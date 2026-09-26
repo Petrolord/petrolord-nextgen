@@ -31,7 +31,7 @@
 import golden from '@petrolord/engines/test-data/economics/goldens/fiscal_cases.json';
 import {
   calculateNPV, calculateIRR, calculateIRRResult, calculateCashFlowForRegime, deriveInsights, runFiscalComparison,
-  GOVERNMENT_SHARE_STATES, commonShareWindow,
+  GOVERNMENT_SHARE_STATES, commonShareWindow, CAPEX_SWEEP_MULTIPLIERS,
 } from '@petrolord/engines/engines/economics/fiscalRegime.js';
 import { fiscalTemplates } from '@petrolord/engines/engines/economics/fiscalTemplates.js';
 
@@ -1251,10 +1251,10 @@ export const insights = (caseId) => {
 };
 
 /**
- * SECTION 22. The tie ranked by floating point noise, with the ranked
- * quantities printed so a reader can see the tie the sentence does not admit.
- * The capex and price verdicts pick their winner with a strict less-than in a
- * reduce, which returns the first element when two are equal.
+ * SECTION 22. The tie a strict reduce would rank by floating point noise, with
+ * the ranked quantities printed. A strict less-than in a reduce returns the
+ * first element when two are equal; the capex verdict ranks each end with
+ * leadOrTie instead, and declines to rank when the least and the most meet.
  */
 export const tieEvidence = async () => {
   const c = goldenComparison('cmp_never_recovers');
@@ -1285,12 +1285,14 @@ export const tieEvidence = async () => {
   // THE TIE IS EXACT, AND BY CONSTRUCTION. At BOTH ends of the swept range
   // every regime recovers cost at its own limit, the pool being far larger
   // than any allowance, so cost recovered, profit oil and tax are unchanged
-  // between a multiplier of 0.8 and one of 1.4. Nothing below the capex line
-  // moves, so the whole capex difference reaches the contractor's year 1 line
-  // undiluted and is discounted by the same single year.
+  // between the first and last swept multipliers, 0.8 and 1.5. Nothing below
+  // the capex line moves, so the whole capex difference reaches the
+  // contractor's year 1 line undiluted and is discounted by the same single year.
+  const LO = CAPEX_SWEEP_MULTIPLIERS[0];
+  const HI = CAPEX_SWEEP_MULTIPLIERS[CAPEX_SWEEP_MULTIPLIERS.length - 1];
   const ends = c.regimes.map((g) => {
-    const lo = totals(cf(g, c.project, 0.8, 1));
-    const hi = totals(cf(g, c.project, 1.4, 1));
+    const lo = totals(cf(g, c.project, LO, 1));
+    const hi = totals(cf(g, c.project, HI, 1));
     return {
       id: g.id,
       name: g.name,
@@ -1299,8 +1301,8 @@ export const tieEvidence = async () => {
       taxAtLow: lo.tax, taxAtHigh: hi.tax,
       capexAtLow: lo.capex, capexAtHigh: hi.capex,
       unchangedBelowTheCapexLine: lo.rec === hi.rec && lo.po === hi.po && lo.tax === hi.tax,
-      lossDerived: calculateNPV(cf(g, c.project, 0.8, 1), c.project.discountRate)
-        - calculateNPV(cf(g, c.project, 1.4, 1), c.project.discountRate),
+      lossDerived: calculateNPV(cf(g, c.project, LO, 1), c.project.discountRate)
+        - calculateNPV(cf(g, c.project, HI, 1), c.project.discountRate),
     };
   });
   const totalCapex = c.project.costs.capex.drilling + c.project.costs.capex.facilities + c.project.costs.capex.subsea;
@@ -1309,8 +1311,10 @@ export const tieEvidence = async () => {
     note: c.note,
     ranked,
     ends,
+    lowMultiplier: LO,
+    highMultiplier: HI,
     everyRegimeUnchangedBelowTheCapexLine: ends.every((x) => x.unchangedBelowTheCapexLine),
-    // The arithmetic closes exactly: 0.6 of the capex, spent in year 1 and
+    // The arithmetic closes exactly: 0.7 of the capex, spent in year 1 and
     // discounted one year at the project rate, IS every one of the six losses.
     capexDifference: ends[0].capexAtHigh - ends[0].capexAtLow,
     totalCapex,

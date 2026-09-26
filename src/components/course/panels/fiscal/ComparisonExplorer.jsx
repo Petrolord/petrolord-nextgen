@@ -429,9 +429,10 @@ const Insights = () => {
       </p>
 
       <p className="text-xs text-slate-500 mt-5 mb-1">
-        THE TIE THE SENTENCE DOES NOT ADMIT. The capex verdict picks its winner with a strict less-than in a reduce,
-        which returns the FIRST element when two are equal and therefore breaks a tie by list order. The price verdict
-        declines to rank unless its lead is at least one percentage point over at least three share prices.
+        A TIE THAT A STRICT REDUCE WOULD RANK. A strict less-than in a reduce returns the FIRST element when two are
+        equal and so breaks a tie by list order. The capex verdict names a regime alone only when it leads the next by
+        at least 0.1 million USD, and declines to rank when the least and the most meet. The price verdict declines to
+        rank unless its lead is at least one percentage point over at least three share prices.
       </p>
       {tie.status !== 'done' ? (tie.status === 'failed' ? <Failed what="the tie evidence" /> : <Waiting what="the tie evidence" />) : (
         <>
@@ -450,12 +451,13 @@ const Insights = () => {
           <p className="text-xs text-slate-500 mt-4 mb-1">
             AND THE TIE HERE IS EXACT, WHICH IS STRONGER THAN A NEAR TIE, but not for the reason it first looks. At
             BOTH ends of the swept range every regime recovers cost at its own limit, the pool being far larger than
-            any allowance, so cost recovered, profit oil and tax are unchanged between a multiplier of 0.8 and one of
-            1.4. Nothing below the capex line moves, so the whole capex difference reaches the contractor year 1 line
+            any allowance, so cost recovered, profit oil and tax are unchanged between a multiplier of{' '}
+            {tie.value.lowMultiplier.toFixed(1)} and one of {tie.value.highMultiplier.toFixed(1)}, the first and last
+            swept multipliers. Nothing below the capex line moves, so the whole capex difference reaches the contractor year 1 line
             undiluted and is discounted by the same single year.
           </p>
           <Tbl
-            head={['regime', 'cost recovered at x0.8', 'at x1.4', 'profit oil at x0.8', 'at x1.4', 'tax at x0.8', 'at x1.4', 'capex loss']}
+            head={(() => { const lo = `x${tie.value.lowMultiplier.toFixed(1)}`; const hi = `at x${tie.value.highMultiplier.toFixed(1)}`; return ['regime', `cost recovered at ${lo}`, hi, `profit oil at ${lo}`, hi, `tax at ${lo}`, hi, 'capex loss']; })()}
             rows={tie.value.ends.map((d) => [d.name, mm(d.costRecoveredAtLow), mm(d.costRecoveredAtHigh), mm(d.profitOilAtLow), mm(d.profitOilAtHigh), mm(d.taxAtLow), mm(d.taxAtHigh), ratio(d.lossDerived)])}
           />
           <p className="text-xs text-slate-300 mt-2 mb-0">
@@ -471,7 +473,7 @@ const Insights = () => {
           <p className="text-xs text-amber-300 mt-2 mb-0">
             {tie.value.separatedAtOneDecimal
               ? 'On this case the ranked quantities are separated at the precision the sentence prints.'
-              : 'The ranked quantities are NOT separated at the precision the sentence prints. Every loss above rounds to the same figure, and the capex verdict names a least and a most and prints the same number for both. A verdict naming a winner is only a verdict when the quantities it ranks are separated by more than the precision they are printed to.'}
+              : 'The ranked quantities are NOT separated at the precision the sentence prints. Every loss above rounds to the same figure, and the capex verdict declines to rank and names all six together. A verdict naming a winner is only a verdict when the quantities it ranks are separated by more than the precision they are printed to.'}
           </p>
         </>
       )}

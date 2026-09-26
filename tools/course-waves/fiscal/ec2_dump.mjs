@@ -835,11 +835,14 @@ w();
 // -------------------------------------------------------------- Section 22
 w('# SECTION 22: A tie ranked by floating point noise (owned by Expert m04)');
 w();
-w('This is finding F3. The capex verdict picks its winner with a strict less-than in a reduce, which returns the first element when two are equal and therefore breaks a tie by list order. The price verdict did the same until EC2-1, and now declines to rank when the lead is under one percentage point (Section 21). When the tie is not exact but differs in the fifteenth significant figure, the winner is whichever regime\'s rounding noise happened to be smallest, and the sentence names it with the confidence of a result.');
+w('This is finding F3. A verdict that picks its winner with a strict less-than in a reduce returns the first element when two are equal, and so breaks a tie by list order; when the tie is not exact but differs in the fifteenth significant figure, the winner is whichever regime\'s rounding noise happened to be smallest, and the sentence names it with the confidence of a result. The capex verdict ranks each end with `leadOrTie` instead: a regime is named alone only when it leads the next by at least `CAPEX_RESILIENCE_MIN_SPREAD_MM`, ' + E.CAPEX_RESILIENCE_MIN_SPREAD_MM + ' million USD, one printed step; otherwise it is named together with every regime within that spread, and when the least and the most meet, no regime is ranked. The price verdict declines to rank when its lead is under one percentage point (Section 21).');
 w();
 {
   const c = CMP['cmp_never_recovers'];
   const res = await E.runFiscalComparison({ projectInputs: c.project, regimes: c.regimes });
+  const MULTS = E.CAPEX_SWEEP_MULTIPLIERS, LO = MULTS[0], HI = MULTS[MULTS.length - 1];
+  const LOS = LO.toFixed(1), HIS = HI.toFixed(1);
+  if (res.sensitivityData.capex.labels[0] !== LOS || res.sensitivityData.capex.labels.at(-1) !== HIS) throw new Error('Section 22: sweep labels do not match CAPEX_SWEEP_MULTIPLIERS');
   w(`**cmp_never_recovers**: ${c.note}`);
   w();
   w('| regime | npv | capex sweep first point | capex sweep last point | loss (derived) |');
@@ -851,25 +854,35 @@ w();
   w();
   for (const i of res.insights) w(`- \`${i.key}\`: ${i.text}`);
   w();
-  w(`The golden records that the engine names "USA - Gulf of Mexico" as the most resilient here and the oracle's arithmetic names "Brazil - Concession". Neither is a result. The golden therefore carries the ranked quantities, \`capexLossesAsEngine\` and \`priceClimbs\`, and the gate treats a tie as a tie rather than pinning a winner.`);
+  w('A strict reduce over these six losses would name whichever regime its list order or its rounding noise favoured; no such name is a result. The golden therefore pins the ranked quantities themselves, `capexLosses` and `priceClimbs` (empty on this case), beside the verdict that declines to rank, and the gate treats a tie as a tie.');
   w();
-  w('AND THE TIE HERE IS EXACT, WHICH IS STRONGER THAN A NEAR TIE, but not for the reason it first looks. The six losses are identical BY CONSTRUCTION because at BOTH ENDS of the sweep every regime recovers cost at its own limit, the pool being far larger than any allowance, so cost recovered, profit oil and tax are unchanged between a multiplier of 0.8 and one of 1.4. Nothing below the capex line moves. The whole capex difference therefore reaches the contractor\'s year 1 line undiluted and is discounted by the same single year, whatever royalty, profit oil and tax each regime carries.');
+  w(`AND THE TIE HERE IS EXACT, WHICH IS STRONGER THAN A NEAR TIE, but not for the reason it first looks. The six losses are identical BY CONSTRUCTION because at BOTH ENDS of the sweep every regime recovers cost at its own limit, the pool being far larger than any allowance, so cost recovered, profit oil and tax are unchanged between a multiplier of ${LO} and one of ${HI}, the first and last of the swept multipliers. Nothing below the capex line moves. The whole capex difference therefore reaches the contractor\'s year 1 line undiluted and is discounted by the same single year, whatever royalty, profit oil and tax each regime carries.`);
   w();
   w('The proof, per regime, at the two ends of the swept range:');
   w();
   {
-    w('| regime | cost recovered at x0.8 | at x1.4 | profit oil at x0.8 | at x1.4 | tax at x0.8 | at x1.4 | capex loss (derived) |');
+    w(`| regime | cost recovered at x${LOS} | at x${HIS} | profit oil at x${LOS} | at x${HIS} | tax at x${LOS} | at x${HIS} | capex loss (derived) |`);
     w('| --- | --- | --- | --- | --- | --- | --- | --- |');
     for (const g of c.regimes) {
-      const a = totals(cf(g, c.project, 0.8, 1)), b = totals(cf(g, c.project, 1.4, 1));
-      const loss = E.calculateNPV(cf(g, c.project, 0.8, 1), c.project.discountRate) - E.calculateNPV(cf(g, c.project, 1.4, 1), c.project.discountRate);
+      const a = totals(cf(g, c.project, LO, 1)), b = totals(cf(g, c.project, HI, 1));
+      if (a.rec !== b.rec || a.po !== b.po || a.tax !== b.tax) throw new Error(`Section 22: ${g.name} moves below the capex line`);
+      const loss = E.calculateNPV(cf(g, c.project, LO, 1), c.project.discountRate) - E.calculateNPV(cf(g, c.project, HI, 1), c.project.discountRate);
+      const swept = res.sensitivityData.capex.data.find((d) => d.regimeId === g.id).values;
+      if (Math.abs(loss - (swept[0] - swept[swept.length - 1])) > 1e-6) throw new Error(`Section 22: ${g.name} proof loss differs from the swept loss`);
       w(`| ${g.name} | ${m(a.rec)} | ${m(b.rec)} | ${m(a.po)} | ${m(b.po)} | ${m(a.tax)} | ${m(b.tax)} | ${r(loss)} |`);
     }
     w();
   }
-  w('READ THE PROFIT OIL COLUMN BEFORE BELIEVING ANY STORY ABOUT IT. It is nought for the three templates that recover cost at 100 percent and it is very much not nought for the other three. Angola carries 3500.5969 of profit oil and 612.6045 of tax on this case, and its royalty is flat 0 percent, so a claim that no profit oil and no tax exist anywhere here is refuted by the government take the same comparison reports. What is true, and is the whole of it, is that none of those columns MOVES across the sweep.');
+  { const ang = totals(cf(c.regimes.find((x) => x.name === 'Angola - Deepwater PSC'), c.project, LO, 1)); w(`READ THE PROFIT OIL COLUMN BEFORE BELIEVING ANY STORY ABOUT IT. It is nought for the three templates that recover cost at 100 percent and it is very much not nought for the other three. Angola carries ${m(ang.po)} of profit oil and ${m(ang.tax)} of tax on this case, and its royalty is flat 0 percent, so a claim that no profit oil and no tax exist anywhere here is refuted by the government take the same comparison reports. What is true, and is the whole of it, is that none of those columns MOVES across the sweep.`); }
   w();
-  w('The arithmetic closes exactly. The capex difference between the two multipliers is 0.6 of 20000, which is 12000 million USD, spent in year 1 and discounted one year at the project\'s 10 percent rate: 12000 divided by 1.1 is 10909.090909, which is every one of the six losses.');
+  {
+    const cap = c.project.costs.capex.drilling + c.project.costs.capex.facilities + c.project.costs.capex.subsea;
+    const g0 = c.regimes[0];
+    const diff = cf(g0, c.project, HI, 1)[0].capex - cf(g0, c.project, LO, 1)[0].capex;
+    const frac = HI - LO, disc = 1 + c.project.discountRate / 100, loss = diff / disc;
+    if (Math.abs(diff - frac * cap) > 1e-6) throw new Error('Section 22: capex difference is not the multiplier span of the capex');
+    w(`The arithmetic closes exactly. The capex difference between the two multipliers, ${LOS} and ${HIS}, is ${frac.toFixed(1)} of ${cap}, which is ${Math.round(diff)} million USD, spent in year 1 and discounted one year at the project's ${c.project.discountRate} percent rate: ${Math.round(diff)} divided by ${disc} is ${r(loss)}, and every one of the six losses in both tables above prints as that figure.`);
+  }
   w();
   w('The price verdict on the same case declines to rank: every point of every series is null and flagged undefined (Section 26), so there is no climb to compare. An earlier build subtracted the zero it returned there and named a most progressive regime on a climb of 0.0 percentage points.');
   w();
@@ -1018,6 +1031,9 @@ w();
 {
   const c = CMP['cmp_never_recovers'];
   const res = await E.runFiscalComparison({ projectInputs: c.project, regimes: c.regimes });
+  const MULTS = E.CAPEX_SWEEP_MULTIPLIERS, LO = MULTS[0], HI = MULTS[MULTS.length - 1];
+  const LOS = LO.toFixed(1), HIS = HI.toFixed(1);
+  if (res.sensitivityData.capex.labels[0] !== LOS || res.sensitivityData.capex.labels.at(-1) !== HIS) throw new Error('Section 22: sweep labels do not match CAPEX_SWEEP_MULTIPLIERS');
   w(`**cmp_never_recovers**: ${c.note} Capex is ${m(c.project.costs.capex.drilling)} drilling plus ${m(c.project.costs.capex.facilities)} facilities plus ${m(c.project.costs.capex.subsea)} subsea $MM. The production is the TEST PROJECT's, ${c.project.production.oil.initial} bbl/d of oil declining ${c.project.production.oil.decline} percent with no gas and no NGL, not the default project's three streams.`);
   w();
   w('| regime | total government take | total contractor NCF | the two added (derived) | value and state the sweep returns, at every one of the nine prices |');
