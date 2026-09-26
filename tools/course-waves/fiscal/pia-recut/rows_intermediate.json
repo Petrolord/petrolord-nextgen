@@ -510,5 +510,37 @@
   "answer_index": 2,
   "explanation": "In year 19 the allowance releases 11.9734 million USD against a cost of 12.8457, and the shortfall of that year and every year after it is what carries the pool to 32.2234.",
   "why": "PIA template ODIDI pool re-derived"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m01-the-sliding-scale",
+  "ord": 2,
+  "prompt": "Why is a price multiplier sweep of the default project, run at 0.700000, 0.710000, 0.720000 and 0.800000, unable to settle which tier owns a threshold?",
+  "options": [
+   "A sweep brackets a threshold and never lands on one: 0.710000 puts the price at 49.700000 and 0.720000 puts it at 50.400000, so no swept point is ever the threshold itself.",
+   "The sweep changes gross revenue at the same time as the rate, so the implied rate of royalty over gross revenue is contaminated and cannot be read.",
+   "The sweep reports the royalty only as a lifetime total, so no single year's rate can be recovered from it.",
+   "The multiplier is applied after the royalty is charged, so the tier a swept point selects belongs to the unswept deck price and not to the price printed."
+  ],
+  "answer_index": 0,
+  "explanation": "The implied rate steps from 0.075000 to 0.100000 somewhere between the multipliers 0.710000 and 0.720000, and a bracket names an interval rather than a side.",
+  "why": "copy rule: the prompt read as an \"X, not Y\" contrastive"
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-the-r-factor",
+  "ord": 14,
+  "prompt": "The R factor column on the default project is identical under the \"USA - Gulf of Mexico\" template and under \"Nigeria - PIA (2021)\". What does that say about it?",
+  "options": [
+   "It is cached from the first template loaded in a comparison run, which is why the six templates report the same column.",
+   "It responds only to production, price and cost, so no royalty, cost recovery limit, split or tax setting can move it.",
+   "It is computed from the contractor's own position, and the two templates happen to leave the contractor in the same place on this project.",
+   "It is fixed by the Designer's default project rather than by the regime, and a different project would make the two columns diverge."
+  ],
+  "answer_index": 1,
+  "explanation": "Neither cumulative depends on the regime. Royalty is not subtracted from the revenue side and tax is not added to the cost side.",
+  "why": "template named as the engine names it; identity confirmed by engine call (every row equal)"
  }
 ]
