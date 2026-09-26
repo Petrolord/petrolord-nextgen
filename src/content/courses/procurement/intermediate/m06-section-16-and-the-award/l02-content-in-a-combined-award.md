@@ -26,7 +26,7 @@ The combined award also brings back the weighting matrix of module 2. A content 
 
 ## Why the engine refuses
 
-The engine reads s.14 as acting at the commercial stage of a lowest-cost award, and a combined score is a different kind of ranking. Rather than choose a reading of its own for that case, it refuses the content rule and names the alternative.
+The engine reads s.14 as acting at the commercial stage of a lowest-cost award, and a combined score is a different kind of ranking. It chooses no reading of its own for that case: it refuses the content rule and names the alternative.
 
 ## Exercise
 

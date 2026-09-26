@@ -72,7 +72,7 @@ q(2, "Under the well services schedule, minWeeks 6 and maxWeeks 10, a bid offers
  ["Charging 0.005 of the price for each of the 5 weeks beyond the minimum, it ranks the bid.",
   "A refusal naming schedule.maxWeeks, because a bid lies outside the stated band.",
   "It caps the bid at 10 weeks and charges the four weeks between 6 and 10."],
- "The engine's schedule basis says beyond 10 weeks the bid is rejected, so the bid leaves at the commercial stage as an exclusion with its reason, a result. The charge applies only to bids inside the band, a bid's weeks are never capped, and a refusal is kept for bad inputs such as maxWeeks below minWeeks.")
+ "The engine's schedule basis says beyond 10 weeks the bid is rejected, so the bid leaves at the commercial stage as an exclusion with its reason, a result: \"offers completion in 11 weeks, beyond the maximum 10 weeks; the bid is nonresponsive\". The charge applies only to bids inside the band, a bid's weeks are never capped, and a refusal is kept for bad inputs such as maxWeeks below minWeeks.")
 
 q(0, "Which bid holds the lowest evaluated cost of the well services tender, with omissions at the average and the fixture's schedule?",
  "WS5, at 862141.000000, with WS2 second at 885574.000000.",

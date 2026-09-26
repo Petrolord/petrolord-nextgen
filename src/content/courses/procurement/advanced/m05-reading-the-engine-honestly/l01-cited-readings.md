@@ -43,4 +43,4 @@ A reading stated in every reason travels with every figure it moves. A reader wh
 
 ## Exercise
 
-Open the contract calculator on the view "The whole tender, any award basis" and change `ncLeadBasis` to "relative". Read the award reason under the tiles: it carries the engine's three readings of s.14. Match each reading to its row in the second table above. Then open the view "The engine refusing, in its own words". Every refusal there names an input with no default: say which of them appear in the second table above, and for each of the others say why the engine asks the caller instead of choosing.
+Open the contract calculator on the view "The whole tender, any award basis" and change `ncLeadBasis` to "relative". Read the award reason under the tiles: it carries the engine's three readings of s.14. Match each reading to its row in the second table above. Then open the view "The engine refusing, in its own words". Every refusal there names an input with no default: say which of them appear in the second table above, and for each of the others say why the engine asks the caller to choose.

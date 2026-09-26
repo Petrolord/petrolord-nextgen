@@ -182,7 +182,7 @@ THE CONTRACTING AND SHOULD-COST INPUTS of the well services fixture (the same tw
 
 # SECTION 4: Every refusal, with the field it names and the engine's own words (owned by Associate m01 l05 and Associate m02 and Associate m03 and Associate m04 and Associate m05 and Professional m01 and Professional m02 and Professional m03 and Professional m04 and Professional m05 and Professional m06 and Expert m01 and Expert m03 and Expert m04 and Expert m05)
 
-A refusal is an object with `error` and `field`. The message starts with the name of the field it refuses and states the exact condition that failed. Each row below is a stated bad input handed to the engine; the message is the engine's, verbatim. A result returned with a reason (a bid excluded, s.14 not engaged, a null lead) is a result, never a refusal.
+A refusal is an object with `error` and `field`. The message starts with the name of the field it refuses and states the exact condition that failed. Each row below is a stated bad input handed to the engine; the message is the engine's, verbatim. A result returned with a reason (a bid excluded, s.14 not engaged, a null lead) is a result. It is no refusal.
 
 | function | stated bad input | field | the engine's message, verbatim |
 | --- | --- | --- | --- |
@@ -283,7 +283,7 @@ A refusal is an object with `error` and `field`. The message starts with the nam
 | `evaluateTender` | no award basis | `award` | award must be 'lowest-cost' or 'combined'; there is no default |
 | `evaluateTender` | Nigerian content with a combined award | `nigerianContent` | nigerianContent applies s.14 at the commercial stage of a lowest-cost award; with award 'combined' state Nigerian content as a rated criterion with its weight instead |
 | `evaluateTender` | Nigerian content given as text with a lowest-cost award | `nigerianContent` | nigerianContent must be { ncLeadBasis } when given |
-| `evaluateTender` | Nigerian content with a bid that has no ncPct | `bids[4].ncPct` | bids[4].ncPct is required for every bid that reaches the commercial stage when nigerianContent is given |
+| `evaluateTender` | the well services tender under a lowest-cost award with Nigerian content, where bids[4] (WS5) has no ncPct | `bids[4].ncPct` | bids[4].ncPct is required for every bid that reaches the commercial stage when nigerianContent is given |
 | `evaluateTender` | criteria weights summing to 99 | `criteria` | criteria weights must sum to 100; they sum to 99 |
 | `evaluatedCosts` | lifecycle spelt with a small c | `lifecycle` | lifecycle is not an accepted key; the accepted keys at the top level are bids, omissionRule, bestEstimates, schedule, lifeCycle, tolerance |
 | `evaluatedCosts` | a bid carrying its technical scores | `bids[0].scores` | bids[0].scores is not an accepted key; the accepted keys of bids[0] are id, name, receivedAt, lines, discount, deviations, omitted, rejected, completionWeeks, annualCosts, residualValue |
@@ -325,7 +325,7 @@ THE ONE RANDOM DRAW IS SEEDED. The contract-type comparison samples the duration
 
 The first two runs return the same object in every field (checked); the third differs.
 
-WHAT A CAPSTONE STATES. Each capstone runs its own synthetic tender, never printed here, and states every setting a figure depends on: the pass mark, the weights, the omission rule, the schedule, the life cycle, the award basis, the technical weight, the price and technical methods, the s.14 reading, the seed and the iteration count, the band. Each graded figure is quoted to six decimals as the panel prints it.
+WHAT A CAPSTONE STATES. Each capstone runs its own synthetic tender, which this digest does not print, and states every setting a figure depends on: the pass mark, the weights, the omission rule, the schedule, the life cycle, the award basis, the technical weight, the price and technical methods, the s.14 reading, the seed and the iteration count, the band. Each graded figure is quoted to six decimals as the panel prints it.
 
 WHAT A COMPUTED FIGURE DOES NOT SAY. An evaluated cost ranks bids under stated rules; it is not a forecast of what the job will cost. A combined score depends on the technical weight and the scoring methods chosen. A Nigerian content percentage is measured in the unit the Schedule names for that item. An s.14 outcome depends on the reading of "at least 5% higher", which the Act does not settle (section 15). Each figure is quoted with its settings for that reason.
 
@@ -405,7 +405,9 @@ The engine's reasons, verbatim:
 > WS2: line ct-spread: quantity x unit rate = 486000 differs from the quoted 468000 by more than 0.005, so the unit rate prevails and the amount is corrected to 486000
 > WS5: line acid: quantity x unit rate = 828 differs from the quoted 82800 and the decimal point in the unit rate is obviously misplaced, so the quoted amount governs and the unit rate is corrected to 1380
 
-WS2 quoted 468000.000000 for the coiled tubing spread where 18 x 27000 is 486000.000000: the unit rate prevails and its total rises by 18000.000000. WS5 typed its acid rate as 13.8 where its amount, 82800.000000, implies 1380.000000; the bid flags the decimal point as obviously misplaced (decimalMisplaced true), so the quoted amount governs, the unit rate is corrected and the total does not move.
+WS2 quoted 468000.000000 for the coiled tubing spread where 18 x 27000 is 486000.000000: the unit rate prevails and its total rises by 18000.000000. WS5 typed its acid rate as 13.8 where its amount, 82800.000000, implies 1380.000000; the line carries decimalMisplaced true, so the quoted amount governs, the unit rate is corrected and the total does not move.
+
+WHO SETS THE FLAG. ITB 35.1(a) makes the exception turn on the opinion of the Employer: the decimal point is obviously misplaced when the Employer judges it so. The engine does not judge it. It reads decimalMisplaced as an input on the bill line, which the evaluator records once that judgement is made; the Ekene fixture records it on WS5's acid line. A line with no gap is not corrected whatever the flag says (below).
 
 THE TOLERANCE, at its boundary (stated lines, stated tolerance 0.5):
 | quantity x unit rate (stated) | quoted (stated) | gap (derived) | tolerance | corrected amount (engine) | rule (engine) |
@@ -457,6 +459,16 @@ COMPLETION TIME. The engine's schedule basis: ratePerWeek 0.005 of (corrected pr
 THE RANKING. The engine's ranking basis: evaluated cost ascending; ties at 12 significant digits go to the earlier receipt, then the bidder id. No two evaluated costs here tie (tieBrokenBy is null on every row).
 
 A PRICED DEVIATION is a minor deviation quantified in money (Public Procurement Act 2007 s.31(14)); a major deviation rejects the bid (s.31(7)) and is passed to the engine as a stated rejection reason. The omission rule 'highest' is also accepted by the engine; section 21 reads it.
+
+TWO COMMERCIAL-STAGE EXCLUSIONS (stated: WS2 given the rejection reason "major deviation: the stated rejection reason for this example", and WS1 offering 11 weeks against the fixture's maxWeeks 10; everything else as the fixture). The exclusions, verbatim from the engine:
+
+| excluded bid | stage | reason (engine), verbatim |
+| --- | --- | --- |
+| WS1 | commercial | offers completion in 11 weeks, beyond the maximum 10 weeks; the bid is nonresponsive |
+| WS2 | commercial | major deviation: the stated rejection reason for this example |
+
+A stated rejection reason is carried into the exclusion as the reason, word for word. The omission is priced again over the bids still responsive after these exclusions: WS5 alone now quotes nitrogen, so WS3's omission is priced at 33600.000000 and its evaluated cost becomes 956190.000000 (engine). The engine's omission reason, verbatim:
+> WS3: item nitrogen omitted; the average of the 1 price quoted by the other responsive bids, 33600, is added
 
 # SECTION 9: The combined score: the commercial score, the relative technical score and their weights (owned by Associate m05 and Professional m02)
 
@@ -520,6 +532,17 @@ T1 and T2 were received at the same second, so the bidder id decides them; T3 wa
 
 When the combined scores tie and the evaluated costs differ, the lower evaluated cost ranks first (stated: U2 with T 100 and C 1000, U1 with T 50 and C 500, technical weight 0.5, both score 75.000000): the engine ranks U1, U2, tieBrokenBy "lower evaluated cost".
 
+Received at 08:00 instead (stated: T3's receipt moved to 2027-05-01T08:00:00Z), T3 ranks first: the engine ranks T3, T1, T2, with tieBrokenBy "earlier receipt", "bidder id".
+
+THE TWO ENDS OF THE TECHNICAL WEIGHT (stated: 0 and 1, the fixture's lowest-ratio and relative methods), engine:
+
+| technical weight | most advantageous | its combined score |
+| --- | --- | --- |
+| 0 | WS5 | 100.000000 |
+| 1 | WS3 | 100.000000 |
+
+THE AWARD AFTER THE TWO COMMERCIAL EXCLUSIONS of section 8 (WS2 rejected, WS1 late): award (engine) WS3. WS3's evaluated cost is 956190.000000 with its omission re-priced, and its combined score 97.049258 against WS5's 87.647059: the award stays WS3, and WS3's own figures move.
+
 # SECTION 11: The lowest evaluated cost over the life of the asset: life-cycle cost through the canonical NPV (owned by Professional m01)
 
 AN AWARD WITHOUT RATED CRITERIA goes to the lowest evaluated cost (engine award source: World Bank Procurement Regulations (7th ed.) para 5.70; Nigeria Public Procurement Act 2007 s.24(3) and s.33(1)). The materials tender is scored technically against its pass mark, and the bids that pass are ranked on evaluated cost alone.
@@ -535,7 +558,14 @@ THE MATERIALS TENDER, the 4 bids that passed, omission rule average, delivery sc
 | 3 | MS1 | 540300.000000 | 0.000000 | 2701.500000 | 22744.720616 | 565746.220616 |
 | 4 | MS3 | 562500.000000 | 0.000000 | 0.000000 | 18953.933847 | 581453.933847 |
 
-Lowest evaluated cost (engine): MS4.
+Lowest evaluated cost (engine): MS4. The engine's delivery-time reasons, verbatim:
+> MS4: completion in 11 weeks is 3 weeks beyond the minimum 8 weeks; 0.0025 x 3 x 503930 = 3779.475 is added
+> MS2: completion in 9 weeks is 1 week beyond the minimum 8 weeks; 0.0025 x 1 x 525700 = 1314.25 is added
+> MS1: completion in 10 weeks is 2 weeks beyond the minimum 8 weeks; 0.0025 x 2 x 540300 = 2701.5 is added
+> MS3: completion in 8 weeks is not beyond the minimum 8 weeks; no adjustment and no credit for earlier completion
+The schedule basis, verbatim: ratePerWeek 0.0025 of (corrected price - discount) for each week beyond 8; beyond 14 weeks the bid is rejected (World Bank SPD Request for Bids, Works, two-envelope (Sep 2025) Section III, time for completion).
+A bid beyond maxWeeks is excluded before any adjustment (stated: MS4 offering 15 weeks against maxWeeks 14); the exclusion, verbatim:
+> MS4: offers completion in 15 weeks, beyond the maximum 14 weeks; the bid is nonresponsive
 
 THE DISCOUNTING, year by year. Each year's cost is discounted to the award date at the end of its year: factor 1 / (1 + 0.1) raised to the year (derived, stated arithmetic):
 
@@ -683,6 +713,8 @@ ANNEX I EXAMPLE 2 (stated from the source: 4 bids and a Borrower's cost estimate
 | Bid 3 | 158012899 | -5.339220 | false |
 | Bid 4 | 165385533 | -10.254183 | false |
 
+Example 2 again after Bid 1 is rejected (stated: the Example 2 bids without Bid 1, and the same estimate): approach (engine) absolute, flagged Bid 2. Five or more bids take the relative approach even when a valid estimate is given (stated: the Example 1 bids with Example 2's estimate): approach (engine) relative, count 5.
+
 Flagged (engine): Bid 1, Bid 2. The Guidance discusses Bid 1, the lowest; Bid 2 sits 23.005876 percent below the estimate, which is 20 percent or more by the same rule, and the engine flags every bid the rule reaches. The engine's reasons, verbatim:
 > Bid 1: evaluated cost 85862863 is 42.75956546532405% below the cost estimate 150003863, 20% or more below: a potential abnormally low bid: clarify the price with the bidder before any decision; it is never rejected automatically
 > Bid 2: evaluated cost 115494160 is 23.005876188668555% below the cost estimate 150003863, 20% or more below: a potential abnormally low bid: clarify the price with the bidder before any decision; it is never rejected automatically
@@ -698,7 +730,7 @@ THE WELL SERVICES TENDER has 4 responsive bids, so the absolute approach applies
 
 A negative percentage is a bid above the estimate.
 
-CLARIFY, NEVER REJECT AUTOMATICALLY. Every flag reason ends with the same clause, from the engine: "a potential abnormally low bid: clarify the price with the bidder before any decision; it is never rejected automatically". Stage 1 identifies a bid to examine; the Guidance requires the price to be clarified with the bidder before any decision.
+CLARIFY BEFORE ANY REJECTION. Every flag reason ends with the same clause, from the engine: "a potential abnormally low bid: clarify the price with the bidder before any decision; it is never rejected automatically". Stage 1 identifies a bid to examine; the Guidance requires the price to be clarified with the bidder before any decision.
 
 # SECTION 14: Nigerian content: the Schedule, measured units, an item against its minimum and overall content (owned by Professional m04)
 
@@ -914,8 +946,9 @@ COST PLUS A FIXED FEE. The same job with the reimbursable contract paying cost p
 | probability of a loss | 0.000000 |
 
 Under a fixed fee the company pays the whole expected overrun, 107001.253374, and the contractor's margin is the fee in every iteration. The contractor's part prints as 6.98e-14, the rounding left by summing 20000 floating-point differences, so it prints in exponent form and carries no share of the overrun. It is no longer negative because a fixed fee does not grow with the cost.
+Typed as 86682.05, as a learner types it, the fee is a different double (86682.05000000005 above is the engine's exact figure). The same run then gives: company pays 107001.253374, company share 1.000000, contractor absorbs 3.55e-12 (engine). The contractor's figure is a floating-point trace in both runs; its size depends on the exact double of the fee, and it carries no share of the overrun.
 
-WITH NOTHING UNCERTAIN (stated: 10 days, 40000 a day, fixed cost 100000; lump sum 500000; day rate 50000 with no mobilisation fee; reimbursable at cost plus a fixed fee of 0; 10 iterations, seed 1) nothing is drawn, no iteration overruns (probability 0.000000), and the reimbursable margin is exactly 0.000000 with a probability of a loss of 0.000000: a margin of exactly 0.000000 is not a loss. The engine's sampling basis, verbatim: 10 iterations, one mulberry32(1) stream; per iteration a uniform for the duration (constant: no draw) then one for the daily cost (constant: no draw); triangular inverse CDF (lib/stats triInvCDF).
+WITH NOTHING UNCERTAIN (stated: 10 days, 40000 a day, fixed cost 100000; lump sum 500000; day rate 50000 with a mobilisation fee of 0; reimbursable at cost plus a fixed fee of 0; 10 iterations, seed 1) nothing is drawn, no iteration overruns (probability 0.000000), and the reimbursable margin is exactly 0.000000 with a probability of a loss of 0.000000: a margin of exactly 0.000000 is not a loss. The engine's sampling basis, verbatim: 10 iterations, one mulberry32(1) stream; per iteration a uniform for the duration (constant: no draw) then one for the daily cost (constant: no draw); triangular inverse CDF (lib/stats triInvCDF).
 
 # SECTION 18: Cost percentiles and their labels: the exceedance definition and the low-cost P90 (owned by Expert m02)
 
@@ -1024,7 +1057,7 @@ The rule decides the award. Section 21 reads why the course grades only the cite
 
 WHEN NOBODY PASSES (stated: the well services tender at a pass mark of 90): award null, commercial null; reason (engine), verbatim: no bid passed the technical envelope; no commercial envelope is opened.
 
-WHEN EVERY OPENED BID IS REJECTED AT THE COMMERCIAL STAGE (stated: the same tender with maxWeeks 5, so every passing bid is late): award null; reason (engine), verbatim: every opened bid was rejected at the commercial stage. Each late bid's exclusion, verbatim:
+WHEN EVERY OPENED BID IS REJECTED AT THE COMMERCIAL STAGE (stated: the same tender with minWeeks 2, maxWeeks 5 and ratePerWeek 0.005, so every passing bid is late; with the fixture's minWeeks 6 left in place the engine refuses instead: "schedule.maxWeeks must be a finite number at or above minWeeks"): award null; reason (engine), verbatim: every opened bid was rejected at the commercial stage. Each late bid's exclusion, verbatim:
 > WS1: offers completion in 6 weeks, beyond the maximum 5 weeks; the bid is nonresponsive
 > WS2: offers completion in 8 weeks, beyond the maximum 5 weeks; the bid is nonresponsive
 > WS3: offers completion in 7 weeks, beyond the maximum 5 weeks; the bid is nonresponsive
@@ -1105,9 +1138,9 @@ Every rule the engine applies has its own boundary; no single rule covers them a
 | contract margin | a margin of exactly 0.000000 | not a loss |
 | overrun | a cost EQUAL to the planned cost | not an overrun |
 
-THE TIE KEY. Two figures tie when Number(x.toPrecision(12)) agrees. The stated costs 1000000.0000001 and 1000000 are different doubles (the engine returns both as typed); they tie because both keys are 1000000.00000. The stated costs 1000000.00001 and 1000000.0001 have the keys 1000000.00001 and 1000000.00010, so they do not tie. The ranking then uses the stated tie-break, and tieBrokenBy names it. A tie is a stated rule, never a guess.
+THE TIE KEY. Two figures tie when Number(x.toPrecision(12)) agrees. The stated costs 1000000.0000001 and 1000000 are different doubles (the engine returns both as typed); they tie because both keys are 1000000.00000. The stated costs 1000000.00001 and 1000000.0001 have the keys 1000000.00001 and 1000000.00010, so they do not tie. The ranking then uses the stated tie-break, and tieBrokenBy names it. A tie is a stated rule. The engine makes no guess.
 
-ONE MORE BOUNDARY IS A PROPERTY OF DOUBLES. A limit a person types (a tolerance, a band) is compared in binary floating point; the engine's FINDINGS states that its oracle and the engine agree except within one unit in the last place of such a limit. Every boundary above was probed with figures exactly representable or far from that unit.
+ONE MORE BOUNDARY IS A PROPERTY OF DOUBLES. A limit a person types (a tolerance, a band) is compared in binary floating point; the course's validation record states that the engine and its independent oracle agree except within one unit in the last place of such a limit. Every boundary above was probed with figures exactly representable or far from that unit.
 
 # SECTION 23: Size caps, each refused with the cap in the message (owned by Expert m05)
 

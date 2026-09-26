@@ -27,7 +27,15 @@ A bidder who is excluded may ask why, and in a public tender the answer is a rec
 
 ## Writing the exclusions down
 
-For each excluded bid, a report gives three things: the bid code, the stage at which it left, and the engine's reason in quotation marks. For the well services tender that is two lines, WS4 and WS6, both at the technical stage. A reader who has only the report can then check each one against the pass mark and the mandatory requirements the tender stated.
+For each excluded bid, a report gives three things: the bid code, the stage at which it left, and the engine's reason in quotation marks. For the well services tender that is two lines, WS4 and WS6, both at the technical stage.
+
+## When an exclusion moves another bid
+
+A commercial exclusion can change a bid that stays in. With WS2 given a rejection reason and WS1 offering 11 weeks, both leave at the commercial stage, and WS5 is the only responsive bid left that quotes nitrogen. WS3's omitted nitrogen is priced again from WS5 alone:
+
+> item nitrogen omitted; the average of the 1 price quoted by the other responsive bids, 33600, is added
+
+WS3's evaluated cost becomes 956190.000000 and its combined score 97.049258 against WS5's 87.647059, so the award stays WS3 while WS3's own figures move.
 
 ## Exercise
 

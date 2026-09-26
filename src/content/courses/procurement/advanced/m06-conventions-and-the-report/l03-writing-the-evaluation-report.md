@@ -27,7 +27,7 @@ A short extract shows the habit. Every figure is quoted with its settings:
 | award | WS3, most advantageous at 96.998434 (combined, technical weight 0.7, priceMethod lowest-ratio, technicalMethod relative) |
 | lowest evaluated cost | WS5 at 862141.000000 (omission rule average; schedule minWeeks 6, maxWeeks 10, ratePerWeek 0.005 of the corrected price less the discount) |
 | exclusions | WS6 at the technical stage for a failed mandatory requirement; WS4 at the technical stage below the pass mark of 70 |
-| corrections | WS2, unit rate prevails, correction 18000.000000; WS5, decimal point declared misplaced, quoted amount governs |
+| corrections | WS2, unit rate prevails, correction 18000.000000; WS5, decimalMisplaced recorded, quoted amount governs |
 | abnormally low | none flagged; absolute approach (four responsive bids) against the should-cost |
 | should-cost | 895361.041667, contingency 0.1 of the base, NPT fraction 0.15, band 0.8 to 1.25; WS3's ratio 1.069948 |
 | contract comparison | day rate P90 cost 837897.131515, the LOW cost, and P10 1029964.481686, on seed 20270211 with 20000 iterations |
@@ -36,7 +36,7 @@ Two things in the extract matter most. The award and the lowest evaluated cost a
 
 ## Quoting the engine in a report
 
-A reason or a refusal goes into the report verbatim, in quotation marks, as the engine's words. A figure the report reasons with comes from the numeric field at six decimals, never lifted out of a reason string, where the engine prints the shortest decimal of the double it holds. The two agree, and only the field is the figure.
+A reason or a refusal goes into the report verbatim, in quotation marks, as the engine's words. A figure the report reasons with comes from the numeric field at six decimals. A reason string is no source for it, since there the engine prints the shortest decimal of the double it holds. The two agree, and only the field is the figure.
 
 ## Settings a reader would change
 

@@ -33,7 +33,7 @@ The should-cost runs the programme at a single stated NPT fraction, 0.15, the mo
 
 No metres are drilled in a coiled tubing cleanout, so no per-metre item applies, and the base is the per-day items times the total days plus the lump items as valued. The estimate is deterministic: one NPT fraction, no sampling, no seed. The contract comparison asks what the job might cost under uncertainty; the should-cost asks what the company believes a fair price is on its plan.
 
-## Why import instead of rebuild
+## Why the engine imports its estimate
 
 Time and cost estimating belong to the drilling courses, and the platform keeps one engine for it. The tender engine imports wellCost and the AFE rollup and adds only the comparison with the bids. A change to how the platform estimates well time reaches the should-cost with no second copy to fall out of step.
 

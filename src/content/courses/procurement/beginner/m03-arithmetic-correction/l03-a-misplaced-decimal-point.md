@@ -6,7 +6,7 @@ The rule that the unit rate prevails has one exception written into it. When the
 
 ## WS5's acid
 
-WS5 prices 60 m3 of 15% HCl treating fluid. It typed the unit rate as 13.8, and wrote the amount as 82800.000000. Sixty times 13.8 is nowhere near that amount. The amount implies a unit rate of 1380.000000, and the gap is a factor of one hundred, a decimal point two places out. WS5 declares the decimal point misplaced on that line with the flag decimalMisplaced set to true. The engine returns:
+WS5 prices 60 m3 of 15% HCl treating fluid. It typed the unit rate as 13.8, and wrote the amount as 82800.000000. Sixty times 13.8 is nowhere near that amount. The amount implies a unit rate of 1380.000000, and the gap is a factor of one hundred, a decimal point two places out. The line carries the flag decimalMisplaced set to true, recorded by the evaluator. The engine returns:
 
 > WS5: line acid: quantity x unit rate = 828 differs from the quoted 82800 and the decimal point in the unit rate is obviously misplaced, so the quoted amount governs and the unit rate is corrected to 1380
 
@@ -22,7 +22,7 @@ Without it, the unit rate rule would cut WS5's acid line from 82800.000000 to 82
 
 ## The flag is stated
 
-The engine does not guess whether a decimal point is obviously misplaced. The flag is an input on the line, set when the evaluation has judged it so. That keeps the judgement visible: a report shows the flag, and a reader can disagree with it. Two refusals guard the flag. It must be true or false:
+The engine does not judge whether a decimal point is obviously misplaced. ITB 35.1(a) leaves that to the opinion of the Employer, and the engine reads the flag as an input on the line, which the evaluator records once that judgement is made. That keeps the judgement visible: a report shows the flag, and a reader can disagree with it. Two refusals guard the flag. It must be true or false:
 
 > lines[0].decimalMisplaced must be true or false when given
 

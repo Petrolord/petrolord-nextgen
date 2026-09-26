@@ -48,7 +48,7 @@ shows the engine's own refusal and reason, verbatim.
 ### `pr-envelope-calculator` (Associate)
 
 Score the technical envelope against a pass mark (WS5 at 70.000000 passes);
-correct a priced bill with the unit rate prevailing or a declared misplaced
+correct a priced bill with the unit rate prevailing or a recorded misplaced
 decimal (WS2's correction is 18000.000000); build each passing bid's evaluated
 cost with the average omission rule and the completion-time adjustment (WS5 at
 862141.000000); weigh the technical and commercial scores (WS3 at 96.998434);

@@ -96,7 +96,7 @@
    "It caps the bid at 10 weeks and charges the four weeks between 6 and 10."
   ],
   "answer": 2,
-  "explanation": "The engine's schedule basis says beyond 10 weeks the bid is rejected, so the bid leaves at the commercial stage as an exclusion with its reason, a result. The charge applies only to bids inside the band, a bid's weeks are never capped, and a refusal is kept for bad inputs such as maxWeeks below minWeeks."
+  "explanation": "The engine's schedule basis says beyond 10 weeks the bid is rejected, so the bid leaves at the commercial stage as an exclusion with its reason, a result: \"offers completion in 11 weeks, beyond the maximum 10 weeks; the bid is nonresponsive\". The charge applies only to bids inside the band, a bid's weeks are never capped, and a refusal is kept for bad inputs such as maxWeeks below minWeeks."
  },
  {
   "prompt": "Which bid holds the lowest evaluated cost of the well services tender, with omissions at the average and the fixture's schedule?",

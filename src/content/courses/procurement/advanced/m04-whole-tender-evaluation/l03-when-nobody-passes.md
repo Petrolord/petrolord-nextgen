@@ -10,11 +10,11 @@ Run the well services tender with a stated pass mark of 90. The highest technica
 
 > no bid passed the technical envelope; no commercial envelope is opened
 
-No price is opened for any bid, which is the point of the two envelopes: a bid that fails on quality never has its price seen, so price cannot pull a weak technical offer back in.
+No price is opened: a bid that fails on quality never has its price seen, so price cannot pull it back in.
 
 ## Every opened bid is rejected
 
-Run the same tender with a stated maxWeeks of 5. Four bids pass the technical envelope, and every one offers completion in more than five weeks, so every one is nonresponsive at the commercial stage. The award is null, with the reason:
+Run the same tender with minWeeks lowered to 2 and maxWeeks to 5; maxWeeks 5 alone, under the fixture's minWeeks 6, is refused. Four bids pass the technical envelope, and every one offers completion in more than five weeks, so every one is nonresponsive at the commercial stage. The award is null, with the reason:
 
 > every opened bid was rejected at the commercial stage
 

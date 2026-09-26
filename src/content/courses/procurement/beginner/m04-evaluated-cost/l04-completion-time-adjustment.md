@@ -31,7 +31,9 @@ WS5 carries the largest adjustment and still holds the lowest evaluated cost, 86
 
 ## No credit for finishing early
 
-A bid that promises fewer weeks than the minimum earns nothing. The rule treats the minimum as the fastest completion the company will value, so a promise to finish sooner adds nothing to the comparison. A bid that offers more than maxWeeks is rejected at the commercial stage and excluded with the engine's reason.
+A bid that promises fewer weeks than the minimum earns nothing. The rule treats the minimum as the fastest completion the company will value, so a promise to finish sooner adds nothing to the comparison. A bid that offers more than maxWeeks is rejected at the commercial stage and excluded with the engine's reason. For WS1 at 11 weeks against maxWeeks 10 it reads:
+
+> offers completion in 11 weeks, beyond the maximum 10 weeks; the bid is nonresponsive
 
 ## The base is a stated choice
 

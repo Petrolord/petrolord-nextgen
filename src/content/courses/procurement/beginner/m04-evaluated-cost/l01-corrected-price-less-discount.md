@@ -23,7 +23,7 @@ With omissions priced at the average and the fixture's completion schedule, the 
 | 3 | WS1 | 943200.000000 | 943200.000000 | 15000.000000 | 0.000000 | 0.000000 | 0.000000 | 928200.000000 |
 | 4 | WS3 | 918000.000000 | 918000.000000 | 0.000000 | 0.000000 | 35400.000000 | 4590.000000 | 957990.000000 |
 
-Each row is the sum of its terms. The corrected price column carries module 3's work: WS2 rises by its correction, and WS5 stays put because its decimal point was declared misplaced.
+Each row is the sum of its terms. The corrected price column carries module 3's work: WS2 rises by its correction, and WS5 stays put because its acid line carries the decimalMisplaced flag the evaluator recorded.
 
 ## WS1's discount
 

@@ -24,7 +24,7 @@ The World Bank's Guidance on Evaluating Bids and Proposals (February 2025) shows
 
 ## A rejection moves the relative test
 
-Under the absolute approach each bid is compared with the buyer's estimate alone, so removing one bid changes nothing for the others. Under the relative approach the mean and the standard deviation are computed over the field, so removing a bid moves the limit for every bid that remains. With fewer than five bids left, the engine switches to the absolute approach and asks for an estimate.
+Under the absolute approach each bid is compared with the buyer's estimate alone, so removing one bid changes nothing for the others. Under the relative approach the mean and the standard deviation are computed over the field, so removing a bid means the engine computes the limit again over the bids that remain. With fewer than five bids left, the engine switches to the absolute approach and asks for an estimate.
 
 Both runs belong in the report: the field before the rejection, the rejection with its reason, and the field after it.
 

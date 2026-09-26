@@ -71,12 +71,12 @@ x("The well services tender is run through evaluateTender at a stated pass mark 
  "The highest technical percentage is WS3's 85.000000, so nobody passes. The call is well formed, so the engine returns a result: award null, commercial null, reason (verbatim) \"no bid passed the technical envelope; no commercial envelope is opened\". A pass mark from 0 to 100 is accepted. No bid below the mark is awarded, and no price is opened, so price cannot pull a weak technical offer back in.")
 
 # 8
-x("The same tender is run with maxWeeks lowered to 5 and minWeeks lowered below it, so the schedule is accepted and every bid that passes the technical envelope is late. What does evaluateTender return?",
+x("The same tender is run with maxWeeks lowered to 5 and minWeeks lowered to 2, so the schedule is accepted and every bid that passes the technical envelope is late. What does evaluateTender return?",
  "Award null with the reason \"every opened bid was rejected at the commercial stage\"",
  ["The refusal \"bids has no bid left to score: every bid is rejected\" under the field bids",
   "An award to WS1, the least late of the four at 6 weeks, with the lateness priced",
   "A refusal naming schedule.maxWeeks, since 5 sits below every bid's weeks"],
- "evaluateTender returns a result here: award null and the reason \"every opened bid was rejected at the commercial stage\", with each late bid's exclusion, for example \"WS1: offers completion in 6 weeks, beyond the maximum 5 weeks; the bid is nonresponsive\". The refusal about no bid left to score belongs to rankTender called on its own. Beyond maxWeeks a bid is rejected and is not priced. A maxWeeks of 5 above the stated minWeeks is a valid input; left with the fixture's minWeeks of 6 it would be refused under schedule.maxWeeks, since maxWeeks must be at or above minWeeks.")
+ "evaluateTender returns a result here: award null and the reason \"every opened bid was rejected at the commercial stage\", with each late bid's exclusion, for example \"WS1: offers completion in 6 weeks, beyond the maximum 5 weeks; the bid is nonresponsive\". The refusal about no bid left to score belongs to rankTender called on its own. Beyond maxWeeks a bid is rejected and is not priced. A maxWeeks of 5 above the stated minWeeks of 2 is a valid input; left with the fixture's minWeeks of 6 it is refused: \"schedule.maxWeeks must be a finite number at or above minWeeks\".")
 
 # 9
 x("Handed a list in which every bid carries a rejection, which call refuses, and what is its field?",

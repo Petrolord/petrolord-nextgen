@@ -25,7 +25,7 @@ The four responsive materials bids, with their evaluated costs under the average
 | MS1 | 565746.220616 | 3.570054 | false |
 | MS3 | 581453.933847 | 6.445634 | false |
 
-MS2 is 0.296313 percent above MS4, so the group is MS4 and MS2. The group is the same under either reading of "at least 5% higher", which the third lesson of this module takes: the reading changes the lead test, never the group.
+MS2 is 0.296313 percent above MS4, so the group is MS4 and MS2. The group is the same under either reading of "at least 5% higher", which the third lesson of this module takes: the reading changes the lead test and leaves the group as it is.
 
 ## At the edge of the margin
 

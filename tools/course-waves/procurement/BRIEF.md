@@ -105,7 +105,7 @@ each.
    weights summing to 100; a bid AT the pass mark passes (WS5 at 70.000000); a
    failed bid's price is never opened.
 2. **Arithmetic correction** (section 7): the unit rate prevails over the line
-   amount unless the bidder declares the decimal point misplaced; a gap EQUAL
+   amount unless the line carries decimalMisplaced, an input the evaluator records once the Employer judges the decimal point obviously misplaced (ITB 35.1(a)); a gap EQUAL
    to the tolerance is not corrected; the subtotals prevail over a stated
    total. WS2's correction is 18000.000000.
 3. **The evaluated cost** (section 8): corrected price less the discount, plus
@@ -137,7 +137,7 @@ each.
 Digest section 4 tables 113 refusals across 11 functions, each with the field
 it names and the engine's message verbatim. **Quote a refusal in a blockquote as
 the engine's own words.** A result returned with a reason (a bid excluded, s.14
-not engaged, a null lead) is a result, never a refusal.
+not engaged, a null lead) is a result. It is no refusal.
 
 ## WHAT IS GRADED, AND WHAT IS NEVER IN THE DIGEST
 
@@ -156,11 +156,11 @@ quoted with its seed and iteration count; every capstone states its settings.
 Digest section 25 carries the rule for each.
 
 1. **"responsive"** names a bid still in the evaluation at that stage.
-2. **"lowest evaluated cost"** names the evaluated cost, never the quoted price.
+2. **"lowest evaluated cost"** names the evaluated cost. The quoted price is a different figure.
 3. **"most advantageous"** names the highest combined score under stated settings.
 4. **"content"** is Nigerian content in the Schedule's measured unit.
 5. **"P90"** of a cost is the LOW figure, printed beside its definition.
-6. **"should-cost"** is the company's independent estimate, never a bid.
+6. **"should-cost"** is the company's independent estimate. No bid is one.
 
 ## SCOPE SEAMS
 

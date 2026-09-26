@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """GATE: the owner copy rule, over everything a learner reads.
 
-No em dashes, no en dashes, and no "X, not Y" contrastive, in the digest, in
+No em dashes, no en dashes, and no "X, not Y" contrastive (nor its cousins
+"rather than", ", never" and "instead of", added after the SC2 audits), in the digest, in
 any lesson body or manifest title, and in the three SC2 calculator panels, their shared bits and the lab
 and the learning page (the text a learner reads in the app), and in every
 prompt, option and explanation of the 21 question banks (the emitted JSON in
@@ -35,7 +36,7 @@ APP_TEXT = [os.path.join(REPO, 'src/components/course/panels/procurement', f) fo
             ('EnvelopeCalculator.jsx', 'AwardCalculator.jsx', 'ContractCalculator.jsx', 'panelBits.jsx', 'tenderLab.js')] + \
            [os.path.join(REPO, 'src/pages/apps/ProcurementLearningPage.jsx')]
 DASHES = re.compile('[—–]')
-CONTRASTIVE = re.compile(r',\s+not\s+\w')
+CONTRASTIVE = re.compile(r',\s+not\s+\w|\brather than\b|,\s+never\b|\binstead of\b', re.I)
 
 ENGINE_TEXT = {}
 
@@ -60,7 +61,7 @@ def main():
     d = open(digest_path, encoding='utf-8').read()
     if '--plant' in sys.argv:
         # THE NEGATIVE CONTROL: one contrastive and one em dash, planted in memory.
-        d += '\nThe median, not the mean \u2014 always.\n'
+        d += '\nThe median, not the mean \u2014 always.\nUse the median rather than the mean.\n'
     findings += sweep('digest.txt', d)
     files += 1
     lines += d.count('\n') + 1
@@ -116,7 +117,7 @@ def main():
                         walk(x, f'{where}.{k}')
             walk(data, n)
             if '--plant-bank' in sys.argv and n == names[0] and strs:
-                strs[-1] = (strs[-1][0], strs[-1][1] + ' The median, not the mean \u2014 always.')
+                strs[-1] = (strs[-1][0], strs[-1][1] + ' The median, not the mean \u2014 always. Use the median instead of the mean.')
             for where, t in strs:
                 findings += [(where, i, k, c, h) for (_, i, k, c, h) in sweep(where, t)]
             bank_files += 1
@@ -141,12 +142,12 @@ def main():
         return 2
     if '--plant-bank' in sys.argv:
         caught = len([f for f in bad if f[0].startswith('sc2')])
-        print(f'  NEGATIVE CONTROL: a contrastive and a dash were planted in a bank string; expected 2 caught, got {caught}')
-        return 1 if caught == 2 else 2
+        print(f'  NEGATIVE CONTROL: a contrastive and a dash were planted in a bank string with an instead-of; expected 3 caught, got {caught}')
+        return 1 if caught == 3 else 2
     if '--plant' in sys.argv:
         caught = len([f for f in bad if f[0] == 'digest.txt'])
-        print(f'  NEGATIVE CONTROL: a contrastive and a dash were planted in the digest; expected 2 caught, got {caught}')
-        return 1 if caught == 2 else 2
+        print(f'  NEGATIVE CONTROL: a contrastive and a dash were planted in the digest with a rather-than; expected 3 caught, got {caught}')
+        return 1 if caught == 3 else 2
     if dead:
         print('  GATE FAILS: an exempt engine string nothing quotes is a dead row, not an amnesty')
         return 1

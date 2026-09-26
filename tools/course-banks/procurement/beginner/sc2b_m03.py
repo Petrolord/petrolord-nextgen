@@ -16,7 +16,7 @@ q(3, "WS2 prices 18 days of the coiled tubing spread at 27000.000000 a day and w
  ["The written amount stands, since 468000.000000 is the figure the bidder signed and the bid form carries it into the total.",
   "Neither figure stands: the line is struck and priced as an omission at the average of the other bids.",
   "The lower of the two figures stands, so that the company never pays more than the line's lower reading."],
- "The unit rate prevails unless the decimal point in it is obviously misplaced (ITB 35.1(a)), and WS2 declares no such error, so the engine returns \"the unit rate prevails and the amount is corrected to 486000\". Nothing is struck or priced as an omission, and the rule picks the rate whatever its direction.")
+ "The unit rate prevails unless the decimal point in it is obviously misplaced (ITB 35.1(a)), and no decimalMisplaced flag is recorded on WS2's line, so the engine returns \"the unit rate prevails and the amount is corrected to 486000\". Nothing is struck or priced as an omission, and the rule picks the rate whatever its direction.")
 
 q(1, "After its ct-spread line is corrected, what is WS2's corrected total?",
  "867400.000000",
@@ -25,7 +25,7 @@ q(1, "After its ct-spread line is corrected, what is WS2's corrected total?",
   "885574.000000, the bid's figure after its deviation and its weeks are added."],
  "The corrected total is the sum of the corrected lines: 849400.000000 plus the 18000.000000 correction on ct-spread gives 867400.000000. The quoted total is what the check replaces, 486000.000000 is one line, and 885574.000000 is WS2's evaluated cost, built later from the corrected price.")
 
-q(0, "WS5 types its acid unit rate as 13.8 on 60 m3 and writes the amount as 82800.000000, declaring the decimal point misplaced. What does the engine do?",
+q(0, "WS5 types its acid unit rate as 13.8 on 60 m3 and writes the amount as 82800.000000, and the evaluator records decimalMisplaced on the line. What does the engine do?",
  "The quoted amount governs and the rate is corrected to 1380.000000.",
  ["The unit rate governs, and the acid line is cut to 828, which WS5 must then honour.",
   "WS5 is rejected at the commercial stage for an obvious error in its priced bill.",
@@ -44,7 +44,7 @@ q(0, "How does the engine know that a unit rate's decimal point is obviously mis
  ["By testing whether the gap is a power of ten.",
   "From the bid's stated total, whenever it differs from the lines by more than 0.005.",
   "It never knows; every misplaced point is read as an ordinary unit-rate slip."],
- "decimalMisplaced is an input on the bill line, and the engine applies the exception only where the flag is stated true on a line already in discrepancy. It does not guess from the size of the gap, a stated total that differs from its lines is a separate check where the subtotals prevail, and without the flag a gap above the tolerance triggers the unit rate rule.")
+ "decimalMisplaced is an input on the bill line, which the evaluator records once the Employer judges the point obviously misplaced (ITB 35.1(a)), and the engine applies the exception only where the flag is stated true on a line already in discrepancy. It does not guess from the size of the gap. A stated total that differs from its lines is a separate check where the subtotals prevail, and without the flag a gap above the tolerance triggers the unit rate rule.")
 
 q(3, "decimalMisplaced is set to true on a line whose quantity is 0. What does the engine return?",
  "A refusal: \"lines[0].quantity must be above 0 when decimalMisplaced is true (the unit rate is corrected as quoted amount / quantity)\".",

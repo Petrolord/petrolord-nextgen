@@ -219,7 +219,7 @@ x("A caller asks for s.14 in a lowest-cost award of the well services tender, bu
  "In the engine's words: \"bids[4].ncPct is required for every bid that reaches the commercial stage when nigerianContent is given\". bids[4] is WS5, the fifth bid in the list, which passed the technical envelope. A missing content is never set to 0 or dropped from the group, since either would decide s.14 on a figure nobody stated. Content enters a lowest-cost award at the commercial stage, and a combined award takes it as a rated criterion instead.")
 
 # 26
-x("With maxWeeks lowered to 5 and minWeeks lowered below it, how does the engine word WS5's exclusion?",
+x("With maxWeeks lowered to 5 and minWeeks lowered to 2, how does the engine word WS5's exclusion?",
  "\"WS5: offers completion in 9 weeks, beyond the maximum 5 weeks; the bid is nonresponsive\"",
  ["\"WS5: completion in 9 weeks is 3 weeks beyond the minimum 6 weeks; 0.005 x 3 x 849400 = 12741 is added\"",
   "\"WS5: technical score 70 is below the pass mark; the commercial envelope is not opened\"",

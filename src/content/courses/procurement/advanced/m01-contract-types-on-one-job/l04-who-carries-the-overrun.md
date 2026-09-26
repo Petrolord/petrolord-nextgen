@@ -2,7 +2,7 @@
 
 {{panel:pr-contract-calculator}}
 
-Every job has a planned cost, and most jobs miss it. The question a contract answers is who pays when they do. The engine measures that directly: it counts the iterations in which the job overruns its plan, and splits each overrun between the company and the contractor under each contract type. The answer is the clearest way to see what the choice of contract really buys.
+Every job has a planned cost, and most jobs miss it. The question a contract answers is who pays when they do. The engine measures that directly: it counts the iterations in which the job overruns its plan, and splits each overrun between the company and the contractor under each contract type.
 
 ## What counts as an overrun
 
@@ -38,4 +38,4 @@ Every figure in this lesson is measured against the plan, and the plan is the mo
 
 ## Exercise
 
-Open the contract calculator on the view "Contract types on one job", set `iterations` to 20000 on seed 20270211, and read the tiles "Probability of an overrun" and "Expected overrun" and the columns "company pays" and "contractor absorbs". Add each row's two figures and check that every row gives the expected overrun. Then replace `feeFraction` in `reimbursable` with a `fixedFee` of 86682.050000, the planned margin of the percentage fee, and read the reimbursable row again. Compare what the company pays with the expected overrun, and say in one sentence why the contractor's part is no longer negative.
+Open the contract calculator on the view "Contract types on one job", set `iterations` to 20000 on seed 20270211, and read the tiles "Probability of an overrun" and "Expected overrun" and the columns "company pays" and "contractor absorbs". Add each row's two figures and check that every row gives the expected overrun. Then replace `feeFraction` in `reimbursable` with a `fixedFee` of 86682.050000, the planned margin of the percentage fee, and read the reimbursable row again. Compare what the company pays with the expected overrun, and say in one sentence why the contractor's part is no longer negative. That part prints as a tiny floating-point trace: its size depends on the exact double of the fee you type, and it carries no share.

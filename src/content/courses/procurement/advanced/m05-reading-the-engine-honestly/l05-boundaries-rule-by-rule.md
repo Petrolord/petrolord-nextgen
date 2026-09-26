@@ -28,7 +28,7 @@ Read the column of results and the pattern breaks at once. A gap equal to the to
 
 ## When two figures tie
 
-Ties have a boundary too. Two figures tie when they agree at 12 significant digits. The stated costs 1000000.0000001 and 1000000 are different doubles, and the engine returns both as typed, yet both round to the same twelve-digit key, so they tie and the stated tie-break decides: the lower evaluated cost, then the earlier receipt, then the bidder id. The costs 1000000.00001 and 1000000.0001 differ at the twelfth digit, so they do not tie, and the lower one ranks first. A tie is a stated rule, never a guess, and `tieBrokenBy` names the rule that ordered each row.
+Ties have a boundary too. Two figures tie when they agree at 12 significant digits. The stated costs 1000000.0000001 and 1000000 are different doubles, and the engine returns both as typed, yet both round to the same twelve-digit key, so they tie and the stated tie-break decides: the lower evaluated cost, then the earlier receipt, then the bidder id. The costs 1000000.00001 and 1000000.0001 differ at the twelfth digit, so they do not tie, and the lower one ranks first. A tie is a stated rule, and `tieBrokenBy` names the rule that ordered each row.
 
 One more boundary belongs to the doubles themselves. A limit a person types is compared in binary floating point, and the engine's oracle and the engine agree except within one unit in the last place of such a limit. Every probe above used figures exactly representable or far from that unit.
 

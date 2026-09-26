@@ -8,7 +8,7 @@
    "The unit rate stands, and the engine corrects the line amount to 486000.000000 because 18 x 27000 is that figure."
   ],
   "answer": 3,
-  "explanation": "The unit rate prevails unless the decimal point in it is obviously misplaced (ITB 35.1(a)), and WS2 declares no such error, so the engine returns \"the unit rate prevails and the amount is corrected to 486000\". Nothing is struck or priced as an omission, and the rule picks the rate whatever its direction."
+  "explanation": "The unit rate prevails unless the decimal point in it is obviously misplaced (ITB 35.1(a)), and no decimalMisplaced flag is recorded on WS2's line, so the engine returns \"the unit rate prevails and the amount is corrected to 486000\". Nothing is struck or priced as an omission, and the rule picks the rate whatever its direction."
  },
  {
   "prompt": "After its ct-spread line is corrected, what is WS2's corrected total?",
@@ -22,7 +22,7 @@
   "explanation": "The corrected total is the sum of the corrected lines: 849400.000000 plus the 18000.000000 correction on ct-spread gives 867400.000000. The quoted total is what the check replaces, 486000.000000 is one line, and 885574.000000 is WS2's evaluated cost, built later from the corrected price."
  },
  {
-  "prompt": "WS5 types its acid unit rate as 13.8 on 60 m3 and writes the amount as 82800.000000, declaring the decimal point misplaced. What does the engine do?",
+  "prompt": "WS5 types its acid unit rate as 13.8 on 60 m3 and writes the amount as 82800.000000, and the evaluator records decimalMisplaced on the line. What does the engine do?",
   "options": [
    "The quoted amount governs and the rate is corrected to 1380.000000.",
    "The unit rate governs, and the acid line is cut to 828, which WS5 must then honour.",
@@ -52,7 +52,7 @@
    "It never knows; every misplaced point is read as an ordinary unit-rate slip."
   ],
   "answer": 0,
-  "explanation": "decimalMisplaced is an input on the bill line, and the engine applies the exception only where the flag is stated true on a line already in discrepancy. It does not guess from the size of the gap, a stated total that differs from its lines is a separate check where the subtotals prevail, and without the flag a gap above the tolerance triggers the unit rate rule."
+  "explanation": "decimalMisplaced is an input on the bill line, which the evaluator records once the Employer judges the point obviously misplaced (ITB 35.1(a)), and the engine applies the exception only where the flag is stated true on a line already in discrepancy. It does not guess from the size of the gap. A stated total that differs from its lines is a separate check where the subtotals prevail, and without the flag a gap above the tolerance triggers the unit rate rule."
  },
  {
   "prompt": "decimalMisplaced is set to true on a line whose quantity is 0. What does the engine return?",

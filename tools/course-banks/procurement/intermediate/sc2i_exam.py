@@ -316,7 +316,7 @@ q(0, "On the materials tender's fixture schedule (minWeeks 8, maxWeeks 14, rateP
  ["An adjustment of 0.0025 x 7 of the price is added and the bid is kept in the ranking as a late one",
   "A cap at 14 weeks on the adjustment, with the bid ranked on that capped figure among the responsive bids",
   "It refuses the whole call, since a completion beyond maxWeeks is an input error"],
- "The engine's schedule basis ends with the maximum: on the well services tender it reads \"beyond 10 weeks the bid is rejected\", and the materials tender states maxWeeks 14. A bid beyond the maximum leaves the commercial envelope as an exclusion with its reason, and the adjustment applies only to the weeks beyond minWeeks up to the maximum. A late bid is a result with a reason, so nothing is refused.")
+ "The engine's schedule basis ends with the maximum: on the well services tender it reads \"beyond 10 weeks the bid is rejected\", and the materials tender states maxWeeks 14. A bid beyond the maximum leaves the commercial envelope as an exclusion with its reason, which the engine words for a 15-week bid as \"offers completion in 15 weeks, beyond the maximum 14 weeks; the bid is nonresponsive\", and the adjustment applies only to the weeks beyond minWeeks up to the maximum. A late bid is a result with a reason, so nothing is refused.")
 
 emit(Q, '/root/cat-wip-procurement/banks/sc2i_exam.json', expect_n=42)
 finish()

@@ -29,7 +29,7 @@ Enter each to six decimals, as the panel prints it. The grading tolerance is set
 
 ## How to work it
 
-Work in stage order, as the engine does. First, the mandatory requirements and the pass mark: note who is excluded and whether any bid sits exactly on the mark. Second, correct each passing bid's bill, checking every line for a declared misplaced decimal point. Third, build the evaluated costs, pricing any omission from the other responsive bids only and applying the schedule to the corrected price less the discount. Fourth, score and weight. Then run the whole tender in one call as a check: its award and exclusions must agree with your stage-by-stage work.
+Work in stage order, as the engine does. First, the mandatory requirements and the pass mark: note who is excluded and whether any bid sits exactly on the mark. Second, correct each passing bid's bill, checking every line for a recorded decimalMisplaced flag. Third, build the evaluated costs, pricing any omission from the other responsive bids only and applying the schedule to the corrected price less the discount. Fourth, score and weight. Then run the whole tender in one call as a check: its award and exclusions must agree with your stage-by-stage work.
 
 ## The traps this tier has shown you
 

@@ -3,12 +3,136 @@ from bankkit import emit, finish
 Q=[]
 def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
-# SC2 Expert m02, Cost Percentiles and Their Labels.
-# STUB written by the foundation. The bank writer replaces this comment and
-# adds 15 q(...) calls: q(key_position, prompt, correct, [three distractors],
-# explanation). Every figure is quoted from digest.txt; read BANK_TASK.md.
-# The emit line below writes to a LITERAL path, which the kit's
-# check-bank-sources reads; keep it as it is.
+# SC2 Expert m02, Cost Percentiles and Their Labels. Every figure is quoted
+# from digest.txt: the exceedance definition of lib/conventions/percentile.js,
+# the engine's floor-index percentile basis, the Ekene contract types' cost
+# percentiles on seed 20270211 with 20000 iterations, the plan, the mean and
+# the overrun. The daily-cost question rests on the payments basis and was
+# checked by calling contractTypes through tender_engine.mjs.
+
+K = [1, 3, 0, 2, 2, 0, 3, 1, 0, 3, 1, 2, 3, 0, 2]
+_i = iter(K)
+def x(p, c, ds, e): q(next(_i), p, c, ds, e)
+
+# 1
+x("lib/conventions/percentile.js sets the P labels once for the platform, and the tender engine imports them. What does it say P90 means?",
+ "A 90% probability the actual quantity meets or exceeds this value, per SPE PRMS",
+ ["Ninety percent of the outcomes fall below the value, the reading most statistics libraries use",
+  "The 90th value in every hundred sorted iterations",
+  "A 90% probability the actual quantity falls at or below this value, per SPE PRMS"],
+ "The definition, verbatim, is \"P90 means a 90% probability the actual quantity meets or exceeds this value, per SPE PRMS.\" It is an exceedance definition. The reading in which 90 percent of outcomes fall below the value is the non-exceedance convention, which the platform does not use, and the at-or-below wording is the same reversal put in PRMS's name. A fixed position in every hundred is not how the engine indexes: it reads floor(0.1 n) for P90.")
+
+# 2
+x("On the Ekene day rate, seed 20270211 with 20000 iterations, which figure does the engine label the P90 company cost?",
+ "837897.131515, the LOW cost: nine iterations in ten cost at least that much",
+ ["1029964.481686, the top of the range, the figure nine outcomes in ten stay below",
+  "912667.421771, the middle figure, counted from the top",
+  "923862.832721, the mean, taken as the cost the company meets with 90 percent assurance"],
+ "Under the exceedance definition a 90 percent probability of meeting or exceeding a cost makes that cost a LOW one, so the engine's P90 for the day rate is 837897.131515. 1029964.481686 is the P10, the HIGH cost: reading it as P90 turns the label backwards. 912667.421771 is the P50 and 923862.832721 the mean, and neither is a percentile at 90.")
+
+# 3
+x("At 20000 iterations, which positions in the sorted company costs does lib/stats basicStats read for P90, P50 and P10?",
+ "2000, 10000 and 18000, counting the first sorted value as index 0",
+ ["18000, 10000 and 2000, with P90 read from the top of the sorted costs downward",
+  "2000, 10000 and 18000, each averaged with its neighbour so the figure is interpolated",
+  "20, 100 and 180, fixed at any count"],
+ "The engine's percentile basis states P90 = index floor(0.1 n), P50 = floor(0.5 n), P10 = floor(0.9 n) on the values sorted ascending, which at 20000 gives 2000, 10000 and 18000. Reading P90 at 18000 would put the label on the HIGH cost. The engine reads the value at the index as it stands with no interpolation. 20, 100 and 180 are the indices at 200 iterations, because the index is a fraction of the count.")
+
+# 4
+x("A learner sets iterations to 200 on the contract calculator. Which index in the sorted costs now holds the HIGH cost figure, and under which label?",
+ "Index 180, labelled P10, since floor(0.9 x 200) is 180",
+ ["Index 20, labelled P90, the higher label",
+  "Position 18000, P10's fixed index",
+  "At index 100, labelled P50, since at so few iterations only the middle value is read"],
+ "The index is the floor of a fraction of the count, so at 200 iterations P90 reads index 20, P50 index 100 and P10 index 180. The HIGH figure is the P10, at 180. Index 20 is the P90, the LOW figure. 18000 is P10's index at 20000 iterations, and there are only 200 values here. All three labels are read at any count.")
+
+# 5
+x("How does the engine turn 20000 sorted company costs into a percentile figure?",
+ "It reads the value at the floor index as it stands, with no interpolation",
+ ["Linear interpolation between the two values either side",
+  "An average of the ten sorted values nearest the fraction",
+  "A triangle is fitted to the costs and inverted with triInvCDF"],
+ "The percentile basis reads the value at index floor(0.1 n), floor(0.5 n) or floor(0.9 n) with no interpolation, so every percentile is a value the engine actually sampled. Linear interpolation is common in other libraries and would give a slightly different figure; averaging a window is not in the basis. triInvCDF turns a uniform into a sample of a stated triangle; it is not used to read a percentile.")
+
+# 6
+x("Why does the lump sum read 900000.000000 at P90, P50 and P10 on the Ekene job?",
+ "The company pays that price whatever happens, so its cost is a single point",
+ ["Its percentiles print at the plan, as a lump sum has no seed",
+  "Each percentile is rounded to the contract value",
+  "The contractor's cost spread is taken off the price, leaving only the planned payment"],
+ "The payments basis says lump sum 900000, paid in every iteration, so every sorted value is 900000.000000 and every percentile reads it. The same seed drives every contract type and the engine rounds nothing. Under the lump sum the contractor's cost moves only the contractor's margin, and the company's cost stays at the price.")
+
+# 7
+x("At P90, the LOW cost, the reimbursable contract costs the company less than the day rate. At P10, the HIGH cost, which costs less?",
+ "The day rate, 1029964.481686 against 1058436.038354 for cost plus 12 percent",
+ ["The reimbursable contract again, since a percentage fee trims every outcome of the job",
+  "Neither: both read 900000.000000 at P10",
+  "Cost plus 12 percent, at 1029964.481686 against the day rate's 1058436.038354"],
+ "The engine's P10 costs are 1029964.481686 for the day rate and 1058436.038354 for cost plus 12 percent, so at the HIGH cost the day rate is lower, while at P90 the reimbursable contract's 809775.400015 is lower than the day rate's 837897.131515. The reimbursable range is the widest: a percentage fee passes every change in cost to the company with the fee on top. One option swaps the two P10 figures. The lump sum's 900000.000000 is its own figure and caps nothing else.")
+
+# 8
+x("Every cost row printed under the exceedance labels passes one check. What is it, and what does a failure of it mean?",
+ "The P90 sits at or below the P50, and the P50 at or below the P10; a P90 above its P10 means the labels were swapped",
+ ["P10 at or below P50 at or below P90, the order of a sorted list; a row out of that order means the cost of the job is skewed",
+  "Mean and P50 agree to six decimals in every row; a gap between the two means too few iterations were run to settle them",
+  "The P50 sits at or below the mean; a row where it does not needs its percentiles interpolated"],
+ "For a cost the P90 is the LOW figure and the P10 the HIGH one, so every row reads P90 at or below P50 at or below P10, and the engine's table prints that check as true for all three contract types. A P90 printed above its P10 means a label was reversed somewhere between the engine and the page. The mean and the P50 are different figures on a skewed job (923862.832721 and 912667.421771 on the day rate), and no percentile is ever interpolated.")
+
+# 9
+x("A company wants a budget for the Ekene day rate job that the cost meets or exceeds in only one outcome of ten. Which figure fits, on seed 20270211 with 20000 iterations?",
+ "1029964.481686, the P10 cost, the HIGH figure",
+ ["837897.131515, the P90 cost, since a 90 label reads as the cautious budget",
+  "912667.421771, the P50, as half the outcomes fall on each side of it",
+  "923862.832721, the mean, as it averages every iteration of the run"],
+ "A value met or exceeded in one outcome of ten is the P10 by the exceedance definition, the HIGH cost, 1029964.481686. The P90, 837897.131515, is met or exceeded in nine outcomes of ten, so a budget set there is overrun almost every time: carrying the reserves habit, where P90 is the cautious figure, into a cost table picks the wrong column. The P50 and the mean are exceeded far more often than one time in ten.")
+
+# 10
+x("On the day rate the mean company cost is 923862.832721 and the P50 912667.421771. Why does the mean sit above the middle?",
+ "The high outcomes lie further from the middle than the low ones, because the NPT triangle has a long upper tail",
+ ["Its mean includes the 160000.000000 mobilisation fee, which the P50 leaves out of the sort",
+  "A floor index always lands one value short, so the P50 is read a little low every time",
+  "The engine takes the mean over the plan and the samples together, which lifts it upward"],
+ "The NPT fraction is triangular with its mode at 0.15 and its maximum at 0.6, so long jobs sit far above the middle while short ones cannot fall far below it; a mean feels the far tail and a middle value does not. Every iteration's company cost includes the mobilisation fee, so it is in both figures. The floor index reads a sampled value and has no downward bias of the size shown, and the mean is taken over the iterations alone.")
+
+# 11
+x("On seed 20270211 with 20000 iterations, 0.902400 of the iterations overrun the plan. Why is the plan so easy to overrun?",
+ "The plan takes the modes, and the NPT triangle (mode 0.15, max 0.6) has far more room above its mode",
+ ["Its plan uses the productive 12.056944 days with no allowance for NPT at all",
+  "The daily cost triangle is centred on its maximum of 55000, far above the plan's 42000.000000 a day, so almost every draw costs more",
+  "Seed 20270211 happens to draw high; another seed would put the share near a half"],
+ "The plan is the modes: 13.865486 days at 42000.000000 a day, with the NPT fraction at 0.15. The triangle's tail runs to 0.6, so most draws sit above the mode, and a plan built from the modes of skewed inputs is optimistic by construction. The plan's days already include the modal NPT. The daily cost triangle has its mode at 42000 and its maximum at 55000. The share comes from the shape of the inputs, which no seed changes.")
+
+# 12
+x("A learner adds a plan with days but no dailyCost to the contract comparison. What does the engine return?",
+ "The refusal: \"plan must be { days, dailyCost }, both at or above 0, when given\"",
+ ["A plan at the stated days and the daily cost's mode of 42000.000000",
+  "A plan at the stated days and the mean daily cost of the samples drawn in the run",
+  "The modes plan of 13.865486 days, with the stated days dropped without a word"],
+ "A stated plan must carry both its days and its daily cost, and the engine refuses one that lacks either, naming the field plan. It fills in no missing half from the mode or from the samples, and it never drops a stated input without saying so.")
+
+# 13
+x("A learner adds a stated plan of 15.277257 days at 42000 to the Ekene run on seed 20270211 with 20000 iterations. What moves?",
+ "The overrun probability and split, the planned payments and the planned margins",
+ ["The P90, P50 and P10 of every contract, as the samples are redrawn around the new plan",
+  "Only the lump sum's figures, as the other payments already follow the days drawn",
+  "Nothing at all, since a stated plan is a label printed beside the table and no more"],
+ "A stated plan moves only the reference the overrun and the planned payments are measured against, so the probability of an overrun, its split and the planned margins move with it. The samples and the percentiles do not move: the same seed draws the same values (a call with this plan returns the same P90, P50 and P10). The day rate and reimbursable planned payments depend on the plan's days and cost, and the lump sum's planned payment stays 900000.000000.")
+
+# 14
+x("Raising the max of dailyCost in the Ekene run leaves the seed and the iterations alone. Whose company cost percentiles move?",
+ "Only the reimbursable contract's: the daily cost reaches the company under cost plus a fee",
+ ["The day rate's and the reimbursable contract's, since both of them pay the contractor for its time on the job",
+  "All three, since a dearer daily cost raises every contract's cost to the company",
+  "None of them, as the daily cost is the contractor's and never reaches the company"],
+ "The payments basis is lump sum 900000; day rate 160000 + 50000 x days; reimbursable cost x 1.12. Only the reimbursable payment contains the contractor's cost, and so its daily cost. The day rate pays by the day at the agreed rate, and the days are drawn from the first uniform of each iteration, which the daily cost triangle does not touch; a call with a higher max returns the same day rate and lump sum percentiles and a higher reimbursable row. The lump sum pays its price whatever happens.")
+
+# 15
+x("Why does the engine return percentileDefinition beside every set of cost percentiles it prints?",
+ "So no reader supplies the everyday reading, in which a bigger label names a bigger cost",
+ ["Because SPE PRMS requires every cost report to carry its percentile definition",
+  "To record which generator, mulberry32, drew the samples behind the percentiles",
+  "Because the definition is recomputed from the seed and differs from run to run"],
+ "A percentile copied without its definition invites the reader to supply one, and the conversational reading would take the P90 cost for the high figure, the wrong one here. The definition is the platform's own convention, kept beside a cost so the convention is never guessed. The generator is stated in the sampling basis, and the definition is a fixed text from lib/conventions/percentile.js that no seed changes.")
 
 emit(Q, '/root/cat-wip-procurement/banks/sc2a_m02.json', expect_n=15)
 finish()

@@ -99,7 +99,7 @@ export const MS_TENDER = Object.freeze({
 
 /* ------------------------------------------------ what a learner can type */
 
-/** A single number from a text box; a blank box is undefined, never zero. */
+/** A single number from a text box; a blank box is undefined. It does not become zero. */
 export const parseNumber = (text) => {
   if (text === '' || text === null || text === undefined) return undefined;
   const v = Number(text);

@@ -459,6 +459,6 @@
    "It refuses the whole call, since a completion beyond maxWeeks is an input error"
   ],
   "answer": 0,
-  "explanation": "The engine's schedule basis ends with the maximum: on the well services tender it reads \"beyond 10 weeks the bid is rejected\", and the materials tender states maxWeeks 14. A bid beyond the maximum leaves the commercial envelope as an exclusion with its reason, and the adjustment applies only to the weeks beyond minWeeks up to the maximum. A late bid is a result with a reason, so nothing is refused."
+  "explanation": "The engine's schedule basis ends with the maximum: on the well services tender it reads \"beyond 10 weeks the bid is rejected\", and the materials tender states maxWeeks 14. A bid beyond the maximum leaves the commercial envelope as an exclusion with its reason, which the engine words for a 15-week bid as \"offers completion in 15 weeks, beyond the maximum 14 weeks; the bid is nonresponsive\", and the adjustment applies only to the weeks beyond minWeeks up to the maximum. A late bid is a result with a reason, so nothing is refused."
  }
 ]
