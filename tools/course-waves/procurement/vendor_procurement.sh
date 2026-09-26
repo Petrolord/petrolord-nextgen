@@ -38,8 +38,9 @@ ENG=/root/petrolord-engines
 NG=${NG:-/root/wt-sc2-nextgen}
 PIN=$(python3 -c "import json,sys;print(json.load(open(sys.argv[1]))['canonical']['commit'])" "$NG/packages/engines/VENDOR.json")
 # First vendored at 91877017f (engines PR #261); re-vendored at 527a197 (engines PR #264, the four
-# foundation wording and consistency findings; no graded number moves).
-REV=${REV:-527a197}
+# foundation wording and consistency findings) and at 006ed85 (engines PR #266, unknown
+# input keys refused at every level, one triangle refusal wording); no graded number moves.
+REV=${REV:-006ed85}
 FULL=$(git -C "$ENG" rev-parse "$REV^{commit}")
 EXP=$(mktemp -d)
 LEDGER_PY=$(mktemp)
@@ -201,7 +202,7 @@ for p in paths:
     added.append({
         'path': p, 'kind': kind, 'group': GROUP, 'vendoredSha': blob,
         'reason': (f"SC2 procurement course: vendored sha-identical from petrolord-engines {full[:7]} "
-                   f"(PR #261 and the findings repair #264: engines/supplychain/tender.js, its jest suite, golden, the ekene-tender fixtures and their writer, oracle, "
+                   f"(PRs #261, #264 and #266: engines/supplychain/tender.js, its jest suite, golden, the ekene-tender fixtures and their writer, oracle, "
                    f"timing script, FINDINGS, negative control) by the wave's vendor_procurement.sh, 4 proofs per path. "
                    f"{'New since' if kind == 'extra' else 'Differing from'} the canonical pin {pin[:7]}, which stays: moving it "
                    f"would also move economics (cashflow.ts 3.11), AFE and other paths other courses grade. "

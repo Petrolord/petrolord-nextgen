@@ -212,7 +212,7 @@ def main():
         body = re.sub(r'\bEK-11/\w+/\d{4}-\d{2}', ' TENDERREF ', body)
         body = re.sub(r'\b(?:WS|MS|T|U|R|B|K|LO|E|S|Z|L|I|H|N|NC)\d+\b', ' BIDREF ', body)
         body = re.sub(r'\bAPI (?:\d+\w*)(?: and API \d+\w*)*', ' STANDARDREF ', body)
-        body = re.sub(r'\bPRs? #\d+(?: and #\d+)?', ' PRREF ', body)
+        body = re.sub(r'\bPRs? #\d+(?:(?:, | and )#\d+)*', ' PRREF ', body)
         body = re.sub(r'\b[ml]\d{2}\b', ' KEYREF ', body)
         # A FIELD PATH NAMED BY A REFUSAL (values[1], index[5]) is an address.
         body = re.sub(r'\b\w+\[\d+\]', ' FIELDREF ', body)

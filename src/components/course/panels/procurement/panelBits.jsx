@@ -84,3 +84,10 @@ export const YES_NO = [['false', 'off'], ['true', 'on']];
 
 /** A very small magnitude, in exponent form. */
 export const eX = (v) => (v === null || v === undefined || !Number.isFinite(Number(v)) ? 'none' : (Number(v) === 0 ? '0' : Number(v).toExponential(2)));
+
+/** The engine's own citation for a result, from its basis. Shows nothing the engine did not return. */
+export const Source = ({ basis, extra }) => {
+  const parts = [basis && basis.source, extra].filter((x) => typeof x === 'string' && x !== '');
+  if (!parts.length) return null;
+  return <Declared title="SOURCE, in the engine's words">{parts.join('; ')}</Declared>;
+};

@@ -2,7 +2,7 @@
 //
 // Every number this lab returns is a return value of the vendored engine
 // (packages/engines/engines/supplychain/tender.js, sha-identical with
-// petrolord-engines 527a197, which imports lib/stats for the seeded Monte
+// petrolord-engines 006ed85, which imports lib/stats for the seeded Monte
 // Carlo, lib/conventions/percentile.js for the cost P-label definition,
 // engines/economics/cashflow.ts for the canonical npv, engines/drilling/
 // wellCost.js for the programme days and the should-cost, and
@@ -42,10 +42,16 @@ const clone = (o) => JSON.parse(JSON.stringify(o));
 /** A fixture bid as the engine takes it: the display name and the content records stay in the fixture. */
 export const bidOf = (b) => { const { name, nc, ncWeights, ...rest } = clone(b); return rest; };
 export const criteriaOf = (f) => f.criteria.map(({ id, weight, maxScore }) => ({ id, weight, maxScore }));
+/** The technical envelope reads only a bid's id, mandatory requirements and scores; the engine refuses any other key. */
+export const techBidOf = (b) => ({ id: b.id, mandatory: clone(b.mandatory), scores: clone(b.scores) });
+/** The commercial envelope reads the bid's receipt, bill and commercial terms. */
+export const commercialBidOf = (b) => { const { scores, mandatory, indigenous, capacity, ncPct, ...rest } = clone(b); return rest; };
 export const WS_BIDS = WELL_SERVICES.bids.map(bidOf);
 export const MS_BIDS = MATERIALS.bids.map(bidOf);
 export const WS_CRITERIA = criteriaOf(WELL_SERVICES);
 export const MS_CRITERIA = criteriaOf(MATERIALS);
+export const WS_TECH_BIDS = WS_BIDS.map(techBidOf);
+export const MS_TECH_BIDS = MS_BIDS.map(techBidOf);
 export const WS_CONTENT = { items: WELL_SERVICES.nc.items, bids: WELL_SERVICES.bids.map((b) => ({ id: b.id, items: b.nc })) };
 export const MS_CONTENT = { items: MATERIALS.nc.items, bids: MATERIALS.bids.map((b) => ({ id: b.id, items: b.nc, weights: b.ncWeights })) };
 export const WS_CONTRACTING = (() => { const { note, ...rest } = clone(WELL_SERVICES.contracting); return rest; })();
@@ -189,7 +195,7 @@ export const shouldCostReader = () => {
 
 /** A handful of the engine's refusals, for a panel that shows what a refusal looks like. */
 export const refusalSamples = () => [
-  ['technicalEvaluation', 'no pass mark', T.technicalEvaluation({ criteria: WS_CRITERIA, bids: clone(WS_BIDS) })],
+  ['technicalEvaluation', 'no pass mark', T.technicalEvaluation({ criteria: WS_CRITERIA, bids: clone(WS_TECH_BIDS) })],
   ['rankTender', 'a price method it does not offer', T.rankTender({ technicalWeight: 0.7, priceMethod: 'mean-deviation', technicalMethod: 'relative', bids: [] })],
   ['contentPreference', 'no s.14 reading', T.contentPreference({ bids: [] })],
   ['contractTypes', 'no seed', T.contractTypes({ ...clone(WS_CONTRACTING), seed: undefined })],

@@ -50,4 +50,4 @@ A report that applies s.14 names the reading beside the outcome, and on a tender
 
 ## Exercise
 
-Open the award calculator on the view "Sections 14 and 16, both readings". It starts on the materials bids and shows both readings side by side. Read the lead, applied and selected rows in each column and match them to the table above, then read both reasons under the table. Change MS2's ncPct until the points reading also applies, and record the smallest value you tried at which it does. Then replace the bids with LO and K4 and confirm the last two rows of the edge table.
+Open the award calculator on the view "Sections 14 and 16, both readings". It starts on the materials bids and shows both readings side by side. Read the lead, applied and selected rows in each column and match them to the table above, then read both reasons under the table. Change MS2's ncPct until the points reading also applies, and record the smallest value you tried at which it does. Then replace the bids with LO and K4 and confirm the last two rows of the edge table. Last, set the reading selector to no reading stated and read the refusal quoted above.

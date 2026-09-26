@@ -76,6 +76,20 @@ is a real wrong method with its real number:
 14. **printed against exact.** The Guidance prints Company D's combined score as
     98.34; the engine's is 98.333333.
 
+## TWO KEYS THAT ARE EASY TO GET WRONG
+
+1. **"Every bid rejected" is a refusal in one function only.** Key the refusal
+   "bids has no bid left to score: every bid is rejected" to `rankTender` (the
+   envelope calculator's combined-score view) and to nothing else. The whole
+   tender in one call (`evaluateTender`) RETURNS A RESULT in the same situation:
+   award null, with the reason "every opened bid was rejected at the commercial
+   stage". That is a result, never a refusal.
+2. **The tie under linear pricing.** At a technical weight of 0.85 with the
+   linear price method, WS5 and WS3 tie on the combined score and the lower
+   evaluated cost orders them; WS1 is most advantageous at that step. A key may
+   rest on this only as the digest prints it (the stepped table), never on a
+   step the digest does not print.
+
 ## THE CAPSTONES ARE NOT YOURS
 
 The three capstones live in `sc2_capstone.mjs` and NOTHING ABOUT THEM IS IN

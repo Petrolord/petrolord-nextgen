@@ -56,7 +56,7 @@ const sum = (a) => a.reduce((x, y) => x + y, 0);
 const mean = (a) => sum(a) / a.length;
 
 /* ---- ONITSHA ---- */
-const ON = inp.ONITSHA;
+const { tender: onTenderNo, scope: onScope, ...ON } = inp.ONITSHA;
 const onRun = (o = {}) => T.evaluateTender({ ...clone(ON), ...o });
 const onTrue = onRun();
 const onBid = (id) => ON.bids.find((b) => b.id === id);
@@ -98,8 +98,8 @@ const ROUTES = {
     wrong: {
       weighted_points_quoted: () => onTrue.technical.bids.find((b) => b.id === 'ON3').weightedPoints,
       unweighted_mean_of_the_scores: () => 100 * mean(Object.values(on3.scores)) / 5,
-      weights_reversed: () => T.technicalEvaluation({ passMark: 0, criteria: ON.criteria.map((c, i, a) => ({ ...c, weight: a[a.length - 1 - i].weight })), bids: [clone(on3)] }).bids[0].technicalPercent,
-      scores_read_out_of_four: () => T.technicalEvaluation({ passMark: 0, criteria: ON.criteria.map((c) => ({ ...c, maxScore: 4 })), bids: [{ ...clone(on3), scores: Object.fromEntries(Object.entries(on3.scores).map(([k, v]) => [k, Math.min(4, v)])) }] }).bids[0].technicalPercent,
+      weights_reversed: () => T.technicalEvaluation({ passMark: 0, criteria: ON.criteria.map((c, i, a) => ({ ...c, weight: a[a.length - 1 - i].weight })), bids: [{ id: on3.id, scores: clone(on3.scores) }] }).bids[0].technicalPercent,
+      scores_read_out_of_four: () => T.technicalEvaluation({ passMark: 0, criteria: ON.criteria.map((c) => ({ ...c, maxScore: 4 })), bids: [{ id: on3.id, scores: Object.fromEntries(Object.entries(on3.scores).map(([k, v]) => [k, Math.min(4, v)])) }] }).bids[0].technicalPercent,
       the_top_bid_s_relative_score: () => onRank().bids.find((b) => b.id === 'ON3').technicalScore,
     },
   },

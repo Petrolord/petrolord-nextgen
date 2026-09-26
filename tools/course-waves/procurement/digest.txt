@@ -4,7 +4,7 @@
 
 # PRECISION. Every price, amount, total, correction, discount, deviation, omission, adjustment, evaluated cost, life-cycle cost, estimate, share amount, payment, margin, overrun, cost, day count, score, points total, percentage, content, lead, ratio, weight, mean, standard deviation, limit, percentile and probability prints to SIX decimals; counts, ranks, weeks, years, seeds and iterations are whole numbers; the 12-digit tie key prints at twelve significant digits where the tie rule is shown; an engine message is printed verbatim, figures and all, and a figure inside a message is the shortest round-trip decimal of the double the engine holds.
 
-# ENGINE. engines/supplychain/tender.js, vendored sha-identical with petrolord-engines 527a197 (engines PRs #261 and #264), 1098 lines. It imports lib/stats (mulberry32, triInvCDF, basicStats, mean, standardDeviation), lib/conventions/percentile.js (EXCEEDANCE_DEFINITION), engines/economics/cashflow.ts (npv), engines/drilling/wellCost.js (evaluateProgram, afeCosts) and engines/economics/afe.js (calculatePartnerCosts). It makes no network call.
+# ENGINE. engines/supplychain/tender.js, vendored sha-identical with petrolord-engines 006ed85 (engines PRs #261, #264 and #266), 1207 lines. It imports lib/stats (mulberry32, triInvCDF, basicStats, mean, standardDeviation), lib/conventions/percentile.js (EXCEEDANCE_DEFINITION), engines/economics/cashflow.ts (npv), engines/drilling/wellCost.js (evaluateProgram, afeCosts) and engines/economics/afe.js (calculatePartnerCosts). It makes no network call.
 
 # AN ENGINE COURSE. There is no Suite app for this course. Every practical runs in the course's own calculator panels, which call this same vendored engine on the learner's own bids and settings.
 
@@ -59,7 +59,8 @@ WHAT THE ENGINE DOES NOT DO, checked here against its exports and its source:
 - Its imports are, in full: lib/stats/stats.js, lib/conventions/percentile.js, economics/cashflow.ts, drilling/wellCost.js, economics/afe.js. It discounts through the canonical npv of engines/economics/cashflow.ts and samples through lib/stats; it carries no Monte Carlo or NPV code of its own.
 - It applies no domestic preference margin, compares no amount in words against figures, computes no negotiation or best and final offer, splits no tender into lots and deducts nothing for the Nigerian Content Development Fund. Section 24 lists each with where it would come from.
 - It decides nothing a rule does not state. The pass mark, the weights, the technical weight, the price and technical scoring methods, the s.14 reading, the should-cost band and the Monte Carlo seed are inputs with no default, and a call without one is refused by name.
-- Its exported names are, in full: DEFAULTS, NC_MEASURES, NC_SCHEDULE, abnormallyLow, contentPreference, contractTypes, correctArithmetic, evaluateTender, evaluatedCosts, nigerianContent, rankTender, shouldCost, technicalEvaluation, weightingBand.
+- It reads no key it does not know. `ACCEPTED_KEYS` is exported with one shape for each of the 11 functions, and every call refuses an input key the function does not read, at every level, naming the key, its path and the accepted keys (section 4 tables them). A misspelt optional key is refused; it never silently drops a term.
+- Its exported names are, in full: ACCEPTED_KEYS, DEFAULTS, NC_MEASURES, NC_SCHEDULE, abnormallyLow, contentPreference, contractTypes, correctArithmetic, evaluateTender, evaluatedCosts, nigerianContent, rankTender, shouldCost, technicalEvaluation, weightingBand.
 
 # SECTION 2: The sources, their editions and the date each was read (owned by Associate m01 l04 and Professional m04 and Expert m05 l01)
 
@@ -258,11 +259,11 @@ A refusal is an object with `error` and `field`. The message starts with the nam
 | `contentPreference` | indigenous given as text | `bids[0].indigenous` | bids[0].indigenous must be true or false when given |
 | `contractTypes` | no iterations | `iterations` | iterations must be a whole number from 1 to 200000 |
 | `contractTypes` | no seed | `seed` | seed must be a whole number from 0 to 4294967295; there is no default, so every run can be reproduced |
-| `contractTypes` | a negative NPT fraction | `duration.nptFrac` | duration.nptFrac must be at or above 0 |
+| `contractTypes` | a negative NPT fraction | `duration.nptFrac` | duration.nptFrac must be at or above 0; got -0.1 |
 | `contractTypes` | an activity the wellCost engine refuses | `duration.program` | duration.program is refused by engines/drilling/wellCost.js: flat "Mobilise and rig up on Ekene-3": durationHr must be >= 0 |
-| `contractTypes` | a duration with min above mode | `duration` | duration must have min <= mode <= max |
-| `contractTypes` | a negative duration minimum | `duration.min` | duration.min must be at or above 0 |
-| `contractTypes` | a daily cost given as text | `dailyCost` | dailyCost must be a number or { min, mode, max } (triangular) |
+| `contractTypes` | a duration with min above mode | `duration` | duration must have min <= mode <= max; got min 16, mode 14, max 20 |
+| `contractTypes` | a negative duration minimum | `duration.min` | duration.min must be at or above 0; got -1 |
+| `contractTypes` | a daily cost given as text | `dailyCost` | dailyCost must be a number or a triangular distribution { min, mode, max } of finite numbers |
 | `contractTypes` | a negative fixed cost | `fixedCost` | fixedCost must be a finite number at or above 0 |
 | `contractTypes` | no lump sum | `lumpSum` | lumpSum must be { price } with price at or above 0 |
 | `contractTypes` | a day rate with no mobilisation fee | `dayRate` | dayRate must be { rate, mobilisationFee }, both at or above 0 |
@@ -284,12 +285,28 @@ A refusal is an object with `error` and `field`. The message starts with the nam
 | `evaluateTender` | Nigerian content given as text with a lowest-cost award | `nigerianContent` | nigerianContent must be { ncLeadBasis } when given |
 | `evaluateTender` | Nigerian content with a bid that has no ncPct | `bids[4].ncPct` | bids[4].ncPct is required for every bid that reaches the commercial stage when nigerianContent is given |
 | `evaluateTender` | criteria weights summing to 99 | `criteria` | criteria weights must sum to 100; they sum to 99 |
+| `evaluatedCosts` | lifecycle spelt with a small c | `lifecycle` | lifecycle is not an accepted key; the accepted keys at the top level are bids, omissionRule, bestEstimates, schedule, lifeCycle, tolerance |
+| `evaluatedCosts` | a bid carrying its technical scores | `bids[0].scores` | bids[0].scores is not an accepted key; the accepted keys of bids[0] are id, name, receivedAt, lines, discount, deviations, omitted, rejected, completionWeeks, annualCosts, residualValue |
+| `evaluatedCosts` | a bill line with a key the engine does not read | `bids[0].lines[0].unitPrice` | bids[0].lines[0].unitPrice is not an accepted key; the accepted keys of bids[0].lines[0] are id, quantity, unitRate, quotedAmount, decimalMisplaced |
+| `evaluatedCosts` | a best estimate for an item no bid omits | `bestEstimates.mob` | bestEstimates.mob is not an item any bid omits; the accepted keys of bestEstimates are the omitted item ids nitrogen |
+| `evaluatedCosts` | a schedule key spelt maxWeek | `schedule.maxWeek` | schedule.maxWeek is not an accepted key; the accepted keys of schedule are minWeeks, maxWeeks, ratePerWeek |
+| `technicalEvaluation` | a score for a criterion the tender does not have | `bids[0].scores.price` | bids[0].scores.price is not a criterion id; the accepted keys of bids[0].scores are the criterion ids methodology, personnel, equipment, hse, schedule |
+| `technicalEvaluation` | a bid carrying its bill | `bids[0].lines` | bids[0].lines is not an accepted key; the accepted keys of bids[0] are id, name, mandatory, scores |
+| `nigerianContent` | a content item the tender does not list | `bids[0].items.pipe` | bids[0].items.pipe is not an item id; the accepted keys of bids[0].items are the item ids casing, valves, cement, baryte |
+| `contentPreference` | the reading passed as ncBasis | `ncBasis` | ncBasis is not an accepted key; the accepted keys at the top level are bids, ncLeadBasis |
+| `contractTypes` | an NPT triangle with min above mode | `duration.nptFrac` | duration.nptFrac must have min <= mode <= max; got min 0.2, mode 0.15, max 0.6 |
+| `contractTypes` | a daily cost triangle with min above mode | `dailyCost` | dailyCost must have min <= mode <= max; got min 45000, mode 42000, max 55000 |
+| `contractTypes` | an activity key spelt durationHrs | `duration.program[0].durationHrs` | duration.program[0].durationHrs is not an accepted key; the accepted keys of duration.program[0] are id, kind, label, fromMdM, toMdM, ropMPerHr, mdM, tripSpeedMPerHr, runSpeedMPerHr, flatHr, durationHr |
+| `shouldCost` | a band key spelt lo | `band.lo` | band.lo is not an accepted key; the accepted keys of band are low, high |
+| `evaluateTender` | a key the engine does not read, domesticPreference | `domesticPreference` | domesticPreference is not an accepted key; the accepted keys at the top level are criteria, passMark, bids, omissionRule, bestEstimates, schedule, lifeCycle, award, technicalWeight, priceMethod, technicalMethod, nigerianContent |
 
-99 refusals across 11 functions: weightingBand 3, correctArithmetic 9, technicalEvaluation 11, evaluatedCosts 23, rankTender 7, nigerianContent 13, contentPreference 5, contractTypes 14, shouldCost 6, abnormallyLow 3, evaluateTender 5.
+113 refusals across 11 functions: weightingBand 3, correctArithmetic 9, technicalEvaluation 13, evaluatedCosts 28, rankTender 7, nigerianContent 14, contentPreference 6, contractTypes 17, shouldCost 7, abnormallyLow 3, evaluateTender 6.
 
 Three rules the table shows:
 - A field with no default is refused when it is missing, and the message says there is no default: the pass mark, the technical weight, the price and technical methods, the s.14 reading, the award basis, the Monte Carlo seed and the should-cost band.
 - `mean-deviation` is refused by name. The engine scores price by `lowest-ratio` or `linear` only (section 21 says why).
+- An input key a function does not read is refused at whatever level it sits (a top-level option, a bid, a bill line, a schedule, an activity, a band), with the path to the key and the full list of accepted keys; a key that is an id (a score, a content item, a best estimate) is checked against the ids the call carries. A key present with no value counts as absent.
+- Every triangle (the days, the NPT fraction, the daily cost) is refused in one wording, with the figures it was given.
 - An error in an imported engine is passed through with the name of that engine: an activity wellCost refuses reaches the learner as `duration.program` with the wellCost message after the colon.
 
 # SECTION 5: What is graded, where the practicals run, and what is never graded (owned by Associate m01 l05 and Expert m06)
@@ -587,6 +604,20 @@ LINEAR PRICE SCORING. The engine's second price method, 'linear', scores Sc = 10
 
 Under 'linear' the dearest responsive bid scores 0.000000 and the cheapest 100.000000, so the same price spread moves the commercial score further. On this tender the price method changes the award: the most advantageous bid (engine) is WS3 under 'lowest-ratio' and WS5 under 'linear', with the technical weight, the technical method and the bids unchanged.
 
+THE TECHNICAL WEIGHT STEPPED UNDER LINEAR PRICING (stated steps: 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1; the well services bids, relative technical score). The most advantageous bid and any row a tie-break ordered, engine:
+
+| technical weight | most advantageous | combined scores, rank order | tie broken |
+| --- | --- | --- | --- |
+| 0.7 | WS5 | WS5 87.647059, WS2 84.430357, WS1 77.265217, WS3 70.000000 | none |
+| 0.75 | WS5 | WS5 86.764706, WS2 85.064513, WS1 80.564152, WS3 75.000000 | none |
+| 0.8 | WS5 | WS5 85.882353, WS2 85.698669, WS1 83.863086, WS3 80.000000 | none |
+| 0.85 | WS1 | WS1 87.162020, WS2 86.332826, WS5 85.000000, WS3 85.000000 | WS3 by lower evaluated cost |
+| 0.9 | WS1 | WS1 90.460955, WS3 90.000000, WS2 86.966982, WS5 84.117647 | none |
+| 0.95 | WS3 | WS3 95.000000, WS1 93.759889, WS2 87.601138, WS5 83.235294 | none |
+| 1 | WS3 | WS3 100.000000, WS1 97.058824, WS2 88.235294, WS5 82.352941 | none |
+
+At a technical weight of 0.85, WS5 and WS3 score the same combined score to twelve significant digits, and the lower evaluated cost ranks WS5 above WS3; the most advantageous bid at that step is WS1. As the weight rises the award moves from WS5 to WS1 and then to WS3.
+
 KIIVER AND KODYM (2015), TABLE 1 (stated from the source: three prices 50, 75, 100; price only). The source prints the lowest-bid ratio scores to whole points:
 
 | bid | price (source) | lowest-ratio Sc (engine) | the source prints | linear Sc (engine) |
@@ -616,6 +647,27 @@ ANNEX I EXAMPLE 1 of the World Bank ALB Guidance (stated from the source: 16 bid
 | mean | 1664426.375000 | 1664426 |
 | standard deviation (population) | 315974.537496 | 315975 |
 | limit, mean less one standard deviation | 1348451.837504 | 1348452 |
+
+THE SIXTEEN BIDS of Example 1 (source: the Guidance's Annex I, the figures the engine's golden also carries), each against the limit (engine):
+
+| bid | evaluated cost (source) | below the limit (engine flag) |
+| --- | --- | --- |
+| Bid 1 | 1145142 | true |
+| Bid 2 | 1330191 | true |
+| Bid 3 | 1342106 | true |
+| Bid 4 | 1378232 | false |
+| Bid 5 | 1462176 | false |
+| Bid 6 | 1476269 | false |
+| Bid 7 | 1486226 | false |
+| Bid 8 | 1579100 | false |
+| Bid 9 | 1613371 | false |
+| Bid 10 | 1657703 | false |
+| Bid 11 | 1856166 | false |
+| Bid 12 | 1900885 | false |
+| Bid 13 | 1912355 | false |
+| Bid 14 | 2099006 | false |
+| Bid 15 | 2149893 | false |
+| Bid 16 | 2242001 | false |
 
 Flagged (engine): Bid 1, Bid 2, Bid 3. The Guidance prints each figure rounded to the unit. The engine's reason for the first, verbatim:
 > Bid 1: evaluated cost 1145142 is below the average 1664426.375 less one standard deviation 315974.5374956808, that is below 1348451.8375043191: a potential abnormally low bid: clarify the price with the bidder before any decision; it is never rejected automatically
@@ -698,7 +750,7 @@ MS2's overall content, 61.584657, is the mean of its four item contents weighted
 MEASURED UNITS are enforced. Valves are counted by number in the Schedule; a bid that reports them by tonnage is refused, verbatim:
 > bids[0].items.valves.measure must be 'number', the unit the minimum is measured in; got 'tonnage'
 
-A TARGET THE SCHEDULE DOES NOT LIST enters with its source stated (s.11(2) lets the Board set one). Two stated bids, one Schedule line (land rigs, 70% by man-hours) and one stated target (catering, 90% by man-hours):
+A TARGET THE SCHEDULE DOES NOT LIST enters with its source stated (s.11(2) lets the Board set one). Two stated bids, one Schedule line (land rigs, engine key drilling-rigs-land, 70% by man-hours) and one stated target (catering, 90% by man-hours):
 
 | bid | rig | catering | overall | items met |
 | --- | --- | --- | --- | --- |
@@ -850,6 +902,19 @@ The engine's overrun basis, verbatim: an iteration overruns when its contractor 
 - Under the day rate the company pays for the extra days at the day rate and the contractor absorbs the rest: a daily cost above plan, and the gap between its daily cost and the day rate on the extra days.
 - Under cost plus 12 percent the company pays the whole overrun and 12 percent on top of it, so its share is 1.120000 and the contractor's part is negative: the contractor earns more when the job overruns. Its probability of a loss is 0.000000.
 
+COST PLUS A FIXED FEE. The same job with the reimbursable contract paying cost plus a fixed fee of 86682.050000 (stated: the planned margin of the percentage fee above), the same seed and iterations. The reimbursable row, engine:
+
+| figure | engine |
+| --- | --- |
+| planned payment | 809032.466667 |
+| company pays of the overrun | 107001.253374 |
+| contractor absorbs | 6.98e-14 |
+| company share | 1.000000 |
+| contractor margin, mean | 86682.050000 |
+| probability of a loss | 0.000000 |
+
+Under a fixed fee the company pays the whole expected overrun, 107001.253374, and the contractor's margin is the fee in every iteration. The contractor's part prints as 6.98e-14, the rounding left by summing 20000 floating-point differences, so it prints in exponent form and carries no share of the overrun. It is no longer negative because a fixed fee does not grow with the cost.
+
 WITH NOTHING UNCERTAIN (stated: 10 days, 40000 a day, fixed cost 100000; lump sum 500000; day rate 50000 with no mobilisation fee; reimbursable at cost plus a fixed fee of 0; 10 iterations, seed 1) nothing is drawn, no iteration overruns (probability 0.000000), and the reimbursable margin is exactly 0.000000 with a probability of a loss of 0.000000: a margin of exactly 0.000000 is not a loss. The engine's sampling basis, verbatim: 10 iterations, one mulberry32(1) stream; per iteration a uniform for the duration (constant: no draw) then one for the daily cost (constant: no draw); triangular inverse CDF (lib/stats triInvCDF).
 
 # SECTION 18: Cost percentiles and their labels: the exceedance definition and the low-cost P90 (owned by Expert m02)
@@ -868,7 +933,7 @@ For a COST, a 90% probability of meeting or exceeding a value makes that value a
 
 The lump sum is the same at every percentile: the company pays 900000.000000 whatever happens. The day rate and the reimbursable contract spread from their P90 to their P10.
 
-THE INDEX RULE. lib/stats basicStats sorts the 20000 values and reads P90 at index floor(0.1 x 20000) = 2000, P50 at 10000 and P10 at 18000 (the first sorted value is index 0), the fractions read from the engine's basis: no interpolation.
+THE INDEX RULE. lib/stats basicStats sorts the 20000 values and reads P90 at index floor(0.1 x 20000) = 2000, P50 at 10000 and P10 at 18000 (the first sorted value is index 0), the fractions read from the engine's basis: no interpolation. At 200 iterations the same rule reads P90 at index 20, P50 at 100 and P10 at 180 (derived).
 
 THE PLAN, THE MEAN AND THE PERCENTILES are three different figures. On the day rate the planned payment is 853274.305556, the mean company cost 923862.832721 and the P50 912667.421771 (engine). The plan is built from the modes; the triangular NPT fraction has a long upper tail (mode 0.15, max 0.6), so 0.902400 of the iterations overrun the plan.
 

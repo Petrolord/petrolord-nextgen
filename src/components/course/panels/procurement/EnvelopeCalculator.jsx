@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import {
-  parseNumber, parseJson, pretty, WS_BIDS, WS_CRITERIA, WS_TENDER, WELL_SERVICES_SETTINGS,
+  parseNumber, parseJson, pretty, WS_BIDS, WS_TECH_BIDS, WS_CRITERIA, WS_TENDER, WELL_SERVICES_SETTINGS, commercialBidOf,
   technicalOf, arithmeticOf, evaluatedOf, rankOf, tenderOf, DEFAULTS,
 } from './tenderLab';
 import {
   PanelShell, SelectField, NumField, Tile, TileGrid, FieldGrid, Note,
 } from '@/components/course/panels/petrophysics/panelKit';
 import {
-  six, list, Tbl, TextField, Refusal, Declared,
+  six, list, Tbl, TextField, Refusal, Declared, Source,
 } from './panelBits';
 
 // The envelope calculator (Associate): the two-envelope evaluation by hand.
@@ -27,7 +27,7 @@ export const MODES = [
 ];
 
 const scoresOnly = (bids) => bids.map((b) => ({ id: b.id, mandatory: b.mandatory, scores: b.scores }));
-const commercialOnly = (bids) => bids.map(({ scores, mandatory, indigenous, capacity, ...rest }) => rest);
+const commercialOnly = (bids) => bids.map(commercialBidOf);
 
 export const TechnicalMode = () => {
   const [crit, setCrit] = useState(pretty(WS_CRITERIA));
@@ -54,6 +54,7 @@ export const TechnicalMode = () => {
           </TileGrid>
           <Declared title="THE SCORE, in the engine's words">{r.basis.score}</Declared>
           <Declared title="THE PASS MARK, in the engine's words">{r.basis.passMark}</Declared>
+          <Source basis={r.basis} />
         </>
       )}
       <Note>A bid that fails a mandatory requirement is not scored. A bid below the pass mark is scored and its commercial envelope is never opened.</Note>
@@ -88,6 +89,7 @@ export const ArithmeticMode = () => {
           </TileGrid>
           {r.reasons.map((x) => <Note key={x}>{x}</Note>)}
           <Declared title="THE RULE, in the engine's words">{r.basis.rule}</Declared>
+          <Source basis={r.basis} />
         </>
       )}
     </>
@@ -95,7 +97,7 @@ export const ArithmeticMode = () => {
 };
 
 export const EvaluatedMode = () => {
-  const passed = technicalOf({ criteria: WS_CRITERIA, bids: WS_BIDS, passMark: WELL_SERVICES_SETTINGS.passMark }).passed;
+  const passed = technicalOf({ criteria: WS_CRITERIA, bids: WS_TECH_BIDS, passMark: WELL_SERVICES_SETTINGS.passMark }).passed;
   const [bids, setBids] = useState(pretty(commercialOnly(WS_BIDS.filter((b) => passed.includes(b.id)))));
   const [rule, setRule] = useState('average');
   const [minW, setMinW] = useState(String(WELL_SERVICES_SETTINGS.schedule.minWeeks));
@@ -125,6 +127,7 @@ export const EvaluatedMode = () => {
           {r.excluded.map((x) => <Note key={x.id}>{`${x.id} excluded: ${x.reason}`}</Note>)}
           <Declared title="THE EVALUATED COST, in the engine's words">{r.basis.evaluatedCost}</Declared>
           <Declared title="THE OMISSION RULE, in the engine's words">{r.basis.omission}</Declared>
+          <Source basis={r.basis} />
         </>
       )}
     </>
@@ -145,7 +148,7 @@ export const CombinedMode = () => {
       <FieldGrid>
         <TextField label="Bids (JSON array of { id, technicalPercent, evaluatedCost, receivedAt })" value={bids} onChange={setBids} rows={6} />
         <NumField label="Technical weight (0 to 1)" value={tw} onChange={setTw} />
-        <SelectField label="Price method" value={pm} onChange={setPm} options={[['lowest-ratio', 'lowest-ratio'], ['linear', 'linear']]} />
+        <SelectField label="Price method" value={pm} onChange={setPm} options={[['lowest-ratio', 'lowest-ratio'], ['linear', 'linear (Professional)']]} />
         <SelectField label="Technical method" value={tm} onChange={setTm} options={[['relative', 'relative'], ['absolute', 'absolute']]} />
       </FieldGrid>
       {b.error && <Note>{b.error}</Note>}
@@ -160,6 +163,7 @@ export const CombinedMode = () => {
           </TileGrid>
           <Declared title="THE COMBINED SCORE, in the engine's words">{`${r.basis.combined}; ${r.basis.technical}; ${r.basis.commercial}`}</Declared>
           <Declared title="THE RANKING, in the engine's words">{r.basis.ranking}</Declared>
+          <Source basis={r.basis} />
         </>
       )}
     </>
@@ -184,8 +188,10 @@ export const TenderMode = () => {
             <Tile label="Lowest evaluated cost" value={String(r.commercial ? r.commercial.lowestEvaluatedCost : 'none')} />
           </TileGrid>
           <Note>{r.reason}</Note>
+          {r.commercial && <Tbl head={['rank', 'bid', 'evaluated cost']} rows={r.commercial.bids.map((x) => [String(x.rank), x.id, six(x.evaluatedCost)])} />}
           <Tbl head={['excluded', 'stage', 'reason']} rows={r.excluded.map((x) => [x.id, x.stage, x.reason])} />
-          <Declared title="THE STAGES, in the engine's words">{r.basis.stages || r.basis.source}</Declared>
+          {r.basis.stages && <Declared title="THE STAGES, in the engine's words">{r.basis.stages}</Declared>}
+          <Source basis={r.basis} extra={r.basis.award} />
         </>
       )}
     </>

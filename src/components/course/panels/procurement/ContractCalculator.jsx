@@ -7,7 +7,7 @@ import {
   PanelShell, SelectField, NumField, Tile, TileGrid, FieldGrid, Note,
 } from '@/components/course/panels/petrophysics/panelKit';
 import {
-  six, list, Tbl, TextField, Refusal, Declared,
+  six, list, Tbl, TextField, Refusal, Declared, Source,
 } from './panelBits';
 
 // The contract calculator (Expert): contracts, should-cost and the whole
@@ -48,14 +48,16 @@ export const ContractsMode = () => {
             <Tile label="Probability of an overrun" value={six(r.overrun.probability)} />
             <Tile label="Expected overrun" value={six(r.overrun.expectedOverrun)} />
           </TileGrid>
-          <Tbl head={['type', 'planned payment', 'mean cost', 'P90 (low)', 'P50', 'P10 (high)', 'company pays', 'contractor absorbs', 'probability of a loss']} rows={TYPES.map(([k, n]) => {
+          <Tbl head={['type', 'planned payment', 'mean cost', 'P90 (low)', 'P50', 'P10 (high)', 'company pays', 'contractor absorbs', 'margin, planned', 'margin, mean', 'probability of a loss']} rows={TYPES.map(([k, n]) => {
             const x = r.types[k];
-            return [n, six(x.plannedPayment), six(x.companyCost.mean), six(x.companyCost.p90), six(x.companyCost.p50), six(x.companyCost.p10), six(x.overrun.companyPays), six(x.overrun.contractorAbsorbs), six(x.contractorMargin.probabilityOfLoss)];
+            return [n, six(x.plannedPayment), six(x.companyCost.mean), six(x.companyCost.p90), six(x.companyCost.p50), six(x.companyCost.p10), six(x.overrun.companyPays), six(x.overrun.contractorAbsorbs), six(x.contractorMargin.planned), six(x.contractorMargin.mean), six(x.contractorMargin.probabilityOfLoss)];
           })} />
+          <Tbl head={['figure', 'mean', 'P90 (low)', 'P50', 'P10 (high)', 'min', 'max']} rows={[['days', r.duration], ['contractor cost', r.contractorCost]].map(([n, d]) => [n, six(d.mean), six(d.p90), six(d.p50), six(d.p10), six(d.min), six(d.max)])} />
           <Declared title="THE PERCENTILE DEFINITION">{r.percentileDefinition}</Declared>
           <Declared title="THE PERCENTILES, in the engine's words">{r.basis.percentiles}</Declared>
           <Declared title="THE SAMPLING, in the engine's words">{r.basis.sampling}</Declared>
           <Declared title="THE OVERRUN, in the engine's words">{r.basis.overrun}</Declared>
+          <Declared title="SOURCE">The engine returns no citation for a contract comparison: its basis names the lib/stats sampler and the percentile convention it follows.</Declared>
         </>
       )}
       <Note>{`The calculator starts at 2000 iterations so it answers quickly; the engine accepts up to ${DEFAULTS.MAX_ITERATIONS}. A seed and an iteration count name a result exactly.`}</Note>
@@ -88,6 +90,7 @@ export const ShouldCostMode = () => {
           <Declared title="THE ESTIMATE, in the engine's words">{r.basis.estimate}</Declared>
           {r.basis.split && <Declared title="THE SPLIT, in the engine's words">{r.basis.split}</Declared>}
           <Declared title="THE BAND, in the engine's words">{r.basis.band}</Declared>
+          <Declared title="SOURCE">The engine returns no citation for a should-cost: its basis names the wellCost and AFE engines it imports.</Declared>
         </>
       )}
     </>
@@ -115,7 +118,9 @@ export const TenderMode = () => {
             <Tile label="Passed the technical envelope" value={list(r.technical.passed)} />
           </TileGrid>
           <Note>{r.reason}</Note>
+          {r.commercial && <Tbl head={['rank', 'bid', 'evaluated cost']} rows={r.commercial.bids.map((x) => [String(x.rank), x.id, six(x.evaluatedCost)])} />}
           <Tbl head={['excluded', 'stage', 'reason']} rows={r.excluded.map((x) => [x.id, x.stage, x.reason])} />
+          <Source basis={r.basis} extra={r.basis.award} />
         </>
       )}
     </>

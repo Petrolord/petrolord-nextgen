@@ -19,7 +19,7 @@ A job with its activity programme, its uncertain NPT fraction and daily cost, it
 
 ## How to work it
 
-Work the fields in the contract calculator, with one step in the envelope calculator. Paste the job into "Contract types on one job", set the stated seed and iteration count, and read the three contract fields from the table. Paste the tender into "The whole tender, any award basis" and note the award and the bids that passed. That view does not list evaluated costs, so build them for the passing bids with the Associate method, in the envelope calculator's view "Evaluated cost of the passing bids" at the stated omission rule and schedule. Then open "Should-cost and the screening band", paste the programme, the cost items, the contingency and the partners, replace the bids with those evaluated costs, and read the estimate, the operator's share and the awarded bid's ratio.
+Work every field in the contract calculator. Paste the job into "Contract types on one job", set the stated seed and iteration count, and read the three contract fields from the table. Paste the tender into "The whole tender, any award basis" and read the award and the evaluated cost of each bid that reached the commercial stage. Then open "Should-cost and the screening band", paste the programme, the cost items, the contingency and the partners, replace the bids with those evaluated costs, and read the estimate, the operator's share and the awarded bid's ratio.
 
 ## What catches people
 

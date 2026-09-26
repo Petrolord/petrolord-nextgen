@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import {
-  parseNumber, parseJson, pretty, MS_BIDS, MS_CONTENT, MATERIALS_SETTINGS, WELL_SERVICES_SETTINGS, NC_SCHEDULE,
+  parseNumber, parseJson, pretty, MS_BIDS, MS_TECH_BIDS, MS_CONTENT, commercialBidOf, MATERIALS_SETTINGS, WELL_SERVICES_SETTINGS, NC_SCHEDULE,
   technicalOf, MS_CRITERIA, evaluatedOf, bandOf, albOf, contentOf, preferenceOf,
 } from './tenderLab';
 import {
   PanelShell, SelectField, NumField, Tile, TileGrid, FieldGrid, Note,
 } from '@/components/course/panels/petrophysics/panelKit';
 import {
-  six, list, Tbl, TextField, Refusal, Declared,
+  six, list, Tbl, TextField, Refusal, Declared, Source,
 } from './panelBits';
 
 // The award calculator (Professional): the lowest evaluated cost and the
@@ -27,8 +27,8 @@ export const MODES = [
   ['preference', 'Sections 14 and 16, both readings'],
 ];
 
-const passedMs = () => technicalOf({ criteria: MS_CRITERIA, bids: MS_BIDS, passMark: MATERIALS_SETTINGS.passMark }).passed;
-const commercialOnly = (bids) => bids.map(({ scores, mandatory, indigenous, capacity, ...rest }) => rest);
+const passedMs = () => technicalOf({ criteria: MS_CRITERIA, bids: MS_TECH_BIDS, passMark: MATERIALS_SETTINGS.passMark }).passed;
+const commercialOnly = (bids) => bids.map(commercialBidOf);
 const msEvaluated = () => evaluatedOf({ bids: commercialOnly(MS_BIDS.filter((b) => passedMs().includes(b.id))), schedule: MATERIALS_SETTINGS.schedule, lifeCycle: MATERIALS_SETTINGS.lifeCycle });
 
 export const LifeCycleMode = () => {
@@ -64,6 +64,7 @@ export const LifeCycleMode = () => {
           </TileGrid>
           <Declared title="THE LIFE-CYCLE COST, in the engine's words">{r.basis.lifeCycle}</Declared>
           <Declared title="THE EVALUATED COST, in the engine's words">{r.basis.evaluatedCost}</Declared>
+          <Source basis={r.basis} />
         </>
       )}
     </>
@@ -94,6 +95,7 @@ export const BandMode = () => {
           </TileGrid>
           {r.reason && <Note>{r.reason}</Note>}
           <Declared title="THE RULE, in the engine's words">{r.basis.rule}</Declared>
+          <Source basis={r.basis} />
         </>
       )}
     </>
@@ -129,6 +131,7 @@ export const AlbMode = () => {
           <Tbl head={['bid', 'evaluated cost', 'percent below the estimate', 'flag']} rows={r.bids.map((x) => [x.id, six(x.evaluatedCost), six(x.belowEstimatePct), String(x.flag)])} />
           {r.bids.filter((x) => x.reason).map((x) => <Note key={x.id}>{x.reason}</Note>)}
           <Declared title="THE RULE, in the engine's words">{r.basis.rule}</Declared>
+          <Source basis={r.basis} />
         </>
       )}
     </>
@@ -156,6 +159,7 @@ export const ContentMode = () => {
           {r.bids.flatMap((x) => x.reasons.map((t) => <Note key={`${x.id}${t}`}>{`${x.id}: ${t}`}</Note>))}
           <Declared title="BY ITEM, in the engine's words">{r.basis.item}</Declared>
           <Declared title="OVERALL, in the engine's words">{r.basis.overall}</Declared>
+          <Source basis={r.basis} />
         </>
       )}
       <Note>{`The engine carries ${Object.keys(NC_SCHEDULE).length} lines of the 2010 Schedule. A target the Schedule does not list enters with its source stated.`}</Note>
@@ -163,40 +167,47 @@ export const ContentMode = () => {
   );
 };
 
+const READINGS = [['both', 'both readings, side by side'], ['points', 'points only'], ['relative', 'relative only'], ['none', 'no reading stated']];
+
 export const PreferenceMode = () => {
   const start = msEvaluated();
   const nc = contentOf(JSON.parse(JSON.stringify(MS_CONTENT)));
   const pct = nc.error ? {} : Object.fromEntries(nc.bids.map((x) => [x.id, x.ncPct]));
   const rows = start.error ? [] : start.bids.map((x) => ({ id: x.id, evaluatedCost: x.evaluatedCost, receivedAt: x.receivedAt, ncPct: pct[x.id], indigenous: MS_BIDS.find((y) => y.id === x.id).indigenous, capacity: MS_BIDS.find((y) => y.id === x.id).capacity }));
   const [bids, setBids] = useState(pretty(rows));
+  const [reading, setReading] = useState('both');
   const b = parseJson(bids);
-  const pts = b.error ? null : preferenceOf({ bids: b.value, ncLeadBasis: 'points' });
-  const rel = b.error ? null : preferenceOf({ bids: b.value, ncLeadBasis: 'relative' });
+  const call = (basis) => preferenceOf({ bids: b.value, ...(basis ? { ncLeadBasis: basis } : {}) });
+  const runs = b.error ? [] : (reading === 'both' ? [['points', call('points')], ['relative', call('relative')]] : [[reading, call(reading === 'none' ? undefined : reading)]]);
+  const refused = runs.find(([, r]) => r.error);
+  const ok = !refused && runs.length > 0;
+  const head = ['', ...runs.map(([k]) => (k === 'points' ? 'read as points' : k === 'relative' ? 'read as relative' : 'no reading'))];
+  const row = (label, f) => [label, ...runs.map(([, r]) => f(r))];
   return (
     <>
       <FieldGrid>
         <TextField label="Bids at the commercial stage (JSON array of { id, evaluatedCost, receivedAt, ncPct, indigenous, capacity })" value={bids} onChange={setBids} rows={8} />
+        <SelectField label="Reading of at least five percent higher" value={reading} onChange={setReading} options={READINGS} />
       </FieldGrid>
       {b.error && <Note>{b.error}</Note>}
-      {pts && pts.error && <Refusal r={pts} />}
-      {pts && !pts.error && rel && !rel.error && (
+      {refused && <Refusal r={refused[1]} />}
+      {ok && (
         <>
-          <Tbl head={['', 'read as points', 'read as relative']} rows={[
-            ['group', list(pts.section14.group), list(rel.section14.group)],
-            ['leader', String(pts.section14.leader), String(rel.section14.leader)],
-            ['runner-up', String(pts.section14.runnerUp), String(rel.section14.runnerUp)],
-            ['lead', six(pts.section14.lead), six(rel.section14.lead)],
-            ['s.14 applied', String(pts.section14.applied), String(rel.section14.applied)],
-            ['selected', pts.selected, rel.selected],
+          <Tbl head={head} rows={[
+            row('group', (r) => list(r.section14.group)),
+            row('leader', (r) => String(r.section14.leader)),
+            row('runner-up', (r) => String(r.section14.runnerUp)),
+            row('lead', (r) => six(r.section14.lead)),
+            row('s.14 applied', (r) => String(r.section14.applied)),
+            row('selected', (r) => r.selected),
           ]} />
-          <Note>{`Points: ${pts.section14.reason}`}</Note>
-          <Note>{`Relative: ${rel.section14.reason}`}</Note>
-          <Tbl head={['s.16 bid', 'above the lowest, percent', 'within the margin']} rows={pts.section16.map((x) => [x.id, six(x.abovePct), String(x.withinMargin)])} />
-          <Declared title="SECTION 14, in the engine's words (points)">{pts.basis.section14}</Declared>
-          <Declared title="SECTION 16, in the engine's words">{pts.basis.section16}</Declared>
+          {runs.map(([k, r]) => <Note key={k}>{`${k === 'points' ? 'Points' : 'Relative'}: ${r.section14.reason}`}</Note>)}
+          <Tbl head={['s.16 bid', 'above the lowest, percent', 'within the margin']} rows={runs[0][1].section16.map((x) => [x.id, six(x.abovePct), String(x.withinMargin)])} />
+          {runs.map(([k, r]) => <Declared key={k} title={`SECTION 14, in the engine's words (${k})`}>{r.basis.section14}</Declared>)}
+          <Declared title="SECTION 16, in the engine's words">{runs[0][1].basis.section16}</Declared>
         </>
       )}
-      <Note>The Act does not say whether at least five percent higher means points or a percentage of the runner-up&apos;s content, so the calculator shows both readings side by side.</Note>
+      <Note>The Act does not say whether at least five percent higher means points or a percentage of the runner-up&apos;s content, so the calculator shows both readings side by side unless you choose one. With no reading stated, the engine refuses.</Note>
     </>
   );
 };

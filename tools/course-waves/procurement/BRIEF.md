@@ -134,7 +134,7 @@ each.
 
 ## THE REFUSALS
 
-Digest section 4 tables 99 refusals across 11 functions, each with the field
+Digest section 4 tables 113 refusals across 11 functions, each with the field
 it names and the engine's message verbatim. **Quote a refusal in a blockquote as
 the engine's own words.** A result returned with a reason (a bid excluded, s.14
 not engaged, a null lead) is a result, never a refusal.

@@ -42,8 +42,10 @@ When wellCost refuses an activity, the tender engine passes the refusal through 
 
 The part after the colon is wellCost's message; the tender engine leaves another engine's rule in that engine's words. Its own checks are separate. A duration stated directly as a days triangle whose minimum sits above its most likely value is refused under the field `duration`:
 
-> duration must have min <= mode <= max
+> duration must have min <= mode <= max; got min 16, mode 14, max 20
+
+The same wording, with the figures it was given, refuses an NPT fraction or a daily cost triangle out of order.
 
 ## Exercise
 
-Open the contract calculator on the view "Contract types on one job". Find `duration.nptFrac` in the box and set its `min`, `mode` and `max` all to 0. Read the tile "Plan days" and check it against the productive days above. Put the triangle back, then change the `durationHr` of `e3-rigup` to -48 and read the refusal, with the field it names and the engine it quotes. Restore 48, then replace the whole `duration` object with a days triangle `{ "min": 15, "mode": 12, "max": 20 }` and read the tender engine's own refusal.
+Open the contract calculator on the view "Contract types on one job". Find `duration.nptFrac` in the box and set its `min`, `mode` and `max` all to 0. Read the tile "Plan days" and check it against the productive days above. Put the triangle back, then change the `durationHr` of `e3-rigup` to -48 and read the refusal, with the field it names and the engine it quotes. Restore 48, then replace the whole `duration` object with a days triangle `{ "min": 16, "mode": 14, "max": 20 }` and read the tender engine's own refusal.

@@ -26,7 +26,7 @@ For the evaluated cost it reads:
 
 > World Bank Procurement Regulations (7th ed.) Annex X para 3.6; Nigeria Public Procurement Act 2007 s.31(14) and s.32(3); World Bank Procurement Regulations (7th ed.) para 5.70; Nigeria Public Procurement Act 2007 s.24(3) and s.33(1)
 
-The envelope calculator prints the rule of each result in the engine's words beneath it. The citations above travel with the result the engine returns, and the course prints them beside the working so you can see where each step comes from.
+The envelope calculator prints the rule of each result in the engine's words beneath it, and the citation the engine returns in a block headed SOURCE. The citations above travel with the result the engine returns, and the course prints them beside the working so you can see where each step comes from.
 
 ## Two kinds of text you will not see quoted
 
@@ -38,4 +38,4 @@ The texts do not settle everything. The Standard Procurement Document gives a ra
 
 ## Exercise
 
-In the envelope calculator choose "Evaluated cost of the passing bids" and read the block headed THE OMISSION RULE. Find the text it cites and match it to its row in the table above, writing its edition beside it. Then open the other four views in turn and read every block printed in the engine's words. For each block decide whether it states a rule taken from a cited text or a figure the engine chose itself. Look closely at the arithmetic rule and at the ranking rule: each carries a figure the engine chose as a convention, and modules 3 and 6 name both.
+In the envelope calculator choose "Evaluated cost of the passing bids" and read the block headed THE OMISSION RULE. Find the text it cites and match it to its row in the table above, writing its edition beside it. Then open the other four views in turn and read every block printed in the engine's words, the SOURCE block included. For each block decide whether it states a rule taken from a cited text or a figure the engine chose itself. Look closely at the arithmetic rule and at the ranking rule: each carries a figure the engine chose as a convention, and modules 3 and 6 name both.

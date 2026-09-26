@@ -126,7 +126,9 @@ const ONITSHA = {
       lines: [line('mob', 1, 126000), line('ct-spread', 15, 29900), line('pump-spread', 5, 22400), line('dissolver', 40, 1720), line('nitrogen', 100, 318), line('demob', 1, 63000)] },
   ],
 };
-const onT = success('ONITSHA evaluateTender', T.evaluateTender(clone(ONITSHA)));
+// The tender number and scope travel in the case file; the engine takes the rest.
+const { tender: onTender, scope: onScope, ...ON_ARGS } = clone(ONITSHA);
+const onT = success('ONITSHA evaluateTender', T.evaluateTender(ON_ARGS));
 const onTech = onT.technical;
 const onCom = onT.commercial;
 const onRank = onT.ranking;

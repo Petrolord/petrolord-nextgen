@@ -88,7 +88,7 @@ than fifteen significant figures outside such a quote fails as FLOAT NOISE.
 
 ## THE REFUSALS, BY NAME
 
-Digest section 4 tables 99 refusals across 11 functions. **Quote the engine's
+Digest section 4 tables 113 refusals across 11 functions. **Quote the engine's
 message in a blockquote.** The ones each tier must teach:
 
 * Associate m01 l05: no pass mark, weights summing to 99, a price method the

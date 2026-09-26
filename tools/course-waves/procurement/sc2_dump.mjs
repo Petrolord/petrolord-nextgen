@@ -137,6 +137,11 @@ const D = T.DEFAULTS;
 // A fixture bid as the engine takes it: the display name, the per-item content
 // record and the content weights stay in the fixture.
 const bidOf = (b) => { const { name, nc, ncWeights, ...rest } = clone(b); return rest; };
+// The technical envelope reads a bid's id, mandatory requirements and scores;
+// the commercial envelope reads its receipt, bill and commercial terms. The
+// engine refuses a key a function does not read, so each call gets its own view.
+const techOf = (b) => ({ id: b.id, mandatory: b.mandatory, scores: b.scores });
+const comOf = (b) => { const { scores, mandatory, indigenous, capacity, ncPct, ...rest } = b; return rest; };
 const WS_BIDS = WS.bids.map(bidOf);
 const MS_BIDS = MS.bids.map(bidOf);
 const critOf = (f) => f.criteria.map(({ id, weight, maxScore }) => ({ id, weight, maxScore }));
@@ -192,7 +197,7 @@ w('# THIS FILE IS THE ONLY TEACHING TRUTH FOR THIS COURSE. Every number in every
 w();
 w(`# PRECISION. Every price, amount, total, correction, discount, deviation, omission, adjustment, evaluated cost, life-cycle cost, estimate, share amount, payment, margin, overrun, cost, day count, score, points total, percentage, content, lead, ratio, weight, mean, standard deviation, limit, percentile and probability prints to SIX decimals; counts, ranks, weeks, years, seeds and iterations are whole numbers; the ${D.TIE_DIGITS}-digit tie key prints at twelve significant digits where the tie rule is shown; an engine message is printed verbatim, figures and all, and a figure inside a message is the shortest round-trip decimal of the double the engine holds.`);
 w();
-w(`# ENGINE. ${ENGINE_REL}, vendored sha-identical with petrolord-engines 527a197 (engines PRs #261 and #264), ${engineLines} lines. It imports lib/stats (mulberry32, triInvCDF, basicStats, mean, standardDeviation), lib/conventions/percentile.js (EXCEEDANCE_DEFINITION), engines/economics/cashflow.ts (npv), engines/drilling/wellCost.js (evaluateProgram, afeCosts) and engines/economics/afe.js (calculatePartnerCosts). It makes no network call.`);
+w(`# ENGINE. ${ENGINE_REL}, vendored sha-identical with petrolord-engines 006ed85 (engines PRs #261, #264 and #266), ${engineLines} lines. It imports lib/stats (mulberry32, triInvCDF, basicStats, mean, standardDeviation), lib/conventions/percentile.js (EXCEEDANCE_DEFINITION), engines/economics/cashflow.ts (npv), engines/drilling/wellCost.js (evaluateProgram, afeCosts) and engines/economics/afe.js (calculatePartnerCosts). It makes no network call.`);
 w();
 w('# AN ENGINE COURSE. There is no Suite app for this course. Every practical runs in the course\'s own calculator panels, which call this same vendored engine on the learner\'s own bids and settings.');
 w();
@@ -262,6 +267,8 @@ must('the engine source makes no network call, reads no clock and draws no unsee
 w(`- Its imports are, in full: ${list(IMPORTS.map((p) => p.replace(/^(\.\.\/)+/, '')))}. It discounts through the canonical npv of engines/economics/cashflow.ts and samples through lib/stats; it carries no Monte Carlo or NPV code of its own.`);
 w('- It applies no domestic preference margin, compares no amount in words against figures, computes no negotiation or best and final offer, splits no tender into lots and deducts nothing for the Nigerian Content Development Fund. ' + refCap('choices') + ' lists each with where it would come from.');
 w('- It decides nothing a rule does not state. The pass mark, the weights, the technical weight, the price and technical scoring methods, the s.14 reading, the should-cost band and the Monte Carlo seed are inputs with no default, and a call without one is refused by name.');
+must('ACCEPTED_KEYS carries one shape for every exported function', Object.keys(T.ACCEPTED_KEYS).sort().join() === EXPORTS.map((x) => x[0]).sort().join() && Object.isFrozen(T.ACCEPTED_KEYS), Object.keys(T.ACCEPTED_KEYS).join());
+w(`- It reads no key it does not know. \`ACCEPTED_KEYS\` is exported with one shape for each of the ${EXPORTS.length} functions, and every call refuses an input key the function does not read, at every level, naming the key, its path and the accepted keys (${ref('refusals')} tables them). A misspelt optional key is refused; it never silently drops a term.`);
 w(`- Its exported names are, in full: ${Object.keys(T).sort().join(', ')}.`);
 
 /* ============================================================ SECTION 2 */
@@ -287,8 +294,8 @@ w();
 w('The engine carries its citations in its own words. Every `basis.source` a call below returns is one of these strings, quoted from the engine:');
 w();
 const band0 = success('weightingBand high risk for its source', T.weightingBand({ risk: 'high', estimatedCostUsd: 900000 }));
-const tech0 = success('technicalEvaluation on the well services tender for its source', T.technicalEvaluation({ criteria: WS_CRIT, bids: WS_BIDS, passMark: WS.passMark }));
-const ec0 = success('evaluatedCosts on the well services tender for its source', T.evaluatedCosts({ bids: WS_BIDS.filter((b) => tech0.passed.includes(b.id)), schedule: WS.schedule }));
+const tech0 = success('technicalEvaluation on the well services tender for its source', T.technicalEvaluation({ criteria: WS_CRIT, bids: WS_BIDS.map(techOf), passMark: WS.passMark }));
+const ec0 = success('evaluatedCosts on the well services tender for its source', T.evaluatedCosts({ bids: WS_BIDS.filter((b) => tech0.passed.includes(b.id)).map(comOf), schedule: WS.schedule }));
 const nc0 = success('nigerianContent on the well services tender for its source', T.nigerianContent(WS_NC_ARGS));
 const alb0 = success('abnormallyLow on Annex I Example 2 for its source', T.abnormallyLow(PUB.albEx2));
 const CITES = [
@@ -381,15 +388,15 @@ w(`THE CONTRACTING AND SHOULD-COST INPUTS of the well services fixture (the same
 section('refusals', 'Every refusal, with the field it names and the engine\'s own words', ['Associate m01 l05', 'Associate m02', 'Associate m03', 'Associate m04', 'Associate m05', 'Professional m01', 'Professional m02', 'Professional m03', 'Professional m04', 'Professional m05', 'Professional m06', 'Expert m01', 'Expert m03', 'Expert m04', 'Expert m05']);
 w('A refusal is an object with `error` and `field`. The message starts with the name of the field it refuses and states the exact condition that failed. Each row below is a stated bad input handed to the engine; the message is the engine\'s, verbatim. A result returned with a reason (a bid excluded, s.14 not engaged, a null lead) is a result, never a refusal.');
 w();
-const wsPassed = WS_BIDS.filter((b) => wsTech.passed.includes(b.id));
+const wsPassed = WS_BIDS.filter((b) => wsTech.passed.includes(b.id)).map(comOf);
 const EC_WS = { bids: wsPassed, schedule: WS.schedule };
-const EC_MS = { bids: MS_BIDS.filter((b) => b.id !== 'MS5'), schedule: MS.schedule, lifeCycle: MS.lifeCycle };
+const EC_MS = { bids: MS_BIDS.filter((b) => b.id !== 'MS5').map(comOf), schedule: MS.schedule, lifeCycle: MS.lifeCycle };
 const RANK_WS = { technicalWeight: 0.7, priceMethod: 'lowest-ratio', technicalMethod: 'relative', bids: wsCombined.ranking.bids.map((b) => ({ id: b.id, technicalPercent: b.technicalPercent, evaluatedCost: b.evaluatedCost, receivedAt: b.receivedAt })) };
 const PREF_MS = { ncLeadBasis: 'points', bids: msAvg.commercial.bids.map((b) => ({ id: b.id, evaluatedCost: b.evaluatedCost, receivedAt: b.receivedAt, ncPct: ncPctOf[b.id], indigenous: MS.bids.find((x) => x.id === b.id).indigenous, capacity: true })) };
 const CT_WS = (() => { const { note, ...rest } = clone(WS.contracting); return rest; })();
 const SC_WS = (() => { const { note, ...rest } = clone(WS.shouldCost); return { ...rest, program: clone(WS.contracting.duration.program), bids: wsCombined.commercial.bids.map((b) => ({ id: b.id, evaluatedCost: b.evaluatedCost })) }; })();
 const TENDER_WS = { criteria: WS_CRIT, passMark: WS.passMark, bids: WS_BIDS, schedule: WS.schedule, award: 'combined', technicalWeight: 0.7, priceMethod: 'lowest-ratio', technicalMethod: 'relative' };
-const TECH_WS = { criteria: WS_CRIT, bids: WS_BIDS, passMark: WS.passMark };
+const TECH_WS = { criteria: WS_CRIT, bids: WS_BIDS.map(techOf), passMark: WS.passMark };
 const ARITH = { lines: clone(WS.bids[1].lines) };
 const PROBES = [
   ['weightingBand', 'risk stated as medium', { risk: 'medium', estimatedCostUsd: 900000 }, 'risk'],
@@ -491,6 +498,20 @@ const PROBES = [
   ['evaluateTender', 'Nigerian content given as text with a lowest-cost award', { ...TENDER_WS, award: 'lowest-cost', nigerianContent: 'points' }, 'nigerianContent'],
   ['evaluateTender', 'Nigerian content with a bid that has no ncPct', { ...TENDER_WS, award: 'lowest-cost', nigerianContent: { ncLeadBasis: 'points' } }, 'bids[4].ncPct'],
   ['evaluateTender', 'criteria weights summing to 99', mut(TENDER_WS, (a) => { a.criteria[0].weight = 29; }), 'criteria'],
+  ['evaluatedCosts', 'lifecycle spelt with a small c', { ...EC_MS, lifecycle: MS.lifeCycle, lifeCycle: undefined }, 'lifecycle'],
+  ['evaluatedCosts', 'a bid carrying its technical scores', mut(EC_WS, (a) => { a.bids[0].scores = { methodology: 4 }; }), 'bids[0].scores'],
+  ['evaluatedCosts', 'a bill line with a key the engine does not read', mut(EC_WS, (a) => { a.bids[0].lines[0].unitPrice = 1; }), 'bids[0].lines[0].unitPrice'],
+  ['evaluatedCosts', 'a best estimate for an item no bid omits', { ...EC_WS, bestEstimates: { mob: 100000 } }, 'bestEstimates.mob'],
+  ['evaluatedCosts', 'a schedule key spelt maxWeek', { ...EC_WS, schedule: { minWeeks: 6, maxWeek: 10, ratePerWeek: 0.005 } }, 'schedule.maxWeek'],
+  ['technicalEvaluation', 'a score for a criterion the tender does not have', mut(TECH_WS, (a) => { a.bids[0].scores.price = 3; }), 'bids[0].scores.price'],
+  ['technicalEvaluation', 'a bid carrying its bill', mut(TECH_WS, (a) => { a.bids[0].lines = []; }), 'bids[0].lines'],
+  ['nigerianContent', 'a content item the tender does not list', mut(MS_NC_ARGS, (a) => { a.bids[0].items.pipe = { measure: 'tonnage', nigerian: 1, total: 2 }; }), 'bids[0].items.pipe'],
+  ['contentPreference', 'the reading passed as ncBasis', mut(PREF_MS, (a) => { a.ncBasis = 'points'; }), 'ncBasis'],
+  ['contractTypes', 'an NPT triangle with min above mode', mut(CT_WS, (a) => { a.duration.nptFrac = { min: 0.2, mode: 0.15, max: 0.6 }; }), 'duration.nptFrac'],
+  ['contractTypes', 'a daily cost triangle with min above mode', { ...CT_WS, dailyCost: { min: 45000, mode: 42000, max: 55000 } }, 'dailyCost'],
+  ['contractTypes', 'an activity key spelt durationHrs', mut(CT_WS, (a) => { a.duration.program[0].durationHrs = 48; delete a.duration.program[0].durationHr; }), 'duration.program[0].durationHrs'],
+  ['shouldCost', 'a band key spelt lo', { ...SC_WS, band: { lo: 0.8, high: 1.25 } }, 'band.lo'],
+  ['evaluateTender', 'a key the engine does not read, domesticPreference', { ...TENDER_WS, domesticPreference: { marginPct: 15 } }, 'domesticPreference'],
 ];
 const REFUSED = PROBES.map(([fn, what, args, field]) => {
   const r = refusal(`${fn}: ${what}`, T[fn](clone(args)), field);
@@ -507,6 +528,8 @@ w();
 w('Three rules the table shows:');
 w('- A field with no default is refused when it is missing, and the message says there is no default: the pass mark, the technical weight, the price and technical methods, the s.14 reading, the award basis, the Monte Carlo seed and the should-cost band.');
 w('- `mean-deviation` is refused by name. The engine scores price by `lowest-ratio` or `linear` only (' + ref('honest') + ' says why).');
+w('- An input key a function does not read is refused at whatever level it sits (a top-level option, a bid, a bill line, a schedule, an activity, a band), with the path to the key and the full list of accepted keys; a key that is an id (a score, a content item, a best estimate) is checked against the ids the call carries. A key present with no value counts as absent.');
+w('- Every triangle (the days, the NPT fraction, the daily cost) is refused in one wording, with the figures it was given.');
 w('- An error in an imported engine is passed through with the name of that engine: an activity wellCost refuses reaches the learner as `duration.program` with the wellCost message after the colon.');
 const ctProg = T.contractTypes(mut(CT_WS, (a) => { a.duration.program[0].durationHr = -48; }));
 must('the wellCost pass-through names wellCost', /is refused by engines\/drilling\/wellCost\.js: /.test(ctProg.error), ctProg.error);
@@ -568,7 +591,7 @@ w(`Passed (engine, in input order): ${list(wsTech.passed)}. WS5 scores ${f6(wsTe
 w();
 w(`WEIGHTED POINTS are the sum of weight x score, the total the World Bank Guidance prints in its Figure IX (on the well services scale, scores ${0} to ${WS_CRIT[0].maxScore}, the maximum is ${WS_CRIT.reduce((t, c) => t + c.weight * c.maxScore, 0)}, derived). The technical percentage divides each term by its maxScore, so the two carry the same order.`);
 w();
-const msTech = success('technicalEvaluation on the materials tender', T.technicalEvaluation({ criteria: MS_CRIT, bids: MS_BIDS, passMark: MS.passMark }));
+const msTech = success('technicalEvaluation on the materials tender', T.technicalEvaluation({ criteria: MS_CRIT, bids: MS_BIDS.map(techOf), passMark: MS.passMark }));
 w(`THE MATERIALS TENDER, pass mark ${MS.passMark} (fixture):`);
 w();
 table(['bid', ...MS_CRIT.map((c) => `${c.id} (w ${c.weight})`), 'technicalPercent', 'weightedPoints', 'status'],
@@ -853,6 +876,19 @@ must('the price method changes the award on this tender: WS3 under lowest-ratio,
 w();
 w(`Under 'linear' the dearest responsive bid scores ${f6(lin.bids.find((b) => b.evaluatedCost === lin.cMax).commercialScore)} and the cheapest ${f6(lin.bids.find((b) => b.evaluatedCost === lin.cMin).commercialScore)}, so the same price spread moves the commercial score further. On this tender the price method changes the award: the most advantageous bid (engine) is ${wsRank.mostAdvantageous} under 'lowest-ratio' and ${lin.mostAdvantageous} under 'linear', with the technical weight, the technical method and the bids unchanged.`);
 w();
+const TW_STEPS = [0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1];
+w(`THE TECHNICAL WEIGHT STEPPED UNDER LINEAR PRICING (stated steps: ${list(TW_STEPS)}; the well services bids, relative technical score). The most advantageous bid and any row a tie-break ordered, engine:`);
+w();
+const steps = TW_STEPS.map((tw) => [tw, success(`rankTender linear at ${tw}`, T.rankTender({ ...clone(RANK_WS), priceMethod: 'linear', technicalWeight: tw }))]);
+table(['technical weight', 'most advantageous', 'combined scores, rank order', 'tie broken'], steps.map(([tw, r]) => [S(tw), r.mostAdvantageous, r.bids.map((b) => `${b.id} ${f6(b.combinedScore)}`).join(', '), r.bids.filter((b) => b.tieBrokenBy).map((b) => `${b.id} by ${b.tieBrokenBy}`).join('; ') || 'none']));
+const at85 = steps.find(([tw]) => tw === 0.85)[1];
+must('the tie step is the one the sentence names', steps.find(([tw]) => tw === 0.85)[1] === at85, 'step');
+must('at 0.85 WS5 and WS3 tie and the lower evaluated cost puts WS5 above WS3; WS1 is most advantageous', at85.mostAdvantageous === 'WS1' && at85.bids.find((b) => b.id === 'WS3').tieBrokenBy === 'lower evaluated cost' && key12(at85.bids.find((b) => b.id === 'WS3').combinedScore) === key12(at85.bids.find((b) => b.id === 'WS5').combinedScore), 'tie');
+must('the award runs WS5, WS1, WS3 as the weight rises', steps.map(([, r]) => r.mostAdvantageous).join() === 'WS5,WS5,WS5,WS1,WS1,WS3,WS3', steps.map(([, r]) => r.mostAdvantageous).join());
+w();
+const TIE_TW = 0.85;
+w(`At a technical weight of ${TIE_TW}, WS5 and WS3 score the same combined score to twelve significant digits, and the lower evaluated cost ranks WS5 above WS3; the most advantageous bid at that step is WS1. As the weight rises the award moves from WS5 to WS1 and then to WS3.`);
+w();
 const kk = success('rankTender Kiiver and Kodym lowest-ratio', T.rankTender(clone(PUB.kk('lowest-ratio'))));
 const kkl = success('rankTender Kiiver and Kodym linear', T.rankTender(clone(PUB.kk('linear'))));
 w(`KIIVER AND KODYM (2015), TABLE 1 (stated from the source: three prices ${list(PUB.kk('linear').bids.map((b) => b.evaluatedCost))}; price only). The source prints the lowest-bid ratio scores to whole points:`);
@@ -881,6 +917,13 @@ w();
 table(['figure', 'engine', 'the Guidance prints'], [['mean', f6(e1.mean), S(PUB.albEx1Printed.mean)], ['standard deviation (population)', f6(e1.standardDeviation), S(PUB.albEx1Printed.sd)], ['limit, mean less one standard deviation', f6(e1.limit), S(PUB.albEx1Printed.limit)]]);
 must('Example 1: relative, bids 1 to 3 flagged', e1.approach === 'relative' && e1.flagged.join() === 'Bid 1,Bid 2,Bid 3', e1.flagged.join());
 must('the Guidance figures are the engine figures rounded to the unit', Math.round(e1.mean) === PUB.albEx1Printed.mean && Math.round(e1.standardDeviation) === PUB.albEx1Printed.sd && Math.round(e1.limit) === PUB.albEx1Printed.limit, 'rounded');
+w();
+const GOLD = JSON.parse(fs.readFileSync(`${ROOT}/test-data/supplychain/goldens/tender_cases.json`, 'utf8'));
+const gEx1 = GOLD.cases.find((c) => c.id === 'wb-alb-annex-i-example-1-relative');
+must('the engine golden carries Annex I Example 1 with the same sixteen bids', gEx1 && JSON.stringify(gEx1.args.bids) === JSON.stringify(PUB.albEx1.bids), 'golden');
+w(`THE SIXTEEN BIDS of Example 1 (source: the Guidance's Annex I, the figures the engine's golden also carries), each against the limit (engine):`);
+w();
+table(['bid', 'evaluated cost (source)', 'below the limit (engine flag)'], e1.bids.map((b) => [b.id, S(b.evaluatedCost), S(b.flag)]));
 w();
 w(`Flagged (engine): ${list(e1.flagged)}. The Guidance prints each figure rounded to the unit. The engine's reason for the first, verbatim:`);
 quote(e1.bids[0].reason);
@@ -948,7 +991,7 @@ quote(T.nigerianContent(mut(MS_NC_ARGS, (a) => { a.bids[0].items.valves.measure 
 w();
 const USER_T = { items: [{ id: 'rig', scheduleLine: 'drilling-rigs-land' }, { id: 'catering', targetPct: 90, measure: 'man-hours', source: 'a level stated for this example by the course; no Board target was read' }], bids: [{ id: 'B1', items: { rig: { measure: 'man-hours', nigerian: 7000, total: 10000 }, catering: { measure: 'man-hours', nigerian: 1800, total: 2000 } } }, { id: 'B2', items: { rig: { measure: 'man-hours', nigerian: 6990, total: 10000 }, catering: { measure: 'man-hours', nigerian: 1790, total: 2000 } } }] };
 const userT = success('nigerianContent with a user-stated target', T.nigerianContent(clone(USER_T)));
-w(`A TARGET THE SCHEDULE DOES NOT LIST enters with its source stated (s.11(2) lets the Board set one). Two stated bids, one Schedule line (land rigs, ${NCS['drilling-rigs-land'].ncPct}% by ${NCS['drilling-rigs-land'].measures[0]}) and one stated target (catering, ${USER_T.items[1].targetPct}% by ${USER_T.items[1].measure}):`);
+w(`A TARGET THE SCHEDULE DOES NOT LIST enters with its source stated (s.11(2) lets the Board set one). Two stated bids, one Schedule line (land rigs, engine key ${USER_T.items[0].scheduleLine}, ${NCS['drilling-rigs-land'].ncPct}% by ${NCS['drilling-rigs-land'].measures[0]}) and one stated target (catering, ${USER_T.items[1].targetPct}% by ${USER_T.items[1].measure}):`);
 w();
 table(['bid', 'rig', 'catering', 'overall', 'items met'], ncRows(userT, ['rig', 'catering']));
 w();
@@ -1106,6 +1149,16 @@ w('- Under the day rate the company pays for the extra days at the day rate and 
 w(`- Under cost plus ${100 * C.reimbursable.feeFraction} percent the company pays the whole overrun and ${100 * C.reimbursable.feeFraction} percent on top of it, so its share is ` + f6(ct.types.reimbursable.overrun.companyShare) + ' and the contractor\'s part is negative: the contractor earns more when the job overruns. Its probability of a loss is ' + f6(ct.types.reimbursable.contractorMargin.probabilityOfLoss) + '.');
 must('reimbursable: no loss', ct.types.reimbursable.contractorMargin.probabilityOfLoss === 0, ct.types.reimbursable.contractorMargin.probabilityOfLoss);
 w();
+const FIXED_FEE = ct.types.reimbursable.contractorMargin.planned;
+const ctFix = success('contractTypes, reimbursable at a fixed fee equal to the percentage fee\'s planned margin', T.contractTypes({ ...clone(CT_WS), reimbursable: { fixedFee: FIXED_FEE } }));
+const fx2 = ctFix.types.reimbursable;
+w(`COST PLUS A FIXED FEE. The same job with the reimbursable contract paying cost plus a fixed fee of ${f6(FIXED_FEE)} (stated: the planned margin of the percentage fee above), the same seed and iterations. The reimbursable row, engine:`);
+w();
+table(['figure', 'engine'], [['planned payment', f6(fx2.plannedPayment)], ['company pays of the overrun', f6(fx2.overrun.companyPays)], ['contractor absorbs', eX(fx2.overrun.contractorAbsorbs)], ['company share', f6(fx2.overrun.companyShare)], ['contractor margin, mean', f6(fx2.contractorMargin.mean)], ['probability of a loss', f6(fx2.contractorMargin.probabilityOfLoss)]]);
+must('under a fixed fee the company pays the whole expected overrun and the contractor absorbs none of it', nearly(fx2.overrun.companyPays, ctFix.overrun.expectedOverrun, 1e-9) && Math.abs(fx2.overrun.contractorAbsorbs) < 1e-6 && nearly(fx2.contractorMargin.mean, FIXED_FEE, 1e-9), `${fx2.overrun.companyPays} ${fx2.overrun.contractorAbsorbs}`);
+w();
+w(`Under a fixed fee the company pays the whole expected overrun, ${f6(ctFix.overrun.expectedOverrun)}, and the contractor's margin is the fee in every iteration. The contractor's part prints as ${eX(fx2.overrun.contractorAbsorbs)}, the rounding left by summing ${C.iterations} floating-point differences, so it prints in exponent form and carries no share of the overrun. It is no longer negative because a fixed fee does not grow with the cost.`);
+w();
 const CT_FLAT = { duration: 10, dailyCost: 40000, fixedCost: 100000, lumpSum: { price: 500000 }, dayRate: { rate: 50000, mobilisationFee: 0 }, reimbursable: { fixedFee: 0 }, iterations: 10, seed: 1 };
 const ctFlat = success('contractTypes with every input constant', T.contractTypes(clone(CT_FLAT)));
 w(`WITH NOTHING UNCERTAIN (stated: ${CT_FLAT.duration} days, ${CT_FLAT.dailyCost} a day, fixed cost ${CT_FLAT.fixedCost}; lump sum ${CT_FLAT.lumpSum.price}; day rate ${CT_FLAT.dayRate.rate} with no mobilisation fee; reimbursable at cost plus a fixed fee of ${CT_FLAT.reimbursable.fixedFee}; ${CT_FLAT.iterations} iterations, seed ${CT_FLAT.seed}) nothing is drawn, no iteration overruns (probability ${f6(ctFlat.overrun.probability)}), and the reimbursable margin is exactly ${f6(ctFlat.types.reimbursable.contractorMargin.mean)} with a probability of a loss of ${f6(ctFlat.types.reimbursable.contractorMargin.probabilityOfLoss)}: a margin of exactly ${f6(ctFlat.types.reimbursable.contractorMargin.mean)} is not a loss. The engine's sampling basis, verbatim: ${ctFlat.basis.sampling}.`);
@@ -1130,7 +1183,7 @@ w();
 w(`The lump sum is the same at every percentile: the company pays ${f6(ct.types.lumpSum.companyCost.p50)} whatever happens. The day rate and the reimbursable contract spread from their P90 to their P10.`);
 w();
 const IDX = Object.fromEntries(['P90', 'P50', 'P10'].map((k) => [k.toLowerCase(), Number(ct.basis.percentiles.match(new RegExp(`${k} = (?:index )?floor\\x28([\\d.]+) n\\x29`))[1])]));
-w(`THE INDEX RULE. lib/stats basicStats sorts the ${C.iterations} values and reads P90 at index floor(${IDX.p90} x ${C.iterations}) = ${Math.floor(IDX.p90 * C.iterations)}, P50 at ${Math.floor(IDX.p50 * C.iterations)} and P10 at ${Math.floor(IDX.p10 * C.iterations)} (the first sorted value is index ${0}), the fractions read from the engine's basis: no interpolation.`);
+w(`THE INDEX RULE. lib/stats basicStats sorts the ${C.iterations} values and reads P90 at index floor(${IDX.p90} x ${C.iterations}) = ${Math.floor(IDX.p90 * C.iterations)}, P50 at ${Math.floor(IDX.p50 * C.iterations)} and P10 at ${Math.floor(IDX.p10 * C.iterations)} (the first sorted value is index ${0}), the fractions read from the engine's basis: no interpolation. At ${IT_SHORT} iterations the same rule reads P90 at index ${Math.floor(IDX.p90 * IT_SHORT)}, P50 at ${Math.floor(IDX.p50 * IT_SHORT)} and P10 at ${Math.floor(IDX.p10 * IT_SHORT)} (derived).`);
 w();
 w(`THE PLAN, THE MEAN AND THE PERCENTILES are three different figures. On the day rate the planned payment is ${f6(ct.types.dayRate.plannedPayment)}, the mean company cost ${f6(ct.types.dayRate.companyCost.mean)} and the P50 ${f6(ct.types.dayRate.companyCost.p50)} (engine). The plan is built from the modes; the triangular NPT fraction has a long upper tail (mode ${C.duration.nptFrac.mode}, max ${C.duration.nptFrac.max}), so ${f6(ct.overrun.probability)} of the iterations overrun the plan.`);
 must('the day-rate mean and P50 both sit above the planned payment', ct.types.dayRate.companyCost.mean > ct.types.dayRate.plannedPayment && ct.types.dayRate.companyCost.p50 > ct.types.dayRate.plannedPayment, 'plan');
