@@ -63,7 +63,7 @@ x("On the power plant in 2030 the buyer takes 7665000.000000, exactly the Adjust
  "The engine's reason reads \"make-up aggregate 478800 available and none taken, because taken 7665000 does not exceed the Adjusted ACQ 7665000\". The make-up threshold is strictly above the Adjusted ACQ, the engine's convention on the model's \"after Buyer has taken delivery of at least\". Meeting the threshold exactly draws nothing, and no rule halves a draw.")
 
 # 7
-x("A golden case holds make-up of 100.000000 from 2027 and 50.000000 from 2028. After 80.000000 is drawn in 2029, the buyer takes 30.000000 of make-up in 2030. How is it attributed?",
+x("A golden case with a make-up period of 3 contract years holds make-up of 100.000000 from 2027 and 50.000000 from 2028. After 80.000000 is drawn in 2029, the buyer takes 30.000000 of make-up in 2030. How is it attributed?",
  "20.000000 from 2027, then 10.000000 from 2028, first in first out",
  ["30.000000 from 2028, the newest entry first",
   "15.000000 from each year",

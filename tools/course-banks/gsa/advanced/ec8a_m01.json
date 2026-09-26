@@ -22,7 +22,7 @@
   "explanation": "On 5.689000 MMBtu per barrel the engine returns 0.175778. Two sources give two slopes, so a report says which heat content it used. The engine divides by whatever heat content it is given and converts nothing to 5.8; 0.166667 is its answer on a stated 6; and 5.689000 is the input, the MMBtu per barrel, and no slope."
  },
  {
-  "prompt": "Run backwards, the Energy Charter Secretariat's printed slope of 0.172 implies 5.813953 MMBtu per barrel. How does the course read the printed 0.172 against the engine's 0.172414?",
+  "prompt": "Run backwards, the Energy Charter Secretariat's (2007) printed slope of 0.172 implies 5.813953 MMBtu per barrel. How does the course read the printed 0.172 against the engine's 0.172414?",
   "options": [
    "As the exact slope for a different barrel, so the report and the engine disagree only about heat content",
    "As an error in the report that the engine corrects, so every quotation of 0.172 becomes 0.172414 in the course",
@@ -41,10 +41,10 @@
    "It sits at parity, since the S-curve slopes of 0.06 on each side average out to the parity slope over the term"
   ],
   "answer": 1,
-  "explanation": "A contract slope below the parity slope prices gas below oil on heat content, and 0.12 is below 0.172414. Adding a constant in US$ per MMBtu to a slope in US$ per MMBtu per US$ per barrel compares unlike things; parity is no bar to comparing an oil-indexed slope, since it is hub-linked multipliers that parity says nothing about; and the S-curve slopes act only outside the kinks and average to nothing."
+  "explanation": "A contract slope below the parity slope prices gas below oil on heat content, and 0.12 is below 0.172414. Adding a constant in US$ per MMBtu to a slope in US$ per MMBtu per US$ per barrel compares unlike things; the parity slope is set beside the slope of an oil-indexed formula, which is what this one is; and the S-curve slopes of 0.06 act only below 55 and above 90, so they set no slope for the whole term."
  },
  {
-  "prompt": "The Energy Charter Secretariat's Figure 51 S-curve (A 0.1485, B 0.8, kinks at 15 and 30 US$ per barrel, flat outside) is run on a JCC of 10. What does the engine return?",
+  "prompt": "The Energy Charter Secretariat's (2007) Figure 51 S-curve (A 0.1485, B 0.8, kinks at 15 and 30 US$ per barrel, flat outside) is run on a JCC of 10. What does the engine return?",
   "options": [
    "2.285000 on the straight line, because the S-curve bends the price only above its upper kink",
    "3.027500 on the low segment, the plateau held at and below the lower kink",
@@ -58,8 +58,8 @@
   "prompt": "Figure 51's S-curve and the straight line 0.8 + 0.1485 x JCC are both priced on the golden JCC values 10, 15, 22.5, 30 and 40. At which of them do the two lines price differently?",
   "options": [
    "At every JCC except 22.5, the one point where the two lines are made to cross",
-   "At 15 and 30 as well as at 10 and 40, since a month at a kink takes the outer segment's price",
-   "At none of them, because the flat outer segments reproduce the straight line's prices at both ends",
+   "15 and 30 as well as 10 and 40, since a month at a kink takes the outer segment's price",
+   "None of them, because the flat outer segments reproduce the straight line's prices at both ends",
    "Only at 10 and 40, the months outside the kinks"
   ],
   "answer": 3,

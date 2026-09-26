@@ -73,8 +73,8 @@ x("The export feed's NPV of the seller revenue is 1,157,367,784.116539. Which te
 # 8
 x("The golden small case (deep offshore, 40 percent utilised in-country) is run at a discount rate of zero. What does the course use it to show?",
  "Its NPV of the seller revenue, 8400.000000, is the plain sum of the rows",
- ["That the royalty rate falls to zero",
-  "That the engine refuses it",
+ ["A royalty rate that falls to zero with the discount rate",
+  "A refusal of the rate, zero lying outside the accepted range",
   "That the NPV equals the last year's row, since at zero only the final year-end flow counts"],
  "At a rate of zero every discount factor is one, so the NPV of the seller revenue is the plain sum of the rows: 8400.000000 both ways. The royalty rate is set by terrain and share, 0.040000 here, whatever the discount rate; the engine refuses only rates at or below -1; and every year's flow counts at zero.")
 

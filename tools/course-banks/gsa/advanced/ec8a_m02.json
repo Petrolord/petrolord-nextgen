@@ -79,8 +79,8 @@
  {
   "prompt": "The golden small case (deep offshore, 40 percent utilised in-country) is run at a discount rate of zero. What does the course use it to show?",
   "options": [
-   "That the royalty rate falls to zero",
-   "That the engine refuses it",
+   "A royalty rate that falls to zero with the discount rate",
+   "A refusal of the rate, zero lying outside the accepted range",
    "Its NPV of the seller revenue, 8400.000000, is the plain sum of the rows",
    "That the NPV equals the last year's row, since at zero only the final year-end flow counts"
   ],

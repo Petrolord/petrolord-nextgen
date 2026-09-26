@@ -30,7 +30,7 @@ x("On the EIA's energy conversion page (read 2026-09-26), one barrel of crude oi
  "On 5.689000 MMBtu per barrel the engine returns 0.175778. Two sources give two slopes, so a report says which heat content it used. The engine divides by whatever heat content it is given and converts nothing to 5.8; 0.166667 is its answer on a stated 6; and 5.689000 is the input, the MMBtu per barrel, and no slope.")
 
 # 3
-x("Run backwards, the Energy Charter Secretariat's printed slope of 0.172 implies 5.813953 MMBtu per barrel. How does the course read the printed 0.172 against the engine's 0.172414?",
+x("Run backwards, the Energy Charter Secretariat's (2007) printed slope of 0.172 implies 5.813953 MMBtu per barrel. How does the course read the printed 0.172 against the engine's 0.172414?",
  "As a rounded figure: the two print alike at three decimals, are not equal, and each is quoted as its own source's",
  ["As the exact slope for a different barrel, so the report and the engine disagree only about heat content",
   "As an error in the report that the engine corrects, so every quotation of 0.172 becomes 0.172414 in the course",
@@ -43,10 +43,10 @@ x("The Ekene export feed agreement (synthetic) prices gas at 0.5 + 0.12 x the av
  ["It sits above parity once the constant is added, since 0.12 plus 0.5 exceeds the parity slope of 0.172414",
   "Nothing, since parity is a reference for hub-indexed prices only",
   "It sits at parity, since the S-curve slopes of 0.06 on each side average out to the parity slope over the term"],
- "A contract slope below the parity slope prices gas below oil on heat content, and 0.12 is below 0.172414. Adding a constant in US$ per MMBtu to a slope in US$ per MMBtu per US$ per barrel compares unlike things; parity is no bar to comparing an oil-indexed slope, since it is hub-linked multipliers that parity says nothing about; and the S-curve slopes act only outside the kinks and average to nothing.")
+ "A contract slope below the parity slope prices gas below oil on heat content, and 0.12 is below 0.172414. Adding a constant in US$ per MMBtu to a slope in US$ per MMBtu per US$ per barrel compares unlike things; the parity slope is set beside the slope of an oil-indexed formula, which is what this one is; and the S-curve slopes of 0.06 act only below 55 and above 90, so they set no slope for the whole term.")
 
 # 5
-x("The Energy Charter Secretariat's Figure 51 S-curve (A 0.1485, B 0.8, kinks at 15 and 30 US$ per barrel, flat outside) is run on a JCC of 10. What does the engine return?",
+x("The Energy Charter Secretariat's (2007) Figure 51 S-curve (A 0.1485, B 0.8, kinks at 15 and 30 US$ per barrel, flat outside) is run on a JCC of 10. What does the engine return?",
  "3.027500 on the low segment, the plateau held at and below the lower kink",
  ["2.285000 on the straight line, because the S-curve bends the price only above its upper kink",
   "3.500000 clamped at the floor, a flat segment being a floor",
@@ -57,8 +57,8 @@ x("The Energy Charter Secretariat's Figure 51 S-curve (A 0.1485, B 0.8, kinks at
 x("Figure 51's S-curve and the straight line 0.8 + 0.1485 x JCC are both priced on the golden JCC values 10, 15, 22.5, 30 and 40. At which of them do the two lines price differently?",
  "Only at 10 and 40, the months outside the kinks",
  ["At every JCC except 22.5, the one point where the two lines are made to cross",
-  "At 15 and 30 as well as at 10 and 40, since a month at a kink takes the outer segment's price",
-  "At none of them, because the flat outer segments reproduce the straight line's prices at both ends"],
+  "15 and 30 as well as 10 and 40, since a month at a kink takes the outer segment's price",
+  "None of them, because the flat outer segments reproduce the straight line's prices at both ends"],
  "Both give 3.027500 at 15, 4.141250 at 22.5 and 5.255000 at 30, because between the kinks and AT either kink the S-curve is the straight line. Outside them it holds flat: 3.027500 at 10 against 2.285000, and 5.255000 at 40 against 6.740000. A kink month is on the middle segment, and the plateaus differ from the line at 10 and 40.")
 
 # 7

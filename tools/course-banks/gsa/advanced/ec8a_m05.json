@@ -1,6 +1,6 @@
 [
  {
-  "prompt": "A contract lets the seller supply excess gas above the DCQ, which the Commonwealth model's BADQ Alternative 1 takes into account. What does the engine compute for that excess gas?",
+  "prompt": "A contract lets the seller supply excess gas above the DCQ, which the Commonwealth model agreement's (2025) BADQ Alternative 1 takes into account. What does the engine compute for that excess gas?",
   "options": [
    "Over-take on the daily balance",
    "Excess gas at the make-up price",
@@ -11,11 +11,11 @@
   "explanation": "The course lists excess gas and over-delivery as not computed: the engine does nothing with them and computes BADQ Alternative 2. The daily balance's over-take is gas taken above the adjusted DCQ, which is a different thing from excess gas in the model's sense; and the engine neither prices excess gas nor adjusts the take-or-pay quantity for it."
  },
  {
-  "prompt": "Off-specification gas and gas delivered before the Start Date have their own clauses in the model agreement (Article 13 and the Start Date). What does the engine do with them?",
+  "prompt": "Off-specification gas and gas delivered before the Start Date have their own clauses in the Commonwealth model agreement (2025) (Article 13 and the Start Date). What does the engine do with them?",
   "options": [
    "It deducts off-specification gas from the quantity taken before looking for a deficiency in the year",
-   "It prices pre-start gas at the contract price of the first priced month of the delivery period",
-   "It books every off-specification day as a seller shortfall on the daily balance of that month",
+   "Pre-start gas is priced at the contract price of the first priced month of the delivery period",
+   "Every off-specification day is booked as a seller shortfall on the daily balance of that month",
    "Nothing; both are taught as concepts only"
   ],
   "answer": 3,
@@ -26,8 +26,8 @@
   "options": [
    "A price reset in each reopener month to the contract price of the first priced month of the agreement",
    "Each reopener month reported with a note that the review's outcome is not modelled",
-   "A refusal: no price can be computed past a date on which the parties may renegotiate their price",
-   "A price held flat from each reopener month"
+   "No price past a date on which the parties may renegotiate their price, the call being refused",
+   "Prices held flat from each reopener month to the next"
   ],
   "answer": 1,
   "explanation": "The engine reports each reopener, verbatim: \"price reopener 2031-01: reported only; the engine does not model the outcome of a price review\". It prices every month on the stated formula through 2036-12, so it resets nothing, refuses nothing and holds nothing flat at a reopener."
@@ -44,7 +44,7 @@
   "explanation": "The engine's message, verbatim, is \"reopeners[0] must be a month 'YYYY-MM'; got \"2031\"\". A reopener is a stated month, and anything else is refused by name; the engine guesses no month, drops no input in silence and spreads nothing across a year."
  },
  {
-  "prompt": "The model agreement's Article 15.8 prints a floor and ceiling per index (Alternative 1) and a cap on the change of an index (Alternative 2). What does the engine compute?",
+  "prompt": "Article 15.8 of the Commonwealth model agreement (2025) prints a floor and ceiling per index (Alternative 1) and a cap on the change of an index (Alternative 2). What does the engine compute?",
   "options": [
    "Alternative 1 only; the change cap is not modelled",
    "The change cap, turned into a floor and a ceiling set around each index's stated base value",
@@ -66,7 +66,7 @@
   "explanation": "The refusal reads \"makeUp.endOfTerm must be one of \"forfeit\", \"refund\"; got \"extend\"\". The model's Article 12.7.5 prints forfeit, refund and extending the term, and the engine models the first two; forfeiture is the model's Alternative 1, and the end-of-term rule is a required input with no default."
  },
  {
-  "prompt": "A contract's carry-forward reduces next year's ACQ, the model's Article 12.8 Alternative 1. How does the engine treat it?",
+  "prompt": "A contract's carry-forward reduces next year's ACQ, Article 12.8 Alternative 1 of the Commonwealth model agreement (2025). How does the engine treat it?",
   "options": [
    "It lowers next year's ACQ by the surplus and then recomputes the take-or-pay quantity on it",
    "It enters the surplus as next year's permitted reduction",
@@ -85,14 +85,14 @@
    "It refuses a call whose excuse lacks a date"
   ],
   "answer": 1,
-  "explanation": "The engine's basis, verbatim: \"the 90-day investigation rule of r.6(3) and the compensation to customer-clients of s.110(13) are not computed.\" It applies the stated excuses in the order of s.110(10); it deems nothing met on a missing date, defers nothing and asks for no date."
+  "explanation": "The engine's basis, verbatim: \"the 90-day investigation rule of r.6(3) and the compensation to customer-clients of s.110(13) are not computed\". It applies the stated excuses in the order of s.110(10); it deems nothing met on a missing date, defers nothing and asks for no date."
  },
  {
-  "prompt": "PIA s.110(13) requires a producer that defaults on supply through the domestic gas aggregator to compensate the customer-client for its loss. What does the engine compute for it?",
+  "prompt": "Section 110(13) of the Petroleum Industry Act 2021 requires a producer that defaults on supply through the domestic gas aggregator to compensate the customer-client for its loss. What does the engine compute for it?",
   "options": [
    "Compensation at US$3.50 per MMBtu not supplied, the rate of s.110(8)",
-   "Compensation at the seller shortfall price stated in the supply agreement",
-   "Compensation equal to the penalised quantity valued at the domestic base price stated for the year",
+   "The seller shortfall price stated in the supply agreement, applied to the gas not supplied",
+   "The penalised quantity valued at the domestic base price stated for the year",
    "Nothing; its basis names that compensation as not computed"
   ],
   "answer": 3,
@@ -107,7 +107,7 @@
    "Flaring has been outside Nigerian law since the Petroleum Industry Act 2021 took effect"
   ],
   "answer": 2,
-  "explanation": "PIA s.104(1) makes flaring outside the exceptions an offence with \"a fine as prescribed by the Commission in regulations\", and the copy of the 2023 Regulations on the regulator's gazetted page is unnumbered and undated, so no figure was read. The rule is public law, no contract term, and the Act does regulate flaring (s.104, s.105)."
+  "explanation": "PIA s.104(1) makes flaring outside the exceptions an offence with \"a fine as prescribed by the Commission in regulations\", and the copy of the 2023 Regulations on the regulator's gazetted page is unnumbered and undated, so no figure was read. The Act leaves the fine to the Commission's regulations, so a gas sales agreement does not set it, and the Act does regulate flaring (s.104, s.105)."
  },
  {
   "prompt": "In the engine, where does a lessee's Domestic Gas Delivery Obligation quantity come from?",

@@ -32,7 +32,7 @@ x("From which text does this course read the S-curve and the price reopener as c
  "The course's sources table lists CLDP and US DOE (edition current as of October 2017, read 2026-09-26) for the glossary and for the S-curve and the price reopener as concept; the Energy Charter Secretariat's Figure 51 supplies a published curve to run. The AIPN text is licensed and never quoted; OT05435 describes make-up orders; and s.167 sets domestic prices, with no S-curve.")
 
 # 3
-x("The export feed's take-or-pay price is the annual average of the monthly contract prices, the model agreement's Article 15.2.6 Alternative 1. For 2029, what is it, and what would Alternative 2 give?",
+x("The export feed's take-or-pay price is the annual average of the monthly contract prices, Article 15.2.6 Alternative 1 of the Commonwealth model agreement (2025). For 2029, what is it, and what would Alternative 2 give?",
  "9.808450; Alternative 2, the last month's price, would give 10.674000",
  ["10.674000; Alternative 2 would give the annual average of 9.808450",
   "9.808450 under either alternative, the two being printed alike",
@@ -125,7 +125,7 @@ x("A golden ledger states no carry-forward right. In 2029 it counts 700.000000 a
  ["It credits the earlier surpluses first, carry-forward being on by default in the engine",
   "It refuses the call until a carry-forward block is stated",
   "It credits half the earlier surplus, the model agreement's default cap on carry-forward"],
- "With no carry-forward stated the engine's basis reads \"Off (no carry-forward right stated)\" and the reason reads that the deficiency payment is 100 x 3 = 300. Carry-forward is an explicit option, off unless stated; its absence is no refusal, since it is optional; and a cap applies only where a contract states one.")
+ "With no carry-forward stated the engine's basis reads \"off (no carry-forward right stated)\" and the reason reads that the deficiency payment is 100 x 3 = 300. Carry-forward is an explicit option, off unless stated; its absence is no refusal, since it is optional; and a cap applies only where a contract states one.")
 
 # 15
 x("The Ekene power plant's 2028 obligation (synthetic allocation) is 6825000.000000 MMBtu and it delivers 5460000.000000, with 688800.000000 excused because the purchaser could not accept. What does domesticGasObligation return?",
@@ -228,8 +228,8 @@ x("How many refusals does the course table, across how many of the engine's func
  "84 refusals across 9 functions",
  ["84 refusals across 13 exported names",
   "58 refusals, one for each provision",
-  "18 refusals, one per capstone field"],
- "The refusal table holds 84 refusals across the 9 functions, from toEnergy's 8 to priceSeries's 18. The engine exports 13 names, 4 of them constants; 58 is the count of quoted provisions; and a capstone field is a graded figure, no refusal.")
+  "18 refusals across 9 functions, the count held by priceSeries"],
+ "The refusal table holds 84 refusals across the 9 functions, from toEnergy's 8 to priceSeries's 18. The engine exports 13 names, 4 of them constants; 58 is the count of quoted provisions; and 18 is the count for priceSeries alone.")
 
 # 28
 x("A contract grants the seller a delivery tolerance of 5.000000 on a DCQ of 100.000000. On one golden day the seller offers 94.000000 against a full nomination, and the buyer takes all of it. What comes back?",
@@ -288,7 +288,7 @@ x("A golden price escalates from 2 at 2027-04 by 2.5 percent a year. In which mo
  "Escalation steps in whole years on each anniversary of the base month: 2.000000 through 2028-03 and 2.050000 from 2028-04, so 2028 averages 2.037500. No monthly step occurs, the calendar year does not set the step, and the base month carries the base price.")
 
 # 35
-x("On a golden basket priced 5 x the sum of weight x index / base, the averaged fo index for 2026-01 is 400.000000 with an index floor of 410. What does the engine hold and price?",
+x("On a golden basket priced 5 x the sum of weight x index / base, weights fo 0.6 and cpi 0.4 on bases of 400 and 100, the averaged indices for 2026-01 are fo 400.000000 and cpi 101.500000, with an fo index floor of 410. What does the engine hold and price?",
  "fo held at 410.000000, pricing 5.105000",
  ["fo left at 400.000000, pricing 5.030000, the floor applying to prices",
   "fo held at 410.000000, pricing 5.030000, the held index being reported only",

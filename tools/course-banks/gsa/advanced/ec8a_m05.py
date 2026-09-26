@@ -16,7 +16,7 @@ _i = iter(K)
 def x(p, c, ds, e): q(next(_i), p, c, ds, e)
 
 # 1
-x("A contract lets the seller supply excess gas above the DCQ, which the Commonwealth model's BADQ Alternative 1 takes into account. What does the engine compute for that excess gas?",
+x("A contract lets the seller supply excess gas above the DCQ, which the Commonwealth model agreement's (2025) BADQ Alternative 1 takes into account. What does the engine compute for that excess gas?",
  "Nothing: it computes BADQ Alternative 2 and models no excess gas",
  ["Over-take on the daily balance",
   "Excess gas at the make-up price",
@@ -24,19 +24,19 @@ x("A contract lets the seller supply excess gas above the DCQ, which the Commonw
  "The course lists excess gas and over-delivery as not computed: the engine does nothing with them and computes BADQ Alternative 2. The daily balance's over-take is gas taken above the adjusted DCQ, which is a different thing from excess gas in the model's sense; and the engine neither prices excess gas nor adjusts the take-or-pay quantity for it.")
 
 # 2
-x("Off-specification gas and gas delivered before the Start Date have their own clauses in the model agreement (Article 13 and the Start Date). What does the engine do with them?",
+x("Off-specification gas and gas delivered before the Start Date have their own clauses in the Commonwealth model agreement (2025) (Article 13 and the Start Date). What does the engine do with them?",
  "Nothing; both are taught as concepts only",
  ["It deducts off-specification gas from the quantity taken before looking for a deficiency in the year",
-  "It prices pre-start gas at the contract price of the first priced month of the delivery period",
-  "It books every off-specification day as a seller shortfall on the daily balance of that month"],
+  "Pre-start gas is priced at the contract price of the first priced month of the delivery period",
+  "Every off-specification day is booked as a seller shortfall on the daily balance of that month"],
  "The course's table of what the engine does not compute lists off-specification and pre-start gas with the engine doing nothing. Every quantity it reads is gas the contract counts, so it deducts nothing, prices nothing before the start and books no seller shortfall for gas quality.")
 
 # 3
 x("The export feed's price carries reopeners in 2031-01 and 2035-01. What does priceSeries return for them?",
  "Each reopener month reported with a note that the review's outcome is not modelled",
  ["A price reset in each reopener month to the contract price of the first priced month of the agreement",
-  "A refusal: no price can be computed past a date on which the parties may renegotiate their price",
-  "A price held flat from each reopener month"],
+  "No price past a date on which the parties may renegotiate their price, the call being refused",
+  "Prices held flat from each reopener month to the next"],
  "The engine reports each reopener, verbatim: \"price reopener 2031-01: reported only; the engine does not model the outcome of a price review\". It prices every month on the stated formula through 2036-12, so it resets nothing, refuses nothing and holds nothing flat at a reopener.")
 
 # 4
@@ -48,7 +48,7 @@ x("A learner types a reopener as \"2031\". What does the engine do?",
  "The engine's message, verbatim, is \"reopeners[0] must be a month 'YYYY-MM'; got \"2031\"\". A reopener is a stated month, and anything else is refused by name; the engine guesses no month, drops no input in silence and spreads nothing across a year.")
 
 # 5
-x("The model agreement's Article 15.8 prints a floor and ceiling per index (Alternative 1) and a cap on the change of an index (Alternative 2). What does the engine compute?",
+x("Article 15.8 of the Commonwealth model agreement (2025) prints a floor and ceiling per index (Alternative 1) and a cap on the change of an index (Alternative 2). What does the engine compute?",
  "Alternative 1 only; the change cap is not modelled",
  ["The change cap, turned into a floor and a ceiling set around each index's stated base value",
   "A refusal of any fast-moving index",
@@ -64,7 +64,7 @@ x("Which end-of-term rules does makeUp.endOfTerm accept?",
  "The refusal reads \"makeUp.endOfTerm must be one of \"forfeit\", \"refund\"; got \"extend\"\". The model's Article 12.7.5 prints forfeit, refund and extending the term, and the engine models the first two; forfeiture is the model's Alternative 1, and the end-of-term rule is a required input with no default.")
 
 # 7
-x("A contract's carry-forward reduces next year's ACQ, the model's Article 12.8 Alternative 1. How does the engine treat it?",
+x("A contract's carry-forward reduces next year's ACQ, Article 12.8 Alternative 1 of the Commonwealth model agreement (2025). How does the engine treat it?",
  "It does not model that alternative; it credits carry-forward against a later deficiency",
  ["It lowers next year's ACQ by the surplus and then recomputes the take-or-pay quantity on it",
   "It enters the surplus as next year's permitted reduction",
@@ -77,14 +77,14 @@ x("Regulation 6(3)(b) of the DGDO Regulations 2022 deems the obligation met if t
  ["It deems the obligation met whenever an excuse is stated and no investigation date is given",
   "A penalty deferred for 90 days",
   "It refuses a call whose excuse lacks a date"],
- "The engine's basis, verbatim: \"the 90-day investigation rule of r.6(3) and the compensation to customer-clients of s.110(13) are not computed.\" It applies the stated excuses in the order of s.110(10); it deems nothing met on a missing date, defers nothing and asks for no date.")
+ "The engine's basis, verbatim: \"the 90-day investigation rule of r.6(3) and the compensation to customer-clients of s.110(13) are not computed\". It applies the stated excuses in the order of s.110(10); it deems nothing met on a missing date, defers nothing and asks for no date.")
 
 # 9
-x("PIA s.110(13) requires a producer that defaults on supply through the domestic gas aggregator to compensate the customer-client for its loss. What does the engine compute for it?",
+x("Section 110(13) of the Petroleum Industry Act 2021 requires a producer that defaults on supply through the domestic gas aggregator to compensate the customer-client for its loss. What does the engine compute for it?",
  "Nothing; its basis names that compensation as not computed",
  ["Compensation at US$3.50 per MMBtu not supplied, the rate of s.110(8)",
-  "Compensation at the seller shortfall price stated in the supply agreement",
-  "Compensation equal to the penalised quantity valued at the domestic base price stated for the year"],
+  "The seller shortfall price stated in the supply agreement, applied to the gas not supplied",
+  "The penalised quantity valued at the domestic base price stated for the year"],
  "The compensation of s.110(13) is on the course's list of what the engine does not compute, and the engine's basis says so. The US$3.50 per MMBtu of s.110(8) is the obligation penalty paid for gas not delivered, a different rule; the seller shortfall price belongs to a gas sales agreement's damages; and no text read gives compensation a formula.")
 
 # 10
@@ -93,7 +93,7 @@ x("Why does this course print no flaring penalty rate?",
  ["The rate is in a licensed text",
   "Each gas sales agreement sets its own flaring penalty",
   "Flaring has been outside Nigerian law since the Petroleum Industry Act 2021 took effect"],
- "PIA s.104(1) makes flaring outside the exceptions an offence with \"a fine as prescribed by the Commission in regulations\", and the copy of the 2023 Regulations on the regulator's gazetted page is unnumbered and undated, so no figure was read. The rule is public law, no contract term, and the Act does regulate flaring (s.104, s.105).")
+ "PIA s.104(1) makes flaring outside the exceptions an offence with \"a fine as prescribed by the Commission in regulations\", and the copy of the 2023 Regulations on the regulator's gazetted page is unnumbered and undated, so no figure was read. The Act leaves the fine to the Commission's regulations, so a gas sales agreement does not set it, and the Act does regulate flaring (s.104, s.105).")
 
 # 11
 x("In the engine, where does a lessee's Domestic Gas Delivery Obligation quantity come from?",

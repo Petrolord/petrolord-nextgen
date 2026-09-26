@@ -21,7 +21,7 @@ x("Which function states the reading \"seller shortfall measured against the qua
  "The first reading is stated in the dailyBalance basis.reading, the function that books each day's seller shortfall. takeOrPay's basis.reading carries readings two and three, gsaCashFlows's basis.royalty carries reading four, and contractQuantities states no reading.")
 
 # 2
-x("The seller offers the whole properly nominated 100.000000 of a golden day, and the buyer takes only 60.000000. How does the engine split the gap?",
+x("On a golden day with a DCQ of 100.000000 and no delivery tolerance, the seller offers the whole properly nominated 100.000000, and the buyer takes only 60.000000. How does the engine split the gap?",
  "Seller shortfall 0.000000, buyer shortfall 40.000000",
  ["Seller shortfall 40.000000, buyer shortfall 0.000000",
   "Seller shortfall 40.000000 and buyer shortfall 40.000000, each side charged with the same gap",
@@ -53,7 +53,7 @@ x("The export feed's 2029 deficiency is 6438500.000000, and its carry-forward cr
  "The reason reads that the buyer may make up 3219250 in the 5 contract years after 2029, to the end of 2034: the deficiency paid after the credit, for the stated make-up period of 5 years. The whole deficiency would count gas the credit already settled; 2032 would be a 3-year period, the length of the carry-forward period, which governs surpluses and not make-up.")
 
 # 6
-x("A golden case with a refund end of term finishes in 2029, with a deficiency of 100.000000 paid at 4 and make-up of 150.000000 still open from 2027. What does the seller refund?",
+x("A golden case with a refund end of term finishes in 2029, with a deficiency of 100.000000 paid at 4 and make-up of 150.000000 still open from 2027. What does the engine's reason say the seller refunds?",
  "600.000000, the 150.000000 from 2027 at 4; the year's own payment of 400 stays with the seller",
  ["1000.000000, the open 150.000000 and the year's own 100.000000, both refunded at the price of 4",
   "400.000000, the last year's deficiency payment handed back",
@@ -114,10 +114,10 @@ x("Why does the course teach the seller shortfall reading as the engine's stated
  ["The Petroleum Industry Act 2021 sets the rule in s.110, and the engine repeats the Act",
   "The AIPN model agreement prints it, and the course may not quote a licensed text",
   "ESMAP para 6.52 defines daily availability that way for every contract"],
- "The definition's opening supports the engine's reading and the formula's letter supports the other, so the engine takes a reading and states it. S.110 is the Domestic Gas Delivery Obligation, the AIPN text is taught by concept only and is no source of this reading, and ESMAP's para 6.52 is a cited source for contract quantities, which binds no contract.")
+ "The definition's opening supports the engine's reading and the formula's letter supports the other, so the engine takes a reading and states it. S.110 is the Domestic Gas Delivery Obligation, the AIPN text is taught by concept only and is no source of this reading, and ESMAP's para 6.52 is cited for daily availability in contract quantities and says nothing of this reading.")
 
 # 14
-x("On a stated day 100.000000 is properly nominated and 40.000000 made available and taken, with force majeure of 30.000000 and maintenance of 10.000000. What does dailyBalance return?",
+x("On a stated day with a DCQ of 100.000000 and no delivery tolerance, 100.000000 is properly nominated and 40.000000 made available and taken, with force majeure of 30.000000 and maintenance of 10.000000. What does dailyBalance return?",
  "Seller shortfall 20.000000, adjusted DCQ 40.000000",
  ["Seller shortfall 60.000000 and an adjusted DCQ of 100.000000, the stated causes being reported only",
   "Seller shortfall 0.000000, since the stated causes excuse the whole gap between nomination and supply",

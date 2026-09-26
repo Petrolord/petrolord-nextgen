@@ -23,7 +23,7 @@ x("Why may this course quote the Commonwealth model gas sales agreement (2025) a
  "The model agreement's front matter reads \"This work is licensed under Creative Commons Attribution 4.0 International.\", so it is quoted short and exact with its attribution. The AIPN model is a licensed text: the course teaches its ideas as concepts and quotes none of it. Neither the date of a text nor any claim that a model contract is law decides this.")
 
 # 2
-x("Where the model agreement prints [## INSERT] for the take-or-pay percentage, what does the engine do?",
+x("Where the Commonwealth model agreement (2025) prints [## INSERT] for the take-or-pay percentage, what does the engine do?",
  "It takes the percentage as a required input with no default",
  ["It uses 80 percent, the percentage stated in the Ekene power plant agreement, until the parties agree otherwise",
   "It uses 100 percent, so the take-or-pay quantity equals the Adjusted ACQ until a figure is typed in",
@@ -31,7 +31,7 @@ x("Where the model agreement prints [## INSERT] for the take-or-pay percentage, 
  "Where the model prints [## INSERT] the engine takes the figure as a required input, and a call without it is refused by name. 80 percent is only what the power plant fixture states; the engine holds no default percentage; and a take-or-pay percentage of 0 is accepted only when a contract states it.")
 
 # 3
-x("The model agreement prints the Adjusted ACQ without and with an operational flexibility credit. Which does the engine compute?",
+x("The Commonwealth model agreement (2025) prints the Adjusted ACQ without and with an operational flexibility credit. Which does the engine compute?",
  "Alternative 2, the credit entering as permittedReduction",
  ["Alternative 1, with no flexibility modelled",
   "Both, returning two Adjusted ACQ figures in every contract year for the reader to choose between",
@@ -39,7 +39,7 @@ x("The model agreement prints the Adjusted ACQ without and with an operational f
  "The engine computes Alternative 2, with the operational flexibility credit entering as permittedReduction, one of the reductions it subtracts from the ACQ. It returns one Adjusted ACQ per year, and it computes it from the stated ACQ and reductions (the year keys include acq, maintenance, forceMajeure, sellerShortfall and permittedReduction).")
 
 # 4
-x("Article 12.6 prints two forms of the Buyer's Deficiency Payment, BADQ x TOPP and (BADQ - CFCQ) x TOPP. Which does the engine follow?",
+x("Article 12.6 of the Commonwealth model agreement (2025) prints two forms of the Buyer's Deficiency Payment, BADQ x TOPP and (BADQ - CFCQ) x TOPP. Which does the engine follow?",
  "The second when carry-forward is stated, which is the first when it is not",
  ["The first always, any carry-forward credit being paid back to the buyer separately at the end of the year",
   "The second always, with the carry-forward credit quantity set to the whole surplus of earlier years",
@@ -47,7 +47,7 @@ x("Article 12.6 prints two forms of the Buyer's Deficiency Payment, BADQ x TOPP 
  "The engine follows Alternative 2 when carry-forward is stated; with no carry-forward the credit is zero and it is Alternative 1. A credit reduces the deficiency paid and is never paid back as money; the credit is capped at the stated percentage of the year's deficiency (the export feed's 2029 credit is 3219250.000000 against 3913300.000000 available); and the engine chooses nothing to favour a party.")
 
 # 5
-x("Article 12.7.5 of the model agreement prints three ends of the Delivery Period. Which does the engine leave out?",
+x("Article 12.7.5 of the Commonwealth model agreement (2025) prints three ends of the Delivery Period. Which does the engine leave out?",
  "Alternative 3, extending the term",
  ["Alternative 2, the refund at the last take-or-pay price, which the engine reports without computing",
   "Alternative 1, forfeiture, since the engine refunds every make-up entry still open at the end",
@@ -55,7 +55,7 @@ x("Article 12.7.5 of the model agreement prints three ends of the Delivery Perio
  "The engine computes Alternatives 1 and 2, forfeit and refund, and does not model extending the term. The export feed computes a refund (3700831.335000 in 2036) and the power plant a forfeiture (252000.000000 in 2034), and a call stating extend is refused: \"makeUp.endOfTerm must be one of \"forfeit\", \"refund\"; got \"extend\"\".")
 
 # 6
-x("ESMAP (para 6.62) and the model agreement's Article 12.8 both cap carry-forward. What is the engine's capPct a percentage of?",
+x("ESMAP Report 152/93 (1993, para 6.62) and Article 12.8 of the Commonwealth model agreement (2025) both cap carry-forward. What is the engine's capPct a percentage of?",
  "The year's deficiency, as in the model's Alternative 2",
  ["The annual quantity, as ESMAP describes the cap on the use of a carry-forward right in any year",
   "The surplus carried from the oldest year",
@@ -63,7 +63,7 @@ x("ESMAP (para 6.62) and the model agreement's Article 12.8 both cap carry-forwa
  "ESMAP describes a cap stated as a percentage of the annual quantity; the model's Alternative 2 caps the credit as a percentage of the year's deficiency, and the engine's capPct follows the model. On the export feed in 2029 the credit of 3219250.000000 is half of the deficiency of 6438500.000000.")
 
 # 7
-x("Which engine order computes ESMAP's description that \"make-up quantities are accounted for after the minimum-pay quantity for the year has been taken\" (para 6.59)?",
+x("Which engine order computes the description in ESMAP Report 152/93 (1993) that \"make-up quantities are accounted for after the minimum-pay quantity for the year has been taken\" (para 6.59)?",
  "after-top-quantity, the take-or-pay quantity as the minimum",
  ["after-adjusted-acq, the reference text's order",
   "first",
@@ -87,7 +87,7 @@ x("Make-up taken in priority (the order first) meets a year whose whole take equ
  "Taken first, make-up comes off the top: 200.000000 of the 800.000000 is make-up, 600.000000 counts against the take-or-pay quantity of 800.000000, and a new deficiency of 200.000000 is paid again. Make-up gas does not count toward the year's own quantity; the order first has no threshold; and expiry depends on the period alone.")
 
 # 10
-x("HMRC OT05402 divides a swing of 150 by a take-or-pay level of 90 and prints 1.66. How does the course quote this beside the engine?",
+x("HMRC Oil Taxation Manual OT05402 (updated 19 December 2019) divides a swing of 150 by a take-or-pay level of 90 and prints 1.66. How does the course quote this beside the engine?",
  "1.666667 as the engine's and 1.66 as the manual's, the manual's being the exact quotient cut after two decimals",
  ["1.66 for both, since the engine rounds effective swing to the manual's two decimals before printing it",
   "1.500000, the swing factor, which the engine reports as the effective swing",
@@ -114,8 +114,8 @@ x("Which Btu does the engine use, and how does its validation record read the mo
 x("What does the engine hold for one cubic foot?",
  "Exactly 0.028316846592 m3, the cube of the international foot",
  ["A value that depends on the reference conditions a contract states for its volume",
-  "A rounded factor, with the exact one left for the caller to state",
-  "A factor read from the model agreement's definitions, beside its own Btu"],
+  "Only a rounded factor, the exact one being left for the caller to state",
+  "One factor read from the model agreement's definitions, beside its own Btu"],
  "UNITS.M3_PER_FT3 is 0.028316846592, (0.3048 m) cubed, exact. It is geometry, so it does not move with reference conditions; the engine states it exactly; and it comes from the definition of the foot, with no contract involved.")
 
 # 14
