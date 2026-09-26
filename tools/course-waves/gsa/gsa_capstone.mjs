@@ -353,11 +353,12 @@ if (failed.length) {
   process.stderr.write(`gsa_capstone: ${ASSERTS.length} assertions, ${failed.length} FAILED\n`);
   process.exit(1);
 }
-if (process.argv.includes('--json')) {
+const MAIN = import.meta.url === `file://${process.argv[1]}`;
+if (MAIN && process.argv.includes('--json')) {
   process.stdout.write(`${JSON.stringify(rows.map(({ tier, key, cls, value }) => ({ tier, key, cls, value })))}\n`);
-} else if (process.argv.includes('--inputs')) {
+} else if (MAIN && process.argv.includes('--inputs')) {
   process.stdout.write(`${JSON.stringify(CASES)}\n`);
-} else if (import.meta.url === `file://${process.argv[1]}`) {
+} else if (MAIN) {
   rows.forEach((r) => console.log(`${r.tier.padEnd(13)} ${r.key.padEnd(34)} ${String(r.value).padEnd(24)} tol ${r.tol}`));
   console.log(`gsa_capstone: ${ASSERTS.length} assertions, 0 failed; ${OPEN_READINGS.length} stated readings, every field bit-identical under each`);
 }
