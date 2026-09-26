@@ -358,6 +358,23 @@ describe('every course panel renders with no props', () => {
       'procurement/EnvelopeCalculator.jsx': ['technical', 'arithmetic', 'evaluated', 'combined', 'tender'],
       'procurement/AwardCalculator.jsx': ['lifecycle', 'band', 'alb', 'content', 'preference'],
       'procurement/ContractCalculator.jsx': ['contracts', 'shouldcost', 'tender', 'bounds', 'refusals'],
+    };
+    let rendered = 0;
+    for (const [name, modes] of Object.entries(MODES)) {
+      const entry = entries.find(([p]) => p.endsWith(`/${name}`));
+      expect(entry, `${name} is not in the panel sweep`).toBeTruthy();
+      const mod = await entry[1]();
+      expect(mod.MODES.map((m) => m[0]), `${name} declares different modes`).toEqual(modes);
+      for (const mode of modes) {
+        expect(
+          () => renderToStaticMarkup(React.createElement(mod.default, { initialMode: mode })),
+          `${name} in the ${mode} view`,
+        ).not.toThrow();
+        rendered += 1;
+      }
+    }
+    expect(rendered).toBe(15);
+  }, 120000);
   it('finds the EC7 pia calculator panels', () => {
     const names = entries.map(([p]) => p.split('/panels/')[1]);
     expect(names).toContain('pia/RoyaltyCalculator.jsx');
