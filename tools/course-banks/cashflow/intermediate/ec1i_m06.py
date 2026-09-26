@@ -1,0 +1,131 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# EC1 cashflow, intermediate tier, The Professional Reading. Reconstructed from the served rows (the applied
+# migrations replayed on a local scratch database) with the EC7 PIA re-cut applied;
+# written by tools/course-waves/cashflow/pia-recut/build.py. Edit here, then re-run it.
+
+q(1,
+ "The capstone method is worked on AKATA in eight steps. What does step one write, before any number?",
+ "The convention sentence: real basis, end-year, 10 percent nominal, 3 percent inflation, valued in 2029, which is the label on every number that follows.",
+ ["The headline NPV of 72534830.66, because every later step is a check on it and a check needs its target before the conventions can be chosen.",
+  "The IRR of 29.2361 percent, because it is the one reading no convention can move and so it anchors the rest of the readings.",
+  "The nominal flow vector, because the eight steps all read from it and the convention is only needed when a reader asks for it."],
+ "Every number changes meaning when a convention is found late; 72534830.66 read as mid-year or as valued from 2030 is a different claim about the same rows.")
+
+q(3,
+ "Step two derives the applied rate for AKATA, real basis, 10 percent nominal, 3 percent inflation. What is applied, and what would the nominal basis apply?",
+ "6.796117 percent on the real flows; the nominal basis applies the nominal rate itself, 10.000000 percent, and the end-year NPV is 72534830.66 on both.",
+ ["The nominal less the inflation, obtained by subtraction, on the real flows; the nominal basis applies the same subtracted rate, because the deflator is taken out of the rate on either basis.",
+  "10.000000 percent on the real flows as printed, because discount_rate_pct is applied as configured on either basis and the basis only decides which total is printed.",
+  "1.851852 percent, the rate the sweep reports at 8 percent inflation, because the escalators of 2 and 3 percent add to the 3 percent inflation before the rate is derived."],
+ "The Fisher rate is one plus the nominal over one plus the inflation less one; at 0 percent inflation it would be 10.000000 and at 8 percent 1.851852, and NPV is 72534830.66 at each.")
+
+q(0,
+ "Step three reads AKATA's NPV under both conventions, 72534830.66 end-year and 70188970.32 mid-year on the real basis. What does the method say to report?",
+ "The pair with its convention on each, because the pair is the answer and neither number alone is.",
+ ["The mid-year figure of 70188970.32, because it is the lower of the two and a decision should rest on the conservative reading.",
+  "The end-year figure of 72534830.66, because the engine defaults to end-year and the default is the engine's statement of the true convention.",
+  "The mean of the two, because the true timing of cash inside a year lies between the conventions and averaging removes the convention error."],
+ "The rows are identical under both readings, and 69159247.46 is the same field mid-year on the nominal basis; no one of the three is more true than the others.")
+
+q(2,
+ "Step four: AKATA valued from 2030 reads 77464382.26 with prior years kept and 206819768.67 with them sunk. What decides which figure is wanted?",
+ "The question being asked: whether to start keeps 2029, and whether to continue, given that 2029 is paid, sinks it.",
+ ["The sign of the 2029 flow: a negative prior year of -121123680.00 is sunk by definition, and only a positive prior year would be kept.",
+  "The size of the gap: a difference as large as 77464382.26 against 206819768.67 means the sunk run has dropped a row and is the wrong one.",
+  "The IRR: the run that still reports 29.2361 percent is the valid one, and the null IRR of the sunk run marks it as a calculation that failed."],
+ "Both are correct for their question, and the sunk run reports the 2029 flow of -121123680.00 as sunk_net_cash_flow so the reader can see what was removed.")
+
+q(1,
+ "Step five reads the profile. AKATA's point labelled 6.8 reads 72534830.66, the headline, so the gap is 0.00. What does the label 6.8 tell a reader about the rate the point was evaluated at?",
+ "Nothing exact: the label is the applied rate rounded to two decimals, while the evaluation is at 6.796117 percent, which is why the point equals the headline.",
+ ["That it was evaluated at 6.8 percent, and the gap of 0.00 shows 6.8 and 6.796117 give the same NPV to the cent on a field of this size.",
+  "That the point sits between the 5 and 8 percent samples and was interpolated from 83023565.60 and 65968275.69.",
+  "That the applied rate is exactly 6.8 percent, the Fisher rate rounded by the engine before any discounting is done."],
+ "Until engines 3.10.0 the point was evaluated at its label too and read 72513070.98, a gap of -21759.68; the engine's own npv() at the exact rate returns the headline.")
+
+q(3,
+ "Step six: before trusting AKATA's IRR of 29.2361 percent, what does the method have you write, and what does it show on the base case?",
+ "The last nominal flow, 30401798.05, positive, so the curve has one positive root and the reported rate is the only one.",
+ ["The NPV at 0 percent, 141637829.18, positive, which proves the curve crosses zero exactly once somewhere between 0 and 100 percent.",
+  "The residual at the root, 0.000000, which proves the root is exact and an exact root is therefore the only root.",
+  "The first flow, -121123680.00, negative, which is the outlay the return is a return on and the only sign the count of roots depends on."],
+ "With a 60000000 abandonment the last flow is -29598201.95, the curve crosses twice and the engine returns null with irrStatus multiple-roots; the sign of the last entry is what changes the count.")
+
+q(2,
+ "Six conventions label 72534830.66. Which single change moves it to 70188970.32, and which to 206819768.67?",
+ "End-year to mid-year moves it to 70188970.32; a 2030 valuation year with prior years treated as sunk moves it to 206819768.67.",
+ ["Real to nominal basis moves it to 70188970.32, because the deflator comes out of the rows; a 2030 valuation year with prior years kept moves it to 206819768.67.",
+  "Inflation from 3 to 8 percent moves it to 70188970.32; valuing from 2031 with prior years kept moves it to 206819768.67.",
+  "The nominal rate from 10 to 12 percent moves it to 70188970.32; an abandonment of 60000000 in 2035 moves it to 206819768.67."],
+ "Basis does not move NPV end-year, inflation never does on the real basis with the escalators set, 2030 with prior years kept gives 77464382.26, and the 60000000 abandonment gives 38666394.86.")
+
+q(0,
+ "The tier ends on the sentence that IRR is a property of a curve, not of a project. What is the sentence claiming?",
+ "That the IRR is a zero of one vector's NPV curve: a curve with two zeros has no single IRR, which is why the engine returns null there, and a scaled vector keeps its IRR at any size.",
+ ["That the IRR moves when the convention moves, as NPV does from 72534830.66 to 70188970.32, because the curve is redrawn under mid-year discounting.",
+  "That the IRR is a rate on the project's money, so a project with an IRR of 29.2361 percent earns 29.2361 percent on its 255000000.00 of capex.",
+  "That the IRR is read from the sampled profile, so AKATA's 29.2361 percent is where the profile crosses zero between the 15 and 20 percent points."],
+ "29.2361 percent holds at every working interest and under all four conventions; [-100, 208, -108.12] is zero at 2.0000 and at 6.0000 percent, so the engine names neither and returns null with both listed.")
+
+q(1,
+ "AKATA's flow vector is [-121123680.00, 31746007.20, 64468245.07, 53959532.44, 44874457.77, 37311468.65, 30401798.05]. An abandonment of 60000000 in 2035 is added. Which entry changes, what happens to its sign, and what does that do to the count of IRR roots?",
+ "The last entry becomes -29598201.95, negative, and the root count goes from one to two, so the engine stops naming a rate and returns null with irrStatus multiple-roots.",
+ ["The first entry grows to include the abandonment as a provision, stays negative, and the root count is unchanged because only the sign of the first flow matters.",
+  "The last entry becomes -29598201.95, negative, and the root count goes from one to none, which is why the engine reports null with irrStatus no-root.",
+  "Every entry falls by a share of the 60000000 spread as a sinking fund across the seven years, the signs are unchanged, and the single root moves down to 23.2570 percent."],
+ "The 200000000 abandonment takes the last entry to -169598201.95 and the NPV negative at every sampled rate, -58362170.82 at 0 percent, and that is the case with no root at all.")
+
+q(2,
+ "The onward lesson names a second source of terminal negatives beside abandonment. What is it?",
+ "A tail kept past its economic limit with the limit test off, where each late year carries a loss to the end of the vector.",
+ ["A price deck that falls in its last entries, which turns the late revenue rows negative before the cascade is applied to them.",
+  "Mid-year discounting, which discounts the valuation year row and so pushes a negative into the tail of the discounted column.",
+  "A working interest below 100 percent, which scales the late rows harder than the early ones and turns the tail negative at 25 percent."],
+ "At 20 percent decline the limit year is 2030 and four years are trimmed; with the limit off those years would stay, and each would carry a loss.")
+
+q(3,
+ "The three habits the lesson names end with reading the rows column before comparing two runs. Why that column?",
+ "Because a sweep that trims years compares different fields: at 20 percent decline six rows are valued and at 40 percent three, so the KPIs are of shortened ledgers.",
+ ["Because the rows column carries the sunk flag, and a run with a sunk row reports 206819768.67 where the same rows kept report 77464382.26.",
+  "Because the rows column is where the discounting convention is recorded for each run, end_year or mid_year, and two runs under different conventions cannot be ranked against each other.",
+  "Because the number of rows sets the exponent of the last flow, so a ten-row field is discounted harder than a six-row field at the same rate."],
+ "The 10 percent decline point keeps all 10 rows and reads 153012318.45; the 20 percent point reads -76483227.81 with four years gone, and part of that difference is the missing rows.")
+
+q(0,
+ "What does the capstone method refuse to produce?",
+ "One number: it produces a labelled set, and a reader asked for the NPV answers with the label attached.",
+ ["A mid-year figure, since the engine defaults to end-year and the method follows the engine's default.",
+  "An IRR on a real basis run, since 29.2361 percent is solved on the nominal flows and the method is worked on the real basis.",
+  "A profile, since the method reads only the headline at the applied rate and leaves the seven sampled points to the sensitivity work."],
+ "AKATA's 72534830.66, 70188970.32, 77464382.26 and 206819768.67 are all NPVs of the same rows, and only the label tells them apart.")
+
+q(2,
+ "Working the method on multiyear_jv_real: 127186476.88 at 0 percent, headline 88104639.00 at 6.796117 percent, 88104639.00 at the point labelled 6.8, IRR 47.9020 percent. What is the gap, and what does the engine naming 47.9020 already tell you?",
+ "The gap is 0.00, and a named rate already tells you it is the only rate in the band from -99 to 1000 percent that zeroes the NPV, because the engine returns null where there is more than one.",
+ ["The gap is 0.00, and a named rate tells you only that Newton converged on something; the count of crossings still has to be checked by hand from the sign of the vector's last flow before the rate can be relied on.",
+  "The gap is -18628.18, because the applied rate of 6.796117 percent is rounded to 6.8 before the point is evaluated, and a named rate says nothing at all about how many crossings the curve has.",
+  "The gap is 0.00, and a named rate tells you the last entry is positive, since the engine names a rate only on conventional vectors."],
+ "Until engines 3.10.0 the point labelled 6.8 read 88086010.81, a gap of -18628.18, and a reported rate was one crossing of however many there were.")
+
+q(1,
+ "AKATA's NPV is -21406234.12 at 60 USD/bbl and 22132715.69 at 70, and the breakeven is 64.916777. What confirms the breakeven, and against which rate?",
+ "The IRR rerun at that price reads 10.0002 percent, the nominal rate: where NPV is zero at the configured rate, that rate is itself a root.",
+ ["The take rerun at that price reads 79.0146 percent, which is the point where the government's share stops rising as the price falls.",
+  "The NPV rerun at that price reads 897.16, which is zero to the engine's tolerance, and the applied real rate of 6.796117 percent is the root there.",
+  "The discounted payback rerun at that price reads 3.961607 years, unchanged, and an unchanged discounted payback marks a zero of NPV."],
+ "The IRR is compared against the nominal 10 percent and not the applied real 6.796117, and the 897.16 residual is the trace of a search that stops at a tolerance on price.")
+
+q(3,
+ "The Professional tier used to hand on two numbers to distrust. What became of them, and what is handed on in their place?",
+ "Both were repaired: the point labelled 6.8 now reads the headline 72534830.66, and [-100, 208, -108.12] now returns null with irrStatus multiple-roots; the habit of asking what the engine did is what travels.",
+ ["Both still stand, the profile gap of -21759.68 and the engine's 6.0000 percent against the oracle's 2.0000, reported exactly as they always were, and the third of them belongs to the Expert tier and concerns abandonment.",
+  "The profile gap was repaired and the two-root IRR was not, so 6.0000 percent is still reported against the oracle's 2.0000 and is the one number the tier now hands on to the Expert tier.",
+  "Both were replaced by the breakeven residual of 897.16 and the mid-year NPV of 70188970.32, the readings the engine still reports without saying what it did."],
+ "The golden records no profile disagreement and no IRR disagreement on engines 3.10.0; 70188970.32 and 897.16 are correct readings under their labels and were never numbers to distrust.")
+
+emit(Q, '/root/wt-ec7-recut/tools/course-banks/cashflow/intermediate/ec1i_m06.json', expect_n=15)
+finish()

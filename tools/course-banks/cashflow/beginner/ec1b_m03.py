@@ -1,0 +1,131 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# EC1 cashflow, beginner tier, Prices. Reconstructed from the served rows (the applied
+# migrations replayed on a local scratch database) with the EC7 PIA re-cut applied;
+# written by tools/course-waves/cashflow/pia-recut/build.py. Edit here, then re-run it.
+
+q(2,
+ "AKATA sets oil_price_usd_bbl=82 with oil_price_escalator_pct=2 from base_year 2029, and the ledger applies 82.000000 then 83.640000. What does 2031 read?",
+ "85.312800, which is 83.640000 escalated again at 2 percent; each step is larger than the one before.",
+ ["82 plus two equal steps of the first year's increment, so the six decimals read as zeros.",
+  "87.019056, because the escalator counts from the first production row rather than from base_year, which puts 2031 three steps out.",
+  "82.000000, because a flat price holds until a deck entry moves it."],
+ "The six decimals are the compounding made visible: 85.312800 in 2031 and 87.019056 in 2032, each escalated from the year before.")
+
+q(0,
+ "The resolver is asked for a flat 80 with a 10 percent escalator from base year 2030, for the year 2029. What comes back?",
+ "72.727273, de-escalated one year, because the base year is the anchor and not the first year of production.",
+ ["80.000000, since the flat price is the starting price and applies unchanged to every year up to the base year, where the escalator begins.",
+  "88.000000, because the escalator counts years away from the base year in either direction and compounds upward on both sides of it.",
+  "Nothing, because the resolver refuses years before the base year."],
+ "The same call returns 66.115702 for 2028 and 88.000000 for 2031, so a reader who assumed the flat price was the starting price will not find it in a first row dated before the base year.")
+
+q(3,
+ "With the escalator at 10 percent and no deck, the resolver returns 128.840800 for 2035. What does the engine refuse on this path?",
+ "Only a missing price: an escalator compounds without a ceiling, and 128.840800 is the engine doing what it was told.",
+ ["A price above the 100 anchor of the deck, which is why the resolver holds the last deck price beyond the last entry rather than escalating it.",
+  "An escalator above the inflation rate, since a real price cannot rise faster than money loses value.",
+  "Nothing at all, including an unset oil price, which it fills from the gas price."],
+ "oil_price_unset stops the run when oil volumes are present and oil_price_usd_bbl is not set; whether 128.840800 is a price anybody will pay is not the engine's question.")
+
+q(1,
+ "escalator_defaults_to_inflation sets inflation_rate_pct=5 and leaves oil_price_escalator_pct out, with oil_price_usd_bbl=100 in base_year 2030. What is the 2031 applied price?",
+ "105.000000, because an unset escalator falls back to the inflation rate.",
+ ["100.000000, because a blank escalator means flat, exactly as opex_escalator_pct=0 does in flat_escalator.",
+  "110.000000, because the escalator defaults to the discount rate of 10 percent when it is not set.",
+  "The run is refused, since an escalator is required whenever an inflation rate is set."],
+ "A blank is not a zero: flat_escalator wrote opex_escalator_pct=0 explicitly and got flat opex, while the blank here gave revenue 105000000.00 in 2031.")
+
+q(1,
+ "deck_step_hold sets a deck of 100 in 2030 and 50 in 2032 with a 10 percent escalator. What does 2031 read?",
+ "100.000000, held from the 2030 entry: not escalated and not interpolated toward 50.",
+ ["110.000000, the 2030 entry escalated by 10 percent, because the escalator runs in every year that has no entry of its own.",
+  "50.000000, because the deck steps when the next entry is read and the engine looks ahead to it.",
+  "The midpoint of the two entries, because a deck is a curve through its points."],
+ "Between entries the last price holds, which is why a two-point deck typed as a forecast holds 100 for a full year and then drops.")
+
+q(0,
+ "In the same deck_step_hold case, what does 2033 read, and why?",
+ "55.000000, the last deck price of 50 escalated by 10 percent, because the escalator only runs past the last entry.",
+ ["50.000000 held for every later year, since a deck's last price is its terminal price and the escalator belongs to the flat price.",
+  "60.500000, two escalations from 50, because the escalator counts every year since the base year 2030.",
+  "110.000000, the flat price of 100 escalated, because the deck has ended and the flat price returns."],
+ "Total revenue over the four rows is 305000000.00, and fed the same deck the resolver continues 60.500000 and 66.550000 for 2034 and 2035.")
+
+q(3,
+ "The resolver is handed a flat price of 80 together with the deck_step_hold deck. Where does the 80 appear?",
+ "Nowhere: a deck replaces the flat price for every year, including years the deck does not name.",
+ ["In the years before 2030, because the deck starts at its first entry and the flat price fills the years before it.",
+  "In 2031, because a year with no entry falls back to the flat price rather than to the entry before it.",
+  "After 2032, when the deck has run out."],
+ "Once a deck exists the flat price is dead, before the first entry and after the last.")
+
+q(2,
+ "deck_before_first_entry has entries for 2031 and 2032 only, the 2031 price written as the string \"90\" under the long key oil_price_usd_bbl, and a flat oil_price_usd_bbl=100. What does 2030 read?",
+ "90.000000, the first deck entry's value; the flat 100 is never applied.",
+ ["100.000000, the flat price, since the deck has no entry for 2030 and the flat price fills years before the deck.",
+  "The run is refused, because the deck price 90 is a string and the key oil_price_usd_bbl is not the short oil key the deck expects.",
+  "0.000000, because the deck has no entry for 2030 and a deck disables the flat price."],
+ "Years before the first deck year take the first deck value, and the engine accepted both the string and the long key: the ledger reads 90.000000, 90.000000, 70.000000.")
+
+q(0,
+ "deck_differential has a one-entry deck of 100 in 2030, a 10 percent escalator and oil_price_differential_usd_bbl=-5. What does 2031 read?",
+ "105.000000: the last entry is escalated from 100 to 110 first, and the differential comes off after.",
+ ["95 escalated by 10 percent, because the differential is applied to the benchmark and the gap then escalates with the price.",
+  "100.000000, because the differential applies only in the deck's own years and 2031 is outside the deck.",
+  "110.000000, because a differential is a one-off adjustment to the base year price that the escalator then overrides."],
+ "The order is fixed, resolve then adjust: the case's own note says differential -5 after deck resolution, and the gross revenue is 95000000.00 then 105000000.00.")
+
+q(1,
+ "Which of the two adjustments is worth more the higher the benchmark goes?",
+ "The scale: 1.2 turns 100 into 120 and a higher benchmark into proportionally more, while the -5 differential is worth the same in a low year and a high year.",
+ ["The differential, because it is applied after the escalator and so compounds with it, while the scale is applied once to the base year price.",
+  "Neither, because both are applied to the resolved price and so both grow with it.",
+  "The differential, since a fixed gap is a larger share of a low price."],
+ "A differential is a quality or location adjustment that keeps a fixed gap; a scale keeps a fixed ratio.")
+
+q(2,
+ "A reader sets both the -5 differential and the 1.2 scale on the same one-entry deck. Which is applied first?",
+ "It cannot be stated from the published cases: none sets both, so run them together and read the applied price before assuming either order.",
+ ["The differential, because the case notes say differential -5 after deck resolution and scale multiplies the resolved deck price, which puts the scale last.",
+  "The scale, because a multiplier is always resolved before an addition in the resolver.",
+  "It does not matter, since the two adjustments commute."],
+ "A scale applied to a price already carrying a -5 differential moves the differential too, so the order matters, and the published cases exercise them one at a time.")
+
+q(3,
+ "deck_differential's ledger shows applied_oil_price 95.000000 in 2030. What in the ledger tells a reader that this is a 100 benchmark with a -5 differential rather than a flat 95?",
+ "Nothing: the column holds the final number and no column carries the benchmark, so the configuration is the only record.",
+ ["The gross revenue of 95000000.00, which is reported beside the benchmark revenue of 100000000.00 so that the gap of the differential can be read off.",
+  "A differential column beside applied_oil_price, which reads -5 in every deck year and 0.00 in every year the escalator has taken over.",
+  "The note on the row, which the engine writes for every adjusted price."],
+ "The same for the scale: 120.000000 in the deck_scale row, and the 100 with the 1.2 only in the config.")
+
+q(0,
+ "AKATA's 2029 row reads gross revenue 186032000.00 on 2200000.00 bbl of oil. A reader divides revenue by oil volume to recover the price. What do they get?",
+ "A number larger than 82.000000, because gas revenue is in the numerator and gas volume is not in the denominator; applied_oil_price is the price.",
+ ["Exactly 82.000000, because gross revenue is the oil price times the oil volume and the gas is reported in its own revenue column.",
+  "A number smaller than 82.000000, because royalty has already been taken out of gross revenue.",
+  "83.640000, because revenue is booked a year forward of the price it was earned at."],
+ "Gross revenue is 82.000000 times the oil plus 3.200000 times 1760000.00 Mscf of gas, and the row does not show revenue by stream.")
+
+q(3,
+ "A deck is entered for oil on a field whose file also carries gas volumes. What happens to the gas price?",
+ "Nothing: the gas stays on gas_price_usd_mscf and its own escalator, because the parsed oil deck carries gas deck entries 0 and no ratio ties gas to oil.",
+ ["The gas follows the oil deck at 6 Mscf per barrel, so an oil entry of 100 prices the gas at one sixth of it.",
+  "The run is refused with gas_price_unset, because a deck for one stream leaves the other streams unpriced.",
+  "The gas is held at its base year price with its escalator suspended for as long as the oil deck is in force."],
+ "There is no single deck that moves all three streams: a gas price is set, or the run is refused when gas volumes are present.")
+
+q(1,
+ "A reader wants a flat oil price and flat opex in a world with 5 percent inflation. Which escalators must be written as 0, and which can be left blank?",
+ "Oil and opex must be written as 0, because a blank falls back to the inflation rate; only the capex escalator is safe to leave blank, since it stays at 0.",
+ ["All three can be left blank, since inflation only enters the real basis and the ledger here is nominal.",
+  "None can be left blank, because every blank escalator is refused the way a blank price is refused with oil_price_unset.",
+  "Only the oil escalator must be written, because opex is a cost and costs never escalate unless opex_escalator_pct is set."],
+ "escalator_defaults_to_inflation shows the fill: revenue 205000000.00 against 200000000.00, opex 20500000.00 against 20000000.00, and no column says which escalator was typed and which was blank.")
+
+emit(Q, '/root/wt-ec7-recut/tools/course-banks/cashflow/beginner/ec1b_m03.json', expect_n=15)
+finish()

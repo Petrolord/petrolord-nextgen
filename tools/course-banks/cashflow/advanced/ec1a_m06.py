@@ -1,0 +1,131 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# EC1 cashflow, advanced tier, The Expert Reading. Reconstructed from the served rows (the applied
+# migrations replayed on a local scratch database) with the EC7 PIA re-cut applied;
+# written by tools/course-waves/cashflow/pia-recut/build.py. Edit here, then re-run it.
+
+q(0,
+ "AKATA under the PIA pays a development levy of 5390489.91 in 2029. Which line of the row is it charged on?",
+ "The CIT assessable profit of 134762247.64, before the two-thirds restriction.",
+ ["The CIT chargeable profit of 92762247.64, after the capital allowance has been taken off, since a levy follows the tax it accompanies.",
+  "The HCT chargeable profit of 84742595.49, because the levy replaced the TET that the 2021 Act charged on the hydrocarbon tax base.",
+  "The gross revenue of 186032000.00, at a rate blended with the royalty, which is why it moves with the terrain string."],
+ "Five taxes on three bases: the levy at 4 percent of 134762247.64 is 5390489.91, and the row's TET is 0.00 because the base year 2029 selects nta_2025.")
+
+q(2,
+ "AKATA under production sharing at a 60 percent cost oil cap reports NPV 29960298.75, and its pool reads 133542720.00 at the end of 2029 and 0.00 by 2034. Where does a reader get those pool figures?",
+ "Only by marching the cost recovery function over the rows the engine produced, because the cost recovered in a year is printed in no column.",
+ ["From the taxable_income column, which under a PSC is the unrecovered cost carried into the year.",
+  "From the KPI block, which reports the cost recovered in each year whenever the cap binds.",
+  "From the difference between gross revenue and net cash flow on each row, which is the cost oil taken that year."],
+ "At a 30 percent cap the pool ends at 207346412.26; the rows report royalty, profit oil as taxable income, tax and net cash flow, and since engines 3.10.0 a run can also carry psc_cost_pool_after, the balance rather than the recovery.")
+
+q(3,
+ "Which terrain's oil royalty rate changes with the daily rate as a single step rather than a blend?",
+ "Deep offshore, 0.050000 to 50000 bopd and 0.075000 past it.",
+ ["The marginal field, whose rate is 0.050000 to 5000 bopd and then steps once to 0.150000 for every barrel above it.",
+  "Shallow water, which charges 0.125000 up to 50000 bopd and steps to a higher tier past the threshold like deep offshore does.",
+  "Frontier, which starts at 0.050000 and steps to 0.075000 once the field is producing at scale."],
+ "Shallow water charges 0.125000 at every rate; the marginal field blends by rate and reads 0.062500 at 10000 bopd; frontier is 0.075000 throughout.")
+
+q(1,
+ "A field sells at a flat 80 USD per barrel for a decade. What does the PIA price royalty do over that decade?",
+ "It falls every year, because the anchors escalate at 2 percent a year from 2021: 80 USD pays 0.023908 in 2025 and 0.010630 in 2035.",
+ ["It stays fixed at the 2021 rate of 0.030000, because a flat price meets the same anchor every year.",
+  "It rises with the field's cumulative production, since the anchors are read on lifetime barrels rather than on the calendar.",
+  "It falls only after 2030, when the 50 anchor escalates past 80 and the royalty switches off."],
+ "A flat price is a falling royalty; at 60 USD the royalty is gone by 2035 because the 50 anchor has escalated past it, and only the 0.100000 ceiling at 200 holds in every year.")
+
+q(2,
+ "AKATA's NPV moves from 43223505.88 in shallow water to 141623594.88 in deep offshore under the conservative reading. Which two rates did the terrain string change?",
+ "The production royalty rate, 0.125000 to 0.050000 on oil, and the HCT rate, 0.300000 to zero under the conservative reading.",
+ ["The production royalty rate and the CIT rate, since CIT under the PIA is set by terrain and falls offshore.",
+  "The production royalty rate and the development levy rate, which the 2025 framework sets lower for deep water.",
+  "The price royalty rate and the HCT rate, because the price royalty anchors are set per terrain and deep offshore has the highest."],
+ "The aggressive reading keeps the HCT rate at 0.300000 and reports 61725382.46 with the same 59501441.00 of royalties; CIT stays 30 in every published case.")
+
+q(0,
+ "A reader checks every rate on AKATA under the PIA against the published tables, finds each one right, and reports 61725382.46 where 141623594.88 is the right answer. What went wrong?",
+ "One string, the deep offshore HCT reading, was read the other way; the strings are where the marks are lost, and no rate the reader typed was wrong.",
+ ["The reader used the 2021 price royalty anchors, which overstate the royalty and pull the NPV down by the difference.",
+  "The reader ran the ledger on the nominal basis rather than the real one, and the 3 percent inflation accounts for the gap.",
+  "The reader forgot the production allowance of 5500000.00 a year, which over the life is the difference between the two figures."],
+ "A fiscal ledger is worked from the outside in: regime, framework, terrain, then the bases; every rate can be right and the headline still wrong.")
+
+q(1,
+ "AKATA as a new lease with prior cumulative 0 and as a new lease with prior cumulative 96000000 print identical 2029 rows, allowance 17600000.00 on 2200000.00 eligible bbl with the cap flag false. How does a reader tell the two runs apart?",
+ "Only from the totals: the allowance is 77440000.00 over the life in one and 32000000.00 in the other, because the cap bites in later years.",
+ ["From the 2029 cap flag, which reads true on the prior-production run because the cap is tested on the prior barrels before the year begins.",
+  "From the 2029 HCT, which is lower on the prior-production run because the allowance is prorated by the barrels left under the cap.",
+  "They cannot be told apart at all, because the engine reports the allowance only for the first year and the totals are both 77440000.00."],
+ "HCT is 61048493.72 against 74680493.72 and NPV 56241834.89 against 46513356.33; a converted lease earns 5500000.00 in 2029 and 24200000.00 over the life.")
+
+q(3,
+ "On AKATA's 2029 row under the PIA the CIT assessable profit is 134762247.64 and the chargeable profit 92762247.64. What is the 42000000.00 between them?",
+ "The capital allowance, a fifth of the 210000000.00 capex over pia_capex_recovery_years 5.",
+ ["The production allowance of 5500000.00 plus the CPR deferral, which together reduce the CIT base before the rate is applied.",
+  "The two-thirds restriction, which caps the chargeable profit at two thirds of the assessable one in every year.",
+  "The HCT of 25422778.65 and the levy of 5390489.91, deducted from the CIT base together with the NDDC of 720000.00 because CIT is charged after them."],
+ "CIT at 30 percent of 92762247.64 is 27828674.29; the production allowance never reaches CIT, and the restriction only acts where the allowance is large against a thin profit.")
+
+q(0,
+ "AKATA's CPR cap binds in 2033, deferring 14561618.62, and the deferral clears in 2034. What would the same deferral have been if the ledger had ended in 2033?",
+ "A forfeiture: a deferred cost does not become a loss and does not survive cessation, so it would be reported as CPR forfeited and never claimed.",
+ ["A tax loss of 14561618.62 banked in hct_loss_carryforward and reported as tax losses unused at cessation.",
+  "A refund, because a cap that binds in the final year is settled against the taxes already paid in earlier years.",
+  "A claim in the final year, since the engine lifts the cap in the last row so that nothing is left on the table."],
+ "cpr_forfeiture defers 8000000.00 with no later year and ends with CPR forfeited at cessation 8000000.00; pia_cpr_carry_two_years forfeits 66000000.00 after three binding years.")
+
+q(2,
+ "The pre-submission checklist has a row for the final net cash flow. What does passing it look like?",
+ "The sign has been read: a negative final flow is where a null IRR and its status come from, and where a rate that is named still has to be read with the profile.",
+ ["The final flow equals the total_abandonment_cost reported in the KPI line, which confirms that the outflow was charged in full and in the year the funding mode names.",
+  "The final flow matches the cumulative cash flow, which confirms that no row was dropped.",
+  "The final flow has been discounted at the applied rate and added to the profile point at 6.8 percent, which must then equal the headline."],
+ "With the limit off a losing tail stays and hands the IRR a terminal negative; AKATA with a lump sum in 2035 ends on -29598201.95 and reports IRR null.")
+
+q(1,
+ "The engine holds both readings of deep offshore HCT, 141623594.88 and 61725382.46 on AKATA. Which does it choose?",
+ "Neither: the choice belongs to counsel, and a ledger that reports one without the other has taken a legal position without saying so.",
+ ["The conservative one, which the course records as conservative_zero and which is a finding of the extraction rather than a default.",
+  "The aggressive one, because the engine prefers the reading that collects more tax when the law is unsettled.",
+  "The one that agrees with the terrain string, since deep offshore under the 2025 framework carries a fixed rate of 0.300000 in the table."],
+ "The engine models one reading of the law at a time; conservative_zero is a default somebody chose, not a finding.")
+
+q(0,
+ "A reader builds a distribution of AKATA's NPV by rerunning the ledger across many price paths. What does the distribution inherit?",
+ "Every convention the ledger carries: basis, discounting convention, framework, terrain and reading, since the engine models one price path, one schedule and one working interest at a time.",
+ ["Nothing but the price range, because a probabilistic layer strips the fiscal conventions out of the runs it aggregates and reports a distribution that is free of convention, which is the whole point of building one.",
+  "The IRR's choice of root, which becomes a distribution of its own once Newton starts from 10 percent on every path, and which then replaces the NPV as the ranking measure because a rate needs no discount rate.",
+  "A breakeven price, which the engine reports for each path and averages into the headline."],
+ "Ranges belong to the sweeps and to a probabilistic layer this course does not own; the price sweep from 82 to 120 moves NPV less than the terrain string does.")
+
+q(3,
+ "A buyer of AKATA asks what its unused loss pool, its forfeited CPR balance and its unclaimed depreciation are worth. What does the engine answer?",
+ "A memo line or silence: the engine stops at the last row, and the memo line is not in the NPV.",
+ ["Their face value discounted at the applied rate, added to the NPV as a terminal value.",
+  "The tax they would have saved at the marginal rate, which the KPI block reports as a deferred tax asset.",
+  "The unclaimed depreciation only, which the ten-year default leaves unclaimed and reports as a residual asset at cessation."],
+ "AKATA's ten-year default straight line claims 174000000.00 of 255000000.00 capex in seven years, and the rest is neither banked, forfeited nor reported.")
+
+q(1,
+ "The same AKATA rows produced 72534830.66, 43223505.88, 141623594.88 and 61725382.46 without a barrel or a price changing. What changed between the four?",
+ "The regime, the terrain string and the reading of the deep offshore HCT rule, and each figure is right for its question.",
+ ["The discount rate, swept across the profile from 0 to 20 percent, with the four figures read at four of its points.",
+  "The basis and the convention, since nominal against real and end-year against mid-year give four combinations.",
+  "The working interest, stepped from 100 percent down through the published shares, with the PIA take invariant at 75.5752 percent across them."],
+ "72534830.66 is JV terms, 43223505.88 the PIA in shallow water, 141623594.88 deep offshore conservative and 61725382.46 deep offshore aggressive; a number without its convention is not a number.")
+
+q(2,
+ "The ledger prices its levers in one currency. On AKATA under the PIA, what is a CPR cap of 40 percent worth?",
+ "The distance from 43223505.88 to -1723561.25: the cap is a word in a document and it moves NPV further than the oil price sweep from 82 to 120 does.",
+ ["The distance from 43223505.88 to 21611752.94, the same halving that a 50 percent working interest produces, since a cap on costs and a share of the field scale the ledger alike.",
+  "Nothing on AKATA, because a cap of 40 percent of costs is above the costs claimed in every year, just as the worked example swept from 30 to 100 percent keeps 242500000.00 claimed at every setting.",
+  "The distance from 43223505.88 to 37060198.23, the same move as taking the field onshore."],
+ "At 40 percent HCT rises from 77020493.72 to 107354738.83 and CIT from 85840666.18 to 117121931.63; the cap is a tax on the decline.")
+
+emit(Q, '/root/wt-ec7-recut/tools/course-banks/cashflow/advanced/ec1a_m06.json', expect_n=15)
+finish()

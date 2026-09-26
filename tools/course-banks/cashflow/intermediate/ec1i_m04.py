@@ -1,0 +1,131 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# EC1 cashflow, intermediate tier, The Internal Rate of Return. Reconstructed from the served rows (the applied
+# migrations replayed on a local scratch database) with the EC7 PIA re-cut applied;
+# written by tools/course-waves/cashflow/pia-recut/build.py. Edit here, then re-run it.
+
+q(2,
+ "AKATA reports NPV 72534830.66 end-year and 70188970.32 mid-year on the real basis, and 69159247.46 mid-year on the nominal basis. What does the IRR read across those three runs?",
+ "29.2361 percent in every one of them.",
+ ["29.2361 percent end-year, and a lower root under mid-year, because the half-year shift discounts every receipt harder and the curve crosses zero sooner.",
+  "29.2361 percent on the nominal basis and 6.796117 percent on the real basis, since the real run discounts at the applied real rate.",
+  "Three roots, one per NPV."],
+ "The IRR is solved from the nominal flow vector alone, and neither the basis, the convention nor the discount rate enters that vector.")
+
+q(0,
+ "AKATA's NPV falls from 72534830.66 at 100 percent working interest to 18133707.67 at 25 percent, and the IRR stays at 29.2361 percent. Why?",
+ "Scaling every entry of a vector by one factor scales its NPV at every rate and leaves the zero where it was.",
+ ["The IRR is solved on the gross revenue rows, which carry no capex, so no working interest can ever reach the root at all.",
+  "The engine solves the root on the discounted column, and the applied real rate of 6.796117 percent is the same in both of those runs.",
+  "The engine solves the IRR before the working interest is applied in the cascade."],
+ "The NPV is a reading of size and the IRR reports none of it: 18133707.67 and 72534830.66 sit under one root, and the take holds at 66.1723 percent throughout.")
+
+q(3,
+ "loss_making, [-1000, 500, 400], reports an IRR of -6.9926 percent. How should that be read?",
+ "As a legitimate root: the rate at which a shrinking discount makes the receipts worth exactly the outlay.",
+ ["As a failed Newton estimate that should have returned null, since the NPV is -100.00 at 0 percent and negative at every positive rate, so nothing brackets a root.",
+  "As a sign error in the report, because the vector never recovers its 1000 of outlay and a return on it cannot carry a minus sign.",
+  "As the rate at which the undiscounted total of the vector reaches zero, which is the payback reading rather than a root of the curve."],
+ "The sampled curve reads 49.382716 at -10 percent and -100.000000 at 0 percent, so the crossing had to lie between them before any finder ran.")
+
+q(1,
+ "AKATA is on the real basis, so its discounted rows are the real flows 30821366.21 and 60767504.07. Which rate is its IRR of 29.2361 percent built to be compared against?",
+ "The nominal 10 percent, because the IRR zeroes the vector printed in money of the day, not the real flows.",
+ ["The applied real rate of 6.796117 percent, because that is the rate the real flows are discounted at and the IRR is a root of the same discounted column.",
+  "Either rate, since the two bases give the same NPV of 72534830.66 end-year and therefore the same root.",
+  "The inflation rate of 3 percent, since the Fisher relation joins the two rates through it."],
+ "At the breakeven price of 64.916777 USD/bbl, where NPV is zero, the IRR reads 10.0002 percent: the nominal rate, which is the proof of which comparison it was built for.")
+
+q(3,
+ "late_payout, [-1000, 0, 0, 0, 0, 2500], reports a root of 20.1124 percent and prints the NPV there as -0.000000. What does that residual say?",
+ "The finder stops at a tolerance, not at an exact zero, and the rounded residual landed on the negative side.",
+ ["Newton overshot on the flat part of the curve and the bisection fallback ran instead, which always leaves its residual on the negative side of zero.",
+  "The root actually sits between the sampled 4.693930 at 20 percent and -180.800000 at 25 percent, and the engine reports the midpoint of that bracket.",
+  "The engine prints the NPV at every reported root as a negative number, because the root is approached from above by convention."],
+ "Every reported root carries 0.000000 or -0.000000: conventional_five_year at 15.2382 percent and tiny_return at 0.1000 percent print the same kind of residual.")
+
+q(0,
+ "Before engines 3.10.0 the finder's method statement said Newton falls back to bisection when unconverged and returns null when no sign change brackets a root. What does bisection need before it can run?",
+ "Two rates with NPVs of opposite sign.",
+ ["Every root of the curve, so that it can halve the interval between the two nearest and confirm that Newton reached the right one.",
+  "A vector with more than one sign change, on which it picks the root nearest zero on the positive side as the hurdle-rate answer.",
+  "A Newton estimate to refine."],
+ "two_roots_minus73_and_173 reads -6500000.000000 at -75 percent and 26500000.000000 at -50 percent, and that pair is a bracket; a curve that never changes sign gives it nothing.")
+
+q(2,
+ "no_real_root, [-1, 3, -3], changes sign twice, and its sampled curve reads -271.000000 at -90 percent, -1.000000 at 0, -0.250000 at 100 and -0.333333 at 200. Why is its IRR null?",
+ "The curve rises toward zero, touches nothing and falls back, so no sign change ever gives bisection a bracket.",
+ ["Two sign changes always mean two roots, so this vector has two and the engine returns null with irrStatus multiple-roots.",
+  "Newton stepped from 10 percent into the region below -90 percent where the last entry dominates, and an unconverged Newton returns null.",
+  "The total at 0 percent is -1.00, and the finder is not run at all on a vector whose undiscounted total never returns its outlay."],
+ "Null here means no rate zeroes the vector, not that the vector is bad or good: it says nothing more than that the search found no crossing.")
+
+q(1,
+ "AKATA at 30 USD/bbl reports IRR null beside an NPV of -169873348.04. AKATA valued from 2030 with 2029 sunk reports IRR null beside an NPV of 206819768.67. What does the engine give a reader to tell those two nulls apart, and what does it still not give?",
+ "An irrStatus naming the branch that failed, which is not a verdict: the NPV beside each null is still the only thing saying one field is deeply uneconomic and the other worth 206819768.67.",
+ ["Nothing at all: both return a bare null, and only the NPV beside each one has ever distinguished them.",
+  "A signed null, positive for the sunk run and negative for the price run, carrying the verdict without the NPV.",
+  "An irrStatus that names the branch and also grades the field, so a reader can rank the two runs from the status alone and never has to look at the NPV printed beside either one of them, whatever its sign."],
+ "Until engines 3.10.0 the null carried no status and the shapes were indistinguishable; the status names no-sign-change, no-root, multiple-roots or above-clamp, and none of the four says whether the field is worth anything.")
+
+q(0,
+ "AKATA reports IRR null with a 200000000 abandonment in 2035, and IRR null with a 60000000 abandonment as well. The two nulls have opposite causes. What are they?",
+ "With 200000000 the NPV is negative at every sampled rate, -58362170.82 at 0 percent, so nothing brackets a crossing; with 60000000 it is 81637829.18 at 0 percent and -78880508.48 at 100, so the curve crosses twice and the engine will not pick one of them.",
+ ["They share one cause: a terminal negative flow always leaves the engine without a bracket, whatever the size of the abandonment.",
+  "Newton overshoots on the steeper curve of the larger abandonment, while the 60000000 root of 23.2570 percent sits above the top of the band.",
+  "The larger abandonment exceeds the 255000000.00 of capex it is set against, and the smaller leaves a last flow of -29598201.95 below the 2034 flow."],
+ "Until engines 3.10.0 the 60000000 run reported 23.2570 percent, one crossing of two; the engine now names a rate only where exactly one rate in the band from -99 to 1000 percent zeroes the NPV.")
+
+q(3,
+ "two_roots_2_and_6, [-100, 208, -108.12], has an NPV of -0.120000 at 0 percent, 0.036982 at 4 and -0.264463 at 10, and is zero at 2 percent and at 6. What does the engine return?",
+ "Null, with irrStatus multiple-roots and the crossings listed as 2.0000 and 6.0000 percent, because two rates in the band zero the NPV and it names a rate only where one does.",
+ ["6.0000 percent, the crossing Newton reaches climbing from its start at 10 percent, with no note that a second one exists.",
+  "2.0000 percent, the crossing nearest zero on the positive side, which is the hurdle-rate region a decision is made in.",
+  "Both rates, reported as a range running from 2.0000 to 6.0000 percent, since either one of them zeroes the NPV."],
+ "Until engines 3.10.0 it reported 6.0000 percent where the oracle read 2.0000 and the golden recorded a disagreement; the golden records none now.")
+
+q(2,
+ "A reader working from a pre-3.10.0 report takes three_roots_0_7_33's IRR of 7.3509 percent to a hurdle of 5 percent and approves. What went wrong?",
+ "The NPV at 5 percent is -0.028075, negative; a hurdle comparison needs the sign of the curve at the hurdle, which is the NPV, not a root.",
+ ["The reader should have used the oracle's 0.0000 percent, which is below 5, and rejected the vector on the smaller root.",
+  "Nothing, since 7.3509 sits above the hurdle and the curve reads 0.081930 at 30 percent.",
+  "The engine should have reported 33, the largest root, and the reader should compare that with the hurdle instead."],
+ "On two_roots_2_and_6 the same reasoning happens to hold because the NPV at 5 percent is 0.027211, positive; the reasoning is wrong either way, and only the sign at the hurdle is an answer.")
+
+q(1,
+ "Why must a vector whose last entry is negative cross zero an even number of times, as two_roots_2_and_6 does?",
+ "At very negative rates the factor on the last entry is enormous and drags the NPV down, -8832.000000 at -90 percent; at very high rates the NPV tends to the first entry, -100; negative at both ends and positive between means an even count of crossings.",
+ ["Because the count of roots equals the count of sign changes in the vector, and a terminal negative after a positive middle makes two.",
+  "Because Newton and bisection each find one root, and the engine runs both on a terminal-negative vector.",
+  "Because the terminal negative is discounted less than the outlay, making the curve symmetric about its peak at 4 percent."],
+ "no_real_root ends negative too and crosses zero times, which is also even: the argument fixes the parity of the count, not the count.")
+
+q(0,
+ "jv_analytic, [-12500000, 37500000], reports IRR 200.0000 percent and NPV 21590909.09 at 10 percent. AKATA reports 29.2361 percent and 72534830.66 at the same nominal 10 percent. A reader sorts the two by IRR. What has been measured?",
+ "How steeply each curve falls through zero, not how high it stands at the chosen rate; NPV ranks AKATA ahead.",
+ ["The same thing either way, because both numbers are readings of one curve and the rankings must agree whenever the discount rate is the same on both sides.",
+  "Value per unit of capital, since 200.0000 percent reflects a 50000000.00 capex recovered in a single year against AKATA's 255000000.00.",
+  "The payback of each field, which is why jv_analytic at 1.333333 years ranks first."],
+ "IRR refuses to report scale: 200.0000 percent sits beside 21590909.09 and 29.2361 percent beside 72534830.66, and the steeper curve is the smaller field.")
+
+q(3,
+ "On the published multiyear_jv_real sweep the nominal discount rate runs from 0 to 20 percent and NPV falls from 148905488.72 to 50852201.45. What does the IRR read at the 20 percent point?",
+ "47.9020 percent, as at every other point.",
+ ["A root below 47.9020 percent, because the sweep at 20 percent applies a real rate of 16.504854 percent and the curve is read on harder-discounted flows.",
+  "Null, since at 20 percent nominal the NPV has fallen to a third of its 0 percent value and the sampled curve no longer brackets a positive root.",
+  "16.504854 percent, the real rate."],
+ "The discount rate is the yardstick brought to the curve; the IRR is the property of the curve, and the sweep never touches the rows the curve is built from.")
+
+q(2,
+ "A manager asks whether AKATA survives a discount rate of 15 percent. Which single number answers, and what does the IRR of 29.2361 percent contribute?",
+ "The NPV at a nominal 15 percent, read from the discount rate sweep; the IRR only says how far the rate can rise before that NPV reaches zero.",
+ ["The NPV profile point at 15 percent, 33900281.71, since the profile is the sensitivity to the rate and 15 is one of its sampled points on the real flows.",
+  "The IRR alone, because 29.2361 percent is the field's return and any rate below it is survived by definition.",
+  "The discounted payback at 15 percent, since a rate the field survives is one at which it still pays back inside its life."],
+ "The profile at 15 is on the real flows, where 15 is not a nominal 15; the sweep row is the reading at the rate the manager named, and the IRR answers how wrong the rate could be, not what the value is.")
+
+emit(Q, '/root/wt-ec7-recut/tools/course-banks/cashflow/intermediate/ec1i_m04.json', expect_n=15)
+finish()

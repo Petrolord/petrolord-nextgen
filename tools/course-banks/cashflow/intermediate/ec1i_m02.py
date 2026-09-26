@@ -1,0 +1,131 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# EC1 cashflow, intermediate tier, Real and Nominal. Reconstructed from the served rows (the applied
+# migrations replayed on a local scratch database) with the EC7 PIA re-cut applied;
+# written by tools/course-waves/cashflow/pia-recut/build.py. Edit here, then re-run it.
+
+q(1,
+ "AKATA is configured with inflation of 3 percent, an oil escalator of 2, a gas escalator of 2, an opex escalator of 3 and a capex escalator of 0. Which of those five rates write the ledger rows?",
+ "The four escalators. Inflation touches no row; it deflates the real_net_cash_flow column and derives the applied real rate.",
+ ["All five, with inflation raising the revenue rows on top of the price escalators.",
+  "Inflation and the opex escalator, which the engine adds together because both are 3 percent and both act on costs.",
+  "Only inflation, since the escalators are display settings that restate prices the inflation rate has already grown."],
+ "Oil goes from 82.000000 to 83.640000 in 2030 by the escalator alone, and the nominal total of 141637829.18 does not move when inflation is swept from 0 to 8 percent.")
+
+q(3,
+ "AKATA's 2033 net cash flow is 44874457.77 nominal and 39870374.51 real. What separates the two figures?",
+ "Four years of deflation at 3 percent, counted from the 2029 base year.",
+ ["Three years of deflation, because the first row after the base year is not deflated either.",
+  "The opex escalator of 3 percent compounding over the horizon and taken back out of the row.",
+  "One year of the gap between the nominal 10 percent and the real 6.796117 percent, applied to the row."],
+ "The 2029 row is the base year and is not deflated, minus 121123680.00 in both columns; 2030 is divided by one year of 3 percent, 2033 by four.")
+
+q(0,
+ "Sweeping AKATA's inflation from 0 to 8 percent with the escalators as configured, the nominal total net cash flow stays 141637829.18 while the real total falls to 83912631.29. What does the sweep prove?",
+ "With every escalator set, inflation touches no row; only the deflator grew.",
+ ["Above 3 percent the inflation rate overrides the escalators, and the real column records the rows it would have written.",
+  "The nominal total is fixed because the engine reports it before inflation is applied, and the real total is the ledger after.",
+  "The real total falls because the engine reduces the opex escalator by the inflation rate to keep costs in real terms."],
+ "Set inflation and every escalator to zero together and NPV becomes 65055328.97; set only inflation to zero and NPV stays 72534830.66.")
+
+q(2,
+ "In escalator_defaults_to_inflation an oil price of 100.000000 becomes 105.000000 at 5 percent inflation with no oil escalator given, and opex of 10000000.00 becomes 10500000.00. What is the rule?",
+ "When an escalator is unset the engine falls back to the inflation rate for oil and for opex, and to zero for capex; setting the escalator cuts the link.",
+ ["Inflation always adds to the escalators, so AKATA's oil price grows at 2 plus 3 percent a year.",
+  "The fallback applies to every cost line, so an unset capex escalator also grows capex at the inflation rate.",
+  "An unset escalator takes the value of the opex escalator, which in this case happens to equal the inflation rate."],
+ "AKATA's escalators are all set explicitly, so its 3 percent inflation only deflates; the default decides the rows only where a key is left empty.")
+
+q(2,
+ "With a nominal rate of 10 percent and inflation of 8, the engine reports an applied real rate of 1.851852 percent. What is the relation, and what would a subtraction have done?",
+ "One plus the nominal over one plus the inflation, less one; a subtraction would have put the real rate higher.",
+ ["The subtraction is the exact relation, and 1.851852 is the engine's display rounding of the difference of the two rates.",
+  "The real rate is the nominal less inflation less the opex escalator of 3, since costs inflate at their own rate.",
+  "A subtraction would have put the real rate lower, because compounding at 8 percent removes more than the plain difference."],
+ "The gap grows with inflation and always in one direction: subtraction overstates the real rate, and an overstated rate understates every discounted row.")
+
+q(0,
+ "Why does AKATA's NPV read 72534830.66 at every inflation in the sweep, from 0 to 8 percent?",
+ "Deflating the flows and deflating the rate cancel exactly, because the real rate was built by dividing the inflation out of the nominal rate.",
+ ["The engine reports NPV on the nominal basis whatever basis is configured, so the deflator never reaches the headline.",
+  "Inflation raises the revenue rows by exactly the amount the deflator later removes from them.",
+  "The sweep resets the escalators to the inflation rate in each run, so the rows grow to compensate for the harsher deflator."],
+ "The 2033 flow of 44874457.77 deflates to 39870374.51 and discounts at 6.796117 percent to 30649858.46; at 10 percent on the nominal flow it is 30649858.46.")
+
+q(3,
+ "A reader deflates AKATA's flows correctly and then discounts them at a subtracted real rate. What comes out?",
+ "An NPV below 72534830.66 with no row to blame, because an overstated rate understates every discounted row.",
+ ["An NPV above 72534830.66, because a subtracted rate is lower than the Fisher rate and discounts less.",
+  "The same 72534830.66, because the deflator and the rate cancel whatever real rate is used.",
+  "The nominal 10 percent profile point of 55805775.02, since that is what the real flows give at a subtracted rate."],
+ "Check the applied real rate the engine prints, 6.796117 percent on AKATA; a hand calculation at any other rate will not reconcile.")
+
+q(1,
+ "Is there a configuration key for a real discount rate?",
+ "No. discount_rate_pct is nominal and the real rate is always derived from it and from inflation_rate_pct.",
+ ["Yes, real_discount_rate_pct, which AKATA sets to 6.796117 and the published real-basis cases to the same value.",
+  "The single discount_rate_pct key is read as real whenever present_value_basis is real and as nominal otherwise.",
+  "There is no key because the escalators enter the conversion, so fields with different escalators carry different applied rates."],
+ "The applied real rate is 6.796117 percent on AKATA, multiyear_pia_real, multiyear_jv_real and pia_loss_relief whatever their prices do, because only the inflation rate enters it.")
+
+q(0,
+ "Under mid-year discounting AKATA's nominal basis gives 69159247.46 and its real basis 70188970.32, after agreeing at 72534830.66 under end-year. Why do the bases part?",
+ "The half-year shift divides by the square root of one plus the applied rate, and the applied rates differ, so the shift is smaller on the real basis.",
+ ["The real basis under mid-year deflates the 2029 row as well, which the end-year run had left whole.",
+  "Mid-year shifts the real flows by half a year of inflation on top of half a year of the rate, and the two shifts compound.",
+  "The half-year shift is taken at the inflation rate of 3 percent rather than at the applied rate on each basis."],
+ "Basis does not move NPV under end-year; under mid-year it does, by about a million USD on AKATA.")
+
+q(3,
+ "A field is presented with a total net cash flow of 117362408.71 from a real basis run, beside a competitor's 141637829.18 from a nominal run of the same rows. What should a reader conclude?",
+ "It is one field. The undiscounted total is the one headline the basis changes, so it must never travel without its basis attached.",
+ ["The second field makes more money, since 141637829.18 exceeds 117362408.71 by the price escalation of 2 percent a year that the first field does not earn.",
+  "The first field is the better investment, because its total is stated in 2029 purchasing power while the second is padded with inflated money of the day.",
+  "The two are different fields whose NPVs would agree, since 72534830.66 is reported on both bases."],
+ "141637829.18 is the cash that will pass through the account in the money of each year; 117362408.71 is what that would buy in 2029.")
+
+q(1,
+ "On AKATA's real basis run, which of the printed totals are still in money of the day?",
+ "Revenue 857602518.80, capex 255000000.00, opex 183899092.34 and tax 148425219.46; only the net cash flow total of 117362408.71 is real.",
+ ["None of them; a real basis run restates every total in 2029 purchasing power, and the net cash flow total is simply the last one printed.",
+  "Only revenue 857602518.80, because prices carry the escalator and the cost totals are deflated with the net cash flow.",
+  "The totals are all real and the rows are all nominal, which is the meaning of a real basis run."],
+ "The basis refuses to change the ledger; only real_net_cash_flow and the discounted column respond to it.")
+
+q(2,
+ "In valuation_year_forward the 2030 row of minus 12500000.00 is reported as minus 13750000.00 in the discounted column. What happened to it?",
+ "Valued in 2031, the 2030 flow is a year in the past and compounds forward by 1.1; NPV moves from 21590909.09 to 23750000.00.",
+ ["It was flagged sunk, and the discounted column shows the flow with a year of interest charged against it.",
+  "It was discounted one more year, because a later valuation year adds an exponent to every row.",
+  "The fiscal cascade was rerun from 2031, and the larger negative is the 2030 capex with its depreciation of 5000000.00 removed."],
+ "The rows are unchanged, total net cash flow stays 25000000.00 and the fiscal columns, royalty 20000000.00 and tax 32500000.00, are identical; only the date of the statement moved.")
+
+q(3,
+ "AKATA valued in 2030 with nothing sunk reports 77464382.26 against 72534830.66 valued in 2029. A reader reports that the project improved. What is wrong?",
+ "A change of date was read as a change of prospects: 77464382.26 is 72534830.66 one year older at 6.796117 percent, with IRR, payback and total unmoved.",
+ ["Nothing; the 2029 capex of 210000000.00 has already been paid, and a field valued after its largest spend is worth more than the same field valued before it.",
+  "The reader should instead have grown the figure at the nominal 10.000000 percent, since the discount rate the owner stated is nominal and the growth follows the stated rate.",
+  "The NPV should have fallen, because a later valuation year discounts every remaining row by one more year."],
+ "Forgetting the capex is a different setting, treat_prior_as_sunk, and it produces 206819768.67, which is nowhere near 77464382.26.")
+
+q(0,
+ "AKATA valued from 2030 with prior years sunk reports an NPV of 206819768.67, sunk_net_cash_flow of minus 121123680.00 and a null IRR. Why is the IRR null?",
+ "With 2029 written off, nothing negative is left in the valued vector to bracket a root.",
+ ["The IRR exceeds the 200.0000 percent that the published cases report as the finder's upper bound, so it is reported as null.",
+  "Newton starts from 10 percent and diverges when the first flow of the vector is positive, and the fallback bisection cannot recover it.",
+  "The engine returns null whenever the NPV exceeds the total net cash flow."],
+ "The published valuation_year_sunk case behaves the same way: NPV 37500000.00, IRR null, DPI null, payback Year 0.")
+
+q(1,
+ "treat_prior_as_sunk is set on AKATA with valuation_year left at 2029. What does the engine report?",
+ "Rows flagged sunk 0, sunk_net_cash_flow 0.00 and NPV 72534830.66, because sunk refuses to act without a later valuation year.",
+ ["The 2029 capex year is flagged and the NPV becomes 206819768.67, since the flag marks the first row whatever the valuation year.",
+  "An error, because no row precedes the valuation year and the flag has nothing to mark.",
+  "Both capex years are flagged and total capex reads 0.00, because sunk applies to capital spend rather than to dates."],
+ "Sunk is a decision about which question is being asked, and with the valuation year at 2029 the question is still whether to start.")
+
+emit(Q, '/root/wt-ec7-recut/tools/course-banks/cashflow/intermediate/ec1i_m02.json', expect_n=15)
+finish()

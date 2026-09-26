@@ -1,0 +1,347 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# EC1 cashflow, intermediate tier, final exam. Reconstructed from the served rows (the applied
+# migrations replayed on a local scratch database) with the EC7 PIA re-cut applied;
+# written by tools/course-waves/cashflow/pia-recut/build.py. Edit here, then re-run it.
+
+q(2,
+ "AKATA's 2033 nominal flow of 44874457.77 reaches 30649858.46 in the discounted column on both bases. By which two routes?",
+ "At 10.000000 percent on the nominal flow, or deflated over four years of 3 percent to 39870374.51 and then discounted at 6.796117 percent.",
+ ["At 10.000000 percent on the nominal flow, or at the same 10.000000 percent on the real flow of 39870374.51, since the rate is the configured one on either basis.",
+  "At 6.796117 percent on the nominal flow, or at 10.000000 percent on the deflated flow, because the harsher rate must go with the smaller number to land on one value.",
+  "At 10.000000 percent on the nominal flow, or at the nominal less the inflation on the real flow, which is what the Fisher relation reduces to over four years."],
+ "Deflating the flow and deflating the rate multiply back to one factor, which is why the two bases agree at 72534830.66 end-year.")
+
+q(0,
+ "Under mid-year discounting on the nominal basis AKATA's 2029 row reads -115486897.55 in the discounted column instead of -121123680.00. What happened to the valuation year row?",
+ "It was shifted by half a year like every other row, so the capex is divided by the square root of 1.1 even though it sits in the valuation year.",
+ ["It was deflated by half a year of the 3 percent inflation, because mid-year timing moves the base date for the real column as well.",
+  "The 45000000.00 of 2030 capex was netted into it, since mid-year timing brings the following year's spend forward by half a year.",
+  "Nothing was discounted; the row is printed net of its 2029 depreciation of 21000000.00 under mid-year, and the exponent is still zero in the valuation year."],
+ "The whole column is scaled by one factor, which is why the mid-year NPV of 69159247.46 sits closer to 72534830.66 than a reader who shifts only the revenue years would compute.")
+
+q(3,
+ "mid_year_discounting reports NPV 20586124.09 against 21590909.09 for its end-year twin, yet DPI 0.431818 and discounted take 82.2761 percent are identical in both. What separates the readings that move from those that hold?",
+ "A sum of present values moves when every row is scaled by one factor; a ratio of two present values scaled by the same factor does not.",
+ ["The DPI and the take are undiscounted readings, so the convention has no exponent to shift in them.",
+  "The mid-year shift applies to the 2031 row only, and the DPI and the take are read on the 2030 row where nothing moved.",
+  "The NPV is evaluated on the real flows and the ratios on the nominal flows, and the convention touches only the real column."],
+ "The same reasoning holds AKATA's discounted payback at 3.961607 years under all four combinations of basis and convention.")
+
+q(1,
+ "A summary table lists two projects at 203250580.21 and 196677221.27. What is a reader entitled to conclude from those two figures?",
+ "Nothing until the conventions are attached: they are one field, multiyear_pia_real, read end-year and mid-year.",
+ ["That the second project is worth less, since NPVs on the same ledger scale are directly comparable whatever their convention.",
+  "That the second project carries the higher discount rate, since a lower NPV on a similar field is the mark of a harsher rate.",
+  "That the two differ by a valuation year, since a shift of one year at 6.796117 percent is about the size of the gap."],
+ "At 5 percent their profiles read 222922734.92 and 217550313.27, and every difference between the two columns is the half-year shift.")
+
+q(1,
+ "AKATA's configuration has discount_rate_pct 10 and inflation_rate_pct 3 and the basis is real. Which rate does the engine apply, and to which column?",
+ "6.796117 percent, derived by Fisher from the two, to real_net_cash_flow; the 10 would be applied to net_cash_flow on the nominal basis.",
+ ["10 percent to real_net_cash_flow, because discount_rate_pct is the rate applied and the basis only selects the column it is applied to.",
+  "3 percent to net_cash_flow to produce the real column, and then 10 percent to the real column, which is two discounts in sequence.",
+  "The nominal rate plus the inflation to net_cash_flow, because a nominal flow carries inflation that the rate must remove."],
+ "Both routes give the same discounted column, 30649858.46 for 2033, and the same NPV of 72534830.66 end-year.")
+
+q(3,
+ "AKATA's 2029 capex of 210000000.00 might have been spent in January or in December. How does the engine time it?",
+ "At one instant, the same for both, fixed by the convention: the end of 2029 under end-year, the middle of the year under mid-year.",
+ ["It reads the month from the capex upload and discounts a December spend by a further eleven twelfths of a year.",
+  "It assumes January for capex and December for revenue, which is why capex is barely discounted and revenue is discounted hard.",
+  "It spreads the 210000000.00 evenly across the year, which is what the mid-year convention computes exactly."],
+ "Every flow in a row arrives at one instant; the convention offers end_year and mid_year and nothing else, and refuses quarterly or split timing.")
+
+q(0,
+ "AKATA's inflation is raised from 3 to 8 percent with the escalators left as configured. Which printed figures move?",
+ "The real total net cash flow, 117362408.71 to 83912631.29, and the applied real rate, 6.796117 to 1.851852 percent; no ledger row and not the NPV.",
+ ["The gross revenue rows, because a higher inflation lifts the applied oil price above 92.345318 in 2035, and the NPV with them.",
+  "The NPV, which falls as the deflator grows, and the real total with it, while the applied real rate stays at 6.796117 percent.",
+  "The nominal total net cash flow, 141637829.18, which is restated in the new money of the day, while the real total holds."],
+ "The escalators write the rows and are set explicitly on AKATA, so inflation only deflates, and the deflated flows at the deflated rate give 72534830.66 every time.")
+
+q(2,
+ "At 5 percent inflation and 10 percent nominal the engine reports an applied real rate of 4.761905 percent. Why not 5?",
+ "The real rate is one plus the nominal over one plus the inflation, less one, which sits below the subtraction, and the shortfall grows with inflation.",
+ ["Because the engine rounds the real rate to six decimals after subtracting, and 4.761905 is the rounded form of the subtraction.",
+  "Because the 2 percent price escalators are netted against the inflation before the subtraction, which lowers the result.",
+  "Because the real rate is the nominal rate deflated over the seven-year life of AKATA, and the deflation compounds."],
+ "At 8 percent inflation the applied rate is 1.851852 percent, further from the subtraction than at 5, and a hand calculation at a subtracted rate will not reconcile with 72534830.66.")
+
+q(3,
+ "In AKATA's price sweep the point at 82 USD/bbl shows a 2030 applied price of 83.640000. What is the sweep moving?",
+ "The flat oil_price_usd_bbl in 2029 money; the 2 percent escalator is applied on top at every point, so no point is a flat price for the life.",
+ ["The 2030 price directly, because the sweep is indexed to first production and the 2029 base price is back-calculated from it.",
+  "The escalator, so that the 2 percent path passes through the sweep price in 2030 and the 2029 price is the same at every point.",
+  "The inflation rate, since on the real basis the price a reader sees is the deflated one and 83.640000 is 82 restated."],
+ "The 2035 applied price at the base point is 92.345318, six years of 2 percent on 82, and a sweep point at 120 escalates the same way.")
+
+q(2,
+ "Valued in 2029, 2030 and 2031 with nothing sunk, AKATA reads 72534830.66, 77464382.26 and 82728951.93. At what rate is the NPV growing, and why that rate?",
+ "At the applied real rate of 6.796117 percent a year, because AKATA is on the real basis and that is the rate its flows are discounted at.",
+ ["At the nominal 10 percent a year, because a valuation year compounds prior flows forward in money of the day.",
+  "At the 3 percent inflation a year, because moving the valuation date restates the same value in later money.",
+  "By the 2029 flow each year, because each step forward removes one more prior year of -121123680.00 from the value."],
+ "The published nominal case grows from 21590909.09 to 23750000.00, one year at 10.000000 percent, because its basis is nominal.")
+
+q(1,
+ "Valued from 2031 with prior years sunk, AKATA reports sunk_net_cash_flow -89377672.80. Its real cumulative through 2030 is -90302313.79. Which figure is the sunk column, and why?",
+ "The nominal cumulative through 2030, -89377672.80, because the sunk column is money of the day like every ledger row.",
+ ["The real cumulative, and the printed -89377672.80 is it compounded forward one year at 6.796117 percent to the 2031 valuation date.",
+  "The nominal cumulative, because the sunk years are discounted at the nominal rate and only the kept years at the real rate.",
+  "Neither: the sunk column is the two years' capex of 255000000.00 net of the depreciation claimed, which happens to sit between the two."],
+ "The sunk flag removes rows from the value metrics and reports what left; it does not deflate them, and the real basis only ever restates the net total.")
+
+q(0,
+ "valuation_year_sunk reports take 58.3333 percent where the same rows valued without the sunk flag report 80.7692. No rate changed. Why did the share move?",
+ "Take is a share of a residual, and the 2030 row left both sides of it: its capex of 50000000.00 left the pre-take value and its royalty of 20000000.00 and tax of 32500000.00 left the government's part.",
+ ["The sunk year's royalty of 20000000.00 is still counted for the government while its revenue of 100000000.00 is not, so the ratio was computed on mismatched years.",
+  "Take on a sunk run is read on the discounted flows, and the discounted take of a single positive row is lower than the undiscounted take of two rows.",
+  "The engine reads take as the tax rate of 50 percent plus the royalty of 20 percent less the sunk share, which lands on 58.3333."],
+ "A take across a sunk boundary is not comparable; a take across a working interest is, since AKATA reports 66.1723 percent at 100 percent interest and at 75, 60, 40 and 25 alike.")
+
+q(0,
+ "AKATA valued in 2032 with nothing sunk reads NPV 88351307.89, IRR 29.2361 percent and payback 3.46 years. Why do the IRR and the payback ignore the valuation date?",
+ "The IRR is a property of the row vector and payback is measured from the first row; only NPV is a value at a date.",
+ ["Because the valuation year only takes effect together with treat_prior_as_sunk, and without the flag every metric reads as at 2029.",
+  "Because both are read on the real flows, and the valuation date moves only the nominal column that NPV is built from.",
+  "Because the engine caches the IRR and payback from the base run and recomputes only NPV when the valuation year changes."],
+ "With the flag set the IRR becomes null and payback reads Year 0, because rows leave the vector; without it nothing leaves and only the date moves.")
+
+q(1,
+ "AKATA's last three discounted rows, 30649858.46, 23167486.48 and 17161022.43, supply most of its 72534830.66. What does that predict for the discount rate sweep?",
+ "A steep fall, because the tail rows are the ones a higher rate reduces most: 48059114.69 at 15 percent nominal and 11736532.11 at 25.",
+ ["A shallow fall, because the tail rows are already small and a higher rate has little left to remove from small rows.",
+  "A rise, because the 2029 row of -121123680.00 is the largest in the ledger and a higher rate would reduce it too.",
+  "No change until the rate passes the IRR of 29.2361 percent, since the NPV of a conventional vector holds its sign to the root."],
+ "From 10 to 15 percent nominal the NPV falls from 72534830.66 to 48059114.69, and the profile from 5 to 10 percent falls from 83023565.60 to 55805775.02, both steep because the tail carries the value.")
+
+q(2,
+ "On multiyear_pia_real the profile point labelled 6.8, the headline at the applied rate, and the engine's own npv() at 6.796117 percent all read 203250580.21. What makes the three agree?",
+ "The applied-rate point is labelled at the rate rounded to two decimals but evaluated at the exact rate, so the point and the headline are one computation.",
+ ["The applied rate of 6.796117 percent rounds to 6.8 with a difference too small to move a field of this size, so the three agree to the cent by luck of scale.",
+  "The profile is evaluated on the nominal flows and the headline on the real ones, and on this case the two bases happen to coincide exactly.",
+  "The headline is copied from the profile point rather than computed, which is why a recomputation by npv() can only ever reproduce it."],
+ "Until engines 3.10.0 the point was evaluated at its label and read 203209583.79, a gap of -40996.42, and the same defect cost -21759.68 on AKATA; the golden records no profile disagreement now.")
+
+q(3,
+ "Before engines 3.10.0, jv_analytic_decision_kpis and multiyear_pia_nominal reported a profile gap of 0.00 at the applied point while AKATA's was -21759.68. Why did those two escape?",
+ "Their basis is nominal, so the applied rate is the nominal 10.000000 percent, already a two-decimal number, and rounding it changes nothing.",
+ ["Their flows are smaller, and the gap scales with the size of the field until it vanishes below the cent.",
+  "Their applied points are computed by the oracle rather than by the engine, and the oracle carries the rate to six decimals.",
+  "Their profiles are sampled at 10 percent, which is a sampled point, while AKATA's 6.796117 lies between samples and is interpolated."],
+ "The rounding only bit when the Fisher rate was not a round number; every case now reads the same at the point and at the headline, because the point is evaluated at the exact applied rate.")
+
+q(3,
+ "AKATA's payback reads 3.46 years. In which calendar year does the crossing sit, and from where is the duration measured?",
+ "During 2032, measured from the start of the first row, 2029: the nominal running total is -24909427.73 at the end of 2031 and 29050104.71 at the end of 2032.",
+ ["During 2033, measured from first production in 2030, because the sanction year carries no revenue and is not counted.",
+  "During 2032, measured from the valuation year, so on a run valued from 2030 the same crossing would be reported a year shorter.",
+  "During 2033, measured from the end of the capex years, because payback counts only the years after the last spend of 45000000.00."],
+ "The crossing is a duration and not a date; on a later-valued run the reported 3.46 years still lands in 2032 because it is measured from the first row.")
+
+q(0,
+ "AKATA's 2033, 2034 and 2035 rows, 44874457.77, 37311468.65 and 30401798.05, are deleted. What happens to its payback_years of 3.461632?",
+ "Nothing; payback sees nothing after the crossing during 2032, and a field with those years removed pays back at exactly the same time.",
+ ["It lengthens, because the total net cash flow falls from 141637829.18 and the crossing is a fraction of the total recovered.",
+  "It becomes Beyond project life, because the ledger now ends before the discounted crossing at 3.961607 years.",
+  "It becomes null, because payback needs at least one row after the crossing to interpolate against."],
+ "The blindness is shared by discounted payback, which reads 3.961607 years and also crosses during 2032; both refuse to see the tail.")
+
+q(1,
+ "In the discount rate sweep AKATA's PV of capex runs from 255000000.00 at 0 percent to 246000000.00 at 25, while DPI falls from 0.555442 to 0.047709. Why does the ratio fall so much faster than its denominator?",
+ "The numerator is the NPV, which loses its tail rows to the rate, 141637829.18 to 11736532.11, while the capex sits in the first two years where the factor is close to one.",
+ ["The denominator is held at the base case 250909090.91 for the ratio while only the numerator is reswept, so the printed PV of capex is a report of the sweep and not the figure the ratio used.",
+  "The DPI is the NPV over the undiscounted capex of 255000000.00 at every point, so the denominator does not move at all in the ratio.",
+  "The discounted take rises from 66.1723 to 94.1819 percent across the sweep, and the DPI is the contractor's remainder of that share."],
+ "At 10 percent nominal the pair is 72534830.66 over 250909090.91, 0.289088, and only the 2030 spend of 45000000.00 is discounted at all.")
+
+q(2,
+ "single_year_positive and valuation_year_sunk both report DPI null. What do the two cases share?",
+ "A PV of capex of 0.00: one has no capex, and the other's only capex year was declared sunk, so there is nothing to divide by.",
+ ["A negative NPV, and the engine suppresses the ratio when the numerator is below zero rather than printing a negative index that a reader might rank on.",
+  "A single row, and a ratio needs at least two rows so that one can be discounted against the other.",
+  "A null IRR, and the DPI is derived from the IRR so that one null propagates to the other."],
+ "zero_rates_capex_only shows the negative case is printed, -1.381818; single_year_positive reports NPV 35000000.00 and valuation_year_sunk 37500000.00, both positive.")
+
+q(2,
+ "single_year_positive reports take 61.1111 percent and discounted take 61.1111. AKATA reports 66.1723 and 76.1610. Why do the two takes agree on one case and part on the other?",
+ "The difference between the two takes is timing, and a one-row field has none: on AKATA the government's share arrives from 2029 while the contractor's is recovered in the tail years that discounting reduces most.",
+ ["single_year_positive has no capex, and the discounted take only differs from the undiscounted where there is capex to discount, because the capex is the only outflow the government does not share and so the only row that can move the ratio between the two readings.",
+  "single_year_positive is on the nominal basis, where discounting is at 10.000000 percent, and the two takes coincide whenever the applied rate is the nominal one, because the deflator and the discount are then the same factor and cancel between the numerator and the denominator of the share.",
+  "AKATA's royalty of 15 percent is discounted and its tax of 40 percent is not, and the split is what opens the gap: royalty is charged on revenue as it arrives, so it carries an exponent, while tax is settled on the year's income and is carried at face value in both readings."],
+ "Every published case with a tail shows the same direction, multiyear_jv_real 69.2573 against 75.4578 and multiyear_pia_real 71.1024 against 77.4499.")
+
+q(1,
+ "At 60 percent working interest AKATA reports NPV 43520898.40, IRR 29.2361 percent and take 66.1723 percent, the same take as at 100 percent. Which of the three is a ratio rather than an amount, and why does it hold?",
+ "The take: it is a ratio, and every monetary line and volume is scaled to your share, so 2029 gross revenue falls from 186032000.00 to 111619200.00 and both sides of it move together.",
+ ["The NPV: 43520898.40 is the field's value at the discount rate and the working interest is applied to it afterwards, which is why the take it implies does not move with the interest at all.",
+  "The IRR: 29.2361 percent is a rate rather than an amount, and the take is an amount of government revenue that happens to be expressed in percent.",
+  "None of the three: the take holds at 66.1723 because royalty at 15 percent and tax at 40 percent are unchanged, and not because any line of the ledger was scaled."],
+ "Until engines 3.10.0 revenue, volumes, opex, capex and depreciation stayed at field level while royalty, tax and net cash flow reported the share, so take counted the partners' portion and read 79.7034 percent at 60 and 91.5431 at 25.")
+
+q(3,
+ "AKATA's rate sweep reads NPV 11736532.11 at 25 percent nominal, and its IRR is 29.2361 percent. What is the relation between the two numbers?",
+ "The IRR is the nominal rate at which the sweep's NPV would reach zero, so a positive NPV at 25 percent is required by an IRR above 25.",
+ ["No relation; the IRR is solved on the nominal flows and the sweep is on the real basis, so its zero lies at a different rate from the sweep's.",
+  "The IRR is 25 percent plus the applied real rate of 21.359223 less the inflation, which is how the sweep's last row relates to the root.",
+  "The sweep would reach zero at 6.796117 percent real, and the IRR is that rate restated as nominal."],
+ "At 20 percent nominal the sweep reads 28144510.75 and at 25 it reads 11736532.11; the crossing lies where the IRR says, beyond the table.")
+
+q(0,
+ "two_roots_10_and_20, [-100, 230, -132], has roots at 10 and 20 percent, and its NPV reads -2.00 at 0 percent. What does the engine return, and what did it return before engines 3.10.0?",
+ "Null now, with irrStatus multiple-roots and both roots listed; 10.0000 percent before, because Newton starts at 10 percent and was already standing on a root.",
+ ["10.0000 percent both before and after, since the lower of two roots is the conservative reading and the contract keeps it.",
+  "Null both before and after, since a vector with a negative last entry has never been given a rate by this engine.",
+  "20.0000 percent now and 10.0000 before, because the contract prefers the crossing furthest from the start of the search."],
+ "The engine names a rate only where exactly one rate in the band from -99 to 1000 percent zeroes the NPV; two_roots_2_and_6 is null the same way, where it used to report 6.0000 against the oracle's 2.0000.")
+
+q(1,
+ "all_positive [5, 5, 5], all_negative [-5, -5] and no_real_root [-1, 3, -3] each report IRR null. How far does irrStatus go towards telling the three apart?",
+ "Two ways only: the first two both read no-sign-change and the third reads no-root, so the status separates no_real_root from the pair, and the NPV at 0 percent, 15.00 against -10.00, separates those.",
+ ["All the way: each of the three carries a status of its own, so a reader never needs to look at the NPV beside the null.",
+  "Not at all: the status reads the same on all three, and only the NPV at 0 percent, 15.00, -10.00 and -1.00, tells them apart.",
+  "Two ways, but the other way round: no_real_root shares no-sign-change with all_negative because both of them are negative at 0 percent, and all_positive alone reads no-root, so the pair that shares a status is the pair that shares a sign."],
+ "no_real_root changes sign twice and still never crosses, which is why it earns no-root rather than no-sign-change; until engines 3.10.0 the null carried no status at all.")
+
+q(2,
+ "two_roots_minus73_and_173, [-12500000, 37500000, -9000000], changes sign between -75 and -50 percent, where its curve reads -6500000.000000 and 26500000.000000, and again between 150 and 175. What does the engine report?",
+ "Null, with irrStatus multiple-roots and the crossings listed as -73.6932 and 173.6932 percent, because both of them lie inside the band.",
+ ["173.6932 percent with a residual of 0.000000, the crossing Newton reaches walking down from 10 percent, the other lying outside the band.",
+  "Null with irrStatus above-clamp, because 173.6932 percent sits above the top of the band the engine will report a rate from.",
+  "-73.6932 percent, the crossing nearest the bottom of the band, which the contract prefers as the conservative of the two."],
+ "Until engines 3.10.0 it reported 173.6932 percent with a residual of 0.000000, which proved that rate was a root and said nothing about the crossing between -75 and -50.")
+
+q(0,
+ "A pre-3.10.0 report gives two_roots_2_and_6 an IRR of 6.0000 percent. Its NPV at a hurdle of 5 percent is 0.027211. Does the approval hold, and on what ground?",
+ "It holds because the NPV at 5 percent is positive, which is the sign the decision needs; the reported 6.0000 against 5 was not the ground.",
+ ["It holds because 6.0000 exceeds 5, and an IRR above the hurdle is the definition of approval on any vector.",
+  "It fails because the oracle's root is 2.0000, below the hurdle, and the lower root governs on a terminal-negative vector since it is the first rate at which the curve is zeroed.",
+  "It fails because the NPV of 0.027211 is within the finder's tolerance and cannot be told from zero."],
+ "On three_roots_0_7_33 the same IRR comparison, 7.3509 against 5, approves a vector whose NPV at 5 percent is -0.028075; the engine returns null on both vectors now, which removes the rate but not the question.")
+
+q(3,
+ "AKATA at 40 USD/bbl reports IRR -21.3703 percent and NPV -115833227.55; at 30 USD/bbl it reports IRR null and NPV -169873348.04. Why does one uneconomic run get a rate and the other none?",
+ "At 40 a sign change still brackets a root below zero, the rate at which a shrinking discount makes the receipts worth the outlay; at 30 no sampled rate produced a positive NPV.",
+ ["At 40 the field still pays tax in three years, 13834880.00, 7217644.80 and 2950616.45, and a root exists while any tax is paid, because a taxable income is a positive income and a positive income somewhere in the vector is what the finder brackets.",
+  "At 30 the root is below -100 percent and the finder refuses to report a rate that would mean losing more than everything, because the discount factor at such a rate is undefined and the method statement returns null rather than a rate it cannot evaluate.",
+  "At 30 the payback reads Beyond project life, and the finder returns null whenever the payback is null."],
+ "loss_making, [-1000, 500, 400], reports -6.9926 percent for the same reason as the 40 USD/bbl run: a negative IRR is a legitimate root.")
+
+q(3,
+ "AKATA with a 200000000 abandonment reports headline NPV -40359955.35 and IRR null, while its NPV of the nominal flows is -58362170.82 at 0 percent and -81068008.48 at 100. Why is the headline less negative than the 0 percent figure?",
+ "Discounting reduces the terminal -169598201.95 more than the positive middle rows because it is furthest from 2029, so a moderate rate makes this vector less negative before the high rates make it more so.",
+ ["The headline is on the real basis, where the abandonment is deflated by six years of 3 percent, and the 0 percent figure is nominal, so the deflator shrinks the terminal -169598201.95 in the headline and leaves it at face value in the nominal figure, which is the whole of the difference.",
+  "The headline excludes the abandonment as a sunk liability, and the 0 percent figure carries it at face value, because a lump sum in the last year is treated by the value metrics as a provision already made and reported separately, the way a sunk year is reported as sunk_net_cash_flow.",
+  "The 0 percent figure is the profile's sampled point and the headline the exact one, and the difference between them is that the profile is read on the nominal flows while the headline is read on the real ones, so the deflator accounts for the whole of it."],
+ "A curve that is negative at 0, less negative in the middle and negative again at 100 percent never crosses, so there is no bracket and the IRR is null.")
+
+q(1,
+ "AKATA's total tax is 279459095.32 at 120 USD/bbl and 7156724.80 at 30. What does the movement of the tax column say about a sweep point?",
+ "Each point is a full rerun of the ledger, cascade included, so the tax column is recomputed at each price rather than carried from the base run.",
+ ["The tax column is the base run's 148425219.46 scaled by the ratio of the new price to 82, which is what a rescaling of revenue implies when every deduction is a fixed share of revenue.",
+  "The tax column moves because the tax rate is swept together with the price, from 40 percent at 82 to a lower rate at 30.",
+  "The tax column moves because the economic limit trims years at low prices, and a trimmed year carries no tax."],
+ "At 50 USD/bbl the last two years pay 0.00 because depreciation of 25500000.00 and escalated opex outrun the revenue, a fact only a rerun of the cascade can produce.")
+
+q(2,
+ "Across AKATA's price sweep the take rises from 57.9418 percent at 120 USD/bbl to 87.4083 at 60 while total tax falls from 279459095.32 to 75781881.55. How can the share rise while the sum falls?",
+ "Take is a share of the pre-take value, and that residual shrinks faster than the government's sum as the price falls, because royalty at 15 percent is charged on revenue whatever the residual.",
+ ["The take is read on the discounted flows and the tax on the nominal ones, and discounting weighs the early royalty more heavily at low prices, because the contractor's recovery is pushed later as the price falls and the tail years are the ones the discount reduces most.",
+  "The tax rate rises as the price falls under the JV terms, so a smaller sum is a larger share of a smaller income, because the depreciation of 25500000.00 a year is a fixed deduction and a fixed deduction against a smaller revenue leaves the 40 percent rate biting on a larger fraction of what remains.",
+  "The take at low prices includes the loss carried forward, which counts as a government receipt until it is used."],
+ "At 50 USD/bbl the residual is so small that the take passes 100 percent, 135.2824, and at 40 it is not positive and the take is null.")
+
+q(0,
+ "A reader asks for AKATA swept on the real discount rate directly, from 0 to 20 percent real. What does the engine offer?",
+ "No such sweep: the real rate is derived from the nominal rate and the 3 percent inflation, so the nominal rate is swept and the applied real rate follows, -2.912621 at 0 to 21.359223 at 25.",
+ ["A real sweep on request, which reads the same NPVs as the nominal one because the two bases agree end-year, so a real rate of 0 percent reads the real total 117362408.71 where the nominal sweep's 0 percent row reads the nominal total 141637829.18, and the two rows are the same field.",
+  "A nominal sweep with inflation set to zero, which makes the real and nominal rates coincide at every point, so that the applied real rate reads 10.000000 percent at 10 nominal and the NPV of 72534830.66 is unchanged because inflation never moved it in the first place.",
+  "The inflation sweep, which moves the real rate from 10.000000 to 1.851852 percent while holding the nominal rate at 10, so that each row of it is a reading of AKATA at a different real rate and the real total, 141637829.18 down to 83912631.29, is the NPV at that rate."],
+ "The inflation sweep does move the applied real rate, but NPV stays 72534830.66 at every point, so it is not a sensitivity to the rate at all.")
+
+q(0,
+ "AKATA is given a price deck and its breakeven reads null. Is the field uneconomic?",
+ "No; with a deck there is no single flat price to move, so the search cannot run, and only the NPV under the deck says whether the field pays.",
+ ["Yes; null is the value the search returns when no price in its range turns the NPV positive, and a deck that holds the price at 100 in 2030 is a price the search has already tried and found wanting.",
+  "Yes; a deck fixes the price and a field whose price cannot move cannot break even.",
+  "No; the breakeven under a deck is the deck's own first entry, oil 100 in 2030, and the null is a formatting of that entry, because a deck price is a price the owner has fixed and a fixed price needs no search to find."],
+ "deck_present_null has a deck of one entry, oil 100 in 2030, and reports null; never_breaks_even_null reports null because no price in the search turns the NPV positive, a different reason behind the same null.")
+
+q(2,
+ "Between 10 and 20 percent decline unit technical cost rises from 45.497913 to 57.021318 USD/boe and four years are trimmed. Can the table separate the decline's effect from the trimming's?",
+ "No: the cost is spread over fewer barrels for both reasons at once, and the two rows compare a ten-row field with a six-row one.",
+ ["Yes: the trimming removes the capex of the trimmed years, and the difference in total capex is the trimming's share.",
+  "Yes: unit technical cost is an undiscounted reading and the limit only trims the discounted column, so the rise is decline alone.",
+  "Yes: the take, 75.6417 against 105.7792, isolates the trimming because the take is invariant to decline."],
+ "The rows column, 10 against 6, is the first thing to read; the NPV moves from 153012318.45 to -76483227.81 for the same two reasons at once.")
+
+q(1,
+ "AKATA with capex at 1.5 of base reports NPV -27542077.46 and IRR 5.7351 percent. Is a positive IRR beside a negative NPV a contradiction?",
+ "No: the IRR is the rate at which NPV is zero, 5.7351 percent, and the configured nominal 10 sits above it, so the NPV at 10 is negative; the two agree.",
+ ["Yes: a positive IRR means the project earns a positive return, so the NPV at any rate should be positive too.",
+  "Yes: the IRR is solved on the real flows at 6.796117 percent and the NPV on the nominal ones at 10, and the two runs disagree because the deflator has been applied to one vector and not the other.",
+  "No: the IRR is unaffected by capex scale, so 5.7351 is the base case's rate restated and the NPV is the only figure that moved, in the same way that the working interest leaves 29.2361 percent fixed at every share."],
+ "At 1.2 of base the IRR is 16.7435 percent and the NPV 32917744.31, positive, because the root has moved back above the nominal 10.")
+
+q(3,
+ "AKATA's price sweep runs the oil price from 30 to 120 USD/bbl and holds the gas price at 3.2 USD/Mscf at every point. What does that make the sweep?",
+ "A sweep on oil alone: the flat oil_price_usd_bbl moves, and the gas revenue is the same at every point.",
+ ["A sweep on total revenue, since the gas is priced off the oil at 800 scf per barrel and follows it.",
+  "A sweep on the oil escalator, since the gas escalator of 2 percent is the one held still.",
+  "A sweep on boe, since 6 Mscf per barrel converts the gas into oil terms and the price is applied to the sum."],
+ "AKATA's gas is 7744000.00 Mscf against 9680000.00 bbl of oil, and its revenue at 3.2 USD/Mscf does not change across the nine points.")
+
+q(1,
+ "A reader reports AKATA's NPV as 70188970.32, and only afterwards discovers that the run was mid-year on the real basis. What does the method call this?",
+ "Working the steps out of order: every number changes meaning when a convention is found late, and naming the convention first is what stops the numbers betraying you.",
+ ["A reconciliation problem: the two facts are consistent, and the reader has only to restate 70188970.32 on the nominal basis, where the mid-year figure of 69159247.46 is the same claim about the same rows in other money.",
+  "A sunk-year problem: a mid-year run on the real basis sinks the valuation year row by discounting it half a year, so the reader is holding an NPV with the 2029 capex partly written off and needs the sunk figure of 206819768.67 to compare.",
+  "A basis problem: 70188970.32 is the real basis figure and the reader needs the nominal 69159247.46 to proceed."],
+ "The convention sentence is written first; 70188970.32 is real basis, mid-year, 10 percent nominal, 3 percent inflation, valued in 2029, and a reader who learns that last has read the number wrong until then.")
+
+q(0,
+ "The onward lesson says the Expert tier's fiscal cascade is read with the conventions this tier named. What does that mean for a PIA NPV such as 203250580.21 on multiyear_pia_real?",
+ "It carries the same label: real basis, end-year, 10 percent nominal at 3 percent inflation, applied 6.796117; its mid-year twin reads 196677221.27 and its applied-rate profile point reads the headline, as AKATA's does.",
+ ["It is convention-free, because the PIA cascade is charged on undiscounted bases and the NPV is a sum of after-tax rows, so the discount rate, the basis and the timing convention enter only the JV ledger, and a PIA NPV is the same number under every reading of time.",
+  "It needs its own conventions, because five taxes on three bases each carry a timing rule that the JV ledger does not, so the royalty, the HCT, the CIT and the levy are each placed in time separately and a PIA NPV is labelled by the timing of each tax rather than by one convention.",
+  "It is read nominal only, because the PIA's price royalty tiers are in money of the day and cannot be deflated, so the real basis is refused on a PIA run and the profile is evaluated on the nominal flows at the nominal 10.000000 percent with no Fisher conversion and no rounding gap."],
+ "Nothing learned in the Professional tier is replaced in the Expert tier; multiyear_pia_nominal reads 203250580.21 too, because the bases agree end-year.")
+
+q(2,
+ "The tier's closing exercise asks for the six conventions that label 72534830.66. Which six?",
+ "Basis, convention, nominal rate, inflation, valuation year and the treatment of prior years.",
+ ["Basis, convention, nominal rate, real rate, inflation and the escalators, because each of them enters the discount factor.",
+  "Royalty, tax rate, working interest, oil price, discount rate and inflation, the inputs a sensitivity would sweep.",
+  "Basis, convention, valuation year, abandonment, decline rate and the economic limit, which shape the tail of the vector."],
+ "The real rate is derived and not chosen, and the fiscal inputs write the rows; the six conventions are the rules for reading rows that are already written.")
+
+q(3,
+ "The story so far records that at 20 percent decline the published PIA field loses four years to the economic limit and its take reads 105.7792 percent. Read with the rows column, what does that take say?",
+ "That it is a share of a residual on a six-row field, close to zero after trimming, and not comparable with the 75.6417 percent of the ten-row run at 10 percent decline.",
+ ["That the field pays more than it earns, which is an error in the cascade the engine should have reported as null.",
+  "That the PIA royalty tiers rise with decline, since a faster decline raises the price tier the field is charged at, and a higher tier on the surviving rows lifts the government's share of a residual that has not otherwise changed.",
+  "That the trimmed years' royalties are still counted while their revenue is not, which inflates the share past 100, because the limit removes revenue rows from the valued ledger while the royalty column keeps its total of 228146979.52."],
+ "At 40 percent decline three rows survive and the take reads 1199.4096 percent, a denominator that has almost vanished, not a rounding fault.")
+
+q(3,
+ "The onward lesson no longer hands on the profile gap of -21759.68 as a number to distrust. Why not?",
+ "Because the applied-rate point is evaluated at the exact 6.796117 percent now and reads the headline 72534830.66, so the gap is 0.00 and there is nothing left to reconcile.",
+ ["For the headline: the profile is the more precise figure because it is on the chart, and the headline of 72534830.66 should be corrected down by the gap to the charted 72513070.98, which is the figure the engine evaluated last and therefore the one it stands behind.",
+  "For the basis: the gap appears on the real basis only, which shows the real basis is the less reliable of the two.",
+  "For the IRR: a profile that misses at the applied rate misses at every rate, so the 29.2361 percent read from it is suspect, and the oracle's habit of reporting the root nearest zero on the positive side is the correction the reader should apply to it."],
+ "Until engines 3.10.0 the point was evaluated at its rounded label and read 72513070.98; the golden records no profile disagreement now, and the IRR disagreement on [-100, 208, -108.12] is gone the same way.")
+
+q(1,
+ "AKATA reads 72534830.66 under nominal end-year and under real end-year, 69159247.46 under nominal mid-year and 70188970.32 under real mid-year. Which of basis and convention moves NPV, and when does the other begin to?",
+ "The convention always moves it; the basis moves it only under mid-year, where the half-year factor differs between 10.000000 and 6.796117 percent.",
+ ["The basis always moves it, by the deflation of 141637829.18 to 117362408.71; the convention only moves it on the nominal basis.",
+  "Both always move it, and the two end-year figures agree by the coincidence of 3 percent inflation against 2 percent escalators, which happen to offset each other over AKATA's seven years.",
+  "Neither moves it on its own; only the two changed together, from nominal end-year to real mid-year, produce a different figure, because each alone is a relabelling of the same discounted column."],
+ "Under end-year the deflated flows at the deflated rate multiply back to the nominal factor exactly; under mid-year the half-year shift is a square root of a different number on each basis.")
+
+emit(Q, '/root/wt-ec7-recut/tools/course-banks/cashflow/intermediate/ec1i_exam.json', expect_n=42)
+finish()
