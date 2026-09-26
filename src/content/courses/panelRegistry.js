@@ -285,6 +285,9 @@ export const PANELS = {
   'ae-retrieval-explorer': React.lazy(() => import('@/components/course/panels/appliedai/RetrievalExplorer')),
   'ae-scoring-explorer': React.lazy(() => import('@/components/course/panels/appliedai/ScoringExplorer')),
   'ae-trust-explorer': React.lazy(() => import('@/components/course/panels/appliedai/TrustExplorer')),
+  'pia-royalty-calculator': React.lazy(() => import('@/components/course/panels/pia/RoyaltyCalculator')),
+  'pia-hct-calculator': React.lazy(() => import('@/components/course/panels/pia/HctCalculator')),
+  'pia-ledger-calculator': React.lazy(() => import('@/components/course/panels/pia/LedgerCalculator')),
 };
 
 export function resolvePanel(id) {

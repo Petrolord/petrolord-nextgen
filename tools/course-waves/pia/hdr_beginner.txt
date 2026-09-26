@@ -1,0 +1,19 @@
+-- ============================================================================
+-- EC7 ASSOCIATE DEEP SEED: Petroleum Industry Act 2021 & Nigerian Fiscal
+-- Terms, beginner tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/pia/beginner.
+--
+-- What this tier owns: THE MAP OF THE ACT. The institutions and who assesses
+-- and collects what; the texts with their editions and read dates; licences,
+-- leases and terrains; royalty by terrain and daily rate, gas royalty and gas
+-- used in-country; royalty by price on either base year; and the instruments
+-- stacked on one ledger with the government take.
+--
+-- AN ENGINE COURSE. There is no Suite app: the practicals run in the course's
+-- own royalty calculator. The Associate capstone grades six Associate
+-- quantities, each identical under every open reading of the texts.
+-- ============================================================================

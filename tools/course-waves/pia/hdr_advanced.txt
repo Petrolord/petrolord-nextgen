@@ -1,0 +1,18 @@
+-- ============================================================================
+-- EC7 EXPERT DEEP SEED: Petroleum Industry Act 2021 & Nigerian Fiscal Terms,
+-- advanced tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json, and the question rows from the committed bank JSONs under
+-- tools/course-banks/pia/advanced.
+--
+-- What this tier owns: TRANSITIONS AND READING AN OUTCOME. Conversion and the
+-- terms of leases that do not convert; what the Nigeria Tax Act 2025 moved and
+-- changed at the edges, with the deep offshore rate taught under three
+-- readings; gas and incentives; and reading a fiscal outcome by provision.
+--
+-- AN ENGINE COURSE. There is no Suite app: the practicals run in the course's
+-- own ledger calculator. The Expert capstone grades six quantities no deep
+-- offshore reading and no base year moves.
+-- ============================================================================

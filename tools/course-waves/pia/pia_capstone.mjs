@@ -42,7 +42,7 @@ const COMMON = {
 };
 
 /* ================================================================ ODOZI, Associate
-   An onshore petroleum mining lease converted from an OML, about 8,500 bopd
+   An onshore petroleum mining lease converted from an OML, about 8,600 bopd
    falling ten percent a year, associated gas at 0.6 Mscf per barrel with 40
    percent of it used in-country, a 60 percent working interest, 2027 to 2032,
    every year under the Nigeria Tax Act 2025. Oil at 54 USD/bbl flat, below the
@@ -57,12 +57,12 @@ const ODOZI = {
     pia_gas_in_country_share_pct: 40, pia_under_nta_2025_override: 'auto',
   },
   prodRows: [
-    { year: 2027, oil_bbl: 3100000, gas_mscf: 1860000, condensate_bbl: 0 },
-    { year: 2028, oil_bbl: 2790000, gas_mscf: 1674000, condensate_bbl: 0 },
-    { year: 2029, oil_bbl: 2511000, gas_mscf: 1506600, condensate_bbl: 0 },
-    { year: 2030, oil_bbl: 2259900, gas_mscf: 1355940, condensate_bbl: 0 },
-    { year: 2031, oil_bbl: 2033910, gas_mscf: 1220346, condensate_bbl: 0 },
-    { year: 2032, oil_bbl: 1830519, gas_mscf: 1098311, condensate_bbl: 0 },
+    { year: 2027, oil_bbl: 3150000, gas_mscf: 1890000, condensate_bbl: 0 },
+    { year: 2028, oil_bbl: 2835000, gas_mscf: 1701000, condensate_bbl: 0 },
+    { year: 2029, oil_bbl: 2551500, gas_mscf: 1530900, condensate_bbl: 0 },
+    { year: 2030, oil_bbl: 2296350, gas_mscf: 1377810, condensate_bbl: 0 },
+    { year: 2031, oil_bbl: 2066715, gas_mscf: 1240029, condensate_bbl: 0 },
+    { year: 2032, oil_bbl: 1860044, gas_mscf: 1116026, condensate_bbl: 0 },
   ],
   capexRows: [{ year: 2027, amount_usd: 48000000 }, { year: 2028, amount_usd: 22000000 }],
   opexRows: flatOpex(2027, 6, 21000000),

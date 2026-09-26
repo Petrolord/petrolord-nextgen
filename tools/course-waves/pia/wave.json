@@ -38,5 +38,364 @@
  },
  "plan": {
   "state": "FOUNDATION: structure, digest, capstones, gates, panels, learning page and writer briefs; STOPS BEFORE LESSONS."
+ },
+ "digest": {
+  "lines": 1026,
+  "sections": 25,
+  "md5": "5cb2b1ee311322980399b35e3469fe4e",
+  "sha256": "11b45b5089dc3bbb3c9a5c159c3a4721e44aea68f011612570bd39bb5299027d"
+ },
+ "fields": {
+  "count": 18,
+  "sha256": "db32035bdcb7552f40eaaad7aef4947da9e67a3ee127f2449ca6b7d7bf16f9c2",
+  "keys": [
+   "odozi_2028_liquids_royalty_rate",
+   "odozi_2029_production_royalty_usd",
+   "odozi_2030_hct_usd",
+   "odozi_2031_dev_levy_usd",
+   "odozi_total_cit_usd",
+   "odozi_government_take_pct",
+   "nkemdi_2028_liquids_royalty_usd",
+   "nkemdi_2029_production_allowance_usd",
+   "nkemdi_2029_hct_chargeable_profit_usd",
+   "nkemdi_2031_cpr_deferred_usd",
+   "nkemdi_cpr_forfeited_usd",
+   "nkemdi_total_cit_usd",
+   "alaku_2026_total_royalty_usd",
+   "alaku_2026_hct_chargeable_profit_usd",
+   "alaku_2025_tet_usd",
+   "alaku_2027_dev_levy_usd",
+   "alaku_2028_cit_usd",
+   "alaku_total_cit_usd"
+  ]
+ },
+ "gates": {
+  "structure.py": {
+   "md5": "e43d9971db1c6da9801493c70548cf36",
+   "command": "python3 structure.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "PROBLEMS: 0"
+  },
+  "prove_prior_courses.sh": {
+   "md5": "69bfba73a7e02e528bbae4a716844698",
+   "command": "bash prove_prior_courses.sh",
+   "expected": 0,
+   "exit": 0,
+   "summary": "PRIOR COURSES UNCHANGED: packages/engines identical to origin/main; D1 to D5, H5 and SC2 (where committed) digests, fields and precision rebuild byte-identical; cashflow and fiscal rebuild byte-identical against /root/wt"
+  },
+  "scaffold.py --check": {
+   "md5": "d1b0a518bf8e486bfe4802fd38384800",
+   "command": "python3 scaffold.py --check",
+   "expected": 0,
+   "exit": 0,
+   "summary": "scaffold: 3 manifests, 0 stubs written, 78 existing lesson files left alone, 0 drift"
+  },
+  "pia_capstone.mjs": {
+   "md5": "3ad1bfcf5950936a68d5c74fb1c82d80",
+   "command": "node pia_capstone.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "pia_capstone: 118 scenario, field and open-reading assertions run, 0 failed"
+  },
+  "make_fields.mjs": {
+   "md5": "59a950eb4218b7db7d642ab93c3bf693",
+   "command": "node make_fields.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "pia_capstone: 118 scenario, field and open-reading assertions run, 0 failed"
+  },
+  "make_fields.mjs NEGATIVE CONTROL": {
+   "md5": "59a950eb4218b7db7d642ab93c3bf693",
+   "command": "node make_fields.mjs --bare-stated-tolerances",
+   "expected": 1,
+   "exit": 1,
+   "summary": "pia_capstone: 118 scenario, field and open-reading assertions run, 0 failed"
+  },
+  "oracle_check.py": {
+   "md5": "7cc7f73a81387880a73e1b806ee88b53",
+   "command": "python3 oracle_check.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "oracle_check: 18 graded values replayed through the stdlib oracle in 0 s; every chain the oracle's own; worst relative difference 4.23e-16, worst 5.96e-02 tolerances; disagreements: 0"
+  },
+  "oracle_check.py NEGATIVE CONTROL": {
+   "md5": "7cc7f73a81387880a73e1b806ee88b53",
+   "command": "python3 oracle_check.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: nkemdi_2031_cpr_deferred_usd was moved by ten tolerances; caught"
+  },
+  "discriminate.mjs": {
+   "md5": "6c2223a910356b79cd89ad1528ee7993",
+   "command": "node discriminate.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "pia_capstone: 118 scenario, field and open-reading assertions run, 0 failed"
+  },
+  "discriminate.mjs NEGATIVE CONTROL": {
+   "md5": "6c2223a910356b79cd89ad1528ee7993",
+   "command": "node discriminate.mjs --slack-tolerances",
+   "expected": 1,
+   "exit": 1,
+   "summary": "pia_capstone: 118 scenario, field and open-reading assertions run, 0 failed"
+  },
+  "quote_check.py": {
+   "md5": "47a4043db904b00ac828922325942743",
+   "command": "python3 quote_check.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "MISMATCHES: 0"
+  },
+  "quote_check.py NEGATIVE CONTROL": {
+   "md5": "47a4043db904b00ac828922325942743",
+   "command": "python3 quote_check.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: one character of pia_federation_account was altered in memory; caught"
+  },
+  "digestrepro.sh": {
+   "md5": "dc723d03530192367ddc22937fc0c673",
+   "command": "/root/dc-wavekit/digestrepro.sh cat-wip-pia /root/wt-ec7-nextgen",
+   "expected": 0,
+   "exit": 0,
+   "summary": "pia_dump: 724 label-and-call, measurement and claim assertions run, 0 failed; 25 sections"
+  },
+  "digestprose.mjs": {
+   "md5": "97dda85819e61737a76d8caf5badb46d",
+   "command": "node /root/dc-wavekit/digestprose.mjs digest.txt --rules cat-wip-pia",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestprose] /root/cat-wip-pia/digest.txt: 1026 line(s), 25 section title(s) and 72 in-body marker(s) swept against their blocks, 32 history framings, 25 engine pin(s); 0 warned for a human read and 0 framed as curricul"
+  },
+  "digestprose.mjs --selftest": {
+   "md5": "97dda85819e61737a76d8caf5badb46d",
+   "command": "node /root/dc-wavekit/digestprose.mjs --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestprose] selftest OK: the founding heading case is caught by the corrected pairing and missed by the broken one; both real keyword cases fail inside a teaching section; FC3 line 683 WARNS where the keyword family ca"
+  },
+  "digestfigures.py": {
+   "md5": "f3428a1fab68f45527c0a34f8b51f29c",
+   "command": "python3 /root/dc-wavekit/digestfigures.py cat-wip-pia",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestfigures] 0 FAILED, 0 outstanding for a human read (0 sentence(s) cleared by name in wave.json)"
+  },
+  "digestfigures.py --selftest": {
+   "md5": "f3428a1fab68f45527c0a34f8b51f29c",
+   "command": "python3 /root/dc-wavekit/digestfigures.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestfigures] selftest OK"
+  },
+  "digestpromise_pia.py": {
+   "md5": "a3b0a303fb2029519488d4de776337df",
+   "command": "python3 digestpromise_pia.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "=> 0 completeness problem(s), all checks applied"
+  },
+  "digestpromise_pia.py NEGATIVE CONTROL": {
+   "md5": "a3b0a303fb2029519488d4de776337df",
+   "command": "python3 digestpromise_pia.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a promise of section 99 was planted; caught"
+  },
+  "digestpromise.py --selftest": {
+   "md5": "f22dd5d57795e134faa73d625358eed7",
+   "command": "python3 /root/dc-wavekit/digestpromise.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "negative control: ALL PASS"
+  },
+  "digestleak.py": {
+   "md5": "b03f1c2f90ff332d4f54c55995944634",
+   "command": "python3 /root/dc-wavekit/digestleak.py cat-wip-pia",
+   "expected": 0,
+   "exit": 0,
+   "summary": "=> 0 graded answer(s) reachable from this digest"
+  },
+  "collisions.py": {
+   "md5": "a5636d0b84e634d5fdc0cbfbdb023044",
+   "command": "python3 /root/dc-wavekit/collisions.py cat-wip-pia",
+   "expected": 0,
+   "exit": 0,
+   "summary": "fields checked: 18  fatal collisions: 0  notes: 0"
+  },
+  "gradeprecision.py": {
+   "md5": "1ceee19667cba7d10f293abd0b97f509",
+   "command": "python3 /root/dc-wavekit/gradeprecision.py cat-wip-pia",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[gradeprecision] /root/cat-wip-pia: 18 graded field(s), 18 OF 18 CLASSIFIED against 1 precision clause(s) in the digest header and 3 declared class(es)"
+  },
+  "briefleak.py": {
+   "md5": "2b5acd7c2b4eea5fbcf9ec657684851f",
+   "command": "python3 /root/dc-wavekit/briefleak.py cat-wip-pia",
+   "expected": 0,
+   "exit": 0,
+   "summary": "0 graded answer(s) reachable from this brief"
+  },
+  "briefcheck.py": {
+   "md5": "4c7fcb25e09b0dd3110a38a1128d3dfb",
+   "command": "python3 /root/dc-wavekit/briefcheck.py cat-wip-pia",
+   "expected": 0,
+   "exit": 0,
+   "summary": "0 figure(s) the digest cannot vouch for. Dates and the leakage-ban conditions are expected here; read the rest."
+  },
+  "gate_capstone_leak.mjs": {
+   "md5": "219f443440f2c84dc7edaa1630ce366b",
+   "command": "node gate_capstone_leak.mjs --no-banks",
+   "expected": 0,
+   "exit": 0,
+   "summary": "FINDINGS: 0"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL value": {
+   "md5": "219f443440f2c84dc7edaa1630ce366b",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-value",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-value: expected a [2 values] finding, caught"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL input": {
+   "md5": "219f443440f2c84dc7edaa1630ce366b",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-input",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-input: expected a [1 inputs] finding, caught"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL name": {
+   "md5": "219f443440f2c84dc7edaa1630ce366b",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-name",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-name: expected a [4 names] finding, caught"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL lesson": {
+   "md5": "219f443440f2c84dc7edaa1630ce366b",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-lesson",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-lesson: expected a [10 lessons numeric] finding, caught"
+  },
+  "gate_copy_rule.py": {
+   "md5": "1187449fd24d0261488be62c962cd444",
+   "command": "python3 gate_copy_rule.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "VIOLATIONS: 0"
+  },
+  "gate_copy_rule.py NEGATIVE CONTROL": {
+   "md5": "1187449fd24d0261488be62c962cd444",
+   "command": "python3 gate_copy_rule.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a contrastive and a dash were planted in the digest; expected 2 caught, got 2"
+  },
+  "gate_copy_rule.py NEGATIVE CONTROL bank": {
+   "md5": "1187449fd24d0261488be62c962cd444",
+   "command": "python3 gate_copy_rule.py --plant-bank",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a contrastive and a dash were planted in a bank string; expected 2 caught, got 2"
+  },
+  "gate_typed_literals.py": {
+   "md5": "d7fd5e85f1fc6c8bb90f55d70928bd7c",
+   "command": "python3 gate_typed_literals.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "UNEXPLAINED TYPED NUMBERS: 0"
+  },
+  "gate_typed_literals.py NEGATIVE CONTROL": {
+   "md5": "d7fd5e85f1fc6c8bb90f55d70928bd7c",
+   "command": "python3 gate_typed_literals.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a typed 4.217 was planted in a printed line; caught 1"
+  },
+  "gate_vocabulary.py": {
+   "md5": "c4f23932b9d123adb1ffb75ace7e38e6",
+   "command": "python3 gate_vocabulary.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "exemptions declared: 2, dead: []"
+  },
+  "gate_vocabulary.py NEGATIVE CONTROL": {
+   "md5": "c4f23932b9d123adb1ffb75ace7e38e6",
+   "command": "python3 gate_vocabulary.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: expected a repair-history framing and an AI claim caught; got ['a repair-history framing', 'an AI claim']"
+  },
+  "truth_check.py": {
+   "md5": "98ac8d6b7ab47b570ec3180c7b81073b",
+   "command": "python3 truth_check.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "truth_check: truth-pia.json (604 digest lines) IS the harvest of digest.txt"
+  },
+  "truth_check.py NEGATIVE CONTROL": {
+   "md5": "98ac8d6b7ab47b570ec3180c7b81073b",
+   "command": "python3 truth_check.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a line was planted in the scratch digest; expected a mismatch, caught"
+  },
+  "numsweep_pia.mjs": {
+   "md5": "f21dd5b3e92163aa59518cf4635fe943",
+   "command": "node numsweep_pia.mjs",
+   "expected": "held NOT ONE literal of seven or more significant figures",
+   "exit": 1,
+   "summary": "This gate does not pass on an empty or unreadable sweep.",
+   "stage": "foundation: expected to refuse on the 78 stubs for the stated reason"
+  },
+  "numsweep_pia.mjs --selftest": {
+   "md5": "f21dd5b3e92163aa59518cf4635fe943",
+   "command": "node numsweep_pia.mjs --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "numsweep_pia selftest OK"
+  },
+  "lengths.py": {
+   "md5": "fec3441c51ca059fde2055b06d2b98bd",
+   "command": "python3 lengths.py",
+   "expected": [
+    "UNDER ITS OWN FLOOR",
+    78
+   ],
+   "exit": 1,
+   "summary": "tiers read: 3  out of band: 79  not written yet: 0",
+   "stage": "foundation: expected to refuse on the 78 stubs for the stated reason"
+  },
+  "lengths.py --selftest": {
+   "md5": "fec3441c51ca059fde2055b06d2b98bd",
+   "command": "python3 lengths.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "lengths.py selftest OK: a heading counts, a table row does not, a 430 word lesson at fourteen minutes is UNDER its own floor of 500 where a flat 420 floor passed it, and an unwritten lesson is named rather than skipped"
+  },
+  "gate_claims.mjs": {
+   "md5": "4e66ecdd800df34a7e936557621a8af2",
+   "command": "node gate_claims.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "FINDINGS: 0"
+  },
+  "gate_claims.mjs NEGATIVE CONTROL": {
+   "md5": "4e66ecdd800df34a7e936557621a8af2",
+   "command": "node gate_claims.mjs --plant-a-recon-figure",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a figure from the recon report was planted in BRIEF.md. Expected it caught and named as a recon figure, got 1."
+  },
+  "gen_course.py (self checks)": {
+   "md5": "6d91c536681d75117d5a7e6c54963748",
+   "command": "python3 gen_course.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "gen_course: engine run 18 of 18 fields.json values equal what pia_capstone.mjs returned through /root/wt-ec7-nextgen/packages/engines, every tolerance the one gradedTolerance.js derives; case-file data re-read and equal "
+  }
  }
 }

@@ -26,6 +26,8 @@ import React from 'react';
 const panels = {
   ...import.meta.glob('/src/components/course/panels/**/*Explorer.jsx'),
   ...import.meta.glob('/src/components/course/panels/**/*Lab.jsx'),
+  // Engine courses whose practicals are calculator panels (EC7 pia).
+  ...import.meta.glob('/src/components/course/panels/**/*Calculator.jsx'),
 };
 
 describe('every course panel renders with no props', () => {
@@ -328,6 +330,34 @@ describe('every course panel renders with no props', () => {
       'forecastml/SmoothingExplorer.jsx': ['fit', 'recursion', 'forecast', 'alpha', 'methods'],
       'forecastml/BacktestExplorer.jsx': ['accuracy', 'holdout', 'scale', 'backtest', 'horizon'],
       'forecastml/UncertaintyExplorer.jsx': ['intervals', 'paths', 'arps', 'compare', 'bounds'],
+    };
+    let rendered = 0;
+    for (const [name, modes] of Object.entries(MODES)) {
+      const entry = entries.find(([p]) => p.endsWith(`/${name}`));
+      expect(entry, `${name} is not in the panel sweep`).toBeTruthy();
+      const mod = await entry[1]();
+      expect(mod.MODES.map((m) => m[0]), `${name} declares different modes`).toEqual(modes);
+      for (const mode of modes) {
+        expect(
+          () => renderToStaticMarkup(React.createElement(mod.default, { initialMode: mode })),
+          `${name} in the ${mode} view`,
+        ).not.toThrow();
+        rendered += 1;
+      }
+    }
+    expect(rendered).toBe(15);
+  }, 120000);
+  it('finds the EC7 pia calculator panels', () => {
+    const names = entries.map(([p]) => p.split('/panels/')[1]);
+    expect(names).toContain('pia/RoyaltyCalculator.jsx');
+    expect(names).toContain('pia/HctCalculator.jsx');
+    expect(names).toContain('pia/LedgerCalculator.jsx');
+  });
+  it('every EC7 pia view renders, not only the default one', async () => {
+    const MODES = {
+      'pia/RoyaltyCalculator.jsx': ['tranches', 'gas', 'price', 'stack', 'refusals'],
+      'pia/HctCalculator.jsx': ['rate', 'allowance', 'capital', 'base', 'cit'],
+      'pia/LedgerCalculator.jsx': ['ledger', 'framework', 'readings', 'moved', 'notes'],
     };
     let rendered = 0;
     for (const [name, modes] of Object.entries(MODES)) {

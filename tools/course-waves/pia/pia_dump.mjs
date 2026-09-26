@@ -176,7 +176,7 @@ w('WHAT THE ENGINE DOES NOT DO, checked here against its source:');
 must('the engine source makes no network call, reads no clock and draws no random number', !/\bfetch\x28|XMLHttpRequest|Math\.random|Date\.now|new Date\x28\x29/.test(ENGINE_SRC), 'none');
 must('the engine never reads pia_water_depth_m', !/cfg\.pia_water_depth_m|\[.pia_water_depth_m.\]/.test(ENGINE_SRC), 'depth');
 w('- It does not read the water depth. `pia_water_depth_m` is carried in the terms and never read; the terrain string decides the royalty and the tax (' + ref('licences') + ').');
-w('- It does not model a field that straddles two terrains, the fiscal oil price the Commission sets, the additional tax at the fiscal price, the split between associated and non-associated gas, exploration and appraisal expensing, the acquisition cost allowance, consolidation across fields, production sharing contracts under the Act, the terms of a lease that has not converted, the non-associated gas credit, or the company-level minimum effective tax test. Each is taught as a concept with its citation (' + ref('concepts') + ') and none is ever graded.');
+w('- It does not model a field lying partly in two terrains, the fiscal oil price the Commission sets, the additional tax at the fiscal price, the split between associated and non-associated gas, exploration and appraisal expensing, the acquisition cost allowance, consolidation across fields, production sharing contracts under the Act, the terms of a lease that has not converted, the non-associated gas credit, or the company-level minimum effective tax test. Each is taught as a concept with its citation (' + ref('concepts') + ') and none is ever graded.');
 w('- It decides no open question of the texts. Where the texts leave a rate open the engine takes a stated input with no default and refuses a run without it; where it keeps a default it says so in `kpis.pia_notes` (' + ref('notes') + ').');
 
 /* ============================================================ SECTION 2 */
@@ -236,7 +236,7 @@ const PROVISIONS = [
   ['The NDDC levy on the total annual budget', 'NDDC Act 2000 s.14(2)(b) (secondary source)', true, 'row nddc', 'levies'],
   ['Working interest: fiscal arithmetic at field level, money at the share', 'PIA s.273(4); NTA s.77(4)', true, 'computeCashFlow working interest scaling', 'take'],
   ['Government take and government cash flow', 'fiscalConventions.js (course wording)', true, 'kpis government_take_pct', 'take'],
-  ['A field that straddles two terrains', 'PIA Seventh Schedule para 10(7); REGS r.14(5), (6)', false, 'not computed', 'concepts'],
+  ['A field lying partly in two terrains', 'PIA Seventh Schedule para 10(7); REGS r.14(5), (6)', false, 'not computed', 'concepts'],
   ['The fiscal oil price and the additional tax at the fiscal price', 'PIA Seventh Schedule para 8, s.268; NTA s.73', false, 'not computed (the realised price stands in)', 'concepts'],
   ['Associated and non-associated gas: scope, cost allocation, royalty deduction', 'PIA s.260(1)(b)(ii), s.260(2), s.263(1)(b)', false, 'not computed (stated approximation)', 'concepts'],
   ['Exploration and appraisal expensing, acquisition cost allowance', 'PIA s.263(1)(d), s.266(1)(c); Fifth Schedule para 17(2)', false, 'not computed', 'concepts'],
@@ -592,7 +592,7 @@ w('ONE YEAR END TO END: the worked example inputs (golden input), shallow water,
 w();
 rowsTable('worked_example_inputs_default');
 w();
-w(`Stated in the golden input: oil at ${GC.worked_example_inputs_default.cfg.oil_price_usd_bbl} USD/bbl, NDDC as a fixed sum of ${GC.worked_example_inputs_default.cfg.pia_nddc_levy_fixed_usd} USD, no prior-year opex, 100 percent working interest. The line items the engine returns for 2025:`);
+w(`Stated in the golden input: oil at ${GC.worked_example_inputs_default.cfg.oil_price_usd_bbl} USD/bbl, NDDC as a fixed sum of ${GC.worked_example_inputs_default.cfg.pia_nddc_levy_fixed_usd} USD, prior-year opex of ${GC.worked_example_inputs_default.cfg.pia_prior_year_opex_usd} USD (for HCDT), 100 percent working interest. The line items the engine returns for 2025:`);
 w();
 const WE_LINES = [
   ['gross revenue', wr.gross_revenue], ['liquids daily rate, bopd', wr.royalty_liquids_bopd], ['liquids royalty rate', wr.royalty_rate_liquids],
@@ -605,6 +605,8 @@ const WE_LINES = [
 table(['line (engine)', '2025'], WE_LINES.map(([l, v]) => [l, f6(v)]));
 must('the worked example is a PIA year at 50,000 bopd, weighted rate 11.25 percent', wr.fiscal_framework === 'pia_only' && wr.royalty_liquids_bopd === 50000 && wr.royalty_rate_liquids === 0.1125, wr.royalty_rate_liquids);
 must('the worked example pays TET at 3 percent', wr.tet_rate_pct === 3, wr.tet_rate_pct);
+must('the worked example: HCDT is 3 percent of the stated prior-year opex', Math.abs(wr.hcdt - 0.03 * GC.worked_example_inputs_default.cfg.pia_prior_year_opex_usd) <= 1e-6, wr.hcdt);
+must('the worked example states a working interest of 100 or none', (GC.worked_example_inputs_default.cfg.pia_working_interest_pct ?? 100) === 100, 'wi');
 must('the worked example: total tax is HCT + CIT + TET', Math.abs(wr.tax - (wr.hct_tax + wr.cit_tax + wr.tet_tax)) <= 1e-6, wr.tax);
 must('the worked example: the CPR does not bind', wr.cpr_deferred_to_next === 0, wr.cpr_deferred_to_next);
 w();
@@ -737,7 +739,12 @@ w();
 ledger(across, CIT_COLS);
 w();
 must('across: 2024 and 2025 restricted, 2026 onward not', across.cashFlowData.every((d) => d.cit_allowance_restricted === (d.year < 2026)), 'restricted');
-w('The restriction column the engine returns (`cit_allowance_restricted`): true in 2024 and 2025, false from 2026 (checked).');
+w('The restriction column the engine returns (`cit_allowance_restricted`): true in 2024 and 2025, false from 2026 (checked). On this lease the restriction does not bind: two thirds of each assessable profit is larger than the allowance, so the whole allowance is claimed.');
+must('across: the restriction does not bind', across.cashFlowData.every((d) => d.cit_allowance_claimed === d.depreciation && d.cit_allowance_carryforward === 0), 'nobind');
+w();
+const cprBind = cpr.cashFlowData.filter((d) => d.fiscal_framework === 'pia_only');
+must('CPR case: the restriction binds in its two PIA years, claiming exactly two thirds', cprBind.length === 2 && cprBind.every((d) => Math.abs(d.cit_allowance_claimed - d.cit_assessable_profit * 2 / 3) <= 1e-6 && d.cit_allowance_carryforward > 0), 'bind');
+w(`Where it binds: on the CPR case of ${ref('hctbase')} (2024 and 2025 are years under the Act alone) the claim is two thirds of the assessable profit, ${f6(cprBind[0].cit_allowance_claimed)} in 2024 and ${f6(cprBind[1].cit_allowance_claimed)} in 2025, and the rest is carried; 2026 is an NTA year and claims the carried amount in full (the CIT table of ${ref('hctbase')}).`);
 w();
 w('LOSSES BY CLASS. A loss (or a chargeable profit below zero) is carried to the next year and used there, separately for the hydrocarbon tax and for companies income tax. On the CPR case:');
 w();
@@ -828,7 +835,7 @@ table(['year', 'framework', 'CIT assessable profit', 'HCT + CIT + TET + levy', `
 must('min ETR: no top-up in the PIA year', (row(me, 2025).min_etr_topup ?? 0) === 0 && (row(me, 2026).min_etr_topup ?? 0) > 0, 'etr');
 must('min ETR at 15: no top-up (the taxes already exceed 15 percent of the base)', me15.cashFlowData.every((d) => (d.min_etr_topup ?? 0) === 0), 'etr15');
 w();
-w('WHAT DID NOT CHANGE. The royalty rates, the tranches, the royalty by price, the hydrocarbon tax rates of 30 and 15 percent onshore and in shallow water, the cost price ratio of 65 percent and the converted-lease production allowance are the same under both frameworks: the engine\'s royalty, price royalty and cost price ratio take no framework input at all.');
+w('WHAT DID NOT CHANGE. The royalty rates, the tranches, the royalty by price, the hydrocarbon tax rates of 30 and 15 percent onshore and in shallow water, the cost price ratio of 65 percent and the converted-lease production allowance are the same under both frameworks: the engine\'s royalty and royalty by price functions take no framework input, and its cost price ratio reads none.');
 must('the royalty functions take no framework input', E.deriveOilRoyaltyRate.length === 2 && E.derivePriceRoyaltyRate.length <= 4, `${E.deriveOilRoyaltyRate.length}`);
 must('the converted allowance is the same under both frameworks', PA('converted', 'onshore', 1000000, 75, 0, 'pia_only').allowance === PA('converted', 'onshore', 1000000, 75, 0, 'nta_2025').allowance, 'conv');
 
@@ -873,7 +880,7 @@ table(['line', 'Alpha, 100 percent', 'Alpha, 50 percent'], [
 ].map(([l, a, b]) => [l, f6(a), f6(b)]));
 must('Alpha: the take equals government cash flow over the pre-take value', Math.abs(A.take - 100 * A.gcf / A.pre) <= 1e-9 && Math.abs(AW.take - 100 * AW.gcf / AW.pre) <= 1e-9, `${A.take} ${100 * A.gcf / A.pre}`);
 must('Alpha: every money line halves at 50 percent', ['royalty', 'hct', 'cit', 'levy', 'hcdt', 'nddc'].every((k) => Math.abs(AW[k] - A[k] / 2) <= 1e-6 * Math.max(1, A[k])), 'half');
-must('Alpha: the take is the same at 50 percent', Math.abs(A.take - AW.take) <= 1e-9, `${A.take} ${AW.take}`);
+must('Alpha: the take is the same at 50 percent, exactly', A.take === AW.take, `${A.take} ${AW.take}`);
 w();
 w('Government cash flow over the pre-take value reproduces the engine\'s take on both lines (checked). At 50 percent every money line is half (checked) and the take does not move (checked): the tranches and caps are read at field level before the share is taken.');
 
