@@ -13,10 +13,10 @@
  {
   "prompt": "AKATA under production sharing at a 60 percent cost oil cap reports NPV 29960298.75, and its pool reads 133542720.00 at the end of 2029 and 0.00 by 2034. Where does a reader get those pool figures, and what is still missing?",
   "options": [
-   "From the taxable_income column, which under a production sharing contract is the unrecovered cost carried into each year of the ledger.",
+   "The taxable_income column, which under a production sharing contract is the unrecovered cost carried into each year of the ledger.",
    "From the KPI block, which reports the cost recovered each year whenever the cost oil cap binds, beside the pool it leaves behind.",
    "From psc_cost_pool_after on each row; the cost recovered in a year is printed in no column and needs the recovery function marched.",
-   "From the difference between gross revenue and net cash flow on each row, which is the cost oil the contractor took in that year."
+   "By subtracting net cash flow from gross revenue on each row, which gives the cost oil the contractor took in that year."
   ],
   "answer": 2,
   "explanation": "Each PSC row reports royalty, profit oil as taxable income, tax, net cash flow and psc_cost_pool_after, the balance carried. At a 30 percent cap the pool ends at 207346412.26, which the KPI reports as unrecovered at cessation; the recovery itself is in no column."
@@ -58,23 +58,23 @@
   "prompt": "Two readers run AKATA in deep offshore, check every rate against the published tables and find each one right, yet one reports 60060654.75 and the other 136554243.51. What separates them?",
   "options": [
    "One string, the stated reading of the deep offshore HCT in an NTA year; neither figure is usable without that reading written beside it.",
-   "One reader used the Regulations price royalty benchmarks, which overstate the royalty and pull the NPV down by the difference between the two.",
-   "One reader ran the ledger on the nominal basis and the other on the real one, and the 3 percent inflation accounts for the gap.",
+   "The Regulations price royalty benchmarks, used by one reader only, which overstate the royalty and pull the NPV down by the difference between the two.",
+   "A nominal basis for one reader and a real one for the other, with the 3 percent inflation accounting for the gap.",
    "One reader forgot the production allowance of 5500000.00 in 2029, which over the life of the field is the difference between the two figures."
   ],
   "answer": 0,
   "explanation": "aggressive_pml_30 charges the hydrocarbon tax at 0.300000 and conservative_zero at nothing. The engine refuses a deep offshore NTA year until one is stated, and the course grades neither: the texts leave the rate open."
  },
  {
-  "prompt": "AKATA as a new lease with prior cumulative 0 and as a new lease with prior cumulative 96000000, both run at a stated new-PML hydrocarbon tax rate, print identical 2029 rows: allowance 17600000.00 on 2200000.00 eligible bbl with the cap flag false. How does a reader tell the two runs apart?",
+  "prompt": "AKATA as a new lease with prior cumulative 0 and as a new lease with prior cumulative 96000000, both run at a stated new-PML hydrocarbon tax rate, print the same 2029 allowance line: allowance 17600000.00 on 2200000.00 eligible bbl with the cap flag false. How does a reader tell the two runs apart?",
   "options": [
    "From the 2029 cap flag, which reads true on the prior-production run because the cap is tested on the prior barrels before the year begins.",
-   "Only from the totals: the allowance is 77440000.00 over the life in one and 54720000.00 in the other, because the cap is crossed later.",
+   "From cumulative_oil_bbl_lifetime, 2200000.00 against 98200000.00 in 2029; the allowances part from 2030, 77440000.00 against 54720000.00 over the life.",
    "From the 2029 HCT, which is lower on the prior-production run because the allowance is prorated by the barrels left under the cap.",
    "They cannot be told apart at all, because the engine reports the allowance only for the first year and the totals are both 77440000.00."
   ],
   "answer": 1,
-  "explanation": "After the cap every later barrel still earns the lower after-cap allowance, which is why the second total is lower yet well above zero. The allowance does not depend on the stated rate; a converted lease earns 5500000.00 in 2029 and 24200000.00 over the life."
+  "explanation": "In 2030 the second run crosses 100000000 and earns 14600000.00 against 14800000.00; the 2029 HCT is 23578719.48 in both. After the cap every later barrel still earns the lower after-cap allowance, which is why the second total is lower yet well above zero. The allowance does not depend on the stated rate; a converted lease earns 5500000.00 in 2029 and 24200000.00 over the life."
  },
  {
   "prompt": "On AKATA's 2029 row under the PIA the CIT assessable profit is 141335497.73 and the chargeable profit 99335497.73. What is the 42000000.00 between them?",

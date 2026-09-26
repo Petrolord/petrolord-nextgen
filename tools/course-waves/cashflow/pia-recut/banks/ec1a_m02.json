@@ -88,7 +88,7 @@
   "explanation": "At 60 the rate is 0.010000 in 2021, 0.005432 in 2025, 0.000209 in 2030 and 0.000000 in 2035, a royalty in name only long before it vanishes. These are the Regulations (2021) base figures, the engine default."
  },
  {
-  "prompt": "pia_price_royalty_ceiling at 200.000000 pays 365000000.000000 on 3650000000.00 of gross revenue, exactly 10 percent, and the table reads 0.100000 at 200 in 2021, 2025, 2030 and 2035. What does a price above the 150 anchor earn?",
+  "prompt": "pia_price_royalty_ceiling at 200.000000 pays 365000000.000000 on 3650000000.00 of gross revenue, exactly 10 percent, and the table reads 0.100000 at 200 in 2021, 2025, 2030 and 2035. What does a price at or above the year's high benchmark earn?",
   "options": [
    "A rate that keeps climbing at the upper tier's slope, twice as steep as the lower tier, so that 200 earns more than 150 and 250 more than 200.",
    "The upper tier rate read at the escalated 150 anchor, which drifts upward with the years so that 200 earns a little more each year.",
@@ -96,7 +96,7 @@
    "The ceiling of 0.100000 and no more, which is the only part of the curve that the years do not erode."
   ],
   "answer": 3,
-  "explanation": "pia_high_price_royalty_tiers at 140.000000 pays 202719327.420547 on 2555000000.00, a rate of 0.079342, still between the escalated middle and high benchmarks; 160 and 200 both read 0.100000 in 2021."
+  "explanation": "pia_high_price_royalty_tiers at 140.000000 pays 202719327.420547 on 2555000000.00, a rate of 0.079342, still between the escalated middle and high benchmarks; 160 and 200 both read 0.100000 in 2021. A price of 160 in 2025 still sits below that year's 162.36 benchmark and reads 0.097820."
  },
  {
   "prompt": "pia_gas_only_hct_zero sells 20000000.00 Mscf and no oil for 90000000.00 of gross revenue at an oil price of 80.000000, and its price_royalty column reads 0.000000 beside a production royalty of 4500000.00. Why no price royalty?",
@@ -129,7 +129,7 @@
    "The WI 50 row applies 0.075000 to the field's 21900000.00 bbl and then halves, while the naive row applies 0.050000 and does not halve, and the scalings land on those figures."
   ],
   "answer": 2,
-  "explanation": "royalty_liquids_bopd reads 60000 on the WI 50 row and 30000 on the naive row, and cumulative_oil_bbl_lifetime reads 21900000.00 and 10950000.00; only the lifetime column and prod_alw_eligible_bbl remember the field. Half of 94900000.00 is 47450000.00."
+  "explanation": "royalty_liquids_bopd reads 60000 on the WI 50 row and 30000 on the naive row, and cumulative_oil_bbl_lifetime reads 21900000.00 and 10950000.00; the lifetime column, prod_alw_eligible_bbl and royalty_liquids_bopd remember the field, and oil_bbl does not. Half of 94900000.00 is 47450000.00."
  },
  {
   "prompt": "pia_deep_offshore_naive_30k lands in the cheaper 0.050000 rate yet reports NPV 369073842.57, below the correct half share of 453861842.57. What pulls it down?",

@@ -206,7 +206,7 @@
    "80.000000 in every year, before the base year as well as after it."
   ],
   "answer": 3,
-  "explanation": "Zero means flat; it is a blank, never a zero, that falls back to inflation, and the same call with the escalator at 10 returns 72.727273 for 2029."
+  "explanation": "Zero means flat; only a blank escalator falls back to inflation, and the same call with the escalator at 10 returns 72.727273 for 2029."
  },
  {
   "prompt": "A reader sets a 10 percent escalator for a flat price, then enters the deck_step_hold deck, which ends at 50 in 2032. What does the resolver return for 2035?",

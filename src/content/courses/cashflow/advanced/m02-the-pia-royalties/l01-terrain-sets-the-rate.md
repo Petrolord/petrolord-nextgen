@@ -1,6 +1,6 @@
 # Terrain and daily rate set the rate
 
-The PIA production royalty is a rate on the year's liquids revenue chosen by where the field sits and how much it produces a day, and in three of the four terrains the daily rate moves it.
+The PIA production royalty is a rate on the year's liquids revenue chosen by where the field sits and how much it produces a day. PIA figures here use the Regulations (2021) price-royalty base, the engine default.
 
 {{panel:ec-fiscal-explorer}}
 
@@ -17,7 +17,7 @@ deriveOilRoyaltyRate by terrain, read at five daily rates:
 
 Onshore and shallow water price the day's barrels in tranches: the first 5000 bopd at 5 percent, the next 5000 at 7.5 percent, everything above 10000 bopd at the terrain's own rate, 15 percent onshore and 12.5 percent in shallow water. Deep offshore pays 5 percent up to and including 50000 bopd and 7.5 percent on the share above. Each terrain then charges ONE weighted average rate on the whole year's volume. Frontier is the only flat terrain, 0.075000 at every rate.
 
-Gas and NGL pay 0.050000 in every terrain, falling to 0.025000 on the share used in-country. A marginal field is not a terrain of its own: it sits onshore or in shallow water and pays that terrain's tranches.
+Gas and NGL pay 0.050000 in every terrain, and gas used in-country pays 0.025000 on that share; natural gas liquids produced separately stay at 5 percent. A marginal field is not a terrain of its own: it sits onshore or in shallow water and pays that terrain's tranches.
 
 ## The same rows, three terrains
 

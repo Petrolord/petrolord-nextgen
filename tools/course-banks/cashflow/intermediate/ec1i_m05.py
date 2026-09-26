@@ -50,7 +50,7 @@ q(2,
 q(3,
  "An analyst averages AKATA's nine sweep NPVs, from -169873348.04 at 30 USD/bbl to 231658748.27 at 120, and reports the mean as the expected value. What is wrong?",
  "Each NPV says what the field is worth if the price is that number for the whole life, and the sweep says nothing about how likely any price is.",
- ["The average must be taken over the discounted flows before the ledger is summed, never over the NPVs afterwards.",
+ ["The average must be taken over the discounted flows before the ledger is summed, and the NPVs afterwards are the wrong thing to average.",
   "The sweep is on the flat price only, so the mean ignores the 2 percent escalator that the engine adds on top at each price.",
   "The sweep should have been weighted by the take at each price, since the government's share changes from 57.9418 to null across it."],
  "Nine ledgers at nine flat prices are nine conditional answers, and averaging them is not an expected value because no probability was ever attached to a price.")
@@ -120,7 +120,7 @@ q(3,
  "At 40 percent decline seven years are trimmed and three rows survive, and total revenue falls from 3485716284.18 at 5 percent decline to 794617600.00.")
 
 q(0,
- "The decline sweep reports a take of 1079.0391 percent at 40 percent decline and a unit technical cost of 78.666122 USD/boe. What is the 1199.4096?",
+ "The decline sweep reports a take of 1079.0391 percent at 40 percent decline and a unit technical cost of 78.666122 USD/boe. What is the 1079.0391?",
  "A share of a pre-take value that has almost vanished, because rows were trimmed while royalties are still charged on what remains.",
  ["A rounding fault in the take, which the engine should have reported as null once the residual turned negative as it does on AKATA at 40 USD/bbl.",
   "The royalties of 72878470.21 divided by the three surviving rows of revenue, which is how the take is defined once the limit engages.",

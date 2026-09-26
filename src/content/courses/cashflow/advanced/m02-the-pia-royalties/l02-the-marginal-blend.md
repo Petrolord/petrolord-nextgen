@@ -35,7 +35,7 @@ Reading the 8000 bopd row as 7.5 percent on every barrel. That is 0.075000, the 
 
 ## What it refuses
 
-The engine reads the year's crude oil plus condensate over the calendar days of the year, and says so in its own statements: the Regulations divide each month's production by the days oil was produced in that month, so a field that ramps inside a year is priced on its average here. The blend carries no price component; the price royalty is charged separately, and on the published case it adds 5585336.289727. And the blend does not set the tax rate: that is the pre-2021 flag.
+The engine reads the year's crude oil plus condensate over the calendar days of the year, and says so in its own statements: the Regulations divide each month's production by the days oil was produced in that month, so a field that ramps inside a year is priced on its average here. The blend carries no price component; the price royalty is charged separately, and on the published case, on the Regulations (2021) base the engine uses by default, it adds 5585336.289727. And the blend does not set the tax rate: that is the pre-2021 flag.
 
 ## Exercise
 

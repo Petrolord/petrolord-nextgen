@@ -73,10 +73,10 @@
    "Into the recoverable cost lane, so it rides the pool as a cost to be recovered rather than being paid outside the contract.",
    "It was deducted from the contractor's profit oil before tax, which is why the net fell by the full 10000000.00 while the taxable income stayed at 27000000.00.",
    "It was paid from the contractor's profit oil after tax and shared with the state at the 50 percent profit split, leaving the contractor's cash lower by the whole sum.",
-   "It was charged as a lump sum in the last year of the field, and the sinking fund label only records that the money was set aside in 2031 rather than spent."
+   "A lump sum charged in the last year of the field, the sinking fund label only recording that the money was set aside in 2031 rather than spent."
   ],
   "answer_index": 0,
   "explanation": "The tax is unchanged at 13500000.00 because the base is unchanged; the contribution is a cost, and costs under a PSC go into the pool and stay out of the tax base.",
-  "why": "Owner copy rule: an \"X, not Y\" contrastive reworded plainly; no fact, figure or key changed."
+  "why": "Owner copy rule: an \"X, not Y\" contrastive reworded plainly; no fact, figure or key changed. Key-truth audit: opening tell: three distractors opened \"It was\"."
  }
 ]

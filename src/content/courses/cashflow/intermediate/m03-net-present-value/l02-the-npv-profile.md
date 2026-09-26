@@ -36,7 +36,7 @@ AKATA's applied rate is 6.796117 percent. The point is labelled 6.8 and reads 72
 
 ## Why the label and the rate part
 
-On a nominal basis the applied rate is the configured one, 10 percent on multiyear_pia_nominal, and label and rate agree to the digit: its 10 percent point reads 219158380.04, the headline. On a real basis the Fisher rate is rarely round, so the printed label and the rate behind it differ in the third decimal. A point computed at the printed 6.8 would discount a little harder than 6.796117 and land a little below the headline, by an amount that grows with the size of the field. Evaluated at the exact rate, every case in the table closes to 0.00.
+On a nominal basis the applied rate is the configured one, 10 percent on multiyear_pia_nominal, and label and rate agree to the digit: its 10 percent point reads 219158380.04, the headline. On a real basis the Fisher rate is rarely round, so the printed label and the rate behind it differ by less than 0.005 of a percentage point. A point computed at the printed 6.8 would discount a little harder than 6.796117 and land a little below the headline, by an amount that grows with the size of the field. Evaluated at the exact rate, every case in the table closes to 0.00.
 
 ## The mistake
 

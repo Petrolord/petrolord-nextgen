@@ -83,8 +83,8 @@ q(1,
  "pia_sinking_fund_wi_50 runs at a 50 percent working interest and reports total fund contributions of 30000000.00 beside a total_abandonment_cost and an abandonment_cost_funded of 30000000.00, with NPV 59518454.92. What does the agreement between those three figures say?",
  "That abandonment_cost_usd is the share under both funding modes, so a fund collects exactly the amount that was entered.",
  ["That the working interest is not applied to the decommissioning lane at all, so a fund at any interest collects the field-level cost and the partner overpays.",
-  "That the engine grossed an entered 15000000.00 up to a field figure and printed both, which is why the contributions and the cost agree.",
-  "That the fund was overfunded, and the surplus is released to the contractor in the final row, which is why the contributions exceed what the partner owes."],
+  "It shows the engine grossed an entered 15000000.00 up to a field figure and printed both, which is why the contributions and the cost agree.",
+  "An overfunded fund, the surplus released to the contractor in the final row, which is why the contributions exceed what the partner owes."],
  "The engine grosses the fund by one over the working interest before the monetary lines are scaled, so the contribution lands at the 30000000.00 entered. On AKATA at 50 percent the fund collects the whole 60000000.00 and reports NPV 7713047.81 with IRR 14.1861 percent.")
 
 q(2,

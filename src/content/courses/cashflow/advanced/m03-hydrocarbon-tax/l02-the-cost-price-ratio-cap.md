@@ -1,6 +1,6 @@
 # The cost price ratio cap
 
-The PIA lets a year claim only so much cost against its crude oil and condensate revenue for the hydrocarbon tax. What is refused is deferred, and what is still deferred when the field stops is lost.
+The PIA lets a year claim only so much cost against its crude oil and condensate revenue for the hydrocarbon tax. What is refused is deferred, and what is still deferred when the field stops is lost. PIA figures here use the Regulations (2021) price-royalty base, the engine default.
 
 {{panel:ec-fiscal-explorer}}
 
@@ -8,7 +8,7 @@ The PIA lets a year claim only so much cost against its crude oil and condensate
 
 cpr_cap is pia_cpr_limit_pct of the crude oil and condensate revenue, 65 percent by default (PIA Sixth Schedule para 2; NTA Sixth Schedule para 2). On the worked example 65 percent of 1460000000.00 is 949000000.00; on cpr_forfeiture 65 percent of 80000000.00 is 52000000.00; pia_cpr_carry_two_years states a limit of 30 percent, and 30 percent of 160000000.00 is 48000000.00. The claim is the year's opex plus the year's capital allowance plus anything deferred from earlier, the carried pool and the opex first. The worked example claims 182500000.00 of opex and 60000000.00 of allowance on 300000000.00 of capex: cpr_costs_claimed 242500000.00, deferred 0.00.
 
-The cap limits the hydrocarbon tax only. Companies income tax deducts its full costs whatever the cap does, and with gas in the stream the shared costs enter the claim at the crude-plus-condensate share. AKATA in 2029 has a cap of 117260000.00, 65 percent of its 180400000.00 of oil revenue, and claims 64001892.15, which is its 24000000.00 of opex plus a fifth of the 210000000.00 capex taken at the oil share. In 2030 the cap is 100577100.00 and the claim 73427625.35, as the second year's 45000000.00 of capex starts its allowance.
+The cap limits the hydrocarbon tax only. Companies income tax deducts its full costs whatever the cap does, and with gas in the stream the shared costs enter the claim at the crude-plus-condensate share. AKATA in 2029 has a cap of 117260000.00, 65 percent of its 180400000.00 of oil revenue, and claims 64001892.15, which is its 24000000.00 of opex plus a fifth of the 210000000.00 capex, both taken at the oil share. The share is an engine approximation; the Act allocates associated-gas costs to crude oil. In 2030 the cap is 100577100.00 and the claim 73427625.35, as the second year's 45000000.00 of capex starts its allowance.
 
 ## When it binds
 
@@ -19,11 +19,11 @@ The cap limits the hydrocarbon tax only. Companies income tax deducts its full c
 | pia_cpr_carry_two_years 2026 | 48000000.00 | 48000000.00 | 44000000.00 | |
 | pia_cpr_carry_two_years 2027 | 48000000.00 | 48000000.00 | 66000000.00 | 66000000.00 |
 
-cpr_forfeiture has 40000000.00 of opex and a 20000000.00 first-year allowance against a 52000000.00 cap; 8000000.00 defers and, with no later year, is forfeited. pia_cpr_carry_two_years adds 22000000.00 to the deferred pool in every year, because the claim is always 48000000.00 against 30000000.00 of opex plus the allowance, and the deferred amount is never a tax loss: hct_loss_carryforward reads 0.00 on every row while cpr_deferred_to_next reads 66000000.00. A cap that binds on a flat field binds forever.
+cpr_forfeiture has 40000000.00 of opex and a 20000000.00 first-year allowance against a 52000000.00 cap; 8000000.00 defers and, with no later year, is forfeited. pia_cpr_carry_two_years adds 22000000.00 to the deferred pool in every year, because the claim is always 48000000.00 against 30000000.00 of opex plus the allowance, and the deferred amount is never a tax loss: hct_loss_carryforward reads 0.00 on every row while cpr_deferred_to_next reads 66000000.00.
 
 ## AKATA
 
-At 65 percent the cap binds twice. In 2032 the cap is 73531102.32 and 1356394.56 defers; in 2033 the cap is 62886061.20 and the deferral grows to 14120774.92; in 2034 the cap is 54139706.27, the claim is 49828572.67 and the deferral clears. Set pia_cpr_limit_pct to 40 and the deferral starts in 2030 and grows every year to the end: HCT rises from 91654840.32 to 121989085.43, CIT stays 102166298.31, and NPV falls from 59766796.57 to 37056190.44. The cap on a declining field is a tax on the decline.
+At 65 percent the cap binds twice. In 2032 the cap is 73531102.32 and 1356394.56 defers; in 2033 the cap is 62886061.20 and the deferral grows to 14120774.92; in 2034 the cap is 54139706.27, the claim is 49828572.67 and the deferral clears. Set pia_cpr_limit_pct to 40 and the deferral starts in 2030 and grows every year to the end: HCT rises from 91654840.32 to 121989085.43, CIT stays 102166298.31, and NPV falls from 59766796.57 to 37056190.44.
 
 ## The mistake
 

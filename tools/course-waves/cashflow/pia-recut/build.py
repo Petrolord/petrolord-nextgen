@@ -145,7 +145,7 @@ def main():
     edits = {
         'course': 'cashflow', 'recut': 'PIA 2021 re-cut, phase 2 (branch fix/cashflow-fiscal-pia-recut)',
         'served': 'docs/pia-recut/served/cashflow_questions.json and cashflow_capstones.json (tools/course-waves/fiscal/pia-recut/replay_banks.sh on a local scratch database)',
-        'digest': 'tools/course-waves/cashflow/digest.txt (md5 950a84dbee7d53c4d98bf9be0a5ebba1)',
+        'digest': 'tools/course-waves/cashflow/digest.txt (md5 af11851d3a3586a7eceab60a89b40d9e)',
         'counts': dict(collections.Counter(k[0] for k in new)),
         'questions': [
             {'slug': 'cashflow', 'tier': k[0], 'scope': k[1], 'module_key': k[2], 'ord': k[3],

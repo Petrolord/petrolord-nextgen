@@ -1,6 +1,6 @@
 # Field-level tiers and working interest
 
-The royalty tranche is read on the field's barrels, and the working interest is applied to the money afterward. Scale the barrels first and you change the tranche.
+The royalty tranche is read on the field's barrels, and the working interest is applied to the money afterward. Scale the barrels first and you change the tranche. PIA figures here use the Regulations (2021) price-royalty base, the engine default.
 
 {{panel:ec-fiscal-explorer}}
 

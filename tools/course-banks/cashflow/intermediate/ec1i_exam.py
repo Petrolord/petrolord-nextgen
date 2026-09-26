@@ -173,7 +173,7 @@ q(2,
  ["single_year_positive has no capex, and the discounted take only differs from the undiscounted where there is capex to discount, because the capex is the only outflow the government does not share and so the only row that can move the ratio between the two readings.",
   "single_year_positive is on the nominal basis, where discounting is at 10.000000 percent, and the two takes coincide whenever the applied rate is the nominal one, because the deflator and the discount are then the same factor and cancel between the numerator and the denominator of the share.",
   "AKATA's royalty of 15 percent is discounted and its tax of 40 percent is not, and the split is what opens the gap: royalty is charged on revenue as it arrives, so it carries an exponent, while tax is settled on the year's income and is carried at face value in both readings."],
- "Every published case with a tail shows the same direction, multiyear_jv_real 69.2573 against 75.4578 and multiyear_pia_real 69.3025 against 75.6850.")
+ "Both multi-year published fields show the same direction, multiyear_jv_real 69.2573 against 75.4578 and multiyear_pia_real 69.3025 against 75.6850; a large outflow late in life, as on jv_abandonment_two_irr_roots, can turn it the other way.")
 
 q(1,
  "At 60 percent working interest AKATA reports NPV 43520898.40, IRR 29.2361 percent and take 66.1723 percent, the same take as at 100 percent. Which of the three is a ratio rather than an amount, and why does it hold?",

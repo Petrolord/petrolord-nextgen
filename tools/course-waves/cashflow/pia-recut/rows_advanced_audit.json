@@ -1,0 +1,18 @@
+[
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-cost-recovery",
+  "ord": 15,
+  "prompt": "AKATA under production sharing at a 30 percent cap leaves 207346412.26 in the pool at the end of 2035. Which output column of the engine reports that figure?",
+  "options": [
+   "The depreciation column, which under a PSC reports the unrecovered capex in the pool rather than a write-off, because cost oil replaces depreciation.",
+   "psc_cost_pool_after on the 2035 row, and kpis.psc_unrecovered_cost_at_cessation repeats it as the cost the end of the field leaves unrecovered.",
+   "The cumulative_cash_flow column, which on a PSC row is the contractor's cumulative position after cost oil and therefore mirrors the pool with its sign reversed.",
+   "The tax column, because tax moves with the pool, 10393930.24 in 2035 at 30 percent against 8400589.37 at 60, and the pool can be read back from it."
+  ],
+  "answer_index": 1,
+  "explanation": "Every production sharing row carries psc_cost_pool_after, the cost still carried at the year end, and the KPI block reports the pool cessation leaves; no column prints the cost recovered in a year, so the recovery itself is read by marching applyPSC. Tax moves with the pool, but tax alone cannot tell a low tax from a low profit.",
+  "why": "KEYED ANSWER WRONG (key-truth audit): the key said no column reports the pool and the KPI prints it as not reported; the engine prints psc_cost_pool_after 207346412.26 on the 2035 row and kpis.psc_unrecovered_cost_at_cessation 207346412.26 (the digest generator read a KPI name that does not exist)."
+ }
+]

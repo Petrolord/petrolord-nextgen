@@ -1,6 +1,6 @@
 # Onward
 
-A fiscal ledger is a model of a law as one engine reads it. Be clear about what that earns and where it stops.
+A fiscal ledger is a model of a law as one engine reads it. Be clear about what that earns and where it stops. PIA figures here use the Regulations (2021) price-royalty base, the engine default.
 
 ## What it earns
 

@@ -28,7 +28,7 @@
    "80.000000 in every year, before the base year as well as after it."
   ],
   "answer_index": 3,
-  "explanation": "Zero means flat; it is a blank, never a zero, that falls back to inflation, and the same call with the escalator at 10 returns 72.727273 for 2029.",
+  "explanation": "Zero means flat; only a blank escalator falls back to inflation, and the same call with the escalator at 10 returns 72.727273 for 2029.",
   "why": "Owner copy rule: an \"X, not Y\" contrastive reworded plainly; no fact, figure or key changed."
  },
  {
@@ -88,7 +88,7 @@
   "options": [
    "It refuses with opex_no_cost_column, because a missing opex file has no cost column to recognise.",
    "It refuses with no_production_rows, since a run needs all three files before it can build a ledger.",
-   "Nothing: the run proceeds with total opex 0.00, because the refusals check only that a recognised header exists, never that opex is present or the number under it right.",
+   "Nothing: the run proceeds with total opex 0.00, because the refusals check only that a recognised header exists and leave the presence and size of opex unchecked.",
    "It runs, but fills opex from unit_opex_usd_per_bbl times the annual volumes, the way the fallback sums *_usd parts when no preferred alias is present, so that the ledger is not left without a cost."
   ],
   "answer_index": 2,

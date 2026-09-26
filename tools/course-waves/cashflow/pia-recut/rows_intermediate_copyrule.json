@@ -134,7 +134,7 @@
   "ord": 6,
   "prompt": "An analyst averages AKATA's nine sweep NPVs, from -169873348.04 at 30 USD/bbl to 231658748.27 at 120, and reports the mean as the expected value. What is wrong?",
   "options": [
-   "The average must be taken over the discounted flows before the ledger is summed, never over the NPVs afterwards.",
+   "The average must be taken over the discounted flows before the ledger is summed, and the NPVs afterwards are the wrong thing to average.",
    "The sweep is on the flat price only, so the mean ignores the 2 percent escalator that the engine adds on top at each price.",
    "The sweep should have been weighted by the take at each price, since the government's share changes from 57.9418 to null across it.",
    "Each NPV says what the field is worth if the price is that number for the whole life, and the sweep says nothing about how likely any price is."

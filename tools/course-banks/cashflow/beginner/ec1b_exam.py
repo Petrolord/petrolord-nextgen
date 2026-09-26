@@ -157,7 +157,7 @@ q(3,
  ["80.000000 from the base year onward and de-escalated values before it, since the base year is still the anchor for the years behind it.",
   "80.000000 from 2030 onward and the inflation rate applied before it, because a typed zero only switches off the forward escalation.",
   "Nothing, because an escalator of 0 is read as unset and falls back to the inflation rate."],
- "Zero means flat; it is a blank, never a zero, that falls back to inflation, and the same call with the escalator at 10 returns 72.727273 for 2029.")
+ "Zero means flat; only a blank escalator falls back to inflation, and the same call with the escalator at 10 returns 72.727273 for 2029.")
 
 q(2,
  "A reader sets a 10 percent escalator for a flat price, then enters the deck_step_hold deck, which ends at 50 in 2032. What does the resolver return for 2035?",

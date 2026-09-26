@@ -1,6 +1,6 @@
 # The minimum effective tax rate
 
-A floor under the whole tax line of an NTA year, measured against one profit, switched off by default. When it binds it does not add a tax; it adds whatever is missing.
+A floor under the whole tax line of an NTA year, measured against one profit, switched off by default. PIA figures here use the Regulations (2021) price-royalty base, the engine default.
 
 {{panel:ec-fiscal-explorer}}
 

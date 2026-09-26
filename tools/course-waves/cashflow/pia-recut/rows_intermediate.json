@@ -60,7 +60,7 @@
    "AKATA's royalty of 15 percent is discounted and its tax of 40 percent is not, and the split is what opens the gap: royalty is charged on revenue as it arrives, so it carries an exponent, while tax is settled on the year's income and is carried at face value in both readings."
   ],
   "answer_index": 2,
-  "explanation": "Every published case with a tail shows the same direction, multiyear_jv_real 69.2573 against 75.4578 and multiyear_pia_real 69.3025 against 75.6850.",
+  "explanation": "Both multi-year published fields show the same direction, multiyear_jv_real 69.2573 against 75.4578 and multiyear_pia_real 69.3025 against 75.6850; a large outflow late in life, as on jv_abandonment_two_irr_roots, can turn it the other way.",
   "why": "Moved takes."
  },
  {
@@ -404,7 +404,7 @@
   "scope": "module",
   "module_key": "m05-sweeps",
   "ord": 15,
-  "prompt": "The decline sweep reports a take of 1079.0391 percent at 40 percent decline and a unit technical cost of 78.666122 USD/boe. What is the 1199.4096?",
+  "prompt": "The decline sweep reports a take of 1079.0391 percent at 40 percent decline and a unit technical cost of 78.666122 USD/boe. What is the 1079.0391?",
   "options": [
    "A share of a pre-take value that has almost vanished, because rows were trimmed while royalties are still charged on what remains.",
    "A rounding fault in the take, which the engine should have reported as null once the residual turned negative as it does on AKATA at 40 USD/bbl.",

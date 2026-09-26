@@ -1,16 +1,16 @@
 # HCDT and NDDC
 
-Two levies are charged before any profit is measured, both at 3 percent, on two different cost figures, and both come out of the tax bases and the cash rather than the tax column.
+Two levies are charged before any profit is measured, both at 3 percent, on two different cost figures, and both come out of the tax bases and the cash rather than the tax column. PIA figures here use the Regulations (2021) price-royalty base, the engine default.
 
 {{panel:ec-fiscal-explorer}}
 
 ## HCDT reads last year's opex
 
-The host community levy is 3 percent of the prior year's opex (PIA s.240(2)). The worked example carries pia_prior_year_opex_usd 170000000 and prints hcdt 5100000.00 in 2025. AKATA under the PIA sets pia_prior_year_opex_usd 0, so 2029 reads hcdt 0.00, 2030 reads 720000.00 on 2029's 24000000.00, and 2031 reads 741600.00 on 2030's 24720000.00. The levy lags the cost by a year, and the first year of a new field pays none unless somebody supplies a prior year.
+The host community levy is 3 percent of the prior year's opex (PIA s.240(2)). The worked example carries pia_prior_year_opex_usd 170000000 and prints hcdt 5100000.00 in 2025. AKATA under the PIA sets pia_prior_year_opex_usd 0, so 2029 reads hcdt 0.00, 2030 reads 720000.00 on 2029's 24000000.00, and 2031 reads 741600.00 on 2030's 24720000.00.
 
 ## NDDC reads this year's whole budget, or a fixed sum
 
-The Niger Delta levy is 3 percent of the year's total annual budget, opex plus capex. pia_onshore_new_lease has opex 30000000.00 and capex 50000000.00, and its nddc reads 2400000.00. AKATA reads 7020000.00 in 2029, on 24000000.00 of opex and 210000000.00 of capex; 2091600.00 in 2030, on 24720000.00 and 45000000.00; and 763848.00 in 2031, when capex has stopped. The opex base is a stated option, never the default: set it on AKATA and the 2029 levy falls to 720000.00. When pia_nddc_levy_fixed_usd is set the fixed sum replaces the percentage: the worked example carries 15000000 and prints nddc 15000000.00 on opex of 182500000.00. So AKATA's two columns share nothing: HCDT follows last year's opex and NDDC this year's spend.
+The Niger Delta levy is 3 percent of the year's total annual budget, opex plus capex. pia_onshore_new_lease has opex 30000000.00 and capex 50000000.00, and its nddc reads 2400000.00. AKATA reads 7020000.00 in 2029, on 24000000.00 of opex and 210000000.00 of capex; 2091600.00 in 2030, on 24720000.00 and 45000000.00; and 763848.00 in 2031, when capex has stopped. The default base is opex plus capex; opex alone is a stated option: set it on AKATA and the 2029 levy falls to 720000.00. When pia_nddc_levy_fixed_usd is set the fixed sum replaces the percentage: the worked example carries 15000000 and prints nddc 15000000.00 on opex of 182500000.00. So AKATA's two columns share nothing: HCDT follows last year's opex and NDDC this year's spend.
 
 ## Where they land
 

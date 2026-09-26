@@ -121,7 +121,7 @@ q(1,
 
 q(2,
  "per_well_beats_total_rollup was run with no opex file at all. What does the refusal machinery do?",
- "Nothing: the run proceeds with total opex 0.00, because the refusals check only that a recognised header exists, never that opex is present or the number under it right.",
+ "Nothing: the run proceeds with total opex 0.00, because the refusals check only that a recognised header exists and leave the presence and size of opex unchecked.",
  ["It refuses with opex_no_cost_column, because a missing opex file has no cost column to recognise.",
   "It refuses with no_production_rows, since a run needs all three files before it can build a ledger.",
   "It runs, but fills opex from unit_opex_usd_per_bbl times the annual volumes, the way the fallback sums *_usd parts when no preferred alias is present, so that the ledger is not left without a cost."],

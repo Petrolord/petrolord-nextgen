@@ -12,7 +12,7 @@ derivePriceRoyaltyRate for shallow water in 2021:
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | rate | 0.000000 | 0.005000 | 0.010000 | 0.025000 | 0.030000 | 0.050000 | 0.060000 | 0.075000 | 0.100000 | 0.100000 |
 
-Nothing at 50 or below. From 50 the rate climbs in a straight line to 0.050000 at 100, then twice as steeply to 0.100000 at 150, and from there it is flat: 160 and 200 both read 0.100000. That flat is the ceiling, the only part the years do not erode. Frontier acreage pays none at any price.
+Nothing at 50 or below. From 50 the rate climbs in a straight line to 0.050000 at 100, then at the same slope to 0.100000 at 150, and from there it is flat: 160 and 200 both read 0.100000. That flat is the ceiling, the only part the years do not erode. Frontier acreage pays none at any price.
 
 ## The benchmarks move
 

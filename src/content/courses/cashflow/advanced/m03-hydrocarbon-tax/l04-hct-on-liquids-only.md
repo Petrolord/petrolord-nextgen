@@ -1,6 +1,6 @@
 # HCT on liquids only
 
-The hydrocarbon tax has a rate set by terrain, licence and lease, and a base that is crude oil and condensate with gas left out.
+The hydrocarbon tax has a rate set by terrain, licence and lease, and a base that is crude oil and condensate with gas left out. PIA figures here use the Regulations (2021) price-royalty base, the engine default.
 
 {{panel:ec-fiscal-explorer}}
 
@@ -29,7 +29,7 @@ Deep offshore in a PIA year pays nothing: pia_deep_offshore_full, a 2025 year, c
 
 pia_gas_only_hct_zero sells 20000000.00 Mscf and no liquids for 90000000.00 of gross revenue. Its hct_assessable_profit is 0.00, hct_tax 0.00, and CIT is still 15420000.00 on a cit_chargeable_profit of 51400000.00. NPV 18318000.00. The Act taxes crude oil and condensate (PIA s.260(1); NTA s.65(2)), and the engine follows it whatever pia_hct_include_gas_revenue says: pia_gas_only_legacy_hct, the same field with that flag true, prints the same 0.00 and the same NPV. Condensate is a liquid: multiyear_pia_real lifts 6000000.00 bbl of oil and 400000.00 bbl of condensate in 2025 and prod_alw_eligible_bbl reads 6400000.00.
 
-On AKATA the exclusion is visible in the bases. The 2029 hct_assessable_profit is 136924208.42 while cit_assessable_profit is 141335497.73; both deduct the NDDC of 7020000.00, but the first leaves out the gas revenue and its royalty and takes the shared costs at the oil share. From there the HCT base loses the capital allowance and the production allowance of 5500000.00 to reach hct_chargeable_profit 90695731.60, and the 0.300000 rate gives 27208719.48. A field with 800 scf of gas per barrel pays its hydrocarbon tax on the oil alone.
+On AKATA the exclusion is visible in the bases. The 2029 hct_assessable_profit is 136924208.42 while cit_assessable_profit is 141335497.73; both deduct the NDDC of 7020000.00, but the first leaves out the gas revenue and its royalty and takes the shared costs at the oil share. From there the HCT base loses the capital allowance and the production allowance of 5500000.00 to reach hct_chargeable_profit 90695731.60, and the 0.300000 rate gives 27208719.48.
 
 ## The mistake
 

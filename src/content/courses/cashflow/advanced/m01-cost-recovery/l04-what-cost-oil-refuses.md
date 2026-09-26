@@ -6,7 +6,7 @@ The production sharing rows answer every question except the one that decides wh
 
 ## The columns that are there
 
-A PSC row reports gross_revenue, royalty, opex, capex, taxable_income (the contractor's profit oil), tax, net_cash_flow, psc_contractor_share_pct, the discounted and cumulative flows and oil_bbl. There is no depreciation column, because capex under a PSC is recovered as cost oil rather than written off, and there is no cost recovered column. The carried balance is reportable: the published psc_pool_unrecovered_at_cessation case prints psc_cost_pool_after on every row and a KPI for the pool that cessation forfeits.
+A PSC row reports gross_revenue, royalty, opex, capex, taxable_income (the contractor's profit oil), tax, net_cash_flow, psc_contractor_share_pct, the discounted and cumulative flows and oil_bbl. There is no depreciation column, because capex under a PSC is recovered as cost oil rather than written off, and there is no cost recovered column. The carried balance is reported: every PSC row prints psc_cost_pool_after, and a KPI reports the pool that cessation forfeits.
 
 ## The number that is not there
 

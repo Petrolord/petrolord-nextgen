@@ -24,12 +24,12 @@
   "options": [
    "That the working interest is not applied to the decommissioning lane at all, so a fund at any interest collects the field-level cost and the partner overpays.",
    "That abandonment_cost_usd is the share under both funding modes, so a fund collects exactly the amount that was entered.",
-   "That the engine grossed an entered 15000000.00 up to a field figure and printed both, which is why the contributions and the cost agree.",
-   "That the fund was overfunded, and the surplus is released to the contractor in the final row, which is why the contributions exceed what the partner owes."
+   "It shows the engine grossed an entered 15000000.00 up to a field figure and printed both, which is why the contributions and the cost agree.",
+   "An overfunded fund, the surplus released to the contractor in the final row, which is why the contributions exceed what the partner owes."
   ],
   "answer_index": 1,
   "explanation": "The engine grosses the fund by one over the working interest before the monetary lines are scaled, so the contribution lands at the 30000000.00 entered. On AKATA at 50 percent the fund collects the whole 60000000.00 and reports NPV 7713047.81 with IRR 14.1861 percent.",
-  "why": "L5: repair-history framing removed from the key and explanation; moved NPV re-derived by engine call."
+  "why": "L5: repair-history framing removed from the key and explanation; moved NPV re-derived by engine call. Key-truth audit: opening tell: three distractors opened \"That\"."
  },
  {
   "tier": "advanced",
@@ -86,14 +86,14 @@
   "ord": 2,
   "prompt": "AKATA under production sharing at a 60 percent cost oil cap reports NPV 29960298.75, and its pool reads 133542720.00 at the end of 2029 and 0.00 by 2034. Where does a reader get those pool figures, and what is still missing?",
   "options": [
-   "From the taxable_income column, which under a production sharing contract is the unrecovered cost carried into each year of the ledger.",
+   "The taxable_income column, which under a production sharing contract is the unrecovered cost carried into each year of the ledger.",
    "From the KPI block, which reports the cost recovered each year whenever the cost oil cap binds, beside the pool it leaves behind.",
    "From psc_cost_pool_after on each row; the cost recovered in a year is printed in no column and needs the recovery function marched.",
-   "From the difference between gross revenue and net cash flow on each row, which is the cost oil the contractor took in that year."
+   "By subtracting net cash flow from gross revenue on each row, which gives the cost oil the contractor took in that year."
   ],
   "answer_index": 2,
   "explanation": "Each PSC row reports royalty, profit oil as taxable income, tax, net cash flow and psc_cost_pool_after, the balance carried. At a 30 percent cap the pool ends at 207346412.26, which the KPI reports as unrecovered at cessation; the recovery itself is in no column.",
-  "why": "Keyed text false: every PSC row carries psc_cost_pool_after, the pool balance; only the cost recovered in a year is printed in no column. L5 framing removed. A distractor shortened to keep the bank inside the answer-length rank band."
+  "why": "Keyed text false: every PSC row carries psc_cost_pool_after, the pool balance; only the cost recovered in a year is printed in no column. L5 framing removed. A distractor shortened to keep the bank inside the answer-length rank band. Key-truth audit: opening tell: three distractors opened \"From\"."
  },
  {
   "tier": "advanced",
@@ -151,29 +151,29 @@
   "prompt": "Two readers run AKATA in deep offshore, check every rate against the published tables and find each one right, yet one reports 60060654.75 and the other 136554243.51. What separates them?",
   "options": [
    "One string, the stated reading of the deep offshore HCT in an NTA year; neither figure is usable without that reading written beside it.",
-   "One reader used the Regulations price royalty benchmarks, which overstate the royalty and pull the NPV down by the difference between the two.",
-   "One reader ran the ledger on the nominal basis and the other on the real one, and the 3 percent inflation accounts for the gap.",
+   "The Regulations price royalty benchmarks, used by one reader only, which overstate the royalty and pull the NPV down by the difference between the two.",
+   "A nominal basis for one reader and a real one for the other, with the 3 percent inflation accounting for the gap.",
    "One reader forgot the production allowance of 5500000.00 in 2029, which over the life of the field is the difference between the two figures."
   ],
   "answer_index": 0,
   "explanation": "aggressive_pml_30 charges the hydrocarbon tax at 0.300000 and conservative_zero at nothing. The engine refuses a deep offshore NTA year until one is stated, and the course grades neither: the texts leave the rate open.",
-  "why": "A stated reading was keyed as the right answer; the two deep offshore readings are now both stated readings and neither is right."
+  "why": "A stated reading was keyed as the right answer; the two deep offshore readings are now both stated readings and neither is right. Key-truth audit: opening tell: three distractors opened \"One reader\"."
  },
  {
   "tier": "advanced",
   "scope": "module",
   "module_key": "m06-the-expert-reading",
   "ord": 7,
-  "prompt": "AKATA as a new lease with prior cumulative 0 and as a new lease with prior cumulative 96000000, both run at a stated new-PML hydrocarbon tax rate, print identical 2029 rows: allowance 17600000.00 on 2200000.00 eligible bbl with the cap flag false. How does a reader tell the two runs apart?",
+  "prompt": "AKATA as a new lease with prior cumulative 0 and as a new lease with prior cumulative 96000000, both run at a stated new-PML hydrocarbon tax rate, print the same 2029 allowance line: allowance 17600000.00 on 2200000.00 eligible bbl with the cap flag false. How does a reader tell the two runs apart?",
   "options": [
    "From the 2029 cap flag, which reads true on the prior-production run because the cap is tested on the prior barrels before the year begins.",
-   "Only from the totals: the allowance is 77440000.00 over the life in one and 54720000.00 in the other, because the cap is crossed later.",
+   "From cumulative_oil_bbl_lifetime, 2200000.00 against 98200000.00 in 2029; the allowances part from 2030, 77440000.00 against 54720000.00 over the life.",
    "From the 2029 HCT, which is lower on the prior-production run because the allowance is prorated by the barrels left under the cap.",
    "They cannot be told apart at all, because the engine reports the allowance only for the first year and the totals are both 77440000.00."
   ],
   "answer_index": 1,
-  "explanation": "After the cap every later barrel still earns the lower after-cap allowance, which is why the second total is lower yet well above zero. The allowance does not depend on the stated rate; a converted lease earns 5500000.00 in 2029 and 24200000.00 over the life.",
-  "why": "Keyed total wrong: after the cap every later barrel still earns the after-cap allowance; the new-lease runs state the new-PML rate, which the allowance does not depend on."
+  "explanation": "In 2030 the second run crosses 100000000 and earns 14600000.00 against 14800000.00; the 2029 HCT is 23578719.48 in both. After the cap every later barrel still earns the lower after-cap allowance, which is why the second total is lower yet well above zero. The allowance does not depend on the stated rate; a converted lease earns 5500000.00 in 2029 and 24200000.00 over the life.",
+  "why": "Keyed total wrong: after the cap every later barrel still earns the after-cap allowance; the new-lease runs state the new-PML rate, which the allowance does not depend on. Key-truth audit: the keyed \"only from the totals\" was false: the 2029 cumulative_oil_bbl_lifetime reads 2200000.00 against 98200000.00 and the 2030 allowance is 14800000.00 against 14600000.00 (engine call)."
  },
  {
   "tier": "advanced",

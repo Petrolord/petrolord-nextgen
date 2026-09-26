@@ -108,7 +108,7 @@ q(0,
  "Into the recoverable cost lane, so it rides the pool as a cost to be recovered rather than being paid outside the contract.",
  ["It was deducted from the contractor's profit oil before tax, which is why the net fell by the full 10000000.00 while the taxable income stayed at 27000000.00.",
   "It was paid from the contractor's profit oil after tax and shared with the state at the 50 percent profit split, leaving the contractor's cash lower by the whole sum.",
-  "It was charged as a lump sum in the last year of the field, and the sinking fund label only records that the money was set aside in 2031 rather than spent."],
+  "A lump sum charged in the last year of the field, the sinking fund label only recording that the money was set aside in 2031 rather than spent."],
  "The tax is unchanged at 13500000.00 because the base is unchanged; the contribution is a cost, and costs under a PSC go into the pool and stay out of the tax base.")
 
 q(3,
@@ -121,11 +121,11 @@ q(3,
 
 q(1,
  "AKATA under production sharing at a 30 percent cap leaves 207346412.26 in the pool at the end of 2035. Which output column of the engine reports that figure?",
- "None. The rows carry no cost recovered and no carried forward column, the KPI block prints unrecovered cost at cessation not reported, and the pool is read only by marching applyPSC over the engine's own rows.",
+ "psc_cost_pool_after on the 2035 row, and kpis.psc_unrecovered_cost_at_cessation repeats it as the cost the end of the field leaves unrecovered.",
  ["The depreciation column, which under a PSC reports the unrecovered capex in the pool rather than a write-off, because cost oil replaces depreciation.",
   "The cumulative_cash_flow column, which on a PSC row is the contractor's cumulative position after cost oil and therefore mirrors the pool with its sign reversed.",
-  "The tax column, because tax is the only line that moves with the pool, 10393930.24 in 2035 at 30 percent against 8400589.37 at 60, and the pool is recoverable from it."],
- "Tax does move with the pool, but a reader who has not marched the pool cannot tell a low tax from a low profit, and the NPV of minus 104151944.05 does not say why either.")
+  "The tax column, because tax moves with the pool, 10393930.24 in 2035 at 30 percent against 8400589.37 at 60, and the pool can be read back from it."],
+ "Every production sharing row carries psc_cost_pool_after, the cost still carried at the year end, and the KPI block reports the pool cessation leaves; no column prints the cost recovered in a year, so the recovery itself is read by marching applyPSC. Tax moves with the pool, but tax alone cannot tell a low tax from a low profit.")
 
 emit(Q, '/root/wt-ec7-recut/tools/course-banks/cashflow/advanced/ec1a_m01.json', expect_n=15)
 finish()

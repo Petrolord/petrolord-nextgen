@@ -1,6 +1,6 @@
 # Loss relief
 
-A loss year pays no tax and banks the loss. The bank is a pool per tax base, and the row's taxable income column does not show it being spent.
+A loss year pays no tax and banks the loss. The bank is a pool per tax base, and the row's taxable income column does not show it being spent. PIA figures here use the Regulations (2021) price-royalty base, the engine default.
 
 {{panel:ec-fiscal-explorer}}
 

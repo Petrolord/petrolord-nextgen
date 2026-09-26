@@ -35,8 +35,8 @@ q(1,
  "In its 2025 year under the Act the worked example pays TET of 31747249.45, and forced to the 2025 framework it pays a development levy of 42329665.93 instead, with royalty, HCT and CIT unchanged. Why is the levy four thirds of the TET?",
  "Same base, the CIT assessable profit of 1058241648.19; only the rates differ, 4 against 3.",
  ["The levy is charged on the HCT base, which is 15000000.00 larger because the NDDC is kept out of that base and taken off the CIT base only.",
-  "The levy is charged on the chargeable profit of 998241648.19 after the allowance, and then a second time on the part of the allowance that was restricted.",
-  "The levy includes the TET it replaced plus the HCDT of 5100000.00 rolled into one line."],
+  "Its base is the chargeable profit of 998241648.19 after the allowance, and the levy is then charged a second time on the part of the allowance that was restricted.",
+  "It includes the TET it replaced plus the HCDT of 5100000.00 rolled into one line."],
  "Both are charged on the CIT assessable profit of 1058241648.19, TET at 3 percent in 2025 and the levy at 4 percent, so the difference is one percent of that base, 10582416.48. Total tax moves from 617004738.36 to 627587154.84 and NPV from 141236909.83 to 130654493.35.")
 
 q(1,
@@ -74,9 +74,9 @@ q(3,
 q(0,
  "The onshore royalty reads 0.062500 at 10000 bopd, exactly halfway between 0.050000 and 0.075000, but 0.106250 at 20000 bopd, which is not halfway to 0.150000. Why the difference?",
  "The rate is an average across the year's barrels: at 10000 bopd the two lower tiers split the barrels evenly, and at 20000 the first 10000 bopd are still priced at those tiers while only the rest pays 15 percent.",
- ["The 20000 bopd row has crossed the deep offshore step at 50000 bopd, which lifts the top tier to 0.075000 for the barrels above it.",
-  "The blend uses a geometric mean above 10000 bopd and an arithmetic one below it.",
-  "The 15 percent tier only opens at 50000 bopd, so at 20000 bopd the rate is still a blend of the two lower tiers weighted by revenue."],
+ ["The 20000 bopd row has crossed the deep offshore step at 50000 bopd, which lifts the top tier to 0.075000 for the barrels above it, and the onshore table then borrows that tier for every barrel above 10000 bopd.",
+  "The blend uses a geometric mean of the tier rates above 10000 bopd and an arithmetic mean below it, so the 20000 bopd reading falls short of the halfway point between the two tiers.",
+  "The 15 percent tier only opens at 50000 bopd, so at 20000 bopd the rate is still a blend of the 5 and 7.5 percent tiers, weighted by each tier's share of the year's revenue."],
  "The onshore rate never reaches 0.150000; it approaches from below, reading 0.132500 at 50000 bopd and 0.142708 at 120000. A marginal field is onshore or in shallow water and reads the same tranche table as any other field there.")
 
 q(1,
@@ -109,7 +109,7 @@ q(3,
  ["That the terrain string moves NPV further than the price sweep to 120, so the words in the fiscal terms outweigh the market on this field.",
   "That the two moves are the same size, because deep offshore lowers only the royalty and a price rise lifts the revenue by exactly as much.",
   "That the terrain string is a price effect in disguise, since a lower royalty rate acts like a higher realised price on every barrel."],
- "Deep offshore under the conservative reading lowers the liquids royalty rate to 0.050000 and sets the hydrocarbon tax to 0.00, which lifts NPV to 136554243.51; an oil price of 120 lifts it to 153901708.13. The reading itself is open, so a negotiator states it beside the number, and the words of the terms still move value almost as far as the market does.")
+ "Deep offshore under the conservative reading lowers the liquids royalty rate to 0.050000 and sets the hydrocarbon tax to 0.00, which lifts NPV to 136554243.51; an oil price of 120 lifts it to 153901708.13. The reading itself is open, so a negotiator states it beside the number; under that reading the words of the terms move value almost as far as the market does.")
 
 q(0,
  "On cpr_forfeiture the two-thirds CIT restriction refuses part of the allowance, cpr_deferred_to_next reads 8000000.00, and the ledger ends: CPR forfeited at cessation 8000000.00. Which of the unclaimed value on that row would a further year have rescued?",
@@ -141,7 +141,7 @@ q(1,
  ["The volume cap, read on lifetime barrels, which trimmed the eligible barrels; the flag reads false because a lease with no prior production has not yet reached 100000000 bbl.",
   "The converted lease rate of 2.5 USD per barrel, which the engine falls back to when the price is below the 50 anchor; the flag confirms that no cap of either kind acted.",
   "The two thirds restriction, which limits the allowance to two thirds of the assessable profit; the flag is false because that restriction is reported on the CIT line instead."],
- "computeProductionAllowance prints cap applied false on every price-limited row, 2000000.00 on a converted lease at 10 USD as well; the flag is true only in a year that reaches the new-lease volume cap, where from a prior 99500000 the 1000000 bbl split 500000.00 below the cap and 500000.00 after it, for 6000000.00.")
+ "computeProductionAllowance prints cap applied false on every price-limited row, 2000000.00 on a converted lease at 10 USD as well; the flag is true only in a year that reaches the new-lease volume cap, where at 80 USD from a prior 99500000 the 1000000 bbl split 500000.00 below the cap and 500000.00 after it, for 6000000.00.")
 
 q(3,
  "jv_loss_carryforward's 2031 row reports taxable income 65000000.00, loss_offset_used 5000000.00 and tax 30000000.00. What is the tax charged on?",
@@ -203,12 +203,12 @@ q(2,
  "jv_abandonment_wi_60 charges the entered 10000000.00 in full against 60 percent flows, and pia_sinking_fund_wi_50 collects 30000000.00 against a total_abandonment_cost of 30000000.00. What is abandonment_cost_usd under each funding mode?",
  "The share under both: the engine charges the amount as entered, so a partner enters its own share of the cost whichever mode it picks.",
  ["A share-level number under a lump sum and a field-level one under a fund, so the fund at a 50 percent interest collects only half of what was entered.",
-  "A field-level number under both, scaled by the working interest on the way into the ledger, so a 50 percent partner's fund collects half the entry.",
-  "A field-level number under a lump sum and a share-level one under a fund, so a partner must halve the entry before switching modes."],
+  "Field-level under both, scaled by the working interest on the way into the ledger, so a 50 percent partner's fund collects half the entry.",
+  "Under a lump sum a field-level number and under a fund a share-level one, so a partner must halve the entry before switching modes."],
  "Both published cases carry the entered figure unscaled: jv_abandonment_wi_60 charges 10000000.00 against 60 percent flows, which is why its unit technical cost reads 43.333333, and pia_sinking_fund_wi_50 collects 30000000.00 and reports NPV 59518454.92. A partner enters its own share under either mode.")
 
 q(1,
- "AKATA under the PIA is NPV 59766796.57. Write the sentence that names it.",
+ "AKATA under the PIA, with the price royalty on the Regulations (2021) base, the engine default, is NPV 59766796.57. Write the rest of the sentence that names it.",
  "59766796.57 on the real basis, end-year, base year 2029, framework nta_2025, shallow water, converted PML.",
  ["59766796.57 at 10 percent nominal, mid-year, base year 2029, framework pia_only, shallow water, new lease.",
   "59766796.57 on the real basis, end-year, base year 2029, framework nta_2025, deep offshore, converted PML, aggressive reading.",
@@ -235,8 +235,8 @@ q(3,
  "pia_deep_offshore_wi_50 halves every monetary line and reports NPV 453861842.57, exactly half of 907723685.14, while pia_deep_offshore_naive_30k halves the upload instead and reports 369073842.57. Where does the naive run lose the difference?",
  "At half the daily rate every barrel carries 0.050000, so its royalty is 43800000.00 against 47450000.00, and it still bears the full capex, opex and levies.",
  ["It loses the production allowance, which the engine grants to a deep offshore lease only in a year whose daily rate stays above the 50000 bopd threshold.",
-  "It is discounted for one more year, because the engine assumes a field half the size starts a year later and pushes every row back by one.",
-  "It pays HCT at 0.300000, since the conservative reading of the deep offshore tax only applies to a field producing above the 50000 bopd threshold."],
+  "One more year of discounting, because the engine assumes a field half the size starts a year later and pushes every row back by one.",
+  "Through HCT charged at 0.300000, since the conservative reading of the deep offshore tax only applies to a field producing above the 50000 bopd threshold."],
  "Two errors in opposite directions, and neither cancels the other: the royalty is understated because 30000 bopd never reaches the 7.5 percent share, and the costs are overstated because 100000000.00 of capex and of opex are borne in full; take reads 45.4033 percent against 41.5126.")
 
 q(2,
@@ -289,7 +289,7 @@ q(2,
 
 q(3,
  "AKATA in shallow water with pia_marginal_field_pre_2021 true keeps its 2029 production royalty at 10070350.00 and pays HCT at 0.150000, 13604359.74 in 2029, for NPV 97891150.04 against 59766796.57 as a converted PML. What did the marginal field status change?",
- "The hydrocarbon tax rate alone: a marginal field converted under s.94(1) pays 15 percent, and its royalty follows the shallow-water tranches.",
+ "The hydrocarbon tax rate alone: a marginal field converted under s.94(1) pays 15 percent, and the engine keeps its royalty on the shallow-water tranches.",
  ["The royalty tranches, which fall to a marginal blend of 5 and 7.5 percent, and the lower HCT is the tax following the smaller royalty through the base.",
   "Both royalty and HCT, since marginal_field is a terrain of its own with its own royalty table and its own hydrocarbon tax rate.",
   "The production allowance, which a marginal field claims at the new-lease 8 USD/bbl, and the lower HCT is that larger allowance."],
@@ -328,7 +328,7 @@ q(3,
  "With 60000000 the final flow is -29598201.95 and the engine reports null there as well, for the other reason in the contract: more than one rate in the band zeroes that NPV, so no single rate is named.")
 
 q(0,
- "Run at a stated new-PML hydrocarbon tax rate of 30 percent, a reading the texts leave open, the 2029 row of AKATA as a new lease is identical whether the prior cumulative is 0 or 96000000: allowance 17600000.00, cap applied false, HCT 23578719.48. Which reading in the working order catches the difference before the headline does?",
+ "Run at a stated new-PML hydrocarbon tax rate of 30 percent, a reading the texts leave open, the 2029 row of AKATA as a new lease prints the same allowance, cap flag and hydrocarbon tax whether the prior cumulative is 0 or 96000000: allowance 17600000.00, cap applied false, HCT 23578719.48. Which reading in the working order catches the difference before the headline does?",
  "The lease and reading step, followed by the totals: allowance 77440000.00 against 54720000.00 over the life, since the cap bites in later years.",
  ["The framework step, since a lease with prior production is read under pia_only and one without under nta_2025.",
   "The 2029 row alone, whose cap applied flag reads true once the prior barrels are entered.",

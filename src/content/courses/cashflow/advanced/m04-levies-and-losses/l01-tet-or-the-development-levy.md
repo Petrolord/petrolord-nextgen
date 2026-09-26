@@ -1,6 +1,6 @@
 # TET or the development levy
 
-Two levies, one base, never both in the same year. The framework string on the row says which one was charged, and the rate is the smaller part of the difference.
+Two levies, one base, never both in the same year. The framework string on the row says which one was charged, and the rate is the smaller part of the difference. PIA figures here use the Regulations (2021) price-royalty base, the engine default.
 
 {{panel:ec-fiscal-explorer}}
 
@@ -31,7 +31,7 @@ The careful mistake is charging both. A reader who has heard of both frameworks 
 
 ## What the engine refuses
 
-It refuses to let the rate be the whole story: 3 against 4 is the rate, 1058241648.19 is the base, and the base is where the money is. It takes the TET rate from the year, and names any stated rate that differs from the statute among its own statements. And it charges either levy on nothing but the assessable profit, so a levy that is not the year's TET rate or 4 percent of that line means the wrong line was read.
+It takes the TET rate from the year unless a rate is stated; a stated rate that differs from the statute is used and named among its own statements. And it charges either levy on nothing but the assessable profit, so a levy that is not the row's tet_rate_pct or 4 percent of that line means the wrong line was read.
 
 ## Exercise
 

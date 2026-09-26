@@ -38,7 +38,7 @@ The careful reader sees the cap as a ceiling on how much cost can be recovered. 
 
 ## What it refuses
 
-No row prints the cost recovered in the year. Every recovery figure above comes from the march rather than from the engine's output, and nothing on the 30 percent run warns that 207346412.26 was left on the table. The balance is better served: a production sharing row can report psc_cost_pool_after and a KPI can report the pool a cessation forfeits, which tells a reader how much was stranded without telling them how it got there.
+No row prints the cost recovered in the year. Every recovery figure above comes from the march rather than from the engine's output. The balance is better served: psc_cost_pool_after on the last row and kpis.psc_unrecovered_cost_at_cessation both report the 207346412.26 the 30 percent run leaves on the table, which tells a reader how much was stranded without telling them how it got there.
 
 ## Exercise
 

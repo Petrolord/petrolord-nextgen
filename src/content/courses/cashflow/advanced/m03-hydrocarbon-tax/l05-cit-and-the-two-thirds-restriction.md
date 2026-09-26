@@ -1,6 +1,6 @@
 # CIT and the two-thirds restriction
 
-Companies income tax is the second profit tax on the same cash, on a base that includes gas, with a capital allowance the law caps at two thirds of the profit in PIA years and carries forward.
+Companies income tax is the second profit tax on the same cash, on a base that includes gas, with a capital allowance the law caps at two thirds of the profit in PIA years and carries forward. PIA figures here use the Regulations (2021) price-royalty base, the engine default.
 
 {{panel:ec-fiscal-explorer}}
 

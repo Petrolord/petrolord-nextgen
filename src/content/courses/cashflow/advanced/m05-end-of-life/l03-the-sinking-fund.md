@@ -1,6 +1,6 @@
 # The sinking fund
 
-The same abandonment cost paid as contributions instead of a lump sum. It rides the opex lane, it relieves the profit taxes, and it changes what a field is worth without changing what it costs.
+The same abandonment cost paid as contributions instead of a lump sum. It rides the opex lane, it relieves the profit taxes, and it changes what a field is worth without changing what it costs. PIA figures here use the Regulations (2021) price-royalty base, the engine default.
 
 {{panel:ec-fiscal-explorer}}
 
