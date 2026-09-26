@@ -236,7 +236,7 @@ const RefineryLearningPage = () => {
                 Some behaviour is an owner decision or a held limit, and this course teaches it as a stated policy and
                 grades none of it. The scaling exponents are defaults for a vendor&apos;s own figures to replace. The
                 screening engine deducts capital in the year it is spent and offers no capital allowance schedule; a
-                fuller allowance model belongs to the Economics module. The stream model&apos;s material balance cannot close
+                fuller allowance model belongs to the Economics &amp; Commercial module. The stream model&apos;s material balance cannot close
                 a refinery tank, so this course prints none. Yields are fixed vectors, quality is not carried through the
                 plan, and the schedule models no tank capacity, jetty window or turnaround.
               </CardDescription>

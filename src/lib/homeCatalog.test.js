@@ -13,6 +13,18 @@ describe('homepage catalogue', () => {
     }
   });
 
+  it('labels commercial_trading and economics per the 2026-09-26 owner decision', () => {
+    expect(MODULE_LABELS.commercial_trading).toBe('Midstream & Downstream');
+    expect(MODULE_LABELS.economics).toBe('Economics & Commercial');
+    const home = Object.fromEntries(HOME_MODULES.map((m) => [m.key, m.label]));
+    expect(home.commercial_trading).toBe(MODULE_LABELS.commercial_trading);
+    expect(home.economics).toBe(MODULE_LABELS.economics);
+  });
+
+  it('keeps em dashes out of the module taglines', () => {
+    for (const m of HOME_MODULES) expect(`${m.label} ${m.tagline}`).not.toMatch(/—/);
+  });
+
   it('keeps em dashes out of the marketing copy', () => {
     for (const co of HOME_COURSES) expect(`${co.name} ${co.blurb}`).not.toMatch(/—/);
   });
