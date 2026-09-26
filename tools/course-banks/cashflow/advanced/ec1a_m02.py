@@ -10,7 +10,7 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 q(1,
  "AKATA under the PIA is shallow water, lifting 2200000 bbl in 2029, and its 2029 production royalty is 10070350.00 on 186032000.00 of gross revenue. A reader applying 0.125000 to the gross lands far above that figure. What did the reader miss?",
  "The tranches. At 6027.40 bopd the liquids pay the weighted 0.054261, the first 5000 bopd at 5 percent and the rest at 7.5 percent, plus gas at 0.050000.",
- ["The price royalty of 3606152.270399, which the engine deducts from the production royalty column before it reports the row, lowering the printed charge.",
+ ["The price royalty of 3606152.270399, which the engine deducts from the production royalty column before it reports the row, lowering the charge.",
   "The HCDT, which is deducted from gross revenue before the royalty rate is applied, so that the royalty base is smaller than the gross revenue of the year.",
   "The water depth of 60 m, which places AKATA in a reduced shallow water band well below the 0.125000 that a field at 100 m of water would pay on every barrel."],
  "Onshore and shallow water charge 5 percent on the first 5000 bopd, 7.5 percent on the next 5000 and their own terrain rate only above 10000 bopd, as one weighted rate; AKATA never reaches the 12.5 percent tranche. The gas pays 281600.00 at 0.050000. Onshore the same row also reads 10070350.00. The price royalty is a separate line, the HCDT is not a royalty deduction, and the rate never reads the depth.")
@@ -52,7 +52,7 @@ q(3,
  "The hydrocarbon tax rate, 15 percent for a marginal field converted under s.94(1) against 30 percent; the royalty is the terrain's either way.",
  ["The royalty tranches, since the flag moves the field onto the lower marginal schedule and the smaller royalty leaves a larger base that is then taxed less.",
   "The price royalty, which the flag waives on a marginal field, so the hydrocarbon tax base loses 3606152.27 of deduction and the tax falls with it.",
-  "The production allowance, which the flag doubles for a converted marginal field, so the chargeable profit is cut in half before the rate applies."],
+  "The production allowance, which the flag doubles for a converted marginal field, so the chargeable profit is halved before the rate applies."],
  "The flag sets the hydrocarbon tax rate to 0.150000 and leaves the royalty to the terrain: total royalties stay 60324870.87 and total tax falls to 171815891.58. pia_marginal_field_blend, run onshore with the flag, pays HCT 24111699.56 on a chargeable profit of 160744663.71. The price royalty and the allowance do not move with the flag.")
 
 q(0,
@@ -99,7 +99,7 @@ q(2,
  "pia_deep_offshore_wi_50 and pia_deep_offshore_naive_30k both carry oil_bbl 10950000.00 on the 2025 row, yet the first pays 47450000.00 of production royalty and the second 43800000.00. Why do two rows with the same barrels pay different royalties?",
  "The tranche is read on the field's barrels and the share applied to the money after: WI 50 is still a 60000 bopd field at 0.054167, the naive upload a 30000 bopd one at 0.050000.",
  ["The WI 50 row adds its price royalty of 20945011.086475 into the production royalty column, and the naive row reports that same price royalty separately.",
-  "The naive row is read at 2025 benchmarks and the WI 50 row at 2021 benchmarks, because a working interest below 100 percent fixes the price curve at the year the licence was granted.",
+  "The naive row is read at 2025 benchmarks and the WI 50 row at 2021 benchmarks, because a working interest below 100 percent fixes the price curve at the licence year.",
   "The WI 50 row applies 0.075000 to the field's 21900000.00 bbl and then halves, while the naive row applies 0.050000 and does not halve, and the scalings land on those figures."],
  "royalty_liquids_bopd reads 60000 on the WI 50 row and 30000 on the naive row, and cumulative_oil_bbl_lifetime reads 21900000.00 and 10950000.00; only the lifetime column and prod_alw_eligible_bbl remember the field. Half of 94900000.00 is 47450000.00.")
 
@@ -122,8 +122,8 @@ q(3,
 q(1,
  "A production file has been pre-scaled to the operator's share before upload. What can the engine report to warn the reader?",
  "Nothing. It cannot tell a pre-scaled upload from a small field: the naive run reports working_interest_pct not reported exactly as the full run does.",
- ["A working_interest_pct of 50 inferred from the ratio of the uploaded barrels to the lifetime cumulative, which it prints in the KPI block as a warning.",
-  "A prod_alw_cap_applied flag of true on the first row, because a halved field reaches the wrong tier and the engine marks any tier it cannot reconcile.",
+ ["A working_interest_pct of 50 inferred from the ratio of uploaded barrels to the lifetime cumulative, which it prints in the KPI block as a warning.",
+  "A prod_alw_cap_applied flag of true on the first row, because a halved field reaches the wrong tier and the engine marks a tier it cannot reconcile.",
   "An ingestion refusal, since the volume columns of a pre-scaled file fail the per-well naming check that the production loader applies."],
  "The row's oil_bbl is the entitlement either way; the only honest scaling is pia_working_interest_pct on the full field, which keeps cumulative_oil_bbl_lifetime at 21900000.00.")
 

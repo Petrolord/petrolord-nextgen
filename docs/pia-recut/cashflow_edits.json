@@ -6,7 +6,7 @@
  "counts": {
   "beginner": 7,
   "intermediate": 32,
-  "advanced": 84
+  "advanced": 85
  },
  "questions": [
   {
@@ -1393,7 +1393,7 @@
     "options[2]",
     "options[3] (keyed)"
    ],
-   "why": "NDDC is 3 percent of the total annual budget, opex plus capex (digest L899, L1300-1302); the two columns no longer carry the same numbers.",
+   "why": "NDDC is 3 percent of the total annual budget, opex plus capex (digest L899, L1300-1302); the two columns no longer carry the same numbers. A distractor shortened to keep the bank inside the answer-length rank band.",
    "old": {
     "prompt": "AKATA under the PIA prints hcdt 0.00 in 2029, 720000.00 in 2030 and 741600.00 in 2031, while nddc reads 720000.00 in 2029 and 741600.00 in 2030. Why do the two columns carry the same numbers one year apart?",
     "options": [
@@ -1410,7 +1410,7 @@
     "options": [
      "NDDC is charged one year in arrears and HCDT in the current year, and the 2029 HCDT of 0.00 is a rounding of the first year's fixed sum.",
      "The engine charges each levy on half the opex in alternate years, so the two columns take turns carrying the full 3 percent of the budget.",
-     "Both read the current year's opex plus capex, and the 2029 HCDT is 0.00 because that levy is suspended in the year of first oil under the 2025 framework.",
+     "Both read the current year's opex plus capex, and the 2029 HCDT is 0.00 because that levy is suspended in the year of first oil.",
      "HCDT is 3 percent of the prior year's opex and NDDC 3 percent of the year's opex plus capex, and AKATA set no prior-year opex, so 2029 pays no HCDT."
     ],
     "answer_index": 3,
@@ -1570,7 +1570,7 @@
     "options[2] (keyed)",
     "options[3]"
    ],
-   "why": "The framework is chosen per year of assessment: pia_loss_relief 2026 row is nta_2025 with TET 0.00 and a levy of 12098579.71 (digest L1055, L1143); the old key was wrong.",
+   "why": "The framework is chosen per year of assessment: pia_loss_relief 2026 row is nta_2025 with TET 0.00 and a levy of 12098579.71 (digest L1055, L1143); the old key was wrong. A distractor shortened to keep the bank inside the answer-length rank band.",
    "old": {
     "prompt": "pia_loss_relief has a 2025 base year and rows in 2025 and 2026. Its 2026 row prints pia_only and pays TET 5755415.35. What does that reveal about the date trigger?",
     "options": [
@@ -1585,7 +1585,7 @@
    "new": {
     "prompt": "pia_loss_relief has a 2025 base year and rows in 2025 and 2026. Its 2025 row prints pia_only, and its 2026 row prints nta_2025 with TET 0.00 and a development levy of 12098579.71. What does that reveal about the date trigger?",
     "options": [
-     "It reads the base year, so a 2025 base year on auto should have kept both rows under the Act, and the 2026 row shows the override misfiring.",
+     "It reads the base year, so a 2025 base year on auto should have kept both rows under the Act; the 2026 row is the override misfiring.",
      "It is disabled whenever a loss pool is being relieved, so the relief year stays under the framework in which the loss was first banked.",
      "It reads each row's year of assessment, so one ledger based in 2025 carries a PIA year and then an NTA year where the levy replaces TET.",
      "It switched the framework only because the loss pool ran out in 2025; a ledger still relieving a loss would stay where it began."
@@ -1639,9 +1639,10 @@
     "explanation",
     "options[0]",
     "options[1]",
+    "options[2]",
     "options[3] (keyed)"
    ],
-   "why": "Figures moved: price 120 lifts AKATA to 153901708.13, deep offshore conservative to 136554243.51 (digest L1307, L1316, L1326); the old key was wrong and distractor 0 had become true. The deep offshore NTA reading is stated as open.",
+   "why": "Figures moved: price 120 lifts AKATA to 153901708.13, deep offshore conservative to 136554243.51 (digest L1307, L1316, L1326); the old key was wrong and distractor 0 had become true. The deep offshore NTA reading is stated as open. A distractor shortened to keep the bank inside the answer-length rank band.",
    "old": {
     "prompt": "AKATA under the PIA reports NPV 43223505.88 in shallow water, 128984232.18 at an oil price of 120, and 141623594.88 in deep offshore under the conservative reading. What does that comparison tell a negotiator?",
     "options": [
@@ -1658,7 +1659,7 @@
     "options": [
      "That the terrain string moves NPV further than the price sweep to 120, so the words in the fiscal terms outweigh the market on this field.",
      "That the two moves are the same size, because deep offshore lowers only the royalty and a price rise lifts the revenue by exactly as much.",
-     "That the terrain string is a price effect in disguise, since a lower royalty rate acts exactly like a higher realised price on every barrel.",
+     "That the terrain string is a price effect in disguise, since a lower royalty rate acts like a higher realised price on every barrel.",
      "That a word in the document comes close to the market: the terrain string adds about 76.8 million against about 94.1 million for the price."
     ],
     "answer_index": 3,
@@ -2005,7 +2006,7 @@
     "options[2]",
     "options[3] (keyed)"
    ],
-   "why": "Moved figures under the weighted deep offshore royalty (digest L804-821).",
+   "why": "Moved figures under the weighted deep offshore royalty (digest L804-821). A distractor shortened to keep the bank inside the answer-length rank band.",
    "old": {
     "prompt": "pia_deep_offshore_wi_50 halves every monetary line and reports NPV 445282165.97, exactly half of 890564331.93, while pia_deep_offshore_naive_30k halves the upload instead and reports 372530915.97. Where does the naive run lose the difference?",
     "options": [
@@ -2021,7 +2022,7 @@
     "prompt": "pia_deep_offshore_wi_50 halves every monetary line and reports NPV 453861842.57, exactly half of 907723685.14, while pia_deep_offshore_naive_30k halves the upload instead and reports 369073842.57. Where does the naive run lose the difference?",
     "options": [
      "It loses the production allowance, which the engine grants to a deep offshore lease only in a year whose daily rate stays above the 50000 bopd threshold.",
-     "It is discounted for one more year, because the engine assumes that a field half the size starts a year later and pushes every row of the ledger back by one.",
+     "It is discounted for one more year, because the engine assumes a field half the size starts a year later and pushes every row back by one.",
      "It pays HCT at 0.300000, since the conservative reading of the deep offshore tax only applies to a field producing above the 50000 bopd threshold.",
      "At half the daily rate every barrel carries 0.050000, so its royalty is 43800000.00 against 47450000.00, and it still bears the full capex, opex and levies."
     ],
@@ -2398,7 +2399,7 @@
     "options[2]",
     "options[3]"
    ],
-   "why": "Old figures (flat 12.5 percent, gas 7 percent); keyed concept was false: the gap is the tranche weighting.",
+   "why": "Old figures (flat 12.5 percent, gas 7 percent); keyed concept was false: the gap is the tranche weighting. A distractor shortened to keep the bank inside the answer-length rank band.",
    "old": {
     "prompt": "AKATA under the PIA is shallow water and its 2029 production royalty is 22944240.00 on 186032000.00 of gross revenue. A reader applying 0.125000 to the gross does not land on that figure. What did the reader miss?",
     "options": [
@@ -2413,7 +2414,7 @@
    "new": {
     "prompt": "AKATA under the PIA is shallow water, lifting 2200000 bbl in 2029, and its 2029 production royalty is 10070350.00 on 186032000.00 of gross revenue. A reader applying 0.125000 to the gross lands far above that figure. What did the reader miss?",
     "options": [
-     "The price royalty of 3606152.270399, which the engine deducts from the production royalty column before it reports the row, lowering the printed charge.",
+     "The price royalty of 3606152.270399, which the engine deducts from the production royalty column before it reports the row, lowering the charge.",
      "The tranches. At 6027.40 bopd the liquids pay the weighted 0.054261, the first 5000 bopd at 5 percent and the rest at 7.5 percent, plus gas at 0.050000.",
      "The HCDT, which is deducted from gross revenue before the royalty rate is applied, so that the royalty base is smaller than the gross revenue of the year.",
      "The water depth of 60 m, which places AKATA in a reduced shallow water band well below the 0.125000 that a field at 100 m of water would pay on every barrel."
@@ -2585,7 +2586,7 @@
     "options[2]",
     "options[3] (keyed)"
    ],
-   "why": "The marginal_field terrain run is refused; the question now reads the flag.",
+   "why": "The marginal_field terrain run is refused; the question now reads the flag. A distractor shortened to keep the bank inside the answer-length rank band.",
    "old": {
     "prompt": "AKATA as a marginal field pays a 2029 production royalty of 10182990.00 against 22944240.00 as shallow water, yet its 2029 HCT is 29251153.65 against 25422778.65 and total tax rises to 223261390.90. Why did the tax rise when the royalty fell?",
     "options": [
@@ -2602,7 +2603,7 @@
     "options": [
      "The royalty tranches, since the flag moves the field onto the lower marginal schedule and the smaller royalty leaves a larger base that is then taxed less.",
      "The price royalty, which the flag waives on a marginal field, so the hydrocarbon tax base loses 3606152.27 of deduction and the tax falls with it.",
-     "The production allowance, which the flag doubles for a converted marginal field, so the chargeable profit is cut in half before the rate applies.",
+     "The production allowance, which the flag doubles for a converted marginal field, so the chargeable profit is halved before the rate applies.",
      "The hydrocarbon tax rate, 15 percent for a marginal field converted under s.94(1) against 30 percent; the royalty is the terrain's either way."
     ],
     "answer_index": 3,
@@ -2796,7 +2797,7 @@
     "options[2] (keyed)",
     "options[3]"
    ],
-   "why": "Figures moved; keyed text quoted the old 0.075 step.",
+   "why": "Figures moved; keyed text quoted the old 0.075 step. A distractor shortened to keep the bank inside the answer-length rank band.",
    "old": {
     "prompt": "pia_deep_offshore_wi_50 and pia_deep_offshore_naive_30k both carry oil_bbl 10950000.00 on the 2025 row, yet the first pays 65700000.00 of production royalty and the second 43800000.00. Why do two rows with the same barrels pay different royalties?",
     "options": [
@@ -2812,7 +2813,7 @@
     "prompt": "pia_deep_offshore_wi_50 and pia_deep_offshore_naive_30k both carry oil_bbl 10950000.00 on the 2025 row, yet the first pays 47450000.00 of production royalty and the second 43800000.00. Why do two rows with the same barrels pay different royalties?",
     "options": [
      "The WI 50 row adds its price royalty of 20945011.086475 into the production royalty column, and the naive row reports that same price royalty separately.",
-     "The naive row is read at 2025 benchmarks and the WI 50 row at 2021 benchmarks, because a working interest below 100 percent fixes the price curve at the year the licence was granted.",
+     "The naive row is read at 2025 benchmarks and the WI 50 row at 2021 benchmarks, because a working interest below 100 percent fixes the price curve at the licence year.",
      "The tranche is read on the field's barrels and the share applied to the money after: WI 50 is still a 60000 bopd field at 0.054167, the naive upload a 30000 bopd one at 0.050000.",
      "The WI 50 row applies 0.075000 to the field's 21900000.00 bbl and then halves, while the naive row applies 0.050000 and does not halve, and the scalings land on those figures."
     ],
@@ -2887,6 +2888,40 @@
     ],
     "answer_index": 3,
     "explanation": "Both regimes put every monetary line and the volumes at the share, so the ratio is unchanged. Under the PIA the royalties halve to 30162435.44 while the tranches and the allowance cap stay field-level, and the 2200000.00 barrels the allowance reads are the field's."
+   }
+  },
+  {
+   "slug": "cashflow",
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m02-the-pia-royalties",
+   "ord": 15,
+   "fields": [
+    "options[0]",
+    "options[2]"
+   ],
+   "why": "Answer-length band: a distractor shortened so the bank keeps the key in the 12 to 40 percent rank band.",
+   "old": {
+    "prompt": "A production file has been pre-scaled to the operator's share before upload. What can the engine report to warn the reader?",
+    "options": [
+     "A working_interest_pct of 50 inferred from the ratio of the uploaded barrels to the lifetime cumulative, which it prints in the KPI block as a warning.",
+     "Nothing. It cannot tell a pre-scaled upload from a small field: the naive run reports working_interest_pct not reported exactly as the full run does.",
+     "A prod_alw_cap_applied flag of true on the first row, because a halved field reaches the wrong tier and the engine marks any tier it cannot reconcile.",
+     "An ingestion refusal, since the volume columns of a pre-scaled file fail the per-well naming check that the production loader applies."
+    ],
+    "answer_index": 1,
+    "explanation": "The row's oil_bbl is the entitlement either way; the only honest scaling is pia_working_interest_pct on the full field, which keeps cumulative_oil_bbl_lifetime at 21900000.00."
+   },
+   "new": {
+    "prompt": "A production file has been pre-scaled to the operator's share before upload. What can the engine report to warn the reader?",
+    "options": [
+     "A working_interest_pct of 50 inferred from the ratio of uploaded barrels to the lifetime cumulative, which it prints in the KPI block as a warning.",
+     "Nothing. It cannot tell a pre-scaled upload from a small field: the naive run reports working_interest_pct not reported exactly as the full run does.",
+     "A prod_alw_cap_applied flag of true on the first row, because a halved field reaches the wrong tier and the engine marks a tier it cannot reconcile.",
+     "An ingestion refusal, since the volume columns of a pre-scaled file fail the per-well naming check that the production loader applies."
+    ],
+    "answer_index": 1,
+    "explanation": "The row's oil_bbl is the entitlement either way; the only honest scaling is pia_working_interest_pct on the full field, which keeps cumulative_oil_bbl_lifetime at 21900000.00."
    }
   },
   {
@@ -3107,9 +3142,11 @@
    "fields": [
     "prompt",
     "explanation",
-    "options[0] (keyed)"
+    "options[0] (keyed)",
+    "options[2]",
+    "options[3]"
    ],
-   "why": "Moved figures: after the cap every barrel earns min(4 USD, 20 percent of price); the allowance is not zero.",
+   "why": "Moved figures: after the cap every barrel earns min(4 USD, 20 percent of price); the allowance is not zero. A distractor shortened to keep the bank inside the answer-length rank band.",
    "old": {
     "prompt": "A new shallow water lease with 1000000 bbl in the year earns 8000000.00 from a prior cumulative of 99000000, 4000000.00 on 500000.00 eligible bbl from 99500000, and 0.00 from 100000000. How is the cap read?",
     "options": [
@@ -3126,8 +3163,8 @@
     "options": [
      "On lifetime barrels against the 100000000 cap: barrels below it earn 8 USD/bbl, later barrels 4 USD/bbl, and a crossing year is split.",
      "On the year's own barrels, so any year that lifts more than the remaining headroom loses the whole allowance for that year.",
-     "On the prior cumulative alone, so a field that starts the year under 100000000 keeps the full 8000000.00 whatever it lifts in the year.",
-     "On the price, since 8 USD/bbl is 10 percent of 80 and the 20 percent of price limit leaves headroom that shrinks as the cumulative rises."
+     "On the prior cumulative alone, so a field that starts the year under 100000000 keeps the full 8000000.00 whatever it lifts.",
+     "On the price, since 8 USD/bbl is 10 percent of 80 and the 20 percent limit leaves headroom that shrinks as the cumulative rises."
     ],
     "answer_index": 0,
     "explanation": "allowance_cap_midyear lifts 2000000.00 bbl from a prior 99000000: 1000000.00 below the cap and 1000000.00 after it, allowance 12000000.00, cap applied true, cumulative_oil_bbl_lifetime 101000000.00; its 2026 row earns 4000000.00 on 1000000.00 barrels, all after the cap. The year's own barrels, the prior cumulative alone and the price do not decide the split."
@@ -3251,7 +3288,7 @@
     "options[2]",
     "options[3]"
    ],
-   "why": "KEYED CONCEPT WRONG: there is no default reading. A PIA year pays no deep offshore HCT; an NTA year is refused until a reading is stated, an open question.",
+   "why": "KEYED CONCEPT WRONG: there is no default reading. A PIA year pays no deep offshore HCT; an NTA year is refused until a reading is stated, an open question. A distractor shortened to keep the bank inside the answer-length rank band.",
    "old": {
     "prompt": "pia_deep_offshore_full pays HCT 0.00 and reports NPV 890564331.93; the same field reads HCT 419659147.53 under pia_deep_offshore_nta_aggressive with NPV 449025977.03, and 174857978.14 under the custom 12.5 with NPV 693827146.42. What decides which one is right?",
     "options": [
@@ -3268,7 +3305,7 @@
     "options": [
      "In a PIA year the Act, which charges deep offshore nothing; in an NTA year no text does, and the engine refuses the year until a reading is stated.",
      "Water depth: pia_water_depth_m 100 is the boundary at which the engine switches from the conservative reading to the aggressive one by itself.",
-     "The date trigger alone: every NTA year takes aggressive_pml_30 by default, because the NTA extends the shallow water PML rate to every terrain it names.",
+     "The date trigger alone: every NTA year takes aggressive_pml_30 by default, as the NTA extends the shallow water PML rate to each terrain.",
      "A PML pays the aggressive 0.300000 and a PPL the custom rate, so the reading string is only a label for what the licence has already decided."
     ],
     "answer_index": 0,
@@ -3285,9 +3322,10 @@
     "prompt",
     "explanation",
     "options[1]",
-    "options[2] (keyed)"
+    "options[2] (keyed)",
+    "options[3]"
    ],
-   "why": "Repair-history framing in the key; moved figures; the two bases are now equal.",
+   "why": "Repair-history framing in the key; moved figures; the two bases are now equal. A distractor shortened to keep the bank inside the answer-length rank band.",
    "old": {
     "prompt": "cpr_forfeiture has cit_assessable_profit 7987389.27 and its recoverable costs would take the base below zero. The engine reports cit_chargeable_profit 2662463.09 and cit_tax 798738.93. What became of the allowance the restriction refused?",
     "options": [
@@ -3305,7 +3343,7 @@
      "It became the 8000000.00 in cpr_deferred_to_next, which is the same refused allowance reported under the CPR label rather than the CIT one.",
      "It was carried into the HCT computation on the same row, where it lowers the hydrocarbon tax base below the CIT base by the refused amount.",
      "It sits in cit_allowance_carryforward, 10675190.93, as CITA para 24(7) provides, and dies with the one-year field.",
-     "It was written off in the year it arose, since this engine has never carried what the two-thirds restriction refuses."
+     "It was written off in the year it arose; this engine never carries what the two-thirds restriction refuses."
     ],
     "answer_index": 2,
     "explanation": "The chargeable profit is exactly one third of 13987213.60 because two thirds is the most the allowance may take in a pre-2026 year (CITA Second Schedule para 24(7), as substituted by Finance Act 2023 s.9(b)). The published pair prices the carry: pia_cit_allowance_restricted_carry at NPV -102455984.11 against pia_cit_allowance_no_carry at -116276490.72. The 8000000.00 in cpr_deferred_to_next is the cost price ratio deferral, a different amount, and the two assessable profits are equal."
@@ -3325,7 +3363,7 @@
     "options[2]",
     "options[3]"
    ],
-   "why": "Both runs are REFUSED: the texts fix the capital allowance at five years. The question is re-cut on the refusal, same key position.",
+   "why": "Both runs are REFUSED: the texts fix the capital allowance at five years. The question is re-cut on the refusal, same key position. A distractor shortened to keep the bank inside the answer-length rank band.",
    "old": {
     "prompt": "On the one-year worked example, pia_capex_recovery_years 1 claims 482500000.00 and gives NPV 279185570.34, while 10 claims 212500000.00 and gives NPV 117185570.34. What does the setting decide on a field that stops before its recovery years run out?",
     "options": [
@@ -3342,7 +3380,7 @@
     "options": [
      "A one-year field cannot carry any allowance past its only year, so the engine refuses every recovery life longer than the ledger it is given.",
      "The texts fix the capital allowance at five years (PIA Fifth Schedule para 17(1); NTA First Schedule Part II para 14(1)).",
-     "The recovery years set the CPR limit as well, and a limit outside the range from 30 to 100 percent is refused by the cap itself.",
+     "The recovery years set the CPR limit too, and a limit outside 30 to 100 percent is refused by the cap itself.",
      "Because the two-thirds restriction would bind at one year and at ten, and the engine refuses any run in which that restriction binds."
     ],
     "answer_index": 1,
@@ -3545,7 +3583,7 @@
     "options[2]",
     "options[3]"
    ],
-   "why": "moved figures in prompt, key and explanation; Regulations base stated (L2)",
+   "why": "moved figures in prompt, key and explanation; Regulations base stated (L2) A distractor shortened to keep the bank inside the answer-length rank band.",
    "old": {
     "prompt": "The worked example at a 2025 base year forced to nta_2025 pays a levy of 41599794.17 with NPV 119585647.53; the same volumes at a 2026 base year on auto pay 41684425.66 with NPV 120347330.91. The framework is nta_2025 both times. What moved the levy?",
     "options": [
@@ -3563,7 +3601,7 @@
      "The 3 percent inflation rate deflated the 2026 year once more, lifting the real profit on which the development levy is computed, so the later year pays more.",
      "The royalty-by-price benchmarks escalated a year further, so the price royalty fell from 34908351.810791 to 32797101.449275 and the assessable profit the levy follows rose to 1060352898.55.",
      "The levy rate steps up in its second year under the framework, above 4 percent, which is why the later ledger pays a little more on the same assessable base.",
-     "The 2026 run discounts one year less than the 2025 run, and the development levy is reported on the discounted profit of the year rather than on the nominal profit that is printed on the row."
+     "The 2026 run discounts one year less than the 2025 run, and the development levy is reported on the discounted profit of the year rather than the nominal profit printed on the row."
     ],
     "answer_index": 1,
     "explanation": "Total royalty fell from 199158351.81 to 197047101.45, and HCT rose from 285784994.46 to 286418369.57 and CIT from 299472494.46 to 300105869.57 on the same movement. The price royalty here is on the Petroleum Royalty Regulations (2021) base, the engine default."
@@ -3946,7 +3984,7 @@
     "options[2] (keyed)",
     "options[3]"
    ],
-   "why": "Keyed text false: every PSC row carries psc_cost_pool_after, the pool balance; only the cost recovered in a year is printed in no column. L5 framing removed.",
+   "why": "Keyed text false: every PSC row carries psc_cost_pool_after, the pool balance; only the cost recovered in a year is printed in no column. L5 framing removed. A distractor shortened to keep the bank inside the answer-length rank band.",
    "old": {
     "prompt": "AKATA under production sharing at a 60 percent cost oil cap reports NPV 29960298.75, and its pool reads 133542720.00 at the end of 2029 and 0.00 by 2034. Where does a reader get those pool figures?",
     "options": [
@@ -3962,7 +4000,7 @@
     "prompt": "AKATA under production sharing at a 60 percent cost oil cap reports NPV 29960298.75, and its pool reads 133542720.00 at the end of 2029 and 0.00 by 2034. Where does a reader get those pool figures, and what is still missing?",
     "options": [
      "From the taxable_income column, which under a production sharing contract is the unrecovered cost carried into each year of the ledger.",
-     "From the KPI block, which reports the cost recovered in each year whenever the cost oil cap binds, beside the pool it leaves behind.",
+     "From the KPI block, which reports the cost recovered each year whenever the cost oil cap binds, beside the pool it leaves behind.",
      "From psc_cost_pool_after on each row; the cost recovered in a year is printed in no column and needs the recovery function marched.",
      "From the difference between gross revenue and net cash flow on each row, which is the cost oil the contractor took in that year."
     ],
@@ -4020,7 +4058,7 @@
     "options[1] (keyed)",
     "options[2]"
    ],
-   "why": "Keyed decimals moved; the keyed rates now say they are on the Regulations (2021) base, the engine default (L2), and the Act reading is named as open.",
+   "why": "Keyed decimals moved; the keyed rates now say they are on the Regulations (2021) base, the engine default (L2), and the Act reading is named as open. A distractor shortened to keep the bank inside the answer-length rank band.",
    "old": {
     "prompt": "A field sells at a flat 80 USD per barrel for a decade. What does the PIA price royalty do over that decade?",
     "options": [
@@ -4035,9 +4073,9 @@
    "new": {
     "prompt": "A field sells at a flat 80 USD per barrel for a decade. What does the PIA price royalty do over that decade?",
     "options": [
-     "It stays fixed at the 2021 rate of 0.030000, because a flat price meets the same benchmark every year and the benchmarks never move after 2021.",
+     "It stays fixed at the 2021 rate of 0.030000, because a flat price meets the same benchmark every year and the benchmarks never move.",
      "It falls every year as the benchmarks escalate: on the Regulations (2021) base, the default, 80 USD pays 0.023910 in 2025 and 0.010632 in 2035.",
-     "It rises with the field's cumulative production, since the benchmarks are read on lifetime barrels rather than on the calendar year of the sale.",
+     "It rises with the field's cumulative production, since the benchmarks are read on lifetime barrels rather than the calendar year of the sale.",
      "It falls only after 2030, when the 50 anchor escalates past 80 and the royalty switches off."
     ],
     "answer_index": 1,
@@ -4200,7 +4238,7 @@
     "options[2]",
     "options[3]"
    ],
-   "why": "Moved deferral figure.",
+   "why": "Moved deferral figure. A distractor shortened to keep the bank inside the answer-length rank band.",
    "old": {
     "prompt": "AKATA's CPR cap binds in 2033, deferring 14561618.62, and the deferral clears in 2034. What would the same deferral have been if the ledger had ended in 2033?",
     "options": [
@@ -4217,7 +4255,7 @@
     "options": [
      "A forfeiture: a deferred cost does not become a loss and does not survive cessation, so it would be reported as CPR forfeited and never claimed.",
      "A tax loss of 14120774.92 banked in hct_loss_carryforward and reported beside the other tax losses left unused at cessation.",
-     "A refund, because a cap that binds in the final year is settled against the hydrocarbon tax already paid in the earlier years of the field's life.",
+     "A refund, because a cap that binds in the final year is settled against the hydrocarbon tax already paid in the earlier years of the field.",
      "A claim in the final year, since the engine lifts the cap in the last row so that no deferred cost is left on the table at cessation."
     ],
     "answer_index": 0,

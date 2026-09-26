@@ -28,7 +28,7 @@ q(3,
  "HCDT is 3 percent of the prior year's opex and NDDC 3 percent of the year's opex plus capex, and AKATA set no prior-year opex, so 2029 pays no HCDT.",
  ["NDDC is charged one year in arrears and HCDT in the current year, and the 2029 HCDT of 0.00 is a rounding of the first year's fixed sum.",
   "The engine charges each levy on half the opex in alternate years, so the two columns take turns carrying the full 3 percent of the budget.",
-  "Both read the current year's opex plus capex, and the 2029 HCDT is 0.00 because that levy is suspended in the year of first oil under the 2025 framework."],
+  "Both read the current year's opex plus capex, and the 2029 HCDT is 0.00 because that levy is suspended in the year of first oil."],
  "NDDC reads the whole annual budget, so the 210000000.00 of capex in 2029 lifts it to 7020000.00, while HCDT reads only the previous year's opex; in 2031 there is no capex and the two differ by one year of opex escalation. With a prior-year opex of 20000000 the 2029 HCDT is 600000.00 and NPV moves from 59766796.57 to 59545347.19; neither levy is in the tax column.")
 
 q(1,
@@ -90,7 +90,7 @@ q(1,
 q(2,
  "pia_loss_relief has a 2025 base year and rows in 2025 and 2026. Its 2025 row prints pia_only, and its 2026 row prints nta_2025 with TET 0.00 and a development levy of 12098579.71. What does that reveal about the date trigger?",
  "It reads each row's year of assessment, so one ledger based in 2025 carries a PIA year and then an NTA year where the levy replaces TET.",
- ["It reads the base year, so a 2025 base year on auto should have kept both rows under the Act, and the 2026 row shows the override misfiring.",
+ ["It reads the base year, so a 2025 base year on auto should have kept both rows under the Act; the 2026 row is the override misfiring.",
   "It is disabled whenever a loss pool is being relieved, so the relief year stays under the framework in which the loss was first banked.",
   "It switched the framework only because the loss pool ran out in 2025; a ledger still relieving a loss would stay where it began."],
  "The framework is chosen for each year of assessment: 2025 is a year under the Act and 2026 a year under the Nigeria Tax Act 2025, whatever the base year. pia_cpr_carry_two_years shows the same split, pia_only in 2025 and nta_2025 in 2026 and 2027.")
@@ -108,7 +108,7 @@ q(3,
  "That a word in the document comes close to the market: the terrain string adds about 76.8 million against about 94.1 million for the price.",
  ["That the terrain string moves NPV further than the price sweep to 120, so the words in the fiscal terms outweigh the market on this field.",
   "That the two moves are the same size, because deep offshore lowers only the royalty and a price rise lifts the revenue by exactly as much.",
-  "That the terrain string is a price effect in disguise, since a lower royalty rate acts exactly like a higher realised price on every barrel."],
+  "That the terrain string is a price effect in disguise, since a lower royalty rate acts like a higher realised price on every barrel."],
  "Deep offshore under the conservative reading lowers the liquids royalty rate to 0.050000 and sets the hydrocarbon tax to 0.00, which lifts NPV to 136554243.51; an oil price of 120 lifts it to 153901708.13. The reading itself is open, so a negotiator states it beside the number, and the words of the terms still move value almost as far as the market does.")
 
 q(0,
@@ -235,7 +235,7 @@ q(3,
  "pia_deep_offshore_wi_50 halves every monetary line and reports NPV 453861842.57, exactly half of 907723685.14, while pia_deep_offshore_naive_30k halves the upload instead and reports 369073842.57. Where does the naive run lose the difference?",
  "At half the daily rate every barrel carries 0.050000, so its royalty is 43800000.00 against 47450000.00, and it still bears the full capex, opex and levies.",
  ["It loses the production allowance, which the engine grants to a deep offshore lease only in a year whose daily rate stays above the 50000 bopd threshold.",
-  "It is discounted for one more year, because the engine assumes that a field half the size starts a year later and pushes every row of the ledger back by one.",
+  "It is discounted for one more year, because the engine assumes a field half the size starts a year later and pushes every row back by one.",
   "It pays HCT at 0.300000, since the conservative reading of the deep offshore tax only applies to a field producing above the 50000 bopd threshold."],
  "Two errors in opposite directions, and neither cancels the other: the royalty is understated because 30000 bopd never reaches the 7.5 percent share, and the costs are overstated because 100000000.00 of capex and of opex are borne in full; take reads 45.4033 percent against 41.5126.")
 

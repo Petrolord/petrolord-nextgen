@@ -52,7 +52,7 @@ q(1,
  "The royalty-by-price benchmarks escalated a year further, so the price royalty fell from 34908351.810791 to 32797101.449275 and the assessable profit the levy follows rose to 1060352898.55.",
  ["The 3 percent inflation rate deflated the 2026 year once more, lifting the real profit on which the development levy is computed, so the later year pays more.",
   "The levy rate steps up in its second year under the framework, above 4 percent, which is why the later ledger pays a little more on the same assessable base.",
-  "The 2026 run discounts one year less than the 2025 run, and the development levy is reported on the discounted profit of the year rather than on the nominal profit that is printed on the row."],
+  "The 2026 run discounts one year less than the 2025 run, and the development levy is reported on the discounted profit of the year rather than the nominal profit printed on the row."],
  "Total royalty fell from 199158351.81 to 197047101.45, and HCT rose from 285784994.46 to 286418369.57 and CIT from 299472494.46 to 300105869.57 on the same movement. The price royalty here is on the Petroleum Royalty Regulations (2021) base, the engine default.")
 
 q(2,

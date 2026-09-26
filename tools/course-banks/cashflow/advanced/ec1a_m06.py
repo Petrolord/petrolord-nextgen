@@ -19,7 +19,7 @@ q(2,
  "AKATA under production sharing at a 60 percent cost oil cap reports NPV 29960298.75, and its pool reads 133542720.00 at the end of 2029 and 0.00 by 2034. Where does a reader get those pool figures, and what is still missing?",
  "From psc_cost_pool_after on each row; the cost recovered in a year is printed in no column and needs the recovery function marched.",
  ["From the taxable_income column, which under a production sharing contract is the unrecovered cost carried into each year of the ledger.",
-  "From the KPI block, which reports the cost recovered in each year whenever the cost oil cap binds, beside the pool it leaves behind.",
+  "From the KPI block, which reports the cost recovered each year whenever the cost oil cap binds, beside the pool it leaves behind.",
   "From the difference between gross revenue and net cash flow on each row, which is the cost oil the contractor took in that year."],
  "Each PSC row reports royalty, profit oil as taxable income, tax, net cash flow and psc_cost_pool_after, the balance carried. At a 30 percent cap the pool ends at 207346412.26, which the KPI reports as unrecovered at cessation; the recovery itself is in no column.")
 
@@ -34,8 +34,8 @@ q(3,
 q(1,
  "A field sells at a flat 80 USD per barrel for a decade. What does the PIA price royalty do over that decade?",
  "It falls every year as the benchmarks escalate: on the Regulations (2021) base, the default, 80 USD pays 0.023910 in 2025 and 0.010632 in 2035.",
- ["It stays fixed at the 2021 rate of 0.030000, because a flat price meets the same benchmark every year and the benchmarks never move after 2021.",
-  "It rises with the field's cumulative production, since the benchmarks are read on lifetime barrels rather than on the calendar year of the sale.",
+ ["It stays fixed at the 2021 rate of 0.030000, because a flat price meets the same benchmark every year and the benchmarks never move.",
+  "It rises with the field's cumulative production, since the benchmarks are read on lifetime barrels rather than the calendar year of the sale.",
   "It falls only after 2030, when the 50 anchor escalates past 80 and the royalty switches off."],
  "A flat price is a falling royalty on either base; the Act reads the same benchmarks one year earlier, a reading the course leaves open. At 60 USD the royalty is gone by 2031 on the Regulations base, and at 200 USD the rate still sits at its 0.100000 ceiling in 2035.")
 
@@ -75,7 +75,7 @@ q(0,
  "AKATA's CPR cap binds in 2033, deferring 14120774.92, and the deferral clears in 2034. What would the same deferral have been if the ledger had ended in 2033?",
  "A forfeiture: a deferred cost does not become a loss and does not survive cessation, so it would be reported as CPR forfeited and never claimed.",
  ["A tax loss of 14120774.92 banked in hct_loss_carryforward and reported beside the other tax losses left unused at cessation.",
-  "A refund, because a cap that binds in the final year is settled against the hydrocarbon tax already paid in the earlier years of the field's life.",
+  "A refund, because a cap that binds in the final year is settled against the hydrocarbon tax already paid in the earlier years of the field.",
   "A claim in the final year, since the engine lifts the cap in the last row so that no deferred cost is left on the table at cessation."],
  "cpr_forfeiture defers 8000000.00 with no later year and ends with CPR forfeited at cessation 8000000.00; pia_cpr_carry_two_years forfeits 66000000.00 after three binding years.")
 

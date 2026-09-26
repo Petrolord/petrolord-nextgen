@@ -80,7 +80,7 @@ DASH = re.compile('[—–]')
 CONTRAST = re.compile(r',\s+not\s+\w')
 SECTION = re.compile(r'\b[Ss]ection \d+')
 HISTORY = re.compile(r'since engines?|engine used to|3\.10\.0|3\.9\.0|before the (audit|repair)|was repaired|pre-audit|'
-                     r'2026-09-15|used to (report|hand|lose|travel|stand|name|do|find)|the engine now|no longer (hides|reports|scales)', re.I)
+                     r'2026-09-15|used to (report|hand|lose|travel|stand|name|do)|the engine now|no longer (hides|reports|scales)', re.I)
 new_hits, old_hits = [], 0
 for rel, lines in changed_lines.items():
     for i, l in lines:

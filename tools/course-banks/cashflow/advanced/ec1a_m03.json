@@ -92,8 +92,8 @@
   "options": [
    "On lifetime barrels against the 100000000 cap: barrels below it earn 8 USD/bbl, later barrels 4 USD/bbl, and a crossing year is split.",
    "On the year's own barrels, so any year that lifts more than the remaining headroom loses the whole allowance for that year.",
-   "On the prior cumulative alone, so a field that starts the year under 100000000 keeps the full 8000000.00 whatever it lifts in the year.",
-   "On the price, since 8 USD/bbl is 10 percent of 80 and the 20 percent of price limit leaves headroom that shrinks as the cumulative rises."
+   "On the prior cumulative alone, so a field that starts the year under 100000000 keeps the full 8000000.00 whatever it lifts.",
+   "On the price, since 8 USD/bbl is 10 percent of 80 and the 20 percent limit leaves headroom that shrinks as the cumulative rises."
   ],
   "answer": 0,
   "explanation": "allowance_cap_midyear lifts 2000000.00 bbl from a prior 99000000: 1000000.00 below the cap and 1000000.00 after it, allowance 12000000.00, cap applied true, cumulative_oil_bbl_lifetime 101000000.00; its 2026 row earns 4000000.00 on 1000000.00 barrels, all after the cap. The year's own barrels, the prior cumulative alone and the price do not decide the split."
@@ -136,7 +136,7 @@
   "options": [
    "In a PIA year the Act, which charges deep offshore nothing; in an NTA year no text does, and the engine refuses the year until a reading is stated.",
    "Water depth: pia_water_depth_m 100 is the boundary at which the engine switches from the conservative reading to the aggressive one by itself.",
-   "The date trigger alone: every NTA year takes aggressive_pml_30 by default, because the NTA extends the shallow water PML rate to every terrain it names.",
+   "The date trigger alone: every NTA year takes aggressive_pml_30 by default, as the NTA extends the shallow water PML rate to each terrain.",
    "A PML pays the aggressive 0.300000 and a PPL the custom rate, so the reading string is only a label for what the licence has already decided."
   ],
   "answer": 0,
@@ -148,7 +148,7 @@
    "It became the 8000000.00 in cpr_deferred_to_next, which is the same refused allowance reported under the CPR label rather than the CIT one.",
    "It was carried into the HCT computation on the same row, where it lowers the hydrocarbon tax base below the CIT base by the refused amount.",
    "It sits in cit_allowance_carryforward, 10675190.93, as CITA para 24(7) provides, and dies with the one-year field.",
-   "It was written off in the year it arose, since this engine has never carried what the two-thirds restriction refuses."
+   "It was written off in the year it arose; this engine never carries what the two-thirds restriction refuses."
   ],
   "answer": 2,
   "explanation": "The chargeable profit is exactly one third of 13987213.60 because two thirds is the most the allowance may take in a pre-2026 year (CITA Second Schedule para 24(7), as substituted by Finance Act 2023 s.9(b)). The published pair prices the carry: pia_cit_allowance_restricted_carry at NPV -102455984.11 against pia_cit_allowance_no_carry at -116276490.72. The 8000000.00 in cpr_deferred_to_next is the cost price ratio deferral, a different amount, and the two assessable profits are equal."
@@ -158,7 +158,7 @@
   "options": [
    "A one-year field cannot carry any allowance past its only year, so the engine refuses every recovery life longer than the ledger it is given.",
    "The texts fix the capital allowance at five years (PIA Fifth Schedule para 17(1); NTA First Schedule Part II para 14(1)).",
-   "The recovery years set the CPR limit as well, and a limit outside the range from 30 to 100 percent is refused by the cap itself.",
+   "The recovery years set the CPR limit too, and a limit outside 30 to 100 percent is refused by the cap itself.",
    "Because the two-thirds restriction would bind at one year and at ten, and the engine refuses any run in which that restriction binds."
   ],
   "answer": 1,
