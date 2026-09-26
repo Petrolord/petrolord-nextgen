@@ -51,6 +51,10 @@ W="$STAGE/repo/tools/course-waves/$SLUG"
 # wave.json, with its repo pointed at the export so nothing the generators read
 # can resolve back out to a working tree.
 python3 -c "import json; p='$W/wave.json'; c=json.load(open(p)); c['repo']='$STAGE/repo'; json.dump(c, open(p,'w'))"
+# esbuild, which ts_loader.mjs uses to strip the types from cashflow.ts, is a
+# build tool and no course input: it is borrowed from the repository's
+# installed node_modules by a symlink, never copied into the export.
+ln -s "$REPO/node_modules" "$STAGE/repo/node_modules"
 mkdir -p "$W/banks"
 for tier in beginner intermediate advanced; do
   cp "$STAGE/repo/tools/course-banks/$SLUG/$tier/"*.json "$W/banks/"
