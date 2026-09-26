@@ -1113,7 +1113,7 @@ w();
   const years = res.summary.map((x) => x.paybackPeriod).filter((y) => y !== null);
   const fastest = Math.min(...years);
   const tied = res.summary.filter((x) => x.paybackPeriod === fastest).map((x) => x.name);
-  w(`${tied.length} regimes pay back in year ${fastest} on ODIDI: ${tied.join(', ')}. The verdict names one of them.`);
+  w(`${tied.length} regimes pay back in year ${fastest} on ODIDI: ${tied.join(', ')}. The verdict names every one of them.`);
   w();
 }
 w('And notice the SECOND name in every one of these sentences. It is not the runner-up. The function picks the fastest, removes it, and then takes the MAXIMUM of what is left, so the second regime named is the SLOWEST of the rest. A sentence of the form "A pays back in year x, against year y for B" reads like a top two and is a top and a bottom, with everything else silently in between.');

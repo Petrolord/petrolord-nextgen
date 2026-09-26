@@ -1590,7 +1590,7 @@ THE SAME THING HAPPENS ON THE TEACHING FIELD, which matters because ODIDI is whe
 
 The verdict: "Brazil - Concession" and "Ghana - Deepwater" pay back in year 6, against year 8 for "Angola - Deepwater PSC".
 
-2 regimes pay back in year 6 on ODIDI: Brazil - Concession, Ghana - Deepwater. The verdict names one of them.
+2 regimes pay back in year 6 on ODIDI: Brazil - Concession, Ghana - Deepwater. The verdict names every one of them.
 
 And notice the SECOND name in every one of these sentences. It is not the runner-up. The function picks the fastest, removes it, and then takes the MAXIMUM of what is left, so the second regime named is the SLOWEST of the rest. A sentence of the form "A pays back in year x, against year y for B" reads like a top two and is a top and a bottom, with everything else silently in between.
 
