@@ -5,7 +5,7 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
 # EC1 cashflow, beginner tier, Adding Up. Reconstructed from the served rows (the applied
 # migrations replayed on a local scratch database) with the EC7 PIA re-cut applied;
-# written by tools/course-waves/cashflow/pia-recut/build.py. Edit here, then re-run it.
+# written by tools/course-waves/cashflow/pia-recut/build.py. Edit the rows there, then re-run it.
 
 q(1,
  "Add AKATA's net_cash_flow column through 2030 and you get -89377672.80 USD. The engine's cumulative_cash_flow column reads -90302313.79 for the same year. Which is the running sum?",

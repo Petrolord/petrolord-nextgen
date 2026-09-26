@@ -140,7 +140,7 @@
    "Take is computed on a 100 percent run and copied onto every scaled run."
   ],
   "answer": 0,
-  "explanation": "AKATA reports 66.1723 percent at 100, 75, 60, 40 and 25 percent alike; until the 2026-09-15 repair the JV ledger kept revenue, volumes and costs at field level while scaling royalty, tax and net, and printed 91.5431 percent at a 25 percent interest."
+  "explanation": "AKATA reports 66.1723 percent at 100, 75, 60, 40 and 25 percent alike: every line of the JV ledger is printed at the share, so revenue, volumes and costs scale with royalty, tax and net, and the ratio between the government's lines and the partner's holds."
  },
  {
   "prompt": "Under AKATA's flat 15 percent royalty and 40 percent tax, scaling the volumes to the interest first would give the same net as scaling the results afterward. Why does the engine still insist on scaling inside?",

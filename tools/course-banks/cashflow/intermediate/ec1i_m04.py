@@ -5,7 +5,7 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
 # EC1 cashflow, intermediate tier, The Internal Rate of Return. Reconstructed from the served rows (the applied
 # migrations replayed on a local scratch database) with the EC7 PIA re-cut applied;
-# written by tools/course-waves/cashflow/pia-recut/build.py. Edit here, then re-run it.
+# written by tools/course-waves/cashflow/pia-recut/build.py. Edit the rows there, then re-run it.
 
 q(2,
  "AKATA reports NPV 72534830.66 end-year and 70188970.32 mid-year on the real basis, and 69159247.46 mid-year on the nominal basis. What does the IRR read across those three runs?",
@@ -48,7 +48,7 @@ q(3,
  "Every reported root carries 0.000000 or -0.000000: conventional_five_year at 15.2382 percent and tiny_return at 0.1000 percent print the same kind of residual.")
 
 q(0,
- "Before engines 3.10.0 the finder's method statement said Newton falls back to bisection when unconverged and returns null when no sign change brackets a root. What does bisection need before it can run?",
+ "The engine's root finder falls back to bisection when Newton does not converge. What does bisection need before it can run?",
  "Two rates with NPVs of opposite sign.",
  ["Every root of the curve, so that it can halve the interval between the two nearest and confirm that Newton reached the right one.",
   "A vector with more than one sign change, on which it picks the root nearest zero on the positive side as the hurdle-rate answer.",
@@ -69,15 +69,15 @@ q(1,
  ["Nothing at all: both return a bare null, and only the NPV beside each one has ever distinguished them.",
   "A signed null, positive for the sunk run and negative for the price run, carrying the verdict without the NPV.",
   "An irrStatus that names the branch and also grades the field, so a reader can rank the two runs from the status alone and never has to look at the NPV printed beside either one of them, whatever its sign."],
- "Until engines 3.10.0 the null carried no status and the shapes were indistinguishable; the status names no-sign-change, no-root, multiple-roots or above-clamp, and none of the four says whether the field is worth anything.")
+ "The status names no-sign-change, no-root, multiple-roots or above-clamp, the branch the search failed on, and none of the four says whether the field is worth anything; that is the NPV's job.")
 
 q(0,
  "AKATA reports IRR null with a 200000000 abandonment in 2035, and IRR null with a 60000000 abandonment as well. The two nulls have opposite causes. What are they?",
  "With 200000000 the NPV is negative at every sampled rate, -58362170.82 at 0 percent, so nothing brackets a crossing; with 60000000 it is 81637829.18 at 0 percent and -78880508.48 at 100, so the curve crosses twice and the engine will not pick one of them.",
  ["They share one cause: a terminal negative flow always leaves the engine without a bracket, whatever the size of the abandonment.",
-  "Newton overshoots on the steeper curve of the larger abandonment, while the 60000000 root of 23.2570 percent sits above the top of the band.",
+  "Newton overshoots on the steeper curve of the larger abandonment, while the smaller abandonment's only crossing sits above the top of the band.",
   "The larger abandonment exceeds the 255000000.00 of capex it is set against, and the smaller leaves a last flow of -29598201.95 below the 2034 flow."],
- "Until engines 3.10.0 the 60000000 run reported 23.2570 percent, one crossing of two; the engine now names a rate only where exactly one rate in the band from -99 to 1000 percent zeroes the NPV.")
+ "With 200000000 nothing brackets a crossing; with 60000000 there are two crossings, and the engine names a rate only where exactly one rate in the band from -99 to 1000 percent zeroes the NPV.")
 
 q(3,
  "two_roots_2_and_6, [-100, 208, -108.12], has an NPV of -0.120000 at 0 percent, 0.036982 at 4 and -0.264463 at 10, and is zero at 2 percent and at 6. What does the engine return?",
@@ -85,10 +85,10 @@ q(3,
  ["6.0000 percent, the crossing Newton reaches climbing from its start at 10 percent, with no note that a second one exists.",
   "2.0000 percent, the crossing nearest zero on the positive side, which is the hurdle-rate region a decision is made in.",
   "Both rates, reported as a range running from 2.0000 to 6.0000 percent, since either one of them zeroes the NPV."],
- "Until engines 3.10.0 it reported 6.0000 percent where the oracle read 2.0000 and the golden recorded a disagreement; the golden records none now.")
+ "Two rates in the band zero the NPV, so the engine names neither and lists both. A finder that stopped at the crossing it reached first from 10 percent would report 6.0000 and hide 2.0000, and nothing in that rate would show it.")
 
 q(2,
- "A reader working from a pre-3.10.0 report takes three_roots_0_7_33's IRR of 7.3509 percent to a hurdle of 5 percent and approves. What went wrong?",
+ "A reader copies from a colleague's spreadsheet and takes three_roots_0_7_33's IRR of 7.3509 percent to a hurdle of 5 percent and approves. What went wrong?",
  "The NPV at 5 percent is -0.028075, negative; a hurdle comparison needs the sign of the curve at the hurdle, which is the NPV, not a root.",
  ["The reader should have used the oracle's 0.0000 percent, which is below 5, and rejected the vector on the smaller root.",
   "Nothing, since 7.3509 sits above the hurdle and the curve reads 0.081930 at 30 percent.",

@@ -5,7 +5,7 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
 # EC1 cashflow, advanced tier, End of Life. Reconstructed from the served rows (the applied
 # migrations replayed on a local scratch database) with the EC7 PIA re-cut applied;
-# written by tools/course-waves/cashflow/pia-recut/build.py. Edit here, then re-run it.
+# written by tools/course-waves/cashflow/pia-recut/build.py. Edit the rows there, then re-run it.
 
 q(2,
  "elt_royalty_tail's 2031 row would sell 120000.00 bbl at 100.000000 USD against opex of 10000000.00, and with the limit on the ledger ends at 2030. Why was a year whose gross revenue exceeds its opex trimmed?",
@@ -64,12 +64,12 @@ q(3,
  "Total tax is 60000000.00 against 65000000.00, the 2031 row prints abandonment_cost_funded 10000000.00, and IRR is 133.3333 against 120.0000 percent.")
 
 q(1,
- "pia_sinking_fund contributes 30000000.00 in its single year: HCT falls from 284810956.27 to 275810956.27 and CIT from 293998456.27 to 284998456.27. What happens to the TET of 25999871.36?",
- "Nothing: the contribution relieves the two profit taxes at their rates and the engine refuses to relieve the levies.",
- ["It falls by 2.5 percent of 30000000.00, since the levy sits on the assessable profit that the contribution reduces.",
-  "It falls in proportion to CIT, because the levy is a fixed fraction of the CIT paid and moves with it.",
-  "It rises, because a lower HCT leaves more assessable profit for the levy to be charged on."],
- "NPV falls from 135185570.34 to 123185570.34 and the unit technical cost rises from 26.438356 to 28.082192 USD per boe; the levy line is unchanged.")
+ "pia_sinking_fund contributes 30000000.00 in 2025, a year under the PIA: HCT falls from 285784994.46 to 276784994.46 and CIT from 299472494.46 to 290472494.46. What happens to the TET of 31747249.45?",
+ "It falls by 3 percent of the 30000000.00, to 30847249.45, because TET is charged on the CIT assessable profit the contribution reduces.",
+ ["It falls by 2.5 percent of 30000000.00, since the tax sits on the assessable profit that the contribution reduces and 2.5 percent is its rate in 2025.",
+  "It falls in proportion to CIT, because the tax is a fixed fraction of the CIT paid in the year and so moves exactly as the CIT line moves.",
+  "It rises, because a lower HCT leaves more assessable profit behind in the year for the tertiary education tax to be charged on."],
+ "TET at 3 percent from 2023 is charged on the CIT assessable profit, which the contribution takes from 1058241648.19 to 1028241648.19, so TET falls to 30847249.45. NPV falls from 141236909.83 to 130136909.83 and the unit technical cost rises from 26.438356 to 28.082192 USD per boe. The 2.5 percent rate belongs to years before 2023.")
 
 q(0,
  "On AKATA a fund from 2029 pays seven contributions of 8571428.57 and relieves the most tax, total 124585925.52, yet reports NPV 44902775.54 and IRR 21.9086 percent against the 2032 fund's 47415100.31 and 23.9820 percent on a total tax of 127157354.09. Why does the fund that relieves more tax score lower on both?",
@@ -80,12 +80,12 @@ q(0,
  "Starting in 2032 pays four contributions of 15000000.00 and gives the higher NPV because the money leaves later; both funds beat the lump sum's 38666394.86, which reports no rate at all because its terminal negative leaves the IRR null.")
 
 q(1,
- "pia_sinking_fund_wi_50 runs at a 50 percent working interest and reports total fund contributions of 30000000.00 beside a total_abandonment_cost and an abandonment_cost_funded of 30000000.00, with NPV 55592785.17. What does the agreement between those three figures say?",
- "That abandonment_cost_usd is the share under both funding modes since engines 3.10.0, so a fund collects exactly the amount that was entered.",
+ "pia_sinking_fund_wi_50 runs at a 50 percent working interest and reports total fund contributions of 30000000.00 beside a total_abandonment_cost and an abandonment_cost_funded of 30000000.00, with NPV 59518454.92. What does the agreement between those three figures say?",
+ "That abandonment_cost_usd is the share under both funding modes, so a fund collects exactly the amount that was entered.",
  ["That the working interest is not applied to the decommissioning lane at all, so a fund at any interest collects the field-level cost and the partner overpays.",
-  "That the engine grossed the entered 15000000.00 up to a field figure and printed both, which is why the contributions and the cost now agree.",
+  "That the engine grossed an entered 15000000.00 up to a field figure and printed both, which is why the contributions and the cost agree.",
   "That the fund was overfunded, and the surplus is released to the contractor in the final row, which is why the contributions exceed what the partner owes."],
- "Until engines 3.10.0 the same row collected 15000000.00 against a reported 30000000.00 and read NPV 61592785.17; on AKATA at 50 percent the fund now collects the whole 60000000.00 and reports NPV 7713047.81 with IRR 14.1861 percent.")
+ "The engine grosses the fund by one over the working interest before the monetary lines are scaled, so the contribution lands at the 30000000.00 entered. On AKATA at 50 percent the fund collects the whole 60000000.00 and reports NPV 7713047.81 with IRR 14.1861 percent.")
 
 q(2,
  "schedule_shift_1 keeps 50000000.00 of capex in 2030 while production and opex reappear in 2031 and 2032, and NPV is 17355371.90. What does schedule_shift_years move?",
@@ -109,7 +109,7 @@ q(3,
  ["The IRR, which fell too far: a longer delay on the same flows cannot move a rate by three percentage points, and the missing row took the rest.",
   "The NPV, which double-discounted the empty year and fell further than the delay alone can explain.",
   "None of them, because a ledger with a missing calendar year is refused by the engine and the KPIs printed are those of the two-year run carried forward unchanged."],
- "A longer wait for the same money cannot shorten a payback; until engines 3.10.0 the IRR of that run read 15.1070 percent and rose with the delay, which was the same row counting reaching the rate.")
+ "A longer wait for the same money cannot shorten a payback. The IRR and the NPV both fell with the delay, so only the payback, counted on rows, misreads the missing year.")
 
 q(1,
  "AKATA with a 200000000 lump sum in 2035 reports payback 3.46 years, the same figure as the run with no abandonment at all, while its nominal flows sum to -58362170.82 and its NPV is -40359955.35. What is that payback telling the reader?",
@@ -125,7 +125,7 @@ q(2,
  ["6.0000 percent, the root Newton reaches from a start of 10 percent, reported on its own with nothing beside it in the result to say that a second root exists inside the band.",
   "2.0000 percent, the root nearest zero on the positive side, which the engine prefers as the hurdle-rate reading.",
   "The larger root by rule, since an IRR is read as the highest rate at which the project is still worth doing."],
- "Until engines 3.10.0 it returned 6.0000 percent unflagged; terminal negatives are where the shape comes from, and AKATA with a 60000000 lump sum ends on -29598201.95 and now returns null too.")
+ "Terminal negatives are where the shape comes from: AKATA with a 60000000 lump sum ends on -29598201.95 and returns null as well, with its status beside it.")
 
 emit(Q, '/root/wt-ec7-recut/tools/course-banks/cashflow/advanced/ec1a_m05.json', expect_n=15)
 finish()

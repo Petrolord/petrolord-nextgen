@@ -5,7 +5,7 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
 # EC1 cashflow, intermediate tier, The Professional Reading. Reconstructed from the served rows (the applied
 # migrations replayed on a local scratch database) with the EC7 PIA re-cut applied;
-# written by tools/course-waves/cashflow/pia-recut/build.py. Edit here, then re-run it.
+# written by tools/course-waves/cashflow/pia-recut/build.py. Edit the rows there, then re-run it.
 
 q(1,
  "The capstone method is worked on AKATA in eight steps. What does step one write, before any number?",
@@ -45,7 +45,7 @@ q(1,
  ["That it was evaluated at 6.8 percent, and the gap of 0.00 shows 6.8 and 6.796117 give the same NPV to the cent on a field of this size.",
   "That the point sits between the 5 and 8 percent samples and was interpolated from 83023565.60 and 65968275.69.",
   "That the applied rate is exactly 6.8 percent, the Fisher rate rounded by the engine before any discounting is done."],
- "Until engines 3.10.0 the point was evaluated at its label too and read 72513070.98, a gap of -21759.68; the engine's own npv() at the exact rate returns the headline.")
+ "The engine's own npv() at the exact rate returns the headline, and a recomputation at the printed 6.8 would land slightly below it, because 6.8 discounts a little harder.")
 
 q(3,
  "Step six: before trusting AKATA's IRR of 29.2361 percent, what does the method have you write, and what does it show on the base case?",
@@ -76,7 +76,7 @@ q(1,
  "The last entry becomes -29598201.95, negative, and the root count goes from one to two, so the engine stops naming a rate and returns null with irrStatus multiple-roots.",
  ["The first entry grows to include the abandonment as a provision, stays negative, and the root count is unchanged because only the sign of the first flow matters.",
   "The last entry becomes -29598201.95, negative, and the root count goes from one to none, which is why the engine reports null with irrStatus no-root.",
-  "Every entry falls by a share of the 60000000 spread as a sinking fund across the seven years, the signs are unchanged, and the single root moves down to 23.2570 percent."],
+  "Every entry falls by a share of the 60000000 spread as a sinking fund across the seven years, the signs are unchanged, and the single root moves a little below 29.2361 percent."],
  "The 200000000 abandonment takes the last entry to -169598201.95 and the NPV negative at every sampled rate, -58362170.82 at 0 percent, and that is the case with no root at all.")
 
 q(2,
@@ -85,15 +85,15 @@ q(2,
  ["A price deck that falls in its last entries, which turns the late revenue rows negative before the cascade is applied to them.",
   "Mid-year discounting, which discounts the valuation year row and so pushes a negative into the tail of the discounted column.",
   "A working interest below 100 percent, which scales the late rows harder than the early ones and turns the tail negative at 25 percent."],
- "At 20 percent decline the limit year is 2030 and four years are trimmed; with the limit off those years would stay, and each would carry a loss.")
+ "At 20 percent decline the limit year is 2031 and three years are trimmed; with the limit off those years would stay, and each would carry a loss.")
 
 q(3,
  "The three habits the lesson names end with reading the rows column before comparing two runs. Why that column?",
- "Because a sweep that trims years compares different fields: at 20 percent decline six rows are valued and at 40 percent three, so the KPIs are of shortened ledgers.",
+ "Because a sweep that trims years compares different fields: at 20 percent decline seven rows are valued and at 40 percent three, so the KPIs are of shortened ledgers.",
  ["Because the rows column carries the sunk flag, and a run with a sunk row reports 206819768.67 where the same rows kept report 77464382.26.",
   "Because the rows column is where the discounting convention is recorded for each run, end_year or mid_year, and two runs under different conventions cannot be ranked against each other.",
-  "Because the number of rows sets the exponent of the last flow, so a ten-row field is discounted harder than a six-row field at the same rate."],
- "The 10 percent decline point keeps all 10 rows and reads 153012318.45; the 20 percent point reads -76483227.81 with four years gone, and part of that difference is the missing rows.")
+  "Because the number of rows sets the exponent of the last flow, so a ten-row field is discounted harder than a seven-row field at the same rate."],
+ "The 10 percent decline point keeps all 10 rows and reads 182401961.12; the 20 percent point reads -30055502.32 with three years gone, and part of that difference is the missing rows.")
 
 q(0,
  "What does the capstone method refuse to produce?",
@@ -107,9 +107,9 @@ q(2,
  "Working the method on multiyear_jv_real: 127186476.88 at 0 percent, headline 88104639.00 at 6.796117 percent, 88104639.00 at the point labelled 6.8, IRR 47.9020 percent. What is the gap, and what does the engine naming 47.9020 already tell you?",
  "The gap is 0.00, and a named rate already tells you it is the only rate in the band from -99 to 1000 percent that zeroes the NPV, because the engine returns null where there is more than one.",
  ["The gap is 0.00, and a named rate tells you only that Newton converged on something; the count of crossings still has to be checked by hand from the sign of the vector's last flow before the rate can be relied on.",
-  "The gap is -18628.18, because the applied rate of 6.796117 percent is rounded to 6.8 before the point is evaluated, and a named rate says nothing at all about how many crossings the curve has.",
+  "The gap is a small negative amount, because the applied rate of 6.796117 percent is rounded to 6.8 before the point is evaluated, and a named rate says nothing at all about how many crossings the curve has.",
   "The gap is 0.00, and a named rate tells you the last entry is positive, since the engine names a rate only on conventional vectors."],
- "Until engines 3.10.0 the point labelled 6.8 read 88086010.81, a gap of -18628.18, and a reported rate was one crossing of however many there were.")
+ "The point is evaluated at the exact applied rate, so the gap is 0.00. The engine names a rate only where exactly one rate in the band zeroes the NPV, so a reported 47.9020 percent already carries the count of crossings.")
 
 q(1,
  "AKATA's NPV is -21406234.12 at 60 USD/bbl and 22132715.69 at 70, and the breakeven is 64.916777. What confirms the breakeven, and against which rate?",
@@ -120,12 +120,12 @@ q(1,
  "The IRR is compared against the nominal 10 percent and not the applied real 6.796117, and the 897.16 residual is the trace of a search that stops at a tolerance on price.")
 
 q(3,
- "The Professional tier used to hand on two numbers to distrust. What became of them, and what is handed on in their place?",
- "Both were repaired: the point labelled 6.8 now reads the headline 72534830.66, and [-100, 208, -108.12] now returns null with irrStatus multiple-roots; the habit of asking what the engine did is what travels.",
- ["Both still stand, the profile gap of -21759.68 and the engine's 6.0000 percent against the oracle's 2.0000, reported exactly as they always were, and the third of them belongs to the Expert tier and concerns abandonment.",
-  "The profile gap was repaired and the two-root IRR was not, so 6.0000 percent is still reported against the oracle's 2.0000 and is the one number the tier now hands on to the Expert tier.",
-  "Both were replaced by the breakeven residual of 897.16 and the mid-year NPV of 70188970.32, the readings the engine still reports without saying what it did."],
- "The golden records no profile disagreement and no IRR disagreement on engines 3.10.0; 70188970.32 and 897.16 are correct readings under their labels and were never numbers to distrust.")
+ "The Professional tier hands on two readings that carry their own proof: the applied-rate profile point and the IRR of a vector whose last entry is negative. What does each tell a reader?",
+ "The point labelled 6.8 reads the headline 72534830.66 because it is evaluated at the exact rate, and [-100, 208, -108.12] is null with multiple-roots and both roots listed.",
+ ["The point labelled 6.8 is a rounded estimate to be corrected against the headline, and [-100, 208, -108.12] returns 6.0000 percent, the root the search reaches first from 10 percent.",
+  "The profile point reads the headline, and [-100, 208, -108.12] returns 2.0000 percent, the lower root, which the contract keeps as the conservative rate for a hurdle.",
+  "Both are superseded by the breakeven residual of 897.16 and the mid-year NPV of 70188970.32, the readings the engine reports without saying how."],
+ "The applied-rate point is labelled at the rate rounded to two decimals and evaluated at 6.796117, so it equals the headline; a vector with two crossings in the band is null with its roots listed. 70188970.32 and 897.16 are correct readings under their labels.")
 
 emit(Q, '/root/wt-ec7-recut/tools/course-banks/cashflow/intermediate/ec1i_m06.json', expect_n=15)
 finish()

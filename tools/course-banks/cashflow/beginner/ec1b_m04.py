@@ -5,7 +5,7 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
 # EC1 cashflow, beginner tier, The Joint Venture Cascade. Reconstructed from the served rows (the applied
 # migrations replayed on a local scratch database) with the EC7 PIA re-cut applied;
-# written by tools/course-waves/cashflow/pia-recut/build.py. Edit here, then re-run it.
+# written by tools/course-waves/cashflow/pia-recut/build.py. Edit the rows there, then re-run it.
 
 q(2,
  "AKATA's 2029 row reads gross revenue 186032000.00 USD, opex 24000000.00, capex 210000000.00 and net cash flow -121123680.00. What does the JV royalty at jv_royalty_pct 15 read on that row?",
@@ -109,7 +109,7 @@ q(0,
  ["The royalty rate falls with the interest, exactly offsetting the smaller net, which is how the engine holds the ratio steady at every interest a partner can hold.",
   "The pre-take value stays at the field's 857602518.80 USD while only the net scales, and the two happen to cancel at this interest.",
   "Take is computed on a 100 percent run and copied onto every scaled run."],
- "AKATA reports 66.1723 percent at 100, 75, 60, 40 and 25 percent alike; until the 2026-09-15 repair the JV ledger kept revenue, volumes and costs at field level while scaling royalty, tax and net, and printed 91.5431 percent at a 25 percent interest.")
+ "AKATA reports 66.1723 percent at 100, 75, 60, 40 and 25 percent alike: every line of the JV ledger is printed at the share, so revenue, volumes and costs scale with royalty, tax and net, and the ratio between the government's lines and the partner's holds.")
 
 q(1,
  "Under AKATA's flat 15 percent royalty and 40 percent tax, scaling the volumes to the interest first would give the same net as scaling the results afterward. Why does the engine still insist on scaling inside?",

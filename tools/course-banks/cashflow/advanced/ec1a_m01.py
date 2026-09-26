@@ -5,7 +5,7 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
 # EC1 cashflow, advanced tier, Cost Recovery. Reconstructed from the served rows (the applied
 # migrations replayed on a local scratch database) with the EC7 PIA re-cut applied;
-# written by tools/course-waves/cashflow/pia-recut/build.py. Edit here, then re-run it.
+# written by tools/course-waves/cashflow/pia-recut/build.py. Edit the rows there, then re-run it.
 
 q(2,
  "psc_carryforward spends 80000000.00 USD of capex and 10000000.00 of opex in 2030 against 100000000.00 of revenue, yet the 2030 row reports taxable_income 27000000.00 and tax 13500000.00. Why is a year that ends 40500000.00 in the red taxed at all?",

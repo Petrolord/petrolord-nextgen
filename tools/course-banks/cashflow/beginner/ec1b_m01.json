@@ -44,7 +44,7 @@
   "explanation": "Depreciation is 5000000.00 in both rows and taxable income is 65000000.00 in both, so the cash difference is the one column that changed."
  },
  {
-  "prompt": "What does the Petroleum Economics Studio engine, version 3.10.0, read before it builds a ledger?",
+  "prompt": "What does the Petroleum Economics Studio engine, version 3.12.0, read before it builds a ledger?",
   "options": [
    "Three uploaded files, production, capex and opex, and a configuration carrying prices, escalators, inflation and fiscal terms; nothing else.",
    "A production file, a reservoir decline model and a facilities capacity file, from which it checks the volumes before believing them.",
@@ -66,11 +66,11 @@
   "explanation": "psc_carryforward reports take 101.0000 percent and single_year_positive 61.1111 percent; null is the engine declining to invent a ratio when revenue is 0.00."
  },
  {
-  "prompt": "multiyear_pia_nominal and multiyear_pia_real are one field with one set of rows, and they report total net cash flow 329879515.51 and 286158487.25. Which is wrong?",
+  "prompt": "multiyear_pia_nominal and multiyear_pia_real are one field with one set of rows, and they report total net cash flow 350425980.24 and 305105917.37. Which is wrong?",
   "options": [
    "The nominal one, because inflation has been added to flows that were already escalated, which counts it twice.",
    "Neither: one is money of the day and the other money of the base year, and a total without its basis is not a number.",
-   "The real one, because it has been discounted at the applied real rate of 6.796117 percent and is the NPV of 203250580.21 under another name.",
+   "The real one, because it has been discounted at the applied real rate of 6.796117 percent and is the NPV of 219158380.04 under another name.",
    "The nominal one, since only the real basis is a valid reading of a PIA ledger."
   ],
   "answer": 1,

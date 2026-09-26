@@ -20,6 +20,8 @@ a row given twice. It writes:
                                           ({prompt, options, answer, explanation}),
                                           for the gates (lengthtails, dupaxes,
                                           numsweep --banks, copy rule)
+  docs/pia-recut/cashflow_after.json      all 396 rows after the re-cut, served shape
+  tools/course-banks/cashflow/<tier>/     the committed bank source pairs (.py emits .json)
   docs/pia-recut/cashflow_edits.json      every changed row, old and new in full,
                                           and the capstone and graded-field changes
 
@@ -35,6 +37,7 @@ DASH = re.compile('[—–]')
 CONTRAST = re.compile(r',\s+not\s+\w', re.I)
 EDITS = os.path.join(REPO, 'docs', 'pia-recut', 'cashflow_edits.json')
 SERVED = os.path.join(REPO, 'docs', 'pia-recut', 'served', 'cashflow_questions.json')
+AFTER = os.path.join(REPO, 'docs', 'pia-recut', 'cashflow_after.json')
 SERVED_CAPS = os.path.join(REPO, 'docs', 'pia-recut', 'served', 'cashflow_capstones.json')
 KIT_CAPS = os.path.join(REPO, 'tools', 'course-waves', 'cashflow', 'capstones.json')
 
@@ -155,12 +158,52 @@ def main():
         'capstones': capstone_changes(),
     }
     edits_txt = json.dumps(edits, ensure_ascii=False, indent=1) + '\n'
+    # The whole after-state, served shape (for the answer-length audit and the ship step).
+    after = [dict(app_slug='cashflow', tier=k[0], scope=k[1], module_key=k[2], ord=k[3],
+                  **{f: new.get(k, served[k])[f] for f in ('prompt', 'options', 'answer_index', 'explanation')})
+             for k in sorted(served, key=order)]
+    after_txt = json.dumps(after, ensure_ascii=False, indent=1) + '\n'
+    # The committed bank SOURCE pairs under tools/course-banks/cashflow/<tier>/:
+    # a .py that holds the questions and emits the .json beside it through the
+    # emit contract (check-bank-sources.py runs every .py and compares bytes).
+    pairs = {}
+    for t in TIERS:
+        man = json.load(open(os.path.join(REPO, 'src/content/courses/cashflow', t, 'manifest.json')))
+        banks = [(f"ec1{LETTER[t]}_{m['key'].split('-')[0]}", 'module', m['key'], m.get('title', m['key'])) for m in man['modules']]
+        banks.append((f'ec1{LETTER[t]}_exam', 'final', None, 'final exam'))
+        for stem, scope, mk, title in banks:
+            rel = f'tools/course-banks/cashflow/{t}/{stem}'
+            rows = [new.get(k, served[k]) for k in sorted((k for k in served if k[:3] == (t, scope, mk)), key=lambda k: k[3])]
+            src = ["import sys; sys.path.insert(0, '/root/dc-wavekit')",
+                   'from bankkit import emit, finish',
+                   'Q=[]',
+                   'def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))',
+                   '',
+                   f'# EC1 cashflow, {t} tier, {title}. Reconstructed from the served rows (the applied',
+                   '# migrations replayed on a local scratch database) with the EC7 PIA re-cut applied;',
+                   '# written by tools/course-waves/cashflow/pia-recut/build.py. Edit the rows there, then re-run it.',
+                   '']
+            for r in rows:
+                a = r['answer_index']
+                ds = [o for i, o in enumerate(r['options']) if i != a]
+                src.append(f"q({a},\n {json.dumps(r['prompt'], ensure_ascii=False)},\n {json.dumps(r['options'][a], ensure_ascii=False)},\n ["
+                           + ',\n  '.join(json.dumps(d, ensure_ascii=False) for d in ds) + f"],\n {json.dumps(r['explanation'], ensure_ascii=False)})\n")
+            src += [f"emit(Q, '/root/wt-ec7-recut/{rel}.json', expect_n={len(rows)})", 'finish()', '']
+            out_json = [{'prompt': r['prompt'], 'options': r['options'], 'answer': r['answer_index'], 'explanation': r['explanation']} for r in rows]
+            pairs[rel + '.py'] = '\n'.join(src)
+            pairs[rel + '.json'] = json.dumps(out_json, indent=1, ensure_ascii=False)
     bank_dir = os.path.join(HERE, 'banks')
     if check:
         bad = [fn for fn, txt in out.items()
                if not os.path.exists(os.path.join(bank_dir, fn)) or open(os.path.join(bank_dir, fn)).read() != txt]
         if not os.path.exists(EDITS) or open(EDITS).read() != edits_txt:
             bad.append('cashflow_edits.json')
+        if not os.path.exists(AFTER) or open(AFTER).read() != after_txt:
+            bad.append('cashflow_after.json')
+        for rel, txt in pairs.items():
+            p = os.path.join(REPO, rel)
+            if not os.path.exists(p) or open(p).read() != txt:
+                bad.append(rel)
         if bad:
             sys.exit('DRIFT: ' + ', '.join(bad))
         print(f'build --check: clean, {len(new)} changed rows')
@@ -169,6 +212,10 @@ def main():
     for fn, txt in out.items():
         open(os.path.join(bank_dir, fn), 'w').write(txt)
     open(EDITS, 'w').write(edits_txt)
+    open(AFTER, 'w').write(after_txt)
+    for rel, txt in pairs.items():
+        os.makedirs(os.path.dirname(os.path.join(REPO, rel)), exist_ok=True)
+        open(os.path.join(REPO, rel), 'w').write(txt)
     print(f'wrote {len(out)} banks and {len(new)} changed rows: ' + ', '.join(f'{t} {edits["counts"].get(t, 0)}' for t in TIERS))
 
 

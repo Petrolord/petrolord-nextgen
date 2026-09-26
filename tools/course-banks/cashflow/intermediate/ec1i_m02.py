@@ -5,7 +5,7 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
 # EC1 cashflow, intermediate tier, Real and Nominal. Reconstructed from the served rows (the applied
 # migrations replayed on a local scratch database) with the EC7 PIA re-cut applied;
-# written by tools/course-waves/cashflow/pia-recut/build.py. Edit here, then re-run it.
+# written by tools/course-waves/cashflow/pia-recut/build.py. Edit the rows there, then re-run it.
 
 q(1,
  "AKATA is configured with inflation of 3 percent, an oil escalator of 2, a gas escalator of 2, an opex escalator of 3 and a capex escalator of 0. Which of those five rates write the ledger rows?",

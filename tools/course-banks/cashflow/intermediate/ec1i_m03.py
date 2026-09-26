@@ -5,7 +5,7 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
 # EC1 cashflow, intermediate tier, Net Present Value. Reconstructed from the served rows (the applied
 # migrations replayed on a local scratch database) with the EC7 PIA re-cut applied;
-# written by tools/course-waves/cashflow/pia-recut/build.py. Edit here, then re-run it.
+# written by tools/course-waves/cashflow/pia-recut/build.py. Edit the rows there, then re-run it.
 
 q(3,
  "AKATA's discounted_cash_flow column runs minus 121123680.00, 28860006.55, 53279541.38, 40540595.37, 30649858.46, 23167486.48 and 17161022.43. How is the NPV of 72534830.66 obtained from it?",
@@ -37,15 +37,15 @@ q(2,
  ["The point is both labelled and evaluated at 6.8 percent, and the gap is 0.00 because rounding 6.796117 up to 6.8 moves the NPV of a field this size by less than a cent, so the label and the evaluation are the same number and always were.",
   "The label is the exact rate truncated for display, and the reading is the 8 percent point of 65968275.69 interpolated back down to 6.8.",
   "The point is labelled at the rounded rate and evaluated on the nominal flows, which is why it agrees with the headline."],
- "Until engines 3.10.0 the point was evaluated at the label too, and AKATA's read 72513070.98 against the headline, a gap of -21759.68; the golden records no profile disagreement now.")
+ "The engine's own npv() at the exact rate on the same flows returns 72534830.66 as well, so the point and the headline are one computation. The label is a rounded name for display, and the point is read on the real flows like the headline.")
 
 q(0,
- "Until engines 3.10.0 the profile gap ran minus 21759.68 on AKATA, minus 40996.42 on multiyear_pia_real and minus 453.74 on allowance_cap_midyear, and was never positive. What produced that sign, and what is the gap today?",
- "The point was evaluated at its rounded label, and 6.8 percent discounts every row a little harder than 6.796117; the exact rate is used now, so the gap is 0.00.",
- ["Floating point accumulation over the discounted rows drifted downward and still does, which is why the gap scales with the size of the field and cannot be removed by changing the rate at which the point is read.",
-  "The profile left out the valuation year row, a negative on each of these fields, and that row is included now, so the gap is 0.00.",
-  "The profile was evaluated end-year against a mid-year headline, and a half-year shift always removes value; both are read end-year now."],
- "The retired gap scaled with the size of the field, 40996.42 on the 203250580.21 case against 453.74 on the 2406447.46 case, and the golden records no profile disagreement on engines 3.10.0.")
+ "A reader recomputes AKATA's applied-rate profile point at its printed label, 6.8 percent, instead of at the applied 6.796117. Which way does the recomputed figure move against the headline 72534830.66, and why?",
+ "Down: 6.8 percent discounts every row a little harder than 6.796117, and the engine evaluates its point at the exact rate, so only the reader's figure moves.",
+ ["Up or down at random: floating point accumulation over the discounted rows drifts, and the drift scales with the size of the field whatever rate the point is read at.",
+  "Up, because 6.8 is the larger rate and a larger rate lifts the present value of a field whose flows after the first year are all positive.",
+  "Not at all: the half-year shift of a mid-year headline absorbs the rounding, so any rate within a hundredth of the applied one gives the same figure."],
+ "AKATA's profile falls at every step, 83023565.60 at 5 percent and 65968275.69 at 8, so a slightly higher rate gives a slightly lower NPV. The engine's point is evaluated at 6.796117 and equals the headline; the recomputation at 6.8 lands a little below it.")
 
 q(3,
  "The profile samples 0, 5, 8, 10, 12, 15 and 20 percent plus the applied rate. What can it not show?",
@@ -104,7 +104,7 @@ q(2,
  "AKATA's opex of 183899092.34 sits inside the NPV here and would sit in the denominator there; the engine prints no profitability index.")
 
 q(0,
- "multiyear_pia_real has an NPV of 203250580.21 and a DPI of 0.398389; multiyear_jv_real has an NPV of 88104639.00 and a DPI of 0.598241. Which ranks first?",
+ "multiyear_pia_real has an NPV of 219158380.04 and a DPI of 0.429569; multiyear_jv_real has an NPV of 88104639.00 and a DPI of 0.598241. Which ranks first?",
  "It depends on the constraint: if capital is scarce the second does more per unit of capital, and if it is not NPV ranks and the first wins.",
  ["The first, because NPV is the only ranking and DPI is a description that cannot reverse it.",
   "The second, because a higher DPI means a higher return on any measure, whatever the capital available: DPI is NPV per unit of capital, and a ratio that beats another per unit beats it in total as well.",
@@ -125,7 +125,7 @@ q(3,
  ["The royalty of 15 percent and the tax of 40 percent are the same at every interest, and take is simply those two rates restated on the pre-take value, so a run at 25 percent reports 66.1723 because the rates it is built from never moved.",
   "Take is read on the field-level rows before the working interest is applied, so a partner reports the whole field's take rather than a share of it, which is why the figure is identical at 100 percent and at 60.",
   "The government's part and the partners' part both grow as the interest falls, and the two movements cancel in the ratio."],
- "Until engines 3.10.0 revenue, volumes, opex, capex and depreciation stayed at field level while royalty, tax and net cash flow reported the share, so take counted the partners' portion and rose as the interest fell, 74.6292 at 75 and 91.5431 at 25.")
+ "A take built from a partner's scaled net over the field's unscaled value would count the other partners' portion as government take and rise as the interest fell. With every line at the share, both sides of the ratio sit on one basis and the working interest drops out.")
 
 emit(Q, '/root/wt-ec7-recut/tools/course-banks/cashflow/intermediate/ec1i_m03.json', expect_n=15)
 finish()

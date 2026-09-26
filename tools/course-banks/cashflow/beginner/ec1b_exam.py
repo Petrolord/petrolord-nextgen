@@ -5,7 +5,7 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
 # EC1 cashflow, beginner tier, final exam. Reconstructed from the served rows (the applied
 # migrations replayed on a local scratch database) with the EC7 PIA re-cut applied;
-# written by tools/course-waves/cashflow/pia-recut/build.py. Edit here, then re-run it.
+# written by tools/course-waves/cashflow/pia-recut/build.py. Edit the rows there, then re-run it.
 
 q(1,
  "In the hand-derived 2030 row the depreciation column reads 5000000.00 USD, and that number appears nowhere in the net cash flow of -12500000.00. What is the column there for?",
@@ -59,7 +59,7 @@ q(3,
  "fiscal_regime picks one of three cascades from gross revenue to net cash flow. Which description is the JV cascade?",
  "Royalty, then deductions, then a single tax rate: 20000000.00 of royalty and 32500000.00 of tax out of 100000000.00 in 2030.",
  ["Cost recovered from a capped share of revenue and the remainder split, which is why psc_carryforward pays 27000000.00 of tax on 200000000.00 of revenue and nets -1000000.00.",
-  "Five taxes on three bases, which on the published worked example collect 604809283.90 out of 1460000000.00 of revenue.",
+  "Five taxes on three bases, which on the published worked example collect 617004738.36 out of 1460000000.00 of revenue.",
   "One tax on gross revenue with no deductions, which is what the loss columns reading 0.00 on every row implies."],
  "Every regime reports the same KPI set; what differs is the cascade between the one gross revenue and the net, and the JV is the flat one.")
 
@@ -253,7 +253,7 @@ q(1,
  ["95.1923 percent, because the partner's scaled net is set against the field's unscaled pre-take value.",
   "A quarter of 80.7692 percent, since take is a money reading and every money reading scales with the interest.",
   "Null, because the engine declines a take on any run below a 100 percent interest."],
- "NPV falls from 21590909.09 to 5397727.27 USD with the share while take does not move; until the 2026-09-15 repair the JV ledger kept revenue and costs at field level and the same run printed 95.1923 percent.")
+ "NPV falls from 21590909.09 to 5397727.27 USD with the share while take does not move. A take that set the partner's scaled net against the field's unscaled value would climb as the interest fell, a reading about the partnership.")
 
 q(0,
  "AKATA's cumulative_nominal reads 29050104.71 USD at the end of 2032 and its cumulative_cash_flow reads 19845806.34. What do the two agree on and what do they not?",
@@ -264,12 +264,12 @@ q(0,
  "The nominal and real columns change sign in the same year, so the whole-year part is the same; the engine's 3.461632 walks the nominal column.")
 
 q(3,
- "multiyear_jv_real and multiyear_pia_real both print payback \"2.89 years\". Do the two fields pay back at the same time?",
- "No. Their payback_years are 2.889357 and 2.892034, and the label is a rounding of each.",
- ["Yes, because the label is the engine's reading and payback_years is a diagnostic that carries extra digits.",
+ "multiyear_jv_real prints payback \"2.89 years\" and multiyear_pia_real \"2.84 years\", and both cross zero in their third row. Do the two fields pay back at the same time?",
+ "No. Their payback_years are 2.889357 and 2.844931, and each label is a rounding of its own figure.",
+ ["Yes, because the two labels differ only in the second decimal, and a label is a display rounding of one shared crossing.",
   "Yes, because both cross zero in their third row and payback is a year.",
   "No, because one is a JV field and the other a PIA field, and the regimes count from different rows."],
- "Two fields that cross in the same calendar year can be nearly a year apart in payback_years, and two that print the same label can differ in the third decimal.")
+ "Both fields cross zero in their third row, yet payback_years reads 2.889357 on the JV field and 2.844931 on the PIA field: the fraction inside the crossing year differs, and each label rounds its own figure. Two fields that cross in the same row can still pay back at different times.")
 
 q(2,
  "The hand-derived case reports unit technical cost 35.000000 USD/boe and opex per boe 10.000000. From which totals?",

@@ -44,7 +44,7 @@
   "explanation": "At 30 USD/bbl only the first two years pay, 6354880.00 and 801844.80, and total tax falls to 7156724.80: the price moves the year in which the deductions overtake the revenue."
  },
  {
-  "prompt": "On the published oil_price_multiyear_pia_real sweep the take reads 144.0232 percent at 40 USD/bbl, 71.1024 at 80 and 71.3286 at 120, while AKATA's JV take falls from 87.4083 at 60 to 57.9418 at 120. Why does the PIA take hold almost flat?",
+  "prompt": "On the published oil_price_multiyear_pia_real sweep the take reads 114.9262 percent at 40 USD/bbl, 69.3025 at 80 and 69.8048 at 120, while AKATA's JV take falls from 87.4083 at 60 to 57.9418 at 120. Why does the PIA take hold almost flat?",
   "options": [
    "The PIA take is working-interest invariant, so it cannot move with the price either.",
    "The PIA field's unit technical cost is 32.823299 USD/boe at every point, so cost and price scale together and the ratio is fixed.",
@@ -107,7 +107,7 @@
    "The mid-year against end-year difference at the breakeven price, which the search cannot remove."
   ],
   "answer": 2,
-  "explanation": "The published cases leave the same trace, -243.53 on jv_analytic, 810.98 on pia_worked_example and 851.16 on multiyear_pia_real, and the IRR of 10.0002 percent confirms the crossing was found."
+  "explanation": "The published cases leave the same trace, -243.53 on jv_analytic, -1391.65 on pia_worked_example and -3574.39 on multiyear_pia_real, and the IRR of 10.0002 percent confirms the crossing was found."
  },
  {
   "prompt": "AKATA's breakeven reads 64.916777 USD/bbl as configured, 64.916777 at a working interest of 60 percent, 69.518418 at a 15 percent discount rate and 74.945115 with royalty 20 and tax 50 percent. Why does the working interest leave it unmoved?",
@@ -143,25 +143,25 @@
   "explanation": "At 50 USD/bbl the real total is -45016230.39 and at 60 it is 8466495.42, so the zero-total price is only bracketed by the sweep, while the breakeven, solved rather than read off a grid, sits above both at 64.916777."
  },
  {
-  "prompt": "On decline_rate_multiyear_pia at 20 percent decline the limit year is 2030, four years are trimmed and six rows are valued. What does the sweep refuse to do with the trimmed years?",
+  "prompt": "On decline_rate_multiyear_pia at 20 percent decline the limit year is 2031, three years are trimmed and seven rows are valued. What does the sweep refuse to do with the trimmed years?",
   "options": [
    "Report them at all, so the rows column reads 10 on every point and only the KPIs reveal the trimming, because the row count is fixed by the production upload and the limit test only zeroes the values in the years it fails.",
-   "Charge their opex, so the KPIs of the shortened field carry no cost after the limit year, while the revenue of the trimmed years is still counted inside the total of 1532137562.53.",
-   "Discount them, so they enter the NPV at face value and pull the NPV down to -76483227.81, because a year past the limit is carried undiscounted as a liability instead of being removed from the ledger.",
+   "Charge their opex, so the KPIs of the shortened field carry no cost after the limit year, while the revenue of the trimmed years is still counted inside the total revenue of the run.",
+   "Discount them, so they enter the NPV at face value and pull the NPV down to -30055502.32, because a year past the limit is carried undiscounted as a liability instead of being removed from the ledger.",
    "Keep them: a year that fails the limit test is removed from the valued ledger, not carried at zero, and the KPIs are of the shortened field."
   ],
   "answer": 3,
   "explanation": "At 40 percent decline seven years are trimmed and three rows survive, and total revenue falls from 3485716284.18 at 5 percent decline to 794617600.00."
  },
  {
-  "prompt": "The decline sweep reports a take of 1199.4096 percent at 40 percent decline and a unit technical cost of 78.666122 USD/boe. What is the 1199.4096?",
+  "prompt": "The decline sweep reports a take of 1079.0391 percent at 40 percent decline and a unit technical cost of 78.666122 USD/boe. What is the 1199.4096?",
   "options": [
    "A share of a pre-take value that has almost vanished, because rows were trimmed while royalties are still charged on what remains.",
    "A rounding fault in the take, which the engine should have reported as null once the residual turned negative as it does on AKATA at 40 USD/bbl.",
-   "The royalties of 118324626.82 divided by the three surviving rows of revenue, which is how the take is defined once the limit engages.",
+   "The royalties of 72878470.21 divided by the three surviving rows of revenue, which is how the take is defined once the limit engages.",
    "The take on the ten-year field before trimming, carried forward unchanged because the take is an undiscounted reading."
   ],
   "answer": 0,
-  "explanation": "Take is 105.7792 percent at 20 percent decline and 202.4061 at 30: the denominator shrinks toward zero as rows are cut, and a share of a value near zero is a large percentage."
+  "explanation": "Take is 93.0311 percent at 20 percent decline and 179.7616 at 30: the denominator shrinks toward zero as rows are cut, and a share of a value near zero is a large percentage."
  }
 ]

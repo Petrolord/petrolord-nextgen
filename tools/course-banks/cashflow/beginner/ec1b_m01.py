@@ -5,7 +5,7 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
 # EC1 cashflow, beginner tier, What a Cash Flow Is. Reconstructed from the served rows (the applied
 # migrations replayed on a local scratch database) with the EC7 PIA re-cut applied;
-# written by tools/course-waves/cashflow/pia-recut/build.py. Edit here, then re-run it.
+# written by tools/course-waves/cashflow/pia-recut/build.py. Edit the rows there, then re-run it.
 
 q(2,
  "The 2030 row of the hand-derived joint venture case reads revenue 100000000.00, royalty 20000000.00, opex 10000000.00, capex 50000000.00, depreciation 5000000.00 and tax 32500000.00. What is the row's net cash flow?",
@@ -40,7 +40,7 @@ q(1,
  "Depreciation is 5000000.00 in both rows and taxable income is 65000000.00 in both, so the cash difference is the one column that changed.")
 
 q(0,
- "What does the Petroleum Economics Studio engine, version 3.10.0, read before it builds a ledger?",
+ "What does the Petroleum Economics Studio engine, version 3.12.0, read before it builds a ledger?",
  "Three uploaded files, production, capex and opex, and a configuration carrying prices, escalators, inflation and fiscal terms; nothing else.",
  ["A production file, a reservoir decline model and a facilities capacity file, from which it checks the volumes before believing them.",
   "A single combined spreadsheet of volumes and costs, with the price taken from the deck by default when the configuration is blank.",
@@ -56,10 +56,10 @@ q(2,
  "psc_carryforward reports take 101.0000 percent and single_year_positive 61.1111 percent; null is the engine declining to invent a ratio when revenue is 0.00.")
 
 q(1,
- "multiyear_pia_nominal and multiyear_pia_real are one field with one set of rows, and they report total net cash flow 329879515.51 and 286158487.25. Which is wrong?",
+ "multiyear_pia_nominal and multiyear_pia_real are one field with one set of rows, and they report total net cash flow 350425980.24 and 305105917.37. Which is wrong?",
  "Neither: one is money of the day and the other money of the base year, and a total without its basis is not a number.",
  ["The nominal one, because inflation has been added to flows that were already escalated, which counts it twice.",
-  "The real one, because it has been discounted at the applied real rate of 6.796117 percent and is the NPV of 203250580.21 under another name.",
+  "The real one, because it has been discounted at the applied real rate of 6.796117 percent and is the NPV of 219158380.04 under another name.",
   "The nominal one, since only the real basis is a valid reading of a PIA ledger."],
  "The ledger carries a net_cash_flow and a real_net_cash_flow column, and their totals part once inflation is set.")
 

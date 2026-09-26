@@ -5,7 +5,7 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
 # EC1 cashflow, beginner tier, The Associate Reading. Reconstructed from the served rows (the applied
 # migrations replayed on a local scratch database) with the EC7 PIA re-cut applied;
-# written by tools/course-waves/cashflow/pia-recut/build.py. Edit here, then re-run it.
+# written by tools/course-waves/cashflow/pia-recut/build.py. Edit the rows there, then re-run it.
 
 q(2,
  "The Associate reading is walked on AKATA's 2031 row rather than on 2029 or 2030. What makes 2031 the cleanest row in the field?",
@@ -53,7 +53,7 @@ q(0,
  ["Scales it by the interest, as it scales every other money reading in the KPI block.",
   "Goes back to a 100 percent run for it, because a scaled run sets the partner's net against the whole field's value and its take is not a fiscal statement.",
   "Leaves it out, because take is a field-level reading and cannot be stated for a partner."],
- "Every money line and the volumes report the share, so take reads 66.1723 percent at 100, at 60 and at 25 percent alike; until the 2026-09-15 repair the same run printed 91.5431 percent at a 25 percent interest.")
+ "Every money line and the volumes report the share, so take reads 66.1723 percent at 100, at 60 and at 25 percent alike, and the figure on the run asked about is the one to quote.")
 
 q(3,
  "One of the four checks says the last cumulative equals the total net cash flow. On AKATA which number is that?",
