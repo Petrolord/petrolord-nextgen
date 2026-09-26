@@ -463,7 +463,7 @@
    "summary": "all banks in this batch passed every gate"
   },
   "bank ec7b_exam.py": {
-   "md5": "96a945c13ac76bbe59c2a5a515acf2c8",
+   "md5": "453f24be1c07270093349ec83918b7a0",
    "command": "python3 ec7b_exam.py",
    "expected": 0,
    "exit": 0,
@@ -678,6 +678,62 @@
    "expected": 0,
    "exit": 0,
    "summary": "FINDINGS: 0"
+  },
+  "gen_seeds.sh HEAD": {
+   "md5": "abb7f4187efcf5ecb98e328d1767fb00",
+   "command": "bash gen_seeds.sh HEAD",
+   "expected": 0,
+   "exit": 0,
+   "summary": "AGREE: all five migrations and the three case files and their index regenerate byte for byte from the committed inputs at HEAD."
+  },
+  "verify_sql.py HEAD": {
+   "md5": "267ca72308b3b7ff4611de2fd1cfb327",
+   "command": "python3 verify_sql.py HEAD",
+   "expected": 0,
+   "exit": 0,
+   "summary": "AGREE: all 396 questions (prompt, options, answer key, explanation), 78 lesson keys in 18 modules, 18 graded fields (key, expected, tolerance) and the catalogue row are byte for byte what the committed banks, manifests, "
+  },
+  "verify_sql.py CANARY text": {
+   "md5": "267ca72308b3b7ff4611de2fd1cfb327",
+   "command": "python3 verify_sql.py HEAD --canary",
+   "expected": 2,
+   "exit": 2,
+   "summary": "intermediate/module/11 explanation: seed 'Section 240(2) sets the contribution at 3 percent of the actual operating expenditure of the preceding financial year, so 3 percent of 170000000 USD is 5100000.000000, and s.263("
+  },
+  "verify_sql.py CANARY key": {
+   "md5": "267ca72308b3b7ff4611de2fd1cfb327",
+   "command": "python3 verify_sql.py HEAD --canary-key",
+   "expected": 2,
+   "exit": 2,
+   "summary": "advanced/module/3 answer_index: seed '0' against bank '1'"
+  },
+  "verify_sql.py CANARY field": {
+   "md5": "267ca72308b3b7ff4611de2fd1cfb327",
+   "command": "python3 verify_sql.py HEAD --canary-field",
+   "expected": 2,
+   "exit": 2,
+   "summary": "capstone field nkemdi_2031_cpr_deferred_usd expected: seed 70390530.68609568 against fields.json 70390537.72514875"
+  },
+  "verify_sql.py CANARY lesson": {
+   "md5": "267ca72308b3b7ff4611de2fd1cfb327",
+   "command": "python3 verify_sql.py HEAD --canary-lesson",
+   "expected": 2,
+   "exit": 2,
+   "summary": "beginner module m03-royalty-by-terrain lesson keys differ from the manifest"
+  },
+  "gen_golive.py (self checks)": {
+   "md5": "93470fafb4a4b185213d20dd0be05756",
+   "command": "python3 -c import sys; sys.argv=[\"x\"]; sys.path.insert(0, \"/root/cat-wip-pia\"); import gen_golive as G; sys.exit(1 if G.refused else 0)",
+   "expected": 0,
+   "exit": 0,
+   "summary": ""
+  },
+  "promptleak.py --sql": {
+   "md5": "e46b7e7196db51aa47fd95995fdb236c",
+   "command": "python3 /root/dc-wavekit/promptleak.py --sql /root/wt-ec7-nextgen/migrations/20261107_ec7_pia_course.sql --course pia",
+   "expected": 0,
+   "exit": 0,
+   "summary": "own-field leaks: 0   cross-tier leaks: 0   self leaks: 0   near misses: 0   small-integer notes: 0"
   }
  },
  "fieldsDiscrimination": {
