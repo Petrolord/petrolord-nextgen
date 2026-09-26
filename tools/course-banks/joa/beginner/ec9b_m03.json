@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "NOC is carried in full on the Ekene terms. Which pair of figures does the engine return for it?",
+  "options": [
+   "Beneficial 0.000000 and paying 20.000000, the carriers taking its barrels.",
+   "Beneficial 0.000000 and paying 0.000000 until the carry is repaid.",
+   "Beneficial 20.000000 and paying 0.000000.",
+   "Beneficial 10.000000, paying 10.000000."
+  ],
+  "answer": 2,
+  "explanation": "On int-ekene NOC's beneficial interest is 20.000000, its share of production, and its paying interest 0.000000, its share of cost while it is carried. A carry moves cost and never moves production, so NOC's production share stays whole: the carriers take none of its barrels. On the half carry in stated shares NOC's paying interest is 10.000000 while its beneficial interest stays 20.000000."
+ },
+ {
+  "prompt": "Under the Ekene carry, how many of NOC's carried points does EKO pay, and what paying interest does that give EKO?",
+  "options": [
+   "10.000000 points, for a paying interest of 50.000000.",
+   "12.307692 points, for a paying interest of 59.807692.",
+   "7.500000 points, for a paying interest of 47.500000.",
+   "20.000000 points, all of them, as the operator."
+  ],
+  "answer": 0,
+  "explanation": "The Ekene carry puts NOC's 20 points on EKO, PA and PB pro rata to their participating interests: EKO 10.000000, PA 6.250000 and PB 3.750000. EKO's paying interest is its 40.000000 plus 10.000000, or 50.000000. 12.307692 and 59.807692 come from the case with two carries, 7.500000 and 47.500000 from the half carry in stated shares, and the operator carries no more than its pro rata part."
+ },
+ {
+  "prompt": "On the Ekene terms, what paying interest does PA reach once its part of NOC's carry is added?",
+  "options": [
+   "5.000000 points, a quarter of NOC's twenty points, for a paying interest of 30.000000.",
+   "31.250000: its 25.000000 plus 6.250000 carry points.",
+   "2.500000 points, as in the half carry, for 27.500000.",
+   "7.692308 points, as when PB is carried too, for 40.192308 in all."
+  ],
+  "answer": 1,
+  "explanation": "The carriers share pro rata among the parties no carry names as carried, so PA takes 25 of the 80 points EKO, PA and PB hold, which is 6.250000 of NOC's 20, and its paying interest is 31.250000. A quarter of twenty ignores that NOC's own share is left out of the ratio. 2.500000 is PA's part of the half carry in stated shares, and 7.692308 its part of NOC's carry when PB is carried as well."
+ },
+ {
+  "prompt": "The engine's reason for the Ekene carry ends with a clause about NOC. Which clause is it?",
+  "options": [
+   "it pays 20% once repaid",
+   "its barrels pass to the carriers",
+   "its beneficial interest falls to 0% while it is carried",
+   "its share of production stays 20%"
+  ],
+  "answer": 3,
+  "explanation": "The engine's reason, in its own words, reads: NOC: 100% of its 20% cost share is carried (20 points), paid by EKO 10, PA 6.25, PB 3.75 (pro rata to their participating interests); its share of production stays 20%. NOC's beneficial interest stays 20.000000 while it is carried, so no production passes to the carriers, and the reason says nothing about a repayment."
+ },
+ {
+  "prompt": "On int-half-carry-stated, NOC is carried for 50.000000 percent of its cost share by EKO and PA. What is NOC's paying interest?",
+  "options": [
+   "0.000000: any carry relieves it of all its cost.",
+   "10.000000: it pays the half of its share that is not carried.",
+   "15.000000, the same as PB.",
+   "20.000000: stated shares move only the carriers' points."
+  ],
+  "answer": 1,
+  "explanation": "Half of NOC's 20 points of cost is carried, 10 points, so NOC still pays the other 10 itself: its paying interest is 10.000000, as the engine returns. A carry moves only the carried percentage stated, so 0.000000 would need a carry of 100 percent. 15.000000 is PB's paying interest, and stated shares do move cost off the carried party."
+ },
+ {
+  "prompt": "On int-half-carry-stated, which party's paying interest equals its participating interest?",
+  "options": [
+   "PA, at 25.000000: a carrier's paying interest stays at its participating interest.",
+   "NOC, at 20.000000: a half carry leaves the carried party's share whole.",
+   "PB, at 15.000000: the stated shares name only EKO and PA.",
+   "EKO, at 40.000000."
+  ],
+  "answer": 2,
+  "explanation": "The stated shares are EKO 75.000000 and PA 25.000000, so PB pays none of the carry and its paying interest stays 15.000000. PA's paying interest is 27.500000 and EKO's 47.500000, each raised by its carry points, and NOC's falls to 10.000000."
+ },
+ {
+  "prompt": "On int-half-carry-stated, EKO and PA carry 10 points of NOC's cost in stated shares of 75.000000 and 25.000000. How many points does EKO pay?",
+  "options": [
+   "7.500000, three quarters of the 10 carried points.",
+   "15.000000, three quarters of NOC's whole 20 points.",
+   "10.000000, the points it pays under pro rata.",
+   "5.000000, half of the 10 carried points."
+  ],
+  "answer": 0,
+  "explanation": "The engine's reason reads, in its own words: NOC: 50% of its 20% cost share is carried (10 points), paid by EKO 7.5, PA 2.5 (in the stated shares); its share of production stays 20%. The stated shares apply to the carried points, 10, so EKO's 75 percent is 7.500000. Three quarters of 20 applies the shares to the part NOC still pays, 10.000000 is EKO's pro rata part of a full carry, and a half ignores the stated shares."
+ },
+ {
+  "prompt": "On int-two-carries NOC is carried in full pro rata, and PB is carried as well. Who carries NOC's 20 points?",
+  "options": [
+   "EKO, PA and PB, 10.000000, 6.250000 and 3.750000, as on the Ekene carry, with PB's part paid by the others.",
+   "EKO and PA in equal halves, 10.000000 each, following the stated halves of PB's carry.",
+   "EKO, PA and PB pro rata to their participating interests, PB included.",
+   "EKO and PA alone: 12.307692 and 7.692308."
+  ],
+  "answer": 3,
+  "explanation": "Pro rata carriers share a carry in proportion to their participating interests among the parties no carry names as carried. PB is carried, so NOC's carriers are EKO and PA alone, in the ratio of their participating interests, and the engine returns 12.307692 and 7.692308. The equal halves are the stated shares of PB's carry, which do not govern NOC's."
+ },
+ {
+  "prompt": "What is EKO's paying interest on int-two-carries?",
+  "options": [
+   "50.000000, as on the Ekene carry.",
+   "59.807692: 40 plus 12.307692 plus 7.500000.",
+   "47.500000, as on the half carry in stated shares, EKO carrying 7.500000 of one carry.",
+   "40.192308, its participating interest plus a share of each carry."
+  ],
+  "answer": 1,
+  "explanation": "EKO's paying interest is its participating interest of 40.000000 plus its carry points on both carries, NOC 12.307692 and PB 7.500000, which is 59.807692. 50.000000 is its figure under one carry, 47.500000 under the half carry, and 40.192308 is PA's paying interest on int-two-carries."
+ },
+ {
+  "prompt": "A carry is stated with carried and carriedPct but no carriers. What does the engine do?",
+  "options": [
+   "It applies pro rata carriers and says so.",
+   "It puts the whole carry on EKO.",
+   "It refuses: the carriers must be stated, with no default.",
+   "It leaves the carried party paying its own share, as though the carry had never been stated in the box."
+  ],
+  "answer": 2,
+  "explanation": "The engine refuses, in its own words: carries[0].carriers must be \"pro-rata\" or an object of carrier shares in per cent (no default); got nothing. It chooses no carriers' rule for the box, puts the carry on no one, and does not compute as if the carry were absent."
+ },
+ {
+  "prompt": "Stated carrier shares of 60 and 30 are typed for a carry. What happens?",
+  "options": [
+   "The engine refuses, printing the sum of 90 it found.",
+   "The shares are rescaled pro rata to 100, and a reason says so.",
+   "The missing 10 stays with the carried party.",
+   "The missing 10 is spread over the parties the stated shares leave out, pro rata to their participating interests."
+  ],
+  "answer": 0,
+  "explanation": "Stated shares must sum to 100. The engine refuses, in its own words: carries[0].carriers must sum to 100; got a sum of 90. It rescales nothing and assigns the missing 10 to nobody, because each would compute on a carry the agreement did not state."
+ },
+ {
+  "prompt": "A second carry names NOC, itself carried, among its carriers. What is the engine's answer?",
+  "options": [
+   "Its part passes to its own carriers.",
+   "It pays its part from its production.",
+   "The second carry is dropped with a reason.",
+   "A refusal: a carried party cannot carry another."
+  ],
+  "answer": 3,
+  "explanation": "The engine refuses, in its own words: carries[1].carriers.NOC is a carried party and cannot carry another. It passes nothing on to other carriers, takes nothing from NOC's production share, and drops no carry."
+ },
+ {
+  "prompt": "Someone types carriedPct as 0 when stating a carry. How does the engine answer?",
+  "options": [
+   "It treats the carry as absent and returns the participating interests as the paying interests.",
+   "It refuses, since carriedPct must be above 0 and at most 100.",
+   "It treats 0 as no limit stated and carries the whole share.",
+   "It accepts it with a reason: the party pays its whole share."
+  ],
+  "answer": 1,
+  "explanation": "The carried percentage states how much of the carried party's cost share moves to its carriers, so a figure of 0 states no carry at all and the engine refuses it. Its own words: carries[0].carriedPct must be a number above 0 and at most 100; got 0. Reading 0 as an absent carry or as a full one would compute on a term the agreement never stated."
+ },
+ {
+  "prompt": "The carries of a box name every party as carried. What does the engine return?",
+  "options": [
+   "The participating interests as the paying interests, since the carries cancel out.",
+   "A result in which the operator, EKO, pays the whole cost of the venture.",
+   "A result in which the carries are applied in order, the last one dropped with a reason saying so.",
+   "A refusal: at least one party must be left not carried."
+  ],
+  "answer": 3,
+  "explanation": "A carry must leave at least one party paying. The engine refuses, in its own words: carries must be leaving at least one party that is not carried; got [\"A\",\"B\"]. Carries do not cancel, and the engine names no operator to pay everything and drops no carry."
+ },
+ {
+  "prompt": "The reason for int-two-carries prints EKO's part of NOC's carry with many more digits than the table's 12.307692. Why?",
+  "options": [
+   "A different carriers' rule applies in the reason, so the two are different figures.",
+   "The table rounds the figure after the carry is repaid, and the reason prints it before.",
+   "Inside a message a percentage prints as the shortest round-trip decimal of the double the engine holds.",
+   "The reason adds PB's stated share to NOC's part."
+  ],
+  "answer": 2,
+  "explanation": "The course prints every share to six decimals, so the field reads 12.307692, while inside a message a percentage or rate prints as the shortest round-trip decimal of the double the engine holds. Both come from the same pro rata rule and the same number, and the reason for NOC's carry names only NOC's carriers."
+ }
+]
