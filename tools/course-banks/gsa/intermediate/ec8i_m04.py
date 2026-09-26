@@ -23,12 +23,12 @@ q(1, "For the same escalated price, what does the engine return as the 2028 annu
   "2.075625, which is the mean the engine returns across the 2029 months after the second anniversary"],
  "The annual average is the arithmetic mean of the calendar year's monthly prices: three months at 2.000000 and nine at 2.050000 give 2.037500. 2.050000 is the last month's price, the Alternative 2 figure the engine also returns. January alone is one month of twelve. 2.075625 is the 2029 average, a year later.")
 
-q(3, "A golden oil-indexed formula prices 0.8 + 0.1485 x jcc with no S-curve and no band, averaging over 1 month with no lag. What does the engine return in the month the jcc index is 30?",
+q(3, "A golden oil-indexed formula prices 0.8 + 0.1485 x jcc with no floor and no ceiling, averaging over 1 month with no lag. What does the engine return in the month the jcc index is 30?",
  "5.255000, on the straight line of the formula",
  ["4.500000, a stated ceiling",
   "4.141250, a lower index",
   "6.740000, a higher index"],
- "0.8 plus 0.1485 x 30 is 5.255000, and with no band and no S-curve every month sits on the straight line. 4.500000 is what the same formula returns when a ceiling of 4.5 is stated, which this case does not state. 4.141250 is the price at a jcc of 22.5. 6.740000 is the price at a jcc of 40.")
+ "0.8 plus 0.1485 x 30 is 5.255000, and with no floor or ceiling every month sits on the straight line. 4.500000 is what the same formula returns when a ceiling of 4.5 is stated, which this case does not state. 4.141250 is the price at a jcc of 22.5. 6.740000 is the price at a jcc of 40.")
 
 q(0, "The same formula is run with a floor of 3.5 and a ceiling of 4.5. In the month the jcc index is 10, the line gives 2.285000. What does the engine return?",
  "3.500000, labelled clamped at the floor",

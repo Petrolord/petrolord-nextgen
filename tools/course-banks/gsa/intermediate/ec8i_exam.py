@@ -189,7 +189,7 @@ q(3, "An index of 11.234346 is passed straight through as the contract price, an
   "11.234400, since the digits past the fourth decimal are rounded up whenever any of them is above zero"],
  "The price is computed in full before the rule reads its fifth decimal: the fifth decimal of 11.234346 is 4, so the fourth decimal stays and the price is 11.234300. Rounding one decimal at a time is not the Article 15.4 rule. Leaving the figure untouched ignores the rounding to four decimals. Rounding up on any trailing digit is no rule the model prints.")
 
-q(2, "Take the linear jcc formula of the Energy Charter examples with its band set at 3.5 to 4.5 US$ per MMBtu. What comes out when jcc sits at 22.5?",
+q(2, "A band of 3.5 to 4.5 US$ per MMBtu is put on the straight line 0.8 + 0.1485 x jcc. What comes out when jcc sits at 22.5?",
  "4.141250, with no clamp",
  ["3.500000, since the line starts below the floor",
   "4.500000, the ceiling, which binds from the midpoint of the band upward",
