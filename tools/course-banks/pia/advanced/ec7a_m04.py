@@ -97,12 +97,12 @@ x("For how long does the NTA s.85 gas tax credit run, and how long may an unused
  "S.85(1)(d): the credit \"shall apply on Non-Associated Gas sales for 10 years only, beginning from the date of attaining first gas production\". S.85(4): \"Unrecouped tax credit in one year may be carried forward for a maximum of three years.\" 1 January 2029 closes the window for first gas, and the carry is capped.")
 
 # 11
-x("A non-associated gas greenfield project first produces commercial gas after 1 January 2029. What does NTA s.85(2) give it?",
- "A gas production allowance at the lower of US$0.50 per thousand cubic feet and 30% of the fiscal gas price",
- ["The same credit at US$1.00 per thousand cubic feet, the s.85 window having been extended past 1 January 2029 for late projects",
-  "No relief at all, since s.85 closes to every project on 1 January 2029",
-  "A tax credit at US$0.50 per thousand cubic feet with no limit tied to the fiscal gas price at all"],
- "S.85(2): \"In the case of all other Non-Associated Gas Greenfield projects with first commercial gas production after 1 January, 2029, gas production allow- ance shall be granted at US$0.50 per thousand cubic feet or 30% of the fiscal gas price, whichever is lower,\". The relief is an allowance, still limited by the fiscal gas price.")
+x("A non-associated gas greenfield project first produces commercial gas after 1 January 2029. What kind of relief does NTA s.85(2) grant it, set beside s.85(1)?",
+ "A gas production allowance, where s.85(1) grants a gas production tax credit",
+ ["The same s.85(1) tax credit, its window extended past 1 January 2029 for projects that start late",
+  "No relief of any kind, since s.85 closes to every project on 1 January 2029",
+  "A royalty of 2.5 percent on its gas, the rate para 10(6) sets for gas used in-country"],
+ "S.85(2): \"In the case of all other Non-Associated Gas Greenfield projects with first commercial gas production after 1 January, 2029, gas production allow- ance shall be granted at US$0.50 per thousand cubic feet or 30% of the fiscal gas price, whichever is lower,\". S.85(1)(b) speaks of \"a gas production tax credit\". Late projects get a relief of a different kind, and the royalty rate is untouched by s.85.")
 
 # 12
 x("How does this course treat the NTA s.85 greenfield gas credit?",

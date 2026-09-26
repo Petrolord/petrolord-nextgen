@@ -68,7 +68,7 @@ x("On ekene_onshore_across_2026 (synthetic, onshore, converted, 2024 to 2028), w
  ["Education tax 4920525.461957 and levy 0.000000, the education tax running on to the end of the lease",
   "4152684.167129 of TET beside a levy of 4920525.461957, both charged in the first year under the new Act",
   "Nothing on either line, the levy first charged in the second year under the Nigeria Tax Act 2025"],
- "The ledger prints 2026 as \"nta_2025\" with TET 0.000000 and development levy 4920525.461957. In a year under the Nigeria Tax Act 2025 the tertiary education tax is none (NTA s.197(5)) and the levy is 4 percent of the companies income tax assessable profit (NTA s.59(1)); 4152684.167129 is the 2025 education tax, a year under the Act alone.")
+ "2026 is the first \"nta_2025\" row of this ledger. Its education tax line reads 0.000000, since NTA s.197(5) deletes the sections behind that tax, and its levy line reads 4920525.461957. The figure 4152684.167129 sits on the 2025 row, a \"pia_only\" year.")
 
 # 8
 x("On what base does the engine charge the development levy of NTA s.59(1)?",

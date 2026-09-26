@@ -111,7 +111,7 @@ x("Which of these is one of the three open readings the course teaches?",
  "The three open readings are the royalty by price base year, the new-lease rate onshore or in shallow water, and the deep offshore rate under the Nigeria Tax Act 2025. The 2.5 percent is a value resting on a secondary source, the NDDC base is a stated alternative, and the daily rate is one of the engine's declared choices.")
 
 # 13
-x("At what point does the engine stop accepting a stated gas in-country share?",
+x("Where is the edge between an accepted and a refused value of pia_gas_in_country_share_pct?",
  "100 is accepted and returns 0.025000; 100.5 is refused",
  ["100 is refused, since a share of 100 leaves no exported gas to price at the full rate",
   "Any share above 50 is refused, since the Regulations cap in-country gas at half",
