@@ -30,7 +30,7 @@ A Brier score mixes two separate things. One is calibration: whether the probabi
 
 ## Brier beside log loss
 
-The calibration call returns log loss beside the Brier score, imported from the machine learning engine and taught in the last lesson of the next module. On this set log loss is 0.503184. The two rank a confident miss differently: the Brier score caps each row's cost at 1, and log loss grows without limit as a wrong probability approaches 0 or 1, which is why it clips. Quote each by name, never one as the other.
+The calibration call returns log loss beside the Brier score, imported from the machine learning engine and taught in the last lesson of the next module. On this set log loss is 0.503184. The two rank a confident miss differently: the Brier score caps each row's cost at 1, and log loss grows without limit as a wrong probability approaches 0 or 1, which is why it clips. Quote each by name, and never quote one as the other.
 
 ## Exercise
 
