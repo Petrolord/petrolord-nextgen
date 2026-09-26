@@ -26,7 +26,7 @@ import React from 'react';
 const panels = {
   ...import.meta.glob('/src/components/course/panels/**/*Explorer.jsx'),
   ...import.meta.glob('/src/components/course/panels/**/*Lab.jsx'),
-  // Engine courses whose practicals are calculator panels (SC2 procurement, EC7 pia, EC8 gsa).
+  // Engine courses whose practicals are calculator panels (SC2 procurement, EC7 pia, EC8 gsa, EC9 joa).
   ...import.meta.glob('/src/components/course/panels/**/*Calculator.jsx'),
 };
 
@@ -430,6 +430,32 @@ describe('every course panel renders with no props', () => {
       }
     }
     expect(rendered).toBe(12);
+  }, 120000);
+  it('finds the EC9 joa calculator panels', () => {
+    const names = entries.map(([p]) => p.split('/panels/')[1]);
+    expect(names).toContain('joa/AccountCalculator.jsx');
+    expect(names).toContain('joa/RecoveryCalculator.jsx');
+    expect(names).toContain('joa/AgreementCalculator.jsx');
+  });
+  it('every EC9 joa view renders, not only the default one', async () => {
+    const MODES = {
+      'joa/AccountCalculator.jsx': ['interests', 'cashCalls', 'budget', 'overhead'],
+      'joa/RecoveryCalculator.jsx': ['ledger', 'carry', 'backIn', 'default', 'psc'],
+      'joa/AgreementCalculator.jsx': ['soleRisk', 'buyIn', 'carry', 'psc', 'default', 'readings'],
+    };
+    let rendered = 0;
+    for (const [name, modes] of Object.entries(MODES)) {
+      const entry = entries.find(([p]) => p.endsWith(`/${name}`));
+      expect(entry, `${name} is not in the panel sweep`).toBeTruthy();
+      const mod = await entry[1]();
+      expect(mod.MODES.map((m) => m[0]), `${name} declares different modes`).toEqual(modes);
+      for (const mode of modes) {
+        const html = renderToStaticMarkup(React.createElement(mod.default, { initialMode: mode }));
+        expect(html, `${name} in the ${mode} view refused its own start`).not.toContain('THE ENGINE REFUSED');
+        rendered += 1;
+      }
+    }
+    expect(rendered).toBe(15);
   }, 120000);
   it('finds the D5 appliedai panels', () => {
     const names = entries.map(([p]) => p.split('/panels/')[1]);

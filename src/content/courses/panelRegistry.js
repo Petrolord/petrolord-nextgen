@@ -294,6 +294,9 @@ export const PANELS = {
   'gsa-quantity-calculator': React.lazy(() => import('@/components/course/panels/gsa/QuantityCalculator')),
   'gsa-ledger-calculator': React.lazy(() => import('@/components/course/panels/gsa/LedgerCalculator')),
   'gsa-contract-calculator': React.lazy(() => import('@/components/course/panels/gsa/ContractCalculator')),
+  'joa-account-calculator': React.lazy(() => import('@/components/course/panels/joa/AccountCalculator')),
+  'joa-recovery-calculator': React.lazy(() => import('@/components/course/panels/joa/RecoveryCalculator')),
+  'joa-agreement-calculator': React.lazy(() => import('@/components/course/panels/joa/AgreementCalculator')),
 };
 
 export function resolvePanel(id) {
