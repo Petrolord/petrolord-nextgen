@@ -46,14 +46,14 @@ q(3, f"On the Ekene 2027 ledger {T}, February's under-call of 500000 comes due i
   "Arrears of 250000.000000 billed in May, since an under-call that meets a month with no call is billed like spend"],
  "April's forecast of 0 is below the stated threshold, so the month makes no call; the engine's reason reads \"2027-04: the under-call of 500000 in 2027-02 (forecast 6000000, actual 6500000) is added to the next cash call (none is made this month), 2 months later\", and EKO's April row shows the adjustment and the amount carried at -250000.000000. A zero-forecast month is called for its adjustment only when no threshold is stated. Arrears billing is for actual spend made without a call.")
 
-q(0, "Under the fixture's terms of a two-month lag, a \"carry\" rule and a 500000.000000 threshold, May 2027 is forecast at 400000.000000 and spends 448000.000000 with no call made. What does EKO pay in June?",
+q(0, "May 2027 is forecast at 400000.000000, below the Ekene threshold of 500000.000000 (lag 2, rule \"carry\"), and spends 448000.000000 with no call made. What does EKO pay in June?",
  "4574000.000000: its call of 4350000.000000 and an arrears billing of 224000.000000",
  ["4350000.000000, its June call, with May's spend left in its balance until the next called month clears it",
   "4500000.000000, its forecast share for June, since the arrears and the credit held from May net out",
   "9148000.000000, what the whole venture pays in June, calls and arrears together"],
  "The engine's June row for EKO shows a call of 4350000.000000, an arrears billing of 224000.000000 and a payment of 4574000.000000; its reason reads \"2027-06: the actual of 2027-05, 448000, made without a cash call, is billed in arrears\". What a party pays in a month is its call plus its arrears billing. 9148000.000000 is June's total across the parties.")
 
-q(2, "July 2027 spends 13800000.000000 against a forecast of 15000000.000000, and with the fixture's two-month lag its over-call of 1200000 lands on September, forecast at only 1000000.000000. The stated negative call rule is \"carry\" (threshold 500000.000000). What does the engine return for EKO in September?",
+q(2, f"An over-call of 1200000 from July 2027 meets September, a month forecast at only 1000000.000000, on the Ekene ledger {T}. What does EKO get in September?",
  "A call of 0.000000 on a forecast share of 500000.000000, and 100000.000000 carried to the next call",
  ["A negative call of -100000.000000, the excess over its forecast share paid back in September",
   "A call of 500000.000000, with the whole adjustment of 600000.000000 moved to October",
@@ -74,7 +74,7 @@ q(3, "A learner loads the Ekene 2027 ledger and sets the control \"A negative ca
   "A refusal only at September's call"],
  "The engine holds no negative call rule, and the course prints the refusal for this very change, in the engine's words: negativeCall must be one of \"refund\", \"carry\"; got nothing. Both public texts allow both outcomes, which is why the rule is a stated input with no default. The refusal comes before any month is computed; the engine never runs part of a ledger.")
 
-q(0, f"At the end of May 2027 on the Ekene ledger {T}, EKO has 150000.000000 carried and May's actual share of 224000.000000 not yet billed. What balance with the operator does the engine return for EKO?",
+q(0, "EKO ends May 2027 with 150000.000000 carried and 224000.000000 of May spend not yet billed (lag 2, \"carry\", threshold 500000.000000). What is its balance with the operator?",
  "-74000.000000",
  ["150000.000000, the carried amount alone, since spend made without a call has not yet been billed and does not count",
   "224000.000000, the May spend the operator is owed, which the engine sets as EKO's balance until June's billing",
@@ -88,7 +88,7 @@ q(2, f"The course checks the closing rows of the Ekene 2027 ledger {T}. EKO clos
   "Every closing balance is 0.000000 once the differences not yet adjusted are billed in arrears in the following month"],
  "The course states the identity on the closing rows as derived: \"for each party the balance less (the differences not yet adjusted + carried - arrears due) is within 0.000001 of zero\", checked for EKO, PA, PB and NOC. It is checked within a stated bound. The closing balances of EKO, PA and PB are -48000.000000, -30000.000000 and -18000.000000, which do not cancel. An unadjusted difference is left for a later call; it is not billed in arrears.")
 
-q(1, "The golden input cc-ekene-2027-every-month runs the Ekene months with a lag of 2 months, the rule \"carry\" and no threshold stated. What does the engine return?",
+q(1, "Drop the threshold from the Ekene ledger so that every month is called (cc-ekene-2027-every-month, lag 2, \"carry\"). What changes in the engine's totals?",
  "Calls of 69052000.000000 over the year, 0.000000 billed in arrears, and EKO closing at -48000.000000",
  ["A refusal naming noCallBelow, a term with no default",
   "68604000.000000 in calls and 448000.000000 in arrears, as before",

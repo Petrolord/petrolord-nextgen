@@ -11,7 +11,7 @@
   "explanation": "The engine's basis reads \"8% a year on the opening balance, compounded yearly; a year's new cost earns none in its own year\", and its reason reads \"2028: 8% a year on the opening balance 16400000 adds 1312000\". 2376960.000000 is the 2029 uplift, charged on 2029's opening balance of 29712000.000000. The uplift runs from the first opening balance, before any entitlement. 8200000.000000 is what the 150 percent multiple adds in 2027 on a different carry."
  },
  {
-  "prompt": "On the Ekene carry (compound 8.000000 percent a year, carry recovery from 50.000000 percent of NOC's share, basis \"contract\"), 2033 opens at 6729407.979520 and NOC's share of entitlement is 18800000.000000. What does NOC keep of its share that year?",
+  "prompt": "2033 opens with 6729407.979520 still owed on the 8.000000 percent compound Ekene carry, which may take half of NOC's share (basis \"contract\"). That share is 18800000.000000. What does NOC keep?",
   "options": [
    "9400000.000000, the half of its share that the carry recovery does not take in any year",
    "18800000.000000, its whole share, since the balance due is below the available amount and the carry closes",
@@ -60,13 +60,13 @@
    "uplift.type must be \"none\" under basis \"pia-s85-4\", since the basis is checked before the terms of the uplift are read",
    "uplift must be an object { type } with type \"none\", \"compound\" or \"multiple\" (no default); got nothing",
    "None: the engine fills the missing rate with 0 and returns the Act's ledger, recovered in 2031",
-   "uplift.ratePctPerYear must be a finite number at or above 0; got nothing"
+   "The refusal for the missing compound rate, naming uplift.ratePctPerYear"
   ],
   "answer": 3,
   "explanation": "The course prints this change as a stated probe on carry-ekene-pia, with the engine's message \"uplift.ratePctPerYear must be a finite number at or above 0; got nothing\". The missing rate is refused before the Act's bar on an uplift is reached, so a learner must state a rate to see the Act's refusal. The uplift object is present here, so the no-uplift refusal does not fire, and the engine holds no rate of its own."
  },
  {
-  "prompt": "The golden input carry-ekene-multiple states a multiple uplift of 150 percent, carry recovery from 50.000000 percent of NOC's share and basis \"contract\". How does the engine build the balance due?",
+  "prompt": "A 150 percent multiple is stated for the Ekene carry (carry-ekene-multiple, half of NOC's share available, basis \"contract\"). How is the balance due built up?",
   "options": [
    "It adds 8200000.000000 in 2027 and 6000000.000000 in 2028, each in the year its cost is carried, fixing the due at 42600000.000000",
    "It adds 150 percent of the opening balance every year, compounding until the carry recovery is complete in 2034",
@@ -81,14 +81,14 @@
   "options": [
    "A ledger that recovers 90 percent of the carried cost and writes the other 10 percent off in the first year of recovery",
    "A ledger identical to no uplift, since the engine floors any multiple below 100 at 100",
-   "A refusal: uplift.multiplePct must be a number at or above 100 (100 recovers the cost alone); got 90",
+   "Refused by name, since a multiple under 100 would give back less than the cost",
    "A refusal naming the cap, as a partial carry recovery is written as a cap"
   ],
   "answer": 2,
   "explanation": "The engine refuses the multiple by name: \"uplift.multiplePct must be a number at or above 100 (100 recovers the cost alone); got 90\". It writes nothing off and floors nothing. A carry recovery limited below the cost is a cap, which is a separate optional term; the refusal here names the multiple because that is the term stated below its bound."
  },
  {
-  "prompt": "The golden input carry-ekene-capped states the compound carry (8.000000 percent a year on the opening balance, recovery from 50.000000 percent of NOC's share, basis \"contract\") with a cap of 25000000.000000. What does the engine return for 2032?",
+  "prompt": "Suppose the compounding Ekene carry (8 percent on the opening balance, half the share, basis \"contract\") is capped at 25000000.000000, as in carry-ekene-capped. What happens in 2032?",
   "options": [
    "10400000.000000 recovered, the whole amount available, with the cap applied only to the year's uplift",
    "4200000.000000 recovered, and 12929407.979520 written off as the cap is reached",
@@ -125,7 +125,7 @@
   "options": [
    "The cost of 200 and the uplift of 20 are both recovered, as a cap bounds the carried cost alone and leaves the uplift on top of it",
    "200 is recovered and 20.000000 is carried to 2029 as outstanding, since a cap delays the uplift",
-   "200 is recovered, the cap is reached, and the uplift of 20.000000 is written off",
+   "The carriers get N's cost of 200 back and lose the 20.000000 uplift to the cap",
    "A refusal, since a cap may not equal the carried cost"
   ],
   "answer": 2,

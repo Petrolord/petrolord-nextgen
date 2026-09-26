@@ -76,11 +76,11 @@ q(2, "Summing 2029 to 2038 of the Ekene PSC variant, whose limit is 60.000000 pe
  "The totals print cost recovered 738000000.000000, contractor entitlement 921059257.500000 and 0.000000 unrecovered at the end. The opening pool is recovered with the later capex and opex, and the entitlement is a different line from cost recovered.")
 
 q(3, "A learner leaves openingCostPool out of the Ekene PSC call, meaning that no cost is carried in. What does the engine return?",
- "A refusal: openingCostPool must be a finite number at or above 0; got nothing",
+ "A refusal naming openingCostPool, a required term even when nothing is carried in",
  ["A run with an opening pool of 0.000000",
   "A run with the fixture's pool of 142000000.000000",
   "A refusal naming costOilLimitBase, which must be stated before the pool can be read"],
- "The opening pool is a required term with no default, and the engine refuses it by name. A contract with no pool carried in states 0. The engine holds no Ekene figure; the fixture's 142000000.000000 is a stated input.")
+ "The opening pool is a required term with no default, and the engine refuses it by name: openingCostPool must be a finite number at or above 0; got nothing. A contract with no pool carried in states 0. The engine holds no Ekene figure; the fixture's 142000000.000000 is a stated input.")
 
 q(0, "A learner states costOilLimitBase as \"net\". What does the engine return?",
  "A refusal: costOilLimitBase must be one of \"after-royalty\", \"gross\"; got \"net\"",
@@ -90,9 +90,9 @@ q(0, "A learner states costOilLimitBase as \"net\". What does the engine return?
  "The engine accepts only the two bases it names and refuses any other word. A text saying production shared is \"usually net of royalties\" does not make the engine read \"net\" as a base: the base is stated by the contract, and a word the engine does not accept is refused with its value.")
 
 q(1, "Suppose royaltyPct is typed as 100 in the recovery calculator's PSC view. What comes back?",
- "A refusal: royaltyPct must be a number from 0 up to, but excluding, 100; got 100",
- ["A PSC run in which the whole gross goes to royalty and the contractor recovers nothing in any year",
-  "A PSC run in which the royalty is capped at 87.5, the most the Ekene limit leaves room for",
+ "A refusal naming royaltyPct, whose bound stops short of 100 itself",
+ ["A run with all of gross paid as royalty",
+  "A royalty capped at 87.5",
   "A refusal naming the cost oil limit, which cannot be passed on revenue after royalty of zero"],
  "The engine's message reads \"royaltyPct must be a number from 0 up to, but excluding, 100; got 100\". A royalty of 100 would leave no revenue after royalty for applyPSC to take the limit on, so the royalty itself is refused at its bound.")
 
@@ -104,11 +104,11 @@ q(2, "Partners EKO 40, PA 25, PB 15 and NOC 20 percent hold the Ekene PSC varian
  "The engine's basis reads \"the contractor entitlement and the costs are split by participating interest with calculatePartnerCosts from engines/economics/afe.js\", and its 2029 row prints EKO -112000000.000000, PA -70000000.000000, PB -42000000.000000 and NOC -56000000.000000. The PSC variant states no carry, so every partner pays by its participating interest.")
 
 q(3, "A learner gives the first year of a PSC call its own contractorProfitSharePct of 120. What does the engine return?",
- "A refusal: years[0].contractorProfitSharePct must be a number from 0 to 100; got 120",
+ "The first year's share refused by name, being above 100",
  ["A year run at a share of 100, the most a contractor can hold, with the excess 20 reported among the reasons",
   "A year run at the call's contractorProfitSharePct, the year's own figure set aside",
   "A sliding scale computed by the engine from the year's share and its daily rate"],
- "The engine refuses the year's share by name. A year's own share is how a sliding scale enters the engine: \"a year's own figure carries a sliding scale, e.g. by daily rate or R-factor, computed outside\". The engine computes no scale and caps no share.")
+ "The engine refuses the year's share by name: years[0].contractorProfitSharePct must be a number from 0 to 100; got 120. A year's own share is how a sliding scale enters the engine: \"a year's own figure carries a sliding scale, e.g. by daily rate or R-factor, computed outside\". The engine computes no scale and caps no share.")
 
 q(0, "Discounting at 0.100000 to 2029, what NPV does the canonical npv give EKO and NOC on psc-ekene (royalty 12.5, limit 60 of gross, share 60, tax 30, opening pool 142000000.000000)?",
  "EKO 53034092.139510 and NOC 26517046.069755",

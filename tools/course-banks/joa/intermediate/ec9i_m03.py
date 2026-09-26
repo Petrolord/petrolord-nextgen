@@ -30,7 +30,7 @@ q(3, "Which of the Ekene back-in cost lines does the engine count as refundable 
   "The operator markup on shared services, 2000000.000000, since it is part of what the joint account paid"],
  "The engine's basis reads \"development and production costs only; bonuses, penalties, interest, premium and markups excluded (PIA s.85(4)(c)); exploration is not development or production\", and the cost line table marks front end engineering design (development) refundable. Each of the other three prints a reason that it is not refundable, citing PIA s.85(4)(c).")
 
-q(1, "A learner states a back-in to 61 percent under basis \"pia-s85-4\". What does the engine return?",
+q(1, "Could NOC take 61 percent under the Act? A learner types targetPct 61 with basis \"pia-s85-4\" to find out. What happens?",
  "A refusal: targetPct must be at most 60 under basis \"pia-s85-4\" (the right to participate up to 60%, PIA s.85(4)(a)); got 61",
  ["A back-in computed at 60 percent, the most the Act allows, with the extra point reported and set aside",
   "A back-in to 61 percent, since the Act lets the ceiling be set as a bid parameter",
@@ -44,15 +44,15 @@ q(2, "Under basis \"pia-s85-4\", what does the engine return for a back-in whose
   "The Ekene back-in to 40 percent, the engine reading a target at the current interest as a doubling"],
  "The course prints the refusal \"targetPct must be above the back-in party's current interest 20; got 20\". A back-in raises the back-in party's participating interest, so a target at its current figure is refused before any refund is computed, and the engine reads no target it was not given.")
 
-q(0, "A contract under basis \"pia-s85-4\" states refundForm \"upfront\" for NOC's back-in. What does the engine return?",
- "A refusal citing s.85(4)(d) and s.85(4)(f): the refund must be \"from-future-entitlement\" under the Act's basis",
+q(0, "NOC's refund is to be paid in one sum on entry, the contract says (refundForm \"upfront\"), and the call is made under the Act's basis. What comes back?",
+ "Refused, since the Act allows no upfront payment and takes the refund from future entitlement",
  ["The refund paid in full in the year of the back-in, since s.85(4)(f) lets the Government's refund be made in cash",
   "A refund from future entitlement, the engine substituting the Act's form for the stated one",
   "The refund of 125200000.000000 that the contract-basis case returns"],
  "The engine's message reads: refundForm must be \"from-future-entitlement\" under basis \"pia-s85-4\": no upfront payment by the Government (s.85(4)(d)); the refund is in cash or in kind from future production or entitlements (s.85(4)(f)); got \"upfront\". A term the Act fixes is refused when a call breaks it; the engine substitutes nothing. Cash under s.85(4)(f) is cash from future entitlement.")
 
 q(3, "A learner copies the Ekene back-in under basis \"pia-s85-4\" and adds refundableKinds: [\"exploration\"] so that the exploration wells are refunded. What does the engine return?",
- "A refusal: refundableKinds must be left out under the Act's basis (development and production, s.85(4)(c))",
+ "Refused, because under the Act the kinds are fixed at development and production and may not be listed",
  ["A refund of 125200000.000000, as a stated list replaces the Act's kinds",
   "The Act's refund of 98000000.000000, with the stated list set aside in a reason",
   "A refusal naming costs[0].kind, since exploration is not one of the kinds the engine accepts on a cost line"],

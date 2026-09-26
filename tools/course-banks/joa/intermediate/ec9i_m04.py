@@ -12,7 +12,7 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
 D = "PB's Ekene default (synthetic): PB pays 250000.000000 of its 2250000.000000 share of the 12000000.000000 call due 2027-03-01"
 
-q(1, f"{D} and cures on 2027-04-15. Who advances PB's unpaid 2000000.000000, as the engine states its cover?",
+q(1, "PB leaves 2000000.000000 of its Ekene cash call unpaid from 2027-03-01 until 2027-04-15, and NOC is carried. Which parties advance the shortfall, as the engine states its cover?",
  "EKO 1230769.230769 and PA 769230.769231, in proportion to their paying interests among the non-defaulting parties",
  ["EKO, PA and NOC in proportion to their participating interests of 40, 25 and 20 percent, NOC included as a party to the venture",
   "EKO alone, as operator, which advances every unpaid amount and recovers it from PB with the default interest",
@@ -66,14 +66,14 @@ q(0, "Suppose a contract's grace were 71.5 hours at 8.25 percent simple over 360
  ["0.000000, as 71.5 hours rounds to three days and the cure falls inside it",
   "A refusal: whole hours only",
   "1833.333333, counting the half-hour past the grace as a whole further day"],
- "The engine's reason reads \"interest 2000000 x 8.25% x 3 days / 360 = 1375 (from 2027-03-01 to the cure on 2027-03-04, the last date excluded); the stated grace of 71.5 hours is exceeded, so interest runs from the due date\". graceHours must be a finite number of hours at or above 0, so 71.5 is accepted and not rounded.")
+ "Seventy-two hours have passed, which is more than 71.5, so the grace is exceeded and default interest runs over all 3 days: 1375.000000. Hours are compared as stated; the engine rounds no grace to whole days, and a fractional grace is a valid input.")
 
 q(3, "A learner sets the interest method control to \"compound\" on the Ekene default. What does the engine return?",
- "A refusal: interest.interestMethod must be one of \"simple\", \"monthly-compound\"; got \"compound\"",
+ "Refused by name: the method takes only the words \"simple\" and \"monthly-compound\"",
  ["20210.781250, reading \"compound\" as monthly compounding, the only compounding the engine computes",
   "A figure compounded daily on the stated day basis, the finest compounding the dates allow",
   "20625.000000, with the unknown method ignored and simple interest applied in its place"],
- "The engine refuses the word it does not accept, naming the field. The method is a stated term with no default: \"simple\" and \"monthly-compound\" are the two it computes, and it maps no other word onto either.")
+ "The engine refuses the word it does not accept, naming the field: interest.interestMethod must be one of \"simple\", \"monthly-compound\"; got \"compound\". The method is a stated term with no default: \"simple\" and \"monthly-compound\" are the two it computes, and it maps no other word onto either.")
 
 q(1, "A contract gives no grace at all, and the learner leaves graceHours out of the interest terms. What does the engine return?",
  "A refusal: graceHours must be stated, 0 when the contract gives no grace, since the engine holds no default",
@@ -82,7 +82,7 @@ q(1, "A contract gives no grace at all, and the learner leaves graceHours out of
   "The default interest with no grace test at all, since a missing grace means none applies"],
  "The engine's message reads \"interest.graceHours must be a finite number of hours at or above 0, stated (0 when the contract gives no grace; the engine holds no default); got nothing\". A contract with no grace is stated as 0. The Kenya figure is the model's, and the engine takes none of it as a fallback.")
 
-q(0, f"{D}. A learner states PB's paid amount as 2250000.000000, its whole share. What does the engine return?",
+q(0, "Suppose PB is recorded as having paid 2250000.000000, its full share of the Ekene call, while still listed as a defaulter. What happens?",
  "A refusal naming defaulters[0].paid: a party that paid its share is not in default",
  ["A default of 0.000000 unpaid, with 0.000000 of default interest and no consequence triggered",
   "A default covered in full by EKO and PA, since PB is still named among the defaulters",

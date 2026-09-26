@@ -18,14 +18,14 @@ q(1, f"The {W} two-barrel example states gross 100, costs 25, royalty 10 percent
   "26.000000 and 39.000000, the profit oil split alone"],
  "The engine returns 43.200000 and 56.800000 on the note's own terms; the note prints its totals in whole dollars, and the two engine figures round to 43 and 57. The printed figures are the text's rounding; the note is not in error. A printed figure and an exact one are quoted side by side and are not keyed as equal. 26.000000 is the contractor's profit oil alone, before tax and without its cost oil.")
 
-q(3, "A limit of 60 percent of gross, a royalty of 10 percent and gross of 100 are the terms of World Bank Briefing Note No. 8 (November 2007). What limit comes back, and in what form does applyPSC receive it?",
- "60.000000, passed as the fraction 60 / (100 - 10) of revenue after royalty",
+q(3, "A limit of 60 percent of gross, a royalty of 10 percent, costs of 25 and gross of 100 are the terms of World Bank Briefing Note No. 8 (November 2007). What cost oil limit and cost recovered come back?",
+ "A limit of 60.000000, and 25.000000 recovered, the costs sitting below it",
  ["60 percent of the revenue after royalty of 90, since applyPSC reads every limit on that base",
-  "60.000000, passed to a gross-base copy of applyPSC written inside the engine for the note",
+  "A limit of 60.000000 with 60.000000 recovered, as a limit is always taken in full",
   "25.000000, the costs, since a limit cannot exceed what there is to recover"],
  "The engine returns a limit of 60.000000, as the note prints (\"60 percent of the gross revenue or US$60\"), and its basis reads \"the limit is stated on gross revenue and passed to applyPSC as the fraction 60 / (100 - 10) of revenue after royalty\". The engine keeps no copy of applyPSC of its own. The cost recovered is 25.000000, below the limit of 60.000000; the limit is a ceiling.")
 
-q(0, f"The {W} example recovers its costs of 25 in full. What does the engine return for the contractor's profit oil and its income tax?",
+q(0, "In the World Bank Note 8 (November 2007) two-barrel case the costs of 25 are recovered in full; the contractor's profit share is 40 percent and tax 30 percent. Which contractor profit oil and income tax result?",
  "Contractor profit oil 26.000000 and tax 7.800000, the taxable income of 26 being the contractor's profit oil here",
  ["Contractor profit oil 39.000000, the government's 60 percent read as the contractor's, taxed at 30 percent",
   "Contractor profit oil 26.000000 and tax 0.000000, since in a production sharing contract the government's profit oil stands in for any income tax",
@@ -47,7 +47,7 @@ q(2, "IMF FARI TNM/16/01 (February 2016), Figure 5, runs one barrel at 100 with 
  "The engine returns cost recovered 50.000000, government profit oil 30.000000, contractor profit oil 20.000000, income tax 6.000000 and 36.000000 to the government, as Figure 5 prints. Its limit is stated on revenue after royalty. The figure's tax base of cost plus profit petroleum less allowable deductions, with deductions assumed equal to cost recovery, leaves the contractor's profit oil.")
 
 q(0, "IMF FARI Figure 5 says \"the base for CIT is equal to cost petroleum plus profit petroleum minus allowable tax deduction\" and assumes the deductions equal the cost recovery. What tax base does that leave in the one-barrel figure?",
- "The contractor's profit oil of 20, taxed at 30 percent to 6",
+ "Only the contractor's 20 of profit petroleum, which bears the 6",
  ["The contractor's cost petroleum and profit petroleum together, since deductions come after the tax",
   "The whole profit oil of 50, taxed at 30 percent, as the government's share is part of the base",
   "Nothing, since the deductions assumed equal to cost recovery wipe out the profit petroleum as well"],
@@ -67,7 +67,7 @@ q(1, "On psc-fari-table-12, how does the engine take each year's contractor shar
   "By applying the Ekene variant's 60 percent to every year of the IMF schedule"],
  "The golden input states each year's contractor share as contractorProfitSharePct, read from Table 13's government share, \"a daily-rate scale the tables compute outside this engine\". The engine's basis reads \"contractorProfitSharePct applies to every year that does not state its own (a year's own figure carries a sliding scale, e.g. by daily rate or R-factor, computed outside)\".")
 
-q(0, "In 2003 of the IMF schedule (psc-fari-table-12: royalty 0.000000 percent, ceiling 80.000000 percent of revenue after royalty), the tables print a ceiling of 170 and cost petroleum of 170. What does the engine return?",
+q(0, "For 2003, with no royalty and a ceiling at 80 percent of revenue after royalty, IMF FARI Tables 12 and 13 print a ceiling of 170 and cost petroleum of 170. What does the engine return?",
  "A ceiling of 170.400000 and cost recovered of 170.400000",
  ["A ceiling of 170, rounded to the table",
   "A ceiling of 433.600000, the 2004 figure",
@@ -100,7 +100,7 @@ q(3, "World Bank Briefing Note No. 8 (November 2007) says: \"For paying income t
  ["Every cost incurred deducted from the contractor's entitlement, as the note's sentence requires",
   "The contractor's entitlement after cost oil, the limit on cost oil being lifted for the tax",
   "The government's profit oil, since the contractor's tax is paid from the state's share"],
- "The engine's basis reads \"income tax is charged on the contractor's profit oil share, as FARI TNM/16/01 and World Bank Note 8 assume (applyPSC in engines/economics/cashflow.ts)\". It is the engine's stated reading, and the course grades no tax figure that depends on it. In both published examples the costs are recovered in full, and the engine reproduces their tax figures.")
+ "That line of the note is about deductions in general; the engine names its own choice in its basis and cites FARI TNM/16/01 and World Bank Note 8 as the two texts that assume it. The other three options each tax a different base. No tax figure the course grades rests on this choice, and in both published examples every cost is recovered, so the engine reproduces their printed tax.")
 
 q(0, "In the IMF schedule (psc-fari-table-12), the profit split differs from the printed tables by up to 1.560000. Why does the course accept that?",
  "It is inside 1.5 plus half a per cent of the year's profit petroleum, as Table 13 prints the government share as a whole per cent",

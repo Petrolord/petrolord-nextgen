@@ -33,7 +33,7 @@
   "explanation": "The engine's basis reads \"development and production costs only; bonuses, penalties, interest, premium and markups excluded (PIA s.85(4)(c)); exploration is not development or production\", and the cost line table marks front end engineering design (development) refundable. Each of the other three prints a reason that it is not refundable, citing PIA s.85(4)(c)."
  },
  {
-  "prompt": "A learner states a back-in to 61 percent under basis \"pia-s85-4\". What does the engine return?",
+  "prompt": "Could NOC take 61 percent under the Act? A learner types targetPct 61 with basis \"pia-s85-4\" to find out. What happens?",
   "options": [
    "A back-in computed at 60 percent, the most the Act allows, with the extra point reported and set aside",
    "A refusal: targetPct must be at most 60 under basis \"pia-s85-4\" (the right to participate up to 60%, PIA s.85(4)(a)); got 61",
@@ -55,9 +55,9 @@
   "explanation": "The course prints the refusal \"targetPct must be above the back-in party's current interest 20; got 20\". A back-in raises the back-in party's participating interest, so a target at its current figure is refused before any refund is computed, and the engine reads no target it was not given."
  },
  {
-  "prompt": "A contract under basis \"pia-s85-4\" states refundForm \"upfront\" for NOC's back-in. What does the engine return?",
+  "prompt": "NOC's refund is to be paid in one sum on entry, the contract says (refundForm \"upfront\"), and the call is made under the Act's basis. What comes back?",
   "options": [
-   "A refusal citing s.85(4)(d) and s.85(4)(f): the refund must be \"from-future-entitlement\" under the Act's basis",
+   "Refused, since the Act allows no upfront payment and takes the refund from future entitlement",
    "The refund paid in full in the year of the back-in, since s.85(4)(f) lets the Government's refund be made in cash",
    "A refund from future entitlement, the engine substituting the Act's form for the stated one",
    "The refund of 125200000.000000 that the contract-basis case returns"
@@ -71,7 +71,7 @@
    "A refund of 125200000.000000, as a stated list replaces the Act's kinds",
    "The Act's refund of 98000000.000000, with the stated list set aside in a reason",
    "A refusal naming costs[0].kind, since exploration is not one of the kinds the engine accepts on a cost line",
-   "A refusal: refundableKinds must be left out under the Act's basis (development and production, s.85(4)(c))"
+   "Refused, because under the Act the kinds are fixed at development and production and may not be listed"
   ],
   "answer": 3,
   "explanation": "The engine refuses: refundableKinds must be left out under basis \"pia-s85-4\" (development and production, s.85(4)(c)); got [\"exploration\"]. Under the Act the kinds are fixed, and a stated list is a contract-basis term. Exploration is an accepted kind on a cost line; the engine simply does not refund it under the Act."

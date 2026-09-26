@@ -16,7 +16,7 @@ q(1, "The Ekene carry (synthetic) states a compound uplift of 8.000000 percent a
   "8200000.000000, the uplift added in the first year a cost is carried"],
  "The engine's basis reads \"8% a year on the opening balance, compounded yearly; a year's new cost earns none in its own year\", and its reason reads \"2028: 8% a year on the opening balance 16400000 adds 1312000\". 2376960.000000 is the 2029 uplift, charged on 2029's opening balance of 29712000.000000. The uplift runs from the first opening balance, before any entitlement. 8200000.000000 is what the 150 percent multiple adds in 2027 on a different carry.")
 
-q(3, "On the Ekene carry (compound 8.000000 percent a year, carry recovery from 50.000000 percent of NOC's share, basis \"contract\"), 2033 opens at 6729407.979520 and NOC's share of entitlement is 18800000.000000. What does NOC keep of its share that year?",
+q(3, "2033 opens with 6729407.979520 still owed on the 8.000000 percent compound Ekene carry, which may take half of NOC's share (basis \"contract\"). That share is 18800000.000000. What does NOC keep?",
  "11532239.382118",
  ["9400000.000000, the half of its share that the carry recovery does not take in any year",
   "18800000.000000, its whole share, since the balance due is below the available amount and the carry closes",
@@ -45,13 +45,13 @@ q(1, "A learner states the Ekene carry with basis \"pia-s85-4\" and an uplift of
  "The engine refuses the call, in its own words: uplift.type must be \"none\" under basis \"pia-s85-4\": the refund excludes interest, premium or markups on cost (PIA s.85(4)(c)); got \"compound\". A term the Act fixes is refused when a call breaks it; the engine neither overrides the basis nor drops the stated term quietly, and \"pia-s85-4\" is one of the two bases the engine accepts.")
 
 q(3, "In the recovery calculator a learner starts from the Ekene carry under PIA s.85(4) and sets the uplift to { type: \"compound\" } with no rate typed. Which refusal does the engine give first?",
- "uplift.ratePctPerYear must be a finite number at or above 0; got nothing",
+ "The refusal for the missing compound rate, naming uplift.ratePctPerYear",
  ["uplift.type must be \"none\" under basis \"pia-s85-4\", since the basis is checked before the terms of the uplift are read",
   "uplift must be an object { type } with type \"none\", \"compound\" or \"multiple\" (no default); got nothing",
   "None: the engine fills the missing rate with 0 and returns the Act's ledger, recovered in 2031"],
  "The course prints this change as a stated probe on carry-ekene-pia, with the engine's message \"uplift.ratePctPerYear must be a finite number at or above 0; got nothing\". The missing rate is refused before the Act's bar on an uplift is reached, so a learner must state a rate to see the Act's refusal. The uplift object is present here, so the no-uplift refusal does not fire, and the engine holds no rate of its own.")
 
-q(0, "The golden input carry-ekene-multiple states a multiple uplift of 150 percent, carry recovery from 50.000000 percent of NOC's share and basis \"contract\". How does the engine build the balance due?",
+q(0, "A 150 percent multiple is stated for the Ekene carry (carry-ekene-multiple, half of NOC's share available, basis \"contract\"). How is the balance due built up?",
  "It adds 8200000.000000 in 2027 and 6000000.000000 in 2028, each in the year its cost is carried, fixing the due at 42600000.000000",
  ["It adds 150 percent of the opening balance every year, compounding until the carry recovery is complete in 2034",
   "It adds 14200000.000000 in 2030, the first year NOC has any entitlement to recover from",
@@ -59,13 +59,13 @@ q(0, "The golden input carry-ekene-multiple states a multiple uplift of 150 perc
  "The engine's reasons read \"2027: the 150% multiple on the carried cost of 16400000 adds 8200000\" and \"2028: the 150% multiple on the carried cost of 12000000 adds 6000000\". After 2028 the uplift column is 0.000000 and the due stays 42600000.000000 until it is paid down; the carry is recovered in 2034 with 42600000.000000 recovered in all. A multiple is not a yearly rate and is not deferred to the first year of entitlement.")
 
 q(2, "A contract for a carry states a multiple uplift of 90 percent, intending that the carriers forgive a tenth of the cost. What does the engine return?",
- "A refusal: uplift.multiplePct must be a number at or above 100 (100 recovers the cost alone); got 90",
+ "Refused by name, since a multiple under 100 would give back less than the cost",
  ["A ledger that recovers 90 percent of the carried cost and writes the other 10 percent off in the first year of recovery",
   "A ledger identical to no uplift, since the engine floors any multiple below 100 at 100",
   "A refusal naming the cap, as a partial carry recovery is written as a cap"],
  "The engine refuses the multiple by name: \"uplift.multiplePct must be a number at or above 100 (100 recovers the cost alone); got 90\". It writes nothing off and floors nothing. A carry recovery limited below the cost is a cap, which is a separate optional term; the refusal here names the multiple because that is the term stated below its bound.")
 
-q(1, "The golden input carry-ekene-capped states the compound carry (8.000000 percent a year on the opening balance, recovery from 50.000000 percent of NOC's share, basis \"contract\") with a cap of 25000000.000000. What does the engine return for 2032?",
+q(1, "Suppose the compounding Ekene carry (8 percent on the opening balance, half the share, basis \"contract\") is capped at 25000000.000000, as in carry-ekene-capped. What happens in 2032?",
  "4200000.000000 recovered, and 12929407.979520 written off as the cap is reached",
  ["10400000.000000 recovered, the whole amount available, with the cap applied only to the year's uplift",
   "4200000.000000 recovered, and 12929407.979520 left outstanding, still owed to the carriers from later entitlement",
@@ -87,7 +87,7 @@ q(0, "Two small golden ledgers state parties A 60, B 20 and N 20 percent, N carr
  "At the boundary the engine recovers the carry in that year: \"2028: the balance 200 is recovered exactly by the 200 available; the carried party receives 0 of its share 200\". One short, it carries the rest: \"2028: 199.8 recovered of 200 due; 0.2 carried to 2029\" and \"2029: the balance 0.2 is recovered with 0.2 of the 200 available\". Nothing is written off without a cap, and the summing tolerance applies to interests summing to 100.")
 
 q(2, "The golden input carry-cap-exactly-cost states parties A 60, B 20 and N 20 percent, a compound uplift of 10 percent, carry recovery from 100 percent of N's share and a cap of 200, equal to N's carried cost. What happens in 2028?",
- "200 is recovered, the cap is reached, and the uplift of 20.000000 is written off",
+ "The carriers get N's cost of 200 back and lose the 20.000000 uplift to the cap",
  ["The cost of 200 and the uplift of 20 are both recovered, as a cap bounds the carried cost alone and leaves the uplift on top of it",
   "200 is recovered and 20.000000 is carried to 2029 as outstanding, since a cap delays the uplift",
   "A refusal, since a cap may not equal the carried cost"],
