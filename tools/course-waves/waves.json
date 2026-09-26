@@ -1447,5 +1447,33 @@
       "digest.txt": "f382e3b952532f29de4df5891dbc499de2f066bb3119bf6dff0387a2a15ef903",
       "fields.json": "de3613c2cfca49d6dc5b96dd5a45de36f8d2837b2147942a0c786200a51e67f1"
     }
+  },
+  "procurement": {
+    "course": "SC2",
+    "live": "/root/cat-wip-procurement",
+    "kit": "full",
+    "kitNote": "Full kit, committed at the foundation and grown with it. The mirror carries everything the wave is rebuilt and gated from: the digest and its generator with the one engine loader (tender_engine.mjs registers ts_loader.mjs, since tender.js imports engines/economics/cashflow.ts for the canonical npv); the eighteen graded answers, the capstone generator and the precision declaration; the discriminate sweep and the oracle cross-check that replays the vendored stdlib oracle on the capstone; the structure; the vendoring script, the prior-course proof and this mirror script. The dataset is the vendored ekene-tender fixtures under packages/engines/test-data/supplychain/ekene-tender, so there is no dataset generator.",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "precision.json",
+      "wave.json",
+      "sc2_dump.mjs",
+      "sc2_capstone.mjs",
+      "tender_engine.mjs",
+      "ts_loader.mjs",
+      "make_fields.mjs",
+      "discriminate.mjs",
+      "oracle_check.py",
+      "structure.py",
+      "build_digest.sh",
+      "vendor_procurement.sh",
+      "prove_prior_courses.sh",
+      "mirror.sh"
+    ],
+    "pins": {
+      "digest.txt": "4e6badf5354b9b105ef201596c56a2b62792bdbee810c67233e6f5a522194cec",
+      "fields.json": "4f34a889d19fd79a3032572bbd6c62b16cd9941214afbf0fafe11ef0067225e1"
+    }
   }
 }

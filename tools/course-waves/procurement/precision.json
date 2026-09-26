@@ -1,0 +1,18 @@
+{
+ "money": {
+  "decimals": 6,
+  "match": "^(?:okigwe_dayrate_company_pays|okigwe_dayrate_mean_cost|okigwe_operator_amount|okigwe_reimbursable_p90_cost|okigwe_should_cost_estimate|onitsha_on1_evaluated_cost|onitsha_on2_corrected_price|onitsha_on3_omission_amount|umuahia_alb_limit|umuahia_um2_life_cycle_cost|umuahia_um4_evaluated_cost)$"
+ },
+ "percent": {
+  "decimals": 6,
+  "match": "^(?:onitsha_on3_technical_percent|umuahia_s14_lead_points|umuahia_s14_lead_relative|umuahia_um3_overall_content)$"
+ },
+ "ratio": {
+  "decimals": 6,
+  "match": "^(?:okigwe_award_ratio)$"
+ },
+ "score": {
+  "decimals": 6,
+  "match": "^(?:onitsha_on2_commercial_score|onitsha_top_combined_score)$"
+ }
+}

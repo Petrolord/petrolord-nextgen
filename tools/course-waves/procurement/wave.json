@@ -1,0 +1,82 @@
+{
+ "slug": "procurement",
+ "prefix": "sc2",
+ "name": "Procurement, Tendering & Contracting",
+ "pathOrder": 71,
+ "module": "supply_chain",
+ "prerequisite": null,
+ "engineCourse": "An ENGINE COURSE: no Suite app. The practicals run in the course's own calculator panels (pr-envelope-calculator, pr-award-calculator, pr-contract-calculator) over the vendored engine; the learning page says so plainly. Lead decisions (cat-brief): the same published fee and the same Associate/Professional/Expert certificate ladder as app courses; no Suite bridge mapping; prerequisite null.",
+ "repo": "/root/wt-sc2-nextgen",
+ "branch": "feat/sc2-procurement-course",
+ "goldens": [],
+ "goldensNote": "EMPTY BY DECISION, as D5. The vendored golden test-data/supplychain/goldens/tender_cases.json carries 141 cases of oracle output. Naming it here would let numsweep resolve a lesson literal against a figure the digest never prints. Every figure a lesson may quote is recomputed by the engine and printed in the digest (the published worked examples are typed in sc2_dump.mjs as stated inputs from their sources), so the harvested truth file carries it.",
+ "engines": [
+  "engines/supplychain/tender.js",
+  "lib/stats/stats.js",
+  "lib/conventions/percentile.js",
+  "engines/drilling/wellCost.js",
+  "engines/economics/afe.js",
+  "engines/economics/cashflow.ts"
+ ],
+ "enginesVendoredAt": "NextGen packages/engines: the tender.js closure vendored sha-identical with petrolord-engines 9187701 (engines PR #261, squash-merged) by vendor_procurement.sh, walked from the jest suite over a git-archive export: 18 closure paths, 7 reached by the walk and 9 NAMED (golden, the two ekene-tender fixtures and their README, the fixture writer, the oracle, the timing script, FINDINGS, the negative control); 16 vendored with 4 proofs each (64 IDENTICAL), 11 of them new and ledgered as kind extra, group sc2-procurement-course, 5 already matching the manifest (lib/stats, percentile.js, wellCost.js, irrContract.js, lib/dates). SHARED PATHS LEFT WITH THEIR OWNERS: engines/economics/cashflow.ts (NextGen carries the 3.10.0 manifest blob; 9187701 carries 3.11.0, the economic-limit capex rule) and engines/economics/afe.js (the 4-economics-revendor blob) are NOT moved: npv and calculatePartnerCosts, the two functions tender.js calls, are source-identical in both blobs (compared by their exported text), and the vendored tender suite passes 175/175 against NextGen's own copies. The canonical pin stays 54cf7c4. All vendored suites: 165 discovered, 15122 tests, 24 failing, all 24 allow-listed (unchanged). PRIOR-COURSE PROOF (prove_prior_courses.sh): every pre-existing packages/engines path is byte-identical to origin/main (VENDOR.json gains sc2 entries only); D1 to D5, H4 and H5 rebuild digest.txt, fields.json and precision.json byte-identical and match their waves.json pins.",
+ "constants": {
+  "$comment": "The engine exports DEFAULTS (TIE_DIGITS 12, ARITHMETIC_TOLERANCE 0.005, WEIGHT_SUM 100, WEIGHT_SUM_TOLERANCE 1e-9, MAX_BIDS 100, MAX_CRITERIA 50, MAX_LINES 5000, MAX_ITEMS 200, MAX_YEARS 100, MAX_ITERATIONS 200000, HIGH_VALUE_USD 10000000, NC_PRICE_MARGIN_PCT 1, NC_LEAD_PCT 5, INDIGENOUS_MARGIN_PCT 10, ALB_ABSOLUTE_PCT 20, ALB_RELATIVE_MIN_BIDS 5), NC_SCHEDULE (45 lines of the 2010 Schedule) and NC_MEASURES. Digest section 1 prints them from the export. None is graded."
+ },
+ "leakScales": [
+  "1",
+  "x1e3",
+  "x1e-3",
+  "x1e2",
+  "x1e-2"
+ ],
+ "plan": {
+  "state": "FOUNDATION: vendoring, structure, digest, capstones, gates, panels, learning page and writer briefs; STOPS BEFORE LESSONS."
+ },
+ "history": {
+  "position": "THIS COURSE TEACHES NO REPAIR HISTORY. The engine's lead decisions (the omission default 'average', mean-deviation dropped, s.14 ncLeadBasis required, the cost P-label basis, the 2010 Schedule only) landed before its merge and before any lesson was written; they are provenance. The digest describes the engine as it is."
+ },
+ "regulatoryRule": "Every Act, regulation and guidance taught is named with its edition or gazette date and the date read (2026-09-26), printed in digest section 2 and asserted against the vendored FINDINGS-tender.md. Licensed texts (AIPN model contracts, API standards) are never quoted. No legal threshold is invented: every one the engine applies is cited to its section; a figure that could not be sourced is a required input with no default.",
+ "scopeSeams": {
+  "NPV and discounting": "OWNED BY the economics courses. SC2 imports the canonical cashflow.ts npv for the life-cycle cost and says so.",
+  "Monte Carlo and P labels for reserves": "OWNED BY the uncertainty course. SC2 samples through lib/stats on a stated seed and teaches the COST reading of the exceedance labels only.",
+  "well time and cost estimating": "OWNED BY the drilling courses. SC2 imports wellCost for the programme days and the should-cost.",
+  "the Petroleum Industry Act 2021 and fiscal terms": "OWNED BY the pia course (EC7). SC2 cites the 2010 content Act only.",
+  "supply chain operations": "OWNED BY MD3 supply."
+ },
+ "namingCollisions": {
+  "responsive": "a bid still in the evaluation at that stage. Section 25.",
+  "lowest evaluated cost": "the engine's evaluated cost, never the quoted price. Sections 8, 11, 25.",
+  "most advantageous": "the highest combined score under stated settings. Sections 9, 25.",
+  "content": "Nigerian content in the Schedule's measured unit. Sections 14, 25.",
+  "P90": "for a cost, the LOW figure (exceedance). Sections 18, 25.",
+  "should-cost": "the company's independent estimate, never a bid. Sections 19, 25."
+ },
+ "openItems": {
+  "ENGINE FINDING 1 (wording)": "The completion-time reasons pluralise 'weeks' after 1: evaluatedCosts prints 'completion in 7 weeks is 1 weeks beyond the minimum 6' (well services WS3, quoted verbatim in digest section 8). Learners read engine messages as course content; repair first (engines PR), then re-cut. No number changes.",
+  "DECISION omission rule": "Lead decision: the course teaches and grades the cited 'average' rule only; 'highest' is shown in Expert m05 in the engine's own words as the uncited option.",
+  "DECISION s.14 reading": "Lead decision: both readings side by side as an open question of the Act; the Professional capstone grades the lead under BOTH readings, each field naming its reading.",
+  "DECISION cost P labels": "Lead decision: kept per lib/conventions/percentile.js; Expert m02 teaches the reversal; the Expert capstone grades a reimbursable P90 cost (the LOW cost) and the discriminate sweep carries the 90th percentile as a wrong method.",
+  "DECISION shared vendored paths": "cashflow.ts and afe.js stay at NextGen's blobs (see enginesVendoredAt). When the pin moves to 9187701 or later, cashflow.ts 3.11 and afe.js arrive with their own re-cuts, not with this course."
+ },
+ "fieldsDiscrimination": {
+  "onitsha_on3_technical_percent": "weighted points quoted, unweighted mean of the scores, weights reversed, scores read out of four, the top bid s relative score",
+  "onitsha_on2_corrected_price": "quoted total governs, the deviation added, the evaluated cost quoted, the quoted amount governs every line",
+  "onitsha_on3_omission_amount": "highest rule, the failed bid prices it, the excluded bids price it, the lowest price, the median price",
+  "onitsha_on1_evaluated_cost": "discount not deducted, credit for early completion, the discount deducted twice, the rate on every week",
+  "onitsha_on2_commercial_score": "linear price method, the failed bid in cmin, the quoted totals scored, the ratio inverted, the combined score quoted",
+  "onitsha_top_combined_score": "weights swapped, absolute technical method, linear price method, highest omission rule, the lowest cost bid s score",
+  "umuahia_um2_life_cycle_cost": "residual not credited, discounted from year 0, undiscounted sum, residual taken off undiscounted, ten percent rate",
+  "umuahia_um4_evaluated_cost": "highest omission rule, no life cycle, no delivery adjustment, the omission left out, the failed bid prices the omission",
+  "umuahia_alb_limit": "sample standard deviation, the failed bid kept, two standard deviations, the mean quoted, the quoted totals used",
+  "umuahia_um3_overall_content": "pooled across units, unweighted mean of the items, weighted by quantity, the casing content alone, weighted by the whole bid price",
+  "umuahia_s14_lead_points": "read as relative, lead over the whole field, pooled contents, unweighted contents",
+  "umuahia_s14_lead_relative": "read as points, relative to the leader, lead over the whole field, ratio not less one",
+  "okigwe_dayrate_mean_cost": "next seed, the planned payment, the p50, no mobilisation fee, the contractor cost mean",
+  "okigwe_reimbursable_p90_cost": "the 90th percentile quoted, the p50, next seed, the fee left out, the mean",
+  "okigwe_dayrate_company_pays": "the contractor part, the whole expected overrun, next seed, the share quoted, the reimbursable company part",
+  "okigwe_should_cost_estimate": "contingency dropped, npt at zero, npt at the maximum, contingency on the per day items only, the lump sum price",
+  "okigwe_operator_amount": "the partners total, the larger partner s share, contingency dropped, the whole estimate",
+  "okigwe_award_ratio": "lowest cost award, inverted, against the base without contingency, the quoted total, against the lump sum"
+ },
+ "cleared_claims": []
+}
