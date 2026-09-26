@@ -16,7 +16,7 @@ The engine derives up to five: best for the contractor, fastest capital recovery
 
 ## What to carry
 
-Three habits survive the move. Name the base before the rate, because 21 percent collected 260.7539 million USD where 35 percent collected 230.9340. Read the closing pool before believing a cost recovery total. And write down what an empty cell means before quoting it, because one printed 0.0000 percent could stand for a project that cannot lose and one that cannot win, and this engine returns null with a status word instead.
+Three habits survive the move. Name the base before the rate, because 21 percent collected 260.7539 million USD where 35 percent collected 230.9340. Read the closing pool before believing a cost recovery total. And write down what an empty cell means before quoting it, because one printed 0.0000 percent could stand for a project that cannot lose and one that cannot win, and this engine names each case instead: a null with its status word, or the negative rate itself when that root lies inside the band.
 
 ## Exercise
 

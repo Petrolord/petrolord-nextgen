@@ -46,10 +46,10 @@
  {
   "prompt": "ODIDI under Brazil returns the contractor 192.9896 over 25 years, the second most of the six templates, and a value of -5.8662 at the project's 12 percent. How can both be true?",
   "options": [
-   "The value is computed on the government's cash flows rather than the contractor's, which is why it carries the opposite sign.",
+   "The value is computed on the government's cash flows rather than the contractor's, which is why it carries the opposite sign to the contractor's own total over the same 25 years of the field.",
    "The total adds 25 undiscounted rows and the value discounts each of them, and at 12 percent the year 1 capex outweighs cash that arrives late, so positive nominal cash is still worth less than nothing today.",
    "The 192.9896 is a total of undiscounted rows and the value excludes the capex, so the two are not readings of the same ledger.",
-   "The closing unrecovered pool of 19.3270 is subtracted in the value and not in the total, and that is the whole of the difference."
+   "The closing unrecovered pool of 19.3270 is subtracted in the value and not in the total, and that deduction, charged against the final year of the 25 year life, is the whole of the difference between the two readings."
   ],
   "answer": 1,
   "explanation": "Same rows, two verdicts. Five of the six templates close ODIDI's cumulative in the black and return a negative value at 12 percent; the PIA template's value is 1.7389."
@@ -148,7 +148,7 @@
    "The cost recovery limit, which tightens as the standing pool grows, and the minimum tax, which arms itself once the residual falls away.",
    "The R factor split Ghana and Angola carry, and the PIA template's royalty on price and daily rate with its split on cumulative production.",
    "The corporate rate, which steps with the R factor tier, and the royalty, which steps with cumulative production.",
-   "The discount rate, which follows the price deck, and the profit split, which follows the closing unrecovered pool of the year before."
+   "The discount rate, which follows the price deck, and the profit split, which follows the closing unrecovered pool of the year before it, whatever the price."
   ],
   "answer": 1,
   "explanation": "A split on cumulative production can only move one way, since production only accumulates. Ghana's and Angola's R factor, a ratio of cumulatives, can fall back and hand the contractor a larger share again."

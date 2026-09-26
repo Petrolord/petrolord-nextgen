@@ -123,7 +123,7 @@
  {
   "prompt": "Why is subtracting the two printed endpoints of a derived column and matching the printed difference a bad check?",
   "options": [
-   "The printed endpoints belong to different rows of the ledger, while a derived difference is only ever computed within one row.",
+   "The printed endpoints belong to different rows of the ledger, while a derived difference is only ever computed within one row, so no pair of printed endpoints can ever reproduce it.",
    "A derived column is computed at full precision and then rounded, and its endpoints are rounded too, so a printed pair of 41.6869 and 41.6802 carries a printed climb of -0.0068.",
    "A derived column is an estimate the engine never returns, so it carries no defined precision to check anything against.",
    "Derived columns print to six decimals and returned columns to four, so the two can never be put in the same subtraction, whichever two rows the printed endpoints come from."
@@ -148,7 +148,7 @@
    "Comparing the shape of regimes against each other, with the Petroleum Economics Studio engine holding the fiscal truth.",
    "Assessing a Nigerian liability under the Petroleum Industry Act, which is why the template set carries a PIA entry at all.",
    "Producing a filing figure, once a template has been reconciled against the Petroleum Economics Studio engine on the same project.",
-   "Replacing that engine for screening work, since the two agree on a total government cash flow of 687.4682 million USD on this project."
+   "Replacing that engine for screening work, since the two agree on a total government cash flow of 687.4682 million USD on the Designer's default project."
   ],
   "answer": 0,
   "explanation": "Even the template carrying the Act's base terms is a model of them. It answers which instrument moved which result, and no filing can rest on it."

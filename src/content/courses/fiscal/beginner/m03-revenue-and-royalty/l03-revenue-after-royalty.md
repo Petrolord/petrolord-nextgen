@@ -27,7 +27,7 @@ The costs available to recover in that year are opex of 31.0027 million USD and 
 
 ## The mistake
 
-The careful reader takes the recovery limit off gross revenue. In year 1 of the default project that would compute the ceiling from 271.9889 million USD rather than 220.9910 million USD, a difference of exactly the royalty. Under a 100 percent limit the error is 50.9979 million USD of extra recovery in the first year alone, and it flows into the unrecovered pool, into the R factor, and into every profit split that keys on the R factor.
+The careful reader takes the recovery limit off gross revenue. In year 1 of the default project that would compute the ceiling from 271.9889 million USD rather than 220.9910 million USD, a difference of exactly the royalty. Under a 100 percent limit the error is 50.9979 million USD of extra recovery in the first year alone, and it leaves the unrecovered pool 50.9979 million USD smaller going into year 2. The R factor does not move, because it divides cumulative revenue by cumulative cost and never reads cost recovery.
 
 The tell is worth memorising. If your cost recovery ceiling under an after-royalty limit ever equals gross revenue, you have used the wrong base, because that limit is taken after the royalty. Only a regime that says `liquids_gross` reads a gross base.
 
@@ -35,7 +35,7 @@ A quieter slip is reading a 100 percent limit as "no limit". The limit binds whe
 
 ## What the base refuses
 
-It refuses to be reordered. Royalty comes off gross revenue first in every ledger, and profit oil is always what is left of revenue after royalty once cost is recovered. The one field that moves is the ceiling's base: `costRecoveryBase` set to `liquids_gross` sizes the ceiling on the gross crude oil and NGL value instead. It also never appears in the output.
+It refuses to be reordered. Royalty comes off gross revenue first in every ledger, and profit oil is always what is left of revenue after royalty once cost is recovered. The one field that moves is the ceiling's base: `costRecoveryBase` set to `liquids_gross` sizes the ceiling on the gross crude oil and NGL value instead. Revenue after royalty also never appears in the output, so every reader builds it from the grossRevenue and royalty columns.
 
 ## Exercise
 

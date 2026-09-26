@@ -21,7 +21,7 @@ Under "USA - Gulf of Mexico", ODIDI sells 139.6563 in year 1 and pays royalty of
 | Angola - Deepwater PSC | 109.1947 | 316.7898 | 8 | -58.1813 | null |
 | Generic Royalty/Tax | 183.8652 | 242.1194 | 7 | -13.3840 | null |
 
-Every template leaves a closing pool on this field, from 19.3270 under Brazil to 192.1146 under Angola, and five of the six return a negative value at 12 percent while returning the contractor positive cash. The sixth, the PIA template, returns 1.7389, barely above zero, on the most contractor cash of the six. The rate column is null down its whole length, because on a field whose late years turn negative no single rate in the band the engine searches brings a ledger to zero, and a null with a reason is the answer rather than a gap.
+Every template leaves a closing pool on this field, from 19.3270 under Brazil to 192.1146 under Angola, and five of the six return a negative value at 12 percent while returning the contractor positive cash. The sixth, the PIA template, returns 1.7389, barely above zero, on the most contractor cash of the six. The rate column is null down its whole length, because on a field whose late years turn negative every ledger reaches zero at two rates inside the band the engine searches, and a null with its status, multiple-roots, is the answer rather than a gap.
 
 ## The conventions, each with its number
 

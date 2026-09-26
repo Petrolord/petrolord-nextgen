@@ -76,8 +76,8 @@
    "Nigeria, because a higher tax against a lower take means more of its claim is being taken through instruments the take does not include."
   ],
   "answer_index": 2,
-  "explanation": "The two columns point in opposite directions on the same ledger, because the government's share of profit oil never passes through the tax line.",
-  "why": "test project re-derived: PIA tax 1074.4895 inside take 1782.9635; USA is heavier on the take"
+  "explanation": "The two columns point in opposite directions across two ledgers. USA - Gulf of Mexico's heavier take is its 18.75 percent royalty, 1312.7238 million USD that never passes through the tax line, while the PIA template collects 443.2226 of royalty and takes 5 and later 10 percent of profit oil beside the larger tax.",
+  "why": "test project re-derived: PIA tax 1074.4895 inside take 1782.9635; USA is heavier on the take; audit: explanation said the government profit-oil share drives the gap; the engine puts the whole of GoM's heavier take in royalty (GoM profit-oil share 0)"
  },
  {
   "tier": "intermediate",
@@ -104,12 +104,12 @@
   "options": [
    "A rate for both, 199900 and 1400 percent, because a root that exists is reported wherever it lies and only a missing root gives null.",
    "Null with the status above-clamp for both, and the second shows the band limits what is reported: 1400 percent is a finite, real root and it is still not named.",
-   "Null with the status no-root for both, because a rate above the band is treated exactly as a rate that does not exist at all anywhere.",
-   "Null for the first and 1400 percent for the second, because the band is applied to the search range rather than to the answer the search returns."
+   "Null with the status no-root for both, because a rate above the band is treated exactly as a rate that does not exist at all anywhere, whatever the size of the root.",
+   "Null for the first and 1400 percent for the second, because only a root lying beyond ten times the band's upper edge is withheld, and 1400 percent falls well short of that limit."
   ],
   "answer_index": 1,
   "explanation": "The band runs from -99 to 1000 percent and a root outside it is not a rate the engine will name, so both are null with the status above-clamp and irrRootAboveBand set. The first root is far beyond any search; the second is a plain finite number, and the band still keeps it out of the rate column.",
-  "why": "repair-history framing removed; asks about the band as a limit on the answer"
+  "why": "repair-history framing removed; asks about the band as a limit on the answer; audit: key no longer uniquely longest"
  },
  {
   "tier": "intermediate",
@@ -180,7 +180,7 @@
   "scope": "module",
   "module_key": "m01-the-sliding-scale",
   "ord": 5,
-  "prompt": "At a price multiplier of 1.200000 on the default project the tiered teaching regime's royalty charges 32.3089 on gross revenue of 323.0889. How much of that revenue was charged at 7.5 percent?",
+  "prompt": "At a price multiplier of 1.200000 on the default project the tiered teaching regime's royalty charges 32.3089 in year 1 on gross revenue of 323.0889. How much of that revenue was charged at 7.5 percent?",
   "options": [
    "None of it. One tier is selected for the year and its rate is charged on the whole of gross revenue, with nothing left in the lower band.",
    "The share of revenue attributable to the first 50 USD per bbl of price, with the remainder taken at 10 percent in the manner of an income tax bracket.",
@@ -189,7 +189,7 @@
   ],
   "answer_index": 0,
   "explanation": "The implied rate at 1.200000 is 0.100000 on every dollar. A blended answer lands between the two printed royalties and looks reasonable, which is what makes it dangerous.",
-  "why": "tiered teaching regime label"
+  "why": "tiered teaching regime label; audit: the figures are year 1"
  },
  {
   "tier": "intermediate",
@@ -212,7 +212,7 @@
   "scope": "module",
   "module_key": "m01-the-sliding-scale",
   "ord": 11,
-  "prompt": "Across the default project sweep the tiered teaching regime's implied rate is 0.075000 at multipliers 0.500000, 0.600000, 0.700000 and 0.710000, and 0.100000 at 0.720000, 0.800000, 1.000000 and 1.200000. What is that pattern?",
+  "prompt": "Across the default project sweep the tiered teaching regime's year 1 implied rate is 0.075000 at multipliers 0.500000, 0.600000, 0.700000 and 0.710000, and 0.100000 at 0.720000, 0.800000, 1.000000 and 1.200000. What is that pattern?",
   "options": [
    "A step function with one break, flat inside each tier and discontinuous where the applied price crosses 50 USD per bbl.",
    "A ramp that rises with price throughout, sampled coarsely enough at these eight multipliers that its slope looks flat inside each band.",
@@ -221,7 +221,7 @@
   ],
   "answer_index": 0,
   "explanation": "Nothing between two thresholds is interpolated. The rate is 0.100000 at an applied price of 50.400000 and still 0.100000 at 84.000000.",
-  "why": "tiered teaching regime label"
+  "why": "tiered teaching regime label; audit: the figures are year 1 only (at 0.70 and 0.71 the rate is 0.100 from year 5)"
  },
  {
   "tier": "intermediate",
@@ -232,12 +232,12 @@
   "options": [
    "Because a threshold of 0 USD/bbl is skipped by the walk, leaving the 50 USD/bbl tier as the only rate the regime can charge.",
    "Because a zero threshold makes the implied rate undefined in any year the applied oil price is itself below one dollar.",
-   "Because the engine treats a 0 USD/bbl key as an instruction to charge no royalty until the next threshold in the list is reached.",
+   "Because the engine treats a 0 USD/bbl key as an instruction to charge no royalty at all until the next threshold in the list is reached, so the lowest tier's rate is never actually charged.",
    "Because at any positive price that tier is genuinely reached, so the fallback to the lowest tier's rate never shows itself and the selection looks like an ordinary threshold rule."
   ],
   "answer_index": 3,
   "explanation": "On tiers keyed at 60 and 80 USD/bbl the fallback is visible as 0.125000 charged below every threshold, and that is the entry every tier list has to be checked for.",
-  "why": "the PIA template has no price tiers; the 0 USD/bbl tier is the tiered teaching regime"
+  "why": "the PIA template has no price tiers; the 0 USD/bbl tier is the tiered teaching regime; audit: key was uniquely longest by 50 characters; a distractor lengthened"
  },
  {
   "tier": "intermediate",
@@ -316,8 +316,8 @@
    "It opens a relief pool once, at the capex times one plus the uplift, and draws that pool down against the profit share until it is exhausted."
   ],
   "answer_index": 3,
-  "explanation": "At the default 20 percent on 500.0000 million USD of capex the pool is 1.2 times the capital cost and the first positive charge falls in year 7.",
-  "why": "repair-history framing removed"
+  "explanation": "At the default 20 percent on 500.0000 million USD of capex the pool is 1.2 times the capital cost. On the Designer's default project Brazil - Concession's first positive resource rent tax charge falls in year 7, and Angola - Deepwater PSC's in year 13.",
+  "why": "repair-history framing removed; audit: explanation named no regime for its year 7 (Brazil year 7, Angola year 13)"
  },
  {
   "tier": "intermediate",
@@ -524,8 +524,8 @@
    "The multiplier is applied after the royalty is charged, so the tier a swept point selects belongs to the unswept deck price and not to the price printed."
   ],
   "answer_index": 0,
-  "explanation": "The implied rate steps from 0.075000 to 0.100000 somewhere between the multipliers 0.710000 and 0.720000, and a bracket names an interval rather than a side.",
-  "why": "copy rule: the prompt read as an \"X, not Y\" contrastive"
+  "explanation": "The year 1 implied rate steps from 0.075000 to 0.100000 somewhere between the multipliers 0.710000 and 0.720000, and a bracket names an interval rather than a side.",
+  "why": "copy rule: the prompt read as an \"X, not Y\" contrastive; audit: the step is the year 1 rate"
  },
  {
   "tier": "intermediate",

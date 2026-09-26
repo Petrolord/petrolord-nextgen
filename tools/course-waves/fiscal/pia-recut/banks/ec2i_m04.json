@@ -85,7 +85,7 @@
    "It opens a relief pool once, at the capex times one plus the uplift, and draws that pool down against the profit share until it is exhausted."
   ],
   "answer": 3,
-  "explanation": "At the default 20 percent on 500.0000 million USD of capex the pool is 1.2 times the capital cost and the first positive charge falls in year 7."
+  "explanation": "At the default 20 percent on 500.0000 million USD of capex the pool is 1.2 times the capital cost. On the Designer's default project Brazil - Concession's first positive resource rent tax charge falls in year 7, and Angola - Deepwater PSC's in year 13."
  },
  {
   "prompt": "Two published cases run the same regime on the same project and differ only in the uplift field: one omits it and one sets it to 0. Total tax is 2127.5549 million USD against 2207.5549. What decided the gap?",

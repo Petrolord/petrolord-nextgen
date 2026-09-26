@@ -68,9 +68,9 @@
  {
   "prompt": "Under the Gulf of Mexico terms a reader takes the cost recovery ceiling as a percent of gross revenue instead. How large is the error in year 1 of the default project?",
   "options": [
-   "Exactly the royalty, 50.9979 million USD of extra recovery, which then flows into the pool, into the R factor and into every split keyed on it.",
+   "Exactly the royalty: 50.9979 million USD of extra recovery, and a pool that much smaller going into year 2.",
    "It is immaterial at a 100 percent limit, since the ceiling binds either way in the year the capex lands.",
-   "It is the spread between two limits the template set uses, 50 percent against 100, applied to the year's revenue.",
+   "The spread between two limits the template set uses, 50 percent against 100, applied to the year's revenue.",
    "It cancels in the totals, a larger recovery in year 1 leaving a smaller pool for the years that follow it."
   ],
   "answer": 0,
@@ -96,7 +96,7 @@
    "A PIA royalty falls back to half the flat rate of the nearest template whenever the deck sits above its price benchmark for the year in question."
   ],
   "answer": 2,
-  "explanation": "On the default project that is 154.4828 on revenue of 2686.9277. The two never collect the same total, because only Brazil's rate is flat."
+  "explanation": "On the default project that is 154.4828 on revenue of 2686.9277. On neither published project do the two collect the same total."
  },
  {
   "prompt": "What can move the tier a sliding royalty selects?",
@@ -124,7 +124,7 @@
   "prompt": "Three of the six templates take a flat 100 percent of profit oil to the contractor and recover cost at 100 percent. What are the other three?",
   "options": [
    "Tiered on the oil price, at those same three limits of 100 percent, a sharing regime keying its split on the price it sells at in the year.",
-   "Flat splits below 100 percent, the difference between the split and 100 being the government's share of profit oil in every year of the life of the field.",
+   "Flat splits below 100 percent, the difference between the split and 100 being the government's share of profit oil in every year of the life of the field, whatever the field produces.",
    "Concessions as well, differing only in the royalty rates of 12.5, 5 and 0 percent that the three of them carry.",
    "Two tiered on the R factor, capped at 90 and 50 percent, and Nigeria - PIA (2021), capped at 70 percent of gross crude and NGL value with a split by cumulative production."
   ],
@@ -134,7 +134,7 @@
  {
   "prompt": "Which template collects the most royalty on the default project, and what does that predict about its contractor?",
   "options": [
-   "USA - Gulf of Mexico at 503.7989 million USD, which leaves that contractor the least cash of the six, 428.8774 million USD.",
+   "USA - Gulf of Mexico at 503.7989 million USD, which leaves that contractor the least cash of all six templates on the default project, 428.8774 million USD.",
    "Generic Royalty/Tax at 335.8660 million USD, since 12.5 percent is the highest flat rate anywhere in the list.",
    "USA - Gulf of Mexico at 503.7989 million USD, and it predicts nothing: that contractor keeps 980.9313 million USD, more than three of the other five.",
    "Nigeria - PIA (2021) at 154.4828 million USD, its royalty by price outcollecting every flat rate in the set of six templates."

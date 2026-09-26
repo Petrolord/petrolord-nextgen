@@ -14,7 +14,7 @@
   "prompt": "On the default project the contractor keeps 1058.0159 under the PIA template and 986.7327 under Generic, though both tax profit at 30 percent with no resource rent tax and no minimum tax. What opened the gap?",
   "options": [
    "The PIA cost recovery limit of 70 percent of the gross value of crude oil and NGL, which hands cost back to the contractor faster than Generic's full limit does.",
-   "The tax base, which is gross revenue under PIA and the contractor's profit share under Generic.",
+   "A tax base that is gross revenue under PIA and the contractor's profit share under Generic.",
    "A much smaller royalty, 154.4828 against 335.8660, which the government's 5 percent of profit oil and the larger PIA tax win back only in part.",
    "The production profile, which the PIA template shortens to the years in which its tranches apply."
   ],
@@ -167,13 +167,13 @@
  {
   "prompt": "Brazil - Concession charges a flat 10 percent and collects 268.6928 of royalty on the default project, where Nigeria - PIA (2021) collects 154.4828. What does the PIA template's royalty charge in each year?",
   "options": [
-   "Two price tiers, 7.5 percent from 0 and 10 percent from 50 USD per bbl, which on this deck sit in the 10 percent tier in every one of the 25 years of the life.",
+   "Two price tiers, 7.5 percent from 0 and 10 percent from 50 USD per bbl, which on this deck sit in the 10 percent tier in every one of the 25 years of the life of the field.",
    "A flat 5 percent on the whole of gross revenue in every year, oil, gas and NGL alike, which is why its total comes to about half of Brazil's flat 10 percent.",
-   "A rate keyed on the R factor, stepping up each time cumulative revenue overtakes another multiple of cumulative cost on the field, whatever the oil price.",
+   "A rate keyed on the R factor, stepping up each time cumulative revenue overtakes another multiple of cumulative cost on the field, whatever the oil price does in the year.",
    "A production royalty at the deep offshore rate for the year's daily oil rate, a royalty by price once oil passes that year's low benchmark, and 5 percent on gas and NGL."
   ],
   "answer": 3,
-  "explanation": "Over the life that comes to 154.4828 on revenue of 2686.9277, and on the test project 443.2226 against Brazil's 700.1194. The two templates never collect the same total."
+  "explanation": "Over the life that comes to 154.4828 on revenue of 2686.9277, and on the test project 443.2226 against Brazil's 700.1194. On neither project do the two collect the same total."
  },
  {
   "prompt": "Angola collects total royalty of 0.0000 on the default project and still leaves the contractor 481.7318, against 980.9313 under the Gulf of Mexico terms at 18.75 percent. Which fields make Angola the harsher regime?",
@@ -368,7 +368,7 @@
    "26.1856, all of it royalty, charged on gross revenue in the year the whole of the capital was spent.",
    "0.0000, because the year's residual is nothing and there is no profit oil for the state to share.",
    "26.1856 of royalty less the state's share of the year's opex, which the recovery machinery credits back.",
-   "10.4742, which is the 7.5 percent the tiered teaching regime charges at a deck price of 45 USD per bbl."
+   "10.4742, which is a flat 7.5 percent royalty charged on the year's gross revenue at a deck price of 45 USD per bbl."
   ],
   "answer": 0,
   "explanation": "Royalty comes off gross revenue before any cost is considered, and revenue after royalty for the year is 113.4707."
@@ -456,7 +456,7 @@
    "A cost recovery limit that tightens automatically as the standing pool grows, and a minimum tax that arms itself once the residual has fallen far enough to trigger it.",
    "A corporate rate that steps with the R factor, and a royalty that steps with cumulative production, so that both of them tighten together as the field matures.",
    "A profit split keyed on the R factor under Ghana and Angola, and under the PIA template a royalty that follows price and daily rate and a split that follows cumulative production.",
-   "A discount rate that follows the price deck from one year to the next, and a profit split that follows the closing unrecovered pool of the year before it, whatever the price."
+   "A discount rate that follows the price deck from one year to the next, and a profit split that follows the closing unrecovered pool of the year before it, whatever the price may be."
   ],
   "answer": 2,
   "explanation": "Under Ghana and Angola the R factor is a ratio of cumulatives, so it can fall back below a threshold it passed and step the contractor's share back up. Cumulative production only grows, so the PIA split can only move one way."

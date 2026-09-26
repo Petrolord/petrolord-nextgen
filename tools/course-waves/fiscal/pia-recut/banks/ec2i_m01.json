@@ -19,7 +19,7 @@
    "The multiplier is applied after the royalty is charged, so the tier a swept point selects belongs to the unswept deck price and not to the price printed."
   ],
   "answer": 0,
-  "explanation": "The implied rate steps from 0.075000 to 0.100000 somewhere between the multipliers 0.710000 and 0.720000, and a bracket names an interval rather than a side."
+  "explanation": "The year 1 implied rate steps from 0.075000 to 0.100000 somewhere between the multipliers 0.710000 and 0.720000, and a bracket names an interval rather than a side."
  },
  {
   "prompt": "A reader tries to place the default project's 70 USD per bbl deck exactly on a 50 USD per bbl threshold by choosing the multiplier 50 divided by 70. The sweep prints an applied price of 50.000000 and the implied rate reads 0.075000. What happened?",
@@ -44,7 +44,7 @@
   "explanation": "`getSlidingScaleRoyalty` falls back to the lowest tier's rate when the price has reached no threshold, which is why year 1 pays 18.0299 on gross revenue of 144.2389."
  },
  {
-  "prompt": "At a price multiplier of 1.200000 on the default project the tiered teaching regime's royalty charges 32.3089 on gross revenue of 323.0889. How much of that revenue was charged at 7.5 percent?",
+  "prompt": "At a price multiplier of 1.200000 on the default project the tiered teaching regime's royalty charges 32.3089 in year 1 on gross revenue of 323.0889. How much of that revenue was charged at 7.5 percent?",
   "options": [
    "None of it. One tier is selected for the year and its rate is charged on the whole of gross revenue, with nothing left in the lower band.",
    "The share of revenue attributable to the first 50 USD per bbl of price, with the remainder taken at 10 percent in the manner of an income tax bracket.",
@@ -110,7 +110,7 @@
   "explanation": "A price printing as 50.000000 can be 49.99999999999998, and the implied rate of 0.075000 is what says so."
  },
  {
-  "prompt": "Across the default project sweep the tiered teaching regime's implied rate is 0.075000 at multipliers 0.500000, 0.600000, 0.700000 and 0.710000, and 0.100000 at 0.720000, 0.800000, 1.000000 and 1.200000. What is that pattern?",
+  "prompt": "Across the default project sweep the tiered teaching regime's year 1 implied rate is 0.075000 at multipliers 0.500000, 0.600000, 0.700000 and 0.710000, and 0.100000 at 0.720000, 0.800000, 1.000000 and 1.200000. What is that pattern?",
   "options": [
    "A step function with one break, flat inside each tier and discontinuous where the applied price crosses 50 USD per bbl.",
    "A ramp that rises with price throughout, sampled coarsely enough at these eight multipliers that its slope looks flat inside each band.",
@@ -125,7 +125,7 @@
   "options": [
    "Because a threshold of 0 USD/bbl is skipped by the walk, leaving the 50 USD/bbl tier as the only rate the regime can charge.",
    "Because a zero threshold makes the implied rate undefined in any year the applied oil price is itself below one dollar.",
-   "Because the engine treats a 0 USD/bbl key as an instruction to charge no royalty until the next threshold in the list is reached.",
+   "Because the engine treats a 0 USD/bbl key as an instruction to charge no royalty at all until the next threshold in the list is reached, so the lowest tier's rate is never actually charged.",
    "Because at any positive price that tier is genuinely reached, so the fallback to the lowest tier's rate never shows itself and the selection looks like an ordinary threshold rule."
   ],
   "answer": 3,

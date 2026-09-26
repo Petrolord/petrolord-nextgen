@@ -34,7 +34,7 @@ Ghana charges the highest rate of the four and collects 230.9340 million USD, wh
 
 ## The mistake
 
-The mistake is ranking regimes by their headline tax rate, or reading a total tax as the weight of a regime. Nigeria's 453.4354 million USD of tax is the largest of the four and sits inside the smallest government cash flow of the four, 687.4682. Ghana shows it from the other side, the smallest tax, 230.9340, inside the largest take, 1316.6067. The tax line measures one instrument. The take measures the regime, and the two can point in opposite directions on the same ledger.
+The mistake is ranking regimes by their headline tax rate, or reading a total tax as the weight of a regime. Nigeria's 453.4354 million USD of tax is the largest of the four and sits inside the smallest government cash flow of the four, 687.4682. Ghana shows it from the other side, the smallest tax, 230.9340, inside the largest take, 1316.6067. The tax line measures one instrument. The take measures the regime, and the two can point in opposite directions on one comparison.
 
 ## What it refuses
 

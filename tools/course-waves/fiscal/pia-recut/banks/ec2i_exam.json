@@ -261,7 +261,7 @@
    "Nigeria, because a higher tax against a lower take means more of its claim is being taken through instruments the take does not include."
   ],
   "answer": 2,
-  "explanation": "The two columns point in opposite directions on the same ledger, because the government's share of profit oil never passes through the tax line."
+  "explanation": "The two columns point in opposite directions across two ledgers. USA - Gulf of Mexico's heavier take is its 18.75 percent royalty, 1312.7238 million USD that never passes through the tax line, while the PIA template collects 443.2226 of royalty and takes 5 and later 10 percent of profit oil beside the larger tax."
  },
  {
   "prompt": "On identical cash flows the mid year present value at 20 percent is 176.3275 million USD against a year end 160.9642. What is the relation?",
@@ -290,8 +290,8 @@
   "options": [
    "A rate for both, 199900 and 1400 percent, because a root that exists is reported wherever it lies and only a missing root gives null.",
    "Null with the status above-clamp for both, and the second shows the band limits what is reported: 1400 percent is a finite, real root and it is still not named.",
-   "Null with the status no-root for both, because a rate above the band is treated exactly as a rate that does not exist at all anywhere.",
-   "Null for the first and 1400 percent for the second, because the band is applied to the search range rather than to the answer the search returns."
+   "Null with the status no-root for both, because a rate above the band is treated exactly as a rate that does not exist at all anywhere, whatever the size of the root.",
+   "Null for the first and 1400 percent for the second, because only a root lying beyond ten times the band's upper edge is withheld, and 1400 percent falls well short of that limit."
   ],
   "answer": 1,
   "explanation": "The band runs from -99 to 1000 percent and a root outside it is not a rate the engine will name, so both are null with the status above-clamp and irrRootAboveBand set. The first root is far beyond any search; the second is a plain finite number, and the band still keeps it out of the rate column."

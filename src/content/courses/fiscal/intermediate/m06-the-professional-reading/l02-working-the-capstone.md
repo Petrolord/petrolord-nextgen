@@ -19,7 +19,7 @@ Opex is 25.0037 million USD in year 1, falls to 12.3405 by year 25 and totals 39
 
 ## Step three: take the implied royalty rate, year by year
 
-Under a flat 18.75 percent royalty the implied rate is 0.187500 in every year. Under the tiered teaching regime's sliding royalty the implied rate is 0.075000 in years 1 to 5 and 0.100000 from year 6, because the deck steps from 45 to 65 USD per bbl at year 6. Under "Nigeria - PIA (2021)" it is 0.050000 in years 1 to 5 and 0.052163 in year 6, moving again in years 7, 8, 9 and 12 against each year's benchmark on the Regulations (2021) base, the engine default.
+Under a flat 18.75 percent royalty the implied rate is 0.187500 in every year. Under the tiered teaching regime's sliding royalty the implied rate is 0.075000 in years 1 to 5 and 0.100000 from year 6, because the deck steps from 45 to 65 USD per bbl at year 6. Under "Nigeria - PIA (2021)" it is 0.050000 in years 1 to 5 and 0.052163 in year 6, is back at 0.050000 by year 9, and sits above it again in every year from 12 to 21 against each year's benchmark on the Regulations (2021) base, the engine default.
 
 ## Step four: check the limit against the closing pool
 
