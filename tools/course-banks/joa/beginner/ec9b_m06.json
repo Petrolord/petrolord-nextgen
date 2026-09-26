@@ -11,7 +11,7 @@
   "explanation": "The engine's basis reads: base = annual cost - stated exclusions. The operating cost is 60000000.000000 and 2000000.000000 is excluded, so the base is 58000000.000000, and the engine's reason prints base 58000000 (cost 60000000 less exclusions 2000000). The exclusion comes out before the scale, 50000000.000000 is only the part inside band 1, and overhead charged under the scale is never part of its own base."
  },
  {
-  "prompt": "What operating overhead does the engine charge on the Ekene 2031 base of 58000000.000000?",
+  "prompt": "The Ekene operating scale charges 2.75 per cent to 50000000.000000 and 1 per cent to 125000000.000000. What does it charge on the 2031 base of 58000000.000000?",
   "options": [
    "1375000.000000, the charge of the first band alone.",
    "1343750.000000, the flat corporate charge.",
@@ -22,7 +22,7 @@
   "explanation": "The scale is marginal: each band's per cent on the part of the base inside the band. The engine's reason reads: operating: base 58000000 (cost 60000000 less exclusions 2000000); 2.75% of 50000000 + 1% of 8000000 = 1455000. 1375000.000000 and 80000.000000 are the two band charges taken one at a time, and 1343750.000000 is the flat 0.625000 percent charge on all three categories together."
  },
  {
-  "prompt": "The Ekene 2031 development base of 150000000.000000 runs through three bands. What is the development charge?",
+  "prompt": "The Ekene 2031 development base of 150000000.000000 runs through bands of 2.5, 1 and 0.5 per cent ending at 50000000.000000, 100000000.000000 and 175000000.000000. What is the development charge?",
   "options": [
    "2000000.000000, band by band.",
    "1250000.000000, the first band's charge.",
@@ -33,7 +33,7 @@
   "explanation": "The engine's reason reads: development: base 150000000; 2.5% of 50000000 + 1% of 50000000 + 0.5% of 50000000 = 2000000. 1250000.000000 and 500000.000000 are the first and second bands' own charges, and 3580000.000000 is the total over the exploration, operating and development categories."
  },
  {
-  "prompt": "What total overhead does the engine return for Ekene 2031 under the category scales?",
+  "prompt": "What total overhead does the engine return for Ekene 2031 under the three category scales the fixture states?",
   "options": [
    "1343750.000000, the flat corporate charge, which takes the place of the category scales.",
    "2000000.000000, the development charge, the largest of the three categories.",
