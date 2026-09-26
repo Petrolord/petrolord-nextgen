@@ -471,6 +471,8 @@ At b = 0 length plays no part and the longer EKD-030 (43 tokens) is first; at b 
 
 A REPEATED QUERY WORD COUNTS ONCE. "oil oil rate" on the hand set returns exactly the scores of "oil rate" (checked to the last bit): d1 2.191027, d3 1.722606. The engine keeps the distinct query terms (Okapi's query-frequency factor with k3 = 0, stated in its basis).
 
+TF-IDF COUNTS IT. The same query "oil oil rate" through rankTfidf, whose query is weighted like a passage (raw counts, section 6): query vector oil 0.894427, rate 0.447214, where "oil rate" gives oil 0.707107, rate 0.707107. The cosines move: d1 0.679173 (0.715911 for "oil rate"), d3 0.530684 (0.503451 for "oil rate").
+
 A SCORE READ TERM BY TERM, on the corpus. Q02 "initial oil rate of Ekene-3", query terms initial (df 7, idf 2.095971), oil (df 24, idf 0.912201), rate (df 6, idf 2.239072), of (df 19, idf 1.140459), ekene (df 44, idf 0.315385), 3 (df 19, idf 1.140459):
 
 | rank | passage | length | score | judged grade (fixture) | term: tf, contribution |
@@ -959,6 +961,17 @@ SYSTEM B'S UNSUPPORTED CLAIMS AND FLAGS, with the engine's reasons. Each reason 
 | Q12 | 1800 | the number 1800 is not in the cited passage EKD-039; it appears in retrieved passages EKD-038 and EKD-042, which the answer does not cite |
 | Q15 | 0.0012 | the number 0.0012 is unsupported: no cited passage is a retrieved passage of the corpus; it appears in EKD-059, cited but not retrieved |
 | Q24 | 2024-03-01 | the date 2024-03-01 is not in the cited passage EKD-031; it appears only in passages EKD-026 and EKD-035, neither cited nor retrieved |
+
+
+THE 11 REASONS BY KIND (derived: each reason above sorted by the clause it ends with, every reason in exactly one kind, checked):
+
+| where the figure is | unsupported claims (system B) |
+| --- | --- |
+| in a retrieved passage the answer does not cite | 3 |
+| in a cited passage that was not retrieved | 1 |
+| only in passages neither cited nor retrieved | 5 |
+| in no passage of the corpus | 2 |
+| all | 11 |
 
 | query | flag (verbatim) |
 | --- | --- |

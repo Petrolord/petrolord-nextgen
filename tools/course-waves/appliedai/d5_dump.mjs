@@ -669,6 +669,10 @@ const rep = success('bm25 oil oil rate', EV.rankBm25({ documents: HAND, query: P
 must('a repeated query word counts once', JSON.stringify(rep.ranking.map((r) => [r.id, r.score])) === JSON.stringify(bh.ranking.map((r) => [r.id, r.score])), 'repeat');
 w(`A REPEATED QUERY WORD COUNTS ONCE. "oil oil rate" on the hand set returns exactly the scores of "oil rate" (checked to the last bit): ${rep.ranking.map((r) => `${r.id} ${f6(r.score)}`).join(', ')}. The engine keeps the distinct query terms (Okapi's query-frequency factor with k3 = 0, stated in its basis).`);
 w();
+const trep = success('rankTfidf oil oil rate', EV.rankTfidf({ documents: HAND, query: PROBE.repeated, k: K }));
+must('TF-IDF counts the repeated query word', trep.ranking.length === th.ranking.length && trep.ranking.every((r, i) => r.id === th.ranking[i].id) && trep.ranking.some((r, i) => r.score !== th.ranking[i].score) && trep.queryVector.oil !== th.queryVector.oil, 'tfidf repeat');
+w(`TF-IDF COUNTS IT. The same query "${PROBE.repeated}" through rankTfidf, whose query is weighted like a passage (raw counts, section 6): query vector ${Object.entries(trep.queryVector).map(([t, x]) => `${t} ${f6(x)}`).join(', ')}, where "${HAND_Q}" gives ${Object.entries(th.queryVector).map(([t, x]) => `${t} ${f6(x)}`).join(', ')}. The cosines move: ${trep.ranking.map((r, i) => `${r.id} ${f6(r.score)} (${f6(th.ranking[i].score)} for "${HAND_Q}")`).join(', ')}.`);
+w();
 const b02 = success('bm25 Q02', EV.rankBm25({ documents: DOCS, query: QTEXT.Q02, k: K }));
 w(`A SCORE READ TERM BY TERM, on the corpus. Q02 "${QTEXT.Q02}", query terms ${b02.queryTerms.map((t) => `${t.term} (df ${t.df}, idf ${f6(t.idf)})`).join(', ')}:`);
 w();
@@ -1012,6 +1016,21 @@ w('SYSTEM B\'S UNSUPPORTED CLAIMS AND FLAGS, with the engine\'s reasons. Each re
 w();
 const unsB = cB.perAnswer.flatMap((r) => r.claims.filter((c) => !c.supported).map((c) => [r.query, c.text, c.reason]));
 table(['query', 'claim', 'reason (verbatim)'], unsB);
+w();
+const KINDS = [
+  ['in a retrieved passage the answer does not cite', /which the answer does not cite$/],
+  ['in a cited passage that was not retrieved', /, cited but not retrieved$/],
+  ['only in passages neither cited nor retrieved', /, neither cited nor retrieved$/],
+  ['in no passage of the corpus', /; it appears in no passage of the corpus$/],
+];
+const kindOf = (reason) => KINDS.filter(([, re]) => re.test(reason));
+must('every system B reason falls in exactly one kind', unsB.every((r) => kindOf(r[2]).length === 1), unsB.map((r) => kindOf(r[2]).length).join());
+const kindN = KINDS.map(([k]) => unsB.filter((r) => kindOf(r[2])[0][0] === k).length);
+must('the kinds add up to the unsupported claims', sum(kindN) === unsB.length && unsB.length === cB.nClaims - cB.nSupported, kindN.join());
+w();
+w(`THE ${unsB.length} REASONS BY KIND (derived: each reason above sorted by the clause it ends with, every reason in exactly one kind, checked):`);
+w();
+table(['where the figure is', 'unsupported claims (system B)'], KINDS.map(([k], i) => [k, S(kindN[i])]).concat([['all', S(unsB.length)]]));
 w();
 table(['query', 'flag (verbatim)'], cB.perAnswer.flatMap((r) => r.flags.map((f) => [r.query, f])));
 const reasonOf = (rows, q, t) => (rows.find((r) => r[0] === q && r[1] === t) || [])[2] || '';

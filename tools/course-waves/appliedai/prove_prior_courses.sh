@@ -10,8 +10,17 @@
 set -euo pipefail
 NG=${NG:-/root/wt-dai-d5-nextgen}
 ENG="$NG/packages/engines"
-SCR=${SCR:-/root/dai-wip-appliedai/scratch/prior}
-rm -rf "$SCR"; mkdir -p "$SCR"
+# A FRESH SCRATCH DIRECTORY PER RUN (mktemp -d), removed on exit, so two runs at
+# once (three lesson writers ran the gates together) never delete each other's
+# rebuilds or logs. SCR=<dir> keeps a named one for inspection; it must not
+# exist yet, so it is never shared either.
+if [ -n "${SCR:-}" ]; then
+  [ -e "$SCR" ] && { echo "REFUSES: SCR=$SCR already exists; name a fresh directory"; exit 2; }
+  mkdir -p "$SCR"
+else
+  SCR=$(mktemp -d /tmp/d5-prior-XXXXXX)
+  trap 'rm -rf "$SCR"' EXIT
+fi
 fail=0
 for spec in "D1:dataqc" "D2:mlcore" "D3:facies" "D4:forecastml"; do
   P=${spec%%:*}; W=${spec#*:}

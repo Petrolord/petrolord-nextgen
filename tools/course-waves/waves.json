@@ -1409,6 +1409,7 @@
       "hdr_advanced.txt",
       "truth-appliedai.json",
       "truth_check.py",
+      "harvest_appliedai.py",
       "numsweep_appliedai.mjs",
       "lengths.py",
       "gen_course.py",
@@ -1443,7 +1444,7 @@
       "banks/d5a_exam.py"
     ],
     "pins": {
-      "digest.txt": "76647fb0b897246e04391d9f4877a560c4af99273d292de576bdb5ce22b31cf1",
+      "digest.txt": "6215305f9dbd0cb69017b8264366204baf3d66842fa9cc448db8d14601135aff",
       "fields.json": "de3613c2cfca49d6dc5b96dd5a45de36f8d2837b2147942a0c786200a51e67f1"
     }
   }
