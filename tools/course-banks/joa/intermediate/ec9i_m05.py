@@ -12,7 +12,7 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
 P = "The Ekene PSC variant (synthetic) states royalty 12.500000 percent, a cost oil limit of 60.000000 percent of gross, a contractor profit share of 60.000000 percent, tax 30.000000 percent and an opening pool of 142000000.000000"
 
-q(2, f"{P}. In 2030 gross revenue is 219000000.000000 and the pool entering the year with its capex and opex is 532000000.000000. What cost does the engine recover, and what pool is carried to 2031?",
+q(2, f"{P}. In 2030 gross revenue is 219000000.000000 and the pool entering the year with its capex and opex is 532000000. What cost does the engine recover, and what pool is carried to 2031?",
  "131400000.000000 recovered, the limit binding, and 400600000.000000 carried to 2031",
  ["114975000.000000 recovered on 60 percent of the revenue after royalty, and 417025000.000000 carried",
   "191625000.000000, all revenue after royalty",
@@ -64,7 +64,7 @@ q(3, "By 2037 the Ekene variant's pool is empty. Revenue after royalty is 916536
 q(1, "The golden input psc-ekene-after-royalty states the Ekene PSC variant (royalty 12.500000 percent, share 60.000000, tax 30.000000, opening pool 142000000.000000) with the limit at 60.000000 percent of revenue after royalty. What pool does the engine carry out of 2038?",
  "33686775.000000, the pool not being cleared within the years stated",
  ["0.000000, as on the gross base",
-  "83179575.000000, the recoverable amount of 2038",
+  "83179575, the recoverable amount of 2038",
   "33686775.000000 written off at the end of 2038, since applyPSC writes off what the years leave"],
  "The engine's reason reads \"2038: recoverable 83179575 is above the cost oil limit 49492800; 33686775 carried to 2039\". The smaller limit on revenue after royalty leaves the pool open at the end of the years stated. The engine carries it; it writes nothing off.")
 

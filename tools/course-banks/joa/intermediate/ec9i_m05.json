@@ -1,6 +1,6 @@
 [
  {
-  "prompt": "The Ekene PSC variant (synthetic) states royalty 12.500000 percent, a cost oil limit of 60.000000 percent of gross, a contractor profit share of 60.000000 percent, tax 30.000000 percent and an opening pool of 142000000.000000. In 2030 gross revenue is 219000000.000000 and the pool entering the year with its capex and opex is 532000000.000000. What cost does the engine recover, and what pool is carried to 2031?",
+  "prompt": "The Ekene PSC variant (synthetic) states royalty 12.500000 percent, a cost oil limit of 60.000000 percent of gross, a contractor profit share of 60.000000 percent, tax 30.000000 percent and an opening pool of 142000000.000000. In 2030 gross revenue is 219000000.000000 and the pool entering the year with its capex and opex is 532000000. What cost does the engine recover, and what pool is carried to 2031?",
   "options": [
    "114975000.000000 recovered on 60 percent of the revenue after royalty, and 417025000.000000 carried",
    "191625000.000000, all revenue after royalty",
@@ -81,7 +81,7 @@
   "options": [
    "0.000000, as on the gross base",
    "33686775.000000, the pool not being cleared within the years stated",
-   "83179575.000000, the recoverable amount of 2038",
+   "83179575, the recoverable amount of 2038",
    "33686775.000000 written off at the end of 2038, since applyPSC writes off what the years leave"
   ],
   "answer": 1,
