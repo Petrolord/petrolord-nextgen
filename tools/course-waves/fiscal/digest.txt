@@ -4,7 +4,7 @@
 
 Engine: engines/economics/fiscalRegime.js with its templates in fiscalTemplates.js. Every table below is a return value of calculateCashFlowForRegime, calculateNPV, calculateIRR, deriveInsights or runFiscalComparison. Money is millions of United States dollars, written $MM in the engine's own labels and "million USD" in prose. Volumes are bbl and Mscf. Barrels of oil equivalent convert gas at 6000 scf per barrel, which the engine writes as a multiply by 1000 and a divide by 6000. Rates are percent.
 
-HOW TO READ A COLUMN MARKED "derived". A derived column is a ratio or a difference of two engine values on the SAME row, computed at full precision and then rounded for printing. The printed endpoints are rounded too, so subtracting the two printed endpoints does not always reproduce the printed difference: the ODIDI PIA climb prints 79.2711 and 79.4678 with a climb of 0.1968, and the default-project Generic Royalty/Tax climb prints 51.2558 and 41.0660 with a climb of -10.1897. Both are correct and both are off by one in the last place from the subtraction a reader would do by hand. Quote a derived column as printed. Never ask a reader, in a lesson exercise or a bank question, to subtract two printed endpoints and match a printed difference.
+HOW TO READ A COLUMN MARKED "derived". A derived column is a ratio or a difference of two engine values on the SAME row, computed at full precision and then rounded for printing. The printed endpoints are rounded too, so subtracting the two printed endpoints does not always reproduce the printed difference: the default-project Generic Royalty/Tax climb prints 51.2558 and 41.0660 with a climb of -10.1897. Both are correct and both are off by one in the last place from the subtraction a reader would do by hand. Quote a derived column as printed. Never ask a reader, in a lesson exercise or a bank question, to subtract two printed endpoints and match a printed difference.
 
 The four instruments a regime carries, and nothing else:
 
@@ -202,7 +202,7 @@ Opex falls year on year even though `fixed` never changes, because the variable 
 
 Gross revenue is oil volume times the applied oil price, plus gas volume times the gas price, plus NGL volume times the NGL price, all divided by one million. Royalty is a rate applied to GROSS revenue, before any cost is deducted.
 
-DEFAULT PROJECT under "USA - Gulf of Mexico" (royalty flat 18.75 percent; cost recovery limit 100 percent; profit split flat 100 percent to the contractor; CIT 21 percent, RRT 0 percent, minimum tax 0 percent). First eight years and the last:
+DEFAULT PROJECT under "USA - Gulf of Mexico" (royalty flat 18.75 percent; cost recovery limit 100 percent of revenue after royalty; profit split flat 100 percent to the contractor; CIT 21 percent, RRT 0 percent, minimum tax 0 percent). First eight years and the last:
 
 | year | grossRevenue | royalty | revenue after royalty (derived, the two printed columns subtracted) | implied royalty rate (derived, royalty over grossRevenue) |
 | --- | --- | --- | --- | --- |
@@ -216,7 +216,7 @@ DEFAULT PROJECT under "USA - Gulf of Mexico" (royalty flat 18.75 percent; cost r
 | 8 | 138.8057 | 26.0261 | 112.7797 | 0.187500 |
 | 25 | 24.3216 | 4.5603 | 19.7613 | 0.187500 |
 
-ODIDI under "USA - Gulf of Mexico" (royalty flat 18.75 percent; cost recovery limit 100 percent; profit split flat 100 percent to the contractor; CIT 21 percent, RRT 0 percent, minimum tax 0 percent). First eight years and the last:
+ODIDI under "USA - Gulf of Mexico" (royalty flat 18.75 percent; cost recovery limit 100 percent of revenue after royalty; profit split flat 100 percent to the contractor; CIT 21 percent, RRT 0 percent, minimum tax 0 percent). First eight years and the last:
 
 | year | grossRevenue | royalty | revenue after royalty (derived, the two printed columns subtracted) | implied royalty rate (derived, royalty over grossRevenue) |
 | --- | --- | --- | --- | --- |
@@ -236,20 +236,20 @@ The implied rate is the same in every year of both tables, because this regime's
 
 `fiscalTemplates` is a list of six. Templates carry no `id`; the Suite assigns one when a template is loaded into a comparison, and the goldens use the slug of the name.
 
-- **Nigeria - PIA (2021)** (id `nigeria___pia__2021`). Deepwater Production Sharing Contract under the Petroleum Industry Act.
-  royalty sliding on price, tiers 0 USD/bbl -> 7.5 percent, 50 USD/bbl -> 10 percent; cost recovery limit 80 percent; profit split tiered on the R factor, R 1 -> 60 percent, R 1.6 -> 40 percent, R 2.5 -> 30 percent; CIT 30 percent, RRT 0 percent, minimum tax 0 percent.
+- **Nigeria - PIA (2021)** (id `nigeria___pia__2021`). Deep offshore production sharing contract on the Petroleum Industry Act 2021 base terms for new acreage: royalty 5% on the first 50,000 bopd and 7.5% above (Seventh Schedule para 10(3)), royalty by price on the Petroleum Royalty Regulations 2022 benchmarks with project year 1 in 2027 (para 11), 5% on gas and NGL (para 10(6)), a cost limit of 70% of the crude and NGL value (para 14(4)), the government's minimum profit oil by cumulative production (para 14(4)), CIT 30% and no hydrocarbon tax in deep offshore (s.260(3)). These are the Act's minimum terms; a licensing round can bid them up (s.303(2)).
+  royalty PIA 2021 royalty (type pia_2021): production royalty by terrain deep_offshore and daily rate, royalty by price on the regulations_2021 benchmarks with project year 1 in calendar 2027, gas and NGL at the gas rate with 0 percent used in-country; cost recovery limit 70 percent of the gross value of crude oil and NGL (costRecoveryBase liquids_gross); profit split government minimum profit oil by cumulative crude oil at the start of the year (type pia_cumulative_production), to 50 million bbl -> government 5 percent, to 100 million bbl -> government 10 percent, to 350 million bbl -> government 15 percent, to 750 million bbl -> government 25 percent, to 1500 million bbl -> government 35 percent, above million bbl -> government 45 percent; CIT 30 percent, RRT 0 percent, minimum tax 0 percent.
 - **Ghana - Deepwater** (id `ghana___deepwater`). Typical terms for a deepwater block in Ghana, featuring royalty and additional oil entitlement.
-  royalty flat 5 percent; cost recovery limit 90 percent; profit split tiered on the R factor, R 1 -> 70 percent, R 1.25 -> 50 percent, R 2 -> 35 percent; CIT 35 percent, RRT 0 percent, minimum tax 0 percent.
+  royalty flat 5 percent; cost recovery limit 90 percent of revenue after royalty; profit split tiered on the R factor, R 1 -> 70 percent, R 1.25 -> 50 percent, R 2 -> 35 percent; CIT 35 percent, RRT 0 percent, minimum tax 0 percent.
 - **Brazil - Concession** (id `brazil___concession`). Standard concession agreement with special participation tax (windfall tax).
-  royalty flat 10 percent; cost recovery limit 100 percent; profit split flat 100 percent to the contractor; CIT 34 percent, RRT 40 percent, minimum tax 0 percent.
+  royalty flat 10 percent; cost recovery limit 100 percent of revenue after royalty; profit split flat 100 percent to the contractor; CIT 34 percent, RRT 40 percent, minimum tax 0 percent.
 - **USA - Gulf of Mexico** (id `usa___gulf_of_mexico`). Federal deepwater lease terms for the Gulf of Mexico.
-  royalty flat 18.75 percent; cost recovery limit 100 percent; profit split flat 100 percent to the contractor; CIT 21 percent, RRT 0 percent, minimum tax 0 percent.
+  royalty flat 18.75 percent; cost recovery limit 100 percent of revenue after royalty; profit split flat 100 percent to the contractor; CIT 21 percent, RRT 0 percent, minimum tax 0 percent.
 - **Angola - Deepwater PSC** (id `angola___deepwater_psc`). Production Sharing Contract for deepwater blocks in Angola.
-  royalty flat 0 percent; cost recovery limit 50 percent; profit split tiered on the R factor, R 1 -> 70 percent, R 1.5 -> 50 percent, R 2 -> 30 percent; CIT 25 percent, RRT 50 percent, minimum tax 0 percent.
+  royalty flat 0 percent; cost recovery limit 50 percent of revenue after royalty; profit split tiered on the R factor, R 1 -> 70 percent, R 1.5 -> 50 percent, R 2 -> 30 percent; CIT 25 percent, RRT 50 percent, minimum tax 0 percent.
 - **Generic Royalty/Tax** (id `generic_royalty_tax`). A simple, generic concessionary system with a flat royalty and corporate income tax.
-  royalty flat 12.5 percent; cost recovery limit 100 percent; profit split flat 100 percent to the contractor; CIT 30 percent, RRT 0 percent, minimum tax 0 percent.
+  royalty flat 12.5 percent; cost recovery limit 100 percent of revenue after royalty; profit split flat 100 percent to the contractor; CIT 30 percent, RRT 0 percent, minimum tax 0 percent.
 
-Three of the six take a flat 100 percent of profit oil to the contractor and recover cost at 100 percent, which is what a concession looks like inside a model built around a production sharing ledger: the contractor keeps everything the taxes do not take. The other three split profit oil on the R factor and cap cost recovery at 80, 90 and 50 percent.
+Three of the six take a flat 100 percent of profit oil to the contractor and recover cost at 100 percent, which is what a concession looks like inside a model built around a production sharing ledger: the contractor keeps everything the taxes do not take. Two split profit oil on the R factor and cap cost recovery at 90 percent (Ghana) and 50 percent (Angola) of revenue after royalty. The Nigeria - PIA (2021) template is the Act's base terms for a deep offshore production sharing contract on new acreage: the royalty the Act and the Petroleum Royalty Regulations 2022 set (production royalty by terrain and daily rate, royalty by price, gas and NGL at 5 percent), cost recovery to 70 percent of the gross value of crude oil and NGL, and the government's minimum share of profit oil by cumulative crude production (PIA Seventh Schedule paras 10, 11 and 14(4)); CIT 30 percent and no hydrocarbon tax in deep offshore (s.260(3)). These are the Act's minimum terms, which a licensing round can bid up (s.303(2)).
 
 # SECTION 8: A concession ledger end to end (owned by Associate m04)
 
@@ -334,7 +334,7 @@ DEFAULT PROJECT:
 
 | regime | total contractor NCF | total government take | total revenue | total tax | payback year | payout year | NPV at the project rate | IRR percent |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Nigeria - PIA (2021) | 406.2057 | 1339.2784 | 2686.9277 | 174.0882 | 4 | 3 | 154.8286 | 28.2129 |
+| Nigeria - PIA (2021) | 1058.0159 | 687.4682 | 2686.9277 | 453.4354 | 3 | 3 | 432.0925 | 46.7732 |
 | Ghana - Deepwater | 428.8774 | 1316.6067 | 2686.9277 | 230.9340 | 3 | 3 | 172.7531 | 33.2329 |
 | Brazil - Concession | 623.9658 | 1121.5184 | 2686.9277 | 852.8256 | 3 | 3 | 287.2804 | 44.0823 |
 | USA - Gulf of Mexico | 980.9313 | 764.5528 | 2686.9277 | 260.7539 | 3 | 3 | 382.0660 | 40.2125 |
@@ -345,7 +345,7 @@ TEST PROJECT:
 
 | regime | total contractor NCF | total government take | total revenue | total tax | payback year | payout year | NPV at the project rate | IRR percent |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Nigeria - PIA (2021) | 778.4845 | 3372.6496 | 7001.1938 | 389.4896 | 2 | 2 | 478.1985 | null (multiple-roots; roots -12.1036, 69.5722) |
+| Nigeria - PIA (2021) | 2368.1705 | 1782.9635 | 7001.1938 | 1074.4895 | 2 | 2 | 1327.7730 | null (multiple-roots; roots -20.4214, 128.9428) |
 | Ghana - Deepwater | 899.0915 | 3252.0426 | 7001.1938 | 529.7561 | 2 | 2 | 531.9201 | null (multiple-roots; roots -14.7956, 88.3418) |
 | Brazil - Concession | 1323.4598 | 2827.6743 | 7001.1938 | 2127.5549 | 2 | 2 | 831.8148 | null (multiple-roots; roots -16.2620, 127.4602) |
 | USA - Gulf of Mexico | 2221.9251 | 1929.2089 | 7001.1938 | 616.4851 | 2 | 2 | 1232.0557 | null (multiple-roots; roots -19.0970, 104.9545) |
@@ -399,9 +399,9 @@ The golden's 32 cash flow cases, with the golden's own note and the headline the
 - gas_and_ngl_streams: Gas and NGL streams contribute revenue and boe on the default project under the Generic template.
   total contractor NCF 986.7327, total government take 758.7514, total revenue 2686.9277, total royalty 335.8660, total cost recovered 941.4436, total profit oil 1409.6182, total tax 422.8854, payback year 3, payout year 3, NPV 397.0445 at 10 percent, IRR 44.6574, closing unrecovered pool 0.0000.
 - template_nigeria___pia__2021_default_project: Template "Nigeria - PIA (2021)" on the Designer's default project.
-  total contractor NCF 406.2057, total government take 1339.2784, total revenue 2686.9277, total royalty 268.6928, total cost recovered 941.4436, total profit oil 1476.7914, total tax 174.0882, payback year 4, payout year 3, NPV 154.8286 at 10 percent, IRR 28.2129, closing unrecovered pool 0.0000.
+  total contractor NCF 1058.0159, total government take 687.4682, total revenue 2686.9277, total royalty 154.4828, total cost recovered 941.4436, total profit oil 1591.0013, total tax 453.4354, payback year 3, payout year 3, NPV 432.0925 at 10 percent, IRR 46.7732, closing unrecovered pool 0.0000.
 - template_nigeria___pia__2021_test_project: Template "Nigeria - PIA (2021)" on the Suite test project.
-  total contractor NCF 778.4845, total government take 3372.6496, total revenue 7001.1938, total royalty 700.1194, total cost recovered 2719.7351, total profit oil 3581.3393, total tax 389.4896, payback year 2, payout year 2, NPV 478.1985 at 10 percent, IRR null (multiple-roots; roots -12.1036, 69.5722), closing unrecovered pool 130.3246.
+  total contractor NCF 2368.1705, total government take 1782.9635, total revenue 7001.1938, total royalty 443.2226, total cost recovered 2711.0880, total profit oil 3846.8832, total tax 1074.4895, payback year 2, payout year 2, NPV 1327.7730 at 10 percent, IRR null (multiple-roots; roots -20.4214, 128.9428), closing unrecovered pool 138.9717.
 - template_ghana___deepwater_default_project: Template "Ghana - Deepwater" on the Designer's default project.
   total contractor NCF 428.8774, total government take 1316.6067, total revenue 2686.9277, total royalty 134.3464, total cost recovered 941.4436, total profit oil 1611.1377, total tax 230.9340, payback year 3, payout year 3, NPV 172.7531 at 10 percent, IRR 33.2329, closing unrecovered pool 0.0000.
 - template_ghana___deepwater_test_project: Template "Ghana - Deepwater" on the Suite test project.
@@ -435,7 +435,7 @@ THE RULE, AND IT IS THE MOST PORTABLE THING IN THIS SECTION. Quote a golden's NU
 
 `getSlidingScaleRoyalty` starts at the FIRST tier's rate and walks the list in order, keeping the rate of every tier whose `threshold` the oil price has reached. For a sorted tier list that is the highest threshold reached. The price it reads is the applied oil price for the year AFTER the price multiplier, so a sweep moves the royalty tier as well as the revenue.
 
-The PIA template's royalty has two tiers, 0 USD/bbl at 7.5 percent and 50 USD/bbl at 10 percent. Swept across the price multiplier on the DEFAULT PROJECT, whose year 1 deck price is 70 USD per bbl:
+The tiered teaching regime's royalty has two tiers, 0 USD/bbl at 7.5 percent and 50 USD/bbl at 10 percent. Swept across the price multiplier on the DEFAULT PROJECT, whose year 1 deck price is 70 USD per bbl:
 
 | price multiplier | applied year 1 oil price (derived, 70 times the multiplier) | year 1 grossRevenue | year 1 royalty | implied rate (derived) |
 | --- | --- | --- | --- | --- |
@@ -450,7 +450,7 @@ The PIA template's royalty has two tiers, 0 USD/bbl at 7.5 percent and 50 USD/bb
 
 The implied rate steps from 0.075000 to 0.100000 between the multipliers 0.710000 and 0.720000, which is the deck price crossing 50 USD per bbl. It is a STEP, not a ramp: nothing between the tiers is interpolated.
 
-WHICH SIDE DOES THE THRESHOLD ITSELF BELONG TO. The comparison in the engine is `oilPrice >= tier.threshold`, so a price sitting EXACTLY on a threshold takes the UPPER tier. No multiplier on this deck lands exactly on 50, and one that looks as though it does is a rounding: 70 times 50 divided by 70 is 49.99999999999998 in binary floating point, which is strictly below the threshold and takes the LOWER tier while printing as 50.000000 at six decimals. So the point is made with a deck priced at the threshold instead, which needs no multiplier at all. Three probe decks, the Designer default project in every other respect, at the PIA royalty:
+WHICH SIDE DOES THE THRESHOLD ITSELF BELONG TO. The comparison in the engine is `oilPrice >= tier.threshold`, so a price sitting EXACTLY on a threshold takes the UPPER tier. No multiplier on this deck lands exactly on 50, and one that looks as though it does is a rounding: 70 times 50 divided by 70 is 49.99999999999998 in binary floating point, which is strictly below the threshold and takes the LOWER tier while printing as 50.000000 at six decimals. So the point is made with a deck priced at the threshold instead, which needs no multiplier at all. Three probe decks, the Designer default project in every other respect, at the tiered teaching regime's royalty:
 
 | deck oil price, USD/bbl | year 1 grossRevenue | year 1 royalty | implied rate (derived) |
 | --- | --- | --- | --- |
@@ -460,7 +460,7 @@ WHICH SIDE DOES THE THRESHOLD ITSELF BELONG TO. The comparison in the engine is 
 
 The threshold belongs to the tier above it. A price one cent below pays 7.5 percent, a price exactly on it pays 10 percent, and a price one cent above pays 10 percent. Read a sweep's printed price column as a ROUNDING of the price the engine used, never as the price itself, and read the implied rate as the measurement: the rate says which side of the threshold the engine was actually on.
 
-The same instrument seen along a deck rather than along a multiplier. ODIDI holds 45 USD per bbl through year 5 and steps to 65 at year 6, so under the PIA royalty its rate changes inside the life of the field:
+The same instrument seen along a deck rather than along a multiplier. ODIDI holds 45 USD per bbl through year 5 and steps to 65 at year 6, so under the tiered teaching regime its royalty rate changes inside the life of the field:
 
 | year | grossRevenue | royalty | implied rate (derived, royalty over grossRevenue) |
 | --- | --- | --- | --- |
@@ -476,7 +476,7 @@ The same instrument seen along a deck rather than along a multiplier. ODIDI hold
 And the two published cases that pin the same behaviour:
 
 - sliding_royalty_price_deck_crossing: The default project's three-point deck ($70, $75 from year 5, $80 from year 10) walks the Designer's default PIA sliding royalty through its $60 and $80 thresholds: 12.5 percent until year 9, 15 percent from year 10.
-  royalty sliding on price, tiers 60 USD/bbl -> 12.5 percent, 80 USD/bbl -> 15 percent; cost recovery limit 70 percent; profit split tiered on the R factor, R 1 -> 60 percent, R 1.5 -> 50 percent; CIT 30 percent, RRT 20 percent, minimum tax 2 percent.
+  royalty sliding on price, tiers 60 USD/bbl -> 12.5 percent, 80 USD/bbl -> 15 percent; cost recovery limit 70 percent of revenue after royalty; profit split tiered on the R factor, R 1 -> 60 percent, R 1.5 -> 50 percent; CIT 30 percent, RRT 20 percent, minimum tax 2 percent.
 
   | year | grossRevenue | royalty | implied rate (derived) |
   | --- | --- | --- | --- |
@@ -490,7 +490,7 @@ And the two published cases that pin the same behaviour:
   | 8 | 138.8057 | 17.3507 | 0.125000 |
 
 - price_below_every_threshold: Price multiplier 0.5 puts $35 oil below every sliding tier: the FIRST tier applies.
-  royalty sliding on price, tiers 60 USD/bbl -> 12.5 percent, 80 USD/bbl -> 15 percent; cost recovery limit 70 percent; profit split tiered on the R factor, R 1 -> 60 percent, R 1.5 -> 50 percent; CIT 30 percent, RRT 20 percent, minimum tax 2 percent.
+  royalty sliding on price, tiers 60 USD/bbl -> 12.5 percent, 80 USD/bbl -> 15 percent; cost recovery limit 70 percent of revenue after royalty; profit split tiered on the R factor, R 1 -> 60 percent, R 1.5 -> 50 percent; CIT 30 percent, RRT 20 percent, minimum tax 2 percent.
 
   | year | grossRevenue | royalty | implied rate (derived) |
   | --- | --- | --- | --- |
@@ -505,11 +505,34 @@ And the two published cases that pin the same behaviour:
 
 `price_below_every_threshold` is the case that shows the starting rate is the FIRST tier's rate and not zero: the price never reaches any threshold above the first, and the first tier's rate is charged in every year.
 
+### The Nigeria - PIA (2021) template's royalty (type pia_2021)
+
+This royalty has no tiers keyed on the price alone. Each year it charges three things, computed by the cash flow engine's own helpers: the production royalty on the oil revenue at the rate for the terrain (deep_offshore) and the year's daily oil rate (the year's oil over 365 days); the royalty by price on the oil revenue, at the rate for the year's oil price and calendar year (project year 1 is 2027) on the regulations_2021 benchmarks; and the gas rate on the gas and NGL revenue. ODIDI under it:
+
+| year | calendar year | oil price | daily oil rate (derived) | production royalty rate | low benchmark | royalty by price rate | gas and NGL rate | royalty | implied rate on grossRevenue (derived) |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | 2027 | 45.000000 | 8000.0000 | 0.050000 | 56.3000 | 0.000000 | 0.050000 | 6.9828 | 0.050000 |
+| 2 | 2028 | 45.000000 | 6880.0000 | 0.050000 | 57.4300 | 0.000000 | 0.050000 | 6.0012 | 0.050000 |
+| 3 | 2029 | 45.000000 | 5916.8000 | 0.050000 | 58.5800 | 0.000000 | 0.050000 | 5.1577 | 0.050000 |
+| 4 | 2030 | 45.000000 | 5088.4480 | 0.050000 | 59.7500 | 0.000000 | 0.050000 | 4.4327 | 0.050000 |
+| 5 | 2031 | 45.000000 | 4376.0653 | 0.050000 | 60.9500 | 0.000000 | 0.050000 | 3.8097 | 0.050000 |
+| 6 | 2032 | 65.000000 | 3763.4161 | 0.050000 | 62.1700 | 0.002276 | 0.050000 | 4.9025 | 0.052163 |
+| 7 | 2033 | 65.000000 | 3236.5379 | 0.050000 | 63.4100 | 0.001254 | 0.050000 | 4.1354 | 0.051192 |
+| 8 | 2034 | 65.000000 | 2783.4226 | 0.050000 | 64.6800 | 0.000247 | 0.050000 | 3.4881 | 0.050235 |
+| 9 | 2035 | 65.000000 | 2393.7434 | 0.050000 | 65.9700 | 0.000000 | 0.050000 | 2.9841 | 0.050000 |
+| 10 | 2036 | 65.000000 | 2058.6193 | 0.050000 | 67.2900 | 0.000000 | 0.050000 | 2.5650 | 0.050000 |
+| 11 | 2037 | 65.000000 | 1770.4126 | 0.050000 | 68.6400 | 0.000000 | 0.050000 | 2.2047 | 0.050000 |
+| 12 | 2038 | 85.000000 | 1522.5549 | 0.050000 | 70.0100 | 0.010704 | 0.050000 | 2.9730 | 0.060246 |
+| 13 | 2039 | 85.000000 | 1309.3972 | 0.050000 | 71.4100 | 0.009514 | 0.050000 | 2.5075 | 0.059111 |
+| 14 | 2040 | 85.000000 | 1126.0816 | 0.050000 | 72.8400 | 0.008346 | 0.050000 | 2.1148 | 0.057996 |
+
+ODIDI produces well under 50,000 bopd, so its production royalty stays at the 5 percent deep offshore rate. The royalty by price is zero while the oil price is at or below the year's low benchmark and rises from the year the deck lifts the price above it.
+
 # SECTION 13: Cost recovery, the pool and the carryforward (owned by Professional m02)
 
 Three lines of the engine do the whole of it. The recoverable pool is the balance brought forward plus this year's capex plus this year's opex. The allowance is the cost recovery limit as a percent of revenue AFTER royalty. Cost recovered is the smaller of the two, and the pool carries the rest forward. Profit oil is revenue after royalty minus cost recovered, floored at zero.
 
-The same project under four limits, so the limit is the only thing that moves. Angola's 50 percent, the PIA's 80, Ghana's 90 and the concession 100, all on the DEFAULT PROJECT with everything else held at the "Generic Royalty/Tax" template's settings:
+The same project under four limits, so the limit is the only thing that moves. Angola's 50 percent, the tiered teaching regime's 80, Ghana's 90 and the concession 100, all on the DEFAULT PROJECT with everything else held at the "Generic Royalty/Tax" template's settings:
 
 Cost recovery limit 50 percent. Total cost recovered 940.4991, total profit oil 1410.5626, total contractor NCF 986.4494, closing unrecovered pool 0.9444 $MM.
 
@@ -569,13 +592,24 @@ Two published cases hold the extremes:
 - capped_40pct: Suite test: recovery capped at 40 percent of revenue after royalty. Cost recovery limit 40 percent. Total cost recovered 2450.4178, total profit oil 3675.6267, total contractor NCF 2173.2968, closing unrecovered pool 399.6419 $MM, payback year 3.
 - never_recovers_huge_capex: Capex 20000 on the test project: the pool never clears and there is no payback. NPV at 0 percent is negative and no rate from -99 to 1000 percent zeroes it, so the IRR is null with status no-root (the retired rule printed 0). Cost recovery limit 100 percent. Total cost recovered 6126.0445, total profit oil 0.0000, total contractor NCF -15724.0151, closing unrecovered pool 15724.0151 $MM, payback year null.
 
+The Nigeria - PIA (2021) template takes its limit on a different base (costRecoveryBase liquids_gross): 70 percent of the gross value of crude oil and NGL, before royalty, where every other regime here takes a percent of revenue after royalty. On ODIDI:
+
+| year | grossRevenue | royalty | recoverable pool (derived, pool brought forward plus capex plus opex) | costRecovered | unrecoveredCostPool |
+| --- | --- | --- | --- | --- | --- |
+| 1 | 139.6563 | 6.9828 | 445.0037 | 97.7288 | 347.2750 |
+| 2 | 120.0245 | 6.0012 | 370.4455 | 83.9892 | 286.4563 |
+| 3 | 103.1532 | 5.1577 | 308.0523 | 72.1819 | 235.8704 |
+| 4 | 88.6543 | 4.4327 | 256.1138 | 62.0349 | 194.0789 |
+| 5 | 76.1939 | 3.8097 | 213.1606 | 53.3147 | 159.8459 |
+| 6 | 93.9859 | 4.9025 | 177.9296 | 65.7659 | 112.1637 |
+
 What cost recovery is NOT. It is not a deduction against tax: the tax base in this model is the contractor's profit share, and cost recovered is added to the contractor's cash separately. It is not depreciation, and there is no schedule. And an unrecovered balance is not a loss carried forward for tax; it is only a claim on future revenue after royalty.
 
 # SECTION 14: The R factor (owned by Professional m03)
 
 The R factor is cumulative gross revenue divided by cumulative cost, where cumulative cost is the running sum of capex plus opex. It is a ratio of CUMULATIVES, not of the year, and it is computed BEFORE the split is chosen, from the totals including the current year. `getTieredSplit` then walks the tier list in order and keeps the split of every tier whose threshold the R factor has reached.
 
-"Nigeria - PIA (2021)" splits at R 1.0 to 60 percent, R 1.6 to 40 percent and R 2.5 to 30 percent. On the DEFAULT PROJECT:
+The tiered teaching regime splits at R 1.0 to 60 percent, R 1.6 to 40 percent and R 2.5 to 30 percent. On the DEFAULT PROJECT:
 
 | year | grossRevenue | opex | capex | rFactor | profitOil | contractor profit share (derived, contractorNCF plus tax plus opex plus capex minus costRecovered) | implied split (derived, that share over profitOil) |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -607,10 +641,41 @@ The R factor is cumulative gross revenue divided by cumulative cost, where cumul
 
 The implied split is the tier the R factor selected, read back out of the ledger. It starts below 1.0 in year 1, so the FIRST tier's split is used even though no threshold has been reached, exactly as the royalty does.
 
+The Nigeria - PIA (2021) template does not split on the R factor. Its split (type pia_cumulative_production) is the government's minimum share of profit oil by the field's cumulative crude production at the START of the year: up to and including 50 million bbl 5 percent, up to and including 100 million bbl 10 percent, up to and including 350 million bbl 15 percent, up to and including 750 million bbl 25 percent, up to and including 1500 million bbl 35 percent, above the last band 45 percent. The contractor takes the rest. On the DEFAULT PROJECT:
+
+| year | cumulative oil at the start of the year, million bbl (derived) | profitOil | implied contractor split (derived) |
+| --- | --- | --- | --- |
+| 1 | 0.000000 | 64.9338 | 0.950000 |
+| 2 | 3.650000 | 58.6403 | 0.950000 |
+| 3 | 6.935000 | 52.9527 | 0.950000 |
+| 4 | 9.891500 | 89.2845 | 0.950000 |
+| 5 | 12.552350 | 155.8969 | 0.950000 |
+| 6 | 14.947115 | 139.3177 | 0.950000 |
+| 7 | 17.102404 | 124.3952 | 0.950000 |
+| 8 | 19.042163 | 110.9648 | 0.950000 |
+| 9 | 20.787947 | 98.8762 | 0.950000 |
+| 10 | 22.359152 | 95.0794 | 0.950000 |
+| 11 | 23.773237 | 84.5766 | 0.950000 |
+| 12 | 25.045913 | 75.1234 | 0.950000 |
+| 13 | 26.191322 | 66.6154 | 0.950000 |
+| 14 | 27.222190 | 58.9580 | 0.950000 |
+| 15 | 28.149971 | 52.0661 | 0.950000 |
+| 16 | 28.984974 | 45.8631 | 0.950000 |
+| 17 | 29.736476 | 40.2802 | 0.950000 |
+| 18 | 30.412829 | 35.2553 | 0.950000 |
+| 19 | 31.021546 | 30.7206 | 0.950000 |
+| 20 | 31.569391 | 26.6127 | 0.950000 |
+| 21 | 32.062452 | 22.9198 | 0.950000 |
+| 22 | 32.506207 | 19.6000 | 0.950000 |
+| 23 | 32.905586 | 16.6156 | 0.950000 |
+| 24 | 33.265028 | 13.9325 | 0.950000 |
+| 25 | 33.588525 | 11.5204 | 0.950000 |
+
+
 Three published cases, one for each behaviour:
 
 - rfactor_tranche_crossing: The Nigeria PIA tranches on a 10000 bopd project (capex 350, opex 20 + 1 $/boe) at $80: the R-factor walks through 1.0 in year 2, 1.6 in year 3 and 2.5 in year 6. The 60 tranche applies from the start (below 1.0 the lowest tier applies), so `contractorSplit` steps 60 -> 40 when R reaches 1.6 in year 3 and 40 -> 30 when it reaches 2.5 in year 6.
-  royalty sliding on price, tiers 0 USD/bbl -> 7.5 percent, 50 USD/bbl -> 10 percent; cost recovery limit 80 percent; profit split tiered on the R factor, R 1 -> 60 percent, R 1.6 -> 40 percent, R 2.5 -> 30 percent; CIT 30 percent, RRT 0 percent, minimum tax 0 percent.
+  royalty sliding on price, tiers 0 USD/bbl -> 7.5 percent, 50 USD/bbl -> 10 percent; cost recovery limit 80 percent of revenue after royalty; profit split tiered on the R factor, R 1 -> 60 percent, R 1.6 -> 40 percent, R 2.5 -> 30 percent; CIT 30 percent, RRT 0 percent, minimum tax 0 percent.
 
   | year | rFactor | profitOil | implied split (derived) |
   | --- | --- | --- | --- |
@@ -641,7 +706,7 @@ Three published cases, one for each behaviour:
   | 25 | 2.654466 | 2.4448 | 0.300000 |
 
 - rfactor_falls_back: The same regime with capex 320 and opex 25: the R-factor peaks at 2.972625 in year 11 and then FALLS as revenue declines while opex keeps accruing, so the split steps back up from 30 to 40 in year 23. The R-factor is a ratio of cumulatives and is not monotone.
-  royalty sliding on price, tiers 0 USD/bbl -> 7.5 percent, 50 USD/bbl -> 10 percent; cost recovery limit 80 percent; profit split tiered on the R factor, R 1 -> 60 percent, R 1.6 -> 40 percent, R 2.5 -> 30 percent; CIT 30 percent, RRT 0 percent, minimum tax 0 percent.
+  royalty sliding on price, tiers 0 USD/bbl -> 7.5 percent, 50 USD/bbl -> 10 percent; cost recovery limit 80 percent of revenue after royalty; profit split tiered on the R factor, R 1 -> 60 percent, R 1.6 -> 40 percent, R 2.5 -> 30 percent; CIT 30 percent, RRT 0 percent, minimum tax 0 percent.
 
   | year | rFactor | profitOil | implied split (derived) |
   | --- | --- | --- | --- |
@@ -672,7 +737,7 @@ Three published cases, one for each behaviour:
   | 25 | 2.395606 | 2.4448 | 0.400000 |
 
 - harsh_split_40_royalty_20: Suite test: a 40 percent split and 20 percent royalty leave the contractor less and the government more than the flat regime.
-  royalty flat 20 percent; cost recovery limit 100 percent; profit split flat 40 percent to the contractor; CIT 30 percent, RRT 0 percent, minimum tax 0 percent, RRT uplift 0 percent.
+  royalty flat 20 percent; cost recovery limit 100 percent of revenue after royalty; profit split flat 40 percent to the contractor; CIT 30 percent, RRT 0 percent, minimum tax 0 percent, RRT uplift 0 percent.
 
   | year | rFactor | profitOil | implied split (derived) |
   | --- | --- | --- | --- |
@@ -760,7 +825,7 @@ The pool under a sweep: the "Brazil - Concession" instruments on the DEFAULT PRO
 The minimum tax and the maximum, on the published case that pins it:
 
 - minimum_tax_binds: A 10 percent minimum tax on gross revenue with a 0 CIT: the minimum binds every year.
-  royalty flat 12.5 percent; cost recovery limit 100 percent; profit split flat 100 percent to the contractor; CIT 0 percent, RRT 0 percent, minimum tax 10 percent, RRT uplift 0 percent. Total tax 700.1194, total contractor NCF 2575.8655 $MM.
+  royalty flat 12.5 percent; cost recovery limit 100 percent of revenue after royalty; profit split flat 100 percent to the contractor; CIT 0 percent, RRT 0 percent, minimum tax 10 percent, RRT uplift 0 percent. Total tax 700.1194, total contractor NCF 2575.8655 $MM.
 
   | year | grossRevenue | profitOil | tax |
   | --- | --- | --- | --- |
@@ -774,7 +839,7 @@ The minimum tax and the maximum, on the published case that pins it:
   | 8 | 357.9998 | 235.3499 | 35.8000 |
 
 - rrt_uplift_default_20: rrtUpliftPct omitted: the default 20 percent uplift sizes the Brazil RRT pool at 1.2 times the 1000 capex (EC2-6).
-  royalty flat 10 percent; cost recovery limit 100 percent; profit split flat 100 percent to the contractor; CIT 34 percent, RRT 40 percent, minimum tax 0 percent. Total tax 2127.5549, total contractor NCF 1323.4598 $MM.
+  royalty flat 10 percent; cost recovery limit 100 percent of revenue after royalty; profit split flat 100 percent to the contractor; CIT 34 percent, RRT 40 percent, minimum tax 0 percent. Total tax 2127.5549, total contractor NCF 1323.4598 $MM.
 
   | year | grossRevenue | profitOil | tax |
   | --- | --- | --- | --- |
@@ -788,7 +853,7 @@ The minimum tax and the maximum, on the published case that pins it:
   | 8 | 357.9998 | 244.2998 | 180.7819 |
 
 - rrt_uplift_zero_respected: rrtUpliftPct 0 is respected (not replaced by the default). The pool is then the capex itself, 1000, relieved once (EC2-6).
-  royalty flat 10 percent; cost recovery limit 100 percent; profit split flat 100 percent to the contractor; CIT 34 percent, RRT 40 percent, minimum tax 0 percent, RRT uplift 0 percent. Total tax 2207.5549, total contractor NCF 1243.4598 $MM.
+  royalty flat 10 percent; cost recovery limit 100 percent of revenue after royalty; profit split flat 100 percent to the contractor; CIT 34 percent, RRT 40 percent, minimum tax 0 percent, RRT uplift 0 percent. Total tax 2207.5549, total contractor NCF 1243.4598 $MM.
 
   | year | grossRevenue | profitOil | tax |
   | --- | --- | --- | --- |
@@ -867,24 +932,24 @@ Regimes: "Nigeria - PIA (2021)", "Ghana - Deepwater", "Brazil - Concession", "US
 
 | rank | regime | npv | irr | paybackPeriod | rFactorPayoutYear | govTake | effectiveTaxRate |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Generic Royalty/Tax | 397.0445 | 44.6574 | 3 | 3 | 758.7514 | 33.7901 |
-| 2 | USA - Gulf of Mexico | 382.0660 | 40.2125 | 3 | 3 | 764.5528 | 34.0485 |
-| 3 | Brazil - Concession | 287.2804 | 44.0823 | 3 | 3 | 1121.5184 | 49.9455 |
-| 4 | Angola - Deepwater PSC | 211.3787 | 32.3741 | 4 | 3 | 1263.7523 | 56.2797 |
-| 5 | Ghana - Deepwater | 172.7531 | 33.2329 | 3 | 3 | 1316.6067 | 58.6335 |
-| 6 | Nigeria - PIA (2021) | 154.8286 | 28.2129 | 4 | 3 | 1339.2784 | 59.6432 |
+| 1 | Nigeria - PIA (2021) | 432.0925 | 46.7732 | 3 | 3 | 687.4682 | 30.6156 |
+| 2 | Generic Royalty/Tax | 397.0445 | 44.6574 | 3 | 3 | 758.7514 | 33.7901 |
+| 3 | USA - Gulf of Mexico | 382.0660 | 40.2125 | 3 | 3 | 764.5528 | 34.0485 |
+| 4 | Brazil - Concession | 287.2804 | 44.0823 | 3 | 3 | 1121.5184 | 49.9455 |
+| 5 | Angola - Deepwater PSC | 211.3787 | 32.3741 | 4 | 3 | 1263.7523 | 56.2797 |
+| 6 | Ghana - Deepwater | 172.7531 | 33.2329 | 3 | 3 | 1316.6067 | 58.6335 |
 
 **cmp_all_templates_test_project**: All six templates on the Suite test project.
 Regimes: "Nigeria - PIA (2021)", "Ghana - Deepwater", "Brazil - Concession", "USA - Gulf of Mexico", "Angola - Deepwater PSC", "Generic Royalty/Tax". Discount rate 10 percent.
 
 | rank | regime | npv | irr | paybackPeriod | rFactorPayoutYear | govTake | effectiveTaxRate |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Generic Royalty/Tax | 1262.3470 | null (multiple-roots; roots -20.4061, 124.5777) | 2 | 2 | 1881.7626 | 36.5310 |
-| 2 | USA - Gulf of Mexico | 1232.0557 | null (multiple-roots; roots -19.0970, 104.9545) | 2 | 2 | 1929.2089 | 37.4521 |
-| 3 | Brazil - Concession | 831.8148 | null (multiple-roots; roots -16.2620, 127.4602) | 2 | 2 | 2827.6743 | 54.8942 |
-| 4 | Angola - Deepwater PSC | 593.3430 | null (multiple-roots; roots -8.3932, 81.3020) | 2 | 2 | 3373.2753 | 65.4861 |
-| 5 | Ghana - Deepwater | 531.9201 | null (multiple-roots; roots -14.7956, 88.3418) | 2 | 2 | 3252.0426 | 63.1326 |
-| 6 | Nigeria - PIA (2021) | 478.1985 | null (multiple-roots; roots -12.1036, 69.5722) | 2 | 2 | 3372.6496 | 65.4739 |
+| 1 | Nigeria - PIA (2021) | 1327.7730 | null (multiple-roots; roots -20.4214, 128.9428) | 2 | 2 | 1782.9635 | 34.6130 |
+| 2 | Generic Royalty/Tax | 1262.3470 | null (multiple-roots; roots -20.4061, 124.5777) | 2 | 2 | 1881.7626 | 36.5310 |
+| 3 | USA - Gulf of Mexico | 1232.0557 | null (multiple-roots; roots -19.0970, 104.9545) | 2 | 2 | 1929.2089 | 37.4521 |
+| 4 | Brazil - Concession | 831.8148 | null (multiple-roots; roots -16.2620, 127.4602) | 2 | 2 | 2827.6743 | 54.8942 |
+| 5 | Angola - Deepwater PSC | 593.3430 | null (multiple-roots; roots -8.3932, 81.3020) | 2 | 2 | 3373.2753 | 65.4861 |
+| 6 | Ghana - Deepwater | 531.9201 | null (multiple-roots; roots -14.7956, 88.3418) | 2 | 2 | 3252.0426 | 63.1326 |
 
 **cmp_flat_vs_complex**: The two Suite test regimes side by side.
 Regimes: "Flat", "Complex". Discount rate 10 percent.
@@ -902,8 +967,8 @@ Regimes: "Nigeria - PIA (2021)", "Ghana - Deepwater", "Brazil - Concession", "US
 | 1 | Brazil - Concession | -15354.6816 | null (no-root) | null | null | 700.1194 | 13.5916 |
 | 2 | Ghana - Deepwater | -15361.7226 | null (no-root) | null | null | 712.5465 | 13.8328 |
 | 3 | Generic Royalty/Tax | -15453.8510 | null (no-root) | null | null | 875.1492 | 16.9894 |
-| 4 | USA - Gulf of Mexico | -15701.7744 | null (no-root) | null | null | 1312.7238 | 25.4842 |
-| 5 | Nigeria - PIA (2021) | -15768.8129 | null (no-root) | null | null | 1431.0440 | 27.7811 |
+| 4 | Nigeria - PIA (2021) | -15537.7310 | null (no-root) | null | null | 1021.2611 | 19.8259 |
+| 5 | USA - Gulf of Mexico | -15701.7744 | null (no-root) | null | null | 1312.7238 | 25.4842 |
 | 6 | Angola - Deepwater PSC | -15900.1132 | null (no-root) | null | null | 1662.7835 | 32.2800 |
 
 **cmp_angola_capex_x3**: EC2-1: Angola - Deepwater PSC on the default project with every capex line tripled. Profit is not positive at 40 (undefined, null), small and positive at 50 (exceeds, 2223 percent) and 60, and a share from 70 up (85.6015).
@@ -929,14 +994,14 @@ All six templates on the DEFAULT PROJECT, government share percent at each swept
 
 | regime | 40 USD/bbl | 50 USD/bbl | 60 USD/bbl | 70 USD/bbl | 80 USD/bbl | 90 USD/bbl | 100 USD/bbl | 110 USD/bbl | 120 USD/bbl | climb, last minus first (derived) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Nigeria - PIA (2021) | 69.6344 | 73.5963 | 74.2694 | 76.7282 | 78.2773 | 78.6226 | 79.2134 | 79.5507 | 79.7764 | 10.1420 |
+| Nigeria - PIA (2021) | 41.6869 | 39.8910 | 39.1960 | 39.3855 | 39.7675 | 40.2149 | 40.6880 | 41.1782 | 41.6802 | -0.0068 |
 | Ghana - Deepwater | 69.9215 | 72.0008 | 74.3024 | 75.4293 | 76.7284 | 76.4647 | 77.2412 | 77.0702 | 77.8175 | 7.8960 |
 | Brazil - Concession | 50.0329 | 55.4903 | 61.0188 | 64.2526 | 66.3747 | 67.8744 | 68.9904 | 69.8534 | 70.5405 | 20.5076 |
 | USA - Gulf of Mexico | 56.9830 | 49.4713 | 45.8941 | 43.8018 | 42.4286 | 41.4583 | 40.7362 | 40.1778 | 39.7332 | -17.2498 |
 | Angola - Deepwater PSC | 63.4520 | 59.5510 | 66.9424 | 72.4012 | 76.0199 | 78.4920 | 80.3565 | 81.6019 | 83.1392 | 19.6873 |
 | Generic Royalty/Tax | 51.2558 | 46.8185 | 44.7054 | 43.4694 | 42.6583 | 42.0851 | 41.6585 | 41.3287 | 41.0660 | -10.1897 |
 
-The nine published price-sweep cases run ONE regime alone on the default project. READ THE NAME CAREFULLY: it is the Designer's own default regime, id 1, "Nigerian PIA (PSC)", and it is NOT the "Nigeria - PIA (2021)" TEMPLATE. The two share a country and nothing else. The Designer regime recovers cost at 70 percent against the template's 80, splits profit oil 60 percent from R 1 and 50 percent from R 1.5 against the template's three tranches, and charges royalty 12.5 percent from 60 USD/bbl and 15 percent from 80 USD/bbl against the template's 7.5 percent from 0 and 10 percent from 50. On the default project the template returns NPV 154.8286 and the Designer regime 169.7176. Anything keyed to "the PIA template" on these sixteen sweep cases is mis-keyed.
+The nine published price-sweep cases run ONE regime alone on the default project. READ THE NAME CAREFULLY: it is the Designer's own default regime, id 1, "Nigerian PIA (PSC)", and it is NOT the "Nigeria - PIA (2021)" TEMPLATE. Its values are the Designer's own sample values and none of them is read from the Act. The Designer regime recovers cost at 70 percent against the template's 70 percent of the gross value of crude oil and NGL, splits profit oil 60 percent from R 1 and 50 percent from R 1.5 against the template's government minimum profit oil by cumulative crude oil at the start of the year (type pia_cumulative_production), to 50 million bbl -> government 5 percent, to 100 million bbl -> government 10 percent, to 350 million bbl -> government 15 percent, to 750 million bbl -> government 25 percent, to 1500 million bbl -> government 35 percent, above million bbl -> government 45 percent, and charges royalty 12.5 percent from 60 USD/bbl and 15 percent from 80 USD/bbl against the template's PIA 2021 royalty (type pia_2021): production royalty by terrain deep_offshore and daily rate, royalty by price on the regulations_2021 benchmarks with project year 1 in calendar 2027, gas and NGL at the gas rate with 0 percent used in-country. On the default project the template returns NPV 432.0925 and the Designer regime 169.7176. Anything keyed to "the PIA template" on these sixteen sweep cases is mis-keyed.
 
 The nine cases pin the whole result at each price, not only the share:
 
@@ -958,7 +1023,7 @@ The states, the climb over the whole sweep, the climb over the COMMON SHARE WIND
 
 | regime | states at 40, 50, 60, 70, 80, 90, 100, 110, 120 | climb, last minus first (derived) | climb over the window (derived) |
 | --- | --- | --- | --- |
-| Nigeria - PIA (2021) | share, share, share, share, share, share, share, share, share | 10.1420 | 10.1420 |
+| Nigeria - PIA (2021) | share, share, share, share, share, share, share, share, share | -0.0068 | -0.0068 |
 | Ghana - Deepwater | share, share, share, share, share, share, share, share, share | 7.8960 | 7.8960 |
 | Brazil - Concession | share, share, share, share, share, share, share, share, share | 20.5076 | 20.5076 |
 | USA - Gulf of Mexico | share, share, share, share, share, share, share, share, share | -17.2498 | -17.2498 |
@@ -971,7 +1036,7 @@ The states, the climb over the whole sweep, the climb over the COMMON SHARE WIND
 
 | regime | states at 40, 50, 60, 70, 80, 90, 100, 110, 120 | climb, last minus first (derived) | climb over the window (derived) |
 | --- | --- | --- | --- |
-| Nigeria - PIA (2021) | exceeds, share, share, share, share, share, share, share, share | -27.2520 | -6.8624 |
+| Nigeria - PIA (2021) | share, share, share, share, share, share, share, share, share | -30.3046 | -7.7909 |
 | Ghana - Deepwater | exceeds, share, share, share, share, share, share, share, share | -26.7801 | -2.5353 |
 | Brazil - Concession | share, share, share, share, share, share, share, share, share | -13.4045 | 11.2181 |
 | USA - Gulf of Mexico | exceeds, share, share, share, share, share, share, share, share | -70.0730 | -25.4837 |
@@ -1006,12 +1071,12 @@ This is finding F2 of the oracle. The summary table computes government take ove
 
 | regime | effectiveTaxRate in the summary table (capex added back) | the price sweep at the same price (no add-back) | difference, percentage points (derived) |
 | --- | --- | --- | --- |
+| Nigeria - PIA (2021) | 30.6156 | 39.3855 | 8.7699 |
 | Generic Royalty/Tax | 33.7901 | 43.4694 | 9.6793 |
 | USA - Gulf of Mexico | 34.0485 | 43.8018 | 9.7533 |
 | Brazil - Concession | 49.9455 | 64.2526 | 14.3071 |
 | Angola - Deepwater PSC | 56.2797 | 72.4012 | 16.1215 |
 | Ghana - Deepwater | 58.6335 | 75.4293 | 16.7958 |
-| Nigeria - PIA (2021) | 59.6432 | 76.7282 | 17.0850 |
 
 Neither number is wrong on its own terms. Take over profit and take over cash are both quantities a fiscal analyst uses, and they answer different questions. What is wrong is that one screen labels both of them "effective tax rate" and shows them within a centimetre of each other.
 
@@ -1027,7 +1092,7 @@ All six templates on the DEFAULT PROJECT, contractor NPV at each swept capex mul
 
 | regime | x0.8 | x0.9 | x1.0 | x1.1 | x1.2 | x1.3 | x1.4 | x1.5 | x1.5, called directly | loss over the SEVEN swept points, 0.8 to 1.4 (derived) | loss over EIGHT points, 0.8 to 1.5 (derived) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Nigeria - PIA (2021) | 176.9424 | 161.3220 | 154.8286 | 132.7266 | 121.6623 | 97.0074 | 79.1811 | 58.5739 | 58.5739 | 118.3685 | 118.3685 |
+| Nigeria - PIA (2021) | 499.4700 | 466.1066 | 432.0925 | 397.9011 | 362.8470 | 327.7928 | 291.8238 | 255.8175 | 255.8175 | 243.6525 | 243.6525 |
 | Ghana - Deepwater | 195.6257 | 185.0914 | 172.7531 | 160.6465 | 143.3384 | 129.9510 | 107.3627 | 85.7833 | 85.7833 | 109.8425 | 109.8425 |
 | Brazil - Concession | 304.7089 | 296.9901 | 287.2804 | 275.6317 | 261.4250 | 244.4347 | 225.4505 | 203.9903 | 203.9903 | 100.7185 | 100.7185 |
 | USA - Gulf of Mexico | 457.1975 | 419.6318 | 382.0660 | 343.9464 | 305.6635 | 267.3371 | 228.4023 | 189.4674 | 189.4674 | 267.7301 | 267.7301 |
@@ -1227,7 +1292,7 @@ This is finding F3. The capex verdict picks its winner with a strict less-than i
 
 | regime | npv | capex sweep first point | capex sweep last point | loss (derived) |
 | --- | --- | --- | --- | --- |
-| Nigeria - PIA (2021) | -15768.8129 | -12132.449284 | -24859.722012 | 12727.272727 |
+| Nigeria - PIA (2021) | -15537.7310 | -11901.367333 | -24628.640060 | 12727.272727 |
 | Ghana - Deepwater | -15361.7226 | -11725.358969 | -24452.631697 | 12727.272727 |
 | Brazil - Concession | -15354.6816 | -11718.317943 | -24445.590670 | 12727.272727 |
 | USA - Gulf of Mexico | -15701.7744 | -12065.410782 | -24792.683509 | 12727.272727 |
@@ -1236,7 +1301,7 @@ This is finding F3. The capex verdict picks its winner with a strict less-than i
 
 - `npv`: "Brazil - Concession" delivers the highest contractor NPV at -15,354.7 million USD, with no IRR because no rate from -99 to 1000 percent brings its NPV to zero.
 - `payback`: No regime pays back within the project life on these inputs.
-- `government`: "Angola - Deepwater PSC" collects the most, 1,662.8 million USD against 1,431.0 million USD for the next highest, "Nigeria - PIA (2021)".
+- `government`: "Angola - Deepwater PSC" collects the most, 1,662.8 million USD against 1,312.7 million USD for the next highest, "USA - Gulf of Mexico".
 - `capex`: No regime can be ranked on resilience to cost overrun: over the swept capex range "Nigeria - PIA (2021)", "Ghana - Deepwater", "Brazil - Concession", "USA - Gulf of Mexico", "Angola - Deepwater PSC" and "Generic Royalty/Tax" give up 12,727.3 million USD each of contractor NPV, within 0.1 million USD of each other.
 - `price`: No regime can be ranked across this sweep: fewer than 3 swept prices give every regime a government take within 0 to 100 percent. No regime is economic at any swept price from 40 to 120 USD per bbl.
 
@@ -1248,7 +1313,7 @@ The proof, per regime, at the two ends of the swept range:
 
 | regime | cost recovered at x0.8 | at x1.4 | profit oil at x0.8 | at x1.4 | tax at x0.8 | at x1.4 | capex loss (derived) |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Nigeria - PIA (2021) | 5040.8595 | 5040.8595 | 1260.2149 | 1260.2149 | 226.8387 | 226.8387 | 10909.090909 |
+| Nigeria - PIA (2021) | 4900.8356 | 4900.8356 | 1657.1356 | 1657.1356 | 462.4701 | 462.4701 | 10909.090909 |
 | Ghana - Deepwater | 5986.0207 | 5986.0207 | 665.1134 | 665.1134 | 162.9528 | 162.9528 | 10909.090909 |
 | Brazil - Concession | 6301.0744 | 6301.0744 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 10909.090909 |
 | USA - Gulf of Mexico | 5688.4699 | 5688.4699 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 10909.090909 |
@@ -1328,33 +1393,33 @@ ODIDI under the PIA template, every column the engine returns, all 25 rows. This
 
 | year | grossRevenue | royalty | costRecovered | unrecoveredCostPool | profitOil | tax | opex | capex | contractorNCF | governmentTake | cumulativeNCF | rFactor |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | 139.6563 | 10.4742 | 103.3457 | 341.6581 | 25.8364 | 4.6506 | 25.0037 | 420.0000 | -330.8068 | 25.4593 | -330.8068 | 0.313832 |
-| 2 | 120.0245 | 9.0018 | 88.8181 | 276.0105 | 22.2045 | 3.9968 | 23.1706 | 0.0000 | 74.9735 | 21.8805 | -255.8333 | 0.554667 |
-| 3 | 103.1532 | 7.7365 | 76.3334 | 221.2731 | 19.0833 | 3.4350 | 21.5960 | 0.0000 | 62.7525 | 18.8048 | -193.0809 | 0.740825 |
-| 4 | 88.6543 | 6.6491 | 65.6042 | 175.9123 | 16.4010 | 2.9522 | 20.2434 | 0.0000 | 52.2492 | 16.1617 | -140.8317 | 0.885247 |
-| 5 | 76.1939 | 5.7145 | 56.3835 | 138.6105 | 14.0959 | 2.5373 | 19.0816 | 0.0000 | 43.2221 | 13.8901 | -97.6096 | 0.997329 |
-| 6 | 93.9859 | 9.3986 | 67.6698 | 89.0244 | 16.9175 | 3.0451 | 18.0837 | 0.0000 | 56.6915 | 19.2107 | -40.9181 | 1.136133 |
-| 7 | 80.7830 | 8.0783 | 58.1637 | 48.0871 | 14.5409 | 2.6174 | 17.2264 | 0.0000 | 47.0445 | 16.5120 | 6.1264 | 1.244586 |
-| 8 | 69.4353 | 6.9435 | 49.9934 | 14.5837 | 12.4983 | 2.2497 | 16.4901 | 0.0000 | 38.7526 | 14.1926 | 44.8790 | 1.328787 |
-| 9 | 59.6821 | 5.9682 | 30.4412 | 0.0000 | 23.2726 | 4.1891 | 15.8575 | 0.0000 | 24.3582 | 19.4663 | 69.2372 | 1.393488 |
-| 10 | 51.2992 | 5.1299 | 15.3141 | 0.0000 | 30.8552 | 5.5539 | 15.3141 | 0.0000 | 12.9592 | 23.0260 | 82.1964 | 1.442436 |
-| 11 | 44.0942 | 4.4094 | 14.8473 | 0.0000 | 24.8375 | 4.4707 | 14.8473 | 0.0000 | 10.4317 | 18.8152 | 92.6282 | 1.478610 |
-| 12 | 49.3479 | 4.9348 | 14.4463 | 0.0000 | 29.9669 | 5.3940 | 14.4463 | 0.0000 | 12.5861 | 22.3156 | 105.2143 | 1.522248 |
-| 13 | 42.4194 | 4.2419 | 14.1018 | 0.0000 | 24.0757 | 4.3336 | 14.1018 | 0.0000 | 10.1118 | 18.2059 | 115.3261 | 1.554214 |
-| 14 | 36.4639 | 3.6464 | 13.8058 | 0.0000 | 19.0117 | 3.4221 | 13.8058 | 0.0000 | 7.9849 | 14.6732 | 123.3110 | 1.576637 |
-| 15 | 31.3448 | 3.1345 | 13.5515 | 0.0000 | 14.6588 | 2.6386 | 13.5515 | 0.0000 | 6.1567 | 11.6366 | 129.4677 | 1.591251 |
-| 16 | 26.9445 | 2.6945 | 13.3331 | 0.0000 | 10.9170 | 1.9651 | 13.3331 | 0.0000 | 4.5851 | 9.0263 | 134.0528 | 1.599480 |
-| 17 | 23.1621 | 2.3162 | 13.1454 | 0.0000 | 7.7005 | 0.9241 | 13.1454 | 0.0000 | 2.1561 | 7.8605 | 136.2089 | 1.602491 |
-| 18 | 19.9108 | 1.9911 | 12.9842 | 0.0000 | 4.9355 | 0.5923 | 12.9842 | 0.0000 | 1.3820 | 5.5447 | 137.5909 | 1.601251 |
-| 19 | 17.1161 | 1.7116 | 12.3236 | 0.5221 | 3.0809 | 0.5546 | 12.8457 | 0.0000 | 0.7718 | 3.4985 | 138.3627 | 1.596553 |
-| 20 | 14.7137 | 1.4714 | 10.5938 | 2.6550 | 2.6485 | 0.4767 | 12.7267 | 0.0000 | -1.0205 | 3.0075 | 137.3422 | 1.589058 |
-| 21 | 12.6486 | 1.2649 | 9.1070 | 6.1724 | 2.2767 | 0.4098 | 12.6244 | 0.0000 | -2.5612 | 2.5854 | 134.7810 | 1.579311 |
-| 22 | 10.8734 | 1.0873 | 7.8289 | 10.8801 | 1.9572 | 0.3523 | 12.5366 | 0.0000 | -3.8857 | 2.2225 | 130.8953 | 1.567765 |
-| 23 | 9.3474 | 0.9347 | 6.7302 | 16.6111 | 1.6825 | 0.3029 | 12.4611 | 0.0000 | -5.0243 | 1.9106 | 125.8711 | 1.554793 |
-| 24 | 8.0357 | 0.8036 | 5.7857 | 23.2216 | 1.4464 | 0.2604 | 12.3962 | 0.0000 | -6.0030 | 1.6425 | 119.8680 | 1.540709 |
-| 25 | 6.9081 | 0.6908 | 4.9738 | 30.5883 | 1.2435 | 0.2238 | 12.3405 | 0.0000 | -6.8444 | 1.4120 | 113.0236 | 1.525768 |
+| 1 | 139.6563 | 6.9828 | 97.7288 | 347.2750 | 34.9447 | 9.9592 | 25.0037 | 420.0000 | -324.0367 | 18.6893 | -324.0367 | 0.313832 |
+| 2 | 120.0245 | 6.0012 | 83.9892 | 286.4563 | 30.0340 | 8.5597 | 23.1706 | 0.0000 | 80.7913 | 16.0626 | -243.2454 | 0.554667 |
+| 3 | 103.1532 | 5.1577 | 72.1819 | 235.8704 | 25.8137 | 7.3569 | 21.5960 | 0.0000 | 67.7520 | 13.8053 | -175.4934 | 0.740825 |
+| 4 | 88.6543 | 4.4327 | 62.0349 | 194.0789 | 22.1867 | 6.3232 | 20.2434 | 0.0000 | 56.5456 | 11.8652 | -118.9478 | 0.885247 |
+| 5 | 76.1939 | 3.8097 | 53.3147 | 159.8459 | 19.0695 | 5.4348 | 19.0816 | 0.0000 | 46.9143 | 10.1980 | -72.0335 | 0.997329 |
+| 6 | 93.9859 | 4.9025 | 65.7659 | 112.1637 | 23.3175 | 6.6455 | 18.0837 | 0.0000 | 63.1883 | 12.7139 | -8.8452 | 1.136133 |
+| 7 | 80.7830 | 4.1354 | 56.5260 | 72.8641 | 20.1215 | 5.7346 | 17.2264 | 0.0000 | 52.6804 | 10.8761 | 43.8352 | 1.244586 |
+| 8 | 69.4353 | 3.4881 | 48.5846 | 40.7695 | 17.3626 | 4.9483 | 16.4901 | 0.0000 | 43.6407 | 9.3046 | 87.4758 | 1.328787 |
+| 9 | 59.6821 | 2.9841 | 41.7592 | 14.8678 | 14.9388 | 4.2576 | 15.8575 | 0.0000 | 35.8360 | 7.9886 | 123.3118 | 1.393488 |
+| 10 | 51.2992 | 2.5650 | 30.1819 | 0.0000 | 18.5523 | 5.2874 | 15.3141 | 0.0000 | 27.2052 | 8.7800 | 150.5170 | 1.442436 |
+| 11 | 44.0942 | 2.2047 | 14.8473 | 0.0000 | 27.0422 | 7.7070 | 14.8473 | 0.0000 | 17.9831 | 11.2638 | 168.5000 | 1.478610 |
+| 12 | 49.3479 | 2.9730 | 14.4463 | 0.0000 | 31.9286 | 9.0997 | 14.4463 | 0.0000 | 21.2325 | 13.6691 | 189.7326 | 1.522248 |
+| 13 | 42.4194 | 2.5075 | 14.1018 | 0.0000 | 25.8102 | 7.3559 | 14.1018 | 0.0000 | 17.1638 | 11.1539 | 206.8963 | 1.554214 |
+| 14 | 36.4639 | 2.1148 | 13.8058 | 0.0000 | 20.5434 | 5.8549 | 13.8058 | 0.0000 | 13.6613 | 8.9968 | 220.5577 | 1.576637 |
+| 15 | 31.3448 | 1.7836 | 13.5515 | 0.0000 | 16.0097 | 4.5628 | 13.5515 | 0.0000 | 10.6464 | 7.1468 | 231.2041 | 1.591251 |
+| 16 | 26.9445 | 1.5042 | 13.3331 | 0.0000 | 12.1072 | 3.4505 | 13.3331 | 0.0000 | 8.0513 | 5.5601 | 239.2554 | 1.599480 |
+| 17 | 23.1621 | 1.2687 | 13.1454 | 0.0000 | 8.7480 | 2.4932 | 13.1454 | 0.0000 | 5.8174 | 4.1992 | 245.0728 | 1.602491 |
+| 18 | 19.9108 | 1.0700 | 12.9842 | 0.0000 | 5.8567 | 1.6691 | 12.9842 | 0.0000 | 3.8947 | 3.0319 | 248.9675 | 1.601251 |
+| 19 | 17.1161 | 0.9024 | 11.9734 | 0.8723 | 4.2403 | 1.2085 | 12.8457 | 0.0000 | 1.9475 | 2.3229 | 250.9149 | 1.596553 |
+| 20 | 14.7137 | 0.7611 | 10.2924 | 3.3066 | 3.6601 | 1.0431 | 12.7267 | 0.0000 | -0.0003 | 1.9873 | 250.9147 | 1.589058 |
+| 21 | 12.6486 | 0.6419 | 8.8475 | 7.0835 | 3.1591 | 0.9004 | 12.6244 | 0.0000 | -1.6761 | 1.7003 | 249.2386 | 1.579311 |
+| 22 | 10.8734 | 0.5437 | 7.6055 | 12.0146 | 2.7243 | 0.7764 | 12.5366 | 0.0000 | -3.1195 | 1.4563 | 246.1191 | 1.567765 |
+| 23 | 9.3474 | 0.4674 | 6.5378 | 17.9379 | 2.3422 | 0.6675 | 12.4611 | 0.0000 | -4.3657 | 1.2520 | 241.7534 | 1.554793 |
+| 24 | 8.0357 | 0.4018 | 5.6201 | 24.7140 | 2.0138 | 0.5739 | 12.3962 | 0.0000 | -5.4370 | 1.0764 | 236.3165 | 1.540709 |
+| 25 | 6.9081 | 0.3454 | 4.8312 | 32.2234 | 1.7315 | 0.4935 | 12.3405 | 0.0000 | -6.3579 | 0.9254 | 229.9586 | 1.525768 |
 
-Totals: gross revenue 1236.1983, royalty 110.4278, cost recovered 779.6254, profit oil 346.1451, tax 61.5480, opex 390.2137, capex 420.0000, opex plus capex 810.2137, contractor net cash flow 113.0236, government take 312.9610 $MM. Payback is year 7 and the R factor passes 1.0 in year 6.
+Totals: gross revenue 1236.1983, royalty 63.9494, cost recovered 777.9904, profit oil 394.2585, tax 112.3637, opex 390.2137, capex 420.0000, opex plus capex 810.2137, contractor net cash flow 229.9586, government take 196.0260 $MM. Payback is year 7 and the R factor passes 1.0 in year 6.
 
 And the same field under the concession template, for the contrast the Associate tier is built on:
 
@@ -1392,7 +1457,7 @@ Every template on ODIDI, one line each:
 
 | regime | total revenue | total contractor NCF | total government take | total tax | total cost recovered | closing unrecovered pool | payback year | payout year | NPV at 12 percent | IRR percent |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Nigeria - PIA (2021) | 1236.1983 | 113.0236 | 312.9610 | 61.5480 | 779.6254 | 30.5883 | 7 | 6 | -43.7842 | null (multiple-roots; roots -14.9830, 7.4603) |
+| Nigeria - PIA (2021) | 1236.1983 | 229.9586 | 196.0260 | 112.3637 | 777.9904 | 32.2234 | 7 | 6 | 1.7389 | null (multiple-roots; roots -19.2469, 12.1606) |
 | Ghana - Deepwater | 1236.1983 | 117.1399 | 308.8447 | 74.7196 | 788.5887 | 21.6250 | 6 | 6 | -27.4074 | null (multiple-roots; roots -15.5925, 8.7906) |
 | Brazil - Concession | 1236.1983 | 192.9896 | 232.9950 | 109.3752 | 790.8868 | 19.3270 | 6 | 6 | -5.8662 | null (multiple-roots; roots -18.7724, 11.4055) |
 | USA - Gulf of Mexico | 1236.1983 | 148.3166 | 277.6679 | 45.8808 | 785.9313 | 24.2824 | 7 | 6 | -37.3123 | null (multiple-roots; roots -17.0511, 8.4381) |
@@ -1403,18 +1468,18 @@ And the full comparison on ODIDI, with the sweeps and the verdicts the engine de
 
 | rank | regime | npv | irr | paybackPeriod | rFactorPayoutYear | govTake | effectiveTaxRate |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Brazil - Concession | -5.8662 | null (multiple-roots; roots -18.7724, 11.4055) | 6 | 6 | 232.9950 | 27.5413 |
-| 2 | Generic Royalty/Tax | -13.3840 | null (multiple-roots; roots -18.3591, 10.6728) | 7 | 6 | 242.1194 | 28.6198 |
-| 3 | Ghana - Deepwater | -27.4074 | null (multiple-roots; roots -15.5925, 8.7906) | 6 | 6 | 308.8447 | 36.5071 |
-| 4 | USA - Gulf of Mexico | -37.3123 | null (multiple-roots; roots -17.0511, 8.4381) | 7 | 6 | 277.6679 | 32.8219 |
-| 5 | Nigeria - PIA (2021) | -43.7842 | null (multiple-roots; roots -14.9830, 7.4603) | 7 | 6 | 312.9610 | 36.9937 |
+| 1 | Nigeria - PIA (2021) | 1.7389 | null (multiple-roots; roots -19.2469, 12.1606) | 7 | 6 | 196.0260 | 23.1713 |
+| 2 | Brazil - Concession | -5.8662 | null (multiple-roots; roots -18.7724, 11.4055) | 6 | 6 | 232.9950 | 27.5413 |
+| 3 | Generic Royalty/Tax | -13.3840 | null (multiple-roots; roots -18.3591, 10.6728) | 7 | 6 | 242.1194 | 28.6198 |
+| 4 | Ghana - Deepwater | -27.4074 | null (multiple-roots; roots -15.5925, 8.7906) | 6 | 6 | 308.8447 | 36.5071 |
+| 5 | USA - Gulf of Mexico | -37.3123 | null (multiple-roots; roots -17.0511, 8.4381) | 7 | 6 | 277.6679 | 32.8219 |
 | 6 | Angola - Deepwater PSC | -58.1813 | null (multiple-roots; roots -14.5072, 6.4905) | 8 | 6 | 316.7898 | 37.4463 |
 
 Price sweep, government share percent at 40, 50, 60, 70, 80, 90, 100, 110, 120 USD per bbl:
 
 | regime | 40 | 50 | 60 | 70 | 80 | 90 | 100 | 110 | 120 | climb (derived) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Nigeria - PIA (2021) | 79.2711 | 75.4528 | 75.8405 | 75.1077 | 77.0633 | 78.1716 | 78.0059 | 79.2372 | 79.4678 | 0.1968 |
+| Nigeria - PIA (2021) | 50.4050 | 44.0459 | 42.4480 | 42.2597 | 42.4603 | 42.8467 | 43.3370 | 43.8931 | 44.3963 | -6.0087 |
 | Ghana - Deepwater | 74.9711 | 72.2734 | 73.2267 | 74.8944 | 75.3276 | 75.9015 | 76.2850 | 77.1423 | 76.9682 | 1.9971 |
 | Brazil - Concession | 61.5443 | 51.1116 | 55.2594 | 60.1317 | 63.1943 | 65.3184 | 66.8943 | 68.0875 | 69.0195 | 7.4752 |
 | USA - Gulf of Mexico | 78.5512 | 58.1144 | 50.8086 | 47.0817 | 44.8331 | 43.3338 | 42.2659 | 41.4713 | 40.8517 | -37.6994 |
@@ -1425,20 +1490,20 @@ Capex sweep, contractor NPV at multipliers 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.
 
 | regime | x0.8 | x0.9 | x1.0 | x1.1 | x1.2 | x1.3 | x1.4 | x1.5 | loss over the swept points (derived) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Nigeria - PIA (2021) | 3.3937 | -18.9565 | -43.7842 | -73.0703 | -104.3452 | -137.8299 | -175.3299 | -212.8299 | 216.2236 |
+| Nigeria - PIA (2021) | 65.9763 | 34.3397 | 1.7389 | -31.8615 | -66.5145 | -103.8740 | -141.3740 | -178.8740 | 244.8503 |
 | Ghana - Deepwater | 16.4714 | -4.5411 | -27.4074 | -52.1090 | -78.5659 | -105.6497 | -134.4307 | -164.7208 | 181.1922 |
 | Brazil - Concession | 53.9349 | 24.3991 | -5.8662 | -36.6793 | -67.9867 | -99.8987 | -132.4638 | -165.7162 | 219.6510 |
 | USA - Gulf of Mexico | 29.2303 | -3.8020 | -37.3123 | -71.1856 | -105.5077 | -140.3181 | -175.6457 | -211.4664 | 240.6967 |
 | Angola - Deepwater PSC | 10.9118 | -22.8707 | -58.1813 | -92.7360 | -129.1957 | -166.6957 | -204.1957 | -241.6957 | 252.6075 |
 | Generic Royalty/Tax | 48.5980 | 17.7848 | -13.3840 | -45.1844 | -77.4757 | -110.2956 | -143.7606 | -177.8770 | 226.4750 |
 
-- `npv` / Best for the contractor: "Brazil - Concession" delivers the highest contractor NPV at -5.9 million USD, with no single IRR because its NPV is zero at -18.8% and 11.4%.
+- `npv` / Best for the contractor: "Nigeria - PIA (2021)" delivers the highest contractor NPV at 1.7 million USD, with no single IRR because its NPV is zero at -19.2% and 12.2%.
 - `payback` / Fastest capital recovery: "Brazil - Concession" and "Ghana - Deepwater" pay back in year 6, against year 8 for "Angola - Deepwater PSC".
-- `government` / Best for the government: "Angola - Deepwater PSC" collects the most, 316.8 million USD against 313.0 million USD for the next highest, "Nigeria - PIA (2021)".
+- `government` / Best for the government: "Angola - Deepwater PSC" collects the most, 316.8 million USD against 308.8 million USD for the next highest, "Ghana - Deepwater".
 - `capex` / Resilience to cost overrun: Over the swept capex range, "Ghana - Deepwater" gives up the least contractor NPV (181.2 million USD) and "Angola - Deepwater PSC" the most (252.6 million USD).
 - `price` / Response to higher prices: "Brazil - Concession" is the most progressive: its government take (undiscounted) rises 7.5 percentage points across the swept price range, so it captures upside fastest.
 
-The PIA royalty tier changes inside ODIDI's life, which is the one thing none of the published template cases do, so the royalty column in Section 12 and the R factor column here move for two different reasons in the same field.
+Under the PIA template ODIDI's royalty by price starts inside the life of the field, in the year the deck lifts the oil price above that year's low benchmark, which none of the published template cases shows; Section 12 prints it year by year.
 
 # SECTION 26: The government share curve carries three states (owned by Expert m02 and Expert m05)
 
@@ -1456,7 +1521,7 @@ The third case, on the published comparison built for it:
 
 | regime | total government take | total contractor NCF | the two added (derived) | value and state the sweep returns, at every one of the nine prices |
 | --- | --- | --- | --- | --- |
-| Nigeria - PIA (2021) | 1431.0440 | -16279.9099 | -14848.8659 | null undefined |
+| Nigeria - PIA (2021) | 1021.2611 | -15870.1271 | -14848.8659 | null undefined |
 | Ghana - Deepwater | 712.5465 | -15561.4124 | -14848.8659 | null undefined |
 | Brazil - Concession | 700.1194 | -15548.9853 | -14848.8659 | null undefined |
 | USA - Gulf of Mexico | 1312.7238 | -16161.5898 | -14848.8659 | null undefined |
@@ -1491,14 +1556,14 @@ Payback in this engine is an INTEGER year, the first year cumulative contractor 
 
 | position in the summary (NPV descending) | regime | npv | paybackPeriod |
 | --- | --- | --- | --- |
-| 1 | Generic Royalty/Tax | 397.0445 | 3 |
-| 2 | USA - Gulf of Mexico | 382.0660 | 3 |
-| 3 | Brazil - Concession | 287.2804 | 3 |
-| 4 | Angola - Deepwater PSC | 211.3787 | 4 |
-| 5 | Ghana - Deepwater | 172.7531 | 3 |
-| 6 | Nigeria - PIA (2021) | 154.8286 | 4 |
+| 1 | Nigeria - PIA (2021) | 432.0925 | 3 |
+| 2 | Generic Royalty/Tax | 397.0445 | 3 |
+| 3 | USA - Gulf of Mexico | 382.0660 | 3 |
+| 4 | Brazil - Concession | 287.2804 | 3 |
+| 5 | Angola - Deepwater PSC | 211.3787 | 4 |
+| 6 | Ghana - Deepwater | 172.7531 | 3 |
 
-The verdict the engine returns: "Generic Royalty/Tax", "USA - Gulf of Mexico", "Brazil - Concession" and "Ghana - Deepwater" pay back in year 3, against year 4 for "Angola - Deepwater PSC".
+The verdict the engine returns: "Nigeria - PIA (2021)", "Generic Royalty/Tax", "USA - Gulf of Mexico", "Brazil - Concession" and "Ghana - Deepwater" pay back in year 3, against year 4 for "Angola - Deepwater PSC".
 
 Read it against the table. Four regimes pay back in year 3 and two in year 4, so "fastest capital recovery" has a four-way tie at the top and a two-way tie at the bottom. The regime the sentence names is the first of the four in summary order, and the summary is sorted by contractor NPV, so on any project where payback ties the payback verdict names WHICHEVER REGIME HAS THE HIGHEST NPV. It is the NPV ranking wearing a different label.
 
@@ -1506,7 +1571,7 @@ That is the exact claim `deriveInsights` was written to eliminate. The function 
 
 The capex and price verdicts have the same reduce and the same tie behaviour, and the golden records a case where the engine and the oracle name different winners on quantities that differ in the fifteenth figure. The payback verdict differs in one way that makes it worse rather than better: those two rank continuous quantities, where an exact tie is rare and a near-tie is the hazard, while THIS one ranks a small integer, where an exact tie is the normal case.
 
-The same six templates on the TEST PROJECT pay back in years 2, 2, 2, 2, 2, 2 reading down the summary, and the verdict reads: "Generic Royalty/Tax", "USA - Gulf of Mexico", "Brazil - Concession", "Angola - Deepwater PSC", "Ghana - Deepwater" and "Nigeria - PIA (2021)" all pay back in year 2.
+The same six templates on the TEST PROJECT pay back in years 2, 2, 2, 2, 2, 2 reading down the summary, and the verdict reads: "Nigeria - PIA (2021)", "Generic Royalty/Tax", "USA - Gulf of Mexico", "Brazil - Concession", "Angola - Deepwater PSC" and "Ghana - Deepwater" all pay back in year 2.
 
 On the Designer's own two default regimes the two payback years differ, Concessionary (Royalty/Tax) year 3 and Nigerian PIA (PSC) year 4, so there the verdict is a real ranking: "Concessionary (Royalty/Tax)" pays back in year 3, against year 4 for "Nigerian PIA (PSC)".
 
@@ -1514,11 +1579,11 @@ THE SAME THING HAPPENS ON THE TEACHING FIELD, which matters because ODIDI is whe
 
 | position in the summary (NPV descending) | regime | npv | paybackPeriod |
 | --- | --- | --- | --- |
-| 1 | Brazil - Concession | -5.8662 | 6 |
-| 2 | Generic Royalty/Tax | -13.3840 | 7 |
-| 3 | Ghana - Deepwater | -27.4074 | 6 |
-| 4 | USA - Gulf of Mexico | -37.3123 | 7 |
-| 5 | Nigeria - PIA (2021) | -43.7842 | 7 |
+| 1 | Nigeria - PIA (2021) | 1.7389 | 7 |
+| 2 | Brazil - Concession | -5.8662 | 6 |
+| 3 | Generic Royalty/Tax | -13.3840 | 7 |
+| 4 | Ghana - Deepwater | -27.4074 | 6 |
+| 5 | USA - Gulf of Mexico | -37.3123 | 7 |
 | 6 | Angola - Deepwater PSC | -58.1813 | 8 |
 
 The verdict: "Brazil - Concession" and "Ghana - Deepwater" pay back in year 6, against year 8 for "Angola - Deepwater PSC".
@@ -1548,23 +1613,23 @@ THE RATIO OF THE TWO IS A PROPERTY OF THE PROJECT. Revenue less opex (NR) and ca
 
 | regime | government cash flow | royalty | royalty share of government cash flow, percent (derived) | government take, undiscounted | state | government take, discounted at 10 percent | state | government share of net revenue, undiscounted | take minus share, percentage points (derived) | take over share (derived) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Nigeria - PIA (2021) | 687.4682 | 154.4828 | 22.4713 | 39.3855 | share | 42.8981 | share | 30.6156 | 8.7699 | 1.286453 |
 | Generic Royalty/Tax | 758.7514 | 335.8660 | 44.2656 | 43.4694 | share | 47.5297 | share | 33.7901 | 9.6793 | 1.286453 |
 | USA - Gulf of Mexico | 764.5528 | 503.7989 | 65.8946 | 43.8018 | share | 49.5092 | share | 34.0485 | 9.7533 | 1.286453 |
 | Brazil - Concession | 1121.5184 | 268.6928 | 23.9579 | 64.2526 | share | 62.0353 | share | 49.9455 | 14.3071 | 1.286453 |
 | Angola - Deepwater PSC | 1263.7523 | 0.0000 | 0.0000 | 72.4012 | share | 72.0659 | share | 56.2797 | 16.1215 | 1.286453 |
 | Ghana - Deepwater | 1316.6067 | 134.3464 | 10.2040 | 75.4293 | share | 77.1703 | share | 58.6335 | 16.7958 | 1.286453 |
-| Nigeria - PIA (2021) | 1339.2784 | 268.6928 | 20.0625 | 76.7282 | share | 79.5391 | share | 59.6432 | 17.0850 | 1.286453 |
 
 **cmp_all_templates_test_project**: total capex 1000.0000, revenue less opex 5151.1341 on every regime, pre-take net cash flow 4151.1341, NR / (NR - C) 1.240898 (derived), discount rate 10 percent.
 
 | regime | government cash flow | royalty | royalty share of government cash flow, percent (derived) | government take, undiscounted | state | government take, discounted at 10 percent | state | government share of net revenue, undiscounted | take minus share, percentage points (derived) | take over share (derived) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Nigeria - PIA (2021) | 1782.9635 | 443.2226 | 24.8588 | 42.9512 | share | 42.6379 | share | 34.6130 | 8.3382 | 1.240898 |
 | Generic Royalty/Tax | 1881.7626 | 875.1492 | 46.5069 | 45.3313 | share | 45.4645 | share | 36.5310 | 8.8003 | 1.240898 |
 | USA - Gulf of Mexico | 1929.2089 | 1312.7238 | 68.0447 | 46.4743 | share | 46.7731 | share | 37.4521 | 9.0221 | 1.240898 |
 | Brazil - Concession | 2827.6743 | 700.1194 | 24.7595 | 68.1181 | share | 64.0642 | share | 54.8942 | 13.2239 | 1.240898 |
 | Angola - Deepwater PSC | 3373.2753 | 0.0000 | 0.0000 | 81.2615 | share | 74.3666 | share | 65.4861 | 15.7755 | 1.240898 |
 | Ghana - Deepwater | 3252.0426 | 350.0597 | 10.7643 | 78.3411 | share | 77.0201 | share | 63.1326 | 15.2085 | 1.240898 |
-| Nigeria - PIA (2021) | 3372.6496 | 700.1194 | 20.7587 | 81.2465 | share | 79.3410 | share | 65.4739 | 15.7725 | 1.240898 |
 
 WHERE PROFIT DISAPPEARS, ONLY THE SECOND METRIC IS READABLE. On the published comparison with capex of 20000 the pre-take net cash flow is negative, so government take is undefined (null) for every regime, undiscounted and discounted. Government share of net revenue still has a positive denominator. The regimes whose government cash flow is all royalty collect it regardless of profit:
 
@@ -1573,8 +1638,8 @@ WHERE PROFIT DISAPPEARS, ONLY THE SECOND METRIC IS READABLE. On the published co
 | Brazil - Concession | 700.1194 | 100.0000 | null | undefined | null | undefined | 13.5916 |
 | Ghana - Deepwater | 712.5465 | 49.1280 | null | undefined | null | undefined | 13.8328 |
 | Generic Royalty/Tax | 875.1492 | 100.0000 | null | undefined | null | undefined | 16.9894 |
+| Nigeria - PIA (2021) | 1021.2611 | 43.3995 | null | undefined | null | undefined | 19.8259 |
 | USA - Gulf of Mexico | 1312.7238 | 100.0000 | null | undefined | null | undefined | 25.4842 |
-| Nigeria - PIA (2021) | 1431.0440 | 48.9237 | null | undefined | null | undefined | 27.7811 |
 | Angola - Deepwater PSC | 1662.7835 | 0.0000 | null | undefined | null | undefined | 32.2800 |
 
 **cmp_angola_capex_x3**: Angola - Deepwater PSC returns government take 85.6015 (share) undiscounted and null (undefined) discounted at 10 percent, and government share of net revenue 28.4191. Discounting weighs the year 1 capex more heavily than the later cash, so the discounted pre-take net cash flow is not positive and the discounted take has no value.
@@ -1583,11 +1648,11 @@ WHERE PROFIT DISAPPEARS, ONLY THE SECOND METRIC IS READABLE. On the published co
 
 | regime | government cash flow | government take, undiscounted | state | government take, discounted at 12 percent | state | government share of net revenue, undiscounted | take over share (derived) |
 | --- | --- | --- | --- | --- | --- | --- | --- |
+| Nigeria - PIA (2021) | 196.0260 | 46.0172 | share | 98.0795 | share | 23.1713 | 1.985951 |
 | Brazil - Concession | 232.9950 | 54.6956 | share | 106.4788 | exceeds | 27.5413 | 1.985951 |
 | Generic Royalty/Tax | 242.1194 | 56.8376 | share | 114.7817 | exceeds | 28.6198 | 1.985951 |
 | Ghana - Deepwater | 308.8447 | 72.5014 | share | 130.2696 | exceeds | 36.5071 | 1.985951 |
 | USA - Gulf of Mexico | 277.6679 | 65.1826 | share | 141.2088 | exceeds | 32.8219 | 1.985951 |
-| Nigeria - PIA (2021) | 312.9610 | 73.4677 | share | 148.3566 | exceeds | 36.9937 | 1.985951 |
 | Angola - Deepwater PSC | 316.7898 | 74.3665 | share | 164.2571 | exceeds | 37.4463 | 1.985951 |
 
 The reading rule. Quote either metric with its name and its basis. On one project the two differ by a fixed factor, so the gap in points grows with the share itself and never with the regime design as such. A royalty-heavy regime matters when profit is thin: its government cash flow does not wait for profit, so government take runs above 100 percent or has no value while government share of net revenue stays readable.

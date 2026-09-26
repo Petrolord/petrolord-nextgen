@@ -78,6 +78,25 @@
       "fields.json": "2f8382fda1a57511004952bdf4e0055dc35594c4a8e623abc8f92720f7bca837"
     }
   },
+  "cashflow": {
+    "course": "EC1",
+    "live": "/root/cat-wip-pia/recut/cashflow",
+    "kit": "inputs",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "build_digest.sh",
+      "ec1_dump.mjs",
+      "ec1_fields.mjs",
+      "discriminate_expert.mjs",
+      "prove_prior_courses.sh"
+    ],
+    "pins": {
+      "digest.txt": "3f88d819840f8e1d447d362d03328c827e9b61935bd13912ee131e93f7a90aa8",
+      "fields.json": "7423f4e1c8a20bed294d2228e79368bc1e230f980992de4ac5586166be8050d5"
+    },
+    "recutNote": "EC7 PIA recut 2026-09-26 (engines 3.12.0 at 3778451, default path). First commit of the EC1 kit. fields.json carries the PROPOSED Expert fields (pending the lead's decision; the live IKPOTO Expert config is refused by the corrected engine). discriminate_expert.mjs proves each Expert field independent of the stated new-PML HCT reading. prove_prior_courses.sh proves qra unchanged."
+  },
   "fiscal": {
     "course": "EC2",
     "live": "/root/ec-wip-fiscal",
@@ -85,17 +104,16 @@
     "inputs": [
       "digest.txt",
       "fields.json",
+      "build_digest.sh",
       "ec2_dump.mjs",
-      "ec2_fields.mjs"
+      "ec2_fields.mjs",
+      "ts_loader.mjs"
     ],
-    "fieldsNoGeneratorSpells": [
-      "cmp_psc_capex_loss_last_tenth_musd"
-    ],
-    "fieldsNote": "No generator anywhere in /root/ec-wip-fiscal spells this graded field name, not only none that is mirrored. Recorded so a SECOND unspelled name is a failure. Reported 2026-09-16, not repaired here.",
     "pins": {
-      "digest.txt": "b09efc6910b1a05cd32c06416e064529cb1266ea57d2502efcad44eb747edec6",
+      "digest.txt": "08b569ca5ca8c54c56ffe045dd1ade2511d1a8fcca0445ef307d2dd431d51474",
       "fields.json": "88e8ec45c5a3314f3596cda2f6cc97ecda959be9f4457da41c91145db54d91bb"
-    }
+    },
+    "recutNote": "EC7 PIA recut 2026-09-26 (engines 3.12.0 at 3778451, default path): the digest is re-cut; fields.json is byte-identical (the URUAN capstone runs its own two regimes and reads no template). ec2_fields.mjs now spells cmp_psc_capex_loss_last_tenth_musd, so the fieldsNoGeneratorSpells exception is retired. fiscalRegime.js imports cashflow.ts, so the dump registers ts_loader.mjs."
   },
   "uncertainty": {
     "course": "EC3",

@@ -6,10 +6,14 @@
 // capstone are two files with opposite audiences and they never share a
 // number (dc-wavekit README, "The teaching digest is NOT the capstone").
 //
-// Usage:  node /root/ec-wip-fiscal/ec2_fields.mjs           prints the aux block
-//         node /root/ec-wip-fiscal/ec2_fields.mjs --json    writes fields.json
+// Usage:  node ec2_fields.mjs           prints the aux block
+//         node ec2_fields.mjs --json    writes fields.json (EC2_WAVE_DIR, EC2_ENGINES override paths)
 
 import fs from 'fs';
+import { register } from 'node:module';
+// fiscalRegime.js imports engines/economics/cashflow.ts (engines 3.12.0): plain
+// node 18 needs the TypeScript hook before the engine is imported.
+register('./ts_loader.mjs', import.meta.url);
 
 const ROOT = process.env.EC2_ENGINES || '/opt/petrolord-studio/workspaces/dev1/projects/petrolord-nextgen/packages/engines';
 const E = await import(`${ROOT}/engines/economics/fiscalRegime.js`);
@@ -117,13 +121,18 @@ export const FIELDS = [
   ['advanced', 'cmp_top_npv_musd', cmp.summary[0].npv, MONEY],
   ['advanced', 'cmp_psc_effective_tax_rate_pct', sPsc.effectiveTaxRate, PCT],
   ['advanced', 'cmp_psc_price_sweep_at_60_pct', priceSweep(PSC.id)[at60], PCT],
-  ['advanced', 'cmp_psc_capex_loss_seven_point_musd', pscCapex[0] - pscCapex[pscCapex.length - 1], MONEY],
+  // Field 4 as the live capstone grades it since the #133 swap (engines #190
+  // made the old seven-point loss equal field 5, so it was retired): the loss
+  // over the last tenth of the sweep, the swept point at 1.4 minus the swept
+  // point at 1.5. Spelled here from 2026-09-26 (EC7 recut); before that no
+  // generator spelled it (waves.json fieldsNoGeneratorSpells).
+  ['advanced', 'cmp_psc_capex_loss_last_tenth_musd', pscCapex[pscCapex.length - 2] - pscCapex[pscCapex.length - 1], MONEY],
   ['advanced', 'cmp_psc_capex_loss_eight_point_musd', pscCapex[0] - pscAt15, MONEY],
   ['advanced', 'cmp_con_price_climb_pct_points', (() => { const v = priceSweep(CONCESSION.id); return v[v.length - 1] - v[0]; })(), PCT],
 ];
 
 if (process.argv.includes('--json')) {
-  fs.writeFileSync('/root/ec-wip-fiscal/fields.json', JSON.stringify(FIELDS, null, 1) + '\n');
+  fs.writeFileSync(`${process.env.EC2_WAVE_DIR || new URL('.', import.meta.url).pathname.replace(/\/$/, '')}/fields.json`, JSON.stringify(FIELDS, null, 1) + '\n');
   console.error(`wrote fields.json, ${FIELDS.length} fields`);
 } else {
   const f = (x, n) => Number(x).toFixed(n);
