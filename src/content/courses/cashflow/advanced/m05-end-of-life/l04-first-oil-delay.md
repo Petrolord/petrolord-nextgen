@@ -27,7 +27,7 @@ The careful mistake is to model the delay by hand and shift everything. A reader
 
 ## A row that is not there
 
-The three-year row list runs 2029, 2030, 2032 and onward: no 2031 row, because nothing happened in it and the engine did not emit an empty year. Now read the KPIs. NPV fell from 40880824.32 at two years to 17894126.42 and the IRR fell from 14.6753 to 11.6363 percent, both as they should, while the payback shortened from 4.96 to 4.90 years, as it should not. A longer wait for the same money cannot shorten a payback; payback is counted on rows rather than on calendar years, so the missing row made the delay look a year shorter to it. Until engines 3.10.0 the IRR read 15.1070 percent here and rose with the delay for the same reason. The NPV is discounted on calendar years and can be trusted; the payback cannot.
+The three-year row list runs 2029, 2030, 2032 and onward: no 2031 row, because nothing happened in it and the engine did not emit an empty year. Now read the KPIs. NPV fell from 40880824.32 at two years to 17894126.42 and the IRR fell from 14.6753 to 11.6363 percent, both as they should, while the payback shortened from 4.96 to 4.90 years, as it should not. A longer wait for the same money cannot shorten a payback; payback is counted on rows rather than on calendar years, so the missing row made the delay look a year shorter to it. The IRR reads the gap year the same way the NPV does and falls with the delay. The NPV is discounted on calendar years and can be trusted; the payback cannot.
 
 ## What the engine refuses
 

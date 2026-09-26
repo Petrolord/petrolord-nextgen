@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "Add AKATA's net_cash_flow column through 2030 and you get -89377672.80 USD. The engine's cumulative_cash_flow column reads -90302313.79 for the same year. Which is the running sum?",
+  "options": [
+   "Only the first; the engine's column has subtracted the 45000000.00 second capex tranche a second time, once as capex and once as depreciation.",
+   "Both are. The engine's column follows the real basis, so it sums real_net_cash_flow: -121123680.00 plus 30821366.21.",
+   "Only the second; the first is wrong because it sums money of the day, which is not a cash column.",
+   "Only the second; the engine's column is the running sum of the discounted cash flow at 10 percent."
+  ],
+  "answer": 1,
+  "explanation": "A reader who does not know which basis the run is on cannot say which number is the cumulative; on the hand-derived case, with inflation 0, the two columns coincide."
+ },
+ {
+  "prompt": "AKATA spends 255000000.00 USD of capex, but the cumulative column never falls below -121123680.00. Why is the exposure smaller than the spend?",
+  "options": [
+   "Because the trough is stated after depreciation, and 21000000.00 of the 2029 spend has already been deducted from it.",
+   "Because the engine states the trough at the working interest and the capex at field level, so the two are on different bases.",
+   "Because the second tranche is deferred by the escalator and lands in the cumulative a year late.",
+   "The 2029 sales covered part of the 2029 spend, and 2030 nets 31746007.20 even after its 45000000.00."
+  ],
+  "answer": 3,
+  "explanation": "The trough is the most the contractor is ever out of pocket, and it sits in 2029, before the second tranche, because production is already covering the build."
+ },
+ {
+  "prompt": "Which pair of numbers reproduces AKATA's payback_years of 3.461632?",
+  "options": [
+   "The nominal cumulative of -24909427.73 at the end of 2031 against the 2032 nominal net cash flow of 53959532.44.",
+   "The displayed cumulative of -29534809.71 at the end of 2031 against the 2032 real net cash flow of 49380616.06.",
+   "The displayed cumulative of -29534809.71 against the 19845806.34 it becomes at the end of 2032.",
+   "Three whole rows plus the 2032 share of the peak 2031 flow of 64468245.07."
+  ],
+  "answer": 0,
+  "explanation": "The engine's payback walks the nominal running sum while its cumulative_cash_flow column shows the real one; same year, different decimal, so quote payback_years and name its column."
+ },
+ {
+  "prompt": "AKATA's cumulative crosses zero in 2032, the fourth row, and the engine prints 3.46 years. From where are the three whole years counted?",
+  "options": [
+   "From first oil, which is why a field whose production starts late reads a longer payback than one that starts at once.",
+   "From the last capex year, 2030, because payback measures the time to recover the final tranche of investment.",
+   "From the first row of the ledger, 2029.",
+   "From the trough, since exposure is what payback is recovering and the trough is where exposure peaks."
+  ],
+  "answer": 2,
+  "explanation": "Measured from the 2030 tranche the same crossing reads a year shorter and the field looks faster than the engine says."
+ },
+ {
+  "prompt": "The hand-derived case reads -12500000.00 USD after 2030 and 25000000.00 after 2031, and the engine prints payback_years 1.333333. Where does the third come from?",
+  "options": [
+   "From the hole over the 50000000.00 of capex, which is the fraction of the investment still unrecovered at the end of 2030.",
+   "12500000.00 of the 37500000.00 earned in 2031 is needed to fill the hole.",
+   "From 2031's share of the two-year total of 25000000.00, which is the fraction of the ledger that comes back after the crossing.",
+   "From the royalty rate of 20 percent applied to the crossing year, since royalty is what delays a payback."
+  ],
+  "answer": 1,
+  "explanation": "One whole year, then a third of the second: the interpolation is inside the crossing year, on that year's flow."
+ },
+ {
+  "prompt": "zero_rates_capex_only reads -60000000.00 then -70000000.00 USD and never turns positive. What does the engine print for payback, and what would a spreadsheet that returns 0 be saying?",
+  "options": [
+   "It prints \"Beyond project life\" with payback_years null; a 0 would claim the field paid back on its first day, which is the single_year_positive label.",
+   "It prints \"Year 0\" with payback_years 0.000000, because the ledger has no crossing to interpolate.",
+   "It prints the last row, 2031, as the payback year and leaves the fraction blank.",
+   "It refuses the run, because a cumulative that never crosses is an upload the engine cannot read."
+  ],
+  "answer": 0,
+  "explanation": "Neither label is a number: \"Year 0\" means the first row was already positive, and null means the money never came back."
+ },
+ {
+  "prompt": "AKATA earns 30401798.05 USD in 2035, three years after its payback. What does that year do to payback_years?",
+  "options": [
+   "It shortens it, which is why 3.461632 is less than the four whole rows the crossing sits in.",
+   "It enters through the discounted payback of 3.961607, which weights the tail years and is the reading that knows about 2035.",
+   "Nothing. Payback sees nothing after the first crossing.",
+   "It would be reported as a second crossing if the tail took the cumulative negative again."
+  ],
+  "answer": 2,
+  "explanation": "A field that stops the day after payback gets the same 3.46 years, and a cumulative that dips negative again late is not flagged."
+ },
+ {
+  "prompt": "multiyear_jv_real turns from -40339805.83 to 1742002.07 USD between 2031 and 2032, and the engine prints payback_years 2.889357. What does the size of that first positive cumulative say?",
+  "options": [
+   "Nothing, because the interpolation inside 2032 already accounts for how narrowly the crossing was made.",
+   "That the field is exposed for 40339805.83 at its worst, which is the trough the payback recovers.",
+   "That 2032's flow was only 1742002.07, so the field is close to its economic limit.",
+   "The crossing clears zero by very little, so a modest price cut would move payback a whole year."
+  ],
+  "answer": 3,
+  "explanation": "payback_years reports a decimal and says nothing of the margin: a crossing made by 1742002.07 and one made by tens of millions print the same kind of number."
+ },
+ {
+  "prompt": "AKATA's total opex is 183899092.34 USD, more than seven times the typed 24000000. Why?",
+  "options": [
+   "The total is restated in 2029 money by the inflation rate of 3 percent, so it drifts from the typed amount.",
+   "The 3 percent opex escalator carried the column from 24000000.00 in 2029 to 28657255.12 in 2035, and the total is the sum of the escalated column.",
+   "The total includes the 45000000.00 second capex tranche, which the engine books in the opex lane.",
+   "The total is scaled by the working interest, which AKATA carries at less than 100 percent."
+  ],
+  "answer": 1,
+  "explanation": "The capex total is exactly 255000000.00 because its escalator is 0; each money total is the sum of its column in money of the day."
+ },
+ {
+  "prompt": "AKATA's totals are 9680000.00 bbl of oil and 7744000.00 Mscf of gas, and the engine reports 10970666.67 boe. On what basis was the gas converted?",
+  "options": [
+   "Price, at the ratio of 82 USD/bbl to 3.2 USD/Mscf, so that a barrel of equivalent means a barrel of equivalent revenue.",
+   "Volume, at one barrel per Mscf, which is why the boe is larger than the oil alone.",
+   "Revenue share, so that the gas counts in proportion to what it earned in each year.",
+   "Energy, at a fixed 6 Mscf per barrel."
+  ],
+  "answer": 3,
+  "explanation": "Six Mscf sell for a small fraction of what a barrel does and the boe count does not care; that is its limit and its use, and it flatters the gas."
+ },
+ {
+  "prompt": "AKATA's unit technical cost is 40.006602 USD/boe. What happens to it when the working interest drops to 40 percent?",
+  "options": [
+   "It falls to 40 percent of itself, because capex and opex are money lines and every money line scales with the interest the partner holds.",
+   "It rises, because the volumes are scaled to the interest while the capex and opex are not.",
+   "Nothing: it stays at 40.006602, because the interest scales the cost and the barrels alike and cancels out of the ratio.",
+   "It becomes null, because the engine declines to divide a partner's cost by the field's barrels."
+  ],
+  "answer": 2,
+  "explanation": "At 40 percent the row reports the partner's share of the 255000000.00 of capex, the 183899092.34 of opex and the 10970666.67 boe alike; neither unit cost contains royalty or tax."
+ },
+ {
+  "prompt": "zero_rates_capex_only prints null for both unit costs, and single_year_positive prints 10.000000 USD/boe for both. Why the two results?",
+  "options": [
+   "The first has no volumes, so the engine will not divide by nothing; the second has no capex, so unit technical cost collapses to opex per boe.",
+   "Both are the engine's zero, printed as null when the field lost money and as the opex rate when it did not.",
+   "The first has no revenue, so the ratio is undefined; the second has revenue of 100000000.00, so the cost can be spread over what that revenue was earned on.",
+   "The first is a JV loss case with the kill switch on; the second is a case with no tax."
+  ],
+  "answer": 0,
+  "explanation": "Null is the engine declining to invent a ratio with nothing underneath it, and it does the same for take on the same case."
+ },
+ {
+  "prompt": "A press release quotes AKATA's government share as royalty plus tax over the 857602518.80 USD of revenue. How does that compare with the engine's take of 66.1723 percent?",
+  "options": [
+   "It is the same, because royalty and tax are the only two government lines and total revenue of 857602518.80 is the only base a share of it can be quoted on.",
+   "It is smaller, because take divides by revenue less capex 255000000.00 less opex 183899092.34, the value the field created.",
+   "It is larger, because the pre-take value adds back the depreciation of 174000000.00 that the tax base removed.",
+   "It cannot be compared, because take is discounted and the press figure is not."
+  ],
+  "answer": 1,
+  "explanation": "Take is over value rather than sales; the rest of that value is the contractor's total net cash flow."
+ },
+ {
+  "prompt": "elt_royalty_tail prints take 131.2500 percent and jv_loss_carryforward prints 125.0000. What makes a take pass 100?",
+  "options": [
+   "A royalty rate above 30 percent, which on the hand-derived case already lifts the take to 88.4615.",
+   "The discounted take being added to the undiscounted one when a field runs on the real basis.",
+   "Rounding on a ratio whose denominator is tiny.",
+   "The contractor's total net cash flow is negative."
+  ],
+  "answer": 3,
+  "explanation": "Whenever the government collects more than the pre-take value, the contractor's share is a loss and the take exceeds 100; with no revenue at all the engine prints null instead."
+ },
+ {
+  "prompt": "Setting AKATA's depreciation to one year lowers total tax from 148425219.46 to 116025219.46 USD, and the take moves. Does the take know when the tax was paid?",
+  "options": [
+   "No. It moves only because less was collected in total; the discounted take of 76.1610 percent is the version with a clock, and it belongs to the Professional tier.",
+   "Yes, because take is computed year by year and then averaged, so a schedule that defers tax lowers it.",
+   "Yes, because the pre-take value is discounted at 10 percent before the government's share is divided by it.",
+   "No, but only because the pre-take value is undiscounted; the government's share is summed year by year at the applied real rate of 6.796117 percent, so a deferred tax counts for less."
+  ],
+  "answer": 0,
+  "explanation": "Take has no clock: it ignores when the government collects and when the contractor spends, which is the whole limit of the undiscounted reading."
+ }
+]

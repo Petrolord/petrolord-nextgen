@@ -10,7 +10,7 @@ Payback reports the first year in which the cumulative cash flow turns non-negat
 
 ## The allowance flag that reports one cap of two
 
-computeProductionAllowance limits the per-barrel allowance twice: by the lease rate, and by pia_production_allowance_pct_of_price 20 of the year's price. Only the second limit is ever flagged. A converted lease lifting 1000000 bbl earns 2500000.00 at 80 USD/bbl and 2000000.00 at 10 USD/bbl, where the price limit cut it, and prod_alw_cap_applied reads false on both rows. The flag turns true only where the volume cap acted, as it does for a new shallow water lease at a prior cumulative of 99500000, which earns 4000000.00 on 500000.00 eligible bbl. Distrust a false flag read as a statement that no cap acted.
+computeProductionAllowance limits the per-barrel allowance twice: by the lease rate, and by pia_production_allowance_pct_of_price 20 of the year's price. Only the second limit is ever flagged. A converted lease lifting 1000000 bbl earns 2500000.00 at 80 USD/bbl and 2000000.00 at 10 USD/bbl, where the price limit cut it, and prod_alw_cap_applied reads false on both rows. The flag turns true only where the volume cap acted, as it does for a new shallow water lease at a prior cumulative of 99500000 lifting 1000000 bbl at 80 USD/bbl: 500000.00 bbl fall below the cap and 500000.00 after it, all are eligible, and the allowance is 6000000.00, the after-cap barrels still earning the lower rate. Distrust a false flag read as a statement that no cap acted.
 
 ## The allowance beside its own eligible barrels
 
@@ -20,9 +20,9 @@ AKATA under the PIA at a 50 percent working interest reports a production allowa
 
 The careful mistake is to reconcile. A reader who divides 2750000.00 by 2200000.00 reports a rate the engine never applied; one who sees payback 3.46 years on a field worth -40359955.35 reruns for a stale NPV; one who reads false beside 2000000.00 concludes nothing was capped. Each number is what its method produces, and the method is not printed beside it.
 
-## What used to stand here
+## Three numbers that read as printed
 
-Three other numbers held this place until the repair of 2026-09-15. The profile point at the applied rate was evaluated at its rounded label and missed its own headline by -21759.68 on AKATA. The IRR of a vector with several roots was whichever root Newton reached from 10 percent, unflagged. And a sinking fund at a 50 percent working interest collected 15000000.00 against a reported 30000000.00. All three are now plain readings: the point is evaluated at the exact rate, a multi-root vector returns null with a status, and the fund collects what was entered.
+Three neighbours look as if they belong on this list and do not. The NPV profile's point at the applied rate is evaluated at the exact rate and equals the headline. The IRR of a vector with several roots is null with a status, so no root is printed as the rate. And a fund at a 50 percent interest collects exactly what was entered.
 
 ## Exercise
 

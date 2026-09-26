@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "The Designer's default project declares oil at 10000 bbl/d declining 10 percent a year, and year 1 comes back as 3.650000 million bbl. Why is there no decline in that first figure?",
+  "options": [
+   "A mid year convention takes half a year of decline in year 1, and at a 10 percent decline the half year rounds away before the figure is printed.",
+   "Year 1 is a stub the engine leaves flat, and the exponential starts from the first full year of production after it.",
+   "The decline is applied after the year is booked, so year 1 is the initial rate times 365 days and the first reduction lands in year 2.",
+   "The declared decline is nominal rather than effective, so nothing is lost in year 1 and the later years lose more."
+  ],
+  "answer": 2,
+  "explanation": "The check is arithmetic you can do in your head: year 1 in million bbl is the daily rate times 365 divided by one million, exactly. ODIDI at 8000 bbl/d gives 2.920000 the same way."
+ },
+ {
+  "prompt": "generateProductionProfile is not exported. How are the annual volumes recovered from the engine?",
+  "options": [
+   "By reading them out of the returned object, which records each stream beside the revenue that stream produced in the year.",
+   "By dividing the printed gross revenue by the applied oil price, which the engine reports in a column of its own.",
+   "By rebuilding them from the declared rate and decline, since no exported quantity depends on volume alone.",
+   "By a probe: royalty zero, a 100 percent limit, a flat 100 percent split, every tax at zero, two streams zeroed and the survivor priced at 1.0."
+  ],
+  "answer": 3,
+  "explanation": "grossRevenue then returns that stream's annual volume divided by one million, which is why the oil and NGL columns read million bbl and the gas column million Mscf."
+ },
+ {
+  "prompt": "Year 25 of the default project still produces 0.291148 million bbl of oil and still pays 11.5851 million USD of opex. What ends the field?",
+  "options": [
+   "The fixed horizon of 25 rows and nothing else, because the sandbox carries no economic limit.",
+   "The year opex overtakes gross revenue, which on this project is year 25 at 11.5851 against 24.3216 million USD.",
+   "The last dated point on the price deck, since no revenue can be computed for a year the deck does not reach.",
+   "Exhaustion of the profile, an exponential decline having taken the rate to zero by the end of the horizon."
+  ],
+  "answer": 0,
+  "explanation": "Year 25 pays 11.5851 million USD of opex against 24.3216 million USD of revenue, so it happens to pay. Nothing would have stopped it if it did not."
+ },
+ {
+  "prompt": "Between year 1 and year 25 the default gas column falls from 0.018250 to 0.002467 while the NGL column falls from 0.547500 to 0.025466. What does that show?",
+  "options": [
+   "Gas is held up late in life by the deck, whose gas points keep stepping while the liquid points have run out.",
+   "Each stream declines at its own rate, and the 8 percent gas stream keeps a larger fraction of itself than the 12 percent NGL stream.",
+   "The engine floors a stream once it falls far enough below its initial rate, which is what flattens the gas tail.",
+   "NGL is produced as a yield off the gas stream, so it has to fall faster than the gas it comes from."
+  ],
+  "answer": 1,
+  "explanation": "Three independent exponentials. ODIDI shows the same thing harder, gas at 9 percent going from 0.014600 to 0.001518 while NGL at 15 percent goes from 0.328500 to 0.006646."
+ },
+ {
+  "prompt": "The published test project declares gas at 0 Mscf/d and NGL at 0 bbl/d, each with a decline of 0 percent. What does the engine do with the two streams?",
+  "options": [
+   "It drops both and returns a single stream project, which is how the test project reaches total revenue of 7001.1938 million USD on one declining oil stream.",
+   "It generates a column of zeros for all 25 years, contributing 0.0000 to revenue and no boe to opex, which is not the same as skipping them.",
+   "It reads a decline of 0 percent as a flat stream held at its initial rate, so both columns are constant instead of declining.",
+   "It refuses the project, since a stream must carry a positive initial rate before any decline can be applied to it."
+  ],
+  "answer": 1,
+  "explanation": "A zero stream is present and priced. The test project is a useful control precisely because those two columns are zeros rather than absences."
+ },
+ {
+  "prompt": "What relationship does the sandbox model between the oil, gas and NGL streams?",
+  "options": [
+   "A gas oil ratio, which ties the gas rate to the oil rate declared for the project and declines along with it.",
+   "A condensate yield, so the NGL volume is computed off the gas volume rather than from an initial rate of its own.",
+   "A shrinkage and fuel deduction, taken off the gas stream before it reaches the revenue sum or the boe sum.",
+   "None. Three independent exponentials, summed once in revenue and again in boe."
+  ],
+  "answer": 3,
+  "explanation": "There is no gas oil ratio, no yield, no shrinkage and no flare deduction. Each stream carries only an initial rate and a decline."
+ },
+ {
+  "prompt": "The default deck prices oil at 70 in year 1 and 75 in year 5. What price is applied in years 2, 3 and 4?",
+  "options": [
+   "70.000000 USD per bbl in each of them, because getPriceForYear holds the last point reached and never interpolates.",
+   "A straight line drawn between the two dated points, so that the three years climb steadily from 70.000000 towards 75.000000 USD per bbl.",
+   "75.000000 USD per bbl, since the next dated point is known and the engine prices forward to it.",
+   "The average of the two dated points, held flat until the year 5 point takes over from it."
+  ],
+  "answer": 0,
+  "explanation": "The whole move from 70.000000 to 75.000000 arrives in a single row. A deck is a staircase, and nothing between two points is interpolated."
+ },
+ {
+  "prompt": "The default deck's last dated point is year 10 at 80 USD per bbl. What is applied in year 25?",
+  "options": [
+   "A price grown from 80.000000 at the project discount rate of 10 percent a year, which is the escalation this model applies.",
+   "Nothing, the deck having run out and the revenue column ending with its last dated point.",
+   "80.000000 USD per bbl, unchanged, because the engine does not escalate past the last point on a deck.",
+   "The year 10 price adjusted for the fall in volume, so that the revenue column declines smoothly to the end."
+  ],
+  "answer": 2,
+  "explanation": "Sixteen consecutive years sit at 80.000000 USD per bbl. A reader expecting annual escalation carries a growing shortfall from year 10 to year 25 and cannot find it, because no output column reports a price."
+ },
+ {
+  "prompt": "ODIDI steps from 45 to 65 USD per bbl at year 6 and its revenue rises from 76.1939 to 93.9859 million USD. The default project steps from 70 to 75 at year 5 and its revenue falls from 197.5024 to 191.1513. Why the opposite signs?",
+  "options": [
+   "The default step lands in a year where the deck also lowers its gas and NGL points, which cancels the gain on oil.",
+   "The size of the step against the size of the decline. A 5 USD step does not outrun a 10 percent oil decline, and a 20 USD step does outrun a 14 percent one.",
+   "ODIDI's step is the second point on its deck and the default step is the third, and only a second point is applied in full.",
+   "Volume rose in ODIDI at year 6, a price step lifting the rate the profile is generated from."
+  ],
+  "answer": 1,
+  "explanation": "Every ODIDI stream fell in year 6. The whole of the rise from 76.1939 to 93.9859 million USD is the deck."
+ },
+ {
+  "prompt": "Which column of the returned ledger reports the price the engine used for a year?",
+  "options": [
+   "The deck column, which the engine copies out of the project inputs into every row of the ledger it returns.",
+   "The implied rate column, which carries the price the royalty tier for that year was selected on.",
+   "The rFactor column, whose numerator is cumulative revenue and therefore the prices behind each year of it.",
+   "None of them. The applied price is recovered by dividing revenue by volume in a single stream probe."
+  ],
+  "answer": 3,
+  "explanation": "Nothing in the output says which deck was used, which is why a deck read wrongly produces a shortfall with no column to trace it to."
+ },
+ {
+  "prompt": "Default project opex reads 31.0027 million USD in year 1 and 11.5851 in year 25, against a fixed figure of 10 million USD a year. What is moving?",
+  "options": [
+   "The variable half, 5 USD per boe on a declining boe total, which is why the curve heads towards the fixed number.",
+   "The fixed half, which the engine escalates through the early years and relaxes as the field matures.",
+   "The regime, since opex enters the cost pool and the pool is drawn down over the life of the field.",
+   "The deck, because the variable rate is charged against revenue rather than against the barrels produced, and revenue steps at year 5."
+  ],
+  "answer": 0,
+  "explanation": "Almost the whole of the year 25 bill of 11.5851 million USD is the fixed 10 million USD a year. The curve would only reach it if production reached zero, which the horizon ends first."
+ },
+ {
+  "prompt": "ODIDI runs a variable rate of 4 USD per boe against the default project's 5, yet its year 25 opex of 12.3405 million USD is above the default project's 11.5851. How?",
+  "options": [
+   "ODIDI produces more boe in year 25, its gas decline of 9 percent being slower than the default project's 8 percent.",
+   "ODIDI's discount rate of 12 percent is applied to the cost columns, which lifts every year in the tail.",
+   "By year 25 almost the whole bill is fixed, and ODIDI's fixed figure is 12 million USD a year against 10.",
+   "The variable rate is charged on revenue, and ODIDI's deck prices oil at 85 USD per bbl in year 25 against 80."
+  ],
+  "answer": 2,
+  "explanation": "ODIDI starts well below the default project, at 25.0037 million USD against 31.0027, and ends above it. The fixed half decides the tail."
+ },
+ {
+  "prompt": "The default deck steps oil from 70 to 75 USD per bbl at year 5, and opex moves from 25.1816 to 23.6264 million USD. Why did the cost fall in a year the price rose?",
+  "options": [
+   "The variable rate is charged on revenue after royalty, which fell that year even though the oil price rose.",
+   "Opex tracks boe, and boe does not know what a barrel sold for.",
+   "The fixed half is prorated against the deck, so a higher price lowers the fixed charge carried in the year.",
+   "The step is applied at the end of the year, so year 5 costs are still computed at 70.000000 USD per bbl."
+  ],
+  "answer": 1,
+  "explanation": "Opex is fixed plus the variable rate times the boe produced, divided by one million. Price enters revenue and nothing else."
+ },
+ {
+  "prompt": "A development is to be built over three years. How is the schedule entered?",
+  "options": [
+   "It is not. Capex is one sum charged to year 1, 500.0000 million USD on the default project and 420.0000 on ODIDI, and the multiplier scales the total rather than the timing.",
+   "By splitting the three buckets, since drilling, facilities and subsea are each charged in the year the engine assigns them.",
+   "By setting the capex multiplier below one and running the remainder as a second project, which spreads the same total.",
+   "By lowering the multiplier to 0.7, which moves the spend later and lifts NPV to 1460.6941 million USD on the flat regime."
+  ],
+  "answer": 0,
+  "explanation": "The sandbox refuses a capex schedule and has no field to hold one. Faking it with the multiplier changes the total and quietly answers a different question."
+ },
+ {
+  "prompt": "Six regimes are compared on one project. What do their opex and capex columns look like?",
+  "options": [
+   "They part at the cost recovery limit, which caps how much of each year's cost the ledger admits in the first place.",
+   "They part once the pool clears, since unrecovered cost is written back out of the opex column in the year that happens.",
+   "They part in year 1 only, where the capex charge is netted against the royalty the regime takes off the top line.",
+   "Identical, row for row, because nothing a government does in this model changes what the field costs."
+  ],
+  "answer": 3,
+  "explanation": "The cost columns do not depend on the regime. Over the life the default project spends 441.4436 million USD of opex and ODIDI spends 390.2137 million USD, whichever template is loaded."
+ }
+]

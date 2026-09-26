@@ -6,37 +6,35 @@ A fiscal ledger is worked from the outside in: regime, framework, terrain, then 
 
 ## Fix the regime and the framework before any number
 
-Read the fiscal regime and the base year, and write the framework down. Under the PIA a base year of 2025 on auto gives pia_only and 2026 gives nta_2025; AKATA's 2029 gives nta_2025, so its last line is a development levy, 5390489.91 in 2029, and its TET is 0.00. Forced to pia_only the same rows pay TET of 3369056.19 and NPV moves from 43223505.88 to 49802016.74. Get the framework wrong and every row's last line is wrong.
+Write the framework down for every year. On auto a year before 2026 is pia_only and a year from 2026 is nta_2025, so AKATA's rows from 2029 are all NTA years: the last line is a development levy, 5653419.91 in 2029, and TET is 0.00. Forced to pia_only the same rows pay TET of 4240064.93 and NPV moves from 59766796.57 to 63590226.39.
 
-## Fix the terrain, the lease and the reading
+## Fix the terrain, the lease and the readings
 
-The terrain string sets the production royalty rate and the HCT rate together. AKATA in shallow water pays production royalty 22944240.00 in 2029 and HCT 25422778.65; onshore, 27454240.00 and 24069778.65; deep offshore, 9301600.00 and, under the conservative reading, HCT 0.00, or 29481778.65 under the aggressive one. Lease status sets the allowance: converted gives 5500000.00 on 2200000.00 bbl, new gives 17600000.00, and a new lease with prior production of 96000000 keeps the 2029 allowance but loses it later, 32000000.00 over the life against 77440000.00. None of these is a rate to guess from a rule of thumb. Each is a string, and the string must be read from the case.
+AKATA in shallow water pays production royalty 10070350.00 in 2029 and HCT 27208719.48, and onshore pays the same, because at 6027 bopd both terrains sit in the lowest tranches. Lease status sets the allowance: converted gives 5500000.00 on 2200000.00 bbl, new gives 17600000.00, and a new lease with 96000000 bbl produced before keeps earning after the cap at the lower rate, 54720000.00 over the life against 77440000.00. A new lease also needs its hydrocarbon tax rate stated, and deep offshore in an NTA year needs its reading stated.
 
 ## Walk the bases in order
 
-Take AKATA's 2029 row. Gross revenue 186032000.00. Royalty 26549752.36, production plus price. Then HCT on liquids: assessable profit 130971072.31, with costs of 66000000.00 claimed against a CPR cap of 120920800.00 and 0.00 deferred, less the allowance of 5500000.00, chargeable 84742595.49, HCT 25422778.65. Then CIT: assessable 134762247.64, chargeable 92762247.64 after the two-thirds restriction, CIT 27828674.29. Then the levy on the assessable profit, 5390489.91. Total tax 58641942.84, net cash flow -133879695.21. Check the CPR columns every year: the cap binds in 2032, deferring 1398740.53, and in 2033, deferring 14561618.62, and a cap that binds in the last year is the difference between a claim and a forfeiture.
+AKATA's 2029 row: royalty 13676502.27, production plus price. HCT on liquids: costs of 64001892.15 claimed against a CPR cap of 117260000.00, nothing deferred, assessable profit 136924208.42, less the allowance of 5500000.00, chargeable 90695731.60, HCT 27208719.48. CIT: assessable 141335497.73, less the capital allowance of 42000000.00, chargeable 99335497.73, CIT 29800649.32. The levy on the CIT assessable profit, 5653419.91. Net cash flow -131327290.98. Then follow the CPR carry year by year: 2032 defers 1356394.56, 2033 carries 14120774.92, the old pool plus the year's own excess, and 2034 claims it all within its cap.
 
-## Decide the end of the ledger
+## The six capstone fields, read one way each
 
-Read whether the economic limit is on; with it off, a losing tail stays and hands the IRR a terminal negative, which since engines 3.10.0 comes back as null with a status. Read the abandonment mode and whether the number entered is the share, which it must be under either mode. Then read the sign of the final net cash flow before believing any IRR.
+The price royalty is read on the Regulations (2021) base at the year's escalated price, rate from the field-level benchmarks, charged at your share. The production allowance in the crossing year splits the field's barrels at the cap: those below earn the new-lease rate, those after the lower after-cap rate, each limited to 20 percent of the price. NDDC is 3 percent of opex plus capex. Total CIT sums a base that deducts full opex and its own allowance and never the HCT. The levy is 4 percent of the CIT assessable profit. The CPR carry is the pool left after a year's claim. The stated hydrocarbon tax rate sits in the HCT line alone, so none of the six moves with it.
 
 ## Before you submit
 
 | Check | What passing looks like |
 | --- | --- |
-| Framework | One string on every row, matching the base year and override |
-| Last line | TET or the levy, never both, at 2.5 or 4 percent of the assessable profit |
-| Royalties | Sum to the KPI, 122393644.64 on AKATA |
-| Loss columns | Offsets used on the row after the loss, per base |
+| Framework | Each row's string matches its own year and the override |
+| Last line | TET at 3 percent from 2023 or the levy at 4 percent, never both |
+| Royalties | Sum to the KPI, 60324870.87 on AKATA |
+| CPR columns | Claimed never above the cap; a carry claimed with the next year's operating costs |
 | Final flow | Sign read; negative often means the IRR comes back null with a status |
-| Headline | Basis, convention and framework written beside it |
-
-Then the units: USD, bbl, Mscf, boe at 6 Mscf per barrel, percent as a word, calendar years.
+| Readings | Every stated reading written beside the answer |
 
 ## The mistake
 
-The careful mistake is to check the rates and skip the bases. Every rate on AKATA under the PIA is published, and a ledger can carry them all correctly and still report 61725382.46 where 141623594.88 is right, because one string was read the other way. The strings are where the marks are lost.
+The careful mistake is to check the rates and skip the bases. Every rate on AKATA under the PIA is published, and a ledger can carry them all and still miss because the working interest was applied twice or the framework was read once for the whole ledger. The bases are where the marks are lost.
 
 ## Exercise
 
-Work AKATA's 2030 row in the order given, one line each: framework, terrain and lease, royalty, HCT base and tax, CIT base and tax, levy, net cash flow. Then name the single string that, misread, changes every line from HCT downward without changing a single rate the reader typed.
+Work AKATA's 2030 row in the order given, one line each: framework, terrain and lease, royalty, HCT base and tax, CIT base and tax, levy, net cash flow. Then name the one stated reading your answer would change, and the lines it would leave alone.

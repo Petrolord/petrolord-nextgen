@@ -8,11 +8,11 @@ The sweep is nine fixed prices, and every one of them re-runs the entire compari
 
 The price sweep runs the whole comparison again at oil prices of 40, 50, 60, 70, 80, 90, 100, 110 and 120 USD per bbl. It reaches each of those prices by a multiplier: the price the sweep wants divided by the first deck point's oil price. That multiplier then scales the oil price in every year of the deck, so the deck's step structure survives the sweep intact and only its level moves.
 
-Every point is a full re-run: the whole comparison, every regime, all 25 rows of every ledger, computed again from the scaled deck. The default project's first deck point is 70 USD per bbl, so the sweep's 70 point is the deck itself at a multiplier of one, and it returns the base case exactly, an NPV of 169.7176 million USD and government cash flow of 1269.4940. Three of the nine points sit below the deck and five above it, so the range is not centred on the base case.
+Every point is a full re-run: the whole comparison, every regime, all 25 rows of every ledger, computed again from the scaled deck. The default project's first deck point is 70 USD per bbl, so the sweep's 70 point is the deck itself at a multiplier of one, and for the Designer's sample PSC regime it returns the base case exactly, an NPV of 169.7176 million USD and government cash flow of 1269.4940. Three of the nine points sit below the deck and five above it, so the range is not centred on the base case.
 
 ## What each point returns
 
-Because the comparison is re-run, everything moves, not only the take. The nine published runs of the Designer's production sharing regime on the default project:
+Because the comparison is re-run, everything moves along with the take. The nine published runs of the Designer's sample PSC regime on the default project follow. Their ids carry "pia" because the engine names it "Nigerian PIA (PSC)"; its values are illustrative samples, none read from the Act:
 
 | case | npv | irr | totalContractorNCF | totalGovTake | paybackYear | finalUnrecoveredPool |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -26,7 +26,7 @@ The 40 USD per bbl point is the interesting one. NPV is -51.1673 million USD, th
 
 ## The mistake
 
-The sweep looks like a set of price scenarios and is not. It is one deck, scaled. Nothing in it changes the step years, the decline, the capex or the opex, so a reader who quotes the 40 USD per bbl point as a low price case is quoting a case in which every other assumption is still the base case's. The second mistake is interpolation. There is no point between 70 and 80, and the curve drawn between them is the chart's line, not the engine's answer.
+The sweep looks like a set of price scenarios and is not. It is one deck, scaled. Nothing in it changes the step years, the decline, the capex or the opex, so a reader who quotes the 40 USD per bbl point as a low price case is quoting a case in which every other assumption is still the base case's. The second mistake is interpolation. There is no point between 70 and 80, and the curve drawn between them is the chart's line and carries no engine answer.
 
 ## What it refuses
 

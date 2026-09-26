@@ -1,0 +1,15 @@
+{
+ "slug": "cashflow",
+ "prefix": "ec1",
+ "name": "Cash Flow & NPV",
+ "goldens": [
+  "economics/goldens/cashflow_cases.json"
+ ],
+ "constants": {
+  "365": "days per year",
+  "366": "days in a leap year",
+  "6": "Mscf of gas per barrel of oil equivalent",
+  "100": "percent"
+ },
+ "repo": "/root/wt-ec7-recut"
+}

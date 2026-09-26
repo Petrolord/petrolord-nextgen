@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "A comparison of several regimes on one field is put in front of you. What is written down before any number is read?",
+  "options": [
+   "The headline reading of each regime, which is its present value at the field's own rate beside its rate of return and its payback year.",
+   "The four instruments of each regime: its royalty, its cost recovery limit, its profit split and its tax stack.",
+   "The field's own production profile and price deck, which every regime in the comparison shares.",
+   "The order the summary has sorted the regimes into, because that order is the engine's own verdict on the comparison."
+  ],
+  "answer": 1,
+  "explanation": "Two lines of instruments predict most of what the ledgers will do. On the teaching field a flat 0 percent royalty, a 50 percent limit and a tiered split already say what kind of ledger Angola - Deepwater PSC will return."
+ },
+ {
+  "prompt": "Angola - Deepwater PSC carries a flat 0 percent royalty, a 50 percent recovery limit, an R factor split of 70, 50 and 30 percent and a stack of 25 and 50 percent. Which of those leaves 192.1146 million USD in the pool at the close of the teaching field?",
+  "options": [
+   "The flat 0 percent royalty, since a regime that takes nothing off gross revenue has no mechanism for returning capital either.",
+   "The resource rent tax at 50 percent, whose relief is drawn against the cost recovery pool and holds that balance open.",
+   "The R factor split, which hands the contractor a smaller share of profit oil as the ratio climbs and so slows the return of capital.",
+   "The 50 percent recovery limit."
+  ],
+  "answer": 3,
+  "explanation": "Angola recovers 618.0991 million USD on that field against 790.8868 for Brazil - Concession, whose limit is 100 percent. The limit decides how fast the pool can drain and nothing else in the list does."
+ },
+ {
+  "prompt": "Under one template the implied royalty rate on the teaching field reads 0.187500 in year 1 and 0.187500 in year 25. Under the tiered teaching regime it reads 0.075000 in years 1 to 5 and 0.100000 from year 6. Which reading identifies the instrument?",
+  "options": [
+   "The one that changes inside the life, because a rate that moves mid field is a sliding scale and the year it moves is a price event.",
+   "The one that holds, because only a flat royalty can charge the same rate in year 1 and in year 25 of a declining field.",
+   "Neither, because an implied rate is royalty over gross revenue and that ratio is fixed by the price deck rather than by the tier list.",
+   "The one that changes, because a royalty rate that moves inside a life is following the production decline through the variable opex."
+  ],
+  "answer": 0,
+  "explanation": "A sliding royalty sitting below every threshold reads as constant as a flat one, so a rate that holds proves nothing. Year 1 pays 26.1856 million USD on 139.6563 and year 25 pays 1.2953 on 6.9081 under the flat 18.75 percent."
+ },
+ {
+  "prompt": "Ghana - Deepwater recovers 788.5887 million USD on the teaching field and closes with 21.6250 still in the pool. Which of those two figures is read first?",
+  "options": [
+   "The recovery total, since it is the number the ledger reports and the pool is derived from it by subtraction.",
+   "Neither on its own. The two have to be added, because the sum of them is the cost the contractor actually incurred over the life.",
+   "The closing pool, because a recovery total says nothing until you know how much was never paid back.",
+   "The recovery total, because the closing pool is settled against government cash flow at the horizon."
+  ],
+  "answer": 2,
+  "explanation": "Angola - Deepwater PSC recovers 618.0991 and closes at 192.1146 on the same field. A large closing pool is money the contractor spent that the ledger never paid back."
+ },
+ {
+  "prompt": "The Professional tier ends on one sentence about instruments. What does it say?",
+  "options": [
+   "An instrument is only as good as the ledger it is read on, so a regime has to be compared on more than one field before it is ranked.",
+   "An instrument's rate never tells you what it collects. Its base does.",
+   "An instrument's rate ranks its burden whenever two regimes are run on the same project with the same production and the same price deck.",
+   "An instrument that cannot be expressed in the four fields should be approximated by raising the rate of one that can."
+  ],
+  "answer": 1,
+  "explanation": "A corporate income tax of 21 percent collected 260.7539 million USD on the default project where one of 35 percent collected 230.9340, because the two rates were charged on different bases."
+ },
+ {
+  "prompt": "Five of the six templates return a negative present value on the teaching field at 12 percent, and Nigeria - PIA (2021) returns 1.7389 million USD. What does that spread say?",
+  "options": [
+   "That the field sits close to its 12 percent hurdle, so the regime decides which side of zero it lands on.",
+   "That five of the regimes are loss making, since a negative present value on a 25 year ledger is the model's report of a loss.",
+   "That the PIA template earns a single rate of return above 12 percent, which is what a positive present value at 12 percent proves.",
+   "That it is an artefact of year end discounting, and the mid year convention would turn all six of the present values negative."
+  ],
+  "answer": 0,
+  "explanation": "The PIA template's present value is zero at -19.2469 and at 12.1606 percent, just above the rate the field is discounted at, and Brazil - Concession, the least negative of the other five, sits at negative 5.8662. No regime on that field carries a single rate of return."
+ },
+ {
+  "prompt": "The summary of a comparison is sorted by contractor net present value descending. What can be read off a regime's position in it?",
+  "options": [
+   "That the last row is the heaviest regime for the contractor, since government cash flow runs in the reverse order of contractor present value.",
+   "That the rows are in order of rate of return as well, because the two measures rank the same cash flows on the same ledger.",
+   "That the rows are in order of payback, since a regime that returns capital faster carries more of its cash in the early discounted years.",
+   "That the first row is the best regime for the contractor, and nothing else."
+  ],
+  "answer": 3,
+  "explanation": "On the teaching field the sort puts Nigeria - PIA (2021) first and Angola - Deepwater PSC last, and neither position says anything about payback, rate of return or the government's share."
+ },
+ {
+  "prompt": "A reading is handed over as the figure 192.9896 million USD, and another as negative 5.8662. What is missing from each?",
+  "options": [
+   "The units, since millions of USD and percent cannot sit beside each other.",
+   "The sign convention, because a contractor cash flow and a present value are reported with opposite signs by this engine.",
+   "The regime on the first and the discount rate on the second, and without them neither figure is an answer.",
+   "The year, since both are lifetime totals over a fixed horizon."
+  ],
+  "answer": 2,
+  "explanation": "Both belong to Brazil - Concession on the teaching field, the first as undiscounted contractor net cash flow over the life and the second as its present value at 12 percent."
+ },
+ {
+  "prompt": "The seven step reading has been worked end to end on a field and every number is labelled. What does the method still refuse to produce?",
+  "options": [
+   "A recommendation. It says what each regime does to this ledger and never which one a government should offer or a contractor should sign.",
+   "A comparison across regimes, since each ledger is worked on its own and the steps do not put two of them side by side.",
+   "A present value, because the method stops at the undiscounted totals and leaves the discounting to a separate reading.",
+   "A reading of the tax stack, since the four fields cannot express what a real fiscal code charges."
+  ],
+  "answer": 0,
+  "explanation": "The sandbox is not a second fiscal truth. It compares the shape of regimes against each other, and a number lifted out of it and quoted as a liability is worth nothing."
+ },
+ {
+  "prompt": "The comparison summary carries government share of net revenue, and Brazil - Concession reads 27.5413 percent on the teaching field. What should a reader know about that column before quoting it?",
+  "options": [
+   "It is government cash flow divided by gross revenue, so it is not comparable with a headline tax rate at all.",
+   "Government take, the same government cash flow divided without the capex added back, sits in the same result object and appears on the screen too.",
+   "It is the rate the tax column implies, so it can be checked by dividing total tax by total profit oil on the same ledger.",
+   "It is reported only for regimes whose profit oil is positive in every year, so a comparison of six can carry fewer than six values."
+  ],
+  "answer": 1,
+  "explanation": "Two ratios of one government cash flow live in one result and both are on the screen. Working out which is which is where the next tier starts, and the six on that field run from 23.1713 to 37.4463 percent."
+ },
+ {
+  "prompt": "The capex sweep on the teaching field runs eight multipliers from 0.8 to 1.5, the last of them exactly 1.5. What does the resilience verdict built on it price?",
+  "options": [
+   "Every overrun the project could suffer, since the sweep is run to the point where the least resilient regime stops paying back.",
+   "The overrun at which the best regime for the contractor changes.",
+   "The contractor present value given up between a 20 percent underspend and a 50 percent overrun, which is the range the axis claims.",
+   "A cost overrun measured against the closing pool, because an overrun that cannot be recovered is the only kind that reaches the contractor."
+  ],
+  "answer": 2,
+  "explanation": "Over those eight points Ghana - Deepwater gives up 181.1922 million USD of contractor present value and Angola - Deepwater PSC 252.6075, and the last point is the engine called at 1.5."
+ },
+ {
+  "prompt": "Across the swept prices on the teaching field government take climbs 1.9971 points for Ghana - Deepwater and falls 37.6994 for USA - Gulf of Mexico. What does a falling share mean?",
+  "options": [
+   "That the government collects less money as price rises.",
+   "That the regime is charging a sliding royalty in reverse, since only a rate that falls with price can produce a falling share.",
+   "That the sweep has run below the range where the regime's instruments bind, so the share is falling towards the level it holds at low price.",
+   "That the regime hands the upside to the contractor as price rises."
+  ],
+  "answer": 3,
+  "explanation": "A share is a ratio and not an amount. The regime whose share climbs fastest is the progressive one, and on that field it is Brazil - Concession at 7.4752 points."
+ },
+ {
+  "prompt": "The verdict named best for the contractor on the teaching field is Nigeria - PIA (2021), whose present value there is 1.7389 million USD and which carries no single rate of return. What is that verdict saying?",
+  "options": [
+   "That the PIA template is the only one of the six to clear the field's 12 percent, by a margin a modest overrun erases.",
+   "That the PIA template earns a single rate of return above 12 percent, which the summary leaves out only because of rounding.",
+   "That the verdict is unusable, since a comparison in which five of the six values are negative cannot name a best regime at all.",
+   "That the field is uneconomic under every regime alike, so the verdict describes the field rather than the template it names."
+  ],
+  "answer": 0,
+  "explanation": "Its present value is zero at -19.2469 and at 12.1606 percent, so the verdict names no rate. On the capex sweep a 10 percent overrun already turns it to negative 31.8615 million USD."
+ },
+ {
+  "prompt": "Three habits from the Professional tier carry into a six regime comparison. What are they?",
+  "options": [
+   "Sort on present value, then on rate of return, then on payback, so that a verdict is never made on one column alone.",
+   "Name the base before the rate, read the closing pool before believing a cost recovery total, and write down what a zero means before quoting it.",
+   "Convert every regime to a common government take, discount at one rate, and report the range rather than a point.",
+   "Check the price deck, the production profile and the cost columns, since a comparison is only as good as the inputs the regimes share."
+  ],
+  "answer": 1,
+  "explanation": "Each habit answers a way this package has already misled a reader: a 21 percent rate that collected more than a 35 percent one, a recovery total with 2543.7575 million USD left unpaid behind it, and a rate column that once printed 0.0000 percent for two opposite things."
+ },
+ {
+  "prompt": "On the teaching field under the PIA template the pool clears in year 10 and stands at 0.0000 through year 18, then reads 0.8723 million USD in year 19 and 32.2234 at the close of year 25. What reopened it?",
+  "options": [
+   "A second round of capex late in the life, which enters the pool whole in the year it is spent as the first round did.",
+   "The royalty rate stepping up in year 19, which reduced revenue after royalty below the level the limit needs to clear a year's cost.",
+   "Revenue fell far enough that the allowance no longer covered the year's own cost, so the shortfall began accruing again.",
+   "The uplift on the resource rent tax, which adds whatever relief it has not used to the cost pool in the years the tax is zero."
+  ],
+  "answer": 2,
+  "explanation": "In year 19 the allowance releases 11.9734 million USD against a cost of 12.8457, and the shortfall of that year and every year after it is what carries the pool to 32.2234."
+ }
+]

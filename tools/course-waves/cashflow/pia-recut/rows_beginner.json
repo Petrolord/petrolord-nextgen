@@ -1,0 +1,114 @@
+[
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 7,
+  "prompt": "fiscal_regime picks one of three cascades from gross revenue to net cash flow. Which description is the JV cascade?",
+  "options": [
+   "Cost recovered from a capped share of revenue and the remainder split, which is why psc_carryforward pays 27000000.00 of tax on 200000000.00 of revenue and nets -1000000.00.",
+   "Five taxes on three bases, which on the published worked example collect 617004738.36 out of 1460000000.00 of revenue.",
+   "One tax on gross revenue with no deductions, which is what the loss columns reading 0.00 on every row implies.",
+   "Royalty, then deductions, then a single tax rate: 20000000.00 of royalty and 32500000.00 of tax out of 100000000.00 in 2030."
+  ],
+  "answer_index": 3,
+  "explanation": "Every regime reports the same KPI set; what differs is the cascade between the one gross revenue and the net, and the JV is the flat one.",
+  "why": "Worked example total tax moved (617004738.36 on the default path)."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "prompt": "multiyear_jv_real prints payback \"2.89 years\" and multiyear_pia_real \"2.84 years\", and both cross zero in their third row. Do the two fields pay back at the same time?",
+  "options": [
+   "Yes, because the two labels differ only in the second decimal, and a label is a display rounding of one shared crossing.",
+   "Yes, because both cross zero in their third row and payback is a year.",
+   "No, because one is a JV field and the other a PIA field, and the regimes count from different rows.",
+   "No. Their payback_years are 2.889357 and 2.844931, and each label is a rounding of its own figure."
+  ],
+  "answer_index": 3,
+  "explanation": "Both fields cross zero in their third row, yet payback_years reads 2.889357 on the JV field and 2.844931 on the PIA field: the fraction inside the crossing year differs, and each label rounds its own figure. Two fields that cross in the same row can still pay back at different times.",
+  "why": "multiyear_pia_real now prints \"2.84 years\" (payback_years 2.844931); the keyed text quoted 2.892034."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-cash-flow-is",
+  "ord": 5,
+  "prompt": "What does the Petroleum Economics Studio engine, version 3.12.0, read before it builds a ledger?",
+  "options": [
+   "Three uploaded files, production, capex and opex, and a configuration carrying prices, escalators, inflation and fiscal terms; nothing else.",
+   "A production file, a reservoir decline model and a facilities capacity file, from which it checks the volumes before believing them.",
+   "A single combined spreadsheet of volumes and costs, with the price taken from the deck by default when the configuration is blank.",
+   "The three files and a well log, which fixes the boe conversion for the field."
+  ],
+  "answer_index": 0,
+  "explanation": "If the volumes are wrong the ledger is wrong, and the engine has no way to know: no reservoir, no facilities capacity, no decline.",
+  "why": "L5: the engine version is 3.12.0."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-cash-flow-is",
+  "ord": 7,
+  "prompt": "multiyear_pia_nominal and multiyear_pia_real are one field with one set of rows, and they report total net cash flow 350425980.24 and 305105917.37. Which is wrong?",
+  "options": [
+   "The nominal one, because inflation has been added to flows that were already escalated, which counts it twice.",
+   "Neither: one is money of the day and the other money of the base year, and a total without its basis is not a number.",
+   "The real one, because it has been discounted at the applied real rate of 6.796117 percent and is the NPV of 219158380.04 under another name.",
+   "The nominal one, since only the real basis is a valid reading of a PIA ledger."
+  ],
+  "answer_index": 1,
+  "explanation": "The ledger carries a net_cash_flow and a real_net_cash_flow column, and their totals part once inflation is set.",
+  "why": "Moved totals and NPV (default path)."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "prompt": "The hand-derived case at a 25 percent working interest prints year 1 royalty 5000000.00 USD, tax 8125000.00 and net -3125000.00, each a quarter of the 100 percent figures. What does the same run report as its take?",
+  "options": [
+   "95.1923 percent, because the partner's scaled net is set against the field's unscaled pre-take value.",
+   "80.7692 percent, the same as at 100 percent, because the interest scales the government's lines and the contractor's together.",
+   "A quarter of 80.7692 percent, since take is a money reading and every money reading scales with the interest.",
+   "Null, because the engine declines a take on any run below a 100 percent interest."
+  ],
+  "answer_index": 1,
+  "explanation": "NPV falls from 21590909.09 to 5397727.27 USD with the share while take does not move. A take that set the partner's scaled net against the field's unscaled value would climb as the interest fell, a reading about the partnership.",
+  "why": "L5 repair history removed from the explanation."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-joint-venture-cascade",
+  "ord": 13,
+  "prompt": "At a 25 percent working interest AKATA's take reads 66.1723 percent, the same as at 100 percent, while the 2029 net falls from -121123680.00 to -30280920.00 USD. Why does the take not move?",
+  "options": [
+   "The interest scales the government's lines and the partner's alike, so the ratio between them is unchanged and take is a property of the regime.",
+   "The royalty rate falls with the interest, exactly offsetting the smaller net, which is how the engine holds the ratio steady at every interest a partner can hold.",
+   "The pre-take value stays at the field's 857602518.80 USD while only the net scales, and the two happen to cancel at this interest.",
+   "Take is computed on a 100 percent run and copied onto every scaled run."
+  ],
+  "answer_index": 0,
+  "explanation": "AKATA reports 66.1723 percent at 100, 75, 60, 40 and 25 percent alike: every line of the JV ledger is printed at the share, so revenue, volumes and costs scale with royalty, tax and net, and the ratio between the government's lines and the partner's holds.",
+  "why": "L5 repair history removed from the explanation."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 6,
+  "prompt": "A ledger question is asked at a working interest below 100 percent. What does the Associate method do with the take?",
+  "options": [
+   "Quotes what the engine prints on that run, 66.1723 percent, because the interest scales the government's lines and the partner's alike.",
+   "Scales it by the interest, as it scales every other money reading in the KPI block.",
+   "Goes back to a 100 percent run for it, because a scaled run sets the partner's net against the whole field's value and its take is not a fiscal statement.",
+   "Leaves it out, because take is a field-level reading and cannot be stated for a partner."
+  ],
+  "answer_index": 0,
+  "explanation": "Every money line and the volumes report the share, so take reads 66.1723 percent at 100, at 60 and at 25 percent alike, and the figure on the run asked about is the one to quote.",
+  "why": "L5 repair history removed from the explanation."
+ }
+]

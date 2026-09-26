@@ -73,7 +73,7 @@ import math
 import os
 import re
 
-ENGINE_VERSION = '3.10.0'
+ENGINE_VERSION = '3.12.0'
 GAS_MSCF_PER_BOE = 6.0
 
 
@@ -637,6 +637,11 @@ def pct(cfg, key, default=0.0):
 
 
 def compute(cfg, prod_rows, capex_rows, opex_rows):
+    # EC7 (engines 3.12.0): this oracle implements the PRE-AUDIT PIA semantics
+    # only, which the engine now runs solely under pia_legacy_pre_audit. A
+    # PIA case without the switch belongs to oracle_pia2021.py.
+    if cfg.get('fiscal_regime') == 'PIA' and cfg.get('pia_legacy_pre_audit') is not True:
+        raise AssertionError('oracle_cashflow computes PIA cases only with pia_legacy_pre_audit true')
     if not prod_rows:
         raise ValueError('No production data found. Upload and process a CSV first.')
     framework = framework_of(cfg)
@@ -725,7 +730,10 @@ def compute(cfg, prod_rows, capex_rows, opex_rows):
                 else:
                     roy = rev * pct(cfg, 'jv_royalty_pct') / 100.0
             return rev - roy - opex_in(year)
-        while len(years) > 1 and noi(years[-1]) < 0:
+        # v3.11: a year that carries capital is never trimmed; the limit
+        # stops production, it does not un-spend committed capex.
+        last_capex_year = max([y for y, a in capex.items() if a != 0], default=float('-inf'))
+        while len(years) > 1 and years[-1] > last_capex_year and noi(years[-1]) < 0:
             years.pop()
             trimmed += 1
         elt_year = years[-1]
@@ -985,6 +993,8 @@ def compute(cfg, prod_rows, capex_rows, opex_rows):
         # EC1-5: the cost pool cessation leaves unrecovered, at the share.
         k['psc_unrecovered_cost_at_cessation'] = psc_carry * wi
     if regime == 'PIA':
+        # EC7: every PIA case here runs the pre-audit path and says so.
+        k['pia_legacy_pre_audit'] = True
         # EC1-6: allowance the CITA restriction disallowed that cessation
         # leaves unclaimed, at the share.
         cit_allow_left = pia_state['cit_allow'] * wi
@@ -1162,6 +1172,10 @@ def build():
              JV_OPEX + [{'year': 2032, 'total_opex_usd': 10_000_000}], 'Economic limit off by default: the 2032 tail (1M revenue vs 10M opex) is kept.'),
         case('elt_tail_trimmed', {**JV_CFG, 'apply_economic_limit': True}, JV_PROD + [{'year': 2032, 'well1_oil_bbl': 10_000}], JV_CAPEX,
              JV_OPEX + [{'year': 2032, 'total_opex_usd': 10_000_000}], 'Economic limit on: 2032 trimmed, limit year 2031.'),
+        case('elt_keeps_trailing_capex', {**JV_CFG, 'apply_economic_limit': True},
+             JV_PROD + [{'year': 2032, 'well1_oil_bbl': 10_000}], JV_CAPEX + [{'year': 2032, 'amount_usd': 5_000_000}],
+             JV_OPEX + [{'year': 2032, 'total_opex_usd': 10_000_000}],
+             'Economic limit on, but 2032 carries 5M capex: the year is kept (limit year 2032, none trimmed).'),
         case('elt_royalty_tail', {**JV_CFG, 'apply_economic_limit': True},
              [{'year': 2030, 'well1_oil_bbl': 1_000_000}, {'year': 2031, 'well1_oil_bbl': 120_000}], JV_CAPEX, JV_OPEX,
              'Tail year 12M revenue, 9.6M after 20 percent royalty, below 10M opex: trimmed on net operating income.'),
@@ -1399,6 +1413,16 @@ def build():
         {'name': 'deck_present_null', 'cfg': {**JV_CFG, 'price_deck': [{'year': 2030, 'oil': 100}]}, 'prodRows': JV_PROD, 'capexRows': JV_CAPEX, 'opexRows': []},
         {'name': 'never_breaks_even_null', 'cfg': JV_CFG, 'prodRows': [{'year': 2030, 'well1_oil_bbl': 10}], 'capexRows': JV_CAPEX, 'opexRows': JV_OPEX},
         {'name': 'positive_at_floor_null', 'cfg': JV_CFG, 'prodRows': JV_PROD, 'capexRows': [], 'opexRows': []},
+        # v3.11: economic limit on, history before the capex year with no
+        # opex booked. The old limit trimmed the capex year at the low bound,
+        # NPV there came out non-negative and the breakeven was null.
+        {'name': 'elt_on_capex_after_first_year',
+         'cfg': {**JV_CFG, 'apply_economic_limit': True},
+         'prodRows': [{'year': 2028, 'well1_oil_bbl': 200_000}, {'year': 2029, 'well1_oil_bbl': 180_000},
+                      {'year': 2030, 'well1_oil_bbl': 160_000}, {'year': 2031, 'well1_oil_bbl': 900_000},
+                      {'year': 2032, 'well1_oil_bbl': 700_000}],
+         'capexRows': [{'year': 2030, 'amount_usd': 40_000_000}],
+         'opexRows': [{'year': y, 'total_opex_usd': 3_000_000} for y in (2030, 2031, 2032)]},
     ]
     for b in breakeven:
         b['breakeven_usd_bbl'] = breakeven_oil_price(b['cfg'], b['prodRows'], b['capexRows'], b['opexRows'])

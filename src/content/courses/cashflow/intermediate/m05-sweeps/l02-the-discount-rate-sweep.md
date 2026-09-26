@@ -21,7 +21,7 @@ Sweep the nominal discount rate on AKATA and two things happen: the applied real
 
 ## The zero-rate row
 
-At a nominal rate of 0 percent the NPV is 141637829.18, which is the total nominal net cash flow, not the real total of 117362408.71. The applied real rate is -2.912621 percent: a nominal rate under the inflation rate is a negative real rate, and discounting the real flows at a negative rate inflates them back to money of the day. The real rate passes through zero between 2 and 4 percent nominal, and only from there does discounting on the real basis begin to shrink the real flows.
+At a nominal rate of 0 percent the NPV is 141637829.18, which is the total nominal net cash flow; the real total is 117362408.71. The applied real rate is -2.912621 percent: a nominal rate under the inflation rate is a negative real rate, and discounting the real flows at a negative rate inflates them back to money of the day. The real rate passes through zero between 2 and 4 percent nominal, and only from there does discounting on the real basis begin to shrink the real flows.
 
 ## Two ways to write one number
 

@@ -4,7 +4,7 @@ The tax in this sandbox is charged on the contractor's share of profit oil, so a
 
 {{panel:ec-regime-explorer}}
 
-## The base is the share, not the cash
+## The base is the share, never the cash
 
 "USA - Gulf of Mexico" carries corporate income tax at 21 percent, resource rent tax at 0 and a minimum tax of 0, so its tax column is one rate on one base. On the Designer's default project it reads 0.0000 in years 1 and 2, 2.3899 in year 3, 28.4107 in year 4 and 1.7170 in year 25.
 
@@ -24,7 +24,7 @@ The `tax` instrument holds three rates. Corporate income tax runs from 21 percen
 
 ## The rate does not rank the tax
 
-Life tax on the default project reads 260.7539 under the Gulf of Mexico terms at 21 percent, 174.0882 under PIA at 30, 230.9340 under Ghana at 35, 422.8854 under Generic at 30 and 852.8256 under Brazil at 34 with its resource rent tax. Ghana carries the highest corporate rate of the six and pays less than Generic, because its tiers hand a smaller share of profit oil to the contractor and the rate has less to act on.
+Life tax on the default project reads 260.7539 under the Gulf of Mexico terms at 21 percent, 453.4354 under PIA at 30, 230.9340 under Ghana at 35, 422.8854 under Generic at 30 and 852.8256 under Brazil at 34 with its resource rent tax. Ghana carries the highest corporate rate of the six and pays less than Generic, because its tiers hand a smaller share of profit oil to the contractor and the rate has less to act on.
 
 ## A default rate inside the instrument
 

@@ -4,7 +4,7 @@
 
 {{panel:ec-comparison-explorer}}
 
-## Three verdicts, not five
+## Three verdicts out of five
 
 On `insights_single_regime` the function returns the contractor verdict, the payback verdict and the government verdict, and omits the capex and price verdicts entirely. A ranking of one is not a ranking. Both sweeps still run and still produce a series, but a series has no winner and the function declines to name one.
 

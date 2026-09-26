@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "AKATA's 2029 row reads gross revenue 186032000.00 USD, opex 24000000.00, capex 210000000.00 and net cash flow -121123680.00. What does the JV royalty at jv_royalty_pct 15 read on that row?",
+  "options": [
+   "Nothing, because the row nets -121123680.00 and a royalty is a share of what the year made rather than of what it sold.",
+   "Fifteen percent of 186032000.00 less the 24000000.00 opex, because a royalty is levied on the net operating income the field actually cleared.",
+   "27904800.00, fifteen percent of the 186032000.00 of sales, before any cost is seen.",
+   "Fifteen percent of the taxable income of 113127200.00, since royalty is deductible and so must be computed on the same base as tax."
+  ],
+  "answer": 2,
+  "explanation": "Off the top means a share of sales, taken before profit: 2035 pays 10998867.98 on 73325786.51 in exactly the same proportion, and 2029 pays 27904800.00 while it loses money."
+ },
+ {
+  "prompt": "On the hand-derived case the royalty is moved from 10 to 30 percent, so the year 1 royalty line rises by 20000000.00 USD. The year 1 net moves only from -7500000.00 to -17500000.00. Where did the other half go?",
+  "options": [
+   "Into the tax base: royalty is deductible, so year 1 tax fell from 37500000.00 to 27500000.00 and the treasury handed half of its own royalty back at the 50 percent rate.",
+   "Into depreciation, which absorbs a larger royalty by spreading it across the schedule.",
+   "Into the working interest, which scales the royalty line before it reaches the net.",
+   "Nowhere: the engine caps the JV royalty so that only half of any change reaches the row."
+  ],
+  "answer": 0,
+  "explanation": "Each ten points of royalty adds 10000000.00 to the royalty line and takes 5000000.00 off tax, so the net moves 5000000.00 a step, and the take still rises from 65.3846 to 88.4615 percent."
+ },
+ {
+  "prompt": "AKATA spends 210000000.00 USD in 2029 and 45000000.00 in 2030. Its depreciation column reads 21000000.00 in 2029 and 25500000.00 in every year from 2030 to 2035. Why does the line step once and then hold?",
+  "options": [
+   "The schedule is declining balance, so the charge is front loaded onto the two years that carried capex and then flattens onto the remaining book value.",
+   "The schedule is unit-of-production and follows the oil, which falls from 2200000.00 bbl to 1850000.00 and then declines more slowly.",
+   "The 3 percent opex escalator also inflates the depreciation, and 25500000.00 is where it saturates.",
+   "A ten-year straight line starts in each spend year, so the 2030 tranche adds its own tenth from 2030."
+  ],
+  "answer": 3,
+  "explanation": "Two tranches, two tenths, added: the line is a schedule on the spends, and it never looks at production or prices."
+ },
+ {
+  "prompt": "Over its seven rows AKATA's default schedule claims 174000000.00 of the 255000000.00 spent. What does the engine do with the rest when the field ends in 2035?",
+  "options": [
+   "It writes the gap off in 2035 as a terminal deduction, which is why the 2035 tax is only 3267865.37.",
+   "Nothing. There is no terminal write-off, so the unused deductions are simply never taken.",
+   "It carries the gap forward as loss_carryforward on the last row, where a later run could claim it.",
+   "It refunds the tax value of the gap as a negative tax line in the final year."
+  ],
+  "answer": 1,
+  "explanation": "A slow schedule leaves value on the table when the field is short, and total tax of 148425219.46 is the cost of it; the seven-year schedule claims 248571428.57 and pays 119700211.23."
+ },
+ {
+  "prompt": "Set jv_psc_depr_years to 5 and then to 1 on AKATA. Both claim the whole 255000000.00 and both land on total tax 116025219.46 USD. In the ledger this tier reads, are they the same project?",
+  "options": [
+   "Yes in every sense, because a ledger without a clock has no column in which two identical totals could differ.",
+   "Yes on every total, and no on timing: the one-year schedule pays 0.00 in 2029 and 2030 and 32193714.85 in 2031, while the five-year schedule pays 36850880.00 in 2029.",
+   "No, because the one-year schedule carries a loss and the engine refunds it, which the totals hide.",
+   "No, because the five-year schedule claims 9000000.00 in 2034 that the one-year schedule never sees."
+  ],
+  "answer": 1,
+  "explanation": "The Associate reading stops at the totals and says they agree; what a clock does to that agreement is the Professional tier's subject."
+ },
+ {
+  "prompt": "A reader's hand-built AKATA ledger shows a 2029 net that is 21000000.00 USD below -121123680.00 and a 2031 net that is 25500000.00 below 64468245.07. Which convention did they break?",
+  "options": [
+   "They deducted capex from the tax base instead of depreciation, so the 2029 tax read 0.00 and the shortfall is the missing tax.",
+   "They took the royalty off revenue less opex rather than off gross revenue, which shrinks the royalty and enlarges the tax.",
+   "They forgot the royalty deduction against tax, so the base was larger than 113127200.00 in every year.",
+   "They charged depreciation to cash."
+  ],
+  "answer": 3,
+  "explanation": "The signature is exact: the gaps are the depreciation charges of those years, and the field comes out 174000000.00 poorer than the engine says."
+ },
+ {
+  "prompt": "AKATA's 2029 taxable income is 186032000.00 less 27904800.00, less 24000000.00, less 21000000.00, which is 113127200.00 USD, and tax at 40 percent is 45250880.00. Why does a year that nets -121123680.00 pay any tax at all?",
+  "options": [
+   "Capex is not deductible when spent; only its depreciation of 21000000.00 is, so the tax authority sees a year that earned 113127200.00.",
+   "Because the JV tax is levied on gross revenue and the deductions only reduce the royalty.",
+   "Because the loss carryforward kill switch is on by default under JV, so a loss year is clamped at zero and taxed as though it had earned its gross revenue.",
+   "Because capex lands in December and the tax is assessed on the year before it arrives."
+  ],
+  "answer": 0,
+  "explanation": "The cash view and the tax view disagree, and both are printed; the loss columns read 0.00 because no AKATA base ever went negative."
+ },
+ {
+  "prompt": "With jv_tax_rate_pct set to 85 the hand-derived case prints year 1 net -35250000.00, year 2 net 14750000.00 and take 115.7692 percent. What does the take say?",
+  "options": [
+   "The engine has overflowed, since a share of value cannot exceed 100 percent and the column should be read as 15.7692.",
+   "The 85 percent rate was applied to the royalty line as well as the base, double counting 20000000.00.",
+   "The government collects more than the pre-take value the field created, and the contractor's two years net to a loss.",
+   "The working interest fell below 100, which is the only way the take column moves above the tax rate."
+  ],
+  "answer": 2,
+  "explanation": "A rate is not a share: at zero tax the same two rows give 30.7692 percent, all of it royalty, and the base decides what any rate is worth."
+ },
+ {
+  "prompt": "loss_offset_used and loss_carryforward read 0.00 on every AKATA row. Why?",
+  "options": [
+   "The loss mechanism is switched off under the JV regime by default and only the PIA cascade carries a pool.",
+   "No AKATA year's taxable income goes negative; the smallest base is 8169663.42 in 2035.",
+   "A loss was banked in 2029 and consumed inside the same row, so both columns net out.",
+   "The engine deducts the 210000000.00 of capex from the base in 2029 and reports the resulting loss elsewhere."
+  ],
+  "answer": 1,
+  "explanation": "The base shrinks every year as revenue falls and opex escalates, but it stays positive, so nothing is carried and the kill switch never matters."
+ },
+ {
+  "prompt": "AKATA nets 31746007.20 USD in 2030 and 64468245.07 in 2031, while 2030's gross revenue of 159564720.00 is higher than 2031's 136363147.20. What explains the smaller 2030 net?",
+  "options": [
+   "Depreciation steps up from 21000000.00 to 25500000.00 in 2030 and is charged against the cash of that year.",
+   "Opex escalates from 24000000.00 to 24720000.00 in 2030, and the 3 percent step falls entirely on that row.",
+   "The 2030 oil price of 83.640000 is below the 2031 price of 85.312800, so the barrels earn less.",
+   "The 45000000.00 second capex tranche lands in 2030."
+  ],
+  "answer": 3,
+  "explanation": "Depreciation contributed nothing to the answer except through tax, 34164004.80 against 25978830.05; the cash line is capex, and 2031 is the first year without any."
+ },
+ {
+  "prompt": "AKATA's 2033 row carries net_cash_flow 44874457.77 USD and real_net_cash_flow 39870374.51. On the hand-derived case the two columns are identical in both years. Why?",
+  "options": [
+   "AKATA runs with inflation_rate_pct 3, so the real column restates each year in 2029 money; the hand-derived case has inflation 0.",
+   "The real column is the net after working interest, and the hand-derived case runs at 100 percent.",
+   "The real column is the discounted cash flow at 10 percent, which on the 2033 row reads 30649858.46.",
+   "The real column subtracts depreciation, and the hand-derived case has only 5000000.00 of it."
+  ],
+  "answer": 0,
+  "explanation": "Both are the same cash; which one you total is a convention, 141637829.18 nominal against 117362408.71 real, and this tier reads net_cash_flow as printed."
+ },
+ {
+  "prompt": "AKATA at a 60 percent working interest prints 2029 gross revenue 111619200.00 USD, royalty 16742880.00, tax 27150528.00 and net -72674208.00, with total oil 5808000.00 bbl. How far does the interest reach?",
+  "options": [
+   "Royalty, tax and net cash flow only, leaving gross revenue at the field's 186032000.00 and the oil at 9680000.00 bbl.",
+   "Only the net cash flow; the row prints royalty and tax at the field's 27904800.00 and 45250880.00.",
+   "Every money line and the volumes: the row reports the partner's share throughout, and NPV falls from 72534830.66 to 43520898.40.",
+   "Nothing on the row; the working interest is applied to the totals and the NPV only."
+  ],
+  "answer": 2,
+  "explanation": "The cascade still runs once on the whole field and the partner takes a share of each result, which is why take holds at 66.1723 percent and the unit technical cost at 40.006602 USD/boe."
+ },
+ {
+  "prompt": "At a 25 percent working interest AKATA's take reads 66.1723 percent, the same as at 100 percent, while the 2029 net falls from -121123680.00 to -30280920.00 USD. Why does the take not move?",
+  "options": [
+   "The interest scales the government's lines and the partner's alike, so the ratio between them is unchanged and take is a property of the regime.",
+   "The royalty rate falls with the interest, exactly offsetting the smaller net, which is how the engine holds the ratio steady at every interest a partner can hold.",
+   "The pre-take value stays at the field's 857602518.80 USD while only the net scales, and the two happen to cancel at this interest.",
+   "Take is computed on a 100 percent run and copied onto every scaled run."
+  ],
+  "answer": 0,
+  "explanation": "AKATA reports 66.1723 percent at 100, 75, 60, 40 and 25 percent alike: every line of the JV ledger is printed at the share, so revenue, volumes and costs scale with royalty, tax and net, and the ratio between the government's lines and the partner's holds."
+ },
+ {
+  "prompt": "Under AKATA's flat 15 percent royalty and 40 percent tax, scaling the volumes to the interest first would give the same net as scaling the results afterward. Why does the engine still insist on scaling inside?",
+  "options": [
+   "Because the engine applies the interest to the uploaded volumes before the cascade runs, so a field-level rate tier would read the partner's barrels rather than the field's.",
+   "Because a rate tier on the field's daily production, a lifetime cumulative cap or a fixed lump sum is not proportional to revenue, and the two orders then part.",
+   "Because the depreciation schedule is unit-of-production and follows the scaled barrels.",
+   "Because the two orders never give the same answer, even under flat rates."
+  ],
+  "answer": 1,
+  "explanation": "Under flat rates every line is proportional to revenue, so the habit is formed where it is cheap: interest is applied to results and leaves inputs alone."
+ },
+ {
+  "prompt": "AKATA sells 1240000.00 Mscf of gas at 3.329280 USD/Mscf in 2031 beside its oil. What royalty rate does the gas revenue carry under the JV?",
+  "options": [
+   "A lower gas tier, which is why the 2031 royalty of 20454472.08 is less than 15 percent of the row's revenue.",
+   "None, because the JV royalty is levied on oil and the gas is sold royalty free at its own price.",
+   "A rate set by terrain and water depth, which AKATA carries as shallow water.",
+   "The same 15 percent as the oil, one rate on the one gross revenue of 136363147.20."
+  ],
+  "answer": 3,
+  "explanation": "The JV royalty has no tiers by rate, no price component, no terrain and no allowance; those belong to the PIA regime and to the Expert tier."
+ }
+]

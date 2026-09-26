@@ -6,7 +6,7 @@ A price that never reaches a tier does not escape royalty. The rate falls back t
 
 ## The published case
 
-`price_below_every_threshold` runs the Designer's default project at a price multiplier of 0.5, which puts oil at 35 USD per bbl, against a royalty of 60 USD/bbl at 12.5 percent and 80 USD/bbl at 15 percent. Neither threshold is ever reached:
+`price_below_every_threshold` runs the Designer's default project at a price multiplier of 0.5, which puts oil at 35 USD per bbl, against the royalty of the Designer's sample PSC regime, 60 USD/bbl at 12.5 percent and 80 USD/bbl at 15 percent; its values are illustrative samples. Neither threshold is ever reached:
 
 | year | grossRevenue | royalty | implied rate |
 | --- | --- | --- | --- |
@@ -16,7 +16,7 @@ A price that never reaches a tier does not escape royalty. The rate falls back t
 | 5 | 101.3476 | 12.6685 | 0.125000 |
 | 8 | 73.3389 | 9.1674 | 0.125000 |
 
-The implied rate is 0.125000 in every year. That is the lowest tier's rate, charged because `getSlidingScaleRoyalty` falls back to it when no threshold has been reached, not because any threshold was met.
+The implied rate is 0.125000 in every year. That is the lowest tier's rate, which `getSlidingScaleRoyalty` falls back to when no threshold has been reached. No threshold was met.
 
 ## What that costs
 
@@ -26,7 +26,7 @@ The case is not a marginal project, it is a losing one, and the royalty is charg
 
 The wrong intuition is that a tier list keyed at 60 and 80 USD per bbl means no royalty below 60. It means 12.5 percent below 60. A reader who assumes zero will predict a royalty line of zeros, a much larger profit oil, and a project that looks marginal rather than negative. The number that gives it away is 18.0299 in year 1 on 144.2389 of revenue.
 
-The other trap is the "Nigeria - PIA (2021)" template, whose lowest tier is keyed at 0 USD/bbl. There that tier is reached at any positive price, so the fallback never shows itself and the behaviour looks like an ordinary threshold rule. Every tier list has to be checked for what its lowest entry does at low price, because that entry is a default and not only a tier.
+The other trap is the tiered teaching regime, whose lowest tier is keyed at 0 USD/bbl. There that tier is reached at any positive price, so the fallback never shows itself and the behaviour looks like an ordinary threshold rule. Every tier list has to be checked for what its lowest entry does at low price, because that entry is a default and not only a tier.
 
 ## What it refuses
 

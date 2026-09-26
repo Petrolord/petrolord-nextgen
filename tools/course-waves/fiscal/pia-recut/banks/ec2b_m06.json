@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "The teaching field ODIDI sells 139.6563 in year 1 under the Gulf of Mexico terms. What are the royalty and the revenue after royalty for that year?",
+  "options": [
+   "Royalty 10.4742, which is the 7.5 percent tier a deck price of 45 USD per bbl selects, on gross revenue of 139.6563.",
+   "Royalty 26.1856 and revenue after royalty 113.4707, charged before any cost is considered.",
+   "Royalty 26.1856 and revenue after royalty 113.4707, struck after the year's opex of 25.0037 has been taken off the top line.",
+   "Royalty 0.0000, since a year spending 420.0000 of capex has no base to charge."
+  ],
+  "answer": 1,
+  "explanation": "A flat 18.75 percent is charged on gross revenue in every year, including the year that carries the whole 420.0000 of capex."
+ },
+ {
+  "prompt": "ODIDI's gross revenue falls to 76.1939 in year 5 and rises to 93.9859 in year 6, while every stream declines throughout. What did that?",
+  "options": [
+   "The oil decline of 14 percent a year starts only at year 6, so the early years fall faster.",
+   "The gas and NGL streams decline more slowly, and by year 6 they carry enough of the mix to lift the total.",
+   "The deck steps from 45 to 65 USD per bbl at year 6, and the step is large enough to outrun a 14 percent oil decline.",
+   "The deck interpolates between its year 1 and year 6 points, so the applied price climbs through the early years and arrives at year 6."
+  ],
+  "answer": 2,
+  "explanation": "The deck holds 45 through year 5 and never interpolates, so the whole move arrives in one row."
+ },
+ {
+  "prompt": "Under the Gulf of Mexico terms, at a cost recovery limit of 100 percent, ODIDI still closes its life with 24.2824 unrecovered. How does a full limit leave a balance behind?",
+  "options": [
+   "The limit is a percent of gross revenue, so the 1.2953 of royalty in year 25 is outside the ceiling and is never recoverable.",
+   "The capex of 420.0000 is charged whole in year 1 and only one year's worth of it may be recovered in any later year.",
+   "The pool is closed at the end of year 25 and whatever it holds at that point is written off rather than recovered.",
+   "Late revenue after royalty of 5.6128 in year 25 cannot absorb the year's opex of 12.3405, so the pool starts filling again."
+  ],
+  "answer": 3,
+  "explanation": "A full limit is a ceiling on revenue after royalty, and on a field declining 14 percent a year the late rows have very little of it."
+ },
+ {
+  "prompt": "Every one of the six templates leaves ODIDI with a closing unrecovered pool, from 19.3270 to 192.1146. What separates the two ends of that range?",
+  "options": [
+   "The cost recovery limit, which is 100 percent under Brazil and 50 percent under Angola.",
+   "The royalty, which is 10 percent under Brazil and 0 percent under Angola, so Brazil has less revenue after royalty to recover against.",
+   "The profit split, which is flat under Brazil and tiered under Angola, so a smaller share of the residual is available to clear the pool.",
+   "The tax stack, since Angola's resource rent tax at 50 percent takes cash the contractor would otherwise recover cost with."
+  ],
+  "answer": 0,
+  "explanation": "A tighter limit leaves more of the year 1 capex waiting, and on a field that declines 14 percent a year the later revenue never catches up."
+ },
+ {
+  "prompt": "ODIDI under Brazil returns the contractor 192.9896 over 25 years, the second most of the six templates, and a value of -5.8662 at the project's 12 percent. How can both be true?",
+  "options": [
+   "The value is computed on the government's cash flows rather than the contractor's, which is why it carries the opposite sign to the contractor's own total over the same 25 years of the field.",
+   "The total adds 25 undiscounted rows and the value discounts each of them, and at 12 percent the year 1 capex outweighs cash that arrives late, so positive nominal cash is still worth less than nothing today.",
+   "The 192.9896 is a total of undiscounted rows and the value excludes the capex, so the two are not readings of the same ledger.",
+   "The closing unrecovered pool of 19.3270 is subtracted in the value and not in the total, and that deduction, charged against the final year of the 25 year life, is the whole of the difference between the two readings."
+  ],
+  "answer": 1,
+  "explanation": "Same rows, two verdicts. Five of the six templates close ODIDI's cumulative in the black and return a negative value at 12 percent; the PIA template's value is 1.7389."
+ },
+ {
+  "prompt": "The capstone method says to build year 1 by hand before reading any column. Why year 1?",
+  "options": [
+   "It is the only year in which the cost recovery limit binds, so the ceiling can be checked against the ledger before anything else.",
+   "It is the year the R factor selects the first tier of a split, and every later year inherits the tier that year established.",
+   "It holds the whole of the capex, so the mistakes are loudest there.",
+   "It carries no tax under any of the six templates, which makes it the one row that can be built without the tax rates."
+  ],
+  "answer": 2,
+  "explanation": "On the default project year 1 is grossRevenue 271.9889, royalty 50.9979, cost recovered 220.9910, a pool of 310.0117 and a contractor line of -310.0117."
+ },
+ {
+  "prompt": "Your hand built year 1 of the Gulf of Mexico ledger on the default project comes out at 50.9979 below the engine's -310.0117. What is the error?",
+  "options": [
+   "Cost recovery was taken on gross revenue of 271.9889 rather than on revenue after royalty of 220.9910.",
+   "The opex of 31.0027 was charged both as a cash cost and again inside the recoverable pool for the year.",
+   "The tax was computed on the whole residual instead of on the contractor's share of it under the flat 100 percent split.",
+   "Royalty was subtracted a second time, after it had already been taken off the top line before cost recovery."
+  ],
+  "answer": 3,
+  "explanation": "Cost oil of 220.9910 is already net of the royalty, and the gap between the two figures names the error exactly."
+ },
+ {
+  "prompt": "A hand built year 1 shows an unrecovered cost pool of 500.0000 on the default project where the engine prints 310.0117. What was missed?",
+  "options": [
+   "The year's own recovery, 220.9910 of cost oil, which is credited before the pool is carried forward.",
+   "The opex of 31.0027, which belongs in the pool alongside the capex and was left out of the recoverable balance.",
+   "The royalty of 50.9979, which is added to the pool in the year it is paid and recovered in the years after it.",
+   "The tax of 0.0000, which is credited to the pool where the residual is nothing."
+  ],
+  "answer": 0,
+  "explanation": "The pool is the balance brought forward plus the year's capex and opex, less what was recovered, so 310.0117 is what remains."
+ },
+ {
+  "prompt": "The method's third step proves a row after the pool has cleared. On the default project year 4 recovers 25.1816, exactly its opex. What does a larger figure in that row mean?",
+  "options": [
+   "The limit was read as a percent of gross revenue, which raises the ceiling and lets the year recover more than it spent.",
+   "The pool was not cleared in year 3, so a carried balance is still being recovered.",
+   "The capex was spread over the early years instead of being charged whole to year 1, leaving a part of it to recover in year 4.",
+   "The profit split was applied before cost recovery rather than after it, which moves part of the residual into the recovered column."
+  ],
+  "answer": 1,
+  "explanation": "Year 3 recovers 167.1490 and closes the pool at 0.0000, so from year 4 the recovered figure and the opex figure are one number."
+ },
+ {
+  "prompt": "Three of these four statements name a check that a single row of the ledger can settle on its own. Which one names a check that cannot be settled that way?",
+  "options": [
+   "That the two takes add to gross revenue less opex less capex, which needs the totals row.",
+   "That tax is 0.0000 in a year whose profit oil is 0.0000, which cannot be settled until the tax column has been totalled.",
+   "That the closing cumulative equals the life total of the contractor column, since it needs all 25 rows.",
+   "That the contractor line rebuilds from cost oil plus the profit share, less tax, less opex and less capex, which needs the totals row to settle."
+  ],
+  "answer": 2,
+  "explanation": "A single row rebuilds the contractor line, settles the identity at -259.0138 in year 1 and settles the zero tax on a zero residual. The cumulative check closes at 980.9313 on both sides and needs all 25 rows to do it."
+ },
+ {
+  "prompt": "The capstone method proves two rows and reads the other twenty three. What does it not catch?",
+  "options": [
+   "A royalty charged on the wrong base, because the error is invisible until the pool has cleared several years later.",
+   "A tax charged on a residual of 0.0000, which only becomes visible once the totals row has been assembled.",
+   "A capex that has been spread across the early years, since the year 1 row would still balance under either treatment.",
+   "A tier crossing, a deck step or a pool that refills late in life, none of which show in the two rows it proves."
+  ],
+  "answer": 3,
+  "explanation": "Nothing in the method discounts anything either, and ODIDI's value of -37.3123 under the Gulf of Mexico terms is invisible to it."
+ },
+ {
+  "prompt": "ODIDI pays back in year 6 under Brazil, year 7 under the Gulf of Mexico terms and year 8 under Angola. What does that spread require of anyone quoting a reading from this field?",
+  "options": [
+   "Name the regime beside the reading, because payback in year 6 and payback in year 8 are both true of the same field.",
+   "Quote the fastest of the six, since the earliest crossing is the one that bounds the field's exposure.",
+   "Quote the median of the six templates, which is the reading least sensitive to the choice of terms.",
+   "Quote the payout year of 6 instead, which is the same under all six and so belongs to the field."
+  ],
+  "answer": 0,
+  "explanation": "The same field returns 148.3166 of contractor cash under the Gulf of Mexico terms and 192.9896 under Brazil."
+ },
+ {
+  "prompt": "ODIDI hands the state between 196.0260 and 316.7898 depending on which of the six templates prices it. What can the Associate reading not say about that range?",
+  "options": [
+   "Which template collects the most, since the six collections are only comparable when the closing pools are equal.",
+   "Which template leaves the contractor the least cash, which needs a discount convention the tier does not carry.",
+   "Which of the splits is fair, which survives a price collapse, and which numbers on a comparison screen are measurements at all.",
+   "How much of each collection is royalty, since the ledger prints government cash flow as a single undivided column."
+  ],
+  "answer": 2,
+  "explanation": "The contractor keeps between 109.1947 and 229.9586 across the same six templates, and the tier can state the range without judging it."
+ },
+ {
+  "prompt": "Every regime in the Associate tier was read at one setting. Which instruments actually move on their own in the templates this tier held still?",
+  "options": [
+   "The cost recovery limit, which tightens as the standing pool grows, and the minimum tax, which arms itself once the residual falls away.",
+   "The R factor split Ghana and Angola carry, and the PIA template's royalty on price and daily rate with its split on cumulative production.",
+   "The corporate rate, which steps with the R factor tier, and the royalty, which steps with cumulative production.",
+   "The discount rate, which follows the price deck, and the profit split, which follows the closing unrecovered pool of the year before it, whatever the price."
+  ],
+  "answer": 1,
+  "explanation": "A split on cumulative production can only move one way, since production only accumulates. Ghana's and Angola's R factor, a ratio of cumulatives, can fall back and hand the contractor a larger share again."
+ },
+ {
+  "prompt": "A published run leaves the resource rent tax uplift unstated and collects life tax of 2127.5549, where the run that sets it to 0 collects 2207.5549. What is the habit that catches this?",
+  "options": [
+   "Compare the two tax columns row by row, since a difference of this size is always visible in the first year of a life of 25 rows.",
+   "Rank the templates by their headline corporate rate first, which is the field the two runs actually differ in.",
+   "Total the government cash flow rather than the tax, because the take is the only column a default setting cannot move.",
+   "Read what the regime does not state as carefully as what it does, because an unstated field takes a default of 20 percent."
+  ],
+  "answer": 3,
+  "explanation": "Both runs share a revenue of 7001.1938 and a profit oil of 3523.7229, so a number nobody typed decided which of the two figures the run reported."
+ }
+]

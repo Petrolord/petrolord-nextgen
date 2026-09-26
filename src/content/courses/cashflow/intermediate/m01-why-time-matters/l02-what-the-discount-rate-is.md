@@ -4,7 +4,7 @@ The discount rate is the return the money would earn elsewhere, stated once, and
 
 {{panel:ec-time-explorer}}
 
-## An input, not a result
+## An input to the ledger
 
 The engine takes discount_rate_pct as a configuration value. AKATA carries 10. Nothing in the production, the prices or the fiscal terms produces that number; it is the owner's statement of what a year's delay costs, or equally what the same capital could earn in its next best use. A project whose NPV at the stated rate is positive earns more than that alternative; a project whose NPV is negative earns less, even when its undiscounted total is comfortably positive.
 
@@ -34,7 +34,7 @@ A second mistake runs the other way: treating the rate as something the project 
 
 ## What the rate refuses
 
-It refuses to be more than one number. Every year of AKATA is discounted at the same rate, so a risk that grows with time, or a financing cost that changes after payback, cannot be expressed here. It refuses to carry inflation on its own: with inflation and every escalator set to zero the NPV is 65055328.97 on either basis at 10.000000 percent, and it is the price and cost escalators, not the inflation rate, that lift the configured answer to 72534830.66. And it refuses to tell you whether 10 is right. That answer lives with the owner's cost of capital, not in the ledger.
+It refuses to be more than one number. Every year of AKATA is discounted at the same rate, so a risk that grows with time, or a financing cost that changes after payback, cannot be expressed here. It refuses to carry inflation on its own: with inflation and every escalator set to zero the NPV is 65055328.97 on either basis at 10.000000 percent, and it is the price and cost escalators that lift the configured answer to 72534830.66; the inflation rate does not. And it refuses to tell you whether 10 is right. That answer lives with the owner's cost of capital, outside the ledger.
 
 ## Exercise
 

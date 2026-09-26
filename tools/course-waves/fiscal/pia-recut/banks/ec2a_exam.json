@@ -1,0 +1,464 @@
+[
+ {
+  "prompt": "One call to `runFiscalComparison` returns four objects. Which are they, and which one is ordered?",
+  "options": [
+   "`summary`, `annualCashFlows`, `sensitivityData` and `insights`, and only the summary is ordered, by contractor NPV descending.",
+   "`summary`, `annualCashFlows`, `sensitivityData` and `insights`, all four ordered by the same contractor NPV so their rows line up.",
+   "A summary and three charts, with the ledgers rebuilt on demand from the summary row a reader clicks.",
+   "One ledger per regime and a set of verdicts, from which the summary table is assembled by the panel that renders it rather than by the engine."
+  ],
+  "answer": 0,
+  "explanation": "Every ledger inside `annualCashFlows` is 25 rows long because the horizon is fixed, and nothing but the summary carries an order."
+ },
+ {
+  "prompt": "On the Suite test project the comparison of Flat against Complex returns Flat at an NPV of 1262.3470 million USD, which is the row Generic Royalty/Tax returns on the same project. What does that show?",
+  "options": [
+   "That the comparison caches a ledger by project and reuses it whenever two regimes return the same government cash flow.",
+   "That the test project is insensitive to fiscal terms, since Complex returns 657.4150 million USD on the same run.",
+   "A name is not a regime: the two carry identical instruments, so they return an identical row.",
+   "That Generic Royalty/Tax is the fallback the engine substitutes whenever a regime is passed without a full set of four instruments."
+  ],
+  "answer": 2,
+  "explanation": "Complex on the same project returns 657.4150 million USD of NPV and 3087.2215 of government cash flow, so the field is not the reason the two agree."
+ },
+ {
+  "prompt": "USA - Gulf of Mexico on the default project runs cumulative contractor net cash flow of -310.0117, then -140.2337, then 8.9905 million USD, and an R factor of 0.512217, then 0.922481, then 1.254640. What are its payback and payout years?",
+  "options": [
+   "Payback year 4 and payout year 3, because the cumulative has to clear the capex rather than merely turn positive.",
+   "Both year 3, read from two different columns: cumulative contractor cash for one and the R factor for the other.",
+   "Both year 3, and they agree because payout is the discounted form of the same crossing.",
+   "Payback year 3 and payout year 2, since the R factor is above 1.0 as soon as cumulative revenue exceeds the first year's opex."
+  ],
+  "answer": 1,
+  "explanation": "Payback is the first year cumulative contractor net cash flow is above zero and payout the first year the R factor is above 1.0, so one is after tax cash and the other a gross ratio."
+ },
+ {
+  "prompt": "Two regimes in one comparison return exactly the same contractor NPV. Where do they sit in the summary?",
+  "options": [
+   "Ordered by government cash flow ascending, which is the tie break the comparison applies before it hands the rows back to the caller.",
+   "Ordered by payback year and then by the R factor payout year, the two integer columns the summary already carries for every regime.",
+   "Either of them may head the table, since a tie inside a floating point sort goes to whichever rounding error happened to be the smaller.",
+   "In the order they were passed in, because the sort has no secondary key."
+  ],
+  "answer": 3,
+  "explanation": "The comparison exposes no option to sort on anything else, so `summary[0]` guarantees the highest contractor NPV at the comparison's discount rate and nothing more."
+ },
+ {
+  "prompt": "Government share of net revenue, the summary's percentage column, counts a great deal that no tax authority calls tax. What is in its numerator?",
+  "options": [
+   "Government cash flow, which is royalty plus the government's share of profit oil plus tax, so USA - Gulf of Mexico reads 34.0485 percent while its only tax is corporate income tax at 21 percent.",
+   "Tax alone, which is why Angola - Deepwater PSC reads 56.2797 percent against instruments carrying 25 and 50 percent.",
+   "Tax plus royalty, with the profit oil split excluded because it is a share of production rather than a charge on income.",
+   "Government cash flow net of the cost the state recovered, which is what takes capex out of the ratio."
+  ],
+  "answer": 0,
+  "explanation": "A flat royalty of 18.75 percent contributes 503.7989 million USD of the 764.5528 that regime collects."
+ },
+ {
+  "prompt": "What does `summary[0]` guarantee on any comparison?",
+  "options": [
+   "The highest contractor NPV and the fastest payback, since the two move together on every published comparison in the course.",
+   "The best result for the contractor on NPV, IRR and payback, which is what makes it the row a recommendation is written from.",
+   "The highest contractor NPV at the comparison's discount rate, and nothing else.",
+   "The lowest government cash flow, because take and contractor NPV are the two sides of one revenue total and must run opposite each other."
+  ],
+  "answer": 2,
+  "explanation": "On the default project rank 3 returns an IRR of 40.2125 percent and rank 4 returns 44.0823, so even the IRR column is already out of order."
+ },
+ {
+  "prompt": "A reader reads government take at 75 USD per bbl off the price chart. What have they read?",
+  "options": [
+   "An interpolation the engine supplies between neighbouring swept points, which is why the sweep returns a curve rather than nine values.",
+   "The chart's own line between two computed points, because the sweep has nine fixed prices and nothing between them.",
+   "A tenth point, because the sweep adds any price the project's own deck carries to its nine fixed prices before it runs.",
+   "A share at the deck's own price, reproduced exactly."
+  ],
+  "answer": 1,
+  "explanation": "The nine prices are fixed and no input changes them, so a project whose economics turn at 45 USD per bbl cannot be examined there at all."
+ },
+ {
+  "prompt": "At `price_40_pia_default` the run returns an NPV of -51.1673 million USD, payback in year 9 and 5.9578 million USD still unrecovered at the end of 25 years. What does the unrecovered pool show?",
+  "options": [
+   "That the sweep charges the whole capex again at each point, so a low price cannot clear a pool that keeps being refilled.",
+   "That the pool is written off in the final year, which is why the closing figure is small rather than the whole unrecovered cost.",
+   "That the project stopped producing before year 25, leaving cost in the pool that later production would have recovered.",
+   "A cost recovery limit that never binds at the deck price binds hard at the bottom of the sweep."
+  ],
+  "answer": 3,
+  "explanation": "At 50 USD per bbl the pool closes to 0.7642 million USD and from 60 upward it closes completely."
+ },
+ {
+  "prompt": "USA - Gulf of Mexico shows a price climb of -17.2498 percentage points and Generic Royalty/Tax -10.1897 on the default project. What makes those two regressive?",
+  "options": [
+   "A fixed royalty rate and a fixed tax rate on a growing profit hand the government a shrinking fraction once cost recovery has been paid off.",
+   "A cost recovery limit that rises with price, which returns more of the contractor's cost before any split is taken and so shrinks the state's share of each barrel.",
+   "A profit split tiered on the R factor, which walks the contractor into a more generous tranche as revenue grows.",
+   "A minimum tax that binds at low prices and stops binding once the computed charge exceeds it, which flattens the government's share as price rises."
+  ],
+  "answer": 0,
+  "explanation": "Brazil - Concession climbs the most at 20.5076 percentage points, the two templates whose split is tiered on the R factor climb by 19.6873 and 7.8960, and Nigeria - PIA (2021) is almost flat at -0.0068."
+ },
+ {
+  "prompt": "Angola - Deepwater PSC returns a price climb of 19.6873 percentage points while its share falls from 63.4520 at 40 USD per bbl to 59.5510 at 50. How can both be true?",
+  "options": [
+   "The climb is measured on government share of net revenue rather than on government take, and the two definitions move in opposite directions.",
+   "The share at 40 USD per bbl was flagged exceeds rather than share, so that point is not on the curve at all.",
+   "The climb is the last swept share minus the first, so it sees two points and hides the minimum between them.",
+   "The climb averages the eight intervals between the nine points, which a single early fall cannot outweigh."
+  ],
+  "answer": 2,
+  "explanation": "Ghana - Deepwater reverses twice inside a positive climb, from 76.7284 down to 76.4647 and from 77.2412 down to 77.0702."
+ },
+ {
+  "prompt": "The published `price_below_every_threshold` case runs the default deck at a price multiplier of 0.5 and returns total gross revenue of 1419.0195 million USD against the deck's own 2686.9277. Why is that more than half?",
+  "options": [
+   "Because the sliding royalty fell below every tier, and revenue is reported after royalty in this ledger.",
+   "The multiplier scales oil only, and the gas and NGL prices in the deck never move.",
+   "Because the deck steps up at year 5 and year 10, and the multiplier is applied only to the first deck point.",
+   "Because production rises to defend revenue when price falls, which is what the closed form decline does at the bottom of a deck."
+  ],
+  "answer": 1,
+  "explanation": "The default project carries gas at 50 Mscf/d and NGL at 1500 bbl/d beside its oil, so a gas weighted project moves less across the sweep than the axis suggests."
+ },
+ {
+  "prompt": "At every swept price the comparison recomputes an NPV, a payback year and an unrecovered pool for every regime. What becomes of them?",
+  "options": [
+   "They are returned inside `sensitivityData` beside the share, which is how a panel draws a second series when a reader asks for one.",
+   "They replace the summary row at whichever price the reader has selected, which is why the table moves when the chart is clicked.",
+   "They are averaged across the nine points and reported as the regime's sensitivity, which is the quantity the progressivity verdict ranks.",
+   "They are discarded, because the chart plots one government take per regime per point."
+  ],
+  "answer": 3,
+  "explanation": "Neither chart can tell a reader that a point it plotted came from a project that never paid back, so the totals underneath a point have to be fetched from the ledger."
+ },
+ {
+  "prompt": "A real cost overrun raises capital and operating cost together and can push spending into later years. What does the capex sweep model?",
+  "options": [
+   "One scalar on the whole capital programme, with drilling, facilities and subsea moving together, all of it still landing in year 1 and opex untouched.",
+   "The capital and the operating cost together, in the fixed proportion the project's own cost stack carries between them.",
+   "The capital cost with its spending rescheduled across the first years, which is what separates an overrun from a larger project.",
+   "The capital cost and the discount rate together, since an overrun that arrives later is worth less than one arriving in year 1."
+  ],
+  "answer": 0,
+  "explanation": "It also holds price fixed at the deck at every multiplier, so nothing in the sweep answers what an overrun costs at a low price."
+ },
+ {
+  "prompt": "The resilience verdict names USA - Gulf of Mexico the least resilient on the default project at 267.7301 million USD given up. What is the catch in that ranking?",
+  "options": [
+   "The quantity is a percentage of base NPV, so a regime with a small base is penalised for a loss that is small in money.",
+   "The quantity is an absolute amount, so a regime with more NPV to lose is penalised for having it, and that regime's base NPV is 382.0660 million USD.",
+   "The quantity is measured from the peak of the curve, so a regime that rises before it falls is charged for the rise as well.",
+   "The quantity is discounted at 10 percent while the base NPV is not, so the two cannot be compared as amounts at all."
+  ],
+  "answer": 1,
+  "explanation": "Angola - Deepwater PSC is named the most resilient at 88.6123 million USD given up, on a base NPV of 211.3787."
+ },
+ {
+  "prompt": "Why can the price chart and the capex chart not be read as a matched pair?",
+  "options": [
+   "One is computed from the summary and the other from the ledgers, so the two are drawn from different objects inside the returned result.",
+   "One re-runs the whole comparison at each point while the other rescales the base case, so only one of the two is a set of full computations.",
+   "One is a rate on the state's side of the ledger at nine prices and the other is money on the contractor's side at eight multipliers.",
+   "One has nine points and the other has eight."
+  ],
+  "answer": 2,
+  "explanation": "Only the capex chart's values can be added or subtracted as amounts, and only the price chart's values can be compared between projects of different sizes."
+ },
+ {
+  "prompt": "Why can a capex loss of 88.6123 million USD on the default project not be carried to another field?",
+  "options": [
+   "Because the losses are quoted in million USD and two fields of different size need the figure expressed as a percentage first.",
+   "Because a second field would be swept over a different capex range, since the multipliers are taken from the project's own capex lines.",
+   "Because the verdict rounds to one decimal place, and a figure carried between fields loses the digits that separated the regimes.",
+   "The ordering itself changes: on ODIDI the same six templates give up between 181.1922 and 252.6075 million USD."
+  ],
+  "answer": 3,
+  "explanation": "Angola - Deepwater PSC gives up the least of the six on the default project and the most of the six on ODIDI, so a resilience ranking belongs to a field."
+ },
+ {
+  "prompt": "Which case does neither sweep cover?",
+  "options": [
+   "An overrun arriving at a low price, because the price sweep holds capex at the base case and the capex sweep holds price at the deck.",
+   "A price above 120 USD per bbl, which the price sweep stops at and the capex sweep cannot reach by raising capital cost.",
+   "A regime with no resource rent tax, since both sweeps assume a tax stack whose base moves with the capex they vary.",
+   "A project whose capex is spent later than year 1, which is the only assumption the two sweeps make differently from each other."
+  ],
+  "answer": 0,
+  "explanation": "The Angola template on the default project at three times capex returns no government take at 40 USD per bbl, where the point is null, and 2223.0766 at 50, and neither chart as drawn would have suggested it."
+ },
+ {
+  "prompt": "A resilience verdict names a different regime on a second run. Which three explanations must be separated?",
+  "options": [
+   "The discount rate moved, the regime list moved, or the sweep was run before the summary had been sorted by contractor NPV.",
+   "The field moved, the range moved, or there was nothing to rank in the first place.",
+   "The capex lines moved, the deck moved, or the verdict was read from the price sweep rather than from the capex sweep.",
+   "The tie break changed, the rounding changed, or the golden pinned a winner the engine no longer returns."
+  ],
+  "answer": 1,
+  "explanation": "On the comparison built with capex of 20000 all six regimes give up 12727.272727 million USD, so the third explanation is not hypothetical."
+ },
+ {
+  "prompt": "Which four claims did the Insights tab state that nothing had computed?",
+  "options": [
+   "That the top NPV regime also collected the least for the government, that payback and payout coincide, and two rankings taken from the sweeps.",
+   "That the summary was sorted on four keys at once, so a reader could take any column's order off the table without reading the column.",
+   "That the top NPV regime also paid back fastest, that the second ranked regime maximised government revenue, and a capex resilience ranking and a price response ranking.",
+   "That every regime pays back, that every IRR is a root, that the summary's percentage column is a tax rate, and that the axis labels match the sweeps."
+  ],
+  "answer": 2,
+  "explanation": "All four now come from the numbers, and a claim that cannot be supported is omitted rather than guessed."
+ },
+ {
+  "prompt": "`insights_flipped` ranks Beta first by NPV at 300.0 million USD, and the government verdict still names Beta. What is the case pinning?",
+  "options": [
+   "That the government verdict reads the take column rather than the sort, so its answer does not change when the NPV order does.",
+   "That the two verdicts are computed from one reduce, so whichever regime heads the summary is named by both of them.",
+   "That a flipped NPV order flips the government verdict with it, which is the coupling `deriveInsights` was written to keep.",
+   "That the government verdict falls back on the first summary row whenever two regimes collect within one decimal place of each other."
+  ],
+  "answer": 0,
+  "explanation": "Beta collects 900.0 million USD against 400.0 for Alpha in both cases, and the sentence is the same in both."
+ },
+ {
+  "prompt": "On `insights_ties` the government verdict reads that Alpha collects the most, 900.0 million USD against 900.0 million USD for Beta. What produced that sentence?",
+  "options": [
+   "A rounding to one decimal place applied before the ranking, which is what turns two different totals into one printed figure.",
+   "A tie break on the summary order, which the engine applies deliberately so that a verdict always names exactly one regime.",
+   "An alphabetical tie break, which is why the regime named first in the sentence is also the one earlier in the alphabet.",
+   "A strict comparison inside a reduce, which keeps the first of two equal values."
+  ],
+  "answer": 3,
+  "explanation": "The ranking runs at full precision and only the sentence rounds, so a tie in the sentence is not always a tie in the quantity, and here it is."
+ },
+ {
+  "prompt": "What does `deriveInsights` do with a claim it cannot support?",
+  "options": [
+   "It returns the verdict with the regime name left empty, so a panel can render the heading and leave the sentence blank.",
+   "It omits the verdict, which is why a single regime returns three and an empty comparison returns none.",
+   "It returns the verdict with the quantity set to zero, which is how the share curve reports a price at which profit is not positive.",
+   "It returns a verdict stating that the claim could not be supported, so that a reader is told which ranking was attempted."
+  ],
+  "answer": 1,
+  "explanation": "Both sweeps still run on a single regime comparison and still produce a series, and the function declines to name a winner among one."
+ },
+ {
+  "prompt": "On the ODIDI comparison the capex verdict names Ghana - Deepwater and the price verdict names Brazil - Concession. What does that disagreement show?",
+  "options": [
+   "That one of the two verdicts has ranked noise, both being produced by the same reduce over the same series.",
+   "That the price verdict ranked nothing, a climb of 7.4752 percentage points being inside the precision its sentence prints.",
+   "That the two sweeps measure different things and need not agree: Ghana gives up the least at 181.1922 million USD while Brazil climbs the most at 7.4752 percentage points.",
+   "That ODIDI is a poor field to compare regimes on, because a field whose NPVs are all negative cannot separate two sweeps."
+  ],
+  "answer": 2,
+  "explanation": "On the default project the capex verdict names Angola - Deepwater PSC at 88.6123 million USD while the price verdict declines to rank at all, so the two sweeps agree in tendency and never row for row."
+ },
+ {
+  "prompt": "The contractor verdict on ODIDI prints 1.7 million USD and says there is no single IRR, because the NPV is zero at -19.2% and 12.2%. What did it rank?",
+  "options": [
+   "The first row of the summary at full precision, 1.7389 million USD, because the sort has already put the highest contractor NPV there.",
+   "The largest contractor NPV it could find across the six ledgers, recomputed at the comparison's discount rate before the sentence was built.",
+   "The rounded figures themselves, which is why two regimes printing the same value are reported as a tie by this verdict.",
+   "The undiscounted lifetime contractor net cash flow, which on ODIDI is 229.9586 million USD for that regime."
+  ],
+  "answer": 0,
+  "explanation": "Every insight sentence rounds money and rates to one decimal place while the ranking underneath runs at full precision."
+ },
+ {
+  "prompt": "A two-year project spends 1 million USD and then earns 2000, so its one real root sits at 199900 percent. Which answer does `calculateIRR` give for it, and on what grounds?",
+  "options": [
+   "It returns 199900.0000 percent, the band having been widened until the search reached the root.",
+   "It returns 1000.0000 percent, the top of the band, as the screening engine returns its own clamp.",
+   "It returns null with the status no-root, since a root outside the band is a root the engine did not find.",
+   "It returns null with the status above-clamp, because the only root lies beyond the band from -99 to 1000 percent."
+  ],
+  "answer": 3,
+  "explanation": "The NPV at 102400 percent is 0.0009 and at 199900 percent is 0.0000, so 102400 is no root; the only root lies above the band, and the engine says so with a status instead of a rate."
+ },
+ {
+  "prompt": "Two published cases have an NPV at 10 percent of 25.6198 and of -16.5289 million USD: one never changes sign, the other is -100 then 90. What does `calculateIRR` return for each?",
+  "options": [
+   "Null with the status no-root on both, neither having a rate inside the band from -99 to 1000 percent that brings its NPV to zero at year-end discounting.",
+   "Null with the status no-sign-change on the profitable one, and the negative root itself, -10.0000 percent, on the one that loses money at every positive rate.",
+   "0.0000 percent on the profitable one and null on the other, the engine still declining to print a negative rate even where the only root lies well inside its band.",
+   "-10.0000 percent on both, the shared contract reporting the nearest root inside the band whatever the flows do, including flows that never change sign."
+  ],
+  "answer": 1,
+  "explanation": "A profitable flow with no sign change has no rate to report, and a loss at every positive rate has a real negative root; a reader who would accept 0.0000 percent for either has read neither status."
+ },
+ {
+  "prompt": "What does an `rrtUpliftPct` of 20 do to the resource rent tax base?",
+  "options": [
+   "It subtracts a fifth of total capex from the profit share in every one of the 25 years, so the relief is five times the capex.",
+   "It subtracts a fifth of total capex from the profit share in the first year only, as a capital allowance on the year the money was spent.",
+   "It opens a pool at 1.2 times total capex, drawn against the profit share until it is exhausted and never refilled.",
+   "It raises the resource rent tax rate by a fifth in the years the project is still recovering its capital."
+  ],
+  "answer": 2,
+  "explanation": "Total capex on the default project is 500.0000 million USD, and the annual treatment this pool replaced was one the engine called a screening approximation in its own comment."
+ },
+ {
+  "prompt": "In the isolated uplift sweep, where the corporate income tax is set to zero so the resource rent tax stands alone, an uplift of 50 returns total tax of 290.7165 million USD and a first charged year of 9. What has happened?",
+  "options": [
+   "A larger pool has pushed the charge later without removing it, the relief being a one-time pool rather than an annual allowance.",
+   "The instrument has been switched off by a parameter whose name says nothing about switching anything off.",
+   "The tax has been deferred past the 25 year horizon and falls in years the ledger does not reach.",
+   "The base has gone negative and the minimum tax has taken over, which is why the charge arrives so late."
+  ],
+  "answer": 0,
+  "explanation": "At a zero uplift the pool is the capex itself and the first charged year is 6; at 20 percent it is 1.2 times the capex and the first charged year is 7."
+ },
+ {
+  "prompt": "On the default project Nigeria - PIA (2021) keeps 291.8238 million USD of contractor NPV at a capex multiplier of 1.4 and 255.8175 at 1.5. What does that single last step cost, set against the 243.6525 the regime gives up over the whole sweep?",
+  "options": [
+   "243.6525 million USD, since the last step of a sweep carries its whole loss once the grid reaches the overrun on the label.",
+   "255.8175 million USD, the NPV at 1.5, because a loss is read from the endpoint of the axis and never from a difference.",
+   "34.81 million USD, the range loss of 243.6525 spread evenly over the seven steps, since a sweep loses the same amount at every step.",
+   "About 36.01 million USD, the swept point at 1.4 minus the swept point at 1.5."
+  ],
+  "answer": 3,
+  "explanation": "The last step is the 1.4 point minus the 1.5 point; the range loss runs from the first swept point at 0.8 to the eighth at 1.5, and the two are different spans of one sweep."
+ },
+ {
+  "prompt": "The verdict quotes Angola - Deepwater PSC as giving up 88.6123 million USD across the swept capex range. What is that measured over?",
+  "options": [
+   "Seven multipliers from 0.8 to 1.4, the eighth point being computed and then dropped.",
+   "Eight multipliers from 0.8 to 1.5, a 20 percent underspend against a 50 percent overrun.",
+   "Its base contractor NPV of 211.3787 million USD, against the value it keeps at the last swept multiplier.",
+   "Nine multipliers from 0.7 to 1.5, the range the published capex cases run."
+  ],
+  "answer": 1,
+  "explanation": "USA - Gulf of Mexico sits at the other end of the same table at 267.7301 million USD, and the last swept value equals the engine called directly at a multiplier of 1.5."
+ },
+ {
+  "prompt": "Every rate in a written answer on ODIDI is correct and the resilience answer is still wrong. What was skipped?",
+  "options": [
+   "The ranges, since the capex sweep stops at a multiplier of 1.4 while the chart promises 1.5.",
+   "The sort, since a resilience verdict is read off the summary's first row.",
+   "The field: a capex loss belongs to one project, and ODIDI orders the six templates differently from the default project.",
+   "The discount rate, since ODIDI is discounted at 12 percent and the swept losses are reported at the comparison's own 10."
+  ],
+  "answer": 2,
+  "explanation": "Ranges and definitions are where the marks are lost, and ODIDI's losses of 181.1922 and 252.6075 million USD belong to that field alone."
+ },
+ {
+  "prompt": "What does this model hand to someone else?",
+  "options": [
+   "Nigerian fiscal truth, which belongs to the Petroleum Economics Studio engine, and any regime whose real burden lives in an instrument the four fields cannot express.",
+   "The comparison of regimes against each other, which needs a full contract model carrying depreciation, ring fencing and loss carryforward rather than four instruments on one ledger.",
+   "The generation of a production profile, which it refuses to attempt and takes instead from whatever forecast the caller supplies alongside the project, its deck and its cost stack.",
+   "The discounting, which is left to the caller because the engine returns undiscounted lifetime totals only."
+  ],
+  "answer": 0,
+  "explanation": "The answer is not to bend a rate until the total looks right, and the sandbox also models no abandonment, no depreciation, no loss carryforward, no ring fence and no valuation date."
+ },
+ {
+  "prompt": "On ODIDI the highest contractor NPV and the largest government cash flow sit in different rows. Which rows, and why is that not a contradiction?",
+  "options": [
+   "Brazil - Concession heads both, and the appearance of a split comes from the government share of net revenue column, which is a ratio rather than a total.",
+   "Nigeria - PIA (2021) at 1.7389 million USD heads the sort while Angola - Deepwater PSC collects 316.7898 at rank 6, because the sort ranks the contractor's discounted cash and take is the state's undiscounted share.",
+   "Generic Royalty/Tax heads the sort at -13.3840 million USD while Nigeria - PIA (2021) collects 196.0260 million USD, and the two differ because one of those columns is a percent of revenue and the other is money over the whole life.",
+   "Angola - Deepwater PSC heads both on ODIDI, which is what makes the field a poor one to rehearse a comparison on."
+  ],
+  "answer": 1,
+  "explanation": "Only the head of the ODIDI sort returns a positive NPV at 12 percent, 1.7389 million USD, and the same regime collects the least for the government, 196.0260."
+ },
+ {
+  "prompt": "Under the PIA template on ODIDI the contractor net cash flow reads -0.0003 million USD in year 20 and stays negative to year 25, while the cumulative ends at 229.9586. What does that mean for the payback year?",
+  "options": [
+   "Payback is recomputed at the end and reported as the last year the cumulative was above zero, which on this ledger is year 25.",
+   "Payback is null on this ledger, because a cumulative that turns down inside the horizon has not recovered the capital.",
+   "Payback is unaffected because the engine reads only the years before the R factor passes 1.0, which on ODIDI is year 6.",
+   "Payback is a first crossing and not a high water mark, and the cumulative peaks at 250.9149 million USD before falling back."
+  ],
+  "answer": 3,
+  "explanation": "The cumulative first turns positive in year 7 at 43.8352 million USD, and late year opex against a declining revenue is what pulls it back."
+ },
+ {
+  "prompt": "On the Designer's defaults the Concessionary regime reads 46.3452 percent in the summary and 59.6210 percent on the price chart at the base price. Which one is government share of net revenue, and why do they differ?",
+  "options": [
+   "The summary's 46.3452, because it adds total capex back to the contractor side, while the chart's 59.6210 divides the same two totals with nothing added back.",
+   "The chart's 59.6210, because the sweep re-runs the whole ledger at each of its nine prices and therefore works on profit, while the summary reports a single ratio taken on cash.",
+   "The summary's 46.3452, because it is discounted at 10 percent while the chart's number is an undiscounted lifetime ratio.",
+   "Neither, since both divide take by take plus contractor cash and the difference between them is the swept price."
+  ],
+  "answer": 0,
+  "explanation": "The Designer's sample PSC regime, whose values are illustrative samples, shows the same pair, 56.5354 against 72.7302, a gap of 16.1948 percentage points on one screen."
+ },
+ {
+  "prompt": "The payback verdict on `cmp_all_templates_default_project` closes with \"against year 4 for Angola - Deepwater PSC\". What is Angola in that sentence?",
+  "options": [
+   "The runner-up, the regime that recovers its capital second fastest of the six templates.",
+   "The regime with the lowest contractor NPV, which the sentence quotes as the comparison's floor.",
+   "The slowest regime left once the tied fastest ones are named, here the only one paying back in year 4.",
+   "The one regime whose R factor payout comes later than its cash payback, which the sentence flags as a warning."
+  ],
+  "answer": 2,
+  "explanation": "The verdict names every regime tied at the fastest year, sets them aside and takes the maximum of what is left, so the second name is the slowest of the rest. The payback column reads 3, 3, 3, 3, 4 and 3 down the summary, and Angola pays out in year 3, before its payback."
+ },
+ {
+  "prompt": "On a comparison where every point of every share series is null and flagged undefined, what does the price verdict return?",
+  "options": [
+   "The regime with the largest government cash flow, since the verdict falls back on the take column whenever no series can be ranked.",
+   "A sentence saying no regime can be ranked across the sweep and that no regime is economic at any swept price.",
+   "A most progressive regime on a climb of 0.0 percentage points, because two nulls subtract to zero like any other pair.",
+   "Nothing at all, since the verdict is omitted in the same way it is for a comparison of one regime."
+  ],
+  "answer": 1,
+  "explanation": "On `cmp_never_recovers` all six templates are undefined at all nine prices, so fewer than three swept prices give a share for every regime, and the sentence ends: no regime is economic at any swept price from 40 to 120 USD per bbl."
+ },
+ {
+  "prompt": "A reader quotes the resilience verdict for Angola - Deepwater PSC on the default project. Which two separate checks does that number need?",
+  "options": [
+   "Whether the discount rate matches the project and whether the regime's four instruments were taken from the template rather than the Designer.",
+   "Whether the sweep re-ran every regime and whether the loss was measured from the peak of the curve rather than from its first point.",
+   "Whether the capex lines were scaled together and whether the opex moved with them.",
+   "Whether the ranked quantities are separated at all, and whether the swept range is the range the answer was about."
+  ],
+  "answer": 3,
+  "explanation": "The pick refuses a lead under 0.1 million USD, and the quantity comes from eight points running 0.8 to 1.5, so both checks can be made off the chart."
+ },
+ {
+  "prompt": "On the default project the price climb and the capex loss rank the six templates in nearly the same order. What connects the two sweeps?",
+  "options": [
+   "A regime that takes a rising share of the upside absorbs a share of the downside, so the contractor's NPV under it moves less when capital cost rises.",
+   "They are computed from the same series, since the capex sweep is the price sweep re-expressed in money rather than in percentage points of government take.",
+   "Both sweeps hold the other variable at the base case, so the two rankings are the same ranking measured twice.",
+   "Each is an endpoint difference over eight points, so a regime that leads one must lead the other by construction."
+  ],
+  "answer": 0,
+  "explanation": "The two steepest climbers give up the least at 100.7185 and 88.6123 million USD and the two most regressive give up 244.0782 and 267.7301, while Nigeria - PIA (2021), almost flat at -0.0068, gives up 243.6525, so the orders still differ row for row."
+ },
+ {
+  "prompt": "On `cmp_never_recovers` every IRR is null with the status no-root and every payback is null. What may a reader do with those two columns?",
+  "options": [
+   "Sort on the IRR, since the status word orders the six regimes even where the rate itself is missing.",
+   "Read the payback null as the last year of the horizon, since a project that never pays back has by definition a payback of year 25.",
+   "Neither may be sorted on: the first says no rate in the band brings the NPV to zero and the second a payback that never arrived.",
+   "Use the payback column to break the tie in the IRR column, because the two are computed from the same cumulative series."
+  ],
+  "answer": 2,
+  "explanation": "The sort that produced the table was on contractor NPV, and what it ranks is six ways of losing money, from -15354.6816 to -15900.1132 million USD."
+ },
+ {
+  "prompt": "ODIDI carries oil, gas and NGL while the Suite test project produces 30000 bbl/d of oil with no gas and no NGL. What does that change about a price sweep on each?",
+  "options": [
+   "On the test project the sweep is meaningless because a single stream cannot show progressivity at all, and on ODIDI it is the only one of the two readings a fiscal analyst should quote.",
+   "On the test project the multiplier is the whole revenue multiplier, and on ODIDI it moves oil only while gas at 40 Mscf/d and NGL at 900 bbl/d stay where the deck left them.",
+   "On both the multiplier scales all three stream prices, and the difference is only that two of ODIDI's streams are small.",
+   "On the test project the sweep must re-run the decline as well, since an oil only field has no gas revenue to hold the ledger up at a low price."
+  ],
+  "answer": 1,
+  "explanation": "A flat curve on a gas weighted field means the sweep did not move most of the revenue, and it says little about whether the terms respond to price."
+ },
+ {
+  "prompt": "The engine returns 255.8175 million USD for Nigeria - PIA (2021) at a capex multiplier of 1.5 both as a swept point and when called directly. What does that agreement pin?",
+  "options": [
+   "That the golden publishes the oracle's eighth point in place of the engine's, the two being equal at that multiplier.",
+   "That the chart may drop a point whose contractor NPV falls below the base case by more than a third, as 255.8175 does against 432.0925.",
+   "That a direct call and a swept point use different discount conventions which happen to meet at a multiplier of 1.5.",
+   "That the sweep reaches its endpoint rather than approaching it, which is the check a step count buys over an accumulating sum."
+  ],
+  "answer": 3,
+  "explanation": "The golden also pins the grid itself as `capexGrid`, eight multipliers from 0.8 to 1.5, so the count and the labels are pinned as well as the values."
+ }
+]

@@ -13,14 +13,14 @@ The engine's discounted profitability index divides the NPV by the present value
 | AKATA | 72534830.66 | 250909090.91 | 0.289088 |
 | jv_analytic_decision_kpis | 21590909.09 | 50000000.00 | 0.431818 |
 | multiyear_jv_real | 88104639.00 | 147272727.27 | 0.598241 |
-| multiyear_pia_real | 203250580.21 | 510181818.18 | 0.398389 |
+| multiyear_pia_real | 219158380.04 | 510181818.18 | 0.429569 |
 | zero_rates_capex_only | -69090909.09 | 50000000.00 | -1.381818 |
 | jv_loss_unused_at_cessation | -50000000.00 | 50000000.00 | -1.000000 |
 | single_year_positive | 35000000.00 | 0.00 | null |
 
 ## What it is for
 
-NPV ranks by value; DPI ranks by value per unit of capital. multiyear_pia_real has the largest NPV in the table, 203250580.21, and a DPI of 0.398389; multiyear_jv_real has less than half that NPV, 88104639.00, and a higher DPI of 0.598241. If capital is the constraint, the second field does more with it. If capital is not the constraint, NPV is the ranking and DPI is only a description.
+NPV ranks by value; DPI ranks by value per unit of capital. multiyear_pia_real has the largest NPV in the table, 219158380.04, and a DPI of 0.429569; multiyear_jv_real has less than half that NPV, 88104639.00, and a higher DPI of 0.598241. If capital is the constraint, the second field does more with it. If capital is not the constraint, NPV is the ranking and DPI is only a description.
 
 A DPI of exactly minus 1.000000 says the field lost precisely its capex in present value and nothing else, which is jv_loss_unused_at_cessation: NPV minus 50000000.00 against a PV of capex of 50000000.00. A DPI past minus one, like zero_rates_capex_only at minus 1.381818, says it lost more than its capital; the excess is opex spent with no revenue against it.
 

@@ -1,46 +1,34 @@
 // Every value the EC1 lab exposes to a panel, a lesson or the grader is pinned
-// here against the teaching digest (/root/ec-wip-cashflow/digest.txt), which
-// is itself nothing but the vendored engine's return values on the published
-// goldens and on the teaching field AKATA. The digest prints money to two
-// decimals, rates and ratios to six and percentages to four, and the pins
-// below hold each number to the precision the digest prints it at.
+// here against the teaching digest (tools/course-waves/cashflow/digest.txt,
+// read through tools/course-waves/waveInputs.mjs), which is itself nothing but
+// the vendored engine's return values on the published goldens and on the
+// teaching field AKATA, every PIA run on the engine's default path. The digest
+// prints money to two decimals, rates and ratios to six and percentages to
+// four, and the pins below hold each number to the precision the digest
+// prints it at. The PIA sections go further and rebuild the digest's own lines
+// from the lab's return values, each of which must occur in the digest verbatim.
 //
 // THE EIGHTEEN GRADED FIELDS of the IKPOTO capstone are pinned separately and
-// EXACTLY against /root/ec-wip-cashflow/fields.json, because a grader reading
-// one derivation and a lesson reading another is exactly the failure this
-// file exists to stop. Then the leak gate: no teaching export may return a
-// number within ten times a graded field's absolute tolerance of a graded
-// answer, in any of three unit shiftings.
+// EXACTLY against the committed fields.json, because a grader reading one
+// derivation and a lesson reading another is exactly the failure this file
+// exists to stop. Then the leak gate: no teaching export may return a number
+// within ten times a graded field's absolute tolerance of a graded answer, in
+// any of three unit shiftings.
 
 import { describe, it, expect } from 'vitest';
+import * as fs from 'node:fs';
 import * as L from './cashflowLab.js';
+import { waveInput } from '../../../../../tools/course-waves/waveInputs.mjs';
+
+const DIGEST = fs.readFileSync(waveInput('cashflow', 'digest.txt'), 'utf8');
 
 /**
- * THE EIGHTEEN GRADED FIELDS, as [tier, key, value, tolerance], copied from
- * /root/ec-wip-cashflow/fields.json. THE TOLERANCE IS ABSOLUTE, in the
- * field's own units: academy_submit_capstone grades with
- * abs(v_got - v_exp) <= v_tol and divides by nothing.
+ * THE EIGHTEEN GRADED FIELDS, as [tier, key, value, tolerance], read from the
+ * committed fields.json. THE TOLERANCE IS ABSOLUTE, in the field's own units:
+ * academy_submit_capstone grades with abs(v_got - v_exp) <= v_tol and divides
+ * by nothing.
  */
-const CAPSTONE_FIELDS = [
-  ['beginner', 'jv_2033_gross_revenue_usd', 66419677.183999985, 1],
-  ['beginner', 'jv_2032_tax_usd', 19728417.6, 1],
-  ['beginner', 'jv_2034_net_cash_flow_usd', 22086267.91657759, 1],
-  ['beginner', 'jv_payback_years', 3.4998246420308123, 0.00001],
-  ['beginner', 'jv_total_boe', 5430620.16, 1],
-  ['beginner', 'jv_government_take_pct', 75.09574181027746, 0.0001],
-  ['intermediate', 'jv_npv_real_usd', 20656337.21686185, 1],
-  ['intermediate', 'jv_npv_mid_year_usd', 20030970.834339857, 1],
-  ['intermediate', 'jv_irr_pct', 23.719272956750835, 0.0001],
-  ['intermediate', 'jv_discounted_payback_years', 3.9696530221864026, 0.0001],
-  ['intermediate', 'jv_dpi', 0.17502648916650668, 0.000001],
-  ['intermediate', 'jv_breakeven_oil_price_usd_bbl', 66.10100889205933, 0.001],
-  ['advanced', 'pia_2032_price_royalty_usd', 951123.1830656304, 1],
-  ['advanced', 'pia_2032_prod_alw_eligible_bbl', 787500, 1],
-  ['advanced', 'pia_2031_cpr_deferred_usd', 3942400, 1],
-  ['advanced', 'pia_total_hct_usd', 51541932.563462615, 1],
-  ['advanced', 'pia_2033_dev_levy_usd', 1331296.587088759, 1],
-  ['advanced', 'pia_npv_real_usd', -46086957.32549152, 1],
-];
+const CAPSTONE_FIELDS = JSON.parse(fs.readFileSync(waveInput('cashflow', 'fields.json'), 'utf8'));
 
 // The digest's three precisions.
 const money = (got, want) => expect(got).toBeCloseTo(want, 2);
@@ -55,9 +43,10 @@ const byYear = (rows, year) => rows.find((r) => r.year === year);
 // ---------------------------------------------------------------------------
 
 describe('the engine, its version and its eight refusals', () => {
-  it('is the 3.10.0 engine the goldens were cut against', () => {
-    expect(L.ENGINE_VERSION).toBe('3.10.0');
+  it('is the 3.12.0 engine the goldens and the digest were cut against', () => {
+    expect(L.ENGINE_VERSION).toBe('3.12.0');
     expect(L.GOLDEN_ENGINE_VERSION).toBe(L.ENGINE_VERSION);
+    expect(DIGEST).toContain(`Engine version ${L.ENGINE_VERSION}.`);
   });
 
   it('refuses all eight published uploads with the message the golden expects', () => {
@@ -197,9 +186,9 @@ describe('prices', () => {
   it('three streams, one fiscal price', () => {
     const m = L.mixedStreamsCase();
     money(m.rows[0].gross_revenue, 556000000);
-    money(m.rows[0].royalty, 72140113.95);
-    money(m.rows[0].hct_tax, 70557300.35);
-    money(m.rows[0].tet_tax, 9093997.15);
+    money(m.rows[0].royalty, 51126152.49);
+    money(m.rows[0].hct_tax, 72644114.69);
+    money(m.rows[0].tet_tax, 11543215.43);
     vol(m.totalBoe, 10300000);
   });
 });
@@ -424,14 +413,14 @@ describe('the profile point at the applied rate is the headline (EC1-1)', () => 
     const c = L.profileGapCases();
     const at = (name) => c.find((x) => x.label === name);
     expect(c[0].label).toBe('AKATA');
-    money(at('multiyear_pia_real').headlineNpv, 203250580.21); money(at('multiyear_pia_real').labelledPointNpv, 203250580.21); money(at('multiyear_pia_real').gap, 0);
+    money(at('multiyear_pia_real').headlineNpv, 219158380.04); money(at('multiyear_pia_real').labelledPointNpv, 219158380.04); money(at('multiyear_pia_real').gap, 0);
     expect(at('multiyear_pia_real').oracle).toBeNull();
     money(at('multiyear_jv_real').headlineNpv, 88104639.00); money(at('multiyear_jv_real').labelledPointNpv, 88104639.00); money(at('multiyear_jv_real').gap, 0);
-    money(at('multiyear_pia_midyear_real').headlineNpv, 196677221.27); money(at('multiyear_pia_midyear_real').labelledPointNpv, 196677221.27); money(at('multiyear_pia_midyear_real').gap, 0); expect(at('multiyear_pia_midyear_real').exactIsComparable).toBe(false);
-    money(at('pia_loss_relief').headlineNpv, -5475212.04); money(at('pia_loss_relief').labelledPointNpv, -5475212.04); money(at('pia_loss_relief').gap, 0);
-    money(at('allowance_cap_midyear').headlineNpv, 2406447.46); money(at('allowance_cap_midyear').labelledPointNpv, 2406447.46); money(at('allowance_cap_midyear').gap, 0);
+    money(at('multiyear_pia_midyear_real').headlineNpv, 212070544.45); money(at('multiyear_pia_midyear_real').labelledPointNpv, 212070544.45); money(at('multiyear_pia_midyear_real').gap, 0); expect(at('multiyear_pia_midyear_real').exactIsComparable).toBe(false);
+    money(at('pia_loss_relief').headlineNpv, 4985473.45); money(at('pia_loss_relief').labelledPointNpv, 4985473.45); money(at('pia_loss_relief').gap, 0);
+    money(at('allowance_cap_midyear').headlineNpv, 18637168.50); money(at('allowance_cap_midyear').labelledPointNpv, 18637168.50); money(at('allowance_cap_midyear').gap, 0);
     expect(at('jv_analytic_decision_kpis').appliedRateLabelPct).toBe(10); money(at('jv_analytic_decision_kpis').gap, 0);
-    expect(at('multiyear_pia_nominal').appliedRateLabelPct).toBe(10); money(at('multiyear_pia_nominal').headlineNpv, 203250580.21); money(at('multiyear_pia_nominal').gap, 0);
+    expect(at('multiyear_pia_nominal').appliedRateLabelPct).toBe(10); money(at('multiyear_pia_nominal').headlineNpv, 219158380.04); money(at('multiyear_pia_nominal').gap, 0);
     // Not one case is left with a gap, and the golden carries no profile
     // disagreement for any of them.
     c.forEach((g) => money(g.gap, 0));
@@ -563,8 +552,8 @@ describe('payback, discounted payback, DPI and take', () => {
     money(j.npv, 88104639.00); rate(j.dpi, 0.598241); pct(j.takePct, 69.2573); pct(j.discountedTakePct, 75.4578);
     rate(j.unitTechnicalCost, 38.952763); rate(j.opexPerBoe, 18.334475);
     const p = at('multiyear_pia_real');
-    rate(p.paybackYears, 2.892034); rate(p.discountedPaybackYears, 3.154942); money(p.pvCapex, 510181818.18);
-    money(p.npv, 203250580.21); rate(p.dpi, 0.398389); pct(p.takePct, 71.1024); pct(p.discountedTakePct, 77.4499);
+    rate(p.paybackYears, 2.844931); rate(p.discountedPaybackYears, 3.082405); money(p.pvCapex, 510181818.18);
+    money(p.npv, 219158380.04); rate(p.dpi, 0.429569); pct(p.takePct, 69.3025); pct(p.discountedTakePct, 75.6850);
     rate(p.unitTechnicalCost, 32.823299); rate(p.opexPerBoe, 15.356751);
     const z = at('zero_rates_capex_only');
     expect(z.payback).toBe('Beyond project life'); expect(z.paybackYears).toBeNull(); expect(z.discountedPaybackYears).toBeNull();
@@ -588,18 +577,18 @@ describe('sweeps', () => {
     const at = (name) => s.find((x) => x.name === name);
     const d = at('decline_rate_multiyear_pia');
     expect(d.key).toBe('decline_pct');
-    money(d.points[0].npv, 281783674.60); expect(d.points[0].economicLimitYear).toBe(2034); expect(d.points[0].yearsTrimmed).toBe(0); expect(d.points[0].rows).toBe(10);
-    money(d.points[2].npv, -76483227.81); expect(d.points[2].rows).toBe(6); expect(d.points[2].economicLimitYear).toBe(2030); expect(d.points[2].yearsTrimmed).toBe(4);
-    money(d.points[4].npv, -261416751.74); expect(d.points[4].rows).toBe(3); pct(d.points[4].takePct, 1199.4096);
+    money(d.points[0].npv, 310869249.17); expect(d.points[0].economicLimitYear).toBe(2034); expect(d.points[0].yearsTrimmed).toBe(0); expect(d.points[0].rows).toBe(10);
+    money(d.points[2].npv, -30055502.32); expect(d.points[2].rows).toBe(7); expect(d.points[2].economicLimitYear).toBe(2031); expect(d.points[2].yearsTrimmed).toBe(3);
+    money(d.points[4].npv, -236566396.64); expect(d.points[4].rows).toBe(3); pct(d.points[4].takePct, 1079.0391);
     const r = at('discount_rate_multiyear_jv_real');
     expect(r.points.map((p) => p.value)).toEqual([0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20]);
     money(r.points[0].npv, 148905488.72); money(r.points[5].npv, 88104639.00); money(r.points[10].npv, 50852201.45);
     r.points.forEach((p) => { pct(p.irrPct, 47.9020); pct(p.takePct, 69.2573); expect(p.totalRoyalties).toBeNull(); });
     const o = at('oil_price_multiyear_pia_real');
-    money(o.points[0].npv, -145273028.51); money(o.points[4].npv, 203250580.21); money(o.points[8].npv, 423341704.82);
-    money(o.points[0].totalHct, 56507066.42); money(o.points[8].totalProductionAllowance, 59028480);
+    money(o.points[0].npv, -96780763.39); money(o.points[4].npv, 219158380.04); money(o.points[8].npv, 447901161.52);
+    money(o.points[0].totalHct, 64509751.64); money(o.points[8].totalProductionAllowance, 59028480);
     const w = at('oil_price_pia_worked_example');
-    money(w.points[0].npv, -91256250); money(w.points[4].npv, 135185570.34); money(w.points[8].npv, 337823783.27);
+    money(w.points[0].npv, -85560750); money(w.points[4].npv, 141236909.83); money(w.points[8].npv, 344548047.12);
     expect(w.points[0].irrPct).toBeNull(); expect(w.points[0].payback).toBe('Beyond project life'); expect(w.points[4].payback).toBe('Year 0');
   });
   it('the AKATA oil price sweep', () => {
@@ -660,8 +649,8 @@ describe('the breakeven oil price', () => {
     const b = L.breakevenCases();
     const at = (name) => b.find((x) => x.name === name);
     rate(at('jv_analytic').engineBreakeven, 71.725872); rate(at('jv_analytic').goldenBreakeven, 71.72619); money(at('jv_analytic').npvAtBreakeven, -243.53);
-    rate(at('pia_worked_example').engineBreakeven, 55.308589); money(at('pia_worked_example').npvAtBreakeven, 810.98);
-    rate(at('multiyear_pia_real').engineBreakeven, 53.23928); money(at('multiyear_pia_real').npvAtBreakeven, 851.16);
+    rate(at('pia_worked_example').engineBreakeven, 54.28632); money(at('pia_worked_example').npvAtBreakeven, -1391.65); expect(at('pia_worked_example').goldenBreakeven).toBeNull();
+    rate(at('multiyear_pia_real').engineBreakeven, 49.623705); money(at('multiyear_pia_real').npvAtBreakeven, -3574.39); expect(at('multiyear_pia_real').goldenBreakeven).toBeNull();
     ['deck_present_null', 'never_breaks_even_null', 'positive_at_floor_null'].forEach((name) => {
       expect(at(name).engineBreakeven).toBeNull(); expect(at(name).goldenBreakeven).toBeNull(); expect(at(name).npvAtBreakeven).toBeNull();
     });
@@ -741,126 +730,164 @@ describe('production sharing: the pool the rows do not carry', () => {
   });
 });
 
+// ---------------------------------------------------------------------------
+// The PIA sections are pinned by REBUILDING the digest's own lines from the
+// lab's return values, with the digest generator's own formatting, and
+// requiring each rebuilt line to occur in the committed digest verbatim. A
+// number that moves, a label that drifts or a refusal whose wording changes
+// fails by name.
+// ---------------------------------------------------------------------------
+
+const f2 = (x) => (x === null || x === undefined ? 'null' : Number(x).toFixed(2));
+const f6 = (x) => (x === null || x === undefined ? 'null' : Number(x).toFixed(6));
+const f4 = (x) => (x === null || x === undefined ? 'null' : Number(x).toFixed(4));
+const yn = (b) => (b === true ? 'true' : b === false ? 'false' : 'null');
+const cell = (k, x) => {
+  if (x === null || x === undefined) return 'null';
+  if (typeof x === 'boolean') return yn(x);
+  if (typeof x === 'string') return x;
+  if (k === 'year') return String(x);
+  if (/price|share_pct/.test(k)) return f6(x);
+  if (/bbl|mscf|boe/.test(k)) return f2(x);
+  return f2(x);
+};
+const inDigest = (line) => expect(DIGEST.includes(line), `not in the digest: ${line}`).toBe(true);
+const PIA_COLS = ['year', 'oil_bbl', 'condensate_bbl', 'gas_mscf', 'applied_oil_price', 'gross_revenue', 'production_royalty', 'price_royalty', 'royalty', 'hcdt', 'nddc', 'opex', 'capex', 'cpr_cap', 'cpr_costs_claimed', 'cpr_deferred_to_next', 'hct_assessable_profit', 'production_allowance', 'prod_alw_eligible_bbl', 'prod_alw_cap_applied', 'hct_chargeable_profit', 'hct_loss_offset_used', 'hct_loss_carryforward', 'hct_tax', 'cit_assessable_profit', 'cit_chargeable_profit', 'cit_loss_offset_used', 'cit_loss_carryforward', 'cit_tax', 'tet_tax', 'dev_levy_tax', 'tax', 'net_cash_flow', 'real_net_cash_flow', 'discounted_cash_flow', 'cumulative_cash_flow', 'fiscal_framework', 'cumulative_oil_bbl_lifetime'];
+const rowLine = (row, cols) => `| ${cols.map((c) => cell(c, row[c])).join(' | ')} |`;
+
 describe('the PIA royalties', () => {
   const t = L.royaltyTables();
-  it('the terrain table and the marginal blend', () => {
+  it('the production royalty by terrain and daily rate: weighted tranches, every line the digest prints', () => {
+    expect(t.oilByTerrain.map((r) => r.terrain)).toEqual(['onshore', 'shallow_water', 'deep_offshore', 'frontier']);
+    t.oilByTerrain.forEach((r) => inDigest(`- ${r.terrain}: ${r.byRate.map((q) => `${q.bopd} bopd gives ${f6(q.rate)}`).join('; ')}.`));
     const oil = Object.fromEntries(t.oilByTerrain.map((r) => [r.terrain, Object.fromEntries(r.byRate.map((q) => [q.bopd, q.rate]))]));
-    L.ROYALTY_RATE_PROBES_BOPD.forEach((b) => { rate(oil.onshore[b], 0.15); rate(oil.shallow_water[b], 0.125); rate(oil.frontier[b], 0.075); });
-    rate(oil.deep_offshore[50000], 0.05); rate(oil.deep_offshore[50001], 0.075); rate(oil.deep_offshore[120000], 0.075);
-    rate(oil.marginal_field[1000], 0.05); rate(oil.marginal_field[6000], 0.054167); rate(oil.marginal_field[10000], 0.0625);
-    rate(oil.marginal_field[20000], 0.10625); rate(oil.marginal_field[50000], 0.1325); rate(oil.marginal_field[120000], 0.142708);
-    const gas = Object.fromEntries(t.gasByTerrain.map((r) => [r.terrain, r.rate]));
-    expect(gas).toEqual({ onshore: 0.07, shallow_water: 0.07, deep_offshore: 0.05, frontier: 0.05, marginal_field: 0.07 });
+    rate(oil.onshore[6000], 0.054167); rate(oil.shallow_water[60000], 0.114583);
+    rate(oil.deep_offshore[50001], 0.05); rate(oil.deep_offshore[60000], 0.054167); rate(oil.frontier[1], 0.075);
   });
-  it('the price royalty anchors escalate from 2021', () => {
-    const px = Object.fromEntries(t.priceAnchors.map((r) => [r.year, Object.fromEntries(r.byPrice.map((q) => [q.price, q.rate]))]));
-    rate(px[2021][50], 0); rate(px[2021][55], 0.005); rate(px[2021][100], 0.05); rate(px[2021][150], 0.1); rate(px[2021][200], 0.1);
-    rate(px[2025][55], 0.000811); rate(px[2025][80], 0.023908); rate(px[2025][100], 0.042385); rate(px[2025][160], 0.097815);
-    rate(px[2026][60], 0.004344); rate(px[2030][60], 0.000205); rate(px[2030][100], 0.033676); rate(px[2035][60], 0); rate(px[2035][100], 0.025788);
-    rate(t.frontierAt200In2025, 0);
+  it('marginal_field is not a terrain: the refusal is the digest line', () => {
+    expect(t.marginalFieldTerrainRefusal).toContain('is not a terrain');
+    inDigest(`- marginal_field is not a terrain: ${t.marginalFieldTerrainRefusal}`);
   });
-  it('the HCT rate by terrain, licence and framework', () => {
-    expect(t.hctRates.map((r) => +r.rate.toFixed(6))).toEqual([0.3, 0.15, 0.15, 0, 0, 0.3, 0.125, 0, 0.2]);
+  it('gas and NGL royalty, every terrain alike, with the in-country share', () => {
+    t.gasByShare.forEach((g) => inDigest(`- in-country share ${g.sharePct} percent: ${g.byTerrain.map((q) => `${q.terrain} ${f6(q.rate)}`).join('; ')}.`));
+    t.gasByShare[0].byTerrain.forEach((q) => rate(q.rate, 0.05));
+    t.gasByShare[3].byTerrain.forEach((q) => rate(q.rate, 0.025));
   });
-  it('the published terrain cases run', () => {
+  it('the royalty-by-price benchmarks on both bases, and the rate by price', () => {
+    t.benchmarks.forEach((b) => inDigest(`| ${b.year} | ${f2(b.regulations2021.low)} | ${f2(b.regulations2021.mid)} | ${f2(b.regulations2021.high)} | ${f2(b.act2020.low)} | ${f2(b.act2020.mid)} | ${f2(b.act2020.high)} |`));
+    t.priceAnchors.forEach((a) => inDigest(`- ${a.year}, shallow_water, regulations_2021: ${a.byPrice.map((q) => `${q.price} gives ${f6(q.rate)}`).join('; ')}.`));
+    inDigest(`- The Act's own example (Seventh Schedule para 11), 75 USD/bbl in 2020 on the act_2020 base: ${f6(t.actExampleAt75In2020)}.`);
+    inDigest(`- frontier at 200 USD/bbl in 2025: ${f6(t.frontierAt200In2025)}.`);
+    rate(t.actExampleAt75In2020, 0.025);
+  });
+  it('the HCT rate by terrain, licence, framework, lease and stated reading, refusals included', () => {
+    expect(t.hctRates).toHaveLength(14);
+    t.hctRates.forEach((h) => inDigest(`- ${h.label}: ${h.refused ? `REFUSED: ${h.refused}` : f6(h.rate)}`));
+    expect(t.hctRates.filter((h) => h.refused).map((h) => h.label)).toEqual([
+      'shallow_water new-acreage PML, no rate stated', 'deep_offshore PML, NTA year, no reading stated',
+    ]);
+  });
+  it('the published terrain cases run on the default path, the refused one on its stated input', () => {
     const c = L.terrainCases();
     expect(c.map((x) => x.name)).toEqual(L.TERRAIN_CASES);
     c.forEach((x) => expect(Number.isFinite(x.kpis.npv)).toBe(true));
+    const lines = L.publishedCaseLines().filter((x) => x.refusedAsPublished);
+    expect(lines.map((x) => x.name).sort()).toEqual(Object.keys(L.STATED_INPUTS).sort());
+    lines.forEach((x) => inDigest(`The published config is REFUSED on the default path: ${x.refusedAsPublished}`));
   });
 });
 
 describe('the hydrocarbon tax cascade', () => {
-  it('computeProductionAllowance on its own', () => {
+  it('computeProductionAllowance on its own: the digest lines', () => {
     const a = L.allowanceCases();
-    const want = [[2500000, 1000000, false], [2000000, 1000000, false], [2500000, 1000000, false], [8000000, 1000000, false], [8000000, 1000000, false], [4000000, 500000, true], [0, 0, true], [6000000, 1000000, false], [0, 0, false]];
-    want.forEach(([al, el, cap], i) => { money(a[i].allowance, al); vol(a[i].eligibleBbl, el); expect(a[i].capApplied).toBe(cap); });
+    expect(a).toHaveLength(14);
+    a.forEach((o) => inDigest(`- ${o.label}: allowance ${f2(o.allowance)}, eligible ${f2(o.eligibleBbl)} bbl, below cap ${f2(o.belowCapBbl)} bbl, after cap ${f2(o.afterCapBbl)} bbl, cap applied ${yn(o.capApplied)}.`));
+    // The year that crosses the cap is split at it, and every later barrel
+    // still earns the after-cap allowance.
+    const cross = a.find((o) => o.label === 'new shallow lease, 1000000 bbl at 80, prior 99500000');
+    money(cross.allowance, 6000000); vol(cross.belowCapBbl, 500000); vol(cross.afterCapBbl, 500000);
+    money(a.find((o) => o.label === 'new shallow lease, 1000000 bbl at 80, prior 100000000').allowance, 4000000);
   });
-  it('the CPR cap does not bind on the worked example, the recovery years do', () => {
+  it('the CPR limit swept on the worked example: the digest lines', () => {
     const s = L.cprCapSweep();
-    money(s[0].cprCap, 438000000); money(s[5].cprCap, 1460000000);
-    s.forEach((r) => { money(r.claimed, 242500000); money(r.deferred, 0); money(r.hct, 284810956.27); money(r.cit, 293998456.27); money(r.npv, 135185570.34); expect(r.cprForfeitedAtCessation).toBeNull(); });
-    const y = L.recoveryYearsSweep();
-    money(y[0].claimed, 482500000); money(y[0].npv, 279185570.34); money(y[1].claimed, 332500000); money(y[1].npv, 189185570.34);
-    money(y[2].claimed, 242500000); money(y[2].npv, 135185570.34); money(y[3].claimed, 212500000); money(y[3].npv, 117185570.34);
+    s.forEach((q) => inDigest(`- pia_cpr_limit_pct ${q.cprPct}: cpr cap ${f2(q.cprCap)}, claimed ${f2(q.claimed)}, deferred ${f2(q.deferred)}, HCT assessable ${f2(q.hctAssessable)}, HCT chargeable ${f2(q.hctChargeable)}, HCT ${f2(q.hct)}, CIT chargeable ${f2(q.citChargeable)}, CIT ${f2(q.cit)}, net ${f2(q.net)}, NPV ${f2(q.npv)}, CPR forfeited ${q.cprForfeitedAtCessation === null ? 'not reported' : f2(q.cprForfeitedAtCessation)}.`));
+    money(s.find((q) => q.cprPct === 65).npv, 141236909.83);
   });
-  it('the published cascade cases run, and the framework switch reads as published', () => {
+  it('the capital allowance is five years, fixed by the texts; any other life is refused', () => {
+    const c = L.capitalAllowanceTable();
+    inDigest(`capitalAllowanceFraction by year of life (0 to 5): PIA years ${c.piaYears.map(f6).join(', ')}; NTA years ${c.ntaYears.map(f6).join(', ')}.`);
+    const y = L.recoveryYearsSweep();
+    y.forEach((q) => inDigest(`- pia_capex_recovery_years ${q.years}: ${q.refused ? `REFUSED: ${q.refused}` : `NPV ${f2(q.npv)}`}`));
+    expect(y.filter((q) => !q.refused).map((q) => q.years)).toEqual([5]);
+  });
+  it('the published cascade cases run, and the framework is chosen year by year', () => {
     const c = L.hctCascadeCases();
     expect(c.map((x) => x.name)).toEqual(L.HCT_CASCADE_CASES);
-    money(c.find((x) => x.name === 'multiyear_pia_real').kpis.npv, 203250580.21);
+    money(c.find((x) => x.name === 'pia_worked_example').kpis.npv, 141236909.83);
+    money(c.find((x) => x.name === 'multiyear_pia_real').kpis.npv, 219158380.04);
     expect(L.frameworkTable().map((r) => r.framework)).toEqual(['pia_only', 'nta_2025', 'nta_2025', 'pia_only', 'nta_2025']);
     expect(L.frameworkCases().map((x) => x.name)).toEqual(L.FRAMEWORK_CASES);
+    const y = L.frameworkByYear();
+    inDigest(`statutoryTetRatePct by year: ${y.statutoryTet.map((q) => `${q.year}: ${q.ratePct}`).join('; ')}.`);
+    inDigest(`fiscalFrameworkForYear with auto: ${y.auto.map((q) => `${q.year}: ${q.framework}`).join('; ')}; with force_pia 2030: ${y.forcePia2030}; with force_nta 2025: ${y.forceNta2025}.`);
+    expect(y.ntaFirstYear).toBe(2026);
+  });
+  it('one ledger across 2025 and 2026 carries both frameworks', () => {
+    const o = L.oneLedgerAcross2025And2026();
+    expect(o.rows.map((q) => q.framework)).toEqual(['pia_only', 'nta_2025']);
+    o.rows.forEach((q) => inDigest(`| ${q.year} | ${q.framework} | ${f2(q.tetRatePct)} | ${f2(q.tet)} | ${f2(q.devLevy)} | ${f2(q.hct)} | ${f2(q.cit)} | ${yn(q.citAllowanceRestricted)} | ${f2(q.net)} |`));
+    inDigest(`TET ${f2(o.totalTet)}, dev levy ${f2(o.totalDevLevy)}, NPV ${f2(o.npv)}.`);
+  });
+  it('the three stated readings, side by side, as the digest prints them', () => {
+    const s = L.statedReadings();
+    const [regs, act] = s.priceRoyaltyBase;
+    inDigest(`Worked example: royalties ${f2(regs.royalties)} on the Regulations base and ${f2(act.royalties)} on the Act's; NPV ${f2(regs.npv)} and ${f2(act.npv)}.`);
+    inDigest(`The same 60,000 bopd field under force_nta: ${s.deepOffshoreNta.map((d) => `${d.reading}: HCT ${f2(d.hct)}, NPV ${f2(d.npv)}`).join('; ')}.`);
+    inDigest(`allowance_cap_midyear at each: ${s.newAcreagePml.map((d) => `${d.ratePct}: HCT ${f2(d.hct)}, NPV ${f2(d.npv)}`).join('; ')}.`);
   });
 });
 
 describe('RESULT 4: AKATA under the PIA, five taxes on three bases', () => {
   const p = L.akataUnderPia();
-  const PIA_ROWS = [
-    // year, prod roy, price roy, royalty, hcdt, nddc, cpr cap, claimed, deferred, hct assessable, allowance, hct chargeable, hct, cit assessable, cit chargeable, cit, tet, dev levy, tax, net, real, dcf, cumulative
-    [2029, 22944240.00, 3605512.36, 26549752.36, 0, 720000, 120920800.00, 66000000.00, 0, 130971072.31, 5500000, 84742595.49, 25422778.65, 134762247.64, 92762247.64, 27828674.29, 0, 5390489.91, 58641942.84, -133879695.21, -133879695.21, -133879695.21, -133879695.21],
-    [2030, 19679900.40, 3092546.29, 22772446.69, 720000, 741600, 103717068.00, 75720000.00, 0, 107629883.47, 4625000, 53548875.90, 16064662.77, 110610673.31, 59610673.31, 17883201.99, 0, 4424426.93, 38372291.70, 27238381.62, 26445030.70, 24762165.11, -107434664.51],
-    [2031, 16818336.50, 2642873.34, 19461209.84, 741600, 763848, 88636045.68, 76461600.00, 0, 87652696.81, 3875000, 34321689.24, 10296506.77, 89934889.36, 38934889.36, 11680466.81, 0, 3597395.57, 25574369.15, 64360520.20, 60665963.05, 53190512.57, -46768701.46],
-    [2032, 14387815.62, 2260935.51, 16648751.13, 763848, 786763.44, 75826707.47, 75826707.47, 1398740.53, 70551028.39, 3250000, 19201415.38, 5760424.61, 72231662.45, 24077220.82, 7223166.25, 0, 2889266.50, 15872857.36, 56358805.10, 51576290.42, 42343204.43, 4807588.96],
-    // 2033 and 2034 carry the CITA restricted allowance: the allowance the
-    // restriction disallows is carried forward and claimed, so the CIT
-    // chargeable profit and the CIT fall against the retired engine's
-    // 19083217.79 / 5724965.34 in 2033 and 20604753.11 / 6181425.93 in 2034.
-    [2033, 12304902.62, 1933621.62, 14238524.24, 786763.44, 810366.34, 64849333.35, 64849333.35, 14561618.62, 54406918.31, 2725000, 16346685.65, 4904005.70, 55521599.17, 18507199.72, 5552159.92, 0, 2220863.97, 12677029.58, 44243310.12, 39309608.00, 30218776.12, 44117196.96],
-    [2034, 10593505.15, 1664688.56, 12258193.71, 810366.34, 834677.33, 55829921.49, 51384196.40, 0, 29328810.32, 2300000, 18301279.57, 5490383.87, 29604753.11, 19733953.35, 5920186.00, 0, 1184190.12, 12594760.00, 31571611.73, 27233949.62, 19603486.93, 71351146.58],
-    [2035, 9043629.29, 1421137.38, 10464766.67, 834677.33, 859717.65, 47661761.23, 28657255.12, 0, 32197437.85, 1925000, 30272437.85, 9081731.35, 32509369.74, 32509369.74, 9752810.92, 0, 1300374.79, 20134917.06, 12374452.67, 10363409.30, 6985055.93, 81714555.87],
-  ];
-  it('the configuration is the digest Section 20 configuration', () => {
+  const COLS = [...PIA_COLS, 'royalty_liquids_bopd', 'royalty_rate_liquids', 'price_royalty_rate_oil', 'hct_rate'];
+  it('the configuration is the digest Section 20 configuration, every other input at the default', () => {
     expect(p.cfg.fiscal_regime).toBe('PIA'); expect(p.cfg.pia_terrain).toBe('shallow_water'); expect(p.cfg.pia_lease_status).toBe('converted');
-    expect(p.cfg.pia_cpr_limit_pct).toBe(65); expect(p.cfg.pia_capex_recovery_years).toBe(5); expect(p.cfg.base_year).toBe(2029);
+    expect(p.cfg.pia_cpr_limit_pct).toBe(65); expect(p.cfg.base_year).toBe(2029);
+    ['pia_capex_recovery_years', 'pia_tet_rate_pct', 'pia_nddc_levy_pct_of_opex', 'pia_legacy_pre_audit'].forEach((k) => expect(p.cfg[k]).toBeUndefined());
     expect(p.kpis.fiscal_framework).toBe('nta_2025');
   });
-  PIA_ROWS.forEach(([year, pr, px, roy, hcdt, nddc, cap, claimed, deferred, hctA, alw, hctC, hct, citA, citC, cit, tet, dev, tax, net, real, dcf, cum]) => {
-    it(`the ${year} row is the digest's row`, () => {
-      const q = byYear(p.rows, year);
-      money(q.production_royalty, pr); money(q.price_royalty, px); money(q.royalty, roy); money(q.hcdt, hcdt); money(q.nddc, nddc);
-      money(q.cpr_cap, cap); money(q.cpr_costs_claimed, claimed); money(q.cpr_deferred_to_next, deferred);
-      money(q.hct_assessable_profit, hctA); money(q.production_allowance, alw); expect(q.prod_alw_cap_applied).toBe(false);
-      money(q.hct_chargeable_profit, hctC); money(q.hct_tax, hct);
-      money(q.cit_assessable_profit, citA); money(q.cit_chargeable_profit, citC); money(q.cit_tax, cit);
-      money(q.tet_tax, tet); money(q.dev_levy_tax, dev); money(q.tax, tax);
-      money(q.net_cash_flow, net); money(q.real_net_cash_flow, real); money(q.discounted_cash_flow, dcf); money(q.cumulative_cash_flow, cum);
-      expect(q.fiscal_framework).toBe('nta_2025');
-    });
+  it('every row is the digest row, cell for cell', () => {
+    expect(p.rows.map((q) => q.year)).toEqual(L.AKATA_YEARS);
+    p.rows.forEach((q) => inDigest(rowLine(q, COLS)));
+    money(byYear(p.rows, 2029).production_royalty, 10070350); money(byYear(p.rows, 2029).nddc, 7020000);
+    p.rows.forEach((q) => { expect(q.fiscal_framework).toBe('nta_2025'); money(q.tet_tax, 0); });
   });
   it('the KPIs and the totals against the JV reading', () => {
-    money(p.kpis.npv, 43223505.88); pct(p.kpis.irr, 21.3784); rate(p.kpis.payback_years, 3.750207); rate(p.kpis.discounted_payback_years, 4.449516);
-    rate(p.kpis.dpi, 0.172268); pct(p.kpis.government_take_pct, 75.5752); pct(p.kpis.government_take_pct_discounted, 85.7943);
-    money(p.totalRoyalties, 122393644.64); money(p.totalHct, 77020493.72); money(p.totalCit, 85840666.18); money(p.totalTet, 0);
-    money(p.totalDevLevy, 21007007.79); money(p.totalHcdt, 4657255.12); money(p.totalNddc, 5516972.77);
-    money(p.totalProductionAllowance, 24200000); money(p.totalTax, 183868167.69);
-    money(p.jv.npv, 72534830.66); pct(p.jv.takePct, 66.1723); money(p.jv.totalTax, 148425219.46);
+    inDigest(`royalties ${f2(p.totalRoyalties)}, HCT ${f2(p.totalHct)}, CIT ${f2(p.totalCit)}, TET ${f2(p.totalTet)}, dev levy ${f2(p.totalDevLevy)}, HCDT ${f2(p.totalHcdt)}, NDDC ${f2(p.totalNddc)}, allowance ${f2(p.totalProductionAllowance)}, total tax ${f2(p.totalTax)}; against AKATA under JV: NPV ${f2(p.jv.npv)}, take ${f4(p.jv.takePct)} percent, total tax ${f2(p.jv.totalTax)}.`);
+    money(p.kpis.npv, 59766796.57); money(p.jv.npv, 72534830.66);
   });
   it('one year as a waterfall carries the five taxes on their bases', () => {
     const w = L.akataPiaYearWaterfall(2029);
+    const q = byYear(p.rows, 2029);
     expect(w.taxes.map((t) => t.name)).toEqual(['royalty', 'hydrocarbon tax', 'companies income tax', 'tertiary education tax', 'development levy']);
-    money(w.taxes[0].amount, 26549752.36); money(w.taxes[0].baseValue, 186032000);
-    money(w.taxes[1].amount, 25422778.65); money(w.taxes[1].baseValue, 84742595.49);
-    money(w.taxes[2].amount, 27828674.29); money(w.taxes[2].baseValue, 92762247.64);
-    money(w.taxes[3].amount, 0); money(w.taxes[4].amount, 5390489.91);
-    money(w.totalTax, 58641942.84); money(w.netCashFlow, -133879695.21);
+    money(w.taxes[0].amount, q.royalty); money(w.taxes[0].baseValue, 186032000);
+    money(w.taxes[1].amount, q.hct_tax); money(w.taxes[1].baseValue, q.hct_chargeable_profit);
+    money(w.taxes[2].amount, q.cit_tax); money(w.taxes[2].baseValue, q.cit_chargeable_profit);
+    money(w.taxes[3].amount, 0); money(w.taxes[4].amount, q.dev_levy_tax);
+    [q.royalty, q.hct_tax, q.cit_tax, q.dev_levy_tax, q.tax, q.net_cash_flow].forEach((x) => expect(DIGEST).toContain(f2(x)));
     expect(L.akataPiaYearWaterfall(2040)).toBeNull();
   });
-  it('the terrain, lease and framework variants', () => {
+  it('the terrain, lease, framework and stated-reading variants are the digest lines, refusals included', () => {
     const v = L.akataPiaVariants();
-    const at = (label) => v.find((x) => x.label === label);
-    money(at('as configured').npv, 43223505.88);
-    money(at('force_pia').year1.tet, 3369056.19); money(at('force_pia').year1.devLevy, 0); money(at('force_pia').totalTax, 175990539.77); money(at('force_pia').npv, 49802016.74); pct(at('force_pia').irrPct, 23.2455); expect(at('force_pia').framework).toBe('pia_only');
-    money(at('new lease, prior cumulative 0').year1.allowance, 17600000); money(at('new lease, prior cumulative 0').totalHct, 61048493.72); money(at('new lease, prior cumulative 0').totalProductionAllowance, 77440000); money(at('new lease, prior cumulative 0').npv, 56241834.89);
-    money(at('new lease, prior cumulative 96000000').totalHct, 74680493.72); money(at('new lease, prior cumulative 96000000').totalProductionAllowance, 32000000); money(at('new lease, prior cumulative 96000000').npv, 46513356.33);
-    money(at('onshore').year1.productionRoyalty, 27454240); money(at('onshore').npv, 37060198.23); pct(at('onshore').takePct, 77.3628);
-    money(at('deep_offshore conservative').year1.productionRoyalty, 9301600); money(at('deep_offshore conservative').year1.hct, 0); money(at('deep_offshore conservative').totalHct, 0);
-    money(at('deep_offshore conservative').npv, 141623594.88); pct(at('deep_offshore conservative').irrPct, 55.9040); pct(at('deep_offshore conservative').takePct, 47.2666);
-    money(at('deep_offshore aggressive').totalHct, 95732374.60); money(at('deep_offshore aggressive').npv, 61725382.46);
-    money(at('marginal field').npv, 61154067.34);
-    money(at('CPR 40').totalHct, 107354738.83); money(at('CPR 40').npv, -1723561.25); pct(at('CPR 40').takePct, 89.9426);
-    money(at('prior year opex 20000000').year1.hcdt, 600000); money(at('prior year opex 20000000').npv, 43002056.49);
-    money(at('oil price 120').year1.priceRoyalty, 13838574.96); money(at('oil price 120').npv, 128984232.18);
-    money(at('oil price 45').year1.priceRoyalty, 0); money(at('oil price 45').npv, -104877462.43); pct(at('oil price 45').takePct, 298.6071);
-    money(at('WI 50').npv, 21611752.94); pct(at('WI 50').irrPct, 21.3784); pct(at('WI 50').takePct, 75.5752); money(at('WI 50').year1.cprClaimed, 33000000);
+    expect(v.map((x) => x.label)).toEqual(L.AKATA_PIA_VARIANTS.map(([label]) => label));
+    v.filter((x) => x.label !== 'as configured').forEach((x) => {
+      if (x.refused) { inDigest(`- ${x.label}: REFUSED: ${x.refused}`); return; }
+      const q = x.year1;
+      inDigest(`- ${x.label}: 2029 production royalty ${f2(q.productionRoyalty)} (liquids rate ${f6(q.liquidsRoyaltyRate)}), price royalty ${f2(q.priceRoyalty)}, gas royalty ${f2(q.gasRoyalty)}, HCDT ${f2(q.hcdt)}, NDDC ${f2(q.nddc)}, CPR claimed ${f2(q.cprClaimed)}, deferred ${f2(q.cprDeferred)}, allowance ${f2(q.allowance)} on ${f2(q.belowCapBbl)} bbl below the cap and ${f2(q.afterCapBbl)} after (cap applied ${yn(q.capApplied)}), HCT rate ${f6(q.hctRate)}, HCT ${f2(q.hct)}, CIT ${f2(q.cit)}, TET ${f2(q.tet)}, dev levy ${f2(q.devLevy)}, net ${f2(q.net)}; totals royalties ${f2(x.totalRoyalties)}, HCT ${f2(x.totalHct)}, CIT ${f2(x.totalCit)}, allowance ${f2(x.totalProductionAllowance)}, tax ${f2(x.totalTax)}; NPV ${f2(x.npv)}, IRR ${x.irrPct === null ? 'null' : `${f4(x.irrPct)} percent`}, take ${f4(x.takePct)} percent, framework ${x.framework}.`);
+    });
+    expect(v.filter((x) => x.refused).map((x) => x.label)).toEqual([
+      'new lease, prior cumulative 0, no new-PML rate stated', 'deep_offshore, no reading stated', 'marginal_field terrain',
+    ]);
   });
 });
 
@@ -871,7 +898,7 @@ describe('loss relief', () => {
     money(at('jv_loss_carryforward').kpis.npv, -13636363.64); money(at('jv_loss_carryforward').rows[1].loss_offset_used, 5000000); money(at('jv_loss_carryforward').rows[1].tax, 30000000);
     money(at('jv_loss_carryforward_killswitch').kpis.npv, -15909090.91);
     money(at('jv_loss_unused_at_cessation').kpis.npv, -50000000); money(at('jv_loss_unused_at_cessation').taxLossesUnusedAtCessation, 5000000);
-    money(at('pia_loss_relief').kpis.npv, -5475212.04); money(at('pia_loss_relief_killswitch').kpis.npv, -8763295.32);
+    money(at('pia_loss_relief').kpis.npv, 4985473.45); money(at('pia_loss_relief_killswitch').kpis.npv, -9568013.75);
     money(at('schedule_shift_1').kpis.npv, 17355371.90); expect(at('schedule_shift_1').scheduleShiftYears).toBe(1);
   });
   it('applyJV on one year with a loss pool', () => {
@@ -903,7 +930,7 @@ describe('the economic limit', () => {
     money(at('elt_off_tail_kept').kpis.npv, 13987603.31); expect(at('elt_off_tail_kept').economicLimitYear).toBeNull(); expect(at('elt_off_tail_kept').rows).toHaveLength(3);
     money(at('elt_tail_trimmed').kpis.npv, 21590909.09); expect(at('elt_tail_trimmed').economicLimitYear).toBe(2031); expect(at('elt_tail_trimmed').yearsTrimmed).toBe(1); expect(at('elt_tail_trimmed').rows).toHaveLength(2);
     money(at('elt_royalty_tail').kpis.npv, -12500000); expect(at('elt_royalty_tail').economicLimitYear).toBe(2030); expect(at('elt_royalty_tail').rows).toHaveLength(1);
-    money(at('elt_pia_multiyear').kpis.npv, 203250580.21); expect(at('elt_pia_multiyear').economicLimitYear).toBe(2030); expect(at('elt_pia_multiyear').rows).toHaveLength(6);
+    money(at('elt_pia_multiyear').kpis.npv, 219158380.04); expect(at('elt_pia_multiyear').economicLimitYear).toBe(2030); expect(at('elt_pia_multiyear').rows).toHaveLength(6);
   });
   it('the long-tail AKATA, limit off and on', () => {
     const t = L.akataTail();
@@ -930,12 +957,10 @@ describe('abandonment: the lump sum and the sinking fund', () => {
     money(at('abandonment_appended_year').kpis.npv, 14077761.08); expect(at('abandonment_appended_year').abandonmentYear).toBe(2033);
     money(at('jv_abandonment_wi_60').kpis.npv, 3863636.36); money(at('jv_abandonment_wi_60').totalAbandonmentCost, 10000000); money(at('jv_abandonment_wi_60').finalRowAbandonmentCost, 10000000); money(at('jv_abandonment_wi_60').totalTax, 39000000); rate(at('jv_abandonment_wi_60').unitTechnicalCost, 43.333333);
     money(at('jv_sinking_fund').kpis.npv, 16818181.82); money(at('jv_sinking_fund').totalFundContributions, 10000000); expect(at('jv_sinking_fund').fundingMode).toBe('sinking_fund');
-    money(at('pia_sinking_fund').kpis.npv, 123185570.34); money(at('pia_sinking_fund').totalFundContributions, 30000000); money(at('pia_sinking_fund').totalAbandonmentCost, 30000000); rate(at('pia_sinking_fund').unitTechnicalCost, 28.082192);
-    // EC1-3: at a 50 percent interest the fund collects the 30000000 that was
-    // entered, because the amount entered is the share under both modes. The
-    // retired engine halved the contribution to 15000000 and left the cost it
-    // funded whole.
-    money(at('pia_sinking_fund_wi_50').kpis.npv, 55592785.17); money(at('pia_sinking_fund_wi_50').totalFundContributions, 30000000); money(at('pia_sinking_fund_wi_50').totalAbandonmentCost, 30000000); rate(at('pia_sinking_fund_wi_50').unitTechnicalCost, 29.726027); expect(at('pia_sinking_fund_wi_50').reportedWiPct).toBe(50);
+    money(at('pia_sinking_fund').kpis.npv, 130136909.83); money(at('pia_sinking_fund').totalFundContributions, 30000000); money(at('pia_sinking_fund').totalAbandonmentCost, 30000000); rate(at('pia_sinking_fund').unitTechnicalCost, 28.082192);
+    // At a 50 percent interest the fund collects the 30000000 that was
+    // entered, because the amount entered is the share under both modes.
+    money(at('pia_sinking_fund_wi_50').kpis.npv, 59518454.92); money(at('pia_sinking_fund_wi_50').totalFundContributions, 30000000); money(at('pia_sinking_fund_wi_50').totalAbandonmentCost, 30000000); rate(at('pia_sinking_fund_wi_50').unitTechnicalCost, 29.726027); expect(at('pia_sinking_fund_wi_50').reportedWiPct).toBe(50);
   });
   it('AKATA abandoned six ways', () => {
     const a = L.akataAbandoned();
@@ -967,7 +992,7 @@ describe('abandonment: the lump sum and the sinking fund', () => {
 // The three numbers that used to be wrong, and what each reads now. The
 // retired readings are kept in each test as history, because a learner is
 // shown this table to be told what changed.
-describe('three numbers that used to be wrong', () => {
+describe('three numbers to read with care', () => {
   const d = L.distrustTable();
   it('(a) EC1-1 closed the profile gap: every case reads its own headline', () => {
     // History: AKATA -21759.68 USD, multiyear_pia_real and
@@ -1076,11 +1101,19 @@ describe('the IKPOTO capstone: the eighteen graded fields reproduce fields.json 
   it('the capstone conditions are the derivation conditions, verbatim', () => {
     expect(L.IKPOTO_JV.base_year).toBe(2031); expect(L.IKPOTO_JV.jv_working_interest_pct).toBe(80);
     expect(L.IKPOTO_PIA.pia_lease_status).toBe('new'); expect(L.IKPOTO_PIA.pia_prior_cumulative_oil_bbl).toBe(97612500);
-    expect(L.IKPOTO_PIA.pia_cpr_limit_pct).toBe(35); expect(L.IKPOTO_PIA.abandonment_cost_usd).toBe(40000000);
+    expect(L.IKPOTO_PIA.pia_cpr_limit_pct).toBeUndefined(); expect(L.IKPOTO_PIA.abandonment_cost_usd).toBe(40000000);
+    // The stated new-PML reading, and no override of a term the texts fix.
+    expect(L.IKPOTO_PIA.pia_new_pml_hct_rate_pct).toBe(30);
+    ['pia_tet_rate_pct', 'pia_capex_recovery_years', 'pia_nddc_levy_pct_of_opex', 'pia_nddc_levy_base', 'pia_price_royalty_base', 'pia_legacy_pre_audit']
+      .forEach((k) => expect(L.IKPOTO_PIA[k]).toBeUndefined());
     expect(L.IKPOTO_PROD).toHaveLength(6); expect(L.IKPOTO_CAPEX).toHaveLength(2); expect(L.IKPOTO_OPEX).toHaveLength(6);
     const runs = L.ikpotoRuns();
     expect(runs.pia.kpis.fiscal_framework).toBe('nta_2025');
+    expect(runs.pia.cashFlowData.map((q) => q.fiscal_framework)).toEqual(Array(6).fill('nta_2025'));
     expect(runs.pia.cashFlowData[1].prod_alw_cap_applied).toBe(true);
+    expect(runs.pia.cashFlowData[1].prod_alw_below_cap_bbl).toBeGreaterThan(0);
+    expect(runs.pia.cashFlowData[1].prod_alw_after_cap_bbl).toBeGreaterThan(0);
+    expect(runs.pia.cashFlowData.findIndex((q) => q.cpr_deferred_to_next > 0)).toBe(3);
     expect(runs.pia.cashFlowData[runs.pia.cashFlowData.length - 1].net_cash_flow).toBeLessThan(0);
   });
 });
@@ -1099,6 +1132,8 @@ const ENGINE_FUNCTIONS = [
   'parsePriceDeck', 'resolveStreamPrice', 'applyJV', 'applyPSC', 'pscTrancheShare',
   'deriveOilRoyaltyRate', 'deriveGasRoyaltyRate', 'derivePriceRoyaltyRate', 'deriveHctRate',
   'computeProductionAllowance', 'determineFiscalFramework',
+  'priceRoyaltyBenchmarks', 'capitalAllowanceFraction', 'statutoryTetRatePct', 'fiscalFrameworkForYear',
+  'defaultPathCfg', 'publishedRefusal',
   'goldenCase', 'publishedCase', 'kpiSummary', 'leakGuardTargets', 'leakGuardHit', 'collectNumbers',
 ];
 
@@ -1116,7 +1151,9 @@ const teachingSurface = () => {
     out.push({ name: `akataPiaYearWaterfall(${y})`, value: L.akataPiaYearWaterfall(y) });
   });
   L.PSC_CAP_SWEEP_PCT.forEach((cap) => out.push({ name: `akataUnderPsc(${cap})`, value: L.akataUnderPsc(cap) }));
-  L.AKATA_PIA_VARIANTS.forEach(([label, patch]) => out.push({ name: `akataUnderPia(${label})`, value: L.akataUnderPia(patch) }));
+  // A variant the engine refuses has no ledger to walk; its refusal is walked
+  // with akataPiaVariants above.
+  L.akataPiaVariants().filter((v) => !v.refused).forEach((v) => out.push({ name: `akataUnderPia(${v.label})`, value: L.akataUnderPia(v.patch) }));
   L.BASIS_COMBINATIONS.forEach(([b, c]) => out.push({ name: `akataProfile(${b} ${c})`, value: L.akataProfile({ present_value_basis: b, discounting_convention: c }) }));
   return out;
 };

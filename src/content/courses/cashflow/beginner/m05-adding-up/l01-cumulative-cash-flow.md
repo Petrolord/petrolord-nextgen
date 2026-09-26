@@ -34,7 +34,7 @@ Adding the net_cash_flow column and expecting the engine's cumulative gives -893
 
 ## What it refuses
 
-The running sum has no clock. One USD earned in 2035 and one spent in 2029 cancel exactly, so the column cannot say whether waiting was worth it. It does not distinguish a field that pays back on a single large year from one that pays back on many small ones. And it is cash, not a return: it does not divide by anything, so a trough of -121123680.00 is neither large nor small until it is set beside what came back.
+The running sum has no clock. One USD earned in 2035 and one spent in 2029 cancel exactly, so the column cannot say whether waiting was worth it. It does not distinguish a field that pays back on a single large year from one that pays back on many small ones. And it is cash rather than a return: it does not divide by anything, so a trough of -121123680.00 is neither large nor small until it is set beside what came back.
 
 ## Exercise
 

@@ -31,7 +31,7 @@ The joint venture reflex is to read taxable income as revenue less costs, which 
 
 ## What it refuses
 
-The row carries no cost recovered column and no depreciation, because capex here is repaid as cost oil rather than written off. The balance is another matter: since engines 3.10.0 a production sharing row can report psc_cost_pool_after, and psc_pool_unrecovered_at_cessation carries it on every row beside a KPI for what cessation forfeits. What is still missing is the recovery, so how much cost oil a year took has to be reconstructed.
+The row carries no cost recovered column and no depreciation, because capex here is repaid as cost oil rather than written off. The balance is another matter: every production sharing row reports psc_cost_pool_after, and kpis.psc_unrecovered_cost_at_cessation reports what cessation forfeits. What is still missing is the recovery, so how much cost oil a year took has to be reconstructed.
 
 ## Exercise
 

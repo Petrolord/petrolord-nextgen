@@ -8,13 +8,11 @@ One tier is selected each year and one rate is charged. Knowing which tier the e
 
 `getSlidingScaleRoyalty` sorts a copy of the tier list by threshold, then keeps the rate of the highest threshold the oil price has reached. Where the price has reached no threshold at all it charges the lowest tier's rate. The order the tiers were typed in cannot change the answer, and two tiers sharing one threshold are refused by name rather than resolved quietly.
 
-Two consequences follow. Below every threshold a rate still applies, so a sliding royalty is never zero unless a tier says so. And a price that reaches two thresholds pays the rate of the higher one, not the sum and not a blend.
-
-Until the 2026-09-15 repair the rule was a walk that kept the last qualifying tier in list order, which matched the highest threshold only while the list was sorted.
+Two consequences follow. Below every threshold a rate still applies, so a sliding royalty is never zero unless a tier says so. And a price that reaches two thresholds pays the rate of the higher one, with no sum and no blend.
 
 ## Where the step falls
 
-The tier the engine chose is not printed. What is printed is royalty and gross revenue, and their ratio names it. On the "Nigeria - PIA (2021)" tiers of 0 USD/bbl at 7.5 percent and 50 USD/bbl at 10 percent, swept across the price multiplier on the Designer's default project:
+The tier the engine chose is not printed. What is printed is royalty and gross revenue, and their ratio names it. On the tiered teaching regime's tiers of 0 USD/bbl at 7.5 percent and 50 USD/bbl at 10 percent, swept across the price multiplier on the Designer's default project:
 
 | price multiplier | applied year 1 oil price | year 1 grossRevenue | year 1 royalty | implied rate |
 | --- | --- | --- | --- | --- |

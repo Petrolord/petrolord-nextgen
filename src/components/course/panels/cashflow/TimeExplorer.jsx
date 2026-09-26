@@ -174,7 +174,7 @@ const Valuation = () => {
         rows={pub.map((p) => [p.name, <span key={p.name} className="whitespace-normal">{p.note}</span>, usd(p.rows[0].discounted_cash_flow), usd(p.rows[1].discounted_cash_flow), usd(p.kpis.npv), p.kpis.irr === null ? 'null' : num(p.kpis.irr, 4), p.valuationYear ?? 'not reported', p.sunkNetCashFlow === null ? 'not reported' : usd(p.sunkNetCashFlow), p.rowsFlaggedSunk])}
       />
       <Note>
-        Sunk is a decision, not a date. A field that is half built has one answer for "should we have started"
+        Sunk is a decision the calendar does not make. A field that is half built has one answer for "should we have started"
         and another for "should we finish", and the engine will give either, as long as the question is stated
         through valuation_year and treat_prior_as_sunk rather than left to the reader to guess.
       </Note>

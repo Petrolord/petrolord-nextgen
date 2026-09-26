@@ -1,6 +1,6 @@
 # IRR by bisection
 
-A root finder has no formula to fail and no derivative to diverge. What it still has to settle is where it will look, and since the 2026-09-15 repair the answer is one fixed band and a status word for everything outside it.
+A root finder has no formula to fail and no derivative to diverge. What it still has to settle is where it will look, and the answer is one fixed band and a status word for everything outside it.
 
 {{panel:ec-instrument-explorer}}
 
@@ -23,11 +23,11 @@ The first checks the convention: with year-end discounting one plus the rate is 
 
 ## On real ledgers
 
-Over the Designer's default project the six templates return 44.6574 percent for "Generic Royalty/Tax", 44.0823 for "Brazil - Concession", 40.2125 for "USA - Gulf of Mexico", 33.2329 for "Ghana - Deepwater", 32.3741 for "Angola - Deepwater PSC" and 28.2129 for "Nigeria - PIA (2021)". On the teaching field, whose prices start at 45 USD per bbl, all six come back null. "Brazil - Concession" is the one the verdict explains: its present value is zero at two rates, one negative and one below the 12 percent the field is discounted at, so no single rate can be named.
+Over the Designer's default project the six templates return 46.7732 percent for "Nigeria - PIA (2021)", 44.6574 for "Generic Royalty/Tax", 44.0823 for "Brazil - Concession", 40.2125 for "USA - Gulf of Mexico", 33.2329 for "Ghana - Deepwater" and 32.3741 for "Angola - Deepwater PSC". On the teaching field, whose prices start at 45 USD per bbl, all six come back null. "Nigeria - PIA (2021)" heads that summary, so it is the one the contractor verdict explains: its present value is zero at negative 19.2 and at 12.2 percent, one rate negative and one just above the 12 percent the field is discounted at, so no single rate can be named.
 
 ## The mistake
 
-The mistake to retire with the old solver is reading a very large rate as a very good project. Until the repair this function bracketed by doubling from 100 percent, ten times over, and printed the top of its own search as a rate whenever the present value was still positive there, so a suspiciously round number stood where a rate should be.
+The mistake is reading a very large rate as a very good project. A solver that brackets by doubling from 100 percent, ten times over, and prints the top of its own search whenever the present value is still positive there puts a suspiciously round number where a rate should be. The band exists to stop that.
 
 The capex multiplier of 0.7 on the flat regime is the case to keep. Its present value is zero at 1095.4783 percent, which is above the band, and again at negative 20.4852 percent, which is inside it, so the engine returns null with the status multiple-roots and `irrRoots` carrying the negative root alone. A reader who took the large number for a return was ranking the payout of a reduced outlay against real rates.
 

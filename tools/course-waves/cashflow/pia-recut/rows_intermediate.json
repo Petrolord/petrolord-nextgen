@@ -1,0 +1,514 @@
+[
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 4,
+  "prompt": "A summary table lists two projects at 219158380.04 and 212070544.45. What is a reader entitled to conclude from those two figures?",
+  "options": [
+   "That the second project is worth less, since NPVs on the same ledger scale are directly comparable whatever their convention.",
+   "Nothing until the conventions are attached: they are one field, multiyear_pia_real, read end-year and mid-year.",
+   "That the second project carries the higher discount rate, since a lower NPV on a similar field is the mark of a harsher rate.",
+   "That the two differ by a valuation year, since a shift of one year at 6.796117 percent is about the size of the gap."
+  ],
+  "answer_index": 1,
+  "explanation": "At 5 percent their profiles read 239552507.28 and 233779309.33, and every difference between the two columns is the half-year shift.",
+  "why": "Moved NPVs and profile points."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 15,
+  "prompt": "On multiyear_pia_real the profile point labelled 6.8, the headline at the applied rate, and the engine's own npv() at 6.796117 percent all read 219158380.04. What makes the three agree?",
+  "options": [
+   "The applied rate of 6.796117 percent rounds to 6.8 with a difference too small to move a field of this size, so the three agree to the cent by luck of scale.",
+   "The profile is evaluated on the nominal flows and the headline on the real ones, and on this case the two bases happen to coincide exactly.",
+   "The applied-rate point is labelled at the rate rounded to two decimals but evaluated at the exact rate, so the point and the headline are one computation.",
+   "The headline is copied from the profile point rather than computed, which is why a recomputation by npv() can only ever reproduce it."
+  ],
+  "answer_index": 2,
+  "explanation": "The label 6.8 is the applied 6.796117 percent rounded to two decimals for display, and the evaluation uses the exact rate, so the profile point and the headline are one computation and npv() at the exact rate reproduces both. Scale plays no part, the profile is read on the real flows like the headline, and the headline is computed in its own right.",
+  "why": "Moved NPV; L5 repair history removed from the explanation."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 16,
+  "prompt": "The applied-rate points of jv_analytic_decision_kpis and multiyear_pia_nominal are labelled 10 and read their headlines, while AKATA's is labelled 6.8 against an applied rate of 6.796117 percent. Why do label and rate agree to the digit on the two nominal cases?",
+  "options": [
+   "Their flows are smaller, and a label only matches its rate once the field is small enough for any rounding of the rate to vanish below the cent.",
+   "Their applied points are computed by the oracle rather than by the engine, and the oracle carries the rate to six decimals.",
+   "Their profiles are sampled at 10 percent, which is a sampled point, while AKATA's 6.796117 lies between samples and is interpolated.",
+   "Their basis is nominal, so the applied rate is the nominal 10.000000 percent, already a two-decimal number, and rounding it changes nothing."
+  ],
+  "answer_index": 3,
+  "explanation": "On a real basis the Fisher rate is rarely round, so the printed label rounds it; on a nominal basis the configured 10 percent is the applied rate. In every case the point is evaluated at the exact applied rate, so it reads the headline whatever the label shows.",
+  "why": "L5: the question was a repair story; it now asks the current rule on the nominal cases. Distractor lengthened so the key is not the longest option."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 21,
+  "prompt": "single_year_positive reports take 61.1111 percent and discounted take 61.1111. AKATA reports 66.1723 and 76.1610. Why do the two takes agree on one case and part on the other?",
+  "options": [
+   "single_year_positive has no capex, and the discounted take only differs from the undiscounted where there is capex to discount, because the capex is the only outflow the government does not share and so the only row that can move the ratio between the two readings.",
+   "single_year_positive is on the nominal basis, where discounting is at 10.000000 percent, and the two takes coincide whenever the applied rate is the nominal one, because the deflator and the discount are then the same factor and cancel between the numerator and the denominator of the share.",
+   "The difference between the two takes is timing, and a one-row field has none: on AKATA the government's share arrives from 2029 while the contractor's is recovered in the tail years that discounting reduces most.",
+   "AKATA's royalty of 15 percent is discounted and its tax of 40 percent is not, and the split is what opens the gap: royalty is charged on revenue as it arrives, so it carries an exponent, while tax is settled on the year's income and is carried at face value in both readings."
+  ],
+  "answer_index": 2,
+  "explanation": "Both multi-year published fields show the same direction, multiyear_jv_real 69.2573 against 75.4578 and multiyear_pia_real 69.3025 against 75.6850; a large outflow late in life, as on jv_abandonment_two_irr_roots, can turn it the other way.",
+  "why": "Moved takes."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 22,
+  "prompt": "At 60 percent working interest AKATA reports NPV 43520898.40, IRR 29.2361 percent and take 66.1723 percent, the same take as at 100 percent. Which of the three is a ratio rather than an amount, and why does it hold?",
+  "options": [
+   "The NPV: 43520898.40 is the field's value at the discount rate and the working interest is applied to it afterwards, which is why the take it implies does not move with the interest at all.",
+   "The take: it is a ratio, and every monetary line and volume is scaled to your share, so 2029 gross revenue falls from 186032000.00 to 111619200.00 and both sides of it move together.",
+   "The IRR: 29.2361 percent is a rate rather than an amount, and the take is an amount of government revenue that happens to be expressed in percent.",
+   "None of the three: the take holds at 66.1723 because royalty at 15 percent and tax at 40 percent are unchanged, and not because any line of the ledger was scaled."
+  ],
+  "answer_index": 1,
+  "explanation": "Every line of the ledger is printed at the share, so the government's lines and the contractor's scale by one factor and the ratio holds. NPV is an amount and scales, 72534830.66 at 100 percent against 43520898.40 at 60, and the IRR is a rate on flows scaled by one factor, so it holds for a different reason.",
+  "why": "L5 repair history removed from the explanation."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 24,
+  "prompt": "two_roots_10_and_20, [-100, 230, -132], has roots at 10 and 20 percent, and its NPV reads -2.00 at 0 percent. A Newton search started at 10 percent would stand on a root at its first step. What does the engine return?",
+  "options": [
+   "Null, with irrStatus multiple-roots and both roots listed, because it counts the crossings in the band before naming any rate.",
+   "10.0000 percent, since the lower of two roots is the conservative reading and the finder keeps the root it is already standing on.",
+   "Null with irrStatus no-sign-change, since a vector with a negative last entry is never given a rate by this engine, whatever its signs.",
+   "20.0000 percent, because the contract prefers the crossing furthest from the point where the search began."
+  ],
+  "answer_index": 0,
+  "explanation": "The engine names a rate only where exactly one rate in the band from -99 to 1000 percent zeroes the NPV, so the starting point of a search never decides the answer. This vector changes sign twice, and two_roots_2_and_6 is null the same way, with 2.0000 and 6.0000 listed.",
+  "why": "L5: the question asked what the engine returned before a release; it now asks the current rule."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "prompt": "all_positive [5, 5, 5], all_negative [-5, -5] and no_real_root [-1, 3, -3] each report IRR null. How far does irrStatus go towards telling the three apart?",
+  "options": [
+   "All the way: each of the three carries a status of its own, so a reader never needs to look at the NPV beside the null.",
+   "Two ways only: the first two both read no-sign-change and the third reads no-root, so the status separates no_real_root from the pair, and the NPV at 0 percent, 15.00 against -10.00, separates those.",
+   "Not at all: the status reads the same on all three, and only the NPV at 0 percent, 15.00, -10.00 and -1.00, tells them apart.",
+   "Two ways, but the other way round: no_real_root shares no-sign-change with all_negative because both of them are negative at 0 percent, and all_positive alone reads no-root, so the pair that shares a status is the pair that shares a sign."
+  ],
+  "answer_index": 1,
+  "explanation": "no_real_root changes sign twice and still never crosses, which is why it earns no-root rather than no-sign-change. The status names the branch that failed, and the NPV beside the null does the rest.",
+  "why": "L5 repair history removed from the explanation."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "prompt": "two_roots_minus73_and_173, [-12500000, 37500000, -9000000], changes sign between -75 and -50 percent, where its curve reads -6500000.000000 and 26500000.000000, and again between 150 and 175. What does the engine report?",
+  "options": [
+   "173.6932 percent with a residual of 0.000000, the crossing Newton reaches walking down from 10 percent, the other lying outside the band.",
+   "Null with irrStatus above-clamp, because 173.6932 percent sits above the top of the band the engine will report a rate from.",
+   "Null, with irrStatus multiple-roots and the crossings listed as -73.6932 and 173.6932 percent, because both of them lie inside the band.",
+   "-73.6932 percent, the crossing nearest the bottom of the band, which the contract prefers as the conservative of the two."
+  ],
+  "answer_index": 2,
+  "explanation": "Both crossings lie inside the band from -99 to 1000 percent, so the engine names neither and lists both. A residual of 0.000000 at 173.6932 percent would prove that rate is a root and say nothing about the crossing between -75 and -50.",
+  "why": "L5 repair history removed from the explanation."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 27,
+  "prompt": "A report from another tool gives two_roots_2_and_6 an IRR of 6.0000 percent. Its NPV at a hurdle of 5 percent is 0.027211. Does the approval hold, and on what ground?",
+  "options": [
+   "It holds because the NPV at 5 percent is positive, which is the sign the decision needs; the reported 6.0000 against 5 was not the ground.",
+   "It holds because 6.0000 exceeds 5, and an IRR above the hurdle is the definition of approval on any vector.",
+   "It fails because the oracle's root is 2.0000, below the hurdle, and the lower root governs on a terminal-negative vector since it is the first rate at which the curve is zeroed.",
+   "It fails because the NPV of 0.027211 is within the finder's tolerance and cannot be told from zero."
+  ],
+  "answer_index": 0,
+  "explanation": "On three_roots_0_7_33 the same IRR comparison, 7.3509 against 5, approves a vector whose NPV at 5 percent is -0.028075; the engine returns null on both vectors, which removes the rate but not the question.",
+  "why": "L5: the premise no longer cites a pre-release engine report."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "prompt": "Between 10 and 20 percent decline unit technical cost rises from 45.497913 to 58.361925 USD/boe and three years are trimmed. Can the table separate the decline's effect from the trimming's?",
+  "options": [
+   "Yes: the trimming removes the capex of the trimmed years, and the difference in total capex is the trimming's share.",
+   "Yes: unit technical cost is an undiscounted reading and the limit only trims the discounted column, so the rise it shows is decline alone.",
+   "No: the cost is spread over fewer barrels for both reasons at once, and the two rows compare a ten-row field with a seven-row one.",
+   "Yes: the take, 72.1778 against 93.0311, isolates the trimming because the take is invariant to decline."
+  ],
+  "answer_index": 2,
+  "explanation": "The rows column, 10 against 7, is the first thing to read; the NPV moves from 182401961.12 to -30055502.32 for the same two reasons at once.",
+  "why": "Moved figures: three years trimmed, seven rows; keyed text said six rows. Distractor lengthened so the key is not the longest option."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 38,
+  "prompt": "The onward lesson says the Expert tier's fiscal cascade is read with the conventions this tier named. What does that mean for a PIA NPV such as 219158380.04 on multiyear_pia_real?",
+  "options": [
+   "It carries the same label: real basis, end-year, 10 percent nominal at 3 percent inflation, applied 6.796117; its mid-year twin reads 212070544.45 and its applied-rate profile point reads the headline, as AKATA's does.",
+   "It is convention-free, because the PIA cascade is charged on undiscounted bases and the NPV is a sum of after-tax rows, so the discount rate, the basis and the timing convention enter only the JV ledger, and a PIA NPV is the same number under every reading of time.",
+   "It needs its own conventions, because five taxes on three bases each carry a timing rule that the JV ledger does not, so the royalty, the HCT, the CIT and the levy are each placed in time separately and a PIA NPV is labelled by the timing of each tax rather than by one convention.",
+   "It is read nominal only, because the PIA's price royalty tiers are in money of the day and cannot be deflated, so the real basis is refused on a PIA run and the profile is evaluated on the nominal flows at the nominal 10.000000 percent with no Fisher conversion and no rounding gap."
+  ],
+  "answer_index": 0,
+  "explanation": "Nothing learned in the Professional tier is replaced in the Expert tier; multiyear_pia_nominal reads 219158380.04 too, because the bases agree end-year.",
+  "why": "Moved NPVs; keyed text quoted the old mid-year NPV."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 40,
+  "prompt": "The decline sweep records that at 20 percent decline the published PIA field loses three years to the economic limit and its take reads 93.0311 percent. Read with the rows column, what does that take say?",
+  "options": [
+   "That the field pays almost all it earns to the government, an error in the cascade the engine should have reported as null.",
+   "That the PIA royalty tiers rise with decline, since a faster decline raises the price tier the field is charged at, and a higher tier on the surviving rows lifts the government's share of a residual that has not otherwise changed.",
+   "That the trimmed years' royalties are still counted while their revenue is not, which inflates the share, because the limit removes revenue rows from the valued ledger while the royalty column keeps its full total.",
+   "That it is a share of a residual shrunk by trimming on a seven-row field, and not comparable with the 72.1778 percent of the ten-row run at 10 percent decline."
+  ],
+  "answer_index": 3,
+  "explanation": "At 40 percent decline three rows survive and the take reads 1079.0391 percent, a denominator that has almost vanished; the figure is no rounding fault.",
+  "why": "Moved figures: at 20 percent decline three years trimmed, seven rows, take 93.0311; keyed text named six rows and 75.6417."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "prompt": "AKATA's applied-rate profile point is labelled 6.8 and reads the headline 72534830.66. A reader recomputes the NPV at exactly 6.8 percent and finds a slightly smaller figure. Which reading should be carried forward?",
+  "options": [
+   "The recomputed one: the chart prints 6.8, so the figure evaluated at 6.8 is the one the engine stands behind, and the headline should be corrected down to it before it is reported anywhere.",
+   "The nominal-basis one: the difference appears on the real basis only, which shows the real basis is the less reliable of the two readings.",
+   "The recomputed one, and the IRR read from the same profile should be marked down as well, because a profile that misses at one rate misses at all of them.",
+   "The headline: the point is evaluated at the exact 6.796117 percent, so a recomputation at the label measures the reader's rounding."
+  ],
+  "answer_index": 3,
+  "explanation": "The label is the applied rate rounded to two decimals for display, and the evaluation is at the exact rate. 6.8 percent discounts every row a little harder than 6.796117, so a recomputation at the label lands slightly below the headline, and nothing in the ledger has moved.",
+  "why": "L5: the question was a repair story; it now asks which reading to carry when a recomputation at the label disagrees."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-net-present-value",
+  "ord": 4,
+  "prompt": "AKATA's applied rate is 6.796117 percent and its profile point is labelled 6.8. That point reads 72534830.66, which is the headline, so the gap is 0.00. How do the label and the reading relate?",
+  "options": [
+   "The point is both labelled and evaluated at 6.8 percent, and the gap is 0.00 because rounding 6.796117 up to 6.8 moves the NPV of a field this size by less than a cent, so the label and the evaluation are the same number and always were.",
+   "The label is the exact rate truncated for display, and the reading is the 8 percent point of 65968275.69 interpolated back down to 6.8.",
+   "The point is labelled at the applied rate rounded to two decimals and evaluated at the exact rate, so the label is a rounded name and the number behind it is not rounded.",
+   "The point is labelled at the rounded rate and evaluated on the nominal flows, which is why it agrees with the headline."
+  ],
+  "answer_index": 2,
+  "explanation": "The engine's own npv() at the exact rate on the same flows returns 72534830.66 as well, so the point and the headline are one computation. The label is a rounded name for display, and the point is read on the real flows like the headline.",
+  "why": "L5 repair history removed from the explanation."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-net-present-value",
+  "ord": 5,
+  "prompt": "A reader recomputes AKATA's applied-rate profile point at its printed label, 6.8 percent, instead of at the applied 6.796117. Which way does the recomputed figure move against the headline 72534830.66, and why?",
+  "options": [
+   "Down: 6.8 percent discounts every row a little harder than 6.796117, and the engine evaluates its point at the exact rate, so only the reader's figure moves.",
+   "Up or down at random: floating point accumulation over the discounted rows drifts, and the drift scales with the size of the field whatever rate the point is read at.",
+   "Up, because 6.8 is the larger rate and a larger rate lifts the present value of a field whose flows after the first year are all positive.",
+   "Not at all: the half-year shift of a mid-year headline absorbs the rounding, so any rate within a hundredth of the applied one gives the same figure."
+  ],
+  "answer_index": 0,
+  "explanation": "AKATA's profile falls at every step, 83023565.60 at 5 percent and 65968275.69 at 8, so a slightly higher rate gives a slightly lower NPV. The engine's point is evaluated at 6.796117 and equals the headline; the recomputation at 6.8 lands a little below it.",
+  "why": "L5: the question was a repair story; it now asks the direction a recomputation at the label moves."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-net-present-value",
+  "ord": 13,
+  "prompt": "multiyear_pia_real has an NPV of 219158380.04 and a DPI of 0.429569; multiyear_jv_real has an NPV of 88104639.00 and a DPI of 0.598241. Which ranks first?",
+  "options": [
+   "It depends on the constraint: if capital is scarce the second does more per unit of capital, and if it is not NPV ranks and the first wins.",
+   "The first, because NPV is the only ranking and DPI is a description that cannot reverse it.",
+   "The second, because a higher DPI means a higher return on any measure, whatever the capital available: DPI is NPV per unit of capital, and a ratio that beats another per unit beats it in total as well.",
+   "The first, because its PV of capex of 510181818.18 is larger and larger fields carry less risk per unit, so the rate they should be read at is lower and their NPV is understated at 6.796117 percent."
+  ],
+  "answer_index": 0,
+  "explanation": "NPV ranks by value; DPI ranks by value per unit of capital, and the two rankings disagree on these two fields.",
+  "why": "Moved NPV and DPI (ranking unchanged)."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m03-net-present-value",
+  "ord": 15,
+  "prompt": "AKATA's take reads 66.1723 percent at a working interest of 100 percent, and 66.1723 at 75, at 60, at 40 and at 25. Why does the working interest leave the share alone?",
+  "options": [
+   "The royalty of 15 percent and the tax of 40 percent are the same at every interest, and take is simply those two rates restated on the pre-take value, so a run at 25 percent reports 66.1723 because the rates it is built from never moved.",
+   "Take is read on the field-level rows before the working interest is applied, so a partner reports the whole field's take rather than a share of it, which is why the figure is identical at 100 percent and at 60.",
+   "The government's part and the partners' part both grow as the interest falls, and the two movements cancel in the ratio.",
+   "Every monetary line and the volumes report the share, so 2029 gross revenue falls from 186032000.00 to 111619200.00 at 60 percent and both sides of the ratio are scaled by one factor."
+  ],
+  "answer_index": 3,
+  "explanation": "A take built from a partner's scaled net over the field's unscaled value would count the other partners' portion as government take and rise as the interest fell. With every line at the share, both sides of the ratio sit on one basis and the working interest drops out.",
+  "why": "L5 repair history removed from the explanation."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-internal-rate-of-return",
+  "ord": 6,
+  "prompt": "The engine's root finder falls back to bisection when Newton does not converge. What does bisection need before it can run?",
+  "options": [
+   "Two rates with NPVs of opposite sign.",
+   "Every root of the curve, so that it can halve the interval between the two nearest and confirm that Newton reached the right one.",
+   "A vector with more than one sign change, on which it picks the root nearest zero on the positive side as the hurdle-rate answer.",
+   "A Newton estimate to refine."
+  ],
+  "answer_index": 0,
+  "explanation": "two_roots_minus73_and_173 reads -6500000.000000 at -75 percent and 26500000.000000 at -50 percent, and that pair is a bracket; a curve that never changes sign gives it nothing.",
+  "why": "L5: the premise no longer quotes a pre-release method statement."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-internal-rate-of-return",
+  "ord": 8,
+  "prompt": "AKATA at 30 USD/bbl reports IRR null beside an NPV of -169873348.04. AKATA valued from 2030 with 2029 sunk reports IRR null beside an NPV of 206819768.67. What does the engine give a reader to tell those two nulls apart, and what does it still not give?",
+  "options": [
+   "Nothing at all: both return a bare null, and only the NPV beside each one has ever distinguished them.",
+   "An irrStatus naming the branch that failed, which is not a verdict: the NPV beside each null is still the only thing saying one field is deeply uneconomic and the other worth 206819768.67.",
+   "A signed null, positive for the sunk run and negative for the price run, carrying the verdict without the NPV.",
+   "An irrStatus that names the branch and also grades the field, so a reader can rank the two runs from the status alone and never has to look at the NPV printed beside either one of them, whatever its sign."
+  ],
+  "answer_index": 1,
+  "explanation": "The status names no-sign-change, no-root, multiple-roots or above-clamp, the branch the search failed on, and none of the four says whether the field is worth anything; that is the NPV's job.",
+  "why": "L5 repair history removed from the explanation."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-internal-rate-of-return",
+  "ord": 9,
+  "prompt": "AKATA reports IRR null with a 200000000 abandonment in 2035, and IRR null with a 60000000 abandonment as well. The two nulls have opposite causes. What are they?",
+  "options": [
+   "With 200000000 the NPV is negative at every sampled rate, -58362170.82 at 0 percent, so nothing brackets a crossing; with 60000000 it is 81637829.18 at 0 percent and -78880508.48 at 100, so the curve crosses twice and the engine will not pick one of them.",
+   "They share one cause: a terminal negative flow always leaves the engine without a bracket, whatever the size of the abandonment.",
+   "Newton overshoots on the steeper curve of the larger abandonment, while the smaller abandonment's only crossing sits above the top of the band.",
+   "The larger abandonment exceeds the 255000000.00 of capex it is set against, and the smaller leaves a last flow of -29598201.95 below the 2034 flow."
+  ],
+  "answer_index": 0,
+  "explanation": "With 200000000 nothing brackets a crossing; with 60000000 there are two crossings, and the engine names a rate only where exactly one rate in the band from -99 to 1000 percent zeroes the NPV.",
+  "why": "L5: a distractor quoted a retired root; the explanation told a repair story."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-internal-rate-of-return",
+  "ord": 10,
+  "prompt": "two_roots_2_and_6, [-100, 208, -108.12], has an NPV of -0.120000 at 0 percent, 0.036982 at 4 and -0.264463 at 10, and is zero at 2 percent and at 6. What does the engine return?",
+  "options": [
+   "6.0000 percent, the crossing Newton reaches climbing from its start at 10 percent, with no note that a second one exists.",
+   "2.0000 percent, the crossing nearest zero on the positive side, which is the hurdle-rate region a decision is made in.",
+   "Both rates, reported as a range running from 2.0000 to 6.0000 percent, since either one of them zeroes the NPV.",
+   "Null, with irrStatus multiple-roots and the crossings listed as 2.0000 and 6.0000 percent, because two rates in the band zero the NPV and it names a rate only where one does."
+  ],
+  "answer_index": 3,
+  "explanation": "Two rates in the band zero the NPV, so the engine names neither and lists both. A finder that stopped at the crossing it reached first from 10 percent would report 6.0000 and hide 2.0000, and nothing in that rate would show it.",
+  "why": "L5 repair history removed from the explanation."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m04-the-internal-rate-of-return",
+  "ord": 11,
+  "prompt": "A reader copies from a colleague's spreadsheet and takes three_roots_0_7_33's IRR of 7.3509 percent to a hurdle of 5 percent and approves. What went wrong?",
+  "options": [
+   "The reader should have used the oracle's 0.0000 percent, which is below 5, and rejected the vector on the smaller root.",
+   "Nothing, since 7.3509 sits above the hurdle and the curve reads 0.081930 at 30 percent.",
+   "The NPV at 5 percent is -0.028075, negative; a hurdle comparison needs the sign of the curve at the hurdle, which is the NPV rather than a root.",
+   "The engine should have reported 33, the largest root, and the reader should compare that with the hurdle instead."
+  ],
+  "answer_index": 2,
+  "explanation": "On two_roots_2_and_6 the same reasoning happens to hold because the NPV at 5 percent is 0.027211, positive; the reasoning is wrong either way, and only the sign at the hurdle is an answer.",
+  "why": "L5: the premise no longer cites a pre-release report. An \"X, not Y\" contrastive reworded plainly (owner copy rule)."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-sweeps",
+  "ord": 5,
+  "prompt": "On the published oil_price_multiyear_pia_real sweep the take reads 114.9262 percent at 40 USD/bbl, 69.3025 at 80 and 69.8048 at 120, while AKATA's JV take falls from 87.4083 at 60 to 57.9418 at 120. Why does the PIA take hold almost flat?",
+  "options": [
+   "The PIA take is working-interest invariant, so it cannot move with the price either.",
+   "The PIA field's unit technical cost is 32.823299 USD/boe at every point, so cost and price scale together and the ratio is fixed.",
+   "The PIA's price royalty tiers rise with price, so the government's share grows as the pre-take value grows.",
+   "The PIA cascade charges its taxes on revenue rather than on income, so the take is a rate rather than a share."
+  ],
+  "answer_index": 2,
+  "explanation": "Both takes are shares of a residual; the JV share falls because a fixed royalty and a fixed tax rate take a smaller fraction of a growing residual, and the PIA tiers replace that fixed royalty with one that climbs.",
+  "why": "Moved takes."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-sweeps",
+  "ord": 10,
+  "prompt": "AKATA's breakeven is 64.916777 USD/bbl. Rerun at that price, the NPV is 897.16 USD, the IRR 10.0002 percent and the take 79.0146 percent. What is the 897.16?",
+  "options": [
+   "The NPV of the final row alone, which the search leaves unresolved because the 2035 revenue is priced by the escalator rather than by the flat price the search moves, so a remainder of that size is expected at any breakeven.",
+   "Proof that the NPV curve against price never quite crosses zero, so 64.916777 is the nearest price rather than a root.",
+   "The trace of a search that stops at a tolerance on price: nothing for a decision, something for a reader who expected zero.",
+   "The mid-year against end-year difference at the breakeven price, which the search cannot remove."
+  ],
+  "answer_index": 2,
+  "explanation": "The published cases leave the same trace, -243.53 on jv_analytic, -1391.65 on pia_worked_example and -3574.39 on multiyear_pia_real, and the IRR of 10.0002 percent confirms the crossing was found.",
+  "why": "Moved breakeven residuals."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-sweeps",
+  "ord": 14,
+  "prompt": "On decline_rate_multiyear_pia at 20 percent decline the limit year is 2031, three years are trimmed and seven rows are valued. What does the sweep refuse to do with the trimmed years?",
+  "options": [
+   "Report them at all, so the rows column reads 10 on every point and only the KPIs reveal the trimming, because the row count is fixed by the production upload and the limit test only zeroes the values in the years it fails.",
+   "Charge their opex, so the KPIs of the shortened field carry no cost after the limit year, while the revenue of the trimmed years is still counted inside the total revenue of the run.",
+   "Discount them, so they enter the NPV at face value and pull the NPV down to -30055502.32, because a year past the limit is carried undiscounted as a liability instead of being removed from the ledger.",
+   "Keep them: a year that fails the limit test is removed from the valued ledger instead of carried at zero, and the KPIs are of the shortened field."
+  ],
+  "answer_index": 3,
+  "explanation": "At 40 percent decline seven years are trimmed and three rows survive, and total revenue falls from 3485716284.18 at 5 percent decline to 794617600.00.",
+  "why": "Moved figures at 20 percent decline. An \"X, not Y\" contrastive reworded plainly (owner copy rule)."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m05-sweeps",
+  "ord": 15,
+  "prompt": "The decline sweep reports a take of 1079.0391 percent at 40 percent decline and a unit technical cost of 78.666122 USD/boe. What is the 1079.0391?",
+  "options": [
+   "A share of a pre-take value that has almost vanished, because rows were trimmed while royalties are still charged on what remains.",
+   "A rounding fault in the take, which the engine should have reported as null once the residual turned negative as it does on AKATA at 40 USD/bbl.",
+   "The royalties of 72878470.21 divided by the three surviving rows of revenue, which is how the take is defined once the limit engages.",
+   "The take on the ten-year field before trimming, carried forward unchanged because the take is an undiscounted reading."
+  ],
+  "answer_index": 0,
+  "explanation": "Take is 93.0311 percent at 20 percent decline and 179.7616 at 30: the denominator shrinks toward zero as rows are cut, and a share of a value near zero is a large percentage.",
+  "why": "Moved takes."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 5,
+  "prompt": "Step five reads the profile. AKATA's point labelled 6.8 reads 72534830.66, the headline, so the gap is 0.00. What does the label 6.8 tell a reader about the rate the point was evaluated at?",
+  "options": [
+   "That it was evaluated at 6.8 percent, and the gap of 0.00 shows 6.8 and 6.796117 give the same NPV to the cent on a field of this size.",
+   "Nothing exact: the label is the applied rate rounded to two decimals, while the evaluation is at 6.796117 percent, which is why the point equals the headline.",
+   "That the point sits between the 5 and 8 percent samples and was interpolated from 83023565.60 and 65968275.69.",
+   "That the applied rate is exactly 6.8 percent, the Fisher rate rounded by the engine before any discounting is done."
+  ],
+  "answer_index": 1,
+  "explanation": "The engine's own npv() at the exact rate returns the headline, and a recomputation at the printed 6.8 would land slightly below it, because 6.8 discounts a little harder.",
+  "why": "L5 repair history removed from the explanation."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 11,
+  "prompt": "The three habits the lesson names end with reading the rows column before comparing two runs. Why that column?",
+  "options": [
+   "Because the rows column carries the sunk flag, and a run with a sunk row reports 206819768.67 where the same rows kept report 77464382.26.",
+   "Because the rows column is where the discounting convention is recorded for each run, end_year or mid_year, and two runs under different conventions cannot be ranked against each other.",
+   "Because the number of rows sets the exponent of the last flow, so a ten-row field is discounted harder than a seven-row field at the same rate.",
+   "Because a sweep that trims years compares different fields: at 20 percent decline seven rows are valued and at 40 percent three, so the KPIs are of shortened ledgers."
+  ],
+  "answer_index": 3,
+  "explanation": "The 10 percent decline point keeps all 10 rows and reads 182401961.12; the 20 percent point reads -30055502.32 with three years gone, and part of that difference is the missing rows.",
+  "why": "Moved figures; keyed text said six rows at 20 percent decline."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 13,
+  "prompt": "Working the method on multiyear_jv_real: 127186476.88 at 0 percent, headline 88104639.00 at 6.796117 percent, 88104639.00 at the point labelled 6.8, IRR 47.9020 percent. What is the gap, and what does the engine naming 47.9020 already tell you?",
+  "options": [
+   "The gap is 0.00, and a named rate tells you only that Newton converged on something; the count of crossings still has to be checked by hand from the sign of the vector's last flow before the rate can be relied on.",
+   "The gap is a small negative amount, because the applied rate of 6.796117 percent is rounded to 6.8 before the point is evaluated, and a named rate says nothing at all about how many crossings the curve has.",
+   "The gap is 0.00, and a named rate already tells you it is the only rate in the band from -99 to 1000 percent that zeroes the NPV, because the engine returns null where there is more than one.",
+   "The gap is 0.00, and a named rate tells you the last entry is positive, since the engine names a rate only on conventional vectors."
+  ],
+  "answer_index": 2,
+  "explanation": "The point is evaluated at the exact applied rate, so the gap is 0.00. The engine names a rate only where exactly one rate in the band zeroes the NPV, so a reported 47.9020 percent already carries the count of crossings.",
+  "why": "L5 repair history removed from the explanation. L5: a distractor quoted a retired gap."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 15,
+  "prompt": "The Professional tier hands on two readings that carry their own proof: the applied-rate profile point and the IRR of a vector whose last entry is negative. What does each tell a reader?",
+  "options": [
+   "The point labelled 6.8 is a rounded estimate to be corrected against the headline, and [-100, 208, -108.12] returns 6.0000 percent, the root the search reaches first from 10 percent.",
+   "The profile point reads the headline, and [-100, 208, -108.12] returns 2.0000 percent, the lower root, which the contract keeps as the conservative rate for a hurdle.",
+   "Both are superseded by the breakeven residual of 897.16 and the mid-year NPV of 70188970.32, the readings the engine reports without saying how.",
+   "The point labelled 6.8 reads the headline 72534830.66 because it is evaluated at the exact rate, and [-100, 208, -108.12] is null with multiple-roots and both roots listed."
+  ],
+  "answer_index": 3,
+  "explanation": "The applied-rate point is labelled at the rate rounded to two decimals and evaluated at 6.796117, so it equals the headline; a vector with two crossings in the band is null with its roots listed. 70188970.32 and 897.16 are correct readings under their labels.",
+  "why": "L5: the question was a repair story; it now asks what the two self-proving readings tell a reader."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 9,
+  "prompt": "AKATA's flow vector is [-121123680.00, 31746007.20, 64468245.07, 53959532.44, 44874457.77, 37311468.65, 30401798.05]. An abandonment of 60000000 in 2035 is added. Which entry changes, what happens to its sign, and what does that do to the count of IRR roots?",
+  "options": [
+   "The first entry grows to include the abandonment as a provision, stays negative, and the root count is unchanged because only the sign of the first flow matters.",
+   "The last entry becomes -29598201.95, negative, and the root count goes from one to two, so the engine stops naming a rate and returns null with irrStatus multiple-roots.",
+   "The last entry becomes -29598201.95, negative, and the root count goes from one to none, which is why the engine reports null with irrStatus no-root.",
+   "Every entry falls by a share of the 60000000 spread as a sinking fund across the seven years, the signs are unchanged, and the single root moves a little below 29.2361 percent."
+  ],
+  "answer_index": 1,
+  "explanation": "The 200000000 abandonment takes the last entry to -169598201.95 and the NPV negative at every sampled rate, -58362170.82 at 0 percent, and that is the case with no root at all.",
+  "why": "L5: a distractor quoted a retired root."
+ },
+ {
+  "tier": "intermediate",
+  "scope": "module",
+  "module_key": "m06-the-professional-reading",
+  "ord": 10,
+  "prompt": "The onward lesson names a second source of terminal negatives beside abandonment. What is it?",
+  "options": [
+   "A price deck that falls in its last entries, which turns the late revenue rows negative before the cascade is applied to them.",
+   "Mid-year discounting, which discounts the valuation year row and so pushes a negative into the tail of the discounted column.",
+   "A tail kept past its economic limit with the limit test off, where each late year carries a loss to the end of the vector.",
+   "A working interest below 100 percent, which scales the late rows harder than the early ones and turns the tail negative at 25 percent."
+  ],
+  "answer_index": 2,
+  "explanation": "At 20 percent decline the limit year is 2031 and three years are trimmed; with the limit off those years would stay, and each would carry a loss.",
+  "why": "Moved figures at 20 percent decline."
+ }
+]

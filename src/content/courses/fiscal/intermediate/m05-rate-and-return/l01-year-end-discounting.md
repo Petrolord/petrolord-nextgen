@@ -26,7 +26,7 @@ At 0 percent the NPV is 980.9313 million USD, which is exactly the total contrac
 
 ## A negative NPV is not a loss
 
-The teaching field runs at a discount rate of 12 percent, and every one of the six templates returns a negative NPV on it: "Brazil - Concession" -5.8662 million USD, "Generic Royalty/Tax" -13.3840, "Ghana - Deepwater" -27.4074, "USA - Gulf of Mexico" -37.3123, "Nigeria - PIA (2021)" -43.7842 and "Angola - Deepwater PSC" -58.1813. None of those regimes loses money. Brazil returns 192.9896 million USD of undiscounted contractor net cash flow over the life and pays back in year 6. The engine names no single rate of return for it, because its present value crosses zero twice, once at a negative rate and once below the 12 percent it is discounted at.
+The teaching field runs at a discount rate of 12 percent, and five of the six templates return a negative NPV on it: "Brazil - Concession" -5.8662 million USD, "Generic Royalty/Tax" -13.3840, "Ghana - Deepwater" -27.4074, "USA - Gulf of Mexico" -37.3123 and "Angola - Deepwater PSC" -58.1813. "Nigeria - PIA (2021)" returns 1.7389, only just positive. None of the six loses money. Brazil returns 192.9896 million USD of undiscounted contractor net cash flow over the life and pays back in year 6. The engine names no single rate of return for it, because its present value crosses zero twice, once at a negative rate and once below the 12 percent it is discounted at.
 
 ## The mistake
 

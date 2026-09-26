@@ -1,0 +1,738 @@
+[
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 6,
+  "prompt": "What does `summary[0]` guarantee on any comparison?",
+  "options": [
+   "The highest contractor NPV and the fastest payback, since the two move together on every published comparison in the course.",
+   "The best result for the contractor on NPV, IRR and payback, which is what makes it the row a recommendation is written from.",
+   "The highest contractor NPV at the comparison's discount rate, and nothing else.",
+   "The lowest government cash flow, because take and contractor NPV are the two sides of one revenue total and must run opposite each other."
+  ],
+  "answer_index": 2,
+  "explanation": "On the default project rank 3 returns an IRR of 40.2125 percent and rank 4 returns 44.0823, so even the IRR column is already out of order.",
+  "why": "default-project ranks moved: GoM is rank 3, Brazil rank 4"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 9,
+  "prompt": "USA - Gulf of Mexico shows a price climb of -17.2498 percentage points and Generic Royalty/Tax -10.1897 on the default project. What makes those two regressive?",
+  "options": [
+   "A fixed royalty rate and a fixed tax rate on a growing profit hand the government a shrinking fraction once cost recovery has been paid off.",
+   "A cost recovery limit that rises with price, which returns more of the contractor's cost before any split is taken and so shrinks the state's share of each barrel.",
+   "A profit split tiered on the R factor, which walks the contractor into a more generous tranche as revenue grows.",
+   "A minimum tax that binds at low prices and stops binding once the computed charge exceeds it, which flattens the government's share as price rises."
+  ],
+  "answer_index": 0,
+  "explanation": "Brazil - Concession climbs the most at 20.5076 percentage points, the two templates whose split is tiered on the R factor climb by 19.6873 and 7.8960, and Nigeria - PIA (2021) is almost flat at -0.0068.",
+  "why": "only two templates split on the R factor; the PIA template is almost flat; audit: key was uniquely longest; distractors lengthened (neither template has a minimum tax or a rising limit)"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 24,
+  "prompt": "The contractor verdict on ODIDI prints 1.7 million USD and says there is no single IRR, because the NPV is zero at -19.2% and 12.2%. What did it rank?",
+  "options": [
+   "The first row of the summary at full precision, 1.7389 million USD, because the sort has already put the highest contractor NPV there.",
+   "The largest contractor NPV it could find across the six ledgers, recomputed at the comparison's discount rate before the sentence was built.",
+   "The rounded figures themselves, which is why two regimes printing the same value are reported as a tie by this verdict.",
+   "The undiscounted lifetime contractor net cash flow, which on ODIDI is 229.9586 million USD for that regime."
+  ],
+  "answer_index": 0,
+  "explanation": "Every insight sentence rounds money and rates to one decimal place while the ranking underneath runs at full precision.",
+  "why": "ODIDI summary head is now Nigeria - PIA (2021) at 1.7389; verdict re-read from the engine"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 31,
+  "prompt": "Every rate in a written answer on ODIDI is correct and the resilience answer is still wrong. What was skipped?",
+  "options": [
+   "The ranges, since the capex sweep stops at a multiplier of 1.4 while the chart promises 1.5.",
+   "The sort, since a resilience verdict is read off the summary's first row.",
+   "The field: a capex loss belongs to one project, and ODIDI orders the six templates differently from the default project.",
+   "The discount rate, since ODIDI is discounted at 12 percent and the swept losses are reported at the comparison's own 10."
+  ],
+  "answer_index": 2,
+  "explanation": "Ranges and definitions are where the marks are lost, and ODIDI's losses of 181.1922 and 252.6075 million USD belong to that field alone.",
+  "why": "copy rule: contrastive removed"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 33,
+  "prompt": "On ODIDI the highest contractor NPV and the largest government cash flow sit in different rows. Which rows, and why is that not a contradiction?",
+  "options": [
+   "Brazil - Concession heads both, and the appearance of a split comes from the government share of net revenue column, which is a ratio rather than a total.",
+   "Nigeria - PIA (2021) at 1.7389 million USD heads the sort while Angola - Deepwater PSC collects 316.7898 at rank 6, because the sort ranks the contractor's discounted cash and take is the state's undiscounted share.",
+   "Generic Royalty/Tax heads the sort at -13.3840 million USD while Nigeria - PIA (2021) collects 196.0260 million USD, and the two differ because one of those columns is a percent of revenue and the other is money over the whole life.",
+   "Angola - Deepwater PSC heads both on ODIDI, which is what makes the field a poor one to rehearse a comparison on."
+  ],
+  "answer_index": 1,
+  "explanation": "Only the head of the ODIDI sort returns a positive NPV at 12 percent, 1.7389 million USD, and the same regime collects the least for the government, 196.0260.",
+  "why": "ODIDI sort head is Nigeria - PIA (2021) at 1.7389 with the smallest take; Angola still collects most at rank 6"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 34,
+  "prompt": "Under the PIA template on ODIDI the contractor net cash flow reads -0.0003 million USD in year 20 and stays negative to year 25, while the cumulative ends at 229.9586. What does that mean for the payback year?",
+  "options": [
+   "Payback is recomputed at the end and reported as the last year the cumulative was above zero, which on this ledger is year 25.",
+   "Payback is null on this ledger, because a cumulative that turns down inside the horizon has not recovered the capital.",
+   "Payback is unaffected because the engine reads only the years before the R factor passes 1.0, which on ODIDI is year 6.",
+   "Payback is a first crossing and not a high water mark, and the cumulative peaks at 250.9149 million USD before falling back."
+  ],
+  "answer_index": 3,
+  "explanation": "The cumulative first turns positive in year 7 at 43.8352 million USD, and late year opex against a declining revenue is what pulls it back.",
+  "why": "PIA template ODIDI ledger re-read: year 20 -0.0003, cumulative peak 250.9149 in year 19, ends 229.9586"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "prompt": "On the Designer's defaults the Concessionary regime reads 46.3452 percent in the summary and 59.6210 percent on the price chart at the base price. Which one is government share of net revenue, and why do they differ?",
+  "options": [
+   "The summary's 46.3452, because it adds total capex back to the contractor side, while the chart's 59.6210 divides the same two totals with nothing added back.",
+   "The chart's 59.6210, because the sweep re-runs the whole ledger at each of its nine prices and therefore works on profit, while the summary reports a single ratio taken on cash.",
+   "The summary's 46.3452, because it is discounted at 10 percent while the chart's number is an undiscounted lifetime ratio.",
+   "Neither, since both divide take by take plus contractor cash and the difference between them is the swept price."
+  ],
+  "answer_index": 0,
+  "explanation": "The Designer's sample PSC regime, whose values are illustrative samples, shows the same pair, 56.5354 against 72.7302, a gap of 16.1948 percentage points on one screen.",
+  "why": "L6: the Designer's sample PSC regime; audit: WRONG KEY: the summary 46.3452 is government share of net revenue (capex added back); the rate on profit is the chart 59.6210 (governmentTakePct). Question re-pointed so the keyed option is true; options unchanged"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 36,
+  "prompt": "The payback verdict on `cmp_all_templates_default_project` closes with \"against year 4 for Angola - Deepwater PSC\". What is Angola in that sentence?",
+  "options": [
+   "The runner-up, the regime that recovers its capital second fastest of the six templates.",
+   "The regime with the lowest contractor NPV, which the sentence quotes as the comparison's floor.",
+   "The slowest regime left once the tied fastest ones are named, here the only one paying back in year 4.",
+   "The one regime whose R factor payout comes later than its cash payback, which the sentence flags as a warning."
+  ],
+  "answer_index": 2,
+  "explanation": "The verdict names every regime tied at the fastest year, sets them aside and takes the maximum of what is left, so the second name is the slowest of the rest. The payback column reads 3, 3, 3, 3, 4 and 3 down the summary, and Angola pays out in year 3, before its payback.",
+  "why": "five templates pay back in year 3 on the default project; the question now tests the second name (slowest of the rest), avoiding a duplicate of m04 ord 1"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 39,
+  "prompt": "On the default project the price climb and the capex loss rank the six templates in nearly the same order. What connects the two sweeps?",
+  "options": [
+   "A regime that takes a rising share of the upside absorbs a share of the downside, so the contractor's NPV under it moves less when capital cost rises.",
+   "They are computed from the same series, since the capex sweep is the price sweep re-expressed in money rather than in percentage points of government take.",
+   "Both sweeps hold the other variable at the base case, so the two rankings are the same ranking measured twice.",
+   "Each is an endpoint difference over eight points, so a regime that leads one must lead the other by construction."
+  ],
+  "answer_index": 0,
+  "explanation": "The two steepest climbers give up the least at 100.7185 and 88.6123 million USD and the two most regressive give up 244.0782 and 267.7301, while Nigeria - PIA (2021), almost flat at -0.0068, gives up 243.6525, so the orders still differ row for row.",
+  "why": "three templates now fall on the price sweep; PIA gives up 243.6525; audit: opening tell removed"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 41,
+  "prompt": "ODIDI carries oil, gas and NGL while the Suite test project produces 30000 bbl/d of oil with no gas and no NGL. What does that change about a price sweep on each?",
+  "options": [
+   "On the test project the sweep is meaningless because a single stream cannot show progressivity at all, and on ODIDI it is the only one of the two readings a fiscal analyst should quote.",
+   "On the test project the multiplier is the whole revenue multiplier, and on ODIDI it moves oil only while gas at 40 Mscf/d and NGL at 900 bbl/d stay where the deck left them.",
+   "On both the multiplier scales all three stream prices, and the difference is only that two of ODIDI's streams are small.",
+   "On the test project the sweep must re-run the decline as well, since an oil only field has no gas revenue to hold the ledger up at a low price."
+  ],
+  "answer_index": 1,
+  "explanation": "A flat curve on a gas weighted field means the sweep did not move most of the revenue, and it says little about whether the terms respond to price.",
+  "why": "copy rule: contrastive removed"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 42,
+  "prompt": "The engine returns 255.8175 million USD for Nigeria - PIA (2021) at a capex multiplier of 1.5 both as a swept point and when called directly. What does that agreement pin?",
+  "options": [
+   "That the golden publishes the oracle's eighth point in place of the engine's, the two being equal at that multiplier.",
+   "That the chart may drop a point whose contractor NPV falls below the base case by more than a third, as 255.8175 does against 432.0925.",
+   "That a direct call and a swept point use different discount conventions which happen to meet at a multiplier of 1.5.",
+   "That the sweep reaches its endpoint rather than approaching it, which is the check a step count buys over an accumulating sum."
+  ],
+  "answer_index": 3,
+  "explanation": "The golden also pins the grid itself as `capexGrid`, eight multipliers from 0.8 to 1.5, so the count and the labels are pinned as well as the values.",
+  "why": "PIA template capex endpoint 255.8175 against base 432.0925; audit: repair framing removed"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-six-regimes-at-once",
+  "ord": 2,
+  "prompt": "All six templates on the default project return gross revenue of 2686.9277 million USD. What does that identical figure say about a fiscal regime?",
+  "options": [
+   "The six templates happen to share a royalty base, and a template built on a different base would return a different revenue.",
+   "Cost recovery is struck before revenue is reported, so the revenue line is already net of the recoverable pool and equal by construction.",
+   "It touches neither production nor price, so revenue belongs to the field and only the division of it moves.",
+   "Revenue is the figure discounted at 10 percent, which removes the regime's effect on timing."
+  ],
+  "answer_index": 2,
+  "explanation": "On that same 2686.9277 million USD, lifetime contractor net cash flow is 1058.0159 million USD under Nigeria - PIA (2021) and 986.7327 under Generic Royalty/Tax.",
+  "why": "PIA default-project contractor NCF 1058.0159"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-six-regimes-at-once",
+  "ord": 3,
+  "prompt": "The summary comes back sorted. What can be read off a row's position, and what tie break applies when two regimes match?",
+  "options": [
+   "Contractor NPV descending, with the payback year as the secondary key wherever two NPVs are equal, so the faster regime is listed first on a tie.",
+   "Contractor NPV descending and nothing else, and there is no secondary key at all, so equal NPVs keep the order they were passed in.",
+   "Contractor NPV descending and government cash flow ascending together, since the two mirror each other on every comparison the engine runs.",
+   "The internal rate of return descending, so rank 3 at 40.2125 percent sitting above rank 4 at 44.0823 percent is an error in the sort."
+  ],
+  "answer_index": 1,
+  "explanation": "summary[0] is the best regime for the contractor and nothing else can be read off a position, and the comparison exposes no option to sort on another column.",
+  "why": "ranks moved: GoM rank 3, Brazil rank 4; audit: key was uniquely longest; distractors lengthened"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-six-regimes-at-once",
+  "ord": 4,
+  "prompt": "On the default project rank 3 returns an internal rate of return of 40.2125 percent and rank 4 returns 44.0823 percent. What has gone wrong?",
+  "options": [
+   "Each rate was solved at a different discount rate, since the solver reruns each regime against its own hurdle.",
+   "The rank 3 regime failed to converge, so the solver reported the edge of its own bracket in that row instead of a root.",
+   "A payback sort ordered the rows, which puts a regime with a later payout above one with a higher rate.",
+   "Nothing at all."
+  ],
+  "answer_index": 3,
+  "explanation": "Nigeria - PIA (2021) leads on NPV at 432.0925 million USD with a rate of 46.7732 percent, USA - Gulf of Mexico sits at rank 3 with 382.0660 and 40.2125, and Brazil - Concession at rank 4 with 287.2804 and 44.0823, so the higher rate and the higher NPV belong to different regimes.",
+  "why": "ranks moved; PIA leads the default sort; audit: opening tell removed (three distractors opened \"The\")"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-six-regimes-at-once",
+  "ord": 5,
+  "prompt": "On ODIDI, Ghana - Deepwater sits at rank 4 collecting 308.8447 million USD for the government and USA - Gulf of Mexico at rank 5 collecting 277.6679. Why does the lower ranked regime collect less?",
+  "options": [
+   "The take column is reported after royalty on that field, and USA - Gulf of Mexico charges the higher flat royalty of the two.",
+   "The sort key is NPV discounted at 12 percent while take is an undiscounted lifetime total, and the larger contractor sum arrives later.",
+   "The ranking was set by the government share of net revenue column, where 32.8219 percent sits below 36.5071 percent.",
+   "USA - Gulf of Mexico never pays back on ODIDI, so its take was truncated at the fixed 25 year horizon."
+  ],
+  "answer_index": 1,
+  "explanation": "USA - Gulf of Mexico keeps 148.3166 million USD of lifetime contractor net cash flow against 117.1399 for Ghana - Deepwater and ranks lower anyway, paying back in year 7 against year 6.",
+  "why": "ODIDI ranks moved: Ghana 4, GoM 5"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-six-regimes-at-once",
+  "ord": 6,
+  "prompt": "Which regime is best for the government on ODIDI, and where is that read from?",
+  "options": [
+   "The regime at rank 2, Brazil - Concession, since the second row is the state's preference once the contractor's own pick is set aside.",
+   "Nigeria - PIA (2021) at rank 1, because on a field this marginal the leading row is the one the state has squeezed hardest.",
+   "Angola - Deepwater PSC, read out of the take column at 316.7898 million USD, from rank 6.",
+   "Ghana - Deepwater, whose 36.5071 percent is the harshest government share of net revenue the summary shows."
+  ],
+  "answer_index": 2,
+  "explanation": "Nothing in the summary sorts by take, and quoting the second row as the government's preference is a claim no column supports.",
+  "why": "ODIDI: PIA rank 1 with the lowest share, Brazil rank 2; history framing removed"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-price-sweep",
+  "ord": 3,
+  "prompt": "At 40 USD per bbl the Designer's sample PSC regime leaves 5.9578 million USD of cost unrecovered at the end of the life. What does that say?",
+  "options": [
+   "The cost recovery limit binds hard at the bottom of the sweep, and the pool closes to 0.7642 at 50 and to 0.0000 from 60 upward.",
+   "The pool carries forward past the horizon, so the contractor recovers the remainder in the following licence period.",
+   "The engine wrote the remainder off as an abandonment provision, which is what makes the NPV smaller than the loss.",
+   "Cost recovery was capped by the profit oil split rather than by the limit, since a low price walks the R factor into a generous tranche."
+  ],
+  "answer_index": 0,
+  "explanation": "At the deck price the limit binds only in the first four years and the pool clears; at 40 USD per bbl the pool is still open after year 25, NPV is -51.1673 million USD, and the engine reports no single IRR, the NPV being zero at -40.1442 and 6.6994 percent.",
+  "why": "L6: the Designer's sample PSC regime; audit: explanation said the limit never binds at the deck price (it binds in years 1 to 4) and that no rate exists at 40 (status multiple-roots, two roots)"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-price-sweep",
+  "ord": 4,
+  "prompt": "The nine published price runs are named price_40_pia_default through price_120_pia_default. Which regime do they actually run?",
+  "options": [
+   "The Nigeria - PIA (2021) template, which is why the 70 point returns that template's NPV of 432.0925 million USD on the default project.",
+   "All six templates at once, with the PIA row published at each price and the other five rows computed and then discarded.",
+   "The Nigeria - PIA (2021) template on the test project, the one project whose first deck point is not 70 USD per bbl.",
+   "The Designer's sample PSC regime, id 1, which the engine names Nigerian PIA (PSC)."
+  ],
+  "answer_index": 3,
+  "explanation": "The template and the Designer's sample PSC regime, whose values are illustrative samples, share little: the sample regime recovers cost to 70 percent of revenue after royalty and charges a royalty of 12.5 percent below 80 USD/bbl and 15 percent from 80, while the template recovers to 70 percent of the gross value of crude oil and NGL and charges the PIA 2021 royalty. The template returns 432.0925 million USD on that project and the sample regime 169.7176.",
+  "why": "template NPV 432.0925; template instruments re-stated; L6 naming; audit: the lowest tier applies below every threshold, so 12.5 percent also runs below 60"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-price-sweep",
+  "ord": 13,
+  "prompt": "A gas weighted project shows a government take that barely moves across the nine points. What is the correct conclusion?",
+  "options": [
+   "The terms are flat rated, so the regime is neither progressive nor regressive.",
+   "The project sits at its cost recovery limit at every price, which pins the share until the recoverable pool clears.",
+   "The sweep did not move most of that project's revenue, so the flat curve says little about its terms.",
+   "The engine flagged every point undefined and returned a constant, as it does whenever contractor net cash flow is negative."
+  ],
+  "answer_index": 2,
+  "explanation": "The multiplier scales oil only, so comparing the steepness of two projects' curves compares their stream mix as much as their terms. The test project is 30000 bbl/d of oil with no gas and no NGL, so there the multiplier is the whole revenue multiplier.",
+  "why": "copy rule: contrastive removed from the key"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-price-sweep",
+  "ord": 14,
+  "prompt": "On the Designer's two default regimes at the deck's own first year price, Concessionary (Royalty/Tax) reads 46.3452 in one place and 59.6210 in another. What separates those two figures?",
+  "options": [
+   "The table adds total capex back into the contractor's side of the denominator and the chart does not.",
+   "The chart is computed at the swept price and the table at the deck price, which are not the same price.",
+   "The chart counts the government's profit oil share as well as tax and the table counts tax alone.",
+   "The chart is undiscounted while the table is discounted at 10 percent."
+  ],
+  "answer_index": 0,
+  "explanation": "Both are the same ratio on the same cash flows and only the add-back differs. The gap on that row is 13.2758 percentage points, and on the Designer's sample PSC regime it is 16.1948.",
+  "why": "L6: the Designer's sample PSC regime"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-price-sweep",
+  "ord": 15,
+  "prompt": "Why can a reader not carry one fixed offset between government share of net revenue in the summary and government take on the chart?",
+  "options": [
+   "The two are computed on different projects, so a gap measured on one field cannot be carried to another.",
+   "The gap runs from 8.7699 to 16.7958 percentage points across six templates on one project at one price.",
+   "The chart prints four decimal places and the table one, so the offset changes with the rounding.",
+   "The gap changes sign between a regime that adds capex back and one that does not."
+  ],
+  "answer_index": 1,
+  "explanation": "The gap grows with government share of net revenue itself, so Ghana - Deepwater's 16.7958 carried across to Nigeria - PIA (2021), where it is 8.7699, overstates the chart badly.",
+  "why": "gap range now 8.7699 (PIA) to 16.7958 (Ghana)"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-capex-sweep",
+  "ord": 2,
+  "prompt": "A capex sweep written as a loop that adds 0.1 to a multiplier starting at 0.8, while it stays at or below 1.5, returns seven points and its last reads 1.4. What ends that loop early?",
+  "options": [
+   "Accumulating 0.1 in binary floating point arrives at 1.5000000000000004, which is greater than 1.5.",
+   "A refusal by the engine of any multiplier above 1.4, because no cost recovery limit can absorb a larger overrun.",
+   "Its eighth point returned a negative NPV for one regime, so the sweep dropped it.",
+   "The label came from the loop bound and the points from a step count."
+  ],
+  "answer_index": 0,
+  "explanation": "The engine sweeps a fixed grid of eight multipliers, so Nigeria - PIA (2021) returns 255.8175 million USD of contractor NPV at 1.5 as a swept point, against 291.8238 at 1.4.",
+  "why": "PIA capex points 255.8175 at 1.5 and 291.8238 at 1.4; repair history removed; audit: opening tell removed"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-capex-sweep",
+  "ord": 8,
+  "prompt": "The nine published capex cases are named capex_0.7_pia_default to capex_1.5_pia_default. How do they relate to the sweep the chart draws?",
+  "options": [
+   "Identical to the swept points, published one case per label on the chart's axis.",
+   "They are the same regime as the chart over a shifted range, the Nigeria - PIA (2021) template under the name the Designer gives it.",
+   "The oracle's own sweep rather than the engine's, published so that the two can be compared point by point.",
+   "A different range on a different regime."
+  ],
+  "answer_index": 3,
+  "explanation": "The published set runs the Designer's sample PSC regime, id 1, at multipliers of 0.7 to 1.5, returning 169.7176 million USD of NPV at 1.0 where the template returns 432.0925, and the chart sweeps 0.8 to 1.5 on the six templates.",
+  "why": "template NPV 432.0925; audit: opening tell removed"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-capex-sweep",
+  "ord": 11,
+  "prompt": "On the default project the two steepest climbers give up the least contractor NPV and the two most regressive templates give up the most. Why is that agreement not a coincidence?",
+  "options": [
+   "The two verdicts are computed by the same reduce over the same array, so they cannot disagree.",
+   "A regime taking a rising share of the upside absorbs a share of the downside too, so the contractor's NPV moves less when capital cost rises.",
+   "Both sweeps hold the other variable at its base case, which forces the two rankings to match row for row, so a regime placed third by climb is placed third by loss as well.",
+   "The price climb is an input to the capex loss, which is why the two orderings track one another so closely."
+  ],
+  "answer_index": 1,
+  "explanation": "Angola - Deepwater PSC climbs 19.6873 percentage points and gives up 88.6123 million USD while USA - Gulf of Mexico climbs -17.2498 and gives up 267.7301, and the orders agree in tendency and not row for row.",
+  "why": "three templates fall on price now; the two that give up most are the two most regressive"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-the-insights",
+  "ord": 1,
+  "prompt": "On `cmp_all_templates_default_project` five of the six templates pay back in year 3. How does the payback verdict report that?",
+  "options": [
+   "It names the first of them in summary order, which is the highest NPV regime, and says nothing of the other four.",
+   "It names all five of them, in summary order, against year 4 for Angola - Deepwater PSC.",
+   "It is omitted, because a five way tie at the top cannot be ranked and an unsupportable claim is dropped.",
+   "It names whichever of them crosses zero cumulative contractor net cash flow earliest inside year 3, the engine interpolating within the year to separate a tie."
+  ],
+  "answer_index": 1,
+  "explanation": "Nigeria - PIA (2021) leads the sort at 432.0925 million USD and is named first, and Angola - Deepwater PSC is the one regime at the slowest year. A verdict naming only the first tied regime would repeat the NPV ranking under another label.",
+  "why": "five templates pay back in year 3; repair history removed"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-the-insights",
+  "ord": 5,
+  "prompt": "Every price series on `cmp_never_recovers` comes back null, flagged undefined, at each of the nine prices. How does the price verdict read there, and on what grounds?",
+  "options": [
+   "It declines to rank, because every point is undefined and so no swept price gives every regime a government take within 0 to 100 percent.",
+   "It names Nigeria - PIA (2021), since two null endpoints subtract to a climb of zero that ranks like any other.",
+   "It names Angola - Deepwater PSC, the regime that collected the most, because the take column breaks a tie in the climbs.",
+   "It is omitted entirely, as it is for a single regime, because the verdict needs at least two regimes whose series carry usable points before it will rank anything."
+  ],
+  "answer_index": 0,
+  "explanation": "Under Nigeria - PIA (2021) lifetime contractor net cash flow of -15870.1271 million USD outweighs a government cash flow of 1021.2611, profit is not positive at any swept price, and the sentence says no regime is economic at any swept price from 40 to 120 USD per bbl.",
+  "why": "PIA on cmp_never_recovers: -15870.1271 and 1021.2611; history framing removed"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-the-insights",
+  "ord": 6,
+  "prompt": "A reader takes the second ranked regime to be the one that maximises government revenue. What does the second row of `cmp_all_templates_default_project` actually collect?",
+  "options": [
+   "1316.6067 million USD, because government cash flow descending is the summary's secondary sort once contractor NPV has ordered the rows.",
+   "764.5528 million USD, the largest of the six, which is why the reading looks right on this project.",
+   "758.7514 million USD, while the largest take on that comparison is 1316.6067 million USD and belongs to the regime in sixth place.",
+   "1263.7523 million USD, for Angola - Deepwater PSC, the regime the take column puts second."
+  ],
+  "answer_index": 2,
+  "explanation": "The sort carries no information about take, and on this project the take column runs the other way, from 687.4682 at rank 1 to 1316.6067 at rank 6.",
+  "why": "row 2 is Generic at 758.7514; the largest take is Ghana 1316.6067 at rank 6; history framing removed"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m04-the-insights",
+  "ord": 11,
+  "prompt": "On ODIDI the price verdict calls Brazil - Concession the most progressive, rising 7.5 percentage points. What does winning on that number say about the field?",
+  "options": [
+   "Brazil - Concession is a progressive regime, a property of its four instruments that the sweep has now measured on a second field.",
+   "The climb is small because the sweep scales oil only, and ODIDI carries gas at 40 Mscf/d and NGL at 900 bbl/d that never move.",
+   "Most of the field is going the other way: only Ghana - Deepwater at 1.9971 climbs beside it, and the other four fall.",
+   "Seven percentage points is the smallest climb the verdict will report, below which the sentence is omitted for want of separation."
+  ],
+  "answer_index": 2,
+  "explanation": "The four falling climbs run from -6.0087 for Nigeria - PIA (2021) down to -37.6994 for USA - Gulf of Mexico, so the winner leads a field on which four of six regimes hand the state a shrinking fraction as price rises.",
+  "why": "PIA ODIDI climb is -6.0087: only Ghana climbs beside Brazil and four fall"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-numbers-to-distrust",
+  "ord": 1,
+  "prompt": "Nigeria - PIA (2021) on the default project reads 30.6156 as government share of net revenue in the summary table and 39.3855 as government take on the price sweep at 70 USD per bbl. What separates the two?",
+  "options": [
+   "The summary is computed on discounted cash flows at 10 percent while the sweep totals the same ledger undiscounted, so the two answer the same question at different dates.",
+   "The sweep re-ran the comparison at a higher oil price than the deck's own, so 39.3855 belongs to a later point of the nine and describes another case.",
+   "The summary adds total capex back into the contractor side of the denominator and the sweep does not, on the same cash flows over the same 25 years.",
+   "The summary counts royalty inside government cash flow and the sweep counts only profit oil and tax, which is why the sweep reads the higher of the two."
+  ],
+  "answer_index": 2,
+  "explanation": "Both come out of one call to `runFiscalComparison`, and 8.7699 percentage points separate them.",
+  "why": "PIA default-project pair 30.6156 and 39.3855, gap 8.7699; copy rule; history framing removed"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-numbers-to-distrust",
+  "ord": 2,
+  "prompt": "A reader proposes to translate between government take and government share of net revenue with a fixed offset, because the chart runs about ten points above the table. Why does that fail?",
+  "options": [
+   "The gap is proportional to the share: here government take is the share times 1.286453, so a larger share carries a larger gap.",
+   "The gap changes with the swept price, so an offset taken at 70 USD per bbl is wrong at every other one of the nine points.",
+   "The offset is stable in percentage points and unstable in money, so it can be carried between rates but never between takes.",
+   "The two rates are computed from different ledgers, so no arithmetic relation between them exists to be approximated by an offset."
+  ],
+  "answer_index": 0,
+  "explanation": "Revenue less opex and capex do not depend on the regime, so the factor is one number for the whole comparison: Ghana - Deepwater's share of 58.6335 becomes a take of 75.4293, while Nigeria - PIA (2021) goes from 30.6156 to 39.3855.",
+  "why": "gap runs 8.7699 (PIA) to 16.7958 (Ghana); key restated as the fixed ratio 1.286453 to stay clear of m02 ord 15"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-numbers-to-distrust",
+  "ord": 8,
+  "prompt": "The nine published capex cases run multipliers of 0.7 to 1.5 and return NPVs from 220.1703 down to 41.2671 million USD. Which regime do they run?",
+  "options": [
+   "The Designer's sample PSC regime, the one the price cases also use, which is not the Nigeria - PIA (2021) template despite the country in its engine name.",
+   "The Nigeria - PIA (2021) template, which is why the case at a multiplier of 1.0 returns the same NPV as that template's summary row on the default project, 432.0925 million USD.",
+   "All six templates at once, with the case reporting the best contractor NPV of the six at each multiplier, which is why its NPV falls more slowly than any one template's.",
+   "The Brazil - Concession template, the regime whose resource rent tax makes a capex sweep worth publishing at all, since its uplifted pool is the one quantity a capex multiplier scales."
+  ],
+  "answer_index": 0,
+  "explanation": "Two ranges live in one engine: the sweep visits 0.8 to 1.5 on the six templates and the published cases 0.7 to 1.5 on the Designer's sample PSC regime, where payback slips from year 3 to year 6.",
+  "why": "L6: the Designer's sample PSC regime; audit: key was uniquely longest; distractors lengthened"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 4,
+  "prompt": "The ODIDI summary is headed by Nigeria - PIA (2021) at 1.7389 million USD. What does rank 1 mean there?",
+  "options": [
+   "Best on the sort's two keys, contractor NPV first and payback year second, which is what puts a year 7 regime at the head of the table.",
+   "Break even, since a value that small sits inside the precision the summary reports.",
+   "The only contractor NPV of the six that clears 12 percent, and a thin one, while the rest run down to -58.1813 million USD.",
+   "Best for the contractor and best for the government at once, because on ODIDI the take column runs opposite to the NPV column."
+  ],
+  "answer_index": 2,
+  "explanation": "The verdict names it best for the contractor at 1.7 million USD, and it is the one regime whose NPV is positive at that rate; the other five are losses at 12 percent.",
+  "why": "ODIDI head is Nigeria - PIA (2021) at +1.7389, the only positive NPV"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 5,
+  "prompt": "On ODIDI which regime collects the most for the government, and where does it sit in the summary?",
+  "options": [
+   "Angola - Deepwater PSC, 316.7898 million USD, at rank 6.",
+   "Nigeria - PIA (2021), 196.0260 million USD, at rank 1, the highest take on the field and the reason it heads the summary.",
+   "Generic Royalty/Tax, 242.1194 million USD, at rank 3, the middle of the table where a balanced regime would be expected to sit.",
+   "Brazil - Concession, 232.9950 million USD, at rank 2, since the regime that leaves the contractor most also runs the largest revenue base."
+  ],
+  "answer_index": 0,
+  "explanation": "The summary is sorted by contractor NPV descending and by nothing else, so the take column has to be read from the take column.",
+  "why": "ODIDI: PIA rank 1 with 196.0260, Brazil rank 2, Generic rank 3"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 6,
+  "prompt": "On ODIDI, Ghana - Deepwater reads a government share of net revenue of 36.5071 at rank 4 and USA - Gulf of Mexico reads 32.8219 at rank 5. What does that show?",
+  "options": [
+   "That the two rows were computed at different discount rates, since the summary discounts each regime at the rate its template carries.",
+   "That government share of net revenue does not follow the sort either.",
+   "That the column shows government take on those two rows, which is the definition that has no capex added back.",
+   "That the sort has a secondary key on government share of net revenue ascending, which only shows itself when two NPVs are close together."
+  ],
+  "answer_index": 1,
+  "explanation": "The ratio is government cash flow over government cash flow plus contractor take with capex added back, both totals undiscounted, while the sort key is discounted at 12 percent.",
+  "why": "ODIDI ranks moved: Ghana 4, GoM 5"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 7,
+  "prompt": "A regime in this sandbox is four fields. Which are they?",
+  "options": [
+   "The royalty, the discount rate, the profit split and the tax block, since the rate is what turns a regime's timing into a value and each template carries the rate it was written for.",
+   "The royalty, the cost recovery limit, the capex schedule and the tax block, because when capital is spent decides what is recovered, and a regime that moved capex to year 3 would recover it later.",
+   "The royalty, flat, sliding on price or the PIA 2021 royalty; the cost recovery limit and its base; the profit split, flat, tiered on the R factor or by cumulative production; and the tax block.",
+   "The royalty, the cost recovery limit, the profit split and the production forecast, which is what makes one regime harsher than another, since a regime that shortens the forecast shortens the government's collection too."
+  ],
+  "answer_index": 2,
+  "explanation": "The tax block holds corporate income tax, the resource rent tax, a minimum tax and an `rrtUpliftPct` that defaults to 20 when the field is absent.",
+  "why": "the four fields admit the PIA 2021 royalty, the liquids-gross cost base and the cumulative-production split; audit: key was uniquely longest by 57 characters; distractors lengthened"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 12,
+  "prompt": "Under the PIA template on ODIDI, cumulative contractor net cash flow first turns positive in year 7 at 43.8352 million USD, against capex of 420.0000. What does the payback year say?",
+  "options": [
+   "That the contractor had recovered the whole 420.0000 million USD of capex, and 43.8352 million USD of profit on top of it, by the end of year 7 discounted at 12 percent.",
+   "The project is viable, since a payback inside the first third of a 25 year life is what the summary's payback column is there to show.",
+   "Only that the cumulative crossed zero in that year, on a field where the cumulative later peaks at 250.9149 and falls back to 229.9586 million USD by year 25.",
+   "Year 7 is the best year of the ledger, because it is the year the contractor's own cash position stopped falling and began to rise."
+  ],
+  "answer_index": 2,
+  "explanation": "Payback is undiscounted and is a first crossing rather than a maximum, and the same ledger returns an NPV of only 1.7389 million USD at 12 percent.",
+  "why": "PIA ODIDI cumulative: year 7 43.8352, peak 250.9149, year 25 229.9586, NPV +1.7389; audit: opening tell removed"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 13,
+  "prompt": "ODIDI returns contractor net cash flow of 229.9586 million USD under the PIA template and 148.3166 under USA - Gulf of Mexico, on one revenue of 1236.1983. Where did the difference come from?",
+  "options": [
+   "From the government, whose take is 196.0260 against 277.6679 million USD on the same two runs.",
+   "From cost recovery, which is 777.9904 under the PIA template against 785.9313 and is the larger of the two differences between the runs.",
+   "From opex and capex, which the PIA template charges against profit oil while a concession charges them against the contractor's line.",
+   "From the discount rate, since the two regimes return different NPVs at 12 percent."
+  ],
+  "answer_index": 0,
+  "explanation": "Opex plus capex is the same 810.2137 million USD in both ledgers, so nothing but the four instruments separates the two contractor totals.",
+  "why": "PIA ODIDI contractor 229.9586 against GoM 148.3166: the government takes less (196.0260 against 277.6679)"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 14,
+  "prompt": "Under the PIA template the ODIDI royalty runs 3.8097 million USD in year 5 and 4.9025 in year 6, on gross revenue of 76.1939 and 93.9859. What moved?",
+  "options": [
+   "The R factor passed 1.0 in year 6, and the royalty rate in this template is keyed to the R factor tranche the year selects.",
+   "Cost recovery closed the pool in year 6, and royalty is charged on revenue after cost recovery once the pool has cleared.",
+   "Production rose in year 6, lifting revenue and royalty together.",
+   "The deck stepped at year 6 and lifted the oil price above that year's low benchmark, so the royalty by price began."
+  ],
+  "answer_index": 3,
+  "explanation": "ODIDI produces well under 50,000 bopd, so the production royalty stays at 5 percent; at 65 USD/bbl against a year 6 low benchmark of 62.1700 the royalty by price adds 0.002276. The benchmarks are the Regulations (2021) base, the engine default, and no published template case shows that start inside a field's life.",
+  "why": "PIA template ODIDI royalty 3.8097 and 4.9025: the royalty by price starts when 65 passes the 2032 low benchmark"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m06-the-expert-reading",
+  "ord": 15,
+  "prompt": "Nigeria - PIA (2021) has a capex resilience of 243.6525 million USD and also of 244.8503. Which is right?",
+  "options": [
+   "The first, because the second was measured on a field where five of the six NPVs are negative, and a loss between two negative numbers is not a resilience figure.",
+   "Both, each for its own field: 243.6525 is the loss on the default project and 244.8503 the loss on ODIDI, over the same eight multipliers.",
+   "The second, because a figure quoted on the Designer's own defaults understates what an overrun costs on a real field.",
+   "Neither, because a loss between two endpoints is not a resilience figure at all when the curve between them is not a straight line."
+  ],
+  "answer_index": 1,
+  "explanation": "A number without its definition is not a number, which is the same lesson as one regime reading 30.6156 as government share of net revenue and 39.3855 as government take.",
+  "why": "PIA capex losses 243.6525 (default) and 244.8503 (ODIDI); pair 30.6156/39.3855"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "prompt": "A two-year project spends 1 million USD and then earns 2000, so its one real root sits at 199900 percent. Which answer does `calculateIRR` give for it, and on what grounds?",
+  "options": [
+   "It returns 199900.0000 percent, the band having been widened until the search reached the root.",
+   "It returns 1000.0000 percent, the top of the band, as the screening engine returns its own clamp.",
+   "It returns null with the status no-root, since a root outside the band is a root the engine did not find.",
+   "It returns null with the status above-clamp, because the only root lies beyond the band from -99 to 1000 percent."
+  ],
+  "answer_index": 3,
+  "explanation": "The NPV at 102400 percent is 0.0009 and at 199900 percent is 0.0000, so 102400 is no root; the only root lies above the band, and the engine says so with a status instead of a rate.",
+  "why": "L5 (lead decision 4): state the IRR contract and the eight-point sweep as they are, no retired-solver or retired-loop history"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "prompt": "Two published cases have an NPV at 10 percent of 25.6198 and of -16.5289 million USD: one never changes sign, the other is -100 then 90. What does `calculateIRR` return for each?",
+  "options": [
+   "Null with the status no-root on both, neither having a rate inside the band from -99 to 1000 percent that brings its NPV to zero at year-end discounting.",
+   "Null with the status no-sign-change on the profitable one, and the negative root itself, -10.0000 percent, on the one that loses money at every positive rate.",
+   "0.0000 percent on the profitable one and null on the other, the engine still declining to print a negative rate even where the only root lies well inside its band.",
+   "-10.0000 percent on both, the shared contract reporting the nearest root inside the band whatever the flows do, including flows that never change sign."
+  ],
+  "answer_index": 1,
+  "explanation": "A profitable flow with no sign change has no rate to report, and a loss at every positive rate has a real negative root; a reader who would accept 0.0000 percent for either has read neither status.",
+  "why": "L5 (lead decision 4): state the IRR contract and the eight-point sweep as they are, no retired-solver or retired-loop history; audit: key said the -100/90 flow loses money at every rate (NPV is positive at -50 percent); now \"every positive rate\"; key no longer uniquely longest"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "prompt": "On the default project Nigeria - PIA (2021) keeps 291.8238 million USD of contractor NPV at a capex multiplier of 1.4 and 255.8175 at 1.5. What does that single last step cost, set against the 243.6525 the regime gives up over the whole sweep?",
+  "options": [
+   "243.6525 million USD, since the last step of a sweep carries its whole loss once the grid reaches the overrun on the label.",
+   "255.8175 million USD, the NPV at 1.5, because a loss is read from the endpoint of the axis and never from a difference.",
+   "34.81 million USD, the range loss of 243.6525 spread evenly over the seven steps, since a sweep loses the same amount at every step.",
+   "About 36.01 million USD, the swept point at 1.4 minus the swept point at 1.5."
+  ],
+  "answer_index": 3,
+  "explanation": "The last step is the 1.4 point minus the 1.5 point; the range loss runs from the first swept point at 0.8 to the eighth at 1.5, and the two are different spans of one sweep.",
+  "why": "L5 (lead decision 4): state the IRR contract and the eight-point sweep as they are, no retired-solver or retired-loop history; audit: distractor \"about 15 percent of the range loss\" was TRUE (36.0062 / 243.6525 = 14.78 percent); replaced by a false even-split figure (34.8075); key drops \"roughly a seventh\""
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-capex-sweep",
+  "ord": 1,
+  "prompt": "What multipliers does the capex sweep hand back with its points?",
+  "options": [
+   "Seven labels, 0.8 through 1.4, the eighth being unreachable in floating point.",
+   "Nine labels from 0.7 to 1.5, the multipliers the published capex cases are run at.",
+   "Eight labels: 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4 and 1.5.",
+   "Six labels, one per template."
+  ],
+  "answer_index": 2,
+  "explanation": "The multipliers are written from a step count, as 8 plus the step number over 10, so the last is exactly 1.5 and the last swept point equals a direct call at 1.5.",
+  "why": "L5 (lead decision 4): state the IRR contract and the eight-point sweep as they are, no retired-solver or retired-loop history"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-numbers-to-distrust",
+  "ord": 5,
+  "prompt": "The capex sweep's axis runs from a multiplier of 0.8 to 1.5. What confirms that the sweep's last point is really the 1.5 point?",
+  "options": [
+   "The chart's last tick label reads 1.5, and a label is written from the same multiplier the point was computed at.",
+   "The loss the resilience verdict quotes is larger than the last step alone, which can only happen when the range is complete.",
+   "The last swept point equals the engine called directly at a multiplier of 1.5, on every regime, to the last printed digit.",
+   "The sweep returns as many points as the published capex cases, nine, so the grid and the golden describe one range."
+  ],
+  "answer_index": 2,
+  "explanation": "On the default project Nigeria - PIA (2021) returns 255.8175 million USD at the last swept point and 255.8175 when the engine is called directly at 1.5; the grid is `CAPEX_SWEEP_MULTIPLIERS`, eight points written from a step count.",
+  "why": "L5 (lead decision 4): state the IRR contract and the eight-point sweep as they are, no retired-solver or retired-loop history"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-numbers-to-distrust",
+  "ord": 10,
+  "prompt": "On flows of -1 in year 1 and 2000 in year 2 the NPV at 102400 percent is 0.0009. What does `calculateIRR` return?",
+  "options": [
+   "102400 percent, the rate at which the NPV first falls below a thousandth of a million USD on these flows.",
+   "Null, with the status above-clamp and `irrRootAboveBand` true, because the only root is 199900 percent.",
+   "199900.0000 percent, the true root, which the widened search now reaches.",
+   "1000.0000 percent, the top of the band, reported as a clamp in the way the screening engine reports its own."
+  ],
+  "answer_index": 1,
+  "explanation": "The NPV at 102400 percent is 0.0009, small, positive and above zero, so 102400 is no root; the only root, 199900 percent, lies above the band.",
+  "why": "L5 (lead decision 4): state the IRR contract and the eight-point sweep as they are, no retired-solver or retired-loop history"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-numbers-to-distrust",
+  "ord": 11,
+  "prompt": "A rate of exactly 102400 percent or exactly 1000 percent appears where an IRR should be. What is the tell a reader should carry?",
+  "options": [
+   "Size rather than roundness, since no real project returns a rate in the thousands of percent and any such value is the edge of a search.",
+   "A rate quoted to four decimal places, which is the format the bisection uses and the Newton iteration does not.",
+   "An IRR reported beside a negative NPV, which is the only combination that a bracket return can produce in either engine.",
+   "Roundness rather than size, because both numbers were the edge of a search."
+  ],
+  "answer_index": 3,
+  "explanation": "On the published `capex_multiplier_0_7` case 1095.4783 percent is a real root and 102400 is no root at all; the engine returns null with a status rather than either, and a round figure is the mark of a search edge.",
+  "why": "L5 (lead decision 4): state the IRR contract and the eight-point sweep as they are, no retired-solver or retired-loop history"
+ }
+]

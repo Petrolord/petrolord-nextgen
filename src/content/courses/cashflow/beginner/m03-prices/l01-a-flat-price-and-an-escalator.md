@@ -24,7 +24,7 @@ The six decimals are the compounding made visible. 85.312800 in 2031 is not 82 p
 
 ## Both directions
 
-The resolver, asked for a flat 80 with a 10 percent escalator from base year 2030, returns 80.000000 in 2030, 88.000000 in 2031, 96.800000 in 2032, 106.480000 in 2033, 117.128000 in 2034 and 128.840800 in 2035. Asked for years before the base it de-escalates: 72.727273 in 2029 and 66.115702 in 2028. The base year is the anchor, not the first year of production. A field whose first row is dated before its base year is priced under the flat price, and a reader who assumed the flat price was the starting price will not find it in the first row. The published ledgers all start at or after their base year, so the de-escalated years appear only in the resolver's output, but the resolver is what the ledger calls.
+The resolver, asked for a flat 80 with a 10 percent escalator from base year 2030, returns 80.000000 in 2030, 88.000000 in 2031, 96.800000 in 2032, 106.480000 in 2033, 117.128000 in 2034 and 128.840800 in 2035. Asked for years before the base it de-escalates: 72.727273 in 2029 and 66.115702 in 2028. The base year is the anchor, whatever the first year of production. A field whose first row is dated before its base year is priced under the flat price, and a reader who assumed the flat price was the starting price will not find it in the first row. The published ledgers all start at or after their base year, so the de-escalated years appear only in the resolver's output, but the resolver is what the ledger calls.
 
 With the escalator at 0 the same call returns 80.000000 in every year from 2028 to 2035. Zero means flat.
 

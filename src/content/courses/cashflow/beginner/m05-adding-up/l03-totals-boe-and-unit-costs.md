@@ -20,11 +20,11 @@ AKATA over 2029 to 2035:
 | gas, Mscf | 7744000.00 |
 | boe | 10970666.67 |
 
-Each money total is the sum of its column in money of the day. The opex total is 183899092.34, not seven times the typed 24000000, because the escalator carried the column from 24000000.00 in 2029 to 28657255.12 in 2035; the capex total is exactly 255000000.00 because its escalator is 0. The two net cash flow totals are money of the day and 2029 money, and the real one is the last entry of the cumulative_cash_flow column.
+Each money total is the sum of its column in money of the day. The opex total is 183899092.34, more than seven times the typed 24000000, because the escalator carried the column from 24000000.00 in 2029 to 28657255.12 in 2035; the capex total is exactly 255000000.00 because its escalator is 0. The two net cash flow totals are money of the day and 2029 money, and the real one is the last entry of the cumulative_cash_flow column.
 
 ## Barrels of oil equivalent
 
-Gas is converted at 6 Mscf per barrel. AKATA's 7744000.00 Mscf join its 9680000.00 bbl to give 10970666.67 boe. The hand-derived case has no gas, so its 2000000.00 bbl are 2000000.00 boe. The conversion is on energy, not on price: at 82 USD/bbl and 3.2 USD/Mscf, six Mscf of gas sell for a small fraction of what a barrel does, and the boe count does not care. That is its limit and its use: it lets an oil field and a gas field be compared per unit, and it flatters the gas.
+Gas is converted at 6 Mscf per barrel. AKATA's 7744000.00 Mscf join its 9680000.00 bbl to give 10970666.67 boe. The hand-derived case has no gas, so its 2000000.00 bbl are 2000000.00 boe. The conversion is on energy alone, and price plays no part: at 82 USD/bbl and 3.2 USD/Mscf, six Mscf of gas sell for a small fraction of what a barrel does, and the boe count does not care. That is its limit and its use: it lets an oil field and a gas field be compared per unit, and it flatters the gas.
 
 ## Unit technical cost and opex per boe
 

@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "What multipliers does the capex sweep hand back with its points?",
+  "options": [
+   "Seven labels, 0.8 through 1.4, the eighth being unreachable in floating point.",
+   "Nine labels from 0.7 to 1.5, the multipliers the published capex cases are run at.",
+   "Eight labels: 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4 and 1.5.",
+   "Six labels, one per template."
+  ],
+  "answer": 2,
+  "explanation": "The multipliers are written from a step count, as 8 plus the step number over 10, so the last is exactly 1.5 and the last swept point equals a direct call at 1.5."
+ },
+ {
+  "prompt": "A capex sweep written as a loop that adds 0.1 to a multiplier starting at 0.8, while it stays at or below 1.5, returns seven points and its last reads 1.4. What ends that loop early?",
+  "options": [
+   "Accumulating 0.1 in binary floating point arrives at 1.5000000000000004, which is greater than 1.5.",
+   "A refusal by the engine of any multiplier above 1.4, because no cost recovery limit can absorb a larger overrun.",
+   "Its eighth point returned a negative NPV for one regime, so the sweep dropped it.",
+   "The label came from the loop bound and the points from a step count."
+  ],
+  "answer": 0,
+  "explanation": "The engine sweeps a fixed grid of eight multipliers, so Nigeria - PIA (2021) returns 255.8175 million USD of contractor NPV at 1.5 as a swept point, against 291.8238 at 1.4."
+ },
+ {
+  "prompt": "For Generic Royalty/Tax the capex sweep reports a loss of 244.0782 million USD. Between which two points is that measured?",
+  "options": [
+   "The NPV at a multiplier of 0.8 and the NPV at 1.4, the eighth point having been computed and then dropped from the series.",
+   "The contractor NPV at a multiplier of 0.8 and the NPV at 1.5, the first and last of the eight swept points.",
+   "The NPV at a multiplier of 0.7 and the NPV at 1.3, which is the range the nine published capex cases are run over.",
+   "The NPV at the base multiplier and the NPV at 1.5, so the loss is measured down from the base case."
+  ],
+  "answer": 1,
+  "explanation": "The last swept value equals the engine called directly at a multiplier of 1.5 on every regime, which is the check that the endpoint is reached rather than approached. For USA - Gulf of Mexico the same loss is 267.7301 million USD."
+ },
+ {
+  "prompt": "Did closing the capex sweep at a multiplier of 1.5 change which regime the resilience verdict names on the default project?",
+  "options": [
+   "Yes. Over eight points Ghana - Deepwater gives up 109.8425 million USD and takes the title from Angola - Deepwater PSC.",
+   "Yes, because the eighth point is where the two regressive templates cross the two whose split is tiered on the R factor.",
+   "It cannot be known, because the engine returns no value at all at a multiplier of 1.5 for any of the six templates.",
+   "No, the winner is the same either way."
+  ],
+  "answer": 3,
+  "explanation": "Angola - Deepwater PSC gives up the least at 88.6123 million USD and USA - Gulf of Mexico the most at 267.7301, and the short sweep named the same pair, so what moved is the quantity attached to the winner."
+ },
+ {
+  "prompt": "The capex verdict ranks one quantity per regime. Which quantity?",
+  "options": [
+   "The contractor NPV at the first swept point minus the NPV at the last, in million USD, which prices a 20 percent underspend against a 50 percent overrun.",
+   "The slope of contractor NPV against the multiplier, fitted across all eight of the swept points.",
+   "The fraction of base case NPV that survives a 50 percent overrun, which is why it reads as a percentage.",
+   "The multiplier at which contractor NPV first turns negative, so a higher figure is the more resilient regime and a regime that never turns negative cannot be ranked at all."
+  ],
+  "answer": 0,
+  "explanation": "It is an absolute amount between two endpoints, so it reports neither the shape between them nor a percentage of the base NPV."
+ },
+ {
+  "prompt": "USA - Gulf of Mexico is named the least resilient at 267.7301 million USD given up, on a base contractor NPV of 382.0660. Why is that not obviously the worse choice?",
+  "options": [
+   "The sweep holds price at the deck, and USA - Gulf of Mexico is the most progressive of the six on that project.",
+   "The 267.7301 is quoted over eight points while the other five regimes are quoted over seven.",
+   "The loss is an absolute amount, so a regime with more NPV to lose is penalised for having it.",
+   "The base NPV of 382.0660 is discounted at 10 percent while the loss beside it is not discounted at all."
+  ],
+  "answer": 2,
+  "explanation": "Angola - Deepwater PSC is named the most resilient at 88.6123 million USD given up on a base NPV of 211.3787, so the verdict prefers the smaller prize because it shrinks more slowly."
+ },
+ {
+  "prompt": "Angola - Deepwater PSC returns 213.5335 million USD at a multiplier of 0.8 and 218.7874 at 0.9. What makes spending more capital pay?",
+  "options": [
+   "Its cost recovery limit of 50 percent lets a larger pool be recovered faster, so the contractor is repaid sooner.",
+   "Its resource rent tax at 50 percent is relieved from a pool opened at total capex times one plus the uplift, so a larger capex opens a larger pool.",
+   "The larger capex lowers the R factor and holds the contractor in the 70 percent tranche, which outweighs the spend.",
+   "Its royalty of 0 percent leaves capex as the only deduction, so the deduction grows with no royalty offsetting it."
+  ],
+  "answer": 1,
+  "explanation": "Brazil - Concession, with a resource rent tax at 40 percent, shows the muted version of the same thing, giving up only the step from 304.7089 to 296.9901 over the same interval."
+ },
+ {
+  "prompt": "The nine published capex cases are named capex_0.7_pia_default to capex_1.5_pia_default. How do they relate to the sweep the chart draws?",
+  "options": [
+   "Identical to the swept points, published one case per label on the chart's axis.",
+   "They are the same regime as the chart over a shifted range, the Nigeria - PIA (2021) template under the name the Designer gives it.",
+   "The oracle's own sweep rather than the engine's, published so that the two can be compared point by point.",
+   "A different range on a different regime."
+  ],
+  "answer": 3,
+  "explanation": "The published set runs the Designer's sample PSC regime, id 1, at multipliers of 0.7 to 1.5, returning 169.7176 million USD of NPV at 1.0 where the template returns 432.0925, and the chart sweeps 0.8 to 1.5 on the six templates."
+ },
+ {
+  "prompt": "Across the published capex cases the payback year steps 3, 3, 4, 4, 4, 5, 5, 6 and 6 while the payout year steps 2, 2, 2, 3, 3, 3, 4, 4 and 4. What does that add to the NPV story?",
+  "options": [
+   "Nothing, since both are integers and an integer cannot resolve a 10 percent step in capex.",
+   "That payback and payout are one test read to two precisions, which is why they step together.",
+   "An overrun also delays the year the contractor turns positive and the year the R factor passes 1.0, and can move a profit split tier with it.",
+   "That the sweep re-runs the discounting alone, the ledger underneath being unchanged by the multiplier."
+  ],
+  "answer": 2,
+  "explanation": "NPV over the same range runs 220.1703, 204.6839, 189.9756, 169.7176, 149.8784, 123.6342, 98.2520, 69.4751 and 41.2671 million USD, so the curve is not a straight line either."
+ },
+ {
+  "prompt": "State the unit and the number of points of each of the two sweeps the comparison returns.",
+  "options": [
+   "Government take in percent at nine oil prices, and contractor NPV in million USD at eight capex multipliers.",
+   "Contractor NPV in million USD at nine oil prices, and government take in percent at eight capex multipliers, which is the pairing the two axis titles suggest.",
+   "Government take in percent on both, nine points on price and seven on capex.",
+   "Contractor NPV in million USD on both, so the two charts can be subtracted point by point."
+  ],
+  "answer": 0,
+  "explanation": "Only the capex chart's values can be added or subtracted as amounts, and only the price chart's can be compared between projects of different sizes."
+ },
+ {
+  "prompt": "On the default project the two steepest climbers give up the least contractor NPV and the two most regressive templates give up the most. Why is that agreement not a coincidence?",
+  "options": [
+   "The two verdicts are computed by the same reduce over the same array, so they cannot disagree.",
+   "A regime taking a rising share of the upside absorbs a share of the downside too, so the contractor's NPV moves less when capital cost rises.",
+   "Both sweeps hold the other variable at its base case, which forces the two rankings to match row for row, so a regime placed third by climb is placed third by loss as well.",
+   "The price climb is an input to the capex loss, which is why the two orderings track one another so closely."
+  ],
+  "answer": 1,
+  "explanation": "Angola - Deepwater PSC climbs 19.6873 percentage points and gives up 88.6123 million USD while USA - Gulf of Mexico climbs -17.2498 and gives up 267.7301, and the orders agree in tendency and not row for row."
+ },
+ {
+  "prompt": "On ODIDI the two sweep verdicts name two different regimes. Which two, and which regime breaks the pattern?",
+  "options": [
+   "Brazil - Concession takes both, since it leads the summary on that field at -5.8662 million USD.",
+   "Ghana - Deepwater takes both, most progressive at 1.9971 percentage points and most resilient at 181.1922 million USD.",
+   "Neither verdict names a regime, because every climb on that field is negative and a negative climb cannot win the price verdict.",
+   "Brazil - Concession is the most progressive at 7.4752 percentage points and Ghana - Deepwater the most resilient at 181.1922 million USD, and Angola - Deepwater PSC breaks it."
+  ],
+  "answer": 3,
+  "explanation": "Angola's climb of -8.3874 is not the worst on that field while its capex loss of 252.6075 million USD is the largest of the six."
+ },
+ {
+  "prompt": "Which case does a project team fear that neither sweep contains?",
+  "options": [
+   "An opex overrun, which the capex multiplier does not touch, though the two curves can be combined into it by eye.",
+   "A delay to first production, which both sweeps do cover through the payback year they compute at every point.",
+   "An overrun arriving at a low price.",
+   "A discount rate above the base case, which the price sweep covers implicitly by re-running the whole comparison."
+  ],
+  "answer": 2,
+  "explanation": "The price sweep holds capex at the base case at every price and the capex sweep holds price at the deck at every multiplier. The Angola template at three times capex returns null at 40 USD per bbl and 2223.0766 at 50, and neither sweep as drawn would have suggested it."
+ },
+ {
+  "prompt": "On the comparison built with capex of 20000 all six templates give up 12727.272727 million USD across the capex sweep. What does the resilience verdict do?",
+  "options": [
+   "It declines to rank, and names all six as giving up 12,727.3 million USD each, within 0.1 million USD of each other.",
+   "It names USA - Gulf of Mexico, a reduce with a strict less than keeping the first of six equal values.",
+   "It names Brazil - Concession, following the oracle's arithmetic wherever the engine's own reduce disagrees with it.",
+   "It is omitted, in the way both sweep verdicts are omitted when only one regime is compared."
+  ],
+  "answer": 0,
+  "explanation": "At a capex of 20000 nothing below the capex line moves between the first swept point and the last, so the whole capex difference reaches the contractor undiluted and is discounted by the same one year in every case. The retired reduce named USA - Gulf of Mexico here and the oracle named Brazil - Concession, and neither was a result."
+ },
+ {
+  "prompt": "Name the three reasons a resilience verdict can differ between two runs.",
+  "options": [
+   "The project life was extended past 25 years, the capex was rescheduled out of year 1, or opex was swept beside capital.",
+   "The field underneath changed, the swept range changed, or there was nothing to rank.",
+   "The bisection failed to converge, the summary lost its sort, or the golden was re-cut against a new engine.",
+   "One regime paid back and the others did not, one returned a null rate, or one returned an empty list of verdicts."
+  ],
+  "answer": 1,
+  "explanation": "On ODIDI the same six templates hand the title to Ghana - Deepwater at 181.1922 million USD where Angola - Deepwater PSC held it on the default project at 88.6123."
+ }
+]

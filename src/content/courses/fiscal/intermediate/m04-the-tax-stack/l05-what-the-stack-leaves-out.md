@@ -14,11 +14,11 @@ There is no depreciation and no capital allowance. Capex reaches the tax computa
 
 ## No other instrument at all
 
-There is no education tax, no levy on gross production, no bonus, no rental and no state participation line. Only two things in the model touch gross revenue, the royalty and the minimum tax. There is no ring fence and no consolidation, so a group cannot shelter one licence with another. There is no abandonment cost and no valuation date, and the horizon is 25 rows whatever the input.
+There is no education tax, no levy on gross production, no bonus, no rental and no state participation line. Three things in the model touch gross revenue: the royalty, the minimum tax and, in the "Nigeria - PIA (2021)" template alone, a cost recovery limit taken on the gross value of crude oil and NGL. There is no ring fence and no consolidation, so a group cannot shelter one licence with another. There is no abandonment cost and no valuation date, and the horizon is 25 rows whatever the input.
 
 ## The mistake
 
-The tempting repair is to bend a rate until the total looks right. If a real regime carries a production levy the four fields cannot express, raising the corporate income tax rate until total tax matches produces the right total and the wrong shape, because the two have different bases and move differently with price and cost. The evidence is in the templates themselves: on the default project "Nigeria - PIA (2021)" collects 174.0882 million USD of tax inside a government cash flow of 1339.2784, while "Generic Royalty/Tax" collects 422.8854 inside a take of 758.7514. A rate tuned to match one of those numbers misses the other completely.
+The tempting repair is to bend a rate until the total looks right. If a real regime carries a production levy the four fields cannot express, raising the corporate income tax rate until total tax matches produces the right total and the wrong shape, because the two have different bases and move differently with price and cost. The evidence is in the templates themselves: on the default project "Nigeria - PIA (2021)" collects 453.4354 million USD of tax inside a government cash flow of 687.4682, while "Generic Royalty/Tax" collects 422.8854 inside a take of 758.7514. A rate tuned to match one of those numbers misses the other completely.
 
 ## What the sandbox is for
 

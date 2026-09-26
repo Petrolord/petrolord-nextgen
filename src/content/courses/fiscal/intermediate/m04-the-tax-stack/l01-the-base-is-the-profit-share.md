@@ -1,12 +1,12 @@
 # The base is the profit share
 
-Three tax instruments act on one quantity in this model, and that quantity is the contractor's share of profit oil. It is not gross revenue, not revenue after cost, and not net cash flow.
+Three tax instruments act on one quantity in this model, and that quantity is the contractor's share of profit oil. Gross revenue, revenue after cost and net cash flow are all other quantities.
 
 {{panel:ec-instrument-explorer}}
 
 ## One base
 
-Cost is compensated through cost recovery, so nothing is deducted for cost a second time at the tax line. The engine's header records that an earlier version halved opex against the base, and that the halving was invented and has been removed.
+Cost is compensated through cost recovery, so nothing is deducted for cost a second time at the tax line. No fraction of opex is taken off the base.
 
 Watch a regime that gives the contractor 100 percent of profit oil, so the profit share and the profit oil column are one number. "Brazil - Concession" on the Designer's default project does that: royalty flat 10 percent, cost recovery limit 100 percent, a flat 100 percent split, corporate income tax at 34 percent and a resource rent tax at 40 percent.
 
@@ -22,7 +22,7 @@ Years 1 and 2 sell 271.9889 and 244.4628 million USD and pay 0.0000 in tax, beca
 
 ## The three instruments
 
-Corporate income tax is the rate on the base in any year the base is positive. Resource rent tax is charged on what is left of the base after relief drawn from a one-time uplift pool, and only when that remainder is positive. The minimum tax is a percent of gross revenue, not of the base. The tax charged is the larger of the sum of the first two and the minimum, not the sum of all three.
+Corporate income tax is the rate on the base in any year the base is positive. Resource rent tax is charged on what is left of the base after relief drawn from a one-time uplift pool, and only when that remainder is positive. The minimum tax is a percent of gross revenue, outside the base. The tax charged is the larger of the sum of the first two and the minimum; the three are never summed.
 
 Because none of the three rates enters the base, the stack decomposes exactly: set two of the three to zero and the third comes back on its own. On this regime and project, corporate income tax alone totals 502.1091 million USD over the life, the resource rent tax alone 350.7165, a 5 percent minimum tax alone 134.3464, and the stack as published 852.8256.
 

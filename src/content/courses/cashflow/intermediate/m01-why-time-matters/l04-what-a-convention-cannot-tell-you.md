@@ -22,7 +22,7 @@ It cannot tell you which convention is true. The rows the engine discounts are y
 
 It cannot tell you whether a difference is real. Two readings of one field, 72534830.66 and 69159247.46, differ by a convention; two fields read under the same convention differ by their ledgers. Only the second difference means anything.
 
-It cannot rescue a comparison that mixes conventions. multiyear_pia_real reports a headline NPV of 203250580.21 and multiyear_pia_midyear_real, the same field, 196677221.27; at 5 percent their profiles read 222922734.92 and 217550313.27. Set those side by side without their conventions and a reader sees two projects. There is one.
+It cannot rescue a comparison that mixes conventions. multiyear_pia_real reports a headline NPV of 219158380.04 and multiyear_pia_midyear_real, the same field, 212070544.45; at 5 percent their profiles read 239552507.28 and 233779309.33. Set those side by side without their conventions and a reader sees two projects. There is one.
 
 ## The mistake
 

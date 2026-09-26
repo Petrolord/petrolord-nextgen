@@ -1,6 +1,6 @@
 # Government cash flow
 
-The state's line is royalty plus its share of profit oil plus tax, and it is a collection, not a profit, because the state carries none of the cost.
+The state's line is royalty plus its share of profit oil plus tax, and it is a collection rather than a profit, because the state carries none of the cost.
 
 {{panel:ec-regime-explorer}}
 
@@ -19,11 +19,11 @@ The contractor's line and the state's line divide one quantity, and the engine p
 | 3 | 149.2243 | 43.5890 | 192.8133 | 192.8133 |
 | 4 | 106.8784 | 65.4424 | 172.3208 | 172.3208 |
 
-Run "Angola - Deepwater PSC" on the same project and the same two derived columns still agree, row for row: -259.0138, 215.6148, 192.8133 and 172.3208, against a contractor line of -323.6112, 157.5549, 140.6278 and 110.6013 and a state line of 64.5974, 58.0599, 52.1855 and 61.7195. The regime moves the split. It cannot move the quantity being split, because unrecovered cost is carried, not paid to anyone.
+Run "Angola - Deepwater PSC" on the same project and the same two derived columns still agree, row for row: -259.0138, 215.6148, 192.8133 and 172.3208, against a contractor line of -323.6112, 157.5549, 140.6278 and 110.6013 and a state line of 64.5974, 58.0599, 52.1855 and 61.7195. The regime moves the split. It cannot move the quantity being split, because unrecovered cost is carried forward and paid to no one.
 
 ## Six collections on one field
 
-The state's life collection on the default project runs 758.7514 under Generic, 764.5528 under the Gulf of Mexico terms, 1121.5184 under Brazil, 1263.7523 under Angola, 1316.6067 under Ghana and 1339.2784 under PIA. The royalty rate does not order that list: Angola charges no royalty at all and collects 1263.7523, while the Gulf of Mexico terms charge the highest royalty of the six at 18.75 percent and collect 764.5528.
+The state's life collection on the default project runs 687.4682 under PIA, 758.7514 under Generic, 764.5528 under the Gulf of Mexico terms, 1121.5184 under Brazil, 1263.7523 under Angola and 1316.6067 under Ghana. The royalty rate does not order that list: Angola charges no royalty at all and collects 1263.7523, while the Gulf of Mexico terms charge the highest royalty of the six at 18.75 percent and collect 764.5528.
 
 ## The mistake
 

@@ -6,7 +6,7 @@ When a file carries both per-well volumes and a total column, the engine sums th
 
 ## The published case
 
-The per_well_beats_total_rollup upload is a single row for 2027: total_oil_bbl=100000, well1_oil_bbl=60000, well2_oil_bbl=40000. All three headers pass the volume test, total_oil_bbl included. The engine reads 2027 as oil 100000.00 bbl, not 200000. The wells are summed, and the total is dropped.
+The per_well_beats_total_rollup upload is a single row for 2027: total_oil_bbl=100000, well1_oil_bbl=60000, well2_oil_bbl=40000. All three headers pass the volume test, total_oil_bbl included. The engine reads 2027 as oil 100000.00 bbl. The wells are summed, and the total is dropped.
 
 The ledger downstream: total revenue 7500000.00, total tax 3375000.00, net cash flow 3375000.00, take 55.0000 percent. No capex and no opex were uploaded, so DPI is null and payback is Year 0. Had the total been added to the wells, the revenue would have been double and every reading built on it wrong by the same factor, and nothing in the KPI panel would have looked odd.
 

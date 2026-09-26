@@ -12,24 +12,24 @@ The ledger carries a second clock beside it. `payout` is the first year the R fa
 
 | regime | payback year | payout year |
 | --- | --- | --- |
-| Nigeria - PIA (2021) | 4 | 3 |
+| Nigeria - PIA (2021) | 3 | 3 |
 | Ghana - Deepwater | 3 | 3 |
 | Brazil - Concession | 3 | 3 |
 | USA - Gulf of Mexico | 3 | 3 |
 | Angola - Deepwater PSC | 4 | 3 |
 | Generic Royalty/Tax | 3 | 3 |
 
-PIA and Angola take a year longer to return the contractor's cash than they take to earn back the project's cost, because the state takes its share in between.
+Angola alone takes a year longer to return the contractor's cash than to earn back the project's cost, because its 50 percent recovery limit and its tiered split hand the state its share in between.
 
 ## When there is no answer
 
-Both readings are null when the event never happens. The published case that runs the test project at capex 20000 returns payback null and payout null, with a life total of -15724.0151. A null is a reading, and quoting it as a null is the correct answer, not a gap in the table.
+Both readings are null when the event never happens. The published case that runs the test project at capex 20000 returns payback null and payout null, with a life total of -15724.0151. A null is a reading, and quoting it as a null is the correct answer. It is no gap in the table.
 
 ## The mistake
 
 Payback is not the year the cost pool clears. A published case named for a pool that never recovers, running cost recovery capped at 5 percent, pays back in year 3 and reaches payout in year 2, and closes the life with 2543.7575 still unrecovered. Its total contractor net cash flow is 1530.0622. The contractor's cash turned positive early while the cost pool never emptied at all, and a reader who treats the two as one clock reports the wrong one.
 
-The second error is to rank on payback. It is a whole year, so four of the six templates read 3 on the default project and are not distinguished at all, and on the Suite test project all six read 2. A tie in this column is not a tie in the money: the same year 3 covers a life total of 986.7327 under Generic and 623.9658 under Brazil.
+The second error is to rank on payback. It is a whole year, so five of the six templates read 3 on the default project and are not distinguished at all, and on the Suite test project all six read 2. A tie in this column is not a tie in the money: the same year 3 covers a life total of 986.7327 under Generic and 623.9658 under Brazil.
 
 ## Slower on a harder field
 
@@ -41,4 +41,4 @@ Payback is undiscounted, so it says when nominal money returns and never what it
 
 ## Exercise
 
-Write payback and payout for the six templates on the default project, and say what makes PIA and Angola differ from the other four. Then say why a case whose pool closes at 2543.7575 can still report payback in year 3.
+Write payback and payout for the six templates on the default project, and say what makes Angola differ from the other five. Then say why a case whose pool closes at 2543.7575 can still report payback in year 3.

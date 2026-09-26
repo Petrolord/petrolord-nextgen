@@ -25,7 +25,7 @@ A header the engine does not recognise is not a zero. A production file headed d
 
 Four of the refusals are about names, two about prices, one about ambiguity and one about emptiness. The useful skill is telling a refusal from its near neighbour that runs.
 
-Ambiguity against duplication. A capex row carrying amount_usd and cost_usd with different values is refused. The same row with both columns at 30000000 is accepted once, and the year's capex is 30000000.00, not doubled. The message says which: different values, refused; the same value, taken once.
+Ambiguity against duplication. A capex row carrying amount_usd and cost_usd with different values is refused. The same row with both columns at 30000000 is accepted once, and the year's capex is 30000000.00, counted once. The message says which: different values, refused; the same value, taken once.
 
 Unrecognised against unpriced. oil_production is not a volume column and stops the run. water_bbl is a volume column and does not: the case_insensitive_headers upload carries Water_BBL=20000, the engine reads 20000.00 bbl of water for 2027, and revenue is 7500000.00 from the 100000.00 bbl of oil alone. Water goes into the annual volumes and earns nothing, silently.
 

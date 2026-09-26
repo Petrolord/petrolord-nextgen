@@ -6,7 +6,7 @@ import {
 import {
   AKATA_YEARS, PSC_CAP_SWEEP_PCT,
   akataUnderPsc, akataPscCapSweep, applyPscTable, pscCases,
-  royaltyTables, terrainCases,
+  royaltyTables, terrainCases, statedReadings,
   akataUnderPia, akataPiaYearWaterfall, akataPiaVariants,
   lossReliefCases, applyJvPoolTable,
   akataTail, economicLimitCases, abandonmentCases, akataAbandoned, akataDelaySweep, distrustTable,
@@ -14,8 +14,8 @@ import {
 import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
 // Fiscal explorer, the Expert tier. THE FISCAL EDGES: production sharing cost
-// recovery, the PIA royalty and tax cascade under the 2021 Act and the 2025
-// framework switch, loss relief, the economic limit, abandonment as a lump sum
+// recovery, the PIA royalty and tax cascade under the 2021 Act and the Nigeria
+// Tax Act 2025, with the framework chosen year by year, loss relief, the economic limit, abandonment as a lump sum
 // and as a sinking fund, first-oil delay, and three numbers the engine reports
 // that a careful reader must distrust.
 //
@@ -36,7 +36,7 @@ const yn = (b) => (b ? 'yes' : 'no');
 
 const MODES = [
   ['costRecovery', 'Cost recovery: the pool the rows never carry'],
-  ['royalties', 'Royalties: terrain, the marginal blend, the price anchors'],
+  ['royalties', 'Royalties: terrain tranches, gas, the royalty by price, the stated readings'],
   ['cascade', 'The PIA cascade: five taxes on three bases'],
   ['losses', 'Loss relief and the pool'],
   ['endOfLife', 'End of life: the limit, abandonment, delay, and three numbers to distrust'],
@@ -166,53 +166,76 @@ const CostRecovery = () => {
 const Royalties = () => {
   const t = useMemo(() => { try { return royaltyTables(); } catch { return null; } }, []);
   const cases = useMemo(() => { try { return terrainCases(); } catch { return null; } }, []);
-  if (!t || !cases) {
+  const readings = useMemo(() => { try { return statedReadings(); } catch { return null; } }, []);
+  if (!t || !cases || !readings) {
     return <Note>The royalty derivations did not return. Each rate is a pure function of terrain, rate and year, so there is nothing else to be missing.</Note>;
   }
   const bopd = t.oilByTerrain[0].byRate.map((q) => q.bopd);
   const prices = t.priceAnchors[0].byPrice.map((q) => q.price);
   return (
     <>
-      <p className="text-xs text-slate-500 mb-1">The production royalty rate by terrain and daily rate (deriveOilRoyaltyRate), as a fraction of gross revenue</p>
+      <p className="text-xs text-slate-500 mb-1">The production royalty rate on crude oil and condensate by terrain and daily rate (deriveOilRoyaltyRate), as one weighted rate on the whole volume</p>
       <Tbl
         head={['terrain', ...bopd.map((b) => `${num(b, 0)} bopd`)]}
         rows={t.oilByTerrain.map((r) => [r.terrain, ...r.byRate.map((q) => frac(q.rate))])}
-        highlight={t.oilByTerrain.findIndex((r) => r.terrain === 'marginal_field')}
       />
       <div className="mt-3 text-xs text-slate-300">
-        Four of the five terrains are flat across the rate probes, and deep offshore steps once at 50000 bopd. The
-        MARGINAL FIELD is the blend: its rate rises with daily production because the low tier applies to the first
-        barrels and the higher tier to the rest, so the rate the field pays is a weighted average that climbs from
-        the deep-offshore floor toward the onshore ceiling and never reaches it.
+        Onshore and shallow water pay 5 percent on the first 5,000 bopd, 7.5 percent on the next 5,000 and the
+        terrain rate above 10,000 bopd (15 percent onshore, 12.5 percent in shallow water), blended into ONE
+        weighted rate on the whole year&apos;s volume. Below 10,000 bopd the two terrains pay the same rate. Deep
+        offshore pays 5 percent up to and including 50,000 bopd and 7.5 percent on the share above, again as one
+        weighted rate. Frontier acreage pays 7.5 percent at every rate. The daily rate is the year&apos;s crude oil
+        plus condensate over the calendar days of the year.
       </div>
-      <div className="mt-3">
-        <TileGrid>
-          {t.gasByTerrain.map((g) => <Tile key={g.terrain} label={`Gas royalty, ${g.terrain}`} value={frac(g.rate)} />)}
-        </TileGrid>
-      </div>
-      <p className="text-xs text-slate-500 mt-4 mb-1">The price royalty (derivePriceRoyaltyRate), shallow water: the anchors escalate at 2 percent a year from 2021</p>
+      <Note>
+        A marginal field is not a terrain. It is onshore or in shallow water, and a producing marginal field
+        converted under section 94(1) is flagged with pia_marginal_field_pre_2021. The engine refuses the old
+        terrain string with this message: {t.marginalFieldTerrainRefusal}
+      </Note>
+      <p className="text-xs text-slate-500 mt-4 mb-1">Gas and NGL royalty (deriveGasRoyaltyRate), every terrain alike, by the share used in country</p>
+      <Tbl
+        head={['share used in country', ...t.gasByShare[0].byTerrain.map((q) => q.terrain)]}
+        rows={t.gasByShare.map((g) => [`${g.sharePct} percent`, ...g.byTerrain.map((q) => frac(q.rate))])}
+      />
+      <p className="text-xs text-slate-500 mt-4 mb-1">The royalty-by-price benchmarks, low, middle and high, USD/bbl, on both bases</p>
+      <Tbl
+        head={['year', 'Regulations 2021 base: low', 'middle', 'high', 'Act 2020 base: low', 'middle', 'high']}
+        rows={t.benchmarks.map((b) => [b.year, usd(b.regulations2021.low), usd(b.regulations2021.mid), usd(b.regulations2021.high), usd(b.act2020.low), usd(b.act2020.mid), usd(b.act2020.high)])}
+      />
+      <p className="text-xs text-slate-500 mt-4 mb-1">The royalty by price (derivePriceRoyaltyRate), shallow water, on the Regulations 2021 base, the engine&apos;s default</p>
       <Tbl
         head={['year', ...prices.map((p) => `${num(p, 0)} USD/bbl`)]}
         rows={t.priceAnchors.map((r) => [r.year, ...r.byPrice.map((q) => frac(q.rate))])}
       />
       <div className="mt-3 text-xs text-slate-300">
-        Read a column downward. The price at which the royalty starts, and the price at which it reaches its
-        10 percent ceiling, both move up by 2 percent a year from 2021, so the same 100 USD barrel pays less
-        price royalty every year the anchors escalate, and by 2035 a price that paid 5 percent in 2021 pays
-        about half that. The frontier terrain is exempt: 200 USD in 2025 gives {frac(t.frontierAt200In2025)}.
+        Read a column downward. The rate is nought at or below the low benchmark, 5 percent at the middle one and
+        10 percent at or above the high one, linear between. Every benchmark rises by 2 percent of the previous
+        year&apos;s benchmark each 1 January, rounded to whole cents, so the same 100 USD barrel pays less royalty by
+        price every year. The Regulations start the escalation from 2021 levels and the Act reads the same levels as
+        2020 levels; that base year is a stated reading, shown below. The Act&apos;s own example, 75 USD/bbl in 2020 on
+        its own base, gives {frac(t.actExampleAt75In2020)}. Frontier acreage pays none: 200 USD in 2025 gives {frac(t.frontierAt200In2025)}.
       </div>
-      <p className="text-xs text-slate-500 mt-4 mb-1">The hydrocarbon tax rate (deriveHctRate) by terrain, licence, framework and interpretation</p>
-      <Tbl head={['case', 'HCT rate']} rows={t.hctRates.map((r) => [r.label, frac(r.rate)])} />
-      <p className="text-xs text-slate-500 mt-4 mb-1">The published terrain cases</p>
+      <p className="text-xs text-slate-500 mt-4 mb-1">The hydrocarbon tax rate (deriveHctRate) by terrain, licence, framework, lease and stated reading</p>
+      <Tbl head={['case', 'HCT rate']} rows={t.hctRates.map((r) => [r.label, r.refused ? <span key={r.label} className="whitespace-normal">refused: {r.refused}</span> : frac(r.rate)])} />
+      <p className="text-xs text-slate-500 mt-4 mb-1">The published terrain cases, each on the engine&apos;s default path</p>
       <Tbl
         head={['case', 'note', 'framework', 'NPV, USD', 'royalties', 'HCT', 'CIT', 'take, %', 'reported WI']}
         rows={cases.map((c) => [c.name, <span key={c.name} className="whitespace-normal">{c.note}</span>, c.framework, usd(c.kpis.npv), usd(c.totalRoyalties), usd(c.totalHct), usd(c.totalCit), c.kpis.government_take_pct === null || c.kpis.government_take_pct === undefined ? 'null' : num(c.kpis.government_take_pct, 4), c.reportedWiPct ?? 'not reported'])}
       />
+      <p className="text-xs text-slate-500 mt-4 mb-1">Three figures the texts leave to a stated reading, side by side (never graded)</p>
+      <Tbl
+        head={['stated reading', 'the choice', 'tax figure, USD', 'NPV, USD']}
+        rows={[
+          ...readings.priceRoyaltyBase.map((r) => ['royalty-by-price base year, worked example', r.base, `royalties ${usd(r.royalties)}`, usd(r.npv)]),
+          ...readings.deepOffshoreNta.map((r) => ['deep offshore HCT in an NTA year, 60,000 bopd', r.reading, `HCT ${usd(r.hct)}`, usd(r.npv)]),
+          ...readings.newAcreagePml.map((r) => ['HCT rate of a new-acreage PML, shallow water', `${r.ratePct} percent`, `HCT ${usd(r.hct)}`, usd(r.npv)]),
+        ]}
+      />
       <Note>
-        The deep offshore HCT rows are the ones that carry a decision rather than a fact. Under the 2021 Act a deep
-        offshore PML pays no hydrocarbon tax; under the 2025 framework the conservative reading keeps it at zero and
-        the aggressive reading charges 30 percent, and the engine will run either. The terrain string and the
-        interpretation string move more value than most of the numeric inputs on this page.
+        These three rows carry a decision the texts leave open. The engine refuses an NTA deep offshore year and a
+        new-acreage PML onshore or in shallow water until the reading is stated, and it defaults the royalty-by-price
+        base to the Regulations while naming the Act&apos;s reading. A ledger built on any of them is only as good as the
+        reading written beside it, so state it every time the figure is quoted.
       </Note>
     </>
   );
@@ -234,10 +257,10 @@ const Cascade = () => {
       </FieldGrid>
       <div className="mt-3">
         <TileGrid>
-          <Tile label="Framework the base year selects" value={w.framework} />
+          <Tile label="Framework of this year of assessment" value={w.framework} />
           <Tile label="Gross revenue" value={usd(w.grossRevenue)} unit="USD" />
           <Tile label="Cost recovery: cap, claimed, deferred" value={`${usd(w.costRecovery.cap)}, ${usd(w.costRecovery.claimed)}, ${usd(w.costRecovery.deferred)}`} unit="USD" />
-          <Tile label="Production allowance" value={`${usd(w.allowance.amount)} on ${num(w.allowance.eligibleBbl, 0)} bbl, cap applied ${yn(w.allowance.capApplied)}`} />
+          <Tile label="Production allowance" value={`${usd(w.allowance.amount)} on ${num(w.allowance.eligibleBbl, 0)} bbl (${num(w.allowance.belowCapBbl, 0)} below the cap, ${num(w.allowance.afterCapBbl, 0)} after), cap applied ${yn(w.allowance.capApplied)}`} />
           <Tile label="Total tax in the year" value={usd(w.totalTax)} unit="USD" />
           <Tile label="Net cash flow" value={usd(w.netCashFlow)} unit="USD" />
           <Tile label="HCDT and NDDC levies" value={`${usd(w.levies.hcdt)}, ${usd(w.levies.nddc)}`} unit="USD" />
@@ -262,12 +285,15 @@ const Cascade = () => {
         rows={w.taxes.map((t) => [t.name, t.base, usd(t.baseValue), usd(t.amount), Object.entries(t.parts).map(([k, v]) => `${k} ${usd(v)}`).join('; ')])}
       />
       <div className="mt-3 text-xs text-slate-300">
-        Five taxes, three bases. Royalty is charged on GROSS REVENUE, in two parts: a production royalty by terrain
-        and a price royalty by year. The hydrocarbon tax is charged on the HCT CHARGEABLE PROFIT, which is revenue
-        less royalty less the costs the cost recovery cap lets through less the production allowance. The companies
-        income tax is charged on the CIT CHARGEABLE PROFIT, a different base that does not get the allowance. The
+        Five taxes, three bases. Royalty is charged on GROSS REVENUE, in parts: a production royalty by terrain
+        and daily rate, a gas royalty, and a royalty by price by year. The hydrocarbon tax is charged on the HCT
+        CHARGEABLE PROFIT: crude and condensate revenue less its royalties, less HCDT and NDDC at the liquids share,
+        less the costs the cost price ratio cap lets through, less the production allowance. The companies income
+        tax is charged on the CIT CHARGEABLE PROFIT, a different base that deducts the full opex and its own capital
+        allowance, never gets the production allowance and is never touched by the cost price ratio cap. The
         tertiary education tax and the development levy share the CIT assessable profit, and only one of them is
-        ever charged: the base year decides which. The base decides more than the rate does.
+        charged in a year: the framework of that year of assessment decides which, so one ledger that runs from
+        2025 into 2026 carries both. The base decides more than the rate does.
       </div>
       <p className="text-xs text-slate-500 mt-4 mb-1">The whole cascade, one row per year</p>
       <Tbl
@@ -290,13 +316,19 @@ const Cascade = () => {
       <p className="text-xs text-slate-500 mt-4 mb-1">The terrain, lease and framework variants, side by side</p>
       <Tbl
         head={['variant', 'framework', 'year 1 production royalty', 'year 1 price royalty', 'year 1 allowance', 'year 1 HCT', 'year 1 CIT', 'year 1 TET', 'year 1 dev levy', 'HCT, life', 'CIT, life', 'total tax', 'NPV, USD', 'IRR, %', 'take, %']}
-        rows={variants.map((v) => [v.label, v.framework, usd(v.year1.productionRoyalty), usd(v.year1.priceRoyalty), usd(v.year1.allowance), usd(v.year1.hct), usd(v.year1.cit), usd(v.year1.tet), usd(v.year1.devLevy), usd(v.totalHct), usd(v.totalCit), usd(v.totalTax), usd(v.npv), v.irrPct === null ? 'null' : num(v.irrPct, 4), num(v.takePct, 4)])}
+        rows={variants.filter((v) => !v.refused).map((v) => [v.label, v.framework, usd(v.year1.productionRoyalty), usd(v.year1.priceRoyalty), usd(v.year1.allowance), usd(v.year1.hct), usd(v.year1.cit), usd(v.year1.tet), usd(v.year1.devLevy), usd(v.totalHct), usd(v.totalCit), usd(v.totalTax), usd(v.npv), v.irrPct === null ? 'null' : num(v.irrPct, 4), num(v.takePct, 4)])}
+      />
+      <p className="text-xs text-slate-500 mt-4 mb-1">The variants the engine refuses, with the reason it gives</p>
+      <Tbl
+        head={['variant', 'refusal']}
+        rows={variants.filter((v) => v.refused).map((v) => [v.label, <span key={v.label} className="whitespace-normal">{v.refused}</span>])}
       />
       <Note>
-        Read the NPV column against the oil price rows and the terrain rows. Moving the same field to deep
-        offshore under the conservative reading zeroes the hydrocarbon tax and roughly triples the NPV; the
-        aggressive reading gives back most of that. The terrain string moves NPV by more than the oil price
-        sweep from 82 to 120 does, and a new lease with prior production near the allowance cap moves it again.
+        Read the NPV column against the oil price rows and the terrain rows. Below 10,000 bopd onshore and shallow
+        water pay the same tranche rate, so moving AKATA onshore changes nothing. Moving it to deep offshore under
+        the conservative_zero reading removes the hydrocarbon tax and more than doubles the NPV; the
+        aggressive_pml_30 reading gives nearly all of that back. Both are stated readings, so the gap between them is
+        a decision about the text, and the rows on a new lease show the same for the new-acreage PML rate.
       </Note>
     </>
   );
@@ -411,25 +443,25 @@ const EndOfLife = () => {
         rows={delay.map((d) => [d.shiftYears, d.rows, d.byYear.map((q) => q.year).join(', '), usd(d.byYear[0].net), usd(d.npv), num(d.irrPct, 4), d.payback, usd(d.lossPoolAfterYearOne)])}
       />
       <div className="mt-3 rounded-md border-2 border-rose-500 bg-rose-900/30 p-3">
-        <p className="text-rose-200 font-bold text-sm mb-2">THREE NUMBERS THAT USED TO BE WRONG, AND WHAT THE ENGINE REPORTS NOW</p>
-        <p className="text-xs text-rose-100 mb-1">1. The profile point at the applied rate is LABELLED at the rounded rate and EVALUATED at the exact one, so the gap is zero on every case. Until engines 3.10.0 it was evaluated at the label too, and the profile missed its own headline NPV.</p>
+        <p className="text-rose-200 font-bold text-sm mb-2">THREE NUMBERS TO READ WITH CARE</p>
+        <p className="text-xs text-rose-100 mb-1">1. The profile point at the applied rate is LABELLED at the rounded rate and EVALUATED at the exact one, so the gap is zero on every case. Read the label as a label: the rate behind the point is the exact applied rate.</p>
         <Tbl
           head={['case', 'engine profile point', 'at, %', 'headline or oracle', 'at, %', 'gap, USD']}
           rows={dist.profileGap.map((g) => [g.case, usd(g.engineNpv), num(g.engineRatePct, 6), usd(g.oracleNpv), num(g.oracleRatePct, 6), usd(g.gap)])}
         />
-        <p className="text-xs text-rose-100 mt-3 mb-1">2. IRR on a multi-root profile is null with irrStatus multiple-roots and every root in the band listed. Until engines 3.10.0 it was whichever root Newton reached from 10 percent, reported as a rate with nothing to say there was another.</p>
+        <p className="text-xs text-rose-100 mt-3 mb-1">2. IRR on a multi-root profile is null with irrStatus multiple-roots and every root in the band listed. A single rate would be one root of several, so the engine names none and lists them all.</p>
         <Tbl
           head={['vector', 'flows', 'engine IRR, %', 'irrStatus', 'roots inside the band, %', 'a root above the band']}
           rows={dist.twoRoots.map((r) => [r.name, `[${r.flows.join(', ')}]`, r.engineIrrPct === null ? 'null' : num(r.engineIrrPct, 4), r.irrStatus ?? '', r.irrRootsPct ? r.irrRootsPct.map((x) => num(x, 4)).join(' and ') : '', r.irrRootAboveBand ? 'yes' : 'no'])}
         />
-        <p className="text-xs text-rose-100 mt-3 mb-1">3. Abandonment is entered at the share under both funding modes, so a fund collects the amount that was typed. Until engines 3.10.0 the contributions were scaled by the working interest a second time while the cost they funded was not, so a 50 percent interest collected half.</p>
+        <p className="text-xs text-rose-100 mt-3 mb-1">3. Abandonment is entered at the share under both funding modes, so a fund collects the amount that was typed at any working interest, and the cost it funds is that same share.</p>
         <Tbl
           head={['case', 'WI, %', 'mode', 'total contributions', 'total_abandonment_cost', 'final row abandonment cost', 'unit technical cost', 'total boe']}
           rows={dist.sinkingFund.map((s) => [s.case, s.wiPct, s.mode, s.totalContributions === null ? 'not reported' : usd(s.totalContributions), usd(s.totalAbandonmentCost), s.finalRowAbandonmentCost === undefined ? '' : usd(s.finalRowAbandonmentCost), num(s.unitTechnicalCost, 6), num(s.totalBoe, 2)])}
         />
       </div>
       <Note>
-The third row of the last table is the one to carry away. At 50 percent working interest the fund now collects
+        The third row of the last table is the one to carry away. At 50 percent working interest the fund collects
         the 30,000,000 that was entered and total_abandonment_cost reports the same number, because the amount is the
         share under both modes. Read the funding mode before the KPI all the same: a fund rides the opex lane and
         relieves the profit taxes, while a lump sum lands post-tax in the final year, so the two still give different

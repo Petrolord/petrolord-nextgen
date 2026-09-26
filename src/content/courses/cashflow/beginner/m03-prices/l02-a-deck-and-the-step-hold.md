@@ -15,7 +15,7 @@ The deck_step_hold case sets price_deck to 100 in 2030 and 50 in 2032, with oil_
 | 2032 | 50.000000 | 50000000.00 |
 | 2033 | 55.000000 | 55000000.00 |
 
-2030 is the first entry. 2031 has no entry, so the 2030 price holds: not escalated, not interpolated toward 50, held. 2032 steps to the entry. 2033 is past the last entry, so the escalator finally runs, on the last deck price: 50 escalated by 10 percent is 55.000000. Total revenue over the four rows is 305000000.00.
+2030 is the first entry. 2031 has no entry, so the 2030 price holds as it is, with no escalation and no interpolation toward 50. 2032 steps to the entry. 2033 is past the last entry, so the escalator finally runs, on the last deck price: 50 escalated by 10 percent is 55.000000. Total revenue over the four rows is 305000000.00.
 
 The resolver shows the tail more fully. Fed that deck, it returns 100.000000 for 2028 through 2031, 50.000000 for 2032, then 55.000000, 60.500000 and 66.550000 for 2033, 2034 and 2035. And the flat price it was given, 80, appears nowhere: a deck replaces the flat price for every year, including years the deck does not name.
 

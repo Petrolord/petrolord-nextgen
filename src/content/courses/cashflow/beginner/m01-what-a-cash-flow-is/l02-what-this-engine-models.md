@@ -1,6 +1,6 @@
 # What this engine models
 
-The Petroleum Economics Studio engine, version 3.10.0, turns three uploaded files and a configuration into a yearly ledger and a handful of headline readings. Knowing its edges is most of knowing how to use it.
+The Petroleum Economics Studio engine, version 3.12.0, turns three uploaded files and a configuration into a yearly ledger and a handful of headline readings. Knowing its edges is most of knowing how to use it.
 
 ## The inputs
 
@@ -12,13 +12,13 @@ Every table the course quotes is a return value of computeCashFlow, computeBreak
 
 ## The regimes
 
-The fiscal_regime setting picks one of three cascades from gross revenue to net cash flow. JV is royalty, then deductions, then a single tax rate: the hand-derived case pays royalty 20000000.00 and tax 32500000.00 out of revenue 100000000.00 in 2030. PSC recovers cost from a capped share of revenue and splits what is left: psc_carryforward reports total tax 27000000.00 on revenue 200000000.00 and total net cash flow -1000000.00. PIA is five taxes on three bases: the published worked example pays total tax 604809283.90 on revenue 1460000000.00.
+The fiscal_regime setting picks one of three cascades from gross revenue to net cash flow. JV is royalty, then deductions, then a single tax rate: the hand-derived case pays royalty 20000000.00 and tax 32500000.00 out of revenue 100000000.00 in 2030. PSC recovers cost from a capped share of revenue and splits what is left: psc_carryforward reports total tax 27000000.00 on revenue 200000000.00 and total net cash flow -1000000.00. PIA is five taxes on three bases: the published worked example pays total tax 617004738.36 on revenue 1460000000.00.
 
 Every regime reports the same KPI set: NPV, IRR, payback, discounted payback, DPI, take and discounted take. This tier reads the ledger without the readings that put a value on time.
 
 ## The conventions it carries
 
-The ledger carries a net_cash_flow and a real_net_cash_flow column, and their totals part once inflation is set: multiyear_pia_nominal and multiyear_pia_real are one field with one set of rows and report total net cash flow 329879515.51 and 286158487.25. Neither is wrong; one is money of the day and the other money of the base year, and a number without its basis is not a number.
+The ledger carries a net_cash_flow and a real_net_cash_flow column, and their totals part once inflation is set: multiyear_pia_nominal and multiyear_pia_real are one field with one set of rows and report total net cash flow 350425980.24 and 305105917.37. Neither is wrong; one is money of the day and the other money of the base year, and a number without its basis is not a number.
 
 ## What it does not model
 

@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "On the Designer's default project year 1 gross revenue is 271.9889 million USD and royalty is 33.9986. A 100 percent cost recovery limit recovers 237.9903. What is the limit a percent of?",
+  "options": [
+   "Gross revenue, which is why a 100 percent limit is described as recovering the whole of the year's revenue if the pool is deep enough.",
+   "Revenue after royalty, so a full limit takes everything left once the royalty has been removed.",
+   "The recoverable pool brought forward, so the limit caps the share of the outstanding balance that may be released in any one year.",
+   "Gross revenue less that year's opex, since opex is recovered first as an operating charge and only capex draws against the stated limit."
+  ],
+  "answer": 1,
+  "explanation": "The royalty is taken first and never becomes recoverable cost, which is why the year 1 allowance at a full limit is 237.9903 and not 271.9889."
+ },
+ {
+  "prompt": "A published run caps cost recovery at 5 percent of revenue after royalty, so its cost pool never clears inside the 25 years. It records payback in year 3 all the same. How?",
+  "options": [
+   "The engine treats the closing pool of 2543.7575 as a receivable and credits it to contractor cash in the year the horizon closes.",
+   "Payback is measured on gross revenue rather than on contractor net cash flow, so a project pays back whether or not any cost is recovered.",
+   "The 5 percent limit loosens automatically once the pool exceeds the capex, releasing the arrears in a single year and producing the year 3 payback.",
+   "Revenue the 5 percent limit will not release as cost oil becomes profit oil instead, and that regime gives the contractor the whole of the profit split, so the capital comes home through the profit share."
+  ],
+  "answer": 3,
+  "explanation": "Cost recovery is not the only way a contractor is paid back. Total profit oil on that case is 5819.7423 against 3355.3781 on the full limit run, and contractor net cash flow still reaches 1530.0622 while its rate of return is null with the status multiple-roots."
+ },
+ {
+  "prompt": "On the Suite test project, `capped_5pct_pool_never_clears` pays total tax of 1745.9227 while `flat_test_project` pays 1006.6134. Why does the tighter cost recovery limit pay more tax?",
+  "options": [
+   "Because cost recovered is not a tax deduction: the base is the contractor's profit share, and cost the limit refuses to release stays inside the profit oil the split and the tax act on.",
+   "Because an unrecovered pool is added to taxable income as a deemed benefit in the year the horizon closes, which raises the lifetime tax total.",
+   "Because the minimum tax provision binds whenever cost recovery falls short, and the minimum is charged on gross revenue rather than on the profit share.",
+   "Because the tighter limit lengthens the life of the pool, and the tax stack charges its capital uplift on every year a balance is still outstanding."
+  ],
+  "answer": 0,
+  "explanation": "Recovering 306.3022 instead of 2770.6665 leaves 5819.7423 of profit oil rather than 3355.3781, and the tax follows the profit oil upward."
+ },
+ {
+  "prompt": "Cost recovered and profit oil are computed from the same base. What does a binding cost recovery limit change?",
+  "options": [
+   "The total available to be shared, since revenue the limit refuses to release as cost oil is held back and paid out in no column of the ledger at all.",
+   "The royalty, because a lower limit leaves a larger residual on which the sliding scale charges its rate a second time.",
+   "Who receives the money and in which year, never how much of it there is, because cost recovered plus profit oil is always revenue after royalty.",
+   "The gross revenue of the year, since the engine reduces the applied price when the pool cannot be drawn down at the stated limit."
+  ],
+  "answer": 2,
+  "explanation": "Profit oil is revenue after royalty minus cost recovered, floored at zero, so at a 100 percent limit on the default project year 1 profit oil is exactly 0.0000 and cost recovered is 237.9903."
+ },
+ {
+  "prompt": "The default project is run at cost recovery limits of 50, 80, 90 and 100 percent with nothing else changed. What are the lifetime totals?",
+  "options": [
+   "Each limit recovers a different total, rising steadily from 940.4991 at 50 percent to 941.4436 at 100 percent as the allowance widens.",
+   "The 80, 90 and 100 percent runs are identical, each recovering 941.4436 and closing the pool at 0.0000, while the 50 percent run recovers 940.4991 and leaves 0.9444 unrecovered.",
+   "All four runs recover 941.4436, because the pool always clears inside the 25 year horizon whatever the annual allowance is.",
+   "The 50 and 80 percent runs are identical at 940.4991, and the 90 and 100 percent runs are identical at 941.4436."
+  ],
+  "answer": 1,
+  "explanation": "Once the pool clears inside the life, the limit that cleared it faster changed when the money arrived and not how much of it arrived. Only the 50 percent run fails to finish."
+ },
+ {
+  "prompt": "At an 80 percent limit on the default project gross revenue falls from 271.9889 in year 1 to 171.8074 in year 6, while profit oil climbs from 47.5981 to 143.6310. What happened?",
+  "options": [
+   "Production improved in the middle years, which lifts profit oil even as the price deck's step hold pulls gross revenue down.",
+   "The royalty rate fell as the applied price crossed back below a sliding threshold, leaving more revenue after royalty for the profit oil line.",
+   "The cost recovery limit tightens automatically once the contractor has passed payback, which diverts the allowance into profit oil.",
+   "The pool emptied. While the pool was deep the allowance ate the profit oil, and the moment there was nothing left to recover the profit oil was released."
+  ],
+  "answer": 3,
+  "explanation": "Nothing improved and a balance simply ran out. The check is to read gross revenue beside profit oil: if revenue is falling while profit oil rises, the pool cleared."
+ },
+ {
+  "prompt": "At an 80 percent limit on the default project, cost recovered runs 190.3922, 171.1239, 153.8100, then 96.6215 in year 4 and 23.6264 in year 5. What is the year 5 figure?",
+  "options": [
+   "That year's opex and nothing more, because the pool is empty and the only cost left to recover is the cost the year itself incurred.",
+   "The unrecovered balance carried out of year 4, released in full now that the allowance finally exceeds it.",
+   "Eighty percent of that year's revenue after royalty, which is the whole allowance the limit permits once the early capex has been worked off.",
+   "The straight line capital allowance the engine switches to once the pool has been drawn below the year's allowance."
+  ],
+  "answer": 0,
+  "explanation": "Year 4 is the partial draw that empties the pool, and every year after it hands back that year's opex and passes the rest through as profit oil."
+ },
+ {
+  "prompt": "`capped_5pct_pool_never_clears` closes with 2543.7575 million USD still in the pool. What happens to it?",
+  "options": [
+   "It is written off against the contractor's taxable profit share in year 25, which is why that case records a lower tax than the full limit run.",
+   "It is carried to a terminal settlement and added to contractor net cash flow in the final year, which is what makes payback possible in year 3.",
+   "Nothing. Nothing in the engine ever pays it, and the horizon does not extend to let the recovery finish.",
+   "It is converted into a loss carryforward that shelters the profit share in the years that follow, though the engine's 25 year horizon truncates it."
+  ],
+  "answer": 2,
+  "explanation": "An unrecovered pool is not a receivable. A reader who adds it back values the case too highly by 2543.7575, and does the same to `capped_40pct` by 399.6419 and to `flat_test_project` by 79.3932."
+ },
+ {
+  "prompt": "`never_recovers_huge_capex` takes the Suite test project to 20000 of capex. Profit oil is 0.0000 in every year and total tax is 0.0000, yet government cash flow is 875.1492. Where did it come from?",
+  "options": [
+   "It is the minimum tax, which is charged on gross revenue whenever the profit share falls to zero and no ordinary tax base exists.",
+   "All of it is royalty, which is charged on gross revenue and has nothing to do with whether any cost was recovered.",
+   "It is the government's share of the 6126.0445 of cost oil recovered.",
+   "It is a clawback of the earlier years' cost recovery, triggered when the closing pool of 15724.0151 exceeds the capex actually spent."
+  ],
+  "answer": 1,
+  "explanation": "Total royalty on that case is 875.1492 and total tax is 0.0000, so the whole of government cash flow is the royalty. That is a royalty seen from the cost recovery side."
+ },
+ {
+  "prompt": "In year 5 the default project incurs 23.6264 of opex and no capex at all, yet at a 50 percent limit it recovers 83.6287. In year 1 it spends 500.0000 of capex and recovers 118.9951. What is the cost recovered column?",
+  "options": [
+   "The year's own spend, capped at the allowance, which is why the year 1 figure is so much smaller than the capex that produced it.",
+   "The depreciation charge for the year, computed from the capex over a life the cost recovery limit implies.",
+   "The share of the year's spend the government has agreed to fund, with the balance left for the contractor to carry at its own risk.",
+   "A draw on a historic balance, so the year that recovers most may be a year that spent almost nothing."
+  ],
+  "answer": 3,
+  "explanation": "A reader who treats cost recovered as a cost column will double count the whole of the year 1 capex of 500.0000 and then wonder why the totals refuse to close."
+ },
+ {
+  "prompt": "At a 50 percent cost recovery limit on the default project, cost recovered and profit oil are equal in every early row, 118.9951 and 118.9951 in year 1 and 106.9525 and 106.9525 in year 2. Why?",
+  "options": [
+   "Because the engine splits revenue after royalty evenly between cost oil and profit oil in any year an unrecovered balance is still outstanding against the pool.",
+   "Because profit oil is defined as the mirror of cost recovered, which is an identity of cost recovery and holds at every limit.",
+   "Because the allowance is exactly half of revenue after royalty and the pool is deep enough to fill it, so the other half is what remains as profit oil.",
+   "Because the 50 percent limit is applied twice, once to the pool draw and once again to the profit oil that the draw leaves behind."
+  ],
+  "answer": 2,
+  "explanation": "It is an arithmetic coincidence of a 50 percent limit and a deep pool, and any other limit breaks it: at 80 percent year 1 recovers 190.3922 and leaves 47.5981."
+ },
+ {
+  "prompt": "On the default project at limits of 80, 90 and 100 percent the total cost recovered over the life is 941.4436 million USD. What is that number made of?",
+  "options": [
+   "The life's capex of 500.0000 and its opex of 441.4436, taken together, because every dollar comes back and the limit only decides when.",
+   "The capex of 500.0000 plus the share of opex the allowance was able to release before the pool cleared in year 3 or year 4.",
+   "The undepreciated balance of the capex, since opex is expensed against profit oil rather than entering the recoverable pool at all.",
+   "The lifetime allowance, which is the stated percent of the whole life's revenue after royalty and is therefore a different total at each of the four limits."
+  ],
+  "answer": 0,
+  "explanation": "There is no capital allowance, no life, no method and no schedule. Capex enters the pool whole in the year it is spent and leaves when revenue after royalty makes room."
+ },
+ {
+  "prompt": "What does the cost recovery limit cap?",
+  "options": [
+   "The pool, so a balance can never grow beyond the stated percent of the life's revenue after royalty.",
+   "The annual draw, and nothing else.",
+   "The total ever recovered, which is why a tight limit leaves a permanent shortfall against the capex spent.",
+   "The share of the year's revenue after royalty available to the contractor once its profit split has also been applied."
+  ],
+  "answer": 1,
+  "explanation": "It does not vary with the R factor, the price or the year, and a regime that recovers capex and opex at different limits cannot be expressed at all."
+ },
+ {
+  "prompt": "Undiscounted contractor net cash flow on the default project is 986.7327 at a 100 percent limit and 986.4494 at a 50 percent limit. What should a reader conclude about a tighter limit?",
+  "options": [
+   "That it makes no difference at all, since an undiscounted total is the only honest measure of what a regime is worth to a contractor.",
+   "That it costs the contractor money in proportion to the tightening, which the undiscounted totals understate because they are nominal.",
+   "That it costs the contractor time rather than money, right up to the point where the pool fails to clear inside the horizon.",
+   "That the two figures differ only by the engine's own arithmetic noise."
+  ],
+  "answer": 2,
+  "explanation": "The shape of the early years changed and a discounted measure is where that shows. The only lasting difference here is the 0.9444 the 50 percent run leaves unrecovered."
+ },
+ {
+  "prompt": "At the close of year 3 on the default project the pool stands at 264.6871 at a 50 percent limit, 71.4398 at 80 percent, 7.0241 at 90 percent and 0.0000 at 100 percent. Which limits have cleared by the end of year 4?",
+  "options": [
+   "Only the 100 percent run, because a limit below a full one leaves a residue that is worked off across the remaining years of the life.",
+   "The 90 and 100 percent runs, since the 80 percent balance of 71.4398 is too large for a single year's allowance to absorb.",
+   "All four, because the 50 percent run's remaining 203.4615 is released once the year 4 allowance is applied to revenue after royalty.",
+   "The 80, 90 and 100 percent runs, since the 90 and 80 percent balances of 7.0241 and 71.4398 are both drawn down inside year 4."
+  ],
+  "answer": 3,
+  "explanation": "The 50 percent run is still carrying 43.9427 at the close of year 7 and finishes the 25 years with 0.9444 unrecovered."
+ }
+]

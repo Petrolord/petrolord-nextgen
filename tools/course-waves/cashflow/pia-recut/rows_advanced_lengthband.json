@@ -1,0 +1,18 @@
+[
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-the-pia-royalties",
+  "ord": 15,
+  "prompt": "A production file has been pre-scaled to the operator's share before upload. What can the engine report to warn the reader?",
+  "options": [
+   "A working_interest_pct of 50 inferred from the ratio of uploaded barrels to the lifetime cumulative, which it prints in the KPI block as a warning.",
+   "Nothing. It cannot tell a pre-scaled upload from a small field: the naive run reports working_interest_pct not reported exactly as the full run does.",
+   "A prod_alw_cap_applied flag of true on the first row, because a halved field reaches the wrong tier and the engine marks a tier it cannot reconcile.",
+   "An ingestion refusal, since the volume columns of a pre-scaled file fail the per-well naming check that the production loader applies."
+  ],
+  "answer_index": 1,
+  "explanation": "The row's oil_bbl is the entitlement either way; the only honest scaling is pia_working_interest_pct on the full field, which keeps cumulative_oil_bbl_lifetime at 21900000.00.",
+  "why": "Answer-length band: a distractor shortened so the bank keeps the key in the 12 to 40 percent rank band."
+ }
+]

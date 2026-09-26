@@ -18,7 +18,7 @@ The result reads total revenue 18000000.00, total capex 5000000.00, total opex 1
 
 ## What the year does to the row
 
-Dating happens before any price is applied, so the price a volume earns depends on which year its date falls in: rows dated 2027-01 and 2027-02 are priced at the 2027 price together, and a row dated the following January at the next year's price, whatever the escalator has made of it. Where a date lands is a pricing decision, not just a filing one.
+Dating happens before any price is applied, so the price a volume earns depends on which year its date falls in: rows dated 2027-01 and 2027-02 are priced at the 2027 price together, and a row dated the following January at the next year's price, whatever the escalator has made of it. Where a date lands is a pricing decision as well as a filing one.
 
 ## What it refuses to guess
 

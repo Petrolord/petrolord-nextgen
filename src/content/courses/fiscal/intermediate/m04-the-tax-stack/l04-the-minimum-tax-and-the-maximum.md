@@ -1,6 +1,6 @@
 # The minimum tax and the maximum
 
-The third instrument is charged on gross revenue, not the profit share, and it does not add to the other two. It replaces them when it is larger.
+The third instrument is charged on gross revenue instead of the profit share, and it does not add to the other two. It replaces them when it is larger.
 
 {{panel:ec-instrument-explorer}}
 
@@ -19,7 +19,7 @@ The published case that pins it sets a 10 percent minimum with a corporate incom
 
 Year 1 pays 87.6000 million USD of tax on a profit share of 0.0000, and the tax follows revenue down because revenue is all it looks at. Over the life it collects 700.1194 million USD and leaves contractor net cash flow at 2575.8655.
 
-## The maximum, not the sum
+## The maximum and never the sum
 
 The tax charged is the larger of the corporate income tax plus the resource rent tax, and the minimum tax. On the four run decomposition of "Brazil - Concession" over the Designer's default project, corporate income tax alone at 34 percent collects 502.1091 million USD, resource rent tax alone at 40 percent 350.7165, a 5 percent minimum tax alone 134.3464, and the published stack with the minimum at zero 852.8256.
 
@@ -33,7 +33,7 @@ The reverse mistake is assuming a minimum tax is a small refinement. A 10 percen
 
 ## What it refuses
 
-There is no minimum tax credit: a year in which the minimum exceeds the profits taxes does not bank the difference against a later year. There is no exemption for a loss-making year, because the base is sales, not profit. And it is blind to the royalty already taken off that same revenue and to the capex not yet recovered.
+There is no minimum tax credit: a year in which the minimum exceeds the profits taxes does not bank the difference against a later year. There is no exemption for a loss-making year, because the base is sales and has nothing to do with profit. And it is blind to the royalty already taken off that same revenue and to the capex not yet recovered.
 
 ## Exercise
 

@@ -18,7 +18,7 @@ Name a year beyond the data and the engine builds one. With abandonment_year 203
 | 60000000 in 2035, the final year | 38666394.86 | null | 148425219.46 |
 | 60000000 in 2037, beyond the data | 44544387.85 | null | 148425219.46 |
 
-The 2035 net cash flow goes from 30401798.05 to -29598201.95, a terminal negative, and the IRR is null. Since engines 3.10.0 a rate is named only where exactly one rate in the band zeroes the NPV, and until that repair this run printed 23.2570 percent, one root of a curve that had another. At 200000000 the final flow is -169598201.95 and the null has the opposite cause, the NPV being negative at every sampled rate, -40359955.35 at the applied rate. The tax total never moves.
+The 2035 net cash flow goes from 30401798.05 to -29598201.95, a terminal negative, and the IRR is null. The engine names a rate only where exactly one rate in the band zeroes the NPV, and this curve has two, so neither is printed as the field's return. At 200000000 the final flow is -169598201.95 and the null has the opposite cause, the NPV being negative at every sampled rate, -40359955.35 at the applied rate. The tax total never moves.
 
 ## The number that is already the share
 
@@ -28,11 +28,11 @@ AKATA shows the size of it. At 100 percent a 60000000 lump sum takes NPV from 72
 
 ## The mistake
 
-The careful mistake is to relieve it. A reader who expects the cost to be deductible reduces the final year's tax and reports a net cash flow higher than the row. Every abandonment case carries the same total tax as the run without it, 148425219.46 on AKATA. Deductibility is real in some regimes, not in this one.
+The careful mistake is to relieve it. A reader who expects the cost to be deductible reduces the final year's tax and reports a net cash flow higher than the row. Every abandonment case carries the same total tax as the run without it, 148425219.46 on AKATA. Some regimes allow the deduction; this engine charges the lump sum after tax.
 
 ## What the engine refuses
 
-It refuses to deduct the lump sum from any base or to scale it by working interest, which is why the number entered must already be the share. It no longer hides a changed sign behind a rate: the IRR comes back null with a status. And it refuses to spread the cost; for that the funding mode has to change.
+It refuses to deduct the lump sum from any base or to scale it by working interest, which is why the number entered must already be the share. It refuses to hide a changed sign behind a rate: the IRR comes back null with a status. And it refuses to spread the cost; for that the funding mode has to change.
 
 ## Exercise
 

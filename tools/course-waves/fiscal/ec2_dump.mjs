@@ -19,6 +19,10 @@
 // engine values printed on the SAME row). Nothing else is computed here.
 
 import fs from 'fs';
+import { register } from 'node:module';
+// fiscalRegime.js imports engines/economics/cashflow.ts (engines 3.12.0): plain
+// node 18 needs the TypeScript hook before the engine is imported.
+register('./ts_loader.mjs', import.meta.url);
 
 const ROOT = process.env.EC2_ENGINES || '/opt/petrolord-studio/workspaces/dev1/projects/petrolord-nextgen/packages/engines';
 const E = await import(`${ROOT}/engines/economics/fiscalRegime.js`);
@@ -45,6 +49,19 @@ const irrRows = (rows) => irrOf(E.calculateIRRResult(rows));
 // stripped ("USA - Gulf of Mexico" -> "usa___gulf_of_mexico").
 const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]/g, '_').replace(/^_+|_+$/g, '');
 
+// COURSE LABELS IN THREE GOLDEN NOTES. The golden's notes on rfactor_tranche_crossing,
+// tiers_unsorted_selected_by_threshold and sliding_royalty_price_deck_crossing name
+// their regimes "the Nigeria PIA tranches" and "the Designer's default PIA sliding
+// royalty". Neither regime is the Act: the first is this course's tiered teaching
+// regime value for value, the second is the Designer's sample PSC regime. The notes
+// print with those two labels relabelled and every number untouched; the golden's
+// own wording is listed for a separate engines rename (RECUT-fiscal-DONE.md, L6).
+const NOTE_LABELS = [
+  ['The Nigeria PIA tranches', "The tiered teaching regime's tranches"],
+  ['the Nigeria PIA tranches', "the tiered teaching regime's tranches"],
+  ["the Designer's default PIA sliding royalty", "the Designer's sample PSC regime's sliding royalty"],
+];
+for (const c of G.cashflow) for (const [a, b] of NOTE_LABELS) c.note = c.note.split(a).join(b);
 const CASE = Object.fromEntries(G.cashflow.map((c) => [c.id, c]));
 const CMP = Object.fromEntries(G.comparisons.map((c) => [c.id, c]));
 const INS = Object.fromEntries(G.insights.map((c) => [c.id, c]));
@@ -57,6 +74,26 @@ const TEST_PROJECT = clone(CASE['template_nigeria___pia__2021_test_project'].pro
 const REGIME = Object.fromEntries(
   fiscalTemplates.map((t) => [slug(t.name), { id: slug(t.name), name: t.name, ...clone(t.regime) }]));
 const PIA = REGIME['nigeria___pia__2021'];
+// The cash flow engine's royalty helpers, which the PIA template's royalty
+// calls (fiscalRegime.js imports them), so the rates printed below are the
+// rates the template charges.
+const CF = await import(`${ROOT}/engines/economics/cashflow.ts`);
+// THE TIERED TEACHING REGIME. A regime of this course, carrying no country's
+// values: a two-tier sliding royalty (7.5 percent from 0, 10 percent from
+// 50 USD/bbl), cost recovery to 80 percent of revenue after royalty, and three
+// R-factor tranches (60 percent from R 1.0, 40 from 1.6, 30 from 2.5), CIT 30.
+// It exists so the sliding royalty and the R-factor split have a worked
+// example with a step inside the teaching field's life.
+const TIERED = {
+  id: 'tiered_teaching', name: 'Tiered teaching regime',
+  royalty: { type: 'sliding_price', tiers: [{ threshold: 0, rate: 7.5 }, { threshold: 50, rate: 10 }] },
+  tax: { cit: 30, rrt: 0, minTax: 0 },
+  costRecoveryLimit: 80,
+  profitSplit: { type: 'tiered_r_factor', tiers: [{ threshold: 1.0, split: 60 }, { threshold: 1.6, split: 40 }, { threshold: 2.5, split: 30 }] },
+};
+// The deck's oil price in a project year, read the way the engine reads it:
+// walk the deck in list order and keep the last point the year has reached.
+const priceAt = (proj, y) => { let px = proj.prices[0].oil; for (const q of proj.prices) if (y >= q.year) px = q.oil; return px; };
 const GOM = REGIME['usa___gulf_of_mexico'];
 const GENERIC = REGIME['generic_royalty_tax'];
 const ANGOLA = REGIME['angola___deepwater_psc'];
@@ -64,8 +101,9 @@ const BRAZIL = REGIME['brazil___concession'];
 const GHANA = REGIME['ghana___deepwater'];
 
 // The TEACHING FIELD this wave designed for itself. Its deck deliberately
-// crosses the PIA royalty threshold between year 5 and year 6, which is the
-// one thing no published case does on a template.
+// crosses the tiered teaching regime's 50 USD/bbl royalty threshold between
+// year 5 and year 6, and the PIA template's low royalty-by-price benchmark in
+// the same year.
 const ODIDI = {
   production: {
     oil: { initial: 8000, decline: 14 },
@@ -98,7 +136,13 @@ const table = (rows, cols = ROW_COLS) => {
   for (const row of rows) w(`| ${cols.map((c) => fmtCell(c, row[c])).join(' | ')} |`);
 };
 const projLine = (pr) => `oil ${pr.production.oil.initial} bbl/d declining ${pr.production.oil.decline} percent a year, gas ${pr.production.gas.initial} Mscf/d declining ${pr.production.gas.decline} percent, NGL ${pr.production.ngl.initial} bbl/d declining ${pr.production.ngl.decline} percent; capex drilling ${pr.costs.capex.drilling}, facilities ${pr.costs.capex.facilities}, subsea ${pr.costs.capex.subsea} $MM; opex fixed ${pr.costs.opex.fixed} $MM a year and variable ${pr.costs.opex.variable} USD per boe; discount rate ${pr.discountRate} percent; price deck ${pr.prices.map((q) => `year ${q.year}: oil ${q.oil}, gas ${q.gas}, NGL ${q.ngl}`).join('; ')}`;
-const regimeLine = (g) => `royalty ${g.royalty.type === 'flat' ? `flat ${g.royalty.rate} percent` : `sliding on price, tiers ${g.royalty.tiers.map((t) => `${t.threshold} USD/bbl -> ${t.rate} percent`).join(', ')}`}; cost recovery limit ${g.costRecoveryLimit} percent; profit split ${g.profitSplit.type === 'flat' ? `flat ${g.profitSplit.split} percent to the contractor` : `tiered on the R factor, ${g.profitSplit.tiers.map((t) => `R ${t.threshold} -> ${t.split} percent`).join(', ')}`}; CIT ${g.tax.cit} percent, RRT ${g.tax.rrt} percent, minimum tax ${g.tax.minTax} percent${g.tax.rrtUpliftPct === undefined ? '' : `, RRT uplift ${g.tax.rrtUpliftPct} percent`}`;
+const royaltyWords = (y) => (y.type === 'flat' ? `flat ${y.rate} percent`
+  : y.type === 'pia_2021' ? `PIA 2021 royalty (type pia_2021): production royalty by terrain ${y.terrain} and daily rate, royalty by price on the ${y.priceRoyaltyBase ?? 'regulations_2021'} benchmarks with project year 1 in calendar ${y.firstCalendarYear}, gas and NGL at the gas rate with ${y.gasInCountrySharePct ?? 0} percent used in-country`
+    : `sliding on price, tiers ${y.tiers.map((t) => `${t.threshold} USD/bbl -> ${t.rate} percent`).join(', ')}`);
+const splitWords = (p) => (p.type === 'flat' ? `flat ${p.split} percent to the contractor`
+  : p.type === 'pia_cumulative_production' ? `government minimum profit oil by cumulative crude oil at the start of the year (type pia_cumulative_production), ${p.tiers.map((t, i) => `${t.upToMMbbl === null ? `above ${p.tiers[i - 1].upToMMbbl}` : `to ${t.upToMMbbl}`} million bbl -> government ${t.governmentPct} percent`).join(', ')}`
+    : `tiered on the R factor, ${p.tiers.map((t) => `R ${t.threshold} -> ${t.split} percent`).join(', ')}`);
+const regimeLine = (g) => `royalty ${royaltyWords(g.royalty)}; cost recovery limit ${g.costRecoveryLimit} percent of ${g.costRecoveryBase === 'liquids_gross' ? 'the gross value of crude oil and NGL (costRecoveryBase liquids_gross)' : 'revenue after royalty'}; profit split ${splitWords(g.profitSplit)}; CIT ${g.tax.cit} percent, RRT ${g.tax.rrt} percent, minimum tax ${g.tax.minTax} percent${g.tax.rrtUpliftPct === undefined ? '' : `, RRT uplift ${g.tax.rrtUpliftPct} percent`}`;
 const totals = (rows) => ({
   ncf: rows.reduce((s, x) => s + x.contractorNCF, 0),
   gov: rows.reduce((s, x) => s + x.governmentTake, 0),
@@ -120,13 +164,13 @@ w('# SECTION 1: The sandbox, its conventions, and what it refuses to be (owned b
 w();
 w('Engine: engines/economics/fiscalRegime.js with its templates in fiscalTemplates.js. Every table below is a return value of calculateCashFlowForRegime, calculateNPV, calculateIRR, deriveInsights or runFiscalComparison. Money is millions of United States dollars, written $MM in the engine\'s own labels and "million USD" in prose. Volumes are bbl and Mscf. Barrels of oil equivalent convert gas at 6000 scf per barrel, which the engine writes as a multiply by 1000 and a divide by 6000. Rates are percent.');
 w();
-w('HOW TO READ A COLUMN MARKED "derived". A derived column is a ratio or a difference of two engine values on the SAME row, computed at full precision and then rounded for printing. The printed endpoints are rounded too, so subtracting the two printed endpoints does not always reproduce the printed difference: the ODIDI PIA climb prints 79.2711 and 79.4678 with a climb of 0.1968, and the default-project Generic Royalty/Tax climb prints 51.2558 and 41.0660 with a climb of -10.1897. Both are correct and both are off by one in the last place from the subtraction a reader would do by hand. Quote a derived column as printed. Never ask a reader, in a lesson exercise or a bank question, to subtract two printed endpoints and match a printed difference.');
+w('HOW TO READ A COLUMN MARKED "derived". A derived column is a ratio or a difference of two engine values on the SAME row, computed at full precision and then rounded for printing. The printed endpoints are rounded too, so subtracting the two printed endpoints does not always reproduce the printed difference: the default-project Generic Royalty/Tax climb prints 51.2558 and 41.0660 with a climb of -10.1897. Both are correct and both are off by one in the last place from the subtraction a reader would do by hand. Quote a derived column as printed. Never ask a reader, in a lesson exercise or a bank question, to subtract two printed endpoints and match a printed difference.');
 w();
 w('The four instruments a regime carries, and nothing else:');
 w();
-w('- `royalty`, either `flat` with a `rate`, or `sliding_price` with tiers keyed on the oil price.');
-w('- `costRecoveryLimit`, a percent of revenue after royalty.');
-w('- `profitSplit`, either `flat` with a contractor `split`, or `tiered_r_factor` with tiers keyed on the R factor.');
+w('- `royalty`, either `flat` with a `rate`, `sliding_price` with tiers keyed on the oil price, or `pia_2021`, the Petroleum Industry Act 2021 royalty the Nigeria - PIA (2021) template carries (Section 12).');
+w('- `costRecoveryLimit`, a percent of revenue after royalty, or, with `costRecoveryBase` set to `liquids_gross`, a percent of the gross value of crude oil and NGL (Section 13).');
+w('- `profitSplit`, either `flat` with a contractor `split`, `tiered_r_factor` with tiers keyed on the R factor, or `pia_cumulative_production`, the government\'s minimum share by cumulative crude production (Section 14).');
 w('- `tax`, holding `cit`, `rrt`, `minTax` and an optional `rrtUpliftPct` that defaults to 20.');
 w();
 w('Four things the sandbox refuses to be, all four stated in the engine\'s own header:');
@@ -245,7 +289,7 @@ for (const t of fiscalTemplates) {
   w(`  ${regimeLine(g)}.`);
 }
 w();
-w('Three of the six take a flat 100 percent of profit oil to the contractor and recover cost at 100 percent, which is what a concession looks like inside a model built around a production sharing ledger: the contractor keeps everything the taxes do not take. The other three split profit oil on the R factor and cap cost recovery at 80, 90 and 50 percent.');
+w('Three of the six take a flat 100 percent of profit oil to the contractor and recover cost at 100 percent, which is what a concession looks like inside a model built around a production sharing ledger: the contractor keeps everything the taxes do not take. Two split profit oil on the R factor and cap cost recovery at 90 percent (Ghana) and 50 percent (Angola) of revenue after royalty. The Nigeria - PIA (2021) template is the Act\'s base terms for a deep offshore production sharing contract on new acreage: the royalty the Act and the Petroleum Royalty Regulations 2022 set (production royalty by terrain and daily rate, royalty by price, gas and NGL at 5 percent), cost recovery to 70 percent of the gross value of crude oil and NGL, and the government\'s minimum share of profit oil by cumulative crude production (PIA Seventh Schedule paras 10, 11 and 14(4)); CIT 30 percent and no hydrocarbon tax in deep offshore (s.260(3)). These are the Act\'s minimum terms, which a licensing round can bid up (s.303(2)).');
 w();
 
 // -------------------------------------------------------------- Section 8
@@ -351,7 +395,7 @@ for (const c of G.cashflow) {
   w(`  total contractor NCF ${m(s.ncf)}, total government take ${m(s.gov)}, total revenue ${m(s.rev)}, total royalty ${m(s.roy)}, total cost recovered ${m(s.rec)}, total profit oil ${m(s.po)}, total tax ${m(s.tax)}, payback year ${payback(rows) ?? 'null'}, payout year ${payout(rows) ?? 'null'}, NPV ${m(E.calculateNPV(rows, c.project.discountRate))} at ${c.project.discountRate} percent, IRR ${irrRows(rows)}, closing unrecovered pool ${m(rows[rows.length - 1].unrecoveredCostPool)}.`);
 }
 w();
-w('A NOTE ON THE NOTES. Each note is the golden\'s own prose, reprinted verbatim. Three of them once made a claim their own numbers refused, and all three were corrected at source (EC2-4):');
+w('A NOTE ON THE NOTES. Each note is the golden\'s own prose, reprinted verbatim except for two regime labels: the tranches the golden calls "the Nigeria PIA tranches" print as the tiered teaching regime\'s, which they are value for value, and "the Designer\'s default PIA sliding royalty" prints as the Designer\'s sample PSC regime\'s sliding royalty. Three of them once made a claim their own numbers refused, and all three were corrected at source (EC2-4):');
 w();
 w('- `capped_5pct_pool_never_clears` (formerly capped_5pct_never_recovers) once said "no payback, IRR 0". It pays back in year 3, because at a 5 percent cost recovery limit the revenue that cannot be recovered becomes profit oil and this regime splits profit oil 100 percent to the contractor. Its NPV is zero at 54.6792 percent and again at -14.2614 percent, so the IRR is null with the status multiple-roots. Cost recovery is not the only way a contractor is paid back.');
 w('- `rfactor_tranche_crossing` once dated the 1.0 crossing to year 3. The R factor crosses 1.0 in year 2 and that crossing steps nothing, because 60 percent is already the first tier\'s split; the step to 40 percent in year 3 is the 1.6 threshold.');
@@ -365,18 +409,18 @@ w('# SECTION 12: The sliding-scale royalty (owned by Professional m01)');
 w();
 w('`getSlidingScaleRoyalty` starts at the FIRST tier\'s rate and walks the list in order, keeping the rate of every tier whose `threshold` the oil price has reached. For a sorted tier list that is the highest threshold reached. The price it reads is the applied oil price for the year AFTER the price multiplier, so a sweep moves the royalty tier as well as the revenue.');
 w();
-w(`The PIA template's royalty has two tiers, 0 USD/bbl at 7.5 percent and 50 USD/bbl at 10 percent. Swept across the price multiplier on the DEFAULT PROJECT, whose year 1 deck price is 70 USD per bbl:`);
+w(`The tiered teaching regime's royalty has two tiers, 0 USD/bbl at 7.5 percent and 50 USD/bbl at 10 percent. Swept across the price multiplier on the DEFAULT PROJECT, whose year 1 deck price is 70 USD per bbl:`);
 w();
 w('| price multiplier | applied year 1 oil price (derived, 70 times the multiplier) | year 1 grossRevenue | year 1 royalty | implied rate (derived) |');
 w('| --- | --- | --- | --- | --- |');
 for (const mult of [0.5, 0.6, 0.7, 0.71, 0.72, 0.8, 1.0, 1.2]) {
-  const rows = cf(PIA, DEFAULT_PROJECT, 1, mult);
+  const rows = cf(TIERED, DEFAULT_PROJECT, 1, mult);
   w(`| ${r(mult)} | ${r(70 * mult)} | ${m(rows[0].grossRevenue)} | ${m(rows[0].royalty)} | ${r(rows[0].royalty / rows[0].grossRevenue)} |`);
 }
 w();
 w('The implied rate steps from 0.075000 to 0.100000 between the multipliers 0.710000 and 0.720000, which is the deck price crossing 50 USD per bbl. It is a STEP, not a ramp: nothing between the tiers is interpolated.');
 w();
-w('WHICH SIDE DOES THE THRESHOLD ITSELF BELONG TO. The comparison in the engine is `oilPrice >= tier.threshold`, so a price sitting EXACTLY on a threshold takes the UPPER tier. No multiplier on this deck lands exactly on 50, and one that looks as though it does is a rounding: 70 times 50 divided by 70 is 49.99999999999998 in binary floating point, which is strictly below the threshold and takes the LOWER tier while printing as 50.000000 at six decimals. So the point is made with a deck priced at the threshold instead, which needs no multiplier at all. Three probe decks, the Designer default project in every other respect, at the PIA royalty:');
+w('WHICH SIDE DOES THE THRESHOLD ITSELF BELONG TO. The comparison in the engine is `oilPrice >= tier.threshold`, so a price sitting EXACTLY on a threshold takes the UPPER tier. No multiplier on this deck lands exactly on 50, and one that looks as though it does is a rounding: 70 times 50 divided by 70 is 49.99999999999998 in binary floating point, which is strictly below the threshold and takes the LOWER tier while printing as 50.000000 at six decimals. So the point is made with a deck priced at the threshold instead, which needs no multiplier at all. Three probe decks, the Designer default project in every other respect, at the tiered teaching regime\'s royalty:');
 w();
 {
   w('| deck oil price, USD/bbl | year 1 grossRevenue | year 1 royalty | implied rate (derived) |');
@@ -384,17 +428,17 @@ w();
   for (const price of [49.99, 50, 50.01]) {
     const pr = clone(DEFAULT_PROJECT);
     pr.prices = [{ year: 1, oil: price, gas: DEFAULT_PROJECT.prices[0].gas, ngl: DEFAULT_PROJECT.prices[0].ngl }];
-    const rows = cf(PIA, pr);
+    const rows = cf(TIERED, pr);
     w(`| ${r(price)} | ${m(rows[0].grossRevenue)} | ${m(rows[0].royalty)} | ${r(rows[0].royalty / rows[0].grossRevenue)} |`);
   }
   w();
 }
 w('The threshold belongs to the tier above it. A price one cent below pays 7.5 percent, a price exactly on it pays 10 percent, and a price one cent above pays 10 percent. Read a sweep\'s printed price column as a ROUNDING of the price the engine used, never as the price itself, and read the implied rate as the measurement: the rate says which side of the threshold the engine was actually on.');
 w();
-w('The same instrument seen along a deck rather than along a multiplier. ODIDI holds 45 USD per bbl through year 5 and steps to 65 at year 6, so under the PIA royalty its rate changes inside the life of the field:');
+w('The same instrument seen along a deck rather than along a multiplier. ODIDI holds 45 USD per bbl through year 5 and steps to 65 at year 6, so under the tiered teaching regime its royalty rate changes inside the life of the field:');
 w();
 {
-  const rows = cf(PIA, ODIDI);
+  const rows = cf(TIERED, ODIDI);
   w('| year | grossRevenue | royalty | implied rate (derived, royalty over grossRevenue) |');
   w('| --- | --- | --- | --- |');
   for (const x of rows.slice(0, 8)) w(`| ${x.year} | ${m(x.grossRevenue)} | ${m(x.royalty)} | ${r(x.royalty / x.grossRevenue)} |`);
@@ -415,12 +459,29 @@ for (const id of ['sliding_royalty_price_deck_crossing', 'price_below_every_thre
 }
 w('`price_below_every_threshold` is the case that shows the starting rate is the FIRST tier\'s rate and not zero: the price never reaches any threshold above the first, and the first tier\'s rate is charged in every year.');
 w();
+w('### The Nigeria - PIA (2021) template\'s royalty (type pia_2021)');
+w();
+w(`This royalty has no tiers keyed on the price alone. Each year it charges three things, computed by the cash flow engine\'s own helpers: the production royalty on the oil revenue at the rate for the terrain (${PIA.royalty.terrain}) and the year\'s daily oil rate (the year\'s oil over 365 days); the royalty by price on the oil revenue, at the rate for the year\'s oil price and calendar year (project year 1 is ${PIA.royalty.firstCalendarYear}) on the ${PIA.royalty.priceRoyaltyBase} benchmarks; and the gas rate on the gas and NGL revenue. ODIDI under it:`);
+w();
+{
+  const rows = cf(PIA, ODIDI);
+  const vol = (y) => ODIDI.production.oil.initial * 365 * Math.pow(1 - ODIDI.production.oil.decline / 100, y - 1);
+  w('| year | calendar year | oil price | daily oil rate (derived) | production royalty rate | low benchmark | royalty by price rate | gas and NGL rate | royalty | implied rate on grossRevenue (derived) |');
+  w('| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |');
+  for (const x of rows.slice(0, 14)) {
+    const cy = PIA.royalty.firstCalendarYear + x.year - 1; const px = priceAt(ODIDI, x.year);
+    w(`| ${x.year} | ${cy} | ${r(px)} | ${m(vol(x.year) / 365)} | ${r(CF.deriveOilRoyaltyRate(PIA.royalty.terrain, vol(x.year) / 365))} | ${m(CF.priceRoyaltyBenchmarks(cy, PIA.royalty.priceRoyaltyBase).low)} | ${r(CF.derivePriceRoyaltyRate(px, cy, PIA.royalty.terrain, PIA.royalty.priceRoyaltyBase))} | ${r(CF.deriveGasRoyaltyRate(PIA.royalty.terrain, PIA.royalty.gasInCountrySharePct))} | ${m(x.royalty)} | ${r(x.royalty / x.grossRevenue)} |`);
+  }
+  w();
+}
+w('ODIDI produces well under 50,000 bopd, so its production royalty stays at the 5 percent deep offshore rate. The royalty by price is zero while the oil price is at or below the year\'s low benchmark and rises from the year the deck lifts the price above it.');
+w();
 // -------------------------------------------------------------- Section 13
 w('# SECTION 13: Cost recovery, the pool and the carryforward (owned by Professional m02)');
 w();
 w('Three lines of the engine do the whole of it. The recoverable pool is the balance brought forward plus this year\'s capex plus this year\'s opex. The allowance is the cost recovery limit as a percent of revenue AFTER royalty. Cost recovered is the smaller of the two, and the pool carries the rest forward. Profit oil is revenue after royalty minus cost recovered, floored at zero.');
 w();
-w('The same project under four limits, so the limit is the only thing that moves. Angola\'s 50 percent, the PIA\'s 80, Ghana\'s 90 and the concession 100, all on the DEFAULT PROJECT with everything else held at the "Generic Royalty/Tax" template\'s settings:');
+w('The same project under four limits, so the limit is the only thing that moves. Angola\'s 50 percent, the tiered teaching regime\'s 80, Ghana\'s 90 and the concession 100, all on the DEFAULT PROJECT with everything else held at the "Generic Royalty/Tax" template\'s settings:');
 w();
 for (const lim of [50, 80, 90, 100]) {
   const g = { ...clone(GENERIC), costRecoveryLimit: lim, id: `limit_${lim}`, name: `Generic at a ${lim} percent limit` };
@@ -445,6 +506,16 @@ for (const id of ['capped_5pct_pool_never_clears', 'capped_40pct', 'never_recove
   w(`- ${id}: ${c.note} Cost recovery limit ${c.regime.costRecoveryLimit} percent. Total cost recovered ${m(s.rec)}, total profit oil ${m(s.po)}, total contractor NCF ${m(s.ncf)}, closing unrecovered pool ${m(rows[rows.length - 1].unrecoveredCostPool)} $MM, payback year ${payback(rows) ?? 'null'}.`);
 }
 w();
+w(`The Nigeria - PIA (2021) template takes its limit on a different base (costRecoveryBase liquids_gross): ${PIA.costRecoveryLimit} percent of the gross value of crude oil and NGL, before royalty, where every other regime here takes a percent of revenue after royalty. On ODIDI:`);
+w();
+{
+  const rows = cf(PIA, ODIDI);
+  w('| year | grossRevenue | royalty | recoverable pool (derived, pool brought forward plus capex plus opex) | costRecovered | unrecoveredCostPool |');
+  w('| --- | --- | --- | --- | --- | --- |');
+  let prev = 0;
+  for (const x of rows.slice(0, 6)) { w(`| ${x.year} | ${m(x.grossRevenue)} | ${m(x.royalty)} | ${m(prev + x.capex + x.opex)} | ${m(x.costRecovered)} | ${m(x.unrecoveredCostPool)} |`); prev = x.unrecoveredCostPool; }
+  w();
+}
 w('What cost recovery is NOT. It is not a deduction against tax: the tax base in this model is the contractor\'s profit share, and cost recovered is added to the contractor\'s cash separately. It is not depreciation, and there is no schedule. And an unrecovered balance is not a loss carried forward for tax; it is only a claim on future revenue after royalty.');
 w();
 
@@ -453,10 +524,10 @@ w('# SECTION 14: The R factor (owned by Professional m03)');
 w();
 w('The R factor is cumulative gross revenue divided by cumulative cost, where cumulative cost is the running sum of capex plus opex. It is a ratio of CUMULATIVES, not of the year, and it is computed BEFORE the split is chosen, from the totals including the current year. `getTieredSplit` then walks the tier list in order and keeps the split of every tier whose threshold the R factor has reached.');
 w();
-w(`"${PIA.name}" splits at R 1.0 to 60 percent, R 1.6 to 40 percent and R 2.5 to 30 percent. On the DEFAULT PROJECT:`);
+w(`The tiered teaching regime splits at R 1.0 to 60 percent, R 1.6 to 40 percent and R 2.5 to 30 percent. On the DEFAULT PROJECT:`);
 w();
 {
-  const rows = cf(PIA, DEFAULT_PROJECT);
+  const rows = cf(TIERED, DEFAULT_PROJECT);
   w('| year | grossRevenue | opex | capex | rFactor | profitOil | contractor profit share (derived, contractorNCF plus tax plus opex plus capex minus costRecovered) | implied split (derived, that share over profitOil) |');
   w('| --- | --- | --- | --- | --- | --- | --- | --- |');
   for (const x of rows) {
@@ -466,6 +537,22 @@ w();
   w();
 }
 w('The implied split is the tier the R factor selected, read back out of the ledger. It starts below 1.0 in year 1, so the FIRST tier\'s split is used even though no threshold has been reached, exactly as the royalty does.');
+w();
+w(`The Nigeria - PIA (2021) template does not split on the R factor. Its split (type pia_cumulative_production) is the government\'s minimum share of profit oil by the field\'s cumulative crude production at the START of the year: ${PIA.profitSplit.tiers.map((t) => `${t.upToMMbbl === null ? 'above the last band' : `up to and including ${t.upToMMbbl} million bbl`} ${t.governmentPct} percent`).join(', ')}. The contractor takes the rest. On the DEFAULT PROJECT:`);
+w();
+{
+  const rows = cf(PIA, DEFAULT_PROJECT);
+  const vol = (y) => DEFAULT_PROJECT.production.oil.initial * 365 * Math.pow(1 - DEFAULT_PROJECT.production.oil.decline / 100, y - 1);
+  let cum = 0;
+  w('| year | cumulative oil at the start of the year, million bbl (derived) | profitOil | implied contractor split (derived) |');
+  w('| --- | --- | --- | --- |');
+  for (const x of rows.slice(0, 25)) {
+    const share = x.contractorNCF + x.tax + x.opex + x.capex - x.costRecovered;
+    w(`| ${x.year} | ${r(cum / 1e6)} | ${m(x.profitOil)} | ${x.profitOil > 0 ? r(share / x.profitOil) : 'null'} |`);
+    cum += vol(x.year);
+  }
+  w();
+}
 w();
 w('Three published cases, one for each behaviour:');
 w();
@@ -596,7 +683,7 @@ for (const c of G.comparisons) {
   res.summary.forEach((s, i) => w(`| ${i + 1} | ${s.name} | ${m(s.npv)} | ${irrOf(s)} | ${s.paybackPeriod ?? 'null'} | ${s.rFactorPayoutYear ?? 'null'} | ${m(s.govTake)} | ${p(s.effectiveTaxRate)} |`));
   w();
 }
-w('`effectiveTaxRate` in this table is government take divided by government take plus contractor take, where contractor take has TOTAL CAPEX ADDED BACK. The add-back is what makes it a rate on profit rather than a rate on cash. Section 19 shows the other definition, in the same result object.');
+w('`effectiveTaxRate` in this table is government take divided by government take plus contractor take, where contractor take has TOTAL CAPEX ADDED BACK. With the add-back the denominator is revenue less opex, so this figure is government share of net revenue; without it the denominator is revenue less opex less capex, the rate on profit that the price sweep reports as government take. Section 19 shows the other definition, in the same result object.');
 w();
 w('`paybackPeriod` is the first year cumulative contractor net cash flow is above zero, and `null` when it never is. `rFactorPayoutYear` is the first year the R factor is above 1.0. They answer different questions and on these cases they often differ, because the R factor is gross revenue over cost while payback is cash after tax and after the government\'s share.');
 w();
@@ -623,7 +710,7 @@ w();
     w(`| ${name} | ${d.values.map((v) => p(v)).join(' | ')} | ${p(d.values[d.values.length - 1] - d.values[0])} |`);
   }
   w();
-  w(`The nine published price-sweep cases run ONE regime alone on the default project. READ THE NAME CAREFULLY: it is the Designer's own default regime, id 1, "${G.priceSweep[0].regime.name}", and it is NOT the "Nigeria - PIA (2021)" TEMPLATE. The two share a country and nothing else. The Designer regime recovers cost at ${G.priceSweep[0].regime.costRecoveryLimit} percent against the template's ${PIA.costRecoveryLimit}, splits profit oil ${G.priceSweep[0].regime.profitSplit.tiers.map((t) => `${t.split} percent from R ${t.threshold}`).join(' and ')} against the template's three tranches, and charges royalty ${G.priceSweep[0].regime.royalty.tiers.map((t) => `${t.rate} percent from ${t.threshold} USD/bbl`).join(' and ')} against the template's ${PIA.royalty.tiers.map((t) => `${t.rate} percent from ${t.threshold}`).join(' and ')}. On the default project the template returns NPV ${m(E.calculateNPV(cf(PIA, DEFAULT_PROJECT), DEFAULT_PROJECT.discountRate))} and the Designer regime ${m(G.priceSweep.find((x) => x.id === 'price_70_pia_default').expected.npv)}. Anything keyed to "the PIA template" on these sixteen sweep cases is mis-keyed.`);
+  w(`The nine published price-sweep cases run ONE regime alone on the default project. READ THE NAME CAREFULLY: it is the Designer's own default regime, id 1, "${G.priceSweep[0].regime.name}", and it is NOT the "Nigeria - PIA (2021)" TEMPLATE. Its values are the Designer\'s own sample values and none of them is read from the Act. The Designer regime recovers cost at ${G.priceSweep[0].regime.costRecoveryLimit} percent against the template's ${PIA.costRecoveryLimit} percent of the gross value of crude oil and NGL, splits profit oil ${G.priceSweep[0].regime.profitSplit.tiers.map((t) => `${t.split} percent from R ${t.threshold}`).join(' and ')} against the template's ${splitWords(PIA.profitSplit)}, and charges royalty ${G.priceSweep[0].regime.royalty.tiers.map((t) => `${t.rate} percent from ${t.threshold} USD/bbl`).join(' and ')} against the template's ${royaltyWords(PIA.royalty)}. On the default project the template returns NPV ${m(E.calculateNPV(cf(PIA, DEFAULT_PROJECT), DEFAULT_PROJECT.discountRate))} and the Designer regime ${m(G.priceSweep.find((x) => x.id === 'price_70_pia_default').expected.npv)}. Anything keyed to "the PIA template" on these ${G.priceSweep.length + G.capexSweep.length} sweep cases is mis-keyed.`);
   w();
   w('The nine cases pin the whole result at each price, not only the share:');
   w();
@@ -689,9 +776,9 @@ w('The sweep\'s definition has a second problem that the summary\'s does not, be
 w();
 
 // -------------------------------------------------------------- Section 20
-w('# SECTION 20: The capex sweep and the point the loop never reaches (owned by Expert m03)');
+w('# SECTION 20: The capex sweep and its eight points (owned by Expert m03)');
 w();
-w('This is finding F1. The capex sweep is written as a for loop from a multiplier of 0.8 to 1.5 in steps of 0.1, and its axis is labelled 0.8 to 1.5. Adding 0.1 to a binary floating point number does not land on 1.5: the accumulated multiplier reaches 1.5000000000000004, which fails the `<= 1.5` test, so the sweep has SEVEN points and its last label reads "1.4".');
+w('The capex sweep runs the whole comparison again at a fixed list of eight capex multipliers, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4 and 1.5 (`CAPEX_SWEEP_MULTIPLIERS`), and its axis is labelled with the same eight. Each point is the contractor NPV at that multiplier, so the last swept point IS the NPV at a 50 percent overrun and equals a direct call of the engine at 1.5.');
 w();
 {
   const c = CMP['cmp_all_templates_default_project'];
@@ -699,9 +786,9 @@ w();
   const sw = res.sensitivityData.capex;
   w(`The engine returns ${sw.labels.length} labels: ${sw.labels.join(', ')}.`);
   w();
-  w('All six templates on the DEFAULT PROJECT, contractor NPV at each swept capex multiplier, and the eighth point the loop never reaches computed by calling the engine directly at a multiplier of 1.5:');
+  w('All six templates on the DEFAULT PROJECT, contractor NPV at each swept capex multiplier, with the engine called directly at a multiplier of 1.5 beside the last swept point:');
   w();
-  w(`| regime | ${sw.labels.map((x) => `x${x}`).join(' | ')} | x1.5, called directly | loss over the SEVEN swept points, 0.8 to 1.4 (derived) | loss over EIGHT points, 0.8 to 1.5 (derived) |`);
+  w(`| regime | ${sw.labels.map((x) => `x${x}`).join(' | ')} | x1.5, called directly | loss over the swept points, first minus last (derived) | loss to the direct call at 1.5 (derived) |`);
   w(`| --- | ${sw.labels.map(() => '---').join(' | ')} | --- | --- | --- |`);
   for (const d of sw.data) {
     const g = c.regimes.find((x) => x.id === d.regimeId);
@@ -709,7 +796,7 @@ w();
     w(`| ${g.name} | ${d.values.map((v) => m(v)).join(' | ')} | ${m(at15)} | ${m(d.values[0] - d.values[d.values.length - 1])} | ${m(d.values[0] - at15)} |`);
   }
   w();
-  w(`The golden publishes the seven engine points as \`engineCapexPoints\` and the seven engine losses as \`capexLossesAsEngine\`, beside the oracle's eight point sweep, so both are pinned and a silent change to either is caught.`);
+  w(`The two loss columns agree on every row, because the last swept point and the direct call are the same number. The golden pins each regime's loss over the sweep as \`capexLosses\`, so a silent change to the sweep is caught.`);
   w();
 }
 w('The seven published capex-sweep cases run the same Designer default regime as the price sweep, id 1, at multipliers of 0.7 to 1.3, and pin the whole result at each. They are NOT the "Nigeria - PIA (2021)" template either:');
@@ -721,7 +808,7 @@ for (const x of G.capexSweep) {
   w(`| ${x.id} | ${m(e.npv)} | ${e.irr === null ? `null${e.irrStatus ? ` (${e.irrStatus})` : ''}` : p(e.irr)} | ${m(e.totalContractorNCF)} | ${m(e.totalGovTake)} | ${e.paybackYear ?? 'null'} | ${e.rFactorPayoutYear ?? 'null'} |`);
 }
 w();
-w('What "resilience to cost overrun" therefore measures is the NPV given up between a 20 percent UNDERSPEND and a 40 percent overrun, not the 50 percent overrun the axis promises. The verdict sentence is not false, it is answering a narrower question than the label on the chart.');
+w('What "resilience to cost overrun" therefore measures is the NPV given up between a 20 percent UNDERSPEND and a 50 percent overrun, the whole range on the axis. It ranks money given up across that range, which is a statement about the sweep and says nothing about which overrun is likely.');
 w();
 
 // -------------------------------------------------------------- Section 21
@@ -748,11 +835,14 @@ w();
 // -------------------------------------------------------------- Section 22
 w('# SECTION 22: A tie ranked by floating point noise (owned by Expert m04)');
 w();
-w('This is finding F3. The capex verdict picks its winner with a strict less-than in a reduce, which returns the first element when two are equal and therefore breaks a tie by list order. The price verdict did the same until EC2-1, and now declines to rank when the lead is under one percentage point (Section 21). When the tie is not exact but differs in the fifteenth significant figure, the winner is whichever regime\'s rounding noise happened to be smallest, and the sentence names it with the confidence of a result.');
+w('This is finding F3. A verdict that picks its winner with a strict less-than in a reduce returns the first element when two are equal, and so breaks a tie by list order; when the tie is not exact but differs in the fifteenth significant figure, the winner is whichever regime\'s rounding noise happened to be smallest, and the sentence names it with the confidence of a result. The capex verdict ranks each end with `leadOrTie` instead: a regime is named alone only when it leads the next by at least `CAPEX_RESILIENCE_MIN_SPREAD_MM`, ' + E.CAPEX_RESILIENCE_MIN_SPREAD_MM + ' million USD, one printed step; otherwise it is named together with every regime within that spread, and when the least and the most meet, no regime is ranked. The price verdict declines to rank when its lead is under one percentage point (Section 21).');
 w();
 {
   const c = CMP['cmp_never_recovers'];
   const res = await E.runFiscalComparison({ projectInputs: c.project, regimes: c.regimes });
+  const MULTS = E.CAPEX_SWEEP_MULTIPLIERS, LO = MULTS[0], HI = MULTS[MULTS.length - 1];
+  const LOS = LO.toFixed(1), HIS = HI.toFixed(1);
+  if (res.sensitivityData.capex.labels[0] !== LOS || res.sensitivityData.capex.labels.at(-1) !== HIS) throw new Error('Section 22: sweep labels do not match CAPEX_SWEEP_MULTIPLIERS');
   w(`**cmp_never_recovers**: ${c.note}`);
   w();
   w('| regime | npv | capex sweep first point | capex sweep last point | loss (derived) |');
@@ -764,25 +854,35 @@ w();
   w();
   for (const i of res.insights) w(`- \`${i.key}\`: ${i.text}`);
   w();
-  w(`The golden records that the engine names "USA - Gulf of Mexico" as the most resilient here and the oracle's arithmetic names "Brazil - Concession". Neither is a result. The golden therefore carries the ranked quantities, \`capexLossesAsEngine\` and \`priceClimbs\`, and the gate treats a tie as a tie rather than pinning a winner.`);
+  w('A strict reduce over these six losses would name whichever regime its list order or its rounding noise favoured; no such name is a result. The golden therefore pins the ranked quantities themselves, `capexLosses` and `priceClimbs` (empty on this case), beside the verdict that declines to rank, and the gate treats a tie as a tie.');
   w();
-  w('AND THE TIE HERE IS EXACT, WHICH IS STRONGER THAN A NEAR TIE, but not for the reason it first looks. The six losses are identical BY CONSTRUCTION because at BOTH ENDS of the sweep every regime recovers cost at its own limit, the pool being far larger than any allowance, so cost recovered, profit oil and tax are unchanged between a multiplier of 0.8 and one of 1.4. Nothing below the capex line moves. The whole capex difference therefore reaches the contractor\'s year 1 line undiluted and is discounted by the same single year, whatever royalty, profit oil and tax each regime carries.');
+  w(`AND THE TIE HERE IS EXACT, WHICH IS STRONGER THAN A NEAR TIE, but not for the reason it first looks. The six losses are identical BY CONSTRUCTION because at BOTH ENDS of the sweep every regime recovers cost at its own limit, the pool being far larger than any allowance, so cost recovered, profit oil and tax are unchanged between a multiplier of ${LO} and one of ${HI}, the first and last of the swept multipliers. Nothing below the capex line moves. The whole capex difference therefore reaches the contractor\'s year 1 line undiluted and is discounted by the same single year, whatever royalty, profit oil and tax each regime carries.`);
   w();
   w('The proof, per regime, at the two ends of the swept range:');
   w();
   {
-    w('| regime | cost recovered at x0.8 | at x1.4 | profit oil at x0.8 | at x1.4 | tax at x0.8 | at x1.4 | capex loss (derived) |');
+    w(`| regime | cost recovered at x${LOS} | at x${HIS} | profit oil at x${LOS} | at x${HIS} | tax at x${LOS} | at x${HIS} | capex loss (derived) |`);
     w('| --- | --- | --- | --- | --- | --- | --- | --- |');
     for (const g of c.regimes) {
-      const a = totals(cf(g, c.project, 0.8, 1)), b = totals(cf(g, c.project, 1.4, 1));
-      const loss = E.calculateNPV(cf(g, c.project, 0.8, 1), c.project.discountRate) - E.calculateNPV(cf(g, c.project, 1.4, 1), c.project.discountRate);
+      const a = totals(cf(g, c.project, LO, 1)), b = totals(cf(g, c.project, HI, 1));
+      if (a.rec !== b.rec || a.po !== b.po || a.tax !== b.tax) throw new Error(`Section 22: ${g.name} moves below the capex line`);
+      const loss = E.calculateNPV(cf(g, c.project, LO, 1), c.project.discountRate) - E.calculateNPV(cf(g, c.project, HI, 1), c.project.discountRate);
+      const swept = res.sensitivityData.capex.data.find((d) => d.regimeId === g.id).values;
+      if (Math.abs(loss - (swept[0] - swept[swept.length - 1])) > 1e-6) throw new Error(`Section 22: ${g.name} proof loss differs from the swept loss`);
       w(`| ${g.name} | ${m(a.rec)} | ${m(b.rec)} | ${m(a.po)} | ${m(b.po)} | ${m(a.tax)} | ${m(b.tax)} | ${r(loss)} |`);
     }
     w();
   }
-  w('READ THE PROFIT OIL COLUMN BEFORE BELIEVING ANY STORY ABOUT IT. It is nought for the three templates that recover cost at 100 percent and it is very much not nought for the other three. Angola carries 3500.5969 of profit oil and 612.6045 of tax on this case, and its royalty is flat 0 percent, so a claim that no profit oil and no tax exist anywhere here is refuted by the government take the same comparison reports. What is true, and is the whole of it, is that none of those columns MOVES across the sweep.');
+  { const ang = totals(cf(c.regimes.find((x) => x.name === 'Angola - Deepwater PSC'), c.project, LO, 1)); w(`READ THE PROFIT OIL COLUMN BEFORE BELIEVING ANY STORY ABOUT IT. It is nought for the three templates that recover cost at 100 percent and it is very much not nought for the other three. Angola carries ${m(ang.po)} of profit oil and ${m(ang.tax)} of tax on this case, and its royalty is flat 0 percent, so a claim that no profit oil and no tax exist anywhere here is refuted by the government take the same comparison reports. What is true, and is the whole of it, is that none of those columns MOVES across the sweep.`); }
   w();
-  w('The arithmetic closes exactly. The capex difference between the two multipliers is 0.6 of 20000, which is 12000 million USD, spent in year 1 and discounted one year at the project\'s 10 percent rate: 12000 divided by 1.1 is 10909.090909, which is every one of the six losses.');
+  {
+    const cap = c.project.costs.capex.drilling + c.project.costs.capex.facilities + c.project.costs.capex.subsea;
+    const g0 = c.regimes[0];
+    const diff = cf(g0, c.project, HI, 1)[0].capex - cf(g0, c.project, LO, 1)[0].capex;
+    const frac = HI - LO, disc = 1 + c.project.discountRate / 100, loss = diff / disc;
+    if (Math.abs(diff - frac * cap) > 1e-6) throw new Error('Section 22: capex difference is not the multiplier span of the capex');
+    w(`The arithmetic closes exactly. The capex difference between the two multipliers, ${LOS} and ${HIS}, is ${frac.toFixed(1)} of ${cap}, which is ${Math.round(diff)} million USD, spent in year 1 and discounted one year at the project's ${c.project.discountRate} percent rate: ${Math.round(diff)} divided by ${disc} is ${r(loss)}, and every one of the six losses in both tables above prints as that figure.`);
+  }
   w();
   w('The price verdict on the same case declines to rank: every point of every series is null and flagged undefined (Section 26), so there is no climb to compare. An earlier build subtracted the zero it returned there and named a most progressive regime on a climb of 0.0 percentage points.');
   w();
@@ -912,7 +1012,7 @@ w();
   for (const i of res.insights) w(`- \`${i.key}\` / ${i.label}: ${i.text}`);
   w();
 }
-w('The PIA royalty tier changes inside ODIDI\'s life, which is the one thing none of the published template cases do, so the royalty column in Section 12 and the R factor column here move for two different reasons in the same field.');
+w('Under the PIA template ODIDI\'s royalty by price starts inside the life of the field, in the year the deck lifts the oil price above that year\'s low benchmark, which none of the published template cases shows; Section 12 prints it year by year.');
 w();
 
 // -------------------------------------------------------------- Section 26
@@ -931,6 +1031,9 @@ w();
 {
   const c = CMP['cmp_never_recovers'];
   const res = await E.runFiscalComparison({ projectInputs: c.project, regimes: c.regimes });
+  const MULTS = E.CAPEX_SWEEP_MULTIPLIERS, LO = MULTS[0], HI = MULTS[MULTS.length - 1];
+  const LOS = LO.toFixed(1), HIS = HI.toFixed(1);
+  if (res.sensitivityData.capex.labels[0] !== LOS || res.sensitivityData.capex.labels.at(-1) !== HIS) throw new Error('Section 22: sweep labels do not match CAPEX_SWEEP_MULTIPLIERS');
   w(`**cmp_never_recovers**: ${c.note} Capex is ${m(c.project.costs.capex.drilling)} drilling plus ${m(c.project.costs.capex.facilities)} facilities plus ${m(c.project.costs.capex.subsea)} subsea $MM. The production is the TEST PROJECT's, ${c.project.production.oil.initial} bbl/d of oil declining ${c.project.production.oil.decline} percent with no gas and no NGL, not the default project's three streams.`);
   w();
   w('| regime | total government take | total contractor NCF | the two added (derived) | value and state the sweep returns, at every one of the nine prices |');
@@ -972,9 +1075,9 @@ w('The rule a reader needs. Before believing a point on this curve, read its sta
 w();
 
 // -------------------------------------------------------------- Section 27
-w('# SECTION 27: The payback verdict restates the NPV ranking whenever payback ties (owned by Expert m04)');
+w('# SECTION 27: The payback verdict ranks an integer column, where ties are the normal case (owned by Expert m04)');
 w();
-w('Payback in this engine is an INTEGER year, the first year cumulative contractor net cash flow is above zero. Integers tie. On the Designer default project with all six templates loaded, four of the six pay back in the same year, and the verdict names one of them as though it had won.');
+w('Payback in this engine is an INTEGER year, the first year cumulative contractor net cash flow is above zero. Integers tie. On the Designer default project with all six templates loaded, most of the six pay back in the same year.');
 w();
 {
   const c = CMP['cmp_all_templates_default_project'];
@@ -986,12 +1089,15 @@ w();
   const pb = res.insights.find((i) => i.key === 'payback');
   w(`The verdict the engine returns: ${pb.text}`);
   w();
+  const byYear = {}; res.summary.forEach((x) => { byYear[x.paybackPeriod] = (byYear[x.paybackPeriod] || 0) + 1; });
+  const ys = Object.keys(byYear).map(Number).sort((a, b) => a - b);
+  const words = ['none', 'one', 'two', 'three', 'four', 'five', 'six'];
+  w(`Read it against the table. ${ys.map((y, i) => `${i === 0 ? words[byYear[y]].replace(/^./, (ch) => ch.toUpperCase()) : words[byYear[y]]} regime${byYear[y] === 1 ? '' : 's'} pay${byYear[y] === 1 ? 's' : ''} back in year ${y}`).join(' and ')}, so "fastest capital recovery" has a ${words[byYear[ys[0]]]}-way tie at the top.`);
+  w();
 }
-w('Read it against the table. Four regimes pay back in year 3 and two in year 4, so "fastest capital recovery" has a four-way tie at the top and a two-way tie at the bottom. The regime the sentence names is the first of the four in summary order, and the summary is sorted by contractor NPV, so on any project where payback ties the payback verdict names WHICHEVER REGIME HAS THE HIGHEST NPV. It is the NPV ranking wearing a different label.');
+w('The verdict names EVERY regime tied at the fastest year, so a tie prints as a tie. The names inside a tie follow the summary order, which is contractor NPV descending; that order ranks nothing about payback, and a reader who takes the first name as the fastest is reading the NPV ranking under another label.');
 w();
-w('That is the exact claim `deriveInsights` was written to eliminate. The function exists because the Insights tab used to declare the top-NPV regime to also have the fastest payback, among three other conclusions nothing had computed. The payback verdict now genuinely reads the payback column, and it still lands on the top-NPV regime every time the column ties, because a strict less-than in a reduce keeps the first element it saw and the first element it saw is the NPV winner.');
-w();
-w('The capex and price verdicts have the same reduce and the same tie behaviour, and the golden records a case where the engine and the oracle name different winners on quantities that differ in the fifteenth figure. The payback verdict differs in one way that makes it worse rather than better: those two rank continuous quantities, where an exact tie is rare and a near-tie is the hazard, while THIS one ranks a small integer, where an exact tie is the normal case.');
+w('A payback verdict ranks a small integer, where an exact tie is the normal case. The capex and price verdicts rank continuous quantities, where a near tie is the hazard, and each names a leader only past a stated minimum lead (Sections 21 and 22). The government verdict is the one that still keeps the first of two exactly tied regimes in summary order (`insights_ties`, Section 22).');
 w();
 {
   const c = CMP['cmp_all_templates_test_project'];
@@ -1021,14 +1127,14 @@ w();
   const years = res.summary.map((x) => x.paybackPeriod).filter((y) => y !== null);
   const fastest = Math.min(...years);
   const tied = res.summary.filter((x) => x.paybackPeriod === fastest).map((x) => x.name);
-  w(`${tied.length} regimes pay back in year ${fastest} on ODIDI: ${tied.join(', ')}. The verdict names one of them.`);
+  w(`${tied.length} regimes pay back in year ${fastest} on ODIDI: ${tied.join(', ')}. The verdict names every one of them.`);
   w();
 }
-w('And notice the SECOND name in every one of these sentences. It is not the runner-up. The function picks the fastest, removes it, and then takes the MAXIMUM of what is left, so the second regime named is the SLOWEST of the rest. A sentence of the form "A pays back in year x, against year y for B" reads like a top two and is a top and a bottom, with everything else silently in between.');
+w('And notice the LAST name in every one of these sentences, the one after "against". It is not the runner-up. The function names the fastest year\'s regimes, sets them aside, and then takes the MAXIMUM of what is left, so the regime after "against" is the SLOWEST of the rest. A sentence of the form "A pays back in year x, against year y for B" reads like a top two and is a top and a bottom, with everything else silently in between. If two regimes tied at that slowest year, the strict greater-than would keep the first of them in summary order and name only that one.');
 w();
-w('The reading rule. A verdict that names a winner on an INTEGER quantity is only a ranking when you have checked the column for ties, and the column is in the summary table two centimetres away. Where it ties, the sentence is telling you about NPV. And the two regimes a payback sentence names are the extremes, never a ranking of two.');
+w('The reading rule. A verdict on an INTEGER quantity is a ranking only where the column does not tie, and the column is in the summary table two centimetres away. Read the names inside a tie as a list. And the regime after "against" is the slowest of the rest, never the runner-up.');
 w();
-w('One more thing to notice in the sentences above, and it is a copy defect rather than an arithmetic one. The engine formats money inside its verdict strings as `$1339.3MM`. Every other number in this course is written as millions of USD in words, because the owner copy rule forbids the dollar sign and the MM unit in user-facing text. A panel that prints an insight sentence verbatim, which is the only honest way to show what the engine said, puts that formatting on the screen. Recorded in the wave FINDINGS.md as EC2-6.');
+w('One more thing to notice in the sentences above. The engine writes money inside its verdict strings as millions of USD in words, one decimal with thousands separators, which is how every other number in this course is written, so a panel prints an insight sentence verbatim, the only honest way to show what the engine said.');
 w();
 
 w('# SECTION 28: Government take and government share of net revenue, the two named metrics (owned by Expert m01, m02 and m05)');

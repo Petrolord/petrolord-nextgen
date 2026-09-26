@@ -1,0 +1,131 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# EC1 cashflow, intermediate tier, Why Time Matters. Reconstructed from the served rows (the applied
+# migrations replayed on a local scratch database) with the EC7 PIA re-cut applied;
+# written by tools/course-waves/cashflow/pia-recut/build.py. Edit the rows there, then re-run it.
+
+q(2,
+ "AKATA's 2029 row is a net cash flow of minus 121123680.00 USD and its discounted cash flow is also minus 121123680.00. Why was the row not discounted?",
+ "The exponent is the number of years between the row and the valuation year, and 2029 is the valuation year, so the exponent is zero.",
+ ["Capex is never discounted, because it is spent at sanction and the factor applies only to the revenue that follows it.",
+  "Negative flows are carried at face value so that the cost of the project is not understated by the discount.",
+  "The engine starts discounting from the first production year, 2030, and treats the sanction year as time zero for prices only."],
+ "The 2030 row, one year out, is divided by 1.1 once, 31746007.20 to 28860006.55; the base year row is divided by nothing.")
+
+q(0,
+ "The 2030 row of AKATA keeps 28860006.55 of its 31746007.20, while the 2035 row keeps only 17161022.43 of 30401798.05. What makes the 2035 row lose the larger share?",
+ "It is six divisions by 1.1 from 2029 rather than one.",
+ ["The 2035 flow is smaller, and the factor takes a larger share of a smaller row.",
+  "The oil price escalator of 2 percent has lifted the 2035 price to 92.345318, so more nominal value is removed.",
+  "The rate rises with each year of the horizon to price the growing risk of the tail."],
+ "Each row loses a larger share than the one before it because it is one more division further from 2029; the 2035 row is a little over half of itself.")
+
+q(3,
+ "AKATA's two capex years sum to 255000000.00 USD and their present value at the applied rate is 250909090.91. Why is the gap so small?",
+ "The 2029 spend of 210000000.00 sits in the valuation year and is not discounted; only the 45000000.00 of 2030 shrinks.",
+ ["The capex escalator is set to zero, and a row that does not escalate is exempt from the discount factor as well.",
+  "Capex is discounted at the applied real rate of 6.796117 percent while revenue is discounted at the nominal 10.000000, so it is treated more gently.",
+  "The engine nets each year's depreciation of 25500000.00 against the capex before discounting, which leaves little to discount."],
+ "Spend arrives early and is barely discounted; revenue arrives late and is discounted hard, which is why 141637829.18 undiscounted becomes an NPV of 72534830.66.")
+
+q(1,
+ "jv_analytic_decision_kpis has a 2030 flow of minus 12500000.00 and a 2031 flow of 37500000.00, base year 2030, 10 percent, nominal, end-year. What is its NPV?",
+ "21590909.09, the first row whole plus the second divided by 1.1 once, 34090909.09.",
+ ["25000000.00, the plain sum of the rows, since two years is too short to discount.",
+  "20586124.09, both rows divided by the square root of 1.1 because each sits half a year from the base date.",
+  "23750000.00, because the 2030 flow is a year older than the 2031 flow and is carried forward by 1.1 to meet it."],
+ "The undiscounted total is 25000000.00; the discount touches the 2031 row alone, 37500000.00 to 34090909.09.")
+
+q(1,
+ "What is discount_rate_pct to the engine?",
+ "An input: the owner's statement of what a year's delay costs, or what the same capital could earn elsewhere, applied as a nominal rate.",
+ ["A result the ledger reveals, the way the IRR of 29.2361 percent is revealed, once the rows are known.",
+  "The inflation rate of 3 percent plus the price escalators, which is how a nominal rate is assembled from its parts.",
+  "The rate at which the profile point equals the headline, a property the profile reveals once the rows are known, so that on AKATA the 10 percent point of 55805775.02 is the NPV."],
+ "AKATA carries 10, and nothing in its production, prices or fiscal terms produces that number.")
+
+q(3,
+ "AKATA's profile row labelled 10 percent reads 55805775.02, and AKATA's discount rate is 10. Why is the headline NPV 72534830.66 instead?",
+ "The profile is evaluated on the real flows, where the configured 10 percent nominal is 6.796117 percent real, and the headline sits at that rate.",
+ ["The headline is evaluated under mid-year discounting and the profile under end-year, and the half-year shift accounts for the difference.",
+  "The headline includes the undiscounted 2029 row of minus 121123680.00, which the profile leaves out because it is the valuation year.",
+  "The profile is evaluated on the nominal flows and the headline on the real ones, so the profile carries three percent of inflation the headline has already removed."],
+ "A profile point labelled with your discount rate is your NPV only when the basis is nominal.")
+
+q(0,
+ "From 0 to 5 percent AKATA's profile falls from 117362408.71 to 83023565.60; from 15 to 20 it falls from 33900281.71 to 16026160.80. Why do the removals shrink as the rate rises?",
+ "The late years that a high rate punishes have already been reduced to little by the time the rate is high.",
+ ["The profile is sampled at uneven steps, 0, 5, 8, 10, 12, 15 and 20, and the later steps are simply closer together.",
+  "The escalators of 2 and 3 percent offset more of the discount as the rate rises.",
+  "The rate is applied to the real flows, which are smaller than the nominal ones, so each step has less to remove."],
+ "AKATA is still positive at 20 percent, 16026160.80, which is why its IRR sits beyond the table at 29.2361 percent.")
+
+q(2,
+ "With inflation and every escalator set to zero, AKATA's NPV is 65055328.97 on either basis. What does that say about the configured 72534830.66?",
+ "The price and cost escalators lift the configured answer; the inflation rate, which the discount rate refuses to carry alone, does not.",
+ ["The 3 percent inflation lifts the answer by raising the revenue rows, and removing it exposes the flat prices underneath.",
+  "The real basis adds value by deflating the capex of 255000000.00 in 2029 money, and the zero run loses that.",
+  "The difference is the Fisher conversion of 10.000000 to 6.796117 percent, which the zero run no longer performs."],
+ "Set only inflation to zero and NPV stays 72534830.66; it is the escalators that move the rows, and the deflator does not.")
+
+q(3,
+ "Under mid_year_discounting the 2030 row goes from minus 12500000.00 to minus 11918282.37, the 2031 row to 32504406.45, and the NPV is 20586124.09 against the end-year 21590909.09. What is the relation between the two NPVs?",
+ "The mid-year NPV is the end-year NPV divided by the square root of 1.1, because every exponent moved by half.",
+ ["Mid-year shifts only the 2031 row by half a year, so the 2030 row stays at minus 12500000.00 and the NPV falls by the change in one row.",
+  "The mid-year NPV is the end-year NPV divided by 1.1 once more, a full extra year on every row, which is why it is lower.",
+  "The difference is the fiscal cascade: royalty of 20000000.00 is charged mid-year and tax of 32500000.00 at year end, so the timing of the two moves the sum."],
+ "Every row, the base year row included, was scaled by one factor, so the sum was scaled by the same factor.")
+
+q(1,
+ "AKATA reads 72534830.66 end-year and 69159247.46 mid-year on the nominal basis, but 72534830.66 and 70188970.32 on the real basis. Why do the two conventions differ less on the real basis?",
+ "Half a year at 6.796117 percent is a smaller division than half a year at 10 percent.",
+ ["The real flows are smaller, 117362408.71 against 141637829.18 in total, so there is less for the half-year shift to remove.",
+  "The real basis shifts only the years after 2029, leaving the capex row whole.",
+  "The real basis deflates the half-year shift by 3 percent of inflation on top of the rate, and the two shifts partly cancel."],
+ "The nominal gap runs 72534830.66 to 69159247.46; the real gap only 72534830.66 to 70188970.32.")
+
+q(0,
+ "Which readings of AKATA does mid-year discounting leave unchanged?",
+ "The IRR of 29.2361 percent, the discounted payback of 3.961607 years and the DPI, because a uniform scaling of every discounted row cannot move a zero crossing or a ratio.",
+ ["The NPV, because the half-year shift applies to the capex rows and to the revenue rows alike, and a change that scales the negative rows and the positive rows by the same factor cancels in the sum.",
+  "The undiscounted total of 141637829.18, which mid-year raises by half a year of growth at the applied rate.",
+  "The applied rate, which becomes the square root of 1.1 under mid-year on both bases."],
+ "The published mid-year case reports a DPI of 0.431818 and a discounted take of 82.2761 percent, identical to its end-year twin.")
+
+q(2,
+ "A reader hand-checks AKATA's mid-year NPV by shifting the 2030 to 2035 rows by half a year and leaving the 2029 row whole at minus 121123680.00. What happens?",
+ "The check will not reconcile: the engine discounts the valuation year row too, to minus 115486897.55.",
+ ["The check reconciles, because the base year row carries an exponent of zero under either convention and cannot move.",
+  "The check lands on 70188970.32, because leaving the capex row whole is what the real basis does under mid-year.",
+  "The check produces a smaller gap than 72534830.66 to 69159247.46, because the capex left at full size pulls the sum down."],
+ "Discounting the 2029 capex by half a year makes it cheaper in present value and partly offsets the shrinking of the revenue rows, so the true gap is smaller than the reader computes.")
+
+q(0,
+ "One project is run end-year and reports 72534830.66; another is run mid-year and reports 69159247.46. Can they be ranked on those NPVs?",
+ "No. Between the two figures there is no information about either field, only a convention, and both must be run under the same one first.",
+ ["Yes, because mid-year is the more accurate convention and its lower figure is the conservative one to rank on.",
+  "Yes, because the IRR of 29.2361 percent and the discounted payback of 3.961607 years are the same under both conventions, which shows that the NPVs are comparable too.",
+  "Yes, provided both are on the nominal basis, since basis is the only setting that changes NPV."],
+ "The IRR and the discounted payback of 3.961607 years are unmoved by the convention; the NPV is not, so it cannot cross a convention boundary.")
+
+q(3,
+ "What third timing choice does discounting_convention offer beside end_year and mid_year?",
+ "None.",
+ ["A start-of-year convention for capex-heavy fields, so that the 2029 spend of 210000000.00 is left undiscounted while revenue is shifted.",
+  "Quarterly timing, applied when a year's rows carry more than one entry per year.",
+  "A split convention with capex at end-year and revenue at mid-year in the same year."],
+ "Every flow in a row is treated as arriving at one instant, so a January capex and a December capex in 2029 are worth the same.")
+
+q(1,
+ "Which of AKATA's two conventions, end-year or mid-year, is the true one?",
+ "The engine cannot say: the rows are years, nothing records when within a year the cash moved, and choosing mid-year is a claim about the field that the engine will not check.",
+ ["Mid-year, because the published mid_year_discounting case is the golden the engine was validated against.",
+  "End-year, because it gives the higher NPV of 72534830.66 and the engine reports the higher of the two readings.",
+  "The engine tests both and keeps the one whose discounted payback matches the undiscounted 3.461632 years."],
+ "Where none is given it discounts end-year, and a default is still a choice the reader has to be told.")
+
+emit(Q, '/root/wt-ec7-recut/tools/course-banks/cashflow/intermediate/ec1i_m01.json', expect_n=15)
+finish()

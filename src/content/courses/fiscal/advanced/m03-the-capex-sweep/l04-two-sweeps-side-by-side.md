@@ -16,12 +16,12 @@ On the default project the two sweeps put the six templates in nearly the same o
 | --- | --- | --- |
 | Brazil - Concession | 20.5076 | 100.7185 |
 | Angola - Deepwater PSC | 19.6873 | 88.6123 |
-| Nigeria - PIA (2021) | 10.1420 | 118.3685 |
 | Ghana - Deepwater | 7.8960 | 109.8425 |
+| Nigeria - PIA (2021) | -0.0068 | 243.6525 |
 | Generic Royalty/Tax | -10.1897 | 244.0782 |
 | USA - Gulf of Mexico | -17.2498 | 267.7301 |
 
-That agreement is not a coincidence. A regime that takes a rising share of the upside is a regime that absorbs a share of the downside, so the contractor's NPV under it moves less when capital costs rise. The two steepest climbers give up the least, 100.7185 and 88.6123 million USD, and the two regressive templates give up the most, 244.0782 and 267.7301. The order is not identical, though: Ghana - Deepwater sits fourth by climb at 7.8960 and third by loss at 109.8425, so the two rankings agree in tendency and not row for row.
+That agreement is not a coincidence. A regime that takes a rising share of the upside is a regime that absorbs a share of the downside, so the contractor's NPV under it moves less when capital costs rise. The two steepest climbers give up the least, 100.7185 and 88.6123 million USD, and the three templates whose climb is negative give up the most, 243.6525, 244.0782 and 267.7301. The order is not identical, though: Brazil - Concession leads by climb and Angola - Deepwater PSC by loss, so the two rankings agree in tendency and swap their top two rows.
 
 ## Where they disagree
 
