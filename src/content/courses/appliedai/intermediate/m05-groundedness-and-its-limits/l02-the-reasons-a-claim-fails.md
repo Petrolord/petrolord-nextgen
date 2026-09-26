@@ -33,7 +33,7 @@ A fabrication, on Q07, "volumetric STOIIP estimate for the Ekene Sand":
 
 > the number 12.1 is not in the cited passage EKD-008; it appears in no passage of the corpus
 
-The reference is 12,139,208 stb. The answer said 12.1 million stb, a planted unit change. The value is a fair rounding, and the check still cannot support it: it compares numbers, and it does not convert units.
+The reference gives the volume in full, in stb. The answer said 12.1 million stb, a planted unit change. The value is a fair rounding, and the check still cannot support it: it compares numbers, and it does not convert units.
 
 ## The whole of system B
 
