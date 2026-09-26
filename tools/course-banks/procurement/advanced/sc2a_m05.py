@@ -87,7 +87,7 @@ x("Kiiver and Kodym (2015) say that under linear conditions bid B, priced 75 bet
  "The engine's linear method scores Sc = 100 x (Cmax - C) / (Cmax - Cmin), so A scores 100.000000, B 50.000000 and C 0.000000. The 75 in the text is a straight line drawn between A's 100 and C's 50, which no engine method reproduces, and the course does not claim one. 66.666667 is B's lowest-ratio score, which Table 1 prints as 67.")
 
 # 10
-x("At a technical weight of 0.7, the engine prints the commercial weight in its basis as 0.30000000000000004. What does that figure show?",
+x("At a technical weight of 0.7, the combined-score basis prints the commercial weight with digits running on well past 0.3, out to seventeen significant figures. What does that show?",
  "The engine computes 1 - 0.7 in binary floating point and prints the shortest decimal of the double it holds",
  ["A defect in the basis, which should print 0.3 since the two weights sum to one",
   "A stated engine convention that shifts weight toward price by a tiny margin",
