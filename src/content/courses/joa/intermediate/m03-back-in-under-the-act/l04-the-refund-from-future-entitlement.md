@@ -22,7 +22,7 @@ The share of entitlement the refund may take each year is a stated input; the Ek
 
 ## The Ekene refund, year by year
 
-NOC owes 98000000.000000, received by EKO 49000000.000000, PA 30625000.000000 and PB 18375000.000000 in proportion to the interest each gave up. It pays from half its new share of 40.000000 percent:
+NOC owes 98000000.000000, received by EKO 49000000.000000, PA 30625000.000000 and PB 18375000.000000 in proportion to the participating interest each gave up. It pays from half its new share of 40.000000 percent:
 
 | year | due | NOC's share | available | recovered | closing | NOC keeps |
 | --- | --- | --- | --- | --- | --- | --- |

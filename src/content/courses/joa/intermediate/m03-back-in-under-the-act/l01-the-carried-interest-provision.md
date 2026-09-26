@@ -20,7 +20,7 @@ The Government may participate up to a stated ceiling:
 
 > "(a) the Government through the NNPC Limited has the right to participate up to 60% in the contract or identified as a bid parameter ;" (PIA s.85(4)(a))
 
-The engine carries two figures from the Act: a ceiling of 60 percent on the target interest (s.85(4)(a)), and development and production as the refundable cost kinds (s.85(4)(c)). It applies them only when a call states the basis "pia-s85-4". Under that basis a carry is recovered with no uplift, and the engine's basis says why:
+The engine carries two figures from the Act: a ceiling of 60 percent on the target participating interest (s.85(4)(a)), and development and production as the refundable cost kinds (s.85(4)(c)). It applies them only when a call states the basis "pia-s85-4". Under that basis a carry is recovered with no uplift, and the engine's basis says why:
 
 > PIA s.85(4): the Government refunds its proportionate share of the unrecovered proven costs, with no bonuses, penalties, interest, premium or markups (s.85(4)(c)), in cash or in kind from future production (s.85(4)(f))
 

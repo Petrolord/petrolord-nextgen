@@ -26,7 +26,7 @@ The engine counts whole months from the due date, compounds each at the annual r
 | default-ekene-monthly-compound-kenya | monthly-compound | 1 | 14 | 20210.781250 |
 | default-monthly-compound-whole-months | monthly-compound | 2 | 0 | 27594.531250 |
 
-On this default, compounding gives less than simple interest on a 360-day year, because the whole month counts as one twelfth of a year where the simple method counts its 31 days. Neither method is more correct: the contract states one.
+On this default, compounding gives less than simple default interest on a 360-day year, because the whole month counts as one twelfth of a year where the simple method counts its 31 days. Neither method is more correct: the contract states one.
 
 ## The grace, at its edges
 
@@ -42,7 +42,7 @@ That is the engine's stated reading, beside the text it reads. Three golden inpu
 | default-grace-exceeded | 72 hours | 2027-03-05 | 4 | false | 1833.333333 |
 | default-grace-fractional-hours | 71.5 hours | 2027-03-04 | 3 | false | 1375.000000 |
 
-A cure at exactly 72 hours is within a grace of 72 hours; one day later, all 4 days carry interest from the due date. A grace of 71.5 hours is exceeded by the same 3 days.
+A cure at exactly 72 hours is within a grace of 72 hours; one day later, all 4 days carry default interest from the due date. A grace of 71.5 hours is exceeded by the same 3 days.
 
 A contract with no grace states 0, and a call that states nothing is refused:
 

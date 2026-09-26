@@ -6,7 +6,7 @@ A back-in raises one party's participating interest to a stated target after the
 
 > "(b) the right to participate shall be from any time upon the granting of the licence or lease ;" (PIA s.85(4)(b))
 
-The interest the back-in party gains has to come from the others. This lesson works out how much each gives up.
+The participating interest the back-in party gains has to come from the others. This lesson works out how much each gives up.
 
 ## The rule
 
@@ -14,11 +14,11 @@ The engine's basis on the Ekene back-in, verbatim:
 
 > new interest of another party = old x (100 - target) / (100 - current); refund = (target - current) / 100 x refundable costs, received in proportion to the interest given up
 
-Every other party keeps the same fraction of its interest, so their interests stay in the same proportion to each other. Only the back-in party's target and the parties' current interests enter the rule; the target is a stated input, and under the Act's basis it is capped.
+Every other party keeps the same fraction of its participating interest, so their participating interests stay in the same proportion to each other. Only the back-in party's target and the parties' current participating interests enter the rule; the target is a stated input, and under the Act's basis it is capped.
 
 ## The Ekene back-in to 40 percent
 
-NOC holds 20.000000 and backs in to a stated target of 40.000000. Every other party keeps (100 - 40) / (100 - 20) of its interest:
+NOC holds 20.000000 and backs in to a stated target of 40.000000. Every other party keeps (100 - 40) / (100 - 20) of its participating interest:
 
 | party | before | after | interest given up |
 | --- | --- | --- | --- |
@@ -31,15 +31,15 @@ The engine's reason opens with the same fraction:
 
 > NOC backs in from 20% to 40%: the others keep 60 / 80 of their interests; refund 20% x refundable costs 490000000 = 98000000 (156000000 excluded)
 
-The refund in that reason is the subject of the next two lessons. Each party receives it in proportion to the interest it gives up, which is why that column is printed.
+The refund in that reason is taken up next. Each party receives it in proportion to the participating interest it gives up, which is why that column is printed.
 
 ## At the ceiling, and beyond it
 
-A target of 60.000000, the Act's ceiling, is accepted. The others then keep 40 / 80 of their interests: EKO 20.000000, PA 12.500000 and PB 7.500000. One point more is refused under the Act's basis:
+A target of 60.000000, the Act's ceiling, is accepted. The others then keep 40 / 80 of their participating interests: EKO 20.000000, PA 12.500000 and PB 7.500000. One point more is refused under the Act's basis:
 
 > targetPct must be at most 60 under basis "pia-s85-4" (the right to participate up to 60%, PIA s.85(4)(a)); got 61
 
-A back-in must also raise the interest. A target equal to the current interest is refused:
+A back-in must also raise the participating interest. A target equal to the current interest is refused:
 
 > targetPct must be above the back-in party's current interest 20; got 20
 

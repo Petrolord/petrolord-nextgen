@@ -41,7 +41,7 @@ A cure on the trigger date is in time; a default still open the day after it is 
 
 ## When forfeiture is available
 
-On the golden input left open to 2027-07-01, the forfeiture right is triggered, and the engine reports what the interests would be if PB's assignment were demanded: EKO 47.058824, PA 29.411765 and NOC 23.529412, pro rata to their participating interests. It reports the compensation and computes none:
+On the golden input left open to 2027-07-01, the forfeiture right is triggered, and the engine reports what the participating interests would be if PB's assignment were demanded: EKO 47.058824, PA 29.411765 and NOC 23.529412, pro rata to their participating interests. It reports the compensation and computes none:
 
 > the cover by acquiring the defaulting party's share of petroleum, and the compensation on an assignment, are reported only
 
