@@ -353,6 +353,12 @@ BRIEFS.forEach((b) => {
   // swept all the same, with the graded KEYS removed, because the keys name
   // the capstone fields by design.
   if (b === 'wave.json') FIELDS.forEach(([, key]) => { text = text.split(key).join('KEY'); });
+  // wave.json pins md5 and sha256 digests of every gate; a hex digest is an
+  // address, and its digit runs are not capstone numbers.
+  if (b === 'wave.json') text = text.replace(/\b[0-9a-f]{12,64}\b/g, 'HEXDIGEST');
+  // wave.json also pins every gate's md5 and the files' sha256, hexadecimal
+  // hashes whose digit runs are not numbers; they are blanked by shape.
+  if (b === 'wave.json') text = text.replace(/\b[0-9a-f]{32}\b|\b[0-9a-f]{64}\b/g, 'HASH');
   count('10 briefs');
   briefsRead += 1;
   sweepText(b, text, -1);
