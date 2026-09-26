@@ -22,7 +22,7 @@ x("On default-ekene-uncured PB's default is still open past the forfeiture trigg
  ["Nothing beyond a note that the default is open, since an assignment has to be agreed first",
   "A compensation of 0.000000, since the Kenya model vests a forfeited share with no payment at all to the defaulter",
   "The book value less PB's unpaid contributions, which it computes as the ceiling Art. 9.3 sets on payment"],
- "The engine's reason ends: if the assignment of PB is demanded, the interest is apportioned pro rata: EKO 47.05882352941177%, PA 29.41176470588235%, NOC 23.529411764705884%; the compensation (at most the book value less unpaid contributions) is not computed. It computes no book value and no payment under either text.")
+ "The engine's reason ends: \"if the assignment of PB is demanded, the interest is apportioned pro rata: EKO 47.05882352941177%, PA 29.41176470588235%, NOC 23.529411764705884%; the compensation (at most the book value less unpaid contributions) is not computed\". It computes no book value and no payment under either text.")
 
 # 2
 x("Norway JOA Art. 9.3 lets the compensation on an assignment be agreed up to the book value of the party's share of the investment; Kenya Model PSC 2015 Art. 6.10 vests a forfeited share without payment of compensation. Where does the engine's work stop under either text?",
