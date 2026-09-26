@@ -8,7 +8,7 @@ A loss year pays no tax and banks the loss. The bank is a pool per tax base, and
 
 The published jv_loss_carryforward case spends 50000000.00 of capex in 2030 with no production. Depreciation of 5000000.00 is charged against no revenue, so taxable income is -5000000.00, tax is 0.00 and loss_carryforward reads 5000000.00. In 2031 the field sells 1000000.00 bbl at 100.000000 USD, pays royalty of 20000000.00 and opex of 10000000.00, takes another 5000000.00 of depreciation and reports taxable income of 65000000.00.
 
-The tax is 30000000.00, not 32500000.00. The pool is applied after the taxable income column: loss_offset_used reads 5000000.00, loss_carryforward falls to 0.00, and 50 percent is charged on the remainder. Net cash flow is 40000000.00, NPV -13636363.64, IRR -20.0000 percent.
+The tax is 30000000.00, where 50 percent of that column would give 32500000.00. The pool is applied after the taxable income column: loss_offset_used reads 5000000.00, loss_carryforward falls to 0.00, and 50 percent is charged on the remainder. Net cash flow is 40000000.00, NPV -13636363.64, IRR -20.0000 percent.
 
 ## The clamp
 
