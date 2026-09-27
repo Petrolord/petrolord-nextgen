@@ -39,6 +39,39 @@ for q in served:
         'w3_differs': False, 'old_pre_w3': None,
         'old': old, 'new': new,
     })
+# The one capstone change (lead decision 2: no repair history in learner text): the
+# Expert dataset line loses "repaired". Prompt and fields do not move; W3 appended one
+# sentence to the prompt, so the guard carries both prompt forms (md5s cross-checked
+# against the literals 20261026_w3_decision.sql guards on).
+import hashlib, re
+SERVED_CAPS = os.path.join(REPO, 'docs/ec45-recut/served/capstones.json')
+W3_FILE = os.path.join(REPO, 'migrations/20261026_w3_decision.sql')
+W3_APPENDED = (' Read the figures in the Decision Tree Builder and the Decision Studio with their Full precision switch '
+               'on (at the top of each page): they print them to the precision this capstone grades, with no digit grouping.')
+CAP_OLD = 'the ABALAMA tree, lottery and surveys, read through Decision Studio and the repaired VOI Analyzer'
+CAP_NEW = 'the ABALAMA tree, lottery and surveys, read through Decision Studio and the VOI Analyzer'
+cap = next(c for c in json.load(open(SERVED_CAPS, encoding='utf-8')) if c['app_slug'] == 'decision' and c['tier'] == 'advanced')
+if cap['dataset'] != CAP_OLD:
+    sys.exit('REFUSED: the served decision Expert dataset is not the text this edit replaces')
+if not cap['prompt'].endswith(W3_APPENDED):
+    sys.exit('REFUSED: the served decision Expert prompt does not carry the W3 sentence')
+md5 = lambda t: hashlib.md5(t.encode('utf-8')).hexdigest()
+pre, post = cap['prompt'][:-len(W3_APPENDED)], cap['prompt']
+w3 = open(W3_FILE, encoding='utf-8').read().split('-- decision / advanced', 1)[1]
+w3_md5s = re.findall(r"md5\(prompt\) = '([0-9a-f]{32})'", w3)[:2]
+if w3_md5s != [md5(pre), md5(post)]:
+    sys.exit(f'REFUSED: the prompt forms do not match the W3 guard md5s {w3_md5s}')
+capstones = [{
+    'slug': 'decision', 'tier': 'advanced', 'cert_tier': cap['cert_tier'], 'title': cap['title'],
+    'changed': ['dataset'],
+    'why': 'Lead decision 2: "repaired" is repair history in learner text; the Expert dataset line loses it.',
+    'graded_fields': 'unchanged: fields (keys, labels, units, expected, tolerances, order) byte-identical; attempts and certificates stand as issued',
+    'old': {'dataset': CAP_OLD},
+    'new': {'dataset': CAP_NEW},
+    'fields': cap['fields'],
+    'prompt_unchanged': {'note': 'The prompt is not edited. W3 appended one sentence to it; the guard matches either form.',
+                         'pre_w3': pre, 'pre_w3_md5': md5(pre), 'post_w3': post, 'post_w3_md5': md5(post)},
+}]
 order = {'beginner': 0, 'intermediate': 1, 'advanced': 2}
 edits.sort(key=lambda e: (order[e['tier']], e['scope'] != 'module', e['module_key'] or '', e['ord']))
 doc = {
@@ -48,11 +81,12 @@ doc = {
                     '20261021b_b4_fix_decision and 20261026_w3_decision. old is the served row; W3 writes no question '
                     'row, so pre-W3 and post-W3 question text are identical (old_pre_w3 null, w3_differs false). '
                     'new is the emitted bank source JSON under tools/course-waves/ec45-recut/banks/decision. '
-                    'Every graded field and capstone is unchanged: capstones is empty.'),
+                    'Every graded field is unchanged; the one capstone edit is the Expert dataset line (no "repaired"), '
+                    'prompt and fields untouched.'),
     'counts': {t: sum(1 for e in edits if e['tier'] == t) for t in order},
     'keys_moved': sum(1 for e in edits if e['key_moved']),
     'questions': edits,
-    'capstones': [],
+    'capstones': capstones,
 }
 text = json.dumps(doc, indent=1, ensure_ascii=False) + '\n'
 if '--check' in sys.argv:

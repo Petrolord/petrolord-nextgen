@@ -1,5 +1,5 @@
 {
- "description": "EC4 decision question rows changed by the ec45 re-cut (engines fb5a363: reported ties, six-place thirds accepted, money refused by node label, one rounded net VOI, no repair history). Identity is slug/tier/scope/module_key/ord as served after 20260916_ec4_decision_*, 20261021b_b4_fix_decision and 20261026_w3_decision. old is the served row; W3 writes no question row, so pre-W3 and post-W3 question text are identical (old_pre_w3 null, w3_differs false). new is the emitted bank source JSON under tools/course-waves/ec45-recut/banks/decision. Every graded field and capstone is unchanged: capstones is empty.",
+ "description": "EC4 decision question rows changed by the ec45 re-cut (engines fb5a363: reported ties, six-place thirds accepted, money refused by node label, one rounded net VOI, no repair history). Identity is slug/tier/scope/module_key/ord as served after 20260916_ec4_decision_*, 20261021b_b4_fix_decision and 20261026_w3_decision. old is the served row; W3 writes no question row, so pre-W3 and post-W3 question text are identical (old_pre_w3 null, w3_differs false). new is the emitted bank source JSON under tools/course-waves/ec45-recut/banks/decision. Every graded field is unchanged; the one capstone edit is the Expert dataset line (no \"repaired\"), prompt and fields untouched.",
  "counts": {
   "beginner": 41,
   "intermediate": 35,
@@ -5074,5 +5074,74 @@
    }
   }
  ],
- "capstones": []
+ "capstones": [
+  {
+   "slug": "decision",
+   "tier": "advanced",
+   "cert_tier": "expert",
+   "title": "Judge the numbers",
+   "changed": [
+    "dataset"
+   ],
+   "why": "Lead decision 2: \"repaired\" is repair history in learner text; the Expert dataset line loses it.",
+   "graded_fields": "unchanged: fields (keys, labels, units, expected, tolerances, order) byte-identical; attempts and certificates stand as issued",
+   "old": {
+    "dataset": "the ABALAMA tree, lottery and surveys, read through Decision Studio and the repaired VOI Analyzer"
+   },
+   "new": {
+    "dataset": "the ABALAMA tree, lottery and surveys, read through Decision Studio and the VOI Analyzer"
+   },
+   "fields": [
+    {
+     "key": "ab_three_reading_evii_musd",
+     "tol": 0.001,
+     "unit": "million USD",
+     "label": "Gross EVII of the three-reading survey",
+     "expected": 25.44400000000003
+    },
+    {
+     "key": "ab_three_reading_mixed_emv_musd",
+     "tol": 0.001,
+     "unit": "million USD",
+     "label": "EMV of the best action after a Mixed reading of the three-reading survey",
+     "expected": 52.455084217092946
+    },
+    {
+     "key": "ab_mc_linked_root_emv_musd",
+     "tol": 0.001,
+     "unit": "million USD",
+     "label": "Root EMV of the prospect tree with the Large payoff linked to the Monte Carlo summary",
+     "expected": 72.10204
+    },
+    {
+     "key": "ab_mc_linked_decision_advantage_musd",
+     "tol": 0.001,
+     "unit": "million USD",
+     "label": "Decision advantage row of the decision brief for that linked tree",
+     "expected": 23.490040000000008
+    },
+    {
+     "key": "ab_analyzer_evpi_two_action_musd",
+     "tol": 0.001,
+     "unit": "million USD",
+     "label": "EVPI the VOI Analyzer reports for this lottery, unrounded (Drill or Do Not Drill)",
+     "expected": 54.960000000000036
+    },
+    {
+     "key": "ab_max_strong_chance_consistent_pct",
+     "tol": 0.001,
+     "unit": "percent",
+     "label": "Largest Strong indicator chance that passes the consistency check with the typed posteriors",
+     "expected": 39.058823529411754
+    }
+   ],
+   "prompt_unchanged": {
+    "note": "The prompt is not edited. W3 appended one sentence to it; the guard matches either form.",
+    "pre_w3": "The ABALAMA prospect, in the Decision Tree Builder (money in million USD, already discounted). Root decision with three branches. Drill, cost 47.3, leads to a chance node: Success probability 0.37, Marginal 0.21 paying 96.4, Dry hole 0.42 paying -31.8. After a Success there is a decision: Develop, cost 212.6, leads to a chance node Large probability 0.62 paying 684.2 and Small 0.38 paying 118.9; or Sell paying 268.4. Farm out, no cost, leads to a chance node with the same three probabilities paying 118.5, 22.7 and 0. Walk away pays 0. The ABALAMA lottery (money in million USD). Outcomes and prior probabilities: Large 0.18, Modest 0.34, Dry 0.48. Actions, payoffs in outcome order: Drill cost 62.5 paying 735 / 88 / -52; Farm out cost 0 paying 142 / 34.6 / 0; Relinquish cost 0 paying 0 / 0 / 0. A survey costing 11.4 reads Strong or Weak with likelihoods P(reading | outcome), in outcome order: Strong 0.78 / 0.46 / 0.17; Weak 0.22 / 0.54 / 0.83. A second survey design reads Strong, Mixed or Weak with likelihoods, in outcome order: Strong 0.66 / 0.31 / 0.09; Mixed 0.23 / 0.44 / 0.27; Weak 0.11 / 0.25 / 0.64; value it with no cost. The tree's Large development payoff is linked to a saved Monte Carlo run whose NPV summary is mean 760.5, P90 (low case) 455, P50 721.3, P10 (high case) 1098.4. In the VOI Analyzer the lottery is entered with Drill as the decision and the Strong and Weak readings as indicators whose outcome chances are typed, in percent and outcome order, Strong 37.1 / 41.3 / 21.6 and Weak 6.4 / 29.5 / 64.1; the Weak indicator chance is always 100 less the Strong indicator chance, and the stated outcome chances are the lottery's priors in percent. Read six values. Money to four decimals in million USD; the indicator chance in percent to four decimals.",
+    "pre_w3_md5": "9c474d00ca4f4b701116d084e1d22d06",
+    "post_w3": "The ABALAMA prospect, in the Decision Tree Builder (money in million USD, already discounted). Root decision with three branches. Drill, cost 47.3, leads to a chance node: Success probability 0.37, Marginal 0.21 paying 96.4, Dry hole 0.42 paying -31.8. After a Success there is a decision: Develop, cost 212.6, leads to a chance node Large probability 0.62 paying 684.2 and Small 0.38 paying 118.9; or Sell paying 268.4. Farm out, no cost, leads to a chance node with the same three probabilities paying 118.5, 22.7 and 0. Walk away pays 0. The ABALAMA lottery (money in million USD). Outcomes and prior probabilities: Large 0.18, Modest 0.34, Dry 0.48. Actions, payoffs in outcome order: Drill cost 62.5 paying 735 / 88 / -52; Farm out cost 0 paying 142 / 34.6 / 0; Relinquish cost 0 paying 0 / 0 / 0. A survey costing 11.4 reads Strong or Weak with likelihoods P(reading | outcome), in outcome order: Strong 0.78 / 0.46 / 0.17; Weak 0.22 / 0.54 / 0.83. A second survey design reads Strong, Mixed or Weak with likelihoods, in outcome order: Strong 0.66 / 0.31 / 0.09; Mixed 0.23 / 0.44 / 0.27; Weak 0.11 / 0.25 / 0.64; value it with no cost. The tree's Large development payoff is linked to a saved Monte Carlo run whose NPV summary is mean 760.5, P90 (low case) 455, P50 721.3, P10 (high case) 1098.4. In the VOI Analyzer the lottery is entered with Drill as the decision and the Strong and Weak readings as indicators whose outcome chances are typed, in percent and outcome order, Strong 37.1 / 41.3 / 21.6 and Weak 6.4 / 29.5 / 64.1; the Weak indicator chance is always 100 less the Strong indicator chance, and the stated outcome chances are the lottery's priors in percent. Read six values. Money to four decimals in million USD; the indicator chance in percent to four decimals. Read the figures in the Decision Tree Builder and the Decision Studio with their Full precision switch on (at the top of each page): they print them to the precision this capstone grades, with no digit grouping.",
+    "post_w3_md5": "9099fda79bc00d69eaef2d67fad28009"
+   }
+  }
+ ]
 }
