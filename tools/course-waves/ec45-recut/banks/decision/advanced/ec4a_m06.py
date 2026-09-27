@@ -9,18 +9,18 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 # ord 1
 q(3, "IRRI types both of the Analyzer's indicators as 20 / 80 percent against stated outcome chances of 30 / 70. What does an expert reading write down?",
  "EMV without information 15.00 and EVPI 63.00, with the value of information withheld because the inputs imply a success chance of 0.200000.",
- ["A value of information of -15.00, worked out by hand from the typed chances, since the repaired Analyzer no longer prints one.",
+ ["A value of information of -15.00, worked out by hand from the typed chances, since the Analyzer prints none.",
   "A value of information of 0.00, since a withheld value means the survey cannot change the decision and so is worth nothing.",
   "No numbers at all, because indicator chances that contradict the stated ones are refused before the Analyzer computes anything."],
- "The two surviving cards depend only on the stated outcome chances. -15.00 is the gross voi printed before the EC4-0 repair, history and below the zero floor that Bayes guarantees, and a withheld value is never written as 0.00.")
+ "The two surviving cards depend only on the stated outcome chances. -15.00 is what the typed chances give with nothing checking them against the stated prior, below the zero floor that Bayes guarantees, and a withheld value is never written as 0.00.")
 
 # ord 2
-q(1, "Before the EC4-0 repair, published certainPosteriorsWithheld printed a gross voi of 245.00. What made that number impossible on sight?",
- "It sat above the evpi card of 63.00, and no information can be worth more than perfect information.",
- ["It sat below the default study's genuine gross voi of 33.00, which any survey on those same payoffs must at least reach.",
-  "It turned negative once the survey cost of 10.0000 was taken off, and a net value below zero cannot come out of Bayes.",
+q(1, "Weighted as typed with nothing checking them, published certainPosteriorsWithheld gives a gross voi of 245.00. What makes that number impossible on sight?",
+ "It sits above the evpi card of 63.00, and no information can be worth more than perfect information.",
+ ["It sits below the default study's genuine gross voi of 33.00, which any survey on those same payoffs must at least reach.",
+  "It turns negative once the survey cost of 10.0000 is taken off, and a net value below zero cannot come out of Bayes.",
   "Its implied success chance of 1.000000 lies outside the range the Analyzer accepts, so the value rested on an out-of-range input."],
- "The inputs imply 1.000000 / 0.000000 against a stated 0.300000 / 0.700000, and the net value then was 235.00. The repaired Analyzer reports 15.00 and 63.00 and withholds the rest.")
+ "The inputs imply 1.000000 / 0.000000 against a stated 0.300000 / 0.700000, and the net value would be 235.00. The Analyzer reports 15.00 and 63.00 and withholds the rest.")
 
 # ord 3
 q(2, "The EKPAN lottery's survey is typed into the Analyzer with its posteriors rounded to 65 and 10 percent, which passes with a gross voi of 20.51. What happens when they are rounded to 65 and 8 percent?",
@@ -35,7 +35,7 @@ q(0, "The first step of an expert case adds every set of typed percents. The EKP
  "The refusal message, `Indicator chances sum to 110 percent, expected 100`, and the box at fault, since a refused case has no value.",
  ["EMV without information 75.75 and EVPI 52.00 with the value of information withheld, as for any typed inputs that fail a check.",
   "The values from the later steps with No bright spot corrected so that the pair sums to 100, since the message names the box that was mistyped.",
-  "The gross voi the Analyzer printed before the repair, since a refused case is valued the way the Analyzer valued it before EC4-0."],
+  "The gross voi the typed chances give with nothing checking them, since a refused case is valued by its unguarded arithmetic."],
  "The indicator chances sum to 110.000000 percent, so they are not a distribution. Withholding with 75.75 and 52.00 answers chances that sum correctly but contradict each other, and the message never says whether 64 or 46.000000 is the slip.")
 
 # ord 5
@@ -68,7 +68,7 @@ q(0, "On the EKPAN lottery an expert values the survey at a cost of 8.0000. Whic
  ["Gross 24.8250, net 16.8250, and a neutral price of 52.0000, since information stays worth buying until its cost reaches the EVPI ceiling.",
   "Gross 16.8250 and net 8.8250, since the survey cost is taken off once inside the information tree and again when the net is reported.",
   "Gross 100.5750 and net 92.5750, since the value of information is the expected value with the survey before the prior is subtracted."],
- "EVII is 100.5750 less 75.7500. The information tree's two root branches tie at a survey cost of 24.8250, where the engine keeps the acquisition as the branch listed first.")
+ "EVII is 100.5750 less 75.7500. The information tree's two root branches tie at a survey cost of 24.8250, where the engine reports the tie and marks the acquisition, listed first.")
 
 # ord 9
 q(0, "A case asks what the EKPAN lottery's survey is worth with all three of its actions available, and a candidate writes the Analyzer's gross voi of 19.84. What went wrong?",
@@ -103,20 +103,20 @@ q(1, "OKRIKA appraises at 87.0000 against selling now at 48.0000. Without the op
  "87.0000 less 15.6000 is 71.4000. Without the later choice the root would sell now at 48.0000, and with it the brief's Decision advantage for Appraise is 39.0000.")
 
 # ord 13
-q(3, "The story so far says thirds typed as 0.333 are refused while 0.3333333 rolls back to 60.0000. Where do thirds typed to six places, 0.333333, fall?",
- "Refused, because in binary their sum misses 1 by 0.0000010000000000287557 and the chance node check makes no allowance for binary rounding.",
+q(2, "The story so far says thirds typed as 0.333 are refused while 0.3333333 rolls back to 60.0000. Where do thirds typed to six places, 0.333333, fall?",
+ "Accepted just below 60.0000, because the engine weights the payoffs by 0.333333 each and reports the slightly smaller mean.",
  ["Accepted at 60.0000, because the message would print 0.999999, which is exactly 1e-6 short and inside a tolerance that includes its edge.",
-  "Accepted at 60.0000, because the EC4-0 repair gave the chance node sum the same 1e-12 allowance that holds the half percent boundary.",
-  "Accepted just below 60.0000, because the engine weights the payoffs by 0.333333 each and reports the slightly smaller mean."],
- "Six places and fewer are refused and seven land inside 1e-6. The 1e-12 allowance belongs to the implied-priors check alone; adding one here is an open owner decision (finding EC4-8).")
+  "Accepted at 60.0000, because the engine rescales an accepted sum to 1 before it weights the payoffs of the node.",
+  "Refused, because in binary their sum misses 1 by a hair above 1e-6 and the chance node check makes no allowance for binary rounding."],
+ "The sum test is |sum - 1| at most 1e-6 plus a 1e-12 allowance and includes its edge, so six places pass and are weighted as typed: 0.333333 x (30 + 60 + 90) = 59.9999. Five places and fewer are refused, and seven give 60.0000.")
 
 # ord 14
-q(0, "The half percent boundary on implied priors holds in the repaired check. What holds it?",
+q(0, "The half percent boundary on implied priors holds in the Analyzer's check. What holds it?",
  "A 1e-12 allowance on top of 0.005, which absorbs 0.0050000000000000044, the binary value of 0.305 less 0.3.",
  ["An inclusive comparison against 0.005 alone, which suffices because 0.305 less 0.3 is exactly 0.005 in binary floating point.",
   "A threshold widened to 6.000000e-3, which is why an implied chance of 0.306000 is the first case the Analyzer withholds.",
   "Rounding each implied chance to six decimals before the delta is taken, so that 0.305000 less 0.300000 comes out exact."],
- "The binary delta overshoots 0.005 by 4.3e-18, and before EC4-0 the engine had no allowance and called justInsideTolerance inconsistent (finding D1). An implied 0.306000 is inconsistent before and after the repair.")
+ "The binary delta overshoots 0.005 by 4.3e-18; compared against 0.005 alone justInsideTolerance would read inconsistent. An implied 0.306000 is inconsistent with or without the allowance.")
 
 # ord 15
 q(2, "An expert writes one sentence reporting the EKPAN lottery's survey. Which sentence carries everything the reading asks for?",

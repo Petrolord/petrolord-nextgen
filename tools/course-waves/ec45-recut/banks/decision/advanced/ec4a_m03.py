@@ -39,20 +39,20 @@ q(2, "The EKPAN information tree, built on the EKPAN lottery with a survey cost 
  "On the EKPAN information tree, 100.5750 less 8.0000 is 92.5750, and 92.5750 less 75.7500 is 16.8250, exactly netEvii; the gross value is 24.8250, the price at which the two root branches would tie.")
 
 # ord 5
-q(0, "The published equalEmvTie has root branches A 30.0000, B 30.0000 and C 29.9990, and the brief prints Recommended first move A with a Decision advantage of 0.0000. Why A?",
- "It is listed first, and the engine replaces the best branch only when a later one is strictly greater.",
- ["A was larger before rounding, and the advantage of 0.0000 is float residue left by subtracting two nearly equal values.",
-  "C at 29.9990 sits closer to B, and the engine breaks a tie against whichever tied branch has the nearer runner up.",
-  "The brief picks the branch with the least exposure among tied values, and A carries the smallest downside of the three."],
- "A and B are exactly equal, so an advantage of 0.0000 beside a named first move is a tie reported as a recommendation; the recommendation comes from listing order and says nothing about which branch is better.")
+q(0, "The published equalEmvTie has root branches A 30.0000, B 30.0000 and C 29.9990. What does a Decision Studio brief print on its first-move and advantage rows?",
+ "Indifferent: \"A\", \"B\" and \"C\" come to the same figure, and Indifferent at the precision shown, because C rounds to the same 30.00 card as A and B.",
+ ["Recommended first move \"A\" with a Decision advantage of 0.0000, because A is listed first and the next best, B, is also 30.0000.",
+  "Indifferent: \"A\" and \"B\" come to the same figure, with an advantage of 0.0010 over C, which sits outside the tie band.",
+  "Recommended first move \"C\", since the brief prefers the tied branch with the smallest downside and C carries the least exposure."],
+ "The brief reads the card-precision tie set, and A, B and C all round to 30.00. The engine still marks A, the first listed, for the optimal path; the brief names no single branch its own figures cannot separate.")
 
 # ord 6
-q(3, "The brief prints chanceRootWithBranchCosts as Optimal EMV -3.0000 and Recommended first move Single path, with no Next best alternative or Decision advantage row. What does that mean?",
- "The root is a chance node, so there is no choice to recommend or compare, and Single path is not a branch the engine picked.",
+q(3, "The brief prints chanceRootWithBranchCosts as Optimal EMV -3.0000 and Recommended first move Chance root: no first decision to make, with no Next best alternative or Decision advantage row. What does that mean?",
+ "The root is a chance node, so there is no choice to recommend or compare, and the label names no branch the engine picked.",
  ["The brief failed to find a second branch, and the two missing rows should be worked out by hand from the calm and storm branches.",
-  "The engine picked calm as the single path, since it is listed first and carries the higher branch value of 17.0000.",
+  "The engine picked calm as the only path, since it is listed first and carries the higher branch value of 17.0000.",
   "The brief hides both rows whenever the Optimal EMV is negative, because a losing tree has no alternative worth quoting."],
- "The Builder writes Chance root and N/A for the same tree, and singleBranchDecision likewise prints just 7.0000 and the move named only; allNegative, at -52.0000, still prints a next best of -55.0000 and an advantage of 3.0000.")
+ "The Builder shows the same label with N/A on its other two cards, and singleBranchDecision likewise prints just 7.0000 and the move named only; allNegative, at -52.0000, still prints a next best of -55.0000 and an advantage of 3.0000.")
 
 # ord 7
 q(1, "Checking the brief's -3.0000 for chanceRootWithBranchCosts by hand, a reader weights calm 0.600000 x 19.0000 and storm 0.400000 x -25.0000, then subtracts both costs, 2.0000 and 8.0000, and gets -8.6000. Which is right?",
@@ -80,7 +80,7 @@ q(0, "A reviewer replaces the EKPAN tree's linked success payoff with its NPV P9
 
 # ord 10
 q(3, "A summary linked to a terminal arrives with an NPV P90 of 185, an NPV P50 of 390 and an NPV P10 of 710, and no mean. What does the engine do?",
- "It refuses with \"Distribution payoff has no finite mean\" and does not estimate one.",
+ "It refuses with a message naming the terminal, Distribution payoff has no finite mean, and does not estimate one.",
  ["It rolls back with the NPV P50 of 390, taking the middle case as the best available stand in for the missing mean.",
   "It averages the three percentiles into a mean and rolls back with that, flagging the payoff as estimated in the brief.",
   "It rolls back with the NPV P90 of 185, the low case, as a conservative fallback, which flips the EKPAN tree to Farm out."],

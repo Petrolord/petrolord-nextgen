@@ -13,7 +13,7 @@
  {
   "prompt": "With the outcome known first, the published golden records the best actions for Large, Medium and Dry on the three outcome lottery as indices 0, 0 and 2. Why does Dry record Farm out?",
   "options": [
-   "Farm out and Relinquish both pay 0.0000 in Dry, and the strictly greater comparison keeps the one listed first.",
+   "Farm out and Relinquish both pay 0.0000 in Dry and tie, and the golden records the first listed of the tied pair.",
    "Farm out breaks the tie by its better payoffs in Large and Medium, which the engine consults when two actions pay the same in one outcome.",
    "Relinquish is left out of perfect information because it pays nothing in any outcome, so Farm out is the only costless action there.",
    "Farm out is what the engine recommends at the prior once a well is dry, and perfect information repeats it."

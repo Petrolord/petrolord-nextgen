@@ -23,52 +23,52 @@ q(3, "The EKPAN lottery's survey has an EVII of 24.8250. With the survey the dri
  "A risk averse buyer would pay more than 24.8250 for this survey, and the engine cannot say how much more. The 0.162500 is a joint chance; the posterior of a dry hole after a bright spot is 0.353261.")
 
 # ord 3
-q(0, "A small tree values Drill at 40.0000 less a cost of 10.0000 and Farm out at 30.0000. Listed Drill first it recommends Drill; listed Farm out first it recommends Farm out. What decides the recommendation?",
- "The listing order, because a decision node replaces its incumbent only on a strictly greater value, so the first of two equal branches is kept.",
+q(0, "A small tree values Drill at 40.0000 less a cost of 10.0000 and Farm out at 30.0000. Listed Drill first the optimal path marks Drill; listed Farm out first it marks Farm out. What decides the mark?",
+ "The listing order decides only which tied branch the optimal path marks; the engine reports the two as tied in either order.",
  ["Floating-point residue in the cost subtraction, which leaves one of the branches a few binary digits ahead depending on which is evaluated first.",
   "The branch with the lower cost, since the engine breaks an equal EMV in favour of the action that commits less money up front.",
   "The last branch evaluated, because a decision node overwrites its best choice whenever a later value is at least as large."],
- "Both orderings return an emv of 30.0000, and only the label follows the order in which somebody typed the branches. Residue decides at a computed switch point such as 0.228571 on the EKPAN lottery; 40.0000 less 10.0000 is exactly 30.0000.")
+ "Both orderings return an emv of 30.0000 with the tie reported, and only the mark follows the order in which somebody typed the branches. At the computed switch point 0.228571 on the EKPAN lottery the engine reports a tie as well; 40.0000 less 10.0000 is exactly 30.0000.")
 
 # ord 4
-q(2, "In the VOI Analyzer, Success at 25 percent pays 200, Dry hole at 75 percent pays -50, and the decision cost is 12.5. The insight names 'Drill Exploration Well' as the optimal decision beside an EMV without information of 0.00. Why that action?",
- "Acting is worth exactly 0, the same as \"Do Not\", and the named decision is listed first, so it keeps an exact tie.",
- ["Acting is worth a small binary residue above 0 once the cost is subtracted, and the Analyzer names whichever action leads by that residue.",
-  "The Analyzer names the risky action whenever the net value is positive, and the netVoi card reads 20.00.",
-  "The Analyzer compares its actions before charging the decision cost of 12.5, so drilling leads by that amount before any card is filled."],
- "0.25 x 200 plus 0.75 x -50 less 12.5 is exactly 0, and nothing on the screen says walking away is worth the same. The gross voi of 25.00 is large precisely because the prior decision is perfectly unsettled.")
+q(2, "In the VOI Analyzer, Success at 25 percent pays 200, Dry hole at 75 percent pays -50, and the decision cost is 12.5. What does the insight say about the decision without new information, and why?",
+ "That 'Drill Exploration Well' and 'Do Not Drill Exploration Well' both come to $0.00M, so it is indifferent between them, because acting is worth exactly 0.",
+ ["That 'Drill Exploration Well' is optimal, because acting is worth a small binary residue above 0 once the cost is subtracted.",
+  "That drilling is optimal, because the Analyzer names the risky action whenever the net value is positive and the netVoi card reads 20.00.",
+  "That drilling leads by 12.5, because the Analyzer compares its actions before charging the decision cost of 12.5."],
+ "0.25 x 200 plus 0.75 x -50 less 12.5 is exactly 0, and the insight names both actions. The gross voi of 25.00 is large because the prior decision is perfectly unsettled.")
 
 # ord 5
-q(0, "A Decision Studio brief for published equalEmvTie prints Optimal EMV 30.0000 and Recommended first move \"A\". Which row shows that the recommendation is a tie?",
- "Decision advantage, which reads 0.0000 because Next best alternative is also 30.0000.",
- ["Recommended first move, which appends the tied branch \"B\" after \"A\" whenever two root branches share the optimal value.",
+q(0, "A Decision Studio brief for published equalEmvTie prints Optimal EMV 30.0000. Which rows show that the first move is a tie?",
+ "Recommended first move, which names A, B and C as coming to the same figure, and Decision advantage, which reads Indifferent at the precision shown.",
+ ["Only Decision advantage, which reads 0.0000 because Next best alternative is also 30.0000, beside a first move of \"A\".",
   "Next best alternative, which reads 29.9990 for \"C\" and so shows that the runner-up sits only a hair below the choice.",
   "Optimal EMV, which is printed without decimals when two branches tie so that a reader can see the value is shared."],
- "Next best alternative is the largest other root branch value, \"B\" at 30.0000, while \"C\" is 29.9990. The advantage row is the only place the tie is visible, so read it before the first move.")
+ "C at 29.9990 rounds to the same 30.00 card as A and B, so the brief names all three and writes Indifferent at the precision shown; it names no single branch its own figures cannot separate.")
 
 # ord 6
-q(1, "On the Analyzer's default study the gross voi is 33.00. At a survey cost of 32.996 the netVoi card reads 0.00. What does the verdict sentence say?",
- "Since this is positive, acquiring the information is financially advantageous, because the verdict tests the net value before it is rounded.",
- ["The information exactly pays for itself, because the verdict reads the two-decimal card and the card says 0.00.",
-  "No verdict at all, since the Analyzer drops the sentence whenever a card rounds to zero and leaves the choice to the reader.",
-  "The information exactly pays for itself, because a net value within half a cent of zero falls inside the Analyzer's neutral band."],
- "33 less 32.996 is a small positive amount: the card rounds it to 0.00 and the sentence tests its sign. Only at a cost of exactly 33.000 do the card and the sentence both say neutral; no neutral band exists.")
+q(3, "On the Analyzer's default study the gross voi is 33.00. At a survey cost of 32.996 the netVoi card reads 0.00. What does the verdict sentence say?",
+ "Since this rounds to zero, the information costs what it is worth, so acquiring it or not is indifferent on EMV grounds, because the verdict reads the card.",
+ ["Since this is negative, the information costs more than the value it adds, because the verdict sets the cost against the EVPI card.",
+  "Since this is positive, acquiring the information is financially advantageous, because the verdict tests the net value before it is rounded.",
+  "No verdict at all, since the Analyzer drops the sentence whenever a card rounds to zero and leaves the choice to the reader."],
+ "The net VOI is rounded once to the two-decimal card, half away from zero with a 1e-12 allowance, and the verdict reads that same value. At 32.990 the card reads 0.01 and the sentence says positive; at 33.010 it reads -0.01 and says negative.")
 
 # ord 7
-q(3, "Priced at 33.004, the default survey shows -0.00 on its net value card. What is the sign telling a reader?",
- "That the net value before rounding is a small negative amount whose sign the rounding kept, which is why the verdict says the survey is not justified.",
- ["Nothing, since -0.00 and 0.00 are the same number on a two-decimal card and the verdict beside both of them reads value-neutral.",
+q(3, "Priced at 33.004, the default survey's net value card reads 0.00. What do the card and the verdict tell a reader?",
+ "That the survey is priced at its gross value to the cent: the card reads 0.00 and the verdict says the value rounds to zero, both from one rounded net value.",
+ ["That the cost is a hair above the value, since the card prints -0.00 to keep the sign of the unrounded net value.",
   "That the survey cost was entered as a negative receipt, which the Analyzer marks with a sign on an otherwise zero card.",
   "That the consistency check found a small disagreement, which the Analyzer reports as a signed zero in place of withholding."],
- "The cards are toFixed(2) strings: 33 less 33.004 is negative and prints -0.00, and the verdict reads that same value unrounded and writes negative. At 32.996 the card reads 0.00 beside a positive verdict.")
+ "33 less 33.004 is a small negative amount, and rounded half away from zero to two decimals it is 0.00; -0.00 is never printed, and the verdict reads the same rounded value. At 33.010 the card reads -0.01 beside the negative verdict.")
 
 # ord 8
-q(2, "A netVoi card reads 0.00 and the verdict beside it says positive. What does a careful reader report?",
+q(2, "A netVoi card reads 0.00 and the verdict beside it says the value rounds to zero. What does a careful reader report?",
  "That the survey is priced at its value, found by comparing the cost with the gross voi, since the cost that makes information neutral is the gross value, 33.00 on the default study.",
- ["That the survey is a positive investment, because the verdict tests the unrounded number and is therefore the more precise of the two readings.",
-  "That the survey is value-neutral, because the card is what the Analyzer displays and a sentence can never be more precise than its card.",
+ ["That the survey is a positive investment, because a card of 0.00 is a rounded positive amount and the verdict only hides its sign.",
+  "That the survey is worth buying, because a 0.00 card means the net value is at least zero before rounding.",
   "That the survey is worth buying at any cost below the evpi card of 63.00, since the ceiling bounds the price and the gross value only bounds the net."],
- "Costs of 32.996 and 33.004 are indistinguishable in any real tender, so a verdict flipping between them reports the sign of a residue. On the EKPAN lottery's full survey the neutral price is its gross 24.8250.")
+ "Costs of 32.996 and 33.004 both round to a 0.00 card with the rounds-to-zero sentence, and no real tender separates them. The neutral price is the gross value, 33.00 on the default study and 24.8250 on the EKPAN lottery's full survey.")
 
 # ord 9
 q(1, "A symmetric survey on the EKPAN lottery at accuracy 0.600000 moves the success chance after a \"reads dry\" result from 0.35 to 0.264151. Why is its EVII 0.0000?",
