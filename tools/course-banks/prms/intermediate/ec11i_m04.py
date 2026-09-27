@@ -98,7 +98,7 @@ q(2, "Handed the EKN-1 best case directly, with the same regime and inputs, comp
  ["The prms engine rounds the canonical figures to its own precision",
   "The prms engine applies the working interest before the cash flow runs",
   "They agree only with the licence cut off"],
- "The engine carries no cash flow, NPV or discounting code of its own. Its basis reads \"computeCashFlow of engines/economics/cashflow.ts with apply_economic_limit (JV regime at 100%, the stated royalty and tax), checked against PRMS 3.1.3.1\", and the direct call returns the same limit, 3 years trimmed, the same net cash flow and the NPV 318649106.969712. It rounds nothing, runs at 100 percent before any share, and the licence cut is applied in both calls.")
+ "The engine carries no cash flow, NPV or discounting code of its own. Its basis reads \"computeCashFlow of engines/economics/cashflow.ts with apply_economic_limit (JV regime at 100%, the stated royalty and tax), checked against PRMS 3.1.3.1\", and the direct call returns the same limit, 3 years trimmed, the same net cash flow and the NPV 318649106.969712. It rounds nothing and runs at 100 percent before any share, and the match holds on the EKN-1 start itself, where the licence cut is in force.")
 
 q(0, "On EKN-1 the loss carry forward is set to false. What becomes of the best case's undiscounted net cash flow?",
  "It stays at 382377266.937500",

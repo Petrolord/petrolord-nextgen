@@ -41,7 +41,7 @@
    "time-frame: not tested, since the justification replaces the benchmark"
   ],
   "answer": 1,
-  "explanation": "A start beyond five years meets the criterion when a longer time-frame is stated as justified, and the engine prints the justification in its line, so the class is Reserves. The not-met line would need the justification false. No start of 0 or more is refused on its size, and the engine tests the time-frame on every discovered project, printing the justification it was given."
+  "explanation": "A start beyond five years meets the criterion when a longer time-frame is stated as justified, and the engine prints the justification in its line, so the class is Reserves. The not-met line would need the justification false. No start of 0 or more is refused on its size, and the engine tests the time-frame on every discovered project with a recovery project, printing the justification it was given."
  },
  {
   "prompt": "An otherwise commercial project is due to begin development in exactly 5 years, with nothing stated about a longer wait. How is the time-frame criterion treated?",
@@ -118,7 +118,7 @@
    "Reserves: every commerciality criterion is met with established technology"
   ],
   "answer": 2,
-  "explanation": "The engine carries the commitment as a stated fact beside the seven criteria and prints it with its section; here it is not met, so the class is Contingent Resources with the single blocker firmIntention. Approvals are met on this input. The commitment is tested on every discovered project whatever the seven show, and the Reserves decision line needs the commitment met."
+  "explanation": "The engine carries the commitment as a stated fact beside the seven criteria and prints it with its section; here it is not met, so the class is Contingent Resources with the single blocker firmIntention. Approvals are met on this input. The commitment is tested on every discovered project with a recovery project, whatever the seven show, and the Reserves decision line needs the commitment met."
  },
  {
   "prompt": "A discovered project passes all seven criteria and the commitment, yet its recovery method is still being proven in the field. Which result does the engine give?",

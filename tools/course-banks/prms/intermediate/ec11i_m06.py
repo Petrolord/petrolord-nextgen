@@ -63,7 +63,7 @@ q(2, "On EKN-1, effective 2027, the licence expiry is stated as 2026. What is th
  ["Every forecast year cut, with 0.000000 barrels of Reserves left in each of the three cases",
   "The expiry moved to 2027, the effective year",
   "The whole forecast run, since the expiry has already passed"],
- "A licence must run at least to the effective year, so the engine refuses: \"licence.expiryYear must be an integer from 2027 to 2300; got 2026\". It returns no figures from a refused input, rewrites no stated year, and never reads a past expiry as a renewal.")
+ "A licence must run at least to the effective year, so the engine refuses: \"licence.expiryYear must be an integer from 2027 to 2300; got 2026\". It returns no figures from a refused input, rewrites no stated year, and reads no past expiry as a renewal.")
 
 q(3, "The renewal control is set to not stated. What does the engine print?",
  "A refusal naming licence.renewalExpected, a stated fact with no default",

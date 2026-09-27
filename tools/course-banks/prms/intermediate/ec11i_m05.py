@@ -39,9 +39,9 @@ q(3, "Which net entitlement line does the engine print when the EKN-1 royalty is
 
 q(2, "On EKN-1, the royalty form changes from royalty interest to production tax. What happens to the best case's undiscounted net cash flow at 100 percent?",
  "Nothing: it is 382377266.937500 under both forms",
- ["It rises, since a production tax charges no volume",
+ ["It rises, as no volume is charged",
   "It falls, since the tax is charged on top of the royalty",
-  "It is refused until the royalty rate is restated"],
+  "No figure at all: it is refused until the rate is restated"],
  "The form changes the volumes and leaves the money alone: the royalty is paid at the same 15.000000 percent either way, and the canonical cash flow charges it the same way, so the best case is 382377266.937500 under both forms and every economic limit stays. No second charge is made, and the form is a stated word that needs no restated rate.")
 
 q(0, "The EKN-1 2P on the net-entitlement basis is 9908615.920000 barrels of oil and 7926892.855000 Mscf of gas, with 6.000000 Mscf per BOE stated. What 2P in BOE does the engine report?",
@@ -74,7 +74,7 @@ q(2, "The EKN-1 best case returns 382377266.937500 undiscounted at 100 percent. 
 
 q(0, "Why does the engine scale the cash by the working interest alone, with no royalty taken out a second time?",
  "The canonical ledger already charges the royalty before tax",
- ["The royalty applies to volumes and never enters a cash flow",
+ ["The royalty applies to volumes alone and stays out of every cash flow",
   "The royalty is charged only when the form is a production tax",
   "Net entitlement is a gross basis, so no share is taken"],
  "The royalty is already in the cash flow: the canonical ledger charges it as a cost of production before any tax, whichever form is stated. Net entitlement takes the royalty out of the volumes for reporting, and scaling the cash by the net entitlement share would charge the royalty holder's share twice. The ledger charges it under both forms, and net entitlement is a share basis.")

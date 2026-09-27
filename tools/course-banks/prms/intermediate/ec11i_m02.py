@@ -35,7 +35,7 @@ q(1, "When the start is 8 years away and the box says the longer wait is justifi
  ["time-frame: development starts within 8 years against the 5-year benchmark: not met (PRMS 2.1.2.3)",
   "A refusal: startWithinYears must be at most 5 when a longer time-frame is stated",
   "time-frame: not tested, since the justification replaces the benchmark"],
- "A start beyond five years meets the criterion when a longer time-frame is stated as justified, and the engine prints the justification in its line, so the class is Reserves. The not-met line would need the justification false. No start of 0 or more is refused on its size, and the engine tests the time-frame on every discovered project, printing the justification it was given.")
+ "A start beyond five years meets the criterion when a longer time-frame is stated as justified, and the engine prints the justification in its line, so the class is Reserves. The not-met line would need the justification false. No start of 0 or more is refused on its size, and the engine tests the time-frame on every discovered project with a recovery project, printing the justification it was given.")
 
 q(1, "An otherwise commercial project is due to begin development in exactly 5 years, with nothing stated about a longer wait. How is the time-frame criterion treated?",
  "Met, with the class Reserves",
@@ -84,7 +84,7 @@ q(2, "The golden input class-no-firm-intention meets every criterion and states 
  ["(7) legal, contractual, environmental, regulatory and government approvals in place or forthcoming: not met",
   "commitment: not tested, since the seven criteria are met",
   "Reserves: every commerciality criterion is met with established technology"],
- "The engine carries the commitment as a stated fact beside the seven criteria and prints it with its section; here it is not met, so the class is Contingent Resources with the single blocker firmIntention. Approvals are met on this input. The commitment is tested on every discovered project whatever the seven show, and the Reserves decision line needs the commitment met.")
+ "The engine carries the commitment as a stated fact beside the seven criteria and prints it with its section; here it is not met, so the class is Contingent Resources with the single blocker firmIntention. Approvals are met on this input. The commitment is tested on every discovered project with a recovery project, whatever the seven show, and the Reserves decision line needs the commitment met.")
 
 q(1, "A discovered project passes all seven criteria and the commitment, yet its recovery method is still being proven in the field. Which result does the engine give?",
  "Contingent Resources, with the blocker \"technology under development\"",

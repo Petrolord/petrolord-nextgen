@@ -85,7 +85,7 @@
    "The whole forecast run, since the expiry has already passed"
   ],
   "answer": 2,
-  "explanation": "A licence must run at least to the effective year, so the engine refuses: \"licence.expiryYear must be an integer from 2027 to 2300; got 2026\". It returns no figures from a refused input, rewrites no stated year, and never reads a past expiry as a renewal."
+  "explanation": "A licence must run at least to the effective year, so the engine refuses: \"licence.expiryYear must be an integer from 2027 to 2300; got 2026\". It returns no figures from a refused input, rewrites no stated year, and reads no past expiry as a renewal."
  },
  {
   "prompt": "The renewal control is set to not stated. What does the engine print?",

@@ -46,10 +46,10 @@
  {
   "prompt": "On EKN-1, the royalty form changes from royalty interest to production tax. What happens to the best case's undiscounted net cash flow at 100 percent?",
   "options": [
-   "It rises, since a production tax charges no volume",
+   "It rises, as no volume is charged",
    "It falls, since the tax is charged on top of the royalty",
    "Nothing: it is 382377266.937500 under both forms",
-   "It is refused until the royalty rate is restated"
+   "No figure at all: it is refused until the rate is restated"
   ],
   "answer": 2,
   "explanation": "The form changes the volumes and leaves the money alone: the royalty is paid at the same 15.000000 percent either way, and the canonical cash flow charges it the same way, so the best case is 382377266.937500 under both forms and every economic limit stays. No second charge is made, and the form is a stated word that needs no restated rate."
@@ -102,7 +102,7 @@
   "prompt": "Why does the engine scale the cash by the working interest alone, with no royalty taken out a second time?",
   "options": [
    "The canonical ledger already charges the royalty before tax",
-   "The royalty applies to volumes and never enters a cash flow",
+   "The royalty applies to volumes alone and stays out of every cash flow",
    "The royalty is charged only when the form is a production tax",
    "Net entitlement is a gross basis, so no share is taken"
   ],
