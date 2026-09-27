@@ -1,0 +1,119 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# SC4 Associate m05, The Binding Constraint.
+# Sources: utilisation per constraint, the binding constraint and its stated
+# tie rule, capacity checks at twelve digits, overloaded voyages as results,
+# the zero-tank refusal and reading a voyage plan. Every keyed figure and
+# message was re-run through the vendored engine (marine_engine.mjs) on the
+# Ekene PSV and AHTS milk runs and the small golden cases.
+
+q(2, "Deck area is measured in m2 and a water tank in m3. How can the engine rank the two against each other?",
+ "Each utilisation is the constraint's load over its own capacity, a ratio with no unit.",
+ ["It turns every tank volume into square metres of deck at a stated tank height, then compares areas.",
+  "Every load is turned into tonnes through the stated densities, and the constraints are ranked by weight.",
+  "It ranks the raw loads, as deck and tanks share one scale."],
+ "Utilisation is load over capacity, so 540 of 600 m2 of deck area and 745 of 1200 m3 of water both become plain ratios, 0.900000 and 0.620833, and can be ranked. The engine converts no volume to area, uses densities only for the deadweight, and has no common scale for raw loads.")
+
+q(0, "What does the engine name as a voyage's binding constraint?",
+ "The constraint with the highest utilisation, with a tie at twelve digits going to the first in the stated order.",
+ ["The constraint whose load is the largest figure in its own unit.",
+  "Any constraint at a utilisation of 1.000000 or above, and no constraint at all on a voyage with room on every limit.",
+  "The constraint a regulation requires the vessel to respect, as the word binding is used in contracts, charters and law."],
+ "In this course binding means the constraint with the highest utilisation, by the stated tie rule, and the engine names one on every voyage. Loads in different units cannot be ranked, a binding constraint need not be full, and the word carries no legal meaning here.")
+
+q(3, "On a small teaching voyage, deck area is 25 of 50 m2, deck load 40 of 80 t, deadweight 50 of 200 t and the one tank 10 of 50 m3. Which constraint is named binding?",
+ "Deck area, at 0.500000, the first of the two tied constraints in the stated order.",
+ ["Deck load, at 0.500000, the last of the two tied constraints in the stated order of checks.",
+  "Both deck area and deck load, since the engine names every constraint that shares the top utilisation.",
+  "None, as nothing is near its limit."],
+ "Deck area and deck load share a utilisation of 0.500000, and the engine names the first in the order deck area, deck load, deadweight, tanks: its reason reads the binding constraint is deck area: 25 m2 of 50 m2 (50%). Giving the tie to the last, deck load, is the alternative the course names. The engine names one constraint on every voyage.")
+
+q(1, "In what order does the engine list and check a voyage's capacity constraints?",
+ "Deck area, deck load, deadweight, then one tank per product in the order the products are listed.",
+ ["The tanks first, product by product, then the deadweight, then the deck load, and the deck area last of all.",
+  "Alphabetically by the name of each constraint, so the barite tank is checked ahead of the deck.",
+  "From the highest utilisation to the lowest, so the binding constraint is always the first row."],
+ "The stated order is deck area, deck load, deadweight, then the tanks in the order of the products. That order is what the tie rule uses, so it matters: a tie goes to the first constraint in it. The constraints table keeps that order whatever the utilisations are.")
+
+q(3, "One tank of 50 m3 holds 45 m3 of a product at 1 t a m3; the deck carries 5 m2 against 50 m2 usable and 4 t against an 80 t rating; the vessel's deadweight is 200 t. Which limit does the engine report?",
+ "Tank d, at 0.900000, the fullest of the four constraints.",
+ ["Deck area, since it is checked first.",
+  "Deadweight, since bulk adds to it.",
+  "None, since the voyage is feasible and a binding constraint is named only on an overloaded voyage."],
+ "The engine's reason reads: the binding constraint is tank d: 45 m3 of 50 m3 (90%). A tank is a constraint like any other, and when it is the fullest it binds. The deadweight here is 49 t of 200 t, far below the tank, and a binding constraint is named on every voyage, feasible or not.")
+
+q(0, "Every figure lands exactly on its limit: 50 m2 of cargo for 50 m2 of usable deck, 80 t for an 80 t deck rating, and 50 m3 of a 1 t a m3 product filling a 50 m3 tank, with a 200 t deadweight. What comes back?",
+ "A feasible voyage, with deck area binding at 1.000000: a load exactly at its capacity fits.",
+ ["An overloaded voyage on deck area, deck load and the tank, since a load at capacity leaves no margin at all.",
+  "A feasible voyage with the tank binding at 1.000000, since the last of the tied constraints is the one named.",
+  "A refusal: three ties cannot be ranked."],
+ "A constraint is overloaded only when its load is above its capacity at twelve digits, so a load exactly at capacity is feasible, and the three-way tie goes to the first in the order, deck area. The engine's reason: the binding constraint is deck area: 50 m2 of 50 m2 (100%). Reading a load at capacity as overloaded is the alternative the course names.")
+
+q(2, "Cargo of 81 t sits on a deck rated for 80 t, its 50 m2 footprint fills the 50 m2 usable deck, and a 50 m3 tank is full. What is the engine's verdict?",
+ "A voyage that is not feasible, with deck load binding at 1.012500 and named as overloaded.",
+ ["Feasible: one tonne is within the tie rule.",
+  "A voyage that is not feasible, with deck area binding at 1.000000 as the first in the order.",
+  "A refusal naming the deck cargo's weight."],
+ "Deck load is at 1.012500, above every other utilisation, so it binds; its load is above its capacity, so it is overloaded. The engine's reasons: the binding constraint is deck load: 81 t of 80 t (101.25%) and overloaded: deck load needs 81 t against a capacity of 80 t. The tie rule acts at twelve digits and one tonne is far beyond it; the tie order applies only to equal utilisations; and an overload is a result.")
+
+q(1, "Two deck cargoes of 0.1 and 0.2 m2 fill a 0.3 m2 deck area capacity. The double sum comes back as 0.30000000000000004 and the utilisation as 1.0000000000000002. What does the engine return?",
+ "Feasible: compared at twelve digits the sum equals the 0.3 m2 exactly, so deck area binds at 1.000000.",
+ ["An overloaded voyage on deck area, since 1.0000000000000002 is above 1 however small the excess.",
+  "A refusal: a footprint below 1 m2 is too small.",
+  "A feasible voyage, since the engine rounds every load to six decimals before any capacity check."],
+ "Decimal inputs are held as binary doubles, so the sum lands a hair above 0.3. The engine compares at twelve significant digits, where the load equals the capacity, so the voyage is feasible. Without the rule, rounding noise would decide the answer. The engine accepts small cargo, and six decimals is only how figures are printed.")
+
+q(0, "The Ekene milk run's deck cargo is doubled to 1080 m2 on the PSV's 600.000000 m2 of usable deck. What does the engine return?",
+ "A full voyage plan with its hours and fuel, marked infeasible, deck area binding at 1.800000 and named as overloaded.",
+ ["A refusal, since a deck cargo of twice the usable deck is an input the engine cannot plan with at all.",
+  "A plan split into two voyages of 540 m2 of deck cargo each, both with deck area binding at 0.900000.",
+  "A plan that carries the first 600 m2 of deck cargo and leaves the rest at the base for the next voyage."],
+ "An overloaded voyage is a result: the engine returns its hours, days and fuel, which do not depend on whether the cargo fits, and adds the verdict and the reasons, here overloaded: deck area needs 1080 m2 against a capacity of 600 m2. It splits no voyage and leaves no cargo behind; those are the planner's answers.")
+
+q(2, "The Ekene milk run's cargo is put on the AHTS Ekene Tide. Which constraints does the engine name as overloaded?",
+ "Deck area, deadweight and tank water, with deck area binding at 1.309091.",
+ ["Deck area alone, since the reasons name only the binding constraint of the voyage.",
+  "Deck area, deck load and deadweight, the three constraints the open deck carries.",
+  "Every constraint on the AHTS, since an overloaded voyage is overloaded throughout."],
+ "The reasons list the binding constraint and then every other overloaded one: deck area at 540 of 412.5 m2, deadweight at 2390 of 2200 t, and tank water at 745 of 600 m3. The deck load, 635 t against 1200 t, is inside its capacity, and so are the other five tanks.")
+
+q(3, "On the Ekene milk run, the PSV's brine tank is stated as 0 while the jack-up asks for 85 m3 of brine. What does the engine return?",
+ "A refusal, in its own words: vessel.tanks.brine must be above 0 to carry brine: the installations on the milk run ask for 85 m3 of it; got 0",
+ ["An overloaded voyage, with tank brine binding and a utilisation too large to print as a finite figure.",
+  "A voyage that carries the brine on deck in portable tanks, adding its area and weight to the deck.",
+  "A voyage that leaves the brine at the base and names it in the reasons as cargo not carried."],
+ "A load of a product the vessel has no tank for is refused by name, with the tank, the product, the m3 the stops ask for and the value it refused. There is no finite utilisation over a zero capacity, so it is no overload. The engine moves no bulk to the deck and drops no cargo from a plan.")
+
+q(1, "Why does the engine refuse a load of a product whose tank is stated as 0, where it plans an overloaded deck as a result?",
+ "No finite utilisation exists for a load over a capacity of zero, and no number of voyages of that vessel could ever carry the product.",
+ ["A tank of 0 is always a typing slip, so the engine asks for the tank to be typed again before it plans.",
+  "A deck can take extra cargo by stacking units two high, where a tank has no such room to give.",
+  "Bulk is priced per m3 where deck cargo is priced per m2, so the fuel bill cannot be worked out."],
+ "An overload reports a ratio and names what another voyage or a larger vessel could fix; a zero tank has no ratio and no voyage of that vessel can carry the product, so the fix lies outside the voyage. A tank of 0 is a valid statement that the vessel has no tank, the engine stacks no cargo, and it prices fuel only.")
+
+q(2, "A vessel states a tank of 0 for a product d, and no installation asks for any d. What does the engine return?",
+ "A feasible plan, with the empty zero tank reported at a utilisation of 0.000000.",
+ ["A refusal, since every tank a vessel states must be above 0 whether or not it is used on the voyage.",
+  "A refusal asking for product d to be removed.",
+  "A plan that drops tank d from the table."],
+ "A zero tank is how a vessel states it has no tank for a product, and it is accepted as long as nothing is loaded into it. The engine reports its utilisation as 0.000000 in the constraints table. Only a load of that product is refused, and a product nobody asks for may stay in the call.")
+
+q(0, "The course advises reading a voyage plan's feasible flag before any other figure. Why?",
+ "An overloaded voyage still returns its hours, days and fuel, so those figures alone do not show whether the cargo fits.",
+ ["The engine prints hours and fuel only for a feasible voyage, so the flag says whether any hours follow.",
+  "The flag carries the binding utilisation, and every other figure in the plan is computed from it in turn, hours and fuel included.",
+  "A voyage that is not feasible is refused, so the flag says whether any figure follows at all."],
+ "The engine plans an overloaded voyage in full, hours, days and fuel included, and marks it with the verdict and the reasons. Reading the time and cost first can hide that the cargo does not fit. The binding utilisation is its own field, and an overload is a result with no refusal.")
+
+q(3, "The engine's reason reads: the binding constraint is deck area: 540 m2 of 600 m2 (90%). Which figure does the course quote for the utilisation?",
+ "0.900000, the numeric field beside the reason, to six decimals.",
+ ["90%, the percentage the reason prints, since the reason is the engine's own words.",
+  "0.9, the short figure, since the engine drops trailing zeros in every figure.",
+  "540 over 600 as a fraction, since a utilisation is written as load over capacity."],
+ "A reason prints short figures and a percentage; the numeric field keeps full precision and the course quotes it to six decimals, 0.900000. Trailing zeros are dropped only inside the engine's sentences, and a utilisation is quoted as the figure the engine returns.")
+
+emit(Q, '/root/cat-wip-marine/banks/sc4b_m05.json', expect_n=15)
+finish()
