@@ -37,8 +37,8 @@ q(1, "Why are the earning, promote and consideration figures of this tier the st
  "No public text prints a farm-in schedule, as the engine's validation record says in its own words.",
  ["The 2024 Regulations print a worked farm-in schedule, which the engine copies figure for figure.",
   "The Penn State page prints the Ekene schedule.",
-  "Licensed model agreements print the schedules, and the course may quote none of them here."],
- "The validation record states: \"No public text prints a farm-in schedule or a break-even promote: those goldens come from the stated deal arithmetic in the oracle.\" So these figures show what a set of terms produces, checked by an independent oracle. The Regulations print no worked example, and the Penn State problem is a separate cited check on another subject.")
+  "Licensed model agreements print the schedules, and the course copies their figures while quoting no sentence."],
+ "The validation record states: \"No public text prints a farm-in schedule or a break-even promote: those goldens come from the stated deal arithmetic in the oracle.\" So these figures show what a set of terms produces, checked by an independent oracle. No licensed model agreement is named as a source, the Regulations are one of the public texts, and the Penn State problem is a separate cited check on another subject.")
 
 q(1, "A learner types limit inside an event's cap object in the earning box. What does the engine's refusal name?",
  "The path events[0].cap.limit, with on, amount and overrunRule as the accepted keys.",
@@ -152,7 +152,7 @@ q(3, "On a deal with a single earning event, which figure is the participating i
  ["The share of the gross cost it pays, since the promote vests with the payment.",
   "The farmor's interest before the deal, since the whole share passes on completion.",
   "The interest earned less the promote in points, the part the promote pays for."],
- "The engine's held-after column adds the interest earned to what the farminee held before, and a newcomer holds 0 before: on the Ekene well the held-after figure is 30.000000, the same as the interest earned. The share paid sets the payment, the farmor keeps what it does not farm out, and the promote is measured against the held-after figure.")
+ "FIN holds 0.000000 before the farm-out, and on the Ekene well the engine's held-after figure is 30.000000, the same as the interest earned. The share paid sets the payment, the farmor keeps what it does not farm out, and the promote is measured against the held-after figure.")
 
 q(0, "With no cap, what does a promote of 10 points on a 40000000.000000 well mean in money?",
  "A carry of 4000000.000000 paid beyond the farminee's own share.",
@@ -169,7 +169,7 @@ q(3, "Past costs of 9000000.000000, with 30 percent of them repaid by FIN (earn-
   "1500000.000000, the bonus."],
  "Thirty percent of 9000000.000000 is the engine's 2700000.000000. The Ekene deal repays the same share of a larger sum, 12000000.000000, giving 3600000.000000; repaying the whole would need a stated 100 percent; and the bonus of 1500000.000000 is a separate term of the same case.")
 
-q(2, "FIN earns 25 percent of sole holder EKO's licence by paying 33.333333 percent of a drilled 12000000.000000 well; there is no cap, no bonus and no reimbursement. What consideration reaches EKO?",
+q(2, "FIN earns 25 percent of sole holder EKO's licence by paying one third (33.333333 percent at six decimals) of a drilled 12000000.000000 well; there is no cap, no bonus and no reimbursement. What consideration reaches EKO?",
  "1000000.000000, the carry alone.",
  ["4000000.000000, the whole of FIN's payment for the well, counted as consideration.",
   "0.000000, as no cash is stated.",
@@ -190,7 +190,7 @@ q(3, "Sum what FIN hands over on earn-bonus-and-reimbursement: 16000000.000000 t
   "23800000.000000, which is FIN's outlay on the Ekene Deep deal, a different well."],
  "Adding the three stated sums gives the engine's 20200000.000000. On this case EKO's consideration is 8200000.000000, which counts the carry in place of FIN's whole payment; 16000000.000000 omits the bonus and the reimbursement; and 23800000.000000 comes from a different well and different cash.")
 
-q(1, "Why does the equivalent working interest sit above the share paid on a deal with a bonus and a reimbursement?",
+q(1, "Why does the equivalent working interest sit above the share paid on an uncapped deal with a bonus and a reimbursement?",
  "It adds the cash to the well payment, so more cash moves it further above.",
  ["It divides by the vested interest, which is always below the share paid.",
   "It counts the carry twice, once in the payment and once as consideration.",
@@ -204,12 +204,12 @@ q(2, "What does the course say the equivalent working interest is?",
   "The interest that vests to the farminee once every earning event of the deal is complete."],
  "The basis calls it \"the heads-up interest that would cost the farminee the same\", computed from the stated payment, bonus and reimbursement. The engine asserts no market value and forecasts no price; a later tier prices an interest with a separate function on a stated basis. The vested interest is a separate figure, 30.000000 on the Ekene deal against 51.739130.")
 
-q(0, "In which two of the engine's totals does the cash bonus appear?",
+q(0, "Which pair of the engine's money totals both count the cash bonus?",
  "The farmor's consideration and the farminee's outlay.",
  ["The farminee's well payment and the carry, since the bonus is paid through the well.",
   "The farmor's well payment and the other parties' payments, split by participating interest.",
   "The promote in points and the promote ratio, which the bonus raises for the farminee."],
- "The bonus moves money from the farminee to the farmor, so the engine counts it in the consideration (beside the carry and the reimbursement) and in the outlay (beside the well payment and the reimbursement). It changes no split of the well, no party's payment for it, and no promote.")
+ "The bonus moves money from the farminee to the farmor, so the engine counts it in the consideration (beside the carry and the reimbursement) and in the outlay (beside the well payment and the reimbursement). It changes no split of the well, no party's payment for it, and no promote. The equivalent working interest and its ratio count it too, as a share of the well.")
 
 # ---- the consent process in words
 q(1, "Under reg. 4(2) of the 2024 Regulations, to whom is an application for the Minister's consent made?",

@@ -55,7 +55,7 @@ q(2, "What must a holder's notification of intention to the Commission state und
  "Regulation 4(4)(b) asks for a statement of \"the reason for the intended assignment, the method intended to be used for the conduct of the transaction, and possible technical and economic benefits derivable from the transaction\". The earning calculator gives figures a notification could carry, but the regulation names no promote, fee or date. A field development plan is the marginal field condition of PIA s.94(5).")
 
 q(3, "What happens when the Commission does not answer a notification of intention within 15 working days?",
- "The notification is deemed approved (reg. 4(7)).",
+ "The application is deemed approved (reg. 4(7)).",
  ["The notification lapses, and the holder must notify the Commission again before applying.",
   "The Minister decides it directly, with no recommendation from the Commission.",
   "The deal proceeds as an earn-in, with the assignment put off until the work is done."],
@@ -73,7 +73,7 @@ q(3, "How long does reg. 18(3) of the 2024 Regulations give the Commission to an
  ["15 working days, the same period the Commission has for a notification of intention.",
   "60 calendar days, after which the application is deemed approved.",
   "No period: the Regulations leave a PEL's timing open."],
- "Regulation 18(3): the Commission shall communicate the reason for the refusal or approval of an assignment of an interest in a PEL in writing to the applicant within 60 working days of the receipt of the application. The 15 working days are for a notification of intention under reg. 4(7), and the period is counted in working days with no deemed approval.")
+ "Regulation 18(3): the Commission shall communicate the reason for the refusal or approval of an assignment of an interest in a PEL in writing to the applicant within 60 working days of the receipt of the application. The 15 working days are for a notification of intention under reg. 4(7), and the period is counted in working days; reg. 18(3) as the course quotes it names no deemed approval.")
 
 q(1, "Which provisions the course quotes say that fees for an assignment, or for assigning rights, are not deductible for tax?",
  "PIA s.95(12), AOI Regulations 2024 reg. 19(5), and PIA s.264(f) and s.302(12)(c).",

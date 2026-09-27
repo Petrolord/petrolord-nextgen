@@ -25,7 +25,7 @@ q(3, "FIN's Ekene Deep-1 terms are 40 percent paid for 30 percent earned from EK
   "0.000000 points and a ratio of 1.000000, since the cap on the gross cost removes the promote."],
  "40 paid less 30 held is 10.000000 points, and 40 over 30 is a ratio of 1.333333, as the engine's row prints. 8.333333 points belongs to earn-third-for-a-quarter. 1.724638 is the promote-adjusted ratio, which counts the cash as well. The cap changes how the cost is split; the reason line still reports a promote of 10 points.")
 
-q(0, "A third for a quarter: FIN pays 33.333333 percent of a 12000000.000000 well (no cap) for 25 percent from EKO, the sole holder. What promote in points results?",
+q(0, "A third for a quarter: FIN pays one third (33.333333 percent at six decimals) of a 12000000.000000 well (no cap) for 25 percent from EKO, the sole holder. What promote in points results?",
  "8.333333 points, at the same 1.333333 ratio as forty for thirty.",
  ["10.000000 points, the Ekene promote, since the ratio of 1.333333 is the same on both deals.",
   "25.000000 points, the whole participating interest earned counted as the farminee's promote.",
@@ -86,7 +86,7 @@ q(0, "The earn-third-for-a-quarter reason line prints FIN's share paid with ever
  ["The message, the engine's own words.",
   "Neither of them: round the share to the nearest whole percent first.",
   "The message's figure rounded to the cent."],
- "The digest's precision rule: inside a message the engine prints a stated input as it was given, and every numeric field keeps full precision, quoted at six decimals. The course reasons with the field, 33.333333, and quotes a message only verbatim. Rounding to a whole point changes the deal, and cent rounding applies to money in a reason.")
+ "The course's precision rule: inside a message the engine prints a stated input as it was given, and every numeric field keeps full precision, quoted at six decimals. The course reasons with the field, 33.333333, and quotes a message only verbatim. Rounding to a whole point changes the deal, and cent rounding applies to money in a reason.")
 
 q(2, "The refusal for a share paid of 25 against an interest earned of 30 names 30 as the lower limit. What is that 30?",
  "What FIN holds once the event vests, the 30 percent it earns.",
@@ -102,12 +102,12 @@ q(0, "Along the edge of the promote, how far can the share paid rise on a licenc
   "75 percent, with PA carried for five points of its own share of the well."],
  "The farminee pays only the farmor's side of the well. At a share of 70 the engine returns EKO paying 0.000000 and a carry of 16000000.000000 (earn-full-carry); a share one point above is refused, with 70 named as the farmor's interest before the deal. PA pays its own share throughout, and no text sets a ceiling of 40 on a promote.")
 
-q(3, "In dollars, how large is the carry when FIN, earning 25 percent from sole holder EKO, pays 33.333333 percent of an uncapped well costing 12000000.000000?",
- "1000000.000000, which is the promote's 8.333333 points applied to the well.",
+q(3, "In dollars, what carry does FIN pay for sole holder EKO when a third of an uncapped 12000000.000000 well buys FIN a quarter of the licence?",
+ "1000000.000000, which is the promote in points applied to the well.",
  ["4000000.000000, which is the whole of what FIN pays for the 12000000.000000 well.",
   "3000000.000000, FIN's own 25 percent.",
   "8000000.000000, what EKO pays for the well after the farminee's payment is made."],
- "The engine returns a carry of 1000000.000000: FIN pays 4000000.000000, its own 25 percent is 3000000.000000, and the difference is the carry. With no cap that is the promote in points applied to the gross cost, 8.333333 points of 12000000.000000. 8000000.000000 is EKO's payment.")
+ "The engine returns a carry of 1000000.000000: FIN pays 4000000.000000, its own 25 percent is 3000000.000000, and the difference is the carry. With no cap that is the promote in points applied to the gross cost: a third less a quarter of 12000000.000000, the promote whose field prints 8.333333. 8000000.000000 is EKO's payment.")
 
 q(1, "Deals are often quoted as a ratio, such as forty for thirty. What does the engine's promote ratio divide by what?",
  "The share paid by the participating interest held after the event.",

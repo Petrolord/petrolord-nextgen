@@ -58,15 +58,15 @@ q(3, "Add a bonus of 1500000.000000 and a reimbursement of 2700000.000000 to FIN
  "50.500000, with a promote-adjusted ratio of 1.683333.",
  ["40.000000 and 1.333333, the share paid and the promote ratio before any cash is counted.",
   "51.739130 and 1.724638, the equivalent figures that belong to the Ekene Deep deal.",
-  "50.500000 with the plain ratio, 1.333333."],
- "The outlay is 20200000.000000, which over the 40000000.000000 well is 50.500000 percent, and over the 30 percent vested a ratio of 1.683333 (engine). 40.000000 and 1.333333 are the figures with no cash. The Ekene figures come from a different well and different cash. The ratio moves with the cash, so 1.333333 cannot sit beside 50.500000.")
+  "50.500000, with an adjusted ratio of 1.333333."],
+ "The outlay is 20200000.000000, which over the 40000000.000000 well is 50.500000 percent, and over the 30 percent vested a ratio of 1.683333 (engine). 40.000000 and 1.333333 are the figures with no cash. The Ekene figures come from a different well and different cash. The promote-adjusted ratio moves with the cash, so it cannot stay at 1.333333, the plain promote ratio the event row prints.")
 
 q(1, "A learner sets the cash bonus control to \"not stated\" and runs the call, then sets it to 0 and runs again. What does the engine return each time?",
- "First a refusal on cashBonus, a term with no default; then a result whose reason reads \"cash bonus: none (stated as 0)\".",
+ "First a refusal on cashBonus, a term with no default; then a result with a reason line reporting the bonus as stated at 0.",
  ["A result both times, since the engine reads a missing bonus as a bonus of 0 and says so in a reason.",
   "A refusal both times, since a bonus stated as 0 is treated as no bonus stated at all.",
   "First a result with no bonus line, then a refusal on cashBonus for a bonus of 0."],
- "A missing bonus is a gap in the terms, and the engine refuses it in its own words: \"cashBonus must be a finite number at or above 0; got nothing\". A bonus of 0 is a stated term, which the engine accepts and reports in a reason line of its own. The two are different things, which is why the panel's control offers both.")
+ "A missing bonus is a gap in the terms, and the engine refuses it in its own words: \"cashBonus must be a finite number at or above 0; got nothing\". A bonus of 0 is a stated term, which the engine accepts and reports in a reason line of its own: \"cash bonus: none (stated as 0)\". The two are different things, which is why the panel's control offers both.")
 
 q(2, "A farm-out carries no reimbursement of past costs. How must the box state its past costs?",
  "As an object with amount and reimbursedPct both 0.",
@@ -108,7 +108,7 @@ q(0, "In the engine's equivalent working interest, what is the farminee's outlay
  ["The farmor's participating interest before the deal, 70 on Ekene.",
   "The consideration to the farmor, carry and cash included.",
   "The participating interest vested, as in the ratio."],
- "The basis divides the farminee's payment, cash bonus and reimbursement by the gross cost of the completed events and multiplies by 100: the heads-up interest that would cost the farminee the same. Dividing that figure by the vested interest gives the promote-adjusted ratio. With nothing completed there is no gross cost to divide by.")
+ "The basis divides the farminee's payment, cash bonus and reimbursement by the gross cost of the completed events and multiplies by 100: the heads-up interest that would cost the farminee the same. Dividing that figure by the vested interest gives the promote-adjusted ratio.")
 
 q(2, "Heads up and cash-free: 30 percent of a drilled 40000000.000000 well, no cap, buys FIN 30 percent, with bonus and past costs both stated as 0. What equivalent working interest results?",
  "30.000000, the share paid.",

@@ -19,7 +19,7 @@ q(3, "The Ekene Deep-1 exploration well: EKO holds 70 and PA 30 percent; FIN pay
  "The engine's event row prints FIN paying 18200000.000000, 39.565217 percent of the 46000000.000000 well, and its reason line says the promote applies to 44000000 with the excess paid by the post-deal interests. 16000000.000000 would use the dry-hole cost, which is no term of the earning event. 13800000.000000 is PA's payment, a plain 30 percent of the well. 14000000.000000 is what EKO pays.")
 
 q(1, "On the Ekene Deep-1 row the engine prints FIN paying 18200000.000000, EKO 14000000.000000 and PA 13800000.000000. What check does the course make with those three payments?",
- "Their total is 46000000.000000, the gross cost of the well, so no term has been misread.",
+ "Their total is 46000000.000000, the gross cost of the well, so the whole well is paid.",
  ["Their total is 44000000.000000, the cap, with the excess billed to the parties later.",
   "FIN's payment equals EKO's and PA's together, the farminee paying for both.",
   "EKO's payment equals PA's, since both licence parties hold what the farminee leaves after its promote."],
@@ -57,8 +57,8 @@ q(3, "With EKO at 70 and PA at 30 percent, a box has FIN paying 75 percent of th
  "The share paid is capped at 70, the farmor's pre-deal share: a farminee pays no other party's share.",
  ["No share paid may exceed twice the interest earned, putting this deal's ceiling at 60.",
   "A promote above 40 points is refused as a matter of law under the 2024 Regulations.",
-  "The share paid plus PA's 30 percent would pass 100, and the parties' shares of any one well must sum to 100."],
- "The engine's words: \"events[0].farmineePaysPct must be at most 70, the farmor's interest before the deal (the farminee pays no other party's share); got 75\". The limit is the farmor's pre-deal share, since the farminee pays only the farmor's side of the well. The engine states no ratio ceiling and no legal cap on a promote; the Regulations set none.")
+  "The share paid may not pass 50 percent, the change-of-control line of PIA s.95(14), which 75 would cross."],
+ "The engine's words: \"events[0].farmineePaysPct must be at most 70, the farmor's interest before the deal (the farminee pays no other party's share); got 75\". The limit is the farmor's pre-deal share, since the farminee pays only the farmor's side of the well. The engine states no ratio ceiling and no legal cap on a promote; the Regulations set none. The 50% of s.95(14) is a line on voting power in a holder and plays no part in the earning call.")
 
 q(1, "Suppose FIN is to earn 71 percent of the licence from EKO, whose participating interest before the deal is 70. Which field does the refusal name, and against what limit?",
  "events[0].earnedPct, at most the farmor's interest 70 less the 0 already earned.",
@@ -95,7 +95,7 @@ q(1, "On the Ekene Deep-1 row the share paid reads 40.000000 while the share of 
   "The engine rounds every share paid down to the promote's whole points before it splits the well."],
  "The reason line reads: \"the gross cost exceeds the cap 44000000 by 2000000: the promote applies to 44000000; the excess is paid by the post-deal interests (FIN 30%, EKO 40%)\". The course reads that line as a record here and leaves the working of caps to a later tier. The bonus and the reimbursement leave the split of the well alone, and the engine rounds no stated share.")
 
-q(0, "EKO holds the whole licence (100 percent). Its well costs 12000000.000000 with no cap, and FIN pays 33.333333 percent of it for 25 percent; the event is completed. What is EKO's payment?",
+q(0, "EKO holds the whole licence (100 percent). Its well costs 12000000.000000 with no cap, and FIN pays one third of it (the field prints 33.333333 percent) for 25 percent; the event is completed. What is EKO's payment?",
  "8000000.000000, EKO's 75 percent less the carry FIN pays.",
  ["9000000.000000, the 75 percent EKO holds after the event, applied to the whole well.",
   "4000000.000000, the payment the engine prints for FIN, the farminee, on that row.",

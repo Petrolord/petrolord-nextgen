@@ -93,10 +93,10 @@
    "The call runs, and carryCap is read as a carry-amount cap on the first event of the box, at the amount stated.",
    "It refuses the call on carryCap and lists the eight top-level keys the function reads.",
    "It runs the call and quietly drops carryCap as a key it does not read.",
-   "A reason line is added warning that carryCap was set aside as a key it does not read, and the call runs."
+   "It refuses on events[0].cap, saying a cap must be stated inside the event it applies to."
   ],
   "answer": 1,
-  "explanation": "Every function refuses an input key it does not read, at every level, naming the key and the accepted keys. In the engine's words: \"carryCap is not an accepted key; the accepted keys at the top level are parties, farmor, farminee, events, vesting, eventsCompleted, cashBonus, pastCosts\". A misspelt optional key is refused so that a term is never silently dropped, and a cap belongs inside an event's cap object."
+  "explanation": "Every function refuses an input key it does not read, at every level, naming the key and the accepted keys. In the engine's words: \"carryCap is not an accepted key; the accepted keys at the top level are parties, farmor, farminee, events, vesting, eventsCompleted, cashBonus, pastCosts\". A misspelt optional key is refused so that a term is never silently dropped, and a cap belongs inside an event's cap object. The refusal names carryCap itself, at the top level, and no event field."
  },
  {
   "prompt": "A box has no vesting rule and also carries an unknown top-level key vest. Which problem does the engine name?",
@@ -115,10 +115,10 @@
    "It computes a farm-in between partners, moving 30 percent of the licence from EKO across to PA's holding.",
    "It merges PA's positions and reports PA at 60 percent after the deal.",
    "It refuses on farminee.id: the farminee must have an id no licence party has.",
-   "It swaps the roles, so PA becomes the farmor and EKO the farminee."
+   "It refuses on farmor, since EKO may not farm out to a party already on its licence."
   ],
   "answer": 2,
-  "explanation": "The engine refuses a farminee that is already a licence party. Its own words: farminee.id must be an id no licence party has (EKO, PA); got \"PA\". A trade between existing partners is a different trade, and the earning call does not compute it. The engine never swaps or merges roles: the farmor and the farminee are stated inputs."
+  "explanation": "The engine refuses a farminee that is already a licence party. Its own words: farminee.id must be an id no licence party has (EKO, PA); got \"PA\". A trade between existing partners is a different trade, and the earning call does not compute it. The engine never merges roles, and the farmor EKO is a valid stated input, so the refusal names the farminee field alone."
  },
  {
   "prompt": "Which figures does the farmout engine hold for itself, with no caller stating them?",
@@ -140,7 +140,7 @@
    "It is the regulator's worked example from the 2024 Regulations, converted from naira to US dollars."
   ],
   "answer": 1,
-  "explanation": "The fixture labels itself: \"SYNTHETIC teaching data for the Ekene field (ours). No real company, deal, prospect, price or regulator decision. The Ekene Deep prospect and every party below are synthetic.\" It is written by a stated script, every party in it is synthetic, and the 2024 Regulations print no worked example at all."
+  "explanation": "The fixture labels itself: \"SYNTHETIC teaching data for the Ekene field (ours). No real company, deal, prospect, price or regulator decision. The Ekene Deep prospect and every party below are synthetic.\" It is written by a stated script, every party in it is synthetic, and no public text the course reads prints a farm-in schedule."
  },
  {
   "prompt": "Where does an Associate learner run the practicals of this course?",

@@ -71,7 +71,7 @@
    "The notification lapses, and the holder must notify the Commission again before applying.",
    "The Minister decides it directly, with no recommendation from the Commission.",
    "The deal proceeds as an earn-in, with the assignment put off until the work is done.",
-   "The notification is deemed approved (reg. 4(7))."
+   "The application is deemed approved (reg. 4(7))."
   ],
   "answer": 3,
   "explanation": "Regulation 4(7) says the Commission shall approve or disapprove the transaction within 15 working days from receipt of the notification of intention, failing which the application is deemed approved. Nothing lapses and the Minister gains no direct role. An earn-in is a deal's own order of events, which HMRC's manual describes; no regulation turns silence into one."
@@ -96,7 +96,7 @@
    "60 working days from receipt, with its reason given in writing."
   ],
   "answer": 3,
-  "explanation": "Regulation 18(3): the Commission shall communicate the reason for the refusal or approval of an assignment of an interest in a PEL in writing to the applicant within 60 working days of the receipt of the application. The 15 working days are for a notification of intention under reg. 4(7), and the period is counted in working days with no deemed approval."
+  "explanation": "Regulation 18(3): the Commission shall communicate the reason for the refusal or approval of an assignment of an interest in a PEL in writing to the applicant within 60 working days of the receipt of the application. The 15 working days are for a notification of intention under reg. 4(7), and the period is counted in working days; reg. 18(3) as the course quotes it names no deemed approval."
  },
  {
   "prompt": "Which provisions the course quotes say that fees for an assignment, or for assigning rights, are not deductible for tax?",

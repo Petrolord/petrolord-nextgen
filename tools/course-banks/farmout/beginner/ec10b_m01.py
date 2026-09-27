@@ -71,8 +71,8 @@ q(1, "A learner adds a top-level key carryCap to an earning box that is otherwis
  "It refuses the call on carryCap and lists the eight top-level keys the function reads.",
  ["The call runs, and carryCap is read as a carry-amount cap on the first event of the box, at the amount stated.",
   "It runs the call and quietly drops carryCap as a key it does not read.",
-  "A reason line is added warning that carryCap was set aside as a key it does not read, and the call runs."],
- "Every function refuses an input key it does not read, at every level, naming the key and the accepted keys. In the engine's words: \"carryCap is not an accepted key; the accepted keys at the top level are parties, farmor, farminee, events, vesting, eventsCompleted, cashBonus, pastCosts\". A misspelt optional key is refused so that a term is never silently dropped, and a cap belongs inside an event's cap object.")
+  "It refuses on events[0].cap, saying a cap must be stated inside the event it applies to."],
+ "Every function refuses an input key it does not read, at every level, naming the key and the accepted keys. In the engine's words: \"carryCap is not an accepted key; the accepted keys at the top level are parties, farmor, farminee, events, vesting, eventsCompleted, cashBonus, pastCosts\". A misspelt optional key is refused so that a term is never silently dropped, and a cap belongs inside an event's cap object. The refusal names carryCap itself, at the top level, and no event field.")
 
 q(0, "A box has no vesting rule and also carries an unknown top-level key vest. Which problem does the engine name?",
  "The unknown key vest: every function checks its accepted keys before it reads a term.",
@@ -85,8 +85,8 @@ q(2, "A box for the Ekene licence (EKO 70 and PA 30 percent) names the farminee'
  "It refuses on farminee.id: the farminee must have an id no licence party has.",
  ["It computes a farm-in between partners, moving 30 percent of the licence from EKO across to PA's holding.",
   "It merges PA's positions and reports PA at 60 percent after the deal.",
-  "It swaps the roles, so PA becomes the farmor and EKO the farminee."],
- "The engine refuses a farminee that is already a licence party. Its own words: farminee.id must be an id no licence party has (EKO, PA); got \"PA\". A trade between existing partners is a different trade, and the earning call does not compute it. The engine never swaps or merges roles: the farmor and the farminee are stated inputs.")
+  "It refuses on farmor, since EKO may not farm out to a party already on its licence."],
+ "The engine refuses a farminee that is already a licence party. Its own words: farminee.id must be an id no licence party has (EKO, PA); got \"PA\". A trade between existing partners is a different trade, and the earning call does not compute it. The engine never merges roles, and the farmor EKO is a valid stated input, so the refusal names the farminee field alone.")
 
 q(3, "Which figures does the farmout engine hold for itself, with no caller stating them?",
  "Size caps and a sum tolerance in DEFAULTS, and the cited gazetted figures in NIGERIA_ASSIGNMENT.",
@@ -100,7 +100,7 @@ q(1, "What does the Ekene farm-out fixture file say about its own data?",
  ["It is a redacted copy of a real Nigerian farm-out, with the parties' names replaced by Ekene names.",
   "It reproduces the Penn State drill or farm out problem under Ekene names.",
   "It is the regulator's worked example from the 2024 Regulations, converted from naira to US dollars."],
- "The fixture labels itself: \"SYNTHETIC teaching data for the Ekene field (ours). No real company, deal, prospect, price or regulator decision. The Ekene Deep prospect and every party below are synthetic.\" It is written by a stated script, every party in it is synthetic, and the 2024 Regulations print no worked example at all.")
+ "The fixture labels itself: \"SYNTHETIC teaching data for the Ekene field (ours). No real company, deal, prospect, price or regulator decision. The Ekene Deep prospect and every party below are synthetic.\" It is written by a stated script, every party in it is synthetic, and no public text the course reads prints a farm-in schedule.")
 
 q(0, "Where does an Associate learner run the practicals of this course?",
  "In the earning calculator, the course's own panel, calling the vendored engine the lessons quote.",
