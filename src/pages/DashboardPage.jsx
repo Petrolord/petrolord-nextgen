@@ -82,6 +82,7 @@ import GsaLearningPage from '@/pages/apps/GsaLearningPage';
 import JoaLearningPage from '@/pages/apps/JoaLearningPage';
 import FarmoutLearningPage from '@/pages/apps/FarmoutLearningPage';
 import PrmsLearningPage from '@/pages/apps/PrmsLearningPage';
+import MarineLearningPage from '@/pages/apps/MarineLearningPage';
 import HygieneLearningPage from '@/pages/apps/HygieneLearningPage';
 import RiskChangeLearningPage from '@/pages/apps/RiskChangeLearningPage';
 import ComplianceLearningPage from '@/pages/apps/ComplianceLearningPage';
@@ -472,6 +473,7 @@ const DashboardPage = () => {
     <Route path="apps/forecastml" element={<ForecastmlLearningPage />} />
     <Route path="apps/appliedai" element={<AppliedaiLearningPage />} />
     <Route path="apps/procurement" element={<ProcurementLearningPage />} />
+    <Route path="apps/marine" element={<MarineLearningPage />} />
     <Route path="apps/pia" element={<PiaLearningPage />} />
     <Route path="apps/gsa" element={<GsaLearningPage />} />
     <Route path="apps/joa" element={<JoaLearningPage />} />

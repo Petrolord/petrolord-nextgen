@@ -1,0 +1,126 @@
+{
+ "dataset": "MGBIDI (synthetic)",
+ "label": "MGBIDI, the Mgbidi supply base and its fleet (synthetic)",
+ "shoreBase:mmc": {
+  "berths": 3,
+  "arrivalsPerDay": 4.6,
+  "workingHoursPerDay": 20,
+  "service": {
+   "fixedHours": 1.5,
+   "lifts": 84,
+   "liftsPerHour": 14,
+   "bulkM3": 540,
+   "bulkM3PerHour": 120,
+   "concurrent": true
+  },
+  "model": "M/M/c",
+  "targetMeanWaitHours": 0.35
+ },
+ "shoreBase:mdc": {
+  "berths": 3,
+  "arrivalsPerDay": 4.6,
+  "workingHoursPerDay": 20,
+  "service": {
+   "fixedHours": 1.5,
+   "lifts": 84,
+   "liftsPerHour": 14,
+   "bulkM3": 540,
+   "bulkM3PerHour": 120,
+   "concurrent": true
+  },
+  "model": "M/D/c"
+ },
+ "fleetVariability": {
+  "vessel": {
+   "name": "PSV Mgbidi Pride (synthetic)",
+   "speedKnots": 12,
+   "deckAreaM2": 780,
+   "deckUsableFraction": 0.74,
+   "deckLoadT": 1900,
+   "deadweightT": 3400,
+   "tanks": {
+    "diesel": 780,
+    "water": 1000
+   },
+   "fuelTPerHour": {
+    "sailing": 0.49,
+    "port": 0.036,
+    "field": 0.29
+   }
+  },
+  "products": [
+   {
+    "id": "diesel",
+    "name": "Marine gas oil (synthetic)",
+    "kind": "liquid",
+    "densityTPerM3": 0.85
+   },
+   {
+    "id": "water",
+    "name": "Potable water (synthetic)",
+    "kind": "liquid",
+    "densityTPerM3": 1
+   }
+  ],
+  "installations": [
+   {
+    "id": "MG-A",
+    "name": "Mgbidi-A platform (synthetic)",
+    "distanceFromBaseNm": 71.5,
+    "fieldHours": 6.5,
+    "minVisits": 2,
+    "demand": {
+     "deckAreaM2": 690.5,
+     "deckWeightT": 812.25,
+     "bulk": {
+      "diesel": 505,
+      "water": 880
+     }
+    }
+   },
+   {
+    "id": "MG-B",
+    "name": "Mgbidi-B platform (synthetic)",
+    "distanceFromBaseNm": 88.25,
+    "fieldHours": 5.25,
+    "minVisits": 2,
+    "demand": {
+     "deckAreaM2": 402.75,
+     "deckWeightT": 455.5,
+     "bulk": {
+      "diesel": 310,
+      "water": 520
+     }
+    }
+   }
+  ],
+  "route": {
+   "mode": "dedicated"
+  },
+  "portHours": 13.5,
+  "weather": {
+   "factor": {
+    "min": 1,
+    "mode": 1.15,
+    "max": 1.55
+   },
+   "appliesTo": [
+    "sailing",
+    "field"
+   ]
+  },
+  "fuelPricePerT": 830.25,
+  "periodDays": 7,
+  "vesselAvailableDays": 6.5,
+  "voyageRounding": "up",
+  "vesselRounding": "up",
+  "demandFactor": {
+   "min": 0.9,
+   "mode": 1,
+   "max": 1.35
+  },
+  "plannedVessels": 2,
+  "iterations": 20000,
+  "seed": 20291117
+ }
+}

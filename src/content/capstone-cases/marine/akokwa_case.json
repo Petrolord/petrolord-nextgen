@@ -1,0 +1,208 @@
+{
+ "dataset": "AKOKWA (synthetic)",
+ "label": "AKOKWA, a week of supply and one voyage of deck cargo for the Akokwa cluster (synthetic)",
+ "fleetSize": {
+  "vessel": {
+   "name": "PSV Akokwa Crest (synthetic)",
+   "speedKnots": 12.5,
+   "deckAreaM2": 860,
+   "deckUsableFraction": 0.72,
+   "deckLoadT": 2150,
+   "deadweightT": 3850,
+   "tanks": {
+    "diesel": 850,
+    "water": 1100,
+    "brine": 450,
+    "cement": 280
+   },
+   "fuelTPerHour": {
+    "sailing": 0.52,
+    "port": 0.04,
+    "field": 0.31
+   }
+  },
+  "products": [
+   {
+    "id": "diesel",
+    "name": "Marine gas oil (synthetic)",
+    "kind": "liquid",
+    "densityTPerM3": 0.845
+   },
+   {
+    "id": "water",
+    "name": "Potable water (synthetic)",
+    "kind": "liquid",
+    "densityTPerM3": 1
+   },
+   {
+    "id": "brine",
+    "name": "Completion brine (synthetic)",
+    "kind": "liquid",
+    "densityTPerM3": 1.25
+   },
+   {
+    "id": "cement",
+    "name": "Cement, dry bulk (synthetic)",
+    "kind": "dry",
+    "densityTPerM3": 1.45
+   }
+  ],
+  "installations": [
+   {
+    "id": "AK-1",
+    "name": "Akokwa wellhead platform (synthetic)",
+    "fieldHours": 4.5,
+    "minVisits": 2,
+    "demand": {
+     "deckAreaM2": 415.5,
+     "deckWeightT": 388.25,
+     "bulk": {
+      "diesel": 365,
+      "water": 610
+     }
+    }
+   },
+   {
+    "id": "AK-2",
+    "name": "Akokwa semi-submersible (synthetic)",
+    "fieldHours": 9.25,
+    "minVisits": 3,
+    "demand": {
+     "deckAreaM2": 1037.75,
+     "deckWeightT": 1420.5,
+     "bulk": {
+      "diesel": 540,
+      "water": 820,
+      "brine": 395,
+      "cement": 215
+     }
+    }
+   },
+   {
+    "id": "AK-3",
+    "name": "Akokwa processing platform (synthetic)",
+    "fieldHours": 6.75,
+    "minVisits": 2,
+    "demand": {
+     "deckAreaM2": 372.25,
+     "deckWeightT": 305.5,
+     "bulk": {
+      "diesel": 290,
+      "water": 540
+     }
+    }
+   },
+   {
+    "id": "AK-4",
+    "name": "Akokwa FSO (synthetic)",
+    "fieldHours": 3.5,
+    "minVisits": 1,
+    "demand": {
+     "deckAreaM2": 118.5,
+     "deckWeightT": 96.75,
+     "bulk": {
+      "diesel": 175,
+      "water": 230
+     }
+    }
+   }
+  ],
+  "route": {
+   "mode": "milk-run",
+   "stops": [
+    "AK-1",
+    "AK-2",
+    "AK-3",
+    "AK-4"
+   ],
+   "legsNm": [
+    58.5,
+    16.25,
+    11.75,
+    24.5,
+    83.25
+   ]
+  },
+  "portHours": 14.5,
+  "weather": {
+   "factor": 1.25,
+   "appliesTo": [
+    "sailing",
+    "port"
+   ]
+  },
+  "fuelPricePerT": 812.75,
+  "periodDays": 7,
+  "vesselAvailableDays": 6.25,
+  "voyageRounding": "up",
+  "vesselRounding": "up"
+ },
+ "deckPlan": {
+  "deck": {
+   "name": "PSV Akokwa Crest clear deck (synthetic)",
+   "areaM2": 860,
+   "usableFraction": 0.72,
+   "loadT": 2150
+  },
+  "items": [
+   {
+    "id": "ak-ibc",
+    "name": "Chemical IBC in a frame (synthetic)",
+    "lengthM": 1.25,
+    "widthM": 1.05,
+    "weightT": 1.35,
+    "quantity": 14
+   },
+   {
+    "id": "ak-skip",
+    "name": "Waste skip (synthetic)",
+    "lengthM": 2.6,
+    "widthM": 1.75,
+    "weightT": 2.9,
+    "quantity": 7
+   },
+   {
+    "id": "ak-c10",
+    "name": "10 ft offshore container (synthetic)",
+    "lengthM": 2.99,
+    "widthM": 2.44,
+    "weightT": 7.5,
+    "quantity": 11
+   },
+   {
+    "id": "ak-bskt",
+    "name": "8 m cargo basket (synthetic)",
+    "lengthM": 8,
+    "widthM": 2.45,
+    "weightT": 7.25,
+    "quantity": 6
+   },
+   {
+    "id": "ak-tank",
+    "name": "Portable brine tank (synthetic)",
+    "lengthM": 5.2,
+    "widthM": 2.35,
+    "weightT": 15.5,
+    "quantity": 5
+   },
+   {
+    "id": "ak-c20",
+    "name": "20 ft offshore container (synthetic)",
+    "lengthM": 6.06,
+    "widthM": 2.44,
+    "weightT": 11.5,
+    "quantity": 14
+   },
+   {
+    "id": "ak-riser",
+    "name": "Riser joints, bundled (synthetic)",
+    "lengthM": 15.25,
+    "widthM": 2.75,
+    "weightT": 41.5,
+    "quantity": 3
+   }
+  ],
+  "voyages": 2,
+  "rule": "first-fit-decreasing-area"
+ }
+}

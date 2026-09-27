@@ -1961,5 +1961,27 @@
       "digest.txt": "9cfd2c1a1db886eb657bf5991d7ebe4c1c8c56ac9c0318a1dabf8be253f96d6f",
       "fields.json": "ba6ccd75007fd2800303707f9d1396551eb3bcb3d829de0ab1debae8e3c8078e"
     }
+  },
+  "marine": {
+    "course": "SC4",
+    "live": "/root/cat-wip-marine",
+    "kit": "full",
+    "kitNote": "PRELIMINARY: registered at the foundation so the suites read the committed copy; the inputs list and the note are completed with the full mirror.",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "precision.json",
+      "wave.json",
+      "structure.py",
+      "marine_capstone.mjs",
+      "marine_engine.mjs",
+      "variant_loader.mjs",
+      "marine_dump.mjs",
+      "build_digest.sh"
+    ],
+    "pins": {
+      "digest.txt": "341e4ad74b7d6dfbf2d4edf3911975c21ba471af4a9b20695eee1ec2a9109dec",
+      "fields.json": "856f50dee882c05f61733d0ba472eddb6968248406eee57ff589a41f7a931b63"
+    }
   }
 }

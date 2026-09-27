@@ -285,10 +285,10 @@ w();
 const two = (x) => (Math.round(x * 100) / 100).toFixed(2);
 const r51 = [1, 2, 5, 10, 20].map((c) => runG(`adan-resing-table-5-1-c${c}`));
 const a51 = [1, 2, 5, 10, 20].map((c) => argsOf(`adan-resing-table-5-1-c${c}`));
-w(`CHECK ONE: ADAN AND RESING, TABLE 5.1 (text: the M/M/c delay probability and mean wait for a mean service time of 1 and an occupation rate of 0.9, at 1, 2, 5, 10 and 20 servers). The golden inputs adan-resing-table-5-1-c1 to -c20 state a service of ${S(a51[0].service.fixedHours)} fixed hour, a working day of ${S(a51[0].workingHoursPerDay)} hours and ${a51.map((a) => S(a.arrivalsPerDay)).join(', ')} arrivals a day, so the offered load is 0.9 per berth. The engine returns:`);
+w(`CHECK ONE: ADAN AND RESING, TABLE 5.1 (text: the M/M/c delay probability and mean wait for a mean service time of 1 and an occupation rate of 0.9, at 1, 2, 5, 10 and 20 servers). The golden inputs adan-resing-table-5-1-c1 to adan-resing-table-5-1-c20 state a service of ${S(a51[0].service.fixedHours)} fixed hour, a working day of ${S(a51[0].workingHoursPerDay)} hours and ${a51.map((a) => S(a.arrivalsPerDay)).join(', ')} arrivals a day, so the offered load is 0.9 per berth. The engine returns:`);
 w();
-table(['berths', 'arrivals a day (golden input)', 'berth utilisation (engine)', 'delay probability (engine)', 'printed (text)', 'mean wait (engine)', 'the engine\'s mean wait at two decimals (derived)', 'printed (text)'],
-  r51.map((r, i) => [TEXT.ar51.rows[i][0], S(a51[i].arrivalsPerDay), f6(r.berthUtilisation), f6(r.probabilityWait), TEXT.ar51.rows[i][1], f6(r.meanWaitHours), two(r.meanWaitHours), TEXT.ar51.rows[i][2]]));
+table(['golden input', 'berths', 'arrivals a day (golden input)', 'berth utilisation (engine)', 'delay probability (engine)', 'printed (text)', 'mean wait (engine)', 'the engine\'s mean wait at two decimals (derived)', 'printed (text)'],
+  r51.map((r, i) => [`adan-resing-table-5-1-c${TEXT.ar51.rows[i][0]}`, TEXT.ar51.rows[i][0], S(a51[i].arrivalsPerDay), f6(r.berthUtilisation), f6(r.probabilityWait), TEXT.ar51.rows[i][1], f6(r.meanWaitHours), two(r.meanWaitHours), TEXT.ar51.rows[i][2]]));
 r51.forEach((r, i) => {
   must(`AR 5.1 c=${TEXT.ar51.rows[i][0]}: the delay probability rounds to the printed figure`, two(r.probabilityWait) === TEXT.ar51.rows[i][1], `${r.probabilityWait}`);
   if (i !== 2) must(`AR 5.1 c=${TEXT.ar51.rows[i][0]}: the mean wait rounds to the printed figure`, two(r.meanWaitHours) === TEXT.ar51.rows[i][2], `${r.meanWaitHours}`);
@@ -302,10 +302,10 @@ w();
 // Table 5.2
 const r52 = [1, 2, 5, 10, 20].map((c) => runG(`adan-resing-table-5-2-c${c}`));
 const a52 = [1, 2, 5, 10, 20].map((c) => argsOf(`adan-resing-table-5-2-c${c}`));
-w('CHECK TWO: ADAN AND RESING, TABLE 5.2 (text: a fixed surplus capacity of 0.1 server, so the occupation rate rises with the number of servers). The golden inputs adan-resing-table-5-2-c1 to -c20 state the same service and working day with the arrivals below:');
+w('CHECK TWO: ADAN AND RESING, TABLE 5.2 (text: a fixed surplus capacity of 0.1 server, so the occupation rate rises with the number of servers). The golden inputs adan-resing-table-5-2-c1 to adan-resing-table-5-2-c20 state the same service and working day with the arrivals below:');
 w();
-table(['berths', 'arrivals a day (golden input)', 'berth utilisation (engine)', 'printed rho (text)', 'mean wait (engine)', 'printed (text)', 'mean in the system (engine)', 'printed (text)'],
-  r52.map((r, i) => [TEXT.ar52.rows[i][0], S(a52[i].arrivalsPerDay), f6(r.berthUtilisation), TEXT.ar52.rows[i][1], f6(r.meanWaitHours), TEXT.ar52.rows[i][2], f6(r.meanInSystem), TEXT.ar52.rows[i][3]]));
+table(['golden input', 'berths', 'arrivals a day (golden input)', 'berth utilisation (engine)', 'printed rho (text)', 'mean wait (engine)', 'printed (text)', 'mean in the system (engine)', 'printed (text)'],
+  r52.map((r, i) => [`adan-resing-table-5-2-c${TEXT.ar52.rows[i][0]}`, TEXT.ar52.rows[i][0], S(a52[i].arrivalsPerDay), f6(r.berthUtilisation), TEXT.ar52.rows[i][1], f6(r.meanWaitHours), TEXT.ar52.rows[i][2], f6(r.meanInSystem), TEXT.ar52.rows[i][3]]));
 r52.forEach((r, i) => {
   must(`AR 5.2 c=${TEXT.ar52.rows[i][0]}: the mean wait rounds to the printed figure`, two(r.meanWaitHours) === TEXT.ar52.rows[i][2], r.meanWaitHours);
   must(`AR 5.2 c=${TEXT.ar52.rows[i][0]}: the mean in the system rounds to the printed whole number`, Math.round(r.meanInSystem) === Number(TEXT.ar52.rows[i][3]), r.meanInSystem);
@@ -617,7 +617,7 @@ w(`THE PUBLISHED FUEL FIGURES. Skoko et al. (2024) print the daily fuel cost of 
 /* ============================================================ SECTION 11 */
 
 section('capacity', 'Deck and bulk capacity: the usable deck, deck load, deadweight and the tanks', ['Associate m04']);
-w('THE CAPACITY CONSTRAINTS, in the stated order: deck area (the deck area times the stated usable fraction), deck load (tonnes of deck cargo), deadweight (deck weight plus every bulk m3 times its stated density), then one tank per product in the order of the products. Deck cargo is measured in square metres and is not stacked, and bulk travels in segregated tanks, one product to a tank (Aas, Halskau and Wallace 2009, taught by concept). Cargo deadweight is the user\'s net figure: there is no stowage factor.');
+w('THE CAPACITY CONSTRAINTS, in the stated order: deck area (the deck area times the stated usable fraction), deck load (tonnes of deck cargo), deadweight (deck weight plus every bulk m3 times its stated density), then one tank per product in the order of the products. Deck cargo is measured in square metres, containers and baskets are not stacked, and bulk travels in segregated tanks, one product to a tank (Aas, Halskau and Wallace 2009, taught by concept); the engine stacks nothing. Cargo deadweight is the user\'s net figure: there is no stowage factor.');
 w();
 const ekVc = ekVv.constraints;
 table(['constraint', 'unit', 'load (engine)', 'capacity (engine)', 'utilisation (engine)'], ekVc.map((c) => [c.constraint, c.unit, f6(c.load), f6(c.capacity), f6(c.utilisation)]));
@@ -782,13 +782,14 @@ w();
 const ekFa = runG('ekene-fleet-ahts-milk-run');
 const ekFad = runG('ekene-fleet-ahts-dedicated');
 const ekFc = runG('ekene-fleet-calm');
-w('THE EKENE WEEK FOUR WAYS, AND CALM (golden inputs; vessels and voyages rounded up; fuel at the fixture price):');
+w('THE EKENE WEEK ON BOTH VESSELS AND BOTH ROUTES, WITH THE NEAREST RULE AND IN CALM WEATHER (golden inputs; voyages rounded up; vessels rounded up, except ekene-fleet-nearest-vessels, which rounds them to the nearest; fuel at the fixture price):');
 w();
 const frow = (id, r) => [id, r.voyageSets.map((s) => `${s.id} ${S(s.voyages)} (${s.drivenBy})`).join('; '), f6(r.vesselDays), f6(r.vesselsExact), S(r.vessels), f6(r.spareVesselDays), f6(r.fleetUtilisation), f6(r.fuelT), f6(r.fuelCost)];
 table(['golden input', 'voyages by set (engine)', 'vessel-days (engine)', 'vessels before rounding (engine)', 'vessels (engine)', 'spare vessel-days (engine)', 'fleet utilisation (engine)', 'fuel t (engine)', 'fuel cost (engine)'], [
-  frow('ekene-fleet-psv-milk-run', ekF), frow('ekene-fleet-ahts-milk-run', ekFa), frow('ekene-fleet-psv-dedicated', ekFd), frow('ekene-fleet-ahts-dedicated', ekFad), frow('ekene-fleet-calm', ekFc),
+  frow('ekene-fleet-psv-milk-run', ekF), frow('ekene-fleet-nearest-vessels', runG('ekene-fleet-nearest-vessels')), frow('ekene-fleet-ahts-milk-run', ekFa), frow('ekene-fleet-psv-dedicated', ekFd), frow('ekene-fleet-ahts-dedicated', ekFad), frow('ekene-fleet-calm', ekFc),
 ]);
-must('every Ekene week needs two vessels', [ekF, ekFa, ekFd, ekFad, ekFc].every((r) => r.vessels === 2), 'two');
+must('every Ekene week needs two vessels', [ekF, ekFa, ekFd, ekFad, ekFc, runG('ekene-fleet-nearest-vessels')].every((r) => r.vessels === 2), 'two');
+must('the nearest rule states nearest', argsOf('ekene-fleet-nearest-vessels').vesselRounding === 'nearest', 'nearest');
 w();
 w(`A PSV OR AN AHTS FOR THE SAME DEMAND. On the milk run the AHTS\'s smaller deck needs ${S(ekFa.voyageSets[0].voyages)} voyages where the PSV needs ${S(ekFs.voyages)}, and its utilisation of the two vessels is ${f6(ekFa.fleetUtilisation)} against ${f6(ekF.fleetUtilisation)} (engine). Both weeks round up to ${S(ekF.vessels)} vessels; the spare vessel-days and the fuel differ.`);
 w();
@@ -980,7 +981,7 @@ const vrow2 = (id) => { const r = runG(id); const a = argsOf(id); return [id, ty
 w('MORE RUNS (golden inputs; every figure a seeded estimate on the seed and draws shown, none graded):');
 w();
 table(['golden input', 'weather factor', 'demand factor', 'planned vessels', 'seed / draws', 'mean vessel-days', 'P90 (low)', 'P10 (high)', 'probability short', 'expected short vessel-days'],
-  ['variability-fixed-factors-equal-fleet-size', 'variability-weather-only', 'variability-demand-only-fractional', 'variability-planned-zero', 'variability-at-capacity-is-not-short', 'variability-one-vessel-short-always', 'ekene-variability-ahts-dedicated'].map(vrow2));
+  ['variability-fixed-factors-equal-fleet-size', 'variability-one-iteration', 'variability-weather-only', 'variability-demand-only-fractional', 'variability-planned-zero', 'variability-at-capacity-is-not-short', 'variability-one-vessel-short-always', 'ekene-variability-ahts-dedicated'].map(vrow2));
 const fx = runG('variability-fixed-factors-equal-fleet-size');
 must('fixed factors give fleetSize every draw', fx.vesselDays.min === ekF.vesselDays && fx.vesselDays.max === ekF.vesselDays, 'fixed');
 must('at capacity is not short; one vessel fewer is always short', runG('variability-at-capacity-is-not-short').probabilityShort === 0 && runG('variability-one-vessel-short-always').probabilityShort === 1, 'short');

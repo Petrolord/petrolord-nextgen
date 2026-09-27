@@ -91,27 +91,27 @@ THE ENGINE'S OWN WORDS ARE NOT A QUOTATION. The basis lines cite each source by 
 
 Nine printed figures or sets of figures from the sources are run through the engine. Each printed figure is cited as its source prints it (text); every other number is the engine's. quote_check.py checks that each text prints each figure cited here.
 
-CHECK ONE: ADAN AND RESING, TABLE 5.1 (text: the M/M/c delay probability and mean wait for a mean service time of 1 and an occupation rate of 0.9, at 1, 2, 5, 10 and 20 servers). The golden inputs adan-resing-table-5-1-c1 to -c20 state a service of 1 fixed hour, a working day of 10 hours and 9, 18, 45, 90, 180 arrivals a day, so the offered load is 0.9 per berth. The engine returns:
+CHECK ONE: ADAN AND RESING, TABLE 5.1 (text: the M/M/c delay probability and mean wait for a mean service time of 1 and an occupation rate of 0.9, at 1, 2, 5, 10 and 20 servers). The golden inputs adan-resing-table-5-1-c1 to adan-resing-table-5-1-c20 state a service of 1 fixed hour, a working day of 10 hours and 9, 18, 45, 90, 180 arrivals a day, so the offered load is 0.9 per berth. The engine returns:
 
-| berths | arrivals a day (golden input) | berth utilisation (engine) | delay probability (engine) | printed (text) | mean wait (engine) | the engine's mean wait at two decimals (derived) | printed (text) |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | 9 | 0.900000 | 0.900000 | 0.90 | 9.000000 | 9.00 | 9.00 |
-| 2 | 18 | 0.900000 | 0.852632 | 0.85 | 4.263158 | 4.26 | 4.26 |
-| 5 | 45 | 0.900000 | 0.762493 | 0.76 | 1.524986 | 1.52 | 1.53 |
-| 10 | 90 | 0.900000 | 0.668732 | 0.67 | 0.668732 | 0.67 | 0.67 |
-| 20 | 180 | 0.900000 | 0.550769 | 0.55 | 0.275385 | 0.28 | 0.28 |
+| golden input | berths | arrivals a day (golden input) | berth utilisation (engine) | delay probability (engine) | printed (text) | mean wait (engine) | the engine's mean wait at two decimals (derived) | printed (text) |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| adan-resing-table-5-1-c1 | 1 | 9 | 0.900000 | 0.900000 | 0.90 | 9.000000 | 9.00 | 9.00 |
+| adan-resing-table-5-1-c2 | 2 | 18 | 0.900000 | 0.852632 | 0.85 | 4.263158 | 4.26 | 4.26 |
+| adan-resing-table-5-1-c5 | 5 | 45 | 0.900000 | 0.762493 | 0.76 | 1.524986 | 1.52 | 1.53 |
+| adan-resing-table-5-1-c10 | 10 | 90 | 0.900000 | 0.668732 | 0.67 | 0.668732 | 0.67 | 0.67 |
+| adan-resing-table-5-1-c20 | 20 | 180 | 0.900000 | 0.550769 | 0.55 | 0.275385 | 0.28 | 0.28 |
 
 A PRINTED SLIP AT FIVE BERTHS. Every printed figure in the table is the engine's figure rounded to two decimals except one: at 5 berths the engine's mean wait is 1.524986, which rounds to 1.52, and the table prints 1.53 (text). The printed figure sits 0.005014 above the engine's (derived: 1.53 less 1.524986), which is more than the half unit of 0.005 a two-decimal rounding allows. The course teaches it as a slip in the printed table; the engine's figure is the one the formula gives.
 
-CHECK TWO: ADAN AND RESING, TABLE 5.2 (text: a fixed surplus capacity of 0.1 server, so the occupation rate rises with the number of servers). The golden inputs adan-resing-table-5-2-c1 to -c20 state the same service and working day with the arrivals below:
+CHECK TWO: ADAN AND RESING, TABLE 5.2 (text: a fixed surplus capacity of 0.1 server, so the occupation rate rises with the number of servers). The golden inputs adan-resing-table-5-2-c1 to adan-resing-table-5-2-c20 state the same service and working day with the arrivals below:
 
-| berths | arrivals a day (golden input) | berth utilisation (engine) | printed rho (text) | mean wait (engine) | printed (text) | mean in the system (engine) | printed (text) |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | 9 | 0.900000 | 0.90 | 9.000000 | 9.00 | 9.000000 | 9 |
-| 2 | 19 | 0.950000 | 0.95 | 9.256410 | 9.26 | 19.487179 | 19 |
-| 5 | 49 | 0.980000 | 0.98 | 9.503169 | 9.50 | 51.465529 | 51 |
-| 10 | 99 | 0.990000 | 0.99 | 9.637384 | 9.64 | 105.310104 | 105 |
-| 20 | 199 | 0.995000 | 0.995 | 9.737327 | 9.74 | 213.672804 | 214 |
+| golden input | berths | arrivals a day (golden input) | berth utilisation (engine) | printed rho (text) | mean wait (engine) | printed (text) | mean in the system (engine) | printed (text) |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| adan-resing-table-5-2-c1 | 1 | 9 | 0.900000 | 0.90 | 9.000000 | 9.00 | 9.000000 | 9 |
+| adan-resing-table-5-2-c2 | 2 | 19 | 0.950000 | 0.95 | 9.256410 | 9.26 | 19.487179 | 19 |
+| adan-resing-table-5-2-c5 | 5 | 49 | 0.980000 | 0.98 | 9.503169 | 9.50 | 51.465529 | 51 |
+| adan-resing-table-5-2-c10 | 10 | 99 | 0.990000 | 0.99 | 9.637384 | 9.64 | 105.310104 | 105 |
+| adan-resing-table-5-2-c20 | 20 | 199 | 0.995000 | 0.995 | 9.737327 | 9.74 | 213.672804 | 214 |
 
 Every printed figure of Table 5.2 is the engine's figure rounded, to two decimals for the wait and to a whole number for the mean in the system (checked when this digest is built).
 
@@ -422,7 +422,7 @@ THE PUBLISHED FUEL FIGURES. Skoko et al. (2024) print the daily fuel cost of a P
 
 # SECTION 11: Deck and bulk capacity: the usable deck, deck load, deadweight and the tanks (owned by Associate m04)
 
-THE CAPACITY CONSTRAINTS, in the stated order: deck area (the deck area times the stated usable fraction), deck load (tonnes of deck cargo), deadweight (deck weight plus every bulk m3 times its stated density), then one tank per product in the order of the products. Deck cargo is measured in square metres and is not stacked, and bulk travels in segregated tanks, one product to a tank (Aas, Halskau and Wallace 2009, taught by concept). Cargo deadweight is the user's net figure: there is no stowage factor.
+THE CAPACITY CONSTRAINTS, in the stated order: deck area (the deck area times the stated usable fraction), deck load (tonnes of deck cargo), deadweight (deck weight plus every bulk m3 times its stated density), then one tank per product in the order of the products. Deck cargo is measured in square metres, containers and baskets are not stacked, and bulk travels in segregated tanks, one product to a tank (Aas, Halskau and Wallace 2009, taught by concept); the engine stacks nothing. Cargo deadweight is the user's net figure: there is no stowage factor.
 
 | constraint | unit | load (engine) | capacity (engine) | utilisation (engine) |
 | --- | --- | --- | --- | --- |
@@ -575,11 +575,12 @@ THE SHORTFALL IS A RESULT WITH A REASON. On fleet-vessels-nearest-short the near
 
 AVAILABLE DAYS AT THE PERIOD. Available days equal to the period are accepted (golden input fleet-available-equals-period: 7 of 7; 0.202381 vessels before rounding, engine); more than the period is refused by name (section 5: fleet-refuse-available-above-period).
 
-THE EKENE WEEK FOUR WAYS, AND CALM (golden inputs; vessels and voyages rounded up; fuel at the fixture price):
+THE EKENE WEEK ON BOTH VESSELS AND BOTH ROUTES, WITH THE NEAREST RULE AND IN CALM WEATHER (golden inputs; voyages rounded up; vessels rounded up, except ekene-fleet-nearest-vessels, which rounds them to the nearest; fuel at the fixture price):
 
 | golden input | voyages by set (engine) | vessel-days (engine) | vessels before rounding (engine) | vessels (engine) | spare vessel-days (engine) | fleet utilisation (engine) | fuel t (engine) | fuel cost (engine) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | ekene-fleet-psv-milk-run | milk-run 4 (deck area) | 10.345455 | 1.591608 | 2 | 2.654545 | 0.795804 | 79.505455 | 69169.745455 |
+| ekene-fleet-nearest-vessels | milk-run 4 (deck area) | 10.345455 | 1.591608 | 2 | 2.654545 | 0.795804 | 79.505455 | 69169.745455 |
 | ekene-fleet-ahts-milk-run | milk-run 5 (deck area) | 12.541667 | 1.929487 | 2 | 0.458333 | 0.964744 | 119.400000 | 103878.000000 |
 | ekene-fleet-psv-dedicated | EKA 2 (minimum visits); EKJ 3 (minimum visits); EKB 1 (minimum visits); EKF 2 (minimum visits) | 11.881818 | 1.827972 | 2 | 1.118182 | 0.913986 | 85.461818 | 74351.781818 |
 | ekene-fleet-ahts-dedicated | EKA 2 (minimum visits); EKJ 3 (minimum visits); EKB 1 (minimum visits); EKF 2 (minimum visits) | 11.433333 | 1.758974 | 2 | 1.566667 | 0.879487 | 98.880000 | 86025.600000 |
@@ -747,6 +748,7 @@ MORE RUNS (golden inputs; every figure a seeded estimate on the seed and draws s
 | golden input | weather factor | demand factor | planned vessels | seed / draws | mean vessel-days | P90 (low) | P10 (high) | probability short | expected short vessel-days |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | variability-fixed-factors-equal-fleet-size | 1.2 | 1 | 2 | 1 / 50 | 10.345455 | 10.345455 | 10.345455 | 0.000000 | 0.000000 |
+| variability-one-iteration | 1, 1.2, 1.6 | 0.85, 1, 1.3 | 2 | 0 / 1 | 7.648544 | 7.648544 | 7.648544 | 0.000000 | 0.000000 |
 | variability-weather-only | 1, 1.2, 1.6 | 1 | 2 | 3 / 3000 | 10.803806 | 9.747707 | 12.018460 | 0.001333 | 0.000030 |
 | variability-demand-only-fractional | 1.2 | 0.85, 1, 1.3 | 2 | 5 / 3000 | 8.465681 | 7.759091 | 9.450642 | 0.000000 | 0.000000 |
 | variability-planned-zero | 1, 1.2, 1.6 | 0.85, 1, 1.3 | 0 | 9 / 500 | 10.235579 | 8.021610 | 11.926509 | 1.000000 | 10.235579 |

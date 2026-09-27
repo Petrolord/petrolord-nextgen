@@ -80,6 +80,7 @@ export const APP_NAMES = {
   refinery: 'Refinery Feasibility & Planning',
   supply: 'Terminals, Depots & Fuel Supply',
   procurement: 'Procurement, Tendering & Contracting',
+  marine: 'Offshore & Marine Logistics',
   gasvalue: 'Flare Gas to Value & LPG/CNG',
   carbon: 'Carbon & Energy Efficiency',
   dataqc: 'Oilfield Data Quality',
