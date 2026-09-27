@@ -743,6 +743,62 @@
    "expected": 0,
    "exit": 0,
    "summary": "FINDINGS: 0"
+  },
+  "gen_seeds.sh HEAD": {
+   "md5": "a94a431bdbef56a394e2f00f92e9a82e",
+   "command": "bash gen_seeds.sh HEAD",
+   "expected": 0,
+   "exit": 0,
+   "summary": "AGREE: all five migrations and the three case files and their index regenerate byte for byte from the committed inputs at HEAD."
+  },
+  "verify_sql.py HEAD": {
+   "md5": "cebfd762a93671ffb422882a0207a878",
+   "command": "python3 verify_sql.py HEAD",
+   "expected": 0,
+   "exit": 0,
+   "summary": "AGREE: all 396 questions (prompt, options, answer key, explanation), 78 lesson keys in 18 modules, 18 graded fields (key, expected, tolerance) and the catalogue row are byte for byte what the committed banks, manifests, "
+  },
+  "verify_sql.py CANARY text": {
+   "md5": "cebfd762a93671ffb422882a0207a878",
+   "command": "python3 verify_sql.py HEAD --canary",
+   "expected": 2,
+   "exit": 2,
+   "summary": "intermediate/module/11 explanation: seed 'The golden inputs read the slides in weeks: a demand of 250.000000 a week with a standard deviation of 182.496365, the RMSE over the square root of 52. The engine converts no per"
+  },
+  "verify_sql.py CANARY key": {
+   "md5": "cebfd762a93671ffb422882a0207a878",
+   "command": "python3 verify_sql.py HEAD --canary-key",
+   "expected": 2,
+   "exit": 2,
+   "summary": "advanced/module/3 answer_index: seed '3' against bank '0'"
+  },
+  "verify_sql.py CANARY field": {
+   "md5": "cebfd762a93671ffb422882a0207a878",
+   "command": "python3 verify_sql.py HEAD --canary-field",
+   "expected": 2,
+   "exit": 2,
+   "summary": "capstone field ogidi_filter_fill_rate_k expected: the seed differs from fields.json by 8.992388578210608e-08"
+  },
+  "verify_sql.py CANARY lesson": {
+   "md5": "cebfd762a93671ffb422882a0207a878",
+   "command": "python3 verify_sql.py HEAD --canary-lesson",
+   "expected": 2,
+   "exit": 2,
+   "summary": "beginner module m03-abc-by-annual-usage-value lesson keys differ from the manifest"
+  },
+  "gen_golive.py (self checks)": {
+   "md5": "c57afd4c650e01ae3e589759ade7357f",
+   "command": "python3 -c import sys; sys.argv=[\"x\"]; sys.path.insert(0, \"/root/cat-wip-materials\"); import gen_golive as G; sys.exit(1 if G.refused else 0)",
+   "expected": 0,
+   "exit": 0,
+   "summary": ""
+  },
+  "promptleak.py --sql": {
+   "md5": "e46b7e7196db51aa47fd95995fdb236c",
+   "command": "python3 /root/dc-wavekit/promptleak.py --sql /root/wt-sc3-nextgen/migrations/20261114_sc3_materials_course.sql --course materials",
+   "expected": 0,
+   "exit": 0,
+   "summary": "own-field leaks: 0   cross-tier leaks: 0   self leaks: 0   near misses: 0   small-integer notes: 0"
   }
  }
 }
