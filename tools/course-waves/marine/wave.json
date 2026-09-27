@@ -758,6 +758,62 @@
    "expected": 0,
    "exit": 0,
    "summary": "FINDINGS: 0"
+  },
+  "gen_seeds.sh HEAD": {
+   "md5": "5a1b04917e5dcc3b926db87d5c223e1b",
+   "command": "bash gen_seeds.sh HEAD",
+   "expected": 0,
+   "exit": 0,
+   "summary": "AGREE: all five migrations and the three case files and their index regenerate byte for byte from the committed inputs at HEAD."
+  },
+  "verify_sql.py HEAD": {
+   "md5": "a8605a937aff9fbd02c58830b12bf7c2",
+   "command": "python3 verify_sql.py HEAD",
+   "expected": 0,
+   "exit": 0,
+   "summary": "AGREE: all 396 questions (prompt, options, answer key, explanation), 78 lesson keys in 18 modules, 18 graded fields (key, expected, tolerance) and the catalogue row are byte for byte what the committed banks, manifests, "
+  },
+  "verify_sql.py CANARY text": {
+   "md5": "a8605a937aff9fbd02c58830b12bf7c2",
+   "command": "python3 verify_sql.py HEAD --canary",
+   "expected": 2,
+   "exit": 2,
+   "summary": "intermediate/module/11 explanation: seed \"Fleet utilisation is always of the fleet: the need over the capacity in vessel-days, 10.345455 over two vessels at 6.5 days. A constraint's utilisation on one voyage, and the ave"
+  },
+  "verify_sql.py CANARY key": {
+   "md5": "a8605a937aff9fbd02c58830b12bf7c2",
+   "command": "python3 verify_sql.py HEAD --canary-key",
+   "expected": 2,
+   "exit": 2,
+   "summary": "advanced/module/3 answer_index: seed '0' against bank '1'"
+  },
+  "verify_sql.py CANARY field": {
+   "md5": "a8605a937aff9fbd02c58830b12bf7c2",
+   "command": "python3 verify_sql.py HEAD --canary-field",
+   "expected": 2,
+   "exit": 2,
+   "summary": "capstone field akokwa_spare_vessel_days expected: the seed differs from fields.json by 2.2416666700664223e-07"
+  },
+  "verify_sql.py CANARY lesson": {
+   "md5": "a8605a937aff9fbd02c58830b12bf7c2",
+   "command": "python3 verify_sql.py HEAD --canary-lesson",
+   "expected": 2,
+   "exit": 2,
+   "summary": "beginner module m03-weather-and-fuel lesson keys differ from the manifest"
+  },
+  "gen_golive.py (self checks)": {
+   "md5": "b976d469fec1dab5ec8b9f1085e0ed76",
+   "command": "python3 -c import sys; sys.argv=[\"x\"]; sys.path.insert(0, \"/root/cat-wip-marine\"); import gen_golive as G; sys.exit(1 if G.refused else 0)",
+   "expected": 0,
+   "exit": 0,
+   "summary": ""
+  },
+  "promptleak.py --sql": {
+   "md5": "e46b7e7196db51aa47fd95995fdb236c",
+   "command": "python3 /root/dc-wavekit/promptleak.py --sql /root/wt-sc4-nextgen/migrations/20261115_sc4_marine_course.sql --course marine",
+   "expected": 0,
+   "exit": 0,
+   "summary": "own-field leaks: 0   cross-tier leaks: 0   self leaks: 0   near misses: 0   small-integer notes: 0"
   }
  }
 }
