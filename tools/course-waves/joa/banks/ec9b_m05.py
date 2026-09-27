@@ -4,9 +4,116 @@ Q=[]
 def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
 # EC9 Associate m05, Budget Control.
-# A STUB written at the foundation. The bank writer replaces the question list
-# below (fifteen questions, BANK_TASK.md) and keeps the emit line, whose path is
-# literal because the kit's check-bank-sources reads literal paths only.
+# Sources: the budget rule and its boundary in the engine's basis, the Ekene
+# 2027 budget by item and in total with its reasons, the budget golden cases
+# with their reasons (the Norwegian figures stated as inputs), and the budget
+# refusals. Every key rests on a digest-printed line or an engine return re-run
+# in /root/cat-wip-joa/scratch/bank-beginner/witness.mjs.
+
+q(2, "Geology and geophysics was approved at 6000000.000000 and spent 6600000.000000, under an item tolerance of 10.000000 percent. What does the engine return?",
+ "Inside its tolerance: an overrun of exactly the tolerance is inside.",
+ ["Beyond its tolerance: an overrun has to be strictly below the tolerance.",
+  "Inside, only because the budget as a whole is inside its own tolerance.",
+  "Beyond: the limit is 10 percent above the actual."],
+ "The engine's boundary reads: an overrun of exactly the tolerance is inside (\"may exceed ... by up to\"). The limit is the approved amount raised by the tolerance, 6600000.000000, and the actual equals it, so the item is inside. The item test stands on its own, and the Ekene budget as a whole is beyond its tolerance. The limit is taken on the approved amount.")
+
+q(0, "What limit does the engine compute for exploration drilling, approved at 48000000.000000 under the Ekene 10 percent item tolerance?",
+ "52800000.000000, and the actual 53500000.000000 is beyond it.",
+ ["52800000.000000, and the actual is inside it by the item tolerance.",
+  "53500000.000000, its actual.",
+  "48000000.000000, as an item has no margin."],
+ "An item is inside its tolerance when actual <= approved x (100 + itemTolerancePct) / 100, so the limit is 52800000.000000 and the actual of 53500000.000000 is beyond it, an overrun of 11.458333 percent. The engine's reason says so: exploration drilling: 53500000 against 48000000 approved is an overrun of 5500000, beyond the item tolerance of 10% (limit 52800000). The limit is computed from the approved amount, and the stated tolerance gives it a margin.")
+
+q(3, "The Ekene 2027 budget tolerance is the lower of 5.000000 percent and 3000000.000000, on an approved total of 76000000.000000. What is the allowed overrun?",
+ "3000000.000000, held by the amount.",
+ ["3800000, 5 percent of the approved total, held by the percentage.",
+  "3000000.000000 plus the unbudgeted allowance of 500000.000000.",
+  "5950000.000000, the overrun the budget actually ran."],
+ "The budget is inside when the total overrun <= the lower of pct % of the approved total and the stated amount. 5 percent of 76000000.000000 is 3800000, and the stated amount is 3000000, so the lower, 3000000.000000, holds, and the engine reports it held by amount. The unbudgeted allowance is a separate test, and 5950000.000000 is the overrun the allowed figure is compared with.")
+
+q(1, "Does the whole 2027 budget pass its own test, with 5.000000 percent and 3000000.000000 stated?",
+ "No: its overrun of 5950000.000000 is beyond the allowed 3000000.000000.",
+ ["Yes: every item but exploration drilling is inside its item tolerance, so the budget is inside as well.",
+  "Yes: the overrun is tested against 5 percent of the actual total of 81950000.000000.",
+  "Yes, once the survey's 250000.000000 is taken out."],
+ "The engine returns an approved total of 76000000.000000, an actual of 81950000.000000, an overrun of 5950000.000000 and an allowed overrun of 3000000.000000, so the budget is beyond its tolerance. The budget test is separate from the item tests, it is taken on the approved total, and taking the survey's 250000.000000 out would still leave an overrun far above 3000000.000000.")
+
+q(0, "A worked case states the budget tolerance as the lower of 5 percent and 75, in NOK million, on an approved budget of 2000. The overrun is 80. What does the engine return?",
+ "Beyond: the amount holds at 75.000000.",
+ ["Inside: the percentage holds at 100, and an overrun of 80 falls under it.",
+  "Inside: the item is inside its 10 percent item tolerance, so the budget is too.",
+  "The higher of the two limits holds, so it is inside."],
+ "On budget-norway-lower-of the engine's reason reads: the budget: 2080 against 2000 approved, an overrun of 80; the allowed overrun is the lower of 5% of the approved total (100) and 75: 75; beyond the budget tolerance. The lower of 100 and 75 is 75, held by the amount. The item is inside its item tolerance, and the budget is still beyond.")
+
+q(2, "budget-norway-pct-holds approves 1000 and spends 1050, the lower of 5% and 75 again stated. How is that overrun judged?",
+ "Inside the budget tolerance, which the percentage holds at 50.000000 and the overrun equals.",
+ ["Beyond: an overrun equal to the allowed overrun is beyond the budget tolerance.",
+  "Inside: the amount holds at 75, which leaves the overrun of 50 well below it.",
+  "Beyond, because the overrun of 50 is set against 5 percent of the actual 1050."],
+ "On budget-norway-pct-holds the reason reads: the budget: 1050 against 1000 approved, an overrun of 50; the allowed overrun is the lower of 5% of the approved total (50) and 75: 50; inside the budget tolerance. The lower of 50 and 75 is 50, held by pct, and an overrun equal to it is inside. The percentage is taken on the approved total, and 5 percent of the actual would allow more.")
+
+q(3, "On budget-item-one-over, item x runs to 55.5 against 50 approved, at a stated 10 percent. How is it judged?",
+ "Beyond its tolerance: 5.5 of overrun against a limit of 55.",
+ ["Inside: 55.5 rounds to 55, the limit, and exactly the limit is inside.",
+  "A refusal: an actual above its limit is refused as an input.",
+  "Inside, because 10 percent of the actual 55.5 is more than the overrun of 5.5."],
+ "The engine's reason reads: x: 55.5 against 50 approved is an overrun of 5.5, beyond the item tolerance of 10% (limit 55). The engine rounds nothing, an item beyond its tolerance is a result with a reason, and the limit is taken on the approved amount, so 55.5 is beyond 55.")
+
+q(1, "What does the engine return for budget-underrun, approved at 100 and spent 90?",
+ "An overrun of -10.000000, inside the budget tolerance.",
+ ["A refusal: an actual below the approved amount is refused.",
+  "An overrun of 10.000000, the size of the gap.",
+  "Beyond its tolerance: an underrun of 10 percent breaks a tolerance of 5 percent in the other direction."],
+ "The overrun is actual less approved, so an underrun is a negative overrun: -10.000000. The engine's reason reads: the budget: 90 against 100 approved, an underrun of 10; the allowed overrun is 5% of the approved total, 5; inside the budget tolerance. An underrun is accepted, the sign is kept, and a tolerance limits overruns alone.")
+
+q(2, "The environmental baseline survey spent 250000.000000 with no approved budget, the only unbudgeted item, under an unbudgeted allowance of 500000.000000. What does the engine report?",
+ "Inside the unbudgeted allowance of 500000.000000, with 250000.000000 in all.",
+ ["Beyond its item tolerance, as any spend against 0 approved exceeds 10 percent of it.",
+  "A refusal, since an item with an approved amount of 0 cannot be tested at all.",
+  "Inside its item tolerance, at 0.000000 percent."],
+ "The engine's reason reads: environmental baseline survey: 250000 spent with no approved budget, inside the unbudgeted allowance 500000 with the other unbudgeted items (250000 in all). An item with no approved budget is tested against the unbudgeted allowance, its overrun percent and limit print none, and nothing is refused.")
+
+q(1, "The unbudgeted allowance is stated as 249999 on the Ekene 2027 budget. What happens to the survey?",
+ "It is above the allowance, and the engine lists it among the items outside their tolerance.",
+ ["It is inside, since the allowance misses the survey by one dollar only.",
+  "The engine refuses an allowance below the unbudgeted total.",
+  "It moves into the approved budget, raising the approved total to cover it."],
+ "On budget-ekene-allowance-short the reason reads: environmental baseline survey: 250000 spent with no approved budget: the unbudgeted items total 250000, above the allowance 249999, and the items outside their tolerance are exploration drilling and environmental baseline survey. One dollar over is over, the allowance is accepted as stated, and the approved total stays 76000000.000000.")
+
+q(3, "No unbudgetedAllowance is stated for the Ekene 2027 budget. What does the engine print for the survey?",
+ "That it was spent with no approved budget and is outside the approved budget.",
+ ["A refusal naming unbudgetedAllowance as a required term.",
+  "Inside: with no allowance stated, there is no limit.",
+  "Nothing: the survey drops out of the budget when no allowance is stated."],
+ "On budget-ekene-no-allowance the engine's reason reads: environmental baseline survey: 250000 spent with no approved budget: outside the approved budget. The allowance is optional, so no refusal comes back, no allowance is no licence to spend, and the survey stays in the actual total of 81950000.000000.")
+
+q(0, "Suppose budgetTolerance is missing from the Ekene 2027 budget's terms. How does budgetControl respond?",
+ "It refuses, naming budgetTolerance: the object { pct, amount } has no default.",
+ ["It tests the whole budget against the item tolerance of 10.000000 percent.",
+  "It skips the budget test and returns only the item tests.",
+  "It applies the lower of 5 percent and NOK 75 million from the Norwegian agreement."],
+ "The engine refuses, in its own words: budgetTolerance must be an object { pct, amount } (amount optional; no default); got nothing. It borrows no other tolerance, skips no test, and holds none of the Norwegian figures: each call states its own.")
+
+q(2, "The item tolerance is left out of a budget control box. How does the engine answer?",
+ "With a refusal naming itemTolerancePct, which it received as nothing.",
+ ["By testing each item at the Norwegian 10 percent, the figure Art. 12.5 prints.",
+  "Each item is tested at 0 percent, so any overrun is beyond.",
+  "With a refusal naming items, which it cannot test without it."],
+ "The engine refuses, in its own words: itemTolerancePct must be a finite number at or above 0; got nothing. The Norwegian 10 percent is the text's figure, and the engine holds none of it; a tolerance of 0 would be a stated term, and the field it names is the tolerance, with the items stated correctly.")
+
+q(0, "The budget tolerance is typed as { pct: 5, amt: 3000000 }. What does the engine do?",
+ "It refuses amt, listing the accepted keys of budgetTolerance: pct, amount.",
+ ["It reads amt as amount, a common short form of the key.",
+  "It drops amt and holds the allowed overrun by the percentage alone.",
+  "It refuses budgetTolerance as missing its amount."],
+ "budgetTolerance reads two keys, and a shortened spelling of amount is caught at its own path: budgetTolerance.amt is not an accepted key; the accepted keys of budgetTolerance are pct, amount. Guessing that amt meant amount, or quietly holding by pct alone, would each compute a tolerance nobody stated, and the amount is optional, so its absence is never the fault: the refusal names the key amt.")
+
+q(3, "Facilities engineering spent 9200000.000000 of an approved 10000000.000000 in 2027. How does the item test read it?",
+ "-800000.000000, or -8.000000 percent, inside its item tolerance.",
+ ["An underrun that frees 800000.000000 for the overrun of exploration drilling, which comes inside.",
+  "A refusal, since an actual below approved is no overrun at all and cannot be tested.",
+  "Beyond its tolerance, as an underrun of 8 percent is a deviation from the approved line."],
+ "The overrun is actual less approved, -800000.000000, which is -8.000000 percent and inside any tolerance at or above zero. The engine tests each item against its own limit, so exploration drilling is still beyond its tolerance, and an underrun is a result.")
 
 emit(Q, '/root/cat-wip-joa/banks/ec9b_m05.json', expect_n=15)
 finish()

@@ -3,10 +3,136 @@ from bankkit import emit, finish
 Q=[]
 def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
-# EC9 Expert m02, Buy-In and Entry.
-# A STUB written at the foundation. The bank writer replaces the question list
-# below (fifteen questions, BANK_TASK.md) and keeps the emit line, whose path is
-# literal because the kit's check-bank-sources reads literal paths only.
+# EC9 Expert m02, Buy-In and Entry. Keys rest on the engine's nonConsent
+# return in mode "buy-in" on the golden input nc-ekene-buy-in-norway-1000 and
+# on stated changes to it (multiple 400 and 100, NOC declining too), each
+# recomputed by scratch/bank-advanced/witness.mjs, and on the digest's
+# verbatim refusals, basis and source lines. The Ekene joint venture is
+# synthetic. No capstone figure appears here.
+
+K = [3, 1, 0, 2, 2, 0, 1, 3, 0, 3, 1, 2, 0, 2, 3]
+_i = iter(K)
+def x(p, c, ds, e): q(next(_i), p, c, ds, e)
+
+# 1
+x("On the golden input nc-ekene-buy-in-norway-1000, PB (participating interest 15.000000) declines the 18000000.000000 Ekene-4 sidetrack and the call states mode \"buy-in\" at 1000.000000 percent. What does PB pay to enter?",
+ "27000000.000000, ten times its proportionate share of 2700000.000000",
+ ["10800000.000000, the premium the ledger takes at 400.000000 percent from production",
+  "18000000.000000, the whole cost of the operation, which is the price of a later entry",
+  "2700000.000000, its proportionate share of the cost with the multiple left aside"],
+ "The engine's reason reads PB: to enter it pays 1000% of its share 2700000 = 27000000, apportioned to the consenting parties in their shares. 10800000.000000 is the premium at the stated 400.000000 percent in the other mode; the whole cost and the bare share each leave out the stated multiple on the proportionate share.")
+
+# 2
+x("PB pays 27000000.000000 to enter the Ekene-4 sidetrack, which EKO (40.000000), PA (25.000000) and NOC (20.000000) funded. How much of that payment goes to EKO?",
+ "12705882.352941, the payment times EKO's share of the project",
+ ["10800000.000000, the payment times EKO's participating interest in the licence",
+  "8470588.235294, the part of the sidetrack's cost that EKO itself paid out",
+  "9000000.000000, an equal third of the payment to each of the consenting parties"],
+ "The engine apportions the entry payment to the consenting parties in their shares of the project, 47.058824 for EKO: 12705882.352941 (engine). Using the licence interest of 40.000000 leaves PB's 15.000000 of the payment with nobody to receive it; 8470588.235294 is EKO's cost paid, the same share on a different total; nothing in the rule splits equally.")
+
+# 3
+x("NOC is carried in full under the main Ekene carry, yet the buy-in call on the sidetrack states no carry and lists NOC among the consenting parties. What does NOC receive of PB's 27000000.000000?",
+ "6352941.176471, its share of the project, 23.529412, of the payment",
+ ["0.000000, because a carried party neither pays for nor receives on an operation",
+  "5400000.000000, its participating interest of 20.000000 applied to the payment",
+  "4235294.117647, the part of the sidetrack's cost that NOC paid out as a party"],
+ "With no carry stated on this call NOC pays its own share of the project and is repaid in it: 6352941.176471 (engine). A carry lives on the call that states it, so 0.000000 misreads this call; 5400000.000000 uses the licence interest; 4235294.117647 is NOC's cost paid, the same share of the project on the 18000000.000000 cost.")
+
+# 4
+x("A learner pastes the six production years of the sole risk box into a call whose mode is \"buy-in\". What does the engine return?",
+ "A refusal naming `years`, which must be left out when mode is \"buy-in\", with the years printed back",
+ ["The entry payment together with a premium recovery ledger over the six pasted years",
+  "The entry payment alone, the pasted years dropped with a note under the tables",
+  "A refusal naming `mode`, because a stated buy-in cannot sit beside production years"],
+ "The engine's message begins years must be left out when mode is \"buy-in\"; got [{\"year\":2031,\"grossValue\":30000000,\"deductions\":10000000}, and prints every year it was given. A buy-in is one payment, so the engine computes no ledger, drops no key silently and names the field that is wrong, which is `years`.")
+
+# 5
+x("The `consenting` list of a buy-in call reads [\"EKO\", \"EKO\", \"PA\", \"NOC\"]. What does the engine do?",
+ "It refuses the call, naming consenting[1] and quoting the repeated \"EKO\" back",
+ ["It counts EKO once and apportions the entry payment among EKO, PA and NOC",
+  "It counts EKO twice, so EKO receives a double share of PB's entry payment",
+  "It reads the second EKO as PB and computes PB's entry"],
+ "The engine refuses before computing anything: consenting[1] must be an id not already listed; got \"EKO\". The list decides who is paid, so it neither merges nor doubles a name, and it never renames an entry to another party.")
+
+# 6
+x("Norway JOA Art. 18.12 apportions the entry payment \"between the initial participants according to their Participating interest in the project.\" Which figures does the engine apportion PB's payment by on the Ekene-4 sidetrack?",
+ "The consenting parties' shares of the project: EKO 47.058824, PA 29.411765, NOC 23.529412",
+ ["Their participating interests in the licence: EKO 40.000000, PA 25.000000, NOC 20.000000",
+  "Their paying interests under the Ekene carry: EKO 50.000000 and PA 31.250000, NOC none",
+  "Equal thirds, since the article names the initial participants as one group of payees sharing alike"],
+ "The engine states the payment is apportioned to the consenting parties in their shares, and prints EKO 47.058824, PA 29.411765, NOC 23.529412 under both modes. Licence interests sum to 85 and leave 15 of the payment unassigned; the carry's paying interests belong to another call; the article says by interest in the project.")
+
+# 7
+x("The Ekene-4 sidetrack is run once as a buy-in at 1000.000000 percent and once as premium recovery from production at 400.000000 percent. What do the two calls share?",
+ "The same base, PB's proportionate share of 2700000.000000; the multiple and timing differ",
+ ["The same sum owed by PB, since the engine converts one mode into the other",
+  "The same timing, with each sum taken year by year from PB's share of net value until it is paid",
+  "Nothing at all, because the buy-in base is the whole cost of the operation"],
+ "The engine rests both on PB's proportionate share of 2700000.000000; under buy-in PB pays 27000000.000000 at once, and under premium recovery the consenting parties take 10800000.000000 out of PB's share of net value from 2031 to 2035. The multiple and the timing are the contract's, and neither mode uses the whole cost as its base.")
+
+# 8
+x("A buy-in call on the sidetrack leaves out `premiumMultiplePct` altogether. How does the engine treat the Norwegian one thousand percent?",
+ "It holds no copy of it and refuses the call, naming premiumMultiplePct as missing",
+ ["It applies one thousand percent, the only multiple a public text prints for entry",
+  "It applies 100 percent, the cost alone, as the lowest multiple it would accept",
+  "It returns the payment as 0.000000 with a note that the multiple is missing"],
+ "A missing multiple stops the call: the engine answers premiumMultiplePct must be a number at or above 100 (a stated contract figure; 100 recovers the cost alone); got nothing. One thousand percent is what the Norwegian text prints for its own agreement, and the engine keeps no copy of it, supplies no floor of its own and prints no zero payment.")
+
+# 9
+x("The engine's basis.source for nonConsent cites Norway JOA Art. 18.6 and 18.12 and then adds one more clause. What does that clause say is taught by concept and stated as inputs?",
+ "Premium recovery from production, a contract term no public text here prints a multiple for",
+ ["The buy-in at one thousand percent, a licensed figure the course may not quote",
+  "Apportionment to the initial participants, a rule the Norwegian text leaves open to the parties",
+  "The sole risk project itself, which Art. 18.6 leaves to the operating committee"],
+ "The basis ends: premium recovery from production is a contract term taught by concept and stated here as inputs. The one thousand percent entry and its apportionment to the initial participants are printed in Art. 18.12, a public text the course quotes, and Art. 18.6 sets participation in proportion to the participating interest.")
+
+# 10
+x("Which set of figures does a nonConsent call return, in either mode?",
+ "The consenting parties' cost shares, each premium, and a buy-in payment or a ledger with its reversion year",
+ ["An NPV for each mode at a discount rate the engine holds, so the two can be compared today",
+  "The cost shares, each premium, and an interest charge on any premium not yet recovered",
+  "Each premium alone, since the consenting parties' shares are a separate interests call"],
+ "The engine lists nonConsent's return as the consenting parties' cost shares, each non-consenting party's premium, and either its buy-in payment or the recovery ledger with the year its interest reverts. It holds no NPV of its own, adds nothing to an unrecovered premium, and prints the shares of the project itself.")
+
+# 11
+x("On the Norwegian buy-in call, a learner removes NOC from `consenting`, so PB and NOC both decline and EKO (40.000000) and PA (25.000000) fund the sidetrack. What share of the project does the engine now give EKO?",
+ "61.538462, its 40.000000 over the 65 points that still consent",
+ ["47.058824, the share it held while three parties consented to the operation",
+  "40.000000, its participating interest in the licence, which the call does not change",
+  "38.461538, the share of the smaller consenting partner"],
+ "The engine divides each consenting party's participating interest by the consenting total, now 65: EKO 61.538462 and PA 38.461538 (engine), and each decliner pays its own entry on its own proportionate share. 47.058824 was EKO's share with NOC consenting; 40.000000 is the licence figure; 38.461538 is PA's share.")
+
+# 12
+x("On the same sidetrack the contract states the buy-in mode at 400.000000 percent. What does PB pay, and how does it compare with the premium the recovery mode computes at that multiple?",
+ "10800000.000000, the same sum as that premium, paid at once to enter",
+ ["27000000.000000, since a buy-in always carries the Norwegian multiple",
+  "2700000.000000, since a buy-in at any multiple repays the cost alone",
+  "7800000.000000, the premium less what 2031's net value would pay"],
+ "The engine applies the stated multiple to the same base in both modes: 400.000000 percent of 2700000.000000 is 10800000.000000 (engine), paid at once under buy-in and taken from PB's share of net value under recovery. The Norwegian figure applies only when a call states it; 7800000.000000 is a ledger balance, which a buy-in has none of.")
+
+# 13
+x("The course reads the Norwegian agreement from an archived capture of 26 May 2024. What made the archived copy necessary?",
+ "The live regjeringen.no copy answered a bot check with HTTP 403 on the date read",
+ ["The live copy prints a newer multiple for entry, so the course fixes the 2007 wording",
+  "The Wayback capture is the official translation of the text",
+  "The live copy is licensed, so the course may quote only an archived public version"],
+ "The sources table records that the live regjeringen.no copy answered a bot check with HTTP 403 on the date read. The translation is unofficial in either place, the course quotes the text exactly as printed, and the agreement is a government publication with no licence on it.")
+
+# 14
+x("A buy-in call on the sidetrack states `premiumMultiplePct` of exactly 100. What does the engine return for PB?",
+ "A payment of 2700000.000000, its proportionate share with nothing added",
+ ["A refusal, because the multiple must be a number above 100 for any entry",
+  "A payment of 0.000000, since 100 percent only restores the parties to even",
+  "A payment of 27000000.000000, the one thousand percent the article prints"],
+ "The engine's rule is at or above 100, and its message says 100 recovers the cost alone: PB pays 2700000.000000 (engine), which leaves nothing for the risk the others ran. 100 is accepted, so there is no refusal; a zero payment would repay nothing; one thousand percent applies only when the call states it.")
+
+# 15
+x("EKO paid 8470588.235294 of the sidetrack's cost and receives 12705882.352941 of PB's entry payment. What single figure links the two?",
+ "Its share of the project, 47.058824, applied once to the cost and once to the payment",
+ ["Its paying interest of 50.000000 under the Ekene carry of NOC, applied to both of the totals",
+  "Its participating interest of 40.000000, grossed up by the one thousand percent",
+  "The ratio of the payment to the cost, which is the stated multiple of 1000.000000"],
+ "The engine prints EKO's share of the project as 47.058824 under both modes: 47.058824 percent of 18000000.000000 is its cost paid and of 27000000.000000 its receipt. The Ekene carry is not on this call; 40.000000 is the licence figure; the payment is 1000.000000 percent of PB's share, and 27000000.000000 over 18000000.000000 is no stated multiple.")
 
 emit(Q, '/root/cat-wip-joa/banks/ec9a_m02.json', expect_n=15)
 finish()

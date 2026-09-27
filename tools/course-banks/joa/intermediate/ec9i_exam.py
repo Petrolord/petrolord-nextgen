@@ -172,7 +172,7 @@ q(3, "PB's Ekene default earns 20625.000000 of default interest (8.250000 percen
   "EKO, PA and NOC by participating interest"],
  "The engine's basis reads \"distributed to the parties financing the default in proportion to their cover\", and the table prints EKO 12692.307692 and PA 7932.692308. NOC, carried, advances none of the cover and receives none of the default interest.")
 
-q(0, "Party C's default on default-working-days-holiday states suspension after 5 working-days from 2027-12-22, with stated holidays. When does the engine put the trigger?",
+q(0, "Party C's default on default-working-days-holiday states suspension after 5 working-days from 2027-12-22, with stated holidays on 2027-12-24, 2027-12-27, 2027-12-28 and 2028-01-01. When does the engine put the trigger?",
  "After 2028-01-03, working days being Monday to Friday less the stated holidays",
  ["After five calendar days, the weekend and the holidays counted like any other day",
   "After the fifth weekday, the stated holidays ignored since the engine keeps no calendar of them",

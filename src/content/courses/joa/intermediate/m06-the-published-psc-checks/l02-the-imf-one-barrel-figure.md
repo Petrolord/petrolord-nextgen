@@ -16,7 +16,7 @@ The figure also states the tax base it uses, and the assumption behind it:
 
 > "Normal tax deductions in the tax/royalty regime are assumed to be equal to the cost recovery in the PSC." (IMF FARI TNM/16/01 (February 2016), Figure 5)
 
-With the deductions equal to cost petroleum, the base for the tax is profit petroleum alone. That is why the engine, which taxes the contractor's profit oil, lands on the figure's 6.
+With the deductions equal to cost petroleum, the base for the tax is the contractor's profit petroleum (20). That is why the engine, which taxes the contractor's profit oil, lands on the figure's 6.
 
 ## The engine beside the figure
 

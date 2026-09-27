@@ -365,6 +365,11 @@ table(['golden input', 'the change (stated probe)', 'field', 'the engine\'s mess
   return [id, what, `\`${field}\``, r && r.error];
 }));
 w();
+const orderProbe = argsOf('cc-ekene-2027'); delete orderProbe.reconciliationLagMonths; orderProbe.lag = 2;
+const orderR = refusal('cashCalls on cc-ekene-2027 with reconciliationLagMonths removed and an unknown key lag added (stated probe)', J.cashCalls(orderProbe), 'lag');
+w('THE ORDER OF REFUSALS. A box that carries an unknown key AND lacks a required term is refused on the unknown key first: every function checks its accepted keys before it reads a term. On cc-ekene-2027 with reconciliationLagMonths removed and a key lag added (stated probe), the engine\'s message, verbatim:');
+quote(orderR.error);
+w();
 w('Four rules the table shows:');
 w('- A contract term with no default is refused when it is missing, and the message says so: the carriers of a carry, the uplift, the reconciliation lag, the negative call rule, the budget tolerance, the overhead scale of every category, the default interest with its rate, method and grace, the premium multiple, the refundable kinds under basis "contract", the opening cost pool.');
 w('- An input key a function does not read is refused at whatever level it sits (a top-level option, a party, a month, a year, a band, an uplift), with the path to the key and the full list of accepted keys.');
@@ -515,7 +520,14 @@ w('The engine\'s reasons, verbatim:');
 reasons(ohE.reasons);
 w();
 const OH = ['overhead-ekene-2031-corporate', 'overhead-norway-operating-1800', 'overhead-norway-development-3000', 'overhead-norway-development-4000', 'overhead-norway-exploration-250', 'overhead-norway-all-with-exclusion', 'overhead-norway-corporate-065', 'overhead-band-edge-exact', 'overhead-zero-cost'];
-table(['golden case', 'categories and bases (engine)', 'total (engine)'], OH.map((id) => { const r = runG(id); return [id, r.categories.map((c) => `${c.category} ${f6(c.base)}`).join('; '), f6(r.total)]; }));
+table(['golden case', 'category', 'base (engine)', 'charge (engine)', 'case total (engine)'], OH.flatMap((id) => { const r = runG(id); return r.categories.map((c) => [id, c.category, f6(c.base), f6(c.charge), f6(r.total)]); }));
+w();
+w('THE BANDS OF THE NORWEGIAN CASES (golden inputs, the Art. 2.2.2 scale in NOK million), each band with its upper limit and the part of the base the engine puts in it:');
+w();
+table(['golden case', 'category', 'band', 'from', 'up to (golden input)', 'per cent (golden input)', 'part of the base in it (engine)', 'band charge (engine)'], OH.filter((id) => /norway/.test(id)).flatMap((id) => runG(id).categories.flatMap((c) => [
+  ...c.bands.map((b, i) => [id, c.category, `band ${i + 1}`, f6(b.from), f6(b.upTo), f6(b.pct), f6(b.amount), f6(b.charge)]),
+  [id, c.category, 'above the last band', f6(c.above.from), 'none', f6(c.above.pct), f6(c.above.amount), f6(c.above.charge)],
+])));
 w();
 OH.forEach((id) => { const r = runG(id); w(`${id}${GC[id].note ? ` (${GC[id].note})` : ''}, the engine's reasons, verbatim:`); reasons(r.reasons); });
 must('the Norwegian printed scale gives 35, 40, 42.5 and 6.25', runG('overhead-norway-operating-1800').total === 35 && runG('overhead-norway-development-3000').total === 40 && runG('overhead-norway-development-4000').total === 42.5 && runG('overhead-norway-exploration-250').total === 6.25, 'norway scale');
@@ -671,7 +683,7 @@ const TRIG = ['default-cured-on-trigger-day', 'default-cured-day-after-trigger',
 w();
 w('THE TRIGGERS (golden inputs):');
 w();
-table(['golden case', 'consequence', 'stated (golden input)', 'trigger date (engine)', 'applies (engine)'], TRIG.flatMap((id) => { const a = argsOf(id); const r = runG(id); return r.defaulters.flatMap((d) => ['suspension', 'forfeiture'].filter((k) => d[k]).map((k) => [id, k, `${S(a[k].after)} ${a[k].unit} from ${a[k].from}`, d[k].triggerDate, S(d[k].applies)])); }));
+table(['golden case', 'consequence', 'stated (golden input)', 'holidays stated (golden input)', 'trigger date (engine)', 'applies (engine)'], TRIG.flatMap((id) => { const a = argsOf(id); const r = runG(id); return r.defaulters.flatMap((d) => ['suspension', 'forfeiture'].filter((k) => d[k]).map((k) => [id, k, `${S(a[k].after)} ${a[k].unit} from ${a[k].from}`, list(a.holidays || []), d[k].triggerDate, S(d[k].applies)])); }));
 w();
 TRIG.forEach((id) => { const r = runG(id); w(`${id}, the engine's reasons, verbatim:`); reasons(r.reasons); });
 must('the Ekene March default carries 20625 of simple interest', dE.interestTotal === 20625, dE.interestTotal);
@@ -764,12 +776,14 @@ w(`WORLD BANK BRIEFING NOTE 8 (November 2007), golden input psc-wb-bn8-2007: gro
 w();
 const WBP = [['royalty', 10, wb.royalty], ['cost oil limit', 60, wb.costOilLimit], ['cost recovered', 25, wb.costRecovered], ['profit oil', 65, wb.profitOil], ['contractor profit oil', 26, wb.contractorProfitOil], ['government profit oil', 39, wb.governmentProfitOil], ['income tax', 7.8, wb.tax], ['contractor retains', 43, wb.contractorEntitlement], ['government takes', 57, wb.governmentTake]];
 table(['line', 'printed (text)', 'engine'], WBP.map(([l, p, e]) => [l, S(p), f6(e)]));
+w('The limit base in the engine\'s basis on this call (psc-wb-bn8-2007), verbatim:');
+quote(runG('psc-wb-bn8-2007').basis.limitBase);
 must('the World Bank lines agree: the first six exactly, tax to 1e-12, the two totals to the whole dollar', WBP.slice(0, 6).every(([, p, e]) => p === e) && Math.abs(wb.tax - 7.8) < 1e-12 && Math.round(wb.contractorEntitlement) === 43 && Math.round(wb.governmentTake) === 57, 'wb');
 w(`The note prints the totals in whole dollars ("${dashfix(C('wb_result').quote)}", ${C('wb_result').cite}); the engine returns ${f6(wb.contractorEntitlement)} and ${f6(wb.governmentTake)}, which round to ${S(WBP[7][1])} and ${S(WBP[8][1])}. Its taxable income of ${S(WBP[4][1])} is the contractor's profit oil here, because the costs are recovered in full.`);
 w();
 const fa = runG('psc-fari-figure-5').years[0];
 const FAP = [['cost recovered', 50, fa.costRecovered], ['government profit oil', 30, fa.governmentProfitOil], ['contractor profit oil', 20, fa.contractorProfitOil], ['income tax', 6, fa.tax], ['government', 36, fa.governmentTake]];
-w(`IMF FARI FIGURE 5 (February 2016), golden input psc-fari-figure-5: one barrel at ${f6(argsOf('psc-fari-figure-5').years[0].grossRevenue)}, limit ${f6(argsOf('psc-fari-figure-5').costOilLimitPct)} percent of ${argsOf('psc-fari-figure-5').costOilLimitBase}, contractor share ${f6(argsOf('psc-fari-figure-5').contractorProfitSharePct)} percent, tax ${f6(argsOf('psc-fari-figure-5').taxRatePct)} percent.`);
+w(`IMF FARI FIGURE 5 (February 2016), golden input psc-fari-figure-5: one barrel at ${f6(argsOf('psc-fari-figure-5').years[0].grossRevenue)}, royalty ${f6(argsOf('psc-fari-figure-5').royaltyPct)} percent, capex ${f6(argsOf('psc-fari-figure-5').years[0].capex)} and opex ${f6(argsOf('psc-fari-figure-5').years[0].opex)}, limit ${f6(argsOf('psc-fari-figure-5').costOilLimitPct)} percent of ${argsOf('psc-fari-figure-5').costOilLimitBase}, contractor share ${f6(argsOf('psc-fari-figure-5').contractorProfitSharePct)} percent, tax ${f6(argsOf('psc-fari-figure-5').taxRatePct)} percent.`);
 w();
 table(['line', 'printed (text)', 'engine'], FAP.map(([l, p, e]) => [l, S(p), f6(e)]));
 must('every FARI Figure 5 line agrees exactly', FAP.every(([, p, e]) => p === e), 'fari5');
@@ -795,7 +809,7 @@ must('every FARI Table 13 split is within 1.5 plus half a per cent of the profit
 const worstCost = Math.max(...ft.years.flatMap((y, i) => [Math.abs(y.costOilLimit - FT.ceiling[i]), Math.abs(y.costRecovered - FT.costPetroleum[i]), Math.abs(y.poolOut - FT.closing[i]), Math.abs(y.profitOil - FT.profit[i])]));
 const worstSplit = Math.max(...ft.years.flatMap((y, i) => [Math.abs(y.contractorProfitOil - FT.jvProfit[i]), Math.abs(y.governmentProfitOil - FT.govProfit[i])]));
 w();
-w(`AGREEMENT AT THE PRINTED PRECISION (derived): the largest difference on a cost line (ceiling, cost petroleum, closing balance, profit) is ${f6(worstCost)}, inside the ${S(PRINTED_BAND)} a line made of at most three printed whole numbers can carry; the largest on the profit split is ${f6(worstSplit)}, inside ${S(PRINTED_BAND)} plus half a per cent of the year's profit petroleum, because Table 13 prints the government share as a whole per cent, from which each year's stated contractor share is read. The carry of ${S(FT.closing[0])} through the first two years and the ceilings that bind in the third and fourth are reproduced.`);
+w(`AGREEMENT AT THE PRINTED PRECISION (derived): the largest difference on a cost line (ceiling, cost petroleum, closing balance, profit) is ${f6(worstCost)}, inside the ${S(PRINTED_BAND)} a line made of at most three printed whole numbers can carry; the largest on the profit split is ${f6(worstSplit)}, inside ${S(PRINTED_BAND)} plus half a per cent of the year's profit petroleum, because Table 13 prints the government share as a whole per cent, from which each year's stated contractor share is read. The pool of ${S(FT.closing[0])} carried forward through the first two years and the ceilings that bind in the third and fourth are reproduced.`);
 w();
 w('NO DEFECT, AND WHAT IT PROVES. The validation record states, verbatim:');
 const NODEF = FINDINGS.match(/Result: NO DEFECT\. The cost pool arithmetic of `applyPSC` \(royalty on gross;\s+the limit on revenue after royalty; cost recovered = min\(pool \+ capex \+\s+opex, limit\); the rest carried; profit oil = revenue after royalty - cost\s+recovered\) reproduces the IMF schedule year by year/);
@@ -875,8 +889,11 @@ must('the 2031 tax is 30 percent of the contractor profit oil (within 1e-6)', Ma
 w();
 w('READING TWO: THE GRACE. The engine\'s basis (default-grace-exceeded), verbatim:');
 const gx = runG('default-grace-exceeded');
+const gcx = runG('default-grace-compound-exceeded');
 quote(gx.basis.grace);
 w(`READING TWO ACTS when a default is cured after the grace. On default-grace-exceeded (grace ${S(argsOf('default-grace-exceeded').interest.graceHours)} hours, cured after ${S(gx.defaulters[0].days)} days) the interest ${f6(gx.interestTotal)} runs from the due date, as the Kenya clause prints ("${dashfix(C('kenya_6_7_grace').quote)}", ${C('kenya_6_7_grace').cite}); on default-grace-last-hour (${S(runG('default-grace-last-hour').defaulters[0].days)} days) there is none. A contract whose grace also delays the start of interest would give a smaller figure; the engine follows the printed clause and the course grades no figure that depends on which.`);
+w(`PRINTED ALIKE IS NOT EQUAL. For a cure inside the first month the monthly-compound form has no whole month, and its figure prints as the simple one: default-grace-compound-exceeded (${S(gcx.defaulters[0].wholeMonths)} whole months, ${S(gcx.defaulters[0].remainingDays)} days) returns ${f6(gcx.interestTotal)} and default-grace-exceeded ${f6(gx.interestTotal)} (engine); the doubles the engine holds are ${S(gcx.interestTotal)} and ${S(gx.interestTotal)}, which differ. The engine never says they are equal, and the course never keys them as equal.`);
+must('compound and simple print alike at six decimals and are not equal', f6(gcx.interestTotal) === f6(gx.interestTotal) && gcx.interestTotal !== gx.interestTotal, `${gcx.interestTotal} ${gx.interestTotal}`);
 must('the grace-exceeded interest counts from the due date: 4 days', gx.defaulters[0].days === 4 && gx.interestTotal > 0, gx.defaulters[0].days);
 w();
 w('READING THREE: THE COVER. The engine\'s basis (default-ekene-march), verbatim:');

@@ -418,6 +418,9 @@ REFUSALS A PANEL CONTROL CAN PRODUCE. Each calculator panel writes every require
 | carry-ekene-multiple | uplift.type set to "none" with multiplePct left in the box | `uplift.multiplePct` | uplift.multiplePct must be left out when type is "none"; got 150 |
 | carry-ekene-pia | uplift set to { type: "compound" } with no rate | `uplift.ratePctPerYear` | uplift.ratePctPerYear must be a finite number at or above 0; got nothing |
 
+THE ORDER OF REFUSALS. A box that carries an unknown key AND lacks a required term is refused on the unknown key first: every function checks its accepted keys before it reads a term. On cc-ekene-2027 with reconciliationLagMonths removed and a key lag added (stated probe), the engine's message, verbatim:
+> lag is not an accepted key; the accepted keys at the top level are parties, carries, months, reconciliationLagMonths, negativeCall, noCallBelow
+
 Four rules the table shows:
 - A contract term with no default is refused when it is missing, and the message says so: the carriers of a carry, the uplift, the reconciliation lag, the negative call rule, the budget tolerance, the overhead scale of every category, the default interest with its rate, method and grace, the premium multiple, the refundable kinds under basis "contract", the opening cost pool.
 - An input key a function does not read is refused at whatever level it sits (a top-level option, a party, a month, a year, a band, an uplift), with the path to the key and the full list of accepted keys.
@@ -670,17 +673,47 @@ The engine's reasons, verbatim:
 > operating: base 58000000 (cost 60000000 less exclusions 2000000); 2.75% of 50000000 + 1% of 8000000 = 1455000
 > development: base 150000000; 2.5% of 50000000 + 1% of 50000000 + 0.5% of 50000000 = 2000000
 
-| golden case | categories and bases (engine) | total (engine) |
-| --- | --- | --- |
-| overhead-ekene-2031-corporate | exploration, operating and development 215000000.000000 | 1343750.000000 |
-| overhead-norway-operating-1800 | operating 1800.000000 | 35.000000 |
-| overhead-norway-development-3000 | development 3000.000000 | 40.000000 |
-| overhead-norway-development-4000 | development 4000.000000 | 42.500000 |
-| overhead-norway-exploration-250 | exploration 250.000000 | 6.250000 |
-| overhead-norway-all-with-exclusion | exploration 400.000000; operating 850.000000; development 2000.000000 | 65.450000 |
-| overhead-norway-corporate-065 | exploration, operation and development 3400.000000 | 22.100000 |
-| overhead-band-edge-exact | operating 1000.000000 | 27.000000 |
-| overhead-zero-cost | operating 0.000000 | 0.000000 |
+| golden case | category | base (engine) | charge (engine) | case total (engine) |
+| --- | --- | --- | --- | --- |
+| overhead-ekene-2031-corporate | exploration, operating and development | 215000000.000000 | 1343750.000000 | 1343750.000000 |
+| overhead-norway-operating-1800 | operating | 1800.000000 | 35.000000 | 35.000000 |
+| overhead-norway-development-3000 | development | 3000.000000 | 40.000000 | 40.000000 |
+| overhead-norway-development-4000 | development | 4000.000000 | 42.500000 | 42.500000 |
+| overhead-norway-exploration-250 | exploration | 250.000000 | 6.250000 | 6.250000 |
+| overhead-norway-all-with-exclusion | exploration | 400.000000 | 7.500000 | 65.450000 |
+| overhead-norway-all-with-exclusion | operating | 850.000000 | 22.950000 | 65.450000 |
+| overhead-norway-all-with-exclusion | development | 2000.000000 | 35.000000 | 65.450000 |
+| overhead-norway-corporate-065 | exploration, operation and development | 3400.000000 | 22.100000 | 22.100000 |
+| overhead-band-edge-exact | operating | 1000.000000 | 27.000000 | 27.000000 |
+| overhead-zero-cost | operating | 0.000000 | 0.000000 | 0.000000 |
+
+THE BANDS OF THE NORWEGIAN CASES (golden inputs, the Art. 2.2.2 scale in NOK million), each band with its upper limit and the part of the base the engine puts in it:
+
+| golden case | category | band | from | up to (golden input) | per cent (golden input) | part of the base in it (engine) | band charge (engine) |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| overhead-norway-operating-1800 | operating | band 1 | 0.000000 | 1000.000000 | 2.700000 | 1000.000000 | 27.000000 |
+| overhead-norway-operating-1800 | operating | band 2 | 1000.000000 | 2500.000000 | 1.000000 | 800.000000 | 8.000000 |
+| overhead-norway-operating-1800 | operating | above the last band | 2500.000000 | none | 0.000000 | 0.000000 | 0.000000 |
+| overhead-norway-development-3000 | development | band 1 | 0.000000 | 1000.000000 | 2.500000 | 1000.000000 | 25.000000 |
+| overhead-norway-development-3000 | development | band 2 | 1000.000000 | 2000.000000 | 1.000000 | 1000.000000 | 10.000000 |
+| overhead-norway-development-3000 | development | band 3 | 2000.000000 | 3500.000000 | 0.500000 | 1000.000000 | 5.000000 |
+| overhead-norway-development-3000 | development | above the last band | 3500.000000 | none | 0.000000 | 0.000000 | 0.000000 |
+| overhead-norway-development-4000 | development | band 1 | 0.000000 | 1000.000000 | 2.500000 | 1000.000000 | 25.000000 |
+| overhead-norway-development-4000 | development | band 2 | 1000.000000 | 2000.000000 | 1.000000 | 1000.000000 | 10.000000 |
+| overhead-norway-development-4000 | development | band 3 | 2000.000000 | 3500.000000 | 0.500000 | 1500.000000 | 7.500000 |
+| overhead-norway-development-4000 | development | above the last band | 3500.000000 | none | 0.000000 | 500.000000 | 0.000000 |
+| overhead-norway-exploration-250 | exploration | band 1 | 0.000000 | 300.000000 | 2.500000 | 250.000000 | 6.250000 |
+| overhead-norway-exploration-250 | exploration | above the last band | 300.000000 | none | 0.000000 | 0.000000 | 0.000000 |
+| overhead-norway-all-with-exclusion | exploration | band 1 | 0.000000 | 300.000000 | 2.500000 | 300.000000 | 7.500000 |
+| overhead-norway-all-with-exclusion | exploration | above the last band | 300.000000 | none | 0.000000 | 100.000000 | 0.000000 |
+| overhead-norway-all-with-exclusion | operating | band 1 | 0.000000 | 1000.000000 | 2.700000 | 850.000000 | 22.950000 |
+| overhead-norway-all-with-exclusion | operating | band 2 | 1000.000000 | 2500.000000 | 1.000000 | 0.000000 | 0.000000 |
+| overhead-norway-all-with-exclusion | operating | above the last band | 2500.000000 | none | 0.000000 | 0.000000 | 0.000000 |
+| overhead-norway-all-with-exclusion | development | band 1 | 0.000000 | 1000.000000 | 2.500000 | 1000.000000 | 25.000000 |
+| overhead-norway-all-with-exclusion | development | band 2 | 1000.000000 | 2000.000000 | 1.000000 | 1000.000000 | 10.000000 |
+| overhead-norway-all-with-exclusion | development | band 3 | 2000.000000 | 3500.000000 | 0.500000 | 0.000000 | 0.000000 |
+| overhead-norway-all-with-exclusion | development | above the last band | 3500.000000 | none | 0.000000 | 0.000000 | 0.000000 |
+| overhead-norway-corporate-065 | exploration, operation and development | above the last band | 0.000000 | none | 0.650000 | 3400.000000 | 22.100000 |
 
 overhead-ekene-2031-corporate, the engine's reasons, verbatim:
 > exploration, operating and development: base 215000000; 0.625% of 215000000 = 1343750
@@ -1308,19 +1341,19 @@ default-no-carry-365, the engine's reasons, verbatim:
 
 THE TRIGGERS (golden inputs):
 
-| golden case | consequence | stated (golden input) | trigger date (engine) | applies (engine) |
-| --- | --- | --- | --- | --- |
-| default-cured-on-trigger-day | suspension | 5 working-days from 2027-03-01 | 2027-03-08 | false |
-| default-cured-on-trigger-day | forfeiture | 3 months from 2027-03-10 | 2027-06-10 | false |
-| default-cured-day-after-trigger | suspension | 5 working-days from 2027-03-01 | 2027-03-08 | true |
-| default-cured-day-after-trigger | forfeiture | 3 months from 2027-03-10 | 2027-06-10 | false |
-| default-forfeiture-last-day | suspension | 5 working-days from 2027-03-01 | 2027-03-08 | true |
-| default-forfeiture-last-day | forfeiture | 3 months from 2027-03-10 | 2027-06-10 | false |
-| default-forfeiture-day-after | suspension | 5 working-days from 2027-03-01 | 2027-03-08 | true |
-| default-forfeiture-day-after | forfeiture | 3 months from 2027-03-10 | 2027-06-10 | true |
-| default-working-days-holiday | suspension | 5 working-days from 2027-12-22 | 2028-01-03 | true |
-| default-months-end-of-month | forfeiture | 3 months from 2027-01-31 | 2027-04-30 | true |
-| default-calendar-days | forfeiture | 90 calendar-days from 2027-01-01 | 2027-04-01 | false |
+| golden case | consequence | stated (golden input) | holidays stated (golden input) | trigger date (engine) | applies (engine) |
+| --- | --- | --- | --- | --- | --- |
+| default-cured-on-trigger-day | suspension | 5 working-days from 2027-03-01 | none | 2027-03-08 | false |
+| default-cured-on-trigger-day | forfeiture | 3 months from 2027-03-10 | none | 2027-06-10 | false |
+| default-cured-day-after-trigger | suspension | 5 working-days from 2027-03-01 | none | 2027-03-08 | true |
+| default-cured-day-after-trigger | forfeiture | 3 months from 2027-03-10 | none | 2027-06-10 | false |
+| default-forfeiture-last-day | suspension | 5 working-days from 2027-03-01 | none | 2027-03-08 | true |
+| default-forfeiture-last-day | forfeiture | 3 months from 2027-03-10 | none | 2027-06-10 | false |
+| default-forfeiture-day-after | suspension | 5 working-days from 2027-03-01 | none | 2027-03-08 | true |
+| default-forfeiture-day-after | forfeiture | 3 months from 2027-03-10 | none | 2027-06-10 | true |
+| default-working-days-holiday | suspension | 5 working-days from 2027-12-22 | 2027-12-24, 2027-12-27, 2027-12-28, 2028-01-01 | 2028-01-03 | true |
+| default-months-end-of-month | forfeiture | 3 months from 2027-01-31 | none | 2027-04-30 | true |
+| default-calendar-days | forfeiture | 90 calendar-days from 2027-01-01 | none | 2027-04-01 | false |
 
 default-cured-on-trigger-day, the engine's reasons, verbatim:
 > the unpaid 2000000 is advanced by EKO 1230769.23, PA 769230.77, in proportion to their paying interests among the non-defaulting parties
@@ -1468,9 +1501,11 @@ WORLD BANK BRIEFING NOTE 8 (November 2007), golden input psc-wb-bn8-2007: gross 
 | income tax | 7.8 | 7.800000 |
 | contractor retains | 43 | 43.200000 |
 | government takes | 57 | 56.800000 |
+The limit base in the engine's basis on this call (psc-wb-bn8-2007), verbatim:
+> the limit is stated on gross revenue and passed to applyPSC as the fraction 60 / (100 - 10) of revenue after royalty
 The note prints the totals in whole dollars ("The end result is that the contractor retains US$43 and the government takes $57.", World Bank Petroleum Sector Briefing Note No. 8 (November 2007)); the engine returns 43.200000 and 56.800000, which round to 43 and 57. Its taxable income of 26 is the contractor's profit oil here, because the costs are recovered in full.
 
-IMF FARI FIGURE 5 (February 2016), golden input psc-fari-figure-5: one barrel at 100.000000, limit 50.000000 percent of after-royalty, contractor share 40.000000 percent, tax 30.000000 percent.
+IMF FARI FIGURE 5 (February 2016), golden input psc-fari-figure-5: one barrel at 100.000000, royalty 0.000000 percent, capex 50.000000 and opex 0.000000, limit 50.000000 percent of after-royalty, contractor share 40.000000 percent, tax 30.000000 percent.
 
 | line | printed (text) | engine |
 | --- | --- | --- |
@@ -1496,7 +1531,7 @@ IMF FARI TABLES 12 AND 13 (February 2016), golden input psc-fari-table-12: eleve
 | 2010 | 480 | 480.000000 | 368 | 369.000000 | 0 | 0.000000 | 232 | 231.000000 | 130 | 129.360000 | 102 | 101.640000 |
 | 2011 | 392 | 392.000000 | 303 | 302.000000 | 0 | 0.000000 | 187 | 188.000000 | 108 | 109.040000 | 79 | 78.960000 |
 
-AGREEMENT AT THE PRINTED PRECISION (derived): the largest difference on a cost line (ceiling, cost petroleum, closing balance, profit) is 1.000000, inside the 1.5 a line made of at most three printed whole numbers can carry; the largest on the profit split is 1.560000, inside 1.5 plus half a per cent of the year's profit petroleum, because Table 13 prints the government share as a whole per cent, from which each year's stated contractor share is read. The carry of 250 through the first two years and the ceilings that bind in the third and fourth are reproduced.
+AGREEMENT AT THE PRINTED PRECISION (derived): the largest difference on a cost line (ceiling, cost petroleum, closing balance, profit) is 1.000000, inside the 1.5 a line made of at most three printed whole numbers can carry; the largest on the profit split is 1.560000, inside 1.5 plus half a per cent of the year's profit petroleum, because Table 13 prints the government share as a whole per cent, from which each year's stated contractor share is read. The pool of 250 carried forward through the first two years and the ceilings that bind in the third and fourth are reproduced.
 
 NO DEFECT, AND WHAT IT PROVES. The validation record states, verbatim:
 > Result: NO DEFECT. The cost pool arithmetic of `applyPSC` (royalty on gross; the limit on revenue after royalty; cost recovered = min(pool + capex + opex, limit); the rest carried; profit oil = revenue after royalty - cost recovered) reproduces the IMF schedule year by year
@@ -1639,6 +1674,7 @@ READING ONE ACTS in a year where the limit binds. On psc-ekene, 2031: cost recov
 READING TWO: THE GRACE. The engine's basis (default-grace-exceeded), verbatim:
 > a stated grace of 72 hours (days x 24 from the due date): a default cured within it carries no interest; one cured later carries interest from the due date, as the Kenya Model PSC 2015 Participation Agreement Art. 6.7 prints (72 hours)
 READING TWO ACTS when a default is cured after the grace. On default-grace-exceeded (grace 72 hours, cured after 4 days) the interest 1833.333333 runs from the due date, as the Kenya clause prints ("A payment not received within seventy-two (72) hours of the due date shall accrue interest from the due date", Kenya Model PSC 2015, Participation Agreement Art. 6.7); on default-grace-last-hour (3 days) there is none. A contract whose grace also delays the start of interest would give a smaller figure; the engine follows the printed clause and the course grades no figure that depends on which.
+PRINTED ALIKE IS NOT EQUAL. For a cure inside the first month the monthly-compound form has no whole month, and its figure prints as the simple one: default-grace-compound-exceeded (0 whole months, 4 days) returns 1833.333333 and default-grace-exceeded 1833.333333 (engine); the doubles the engine holds are 1833.3333333333535 and 1833.3333333333333, which differ. The engine never says they are equal, and the course never keys them as equal.
 
 READING THREE: THE COVER. The engine's basis (default-ekene-march), verbatim:
 > the non-defaulting parties advance the unpaid amounts in proportion to their paying interests among themselves (the parties that pay cost; a carried party pays none)

@@ -33,13 +33,13 @@ The engine writes each year in its own words. The first and the last lines of th
 
 > PB 2035: the balance 1350000 is recovered with 1350000 of the 1500000 available; the non-consenting party receives 150000 of its share 1500000
 
-## What the premium recovery does not carry
+## What the premium recovery leaves out
 
 The engine adds nothing to the balance while it waits. There is no uplift on the premium and no default interest on it: the multiple is the whole price of the risk, stated once. A contract that charged something on the unrecovered premium would state it, and this engine computes no such term. The gross values and deductions are stated inputs, so a computed premium recovery says what the stated terms produce and forecasts nothing a partner will pay.
 
 ## Two parties declining
 
-When two parties decline, each has its own ledger on its own share, and the engine reports a reversion year for each. The consenting parties carry the whole cost in their shares of the project either way.
+When two parties decline, each has its own ledger on its own share, and the engine reports a reversion year for each. The consenting parties bear the whole cost in their shares of the project either way.
 
 ## Exercise
 

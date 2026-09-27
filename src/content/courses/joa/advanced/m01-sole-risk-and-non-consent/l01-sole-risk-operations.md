@@ -10,7 +10,7 @@ The Norwegian Joint Operating Agreement (Attachment A, an unofficial English tra
 
 > "In sole risk projects each Party participates in proportion to his Participating interest, unless the Parties otherwise agree." (Norway JOA Art. 18.6)
 
-The industry's common model joint operating agreement is sold under licence, and this course teaches its ideas as concepts only: an operation declined, the consenting parties carrying it, and a premium taken back out of the declining party's share of production. The engine's function `nonConsent` computes that with every contract figure stated.
+The industry's common model joint operating agreement is sold under licence, and this course teaches its ideas as concepts only: an operation declined, the consenting parties paying for it, and a premium taken back out of the declining party's share of production. The engine's function `nonConsent` computes that with every contract figure stated.
 
 ## The Ekene-4 sidetrack
 

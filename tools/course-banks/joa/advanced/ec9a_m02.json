@@ -107,7 +107,7 @@
    "The consenting parties' cost shares, each premium, and a buy-in payment or a ledger with its reversion year"
   ],
   "answer": 3,
-  "explanation": "The engine lists nonConsent's return as the consenting parties' cost shares, each non-consenting party's premium, and either its buy-in payment or the recovery ledger with the year its interest reverts. It carries no NPV of its own, adds nothing to an unrecovered premium, and prints the shares of the project itself."
+  "explanation": "The engine lists nonConsent's return as the consenting parties' cost shares, each non-consenting party's premium, and either its buy-in payment or the recovery ledger with the year its interest reverts. It holds no NPV of its own, adds nothing to an unrecovered premium, and prints the shares of the project itself."
  },
  {
   "prompt": "On the Norwegian buy-in call, a learner removes NOC from `consenting`, so PB and NOC both decline and EKO (40.000000) and PA (25.000000) fund the sidetrack. What share of the project does the engine now give EKO?",

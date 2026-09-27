@@ -6,7 +6,7 @@ An entry payment has a payer and several payees. The Norwegian agreement sends i
 
 ## Shares of the project
 
-When PB declines the sidetrack, EKO, PA and NOC carry the whole cost in proportion to their participating interests among themselves. The engine prints those shares in its first reason:
+When PB declines the sidetrack, EKO, PA and NOC pay the whole cost in proportion to their participating interests among themselves. The engine prints those shares in its first reason:
 
 > Ekene-4 sidetrack: cost 18000000 paid by the consenting parties EKO 47.05882352941177%, PA 29.41176470588235%, NOC 23.529411764705884% (in proportion to their participating interests)
 
@@ -28,7 +28,7 @@ The three amounts add back to the payment, and each is the payment times that pa
 
 ## Why the share of the project
 
-The parties who carried the operation carried it in their shares of the project, so they are repaid in the same shares. EKO paid 8470588.235294 of the sidetrack's cost and receives 12705882.352941 of the entry payment; both figures are its share of the project applied to a different total. Apportioning by participating interest in the licence would leave part of the payment unassigned, because PB's own 15.000000 percent would have nobody to go to.
+The parties who paid for the operation paid in their shares of the project, so they are repaid in the same shares. EKO paid 8470588.235294 of the sidetrack's cost and receives 12705882.352941 of the entry payment; both figures are its share of the project applied to a different total. Apportioning by participating interest in the licence would leave part of the payment unassigned, because PB's own 15.000000 percent would have nobody to go to.
 
 ## A carried party that consents
 

@@ -2,7 +2,7 @@
 
 {{panel:joa-account-calculator}}
 
-The operator spends the joint venture's money before the parties see the bills. To avoid financing the whole venture out of its own pocket, it asks each party for an advance every month, the cash call, against a forecast of the month's spending. This module works one month's cash call at a time: the forecast share, the actual share, the difference, and how that difference adjusts a later call.
+The operator spends the joint venture's money before the parties see the bills. To avoid financing the whole venture out of its own pocket, it asks each party for an advance in each month whose forecast reaches the stated threshold, the cash call, against a forecast of the month's spending. This module works one month's cash call at a time: the forecast share, the actual share, the difference, and how that difference adjusts a later call.
 
 ## Four clauses from the public texts
 

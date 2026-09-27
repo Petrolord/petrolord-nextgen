@@ -459,6 +459,6 @@
    "The carry uplift on the opening balance, as the premium ledger also accrues it"
   ],
   "answer": 1,
-  "explanation": "The conventions table lists non-consent: the premium on the proportionate share of the cost; reversion inside the payout period, an engine convention. The receipt of 150000.000000 exists only because the rest of the payout year's share reverts to PB; the ledger carries no uplift and no cover applies to a sole risk operation."
+  "explanation": "The conventions table lists non-consent: the premium on the proportionate share of the cost; reversion inside the payout period, an engine convention. The receipt of 150000.000000 exists only because the rest of the payout year's share reverts to PB; the ledger adds no uplift and no cover applies to a sole risk operation."
  }
 ]

@@ -351,7 +351,7 @@ x("A partner report quotes PB's 2035 receipt of 150000.000000 on the Ekene-4 sid
  ["Only the premium multiple, as the receipt follows from the multiple and nothing else",
   "The cover reading, since the consenting parties advanced PB's share of the cost",
   "The carry uplift on the opening balance, as the premium ledger also accrues it"],
- "The conventions table lists non-consent: the premium on the proportionate share of the cost; reversion inside the payout period, an engine convention. The receipt of 150000.000000 exists only because the rest of the payout year's share reverts to PB; the ledger carries no uplift and no cover applies to a sole risk operation.")
+ "The conventions table lists non-consent: the premium on the proportionate share of the cost; reversion inside the payout period, an engine convention. The receipt of 150000.000000 exists only because the rest of the payout year's share reverts to PB; the ledger adds no uplift and no cover applies to a sole risk operation.")
 
 emit(Q, '/root/cat-wip-joa/banks/ec9a_exam.json', expect_n=42)
 finish()

@@ -2,7 +2,7 @@
 
 {{panel:joa-account-calculator}}
 
-A forecast is an estimate, and the month's actual spending always differs from it by something. After the month closes, the operator books the actual joint spending and splits it on the same paying interests. The gap between what a party advanced and what it owed is its difference, and a later cash call corrects it.
+A forecast is an estimate, and the month's actual spending usually differs from it; on the Ekene ledger June and September 2027 are called exactly, their actual equal to their forecast. After the month closes, the operator books the actual joint spending and splits it on the same paying interests. The gap between what a party advanced and what it owed is its difference, and a later cash call corrects it.
 
 ## The difference
 

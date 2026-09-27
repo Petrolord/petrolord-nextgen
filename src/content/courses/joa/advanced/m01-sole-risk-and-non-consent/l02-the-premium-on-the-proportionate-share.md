@@ -18,7 +18,7 @@ On the Ekene-4 sidetrack PB's participating interest is 15.000000 percent, so it
 | C (a well costing 1000.000000, consenting A and B) | 20.000000 | 200.000000 | 300.000000 | 600.000000 |
 | B (a well costing 1000.000000, consenting A alone) | 30.000000 | 300.000000 | 100.000000 | 300.000000 |
 
-The base belongs to the declining party alone. The consenting parties pay the whole cost between them in proportion to their participating interests among themselves, and those shares of the project (EKO 47.058824, PA 29.411765, NOC 23.529412) settle how the consenting parties carry the cost. They never enter the premium itself.
+The base belongs to the declining party alone. The consenting parties pay the whole cost between them in proportion to their participating interests among themselves, and those shares of the project (EKO 47.058824, PA 29.411765, NOC 23.529412) settle how the consenting parties bear the cost. They never enter the premium itself.
 
 ## The multiple is stated, with no default
 
@@ -26,7 +26,7 @@ No public text this course reads prints a premium multiple for recovery from pro
 
 > premiumMultiplePct must be a number at or above 100 (a stated contract figure; 100 recovers the cost alone); got nothing
 
-A multiple below 100 would hand back less than the cost the consenting parties carried for the declining party, and the engine refuses it by name:
+A multiple below 100 would hand back less than the cost the consenting parties paid for the declining party, and the engine refuses it by name:
 
 > premiumMultiplePct must be a number at or above 100 (a stated contract figure; 100 recovers the cost alone); got 50
 

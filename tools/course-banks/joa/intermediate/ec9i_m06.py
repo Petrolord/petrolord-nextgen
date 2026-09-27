@@ -79,7 +79,7 @@ q(1, "Before production starts, what do 2001 and 2002 of the FARI Table 12 run s
  ["A cost recovery of 250 in 2001, spent before production and recovered at once",
   "A pool of 250 written off at the end of 2002",
   "A ceiling of 250 each year, the pool setting its own limit before production starts"],
- "The engine returns a ceiling of 0.000000, cost recovered 0.000000 and a pool out of 250.000000 in 2001 and 2002, where the tables print 0, 0 and 250. The course states: \"The carry of 250 through the first two years and the ceilings that bind in the third and fourth are reproduced.\" A pool is carried; nothing is written off.")
+ "The engine returns a ceiling of 0.000000, cost recovered 0.000000 and a pool out of 250.000000 in 2001 and 2002, where the tables print 0, 0 and 250. The course states: \"The pool of 250 carried forward through the first two years and the ceilings that bind in the third and fourth are reproduced.\" A pool is carried; nothing is written off.")
 
 q(2, "What does the engine's validation record conclude from the IMF schedule, in its own words?",
  "Result: NO DEFECT, the applyPSC cost pool arithmetic reproducing the IMF schedule year by year",

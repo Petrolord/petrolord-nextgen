@@ -2,7 +2,7 @@
 
 {{panel:joa-agreement-calculator}}
 
-The two modes of `nonConsent` answer the same question in two ways: what does a party that declined an operation pay for the risk the others carried. This lesson sets them side by side on one operation, so that a report can say which figure comes from the base, which from the multiple and which from the timing.
+The two modes of `nonConsent` answer the same question in two ways: what does a party that declined an operation pay for the risk the others bore. This lesson sets them side by side on one operation, so that a report can say which figure comes from the base, which from the multiple and which from the timing.
 
 ## One operation, two contracts
 
@@ -21,13 +21,13 @@ Both rest on the same base. The multiple sets the size of the sum and the mode s
 
 ## The consenting parties' shares are the same
 
-Under both modes the consenting parties hold the project in proportion to their participating interests among themselves: EKO 47.058824, PA 29.411765, NOC 23.529412 (engine). The entry payment is apportioned in those shares, and the cost they carried was paid in the same shares.
+Under both modes the consenting parties hold the project in proportion to their participating interests among themselves: EKO 47.058824, PA 29.411765, NOC 23.529412 (engine). The entry payment is apportioned in those shares, and the cost they bore was paid in the same shares.
 
 ## What each mode puts at risk
 
 The two modes move risk differently, and the difference is a matter of reading the ledgers without adding any figure of your own.
 
-- Under buy-in the consenting parties hold the sum on the day of entry. Their exposure ends when PB pays; PB carries the cost of entering whatever the sidetrack later produces.
+- Under buy-in the consenting parties hold the sum on the day of entry. Their exposure ends when PB pays; PB bears the cost of entering whatever the sidetrack later produces.
 - Under recovery from production the consenting parties are paid only if the sidetrack produces net value. The Ekene ledger recovers the premium by 2035 because its stated gross values and deductions leave enough share of net value; a weaker operation would stretch the ledger, and one that never earned net value would recover nothing.
 - In the payout year PB receives the rest of its share, 150000.000000 in 2035, and its whole share from 2036, 1200000.000000 that year.
 
