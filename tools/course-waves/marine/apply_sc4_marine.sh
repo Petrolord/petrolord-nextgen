@@ -90,11 +90,11 @@ FILES="$SEEDS
 $GOLIVE"
 digest_for() {
   case $1 in
-    20261115_sc4_marine_course               ) echo d5f2b933e8cbb4f6abbc69fd03acd94150b2687597c4d459170893a0ebadf76a ;;
-    20261115_sc4_marine_beginner_deep        ) echo 4a034b8da0fde480d35df8c4ed7b50fe9f127b2690ffc1e3b10cbece89b6cfcd ;;
-    20261115_sc4_marine_intermediate_deep    ) echo bb9492e12aec5bebc48385546e8c25c93df2d3d3fe19f71ba0dea56fbcc15e1e ;;
-    20261115_sc4_marine_advanced_deep        ) echo dbaf9bf10e84c472cbb640b6f48d7b24a279374067103459e7c5a49949fbe6bd ;;
-    20261115_sc4_marine_go_live              ) echo 928f0981867992702c34f17723caf44fc9c7f3a7e043a8343bfd2d1ce2ce2a4e ;;
+    20261115_sc4_marine_course               ) echo a16db243ec5a7729b52de41f722182d53a0ded9d15c91a67da19af2328f0a41d ;;
+    20261115_sc4_marine_beginner_deep        ) echo 925799ba7b2478b28991cb4844f72bffa64db8110e4d664d202b2414cc57bbe2 ;;
+    20261115_sc4_marine_intermediate_deep    ) echo 353ef31ac1ad19064bfdba03c0a98299939f8e1740d9dca11751cb17f6617c53 ;;
+    20261115_sc4_marine_advanced_deep        ) echo 3b4b5ff5d11220f6ae4963114cd93cbb54b949939536b4b5df847b6c73893416 ;;
+    20261115_sc4_marine_go_live              ) echo 6f717a96deca76024ade4fe98b460b49c4dab8c4989995e263240720d55d024b ;;
     *) echo UNPINNED ;;
   esac
 }
