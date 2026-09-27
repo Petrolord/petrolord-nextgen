@@ -36,7 +36,7 @@ export const CAP_STARTS = [
 
 export const DEAL_STARTS = [
   ['deal', 'The Ekene Deep deal, cash flows stated'], ['dealNpv', 'The same, the success-case value stated'], ['dealNoCap', 'No cap'],
-  ['dealCarryCap', 'A carry-amount cap'], ['dealFarmorSide', 'The excess by the farmor side'], ['dealBonusZero', 'No bonus and no reimbursement'],
+  ['dealCarryCap', 'A carry-amount cap'], ['dealFarmorSide', 'The excess by the farmor side'], ['dealBonusZero', 'No bonus and no assignor fees'],
   ['dealDry', 'A chance of success of 0'], ['dealCertain', 'A chance of success of 100'], ['dealPsu', 'The Penn State figures'],
   ['dealKinks', 'Breakpoints under a carry cap'], ['dealBreakEven', 'A promote at the break-even exactly'],
 ];

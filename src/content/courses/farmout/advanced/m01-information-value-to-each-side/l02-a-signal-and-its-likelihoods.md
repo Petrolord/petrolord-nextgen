@@ -34,11 +34,11 @@ A signal set that cannot be a survey is refused by name, before anything is comp
 
 Likelihoods given success that do not sum to 100 over the signals describe no survey:
 
-> information.signals must have likelihoodsPct[0] summing to 100 over the signals (P(signal / success)); got a sum of 95
+> information.signals must have likelihoodsPct[0] summing to 100 over the signals (P(signal | success)); got a sum of 95
 
 Each signal states two likelihoods, one given success and one given a dry hole, in per cent:
 
-> information.signals[0].likelihoodsPct must be an array [P(signal / success), P(signal / dry hole)] in per cent; got [75]
+> information.signals[0].likelihoodsPct must be an array [P(signal | success), P(signal | dry hole)] in per cent; got [75]
 
 The engine accepts at most 10 signals in one call. The engine checks the shape and the sums of the likelihoods and derives everything else from them.
 

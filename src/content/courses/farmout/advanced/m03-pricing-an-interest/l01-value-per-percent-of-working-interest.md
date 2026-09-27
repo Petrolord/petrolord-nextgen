@@ -27,7 +27,7 @@ The engine's reasons, verbatim:
 
 ## What the figure leaves out
 
-The value per percent is the value of a heads-up working interest: each percent pays its own share of the well and nothing more. It carries no promote, no bonus and no reimbursement. Take the value of 30.000000 percent, 7893775.278136, and subtract the bonus of 2000000.000000 and the reimbursement of 3600000.000000: the result is 2293775.278136, which is FIN's EMV in the deal calculator when it pays 30.000000 percent of the well for 30.000000 percent. The promote on top of that is what took FIN's EMV below 0 in the deal as offered.
+The value per percent is the value of a heads-up working interest: each percent pays its own share of the well and nothing more. It carries no promote, no bonus and no reimbursement. Take the value of 30.000000 percent, 7893775.278136, and subtract the bonus of 2000000.000000 and the reimbursement of 3600000.000000: the result prints as 2293775.278136, which is how FIN's EMV in the deal calculator prints when it pays 30.000000 percent of the well for 30.000000 percent. The promote on top of that is what took FIN's EMV below 0 in the deal as offered.
 
 ## The Penn State figures
 

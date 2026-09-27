@@ -29,7 +29,7 @@ The course states the Ekene Deep deal with one term changed at a time:
 | cap "none" | -1856224.721864 | decline |
 | overrun rule "farmor-side" | -1656224.721864 | decline |
 | cap "carry-amount" of 3000000.000000 | -706224.721864 | decline |
-| cash bonus 0 and no reimbursement | 193775.278136 | farm in |
+| cash bonus 0 and assignor fees 0, the reimbursement kept | 193775.278136 | farm in |
 
 Each change moves FIN's EMV through its payoffs. Removing the cap makes FIN pay its promoted share of the whole success well. The farmor-side rule takes FIN's share of the excess off it. A carry cap stops the carry at a smaller figure. Dropping the cash leaves FIN with a positive EMV, and it farms in.
 
@@ -54,5 +54,5 @@ A farminee that declines at 40.000000 percent may accept at a smaller share. The
 Work in the course's own deal calculator.
 
 1. Open the view "The value of the deal to each side" and start from "The Ekene Deep deal, cash flows stated". Find FIN's farm-in row and the farminee's best-action tile.
-2. Start from "No bonus and no reimbursement" and read FIN's EMV and best action. Then start from "A carry-amount cap" and compare.
+2. Start from "No bonus and no assignor fees" and read FIN's EMV and best action. Then start from "A carry-amount cap" and compare.
 3. Back on the Ekene Deep deal, lower "Share of the well the farminee pays, percent (stated)" to 35 and read FIN's EMV. Then set it to 20 and read the refusal.

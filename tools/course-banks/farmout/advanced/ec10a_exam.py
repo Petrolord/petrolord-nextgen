@@ -44,11 +44,11 @@ x("Which amplitude signal changes neither side's action on the Ekene deal?",
 
 # 4
 x("The first signal of a survey is typed with only its likelihood given success, [75]. How does the engine answer?",
- "information.signals[0].likelihoodsPct must be an array [P(signal / success), P(signal / dry hole)] in per cent; got [75]",
- ["information.signals must have likelihoodsPct[0] summing to 100 over the signals (P(signal / success)); got a sum of 75",
+ "information.signals[0].likelihoodsPct must be an array [P(signal | success), P(signal | dry hole)] in per cent; got [75]",
+ ["information.signals must have likelihoodsPct[0] summing to 100 over the signals (P(signal | success)); got a sum of 75",
   "information.signals[0].likelihoodsPct must be a number from 0 to 100; got [75]",
   "information.signals must be an array of at least 2 signals; got [75]"],
- "Each signal states two likelihoods in per cent, one given success and one given a dry hole, so the engine refuses the shape by the signal's path, in its own words: information.signals[0].likelihoodsPct must be an array [P(signal / success), P(signal / dry hole)] in per cent; got [75]. The other three misname the rule or the field.")
+ "Each signal states two likelihoods in per cent, one given success and one given a dry hole, so the engine refuses the shape by the signal's path, in its own words: information.signals[0].likelihoodsPct must be an array [P(signal | success), P(signal | dry hole)] in per cent; got [75]. The other three misname the rule or the field.")
 
 # 5
 x("An information call lists 11 signals. What does the engine do with it?",

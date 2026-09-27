@@ -9,7 +9,7 @@
 # the timing script and the negative control are NAMED with the reason they
 # travel, with FINDINGS-farmout.md, the validation record (engines #273).
 # Vendored at 6626465 (engines #272 the engine, #273 and #275 FINDINGS, #276 the
-# negative-carry refusal, #274 the simple
+# negative-carry refusal, #277 refusal bounds on the accepted side, #274 the simple
 # uplift in jointVenture.carryRecovery, which farmout.developmentCarry passes
 # through).
 #
@@ -41,7 +41,7 @@ set -euo pipefail
 ENG=/root/petrolord-engines
 NG=${NG:-/root/wt-ec10-nextgen}
 PREFIX=ec10-farmout
-REV=${REV:-6626465}
+REV=${REV:-fb5a363}
 FULL=$(git -C "$ENG" rev-parse "$REV^{commit}")
 PIN=$(python3 -c "import json,sys;print(json.load(open(sys.argv[1]))['canonical']['commit'])" "$NG/packages/engines/VENDOR.json")
 EXP=$(mktemp -d)

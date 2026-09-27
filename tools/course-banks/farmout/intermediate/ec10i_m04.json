@@ -137,10 +137,10 @@
    "A deal FIN can sign at no promote, the best share for it on these terms and one the engine accepts",
    "The break-even share of EKO, since the table lists one breakpoint for each side of the deal",
    "The share at which the carry is 0, the smallest share the engine accepts under this rule",
-   "A point on the EMV line: a deal stated at 30.000000 is refused, below the floor of 31.363636"
+   "A point on the EMV line: a deal stated at 30.000000 is refused, below the floor of 31.363637"
   ],
   "answer": 3,
-  "explanation": "The engine rolls the EMV back at the earned interest to draw its line, and that point can sit below the floor a stated deal must reach. On these terms the refusal names a floor of 31.363636, the share printed to six decimals at which the success well's carry reaches 0, and the deal call refuses any share below it by name. The solved break-even, 35.960428, is above it. The table is FIN's alone."
+  "explanation": "The engine rolls the EMV back at the earned interest to draw its line, and that point can sit below the floor a stated deal must reach. On these terms the refusal names a floor of 31.363637, rounded up at the sixth decimal so that it is accepted, the share at which the success well's carry reaches 0, and the deal call refuses any share below it by name. The solved break-even, 35.960428, is above it. The table is FIN's alone."
  },
  {
   "prompt": "How does the engine solve the chance of success at which a named position's EMV is 0? Pick its basis as it prints it.",

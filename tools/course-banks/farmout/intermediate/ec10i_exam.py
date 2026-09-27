@@ -217,9 +217,9 @@ q(1, "On the stated case deal-break-even-at-farmor-share (N paying 100.000000 pe
   "Every position, the promote taking it all"],
  "The engine's reason reads \"F after the farm-out: EMV is at or above 0 at every chance of success (the dry hole is not a loss)\": carried for the whole well, F pays nothing on a dry hole. F alone breaks even at 20.000000 percent and N at 50.000000 percent, the stated chance at which its EMV is exactly 0.")
 
-q(0, "The Ekene Deep deal restated with \"farmor-side\" refuses any stated share below 31.363636. What break-even share does the engine solve on it?",
- "35.960428 percent, above that smallest share",
- ["31.363636 percent, where FIN's EMV is 0",
+q(0, "The Ekene Deep deal restated with \"farmor-side\" refuses any stated share below 31.363637, the floor its refusal prints. What break-even share does the engine solve on it?",
+ "35.960428 percent, above that printed floor",
+ ["31.363637 percent, where FIN's EMV is 0",
   "30.000000 percent, the first breakpoint",
   "35.594574 percent, the post-deal figure"],
  "On deal-ekene-farmor-side the engine solves 35.960428 percent, above the floor the stated-deal check names. The breakpoint table still lists 30.000000, a point on the EMV line; a deal stated there is refused. 35.594574 is the break-even under \"post-deal-interests\", and the floor is set by the carry reaching 0.")

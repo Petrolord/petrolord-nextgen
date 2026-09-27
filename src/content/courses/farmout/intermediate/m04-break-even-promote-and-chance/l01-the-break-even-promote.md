@@ -33,9 +33,9 @@ The break-even promote belongs to the terms it was solved on:
 | --- | --- | --- | --- |
 | the Ekene Deep deal | 35.594574 | 5.594574 | 1.186486 |
 | a carry-amount cap of 3000000.000000 | 35.527169 | 5.527169 | 1.184239 |
-| cash bonus 0 and no reimbursement | 40.472623 | 10.472623 | 1.349087 |
+| cash bonus 0 and assignor fees 0, the reimbursement kept | 40.472623 | 10.472623 | 1.349087 |
 
-Without the cash, FIN could pay 40.472623 percent and break even, which is above the 40.000000 the deal asks; that is why FIN farms in on those terms.
+Without the bonus and the fees, FIN could pay 40.472623 percent and break even, which is above the 40.000000 the deal asks; that is why FIN farms in on those terms.
 
 ## At the break-even exactly
 

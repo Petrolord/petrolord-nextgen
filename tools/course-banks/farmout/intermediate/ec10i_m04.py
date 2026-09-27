@@ -98,11 +98,11 @@ q(1, "Turn to the incoming party of that Penn State problem, which pays the whol
  "The engine returns a break-even share of 98.000000 percent for 93.333333 (a promote of 4.666667 points, ratio 1.050000) and a break-even chance of 35.714286 percent for the incoming party. The page prints its EMVs, 12500.000000 and 17500.000000, which are the owner's; it prints no break-even. At the 100.000000 percent asked the incoming party's EMV is -5000.000000, below 0.")
 
 q(3, "The Ekene Deep deal is restated with the overrun rule \"farmor-side\" (FIN earning 30.000000 percent under a 44000000.000000 gross-cost cap, success well 46000000.000000, dry hole 40000000.000000, chance 25.000000 percent). Its breakpoint table lists 30.000000 and 70.000000, and the solved break-even is 35.960428 percent. What is the listed 30.000000?",
- "A point on the EMV line: a deal stated at 30.000000 is refused, below the floor of 31.363636",
+ "A point on the EMV line: a deal stated at 30.000000 is refused, below the floor of 31.363637",
  ["A deal FIN can sign at no promote, the best share for it on these terms and one the engine accepts",
   "The break-even share of EKO, since the table lists one breakpoint for each side of the deal",
   "The share at which the carry is 0, the smallest share the engine accepts under this rule"],
- "The engine rolls the EMV back at the earned interest to draw its line, and that point can sit below the floor a stated deal must reach. On these terms the refusal names a floor of 31.363636, the share printed to six decimals at which the success well's carry reaches 0, and the deal call refuses any share below it by name. The solved break-even, 35.960428, is above it. The table is FIN's alone.")
+ "The engine rolls the EMV back at the earned interest to draw its line, and that point can sit below the floor a stated deal must reach. On these terms the refusal names a floor of 31.363637, rounded up at the sixth decimal so that it is accepted, the share at which the success well's carry reaches 0, and the deal call refuses any share below it by name. The solved break-even, 35.960428, is above it. The table is FIN's alone.")
 
 q(0, "How does the engine solve the chance of success at which a named position's EMV is 0? Pick its basis as it prints it.",
  "EMV is linear in the chance of success: p* = -dry / (success - dry) when success and dry hole have opposite signs",

@@ -30,9 +30,9 @@ The engine's reasons:
 
 The stated chance is 25.000000 percent. The farm-out lowers the chance EKO needs, from 15.080094 to 6.377457 percent, because FIN pays part of EKO's share of the well and the cash arrives in both outcomes. The deal asks FIN for a chance of 27.281304 percent, above the one stated, which is another way of saying FIN declines.
 
-## The same prospect without the cash
+## The same prospect without the bonus
 
-The course states the Ekene Deep deal with no cash bonus and no reimbursement:
+The course states the Ekene Deep deal with no cash bonus and no assignor fees, the reimbursement kept:
 
 | position | break-even chance of success |
 | --- | --- |
@@ -40,7 +40,7 @@ The course states the Ekene Deep deal with no cash bonus and no reimbursement:
 | EKO after the farm-out | 7.887314 |
 | FIN farms in | 24.755257 |
 
-EKO drilling alone is untouched: no deal term enters that position. EKO after the farm-out needs more chance without the cash, and FIN needs less. FIN's break-even chance of 24.755257 percent now sits below the stated 25.000000, so FIN farms in, the same answer the break-even promote gave on these terms.
+EKO drilling alone is untouched: no deal term enters that position. EKO after the farm-out needs more chance without the bonus, and FIN needs less. FIN's break-even chance of 24.755257 percent now sits below the stated 25.000000, so FIN farms in, the same answer the break-even promote gave on these terms.
 
 ## What each break-even tells a side
 
@@ -52,4 +52,4 @@ Work in the course's own deal calculator.
 
 1. Open the view "The value of the deal to each side" and start from "The Ekene Deep deal, cash flows stated". Read the three rows of the break-even chance table and their reasons.
 2. With the control "Chance of success, percent (stated)", set the chance to 27 and then to 28. Read FIN's best action each time. Read the farmor's best action too, and compare it with EKO's best action at 25.
-3. Start from "No bonus and no reimbursement" and check the three break-even chances against the second table.
+3. Start from "No bonus and no assignor fees" and check the three break-even chances against the second table.

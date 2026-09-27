@@ -25,7 +25,7 @@ On the worked case `earn-bonus-and-reimbursement`, FIN pays 40.000000 percent of
 
 FIN pays 16000000.000000; its own share of the well is 30.000000 percent of 40000000.000000, which is 12000000.000000; the carry is the difference, 4000000.000000. EKO holds 40.000000 percent after the deal and pays 12000000.000000, so the carry covers the part of EKO's post-deal share it does not pay.
 
-With no cap, the carry is the promote in points applied to the gross cost: 10.000000 points of 40000000.000000 is 4000000.000000. On the case `earn-third-for-a-quarter` the same check holds: 8.333333 points of a well of 12000000.000000 gives the engine's carry of 1000000.000000.
+With no cap, the carry is the promote in points applied to the gross cost: 10.000000 points of 40000000.000000 is 4000000.000000. On the start "A third for a quarter", which states the share as one third, the engine's carry is 1000000.000000: a third less a quarter of 12000000.000000, the promote whose field prints 8.333333. The two print alike at six decimals and are not the same number: typing 33.333333 into the share control states another deal, and the engine then returns a carry of 999999.960000.
 
 ## Where a cap parts the two
 

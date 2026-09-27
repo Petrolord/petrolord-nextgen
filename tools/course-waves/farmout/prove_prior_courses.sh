@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # PROVE THE EC10 FOUNDATION LEAVES EVERY EARLIER COURSE UNCHANGED.
 #
-# PART 1, THE TREE. This course vendors the farmout.js closure at 6626465
+# PART 1, THE TREE. This course vendors the farmout.js closure at fb5a363
 # (vendor_farmout.sh) under its OWN ROOT, packages/engines/ec10-farmout, and
 # moves nothing else: every packages/engines path on this branch that differs
 # from origin/main must be one of the nineteen paths VENDOR.json ledgers as
 # group ec10-farmout-course (all under ec10-farmout/), each byte-identical to
-# petrolord-engines 6626465, plus VENDOR.json itself, whose only change is those
+# petrolord-engines fb5a363, plus VENDOR.json itself, whose only change is those
 # nineteen ledger entries. The canonical paths the closure duplicates
 # (engines/economics/cashflow.ts, decisionTree.js, portfolio.js, afe.js,
 # jointVenture.js, irrContract.js, lib/stats/stats.js, lib/dates/dates.js) must
@@ -42,7 +42,7 @@ fail=0
 
 echo "PART 1: packages/engines on this branch against $BASE"
 ENG_CANON=${ENG_CANON:-/root/petrolord-engines}
-REV=6626465
+REV=fb5a363
 LEDGERED=$(python3 -c "import json,sys;print('\n'.join(sorted(e['path'] for e in json.load(open(sys.argv[1]))['knownDeviations'] if e.get('group')=='ec10-farmout-course')))" "$ENG/VENDOR.json")
 nled=$(printf '%s\n' "$LEDGERED" | grep -c .)
 [ "$nled" = 19 ] || { echo "  VENDOR.json ledgers $nled paths as ec10-farmout-course, expected 19"; fail=1; }
@@ -127,4 +127,4 @@ for spec in EC4:decision:ec4 EC5:portfolio:ec5; do
     printf 'EC %-9s %-12s %s, %s  sha256 %s\n' "$W" "$f" "$v" "$pv" "${got:0:16}"
   done
 done
-[ $fail = 0 ] && echo "PRIOR COURSES UNCHANGED: packages/engines differs from $BASE only by the nineteen ec10-farmout-course paths under ec10-farmout/ (sha-identical to 6626465) and their ledger entries, with every canonical path the closure duplicates byte-identical; D1 to D5, H1, H3, H4, H5, SC2 procurement, EC7 pia, EC8 gsa and EC9 joa digests, fields and precision rebuild byte-identical; cashflow, fiscal, decision and portfolio rebuild byte-identical against $ENG" || { echo "PRIOR COURSES: A DIFFERENCE"; exit 1; }
+[ $fail = 0 ] && echo "PRIOR COURSES UNCHANGED: packages/engines differs from $BASE only by the nineteen ec10-farmout-course paths under ec10-farmout/ (sha-identical to fb5a363) and their ledger entries, with every canonical path the closure duplicates byte-identical; D1 to D5, H1, H3, H4, H5, SC2 procurement, EC7 pia, EC8 gsa and EC9 joa digests, fields and precision rebuild byte-identical; cashflow, fiscal, decision and portfolio rebuild byte-identical against $ENG" || { echo "PRIOR COURSES: A DIFFERENCE"; exit 1; }

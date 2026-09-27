@@ -35,6 +35,10 @@ On the same figures the engine solves the other positions: the incoming party br
 
 A report never quotes a missing figure as 0. It quotes the status and the reason, with the terms that produced them. "negative-without-promote" tells the farmor that no promote will interest this farminee on these terms; only a change elsewhere, a bonus, a cap, a chance, can. "positive-at-farmor-share" tells the farminee that even carrying the farmor's whole share leaves it ahead.
 
+## A breakpoint the engine refuses as a deal
+
+Under the farmor-side overrun rule a breakpoint can sit below the share the engine accepts. On the Ekene Deep deal with that rule the breakpoint table lists 30.000000, the earned interest. The engine refuses a deal stated there: its message names a floor of 31.363637, rounded up at the sixth decimal so that the printed floor is itself accepted. The solved break-even, 35.960428 percent, sits above the floor, so it is a deal the engine runs. A listed breakpoint is a point on the EMV line and never a deal to offer.
+
 ## Exercise
 
 Work in the course's own deal calculator.

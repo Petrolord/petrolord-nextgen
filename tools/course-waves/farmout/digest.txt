@@ -4,7 +4,7 @@
 
 # PRECISION. Every amount of money, value, EMV, payment, cost, carry, fee, surcharge, price, NPV, balance, percentage, share, interest, promote, ratio, probability and chance prints to SIX decimals; years, day counts, event counts, draws, seeds and whole inputs print as whole numbers; a figure of sixteen or more significant digits at six decimals prints with its thousands grouped by commas; an engine message, reason and basis is printed verbatim, figures and all. Inside a message the engine prints money rounded to the cent (half away from zero, trailing zeros dropped), a computed percentage, probability or ratio to six decimals (trailing zeros dropped), and a stated input as it was given.
 
-# ENGINE. engines/economics/farmout.js, vendored sha-identical with petrolord-engines 6626465 (engines PRs #272 to #276), 1032 lines, with its whole runtime closure under its own root in the NextGen repository. It imports applyJV and npv from engines/economics/cashflow.ts, rollback, evpi and evii from engines/economics/decisionTree.js, portfolioRiskMetrics from engines/economics/portfolio.js, calculatePartnerCosts from engines/economics/afe.js, and carryRecovery and backIn from engines/economics/jointVenture.js, and nothing else. It makes no network call.
+# ENGINE. engines/economics/farmout.js, vendored sha-identical with petrolord-engines 6626465 (engines PRs #272 to #276), 1045 lines, with its whole runtime closure under its own root in the NextGen repository. It imports applyJV and npv from engines/economics/cashflow.ts, rollback, evpi and evii from engines/economics/decisionTree.js, portfolioRiskMetrics from engines/economics/portfolio.js, calculatePartnerCosts from engines/economics/afe.js, and carryRecovery and backIn from engines/economics/jointVenture.js, and nothing else. It makes no network call.
 
 # AN ENGINE COURSE. There is no Suite app for this course. Every practical runs in the course's own calculator panels, which call this same vendored engine on the learner's own deal terms.
 
@@ -326,8 +326,12 @@ A refusal is an object with `error` and `field`. The message starts with the nam
 | `earningObligation` | earn-refuse-unknown-key | `carryCap` | carryCap is not an accepted key; the accepted keys at the top level are parties, farmor, farminee, events, vesting, eventsCompleted, cashBonus, pastCosts |
 | `earningObligation` | earn-refuse-unknown-cap-key | `events[0].cap.limit` | events[0].cap.limit is not an accepted key; the accepted keys of events[0].cap are on, amount, overrunRule |
 | `dealValue` | deal-refuse-negative-carry-one-below | `deal.farmineePaysPct` | deal.farmineePaysPct must be at or above 36, the share at which the carry is 0 when the farmor side pays the excess: paying 35% of the promoted 4000000 (1400000) against its held 30% of the success well cost 4800000 (1440000) leaves a carry of -40000; got 35 |
-| `dealValue` | deal-refuse-negative-carry-ekene | `deal.farmineePaysPct` | deal.farmineePaysPct must be at or above 31.363636, the share at which the carry is 0 when the farmor side pays the excess: paying 31% of the promoted 44000000 (13640000) against its held 30% of the success well cost 46000000 (13800000) leaves a carry of -160000; got 31 |
-| `informationValue` | info-refuse-negative-carry | `deal.farmineePaysPct` | deal.farmineePaysPct must be at or above 31.363636, the share at which the carry is 0 when the farmor side pays the excess: paying 31% of the promoted 44000000 (13640000) against its held 30% of the success well cost 46000000 (13800000) leaves a carry of -160000; got 31 |
+| `dealValue` | deal-refuse-negative-carry-ekene | `deal.farmineePaysPct` | deal.farmineePaysPct must be at or above 31.363637 (rounded up at the sixth decimal so that it is accepted), the share at which the carry is 0 when the farmor side pays the excess: paying 31% of the promoted 44000000 (13640000) against its held 30% of the success well cost 46000000 (13800000) leaves a carry of -160000; got 31 |
+| `dealValue` | deal-refuse-negative-carry-one-print-step-below | `deal.farmineePaysPct` | deal.farmineePaysPct must be at or above 31.363637 (rounded up at the sixth decimal so that it is accepted), the share at which the carry is 0 when the farmor side pays the excess: paying 31.363636% of the promoted 44000000 (13799999.84) against its held 30% of the success well cost 46000000 (13800000) leaves a carry of -0.16; got 31.363636 |
+| `earningObligation` | earn-refuse-promote-below-inexact-held | `events[1].farmineePaysPct` | events[1].farmineePaysPct must be at or above 30.3 (rounded up at the sixth decimal so that it is accepted), the interest the farminee holds after the event (a promote of 0 or more); got 30.299999 |
+| `earningObligation` | earn-refuse-earned-above-inexact-rest | `events[1].earnedPct` | events[1].earnedPct must be at most 19.9, the farmor's interest 70 less 50.1 already earned; got 19.95 |
+| `earningObligation` | earn-refuse-promote-ceiling-refused | `events[1].farmineePaysPct` | events[1].farmineePaysPct must be at or above 1.130001 (rounded up at the sixth decimal so that it is accepted), the interest the farminee holds after the event (a promote of 0 or more); got 1.13 |
+| `informationValue` | info-refuse-negative-carry | `deal.farmineePaysPct` | deal.farmineePaysPct must be at or above 31.363637 (rounded up at the sixth decimal so that it is accepted), the share at which the carry is 0 when the farmor side pays the excess: paying 31% of the promoted 44000000 (13640000) against its held 30% of the success well cost 46000000 (13800000) leaves a carry of -160000; got 31 |
 | `dealValue` | deal-refuse-no-fees | `deal.assignorFees` | deal.assignorFees must be a finite number at or above 0; got nothing |
 | `dealValue` | deal-refuse-chance | `project.chanceOfSuccessPct` | project.chanceOfSuccessPct must be a number from 0 to 100; got 101 |
 | `dealValue` | deal-refuse-no-dry-cost | `project.wellCost.dry` | project.wellCost.dry must be a finite number at or above 0; got nothing |
@@ -341,8 +345,8 @@ A refusal is an object with `error` and `field`. The message starts with the nam
 | `dealValue` | deal-refuse-unknown-project-key | `project.pos` | project.pos is not an accepted key; the accepted keys of project are chanceOfSuccessPct, wellCost, successValue |
 | `informationValue` | info-refuse-side | `side` | side must be one of "farmor", "farminee"; got "partner" |
 | `informationValue` | info-refuse-one-signal | `information.signals` | information.signals must be an array of at least 2 signals; got [{"label":"a","likelihoodsPct":[100,100]}] |
-| `informationValue` | info-refuse-sum | `information.signals` | information.signals must have likelihoodsPct[0] summing to 100 over the signals (P(signal / success)); got a sum of 95 |
-| `informationValue` | info-refuse-shape | `information.signals[0].likelihoodsPct` | information.signals[0].likelihoodsPct must be an array [P(signal / success), P(signal / dry hole)] in per cent; got [75] |
+| `informationValue` | info-refuse-sum | `information.signals` | information.signals must have likelihoodsPct[0] summing to 100 over the signals (P(signal \| success)); got a sum of 95 |
+| `informationValue` | info-refuse-shape | `information.signals[0].likelihoodsPct` | information.signals[0].likelihoodsPct must be an array [P(signal \| success), P(signal \| dry hole)] in per cent; got [75] |
 | `interestValue` | interest-refuse-basis | `valueBasis` | valueBasis must be one of "risked", "success-case"; got "unrisked" |
 | `interestValue` | interest-refuse-unit-without-reserves | `transaction.volumeUnit` | transaction.volumeUnit must be left out when no reserves are stated; got "boe" |
 | `interestValue` | interest-refuse-no-unit | `transaction.volumeUnit` | transaction.volumeUnit must be a non-empty string; got nothing |
@@ -369,7 +373,11 @@ A refusal is an object with `error` and `field`. The message starts with the nam
 | `backInRight` | backin-refuse-target | `backIn.targetPct` | backIn.targetPct must be above the back-in party's current interest 40; got 35 |
 | `backInRight` | backin-refuse-earned | `earnedPct` | earnedPct must be at most the farmor's interest 70; got 80 |
 
-67 refusals across 8 functions: earningObligation 24, dealValue 13, informationValue 5, interestValue 4, riskSharing 6, consentFee 9, developmentCarry 3, backInRight 3.
+71 refusals across 8 functions: earningObligation 27, dealValue 14, informationValue 5, interestValue 4, riskSharing 6, consentFee 9, developmentCarry 3, backInRight 3.
+
+MESSAGES THAT PRINT A PIPE. 2 messages carry the character | as the engine writes it (P(signal | success)); the table escapes it, and each is printed here as the engine returns it, verbatim:
+> information.signals must have likelihoodsPct[0] summing to 100 over the signals (P(signal | success)); got a sum of 95
+> information.signals[0].likelihoodsPct must be an array [P(signal | success), P(signal | dry hole)] in per cent; got [75]
 
 REFUSALS A PANEL CONTROL CAN PRODUCE. Each calculator panel writes every required term into the box through a visible control, and setting a control to "not stated" removes the term. The calls below are not golden cases; each is a golden input with one term removed or changed (stated probes), handed to the engine here, and the message is the engine's, verbatim:
 
@@ -385,6 +393,8 @@ REFUSALS A PANEL CONTROL CAN PRODUCE. Each calculator panel writes every require
 | interest-ekene-risked | valueBasis removed | `valueBasis` | valueBasis must be one of "risked", "success-case"; got nothing |
 | risk-ekene | seed removed | `seed` | seed must be an integer from 0 to 4294967295 (stated; no default); got nothing |
 | devcarry-ekene | recoverFromPct removed | `recoverFromPct` | recoverFromPct must be a number above 0 and at most 100; got nothing |
+| interest-ekene-risked | transaction.price removed (the price control set to not stated) | `transaction.price` | transaction.price must be a finite number at or above 0; got nothing |
+| fee-ekene | payment stated as an empty object {} (both dates removed and the group left behind) | `payment.notifiedOn` | payment.notifiedOn must be a real date 'YYYY-MM-DD'; got nothing |
 | backin-ekene-pia | backIn.refundForm set to "upfront" under basis "pia-s85-4" (the refund form control) | `backIn.refundForm` | backIn.refundForm must be "from-future-entitlement" under basis "pia-s85-4": no upfront payment by the Government (s.85(4)(d)); the refund is in cash or in kind from future production or entitlements (s.85(4)(f)); got "upfront" |
 
 THE ORDER OF REFUSALS. A box that carries an unknown key AND lacks a required term is refused on the unknown key first: every function checks its accepted keys before it reads a term. On earn-ekene-single with vesting removed and a key vest added (stated probe), the engine's message, verbatim:
@@ -455,6 +465,7 @@ earn-none-completed, the engine's reasons, verbatim:
 > consideration to EKO: carry 0 + cash bonus 0 + past-cost reimbursement 0 (0% of 0) = 0
 
 AN OBLIGATION AND A PAYMENT. Every event's split is reported as the obligation; the totals count completed events only. On earn-none-completed the event's split is computed (16000000.000000 for FIN) and the totals are 0.000000 paid and 0.000000 percent vested (engine).
+With no event completed there is no gross cost to price the outlay over: the equivalent working interest and the promote-adjusted ratio are none and none (engine, null).
 
 # SECTION 8: The promote in points, the promote ratio and the carry inside a promote (owned by Associate m03)
 
@@ -488,6 +499,7 @@ earn-all-of-farmor, the engine's reasons, verbatim:
 HEADS UP. When the share paid equals the interest earned (earn-heads-up: 30.000000 for 30.000000), the promote is 0.000000 points, the ratio 1.000000 and the carry 0.000000 (engine): the farminee pays its own share and nothing of the farmor's.
 A FULL CARRY. When the farminee pays the farmor's whole pre-deal interest (earn-full-carry: 70.000000 for 30.000000), the farmor pays 0.000000 and the carry is 16000000.000000 (engine): the farmor's post-deal share of the well is paid in full by the farminee.
 A THIRD FOR A QUARTER. On earn-third-for-a-quarter the farminee pays 33.333333 percent for 25.000000 percent: a promote of 8.333333 points and a ratio of 1.333333 (engine). The stated share is a double that prints as 33.333333 at six decimals; the engine's message prints a stated input as it was given.
+TYPED AT SIX DECIMALS IS ANOTHER DEAL. The start "A third for a quarter" states the double nearest one third. A learner who types 33.333333 states a different share, and the engine returns FIN 3999999.960000, EKO 8000000.040000 and a carry of 999999.960000 (stated probe, engine), against 4000000.000000, 8000000.000000 and 1000000.000000 on the start. The two print differently at six decimals; quote each with the share it was run at.
 
 # SECTION 9: The cash bonus, the past-cost reimbursement, the consideration and the equivalent working interest (owned by Associate m04)
 
@@ -519,7 +531,7 @@ WHAT THE TEXTS SAY, each quoted in section 3:
 - Every assignment of an interest in a petroleum prospecting licence or petroleum mining lease needs the prior written consent of the Minister, granted on the Commission's recommendation (PIA s.95(2); AOI Regulations 2024 reg. 4(2)).
 - A change of control of the holder is an assignment (PIA s.95(3)); the Act puts the line at voting power that "exceeds 50%" (PIA s.95(14)), and the Regulations require the Minister's consent to a change in control of a holder not listed on a public exchange (AOI Regulations 2024 reg. 3(3)).
 - A petroleum exploration licence (PEL) is assigned with the consent of the Commission (PIA s.95(15); AOI Regulations 2024 reg. 16(c)), which answers within 60 working days (AOI Regulations 2024 reg. 18(3)).
-- The holder first notifies the Commission of its intention, stating the reason, the method and the expected benefits (AOI Regulations 2024 reg. 4(4)(b)); the Commission answers within 15 working days or the notification is deemed approved (AOI Regulations 2024 reg. 4(7)). The Minister's silence for 60 working days after the Commission's recommendation is a deemed consent (PIA s.95(7)(b)).
+- The holder first notifies the Commission of its intention, stating the reason, the method and the expected benefits (AOI Regulations 2024 reg. 4(4)(b)); the Commission answers within 15 working days, failing which the application is deemed approved (AOI Regulations 2024 reg. 4(7)). The Minister's silence for 60 working days after the Commission's recommendation is a deemed consent (PIA s.95(7)(b)).
 - The fee is a percentage of the value of the transaction and is not tax deductible (PIA s.95(12); AOI Regulations 2024 reg. 19(5)); for companies income tax and hydrocarbon tax, fees paid for assigning rights to another party are not deductible (PIA s.264(f); PIA s.302(12)(c)). Section 16 computes the fee.
 - A farm-out agreement provides for a decommissioning and abandonment plan funded by the incoming parties in whole or in part (PIA s.233(10)); the engine computes no such share (section 25).
 
@@ -587,11 +599,13 @@ earn-cap-carry-zero, the engine's reasons, verbatim:
 THE TWO OVERRUN RULES ON THE SAME EXCESS. The well of 48000000.000000 exceeds the cap of 40000000.000000 by 8000000.000000. Under "post-deal-interests" FIN pays 18400000.000000 and EKO 15200000.000000; under "farmor-side" FIN pays 16000000.000000 and EKO 17600000.000000 (engine). PA pays 14400000.000000 under both: the overrun rule moves money between the farmor and the farminee only.
 A CAP REACHED EXACTLY is its own state: on earn-cap-gross-exactly the gross cost equals the cap ("exactly", excess 0.000000); on earn-cap-carry-exactly the carry equals the cap ("exactly", carry 4000000.000000). Both split the cost as a cap not reached would (engine).
 
-A CARRY BELOW 0 IS REFUSED. Under "farmor-side" the excess is the farmor's alone, so a share paid can leave the farminee paying less than its held interest of the gross cost: a negative carry, the farmor carrying the farminee. The engine refuses it and names the smallest share it accepts. At that share the carry is exactly 0 and the call runs (earn-carry-zero-farmor-side: 36.000000 percent for 30.000000, carry 0.000000, FIN pays 14400000.000000 and EKO 19200000.000000, engine); one point below it is refused (earn-refuse-negative-carry-one-below, share 35), in the engine's words:
+A CARRY BELOW 0 IS REFUSED. Under "farmor-side" the excess is the farmor's alone, so a share paid can leave the farminee paying less than its held interest of the gross cost: a negative carry, the farmor carrying the farminee. The engine refuses it and names a floor in its message. At a floor of a whole share the carry is exactly 0 and the call runs (earn-carry-zero-farmor-side: 36.000000 percent for 30.000000, carry 0.000000, FIN pays 14400000.000000 and EKO 19200000.000000, engine); one point below it is refused (earn-refuse-negative-carry-one-below, share 35), in the engine's words:
 > events[0].farmineePaysPct must be at or above 36, the share at which the carry is 0 when the farmor side pays the excess: paying 35% of the promoted 40000000 (14000000) against its held 30% of the gross cost 48000000 (14400000) leaves a carry of -400000; got 35
-The same check guards a deal on both outcomes. On the Ekene deal with the farmor-side rule the smallest share is 31.363636 percent of the well, set by the success well above the cap; a stated 31 percent is refused (deal-refuse-negative-carry-ekene), in the engine's words:
-> deal.farmineePaysPct must be at or above 31.363636, the share at which the carry is 0 when the farmor side pays the excess: paying 31% of the promoted 44000000 (13640000) against its held 30% of the success well cost 46000000 (13800000) leaves a carry of -160000; got 31
-A BREAKPOINT IS NOT A STATED DEAL. The break-even promote's breakpoint table rolls the EMV back at the earned interest, which can sit below that smallest share: on deal-ekene-farmor-side it lists 30.000000 and 70.000000, and a deal stated at 30.000000 percent is refused by the check above. The solved break-even, 35.960428 percent, is above the smallest share (engine). A listed breakpoint is a point on the EMV line; it is never offered as a deal the engine accepts.
+The same check guards a deal on both outcomes. On the Ekene deal with the farmor-side rule the exact floor is the share at which the success well's carry reaches 0, the earned 30.000000 percent of the whole 46000000.000000 over the promoted 44000000.000000 (derived); the engine prints it as 31.363637, rounded up at the sixth decimal so that the printed figure is itself accepted. A stated 31 percent is refused (deal-refuse-negative-carry-ekene), in the engine's words:
+> deal.farmineePaysPct must be at or above 31.363637 (rounded up at the sixth decimal so that it is accepted), the share at which the carry is 0 when the farmor side pays the excess: paying 31% of the promoted 44000000 (13640000) against its held 30% of the success well cost 46000000 (13800000) leaves a carry of -160000; got 31
+THE PRINTED FLOOR IS ACCEPTED; ONE PRINT STEP BELOW IS NOT. A deal stated at the printed 31.363637 runs (deal-negative-carry-printed-minimum-accepted: FIN's EMV 1884684.108136, the success well's carry 0.280000, engine); a deal stated at 31.363636, which also prints as 31.363636 at six decimals and sits below the exact floor, is refused (deal-refuse-negative-carry-one-print-step-below), in the engine's words:
+> deal.farmineePaysPct must be at or above 31.363637 (rounded up at the sixth decimal so that it is accepted), the share at which the carry is 0 when the farmor side pays the excess: paying 31.363636% of the promoted 44000000 (13799999.84) against its held 30% of the success well cost 46000000 (13800000) leaves a carry of -0.16; got 31.363636
+A BREAKPOINT IS NOT A STATED DEAL. The break-even promote's breakpoint table rolls the EMV back at the earned interest, which can sit below the floor: on deal-ekene-farmor-side it lists 30.000000 and 70.000000, and a deal stated at 30.000000 percent is refused by the check above. The solved break-even, 35.960428 percent, is above the floor (engine). A listed breakpoint is a point on the EMV line; it is never offered as a deal the engine accepts.
 
 # SECTION 13: Drill-to-earn: earning events, vesting event by event and vesting when every event is complete (owned by Professional m02)
 
@@ -687,7 +701,7 @@ THE SAME PROSPECT UNDER OTHER TERMS (golden inputs; each changes one term of dea
 | deal-ekene-no-cap | cap "none" | 18418808.982316 | 19883033.704181 | -1856224.721864 | farm out | decline |
 | deal-ekene-carry-cap | cap "carry-amount" of 3000000.000000 | 18418808.982316 | 18733033.704181 | -706224.721864 | farm out | decline |
 | deal-ekene-farmor-side | overrun rule "farmor-side" | 18418808.982316 | 19683033.704181 | -1656224.721864 | farm out | decline |
-| deal-ekene-bonus-zero | cash bonus 0 and no reimbursement | 18418808.982316 | 18225033.704181 | 193775.278136 | drill alone | farm in |
+| deal-ekene-bonus-zero | cash bonus 0 and assignor fees 0, the reimbursement kept | 18418808.982316 | 18225033.704181 | 193775.278136 | drill alone | farm in |
 | deal-ekene-dry-hole | chance of success 0.000000 | -28000000.000000 | -6792000.000000 | -21600000.000000 | walk away | decline |
 | deal-ekene-certain | chance of success 100.000000 | 157675235.929265 | 99708134.816723 | 57575101.112542 | drill alone | farm in |
 
@@ -734,6 +748,24 @@ deal-carry-cap-kinks, the break-even reason, verbatim:
 > break-even promote: N's EMV is 0 when it pays 50% of the well for 40% (a promote of 10 points)
 deal-carry-cap-flat-positive, the break-even reason, verbatim:
 > break-even promote: none up to the farmor's whole 100% share; paying it, N's EMV is 140000, above 0
+
+THE TERMS OF THE SMALL STATED CASES (golden inputs):
+
+| golden case | farmor interest | chance of success | success well | dry-hole well | success-case value | share paid | interest earned | cap |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| deal-promote-exactly-break-even | 100.000000 | 25.000000 | 1600000.000000 | 1600000.000000 | 8000000.000000 | 50.000000 | 40.000000 | none |
+| deal-promote-just-above-break-even | 100.000000 | 25.000000 | 1600000.000000 | 1600000.000000 | 8000000.000000 | 50.500000 | 40.000000 | none |
+| deal-negative-without-promote | 100.000000 | 10.000000 | 1600000.000000 | 1600000.000000 | 8000000.000000 | 50.000000 | 40.000000 | none |
+| deal-positive-at-farmor-share | 100.000000 | 90.000000 | 1600000.000000 | 1600000.000000 | 8000000.000000 | 50.000000 | 40.000000 | none |
+| deal-break-even-at-farmor-share | 100.000000 | 50.000000 | 1600000.000000 | 1600000.000000 | 8000000.000000 | 100.000000 | 40.000000 | none |
+| deal-carry-cap-kinks | 100.000000 | 25.000000 | 1600000.000000 | 1600000.000000 | 8000000.000000 | 50.000000 | 40.000000 | carry-amount 200000.000000 |
+| deal-carry-cap-flat-positive | 100.000000 | 25.000000 | 1600000.000000 | 1600000.000000 | 8000000.000000 | 50.000000 | 40.000000 | carry-amount 20000.000000 |
+
+deal-ekene-carry-cap, the break-even reason, verbatim:
+> break-even promote: FIN's EMV is 0 when it pays 35.527169% of the well for 30% (a promote of 5.527169 points)
+deal-break-even-at-farmor-share, the break-even reason and the farmor-after chance reason, verbatim:
+> break-even promote: N's EMV is 0 when it pays 100% of the well for 40% (a promote of 60 points)
+> F after the farm-out: EMV is at or above 0 at every chance of success (the dry hole is not a loss)
 
 BREAKPOINTS UNDER A CARRY CAP. EMV falls in a straight line as the share paid rises, until the carry reaches a carry-amount cap; from there the farminee pays no more carry and its EMV stops falling. On deal-carry-cap-kinks the engine rolls the EMV back at 3 breakpoints (40.000000, 52.500000, 100.000000) and interpolates exactly on the segment that crosses 0. On deal-carry-cap-flat-positive the cap holds the EMV above 0 all the way to the farmor's whole share, so no break-even exists.
 
@@ -821,6 +853,7 @@ THE SURCHARGE IS STRAIGHT LINE. It is 0.01 percent of the fee a day, charged on 
 HOW THE DAYS ARE COUNTED. Days run from the notification date to the payment date, the notification day not counted: fee-ekene is notified 2027-05-03 and paid 2027-07-30, 88 days (engine), on time. Section 22 names this count as a reading.
 
 WITHOUT A PAYMENT. A call with no payment dates computes the fee and says nothing about timing (fee-no-payment: payment none).
+An empty payment group is a different call: stated as {} it is refused on its first date (the refusals a panel control can produce print the message). The deal calculator's fee view removes the payment key whole when both of its date controls are cleared, so the box then states no payment and the view shows the fee with no timing.
 
 # SECTION 18: The value of information to each side: perfect information, a signal and its likelihoods, and its cost (owned by Expert m01)
 
@@ -968,7 +1001,7 @@ interest-negative-emv, the engine's reasons, verbatim:
 > stated price 1000000 for 25%: 40000 a percent, 4000000 for 100%; no price-to-value ratio, the risked value per percent being -300000, at or below 0
 
 THE EKENE DEEP PRICE (interest-ekene-risked): the 100 percent position is worth 26312584.260452 risked at 25.000000 percent, 263125.842605 a percent; 30.000000 percent on that basis is 7893775.278136 (engine). The stated price of 16000000.000000 is 533333.333333 a percent, 2.026914 times the risked value per percent (engine): a ratio of a stated price to a computed value, reported only.
-THE PRICE AND THE DEAL (derived). 30.000000 percent on the risked basis, 7893775.278136, less the bonus 2000000.000000 and the reimbursement 3600000.000000 is 2293775.278136: FIN's EMV in deal-ekene paying 30.000000 percent for 30.000000 (the first breakpoint, 2293775.278136, engine). Paying only its own share, the farminee holds the risked value of its interest less the cash it hands over.
+THE PRICE AND THE DEAL (derived). 30.000000 percent on the risked basis, 7893775.278136, less the bonus 2000000.000000 and the reimbursement 3600000.000000 is 2293775.278136: FIN's EMV in deal-ekene paying 30.000000 percent for 30.000000 (the first breakpoint, 2293775.278136, engine). The two figures print alike at six decimals and are not equal: they differ by float residue under 0.000001 (about 1.1e-8), so the identity holds to the precision this course prints. Paying only its own share, the farminee holds the risked value of its interest less the cash it hands over.
 NO RATIO ON A VALUE AT OR BELOW 0. On interest-negative-emv the risked value per percent is -300000.000000, and the engine returns no price-to-value ratio (none) and says why in a reason.
 A RESERVE CATEGORY IS A STATED LABEL. The engine divides the stated price by the stated volume net to the interest; it classifies nothing. "2C (contingent, best estimate)" is the fixture's label.
 
@@ -980,6 +1013,27 @@ THE DEVELOPMENT CARRY, in the engine's basis (devcarry-ekene), verbatim:
 > 8% a year on the opening balance, compounded yearly; a year's new cost earns none in its own year
 
 THE EKENE DEEP DEVELOPMENT CARRY (golden input devcarry-ekene, the fixture): after the farm-in the interests are EKO 40.000000, PA 30.000000, FIN 30.000000; FIN carries 50.000000 percent of EKO's cost share, a carried interest of 20.000000 points (engine). The recovery ledger (engine):
+
+| year | development cost at 100 percent (golden input) | entitlement at 100 percent (golden input) |
+| --- | --- | --- |
+| 2029 | 240000000.000000 | 0.000000 |
+| 2030 | 360000000.000000 | 0.000000 |
+| 2031 | 120000000.000000 | 0.000000 |
+| 2032 | 0.000000 | 250000000.000000 |
+| 2033 | 0.000000 | 250000000.000000 |
+| 2034 | 0.000000 | 220000000.000000 |
+| 2035 | 0.000000 | 193600000.000000 |
+| 2036 | 0.000000 | 170368000.000000 |
+| 2037 | 0.000000 | 149923840.000000 |
+| 2038 | 0.000000 | 131932979.000000 |
+| 2039 | 0.000000 | 116101021.000000 |
+| 2040 | 0.000000 | 102168898.000000 |
+| 2041 | 0.000000 | 89908630.000000 |
+| 2042 | 0.000000 | 79119594.000000 |
+| 2043 | 0.000000 | 69625242.000000 |
+| 2044 | 0.000000 | 61270212.000000 |
+| 2045 | 0.000000 | 53917786.000000 |
+The carried cost of a year is its cost times EKO's 40.000000 percent times the 50.000000 percent carried (derived): 240000000.000000 in 2029 gives 48000000.000000 (engine).
 
 | year | opening | uplift | carried cost added | due | farmor's share of the entitlement | available for recovery | recovered | closing | written off | the farmor receives |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |

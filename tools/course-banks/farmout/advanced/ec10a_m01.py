@@ -81,18 +81,18 @@ x("On info-uninformative both signals carry likelihoods of 50.000000 percent giv
 # 9
 x("An informationValue call states one signal only, labelled a, with likelihoods [100, 100]. The engine's own words in reply are which of these?",
  "information.signals must be an array of at least 2 signals; got [{\"label\":\"a\",\"likelihoodsPct\":[100,100]}]",
- ["information.signals must have likelihoodsPct[0] summing to 100 over the signals (P(signal / success)); got a sum of 95",
-  "information.signals[0].likelihoodsPct must be an array [P(signal / success), P(signal / dry hole)] in per cent; got [75]",
+ ["information.signals must have likelihoodsPct[0] summing to 100 over the signals (P(signal | success)); got a sum of 95",
+  "information.signals[0].likelihoodsPct must be an array [P(signal | success), P(signal | dry hole)] in per cent; got [75]",
   "information.signals must have at most 10 entries; got 11"],
  "One signal tells nothing, so the engine refuses the array by its length and prints the whole array back, in its own words: information.signals must be an array of at least 2 signals. The summing message answers a likelihood column that does not sum to 100; the array message with got [75] answers a signal with one likelihood; the at-most-10 message answers eleven signals, above the cap of 10.")
 
 # 10
-x("The engine refuses a signal set with this message: information.signals must have likelihoodsPct[0] summing to 100 over the signals (P(signal / success)); got a sum of 95. Which rule failed?",
+x("The engine refuses a signal set with this message: information.signals must have likelihoodsPct[0] summing to 100 over the signals (P(signal | success)); got a sum of 95. Which rule failed?",
  "The chances of every signal given success must add to 100 across the signals",
  ["The two likelihoods of each signal, given success and given a dry hole, must add to 100 for that signal",
   "The chance of success must be 100 less the chance of a dry hole",
   "The engine's own signal chances must add to 100 before weighting"],
- "likelihoodsPct[0] is P(signal / success), and the rule is a column rule: summed over the signals it must reach 100, because some signal is always returned when the well succeeds. A signal's own pair need not add to 100 (the Ekene pairs happen to, and 50 with 50 does too). The chance of success is one stated input, and the signal chances are computed by the engine, so neither can be the failed rule.")
+ "likelihoodsPct[0] is P(signal | success), and the rule is a column rule: summed over the signals it must reach 100, because some signal is always returned when the well succeeds. A signal's own pair need not add to 100 (the Ekene pairs happen to, and 50 with 50 does too). The chance of success is one stated input, and the signal chances are computed by the engine, so neither can be the failed rule.")
 
 # 11
 x("A caller asks informationValue to value the survey for side \"partner\". What comes back?",
@@ -120,11 +120,11 @@ x("The same Ekene survey is worth 6892331.458602 to EKO and 6745331.458602 to FI
 
 # 14
 x("On the Ekene deal stated with the farmor-side overrun rule, an informationValue call gives FIN a share paid of 31 percent. Which statement matches what the engine does?",
- "It refuses deal.farmineePaysPct, naming 31.363636 as the share at which the carry is 0",
+ "It refuses deal.farmineePaysPct, naming a floor of 31.363637, rounded up so it is accepted",
  ["It returns FIN's EVII on the stated terms and leaves the share paid unread",
   "It refuses information.cost, checking the survey's cost before the deal",
   "It returns a result for FIN with a reason saying the carry on the success well is below 0"],
- "The information call builds the same positions as the deal call, so it applies the same check. The engine's words: deal.farmineePaysPct must be at or above 31.363636, the share at which the carry is 0 when the farmor side pays the excess ... got 31. The share paid is read, the cost is untouched, and a carry below 0 is refused outright with no values returned.")
+ "The information call builds the same positions as the deal call, so it applies the same check. The engine's words: deal.farmineePaysPct must be at or above 31.363637 (rounded up at the sixth decimal so that it is accepted), the share at which the carry is 0 when the farmor side pays the excess ... got 31. The share paid is read, the cost is untouched, and a carry below 0 is refused outright with no values returned.")
 
 # 15
 x("Where do the EVPI and EVII figures of informationValue come from inside the engine?",

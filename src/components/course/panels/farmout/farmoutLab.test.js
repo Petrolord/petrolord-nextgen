@@ -132,17 +132,17 @@ describe('THE DIGEST GATE: every number a teaching reader returns is printed in 
   it('every refusal a route returns is the engine\'s own message, the digest quotes it verbatim, and the lab never writes it', () => {
     const gold = JSON.parse(fs.readFileSync(GOLDEN, 'utf8'));
     const refusals = gold.cases.filter((c) => c.expected && c.expected.error === true);
-    expect(refusals.length).toBe(67);
+    expect(refusals.length).toBe(71);
     let n = 0;
     refusals.forEach((c) => {
       const r = ROUTES[c.fn](c.args);
       expect(r.error, c.id).toBe(c.expected.message);
-      // a table cell prints a pipe as a slash
-      expect(DIGEST, c.id).toContain(r.error.replace(/\|/g, '/'));
+      // a table cell escapes a pipe; each piped message is also printed whole as a blockquote
+      expect(DIGEST, c.id).toContain(r.error);
       expect(LAB_SOURCE.includes(r.error), `the lab writes the message of ${c.id} as a literal`).toBe(false);
       n += 1;
     });
-    expect(n).toBe(67);
+    expect(n).toBe(71);
   });
 });
 
