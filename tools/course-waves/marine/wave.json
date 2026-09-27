@@ -83,10 +83,10 @@
   "SIBLING": "SC3 materials (path order 77) is built in parallel in /root/wt-sc3-nextgen; both waves add to VENDOR.json, waves.json, panelRegistry.js, appNames.js, homeCatalog.js, DashboardPage.jsx and panelRender.test.jsx, so the second to merge takes a mechanical merge of those lines."
  },
  "digest": {
-  "lines": 893,
+  "lines": 894,
   "sections": 30,
-  "md5": "c63ad7989a71f2afd19be720757b59c4",
-  "sha256": "3f6c72f809cc3c2d41e512ed61460e944092300308454630a4e74c8bfee2e1e8"
+  "md5": "fc552f57da686c054c7d5155965a9314",
+  "sha256": "956e431d269e1bccd1ddc3f896d799c5bcd8bb00949d4598945bab207c18f60d"
  },
  "fields": {
   "count": 18,
@@ -209,14 +209,14 @@
    "command": "/root/dc-wavekit/digestrepro.sh cat-wip-marine /root/wt-sc4-nextgen",
    "expected": 0,
    "exit": 0,
-   "summary": "marine_dump: 1171 label-and-call, measurement and claim assertions run, 0 failed; 30 sections"
+   "summary": "marine_dump: 1174 label-and-call, measurement and claim assertions run, 0 failed; 30 sections"
   },
   "digestprose.mjs": {
    "md5": "97dda85819e61737a76d8caf5badb46d",
    "command": "node /root/dc-wavekit/digestprose.mjs digest.txt --rules cat-wip-marine",
    "expected": 0,
    "exit": 0,
-   "summary": "[digestprose] /root/cat-wip-marine/digest.txt: 893 line(s), 30 section title(s) and 119 in-body marker(s) swept against their blocks, 32 history framings, 10 engine pin(s); 3 warned for a human read and 0 framed as curri"
+   "summary": "[digestprose] /root/cat-wip-marine/digest.txt: 894 line(s), 30 section title(s) and 119 in-body marker(s) swept against their blocks, 32 history framings, 10 engine pin(s); 3 warned for a human read and 0 framed as curri"
   },
   "digestprose.mjs --selftest": {
    "md5": "97dda85819e61737a76d8caf5badb46d",
@@ -412,7 +412,7 @@
    "command": "python3 truth_check.py",
    "expected": 0,
    "exit": 0,
-   "summary": "truth_check: truth-marine.json (399 digest lines) IS the harvest of digest.txt"
+   "summary": "truth_check: truth-marine.json (400 digest lines) IS the harvest of digest.txt"
   },
   "truth_check.py NEGATIVE CONTROL": {
    "md5": "5a1bd55c4b01a9f2cbcad1a24a48219a",
