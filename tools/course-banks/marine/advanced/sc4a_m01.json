@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "The Ekene supply base states 2 fixed hours a call, 60 lifts at 12 an hour and 900 m3 of bulk at 150 m3 an hour, with the lifts and the bulk at the same time. What service time does the engine return for one call?",
+  "options": [
+   "13.000000 hours, the fixed hours plus the lift hours plus the bulk hours taken one after another",
+   "6.000000 hours, the bulk hours alone, because the pumping outlasts the crane work",
+   "8.000000 hours, the fixed hours plus the larger of the lift hours and the bulk hours",
+   "5.000000 hours, the lift hours alone, as though the crane were the berth's only task"
+  ],
+  "answer": 2,
+  "explanation": "With the concurrent choice true, the engine adds the fixed hours to the larger of the lift hours (60 over 12 is 5.000000) and the bulk hours (900 over 150 is 6.000000): 2 plus 6 gives 8.000000 hours. 13.000000 is the service when the lifts and the bulk run one after the other; 6.000000 and 5.000000 each drop the fixed hours and one of the two terms."
+ },
+ {
+  "prompt": "The Ekene base is run with the lifts first and the bulk after them (concurrent false), still 2 berths and 3.2 arrivals a day over 24 working hours. What berth utilisation does the engine return?",
+  "options": [
+   "0.866667, an offered load of 1.733333 spread over the 2 berths",
+   "0.533333, the figure with the lifts and the bulk alongside",
+   "1.733333, the offered load before it is spread over berths",
+   "0.711111, which is what the three berths carry on a twelve-hour working day"
+  ],
+  "answer": 0,
+  "explanation": "One after the other, the service is 2 plus 5 plus 6, 13.000000 hours; 0.133333 arrivals an hour times 13.000000 is an offered load of 1.733333, and over 2 berths the berth utilisation is 0.866667. 0.533333 belongs to the 8-hour concurrent service; 1.733333 is the offered load before it is spread over the berths; 0.711111 is the three-berth base on a twelve-hour day."
+ },
+ {
+  "prompt": "On the working-hour clock, what arrivals an hour does the engine return for the Ekene base, which takes 3.2 arrivals a day over a 24-hour working day?",
+  "options": [
+   "0.266667 an hour, the rate the same 3.2 arrivals give over a twelve-hour working day",
+   "1.066667 an hour, the arrivals an hour already multiplied by the 8-hour service",
+   "0.533333 an hour, the busy share of each berth's hours",
+   "0.133333 an hour, the arrivals a day over the working hours a day"
+  ],
+  "answer": 3,
+  "explanation": "Arrivals an hour are the stated arrivals a day over the stated working hours a day: 3.2 over 24 is 0.133333. 0.266667 is the same 3.2 over a 12-hour day; 1.066667 is the offered load, the arrivals an hour times the 8.000000-hour service; 0.533333 is the berth utilisation."
+ },
+ {
+  "prompt": "Shorten the Ekene quay's working day to 12 hours and give it a third berth, keeping the 3.2 daily arrivals and the 8-hour concurrent calls. What berth utilisation results?",
+  "options": [
+   "0.355556, the three-berth figure the same base returns on a 24-hour working day",
+   "0.711111, an offered load of 2.133333 carried by the 3 berths",
+   "2.133333, the offered load, taken as though it were already a berth utilisation",
+   "0.533333, as though halving the working day left the arrival rate where it was"
+  ],
+  "answer": 1,
+  "explanation": "Over 12 working hours the 3.2 arrivals come at 0.266667 an hour; times 8.000000 hours the offered load is 2.133333, and over 3 berths the berth utilisation is 0.711111. 0.355556 is three berths on the 24-hour clock; 2.133333 is the load before it is spread; 0.533333 is the two-berth base on 24 hours. Halving the working day doubles the arrivals an hour."
+ },
+ {
+  "prompt": "What does the engine call the offered load at the base, and what is it for the Ekene base with its 8-hour calls?",
+  "options": [
+   "The arrivals an hour times the service time: 1.066667 berth-hours of work in each working hour",
+   "The offered load over the berths: 0.533333, the busy share of each berth's working hours",
+   "The mean number of vessels waiting for a berth at any moment: 0.424017 on two berths",
+   "The vessels at the base on average, queue and berths together: 1.490683 on two berths"
+  ],
+  "answer": 0,
+  "explanation": "The offered load is the arrivals an hour times the service time, 0.133333 times 8.000000, which is 1.066667: a little more than one berth's work arrives every working hour. 0.533333 is that load over the 2 berths, the berth utilisation; 0.424017 is the mean queue; 1.490683 is the mean in the system."
+ },
+ {
+  "prompt": "The Ekene base is stated with 3 berths and every other input held. Which pair of figures does the engine return?",
+  "options": [
+   "An offered load of 1.066667 and a berth utilisation of 0.533333",
+   "An offered load of 2.133333 and a berth utilisation of 0.711111",
+   "An offered load still at 1.066667, with a berth utilisation of 0.355556",
+   "An offered load cut to 0.355556 and a berth utilisation that follows it at 0.266667"
+  ],
+  "answer": 2,
+  "explanation": "The offered load is the arrivals an hour times the service time, so a third berth does not move it from 1.066667; what moves is the share each berth carries, 1.066667 over 3, which is 0.355556. 0.533333 is the two-berth figure; 2.133333 and 0.711111 belong to the twelve-hour day; 0.266667 is the berth utilisation at four berths."
+ },
+ {
+  "prompt": "The Ekene base (3.2 arrivals a day, 24 working hours, 8-hour calls) is handed to the engine with 1 berth. What comes back?",
+  "options": [
+   "A result with a very long mean wait, since a berth utilisation of 1.066667 is only a little above one",
+   "A refusal on arrivalsPerDay: at most 2.999999 a day for a steady state, the berth utilisation being 1.066667",
+   "Returned figures with a reason saying the single berth is overloaded, and the wait it would face",
+   "Refused on berths by name, because the engine accepts no base with fewer than 2 berths at all"
+  ],
+  "answer": 1,
+  "explanation": "With one berth the berth utilisation would be 1.066667, and at or above 1 no steady state exists, so the engine refuses. In its own words: \"arrivalsPerDay must be at most 2.999999 (rounded down at the sixth decimal so that it is accepted) for a steady state with 1 berth: the berth utilisation must stay below 1, so arrivals a day must stay below berths x working hours a day / service hours = 3; got 3.2, a berth utilisation of 1.066667\". A refusal returns no figures, so no wait and no reason come back; berths from 1 to 100 are accepted."
+ },
+ {
+  "prompt": "In the engine's refusal of the one-berth Ekene base, the exact bound is 3 arrivals a day. How is that bound built?",
+  "options": [
+   "The arrivals an hour times the working hours, less the vessels already queued at the quay",
+   "The largest arrivals a day at which the mean wait stays inside one working day of 24 hours",
+   "The number of vessels one berth can hold alongside at once",
+   "The berths times the working hours a day over the service hours: 1 times 24 over 8"
+  ],
+  "answer": 3,
+  "explanation": "The berth utilisation must stay below 1, which caps the arrivals a day below berths x working hours a day / service hours: 1 times 24 over 8 is 3. The bound is set by saturation alone; it has nothing to do with a target wait or with how many vessels lie alongside, and the queue does not enter it."
+ },
+ {
+  "prompt": "A base is stated so that its berth utilisation comes to 0.999500. What kind of answer does the engine give?",
+  "options": [
+   "A refusal on arrivalsPerDay, since any berth utilisation that close to 1 has no steady state",
+   "A result whose mean wait is held at one working day, the longest figure the engine reports",
+   "A result, since below 1 a steady state exists, with a mean wait that runs very long",
+   "A reason with no figures, saying that the berths are saturated and naming the bound"
+  ],
+  "answer": 2,
+  "explanation": "The steady state needs a berth utilisation strictly below 1, and 0.999500 is below it, so the engine returns its figures: on that case a mean wait of 999.250063 hours and a mean queue of 1997.500875. The engine holds no cap on the wait, and a figure at 1 or above is refused with the bound printed."
+ },
+ {
+  "prompt": "A shore base call states every input except whether the lifts and the bulk run at the same time. What does the engine return?",
+  "options": [
+   "service.concurrent must be true (lifts and bulk at the same time) or false (one after the other); there is no default; got nothing",
+   "A result with the lifts and the bulk run one after the other, the slower of the two choices, and a line in its basis saying so",
+   "service must give a service time above 0 hours (fixed hours, lifts or bulk); got 0, since no service time can be built at all",
+   "Figures computed with the lifts and bulk alongside, the choice that gives the shorter service time, and a note of the choice"
+  ],
+  "answer": 0,
+  "explanation": "The concurrent choice is a required input with no default, because whether a base can crane and pump at once depends on crews, hoses and safety rules the engine cannot see. The engine's own words are the key. The \"service must give a service time above 0 hours\" message belongs to a call whose terms add to no time at all; the engine never picks either choice for the planner."
+ },
+ {
+  "prompt": "A call states a working day of 25 hours for the base. What does the engine return, in its own words?",
+  "options": [
+   "A result on the 24-hour clock with the extra hour dropped and a note in the basis",
+   "Figures on a 25-hour clock, the arrivals an hour taken over the 25 hours as typed",
+   "berths must be a whole number from 1 to 100; got 25, since the day was read as berths",
+   "workingHoursPerDay must be a number above 0 and at most 24; got 25"
+  ],
+  "answer": 3,
+  "explanation": "The working day is a number above 0 and at most 24, and the engine refuses anything else by name, verbatim: \"workingHoursPerDay must be a number above 0 and at most 24; got 25\". It neither trims the figure to 24 nor runs on it, and the field it names is the working day."
+ },
+ {
+  "prompt": "A call states 0 lifts an hour for the crane at the base, with lifts to make. What does the engine return?",
+  "options": [
+   "service must give a service time above 0 hours (fixed hours, lifts or bulk); got 0",
+   "A refusal naming service.liftsPerHour, the lift rate, which has to be above 0",
+   "A result with the lift hours read as 0, so the call is the fixed hours and the bulk",
+   "A result whose service time has no limit, followed by a refusal of the arrivals"
+  ],
+  "answer": 1,
+  "explanation": "A rate of zero would make the lift hours infinite, and the engine refuses the rate by name, verbatim: \"service.liftsPerHour must be a finite number above 0; got 0\". The \"service must give a service time above 0 hours\" message is the refusal of a call whose terms add to no time at all, a different case; no result is returned either way."
+ },
+ {
+  "prompt": "A planner types the crane rate at the base under the key service.craneRate. What does the engine do with it?",
+  "options": [
+   "Drops the unknown key without a word and runs the call on the service terms it does read, so the stated crane rate is quietly lost",
+   "Reads it as the lifts an hour, since the crane is the plant that lifts the deck cargo, and prints the mapping in the basis",
+   "Refuses it by name and lists the keys of service it does read: fixedHours, lifts, liftsPerHour, bulkM3, bulkM3PerHour, concurrent",
+   "Runs the call as typed and adds a line to its basis saying that one key of service was read as a comment and ignored"
+  ],
+  "answer": 2,
+  "explanation": "Every call refuses an input key the function does not read, at every level, naming the key, its path and the accepted keys. Verbatim: \"service.craneRate is not an accepted key; the accepted keys of service are fixedHours, lifts, liftsPerHour, bulkM3, bulkM3PerHour, concurrent\". A misspelt key is refused; the engine drops no key silently and maps none to another input."
+ },
+ {
+  "prompt": "Why does the engine count the queue at the base on the working hour?",
+  "options": [
+   "A base that closes holds its arrivals until it opens, so the queue forms in the hours the berths work",
+   "Vessels reach the base only in working hours, so any vessel arriving at night is dropped from the count",
+   "Erlang's C formula needs whole working days as its unit of time, so the working hour is the smallest unit",
+   "So that every wait comes out in calendar days, the unit in which vessel charters are billed"
+  ],
+  "answer": 0,
+  "explanation": "Arrivals an hour are the arrivals a day over the working hours a day, and every time the queue returns is in working hours: counting the closed hours would spread the same vessels over hours in which no berth serves anyone. No arrival is dropped, the formula takes any unit of time, and the engine prices no charter."
+ },
+ {
+  "prompt": "On the Ekene base as M/M/c, the engine returns a berth utilisation of 0.533333. What does that figure tell a planner?",
+  "options": [
+   "Roughly half of the arriving vessels will find both berths taken and wait for one to come free",
+   "How busy the berths are, and that a steady state exists; how often and how long vessels wait depend on the model",
+   "That an arriving vessel spends about half of its time at the base waiting in the queue for a berth",
+   "That the base could take about half as many arrivals again before a vessel first had to wait"
+  ],
+  "answer": 1,
+  "explanation": "The berth utilisation is the offered load over the berths, the share of each berth's working hours spent serving. It says the base is below saturation and how busy it is; the probability of waiting (0.371014 as M/M/c) and the mean wait come from the model. Vessels can wait at any utilisation above zero."
+ }
+]
