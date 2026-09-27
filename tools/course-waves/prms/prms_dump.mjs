@@ -96,7 +96,7 @@ const group = (s) => { const [i, d] = s.split('.'); return `${i.replace(/\B(?=(\
 const f6 = (x) => {
   if (x === null || x === undefined) return 'none';
   const s = Number(x).toFixed(6);
-  const t = s === '-0.000000' ? '0.000000' : s;
+  const t = Number(s) === 0 ? (0).toFixed(6) : s;
   return t.replace(/^-/, '').replace('.', '').replace(/^0+/, '').length > 15 ? group(t) : t;
 };
 const S = (x) => String(x);
@@ -157,6 +157,15 @@ const argsOf = (id) => clone(GC[id].args);
 const D = E.DEFAULTS;
 const PF = E.PRMS_FIGURES;
 const { OUTCOME_LABELS, EXCEEDANCE_DEFINITION } = PCT;
+// THE FIGURES THE TEXTS PRINT, typed ONCE here with their citation. Each is
+// checked against its text by quote_check.py (which reads the texts), and
+// each is printed as the text prints it. None is computed from.
+const TEXT = {
+  faq33: { cite: 'PRMS FAQ 3.3 (October 2022)', low: 5, best: 7, increment: 2 },
+  ag: { cite: 'Guidelines for Application of the PRMS (November 2011), Table 6.2 and Fig. 6.5', expA: '53.4', expB: '35.6', provedA: '43.3', provedB: '28.5', provedTotal: '71.8', figArithmetic: '72', figIndependent: '77' },
+  nuprc: { cite: 'NUPRC media release, 1 April 2026', ag: '100.21', nag: '114.98', total: '215.19', condensate: '5.92', oilAndCondensate: '37.01', crudeAsRendered: '09' },
+  errataItem: 5,
+};
 const EXPORTS = [
   ['classify', 'the class and sub-class of one project', 'name (optional), discovery, recoveryProject, subClass, commerciality, economicStatus, projectStatus, reservesStatus, chances, nigeria (optional)', 'the class, the sub-class, the economic and reserves status, the chances and the chance of commerciality, each commerciality criterion met or not, the blockers, the category labels, the Nigerian notes and each decision with the section it applies'],
   ['categorize', 'the categories of one set of estimates', 'resourceClass, method, estimates, unit', 'the cumulative categories with their outcome labels, the incremental categories, the exceedance sentence and whether one value describes the range'],
@@ -213,11 +222,11 @@ const PSRC = {
   fieldDevelopmentPlanYears: ['the years within which a field development plan follows a commercial discovery declaration', 'PIA 2021 s.79(1)'],
 };
 table(['constant', 'value', 'what it sets', 'where it comes from'], [
-  ...Object.entries(D).map(([k, v]) => [`\`DEFAULTS.${k}\``, k === 'PSD_TOLERANCE' ? '1e-9' : S(v), DSRC[k], k === 'PSD_TOLERANCE' ? 'engine convention' : 'cap']),
+  ...Object.entries(D).map(([k, v]) => [`\`DEFAULTS.${k}\``, k === 'PSD_TOLERANCE' ? v.toExponential() : S(v), DSRC[k], k === 'PSD_TOLERANCE' ? 'engine convention' : 'cap']),
   ...Object.entries(PF).map(([k, v]) => [`\`PRMS_FIGURES.${k}\``, S(v), PSRC[k][0], PSRC[k][1]]),
 ]);
 must('DEFAULTS carries six values, each described here', Object.keys(D).length === 6 && Object.keys(D).every((k) => DSRC[k]), Object.keys(D));
-must('the PSD tolerance prints as 1e-9 because it is 1e-9', D.PSD_TOLERANCE === 1e-9, D.PSD_TOLERANCE);
+must('the PSD tolerance prints in exponent form as the engine states it', D.PSD_TOLERANCE.toExponential() === '1e-9', D.PSD_TOLERANCE);
 must('PRMS_FIGURES carries five values, each described and cited here', Object.keys(PF).length === 5 && Object.keys(PF).every((k) => PSRC[k]), Object.keys(PF));
 must('DEFAULTS and PRMS_FIGURES are frozen', Object.isFrozen(D) && Object.isFrozen(PF), 'frozen');
 must('PRMS_FIGURES carries the figures read from the texts', PF.reasonableTimeFrameYears === 5 && PF.significantDiscoveryRetentionMaxYears === 10 && PF.retentionMinOnshoreShallowYears === 5 && PF.retentionMinDeepWaterYears === 8 && PF.fieldDevelopmentPlanYears === 2, JSON.stringify(PF));
@@ -296,7 +305,8 @@ w();
 // THE FAQ 3.3 EXAMPLE
 const fq = runG('econ-faq33-low-fails');
 const fqc = runG('cat-faq33-incremental');
-w('CHECK ONE: THE FAQ 3.3 EXAMPLE (text: a technical low outcome of 5 and a best estimate of 7, the best being 5 + 2). The FAQ answer (numbers only, never quoted) takes the low case failing the economic test while the best passes. The golden input econ-faq33-low-fails states a one-year project: low 5000000, best 7000000 and high 9000000 barrels, an oil price of 10, capital of 60000000, no royalty, tax or opex, and the licence in the same year (stated). The engine returns (golden input):');
+const fqA = argsOf('econ-faq33-low-fails');
+w(`CHECK ONE: THE FAQ 3.3 EXAMPLE (text: a technical low outcome of ${S(TEXT.faq33.low)} and a best estimate of ${S(TEXT.faq33.best)}, the best being ${S(TEXT.faq33.low)} + ${S(TEXT.faq33.increment)}). The FAQ answer (numbers only, never quoted) takes the low case failing the economic test while the best passes. The golden input econ-faq33-low-fails states a one-year project: low ${S(fqA.forecasts.low[0].oil)}, best ${S(fqA.forecasts.best[0].oil)} and high ${S(fqA.forecasts.high[0].oil)} barrels, an oil price of ${S(fqA.prices[0].oil)}, capital of ${S(fqA.costs.capex[0].amount)}, no royalty, tax or opex, and the licence in the same year (stated). The engine returns (golden input):`);
 w();
 table(['case', 'undiscounted net cash flow at 100%', 'economic', 'reported oil'], ['low', 'best', 'high'].map((k) => [k, f6(fq.cases[k].undiscountedNetCashFlow), S(fq.cases[k].economic), f6(fq.cases[k].reported.oil)]));
 w();
@@ -305,7 +315,7 @@ must('FAQ 3.3: the low case fails, 1P = 0, 2P = 7000000 and P2 = 7000000', !fq.c
 w();
 w('The engine\'s reason on the low case, verbatim:');
 quote(fq.reasons.find((r) => r.startsWith('the low case is not economic')));
-w(`So 1P is ${f6(fq.reserves.cumulative['1P'].oil)} and 2P is ${f6(fq.reserves.cumulative['2P'].oil)}, the whole best estimate: the P2 increment is ${f6(fq.reserves.incremental.P2.oil)} (engine), and the low-case barrels are inside 2P. The same figures as a category set stated incrementally (golden input cat-faq33-incremental: first 5, second 2, third 3 MMbbl) give 1P ${f6(fqc.cumulative[0].value)}, 2P ${f6(fqc.cumulative[1].value)} and 3P ${f6(fqc.cumulative[2].value)} (engine) when the low case passes.`);
+w(`So 1P is ${f6(fq.reserves.cumulative['1P'].oil)} and 2P is ${f6(fq.reserves.cumulative['2P'].oil)}, the whole best estimate: the P2 increment is ${f6(fq.reserves.incremental.P2.oil)} (engine), and the low-case barrels are inside 2P. The same figures as a category set stated incrementally (golden input cat-faq33-incremental: first ${S(argsOf('cat-faq33-incremental').estimates.first)}, second ${S(argsOf('cat-faq33-incremental').estimates.second)}, third ${S(argsOf('cat-faq33-incremental').estimates.third)} MMbbl) give 1P ${f6(fqc.cumulative[0].value)}, 2P ${f6(fqc.cumulative[1].value)} and 3P ${f6(fqc.cumulative[2].value)} (engine) when the low case passes.`);
 must('cat-faq33-incremental gives 5, 7 and 10', fqc.cumulative.map((x) => x.value).join() === '5,7,10', fqc.cumulative.map((x) => x.value).join());
 w();
 // AG 2011 TABLE 6.2
@@ -314,36 +324,39 @@ const agD = runG('agg-ag2011-table62-dependent');
 const agA = argsOf('agg-ag2011-table62-independent');
 const agDA = argsOf('agg-ag2011-table62-dependent');
 const Z90 = 1.2815515655446004;
-w('CHECK TWO: THE 2011 GUIDELINES, TABLE 6.2 (text: two gas blocks A and B with an expectation of GIIP of 53.4 and 35.6, a Proved GIIP of 43.3 and 28.5 and a total Proved of 71.8, all in thousand million cubic metres; Fig. 6.5 prints the arithmetic Proved as 72 and the probabilistic Proved of independent blocks as 77). The Guidelines add the blocks by error propagation for symmetric distributions (section 6.3.3), so the golden input reads each block as a NORMAL distribution with the printed expectation as its mean and the expectation less the Proved as its 90 percent half-width: the standard deviation is that half-width over the standard normal 90th percentile. That reading is the Guidelines\' own, stated as such; the engine takes whatever distribution a call states.');
+w(`CHECK TWO: THE 2011 GUIDELINES, TABLE 6.2 (text: two gas blocks A and B with an expectation of GIIP of ${TEXT.ag.expA} and ${TEXT.ag.expB}, a Proved GIIP of ${TEXT.ag.provedA} and ${TEXT.ag.provedB} and a total Proved of ${TEXT.ag.provedTotal}, all in thousand million cubic metres; Fig. 6.5 prints the arithmetic Proved as ${TEXT.ag.figArithmetic} and the probabilistic Proved of independent blocks as ${TEXT.ag.figIndependent}). The Guidelines add the blocks by error propagation for symmetric distributions (section 6.3.3), so the golden input reads each block as a NORMAL distribution with the printed expectation as its mean and the expectation less the Proved as its 90 percent half-width: the standard deviation is that half-width over the standard normal 90th percentile. That reading is the Guidelines\' own, stated as such; the engine takes whatever distribution a call states.`);
 w();
-table(['block', 'distribution (golden input)', 'mean', 'standard deviation', 'low estimate (engine)', 'the Proved the Guidelines print (text)'], agI.projects.map((p, i) => [p.id, p.distribution.type, f6(agA.projects[i].distribution.mean), f6(agA.projects[i].distribution.stdDev), f6(p.low), i === 0 ? '43.3' : '28.5']));
-must('AG 6.2: the engine reads each normal block\'s low estimate back to the printed Proved', Math.abs(agI.projects[0].low - 43.3) < 1e-9 && Math.abs(agI.projects[1].low - 28.5) < 1e-9, `${agI.projects[0].low} ${agI.projects[1].low}`);
+table(['block', 'distribution (golden input)', 'mean', 'standard deviation', 'low estimate (engine)', 'the Proved the Guidelines print (text)'], agI.projects.map((p, i) => [p.id, p.distribution.type, f6(agA.projects[i].distribution.mean), f6(agA.projects[i].distribution.stdDev), f6(p.low), i === 0 ? TEXT.ag.provedA : TEXT.ag.provedB]));
+must('AG 6.2: the engine reads each normal block\'s low estimate back to the printed Proved', Math.abs(agI.projects[0].low - Number(TEXT.ag.provedA)) < 1e-9 && Math.abs(agI.projects[1].low - Number(TEXT.ag.provedB)) < 1e-9, `${agI.projects[0].low} ${agI.projects[1].low}`);
 w();
-const agExact = 89 - Math.sqrt(10.1 * 10.1 + 7.1 * 7.1);
-w(`ARITHMETIC. The arithmetic sum by category (engine): low ${f6(agI.arithmetic.low)}, best ${f6(agI.arithmetic.best)}, high ${f6(agI.arithmetic.high)}; the Guidelines print 71.8 in Table 6.2 and 72 on Fig. 6.5 (text).`);
-must('AG 6.2: the arithmetic low is 71.8', Math.abs(agI.arithmetic.low - 71.8) < 1e-9, agI.arithmetic.low);
-w(`INDEPENDENT BLOCKS (golden input agg-ag2011-table62-independent: correlation ${S(agA.correlation.rho)}, seed ${S(agA.seed)}, ${S(agA.iterations)} draws). The seeded Monte Carlo returns a P90 of ${f6(agI.statistical.low)}, a P50 of ${f6(agI.statistical.best)} and a P10 of ${f6(agI.statistical.high)}, with a sampled mean of ${f6(agI.statistical.mean)} against the exact sum of the means ${f6(agI.sumOfMeans)} (engine). The Guidelines print 77 (text). The exact low of a sum of two independent normals (derived: 89 less the square root of 10.1 squared plus 7.1 squared) is ${f6(agExact)}; the sampled P90 differs from it by ${f6(Math.abs(agI.statistical.low - agExact))} at these ${S(agA.iterations)} draws.`);
-must('AG 6.2: the sampled P90 rounds to 77 and sits within 0.05 of the exact low', Math.round(agI.statistical.low) === 77 && Math.abs(agI.statistical.low - agExact) < 0.05, agI.statistical.low);
+const agSum = Number(TEXT.ag.expA) + Number(TEXT.ag.expB);
+const agHalfA = Number(TEXT.ag.expA) - Number(TEXT.ag.provedA);
+const agHalfB = Number(TEXT.ag.expB) - Number(TEXT.ag.provedB);
+const agExact = agSum - Math.sqrt(agHalfA * agHalfA + agHalfB * agHalfB);
+w(`ARITHMETIC. The arithmetic sum by category (engine): low ${f6(agI.arithmetic.low)}, best ${f6(agI.arithmetic.best)}, high ${f6(agI.arithmetic.high)}; the Guidelines print ${TEXT.ag.provedTotal} in Table 6.2 and ${TEXT.ag.figArithmetic} on Fig. 6.5 (text).`);
+must('AG 6.2: the arithmetic low is the printed total Proved', Math.abs(agI.arithmetic.low - Number(TEXT.ag.provedTotal)) < 1e-9, agI.arithmetic.low);
+w(`INDEPENDENT BLOCKS (golden input agg-ag2011-table62-independent: correlation ${S(agA.correlation.rho)}, seed ${S(agA.seed)}, ${S(agA.iterations)} draws). The seeded Monte Carlo returns a P90 of ${f6(agI.statistical.low)}, a P50 of ${f6(agI.statistical.best)} and a P10 of ${f6(agI.statistical.high)}, with a sampled mean of ${f6(agI.statistical.mean)} against the exact sum of the means ${f6(agI.sumOfMeans)} (engine). The Guidelines print ${TEXT.ag.figIndependent} (text). The exact low of a sum of two independent normals (derived: the sum of the expectations, ${f6(agSum)}, less the square root of the sum of the squared half-widths ${f6(agHalfA)} and ${f6(agHalfB)}) is ${f6(agExact)}; the sampled P90 differs from it by ${f6(Math.abs(agI.statistical.low - agExact))} at these ${S(agA.iterations)} draws.`);
+must('AG 6.2: the sampled P90 rounds to the printed figure and sits within 0.05 of the exact low', Math.round(agI.statistical.low) === Number(TEXT.ag.figIndependent) && Math.abs(agI.statistical.low - agExact) < 0.05, agI.statistical.low);
 w(`NEAR TOTAL DEPENDENCE (golden input agg-ag2011-table62-dependent: correlation ${S(agDA.correlation.rho)}, seed ${S(agDA.seed)}, ${S(agDA.iterations)} draws). The sampled P90 returns to ${f6(agD.statistical.low)} (engine), against the arithmetic ${f6(agD.arithmetic.low)}.`);
 must('AG 6.2 dependent: the sampled P90 is within 0.3 of 71.8', Math.abs(agD.statistical.low - 71.8) < 0.3, agD.statistical.low);
 // the lognormal reading, through the engine
 const lnSd = (m, q) => { const s = -Z90 + Math.sqrt(Z90 * Z90 - 2 * Math.log(q / m)); return m * Math.sqrt(Math.exp(s * s) - 1); };
 const lnArgs = clone(agA);
-lnArgs.projects = [{ id: 'A', name: 'Block A, read as a lognormal (stated)', distribution: { type: 'lognormal', mean: 53.4, stdDev: lnSd(53.4, 43.3) } }, { id: 'B', name: 'Block B, read as a lognormal (stated)', distribution: { type: 'lognormal', mean: 35.6, stdDev: lnSd(35.6, 28.5) } }];
+lnArgs.projects = [{ id: 'A', name: 'Block A, read as a lognormal (stated)', distribution: { type: 'lognormal', mean: Number(TEXT.ag.expA), stdDev: lnSd(Number(TEXT.ag.expA), Number(TEXT.ag.provedA)) } }, { id: 'B', name: 'Block B, read as a lognormal (stated)', distribution: { type: 'lognormal', mean: Number(TEXT.ag.expB), stdDev: lnSd(Number(TEXT.ag.expB), Number(TEXT.ag.provedB)) } }];
 const agLn = success('aggregate on AG 6.2 read as two lognormals (stated probe)', E.aggregate(lnArgs));
-w(`THE SAME BLOCKS READ AS LOGNORMALS (stated probe). A lognormal through the same expectation and Proved (derived: its log standard deviation s solves s squared over 2 plus 1.2815515655446004 times s plus ln(Proved over expectation) = 0, and its standard deviation is the expectation times the square root of e to the s squared less 1) has a standard deviation of ${f6(lnArgs.projects[0].distribution.stdDev)} for A and ${f6(lnArgs.projects[1].distribution.stdDev)} for B; the engine reads their low estimates back as ${f6(agLn.projects[0].low)} and ${f6(agLn.projects[1].low)}. On the same seed ${S(lnArgs.seed)} and ${S(lnArgs.iterations)} draws the sampled P90 of the total is ${f6(agLn.statistical.low)} (engine). The reading moves the figure: the Guidelines\' own symmetric reading is the one the golden input takes, and the course names both.`);
-must('the lognormal reading reads the lows back to the printed Proved', Math.abs(agLn.projects[0].low - 43.3) < 1e-9 && Math.abs(agLn.projects[1].low - 28.5) < 1e-9, `${agLn.projects[0].low} ${agLn.projects[1].low}`);
+w(`THE SAME BLOCKS READ AS LOGNORMALS (stated probe). A lognormal through the same expectation and Proved (derived: its log standard deviation s solves half of s squared, plus ${S(Z90)} times s, plus the natural log of the Proved over the expectation, equal to zero; its standard deviation is the expectation times the square root of e to the s squared, less one) has a standard deviation of ${f6(lnArgs.projects[0].distribution.stdDev)} for A and ${f6(lnArgs.projects[1].distribution.stdDev)} for B; the engine reads their low estimates back as ${f6(agLn.projects[0].low)} and ${f6(agLn.projects[1].low)}. On the same seed ${S(lnArgs.seed)} and ${S(lnArgs.iterations)} draws the sampled P90 of the total is ${f6(agLn.statistical.low)} (engine). The reading moves the figure: the Guidelines\' own symmetric reading is the one the golden input takes, and the course names both.`);
+must('the lognormal reading reads the lows back to the printed Proved', Math.abs(agLn.projects[0].low - Number(TEXT.ag.provedA)) < 1e-9 && Math.abs(agLn.projects[1].low - Number(TEXT.ag.provedB)) < 1e-9, `${agLn.projects[0].low} ${agLn.projects[1].low}`);
 must('the lognormal reading gives a sampled P90 near 76.4', Math.abs(agLn.statistical.low - 76.4) < 0.1, agLn.statistical.low);
 w();
 // NUPRC 2026
 const nu = runG('agg-nuprc-2026-gas-2p');
 const nuA = argsOf('agg-nuprc-2026-gas-2p');
-w('CHECK THREE: THE NATIONAL GAS FIGURE (text: the NUPRC release of 1 April 2026 prints the 2P associated gas at 100.21 and the 2P non-associated gas at 114.98 trillion cubic feet as at 1 January 2026, a total of 215.19). The golden input agg-nuprc-2026-gas-2p states each published 2P figure as one value (a constant: low, best and high the same) at the above-field level, so the engine\'s category labels read 1P, 2P and 3P for the one stated figure; only the 2P is what was published.');
+w(`CHECK THREE: THE NATIONAL GAS FIGURE (text: the NUPRC release of 1 April 2026 prints the 2P associated gas at ${TEXT.nuprc.ag} and the 2P non-associated gas at ${TEXT.nuprc.nag} trillion cubic feet as at 1 January 2026, a total of ${TEXT.nuprc.total}). The golden input agg-nuprc-2026-gas-2p states each published 2P figure as one value (a constant: low, best and high the same) at the above-field level, so the engine\'s category labels read 1P, 2P and 3P for the one stated figure; only the 2P is what was published.`);
 w();
 table(['project (golden input)', 'the stated 2P'], nuA.projects.map((p) => [`${p.id}, ${p.name}`, f6(p.estimates.best)]));
 w();
 w(`The engine sums them to ${f6(nu.arithmetic.best)} and reports "${nu.reportable}" as what may be reported at the ${nu.level} level (engine, seed ${S(nuA.seed)}, ${S(nuA.iterations)} draws of two constants).`);
-must('NUPRC 2026: the sum is 215.19 and only the arithmetic sum is reportable', Math.abs(nu.arithmetic.best - 215.19) < 1e-9 && nu.reportable === 'arithmetic', `${nu.arithmetic.best} ${nu.reportable}`);
+must('NUPRC 2026: the sum is the published total and only the arithmetic sum is reportable', Math.abs(nu.arithmetic.best - Number(TEXT.nuprc.total)) < 1e-9 && nu.reportable === 'arithmetic', `${nu.arithmetic.best} ${nu.reportable}`);
 w();
 w(`CHECK FOUR: THE SEC SUMMATION RULE (17 CFR 229.1202(a)(3), quoted in ${ref('provisions')}). The same projects aggregated at the "field" and at the "above-field" level (golden inputs agg-ekene-reserves and agg-ekene-reserves-above-field) return the same figures and differ in what may be reported:`);
 const aF = runG('agg-ekene-reserves');
@@ -599,7 +612,7 @@ w('THE EXCEEDANCE SENTENCE, as the canonical percentile convention (lib/conventi
 quote(EXCEEDANCE_DEFINITION);
 must('categorize returns the exceedance sentence of the convention', catR.exceedance === EXCEEDANCE_DEFINITION, catR.exceedance);
 w();
-table(['case', 'outcome label (lib/conventions/percentile.js)', 'what it means here'], [['low', OUTCOME_LABELS.p90, 'at least 90 percent probability of being met or exceeded, when the method is probabilistic'], ['best', OUTCOME_LABELS.p50, 'at least 50 percent probability'], ['high', OUTCOME_LABELS.p10, 'at least 10 percent probability']]);
+table(['case', 'outcome label (lib/conventions/percentile.js)', 'what it means here'], [['low', OUTCOME_LABELS.p90, `at least ${OUTCOME_LABELS.p90.slice(1)} percent probability of being met or exceeded, when the method is probabilistic`], ['best', OUTCOME_LABELS.p50, `at least ${OUTCOME_LABELS.p50.slice(1)} percent probability`], ['high', OUTCOME_LABELS.p10, `at least ${OUTCOME_LABELS.p10.slice(1)} percent probability`]]);
 must('the labels are P90, P50 and P10', OUTCOME_LABELS.p90 === 'P90' && OUTCOME_LABELS.p50 === 'P50' && OUTCOME_LABELS.p10 === 'P10', JSON.stringify(OUTCOME_LABELS));
 w();
 w('THE LOW ESTIMATE CARRIES THE HIGHEST PROBABILITY. The P90 is the low estimate: the quantity that is met or exceeded with at least 90 percent probability is the smallest of the three. The engine prints the probability beside each category (golden input cat-reserves-cumulative), verbatim:');
@@ -629,7 +642,7 @@ quote(E.classify(argsOf('class-refuse-nigeria-significant-reserves')).error);
 w('And the notes follow a discovery only, verbatim (golden input class-refuse-nigeria-undiscovered):');
 quote(E.classify(argsOf('class-refuse-nigeria-undiscovered')).error);
 w();
-w(`NATIONAL RESERVES AND THE COMMISSION. The Act gives the Commission the evaluation of national reserves (s.7(i), quoted in ${ref('provisions')}), and the Commission publishes the national position each year; its release of 1 April 2026 put the 2P gas at 215.19 trillion cubic feet as at 1 January 2026 (text; ${ref('published')}). The Commercial Regulations 2025 ask for a status report that includes a statement of the reserves situation (reg. 6, by concept). No gazetted rule on how reserves are booked was found (${ref('sources')}), so the course teaches the PRMS classes and states no Nigerian booking rule.`);
+w(`NATIONAL RESERVES AND THE COMMISSION. The Act gives the Commission the evaluation of national reserves (s.7(i), quoted in ${ref('provisions')}), and the Commission publishes the national position each year; its release of 1 April 2026 put the 2P gas at ${TEXT.nuprc.total} trillion cubic feet as at 1 January 2026 (text; ${ref('published')}). The Commercial Regulations 2025 ask for a status report that includes a statement of the reserves situation (reg. 6, by concept). No gazetted rule on how reserves are booked was found (${ref('sources')}), so the course teaches the PRMS classes and states no Nigerian booking rule.`);
 
 /* ============================================================ SECTION 14 */
 
@@ -725,9 +738,12 @@ must('the canonical cash flow gives the prms figures', cfB.kpis.economic_limit_y
 w();
 const tz = runG('econ-tail-exactly-zero-kept');
 const t1 = runG('econ-tail-one-below-cut');
-w('THE TRAILING TRIM AT ITS BOUNDARY. The canonical limit cuts trailing years whose revenue less royalty less opex is below 0 and keeps a year where it is exactly 0. Two golden inputs differ by one barrel in the last year (20000 and 19999 barrels at 50 a barrel against opex of 1000000, stated):');
+const tzA = argsOf('econ-tail-exactly-zero-kept');
+const t1A = argsOf('econ-tail-one-below-cut');
+const lastOil = (a) => a.forecasts.best[a.forecasts.best.length - 1].oil;
+w(`THE TRAILING TRIM AT ITS BOUNDARY. The canonical limit cuts trailing years whose revenue less royalty less opex is below 0 and keeps a year where it is exactly 0. Two golden inputs differ by one barrel in the last year (${S(lastOil(tzA))} and ${S(lastOil(t1A))} barrels at ${S(tzA.prices[2].oil)} a barrel against opex of ${S(tzA.costs.opex[2].amount)}, stated):`);
 w();
-table(['golden input', 'last-year oil (stated)', 'economic limit (engine)', 'trailing years cut (engine)', '2P oil (engine)'], [['econ-tail-exactly-zero-kept', tz, 20000], ['econ-tail-one-below-cut', t1, 19999]].map(([id, r, o]) => [id, S(o), S(r.cases.best.economicLimitYear), S(r.cases.best.yearsTrimmed), f6(r.reserves.cumulative['2P'].oil)]));
+table(['golden input', 'last-year oil (stated)', 'economic limit (engine)', 'trailing years cut (engine)', '2P oil (engine)'], [['econ-tail-exactly-zero-kept', tz, lastOil(tzA)], ['econ-tail-one-below-cut', t1, lastOil(t1A)]].map(([id, r, o]) => [id, S(o), S(r.cases.best.economicLimitYear), S(r.cases.best.yearsTrimmed), f6(r.reserves.cumulative['2P'].oil)]));
 must('a zero year is kept and one barrel less is cut', tz.cases.best.yearsTrimmed === 0 && t1.cases.best.yearsTrimmed === 1, `${tz.cases.best.yearsTrimmed} ${t1.cases.best.yearsTrimmed}`);
 w();
 const z0 = runG('econ-exactly-zero-not-economic');
@@ -872,7 +888,7 @@ const negFit = clone(argsOf('agg-ekene-reserves-independent'));
 negFit.projects = [{ id: 'F', name: 'a symmetric fit near 0 (stated)', distribution: { type: 'triangular-fit' }, estimates: { low: 1, best: 5.5, high: 10 } }];
 const negR = refusal('aggregate on a triangular fitted exactly through 1, 5.5 and 10 (stated probe)', E.aggregate(negFit), 'projects[0].estimates');
 w();
-w(`TWO FIT REFUSALS, TWO MESSAGES. The golden input agg-refuse-tri-fit-negative returns the exactness message because no triangular passes through its three estimates at all. A fit that does pass through exactly and still reaches below 0 is refused with its own message. On a stated low of 1, best of 5.5 and high of 10 (stated probe), verbatim:`);
+w(`TWO FIT REFUSALS, TWO MESSAGES. The golden input agg-refuse-tri-fit-negative returns the exactness message because no triangular passes through its three estimates at all. A fit that does pass through exactly and still reaches below 0 is refused with its own message. On a stated low of ${S(negFit.projects[0].estimates.low)}, best of ${S(negFit.projects[0].estimates.best)} and high of ${S(negFit.projects[0].estimates.high)} (stated probe), verbatim:`);
 quote(negR.error);
 must('the negative-fit message is its own', /stays at or above 0/.test(negR.error) && negR.error !== E.aggregate(argsOf('agg-refuse-tri-fit-negative')).error, negR.error);
 const wideN = { resourceClass: 'reserves', level: 'field', unit: 'MMbbl', projects: [{ id: 'W', name: 'a wide normal (stated)', distribution: { type: 'normal', mean: 4, stdDev: 3.1 } }], correlation: { type: 'uniform', rho: 0 }, seed: 1, iterations: 1000 };
@@ -883,7 +899,8 @@ w(`A normal that stays at or above 0 at its low estimate can still draw below 0;
 quote(nBelow || '');
 must('a wide normal reports its chance below zero', !!nBelow && wideR.projects[0].chanceBelowZero > 0.05, nBelow);
 const ekBelow = aF.projects.find((p) => p.id === 'EKN-U').chanceBelowZero;
-w(`The Ekene Upper sand normal (mean 4, standard deviation 0.8) has a chance below 0 of ${ekBelow.toExponential(6)} (engine), which prints as 0 at six decimals, so the engine adds no such line for it.`);
+const ekU = aF.projects.find((p) => p.id === 'EKN-U').distribution;
+w(`The Ekene Upper sand normal (mean ${S(ekU.mean)}, standard deviation ${S(ekU.stdDev)}) has a chance below 0 of ${ekBelow.toExponential(6)} (engine), which prints as 0 at six decimals, so the engine adds no such line for it.`);
 must('the Ekene normal chance below zero rounds to 0 at six decimals', ekBelow > 0 && ekBelow < 5e-7, ekBelow);
 w();
 const cst = runG('agg-constant-project');
@@ -939,8 +956,8 @@ section('tworules', 'Two economic-limit rules: the canonical trailing trim, the 
 w('RULE ONE, THE CANONICAL TRAILING TRIM (cashflow.ts, the economic limit every economics course in the academy uses): working backward from the last year, cut every trailing year whose revenue less royalty less opex is below 0; a year with capital is kept, and a year at exactly 0 is kept.');
 w('RULE TWO, THE PRMS CUMULATIVE PEAK (PRMS 3.1.3.1 to 3.1.3.4): the economic limit is where the cumulative net cash flow, before income tax, allowances and abandonment, reaches its maximum; interim negative years count only when later positive years more than offset them.');
 w();
-w('On a declining forecast with no late capital the two rules give the same year, and the engine uses the canonical one and checks it against the peak. On a profile with a late dip and a partial recovery they disagree, and the engine refuses and names both years. The golden input econ-refuse-limit-disagrees states such a profile: 100000, 10000, 25000 and 22000 barrels from 2027 to 2030 at 50 a barrel with opex of 1000000 a year (stated). The canonical cash flow of its low case, run directly (stated probe: the same inputs handed to computeCashFlow with the economic limit off), year by year:');
 const disA = argsOf('econ-refuse-limit-disagrees');
+w(`On a declining forecast with no late capital the two rules give the same year, and the engine uses the canonical one and checks it against the peak. On a profile with a late dip and a partial recovery they disagree, and the engine refuses and names both years. The golden input econ-refuse-limit-disagrees states such a profile: ${disA.forecasts.low.map((r) => S(r.oil)).join(', ')} barrels from ${S(disA.effectiveYear)} to ${S(disA.forecasts.low[disA.forecasts.low.length - 1].year)} at ${S(disA.prices[0].oil)} a barrel with opex of ${S(disA.costs.opex[0].amount)} a year (stated). The canonical cash flow of its low case, run directly (stated probe: the same inputs handed to computeCashFlow with the economic limit off), year by year:`);
 const cfOff = CF.computeCashFlow(cfIn(disA, 'low', false));
 let cumD = 0;
 const disRows = cfOff.cashFlowData.map((r) => { const noi = r.gross_revenue - r.royalty - r.opex; cumD += noi - r.capex; return [S(r.year), f6(r.gross_revenue), f6(r.royalty), f6(r.opex), f6(r.capex), f6(noi), f6(cumD)]; });
@@ -979,15 +996,15 @@ w(`THE GUIDELINES\' TABLE 6.2 READ WITH NORMAL MARGINALS is a reading of the gol
 /* ============================================================ SECTION 26 */
 
 section('quirks', 'Reference texts and their quirks', ['Expert m06 l02']);
-w('A TABLE AND A FIGURE WITH TWO NUMBERS. The 2011 Guidelines print the arithmetic Proved of blocks A and B as 71.8 in Table 6.2 and as 72 on Fig. 6.5 (text): the figure rounds the table. The engine returns ' + f6(agI.arithmetic.low) + ' (' + ref('published') + ').');
+w(`A TABLE AND A FIGURE WITH TWO NUMBERS. The 2011 Guidelines print the arithmetic Proved of blocks A and B as ${TEXT.ag.provedTotal} in Table 6.2 and as ${TEXT.ag.figArithmetic} on Fig. 6.5 (text): the figure rounds the table. The engine returns ${f6(agI.arithmetic.low)} (${ref('published')}).`);
 w();
 w('A SUPERSEDED EDITION. The 2011 Guidelines were revised in 2022; the 2022 edition is sold and was not read. A lesson names the 2011 edition by its year.');
 w();
 w('A STANDARD READ FROM A BILINGUAL EDITION. The English text of SPE-PRMS 2018 was read from the SPE-hosted English-Chinese edition (Version 2023 V1.0, developed from PRMS 2018 V1.0), whose English is the 2018 text; section numbers are the 2018 numbers.');
 w();
-w('AN ERRATUM ON THE WORD ECONOMIC. The consolidated PRMS errata (May 2022, item 5) revise the glossary entry for "economic" so that it reads a zero percent discount rate, matching PRMS 3.1.2.1 (text, never quoted): the economic test is undiscounted, which is the test the engine applies.');
+w(`AN ERRATUM ON THE WORD ECONOMIC. The consolidated PRMS errata (May 2022, item ${S(TEXT.errataItem)}) revise the glossary entry for "economic" so that it reads a zero percent discount rate, matching PRMS 3.1.2.1 (text, never quoted): the economic test is undiscounted, which is the test the engine applies.`);
 w();
-w('A RELEASE THAT PRINTS ONE FIGURE SHORT. The NUPRC release of 1 April 2026, as its page renders, prints the 2P crude oil figure as 09 billion barrels beside a condensate figure of 5.92 and a total of 37.01 billion barrels (text); the crude oil figure is truncated on the page, so the course uses only the gas figures and the total, and computes nothing from the truncated one.');
+w(`A RELEASE THAT PRINTS ONE FIGURE SHORT. The NUPRC release of 1 April 2026, as its page renders, prints the 2P crude oil figure as ${TEXT.nuprc.crudeAsRendered} billion barrels beside a condensate figure of ${TEXT.nuprc.condensate} and a total of ${TEXT.nuprc.oilAndCondensate} billion barrels (text); the crude oil figure is truncated on the page, so the course uses only the gas figures and the total, and computes nothing from the truncated one.`);
 w();
 w('A FILE NAME THAT DIFFERS FROM THE TITLE. The Commission hosts S.I. No. 37 of 2023 under a file name that reads "Significant Crude Oil and Gas Recovery Regulations"; the gazette title is the Significant Crude Oil and Gas Discovery Regulations, 2023, and the course cites the gazette title.');
 w();

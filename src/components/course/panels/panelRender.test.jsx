@@ -26,7 +26,7 @@ import React from 'react';
 const panels = {
   ...import.meta.glob('/src/components/course/panels/**/*Explorer.jsx'),
   ...import.meta.glob('/src/components/course/panels/**/*Lab.jsx'),
-  // Engine courses whose practicals are calculator panels (SC2 procurement, EC7 pia, EC8 gsa, EC9 joa, EC10 farmout).
+  // Engine courses whose practicals are calculator panels (SC2 procurement, EC7 pia, EC8 gsa, EC9 joa, EC10 farmout, EC11 prms).
   ...import.meta.glob('/src/components/course/panels/**/*Calculator.jsx'),
 };
 
@@ -482,6 +482,35 @@ describe('every course panel renders with no props', () => {
       }
     }
     expect(rendered).toBe(11);
+  }, 120000);
+  it('finds the EC11 prms calculator panels', () => {
+    const names = entries.map(([p]) => p.split('/panels/')[1]);
+    expect(names).toContain('prms/ClassificationCalculator.jsx');
+    expect(names).toContain('prms/ReservesCalculator.jsx');
+    expect(names).toContain('prms/AggregationCalculator.jsx');
+  });
+  it('every EC11 prms view renders, not only the default one', async () => {
+    const MODES = {
+      'prms/ClassificationCalculator.jsx': ['classify', 'categorize'],
+      'prms/ReservesCalculator.jsx': ['classify', 'categorize', 'economicLimit'],
+      'prms/AggregationCalculator.jsx': ['aggregate', 'reconcile', 'economicLimit', 'readings'],
+    };
+    const REFUSES_ITS_START = { 'prms/AggregationCalculator.jsx': ['economicLimit'] };
+    let rendered = 0;
+    for (const [name, modes] of Object.entries(MODES)) {
+      const entry = entries.find(([p]) => p.endsWith(`/${name}`));
+      expect(entry, `${name} is not in the panel sweep`).toBeTruthy();
+      const mod = await entry[1]();
+      expect(mod.MODES.map((m) => m[0]), `${name} declares different modes`).toEqual(modes);
+      for (const mode of modes) {
+        const html = renderToStaticMarkup(React.createElement(mod.default, { initialMode: mode }));
+        // The two-rules view starts on the profile the engine refuses by design, and shows that refusal.
+        if ((REFUSES_ITS_START[name] || []).includes(mode)) expect(html, `${name} in the ${mode} view`).toContain('THE ENGINE REFUSED');
+        else expect(html, `${name} in the ${mode} view refused its own start`).not.toContain('THE ENGINE REFUSED');
+        rendered += 1;
+      }
+    }
+    expect(rendered).toBe(9);
   }, 120000);
   it('finds the D5 appliedai panels', () => {
     const names = entries.map(([p]) => p.split('/panels/')[1]);

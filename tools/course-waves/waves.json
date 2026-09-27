@@ -1877,5 +1877,24 @@
       "digest.txt": "377738cbe2fe7f680dcf265c9b40d51c1d04d7973ee7ef71fe3c534d0ec3849a",
       "fields.json": "a6d9b7c7825d4a1c961a91588b55469fcce8e0eb76904daf9f363ea2654e762d"
     }
+  },
+  "prms": {
+    "course": "EC11",
+    "live": "/root/cat-wip-prms",
+    "kit": "full",
+    "kitNote": "PRELIMINARY: registered at the foundation so the suites read the committed copy; the inputs list and the note are completed with the full mirror.",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "precision.json",
+      "wave.json",
+      "prms_capstone.mjs",
+      "prms_engine.mjs",
+      "ts_loader.mjs"
+    ],
+    "pins": {
+      "digest.txt": "d33829b527438c9ec6e9199a5f3fba3b2f236b965d43de4b933b9c23672819ce",
+      "fields.json": "9d0ecef8efc77b3f1b68550055f73d7fd8782736683c32035e052603e4030e07"
+    }
   }
 }

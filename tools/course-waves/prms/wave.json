@@ -1,0 +1,55 @@
+{
+ "slug": "prms",
+ "prefix": "ec11",
+ "name": "Reserves & Resources under SPE-PRMS 2018",
+ "pathOrder": 76,
+ "module": "economics",
+ "prerequisite": null,
+ "engineCourse": "An ENGINE COURSE: no Suite app. The practicals run in the course's own calculator panels (prms-classification-calculator, prms-reserves-calculator, prms-aggregation-calculator) over the vendored engine engines/economics/prms.js; the learning page says so plainly. Lead decisions (cat-brief): the same published fee and the same Associate/Professional/Expert certificate ladder as app courses; no Suite bridge mapping; prerequisite null.",
+ "repo": "/root/wt-ec11-nextgen",
+ "branch": "feat/ec11-prms-course",
+ "goldens": [],
+ "goldensNote": "EMPTY BY DECISION, as EC10, EC9, EC8, SC2, EC7 and D5. The vendored golden test-data/economics/goldens/prms_cases.json carries oracle output beside its inputs. The digest reads its INPUTS only and prints the engine's own figures (and asserts every refusal message equals the golden's); naming the golden here would let numsweep resolve a lesson literal against an oracle figure the digest never prints.",
+ "engines": [
+  "engines/economics/prms.js",
+  "engines/economics/cashflow.ts",
+  "lib/stats/stats.js",
+  "lib/conventions/percentile.js"
+ ],
+ "enginesVendoredAt": "prms.js vendored sha-identical from petrolord-engines bb8ef5f (engines PR #278) at its CANONICAL path by vendor_prms.sh, with its jest suite, golden, the ekene-prms fixture and README, the fixture writer, the oracle, the timing script and the negative control: 9 new paths ledgered in VENDOR.json as kind extra, group ec11-prms-course; pin 54cf7c4 unchanged. Its runtime imports (engines/economics/cashflow.ts, engines/economics/irrContract.js, lib/stats/stats.js, lib/conventions/percentile.js) were ALREADY vendored in NextGen at the bb8ef5f blobs, and at the same blobs on fix/decision-portfolio-recut (proved, four proofs a path), so nothing shared moved. The suite passes 171 of 171 on NextGen's copies. The oracle's two helper imports (oracle_jointventure.py, oracle_screening.py) are older blobs in NextGen than bb8ef5f and reproduce all 139 golden cases identically. FINDINGS-prms.md is not in the engines tree at bb8ef5f; the digest prints the sources table and quote_check.py pins every file.",
+ "history": {
+  "position": "THIS COURSE TEACHES NO REPAIR HISTORY. The lead's decisions on the engine (the refusal where the canonical trailing trim and the PRMS 3.1.3.1 cumulative peak disagree; the 2011 Guidelines' Table 6.2 read with normal marginals as the Guidelines' own reading; P90 as the low estimate per lib/conventions/percentile.js; no PRMS, FAQ or Guidelines prose quoted) landed before any lesson was written; that is provenance."
+ },
+ "regulatoryRule": "Every standard, Act, regulation, guide and release is named with its edition or gazette date, its licence and the date read (2026-09-27), printed in digest section 2; quote_check.py pins every file's sha256 prefix and checks the thirteen the draft validation record lists. Public texts (PIA 2021, S.I. No. 37 of 2023, 17 CFR 229.1202, 229.1203 and 210.4-10) are quoted with citation, each quotation in concepts.json and verified against its text. SPE-PRMS 2018 (CC BY-NC-ND 4.0), the PRMS FAQs (copyright SPE) and the 2011 Application Guidelines (no licence printed) are cited by section and never quoted; their printed figures are cited as figures and checked in the texts by quote_check.py; gate_no_prms_prose.py refuses any eight-word run of their text in anything a learner reads. The NUPRC release of 1 April 2026 (all rights reserved) is cited for its figures only. No gazetted NUPRC reserves reporting regulation was found; the digest says so.",
+ "openReadings": {
+  "five-year benchmark": "met at five years (PRMS 2.1.2.3). Never graded: every field bit-identical under reading_time_frame_exclusive.",
+  "economic test at zero": "an undiscounted net cash flow of exactly 0 is not economic. Never graded: bit-identical under reading_economic_at_zero.",
+  "economic test and abandonment": "the test includes abandonment (PRMS 3.1.1(2)); the producibility determination of 3.1.2.1 excludes it. Never graded: bit-identical under reading_economic_test_before_adr.",
+  "economic limit rule": "the canonical trailing trim, checked against the PRMS 3.1.3.1 cumulative peak and refused where they disagree. Never graded: bit-identical under reading_limit_at_prms_peak (every accepted profile agrees by construction).",
+  "replacement ratio": "every movement other than production over production. Never graded: bit-identical under reading_replacement_additions_only.",
+  "life index": "the closing best estimate over the period's mean annual production. Never graded: bit-identical under reading_life_index_on_low.",
+  "reconciliation tolerance": "a difference equal to the tolerance closes. Never graded: bit-identical under reading_tolerance_exclusive.",
+  "Monte Carlo low": "the 0.1 quantile of the totals (lib/conventions/percentile.js). Never graded: bit-identical under reading_mc_low_at_high_quantile, and on a second seed and draw count.",
+  "the Guidelines' Table 6.2": "read with normal marginals, the Guidelines' own symmetric reading (a lognormal through the same figures gives a sampled P90 of 76.434906 on seed 2011 and 200000 draws). A golden-input reading, printed beside the lognormal one; no field uses it."
+ },
+ "scopeSeams": {
+  "decline curves and type curves": "OWNED BY the dca course; this course takes a technical forecast as a stated input and refers there.",
+  "material balance": "OWNED BY the mbal course.",
+  "volumetric in-place and recoverable estimates": "OWNED BY the reservoircalc course (Reservoir Volumetrics).",
+  "the cash flow ledger, discounting and NPV": "OWNED BY the cashflow course; this course imports computeCashFlow and applyJV and refers there.",
+  "the Nigerian fiscal system": "OWNED BY the pia course; this course states a royalty and a tax rate as inputs.",
+  "distributions, correlation and Monte Carlo": "OWNED BY the uncertainty course; this course applies the canonical sampler to aggregation."
+ },
+ "namingCollisions": {
+  "reserves": "the PRMS class; a national or company figure is 'reported reserves' with its date.",
+  "resources": "all quantities; each class named in full.",
+  "P90": "always the low estimate.",
+  "proved": "cumulative 1P; the increment is Proved (P1).",
+  "economic limit": "always of a named rule and a named case.",
+  "risked": "always names its chance.",
+  "entitlement": "always of a named basis."
+ },
+ "plan": {
+  "state": "FOUNDATION: structure, digest, capstones, fields, precision, truth, panels, learning page, gates, writer briefs. Stops before lessons."
+ }
+}

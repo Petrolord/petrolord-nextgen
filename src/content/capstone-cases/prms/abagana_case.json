@@ -1,0 +1,44 @@
+{
+ "dataset": "ABAGANA (synthetic)",
+ "label": "ABAGANA, the resources of the Abagana licence (synthetic)",
+ "classify:prospect": {
+  "name": "Abagana Deep prospect (synthetic)",
+  "discovery": "undiscovered",
+  "recoveryProject": "established-technology",
+  "subClass": "prospect",
+  "chances": {
+   "geologicDiscoveryPct": 23.5,
+   "developmentPct": 61.3
+  }
+ },
+ "classify:lead": {
+  "name": "Abagana Shallow lead (synthetic)",
+  "discovery": "undiscovered",
+  "recoveryProject": "established-technology",
+  "subClass": "lead",
+  "chances": {
+   "geologicDiscoveryPct": 12.25,
+   "developmentPct": 47.5
+  }
+ },
+ "categorize:reserves": {
+  "resourceClass": "reserves",
+  "method": "cumulative",
+  "estimates": {
+   "low": 11.35,
+   "best": 18.62,
+   "high": 27.415
+  },
+  "unit": "MMbbl"
+ },
+ "categorize:contingent": {
+  "resourceClass": "contingent",
+  "method": "incremental",
+  "estimates": {
+   "first": 4.215,
+   "second": 3.37,
+   "third": 5.605
+  },
+  "unit": "MMboe"
+ }
+}
