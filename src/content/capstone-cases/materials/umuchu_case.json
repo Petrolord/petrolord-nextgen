@@ -1,0 +1,37 @@
+{
+ "dataset": "UMUCHU (synthetic)",
+ "label": "UMUCHU, the spares of the Umuchu compressor station (synthetic)",
+ "insuranceSpares": {
+  "failuresPerYear": 3.25,
+  "leadTimeDays": 120,
+  "daysPerYear": 365,
+  "unitCost": 142500,
+  "holdingRate": 0.18,
+  "downtimeCostPerDay": 24750,
+  "maxSpares": 8
+ },
+ "poissonStock": {
+  "demandRate": 0.18,
+  "leadTime": 5,
+  "reviewPeriod": 2,
+  "serviceMeasure": "fill-rate",
+  "serviceLevel": 0.99,
+  "orderQuantity": 3
+ },
+ "leadTimeRisk": {
+  "demandPerDay": {
+   "min": 0.004,
+   "mode": 0.0065,
+   "max": 0.011
+  },
+  "leadTimeDays": {
+   "min": 95,
+   "mode": 140,
+   "max": 235
+  },
+  "reorderPoint": 2,
+  "serviceLevel": 0.98,
+  "iterations": 20000,
+  "seed": 20291114
+ }
+}
