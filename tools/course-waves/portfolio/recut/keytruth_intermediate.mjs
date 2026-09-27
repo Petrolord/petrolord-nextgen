@@ -133,9 +133,10 @@ export default [
   // m05 15: the 2020 window closes on 31 Dec 20
   { q: 'intermediate m05 15', where: 'key', printed: 'from the invoices to that day', value: (L) => curveGoldenLast(L, Y2020) && L.curveCase(Y2020).at(-1).Actual === 350 && L.curveCase(Y2020).at(-1).Planned === 1200 },
   // m06 4: 900000 kept and flagged by 40000
-  { q: 'intermediate m06 4', where: 'explanation', printed: '40000', value: (L) => L.A.itemForecastCheck(L.item('CMT-03', { forecast: 900000 })).forecastBelowCommittedBy },
+  { q: 'intermediate m06 4', where: 'explanation', printed: 'marked when they undercut', value: (L) => { const c = L.A.itemForecastCheck(L.item('CMT-03', { forecast: 900000 })); return c.forecast === 900000 && c.forecastBelowCommitted === true && c.forecastBelowCommittedBy === c.committed - c.forecast; } },
   // m06 8: CPI null
-  { q: 'intermediate m06 8', where: 'key', printed: 'Null, with cpiStatus "no-spend"', value: (L) => { const m = L.metricsCase(WEV); return m.cpi === null && m.cpiStatus === 'no-spend' && metricsGolden(L, WEV, ['cpi', 'earnedValue', 'totalActuals']); } },
+  { q: 'intermediate m06 8', where: 'key', printed: 'CPI is null with cpiStatus "no-spend"', value: (L) => { const z = L.ofon('2027-08-15', L.OFON_ITEMS.map((x) => ({ ...L.clone(x), actual: 0 }))); return z.cpi === null && z.cpiStatus === 'no-spend' && z.earnedValue === L.ofon().earnedValue && String(z.earnedValue) === digestRow('2027-08-15')[3]; } },
+  { q: 'intermediate m06 8', where: 'prompt', printed: '15231500', value: (L) => L.ofon('2027-08-15', L.OFON_ITEMS.map((x) => ({ ...L.clone(x), actual: 0 }))).earnedValue },
   // m06 10: the closing point carries the EAC
   { q: 'intermediate m06 10', where: 'key', printed: '27600000', value: (L) => L.ofonCurve().at(-1).Forecast },
   { q: 'intermediate m06 10', where: 'prompt', printed: '24949669', value: (L) => L.ofonCurve().at(-2).Forecast },

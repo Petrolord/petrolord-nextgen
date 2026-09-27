@@ -92,7 +92,7 @@
    "The CPI: OFON-1's is null before the start and the empty AFE's is 1, and the SPI simply follows the CPI in each report."
   ],
   "answer_index": 0,
-  "explanation": "One rule for an undefined ratio: SPI is null with spiStatus \"no-budget\" when the AFE has no budget, and \"no-planned-value\" when there is a budget and nothing planned yet. The empty AFE also reports CPI null with \"no-spend\".",
+  "explanation": "The status says why the schedule index is missing: \"no-budget\" when there is nothing to plan against at all, \"no-planned-value\" when a budget exists but the window has not yet planned any of it.",
   "why": "graded: the empty AFE returns SPI null (no-budget) and CPI null (no-spend); the premise SPI 1.000000 was false."
  },
  {
@@ -492,7 +492,7 @@
    "0, since no money has yet bought any of the work, so the earned value is set against a spend of nothing."
   ],
   "answer_index": 1,
-  "explanation": "One rule for an undefined ratio: CPI is null with cpiStatus \"no-spend\" when nothing has been spent. The same case reports SPI 0.275000 (ok), a real ratio of earned value to planned value.",
+  "explanation": "With actuals of 0 there is nothing to divide by, so the engine prints no CPI and names the reason; beside it the case still reports SPI 0.275000 with status ok, earned value over planned value.",
   "why": "graded: CPI is null (no-spend) with nothing spent; the case is renamed."
  },
  {
@@ -548,7 +548,7 @@
   "scope": "module",
   "module_key": "m04-the-as-of-date",
   "ord": 3,
-  "prompt": "OFON-1's window opens on 2027-02-01. What SPI does the engine report as of 2027-02-01 itself?",
+  "prompt": "OFON-1's window opens on 2027-02-01. Which schedule reading does a report dated that very day carry?",
   "options": [
    "1.000000, because on the start day the job is exactly on schedule.",
    "Infinity, because earned value of 15231500 is divided by a planned value of 0 and the division is carried out as written.",
@@ -780,7 +780,7 @@
    "The rule reads 900000 as a saving to be booked against the budget, which is why the variance on that line becomes positive at once."
   ],
   "answer_index": 2,
-  "explanation": "The 900000 entry carries forecastBelowCommitted with 40000; the same line with an entered forecast of 1 forecasts 1, flagged, and a forecast of 0 meant as a descope saves nothing on the report.",
+  "explanation": "Positive entries are trusted and marked when they undercut the money already out the door; a zero is no entry, so a descope typed as 0 saves nothing on the report.",
   "why": "fact: the entry is taken and flagged; finding id removed."
  },
  {
@@ -788,16 +788,16 @@
   "scope": "module",
   "module_key": "m06-the-professional-reading",
   "ord": 8,
-  "prompt": "The published weighted earned value case reports earned value 110.0000 and actuals 0.0000. What does the engine print for its CPI, and why?",
+  "prompt": "OFON-1 is re-entered with every actual set to 0 and its progress unchanged, so earned value stays at 15231500. What does the report print for CPI?",
   "options": [
-   "1.000000, on budget, since the work earned was delivered for nothing and an index of 1 is the cost-neutral reading.",
-   "0.000000, since no money has yet been turned into any of the work that was earned.",
-   "As the ratio of earned value to planned value, since with no spend the engine substitutes the schedule index for the cost index on that AFE.",
-   "Null, with cpiStatus \"no-spend\": nothing has been spent, so there is no cost efficiency to report."
+   "1.000000, on budget, since work earned for nothing is read as the cost-neutral index the engine falls back to.",
+   "Infinity, since 15231500 over a spend of 0 has no finite value and the engine prints the division as it stands.",
+   "The SPI in its place, since with no spend the engine substitutes the schedule index for the cost index on that AFE.",
+   "No ratio: CPI is null with cpiStatus \"no-spend\", and the CPI tile reads N/A with \"Nothing spent yet, so no cost efficiency\"."
   ],
   "answer_index": 3,
-  "explanation": "One rule for an undefined ratio: CPI is null with cpiStatus \"no-spend\" when nothing has been spent, and the CPI tile reads \"N/A\" with \"Nothing spent yet, so no cost efficiency\".",
-  "why": "graded: CPI is null (no-spend) with nothing spent; the premise CPI 1.000000 was false."
+  "explanation": "Value earned with nothing spent has no cost efficiency to report, so the engine returns null and names the reason; earned value itself is unchanged by the actuals.",
+  "why": "graded: CPI is null (no-spend) with nothing spent; the premise CPI 1.000000 was false. Rebuilt on OFON-1 with every actual at 0 to stay clear of the Module 3 item on the same case."
  },
  {
   "tier": "intermediate",
