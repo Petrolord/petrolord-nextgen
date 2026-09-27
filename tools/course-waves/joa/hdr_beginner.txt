@@ -1,0 +1,20 @@
+-- ============================================================================
+-- EC9 ASSOCIATE DEEP SEED: Joint Ventures, Operating Agreements & Cost
+-- Recovery, beginner tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/joa/beginner.
+--
+-- What this tier owns: INTERESTS AND THE JOINT ACCOUNT. What a joint operating
+-- agreement fixes; the texts with their editions and read dates; participating
+-- interests and the partner split; paying and beneficial interests under a
+-- carry; monthly cash calls, actuals, the difference, the threshold and
+-- billing in arrears; budget control against the item and budget tolerances;
+-- operator overhead on a marginal scale with exclusions.
+--
+-- AN ENGINE COURSE. There is no Suite app: the practicals run in the course's
+-- own account calculator. The capstone grades six values of this tier, each
+-- identical under every reading the engine states.
+-- ============================================================================

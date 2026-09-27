@@ -1,0 +1,370 @@
+{
+ "dataset": "OKWELLE (synthetic)",
+ "label": "OKWELLE, the Okwelle gas-condensate joint venture (synthetic)",
+ "carry": {
+  "parties": [
+   {
+    "id": "OKO",
+    "name": "Okwelle Operating (synthetic), operator",
+    "participatingPct": 35
+   },
+   {
+    "id": "PRA",
+    "name": "Partner Ranu A (synthetic)",
+    "participatingPct": 27.5
+   },
+   {
+    "id": "PRB",
+    "name": "Partner Ranu B (synthetic)",
+    "participatingPct": 22.5
+   },
+   {
+    "id": "NCP",
+    "name": "State participant (synthetic)",
+    "participatingPct": 15
+   }
+  ],
+  "carries": [
+   {
+    "carried": "NCP",
+    "carriedPct": 100,
+    "carriers": "pro-rata"
+   }
+  ],
+  "carried": "NCP",
+  "basis": "contract",
+  "uplift": {
+   "type": "compound",
+   "ratePctPerYear": 7.5
+  },
+  "recoverFromPct": 60,
+  "years": [
+   {
+    "year": 2028,
+    "cost": 96500000.4,
+    "entitlement": 0
+   },
+   {
+    "year": 2029,
+    "cost": 71250000,
+    "entitlement": 0
+   },
+   {
+    "year": 2030,
+    "cost": 18400000,
+    "entitlement": 88400000
+   },
+   {
+    "year": 2031,
+    "cost": 0,
+    "entitlement": 102750000.4
+   },
+   {
+    "year": 2032,
+    "cost": 0,
+    "entitlement": 97300000
+   },
+   {
+    "year": 2033,
+    "cost": 0,
+    "entitlement": 90150000.25
+   },
+   {
+    "year": 2034,
+    "cost": 0,
+    "entitlement": 83600000
+   },
+   {
+    "year": 2035,
+    "cost": 0,
+    "entitlement": 77250000
+   }
+  ]
+ },
+ "cashCalls": {
+  "parties": [
+   {
+    "id": "OKO",
+    "name": "Okwelle Operating (synthetic), operator",
+    "participatingPct": 35
+   },
+   {
+    "id": "PRA",
+    "name": "Partner Ranu A (synthetic)",
+    "participatingPct": 27.5
+   },
+   {
+    "id": "PRB",
+    "name": "Partner Ranu B (synthetic)",
+    "participatingPct": 22.5
+   },
+   {
+    "id": "NCP",
+    "name": "State participant (synthetic)",
+    "participatingPct": 15
+   }
+  ],
+  "carries": [
+   {
+    "carried": "NCP",
+    "carriedPct": 100,
+    "carriers": "pro-rata"
+   }
+  ],
+  "reconciliationLagMonths": 2,
+  "negativeCall": "carry",
+  "noCallBelow": 1000000,
+  "months": [
+   {
+    "month": "2030-01",
+    "forecast": 6200000,
+    "actual": 5710250.5
+   },
+   {
+    "month": "2030-02",
+    "forecast": 8450000,
+    "actual": 8912400.25
+   },
+   {
+    "month": "2030-03",
+    "forecast": 11300000,
+    "actual": 9150000
+   },
+   {
+    "month": "2030-04",
+    "forecast": 850000,
+    "actual": 910500.75
+   },
+   {
+    "month": "2030-05",
+    "forecast": 1250000,
+    "actual": 1250000
+   },
+   {
+    "month": "2030-06",
+    "forecast": 14650000,
+    "actual": 14120750.5
+   },
+   {
+    "month": "2030-07",
+    "forecast": 9800000,
+    "actual": 10235000.25
+   },
+   {
+    "month": "2030-08",
+    "forecast": 5400000,
+    "actual": 5400000
+   },
+   {
+    "month": "2030-09",
+    "forecast": 7300000,
+    "actual": 7015500.5
+   }
+  ]
+ },
+ "backIn": {
+  "parties": [
+   {
+    "id": "OKO",
+    "name": "Okwelle Operating (synthetic), operator",
+    "participatingPct": 35
+   },
+   {
+    "id": "PRA",
+    "name": "Partner Ranu A (synthetic)",
+    "participatingPct": 27.5
+   },
+   {
+    "id": "PRB",
+    "name": "Partner Ranu B (synthetic)",
+    "participatingPct": 22.5
+   },
+   {
+    "id": "NCP",
+    "name": "State participant (synthetic)",
+    "participatingPct": 15
+   }
+  ],
+  "backInParty": "NCP",
+  "targetPct": 37.5,
+  "basis": "pia-s85-4",
+  "refundForm": "from-future-entitlement",
+  "recoverFromPct": 55,
+  "costs": [
+   {
+    "item": "exploration wells Okwelle-1 and Okwelle-2",
+    "amount": 118400000,
+    "kind": "exploration"
+   },
+   {
+    "item": "development wells and the gas plant to date",
+    "amount": 386750000.5,
+    "kind": "development"
+   },
+   {
+    "item": "early production costs",
+    "amount": 24300000,
+    "kind": "production"
+   },
+   {
+    "item": "signature bonus",
+    "amount": 12000000,
+    "kind": "bonus"
+   },
+   {
+    "item": "interest on the carry finance",
+    "amount": 6500000,
+    "kind": "interest"
+   },
+   {
+    "item": "operator markup on shared services",
+    "amount": 1850000,
+    "kind": "markup"
+   }
+  ],
+  "years": [
+   {
+    "year": 2032,
+    "entitlement": 97300000
+   },
+   {
+    "year": 2033,
+    "entitlement": 90150000.25
+   },
+   {
+    "year": 2034,
+    "entitlement": 83600000
+   },
+   {
+    "year": 2035,
+    "entitlement": 77250000
+   },
+   {
+    "year": 2036,
+    "entitlement": 71400000
+   },
+   {
+    "year": 2037,
+    "entitlement": 65900000
+   }
+  ]
+ },
+ "default": {
+  "parties": [
+   {
+    "id": "OKO",
+    "name": "Okwelle Operating (synthetic), operator",
+    "participatingPct": 35
+   },
+   {
+    "id": "PRA",
+    "name": "Partner Ranu A (synthetic)",
+    "participatingPct": 27.5
+   },
+   {
+    "id": "PRB",
+    "name": "Partner Ranu B (synthetic)",
+    "participatingPct": 22.5
+   },
+   {
+    "id": "NCP",
+    "name": "State participant (synthetic)",
+    "participatingPct": 15
+   }
+  ],
+  "callTotal": 14650000,
+  "dueDate": "2030-06-01",
+  "asOf": "2030-09-30",
+  "defaulters": [
+   {
+    "id": "PRA",
+    "paid": 1250000.5,
+    "curedOn": "2030-08-19"
+   }
+  ],
+  "interest": {
+   "annualRatePct": 9.5,
+   "dayBasis": 365,
+   "interestMethod": "monthly-compound",
+   "graceHours": 0
+  },
+  "suspension": {
+   "after": 5,
+   "unit": "working-days",
+   "from": "2030-06-01"
+  },
+  "forfeiture": {
+   "after": 90,
+   "unit": "calendar-days",
+   "from": "2030-06-08"
+  }
+ },
+ "psc": {
+  "royaltyPct": 10,
+  "costOilLimitPct": 55,
+  "costOilLimitBase": "gross",
+  "contractorProfitSharePct": 45,
+  "taxRatePct": 30,
+  "openingCostPool": 186000000,
+  "parties": [
+   {
+    "id": "OKO",
+    "name": "Okwelle Operating (synthetic), operator",
+    "participatingPct": 35
+   },
+   {
+    "id": "PRA",
+    "name": "Partner Ranu A (synthetic)",
+    "participatingPct": 27.5
+   },
+   {
+    "id": "PRB",
+    "name": "Partner Ranu B (synthetic)",
+    "participatingPct": 22.5
+   },
+   {
+    "id": "NCP",
+    "name": "State participant (synthetic)",
+    "participatingPct": 15
+   }
+  ],
+  "years": [
+   {
+    "year": 2030,
+    "grossRevenue": 142500000,
+    "capex": 64000000,
+    "opex": 11200000
+   },
+   {
+    "year": 2031,
+    "grossRevenue": 168300000.4,
+    "capex": 22500000,
+    "opex": 12400000
+   },
+   {
+    "year": 2032,
+    "grossRevenue": 159750000.4,
+    "capex": 8000000,
+    "opex": 13100000.25
+   },
+   {
+    "year": 2033,
+    "grossRevenue": 147200000,
+    "capex": 0,
+    "opex": 13600000
+   },
+   {
+    "year": 2034,
+    "grossRevenue": 133850000.5,
+    "capex": 0,
+    "opex": 14050000
+   },
+   {
+    "year": 2035,
+    "grossRevenue": 121400000,
+    "capex": 0,
+    "opex": 14500000
+   }
+  ]
+ }
+}

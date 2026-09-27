@@ -1,0 +1,282 @@
+{
+ "dataset": "ABIAMA (synthetic)",
+ "label": "ABIAMA, the Abiama deepwater joint venture (synthetic)",
+ "soleRisk": {
+  "parties": [
+   {
+    "id": "ABO",
+    "name": "Abiama Operating (synthetic), operator",
+    "participatingPct": 45
+   },
+   {
+    "id": "SPA",
+    "name": "Sepal Offshore A (synthetic)",
+    "participatingPct": 25
+   },
+   {
+    "id": "SPB",
+    "name": "Sepal Offshore B (synthetic)",
+    "participatingPct": 17.5
+   },
+   {
+    "id": "SNC",
+    "name": "State participant (synthetic)",
+    "participatingPct": 12.5
+   }
+  ],
+  "consenting": [
+   "ABO",
+   "SPA",
+   "SNC"
+  ],
+  "operation": {
+   "name": "Abiama-3 appraisal sidetrack",
+   "cost": 26750000.4
+  },
+  "premiumMultiplePct": 300,
+  "mode": "recover-from-production",
+  "years": [
+   {
+    "year": 2032,
+    "grossValue": 21400000,
+    "deductions": 23150000
+   },
+   {
+    "year": 2033,
+    "grossValue": 38650000.5,
+    "deductions": 12400000
+   },
+   {
+    "year": 2034,
+    "grossValue": 35200000,
+    "deductions": 11850000.25
+   },
+   {
+    "year": 2035,
+    "grossValue": 31900000,
+    "deductions": 11300000
+   },
+   {
+    "year": 2036,
+    "grossValue": 28750000,
+    "deductions": 10800000
+   },
+   {
+    "year": 2037,
+    "grossValue": 25600000.5,
+    "deductions": 10250000
+   }
+  ]
+ },
+ "buyIn": {
+  "parties": [
+   {
+    "id": "ABO",
+    "name": "Abiama Operating (synthetic), operator",
+    "participatingPct": 45
+   },
+   {
+    "id": "SPA",
+    "name": "Sepal Offshore A (synthetic)",
+    "participatingPct": 25
+   },
+   {
+    "id": "SPB",
+    "name": "Sepal Offshore B (synthetic)",
+    "participatingPct": 17.5
+   },
+   {
+    "id": "SNC",
+    "name": "State participant (synthetic)",
+    "participatingPct": 12.5
+   }
+  ],
+  "consenting": [
+   "ABO",
+   "SPA",
+   "SPB"
+  ],
+  "operation": {
+   "name": "Abiama-4 exploration well",
+   "cost": 31400000.25
+  },
+  "premiumMultiplePct": 750,
+  "mode": "buy-in"
+ },
+ "carry": {
+  "parties": [
+   {
+    "id": "ABO",
+    "name": "Abiama Operating (synthetic), operator",
+    "participatingPct": 45
+   },
+   {
+    "id": "SPA",
+    "name": "Sepal Offshore A (synthetic)",
+    "participatingPct": 25
+   },
+   {
+    "id": "SPB",
+    "name": "Sepal Offshore B (synthetic)",
+    "participatingPct": 17.5
+   },
+   {
+    "id": "SNC",
+    "name": "State participant (synthetic)",
+    "participatingPct": 12.5
+   }
+  ],
+  "carries": [
+   {
+    "carried": "SNC",
+    "carriedPct": 100,
+    "carriers": "pro-rata"
+   }
+  ],
+  "carried": "SNC",
+  "basis": "contract",
+  "uplift": {
+   "type": "multiple",
+   "multiplePct": 250
+  },
+  "recoverFromPct": 100,
+  "discountRate": 0.1,
+  "baseYear": 2031,
+  "years": [
+   {
+    "year": 2031,
+    "cost": 142600000,
+    "entitlement": 0
+   },
+   {
+    "year": 2032,
+    "cost": 88350000.5,
+    "entitlement": 0
+   },
+   {
+    "year": 2033,
+    "cost": 21000000,
+    "entitlement": 186400000
+   },
+   {
+    "year": 2034,
+    "cost": 0,
+    "entitlement": 214750000.5
+   },
+   {
+    "year": 2035,
+    "cost": 0,
+    "entitlement": 198300000
+   },
+   {
+    "year": 2036,
+    "cost": 0,
+    "entitlement": 176900000.25
+   },
+   {
+    "year": 2037,
+    "cost": 0,
+    "entitlement": 158200000
+   },
+   {
+    "year": 2038,
+    "cost": 0,
+    "entitlement": 141650000
+   }
+  ]
+ },
+ "psc": {
+  "royaltyPct": 7.5,
+  "costOilLimitPct": 62.5,
+  "costOilLimitBase": "gross",
+  "contractorProfitSharePct": 50,
+  "taxRatePct": 35,
+  "openingCostPool": 312000000,
+  "years": [
+   {
+    "year": 2033,
+    "grossRevenue": 196400000,
+    "capex": 58000000,
+    "opex": 18200000,
+    "contractorProfitSharePct": 50
+   },
+   {
+    "year": 2034,
+    "grossRevenue": 231750000.5,
+    "capex": 21000000,
+    "opex": 19400000,
+    "contractorProfitSharePct": 45
+   },
+   {
+    "year": 2035,
+    "grossRevenue": 244100000.75,
+    "capex": 6500000,
+    "opex": 20150000.75,
+    "contractorProfitSharePct": 40
+   },
+   {
+    "year": 2036,
+    "grossRevenue": 226300000,
+    "capex": 0,
+    "opex": 20800000,
+    "contractorProfitSharePct": 40
+   },
+   {
+    "year": 2037,
+    "grossRevenue": 205650000.5,
+    "capex": 0,
+    "opex": 21300000,
+    "contractorProfitSharePct": 45
+   }
+  ]
+ },
+ "default": {
+  "parties": [
+   {
+    "id": "ABO",
+    "name": "Abiama Operating (synthetic), operator",
+    "participatingPct": 45
+   },
+   {
+    "id": "SPA",
+    "name": "Sepal Offshore A (synthetic)",
+    "participatingPct": 25
+   },
+   {
+    "id": "SPB",
+    "name": "Sepal Offshore B (synthetic)",
+    "participatingPct": 17.5
+   },
+   {
+    "id": "SNC",
+    "name": "State participant (synthetic)",
+    "participatingPct": 12.5
+   }
+  ],
+  "callTotal": 22800000,
+  "dueDate": "2034-02-01",
+  "asOf": "2034-07-15",
+  "defaulters": [
+   {
+    "id": "SPB",
+    "paid": 1500000.5
+   }
+  ],
+  "interest": {
+   "annualRatePct": 10.25,
+   "dayBasis": 360,
+   "interestMethod": "simple",
+   "graceHours": 0
+  },
+  "suspension": {
+   "after": 5,
+   "unit": "working-days",
+   "from": "2034-02-01"
+  },
+  "forfeiture": {
+   "after": 3,
+   "unit": "months",
+   "from": "2034-02-12"
+  }
+ }
+}

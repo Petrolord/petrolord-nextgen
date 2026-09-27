@@ -1,0 +1,362 @@
+{
+ "app_slug": "joa",
+ "tier": "intermediate",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-the-cash-call-ledger",
+   "title": "The Cash Call Ledger",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-reconciliation-carried-to-a-later-call",
+     "title": "Reconciliation carried to a later call",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "joa-account-calculator",
+      "joa-recovery-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-reconciliation-lag",
+     "title": "The reconciliation lag",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "joa-recovery-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-a-negative-call-refunded-or-carried",
+     "title": "A negative call, refunded or carried",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "joa-recovery-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-balance-with-the-operator",
+     "title": "The balance with the operator",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "joa-recovery-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-carries-with-uplift-and-caps",
+   "title": "Carries with Uplift and Caps",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-a-carry-and-its-recovery",
+     "title": "A carry and its recovery",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "joa-recovery-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-recovery-from-the-carried-share",
+     "title": "Recovery from the carried party's share",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "joa-recovery-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-compound-uplift-on-the-opening-balance",
+     "title": "Compound uplift on the opening balance",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "joa-recovery-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-a-multiple-uplift",
+     "title": "A multiple uplift",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "joa-recovery-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-a-cap-and-the-write-off",
+     "title": "A cap and the write-off",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "joa-recovery-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-back-in-under-the-act",
+   "title": "Back-In under the Act",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-the-carried-interest-provision",
+     "title": "The carried interest provision of the Act",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "joa-recovery-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-interests-after-a-back-in",
+     "title": "Interests after a back-in",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "joa-recovery-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-refundable-costs-and-exclusions",
+     "title": "Refundable costs and the exclusions",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "joa-recovery-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-refund-from-future-entitlement",
+     "title": "The refund from future entitlement",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "joa-recovery-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-default-cover-and-interest",
+   "title": "Default Cover and Interest",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-a-default-on-a-cash-call",
+     "title": "A default on a cash call",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "joa-recovery-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-pro-rata-cover",
+     "title": "Pro rata cover by the non-defaulting parties",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "joa-recovery-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-simple-default-interest",
+     "title": "Simple default interest on a day basis",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "joa-recovery-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-monthly-compounding-and-grace",
+     "title": "Monthly compounding and the grace",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "joa-recovery-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-suspension-and-forfeiture",
+     "title": "Suspension and forfeiture triggers",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "joa-recovery-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-psc-cost-recovery",
+   "title": "PSC Cost Recovery",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-cost-oil-profit-oil-and-the-order",
+     "title": "Cost oil, profit oil and the order",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "joa-recovery-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-cost-oil-limit-and-its-base",
+     "title": "The cost oil limit and its base",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "joa-recovery-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-pool-carried-forward",
+     "title": "The cost pool carried forward",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "joa-recovery-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-splitting-the-contractor-entitlement",
+     "title": "Splitting the contractor entitlement between partners",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "joa-recovery-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-the-published-psc-checks",
+   "title": "The Published PSC Checks",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-the-world-bank-two-barrel-example",
+     "title": "The World Bank two-barrel example",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "joa-recovery-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-imf-one-barrel-figure",
+     "title": "The IMF one-barrel figure",
+     "order": 2,
+     "est_minutes": 12,
+     "panels": [
+      "joa-recovery-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-imf-schedule-year-by-year",
+     "title": "The IMF schedule, year by year",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "joa-recovery-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "joa-recovery-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

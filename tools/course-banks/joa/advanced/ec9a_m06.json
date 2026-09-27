@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "carry-ekene-compound states a compound uplift of 8 percent a year on NOC's carried cost, recovered from 50 percent of its share. The first carried cost, 16400000.000000, arrives in 2027. What uplift does the engine add in 2027 and in 2028?",
+  "options": [
+   "1312000.000000 in 2027, since the uplift runs from the day the cost is carried",
+   "1312000.000000 in 2027 and 2376960.000000 in 2028, the cost compounding twice",
+   "0.000000 in both years, as uplift waits for the first year with entitlement",
+   "0.000000 in 2027 and 1312000.000000 in 2028, 8 percent of the opening balance"
+  ],
+  "answer": 3,
+  "explanation": "The engine's convention: the uplift accrues on the opening balance, and a year's new carried cost earns none in its own year. 2027 opens at 0.000000, so its uplift is 0.000000; 2028 opens at 16400000.000000 and adds 1312000.000000. 2376960.000000 is the uplift of 2029, on the 2029 opening of 29712000.000000."
+ },
+ {
+  "prompt": "The engine applies both stated readings and conventions. What separates the two?",
+  "options": [
+   "A reading is a rule the law fixes and the engine applies; a convention is a figure the engine holds when a call is silent on a term",
+   "A reading is graded in the capstone and a convention is not; otherwise the engine treats the two in the same way",
+   "A reading takes one side where a public text can be read two ways; a convention is the engine's choice where no text fixes one",
+   "A reading comes from a licensed model agreement and a convention from a public text quoted with its citation"
+  ],
+  "answer": 2,
+  "explanation": "The course defines a reading as a place where a public text can be read two ways and the engine takes one, and a convention as the engine's stated choice where no text fixes one. Neither is the law, and neither supplies a missing contract term; no graded figure depends on a reading, and no licensed text is quoted."
+ },
+ {
+  "prompt": "On backin-ekene-pia NOC backs in from 20 to 40 percent under basis \"pia-s85-4\". What participating interest does EKO keep, under the engine's back-in convention?",
+  "options": [
+   "30.000000, its 40.000000 times (100 - 40) / (100 - 20)",
+   "20.000000, the operator giving up all of NOC's 20 new points alone",
+   "18.750000, the share the convention leaves each of the partners",
+   "40.000000, as a back-in refunds costs and leaves interests alone"
+  ],
+  "answer": 0,
+  "explanation": "The engine's convention reads: a back-in: the others keep (100 - target) / (100 - current) of their interests and receive the refund in proportion to the interest given up. EKO keeps 60 / 80 of 40.000000, which is 30.000000, and gives up 10.000000; 18.750000 is PA's interest after; the operator carries no special burden."
+ },
+ {
+  "prompt": "A partner report quotes EKO's NPV on carry-ekene-compound as 95024921.509253. What must it name beside that figure?",
+  "options": [
+   "The uplift of 8 percent, which the engine uses as its discount rate for a carry",
+   "The discount rate, 0.100000, and the base year, 2027, of the canonical npv",
+   "Nothing further, since an NPV is a property of the carry and its ledger alone",
+   "The rate the engine holds for every NPV, with the base year set to the payout"
+  ],
+  "answer": 1,
+  "explanation": "Every NPV the engine prints is the canonical npv of cashflow.ts, year-end flows discounted to the stated base year at the stated rate, and the partner report names the discount rate and base year beside every NPV. The uplift is a carry term with no part in discounting, and the engine holds no rate of its own."
+ },
+ {
+  "prompt": "The engine's reason for 2032 on carry-ekene-compound reads \"10400000 recovered of 17129407.98 due\", and the ledger's due field for 2032 is 17129407.979520. What convention explains the two?",
+  "options": [
+   "The reason is the engine's answer and the field is a working figure that a report should not quote",
+   "The field is rounded to six decimals from the reason, which carries the engine's exact figure in full",
+   "Two separate calculations whose results agree to the cent and differ only after that point, each printed in its own place",
+   "Money in a reason is rounded to the cent, half away from zero; every numeric field keeps full precision"
+  ],
+  "answer": 3,
+  "explanation": "The conventions table reads: money in a reason is rounded to the cent, half away from zero, trailing zeros dropped; every numeric field keeps full precision. The course quotes the field at six decimals, 17129407.979520, and the reason's 17129407.98 is its display to the cent from the same figure."
+ },
+ {
+  "prompt": "A learner pastes a cash call ledger of 601 months into a cashCalls call. What does the engine answer?",
+  "options": [
+   "It computes the first 600 months and drops the last one with a note",
+   "A refusal naming `months`, as 601 entries pass the cap of 600",
+   "It computes all 601 months, since the cap is a guide for the panels",
+   "A refusal naming months[600] alone, the one entry past the cap"
+  ],
+  "answer": 1,
+  "explanation": "`DEFAULTS.MAX_MONTHS` is 600, the most months in one cash call ledger, and a call over it is refused in the engine's own words: months must have at most 600 entries; got 601. The engine never truncates a stated input, and the cap binds every call, a panel's included."
+ },
+ {
+  "prompt": "`DEFAULTS.MAX_PARTIES` and `DEFAULTS.MAX_BANDS` are both 20. What does each of the two caps count?",
+  "options": [
+   "The parties of a licence over its whole life; the bands of every category of a call taken together",
+   "The consenting parties of a sole risk call only; the bands that come before the abovePct rate",
+   "The parties, carries and defaulters of one call; the bands of one overhead scale",
+   "The months of a cash call ledger in years; the budget items of one call counted in tens"
+  ],
+  "answer": 2,
+  "explanation": "The constants table reads MAX_PARTIES 20, the most parties (and carries, and defaulters) one call accepts, and MAX_BANDS 20, the most bands in one overhead scale; a scale of 21 bands is refused with scale.operating.bands must have at most 20 entries; got 21. Months and items have their own caps, 600 and 200."
+ },
+ {
+  "prompt": "carry-ekene-short-horizon runs the Ekene carry with its 8 percent compound uplift to 2031 only, and 15860562.944000 is still outstanding at the end. What does the engine return?",
+  "options": [
+   "A result: the whole ledger, with the reason 2031: 15860562.94 of the carry is not recovered by the last year",
+   "A refusal naming `years`, since a carry recovery must run until the whole carry is recovered",
+   "A result that writes the 15860562.944000 off in 2031, as a stated cap would have done",
+   "A refusal naming `recoverFromPct`, since half of NOC's share cannot pay off the carry"
+  ],
+  "answer": 0,
+  "explanation": "A carry not recovered by the last year is a result with a reason, which is no refusal. The engine returns the ledger to 2031 with outstanding 15860562.944000 and written off 0.000000; a write-off happens only under a stated cap, as on carry-ekene-capped, and a recovery share of 50 is a valid stated term."
+ },
+ {
+  "prompt": "How does every refusal message of the engine begin, and what does an unknown key's message add?",
+  "options": [
+   "It starts with the field it refuses; an unknown key's message adds the key's path and the full list of accepted keys",
+   "It starts with the function's name; an unknown key's message adds the nearest accepted key as a spelling suggestion to try next",
+   "It starts with a numbered refusal code from the engine's table; an unknown key's message names the key and nothing further",
+   "It starts with the value it was given; an unknown key's message adds the rule the key would have set"
+  ],
+  "answer": 0,
+  "explanation": "The refusals table says a message starts with the name of the field it refuses and states the exact condition, and that an unknown key is refused wherever it sits with its path and the full list of accepted keys, for example uplift.rate is not an accepted key; the accepted keys of uplift are type, ratePctPerYear, multiplePct."
+ },
+ {
+  "prompt": "A partner report quotes the Ekene March cover: EKO 1230769.230769 and PA 769230.769231 of PB's unpaid 2000000.000000, with NOC carried in full. What must it say about the figures' footing?",
+  "options": [
+   "That the cover follows the law of Norway JOA Art. 9.1 exactly, so no reading need be named beside it",
+   "That the cover is by participating interest, since the Norwegian text uses those words",
+   "That the cover is by paying interest among the non-defaulting parties, the engine's stated reading",
+   "That NOC's part of the cover is deferred until its carry is recovered from production"
+  ],
+  "answer": 2,
+  "explanation": "The partner report names each reading the figures rest on, and the conventions table marks the cover, by the paying interests of the non-defaulting parties, as a stated reading. A reading is no law; a reading by participating interest would bring the carried NOC into the cover, which the engine does not do, and nothing is deferred."
+ },
+ {
+  "prompt": "What makes every graded number in this course exactly reproducible?",
+  "options": [
+   "Each is rounded to the cent before grading, so any machine differences vanish in the rounding step",
+   "Each is the mean of a seeded Monte Carlo run, and the seed is printed on the capstone card for the learner",
+   "Each is checked against a published worked example, and the printed figure is the answer",
+   "Each is an engine return on fixed stated inputs, and nothing in the engine samples or searches"
+  ],
+  "answer": 3,
+  "explanation": "The course says every graded number is a return value of the engine on fixed inputs; nothing samples or searches, so the same terms give the same number on any machine and there is exactly one right answer. Figures are quoted to six decimals, the engine carries no Monte Carlo code of its own, and a printed figure is the text's."
+ },
+ {
+  "prompt": "How far may the participating interests of a call sum from 100 before `participatingInterests` refuses them?",
+  "options": [
+   "0.000001, the six-decimal precision at which every interest is printed",
+   "1e-9, the engine convention `DEFAULTS.SUM_TOLERANCE`; a sum of 90 is refused",
+   "0.5, the half percentage point a rounded table of interests can carry and still close",
+   "10, the Norwegian item tolerance, applied to the sum of the interests"
+  ],
+  "answer": 1,
+  "explanation": "`DEFAULTS.SUM_TOLERANCE` is 1e-9, an engine convention for how far participating interests or carrier shares may sum from 100, and the refusal reads parties must have participatingPct summing to 100; got a sum of 90. Six decimals is the course's print precision, which sets no tolerance, and the 10 percent is a budget term of another text."
+ },
+ {
+  "prompt": "The Ekene March default (PB's unpaid 2000000.000000, 8.25 percent simple, no grace, 45 days) gives 20625.000000 on the stated 360-day basis. A probe states a 365-day basis for the same default. What does the engine return, and why does a report name the basis?",
+  "options": [
+   "20625.000000, since the engine converts every stated basis to 360 days",
+   "20342.465753, since the day basis is a stated term that moves the figure",
+   "20210.781250, since a 365-day year compounds the interest monthly",
+   "A refusal, since the Norwegian text prints no 365-day basis at all"
+  ],
+  "answer": 1,
+  "explanation": "The engine's reason reads interest 2000000 x 8.25% x 45 days / 365 = 20342.47, the field 20342.465753 against 20625.000000 on 360 days. The day basis must be 365 or 360 and is stated; 20210.781250 is the monthly compounding case, a different stated method."
+ },
+ {
+  "prompt": "PB's premium on the Ekene-4 sidetrack is 10800000.000000 at a stated 400.000000 percent. What does that figure say about what PB will pay?",
+  "options": [
+   "A promise that PB will pay it in cash by 2035, the year in which its interest in the sidetrack reverts",
+   "That PB will pay it only if the sidetrack's net value covers it by 2036, the last year the call states",
+   "That PB will pay it at once if the contract's mode is left unstated",
+   "Nothing as a forecast: it is a stated multiple of a stated cost, quoted with its terms"
+  ],
+  "answer": 3,
+  "explanation": "The course says a premium is a stated multiple of a stated cost and none of these figures is a forecast of what a partner will pay, which is why each is quoted with its terms. Under premium recovery PB pays nothing out of pocket; the ledger takes its share of net value; and a call with no mode is refused."
+ },
+ {
+  "prompt": "A report section on the Ekene-4 sidetrack cites Norway JOA Art. 18.6. What must travel with the citation, under the course's rule for sources?",
+  "options": [
+   "The text's edition, an unofficial English translation of the 2007 text, and the date it was read, 2026-09-26",
+   "The matching clause of the licensed model agreement, set beside it so a partner can compare the two",
+   "The live regjeringen.no address, since the Wayback capture of 26 May 2024 is only a backup",
+   "Nothing more, since the engine's basis.source already names the article and its edition"
+  ],
+  "answer": 0,
+  "explanation": "The partner report names every source applied with its edition and the date it was read; the course reads the agreement from the Wayback capture because the live copy answered HTTP 403. Licensed texts are never quoted, and a report cites the source itself with its edition and date."
+ }
+]

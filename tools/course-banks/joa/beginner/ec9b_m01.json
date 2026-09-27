@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "Which of these texts does the course quote word for word, with its citation?",
+  "options": [
+   "The AIPN model joint operating agreement, whose clauses the industry adapts more than any other form.",
+   "The COPAS accounting procedures, for their overhead scale and the timing of each cash call.",
+   "The Norwegian joint operating agreement, from its unofficial English translation of the 2007 text.",
+   "The AAPL forms, for the duties of the operator and the consent rules of the non-operators."
+  ],
+  "answer": 2,
+  "explanation": "The Norwegian agreement is a public text, quoted with its citation from the Wayback Machine capture of 26 May 2024. The AIPN model joint operating agreement, the COPAS accounting procedures and the AAPL forms are licensed, so the course teaches their ideas by concept only and quotes none of them."
+ },
+ {
+  "prompt": "How does the course cite the Petroleum Industry Act 2021 (Act No. 6) when it names the Act's edition?",
+  "options": [
+   "Official Gazette No. 142, Vol. 108, 27 August 2021.",
+   "Official Gazette No. 108, Vol. 142, 27 August 2021, with the volume and number as the gazette prints them.",
+   "Official Gazette No. 142, Vol. 108, 27 February 2007, the date the Act's joint venture rules were first printed.",
+   "Act No. 6, cited from the Wayback Machine capture of 26 May 2024, because the gazette answered a bot check."
+  ],
+  "answer": 0,
+  "explanation": "The sources table gives the Act as Official Gazette No. 142, Vol. 108, 27 August 2021. The number and the volume are not interchangeable, so 108 and 142 swapped name a different gazette. 27 February 2007 is the date on the Norwegian agreement's PDF, and the Wayback capture of 26 May 2024 is how the course reads the Norwegian agreement, whose live copy answered the bot check."
+ },
+ {
+  "prompt": "On what date was each text in the course's sources table read?",
+  "options": [
+   "26 May 2024, the date of the Wayback Machine capture the Norwegian agreement is cited from.",
+   "27 August 2021, the date of the Act's gazette.",
+   "27 February 2007, the date printed on the Norwegian agreement, the oldest text in the table.",
+   "2026-09-26, the same date for every text in the table."
+  ],
+  "answer": 3,
+  "explanation": "Every text in the sources table was read on 2026-09-26, and the table prints that date against each one. 26 May 2024 is the date of the Norwegian agreement's archived capture, 27 August 2021 the date of the Act's gazette and 27 February 2007 the date on the Norwegian PDF: each is an edition date, and none is a date the course read a text."
+ },
+ {
+  "prompt": "Why does the course cite the Norwegian agreement from a Wayback Machine capture?",
+  "options": [
+   "The ministry withdrew the English translation in 2024, so the archived capture is the last copy.",
+   "The live regjeringen.no copy answered a bot check with HTTP 403 on the date it was read.",
+   "The capture holds the official Norwegian text, which the course then translates for itself.",
+   "The regjeringen.no copy is licensed, so only an archived copy may be quoted in a course."
+  ],
+  "answer": 1,
+  "explanation": "The sources table says the live regjeringen.no copy answered a bot check with HTTP 403 on 2026-09-26, so the text is cited from the capture of 26 May 2024. The text is an unofficial English translation, and the course translates nothing itself. It is a public text: the licensed texts are the AIPN, COPAS and AAPL forms."
+ },
+ {
+  "prompt": "What does the course say about a public worked schedule for a cash call reconciliation or for an overhead scale applied to figures?",
+  "options": [
+   "The Kenya Model PSC 2015 prints one, and the course copies its cash call figures.",
+   "The research found none, so those figures are the Norwegian clause arithmetic run by the engine.",
+   "World Bank Briefing Note 8 prints one for overhead, which the panel runs.",
+   "OpenOil prints one, and the course teaches it with the printed 11.75 corrected to the engine's figure."
+  ],
+  "answer": 1,
+  "explanation": "The validation record, quoted in the course, found no public text that prints a worked schedule for a cash call over/under reconciliation or an overhead scale applied to figures, so those figures are the stated clause arithmetic of the Norwegian agreement run by the engine. The Kenya model prints cash call clauses and no schedule, Briefing Note 8 prints a PSC illustration, and OpenOil's 11.75 belongs to a state participation example that is taught as a printed arithmetic error."
+ },
+ {
+  "prompt": "How does the fixture file of the Ekene joint venture describe itself, in its own words?",
+  "options": [
+   "Anonymised books of a Nigerian shallow water joint venture, with each partner's name removed.",
+   "A worked schedule published with the Norwegian agreement, restated in US$ for the course's use.",
+   "A regulator's model case for PIA s.85(4), with the four parties relabelled EKO, PA, PB and NOC.",
+   "SYNTHETIC teaching data for the Ekene field (ours). No real company, contract, budget, price or regulator decision."
+  ],
+  "answer": 3,
+  "explanation": "The fixture is labelled SYNTHETIC in the file, written by a stated script for this platform, and the course quotes that label verbatim. No real joint venture's books are used, no public text prints a worked schedule of this kind for the Norwegian agreement, and no regulator decision appears in the data."
+ },
+ {
+  "prompt": "Which participating interests and which carry does the Ekene fixture state?",
+  "options": [
+   "EKO 40.000000, PA 25.000000, PB 15.000000 and NOC 20.000000, with NOC carried 100 percent by pro rata carriers.",
+   "EKO 50.000000, PA 31.250000, PB 18.750000 and NOC 0.000000, with no carry stated anywhere in the file.",
+   "EKO 40.000000, PA 25.000000, PB 15.000000 and NOC 20.000000, with NOC carried half, in stated shares.",
+   "EKO 40.000000, PA 25.000000, PB 15.000000 and NOC 20.000000, with no carry, so each pays its own share."
+  ],
+  "answer": 0,
+  "explanation": "The fixture gives EKO 40.000000, PA 25.000000, PB 15.000000 and NOC 20.000000 as participating interests, and states NOC carried 100 percent with carriers pro rata. The set 50.000000, 31.250000, 18.750000 and 0.000000 is the paying interests the engine computes from that carry. A half carry in stated shares is a separate worked case, and the fixture does state a carry."
+ },
+ {
+  "prompt": "Which of these does the engine decline to compute?",
+  "options": [
+   "Each carrier's carry points under a stated carry.",
+   "The allowed overrun of a budget under its stated tolerance.",
+   "An index adjustment of an overhead scale's band limits.",
+   "Each party's forecast share of a month's cash call."
+  ],
+  "answer": 2,
+  "explanation": "The course lists what the engine does not compute: no compensation on an assignment, no cover by taking a defaulter's petroleum, no index adjustment of a scale, no expert determination and no sliding scale of profit shares. Carry points, the allowed overrun of a budget and each forecast share are all figures the engine returns, from participatingInterests, budgetControl and cashCalls."
+ },
+ {
+  "prompt": "What code does jointVenture.js take from elsewhere in the engines package?",
+  "options": [
+   "Its own npv and a Monte Carlo sampler, with calculatePartnerCosts imported from afe.js for splits.",
+   "None at all: every split, pool and discount is its own code.",
+   "applyPSC from cashflow.ts, with a partner split of its own kept in a helper beside the cash calls.",
+   "applyPSC and npv from cashflow.ts, and calculatePartnerCosts from afe.js."
+  ],
+  "answer": 3,
+  "explanation": "The engine's two imports are engines/economics/cashflow.ts, for applyPSC and npv, and engines/economics/afe.js, for calculatePartnerCosts. It carries no cost pool, NPV or Monte Carlo code of its own, nothing in it samples, and every split of a joint account amount goes through the canonical calculatePartnerCosts."
+ },
+ {
+  "prompt": "What does the engine hand back when it refuses an input?",
+  "options": [
+   "An object with error and field, whose message starts with the name of the field it refuses.",
+   "A result whose figures are all zero, with a reason naming the field the engine doubted.",
+   "The figures computed on the nearest accepted terms, with a warning printed in the basis.",
+   "An empty result and a code number, which the panel looks up in a table of messages."
+  ],
+  "answer": 0,
+  "explanation": "A refusal is an object with error and field: field names the input refused, and the message starts with that name and states the exact condition that failed, with the value it was given. A refusal returns no figures, so it hands back no zeros and no result on substitute terms, and the message is the engine's own words with no code to look up."
+ },
+ {
+  "prompt": "On the Ekene 2027 cash calls, April and May make no cash call. How does the engine report those two months?",
+  "options": [
+   "As a refusal naming noCallBelow, since the engine cannot compute a month that has no call.",
+   "As a refusal naming the forecast of April, since a forecast of 0 is refused as an input.",
+   "As a result, with a reason printed beside each month.",
+   "As a result with both months left out of the ledger, and with no reason printed for them."
+  ],
+  "answer": 2,
+  "explanation": "A result returned with a reason, such as a month with no cash call, is a result and no refusal. April's forecast of 0 and May's below 500000 are both below the stated threshold, and each month's reason reads that there is no cash call and that the actual is billed in arrears in the next month. The months stay in the ledger, and a forecast of 0 is accepted."
+ },
+ {
+  "prompt": "A box states the carry under the key carry, singular. What does participatingInterests do with it?",
+  "options": [
+   "It reads carry as carries, since the engine accepts the singular form of every plural key it knows.",
+   "It refuses the key, naming it and listing the keys it accepts at the top level: parties, carries.",
+   "It drops carry without a word and returns the paying interests as though no carry had been stated.",
+   "It refuses the call for want of carries, naming carries as a required term with no default."
+  ],
+  "answer": 1,
+  "explanation": "Every call refuses an input key the function does not read, naming the key, its path and the accepted keys. In the engine's own words: carry is not an accepted key; the accepted keys at the top level are parties, carries. A misspelt key is refused, so a term is never dropped silently. The refusal names carry: carries itself is optional, and the worked case with no carry states none."
+ },
+ {
+  "prompt": "Why does every graded figure in this course have exactly one right answer?",
+  "options": [
+   "Each figure is rounded to whole dollars by the grader, so any difference between machines disappears.",
+   "Nothing in the engine samples or searches, so the same terms give the same number on any machine.",
+   "The engine seeds its Monte Carlo sampler with a fixed seed that the capstone card states for each run.",
+   "The capstone accepts the digits a reason prints, whichever of the two precisions the panel shows."
+  ],
+  "answer": 1,
+  "explanation": "Every graded number is a return value of the engine on fixed inputs, and nothing in the engine samples or searches, so there is exactly one right answer. The engine has no Monte Carlo code of its own, so there is no seed. Each graded figure is quoted to six decimals as the panel prints it, which is neither whole dollars nor a reason's digits."
+ },
+ {
+  "prompt": "Where does an Associate learner run the practicals of this course?",
+  "options": [
+   "In a Suite app for joint ventures, opened from the Suite dashboard.",
+   "In the recovery calculator, shared with the Professional tier.",
+   "In a spreadsheet the learner builds, since an engine course carries no panel of its own.",
+   "In the account calculator, the course's own panel, which calls the vendored engine."
+  ],
+  "answer": 3,
+  "explanation": "This is an engine course with no Suite app. Each tier has a calculator panel that calls the same vendored engine: the account calculator at Associate, the recovery calculator at Professional and the agreement calculator at Expert. The recovery calculator belongs to the Professional tier, and the panels make a spreadsheet unnecessary."
+ },
+ {
+  "prompt": "In this course the word overhead carries a narrower meaning than it has in conversation. What is it?",
+  "options": [
+   "The operator's charge on a stated scale over a stated base.",
+   "Any indirect cost of the joint venture, charged at whatever figure the operator books for it.",
+   "Every cost outside the approved budget, charged against the stated unbudgeted allowance.",
+   "The part of a carried party's cost share that its carriers pay on its behalf each month."
+  ],
+  "answer": 0,
+  "explanation": "The course's vocabulary legislates overhead as the operator's charge on a stated scale over a stated base, and notes that the Norwegian scale it follows is a research and development and corporate charge. Any indirect cost is the conversational meaning the rule narrows. Spending outside the budget is tested against the unbudgeted allowance, and the cost share paid by carriers is a carry."
+ }
+]

@@ -2256,6 +2256,76 @@
       "group": "ec8-gsa-course",
       "vendoredSha": "e5989a9f001045985aef8cd94b40842f6f0bf738",
       "reason": "EC8 gsa course: vendored sha-identical from petrolord-engines 7f5d462 (PRs #267 and #268: engines/economics/gasContract.js, its jest suite, golden, the ekene-gsa fixtures and their writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_procurement.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 7f5d462 or later."
+    },
+    {
+      "path": "__tests__/economics.jointVenture.test.js",
+      "kind": "extra",
+      "group": "ec9-joa-course",
+      "vendoredSha": "530694a5f1a1a73f01877354ba7872500686e8d3",
+      "reason": "EC9 joa course: vendored sha-identical from petrolord-engines 3ae56e7 (PR #270: engines/economics/jointVenture.js, its jest suite, golden, the ekene-jv fixture and its writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_joa.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 3ae56e7 or later."
+    },
+    {
+      "path": "engines/economics/jointVenture.js",
+      "kind": "extra",
+      "group": "ec9-joa-course",
+      "vendoredSha": "364f766339c81af2a05a52f85f6ec19d759004b4",
+      "reason": "EC9 joa course: vendored sha-identical from petrolord-engines 3ae56e7 (PR #270: engines/economics/jointVenture.js, its jest suite, golden, the ekene-jv fixture and its writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_joa.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 3ae56e7 or later."
+    },
+    {
+      "path": "test-data/economics/ekene-jv/README.md",
+      "kind": "extra",
+      "group": "ec9-joa-course",
+      "vendoredSha": "6936922836d586313dc4e78a8d7ada92210c3414",
+      "reason": "EC9 joa course: vendored sha-identical from petrolord-engines 3ae56e7 (PR #270: engines/economics/jointVenture.js, its jest suite, golden, the ekene-jv fixture and its writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_joa.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 3ae56e7 or later."
+    },
+    {
+      "path": "test-data/economics/ekene-jv/ekene-jv.json",
+      "kind": "extra",
+      "group": "ec9-joa-course",
+      "vendoredSha": "4cee0604322dd258a4dda8fa4cd30793fb3ed968",
+      "reason": "EC9 joa course: vendored sha-identical from petrolord-engines 3ae56e7 (PR #270: engines/economics/jointVenture.js, its jest suite, golden, the ekene-jv fixture and its writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_joa.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 3ae56e7 or later."
+    },
+    {
+      "path": "test-data/economics/goldens/jointventure_cases.json",
+      "kind": "extra",
+      "group": "ec9-joa-course",
+      "vendoredSha": "69ac8a69041443b0988183bc9a0bd11584371d41",
+      "reason": "EC9 joa course: vendored sha-identical from petrolord-engines 3ae56e7 (PR #270: engines/economics/jointVenture.js, its jest suite, golden, the ekene-jv fixture and its writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_joa.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 3ae56e7 or later."
+    },
+    {
+      "path": "tools/validation/economics/FINDINGS-jointVenture.md",
+      "kind": "extra",
+      "group": "ec9-joa-course",
+      "vendoredSha": "480032d07f9bfe798b0311bf2edefb688d4b7e8d",
+      "reason": "EC9 joa course: vendored sha-identical from petrolord-engines 3ae56e7 (PR #270: engines/economics/jointVenture.js, its jest suite, golden, the ekene-jv fixture and its writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_joa.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 3ae56e7 or later."
+    },
+    {
+      "path": "tools/validation/economics/make_jv_fixtures.py",
+      "kind": "extra",
+      "group": "ec9-joa-course",
+      "vendoredSha": "fea723b6da1a5f228df63da479f2960aea33811c",
+      "reason": "EC9 joa course: vendored sha-identical from petrolord-engines 3ae56e7 (PR #270: engines/economics/jointVenture.js, its jest suite, golden, the ekene-jv fixture and its writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_joa.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 3ae56e7 or later."
+    },
+    {
+      "path": "tools/validation/economics/negcontrol_jointventure.sh",
+      "kind": "extra",
+      "group": "ec9-joa-course",
+      "vendoredSha": "bc3afa57ceafa3a5fa2d3e5e577c3049df802732",
+      "reason": "EC9 joa course: vendored sha-identical from petrolord-engines 3ae56e7 (PR #270: engines/economics/jointVenture.js, its jest suite, golden, the ekene-jv fixture and its writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_joa.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 3ae56e7 or later."
+    },
+    {
+      "path": "tools/validation/economics/oracle_jointventure.py",
+      "kind": "extra",
+      "group": "ec9-joa-course",
+      "vendoredSha": "22bd3bfab89fcecfce1999b6aa023e8352cfd739",
+      "reason": "EC9 joa course: vendored sha-identical from petrolord-engines 3ae56e7 (PR #270: engines/economics/jointVenture.js, its jest suite, golden, the ekene-jv fixture and its writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_joa.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 3ae56e7 or later."
+    },
+    {
+      "path": "tools/validation/economics/timing_jointventure.js",
+      "kind": "extra",
+      "group": "ec9-joa-course",
+      "vendoredSha": "b571d8ac9da222553535cfc3d4eae94a2bd6fbfa",
+      "reason": "EC9 joa course: vendored sha-identical from petrolord-engines 3ae56e7 (PR #270: engines/economics/jointVenture.js, its jest suite, golden, the ekene-jv fixture and its writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_joa.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 3ae56e7 or later."
     }
   ]
 }

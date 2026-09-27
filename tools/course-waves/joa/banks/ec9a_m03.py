@@ -1,0 +1,139 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# EC9 Expert m03, The Stated Readings. Each of the three readings is keyed
+# only as the engine's stated reading, quoted from its basis, never as the
+# law. Figures rest on the engine's pscCostRecovery and defaultCover returns on
+# the golden inputs (psc-ekene, psc-ekene-after-royalty, default-ekene-march,
+# default-grace-*, default-no-carry-365, default-ekene-uncured), recomputed by
+# scratch/bank-advanced/witness.mjs. What the other reading would change is
+# keyed only where the digest prints it. No capstone figure appears here.
+
+K = [0, 2, 1, 3, 3, 1, 0, 2, 0, 3, 2, 1, 3, 0, 2]
+_i = iter(K)
+def x(p, c, ds, e): q(next(_i), p, c, ds, e)
+
+# 1
+x("Where a production sharing contract's cost oil limit binds, which income tax base does the engine state it takes, in its own basis?",
+ "The contractor's profit oil share, stated as the reading FARI TNM/16/01 and World Bank Note 8 assume",
+ ["Revenue after royalty less every cost incurred that year, which the engine states is the law",
+  "The contractor's whole entitlement, cost oil and profit oil together, as the IMF figure prints it",
+  "Gross revenue before royalty, since the World Bank note places no limit of any kind on income tax deductions"],
+ "The engine's basis reads: income tax is charged on the contractor's profit oil share, as FARI TNM/16/01 and World Bank Note 8 assume (applyPSC in engines/economics/cashflow.ts). It is a stated reading and the course grades no tax figure; a regime deducting costs as incurred would tax a different base, and on psc-ekene 2031 the tax of 9756450.000000 is 30.000000 percent of the contractor's profit oil.")
+
+# 2
+x("The Ekene PSC variant (synthetic) states royalty 12.500000 percent, a cost oil limit of 60.000000 percent of gross, a contractor share of 60.000000 percent and tax of 30.000000 percent. In 2031 the engine returns a tax of 9756450.000000. Of which 2031 figure is that tax 30.000000 percent?",
+ "The contractor's profit oil, 32521500.000000",
+ ["The profit oil before the split, 54202500.000000, which the note shares",
+  "The cost recovered that year, 118260000.000000, as a check on the pool",
+  "The government profit oil of the year, 21681000.000000, grossed up"],
+ "The engine's order ends tax = taxRatePct % of the contractor's profit oil, and 2031 prints contractor profit oil 32521500.000000 with tax 9756450.000000. 54202500.000000 is the profit oil before the 60.000000 percent contractor share; 118260000.000000 is cost recovered, which is no tax base here; 21681000.000000 is the government's share of profit oil.")
+
+# 3
+x("The course says the PSC tax reading acts on psc-ekene in 2031. What in the 2031 row makes it act there?",
+ "The limit binds: cost recovered, 118260000.000000, draws on the carried pool far past that year's capex and opex of 31000000.000000",
+ ["The royalty of 12.500000 percent is taken after the limit, so the tax base shrinks by the royalty",
+  "The pool runs out in 2031, so the profit oil jumps and the contractor's tax rate changes with it",
+  "The contractor's share of profit oil slides that year, so a second tax rate is applied on top"],
+ "Reading one acts in a year where the limit binds: in 2031 the engine recovers 118260000.000000 against capex and opex of 31000000.000000, and a regime that deducts the year's costs as incurred would tax a different base. Royalty comes first in the engine's order; the pool is recovered in 2036; the contractor share is 60.000000 in every Ekene year.")
+
+# 4
+x("Why does the course grade no PSC tax figure?",
+ "No public text it reads prints a year where the limit binds with its tax, so the engine states its reading",
+ ["The tax rate of 30.000000 percent is a figure of the World Bank note and cannot be graded",
+  "The engine computes tax outside applyPSC, and figures outside it are never graded",
+  "Tax belongs to the Petroleum Industry Act course, which grades every tax figure itself"],
+ "The course says: No public text prints such a year with its tax, so the engine states its reading and the course grades no tax figure. The rate is a stated input of each call; the tax line comes from the canonical applyPSC of cashflow.ts; and the grading rule turns on the reading alone, whichever course owns the Nigerian taxes.")
+
+# 5
+x("PB owes 2000000.000000 on a call due 2027-03-01, at a stated 8.25 percent a year, simple, 360-day basis, with a stated grace of 72 hours, and pays on 2027-03-05. What default interest does the engine return under its stated grace reading?",
+ "1833.333333, for all 4 days from the due date",
+ ["0.000000, since the payment came within a few days of the due date",
+  "1375.000000, for the 3 days the default ran after the grace had ended",
+  "20625.000000, for the 45 days of the Ekene March default"],
+ "The engine's grace reading: a default cured within it carries no interest; one cured later carries interest from the due date, as the Kenya Model PSC 2015 Participation Agreement Art. 6.7 prints. 96 hours exceed 72, so the engine charges 4 days: 1833.333333. 1375.000000 is the 3-day figure of the 71.5-hour case; 20625.000000 belongs to the cure on 2027-04-15.")
+
+# 6
+x("A contract states a grace of 71.5 hours. PB's unpaid 2000000.000000 arrives on 2027-03-04, three days after it fell due, at 8.25 percent simple on a 360-day year. What default interest results under the engine's stated grace reading?",
+ "1375.000000, because 72 hours exceed the stated 71.5 and interest runs from the due date",
+ ["0.000000, because three whole days is how the engine rounds any grace stated in hours for a cure",
+  "1833.333333, because a grace that is exceeded adds a day of penalty to the count",
+  "A refusal, since a grace must be stated in whole days of 24 hours each"],
+ "The engine counts the grace in hours, days x 24 from the due date: 3 days are 72 hours, beyond 71.5, so the grace is exceeded and interest runs for all 3 days: 1375.000000. It rounds no grace to whole days, adds no penalty day and accepts a grace stated in fractions of an hour; under its stated reading interest runs from the due date.")
+
+# 7
+x("Which of these terms may a defaultCover, cashCalls or carryRecovery call leave out and still run?",
+ "A no-call threshold, a carry cap or a set of default consequences",
+ ["Grace hours, when the contract gives no grace at all to a defaulter",
+  "The day basis, when the stated default interest is simple interest",
+  "The negative call rule, when no month of the year is expected to over-call"],
+ "The course lists the threshold, the cap and the consequences as optional, applied only when stated. The grace must be stated even when it is 0 (interest.graceHours must be a finite number of hours at or above 0, stated (0 when the contract gives no grace; the engine holds no default); got nothing), and the day basis and the negative call rule are required terms too.")
+
+# 8
+x("On default-ekene-march PB leaves 2000000.000000 unpaid while NOC (participating interest 20.000000) is carried in full and EKO and PA hold paying interests of 50.000000 and 31.250000. How does the engine split the cover, and on what stated basis?",
+ "EKO 61.538462 and PA 38.461538 percent, by paying interest among the non-defaulting parties",
+ ["EKO 47.058824, PA 29.411765 and NOC 23.529412 percent, by participating interest in the licence",
+  "EKO 50.000000 and PA 31.250000 percent, with the rest left unpaid for the next call",
+  "EKO 100.000000 percent, as the operator advances every unpaid amount alone"],
+ "The engine's basis: the non-defaulting parties advance the unpaid amounts in proportion to their paying interests among themselves (the parties that pay cost; a carried party pays none). So EKO covers 1230769.230769 and PA 769230.769231, and nothing is left unpaid. The participating split with NOC is the forfeiture apportionment, a different rule.")
+
+# 9
+x("What does the course say a reading of Norway JOA Art. 9.1 by participating interest would do on the Ekene March default?",
+ "It would bring the carried NOC into the cover of PB's unpaid amount",
+ ["It would give the same cover as the engine, since both interests are equal",
+  "It would leave PA out of the cover, as its participating interest is smaller",
+  "It would raise PB's default interest, as more parties would finance it"],
+ "The course states that a reading by participating interest would bring the carried NOC into the cover. Under the Ekene carry NOC's paying interest is 0.000000 against a participating interest of 20.000000, so the two readings differ here; PB's default interest of 20625.000000 depends on its own unpaid amount and dates alone.")
+
+# 10
+x("On default-no-carry-365, parties A (50), B (30) and C (20) state no carry and C defaults on 200000.000000. Why do the two readings of the cover agree here?",
+ "With no carry, paying and participating interests coincide, so A covers 125000.000000 and B 75000.000000",
+ ["The engine drops its stated reading whenever a carry is absent and falls back to the wording of the Norwegian text",
+  "C is the only party with a paying interest, so its unpaid amount has nobody left to be covered by",
+  "The cover is split equally between the two non-defaulting parties, at 100000.000000 each"],
+ "Outside a carry the paying and participating interests are the same, so the engine's reading and the text's wording give one answer: A 125000.000000 (62.500000 percent) and B 75000.000000 (37.500000 percent). The engine states the same reading on every call; A and B both pay cost here; nothing is split equally.")
+
+# 11
+x("If the Ekene March default is left open past the forfeiture trigger, the engine reports the interests after an assignment of PB's interest. Which rule sets them, and is it one of the three readings?",
+ "Norway JOA Art. 9.4, pro rata to participating interest: EKO 47.058824, PA 29.411765, NOC 23.529412; no reading",
+ ["The cover reading again, by paying interest: EKO 61.538462 and PA 38.461538, with the carried NOC left out of the apportionment entirely",
+  "The grace reading, which sets how far past the trigger an assignment can be demanded by the parties",
+  "A fourth reading of Art. 9.3, which the engine states because the text sets no rule for apportioning an interest"],
+ "Art. 9.4 apportions an assigned interest pro rata amongst the non-defaulting parties in accordance with their participating interest, and the engine reports EKO 47.058824, PA 29.411765, NOC 23.529412 on default-ekene-uncured. The engine states three readings only: the PSC tax, the grace and the cover.")
+
+# 12
+x("PB's default interest on the Ekene March default is 20625.000000, and EKO and PA covered 61.538462 and 38.461538 percent of the unpaid amount. How does the engine distribute that default interest?",
+ "EKO 12692.307692 and PA 7932.692308, in proportion to their cover",
+ ["To the operator alone, EKO, which administers the joint account",
+  "EKO, PA and NOC by participating interest, as the licence is shared",
+  "Held on the joint account with interest on the operator's cash balance"],
+ "The engine's interest basis ends: distributed to the parties financing the default in proportion to their cover, which gives EKO 12692.307692 and PA 7932.692308. NOC financed nothing and receives nothing, and the engine computes no interest on cash balances held by the operator.")
+
+# 13
+x("psc-ekene states the cost oil limit as 60.000000 percent of gross; psc-ekene-after-royalty states the same 60.000000 percent of revenue after royalty, with royalty 12.500000 percent in both. What 2030 limits does the engine return?",
+ "131400000.000000 on gross and 114975000.000000 on revenue after royalty",
+ ["131400000.000000 on both, as a stated percentage fixes the limit whatever the base",
+  "114975000.000000 on both, as applyPSC works after royalty either way",
+  "A refusal, because a gross limit of 60 exceeds what a 12.500000 percent royalty leaves"],
+ "The base is a required input, `costOilLimitBase`, and the base moves the limit: 131400000.000000 on gross and 114975000.000000 on after-royalty in 2030 (engine). For gross the engine passes the same amount to applyPSC as the fraction 60 / (100 - 12.5) of revenue after royalty; a gross limit is refused only above 87.5.")
+
+# 14
+x("A pscCostRecovery call on the Ekene variant states royalty 12.500000 percent, `costOilLimitBase` \"gross\" and a cost oil limit of 90. What does the engine return?",
+ "A refusal naming costOilLimitPct, since royalty leaves only 87.5 percent of gross",
+ ["A cost oil limit of 90 percent of gross, applied as the contract states it in every year",
+  "A cost oil limit capped at 60 percent, the Act's ceiling for a renegotiated contract",
+  "A cost oil limit of 87.5 percent of gross, reduced quietly to what royalty leaves"],
+ "The engine refuses by name: costOilLimitPct must be at or below the revenue left after royalty, 87.5% of gross, when costOilLimitBase is \"gross\"; got 90. applyPSC can never recover more than revenue after royalty. The Act's 60 percent ceiling is reported in the basis only, and the engine never trims a stated figure.")
+
+# 15
+x("Which of the following is a required input with no default and none of the engine's three stated readings?",
+ "The base of the cost oil limit, `costOilLimitBase`, gross or after royalty",
+ ["The base of PSC income tax, the contractor's profit oil share in a year the limit binds",
+  "The effect of a grace, cured within it or later, on default interest",
+  "The parties that cover a default, by paying interest among the non-defaulting parties"],
+ "The course names three readings, the PSC tax, the grace and the cover, and then says the limit base of a PSC is a different thing: a required input with no default. A call with \"net\" is refused: costOilLimitBase must be one of \"after-royalty\", \"gross\"; got \"net\".")
+
+emit(Q, '/root/cat-wip-joa/banks/ec9a_m03.json', expect_n=15)
+finish()
