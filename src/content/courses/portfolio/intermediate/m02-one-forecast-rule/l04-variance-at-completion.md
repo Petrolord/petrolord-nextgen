@@ -24,7 +24,7 @@ Budget minus forecast makes an overrun negative and a saving positive. Some repo
 
 | case | budget | commitment | actual | entered forecast | engine EAC | engine variance |
 | --- | --- | --- | --- | --- | --- | --- |
-| suite test: entered forecast | 100 | 0 | 0 | 140 | 140.0000 | -40.0000 |
+| suite test: entered forecast (nothing spent: CPI null) | 100 | 0 | 0 | 140 | 140.0000 | -40.0000 |
 | suite test: under budget forecasts the budget | 100 | 10 | 20 | none | 100.0000 | 0.0000 |
 | suite test: committed past the budget | 100 | 60 | 70 | none | 130.0000 | -30.0000 |
 

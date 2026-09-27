@@ -35,7 +35,7 @@ The first three are read from the lines as entered and do not change with the da
 
 ## What it refuses
 
-The engine refuses a negative progress figure and names the cost item that carries it. It refuses an as-of date that is not a real date with the message "asOf is not a valid date". It accepts progress past 100.0000 percent and lets that line earn more than its budget. It plans spending as a straight line across the window, and its earned value is only as good as the progress typed in.
+The engine refuses a negative progress figure and names the cost item that carries it. It refuses an as-of date that is not a real date with the message "asOf is not a valid date". It refuses progress above 100 percent in the same way, naming the line; a published line typed at 150 percent reads "Cost item "0" has progress above 100 percent (150 percent). Progress runs from 0 to 100 percent." Progress of exactly 100 percent is accepted and earns the line its whole budget. It plans spending as a straight line across the window, and its earned value is only as good as the progress typed in.
 
 ## The mistake
 

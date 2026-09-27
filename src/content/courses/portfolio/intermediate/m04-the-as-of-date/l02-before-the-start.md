@@ -1,6 +1,6 @@
 # Before the start
 
-Before an AFE's window opens there is no planned value to divide by, so the repaired engine reports SPI as null. It still reports everything that does not need the calendar.
+Before an AFE's window opens there is no planned value to divide by, so the engine reports SPI as null with spiStatus "no-planned-value". It still reports everything that does not need the calendar.
 
 {{panel:ec-cost-explorer}}
 
@@ -19,7 +19,7 @@ The start day reads the same. On 2027-02-01 no whole day has elapsed, so time pr
 
 The golden cases hold the same boundary on a second window, 2026-01-01 to 2027-12-31. As of 2025-12-31 the engine returns time progress 0.000000 and SPI null. As of 2026-01-01, the start day, it returns time progress 0.000000 and SPI null again.
 
-Before EC5-0 the same division went ahead and SPI came out as Infinity or as NaN before the start date. Neither is a schedule reading, and a chart or a sort handed either one misbehaves quietly.
+The status names the reason. "no-planned-value" means there is a budget and nothing is planned yet; an AFE with no budget at all reports "no-budget" instead, and the SPI tile reads "Not started" for the first and "N/A" with "No budget to measure schedule against" for the second.
 
 ## Null is a reading
 

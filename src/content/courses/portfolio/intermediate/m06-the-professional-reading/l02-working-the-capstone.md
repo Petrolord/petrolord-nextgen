@@ -20,7 +20,7 @@ Apply the rule to each line before reading the EAC, and write the branch each li
 | LOG-04 | 2100000 | 1250000 | none | 2100000 | budget |
 | CMP-05 | 5600000 | 1200000 | none | 5600000 | budget |
 
-OFON-1's EAC is 27600000 and its variance at completion -550000. An answer that quotes only the EAC has shown no reading, because the branch on each line is the reading. Look for an entered forecast that is not positive: the rule ignores it, and that line falls back to the larger of its budget and its actual plus commitment.
+OFON-1's EAC is 27600000 and its variance at completion -550000. An answer that quotes only the EAC has shown no reading, because the branch on each line is the reading. Look for the flags: a line whose entered forecast is below its actual plus commitment, and a negative entry the rule ignored.
 
 ## Earned value and CPI
 
@@ -28,11 +28,11 @@ Multiply each budget by its progress. DRL-01, 14200000 at 72.0000 percent, earns
 
 ## The date, then SPI
 
-Set the explorer's as-of date to the date the task names, and write that date beside every planned value and SPI you quote. For OFON-1 as of 2027-08-15: time progress 0.645695, planned value 17466060, SPI 0.872063. Then place the date in the window. On or before the start day SPI is null, and on or after the end it equals percent complete divided by 100. A date the engine cannot read is refused with "asOf is not a valid date".
+Set the explorer's as-of date to the date the task names, and write that date beside every planned value and SPI you quote. For OFON-1 as of 2027-08-15: time progress 0.645695, planned value 17466060, SPI 0.872063. Then place the date in the window. On or before the start day SPI is null with spiStatus "no-planned-value", and on or after the end it equals percent complete divided by 100. A date the engine cannot read is refused with "asOf is not a valid date".
 
 ## The curve
 
-Read the S-curve at the same as-of date. Count the points, compare the last Actual with the line actuals, find the first projected Forecast point, and write the last Planned point beside the budget. On OFON-1 that is 10 points, a last Actual of 15090000, a jump to 19374834 and a last Planned of 24452483 against 27050000.
+Read the S-curve at the same as-of date. Count the points, compare the last Actual with the line actuals, find the first projected Forecast point, and read the closing point dated the window end. On OFON-1 that is 11 points, a last Actual of 15090000, a jump to 19374834 and a closing point with Planned 27050000, the budget, and Forecast 27600000, the EAC.
 
 ## Before you submit
 
@@ -43,7 +43,7 @@ Read the S-curve at the same as-of date. Count the points, compare the last Actu
 | Forecast | Rule branch named on every line, then EAC and variance |
 | Earned value | Earned value by line, CPI, percent spent, percent complete |
 | Date | As-of date written beside planned value and SPI |
-| Curve | Points, last Actual, forecast jump, plan shortfall |
+| Curve | Points, last Actual, forecast jump, closing point (budget and EAC) |
 
 ## The mistake
 

@@ -17,7 +17,7 @@ CMT-03 has spent 640000 and committed 300000, 940000 in all, against a budget of
 
 ## A published case
 
-The engine's test "suite test: entered forecast" holds one line with a budget of 100, no commitment, no actual and an entered forecast of 140. The engine returns EAC 140.0000 and variance -40.0000. Nothing has been spent, and the line still forecasts past its budget, because an entered forecast needs no spend behind it.
+The engine's test "suite test: entered forecast (nothing spent: CPI null)" holds one line with a budget of 100, no commitment, no actual and an entered forecast of 140. The engine returns EAC 140.0000 and variance -40.0000. Nothing has been spent, and the line still forecasts past its budget, because an entered forecast needs no spend behind it. With nothing spent, the same case reports CPI null with cpiStatus "no-spend".
 
 ## What the entered forecast carries
 
@@ -25,11 +25,11 @@ It carries knowledge the other columns cannot hold: a cement job redesigned, a p
 
 ## What it refuses
 
-A positive entered forecast wins unconditionally. The engine does not compare it with actual + commitment, does not ask when it was entered, and does not ask who entered it. By the wording of the rule, an entered forecast smaller than the money already spent and committed on a line would still be taken as that line's forecast. The rule trusts the typist. An entered forecast that is not positive is not taken at all, and the rule falls back to its second half.
+A positive entered forecast always wins, and the engine does not ask when or by whom it was entered. It does compare it with actual + commitment. One below the money already spent and committed is still taken as the line's forecast, since a re-baseline is legitimate, and it is flagged: CMT-03 with 900000 entered forecasts 900000, with forecastBelowCommitted true and forecastBelowCommittedBy 40000, the 940000 already spent and committed less the forecast. The Cost Breakdown table marks such a line "below spent and committed" with the amount. An entered forecast that is not positive is not taken at all, and the rule falls back to its second half.
 
 ## The mistake
 
-The mistake is a forecast copied from the budget. Before the EC5-0 repair of the Suite, editing a line copied its budget into its forecast field. Under the rule as it stands, a copied budget is a positive entered forecast and wins. Had CSG-02's budget of 3900000 been copied into its forecast, the line would forecast 3900000 against the 4300000 already spent, its variance would read 0, and an overrun of 400000 would vanish from the EAC. The repaired Suite no longer copies the budget when a line is edited, but a figure copied by hand does the same damage. An entered forecast that equals its budget to the dollar deserves a question before it is believed.
+The mistake is a forecast copied from the budget. Editing a line in the Suite does not copy its budget into its forecast field, but a person can type it there by hand. A copied budget is a positive entered forecast and wins. Had CSG-02's budget of 3900000 been copied into its forecast, the line would forecast 3900000 against the 4300000 already spent, its variance would read 0, and an overrun of 400000 would vanish from the EAC. The engine would flag that line, since 3900000 sits below the 4300000 spent, but the EAC would still carry the copied figure. An entered forecast that equals its budget to the dollar deserves a question before it is believed.
 
 ## Exercise
 
