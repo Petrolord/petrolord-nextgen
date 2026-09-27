@@ -1,0 +1,363 @@
+{
+ "app_slug": "prms",
+ "tier": "advanced",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-arithmetic-aggregation",
+   "title": "Arithmetic Aggregation",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-summing-by-category",
+     "title": "Summing by category",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "prms-aggregation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-above-the-field-level",
+     "title": "Above the field level",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "prms-aggregation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-sec-summation-rule",
+     "title": "The SEC summation rule",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "prms-aggregation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-a-sum-of-low-estimates",
+     "title": "A sum of low estimates",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "prms-aggregation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-probabilistic-aggregation",
+   "title": "Probabilistic Aggregation",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-the-monte-carlo-underneath",
+     "title": "The Monte Carlo underneath",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "prms-aggregation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-two-blocks-from-the-application-guidelines",
+     "title": "Two blocks from the Application Guidelines",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "prms-aggregation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-correlation-between-projects",
+     "title": "Correlation between projects",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "prms-aggregation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-seed-draws-and-what-is-never-graded",
+     "title": "Seed, draws and what is never graded",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "prms-aggregation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-mean-of-a-total",
+     "title": "The mean of a total",
+     "order": 5,
+     "est_minutes": 12,
+     "panels": [
+      "prms-aggregation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-risked-quantities-and-classes",
+   "title": "Risked Quantities and Classes",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-classes-kept-apart",
+     "title": "Classes kept apart",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "prms-aggregation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-risked-mean",
+     "title": "The risked mean",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "prms-aggregation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-distributions-stated-or-fitted",
+     "title": "Distributions stated or fitted",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "prms-aggregation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-a-national-total",
+     "title": "A national total",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "prms-aggregation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-reconciliation",
+   "title": "Reconciliation",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-opening-movements-and-closing",
+     "title": "Opening, movements and closing",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "prms-aggregation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-production-out-of-every-category",
+     "title": "Production out of every category",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "prms-aggregation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-revisions-transfers-and-divestments",
+     "title": "Revisions, transfers and divestments",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "prms-aggregation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-a-reconciliation-that-does-not-close",
+     "title": "A reconciliation that does not close",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "prms-aggregation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-replacement-ratio-and-the-life-index",
+     "title": "The replacement ratio and the life index",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "prms-aggregation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-two-economic-limit-rules",
+   "title": "Two Economic-Limit Rules",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-the-trailing-trim",
+     "title": "The trailing trim",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "prms-reserves-calculator",
+      "prms-aggregation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-cumulative-peak",
+     "title": "The cumulative peak",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "prms-reserves-calculator",
+      "prms-aggregation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-why-the-engine-refuses",
+     "title": "Why the engine refuses",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "prms-aggregation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-boundaries-rule-by-rule",
+     "title": "Boundaries, rule by rule",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "prms-aggregation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-what-the-engine-does-not-compute",
+   "title": "What the Engine Does Not Compute",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-what-the-engine-leaves-out",
+     "title": "What the engine leaves out",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "prms-aggregation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-readings-and-source-quirks",
+     "title": "Readings and source quirks",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "prms-aggregation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-writing-the-reserves-report",
+     "title": "Writing the reserves report",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "prms-aggregation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "prms-aggregation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

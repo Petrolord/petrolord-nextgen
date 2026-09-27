@@ -264,5 +264,5 @@ export const BlockSelector = ({ blocks, value, onChange }) => (blocks.length > 1
   </div>
 ) : null);
 
-/** A Monte Carlo figure's label: always with its seed and its draws, and never graded. */
-export const drawnNote = (seed, iterations) => `a seeded Monte Carlo estimate (seed ${seed}, ${iterations} draws), never graded`;
+/** A Monte Carlo figure's label: always with its seed and its draws; such a figure is not graded. */
+export const drawnNote = (seed, iterations) => `a seeded Monte Carlo estimate on seed ${seed} and ${iterations} draws; it is not graded`;
