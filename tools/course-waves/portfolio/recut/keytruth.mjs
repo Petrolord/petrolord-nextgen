@@ -143,8 +143,10 @@ checks.forEach((c, i) => {
   else field = n[c.where];
   if (field === undefined) { console.error(`REFUSED: ${c.q} has no field ${c.where}`); process.exit(2); }
   if (c.where === 'key') keyed.add(c.q);
-  const printed = plant && typeof c.printed === 'string' && /\d/.test(c.printed) ? bump(c.printed) : c.printed;
   const v = values[i];
+  // --plant perturbs only a figure the engine returned as a number; a string or
+  // boolean claim keeps its printed text (a set label or a message may hold digits).
+  const printed = plant && typeof v === 'number' && typeof c.printed === 'string' && /\d/.test(c.printed) ? bump(c.printed) : c.printed;
   let ok; let got;
   if (typeof v === 'number') {
     numeric += 1;
