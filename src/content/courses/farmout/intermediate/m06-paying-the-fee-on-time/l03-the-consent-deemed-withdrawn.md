@@ -41,4 +41,4 @@ Work in the course's own deal calculator.
 
 1. Open the view "The consent fee and its day rules" and start from "Paid on day 211". Read the payment tiles and the reason, and confirm the fee tiles still show 392000.000000.
 2. Start from "Paid on day 210". With the control "Fee paid on, YYYY-MM-DD (optional)", change the date to 2027-07-31 and read the new status.
-3. Delete the whole `"payment"` entry from the box, with its braces, and read what the fee view shows about timing.
+3. Clear both date controls, "Consent notified on" and "Fee paid on", and read what the fee view shows about timing.

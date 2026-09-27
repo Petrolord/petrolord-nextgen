@@ -94,7 +94,7 @@ with the field, 9629358.080000.
 
 ## THE REFUSALS, BY NAME
 
-Digest section 5 tables 61 refusals. **Quote the engine's message in a
+Digest section 5 tables 67 refusals. **Quote the engine's message in a
 blockquote.** The ones each tier must teach:
 
 * Associate m01 l05 to m06: interests that do not sum to 100, an unknown key,

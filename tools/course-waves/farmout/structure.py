@@ -5,8 +5,8 @@
 # calculator panels over the vendored engine.
 #
 # Engine: engines/economics/farmout.js, vendored sha-identical with
-# petrolord-engines b7d305b (engines PRs #272, #273 FINDINGS and #274 the
-# simple uplift) under its own root
+# petrolord-engines 6626465 (engines PRs #272, #273 and #275 FINDINGS, #274
+# the simple uplift, #276 the negative-carry refusal) under its own root
 # packages/engines/ec10-farmout, with its whole runtime closure (cashflow.ts
 # for applyJV and npv, decisionTree.js for rollback, evpi and evii,
 # portfolio.js for portfolioRiskMetrics, afe.js for calculatePartnerCosts,
@@ -14,7 +14,7 @@
 # because the canonical NextGen decisionTree.js and portfolio.js are held at
 # older blobs for the EC4 and EC5 courses (vendor_farmout.sh says why).
 # vendor_farmout.sh walks the closure from the jest suite (nineteen paths with
-# FINDINGS) and the engine's own suite passes 153 of 153 from that root.
+# FINDINGS) and the engine's own suite passes 162 of 162 from that root.
 #
 # THE DIGEST IS THE ONLY TEACHING TRUTH. digest.txt, built by farmout_dump.mjs.
 # The oracle, the golden's expected figures, the fixture README and the

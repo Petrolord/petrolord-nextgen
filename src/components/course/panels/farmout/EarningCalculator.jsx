@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import {
-  STARTS, pick, pretty, viewEarning,
+  STARTS, pick, pretty, viewEarning, feeOf,
 } from './farmoutLab';
 import {
   PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note,
 } from '@/components/course/panels/petrophysics/panelKit';
 import {
   six, Tbl, TextField, Refusal, EngineNote, Reasons, Source, useJsonBox, StatedControl, MissingStated,
-  statedIn, CapControl, CapTermControls,
+  statedIn, CapControl, CapTermControls, safe,
 } from './panelBits';
 
 // The earning calculator (Associate): the earning obligation of a farm-in, the
@@ -109,7 +109,25 @@ export const EarningResult = ({ r }) => (
 export const EARNING_STARTS = [
   ['earning', 'The Ekene Deep well, a gross-cost cap'], ['earnHeadsUp', 'A heads-up deal'], ['earnFullCarry', 'A full carry'],
   ['earnThird', 'A third for a quarter'], ['earnBonus', 'A cash bonus and a reimbursement'], ['earnNoneCompleted', 'An event not yet completed'],
+  ['earnAllOfFarmor', "The farmor's whole interest earned"], ['capGrossBelow', 'A well below its gross-cost cap'],
 ];
+
+/**
+ * THE CONSENT IN WORDS, read only: the engine's own consent line from the
+ * basis of a consent fee call on the Ekene assignment (golden input fee-ekene).
+ * The fee itself is computed in the deal calculator; nothing here is a figure.
+ */
+export const ConsentLine = () => {
+  const r = safe(() => feeOf(STARTS.earnConsent));
+  if (!r || r.error) return null;
+  return (
+    <div className="mt-3 rounded-md border border-sky-800/60 bg-sky-950/20 p-3">
+      <p className="text-sky-300 text-xs font-medium mb-1">THE CONSENT IN WORDS, AS THE ENGINE STATES IT</p>
+      <p className="text-xs text-slate-300 mb-0 font-mono">{r.basis.consent}</p>
+      <p className="text-xs text-slate-400 mt-1 mb-0">The fee on an assignment is computed in the deal calculator.</p>
+    </div>
+  );
+};
 
 export const EarningMode = ({ initialCase = null, initialText = null, starts = EARNING_STARTS }) => {
   const box = useJsonBox(initialCase ? pick(initialCase, 'earning') : STARTS[starts[0][0]], initialText);
@@ -122,6 +140,7 @@ export const EarningMode = ({ initialCase = null, initialText = null, starts = E
       {box.parsed.error && <Note>{box.parsed.error}</Note>}
       {r && r.error && <Refusal text={r.error} />}
       {r && !r.error && <EarningResult r={r} />}
+      <ConsentLine />
     </>
   );
 };

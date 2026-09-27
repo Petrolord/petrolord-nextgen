@@ -42,4 +42,4 @@ The Ekene Deep prospect sits on a petroleum prospecting licence, a PPL, in the s
 
 ## Exercise
 
-Open the earning calculator, the course's own calculator panel, in the view "The earning obligation, the promote and the consideration", and start from "The Ekene Deep well, a gross-cost cap". From the result, write a short consent note: the licence type, which authority consents and on whose recommendation, the farmor and the farminee, and each party's participating interest before and after the deal as the calculator prints it. Then write the one line that would change if the licence were a PEL.
+Open the earning calculator, the course's own calculator panel, in the view "The earning obligation, the promote and the consideration", and start from "The Ekene Deep well, a gross-cost cap". Read the note "The consent in words, as the engine states it" below the result. Then write a short consent note: the licence type, which authority consents and on whose recommendation, the farmor and the farminee, and each party's participating interest before and after the deal as the calculator prints it. Then write the one line that would change if the licence were a PEL.

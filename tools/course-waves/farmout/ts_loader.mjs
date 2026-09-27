@@ -54,8 +54,8 @@ export const VARIANTS = {
   ],
   // A gross-cost cap ignored: the promote on the whole gross cost.
   gross_cap_ignored: [
-    'base = Math.min(C, cap.amount);',
-    'base = C;',
+    'base = Math.min(C, cap.amount);\n    excess = C - base;',
+    'base = C;\n    excess = C - base;',
   ],
   // The overrun rules swapped.
   overrun_rules_swapped: [

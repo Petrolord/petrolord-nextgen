@@ -121,8 +121,16 @@ export const setStated = (text, viewKey, path, value) => {
     if (!INDEX.test(lastKey)) return { error: `${path} is a list entry and needs a number` };
     if (value === undefined) o.splice(Number(lastKey), 1); else o[Number(lastKey)] = value;
   } else if (value === undefined) delete o[lastKey]; else o[lastKey] = value;
+  // AN OPTIONAL GROUP LEFT EMPTY IS REMOVED WHOLE. Clearing the last stated
+  // term of an optional group (the payment dates of a consent fee) leaves no
+  // empty object behind for the engine to refuse: the box then states no
+  // payment at all, and the engine returns the no-payment result.
+  if (value === undefined && keys.length === 2 && OPTIONAL_GROUPS.includes(keys[0]) && isObj(block[keys[0]]) && !Object.keys(block[keys[0]]).length) delete block[keys[0]];
   return { text: pretty(next) };
 };
+
+/** Groups of optional terms that are removed whole once their last term is cleared. */
+export const OPTIONAL_GROUPS = Object.freeze(['payment']);
 
 /**
  * THE UPLIFT OF A CARRY, REWRITTEN WHOLE FOR A NEW TYPE, so no term of the old
@@ -199,6 +207,8 @@ export const STARTS = Object.freeze({
   earnThird: G('earn-third-for-a-quarter'),
   earnBonus: G('earn-bonus-and-reimbursement'),
   earnNoneCompleted: G('earn-none-completed'),
+  earnAllOfFarmor: G('earn-all-of-farmor'),
+  earnConsent: G('fee-ekene'),
   capGrossBelow: G('earn-cap-gross-below'),
   capGrossExactly: G('earn-cap-gross-exactly'),
   capGrossPost: G('earn-cap-gross-exceeded-post'),

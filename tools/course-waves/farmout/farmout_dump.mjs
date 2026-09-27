@@ -168,7 +168,7 @@ w('# THIS FILE IS THE ONLY TEACHING TRUTH FOR THIS COURSE. Every number in every
 w();
 w('# PRECISION. Every amount of money, value, EMV, payment, cost, carry, fee, surcharge, price, NPV, balance, percentage, share, interest, promote, ratio, probability and chance prints to SIX decimals; years, day counts, event counts, draws, seeds and whole inputs print as whole numbers; a figure of sixteen or more significant digits at six decimals prints with its thousands grouped by commas; an engine message, reason and basis is printed verbatim, figures and all. Inside a message the engine prints money rounded to the cent (half away from zero, trailing zeros dropped), a computed percentage, probability or ratio to six decimals (trailing zeros dropped), and a stated input as it was given.');
 w();
-w(`# ENGINE. ${ENGINE_REL}, vendored sha-identical with petrolord-engines b7d305b (engines PRs #272, #273 and #274), ${engineLines} lines, with its whole runtime closure under its own root in the NextGen repository. It imports applyJV and npv from engines/economics/cashflow.ts, rollback, evpi and evii from engines/economics/decisionTree.js, portfolioRiskMetrics from engines/economics/portfolio.js, calculatePartnerCosts from engines/economics/afe.js, and carryRecovery and backIn from engines/economics/jointVenture.js, and nothing else. It makes no network call.`);
+w(`# ENGINE. ${ENGINE_REL}, vendored sha-identical with petrolord-engines 6626465 (engines PRs #272 to #276), ${engineLines} lines, with its whole runtime closure under its own root in the NextGen repository. It imports applyJV and npv from engines/economics/cashflow.ts, rollback, evpi and evii from engines/economics/decisionTree.js, portfolioRiskMetrics from engines/economics/portfolio.js, calculatePartnerCosts from engines/economics/afe.js, and carryRecovery and backIn from engines/economics/jointVenture.js, and nothing else. It makes no network call.`);
 w();
 w('# AN ENGINE COURSE. There is no Suite app for this course. Every practical runs in the course\'s own calculator panels, which call this same vendored engine on the learner\'s own deal terms.');
 w();
@@ -361,7 +361,7 @@ w();
 w(`${REF.length} refusals across ${Object.keys(byFn).length} functions: ${list(Object.entries(byFn).map(([k, v]) => `${k} ${v}`))}.`);
 must('every exported function has at least one refusal tabled', EXPORTS.every(([n]) => byFn[n] > 0), JSON.stringify(byFn));
 must('no refusal message carries an em or en dash', REFUSED.every((r) => !/[–—]/.test(r[3])), 'dash');
-must('sixty-one refusal cases in the golden file', REF.length === 61, REF.length);
+must('sixty-seven refusal cases in the golden file', REF.length === 67, REF.length);
 w();
 w('REFUSALS A PANEL CONTROL CAN PRODUCE. Each calculator panel writes every required term into the box through a visible control, and setting a control to "not stated" removes the term. The calls below are not golden cases; each is a golden input with one term removed or changed (stated probes), handed to the engine here, and the message is the engine\'s, verbatim:');
 w();
@@ -377,6 +377,7 @@ const PANEL_REFUSALS = [
   ['interest-ekene-risked', 'valueBasis removed', (a) => dropAt(a, 'valueBasis'), 'valueBasis'],
   ['risk-ekene', 'seed removed', (a) => dropAt(a, 'seed'), 'seed'],
   ['devcarry-ekene', 'recoverFromPct removed', (a) => dropAt(a, 'recoverFromPct'), 'recoverFromPct'],
+  ['backin-ekene-pia', 'backIn.refundForm set to "upfront" under basis "pia-s85-4" (the refund form control)', (a) => { a.backIn.refundForm = 'upfront'; delete a.backIn.recoverFromPct; delete a.backIn.years; return a; }, 'backIn.refundForm'],
 ];
 table(['golden input', 'the change (stated probe)', 'field', 'the engine\'s message, verbatim'], PANEL_REFUSALS.map(([id, what, f, field]) => {
   const r = refusal(`${GC[id].fn} on ${id} with ${what}`, E[GC[id].fn](f(argsOf(id))), field);
@@ -463,7 +464,7 @@ w();
 w(`HEADS UP. When the share paid equals the interest earned (earn-heads-up: ${f6(hu.farmineePaysPct)} for ${f6(hu.earnedPct)}), the promote is ${f6(hu.promotePoints)} points, the ratio ${f6(hu.promoteRatio)} and the carry ${f6(hu.carry)} (engine): the farminee pays its own share and nothing of the farmor's.`);
 w(`A FULL CARRY. When the farminee pays the farmor's whole pre-deal interest (earn-full-carry: ${f6(fc.farmineePaysPct)} for ${f6(fc.earnedPct)}), the farmor pays ${f6(fc.farmorPays)} and the carry is ${f6(fc.carry)} (engine): the farmor's post-deal share of the well is paid in full by the farminee.`);
 const tq = runG('earn-third-for-a-quarter').events[0];
-w(`A THIRD FOR A QUARTER. On earn-third-for-a-quarter the farminee pays ${f6(tq.farmineePaysPct)} percent for ${f6(tq.earnedPct)} percent: a promote of ${f6(tq.promotePoints)} points and a ratio of ${f6(tq.promoteRatio)} (engine). The stated share is the double ${S(argsOf('earn-third-for-a-quarter').events[0].farmineePaysPct)}, which the engine's message prints as given.`);
+w(`A THIRD FOR A QUARTER. On earn-third-for-a-quarter the farminee pays ${f6(tq.farmineePaysPct)} percent for ${f6(tq.earnedPct)} percent: a promote of ${f6(tq.promotePoints)} points and a ratio of ${f6(tq.promoteRatio)} (engine). The stated share is a double that prints as ${f6(argsOf('earn-third-for-a-quarter').events[0].farmineePaysPct)} at six decimals; the engine's message prints a stated input as it was given.`);
 
 /* ============================================================ SECTION 9 */
 
@@ -556,6 +557,19 @@ const cce = runG('earn-cap-carry-exactly').events[0];
 const cge = runG('earn-cap-gross-exactly').events[0];
 w(`A CAP REACHED EXACTLY is its own state: on earn-cap-gross-exactly the gross cost equals the cap ("${cge.capState}", excess ${f6(cge.excess)}); on earn-cap-carry-exactly the carry equals the cap ("${cce.capState}", carry ${f6(cce.carry)}). Both split the cost as a cap not reached would (engine).`);
 must('a cap reached exactly reports "exactly"', cge.capState === 'exactly' && cce.capState === 'exactly' && cge.excess === 0, 'exactly');
+
+w();
+const cz = runG('earn-carry-zero-farmor-side').events[0];
+const cneg = GC['earn-refuse-negative-carry-one-below'];
+const dneg = GC['deal-refuse-negative-carry-ekene'];
+w(`A CARRY BELOW 0 IS REFUSED. Under "farmor-side" the excess is the farmor's alone, so a share paid can leave the farminee paying less than its held interest of the gross cost: a negative carry, the farmor carrying the farminee. The engine refuses it and names the smallest share it accepts. At that share the carry is exactly 0 and the call runs (earn-carry-zero-farmor-side: ${f6(cz.farmineePaysPct)} percent for ${f6(cz.earnedPct)}, carry ${f6(cz.carry)}, FIN pays ${f6(cz.farmineePays)} and EKO ${f6(cz.farmorPays)}, engine); one point below it is refused (${cneg.id}, share ${S(cneg.args.events[0].farmineePaysPct)}), in the engine's words:`);
+quote(refusal(`earningObligation on ${cneg.id}`, E.earningObligation(argsOf(cneg.id)), cneg.expected.field).error);
+must('a carry of exactly 0 is accepted under farmor-side', cz.carry === 0 && cz.capState === 'exceeded', cz.carry);
+w(`The same check guards a deal on both outcomes. On the Ekene deal with the farmor-side rule the smallest share is ${S(dneg.expected.message.match(/at or above ([\d.]+)/)[1])} percent of the well, set by the success well above the cap; a stated ${S(dneg.args.deal.farmineePaysPct)} percent is refused (${dneg.id}), in the engine's words:`);
+quote(refusal(`dealValue on ${dneg.id}`, E.dealValue(argsOf(dneg.id)), dneg.expected.field).error);
+const bpFS = runG('deal-ekene-farmor-side').breakEvenPromote;
+w(`A BREAKPOINT IS NOT A STATED DEAL. The break-even promote's breakpoint table rolls the EMV back at the earned interest, which can sit below that smallest share: on deal-ekene-farmor-side it lists ${bpFS.breakpoints.map((b) => f6(b.farmineePaysPct)).join(' and ')}, and a deal stated at ${f6(bpFS.breakpoints[0].farmineePaysPct)} percent is refused by the check above. The solved break-even, ${f6(bpFS.farmineePaysPct)} percent, is above the smallest share (engine). A listed breakpoint is a point on the EMV line; it is never offered as a deal the engine accepts.`);
+must('the listed breakpoint sits below the minimum and the solved break-even above it', bpFS.breakpoints[0].farmineePaysPct < 31.363636 && bpFS.farmineePaysPct > 31.363637 && E.dealValue({ ...argsOf('deal-ekene-farmor-side'), deal: { ...argsOf('deal-ekene-farmor-side').deal, farmineePaysPct: bpFS.breakpoints[0].farmineePaysPct } }).error, JSON.stringify(bpFS.breakpoints));
 
 /* ============================================================ SECTION 13 */
 
@@ -655,7 +669,7 @@ must('the engine reproduces the Penn State EMVs to 1e-6', Math.abs(psu.farmor.al
 must('the engine reproduces the Penn State payoffs to 1e-6', Math.abs(psu.farmor.alone.dry - PSU.drillDry) < 1e-6 && Math.abs(psu.farmor.alone.success - PSU.drillProducer) < 1e-6 && Math.abs(psu.farmor.farmOut.dry - PSU.farmOutDry) < 1e-6 && Math.abs(psu.farmor.farmOut.success - PSU.farmOutProducer) < 1e-6, 'payoffs');
 // quote_check.py checks the Penn State page prints these figures (the page lives only in the wave directory).
 w();
-w(`The engine's farm out EMV is ${S(psu.farmor.farmOut.emv)} as a double; it prints as ${f6(PSU.farmOut)} at six decimals, and the check passes within 0.000001. The page's farm out payoff of ${f6(PSU.farmOutProducer)} is ${f6((PSU.farmOutProducer / argsOf('deal-psu-eme801').project.successValue.npv) * 100)} percent of the ${f6(argsOf('deal-psu-eme801').project.successValue.npv)} success value (derived), which is why the golden input keeps ${f6(100 - argsOf('deal-psu-eme801').deal.earnedPct)} percent for the owner; the page itself states no interest. The engine's reading of the page, the incoming party's side, and the break-evens on it are printed in ${ref('breakeven')}.`);
+w(`The engine's farm out EMV prints as ${f6(psu.farmor.farmOut.emv)} at six decimals (engine); the double it holds carries float residue in its last binary digits, and the check passes within ${S(1e-6)}. The page's farm out payoff of ${f6(PSU.farmOutProducer)} is ${f6((PSU.farmOutProducer / argsOf('deal-psu-eme801').project.successValue.npv) * 100)} percent of the ${f6(argsOf('deal-psu-eme801').project.successValue.npv)} success value (derived), which is why the golden input keeps ${f6(100 - argsOf('deal-psu-eme801').deal.earnedPct)} percent for the owner; the page itself states no interest. The engine's reading of the page, the incoming party's side, and the break-evens on it are printed in ${ref('breakeven')}.`);
 
 /* ============================================================ SECTION 15 */
 
@@ -776,6 +790,9 @@ w(`THE SIGNAL THAT TURNS THE DECISION. Without the survey ${FX.farminee.id} decl
 must('the signal turns the farminee decision and is worth more than its cost', iF.perSignal[0].bestAction === 'farm in' && iF.perSignal[1].bestAction === 'decline' && iF.netEvii > 0, 'turn');
 w(`THE SAME SURVEY TO EACH SIDE. To ${FX.farmor} the same survey is worth ${f6(iFo.evii)} (EVPI ${f6(iFo.evpi)}): after a bright signal ${FX.farmor} would drill alone, after a dim one it would farm out (engine). The two sides value the same information differently because their actions and payoffs differ.`);
 must('the farmor turns from drilling alone to farming out across the signals', iFo.perSignal[0].bestAction === 'drill alone' && iFo.perSignal[1].bestAction === 'farm out', 'farmor turn');
+
+w(`THE FARMOR'S PERFECT-INFORMATION PATH (derived). With perfect information ${FX.farmor} drills alone on a known success and walks away on a known dry hole, so its EMV with perfect information is the chance of success ${f6(dE.chanceOfSuccessPct)} percent times the drill-alone success payoff ${f6(dE.farmor.alone.success)}: ${f6(iFo.evWithPerfectInformation)} (engine), and EVPI is that less the EMV without information, ${f6(iFo.emvPrior)}.`);
+must('the farmor EV with perfect information is p x the drill-alone success payoff', Math.abs(iFo.evWithPerfectInformation - 0.25 * dE.farmor.alone.success) < 1e-6 && Math.abs(iFo.evpi - (iFo.evWithPerfectInformation - iFo.emvPrior)) < 1e-6, iFo.evWithPerfectInformation);
 const unin = runG('info-uninformative');
 w(`AN UNINFORMATIVE SIGNAL. On info-uninformative both signals are equally likely under success and dry hole; the chance of success stays ${f6(unin.perSignal[0].posteriorSuccessPct)} percent after either and EVII is ${f6(unin.evii)} (engine), exactly its stated cost of ${f6(unin.informationCost)}.`);
 must('an uninformative signal is worth 0', unin.evii === 0 && unin.netEvii === 0, unin.evii);
@@ -805,6 +822,13 @@ const rA = rE.positions[0];
 const rB = rE.positions[1];
 w(`THE EKENE DEEP POSITIONS (risk-ekene, golden input): ${FX.farmor} drilling alone holds its ${f6(FX.parties[0].participatingPct)} percent, and after the farm-out holds ${f6(FX.parties[0].participatingPct - FX.deal.earnedPct)} percent and the cash it receives as a certain holding. The EMVs are the dealValue EMVs of ${ref('dealvalue')} (${f6(rA.emv)} and ${f6(rB.emv)}, engine); the standard deviation falls from ${f6(rA.stdDev)} to ${f6(rB.stdDev)}, and the low case rises from ${f6(rA.p90)} to ${f6(rB.p90)}.`);
 must('the risk EMVs are the deal EMVs to 1e-6', Math.abs(rA.emv - dE.farmor.alone.emv) < 1e-6 && Math.abs(rB.emv - dE.farmor.farmOut.emv) < 1e-6, `${rA.emv} ${rB.emv}`);
+
+w('THE HOLDINGS OF EACH POSITION (golden input risk-ekene):');
+w();
+table(['position', 'holding', 'chance of success', 'success value', 'fail cost', 'standard deviation of the success value'], argsOf('risk-ekene').positions.flatMap((p) => p.holdings.map((h) => [p.name, h.id, f6(h.chanceOfSuccessPct), f6(h.successValue), f6(h.failCost), f6(h.successStdDev)])));
+const cashH = argsOf('risk-ekene').positions[1].holdings.find((h) => h.chanceOfSuccessPct === 100);
+w(`The certain holding is the cash ${FX.farmor} receives, ${f6(cashH.successValue)} (golden input): the bonus ${f6(FX.deal.cashBonus)} plus the reimbursement ${f6(eT.pastCostReimbursement)} less the assignor fees ${f6(FX.deal.assignorFees)} (derived).`);
+must('the certain holding is bonus plus reimbursement less fees', Math.abs(cashH.successValue - (FX.deal.cashBonus + eT.pastCostReimbursement - FX.deal.assignorFees)) < 1e-6, cashH.successValue);
 const band = 5 * Math.sqrt(0.75 * 0.25 / rE.iterations);
 w(`A DRAW IS AN ESTIMATE. Both Ekene positions lose money on a dry hole and on nothing else, so each loses with the dry-hole chance, ${f6(0.75)} (derived: 100 less the stated ${f6(FX.project.chanceOfSuccessPct)} percent, over 100). The ${S(rE.iterations)} seeded draws estimate ${f6(rA.probLoss)} and ${f6(rB.probLoss)} (engine), each within ${f6(band)} of it (derived: five standard errors of a proportion at that chance). The seed and the draw count are stated inputs, so the same call returns the same estimates on any machine; a different seed returns different ones.`);
 must('the Ekene draw estimates sit within five standard errors of the dry-hole chance', Math.abs(rA.probLoss - 0.75) < band && Math.abs(rB.probLoss - 0.75) < band, `${rA.probLoss} ${rB.probLoss} ${band}`);
@@ -844,6 +868,9 @@ w();
 w(`THE EKENE DEEP PRICE (interest-ekene-risked): the 100 percent position is worth ${f6(ipE.position100.emv)} risked at ${f6(ipE.chanceOfSuccessPct)} percent, ${f6(ipE.perPct.risked)} a percent; ${f6(ipE.interestPct)} percent on that basis is ${f6(ipE.interestValue)} (engine). The stated price of ${f6(ipE.transaction.price)} is ${f6(ipE.transaction.impliedPerPct)} a percent, ${f6(ipE.transaction.priceToValue)} times the risked value per percent (engine): a ratio of a stated price to a computed value, reported only.`);
 must('the priced interest is the interest scaling of the risked EMV', Math.abs(ipE.interestValue - ipE.position100.emv * 0.3) < 1e-6, ipE.interestValue);
 must('the risked value of 30 percent equals the farminee payoff EMV check: EMV of the 100 percent position over 100 per percent', Math.abs(ipE.perPct.risked * 100 - ipE.position100.emv) < 1e-6, 'per pct');
+
+w(`THE PRICE AND THE DEAL (derived). ${f6(ipE.interestPct)} percent on the risked basis, ${f6(ipE.interestValue)}, less the bonus ${f6(FX.deal.cashBonus)} and the reimbursement ${f6(eT.pastCostReimbursement)} is ${f6(ipE.interestValue - FX.deal.cashBonus - eT.pastCostReimbursement)}: FIN's EMV in deal-ekene paying ${f6(dE.breakEvenPromote.breakpoints[0].farmineePaysPct)} percent for ${f6(dE.terms.earnedPct)} (the first breakpoint, ${f6(dE.breakEvenPromote.breakpoints[0].emv)}, engine). Paying only its own share, the farminee holds the risked value of its interest less the cash it hands over.`);
+must('the price identity closes to 1e-6', Math.abs(ipE.interestValue - FX.deal.cashBonus - eT.pastCostReimbursement - dE.breakEvenPromote.breakpoints[0].emv) < 1e-6, dE.breakEvenPromote.breakpoints[0].emv);
 const neg = runG('interest-negative-emv');
 w(`NO RATIO ON A VALUE AT OR BELOW 0. On interest-negative-emv the risked value per percent is ${f6(neg.perPct.risked)}, and the engine returns no price-to-value ratio (${f6(neg.transaction.priceToValue)}) and says why in a reason.`);
 must('no price-to-value ratio on a negative value', neg.transaction.priceToValue === null, 'null');
@@ -967,6 +994,7 @@ const bfs = runG('deal-break-even-at-farmor-share');
 table(['rule', 'at the boundary (probed)', 'engine result'], [
   ['gross-cost cap', `a gross cost EQUAL to the cap (earn-cap-gross-exactly: ${f6(cge.grossCost)})`, `"${cge.capState}", excess ${f6(cge.excess)}; the promote on all of it`],
   ['carry-amount cap', `a carry EQUAL to the cap (earn-cap-carry-exactly: ${f6(cce.carry)})`, `"${cce.capState}"`],
+  ['carry under farmor-side', `the share at which the carry is 0 (earn-carry-zero-farmor-side: ${f6(runG('earn-carry-zero-farmor-side').events[0].farmineePaysPct)})`, `accepted, carry ${f6(runG('earn-carry-zero-farmor-side').events[0].carry)}; one point below is refused (earn-refuse-negative-carry-one-below)`],
   ['carry-amount cap of 0', 'a cap of 0 (earn-cap-carry-zero)', `carry ${f6(runG('earn-cap-carry-zero').events[0].carry)}; the farminee pays its own share alone`],
   ['promote', `a share paid EQUAL to the interest earned (earn-heads-up)`, `promote ${f6(hu.promotePoints)} points, ratio ${f6(hu.promoteRatio)}`],
   ['share paid', 'a share paid EQUAL to the farmor\'s interest (earn-full-carry)', `accepted; the farmor pays ${f6(fc.farmorPays)}; one point above is refused (earn-refuse-pays-above-farmor)`],

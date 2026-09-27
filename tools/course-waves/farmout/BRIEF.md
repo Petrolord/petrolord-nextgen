@@ -162,7 +162,7 @@ that finds each.
 
 ## THE REFUSALS
 
-Digest section 5 tables 61 refusals across 8 functions, each with the field it
+Digest section 5 tables 67 refusals across 8 functions, each with the field it
 names and the engine's message verbatim. **Quote a refusal in a blockquote as
 the engine's own words.** A result returned with a reason (an event not
 completed, a break-even that does not exist, a consent deemed withdrawn) is a

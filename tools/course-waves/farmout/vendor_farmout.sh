@@ -8,7 +8,8 @@
 # cannot parse, so those, the fixture README, the fixture writer, the oracle,
 # the timing script and the negative control are NAMED with the reason they
 # travel, with FINDINGS-farmout.md, the validation record (engines #273).
-# Vendored at b7d305b (engines #272 the engine, #273 FINDINGS, #274 the simple
+# Vendored at 6626465 (engines #272 the engine, #273 and #275 FINDINGS, #276 the
+# negative-carry refusal, #274 the simple
 # uplift in jointVenture.carryRecovery, which farmout.developmentCarry passes
 # through).
 #
@@ -40,7 +41,7 @@ set -euo pipefail
 ENG=/root/petrolord-engines
 NG=${NG:-/root/wt-ec10-nextgen}
 PREFIX=ec10-farmout
-REV=${REV:-b7d305b}
+REV=${REV:-6626465}
 FULL=$(git -C "$ENG" rev-parse "$REV^{commit}")
 PIN=$(python3 -c "import json,sys;print(json.load(open(sys.argv[1]))['canonical']['commit'])" "$NG/packages/engines/VENDOR.json")
 EXP=$(mktemp -d)
@@ -157,7 +158,7 @@ for p in paths:
     added.append({
         'path': p, 'kind': 'extra', 'group': GROUP, 'vendoredSha': blob,
         'reason': (f"EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines {full[:7]} "
-                   f"(PRs #272, #273, #274) under its own root {prefix}/ by the wave's vendor_farmout.sh, 4 proofs per path. "
+                   f"(PRs #272 to #276) under its own root {prefix}/ by the wave's vendor_farmout.sh, 4 proofs per path. "
                    f"Its own root because farmout.js needs the {full[:7]} decisionTree.js and portfolio.js, whose canonical "
                    f"NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses "
                    f"(pull only with their recut). Remove this entry, and collapse the root into the canonical paths, "

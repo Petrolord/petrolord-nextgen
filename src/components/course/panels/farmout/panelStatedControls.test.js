@@ -99,6 +99,34 @@ describe('THE PASTE PATH THROUGH EVERY VIEW', () => {
     expect(L.devCarryOf(L.READING_CASES.simple).basis.uplift).toContain('a recovery pays the accrued interest first, then the principal');
     expect(html).toContain('a recovery pays the accrued interest first, then the principal');
   });
+  it('clearing both optional payment dates removes the payment key whole, and the engine returns the no-payment result', () => {
+    const t = L.pretty(L.STARTS.fee);
+    const one = JSON.parse(L.setStated(t, 'fee', 'payment.notifiedOn', undefined).text);
+    expect(one.payment).toBeTruthy();
+    expect(L.feeOf(one).field).toBe('payment.notifiedOn');
+    const both = JSON.parse(L.setStated(L.pretty(one), 'fee', 'payment.paidOn', undefined).text);
+    expect(Object.prototype.hasOwnProperty.call(both, 'payment')).toBe(false);
+    const r = L.feeOf(both);
+    expect(r.error).toBeUndefined();
+    expect(r.payment).toBeNull();
+    expect(r.fee).toBe(L.feeOf(L.STARTS.fee).fee);
+    // the same in a whole case file: only the fee block's payment goes
+    const whole = JSON.parse(TEXT.umunze);
+    const a = L.setStated(TEXT.umunze, 'fee', 'payment.notifiedOn', undefined).text;
+    const b = JSON.parse(L.setStated(a, 'fee', 'payment.paidOn', undefined).text);
+    expect(Object.prototype.hasOwnProperty.call(b.fee, 'payment')).toBe(false);
+    expect(b.deal).toEqual(whole.deal);
+  });
+  it('the earning calculator starts from the whole-interest and below-the-cap cases and prints the consent line read only', () => {
+    expect(L.STARTS.earnAllOfFarmor).toBe(L.GOLDEN_ARGS['earn-all-of-farmor'].args);
+    expect(L.earningOf(L.STARTS.earnAllOfFarmor).error).toBeUndefined();
+    expect(L.earningOf(L.STARTS.capGrossBelow).error).toBeUndefined();
+    const html = render(EarningCalculator, 'earning', null);
+    expect(html).toContain("The farmor&#x27;s whole interest earned");
+    expect(html).toContain('A well below its gross-cost cap');
+    expect(html).toContain('THE CONSENT IN WORDS, AS THE ENGINE STATES IT');
+    expect(html).toContain(L.feeOf(L.STARTS.earnConsent).basis.consent.replace(/'/g, '&#x27;'));
+  });
   it('NEGATIVE CONTROL: a label no view prints is reported absent', () => {
     expect(labelled(render(EarningCalculator, 'earning', TEXT.ogbaku), 'a control nobody wrote')).toBe(false);
   });
