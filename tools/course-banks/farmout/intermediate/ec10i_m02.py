@@ -91,7 +91,7 @@ q(1, "A one-event deal is stated with eventsCompleted set to 2. In the engine's 
  ["A result with the extra count ignored",
   "eventsCompleted must be at most 2; got 2",
   "A result that counts the event twice, doubling the totals"],
- "The refusal is the engine's: \"eventsCompleted must be at most 1, the number of events; got 2\". A count above the number of events is refused, never trimmed. No event is paid twice, and the bound is the number of events stated in the deal.")
+ "The refusal is the engine's: \"eventsCompleted must be at most 1, the number of events; got 2\". A count above the number of events is refused, and nothing is trimmed. No event is paid twice, and the bound is the number of events stated in the deal.")
 
 q(3, "The first of two events earns 40 percent from a farmor holding 70; the second event is stated to earn 35 more. How does the engine answer?",
  "events[1].earnedPct must be at most 30, the farmor's interest 70 less 40 already earned; got 35",
