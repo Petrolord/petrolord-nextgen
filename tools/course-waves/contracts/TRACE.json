@@ -1,30 +1,199 @@
 {
- "beginner/m01-contract-management-and-its-sources/l01-what-contract-management-is": [],
- "beginner/m01-contract-management-and-its-sources/l02-the-contract-lifecycle": [],
- "beginner/m01-contract-management-and-its-sources/l03-owners-managers-and-the-supplier": [],
- "beginner/m01-contract-management-and-its-sources/l04-the-sources-and-their-dates": [],
- "beginner/m01-contract-management-and-its-sources/l05-a-practice-course-and-its-written-work": [],
- "beginner/m02-award-handover-and-mobilisation/l01-from-tender-team-to-contract-team": [],
- "beginner/m02-award-handover-and-mobilisation/l02-the-contract-management-plan": [],
- "beginner/m02-award-handover-and-mobilisation/l03-the-kick-off-meeting": [],
- "beginner/m02-award-handover-and-mobilisation/l04-mobilisation-and-first-deliveries": [],
- "beginner/m03-reading-the-contract-you-manage/l01-scope-and-specification": [],
- "beginner/m03-reading-the-contract-you-manage/l02-the-price-basis": [],
- "beginner/m03-reading-the-contract-you-manage/l03-order-of-precedence": [],
- "beginner/m03-reading-the-contract-you-manage/l04-clauses-a-contract-manager-uses": [],
- "beginner/m04-kpis-and-service-levels/l01-what-a-kpi-measures": [],
- "beginner/m04-kpis-and-service-levels/l02-designing-an-indicator": [],
- "beginner/m04-kpis-and-service-levels/l03-service-levels-and-service-credits": [],
- "beginner/m04-kpis-and-service-levels/l04-data-evidence-and-a-disputed-score": [],
- "beginner/m05-payment-records-and-the-audit-trail/l01-checking-an-invoice": [],
- "beginner/m05-payment-records-and-the-audit-trail/l02-certifying-work-done": [],
- "beginner/m05-payment-records-and-the-audit-trail/l03-records-that-survive-an-audit": [],
- "beginner/m05-payment-records-and-the-audit-trail/l04-correspondence-and-instructions": [],
- "beginner/m06-nigerian-content-in-execution/l01-the-content-act-and-the-board": [],
- "beginner/m06-nigerian-content-in-execution/l02-first-consideration-in-practice": [],
- "beginner/m06-nigerian-content-in-execution/l03-nigerians-employed-and-trained": [],
- "beginner/m06-nigerian-content-in-execution/l04-plans-and-reports-a-contract-carries": [],
- "beginner/m06-nigerian-content-in-execution/l05-preparing-for-the-associate-exam": [],
+ "beginner/m01-contract-management-and-its-sources/l01-what-contract-management-is": [
+  "P008",
+  "P009",
+  "P007",
+  "P001",
+  "P010",
+  "P066"
+ ],
+ "beginner/m01-contract-management-and-its-sources/l02-the-contract-lifecycle": [
+  "P011",
+  "P017",
+  "P009",
+  "P014",
+  "P190",
+  "P195",
+  "P127"
+ ],
+ "beginner/m01-contract-management-and-its-sources/l03-owners-managers-and-the-supplier": [
+  "P002",
+  "P001",
+  "P006",
+  "P003",
+  "P021",
+  "P012"
+ ],
+ "beginner/m01-contract-management-and-its-sources/l04-the-sources-and-their-dates": [
+  "P139",
+  "P102",
+  "P052",
+  "P066",
+  "P020"
+ ],
+ "beginner/m01-contract-management-and-its-sources/l05-a-practice-course-and-its-written-work": [
+  "P009",
+  "P007"
+ ],
+ "beginner/m02-award-handover-and-mobilisation/l01-from-tender-team-to-contract-team": [
+  "P013",
+  "P011",
+  "P108",
+  "P021",
+  "P213"
+ ],
+ "beginner/m02-award-handover-and-mobilisation/l02-the-contract-management-plan": [
+  "P014",
+  "P015",
+  "P018",
+  "P019",
+  "P020"
+ ],
+ "beginner/m02-award-handover-and-mobilisation/l03-the-kick-off-meeting": [
+  "P023",
+  "P024",
+  "P016",
+  "P021"
+ ],
+ "beginner/m02-award-handover-and-mobilisation/l04-mobilisation-and-first-deliveries": [
+  "P017",
+  "P016",
+  "P022",
+  "P049",
+  "P050",
+  "P051"
+ ],
+ "beginner/m03-reading-the-contract-you-manage/l01-scope-and-specification": [
+  "P007",
+  "P029",
+  "P030"
+ ],
+ "beginner/m03-reading-the-contract-you-manage/l02-the-price-basis": [
+  "P026",
+  "P027",
+  "P028",
+  "P029",
+  "P159",
+  "P149",
+  "P150",
+  "P031"
+ ],
+ "beginner/m03-reading-the-contract-you-manage/l03-order-of-precedence": [
+  "P024",
+  "P032",
+  "P033",
+  "P034",
+  "P102"
+ ],
+ "beginner/m03-reading-the-contract-you-manage/l04-clauses-a-contract-manager-uses": [
+  "P025",
+  "P151",
+  "P077",
+  "P087",
+  "P131",
+  "P118",
+  "P179"
+ ],
+ "beginner/m04-kpis-and-service-levels/l01-what-a-kpi-measures": [
+  "P036",
+  "P035",
+  "P043",
+  "P019"
+ ],
+ "beginner/m04-kpis-and-service-levels/l02-designing-an-indicator": [
+  "P040",
+  "P041",
+  "P037",
+  "P196",
+  "P036"
+ ],
+ "beginner/m04-kpis-and-service-levels/l03-service-levels-and-service-credits": [
+  "P054",
+  "P151",
+  "P028",
+  "P042"
+ ],
+ "beginner/m04-kpis-and-service-levels/l04-data-evidence-and-a-disputed-score": [
+  "P160",
+  "P038",
+  "P039",
+  "P042"
+ ],
+ "beginner/m05-payment-records-and-the-audit-trail/l01-checking-an-invoice": [
+  "P054",
+  "P211",
+  "P194",
+  "P047",
+  "P048",
+  "P045"
+ ],
+ "beginner/m05-payment-records-and-the-audit-trail/l02-certifying-work-done": [
+  "P050",
+  "P047",
+  "P055",
+  "P185"
+ ],
+ "beginner/m05-payment-records-and-the-audit-trail/l03-records-that-survive-an-audit": [
+  "P160",
+  "P078",
+  "P130",
+  "P136",
+  "P053",
+  "P052"
+ ],
+ "beginner/m05-payment-records-and-the-audit-trail/l04-correspondence-and-instructions": [
+  "P160",
+  "P021",
+  "P087",
+  "P077",
+  "P078",
+  "P089"
+ ],
+ "beginner/m06-nigerian-content-in-execution/l01-the-content-act-and-the-board": [
+  "P100",
+  "P102",
+  "P135",
+  "P129",
+  "P136",
+  "P139",
+  "P133",
+  "P131"
+ ],
+ "beginner/m06-nigerian-content-in-execution/l02-first-consideration-in-practice": [
+  "P105",
+  "P107",
+  "P106",
+  "P125",
+  "P122"
+ ],
+ "beginner/m06-nigerian-content-in-execution/l03-nigerians-employed-and-trained": [
+  "P112",
+  "P119",
+  "P114",
+  "P113",
+  "P118"
+ ],
+ "beginner/m06-nigerian-content-in-execution/l04-plans-and-reports-a-contract-carries": [
+  "P103",
+  "P137",
+  "P131",
+  "P132",
+  "P109",
+  "P113",
+  "P127",
+  "P130"
+ ],
+ "beginner/m06-nigerian-content-in-execution/l05-preparing-for-the-associate-exam": [
+  "P007",
+  "P001",
+  "P054",
+  "P077",
+  "P100",
+  "P102",
+  "P131",
+  "P130",
+  "P042"
+ ],
  "intermediate/m01-segmenting-suppliers/l01-why-suppliers-get-different-attention": [],
  "intermediate/m01-segmenting-suppliers/l02-profit-impact-and-supply-risk": [],
  "intermediate/m01-segmenting-suppliers/l03-tiering-contracts-by-risk-and-value": [],
