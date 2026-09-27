@@ -18,7 +18,7 @@ The UK guidance note on assessing and monitoring the economic and financial stan
 
 ## Risk and reward decide the effort
 
-The UK Contract Management Principles, principle 4, direct the most and strongest resource to contracts where the risks and rewards are highest. The tier is the written form of that choice: which contracts get a senior owner at reviews, whose finances are watched, and which need a continuity plan.
+The UK Contract Management Principles (publication page updated December 2025), principle 4, direct the most and strongest resource to contracts where the risks and rewards are highest. The tier is the written form of that choice: which contracts get a senior owner at reviews, whose finances are watched, and which need a continuity plan.
 
 All of these are UK texts that bind UK contracting authorities. For Ekene they are published practice: the operator may adopt the four factors in its own register, and the course asks what they would mean on an Ekene contract.
 

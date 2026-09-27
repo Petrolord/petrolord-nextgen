@@ -6,13 +6,13 @@ Every text in this lesson was read on 27 September 2026.
 
 ## The UK rule: a ground or a new procurement
 
-The UK guidance on Contract Modifications (Crown copyright 2024), para 1, states the rule for UK contracting authorities under the Procurement Act 2023:
+The UK guidance on Contract Modifications (Crown copyright 2024), para 1, states the rule for UK contracting authorities under the Procurement Act 2023 as enacted:
 
 > If a modification cannot be justified on at least one of the grounds, the modification is not permitted and a new procurement must be carried out if the contracting authority wishes to implement the subject-matter of the modification.
 
 ## Some of the grounds
 
-Three of the grounds the guidance describes show the shape:
+Three grounds the guidance describes show the shape:
 
 * **Non-substantial change.** The term moves by no more than 10% of the maximum term at award, with no material change of scope or of economic balance toward the supplier.
 * **Below-threshold change.** A modification may not move the estimated value by more than 10% for goods or services or 15% for works, and all such modifications together must stay below the threshold for that type of contract.

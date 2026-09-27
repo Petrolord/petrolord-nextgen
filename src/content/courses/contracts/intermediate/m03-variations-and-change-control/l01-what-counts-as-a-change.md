@@ -6,7 +6,7 @@ Every text in this lesson was read on 27 September 2026.
 
 ## The contract's own word first
 
-Contracts use different words: variation, change order, change, amendment. The course follows the contract's own word first. "Modification" is the word of the UK Procurement Act 2023 for a change to a public contract after award. Whatever the word, a change alters what the contract requires, when, or for what price.
+Contracts use different words: variation, change order, change, amendment. The course follows the contract's own word first. "Modification" is the word of the UK Procurement Act 2023 (as enacted) for a change to a public contract after award. Whatever the word, a change alters what the contract requires, when, or for what price.
 
 ## The standard for change control
 

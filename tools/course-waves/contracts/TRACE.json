@@ -194,32 +194,179 @@
   "P130",
   "P042"
  ],
- "intermediate/m01-segmenting-suppliers/l01-why-suppliers-get-different-attention": [],
- "intermediate/m01-segmenting-suppliers/l02-profit-impact-and-supply-risk": [],
- "intermediate/m01-segmenting-suppliers/l03-tiering-contracts-by-risk-and-value": [],
- "intermediate/m01-segmenting-suppliers/l04-relationship-models-for-each-segment": [],
- "intermediate/m01-segmenting-suppliers/l05-segmenting-the-ekene-suppliers": [],
- "intermediate/m02-supplier-performance-reviews/l01-the-review-cycle": [],
- "intermediate/m02-supplier-performance-reviews/l02-the-scorecard-and-its-evidence": [],
- "intermediate/m02-supplier-performance-reviews/l03-running-the-review-meeting": [],
- "intermediate/m02-supplier-performance-reviews/l04-improvement-plans-that-close": [],
- "intermediate/m03-variations-and-change-control/l01-what-counts-as-a-change": [],
- "intermediate/m03-variations-and-change-control/l02-authority-to-instruct-a-change": [],
- "intermediate/m03-variations-and-change-control/l03-assessing-a-change-request": [],
- "intermediate/m03-variations-and-change-control/l04-limits-on-modifying-a-public-contract": [],
- "intermediate/m03-variations-and-change-control/l05-the-change-register": [],
- "intermediate/m04-supplier-risk-and-resilience/l01-risks-a-supplier-carries-in": [],
- "intermediate/m04-supplier-risk-and-resilience/l02-financial-standing-and-early-warnings": [],
- "intermediate/m04-supplier-risk-and-resilience/l03-single-sources-and-continuity": [],
- "intermediate/m04-supplier-risk-and-resilience/l04-resolution-planning": [],
- "intermediate/m05-nigerian-content-obligations-in-depth/l01-the-nigerian-content-plan": [],
- "intermediate/m05-nigerian-content-obligations-in-depth/l02-employment-and-expatriate-positions": [],
- "intermediate/m05-nigerian-content-obligations-in-depth/l03-training-and-capacity-building": [],
- "intermediate/m05-nigerian-content-obligations-in-depth/l04-performance-reports-and-monitoring": [],
- "intermediate/m06-poor-performance-and-remedies/l01-from-concern-to-formal-notice": [],
- "intermediate/m06-poor-performance-and-remedies/l02-remedies-the-contract-gives": [],
- "intermediate/m06-poor-performance-and-remedies/l03-recording-poor-performance": [],
- "intermediate/m06-poor-performance-and-remedies/l04-preparing-for-the-professional-exam": [],
+ "intermediate/m01-segmenting-suppliers/l01-why-suppliers-get-different-attention": [
+  "P004",
+  "P061",
+  "P062",
+  "P066"
+ ],
+ "intermediate/m01-segmenting-suppliers/l02-profit-impact-and-supply-risk": [
+  "P056",
+  "P057",
+  "P058"
+ ],
+ "intermediate/m01-segmenting-suppliers/l03-tiering-contracts-by-risk-and-value": [
+  "P060",
+  "P093",
+  "P004"
+ ],
+ "intermediate/m01-segmenting-suppliers/l04-relationship-models-for-each-segment": [
+  "P062",
+  "P063",
+  "P064",
+  "P065",
+  "P059"
+ ],
+ "intermediate/m01-segmenting-suppliers/l05-segmenting-the-ekene-suppliers": [
+  "P061",
+  "P004",
+  "P060",
+  "P056",
+  "P062",
+  "P007"
+ ],
+ "intermediate/m02-supplier-performance-reviews/l01-the-review-cycle": [
+  "P007",
+  "P009",
+  "P069",
+  "P038"
+ ],
+ "intermediate/m02-supplier-performance-reviews/l02-the-scorecard-and-its-evidence": [
+  "P041",
+  "P036",
+  "P040",
+  "P039",
+  "P160"
+ ],
+ "intermediate/m02-supplier-performance-reviews/l03-running-the-review-meeting": [
+  "P042",
+  "P067",
+  "P132",
+  "P160"
+ ],
+ "intermediate/m02-supplier-performance-reviews/l04-improvement-plans-that-close": [
+  "P067",
+  "P068",
+  "P042",
+  "P070",
+  "P074"
+ ],
+ "intermediate/m03-variations-and-change-control/l01-what-counts-as-a-change": [
+  "P077",
+  "P156",
+  "P080",
+  "P089"
+ ],
+ "intermediate/m03-variations-and-change-control/l02-authority-to-instruct-a-change": [
+  "P021",
+  "P087",
+  "P078",
+  "P012"
+ ],
+ "intermediate/m03-variations-and-change-control/l03-assessing-a-change-request": [
+  "P088",
+  "P156",
+  "P078",
+  "P084"
+ ],
+ "intermediate/m03-variations-and-change-control/l04-limits-on-modifying-a-public-contract": [
+  "P079",
+  "P080",
+  "P081",
+  "P082",
+  "P083",
+  "P086",
+  "P102"
+ ],
+ "intermediate/m03-variations-and-change-control/l05-the-change-register": [
+  "P078",
+  "P020",
+  "P160"
+ ],
+ "intermediate/m04-supplier-risk-and-resilience/l01-risks-a-supplier-carries-in": [
+  "P133",
+  "P187",
+  "P099"
+ ],
+ "intermediate/m04-supplier-risk-and-resilience/l02-financial-standing-and-early-warnings": [
+  "P090",
+  "P093",
+  "P094",
+  "P095",
+  "P096"
+ ],
+ "intermediate/m04-supplier-risk-and-resilience/l03-single-sources-and-continuity": [
+  "P060",
+  "P004",
+  "P187",
+  "P098",
+  "P099"
+ ],
+ "intermediate/m04-supplier-risk-and-resilience/l04-resolution-planning": [
+  "P091",
+  "P098",
+  "P097",
+  "P092"
+ ],
+ "intermediate/m05-nigerian-content-obligations-in-depth/l01-the-nigerian-content-plan": [
+  "P103",
+  "P104",
+  "P105",
+  "P102",
+  "P137",
+  "P125"
+ ],
+ "intermediate/m05-nigerian-content-obligations-in-depth/l02-employment-and-expatriate-positions": [
+  "P112",
+  "P119",
+  "P118",
+  "P115",
+  "P116",
+  "P117"
+ ],
+ "intermediate/m05-nigerian-content-obligations-in-depth/l03-training-and-capacity-building": [
+  "P135",
+  "P113",
+  "P114",
+  "P121"
+ ],
+ "intermediate/m05-nigerian-content-obligations-in-depth/l04-performance-reports-and-monitoring": [
+  "P127",
+  "P128",
+  "P109",
+  "P131",
+  "P129",
+  "P130"
+ ],
+ "intermediate/m06-poor-performance-and-remedies/l01-from-concern-to-formal-notice": [
+  "P067",
+  "P184",
+  "P160",
+  "P070",
+  "P075"
+ ],
+ "intermediate/m06-poor-performance-and-remedies/l02-remedies-the-contract-gives": [
+  "P076",
+  "P182",
+  "P068",
+  "P186",
+  "P185"
+ ],
+ "intermediate/m06-poor-performance-and-remedies/l03-recording-poor-performance": [
+  "P071",
+  "P070",
+  "P072",
+  "P073",
+  "P074",
+  "P160"
+ ],
+ "intermediate/m06-poor-performance-and-remedies/l04-preparing-for-the-professional-exam": [
+  "P004",
+  "P061",
+  "P078",
+  "P067",
+  "P131"
+ ],
  "advanced/m01-contract-strategy/l01-what-a-contract-strategy-decides": [
   "P011",
   "P004",

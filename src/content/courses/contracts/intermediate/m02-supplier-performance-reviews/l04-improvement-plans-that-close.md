@@ -6,7 +6,7 @@ Every text in this lesson was read on 27 September 2026.
 
 ## Where the plan comes from
 
-GovS 008 (version 2.2, issued 1 April 2026), at 5.4.3, names the tool: where performance does not or is unlikely to meet the contract, corrective action is taken within the terms of the contract, "such as through formal notice or a performance improvement plan." The UK Contract Management Principles, principle 3, ask contract managers to "Understand and use contractual options such as appointment of Remedial Advisor, Rectification Plans and Step In rights." Both are UK texts, read here as practice. On an Ekene contract the first question is whether the contract itself provides a rectification plan procedure; if it does, that procedure is followed.
+GovS 008 (version 2.2, issued 1 April 2026), at 5.4.3, names the tool: where performance does not or is unlikely to meet the contract, corrective action is taken within the terms of the contract, "such as through formal notice or a performance improvement plan." The UK Contract Management Principles (publication page updated December 2025), principle 3, ask contract managers to "Understand and use contractual options such as appointment of Remedial Advisor, Rectification Plans and Step In rights." Both are UK texts, read here as practice. On an Ekene contract the first question is whether the contract itself provides a rectification plan procedure; if it does, that procedure is followed.
 
 ## Five parts of a plan that closes
 

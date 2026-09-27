@@ -6,7 +6,7 @@ Every text in this lesson was read on 27 September 2026.
 
 ## The rules the register follows
 
-Three published statements shape the register. GovS 008 (version 2.2, issued 1 April 2026), at 6.3: "Suppliers should be segmented according to their commercial and business impact." The UK Contract Management Principles, principle 4, direct the strongest resource where risks and rewards are highest. The Sourcing Playbook (June 2023) lists the tiering factors: impact of service failure, service continuity, speed and ease of switching, and value. All three are UK texts, read here as practice Ekene may adopt. The portfolio idea (Kraljic, Harvard Business Review, 1983, by concept) supplies the four groups: strategic, bottleneck, leverage and non-critical.
+Three published statements shape the register. GovS 008 (version 2.2, issued 1 April 2026), at 6.3: "Suppliers should be segmented according to their commercial and business impact." The UK Contract Management Principles (publication page updated December 2025), principle 4, direct the strongest resource where risks and rewards are highest. The Sourcing Playbook (June 2023) lists the tiering factors: impact of service failure, service continuity, speed and ease of switching, and value. All three are UK texts, read here as practice Ekene may adopt. The portfolio idea (Kraljic, Harvard Business Review, 1983, by concept) supplies the four groups: strategic, bottleneck, leverage and non-critical.
 
 ## The seven contracts
 
@@ -30,7 +30,7 @@ Three published statements shape the register. GovS 008 (version 2.2, issued 1 A
 
 **EKC-05** is a one-off works contract. Its risk is high while the work runs and falls away at completion, so its tier is set for the life of the works and reviewed at handover.
 
-**EKC-03 and EKC-07** read as non-critical or leverage. Both can be managed firmly by their own terms, with EKC-07's key person noted as its one switching difficulty.
+**EKC-03 and EKC-07** read as non-critical or leverage. Both can be managed firmly by their own terms, with EKC-07's key person noted as its one switching difficulty. GovS 008, at 6.2, accepts that suppliers like these may need no relationship management at all, so the time saved goes to the strategic contracts.
 
 ## What changes because of the segment
 
