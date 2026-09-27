@@ -8,7 +8,7 @@
    "7.295600 m2, the footprint of the 10 ft container on the same list"
   ],
   "answer": 1,
-  "explanation": "The footprint of a unit is its length times its width, 6.060000 by 2.440000, which is 14.786400 m2. The weight is checked against the deck load and never read as area. Length alone is no area, and 7.295600 m2 belongs to the smaller container."
+  "explanation": "The footprint of a unit is its length times its width, 6.060000 by 2.440000, which is 14.786400 m2. The weight is checked against the deck load; it is no area. Length alone is no area, and 7.295600 m2 belongs to the smaller container."
  },
  {
   "prompt": "The Ekene deck cargo books the casing joints as one item line, pipe-bundle, with a quantity of 2. How does the deck plan name its units?",
@@ -85,7 +85,7 @@
    "A refusal, since the units leave no margin on area or on the load"
   ],
   "answer": 2,
-  "explanation": "The engine carries both: a unit that fills the deck exactly fits, a reading it states, with the fit checked inclusively at twelve digits. The alternative, an exact fill read as overflow, would leave one unit behind. Nothing is overloaded at the capacity, and a deck plan refuses inputs and never a tight fit."
+  "explanation": "The engine carries both: a unit that fills the deck exactly fits, a reading it states, with the fit checked inclusively at twelve digits. The alternative, an exact fill read as overflow, would leave one unit behind. Nothing is overloaded at the capacity, and a deck plan refuses bad inputs only; a tight fit is a result."
  },
  {
   "prompt": "On that exact-fit case, a planner raises each unit's weight from 1.5 t to 1.6 t, leaving the 3 t deck load. What does the engine return?",

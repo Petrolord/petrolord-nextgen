@@ -129,7 +129,7 @@
    "3 voyages, driven by deck area, since its new ratio rounds up to exactly 3 voyages"
   ],
   "answer": 2,
-  "explanation": "With 800 m2 of capacity the deck ratio falls below 3, and so does every other ratio, deadweight's 2.084143 included. The voyages needed are the larger of the largest ratio and the visits, so the visits set 3 and the engine names minimum visits. The deck ratio is compared unrounded, so it cannot claim the count by rounding up to 3."
+  "explanation": "With 800 m2 of capacity the deck ratio falls below 3 while staying the largest ratio, above deadweight's 2.084143. The voyages needed are the larger of the largest ratio and the visits, so the visits set 3 and the engine names minimum visits. The deck ratio is compared unrounded, so it cannot claim the count by rounding up to 3."
  },
  {
   "prompt": "EKJ's minimum visits go from 3 to 4 while the rest of the rainy-season PSV milk run week, voyages rounded up, stays as stated. What does the engine return?",
@@ -140,7 +140,7 @@
    "8 voyages, the 4 of deck area plus the 4 visits, and the vessel-days double"
   ],
   "answer": 1,
-  "explanation": "The voyages needed are the larger of 3.100000 and 4, so they are 4.000000 and the visits are named. Rounded up, deck area also gave 4 voyages, so the vessel-days do not move: 4 times 2.586364 days is 10.345455. The driver changed and the count did not. Visits are compared with the ratio and never added to it."
+  "explanation": "The voyages needed are the larger of 3.100000 and 4, so they are 4.000000 and the visits are named. Rounded up, deck area also gave 4 voyages, so the vessel-days do not move: 4 times 2.586364 days is 10.345455. The driver changed and the count did not. Visits are compared with the ratio; they are not added to it."
  },
  {
   "prompt": "The Ekene week is sized on the PSV as dedicated voyages, one voyage set per installation. EKJ asks for 900.000000 m2 of deck cargo against 600.000000 m2 a voyage and states 3 visits. What does the engine name as the driver of each set?",
@@ -162,6 +162,6 @@
    "A faster vessel, since shorter voyages let the same visits carry more of the period's demand"
   ],
   "answer": 0,
-  "explanation": "When the visits drive, every demand ratio sits at or below them, so a bigger deck, tank or speed changes a ratio that is already under the count. Only a change to the stated visits moves it, or a demand rise that lifts a ratio above them. Speed changes the voyage days and never the voyage count."
+  "explanation": "When the visits drive, every demand ratio sits at or below them, so a bigger deck, tank or speed changes a ratio that is already under the count. Only a change to the stated visits moves it, or a demand rise that lifts a ratio above them. Speed changes the voyage days while the voyage count stays put."
  }
 ]

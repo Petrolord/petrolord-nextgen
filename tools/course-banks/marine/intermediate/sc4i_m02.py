@@ -29,16 +29,16 @@ q(0, "What does voyageRounding \"none\" describe that \"up\" does not?",
   "The voyage count with the minimum visits removed, leaving the demand ratio on its own"],
  "\"none\" keeps the fraction: 3.100000 voyages is what the Ekene week averages over many periods, the right figure for a budget spread over a year. The fewest whole voyages is \"up\". No cargo is left ashore by either rule, and the visits still count under both, since rounding acts on the voyages needed.")
 
-q(2, "A dedicated installation's deck demand is 2.1 m2 against a deck area capacity of 0.7 m2, voyages rounded up. The double arithmetic returns the ratio as 3.0000000000000004. What voyage count does the engine return?",
+q(2, "A dedicated installation's deck demand is 2.1 m2 against a deck area capacity of 0.7 m2, voyages rounded up. The binary arithmetic returns the ratio a hair above 3 in its last digit. What voyage count does the engine return?",
  "3, because it rounds up the ratio's twelve-significant-digit figure, which is 3",
  ["4, the ceiling of the raw double, since the ratio sits a hair above exactly 3",
-  "3.0000000000000004, since a count rounded up keeps the exact ratio",
+  "A hair over 3, since a count rounded up keeps the exact ratio",
   "A refusal, since a demand ratio must be a whole number to round up"],
- "The engine's stated reading takes the ceiling of the twelve-digit figure, and 3.0000000000000004 agrees with 3 to twelve digits, so the engine returns 3 voyages. The alternative, a ceiling of the raw double, would plan a fourth voyage for binary noise. A rounded count is whole, and nothing here is refused.")
+ "The engine's stated reading takes the ceiling of the twelve-digit figure, and the ratio agrees with 3 to twelve digits, so the engine returns 3 voyages. The alternative, a ceiling of the raw double, would plan a fourth voyage for binary noise. A rounded count is whole, and nothing here is refused.")
 
 q(2, "One installation sized alone asks for 300.001 m2 of deck cargo against a deck area capacity of 100 m2, voyages rounded up. Why does the engine return 4 voyages?",
  "The demand is a thousandth of a square metre above three voyages, a real fourth voyage",
- ["The binary figure 3.0000099999999996 always rounds up whatever its first twelve digits say",
+ ["The binary figure of the ratio always rounds up whatever its first twelve digits say",
   "A thousandth of a square metre rounds away at twelve digits, so the extra voyage is noise",
   "Rounding up adds one voyage to every whole ratio so that no set runs at full capacity"],
  "300.001 over 100 differs from 3 in the sixth significant digit, well inside twelve, so the twelve-digit figure is above 3 and rounds up to 4. The comparison at twelve digits removes only binary noise in the last digits, which is why 300 over 100 gives 3. Rounding up adds nothing to a ratio that is whole.")
@@ -59,7 +59,7 @@ q(3, "The Ekene PSV milk run week sails 4 voyages (voyages rounded up) in every 
 
 q(1, "The Ekene week is sized on the PSV as dedicated voyages, voyages rounded up: EKA 2 voyages of 1.363636 days, EKJ 3 of 1.518182, EKB 1 of 1.372727 and EKF 2 of 1.613636. What vessel-days does the engine return for the fleet?",
  "11.881818, the four sets' own vessel-days summed row by row",
- ["5.868182, one voyage to each stop added once",
+ ["5.868182, one voyage to each stop, each added once to the total",
   "10.345455, the milk run's figure for the same demand",
   "12.541667, since dedicated voyages need one more voyage than the milk run"],
  "Each installation is its own set, so 2.727273 plus 4.554545 plus 1.372727 plus 3.227273 is 11.881818 vessel-days. 5.868182 counts one voyage to each stop and ignores the voyage counts. The same demand on a different route gives different vessel-days. 12.541667 is the AHTS milk run.")
@@ -96,14 +96,14 @@ q(3, "Which of these fleetSize inputs does the engine refuse, where the others r
  "A period of zero days: periodDays must be a finite number above 0; got 0",
  ["One voyage of 9.25 days against 6.5 days a vessel is available in the period",
   "Vessels rounded to the nearest, leaving the week short by 2.916667 vessel-days",
-  "A dedicated voyage set whose count is driven by the minimum visits alone"],
+  "A dedicated set whose count is driven by the minimum visits alone"],
  "A period of zero cannot be computed, so the engine refuses it by name and returns no figures. A voyage longer than the days available and a short fleet are results with reasons: the engine computes them and prints what deserves attention. A set driven by its visits is an ordinary result.")
 
 q(0, "One Ekene PSV milk run voyage takes 2.586364 days, and a vessel is available 6.5 days of the week. Does the engine print a reason about voyage length?",
  "No reason: each voyage fits inside the 6.5 days a vessel has, with room for two",
- ["A reason, since 4 voyages of 2.586364 days exceed the 6.5 days one vessel has",
+ ["Yes: a reason, since 4 voyages of 2.586364 days exceed the 6.5 days one vessel has",
   "A reason, since the week's 10.345455 vessel-days are more than 6.5 available days",
-  "A refusal, since the vessel-days of the week are more than one vessel can supply"],
+  "A refusal, since the week's vessel-days exceed what one vessel supplies"],
  "The reason compares one voyage's days with the available days, and 2.586364 is below 6.5, so nothing is printed. That the week's total needs more than one vessel is the ordinary job of the vessel count, 2 here. A total above one vessel's days is neither a reason nor a refusal.")
 
 q(1, "The Ekene PSV milk run takes 62.072727 hours with the weather factor 1.2 on sailing and field time. What voyage days does fleetSize use for that set?",

@@ -30,7 +30,7 @@
    "It accepts it and returns 0.202381 vessels before rounding for that case"
   ],
   "answer": 3,
-  "explanation": "The boundary is inclusive: available days may equal the period, and the golden case returns 0.202381 vessels before rounding. Only days above the period are refused. Any allowance for crew change is the planner's to state, and the engine holds none. The fraction is before rounding."
+  "explanation": "The boundary is inclusive: available days may equal the period, and the course's case returns 0.202381 vessels before rounding. Only days above the period are refused. Any allowance for crew change is the planner's to state, and the engine holds none. The fraction is before rounding."
  },
  {
   "prompt": "One installation's week needs 9.916667 vessel-days with 7 days available a vessel, so 1.416667 vessels before rounding. vesselRounding is \"nearest\". What does the engine return?",

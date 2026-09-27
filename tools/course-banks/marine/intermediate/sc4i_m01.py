@@ -90,14 +90,14 @@ q(2, "On the Ekene PSV milk run week, a planner changes only the usable deck fra
  ["4 voyages, still driven by deck area, since deck area had the largest ratio before",
   "3 voyages, driven by deadweight, since 2.084143 is now the largest demand ratio",
   "3 voyages, driven by deck area, since its new ratio rounds up to exactly 3 voyages"],
- "With 800 m2 of capacity the deck ratio falls below 3, and so does every other ratio, deadweight's 2.084143 included. The voyages needed are the larger of the largest ratio and the visits, so the visits set 3 and the engine names minimum visits. The deck ratio is compared unrounded, so it cannot claim the count by rounding up to 3.")
+ "With 800 m2 of capacity the deck ratio falls below 3 while staying the largest ratio, above deadweight's 2.084143. The voyages needed are the larger of the largest ratio and the visits, so the visits set 3 and the engine names minimum visits. The deck ratio is compared unrounded, so it cannot claim the count by rounding up to 3.")
 
 q(1, "EKJ's minimum visits go from 3 to 4 while the rest of the rainy-season PSV milk run week, voyages rounded up, stays as stated. What does the engine return?",
  "4 voyages driven by minimum visits, and the week still needs 10.345455 vessel-days",
  ["4 voyages still driven by deck area, and the week still needs 10.345455 vessel-days",
   "5 voyages driven by minimum visits, adding one voyage of 2.586364 days to the week",
   "8 voyages, the 4 of deck area plus the 4 visits, and the vessel-days double"],
- "The voyages needed are the larger of 3.100000 and 4, so they are 4.000000 and the visits are named. Rounded up, deck area also gave 4 voyages, so the vessel-days do not move: 4 times 2.586364 days is 10.345455. The driver changed and the count did not. Visits are compared with the ratio and never added to it.")
+ "The voyages needed are the larger of 3.100000 and 4, so they are 4.000000 and the visits are named. Rounded up, deck area also gave 4 voyages, so the vessel-days do not move: 4 times 2.586364 days is 10.345455. The driver changed and the count did not. Visits are compared with the ratio; they are not added to it.")
 
 q(3, "The Ekene week is sized on the PSV as dedicated voyages, one voyage set per installation. EKJ asks for 900.000000 m2 of deck cargo against 600.000000 m2 a voyage and states 3 visits. What does the engine name as the driver of each set?",
  "Minimum visits for all four sets: EKA 2, EKJ 3, EKB 1 and EKF 2",
@@ -111,7 +111,7 @@ q(0, "A fleet result names \"minimum visits\" as the driver of a voyage set. Whi
  ["A larger deck area or a higher usable fraction, since deck area is the usual lever on a count",
   "A bigger tank for the heaviest bulk product, since a tank ratio sits below the visits",
   "A faster vessel, since shorter voyages let the same visits carry more of the period's demand"],
- "When the visits drive, every demand ratio sits at or below them, so a bigger deck, tank or speed changes a ratio that is already under the count. Only a change to the stated visits moves it, or a demand rise that lifts a ratio above them. Speed changes the voyage days and never the voyage count.")
+ "When the visits drive, every demand ratio sits at or below them, so a bigger deck, tank or speed changes a ratio that is already under the count. Only a change to the stated visits moves it, or a demand rise that lifts a ratio above them. Speed changes the voyage days while the voyage count stays put.")
 
 emit(Q, '/root/cat-wip-marine/banks/sc4i_m01.json', expect_n=15)
 finish()

@@ -11,7 +11,7 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 # 2026-09-27, by example and never by its wording. No capstone name, input or
 # value appears.
 
-q(1, "How do the course's golden cases turn the article's bins of a capacity into a deck plan the engine can pack?",
+q(1, "How do the course's packing cases turn the article's bins of a capacity into a deck plan the engine can pack?",
  "Each number is a footprint one metre wide with the number as its length, on a usable fraction of 1 with no weight",
  ["Each number is a weight in tonnes against a deck load equal to the capacity, with every footprint set to 1 m2",
   "Each number is a square footprint whose side is the number, on a deck whose area is the capacity squared",
@@ -46,12 +46,12 @@ q(1, "On the capacity 61 list, a planner states the deck area as 62, first-fit d
   "5 voyages, since a larger deck always needs one more"],
  "The engine packs {44,17}, {24,24,8,6}, {22,21,8,6} at 62: three voyages, the bound. Non-monotone means the voyage count can rise as the deck grows, and it can fall again. The list adds to more than two decks of 62, so 2 is below the bound.")
 
-q(3, "The same article prints Example 5.1 of Huang and Lu (2021), a list packed at capacity 75. What does the engine return on that list?",
+q(3, "The Wikipedia article on first-fit decreasing (revision 1317275412, CC BY-SA 4.0) prints Example 5.1 of Huang and Lu (2021), a list packed at capacity 75. What does the engine return on that list?",
  "{51,12,12}, {28,28,10}, {28,27,10,10}, {25,10,10,10,10,10}: 4 voyages, set for set",
  ["{51,12,12}, {28,28,10}, {28,27,10,10}, {25,10,10,10,10,10}: 4 voyages and one overflow",
   "{51,12,10}, {28,28,12}, {28,27,10,10}, {25,10,10,10,10}, {10}: 5 voyages",
   "{51,12,12}, {28,28,10,10}, {28,27,10}, {25,10,10,10,10,10}: 4 voyages, set for set"],
- "The engine packs the golden input into exactly the four sets the article prints. Nothing overflows, since ten voyages are stated. The five-set packing moves a 10 and a 12 the rule does not move, and another packing moves a 10 from the third set to the second, which would hold 76.")
+ "The engine packs the course's case into exactly the four sets the article prints. Nothing overflows, since ten voyages are stated. The five-set packing moves a 10 and a 12 the rule does not move, and another packing moves a 10 from the third set to the second, which would then overfill its 75.")
 
 q(0, "The Huang and Lu list at capacity 75 is booked in decreasing order. A planner switches the rule to \"first-fit\". What does the engine return?",
  "The same four sets and 4 voyages, since the booked order is already the sorted order",
@@ -60,7 +60,7 @@ q(0, "The Huang and Lu list at capacity 75 is booked in decreasing order. A plan
   "A packing on 3 voyages, since first fit fills each voyage before it opens the next one"],
  "When the booked order is already largest first, first fit places the units in the same order as first-fit decreasing and gives the same packing: {51,12,12}, {28,28,10}, {28,27,10,10}, {25,10,10,10,10,10}. The rules differ only in the order they take the units. Three voyages would be below the lower bound of 4.")
 
-q(2, "Dosa's (2007) tight worst case, scaled to capacity 400, is cited from the same article. The engine packs it by first-fit decreasing. What does it return?",
+q(2, "Dosa's (2007) tight worst case, scaled to capacity 400, is cited from the Wikipedia article on first-fit decreasing, revision 1317275412. The engine packs it by first-fit decreasing. What does it return?",
  "8 voyages against a lower bound of 6; the text's optimum is 6 bins",
  ["6 voyages, since the engine finds the optimum the text states",
   "8 voyages against a lower bound of 8, since the bound is the rule's count",
@@ -69,9 +69,9 @@ q(2, "Dosa's (2007) tight worst case, scaled to capacity 400, is cited from the 
 
 q(1, "On Dosa's tight case, why does first-fit decreasing need 8 voyages where 6 would do?",
  "Each 204 takes a 108 early, leaving gaps too small for every later 104 or 92",
- ["The 92s are packed first as the smallest units and fill the early voyages",
+ ["Being the smallest, the 92s are packed first and fill the early voyages",
   "The deck load binds before the area, since each unit weighs its own length",
-  "The engine keeps a margin of area on each voyage, which the text's optimum uses"],
+  "A margin of area kept on each voyage by the engine, which the text's optimum uses"],
  "The large units go first and each 204 pairs with a 108, the largest unit that still fits. The gap left on each of the first four voyages is smaller than any unit still waiting, and a single 92 ends alone on voyage 8. The examples carry no weight, and the engine holds no margin beyond the stated usable fraction.")
 
 q(3, "On Dosa's tight case, the booked list reads four 204s, four 104s, four 92s, four 108s and four 92s. Packed by first fit in that order, what does the engine return?",

@@ -27,13 +27,13 @@ q(3, "A planner states the packing rule as \"best-fit\". What does the engine re
  ["A plan by first-fit decreasing, since a rule it does not compute is read as the nearest rule",
   "A plan that puts each unit on the voyage it fills most tightly, then prints the voyages used",
   "A refusal: rule must be one of \"first-fit-decreasing-area\", \"first-fit\"; got nothing"],
- "The engine computes two rules and refuses any other by name, quoting what it got. It never substitutes a rule and never packs by tightest fit, which would be a different rule. The \"got nothing\" message is the one for a call with no rule stated at all.")
+ "The engine computes two rules and refuses any other by name, quoting what it got. It substitutes no rule and packs by no tightest fit, which would be a different rule. The \"got nothing\" message is the one for a call with no rule stated at all.")
 
 q(1, "Under either rule, which voyage does a unit try first when its turn comes?",
  "Voyage 1, and it moves on only when that voyage lacks the area or the deck load",
  ["The voyage with the most area left, so the unit sits where the deck is emptiest",
-  "The voyage the previous unit went on, so a packing moves forward voyage by voyage",
-  "The voyage it fills most tightly, so the least area is left over after placing it"],
+  "Whichever voyage the previous unit went on, so a packing moves forward voyage by voyage",
+  "Its tightest-fitting voyage, so the least area is left over after placing it"],
  "Every unit starts its search at voyage 1, however full it is, and takes the first voyage with enough area and deck load. That loads the early voyages as fully as the rule can and leaves the last light. Choosing the emptiest or the tightest voyage would be other rules the engine does not compute.")
 
 q(1, "The Ekene deck cargo is packed by first-fit decreasing onto 2 stated voyages. What does voyage 2 carry?",
@@ -109,9 +109,9 @@ q(0, "On a 10 m2, 10 t deck packed by first fit onto 1 voyage, unit a (9 m2, 9 t
 q(3, "Why is the ending \"no one voyage had both\" the one to read with care?",
  "Both limits read enough on some voyage, yet no single voyage holds both for the unit",
  ["It is the only ending that means a unit is heavier than the whole deck load it faces",
-  "It appears only under first-fit decreasing, where units go largest first",
-  "It marks a refusal, since the engine cannot place the unit on any voyage"],
- "The short and enough marks report the most area and the most load left on any voyage, each on its own. When they sit on different voyages both read enough and the unit still overflows, so the pair stops it together. A unit too heavy for the deck gets a never-fit reason. The golden case is first fit, and overflow is a result.")
+  "Only first-fit decreasing writes it, where units go largest first",
+  "This ending marks a refusal, since the engine cannot place the unit on any voyage"],
+ "The short and enough marks report the most area and the most load left on any voyage, each on its own. When they sit on different voyages both read enough and the unit still overflows, so the pair stops it together. A unit too heavy for the deck gets a never-fit reason. The course's case is first fit, and overflow is a result.")
 
 emit(Q, '/root/cat-wip-marine/banks/sc4i_m05.json', expect_n=15)
 finish()

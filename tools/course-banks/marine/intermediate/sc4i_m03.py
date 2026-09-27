@@ -27,7 +27,7 @@ q(3, "A single dedicated installation's week is sized with 7 of 7 days available
  ["It refuses it, since a vessel must keep some days for crew change",
   "It refuses it, since available days must stay strictly below the period",
   "It accepts it and sets the vessels before rounding to 1 on that case"],
- "The boundary is inclusive: available days may equal the period, and the golden case returns 0.202381 vessels before rounding. Only days above the period are refused. Any allowance for crew change is the planner's to state, and the engine holds none. The fraction is before rounding.")
+ "The boundary is inclusive: available days may equal the period, and the course's case returns 0.202381 vessels before rounding. Only days above the period are refused. Any allowance for crew change is the planner's to state, and the engine holds none. The fraction is before rounding.")
 
 q(1, "One installation's week needs 9.916667 vessel-days with 7 days available a vessel, so 1.416667 vessels before rounding. vesselRounding is \"nearest\". What does the engine return?",
  "1 vessel, 7.000000 vessel-days of capacity, short by 2.916667 vessel-days",

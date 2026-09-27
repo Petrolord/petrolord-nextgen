@@ -13,7 +13,7 @@ q(1, "The Ekene 20 ft offshore container is stated as 6.060000 m long, 2.440000 
  ["12.000000 m2, its weight in tonnes read as an area",
   "6.060000 m2, the length alone, as the unit is loaded lengthwise",
   "7.295600 m2, the footprint of the 10 ft container on the same list"],
- "The footprint of a unit is its length times its width, 6.060000 by 2.440000, which is 14.786400 m2. The weight is checked against the deck load and never read as area. Length alone is no area, and 7.295600 m2 belongs to the smaller container.")
+ "The footprint of a unit is its length times its width, 6.060000 by 2.440000, which is 14.786400 m2. The weight is checked against the deck load; it is no area. Length alone is no area, and 7.295600 m2 belongs to the smaller container.")
 
 q(3, "The Ekene deck cargo books the casing joints as one item line, pipe-bundle, with a quantity of 2. How does the deck plan name its units?",
  "pipe-bundle#1 and pipe-bundle#2, the id, a # sign and the unit number",
@@ -62,7 +62,7 @@ q(2, "Two units of 2.500000 m2 and 1.5 t each are packed onto one voyage whose u
  ["One unit carried and one overflow, since an exact fill is overflow",
   "Both units carried with a reason warning that the deck is overloaded",
   "A refusal, since the units leave no margin on area or on the load"],
- "The engine carries both: a unit that fills the deck exactly fits, a reading it states, with the fit checked inclusively at twelve digits. The alternative, an exact fill read as overflow, would leave one unit behind. Nothing is overloaded at the capacity, and a deck plan refuses inputs and never a tight fit.")
+ "The engine carries both: a unit that fills the deck exactly fits, a reading it states, with the fit checked inclusively at twelve digits. The alternative, an exact fill read as overflow, would leave one unit behind. Nothing is overloaded at the capacity, and a deck plan refuses bad inputs only; a tight fit is a result.")
 
 q(1, "On that exact-fit case, a planner raises each unit's weight from 1.5 t to 1.6 t, leaving the 3 t deck load. What does the engine return?",
  "One unit carried, and the second is overflow with the ending \"deck load stops it\"",
