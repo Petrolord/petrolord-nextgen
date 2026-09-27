@@ -1,45 +1,34 @@
-# What was repaired and what was not
+# Flags and standing properties
 
-EC5-0 repaired the portfolio and AFE engines and the Suite apps that call them, and one more repair has landed since. Four engine findings and two app items are left as they were, and those are properties of the tools as published, to be read around on every answer.
+Between a refusal and a clean answer sit two more kinds of reading. A flag is raised on a result the engine still returns. A standing property is a way the tools behave that no flag will ever mention. An expert answer names both.
 
 {{panel:ec-governance-explorer}}
 
-## Repaired, with what each now returns
+## Flags the engines raise without refusing
 
-| repaired in EC5-0 | what the engine now returns |
-| --- | --- |
-| risk summary | a seeded Monte Carlo, seed 20260829, 10000 iterations by default |
-| overshoot flag | gridOvershoot: overLimit true, overLimitBy 2.0000 |
-| negative capex | PortfolioInputError naming the project |
-| as-of date | OFON-1 SPI 0.872063 as of 2027-08-15 |
-| SPI null | null on 2027-01-15 and on the start day 2027-02-01 |
-| S-curve bounded | 10 points, Feb 27 to Nov 27 |
-| one forecast rule | OFON-1 EAC 27600000, variance -550000 |
-| negative progress | AfeInputError naming the line |
-| negative working interest | valid false, the engine note |
+| flag | where | what raises it | example |
+| --- | --- | --- | --- |
+| forecastBelowCommitted | each AFE line | a positive entered forecast below the money spent and committed | CMT-03 at a forecast of 900000 against 940000 committed: kept, flagged by 40000 |
+| forecastIgnored "negative" | each AFE line | an entered forecast below 0, replaced by the standard rule | CMT-03 at -5 forecasts 1250000 |
+| cpiStatus | the AFE | why CPI is null | "no-spend" when nothing has been spent |
+| spiStatus | the AFE | why SPI is null | "no-planned-value" on the start day; "no-budget" on an empty AFE |
+| valid and note | the partner split | a negative interest, or interests above 100 percent | 30 and -20: valid false, the partner named |
+| undated invoices | beside the S-curve | invoices with no date the engine can read | the published undated case: 2 |
 
-The Suite repair removed the invented partners and integrations, added the AFE dates, put one EAC rule on every screen, and shows the grid resolution and the overshoot.
+Every one of these leaves the numbers visible. The forecast below committed is a legitimate re-baseline or a typing slip, and only the reader can say which. A CPI of null with cpiStatus "no-spend" is an answer: there is no cost efficiency to report yet. A split marked valid false still shows its amounts so the error can be traced.
 
-The risk summary is the largest repair. Before EC5-0 it used a normal approximation. On the published single wildcat that approximation gave a loss probability of 0.365832 against an exact 0.700000, and a P90 of -150.5560, below the worst possible outcome of -50.0000. The simulation returns 0.696100 and a P90 of -50.0000. The approximation is now history, and the seed is shown with every answer.
+## Properties the course teaches as they stand
 
-One repair landed after these modules were written. An invoice the engine cannot date no longer reaches the S-curve, and the count of undated invoices is reported beside it. The published undated case, which once read 200 at every point, now reads 0 throughout, with 2 undated invoices named.
+An AFE with no dates reads time progress 1, so SPI measures nothing there; the Suite labels SPI unavailable for such an AFE. A positive entered forecast is taken as typed even below the money already spent, and flagged. After the as-of date the S-curve's Forecast ignores the actuals and is the EAC spread from the start. Correlation in the risk summary is clamped to 0 to 1, and the Suite's correlation slider stops at 0.9: OKONO's 600.0000 set reads a stdDev of 239.8888 and a P(loss) of 0.059000 at rho 1.000000 against 232.0795 and 0.049500 at rho 0.900000, so the fully correlated case can be run through the engine but cannot be set from the screen. The Suite stores a risk score from 1 to 10 with each project, and neither the optimizer nor the risk summary reads it. The stated fallback grid is used only when a call states a small exactStateLimit, since the default of 200000 is never reached by an inventory of sixteen projects or fewer.
 
-## Left in the portfolio engine
-
-The grid undershoot (finding D4) is not flagged: gridUndershoot funds X + Y + Z at 660.0000 where the exact optimum is 860.0000. A free project is still charged one cell (finding D2). At a limit of 0.0000 a project with capex 0.0000 and EMV 10.0000 is not funded. At a limit of 100.0000 beside a project costing 100.0000 it is dropped, a gap of -10.0000, and only at 101.0000 does it fit. Both bite where rounding or a zero capex meets a tight limit, and neither says so on the result.
-
-## Left in the AFE engine
-
-CPI reads 1.000000 whenever actuals are 0: OFON-1 with every actual set to 0 still earns 15231500 and reports CPI 1.000000, the number an AFE exactly on budget would show. The S-curve plan stops short: OFON-1's last Planned point is 24452483 against a budget of 27050000, 2597517 short.
-
-## Left in the Suite app
-
-The correlation slider stops at 0.9, while the engine accepts 1. OKONO's 600.0000 set reads a stdDev of 239.8888 and a P(loss) of 0.059000 at rho 1.000000, against 232.0795 and 0.049500 at rho 0.900000, so the most correlated case cannot be set from the screen. Read the slider's top value as the app's limit, never as the engine's. The app's risk score is unused: no number the engine returns depends on it, and changing it changes nothing.
+None of these is an error to be caught. Each is a condition a number is true under.
 
 ## The mistake
 
-The mistake is hearing "repaired" as "trustworthy". The repairs make the engines state their conditions: a seed, a date, a rule, a flag. They remove none of the findings left, and a result can carry every repair and still hide D2, D4, a CPI of 1.000000 before spend or a plan that ends short. The other mistake is working around a finding silently. Put it in the answer, for example: overLimit false, and D4 is not flagged on this grid.
+The mistake is reading a returned result as a clean one. A forecast total, a split or an S-curve can come back complete and still carry a flag in a field nobody printed. Read the flags first: lines below committed, lines with an ignored forecast, the two ratio statuses, valid, and the undated count.
+
+The other mistake is working around a property silently. Put it in the answer: SPI as of a stated date, the correlation used and the seed, and whether the solve was exact.
 
 ## Exercise
 
-List four repairs with the number or message each now returns. Then name the four engine findings left and the two app items, and give one published number that shows each engine finding.
+List four flags the engines raise without refusing, with the input that raises each and one published or OFON-1 number that shows it. Then name three properties the course teaches as they stand, and say for each which figure in an answer it conditions.

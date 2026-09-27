@@ -23,11 +23,11 @@ The AFE carries actuals in two places. The cost lines hold them for the metrics:
 
 ## Which totals are not bills
 
-The commitments of 5000000 are orders placed, not money spent, and billing them charges partners for work nobody has invoiced. The budget of 27050000 is an authorisation, and the EAC of 27600000 is a forecast. Billing Ofon Energy its budget share of 10820000 today would charge it for 40.0000 percent of work not yet done. The same interest applied to the EAC is a forecast of a partner's final exposure, useful for its own planning and wrong on an invoice.
+The commitments of 5000000 are orders placed with no money yet spent, and billing them charges partners for work nobody has invoiced. The budget of 27050000 is an authorisation, and the EAC of 27600000 is a forecast. Billing Ofon Energy its budget share of 10820000 today would charge it for 40.0000 percent of work not yet done. The same interest applied to the EAC is a forecast of a partner's final exposure, useful for its own planning and wrong on an invoice.
 
-## What the report used to do
+## What the report bills
 
-Before EC5-0 the AFE summary PDF billed two invented partners, Partner A at 30 percent and Partner B at 10 percent, whatever partners had been saved. An AFE with Ofon Energy, Enang Petroleum and Mfem Resources would have printed a split for parties that do not exist. The repaired PDF bills the AFE's saved partners and prints the engine note whenever the split is invalid.
+The AFE summary PDF bills the partners saved on the AFE, here Ofon Energy, Enang Petroleum and Mfem Resources. With no partners saved the operator carries 100 percent of the cost. When the split is invalid the PDF prints the engine note beside the amounts, so a bill with a negative interest or a total over the whole goes out with its warning attached. The PDF splits the total it is given in the same way as the engine, and choosing that total is still the biller's decision.
 
 ## The mistake
 

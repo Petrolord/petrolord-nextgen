@@ -1,12 +1,10 @@
-# An overshoot flagged
+# A limit the answer always fits
 
-A refusal stops the engine and returns nothing. A flag returns the answer and marks what is wrong with it. The grid overshoot is flagged: the set still breaks the limit, and the result now says so and by how much.
+A refusal stops the engine and returns nothing. A flag returns the answer and marks what is wrong with it. The optimizer carries an overshoot flag, overLimit with overLimitBy, and it reads false and 0.0000 on every result, because the funded set always fits the limit. The readings that say how good the answer is are solveMethod and optimalityGap.
 
 {{panel:ec-governance-explorer}}
 
-## The published overshoot
-
-The limit of 6000.0000 is above 5000, so each cell is the limit / 2000, a resolution of 3.000000, and each project weighs its capex over 3.000000, rounded to whole cells.
+## The published overshoot case
 
 | project | capex | EMV |
 | --- | --- | --- |
@@ -14,30 +12,32 @@ The limit of 6000.0000 is above 5000, so each cell is the limit / 2000, a resolu
 | B | 2002.0000 | 300.0000 |
 | C | 1995.0000 | 280.0000 |
 
-| result | set | capex | EMV | overLimit | overLimitBy |
-| --- | --- | --- | --- | --- | --- |
-| engine | A + B | 6002.0000 | 800.0000 | true | 2.0000 |
+The limit is 6000.0000. A + B would cost 6002.0000 and return 800.0000, and it does not fit. The engine solves the knapsack exactly on the capex as typed and funds A + C at capex 5995.0000 for 780.0000, leaving 5.0000 unspent. The result reads solveMethod exact, optimalityGap 0.0000, resolution null, overLimit false and overLimitBy 0.0000. The case is named for the set a rounded grid would push over the limit, and the exact solve never builds that set.
 
-Rounding drops a fraction of a cell from A and another from B, so A + B fills the grid exactly while its real capex of 6002.0000 sits 2.0000 over the limit. The exact optimum that respects the limit is A + C at 780.0000, and the golden gap is 20.0000. The set with the higher EMV is the one the budget cannot pay for.
+## The stated fallback
 
-## What the flag does and does not do
+A call may state a small exactStateLimit, and above it the solve falls back to a grid of 2000 cells. gridOvershootFallback runs the same three projects with exactStateLimit 2.
 
-Before EC5-0 the engine returned A + B with nothing to mark it. The repaired engine returns the same set and adds overLimit true and overLimitBy 2.0000, and the Suite now shows the resolution and the overshoot on screen.
+| weights in cells | A | B | C |
+| --- | --- | --- | --- |
+| rounded up at resolution 3.000000 | 1334 | 668 | 665 |
 
-The flag does not re-solve, and it never reports 780.0000. A reader who sees overLimit true must treat the set as infeasible and check the alternatives by hand, where A + C is the answer. A coarse grid is not always harmful: rawDollars and nonIntegerLimit return overLimit false with a gap of 0.0000.
+| result | set | capex | EMV | solveMethod | overLimit | optimalityGap |
+| --- | --- | --- | --- | --- | --- | --- |
+| fallback | A + C | 5995.0000 | 780.0000 | grid-feasible | false | 20.0000 |
 
-## A flag that never fires
+Every weight is rounded UP, so A + B needs 2002 cells and cannot fit the 2000 the grid holds, while A + C needs 1999 and does. Any set that fits the rounded-up grid fits the limit in money, which is why overLimit stays false on the fallback too. The optimalityGap of 20.0000 is an upper bound on the EMV the fallback may leave out: the best set on the same grid with every weight rounded down, less the funded EMV. Here the fallback found the exact optimum and the bound is still 20.0000, so a positive gap says a better set may exist. It does not say that one does.
 
-The grid can also undershoot, and that is not flagged (finding D4). In gridUndershoot, projects of capex 1499.0000, 1499.0000, 1499.0000 and 1502.0000 face the same 6000.0000 limit, and rounding makes the four together weigh more cells than the grid holds. The engine funds X + Y + Z at capex 4500.0000 and EMV 660.0000 with overLimit false. The exact optimum funds all four at 860.0000, a gap of -200.0000. overLimit false says nothing about whether a better set was missed.
+The other published fallback shows a gap that is real. gridUndershootFallback, with exactStateLimit 3, funds X + Y + Z at capex 4500.0000 for 660.0000 with optimalityGap 200.0000, where the exact optimum is all four projects at 860.0000.
 
-## Flags on the AFE side
+## The flags that do fire
 
-The joint venture split flags rather than refuses. A partner with a negative working interest returns valid false and the engine note, and the allocation is still shown: interests of 30 and -20 on a cost of 1000.00 leave the operator 90.0000 percent, an amount of 900.00. The repaired AFE summary prints the note beside it.
+The live flags sit on the AFE side. A partner with a negative working interest returns valid false and the engine note, and the allocation is still shown: interests of 30 and -20 on a cost of 1000.00 leave the operator 90.0000 percent, an amount of 900.00. An entered forecast below the money spent and committed is kept and flagged with the amount it falls short. The AFE summary PDF prints the split note beside the amounts.
 
 ## The mistake
 
-The mistake is reading a flag as decoration. An EMV of 800.0000 beside overLimit true is the value of a set the company cannot fund, and ranking it against a feasible 780.0000 prefers the set that breaks the budget. The opposite mistake is treating overLimit false as a certificate of optimality, which gridUndershoot disproves by a gap of -200.0000.
+The mistake is reading overLimit false as a certificate of optimality. It says the set fits, which it always does. Whether the set is the best that fits is said by solveMethod: exact means optimalityGap is 0.0000, and grid-feasible means optimalityGap has to be quoted beside the EMV.
 
 ## Exercise
 
-For gridOvershoot, give the resolution, the engine's set with its capex, EMV, overLimit and overLimitBy, and the exact optimum with its EMV. Explain in one sentence why A + B fits the grid. Then say why overLimit false on gridUndershoot does not mean its set is the best within the limit.
+For the published overshoot case, give the exact solve's set, capex, EMV, solveMethod and overLimit. Then for gridOvershootFallback give the rounded-up cell weights, explain in one sentence why A + B cannot fit the grid, and say what its optimalityGap of 20.0000 bounds.

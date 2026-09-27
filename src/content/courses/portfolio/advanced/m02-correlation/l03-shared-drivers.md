@@ -1,6 +1,6 @@
 # Shared drivers
 
-Correlation in the risk simulation is a shared draw. Each iteration deals two normals, F1 and F2, that every funded project hears, and rho sets how much of each project's driver comes from them rather than from its own draws.
+Correlation in the risk simulation is a shared draw. Each iteration deals two normals, F1 and F2, that every funded project hears, and rho sets how much of each project's driver comes from them and how much from its own draws.
 
 {{panel:ec-governance-explorer}}
 
@@ -20,7 +20,7 @@ F1 stands for what makes projects succeed or fail together: one basin model, one
 
 The three wells are the same on every row; only the shared driver changes. Independent, all three fail together with chance 0.343000. Fully shared, they fail together whenever one does, 0.700000. The copula case, with a partial correlation, sits between at 0.469561. The low case is -150.0000 on every row, all three failing; what the shared driver changes is how often that happens.
 
-The normal approximation the engine used before EC5-0 got worse as dependence rose, putting P90 at -191.0335, -338.5074 and -451.6680, each beneath the -150.0000 the three wells can lose. The closed-form stdDev grows with rho, and a bell curve stretched that wide runs past the floor.
+A normal approximation gets worse as dependence rises, putting P90 at -191.0335, -338.5074 and -451.6680, each beneath the -150.0000 the three wells can lose. The closed-form stdDev grows with rho, and a bell curve stretched that wide runs past the floor.
 
 The three mixed projects tell the same story: exact P(loss) 0.315000 independent, 0.401631 under the copula and 0.600000 comonotone.
 

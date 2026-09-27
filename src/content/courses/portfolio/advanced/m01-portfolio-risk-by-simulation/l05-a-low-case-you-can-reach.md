@@ -23,7 +23,7 @@ On every row the engine's P90 is the exact outcome. For one wildcat the low case
 
 ## A continuous portfolio
 
-When a success carries a spread, the low case is no longer one of a few spikes. mixtureWithSpread pairs a risked project with a sure one. The approximation put its P90 at -12.4175, a loss; the simulation reads 1.7148, a small gain. A reader of the old figure would have said the portfolio's low case loses money, when nine outcomes in ten are gains.
+When a success carries a spread, the low case is not one of a few spikes. mixtureWithSpread pairs a risked project with a sure one. A normal approximation puts its P90 at -12.4175, a loss; the simulation reads 1.7148, a small gain. A reader of the normal figure would say the portfolio's low case loses money, when nine outcomes in ten are gains.
 
 ## OKONO's funded sets
 
@@ -35,7 +35,7 @@ When a success carries a spread, the low case is no longer one of a few spikes. 
 | 750.0000 | 444.0000 | 138.2474 | 879.3797 | 86.8879 |
 | 1000.0000 | 588.0000 | 120.7015 | 1099.4568 | 98.0856 |
 
-The approximation was too pessimistic at 450.0000, putting P90 at -57.1494 against -18.3574, and too optimistic at 300.0000 and 600.0000, where its 108.3959 and 218.4079 sit above the simulated 100.7698 and 200.3575. The 450.0000 set is the only one whose low case is a loss, and its P10 of 738.1043 is the widest reach of the three smaller sets because OK-3's success is carried inside it.
+The normal approximation is too pessimistic at 450.0000, putting P90 at -57.1494 against -18.3574, and too optimistic at 300.0000 and 600.0000, where its 108.3959 and 218.4079 sit above the simulated 100.7698 and 200.3575. The 450.0000 set is the only one whose low case is a loss, and its P10 of 738.1043 is the widest reach of the three smaller sets because OK-3's success is carried inside it.
 
 ## What P90 refuses to say
 
