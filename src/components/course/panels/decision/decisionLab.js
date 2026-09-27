@@ -7,12 +7,12 @@
 // insight sentence below is a return value of
 // engines/economics/decisionTree.js (the Decision Tree Builder, and the
 // rollback behind Decision Studio's decision section) or
-// engines/economics/voi.js (the VOI Analyzer), as repaired in EC4-0: percent
-// refusals, and a `withheld` result whose value cards are null.
+// engines/economics/voi.js (the VOI Analyzer): percent and money refusals, tie
+// reports, and a `withheld` result whose value cards are null.
 //
 // NOTHING IN THIS FILE COMPUTES A DECISION QUANTITY. Where a reader carries a
 // value the digest calls "derived" (Decision Studio's next best and advantage
-// rows, the joint columns of a Bayes table, the reconstructed pre-repair cards,
+// rows, the joint columns of a Bayes table, the unguarded arithmetic cards,
 // a switch probability read off the stated payoffs), it is arithmetic on
 // numbers the engine returned or on the inputs it was handed, with the
 // arithmetic stated, and the key name says Derived. The lab and
@@ -129,11 +129,12 @@ export const IRRI_FORM = () => {
 };
 // A linked Monte Carlo summary for EKPAN's success payoff (P90 is the low case).
 export const SUMMARY = { mean: 420, p90: 185, p50: 390, p10: 710 };
-// What the Analyzer printed BEFORE the EC4-0 repair, reconstructed from engine
-// calls: per indicator the best action value under the TYPED posteriors
-// (bestActionEmv, an engine return), weighted by the typed indicator chances
-// (derived arithmetic), less the EMV without information.
-export const legacyCards = (form) => {
+// The UNGUARDED arithmetic: what the typed numbers give when nothing checks
+// them against the stated prior, from engine calls: per indicator the best
+// action value under the TYPED posteriors (bestActionEmv, an engine return),
+// weighted by the typed indicator chances (derived arithmetic), less the EMV
+// without information.
+export const unguardedCards = (form) => {
   const oc = form.outcomes.map((o) => ({ label: o.name, probability: o.probability / 100 }));
   const acts = [
     { label: form.decisionName, cost: form.decisionCost, payoffs: form.outcomes.map((o) => o.payoff) },
@@ -204,6 +205,15 @@ const treeView = (annotated) => {
 };
 
 const branchValues = (a) => a.branches.map((b) => ({ label: b.label, branchValue: b.branchValue }));
+/** The tie report of a decision node or a best action, as the engine returns it. */
+const tieReport = (x) => ({
+  tiedIndices: [...x.tiedIndices],
+  indifferent: x.indifferent,
+  tiedIndicesAtCardPrecision: [...x.tiedIndicesAtCardPrecision],
+  indifferentAtCardPrecision: x.indifferentAtCardPrecision,
+});
+/** The engine's tie band, relative to max(1, |best|). */
+export const TIE_RELATIVE = D.TIE_RELATIVE;
 const bestLabelOf = (a) => a.branches[a.bestBranchIndex].label;
 
 /** The VOI Analyzer's return, as the panels and the digest read it. */
@@ -222,7 +232,7 @@ const voiAttempt = (form) => {
   return a.ok ? { ok: true, ...voiSummary(a.value) } : { ok: false, error: a.error };
 };
 /** The verdict sentence inside an engine insight, read off the engine string. */
-const verdictOf = (insights) => (insights.match(/Since this is[^.]*\.|The information exactly[^.]*\./) || [null])[0];
+const verdictOf = (insights) => (insights.match(/Since this is[^.]*\.|Since this rounds to zero[^.]*\./) || [null])[0];
 
 const rollbackAttempt = (fn) => {
   const a = attempt(fn);
@@ -236,10 +246,11 @@ const rollbackAttempt = (fn) => {
 export const ENGINE_RULE_LINES = [
   '- Node types: decision (takes the MAX over branch values), chance (takes the probability-weighted SUM of branch values), terminal (its payoff).',
   '- A branch value is the child EMV minus the branch cost. A cost is charged when the branch is taken, before a chance node weights it.',
-  '- Probability tolerance at a chance node: sums within 1e-6 of 1 are accepted.',
+  '- Probability tolerance at a chance node: a sum is accepted when |sum - 1| is at most 1e-6 plus a 1e-12 allowance for binary representation (inclusive), and the accepted probabilities are used as typed, never rescaled. The same test guards the outcome priors of a lottery and each likelihood column.',
   '- Risk attitude: risk neutral. The rollback maximises expected money; no utility function, no risk aversion parameter exists in either module.',
   '- Discounting: none. A payoff is a number already discounted by whichever engine valued it.',
-  '- Ties: a decision node keeps the FIRST branch listed when a later branch is only equal (the comparison is strictly greater).',
+  `- Ties: two values tie when they differ by at most ${D.TIE_RELATIVE} x max(1, |best|). A decision node returns tiedIndices (every branch that ties with the best, in listed order) and indifferent (true when more than one branch ties); bestBranchIndex and the optimal path mark the FIRST listed of the tied branches. A second set, tiedIndicesAtCardPrecision with indifferentAtCardPrecision, holds every branch whose value rounds to the same two-decimal card as the best (half away from zero). A lottery's best action reports the same four fields.`,
+  '- Money: a cost or payoff that is left out is 0. One that is present must be a finite number, or text holding one (" 40 " is 40); a blank, a null, text that is not a number, a non-finite number or true/false is refused by node label, and a cost below 0 is refused (a receipt is entered as a payoff).',
 ];
 
 export const engineRules = () => {
@@ -249,6 +260,10 @@ export const engineRules = () => {
     successPayoff: t.branches[0].node.branches[0].node.payoff,
     dryHolePayoff: t.branches[0].node.branches[2].node.payoff,
     treeEmv: D.rollback(EKPAN_TREE()).emv,
+    omitted: {
+      engineEmv: D.rollback(clone(GC.rollback.omittedCostAndPayoffAreZero.tree)).emv,
+      goldenEmv: GC.rollback.omittedCostAndPayoffAreZero.expected.emv,
+    },
   };
 };
 
@@ -260,6 +275,15 @@ const REFUSAL_CASES = [
   ['an unknown node type "lottery"', 'unknownType'],
   ['a branch with no child node', 'missingChildNode'],
   ['a bad distribution two levels down', 'nestedRefusal'],
+  ['a branch cost left blank ""', 'blankCostRefused'],
+  ['a branch cost null', 'nullCostRefused'],
+  ['a branch cost "abc"', 'nonNumericCostRefused'],
+  ['a branch cost of -5', 'negativeCostRefused'],
+  ['a terminal payoff left blank ""', 'blankPayoffRefused'],
+  ['a terminal payoff null', 'nullPayoffRefused'],
+  ['a terminal payoff "abc"', 'nonNumericPayoffRefused'],
+  ['a terminal payoff true', 'booleanPayoffRefused'],
+  ['a distribution payoff whose mean is blank', 'distributionBlankMeanRefused'],
 ];
 
 export const refusals = () => REFUSAL_CASES.map(([what, id]) => ({
@@ -284,7 +308,7 @@ export const thirds = () => ({
     ...rollbackAttempt(() => D.rollback(thirdsTree(p))),
   })),
   // Derived: the binary sum of 0.333333 typed three times, and its distance from 1,
-  // against the engine's 1e-6 tolerance (finding EC4-8).
+  // against the engine's 1e-6 tolerance and its 1e-12 representation allowance.
   binary: {
     typed: 0.333333,
     sumDerived: 0.333333 + 0.333333 + 0.333333,
@@ -294,6 +318,11 @@ export const thirds = () => ({
     engineEmv: D.rollback(clone(GC.rollback.thirdsProbabilities.tree)).emv,
     goldenEmv: GC.rollback.thirdsProbabilities.expected.emv,
   },
+  sixPlaces: {
+    engineEmv: D.rollback(clone(GC.rollback.thirdsTypedToSixPlaces.tree)).emv,
+    goldenEmv: GC.rollback.thirdsTypedToSixPlaces.expected.emv,
+  },
+  threePlaces: rollbackAttempt(() => D.rollback(clone(GC.rollbackRefusals.thirdsTypedToThreePlaces.tree))),
 });
 
 export const costOnChanceBranch = () => {
@@ -343,7 +372,8 @@ export const drillOutcomes = () => {
 // SECTION 3. Decision nodes.
 // ---------------------------------------------------------------------------
 
-export const PUBLISHED_DECISION_IDS = ['drillFarmOut', 'equalEmvTie', 'allNegative', 'singleBranchDecision', 'missingCostAndNullPayoff'];
+export const PUBLISHED_DECISION_IDS = ['drillFarmOut', 'equalEmvTie', 'allNegative', 'singleBranchDecision', 'omittedCostAndPayoffAreZero'];
+export const PUBLISHED_TIE_IDS = ['floatResidueTie', 'withinToleranceTie', 'nearTieOutsideTolerance', 'cardPrecisionTieOutsideBand', 'apartOnTheCards', 'cardBoundarySplitsAnExactTie'];
 export const TIE_INPUTS = { drillPayoff: 40, drillCost: 10, farmPayoff: 30 };
 
 const poorEkpan = (pS) => {
@@ -366,12 +396,16 @@ export const decisionNodes = () => {
     farmOutOnPath: ek.branches[1].node.branches.map((b) => b.onOptimalPath),
     published: PUBLISHED_DECISION_IDS.map((id) => {
       const c = GC.rollback[id]; const a = D.rollback(clone(c.tree));
-      return { id, emv: a.emv, bestBranchIndex: a.bestBranchIndex ?? null, branches: branchValues(a), goldenEmv: c.expected.emv };
+      return { id, emv: a.emv, bestBranchIndex: a.bestBranchIndex ?? null, ties: a.type === 'decision' ? tieReport(a) : null, branches: branchValues(a), goldenEmv: c.expected.emv };
     }),
     tie: {
-      firstListed: { bestLabel: bestLabelOf(tieFirst), emv: tieFirst.emv },
-      swapped: { bestLabel: bestLabelOf(tieSwapped), emv: tieSwapped.emv },
+      firstListed: { bestLabel: bestLabelOf(tieFirst), emv: tieFirst.emv, ...tieReport(tieFirst) },
+      swapped: { bestLabel: bestLabelOf(tieSwapped), emv: tieSwapped.emv, ...tieReport(tieSwapped) },
     },
+    publishedTies: PUBLISHED_TIE_IDS.map((id) => {
+      const a = D.rollback(clone(GC.rollback[id].tree));
+      return { id, branches: branchValues(a), bestBranchIndex: a.bestBranchIndex, ...tieReport(a) };
+    }),
     dryHolePayoff: EKPAN_TREE().branches[0].node.branches[2].node.payoff,
     withoutWalkAway: { emv: noWalk.emv, bestLabel: bestLabelOf(noWalk) },
     poorPriors: [0.1, 0.05].map((pS) => {
@@ -470,6 +504,7 @@ export const switchPoint = () => {
   const df = crossing(EKPAN_ACTIONS[0], EKPAN_ACTIONS[1]);
   const dw = crossing(EKPAN_ACTIONS[0], EKPAN_ACTIONS[2]);
   const at = actionValues(df.p);
+  const best = D.bestActionEmv(outcomesAt(df.p), EKPAN_ACTIONS);
   return {
     drillSlopeDerived: df.a.slope,
     drillInterceptDerived: df.a.intercept,
@@ -479,7 +514,10 @@ export const switchPoint = () => {
     drillFarmDenominatorDerived: df.a.slope - df.b.slope,
     drillAtSwitch: at[0],
     farmAtSwitch: at[1],
-    bestAtSwitch: EKPAN_ACTIONS[D.bestActionEmv(outcomesAt(df.p), EKPAN_ACTIONS).actionIndex].label,
+    bestAtSwitch: EKPAN_ACTIONS[best.actionIndex].label,
+    actionIndexAtSwitch: best.actionIndex,
+    tiesAtSwitch: tieReport(best),
+    tiedLabelsAtSwitch: best.tiedIndices.map((i) => EKPAN_ACTIONS[i].label),
     gapAtSwitchDerived: at[0] - at[1],
     drillWalkSwitchDerived: dw.p,
     drillWalkNumeratorDerived: dw.b.intercept - dw.a.intercept,
@@ -492,9 +530,9 @@ export const publishedSweep = () => {
   const rows = [0.1, 0.15, 0.2, 0.25, 0.3].map((p) => {
     const t = clone(pf.tree); t.branches.forEach((b) => { if (b.node.type === 'chance') { b.node.branches[0].probability = p; b.node.branches[1].probability = 1 - p; } });
     const a = D.rollback(t);
-    return { p, branches: branchValues(a), bestLabel: bestLabelOf(a), bestBranchIndex: a.bestBranchIndex };
+    return { p, branches: branchValues(a), bestLabel: bestLabelOf(a), bestBranchIndex: a.bestBranchIndex, ...tieReport(a) };
   });
-  const tie = rows.find((x) => x.branches[0].branchValue === x.branches[1].branchValue) || null;
+  const tie = rows.find((x) => x.indifferent) || null;
   return { rows, tie };
 };
 
@@ -610,9 +648,10 @@ export const costSweep = () => {
   const rows = [0, 4, 8, 12, 16, 20, 24, gross, 28, 32].map((c) => {
     const t = D.rollback(D.buildInformationTree({ outcomes: outcomesAt(EKPAN_PRIOR), actions: EKPAN_ACTIONS, signals: EKPAN_SIGNALS, infoCost: c, infoLabel: INFO_LABEL }));
     const e = D.evii(outcomesAt(EKPAN_PRIOR), EKPAN_ACTIONS, EKPAN_SIGNALS, c);
-    return { cost: c, acquire: t.branches[0].branchValue, noInformation: t.branches[1].branchValue, netEvii: e.netEvii, rootChoice: bestLabelOf(t), isTie: t.branches[0].branchValue === t.branches[1].branchValue };
+    return { cost: c, acquire: t.branches[0].branchValue, noInformation: t.branches[1].branchValue, netEvii: e.netEvii, rootChoice: bestLabelOf(t), isTie: t.indifferent, ...tieReport(t) };
   });
-  return { rows, tieCost: gross };
+  const atGross = D.rollback(D.buildInformationTree({ outcomes: outcomesAt(EKPAN_PRIOR), actions: EKPAN_ACTIONS, signals: EKPAN_SIGNALS, infoCost: gross, infoLabel: INFO_LABEL }));
+  return { rows, tieCost: gross, tieAtGross: { rootChoice: bestLabelOf(atGross), ...tieReport(atGross) } };
 };
 
 // ---------------------------------------------------------------------------
@@ -720,7 +759,14 @@ export const HALF_PERCENT = 0.005;
 /** Rounded-posterior rows after the full-precision one: Bright spot percent, then the two posteriors in percent. */
 export const ROUNDED_ROWS = [[46, 64.7, 9.7], [46, 65, 10], [46, 65, 9], [46, 64, 10], [45, 65, 10], [46, 65, 8], [46, 66, 10], [47, 65, 10]];
 
-const legacyOrNull = (form) => { const a = attempt(() => legacyCards(form)); return a.ok ? a.value : null; };
+// The unguarded arithmetic is read for the percent refusals only; a money
+// refusal has no unguarded reading worth teaching.
+const unguardedOrNull = (form) => {
+  const refusal = attempt(() => V.generateVoiData(form));
+  if (!refusal.ok && /cost|[Pp]ayoff/.test(refusal.error)) return null;
+  const a = attempt(() => unguardedCards(form));
+  return a.ok ? a.value : null;
+};
 
 export const contradictions = () => {
   const ip = GC.impliedPriors;
@@ -744,18 +790,18 @@ export const contradictions = () => {
       const x = voiSummary(V.generateVoiData(voiForm({ pPos: a, postPos: b, postNeg: c })));
       return { brightSpotPercent: a, successGivenBrightPercent: b, successGivenNoBrightPercent: c, impliedSuccess: x.implied[0], delta: x.deltas[0], consistent: x.consistent, voi: x.kpis.voi, netVoi: x.kpis.netVoi, withheld: x.withheld };
     }),
-    irri: { ...voiSummary(V.generateVoiData(IRRI_FORM())), beforeRepair: legacyCards(IRRI_FORM()) },
+    irri: { ...voiSummary(V.generateVoiData(IRRI_FORM())), unguarded: unguardedCards(IRRI_FORM()) },
     publishedWithheld: PUBLISHED_WITHHELD_IDS.map((id) => ({
-      id, ...voiSummary(V.generateVoiData(clone(GC.voi[id].inputs))), beforeRepair: legacyCards(clone(GC.voi[id].inputs)),
+      id, ...voiSummary(V.generateVoiData(clone(GC.voi[id].inputs))), unguarded: unguardedCards(clone(GC.voi[id].inputs)),
     })),
     // The 56 / 44 row carries its implied Success and the stated one, and no
     // delta: nothing teaches from that delta, and read x0.001 it sits within
     // ten grading bands of a graded capstone field (the leak gate caught it).
-    ekpan56: (() => { const { deltas, ...rest } = voiAttempt(ekpan56); return { ...rest, beforeRepair: legacyCards(ekpan56) }; })(),
+    ekpan56: (() => { const { deltas, ...rest } = voiAttempt(ekpan56); return { ...rest, unguarded: unguardedCards(ekpan56) }; })(),
     voiRefusals: G.voiRefusals.map((c) => ({
       id: c.id,
       ...voiAttempt(clone(c.inputs)),
-      beforeRepair: c.inputs.outcomes?.length ? legacyOrNull(clone(c.inputs)) : null,
+      unguarded: c.inputs.outcomes?.length ? unguardedOrNull(clone(c.inputs)) : null,
     })),
     indicatorSum110: { sumDerived: pc.pPos + 64, ...voiAttempt(sum110) },
   };
@@ -814,12 +860,30 @@ export const biggerLotteries = () => {
 // SECTION 13. The decision brief.
 // ---------------------------------------------------------------------------
 
-/** Decision Studio's four decision rows, from a rolled-back tree. The last two are derived. */
+/** The brief's first-move label for a tie at card precision: every tied branch, quoted. */
+const tiedMove = (labels) => (labels.length <= 1
+  ? labels.map((l) => `"${l}"`).join('')
+  : `${labels.slice(0, -1).map((l) => `"${l}"`).join(', ')} and "${labels[labels.length - 1]}"`);
+/**
+ * Decision Studio's four decision rows, from a rolled-back tree, restated from
+ * the Suite's briefModel.js and firstMoveLabel.js: the first move reads the
+ * card-precision tie set. The next best and a numeric advantage are derived.
+ */
 const studioRows = (a) => {
-  if (a.type !== 'decision') return { optimal: a.emv, move: 'Single path', nextDerived: null, advantageDerived: null };
+  if (a.type === 'chance') return { optimal: a.emv, move: 'Chance root: no first decision to make', nextDerived: null, advantageDerived: null, advantageText: null };
+  if (a.type !== 'decision') return { optimal: a.emv, move: 'Single outcome: no decision to make', nextDerived: null, advantageDerived: null, advantageText: null };
+  const tied = a.tiedIndicesAtCardPrecision;
+  const move = tied.length > 1 ? `Indifferent: ${tiedMove(tied.map((i) => a.branches[i].label))} come to the same figure` : `"${a.branches[a.bestBranchIndex].label}"`;
   const others = a.branches.filter((_, i) => i !== a.bestBranchIndex).map((b) => b.branchValue);
   const next = others.length ? Math.max(...others) : null;
-  return { optimal: a.emv, move: a.branches[a.bestBranchIndex].label, nextDerived: next, advantageDerived: next == null ? null : a.emv - next };
+  const indifferent = next != null && a.indifferentAtCardPrecision;
+  return {
+    optimal: a.emv,
+    move,
+    nextDerived: next,
+    advantageDerived: next == null || indifferent ? null : a.emv - next,
+    advantageText: indifferent ? 'Indifferent at the precision shown' : null,
+  };
 };
 
 /** The economics section's row labels, built from the convention module. */
@@ -847,6 +911,17 @@ export const brief = () => {
 // SECTION 14. Refusals and silent defaults.
 // ---------------------------------------------------------------------------
 
+// A golden holding NaN or an infinity carries a placeholder string and a
+// nonFinite instruction (JSON holds neither); inject the number as the engine
+// suite does.
+const injectNonFinite = (c) => {
+  const x = clone(c);
+  for (const inj of c.nonFinite || []) {
+    let t = x; const at = inj.at; at.slice(0, -1).forEach((k) => { t = t[k]; });
+    t[at[at.length - 1]] = Number(inj.value);
+  }
+  return x;
+};
 const dec = (cost, payoff) => ({ type: 'decision', label: 'd', branches: [{ label: 'A', cost, node: T('A', payoff) }, { label: 'B', cost: 0, node: T('B', 12) }] });
 const defaultRow = (what, fn) => {
   const a = attempt(fn);
@@ -874,9 +949,15 @@ export const silentDefaults = () => ({
   thirds: thirds().rows.filter((x) => x.typed === '0.333' || x.typed === '0.3333333'),
   probabilityAsText: rollbackAttempt(() => D.rollback({ type: 'chance', label: 'c', branches: [{ label: 'a', probability: '0.5', node: T('a', 10) }, { label: 'b', probability: '0.5', node: T('b', 30) }] })),
   probabilityEmpty: rollbackAttempt(() => D.rollback({ type: 'chance', label: 'c', branches: [{ label: 'a', probability: '', node: T('a', 10) }, { label: 'b', probability: 1, node: T('b', 30) }] })),
-  eviiRefusals: ['likelihoodColumnBelowOne', 'likelihoodColumnAboveOne', 'priorsNotDistribution', 'noSignals', 'payoffCountMismatch'].map((id) => {
+  eviiRefusals: ['likelihoodColumnBelowOne', 'likelihoodColumnAboveOne', 'priorsNotDistribution', 'noSignals', 'payoffCountMismatch', 'likelihoodColumnShortByTwoMillionths', 'priorsShortByTwoMillionths'].map((id) => {
     const c = GC.eviiRefusals[id]; const a = attempt(() => D.evii(c.outcomes, c.actions, c.signals, c.infoCost || 0));
     return a.ok ? { id, ok: true, evii: a.value.evii } : { id, ok: false, error: a.error };
+  }),
+  lotteryRefusals: G.lotteryRefusals.map((c0) => {
+    const c = injectNonFinite(c0);
+    const call = c.calls[0];
+    const a = attempt(() => (call === 'evii' ? D.evii(c.outcomes, c.actions, c.signals, c.infoCost) : D.bestActionEmv(c.outcomes, c.actions)));
+    return a.ok ? { id: c.id, call, ok: true } : { id: c.id, call, ok: false, error: a.error };
   }),
 });
 

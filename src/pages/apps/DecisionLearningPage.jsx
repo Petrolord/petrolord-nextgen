@@ -57,7 +57,7 @@ const LESSONS = [
   { n: 10, title: 'The VOI Analyzer has two actions and four cards',
     body: 'It offers the named decision and Do Not, shows four cards, keeps the gross voi to its guidance sentence, and its EMV with Information card is after the survey cost.' },
   { n: 11, title: 'Typed inputs can contradict each other',
-    body: 'Rounded posteriors imply other outcome chances. Past half a percent the repaired Analyzer withholds the value, and inputs that are not chances at all are refused.' },
+    body: 'Rounded posteriors imply other outcome chances. Past half a percent the Analyzer withholds the value, and inputs that are not chances at all are refused.' },
   { n: 12, title: 'Bigger lotteries, more readings',
     body: 'Three outcomes and four actions, three readings, a reading that never happens, and a half-scale action that can never be best.' },
   { n: 13, title: 'The decision brief re-rolls the tree',

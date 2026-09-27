@@ -1,6 +1,6 @@
 // TWO GATES ON WHAT THE DECISION PANELS RENDER.
 //
-// THE WITHHELD GATE. Since EC4-0 the VOI Analyzer returns null for the value
+// THE WITHHELD GATE. The VOI Analyzer returns null for the value
 // cards it withholds (emvWithInfo, voi, netVoi) when the typed inputs
 // contradict each other. A panel that pushes that null through a naive
 // formatter prints "null", "NaN" or "$null" where the learner should read that

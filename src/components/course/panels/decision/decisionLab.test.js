@@ -53,6 +53,7 @@ const said = (res) => (res.ok ? `accepted, emv ${m(res.emv)}` : `refused: "${res
 const card = (v) => (v === null ? 'withheld' : v);
 const kpiLine = (s) => `emvWithoutInfo ${card(s.kpis.emvWithoutInfo)}, emvWithInfo ${card(s.kpis.emvWithInfo)}, voi ${card(s.kpis.voi)}, netVoi ${card(s.kpis.netVoi)}, evpi ${card(s.kpis.evpi)}; consistent ${s.consistent}; withheld ${s.withheld}; tree ${s.tree ? `drawn, root emv ${m(s.tree.emv)}, root bestBranchIndex ${s.tree.bestBranchIndex}` : 'not drawn'}`;
 const voiLine = (s) => (s.ok ? kpiLine(s) : `refused: "${s.error}"`);
+const ties = (x) => `tiedIndices [${x.tiedIndices.join(', ')}], indifferent ${x.indifferent}, tiedIndicesAtCardPrecision [${x.tiedIndicesAtCardPrecision.join(', ')}], indifferentAtCardPrecision ${x.indifferentAtCardPrecision}`;
 const values = (branches, sep = ', ') => branches.map((b) => `"${b.label}" ${m(b.branchValue)}`).join(sep);
 
 const treeTable = (w, tv) => {
@@ -92,6 +93,7 @@ const SECTIONS = {
     w();
     w('Refusals, each the engine message verbatim (published rollbackRefusals cases):');
     L.refusals().forEach((x) => w(`- ${x.what}: ${said(x)}`));
+    w(`A cost and a payoff that are left out (published omittedCostAndPayoffAreZero): accepted, engine emv ${m(rules.omitted.engineEmv)}, golden ${m(rules.omitted.goldenEmv)}.`);
     w();
     w(`Two numbers already discounted, EKPAN's drill success payoff ${m(rules.successPayoff)} and its dry hole ${m(rules.dryHolePayoff)}, enter unchanged: the rollback has no rate to apply. EKPAN tree emv ${m(rules.treeEmv)}.`);
     w();
@@ -113,8 +115,9 @@ const SECTIONS = {
     const th = L.thirds();
     w(`Probabilities typed as thirds on a chance node paying ${th.payoffs.join(' / ')}:`);
     th.rows.forEach((x) => w(`- each ${x.typed}, sum ${r(x.sumDerived)}: ${said(x)}`));
-    w(`# Commentary: the tolerance test is |sum - 1| > 1e-6 with no allowance for binary rounding. Each ${th.binary.typed} three times sums in binary to ${th.binary.sumDerived.toPrecision(17)}, and |sum - 1| evaluates to ${th.binary.gapDerived.toPrecision(17)} (derived), just above 1e-6, so a sum that is exactly 1e-6 short in decimal is refused while the message prints 0.999999. The same comparison guards each likelihood column (finding EC4-8, an owner decision; the half-percent check was given an allowance in EC4-0 for the same reason).`);
+    w(`# Commentary: each ${th.binary.typed} three times sums in binary to ${th.binary.sumDerived.toPrecision(17)}, and |sum - 1| evaluates to ${th.binary.gapDerived.toPrecision(17)} (derived), a hair above 1e-6 only because ${th.binary.typed} has no exact binary image. The engine compares |sum - 1| against 1e-6 plus a 1e-12 allowance, so a sum exactly 1e-6 short in its typed decimals is accepted, and 0.999 (each 0.333) is still refused. Accepted probabilities are used as typed: the ${th.binary.typed} node is worth ${th.binary.typed} x (${th.payoffs.join(' + ')}), never rescaled to sum to 1.`);
     w(`- published thirdsProbabilities: engine emv ${m(th.published.engineEmv)}, golden ${m(th.published.goldenEmv)}.`);
+    w(`- published thirdsTypedToSixPlaces (90 / 30 / -15, each 0.333333): engine emv ${f(th.sixPlaces.engineEmv, 6)}, golden ${f(th.sixPlaces.goldenEmv, 6)}; published thirdsTypedToThreePlaces (each 0.333): ${said(th.threePlaces)}.`);
     w();
     const cc = L.costOnChanceBranch();
     w(`A cost on a chance branch (published chanceRootWithBranchCosts): root emv ${m(cc.rootEmv)}; branches ${cc.branches.map((b) => `"${b.label}" probability ${r(b.probability)} cost ${m(b.cost)} child ${m(b.childEmv)} value ${m(b.branchValue)}`).join('; ')}.`);
@@ -141,11 +144,12 @@ const SECTIONS = {
     w(`EKPAN root: branch values ${values(dn.root.branches)}; bestBranchIndex ${dn.root.bestBranchIndex}; emv ${m(dn.root.emv)}.`);
     w(`EKPAN marginal-find decision: ${dn.marginal.map((b) => `"${b.label}" child ${m(b.childEmv)} cost ${m(b.cost)} value ${m(b.branchValue)} onOptimalPath ${b.onOptimalPath}`).join('; ')}.`);
     w(`A branch below a branch that is NOT taken is never on the optimal path: the farm-out's three outcomes all read onOptimalPath ${dn.farmOutOnPath.join(' / ')}.`);
-    w('# App surface: the Decision Tree Builder shows four cards: Optimal EMV (the root emv), Recommended first move (the root best branch label), Next best alternative (the largest other root branch value) and Decision advantage (the difference). A root that is a chance node reads "Chance root" on the first-move card and N/A on the other two; a root with one branch reads N/A on the other two.');
+    w('# App surface: the Decision Tree Builder shows four cards: Optimal EMV (the root emv), Recommended first move (the root best branch label), Next best alternative (the largest root branch value other than the marked one) and Decision advantage (the difference). When the root branches tie at card precision, the first-move card reads "Indifferent:" followed by the tied branch labels and "come to the same figure", and the Decision advantage card reads "Indifferent". A root that is a chance node reads "Chance root: no first decision to make" on the first-move card and N/A on the other two; a root with one branch reads N/A on the other two.');
     w();
-    dn.published.forEach((a) => w(`- published ${a.id}: engine emv ${m(a.emv)}, bestBranchIndex ${a.bestBranchIndex ?? 'none'}, branch values ${values(a.branches)}; golden emv ${m(a.goldenEmv)}.`));
+    dn.published.forEach((a) => w(`- published ${a.id}: engine emv ${m(a.emv)}, bestBranchIndex ${a.bestBranchIndex ?? 'none'}${a.ties ? `, ${ties(a.ties)}` : ''}, branch values ${values(a.branches)}; golden emv ${m(a.goldenEmv)}.`));
     const ti = L.TIE_INPUTS;
-    w(`A tie decided by listing order: Drill (${m(ti.drillPayoff)} less cost ${m(ti.drillCost)}) against Farm out (${m(ti.farmPayoff)}). Listed Drill first: best "${dn.tie.firstListed.bestLabel}". Listed Farm out first: best "${dn.tie.swapped.bestLabel}". Both emv ${m(dn.tie.firstListed.emv)}.`);
+    w(`An exact tie: Drill (${m(ti.drillPayoff)} less cost ${m(ti.drillCost)}) against Farm out (${m(ti.farmPayoff)}), both emv ${m(dn.tie.firstListed.emv)}. Listed Drill first: ${ties(dn.tie.firstListed)}; the optimal path marks "${dn.tie.firstListed.bestLabel}". Listed Farm out first: ${ties(dn.tie.swapped)}; the optimal path marks "${dn.tie.swapped.bestLabel}". The engine reports the tie; the marked branch is only the first one listed.`);
+    dn.publishedTies.forEach((a) => w(`- published ${a.id}: branch values ${a.branches.map((b) => `"${b.label}" ${b.branchValue}`).join(', ')} (shortest round trip); ${ties(a)}; bestBranchIndex ${a.bestBranchIndex}.`));
     w(`Walking away is a branch. EKPAN at a dry hole of ${m(dn.dryHolePayoff)} still drills; the root without its walk-away branch reads emv ${m(dn.withoutWalkAway.emv)}, the same, because walking away is not the best branch here.`);
     dn.poorPriors.forEach((x) => w(`- EKPAN with success at ${r(x.pSuccess)} (dry hole ${r(x.pDry)}): branch values ${values(x.branches)}; best "${x.bestLabel}"; without the walk-away branch best "${x.withoutWalkAway.bestLabel}" at ${m(x.withoutWalkAway.emv)}.`));
     w();
@@ -183,14 +187,14 @@ const SECTIONS = {
     w('| --- | --- | --- | --- | --- | --- |');
     ps.rows.forEach((x) => w(`| ${r(x.p)} | ${x.values.map(m).join(' | ')} | ${x.bestLabel} | ${m(x.emv)} |`));
     const sp = L.switchPoint();
-    w(`Drill against farm out, a straight line each: Drill = ${sp.drillSlopeDerived} p - ${-sp.drillInterceptDerived}, Farm out = ${sp.farmSlopeDerived} p (derived from the payoffs and cost above), equal at p = ${sp.drillFarmNumeratorDerived} / ${sp.drillFarmDenominatorDerived} = ${r(sp.drillFarmSwitchDerived)} (derived). At that probability the engine reads Drill ${m(sp.drillAtSwitch)}, Farm out ${m(sp.farmAtSwitch)}, best "${sp.bestAtSwitch}".`);
-    w(`# Commentary: ${sp.drillFarmNumeratorDerived} / ${sp.drillFarmDenominatorDerived} has no exact binary image, so the two values differ in the last binary digits (Drill less Farm out = ${sp.gapAtSwitchDerived.toExponential(2)}, derived). The engine's choice AT the switch probability is that rounding residue, not the tie rule; the tie rule is shown on an exact tie below.`);
+    w(`Drill against farm out, a straight line each: Drill = ${sp.drillSlopeDerived} p - ${-sp.drillInterceptDerived}, Farm out = ${sp.farmSlopeDerived} p (derived from the payoffs and cost above), equal at p = ${sp.drillFarmNumeratorDerived} / ${sp.drillFarmDenominatorDerived} = ${r(sp.drillFarmSwitchDerived)} (derived). At that probability the engine reads Drill ${m(sp.drillAtSwitch)}, Farm out ${m(sp.farmAtSwitch)}; ${ties(sp.tiesAtSwitch)}; actionIndex ${sp.actionIndexAtSwitch} ("${sp.bestAtSwitch}").`);
+    w(`# Commentary: ${sp.drillFarmNumeratorDerived} / ${sp.drillFarmDenominatorDerived} has no exact binary image, so the two values differ in the last binary digits (Drill less Farm out = ${sp.gapAtSwitchDerived.toExponential(2)}, derived). That residue is far inside the tie band ${L.TIE_RELATIVE} x max(1, |best|), so the engine reports the two actions tied and the first listed, ${sp.bestAtSwitch}, carries the actionIndex.`);
     w(`On the lottery, Drill against walking away, equal at p = ${sp.drillWalkNumeratorDerived} / ${sp.drillWalkDenominatorDerived} = ${r(sp.drillWalkSwitchDerived)} (derived), below the farm-out switch, so walking away is never the best EKPAN action at any success probability above 0: Farm out pays ${sp.farmSlopeDerived} p, which is positive.`);
     w();
     const pw = L.publishedSweep();
     w('Published drillFarmOut tree with its success probability swept (both chance nodes moved together):');
     pw.rows.forEach((x) => w(`- success ${r(x.p)}: ${values(x.branches)}; best "${x.bestLabel}"`));
-    w(`At success ${r(pw.tie.p)} the published tree ties Drill and Farm out exactly, and the engine reports the first branch listed.`);
+    w(`At success ${r(pw.tie.p)} the published tree ties Drill and Farm out: ${ties(pw.tie)}; the optimal path marks "${pw.tie.bestLabel}", the first listed.`);
     w();
     w(`What the EKPAN EMV hides, at the stated ${h.prior} prior (derived from the rows above):`);
     w(`- Drill emv ${m(h.drillEmv)}; the two outcomes it can actually produce, after the cost, are ${m(h.drillMoneyDerived[0])} with probability ${r(h.drillChances[0])} and ${m(h.drillMoneyDerived[1])} with probability ${r(h.drillChances[1])}.`);
@@ -256,7 +260,7 @@ const SECTIONS = {
     w('| --- | --- | --- | --- | --- |');
     const cs = L.costSweep();
     cs.rows.forEach((x) => w(`| ${m(x.cost)} | ${m(x.acquire)} | ${m(x.noInformation)} | ${m(x.netEvii)} | ${x.rootChoice} |`));
-    w('At a cost exactly equal to evii the two root branches tie and the engine keeps the first branch listed, the acquisition.');
+    w(`At a cost exactly equal to evii the two root branches tie: ${ties(cs.tieAtGross)}; the optimal path marks the first listed, "${cs.tieAtGross.rootChoice}".`);
     w();
     it.published.forEach((c) => {
       w(`- published ${c.id} inputs: outcomes ${c.outcomes.map((o) => `${o.label} ${r(o.probability)}`).join(', ')}; actions ${c.actions.map((a) => `${a.label} cost ${m(a.cost || 0)} paying ${a.payoffs.map(m).join(' / ')}`).join('; ')}; signals ${c.signals.map((g) => `${g.label} ${g.likelihoods.map(r).join(' / ')}`).join('; ') || 'none'}; survey cost ${m(c.infoCost)}.`);
@@ -312,8 +316,8 @@ const SECTIONS = {
     w('| --- | --- | --- | --- |');
     an.costTable.forEach((x) => w(`| ${m(x.cost)} | ${x.emvWithInfo} | ${x.netVoi} | ${x.rootChoice ?? 'no tree'} |`));
     w();
-    const old = L.contradictions().irri.beforeRepair;
-    w(`Before the EC4-0 repair, the IRRI inputs (both indicators typed 20 / 80 percent) printed a gross voi of ${old.voi.toFixed(2)} and a netVoi card of ${old.net.toFixed(2)} (reconstructed from engine calls, derived). The repaired Analyzer withholds both; Section 11 reads the case in full.`);
+    const irri = L.contradictions().irri;
+    w(`The IRRI inputs (the defaults with both indicators typed 20 / 80 percent): the Analyzer withholds the gross voi and the netVoi card (voi ${card(irri.kpis.voi)}, netVoi ${card(irri.kpis.netVoi)}, withheld ${irri.withheld}); Section 11 reads the case in full.`);
     w();
   },
 
@@ -324,7 +328,7 @@ const SECTIONS = {
     w(`impliedPriors: implied P(outcome) = sum over indicators of P(indicator) x P(outcome | indicator); consistent when every delta against the stated prior is within ${L.HALF_PERCENT}.`);
     ct.impliedPriors.forEach((e) => w(`- published ${e.id}: stated ${e.stated.map(r).join(' / ')}, implied ${e.implied.map(r).join(' / ')}, deltas ${e.deltas.map((d) => d.toExponential(6)).join(' / ')}, consistent ${e.consistent}; golden consistent ${e.goldenConsistent}.`));
     const bd = ct.boundary;
-    w(`The boundary case: 0.305 - 0.3 evaluates in binary floating point to ${bd.deltaDerived.toPrecision(17)}, which is above ${L.HALF_PERCENT} by ${bd.excessDerived.toExponential(1)} (derived). The engine compares against ${L.HALF_PERCENT} plus a 1e-12 representation allowance and reports consistent ${bd.consistent}; compared against ${L.HALF_PERCENT} alone the same deltas would read consistent ${bd.consistentWithoutAllowanceDerived} (derived). Before the EC4-0 repair the engine had no allowance and called this case inconsistent (finding D1, now resolved).`);
+    w(`The boundary case: 0.305 - 0.3 evaluates in binary floating point to ${bd.deltaDerived.toPrecision(17)}, which is above ${L.HALF_PERCENT} by ${bd.excessDerived.toExponential(1)} (derived). The engine compares against ${L.HALF_PERCENT} plus a 1e-12 representation allowance and reports consistent ${bd.consistent}; compared against ${L.HALF_PERCENT} alone the same deltas would read consistent ${bd.consistentWithoutAllowanceDerived} (derived).`);
     w();
     w('Rounded posteriors. EKPAN typed with its posteriors rounded instead of at full precision:');
     w('| Bright spot percent | P(Success given Bright spot) percent | P(Success given No bright spot) percent | implied Success | delta | consistent | gross voi | netVoi card |');
@@ -333,13 +337,13 @@ const SECTIONS = {
     w();
     const ir = ct.irri;
     w(`IRRI: the Analyzer defaults with BOTH indicators typed as 20 / 80 percent. ${kpiLine(ir)}; implied ${ir.implied.map(r).join(' / ')} against stated ${ir.stated.map(r).join(' / ')}; deltas ${ir.deltas.map(r).join(' / ')}.`);
-    w(`- Before the EC4-0 repair the same inputs printed a gross voi of ${ir.beforeRepair.voi.toFixed(2)} and a netVoi card of ${ir.beforeRepair.net.toFixed(2)} (reconstructed from engine calls, derived). Information derived by Bayes can never be worth less than 0 (evii >= 0); a negative value is only reachable from typed inputs that contradict the stated prior, which is why the repaired Analyzer withholds it.`);
+    w(`- Weighted by the typed chances with nothing checking them against the stated prior, the same inputs would give a gross voi of ${ir.unguarded.voi.toFixed(2)} and a net voi of ${ir.unguarded.net.toFixed(2)} (unguarded arithmetic from engine calls, derived). Information derived by Bayes can never be worth less than 0 (evii >= 0); a negative value is only reachable from typed inputs that contradict the stated prior, which is why the Analyzer withholds it.`);
     w(`- IRRI insight, verbatim: ${ir.insights}`);
-    ct.publishedWithheld.forEach((x) => w(`- published ${x.id}: ${kpiLine(x)}; implied ${x.implied.map(r).join(' / ')}. Before the repair: gross voi ${x.beforeRepair.voi.toFixed(2)}, netVoi card ${x.beforeRepair.net.toFixed(2)}, against evpi card ${x.beforeRepair.evpi.toFixed(2)} (reconstructed, derived).`));
-    w(`- EKPAN with Bright spot typed at 56 percent and No bright spot at 44 percent (the chances still sum to 100), the posteriors unchanged: ${voiLine(ct.ekpan56)}; implied Success ${r(ct.ekpan56.implied[0])} against stated ${r(ct.ekpan56.stated[0])}; before the repair gross voi ${ct.ekpan56.beforeRepair.voi.toFixed(2)} (reconstructed, derived).`);
+    ct.publishedWithheld.forEach((x) => w(`- published ${x.id}: ${kpiLine(x)}; implied ${x.implied.map(r).join(' / ')}. Unguarded arithmetic: gross voi ${x.unguarded.voi.toFixed(2)}, net voi ${x.unguarded.net.toFixed(2)}, against evpi ${x.unguarded.evpi.toFixed(2)} (derived).`));
+    w(`- EKPAN with Bright spot typed at 56 percent and No bright spot at 44 percent (the chances still sum to 100), the posteriors unchanged: ${voiLine(ct.ekpan56)}; implied Success ${r(ct.ekpan56.implied[0])} against stated ${r(ct.ekpan56.stated[0])}; unguarded arithmetic gross voi ${ct.ekpan56.unguarded.voi.toFixed(2)} (derived).`);
     w();
-    w('What the repaired Analyzer refuses outright, before computing anything (published voiRefusals, each engine message verbatim). Each typed chance must lie between 0 and 100 percent, and each sum (the outcome chances, the indicator chances, and the outcome chances under each indicator) must lie within 1e-4 percentage points of 100:');
-    ct.voiRefusals.forEach((c) => w(`- ${c.id}: ${voiLine(c)}${c.beforeRepair ? ` Before the repair: gross voi ${c.beforeRepair.voi.toFixed(2)} against evpi card ${c.beforeRepair.evpi.toFixed(2)} (reconstructed, derived).` : ''}`));
+    w('What the Analyzer refuses outright, before computing anything (published voiRefusals, each engine message verbatim). Each typed chance must lie between 0 and 100 percent, and each sum (the outcome chances, the indicator chances, and the outcome chances under each indicator) must lie within 1e-4 percentage points of 100 (inclusive, with a 1e-12 allowance for binary representation). The survey cost and the decision cost must be numbers of 0 or more, and each outcome payoff a finite number:');
+    ct.voiRefusals.forEach((c) => w(`- ${c.id}: ${voiLine(c)}${c.unguarded ? ` Unguarded arithmetic: gross voi ${c.unguarded.voi.toFixed(2)} against evpi ${c.unguarded.evpi.toFixed(2)} (derived).` : ''}`));
     w(`- EKPAN with No bright spot typed at 64 percent, so the indicator chances sum to ${f(ct.indicatorSum110.sumDerived, 6)} percent: ${voiLine(ct.indicatorSum110)}`);
     w('A refusal and a withholding are different answers: a refusal says the typed numbers are not chances at all; a withholding says they are chances that cannot all be true together, and still reports the two cards that depend only on the stated outcome chances.');
     w();
@@ -379,9 +383,9 @@ const SECTIONS = {
     w();
     w('Decision Studio assembles up to three sections, each with a provenance line: probabilistic economics from a saved EPE Monte Carlo run, decision analysis from a saved tree re-rolled by this engine at brief time, and capital allocation from a saved portfolio. Its decision rows are: Optimal EMV (root emv), Recommended first move (the root best branch label), Next best alternative (the largest OTHER root branch value) and Decision advantage (optimal emv less next best). The last two are arithmetic on engine returns, printed here as derived.');
     const bf = L.brief();
-    bf.rows.forEach((b) => w(`- ${b.name}: Optimal EMV ${m(b.optimal)} (engine); Recommended first move "${b.move}"; Next best alternative ${b.nextDerived == null ? 'row absent' : m(b.nextDerived)} (derived); Decision advantage ${b.advantageDerived == null ? 'row absent' : m(b.advantageDerived)} (derived).`));
-    w('An exact tie prints a Decision advantage of 0 beside a recommended first move that is simply the branch listed first.');
-    w('# App surface: the brief writes "Single path" as the first move for a tree whose root is a chance node, where the Decision Tree Builder writes "Chance root" for the same tree.');
+    bf.rows.forEach((b) => w(`- ${b.name}: Optimal EMV ${m(b.optimal)} (engine); Recommended first move ${b.move}; Next best alternative ${b.nextDerived == null ? 'row absent' : m(b.nextDerived)} (derived); Decision advantage ${b.advantageText ?? (b.advantageDerived == null ? 'row absent' : `${m(b.advantageDerived)} (derived)`)}.`));
+    w('When the root branches tie at card precision, the brief names every tied branch on the first-move row and writes "Indifferent at the precision shown" on the advantage row; it never names one of two branches its own figures cannot separate.');
+    w('# App surface: the brief and the Decision Tree Builder share one first-move label. A tree whose root is a chance node reads "Chance root: no first decision to make" on both screens, and a tree that is a single terminal reads "Single outcome: no decision to make".');
     w();
     const mc = bf.monteCarlo;
     const low = mc.readings.find((x) => x.key === 'p90');
@@ -399,7 +403,7 @@ const SECTIONS = {
     w(`Branch A pays ${sd.branchA.payoff} at the cost shown; branch B pays ${sd.branchB.payoff} at no cost.`);
     sd.rows.forEach((x) => w(`- ${x.what}: ${x.ok ? `accepted, emv ${m(x.emv)}, best "${x.bestLabel}"${x.branchAValue !== null ? `, branch A value ${m(x.branchAValue)}` : ''}` : `refused: "${x.error}"`}`));
     w();
-    w('# App surface: in the Decision Tree Builder, clearing a payoff, probability or cost box stores 0, the same value the engine gives a blank or non-numeric cost. A cleared probability therefore surfaces as a sum that is not 1; a cleared cost or payoff is silent.');
+    w('# App surface: in the Decision Tree Builder, clearing a cost or payoff box removes the entry from the tree, so the engine reads it as left out, which is 0; nothing on screen flags it. Clearing a probability box stores 0, which surfaces as a sum that is not 1. A blank or non-numeric cost or payoff reaches the engine only from a tree built outside the form (an imported file), and the engine refuses it by node label.');
     const coarse = sd.thirds.find((x) => x.typed === '0.333');
     const fine = sd.thirds.find((x) => x.typed === '0.3333333');
     w(`Thirds (from Section 2): each ${coarse.typed}, sum ${r(coarse.sumDerived)}, ${coarse.ok ? 'accepted' : 'refused'}; each ${fine.typed}, ${fine.ok ? 'accepted' : 'refused'}.`);
@@ -407,7 +411,9 @@ const SECTIONS = {
     w(`A probability left empty "" on one branch and 1 on the other: ${said(sd.probabilityEmpty)}.`);
     w();
     sd.eviiRefusals.forEach((c) => w(`- published eviiRefusals ${c.id}: ${c.ok ? `accepted (evii ${m(c.evii)})` : `refused: "${c.error}"`}`));
-    w('The VOI Analyzer refuses its percent inputs the same way: see Section 11, voiRefusals. A boundary kept despite binary arithmetic: see Section 11, justInsideTolerance (finding D1, resolved).');
+    w('Money in a lottery is read the same way as in a tree, by action label (published lotteryRefusals, each engine message verbatim):');
+    sd.lotteryRefusals.forEach((c) => w(`- ${c.id} (${c.call}): ${c.ok ? 'accepted' : `refused: "${c.error}"`}`));
+    w('The VOI Analyzer refuses its percent inputs the same way: see Section 11, voiRefusals. A boundary kept despite binary arithmetic: see Section 11, justInsideTolerance.');
     w();
   },
 
@@ -420,10 +426,10 @@ const SECTIONS = {
     w();
     const ti = ds.tie;
     const tin = ti.inputs;
-    w(`An exact tie reported as a recommendation. Analyzer inputs: Success ${tin.success} percent paying ${tin.payS}, Dry hole ${tin.dry} percent paying ${tin.payD}, decision cost ${tin.decisionCost}, so acting is worth ${tin.success / 100} x ${tin.payS} + ${tin.dry / 100} x (${tin.payD}) - ${tin.decisionCost} = ${ti.actingValueDerived} (derived), exactly the "Do Not" value. Survey cost ${m(ti.surveyCost)}. Cards: ${kpiLine(ti)}.`);
+    w(`An exact tie. Analyzer inputs: Success ${tin.success} percent paying ${tin.payS}, Dry hole ${tin.dry} percent paying ${tin.payD}, decision cost ${tin.decisionCost}, so acting is worth ${tin.success / 100} x ${tin.payS} + ${tin.dry / 100} x (${tin.payD}) - ${tin.decisionCost} = ${ti.actingValueDerived} (derived), exactly the "Do Not" value. Survey cost ${m(ti.surveyCost)}. Cards: ${kpiLine(ti)}.`);
     w(`- insight opening, verbatim: ${ti.insightOpening}`);
     w();
-    w('A KPI rounded before it is shown. The five cards are toFixed(2) strings; the verdict reads the unrounded net VOI. The Analyzer defaults at survey costs either side of the gross VOI 33:');
+    w('A KPI rounded before it is shown. The five cards are two-decimal strings, rounded half away from zero with a 1e-12 allowance, and "-0.00" is never printed. The net VOI is rounded once to that card, and the verdict sentence reads the same rounded value, so a card of 0.00 always carries the "rounds to zero" sentence. The Analyzer defaults at survey costs either side of the gross VOI 33:');
     w('| survey cost | netVoi card | verdict sentence |');
     w('| --- | --- | --- |');
     ds.rounding.forEach((x) => w(`| ${f(x.cost, 3)} | ${x.netVoi} | ${x.verdict} |`));
@@ -499,7 +505,7 @@ describe('the digest on disk and the teaching fields', () => {
     const dump = fs.readFileSync(DUMP_MJS, 'utf8');
     const lab = fs.readFileSync(path.join(HERE, 'decisionLab.js'), 'utf8');
     ['EKPAN_TREE', 'EKPAN_PRIOR', 'EKPAN_ACTIONS', 'EKPAN_SIGNALS', 'EKPAN_SURVEY_COST', 'symmetric', 'OKRIKA_DEVELOP',
-      'OKRIKA_TREE', 'voiForm', 'IRRI_FORM', 'SUMMARY', 'legacyCards'].forEach((name) => {
+      'OKRIKA_TREE', 'voiForm', 'IRRI_FORM', 'SUMMARY', 'unguardedCards'].forEach((name) => {
       const theirs = statement(dump, name, false);
       const ours = statement(lab, name, true);
       expect(theirs, `${name} in ec4_dump.mjs`).not.toBeNull();
@@ -511,9 +517,9 @@ describe('the digest on disk and the teaching fields', () => {
     });
   });
 
-  it('the published goldens are the ones the brief names: 107 decision cases in nine blocks', () => {
+  it('the published goldens are the ones the brief names: 164 decision cases in ten blocks', () => {
     expect(L.goldenCounts()).toEqual({
-      rollback: 12, rollbackRefusals: 7, evpi: 11, evii: 18, eviiRefusals: 5, impliedPriors: 6, informationTree: 10, voi: 24, voiRefusals: 7,
+      rollback: 21, rollbackRefusals: 23, evpi: 14, evii: 19, eviiRefusals: 7, impliedPriors: 6, informationTree: 10, voi: 38, voiRefusals: 14, lotteryRefusals: 12,
     });
   });
 });
@@ -546,14 +552,24 @@ describe('the digest, regenerated from the lab alone, section by section', () =>
 // ---------------------------------------------------------------------------
 
 describe('the claims the digest prose makes hold on the lab values', () => {
-  it('ties go to the branch listed first, and the exact published tie is a tie', () => {
+  it('a tie is reported, and only the mark goes to the branch listed first', () => {
     const dn = L.decisionNodes();
     expect(dn.tie.firstListed.emv).toBe(dn.tie.swapped.emv);
+    expect([dn.tie.firstListed.indifferent, dn.tie.swapped.indifferent]).toEqual([true, true]);
+    expect([dn.tie.firstListed.bestLabel, dn.tie.swapped.bestLabel]).toEqual(['Drill', 'Farm out']);
     const pw = L.publishedSweep();
     expect(pw.tie.p).toBe(0.2);
     expect(pw.tie.bestBranchIndex).toBe(0);
-    const tieRow = L.costSweep().rows.find((x) => x.isTie);
-    expect(tieRow.rootChoice).toBe(L.INFO_LABEL);
+    expect(pw.tie.tiedIndices).toEqual([0, 1]);
+    const sp = L.switchPoint();
+    expect(sp.tiesAtSwitch.indifferent).toBe(true);
+    expect(sp.tiedLabelsAtSwitch).toEqual(['Drill', 'Farm out']);
+    const cs = L.costSweep();
+    expect(cs.tieAtGross.indifferent).toBe(true);
+    expect(cs.tieAtGross.rootChoice).toBe(L.INFO_LABEL);
+    const eq = L.brief().rows.find((x) => x.name === 'published equalEmvTie');
+    expect(eq.move).toBe('Indifferent: "A", "B" and "C" come to the same figure');
+    expect(eq.advantageText).toBe('Indifferent at the precision shown');
     expect(L.costSweep().rows.every((x) => [L.INFO_LABEL, 'No further information'].includes(x.rootChoice))).toBe(true);
   });
 
@@ -670,7 +686,7 @@ describe('the ABALAMA capstone: the eighteen graded fields reproduce fields.json
  * panel or the lab hands it. The list is asserted, so a new reader cannot hide
  * in it.
  */
-const ARG_REQUIRED = ['symmetric', 'OKRIKA_DEVELOP', 'voiForm', 'legacyCards', 'leakGuardTargets', 'leakGuardHit', 'collectNumbers'];
+const ARG_REQUIRED = ['symmetric', 'OKRIKA_DEVELOP', 'voiForm', 'unguardedCards', 'leakGuardTargets', 'leakGuardHit', 'collectNumbers'];
 const GATE_MACHINERY = ['LEAK_GUARD_MARGIN', 'LEAK_GUARD_SCALINGS'];
 
 /** A surface smaller than this is not the lab: refuse to call it clean. */
@@ -689,10 +705,10 @@ const teachingSurface = () => {
   L.contradictions().rounded.forEach((x) => {
     const form = L.voiForm({ pPos: x.brightSpotPercent, postPos: x.successGivenBrightPercent, postNeg: x.successGivenNoBrightPercent });
     push(`voiForm(${x.brightSpotPercent})`, form);
-    push(`legacyCards(voiForm(${x.brightSpotPercent}))`, L.legacyCards(form));
+    push(`unguardedCards(voiForm(${x.brightSpotPercent}))`, L.unguardedCards(form));
   });
-  push('legacyCards(IRRI_FORM())', L.legacyCards(L.IRRI_FORM()));
-  push('legacyCards(TIE_FORM())', L.legacyCards(L.TIE_FORM()));
+  push('unguardedCards(IRRI_FORM())', L.unguardedCards(L.IRRI_FORM()));
+  push('unguardedCards(TIE_FORM())', L.unguardedCards(L.TIE_FORM()));
   return out;
 };
 

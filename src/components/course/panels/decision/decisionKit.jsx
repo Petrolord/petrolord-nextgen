@@ -28,8 +28,8 @@ export const outcomeLabel = (key) => `${OUTCOME_LABELS[key]}${OUTCOME_SUFFIX[key
 
 export const Outcome = ({ children }) => <span data-plabel="outcome" className="text-[#BFFF00] font-semibold">{children}</span>;
 
-/** A value the Analyzer printed before the EC4-0 repair, shown as history only. */
-export const History = ({ children }) => <span data-history="pre-repair" className="text-slate-400 italic">{children}</span>;
+/** Unguarded arithmetic: what typed numbers would give with nothing checking them. Never an Analyzer card. */
+export const Unguarded = ({ children }) => <span data-unguarded="arithmetic" className="text-slate-400 italic">{children}</span>;
 
 export const Tbl = ({ head, rows, strong = () => false }) => (
   <div className="mt-3 overflow-x-auto">

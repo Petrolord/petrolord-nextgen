@@ -64,9 +64,11 @@ export const TreeMode = ({ t, rules, refs, dn }) => {
             rows={dn.published.map((a) => [a.id, mm(a.emv), a.bestBranchIndex === null ? 'none' : a.branches[a.bestBranchIndex].label, a.branches.map((b) => `${b.label} ${mm(b.branchValue)}`).join(', '), mm(a.goldenEmv)])}
           />
           <Text>
-            A tie decided by listing order. Drill pays {mm(TIE_INPUTS.drillPayoff)} less a cost of {mm(TIE_INPUTS.drillCost)} and
-            Farm out pays {mm(TIE_INPUTS.farmPayoff)}. Listed Drill first, the engine picks {dn.tie.firstListed.bestLabel}; listed
-            Farm out first, it picks {dn.tie.swapped.bestLabel}. Both read {mm(dn.tie.firstListed.emv)} million USD.
+            An exact tie. Drill pays {mm(TIE_INPUTS.drillPayoff)} less a cost of {mm(TIE_INPUTS.drillCost)} and
+            Farm out pays {mm(TIE_INPUTS.farmPayoff)}; both read {mm(dn.tie.firstListed.emv)} million USD. The engine reports the
+            tie (indifferent {String(dn.tie.firstListed.indifferent)}, tied branches {dn.tie.firstListed.tiedIndices.join(' and ')}) in
+            either order. Only the mark on the optimal path follows the listing: {dn.tie.firstListed.bestLabel} when Drill is listed
+            first, {dn.tie.swapped.bestLabel} when Farm out is.
           </Text>
           <Tbl
             head={['EKPAN tree', ...dn.root.branches.map((b) => b.label), 'best', 'best without the walk-away branch', 'EMV without it']}
@@ -221,14 +223,14 @@ export const SweepMode = ({ ps, sp, pw }) => {
           <Tile label="Drill meets Farm out at (derived)" value={pr(sp.drillFarmSwitchDerived)} />
           <Tile label="Drill there, the engine" value={mm(sp.drillAtSwitch)} unit="million USD" />
           <Tile label="Farm out there, the engine" value={mm(sp.farmAtSwitch)} unit="million USD" />
-          <Tile label="The engine picks" value={sp.bestAtSwitch} />
+          <Tile label="The engine reports" value={sp.tiesAtSwitch.indifferent ? `a tie: ${sp.tiedLabelsAtSwitch.join(' and ')}` : sp.bestAtSwitch} />
         </TileGrid>
       </div>
       <Note>
         Drill is {sp.drillSlopeDerived} p less {-sp.drillInterceptDerived} and Farm out is {sp.farmSlopeDerived} p (derived from the
         payoffs and the cost), equal at {sp.drillFarmNumeratorDerived} / {sp.drillFarmDenominatorDerived}. That fraction has no exact
-        binary image, so at the switch the two differ by {sp.gapAtSwitchDerived.toExponential(2)} (derived) and the engine&apos;s pick is
-        that residue. Drill meets Walk away lower, at {pr(sp.drillWalkSwitchDerived)}, where Farm out already pays more, so walking away
+        binary image, so at the switch the two differ by {sp.gapAtSwitchDerived.toExponential(2)} (derived). That residue sits far
+        inside the engine&apos;s tie band, so it reports the two tied and marks {sp.bestAtSwitch}, the first listed. Drill meets Walk away lower, at {pr(sp.drillWalkSwitchDerived)}, where Farm out already pays more, so walking away
         is never best.
       </Note>
       <Sub>The published drill and farm-out tree, success swept</Sub>
@@ -237,7 +239,7 @@ export const SweepMode = ({ ps, sp, pw }) => {
         strong={(i) => Boolean(pw.tie) && pw.rows[i].p === pw.tie.p}
         rows={pw.rows.map((x) => [pr(x.p), ...x.branches.map((b) => mm(b.branchValue)), x.bestLabel])}
       />
-      {pw.tie && <Note>At success {pr(pw.tie.p)} Drill and Farm out tie exactly, and the engine reports {pw.tie.bestLabel}, the branch listed first.</Note>}
+      {pw.tie && <Note>At success {pr(pw.tie.p)} Drill and Farm out tie, and the engine reports the tie; the optimal path marks {pw.tie.bestLabel} only because it is listed first.</Note>}
       <Sub>What the lottery EMV hides</Sub>
       <Tbl
         head={['action at the stated prior', 'EMV, million USD', 'money on a success (derived)', 'money on a dry hole (derived)', 'chance of a dry hole']}
