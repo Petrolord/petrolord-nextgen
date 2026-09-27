@@ -90,18 +90,20 @@ FILES="$SEEDS
 $GOLIVE"
 digest_for() {
   case $1 in
-    20261114_sc3_materials_course               ) echo 37e4fb86f549f73828a30a157cf3465c7492e20e8ada23d8a338627e4112fa83 ;;
-    20261114_sc3_materials_beginner_deep        ) echo 56361a06f90a830886915ab0057094d6b426fdfe64795f9734b78a153ee98a7b ;;
-    20261114_sc3_materials_intermediate_deep    ) echo ff6abf277f28ff805df4147815b9625c39e56a80b30b60665501bb82dfea2bff ;;
-    20261114_sc3_materials_advanced_deep        ) echo 178efdb32accbc4bcc7fca1c8963d7468437c17952eb6375be090a354c554c02 ;;
-    20261114_sc3_materials_go_live              ) echo 26c7a7061c93626d3a8da88410f0fe7b49cc99e0f88d7ab8493d545a3dc9e67d ;;
+    20261114_sc3_materials_course               ) echo d5f2b933e8cbb4f6abbc69fd03acd94150b2687597c4d459170893a0ebadf76a ;;
+    20261114_sc3_materials_beginner_deep        ) echo 4a034b8da0fde480d35df8c4ed7b50fe9f127b2690ffc1e3b10cbece89b6cfcd ;;
+    20261114_sc3_materials_intermediate_deep    ) echo bb9492e12aec5bebc48385546e8c25c93df2d3d3fe19f71ba0dea56fbcc15e1e ;;
+    20261114_sc3_materials_advanced_deep        ) echo dbaf9bf10e84c472cbb640b6f48d7b24a279374067103459e7c5a49949fbe6bd ;;
+    20261114_sc3_materials_go_live              ) echo 3aa1340a84e89126a302ee36c99a8938efbc4a33f68c088b81452206d8de7496 ;;
     *) echo UNPINNED ;;
   esac
 }
 
 say()    { echo "$*"; }
 refuse() { echo; echo "REFUSED: $*"; echo "Nothing was applied. run artefacts: $RUN"; exit 2; }
-prod_q() { ( cd "$NG_REPO" && supabase db query --linked -f "$1" 2>&1 ); }
+# stdin is closed for every production call, so a confirmation piped into
+# `apply --prod --go-live` is read by the prompt and by nothing else.
+prod_q() { ( cd "$NG_REPO" && supabase db query --linked -f "$1" 2>&1 < /dev/null ); }
 failed() { [ "$1" -ne 0 ] || grep -qE '(^|[^A-Z_])ERROR' <<<"$2"; }
 
 fetch() {
@@ -232,10 +234,11 @@ case "${1:-verify}" in
     [ "${2:-}" = "--prod" ] || refuse "apply writes PRODUCTION; pass --prod explicitly (run dryrun, attempts, prod-status and prod-dryrun first)"
     fetch
     if [ "${3:-}" = "--go-live" ]; then
-      [ "$(golive_state)" = HELD ] || refuse "the go-live is not HELD on production: $(golive_state). Apply the four seeds first."
       say "THE GO-LIVE. Confirm you have SERVED the built DashboardPage chunk and SEEN 'apps/materials' in it."
-      printf "Type exactly  apps/materials  to proceed: "; read -r answer
+      printf "Type exactly  apps/materials  to proceed (or pipe it: echo \"apps/materials\" | %s apply --prod --go-live): " "$0"
+      answer=""; read -r answer || true
       [ "$answer" = "apps/materials" ] || refuse "upload gate not confirmed"
+      [ "$(golive_state)" = HELD ] || refuse "the go-live is not HELD on production: $(golive_state). Apply the four seeds first."
       { echo "begin;"; cat "$RUN/$GOLIVE.sql"; echo; echo "commit;"; } > "$RUN/golive.apply.sql"
       out=$(prod_q "$RUN/golive.apply.sql"); rc=$?
       if failed $rc "$out"; then echo "$out" | grep -E 'ERROR|refused' | head -3; refuse "the go-live failed and rolled back"; fi
