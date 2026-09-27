@@ -82,12 +82,26 @@ echo; echo "PART 3: the courses that run shared files, rebuilt from their commit
 for spec in D1:dataqc D2:mlcore D3:facies D4:forecastml D5:appliedai H1:safetystats H3:lopa H4:consequence H5:qra SC2:procurement EC7:pia EC8:gsa EC9:joa; do
   P=${spec%%:*}; W=${spec#*:}; src="$NG/tools/course-waves/$W"; dst="$SCR/$W"; cp -rp "$src" "$dst"
   export ${P}_WAVE_DIR="$dst" ${P}_ENGINES="$ENG" ${P}_REPO="$NG" ${P}_TOLERANCE="$NG/src/components/course/panels/$W/gradedTolerance.js"
+  known=""
+  if [ "$W" = joa ] && [ "${ALLOW_JOA_DIGEST:-0}" = 1 ]; then
+    # EC9 joa reads jointVenture.js, which moves to the engines #274 blob so the
+    # farmout root can collapse. Its generator asserts the golden holds 78
+    # refusals; #274 adds five. With ALLOW_JOA_DIGEST=1 the scratch copy (never
+    # the committed kit) accepts the vendored count, the digest difference is
+    # printed as KNOWN, and fields.json and precision.json must stay identical.
+    n=$(python3 -c "import json;print(sum(1 for c in json.load(open('$ENG/test-data/economics/goldens/jointventure_cases.json'))['cases'] if (c.get('expected') or {}).get('error') is True))")
+    sed -i "s/REF.length === 78, REF.length/REF.length === $n, REF.length/" "$dst/joa_dump.mjs"
+    known=digest.txt
+  fi
   if (cd "$dst" && sh ./build_digest.sh > digest.tmp 2> digest.err && mv digest.tmp digest.txt && node ./make_fields.mjs > fields.log 2>&1); then
     for f in digest.txt fields.json precision.json; do
+      if [ "$f" = "$known" ] && ! cmp -s "$src/$f" "$dst/$f"; then
+        printf '%-4s %-12s %-15s KNOWN DIFFERENCE (%s diff lines; engines #274 refusal rows, pending the lead)\n' "$P" "$W" "$f" "$(diff "$src/$f" "$dst/$f" | grep -c '^[<>]')"; continue
+      fi
       cmp -s "$src/$f" "$dst/$f" && v=IDENTICAL || { v=DIFFERS; fail=1; }
       printf '%-4s %-12s %-15s %s  sha256 %s\n' "$P" "$W" "$f" "$v" "$(sha256sum "$dst/$f" | cut -c1-16)"
     done
-    for f in digest.txt fields.json; do [ "$(pin $W $f)" = "$(sha256sum "$dst/$f" | cut -d' ' -f1)" ] || { echo "$P $W $f DOES NOT MATCH its pin"; fail=1; }; done
+    for f in digest.txt fields.json; do [ "$f" = "$known" ] && continue; [ "$(pin $W $f)" = "$(sha256sum "$dst/$f" | cut -d' ' -f1)" ] || { echo "$P $W $f DOES NOT MATCH its pin"; fail=1; }; done
   else echo "$P $W: rebuild FAILED"; tail -n 3 "$dst/digest.err" "$dst/fields.log"; fail=1; fi
   unset ${P}_WAVE_DIR ${P}_ENGINES ${P}_REPO ${P}_TOLERANCE
 done

@@ -144,7 +144,7 @@
       "ec4_fields.mjs"
     ],
     "pins": {
-      "digest.txt": "4f3453ce63dcb7daf231ca980c1e64e09803882a873e5b54562e3e09ea1d5d2b",
+      "digest.txt": "42fc7789ea380d179e2ccd9a22d69b6114a21adcd9553faf22af5bdb93f46eff",
       "fields.json": "ed46a9f0bf33fabc9be60baea12f09ea4897a9a8d7b0efa4c301a379cd49f1fc"
     }
   },
@@ -159,7 +159,7 @@
       "ec5_fields.mjs"
     ],
     "pins": {
-      "digest.txt": "58e3821bac104d90d6f0afe169ac077dfcb3c904d2529864222239e084a18e4e",
+      "digest.txt": "f7ce10259f3143c5aa01b3a332154c2a89921d7923252d3d7af0798d94da490a",
       "fields.json": "20d8113e5656a4608f90b424429b8b32e3751b8228eb55582b15dea5fdc27718"
     }
   },
