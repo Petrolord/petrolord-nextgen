@@ -44,7 +44,7 @@ u=$(git -C "$NG" status --porcelain -- packages/engines | grep -v node_modules |
 [ -z "$u" ] || { echo "  UNCOMMITTED under packages/engines:"; echo "$u"; fail=1; }
 
 echo; echo "PART 2: the full kits, rebuilt from their committed copies in $SCR"
-for spec in D1:dataqc D2:mlcore D3:facies D4:forecastml D5:appliedai H1:safetystats H3:lopa H4:consequence H5:qra SC2:procurement EC7:pia EC8:gsa EC9:joa EC10:farmout EC11:prms; do
+for spec in D1:dataqc D2:mlcore D3:facies D4:forecastml D5:appliedai H1:safetystats H3:lopa H4:consequence H5:qra SC2:procurement EC7:pia EC8:gsa EC9:joa EC10:farmout EC11:prms SC3:materials; do
   P=${spec%%:*}; W=${spec#*:}; src="$NG/tools/course-waves/$W"; dst="$SCR/$W"; cp -rp "$src" "$dst"
   export ${P}_WAVE_DIR="$dst" ${P}_ENGINES="$ENG" ${P}_REPO="$NG" ${P}_TOLERANCE="$NG/src/components/course/panels/$W/gradedTolerance.js"
   if (cd "$dst" && sh ./build_digest.sh > digest.tmp 2> digest.err && mv digest.tmp digest.txt && node ./make_fields.mjs > fields.log 2>&1); then
@@ -117,4 +117,4 @@ PY
 echo; echo "PART 5: the committed wave inputs"
 if out=$(node "$NG/tools/course-waves/check-wave-inputs.mjs" 2>&1); then echo "  $(echo "$out" | tail -1)"; else echo "$out" | grep -E 'FAIL|problem' | head -20; fail=1; fi
 
-[ $fail = 0 ] && echo "PRIOR COURSES UNCHANGED: packages/engines byte-identical to $BASE; D1 to D5, H1, H3, H4, H5, SC2 and EC7 to EC11 digests, fields and precision rebuild byte-identical; cashflow, fiscal, fdp (digest), decision and portfolio rebuild byte-identical and match their pins; every changed path is this wave's own or a named platform file; waves.json only adds contracts; check-wave-inputs passes" || { echo "PRIOR COURSES: A DIFFERENCE"; exit 1; }
+[ $fail = 0 ] && echo "PRIOR COURSES UNCHANGED: packages/engines byte-identical to $BASE; D1 to D5, H1, H3, H4, H5, SC2, EC7 to EC11 and SC3 digests, fields and precision rebuild byte-identical; cashflow, fiscal, fdp (digest), decision and portfolio rebuild byte-identical and match their pins; every changed path is this wave's own or a named platform file; waves.json only adds contracts; check-wave-inputs passes" || { echo "PRIOR COURSES: A DIFFERENCE"; exit 1; }

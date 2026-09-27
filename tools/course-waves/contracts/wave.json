@@ -247,11 +247,11 @@
    "summary": "=== negative control: 5 of 5 plants red"
   },
   "prove_prior_courses.sh": {
-   "md5": "cfd2c8ffc69a6a81c4132c21bae60b50",
+   "md5": "7c0e7ea6c1805584415f9c84c915fa37",
    "command": "bash prove_prior_courses.sh",
    "expected": 0,
    "exit": 0,
-   "summary": "PRIOR COURSES UNCHANGED: packages/engines byte-identical to origin/main; D1 to D5, H1, H3, H4, H5, SC2 and EC7 to EC11 digests, fields and precision rebuild byte-identical; cashflow, fiscal, fdp (digest), decision and po"
+   "summary": "PRIOR COURSES UNCHANGED: packages/engines byte-identical to origin/main; D1 to D5, H1, H3, H4, H5, SC2, EC7 to EC11 and SC3 digests, fields and precision rebuild byte-identical; cashflow, fiscal, fdp (digest), decision a"
   },
   "gen_course.py (self checks)": {
    "md5": "fa069cc1eee032100b59f1ce095937f7",

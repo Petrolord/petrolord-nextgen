@@ -17,8 +17,9 @@
 #     chassis tunables (final exam: 25 served, 70 per cent to pass);
 #   * a catalogue of stand-in courses at path_order 1 to 78 with the SIX REAL
 #     engine course migrations (procurement 71, pia 72, gsa 73, joa 74,
-#     farmout 75, prms 76) read out of REF, so the backfill meets real rows and
-#     real capstones; 77 and 78 (materials, marine) are stand-ins. Every
+#     farmout 75, prms 76) and SC3 materials (77, an app course) read out of
+#     REF, so the backfill meets real rows and real capstones; 78 (marine) is a
+#     stand-in. Every
 #     path_order 1 to 78 is asserted occupied and 79 asserted free.
 # Stubbed, and said so: academy_has_scope (true for a user with an active
 # enrolment in the course; the real one also checks activation and
@@ -123,19 +124,19 @@ git -C "$REPO" show "$REF:migrations/20261105_catalog_course_titles.sql" \
 P <<'SQL'
 insert into public.academy_apps (slug, name, module, path_order, status)
 select 'neighbour' || g, 'Neighbour ' || g,
-       case when g in (71, 77, 78) then 'supply_chain' else 'other' end, g, 'available'
-  from generate_series(1, 78) g where g not between 71 and 76;
+       case when g = 78 then 'supply_chain' else 'other' end, g, 'available'
+  from generate_series(1, 78) g where g not between 71 and 77;
 SQL
 n=0
 for f in $(git -C "$REPO" ls-tree --name-only "$REF" migrations/ \
-           | grep -E '_(sc2_procurement|ec7_pia|ec8_gsa|ec9_joa|ec10_farmout|ec11_prms)_course\.sql$'); do
+           | grep -E '_(sc2_procurement|ec7_pia|ec8_gsa|ec9_joa|ec10_farmout|ec11_prms|sc3_materials)_course\.sql$'); do
   git -C "$REPO" show "$REF:$f" | P
   n=$((n + 1))
 done
-[ "$n" = 6 ] || { echo "REFUSED: expected the 6 engine course migrations at $REF, found $n"; exit 2; }
+[ "$n" = 7 ] || { echo "REFUSED: expected the 6 engine course migrations and SC3 materials at $REF, found $n"; exit 2; }
 holes=$(P -Atc "select coalesce(string_agg(g::text, ',' order by g), '') from generate_series(1, 78) g where not exists (select 1 from public.academy_apps a where a.path_order = g)")
 [ -z "$holes" ] || { echo "REFUSED: path_order hole(s) in the scratch catalogue: $holes"; exit 2; }
 [ "$(P -Atc "select count(*) from public.academy_apps where path_order = 79 or slug = 'contracts'")" = 0 ] \
   || { echo "REFUSED: path_order 79 or the slug contracts is already taken in the scratch catalogue"; exit 2; }
-echo "$C ready at $REF: the real deep-course tables and learner functions, $n engine course migrations, path_order 1 to 78 held, 79 free"
+echo "$C ready at $REF: the real deep-course tables and learner functions, $n course migrations (6 engine, SC3 materials), path_order 1 to 78 held, 79 free"
 P -Atc "select count(*) filter (where status='available') || ' available / ' || count(*) filter (where status='coming_soon') || ' coming_soon, ' || (select count(*) from public.academy_capstones) || ' capstones' from public.academy_apps"
