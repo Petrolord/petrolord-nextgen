@@ -1,6 +1,6 @@
 # SC3 TEACHING DIGEST: Materials, Spares & Inventory Management
 
-# THIS FILE IS THE ONLY TEACHING TRUTH FOR THIS COURSE. Every number in every lesson, bank question, key truth and panel comes from a line below. The oracle, the golden file's expected figures, the fixture README, the negative control, FINDINGS-inventory.md and the engine source comments are PROVENANCE and not teaching truth.
+# THIS FILE IS THE ONLY TEACHING TRUTH FOR THIS COURSE. Every number in every lesson, bank question, key truth and panel comes from a line below. The oracle, the golden file's expected figures, the fixture README, the negative control, FINDINGS-inventory.md and the engine source comments are PROVENANCE; none of them is teaching truth.
 
 # PRECISION. Every quantity, cost, amount of money, score, share, percentage, probability, safety factor, sigma, mean and ratio prints to SIX decimals; years, months and days stated as inputs, counts, ranks, levels, spares, draws, seeds and whole inputs print as whole numbers or as given; a figure of sixteen or more significant digits at six decimals prints with its thousands grouped by commas; an engine message, reason and basis is printed verbatim, figures and all. Inside a message the engine prints money rounded to the cent and a computed quantity, factor or probability to six decimal places (both half away from zero, trailing zeros dropped), and a stated input as it was given.
 
@@ -12,7 +12,7 @@
 
 # WHAT IS NEVER IN THIS FILE. No capstone field, no capstone case and no graded answer. The capstones run their own registers and the digest never names them.
 
-# NO LECTURE PROSE. The MIT OpenCourseWare lectures of ESD.260J are licensed CC BY-NC-SA 4.0 and this course is sold, so the course cites their figures by lecture and slide, teaches their ideas in its own words and never reproduces a slide or its text. Only public-domain texts are quoted (section 3).
+# NO LECTURE PROSE. The MIT OpenCourseWare lectures of ESD.260J are licensed CC BY-NC-SA 4.0 and this course is sold, so the course cites their figures by lecture and slide, teaches their ideas in its own words; no slide and no slide text is reproduced. Only public-domain texts are quoted (section 3).
 
 # THIS COURSE TEACHES NO REPAIR HISTORY. Every section below describes what the engine does today.
 
@@ -75,8 +75,7 @@ The validation record, FINDINGS-inventory.md (engines PRs #281 and #283), lists 
 
 NOT USED, and said plainly. The two textbooks the record names were not read, so the course cites neither. No licensed maintenance or reliability standard was read, so the course names none: criticality criteria and weights are the user's stated policy, and the course names VED (vital, essential, desirable) only as one such scheme, in its own words.
 
-THE LECTURES ARE CITED, NEVER REPRODUCED. The lead's decision is recorded in FINDINGS-inventory.md, and this digest follows it: a lesson cites a lecture figure with its lecture and slide number, works it through the course's own panel and never copies a slide, a slide title or a sentence of slide text. The record's own words, verbatim:
-> MIT OpenCourseWare is CC BY-NC-SA 4.0 and NextGen is a paid product: the course cites the Caplice figures with lecture and slide numbers and never reproduces slides or slide text.
+THE LECTURES ARE CITED; NO SLIDE IS REPRODUCED. The lead's decision is recorded in FINDINGS-inventory.md, and this digest follows it: a lesson cites a lecture figure with its lecture and slide number, works it through the course's own panel, and copies no slide, no slide title and no sentence of slide text.
 
 The engine carries its citations in its own words. The `basis` of one call of each function, verbatim:
 
@@ -166,7 +165,7 @@ CHECK FIVE: CAPLICE LECTURE 11 SLIDES 18 TO 24, SAFETY STOCK AT A CYCLE SERVICE 
 
 Over the two weeks the demand is 500.000000 with a sigma of 258.088834 (engine). The table reading reproduces all four printed figures; the exact safety factor does not, which is why the course states the rule a figure was read with.
 
-THE FILL-RATE COLUMN OF THE SAME SLIDE, on the same inputs with the item fill rate as the service measure (golden inputs caplice-l11-ifr-99, -95, -90 and -80):
+THE FILL-RATE COLUMN OF THE SAME SLIDE, on the same inputs with the item fill rate as the service measure (golden inputs caplice-l11-ifr-99, caplice-l11-ifr-95, caplice-l11-ifr-90, caplice-l11-ifr-80):
 
 | item fill rate | safety factor (engine) | safety stock (engine) | printed (text) | printed less the engine (derived) |
 | --- | --- | --- | --- | --- |
@@ -192,7 +191,7 @@ CHECK SIX: CAPLICE LECTURE 12 SLIDES 5 AND 6, PERIODIC REVIEW. The same weekly d
 The engine's reason, verbatim (it prints the loss target the slide rounds):
 > a fill rate of 0.95 needs G(k) at or below 2000 x (1 - 0.95) / 577.104177 = 0.173279, so k = 0.583373, read as 0.58; safety stock 334.720422 over a demand of 2500 with sigma 577.104177 gives the order-up-to level S 2834.720422, held as 2835 (the nearest multiple of 1 (halves upward))
 
-CHECK SEVEN: CAPLICE LECTURE 13 SLIDES 11 AND 12, POISSON DEMAND FOR A SLOW MOVER. A demand of 0.8 a week, Poisson, reviewed every week with no lead time, an item fill rate of 0.9 and an order quantity of 0.8 (the mean demand a review), so the units short a cycle may be at most 0.08 (golden input caplice-l13-poisson-fill). The slide prints a level of 2 (text); the engine gives 2. The table, with the slide's figures beside the engine's (golden input caplice-l13-poisson-table carries the rows to 4):
+CHECK SEVEN: CAPLICE LECTURE 13 SLIDES 11 AND 12, POISSON DEMAND FOR A SLOW MOVER. A demand of 0.8 a week, Poisson, reviewed every week with no lead time, an item fill rate of 0.9 and an order quantity of 0.8 (the mean demand a review), so the units short a cycle may be at most 0.08 (golden input caplice-l13-poisson-fill). The slide prints a level of 2 (text); the engine gives 2. The table, with the slide's figures beside the engine's (golden input caplice-l13-poisson-table carries the rows to level 4):
 
 | level | probability (engine) | printed (text) | cumulative (engine) | printed (text) | expected units short beyond the level (engine) | printed (text) |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -202,7 +201,7 @@ CHECK SEVEN: CAPLICE LECTURE 13 SLIDES 11 AND 12, POISSON DEMAND FOR A SLOW MOVE
 | 3 | 0.038343 | not cited | 0.990920 | 99.1% | 0.010699 | 0.01 |
 | 4 | 0.007669 | not cited | 0.998589 | 99.9% | 0.001619 | 0.009 |
 
-Levels 0 to 3 agree with the slide at the precision it prints. The loss at level 4 is a slip: section 5. The engine's reason for level 2, verbatim:
+Every level below 4 agrees with the slide at the precision it prints. The loss at level 4 is a slip: section 5. The engine's reason for level 2, verbatim:
 > level 2: expected units short 0.058121 is at or below 0.8 x (1 - 0.9) = 0.08; at 1 it is 0.249329 (Poisson mean 0.8)
 
 CHECK EIGHT: MIL-HDBK-338B EXAMPLE 5.3.8.1, TWO SPARE LAMPS. A failure rate of 0.001 an hour over 500 hours (golden input mil-hdbk-338b-lamps) is a Poisson mean of 0.500000, and the chance of two failures or fewer is 0.985612 (engine); the handbook prints 0.986 (text). The same mean as orders outstanding in insurance spares is in section 22.
@@ -216,7 +215,7 @@ SLIP ONE: CAPLICE LECTURE 11 SLIDE 24, THE ITEM FILL RATE OF 0.95. The slide pri
 
 At the engine's safety stock the achieved fill rate is 0.950000 and the expected units short a cycle are 11.400000 (engine): the rule meets its target exactly.
 
-SLIP TWO: CAPLICE LECTURE 13 SLIDE 12, THE LOSS AT LEVEL 4. The slide prints the expected units short beyond level 4 as 0.009 (text). The recursion the same slide states, the loss at one level less one less the cumulative probability at the level below, gives 0.001619 (engine, golden input caplice-l13-poisson-table). The loss at level 3 is 0.010699 and the cumulative probability at 3 is 0.990920, so 0.010699 less (1 less 0.990920) is 0.001619 (derived), the engine's figure at six decimals. The printed 0.009 is not the recursion's figure at any precision the slide uses.
+SLIP TWO: CAPLICE LECTURE 13 SLIDE 12, THE LOSS AT LEVEL 4. The slide prints the expected units short beyond level 4 as 0.009 (text). The recursion the same slide states, the loss at one level less one less the cumulative probability at the level below, gives 0.001619 (engine, golden input caplice-l13-poisson-table). The loss at level 3 is 0.010699 and the cumulative probability there is 0.990920, so 0.010699 less one less 0.990920 is 0.001619 (derived), the engine's figure at six decimals. The printed 0.009 is not the recursion's figure at any precision the slide uses.
 
 # SECTION 6: The Ekene materials register and its stated policy (owned by Associate m01 l03 and Associate m01 l04 and Professional m02 l04 and Expert m01 l05 and Expert m04 l03)
 
@@ -316,8 +315,8 @@ A refusal is an object with `error` and `field`. The message starts with the nam
 | `eoq` | eoq-refuse-both-holding | `holdingCostPerUnitYear` | holdingCostPerUnitYear or holdingRate: state exactly one (holdingRate goes with unitCost) |
 | `eoq` | eoq-refuse-no-holding | `holdingCostPerUnitYear` | holdingCostPerUnitYear or holdingRate: state exactly one (holdingRate goes with unitCost) |
 | `eoq` | eoq-refuse-rate-without-price | `unitCost` | unitCost is required with holdingRate (the holding cost is holdingRate x unitCost) |
-| `eoq` | eoq-refuse-rounding-missing | `rounding` | printed below this table as a quotation, because it carries the character \| |
-| `eoq` | eoq-refuse-rounding-rule | `rounding` | printed below this table as a quotation, because it carries the character \| |
+| `eoq` | eoq-refuse-rounding-missing | `rounding` | quoted after the table, because it carries the character \| |
+| `eoq` | eoq-refuse-rounding-rule | `rounding` | quoted after the table, because it carries the character \| |
 | `eoq` | eoq-refuse-rounding-multiple-zero | `rounding.multiple` | rounding.multiple must be a finite number above 0; got 0 |
 | `eoq` | eoq-refuse-none-with-multiple | `rounding.multiple` | rounding.multiple must be left out when the rule is 'none' |
 | `eoq` | eoq-refuse-rounds-to-zero | `rounding` | rounding gives an order quantity of 0 from the EOQ 400; state a smaller multiple or another rule |
@@ -408,7 +407,7 @@ MORE REFUSALS, EACH A STATED PROBE. The calls below are not golden cases; each i
 | qd-ekene-casing | breaks[1].unitPrice set to 0 | `breaks[1].unitPrice` | breaks[1].unitPrice must be a finite number above 0; got 0 |
 | qd-ekene-casing | replaced by a two-band schedule (prices 1 and 0.5, the break at 100) with a demand, order cost and holding rate of 1 each, rounded down to a multiple of 100 | `rounding` | rounding gives an order quantity of 0 from the band 0 EOQ 1.414214; state a smaller multiple or another rule |
 | ss-ekene-choke-beans | safetyFactorRounding set to nearest with no decimals | `safetyFactorRounding.decimals` | safetyFactorRounding.decimals must be a whole number from 0 to 6; got undefined |
-| ss-ekene-choke-beans | rounding removed (the rounding control set to not stated) | `rounding` | printed below this table as a quotation, because it carries the character \| |
+| ss-ekene-choke-beans | rounding removed (the rounding control set to not stated) | `rounding` | quoted after the table, because it carries the character \| |
 | ps-ekene-psv-kits | orderQuantity set to 0 | `orderQuantity` | orderQuantity must be a finite number above 0; got 0 |
 | ins-ekene-esp-motor | unitCost set to -1 | `unitCost` | unitCost must be a finite number at or above 0; got -1 |
 | ltr-ekene-mech-seal | leadTimeDays set to the string 90 | `leadTimeDays` | leadTimeDays must be a number or a triangular distribution { min, mode, max } of finite numbers |
@@ -477,13 +476,13 @@ Each weight is a percentage and the weights add to 100; a criterion contributes 
 
 Counts: V 6, E 5, D 7.
 
-THE MINIMUM IS MET AT OR ABOVE. MECH-SEAL scores exactly the V minimum and is V; GASKET-RJ scores exactly the E minimum and is E. On stated inputs (golden inputs, two criteria of weight 50 each out of 10, classes V from 70 and E from 40):
+THE MINIMUM IS MET AT OR ABOVE. MECH-SEAL scores exactly the V minimum and is V; GASKET-RJ scores exactly the E minimum and is E. On stated inputs (golden inputs crit-at-cutoff-is-in and crit-just-below-cutoff: two criteria of weight 50, 50 out of 10, classes V from 70, E from 40, D from 0):
 crit-at-cutoff-is-in, the engine's reason, verbatim:
 > X: weighted score 70 is at or above 70, the minimum for class V
 crit-just-below-cutoff, the engine's reason, verbatim:
 > X: weighted score 69.95 is at or above 40, the minimum for class E, and below 70 for class V
 
-TWELVE SIGNIFICANT DIGITS. Three weights of 33.3, 33.3 and 33.4 with a score of 7 out of 10 on each (golden input crit-12-digit-key) sum to a weighted score the computer holds as 69.99999999999999; compared at 12 significant digits it meets the minimum of 70, and the item is class V. The engine's reason, verbatim:
+TWELVE SIGNIFICANT DIGITS. Three weights of 33.3, 33.3, 33.4 with a score of 7 out of 10 on each (golden input crit-12-digit-key) sum to a weighted score the computer holds as 69.99999999999999; compared at 12 significant digits it meets the minimum of 70, and the item is class V. The engine's reason, verbatim:
 > T: weighted score 70 is at or above 70, the minimum for class V
 
 THE OVERRIDE. A maximum score on a named criterion places the item in the first class whatever its weighted score; one below the maximum does not. PSV-KIT on the register (fixture), and two stated cases (golden inputs):
@@ -535,7 +534,7 @@ CEM-G under at-or-below (fixture), the engine's reason, verbatim:
 CEM-G under include-crossing (fixture), the engine's reason, verbatim:
 > CEM-G: cumulative share before it 78.753907% is below 80%
 
-A SHARE EXACTLY ON A CUT-OFF (golden inputs abc-cutoff-exact-at-or-below and abc-cutoff-exact-include-crossing: three items of value 80, 15 and 5):
+A SHARE EXACTLY ON A CUT-OFF (golden inputs abc-cutoff-exact-at-or-below and abc-cutoff-exact-include-crossing: three items of value 80.000000, 15.000000, 5.000000):
 
 | id | cumulative share | at-or-below | include-crossing |
 | --- | --- | --- | --- |
@@ -702,7 +701,7 @@ CHK-BEAN on the Ekene register (fixture case, golden input ss-ekene-choke-beans)
 | lead-time spread set to 0 (stated probe) | 8.333250 | 2.529822 | 4.161187 | 12.494437 |
 | demand spread set to 0 (stated probe) | 8.333250 | 1.666650 | 2.741395 | 11.074645 |
 
-The two parts add as squares: 2.529822 squared plus 1.666650 squared is 3.029476 squared (derived; the check holds to 1e-9). The engine's reason for the stated case, verbatim:
+The two parts add as squares: 2.529822 squared plus 1.666650 squared is 3.029476 squared (derived; asserted when this digest was built). The engine's reason for the stated case, verbatim:
 > a cycle service level of 0.95 gives k = Phi^-1(0.95) = 1.644854; safety stock 4.983044 over a demand of 8.33325 with sigma 3.029476 gives the reorder point s 13.316294, held as 14 (up to a multiple of 1)
 
 LEAD-TIME SPREAD ALONE. With a steady demand of 20 a period and a lead time of 5 periods with a standard deviation of 1.5 (golden input ss-lead-time-variance-only), sigma is 30.000000: the demand times the lead-time spread. The engine's reason, verbatim:
@@ -759,7 +758,7 @@ CHK-BEAN reviewed every month (stated probe: the fixture case with a review peri
 
 The lecture 12 check (the order-up-to level 2835.000000) is in section 4.
 
-A FLOOR ON THE SAFETY FACTOR. A cycle service level below 0.5 gives a negative k. The floor is a stated input: a number, or null for none. At a level of 0.4 (golden inputs ss-floor-at-zero and ss-negative-k-without-floor) the exact k is -0.253347; with the floor 0 the engine holds k at 0.000000 and the safety stock at 0.000000; with no floor the safety stock is -65.386058. The two reasons, verbatim:
+A FLOOR ON THE SAFETY FACTOR. A cycle service level below one half gives a negative k. The floor is a stated input: a number, or null for none. At a level of 0.4 (golden inputs ss-floor-at-zero and ss-negative-k-without-floor) the exact k is -0.253347; with the floor 0 the engine holds k at 0.000000 and the safety stock at 0.000000; with no floor the safety stock is -65.386058. The two reasons, verbatim:
 ss-floor-at-zero, the engine's reason, verbatim:
 > a cycle service level of 0.4 gives k = Phi^-1(0.4) = -0.253347; below the stated minimum 0, so k = 0; safety stock 0 over a demand of 500 with sigma 258.088834 gives the reorder point s 500, held as 500 (up to a multiple of 1)
 ss-negative-k-without-floor, the engine's reason, verbatim:
@@ -860,7 +859,7 @@ When the cheapest stock lies on the search limit the engine says so, and a large
 THE SAMPLER. leadTimeRisk samples through lib/stats, the platform's one seeded Monte Carlo: mulberry32 for the uniforms and the triangular inverse triInvCDF for each value. Per draw it takes a lead time in days, then a demand rate a day held for that whole lead time; the lead-time demand is the rate times the days. The basis, verbatim:
 > 20000 iterations, one mulberry32(20270301) stream; per iteration a uniform for the lead time then one for the demand rate; triangular inverse CDF (lib/stats triInvCDF); the rate holds for the whole lead time
 
-THE MECHANICAL SEAL on the Ekene register (fixture case, golden input ltr-ekene-mech-seal): demand a day triangular from 0.01 through 0.016 to 0.03, lead time triangular from 70 through 90 to 160 days, reorder point 3, service level 0.95, 20000 draws, seed 20270301. THESE FIGURES ARE SAMPLED AND NEVER GRADED; each is quoted with its seed and draw count.
+THE MECHANICAL SEAL on the Ekene register (fixture case, golden input ltr-ekene-mech-seal): demand a day triangular from 0.01 through 0.016 to 0.03, lead time triangular from 70 through 90 to 160 days, reorder point 3, service level 0.95, 20000 draws, seed 20270301. THESE FIGURES ARE SAMPLED; NONE OF THEM IS GRADED, and each is quoted with its seed and draw count.
 
 | figure | lead time, days | lead-time demand, seals |
 | --- | --- | --- |
@@ -894,7 +893,7 @@ ltr-constant-demand-equal-to-stock, the engine's reason, verbatim:
 ltr-constant-demand-above-stock, the engine's reason, verbatim:
 > 50 of 50 draws have a lead-time demand above the reorder point 19.5: a stockout probability of 1 a cycle
 
-A REORDER POINT FOR A SERVICE LEVEL. With a service level stated, the engine returns the smallest sampled lead-time demand that at least that share of draws does not exceed: the sorted draws at index ceil(level times draws) less 1. For the mechanical seal at 0.95 it is 3.062282 seals (seed 20270301, 20000 draws; sampled, never graded), against the stated reorder point 3, whose sampled cycle service is 0.941400.
+A REORDER POINT FOR A SERVICE LEVEL. With a service level stated, the engine returns the smallest sampled lead-time demand that at least that share of draws does not exceed: the sorted draws at index ceil(level times draws) less 1. For the mechanical seal at 0.95 it is 3.062282 seals (seed 20270301, 20000 draws; a sampled figure, which is not graded), against the stated reorder point 3, whose sampled cycle service is 0.941400.
 
 CONSTANT INPUTS DRAW NOTHING. A number in place of a triangle is a constant, and the engine takes no uniform for it: the basis names it. With a constant demand of 1.5 a day and a sampled lead time (golden input ltr-lead-time-only), the basis, verbatim:
 > 5000 iterations, one mulberry32(42) stream; per iteration a uniform for the lead time then one for the demand rate (constant: no draw); triangular inverse CDF (lib/stats triInvCDF); the rate holds for the whole lead time
@@ -919,7 +918,7 @@ A READING is a choice the engine makes where the texts leave room, stated in its
 | READING NINE: a slow-moving band minimum is reached at or above it | slowMoving | bands active from 0 months (0%), slow from 12 months (25%), very slow from 24 months (50%), obsolete from 36 months (100%), a band reached at or above its minimum; cover = onHand / monthlyUsage, excess above 24 months; compared at 12 significant digits | reached only strictly above it |
 | READING TEN: excess is stock strictly above the cover limit | slowMoving | bands active from 0 months (0%), slow from 12 months (25%), very slow from 24 months (50%), obsolete from 36 months (100%), a band reached at or above its minimum; cover = onHand / monthlyUsage, excess above 24 months; compared at 12 significant digits | at or above the limit |
 | READING ELEVEN: a lead-time demand equal to the reorder point is met | leadTimeRisk | 0 of 50 draws have a lead-time demand above the reorder point 20: a stockout probability of 0 a cycle | equality counted as a stockout |
-| READING TWELVE: the reorder point for a service level is the sorted draw at ceil(level times draws) less 1 | leadTimeRisk | reorderPointForService is the sorted lead-time demand at index ceil(0.95 x n) - 1 | one sorted draw higher |
+| READING TWELVE: the reorder point for a service level is the sorted draw at ceil(level times draws) less one | leadTimeRisk | reorderPointForService is the sorted lead-time demand at index ceil(0.95 x n) - 1 | one sorted draw higher |
 | READING THIRTEEN: the P90 of a sampled lead time or demand is the low figure | leadTimeRisk | lib/stats basicStats on the sorted values: P90 = index floor(0.1 n), P50 = floor(0.5 n), P10 = floor(0.9 n). P-labels per lib/conventions/percentile.js: P90 means a 90% probability the actual quantity meets or exceeds the value, so for a lead time or a demand P90 is the LOW figure (10th percentile) and the stockout risk sits at the P10 end | P90 read as the high figure |
 
 THE ONE-FOR-ONE INSURANCE MODEL and ONE RATE FOR A WHOLE LEAD TIME are models of the whole calculation; section 29 states them with the other conventions that are choices.

@@ -172,7 +172,7 @@ const TEXT = {
   l8s15: { f1: '2,500', f2: '7,500', eoq0: '400', eoq1: '1,033', eoq2: '1,789', price: '44.19', purchase: '88,384', order: '559', hold: '9,882', total: '98,825', base: '105,000' },
   l11s24: { csl: ['601', '423', '330', '217'], ifr: ['513', '348', '252', '148'], demand: '13,000', rmse: '1,316', eoq: '228' },
   l12s6: { sigma: '577', g: '0.1733', k: '0.58', s: '2835' },
-  l13s12: { p: ['44.9%', '35.9%', '14.4%'], f: ['44.9%', '80.9%', '95.3%', '99.1%', '99.9%'], l: ['0.80', '0.25', '0.06', '0.01', '0.009'], eus: '0.08', level: '2' },
+  l13s12: { p: ['44.9%', '35.9%', '14.4%'], f: ['44.9%', '80.9%', '95.3%', '99.1%', '99.9%'], l: ['0.80', '0.25', '0.06', '0.01', '0.009'], eus: '0.08', level: '2', slipLevel: 4 },
   mil: { r: '0.986' },
 };
 const EXPORTS = [
@@ -192,7 +192,7 @@ const EXPORTS = [
 const engineLines = ENGINE_SRC.replace(/\n$/, '').split('\n').length;
 w('# SC3 TEACHING DIGEST: Materials, Spares & Inventory Management');
 w();
-w('# THIS FILE IS THE ONLY TEACHING TRUTH FOR THIS COURSE. Every number in every lesson, bank question, key truth and panel comes from a line below. The oracle, the golden file\'s expected figures, the fixture README, the negative control, FINDINGS-inventory.md and the engine source comments are PROVENANCE and not teaching truth.');
+w('# THIS FILE IS THE ONLY TEACHING TRUTH FOR THIS COURSE. Every number in every lesson, bank question, key truth and panel comes from a line below. The oracle, the golden file\'s expected figures, the fixture README, the negative control, FINDINGS-inventory.md and the engine source comments are PROVENANCE; none of them is teaching truth.');
 w();
 w('# PRECISION. Every quantity, cost, amount of money, score, share, percentage, probability, safety factor, sigma, mean and ratio prints to SIX decimals; years, months and days stated as inputs, counts, ranks, levels, spares, draws, seeds and whole inputs print as whole numbers or as given; a figure of sixteen or more significant digits at six decimals prints with its thousands grouped by commas; an engine message, reason and basis is printed verbatim, figures and all. Inside a message the engine prints money rounded to the cent and a computed quantity, factor or probability to six decimal places (both half away from zero, trailing zeros dropped), and a stated input as it was given.');
 w();
@@ -204,7 +204,7 @@ w('# THE DATA. Every Ekene item, score, usage, cost, stock, demand, lead time, f
 w();
 w('# WHAT IS NEVER IN THIS FILE. No capstone field, no capstone case and no graded answer. The capstones run their own registers and the digest never names them.');
 w();
-w(`# NO LECTURE PROSE. The MIT OpenCourseWare lectures of ESD.260J are licensed CC BY-NC-SA 4.0 and this course is sold, so the course cites their figures by lecture and slide, teaches their ideas in its own words and never reproduces a slide or its text. Only public-domain texts are quoted (${ref('provisions')}).`);
+w(`# NO LECTURE PROSE. The MIT OpenCourseWare lectures of ESD.260J are licensed CC BY-NC-SA 4.0 and this course is sold, so the course cites their figures by lecture and slide, teaches their ideas in its own words; no slide and no slide text is reproduced. Only public-domain texts are quoted (${ref('provisions')}).`);
 w();
 w('# THIS COURSE TEACHES NO REPAIR HISTORY. Every section below describes what the engine does today.');
 
@@ -277,10 +277,9 @@ quote(NOTUSED ? NOTUSED[0] : '');
 w();
 w('NOT USED, and said plainly. The two textbooks the record names were not read, so the course cites neither. No licensed maintenance or reliability standard was read, so the course names none: criticality criteria and weights are the user\'s stated policy, and the course names VED (vital, essential, desirable) only as one such scheme, in its own words.');
 w();
-w('THE LECTURES ARE CITED, NEVER REPRODUCED. The lead\'s decision is recorded in FINDINGS-inventory.md, and this digest follows it: a lesson cites a lecture figure with its lecture and slide number, works it through the course\'s own panel and never copies a slide, a slide title or a sentence of slide text. The record\'s own words, verbatim:');
+w('THE LECTURES ARE CITED; NO SLIDE IS REPRODUCED. The lead\'s decision is recorded in FINDINGS-inventory.md, and this digest follows it: a lesson cites a lecture figure with its lecture and slide number, works it through the course\'s own panel, and copies no slide, no slide title and no sentence of slide text.');
 const OCWRULE = FINDINGS.match(/MIT OpenCourseWare is CC BY-NC-SA 4\.0 and NextGen is a paid product: the course cites the Caplice figures with lecture and slide numbers and never reproduces slides or slide text\./);
 must('FINDINGS records the lead decision on the lectures', !!OCWRULE, 'ocw');
-quote(OCWRULE ? OCWRULE[0] : '');
 w();
 w('The engine carries its citations in its own words. The `basis` of one call of each function, verbatim:');
 w();
@@ -328,7 +327,7 @@ const h1 = runG('harris-1913-example');
 const h2 = runG('harris-1913-connector');
 const h3 = runG('harris-1913-stud');
 const h4 = runG('harris-1913-stud-say-49');
-w('CHECK ONE: HARRIS (1913), THREE LOTS. Harris writes the lot as the square root of 240 M S / C, with M the monthly movement, S the set-up cost and C the unit cost, and ten per cent a year for interest and depreciation. The golden inputs read his figures as annual demand 12 M, order cost S, unit cost C and a holding rate of 0.1:');
+w('CHECK ONE: HARRIS (1913), THREE LOTS. Harris writes the lot as the square root of 240 M S / C, with M the monthly movement, S the set-up cost and C the unit cost, and ten per cent a year for interest and depreciation. The golden inputs read his figures as annual demand 12 M, order cost S, unit cost C and a holding rate of ' + S(argsOf('harris-1913-example').holdingRate) + ':');
 w();
 table(['golden input', 'annual demand', 'order cost', 'unit cost', 'holding rate', 'EOQ (engine)', 'Harris prints (text)'], [
   ['harris-1913-example', S(argsOf('harris-1913-example').annualDemand), S(argsOf('harris-1913-example').orderCost), S(argsOf('harris-1913-example').unitCost), S(argsOf('harris-1913-example').holdingRate), f6(h1.eoq), TEXT.harris.lot1],
@@ -337,7 +336,7 @@ table(['golden input', 'annual demand', 'order cost', 'unit cost', 'holding rate
 ]);
 must('Harris: the engine lots truncate to his printed figures (2190, 6856 printed 6,850, 48.5)', Math.floor(h1.eoq) === 2190 && Math.floor(h2.eoq / 10) * 10 === 6850 && Math.floor(h3.eoq * 10) / 10 === 48.5, `${h1.eoq} ${h2.eoq} ${h3.eoq}`);
 w();
-w(`Harris prints each lot short of the formula's figure: the engine's ${f6(h1.eoq)} is printed ${TEXT.harris.lot1}, ${f6(h2.eoq)} is printed ${TEXT.harris.lot2} and ${f6(h3.eoq)} is printed ${TEXT.harris.lot3}. He then says "or, say, ${TEXT.harris.say}" for the stud: the same call with the stated rule nearest multiple of 1 (golden input harris-1913-stud-say-49) orders ${f6(h4.quantity)} (engine). The engine's reason, verbatim:`);
+w(`Harris prints each lot short of the formula's figure: the engine's ${f6(h1.eoq)} is printed ${TEXT.harris.lot1}, ${f6(h2.eoq)} is printed ${TEXT.harris.lot2} and ${f6(h3.eoq)} is printed ${TEXT.harris.lot3}. He then says "or, say, ${TEXT.harris.say}" for the stud: the same call with the stated rule nearest multiple of ${S(argsOf('harris-1913-stud-say-49').rounding.multiple)} (golden input harris-1913-stud-say-49) orders ${f6(h4.quantity)} (engine). The engine's reason, verbatim:`);
 must('Harris stud: nearest 1 gives 49', h4.quantity === 49, h4.quantity);
 quote(h4.reason);
 w();
@@ -379,12 +378,12 @@ w(`Over the two weeks the demand is ${f6(csl[0][0].demandOverProtection)} with a
 w();
 const ifrIds = ['99', '95', '90', '80'];
 const ifr = ifrIds.map((p) => runG(`caplice-l11-ifr-${p}`));
-w('THE FILL-RATE COLUMN OF THE SAME SLIDE, on the same inputs with the item fill rate as the service measure (golden inputs caplice-l11-ifr-99, -95, -90 and -80):');
+w(`THE FILL-RATE COLUMN OF THE SAME SLIDE, on the same inputs with the item fill rate as the service measure (golden inputs ${list(ifrIds.map((p) => `caplice-l11-ifr-${p}`))}):`);
 w();
 table(['item fill rate', 'safety factor (engine)', 'safety stock (engine)', 'printed (text)', 'printed less the engine (derived)'], ifrIds.map((p, i) => [`0.${p}`, f6(ifr[i].safetyFactorExact), f6(ifr[i].safetyStock), TEXT.l11s24.ifr[i], f6(Number(TEXT.l11s24.ifr[i]) - ifr[i].safetyStock)]));
 must('three of the four fill-rate figures lie within 2 units of the print, and the 0.95 row does not', [0, 2, 3].every((i) => Math.abs(Number(TEXT.l11s24.ifr[i]) - ifr[i].safetyStock) < 2) && Math.abs(348 - ifr[1].safetyStock) > 8, ifr.map((r) => r.safetyStock).join());
 w();
-w(`Three rows agree with the slide to within 2 units. The 0.95 row is a slip: ${ref('slips')}.`);
+w(`Three rows agree with the slide to within 2 units. The ${S(argsOf('caplice-l11-ifr-95').serviceLevel)} row is a slip: ${ref('slips')}.`);
 w();
 // CAPLICE L12 SLIDE 6
 const r12 = runG('caplice-l12-periodic-rs');
@@ -404,13 +403,13 @@ w();
 const p13 = runG('caplice-l13-poisson-fill');
 const t13 = runG('caplice-l13-poisson-table');
 const a13 = argsOf('caplice-l13-poisson-fill');
-w(`CHECK SEVEN: CAPLICE LECTURE 13 SLIDES 11 AND 12, POISSON DEMAND FOR A SLOW MOVER. A demand of ${S(a13.demandRate)} a week, Poisson, reviewed every week with no lead time, an item fill rate of ${S(a13.serviceLevel)} and an order quantity of ${S(a13.orderQuantity)} (the mean demand a review), so the units short a cycle may be at most ${TEXT.l13s12.eus} (golden input caplice-l13-poisson-fill). The slide prints a level of ${TEXT.l13s12.level} (text); the engine gives ${S(p13.level)}. The table, with the slide's figures beside the engine's (golden input caplice-l13-poisson-table carries the rows to 4):`);
+w(`CHECK SEVEN: CAPLICE LECTURE 13 SLIDES 11 AND 12, POISSON DEMAND FOR A SLOW MOVER. A demand of ${S(a13.demandRate)} a week, Poisson, reviewed every week with no lead time, an item fill rate of ${S(a13.serviceLevel)} and an order quantity of ${S(a13.orderQuantity)} (the mean demand a review), so the units short a cycle may be at most ${TEXT.l13s12.eus} (golden input caplice-l13-poisson-fill). The slide prints a level of ${TEXT.l13s12.level} (text); the engine gives ${S(p13.level)}. The table, with the slide's figures beside the engine's (golden input caplice-l13-poisson-table carries the rows to level ${S(TEXT.l13s12.slipLevel)}):`);
 w();
-table(['level', 'probability (engine)', 'printed (text)', 'cumulative (engine)', 'printed (text)', 'expected units short beyond the level (engine)', 'printed (text)'], [0, 1, 2, 3, 4].map((x) => [S(x), f6(t13.rows[x].probability), x < 3 ? TEXT.l13s12.p[x] : 'not cited', f6(t13.rows[x].cumulative), TEXT.l13s12.f[x], f6(t13.rows[x].expectedShort), TEXT.l13s12.l[x]]));
+table(['level', 'probability (engine)', 'printed (text)', 'cumulative (engine)', 'printed (text)', 'expected units short beyond the level (engine)', 'printed (text)'], TEXT.l13s12.f.map((_, x) => [S(x), f6(t13.rows[x].probability), x < 3 ? TEXT.l13s12.p[x] : 'not cited', f6(t13.rows[x].cumulative), TEXT.l13s12.f[x], f6(t13.rows[x].expectedShort), TEXT.l13s12.l[x]]));
 must('Caplice L13: level 2 met at L(2) 0.058121 against 0.08', p13.level === 2 && Math.abs(p13.expectedShortPerCycle - 0.058121) < 1e-6, p13.expectedShortPerCycle);
 must('the table rows run to level 4 at least', t13.rows.length >= 5, t13.rows.length);
 w();
-w(`Levels 0 to 3 agree with the slide at the precision it prints. The loss at level 4 is a slip: ${ref('slips')}. The engine's reason for level 2, verbatim:`);
+w(`Every level below ${S(TEXT.l13s12.slipLevel)} agrees with the slide at the precision it prints. The loss at level ${S(TEXT.l13s12.slipLevel)} is a slip: ${ref('slips')}. The engine's reason for level ${S(p13.level)}, verbatim:`);
 quote(p13.reason);
 w();
 // MIL-HDBK-338B
@@ -433,7 +432,7 @@ w(`At the engine's safety stock the achieved fill rate is ${f6(ifr[1].achievedFi
 must('the rule meets the 0.95 fill rate at 339.18', Math.abs(ifr[1].achievedFillRate - 0.95) < 1e-12 && Math.abs(ifr[1].safetyStock - 339.18) < 0.01, ifr[1].achievedFillRate);
 w();
 const slip2 = GC['caplice-l13-poisson-table'];
-w(`SLIP TWO: CAPLICE LECTURE 13 SLIDE 12, THE LOSS AT LEVEL 4. The slide prints the expected units short beyond level 4 as ${TEXT.l13s12.l[4]} (text). The recursion the same slide states, the loss at one level less one less the cumulative probability at the level below, gives ${f6(t13.rows[4].expectedShort)} (engine, golden input caplice-l13-poisson-table). The loss at level 3 is ${f6(t13.rows[3].expectedShort)} and the cumulative probability at 3 is ${f6(t13.rows[3].cumulative)}, so ${f6(t13.rows[3].expectedShort)} less (1 less ${f6(t13.rows[3].cumulative)}) is ${f6(t13.rows[3].expectedShort - (1 - t13.rows[3].cumulative))} (derived), the engine's figure at six decimals. The printed ${TEXT.l13s12.l[4]} is not the recursion's figure at any precision the slide uses.`);
+w(`SLIP TWO: CAPLICE LECTURE 13 SLIDE 12, THE LOSS AT LEVEL ${S(TEXT.l13s12.slipLevel)}. The slide prints the expected units short beyond level ${S(TEXT.l13s12.slipLevel)} as ${TEXT.l13s12.l[TEXT.l13s12.slipLevel]} (text). The recursion the same slide states, the loss at one level less one less the cumulative probability at the level below, gives ${f6(t13.rows[4].expectedShort)} (engine, golden input caplice-l13-poisson-table). The loss at level ${S(TEXT.l13s12.slipLevel - 1)} is ${f6(t13.rows[3].expectedShort)} and the cumulative probability there is ${f6(t13.rows[3].cumulative)}, so ${f6(t13.rows[3].expectedShort)} less one less ${f6(t13.rows[3].cumulative)} is ${f6(t13.rows[3].expectedShort - (1 - t13.rows[3].cumulative))} (derived), the engine's figure at six decimals. The printed ${TEXT.l13s12.l[TEXT.l13s12.slipLevel]} is not the recursion's figure at any precision the slide uses.`);
 must('the level-4 loss is 0.001619 at six decimals and the recursion reproduces it', f6(t13.rows[4].expectedShort) === '0.001619' && f6(t13.rows[3].expectedShort - (1 - t13.rows[3].cumulative)) === f6(t13.rows[4].expectedShort), t13.rows[4].expectedShort);
 must('the recursion figure at level 4 rounds to 0.002 at three decimals, so the print 0.009 is not it', Math.round(t13.rows[4].expectedShort * 1000) === 2, t13.rows[4].expectedShort);
 must('the golden file pins the level-4 loss as a slip', JSON.stringify(slip2.published || {}).includes('0.009'), 'pinned');
@@ -445,7 +444,7 @@ must('the fixture is labelled synthetic', /^SYNTHETIC/.test(FX.synthetic) && /sy
 w(`The fixture: ${FX.title}, written by ${FX.generatedBy}, money in ${FX.currency}. Its own label, verbatim:`);
 quote(FX.synthetic);
 w();
-w(`${FX.items.length} stock items (fixture). Scores run from 1 to ${S(POL.criticality.scoreMax)} on each of the four criteria; usage is a year; months since the last issue and monthly usage are stated.`);
+w(`${FX.items.length} stock items (fixture). Scores run from ${S(Math.min(...FX.items.flatMap((it) => Object.values(it.scores))))} to ${S(POL.criticality.scoreMax)} on each of the four criteria; usage is a year; months since the last issue and monthly usage are stated.`);
 w();
 table(['id', 'name', 'annual usage', 'unit cost', 'safety', 'production', 'lead time', 'redundancy', 'on hand', 'months since last issue', 'monthly usage'],
   FX.items.map((it) => [it.id, it.name, S(it.annualUsage), S(it.unitCost), S(it.scores.safety), S(it.scores.production), S(it.scores.leadTime), S(it.scores.redundancy), S(it.onHand), S(it.monthsSinceLastIssue), S(it.monthlyUsage)]));
@@ -508,7 +507,7 @@ const REFUSED = REF.map((c) => {
 // A message that carries a pipe character is printed below the table as a
 // quotation, so it reads exactly as the engine writes it.
 const PIPED = REFUSED.filter((r) => r[3].includes('|'));
-table(['function', 'golden case', 'field', 'the engine\'s message, verbatim'], REFUSED.map((r) => (r[3].includes('|') ? [...r.slice(0, 3), 'printed below this table as a quotation, because it carries the character |'] : r)));
+table(['function', 'golden case', 'field', 'the engine\'s message, verbatim'], REFUSED.map((r) => (r[3].includes('|') ? [...r.slice(0, 3), 'quoted after the table, because it carries the character |'] : r)));
 if (PIPED.length) {
   w();
   w('The messages that carry the character |, verbatim:');
@@ -568,7 +567,7 @@ const PROBED = PROBES.map(([id, what, f, field]) => {
   const r = refusal(`${probeFn(id)} on ${id} with ${what}`, E[probeFn(id)](f(probeArgs(id))), field);
   return [id, what, `\`${field}\``, r.error];
 });
-table(['golden input', 'the change (stated probe)', 'field', 'the engine\'s message, verbatim'], PROBED.map((r) => (r[3].includes('|') ? [...r.slice(0, 3), 'printed below this table as a quotation, because it carries the character |'] : r)));
+table(['golden input', 'the change (stated probe)', 'field', 'the engine\'s message, verbatim'], PROBED.map((r) => (r[3].includes('|') ? [...r.slice(0, 3), 'quoted after the table, because it carries the character |'] : r)));
 PROBED.filter((r) => r[3].includes('|')).forEach((r) => { w(); w(`The message of the probe "${r[1]}" on ${r[0]}, verbatim:`); quote(r[3]); });
 w();
 // EVERY REFUSAL SITE IS REACHED. An instrumented copy of the engine source (the
@@ -579,12 +578,17 @@ const SITE = /\brefuse\(/g;
 const siteCount = (ENGINE_SRC.match(SITE) || []).length;
 let k = 0;
 const abs = (rel) => pathToFileURL(`${ROOT}/${rel}`).href;
-const instr = ENGINE_SRC
+// The substitutions that make the instrumented copy, declared once (the typed
+// literal gate reads this declaration as code, never as printed prose).
+const INSTR = {
+  refuseDef: 'const refuse = (field, message) => ({ error: `${field} ${message}`, field });',
+  helper: '\nconst __R = (n, f, m) => { globalThis.__SC3_HITS.add(n); return refuse(f, m); };',
+  imports: [['../../lib/stats/stats.js', 'lib/stats/stats.js'], ['../../lib/conventions/percentile.js', 'lib/conventions/percentile.js'], ['../hse/safetyStats.js', 'engines/hse/safetyStats.js']],
+};
+let instr = ENGINE_SRC
   .replace(/\brefuse\(/g, () => { k += 1; return `__R(${k}, `; })
-  .replace("const refuse = (field, message) => ({ error: `${field} ${message}`, field });", "const refuse = (field, message) => ({ error: `${field} ${message}`, field });\nconst __R = (n, f, m) => { globalThis.__SC3_HITS.add(n); return refuse(f, m); };")
-  .replace("'../../lib/stats/stats.js'", `'${abs('lib/stats/stats.js')}'`)
-  .replace("'../../lib/conventions/percentile.js'", `'${abs('lib/conventions/percentile.js')}'`)
-  .replace("'../hse/safetyStats.js'", `'${abs('engines/hse/safetyStats.js')}'`);
+  .replace(INSTR.refuseDef, INSTR.refuseDef + INSTR.helper);
+INSTR.imports.forEach(([from, to]) => { instr = instr.replace(`from '${from}'`, `from '${abs(to)}'`); });
 must('the instrumented copy tags every refuse call site and keeps the helper', k === siteCount && instr.includes('const __R = '), `${k} ${siteCount}`);
 globalThis.__SC3_HITS = new Set();
 const IE = await import(`data:text/javascript;base64,${Buffer.from(instr).toString('base64')}`);
@@ -634,7 +638,8 @@ w(`Counts: ${list(Object.entries(critFx.counts).map(([c, n]) => `${c} ${n}`))}.`
 must('the counts add to eighteen', Object.values(critFx.counts).reduce((a, b) => a + b, 0) === 18, JSON.stringify(critFx.counts));
 must('every contribution is weight x score / scoreMax', critFx.items.every((x) => POL.criticality.criteria.every((c) => x.contributions[c.id] === (c.weight * byId[x.id].scores[c.id]) / POL.criticality.scoreMax)), 'contributions');
 w();
-w('THE MINIMUM IS MET AT OR ABOVE. MECH-SEAL scores exactly the V minimum and is V; GASKET-RJ scores exactly the E minimum and is E. On stated inputs (golden inputs, two criteria of weight 50 each out of 10, classes V from 70 and E from 40):');
+const aIn = argsOf('crit-at-cutoff-is-in');
+w(`THE MINIMUM IS MET AT OR ABOVE. MECH-SEAL scores exactly the V minimum and is V; GASKET-RJ scores exactly the E minimum and is E. On stated inputs (golden inputs crit-at-cutoff-is-in and crit-just-below-cutoff: two criteria of weight ${list(aIn.criteria.map((c) => S(c.weight)))} out of ${S(aIn.scoreMax)}, classes ${list(aIn.classes.map((c) => `${c.label} from ${S(c.minScore)}`))}):`);
 const cIn = runG('crit-at-cutoff-is-in');
 const cBelow = runG('crit-just-below-cutoff');
 qg('crit-at-cutoff-is-in', cIn.items[0].reason);
@@ -642,7 +647,8 @@ qg('crit-just-below-cutoff', cBelow.items[0].reason);
 must('70 is V and 69.95 is E', cIn.items[0].class === 'V' && cBelow.items[0].class === 'E', `${cIn.items[0].weightedScore} ${cBelow.items[0].weightedScore}`);
 w();
 const c12 = runG('crit-12-digit-key');
-w(`TWELVE SIGNIFICANT DIGITS. Three weights of 33.3, 33.3 and 33.4 with a score of 7 out of 10 on each (golden input crit-12-digit-key) sum to a weighted score the computer holds as ${S(c12.items[0].weightedScore)}; compared at 12 significant digits it meets the minimum of 70, and the item is class ${c12.items[0].class}. The engine's reason, verbatim:`);
+const a12k = argsOf('crit-12-digit-key');
+w(`TWELVE SIGNIFICANT DIGITS. Three weights of ${list(a12k.criteria.map((c) => S(c.weight)))} with a score of ${S(a12k.items[0].scores.a)} out of ${S(a12k.scoreMax)} on each (golden input crit-12-digit-key) sum to a weighted score the computer holds as ${S(c12.items[0].weightedScore)}; compared at ${S(D.TIE_DIGITS)} significant digits it meets the minimum of ${S(a12k.classes[0].minScore)}, and the item is class ${c12.items[0].class}. The engine's reason, verbatim:`);
 quote(c12.items[0].reason);
 must('the 12-digit key places 69.99999999999999 in V', c12.items[0].weightedScore < 70 && c12.items[0].class === 'V', c12.items[0].weightedScore);
 w();
@@ -678,7 +684,7 @@ qg('CEM-G under include-crossing (fixture)', ax['CEM-G'].reason);
 w();
 const ex1 = runG('abc-cutoff-exact-at-or-below');
 const ex2 = runG('abc-cutoff-exact-include-crossing');
-w('A SHARE EXACTLY ON A CUT-OFF (golden inputs abc-cutoff-exact-at-or-below and abc-cutoff-exact-include-crossing: three items of value 80, 15 and 5):');
+w(`A SHARE EXACTLY ON A CUT-OFF (golden inputs abc-cutoff-exact-at-or-below and abc-cutoff-exact-include-crossing: three items of value ${list(ex1.items.map((x) => f6(x.annualValue)))}):`);
 w();
 table(['id', 'cumulative share', 'at-or-below', 'include-crossing'], ex1.items.map((x, i) => [x.id, f6(x.cumulativePct), x.class, ex2.items[i].class]));
 must('exact cut-offs: at-or-below A,B,C; include-crossing A,B,C', ex1.items.map((x) => x.class).join() === 'A,B,C' && ex2.items.map((x) => x.class).join() === 'A,B,C', 'exact');
@@ -735,7 +741,7 @@ table(['rule', 'quantity ordered', 'relevant cost a year', 'penalty, percent'], 
 must('the penalty is 0 at the EOQ and above 0 elsewhere', rr[0].roundingPenaltyPct === 0 && rr.slice(1).every((r) => r.roundingPenaltyPct > 0), 'penalty');
 must('rounding up by 50 costs more than rounding up by 10', rr[4].roundingPenaltyPct > rr[1].roundingPenaltyPct, 'flat');
 w();
-w(`THE FLAT BOTTOM. An order ${f6(rr[4].quantity - eB.eoq)} units above the EOQ (derived: ${f6(rr[4].quantity)} less ${f6(eB.eoq)}) costs ${f6(rr[4].roundingPenaltyPct)} percent more a year; the relevant cost is flat near its minimum, which is why a stated rounding to a pallet, a drum or a truckload costs little. The engine's reason for the multiple of 50, verbatim:`);
+w(`THE FLAT BOTTOM. An order ${f6(rr[4].quantity - eB.eoq)} units above the EOQ (derived: ${f6(rr[4].quantity)} less ${f6(eB.eoq)}) costs ${f6(rr[4].roundingPenaltyPct)} percent more a year; the relevant cost is flat near its minimum, which is why a stated rounding to a pallet, a drum or a truckload costs little. The engine's reason for the multiple of ${S(RULES[4].multiple)}, verbatim:`);
 quote(rr[4].reason);
 w();
 const half = runG('eoq-q-exactly-half-of-multiple');
@@ -832,7 +838,7 @@ table(['case', 'demand over P', 'sigma', 'safety stock', 'reorder point'], [
 ]);
 must('sigma squared is the sum of the two parts squared', Math.abs(sC.sigma ** 2 - ltOff.sigma ** 2 - dOff.sigma ** 2) < 1e-9, 'parts');
 w();
-w(`The two parts add as squares: ${f6(ltOff.sigma)} squared plus ${f6(dOff.sigma)} squared is ${f6(sC.sigma)} squared (derived; the check holds to 1e-9). The engine's reason for the stated case, verbatim:`);
+w(`The two parts add as squares: ${f6(ltOff.sigma)} squared plus ${f6(dOff.sigma)} squared is ${f6(sC.sigma)} squared (derived; asserted when this digest was built). The engine's reason for the stated case, verbatim:`);
 quote(sC.reason);
 w();
 const lto = runG('ss-lead-time-variance-only');
@@ -874,15 +880,16 @@ w();
 w(`THE TWO MEASURES ARE DIFFERENT TARGETS. On the same item, a cycle service level of ${S(aS.serviceLevel)} gives k ${f6(sC.safetyFactorExact)} and a fill rate of ${S(aF.serviceLevel)} gives k ${f6(sF.safetyFactorExact)} (engine): a fill rate counts the units short against the order quantity each cycle brings, and a cycle service level counts the cycles with any shortage at all. A service level in this course always names its measure.`);
 must('on CHK-BEAN the fill-rate k is below the cycle-service k', sF.safetyFactorExact < sC.safetyFactorExact, `${sF.safetyFactorExact} ${sC.safetyFactorExact}`);
 w();
-w(`The lecture 11 fill-rate column is in ${ref('published')}; its 0.95 row is a slip (${ref('slips')}).`);
+w(`The lecture 11 fill-rate column is in ${ref('published')}; its ${S(argsOf('caplice-l11-ifr-95').serviceLevel)} row is a slip (${ref('slips')}).`);
 
 /* ============================================================ SECTION 19 */
 
 section('periodic', 'Periodic review: the review period, the order-up-to level, a floor on the safety factor and certain demand', ['Professional m05']);
 w('PERIODIC REVIEW. Stock is counted every R periods and topped up to the order-up-to level S. The protection period becomes the review period plus the lead time, and the rest of the rule is unchanged: S is the demand over R + L plus k times sigma over R + L.');
 w();
-const sR = success('safetyStock choke beans reviewed monthly (stated probe)', E.safetyStock({ ...aS, reviewPeriod: 1 }));
-w(`CHK-BEAN reviewed every month (stated probe: the fixture case with a review period of 1): policy ${sR.policy}, protection period ${f6(sR.protectionPeriod)} months, demand over it ${f6(sR.demandOverProtection)}, sigma ${f6(sR.sigma)}, safety stock ${f6(sR.safetyStock)}, order-up-to level ${f6(sR.level)}, held as ${f6(sR.levelRounded)} (engine). The engine's reason, verbatim:`);
+const rProbe = { ...aS, reviewPeriod: 1 };
+const sR = success('safetyStock choke beans reviewed monthly (stated probe)', E.safetyStock(rProbe));
+w(`CHK-BEAN reviewed every month (stated probe: the fixture case with a review period of ${S(rProbe.reviewPeriod)}): policy ${sR.policy}, protection period ${f6(sR.protectionPeriod)} months, demand over it ${f6(sR.demandOverProtection)}, sigma ${f6(sR.sigma)}, safety stock ${f6(sR.safetyStock)}, order-up-to level ${f6(sR.level)}, held as ${f6(sR.levelRounded)} (engine). The engine's reason, verbatim:`);
 quote(sR.reason);
 must('periodic review raises the protection period to 3.5 and the level', sR.protectionPeriod === 3.5 && sR.level > sC.level && sR.policy === 'periodic (R, S)', sR.protectionPeriod);
 w();
@@ -890,7 +897,7 @@ w(`The lecture 12 check (the order-up-to level ${f6(r12.levelRounded)}) is in ${
 w();
 const fl = runG('ss-floor-at-zero');
 const nf = runG('ss-negative-k-without-floor');
-w(`A FLOOR ON THE SAFETY FACTOR. A cycle service level below 0.5 gives a negative k. The floor is a stated input: a number, or null for none. At a level of ${S(argsOf('ss-floor-at-zero').serviceLevel)} (golden inputs ss-floor-at-zero and ss-negative-k-without-floor) the exact k is ${f6(fl.safetyFactorExact)}; with the floor 0 the engine holds k at ${f6(fl.safetyFactor)} and the safety stock at ${f6(fl.safetyStock)}; with no floor the safety stock is ${f6(nf.safetyStock)}. The two reasons, verbatim:`);
+w(`A FLOOR ON THE SAFETY FACTOR. A cycle service level below one half gives a negative k. The floor is a stated input: a number, or null for none. At a level of ${S(argsOf('ss-floor-at-zero').serviceLevel)} (golden inputs ss-floor-at-zero and ss-negative-k-without-floor) the exact k is ${f6(fl.safetyFactorExact)}; with the floor 0 the engine holds k at ${f6(fl.safetyFactor)} and the safety stock at ${f6(fl.safetyStock)}; with no floor the safety stock is ${f6(nf.safetyStock)}. The two reasons, verbatim:`);
 qg('ss-floor-at-zero', fl.reason);
 qg('ss-negative-k-without-floor', nf.reason);
 must('the floor holds k at 0; without it the safety stock is negative', fl.safetyFactor === 0 && fl.safetyStock === 0 && nf.safetyStock < 0, nf.safetyStock);
@@ -918,8 +925,9 @@ w(`Poisson mean ${f6(pP.mean)}; level ${S(pP.level)}; safety stock ${f6(pP.safet
 quote(pP.reason);
 must('PSV-KIT: level 5 at mean 2', pP.level === 5 && pP.mean === 2, pP.level);
 w();
-const pF = success('poissonStock PSV-KIT at a fill rate of 0.95 with an order of 6 (stated probe)', E.poissonStock({ ...aP, serviceMeasure: 'fill-rate', orderQuantity: 6 }));
-w(`THE FILL RATE ON THE SAME ITEM (stated probe: a fill rate of 0.95 with an order quantity of 6 kits): level ${S(pF.level)}, expected units short a cycle ${f6(pF.expectedShortPerCycle)}, achieved fill rate ${f6(pF.achievedFillRate)} (engine). The engine's reason, verbatim:`);
+const pFArgs = { ...aP, serviceMeasure: 'fill-rate', orderQuantity: 6 };
+const pF = success('poissonStock PSV-KIT at a fill rate with an order of 6 (stated probe)', E.poissonStock(pFArgs));
+w(`THE FILL RATE ON THE SAME ITEM (stated probe: a fill rate of ${S(pFArgs.serviceLevel)} with an order quantity of ${S(pFArgs.orderQuantity)} kits): level ${S(pF.level)}, expected units short a cycle ${f6(pF.expectedShortPerCycle)}, achieved fill rate ${f6(pF.achievedFillRate)} (engine). The engine's reason, verbatim:`);
 quote(pF.reason);
 w();
 w('THE LOSS RECURSION. The expected units short beyond level 0 is the mean; each level after that subtracts one less the cumulative probability at the level before. The engine uses the recursion; its oracle computes each loss directly, and the two agree on every golden case.');
@@ -935,7 +943,7 @@ qg('ps-level-zero', pz.reason);
 qg('ps-fill-with-review', pr.reason);
 must('the level exactly met is 1; just above is 2; a tiny mean gives 0', pm.level === 1 && pa.level === 2 && pz.level === 0, `${pm.level} ${pa.level} ${pz.level}`);
 w();
-w(`The lecture 13 and MIL-HDBK-338B checks are in ${ref('published')}; the lecture 13 slip at level 4 is in ${ref('slips')}. Above a Poisson mean of ${S(D.MAX_POISSON_MEAN)} the engine refuses and the normal safety stock serves (${ref('sizecaps')}).`);
+w(`The lecture 13 and MIL-HDBK-338B checks are in ${ref('published')}; the lecture 13 slip at level ${S(TEXT.l13s12.slipLevel)} is in ${ref('slips')}. Above a Poisson mean of ${S(D.MAX_POISSON_MEAN)} the engine refuses and the normal safety stock serves (${ref('sizecaps')}).`);
 
 /* ============================================================ SECTION 21 */
 
@@ -945,7 +953,7 @@ section('insurance', 'Insurance spares: orders outstanding one for one, holding 
 w(`THE ENGINE'S MODEL, STATED PLAINLY. Each failure takes a spare and places a replacement order that arrives after the lead time, one for one, so the orders outstanding at a random moment are Poisson with a mean of the failures a year times the lead time in days over the days a year. With n spares, the failed units waiting for a spare are the orders outstanding beyond n; each waiting unit is one unit down, costed at the downtime cost a day. The rule, in the engine's words, verbatim: ${bI.rule}. Its reading, verbatim: ${bI.reading}.`);
 w();
 w('THE ANCHOR. No public text read for this course prints a worked insurance-spares cost example, so the course states the one-for-one model as the engine\'s model and anchors its Poisson figure to MIL-HDBK-338B (' + ref('anchor') + '). The lead\'s decision is recorded in FINDINGS-inventory.md, verbatim:');
-const ANCHOR = FINDINGS.match(/The one-for-one insurance-spares model is stated plainly in the course as the engine's model, with its anchor\./);
+const ANCHOR = FINDINGS.match(/The one-for-one insurance-spares model is stated plainly in the course as the engine\x27s model, with its anchor\./);
 must('FINDINGS records the lead decision on the insurance model', !!ANCHOR, 'anchor');
 quote(ANCHOR ? ANCHOR[0] : '');
 w();
@@ -1001,7 +1009,7 @@ section('montecarlo', 'Lead-time risk by the canonical Monte Carlo: the sampler,
 w(`THE SAMPLER. leadTimeRisk samples through lib/stats, the platform's one seeded Monte Carlo: mulberry32 for the uniforms and the triangular inverse triInvCDF for each value. Per draw it takes a lead time in days, then a demand rate a day held for that whole lead time; the lead-time demand is the rate times the days. The basis, verbatim:`);
 quote(L.basis.sampling);
 w();
-w(`THE MECHANICAL SEAL on the Ekene register (fixture case, golden input ltr-ekene-mech-seal): demand a day triangular from ${S(aL.demandPerDay.min)} through ${S(aL.demandPerDay.mode)} to ${S(aL.demandPerDay.max)}, lead time triangular from ${S(aL.leadTimeDays.min)} through ${S(aL.leadTimeDays.mode)} to ${S(aL.leadTimeDays.max)} days, reorder point ${S(aL.reorderPoint)}, service level ${S(aL.serviceLevel)}, ${S(aL.iterations)} draws, seed ${S(aL.seed)}. THESE FIGURES ARE SAMPLED AND NEVER GRADED; each is quoted with its seed and draw count.`);
+w(`THE MECHANICAL SEAL on the Ekene register (fixture case, golden input ltr-ekene-mech-seal): demand a day triangular from ${S(aL.demandPerDay.min)} through ${S(aL.demandPerDay.mode)} to ${S(aL.demandPerDay.max)}, lead time triangular from ${S(aL.leadTimeDays.min)} through ${S(aL.leadTimeDays.mode)} to ${S(aL.leadTimeDays.max)} days, reorder point ${S(aL.reorderPoint)}, service level ${S(aL.serviceLevel)}, ${S(aL.iterations)} draws, seed ${S(aL.seed)}. THESE FIGURES ARE SAMPLED; NONE OF THEM IS GRADED, and each is quoted with its seed and draw count.`);
 w();
 table(['figure', 'lead time, days', 'lead-time demand, seals'], [
   ['mean', f6(L.leadTime.mean), f6(L.leadTimeDemand.mean)], ['P90 (the low figure)', f6(L.leadTime.p90), f6(L.leadTimeDemand.p90)], ['P50', f6(L.leadTime.p50), f6(L.leadTimeDemand.p50)], ['P10 (the high figure)', f6(L.leadTime.p10), f6(L.leadTimeDemand.p10)], ['minimum', f6(L.leadTime.min), f6(L.leadTimeDemand.min)], ['maximum', f6(L.leadTime.max), f6(L.leadTimeDemand.max)],
@@ -1047,7 +1055,7 @@ qg('ltr-constant-demand-equal-to-stock', eq.reason);
 qg('ltr-constant-demand-above-stock', ab.reason);
 must('equal is met, half a unit short is always a stockout', eq.probabilityOfStockout === 0 && ab.probabilityOfStockout === 1 && ab.expectedShortPerCycle === 0.5, 'equality');
 w();
-w(`A REORDER POINT FOR A SERVICE LEVEL. With a service level stated, the engine returns the smallest sampled lead-time demand that at least that share of draws does not exceed: the sorted draws at index ceil(level times draws) less 1. For the mechanical seal at ${S(aL.serviceLevel)} it is ${f6(L.reorderPointForService)} seals (seed ${S(aL.seed)}, ${S(aL.iterations)} draws; sampled, never graded), against the stated reorder point ${S(aL.reorderPoint)}, whose sampled cycle service is ${f6(L.cycleServiceLevel)}.`);
+w(`A REORDER POINT FOR A SERVICE LEVEL. With a service level stated, the engine returns the smallest sampled lead-time demand that at least that share of draws does not exceed: the sorted draws at index ceil(level times draws) less 1. For the mechanical seal at ${S(aL.serviceLevel)} it is ${f6(L.reorderPointForService)} seals (seed ${S(aL.seed)}, ${S(aL.iterations)} draws; a sampled figure, which is not graded), against the stated reorder point ${S(aL.reorderPoint)}, whose sampled cycle service is ${f6(L.cycleServiceLevel)}.`);
 w();
 const lo = runG('ltr-lead-time-only');
 const o1 = runG('ltr-one-iteration');
@@ -1075,7 +1083,7 @@ table(['reading', 'where it acts', 'the engine\'s words, verbatim', 'the alterna
   ['READING NINE: a slow-moving band minimum is reached at or above it', 'slowMoving', bM.rule, 'reached only strictly above it'],
   ['READING TEN: excess is stock strictly above the cover limit', 'slowMoving', bM.rule, 'at or above the limit'],
   ['READING ELEVEN: a lead-time demand equal to the reorder point is met', 'leadTimeRisk', eq.reason, 'equality counted as a stockout'],
-  ['READING TWELVE: the reorder point for a service level is the sorted draw at ceil(level times draws) less 1', 'leadTimeRisk', L.basis.service, 'one sorted draw higher'],
+  ['READING TWELVE: the reorder point for a service level is the sorted draw at ceil(level times draws) less one', 'leadTimeRisk', L.basis.service, 'one sorted draw higher'],
   ['READING THIRTEEN: the P90 of a sampled lead time or demand is the low figure', 'leadTimeRisk', L.basis.percentiles, 'P90 read as the high figure'],
 ]);
 w();
@@ -1137,10 +1145,10 @@ const bigItems = Array.from({ length: D.MAX_ITEMS + 1 }, (_, i) => ({ id: `I${i}
 const capA = refusal('abcClassification with 5001 items (stated probe)', E.abcClassification({ items: bigItems, cutoffs: { aPct: 80, bPct: 95 }, boundaryRule: 'at-or-below' }), 'items');
 const atA = success('abcClassification with 5000 items (stated probe)', E.abcClassification({ items: bigItems.slice(0, D.MAX_ITEMS), cutoffs: { aPct: 80, bPct: 95 }, boundaryRule: 'at-or-below' }));
 table(['call', 'result'], [
-  ['leadTimeRisk with 200001 draws (golden input ltr-refuse-iterations-cap)', capI.error],
-  ['poissonStock with a Poisson mean above 500 (golden input ps-refuse-mean-above-cap)', capP.error],
-  ['poissonStock at a mean of exactly 500 (golden input ps-mean-at-cap)', `accepted: level ${S(runG('ps-mean-at-cap').level)}`],
-  ['insuranceSpares with maxSpares 1001 (golden input ins-refuse-max-cap)', capS.error],
+  [`leadTimeRisk with ${S(argsOf('ltr-refuse-iterations-cap').iterations)} draws (golden input ltr-refuse-iterations-cap)`, capI.error],
+  [`poissonStock with a Poisson mean above ${S(D.MAX_POISSON_MEAN)} (golden input ps-refuse-mean-above-cap)`, capP.error],
+  [`poissonStock at a mean of exactly ${S(D.MAX_POISSON_MEAN)} (golden input ps-mean-at-cap)`, `accepted: level ${S(runG('ps-mean-at-cap').level)}`],
+  [`insuranceSpares with maxSpares ${S(argsOf('ins-refuse-max-cap').maxSpares)} (golden input ins-refuse-max-cap)`, capS.error],
   [`abcClassification with ${S(D.MAX_ITEMS + 1)} items (stated probe)`, capA.error],
   [`abcClassification with ${S(D.MAX_ITEMS)} items (stated probe)`, `accepted: ${S(atA.items.length)} items ranked`],
 ]);

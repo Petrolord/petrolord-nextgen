@@ -205,7 +205,7 @@ const UMUCHU = {
     maxSpares: 8,
   },
   poissonStock: {
-    demandRate: 0.18, leadTime: 5, reviewPeriod: 2,
+    demandRate: 0.185, leadTime: 5, reviewPeriod: 2,
     serviceMeasure: 'fill-rate', serviceLevel: 0.99, orderQuantity: 3,
   },
   // THE LEAD-TIME MONTE CARLO BLOCK. Worked in the brief with its seed and

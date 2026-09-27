@@ -11,7 +11,7 @@
   "maxSpares": 8
  },
  "poissonStock": {
-  "demandRate": 0.18,
+  "demandRate": 0.185,
   "leadTime": 5,
   "reviewPeriod": 2,
   "serviceMeasure": "fill-rate",

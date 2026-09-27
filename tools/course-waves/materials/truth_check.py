@@ -20,7 +20,7 @@ KIT = os.environ.get('SC3_KIT', '/root/dc-wavekit')
 truth = os.path.join(HERE, 'truth-materials.json')
 if not os.path.exists(truth):
     print('REFUSED: no truth-materials.json; run harvest_materials.py'); sys.exit(2)
-tmp = tempfile.mkdtemp(prefix='ec11-truth-')
+tmp = tempfile.mkdtemp(prefix='sc3-truth-')
 shutil.copy(os.path.join(HERE, 'digest.txt'), tmp)
 shutil.copy(os.path.join(HERE, 'wave.json'), tmp)
 if '--plant' in sys.argv:

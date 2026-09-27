@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""THE EC11 TRUTH HARVEST: the kit's harvest_digest.py, then COMMA-GROUPED FIGURES.
+"""THE SC3 TRUTH HARVEST: the kit's harvest_digest.py, then COMMA-GROUPED FIGURES.
 
 The kit harvester reads "12,139,208" as three literals (12, 139, 208), while
 the kit numsweep reads a lesson's "12,139,208" as ONE literal, 12139208, with
