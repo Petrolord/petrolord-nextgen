@@ -121,15 +121,15 @@
   "explanation": "On the EKPAN lottery EVII = 0.460000 x 207.7989 + 0.540000 x 9.2361 less 75.7500 = 24.8250, gross of any price and inside 0 and the EVPI of 52.0000."
  },
  {
-  "prompt": "Before the repair, the VOI Analyzer printed a gross value of information of -15.00 for typed indicator numbers. What does the lower bound on EVII say about that card, and what does the repaired Analyzer do?",
+  "prompt": "Weighted by typed indicator numbers with nothing checking them against the stated prior, a VOI Analyzer entry gives a gross value of information of -15.00. What does the lower bound on EVII say about that figure, and what does the Analyzer do?",
   "options": [
-   "The survey was harmful: acting on its readings lost 15.00 against the prior decision, and the repaired Analyzer reports the loss as a negative card.",
-   "The repaired Analyzer clamps the value to 0.00, which is the lower bound applied as a floor on whatever the typed numbers produce.",
-   "Information derived by Bayes can never be worth less than 0, so the typed numbers contradicted each other; the repaired Analyzer withholds that value.",
-   "The negative figure was net of the survey cost, and the repaired Analyzer now splits it into a gross card and a net card."
+   "The survey was harmful: acting on its readings lost 15.00 against the prior decision, and the Analyzer reports the loss as a negative card.",
+   "The Analyzer clamps the value to 0.00, which is the lower bound applied as a floor on whatever the typed numbers produce.",
+   "Information derived by Bayes can never be worth less than 0, so the typed numbers contradict each other; the Analyzer withholds that value.",
+   "The negative figure was net of the survey cost, and the Analyzer splits it into a gross card and a net card."
   ],
   "answer": 2,
-  "explanation": "A company holding a survey can always ignore it, so EVII cannot be negative. The -15.00 card is history from before the repair; the Analyzer now keeps EMV without information and EVPI and withholds the rest."
+  "explanation": "A company holding a survey can always ignore it, so EVII cannot be negative. The -15.00 is only the unguarded arithmetic; the Analyzer keeps EMV without information and EVPI and withholds the rest."
  },
  {
   "prompt": "The published perfectSignal case returns an evii of 35.0000. Why is that the most any survey on its prospect can return?",

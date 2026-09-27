@@ -63,20 +63,20 @@ q(1, "At what survey price do the two root branches of the EKPAN lottery informa
  "On the EKPAN lottery the branches are equal when the price is 100.5750 less 75.7500 = 24.8250. EVPI is the neutral price of a survey that never misreads, and the neutral price compares two branches, never a branch with zero.")
 
 # ord 8
-q(0, "At a survey cost of exactly 24.8250 the EKPAN lottery information tree's root still names the acquisition. What does that name carry?",
- "Only the listing order: the branches tie at 75.7500 and the engine keeps the first branch listed, so a net value of 0.0000 says nothing favours buying.",
+q(0, "At a survey cost of exactly 24.8250 the EKPAN lottery information tree's root still marks the acquisition. What does that mark carry?",
+ "Only the listing order: the branches tie at 75.7500, the engine reports the tie and marks the first listed, and a net value of 0.0000 says nothing favours buying.",
  ["A small positive net value hidden by printing to four decimals, since the engine compares the unrounded lottery branch values.",
   "A preference for information whenever the two lottery branches fall within the engine's tolerance of 1e-6 of each other.",
   "A real recommendation, since at the neutral price the survey still lowers the chance of drilling a dry hole on the lottery."],
- "At a cost equal to the EKPAN lottery's EVII the two root branches tie and the strictly-greater comparison keeps the acquisition, listed first. Nothing in the engine flags the tie, so read netEvii beside every root choice.")
+ "At a cost equal to the EKPAN lottery's EVII the two root branches tie; the engine reports the tie and marks the acquisition, listed first. Read netEvii beside every root choice.")
 
 # ord 9
 q(0, "costExactlyNetZero returns root branch values 43.0000 and 43.0000 and bestBranchIndex 0. What would listing the no-information branch first change?",
- "The recommendation, which becomes doing without the survey, while the root value stays 43.0000.",
+ "The marked branch, which becomes doing without the survey, while the root value stays 43.0000 and the tie is reported either way.",
  ["Nothing, since the engine breaks exact ties toward the branch with fewer nodes below it, which is the no-information branch in either order.",
   "The root value, since the rollback weights a decision node's branches in listing order before it takes the maximum.",
   "The tie price, which moves away from the survey's gross value of 12.5000 toward the prior."],
- "A decision node replaces the incumbent only on a strictly greater value, so the first listed wins a tie. The survey there costs 12.5000, its gross value, and the root is 43.0000 whichever branch is named.")
+ "The two root branches tie, so the engine reports the tie in either order and marks whichever is listed first. The survey there costs 12.5000, its gross value, and the root is 43.0000 whichever branch is marked.")
 
 # ord 10
 q(2, "At a survey cost of 28.0000 the EKPAN lottery acquisition branch is still worth 72.5750. A reader buys the survey because that branch is comfortably positive. What does the tree say?",

@@ -71,12 +71,12 @@ q(3, "A hand-built information tree for the EKPAN lottery carries 0.350000 and 0
  "Under a reading the outcome branches must carry that reading's posteriors, 0.646739 and 0.353261 after a bright spot. With the prior everywhere the reading node returns 75.7500 and the price is pure loss.")
 
 # ord 9
-q(2, "Before the EC4-0 repair the Analyzer printed a gross value of information of -15.00 on IRRI. Why is a negative value, on its own, evidence of broken inputs?",
+q(2, "Weighted by IRRI's typed chances with nothing checking them against the stated prior, the numbers give a gross value of information of -15.00. Why is a negative value, on its own, evidence of broken inputs?",
  "Whoever holds a survey can ignore it and take the prior action, so information derived by Bayes is never worth less than 0.",
  ["Because the survey cost of 10.0000 had been subtracted from it, and a gross value by definition carries no cost inside it at all.",
   "Because IRRI's EVPI is 63.00, and a value below zero is admissible only on a survey that never misreads the outcome it reports.",
-  "It is not, since a survey that misleads more often than it informs has a negative value, which the repair now hides from view."],
- "uselessSignal sits on that floor at 0.0000. IRRI's typed indicators imply success of 0.200000 against 0.300000 stated, and the repaired Analyzer withholds instead.")
+  "It is not, since a survey that misleads more often than it informs has a negative value, which the Analyzer hides from view."],
+ "uselessSignal sits on that floor at 0.0000. IRRI's typed indicators imply success of 0.200000 against 0.300000 stated, and the Analyzer withholds the value.")
 
 # ord 10
 q(0, "A contractor quotes 40.0000 for the CSEM survey on the EKPAN lottery, pointing out that the price is still under the EVPI of 52.0000. What is the most the survey is worth to this decision?",
@@ -87,12 +87,12 @@ q(0, "A contractor quotes 40.0000 for the CSEM survey on the EKPAN lottery, poin
  "EVPI caps a survey that never misreads, and this one lights up over 0.250000 of dry holes. At 40.0000 the root would choose No further information.")
 
 # ord 11
-q(3, "Two engine choices on the EKPAN lottery sit at points of indifference: Farm out named at the success probability 0.228571, and Acquire CSEM survey named at a price of 24.8250. What decides each name?",
- "Binary residue decides the first, since Drill less Farm out is -7.11e-15; the tie rule decides the second, where both branches are exactly 75.7500.",
- ["The tie rule decides both, since in each case the engine keeps whichever branch was listed first when two values are equal.",
-  "Binary residue decides both, since 24.8250 printed to four decimals hides a last-digit gap between the two root branches as well.",
-  "Neither is a tie: Farm out is worth more at 0.228571 by the printed precision, and at 24.8250 acquiring keeps a positive net value."],
- "80 / 350 has no exact binary image, so the choice at the switch is rounding. 100.5750 less 24.8250 is exactly 75.7500, and at an exact tie the first branch listed, the acquisition, is kept.")
+q(0, "Two engine results on the EKPAN lottery sit at points of indifference: Drill marked at the success probability 0.228571, and Acquire CSEM survey marked at a price of 24.8250. What decides each mark?",
+ "The tie rule decides both: in each case the engine reports the two values tied and marks whichever was listed first.",
+ ["Binary residue decides both, since 24.8250 printed to four decimals hides a last-digit gap between the two root branches as well.",
+  "Neither is a tie: Farm out is worth more at 0.228571 by the printed precision, and at 24.8250 acquiring keeps a positive net value.",
+  "Binary residue decides the first, since Drill less Farm out is -7.11e-15; the tie rule decides the second, where both branches are exactly 75.7500."],
+ "80 / 350 has no exact binary image, so Drill less Farm out is -7.11e-15, far inside the tie band of 1e-9 x max(1, |best|), and at 24.8250 the survey is priced at its gross value, so both root branches come to 75.7500. The engine reports each as a tie and marks the first listed.")
 
 # ord 12
 q(1, "At a survey cost of 32.0000 the EKPAN lottery's information tree root reads 75.7500, and a reviewer reports the survey as worth 75.7500. What are its gross and net values at that price?",
@@ -183,12 +183,12 @@ q(3, "The EKPAN lottery is typed into the Analyzer with Bright spot at 46.000000
  "Percents that are not a distribution are refused first. Withholding is for percents that are distributions and still imply another prior, as with Bright spot at 56 percent.")
 
 # ord 23
-q(0, "Typed into the repaired Analyzer, the EKPAN lottery with Bright spot at 56 percent and No bright spot at 44 percent passes the sum check with its posteriors unchanged. What does it report?",
+q(0, "Typed into the Analyzer, the EKPAN lottery with Bright spot at 56 percent and No bright spot at 44 percent passes the sum check with its posteriors unchanged. What does it report?",
  "75.75 and 52.00 only, withholding EMV with Information, both values of information and the diagram.",
  ["Every card, since the indicator chances sum to 100 and the posteriors are the Bayes results carried at full precision.",
   "Every card, after rescaling the posteriors until implied success returns to 0.350000.",
   "A gross value of 40.62 marked inconsistent, since the Analyzer prints what it computed beside its consistency warning."],
- "56 percent of 64.673913 plus 44 percent of 9.722222 implies success 0.404952, beyond 0.005 of 0.350000. The 40.62 is what the Analyzer printed before the repair.")
+ "56 percent of 64.673913 plus 44 percent of 9.722222 implies success 0.404952, beyond 0.005 of 0.350000. The 40.62 is what these typed numbers give with nothing checking them against the stated prior.")
 
 # ord 24
 q(1, "Inverting the EKPAN lottery's Analyzer entries, Bright spot given Success is 0.646739 x 0.460000 / 0.350000. What does it return, and what does the same arithmetic say with Bright spot typed at 56 percent?",
@@ -196,7 +196,7 @@ q(1, "Inverting the EKPAN lottery's Analyzer entries, Bright spot given Success 
  ["0.297500, the joint chance; at 56 percent, a larger joint valued as a stronger survey.",
   "0.646739 unchanged, since inverting only relabels the posterior, and at 56 percent that same posterior with a heavier weight.",
   "0.850000, and at 56 percent a figure just under 1 marking a very strong survey that the Analyzer still values in full."],
- "The Success column sums to the implied success chance over the stated one, so it sums to 1 only when the typing is consistent. The repaired Analyzer withholds on those 56 percent inputs.")
+ "The Success column sums to the implied success chance over the stated one, so it sums to 1 only when the typing is consistent. The Analyzer withholds on those 56 percent inputs.")
 
 # ord 25
 q(3, "On the Analyzer's default study, what survey price leaves the survey value-neutral, and which number plays the same role on the tree engine's EKPAN lottery?",
@@ -204,7 +204,7 @@ q(3, "On the Analyzer's default study, what survey price leaves the survey value
  ["23.00, the Net VOI card at the default cost, and on the EKPAN lottery its netEvii of 16.8250 at a price of 8.0000.",
   "63.00, the EVPI card, and on the EKPAN lottery its EVPI of 52.0000, since information turns neutral when priced at its ceiling.",
   "38.00, the EMV with Information card, and on the EKPAN lottery its acquire branch of 92.5750 at a price of 8.0000."],
- "At 33.0000 the net card reads 0.00 and the verdict says the information exactly pays for itself; at 24.8250 the EKPAN lottery's root branches tie at 75.7500. Both prices are gross values, which no card shows.")
+ "At 33.0000 the net card reads 0.00 and the verdict says the information costs what it is worth; at 24.8250 the EKPAN lottery's root branches tie at 75.7500. Both prices are gross values, which no card shows.")
 
 # ord 26
 q(0, "The Analyzer typed with the EKPAN lottery shows EMV without Information 75.75 and EVPI 52.00, exactly the lottery's own values, and a reviewer signs off the typing on that match. What does the match hide?",
@@ -223,7 +223,7 @@ q(2, "Squeezing the EKPAN lottery into the Analyzer drops the farm-out, an actio
  "On the EKPAN lottery Drill at 75.7500 beats Farm out at 33.2500, so emvPrior and EVPI survive the omission and only the value with information exposes it, 95.5875 against 100.5750.")
 
 # ord 28
-q(1, "The CSEM survey's hit rate, 0.850000, is typed into the Analyzer as P(Success | Bright spot) for the EKPAN lottery. How does the repaired Analyzer's response differ from a hand rollback that makes the same misreading?",
+q(1, "The CSEM survey's hit rate, 0.850000, is typed into the Analyzer as P(Success | Bright spot) for the EKPAN lottery. How does the Analyzer's response differ from a hand rollback that makes the same misreading?",
  "The rollback values Drill after a bright spot at 298.2500 against 207.7989; the Analyzer finds the implied success chance far from 0.350000 and withholds.",
  ["Both overvalue the survey by the same amount, since the Analyzer and the rollback run the same Bayes arithmetic on the number typed.",
   "The Analyzer refuses with a message naming the sum, since a success chance of 0.850000 cannot sit in a row that also holds a dry hole.",
@@ -231,19 +231,19 @@ q(1, "The CSEM survey's hit rate, 0.850000, is typed into the Analyzer as P(Succ
  "The Analyzer never inverts and never rescales; the row still sums to 100, so it is withheld and not refused. The hand overstatement lands on the reading that argues for drilling.")
 
 # ord 29
-q(3, "On IRRI both indicators are typed 20 / 80 percent against a stated Success Case of 30 percent. Which two values does the repaired Analyzer still print, and why can it?",
+q(3, "On IRRI both indicators are typed 20 / 80 percent against a stated Success Case of 30 percent. Which two values does the Analyzer still print, and why can it?",
  "15.00 and 63.00, since EMV without information and EVPI use only the stated outcome chances.",
- ["15.00 and -15.00, the value at the prior and a gross value of information now shown beside a consistency warning.",
+ ["15.00 and -15.00, the value at the prior and a gross value of information shown beside a consistency warning.",
   "63.00 alone, since EMV without information uses the implied 0.200000.",
   "None, since typed percents that contradict each other are refused with a message naming the sum in percent."],
- "The indicators imply success of 0.200000 against 0.300000, far beyond the 0.005 tolerance, so every value that needs the posteriors is withheld. The -15.00 is pre-repair history.")
+ "The indicators imply success of 0.200000 against 0.300000, far beyond the 0.005 tolerance, so every value that needs the posteriors is withheld. The -15.00 is only what the typed chances give with nothing checking them against the stated prior.")
 
 # ord 30
-q(0, "Before the EC4-0 repair, a posterior row summing to 130 percent printed a gross value of information of 69.00 beside an EVPI card of 63.00. Which bound did that break, and what does the repaired Analyzer do with the input?",
- "The upper bound, since no information is worth more than knowing the outcome; the row is now refused with a message naming 130 percent.",
- ["The lower bound, since a gross value above EVPI turns negative once the survey cost is charged, and the input is now withheld.",
-  "No bound, since EVPI is a card after cost and the gross value before it, and the repaired Analyzer prints both unchanged.",
-  "The upper bound, and the repaired Analyzer now rescales the row to 100 percent and prints a value under 63.00."],
+q(0, "A posterior row summing to 130 percent, weighted as typed with nothing checking it, gives a gross value of information of 69.00 beside an EVPI of 63.00. Which bound does that break, and what does the Analyzer do with the input?",
+ "The upper bound, since no information is worth more than knowing the outcome; the row is refused with a message naming 130 percent.",
+ ["The lower bound, since a gross value above EVPI turns negative once the survey cost is charged, and the input is withheld.",
+  "No bound, since EVPI is a card after cost and the gross value before it, and the Analyzer prints both unchanged.",
+  "The upper bound, and the Analyzer rescales the row to 100 percent and prints a value under 63.00."],
  "0 <= value <= EVPI for any information derived by Bayes. A row that is not a distribution is refused before any card; withholding is for distributions that contradict the stated chances.")
 
 # ord 31
@@ -252,7 +252,7 @@ q(2, "A capstone answer subtracts the EKPAN tree's drill branch value, 105.0000,
  ["Nothing, since the EKPAN tree and lottery share one prospect at a 0.350000 success chance, and EVPI needs only the best prior value.",
   "The baseline should be the lottery's farm-out at 33.2500, since perfect information recommends the farm-out on a dry hole.",
   "The subtraction runs backwards, since EVPI is the value at the prior less the value with perfect information."],
- "The EKPAN tree's drill branch of 105.0000 loses money with probability 0.500000; the EKPAN lottery's drill action of 75.7500 loses with probability 0.650000. Section 16 carries them as separate fields.")
+ "The EKPAN tree's drill branch of 105.0000 loses money with probability 0.500000; the EKPAN lottery's drill action of 75.7500 loses with probability 0.650000. The course carries them as separate fields.")
 
 # ord 32
 q(1, "On a known dry hole in the EKPAN lottery, Farm out and Walk away both pay 0.0000 and the table names Farm out. If Walk away were listed first, what would happen to EVPI?",
@@ -260,7 +260,7 @@ q(1, "On a known dry hole in the EKPAN lottery, Farm out and Walk away both pay 
  ["EVPI would fall, because naming Walk away gives up the farm-out's 95.0000 on a success that perfect information could still reveal.",
   "It rises to 61.7143, as the farm-out line no longer sets the switch.",
   "The engine refuses: a tie on one outcome leaves the best action undefined."],
- "The best value on a dry hole is 0.0000 whichever action is named. A tie on an outcome row is the first-branch rule at work, and it moves labels, never values.")
+ "The best value on a dry hole is 0.0000 whichever action is named. A tie on an outcome row names the first listed of the tied actions, which moves a label and leaves every value alone.")
 
 # ord 33
 q(0, "The CSEM survey on the EKPAN lottery is worth 24.8250, between the symmetric survey's 22.7000 at accuracy 0.800000 and 30.0250 at 0.850000. Why can no symmetric survey, at any accuracy, pass 52.0000?",

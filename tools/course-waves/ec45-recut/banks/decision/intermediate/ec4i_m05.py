@@ -23,7 +23,7 @@ q(3, "Which actions does the VOI Analyzer weigh when it values a survey?",
  "The Analyzer offers exactly two actions and no third branch; a farm-out or partner option has to be squeezed into act or do not.")
 
 # ord 3
-q(0, "An analyst enters No bright spot at 64 percent beside Bright spot at 46.000000 percent for the EKPAN lottery's survey. What comes back from the repaired VOI Analyzer?",
+q(0, "An analyst enters No bright spot at 64 percent beside Bright spot at 46.000000 percent for the EKPAN lottery's survey. What comes back from the VOI Analyzer?",
  "A refusal before any card: \"Indicator chances sum to 110 percent, expected 100\".",
  ["The two cards that use only the stated chances, 75.75 and 52.00, with the other values and the diagram withheld.",
   "Full cards computed after rescaling the two indicator chances so that they sum to 100 percent.",
@@ -31,19 +31,19 @@ q(0, "An analyst enters No bright spot at 64 percent beside Bright spot at 46.00
  "Percents that are not a distribution are refused outright, and the message names the sum in percent. Withholding is the answer to chances that sum correctly but contradict the stated outcome chances.")
 
 # ord 4
-q(2, "Suppose the CSEM survey's indicator chances for the EKPAN lottery are entered as 56 and 44 percent while both posteriors keep their Bayes values. Which results does the repaired check let through?",
+q(2, "Suppose the CSEM survey's indicator chances for the EKPAN lottery are entered as 56 and 44 percent while both posteriors keep their Bayes values. Which results does the Analyzer's check let through?",
  "EMV without information 75.75 and EVPI 52.00, withholding EMV with information, the gross and net value and the diagram.",
  ["A refusal, because the indicator chances no longer agree with the stated outcome chances and the Analyzer declines to compute any card.",
   "A gross value of information of 40.62 beside an EVPI of 52.00, which is what these inputs produce on the four cards and in the sentence.",
   "The gross value of 19.84, after rescaling the posteriors so that they fit the stated success chance of 0.350000 again."],
- "The chances sum to 100, so nothing is refused, but they imply success 0.404952 against the stated 0.350000, more than 0.005 away. 40.62 is what the Analyzer printed before the repair; the check never repairs.")
+ "The chances sum to 100, so nothing is refused, but they imply success 0.404952 against the stated 0.350000, more than 0.005 away. 40.62 is what these typed numbers give with nothing checking them against the stated prior; the check never repairs.")
 
 # ord 5
-q(0, "Before the repair, the VOI Analyzer printed a gross value of information of 69.00 beside an EVPI of 63.00 for a Positive Seismic posterior row summing to 130 percent. What happens now, and what was wrong with 69.00?",
- "The inputs are refused with \"Outcome chances given \"Positive Seismic\" sum to 130 percent, expected 100\"; 69.00 was a survey worth more than knowing the answer.",
+q(0, "Weighted as typed with nothing checking them, a Positive Seismic posterior row summing to 130 percent gives a gross value of information of 69.00 beside an EVPI of 63.00. What does the Analyzer do with that row, and what is wrong with 69.00?",
+ "The inputs are refused with \"Outcome chances given \"Positive Seismic\" sum to 130 percent, expected 100\"; 69.00 is a survey worth more than knowing the answer.",
  ["The value is withheld while 15.00 and 63.00 stay on their cards, since a row that sums past 100 contradicts the stated chances.",
   "The value is capped at 63.00, because EVPI is the ceiling and a survey can reach it but never pass it.",
-  "The row is rescaled to 100 percent and valued, and 69.00 was wrong only because the old build skipped that step."],
+  "The row is rescaled to 100 percent and valued, and 69.00 is wrong only because that rescaling step was skipped."],
  "A row summing to 130 percent is not a set of chances at all, so it is refused; a withholding is for chances that cannot all be true together. No survey beats perfect information at 63.00.")
 
 # ord 6
@@ -52,7 +52,7 @@ q(1, "In the Analyzer's default study, Positive Seismic comes up 40 percent of t
  ["The Success Case entries down the column must add to 100 percent, the way a distribution over indicators would.",
   "Each posterior must be at least the stated 30 percent, because a survey can only raise the chance it reports on.",
   "The indicator chances must match the outcome chances, 40 percent against 30 percent and 60 percent against 70 percent, within 0.005 in decimals."],
- "Posteriors carry the prior inside them, so their weighted average must give back the stated chance; the repaired Analyzer withholds when an implied chance sits more than 0.005 from it.")
+ "Posteriors carry the prior inside them, so their weighted average must give back the stated chance; the Analyzer withholds when an implied chance sits more than 0.005 from it.")
 
 # ord 7
 q(3, "The EKPAN lottery is typed into the VOI Analyzer with its Bayes posteriors at full precision and a survey cost of 8.0000. After No bright spot, Drill is worth -36.7361. What does the EMV with Information card read?",
@@ -104,11 +104,11 @@ q(3, "A report on the Analyzer's default study sets the Net VOI card, 23.00, bes
 
 # ord 13
 q(2, "At a survey cost of 33.0000 on the Analyzer's default study the Net VOI card reads 0.00. What do the verdict and the drawn tree's root say?",
- "The verdict says the information exactly pays for itself, and the root still reads \"Acquire 3D Seismic Survey\" because the tied branches keep the first listed.",
+ "The verdict says it rounds to zero and acquiring or not is indifferent, and the root marks \"Acquire 3D Seismic Survey\", the first listed of two tied branches.",
  ["The verdict calls acquiring positive and the root acquires, since a net value of zero counts as no loss and so as a gain.",
   "The verdict says the information is not justified and the root reads \"No further information\", because acquiring is chosen only when it strictly gains over not acquiring.",
-  "The verdict says it exactly pays for itself and the root reads \"No further information\", the branch kept when two values are equal."],
- "The two root branches tie and the engine replaces a branch only on a strictly greater value. At 40.0000 the card reads -7.00 and the root turns to \"No further information\".")
+  "The verdict says it rounds to zero, and the root reads \"No further information\", the branch kept when two values are equal."],
+ "The two root branches tie; the engine reports the tie and marks the first listed. At 40.0000 the card reads -7.00 and the root turns to \"No further information\".")
 
 # ord 14
 q(0, "On the EKPAN lottery the tree engine returns an evWithInfo of 100.5750, while the Analyzer's EMV with Information card reads 87.59 at a survey cost of 8.0000. What separates them?",

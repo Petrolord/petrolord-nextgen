@@ -33,15 +33,15 @@
   "explanation": "EVPI on the EKPAN lottery is the expected regret of the prior choice: on Success Drill stays best at 365.0000, so the only gain is 80.0000 on the dry hole, 0.650000 x 80.0000 = 52.0000."
  },
  {
-  "prompt": "On the EKPAN lottery's Dry hole row the engine reports Farm out as the best action if known, beside a best value of 0.0000. What would listing Walk away before Farm out change?",
+  "prompt": "On the EKPAN lottery's Dry hole row, the course's perfect-information table names Farm out as the best action if known, beside a best value of 0.0000. What would listing Walk away before Farm out change?",
   "options": [
-   "Nothing at all, because the engine breaks a tie by the larger payoff in the other outcome, where the lottery's Farm out pays 95.0000 against 0.0000.",
+   "Nothing at all, because a tie is broken by the larger payoff in the other outcome, where the lottery's Farm out pays 95.0000 against 0.0000.",
    "Only the name reported for Dry hole, which becomes Walk away; the best value 0.0000 and evWithPerfect 127.7500 on the lottery stay the same.",
    "evWithPerfect on the lottery, because Walk away is valued as a terminal and Farm out as a chance node, so the rollback reaches a different expectation.",
    "The prior decision, because listing order is also the order in which the engine weights the lottery's actions at 0.350000."
   ],
   "answer": 1,
-  "explanation": "Farm out and Walk away both pay 0.0000 on the EKPAN lottery's dry hole and the engine keeps the first branch listed; EVPI takes the best VALUE per outcome, so 52.0000 does not depend on the label."
+  "explanation": "Farm out and Walk away both pay 0.0000 on the EKPAN lottery's dry hole, and the table names the first listed of the tied pair; EVPI takes the best VALUE per outcome, so 52.0000 does not depend on the label."
  },
  {
   "prompt": "dominantAction has outcomes at 0.300000 and 0.700000, and its better action pays 100.0000 or 50.0000, yet its EVPI is 0.0000. Why?",
@@ -88,15 +88,15 @@
   "explanation": "The peak on the EKPAN lottery sits at the drill against farm-out switch, 80 / 350 = 0.228571, where 83.4286 less 21.7143 is 61.7143; at 0.500000 EVPI is only 40.0000."
  },
  {
-  "prompt": "At 0.228571 the engine names Farm out as the prior best action on the EKPAN lottery, with both actions printed at 21.7143. What decides that name?",
+  "prompt": "At 0.228571 on the EKPAN lottery both actions print 21.7143. What does the engine return as the prior best action there?",
   "options": [
-   "The tie rule, which keeps the first action listed when a later one is only equal, and so names the farm-out whenever the two lottery values print alike.",
-   "A built-in preference for the action that never loses money when two lottery EMVs agree to four decimals.",
-   "Floating point residue: 80 / 350 has no exact binary image, and Drill comes out below Farm out in the last binary digits.",
-   "EVPI, which is 61.7143 under Farm out and lower under Drill, so the engine names the lottery action that leaves the most to learn."
+   "Farm out alone, because Drill comes out below it in the last binary digits and the engine compares values to that digit.",
+   "Farm out, by a built-in preference for the action that never loses money when two lottery EMVs agree to four decimals.",
+   "A tie with indifferent true, and Drill, listed first, carries the action index; EVPI is 61.7143 either way.",
+   "Farm out, because EVPI is 61.7143 under Farm out and lower under Drill, so the engine names the action that leaves the most to learn."
   ],
   "answer": 2,
-  "explanation": "Drill is listed before Farm out on the EKPAN lottery, so the tie rule would name Drill; Drill less Farm out is -7.11e-15 there, and EVPI of 61.7143 is the same whichever is named."
+  "explanation": "80 / 350 has no exact binary image, so Drill less Farm out is -7.11e-15, far inside the tie band of 1e-9 x max(1, |best|). The engine reports the tie, and EVPI of 61.7143 is the same whichever action is marked."
  },
  {
   "prompt": "On the EKPAN lottery at a success probability of 0.050000, EVPI is 13.5000. In which outcome does perfect information change the prior action?",

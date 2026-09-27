@@ -31,12 +31,12 @@ q(2, "An analyst reads the CSEM survey's 0.850000 as the chance of success after
  "The posterior is 0.646739 because the 0.250000 of dry holes that show a bright spot still count; reading 0.850000 overvalues the drill.")
 
 # ord 4
-q(0, "The CSEM survey on the EKPAN lottery is quoted at exactly 24.8250. What does the information tree recommend, and what does that mean?",
- "\"Acquire CSEM survey\", only because the two root branches tie at 75.7500 and the engine keeps the branch listed first; the money is the same either way.",
+q(0, "The CSEM survey on the EKPAN lottery is quoted at exactly 24.8250. What does the information tree mark, and what does that mean?",
+ "\"Acquire CSEM survey\", only because the two root branches tie at 75.7500 and the engine marks the branch listed first; it reports the tie, and the money is the same either way.",
  ["\"No further information\", because a net value of zero buys nothing and the engine prefers not to spend on information.",
   "\"Acquire CSEM survey\", but by floating-point residue, since the two branch values differ in their last binary digits.",
   "\"Acquire CSEM survey\" on merit, because 24.8250 is below the gross value and the net value at that price is 16.8250."],
- "The neutral price is the gross evii, 24.8250, where acquire is 100.5750 less 24.8250 = 75.7500. An exact tie goes to the first branch; float residue is what decides the drill against farm-out choice at 0.228571.")
+ "The neutral price is the gross evii, 24.8250, where acquire is 100.5750 less 24.8250 = 75.7500. The engine reports the tie and marks the first branch; the drill against farm-out crossing at 0.228571 is a reported tie as well.")
 
 # ord 5
 q(2, "The VOI Analyzer values the CSEM survey on the EKPAN lottery at a gross 19.84, while the tier's own Bayes run gives 24.8250. Why?",
@@ -71,12 +71,12 @@ q(0, "A close-out note on the EKPAN lottery lists Drill at 75.7500, an EVPI of 5
  "The EKPAN lottery has two outcomes and no later decision: emvPrior 75.7500, evpi 52.0000, evii 24.8250, and Drill loses on the dry hole 0.650000 of the time. The EKPAN tree adds a Marginal find with a later decision; its drill branch of 105.0000 loses money with probability 0.500000. Name the model beside every EKPAN number.")
 
 # ord 9
-q(0, "On IRRI, both indicators are typed 20 / 80 percent into the Analyzer defaults. What does the repaired Analyzer report?",
+q(0, "On IRRI, both indicators are typed 20 / 80 percent into the Analyzer defaults. What does the Analyzer report?",
  "EMV without information 15.00 and EVPI 63.00, withholding the rest, because the typing implies success 0.200000 against the 0.300000 stated.",
  ["A gross value of information of -15.00 and a net value of -25.00 on its cards, showing that a survey read this way is worse than useless to the decision.",
   "A refusal, because two identical rows of chances are not a distribution and cannot be valued.",
   "A gross value of 0.00, since two identical indicators move nothing and so leave the value at zero."],
- "The rows sum to 100 so nothing is refused, but the implied chance sits far more than 0.005 from the stated one. The -15.00 was printed before the repair, and information derived by Bayes is never worth less than 0.")
+ "The rows sum to 100 so nothing is refused, but the implied chance sits far more than 0.005 from the stated one. The -15.00 is what the typed chances give with nothing checking them against the stated prior, and information derived by Bayes is never worth less than 0.")
 
 # ord 10
 q(2, "The EKPAN lottery's Drill action is chosen at 75.7500 against Farm out at 33.2500, although it loses 80.0000 with probability 0.650000. A manager wants the survey credited for sparing a dry hole. What does the tier's engine say?",
