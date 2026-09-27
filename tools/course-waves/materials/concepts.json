@@ -1,0 +1,65 @@
+[
+ {
+  "id": "harris_square_root",
+  "text": "HARRIS",
+  "source": "harris1913.txt",
+  "cite": "Harris (1913), Factory 10(2), read in the 1990 reprint p. 948",
+  "quote": "the value for X that will give the minimum value to Y, reduces to the square root of (240MS divided by C).",
+  "paraphrase": "Harris writes the lot size that keeps the combined set-up and carrying cost lowest as a square root, with M the monthly movement, S the set-up cost and C the unit cost; the 240 folds together the twelve months of a year and his ten per cent a year for interest and depreciation.",
+  "found": true
+ },
+ {
+  "id": "harris_first_lot",
+  "text": "HARRIS",
+  "source": "harris1913.txt",
+  "cite": "Harris (1913), Factory 10(2), read in the 1990 reprint p. 948",
+  "quote": "Applying the formula, it is found that the theoretical economical size of lot is 2,190 units.",
+  "paraphrase": "His first worked example, a movement of 1,000 units a month, a set-up cost of two dollars and a unit cost of ten cents, gives a lot he prints as 2,190.",
+  "found": true
+ },
+ {
+  "id": "harris_stud",
+  "text": "HARRIS",
+  "source": "harris1913.txt",
+  "cite": "Harris (1913), Factory 10(2), read in the 1990 reprint p. 949",
+  "quote": "The correct quantity is 48.5 or, say, 49.",
+  "paraphrase": "For the stud of his Figure III he prints the lot and then rounds it to a whole number, a rounding rule stated in words.",
+  "found": true
+ },
+ {
+  "id": "harris_four_fold",
+  "text": "HARRIS",
+  "source": "harris1913.txt",
+  "cite": "Harris (1913), Factory 10(2), read in the 1990 reprint p. 950",
+  "quote": "it is of value to know that this consumption must increase four fold to warrant doubling the manufacturing quantities.",
+  "paraphrase": "Because the lot grows with the square root of demand, the demand must rise four times over before the lot doubles.",
+  "found": true
+ },
+ {
+  "id": "mil_r_or_fewer",
+  "text": "MIL",
+  "source": "mil338_pp109.txt",
+  "cite": "MIL-HDBK-338B (1 October 1998) section 5.3.8, eq. 5.58",
+  "quote": "In the case of redundant equipments, the R(t) might be desired in terms of the probability of r or fewer failures in time t.",
+  "paraphrase": "The handbook states the chance that no more than a stated number of failures happen in a stated time, which is the Poisson cumulative probability.",
+  "found": true
+ },
+ {
+  "id": "mil_projector",
+  "text": "MIL",
+  "source": "mil338_pp109.txt",
+  "cite": "MIL-HDBK-338B (1 October 1998) example 5.3.8.1, p. 5-27",
+  "quote": "A slide projector is needed for 500 hours of operation. Replacement of failed lamps is permitted, but there are only two spare bulbs on hand.",
+  "paraphrase": "The handbook example holds two spares for a mission of a stated length.",
+  "found": true
+ },
+ {
+  "id": "mil_lamp_rate",
+  "text": "MIL",
+  "source": "mil338_pp109.txt",
+  "cite": "MIL-HDBK-338B (1 October 1998) example 5.3.8.1, p. 5-27",
+  "quote": "If the lamp failure rate is 0.001 failures per hour, what is the reliability for the mission (i.e., the probability that no more than two lamp failures will occur)?",
+  "paraphrase": "With a stated failure rate, the question is the chance that the two spares are enough for the whole mission.",
+  "found": true
+ }
+]

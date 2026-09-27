@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "The Ekene casing CSG-958 has an annual usage of 240 joints at a unit cost of 1450, and 60 joints on hand. What annual usage value does ABC rank it by?",
+  "options": [
+   "87000.000000, the stock on hand times the unit cost, which is the value sitting on the shelf.",
+   "1450, the unit cost alone, since ABC ranks the dearest items first whatever their usage.",
+   "348000.000000, the annual usage times the unit cost.",
+   "370000.000000, the value of the ESP motor, which heads the ranking."
+  ],
+  "answer": 2,
+  "explanation": "Annual usage value is annualUsage x unitCost: 240 x 1450 = 348000.000000, rank 2 on the register. The stock on hand times the unit cost is the stock value the slow-moving view reports, which measures a different thing. Ranking by unit cost alone would ignore how much of an item flows through the store. 370000.000000 is ESP-MTR's value at rank 1."
+ },
+ {
+  "prompt": "The total annual usage value of the Ekene register is 1580620.000000. What share of it does the ESP motor ESP-MTR carry?",
+  "options": [
+   "23.408536 percent, its value of 370000.000000 over the total.",
+   "45.425213 percent, the cumulative share once the casing is counted.",
+   "22.016677 percent, the share the engine returns for CSG-958 at rank 2.",
+   "33.333333 percent, the share of the items that class A holds."
+  ],
+  "answer": 0,
+  "explanation": "An item's share is its annual usage value over the total, in percent: 370000.000000 over 1580620.000000 is 23.408536. The cumulative share after rank 2 is 45.425213, and 22.016677 is the casing's own share. 33.333333 is the share of the items that class A holds, a count that would treat a motor and an O-ring kit alike, which ABC exists to avoid."
+ },
+ {
+  "prompt": "Class G cement CEM-G brings the cumulative share from 78.753907 to 83.536840 on the Ekene register, with A to 80 percent and B to 95. What class does it take under each boundary rule?",
+  "options": [
+   "A under at-or-below, and B under include-crossing, the higher class in each case.",
+   "B under both rules, since its cumulative share of 83.536840 is above 80 either way.",
+   "A under both rules, since the share before it, 78.753907, is below 80 either way.",
+   "B under at-or-below, and A under include-crossing, since each rule reads a different share."
+  ],
+  "answer": 3,
+  "explanation": "Under at-or-below the cumulative share including the item decides: \"CEM-G: cumulative share 83.53684% is at or below 95% and above 80%\", so B. Under include-crossing the share before it decides: \"CEM-G: cumulative share before it 78.753907% is below 80%\", so A. Each rule reads a different share, which is why the item that crosses a cut-off is the one they disagree on."
+ },
+ {
+  "prompt": "On the Ekene register, which items take a different ABC class under include-crossing from the class they take under at-or-below?",
+  "options": [
+   "CEM-G only, the one item crossing 80 percent.",
+   "CEM-G and LUBE-OIL, the two items whose cumulative shares cross a cut-off.",
+   "Every item from rank 7 downward, since include-crossing moves each of them up a class.",
+   "None: the rules differ only on an exact cut-off."
+  ],
+  "answer": 1,
+  "explanation": "CEM-G crosses 80 percent and LUBE-OIL crosses 95 percent, from 94.197214 to 95.654870. Include-crossing places each crossing item in the higher class: CEM-G A, LUBE-OIL B. Every other item takes the same class under both rules. On a share exactly on a cut-off the two rules agree, because no item crosses a line there."
+ },
+ {
+  "prompt": "Under the Ekene policy (A to 80, B to 95, at-or-below), how many items are class A, and what share of the annual usage value do they hold?",
+  "options": [
+   "7 items, holding 83.536840 percent, the count under the other boundary rule.",
+   "6 items, holding 80 percent exactly, since class A is filled up to its cut-off.",
+   "6 items, holding 78.753907 percent, the share at GL-VALVE.",
+   "3 items, holding 63.645911 percent, since class A closes at a third of the items."
+  ],
+  "answer": 2,
+  "explanation": "Under at-or-below, class A is ranks 1 to 6, ending with GL-VALVE at a cumulative share of 78.753907. A cut-off is a ceiling for the cumulative share under this rule, so A holds what its items hold and need not reach 80. Seven items and 83.536840 are what include-crossing gives, with CEM-G joining A. The cut-offs are shares of value; no share of items closes a class."
+ },
+ {
+  "prompt": "A stated case has items a and b with the same annual usage value of 10.000000. How does the engine order them, and on what footing?",
+  "options": [
+   "a and b both at rank 1, since two items of equal value share a rank between them.",
+   "b at rank 1 and a at rank 2, since a tie is ranked by id with the later id first.",
+   "It refuses the case, since a tie in value leaves the cumulative share undefined.",
+   "a at rank 1 and b at rank 2: the engine ranks ties by id ascending, a choice it states in its basis."
+  ],
+  "answer": 3,
+  "explanation": "The basis reads \"annual usage value = annualUsage x unitCost, ranked highest first (ties by id); the cumulative share including the item decides against A 80% and B 95%; compared at 12 significant digits\" as it prints on the Ekene call. Ranking a tie by id ascending is the engine's stated choice, and id descending is the alternative. No graded figure depends on it, and a tie in value is ranked with no refusal."
+ },
+ {
+  "prompt": "A stated case has three items worth 80.000000, 15.000000 and 5.000000, so the cumulative shares land exactly on 80 and 95. Under at-or-below, what classes does the engine return?",
+  "options": [
+   "A, B and C: a share exactly on a cut-off stays in the class that cut-off closes.",
+   "B, C and C: a share on a cut-off has crossed it.",
+   "A, A and B: the item on each cut-off is pulled into the higher class, as include-crossing does.",
+   "A refusal: a share may not land on a cut-off."
+  ],
+  "answer": 0,
+  "explanation": "The engine's reasons read \"P: cumulative share 80% is at or below 80%\" and \"Q: cumulative share 95% is at or below 95% and above 80%\", so P is A, Q is B and R is C. Under include-crossing the same case gives the same classes, since the share before Q is exactly 80 and the share before R exactly 95. Nothing here is refused."
+ },
+ {
+  "prompt": "A policy states A to 80 percent and B also to 80 percent. What does the engine return?",
+  "options": [
+   "The classes, with class B empty, since no cumulative share can lie above 80 and at or below 80.",
+   "A refusal: \"cutoffs.bPct must be a number above aPct 80 and below 100; got 80\".",
+   "B moved up to 95 percent, the figure the engine holds for a missing B cut-off.",
+   "A single class for A and B, merged at 80 percent."
+  ],
+  "answer": 1,
+  "explanation": "The B cut-off must lie above the A cut-off and below 100, so a policy that leaves no room for class B is refused before any item is ranked. The engine holds no cut-off of its own and merges no classes; it returns the policy to its author to state again."
+ },
+ {
+  "prompt": "A learner sets the boundary rule control to not stated in the ABC view. What does the engine print?",
+  "options": [
+   "The classes under at-or-below, the rule most textbooks use, with a note that the rule was taken as read.",
+   "Both rules side by side, so the learner can pick one after seeing the results printed.",
+   "Crossing items left unclassed until a rule is stated, each flagged in its own reason.",
+   "A refusal on boundaryRule, in a message that names both rules and what each one decides."
+  ],
+  "answer": 3,
+  "explanation": "The engine holds no boundary rule: leaving it out is refused, in the engine's words \"boundaryRule must be 'at-or-below' (the cumulative share including the item decides) or 'include-crossing' (the share before the item decides, so the item crossing a cut-off joins the higher class)\". It picks neither and prints no side-by-side result. Neither rule is right in general, so a policy picks one and writes it down."
+ },
+ {
+  "prompt": "The engine's basis for ABC cites Caplice, MIT ESD.260J (2006) lecture 11 slide 4. What does the course take from that citation about the cut-offs?",
+  "options": [
+   "The lecture fixes A at 80 percent and B at 95 percent, and the engine applies those two figures to every register.",
+   "A table of cut-offs by industry, printed in the lecture, whose oil and gas row the engine reads.",
+   "The classes are arbitrary, so the cut-offs are the caller's stated policy and the course states none as a standard.",
+   "Cut-offs by item count, set in the lecture, which the engine converts to shares of value before it classifies."
+  ],
+  "answer": 2,
+  "explanation": "The basis reads \"Caplice, MIT ESD.260J (2006) lecture 11 slide 4 (standard ABC analysis; the classes are arbitrary, so the cut-offs are the caller's stated policy)\". The source supports ranking by value; where the lines fall is a decision the policy writes down. 80 and 95 are the Ekene policy's choice, and the engine refuses a call that states no cut-offs."
+ },
+ {
+  "prompt": "HEAT-TRC, the obsolete heat tracing controller, has an annual usage of 0 at a unit cost of 3100. How does the Ekene ABC run treat it?",
+  "options": [
+   "It is refused, since an item with no annual usage value cannot be placed in the ranking.",
+   "It is ranked last with a value of 0.000000 and a cumulative share of 100.000000, class C.",
+   "It is ranked by its unit cost of 3100, since its usage of zero would otherwise hide it.",
+   "It is left out of the ranking and listed apart, with a reason saying it holds no value."
+  ],
+  "answer": 1,
+  "explanation": "An item may have zero value; it ranks at the foot of the register, 18th, and is class C under either rule. Only a register in which every item has zero value is refused: \"items must carry some annual usage value; every annualUsage x unitCost is 0\". The engine ranks by annual usage value alone and leaves no item out."
+ },
+ {
+  "prompt": "PSV-KIT is criticality class V on the Ekene policy. Which ABC class does it take under the Ekene cut-offs and at-or-below?",
+  "options": [
+   "C, since six kits a year at 3800 each carry a cumulative share of 97.097342.",
+   "A, since every class V item is also ABC class A.",
+   "B, since its safety score lifts its annual usage value by the override weight.",
+   "V, since ABC reuses the criticality classes."
+  ],
+  "answer": 0,
+  "explanation": "ABC weighs the money that flows through an item: PSV-KIT's value of 22800.000000 ranks 13th and its cumulative share of 97.097342 is above 95, so it is C. Criticality weighs the consequence of a stockout and plays no part in ABC. The two classes answer two questions, which is why the course writes \"criticality class V\" and \"ABC class C\"."
+ },
+ {
+  "prompt": "BARYTE is criticality class D on the Ekene policy. Where does it sit by annual usage value?",
+  "options": [
+   "Rank 18, class C, since a class D item has the least consequence and carries no weight in ABC.",
+   "Rank 5, class B, one below its ranking.",
+   "Rank 1, class A, since bulk materials are always ranked ahead of spares by annual usage.",
+   "Rank 5, class A, with a value of 78000.000000 from 300 tonnes a year at 260 each."
+  ],
+  "answer": 3,
+  "explanation": "BARYTE's annual usage value is 300 x 260 = 78000.000000, rank 5, with a cumulative share of 73.895054, at or below 80, so A. Criticality plays no part in the ranking. It ranks behind ESP-MTR, CSG-958, ESP-PMP and WH-MV on value, and nothing moves an item by its kind."
+ },
+ {
+  "prompt": "What does the cumulative share of GL-VALVE, 78.753907, decide about GL-VALVE under the Ekene policy and at-or-below?",
+  "options": [
+   "It is below 95, so GL-VALVE is class B.",
+   "It is within two points of 80, so GL-VALVE is flagged for a boundary review.",
+   "It is at or below 80, so GL-VALVE is class A, the last item in A.",
+   "It sits near the cut-off, so GL-VALVE is class A only under include-crossing."
+  ],
+  "answer": 2,
+  "explanation": "Under at-or-below the cumulative share including the item decides, and 78.753907 is at or below the A cut-off of 80, so GL-VALVE is A, at rank 6. The next item, CEM-G, carries the share past 80. B takes shares above 80 and at or below 95. The engine flags nothing near a cut-off, and compares shares at 12 significant digits with no rounding to whole numbers."
+ },
+ {
+  "prompt": "How many Ekene items are class A under include-crossing, with the same cut-offs of 80 and 95?",
+  "options": [
+   "7, since CEM-G joins A when the share before it decides.",
+   "6, as under at-or-below.",
+   "8, since include-crossing also lifts MECH-SEAL, the item after CEM-G.",
+   "5, since include-crossing closes A as soon as the share before an item passes 70."
+  ],
+  "answer": 0,
+  "explanation": "Under include-crossing ranks 1 to 7 are A: CEM-G's share before it is 78.753907, below 80, so it joins A. MECH-SEAL's share before it is 83.536840, at or above 80, so it is B. Six A items is the at-or-below count. The rule changes which share is read; the cut-offs stay 80 and 95."
+ }
+]

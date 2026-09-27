@@ -1,0 +1,578 @@
+{
+ "beginner/m01-contract-management-and-its-sources/l01-what-contract-management-is": [
+  "P008",
+  "P009",
+  "P007",
+  "P001",
+  "P010",
+  "P066"
+ ],
+ "beginner/m01-contract-management-and-its-sources/l02-the-contract-lifecycle": [
+  "P011",
+  "P017",
+  "P009",
+  "P014",
+  "P190",
+  "P195",
+  "P127"
+ ],
+ "beginner/m01-contract-management-and-its-sources/l03-owners-managers-and-the-supplier": [
+  "P002",
+  "P001",
+  "P006",
+  "P003",
+  "P021",
+  "P012"
+ ],
+ "beginner/m01-contract-management-and-its-sources/l04-the-sources-and-their-dates": [
+  "P139",
+  "P102",
+  "P052",
+  "P066",
+  "P020"
+ ],
+ "beginner/m01-contract-management-and-its-sources/l05-a-practice-course-and-its-written-work": [
+  "P009",
+  "P007"
+ ],
+ "beginner/m02-award-handover-and-mobilisation/l01-from-tender-team-to-contract-team": [
+  "P013",
+  "P011",
+  "P108",
+  "P021",
+  "P213"
+ ],
+ "beginner/m02-award-handover-and-mobilisation/l02-the-contract-management-plan": [
+  "P014",
+  "P015",
+  "P018",
+  "P019",
+  "P020"
+ ],
+ "beginner/m02-award-handover-and-mobilisation/l03-the-kick-off-meeting": [
+  "P023",
+  "P024",
+  "P016",
+  "P021"
+ ],
+ "beginner/m02-award-handover-and-mobilisation/l04-mobilisation-and-first-deliveries": [
+  "P017",
+  "P016",
+  "P022",
+  "P049",
+  "P050",
+  "P051"
+ ],
+ "beginner/m03-reading-the-contract-you-manage/l01-scope-and-specification": [
+  "P007",
+  "P029",
+  "P030"
+ ],
+ "beginner/m03-reading-the-contract-you-manage/l02-the-price-basis": [
+  "P026",
+  "P027",
+  "P028",
+  "P029",
+  "P159",
+  "P149",
+  "P150",
+  "P031"
+ ],
+ "beginner/m03-reading-the-contract-you-manage/l03-order-of-precedence": [
+  "P024",
+  "P032",
+  "P033",
+  "P034",
+  "P102"
+ ],
+ "beginner/m03-reading-the-contract-you-manage/l04-clauses-a-contract-manager-uses": [
+  "P025",
+  "P151",
+  "P077",
+  "P087",
+  "P131",
+  "P118",
+  "P179"
+ ],
+ "beginner/m04-kpis-and-service-levels/l01-what-a-kpi-measures": [
+  "P036",
+  "P035",
+  "P043",
+  "P019"
+ ],
+ "beginner/m04-kpis-and-service-levels/l02-designing-an-indicator": [
+  "P040",
+  "P041",
+  "P037",
+  "P196",
+  "P036"
+ ],
+ "beginner/m04-kpis-and-service-levels/l03-service-levels-and-service-credits": [
+  "P054",
+  "P151",
+  "P028",
+  "P042"
+ ],
+ "beginner/m04-kpis-and-service-levels/l04-data-evidence-and-a-disputed-score": [
+  "P160",
+  "P038",
+  "P039",
+  "P042",
+  "P007"
+ ],
+ "beginner/m05-payment-records-and-the-audit-trail/l01-checking-an-invoice": [
+  "P054",
+  "P211",
+  "P194",
+  "P047",
+  "P048",
+  "P045"
+ ],
+ "beginner/m05-payment-records-and-the-audit-trail/l02-certifying-work-done": [
+  "P050",
+  "P047",
+  "P055",
+  "P185"
+ ],
+ "beginner/m05-payment-records-and-the-audit-trail/l03-records-that-survive-an-audit": [
+  "P160",
+  "P078",
+  "P130",
+  "P136",
+  "P053",
+  "P052"
+ ],
+ "beginner/m05-payment-records-and-the-audit-trail/l04-correspondence-and-instructions": [
+  "P160",
+  "P021",
+  "P087",
+  "P077",
+  "P078",
+  "P089"
+ ],
+ "beginner/m06-nigerian-content-in-execution/l01-the-content-act-and-the-board": [
+  "P100",
+  "P102",
+  "P135",
+  "P129",
+  "P136",
+  "P139",
+  "P133",
+  "P131"
+ ],
+ "beginner/m06-nigerian-content-in-execution/l02-first-consideration-in-practice": [
+  "P105",
+  "P107",
+  "P106",
+  "P125",
+  "P122"
+ ],
+ "beginner/m06-nigerian-content-in-execution/l03-nigerians-employed-and-trained": [
+  "P112",
+  "P119",
+  "P114",
+  "P113",
+  "P118"
+ ],
+ "beginner/m06-nigerian-content-in-execution/l04-plans-and-reports-a-contract-carries": [
+  "P103",
+  "P137",
+  "P131",
+  "P132",
+  "P109",
+  "P113",
+  "P127",
+  "P130"
+ ],
+ "beginner/m06-nigerian-content-in-execution/l05-preparing-for-the-associate-exam": [
+  "P007",
+  "P001",
+  "P054",
+  "P077",
+  "P100",
+  "P102",
+  "P131",
+  "P130",
+  "P042"
+ ],
+ "intermediate/m01-segmenting-suppliers/l01-why-suppliers-get-different-attention": [
+  "P004",
+  "P061",
+  "P062",
+  "P066"
+ ],
+ "intermediate/m01-segmenting-suppliers/l02-profit-impact-and-supply-risk": [
+  "P056",
+  "P057",
+  "P058"
+ ],
+ "intermediate/m01-segmenting-suppliers/l03-tiering-contracts-by-risk-and-value": [
+  "P060",
+  "P093",
+  "P004"
+ ],
+ "intermediate/m01-segmenting-suppliers/l04-relationship-models-for-each-segment": [
+  "P062",
+  "P063",
+  "P064",
+  "P065",
+  "P059"
+ ],
+ "intermediate/m01-segmenting-suppliers/l05-segmenting-the-ekene-suppliers": [
+  "P061",
+  "P004",
+  "P060",
+  "P056",
+  "P062",
+  "P007"
+ ],
+ "intermediate/m02-supplier-performance-reviews/l01-the-review-cycle": [
+  "P007",
+  "P009",
+  "P069",
+  "P038"
+ ],
+ "intermediate/m02-supplier-performance-reviews/l02-the-scorecard-and-its-evidence": [
+  "P041",
+  "P036",
+  "P040",
+  "P039",
+  "P160"
+ ],
+ "intermediate/m02-supplier-performance-reviews/l03-running-the-review-meeting": [
+  "P042",
+  "P067",
+  "P132",
+  "P160"
+ ],
+ "intermediate/m02-supplier-performance-reviews/l04-improvement-plans-that-close": [
+  "P067",
+  "P068",
+  "P042",
+  "P070",
+  "P074"
+ ],
+ "intermediate/m03-variations-and-change-control/l01-what-counts-as-a-change": [
+  "P077",
+  "P156",
+  "P080",
+  "P089"
+ ],
+ "intermediate/m03-variations-and-change-control/l02-authority-to-instruct-a-change": [
+  "P021",
+  "P087",
+  "P078",
+  "P012"
+ ],
+ "intermediate/m03-variations-and-change-control/l03-assessing-a-change-request": [
+  "P088",
+  "P156",
+  "P078",
+  "P084"
+ ],
+ "intermediate/m03-variations-and-change-control/l04-limits-on-modifying-a-public-contract": [
+  "P079",
+  "P080",
+  "P081",
+  "P082",
+  "P083",
+  "P086",
+  "P102",
+  "P085"
+ ],
+ "intermediate/m03-variations-and-change-control/l05-the-change-register": [
+  "P078",
+  "P020",
+  "P160"
+ ],
+ "intermediate/m04-supplier-risk-and-resilience/l01-risks-a-supplier-carries-in": [
+  "P133",
+  "P187",
+  "P099"
+ ],
+ "intermediate/m04-supplier-risk-and-resilience/l02-financial-standing-and-early-warnings": [
+  "P090",
+  "P093",
+  "P094",
+  "P095",
+  "P096"
+ ],
+ "intermediate/m04-supplier-risk-and-resilience/l03-single-sources-and-continuity": [
+  "P060",
+  "P004",
+  "P187",
+  "P098",
+  "P099"
+ ],
+ "intermediate/m04-supplier-risk-and-resilience/l04-resolution-planning": [
+  "P091",
+  "P098",
+  "P097",
+  "P092"
+ ],
+ "intermediate/m05-nigerian-content-obligations-in-depth/l01-the-nigerian-content-plan": [
+  "P103",
+  "P104",
+  "P105",
+  "P102",
+  "P137",
+  "P125"
+ ],
+ "intermediate/m05-nigerian-content-obligations-in-depth/l02-employment-and-expatriate-positions": [
+  "P112",
+  "P119",
+  "P118",
+  "P115",
+  "P116",
+  "P117"
+ ],
+ "intermediate/m05-nigerian-content-obligations-in-depth/l03-training-and-capacity-building": [
+  "P135",
+  "P113",
+  "P114",
+  "P121"
+ ],
+ "intermediate/m05-nigerian-content-obligations-in-depth/l04-performance-reports-and-monitoring": [
+  "P127",
+  "P128",
+  "P109",
+  "P131",
+  "P129",
+  "P130"
+ ],
+ "intermediate/m06-poor-performance-and-remedies/l01-from-concern-to-formal-notice": [
+  "P067",
+  "P184",
+  "P160",
+  "P070",
+  "P075"
+ ],
+ "intermediate/m06-poor-performance-and-remedies/l02-remedies-the-contract-gives": [
+  "P076",
+  "P182",
+  "P068",
+  "P186",
+  "P185",
+  "P183"
+ ],
+ "intermediate/m06-poor-performance-and-remedies/l03-recording-poor-performance": [
+  "P071",
+  "P070",
+  "P072",
+  "P073",
+  "P074",
+  "P160"
+ ],
+ "intermediate/m06-poor-performance-and-remedies/l04-preparing-for-the-professional-exam": [
+  "P004",
+  "P061",
+  "P078",
+  "P067",
+  "P131"
+ ],
+ "advanced/m01-contract-strategy/l01-what-a-contract-strategy-decides": [
+  "P011",
+  "P004",
+  "P144",
+  "P145"
+ ],
+ "advanced/m01-contract-strategy/l02-delivery-models-and-make-or-buy": [
+  "P142",
+  "P143",
+  "P010",
+  "P105",
+  "P131"
+ ],
+ "advanced/m01-contract-strategy/l03-packaging-the-work": [
+  "P145",
+  "P057",
+  "P058",
+  "P004",
+  "P118",
+  "P204"
+ ],
+ "advanced/m01-contract-strategy/l04-choosing-the-price-basis": [
+  "P026",
+  "P027",
+  "P028",
+  "P146",
+  "P029",
+  "P147",
+  "P148",
+  "P149",
+  "P150"
+ ],
+ "advanced/m01-contract-strategy/l05-a-strategy-for-an-ekene-campaign": [
+  "P146",
+  "P011",
+  "P151",
+  "P019",
+  "P102",
+  "P137"
+ ],
+ "advanced/m02-claims/l01-what-a-claim-is": [
+  "P161",
+  "P153",
+  "P157"
+ ],
+ "advanced/m02-claims/l02-notice-and-its-timing": [
+  "P152",
+  "P161",
+  "P157",
+  "P160",
+  "P171"
+ ],
+ "advanced/m02-claims/l03-entitlement-and-evidence": [
+  "P154",
+  "P159",
+  "P155",
+  "P160",
+  "P185"
+ ],
+ "advanced/m02-claims/l04-assessing-a-claim-fairly": [
+  "P156",
+  "P158",
+  "P154",
+  "P161",
+  "P088",
+  "P078"
+ ],
+ "advanced/m03-disputes-and-their-resolution/l01-the-escalation-ladder": [
+  "P165",
+  "P163",
+  "P162",
+  "P166"
+ ],
+ "advanced/m03-disputes-and-their-resolution/l02-negotiation-and-mediation": [
+  "P170",
+  "P171",
+  "P172",
+  "P173",
+  "P021",
+  "P216"
+ ],
+ "advanced/m03-disputes-and-their-resolution/l03-expert-determination-and-adjudication": [
+  "P163",
+  "P164",
+  "P161"
+ ],
+ "advanced/m03-disputes-and-their-resolution/l04-arbitration-and-the-courts": [
+  "P167",
+  "P162",
+  "P166",
+  "P168",
+  "P169",
+  "P174",
+  "P175"
+ ],
+ "advanced/m04-termination-step-in-and-exit/l01-grounds-for-termination": [
+  "P182",
+  "P183",
+  "P176",
+  "P178",
+  "P133",
+  "P184",
+  "P185"
+ ],
+ "advanced/m04-termination-step-in-and-exit/l02-step-in-and-other-interventions": [
+  "P068",
+  "P187",
+  "P076",
+  "P186",
+  "P067"
+ ],
+ "advanced/m04-termination-step-in-and-exit/l03-exit-planning": [
+  "P200",
+  "P197",
+  "P179",
+  "P180",
+  "P195",
+  "P112"
+ ],
+ "advanced/m04-termination-step-in-and-exit/l04-a-supplier-in-distress": [
+  "P095",
+  "P096",
+  "P090",
+  "P094",
+  "P097",
+  "P098"
+ ],
+ "advanced/m05-close-out-and-lessons-learned/l01-completion-and-acceptance": [
+  "P198",
+  "P055",
+  "P190",
+  "P137",
+  "P195"
+ ],
+ "advanced/m05-close-out-and-lessons-learned/l02-the-final-account": [
+  "P194",
+  "P055",
+  "P022",
+  "P191",
+  "P192",
+  "P134",
+  "P140"
+ ],
+ "advanced/m05-close-out-and-lessons-learned/l03-evaluating-the-supplier-at-close": [
+  "P193",
+  "P196",
+  "P038",
+  "P039",
+  "P199",
+  "P041",
+  "P185"
+ ],
+ "advanced/m05-close-out-and-lessons-learned/l04-lessons-learned": [
+  "P190",
+  "P192",
+  "P193",
+  "P196",
+  "P140",
+  "P011"
+ ],
+ "advanced/m06-integrity-governance-and-the-written-case/l01-conflicts-of-interest-and-gifts": [
+  "P212",
+  "P203",
+  "P202",
+  "P213",
+  "P214",
+  "P208"
+ ],
+ "advanced/m06-integrity-governance-and-the-written-case/l02-fraud-and-corruption-in-execution": [
+  "P211",
+  "P204",
+  "P205",
+  "P206",
+  "P133",
+  "P209",
+  "P210"
+ ],
+ "advanced/m06-integrity-governance-and-the-written-case/l03-governance-and-assurance": [
+  "P002",
+  "P001",
+  "P003",
+  "P004",
+  "P012",
+  "P054",
+  "P136",
+  "P130"
+ ],
+ "advanced/m06-integrity-governance-and-the-written-case/l04-reading-the-sources-as-they-change": [
+  "P139",
+  "P137",
+  "P141",
+  "P052",
+  "P186",
+  "P217"
+ ],
+ "advanced/m06-integrity-governance-and-the-written-case/l05-the-written-case-brief": [
+  "P007",
+  "P154",
+  "P182",
+  "P190",
+  "P184",
+  "P185",
+  "P076",
+  "P102"
+ ]
+}

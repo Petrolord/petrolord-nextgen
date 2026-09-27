@@ -1,0 +1,206 @@
+{
+ "dataset": "NKEREFI (synthetic)",
+ "label": "NKEREFI, one PSV serving the Nkerefi cluster (synthetic)",
+ "voyagePlan:milk-run": {
+  "vessel": {
+   "name": "PSV Nkerefi Dawn (synthetic)",
+   "speedKnots": 11.5,
+   "deckAreaM2": 720,
+   "deckUsableFraction": 0.8,
+   "deckLoadT": 1650,
+   "deadweightT": 3100,
+   "tanks": {
+    "diesel": 700,
+    "water": 900,
+    "mud": 500
+   },
+   "fuelTPerHour": {
+    "sailing": 0.46,
+    "port": 0.035,
+    "field": 0.27
+   }
+  },
+  "products": [
+   {
+    "id": "diesel",
+    "name": "Marine gas oil (synthetic)",
+    "kind": "liquid",
+    "densityTPerM3": 0.84
+   },
+   {
+    "id": "water",
+    "name": "Drill water (synthetic)",
+    "kind": "liquid",
+    "densityTPerM3": 1
+   },
+   {
+    "id": "mud",
+    "name": "Oil-based mud (synthetic)",
+    "kind": "liquid",
+    "densityTPerM3": 1.35
+   }
+  ],
+  "installations": [
+   {
+    "id": "NK-P",
+    "name": "Nkerefi production platform (synthetic)",
+    "fieldHours": 5.5,
+    "cargo": {
+     "deckAreaM2": 212.5,
+     "deckWeightT": 246.75,
+     "bulk": {
+      "diesel": 185,
+      "water": 320
+     }
+    }
+   },
+   {
+    "id": "NK-R",
+    "name": "Nkerefi jack-up drilling unit (synthetic)",
+    "fieldHours": 7.25,
+    "cargo": {
+     "deckAreaM2": 238.25,
+     "deckWeightT": 402.5,
+     "bulk": {
+      "diesel": 210,
+      "water": 275,
+      "mud": 340
+     }
+    }
+   },
+   {
+    "id": "NK-F",
+    "name": "Nkerefi FPSO (synthetic)",
+    "fieldHours": 4.75,
+    "cargo": {
+     "deckAreaM2": 97.75,
+     "deckWeightT": 88.25,
+     "bulk": {
+      "diesel": 130,
+      "water": 145
+     }
+    }
+   }
+  ],
+  "route": {
+   "mode": "milk-run",
+   "stops": [
+    "NK-P",
+    "NK-R",
+    "NK-F"
+   ],
+   "legsNm": [
+    47.5,
+    13.25,
+    21.5,
+    58.75
+   ]
+  },
+  "portHours": 10.5,
+  "weather": {
+   "factor": 1.15,
+   "appliesTo": [
+    "sailing",
+    "field"
+   ]
+  },
+  "fuelPricePerT": 845.5
+ },
+ "voyagePlan:dedicated": {
+  "vessel": {
+   "name": "PSV Nkerefi Dawn (synthetic)",
+   "speedKnots": 11.5,
+   "deckAreaM2": 720,
+   "deckUsableFraction": 0.8,
+   "deckLoadT": 1650,
+   "deadweightT": 3100,
+   "tanks": {
+    "diesel": 700,
+    "water": 900,
+    "mud": 500
+   },
+   "fuelTPerHour": {
+    "sailing": 0.46,
+    "port": 0.035,
+    "field": 0.27
+   }
+  },
+  "products": [
+   {
+    "id": "diesel",
+    "name": "Marine gas oil (synthetic)",
+    "kind": "liquid",
+    "densityTPerM3": 0.84
+   },
+   {
+    "id": "water",
+    "name": "Drill water (synthetic)",
+    "kind": "liquid",
+    "densityTPerM3": 1
+   },
+   {
+    "id": "mud",
+    "name": "Oil-based mud (synthetic)",
+    "kind": "liquid",
+    "densityTPerM3": 1.35
+   }
+  ],
+  "installations": [
+   {
+    "id": "NK-P",
+    "name": "Nkerefi production platform (synthetic)",
+    "fieldHours": 5.5,
+    "distanceFromBaseNm": 47.5,
+    "cargo": {
+     "deckAreaM2": 212.5,
+     "deckWeightT": 246.75,
+     "bulk": {
+      "diesel": 185,
+      "water": 320
+     }
+    }
+   },
+   {
+    "id": "NK-R",
+    "name": "Nkerefi jack-up drilling unit (synthetic)",
+    "fieldHours": 7.25,
+    "distanceFromBaseNm": 55.25,
+    "cargo": {
+     "deckAreaM2": 238.25,
+     "deckWeightT": 402.5,
+     "bulk": {
+      "diesel": 210,
+      "water": 275,
+      "mud": 340
+     }
+    }
+   },
+   {
+    "id": "NK-F",
+    "name": "Nkerefi FPSO (synthetic)",
+    "fieldHours": 4.75,
+    "distanceFromBaseNm": 58.75,
+    "cargo": {
+     "deckAreaM2": 97.75,
+     "deckWeightT": 88.25,
+     "bulk": {
+      "diesel": 130,
+      "water": 145
+     }
+    }
+   }
+  ],
+  "route": {
+   "mode": "dedicated"
+  },
+  "portHours": 10.5,
+  "weather": {
+   "factor": 1.15,
+   "appliesTo": [
+    "sailing",
+    "field"
+   ]
+  },
+  "fuelPricePerT": 845.5
+ }
+}

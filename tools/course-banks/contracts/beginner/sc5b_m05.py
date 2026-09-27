@@ -1,0 +1,141 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+TRACE=[]
+def q(k,p,c,ds,e,src):
+    # k the key's index (0 to 3), p the prompt, c the correct option, ds the
+    # three distractors, e the explanation, src the PACK.md passage ids (P001
+    # style) the key rests on: at least one, read by gate_source_trace.py and
+    # never printed to a learner.
+    Q.append((k,p,c,ds,e)); TRACE.append(list(src))
+
+# SC5 Associate m05, Payment, Records and the Audit Trail. 15 questions.
+# Lessons: Checking an invoice against the contract; Certifying work done; Records that survive an audit; Correspondence and instructions in writing.
+# Topics: T05, T08.
+# Every key rests on a PACK.md passage named in its src list; the
+# explanation cites the SOURCE by name and locator (an Act and its section,
+# a guidance and its paragraph), never a passage id or a pack section.
+# FILLED AT THE BANK STAGE (Associate bank writer).
+
+q(0, "EKC-07 is a synthetic environmental monitoring consultancy: EM-G (synthetic) is paid a time-based fee against approved timesheets. Its quarterly invoice charges more days than the approved timesheets show, and one line repeats a charge from last quarter. What should the manager do?",
+ "Pay the approved days on time and hold the extra days and the repeated line pending evidence.",
+ ["Hold the whole invoice until EM-G sends a clean one, however long that takes.",
+  "Pay it all now and recover any overpayment at the final account.",
+  "Pay it all, since a consultant's invoice is presumed accurate."],
+ "The World Bank Contract Management Practice guidance (Fraud and Corruption, p.41), taught by concept, lists payments that do not follow the contract and false or duplicate invoices among the red flags in execution, so the unsupported days and the repeated line are held. The UK Government Functional Standard GovS 008 (version 2.2) at 5.4.4 asks for payments that reflect the contract terms. Checking is no reason to delay the undisputed part, so the approved days are paid within the contract's payment period.",
+ ['P211', 'P054'])
+
+q(2, "Which of these does the World Bank Contract Management Practice guidance (p.41) list among the red flags of fraud and corruption during contract execution?",
+ "False or duplicate invoices, and payments that do not follow the contract.",
+ ["A supplier asking for a kick-off meeting in the first week after the contract is awarded.",
+  "A contract manager who files every note sent to the supplier with its date and author.",
+  "An invoice that arrives on time with every timesheet attached."],
+ "The World Bank guidance, taught by concept, lists red flags during execution including poor quality materials or workmanship, change orders without contractual justification, unjustified changes in specification, payments that do not follow the contract, and false or duplicate invoices. A kick-off request, a dated file and a complete, punctual invoice are signs of a contract being run well.",
+ ['P211'])
+
+q(3, "While checking the last invoice on EKC-04, the synthetic TB-D casing frame agreement, the manager finds that three earlier deliveries were paid at an old unit price. The final payment has not yet been made. What does the World Bank Contract Management Practice guidance (Price Adjustment, p.21) say?",
+ "Correct the payment error before the final payment is made.",
+ ["Leave it, since an error in a delivery already paid cannot be reopened.",
+  "Report TB-D to the Board, since a price error is a Nigerian content offence.",
+  "Ask TB-D to decide whether it wants to correct the error or keep the difference."],
+ "The World Bank guidance, taught by concept, says payment errors found before the final payment is made should be corrected. The manager corrects it with the unit prices the agreement states, in whichever direction it runs. A pricing slip is not a Nigerian content matter for the Board, and leaving the choice to the supplier abandons the contract's own terms.",
+ ['P194'])
+
+q(1, "Under Nigeria's Public Procurement Act 2007, s.37(2), when does a payment by a federal procuring entity count as a delayed payment?",
+ "When it is due after more than sixty days from submission of the invoice and valuation certificate.",
+ ["When it is due after more than 30 days from the date the work was finished on site, whatever the invoice date.",
+  "When the contractor says it is late, whatever the date the invoice was sent.",
+  "When the Bureau has not approved it by the end of the financial year."],
+ "Section 37(2) provides that any payment due after more than sixty days from the date of submission of the invoice, valuation certificate and confirmation or authentication by the procuring body is a delayed payment. It binds federal procuring entities and is published public practice for an operator. The 30 day figure belongs to the UK Procurement Act 2023 payment term, and neither the contractor's say-so nor the Bureau sets the clock.",
+ ['P047', 'P045'])
+
+q(0, "A federal body pays a contractor late. What do s.37(3) and (4) of Nigeria's Public Procurement Act 2007 provide?",
+ "Interest at the rate the contract specifies, and every contract must include late-payment interest terms.",
+ ["A fine of five per cent of the project sum, paid by the entity to the Bureau.",
+  "Nothing, unless the contractor sues and a court sets a rate.",
+  "Cancellation of the contract at the contractor's option."],
+ "Section 37(3) says delayed payments attract interest at the rate specified in the contract document, and s.37(4) says all contracts shall include terms specifying the interest for late payment of more than sixty days. The five per cent fine belongs to the content Act, s.68, for carrying out a project contrary to that Act, and cancellation for late payment is not in s.37.",
+ ['P048'])
+
+q(1, "An Ekene manager reads that under the UK Procurement Act 2023 regime a valid, undisputed invoice is paid within 30 days. How does this apply to EKC-06, the synthetic IM-F instrument maintenance contract?",
+ "It is UK practice; the manager pays within the payment period the IM-F contract states.",
+ ["It binds Ekene, because the UK rule is implied into every service contract in every country.",
+  "It replaces the IM-F contract's payment clause whenever the UK period is the shorter of the two.",
+  "It applies only to disputed invoices, which then fall due within 30 days regardless of the dispute."],
+ "The UK guidance on electronic invoicing and payment (para 7) describes an implied term under the UK Act that a valid, undisputed invoice is paid within 30 days of receipt. That term applies to UK public contracts. Each Ekene contract states its own payment period, and the manager works to it. The UK term covers undisputed invoices, so a rule about disputed ones inverts it.",
+ ['P045'])
+
+q(3, "EKC-05 is a synthetic flowline replacement: FW-E (synthetic) is paid a lump sum against milestones. FW-E asks for the certificate for the flowline installation milestone. The lines are laid, but the pressure test the contract ties to that milestone has not been done. What should the manager do?",
+ "Hold the certificate until the test is done and its results accepted.",
+ ["Certify the milestone in full now, since the lines are visibly in place and FW-E is waiting.",
+  "Half the milestone can be certified, since roughly half the defined work is done.",
+  "Sign it and release the retention, so that FW-E can pay for the pressure test."],
+ "The World Bank Contract Management Practice guidance reminds its reader that a contract is managed on its own terms, and this milestone as defined includes the pressure test. A certificate rests on the inspection and tests the contract requires, so it waits for the test. A partial certificate is possible only where the contract pays that way, and the World Bank Regulations (Annex IX para 2.14) describe retention as released once the contractor has met its obligations, which is not yet the case.",
+ ['P007', 'P055'])
+
+q(2, "EKC-05 is the synthetic flowline replacement works contract with FW-E (synthetic). Its pressure test passes on a Friday. The manager plans to sign FW-E's certificate at the end of next month to ease Ekene's cash flow. What does the World Bank Contract Management Practice guidance (p.40) teach about the employer's side?",
+ "The employer must meet its own obligations, timely payment included.",
+ ["Delay is prudent, since certifying late costs the employer nothing under any contract.",
+  "Waiting is fine if FW-E has not complained before.",
+  "A late certificate is expected, since a lump sum is paid only when the whole contract ends."],
+ "The World Bank guidance, taught by concept, draws from one of its case studies the point that an employer must meet its own obligations, timely payment included. Certifying less or later than the evidence supports is as wrong as certifying more. A lump sum against milestones is paid milestone by milestone, and the supplier's silence changes nothing.",
+ ['P185'])
+
+q(0, "For works contracts, which payment arrangement do the World Bank Procurement Regulations for IPF Borrowers (Seventh Edition, Annex IX para 2.14) describe for retention?",
+ "A reasonable retention, released once the contractor has met its obligations.",
+ ["A retention of the whole contract price, released on the day of signature.",
+  "No retention at all, since the advances paid to the contractor make one unnecessary.",
+  "A retention kept by the employer permanently as a discount."],
+ "Annex IX para 2.14, taught by concept, provides that a works contract may, where appropriate, allow a mobilisation advance, advances against plant and materials, regular payments as progress is made, and a reasonable retention released once the contractor has met its obligations. Retention is security held and then released, and it is neither the whole price nor a permanent discount.",
+ ['P055'])
+
+q(2, "EKC-01 is a synthetic well services framework with WS-A (synthetic). An NCDMB officer asks to see the timesheets behind the person-hours WS-A reported. Which provision of the Nigerian Oil and Gas Industry Content Development Act 2010 (the content Act) obliges WS-A to give access?",
+ "Section 64: operators and contractors give the Board access to substantiating documents.",
+ ["Section 60, which requires WS-A to file its own annual Nigerian content report within sixty days.",
+  "None, since the content Act gives the Board access to the records of operators and nobody else.",
+  "Section 16(21) of the content Act, which makes WS-A's accounting officer accountable."],
+ "The content Act, s.64, provides that all operators and contractors shall provide the Board or its designated agent with access to their facilities and all documentation and information required for substantiating the Nigerian content reported. It reaches contractors as well as operators. Section 60 is the operator's annual report, and s.16(21) is a provision of the Public Procurement Act 2007.",
+ ['P130'])
+
+q(1, "Under Nigeria's Public Procurement Act 2007, s.38(5), who may inspect a federal procuring entity's procurement records on request?",
+ "The Bureau, an investigator the Bureau appoints, and the Auditor-General.",
+ ["The contractor's bank, to confirm the payments it has received.",
+  "Only the procuring entity's own staff, since the records are confidential.",
+  "The Board, which audits every public procurement under the content Act."],
+ "Section 38(5) makes the records and documents maintained by procuring entities available for inspection by the Bureau, an investigator appointed by the Bureau and the Auditor-General upon request. It binds federal procuring entities and is public practice for an operator. The Board's audit function under the content Act, s.70(k), concerns Nigerian content, which is a separate matter.",
+ ['P053'])
+
+q(3, "An Ekene manager asks how long the Public Procurement Act 2007 says procurement records must be kept, citing s.16(12). What does this course teach?",
+ "No period, since the printed text garbles it; follow the contract and company policy.",
+ ["Ten years from award, the period s.16(12) states in plain words.",
+  "Three months after the financial year ends, the period s.16(12) sets for keeping every file.",
+  "Until the Board issues its Nigerian content compliance certificate on the finished contract."],
+ "The printed Public Procurement Act 2007 gives the retention period in s.16(12) in garbled words, so the course teaches no period from it, and an Ekene manager follows the retention rule in the contract and the company's own policy. The three months in s.16(13) is the deadline for sending copies to the Bureau, a different duty. No plain ten year period is printed there, and the Board's certificate does not govern record keeping.",
+ ['P052'])
+
+q(0, "The UK Government Functional Standard GovS 008 (version 2.2) at 5.4.5 sets expectations for contract change control. Which of these does it include?",
+ "An audit trail in a change register, with evidence kept for later procurement or disputes.",
+ ["Changes agreed on site by phone, with paperwork optional where the sum is small.",
+  "A change register kept by the supplier alone, which the buyer reads once a year.",
+  "Approval after the change is carried out, once its full cost is known and the supplier has invoiced it."],
+ "GovS 008 at 5.4.5 expects change control to give an audit trail in a change register, a cost of change justified against the business case, approvals obtained before implementation, retained evidence for later procurement or disputes, and changes that are value for money and lawful. It is UK practice and a sound habit for Ekene. Approval after the event and informal phone changes are what it guards against.",
+ ['P078'])
+
+q(1, "EKC-06 is a synthetic instrument maintenance contract with IM-F (synthetic). A production supervisor asked IM-F's technician in person to start maintaining analysers that are not on the contract's instrument list. The technician emails asking whether IM-F will be paid. What should the manager reply?",
+ "Stop that work until a written change instruction comes from someone with authority.",
+ ["Carry on, since the supervisor's request is an instruction that binds Ekene to pay for the work.",
+  "Add the analysers to next month's invoice at the contract's hourly rate and keep working.",
+  "Keep going, since work done in good faith joins the contract scope by default once it starts."],
+ "The World Bank Contract Management Practice guidance, taught by concept, asks for named people holding delegated authority to act on a change request, and a decision binds only when its maker holds the authority to take it. A supervisor's spoken request is well meant but unauthorised, so the work waits for a written instruction under the change clause, and any hours already spent are recorded. Good faith does not turn unlisted work into contract scope.",
+ ['P087', 'P021'])
+
+q(2, "A federal procuring entity finds that part of a contractor's work was done with defective materials. Under Nigeria's Public Procurement Act 2007, s.53(3), what written instruction may the Bureau issue, on the entity's advice or after a review or an investigation?",
+ "A variation order making the contractor repair or replace the work at its own expense.",
+ ["A spoken warning to the contractor, since defects need no written instruction.",
+  "An order cancelling the contract and letting the work to another firm at public cost.",
+  "A service credit deducted automatically from the contractor's next payment."],
+ "Section 53(3) lets the Bureau, on the procuring entity's advice, the results of its review or an investigation report, issue a variation order requiring a contractor, at its own expense, to repair, replace or do anything left undone or carried out with inferior or defective materials or with less skill than the contract requires. So even an instruction to put defects right is written. The 2007 Act binds federal procuring entities and is published practice for an operator.",
+ ['P089'])
+
+emit(Q, '/root/cat-wip-contracts/banks/sc5b_m05.json', expect_n=15)
+finish()

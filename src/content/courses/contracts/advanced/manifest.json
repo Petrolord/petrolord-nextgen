@@ -1,0 +1,335 @@
+{
+ "app_slug": "contracts",
+ "tier": "advanced",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-contract-strategy",
+   "title": "Contract Strategy",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-what-a-contract-strategy-decides",
+     "title": "What a contract strategy decides",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-delivery-models-and-make-or-buy",
+     "title": "Delivery models and make or buy",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-packaging-the-work",
+     "title": "Packaging the work",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-choosing-the-price-basis",
+     "title": "Choosing the price basis for the risk",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-a-strategy-for-an-ekene-campaign",
+     "title": "A strategy for an Ekene campaign",
+     "order": 5,
+     "est_minutes": 14,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-claims",
+   "title": "Claims",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-what-a-claim-is",
+     "title": "What a claim is",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-notice-and-its-timing",
+     "title": "Notice and its timing",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-entitlement-and-evidence",
+     "title": "Entitlement and evidence",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-assessing-a-claim-fairly",
+     "title": "Assessing a claim fairly",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-disputes-and-their-resolution",
+   "title": "Disputes and Their Resolution",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-the-escalation-ladder",
+     "title": "The escalation ladder",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-negotiation-and-mediation",
+     "title": "Negotiation and mediation",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-expert-determination-and-adjudication",
+     "title": "Expert determination and adjudication",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-arbitration-and-the-courts",
+     "title": "Arbitration and the courts",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-termination-step-in-and-exit",
+   "title": "Termination, Step-In and Exit",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-grounds-for-termination",
+     "title": "Grounds for termination",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-step-in-and-other-interventions",
+     "title": "Step-in and other interventions",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-exit-planning",
+     "title": "Exit planning and handover to a successor",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-a-supplier-in-distress",
+     "title": "A supplier in distress",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-close-out-and-lessons-learned",
+   "title": "Close-Out and Lessons Learned",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-completion-and-acceptance",
+     "title": "Completion and acceptance",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-final-account",
+     "title": "The final account and releasing securities",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-evaluating-the-supplier-at-close",
+     "title": "Evaluating the supplier at close",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-lessons-learned",
+     "title": "Lessons learned that change the next contract",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-integrity-governance-and-the-written-case",
+   "title": "Integrity, Governance and the Written Case",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-conflicts-of-interest-and-gifts",
+     "title": "Conflicts of interest and gifts",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-fraud-and-corruption-in-execution",
+     "title": "Fraud and corruption in execution",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-governance-and-assurance",
+     "title": "Governance and assurance of the contract portfolio",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-reading-the-sources-as-they-change",
+     "title": "Reading the sources as they change",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-written-case-brief",
+     "title": "The written case brief",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

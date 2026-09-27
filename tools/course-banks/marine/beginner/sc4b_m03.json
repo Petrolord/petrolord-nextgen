@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "What weather factors does the engine accept in a voyage plan?",
+  "options": [
+   "Any number above 0, so a factor of 0.9 can model a following sea that shortens a voyage.",
+   "Only 1 or 1.2, the two Ekene factors.",
+   "A factor from the engine's own table of seasons, looked up by the month the voyage sails in.",
+   "Any finite number from 1 to 10, both ends accepted, with 1 the calm voyage."
+  ],
+  "answer": 3,
+  "explanation": "The weather factor is a stated number from 1 to 10. A factor of 1 is calm, and 10 is the cap in DEFAULTS; 0.9 and 10.5 are both refused. The Ekene figures are the fixture's stated inputs, one choice among many, and the engine keeps no table of seasons."
+ },
+ {
+  "prompt": "To model a following sea, a planner types 0.9 into the weather factor control. What is the outcome?",
+  "options": [
+   "A plan in which every activity the factor names runs a tenth faster than its calm time.",
+   "A refusal, in its own words: weather.factor must be a finite number from 1 to 10; got 0.9",
+   "A plan with the factor raised to 1, the calm floor, and a note of the change in the reasons.",
+   "A refusal, in its own words: weather.factor must be a finite number above 1; got 0.9"
+  ],
+  "answer": 1,
+  "explanation": "A factor below 1 would make bad weather faster than calm, so the engine refuses it on weather.factor, printing the value it got. It changes no stated input to fit, and the activities are a separate input with their own refusals. A factor of exactly 1, the calm plan, is accepted, so the range starts at 1."
+ },
+ {
+  "prompt": "Port time on the Ekene milk run is stated as 12 hours. If the planner puts port in the list the 1.2 allowance slows, how long is port time in the plan?",
+  "options": [
+   "14.400000, the 12 stated hours times the factor, since port time is named.",
+   "12.000000, the stated hours, since the weather factor never reaches the time at the base.",
+   "27.600000, the weathered field hours.",
+   "22.472727, the weathered sailing hours."
+  ],
+  "answer": 0,
+  "explanation": "An activity named in weather.appliesTo is multiplied by the factor, so port time becomes 14.400000 hours. 12.000000 is the port time when port is left out of the list, as in the Ekene rainy-season plan. 27.600000 and 22.472727 are the field and sailing hours."
+ },
+ {
+  "prompt": "With 1.2 on sailing and field time the Ekene milk run takes 62.072727 hours. The same plan with port time named as well returns what total hours?",
+  "options": [
+   "62.072727, since port time at the base is never slowed by the weather in the engine.",
+   "53.727273, since a factor on every activity is read by the engine as the calm case.",
+   "64.472727, since port time grows from 12.000000 to 14.400000 hours.",
+   "2.686364, the total with all three slowed."
+  ],
+  "answer": 2,
+  "explanation": "Naming port time lifts the port hours from 12.000000 to 14.400000, and the voyage to 64.472727 hours in all. The engine slows any activity the list names, including port time. 53.727273 is the calm voyage at a factor of 1, and 2.686364 is the same voyage's figure in days."
+ },
+ {
+  "prompt": "In a voyage plan box, weather.appliesTo is missing while the factor is stated as 1.2. What comes back?",
+  "options": [
+   "A plan with the factor applied to all three activities, the list the engine assumes when none is given.",
+   "A plan with the factor applied to sailing alone, the activity the weather slows the most at sea, with port and field time kept at their calm hours.",
+   "A refusal, in its own words: weather.appliesTo must be an array naming at least one of \"sailing\", \"port\", \"field\"; got nothing",
+   "A refusal, in its own words: weather.factor must be 1 when weather.appliesTo is left out; got 1.2"
+  ],
+  "answer": 2,
+  "explanation": "The list of activities is a required input with no assumed value, so leaving it out is refused by name, on weather.appliesTo itself whatever the factor. The engine applies the factor to no activity of its own choosing and sets no stated input aside: the plan names both the factor and what it slows."
+ },
+ {
+  "prompt": "A planner wants standby time slowed by the weather and adds standby to weather.appliesTo after sailing. What does the engine return, and what can the planner do?",
+  "options": [
+   "A refusal: the activities are sailing, port and field only, so standby is folded into the stated port or field hours.",
+   "A plan with a fourth activity added for standby, burning fuel at a rate read from Skoko et al.'s tables.",
+   "A plan that treats standby as port time and applies the factor to it without a word in the reasons.",
+   "A refusal asking for standby to be stated in days, since standby is counted by the day offshore."
+  ],
+  "answer": 0,
+  "explanation": "The engine's own words are: weather.appliesTo[1] must be one of \"sailing\", \"port\", \"field\"; got \"standby\". ACTIVITIES holds three names only, so standby has no activity and no burn of its own. The engine renames nothing silently, and it asks for no days. The planner folds standby into the stated port or field hours and says so."
+ },
+ {
+  "prompt": "Between the calm Ekene milk run (factor 1) and the rainy-season run (1.2 on sailing and field time), which figure stays the same?",
+  "options": [
+   "The total hours, 53.727273 in both, since the factor applies to the fuel burn and leaves the hours alone, so only the bill moves.",
+   "The fuel cost, 14462.563636 in both, since the fuel is priced per voyage and each season sails one voyage.",
+   "The days, 2.238636 in both, since a voyage's days count the sailing hours and exclude the field time the factor slows.",
+   "The deck area utilisation, 0.900000 in both, since the weather changes time and fuel and leaves the cargo where it is."
+  ],
+  "answer": 3,
+  "explanation": "Weather multiplies time, and fuel follows time, so the hours rise from 53.727273 to 62.072727, the days from 2.238636 to 2.586364 and the fuel cost from 14462.563636 to 17292.436364. The cargo, the capacities and so every utilisation stay the same, with deck area at 0.900000."
+ },
+ {
+  "prompt": "How does the engine find the fuel of a voyage?",
+  "options": [
+   "The NM sailed times a stated tonnes per NM, with the fuel in port and at the field left out of the voyage's total.",
+   "The hours in each activity times the stated tonnes an hour for that activity, added over sailing, port and field.",
+   "A speed-cube law on the stated speed, which the weather factor then scales on top of the hours it adds.",
+   "The total hours times one average burn for the whole voyage, taken from the Skoko et al. tables."
+  ],
+  "answer": 1,
+  "explanation": "Fuel is hours by activity times the stated burn for that activity. There is no speed-cube law and no per-NM burn, and the weather factor raises fuel only through the hours it adds. Each activity has its own stated burn, so one average rate would lose the difference between 0.5 t an hour sailing and 0.03 t an hour in port."
+ },
+ {
+  "prompt": "Sailing hours of 22.472727 at a stated sailing burn of 0.5 t an hour give how much sailing fuel?",
+  "options": [
+   "11.236364 t, the sailing hours times the sailing burn.",
+   "9.363636 t, the calm sailing fuel.",
+   "8.280000 t, the field fuel, from 27.600000 field hours at the field burn of 0.3 t an hour.",
+   "19.876364 t, the voyage's total fuel."
+  ],
+  "answer": 0,
+  "explanation": "22.472727 hours at 0.5 t an hour is 11.236364 t. The calm voyage sails 18.727273 hours and burns 9.363636 t; 8.280000 t is the field fuel and 19.876364 t the voyage's total."
+ },
+ {
+  "prompt": "Naming port time in the allowance lifts the Ekene milk run's port hours from 12.000000 to 14.400000. At a port burn of 0.03 t an hour, what does the voyage's total fuel do?",
+  "options": [
+   "It stays at 19.876364 t, because the engine sets a voyage's fuel from its sailing hours alone.",
+   "It rises to 23.880000 t, all three slowed.",
+   "It rises by 2829.872727 t, the whole rainy-season allowance, since port time is now weathered too.",
+   "It rises from 19.876364 to 19.948364 t, because port burns so little an hour."
+  ],
+  "answer": 3,
+  "explanation": "The extra port hours burn at only 0.03 t an hour, so the port fuel moves from 0.360000 to 0.432000 t and the total from 19.876364 t to 19.948364 t. Fuel follows the hours in every activity. 23.880000 t is the AHTS's fuel on the same route, and 2829.872727 is money, the fuel cost the allowance on sailing and field time adds to the calm voyage."
+ },
+ {
+  "prompt": "The rainy-season Ekene milk run burns 19.876364 t, and the fuel price is stated at 870 a tonne. What fuel cost does the engine return?",
+  "options": [
+   "14462.563636, the calm voyage's cost.",
+   "17292.436364, the tonnes times the stated price.",
+   "17355.076364, the fuel cost with the factor named on port time as well as sailing and field.",
+   "20775.600000, the fuel cost of the AHTS Ekene Tide on the same route and at the same price."
+  ],
+  "answer": 1,
+  "explanation": "The fuel cost is the tonnes times the stated price: 19.876364 t at 870 is 17292.436364. The other three are the engine's figures for other plans: the calm voyage, the plan with port time weathered, and the AHTS voyage."
+ },
+ {
+  "prompt": "At a stated 870 a tonne, by how much does the rainy-season allowance on sailing and field time raise the Ekene milk run's fuel bill over the calm voyage?",
+  "options": [
+   "62.640000, the extra cost of naming port time in the allowance as well as sailing and field.",
+   "17292.436364, the whole of the rainy-season fuel bill, which the allowance is taken to cause.",
+   "2829.872727, the rainy-season cost 17292.436364 less the calm cost 14462.563636.",
+   "14462.563636, the calm fuel bill, which the rainy-season allowance is taken to double."
+  ],
+  "answer": 2,
+  "explanation": "The allowance adds 2829.872727 to the bill, the difference of the two engine fuel costs. 62.640000 is what naming port time adds on top of that. The calm voyage still burns fuel, so the whole rainy-season bill is not the allowance, and a factor of 1.2 on two activities does not double anything."
+ },
+ {
+  "prompt": "The PSV day of Skoko et al. (Tables 1 and 4) is put through the engine as one out-and-back trip of 120 NM each way at 10 knots, with 24 hours alongside the base, no field hours and a weather factor of 1, burning 0.5 t an hour under way and 0.03 in port, fuel priced at 870. What comes back?",
+  "options": [
+   "A fuel cost of 11066.400000, whose sailing part 10440.000000 and port part 626.400000 are the two daily figures the table prints.",
+   "A fuel cost of 10440.000000 in all, since the table counts the sailing day only and a day in port burns nothing.",
+   "A fuel cost of 626.400000 in all, since a PSV at the economic speed spends the whole of the day in port.",
+   "A fuel cost of 11066.400000, which misses the table's printed daily figures by the cost of a day in port."
+  ],
+  "answer": 0,
+  "explanation": "The voyage sails 240.000000 NM in 24.000000 hours and burns 12.000000 t sailing and 0.720000 t in port, for 11066.400000 at 870. The two parts, 10440.000000 and 626.400000, are exactly the daily sailing and port costs the paper prints. A port day burns 0.03 t an hour, a small amount that is still counted."
+ },
+ {
+  "prompt": "For the AHTS optimal month in Skoko et al.'s Tables 5 and 7, the course states 168 field hours, navigation as a dedicated voyage of 79.2 NM each way at 11 knots, 57.6 port hours, burns of 0.5 t an hour sailing and in the field and 0.03 in port, a weather factor of 1, and 870 a tonne. Which fuel cost results?",
+  "options": [
+   "186214.104000, the figure the table's rounded days give for the month through the engine.",
+   "11066.400000, the fuel cost of one day of a PSV at sea and one in port, at the same price.",
+   "92.928000, the fuel cost of the month with the price of 870 left out of the product.",
+   "80847.360000, from 92.928000 t, the optimal fuel cost the paper prints."
+  ],
+  "answer": 3,
+  "explanation": "The engine returns 14.400000 sailing hours, 92.928000 t and a fuel cost of 80847.360000, the printed AHTS figure exactly. 186214.104000 is what the rounded PSV days give, 11066.400000 is the PSV daily check, and 92.928000 is the tonnes, which the engine multiplies by the stated price."
+ },
+ {
+  "prompt": "Why does the course leave out Skoko et al.'s printed PSV month total of USD 186,274.10 and use the AHTS row?",
+  "options": [
+   "The PSV row is priced at a fuel price other than USD 870 a tonne, so it cannot be set beside the AHTS row.",
+   "The printed rounded days give 186214.104000 through the engine, 59.996000 short, so the total cannot be reproduced.",
+   "The paper withdrew the PSV row in the edition of 1 February 2024 that the course read on 2026-09-27.",
+   "The engine refuses the PSV month, because its sailing days would need a weather factor above the cap of 10."
+  ],
+  "answer": 1,
+  "explanation": "Run through the engine, the PSV's printed rounded days give 186214.104000, which is 59.996000 short of the printed total, so the inputs as printed do not reach the figure printed beside them. The course therefore uses the AHTS row, which reproduces exactly. The PSV month is priced at the same 870 a tonne, nothing was withdrawn, and the engine plans it without a refusal."
+ }
+]

@@ -1,0 +1,214 @@
+{
+ "dataset": "IGBARIAM (synthetic)",
+ "label": "IGBARIAM, the materials register of the Igbariam flow station (synthetic)",
+ "criticality": {
+  "criteria": [
+   {
+    "id": "safety",
+    "label": "Consequence of failure for people and the environment",
+    "weight": 35
+   },
+   {
+    "id": "production",
+    "label": "Consequence of failure for oil throughput",
+    "weight": 30
+   },
+   {
+    "id": "leadTime",
+    "label": "Replacement lead time",
+    "weight": 20
+   },
+   {
+    "id": "redundancy",
+    "label": "Lack of an installed standby",
+    "weight": 15
+   }
+  ],
+  "scoreMax": 4,
+  "items": [
+   {
+    "id": "IGB-P101",
+    "name": "Crude transfer pump seal kit (synthetic)",
+    "scores": {
+     "safety": 3,
+     "production": 4,
+     "leadTime": 3,
+     "redundancy": 1
+    }
+   },
+   {
+    "id": "IGB-V204",
+    "name": "Separator level control valve trim (synthetic)",
+    "scores": {
+     "safety": 2,
+     "production": 3,
+     "leadTime": 3,
+     "redundancy": 3
+    }
+   },
+   {
+    "id": "IGB-E310",
+    "name": "Flare igniter module (synthetic)",
+    "scores": {
+     "safety": 4,
+     "production": 1,
+     "leadTime": 2,
+     "redundancy": 2
+    }
+   },
+   {
+    "id": "IGB-F412",
+    "name": "Instrument air dryer cartridge (synthetic)",
+    "scores": {
+     "safety": 1,
+     "production": 2,
+     "leadTime": 1,
+     "redundancy": 3
+    }
+   }
+  ],
+  "classes": [
+   {
+    "label": "V",
+    "minScore": 72
+   },
+   {
+    "label": "E",
+    "minScore": 45
+   },
+   {
+    "label": "D",
+    "minScore": 0
+   }
+  ],
+  "topClassOnMaxScore": [
+   "safety"
+  ]
+ },
+ "abcClassification": {
+  "items": [
+   {
+    "id": "IGB-P101",
+    "name": "Crude transfer pump seal kit (synthetic)",
+    "annualUsage": 14,
+    "unitCost": 3625
+   },
+   {
+    "id": "IGB-V204",
+    "name": "Separator level control valve trim (synthetic)",
+    "annualUsage": 6,
+    "unitCost": 8740
+   },
+   {
+    "id": "IGB-E310",
+    "name": "Flare igniter module (synthetic)",
+    "annualUsage": 3,
+    "unitCost": 5210
+   },
+   {
+    "id": "IGB-F412",
+    "name": "Instrument air dryer cartridge (synthetic)",
+    "annualUsage": 48,
+    "unitCost": 187.5
+   },
+   {
+    "id": "IGB-C515",
+    "name": "Corrosion inhibitor, drum (synthetic)",
+    "annualUsage": 130,
+    "unitCost": 212
+   },
+   {
+    "id": "IGB-G618",
+    "name": "Glycol top-up, pail (synthetic)",
+    "annualUsage": 75,
+    "unitCost": 46.8
+   },
+   {
+    "id": "IGB-H721",
+    "name": "Hydraulic hose assembly (synthetic)",
+    "annualUsage": 22,
+    "unitCost": 158
+   },
+   {
+    "id": "IGB-K824",
+    "name": "Gauge glass kit (synthetic)",
+    "annualUsage": 9,
+    "unitCost": 94.25
+   }
+  ],
+  "cutoffs": {
+   "aPct": 75,
+   "bPct": 92
+  },
+  "boundaryRule": "at-or-below"
+ },
+ "eoq": {
+  "annualDemand": 130,
+  "orderCost": 1450,
+  "unitCost": 212,
+  "holdingRate": 0.24,
+  "rounding": {
+   "rule": "up",
+   "multiple": 6
+  }
+ },
+ "slowMoving": {
+  "items": [
+   {
+    "id": "IGB-P101",
+    "name": "Crude transfer pump seal kit (synthetic)",
+    "onHand": 5,
+    "unitCost": 3625,
+    "monthsSinceLastIssue": 2.5,
+    "monthlyUsage": 1.1667
+   },
+   {
+    "id": "IGB-V204",
+    "name": "Separator level control valve trim (synthetic)",
+    "onHand": 3,
+    "unitCost": 8740,
+    "monthsSinceLastIssue": 10.5,
+    "monthlyUsage": 0.5
+   },
+   {
+    "id": "IGB-E310",
+    "name": "Flare igniter module (synthetic)",
+    "onHand": 4,
+    "unitCost": 5210,
+    "monthsSinceLastIssue": 21,
+    "monthlyUsage": 0.25
+   },
+   {
+    "id": "IGB-M927",
+    "name": "Superseded meter prover seal set (synthetic)",
+    "onHand": 7,
+    "unitCost": 1387.35,
+    "monthsSinceLastIssue": 33.5,
+    "monthlyUsage": 0
+   }
+  ],
+  "bands": [
+   {
+    "label": "active",
+    "minMonths": 0,
+    "writeDownPct": 0
+   },
+   {
+    "label": "slow",
+    "minMonths": 9,
+    "writeDownPct": 20
+   },
+   {
+    "label": "very slow",
+    "minMonths": 18,
+    "writeDownPct": 45
+   },
+   {
+    "label": "obsolete",
+    "minMonths": 30,
+    "writeDownPct": 100
+   }
+  ],
+  "excessCoverMonths": 18
+ }
+}

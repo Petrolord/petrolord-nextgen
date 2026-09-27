@@ -1,0 +1,26 @@
+{
+ "area": {
+  "decimals": 6,
+  "match": "^(?:akokwa_ffd_v1_area_m2)$"
+ },
+ "count": {
+  "decimals": 6,
+  "match": "^(?:akokwa_vessels_exact|akokwa_voyages_exact|mgbidi_mdc_mean_queue)$"
+ },
+ "mass": {
+  "decimals": 6,
+  "match": "^(?:nkerefi_milkrun_deadweight_t|nkerefi_milkrun_fuel_t)$"
+ },
+ "money": {
+  "decimals": 6,
+  "match": "^(?:nkerefi_milkrun_fuel_cost)$"
+ },
+ "ratio": {
+  "decimals": 6,
+  "match": "^(?:akokwa_ffd_v2_load_utilisation|mgbidi_mmc_probability_wait|nkerefi_binding_utilisation)$"
+ },
+ "time": {
+  "decimals": 6,
+  "match": "^(?:akokwa_spare_vessel_days|akokwa_vessel_days|mgbidi_mdc_wait_hours|mgbidi_mmc_time_at_base_hours|mgbidi_mmc_wait_hours|mgbidi_target_wait_hours|nkerefi_dedicated_days|nkerefi_milkrun_hours)$"
+ }
+}
