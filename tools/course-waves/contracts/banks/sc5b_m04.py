@@ -15,7 +15,127 @@ def q(k,p,c,ds,e,src):
 # Every key rests on a PACK.md passage named in its src list; the
 # explanation cites the SOURCE by name and locator (an Act and its section,
 # a guidance and its paragraph), never a passage id or a pack section.
-# EMPTY AT THE FOUNDATION: the bank writers fill it.
+# FILLED AT THE BANK STAGE (Associate bank writer).
+
+q(2, "EKC-01 is a synthetic well services framework with WS-A (synthetic); it states KPIs for mobilisation on time, supplier-caused non-productive time and safety reporting. The drilling superintendent wants WS-A marked down at the quarterly review because its crews used an unfamiliar paperwork format. How should the review treat that complaint?",
+ "As a management measure to raise with WS-A, since it is none of the three stated KPIs.",
+ ["As a fourth KPI, scored this quarter because the superintendent is senior.",
+  "As grounds to withhold the next call-off payment until WS-A adopts the format.",
+  "As a safety reporting failure, because paperwork is part of every safety system on a well site."],
+ "In this course a KPI is an indicator the contract states. The UK Procurement Act 2023, s.52(4), defines a key performance indicator as a measure against which a supplier's performance of a contract can be assessed, and the World Bank Regulations tie KPIs to the requirements of the contract (Annex XI para 2.4). A preference the framework never states is a management measure: it can be raised, or written in through the change clause, but it carries no contractual remedy. Relabelling it as safety reporting stretches a stated KPI past its definition.",
+ ['P036', 'P043'])
+
+q(0, "How does the UK Procurement Act 2023, s.52(4), define a key performance indicator?",
+ "A factor or measure against which a supplier's performance of a contract can be assessed during its life-cycle.",
+ ["Any figure a buyer collects about a supplier, whether or not the contract mentions it.",
+  "A target the supplier sets for itself after award and reports once a year.",
+  "A price reduction applied automatically when the supplier falls short."],
+ "Section 52(4) of the UK Procurement Act 2023 defines a key performance indicator as a factor or measure against which a supplier's performance of a contract can be assessed during the life-cycle of the contract. A figure the buyer collects on its own is a management measure, a supplier's private target is not the buyer's measure, and a price reduction for a missed level is a service credit.",
+ ['P036'])
+
+q(1, "A colleague says that EKC-02, the synthetic MV-B vessel charter, must carry at least three KPIs because the UK Procurement Act 2023, s.52(1), requires them above £5 million. What is the sound response?",
+ "Section 52(1) binds UK contracting authorities only; it is practice for Ekene.",
+ ["The colleague is right, since the UK Act applies to every charter above £5 million anywhere in the world.",
+  "The colleague is right, but only if MV-B is registered in the United Kingdom.",
+  "Section 52(1) sets a ceiling of three KPIs, so the charter may carry fewer but never more than three."],
+ "The UK Procurement Act 2023, s.52(1), says a contracting authority must set at least three key performance indicators before entering into a public contract with an estimated value of more than £5 million. It binds UK contracting authorities only, and no Ekene contract is governed by it, whatever the supplier's country. It also sets a floor of three: the section places no ceiling on the number.",
+ ['P035'])
+
+q(3, "Where they are needed, what are key performance indicators set to do under Annex XI para 2.4 of the World Bank's Regulations for IPF Borrowers?",
+ "Confirm that the contractor performs satisfactorily and meets the contract's requirements.",
+ ["Rank the suppliers on a contract against each other, so the weakest can be dropped at the next tender round.",
+  "Replace the contract's payment clauses with a single monthly score that the manager converts into a fee.",
+  "Set targets that change each quarter at the contract manager's choice."],
+ "Annex XI para 2.4, taught by concept, sets KPIs where needed to confirm that the contractor performs satisfactorily and meets the requirements of the contract. They measure performance against the contract; they do not rewrite its payment terms, rank bidders for a new tender, or move at the manager's whim.",
+ ['P043'])
+
+q(0, "For the contracts a borrower's procurement strategy identifies, where do the World Bank Procurement Regulations (Seventh Edition, Annex I para 3.7) place the key performance indicators and milestone events?",
+ "In the contract management plan the borrower prepares for that contract.",
+ ["In the supplier's own quality manual, which the manager reads at each quarterly review.",
+  "In a separate side letter sent to the supplier after the first milestone is complete.",
+  "In the tender advertisement only, with nothing about them carried into execution."],
+ "Annex I para 3.7, taught by concept, has the borrower prepare, for the contracts its procurement strategy identifies, a contract management plan that sets key performance indicators and milestone events. So a KPI is tied to the contract's requirements and written into the plan. A supplier's quality manual, a later letter or a tender advertisement is not where the Regulations put them.",
+ ['P019'])
+
+q(2, "Ekene's draft scorecard for EKC-03, the synthetic CF-C camp services contract, lists twenty-four indicators for the catering service alone. What does the UK Sourcing Playbook (June 2023), Chapter 5, warn?",
+ "More than 10 to 15 KPIs per service leads to overcomplicated contracts and ambiguity.",
+ ["The more indicators a service carries, the less room a supplier has to argue about what it owes.",
+  "The number of indicators does not matter so long as each one has a credit.",
+  "Every indicator must be weighted equally, whatever the service."],
+ "The Sourcing Playbook, Chapter 5, warns that having too many KPIs (more than 10 to 15 per service) will lead to overcomplicated contracts and ambiguity with suppliers. It is UK practice, and the point for any contract is that each indicator should earn its place. More measures breed more ambiguity on the Playbook's own warning, and neither credits nor equal weights cure too many of them.",
+ ['P040'])
+
+q(1, "EKC-06 is a synthetic instrument maintenance contract with IM-F (synthetic), with KPIs for planned work completed and repeat failures. Planned work completed has been high for three months while the same instruments keep failing. Which UK Contract Management Principle explains why the second KPI matters?",
+ "Principle 7: a balanced scorecard of hard and soft measures, focused on outcomes.",
+ ["Principle 1, on appointing resource and handing over from sourcing well before the contract is awarded.",
+  "Principle 4, which says to drop any indicator the supplier finds easy to meet and keep only the hard ones.",
+  "Principle 2, which makes the supplier accountable for choosing the indicators."],
+ "The UK Contract Management Principles, principle 7, ask for a balanced scorecard measuring hard data such as KPI performance alongside soft measures, with a focus on achievement of outcomes. A high planned work score beside repeat failures shows one indicator met at the expense of the outcome, and the second one catches it. Principles 1 and 2 concern resourcing and roles, and principle 4 is about directing resource by risk.",
+ ['P041'])
+
+q(3, "Under the UK Cabinet Office guidance on KPIs under the Procurement Act 2023 (para 10), when does the duty to set at least three KPIs fall away?",
+ "Where performance could not appropriately be assessed through KPIs.",
+ ["Where the supplier objects to KPIs in writing before the contract is signed.",
+  "Where the contract is worth more than £5 million and has a service level already.",
+  "Where the buyer has no contract manager available to read the scores each quarter."],
+ "The UK KPI guidance (para 10) says the duty falls away where the authority considers that performance could not appropriately be assessed through KPIs, and gives a one-off delivery of off-the-shelf goods as its example. A supplier's objection, a staffing gap or an existing service level does not remove the duty. It is UK practice, and for Ekene the lesson is that a simple supply may need an acceptance check and nothing more.",
+ ['P037'])
+
+q(0, "EKC-03 is a synthetic camp catering contract with CF-C (synthetic): a fixed monthly fee, with service credits deducted when a stated level is missed. Two cleanliness audits this month scored below the stated level, and CF-C invoices the full fee. What should the manager do?",
+ "Apply the credit the contract states, with the two audit results as evidence, and record it.",
+ ["Pay the full fee and raise the two audits at the annual review, to keep the relationship smooth.",
+  "Deduct a larger sum than the contract states, to make sure CF-C takes the cleanliness audits seriously.",
+  "Agree with CF-C by phone to waive the credit this month if next month is better."],
+ "A service credit is the stated deduction the contract applies when a level is missed, applied as the contract says with its evidence and recorded. The UK Government Functional Standard GovS 008 (version 2.2) at 5.4.4 says payments should be audited periodically to ensure they reflect the contract terms and service levels received. Waiving a credit informally or adding one the contract does not state both depart from the terms, and delay leaves the invoice wrong.",
+ ['P054'])
+
+q(1, "After applying the credit for a missed maintenance response level on EKC-03, the synthetic CF-C contract, what does the World Bank Contract Management Practice guidance (p.94, item 10) expect next?",
+ "Finding the underlying cause, and dealing with it through an action plan.",
+ ["Nothing further, since the credit has already settled the matter in full for both sides.",
+  "Replacing CF-C at once, since any missed service level ends the contract automatically.",
+  "Doubling the credit next month if the same level is missed again by CF-C's team."],
+ "The World Bank guidance, taught by concept, expects the underlying cause of a missed KPI to be found and the problem dealt with through an action plan. The same habit fits a missed service level: a credit adjusts the price, and it does not fix the service. Replacing a supplier is no Associate step, and a doubled credit appears nowhere in the contract.",
+ ['P042'])
+
+q(2, "What does the UK Government Functional Standard GovS 008 (version 2.2) say at 5.4.4 about payments to suppliers?",
+ "They should be audited periodically to check they reflect the contract terms and service levels received.",
+ ["They should be made in advance each quarter, so suppliers can fund their work.",
+  "They should always be held until the contract closes.",
+  "They should be set by the supplier's own report."],
+ "GovS 008 at 5.4.4 says payments should be audited periodically to ensure they reflect the contract terms and service levels received from suppliers. That is UK practice and a useful check on any Ekene contract with service levels. Paying in advance, holding every payment to close or paying on the supplier's own word all cut the link between payment and service.",
+ ['P054'])
+
+q(0, "EKC-02 is a synthetic vessel charter with MV-B (synthetic), with availability as its service level. Ekene's log shows the vessel unavailable after an engine fault; MV-B says part of that time it was waiting for a berth. What does the World Bank Contract Management Practice guidance (Figure XIV) point the manager to?",
+ "Records made at the time: performance, communications and notices, dates, and who was involved.",
+ ["MV-B's account of events, since the supplier knows its own vessel.",
+  "A memo written today from memory by whoever was on shift.",
+  "The average availability of other vessels in the area."],
+ "The World Bank guidance, taught by concept, lists what to record: how the supplier performed and delivered, every communication and notice, the dates and who was involved. Records made at the time, such as the daily log, engine and deck logs and berth records, are compared against the charter's definition of availability. A memo written later, one side's account or other vessels' figures cannot settle this vessel's hours.",
+ ['P160'])
+
+q(3, "The UK Cabinet Office guidance on KPIs under the Procurement Act 2023 (para 14) sets how often a UK contracting authority assesses a supplier against its KPIs. What does it say?",
+ "At least once in every twelve months, and on termination.",
+ ["Only once, at the end of the contract, when all the data is in.",
+  "Every month without exception, whatever the length of the contract.",
+  "Whenever the supplier asks for its score, and at no other time."],
+ "The UK KPI guidance (para 14) requires the authority, at least once in every twelve month period during the lifetime of the contract and on termination, to assess the supplier's performance against those KPIs. That duty binds UK contracting authorities. The practice it models for Ekene is simple: assess on a fixed cycle, against the stated indicator, so a disagreement is caught early.",
+ ['P038'])
+
+q(1, "Which list gives the five ratings that published KPI assessments use under the UK Procurement Act 2023 regime, as the UK KPI guidance (para 15) sets them out?",
+ "Good, Approaching target, Requires improvement, Inadequate, and Other.",
+ ["Excellent, Good, Fair, Poor and Failed, as the Board sets them for all operators.",
+  "Green, Amber and Red, with no further categories allowed.",
+  "Pass and Fail only, one of them for each of the stated KPIs."],
+ "The UK KPI guidance (para 15 and its table, from regulation 39(5)) gives five ratings: Good (meeting or exceeding the KPI), Approaching target, Requires improvement (below the KPI), Inadequate (significantly below the KPI) and Other. The Board has no role in UK ratings, and traffic lights or pass and fail are not the published scale.",
+ ['P039'])
+
+q(2, "EKC-06, the synthetic IM-F instrument maintenance contract, is being reviewed so the next contract is written better. Which question does the UK Sourcing Playbook (June 2023), Chapter 13, put for this kind of lessons learned analysis?",
+ "Did the KPIs drive the required behaviours and outcomes from the contract?",
+ ["Did the supplier agree with every score it was given during the life of the contract?",
+  "How many more KPIs could be added to the next contract to close every gap?",
+  "Which of the KPIs was the cheapest for the team to measure each month?"],
+ "The Sourcing Playbook, Chapter 13, asks whether the KPIs drove the required behaviours and outcomes from the contract, as part of knowledge transfer and lessons learned analysis. A manager who saw planned work scored high while repeat failures continued records that, so the next contract is written better. Agreement on scores, measurement cost and adding more indicators miss the question.",
+ ['P196'])
 
 emit(Q, '/root/cat-wip-contracts/banks/sc5b_m04.json', expect_n=15)
 finish()
