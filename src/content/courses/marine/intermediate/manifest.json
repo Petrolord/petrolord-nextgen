@@ -1,0 +1,362 @@
+{
+ "app_slug": "marine",
+ "tier": "intermediate",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-demand-over-a-period",
+   "title": "Demand over a Period",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-weekly-demand-per-installation",
+     "title": "Weekly demand per installation",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "marine-voyage-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-demand-over-capacity-per-constraint",
+     "title": "Demand over capacity per constraint",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "marine-voyage-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-minimum-visits",
+     "title": "Minimum visits",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "marine-voyage-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-what-drives-the-voyage-count",
+     "title": "What drives the voyage count",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "marine-voyage-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-voyages-and-vessel-days",
+   "title": "Voyages and Vessel-Days",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-rounding-voyages-up-or-not-at-all",
+     "title": "Rounding voyages up or not at all",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "marine-voyage-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-voyage-days-and-vessel-days",
+     "title": "Voyage days and vessel-days",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "marine-voyage-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-dedicated-voyages-sized-one-by-one",
+     "title": "Dedicated voyages sized one by one",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "marine-voyage-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-a-voyage-longer-than-the-days-available",
+     "title": "A voyage longer than the days available",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "marine-voyage-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-vessels-required",
+   "title": "Vessels Required",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-available-days-and-the-period",
+     "title": "Available days and the period",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "marine-voyage-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-rounding-vessels",
+     "title": "Rounding vessels up, to the nearest or not at all",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "marine-voyage-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-spare-and-short-vessel-days",
+     "title": "Spare and short vessel-days",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "marine-voyage-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-fleet-utilisation-and-fuel-for-the-period",
+     "title": "Fleet utilisation and fuel for the period",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "marine-voyage-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-a-psv-or-an-ahts-for-the-same-demand",
+     "title": "A PSV or an AHTS for the same demand",
+     "order": 5,
+     "est_minutes": 14,
+     "panels": [
+      "marine-voyage-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-deck-cargo-and-footprints",
+   "title": "Deck Cargo and Footprints",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-items-footprints-and-units",
+     "title": "Items, footprints and units",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "marine-deck-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-area-bound-with-no-stacking",
+     "title": "The area bound with no stacking",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "marine-deck-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-lower-bound-on-voyages",
+     "title": "The lower bound on voyages",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "marine-deck-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-what-the-area-bound-leaves-out",
+     "title": "What the area bound leaves out",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "marine-deck-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-first-fit-decreasing",
+   "title": "First-Fit Decreasing",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-sorting-by-area",
+     "title": "Sorting by area",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "marine-deck-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-first-voyage-that-holds-a-unit",
+     "title": "The first voyage that holds a unit",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "marine-deck-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-ties-go-to-the-heavier-unit",
+     "title": "Ties go to the heavier unit",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "marine-deck-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-first-fit-in-the-booked-order",
+     "title": "First fit in the booked order",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "marine-deck-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-overflow-and-its-reasons",
+     "title": "Overflow and its reasons",
+     "order": 5,
+     "est_minutes": 14,
+     "panels": [
+      "marine-deck-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-published-packing-examples",
+   "title": "Published Packing Examples",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-two-capacities-one-list",
+     "title": "Two capacities, one list",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "marine-deck-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-when-a-larger-deck-needs-more-voyages",
+     "title": "When a larger deck needs more voyages",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "marine-deck-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-a-tight-worst-case",
+     "title": "A tight worst case",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "marine-deck-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "marine-voyage-calculator",
+      "marine-deck-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

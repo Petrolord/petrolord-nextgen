@@ -1,0 +1,27 @@
+{
+ "slug": "marine",
+ "prefix": "sc4",
+ "name": "Offshore & Marine Logistics",
+ "pathOrder": 78,
+ "module": "supply_chain",
+ "prerequisite": null,
+ "appCourse": "An APP COURSE (plan section 5; lead, SC3/SC4 course path orders). The Suite app is the Marine Logistics Planner (Suite #741, merged 9492102d6, /dashboard/apps/midstream-downstream/marine-logistics-planner), which vendors the same engine; the learning page names it and bridges to it. The practicals still run in the course's own four calculator panels (marine-voyage-calculator, marine-deck-calculator, marine-base-calculator, marine-variability-calculator) over the vendored engine engines/supplychain/marineLogistics.js, so a learner without a Suite seat can work every exercise. The same Associate/Professional/Expert certificate ladder as every app course; prerequisite null.",
+ "repo": "/root/wt-sc4-nextgen",
+ "branch": "feat/sc4-marine-course",
+ "goldens": [],
+ "goldensNote": "EMPTY BY DECISION, as EC11, EC10, EC9, EC8, SC2, EC7 and D5. The vendored golden test-data/supplychain/goldens/marine_cases.json carries oracle output beside its inputs. The digest reads its INPUTS only and prints the engine's own figures (and asserts every refusal message equals the golden's); naming the golden here would let numsweep resolve a lesson literal against an oracle figure the digest never prints.",
+ "engines": [
+  "engines/supplychain/marineLogistics.js",
+  "lib/stats/stats.js",
+  "lib/conventions/percentile.js"
+ ],
+ "enginesVendoredAt": "marineLogistics.js vendored sha-identical from petrolord-engines 110f0a0 (engines PRs #282 and #283) at its CANONICAL path by vendor_marine.sh, with its jest suite, golden, the ekene-marine fixture and README, the fixture writer, the oracle, the timing script, the negative control and FINDINGS-marine.md (with the lead's decisions of 2026-09-27): 10 new paths ledgered in VENDOR.json as kind extra, group sc4-marine-course; pin 54cf7c4 unchanged. Its runtime imports (lib/stats/stats.js, lib/conventions/percentile.js) were ALREADY vendored in NextGen at the 110f0a0 blobs, and at the same blobs on origin/main (proved, four proofs a path), so nothing shared moved. The suite passes 212 of 212 on NextGen's copies.",
+ "history": {
+  "position": "THIS COURSE TEACHES NO REPAIR HISTORY. The lead's decisions on the engine (the seven FINDINGS defaults accepted; Adan and Resing and Iversen cited for figures and formulas and never quoted; the Table 5.1 c = 5 figure taught as a printed slip; the Skoko PSV total left out because the rounded days do not reproduce it) landed before any lesson was written; that is provenance."
+ },
+ "cleared_claims": [
+  "The three rows differ only in what the weather input states, so a plan names both the factor and the activities.",
+  "The first three rows are three voyages of demand, whatever the double arithmetic leaves in the last digit; the fourth asks for a thousandth of a square metre more than three voyages carry, and rounds up to four."
+ ],
+ "cleared_claims_note": "Read by hand 2026-09-27: Section 9 prints exactly three rows (calm, the fixture factor on sailing and field, the factor on every activity) and they differ only in the weather input; Section 15's first three rows each return 3 voyages (engine) and the fourth 4."
+}
