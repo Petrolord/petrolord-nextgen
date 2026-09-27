@@ -41,7 +41,7 @@
    "1000.000000, the whole cost of the well it refused to fund"
   ],
   "answer": 1,
-  "explanation": "The engine prints C: participating interest 20.000000, proportionate share of the cost 200.000000, premium 600.000000. The premium rests on the cost of the well alone; 200.000000 is the base at 100 percent; the whole cost is carried by A and B."
+  "explanation": "The engine prints C: participating interest 20.000000, proportionate share of the cost 200.000000, premium 600.000000. The premium rests on the cost of the well alone; 200.000000 is the base at 100 percent; the whole cost is paid by A and B."
  },
  {
   "prompt": "PA, 25.000000 in the licence, is one of the three parties paid when PB buys in at the Norwegian 1000.000000 percent on the sidetrack. What is PA's part?",
@@ -68,7 +68,7 @@
  {
   "prompt": "A buy-in call is refused when it states production years. Which back-in call does the engine refuse in the same shape?",
   "options": [
-   "One with refundForm \"upfront\" that also states years: years must be left out when refundForm is \"upfront\"",
+   "One with refundForm \"upfront\" that also states years, refused by naming `years`",
    "One under basis \"contract\" that states exploration among its refundable kinds of cost",
    "One under basis \"pia-s85-4\" that recovers the refund from future entitlement over years",
    "One whose years run past the last year the back-in party's refund can be recovered"
@@ -77,12 +77,12 @@
   "explanation": "Both refusals name `years` and print what they were given: years must be left out when mode is \"buy-in\", and years must be left out when refundForm is \"upfront\". A contract may state exploration as refundable (backin-ekene-contract-upfront does), recovery from future entitlement is how the Act's refund runs, and a refund not recovered by the last year is a result."
  },
  {
-  "prompt": "Under monthly compounding at 8.25 percent on a 360-day year, a cure four days late with a 72-hour grace (default-grace-compound-exceeded) yields which default interest on PB's 2000000.000000?",
+  "prompt": "Under monthly compounding at 8.25 percent on a 360-day year, a cure four days late with a 72-hour grace (default-grace-compound-exceeded) yields which default interest on PB's 2000000.000000, under the engine's stated grace reading?",
   "options": [
    "0.000000, as monthly compounding starts only after the first whole month",
    "1375.000000, as the 72 hours of grace come off the 4 days before interest",
    "20210.781250, the Kenya figure for 1 whole month and 14 days",
-   "1833.333333, the same as simple interest, as 0 whole months have passed"
+   "1833.333333, 4 days at the daily rate, as 0 whole months have passed"
   ],
   "answer": 3,
   "explanation": "The engine's reason reads interest 2000000 x ((1 + 8.25% / 12)^0 x (1 + 8.25% x 4 days / 360) - 1), 0 whole months and 4 days = 1833.33, with the grace exceeded so interest runs from the due date. Under its stated reading nothing comes off for the grace, and 20210.781250 belongs to a cure on 2027-04-15."
@@ -132,7 +132,7 @@
   "explanation": "The cover is the engine's stated reading, by paying interests among the non-defaulting parties; the interests after an assignment follow Norway JOA Art. 9.4, pro rata by participating interest, with the compensation not computed. That second rule is no reading, and it brings NOC in at 23.529412."
  },
  {
-  "prompt": "The Ekene default is left open to asOf 2027-07-01, 122 days after the due date. What default interest does the engine return on simple interest at 8.25 percent, 360-day basis, and on monthly compounding?",
+  "prompt": "The Ekene default is left open to asOf 2027-07-01, 122 days after the due date. What default interest does the engine return on simple interest at 8.25 percent, 360-day basis, no grace, and on monthly compounding?",
   "options": [
    "55916.666667 on both, as a default still open is charged simple interest",
    "55916.666667 simple and 55569.791577 compounded monthly over 4 whole months",
@@ -158,7 +158,7 @@
   "options": [
    "Zero, taken as the pool, with a note that the haircut is pending",
    "A pool cut by the minimum 55% haircut of s.311 from the stated capex",
-   "openingCostPool must be a finite number at or above 0; got nothing",
+   "A refusal naming openingCostPool, a required input with no default",
    "A pool carried from the cash call ledger of the same joint venture"
   ],
   "answer": 2,
@@ -278,12 +278,12 @@
   "prompt": "A default call states its suspension in \"business-days\". What does the engine answer?",
   "options": [
    "Business-days read as working-days, the nearest unit it knows",
-   "suspension.unit must be one of \"calendar-days\", \"working-days\", \"months\"; got \"business-days\"",
+   "A refusal naming suspension.unit, with \"business-days\" quoted back",
    "It counts calendar days, the unit left when a stated unit is unknown",
    "It drops the suspension and reports the forfeiture alone"
   ],
   "answer": 1,
-  "explanation": "The engine refuses the unit it cannot read and quotes it back, and it never swaps one unit for another or drops a stated consequence. Working days, calendar days and months are the three units it counts."
+  "explanation": "The engine refuses the unit it cannot read and quotes it back, in its own words: suspension.unit must be one of \"calendar-days\", \"working-days\", \"months\"; got \"business-days\". It never swaps one unit for another or drops a stated consequence. Working days, calendar days and months are the three units it counts."
  },
  {
   "prompt": "backin-ekene-contract-upfront backs NOC in from 20 to 40 percent under basis \"contract\", with refundable kinds stated as exploration and development and the refund paid upfront. What refund does the engine return?",
@@ -302,7 +302,7 @@
    "A refund paid at once, since the Act lets the contract choose between cash and kind",
    "A refund paid upfront with its uplift removed, as s.85(4)(c) excludes interest",
    "refundForm must be \"from-future-entitlement\" under basis \"pia-s85-4\": no upfront payment by the Government (s.85(4)(d))",
-   "refundableKinds must be left out under basis \"pia-s85-4\" (development and production)"
+   "refundableKinds must be left out under basis \"pia-s85-4\" (development and production, s.85(4)(c))"
   ],
   "answer": 2,
   "explanation": "The engine refuses a term the Act fixes: s.85(4)(d) forbids an upfront payment by the Government and s.85(4)(f) sets the refund in cash or in kind from future production or entitlements. The refundable-kinds refusal is another rule, raised when kinds are stated under the Act."
@@ -378,8 +378,8 @@
   "options": [
    "A cover by NOC alone of all three unpaid shares, as the only party left that has not defaulted",
    "A result in which the three defaulters cover one another in proportion to their paying interests",
-   "interest.graceHours must be stated; the grace reading, which applies whenever three parties default",
-   "defaulters must be leaving at least one non-defaulting party with a paying interest above 0; the cover reading"
+   "A refusal naming interest.graceHours; the grace reading, which acts whenever three parties default",
+   "A refusal naming `defaulters`, as no paying party is left to cover; the cover reading"
   ],
   "answer": 3,
   "explanation": "The engine's message reads defaulters must be leaving at least one non-defaulting party with a paying interest above 0; got [\"EKO\",\"PA\",\"PB\"]. Under the cover reading only parties that pay cost advance cash, and carried NOC pays none, so nobody is left to cover."
@@ -389,11 +389,11 @@
   "options": [
    "Zero unpaid and no default interest, since PB owes nothing on the call",
    "A cover of 0.000000 by EKO and PA with PB's consequences reported as not triggered",
-   "defaulters[0].paid must be below the party's share of the call 2250000 (a party that paid its share is not in default)",
+   "A refusal naming defaulters[0].paid, as a party that paid its share is not in default",
    "A result that treats PB's payment as an over-call credited to its next cash call"
   ],
   "answer": 2,
-  "explanation": "The boundary table reads paid EQUAL to the share: refused: no default. The engine refuses the call, since a party that paid its share is not in default, so it returns no zero default, reports no consequences, and a cash call over-call is another function's matter."
+  "explanation": "The boundary table reads paid EQUAL to the share: refused: no default. In the engine's own words: defaulters[0].paid must be below the party's share of the call 2250000 (a party that paid its share is not in default); got 2250000. The engine refuses the call, so it returns no zero default, reports no consequences, and a cash call over-call is another function's matter."
  },
  {
   "prompt": "A carry recovery call names the PIA s.85(4) basis and also a compound uplift of 8 percent a year. Which message results?",

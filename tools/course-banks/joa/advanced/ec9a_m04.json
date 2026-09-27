@@ -137,7 +137,7 @@
    "Both are refused, as the Act lets the Government participate only below 60 percent of the contract",
    "Both are accepted, as the Act's figure is a stated input that a call may raise at will",
    "60 is refused and 61 accepted, as the Act reads the 60 percent as a floor on entry",
-   "60 is accepted; 61 is refused: targetPct must be at most 60 under basis \"pia-s85-4\""
+   "60 is accepted and 61 refused, the Act's 60 percent being a ceiling the engine applies"
   ],
   "answer": 3,
   "explanation": "PIA s.85(4)(a) gives the right to participate up to 60%, so a target of exactly 60 is accepted (60.000000) and 61 is refused: targetPct must be at most 60 under basis \"pia-s85-4\" (the right to participate up to 60%, PIA s.85(4)(a)); got 61. The engine applies the Act's figure itself under the stated basis, so no call can raise it."

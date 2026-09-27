@@ -11,7 +11,7 @@
   "explanation": "The engine's reason reads PB: to enter it pays 1000% of its share 2700000 = 27000000, apportioned to the consenting parties in their shares. 10800000.000000 is the premium at the stated 400.000000 percent in the other mode; the whole cost and the bare share each leave out the stated multiple on the proportionate share."
  },
  {
-  "prompt": "PB pays 27000000.000000 to enter the Ekene-4 sidetrack, which EKO (40.000000), PA (25.000000) and NOC (20.000000) carried. How much of that payment goes to EKO?",
+  "prompt": "PB pays 27000000.000000 to enter the Ekene-4 sidetrack, which EKO (40.000000), PA (25.000000) and NOC (20.000000) funded. How much of that payment goes to EKO?",
   "options": [
    "10800000.000000, the payment times EKO's participating interest in the licence",
    "12705882.352941, the payment times EKO's share of the project",
@@ -48,7 +48,7 @@
   "options": [
    "It counts EKO once and apportions the entry payment among EKO, PA and NOC",
    "It counts EKO twice, so EKO receives a double share of PB's entry payment",
-   "It refuses: consenting[1] must be an id not already listed; got \"EKO\"",
+   "It refuses the call, naming consenting[1] and quoting the repeated \"EKO\" back",
    "It reads the second EKO as PB and computes PB's entry"
   ],
   "answer": 2,
@@ -82,7 +82,7 @@
    "It applies one thousand percent, the only multiple a public text prints for entry",
    "It applies 100 percent, the cost alone, as the lowest multiple it would accept",
    "It returns the payment as 0.000000 with a note that the multiple is missing",
-   "It holds no copy of it and refuses: premiumMultiplePct must be a number at or above 100; got nothing"
+   "It holds no copy of it and refuses the call, naming premiumMultiplePct as missing"
   ],
   "answer": 3,
   "explanation": "A missing multiple stops the call: the engine answers premiumMultiplePct must be a number at or above 100 (a stated contract figure; 100 recovers the cost alone); got nothing. One thousand percent is what the Norwegian text prints for its own agreement, and the engine keeps no copy of it, supplies no floor of its own and prints no zero payment."
@@ -110,7 +110,7 @@
   "explanation": "The engine lists nonConsent's return as the consenting parties' cost shares, each non-consenting party's premium, and either its buy-in payment or the recovery ledger with the year its interest reverts. It carries no NPV of its own, adds nothing to an unrecovered premium, and prints the shares of the project itself."
  },
  {
-  "prompt": "On the Norwegian buy-in call, a learner removes NOC from `consenting`, so PB and NOC both decline and EKO (40.000000) and PA (25.000000) carry the sidetrack. What share of the project does the engine now give EKO?",
+  "prompt": "On the Norwegian buy-in call, a learner removes NOC from `consenting`, so PB and NOC both decline and EKO (40.000000) and PA (25.000000) fund the sidetrack. What share of the project does the engine now give EKO?",
   "options": [
    "47.058824, the share it held while three parties consented to the operation",
    "61.538462, its 40.000000 over the 65 points that still consent",

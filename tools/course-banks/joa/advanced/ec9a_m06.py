@@ -57,10 +57,10 @@ x("The engine's reason for 2032 on carry-ekene-compound reads \"10400000 recover
 
 # 6
 x("A learner pastes a cash call ledger of 601 months into a cashCalls call. What does the engine answer?",
- "months must have at most 600 entries; got 601",
+ "A refusal naming `months`, as 601 entries pass the cap of 600",
  ["It computes the first 600 months and drops the last one with a note",
   "It computes all 601 months, since the cap is a guide for the panels",
-  "months[600].month must be a month 'YYYY-MM'; got the extra entry"],
+  "A refusal naming months[600] alone, the one entry past the cap"],
  "`DEFAULTS.MAX_MONTHS` is 600, the most months in one cash call ledger, and a call over it is refused in the engine's own words: months must have at most 600 entries; got 601. The engine never truncates a stated input, and the cap binds every call, a panel's included.")
 
 # 7
@@ -112,7 +112,7 @@ x("How far may the participating interests of a call sum from 100 before `partic
  "`DEFAULTS.SUM_TOLERANCE` is 1e-9, an engine convention for how far participating interests or carrier shares may sum from 100, and the refusal reads parties must have participatingPct summing to 100; got a sum of 90. Six decimals is the course's print precision, which sets no tolerance, and the 10 percent is a budget term of another text.")
 
 # 13
-x("The Ekene March default (PB's unpaid 2000000.000000, 8.25 percent simple, 45 days) gives 20625.000000 on the stated 360-day basis. A probe states a 365-day basis for the same default. What does the engine return, and why does a report name the basis?",
+x("The Ekene March default (PB's unpaid 2000000.000000, 8.25 percent simple, no grace, 45 days) gives 20625.000000 on the stated 360-day basis. A probe states a 365-day basis for the same default. What does the engine return, and why does a report name the basis?",
  "20342.465753, since the day basis is a stated term that moves the figure",
  ["20625.000000, since the engine converts every stated basis to 360 days",
   "20210.781250, since a 365-day year compounds the interest monthly",

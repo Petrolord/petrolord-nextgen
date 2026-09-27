@@ -112,7 +112,7 @@ x("On default-cured-on-trigger-day, PB's suspension is stated at 5 working-days 
 
 # 13
 x("Under basis \"pia-s85-4\", NOC backs in on backin-pia-at-60 to a target of exactly 60, and on backin-refuse-pia-61 to 61. What does the engine return?",
- "60 is accepted; 61 is refused: targetPct must be at most 60 under basis \"pia-s85-4\"",
+ "60 is accepted and 61 refused, the Act's 60 percent being a ceiling the engine applies",
  ["Both are refused, as the Act lets the Government participate only below 60 percent of the contract",
   "Both are accepted, as the Act's figure is a stated input that a call may raise at will",
   "60 is refused and 61 accepted, as the Act reads the 60 percent as a floor on entry"],

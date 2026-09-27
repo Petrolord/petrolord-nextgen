@@ -71,7 +71,7 @@
    "Refuses the call, as 80.000000 exceeds the ceiling the Act allows a renegotiated PSC",
    "Reports it in its basis only and applies the contract's stated 80.000000",
    "Caps the ceiling at 60.000000 in every year and notes in a reason the change it made",
-   "Applies 60.000000 to the first two years, when the carry of 250 builds, and 80.000000 after"
+   "Applies 60.000000 to the first two years, while the pool of 250 is carried forward, and 80.000000 after"
   ],
   "answer": 1,
   "explanation": "The engine's basis reads: PIA s.311(2)(a)(iii): a renegotiated production sharing contract features a cost oil limit of not more than 60% of the total oil production; the limit here is the contract's stated figure. `PIA_JV.renegotiatedPscCostOilLimitPct` of 60.000000 is reported in the basis only, and the IMF case reproduces its ceilings on the stated 80.000000."
@@ -93,7 +93,7 @@
    "A capped share of 100, so that the government takes no profit oil at all in that year",
    "It reads 120 as a sliding scale result and accepts it, since the scale is worked outside",
    "It refuses naming contractorProfitSharePct at the top level, as the year cannot hold one",
-   "years[0].contractorProfitSharePct must be a number from 0 to 100; got 120"
+   "It refuses by the year's own path, as a stated share must lie from 0 to 100"
   ],
   "answer": 3,
   "explanation": "The engine checks that a stated share is a percentage and refuses by the year's path: years[0].contractorProfitSharePct must be a number from 0 to 100; got 120. It never trims a stated figure, and a year may state its own share, which is how a scale worked outside reaches the engine."
@@ -101,13 +101,13 @@
  {
   "prompt": "A learner adds a date to the `operation` block of the Ekene-4 sidetrack call, to model a later sole risk development under Norway JOA Art. 19. What does the engine answer?",
   "options": [
-   "operation.date is not an accepted key; the accepted keys of operation are name, cost",
+   "A refusal of the unknown key operation.date, listing name and cost as its accepted keys",
    "Premium recovery that starts its ledger in the year of the stated date",
    "A bar on later entry, computed from the date under the terms of Art. 19",
    "A buy-in payment indexed from the stated date to the year of the entry"
   ],
   "answer": 0,
-  "explanation": "The engine computes sole risk operations only: one operation, one cost and the years of its net value. Sole risk development and the bar on later entry (Norway JOA Art. 19) are not computed, and the unknown key is refused in the engine's own words."
+  "explanation": "The engine computes sole risk operations only: one operation, one cost and the years of its net value. Sole risk development and the bar on later entry (Norway JOA Art. 19) are not computed, and the unknown key is refused in the engine's own words: operation.date is not an accepted key; the accepted keys of operation are name, cost."
  },
  {
   "prompt": "Norway Accounting Agreement Art. 2.2.2 adjusts its overhead bands each year on the consumer price index as published by Statistics Norway per 15 July of the current year. What does the engine's overhead function do about that?",

@@ -39,7 +39,7 @@ x("PB, holding 15.000000 percent, declines the Ekene-4 operation costing 1800000
 
 # 4
 x("A learner lists all four Ekene parties, EKO, PA, PB and NOC, in `consenting` on a nonConsent call. What does the engine return?",
- "A refusal: consenting must be leaving at least one non-consenting party (every party consents: a joint operation)",
+ "A refusal naming `consenting`, since a call in which every party consents is a joint operation",
  ["A result in which every premium is 0.000000 and the whole cost is split between the four parties by participating interest",
   "A refusal naming premiumMultiplePct, since no multiple can apply when nobody declines",
   "A result that treats the last party listed as the declining one and computes that party's premium at the stated multiple"],
@@ -49,7 +49,7 @@ x("A learner lists all four Ekene parties, EKO, PA, PB and NOC, in `consenting` 
 x("Which statement about the premium multiple matches the engine's nonConsent refusals?",
  "Below 100 is refused, and exactly 100 is accepted and returns the proportionate share alone",
  ["Below 100 is accepted and read as a discount on the proportionate share, so the premium is smaller than the cost",
-  "Exactly 100 is refused, because a premium must add something on top of the cost the consenting parties carried",
+  "Exactly 100 is refused, because a premium must add something on top of the cost the consenting parties funded",
   "A missing multiple is replaced with the Norwegian one thousand percent"],
  "The engine's message is premiumMultiplePct must be a number at or above 100 (a stated contract figure; 100 recovers the cost alone). A stated 50 is refused, and so is a call that states nothing; on the golden case where A alone consents at 100.000000 percent, B's premium is 300.000000 on a share of 300.000000. The engine holds no Norwegian figure.")
 
@@ -119,7 +119,7 @@ x("Which use of the word \"premium\" follows the rule this course legislates for
 
 # 14
 x("A learner types \"penalty\" as the `mode` of a nonConsent call on the Ekene-4 sidetrack. What does the engine answer?",
- "A refusal: mode must be one of \"recover-from-production\", \"buy-in\"; got \"penalty\"",
+ "A refusal naming `mode`, listing the two modes it reads and quoting \"penalty\" back",
  ["A premium recovery ledger, read as a penalty with the stated multiple of 400.000000",
   "A buy-in payment, the mode the engine applies when the stated one is not known",
   "A refusal naming premiumMultiplePct, as a penalty mode carries no stated multiple"],

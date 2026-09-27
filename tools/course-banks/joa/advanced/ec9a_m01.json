@@ -37,7 +37,7 @@
   "options": [
    "A result in which every premium is 0.000000 and the whole cost is split between the four parties by participating interest",
    "A refusal naming premiumMultiplePct, since no multiple can apply when nobody declines",
-   "A refusal: consenting must be leaving at least one non-consenting party (every party consents: a joint operation)",
+   "A refusal naming `consenting`, since a call in which every party consents is a joint operation",
    "A result that treats the last party listed as the declining one and computes that party's premium at the stated multiple"
   ],
   "answer": 2,
@@ -48,7 +48,7 @@
   "options": [
    "Below 100 is refused, and exactly 100 is accepted and returns the proportionate share alone",
    "Below 100 is accepted and read as a discount on the proportionate share, so the premium is smaller than the cost",
-   "Exactly 100 is refused, because a premium must add something on top of the cost the consenting parties carried",
+   "Exactly 100 is refused, because a premium must add something on top of the cost the consenting parties funded",
    "A missing multiple is replaced with the Norwegian one thousand percent"
   ],
   "answer": 0,
@@ -148,7 +148,7 @@
    "A premium recovery ledger, read as a penalty with the stated multiple of 400.000000",
    "A buy-in payment, the mode the engine applies when the stated one is not known",
    "A refusal naming premiumMultiplePct, as a penalty mode carries no stated multiple",
-   "A refusal: mode must be one of \"recover-from-production\", \"buy-in\"; got \"penalty\""
+   "A refusal naming `mode`, listing the two modes it reads and quoting \"penalty\" back"
   ],
   "answer": 3,
   "explanation": "The engine refuses the field it cannot read and quotes the value back: mode must be one of \"recover-from-production\", \"buy-in\"; got \"penalty\". It never substitutes a mode, and the multiple on the call was stated, so the refusal names `mode` alone."

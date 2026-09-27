@@ -55,15 +55,15 @@
   "explanation": "The engine's grace reading: a default cured within it carries no interest; one cured later carries interest from the due date, as the Kenya Model PSC 2015 Participation Agreement Art. 6.7 prints. 96 hours exceed 72, so the engine charges 4 days: 1833.333333. 1375.000000 is the 3-day figure of the 71.5-hour case; 20625.000000 belongs to the cure on 2027-04-15."
  },
  {
-  "prompt": "A contract states a grace of 71.5 hours. PB's unpaid 2000000.000000 arrives on 2027-03-04, three days after it fell due, at 8.25 percent simple on a 360-day year. What default interest results?",
+  "prompt": "A contract states a grace of 71.5 hours. PB's unpaid 2000000.000000 arrives on 2027-03-04, three days after it fell due, at 8.25 percent simple on a 360-day year. What default interest results under the engine's stated grace reading?",
   "options": [
    "0.000000, because three whole days is how the engine rounds any grace stated in hours for a cure",
    "1375.000000, because 72 hours exceed the stated 71.5 and interest runs from the due date",
    "1833.333333, because a grace that is exceeded adds a day of penalty to the count",
-   "One day of interest, for the part of the default that ran past the grace"
+   "A refusal, since a grace must be stated in whole days of 24 hours each"
   ],
   "answer": 1,
-  "explanation": "The engine counts the grace in hours, days x 24 from the due date: 3 days are 72 hours, beyond 71.5, so the grace is exceeded and interest runs for all 3 days: 1375.000000. It rounds no grace to whole days and adds no penalty day, and under its stated reading interest runs from the due date, so a single day past the grace is no figure it returns."
+  "explanation": "The engine counts the grace in hours, days x 24 from the due date: 3 days are 72 hours, beyond 71.5, so the grace is exceeded and interest runs for all 3 days: 1375.000000. It rounds no grace to whole days, adds no penalty day and accepts a grace stated in fractions of an hour; under its stated reading interest runs from the due date."
  },
  {
   "prompt": "Which of these terms may a defaultCover, cashCalls or carryRecovery call leave out and still run?",
@@ -145,7 +145,7 @@
  {
   "prompt": "A pscCostRecovery call on the Ekene variant states royalty 12.500000 percent, `costOilLimitBase` \"gross\" and a cost oil limit of 90. What does the engine return?",
   "options": [
-   "A refusal: costOilLimitPct must be at or below the revenue left after royalty, 87.5% of gross",
+   "A refusal naming costOilLimitPct, since royalty leaves only 87.5 percent of gross",
    "A cost oil limit of 90 percent of gross, applied as the contract states it in every year",
    "A cost oil limit capped at 60 percent, the Act's ceiling for a renegotiated contract",
    "A cost oil limit of 87.5 percent of gross, reduced quietly to what royalty leaves"

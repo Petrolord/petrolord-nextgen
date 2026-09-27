@@ -58,9 +58,9 @@
   "prompt": "A learner pastes a cash call ledger of 601 months into a cashCalls call. What does the engine answer?",
   "options": [
    "It computes the first 600 months and drops the last one with a note",
-   "months must have at most 600 entries; got 601",
+   "A refusal naming `months`, as 601 entries pass the cap of 600",
    "It computes all 601 months, since the cap is a guide for the panels",
-   "months[600].month must be a month 'YYYY-MM'; got the extra entry"
+   "A refusal naming months[600] alone, the one entry past the cap"
   ],
   "answer": 1,
   "explanation": "`DEFAULTS.MAX_MONTHS` is 600, the most months in one cash call ledger, and a call over it is refused in the engine's own words: months must have at most 600 entries; got 601. The engine never truncates a stated input, and the cap binds every call, a panel's included."
@@ -132,7 +132,7 @@
   "explanation": "`DEFAULTS.SUM_TOLERANCE` is 1e-9, an engine convention for how far participating interests or carrier shares may sum from 100, and the refusal reads parties must have participatingPct summing to 100; got a sum of 90. Six decimals is the course's print precision, which sets no tolerance, and the 10 percent is a budget term of another text."
  },
  {
-  "prompt": "The Ekene March default (PB's unpaid 2000000.000000, 8.25 percent simple, 45 days) gives 20625.000000 on the stated 360-day basis. A probe states a 365-day basis for the same default. What does the engine return, and why does a report name the basis?",
+  "prompt": "The Ekene March default (PB's unpaid 2000000.000000, 8.25 percent simple, no grace, 45 days) gives 20625.000000 on the stated 360-day basis. A probe states a 365-day basis for the same default. What does the engine return, and why does a report name the basis?",
   "options": [
    "20625.000000, since the engine converts every stated basis to 360 days",
    "20342.465753, since the day basis is a stated term that moves the figure",

@@ -23,7 +23,7 @@ x("On the golden input nc-ekene-buy-in-norway-1000, PB (participating interest 1
  "The engine's reason reads PB: to enter it pays 1000% of its share 2700000 = 27000000, apportioned to the consenting parties in their shares. 10800000.000000 is the premium at the stated 400.000000 percent in the other mode; the whole cost and the bare share each leave out the stated multiple on the proportionate share.")
 
 # 2
-x("PB pays 27000000.000000 to enter the Ekene-4 sidetrack, which EKO (40.000000), PA (25.000000) and NOC (20.000000) carried. How much of that payment goes to EKO?",
+x("PB pays 27000000.000000 to enter the Ekene-4 sidetrack, which EKO (40.000000), PA (25.000000) and NOC (20.000000) funded. How much of that payment goes to EKO?",
  "12705882.352941, the payment times EKO's share of the project",
  ["10800000.000000, the payment times EKO's participating interest in the licence",
   "8470588.235294, the part of the sidetrack's cost that EKO itself paid out",
@@ -48,7 +48,7 @@ x("A learner pastes the six production years of the sole risk box into a call wh
 
 # 5
 x("The `consenting` list of a buy-in call reads [\"EKO\", \"EKO\", \"PA\", \"NOC\"]. What does the engine do?",
- "It refuses: consenting[1] must be an id not already listed; got \"EKO\"",
+ "It refuses the call, naming consenting[1] and quoting the repeated \"EKO\" back",
  ["It counts EKO once and apportions the entry payment among EKO, PA and NOC",
   "It counts EKO twice, so EKO receives a double share of PB's entry payment",
   "It reads the second EKO as PB and computes PB's entry"],
@@ -72,7 +72,7 @@ x("The Ekene-4 sidetrack is run once as a buy-in at 1000.000000 percent and once
 
 # 8
 x("A buy-in call on the sidetrack leaves out `premiumMultiplePct` altogether. How does the engine treat the Norwegian one thousand percent?",
- "It holds no copy of it and refuses: premiumMultiplePct must be a number at or above 100; got nothing",
+ "It holds no copy of it and refuses the call, naming premiumMultiplePct as missing",
  ["It applies one thousand percent, the only multiple a public text prints for entry",
   "It applies 100 percent, the cost alone, as the lowest multiple it would accept",
   "It returns the payment as 0.000000 with a note that the multiple is missing"],
@@ -95,7 +95,7 @@ x("Which set of figures does a nonConsent call return, in either mode?",
  "The engine lists nonConsent's return as the consenting parties' cost shares, each non-consenting party's premium, and either its buy-in payment or the recovery ledger with the year its interest reverts. It carries no NPV of its own, adds nothing to an unrecovered premium, and prints the shares of the project itself.")
 
 # 11
-x("On the Norwegian buy-in call, a learner removes NOC from `consenting`, so PB and NOC both decline and EKO (40.000000) and PA (25.000000) carry the sidetrack. What share of the project does the engine now give EKO?",
+x("On the Norwegian buy-in call, a learner removes NOC from `consenting`, so PB and NOC both decline and EKO (40.000000) and PA (25.000000) fund the sidetrack. What share of the project does the engine now give EKO?",
  "61.538462, its 40.000000 over the 65 points that still consent",
  ["47.058824, the share it held while three parties consented to the operation",
   "40.000000, its participating interest in the licence, which the call does not change",
