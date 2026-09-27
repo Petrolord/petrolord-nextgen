@@ -1,0 +1,651 @@
+[
+ {
+  "id": "S01",
+  "title": "Government Functional Standard GovS 008: Commercial",
+  "publisher": "Government Commercial Function (UK Cabinet Office)",
+  "edition": "Version 2.2, date issued 01 April 2026 (PDF file dated 2026-03-26; gov.uk page updated 2026-05-14)",
+  "url": "https://assets.publishing.service.gov.uk/media/69c67905cdfd19de13d0f79c/2026-03-26_Govs008_Functional_standard_2026_-_RESET_Revisions_v5.1__FINAL_.pdf",
+  "file": "uk_govs008.pdf",
+  "txt": "uk_govs008_flow.txt",
+  "sha256": "8687286171e217c97aa47689514ab4367c7ea384e5714e1c1be7ae2d6d37d674",
+  "licence": "Printed p.2: '(c) Crown copyright 2026 ... You may re-use this information (excluding logos) free of charge in any format or medium, under the terms of the Open Government Licence.'",
+  "quote_policy": "quote",
+  "date_read": "2026-09-27",
+  "used_for": [
+   "T01",
+   "T02",
+   "T04",
+   "T05",
+   "T06",
+   "T07",
+   "T08",
+   "T09",
+   "T13",
+   "T14",
+   "T15",
+   "T16"
+  ],
+  "reused_from": null
+ },
+ {
+  "id": "S02",
+  "title": "The Sourcing Playbook",
+  "publisher": "UK Cabinet Office",
+  "edition": "June 2023 (Version 4); gov.uk publication page last updated 2026-09-17 (tool attachment only; the Playbook PDF itself is unchanged)",
+  "url": "https://assets.publishing.service.gov.uk/media/64901fcc5f7bb700127fac5e/Sourcing_Playbook_Final.pdf",
+  "file": "uk_sourcing_playbook.pdf",
+  "txt": "uk_sourcing_playbook_flow.txt",
+  "sha256": "cb8ac9383e2c53c47845b07bf65567c7abfc7f91b4ce7f009cfcccaa24c9a72d",
+  "licence": "Printed p.ii: '(c) Crown copyright 2023. Produced by Cabinet Office. This publication is licensed under the terms of the Open Government Licence v3.0 except where otherwise stated.'",
+  "quote_policy": "quote",
+  "date_read": "2026-09-27",
+  "used_for": [
+   "T01",
+   "T02",
+   "T04",
+   "T06",
+   "T07",
+   "T09",
+   "T11",
+   "T14",
+   "T15"
+  ],
+  "reused_from": null
+ },
+ {
+  "id": "S03",
+  "title": "Delivery model assessments guidance note (Sourcing Playbook guidance note)",
+  "publisher": "UK Cabinet Office",
+  "edition": "May 2021",
+  "url": "https://assets.publishing.service.gov.uk/media/60a387d5e90e07357422eb45/Delivery_model_assessment_guidance_note_May_2021.pdf",
+  "file": "uk_delivery_model.pdf",
+  "txt": "uk_delivery_model_flow.txt",
+  "sha256": "1c2fc8d599df70694a901bd6e99866c927a9e151fe34b934067161a3e5f9efa1",
+  "licence": "Printed back page: 'This publication is licensed under the terms of the Open Government Licence v3.0 except where otherwise stated.'",
+  "quote_policy": "quote",
+  "date_read": "2026-09-27",
+  "used_for": [
+   "T11"
+  ],
+  "reused_from": null
+ },
+ {
+  "id": "S04",
+  "title": "Assessing and Monitoring the Economic and Financial Standing of Bidders and Suppliers guidance note",
+  "publisher": "UK Cabinet Office",
+  "edition": "2026 edition (running header '2026'; back page '(c) Crown copyright 2025'; file 2025-12-31_EFS_2025_Final_v4, gov.uk replaced 2026-01-13)",
+  "url": "https://assets.publishing.service.gov.uk/media/698c4873701ea1f716d712d9/2025-12-31-_EFS_-2025_Final_v4.pdf",
+  "file": "uk_efs.pdf",
+  "txt": "uk_efs_flow.txt",
+  "sha256": "ac59914416cca2fa89455582df680864e96f4796d22d8753946bdbd252419483",
+  "licence": "Printed on the document's final page: '(c) Crown copyright 2025. This publication is licensed under the terms of the Open Government Licence v3.0 except where otherwise stated.' (drop-cap letters are lost in text extraction; quotes avoid sentence starts)",
+  "quote_policy": "quote",
+  "date_read": "2026-09-27",
+  "used_for": [
+   "T07",
+   "T09"
+  ],
+  "reused_from": null
+ },
+ {
+  "id": "S05",
+  "title": "Resolution Planning guidance note",
+  "publisher": "UK Cabinet Office",
+  "edition": "May 2021",
+  "url": "https://assets.publishing.service.gov.uk/media/60a388c7e90e07356f0fdd30/Resolution_planning_guidance_note_May_2021.pdf",
+  "file": "uk_resolution_planning.pdf",
+  "txt": "uk_resolution_planning_flow.txt",
+  "sha256": "6522665694fcbec83af4a5de84ec48639116c15f9e1d7d112540988ed40fde13",
+  "licence": "Printed on the document's final page: '(c) Crown copyright 2020. This publication is licensed under the terms of the Open Government Licence v3.0 except where otherwise stated.'",
+  "quote_policy": "quote",
+  "date_read": "2026-09-27",
+  "used_for": [
+   "T06",
+   "T09",
+   "T14"
+  ],
+  "reused_from": null
+ },
+ {
+  "id": "S06",
+  "title": "Corporate Financial Distress guidance note",
+  "publisher": "UK Cabinet Office",
+  "edition": "2025 edition (file 2025-12-31_CFD_2025_Final_v3, gov.uk replaced 2026-01-13)",
+  "url": "https://assets.publishing.service.gov.uk/media/6981bbefec71a16669612e51/2025-12-31-_CFD_-2025_Final_v3.pdf",
+  "file": "uk_cfd.pdf",
+  "txt": "uk_cfd_flow.txt",
+  "sha256": "695b3dd3e6566bc6eac735ce94b0fa4e0e3fbf582fc97c03e1236e1fa0ff32e1",
+  "licence": "gov.uk site footer on the publication page: 'All content is available under the Open Government Licence v3.0, except where otherwise stated' (no licence line survived text extraction from the PDF itself)",
+  "quote_policy": "quote",
+  "date_read": "2026-09-27",
+  "used_for": [
+   "T09"
+  ],
+  "reused_from": null
+ },
+ {
+  "id": "S07",
+  "title": "Risk Allocation and Pricing Approaches guidance note",
+  "publisher": "UK Cabinet Office",
+  "edition": "January 2026 (running header; file 2025-12-31_RAPA_2025_Final_v3; back page '(c) Crown copyright 2025')",
+  "url": "https://assets.publishing.service.gov.uk/media/6981bbc73915f7123658014c/2025-12-31-_RAPA_-2025_Final_v3.pdf",
+  "file": "uk_rapa.pdf",
+  "txt": "uk_rapa_flow.txt",
+  "sha256": "152b55ff20dd87fac3eb94a097280c5ad4bb904ef7ddb785b3fb3f24040394c1",
+  "licence": "Printed on the document's final page: '(c) Crown copyright 2025. This publication is licensed under the terms of the Open Government Licence v3.0 except where otherwise stated.'",
+  "quote_policy": "quote",
+  "date_read": "2026-09-27",
+  "used_for": [
+   "T03",
+   "T11"
+  ],
+  "reused_from": null
+ },
+ {
+  "id": "S08",
+  "title": "Procurement Act 2023 Guidance: Key Performance Indicators",
+  "publisher": "UK Cabinet Office",
+  "edition": "Manage phase guidance; PDF version with guidance links added 2026-04-20 (back page '(c) Crown copyright 2024')",
+  "url": "https://assets.publishing.service.gov.uk/media/69e6437e3e3b4e9340cc92f3/2026-04-20_-_Guidance_-_KPIs_FINAL_pdf_links_.docx.pdf",
+  "file": "pa23_kpis.pdf",
+  "txt": "pa23_kpis.txt",
+  "sha256": "c3e74ff67187cc5115101097f41590bcb5dbe367d49f04e86328fc627cbd1fa5",
+  "licence": "Printed on the document's final page: '(c) Crown copyright 2024. This publication is licensed under the terms of the Open Government Licence v3.0 except where otherwise stated.'",
+  "quote_policy": "quote",
+  "date_read": "2026-09-27",
+  "used_for": [
+   "T04",
+   "T07"
+  ],
+  "reused_from": null
+ },
+ {
+  "id": "S09",
+  "title": "Procurement Act 2023 Guidance: Contract Performance Notices",
+  "publisher": "UK Cabinet Office",
+  "edition": "Manage phase guidance, current PDF listed on the Manage phase page on 2026-09-27 (media id 685d6178; '(c) Crown copyright 2024')",
+  "url": "https://assets.publishing.service.gov.uk/media/685d6178e44db4975be00ae3/Guidance_-_Contract_Performance_Notices_FINAL_pdf_links__.docx.pdf",
+  "file": "pa23_performance_notices.pdf",
+  "txt": "pa23_performance_notices.txt",
+  "sha256": "56677cd26e157c8e9d541abd067a3607edd93fa549dc04e54e5e1011a437bdd0",
+  "licence": "Printed on the document's final page: '(c) Crown copyright 2024. This publication is licensed under the terms of the Open Government Licence v3.0 except where otherwise stated.'",
+  "quote_policy": "quote",
+  "date_read": "2026-09-27",
+  "used_for": [
+   "T04",
+   "T07",
+   "T14",
+   "T15"
+  ],
+  "reused_from": null
+ },
+ {
+  "id": "S10",
+  "title": "Procurement Act 2023 Guidance: Contract Modifications",
+  "publisher": "UK Cabinet Office",
+  "edition": "Manage phase guidance, current PDF listed on the Manage phase page on 2026-09-27 (media id 685415e5; '(c) Crown copyright 2024')",
+  "url": "https://assets.publishing.service.gov.uk/media/685415e516eefd7361e989d2/Guidance_-_Contract_Modifications_FINAL_pdf_links_.docx.pdf",
+  "file": "pa23_modifications.pdf",
+  "txt": "pa23_modifications.txt",
+  "sha256": "9509ecb7ab60e43b347180c9e90a1f4da0d3ddf7bb191e3e072b8c752f3f51b5",
+  "licence": "Printed on the document's final page: '(c) Crown copyright 2024. This publication is licensed under the terms of the Open Government Licence v3.0 except where otherwise stated.'",
+  "quote_policy": "quote",
+  "date_read": "2026-09-27",
+  "used_for": [
+   "T08",
+   "T16"
+  ],
+  "reused_from": null
+ },
+ {
+  "id": "S11",
+  "title": "Procurement Act 2023 Guidance: Contract Terminations",
+  "publisher": "UK Cabinet Office",
+  "edition": "Manage phase guidance; PDF dated 2026-04-15 (guidance links added)",
+  "url": "https://assets.publishing.service.gov.uk/media/69dfae476c6ccf244be42ddb/2026-04-15_-_Guidance_-_Contract_Terminations_FINAL_pdf_links_.docx.pdf",
+  "file": "pa23_termination.pdf",
+  "txt": "pa23_termination.txt",
+  "sha256": "dca12d695ed2759e6cd8fb70898f82fd87b5a4d80afd48b3f78fa17b1858c9c1",
+  "licence": "Printed on the document's final page: '(c) Crown copyright 2024. This publication is licensed under the terms of the Open Government Licence v3.0 except where otherwise stated.'",
+  "quote_policy": "quote",
+  "date_read": "2026-09-27",
+  "used_for": [
+   "T03",
+   "T14",
+   "T15"
+  ],
+  "reused_from": null
+ },
+ {
+  "id": "S12",
+  "title": "Procurement Act 2023 Guidance: Electronic Invoicing and Payment",
+  "publisher": "UK Cabinet Office",
+  "edition": "Manage phase guidance; PDF with guidance links added 2026-04-15",
+  "url": "https://assets.publishing.service.gov.uk/media/69dfa51d6c6ccf244be42dcd/Guidance_-_Electronic_Invoicing_and_Payment_FINAL_pdf_links_.docx.pdf",
+  "file": "pa23_einvoicing.pdf",
+  "txt": "pa23_einvoicing.txt",
+  "sha256": "b0ee1ee3b3390d5f970c317c63f17aa23926e7023fa4a3c16efdbcad16f75191",
+  "licence": "Printed on the document's final page: '(c) Crown copyright 2024. This publication is licensed under the terms of the Open Government Licence v3.0 except where otherwise stated.'",
+  "quote_policy": "quote",
+  "date_read": "2026-09-27",
+  "used_for": [
+   "T05"
+  ],
+  "reused_from": null
+ },
+ {
+  "id": "S13",
+  "title": "Procurement Act 2023 Guidance: Contract Payment Information",
+  "publisher": "UK Cabinet Office",
+  "edition": "Version 3, 2026-07-20 ('(c) Crown copyright 2026')",
+  "url": "https://assets.publishing.service.gov.uk/media/6a5e29ef24d44672cf1b4608/2026-07-20_PA23_Guidance_-_Contract_Payment_Information.PDF_links.V3.pdf",
+  "file": "pa23_payment_info.pdf",
+  "txt": "pa23_payment_info.txt",
+  "sha256": "51746b26be7c39b5c2078741f7ec3e3cccb6bf192c40ddab6566ab201c2b8dd8",
+  "licence": "Printed on the document's final page: '(c) Crown copyright 2026. This publication is licensed under the terms of the Open Government Licence v3.0 except where otherwise stated.'",
+  "quote_policy": "quote",
+  "date_read": "2026-09-27",
+  "used_for": [
+   "T05"
+  ],
+  "reused_from": null
+ },
+ {
+  "id": "S14",
+  "title": "Procurement Act 2023 Guidance: Conflicts of Interest",
+  "publisher": "UK Cabinet Office",
+  "edition": "Define phase guidance, current PDF listed on the Define phase page on 2026-09-27 (media id 690b5e70; '(c) Crown copyright 2024')",
+  "url": "https://assets.publishing.service.gov.uk/media/690b5e7014b040dfe829232b/Guidance_-_Conflicts_of_Interest_FINAL_pdf_links_.docx.pdf",
+  "file": "pa23_conflicts.pdf",
+  "txt": "pa23_conflicts.txt",
+  "sha256": "1fa0156732e91d49a655a235cfee9f36b1628e0a3e61f8cf1b03185326ea8f87",
+  "licence": "Printed on the document's final page: '(c) Crown copyright 2024. This publication is licensed under the terms of the Open Government Licence v3.0 except where otherwise stated.'",
+  "quote_policy": "quote",
+  "date_read": "2026-09-27",
+  "used_for": [
+   "T02",
+   "T08",
+   "T16"
+  ],
+  "reused_from": null
+ },
+ {
+  "id": "S15",
+  "title": "Contract Management Principles (Commercial capability: contract management standards)",
+  "publisher": "Crown Commercial Service / Cabinet Office (now Government Commercial Agency)",
+  "edition": "Undated 2-page PDF (created 2014-06-26); publication page last updated 2025-12-12",
+  "url": "https://assets.publishing.service.gov.uk/media/5a7dcf16ed915d2ac884daf3/Contract_Management_Principles.pdf",
+  "file": "uk_cm_principles.pdf",
+  "txt": "uk_cm_principles.txt",
+  "sha256": "52cba98ab8e1cc7c61ad053cc469bf412fd29a854fcd535a2e23e7db9801b1c4",
+  "licence": "gov.uk site footer on the publication page: 'All content is available under the Open Government Licence v3.0, except where otherwise stated'",
+  "quote_policy": "quote",
+  "date_read": "2026-09-27",
+  "used_for": [
+   "T01",
+   "T02",
+   "T04",
+   "T05",
+   "T06",
+   "T07",
+   "T08",
+   "T16"
+  ],
+  "reused_from": null
+ },
+ {
+  "id": "S16",
+  "title": "Contract Management Framework Summary (Commercial capability: contract management standards)",
+  "publisher": "Crown Commercial Service / Cabinet Office",
+  "edition": "Undated 3-page PDF (created 2014-06-26), based on the NAO good practice contract management framework (December 2008); page updated 2025-12-12",
+  "url": "https://assets.publishing.service.gov.uk/media/5a7d579fed915d321c2de776/Contract_Management_Framework_Summary.pdf",
+  "file": "uk_cm_framework.pdf",
+  "txt": "uk_cm_framework.txt",
+  "sha256": "4d9603bed07667d6bb46e20af1c2ef0eb71a178ca3d7cd0554030b8ea22ba2a6",
+  "licence": "gov.uk site footer on the publication page: 'All content is available under the Open Government Licence v3.0, except where otherwise stated'",
+  "quote_policy": "quote",
+  "date_read": "2026-09-27",
+  "used_for": [
+   "T01",
+   "T03",
+   "T05",
+   "T06",
+   "T07",
+   "T08",
+   "T09",
+   "T13",
+   "T15"
+  ],
+  "reused_from": null
+ },
+ {
+  "id": "S17",
+  "title": "Procurement Guidance: Contract Management Practice",
+  "publisher": "The World Bank",
+  "edition": "Second Edition, May 2024 (cover 'June 2024'; first published September 2018). A near-identical 'FINAL' file with cover 'May 2024' also exists (kept in raw/)",
+  "url": "https://thedocs.worldbank.org/en/doc/91fb360c22051e5c09809215cb32f117-0290012024/original/Contract-Management-Practice-Procurement-Guidance-June-2024.pdf",
+  "file": "wb_cm_practice_2024.pdf",
+  "txt": "wb_cm_practice_2024_flow.txt",
+  "sha256": "651dcf935b2f76b479b9759baec5722e7c34cef9a1feda5631ecde33f32474b4",
+  "licence": "Printed on the verso of the title page, 'Rights and Permissions': 'The material in this work is subject to copyright. Because The World Bank encourages dissemination of its knowledge, this work may be reproduced, in whole or in part, for noncommercial purposes as long as full attribution to this work is given.' Commercial course use is outside that grant, so only short attributed quotations are used.",
+  "quote_policy": "concept",
+  "date_read": "2026-09-27",
+  "used_for": [
+   "T01",
+   "T02",
+   "T03",
+   "T04",
+   "T05",
+   "T07",
+   "T08",
+   "T09",
+   "T11",
+   "T12",
+   "T13",
+   "T14",
+   "T15",
+   "T16"
+  ],
+  "reused_from": null
+ },
+ {
+  "id": "S18",
+  "title": "Procurement Regulations for IPF Borrowers",
+  "publisher": "The World Bank",
+  "edition": "Seventh Edition, September 2025",
+  "url": "https://thedocs.worldbank.org/en/doc/c84273d1b230aeb2b0b8134de5dc8cd7-0290012025/original/Procurement-Regulations-7th-Edition-Sep-2025.pdf",
+  "file": "WB-Reg-7th-Sep2025.pdf",
+  "txt": "WB7.txt",
+  "sha256": "7f118ac8fa8949ef23790d84f74c975a98c4bba4effd69328ead58d71578b6f3",
+  "licence": "Printed on the edition page: 'This document is subject to copyright. This document may be used and reproduced for non-commercial purposes, with attribution to the World Bank. The document may not be modified.' Short attributed quotations only.",
+  "quote_policy": "concept",
+  "date_read": "2026-09-27",
+  "used_for": [
+   "T01",
+   "T02",
+   "T03",
+   "T04",
+   "T05",
+   "T08",
+   "T11",
+   "T13",
+   "T14",
+   "T15",
+   "T16"
+  ],
+  "reused_from": "/root/sc2-sources (fetched 2026-09-26)"
+ },
+ {
+  "id": "S19",
+  "title": "Project Procurement Strategy for Development: PPSD Long Form Detailed User Guidance",
+  "publisher": "The World Bank",
+  "edition": "Fourth Edition, August 2025",
+  "url": "https://thedocs.worldbank.org/en/doc/b6bd32d73ca9f00f9cd83c90550d8a63-0290012025/original/PPSD-Procurement-Guidance-FINAL-aug-25.pdf",
+  "file": "wb_ppsd_2025.pdf",
+  "txt": "wb_ppsd_2025_flow.txt",
+  "sha256": "314dedd2ec08f04d2bd93d2fea7bcec93519de5348b409f756d71ae6eb8cc813",
+  "licence": "Printed on the title verso (Copyright (c) 2025), 'Rights and Permissions': 'The material in this work is subject to copyright. Because The World Bank encourages dissemination of its knowledge, this work may be reproduced, in whole or in part, for noncommercial purposes as long as full attribution to this work is given.' Commercial course use is outside that grant, so only short attributed quotations are used.",
+  "quote_policy": "concept",
+  "date_read": "2026-09-27",
+  "used_for": [
+   "T06"
+  ],
+  "reused_from": null
+ },
+ {
+  "id": "S20",
+  "title": "Nigerian Oil and Gas Industry Content Development Act, 2010 (Act No. 2)",
+  "publisher": "Federal Republic of Nigeria (copy hosted by FAO FAOLEX)",
+  "edition": "Act No. 2 of 2010, commenced 22 April 2010",
+  "url": "https://faolex.fao.org/docs/pdf/nig169358.pdf",
+  "file": "nig169358.pdf",
+  "txt": "nig169358_flow.txt",
+  "sha256": "b2a7e193360ad9239ca4800105bc93616ffe73764a6d1d0abd6b11d3c40b5a54",
+  "licence": "No licence statement printed. Official statutory text of the Federal Republic of Nigeria; quoted with section citation.",
+  "quote_policy": "quote",
+  "date_read": "2026-09-27",
+  "used_for": [
+   "T01",
+   "T02",
+   "T03",
+   "T04",
+   "T05",
+   "T07",
+   "T10",
+   "T14",
+   "T15",
+   "T16"
+  ],
+  "reused_from": "/root/sc2-sources (fetched 2026-09-26); flow text regenerated 2026-09-27"
+ },
+ {
+  "id": "S21",
+  "title": "Nigerian Oil and Gas Industry Content Development Act, 2010 (NCDMB-hosted copy)",
+  "publisher": "NCDMB (Nigerian Content Development and Monitoring Board)",
+  "edition": "Act No. 2 of 2010; NCDMB copy with page marks '(c) 2016 NCDMB PROPRIETARY'",
+  "url": "https://ncdmb.gov.ng/nc-act.pdf",
+  "file": "nc-act.pdf",
+  "txt": "nc-act.txt",
+  "sha256": "6899413ebe275f85dc780c36c56b47e1d62c69455239c4c40815ec83569c7f50",
+  "licence": "Each page printed '(c) 2016 NCDMB PROPRIETARY'. Used only to cross-check the FAOLEX copy (S20); nothing is quoted from this copy.",
+  "quote_policy": "short-quote",
+  "date_read": "2026-09-27",
+  "used_for": [
+   "T10"
+  ],
+  "reused_from": "/root/sc2-sources (fetched 2026-09-26)",
+  "cross_check_of": "S20"
+ },
+ {
+  "id": "S22",
+  "title": "Public Procurement Act, 2007 (Act No. 14)",
+  "publisher": "Federal Republic of Nigeria (copy hosted by NCDMB)",
+  "edition": "Official Gazette No. 65, Vol. 94, Lagos, 19 June 2007, A 203 to A 249",
+  "url": "https://ncdmb.gov.ng/images/Downloads/Public-Procurement-Act-2007.pdf",
+  "file": "Public-Procurement-Act-2007.pdf",
+  "txt": "ppa2007_flow.txt",
+  "sha256": "60c6ab3b97b8b45f92ffb1cb3bafe73f89f0d8a45d43ec98f2364899319bff37",
+  "licence": "No licence statement printed. Official gazetted statutory text; quoted with section citation.",
+  "quote_policy": "quote",
+  "date_read": "2026-09-27",
+  "used_for": [
+   "T01",
+   "T02",
+   "T03",
+   "T05",
+   "T07",
+   "T08",
+   "T13",
+   "T14",
+   "T16"
+  ],
+  "reused_from": "/root/sc2-sources (fetched 2026-09-26); flow text regenerated 2026-09-27"
+ },
+ {
+  "id": "S23",
+  "title": "Guidelines for NCDMB Approvals of Nigerian Oil and Gas Industry Contracting Processes (update of the PCAD Guidelines of 16 April 2018)",
+  "publisher": "NCDMB",
+  "edition": "2025 update (PDF modified 2025-03-28; cites the September 2023 industry SLA/MOU and the 2024 Presidential Directives)",
+  "url": "https://ncdmb.gov.ng/images/GUIDELINES/Guidelines-for-NCDMB-Approvals-of-NOG-Contracting-Processes.pdf",
+  "file": "ncdmb_Guidelines-for-NCDMB-Approvals-of-NOG-Contracting-Processes.pdf",
+  "txt": "ncdmb_pcad_flow.txt",
+  "sha256": "2aec094e71622b5a7bfa002c89dcd330cd2bd633284c6fdb9ef77414d0d9257b",
+  "licence": "No licence or copyright statement printed. Public regulator guideline on ncdmb.gov.ng 'Operational Guidelines' page; short attributed quotations only.",
+  "quote_policy": "short-quote",
+  "date_read": "2026-09-27",
+  "used_for": [
+   "T01",
+   "T02",
+   "T10",
+   "T15"
+  ],
+  "reused_from": null
+ },
+ {
+  "id": "S25",
+  "title": "Guidelines on Nigerian Oil and Gas Industry Content Joint Qualification System (NOGIC JQS)",
+  "publisher": "NCDMB",
+  "edition": "Issue D1 (undated; approved by the Executive Secretary)",
+  "url": "https://ncdmb.gov.ng/images/GUIDELINES/NOGICJQSGuidelines.pdf",
+  "file": "ncdmb_NOGICJQSGuidelines.pdf",
+  "txt": null,
+  "sha256": "a5fcd3d03396000910bf0380a0feec51dcd17131c1ffdd08cc5b817bfb0e26cc",
+  "licence": "No licence statement on the pages read. Scanned image PDF; paraphrase only.",
+  "quote_policy": "concept",
+  "date_read": "2026-09-27",
+  "used_for": [
+   "T10"
+  ],
+  "note": "Scanned image PDF with no text layer; pages 1 to 3 read visually (raw/img/jqs*.png).",
+  "reused_from": null
+ },
+ {
+  "id": "S26",
+  "title": "Arbitration and Mediation Act, 2023",
+  "publisher": "Federal Republic of Nigeria (scan of the Act; copy hosted by Aceris Law LLC)",
+  "edition": "Arbitration and Mediation Act, 2023 (repeals the Arbitration and Conciliation Act, Cap A18 LFN 2004); scan created 2023-05-27, OCR text layer",
+  "url": "https://www.acerislaw.com/wp-content/uploads/2023/08/New-Nigerian-Arbitration-and-Mediation-Act.pdf",
+  "file": "ng_ama2023.pdf",
+  "txt": "ng_ama2023_flow.txt",
+  "sha256": "ad475217ec6441edcc330667992bc8f059e9000cde56e6a2c450264fc15311ca",
+  "licence": "No licence statement printed. Statutory text of the Federal Republic of Nigeria; the copy is a law firm's upload of the scanned Act, since no official government-hosted text was found. Quoted with section citation.",
+  "quote_policy": "quote",
+  "date_read": "2026-09-27",
+  "used_for": [
+   "T12",
+   "T13"
+  ],
+  "reused_from": null
+ },
+ {
+  "id": "S27",
+  "title": "Procurement Act 2023 (c. 54)",
+  "publisher": "UK Parliament (legislation.gov.uk, The Stationery Office)",
+  "edition": "As enacted, 26 October 2023 (PDF printed by TSO); later amendments are not reflected in this copy",
+  "url": "https://www.legislation.gov.uk/ukpga/2023/54/pdfs/ukpga_20230054_en.pdf",
+  "file": "pa23_act.pdf",
+  "txt": "pa23_act_flow.txt",
+  "sha256": "9eca2f78b22511546f606ed1cca6df5c96fae792fae4f8f4c53a02f5f0808ed8",
+  "licence": "Final page: '(c) Crown copyright 2023'. legislation.gov.uk states its content is available under the Open Government Licence v3.0 except where otherwise stated.",
+  "quote_policy": "quote",
+  "date_read": "2026-09-27",
+  "used_for": [
+   "T04",
+   "T05",
+   "T07",
+   "T14"
+  ],
+  "reused_from": null
+ },
+ {
+  "id": "S28",
+  "title": "Purchasing must become supply management",
+  "publisher": "Harvard Business Review",
+  "edition": "Kraljic, P. (1983). Harvard Business Review 61(5), September to October 1983, pp.109 to 117",
+  "url": null,
+  "file": null,
+  "txt": null,
+  "sha256": null,
+  "licence": "All rights reserved (HBR). Not downloaded. Concept only.",
+  "quote_policy": "concept",
+  "date_read": "2026-09-27",
+  "used_for": [
+   "T06"
+  ],
+  "concept": "Portfolio purchasing matrix: profit impact versus supply risk, four item classes (strategic, bottleneck, leverage, non-critical), a different strategy per class.",
+  "reused_from": null
+ },
+ {
+  "id": "S29",
+  "title": "ISO 44001:2017 Collaborative business relationship management systems: Requirements and framework",
+  "publisher": "International Organization for Standardization",
+  "edition": "ISO 44001:2017 (first edition, 2017)",
+  "url": "https://www.iso.org (catalogue entry; not fetched)",
+  "file": null,
+  "txt": null,
+  "sha256": null,
+  "licence": "Copyright ISO; sold standard. Not downloaded. Concept only.",
+  "quote_policy": "concept",
+  "date_read": "2026-09-27",
+  "used_for": [
+   "T06"
+  ],
+  "concept": "A management system for collaborative relationships across a relationship life cycle from awareness and partner selection to joint working, value creation and exit.",
+  "reused_from": null
+ },
+ {
+  "id": "S30",
+  "title": "CIPS contract management and supplier relationship management study material",
+  "publisher": "Chartered Institute of Procurement and Supply",
+  "edition": "Professional qualification study material (not a single edition)",
+  "url": "https://www.cips.org (not fetched)",
+  "file": null,
+  "txt": null,
+  "sha256": null,
+  "licence": "Copyright CIPS; member and licensed material. Not downloaded. Concept only.",
+  "quote_policy": "concept",
+  "date_read": "2026-09-27",
+  "used_for": [
+   "T01",
+   "T06"
+  ],
+  "concept": "Contract management and supplier relationship management taught as linked disciplines; the professional frame for the course, with no text reused.",
+  "reused_from": null
+ },
+ {
+  "id": "S31",
+  "title": "AIPN Model Contracts (e.g. Model Joint Operating Agreement, Model Farmout Agreement)",
+  "publisher": "AIPN (Association of International Petroleum Negotiators)",
+  "edition": "Various editions",
+  "url": "https://www.aipn.org (not fetched)",
+  "file": null,
+  "txt": null,
+  "sha256": null,
+  "licence": "Copyright AIPN; licensed to members. Not downloaded. Concept only.",
+  "quote_policy": "concept",
+  "date_read": "2026-09-27",
+  "used_for": [
+   "T03"
+  ],
+  "concept": "Industry model forms with elections and options; the contract manager works from the signed version.",
+  "reused_from": null
+ },
+ {
+  "id": "S32",
+  "title": "LOGIC Standard Contracts for the UK Offshore Oil and Gas Industry",
+  "publisher": "LOGIC (Leading Oil and Gas Industry Competitiveness)",
+  "edition": "Various editions",
+  "url": "https://www.logic-oil.com (not fetched)",
+  "file": null,
+  "txt": null,
+  "sha256": null,
+  "licence": "Copyright LOGIC; licensed forms. Not downloaded. Concept only.",
+  "quote_policy": "concept",
+  "date_read": "2026-09-27",
+  "used_for": [
+   "T03"
+  ],
+  "concept": "Standard forms for offshore services, construction and supply; read the edition and amendments actually signed.",
+  "reused_from": null
+ },
+ {
+  "id": "S33",
+  "title": "FIDIC Conditions of Contract (Red Book and Silver Book, Second Edition 2017, reprinted 2022), including FIDIC text embedded in World Bank SPD General Conditions of Contract",
+  "publisher": "Federation Internationale des Ingenieurs-Conseils (FIDIC)",
+  "edition": "Second Edition 2017, reprinted 2022 with amendments (edition as cited in S17 p.50)",
+  "url": "https://fidic.org (not fetched)",
+  "file": null,
+  "txt": null,
+  "sha256": null,
+  "licence": "Copyright FIDIC; licensed conditions. World Bank SPDs embed FIDIC text under licence. Not downloaded. Concept only; S17 itself quotes the FIDIC claim definition, and that quotation is not reused.",
+  "quote_policy": "concept",
+  "date_read": "2026-09-27",
+  "used_for": [
+   "T03",
+   "T12",
+   "T13"
+  ],
+  "concept": "Engineer's or Employer's Representative's role in 'Agreement or Determination'; claim notice and particulars procedure; dispute avoidance and adjudication boards.",
+  "reused_from": null
+ }
+]

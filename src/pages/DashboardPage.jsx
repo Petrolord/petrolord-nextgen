@@ -83,6 +83,7 @@ import JoaLearningPage from '@/pages/apps/JoaLearningPage';
 import FarmoutLearningPage from '@/pages/apps/FarmoutLearningPage';
 import PrmsLearningPage from '@/pages/apps/PrmsLearningPage';
 import MaterialsLearningPage from '@/pages/apps/MaterialsLearningPage';
+import ContractsLearningPage from '@/pages/apps/ContractsLearningPage';
 import HygieneLearningPage from '@/pages/apps/HygieneLearningPage';
 import RiskChangeLearningPage from '@/pages/apps/RiskChangeLearningPage';
 import ComplianceLearningPage from '@/pages/apps/ComplianceLearningPage';
@@ -479,6 +480,7 @@ const DashboardPage = () => {
     <Route path="apps/farmout" element={<FarmoutLearningPage />} />
     <Route path="apps/prms" element={<PrmsLearningPage />} />
     <Route path="apps/materials" element={<MaterialsLearningPage />} />
+    <Route path="apps/contracts" element={<ContractsLearningPage />} />
     <Route path="apps/hygiene" element={<HygieneLearningPage />} />
     <Route path="apps/riskchange" element={<RiskChangeLearningPage />} />
     <Route path="apps/compliance" element={<ComplianceLearningPage />} />

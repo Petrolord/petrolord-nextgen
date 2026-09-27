@@ -7,15 +7,18 @@ import { getFinalExam, submitFinalExam } from '@/services/academyService';
 import { useCourse, TIER_LABELS } from '@/components/course/useCourse';
 import QuizRunner from '@/components/course/QuizRunner';
 import LockedCard from '@/components/course/LockedCard';
+import { courseTypeOf, finalExamCopy } from '@/lib/courseType';
 
 // Tier final exam. The server refuses to serve it until every module is
-// complete; passing it unlocks the capstone practical in the app.
+// complete; passing it unlocks the capstone practical in the app, or, for a
+// practice course (no numeric capstone), the certificate on the course home.
 const FinalExamPage = () => {
   const { appSlug, tier } = useParams();
   const { progress, refresh } = useCourse(appSlug, tier);
 
   const manifest = getManifest(appSlug, tier);
   const base = `/dashboard/apps/${appSlug}/course/${tier}`;
+  const copy = finalExamCopy(courseTypeOf(appSlug), tier, appSlug);
 
   const fetchQuiz = useCallback(() => getFinalExam(appSlug, tier), [appSlug, tier]);
   const submit = useCallback(
@@ -45,12 +48,12 @@ const FinalExamPage = () => {
         </Link>
         <QuizRunner
           title={`Final exam: ${TIER_LABELS[tier] || tier}`}
-          description="A randomized exam across the whole course. Passing it unlocks the capstone practical."
+          description={copy.description}
           fetchQuiz={fetchQuiz}
           submitQuiz={submit}
           onPassed={refresh}
-          continueTo={`/dashboard/apps/${appSlug}`}
-          continueLabel="Open the capstone"
+          continueTo={copy.continueTo}
+          continueLabel={copy.continueLabel}
         />
       </div>
     </>

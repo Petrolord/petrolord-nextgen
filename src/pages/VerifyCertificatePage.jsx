@@ -11,6 +11,8 @@ import { verifyCertificate } from '@/services/academyService';
 import {
   courseName, CERT_TIER_LABELS as TIER_LABEL, formalDate, titleCaseSlug,
 } from '@/lib/appNames';
+import PracticeCourseBadge from '@/components/course/PracticeCourseBadge';
+import { courseTypeOf } from '@/lib/courseType';
 
 const STATUS = {
   valid: { icon: ShieldCheck, color: 'text-[#BFFF00]', border: 'border-[#BFFF00]', label: 'Valid certificate' },
@@ -118,7 +120,10 @@ const VerifyCertificatePage = () => {
                 </div>
                 <div className="flex justify-between border-b border-gray-700 pb-2">
                   <dt className="text-gray-400">Course</dt>
-                  <dd className="text-white">{courseName(result.app_slug, result.course_name)}</dd>
+                  <dd className="text-white text-right">
+                    {courseName(result.app_slug, result.course_name)}
+                    <PracticeCourseBadge show={courseTypeOf(result.app_slug, [{ slug: result.app_slug, course_type: result.course_type }]) === 'practice'} />
+                  </dd>
                 </div>
                 <div className="flex justify-between border-b border-gray-700 pb-2">
                   <dt className="text-gray-400">Certification</dt>

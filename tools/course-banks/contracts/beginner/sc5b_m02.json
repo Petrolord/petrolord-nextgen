@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "EKC-01 is a synthetic well services framework with WS-A (synthetic). Ekene named its contract manager a week after award, and nobody from the tender team briefed that person. Which UK Contract Management Principle did this miss?",
+  "options": [
+   "Principle 7, on a balanced scorecard of measures.",
+   "Principle 1, on early resourcing and handover from sourcing.",
+   "Principle 4, on directing resource where the risk is.",
+   "Principle 2, on clear accountability for the contract."
+  ],
+  "answer": 1,
+  "explanation": "The UK Contract Management Principles, principle 1, say to make sure adequate resource is identified and appointed well before award and that there is an effective handover or transition from sourcing to contract management. A late appointment with no briefing misses both halves. Principles 2, 4 and 7 deal with roles, risk-based resourcing and measurement, which are real duties but different ones."
+ },
+ {
+  "prompt": "The new manager of EKC-01, the synthetic WS-A framework, needs a baseline for the framework's Nigerian content reporting. Under the Nigerian Oil and Gas Industry Content Development Act 2010 (the content Act), s.22, what did Ekene give the Board before award for a service contract of this kind?",
+  "options": [
+   "Nothing, since content figures are due only after a first year of work.",
+   "A copy of WS-A's audited accounts, which the Board uses to fix the Nigerian share of each call-off.",
+   "The minimum Nigerian labour percentage the Board had stipulated for WS-A's cadres under its labour clause.",
+   "Estimated Nigerian employment in person-hours, with the contractor and dates."
+  ],
+  "answer": 3,
+  "explanation": "Under the content Act, s.22, the operator gives the Board before award the selected contractor, designated sub-contractors, commencement and completion dates and, for construction or service contracts, the estimated Nigerian employment in person-hours. Those award-stage numbers become the baseline the manager reports against. The content Act asks for no audited accounts here, and a labour clause percentage arises under s.34 only for contracts whose total budget exceeds $100 million (USD)."
+ },
+ {
+  "prompt": "Responsibility for EKC-04, the synthetic casing and tubulars frame agreement with TB-D (synthetic), passes from the procurement team to a contract management team. What does the UK guidance on conflicts of interest under the Procurement Act 2023 (para 24) recommend at this point?",
+  "options": [
+   "Refresh the conflicts assessment for the people now running the contract.",
+   "Close the conflicts file, because conflicts matter only while bids are being evaluated.",
+   "Ask TB-D to certify that none of its staff know anyone at Ekene.",
+   "Keep the tender team's declarations, which cover everyone who will ever touch the contract."
+  ],
+  "answer": 0,
+  "explanation": "The UK conflicts of interest guidance (para 24) says the conflicts assessment should be refreshed when people or the contract change, for example when responsibility passes from the procurement team to a contract management or operations team. That is UK practice and a useful habit for Ekene. A conflict can arise in execution as easily as at tender, and the tender team's declarations cover only the tender team."
+ },
+ {
+  "prompt": "The contract management plan for EKC-06, the synthetic IM-F instrument maintenance contract, is ready. Under the UK Government Functional Standard GovS 008 (version 2.2) at 5.4.2, who produces it and who approves it?",
+  "options": [
+   "IM-F produces it and the manager approves it.",
+   "The procurement team, with no approval needed after award.",
+   "The contract manager produces it and the senior business owner approves it.",
+   "The senior business owner produces it and IM-F countersigns it at the kick-off meeting."
+  ],
+  "answer": 2,
+  "explanation": "GovS 008 at 5.4.2 says the plan should be produced by the contract manager (see 4.6.6) and be approved by the senior business owner (see 4.6.5). It is the buyer's working document, so the supplier neither writes nor countersigns it, and it needs an approval even when the procurement team drafted it early."
+ },
+ {
+  "prompt": "Six months into EKC-03, the synthetic camp catering contract with CF-C (synthetic), Ekene changes who may approve service credits. The contract management plan still names the old approver. What does the UK Government Functional Standard GovS 008 (version 2.2) at 5.4.2 imply the manager should do?",
+  "options": [
+   "Leave the plan as it is, because a signed plan is fixed for the whole term.",
+   "Ask CF-C to amend the plan, since the supplier holds the master copy.",
+   "Update the plan, since it is reviewed periodically through the contract's life.",
+   "Start a new tender, because a change of approver ends the current plan's validity."
+  ],
+  "answer": 2,
+  "explanation": "GovS 008 at 5.4.2 says the plan defines the roles and responsibilities of each party and should be reviewed periodically throughout the life of the contract. A new delegation is exactly the kind of change that means a dated update. The plan is Ekene's document, so CF-C does not hold it, and a change of approver has nothing to do with retendering."
+ },
+ {
+  "prompt": "When should the contract management plan for EKC-05, the synthetic FW-E flowline replacement, be finished, on the practice the World Bank Procurement Regulations for IPF Borrowers (Seventh Edition, September 2025) set out in Annex XI para 2.3?",
+  "options": [
+   "Drafted as the contract is created, and finished by the time it is signed.",
+   "Written after the first milestone, when the risks are known.",
+   "Drafted by FW-E during mobilisation, then adopted.",
+   "Left until the defects period, as a lessons record."
+  ],
+  "answer": 0,
+  "explanation": "Annex XI para 2.3 of the World Bank Regulations, taught by concept as published practice, has the plan drafted while the contract is being created and finished by the time it is signed. A plan written after the first milestone leaves mobilisation unplanned, the supplier does not write the buyer's plan, and a lessons record at close is a different document."
+ },
+ {
+  "prompt": "EKC-01, the synthetic WS-A framework, has a Nigerian content plan with quarterly reporting. Which heading from the World Bank list of what a contract management plan typically covers (Procurement Regulations, Seventh Edition, Annex XI para 3.1) will feed that reporting most directly?",
+  "options": [
+   "Milestones and the critical path, which show when WS-A mobilises.",
+   "Key terms, which repeat the framework's call-off procedure for each well.",
+   "Variation and change control, which record every change to the scope of work.",
+   "Local labour monitoring, kept for each crew and each call-off."
+  ],
+  "answer": 3,
+  "explanation": "The World Bank list in Annex XI para 3.1 includes local labour monitoring, and on an Ekene contract that heading feeds the Nigerian content reporting the content Act requires. Milestones, key terms and change control belong in the plan too, but none of them records who worked the hours, which is what the content report needs."
+ },
+ {
+  "prompt": "EKC-04 is the synthetic casing frame agreement with TB-D (synthetic), the only supplier qualified for one premium connection. Under the risks heading of its contract management plan, what should the manager record?",
+  "options": [
+   "Nothing, since a frame agreement at fixed unit prices carries no risk for the buyer.",
+   "The single source for the premium connection, and how early ordering mitigates it.",
+   "TB-D's unit prices, which are the only risk a supply contract carries.",
+   "A plan to switch to another supplier at the next order, whatever the well design needs."
+  ],
+  "answer": 1,
+  "explanation": "The World Bank Regulations list identified risks and their mitigation first among what a contract management plan covers (Annex XI para 3.1). A sole qualified source means a late order has no quick substitute, so the plan names the risk and how it is managed, for example by placing orders early. Fixed prices do not remove supply risk, and switching suppliers is not possible for a connection only TB-D is qualified to supply."
+ },
+ {
+  "prompt": "At the kick-off for EKC-07, the synthetic EM-G environmental monitoring consultancy, both sides want to know what happens if a quarterly report is returned twice and the matter stalls. Which item from the World Bank Contract Management Practice guidance's kick-off list (p.82) covers this?",
+  "options": [
+   "Agreeing the escalation route for a problem that stalls.",
+   "Introducing the parties and their roles, which ends the need for any further route.",
+   "Confirming insurances, which pays for any report returned more than once.",
+   "Walking through the payment schedule, which fixes the fee for a returned report."
+  ],
+  "answer": 0,
+  "explanation": "The World Bank guidance (p.82), taught by concept, lists agreeing escalation routes for bottlenecks among what a kick-off should at least do, beside introducing the parties, setting communication and reporting, walking through the documents and payment schedule, and confirming a shared understanding. Introductions and a payment walk-through matter, but neither sets a route for a stalled problem, and insurance does not deal with report quality."
+ },
+ {
+  "prompt": "EKC-02 is a synthetic vessel charter with MV-B (synthetic). At the kick-off, the manager walks both teams through the charter documents. According to the World Bank Contract Management Practice guidance (p.82, item 3), what should everyone understand by the end of that walk-through?",
+  "options": [
+   "How much MV-B paid for the vessel, which fixes the day rate for the whole term.",
+   "Which Ekene employee sails as company representative.",
+   "Which of MV-B's crew will be released first if Ekene reduces the vessel's hours.",
+   "Which document takes priority over which, among the key provisions."
+  ],
+  "answer": 3,
+  "explanation": "The World Bank guidance (p.82, item 3), taught by concept, lists a walk-through of the contract documents so that everyone understands the key provisions, which document takes priority over which, the conditions, the terms of reference, the payment schedule and the milestones. The vessel's purchase price and crew release order are MV-B's own affairs, and a sailing representative is not a documents question."
+ },
+ {
+  "prompt": "FW-E (synthetic) is mobilising for EKC-05, a complex synthetic works contract. On a contract like this, what does GovS 008, the UK commercial functional standard, expect to be confirmed during mobilisation (5.4.1)?",
+  "options": [
+   "A retender of the contract if FW-E's crew has not arrived within a week.",
+   "Who holds each role in managing it, commercial specialists included, is confirmed.",
+   "The senior business owner hands the contract to FW-E to manage on Ekene's behalf.",
+   "The retention is released early so that FW-E can fund its mobilisation costs."
+  ],
+  "answer": 1,
+  "explanation": "GovS 008 at 5.4.1 treats mobilisation as the start of delivery and, for more complex contracts, expects the roles for managing the contract (senior business owner, contract manager, commercial specialists) to be confirmed during it. Simple, low cost contracts may need no commercial specialist support. Retendering, handing management to the supplier and releasing retention early are not what the standard describes."
+ },
+ {
+  "prompt": "Before paying an advance to FW-E (synthetic) on EKC-05, the synthetic flowline replacement, the manager doubts that FW-E's performance security is genuine. What does the World Bank Contract Management Practice guidance (pp.13 to 14) expect?",
+  "options": [
+   "Pay the advance and check the security later, since late payment breaks the contract.",
+   "Accept it if the document looks formal and carries a bank logo.",
+   "Verify the security with the institution that issued it before the advance is paid.",
+   "Ask FW-E to confirm in an email that the security is genuine."
+  ],
+  "answer": 2,
+  "explanation": "The World Bank guidance, taught by concept, has the employer check that a performance security matches the contract in amount, validity and wording, and verify a doubtful security with the issuing institution before paying an advance. A logo or the supplier's own email proves nothing about the security, and paying first defeats the check."
+ },
+ {
+  "prompt": "A trainee reads that Nigeria's Public Procurement Act 2007, s.35(1), allows a mobilisation fee. On what terms, and on what basis does the course use the rule for Ekene?",
+  "options": [
+   "Not more than 15%, and for Ekene it serves as a model of public practice.",
+   "Not more than 10%, binding on every Ekene contract.",
+   "Not more than 15%, and binding on Ekene exactly as it binds a federal procuring entity.",
+   "Any amount the parties agree, since s.35(1) sets no ceiling on the fee."
+  ],
+  "answer": 0,
+  "explanation": "The Public Procurement Act 2007, s.35(1), provides that a mobilisation fee of not more than 15% may be paid to a supplier or contractor, supported by the items the section lists. The 2007 Act binds federal procuring entities, and for an operator such as Ekene it is a published statement of public practice. The 10% figure belongs to the performance guarantee in s.36, and treating the 2007 Act as binding on an operator mistakes whom it governs."
+ },
+ {
+  "prompt": "A federal procuring entity has paid a mobilisation fee to a contractor. Under Nigeria's Public Procurement Act 2007, s.35(2), what must exist before any further payment is made?",
+  "options": [
+   "A second mobilisation fee request signed by the contractor's director.",
+   "A letter from the Bureau approving each later payment one by one.",
+   "An interim performance certificate issued in accordance with the contract.",
+   "Nothing further, since the fee has already secured the contractor's performance."
+  ],
+  "answer": 2,
+  "explanation": "Section 35(2) provides that once a mobilisation fee has been paid, no further payment shall be made without an interim performance certificate issued in accordance with the contract agreement. The 2007 Act sets no second fee and no payment-by-payment approval from the Bureau. The rule binds federal procuring entities, and it models a useful discipline for any contract: a certificate before the next payment."
+ },
+ {
+  "prompt": "Under Nigeria's Public Procurement Act 2007, s.36, a federal procuring entity may pay a mobilisation fee only if a Performance Guarantee is in place. How large must that guarantee be?",
+  "options": [
+   "Exactly 15% of the contract value, as in s.35.",
+   "At least 10% of the contract value, or the fee requested if that is higher.",
+   "Whatever the contractor offers, as s.36 leaves it open.",
+   "At least 5% of the project sum, as in the content Act."
+  ],
+  "answer": 1,
+  "explanation": "Section 36 makes a Performance Guarantee a precondition for any contract on which a mobilisation fee is paid, of not less than 10% of the contract value or an amount equal to the fee requested, whichever is higher. The 15% figure is the ceiling on the fee in s.35(1), and the five per cent in the content Act, s.68, is a fine, which is a different thing altogether."
+ }
+]

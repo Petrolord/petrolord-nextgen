@@ -18,6 +18,8 @@ import {
   courseName, CERT_TIER_LABELS, formalDate, certificateHolder, titleCaseSlug,
 } from '@/lib/appNames';
 import CertificateView from '@/components/academy/CertificateView';
+import PracticeCourseBadge from '@/components/course/PracticeCourseBadge';
+import { courseTypeOf } from '@/lib/courseType';
 const STATUS_PILL = {
   valid: { cls: 'bg-emerald-900/40 text-emerald-300 border-emerald-700', icon: CheckCircle2, label: 'Valid' },
   expired: { cls: 'bg-yellow-900/40 text-yellow-300 border-yellow-700', icon: AlertTriangle, label: 'Expired' },
@@ -132,6 +134,7 @@ const AcademyCertificatesPage = () => {
                           <span className="text-[#BFFF00] text-sm font-medium">
                             {CERT_TIER_LABELS[c.tier] || titleCaseSlug(c.tier)}
                           </span>
+                          <PracticeCourseBadge show={courseTypeOf(c.app_slug, [{ slug: c.app_slug, course_type: c.course_type }]) === 'practice'} />
                         </div>
                         <p className="text-xs text-gray-500 font-mono mt-1">{c.certificate_number}</p>
                       </div>

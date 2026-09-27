@@ -60,6 +60,7 @@ export const APP_NAMES = {
   joa: 'Joint Ventures, Operating Agreements & Cost Recovery',
   farmout: 'Farm-ins, Farm-outs & Asset Valuation',
   prms: 'Reserves & Resources under SPE-PRMS 2018',
+  contracts: 'Contract & Supplier Management',
   separation: 'Separation & Slug Catching',
   linesizing: 'Pipeline & Line Sizing',
   rotating: 'Rotating Equipment',
