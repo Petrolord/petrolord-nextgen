@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "Where does the engine's fleetVariability function get its random numbers and its summaries?",
+  "options": [
+   "From the canonical lib/stats: one mulberry32 stream on the stated seed, triInvCDF and basicStats",
+   "From a sampler of its own inside the marine engine, written for the weather and the demand",
+   "From the clock of the machine it runs on, so every run gives a fresh and independent answer",
+   "From a table of past Ekene weeks, resampled with replacement to build the spread of weeks"
+  ],
+  "answer": 0,
+  "explanation": "The engine carries no sampler and no percentile code of its own: it imports mulberry32, triInvCDF and basicStats from lib/stats/stats.js and the exceedance sentence from lib/conventions/percentile.js. It reads no clock and fits nothing to past weeks; the seed is a stated input."
+ },
+ {
+  "prompt": "In each draw of the engine's Monte Carlo, in what order are the two factors taken from the stream?",
+  "options": [
+   "The demand factor first, since demand sets the voyages before the weather acts",
+   "Both from one uniform number, so the two factors always move together",
+   "The weather factor first, then the demand factor, each only when it varies",
+   "Whichever varies more is drawn first, as judged from its min and its max"
+  ],
+  "answer": 2,
+  "explanation": "The engine's basis states it: per iteration the weather factor is drawn first, then the demand factor, each only when it varies. If the weather is a plain number it takes no uniform number and the demand factor takes the first. Each factor has its own uniform draw, so the two are drawn independently; the order is fixed, which is what lets the same seed give back every draw."
+ },
+ {
+  "prompt": "A triangular factor is stated with its max equal to its min. What does the engine's Monte Carlo do with it?",
+  "options": [
+   "Refuses it, since a triangular must have its min strictly below its mode and its max",
+   "Draws nothing for it, since a triangular only varies when its max is above its min",
+   "Draws a uniform number for it anyway, and every draw then returns the same value",
+   "Replaces it with the mode of the other factor, so that at least one of the two still varies"
+  ],
+  "answer": 1,
+  "explanation": "A factor varies when it is a triangular { min, mode, max } with max above min; a plain number, or a triangular whose max equals its min, is fixed and takes no uniform number from the stream. The engine's order rule is min <= mode <= max, so an equal triangle is accepted, and nothing is borrowed from the other factor."
+ },
+ {
+  "prompt": "What does the demand factor of a draw multiply, in the engine's Monte Carlo?",
+  "options": [
+   "The minimum visits of every installation, rounded up to whole visits after each draw is made",
+   "Voyages after rounding, so that each draw scales the voyage count of the plan directly",
+   "The vessel-days of the plan at the modes, as a single multiplier on the whole of the fleet's work",
+   "Every installation's demand in the period: deck area, deck weight and every bulk product"
+  ],
+  "answer": 3,
+  "explanation": "The demand factor multiplies every installation's demand, deck area, deck weight and each bulk product alike, and each draw then sizes the fleet exactly as fleetSize does. The minimum visits are a stated count and do not scale; the voyages and the vessel-days follow from the scaled demand through the stated rounding."
+ },
+ {
+  "prompt": "On the Ekene week (the PSV milk run, weather triangular 1, 1.2, 1.6 on sailing and field time, demand triangular 0.85, 1, 1.3, 2 planned vessels, seed 20260927, 20000 draws), what does the engine return as the plan at the modes?",
+  "options": [
+   "10.239206 vessel-days and 2.001400 vessels, the mean of the sampled weeks on seed 20260927",
+   "10.345455 vessel-days and 2 vessels, the figures fleetSize returns for the same week, no draw",
+   "10.412277 vessel-days, the P50 of the draws, which is the plan once the draws are sorted",
+   "7.977705 vessel-days, the P90 of the draws, the week the plan must be sized to cover"
+  ],
+  "answer": 1,
+  "explanation": "The plan at the modes takes the weather factor at 1.2 and the demand factor at 1, and it is the fleetSize week: 10.345455 vessel-days and 2 vessels. It is no draw, so it does not move with the seed. 10.239206 and 2.001400 are the sampled means, 10.412277 the P50 and 7.977705 the P90, each an estimate on seed 20260927 and 20000 draws."
+ },
+ {
+  "prompt": "The seed is left out of a fleetVariability call. What comes back?",
+  "options": [
+   "seed must be a whole number from 0 to 4294967295 (there is no default, so every run can be reproduced); got nothing",
+   "A result drawn on seed 0, the first value in the accepted range, with that seed printed beside every figure",
+   "A result drawn on a seed taken from the clock, with the seed it chose printed in the basis so it can be repeated",
+   "seed must be a whole number from 0 to 4294967295 (there is no default, so every run can be reproduced); got -1"
+  ],
+  "answer": 0,
+  "explanation": "The seed has no default, so a call without one is refused in the engine's own words, ending \"got nothing\". The message ending \"got -1\" is the refusal of a negative seed. The engine reads no clock and picks no seed for the planner, because a run nobody can repeat cannot be checked."
+ },
+ {
+  "prompt": "On the Ekene week with seed 20260927 and 20000 draws, the engine returns a P90 and a P10 of the vessel-days. Which is which, as the engine reports them?",
+  "options": [
+   "P90 11.908677, the figure that 90 percent of the sampled weeks stay at or below; P10 7.977705",
+   "P90 10.412277 and P10 10.239206, the median and the mean of the sampled vessel-days",
+   "P90 16.024716 and P10 6.757591, the largest and the smallest of the sampled weeks",
+   "P90 7.977705, the low figure met or exceeded in 90 percent of the draws; P10 11.908677"
+  ],
+  "answer": 3,
+  "explanation": "For a requirement the engine takes the P90 as the LOW figure, the 10th percentile of the sorted draws at index floor(0.1 n), and the P10 as the high figure, the 90th percentile: 7.977705 and 11.908677, both estimates on seed 20260927 and 20000 draws. This is the engine's stated reading, with its sentence from lib/conventions/percentile.js; P90 read at the high side is the alternative it names. 10.412277 is the P50, 10.239206 the mean, and 16.024716 and 6.757591 the max and min."
+ },
+ {
+  "prompt": "Which sentence does the engine return beside its percentiles to fix what its P90 means?",
+  "options": [
+   "P90 means the value that 90% of the draws stay at or below, the upper tail of the requirement.",
+   "P90 means the 90th percentile of the sorted draws, at index floor(0.9 n), per lib/stats.",
+   "P90 means a 90% probability the actual quantity meets or exceeds this value, per SPE PRMS.",
+   "P90 means the requirement a planner should size the fleet to, in nine weeks out of ten."
+  ],
+  "answer": 2,
+  "explanation": "The engine returns the exceedance sentence of lib/conventions/percentile.js verbatim, as the key shows. Under it the P90 of a requirement is the figure met or exceeded in 90 percent of the draws, the low one. The other three read the P90 at the high side or as a sizing rule, which the engine does not state."
+ },
+ {
+  "prompt": "The Ekene week states 2 planned vessels at 6.5 available days a vessel. When does the engine count a draw as short?",
+  "options": [
+   "When its vessel-days are strictly above 13.000000, the planned vessels times the available days",
+   "When its vessel-days reach 13.000000 or more, a need equal to the capacity in vessel-days included",
+   "When its vessel-days pass the 10.345455 of the plan at the modes, the fleet's planned workload",
+   "When its whole vessels required come to 2 or more, the count of planned vessels on the week"
+  ],
+  "answer": 0,
+  "explanation": "The planned capacity in vessel-days is the planned vessels times the available days, 2 times 6.5, which is 13.000000, and a draw is short when its vessel-days are strictly above it at twelve significant digits. That strict comparison is the engine's stated reading; short at equality is the alternative it names. The plan at the modes is no capacity."
+ },
+ {
+  "prompt": "On the Ekene week with 2 planned vessels, seed 20260927 and 20000 draws, what share of the draws does the engine return as short, and what expected shortfall?",
+  "options": [
+   "0.998600 of the draws short, the share that needs exactly 2 whole vessels in the week",
+   "0.001400 of the draws short, with 0.000686 expected short vessel-days, both estimates",
+   "0.085000 of the draws short, with 0.025759 expected short vessel-days over the draws",
+   "0.001700 of the draws short, the share the same inputs give on seed 7 and 20000 draws"
+  ],
+  "answer": 1,
+  "explanation": "On seed 20260927 and 20000 draws the engine returns a probability short of 0.001400 and an expected shortfall of 0.000686 vessel-days, averaged over every draw with the covered draws at zero. 0.998600 is the share needing 2 vessels; 0.085000 and 0.025759 are the AHTS on dedicated voyages (seed 11, 5000 draws); 0.001700 is seed 7. Each is an estimate on its own seed and draws."
+ },
+ {
+  "prompt": "Both factors are held fixed, so every draw needs 14.000000 vessel-days, and 2 planned vessels give exactly 14.000000 (seed 4, 20 draws). What probability short does the engine return?",
+  "options": [
+   "1.000000, since every one of the 20 draws reaches the planned capacity in vessel-days",
+   "0.500000, half the draws being read as short when a need sits right at the capacity",
+   "No figure, since a Monte Carlo with both factors fixed is refused by the engine outright",
+   "0.000000, since a need equal to the planned capacity in vessel-days is covered"
+  ],
+  "answer": 3,
+  "explanation": "Short means strictly above the planned capacity, so a need exactly at it is not short: the engine returns 0.000000. That is its stated reading; the alternative, short at equality, would count every draw here. With one vessel fewer every draw is short, by 7.000000. Fixed factors are accepted, and every draw is then the fleetSize week."
+ },
+ {
+  "prompt": "The Ekene inputs are run on seed 7 with 20000 draws, beside the run on seed 20260927. Which figure is the same in both runs?",
+  "options": [
+   "The mean vessel-days, since 20000 draws settle it to the sixth decimal",
+   "The P90 of the vessel-days, since the percentile rule does not change",
+   "The plan at the modes, 10.345455 vessel-days, since it is no draw",
+   "The probability short, since the planned vessels have not changed"
+  ],
+  "answer": 2,
+  "explanation": "On seed 7 the mean is 10.249964, the P90 8.023594, the P10 11.928203 and the probability short 0.001700, against 10.239206, 7.977705, 11.908677 and 0.001400 on seed 20260927. The plan at the modes stays at 10.345455 because it is computed at the modes with no sampling. That is why every sampled figure is quoted with its seed and draws."
+ },
+ {
+  "prompt": "A fleetVariability call states a demand factor with min 1, mode 0.9 and max 1.3. What does the engine return?",
+  "options": [
+   "demandFactor must have min <= mode <= max; got min 1, mode 0.9, max 1.3",
+   "A result with the min and the mode swapped into order, and a note of the swap",
+   "A result that reads the triangular as fixed at its mode of 0.9 for every draw",
+   "demandFactor must be a number at or above 0 or a triangular distribution"
+  ],
+  "answer": 0,
+  "explanation": "A triangular must keep min at or below mode at or below max, and the engine refuses one that does not, in its own words as the key shows. It reorders nothing and fixes nothing. The other message is the start of the refusal of a demand factor that is neither a number nor a whole triangular."
+ },
+ {
+  "prompt": "A weather factor inside a fleetVariability call is stated as a triangular with a min of 0.9. What does the engine return?",
+  "options": [
+   "A result, the calm floor of 1 binding plain numbers only",
+   "A result with the min raised to 1 and a note of it",
+   "weather.factor must be a finite number from 1 to 10; got 0.9",
+   "weather.factor.min must be at or above 1; got 0.9"
+  ],
+  "answer": 3,
+  "explanation": "The weather factor keeps its calm floor of 1 and its cap of 10 inside a triangular as well as outside it, and the engine refuses the min by its own path, in its own words as the key shows. It moves no input. The \"from 1 to 10\" message is the refusal of a plain weather factor."
+ },
+ {
+  "prompt": "Why is no graded answer in this course a Monte Carlo figure, although the variability calculator prints many?",
+  "options": [
+   "Sampled figures are too rough to grade, since 20000 draws never settle to the sixth decimal",
+   "A graded answer needs one right value on any machine, and a sampled figure moves with its seed",
+   "The capstone runs its Monte Carlo on a hidden seed, so a learner cannot reproduce the figure",
+   "A sampled figure is the uncertainty course's to grade, so this course only shows the method"
+  ],
+  "answer": 1,
+  "explanation": "Every graded figure is a return value of the engine on fixed inputs. A sampled figure is a function of its seed and draws, so it is taught as an estimate with both, and no mark rests on it; a plan still reports it, because a fleet manager needs the spread. No seed is hidden: the seed is always a stated input."
+ }
+]

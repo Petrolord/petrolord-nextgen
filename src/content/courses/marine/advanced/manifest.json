@@ -1,0 +1,366 @@
+{
+ "app_slug": "marine",
+ "tier": "advanced",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-the-shore-base-as-a-queue",
+   "title": "The Shore Base as a Queue",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-berths-arrivals-and-service",
+     "title": "Berths, arrivals and service",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "marine-base-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-working-hour-clock",
+     "title": "The working-hour clock",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "marine-base-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-fixed-hours-lifts-and-bulk",
+     "title": "Fixed hours, lifts and bulk",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "marine-base-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-offered-load-and-berth-utilisation",
+     "title": "Offered load and berth utilisation",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "marine-base-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-erlang-c-and-mmc",
+   "title": "Erlang C and M/M/c",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-the-probability-of-waiting",
+     "title": "The probability of waiting",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "marine-base-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-mean-wait-and-mean-queue",
+     "title": "Mean wait and mean queue",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "marine-base-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-littles-law-at-the-base",
+     "title": "Little's law at the base",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "marine-base-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-published-tables",
+     "title": "The published tables",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "marine-base-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-a-printed-figure-that-misses-its-rounding",
+     "title": "A printed figure that misses its rounding",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "marine-base-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-constant-service-and-mdc",
+   "title": "Constant Service and M/D/c",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-a-constant-service-time",
+     "title": "A constant service time",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "marine-base-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-an-approximation-for-several-berths",
+     "title": "An approximation for several berths",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "marine-base-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-one-berth-and-the-exact-formula",
+     "title": "One berth and the exact formula",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "marine-base-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-how-many-berths-meet-a-target",
+     "title": "How many berths meet a target",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "marine-base-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-weather-and-demand-variability",
+   "title": "Weather and Demand Variability",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-the-monte-carlo-underneath",
+     "title": "The Monte Carlo underneath",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "marine-variability-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-two-factors-drawn-in-order",
+     "title": "Two factors drawn in order",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "marine-variability-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-vessels-required-as-a-distribution",
+     "title": "Vessels required as a distribution",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "marine-variability-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-chance-of-being-short",
+     "title": "The chance of being short",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "marine-variability-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-seed-draws-and-what-is-never-graded",
+     "title": "Seed, draws and what is never graded",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "marine-variability-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-readings-and-boundaries",
+   "title": "Readings and Boundaries",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-the-twelve-digit-tie-rule",
+     "title": "The twelve-digit tie rule",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "marine-base-calculator",
+      "marine-variability-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-boundaries-rule-by-rule",
+     "title": "Boundaries, rule by rule",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "marine-base-calculator",
+      "marine-variability-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-a-printed-bound-on-the-accepted-side",
+     "title": "A printed bound on the accepted side",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "marine-base-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-published-figures-that-do-not-reproduce",
+     "title": "Published figures that do not reproduce",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "marine-base-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-what-the-engine-does-not-compute",
+   "title": "What the Engine Does Not Compute",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-what-the-engine-leaves-out",
+     "title": "What the engine leaves out",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "marine-base-calculator",
+      "marine-variability-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-size-caps-and-refusals-at-scale",
+     "title": "Size caps and refusals at scale",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "marine-base-calculator",
+      "marine-variability-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-writing-the-logistics-plan",
+     "title": "Writing the logistics plan",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "marine-base-calculator",
+      "marine-variability-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "marine-base-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,361 @@
+{
+ "app_slug": "marine",
+ "tier": "beginner",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-offshore-supply-as-a-system",
+   "title": "Offshore Supply as a System",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-why-offshore-supply-is-planned",
+     "title": "Why offshore supply is planned",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "marine-voyage-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-sources-and-the-dates-they-were-read",
+     "title": "Sources and the dates they were read",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "marine-voyage-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-ekene-cluster-and-its-supply-base",
+     "title": "The Ekene cluster and its supply base",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "marine-voyage-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-nautical-miles-knots-hours-and-tonnes",
+     "title": "Nautical miles, knots, hours and tonnes",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "marine-voyage-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-calculator-panels-and-refusals",
+     "title": "The calculator panels and the refusals",
+     "order": 5,
+     "est_minutes": 14,
+     "panels": [
+      "marine-voyage-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-routes-and-voyage-time",
+   "title": "Routes and Voyage Time",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-milk-runs-and-dedicated-voyages",
+     "title": "Milk runs and dedicated voyages",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "marine-voyage-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-legs-and-sailing-hours",
+     "title": "Legs and sailing hours",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "marine-voyage-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-port-and-field-time",
+     "title": "Port and field time",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "marine-voyage-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-voyage-in-days",
+     "title": "The voyage in days",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "marine-voyage-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-weather-and-fuel",
+   "title": "Weather and Fuel",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-a-stated-weather-factor",
+     "title": "A stated weather factor",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "marine-voyage-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-which-activities-the-weather-slows",
+     "title": "Which activities the weather slows",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "marine-voyage-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-fuel-burn-by-activity",
+     "title": "Fuel burn by activity",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "marine-voyage-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-fuel-bill",
+     "title": "The fuel bill",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "marine-voyage-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-deck-and-bulk-capacity",
+   "title": "Deck and Bulk Capacity",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-deck-area-in-square-metres",
+     "title": "Deck area in square metres",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "marine-voyage-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-usable-fraction-of-the-deck",
+     "title": "The usable fraction of the deck",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "marine-voyage-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-deck-load-and-deadweight",
+     "title": "Deck load and deadweight",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "marine-voyage-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-bulk-tanks-by-product",
+     "title": "Bulk tanks by product",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "marine-voyage-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-the-binding-constraint",
+   "title": "The Binding Constraint",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-utilisation-per-constraint",
+     "title": "Utilisation per constraint",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "marine-voyage-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-binding-constraint-and-its-ties",
+     "title": "The binding constraint and its ties",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "marine-voyage-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-an-overloaded-voyage",
+     "title": "An overloaded voyage",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "marine-voyage-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-a-tank-the-vessel-does-not-have",
+     "title": "A tank the vessel does not have",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "marine-voyage-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-reading-a-voyage-plan",
+     "title": "Reading a voyage plan",
+     "order": 5,
+     "est_minutes": 14,
+     "panels": [
+      "marine-voyage-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-planning-a-voyage-end-to-end",
+   "title": "Planning a Voyage End to End",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-a-psv-and-an-ahts-on-one-route",
+     "title": "A PSV and an AHTS on one route",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "marine-voyage-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-calm-and-rainy-season",
+     "title": "Calm weather and the rainy season",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "marine-voyage-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-checking-a-plan-before-it-sails",
+     "title": "Checking a plan before it sails",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "marine-voyage-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "marine-voyage-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

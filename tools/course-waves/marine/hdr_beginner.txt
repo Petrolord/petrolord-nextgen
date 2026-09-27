@@ -1,0 +1,21 @@
+-- ============================================================================
+-- SC4 ASSOCIATE DEEP SEED: Offshore & Marine Logistics, beginner tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/marine/beginner.
+--
+-- What this tier owns: VOYAGES, CAPACITY AND THE BINDING CONSTRAINT. Offshore
+-- supply as a system and the sources with their editions, licences and read
+-- dates; milk runs and dedicated voyages, legs and sailing hours, port and
+-- field time; the stated weather factor and the activities it slows; fuel by
+-- activity and the fuel bill; deck area and its usable fraction, deck load,
+-- deadweight and the tanks; utilisation, the binding constraint and an
+-- overloaded voyage.
+--
+-- AN APP COURSE. The Suite app is the Marine Logistics Planner; the practicals
+-- also run in the course's own voyage and fleet calculator. The capstone grades
+-- six values of this tier, each identical under every reading the engine states
+-- and never a Monte Carlo draw.
+-- ============================================================================

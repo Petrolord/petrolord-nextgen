@@ -306,6 +306,10 @@ export const PANELS = {
   'materials-register-calculator': React.lazy(() => import('@/components/course/panels/materials/RegisterCalculator')),
   'materials-stock-calculator': React.lazy(() => import('@/components/course/panels/materials/StockCalculator')),
   'materials-spares-calculator': React.lazy(() => import('@/components/course/panels/materials/SparesCalculator')),
+  'marine-voyage-calculator': React.lazy(() => import('@/components/course/panels/marine/VoyageCalculator')),
+  'marine-deck-calculator': React.lazy(() => import('@/components/course/panels/marine/DeckCalculator')),
+  'marine-base-calculator': React.lazy(() => import('@/components/course/panels/marine/BaseCalculator')),
+  'marine-variability-calculator': React.lazy(() => import('@/components/course/panels/marine/VariabilityCalculator')),
 };
 
 export function resolvePanel(id) {

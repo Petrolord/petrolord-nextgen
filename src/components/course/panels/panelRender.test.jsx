@@ -26,7 +26,7 @@ import React from 'react';
 const panels = {
   ...import.meta.glob('/src/components/course/panels/**/*Explorer.jsx'),
   ...import.meta.glob('/src/components/course/panels/**/*Lab.jsx'),
-  // Engine courses whose practicals are calculator panels (SC2 procurement, EC7 pia, EC8 gsa, EC9 joa, EC10 farmout, EC11 prms), and the SC3 materials app course's calculators.
+  // Engine courses whose practicals are calculator panels (SC2 procurement, EC7 pia, EC8 gsa, EC9 joa, EC10 farmout, EC11 prms), and the SC3 materials and SC4 marine app courses' calculators.
   ...import.meta.glob('/src/components/course/panels/**/*Calculator.jsx'),
 };
 
@@ -539,6 +539,34 @@ describe('every course panel renders with no props', () => {
       }
     }
     expect(rendered).toBe(10);
+  }, 120000);
+  it('finds the SC4 marine calculator panels', () => {
+    const names = entries.map(([p]) => p.split('/panels/')[1]);
+    expect(names).toContain('marine/VoyageCalculator.jsx');
+    expect(names).toContain('marine/DeckCalculator.jsx');
+    expect(names).toContain('marine/BaseCalculator.jsx');
+    expect(names).toContain('marine/VariabilityCalculator.jsx');
+  });
+  it('every SC4 marine view renders, not only the default one', async () => {
+    const MODES = {
+      'marine/VoyageCalculator.jsx': ['voyagePlan', 'fleetSize'],
+      'marine/DeckCalculator.jsx': ['deckPlan'],
+      'marine/BaseCalculator.jsx': ['shoreBase'],
+      'marine/VariabilityCalculator.jsx': ['fleetVariability'],
+    };
+    let rendered = 0;
+    for (const [name, modes] of Object.entries(MODES)) {
+      const entry = entries.find(([p]) => p.endsWith(`/${name}`));
+      expect(entry, `${name} is not in the panel sweep`).toBeTruthy();
+      const mod = await entry[1]();
+      expect(mod.MODES.map((m) => m[0]), `${name} declares different modes`).toEqual(modes);
+      for (const mode of modes) {
+        const html = renderToStaticMarkup(React.createElement(mod.default, { initialMode: mode }));
+        expect(html, `${name} in the ${mode} view refused its own start`).not.toContain('THE ENGINE REFUSED');
+        rendered += 1;
+      }
+    }
+    expect(rendered).toBe(5);
   }, 120000);
   it('finds the D5 appliedai panels', () => {
     const names = entries.map(([p]) => p.split('/panels/')[1]);

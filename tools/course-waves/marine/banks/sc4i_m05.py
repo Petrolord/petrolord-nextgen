@@ -1,0 +1,117 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# SC4 Professional m05, First-Fit Decreasing.
+# Every figure is quoted from digest.txt or returned by the vendored engine on
+# the stated input (single-field edits verified by the writer's probe). The
+# Ekene cluster is synthetic. No capstone name, input or value appears.
+
+q(2, "How does the rule \"first-fit-decreasing-area\" order the units before it places any of them?",
+ "By footprint, largest first; then heavier first, then item id, then unit number",
+ ["By weight, heaviest first; then larger footprint, then item id, then unit number",
+  "In the order booked, with only the ties between equal footprints put heavier first",
+  "By footprint, smallest first, so that the small units fill the deck before the rest"],
+ "The rule sorts by footprint area, largest first, and settles ties heavier first, then by id, then by unit number. Weight is only the first tie-break. Keeping the booked order is the other rule, \"first-fit\". Smallest first would strand the large units, the opposite of the rule's purpose.")
+
+q(0, "On the Ekene voyage of deck cargo packed by first-fit decreasing, which four units does the engine put first in the packing order?",
+ "pipe-bundle#1, pipe-bundle#2, basket-6m#1, basket-6m#2",
+ ["chem-ibc#1, chem-ibc#2, chem-ibc#3, chem-ibc#4",
+  "pipe-bundle#1, pipe-bundle#2, cont-20#1, cont-20#2",
+  "mud-tank#1, mud-tank#2, pipe-bundle#1, pipe-bundle#2"],
+ "The casing bundles have the largest footprint, 35.100000 m2, and the 6 m baskets come next at 15.000000 m2, ahead of the 20 ft containers at 14.786400 m2. The chemical IBCs lead only in the booked order used by first fit. The mud tanks are heavier but smaller, and weight settles only ties of area.")
+
+q(3, "A planner states the packing rule as \"best-fit\". What does the engine return?",
+ "A refusal: rule must be one of \"first-fit-decreasing-area\", \"first-fit\"; got \"best-fit\"",
+ ["A plan by first-fit decreasing, since a rule it does not compute is read as the nearest rule",
+  "A plan that puts each unit on the voyage it fills most tightly, then prints the voyages used",
+  "A refusal: rule must be one of \"first-fit-decreasing-area\", \"first-fit\"; got nothing"],
+ "The engine computes two rules and refuses any other by name, quoting what it got. It substitutes no rule and packs by no tightest fit, which would be a different rule. The \"got nothing\" message is the one for a call with no rule stated at all.")
+
+q(1, "Under either rule, which voyage does a unit try first when its turn comes?",
+ "Voyage 1, and it moves on only when that voyage lacks the area or the deck load",
+ ["The voyage with the most area left, so the unit sits where the deck is emptiest",
+  "Whichever voyage the previous unit went on, so a packing moves forward voyage by voyage",
+  "Its tightest-fitting voyage, so the least area is left over after placing it"],
+ "Every unit starts its search at voyage 1, however full it is, and takes the first voyage with enough area and deck load. That loads the early voyages as fully as the rule can and leaves the last light. Choosing the emptiest or the tightest voyage would be other rules the engine does not compute.")
+
+q(1, "The Ekene deck cargo is packed by first-fit decreasing onto 2 stated voyages. What does voyage 2 carry?",
+ "11 units with 16.500000 m2 of footprint: the last skip and ten chemical IBCs",
+ ["The two casing bundles, 35.100000 m2 each, which could not share a voyage",
+  "Half the cargo, since first-fit decreasing spreads the units evenly over voyages",
+  "Nothing, since the 615.729600 m2 of footprint fits the first voyage by itself"],
+ "Voyage 1 takes 50 units and 599.229600 m2, and every later unit finds too little area there and goes to voyage 2: the sixth skip and ten IBCs, 16.500000 m2. The casing bundles go on first, to voyage 1. The rule fills early voyages first, and 615.729600 m2 is more than the 600.000000 m2 usable.")
+
+q(3, "The same Ekene cargo, first-fit decreasing, is packed with 3 voyages stated. What does the engine return?",
+ "Voyage 3 stays empty and the voyages used read 2, the same packing as with 2 stated",
+ ["The 61 units spread over three voyages, since each stated voyage must carry cargo",
+  "Voyage 3 takes the last unit of voyage 2, so the three voyages carry similar deck areas",
+  "A refusal, since the stated voyages must never exceed the lower bound of 2 voyages"],
+ "A stated voyage that nothing reaches stays empty, and \"voyages used\" counts only voyages that carry something. The first-fit placing never moves a unit it has placed. Stating more voyages than the cargo needs is accepted and shows how many it really needs.")
+
+q(0, "Three item lines share a footprint of 6.000000 m2: b (1 t, quantity 2), a (1 t) and c (4 t). The deck holds two of them a voyage, and the rule is first-fit decreasing. What does the engine return for voyage 1?",
+ "c and a, as the engine sorts them c, a, b#1, b#2, putting the heavier c first",
+ ["b#1 and b#2, since the first line booked goes first when footprints are equal",
+  "a and b#1, since ties go by item id before weight is looked at in the order",
+  "a and c, since a lighter unit goes first when the footprints are equal"],
+ "The engine returns c and a on voyage 1 and b#1, b#2 on voyage 2. Putting the heavier of two equal footprints first is a reading the engine states; the alternative, lighter first, would send c to voyage 2. After weight, the item id puts a before b, and the unit number orders b#1 before b#2.")
+
+q(2, "On that equal-footprint case, a planner lowers c's weight from 4 t to 1 t, so all four units weigh the same. What order does the engine return?",
+ "a, b#1, b#2, c, with a and b#1 on voyage 1",
+ ["c, a, b#1, b#2, the same order as before",
+  "b#1, b#2, a, c, the order the lines were booked",
+  "a, c, b#1, b#2, with a and c on voyage 1"],
+ "With equal footprints and equal weights, the item id decides: a, then b, then c, and the unit number orders b's units. The deck holds two a voyage, so voyage 1 takes a and b#1. The old order rested on c's extra weight. The booked order is used only by first fit.")
+
+q(3, "Pack the Ekene deck cargo onto a single voyage by the rule \"first-fit\", which keeps the fixture's smallest-first booking. What comes back?",
+ "580.629600 m2 and 60 units carried, one casing bundle left behind",
+ ["599.229600 m2 and 50 units carried, the same plan as first-fit decreasing",
+  "615.729600 m2 and 61 units carried, as the booked order packs more tightly",
+  "580.629600 m2 carried, with both casing bundles left behind on the quay"],
+ "First fit places the small units first and fills the deck with them; by the second casing bundle's turn the most area left is 19.3704 m2 against the 35.1 it needs. It carries more units and less area than first-fit decreasing's 599.229600 m2 and 50 units. The first bundle still fits.")
+
+q(1, "Which is the engine's own overflow reason for pipe-bundle#2 when the Ekene cargo is packed by first fit onto one voyage?",
+ "pipe-bundle#2 is overflow: it needs 35.1 m2 of usable area and 38 t of deck load; at its turn the most left on any voyage was 19.3704 m2 (short) and 1522.4 t (enough); usable area stops it",
+ ["pipe-bundle#2 is overflow: its footprint 35.1 m2 is larger than the usable deck area 19.3704 m2, so no voyage of this deck can ever carry it",
+  "pipe-bundle#2 is overflow: it needs 35.1 m2 of usable area and 38 t of deck load; at its turn the most left on any voyage was 19.3704 m2 (short) and 1522.4 t (enough); deck load stops it",
+  "pipe-bundle#2 is overflow: it needs 35.1 m2 of usable area and 38 t of deck load; at its turn the most left on any voyage was 19.3704 m2 (short) and 1522.4 t (short); usable area and deck load both stop it"],
+ "Area is short and deck load is enough, so the reason names usable area. The unit fits an empty voyage of 600.000000 m2, so it is no never-fit unit, whose reason compares the footprint with the whole usable deck. Only a short limit is named, and 1522.4 t is plenty for 38 t.")
+
+q(0, "Switch the two-voyage Ekene deck plan to first fit in the booked order. Which unit or units ride the second voyage?",
+ "pipe-bundle#2 alone, 35.100000 m2, the bundle the first voyage had no room for",
+ ["The last skip and ten chemical IBCs, 16.500000 m2, as under first-fit decreasing",
+  "Both casing bundles, since first fit keeps the units of one line together",
+  "Nothing, since the booked order carries all 61 units on the first voyage"],
+ "First fit fills voyage 1 with 60 units and 580.629600 m2, as on one voyage, and the stranded bundle goes to voyage 2 alone. The last skip and ten IBCs ride voyage 2 under first-fit decreasing, a different packing order. pipe-bundle#1 is already on voyage 1, and one voyage cannot carry all 61 by area.")
+
+q(2, "An overflow reason reads: at its turn the most left on any voyage was 9 m2 (enough) and 1 t (short). Which ending does the engine write?",
+ "deck load stops it",
+ ["usable area stops it",
+  "usable area and deck load both stop it",
+  "no one voyage had both, so usable area and deck load together stop it"],
+ "One limit is marked short, the deck load, so the reason names it alone: deck load stops it. Usable area is marked enough. Both limits are named together only when both are short. The fourth ending is for a unit whose two limits each read enough while no single voyage holds both.")
+
+q(2, "A reason reads: c is overflow: it needs 3 m2 of usable area and 1 t of deck load; at its turn the most left on any voyage was 9 m2 (enough) and 9 t (enough); no one voyage had both, so usable area and deck load together stop it. What does it tell the planner?",
+ "The spare area is on one voyage and the spare load on another, so c needs another voyage",
+ ["The engine made an error, since a unit with enough area and enough load always fits",
+  "c is too large for this deck and needs a larger deck or a stronger one to be carried",
+  "c can never ride this deck, so the engine lists it as never fitting"],
+ "Each figure is the most left on any voyage, and here they sit on different voyages, so each limit alone reads enough and no single voyage passes both. c fits an empty voyage, so it needs another voyage; with 3 voyages stated the engine puts c on voyage 3. A unit listed as never fitting is one too large or too heavy for an empty voyage, and c is neither.")
+
+q(0, "On a 10 m2, 10 t deck packed by first fit onto 1 voyage, unit a (9 m2, 9 t) goes first, then b (1 m2, 1 t), then c (1 m2, 1 t). What does the engine return for c?",
+ "Overflow, 0 m2 (short) and 0 t (short) left; usable area and deck load both stop it",
+ ["Carried, since a fit is inclusive and c needs no more than b needed before it",
+  "Overflow as a unit that never fits, since the deck is full after a and b are on",
+  "Overflow with the ending that no one voyage had both area and load left for c"],
+ "b fills the voyage exactly and fits, since a fit is inclusive, so nothing is left at c's turn: both limits read 0 and short, and the reason names both. c alone fits an empty voyage, so it is no never-fit unit. The fourth ending needs both limits to read enough.")
+
+q(3, "Why is the ending \"no one voyage had both\" the one to read with care?",
+ "Both limits read enough on some voyage, yet no single voyage holds both for the unit",
+ ["It is the only ending that means a unit is heavier than the whole deck load it faces",
+  "Only first-fit decreasing writes it, where units go largest first",
+  "This ending marks a refusal, since the engine cannot place the unit on any voyage"],
+ "The short and enough marks report the most area and the most load left on any voyage, each on its own. When they sit on different voyages both read enough and the unit still overflows, so the pair stops it together. A unit too heavy for the deck gets a never-fit reason. The course's case is first fit, and overflow is a result.")
+
+emit(Q, '/root/cat-wip-marine/banks/sc4i_m05.json', expect_n=15)
+finish()

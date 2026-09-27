@@ -1,0 +1,21 @@
+-- ============================================================================
+-- SC4 EXPERT DEEP SEED: Offshore & Marine Logistics, advanced tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/marine/advanced.
+--
+-- What this tier owns: SHORE BASE QUEUES, VARIABILITY AND THE LIMITS. The
+-- working-hour clock, the service time and the berth utilisation; M/M/c by
+-- Erlang C with the published tables and their printed slip; M/D/c by the
+-- Cosmetatos approximation and the berth target; the fleet under weather and
+-- demand variability through the seeded canonical Monte Carlo, taught with its
+-- seed and draws and never graded; the readings, the boundaries and what the
+-- engine does not compute.
+--
+-- AN APP COURSE. The Suite app is the Marine Logistics Planner; the practicals
+-- also run in the course's own shore base and variability calculators. The
+-- capstone grades six values of this tier, each identical under every reading
+-- the engine states and never a Monte Carlo draw.
+-- ============================================================================

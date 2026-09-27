@@ -1,0 +1,908 @@
+# SC4 TEACHING DIGEST: Offshore & Marine Logistics
+
+# THIS FILE IS THE ONLY TEACHING TRUTH FOR THIS COURSE. Every number in every lesson, bank question, key truth and panel comes from a line below. The oracle, the golden file's expected figures, the fixture README, the negative control and the engine source comments are PROVENANCE; none of them is teaching truth.
+
+# PRECISION. Every distance, speed, time in hours or days, vessel-day, fuel tonnage, amount of money, area, weight, volume, fraction, utilisation, probability, factor, count that is not whole and queue figure prints to SIX decimals; whole counts (voyages rounded up, vessels, berths, units, draws, seeds) and whole inputs print as whole numbers; a figure of sixteen or more significant digits at six decimals prints with its thousands grouped by commas; an engine message, reason and basis is printed verbatim, figures and all. Inside a message the engine prints money rounded to the cent and a computed quantity to six decimals (both half away from zero, trailing zeros dropped), and a stated input as it was given.
+
+# ENGINE. engines/supplychain/marineLogistics.js, vendored sha-identical with petrolord-engines e67e7ba (engines PRs #282, #283 and #284: the engine, its validation record FINDINGS-marine.md with the lead's decisions, and the deckPlan overflow reasons that name the stopping limit with the lower bound over the units that fit), 932 lines, at its canonical path in the NextGen repository. It imports mulberry32, triInvCDF and basicStats from lib/stats/stats.js and EXCEEDANCE_DEFINITION from lib/conventions/percentile.js, and nothing else. It makes no network call.
+
+# AN APP COURSE. The Suite app for this course is the Marine Logistics Planner, in the Suite's Midstream & Downstream module, which runs this same engine file (the same blob). Every practical in this course also runs in the course's own four calculator panels, which call the vendored engine on the learner's own inputs, so a learner without a Suite seat can work every exercise.
+
+# THE DATA. Every Ekene installation, vessel, product, leg, cargo, demand, deck item and supply base term is SYNTHETIC, written for this platform by a stated script. No real company, vessel, port, installation or contract appears.
+
+# WHAT IS NEVER IN THIS FILE. No capstone field, no capstone case and no graded answer. The capstones run their own clusters and the digest never names them.
+
+# NO SOURCE PROSE. The course cites its sources by table, equation and example and writes every explanation in its own words; none of their prose is quoted (section 2).
+
+# THIS COURSE TEACHES NO REPAIR HISTORY. Every section below describes what the engine does today.
+
+# SECTION 1: What this engine computes, and what it declines to compute (owned by Associate m01 and Expert m06)
+
+Every function takes plain arrays and objects and returns either a result object or an object with `error` and `field`, where `field` names the input it refused and the message starts with that name. Every result carries a `basis` block naming the rules it applied and where they come from, so the working can be printed; voyagePlan and fleetSize also return `reasons`, and a shoreBase target returns its own reason.
+
+| function | role | what it needs | what it returns |
+| --- | --- | --- | --- |
+| `voyagePlan` | the voyages of one vessel on a stated route | vessel, products, installations (each with its cargo), route, portHours, weather, fuelPricePerT | per voyage the legs, the hours by activity with the weather factor, the days, the fuel by activity, the fuel cost, the load, the utilisation of every capacity constraint, the binding constraint, every overloaded constraint and the reasons; the totals over the voyages |
+| `fleetSize` | the fleet a period's demand needs | vessel, products, installations (each with its demand and minimum visits), route, portHours, weather, fuelPricePerT, periodDays, vesselAvailableDays, voyageRounding, vesselRounding | per voyage set the voyages before and after rounding and what drives them, the hours, the voyage days and the vessel-days; the vessel-days, the vessels before and after rounding, spare or short vessel-days, the fleet utilisation, the fuel and its cost for the period |
+| `fleetVariability` | the fleet under weather and demand variability | every fleetSize input with the weather factor a number or a triangular, demandFactor, plannedVessels, iterations, seed | the plan at the modes; the vessel-days and the vessels required as mean, P90, P50, P10, min and max; the distribution of whole vessels; the probability of being short and the expected short vessel-days for the planned vessels; the exceedance sentence |
+| `deckPlan` | the deck cargo of a stated number of voyages | deck, items, voyages, rule | the packing order, the usable area, each voyage's units, area, weight and their utilisations, the voyages used, every overflow unit with its reason, the totals, the lower bound and the units no voyage can ever carry |
+| `shoreBase` | the berth queue at the supply base | berths, arrivalsPerDay, workingHoursPerDay, service, model, targetMeanWaitHours (optional) | the service hours, the arrivals an hour, the offered load, the berth utilisation, the probability of waiting (M/M/c), the mean queue, the mean wait, the mean time at the base, the mean in the system; with a target, the fewest berths that meet it |
+
+The stated constants, read from the exported `DEFAULTS` and `ACTIVITIES`:
+
+| constant | value | what it sets | kind |
+| --- | --- | --- | --- |
+| `DEFAULTS.TIE_DIGITS` | 12 | the significant digits two figures must agree to for a tie, a capacity check or a count rounded up | engine convention |
+| `DEFAULTS.MAX_INSTALLATIONS` | 50 | the most installations one call accepts | cap |
+| `DEFAULTS.MAX_PRODUCTS` | 20 | the most bulk products one call accepts | cap |
+| `DEFAULTS.MAX_ITEM_LINES` | 500 | the most item lines one deck plan accepts | cap |
+| `DEFAULTS.MAX_UNITS` | 2000 | the most units (item lines times quantities) one deck plan accepts | cap |
+| `DEFAULTS.MAX_QUANTITY` | 1000 | the largest quantity one item line accepts | cap |
+| `DEFAULTS.MAX_DECK_VOYAGES` | 500 | the most voyages one deck plan accepts | cap |
+| `DEFAULTS.MAX_BERTHS` | 100 | the most berths a shore base, or its target search, accepts | cap |
+| `DEFAULTS.MAX_WEATHER_FACTOR` | 10 | the largest weather factor accepted (the smallest is 1) | cap |
+| `DEFAULTS.MAX_ITERATIONS` | 200000 | the most Monte Carlo draws one fleetVariability call accepts | cap |
+| `DEFAULTS.MAX_DRAWS` | 2000000 | the most iterations times voyage sets one fleetVariability call accepts | cap |
+
+`ACTIVITIES` is "sailing", "port", "field": the three kinds of time a voyage spends, each with its own stated fuel burn, and the names a weather factor is applied to.
+
+WHAT THE ENGINE DOES NOT DO, checked here against its exports and its source:
+- Its two imports are lib/stats/stats.js (the canonical seeded Monte Carlo: mulberry32, the triangular inverse CDF triInvCDF and the summary basicStats) and lib/conventions/percentile.js (the exceedance sentence). It carries no sampler and no percentile code of its own. The one function that samples is fleetVariability, on the stated seed. It discounts nothing and computes no NPV.
+- It decides nothing an input does not state. Every speed, distance, leg, time, capacity, usable fraction, density, tank, fuel burn, fuel price, weather factor and the activities it applies to, demand, minimum visits, period, available days, rounding rule, footprint, weight, quantity, packing rule, berth count, arrival rate, working day, service term, queue model, distribution, planned fleet, draw count and seed is an input with no default, and a call without one is refused by name (section 5). The only figures it holds are its caps and the tie rule in `DEFAULTS`.
+- It reads no key it does not know. `ACCEPTED_KEYS` is exported with one shape for each of the 5 functions, and every call refuses an input key the function does not read, at every level, naming the key, its path and the accepted keys; a bulk or tank key must be a stated product id. A misspelt optional key is refused; it is never dropped silently.
+- It plans no vessel schedule by the clock, sets no hire rate, fits no distribution to data, stacks no cargo, checks no deck shape and computes no port cost. Section 27 lists each with the course that owns it.
+- Its exported names are, in full: ACCEPTED_KEYS, ACTIVITIES, DEFAULTS, deckPlan, fleetSize, fleetVariability, shoreBase, voyagePlan.
+
+# SECTION 2: The sources, their editions and licences, and the date each was read (owned by Associate m01 l02 and Expert m05 l04 and Expert m06)
+
+THE RULE THIS COURSE FOLLOWS FOR EVERY SOURCE. Each one is named with its edition or date, its licence and the date it was read. The course quotes none of their prose: a text with no licence printed is cited for its figures and formulas; a CC BY-SA text is cited without pasting its wording; a publisher's text is taught by concept; a CC BY 4.0 text is cited by table and equation. Every figure the engine applies is a stated input with no default. Every text below was read on 2026-09-27.
+
+| text | edition or date | licence | what the course reads from it | how the course uses it | date read |
+| --- | --- | --- | --- | --- | --- |
+| I. Adan and J. Resing, Queueing Systems (lecture notes, Eindhoven University of Technology) | 26 March 2015 | no licence printed | ch. 5 (eqs 5.1 to 5.3, the M/M/c delay probability, mean queue and mean wait; Tables 5.1 and 5.2); s. 3.4 Little's law; s. 7.6 eqs 7.14 to 7.16 (the Pollaczek-Khinchin mean value formula); s. 11.3 the Erlang B recursion (11.3) and remark 11.3.2 | FIGURES AND FORMULAS ONLY: never quoted | 2026-09-27 |
+| V. B. Iversen, Teletraffic Engineering Handbook (ITU-D Study Group 2 Question 16 and ITC) | draft, 20 June 2001 | an ITU document; no licence printed | s. 12.2 Erlang's C formula; Example 12.3.1 (two delay systems and their mean waits) | FIGURES AND FORMULAS ONLY: never quoted | 2026-09-27 |
+| B. Liu, T. P. Pantelidis, S. Tam and J. Y. J. Chow, An EV charging station access equilibrium model with M/D/C queueing | arXiv 2102.05851v2 (11 February 2021) | CC BY 4.0 | eq. (2): the Cosmetatos (1975) approximation for the M/D/c mean wait, and the statement that M/D/c has no closed form for its mean delay | cited by equation | 2026-09-27 |
+| I. Skoko, Z. Lusic, Z. Sanchez-Varela and Z. Boko, Optimization Model for Selection of the Offshore Fleet Structure, J. Mar. Sci. Eng. 12(2), 263 | 1 February 2024 | CC BY 4.0 | Table 1 (fuel burn by activity and the daily fuel cost at USD 870 a tonne), Table 4 (the daily distance at the economic speed; the usable share of capacity), Tables 5 and 7 (the optimal days by activity and the optimal fuel cost) | cited by table | 2026-09-27 |
+| B. Aas, O. Halskau and S. W. Wallace, The role of supply vessels in offshore logistics, Maritime Economics & Logistics 11(3), 302-325 | 2009 (accepted manuscript, Lancaster EPrints 45409) | publisher copyright | deck cargo measured in square metres with no stacking; bulk in segregated tanks; the economical speed; weather limits on sailing and on offshore loading | BY CONCEPT ONLY: never quoted | 2026-09-27 |
+| Wikipedia, First-fit-decreasing bin packing | revision 1317275412 (17 October 2025) | CC BY-SA 4.0 | the first-fit decreasing rule (Johnson 1973); the capacity 60 and 61 example (Coffman, Garey and Johnson 1978); Huang and Lu (2021) Example 5.1; the tight example of Dosa (2007) | CITED BY SECTION AND EXAMPLE: its wording is not pasted | 2026-09-27 |
+
+NOT USED. No openly readable offshore paper was found that prints a deterministic fleet-sizing example with its inputs and a vessel count, so the course validates fleet sizing through its published parts (the Skoko et al. fuel and distance tables) and teaches the sizing rule as the engine states it. Fagerholt and Lindstad (2000), Halvorsen-Weare et al. (2012) and Maisiuk and Gribkovskaia (2014) were paywalled or blocked where they were sought, and IMCA and GOMO guidance was not used.
+
+The engine carries its citations in its own words. The `basis` of one call of each function, verbatim:
+
+| call | basis key | the engine's basis, verbatim |
+| --- | --- | --- |
+| voyagePlan (ekene-voyage-milk-run-psv) | rule | one milk run through the stops in the stated order; weather factor 1.2 on sailing, field time; deck area capacity = deck area x the usable fraction 0.75; deadweight load = deck weight + bulk m3 x the stated density; the binding constraint has the highest utilisation (ties to the first in the order deck area, deck load, deadweight, tanks) |
+| voyagePlan (ekene-voyage-milk-run-psv) | source | sailing hours = distance / speed (Skoko et al. 2024: 10 knots is 240 nautical miles a day); fuel = hours in each activity x the stated tonnes an hour; fuel cost = tonnes x price (Skoko et al. 2024, Tables 1, 4 and 7); Aas, Halskau and Wallace (2009): deck cargo is measured in square metres and is not stacked; bulk travels in segregated tanks (taught by concept) |
+| fleetSize (ekene-fleet-psv-milk-run) | rule | voyages = the largest of demand / capacity over deck area (x 0.75), deck load, deadweight and each tank, and the minimum visits, rounded up to whole voyages; vessel-days = voyages x voyage days; vessels = vessel-days / 6.5 available days, rounded up; counts compare at 12 significant digits |
+| fleetSize (ekene-fleet-psv-milk-run) | source | voyages a period = the largest of demand / capacity per constraint and the minimum visits; vessel-days = voyages x voyage days; vessels = vessel-days / available days a vessel, by the stated rounding rule; sailing hours = distance / speed (Skoko et al. 2024: 10 knots is 240 nautical miles a day); fuel = hours in each activity x the stated tonnes an hour; fuel cost = tonnes x price (Skoko et al. 2024, Tables 1, 4 and 7) |
+| fleetVariability (ekene-variability-psv-milk-run) | rule | per iteration the weather factor is drawn first, then the demand factor, each only when it varies (lib/stats mulberry32 seed 20260927, triangular inverse CDF); the fleet is sized as fleetSize does; short means vessel-days above plannedVessels x available days; for a requirement P90 is the LOW figure (10th percentile) and P10 the HIGH figure (90th percentile) |
+| fleetVariability (ekene-variability-psv-milk-run) | source | lib/stats (mulberry32, triInvCDF, basicStats) and lib/conventions/percentile.js; voyages a period = the largest of demand / capacity per constraint and the minimum visits; vessel-days = voyages x voyage days; vessels = vessel-days / available days a vessel, by the stated rounding rule |
+| deckPlan (ekene-deck-one-voyage-ffd) | rule | first-fit decreasing by footprint area (ties: heavier first, then item id, then unit number); usable area = 800 m2 x 0.75; a unit goes to the first voyage whose area and deck load still hold it; the lower bound counts only the units that fit an empty voyage (a unit larger than the usable area or heavier than the deck load is listed in neverFit and left out): the larger of their area / usable area and their weight / deck load, rounded up, and 0 when no unit fits; an overflow reason gives the most usable area and deck load left on any voyage at the unit's turn and names the limit that stops it; an area bound with no stacking and no check of shapes |
+| deckPlan (ekene-deck-one-voyage-ffd) | source | Johnson (1973) first-fit decreasing; Coffman, Garey and Johnson (1978) example as printed in Wikipedia, First-fit-decreasing bin packing (CC BY-SA 4.0); Aas, Halskau and Wallace (2009): deck cargo is measured in square metres and is not stacked; bulk travels in segregated tanks (taught by concept) |
+| shoreBase (ekene-base-mmc) | rule | working-hour clock: 3.2 arrivals a day over 24 working hours; service 8 hours = 2 fixed + 5 for lifts alongside 6 for bulk; M/M/c (Poisson arrivals, exponential service, first come first served) |
+| shoreBase (ekene-base-mmc) | source | Adan and Resing, Queueing Systems (2015): eq. (5.1) delay probability, computed by the stable recursion (11.3) and remark 11.3.2; eq. (5.2) E(Lq) = PiW rho / (1 - rho); eq. (5.3) E(W) = PiW / ((1 - rho) c mu); Little's law (section 3.4) |
+| shoreBase (ekene-base-mdc) | rule | working-hour clock: 3.2 arrivals a day over 24 working hours; service 8 hours = 2 fixed + 5 for lifts alongside 6 for bulk; M/D/c (Poisson arrivals, constant service) by an approximation; probabilityWait is not given for M/D/c |
+| shoreBase (ekene-base-mdc) | source | Cosmetatos (1975), INFOR 13, 328-331, as printed in Liu, Pantelidis, Tam and Chow (arXiv 2102.05851v2) eq. (2): Wq(M/D/c) = Wq(M/M/c) / 2 x (1 + (1 - rho)(c - 1)(sqrt(4 + 5c) - 2) / (16 rho c)); an approximation, exact at c = 1 where it is the Pollaczek-Khinchin mean value formula (Adan and Resing 2015, eqs 7.14 to 7.16); Adan and Resing, Queueing Systems (2015): eq. (5.1) delay probability, computed by the stable recursion (11.3) and remark 11.3.2; eq. (5.2) E(Lq) = PiW rho / (1 - rho); eq. (5.3) E(W) = PiW / ((1 - rho) c mu); Little's law (section 3.4) |
+
+THE ENGINE'S OWN WORDS ARE NOT A QUOTATION. The basis lines cite each source by table, equation and section and state its formula in the engine's own words; a lesson that needs one of those ideas teaches it from the citation, the engine's stated arithmetic and the course's own words.
+
+# SECTION 3: The published checks the engine reproduces (owned by Associate m03 l04 and Professional m06 and Expert m02 l04 and Expert m02 l05 and Expert m05 l04)
+
+Nine printed figures or sets of figures from the sources are run through the engine. Each printed figure is cited as its source prints it (text); every other number is the engine's. quote_check.py checks that each text prints each figure cited here.
+
+CHECK ONE: ADAN AND RESING, TABLE 5.1 (text: the M/M/c delay probability and mean wait for a mean service time of 1 and an occupation rate of 0.9, at 1, 2, 5, 10 and 20 servers). The golden inputs adan-resing-table-5-1-c1 to adan-resing-table-5-1-c20 state a service of 1 fixed hour, a working day of 10 hours and 9, 18, 45, 90, 180 arrivals a day, so the offered load is 0.900000 per berth (engine). The engine returns:
+
+| golden input | berths | arrivals a day (golden input) | berth utilisation (engine) | delay probability (engine) | printed (text) | mean wait (engine) | the engine's mean wait at two decimals (derived) | printed (text) |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| adan-resing-table-5-1-c1 | 1 | 9 | 0.900000 | 0.900000 | 0.90 | 9.000000 | 9.00 | 9.00 |
+| adan-resing-table-5-1-c2 | 2 | 18 | 0.900000 | 0.852632 | 0.85 | 4.263158 | 4.26 | 4.26 |
+| adan-resing-table-5-1-c5 | 5 | 45 | 0.900000 | 0.762493 | 0.76 | 1.524986 | 1.52 | 1.53 |
+| adan-resing-table-5-1-c10 | 10 | 90 | 0.900000 | 0.668732 | 0.67 | 0.668732 | 0.67 | 0.67 |
+| adan-resing-table-5-1-c20 | 20 | 180 | 0.900000 | 0.550769 | 0.55 | 0.275385 | 0.28 | 0.28 |
+
+A PRINTED SLIP AT FIVE BERTHS. Every printed figure in the table is the engine's figure rounded to two decimals except one: at 5 berths the engine's mean wait is 1.524986, which rounds to 1.52, and the table prints 1.53 (text). The printed figure sits 0.005014 above the engine's (derived: 1.53 less 1.524986), which is more than the half unit a two-decimal rounding allows. The course teaches it as a slip in the printed table; the engine's figure is the one the formula gives.
+
+CHECK TWO: ADAN AND RESING, TABLE 5.2 (text: the surplus capacity held at 0.1 of a server, so the occupation rate rises with the number of servers). The golden inputs adan-resing-table-5-2-c1 to adan-resing-table-5-2-c20 state the same service and working day with the arrivals below:
+
+| golden input | berths | arrivals a day (golden input) | berth utilisation (engine) | printed rho (text) | mean wait (engine) | printed (text) | mean in the system (engine) | printed (text) |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| adan-resing-table-5-2-c1 | 1 | 9 | 0.900000 | 0.90 | 9.000000 | 9.00 | 9.000000 | 9 |
+| adan-resing-table-5-2-c2 | 2 | 19 | 0.950000 | 0.95 | 9.256410 | 9.26 | 19.487179 | 19 |
+| adan-resing-table-5-2-c5 | 5 | 49 | 0.980000 | 0.98 | 9.503169 | 9.50 | 51.465529 | 51 |
+| adan-resing-table-5-2-c10 | 10 | 99 | 0.990000 | 0.99 | 9.637384 | 9.64 | 105.310104 | 105 |
+| adan-resing-table-5-2-c20 | 20 | 199 | 0.995000 | 0.995 | 9.737327 | 9.74 | 213.672804 | 214 |
+
+Every printed figure of Table 5.2 is the engine's figure rounded, to two decimals for the wait and to a whole number for the mean in the system (checked when this digest is built).
+
+CHECK THREE: IVERSEN, EXAMPLE 12.3.1 (text: two M/M/n delay systems, the first with a mean service time of 100 s, 20 erlang and 32 channels, the second with 10 s, 2 erlang and 5 channels; mean waits of 0.075 s and 0.199 s, 0.274 s in total). The golden inputs read the second as the hour: a fixed service of 100 and 10, 32 and 5 berths, 2 and 2 arrivals a day over a 10-hour day, so the offered loads are 20.000000 and 2.000000 (engine).
+
+| system | offered load (engine) | delay probability (engine) | mean wait (engine) | printed (text) |
+| --- | --- | --- | --- | --- |
+| first (golden input iversen-2001-example-12-3-1-system-1) | 20.000000 | 0.008964 | 0.074697 | 0.075 |
+| second (golden input iversen-2001-example-12-3-1-system-2) | 2.000000 | 0.059701 | 0.199005 | 0.199 |
+
+The two mean waits add to 0.273702 (derived), which rounds to the printed 0.274 at three decimals; each engine figure rounds to its printed figure at three decimals.
+
+CHECK FOUR: SKOKO ET AL., TABLES 1 AND 4 (text: a PSV burns 0.5 t an hour sailing and 0.03 t an hour in port; at USD 870 a tonne a day of each costs USD 10,440.00 and USD 626.4; at the economic speed a PSV covers 240 NM a day and an AHTS 264 NM). The golden input skoko-2024-table1-psv-daily-fuel states one dedicated voyage of 120 NM each way at 10 knots, 24 port hours, no field hours, burns of 0.5 and 0.03 t an hour and a price of 870 a tonne. The engine returns 240.000000 NM, 24.000000 sailing hours, 12.000000 t of sailing fuel, 0.720000 t of port fuel and a fuel cost of 11066.400000. At the price, the sailing fuel is 10440.000000 and the port fuel 626.400000 (derived: tonnes times the stated price), the two daily figures the table prints.
+The AHTS figure checks the same way (stated probe: the same case at 11 knots over 132 NM each way): the engine returns 264.000000 NM in 24.000000 sailing hours, the 264 NM a day the table prints for an AHTS.
+
+CHECK FIVE: SKOKO ET AL., TABLES 5 AND 7, THE AHTS (text: the optimal month of the AHTS has 7.00 days of maritime activities and 0.60 days of navigation at 0.5 t an hour and 2.40 days of standby in port at 0.03 t an hour; the optimal fuel cost is USD 80,847.36). The golden input skoko-2024-table7-ahts-optimal-fuel reads the maritime activities as field time (168 hours at 0.5 t an hour), the navigation as a dedicated voyage of 79.2 NM each way at 11 knots, and 57.6 port hours. The engine returns 14.400000 sailing hours, 92.928000 t of fuel and a fuel cost of 80847.360000, the printed figure.
+
+CHECK SIX, A PRINTED TOTAL THE ROUNDED DAYS DO NOT REPRODUCE: SKOKO ET AL., TABLES 5 AND 7, THE PSV (text: the optimal month of the PSV has 3.81 days in port, 13.18 days sailing, 2.40 days of standby at the facility, 2.40 days of standby in port and 4.14 days of offshore supply; Table 7 prints an optimal fuel cost of USD 186,274.10). A stated probe puts the sailing days on a dedicated voyage of 1581.600000 NM each way at 10 knots, the offshore supply days at the sailing burn as 99.360000 field hours, and the port and both standby days at the port burn as 206.640000 port hours, at USD 870 a tonne. The engine returns 214.039200 t and a fuel cost of 186214.104000, which is 59.996000 short of the printed total (derived). The rounded days the table prints do not reproduce the printed figure, so the course uses the AHTS row and leaves the PSV total out.
+
+CHECK SEVEN: THE FIRST-FIT DECREASING EXAMPLE AT CAPACITY 60 AND 61 (text: Wikipedia, First-fit-decreasing bin packing (revision 1317275412), the example of Coffman, Garey and Johnson (1978): ten items packed into bins of capacity 60 give {44,8,8}, {24,24,6,6}, {22,21,17}, and into bins of capacity 61 give {44,17}, {24,24,8}, {22,21,8,6}, {6}). The golden inputs state each item as a footprint one metre wide with its size as its length, a usable fraction of 1 and no weight, and 10 voyages. The engine packs, by the voyage each footprint lands on:
+
+| golden input | deck area | the engine's voyages, by footprint | voyages used (engine) | lower bound (engine) |
+| --- | --- | --- | --- | --- |
+| ffd-wikipedia-cgj-capacity-60 | 60 | {44,8,8}, {24,24,6,6}, {22,21,17} | 3 | 3 |
+| ffd-wikipedia-cgj-capacity-61 | 61 | {44,17}, {24,24,8}, {22,21,8,6}, {6} | 4 | 3 |
+
+A LARGER DECK, MORE VOYAGES. With capacity 61 the same ten footprints take 4 voyages where capacity 60 takes 3, while the lower bound stays at 3 (engine): first-fit decreasing is not monotone in the capacity.
+
+CHECK EIGHT: HUANG AND LU (2021), EXAMPLE 5.1, AS THE ARTICLE PRINTS IT (text: at capacity 75 the list packs into {51,12,12}, {28,28,10}, {28,27,10,10}, {25,10,10,10,10,10}). The engine packs the golden input ffd-wikipedia-huang-lu-capacity-75 into {51,12,12}, {28,28,10}, {28,27,10,10}, {25,10,10,10,10,10}, 4 voyages (engine).
+
+CHECK NINE: THE TIGHT WORST CASE OF DOSA (2007), SCALED TO CAPACITY 400 (text: the optimum packs the items into 6 bins and first-fit decreasing uses 8, which is 11/9 of the optimum plus 6/9). The engine uses 8 voyages on the golden input ffd-wikipedia-dosa-tight-example, packing {204,108}, {204,108}, {204,108}, {204,108}, {104,104,104}, {104,92,92,92}, {92,92,92,92}, {92}, with a lower bound of 6 (engine). The lower bound is the area bound; the optimum of 6 is the text's, and the engine does not search for an optimum.
+
+# SECTION 4: The Ekene cluster, its vessels and its supply base (owned by Associate m01 l03 and Associate m06 and Professional m01 and Professional m04 and Expert m01 and Expert m04)
+
+Every teaching case in this course comes from one fixture file under test-data/supplychain/ekene-marine, written by a stated script that reproduces it. It is labelled SYNTHETIC in the file, whose statement reads, verbatim:
+> SYNTHETIC teaching data for the Ekene field (Petrolord fictional teaching field, block EK-11), given a fictional offshore cluster. No real company, vessel, port, installation or contract appears.
+
+THE CLUSTER (fixture): Ekene offshore cluster supply (synthetic): one PSV and one AHTS from the Ekene supply base.
+
+THE SIX BULK PRODUCTS (fixture):
+
+| id | product | kind | density, t a m3 |
+| --- | --- | --- | --- |
+| diesel | Marine gas oil for the installations | liquid | 0.850000 |
+| water | Potable and drill water | liquid | 1.000000 |
+| mud | Pre-mixed water-based mud | liquid | 1.400000 |
+| brine | Completion brine | liquid | 1.200000 |
+| cement | Oilwell cement (dry bulk) | dry | 1.500000 |
+| barite | Barite (dry bulk) | dry | 2.100000 |
+
+THE TWO VESSELS (fixture):
+
+| key | vessel | speed, knots | deck area, m2 | usable fraction | deck load, t | deadweight, t | tanks, m3 | fuel t an hour (sailing, port, field) |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| psv | PSV Ekene Star (synthetic) | 11.000000 | 800.000000 | 0.750000 | 2000.000000 | 3500.000000 | diesel 800, water 1200, mud 600, brine 400, cement 250, barite 250 | 0.500000, 0.030000, 0.300000 |
+| ahts | AHTS Ekene Tide (synthetic) | 12.000000 | 550.000000 | 0.750000 | 1200.000000 | 2200.000000 | diesel 700, water 600, mud 300, brine 200, cement 150, barite 150 | 0.600000, 0.040000, 0.400000 |
+
+THE FOUR INSTALLATIONS (fixture): the distance from the base, the field hours a visit, the minimum visits a week, the week's demand and the cargo of one planned voyage:
+
+| id | installation | distance from the base, NM | field hours | minimum visits | week: deck m2, deck t, bulk m3 | one voyage: deck m2, deck t, bulk m3 |
+| --- | --- | --- | --- | --- | --- | --- |
+| EKA | Ekene-A production platform (synthetic) | 62.000000 | 6.000000 | 2 | 520.000000, 610.000000, diesel 450, water 900 | 175.000000, 205.000000, diesel 150, water 300 |
+| EKJ | Ekene jack-up drilling unit (synthetic) | 68.000000 | 8.000000 | 3 | 900.000000, 1100.000000, diesel 500, water 700, mud 600, brine 250, cement 180, barite 200 | 215.000000, 300.000000, diesel 170, water 240, mud 200, brine 85, cement 60, barite 70 |
+| EKB | Ekene-B wellhead platform (synthetic) | 74.000000 | 4.000000 | 1 | 180.000000, 150.000000, diesel 120, water 200 | 60.000000, 50.000000, diesel 40, water 70 |
+| EKF | Ekene FPSO (synthetic) | 95.000000 | 5.000000 | 2 | 260.000000, 240.000000, diesel 300, water 400 | 90.000000, 80.000000, diesel 100, water 135 |
+
+THE MILK RUN (fixture): stops EKA, EKJ, EKB, EKF in that order, legs 62, 9, 12, 28, 95 NM (base to the first stop, stop to stop, the last stop back to the base). Port hours 12 a voyage. Weather factor 1.2 on sailing and field time (rainy-season allowance, a stated planning factor). Fuel at 870 a tonne. A period of 7 days with 6.5 days available a vessel (one week; half a day a week held for crew change and maintenance).
+
+VARIABILITY (fixture): a triangular weather factor of min 1, mode 1.2 and max 1.6; a triangular demand factor of min 0.85, mode 1 and max 1.3; 2 planned vessels; 20000 draws on seed 20260927.
+
+THE DECK AND ONE VOYAGE OF DECK CARGO (fixture): PSV Ekene Star clear deck (synthetic), 800 m2 with a usable fraction of 0.75 and a deck load of 2000 t, and the items in the order booked:
+
+| id | item | length, m | width, m | footprint, m2 (derived: length times width) | weight, t | quantity |
+| --- | --- | --- | --- | --- | --- | --- |
+| chem-ibc | Chemical IBC in a frame (synthetic) | 1.200000 | 1.000000 | 1.200000 | 1.300000 | 12 |
+| skip | Waste skip (synthetic) | 2.500000 | 1.800000 | 4.500000 | 3.000000 | 6 |
+| cont-10 | 10 ft offshore container (synthetic) | 2.990000 | 2.440000 | 7.295600 | 8.000000 | 12 |
+| basket-6m | 6 m cargo basket (synthetic) | 6.000000 | 2.500000 | 15.000000 | 6.000000 | 8 |
+| mud-tank | Portable mud tank (synthetic) | 5.000000 | 2.400000 | 12.000000 | 14.000000 | 5 |
+| cont-20 | 20 ft offshore container (synthetic) | 6.060000 | 2.440000 | 14.786400 | 12.000000 | 16 |
+| pipe-bundle | Casing joints, 13-3/8 in, bundled (synthetic) | 13.500000 | 2.600000 | 35.100000 | 38.000000 | 2 |
+
+THE SUPPLY BASE (fixture): Ekene supply base (synthetic), 2 berths, 3.2 arrivals a day over a 24-hour working day; a call needs 2 fixed hours, 60 lifts at 12 an hour and 900 m3 of bulk at 150 m3 an hour, the lifts and the bulk at the same time (concurrent true).
+
+The golden inputs whose ids start ekene- carry these same facts (checked when this digest is built): the voyage plans carry each installation's one-voyage cargo, the fleet cases the week's demand and the minimum visits, the deck plans the deck and the items, the base cases the supply base.
+
+THE SITUATIONS THE FIXTURE README PLANTS, each confirmed against the engine when this digest is built (every figure is the engine's, on the golden inputs named):
+
+| situation | golden input | the engine returns |
+| --- | --- | --- |
+| one PSV milk run with the voyage cargo | ekene-voyage-milk-run-psv | feasible true; binding deck area at a utilisation of 0.900000 |
+| the deck cargo doubled | ekene-voyage-deck-overloaded | overloaded: deck area; deck area utilisation 1.800000 |
+| a week on the PSV milk run | ekene-fleet-psv-milk-run | 3.100000 voyages of demand driven by deck area, rounded up to 4; 2 vessels |
+| a week of dedicated PSV voyages | ekene-fleet-psv-dedicated | EKA 2 (minimum visits); EKJ 3 (minimum visits); EKB 1 (minimum visits); EKF 2 (minimum visits) |
+| one voyage of deck cargo, first-fit decreasing | ekene-deck-one-voyage-ffd | 599.229600 m2 carried of 600.000000 usable; 11 units overflow |
+| the same, first fit in the booked order | ekene-deck-one-voyage-first-fit | 580.629600 m2 carried; 1 unit overflows: pipe-bundle#2 |
+| the same cargo on two voyages | ekene-deck-two-voyages-ffd | 2 voyages used, 0 overflow |
+| the supply base | ekene-base-mmc and ekene-base-mdc | berth utilisation 0.533333; mean wait 3.180124 hours (M/M/c) and 1.665786 hours (M/D/c) |
+| the supply base with one berth | base-refuse-ekene-one-berth-overloaded | refused (the message is in section 5) |
+
+# SECTION 5: Every refusal, with the field it names and the engine's own words (owned by Associate m01 l05 and Associate m04 and Associate m05 l04 and Professional m02 and Professional m03 and Professional m04 and Expert m01 and Expert m04 and Expert m06)
+
+A refusal is an object with `error` and `field`. The message starts with the name of the field it refuses and states the exact condition that failed: "<field> must be <condition>; got <value>", the value as the engine prints it (a string in quotes, an absent value as nothing), or, for an unknown key, "<field> is not an accepted key; the accepted keys ... are ...". Each row below is a stated bad input from the golden file handed to the engine; the message is the engine's, verbatim. A result returned with a reason (an overloaded voyage, a voyage longer than the days available, a shortfall of vessel-days, overflow on the deck, a berth target no count meets) is a result. It is no refusal.
+
+| function | golden case | field | the engine's message, verbatim |
+| --- | --- | --- | --- |
+| `voyagePlan` | voyage-refuse-tank-zero-capacity | `vessel.tanks.d` | vessel.tanks.d must be above 0 to carry d: installation X asks for 3 m3 of it; got 0 |
+| `voyagePlan` | voyage-refuse-milk-run-tank-zero | `vessel.tanks.brine` | vessel.tanks.brine must be above 0 to carry brine: the installations on the milk run ask for 85 m3 of it; got 0 |
+| `voyagePlan` | voyage-refuse-unknown-key | `fuelPrice` | fuelPrice is not an accepted key; the accepted keys at the top level are vessel, products, installations, route, portHours, weather, fuelPricePerT |
+| `voyagePlan` | voyage-refuse-unknown-vessel-key | `vessel.deckArea` | vessel.deckArea is not an accepted key; the accepted keys of vessel are name, speedKnots, deckAreaM2, deckUsableFraction, deckLoadT, deadweightT, tanks, fuelTPerHour |
+| `voyagePlan` | voyage-refuse-unknown-fuel-key | `vessel.fuelTPerHour.standby` | vessel.fuelTPerHour.standby is not an accepted key; the accepted keys of vessel.fuelTPerHour are sailing, port, field |
+| `voyagePlan` | voyage-refuse-unknown-cargo-key | `installations[0].cargo.deckAreaM2s` | installations[0].cargo.deckAreaM2s is not an accepted key; the accepted keys of installations[0].cargo are deckAreaM2, deckWeightT, bulk |
+| `voyagePlan` | voyage-refuse-unknown-bulk-product | `installations[0].cargo.bulk.methanol` | installations[0].cargo.bulk.methanol is not a product id; the accepted keys of installations[0].cargo.bulk are the product ids diesel, water, mud, brine, cement, barite |
+| `voyagePlan` | voyage-refuse-unknown-tank-product | `vessel.tanks.methanol` | vessel.tanks.methanol is not a product id; the accepted keys of vessel.tanks are the product ids diesel, water, mud, brine, cement, barite |
+| `voyagePlan` | voyage-refuse-tank-missing | `vessel.tanks.mud` | vessel.tanks.mud must be stated for every product (0 when the vessel has no tank for it); got nothing |
+| `voyagePlan` | voyage-refuse-usable-fraction-zero | `vessel.deckUsableFraction` | vessel.deckUsableFraction must be a number above 0 and at most 1; got 0 |
+| `voyagePlan` | voyage-refuse-usable-fraction-above-one | `vessel.deckUsableFraction` | vessel.deckUsableFraction must be a number above 0 and at most 1; got 1.1 |
+| `voyagePlan` | voyage-refuse-speed-missing | `vessel.speedKnots` | vessel.speedKnots must be a finite number above 0; got nothing |
+| `voyagePlan` | voyage-refuse-weather-below-one | `weather.factor` | weather.factor must be a finite number from 1 to 10; got 0.9 |
+| `voyagePlan` | voyage-refuse-weather-above-cap | `weather.factor` | weather.factor must be a finite number from 1 to 10; got 10.5 |
+| `voyagePlan` | voyage-refuse-weather-activity | `weather.appliesTo[1]` | weather.appliesTo[1] must be one of "sailing", "port", "field"; got "standby" |
+| `voyagePlan` | voyage-refuse-weather-repeat | `weather.appliesTo[1]` | weather.appliesTo[1] repeats "sailing" |
+| `voyagePlan` | voyage-refuse-weather-empty | `weather.appliesTo` | weather.appliesTo must be an array naming at least one of "sailing", "port", "field"; got [] |
+| `voyagePlan` | voyage-refuse-route-mode | `route.mode` | route.mode must be one of "milk-run", "dedicated"; got "round-robin" |
+| `voyagePlan` | voyage-refuse-stops-missing-one | `route.stops` | route.stops must be an array naming each of the 4 installations once, in the order sailed; got ["EKA","EKJ","EKB"] |
+| `voyagePlan` | voyage-refuse-stops-unknown | `route.stops[3]` | route.stops[3] must be an installation id (EKA, EKJ, EKB, EKF); got "EKX" |
+| `voyagePlan` | voyage-refuse-stops-repeat | `route.stops[2]` | route.stops[2] repeats "EKA"; a milk run visits each installation once |
+| `voyagePlan` | voyage-refuse-legs-count | `route.legsNm` | route.legsNm must be an array of 5 leg distances in nautical miles (base to the first stop, stop to stop, the last stop back to the base); got [62,9,12,28] |
+| `voyagePlan` | voyage-refuse-leg-negative | `route.legsNm[2]` | route.legsNm[2] must be a finite number at or above 0; got -12 |
+| `voyagePlan` | voyage-refuse-distance-on-milk-run | `installations[0].distanceFromBaseNm` | installations[0].distanceFromBaseNm is read only when route.mode is "dedicated"; a milk run takes its distances from route.legsNm |
+| `voyagePlan` | voyage-refuse-legs-on-dedicated | `route.legsNm` | route.legsNm is read only when route.mode is "milk-run"; a dedicated voyage uses each installation's distanceFromBaseNm out and back |
+| `voyagePlan` | voyage-refuse-stops-on-dedicated | `route.stops` | route.stops is read only when route.mode is "milk-run"; a dedicated voyage sails from the base to one installation and back |
+| `voyagePlan` | voyage-refuse-dedicated-distance-missing | `installations[0].distanceFromBaseNm` | installations[0].distanceFromBaseNm must be a finite number at or above 0; got nothing |
+| `voyagePlan` | voyage-refuse-product-kind | `products[0].kind` | products[0].kind must be one of "liquid", "dry"; got "gas" |
+| `voyagePlan` | voyage-refuse-product-density | `products[0].densityTPerM3` | products[0].densityTPerM3 must be a finite number above 0; got 0 |
+| `voyagePlan` | voyage-refuse-product-repeat | `products[6].id` | products[6].id repeats the id "diesel" |
+| `voyagePlan` | voyage-refuse-no-products | `products` | products must be an array of at least 1 entry; got [] |
+| `voyagePlan` | voyage-refuse-cargo-negative | `installations[0].cargo.deckWeightT` | installations[0].cargo.deckWeightT must be a finite number at or above 0; got -1 |
+| `voyagePlan` | voyage-refuse-port-hours | `portHours` | portHours must be a finite number at or above 0; got "12" |
+| `voyagePlan` | voyage-refuse-fuel-price | `fuelPricePerT` | fuelPricePerT must be a finite number at or above 0; got nothing |
+| `voyagePlan` | voyage-refuse-options | `options` | options must be an object of named inputs |
+| `fleetSize` | fleet-refuse-available-above-period | `vesselAvailableDays` | vesselAvailableDays must be at most periodDays (7); got 7.5 |
+| `fleetSize` | fleet-refuse-voyage-rounding | `voyageRounding` | voyageRounding must be one of "up", "none"; got "nearest" |
+| `fleetSize` | fleet-refuse-vessel-rounding-missing | `vesselRounding` | vesselRounding must be one of "up", "nearest", "none"; got nothing |
+| `fleetSize` | fleet-refuse-min-visits-fraction | `installations[0].minVisits` | installations[0].minVisits must be a whole number from 0 to 1000; got 1.5 |
+| `fleetSize` | fleet-refuse-min-visits-missing | `installations[0].minVisits` | installations[0].minVisits must be a whole number from 0 to 1000; got nothing |
+| `fleetSize` | fleet-refuse-tank-zero | `vessel.tanks.d` | vessel.tanks.d must be above 0 to carry d: installation X asks for 5 m3 of it; got 0 |
+| `fleetSize` | fleet-refuse-weather-triangle | `weather.factor` | weather.factor must be a finite number from 1 to 10; got {"min":1,"mode":1.2,"max":1.5} |
+| `fleetSize` | fleet-refuse-unknown-key | `iterations` | iterations is not an accepted key; the accepted keys at the top level are vessel, products, installations, route, portHours, weather, fuelPricePerT, periodDays, vesselAvailableDays, voyageRounding, vesselRounding |
+| `fleetSize` | fleet-refuse-unknown-installation-key | `installations[0].cargo` | installations[0].cargo is not an accepted key; the accepted keys of installations[0] are id, name, distanceFromBaseNm, fieldHours, minVisits, demand |
+| `fleetSize` | fleet-refuse-period-zero | `periodDays` | periodDays must be a finite number above 0; got 0 |
+| `fleetSize` | fleet-refuse-demand-missing | `installations[0].demand` | installations[0].demand must be an object { deckAreaM2, deckWeightT, bulk }; got nothing |
+| `fleetVariability` | variability-refuse-draws-cap | `iterations` | iterations must be at most 181818 with 11 voyage sets (iterations x voyage sets is capped at 2000000); got 181819 |
+| `fleetVariability` | variability-refuse-seed-missing | `seed` | seed must be a whole number from 0 to 4294967295 (there is no default, so every run can be reproduced); got nothing |
+| `fleetVariability` | variability-refuse-seed-negative | `seed` | seed must be a whole number from 0 to 4294967295 (there is no default, so every run can be reproduced); got -1 |
+| `fleetVariability` | variability-refuse-iterations-cap | `iterations` | iterations must be a whole number from 1 to 200000; got 200001 |
+| `fleetVariability` | variability-refuse-weather-min-below-one | `weather.factor.min` | weather.factor.min must be at or above 1; got 0.9 |
+| `fleetVariability` | variability-refuse-weather-max-above-cap | `weather.factor.max` | weather.factor.max must be at most 10; got 11 |
+| `fleetVariability` | variability-refuse-triangle-order | `demandFactor` | demandFactor must have min <= mode <= max; got min 1, mode 0.9, max 1.3 |
+| `fleetVariability` | variability-refuse-triangle-shape | `demandFactor` | demandFactor must be a number at or above 0 or a triangular distribution { min, mode, max } of finite numbers; got {"min":1,"max":1.3} |
+| `fleetVariability` | variability-refuse-unknown-triangle-key | `demandFactor.mean` | demandFactor.mean is not an accepted key; the accepted keys of demandFactor are min, mode, max |
+| `fleetVariability` | variability-refuse-demand-negative | `demandFactor` | demandFactor must be a number at or above 0 or a triangular distribution { min, mode, max }; got -0.1 |
+| `fleetVariability` | variability-refuse-planned-fraction | `plannedVessels` | plannedVessels must be a whole number from 0 to 1000; got 1.5 |
+| `deckPlan` | deck-refuse-rule | `rule` | rule must be one of "first-fit-decreasing-area", "first-fit"; got "best-fit" |
+| `deckPlan` | deck-refuse-voyages-zero | `voyages` | voyages must be a whole number from 1 to 500; got 0 |
+| `deckPlan` | deck-refuse-quantity-fraction | `items[0].quantity` | items[0].quantity must be a whole number from 1 to 1000; got 1.5 |
+| `deckPlan` | deck-refuse-width-zero | `items[0].widthM` | items[0].widthM must be a finite number above 0; got 0 |
+| `deckPlan` | deck-refuse-usable-missing | `deck.usableFraction` | deck.usableFraction must be a number above 0 and at most 1; got nothing |
+| `deckPlan` | deck-refuse-units-cap | `items` | items hold 2001 units in all; the cap is 2000 |
+| `deckPlan` | deck-refuse-unknown-item-key | `items[0].heightM` | items[0].heightM is not an accepted key; the accepted keys of items[0] are id, name, lengthM, widthM, weightT, quantity |
+| `deckPlan` | deck-refuse-unknown-deck-key | `deck.stowageFactor` | deck.stowageFactor is not an accepted key; the accepted keys of deck are name, areaM2, usableFraction, loadT |
+| `deckPlan` | deck-refuse-item-repeat | `items[1].id` | items[1].id repeats the id "chem-ibc" |
+| `shoreBase` | base-refuse-saturated-exactly | `arrivalsPerDay` | arrivalsPerDay must be at most 19.999999 (rounded down at the sixth decimal so that it is accepted) for a steady state with 2 berths: the berth utilisation must stay below 1, so arrivals a day must stay below berths x working hours a day / service hours = 20; got 20, a berth utilisation of 1 |
+| `shoreBase` | base-refuse-saturated-thirds | `arrivalsPerDay` | arrivalsPerDay must be at most 26.666666 (rounded down at the sixth decimal so that it is accepted) for a steady state with 2 berths: the berth utilisation must stay below 1, so arrivals a day must stay below berths x working hours a day / service hours = 26.666667; got 30, a berth utilisation of 1.125 |
+| `shoreBase` | base-refuse-ekene-one-berth-overloaded | `arrivalsPerDay` | arrivalsPerDay must be at most 2.999999 (rounded down at the sixth decimal so that it is accepted) for a steady state with 1 berth: the berth utilisation must stay below 1, so arrivals a day must stay below berths x working hours a day / service hours = 3; got 3.2, a berth utilisation of 1.066667 |
+| `shoreBase` | base-refuse-service-zero | `service` | service must give a service time above 0 hours (fixed hours, lifts or bulk); got 0 |
+| `shoreBase` | base-refuse-model | `model` | model must be one of "M/M/c", "M/D/c"; got "M/G/c" |
+| `shoreBase` | base-refuse-concurrent-missing | `service.concurrent` | service.concurrent must be true (lifts and bulk at the same time) or false (one after the other); there is no default; got nothing |
+| `shoreBase` | base-refuse-working-hours | `workingHoursPerDay` | workingHoursPerDay must be a number above 0 and at most 24; got 25 |
+| `shoreBase` | base-refuse-berths-zero | `berths` | berths must be a whole number from 1 to 100; got 0 |
+| `shoreBase` | base-refuse-berths-cap | `berths` | berths must be a whole number from 1 to 100; got 101 |
+| `shoreBase` | base-refuse-lift-rate-zero | `service.liftsPerHour` | service.liftsPerHour must be a finite number above 0; got 0 |
+| `shoreBase` | base-refuse-target-negative | `targetMeanWaitHours` | targetMeanWaitHours must be a finite number at or above 0; got -1 |
+| `shoreBase` | base-refuse-unknown-key | `servers` | servers is not an accepted key; the accepted keys at the top level are berths, arrivalsPerDay, workingHoursPerDay, service, model, targetMeanWaitHours |
+| `shoreBase` | base-refuse-unknown-service-key | `service.craneRate` | service.craneRate is not an accepted key; the accepted keys of service are fixedHours, lifts, liftsPerHour, bulkM3, bulkM3PerHour, concurrent |
+
+79 refusals across 5 functions: voyagePlan 35, fleetSize 11, fleetVariability 11, deckPlan 9, shoreBase 13.
+
+REFUSALS A PANEL CONTROL CAN PRODUCE. Each calculator panel writes every required input into the box through a visible control, and setting a control to "not stated" removes the input. The calls below are not golden cases; each is a golden input with one input removed (stated probes), handed to the engine here, and the message is the engine's, verbatim:
+
+| golden input | the input removed (stated probe) | field | the engine's message, verbatim |
+| --- | --- | --- | --- |
+| ekene-voyage-milk-run-psv | vessel.speedKnots | `vessel.speedKnots` | vessel.speedKnots must be a finite number above 0; got nothing |
+| ekene-voyage-milk-run-psv | vessel.deckUsableFraction | `vessel.deckUsableFraction` | vessel.deckUsableFraction must be a number above 0 and at most 1; got nothing |
+| ekene-voyage-milk-run-psv | vessel.fuelTPerHour.port | `vessel.fuelTPerHour.port` | vessel.fuelTPerHour.port must be a finite number at or above 0; got nothing |
+| ekene-voyage-milk-run-psv | weather.factor | `weather.factor` | weather.factor must be a finite number from 1 to 10; got nothing |
+| ekene-voyage-milk-run-psv | weather.appliesTo | `weather.appliesTo` | weather.appliesTo must be an array naming at least one of "sailing", "port", "field"; got nothing |
+| ekene-voyage-milk-run-psv | portHours | `portHours` | portHours must be a finite number at or above 0; got nothing |
+| ekene-voyage-milk-run-psv | fuelPricePerT | `fuelPricePerT` | fuelPricePerT must be a finite number at or above 0; got nothing |
+| ekene-voyage-milk-run-psv | route.mode | `route.mode` | route.mode must be one of "milk-run", "dedicated"; got nothing |
+| ekene-voyage-milk-run-psv | products[0].densityTPerM3 | `products[0].densityTPerM3` | products[0].densityTPerM3 must be a finite number above 0; got nothing |
+| ekene-fleet-psv-milk-run | voyageRounding | `voyageRounding` | voyageRounding must be one of "up", "none"; got nothing |
+| ekene-fleet-psv-milk-run | vesselRounding | `vesselRounding` | vesselRounding must be one of "up", "nearest", "none"; got nothing |
+| ekene-fleet-psv-milk-run | periodDays | `periodDays` | periodDays must be a finite number above 0; got nothing |
+| ekene-fleet-psv-milk-run | vesselAvailableDays | `vesselAvailableDays` | vesselAvailableDays must be a finite number above 0; got nothing |
+| ekene-fleet-psv-milk-run | installations[0].minVisits | `installations[0].minVisits` | installations[0].minVisits must be a whole number from 0 to 1000; got nothing |
+| ekene-variability-psv-milk-run | demandFactor | `demandFactor` | demandFactor must be a number at or above 0 or a triangular distribution { min, mode, max } of finite numbers; got nothing |
+| ekene-variability-psv-milk-run | plannedVessels | `plannedVessels` | plannedVessels must be a whole number from 0 to 1000; got nothing |
+| ekene-variability-psv-milk-run | iterations | `iterations` | iterations must be a whole number from 1 to 200000; got nothing |
+| ekene-variability-psv-milk-run | seed | `seed` | seed must be a whole number from 0 to 4294967295 (there is no default, so every run can be reproduced); got nothing |
+| ekene-deck-one-voyage-ffd | rule | `rule` | rule must be one of "first-fit-decreasing-area", "first-fit"; got nothing |
+| ekene-deck-one-voyage-ffd | voyages | `voyages` | voyages must be a whole number from 1 to 500; got nothing |
+| ekene-deck-one-voyage-ffd | deck.loadT | `deck.loadT` | deck.loadT must be a finite number above 0; got nothing |
+| ekene-base-mmc | model | `model` | model must be one of "M/M/c", "M/D/c"; got nothing |
+| ekene-base-mmc | service.concurrent | `service.concurrent` | service.concurrent must be true (lifts and bulk at the same time) or false (one after the other); there is no default; got nothing |
+| ekene-base-mmc | workingHoursPerDay | `workingHoursPerDay` | workingHoursPerDay must be a number above 0 and at most 24; got nothing |
+| ekene-base-mmc | berths | `berths` | berths must be a whole number from 1 to 100; got nothing |
+
+THE ORDER OF REFUSALS. A box that carries an unknown key AND lacks a required input is refused on the unknown key first: every function checks its accepted keys before it reads an input. On ekene-base-mmc with model removed and a key queue added (stated probe), the engine's message, verbatim:
+> queue is not an accepted key; the accepted keys at the top level are berths, arrivalsPerDay, workingHoursPerDay, service, model, targetMeanWaitHours
+
+Four rules the tables show:
+- An input with no default is refused when it is missing, and the message says so: a speed, a deck area and its usable fraction, a deck load, a deadweight, a tank for every product (none stated as zero capacity), every fuel burn, a density and a kind for every product, the route and its legs, port hours, the weather factor and the activities it slows, the fuel price, the period and the available days, both rounding rules, the minimum visits, the packing rule and the voyages of a deck plan, the berths, the arrivals, the working day, every service term, the concurrent choice, the queue model, the demand factor, the planned vessels, the draws and the seed.
+- An input key a function does not read is refused at whatever level it sits (a top-level option, a vessel term, a fuel activity, a cargo, a bulk product, a tank, an item, a deck term, a triangular, a service term), with the path to the key and the full list of accepted keys.
+- An input that contradicts the route or the vessel is refused by name: a distance from the base on a milk run, legs or stops on a dedicated voyage, a load of a product the vessel has no tank for, available days above the period, a weather factor below the calm factor or above the cap, a berth utilisation at or above 1.
+- A stated figure inside a message is printed as it was given; a computed one prints to six decimals, and a printed bound is moved to the accepted side at the sixth decimal (section 25).
+
+# SECTION 6: What is graded, where the practicals run, the Suite app, and what is never graded (owned by Associate m01 l05 and Expert m04 l05 and Expert m06)
+
+EVERY GRADED NUMBER IN THIS COURSE IS A RETURN VALUE OF THIS ENGINE ON FIXED INPUTS. A capstone field, a question key and a panel figure are each computed by a function in the table of section 1 on inputs written down in advance. No graded figure comes from the Monte Carlo of fleetVariability, so the same inputs give the same number on any machine, and there is exactly one right answer.
+
+THE PRACTICALS RUN IN THE COURSE'S OWN CALCULATOR PANELS. Four panels call this same vendored engine: the voyage and fleet calculator (voyagePlan and fleetSize; Associate and Professional), the deck calculator (deckPlan; Professional), the shore base calculator (shoreBase; Expert) and the variability calculator (fleetVariability; Expert, every figure on it labelled with its seed and draws and marked as not graded). A learner types or pastes their own inputs; the panel prints what the engine returns, every refusal in the engine's own words, and the reasons beside each figure.
+
+THE SUITE APP. The Marine Logistics Planner, in the Suite's Midstream & Downstream module, runs this same engine file in six tabs (installations and demand, the voyage plan, fleet sizing, fleet variability, the deck plan and the shore base) on the same Ekene fixture. What a learner works in a panel here is what the planner computes there; the course is complete without it.
+
+WHAT A CAPSTONE STATES. Each capstone runs its own synthetic cluster, which this digest does not print, and states every input a figure depends on: the vessel with every capacity, tank and fuel burn; the products and their densities; the installations with their distances, field hours, cargo or demand and minimum visits; the route and its legs; port hours; the weather factor and the activities it slows; the fuel price; the period, the available days and both rounding rules; the deck, the items and the packing rule; the berths, arrivals, working day, service terms, the concurrent choice, the queue model and any target. Each graded figure is quoted to six decimals as the panel prints it.
+
+WHAT IS NEVER GRADED. No graded figure depends on a reading the engine states (section 24): every capstone field is the same number under each reading the engine takes and under the alternative it names. A choice a capstone states (the activities the weather slows, the rounding rules, the packing rule, the queue model) is part of the question, stated in the capstone. No graded figure is a Monte Carlo draw: the mean, P90, P50 and P10 of section 23 are taught with their seed and draw count and are never graded.
+
+WHAT A COMPUTED FIGURE DOES NOT SAY. A voyage plan is the stated route, speed, times and burns added up; a fleet is the stated demand divided by the stated capacities and rounded by the stated rules; a deck plan is an area bound by a stated rule; a queue figure is a steady-state average of a stated model. None is a schedule, a forecast of the weather or a promise that a berth will be free. Each figure is quoted with its inputs for that reason.
+
+# SECTION 7: Units and the conventions the engine states once (owned by Associate m01 l04)
+
+UNITS. Distances are in nautical miles (NM), speeds in knots (nautical miles an hour), times in hours unless a name says days, areas in square metres (m2), weights and fuel in tonnes (t), bulk volumes in cubic metres (m3), densities in tonnes a cubic metre, and money in one currency, whatever unit the caller uses. Sailing hours are the voyage's distance over the speed; days are hours over 24.
+
+ONE LEG AT A TIME (golden input ekene-voyage-milk-run-psv, the PSV at 11 knots). Each leg's calm hours are its distance over the speed (engine):
+
+| leg | from | to | NM (fixture) | calm hours (engine) |
+| --- | --- | --- | --- | --- |
+| 1 | base | EKA | 62.000000 | 5.636364 |
+| 2 | EKA | EKJ | 9.000000 | 0.818182 |
+| 3 | EKJ | EKB | 12.000000 | 1.090909 |
+| 4 | EKB | EKF | 28.000000 | 2.545455 |
+| 5 | EKF | base | 95.000000 | 8.636364 |
+
+The voyage sails 206.000000 NM (engine). At 10 knots a day of sailing covers 240.000000 NM (engine, golden input skoko-2024-table1-psv-daily-fuel, 24.000000 hours), the figure Skoko et al. print for a PSV (section 3).
+
+THE TIE RULE. Two figures TIE when they agree to 12 significant digits. A capacity check passes when the 12-digit figure of the load is at or below that of the capacity; a count rounded up is the ceiling of the 12-digit figure; a binding tie goes to the first constraint in the stated order. The rule exists because decimal inputs are held as binary doubles: on the golden input fleet-decimal-ratio-2-1-over-0-7-is-three the demand ratio comes back as 3.0000000000000004 (engine, printed in full) and counts as 3 voyages. Section 24 and section 25 show where it acts.
+
+HOW THE ENGINE PRINTS INSIDE A MESSAGE. Money rounds to the cent and a computed quantity to six decimals, both half away from zero with trailing zeros dropped; a stated input prints as it was typed; a percentage is a computed figure with a % sign. The numeric fields keep full precision.
+
+# SECTION 8: Routes and voyage time: milk runs, dedicated voyages, legs, port and field hours (owned by Associate m02)
+
+TWO ROUTE MODES. A milk run ("milk-run") is one voyage from the base through every installation once, in the stated order, and back: it states its stops and one leg distance more than there are stops (base to the first stop, stop to stop, the last stop back to the base). A dedicated route ("dedicated") is one voyage per installation, out and back, each at its own stated distance from the base. A milk run takes its distances from its legs and a dedicated route from the installations; a distance given to the mode that does not read it is refused by name (section 5).
+
+THE HOURS OF A VOYAGE are sailing (the NM over the speed), port (the stated port hours, once a voyage) and field (the sum of the stated field hours of the installations the voyage serves), before any weather factor. On the Ekene PSV (golden inputs ekene-voyage-milk-run-psv and ekene-voyage-dedicated-psv, with the fixture weather factor):
+
+| voyage | stops | NM (engine) | sailing hours (engine) | port hours (engine) | field hours (engine) | total hours (engine) | days (engine) |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| milk-run | EKA, EKJ, EKB, EKF | 206.000000 | 22.472727 | 12.000000 | 27.600000 | 62.072727 | 2.586364 |
+| EKA | EKA | 124.000000 | 13.527273 | 12.000000 | 7.200000 | 32.727273 | 1.363636 |
+| EKJ | EKJ | 136.000000 | 14.836364 | 12.000000 | 9.600000 | 36.436364 | 1.518182 |
+| EKB | EKB | 148.000000 | 16.145455 | 12.000000 | 4.800000 | 32.945455 | 1.372727 |
+| EKF | EKF | 190.000000 | 20.727273 | 12.000000 | 6.000000 | 38.727273 | 1.613636 |
+
+The milk run takes 2.586364 days for one voyage; the four dedicated voyages take 5.868182 days in all (engine totals). Each voyage's days are its total hours over 24.
+
+A LEG OF ZERO. Two installations at one location are a leg of 0 NM, which is accepted (golden input voyage-zero-distance-leg: legs 30, 0, 30 NM at 10 knots). The engine returns 6.000000 sailing hours and 12.000000 hours in all.
+
+# SECTION 9: Weather: one stated factor and the activities it slows (owned by Associate m03 l01 and Associate m03 l02 and Associate m06 l02)
+
+ONE STATED FACTOR. Weather enters as one stated factor from 1 to 10 that multiplies the time of the activities the call names in weather.appliesTo (any of sailing, port and field, at least one, none repeated). An activity the call does not name keeps its calm time. The list of activities is required, so the call says which activities the weather slows; fuel follows time. A factor of 1 is calm (golden input ekene-voyage-calm).
+
+THE SAME MILK RUN THREE WAYS (golden inputs, the Ekene PSV):
+
+| golden input | weather factor | applies to | sailing hours | port hours | field hours | total hours | days |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| ekene-voyage-calm | 1 | sailing, port, field | 18.727273 | 12.000000 | 23.000000 | 53.727273 | 2.238636 |
+| ekene-voyage-milk-run-psv | 1.2 | sailing, field | 22.472727 | 12.000000 | 27.600000 | 62.072727 | 2.586364 |
+| ekene-voyage-weather-on-all-activities | 1.2 | field, port, sailing | 22.472727 | 14.400000 | 27.600000 | 64.472727 | 2.686364 |
+
+With the factor on sailing and field time, port time stays at 12.000000 hours; named on port time as well, it becomes 14.400000 hours (engine). The three rows differ only in what the weather input states, so a plan names both the factor and the activities.
+
+WHERE THE IDEA COMES FROM. Aas, Halskau and Wallace (2009) describe weather limits both on sailing and on loading at the installation (taught by concept); the engine does not model a weather window, a wave height or a waiting-on-weather rule, only the stated factor on the stated time (section 27).
+
+# SECTION 10: Fuel by activity and the fuel bill (owned by Associate m03 l03 and Associate m03 l04)
+
+FUEL = hours in each activity times the stated tonnes an hour for that activity; the fuel cost is the tonnes times the stated price a tonne. There is no speed-cube law: a burn rate is stated for each activity, and the weather factor raises fuel only through the hours it adds.
+
+| golden input | sailing t (engine) | port t (engine) | field t (engine) | total t (engine) | fuel cost (engine) |
+| --- | --- | --- | --- | --- | --- |
+| ekene-voyage-calm | 9.363636 | 0.360000 | 6.900000 | 16.623636 | 14462.563636 |
+| ekene-voyage-milk-run-psv | 11.236364 | 0.360000 | 8.280000 | 19.876364 | 17292.436364 |
+| ekene-voyage-weather-on-all-activities | 11.236364 | 0.432000 | 8.280000 | 19.948364 | 17355.076364 |
+
+At the fixture burns (sailing 0.5 t an hour, port 0.03 t an hour, field 0.3 t an hour) and USD 870 a tonne, the rainy-season allowance on sailing and field time adds 2829.872727 to the calm voyage's fuel bill (derived: the two engine fuel costs, less). Adding port time to the allowance adds 62.640000 more (derived), because port burns 0.03 t an hour.
+
+THE PUBLISHED FUEL FIGURES. Skoko et al. (2024) print the daily fuel cost of a PSV at 0.5 and 0.03 t an hour and USD 870 a tonne, and the optimal fuel of an AHTS month; the engine reproduces both (section 3, checks four and five).
+
+# SECTION 11: Deck and bulk capacity: the usable deck, deck load, deadweight and the tanks (owned by Associate m04)
+
+THE CAPACITY CONSTRAINTS, in the stated order: deck area (the deck area times the stated usable fraction), deck load (tonnes of deck cargo), deadweight (deck weight plus every bulk m3 times its stated density), then one tank per product in the order of the products. Deck cargo is measured in square metres, containers and baskets are not stacked, and bulk travels in segregated tanks, one product to a tank (Aas, Halskau and Wallace 2009, taught by concept); the engine stacks nothing. Cargo deadweight is the user's net figure: there is no stowage factor.
+
+| constraint | unit | load (engine) | capacity (engine) | utilisation (engine) |
+| --- | --- | --- | --- | --- |
+| deck area | m2 | 540.000000 | 600.000000 | 0.900000 |
+| deck load | t | 635.000000 | 2000.000000 | 0.317500 |
+| deadweight | t | 2390.000000 | 3500.000000 | 0.682857 |
+| tank diesel | m3 | 460.000000 | 800.000000 | 0.575000 |
+| tank water | m3 | 745.000000 | 1200.000000 | 0.620833 |
+| tank mud | m3 | 200.000000 | 600.000000 | 0.333333 |
+| tank brine | m3 | 85.000000 | 400.000000 | 0.212500 |
+| tank cement | m3 | 60.000000 | 250.000000 | 0.240000 |
+| tank barite | m3 | 70.000000 | 250.000000 | 0.280000 |
+
+(golden input ekene-voyage-milk-run-psv: the PSV's 800 m2 deck at a usable fraction of 0.75 gives a deck area capacity of 600.000000 m2 (engine).)
+
+THE DEADWEIGHT LOAD of the Ekene milk run is 2390.000000 t (engine): 635.000000 t of deck cargo plus the bulk, product by product, at its density (diesel 460.000000 m3 at 0.85, water 745.000000 m3 at 1, mud 200.000000 m3 at 1.4, brine 85.000000 m3 at 1.2, cement 60.000000 m3 at 1.5, barite 70.000000 m3 at 2.1).
+
+A LIQUID HEAVIER THAN WATER (golden input voyage-deadweight-from-density: 60 t of deck cargo and 50 m3 of d at 2.9 t a m3 against a deadweight of 200 t). The engine returns a deadweight load of 205.000000 t and a deadweight utilisation of 1.025000: the voyage is overloaded on deadweight. The engine's reasons, verbatim:
+> the binding constraint is deadweight: 205 t of 200 t (102.5%)
+> overloaded: deadweight needs 205 t against a capacity of 200 t
+
+A TANK OF ZERO. Every product needs a stated tank, stated as zero when the vessel has none for it. A zero tank with nothing loaded in it is accepted (golden input voyage-tank-zero-capacity-empty-ok: feasible true, its utilisation reported as 0.000000); a load of that product is refused by name, and a missing tank is refused too (section 5: voyage-refuse-tank-zero-capacity, voyage-refuse-milk-run-tank-zero, voyage-refuse-tank-missing).
+
+# SECTION 12: Utilisation, the binding constraint and its tie rule, and an overloaded voyage (owned by Associate m05)
+
+UTILISATION of a constraint is its load over its capacity. The BINDING constraint is the one with the highest utilisation; a tie at twelve significant digits goes to the first in the order deck area, deck load, deadweight, then the tanks in the order of the products. A constraint is OVERLOADED when its load is above its capacity at twelve digits: a load exactly at capacity is feasible. The engine names the binding constraint and every overloaded one in its reasons.
+
+| golden input | binding (engine) | feasible (engine) | overloaded (engine) | the engine's reasons, verbatim |
+| --- | --- | --- | --- | --- |
+| voyage-at-capacity-feasible | deck area at 1.000000 | true | none | the binding constraint is deck area: 50 m2 of 50 m2 (100%) |
+| voyage-one-over-deck-load | deck load at 1.012500 | false | deck load | the binding constraint is deck load: 81 t of 80 t (101.25%) / overloaded: deck load needs 81 t against a capacity of 80 t |
+| voyage-binding-tie-goes-to-deck-area | deck area at 0.500000 | true | none | the binding constraint is deck area: 25 m2 of 50 m2 (50%) |
+| voyage-binding-tank | tank d at 0.900000 | true | none | the binding constraint is tank d: 45 m3 of 50 m3 (90%) |
+| voyage-decimal-sum-at-capacity | deck area at 1.000000 | true | none | the binding constraint is deck area: 0.3 m2 of 0.3 m2 (100%) |
+| ekene-voyage-milk-run-psv | deck area at 0.900000 | true | none | the binding constraint is deck area: 540 m2 of 600 m2 (90%) |
+| ekene-voyage-deck-overloaded | deck area at 1.800000 | false | deck area | the binding constraint is deck area: 1080 m2 of 600 m2 (180%) / overloaded: deck area needs 1080 m2 against a capacity of 600 m2 |
+
+THE TIE. On voyage-binding-tie-goes-to-deck-area, deck area and deck load share a utilisation of 0.500000 (engine), and the engine names deck area, the first in the order.
+
+A DECIMAL SUM AT CAPACITY. On voyage-decimal-sum-at-capacity two deck cargoes of 0.1 and 0.2 m2 fill a 0.3 m2 deck; the double sum is 0.30000000000000004 and its utilisation 1.0000000000000002 (engine, printed in full), and the twelve-digit rule reads it as at capacity, so the voyage is feasible.
+
+AN OVERLOADED VOYAGE. The same voyage cargo on the Ekene AHTS milk run (golden input ekene-voyage-milk-run-ahts) is overloaded on deck area, deadweight, tank water, with deck area binding at 1.309091 (engine). The engine's reasons, verbatim:
+> the binding constraint is deck area: 540 m2 of 412.5 m2 (130.909091%)
+> overloaded: deck area needs 540 m2 against a capacity of 412.5 m2
+> overloaded: deadweight needs 2390 t against a capacity of 2200 t
+> overloaded: tank water needs 745 m3 against a capacity of 600 m3
+
+An overloaded voyage is a result with its reasons: the engine plans it and says what does not fit. A load of a product the vessel has no tank for is a refusal (section 5), because no voyage of that vessel can carry it.
+
+READING A VOYAGE PLAN, in the order the engine returns it: the legs and their calm hours, the hours by activity after the weather factor, the days, the fuel by activity and its cost, the load (deck area, deck weight, bulk by product and the deadweight), each constraint with its load, capacity and utilisation, the binding constraint, the overloaded ones, and the reasons.
+
+# SECTION 13: Planning a voyage end to end: a PSV and an AHTS on one route, calm and rainy season (owned by Associate m06)
+
+THE TWO VESSELS ON THE SAME MILK RUN AND THE SAME CARGO (golden inputs ekene-voyage-milk-run-psv and ekene-voyage-milk-run-ahts, weather factor 1.2 on sailing and field time):
+
+| vessel | speed, knots (fixture) | total hours (engine) | fuel t (engine) | fuel cost (engine) | binding (engine) | feasible (engine) |
+| --- | --- | --- | --- | --- | --- | --- |
+| PSV Ekene Star (synthetic) | 11 | 62.072727 | 19.876364 | 17292.436364 | deck area at 0.900000 | true |
+| AHTS Ekene Tide (synthetic) | 12 | 60.200000 | 23.880000 | 20775.600000 | deck area at 1.309091 | false |
+
+The AHTS sails the route in fewer hours and cannot carry the cargo; the PSV carries it. A faster voyage that does not fit is not a plan.
+
+CALM AND RAINY SEASON. The calm milk run takes 2.238636 days and burns fuel costing 14462.563636; with the rainy-season factor of 1.2 on sailing and field time it takes 2.586364 days and costs 17292.436364 (engine). The capacity figures are the same in both, because weather changes time and fuel and leaves the cargo where it is.
+
+CHECKING A PLAN BEFORE IT SAILS, in the engine's terms: every product has a stated tank and density; the route names every stop once with one more leg than stops, or a distance for every dedicated installation; the weather factor and the activities it slows are stated; the voyage is feasible, and if it is not, the reasons name each overloaded constraint; the binding constraint and its utilisation are read off; the days fit the time the vessel has; the fuel and its cost are read with the price they rest on.
+
+# SECTION 14: Demand over a period: demand over capacity per constraint, minimum visits and what drives the voyage count (owned by Professional m01)
+
+A PERIOD'S DEMAND. fleetSize reads each installation's demand over the stated period (deck m2, deck t and bulk m3 by product) and its stated minimum visits in the period. A voyage set is the milk run (the demand of every stop added up) or one dedicated installation. For each constraint the demand over the capacity is how many full voyages that constraint alone needs; the voyages of demand are the largest of those ratios, and the voyages needed are the larger of that and the minimum visits (the largest minimum visits of the stops on a milk run).
+
+THE EKENE WEEK ON THE PSV MILK RUN (golden input ekene-fleet-psv-milk-run). Per constraint, the engine returns the week's demand and the capacity of one voyage; the ratio is their quotient (derived):
+
+| constraint | demand in the week (engine) | capacity a voyage (engine) | demand over capacity (derived) |
+| --- | --- | --- | --- |
+| deck area | 1860.000000 | 600.000000 | 3.100000 |
+| deck load | 2100.000000 | 2000.000000 | 1.050000 |
+| deadweight | 7294.500000 | 3500.000000 | 2.084143 |
+| tank diesel | 1370.000000 | 800.000000 | 1.712500 |
+| tank water | 2200.000000 | 1200.000000 | 1.833333 |
+| tank mud | 600.000000 | 600.000000 | 1.000000 |
+| tank brine | 250.000000 | 400.000000 | 0.625000 |
+| tank cement | 180.000000 | 250.000000 | 0.720000 |
+| tank barite | 200.000000 | 250.000000 | 0.800000 |
+
+The largest ratio is deck area's, 3.100000 (engine: voyagesExact), above the largest minimum visits of the four stops, 3 (fixture), so the engine names "deck area" as the driver.
+
+WHAT DRIVES THE COUNT (golden inputs, one dedicated installation, a deck area capacity of 100 m2 and a tank of 100 m3):
+
+| golden input | demand | minimum visits | voyages before rounding (engine) | voyages (engine) | driven by (engine) |
+| --- | --- | --- | --- | --- | --- |
+| fleet-demand-exactly-three-voyages | 300.000000 m2 | 0 | 3.000000 | 3 | deck area |
+| fleet-min-visits-drive | 250.000000 m2 | 3 | 3.000000 | 3 | minimum visits |
+| fleet-min-visits-equal-demand-names-demand | 300.000000 m2 | 3 | 3.000000 | 3 | deck area |
+| fleet-no-demand-no-visits | 0.000000 m2 | 0 | 0.000000 | 0 | no demand |
+| fleet-tank-drives | 10.000000 m2, d 410 m3 | 0 | 4.100000 | 5 | tank d |
+
+The engine names a constraint when its ratio is at or above the minimum visits (a tie names the demand), "minimum visits" when the visits are larger, and "no demand" when there is neither demand nor a visit.
+
+# SECTION 15: Voyages and vessel-days: rounding voyages, voyage days, dedicated sets, and a voyage longer than the days available (owned by Professional m02)
+
+ROUNDING VOYAGES is a stated rule: "up" to whole voyages (the ceiling of the twelve-digit figure), or "none", which keeps the fractional average. Vessel-days for a voyage set are its voyages times its voyage days (the voyage's hours after the weather factor, in days); the fleet's vessel-days are the sum over the voyage sets.
+
+| golden input | voyage rounding | voyages before rounding (engine) | voyages (engine) | voyage days (engine) | vessel-days (engine) |
+| --- | --- | --- | --- | --- | --- |
+| ekene-fleet-psv-milk-run | up | 3.100000 | 4 | 2.586364 | 10.345455 |
+| ekene-fleet-fractional | none | 3.100000 | 3.100000 | 2.586364 | 8.017727 |
+
+Rounding up asks for 10.345455 vessel-days in the week; the fractional average asks for 8.017727 (engine). "none" is the long-run average over many periods, which no single week can sail.
+
+ROUNDING UP AT ITS BOUNDARY (golden inputs, one dedicated installation driven by its deck area):
+
+| golden input | deck demand, m2 (golden input) | deck area capacity, m2 (engine) | voyages before rounding (engine, printed in full) | voyages (engine) |
+| --- | --- | --- | --- | --- |
+| fleet-demand-exactly-three-voyages | 300 | 100 | 3 | 3 |
+| fleet-decimal-ratio-exactly-three | 0.3 | 0.1 | 2.9999999999999996 | 3 |
+| fleet-decimal-ratio-2-1-over-0-7-is-three | 2.1 | 0.7 | 3.0000000000000004 | 3 |
+| fleet-demand-just-over-three-voyages | 300.001 | 100 | 3.0000099999999996 | 4 |
+
+The first three rows are three voyages of demand, whatever the double arithmetic leaves in the last digit; the fourth asks for a thousandth of a square metre more than three voyages carry, and rounds up to four.
+
+DEDICATED VOYAGES SIZED ONE BY ONE (golden input ekene-fleet-psv-dedicated): each installation is its own voyage set, with its own ratio, its own minimum visits and its own voyage days.
+
+| voyage set | voyages before rounding (engine) | voyages (engine) | driven by (engine) | voyage days (engine) | vessel-days (engine) |
+| --- | --- | --- | --- | --- | --- |
+| EKA | 2.000000 | 2 | minimum visits | 1.363636 | 2.727273 |
+| EKJ | 3.000000 | 3 | minimum visits | 1.518182 | 4.554545 |
+| EKB | 1.000000 | 1 | minimum visits | 1.372727 | 1.372727 |
+| EKF | 2.000000 | 2 | minimum visits | 1.613636 | 3.227273 |
+
+The dedicated week needs 11.881818 vessel-days against the milk run's 10.345455 (engine).
+
+A VOYAGE LONGER THAN THE DAYS AVAILABLE (golden input fleet-voyage-longer-than-available: 200 port hours make one voyage longer than the 6.5 days a vessel is available). This is a result with a reason, verbatim:
+> voyage X takes 9.25 days, longer than the 6.5 days a vessel is available in the period
+The engine still sizes it: 9.250000 vessel-days and 2 vessels (engine), which no single vessel can sail inside the period.
+
+# SECTION 16: Vessels required: available days, the rounding rule, spare and short vessel-days, utilisation and fuel for the period (owned by Professional m03)
+
+AVAILABLE DAYS are stated, at most the period: the crew change and maintenance allowance is the planner's. Vessels before rounding are the vessel-days over the available days a vessel; the stated rule rounds them "up", to the "nearest" whole vessel (halves up) or "none". The capacity in vessel-days is the vessels times the available days; spare vessel-days are the capacity less the need, and short vessel-days the need less the capacity when the need is larger at twelve digits. Fleet utilisation is the need over the capacity.
+
+| golden input | vessel rounding | vessel-days (engine) | vessels before rounding (engine) | vessels (engine) | capacity, vessel-days (engine) | spare (engine) | short (engine) | fleet utilisation (engine) |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| fleet-vessels-up | up | 9.916667 | 1.416667 | 2 | 14.000000 | 4.083333 | 0.000000 | 0.708333 |
+| fleet-vessels-nearest-short | nearest | 9.916667 | 1.416667 | 1 | 7.000000 | 0.000000 | 2.916667 | 1.416667 |
+| fleet-vessels-none | none | 9.916667 | 1.416667 | 1.416667 | 9.916667 | 0.000000 | 0.000000 | 1.000000 |
+| fleet-vessels-nearest-half-rounds-up | nearest | 10.500000 | 1.500000 | 2 | 14.000000 | 3.500000 | 0.000000 | 0.750000 |
+| fleet-vessel-days-exactly-two-vessels | up | 14.000000 | 2.000000 | 2 | 14.000000 | 0.000000 | 0.000000 | 1.000000 |
+
+THE SHORTFALL IS A RESULT WITH A REASON. On fleet-vessels-nearest-short the nearest whole vessel leaves the need uncovered, verbatim:
+> 1 vessel gives 7 vessel-days against 9.916667 needed: short by 2.916667 vessel-days
+
+AVAILABLE DAYS AT THE PERIOD. Available days equal to the period are accepted (golden input fleet-available-equals-period: 7 of 7; 0.202381 vessels before rounding, engine); more than the period is refused by name (section 5: fleet-refuse-available-above-period).
+
+THE EKENE WEEK ON BOTH VESSELS AND BOTH ROUTES, WITH THE NEAREST RULE AND IN CALM WEATHER (golden inputs; voyages rounded up; vessels rounded up, except ekene-fleet-nearest-vessels, which rounds them to the nearest; fuel at the fixture price):
+
+| golden input | voyages by set (engine) | vessel-days (engine) | vessels before rounding (engine) | vessels (engine) | spare vessel-days (engine) | fleet utilisation (engine) | fuel t (engine) | fuel cost (engine) |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| ekene-fleet-psv-milk-run | milk-run 4 (deck area) | 10.345455 | 1.591608 | 2 | 2.654545 | 0.795804 | 79.505455 | 69169.745455 |
+| ekene-fleet-nearest-vessels | milk-run 4 (deck area) | 10.345455 | 1.591608 | 2 | 2.654545 | 0.795804 | 79.505455 | 69169.745455 |
+| ekene-fleet-ahts-milk-run | milk-run 5 (deck area) | 12.541667 | 1.929487 | 2 | 0.458333 | 0.964744 | 119.400000 | 103878.000000 |
+| ekene-fleet-psv-dedicated | EKA 2 (minimum visits); EKJ 3 (minimum visits); EKB 1 (minimum visits); EKF 2 (minimum visits) | 11.881818 | 1.827972 | 2 | 1.118182 | 0.913986 | 85.461818 | 74351.781818 |
+| ekene-fleet-ahts-dedicated | EKA 2 (minimum visits); EKJ 3 (minimum visits); EKB 1 (minimum visits); EKF 2 (minimum visits) | 11.433333 | 1.758974 | 2 | 1.566667 | 0.879487 | 98.880000 | 86025.600000 |
+| ekene-fleet-calm | milk-run 4 (deck area) | 8.954545 | 1.377622 | 2 | 4.045455 | 0.688811 | 66.494545 | 57850.254545 |
+
+A PSV OR AN AHTS FOR THE SAME DEMAND. On the milk run the AHTS's smaller deck needs 5 voyages where the PSV needs 4, and its utilisation of the two vessels is 0.964744 against 0.795804 (engine). Both weeks round up to 2 vessels; the spare vessel-days and the fuel differ.
+
+FUEL FOR THE PERIOD is the voyages of each set times the fuel of one of its voyages, added over the sets; its cost is the tonnes times the stated price.
+
+# SECTION 17: Deck cargo and footprints: items, units, the area bound with no stacking, and the lower bound (owned by Professional m04)
+
+ITEMS AND UNITS. A deck plan states each item line with an id, a length and a width in metres, a weight in tonnes and a whole quantity. The footprint of one unit is its length times its width. A line of one unit is named by its id; a line of several names each unit by the id, a # sign and the unit number (engine: pipe-bundle#1). The usable area is the deck area times the stated usable fraction, and the deck load is stated in tonnes.
+
+THE AREA BOUND. A unit fits a voyage when the footprints already on it plus its own stay at or below the usable area AND the weights stay at or below the deck load, both at twelve digits (inclusive). Cargo is never stacked and footprints are never checked against the deck's shape: the plan is an area bound, the same measure Aas, Halskau and Wallace (2009) describe for deck cargo (taught by concept). A deck plan is packed onto a stated number of voyages; a unit no voyage can take is OVERFLOW, named with its reason.
+
+THE EKENE VOYAGE OF DECK CARGO (golden input ekene-deck-one-voyage-ffd): 61 units with footprints totalling 615.729600 m2 and weights totalling 515.600000 t (engine), against a usable area of 600.000000 m2 and a deck load of 2000 t.
+
+THE LOWER BOUND on voyages counts only the units that fit an empty voyage: the larger of their area over the usable area and their weight over the deck load, each rounded up at twelve digits. A unit larger than the usable area or heavier than the deck load can never be carried; the engine lists it in `neverFit` and leaves it out of the bound. Here every unit fits an empty voyage (never fit: none) and the bound is 2 voyages (engine). No packing rule can carry the carriable cargo on fewer; a rule may need more.
+
+WHEN THE DECK LOAD BINDS. The same cargo on a deck rated at 300 t (golden input ekene-deck-light-load-limit, 2 voyages) packs as below (engine): the weights reach the deck load before the footprints fill the area.
+
+| voyage | units (engine) | area, m2 (engine) | weight, t (engine) | area utilisation (engine) | load utilisation (engine) |
+| --- | --- | --- | --- | --- | --- |
+| 1 | 25 | 404.505200 | 300.000000 | 0.674175 | 1.000000 |
+| 2 | 36 | 211.224400 | 215.600000 | 0.352041 | 0.718667 |
+
+WHAT THE AREA BOUND LEAVES OUT, and the two overflow reasons no voyage count can cure (golden inputs):
+
+| golden input | the overflow reason, verbatim | never fit (engine) | lower bound (engine) |
+| --- | --- | --- | --- |
+| deck-item-larger-than-deck | big is overflow: its footprint 12.5 m2 is larger than the usable deck area 10 m2 | big | 1 |
+| deck-item-heavier-than-deck-load | heavy is overflow: its weight 10.5 t is above the deck load 10 t | heavy | 0 |
+
+On deck-item-larger-than-deck the two units that fit need 1 voyage and the bound is 1; on deck-item-heavier-than-deck-load no unit fits an empty voyage, so the bound is 0 (engine).
+
+The bound does not compare a basket's length with the deck's width, does not stack a skip on a container, does not keep a lane clear for the crane and does not balance the load; those are the deck foreman's, and a plan that passes the area bound can still fail on the deck (section 27).
+
+# SECTION 18: First-fit decreasing: sorting by area, the first voyage that holds a unit, ties heavier first, first fit in the booked order, and overflow (owned by Professional m05)
+
+TWO STATED RULES. "first-fit-decreasing-area" sorts the units by footprint area, largest first, then heavier first, then item id, then unit number, and puts each unit on the first voyage that still holds it (Johnson 1973; the rule as the Wikipedia article on first-fit decreasing describes it, cited). "first-fit" keeps the booked order and puts each unit on the first voyage that still holds it. The rule is required; there is no default.
+
+THE EKENE CARGO ON ONE VOYAGE, BOTH RULES (golden inputs ekene-deck-one-voyage-ffd and ekene-deck-one-voyage-first-fit). The fixture books the items smallest first.
+
+| golden input | rule | first units in the packing order (engine) | area carried, m2 (engine) | weight carried, t (engine) | units carried (engine) | overflow units (engine) |
+| --- | --- | --- | --- | --- | --- | --- |
+| ekene-deck-one-voyage-ffd | first-fit-decreasing-area | pipe-bundle#1, pipe-bundle#2, basket-6m#1, basket-6m#2 | 599.229600 | 499.600000 | 50 | 11 |
+| ekene-deck-one-voyage-first-fit | first-fit | chem-ibc#1, chem-ibc#2, chem-ibc#3, chem-ibc#4 | 580.629600 | 477.600000 | 60 | 1 |
+
+First-fit decreasing puts the two casing bundles on first and leaves 11 small units behind, 16.500000 m2 of footprint (derived: the overflow footprints added). First fit in the booked order fills the deck with the small units first and strands a casing bundle, 35.100000 m2 (engine). The overflow reasons, verbatim:
+> skip#6 is overflow: it needs 4.5 m2 of usable area and 3 t of deck load; at its turn the most left on any voyage was 3.1704 m2 (short) and 1503 t (enough); usable area stops it
+> pipe-bundle#2 is overflow: it needs 35.1 m2 of usable area and 38 t of deck load; at its turn the most left on any voyage was 19.3704 m2 (short) and 1522.4 t (enough); usable area stops it
+
+TWO VOYAGES (golden input ekene-deck-two-voyages-ffd): first-fit decreasing carries all 61 units, 599.229600 m2 on the first voyage and 16.500000 m2 on the second (engine), no overflow, matching the lower bound of 2.
+
+TIES GO TO THE HEAVIER UNIT, THEN THE ITEM ID, THEN THE UNIT NUMBER (golden input deck-ties-heavier-first-then-id: b 2 m by 3 m at 1 t, quantity 2; a 3 m by 2 m at 1 t, quantity 1; c 6 m by 1 m at 4 t, quantity 1; every footprint is 6.000000 m2). The engine sorts them c, a, b#1, b#2 and packs voyage 1: c, a; voyage 2: b#1, b#2.
+
+A FIT IS INCLUSIVE. Two units of 2.500000 m2 and 1.5 t fill a usable area of 5.000000 m2 and a deck load of 3 t exactly (golden input deck-exact-fit-inclusive): both go on, area utilisation 1.000000. Footprints of 0.1 and 0.2 m2 fill a 0.3 m2 deck (golden input deck-decimal-footprints-fill-exactly: 2 units carried, the double sum 0.30000000000000004, engine).
+
+THE OVERFLOW REASONS the engine writes. A unit that can never be carried says so: its footprint is larger than the usable deck area, or its weight is above the deck load (section 17); those need a bigger deck. Any other unit left behind is stopped by the room left at its turn, after every unit before it in the packing order is placed: the reason gives what the unit needs, the most usable area and the most deck load left on any voyage, each marked short or enough, and names the limit that stops it, in one of four endings. Those need another voyage. The four endings on their golden inputs, verbatim:
+
+| golden input | rule | voyages | the overflow reason, verbatim |
+| --- | --- | --- | --- |
+| deck-overflow-area-stops-it | first-fit-decreasing-area | 1 | b is overflow: it needs 2 m2 of usable area and 1 t of deck load; at its turn the most left on any voyage was 1 m2 (short) and 99 t (enough); usable area stops it |
+| deck-overflow-deck-load-stops-it | first-fit | 1 | b is overflow: it needs 1 m2 of usable area and 2 t of deck load; at its turn the most left on any voyage was 9 m2 (enough) and 1 t (short); deck load stops it |
+| deck-overflow-both-stop-it | first-fit | 1 | b is overflow: it needs 2 m2 of usable area and 2 t of deck load; at its turn the most left on any voyage was 1 m2 (short) and 1 t (short); usable area and deck load both stop it |
+| deck-overflow-no-one-voyage-has-both | first-fit | 2 | c is overflow: it needs 3 m2 of usable area and 1 t of deck load; at its turn the most left on any voyage was 9 m2 (enough) and 9 t (enough); no one voyage had both, so usable area and deck load together stop it |
+| deck-overflow-at-exact-remaining-room | first-fit | 1 | c is overflow: it needs 1 m2 of usable area and 1 t of deck load; at its turn the most left on any voyage was 0 m2 (short) and 0 t (short); usable area and deck load both stop it |
+
+The last ending is the one to read with care: on deck-overflow-no-one-voyage-has-both one voyage has the area and another has the deck load, so each limit alone reads enough and the pair still stops the unit. On deck-overflow-at-exact-remaining-room the unit before it fills the room exactly, which fits (a fit is inclusive), and nothing is left at its turn.
+
+# SECTION 19: Published packing examples: two capacities, a larger deck that needs more voyages, and a tight worst case (owned by Professional m06)
+
+The four packings of section 3 (checks seven to nine) are the textbook side of the deck plan: each is a list of one-metre-wide footprints with no weight, packed by the engine exactly as the article prints it.
+
+FIRST FIT ON THE SAME LIST. The golden input ffd-wikipedia-cgj-first-fit-order states the capacity 60 items in the order 44, 24, 24, 22, 21, 17, 8, 8, 6, 6 with the rule "first-fit": they are already in decreasing order, so first fit packs {44,8,8}, {24,24,6,6}, {22,21,17} (engine), the same as first-fit decreasing.
+
+THE BOOKED ORDER MATTERS. The same capacity 60 list booked smallest first and packed by first fit (stated probe: the golden input ffd-wikipedia-cgj-capacity-60 with its items reversed and the rule "first-fit") gives {6,6,8,8,17}, {21,22}, {24,24}, {44}, 4 voyages (engine), where first-fit decreasing gives 3.
+
+WHAT THE EXAMPLES TEACH, each from the engine's own packings above: first-fit decreasing can need more voyages on a larger deck (3 at capacity 60, 4 at 61); it can use 8 voyages where the text's optimum is 6 and the engine's lower bound is 6; and it is a rule, stated and repeatable, with no search for the best packing.
+
+# SECTION 20: The shore base as a queue: the working-hour clock, the service time, the offered load and the berth utilisation (owned by Expert m01)
+
+THE WORKING-HOUR CLOCK. The base is modelled on its working hours: arrivals an hour are the stated arrivals a day over the stated working hours a day (at most a whole day), and every time the queue returns is in working hours. A call's SERVICE TIME is the stated fixed hours plus the lift hours (lifts over the stated lifts an hour) and the bulk hours (m3 over the stated m3 an hour), the two added when they run one after the other (concurrent false) or the larger of the two when they run at the same time (concurrent true); the choice is required. The OFFERED LOAD is the arrivals an hour times the service time, and the BERTH UTILISATION is the offered load over the berths.
+
+| golden input | berths | arrivals a day | working hours | concurrent | lift hours (engine) | bulk hours (engine) | service hours (engine) | arrivals an hour (engine) | offered load (engine) | berth utilisation (engine) |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| ekene-base-mmc | 2 | 3.2 | 24 | true | 5.000000 | 6.000000 | 8.000000 | 0.133333 | 1.066667 | 0.533333 |
+| ekene-base-sequential-service | 2 | 3.2 | 24 | false | 5.000000 | 6.000000 | 13.000000 | 0.133333 | 1.733333 | 0.866667 |
+| ekene-base-twelve-hour-day | 3 | 3.2 | 12 | true | 5.000000 | 6.000000 | 8.000000 | 0.266667 | 2.133333 | 0.711111 |
+
+The Ekene base on a 12-hour working day takes the same 3.2 arrivals a day in half the hours, so its arrivals an hour and its berth utilisation are higher (engine); with the lifts and the bulk one after the other the service time is 13.000000 hours where it was 8.000000 (engine).
+
+A STEADY STATE NEEDS A BERTH UTILISATION BELOW 1. At or above it the queue grows without limit, and the engine refuses, printing the largest arrivals a day that stay below saturation. The printed bound is the six-decimal figure nearest the exact bound on the accepted side, and the message says so when it is rounded down (golden inputs, verbatim):
+
+| golden input | the engine's message, verbatim |
+| --- | --- |
+| base-refuse-saturated-exactly | arrivalsPerDay must be at most 19.999999 (rounded down at the sixth decimal so that it is accepted) for a steady state with 2 berths: the berth utilisation must stay below 1, so arrivals a day must stay below berths x working hours a day / service hours = 20; got 20, a berth utilisation of 1 |
+| base-refuse-saturated-thirds | arrivalsPerDay must be at most 26.666666 (rounded down at the sixth decimal so that it is accepted) for a steady state with 2 berths: the berth utilisation must stay below 1, so arrivals a day must stay below berths x working hours a day / service hours = 26.666667; got 30, a berth utilisation of 1.125 |
+| base-refuse-ekene-one-berth-overloaded | arrivalsPerDay must be at most 2.999999 (rounded down at the sixth decimal so that it is accepted) for a steady state with 1 berth: the berth utilisation must stay below 1, so arrivals a day must stay below berths x working hours a day / service hours = 3; got 3.2, a berth utilisation of 1.066667 |
+
+JUST BELOW. On base-just-below-saturation the berth utilisation is 0.999500 and the engine returns a mean wait of 999.250063 hours and a mean queue of 1997.500875 (engine): the steady state exists, and it is long.
+
+# SECTION 21: Erlang C and M/M/c: the probability of waiting, mean wait and mean queue, Little's law, the published tables and a printed slip (owned by Expert m02)
+
+M/M/c. Poisson arrivals, exponential service times, c berths, first come first served. With offered load a and utilisation rho = a / c below 1: the delay probability PiW is Erlang's C formula (Adan and Resing 2015, eq. 5.1; Iversen 2001, s. 12.2), which the engine computes by the stable Erlang B recursion (Adan and Resing, s. 11.3, recursion 11.3 and remark 11.3.2); the mean queue is E(Lq) = PiW rho / (1 - rho) (eq. 5.2); the mean wait is E(W) = PiW S / (c (1 - rho)) with S the service time (eq. 5.3); the mean time at the base is the wait plus S; the mean in the system is E(Lq) plus a.
+
+THE EKENE BASE WITH MORE BERTHS (stated probes: ekene-base-mmc with the berths stated as below):
+
+| berths (stated) | berth utilisation (engine) | delay probability (engine) | mean queue (engine) | mean wait, hours (engine) | mean time at the base, hours (engine) | mean in the system (engine) |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | refused: see section 20 |  |  |  |  |  |
+| 2 | 0.533333 | 0.371014 | 0.424017 | 3.180124 | 11.180124 | 1.490683 |
+| 3 | 0.355556 | 0.106417 | 0.058713 | 0.440347 | 8.440347 | 1.125380 |
+| 4 | 0.266667 | 0.025264 | 0.009187 | 0.068902 | 8.068902 | 1.075854 |
+| 5 | 0.213333 | 0.005033 | 0.001365 | 0.010236 | 8.010236 | 1.068032 |
+
+LITTLE'S LAW AT THE BASE (Adan and Resing, s. 3.4): the mean queue is the arrivals an hour times the mean wait, and the mean in the system is the mean queue plus the offered load. On the Ekene base with two berths (golden input ekene-base-mmc):
+- arrivals an hour 0.133333 times the mean wait 3.180124 is 0.424017 (derived); the engine's mean queue is 0.424017;
+- the mean queue plus the offered load 1.066667 is 1.490683 (derived); the engine's mean in the system is 1.490683.
+
+THE PUBLISHED TABLES. Adan and Resing's Tables 5.1 and 5.2 and Iversen's Example 12.3.1 run through the engine in section 3 (checks one to three). Every printed figure is the engine's figure rounded, except the mean wait at five servers in Table 5.1: the table prints 1.53 where the formula gives 1.524986, which rounds to 1.52. The course teaches the printed 1.53 as a slip in the table.
+
+WHAT M/M/c ASSUMES. Arrivals at random (Poisson), service times spread like an exponential (as many short calls as the mean suggests, and some long ones), one queue served first come first served, and a steady state. A base whose calls take much the same time every time is closer to M/D/c (section 22).
+
+# SECTION 22: Constant service and M/D/c: the Cosmetatos approximation, one berth and the exact formula, and the berth target (owned by Expert m03)
+
+M/D/c. Poisson arrivals and a constant service time. There is no closed form for the M/D/c mean wait (Liu, Pantelidis, Tam and Chow, arXiv 2102.05851v2, CC BY 4.0); the engine uses the Cosmetatos (1975) approximation as that paper prints it in eq. (2): the M/D/c wait is the M/M/c wait over 2, times 1 plus (1 - rho)(c - 1)(sqrt(4 + 5c) - 2) / (16 rho c). The engine labels it an approximation and returns no delay probability for M/D/c.
+
+ONE BERTH, EXACT. At c = 1 the correction term is 0 and the formula is the Pollaczek-Khinchin mean value formula for M/D/1 (Adan and Resing 2015, eqs 7.14 to 7.16): the wait is rho S / (2 (1 - rho)). On the golden input base-md1-pollaczek-khinchin (1 berth, a service of 1 hour, rho 0.900000) the engine returns a mean wait of 4.500000 hours; the formula gives 4.500000 (derived), half of the M/M/1 wait at the same load, 9.000000 hours (engine, golden input adan-resing-table-5-1-c1).
+
+SEVERAL BERTHS, APPROXIMATE. On base-mdc-three-berths (3 berths, rho 0.800000) the engine returns an M/D/c mean wait of 0.552578 hours; the same inputs as M/M/c (stated probe) give 1.078652 hours (engine). On the Ekene base with two berths, M/D/c gives 1.665786 hours against M/M/c's 3.180124 (engine), a ratio of 0.523812 (derived).
+
+HOW MANY BERTHS MEET A TARGET. With a stated targetMeanWaitHours the engine searches from the fewest berths that keep the utilisation below saturation (the whole part of the offered load, plus one) up to 100, and returns the fewest whose mean wait is at or below the target (inclusive), with its reason. The search uses the stated model.
+
+| golden input | model | target, hours (golden input) | berths (engine) | mean wait there, hours (engine) | the engine's reason, verbatim |
+| --- | --- | --- | --- | --- | --- |
+| ekene-base-mmc-target-one-hour | M/M/c | 1 | 3 | 0.440347 | 3 berths are the fewest with a mean wait at or below 1 hour (0.440347 hours) |
+| ekene-base-mdc-target-one-hour | M/D/c | 1 | 3 | 0.259397 | 3 berths are the fewest with a mean wait at or below 1 hour (0.259397 hours) |
+| base-target-met-exactly-by-current | M/M/c | 9 | 1 | 9.000000 | 1 berth is the fewest with a mean wait at or below 9 hours (9 hours) |
+| base-target-zero-unreachable | M/M/c | 0 | none | none | no berth count up to 100 gives a mean wait at or below 0 hours |
+
+A target met exactly is met: on base-target-met-exactly-by-current the wait at one berth is the target itself. A target of 0 hours is never met, and the engine reports it with no berth count.
+
+# SECTION 23: Weather and demand variability: the canonical Monte Carlo, two factors drawn in order, vessels as a distribution, the chance of being short (owned by Expert m04)
+
+THE CANONICAL MONTE CARLO. fleetVariability samples through lib/stats: one mulberry32 stream on the stated seed; per iteration the weather factor is drawn first, then the demand factor, each only when it varies (a triangular { min, mode, max } with max above min; a plain number is fixed), each value the triangular inverse CDF of its uniform draw (triInvCDF). The demand factor multiplies every installation's demand. Each iteration sizes the fleet exactly as fleetSize does. The summaries are lib/stats basicStats; the labels are those of lib/conventions/percentile.js.
+
+THE EXCEEDANCE SENTENCE the engine returns, verbatim:
+> P90 means a 90% probability the actual quantity meets or exceeds this value, per SPE PRMS.
+
+FOR A REQUIREMENT OR A COST, P90 IS THE LOW FIGURE: the 10th percentile of the sorted values (index floor(0.1 n)), met or exceeded in 90 percent of the draws; P10 is the HIGH figure, the 90th percentile. The engine's basis says so (section 2).
+
+THE EKENE WEEK UNDER VARIABILITY (golden input ekene-variability-psv-milk-run: the PSV milk run, the weather factor triangular 1, 1.2, 1.6 on sailing and field time, the demand factor triangular 0.85, 1, 1.3, 2 planned vessels; seed 20260927, 20000 draws). Every figure below is a seeded Monte Carlo estimate on seed 20260927 and 20000 draws; none is graded.
+
+THE PLAN AT THE MODES (not a draw): weather factor 1.2, demand factor 1, 10.345455 vessel-days and 2 vessels (engine), the figures fleetSize returns for the same week (section 16).
+
+| statistic (seed 20260927, 20000 draws) | vessel-days (engine) | vessels required (engine) |
+| --- | --- | --- |
+| mean | 10.239206 | 2.001400 |
+| P90 (low) | 7.977705 | 2.000000 |
+| P50 | 10.412277 | 2.000000 |
+| P10 (high) | 11.908677 | 2.000000 |
+| min | 6.757591 | 2.000000 |
+| max | 16.024716 | 3.000000 |
+
+| whole vessels (engine) | share of the draws (engine) |
+| --- | --- |
+| 2 | 0.998600 |
+| 3 | 0.001400 |
+
+THE CHANCE OF BEING SHORT with 2 planned vessels (capacity 13.000000 vessel-days, engine): 0.001400 of the draws need more vessel-days than that (strictly above, at twelve digits), and the expected shortfall over all the draws is 0.000686 vessel-days (engine; seed 20260927, 20000 draws).
+
+ANOTHER SEED, ANOTHER ESTIMATE (stated probe: the same inputs on seed 7 and 20000 draws): mean vessel-days 10.249964, P90 8.023594, P10 11.928203, probability short 0.001700 (engine). The figures move with the seed, which is why a Monte Carlo figure is always quoted with its seed and its draws and no Monte Carlo figure is graded; the plan at the modes does not move (10.345455 vessel-days).
+
+MORE RUNS (golden inputs; every figure a seeded estimate on the seed and draws shown, none graded):
+
+| golden input | weather factor | demand factor | planned vessels | seed / draws | mean vessel-days | P90 (low) | P10 (high) | probability short | expected short vessel-days |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| variability-fixed-factors-equal-fleet-size | 1.2 | 1 | 2 | 1 / 50 | 10.345455 | 10.345455 | 10.345455 | 0.000000 | 0.000000 |
+| variability-one-iteration | 1, 1.2, 1.6 | 0.85, 1, 1.3 | 2 | 0 / 1 | 7.648544 | 7.648544 | 7.648544 | 0.000000 | 0.000000 |
+| variability-weather-only | 1, 1.2, 1.6 | 1 | 2 | 3 / 3000 | 10.803806 | 9.747707 | 12.018460 | 0.001333 | 0.000030 |
+| variability-demand-only-fractional | 1.2 | 0.85, 1, 1.3 | 2 | 5 / 3000 | 8.465681 | 7.759091 | 9.450642 | 0.000000 | 0.000000 |
+| variability-planned-zero | 1, 1.2, 1.6 | 0.85, 1, 1.3 | 0 | 9 / 500 | 10.235579 | 8.021610 | 11.926509 | 1.000000 | 10.235579 |
+| variability-at-capacity-is-not-short | 1 | 1 | 2 | 4 / 20 | 14.000000 | 14.000000 | 14.000000 | 0.000000 | 0.000000 |
+| variability-one-vessel-short-always | 1 | 1 | 1 | 4 / 20 | 14.000000 | 14.000000 | 14.000000 | 1.000000 | 7.000000 |
+| ekene-variability-ahts-dedicated | 1, 1.2, 1.6 | 0.85, 1, 1.3 | 2 | 11 / 5000 | 11.846782 | 10.888232 | 12.926222 | 0.085000 | 0.025759 |
+
+With both factors fixed every draw is the fleetSize week. A need exactly at the planned capacity is not short (strictly above counts); with one vessel fewer every draw is short.
+
+# SECTION 24: The readings the engine states, where each acts, and the alternative (owned by Expert m05 and Expert m06 l03)
+
+Where no source fixes a convention, the engine states one. Each reading below is the engine's, with a golden input on which it acts, the engine's answer there, and the alternative the course names. No capstone field is moved by any alternative (section 6).
+
+| reading | golden input | the engine returns | the alternative |
+| --- | --- | --- | --- |
+| READING ONE: a load exactly at a capacity is feasible | voyage-at-capacity-feasible | feasible true at a deck area utilisation of 1.000000 | the load at capacity read as overloaded |
+| READING TWO: a binding tie goes to the first constraint in the order | voyage-binding-tie-goes-to-deck-area | binding deck area | the tie given to the last of the tied constraints (deck load here, section 12) |
+| READING THREE: a count rounds up on its twelve-digit figure | fleet-decimal-ratio-2-1-over-0-7-is-three | 3 voyages from 3.0000000000000004 | the ceiling of the raw double (derived: the ceiling of 3.0000000000000004 is 4) |
+| READING FOUR: the nearest whole vessel rounds a half up | fleet-vessels-nearest-half-rounds-up | 2 vessels from 1.500000 | halves rounded down (derived: 1.5 would give 1 vessel, and the week would be short) |
+| READING FIVE: demand equal to the minimum visits names the demand | fleet-min-visits-equal-demand-names-demand | driven by deck area | the tie named as minimum visits |
+| READING SIX: first-fit decreasing puts the heavier of two equal footprints first | deck-ties-heavier-first-then-id | order c, a, b#1, b#2 | the lighter first |
+| READING SEVEN: a unit that fills the deck exactly fits | deck-exact-fit-inclusive | 2 units carried, 0 overflow | an exact fill read as overflow |
+| READING EIGHT: a berth target is met at or below it | base-target-met-exactly-by-current | 1 berth meets a target of 9 hours | the target met only strictly below it |
+| READING NINE: short means strictly above the planned capacity | variability-at-capacity-is-not-short | probability short 0.000000 | short at equality (derived: every draw equals the capacity here, so every draw would count) |
+| READING TEN: the P90 of a requirement is the low figure | ekene-variability-psv-milk-run | P90 7.977705 vessel-days, below the P10 11.908677 (seed 20260927, 20000 draws) | P90 read at the high side |
+
+THE CHOICES A CALL STATES are not readings: the activities the weather slows, the voyage and vessel rounding rules, the packing rule, the queue model and the concurrent choice are inputs, each required, and a capstone states each one it uses.
+
+# SECTION 25: Boundaries, rule by rule (owned by Expert m05 l01 and Expert m05 l02 and Expert m05 l03)
+
+Each rule has its own boundary. None is global: some are inclusive, some strict, and some are read at twelve significant digits. Every row is the engine's answer on a golden input.
+
+| rule | at the boundary | one past it | golden inputs |
+| --- | --- | --- | --- |
+| capacity | load = capacity: feasible | one tonne over: overloaded | voyage-at-capacity-feasible, voyage-one-over-deck-load |
+| decimal sums | 0.1 + 0.2 fills 0.3: feasible |  | voyage-decimal-sum-at-capacity, deck-decimal-footprints-fill-exactly |
+| the binding tie | equal utilisations: deck area named |  | voyage-binding-tie-goes-to-deck-area |
+| voyages rounded up | exactly 3 is 3 (2.1 over 0.7 is 3) | 300.001 over 100 is 4 | fleet-demand-exactly-three-voyages, fleet-decimal-ratio-2-1-over-0-7-is-three, fleet-demand-just-over-three-voyages |
+| demand and minimum visits | equal: demand named | more visits: minimum visits named | fleet-min-visits-equal-demand-names-demand, fleet-min-visits-drive |
+| vessels to the nearest | 1.5 rounds to 2 | 1.416667 rounds to 1, shortfall reported | fleet-vessels-nearest-half-rounds-up, fleet-vessels-nearest-short |
+| vessels up | vessel-days of exactly two vessels: 2 vessels, utilisation 1 |  | fleet-vessel-days-exactly-two-vessels |
+| available days | equal to the period: accepted | above the period: refused | fleet-available-equals-period, fleet-refuse-available-above-period |
+| short in the Monte Carlo | need = planned capacity: not short | one vessel fewer: always short | variability-at-capacity-is-not-short, variability-one-vessel-short-always |
+| iterations times voyage sets | 181818 with 11 sets: accepted | 181819: refused | variability-refuse-draws-cap |
+| a deck fit | an exact fill: fits | heavier than the deck load: overflow | deck-exact-fit-inclusive, deck-item-heavier-than-deck-load |
+| the room at a unit's turn | room used exactly: the unit fits | nothing left: overflow, both short | deck-overflow-at-exact-remaining-room |
+| the lower bound | a unit that fits an empty voyage: counted | too large or too heavy for any voyage: listed in neverFit and left out | deck-item-larger-than-deck, deck-item-heavier-than-deck-load |
+| the steady state | utilisation 0.9995: accepted | utilisation 1: refused, printing 19.999999 | base-just-below-saturation, base-refuse-saturated-exactly |
+| a printed bound | 26.666666 is printed (accepted) | 26.666667 would be refused | base-refuse-saturated-thirds |
+| the berth target | wait = target: met | target 0: unreachable, reported | base-target-met-exactly-by-current, base-target-zero-unreachable |
+| the weather factor | 1: accepted | 0.9 and 10.5: refused | ekene-voyage-calm, voyage-refuse-weather-below-one, voyage-refuse-weather-above-cap |
+| the usable fraction | 1: accepted | 0 and 1.1: refused | skoko-2024-table1-psv-daily-fuel, voyage-refuse-usable-fraction-zero, voyage-refuse-usable-fraction-above-one |
+
+A PRINTED BOUND ON THE ACCEPTED SIDE. When a refusal names the most a figure may be, the engine prints the six-decimal figure nearest the exact bound that its own rule accepts, and adds "(rounded down at the sixth decimal so that it is accepted)" when that figure differs from the exact bound: typing the printed figure back in passes. On base-refuse-saturated-thirds the exact bound is 26.666667 at six decimals and would be refused, so the engine prints 26.666666.
+
+# SECTION 26: Reference texts and their quirks (owned by Expert m02 l05 and Expert m05 l04 and Expert m06 l03)
+
+A PRINTED FIGURE THAT MISSES ITS ROUNDING. Adan and Resing's Table 5.1 prints a mean wait of 1.53 at five servers (text); the formula the table is built from gives 1.524986, which rounds to 1.52 (section 3, check one). Every other figure in Tables 5.1 and 5.2 is the engine's rounded. The course names the printed figure as a slip and quotes the engine's.
+
+A TOTAL THE ROUNDED DAYS DO NOT REPRODUCE. Skoko et al. print the PSV's optimal fuel cost as USD 186,274.10; the rounded days of their Table 5 give 186214.104000 through the engine (section 3, check six). The course uses the AHTS row, which reproduces exactly, and leaves the PSV total out.
+
+A HANDBOOK IN DRAFT. Iversen's Teletraffic Engineering Handbook was read in its ITU-D draft of 20 June 2001; its Example 12.3.1 is in seconds, and the golden inputs read the second as the working hour, which changes no figure because every time in the call is read in the same unit.
+
+A LIVING PAGE. The Wikipedia article on first-fit decreasing changes over time, so the course cites revision 1317275412 of 17 October 2025 and the examples as that revision prints them. Johnson's 1973 thesis and Dosa's 2007 paper were not read directly; the rule and the examples are taken as the article states them, with its citations.
+
+AN APPROXIMATION READ AT SECOND HAND. Cosmetatos (1975) was not read directly; the formula is taken as Liu, Pantelidis, Tam and Chow print it (arXiv 2102.05851v2, eq. (2), CC BY 4.0), and the engine labels it an approximation.
+
+A USABLE SHARE STATED TWO WAYS. Skoko et al. use 85% of a vessel's carrying capacity as usable (text, beside Table 4); the Ekene fixture states a usable deck fraction of 0.75. Neither is a default: the usable fraction is a required input on every call.
+
+AN ACCEPTED MANUSCRIPT. Aas, Halskau and Wallace (2009) was read as the accepted manuscript on Lancaster EPrints, cited with the journal's volume and pages; the course teaches its ideas by concept and quotes none of its prose.
+
+# SECTION 27: What the engine does not compute, and which course owns it (owned by Expert m06 l01)
+
+The engine takes these as stated inputs, or leaves them out; where another course of the academy owns the subject the lessons name it in one sentence and do not re-teach it:
+
+| not computed here | what the engine takes instead | where it belongs |
+| --- | --- | --- |
+| a schedule by the clock: departure times, night holding, a sailing plan by day | counts of voyages and vessel-days over a stated period | none: a planner's schedule |
+| weather windows, wave heights and waiting on weather | one stated factor on the stated activities | none: always a stated input |
+| a speed and fuel curve | a stated burn rate for each activity at the stated speed | none: always a stated input |
+| vessel hire, port fees and a contract for the vessel | a stated fuel price only | procurement (Procurement, Tendering & Contracting) |
+| stacking, deck shape, lanes and stability | an area bound with a stated usable fraction and deck load | none: the deck foreman's plan |
+| a stowage factor for bulk | the user's net deadweight and stated densities | none: always a stated input |
+| berth-specific cranes, shifts and priorities | one queue on the working-hour clock | none |
+| the optimum deck packing | a stated rule (first-fit decreasing or first fit) and the area lower bound | none |
+| stock levels, spares and reorder points | stated cargo and demand | materials (Materials, Spares & Inventory Management) |
+| supplier performance and contract management | none | contracts (Contract & Supplier Management) |
+| distributions, correlation and Monte Carlo as a subject | the canonical seeded sampler of lib/stats, applied to the fleet | uncertainty |
+| discounting, NPV and a cash flow | none: the engine discounts nothing | cashflow (Petroleum Economics and Cash Flow) |
+
+# SECTION 28: Size caps and refusals at scale (owned by Expert m06 l02)
+
+| cap | value | call over the cap | the engine's message, verbatim |
+| --- | --- | --- | --- |
+| `MAX_INSTALLATIONS` | 50 | voyagePlan with 51 dedicated installations (stated probe) | installations has 51 entries; the cap is 50 |
+| `MAX_PRODUCTS` | 20 | voyagePlan with 21 products (stated probe) | products has 21 entries; the cap is 20 |
+| `MAX_ITEM_LINES` | 500 | deckPlan with 501 item lines (stated probe) | items has 501 entries; the cap is 500 |
+| `MAX_UNITS` | 2000 | deckPlan with 2001 units (golden input deck-refuse-units-cap) | items hold 2001 units in all; the cap is 2000 |
+| `MAX_QUANTITY` | 1000 | deckPlan with a quantity of 1001 (stated probe) | items[0].quantity must be a whole number from 1 to 1000; got 1001 |
+| `MAX_DECK_VOYAGES` | 500 | deckPlan with 501 voyages (stated probe) | voyages must be a whole number from 1 to 500; got 501 |
+| `MAX_BERTHS` | 100 | shoreBase with 101 berths (golden input base-refuse-berths-cap) | berths must be a whole number from 1 to 100; got 101 |
+| `MAX_WEATHER_FACTOR` | 10 | voyagePlan with a weather factor of 10.5 (golden input voyage-refuse-weather-above-cap) | weather.factor must be a finite number from 1 to 10; got 10.5 |
+| `MAX_ITERATIONS` | 200000 | fleetVariability with 200001 draws (golden input variability-refuse-iterations-cap) | iterations must be a whole number from 1 to 200000; got 200001 |
+| `MAX_DRAWS` | 2000000 | fleetVariability with 181819 draws and 11 voyage sets (golden input variability-refuse-draws-cap) | iterations must be at most 181818 with 11 voyage sets (iterations x voyage sets is capped at 2000000); got 181819 |
+
+THE DRAWS CAP. Iterations times voyage sets may not exceed 2000000, because every draw sizes every voyage set; the refusal names the most draws the stated sets allow. A panel stays well inside these caps.
+
+# SECTION 29: Conventions that are choices, and the logistics plan (owned by Expert m06 l03)
+
+CONVENTIONS THAT ARE CHOICES. Each is the engine's stated choice, or a choice the call must state; a different choice would move a figure, so each is named in any plan that quotes the figure:
+
+| convention | the choice | where it comes from |
+| --- | --- | --- |
+| sailing time | the NM over the stated speed; no speed-fuel curve | Skoko et al. (2024), Table 4 |
+| weather | one stated factor on the stated activities; fuel follows time | a stated input |
+| fuel | hours by activity times the stated burn; tonnes times the stated price | Skoko et al. (2024), Tables 1 and 7 |
+| capacity | deck area times the usable fraction, deck load, deadweight with the stated densities, one tank per product | Aas, Halskau and Wallace (2009), by concept |
+| ties and checks | twelve significant digits; capacity inclusive; a binding tie to the first constraint | engine convention (section 24) |
+| voyages | the largest demand ratio and the minimum visits, rounded as stated | a stated rule |
+| vessels | vessel-days over the available days, rounded as stated (nearest halves up) | a stated rule |
+| the deck plan | first-fit decreasing by area (heavier first on a tie) or first fit; an area bound with no stacking | Johnson (1973), as the Wikipedia article states it |
+| the queue clock | the working hour | engine convention |
+| the queue model | M/M/c by Erlang C, or M/D/c by the Cosmetatos approximation | Adan and Resing (2015); Liu et al. (2021), eq. (2) |
+| the berth target | the fewest berths with a mean wait at or below the target | engine convention |
+| the Monte Carlo | weather then demand, each drawn only when it varies; P90 the low figure; short strictly above | lib/stats and lib/conventions/percentile.js |
+| money and figures in a reason | money to the cent and a computed quantity to six decimals, half away from zero, trailing zeros dropped; every numeric field keeps full precision | engine convention |
+
+WRITING THE LOGISTICS PLAN names: the cluster and each installation (synthetic in this course) with its distance or legs, field hours, cargo or demand and minimum visits; every source applied with its edition, licence and the date read; the vessel with every capacity, tank and burn; the products and densities; the route; the port hours; the weather factor and the activities it slows; the fuel price; each voyage's hours, days, fuel, binding constraint and any overload; the period, the available days, both rounding rules, the voyages and what drives them, the vessel-days, the vessels and the spare or short vessel-days; the deck plan with its rule, the voyages, the lower bound and every overflow unit; the base with its berths, arrivals, working day, service terms, model and any target; each Monte Carlo figure with its seed and draws; and each reading the figures rest on.
+
+# SECTION 30: Vocabulary this course legislates before a word is written (owned by Associate m01 and Professional m01 and Expert m01)
+
+Seven terms in this course carry a narrower meaning than they have in conversation. The rule for each is binding on every lesson, bank question, key truth and panel.
+
+| term | what it can mean elsewhere | the rule here |
+| --- | --- | --- |
+| voyage | any trip | one sailing from the base and back: a milk run is one voyage through every stop; a dedicated voyage serves one installation |
+| capacity | size in general | always of a named constraint: deck area times the usable fraction, deck load, deadweight, or a named tank |
+| binding | legally required | the constraint with the highest utilisation, by the stated tie rule |
+| vessel-days | vessels times days | the voyages times the voyage days a set needs, added over the sets; the capacity in vessel-days is the vessels times the available days |
+| utilisation | use in general | always of a named thing: a constraint, a deck, the fleet or a berth |
+| wait | any delay | the mean wait in the queue on the working-hour clock; the time at the base adds the service time |
+| P90 | the 90th percentile of anything | for a requirement or a cost, the LOW figure: met or exceeded in 90 percent of the draws; always quoted with its seed and draws |
+
+A FIGURE THAT DEPENDS ON AN INPUT is quoted with it: a voyage's hours with its route, speed and weather; a fuel cost with its burns and price; a utilisation with its capacity; a voyage count with its rounding rule; a vessel count with its available days and rounding rule; a deck plan with its rule and voyages; a queue figure with its model, berths, arrivals, working day and service; a Monte Carlo figure with its seed and draws.
