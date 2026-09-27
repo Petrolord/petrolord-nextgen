@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "What does the canonical trailing trim of cashflow.ts, the economic limit every economics course in the academy uses, cut?",
+  "options": [
+   "Every year whose net cash flow after tax is below 0, wherever it falls",
+   "Every year after the cumulative net cash flow before tax and abandonment peaks",
+   "Working back from the last year, every trailing year whose revenue less royalty less opex is below 0; a year with capital is kept, and so is a year at exactly 0",
+   "Every trailing year whose revenue less royalty less opex is at or below 0, capital years included"
+  ],
+  "answer": 2,
+  "explanation": "The trim works backward from the last year and stops at the first year that pays; it looks at revenue less royalty less opex, keeps a year with capital and keeps a year at exactly 0. It does not cut interior years or read tax; the cut after the cumulative peak is the PRMS rule; and a year at exactly 0 is kept."
+ },
+ {
+  "prompt": "How does the PRMS rule of 3.1.3.1 to 3.1.3.4, as the engine checks it, place the economic limit?",
+  "options": [
+   "At the last year whose own revenue less royalty less opex is at or above 0",
+   "At the year the undiscounted cumulative net cash flow after tax and abandonment first turns positive and stays so",
+   "At the licence expiry, whatever the cash flow, unless a renewal is stated",
+   "At the year the cumulative net cash flow before income tax, allowances and abandonment reaches its maximum"
+  ],
+  "answer": 3,
+  "explanation": "The PRMS rule places the limit at the peak of the cumulative net cash flow before income tax, allowances and abandonment; interim negative years count only when later positive years more than offset them. The last paying year is the canonical trim; a cumulative turning positive is no limit; and the licence cut is a separate step."
+ },
+ {
+  "prompt": "The golden input econ-refuse-limit-disagrees states a low forecast of 100000, 10000, 25000 and 22000 barrels from 2027 to 2030 at 50 a barrel, with opex of 1000000 a year. What does the engine return?",
+  "options": [
+   "a result at 2027, the more cautious of the two limits",
+   "a refusal naming both years: the trailing trim gives 2030 and the cumulative peak gives 2027",
+   "a result at 2030, the canonical limit, with the peak printed as a warning line",
+   "a refusal saying the low forecast must be economic when the best case is, on the same prices and costs"
+  ],
+  "answer": 1,
+  "explanation": "The last year pays, so the trim keeps every year to 2030; the cumulative peaks in 2027. The engine answers with neither and refuses, naming both years: they give 2030 and 2027. It picks no cautious or canonical answer for the caller; the \"economic when the best case is\" message belongs to a high case that fails."
+ },
+ {
+  "prompt": "On that late-dip profile the canonical cash flow gives a cumulative before tax and abandonment of 4000000, 3500000, 3750000 and 3850000 from 2027 to 2030. Why does the PRMS rule stop in 2027?",
+  "options": [
+   "The cumulative peaks in 2027: the later partial recovery to 3850000 never regains 4000000",
+   "2028 is the first year whose revenue less royalty less opex is negative, so the PRMS rule stops before it",
+   "2027 is the only year without opex",
+   "The PRMS rule stops at the first year of production, whatever the later years of the forecast bring"
+  ],
+  "answer": 0,
+  "explanation": "The PRMS limit is the year of the cumulative maximum, 4000000 in 2027; the 2029 and 2030 years add back 250000 and 100000 and leave the cumulative at 3850000, below the peak, so the interim loss of 2028 is not offset. A negative single year is what the trim reads; every year carries opex; and no rule stops at the first year by definition."
+ },
+ {
+  "prompt": "On the same profile, why does the canonical trailing trim keep every year to 2030?",
+  "options": [
+   "The last year carries capital, and the canonical trim keeps every year with capital in it",
+   "The last year pays: its revenue less royalty less opex is 100000.000000, above 0",
+   "The trim reads the cumulative before tax, which stays positive in every year of the profile",
+   "The trim keeps every year inside the licence, and 2030 falls before any stated expiry"
+  ],
+  "answer": 1,
+  "explanation": "In 2030 revenue of 1100000.000000 less opex of 1000000.000000 leaves 100000.000000 (derived from the canonical cash flow), so working back from the end the trim finds a paying year at once and cuts nothing. The profile states no capital; the trim reads each year's own margin, and the cumulative plays no part in it; the licence cut is a separate step."
+ },
+ {
+  "prompt": "Why does the engine refuse where the two rules disagree?",
+  "options": [
+   "The canonical rule is wrong on late-dip profiles, and the PRMS rule is not yet built into the engine",
+   "A disagreement means the forecast holds a typing error",
+   "Either answer would move a Reserves figure by a choice the caller did not make, so both years are named for the caller to see",
+   "The two rules can never disagree on a real field, so a disagreement marks a synthetic case"
+  ],
+  "answer": 2,
+  "explanation": "The canonical rule would count the late barrels and the PRMS rule would drop them; answering with either would move a Reserves figure by a choice the caller never made, so the engine refuses and names both years. Neither rule is called wrong; the engine computes both to compare them; and the profile is a legitimate forecast with no typing error in it."
+ },
+ {
+  "prompt": "Why does the engine not simply switch the canonical cash flow over to the PRMS rule?",
+  "options": [
+   "It would move every figure the academy's other economics courses and the Suite's economics app teach from cashflow.ts",
+   "The PRMS rule cannot be computed from a yearly cash flow",
+   "The PRMS rule applies only to Contingent Resources",
+   "SPE-PRMS 2018 forbids a cumulative peak for Reserves"
+  ],
+  "answer": 0,
+  "explanation": "The canonical cash flow is shared; changing it would move figures across the academy and the Suite, so that change is a separate decision for the platform, and the engine keeps both rules visible by refusing where they part. The peak is computed from the yearly cash flow; the rule is about Reserves; and PRMS 3.1.3.1 is the rule itself."
+ },
+ {
+  "prompt": "After the refusal on a late-dip profile, what can the caller do?",
+  "options": [
+   "Remove the opex from the dip years so the trim cuts them",
+   "Set the licence expiry to 2027, which makes both rules give the same year by construction",
+   "Ask the engine for the PRMS limit with a stated option that switches rules",
+   "State a forecast on which the two rules agree, or split the project at the dip"
+  ],
+  "answer": 3,
+  "explanation": "The engine's own advice is to state a forecast on which the two agree, the technical forecast ending where the project stops paying, or to split the project at the dip; the refusal names both years so the barrels in question can be seen. Altering stated costs or the licence to force agreement changes the facts, and the engine offers no rule-switching option."
+ },
+ {
+  "prompt": "On the Ekene Main waterflood (EKN-1, golden input econ-ekene), a declining forecast with no late capital, where does the best case reach its economic limit under the canonical rule?",
+  "options": [
+   "2040, the licence expiry, where the high case stops",
+   "2041, the last year of the technical forecast",
+   "2033, with 7 trailing years cut from the end",
+   "2037, with 3 trailing years cut"
+  ],
+  "answer": 3,
+  "explanation": "On a declining forecast with no late capital the two rules agree, and the engine uses the canonical one and checks it against the peak: the best case stops in 2037 with 3 trailing years cut (engine). 2040 is the licence cut and the high case's limit; 2041 is the end of the technical forecast; 2033 is the low case's limit."
+ },
+ {
+  "prompt": "Two golden inputs differ by one barrel in the last year: 20000 and 19999 barrels at 50 a barrel against opex of 1000000. What economic limits does the engine return?",
+  "options": [
+   "2028 for both, since a trailing year at exactly 0 does not pay and the trim cuts it with the negative one",
+   "2029 for both, since one barrel in the last year is inside any tolerance the canonical trim applies",
+   "2029 for 20000 barrels, where the last year is exactly 0 and kept; 2028 for 19999, where it is cut",
+   "2029 for 19999 and 2028 for 20000"
+  ],
+  "answer": 2,
+  "explanation": "20000 barrels at 50 is 1000000, exactly the opex, and the canonical trim keeps a year at exactly 0: limit 2029, 0 years cut, 2P oil 170000.000000. One barrel less makes the last year negative: limit 2028, 1 year cut, 2P oil 150000.000000 (engine). The trim has no tolerance; the boundary is inclusive at 0."
+ },
+ {
+  "prompt": "The golden input econ-exactly-zero-not-economic gives a best case whose undiscounted net cash flow is exactly 0.000000. What does the engine return?",
+  "options": [
+   "not economic, and the project stays in Contingent Resources, economically not viable",
+   "economic, since a trailing year at exactly 0 is kept by the canonical trim and the test follows the trim",
+   "a refusal, because a case at exactly 0 cannot be classed",
+   "economic, with 1P set to 0 and the 2P and 3P kept, as when a low case fails the test"
+  ],
+  "answer": 0,
+  "explanation": "The engine reads the economic test as an undiscounted net cash flow above 0, so exactly 0 is not economic: not commercial, the best case fails (PRMS 2.1.2.2, 3.1.2.1), economically not viable. That boundary is strict, where the trim's is inclusive; a result is returned; and 1P set to 0 applies when the low case fails and the best passes."
+ },
+ {
+  "prompt": "Otherwise commercial projects state that development starts within 5 and within 6 years, with a longer time-frame not stated as justified. What classes does the engine return?",
+  "options": [
+   "Contingent Resources at both, since 5 years exactly is not within the benchmark",
+   "Reserves at 5 years, the benchmark met; Contingent Resources at 6",
+   "Reserves at both, since the benchmark is a recommendation",
+   "Reserves at 6 and Contingent Resources at 5"
+  ],
+  "answer": 1,
+  "explanation": "The engine reads the five-year benchmark as met at five years (its stated reading; the alternative it names is five years exactly not met): 5 years gives Reserves and 6 years gives Contingent Resources with the time-frame not met. A benchmark the engine applies moves the class, and the later start is the one that fails."
+ },
+ {
+  "prompt": "Under PIA 2021 s.78(9), the Nigerian notes are run at 10 and at 11 years since a significant discovery was declared. What does the engine print?",
+  "options": [
+   "At 10 years the retention has ended, since the period is less than 10 years",
+   "At 11 years the class moves to Discovered Unrecoverable",
+   "At both, the area is inside retention, since the Commission may extend the period without limit under the Regulations",
+   "At 10 years the retention period is running; at 11 it has ended, so the area is relinquished unless a commercial discovery was declared (s.78(13))"
+  ],
+  "answer": 3,
+  "explanation": "The retention runs at most 10 years from the declaration, so 10 is inside and 11 has ended; the engine prints the s.78(13) consequence as a note. The notes do not change the PRMS class, which stays Contingent Resources at both; and reg. 6(3) lets the Commission grant up to the maximum the Act allows, no further."
+ },
+ {
+  "prompt": "The engine's economic test on a case includes the abandonment cost. How is that choice taught?",
+  "options": [
+   "As a reading the engine states, with the alternative it names: the test made before the abandonment cost",
+   "As the rule of PRMS 3.1.2.1 itself, which the engine applies as binding without naming any alternative at all",
+   "As a stated input a panel may switch off without saying so, leaving the test to the learner's own choice",
+   "As a figure the course grades under both choices"
+  ],
+  "answer": 0,
+  "explanation": "The engine's basis cites 3.1.2.1 with ADR included, and the course teaches it as a stated reading beside the alternative, the test before the abandonment cost as the producibility determination is made. No stated reading is taught as the law; no input is supplied silently; and no graded figure moves under any reading."
+ },
+ {
+  "prompt": "On EKN-1 the licence expires in 2040 with no renewal expected. What happens to the high case's barrels in the expiry year and after it?",
+  "options": [
+   "The expiry year is cut along with every later year, since the licence ends as that year begins",
+   "The later years are kept and reported in the 3P, since the high case is the one that reaches them",
+   "The expiry year 2040 is kept; the later years are reported as beyond the licence",
+   "The later years are kept and moved into Contingent Resources by the engine, with their class printed"
+  ],
+  "answer": 2,
+  "explanation": "The licence boundary keeps the expiry year, and the years after it are cut before the cash flow is run, their barrels reported as beyond the licence: 601257.000000 barrels of oil on the high case (engine). The engine classifies none of them; the texts place such quantities outside Reserves unless an extension is reasonably expected."
+ }
+]

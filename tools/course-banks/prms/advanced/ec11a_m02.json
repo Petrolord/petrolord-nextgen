@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "Where does the sampler behind the engine's statistical aggregation come from?",
+  "options": [
+   "A sampler written inside prms.js for reserves work alone, seeded from the project count and the stated unit",
+   "lib/stats: createCorrelatedSampler (a Gaussian copula with a Cholesky factor) on the mulberry32 generator",
+   "engines/economics/cashflow.ts, which the engine already imports for computeCashFlow and applyJV",
+   "The panel's own browser random numbers, drawn afresh each time the aggregation calculator is opened"
+  ],
+  "answer": 1,
+  "explanation": "The engine's basis names lib/stats/stats.js: createCorrelatedSampler (Gaussian copula, Cholesky), mulberry32, fitTriangularToPercentiles and quantile. prms.js carries no sampler of its own; cashflow.ts supplies the cash flow and applyJV and no sampler; and a panel reproduces its figures because the draws are seeded."
+ },
+ {
+  "prompt": "How does the engine read the low estimate of a total from its sampled draws?",
+  "options": [
+   "As the 0.9 quantile of the totals, since P90 names the 90th percentile of the sampled draws",
+   "As the sum of each project's own low estimate, each read off its stated distribution first",
+   "As the mean of the totals less a multiple of their sampled standard deviation",
+   "As the 0.1 quantile of the totals, labelled P90 per lib/conventions/percentile.js"
+  ],
+  "answer": 3,
+  "explanation": "The engine's label line reads that P90 is the 0.1 quantile of the totals, the low estimate, per lib/conventions/percentile.js; the 0.9 quantile is the alternative that would read P90 as high. A sum of lows is the arithmetic 1P, a different figure; and no normal approximation of the total is made."
+ },
+ {
+  "prompt": "The Ekene Reserves are sampled on seed 20271112 with 20000 draws, then again on the same seed and draws, then on seed 20271113 with 20000 draws. What does that show?",
+  "options": [
+   "The same seed and draws give the same P90 again; a new seed moves it, so a sampled figure is quoted with both and is not graded",
+   "The sampler is broken, because a correct Monte Carlo returns one P90 on every seed",
+   "The second seed is the better one, because its P90 lies closer to the arithmetic 1P",
+   "The draws are too few, and at 200000 draws every seed returns the same P90 exactly"
+  ],
+  "answer": 0,
+  "explanation": "On seed 20271112 the P90 is 17.300834 on both runs; on seed 20271113 it is 17.414533 (engine, 20000 draws each). Every seeded Monte Carlo moves with its seed by the sampling error; no seed is better; and more draws shrink the spread between seeds without making it vanish."
+ },
+ {
+  "prompt": "The Ekene Reserves are sampled on seed 20271112 and 20000 draws under uniform 0, the stated pairs and uniform 0.95. What does the sampled P90 do as the stated correlation rises?",
+  "options": [
+   "It rises away from the arithmetic 1P",
+   "It stays at 17.300834 on all three runs",
+   "It falls toward the arithmetic 1P of 15.809794",
+   "It falls below the arithmetic 1P at uniform 0.95, crossing it"
+  ],
+  "answer": 2,
+  "explanation": "On those draws the P90 runs 18.487436, 17.300834 and 15.891238 (engine): it moves toward 15.809794 as the correlation rises and stays above it at 0.95. It does not rise; it moves with every run; and it does not cross the arithmetic sum, which is the P90 only under total dependence."
+ },
+ {
+  "prompt": "Of the four stated correlations run on the Ekene Reserves (seed 20271112, 20000 draws), which puts the sampled P90 furthest above the arithmetic 1P?",
+  "options": [
+   "uniform -0.4, where the projects offset one another most",
+   "uniform 0.95, since a strong correlation widens the total",
+   "uniform 0, since independent projects sit furthest apart",
+   "the stated pairs, which are the only unequal correlations"
+  ],
+  "answer": 0,
+  "explanation": "The sampled P90 is 20.009881 under uniform -0.4, 18.487436 under 0, 17.300834 under the stated pairs and 15.891238 under 0.95 (engine, on that seed and those draws). A negative correlation lets a low project be offset by a high one, lifting the low of the total furthest; strong positive correlation pulls it toward the sum of the lows."
+ },
+ {
+  "prompt": "On every one of those four Ekene Reserves runs, what exact mean of the total does the engine print beside the sampled mean?",
+  "options": [
+   "26.699904, the sampled mean of the stated-pairs run on seed 20271112",
+   "26.821102, the sum of the three means",
+   "26.396958, the arithmetic 2P",
+   "26.430497, the sampled P50 of the stated-pairs run, being the best of the total"
+  ],
+  "answer": 1,
+  "explanation": "The mean of a total is the sum of the means whatever the correlation (PRMS 4.2.5.2), so the exact 26.821102 is printed on every run (engine). 26.699904 is a sampled mean on seed 20271112 and 20000 draws; 26.396958 sums best estimates, which are medians of each project; 26.430497 is a sampled P50."
+ },
+ {
+  "prompt": "The 2011 Guidelines' blocks A and B, read as normals with means 53.400000 and 35.600000, have 90 percent half-widths of 10.100000 and 7.100000. What is the exact low of their sum when they are independent?",
+  "options": [
+   "71.800000",
+   "76.623299",
+   "76.434906",
+   "76.654150"
+  ],
+  "answer": 3,
+  "explanation": "For two independent normals the low of the sum is 89.000000 less the square root of the sum of the squared half-widths: 76.654150 (derived, in closed form). 71.800000 is the arithmetic sum of the lows; 76.623299 is the sampled P90 on seed 2011 and 200000 draws; 76.434906 is the sampled P90 of the same blocks read as lognormals."
+ },
+ {
+  "prompt": "Under the Guidelines' own symmetric reading taken by the golden input, what standard deviation does block A carry (expectation 53.400000, Proved 43.300000)?",
+  "options": [
+   "10.100000: the half-width itself, the gap between the expectation and the Proved",
+   "8.289303: the standard deviation of a lognormal through the same expectation and Proved",
+   "7.881072: the half-width of 10.100000 over the standard normal 90th percentile",
+   "5.540159"
+  ],
+  "answer": 2,
+  "explanation": "The golden input reads each block as a normal with the expectation as its mean and the expectation less the Proved as its 90 percent half-width, so its standard deviation is 10.100000 over the standard normal 90th percentile: 7.881072. 10.100000 is the half-width; 8.289303 belongs to the lognormal reading; 5.540159 is block B's standard deviation."
+ },
+ {
+  "prompt": "The same two blocks are sampled at a stated correlation of 0.999 on seed 2011 and 200000 draws. What happens to the sampled P90?",
+  "options": [
+   "It stays near the independent figure of 77 that the Guidelines print",
+   "It returns almost to the arithmetic sum of the lows, 71.800000",
+   "The call is refused, because 0.999 is treated as total dependence",
+   "It rises above the exact independent low of 76.654150"
+  ],
+  "answer": 1,
+  "explanation": "Near total dependence the sampled P90 is 71.774133 (engine, on that seed and those draws), almost the arithmetic 71.800000: a sum of lows is the low of the total when the parts move together. 0.999 is accepted (a correlation of 1 is refused); the independent figure belongs to correlation 0."
+ },
+ {
+  "prompt": "Read as lognormals through the same expectations and Proved figures, the Guidelines' blocks give a sampled P90 of 76.434906 on seed 2011 and 200000 draws, against 76.623299 for the normal reading on the same seed and draws. What does the pair teach?",
+  "options": [
+   "The stated marginal distribution moves the probabilistic total, so the reading is named beside the figure",
+   "The lognormal reading is wrong, since the Guidelines print 77 and only the normal reading comes close to it",
+   "The two readings agree once rounded to whole numbers, so the choice of distribution does not matter to a total",
+   "The seed differs between the two runs, which accounts for the whole of the gap between the two sampled figures"
+  ],
+  "answer": 0,
+  "explanation": "Both runs use seed 2011 and 200000 draws; the gap comes from the marginals. The Guidelines add their blocks for symmetric distributions and the golden input takes that reading, stated as such; the course names both and grades neither. Rounding to 77 hides the difference without removing it."
+ },
+ {
+  "prompt": "A caller states a uniform correlation of 1 between the Ekene projects. What does the engine return?",
+  "options": [
+   "the arithmetic sums returned as the sampled figures, since total dependence makes the two methods agree exactly and no draw is then needed at all",
+   "a result with the correlation capped at 0.999 and a warning line in the reasons",
+   "the refusal: correlation must be a positive semidefinite correlation matrix; got 1",
+   "the refusal: correlation.rho must be a number above -1 and below 1 (the canonical sampler takes a correlation strictly between -1 and 1); got 1"
+  ],
+  "answer": 3,
+  "explanation": "The engine's own words refuse a rho of 1 by name: correlation.rho must be a number above -1 and below 1, because the canonical sampler takes a correlation strictly inside that range. It substitutes no arithmetic answer and caps nothing; the positive semidefinite refusal is a different message for a matrix the Cholesky factor cannot reproduce."
+ },
+ {
+  "prompt": "Three varying projects are given a uniform correlation of -0.6. What does the engine return, in its own words?",
+  "options": [
+   "correlation.rho must be a number above -1 and below 1 (the canonical sampler takes a correlation strictly between -1 and 1); got -0.6",
+   "a sampled total with the correlation clipped to 0 and a line saying the matrix was adjusted",
+   "correlation must be an object { type: \"uniform\", rho } or { type: \"pairs\", pairs } (stated; no default); got -0.6",
+   "correlation must be a positive semidefinite correlation matrix (the Cholesky factor misses the stated matrix by 0.8); got {\"type\":\"uniform\",\"rho\":-0.6}"
+  ],
+  "answer": 3,
+  "explanation": "Three variables cannot all be correlated at -0.6: the matrix is not positive semidefinite and the engine refuses it, naming how far the Cholesky factor misses (0.8). -0.6 is inside the range the rho check allows, so that message does not fire; nothing is clipped or repaired; and the object-shape message is for a correlation left out."
+ },
+ {
+  "prompt": "A pairs correlation on the three Ekene Reserves projects states only two pairs. What does the engine return?",
+  "options": [
+   "a result that treats the missing pair as independent, filling it with a correlation of 0 and saying so in the reasons",
+   "a result that copies the nearest stated correlation into the missing pair and prints the matrix it then used",
+   "a refusal naming the first missing pair, EKN-2 and EKN-U, and asking for one pair each of the 3 pairs",
+   "a refusal saying that correlation.pairs[2] must be a pair stated once, since a pair was entered twice by mistake"
+  ],
+  "answer": 2,
+  "explanation": "The engine refuses: correlation.pairs must be one pair for each of the 3 pairs of varying projects, a correlation of 0 being entered as a pair like any other, and it names EKN-2 and EKN-U as the first missing pair. It supplies no 0 and copies nothing; the \"stated once\" refusal is for a duplicate pair."
+ },
+ {
+  "prompt": "The seed is removed from an aggregation call. What does the engine return, in its own words?",
+  "options": [
+   "seed must be an integer from 0 to 4294967295 (the mulberry32 seed; no default); got nothing",
+   "a result on the seed 20271112, which the Ekene fixture uses",
+   "a result on a seed drawn from the clock, printed in the reasons",
+   "iterations must be an integer from 100 to 200000; got nothing"
+  ],
+  "answer": 0,
+  "explanation": "The seed is a stated input with no default, and the engine refuses its absence by name. It borrows no fixture seed and reads no clock, which is what lets any figure be reproduced on its seed and draws; the iterations message belongs to a missing or out-of-range draw count."
+ },
+ {
+  "prompt": "Which of these figures from an Expert aggregation can be a graded figure in this course?",
+  "options": [
+   "the sampled P90 on the stated seed and draws",
+   "the arithmetic 1P, a return of the engine on fixed inputs",
+   "the sampled mean on the stated seed and draws",
+   "the sampled P50, since it is the best estimate of the total"
+  ],
+  "answer": 1,
+  "explanation": "Every graded number is a return value of the engine on fixed inputs, and none comes from the Monte Carlo. The sampled P90, P50, P10 and mean are taught with their seed and draw count, and none is graded as an exact figure; the arithmetic sums are closed-form and can be graded."
+ }
+]
