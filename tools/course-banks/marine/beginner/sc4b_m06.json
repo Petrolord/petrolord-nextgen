@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "The PSV (11 knots) and the AHTS (12 knots) sail the Ekene milk run with the same cargo, port and field hours, and 1.2 on sailing and field time. What total hours does the engine give the AHTS?",
+  "options": [
+   "62.072727, the same as the PSV, since both vessels sail the same 206.000000 NM of legs.",
+   "60.200000, fewer than the PSV because the AHTS sails faster.",
+   "64.472727, since the AHTS's anchor-handling role adds the weather factor to its port time.",
+   "53.727273, the calm voyage's hours."
+  ],
+  "answer": 1,
+  "explanation": "The AHTS covers the 206.000000 NM at 12 knots, so its sailing hours are fewer, and with the same port and field hours its voyage is 60.200000 hours against the PSV's 62.072727. The weather input is the same for both and names no port time, and the engine applies it whatever the vessel's speed."
+ },
+ {
+  "prompt": "On the Ekene milk run the AHTS burns 23.880000 t against the PSV's 19.876364 t, though its voyage is shorter. Why?",
+  "options": [
+   "It sails a longer route, since the AHTS's milk run adds a leg out to an anchor-handling site.",
+   "Its weather factor is higher, since the engine slows an AHTS more than a PSV in the same swell and the same rainy season.",
+   "Its fuel is priced higher, since the engine charges an AHTS at a different price a tonne.",
+   "It burns more an hour in every activity: 0.600000, 0.040000 and 0.400000 t against the PSV's 0.5, 0.03 and 0.3."
+  ],
+  "answer": 3,
+  "explanation": "Fuel is hours by activity times the stated burn for each activity. The AHTS's stated burns are higher in all three, so it burns more fuel in all even over fewer hours. The two vessels sail the same legs under the same weather input, and the price enters the cost and leaves the tonnes alone: the fuel cost is 20775.600000 against 17292.436364 at the same 870."
+ },
+ {
+  "prompt": "The Ekene milk run's cargo is planned on both vessels in the rainy season. Which vessel makes a plan, by the engine's results?",
+  "options": [
+   "The AHTS: its 60.200000 hours are the shorter voyage, and the shorter voyage is the better plan whatever load it carries.",
+   "The AHTS: its fuel cost of 20775.600000 is the lower of the two bills for the same cargo on the same route.",
+   "The PSV: it carries the cargo with deck area binding at 0.900000, where the faster AHTS is overloaded at 1.309091.",
+   "Neither vessel, since the reasons show both of them overloaded on deck area on this milk run."
+  ],
+  "answer": 2,
+  "explanation": "The PSV's voyage is feasible and the AHTS's is overloaded on deck area, deadweight and tank water. A faster voyage that does not fit is no plan. The AHTS's bill is the higher one, 20775.600000 against 17292.436364, and the PSV is feasible with room on every constraint."
+ },
+ {
+  "prompt": "The AHTS voyage on the Ekene milk run is re-run in calm weather, a factor of 1. Does the engine then call it feasible?",
+  "options": [
+   "No: weather changes time and fuel only, so deck area, deadweight and tank water stay overloaded.",
+   "Yes, since a calm voyage burns less fuel, and the saved fuel frees deadweight for the cargo the tanks hold.",
+   "Only on deck area, since calm weather frees the crane's working space on the open deck.",
+   "It depends on the fuel price, since a cheaper voyage can carry more cargo within its budget."
+  ],
+  "answer": 0,
+  "explanation": "The capacities and loads are the same in calm weather and in the rainy season, so the verdict does not move: the engine still names deck area binding at 1.309091 with deadweight and tank water overloaded. The vessel's fuel is not part of the cargo deadweight, the usable fraction is a stated input, and the price enters only the fuel cost."
+ },
+ {
+  "prompt": "How long, in days, is one PSV voyage round the four Ekene stops with a factor of 1, and how long with the 1.2 allowance on sailing and field time?",
+  "options": [
+   "2.586364 days in both seasons.",
+   "2.238636 days calm and 2.686364 days in the rainy season, with the base's port time slowed too.",
+   "2.238636 days calm and 2.586364 days in the rainy season.",
+   "53.727273 and 62.072727 days."
+  ],
+  "answer": 2,
+  "explanation": "A voyage's days are its total hours after the weather factor, over 24: 53.727273 calm hours are 2.238636 days and 62.072727 rainy-season hours are 2.586364 days. 2.686364 is the rainy-season voyage with port time named as well, which this plan does not state, and 53.727273 and 62.072727 are hours."
+ },
+ {
+  "prompt": "Which checks on the course's pre-sailing checklist does the engine enforce for the planner, refusing an input that breaks one?",
+  "options": [
+   "The reading checks: whether the voyage is feasible, which constraint binds and whether the voyage's days fit the vessel's time.",
+   "The input checks: a tank and density for every product, every stop named once with one more leg than stops, and a stated weather factor with its activities.",
+   "Every check on the list, so a plan the engine accepts without a refusal is ready to sail as it stands.",
+   "None of them, since the engine plans whatever it is given and reports any fault only afterwards."
+  ],
+  "answer": 1,
+  "explanation": "The first three checks are about inputs, and an input that breaks one is refused by name. The last four are about reading the result, the verdict, the binding constraint, the days and the fuel with its price, and only the planner can make them: an overloaded voyage is a result and the engine knows no period at this tier."
+ },
+ {
+  "prompt": "Why does the checklist leave it to the planner to confirm that a voyage's days fit the time the vessel has?",
+  "options": [
+   "A voyage plan states no period, so the engine reports the days without knowing how long the vessel is available.",
+   "The engine rounds a voyage's days up to whole days, so the planner must work out the exact days by hand.",
+   "The engine refuses any voyage longer than one day, so a voyage it plans always fits inside the vessel's available time.",
+   "A voyage's days depend on the fuel price, which the engine is not given at this tier of the course."
+  ],
+  "answer": 0,
+  "explanation": "voyagePlan reads no period and no available days, so it cannot compare the days with the vessel's time; the Professional tier states them. The engine rounds no days, plans voyages of any length (the Ekene milk run is 2.586364 days), and the days follow from the hours alone."
+ },
+ {
+  "prompt": "A colleague quotes the rainy-season Ekene fuel cost as 17292.436364. What must the quote name beside the figure, by the course's rule?",
+  "options": [
+   "The date the fuel price was read, since the engine can confirm every other input on its own from its tables.",
+   "The binding constraint of the voyage, since the fuel cost depends on which constraint binds the plan.",
+   "The deck area capacity, since the engine burns fuel for each square metre of cargo carried.",
+   "The fuel burns, the price of 870 a tonne, and the weather factor with the activities it slows."
+  ],
+  "answer": 3,
+  "explanation": "A figure that depends on an input is quoted with it: a fuel cost with its burns and price, and the hours under it with the route, speed and weather. The weather choice alone moves the bill by 2829.872727. The binding constraint and the deck area do not enter the fuel, and the engine confirms no input for the planner."
+ },
+ {
+  "prompt": "Which question does this tier's voyage plan leave to the procurement course?",
+  "options": [
+   "Which vessel carries a stated cargo on a stated route within its capacities.",
+   "Which vessel a company should hire, and at what rate.",
+   "How long a voyage takes at a stated speed, with its port and field hours.",
+   "What a voyage's fuel costs at a stated burn for each activity and a stated price."
+  ],
+  "answer": 1,
+  "explanation": "The engine answers which vessel carries a stated cargo on a stated route, how long the voyage takes and what its fuel costs. It sets no hire rate and prices no contract: vessel hire and contracting belong to the procurement course."
+ },
+ {
+  "prompt": "Which sentence uses the word utilisation as this course requires?",
+  "options": [
+   "The PSV runs at a utilisation of 0.900000 on the Ekene milk run in the rainy season.",
+   "The rainy-season voyage has a utilisation of 0.900000, which leaves the vessel some room.",
+   "Utilisation across the Ekene cluster is high this season, at about 0.900000 of the whole.",
+   "The deck area's utilisation on the Ekene PSV milk run is 0.900000."
+  ],
+  "answer": 3,
+  "explanation": "In this course a utilisation is always of a named thing: a constraint here, and at later tiers a deck, the fleet or a berth. 0.900000 is the deck area's utilisation; the other constraints have their own, from 0.212500 for the brine tank to 0.682857 for the deadweight, so a vessel, a voyage or a cluster has no single utilisation."
+ },
+ {
+  "prompt": "A planner is drafting a line on how much the PSV can carry. Which draft meets the course's rule for capacity?",
+  "options": [
+   "The PSV's deadweight capacity is 3500 t, and the Ekene milk run loads 2390.000000 t against it.",
+   "The PSV has plenty of capacity left over for the Ekene milk run in the rainy season, whatever the cargo.",
+   "The AHTS lacks the capacity for this route, so a second vessel will be needed on each voyage.",
+   "Capacity is what the Ekene cluster needs more of when the rainy season comes."
+  ],
+  "answer": 0,
+  "explanation": "A capacity is always of a named constraint: deck area times the usable fraction, deck load, deadweight or a named tank. The PSV has 600.000000 m2 of deck area capacity and 3500 t of deadweight, each with its own utilisation, so a sentence that names no constraint says nothing a plan can check."
+ },
+ {
+  "prompt": "The AHTS's reasons on the Ekene milk run name three overloaded constraints. Which changes do those reasons point a planner toward?",
+  "options": [
+   "Raising the weather factor until the voyage takes long enough for the cargo to be worked alongside.",
+   "Lowering the fuel price, since a cheaper voyage frees deadweight for more of the cargo on deck.",
+   "Moving some cargo to another voyage, choosing the larger vessel, or splitting the milk run.",
+   "Stating a usable deck fraction above 1, so that the same deck holds more of the cargo."
+  ],
+  "answer": 2,
+  "explanation": "An overloaded voyage is a result that names what does not fit, so the fixes are about the cargo, the vessel or the route. The weather factor and the fuel price change time and money and leave every capacity where it is, and a usable fraction above 1 is refused by name."
+ },
+ {
+  "prompt": "Why is the comparison of the two Ekene vessels on the milk run a fair one?",
+  "options": [
+   "Both vessels state the same speed, so every difference between the two rows comes from the tanks.",
+   "The engine scales each vessel to the same deck before it compares them, so the decks cancel out.",
+   "Both are run in calm weather, so the weather cannot favour one of the two vessels over the other.",
+   "Only the vessel changes: the route, the cargo, the port and field hours, the weather input and the price are the same in both."
+  ],
+  "answer": 3,
+  "explanation": "Every difference in the table comes from the vessels' own stated figures because nothing else changed. The PSV states 11 knots and the AHTS 12, the engine scales nothing, and both rows carry the rainy-season factor of 1.2 on sailing and field time. Change the weather on one side and the comparison would mix two effects."
+ },
+ {
+  "prompt": "On the Ekene PSV milk run the deck area's utilisation is 0.900000 and the deadweight's 0.682857. What does that pair tell a planner?",
+  "options": [
+   "Deck area runs out first: the vessel has more room by weight than by area, so dense cargo with a small footprint fits more easily.",
+   "Deadweight binds, since it is the constraint nearest to its limit when the limits are counted in tonnes.",
+   "The voyage is overloaded by weight, since 0.682857 of the 3500 t deadweight is above the 2000 t deck load.",
+   "Nothing a planner can use, since the utilisations of two constraints in different units cannot be compared."
+  ],
+  "answer": 0,
+  "explanation": "The binding constraint is the highest utilisation, deck area at 0.900000, and the deadweight comes second. The gap says where room is left: by weight more than by area. Utilisations are unitless ratios, so they compare across units; the deadweight load of 2390.000000 t is checked against the 3500 t deadweight, and the deck load is its own constraint at 0.317500."
+ },
+ {
+  "prompt": "On the rainy-season Ekene PSV plan, the fuel price control is changed from 870 to 0. What does the engine return?",
+  "options": [
+   "A refusal, since the fuel price must be a finite number above 0 for the fuel to be costed at all.",
+   "No fuel and no cost at all.",
+   "The same hours and the same 19.876364 t of fuel, with a fuel cost of 0.000000.",
+   "The same fuel cost of 17292.436364, since a price of zero is replaced by Skoko et al.'s USD 870."
+  ],
+  "answer": 2,
+  "explanation": "A fuel price must be a finite number at or above 0, so 0 is accepted. Fuel follows the hours and the burns, so the tonnes do not move, and the cost is the tonnes times the stated price, which is now 0. The engine replaces no stated input with a published figure."
+ }
+]
