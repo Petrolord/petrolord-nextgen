@@ -38,7 +38,7 @@ q(1, "Does the whole 2027 budget pass its own test, with 5.000000 percent and 30
   "Yes, once the survey's 250000.000000 is taken out."],
  "The engine returns an approved total of 76000000.000000, an actual of 81950000.000000, an overrun of 5950000.000000 and an allowed overrun of 3000000.000000, so the budget is beyond its tolerance. The budget test is separate from the item tests, it is taken on the approved total, and taking the survey's 250000.000000 out would still leave an overrun far above 3000000.000000.")
 
-q(0, "A worked case states the Norwegian figures in NOK million on an approved budget of 2000. The overrun is 80. What does the engine return?",
+q(0, "A worked case states the budget tolerance as the lower of 5 percent and 75, in NOK million, on an approved budget of 2000. The overrun is 80. What does the engine return?",
  "Beyond: the amount holds at 75.000000.",
  ["Inside: the percentage holds at 100, and an overrun of 80 falls under it.",
   "Inside: the item is inside its 10 percent item tolerance, so the budget is too.",
@@ -48,8 +48,8 @@ q(0, "A worked case states the Norwegian figures in NOK million on an approved b
 q(2, "budget-norway-pct-holds approves 1000 and spends 1050, the lower of 5% and 75 again stated. How is that overrun judged?",
  "Inside the budget tolerance, which the percentage holds at 50.000000 and the overrun equals.",
  ["Beyond: an overrun equal to the allowed overrun is beyond the budget tolerance.",
-  "Inside: the amount holds at 75, well above 50.",
-  "Beyond, because 50 exceeds 5 percent of the actual."],
+  "Inside: the amount holds at 75, which leaves the overrun of 50 well below it.",
+  "Beyond, because the overrun of 50 is set against 5 percent of the actual 1050."],
  "On budget-norway-pct-holds the reason reads: the budget: 1050 against 1000 approved, an overrun of 50; the allowed overrun is the lower of 5% of the approved total (50) and 75: 50; inside the budget tolerance. The lower of 50 and 75 is 50, held by pct, and an overrun equal to it is inside. The percentage is taken on the approved total, and 5 percent of the actual would allow more.")
 
 q(3, "On budget-item-one-over, item x runs to 55.5 against 50 approved, at a stated 10 percent. How is it judged?",
@@ -66,7 +66,7 @@ q(1, "What does the engine return for budget-underrun, approved at 100 and spent
   "Beyond its tolerance: an underrun of 10 percent breaks a tolerance of 5 percent in the other direction."],
  "The overrun is actual less approved, so an underrun is a negative overrun: -10.000000. The engine's reason reads: the budget: 90 against 100 approved, an underrun of 10; the allowed overrun is 5% of the approved total, 5; inside the budget tolerance. An underrun is accepted, the sign is kept, and a tolerance limits overruns alone.")
 
-q(2, "The environmental baseline survey spent 250000.000000 with no approved budget. What does the engine report on the Ekene 2027 terms?",
+q(2, "The environmental baseline survey spent 250000.000000 with no approved budget, the only unbudgeted item, under an unbudgeted allowance of 500000.000000. What does the engine report?",
  "Inside the unbudgeted allowance of 500000.000000, with 250000.000000 in all.",
  ["Beyond its item tolerance, as any spend against 0 approved exceeds 10 percent of it.",
   "A refusal, since an item with an approved amount of 0 cannot be tested at all.",
@@ -98,15 +98,15 @@ q(2, "The item tolerance is left out of a budget control box. How does the engin
  "With a refusal naming itemTolerancePct, which it received as nothing.",
  ["By testing each item at the Norwegian 10 percent, the figure Art. 12.5 prints.",
   "Each item is tested at 0 percent, so any overrun is beyond.",
-  "By testing items against the budget tolerance."],
- "The engine refuses, in its own words: itemTolerancePct must be a finite number at or above 0; got nothing. The Norwegian 10 percent is the text's figure, and the engine holds none of it; a tolerance of 0 would be a stated term, and the budget tolerance is a separate test on the whole budget.")
+  "With a refusal naming items, which it cannot test without it."],
+ "The engine refuses, in its own words: itemTolerancePct must be a finite number at or above 0; got nothing. The Norwegian 10 percent is the text's figure, and the engine holds none of it; a tolerance of 0 would be a stated term, and the field it names is the tolerance, with the items stated correctly.")
 
 q(0, "The budget tolerance is typed as { pct: 5, amt: 3000000 }. What does the engine do?",
  "It refuses amt, listing the accepted keys of budgetTolerance: pct, amount.",
  ["It reads amt as amount, a common short form of the key.",
   "It drops amt and holds the allowed overrun by the percentage alone.",
-  "It applies 3000000 as the limit of each item."],
- "budgetTolerance reads two keys, and a shortened spelling of amount is caught at its own path: budgetTolerance.amt is not an accepted key; the accepted keys of budgetTolerance are pct, amount. Guessing that amt meant amount, or quietly holding by pct alone, would each compute a tolerance nobody stated, and the budget tolerance tests the budget total, so it sets no item's limit.")
+  "It refuses budgetTolerance as missing its amount."],
+ "budgetTolerance reads two keys, and a shortened spelling of amount is caught at its own path: budgetTolerance.amt is not an accepted key; the accepted keys of budgetTolerance are pct, amount. Guessing that amt meant amount, or quietly holding by pct alone, would each compute a tolerance nobody stated, and the amount is optional, so its absence is never the fault: the refusal names the key amt.")
 
 q(3, "Facilities engineering spent 9200000.000000 of an approved 10000000.000000 in 2027. How does the item test read it?",
  "-800000.000000, or -8.000000 percent, inside its item tolerance.",

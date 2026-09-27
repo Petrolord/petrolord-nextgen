@@ -61,10 +61,10 @@ q(0, "Which participating interests and which carry does the Ekene fixture state
  "The fixture gives EKO 40.000000, PA 25.000000, PB 15.000000 and NOC 20.000000 as participating interests, and states NOC carried 100 percent with carriers pro rata. The set 50.000000, 31.250000, 18.750000 and 0.000000 is the paying interests the engine computes from that carry. A half carry in stated shares is a separate worked case, and the fixture does state a carry.")
 
 q(2, "Which of these does the engine decline to compute?",
- "An index adjustment of an overhead scale.",
- ["Each carrier's carry points, when a carry is stated with its carriers and carried percentage.",
-  "The allowed overrun of a budget, as the lower of a stated percentage and a stated amount.",
-  "Each party's forecast share of a month's cash call, split on the parties' paying interests."],
+ "An index adjustment of an overhead scale's band limits.",
+ ["Each carrier's carry points under a stated carry.",
+  "The allowed overrun of a budget under its stated tolerance.",
+  "Each party's forecast share of a month's cash call."],
  "The course lists what the engine does not compute: no compensation on an assignment, no cover by taking a defaulter's petroleum, no index adjustment of a scale, no expert determination and no sliding scale of profit shares. Carry points, the allowed overrun of a budget and each forecast share are all figures the engine returns, from participatingInterests, budgetControl and cashCalls.")
 
 q(3, "What code does jointVenture.js take from elsewhere in the engines package?",
@@ -92,8 +92,8 @@ q(1, "A box states the carry under the key carry, singular. What does participat
  "It refuses the key, naming it and listing the keys it accepts at the top level: parties, carries.",
  ["It reads carry as carries, since the engine accepts the singular form of every plural key it knows.",
   "It drops carry without a word and returns the paying interests as though no carry had been stated.",
-  "It returns the paying interests with no carry and a reason saying the carry was set aside."],
- "Every call refuses an input key the function does not read, naming the key, its path and the accepted keys. In the engine's own words: carry is not an accepted key; the accepted keys at the top level are parties, carries. A misspelt key is refused, so a term is never dropped silently and no reason replaces the refusal.")
+  "It refuses the call for want of carries, naming carries as a required term with no default."],
+ "Every call refuses an input key the function does not read, naming the key, its path and the accepted keys. In the engine's own words: carry is not an accepted key; the accepted keys at the top level are parties, carries. A misspelt key is refused, so a term is never dropped silently. The refusal names carry: carries itself is optional, and the worked case with no carry states none.")
 
 q(1, "Why does every graded figure in this course have exactly one right answer?",
  "Nothing in the engine samples or searches, so the same terms give the same number on any machine.",

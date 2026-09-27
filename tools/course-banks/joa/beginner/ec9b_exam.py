@@ -97,14 +97,14 @@ q(0, "Sum up PA's June 2027 payment on the Ekene terms, a lag of 2 months and a 
   "140000.000000, May's arrears billing alone, with the June call deferred."],
  "PA's June row prints forecast share 2812500.000000, adjustment 93750.000000, call 2718750.000000, arrears billing 140000.000000 and paid 2858750.000000: the payment adds May's billing to the June call. July plays no part, and the forecast share is the figure before the credit comes off.")
 
-q(2, "NOC holds a beneficial interest of 20.000000. What does NOC pay in June 2027 on the Ekene terms?",
+q(2, "NOC, carried in full on the Ekene terms, holds a beneficial interest of 20.000000. What does NOC pay in June 2027?",
  "0.000000 across call, arrears billing and paid.",
  ["20 percent of May's arrears, since arrears follow the beneficial interest.",
   "Its share of the June call, the carry ending once a threshold month passes.",
   "Nothing in June, as it settles every call at the end of the year."],
  "Every cash call and arrears billing is split on the paying interests, and NOC's is 0.000000 while it is carried in full, so its June row shows a call, arrears billing and paid of 0.000000. The beneficial interest is its share of production, the carry does not end with a threshold month, and nothing in the rule defers a party's calls to the year's end.")
 
-q(1, "May 2027's actual of 448000 is billed in arrears in June. What is EKO's arrears billing?",
+q(1, "Under the Ekene carry, May 2027's actual of 448000 is billed in arrears in June. What is EKO's arrears billing?",
  "224000.000000, the actual split on its paying interest of 50.000000.",
  ["448000, the whole actual, billed to the operator.",
   "140000.000000, the part billed to PA.",
@@ -137,8 +137,8 @@ q(3, "A months entry carries a budget figure beside its forecast and actual. Wha
  "A refusal listing a month's keys: month, forecast, actual.",
  ["A ledger that tests each month's actual against that budget figure.",
   "A ledger computed as usual, the budget figure dropped without a word.",
-  "A result with the budget figure used as the forecast."],
- "The engine refuses, in its own words: months[0].budget is not an accepted key; the accepted keys of months[0] are month, forecast, actual. Budget control is a separate function with its own items, and the engine never drops a key silently or swaps one figure for another.")
+  "A refusal naming months, as a month may carry two figures."],
+ "The engine refuses, in its own words: months[0].budget is not an accepted key; the accepted keys of months[0] are month, forecast, actual. The field it names is the key itself, months[0].budget. Budget control is a separate function with its own items, and the engine never drops a key silently or swaps one figure for another.")
 
 q(1, "A cash calls box states its reconciliation lag under the key lag. What does the engine say?",
  "It refuses lag and lists its six accepted top-level keys.",
@@ -151,8 +151,8 @@ q(0, "Someone drops the leading zero and types January 2027 as 2027-1. How does 
  "A refusal: a month must be written 'YYYY-MM'.",
  ["The month read as January 2027, the leading zero supplied for it.",
   "The month read as October 2027, from the digits 2027-1 and a zero after them.",
-  "A result, with a reason saying the month was reformatted."],
- "The engine refuses, in its own words: months[0].month must be a month 'YYYY-MM'; got \"2027-1\". It supplies no digit and guesses no month, so no reformatting reason ever appears.")
+  "A refusal naming months[1].month, the month after it."],
+ "The engine refuses, in its own words: months[0].month must be a month 'YYYY-MM'; got \"2027-1\". It names the month it cannot read, months[0].month, and supplies no digit and guesses no month.")
 
 q(3, "Why is every adjustment in January 2027 on the Ekene terms 0.000000?",
  "No month lies a lag of 2 months before January in the ledger.",
@@ -178,10 +178,10 @@ q(2, "General and administration was approved at 4000000.000000 and spent 410000
 
 q(0, "On which total does the engine take the percentage of the budget tolerance?",
  "The approved total.",
- ["The actual total, 81950000.000000 on the Ekene 2027 budget.",
-  "The largest approved item, exploration drilling at 48000000.000000.",
+ ["The actual total.",
+  "The largest approved item.",
   "The approved total less the unbudgeted items."],
- "The engine's rule reads: the budget is inside when the total overrun <= the lower of pct % of the approved total and the stated amount. On the Ekene 2027 budget the reason prints 5% of the approved total (3800000), on 76000000.000000. The actual total and the largest item are no part of the test, and an unbudgeted item has an approved amount of 0.")
+ "The engine's rule reads: the budget is inside when the total overrun <= the lower of pct % of the approved total and the stated amount. On the Ekene 2027 budget the reason prints 5% of the approved total (3800000), on 76000000.000000. The actual total, 81950000.000000 on the Ekene 2027 budget, and the largest item, exploration drilling at 48000000.000000, are no part of the test, and an unbudgeted item has an approved amount of 0.")
 
 q(3, "With the 10 percent item tolerance and no unbudgeted allowance stated, which Ekene 2027 items does the engine list as outside their tolerance?",
  "Exploration drilling and environmental baseline survey.",
@@ -193,8 +193,8 @@ q(3, "With the 10 percent item tolerance and no unbudgeted allowance stated, whi
 q(1, "The Norwegian agreement allows work outside the programme and the budgets up to NOK 3 million a budget in the year. How does the engine hold such an allowance?",
  "As unbudgetedAllowance, stated by the call and tested against the unbudgeted items together.",
  ["As a fixed NOK 3 million, which it converts to US$ for the Ekene budget.",
-  "As part of the budget tolerance, added to its stated amount.",
-  "As one extra item approved at the allowance."],
+  "As part of the budget tolerance, added to its stated amount for the year's test.",
+  "As one extra item approved at the allowance and tested at the item tolerance."],
  "The engine holds none of the Norwegian figures, and each call states its own. The Ekene 2027 budget states an unbudgeted allowance of 500000.000000, and the survey's reason tests it with the other unbudgeted items (250000 in all). The allowance is a test of its own, separate from the budget tolerance, and nothing is converted from NOK.")
 
 q(2, "On budget-item-at-tolerance, item x spends 55 against 50 approved, with 10 percent stated for the item and for the budget. What does the budget test return?",
@@ -212,21 +212,21 @@ q(3, "Where does the engine's source for budgetControl say the percentages and a
  "The engine's basis.source for budgetControl ends: every percentage and amount is a stated input with no default. The Norwegian 10 percent and the lower of 5 percent and NOK 75 million are the text's figures, and the Ekene fixture's figures are the terms of one synthetic contract.")
 
 # m06: overhead
-q(0, "overhead-norway-operating-1800: which charge does the Art. 2.2.2 operating scale, as the case states it, produce on 1800?",
+q(0, "overhead-norway-operating-1800 states the Art. 2.2.2 operating scale as 2.7 per cent up to 1000 and 1 per cent on a second band that reaches past 1800. Which charge does it produce on a base of 1800?",
  "35.000000: 2.7% of 1000 plus 1% of 800.",
  ["27.000000, the first band alone.",
   "1% of the whole base of 1800.",
   "40.000000, the development scale."],
  "The engine's reason reads: operating: base 1800; 2.7% of 1000 + 1% of 800 = 35. The scale is marginal, so the first band's 27.000000 is only part of the charge, the band the base ends in charges only its own part, and 40.000000 belongs to the development scale on a base of 3000.")
 
-q(1, "overhead-norway-development-3000 runs a development base through the three Norwegian bands the case states. What total comes back?",
+q(1, "overhead-norway-development-3000 runs a development base of 3000 through bands of 2.5 per cent to 1000, 1 per cent to 2000 and 0.5 per cent to 3500. What total comes back?",
  "40.000000, over the three bands.",
  ["42.500000, the charge on 4000 with 500 above the last band.",
   "35.000000, as for the operating scale.",
   "30.000000, 1% of the whole base."],
  "The engine's reason reads: development: base 3000; 2.5% of 1000 + 1% of 1000 + 0.5% of 1000 = 40. 42.500000 is the charge on a base of 4000, 35.000000 is the operating scale on 1800, and the marginal scale charges no single rate on the whole base.")
 
-q(2, "The Norwegian exploration scale, 2.5% in its first band, is stated on a base of 250 NOK million. What does the engine charge?",
+q(2, "The Norwegian exploration scale, 2.5% in a single band up to 300, is stated on a base of 250 NOK million. What does the engine charge?",
  "6.250000, at 2.5% inside the first band.",
  ["7.5, the charge on a base of 400.",
   "0.000000, as a base below the first band's limit is not charged.",
@@ -255,7 +255,7 @@ q(0, "An exclusion is stated for a category named drilling, and the box's costs 
  "The engine refuses, in its own words: excluded.drilling is not a cost category; the categories are operating. An exclusion belongs to the category it names, and a name that matches no category is refused, and is neither moved, held nor ignored.")
 
 q(2, "The Ekene 2031 exploration base is 5000000.000000 on a scale whose single band charges 2.5% to 30000000.000000, with 0 above. What is charged above the last band?",
- "0.000000, as the base does not reach the last band.",
+ "0.000000, as the base stays below the band's upper limit.",
  ["125000.000000, the whole exploration charge.",
   "30000000.000000, the band's width, at 0 per cent.",
   "The rest of the base at the first band's 2.500000 per cent."],
@@ -277,14 +277,14 @@ q(1, "The cash calls view prints a Source block under its result. What does it n
  "The engine's basis.source for cashCalls cites Attachment B Accounting Agreement Art. 1.2.1 and Attachment A Joint Operating Agreement Art. 8.1. PIA s.85(4) is cited with participatingInterests, Art. 12.5 with budgetControl, and the Kenya text is not the source the engine names for its cash calls.")
 
 # m02 and m03: the interests
-q(0, "When NOC and PB are both carried, as on int-two-carries, how large is PA's share of cost?",
+q(0, "Suppose both NOC and PB are carried whole: NOC's 20 split pro rata among the uncarried, PB's 15 split equally by EKO and PA. What share of cost falls on PA?",
  "40.192308: its 25 plus 7.692308 of NOC's carry and 7.500000 of PB's.",
  ["31.250000, the same as under the Ekene carry alone.",
   "27.500000, as under the half carry in stated shares.",
   "59.807692, EKO's figure."],
- "On int-two-carries PA carries NOC 7.692308, its pro rata part among the parties not carried, and PB 7.500000, its stated half, so its paying interest is 40.192308. 31.250000 is PA's figure under the Ekene carry, 27.500000 under the half carry, and 59.807692 is EKO's.")
+ "With PB carried, NOC's 20 points fall on EKO and PA alone in the ratio 40 to 25, so PA's part is 7.692308, and PA also pays half of PB's 15, 7.500000. Added to its own 25 that makes 40.192308, as the engine returns on int-two-carries. PA pays 31.250000 when NOC alone is carried pro rata and 27.500000 under the half carry in stated shares, and 59.807692 belongs to EKO.")
 
-q(3, "Under the half carry in stated shares, how much of each cost does PA bear?",
+q(3, "NOC is carried for 50.000000 percent of its cost share by EKO and PA in stated shares of 75.000000 and 25.000000. How much of each cost does PA bear?",
  "27.500000: 25 plus 2.500000 carry points.",
  ["31.250000, as PA's pro rata part of the carry.",
   "25.000000, since a carrier's paying interest stays put.",
@@ -294,15 +294,15 @@ q(3, "Under the half carry in stated shares, how much of each cost does PA bear?
 q(2, "IMF WP/24/89 (April 2024) describes what a carry is. What does it say?",
  "A financing arrangement to cover the state's proportional share of development spending.",
  ["A transfer of the state's share of production to the parties that carry it.",
-  "A tax credit the state grants its carriers on development spending.",
-  "A premium the state pays on its share of development costs."],
+  "A tax credit the state grants its carriers on the development spending they cover.",
+  "A premium the state pays its carriers on its proportional share of development costs."],
  "The working paper reads: \"The parties may establish a financing arrangement to cover (“carry”) the state’s proportional share of development spending.\" (IMF WP/24/89 (April 2024)). A carry finances cost, and the engine's rule leaves the carried party's share of production whole.")
 
 q(1, "Under PIA s.85(4), which contract must include a carried interest provision?",
  "A concession agreement under s.85(2)(d), which may include a joint venture with NNPC Limited.",
  ["A production sharing contract under s.85(2)(a), for the risk-bearing party.",
-  "Every contract under section 85, whatever its form.",
-  "A renegotiated production sharing contract."],
+  "Every contract under section 85, whatever its form, including production sharing.",
+  "A renegotiated production sharing contract under s.311(2)(a)(iii), with its cost oil limit."],
  "Section 85(4) opens \"A contract as provided for under section 85 (2) (d)\", which is the concession agreement that may include an incorporated or unincorporated joint venture with NNPC Limited. A production sharing contract is s.85(2)(a), and s.311(2)(a)(iii) sets the cost oil limit of a renegotiated one, a different provision.")
 
 q(3, "What does the capstone of each tier state about its joint venture?",

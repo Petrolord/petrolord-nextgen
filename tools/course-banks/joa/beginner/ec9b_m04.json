@@ -35,10 +35,10 @@
  {
   "prompt": "A worked case states a threshold of 500. January 2027 forecasts exactly 500 and February 499. Which months are called?",
   "options": [
-   "Neither month: a forecast at or below the threshold of 500 makes no cash call.",
-   "Both months, since each forecast is within one of the stated threshold.",
+   "Neither month.",
+   "Both months.",
    "January alone.",
-   "February alone, since January's actual of 500 equals the threshold."
+   "February alone."
   ],
   "answer": 2,
   "explanation": "The rule is strictly below: a forecast equal to the threshold is called and one below it is not. On cc-threshold-exactly January is called for 500.000000 and February is not, and the engine's reason reads: 2027-02: no cash call: the forecast 499 is below the stated threshold 500; the actual is billed in arrears in the next month. The test reads the forecast, and there is no margin of one."
@@ -66,7 +66,7 @@
   "explanation": "What a party pays in a month is its call plus its arrears billing. PB's June call is 1631250.000000, its forecast share of 1687500.000000 less an adjustment of 56250.000000, and May's actual is billed in arrears in June at 84000.000000 for PB, so it pays 1715250.000000. The engine's reason reads: 2027-06: the actual of 2027-05, 448000, made without a cash call, is billed in arrears."
  },
  {
-  "prompt": "On cc-zero-call-month, with lag 1 and negative call rule carry, January over-calls by 200 and February forecasts 0. What happens in February and March?",
+  "prompt": "On cc-zero-call-month, with lag 1, negative call rule carry and no threshold stated, January over-calls by 200 and February forecasts 0. What happens in February and March?",
   "options": [
    "February's calls are -200.000000, a refund paid out at once, and March is then called in full at 400.000000.",
    "February makes no call, since a forecast of 0 is below any threshold, and the credit lapses at the month's end.",
@@ -101,13 +101,13 @@
  {
   "prompt": "A cash calls box leaves out reconciliationLagMonths. What does the engine do?",
   "options": [
-   "It uses a lag of 1 month.",
+   "A refusal naming months, which it cannot read without a lag.",
    "It refuses: the lag must be an integer at or above 1.",
    "It computes every call with no adjustment and says so in a reason printed for each month.",
    "It applies each difference to the next call, as the Norwegian accounting agreement says."
   ],
   "answer": 1,
-  "explanation": "The reconciliation lag is a contract term with no default. The engine refuses, in its own words: reconciliationLagMonths must be an integer at or above 1; got nothing. It assumes no lag, computes no calls without one, and reads no Norwegian wording into the box."
+  "explanation": "The reconciliation lag is a contract term with no default. The engine refuses, in its own words: reconciliationLagMonths must be an integer at or above 1; got nothing. The field it names is reconciliationLagMonths, and the months are stated correctly. It assumes no lag, computes no calls without one, and reads no Norwegian wording into the box."
  },
  {
   "prompt": "Can the reconciliation lag be stated as 0, so that a month's difference adjusts its own call?",
@@ -124,12 +124,12 @@
   "prompt": "A box's second month is typed as 2027-03, straight after 2027-01. What does the engine return?",
   "options": [
    "A ledger with February filled in at a forecast and actual of 0, and a reason naming it.",
-   "A ledger that counts the lag in calendar months across the gap.",
+   "A refusal naming months[0].month, the month before the gap.",
    "A refusal naming months[1].month, which expected 2027-02.",
    "A result, with a reason printed that names the missing month."
   ],
   "answer": 2,
-  "explanation": "The months must follow one another with no gap, because the lag counts months. The engine refuses, in its own words: months[1].month must be 2027-02, the month after 2027-01 (the months are consecutive); got \"2027-03\". It fills in no month and computes nothing across the gap."
+  "explanation": "The months must follow one another with no gap, because the lag counts months. The engine refuses, in its own words: months[1].month must be 2027-02, the month after 2027-01 (the months are consecutive); got \"2027-03\". It names the second month, months[1].month, the one that breaks the sequence, and fills in no month."
  },
  {
   "prompt": "A cash calls box states negativeCall as net. What happens?",
@@ -137,10 +137,10 @@
    "The credit is netted against the actual share.",
    "It is refused: the rule must be refund or carry.",
    "It is read as carry, the nearer of the two stated rules, and the credit waits for the next call.",
-   "The excess is refunded, the rest carried."
+   "It is refused as a missing term: got nothing."
   ],
   "answer": 1,
-  "explanation": "The negative call rule takes one of two stated values. The engine refuses, in its own words: negativeCall must be one of \"refund\", \"carry\"; got \"net\". It maps no third word onto either rule and mixes none of them."
+  "explanation": "The negative call rule takes one of two stated values. The engine refuses, in its own words: negativeCall must be one of \"refund\", \"carry\"; got \"net\". The message prints the value it was given, \"net\", so the term was stated and is refused as a third word. It maps no third word onto either rule and mixes none of them."
  },
  {
   "prompt": "On cc-last-month-uncalled, December 2027 forecasts 100 against a threshold of 500. What does the engine print for December?",

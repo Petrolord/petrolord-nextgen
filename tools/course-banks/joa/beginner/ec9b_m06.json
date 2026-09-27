@@ -1,9 +1,9 @@
 [
  {
-  "prompt": "Before any band is applied, how large is the Ekene 2031 operating category's base?",
+  "prompt": "The Ekene 2031 operating cost is 60000000.000000, and 2000000.000000 of it is stated as excluded. Before any band is applied, how large is the operating base?",
   "options": [
    "60000000.000000, since an exclusion reduces the charge after the scale has been applied.",
-   "58000000.000000: cost of 60000000.000000 less 2000000.000000 excluded.",
+   "58000000.000000: the cost less the stated exclusion.",
    "50000000.000000, the part of the base that sits in the first band.",
    "58000000.000000 plus the overhead charged on it."
   ],
@@ -33,7 +33,7 @@
   "explanation": "The engine's reason reads: development: base 150000000; 2.5% of 50000000 + 1% of 50000000 + 0.5% of 50000000 = 2000000. 1250000.000000 and 500000.000000 are the first and second bands' own charges, and 3580000.000000 is the total over the exploration, operating and development categories."
  },
  {
-  "prompt": "What total overhead does the engine return for Ekene 2031 under the three category scales the fixture states?",
+  "prompt": "On their Ekene 2031 scales, exploration is charged 125000.000000, operating 1455000.000000 and development 2000000.000000, with no corporate charge stated. What total overhead does the engine return?",
   "options": [
    "1343750.000000, the flat corporate charge, which takes the place of the category scales.",
    "2000000.000000, the development charge, the largest of the three categories.",
@@ -57,10 +57,10 @@
  {
   "prompt": "The Norwegian accounting agreement, Art. 2.2.3, prints 0.65 % of the annual costs for exploration, operation and development. On a base of 3400 NOK million, what does the engine charge?",
   "options": [
-   "65.450000, the Art. 2.2.2 scale over the three categories.",
+   "65.450000.",
    "22.100000.",
-   "35.000000, the Art. 2.2.2 operating scale on 1800.",
-   "42.500000, the Art. 2.2.2 development scale on 4000."
+   "35.000000.",
+   "42.500000."
   ],
   "answer": 1,
   "explanation": "On overhead-norway-corporate-065 the engine's reason reads: exploration, operation and development: base 3400; 0.65% of 3400 = 22.1, a total of 22.100000. The other three figures are cases of the Art. 2.2.2 research and development scale: 65.450000 over three categories with an exclusion, 35.000000 on an operating base of 1800 and 42.500000 on a development base of 4000."
@@ -77,7 +77,7 @@
   "explanation": "A base exactly at a band's upper limit is charged in that band only: overhead-band-edge-exact charges 1000.000000 in the first band and 0.000000 in the second, a total of 27.000000, and the reason reads: operating: base 1000; 2.7% of 1000 = 27. Nothing crosses the edge, and the scale is marginal, so no rate applies to the whole base."
  },
  {
-  "prompt": "A worked case states the Norwegian development scale in NOK million on a base of 4000, with 0 stated above the last band. What does the engine charge?",
+  "prompt": "A worked case states the Norwegian development scale in NOK million, 2.5 per cent to 1000, 1 per cent to 2000 and 0.5 per cent to 3500, with 0 stated above the last band, on a base of 4000. What does the engine charge?",
   "options": [
    "40.000000: the printed scale stops at 3000.",
    "100.000000, 2.5 per cent of the whole base of 4000.",
@@ -88,15 +88,15 @@
   "explanation": "The engine's reason reads: development: base 4000; 2.5% of 1000 + 1% of 1000 + 0.5% of 1500 + 0% of 500 above 3500 = 42.5. The bands run to 3500, where 40.000000 is the charge on a base of 3000, the first band's 2.5 per cent covers only its first 1000, and 35.000000 belongs to the operating scale."
  },
  {
-  "prompt": "A Norwegian worked case excludes 150 of area fees and CO2 duty from an operating cost of 1000 NOK million. What is the operating charge?",
+  "prompt": "A Norwegian worked case excludes 150 of area fees and CO2 duty from an operating cost of 1000 NOK million, on a scale of 2.7 per cent up to 1000 and 1 per cent on the next band. What is the operating charge?",
   "options": [
-   "27.000000, 2.7% of the whole cost of 1000.",
+   "27 on the whole cost of 1000, at 2.7%.",
    "22.95 on a base of 850, at 2.7%.",
-   "22.100000, 0.65% of the annual costs.",
+   "22.1 on a base of 3400, at the flat 0.65%.",
    "65.450000, the charge over all three categories of that case."
   ],
   "answer": 1,
-  "explanation": "On overhead-norway-all-with-exclusion the reason reads: operating: base 850 (cost 1000 less exclusions 150); 2.7% of 850 = 22.95. The exclusion comes out of the base before the scale, so 27.000000 on the whole 1000 is wrong. 22.100000 is the flat 0.65% corporate case, and 65.450000 is that case's total over three categories."
+  "explanation": "On overhead-norway-all-with-exclusion the reason reads: operating: base 850 (cost 1000 less exclusions 150); 2.7% of 850 = 22.95. The exclusion comes out of the base before the scale, so 27 on the whole 1000 is wrong. 22.1 is the flat 0.65% corporate case on a base of 3400, and 65.450000 is that case's total over three categories."
  },
  {
   "prompt": "Can overhead charged under a scale enter the base it is charged on?",
@@ -126,10 +126,10 @@
    "It charges operating at the exploration scale, the nearest category it holds.",
    "Operating is charged at 0, since no scale was stated.",
    "It refuses, naming scale.operating: there is no default rate.",
-   "It charges operating at the Norwegian 0.65 %."
+   "It refuses, naming costs.operating as a cost with no scale."
   ],
   "answer": 2,
-  "explanation": "The engine refuses, in its own words: scale.operating must be an object { bands, abovePct } (no default rate); got nothing. It borrows no scale from another category or from the Norwegian text, and it charges nothing at all on an unstated term."
+  "explanation": "The engine refuses, in its own words: scale.operating must be an object { bands, abovePct } (no default rate); got nothing. The field it names is the scale, scale.operating; the cost is stated correctly. It borrows no scale from another category or from the Norwegian text."
  },
  {
   "prompt": "A scale's second band is given the same upTo as the first, 100. How does the engine answer?",
@@ -148,10 +148,10 @@
    "The engine refuses: an exclusion may not exceed its category's cost.",
    "The base is clipped at 0, and nothing is charged for operating.",
    "A negative base of -1 gives a small credit to the parties.",
-   "The spare 1 is taken from the next category's base."
+   "It refuses, naming costs.operating as too small for its exclusion."
   ],
   "answer": 0,
-  "explanation": "The engine refuses, in its own words: excluded.operating must be at or below the cost of the category 10; got 11. A base cannot fall below zero by an exclusion, and an exclusion belongs to the category it names."
+  "explanation": "The engine refuses, in its own words: excluded.operating must be at or below the cost of the category 10; got 11. The field it names is the exclusion, excluded.operating, measured against the stated cost. A base cannot fall below zero by an exclusion."
  },
  {
   "prompt": "A scale lists its bands and leaves out abovePct. What happens?",
@@ -159,9 +159,9 @@
    "The part above the last band is charged at the last band's per cent.",
    "It is refused: abovePct is required even when it is zero.",
    "The part above the last band is left uncharged, as the Norwegian text prints nothing there.",
-   "Everything above is charged at the 0.65 % of Art. 2.2.3."
+   "It is refused for a missing bands list."
   ],
   "answer": 1,
-  "explanation": "The engine refuses, in its own words: scale.operating.abovePct must be a number from 0 to 100; got nothing. The Norwegian scale prints nothing above its last band, so the worked cases state 0 there; the engine extends no band's per cent and borrows no rate from Art. 2.2.3."
+  "explanation": "The engine refuses, in its own words: scale.operating.abovePct must be a number from 0 to 100; got nothing. The Norwegian scale prints nothing above its last band, so the worked cases state 0 there; the engine extends no band's per cent, and the bands are listed, so abovePct alone is refused."
  }
 ]

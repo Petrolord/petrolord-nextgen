@@ -21,8 +21,8 @@ q(3, "Four parties are typed with participating interests that sum to 90. What d
  "A refusal naming parties, with the sum it found.",
  ["The participating interests rescaled to make up 100, with a reason printing the factor applied.",
   "The participating interests as typed, with the unassigned 10 points of cost left to the operator.",
-  "A result with a reason that flags the gap and names the party whose share is most likely wrong."],
- "The engine checks the sum before anything else and refuses, in its own words: parties must have participatingPct summing to 100; got a sum of 90. It rescales nothing, assigns no share to the operator and guesses no party: a refusal returns no figures at all.")
+  "A refusal naming parties[0].participatingPct, the first share it reads in the box."],
+ "The engine refuses, in its own words: parties must have participatingPct summing to 100; got a sum of 90. The field it names is parties, the whole set, and no single share is faulted. It rescales nothing, assigns no share to the operator and guesses no party: a refusal returns no figures at all.")
 
 q(0, "How far from 100 may the participating interests sum and still be accepted?",
  "1e-9, the engine convention DEFAULTS.SUM_TOLERANCE.",
@@ -35,8 +35,8 @@ q(2, "Two parties in one box are both given the id A. Which answer does the engi
  "A refusal: parties[1].id must be an id no other party has.",
  ["Both are merged into one party with both shares.",
   "It renames the second A2 and says so in a reason.",
-  "It keeps the first A and drops the second."],
- "The engine refuses, in its own words: parties[1].id must be an id no other party has; got \"A\". Its message names the second party's path, counting from zero. It never merges, renames or drops a party, because each would compute on terms nobody stated.")
+  "A refusal naming parties[0].id, the first of the two."],
+ "The engine refuses, in its own words: parties[1].id must be an id no other party has; got \"A\". Its message names the second party's path, parties[1].id, counting from zero, and leaves the first alone. It never merges, renames or drops a party, because each would compute on terms nobody stated.")
 
 q(1, "A party's participatingPct is typed as 0. What happens?",
  "The call is refused: a participating interest must be above 0 and at most 100.",
@@ -66,7 +66,7 @@ q(0, "Which code splits a joint account amount between the parties?",
   "The npv of cashflow.ts at a discount rate of 0."],
  "Every joint account amount the engine splits between parties goes through the canonical calculatePartnerCosts of engines/economics/afe.js. The engine's basis says every split of a joint account amount is calculatePartnerCosts from engines/economics/afe.js on the paying interests. applyPSC and npv are imported from cashflow.ts for PSC cost recovery and discounting, and neither splits an amount between parties.")
 
-q(3, "The Ekene forecast for January 2027 is 4000000.000000. What is PB's forecast share?",
+q(3, "Under the Ekene carry, NOC carried in full by pro rata carriers, January 2027 forecasts 4000000.000000. What is PB's forecast share?",
  "750000.000000, on its paying interest of 18.750000.",
  ["600000.000000, on its participating interest of 15.000000 in the joint venture.",
   "675000.000000, its share of January's actual.",
@@ -103,12 +103,12 @@ q(3, "In the engine's rule, which share always equals the participating interest
 
 q(1, "Which inputs does participatingInterests read at the top level?",
  "parties and carries.",
- ["parties, carries and months, since a participating interest can change from month to month.",
-  "parties alone, with every carry stated in the cash calls box that uses the paying interests.",
-  "parties, carries and a date on which each participating interest takes effect in the venture."],
+ ["parties, carries and months.",
+  "parties alone.",
+  "parties, carries and an effective date."],
  "The function table gives participatingInterests two inputs, parties and carries, and the engine's refusal of an unknown key lists the same two: the accepted keys at the top level are parties, carries. Months belong to cashCalls, and an input key the function does not read, such as a date, is refused.")
 
-q(0, "A partner report splits the Ekene January 2027 cash call on the participating interests. Which party does that split call for a cost it does not bear?",
+q(0, "NOC is carried in full on the Ekene terms, and a partner report splits the January 2027 cash call on the participating interests. Which party does that split call for a cost it does not bear?",
  "NOC, whose paying interest is 0.000000 while it is carried in full.",
  ["EKO, whose paying interest as operator is 40.000000.",
   "PB, whose paying interest is 15.000000 under the carry.",

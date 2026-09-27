@@ -15,11 +15,11 @@
   "options": [
    "The participating interests rescaled to make up 100, with a reason printing the factor applied.",
    "The participating interests as typed, with the unassigned 10 points of cost left to the operator.",
-   "A result with a reason that flags the gap and names the party whose share is most likely wrong.",
+   "A refusal naming parties[0].participatingPct, the first share it reads in the box.",
    "A refusal naming parties, with the sum it found."
   ],
   "answer": 3,
-  "explanation": "The engine checks the sum before anything else and refuses, in its own words: parties must have participatingPct summing to 100; got a sum of 90. It rescales nothing, assigns no share to the operator and guesses no party: a refusal returns no figures at all."
+  "explanation": "The engine refuses, in its own words: parties must have participatingPct summing to 100; got a sum of 90. The field it names is parties, the whole set, and no single share is faulted. It rescales nothing, assigns no share to the operator and guesses no party: a refusal returns no figures at all."
  },
  {
   "prompt": "How far from 100 may the participating interests sum and still be accepted?",
@@ -38,10 +38,10 @@
    "Both are merged into one party with both shares.",
    "It renames the second A2 and says so in a reason.",
    "A refusal: parties[1].id must be an id no other party has.",
-   "It keeps the first A and drops the second."
+   "A refusal naming parties[0].id, the first of the two."
   ],
   "answer": 2,
-  "explanation": "The engine refuses, in its own words: parties[1].id must be an id no other party has; got \"A\". Its message names the second party's path, counting from zero. It never merges, renames or drops a party, because each would compute on terms nobody stated."
+  "explanation": "The engine refuses, in its own words: parties[1].id must be an id no other party has; got \"A\". Its message names the second party's path, parties[1].id, counting from zero, and leaves the first alone. It never merges, renames or drops a party, because each would compute on terms nobody stated."
  },
  {
   "prompt": "A party's participatingPct is typed as 0. What happens?",
@@ -88,7 +88,7 @@
   "explanation": "Every joint account amount the engine splits between parties goes through the canonical calculatePartnerCosts of engines/economics/afe.js. The engine's basis says every split of a joint account amount is calculatePartnerCosts from engines/economics/afe.js on the paying interests. applyPSC and npv are imported from cashflow.ts for PSC cost recovery and discounting, and neither splits an amount between parties."
  },
  {
-  "prompt": "The Ekene forecast for January 2027 is 4000000.000000. What is PB's forecast share?",
+  "prompt": "Under the Ekene carry, NOC carried in full by pro rata carriers, January 2027 forecasts 4000000.000000. What is PB's forecast share?",
   "options": [
    "600000.000000, on its participating interest of 15.000000 in the joint venture.",
    "675000.000000, its share of January's actual.",
@@ -145,16 +145,16 @@
  {
   "prompt": "Which inputs does participatingInterests read at the top level?",
   "options": [
-   "parties, carries and months, since a participating interest can change from month to month.",
+   "parties, carries and months.",
    "parties and carries.",
-   "parties alone, with every carry stated in the cash calls box that uses the paying interests.",
-   "parties, carries and a date on which each participating interest takes effect in the venture."
+   "parties alone.",
+   "parties, carries and an effective date."
   ],
   "answer": 1,
   "explanation": "The function table gives participatingInterests two inputs, parties and carries, and the engine's refusal of an unknown key lists the same two: the accepted keys at the top level are parties, carries. Months belong to cashCalls, and an input key the function does not read, such as a date, is refused."
  },
  {
-  "prompt": "A partner report splits the Ekene January 2027 cash call on the participating interests. Which party does that split call for a cost it does not bear?",
+  "prompt": "NOC is carried in full on the Ekene terms, and a partner report splits the January 2027 cash call on the participating interests. Which party does that split call for a cost it does not bear?",
   "options": [
    "NOC, whose paying interest is 0.000000 while it is carried in full.",
    "EKO, whose paying interest as operator is 40.000000.",
