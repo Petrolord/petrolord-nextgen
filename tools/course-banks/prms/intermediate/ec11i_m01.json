@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "A discovered project meets every commerciality criterion with established technology. Its investment has been sanctioned and its wells are still being built. Which Reserves sub-class does the engine derive?",
+  "options": [
+   "justified-for-development, since no barrel has been sold yet",
+   "approved-for-development",
+   "on-production, because the investment decision has been taken",
+   "development-pending, while the project waits for first oil"
+  ],
+  "answer": 1,
+  "explanation": "The engine derives the sub-class from the two stated facts: decision taken and no production gives approved-for-development (PRMS 2.1.3.5.5, Table 1), the sub-class of Ekene infill wells (EKN-2). Justified-for-development is the step before, with no investment decision yet. On-production needs the project on production. Development-pending is a Contingent Resources sub-class and cannot apply to a commercial project."
+ },
+ {
+  "prompt": "The golden input class-justified states a commercial project with the final investment decision not taken and production not started. What sub-class does the engine return?",
+  "options": [
+   "approved-for-development, since every commerciality criterion is met here",
+   "development-pending, as the decision is still to come",
+   "No sub-class until the investment decision is taken",
+   "justified-for-development: no final investment decision yet"
+  ],
+  "answer": 3,
+  "explanation": "With neither fact true the engine returns justified-for-development and prints the decision \"justified-for-development: no final investment decision yet\". Approved-for-development needs the decision taken. Development-pending belongs to Contingent Resources, and this project is commercial. The engine always returns a sub-class for a Reserves project; the missing decision is what sets this one."
+ },
+ {
+  "prompt": "For a project it finds commercial, which two stated facts does the engine read to derive the Reserves sub-class?",
+  "options": [
+   "Whether the final investment decision is taken and whether the project is on production",
+   "The reserves status and the stated economic status of the project",
+   "The years to the start of development and whether a longer wait is justified",
+   "Its chance of development and whether the firm intention to proceed is stated"
+  ],
+  "answer": 0,
+  "explanation": "The Reserves sub-class is derived from the project status: finalInvestmentDecision and onProduction, each a stated true or false (PRMS 2.1.3.5, Table 1). The reserves status is stated for Reserves and checked against the project status; it sets no sub-class. The start and its justification set the time-frame criterion, which decides the class. A Reserves project carries no chance at all, and the firm intention is a commerciality fact."
+ },
+ {
+  "prompt": "Ekene Main waterflood (EKN-1) is stated as on production. In a copy of it the final investment decision is set to false. What does the engine return?",
+  "options": [
+   "The sub-class justified-for-development, read from the missing decision",
+   "On-production, as production outranks it",
+   "A refusal naming projectStatus.finalInvestmentDecision",
+   "A refusal naming subClass, which must change to approved-for-development"
+  ],
+  "answer": 2,
+  "explanation": "A producing project has passed its investment decision, so the engine refuses the contradiction in the facts and names the fact to fix: \"projectStatus.finalInvestmentDecision must be true for a project on production (a producing project has passed its investment decision); got false\". It derives no sub-class from facts that disagree, so neither justified-for-development nor on-production comes back, and the refusal names the decision field, since the sub-class check never gets that far."
+ },
+ {
+  "prompt": "Ekene infill wells (EKN-2) has its investment decision taken and is not on production. In a copy, the reserves status is changed to developed-producing. What happens?",
+  "options": [
+   "The call returns developed-producing as stated, since the reserves status is a stated fact the engine records",
+   "The sub-class moves up to on-production to match the stated reserves status",
+   "The call is refused on reservesStatus, which must be developed-non-producing or undeveloped",
+   "The call is refused on subClass, which must then read on-production"
+  ],
+  "answer": 2,
+  "explanation": "Developed producing reserves come from completion intervals open and producing (PRMS 2.1.3.6, Table 2), so the engine refuses on reservesStatus and names the two statuses a project not on production may carry. The status is stated and it is also checked. The engine never moves a sub-class to fit a status; the sub-class follows the project status, and here the project is not on production."
+ },
+ {
+  "prompt": "How does the engine set the sub-class of a Contingent Resources project?",
+  "options": [
+   "It takes the stated one and checks only that it is one of the four",
+   "It derives it from the list of blockers that the commerciality test names for the project",
+   "It reads it from the stated economic status of the project",
+   "It derives it from the stated chance of development, Pd"
+  ],
+  "answer": 0,
+  "explanation": "The engine cannot see why a development is waiting, so the Contingent sub-class is stated and checked against the four of PRMS 2.1.3.5.6 and Table 1: development-pending, development-on-hold, development-unclarified and development-not-viable. The blockers and the economic status are printed beside it, and the chance of development sets the chance of commerciality; none of them sets the sub-class."
+ },
+ {
+  "prompt": "In a copy of Ekene East gas (EKN-3), the stated sub-class development-on-hold is changed to development-not-viable, and nothing else moves. What does the engine return?",
+  "options": [
+   "A refusal: not-viable needs a not-viable economic status",
+   "Contingent Resources, with the sub-class reset to development-on-hold",
+   "Discovered Unrecoverable, since no project is planned for it any more",
+   "Contingent Resources, sub-class development-not-viable (stated)"
+  ],
+  "answer": 3,
+  "explanation": "The engine accepts any of the four Contingent sub-classes on any Contingent project, so it returns the class with development-not-viable as stated and the same six blockers. Nothing ties the sub-class to the economic status, and the engine never rewrites a stated input. Discovered Unrecoverable needs no recovery project at all, and EKN-3 states one with established technology. Whether the sub-class fits the blockers is a judgement left to the person who signs the report."
+ },
+ {
+  "prompt": "The appraisal project EKN-4, already discovered, carries a stated Pd of 65.000000 percent. Which Pc appears in its decisions?",
+  "options": [
+   "No figure: a discovered project carries no chance",
+   "65.000000 percent, from Pc = Pd",
+   "50.000000 percent, the figure Ekene East gas carries",
+   "A refusal until a chance of geologic discovery is stated"
+  ],
+  "answer": 1,
+  "explanation": "A discovered project has already met its geology, so its chance of commerciality is the chance of development alone (PRMS 2.1.3.3). The engine's decision line is \"Pc = Pd = 65%\". Only Reserves carry no chance. 50.000000 percent is EKN-3's Pd. A chance of geologic discovery on a discovered project is refused, so asking for one would be the error."
+ },
+ {
+  "prompt": "A copy of a Contingent project states chances.geologicDiscoveryPct as 50 beside its chance of development. Which field does the engine refuse?",
+  "options": [
+   "chances.geologicDiscoveryPct, which applies to Prospective Resources only",
+   "chances, since a Contingent project may state no chance of any kind",
+   "chances.developmentPct, which must then fall to the product of both",
+   "subClass, which must change to prospect once Pg is stated"
+  ],
+  "answer": 0,
+  "explanation": "The engine's message reads \"chances.geologicDiscoveryPct must be left out for a discovered accumulation (the chance of geologic discovery applies to Prospective Resources, PRMS 2.1.3.2); got 50\". A Contingent project must state its chance of development, so the chances object is required. The engine computes Pc = Pd for it and multiplies nothing. The discovery status sets the class, and a stated chance never turns a discovered project into a prospect."
+ },
+ {
+  "prompt": "Ekene Shallow lead (EKN-7) states a chance of geologic discovery of 15.000000 percent and a chance of development of 70.000000 percent. What chance of commerciality does the engine return?",
+  "options": [
+   "15.000000 percent, the chance of geologic discovery",
+   "70.000000 percent, the chance of development alone",
+   "10.500000 percent",
+   "20.000000 percent, the figure of the Ekene Deep prospect"
+  ],
+  "answer": 2,
+  "explanation": "For an undiscovered project the chance of commerciality is the product Pc = Pg x Pd (PRMS 2.1.3.3), and the engine returns 10.500000 percent for EKN-7. Pg alone ignores the chance of development if found; Pd alone is the discovered-project rule. 20.000000 percent is EKN-6, whose Pg of 25.000000 and Pd of 80.000000 give a different product."
+ },
+ {
+  "prompt": "The golden input class-pg-zero states a prospect with a chance of geologic discovery of 0 and a chance of development of 50.000000 percent. What does the engine return?",
+  "options": [
+   "Undiscovered Unrecoverable, since nothing can ever be found at that chance of discovery",
+   "A refusal: a chance of geologic discovery must be above 0",
+   "Prospective Resources with a Pc of 50.000000, from Pd",
+   "Prospective Resources, sub-class prospect, with a Pc of 0.000000"
+  ],
+  "answer": 3,
+  "explanation": "The engine classifies the facts it is given: an undiscovered accumulation with a recovery project is Prospective Resources, and the product 0 x 50 gives a Pc of 0.000000. Unrecoverable needs no recovery project, and this one states established technology. A chance of 0 lies inside the accepted range from 0 to 100, so there is nothing to refuse. Pd alone is the rule for a discovered project."
+ },
+ {
+  "prompt": "A copy of an undiscovered project states the sub-class development-pending. What does the engine return?",
+  "options": [
+   "Contingent Resources, since the stated sub-class belongs to that class",
+   "The refusal: subClass must be one of \"prospect\", \"lead\", \"play\"; got \"development-pending\"",
+   "Prospective Resources with the stated sub-class printed beside it",
+   "A refusal on discovery, which must change to discovered first"
+  ],
+  "answer": 1,
+  "explanation": "Prospective Resources carry three stated sub-classes (PRMS 2.1.3.5.9, Table 1), and the engine checks the stated one is among them. The discovery status sets the class, and a stated sub-class never moves a project across the class line. The engine does not print a sub-class it has refused, and the discovery field is valid as stated, so the refusal names subClass."
+ },
+ {
+  "prompt": "On a commercial project with finalInvestmentDecision true and onProduction false, the box states subClass as development-pending. What does the refusal ask for?",
+  "options": [
+   "One of the four Contingent Resources sub-classes, listed in full",
+   "A project status with both facts false, to fit development-pending",
+   "A chance of development for the pending project",
+   "The sub-class approved-for-development, which the facts give"
+  ],
+  "answer": 3,
+  "explanation": "The class is decided first, from the criteria, and this project is Reserves. The message reads \"subClass must be \"approved-for-development\" for this project (final investment decision taken; production yet to start: PRMS 2.1.3.5.5, Table 1); got \"development-pending\"\". The list of four Contingent sub-classes appears only when the facts make a project Contingent. The engine asks the stated sub-class to follow the facts, and a Reserves project carries no chance."
+ },
+ {
+  "prompt": "A project that fails six commerciality criteria states the sub-class approved-for-development. What does the engine do?",
+  "options": [
+   "Refuses subClass, listing the four Contingent sub-classes and the six blockers",
+   "Classifies it as Reserves, since approved-for-development is a Reserves sub-class",
+   "Refuses projectStatus, since an approved project must state its decision",
+   "Returns Contingent Resources and prints the stated sub-class beside the blockers"
+  ],
+  "answer": 0,
+  "explanation": "A stated sub-class does not make a project commercial; the criteria do. The engine decides Contingent Resources first, then refuses: \"subClass must be one of \"development-pending\", \"development-on-hold\", \"development-unclarified\", \"development-not-viable\" for Contingent Resources (not commercial: financialAppropriations, timeFrame, economicStatus, market, facilities, firmIntention)\". A project status is read for Reserves alone, and the engine never returns a result that carries a sub-class from the wrong class."
+ },
+ {
+  "prompt": "A classification box carries the top-level key maturity beside the usual facts. What comes back?",
+  "options": [
+   "The class and sub-class, with the unknown key dropped silently",
+   "A sub-class read from the maturity key in place of subClass",
+   "A refusal: maturity is not an accepted key, with the accepted top-level keys listed",
+   "A refusal naming subClass, which the maturity key hides"
+  ],
+  "answer": 2,
+  "explanation": "Every function checks its accepted keys before it reads a fact, and it drops nothing silently. The message reads \"maturity is not an accepted key; the accepted keys at the top level are name, discovery, recoveryProject, subClass, commerciality, economicStatus, projectStatus, reservesStatus, chances, nigeria\". The engine reads no key it does not know, so a maturity key is never read as a sub-class, and the key check runs before the sub-class check."
+ }
+]

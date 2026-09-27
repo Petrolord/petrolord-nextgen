@@ -1,0 +1,118 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# EC11 Professional m04, The Economic Limit.
+# Every figure and every engine message is quoted from digest.txt, where the
+# engine returned it on the Ekene fixture or a stated golden input, and every
+# key was re-run through the vendored engine by the writer's witness
+# (scratch/bank-intermediate). No capstone name, input or value appears.
+
+q(1, "Ekene Main waterflood (EKN-1) states three technical forecasts from 2027 to 2041 and a licence expiring in 2040 with no renewal expected. In which years does the canonical trailing trim put the low, best and high economic limits?",
+ "2033, 2037 and 2040",
+ ["2040 for all three, the licence expiry year",
+  "2041 for all three, the last forecast year",
+  "2040, 2037 and 2033, the high case stopping first"],
+ "Each case is cut at its own canonical economic limit: the low in 2033 with 7 trailing years cut, the best in 2037 with 3, and the high in 2040 with 0. The licence cut removes 2041 from every case before the cash flow runs, and only the high case pays all the way to 2040. A smaller forecast stops paying sooner, so the low case reaches its limit first.")
+
+q(2, "After the licence cut and the canonical economic limit, how much oil does the EKN-1 best case keep on a gross basis?",
+ "16653136.000000 barrels",
+ ["18252916.000000 barrels, the technical best forecast",
+  "9908615.920000 barrels, after the royalty interest",
+  "11657195.200000 barrels, the 70.000000 percent share"],
+ "The engine reports the economic oil, gross, of the best case as 16653136.000000: the technical 18252916.000000 less 308309.000000 beyond the licence and 1291471.000000 beyond the limit. 9908615.920000 is the same case on the net-entitlement basis, and 11657195.200000 on the working-interest basis; both apply a basis to the gross figure.")
+
+q(0, "Which trailing years does the canonical economic limit of cashflow.ts cut?",
+ "Trailing years whose revenue less royalty less opex is below 0, keeping capital years and years at exactly 0",
+ ["Every year whose net cash flow after tax and abandonment is below 0, wherever it falls in the forecast",
+  "Every year after the one in which the cumulative net cash flow before tax peaks",
+  "Trailing years whose production falls below the average rate of the forecast"],
+ "Working back from the last year, the trailing trim removes each year whose revenue less royalty less opex is negative; a year with capital is kept, and a year at exactly 0 is kept. It looks at trailing years only, and it ignores tax and abandonment. The cumulative peak is the PRMS 3.1.3.1 limit, which the engine checks against the trim and does not apply. No rule here uses an average rate.")
+
+q(3, "A golden input's last year produces 19999 barrels at 50 a barrel against opex of 1000000. What economic limit and 2P oil does the engine return?",
+ "2028, one trailing year cut, and a 2P oil of 150000.000000",
+ ["2029, the last year kept, and a 2P oil of 170000.000000",
+  "2028, one trailing year cut, with the 2P oil still 170000.000000",
+  "2029, the last year kept, and a 2P oil of 150000.000000"],
+ "The last year's revenue falls one barrel's worth below its opex, so the trim cuts it: the limit is 2028 with 1 trailing year cut and the 2P oil is 150000.000000 (golden input econ-tail-one-below-cut). 170000.000000 belongs to the input with 20000 barrels, whose last year is kept. A cut year's barrels leave the quantity with it, and a limit of 2029 keeps them.")
+
+q(3, "On the golden input econ-tail-exactly-zero-kept, 20000 barrels at 50 a barrel exactly meet opex of 1000000 in the last year. Why does that year stay inside the limit?",
+ "The trim cuts only a year below 0",
+ ["Any producing year is kept",
+  "The last year of a forecast is never trimmed by the engine",
+  "Its tax loss turns it positive"],
+ "The canonical trailing trim is strict on one side: a trailing year is cut when revenue less royalty less opex is below 0, and a year at exactly 0 is kept. So the limit is 2029 with 0 years cut and a 2P oil of 170000.000000. Production alone keeps nothing, as the 19999-barrel input shows; the last year is the first one the trim tests; and the trim reads no tax.")
+
+q(1, "What does the engine's economic test ask of each case after the limit?",
+ "Whether its undiscounted net cash flow after tax and abandonment is above 0",
+ ["Whether its NPV at the stated discount rate is above 0 at 100 percent",
+  "Whether its net cash flow at the working interest covers the capital alone",
+  "Whether its net cash flow before tax and abandonment is at or above 0"],
+ "The basis reads \"3.1.2.1 (undiscounted cumulative net cash flow above 0, ADR included), 3.1.2.8\": undiscounted, after tax and abandonment, and strictly above 0. The discount rate sets the NPV and no verdict. The test runs at 100 percent, where a project either pays or does not. Leaving out tax and abandonment, or letting exactly 0 pass, changes what is tested.")
+
+q(0, "The golden input econ-exactly-zero-not-economic gives a best case undiscounted net cash flow of 0.000000. What status does the engine return?",
+ "Not commercial: the project stays in Contingent Resources, economically not viable",
+ ["Reserves, since a best case at exactly 0 does not lose money",
+  "A refusal on forecasts.best, which must be economic on these costs",
+  "Reserves with 1P set to 0, the FAQ 3.3 rule applied to the best case"],
+ "The engine calls a case economic only above 0, so a best case at exactly 0 fails and the status reads \"not commercial: the best case fails the economic test (PRMS 2.1.2.2, 3.1.2.1); the project stays in Contingent Resources, economically not viable (PRMS 2.1.3.7.1)\". Reading exactly 0 as not economic is the engine's stated reading; the alternative it names reads it as economic, and no graded figure rests on the edge. A failing best case is a result with a reason, and the FAQ 3.3 rule concerns a failing low case.")
+
+q(2, "On the golden input econ-best-fails the best case returns an undiscounted net cash flow of -10000000.000000 and the high case passes. Which Reserves categories does the engine report?",
+ "None",
+ ["A 3P of 9000000.000000 from the high case, which passes",
+  "1P 0.000000 and 2P 7000000.000000, as when only the low case fails",
+  "A 2P of 7000000.000000 recorded as not economic"],
+ "The best case decides the class: when it fails, the engine reports no Reserves categories and says the project stays in Contingent Resources (PRMS 2.1.2.2, 3.1.2.1). A passing high case gives no 3P on its own. 1P 0.000000 with 2P 7000000.000000 is the FAQ 3.3 result, where the best case passes. The engine reports no 2P from a failing best case.")
+
+q(0, "The golden input econ-faq33-low-fails states low, best and high of 5000000, 7000000 and 9000000 barrels in one year at 10 a barrel against capital of 60000000. Which 1P and 2P does the engine report?",
+ "2P 7000000.000000, with 1P set to 0.000000",
+ ["2P 7000000.000000, with 1P at 5000000.000000",
+  "2P 2000000.000000, with 1P set to 0.000000",
+  "2P 7000000.000000, with 1C at 5000000.000000"],
+ "The low case returns -10000000.000000 and fails, the best returns 10000000.000000 and passes, so the project holds Reserves with 1P set to 0 and the whole best estimate as 2P (PRMS 3.1.2.8; FAQ 3.3). Reporting 5000000 as 1P books barrels that do not pay. A 2P of 2000000 takes the low barrels out of it. FAQ 3.4 keeps them out of 1C, since a project carries a single classification.")
+
+q(3, "When the low case fails and the best passes, where does the engine put the low-case barrels?",
+ "Inside the 2P, in the Probable (P2) increment",
+ ["In the 1C of Contingent Resources beside the Reserves",
+  "Out of every category, dropped with the failing case",
+  "In the 1P, marked as not economic"],
+ "The engine's reason reads \"the low case quantities remain within 2P; FAQ 3.4 keeps them out of 1C, since a project carries a single classification\". On the FAQ 3.3 figures the Probable (P2) is 7000000.000000, the whole best estimate, so the low barrels sit inside it. Splitting them into 1C would give one project two classes. They are dropped from no category they belong to, and the 1P is 0.")
+
+q(1, "On the same FAQ 3.3 figures, what Possible (P3) increment does the engine return?",
+ "2000000.000000",
+ ["9000000.000000, the high case",
+  "7000000.000000, the whole best estimate",
+  "0.000000, since the low case failed"],
+ "The Possible (P3) is the 3P less the 2P, 9000000.000000 less 7000000.000000, which the engine returns as 2000000.000000. 9000000.000000 is the cumulative 3P. 7000000.000000 is the Probable (P2) here. A failing low case sets the 1P to 0 and leaves the 2P and 3P, and so the Possible (P3), standing.")
+
+q(2, "With the best case economic, the high forecast on the same costs and prices returns -5000000. What does the engine do?",
+ "Refuses forecasts.high, which must be economic when the best case is",
+ ["Reports a 3P equal to the 2P and prints a warning beside it",
+  "Sets the 3P to 0, as it sets the 1P when the low case fails",
+  "Swaps the best and high forecasts so the range is in order again"],
+ "A high forecast that loses money when the best makes money is no range, so the engine refuses it: \"forecasts.high must be a forecast that is economic when the best case is (tested on the same costs and prices, PRMS 2.2.0.3: an undiscounted net cash flow above 0); got -5000000\". Only the low case may fail while the best passes. The engine never rewrites or reorders a stated forecast.")
+
+q(2, "Handed the EKN-1 best case directly, with the same regime and inputs, computeCashFlow of cashflow.ts returns 2037 and an undiscounted net cash flow of 382377266.937500. What does that show?",
+ "The prms engine reports the canonical cash flow's own figures",
+ ["The prms engine rounds the canonical figures to its own precision",
+  "The prms engine applies the working interest before the cash flow runs",
+  "They agree only with the licence cut off"],
+ "The engine carries no cash flow, NPV or discounting code of its own. Its basis reads \"computeCashFlow of engines/economics/cashflow.ts with apply_economic_limit (JV regime at 100%, the stated royalty and tax), checked against PRMS 3.1.3.1\", and the direct call returns the same limit, 3 years trimmed, the same net cash flow and the NPV 318649106.969712. It rounds nothing, runs at 100 percent before any share, and the licence cut is applied in both calls.")
+
+q(0, "On EKN-1 the loss carry forward is set to false. What becomes of the best case's undiscounted net cash flow?",
+ "It stays at 382377266.937500",
+ ["It falls to 267664086.856250",
+  "It rises to 651707494.450000",
+  "It is refused until a loss year appears"],
+ "The loss relief choice acts on the tax only, and on EKN-1 no case has a loss year to carry, so the best undiscounted net cash flow is 382377266.937500 either way (golden input econ-ekene-no-loss-relief). 267664086.856250 is the best case at the 70.000000 percent working interest, and 651707494.450000 is the high case. The choice is a stated true or false and is accepted as false.")
+
+q(3, "On the EKN-1 net-entitlement start, the discount rate is changed from 10.000000 percent to 0. What moves?",
+ "The NPV columns alone",
+ ["Every economic limit, since the trim reads discounted cash",
+  "The 2P alone",
+  "The verdicts, since the economic test is run on the NPV"],
+ "The discount rate sets the NPV and nothing else: the economic test is undiscounted (PRMS 3.1.2.1), and the trailing trim reads revenue less royalty less opex year by year. So the limits, the verdicts and every Reserves quantity stay, and at 0 each NPV equals its undiscounted net cash flow. An NPV is always quoted with its rate.")
+
+emit(Q, '/root/cat-wip-prms/banks/ec11i_m04.json', expect_n=15)
+finish()
