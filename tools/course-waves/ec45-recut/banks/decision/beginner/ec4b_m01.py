@@ -92,7 +92,7 @@ q(3, "A tree with undiscounted payoffs, a success probability chosen to flatter 
  ["That its payoffs are present values, since the engine refuses a terminal typed without a rate.",
   "That no branch left off the tree would have beaten the best, since each decision node is checked for a walk-away before it is accepted.",
   "That its probabilities describe the prospect, since a probability chosen to favour one branch would push its chance node out of tolerance."],
- "The engine checks shape, never truth. Any set of probabilities that sums to 1 within 1e-6 passes, and the EKPAN tree's 105.0000 is only as good as its inputs.")
+ "The engine checks shape and never truth. Any set of probabilities that sums to 1 within 1e-6 passes, and the EKPAN tree's 105.0000 is only as good as its inputs.")
 
 # ord 12
 q(2, "An owner picks the drill on the EKPAN tree because its success pays 420.0000, the largest number in the table. What is wrong with that reasoning, given that the tree also recommends Drill?",
@@ -116,7 +116,7 @@ q(0, "At the EKPAN tree's root decision node, which three numbers does the engin
  ["160.0000, 37.7500 and 0.0000, the nodes' own values, with the drill cost of 55.0000 charged once the maximum has been taken.",
   "420.0000, 95.0000 and 0.0000, the best payoff reachable on each branch.",
   "-25.0000, 0.0000 and 0.0000, the worst outcome each branch can deliver, since the root guards against a loss."],
- "Nodes combine branch values, never raw child values: the drill's chance node is 160.0000 and its branch 105.0000. The root takes the largest, EMV 105.0000, best branch index 0.")
+ "Nodes combine branch values and never raw child values: the drill's chance node is 160.0000 and its branch 105.0000. The root takes the largest, EMV 105.0000, best branch index 0.")
 
 # ord 15
 q(3, "A decision node picks one of its branches. What does a chance node on the EKPAN tree pick?",

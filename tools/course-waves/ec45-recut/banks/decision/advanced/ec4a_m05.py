@@ -12,7 +12,7 @@ q(1, "On the EKPAN lottery at a success probability of 0.35 the drill is worth 7
  ["Setting a risk tolerance below the drill's loss of 80.0000, which the rollback reads before comparing the two means.",
   "The drill's 0.650000 chance of losing money, since the engine demotes an action that loses more often than it wins.",
   "A higher discount rate on the drill's success payoff, because the rollback applies the rate typed on each terminal before weighting."],
- "The engine sees only the two means: 0.350000 x 365.0000 plus 0.650000 x -80.0000 is 75.7500. A preference for the farm-out belongs in words beside the tree, never hidden in a payoff quietly lowered until the farm-out wins.")
+ "The engine sees only the two means: 0.350000 x 365.0000 plus 0.650000 x -80.0000 is 75.7500. A preference for the farm-out belongs in words beside the tree and is never hidden in a payoff quietly lowered until the farm-out wins.")
 
 # ord 2
 q(3, "The EKPAN lottery's survey has an EVII of 24.8250. With the survey the drill is chosen only after a bright spot, so the joint chance of drilling a dry hole falls from 0.650000 to 0.162500. How much of that fall is priced in the 24.8250?",

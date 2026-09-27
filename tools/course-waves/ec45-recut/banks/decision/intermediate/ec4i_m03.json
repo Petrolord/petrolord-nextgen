@@ -8,14 +8,14 @@
    "It quotes gross as net, overstating the survey's contribution by exactly its price; the net value is 16.8250."
   ],
   "answer": 3,
-  "explanation": "On the EKPAN lottery netEvii is evii less the cost: 24.8250 less 8.0000 is 16.8250. The 92.5750 is the whole decision with the survey bought, not the survey's own contribution."
+  "explanation": "On the EKPAN lottery netEvii is evii less the cost: 24.8250 less 8.0000 is 16.8250. The 92.5750 is the whole decision with the survey bought, which is more than the survey adds on its own."
  },
  {
   "prompt": "Why can the EKPAN lottery survey's price of 8.0000 be taken off before or after the readings are weighted with the same result, when a cost on one branch of a chance node cannot?",
   "options": [
    "Because the survey price is already discounted and a chance-branch cost is not, so the engine applies the two at different points in the rollback.",
    "The survey price sits on the branch that buys the survey and is paid whichever reading arrives, while a chance-branch cost is paid on that branch alone.",
-   "Because readings are signals rather than outcomes, and the engine skips any cost placed on a signal branch while weighting it.",
+   "Because readings are signals that are not outcomes themselves, and the engine skips any cost placed on a signal branch while weighting it.",
    "It cannot: taking 8.0000 off after weighting charges it 0.460000 plus 0.540000 times over, which overstates the price paid."
   ],
   "answer": 1,
@@ -74,7 +74,7 @@
    "16.8250 on the lottery, the net value, since the tie comes when the price has used up everything the survey adds."
   ],
   "answer": 1,
-  "explanation": "On the EKPAN lottery the branches are equal when the price is 100.5750 less 75.7500 = 24.8250. EVPI is the neutral price of a survey that never misreads, and the neutral price compares two branches, never a branch with zero."
+  "explanation": "On the EKPAN lottery the branches are equal when the price is 100.5750 less 75.7500 = 24.8250. EVPI is the neutral price of a survey that never misreads, and the neutral price compares two branches and never a branch with zero."
  },
  {
   "prompt": "At a survey cost of exactly 24.8250 the EKPAN lottery information tree's root still marks the acquisition. What does that mark carry?",

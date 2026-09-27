@@ -200,7 +200,7 @@ q(1, "An expert case hands over typed Analyzer percents and asks what the survey
 
 # ord 25
 q(2, "The likelihood 0.850000 is used as a posterior twice: by hand in the EKPAN lottery's Bayes step, and in the Analyzer as the Success chance given Bright spot, with the Dry hole chance given Bright spot typed so the pair still sums to 100. What goes wrong in each?",
- "By hand the drill after a bright spot is valued at 298.2500 instead of 207.7989; in the Analyzer the implied Success misses 0.350000 by far more than 0.005, so the value is withheld.",
+ "By hand the drill after a bright spot is valued at 298.2500 where 207.7989 is right; in the Analyzer the implied Success misses 0.350000 by far more than 0.005, so the value is withheld.",
  ["Both value the drill after a bright spot at 298.2500, because the Analyzer and the Bayes step put the same success chance against the same payoffs.",
   "Nothing goes wrong in either, because a likelihood equals its posterior whenever every column of the survey sums to 1.",
   "By hand nothing moves, because Bayes renormalises, and the Analyzer refuses the box as a likelihood typed where a posterior belongs."],
@@ -220,7 +220,7 @@ q(1, "The EKPAN lottery typed with posteriors of 64.7 and 9.7 percent gives an i
  ["The rounded one, because a delta of exactly zero is a stronger consistency result than the binary residue of 5.551115e-17 that the full-precision entry leaves behind.",
   "Both equally, because the Analyzer treats every entry whose delta is inside 0.005 as the same survey, and the gap between 19.89 and 19.84 is only rounding noise on the card.",
   "Neither, because a delta below 1e-12 falls inside the representation allowance and the Analyzer withholds what it cannot tell from zero."],
- "Six rounded EKPAN lottery rows pass the check with gross values from 18.41 to 20.51. The survey is the same in every row; a pass certifies agreement, not precision.")
+ "Six rounded EKPAN lottery rows pass the check with gross values from 18.41 to 20.51. The survey is the same in every row; a pass certifies agreement and says nothing of precision.")
 
 # ord 28
 q(3, "A colleague wants the Analyzer to print contradictingPosterior's unguarded 75.00 again, only capped at the 63.00 EVPI. What is wrong with that plan?",
@@ -249,7 +249,7 @@ q(0, "A write-up must report the value of the published threeByThree survey on t
 # ord 31
 q(2, "On a two-branch chance node paying 10 and 30, one probability is typed as the text \"0.5\" beside 0.5; on a second copy the probability on the branch paying 10 is left empty beside 1 on the branch paying 30. What does each node roll back to?",
  "20.0000 and 30.0000: text that reads as a number is converted, and an empty probability is read as 0, so the second node weights only the branch paying 30.",
- ["20.0000 and a refusal, since an empty probability leaves the sum short of 1 and the engine returns a message that names the node at fault instead of a value.",
+ ["20.0000 and a refusal, since an empty probability leaves the sum short of 1 and the engine returns a message that names the node at fault and gives no value.",
   "A refusal and 30.0000, because a probability typed as text is not a number and is refused in the same way as a payoff typed as \"20abc\", before any weighting.",
   "20.0000 both times, because an empty probability is shared out evenly with the other branch before the sum is checked."],
  "A cleared probability usually surfaces as a sum that is not 1; it passes only when the other branches already sum to 1, and then its branch vanishes from the weighting without a message.")
@@ -308,7 +308,7 @@ q(3, "Which sentence reports the EKPAN lottery's CSEM survey value completely?",
  ["Worth 19.84 gross and 11.84 net at a cost of 8.0000 against an EVPI card of 52.00, the survey's full value on the lottery.",
   "Worth 16.8250 at a cost of 8.0000, below a ceiling of 52.0000, which is also the price at which buying it becomes neutral.",
   "Worth 24.8250 net of its 8.0000 cost against a ceiling of 61.7143, the EVPI at the drill against farm-out switch."],
- "A value of information needs its actions, its tree and its consistency: 19.84 is right for two actions, and the neutral price is the gross 24.8250, not the net.")
+ "A value of information needs its actions, its tree and its consistency: 19.84 is right for two actions, and the neutral price is the gross 24.8250; the net plays no part in it.")
 
 # ord 39
 q(0, "Four entries reach the rollback: a payoff summary carrying NPV P90 185, NPV P50 390 and NPV P10 710 but no mean; a payoff typed \"20abc\"; a payoff left empty; and a cost typed \"abc\". Which does the engine refuse?",

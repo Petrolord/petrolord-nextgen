@@ -108,7 +108,7 @@ q(0, "deepAlternation rolls back to 6.0000 along a path that runs go, then up an
  ["The payoff of the most likely route through the tree, since the path follows the branches the rollback kept.",
   "What the company receives if it follows the optimal path at every decision, whichever outcomes arrive along the way.",
   "The worst the company can reach along the optimal path, once the costs of go and push have both been paid."],
- "Win after push pays 50.0000 before the costs of 6.0000 and 4.0000, and down pays -3.0000 before the 4.0000; the root weights these, so 6.0000 is a mean and the path is a plan, never a forecast.")
+ "Win after push pays 50.0000 before the costs of 6.0000 and 4.0000, and down pays -3.0000 before the 4.0000; the root weights these, so 6.0000 is a mean and the path is a plan and never a forecast.")
 
 # ord 14
 q(3, "The Decision Tree Builder's drawing labels OKRIKA's development chance node after a good appraisal with its own value, 375.0000. What happens if that figure is weighted into the appraisal node?",
@@ -116,7 +116,7 @@ q(3, "The Decision Tree Builder's drawing labels OKRIKA's development chance nod
  ["Nothing changes, because the drawing's label and the branch value are the same number whenever the branch lies on the optimal path.",
   "The good branch is overstated by OKRIKA's sale price of 95.0000, which the drawing adds to the development as its fallback.",
   "The appraisal branch comes out slightly low, because the label is rounded for display while the rollback weights the unrounded value."],
- "A node label is the value before the cost on the branch into it; the appraisal node takes 225.0000 after a good result and 25.0000 after a poor one, never 375.0000 or 56.0000.")
+ "A node label is the value before the cost on the branch into it; the appraisal node takes 225.0000 after a good result and 25.0000 after a poor one, and it never takes 375.0000 or 56.0000.")
 
 # ord 15
 q(2, "OKRIKA's appraisal cost of 18.0000 and development cost of 150.0000 are paid at different times, and its sale after a poor result is typed at 25.0000. What does the rollback check about either?",

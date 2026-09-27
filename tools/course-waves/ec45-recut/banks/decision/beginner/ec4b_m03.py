@@ -8,7 +8,7 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
 # ord 1
 q(3, "On the EKPAN tree the Builder shows Optimal EMV 105.0000, Recommended first move Drill, Next best alternative 37.7500 and Decision advantage 67.2500. What does the advantage measure?",
- "The EMV given up by taking the farm-out instead of the drill, a difference of averages that says nothing about how often the drill does worse.",
+ "The EMV given up by taking the farm-out over the drill, a difference of averages that says nothing about how often the drill does worse.",
  ["The money the drill makes over the farm-out on the one well drilled, since both moves face the same outcome.",
   "The drill node's value less the farm-out's, read off the drawing's node labels before the drill cost is charged.",
   "The drill's lead over the farm-out in only the outcomes where it does better, weighted across the 0.500000 of the probability that is not a dry hole."],
@@ -19,7 +19,7 @@ q(1, "Inside the EKPAN tree's drill, a reader compares Develop at 260.0000 with 
  "It finds the right branch at a value 90.0000 too high, and that inflated value would then be weighted into the drill node.",
  ["It finds the wrong branch, since Sell at 140.0000 beats Develop once the develop cost of 90.0000 has been paid.",
   "Nothing, since a decision node compares payoffs, and only a chance node needs branch values net of their costs.",
-  "Nothing, since a cost on a branch below a chance node is charged at the drill branch above it, alongside the 55.0000, rather than where it sits."],
+  "Nothing, since a cost on a branch below a chance node is charged at the drill branch above it, alongside the 55.0000, and not where it sits."],
  "A decision node only ever compares branch values: Develop is 260.0000 less 90.0000, which is 170.0000, against Sell's 140.0000. The drill chance node weights 170.0000.")
 
 # ord 3
@@ -36,7 +36,7 @@ q(2, "On the EKPAN tree, Sell under the marginal find reads onOptimalPath false.
  ["Sell is a poor outcome, since a false flag marks a branch whose value falls below the root EMV of 105.0000.",
   "Sell can never be reached, because the marginal find itself sits off the optimal path beneath the drill's chance node and so is never faced.",
   "Sell loses money once the drill cost of 55.0000 is charged against its 140.0000 as well, and a false flag is how the engine records that loss."],
- "A false flag says a branch is not reached under the best strategy, not that it is poor: Sell's 140.0000 is above 105.0000 and still off the path because Develop wins at 170.0000.")
+ "A false flag says a branch is not reached under the best strategy and says nothing about its quality: Sell's 140.0000 is above 105.0000 and still off the path because Develop wins at 170.0000.")
 
 # ord 5
 q(1, "Drill pays 40.0000 at a cost of 10.0000 and Farm out pays 30.0000. The same two branches are typed once with Drill first and once with Farm out first. What does the engine report?",
@@ -67,8 +67,8 @@ q(2, "Which plan states the EKPAN tree's optimal strategy?",
  "Drill; on a success take 420.0000; on a marginal find develop; on a dry hole accept -25.0000.",
  ["Drill; on a success take 420.0000; on a marginal find sell for 140.0000, the safer later choice; on a dry hole accept -25.0000.",
   "Drill and take 420.0000, since the optimal path is the single line from the root down to the best payoff.",
-  "Drill; on a marginal find develop; on a dry hole farm out instead for 0.0000 rather than accept the -25.0000."],
- "The path runs through one branch at each decision reached and every branch of each chance node on it, so it covers the dry hole at 0.500000. The farm-out is a root alternative, not a move available after drilling.")
+  "Drill; on a marginal find develop; on a dry hole farm out for 0.0000 and avoid the -25.0000."],
+ "The path runs through one branch at each decision reached and every branch of each chance node on it, so it covers the dry hole at 0.500000. The farm-out is a root alternative and no move available after drilling.")
 
 # ord 9
 q(1, "The published allNegative case has branches A at -55.0000 and B at -52.0000. What does the Builder show, and what does it mean?",

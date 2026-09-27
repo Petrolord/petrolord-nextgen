@@ -88,7 +88,7 @@
   "explanation": "Averaging over the summary before or after weighting by 0.350000 gives the same number, so a success worth exactly 420.0000 and one spread from 185 to 710 produce the same 105.0000."
  },
  {
-  "prompt": "To be conservative, an analyst types the summary's P90 of 185 as the EKPAN tree's success payoff instead of its mean. What does the tree then report?",
+  "prompt": "To be conservative, an analyst types the summary's P90 of 185 as the EKPAN tree's success payoff in place of its mean. What does the tree then report?",
   "options": [
    "The drill branch rises to 206.5000, because under the exceedance meaning a P90 is the high case of the summary.",
    "The EMV stays at 105.0000, since the engine reads a linked payoff at its mean whatever statistic is typed in.",

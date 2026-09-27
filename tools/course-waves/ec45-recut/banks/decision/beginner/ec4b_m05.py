@@ -83,7 +83,7 @@ q(3, "At success 0.100000 on the EKPAN lottery a reader sees Drill at -35.5000 a
  "The lottery's farm-out at 9.5000, the best of its three actions there.",
  ["Nothing, because a negative drill on the lottery means no action on that prospect is worth more than walking away.",
   "The lottery's drill at 9.0000, since the drill turns positive at that probability once the farm-out is taken off the table.",
-  "The lottery's farm-out at 19.0000, since a farm-out is valued at the switch probability rather than at the probability stated."],
+  "The lottery's farm-out at 19.0000, since a farm-out is valued at the switch probability in place of the probability stated."],
  "A negative drill says only that drilling is worse than nothing; the best action needs every branch compared at once, and at 0.100000 the EKPAN lottery's Farm out is 9.5000 against Walk away at 0.0000.")
 
 # ord 11

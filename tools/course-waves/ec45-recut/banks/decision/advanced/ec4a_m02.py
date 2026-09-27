@@ -96,7 +96,7 @@ q(2, "A reviewer expects the engine to refuse impossibleSignal, since the Never 
 
 # ord 12
 q(1, "At a Large chance of 0.300000 on the three outcome lottery, Drill alone is worth 161.0000 and Drill with partner 80.5000. Why can the partner never be the best action on this lottery?",
- "Its payoffs and cost are exactly half of Drill alone's, so it is worth half at every probability, and when half is negative Farm out, never below 0, beats it.",
+ "Its payoffs and cost are exactly half of Drill alone's, so it is worth half at every probability, and when half is negative Farm out, which stays at 0 or above, beats it.",
  ["It is dominated by Farm out in every outcome, since Farm out pays at least as much as the partner in Large, Medium and Dry alike.",
   "It is never best at the stated prior, but at a Large chance of 0.000000 it halves Drill alone's loss and so leads the other actions.",
   "It could lead if the engine's risk aversion setting were raised, since halving the Dry loss is exactly what a cautious operator pays for."],

@@ -140,7 +140,7 @@
    "The worst the company can reach along the optimal path, once the costs of go and push have both been paid."
   ],
   "answer": 0,
-  "explanation": "Win after push pays 50.0000 before the costs of 6.0000 and 4.0000, and down pays -3.0000 before the 4.0000; the root weights these, so 6.0000 is a mean and the path is a plan, never a forecast."
+  "explanation": "Win after push pays 50.0000 before the costs of 6.0000 and 4.0000, and down pays -3.0000 before the 4.0000; the root weights these, so 6.0000 is a mean and the path is a plan and never a forecast."
  },
  {
   "prompt": "The Decision Tree Builder's drawing labels OKRIKA's development chance node after a good appraisal with its own value, 375.0000. What happens if that figure is weighted into the appraisal node?",
@@ -151,7 +151,7 @@
    "The good branch is overstated by the whole 150.0000 development cost."
   ],
   "answer": 3,
-  "explanation": "A node label is the value before the cost on the branch into it; the appraisal node takes 225.0000 after a good result and 25.0000 after a poor one, never 375.0000 or 56.0000."
+  "explanation": "A node label is the value before the cost on the branch into it; the appraisal node takes 225.0000 after a good result and 25.0000 after a poor one, and it never takes 375.0000 or 56.0000."
  },
  {
   "prompt": "OKRIKA's appraisal cost of 18.0000 and development cost of 150.0000 are paid at different times, and its sale after a poor result is typed at 25.0000. What does the rollback check about either?",

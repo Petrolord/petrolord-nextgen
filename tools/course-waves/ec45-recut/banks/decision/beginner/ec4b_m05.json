@@ -103,7 +103,7 @@
   "options": [
    "Nothing, because a negative drill on the lottery means no action on that prospect is worth more than walking away.",
    "The lottery's drill at 9.0000, since the drill turns positive at that probability once the farm-out is taken off the table.",
-   "The lottery's farm-out at 19.0000, since a farm-out is valued at the switch probability rather than at the probability stated.",
+   "The lottery's farm-out at 19.0000, since a farm-out is valued at the switch probability in place of the probability stated.",
    "The lottery's farm-out at 9.5000, the best of its three actions there."
   ],
   "answer": 3,

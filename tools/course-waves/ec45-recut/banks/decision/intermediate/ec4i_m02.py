@@ -41,7 +41,7 @@ q(2, "Of the EKPAN lottery's 0.460000 chance of a bright spot, 0.162500 comes fr
 # ord 5
 q(0, "A reader divides the EKPAN lottery joint chance 0.297500 by the prior 0.350000 and gets 0.850000. What went wrong?",
  "The posterior divides the joint by the chance of the reading, 0.460000, giving 0.646739; dividing by the prior returns the likelihood the calculation started from.",
- ["Nothing went wrong: the hit rate and the lottery's posterior coincide whenever the joint chance is taken with the success outcome rather than the dry one.",
+ ["Nothing went wrong: the hit rate and the lottery's posterior coincide whenever the joint chance is taken with the success outcome and not the dry one.",
   "The joint should first be multiplied by the lottery's pSignal of 0.460000 and only then divided by the prior 0.350000.",
   "The divisor should be the lottery's dry hole prior of 0.650000, since a posterior compares the reading with the alternative outcome."],
  "Bayes on the EKPAN lottery is joint over pSignal: 0.297500 / 0.460000 = 0.646739. A reader who finishes holding the hit rate has divided by the wrong number.")
@@ -57,7 +57,7 @@ q(1, "Weight the EKPAN lottery's success posteriors, 0.646739 and 0.097222, by t
 # ord 7
 q(3, "Reading the EKPAN lottery likelihood 0.850000 as the chance of success after a bright spot, what is Drill worth after a bright spot, and which way does the error push?",
  "298.2500 against the posterior's 207.7989, an overstatement on the reading that argues for drilling.",
- ["207.7989 either way, because Drill is still the lottery's best action after a bright spot and its value is read from the tree rather than from the probability.",
+ ["207.7989 either way, because Drill is still the lottery's best action after a bright spot and its value is read from the tree and not from the probability.",
   "262.7989, the lottery's drill chance node, because 0.850000 enters the weighting before the drill cost of 55.0000 and never meets it.",
   "An understatement on the lottery, because 0.850000 leaves out the prior of 0.350000, which the posterior adds on top of the hit rate."],
  "The engine at probability 0.85 gives the EKPAN lottery's Drill 298.2500; at the posterior 0.646739 it is 207.7989. The error pushes the decision the way a hopeful team already leans.")

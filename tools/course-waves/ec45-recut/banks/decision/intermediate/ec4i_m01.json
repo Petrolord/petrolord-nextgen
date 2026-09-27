@@ -104,13 +104,13 @@
    "Dry hole, where the lottery's Drill at -80.0000 gives way to 0.0000, exactly as it does at the stated prior of 0.350000.",
    "Success, where the prior best Farm out gives way to Drill's 365.0000 against 95.0000 on the lottery.",
    "Both outcomes, since at a low success chance Walk away is the lottery's prior best action and each outcome favours something else.",
-   "Neither, since 13.5000 is the value of confirming the lottery's prior action rather than of changing it in some outcome."
+   "Neither, since 13.5000 is the value of confirming the lottery's prior action with no change to it in any outcome."
   ],
   "answer": 1,
   "explanation": "Left of the switch the EKPAN lottery's prior best is Farm out, so the only gain is on Success: 0.050000 x (365.0000 less 95.0000) = 13.5000. Walk away is never best on the lottery above 0."
  },
  {
-  "prompt": "A reader builds the EKPAN lottery's perfect-information table from the gross Drill payoffs, 420.0000 and -25.0000, instead of the net ones. What survives the error?",
+  "prompt": "A reader builds the EKPAN lottery's perfect-information table from the gross Drill payoffs, 420.0000 and -25.0000, in place of the net ones. What survives the error?",
   "options": [
    "The best action in each outcome survives and the value does not, because 420.0000 enters the weighting where 365.0000 belongs.",
    "Both survive, because the lottery's drill cost of 55.0000 is paid in every outcome and so cancels out of evWithPerfect.",

@@ -20,7 +20,7 @@ q(1, "Which line is the EKPAN lottery's value with the CSEM survey, before its c
  ["0.350000 x 207.7989 + 0.650000 x 9.2361, weighting each signal's value by the prior of the outcome it points to",
   "0.460000 x 207.7989 + 0.540000 x -36.7361, keeping Drill after No bright spot because Drill is best at the prior",
   "0.460000 x 207.7989 + 0.540000 x 9.2361 less 8.0000, taking the survey cost out before the value is called gross"],
- "Weight by pSignal, never by the prior, and take the best action after each signal: Farm out at 9.2361 after No bright spot. EVII is 100.5750 less 75.7500 = 24.8250.")
+ "Weight by pSignal and never by the prior, and take the best action after each signal: Farm out at 9.2361 after No bright spot. EVII is 100.5750 less 75.7500 = 24.8250.")
 
 # ord 3
 q(2, "An analyst reads the CSEM survey's 0.850000 as the chance of success after a bright spot on the EKPAN lottery. What does that do?",
@@ -92,7 +92,7 @@ q(1, "Working the EKPAN lottery by hand, an analyst's posteriors weighted by the
  ["A survey informative enough to move the average belief away from the prior, which is what gives it a value above zero.",
   "Inputs that contradict each other, which the tree engine would withhold in the way the Analyzer does.",
   "Rounding to six decimals, which the engine allows for within its 1e-6 tolerance on each probability column it checks."],
- "The check is 0.460000 x 0.646739 + 0.540000 x 0.097222 = 0.350000; a survey moves belief up on one reading and down on the other, never on average.")
+ "The check is 0.460000 x 0.646739 + 0.540000 x 0.097222 = 0.350000; a survey moves belief up on one reading and down on the other, and it never moves on average.")
 
 # ord 12
 q(3, "An analyst takes the EKPAN lottery's survey cost of 8.0000 off inside each signal branch and again at the information tree's root. What net value do they report?",
@@ -100,14 +100,14 @@ q(3, "An analyst takes the EKPAN lottery's survey cost of 8.0000 off inside each
  ["16.8250, since a constant taken off every signal branch cannot change which action wins after either signal, and so cannot change the money either.",
   "12.8250, since the inner charge is weighted by the signal chances and only about half of it survives to reach the root.",
   "0.8250, because charging the survey on every branch of the tree is the same as quoting it at 24.0000."],
- "The acquire branch becomes 84.5750 instead of 92.5750 against 75.7500. The actions do not change, but the money does: subtract the cost once, after the Bayes value.")
+ "The acquire branch becomes 84.5750, down from 92.5750, against 75.7500. The actions do not change, but the money does: subtract the cost once, after the Bayes value.")
 
 # ord 13
 q(2, "Why can the tree engine never withhold a value of information the way the VOI Analyzer does?",
  "It takes likelihoods and derives the posteriors itself, so its inputs cannot contradict the stated outcome chances.",
  ["It quietly rescales any posteriors that fail the check so that they return the stated prior before it values the survey on its own.",
   "It has a wider consistency tolerance than the Analyzer, so inputs that fail 0.005 there pass here.",
-  "It does withhold, but its withheld values print as 0.0000 in the table rather than as a missing card."],
+  "It does withhold, but its withheld values print as 0.0000 in the table and never as a missing card."],
  "Contradictory inputs are only reachable when posteriors are typed by hand, which the Analyzer allows and the tree engine does not.")
 
 # ord 14

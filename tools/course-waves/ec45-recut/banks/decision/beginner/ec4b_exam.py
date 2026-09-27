@@ -11,7 +11,7 @@ q(2, "A board says it cannot survive a loss of 80.0000 million USD on one well, 
  "The engine is risk neutral: it maximises expected money and has no utility function or risk aversion setting where that limit could be entered.",
  ["The loss is already priced in, because the EKPAN tree's dry hole of -25.0000 was discounted at a risk premium before it was typed into its terminal.",
   "The limit bears on the farm-out as well, so it lowers both branch values together and leaves their order at the root unchanged.",
-  "The EKPAN tree's drill cost of 55.0000 is charged before weighting, which caps the loss the rollback can see at the cost rather than at the whole dry hole outcome."],
+  "The EKPAN tree's drill cost of 55.0000 is charged before weighting, which caps the loss the rollback can see at the cost and leaves the whole dry hole outcome out."],
  "On the EKPAN tree the drill loses money with probability 0.500000 and still wins, 105.0000 against 37.7500, because the rollback ranks branches by their averages alone.")
 
 # ord 2
@@ -81,7 +81,7 @@ q(0, "The published chanceRootWithBranchCosts tree has a chance node at its root
 # ord 10
 q(1, "Subtracting every cost on chanceRootWithBranchCosts once, after weighting, gives -8.6000 against the engine's -3.0000. Where does the difference come from?",
  "The hand figure charges the storm's cost in the calm and the calm's cost in the storm.",
- ["It weights each cost by the other branch's probability, so the storm cost of 8.0000 is counted at 0.600000 instead of 0.400000.",
+ ["It weights each cost by the other branch's probability, so the storm cost of 8.0000 is counted at 0.600000 where 0.400000 belongs.",
   "It is the engine rounding each cost to four decimals before weighting, a step that a hand calculation carried at full precision avoids.",
   "It counts the chance root's own cost twice, because the engine charges a root cost once and the hand calculation applies it on both branches."],
  "A cost is paid only when its branch occurs: 2.0000 only in the calm and 8.0000 only in the storm, and -8.6000 is never refused because no engine ever sees a hand calculation.")
@@ -91,7 +91,7 @@ q(3, "A reviewer rolls back deepAlternation with its two costs, 4.0000 on go and
  "The push cost was charged on the down branch too; paid only on up, weighted 0.500000, it costs the root half as much and the root is 6.0000.",
  ["Nothing went wrong, since costs are additive and the order in which a hand rollback subtracts them cannot change the value at the root.",
   "The push cost should have been left out, because once push carries its cost of 6.0000 the decision beneath up switches to hold instead.",
-  "The costs should have come off after weighting at every level rather than at the root, which is what the engine does to reach 6.0000."],
+  "The costs should have come off after weighting at every level and never at the root, which is what the engine does to reach 6.0000."],
  "Push is paid only under up: 0.500000 x 23.0000 + 0.500000 x -3.0000 = 10.0000, less 4.0000 on go is 6.0000; chanceRootWithBranchCosts shows the same error at -8.6000 against -3.0000.")
 
 # ord 12
@@ -138,7 +138,7 @@ q(2, "The Builder's cards for OKRIKA read Optimal EMV 87.0000 and Recommended fi
 q(0, "On the published allNegative case the Builder names B with a decision advantage of 3.0000 over A. What does that advantage tell a reader?",
  "Only that B loses 3.0000 less than A on average, and nothing about whether either should be taken.",
  ["That B earns 3.0000 on average, since the card reports the winner's margin above a zero floor.",
-  "That B is the safer branch, because the advantage is worked out on the worst outcome of each branch rather than on their averages.",
+  "That B is the safer branch, because the advantage is worked out on the worst outcome of each branch and ignores their averages.",
   "That the engine found both branches negative, added a walk-away at 0.0000, and reported B's margin over A as a fallback."],
  "The engine returns EMV -52.0000 against -55.0000; it has no zero floor and never adds a walk-away, so the recommendation is an instruction to lose 52.0000 on average.")
 
@@ -295,7 +295,7 @@ q(2, "The expected value of perfect information on the EKPAN lottery is 52.0000 
  "On the EKPAN lottery at 0.350000 knowing the outcome gives 0.350000 x 365.0000 + 0.650000 x 0.0000 = 127.7500 against 75.7500, a difference of 52.0000; the peak of 61.7143 sits on the switch this tier solves.")
 
 # ord 37
-q(0, "The VOI Analyzer's second action is Do Not, with every payoff 0. Set beside the EKPAN lottery's three actions, which one is it, and what does offering it instead of the farm-out do?",
+q(0, "The VOI Analyzer's second action is Do Not, with every payoff 0. Set beside the EKPAN lottery's three actions, which one is it, and what does offering it in place of the farm-out do?",
  "It is Walk away, which the farm-out dominates, so the Analyzer keeps the alternative that is never best and drops the one that can be.",
  ["It is the farm-out with its payoffs cleared, so the Analyzer still values the same three actions, with one of them simply set to 0.0000.",
   "It is Drill at no cost, the Analyzer's way of pricing the decision without the EKPAN lottery's drill cost of 55.0000.",
@@ -331,7 +331,7 @@ q(0, "OKRIKA's appraisal cost of 18.0000 is paid today and its development cost 
  "Every cost and payoff must already be discounted to the date of the root decision, because the rollback takes them at face value.",
  ["The development cost must be typed undiscounted, since the engine discounts each deeper level of the tree by one stage before weighting it.",
   "Nothing about timing, because costs paid in different years cancel out of any comparison between branches that contain them.",
-  "The appraisal cost must be charged at the root instead of on its branch, so that money paid today stays apart from later money."],
+  "The appraisal cost must be charged at the root and kept off its branch, so that money paid today stays apart from later money."],
  "The engine has no rate and no date in any node, so a tree is only as well discounted as its typed numbers; the EKPAN tree's develop cost of 90.0000 after a marginal find needs the same care.")
 
 # ord 42

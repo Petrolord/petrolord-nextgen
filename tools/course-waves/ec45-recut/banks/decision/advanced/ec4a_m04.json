@@ -107,7 +107,7 @@
    "The posteriors after each signal, 0.646739 and 0.353261 after a bright spot, since those are the numbers the action is chosen on."
   ],
   "answer": 1,
-  "explanation": "The survey passes because Success reads 0.850000 / 0.150000 and Dry hole 0.250000 / 0.750000. A Dry hole column summing to 1.200000 is refused with the outcome named; the signal chances and posteriors are derived, never typed."
+  "explanation": "The survey passes because Success reads 0.850000 / 0.150000 and Dry hole 0.250000 / 0.750000. A Dry hole column summing to 1.200000 is refused with the outcome named; the signal chances and posteriors are derived and are never typed."
  },
  {
   "prompt": "The EKPAN lottery is typed into the VOI Analyzer with Bright spot at 46.000000 percent and No bright spot at 64 percent. What does the Analyzer show?",

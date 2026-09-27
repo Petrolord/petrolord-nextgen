@@ -8,7 +8,7 @@
    "Optimal EMV and Recommended first move; the other two are arithmetic on the rollback."
   ],
   "answer": 3,
-  "explanation": "On the EKPAN tree, next best is the largest other root branch value, Farm out at 37.7500, and the advantage is 105.0000 less 37.7500; the brief recomputes the saved tree rather than storing the Builder's answer, so the two agree on the numbers."
+  "explanation": "On the EKPAN tree, next best is the largest other root branch value, Farm out at 37.7500, and the advantage is 105.0000 less 37.7500; the brief recomputes the saved tree and stores none of the Builder's answers, so the two agree on the numbers."
  },
  {
   "prompt": "OKRIKA's root branches, in the order listed, are Appraise 87.0000, Develop now 33.6000 and Sell now 48.0000. What does the brief print for Next best alternative and Decision advantage?",

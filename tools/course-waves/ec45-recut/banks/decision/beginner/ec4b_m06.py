@@ -27,11 +27,11 @@ q(0, "On OKRIKA, the development chance node after a poor appraisal sits under a
  "A refusal of the whole tree naming that node and printing 0.900000, with no EMV for Appraise, Develop now or Sell now.",
  ["The root at 87.0000 unchanged, since that development reads onOptimalPath false and the sale at 25.0000 is what the appraisal node weights.",
   "Sell now at 48.0000, the only root branch that passes through no chance node, with the other two root branches reported as refused.",
-  "The root with that node's probabilities rescaled to sum to 1, since a node below a branch the rollback does not take is repaired quietly rather than refused."],
+  "The root with that node's probabilities rescaled to sum to 1, since a node below a branch the rollback does not take is fixed quietly and escapes refusal."],
  "The sum is checked at every chance node however deep, taken or not: the rollback still values that development at -94.0000 before the decision sets it against the sale at 25.0000. A refusal returns no EMV for any part of the tree, and the engine never rescales.")
 
 # ord 4
-q(2, "A reader types the EKPAN tree's success payoff as 185, the P90 (the low case) of its Monte Carlo NPV summary, instead of linking the summary whose mean is 420. What does the tree read?",
+q(2, "A reader types the EKPAN tree's success payoff as 185, the P90 (the low case) of its Monte Carlo NPV summary, in place of linking the summary whose mean is 420. What does the tree read?",
  "37.7500 with Farm out first, where the linked summary would have given the tree 105.0000 with Drill.",
  ["105.0000 with Drill, since the P90 is the cautious figure and a drill on the tree that survives it survives the mean as well.",
   "94.5000 with Drill, since 185 sits near the P50 and the tree moves only part way.",

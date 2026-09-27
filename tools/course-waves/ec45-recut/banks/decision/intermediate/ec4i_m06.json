@@ -19,7 +19,7 @@
    "0.460000 x 207.7989 + 0.540000 x 9.2361 less 8.0000, taking the survey cost out before the value is called gross"
   ],
   "answer": 1,
-  "explanation": "Weight by pSignal, never by the prior, and take the best action after each signal: Farm out at 9.2361 after No bright spot. EVII is 100.5750 less 75.7500 = 24.8250."
+  "explanation": "Weight by pSignal and never by the prior, and take the best action after each signal: Farm out at 9.2361 after No bright spot. EVII is 100.5750 less 75.7500 = 24.8250."
  },
  {
   "prompt": "An analyst reads the CSEM survey's 0.850000 as the chance of success after a bright spot on the EKPAN lottery. What does that do?",
@@ -118,7 +118,7 @@
    "Rounding to six decimals, which the engine allows for within its 1e-6 tolerance on each probability column it checks."
   ],
   "answer": 1,
-  "explanation": "The check is 0.460000 x 0.646739 + 0.540000 x 0.097222 = 0.350000; a survey moves belief up on one reading and down on the other, never on average."
+  "explanation": "The check is 0.460000 x 0.646739 + 0.540000 x 0.097222 = 0.350000; a survey moves belief up on one reading and down on the other, and it never moves on average."
  },
  {
   "prompt": "An analyst takes the EKPAN lottery's survey cost of 8.0000 off inside each signal branch and again at the information tree's root. What net value do they report?",
@@ -129,7 +129,7 @@
    "8.8250, where the net value is 16.8250, because the weights sum to 1 and the inner charges add one more 8.0000."
   ],
   "answer": 3,
-  "explanation": "The acquire branch becomes 84.5750 instead of 92.5750 against 75.7500. The actions do not change, but the money does: subtract the cost once, after the Bayes value."
+  "explanation": "The acquire branch becomes 84.5750, down from 92.5750, against 75.7500. The actions do not change, but the money does: subtract the cost once, after the Bayes value."
  },
  {
   "prompt": "Why can the tree engine never withhold a value of information the way the VOI Analyzer does?",
@@ -137,7 +137,7 @@
    "It quietly rescales any posteriors that fail the check so that they return the stated prior before it values the survey on its own.",
    "It has a wider consistency tolerance than the Analyzer, so inputs that fail 0.005 there pass here.",
    "It takes likelihoods and derives the posteriors itself, so its inputs cannot contradict the stated outcome chances.",
-   "It does withhold, but its withheld values print as 0.0000 in the table rather than as a missing card."
+   "It does withhold, but its withheld values print as 0.0000 in the table and never as a missing card."
   ],
   "answer": 2,
   "explanation": "Contradictory inputs are only reachable when posteriors are typed by hand, which the Analyzer allows and the tree engine does not."

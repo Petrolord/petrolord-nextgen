@@ -67,7 +67,7 @@ q(2, "From accuracy 0.650000 upward the symmetric survey on the EKPAN lottery is
  "The actions are fixed across those rows, Drill after a success reading and Farm out after a dry one, so the value is four joint terms each a straight line in accuracy.",
  ["The posteriors rise in equal steps with accuracy, so the Drill value after a success reading grows by the same amount each row.",
   "The evii is a fixed fraction of the EVPI of 52.0000, and that fraction grows in proportion to accuracy.",
-  "The engine interpolates between the switch accuracy and a perfect reading instead of running Bayes on each row."],
+  "The engine interpolates between the switch accuracy and a perfect reading and skips Bayes on each row."],
  "The terms are 0.350000 x a x 365.0000, 0.650000 x (1 less a) x -80.0000 and 0.350000 x (1 less a) x 95.0000. The posteriors are not linear: 0.556818, 0.617647, 0.682927.")
 
 # ord 9

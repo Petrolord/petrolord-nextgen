@@ -84,7 +84,7 @@ q(1, "The Bayes calculation behind EVII checks the likelihoods of the EKPAN lott
  ["Each signal's likelihoods across the outcomes, so a bright spot's 0.850000 given Success and 0.250000 given a dry hole must together sum to 1.",
   "The chances of the signals themselves, 0.460000 for a bright spot and 0.540000 for none, which the engine checks before any posterior.",
   "The posteriors after each signal, 0.646739 and 0.353261 after a bright spot, since those are the numbers the action is chosen on."],
- "The survey passes because Success reads 0.850000 / 0.150000 and Dry hole 0.250000 / 0.750000. A Dry hole column summing to 1.200000 is refused with the outcome named; the signal chances and posteriors are derived, never typed.")
+ "The survey passes because Success reads 0.850000 / 0.150000 and Dry hole 0.250000 / 0.750000. A Dry hole column summing to 1.200000 is refused with the outcome named; the signal chances and posteriors are derived and are never typed.")
 
 # ord 11
 q(0, "The EKPAN lottery is typed into the VOI Analyzer with Bright spot at 46.000000 percent and No bright spot at 64 percent. What does the Analyzer show?",

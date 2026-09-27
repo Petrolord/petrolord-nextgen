@@ -12,7 +12,7 @@ q(3, "Decision Studio briefs the EKPAN tree as Optimal EMV 105.0000, Recommended
  ["All four, since the brief re-rolls the saved tree at brief time and reads each of the rows directly off the engine's result.",
   "Only the Recommended first move, since Optimal EMV is copied from the answer the Decision Tree Builder stored with the tree.",
   "Every row except the advantage, since the engine returns Next best alternative as the second branch listed at the root."],
- "On the EKPAN tree, next best is the largest other root branch value, Farm out at 37.7500, and the advantage is 105.0000 less 37.7500; the brief recomputes the saved tree rather than storing the Builder's answer, so the two agree on the numbers.")
+ "On the EKPAN tree, next best is the largest other root branch value, Farm out at 37.7500, and the advantage is 105.0000 less 37.7500; the brief recomputes the saved tree and stores none of the Builder's answers, so the two agree on the numbers.")
 
 # ord 2
 q(1, "OKRIKA's root branches, in the order listed, are Appraise 87.0000, Develop now 33.6000 and Sell now 48.0000. What does the brief print for Next best alternative and Decision advantage?",
