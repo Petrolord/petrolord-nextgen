@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "The EKPAN lottery is typed into the VOI Analyzer at full precision: Bright spot 46.000000 percent, success given Bright spot 64.673913 percent, success given No bright spot 9.722222 percent, against a stated success chance of 35 percent. What does the consistency check compute?",
+  "options": [
+   "The sum of the two posteriors, which must reach 100 percent before the Analyzer will print any value of information for the survey.",
+   "The indicator weighted average of the two posteriors, 0.297500 plus 0.052500, which is 0.350000 and leaves only binary residue as the delta.",
+   "The likelihoods recovered from the posteriors, 0.850000 and 0.250000, each compared in turn against the stated success chance of 0.350000.",
+   "The posterior after No bright spot read alone against the stated chance, because it is the more likely of the two readings on this survey."
+  ],
+  "answer": 1,
+  "explanation": "Implied success is the sum over readings of each reading's chance times its posterior; on the EKPAN lottery 0.460000 x 0.646739 + 0.540000 x 0.097222 returns 0.350000 with a delta of 5.551115e-17, so the entries are consistent and the gross voi reads 19.84."
+ },
+ {
+  "prompt": "IRRI is the Analyzer's default study with both Positive Seismic and Negative Seismic typed as 20 / 80 percent. What does the repaired Analyzer show?",
+  "options": [
+   "A gross voi of -15.00 and a netVoi card of -25.00, because after either reading the best action is Do Not and the with side comes to 0.",
+   "A refusal naming the sum in percent, since two indicators typed with identical outcome chances do not form a distribution at all.",
+   "Every card at 0.00, since a withheld value is printed as zero so that the verdict sentence can still call the survey value neutral.",
+   "EMV without information 15.00 and EVPI 63.00, with every other card and the diagram withheld."
+  ],
+  "answer": 3,
+  "explanation": "The readings imply a 0.200000 success chance against a stated 0.300000, so consistent is false and withheld is true; the -15.00 and -25.00 are pre-repair cards and history, and the two surviving cards use only the stated outcome chances."
+ },
+ {
+  "prompt": "Why does IRRI imply a success chance of 0.200000 whatever its indicator chances of 40 and 60 percent are typed as?",
+  "options": [
+   "Both readings carry a success chance of 20 percent, and a weighted average of equal numbers returns that number for any weights.",
+   "The engine substitutes the smallest outcome chance typed on the form whenever the entries disagree with the stated chances.",
+   "The indicator chances enter only the value of information, and the check reads the posteriors of the first indicator listed, Positive Seismic.",
+   "The indicator chances are rescaled until they reproduce a stated chance, and 20 percent is the closest those entries reach."
+  ],
+  "answer": 0,
+  "explanation": "Implied success is 40 percent of 20 percent plus 60 percent of 20 percent, which is 0.200000; the delta against the stated 0.300000 is -0.100000, far past the 0.005 allowance."
+ },
+ {
+  "prompt": "The published justInsideTolerance case states 0.300000 / 0.700000 and implies 0.305000 / 0.695000. What does the repaired engine report?",
+  "options": [
+   "Consistent false, because 0.305 - 0.3 is 0.0050000000000000044 in binary, above 0.005, which is the result recorded as finding D1.",
+   "Consistent false, because the allowance is relative, half a percent of the stated 0.300000, and a delta of 5.000000e-3 is far beyond it.",
+   "Consistent true, because the boundary is inclusive and a 1e-12 allowance absorbs the binary residue in 0.305 - 0.3.",
+   "Consistent true with a boundary mark beside the cards, showing the delta sits exactly on the half percent line."
+  ],
+  "answer": 2,
+  "explanation": "Before the EC4-0 repair the engine had no allowance and called this case inconsistent; D1 is resolved, a delta of exactly 5.000000e-3 now reads consistent true, and nothing grades it as sitting on the line."
+ },
+ {
+  "prompt": "On the Analyzer defaults the gross voi is 33.00 at an implied success chance of 0.300000 and 34.75 at 0.305000 (consistentAtHalfPercent), while the pre-repair 35.10 at 0.306000 is now withheld. What does the climb from 33.00 to 34.75 show?",
+  "options": [
+   "The typed posteriors describe a sharper survey, and posteriors further from the prior always carry more information.",
+   "Part of an accepted value can be extra success the stated chances never granted, so a pass does not certify the value.",
+   "The allowance rescales the posteriors onto the stated chances before valuing, so 34.75 includes a correction the engine adds.",
+   "It is binary residue from the 1e-12 allowance, so 33.00 and 34.75 describe the same survey to two decimals."
+  ],
+  "answer": 1,
+  "explanation": "The value climbs with the contradiction inside the half point: 34.75 carries the same kind of error as the withheld 35.10, only less of it, and nudging entries under the line does not make them agree."
+ },
+ {
+  "prompt": "On the EKPAN lottery, posteriors typed 65.000000 / 10.000000 and 65.000000 / 9.000000, both with Bright spot at 46.000000 percent, print the same gross voi of 20.51. Why?",
+  "options": [
+   "After No bright spot the Analyzer's best action is Do Not at either posterior, and Do Not pays 0 at any success chance.",
+   "The Analyzer rounds each typed posterior to the nearest 5 percent before valuing, so 9 and 10 percent become one entry.",
+   "Both rows pass the half percent check, and every accepted row prints the value the full precision entries would have given.",
+   "A posterior below 10 percent is treated as a dry reading and valued as if the success chance after it were exactly zero."
+  ],
+  "answer": 0,
+  "explanation": "The posterior after No bright spot multiplies a branch worth nothing, so the card cannot see it; on the EKPAN lottery full precision prints 19.84, so 20.51 overvalues the survey by rounding alone."
+ },
+ {
+  "prompt": "The EKPAN lottery typed with posteriors rounded to 64.700000 and 9.700000 gives an implied success chance of 0.350000 and a delta of 0.000000e+0. What does that result certify?",
+  "options": [
+   "That the entries match the survey, so 19.89 is the survey's value and the 19.84 printed at full precision is the approximation.",
+   "That the posteriors were derived by Bayes, since only posteriors derived from likelihoods can land on a delta of exactly zero.",
+   "That the value is exact to two decimals, since a gross voi can be off only when the delta is not zero.",
+   "Only that the entries average back to the stated chance; the card still reads 19.89 against 19.84 at full precision."
+  ],
+  "answer": 3,
+  "explanation": "The check compares implied against stated chances and nothing else: on the EKPAN lottery, rounding to one decimal happened to average back exactly while still moving the gross voi from 19.84 to 19.89."
+ },
+ {
+  "prompt": "Having seen 65.000000 / 9.000000 print the same 20.51 as 65.000000 / 10.000000 on the EKPAN lottery, a user types the posterior after No bright spot as 8.000000 percent. What does the Analyzer show?",
+  "options": [
+   "20.51 again, since the posterior after No bright spot multiplies a Do Not branch worth 0 and cannot move any output of the Analyzer.",
+   "18.46, since lowering either posterior lowers the value of information, as the row typed 64.000000 / 10.000000 already shows.",
+   "EMV without information 75.75 and EVPI 52.00 only, because the implied success chance falls to 0.342200.",
+   "A refusal saying the outcome chances given No bright spot fail to sum to 100 percent, since 8 percent sits below the allowance."
+  ],
+  "answer": 2,
+  "explanation": "On the EKPAN lottery the delta of -7.800000e-3 is past the 0.005 allowance, so the value is withheld: a posterior that never reaches the value still breaks the agreement every value depends on. The entry is still a distribution, so it is withheld and not refused."
+ },
+ {
+  "prompt": "With the EKPAN lottery posteriors at 65.000000 and 10.000000, Bright spot typed at 45.000000 percent passes at an implied 0.347500, and typed at 47.000000 percent fails at 0.358500. Why does the indicator chance move the implied prior fastest?",
+  "options": [
+   "It weights both posteriors at once, shifting weight from one reading's success chance to the other's.",
+   "It is the only entry the check reads, because the posteriors enter the value of information and never the implied prior.",
+   "Indicator chances are typed in whole percents and posteriors to six decimals, so each step on an indicator chance is coarser.",
+   "The Analyzer rescales the indicator chances to sum to 100 after every edit, which doubles the effect of any change to one of them."
+  ],
+  "answer": 0,
+  "explanation": "On the EKPAN lottery a point of indicator chance moves weight across the whole gap between 65 and 10 percent, so 45.000000 prints 18.41 and 47.000000 is withheld; rounding 65 up to 66.000000 fails too, at 0.357600."
+ },
+ {
+  "prompt": "Before the EC4-0 repair the published contradictingPosterior case printed a gross voi of 75.00 beside an EVPI card of 63.00. Why was that value impossible?",
+  "options": [
+   "The survey cost of 10.0000 was added to the with side where it should have been subtracted, which lifted the gross value past its ceiling.",
+   "The with side averaged to a 0.420000 success chance against a stated 0.300000, so the subtraction included the uplift of believing in a better prospect.",
+   "The EVPI card came from the two action form and the voi from a lottery with a farm-out, so the two numbers described different lotteries.",
+   "EVPI caps expected value with information and not the value of information, so 75.00 above 63.00 was ordinary arithmetic on consistent inputs."
+  ],
+  "answer": 1,
+  "explanation": "Information derived by Bayes satisfies 0 <= evii <= evpi; 75.00 set a 0.420000 prospect after the survey against a 0.300000 prospect before it. It is history, and the repaired Analyzer withholds the value."
+ },
+ {
+  "prompt": "A reviewer proposes fixing the pre-repair Analyzer by capping any value of information at EVPI. Why does that not fix it?",
+  "options": [
+   "Clipping would change the verdict sentence, which is computed from the unclipped value, so the card and the sentence would disagree.",
+   "EVPI is itself withheld whenever the inputs contradict each other, so there would be no ceiling left to clip the value against.",
+   "Capping 75.00 at 63.00 is what the repaired Analyzer already does, so the proposal duplicates the repair rather than adding to it.",
+   "Contradictions also land below the ceiling: the EKPAN lottery typed with indicators at 56 and 44 percent printed 40.62 under an EVPI of 52.00."
+  ],
+  "answer": 3,
+  "explanation": "The honest value on those EKPAN lottery entries is 19.84, and indicatorChancesAboveHundred printed 33.00, the very card the consistent defaults print; a test on the output catches only the loudest cases, so the repair tests the inputs."
+ },
+ {
+  "prompt": "The published pricey case prints a netVoi card of -17.00 today, and IRRI printed a gross voi of -15.00 before the repair. What separates the two?",
+  "options": [
+   "Nothing of substance: a misleading survey has a negative gross value just as an expensive survey has a negative net value.",
+   "The first is a pre-repair card and history, while the second is what the repaired Analyzer prints for IRRI today.",
+   "The first says a price of 50.0000 exceeds a gross value of 33.00; the second could only come from typed inputs that contradict the stated prior.",
+   "Both say the survey costs more than it adds, and they differ only in whether the survey cost of 10.0000 was deducted."
+  ],
+  "answer": 2,
+  "explanation": "A decision maker can always ignore a Bayes signal, so evii is at least 0, and uselessSignal sits on that floor at 0.0000; a negative net value says the price is too high, a negative gross value says the inputs disagree."
+ },
+ {
+  "prompt": "posteriorsAboveHundred types outcome chances given Positive Seismic that sum to 130 percent; IRRI types two readings whose outcome chances each sum to 100. How does the repaired Analyzer treat each?",
+  "options": [
+   "It refuses the first before computing anything, and withholds the value on IRRI while still showing 15.00 and 63.00.",
+   "It withholds both, keeping EMV without information and EVPI, because every contradiction in typed percents is reported the same way.",
+   "It clips the first to 100 percent and values it at the pre-repair 69.00, and it withholds the value of information on IRRI.",
+   "It withholds the first with a warning naming 130 percent, and refuses IRRI because its two readings are typed identically."
+  ],
+  "answer": 0,
+  "explanation": "A refusal says the typed numbers are not chances at all, with the message \"Outcome chances given \"Positive Seismic\" sum to 130 percent, expected 100\"; a withholding says they are chances that cannot all be true together."
+ },
+ {
+  "prompt": "Why can typed inputs contradict each other in the VOI Analyzer when the Decision Tree Builder's information tree cannot?",
+  "options": [
+   "The Builder rounds posteriors to six decimals and the Analyzer to two, and only the coarser rounding can break the half percent check.",
+   "The Analyzer takes posteriors as typed, while the Builder derives them from likelihoods and the stated prior, so they agree by construction.",
+   "The Builder refuses any survey whose readings disagree with the prior, while the Analyzer accepts them and repairs the posteriors afterwards.",
+   "The Analyzer takes likelihoods where the Builder takes posteriors, and a likelihood typed in is compared against the wrong prior."
+  ],
+  "answer": 1,
+  "explanation": "Averaging Bayes posteriors over the readings returns the prior, as the EKPAN lottery's 0.460000 x 0.646739 + 0.540000 x 0.097222 = 0.350000 shows; nothing ties typed posteriors to outcome chances typed two boxes earlier, which is why the IRRI warning points to the Builder."
+ },
+ {
+  "prompt": "Before the repair, indicatorChancesAboveHundred, with indicator chances summing to 110 percent, printed a gross voi of 33.00. What made that value dangerous, and what happens to the entry today?",
+  "options": [
+   "Nothing, since rescaling indicator chances by their sum leaves the posteriors alone, and the Analyzer still prints 33.00.",
+   "It sat inside the half percent allowance, so the check passed it, and today the allowance is narrowed to catch it.",
+   "It contradicted the stated chances, so today the value is withheld and EMV without information 15.00 and EVPI 63.00 remain on the screen.",
+   "It matched the card the consistent defaults print; today it is refused with \"Indicator chances sum to 110 percent, expected 100\"."
+  ],
+  "answer": 3,
+  "explanation": "A 110 percent indicator set is not a distribution, so it is refused outright and never reaches the consistency check; an output test would have passed 33.00, which sat under 63.00."
+ }
+]

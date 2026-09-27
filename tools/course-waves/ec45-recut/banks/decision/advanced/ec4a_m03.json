@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "Decision Studio briefs the EKPAN tree as Optimal EMV 105.0000, Recommended first move Drill, Next best alternative 37.7500 and Decision advantage 67.2500. Which rows are engine returns?",
+  "options": [
+   "All four, since the brief re-rolls the saved tree at brief time and reads each of the rows directly off the engine's result.",
+   "Only the Recommended first move, since Optimal EMV is copied from the answer the Decision Tree Builder stored with the tree.",
+   "Every row except the advantage, since the engine returns Next best alternative as the second branch listed at the root.",
+   "Optimal EMV and Recommended first move; the other two are arithmetic on the rollback."
+  ],
+  "answer": 3,
+  "explanation": "On the EKPAN tree, next best is the largest other root branch value, Farm out at 37.7500, and the advantage is 105.0000 less 37.7500; the brief recomputes the saved tree rather than storing the Builder's answer, so the two agree on the numbers."
+ },
+ {
+  "prompt": "OKRIKA's root branches, in the order listed, are Appraise 87.0000, Develop now 33.6000 and Sell now 48.0000. What does the brief print for Next best alternative and Decision advantage?",
+  "options": [
+   "33.6000 and a larger advantage, since next best is the branch listed directly after the recommended first move.",
+   "48.0000 and 39.0000, since Sell now is the largest other branch value even though it is listed third.",
+   "25.0000, the sell value after a poor appraisal, the fallback inside the Appraise branch.",
+   "183.6000 for Develop now, which places Develop now first and Appraise second, so the advantage runs against Appraise."
+  ],
+  "answer": 1,
+  "explanation": "Next best means the largest other value wherever it sits in the list; 87.0000 less 48.0000 is 39.0000, and taking the second branch listed would overstate the advantage."
+ },
+ {
+  "prompt": "A reader checks OKRIKA's brief against the Decision Tree Builder's drawing, whose labels show each node's own EMV. Develop now's chance node carries 183.6000. What goes wrong if that label is taken as the branch value?",
+  "options": [
+   "Its 150.0000 cost is left off, so Develop now appears to be the best move with Appraise second, and the advantage runs the wrong way.",
+   "Nothing goes wrong, because the drawing labels each node after the cost on the branch into it, which is the value the brief uses.",
+   "Only Appraise's figure shifts, to 105.0000 before its 18.0000 cost, widening the advantage without changing the recommended move.",
+   "The label is rounded for drawing, so the reader's advantage differs from the brief's in the decimals while the rows otherwise agree."
+  ],
+  "answer": 0,
+  "explanation": "Develop now's branch value is 183.6000 less 150.0000, which is 33.6000; a node label is the value before the cost on the branch leading into it."
+ },
+ {
+  "prompt": "The EKPAN information tree, built on the EKPAN lottery with a survey cost of 8.0000, briefs as Optimal EMV 92.5750, Acquire CSEM survey, Next best alternative 75.7500 and Decision advantage 16.8250. What is the advantage?",
+  "options": [
+   "The survey's gross value before its cost of 8.0000, which is why the tree still chooses to acquire the survey at that price.",
+   "The value of perfect information on the EKPAN lottery less the survey's cost, the most the survey could still add.",
+   "The survey's net value, since the acquire branch is EV with information less the cost and the other branch is the prior EMV.",
+   "The chance weighted gain from the No bright spot reading alone, the one reading that moves the action away from Drill."
+  ],
+  "answer": 2,
+  "explanation": "On the EKPAN information tree, 100.5750 less 8.0000 is 92.5750, and 92.5750 less 75.7500 is 16.8250, exactly netEvii; the gross value is 24.8250, the price at which the two root branches would tie."
+ },
+ {
+  "prompt": "The published equalEmvTie has root branches A 30.0000, B 30.0000 and C 29.9990, and the brief prints Recommended first move A with a Decision advantage of 0.0000. Why A?",
+  "options": [
+   "It is listed first, and the engine replaces the best branch only when a later one is strictly greater.",
+   "A was larger before rounding, and the advantage of 0.0000 is float residue left by subtracting two nearly equal values.",
+   "C at 29.9990 sits closer to B, and the engine breaks a tie against whichever tied branch has the nearer runner up.",
+   "The brief picks the branch with the least exposure among tied values, and A carries the smallest downside of the three."
+  ],
+  "answer": 0,
+  "explanation": "A and B are exactly equal, so an advantage of 0.0000 beside a named first move is a tie reported as a recommendation; the recommendation comes from listing order and says nothing about which branch is better."
+ },
+ {
+  "prompt": "The brief prints chanceRootWithBranchCosts as Optimal EMV -3.0000 and Recommended first move Single path, with no Next best alternative or Decision advantage row. What does that mean?",
+  "options": [
+   "The brief failed to find a second branch, and the two missing rows should be worked out by hand from the calm and storm branches.",
+   "The engine picked calm as the single path, since it is listed first and carries the higher branch value of 17.0000.",
+   "The brief hides both rows whenever the Optimal EMV is negative, because a losing tree has no alternative worth quoting.",
+   "The root is a chance node, so there is no choice to recommend or compare, and Single path is not a branch the engine picked."
+  ],
+  "answer": 3,
+  "explanation": "The Builder writes Chance root and N/A for the same tree, and singleBranchDecision likewise prints just 7.0000 and the move named only; allNegative, at -52.0000, still prints a next best of -55.0000 and an advantage of 3.0000."
+ },
+ {
+  "prompt": "Checking the brief's -3.0000 for chanceRootWithBranchCosts by hand, a reader weights calm 0.600000 x 19.0000 and storm 0.400000 x -25.0000, then subtracts both costs, 2.0000 and 8.0000, and gets -8.6000. Which is right?",
+  "options": [
+   "-8.6000, because the brief re-rolls only the optimal path, charging calm's cost of 2.0000 and never the storm's.",
+   "-3.0000, because each cost is paid only on its own branch, so calm is worth 17.0000 and storm -33.0000 before weighting.",
+   "-8.6000, because a chance root has no decision above it, so its branch costs are charged once to the whole node after weighting.",
+   "Both, since -3.0000 is the Optimal EMV and -8.6000 is the Decision advantage the brief leaves out on a chance root."
+  ],
+  "answer": 1,
+  "explanation": "0.600000 x 17.0000 + 0.400000 x -33.0000 is -3.0000; subtracting every cost after weighting charges the storm's 8.0000 in calm weather too."
+ },
+ {
+  "prompt": "Two saved EPE runs give the success case the same mean NPV of 420, and one of them has a far lower low case. Each is linked in turn to the EKPAN tree's success terminal and briefed. How do the two decision sections compare?",
+  "options": [
+   "The wider run prints a lower Optimal EMV, since its NPV P90 low case pulls the drill chance node down before the cost is charged.",
+   "The wider run prints a higher Optimal EMV, since its NPV P10 high case adds upside that the rollback credits to the drill branch.",
+   "Both print Optimal EMV 105.0000 with Drill, since a risk neutral rollback never looks past the mean.",
+   "Both print 105.0000, but the wider run's advantage shrinks, measured against its low case."
+  ],
+  "answer": 2,
+  "explanation": "A chance node is a probability weighted sum, so its expectation uses each payoff's mean alone; on the EKPAN tree both runs give 105.0000 and an advantage of 67.2500, and no risk aversion parameter exists to reward the narrower spread."
+ },
+ {
+  "prompt": "A reviewer replaces the EKPAN tree's linked success payoff with its NPV P90 of 185.0000, typed as a fixed payoff, to be prudent. What happens?",
+  "options": [
+   "The drill branch falls to 22.7500 below the farm-out's 37.7500 and the choice flips, because a low outcome is averaged as if it were the mean.",
+   "Nothing moves, because the rollback reads only a summary's mean, and the brief restores the linked mean of 420 at brief time.",
+   "The drill branch falls to 22.7500 and still leads, since the farm-out's success payoff is scaled down by the same low case.",
+   "The root becomes 37.7500 and that is the right answer for a risk neutral tree, which should be fed each run's low case."
+  ],
+  "answer": 0,
+  "explanation": "On the EKPAN tree, 0.350000 x 185.0000 + 0.150000 x 170.0000 + 0.500000 x -25.0000, less the 55.0000 drill cost, is 22.7500; the NPV P90 is the run's low case and was never its expected payoff."
+ },
+ {
+  "prompt": "A summary linked to a terminal arrives with an NPV P90 of 185, an NPV P50 of 390 and an NPV P10 of 710, and no mean. What does the engine do?",
+  "options": [
+   "It rolls back with the NPV P50 of 390, taking the middle case as the best available stand in for the missing mean.",
+   "It averages the three percentiles into a mean and rolls back with that, flagging the payoff as estimated in the brief.",
+   "It rolls back with the NPV P90 of 185, the low case, as a conservative fallback, which flips the EKPAN tree to Farm out.",
+   "It refuses with \"Distribution payoff has no finite mean\" and does not estimate one."
+  ],
+  "answer": 3,
+  "explanation": "The engine will not guess a mean from percentiles, since the rollback needs the expectation and three percentiles do not fix it; on the EKPAN tree reading 390.0000 would have printed 94.5000."
+ },
+ {
+  "prompt": "In the Decision Tree Builder a user unlinks the Monte Carlo run from the EKPAN tree's success terminal. What does the terminal hold afterwards?",
+  "options": [
+   "No payoff, which the engine reads as 0.0000, so the drill branch collapses and Farm out becomes the recommended first move.",
+   "The copied mean, 420.0000, as a fixed payoff, so the tree still rolls back to 105.0000.",
+   "The copied NPV P90 of 185.0000, since unlinking keeps the conservative copy of the run and discards the other two statistics.",
+   "The run's current mean, re-read once at the moment of unlinking, so the fixed payoff is up to date with any revaluation."
+  ],
+  "answer": 1,
+  "explanation": "Linking stores a copy of the run's NPV mean, P90 and P10 at the moment of linking; nothing re-reads the run, and unlinking keeps the mean as a fixed payoff."
+ },
+ {
+  "prompt": "Every section of a Decision Studio brief carries a provenance line. What does the decision section's line establish about an EKPAN tree briefed at 105.0000?",
+  "options": [
+   "That the tree's payoffs were discounted, since the provenance line records the rate the rollback applied at brief time.",
+   "That every cost box held a typed value, since a cleared cost is refused before a tree can be saved for a brief.",
+   "Which saved tree was rolled back, and nothing about whether its probabilities, payoffs or cost boxes are right.",
+   "That the tree agrees with the economics section, since both sections are stamped when the brief is built."
+  ],
+  "answer": 2,
+  "explanation": "The rollback applies no discounting and a cleared cost box is silently 0; the EKPAN tree's drill branch worth 105.0000 still loses money with probability 0.500000, and the source is where checking starts."
+ },
+ {
+  "prompt": "A brief's economics section comes from an EPE Monte Carlo run revalued after it was linked into a tree, and its decision section re-rolls that tree at brief time. What can the page show?",
+  "options": [
+   "A consistent page, since re-rolling at brief time re-reads every linked run before the decision rows are printed.",
+   "A refusal in the decision section, since the brief detects that the run behind a linked payoff has changed since linking.",
+   "The new run's mean in the decision section and the old one in the economics section, since only the tree is refreshed.",
+   "An NPV summary the tree never saw beside an Optimal EMV built on the older copied mean, with both provenance lines true."
+  ],
+  "answer": 3,
+  "explanation": "Re-rolling recomputes the tree without refreshing what the tree copied, so the page disagrees with itself; linking the run again in the Decision Tree Builder brings the two sections back into line."
+ },
+ {
+  "prompt": "Writing up the EKPAN tree with its linked summary, an analyst labels the numbers. Which labelling follows the course's percentile convention?",
+  "options": [
+   "NPV P90 185.0000 as the low case and NPV P10 710.0000 as the high case, with the 0.350000 success chance as a plain probability.",
+   "A high case for the NPV P90 of 185.0000, because a larger percentile number marks a larger outcome, and a plain success chance.",
+   "The low case for the NPV P90 of 185.0000, and the success chance written as a P35 so that readers can see it is uncertain.",
+   "NPV P10 710.0000 as the low case, since only 10 percent of the runs fall below it, with a plain success chance."
+  ],
+  "answer": 0,
+  "explanation": "Under the exceedance meaning P90 is the low case, which is why the brief's economics rows read NPV P90 (low), NPV P50 and NPV P10 (high); a probability, likelihood or posterior never takes a P-label."
+ },
+ {
+  "prompt": "The EKPAN tree briefs with a Decision advantage of 67.2500. What does that number say?",
+  "options": [
+   "That Drill beats Farm out by at least 67.2500 in every outcome, a margin of safety the farm-out cannot close in any case.",
+   "That the drill branch's mean exceeds the farm-out's by 67.2500; the drill still loses money with probability 0.500000.",
+   "That the drill's probability weighted gains exceed its probability weighted losses by 67.2500 once the farm-out is set aside.",
+   "That a survey on the EKPAN tree could add up to 67.2500 before the recommended first move would change to Farm out."
+  ],
+  "answer": 1,
+  "explanation": "On the EKPAN tree it is 105.0000 less 37.7500, a difference of two means; after the 55.0000 drill cost the outcomes are 365.0000, 115.0000 and -80.0000, and 105.0000 is none of them."
+ }
+]

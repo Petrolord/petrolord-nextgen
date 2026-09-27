@@ -1,0 +1,130 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# EC4 decision, intermediate, module m02-imperfect-information-by-bayes.
+# One q() per served question, in ord order (ord = position, from 1).
+
+# ord 1
+q(1, "The EKPAN lottery survey's Bright spot row reads 0.850000 given Success and 0.250000 given Dry hole, which sum to more than 1. Is that an error?",
+ "No: each column is a distribution over readings for one outcome, and a row answers no single question, so nothing requires it to sum to 1.",
+ ["Yes, and the engine refuses it, because a row of likelihoods is the chance of that reading across every outcome and must be a distribution.",
+  "Yes, and the engine rescales the row to 1 before Bayes, which is why the lottery's posterior after a bright spot comes out at 0.646739.",
+  "No, because likelihoods are grades of the survey's accuracy, and only their average across the row has to stay below 1."],
+ "On the EKPAN lottery survey 0.850000 and 0.150000 sum to 1 given Success, and 0.250000 and 0.750000 given Dry hole; those columns are what the engine checks.")
+
+# ord 2
+q(3, "A likelihood column for Success is typed so that it sums to 0.900000. What does the engine do with it?",
+ "Refuses it, with a message naming the Success column and the sum 0.900000, and rescales nothing.",
+ ["Rescales the column in proportion so that it sums to 1, values the survey on the corrected likelihoods and flags nothing to the user.",
+  "Accepts it, since the tolerance allowed on a likelihood column is looser than the 1e-6 allowed on the probabilities at a chance node.",
+  "Assigns the missing 0.100000 to a reading of its own, as if the survey returned no reading at all on that share of successes."],
+ "The published likelihoodColumnBelowOne case is refused: \"Likelihoods P(signal | \"Success\") sum to 0.900000, expected 1\". A column that misses 1 is never quietly normalised.")
+
+# ord 3
+q(0, "What is the chance of a bright spot before the EKPAN lottery survey is shot?",
+ "0.460000, the prior-weighted sum of 0.297500 from successes and 0.162500 from dry holes.",
+ ["0.850000, the lottery's hit rate, as if only successes lit up.",
+  "0.550000, half the lottery's likelihood row sum, one equal weight per outcome.",
+  "0.350000 on the lottery, the prior, since a survey cannot change how often the prospect succeeds or how often it lights up."],
+ "On the EKPAN lottery 0.350000 x 0.850000 = 0.297500 and 0.650000 x 0.250000 = 0.162500, together 0.460000. The hit rate counts only successes, and equal halves ignore how often each outcome occurs.")
+
+# ord 4
+q(2, "Of the EKPAN lottery's 0.460000 chance of a bright spot, 0.162500 comes from dry holes. Why does a false alarm rate of only 0.250000 contribute that much?",
+ "It applies to the dry outcomes, which are 0.650000 of the prior, a much larger base than the 0.350000 of successes.",
+ ["The lottery's false alarm rate is added to the miss rate of 0.150000 before it is weighted, and that addition inflates the dry share of bright spots.",
+  "Dry holes are counted twice on the lottery, once in the bright spot row and once in the no bright spot row, before the joint chances are summed.",
+  "The hit rate 0.850000 shrinks once divided by the lottery's prior, so the dry share only looks large beside it."],
+ "Each joint cell on the EKPAN lottery is prior times likelihood: 0.650000 x 0.250000 = 0.162500. That share of bright spots is what keeps a bright spot from settling the question.")
+
+# ord 5
+q(0, "A reader divides the EKPAN lottery joint chance 0.297500 by the prior 0.350000 and gets 0.850000. What went wrong?",
+ "The posterior divides the joint by the chance of the reading, 0.460000, giving 0.646739; dividing by the prior returns the likelihood the calculation started from.",
+ ["Nothing went wrong: the hit rate and the lottery's posterior coincide whenever the joint chance is taken with the success outcome rather than the dry one.",
+  "The joint should first be multiplied by the lottery's pSignal of 0.460000 and only then divided by the prior 0.350000.",
+  "The divisor should be the lottery's dry hole prior of 0.650000, since a posterior compares the reading with the alternative outcome."],
+ "Bayes on the EKPAN lottery is joint over pSignal: 0.297500 / 0.460000 = 0.646739. A reader who finishes holding the hit rate has divided by the wrong number.")
+
+# ord 6
+q(1, "Weight the EKPAN lottery's success posteriors, 0.646739 and 0.097222, by the signal chances 0.460000 and 0.540000. What comes back, and what does it mean?",
+ "The prior 0.350000: a survey moves belief up on one reading and down on the other and in expectation moves it nowhere, so its value comes only from fitting the action to the reading.",
+ ["A number above the lottery's prior of 0.350000, because a survey with a hit rate of 0.850000 raises the expected chance of success of the prospect it reads.",
+  "Nothing meaningful, because posteriors taken after two different readings describe two different prospects and cannot be combined into one probability.",
+  "The average of the lottery's two likelihoods, because weighting by the signal chances undoes the Bayes division."],
+ "On the EKPAN lottery 0.460000 x 0.646739 + 0.540000 x 0.097222 returns 0.350000. Because every posterior is derived from one prior, the engine guarantees that average.")
+
+# ord 7
+q(3, "Reading the EKPAN lottery likelihood 0.850000 as the chance of success after a bright spot, what is Drill worth after a bright spot, and which way does the error push?",
+ "298.2500 against the posterior's 207.7989, an overstatement on the reading that argues for drilling.",
+ ["207.7989 either way, because Drill is still the lottery's best action after a bright spot and its value is read from the tree rather than from the probability.",
+  "262.7989, the lottery's drill chance node, because 0.850000 enters the weighting before the drill cost of 55.0000 and never meets it.",
+  "An understatement on the lottery, because 0.850000 leaves out the prior of 0.350000, which the posterior adds on top of the hit rate."],
+ "The engine at probability 0.85 gives the EKPAN lottery's Drill 298.2500; at the posterior 0.646739 it is 207.7989. The error pushes the decision the way a hopeful team already leans.")
+
+# ord 8
+q(2, "After no bright spot on the EKPAN lottery, a reader compares the drill chance node at 18.2639 with Farm out at 9.2361 and drills. What is the right comparison?",
+ "The drill branch after its 55.0000 cost, -36.7361, against 9.2361, which makes Farm out best.",
+ ["The same comparison is right, since the lottery's drill cost was already paid when the survey was bought and cannot be charged twice.",
+  "Drill at 18.2639 against Walk away at 0.0000, since the lottery's farm-out is withdrawn by a partner once a negative reading is known.",
+  "The lottery's prior drill value of 75.7500 against 9.2361, since a survey changes the probabilities and never the drill economics."],
+ "Subtract every branch cost before taking a maximum: on the EKPAN lottery 18.2639 less 55.0000 is -36.7361. Node values give the right action after a bright spot and the wrong one here.")
+
+# ord 9
+q(1, "What makes the EKPAN lottery survey worth anything at all?",
+ "Its success posteriors, 0.646739 and 0.097222, straddle the lottery's switch at 0.228571, so the two readings lead to different actions.",
+ ["Its hit rate of 0.850000 exceeds the lottery's prior of 0.350000, so each of its readings adds knowledge about the prospect and knowledge is worth money.",
+  "It raises the chance of success after a bright spot, which lifts the expected chance of success of the lottery above 0.350000.",
+  "Its posteriors differ from the lottery's prior, and any movement in belief carries value in proportion to its size, whichever action follows."],
+ "If both readings led to Drill the survey would be worth nothing. On the EKPAN lottery a posterior above 0.228571 favours Drill and one below favours Farm out.")
+
+# ord 10
+q(0, "On which reading does the EKPAN lottery survey earn its value, and what does the action change from there?",
+ "No bright spot, where Farm out at 9.2361 replaces a Drill branch worth -36.7361; after a bright spot the prior action is kept.",
+ ["Bright spot, where the lottery's Drill value rises from 75.7500 to 207.7989 and that whole rise, weighted by 0.460000, is credited to the survey.",
+  "Both readings, weighted by 0.460000 and 0.540000, since each reading moves the lottery's posterior away from 0.350000.",
+  "Bright spot, because 0.646739 is above the lottery's switch and confirms Drill with more confidence than the prior did."],
+ "On the EKPAN lottery the only gain is on no bright spot: 0.540000 times the switch from -36.7361 to 9.2361 recovers the whole 24.8250 of EVII.")
+
+# ord 11
+q(3, "What is the expected value of imperfect information for the EKPAN lottery survey?",
+ "24.8250, evWithInfo 100.5750 less emvPrior 75.7500.",
+ ["100.5750 on the lottery, the value of deciding after the reading, since that is what the company holds once the survey is in.",
+  "52.0000 on the lottery, since a survey with a hit rate of 0.850000 recovers the whole perfect information ceiling on the reading that matters.",
+  "16.8250 on the lottery, since a value of information is always quoted after the survey's cost of 8.0000 has been paid."],
+ "On the EKPAN lottery EVII = 0.460000 x 207.7989 + 0.540000 x 9.2361 less 75.7500 = 24.8250, gross of any price and inside 0 and the EVPI of 52.0000.")
+
+# ord 12
+q(2, "Before the repair, the VOI Analyzer printed a gross value of information of -15.00 for typed indicator numbers. What does the lower bound on EVII say about that card, and what does the repaired Analyzer do?",
+ "Information derived by Bayes can never be worth less than 0, so the typed numbers contradicted each other; the repaired Analyzer withholds that value.",
+ ["The survey was harmful: acting on its readings lost 15.00 against the prior decision, and the repaired Analyzer reports the loss as a negative card.",
+  "The repaired Analyzer clamps the value to 0.00, which is the lower bound applied as a floor on whatever the typed numbers produce.",
+  "The negative figure was net of the survey cost, and the repaired Analyzer now splits it into a gross card and a net card."],
+ "A company holding a survey can always ignore it, so EVII cannot be negative. The -15.00 card is history from before the repair; the Analyzer now keeps EMV without information and EVPI and withholds the rest.")
+
+# ord 13
+q(0, "The published perfectSignal case returns an evii of 35.0000. Why is that the most any survey on its prospect can return?",
+ "Its posteriors are 1.000000 and 0.000000, so it never misreads, and 35.0000 equals that prospect's EVPI, the ceiling for every survey on it.",
+ ["The engine clamps evWithInfo at 78.0000 as a safety limit, and the clamp happened to bind on this survey and not on the others.",
+  "Its two readings are equally likely, 0.500000 each, and an evenly split survey is the most informative one that a two-outcome prospect allows its readings to be.",
+  "35.0000 is the price cap written into the golden so that the net value of the survey stays at or above zero."],
+ "perfectSignal's evWithInfo of 78.0000 is the published prospect's evWithPerfect, and 78.0000 less 43.0000 is 35.0000. Nothing is clamped: a survey that never misreads is perfect information.")
+
+# ord 14
+q(1, "uselessSignal's posteriors after Heads and after Tails both stay at 0.300000 and 0.700000. What is its evii, and why?",
+ "0.0000, because a reading equally likely under both outcomes moves nothing, so no reading changes the action.",
+ ["12.5000, what any two-reading survey adds to that prospect, since each reading resolves some doubt.",
+  "None, because the engine refuses a survey whose readings carry no information and returns a message in place of a value.",
+  "Negative, because the survey returns beliefs no better than the prior while still asking the decision maker to act on them."],
+ "uselessSignal returns evWithInfo 43.0000 and evii 0.0000, sitting on the lower bound. The 12.5000 belongs to seismicBayes, a different survey on the same prospect.")
+
+# ord 15
+q(2, "A reader divides the EKPAN lottery survey's EVII of 24.8250 by its EVPI of 52.0000 and calls the ratio the survey's accuracy. Why is that wrong?",
+ "It is a ratio of values that moves with the prior and the payoffs while the likelihoods stay put; accuracy lives in 0.850000 and 0.250000.",
+ ["It is right only once the lottery survey's cost of 8.0000 has been netted out of the numerator, since accuracy is judged on what the survey returns after its price.",
+  "It understates accuracy, since on a two-outcome lottery EVII can never exceed half of EVPI, so the ratio must be doubled before it is read.",
+  "It overstates accuracy, since the ratio counts the lottery's bright spot reading twice, once inside evWithInfo and once inside EVPI."],
+ "The accuracy of the EKPAN lottery survey is its likelihoods; the value of that accuracy is what it changes on this decision. perfectSignal shows EVII can equal EVPI, so no half rule exists.")
+
+emit(Q, "/root/wt-ec45-recut/tools/course-waves/ec45-recut/banks/decision/intermediate/ec4i_m02.json", label="ec4i_m02", expect_n=15)
+finish()

@@ -1,0 +1,130 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# EC4 decision, intermediate, module m01-perfect-information.
+# One q() per served question, in ord order (ord = position, from 1).
+
+# ord 1
+q(2, "On the EKPAN lottery at a success probability of 0.350000, weighting each action's column by the priors and then taking the largest gives 75.7500. What does taking the largest value in each outcome first, and weighting second, give?",
+ "127.7500, the value of deciding after the outcome is announced, which is evWithPerfect on the lottery and not yet the worth of the information.",
+ ["52.0000 directly, because weighting the per-outcome maxima already subtracts the lottery's prior decision inside the sum.",
+  "365.0000, the lottery's Drill net on Success, because learning the outcome first raises the chance of success to 1.",
+  "75.7500 again on the lottery, since the same six numbers go in and the order of a maximum and a weighted sum cannot change a result."],
+ "The order of the two operations is the whole method: on the EKPAN lottery 0.350000 x 365.0000 + 0.650000 x 0.0000 = 127.7500, and only its excess over 75.7500, 52.0000, is the value of the information.")
+
+# ord 2
+q(0, "A reader computes EVPI on the EKPAN lottery as 127.7500 less the farm-out's 33.2500, reasoning that perfect information sometimes recommends the farm-out. What is wrong with the baseline?",
+ "It credits the information with Drill's advantage over Farm out, which the company already holds without it; the baseline is the prior best action, Drill at 75.7500 on the lottery.",
+ ["Nothing, since EVPI measures the gain over the action that perfect information would replace, and on the lottery's Dry hole that action is the farm-out.",
+  "The farm-out value must first be taken net of the lottery's drill cost of 55.0000, because a cost is paid under every action once it is on the tree.",
+  "It should subtract Walk away at 0.0000, since information is always measured against doing nothing at all."],
+ "EVPI on the EKPAN lottery subtracts the best decision available today, 75.7500, giving 52.0000; subtracting 33.2500 overstates it by Drill's lead over Farm out at the prior.")
+
+# ord 3
+q(3, "Why is EVPI on the EKPAN lottery at 0.350000 equal to 0.650000 x 80.0000?",
+ "Perfect information changes the prior choice only on Dry hole, from Drill at -80.0000 to 0.0000, and that gain is weighted by how often the dry hole occurs.",
+ ["EVPI is the expected loss of the Drill action on the lottery, the dry hole loss weighted by its chance, whatever the other actions happen to pay in that outcome.",
+  "On Success perfect information switches the lottery from Drill to Farm out, and the 80.0000 is the net difference between them weighted by the dry hole chance.",
+  "The lottery's farm-out forgoes 95.0000 on Success and Drill avoids 80.0000 on Dry hole, and on this lottery only the second term survives the weighting."],
+ "EVPI on the EKPAN lottery is the expected regret of the prior choice: on Success Drill stays best at 365.0000, so the only gain is 80.0000 on the dry hole, 0.650000 x 80.0000 = 52.0000.")
+
+# ord 4
+q(1, "On the EKPAN lottery's Dry hole row the engine reports Farm out as the best action if known, beside a best value of 0.0000. What would listing Walk away before Farm out change?",
+ "Only the name reported for Dry hole, which becomes Walk away; the best value 0.0000 and evWithPerfect 127.7500 on the lottery stay the same.",
+ ["Nothing at all, because the engine breaks a tie by the larger payoff in the other outcome, where the lottery's Farm out pays 95.0000 against 0.0000.",
+  "evWithPerfect on the lottery, because Walk away is valued as a terminal and Farm out as a chance node, so the rollback reaches a different expectation.",
+  "The prior decision, because listing order is also the order in which the engine weights the lottery's actions at 0.350000."],
+ "Farm out and Walk away both pay 0.0000 on the EKPAN lottery's dry hole and the engine keeps the first branch listed; EVPI takes the best VALUE per outcome, so 52.0000 does not depend on the label.")
+
+# ord 5
+q(1, "dominantAction has outcomes at 0.300000 and 0.700000, and its better action pays 100.0000 or 50.0000, yet its EVPI is 0.0000. Why?",
+ "The same action is best in both outcomes, so knowing which one arrives would never change what is done.",
+ ["Its payoff swing is too small beside its prior EMV of 65.0000 for the engine to register any value of knowing the outcome.",
+  "Its actions carry no cost, and EVPI is measured only against the money that a costed action puts at risk in a bad outcome.",
+  "The engine refuses to value information on a lottery with no losing outcome, and returns 0.0000 in place of an answer."],
+ "Always pays 100.0000 against 10.0000 and 50.0000 against 5.0000, so the maximum in each outcome picks Always and weighting returns 65.0000 on both sides; the size of the swing never enters the test.")
+
+# ord 6
+q(2, "A spreadsheet reports a negative EVPI on a lottery. What does that say?",
+ "The inputs or the arithmetic are wrong, since in every outcome the best value is at least the prior action's value, and weighting cannot reverse that.",
+ ["The prior action is so good that learning the outcome would tempt the company away from it, a real cost of knowing in advance that the engine subtracts from evWithPerfect.",
+  "The information would arrive too late to act on, and the engine charges the delay against the value of knowing as a negative amount.",
+  "A risk averse utility function has pulled the value of knowing below zero for a company that dislikes seeing the bad outcome early."],
+ "evWithPerfect can never be less than emvPrior, so an EVPI below 0.0000 is an error; the engine is risk neutral and undiscounted, with no utility function and no delay to charge.")
+
+# ord 7
+q(0, "certainOutcome returns an EVPI of 0.0000, with emvPrior and evWithPerfect both 260.0000. A contractor offers a cheap survey on that decision. What is the survey worth on EMV grounds?",
+ "Nothing, because imperfect information is bounded by perfect information, so no survey on that decision can be worth more than 0.0000.",
+ ["Up to the prior value of 260.0000, since a certain outcome makes every reading of the survey certain to be correct.",
+  "Anything below the drill cost of 40.0000, since the survey only has to beat the capital it protects to be worth buying.",
+  "It cannot be said until the survey's likelihoods are known, since EVPI bounds only perfect information and not a real survey."],
+ "When one outcome has probability 1.000000 there is nothing to reveal; a zero EVPI closes the question for every kind of information on the decision, and the right price is nothing.")
+
+# ord 8
+q(3, "The EKPAN lottery's EVPI sweep reads 54.0000 at 0.200000 and 60.0000 at 0.250000. Where does EVPI peak, and why there?",
+ "At 0.228571, where Drill and Farm out are both worth 21.7143 on the lottery, giving 61.7143, because the prior decision is least settled there.",
+ ["At 0.250000 and 60.0000, the largest row of the lottery sweep, since EVPI rises smoothly between rows and the sampled rows are close enough together to find it.",
+  "At 0.500000 on the lottery, where Success and Dry hole are equally likely and uncertainty about the outcome is therefore greatest.",
+  "Midway between 0.200000 and 0.250000, where the two sampled lottery values would meet if the rows were joined by one straight line."],
+ "The peak on the EKPAN lottery sits at the drill against farm-out switch, 80 / 350 = 0.228571, where 83.4286 less 21.7143 is 61.7143; at 0.500000 EVPI is only 40.0000.")
+
+# ord 9
+q(2, "At 0.228571 the engine names Farm out as the prior best action on the EKPAN lottery, with both actions printed at 21.7143. What decides that name?",
+ "Floating point residue: 80 / 350 has no exact binary image, and Drill comes out below Farm out in the last binary digits.",
+ ["The tie rule, which keeps the first action listed when a later one is only equal, and so names the farm-out whenever the two lottery values print alike.",
+  "A built-in preference for the action that never loses money when two lottery EMVs agree to four decimals.",
+  "EVPI, which is 61.7143 under Farm out and lower under Drill, so the engine names the lottery action that leaves the most to learn."],
+ "Drill is listed before Farm out on the EKPAN lottery, so the tie rule would name Drill; Drill less Farm out is -7.11e-15 there, and EVPI of 61.7143 is the same whichever is named.")
+
+# ord 10
+q(1, "On the EKPAN lottery at a success probability of 0.050000, EVPI is 13.5000. In which outcome does perfect information change the prior action?",
+ "Success, where the prior best Farm out gives way to Drill's 365.0000 against 95.0000 on the lottery.",
+ ["Dry hole, where the lottery's Drill at -80.0000 gives way to 0.0000, exactly as it does at the stated prior of 0.350000.",
+  "Both outcomes, since at a low success chance Walk away is the lottery's prior best action and each outcome favours something else.",
+  "Neither, since 13.5000 is the value of confirming the lottery's prior action rather than of changing it in some outcome."],
+ "Left of the switch the EKPAN lottery's prior best is Farm out, so the only gain is on Success: 0.050000 x (365.0000 less 95.0000) = 13.5000. Walk away is never best on the lottery above 0.")
+
+# ord 11
+q(0, "A reader builds the EKPAN lottery's perfect-information table from the gross Drill payoffs, 420.0000 and -25.0000, instead of the net ones. What survives the error?",
+ "The best action in each outcome survives and the value does not, because 420.0000 enters the weighting where 365.0000 belongs.",
+ ["Both survive, because the lottery's drill cost of 55.0000 is paid in every outcome and so cancels out of evWithPerfect.",
+  "Neither survives, because -25.0000 now beats 0.0000 on Dry hole and Drill becomes best in both outcomes.",
+  "The value survives and the action does not, since a cost matters only when two actions are compared within an outcome."],
+ "On the EKPAN lottery Drill still wins Success and still loses Dry hole (-25.0000 is below 0.0000), but Drill enters evWithPerfect only on Success, so its 55.0000 cost does not cancel.")
+
+# ord 12
+q(3, "The published prospect and voiDefaultLottery both reach evWithPerfect 78.0000, yet their EVPIs are 35.0000 and 63.0000. What separates them?",
+ "The decision without information: the prospect's prior best is worth 43.0000 and voiDefaultLottery's 15.0000.",
+ ["Their success chances, since voiDefaultLottery's lower prior leaves more of the outcome still to be revealed by the information.",
+  "voiDefaultLottery reports its EVPI gross of the drill cost of 40.0000 and the prospect reports it net of that cost.",
+  "voiDefaultLottery's dry hole payoff of -50.0000 enters evWithPerfect, and the 78.0000 printed for it rounds that difference away."],
+ "Both run a success chance of 0.300000; the prospect's farm-out raises its prior decision to 43.0000, leaving 35.0000 to gain, while 15.0000 leaves 63.0000. The -50.0000 never enters, since nobody drills a known dry hole.")
+
+# ord 13
+q(0, "On the EKPAN lottery at 0.350000 a vendor prices a study of the prospect above 52.0000. What can be said before any Bayes is done?",
+ "The price can be refused, since no information about this decision can be worth more than its EVPI of 52.0000.",
+ ["Nothing yet, since an accurate enough study could be worth up to the lottery's evWithPerfect of 127.7500.",
+  "It is acceptable if the study's hit rate beats the lottery's prior of 0.350000, since EVPI caps only weak studies.",
+  "It should be compared with the lottery's drill value of 75.7500, the most that any study of it could protect."],
+ "EVPI caps every survey on the EKPAN lottery decision; the CSEM survey there is worth 24.8250, inside the 52.0000 ceiling, and a value above it is an error in the inputs or the arithmetic.")
+
+# ord 14
+q(2, "At a success probability of 0.900000 the EKPAN lottery's EVPI is 8.0000. What does that small number say about drilling?",
+ "The prior choice of Drill is rarely wrong there; Drill still loses 80.0000 on the lottery whenever the dry hole comes.",
+ ["Drilling is close to risk free there, since EVPI is the expected loss the company is exposed to by drilling the lottery.",
+  "Farm out has become the lottery's prior best action, and perfect information would switch to Drill only on Success.",
+  "The engine floors EVPI near the lottery's drill economics, so 8.0000 is a lower limit and not a computed value at all."],
+ "On the EKPAN lottery 0.100000 x 80.0000 = 8.0000: the dry hole is rare, so the choice is rarely wrong, but a risk neutral EVPI says nothing about the size of the loss when it happens.")
+
+# ord 15
+q(3, "A careful reader values the EKPAN lottery with perfect information at 365.0000, pricing the prospect as if success were certain. What is the error?",
+ "Knowing the outcome does not change how often it occurs: the lottery is still dry 0.650000 of the time, so evWithPerfect is 127.7500.",
+ ["The figure is the right evWithPerfect for the lottery but has to be reduced by the drill cost of 55.0000 once more before it is quoted, since the table shows outcomes and not branches.",
+  "It should be the EKPAN tree's 105.0000, since perfect information restores the marginal find the lottery folded away.",
+  "The sign is wrong: perfect information lowers the lottery's success value to the farm-out's 95.0000, because a known success is sold for its farm-out price."],
+ "Perfect information on the EKPAN lottery announces Success 0.350000 of the time, exactly as often as it arrives. The 105.0000 belongs to the EKPAN TREE, a different three-outcome model, and mixing the two is the error that distractor examines.")
+
+emit(Q, "/root/wt-ec45-recut/tools/course-waves/ec45-recut/banks/decision/intermediate/ec4i_m01.json", label="ec4i_m01", expect_n=15)
+finish()

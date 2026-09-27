@@ -1,0 +1,130 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# EC4 decision, intermediate, module m05-the-voi-analyzer.
+# One q() per served question, in ord order (ord = position, from 1).
+
+# ord 1
+q(1, "An analyst types the EKPAN lottery into the VOI Analyzer with a success payoff of 365.0000 and a drill cost of 55.0000. What catches the mistake?",
+ "Only a hand rollback at the stated chances: the EMV without information no longer matches 75.7500, and the Analyzer has no way to know the drill was charged twice.",
+ ["The consistency check, which withholds the value of information when a payoff and the decision cost overlap.",
+  "A refusal naming the payoff, since the Analyzer does not accept a payoff that is already net of its decision cost.",
+  "The EVPI card, which the Analyzer flags whenever it exceeds the EMV without information by more than the survey cost."],
+ "A payoff is the money before the decision cost; typed at 365.0000 with the cost of 55.0000 it charges the drill twice, silently. The check is the EMV without information against 75.7500.")
+
+# ord 2
+q(3, "Which actions does the VOI Analyzer weigh when it values a survey?",
+ "The named decision at its cost, and \"Do Not\" with every payoff 0.",
+ ["The named decision, \"Do Not\", and one optional alternative such as a farm-out typed with its own payoffs.",
+  "One action for each outcome typed, so a study with Success and Dry hole gets two actions and a third outcome adds a third.",
+  "As many actions as indicators, each the best response to one indicator, chosen by the Analyzer from the posteriors typed."],
+ "The Analyzer offers exactly two actions and no third branch; a farm-out or partner option has to be squeezed into act or do not.")
+
+# ord 3
+q(0, "An analyst enters No bright spot at 64 percent beside Bright spot at 46.000000 percent for the EKPAN lottery's survey. What comes back from the repaired VOI Analyzer?",
+ "A refusal before any card: \"Indicator chances sum to 110 percent, expected 100\".",
+ ["The two cards that use only the stated chances, 75.75 and 52.00, with the other values and the diagram withheld.",
+  "Full cards computed after rescaling the two indicator chances so that they sum to 100 percent.",
+  "A refusal that names the Bright spot box as the one to correct."],
+ "Percents that are not a distribution are refused outright, and the message names the sum in percent. Withholding is the answer to chances that sum correctly but contradict the stated outcome chances.")
+
+# ord 4
+q(2, "Suppose the CSEM survey's indicator chances for the EKPAN lottery are entered as 56 and 44 percent while both posteriors keep their Bayes values. Which results does the repaired check let through?",
+ "EMV without information 75.75 and EVPI 52.00, withholding EMV with information, the gross and net value and the diagram.",
+ ["A refusal, because the indicator chances no longer agree with the stated outcome chances and the Analyzer declines to compute any card.",
+  "A gross value of information of 40.62 beside an EVPI of 52.00, which is what these inputs produce on the four cards and in the sentence.",
+  "The gross value of 19.84, after rescaling the posteriors so that they fit the stated success chance of 0.350000 again."],
+ "The chances sum to 100, so nothing is refused, but they imply success 0.404952 against the stated 0.350000, more than 0.005 away. 40.62 is what the Analyzer printed before the repair; the check never repairs.")
+
+# ord 5
+q(0, "Before the repair, the VOI Analyzer printed a gross value of information of 69.00 beside an EVPI of 63.00 for a Positive Seismic posterior row summing to 130 percent. What happens now, and what was wrong with 69.00?",
+ "The inputs are refused with \"Outcome chances given \"Positive Seismic\" sum to 130 percent, expected 100\"; 69.00 was a survey worth more than knowing the answer.",
+ ["The value is withheld while 15.00 and 63.00 stay on their cards, since a row that sums past 100 contradicts the stated chances.",
+  "The value is capped at 63.00, because EVPI is the ceiling and a survey can reach it but never pass it.",
+  "The row is rescaled to 100 percent and valued, and 69.00 was wrong only because the old build skipped that step."],
+ "A row summing to 130 percent is not a set of chances at all, so it is refused; a withholding is for chances that cannot all be true together. No survey beats perfect information at 63.00.")
+
+# ord 6
+q(1, "In the Analyzer's default study, Positive Seismic comes up 40 percent of the time with Success Case at 60 percent, and Negative Seismic 60 percent with Success Case at 10 percent. What check do these typed numbers have to pass?",
+ "Weighted by the indicator chances they must return the stated Success Case: 40 percent x 60 percent + 60 percent x 10 percent = 30 percent.",
+ ["The Success Case entries down the column must add to 100 percent, the way a distribution over indicators would.",
+  "Each posterior must be at least the stated 30 percent, because a survey can only raise the chance it reports on.",
+  "The indicator chances must match the outcome chances, 40 percent against 30 percent and 60 percent against 70 percent, within 0.005 in decimals."],
+ "Posteriors carry the prior inside them, so their weighted average must give back the stated chance; the repaired Analyzer withholds when an implied chance sits more than 0.005 from it.")
+
+# ord 7
+q(3, "The EKPAN lottery is typed into the VOI Analyzer with its Bayes posteriors at full precision and a survey cost of 8.0000. After No bright spot, Drill is worth -36.7361. What does the EMV with Information card read?",
+ "87.59, from 0.460000 x 207.7989 + 0.540000 x 0.0000 = 95.5875 less the survey cost.",
+ ["100.5750, because after No bright spot the Analyzer takes the best remaining action, the farm-out at 9.2361, weighted by 0.540000.",
+  "95.5875, because the card titled EMV with Information is the value before the survey cost, the same quantity as the tree engine's evWithInfo.",
+  "No value: the card is withheld because Drill is negative after one indicator."],
+ "The Analyzer can only choose \"Do Not\" at 0 after No bright spot, and the card is after the survey cost; the root of the drawn tree is 87.5875.")
+
+# ord 8
+q(2, "From the EKPAN lottery's Analyzer entries, Bright spot 46.000000 percent and P(Success | Bright spot) 64.673913 percent, which line recovers the likelihood of a bright spot over a dry hole?",
+ "0.353261 x 0.460000 / 0.650000, giving the survey's own 0.250000.",
+ ["0.353261 x 0.650000 / 0.460000, dividing by the chance of the indicator as Bayes does for a posterior.",
+  "0.353261 read directly, since the dry-hole share left in the Bright spot row is how often dry holes show one.",
+  "0.646739 x 0.460000 / 0.350000, since the bright spot's likelihood is the same over either outcome."],
+ "P(indicator | outcome) = P(outcome | indicator) x P(indicator) / P(outcome); the indicator chance belongs on top. The last line recovers 0.850000, the likelihood over a success.")
+
+# ord 9
+q(1, "A reviewer checks the EKPAN lottery typed into the VOI Analyzer: the cards read 75.75 without information and 52.00 for EVPI, matching the lottery's 75.7500 and 52.0000. Has the typing captured the decision?",
+ "No: those two numbers cannot see the missing farm-out, which only the value with information exposes.",
+ ["Yes, because the emvPrior and the EVPI together pin down every action on the lottery, and a missing action would move at least one of them.",
+  "Yes, provided the inputs are consistent, since a consistent study with matching cards can only differ from the lottery in rounding.",
+  "Yes, since a missing action would have been refused."],
+ "Drill beats Farm out at the prior, 75.7500 against 33.2500, and under perfect information a known dry hole pays 0.0000 either way, so both rows match. After No bright spot the farm-out's 9.2361 is lost.")
+
+# ord 10
+q(0, "The Analyzer's engine returns a gross voi of 33.00 on its default study. Where does a user see it?",
+ "Only in the Decision Guidance sentence and the CSV export.",
+ ["On the card titled EMV with Information, which on the default study reads the gross value of the survey.",
+  "On the card titled Net Value of Info (Net VOI).",
+  "On the EVPI card, beside the value of perfect information, so the two gross ceilings can be read together."],
+ "The panel shows four cards: EMV without Information 15.00, EMV with Information 38.00, Net VOI 23.00 and EVPI 63.00. The fifth number is only in the sentence and the CSV.")
+
+# ord 11
+q(3, "On the Analyzer's default study with the survey at 10.0000, the cards read 15.00 without information and 38.00 with information. What is the net value of information?",
+ "23.00, because 38.00 is already after the survey cost.",
+ ["13.00, since the survey cost still has to come off the EMV with Information card before it is set against 15.00.",
+  "33.00, because the difference between the two EMV cards is the gross value and the net comes from the separate cost box.",
+  "28.00, the EMV with Information card less the survey cost, since that difference is what the survey adds after it is paid for."],
+ "The card reads 48.00 at a cost of 0 and 38.00 at 10.0000, so it is net of the cost. Subtracting 10.0000 again charges the survey twice; 13.00 is the card at a cost of 20.0000.")
+
+# ord 12
+q(3, "A report on the Analyzer's default study sets the Net VOI card, 23.00, beside the EVPI card, 63.00, and concludes the survey captures about a third of what perfect information would. What is wrong?",
+ "It sets a value after cost against a ceiling before cost; the fair pair is the gross 33.00 against 63.00, and 33.00 is on no card.",
+ ["Nothing, because both cards are after the survey cost of 10.0000, so the ratio compares like with like.",
+  "The EVPI card is itself net of the survey cost, so the fair comparison takes the cost off 63.00 before setting it beside 23.00.",
+  "The comparison should use EMV with Information, 38.00, against 63.00, since that card holds the survey's value."],
+ "EVPI charges nothing for the information. The gross value, 23.00 plus the cost of 10.0000, is 33.00, which appears only in the guidance sentence and CSV.")
+
+# ord 13
+q(2, "At a survey cost of 33.0000 on the Analyzer's default study the Net VOI card reads 0.00. What do the verdict and the drawn tree's root say?",
+ "The verdict says the information exactly pays for itself, and the root still reads \"Acquire 3D Seismic Survey\" because the tied branches keep the first listed.",
+ ["The verdict calls acquiring positive and the root acquires, since a net value of zero counts as no loss and so as a gain.",
+  "The verdict says the information is not justified and the root reads \"No further information\", because acquiring is chosen only when it strictly gains over not acquiring.",
+  "The verdict says it exactly pays for itself and the root reads \"No further information\", the branch kept when two values are equal."],
+ "The two root branches tie and the engine replaces a branch only on a strictly greater value. At 40.0000 the card reads -7.00 and the root turns to \"No further information\".")
+
+# ord 14
+q(0, "On the EKPAN lottery the tree engine returns an evWithInfo of 100.5750, while the Analyzer's EMV with Information card reads 87.59 at a survey cost of 8.0000. What separates them?",
+ "The card is after the survey cost and the Analyzer has dropped the farm-out: adding 8.0000 back gives 95.5875, still short of 100.5750.",
+ ["Only the survey cost, since the card subtracts 8.0000 and the tree engine does not, and the rest of the gap is two-decimal rounding of the card.",
+  "The Analyzer rounds the posteriors to whole percents before valuing, which moves the value after each indicator.",
+  "The Analyzer subtracts the survey cost after each indicator as well as once at the root, charging it twice."],
+ "0.460000 x 207.7989 + 0.540000 x 9.2361 = 100.5750 with the farm-out; without it the No bright spot branch pays 0.0000, giving 95.5875.")
+
+# ord 15
+q(1, "The EKPAN lottery's survey is quoted at 20.0000. What do the three-action information tree and the two-action VOI Analyzer conclude?",
+ "The tree acquires with a net value of 4.8250; the Analyzer's gross value, 19.8375, is under the cost, so its net is negative and its verdict says not justified.",
+ ["Both acquire, since the matching 75.75 and 52.00 show the Analyzer typed the same decision the tree rolls back.",
+  "Both decline, because 20.0000 exceeds the Analyzer's gross value and the tree reads the same survey through the same posteriors.",
+  "The Analyzer acquires with a net value of 4.8250 and the tree declines, because the tree charges the survey on its root branch."],
+ "With the farm-out the survey is worth 24.8250 gross; without it 19.8375. The gap is the dropped action's 9.2361 weighted by the 0.540000 chance of No bright spot, and it decides this price.")
+
+emit(Q, "/root/wt-ec45-recut/tools/course-waves/ec45-recut/banks/decision/intermediate/ec4i_m05.json", label="ec4i_m05", expect_n=15)
+finish()
