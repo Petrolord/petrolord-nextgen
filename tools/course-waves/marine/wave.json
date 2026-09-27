@@ -15,7 +15,7 @@
   "lib/stats/stats.js",
   "lib/conventions/percentile.js"
  ],
- "enginesVendoredAt": "marineLogistics.js vendored sha-identical from petrolord-engines 110f0a0 (engines PRs #282 and #283) at its CANONICAL path by vendor_marine.sh, with its jest suite, golden, the ekene-marine fixture and README, the fixture writer, the oracle, the timing script, the negative control and FINDINGS-marine.md (with the lead's decisions of 2026-09-27): 10 new paths ledgered in VENDOR.json as kind extra, group sc4-marine-course; pin 54cf7c4 unchanged. Its runtime imports (lib/stats/stats.js, lib/conventions/percentile.js) were ALREADY vendored in NextGen at the 110f0a0 blobs, and at the same blobs on origin/main (proved, four proofs a path), so nothing shared moved. The suite passes 212 of 212 on NextGen's copies.",
+ "enginesVendoredAt": "marineLogistics.js vendored sha-identical from petrolord-engines 110f0a0 (engines PRs #282 and #283) at its CANONICAL path by vendor_marine.sh and re-vendored at e67e7ba (engines PR #284: the deckPlan overflow reasons name the limit that stops a unit, lowerBound counts only units that fit an empty voyage, neverFit names the rest; goldens 168 with 79 refusals; no graded field moved, fields.json unchanged), with its jest suite, golden, the ekene-marine fixture and README, the fixture writer, the oracle, the timing script, the negative control and FINDINGS-marine.md: 10 paths ledgered in VENDOR.json as kind extra, group sc4-marine-course; pin 54cf7c4 unchanged. Its runtime imports (lib/stats/stats.js, lib/conventions/percentile.js) were ALREADY vendored in NextGen at the same blobs, so nothing shared moved. The suite passes 219 of 219 on NextGen's copies.",
  "history": {
   "position": "THIS COURSE TEACHES NO REPAIR HISTORY. The lead's decisions on the engine (the seven FINDINGS defaults accepted; Adan and Resing and Iversen cited for figures and formulas and never quoted; the Table 5.1 c = 5 figure taught as a printed slip; the Skoko PSV total left out because the rounded days do not reproduce it) landed before any lesson was written; that is provenance."
  },
@@ -78,17 +78,17 @@
   "mgbidi_target_wait_hours": "erlang b one step too far, twenty four hour clock, concurrent service summed, the other queue model, the wait at the stated berths"
  },
  "openItems": {
-  "ENGINE FINDINGS": "Two optional findings for a repair-first engines PR, neither blocking the foundation: (1) wording, the third deckPlan overflow reason (\"no voyage has X m2 of usable area and Y t of deck load left\") does not say which of the two limits is exhausted, so on the Ekene one-voyage deck it reads as though deck load were short when only area is; (2) coverage, deckPlan.lowerBound counts the area and weight of units no voyage can ever carry (a footprint above the usable deck or a weight above the deck load), so on deck-item-larger-than-deck the bound is 3 for cargo whose carriable part fits one voyage. The course teaches both exactly as the engine returns them.",
+  "ENGINE FINDINGS": "The foundation's two engine findings (the deckPlan overflow reason that did not name the stopping limit; lowerBound counting units no voyage can carry) were repaired in engines #284 (e67e7ba) and re-vendored; the digest prints the new reasons verbatim with their four endings, neverFit and the new goldens, and the deck calculator shows neverFit. fields.json is unchanged (sha256 856f50de...).",
   "VENDORING": "marineLogistics.js on its canonical path; lib/stats and lib/conventions/percentile.js already at the 110f0a0 blobs on NextGen main and untouched; ten paths ledgered as sc4-marine-course.",
   "SIBLING": "SC3 materials (path order 77) is built in parallel in /root/wt-sc3-nextgen; both waves add to VENDOR.json, waves.json, panelRegistry.js, appNames.js, homeCatalog.js, DashboardPage.jsx and panelRender.test.jsx, so the second to merge takes a mechanical merge of those lines.",
   "APP_NAMES": "src/lib/appNames.js and the homepage catalogue (src/lib/homeCatalog.js) get their marine entries with the course migration: appNames.test.js requires every APP_NAMES slug to have an academy_apps row in migrations/ and every catalogue course to carry its APP_NAMES name, and the migrations are written at the ship stage (after the banks). The route, the learning page and the four panel registrations are in place now.",
   "FULL SUITE": "npx vitest run on this worktree: every marine suite, panelRender and src/lib pass; the only failures are other waves' mirror gates (carbon, crude, gasprocessing, gasvalue, hygiene, consequence, lopa, qra, safetystats, mlcore and siblings) comparing their committed copies against live wave directories under /root that have drifted on this machine, which this branch does not touch."
  },
  "digest": {
-  "lines": 894,
+  "lines": 908,
   "sections": 30,
-  "md5": "fc552f57da686c054c7d5155965a9314",
-  "sha256": "956e431d269e1bccd1ddc3f896d799c5bcd8bb00949d4598945bab207c18f60d"
+  "md5": "db561bab60eacbde7f03fa49350651b9",
+  "sha256": "33858377bfd25065b5e2e9c232e4bb2fca87ef7d08a991851cd74b723a70ce46"
  },
  "fields": {
   "count": 18,
@@ -116,18 +116,18 @@
  },
  "gates": {
   "structure.py": {
-   "md5": "c2922a688fce193cd209872ab79cbd5a",
+   "md5": "2edfc93b0ce3f05009b78b13600687bb",
    "command": "python3 structure.py",
    "expected": 0,
    "exit": 0,
    "summary": "PROBLEMS: 0"
   },
   "prove_prior_courses.sh": {
-   "md5": "bf77f18057b9ccdd0624c361b75c073a",
+   "md5": "a0413948494d8cdb2a923a42fd67cc73",
    "command": "bash prove_prior_courses.sh",
    "expected": 0,
    "exit": 0,
-   "summary": "PRIOR COURSES UNCHANGED: packages/engines differs from origin/main only by the ten sc4-marine-course paths (sha-identical to 110f0a0) and their ledger entries, with the shared runtime paths byte-identical; D1 to D5, H1, "
+   "summary": "PRIOR COURSES UNCHANGED: packages/engines differs from origin/main only by the ten sc4-marine-course paths (sha-identical to e67e7ba) and their ledger entries, with the shared runtime paths byte-identical; D1 to D5, H1, "
   },
   "scaffold.py --check": {
    "md5": "8e7babcc572d5e12dd7306fe0a7fddfb",
@@ -137,11 +137,11 @@
    "summary": "scaffold: 3 manifests, 0 stubs written, 78 existing lesson files left alone, 0 drift"
   },
   "vendor_marine.sh (the closure re-proved, four proofs a path)": {
-   "md5": "f78a52e74681d39033d70e05c71b6ef1",
+   "md5": "ece5caf5262348acecb61ed531b017ae",
    "command": "bash vendor_marine.sh",
    "expected": 0,
    "exit": 0,
-   "summary": "Tests:       212 passed, 212 total"
+   "summary": "Tests:       219 passed, 219 total"
   },
   "marine_capstone.mjs": {
    "md5": "5c3d49e38527d8c87af99018c696ffec",
@@ -211,14 +211,14 @@
    "command": "/root/dc-wavekit/digestrepro.sh cat-wip-marine /root/wt-sc4-nextgen",
    "expected": 0,
    "exit": 0,
-   "summary": "marine_dump: 1174 label-and-call, measurement and claim assertions run, 0 failed; 30 sections"
+   "summary": "marine_dump: 1193 label-and-call, measurement and claim assertions run, 0 failed; 30 sections"
   },
   "digestprose.mjs": {
    "md5": "97dda85819e61737a76d8caf5badb46d",
    "command": "node /root/dc-wavekit/digestprose.mjs digest.txt --rules cat-wip-marine",
    "expected": 0,
    "exit": 0,
-   "summary": "[digestprose] /root/cat-wip-marine/digest.txt: 894 line(s), 30 section title(s) and 119 in-body marker(s) swept against their blocks, 32 history framings, 10 engine pin(s); 3 warned for a human read and 0 framed as curri"
+   "summary": "[digestprose] /root/cat-wip-marine/digest.txt: 908 line(s), 30 section title(s) and 119 in-body marker(s) swept against their blocks, 32 history framings, 10 engine pin(s); 3 warned for a human read and 0 framed as curri"
   },
   "digestprose.mjs --selftest": {
    "md5": "97dda85819e61737a76d8caf5badb46d",
@@ -414,7 +414,7 @@
    "command": "python3 truth_check.py",
    "expected": 0,
    "exit": 0,
-   "summary": "truth_check: truth-marine.json (400 digest lines) IS the harvest of digest.txt"
+   "summary": "truth_check: truth-marine.json (407 digest lines) IS the harvest of digest.txt"
   },
   "truth_check.py NEGATIVE CONTROL": {
    "md5": "5a1bd55c4b01a9f2cbcad1a24a48219a",
@@ -471,7 +471,7 @@
    "summary": "NEGATIVE CONTROL: a figure from the recon report was planted in BRIEF.md. Expected it caught and named as a recon figure, got 1."
   },
   "gen_course.py (self checks)": {
-   "md5": "354d0d414f4d7828bbeda44af177c800",
+   "md5": "f4772deefdb029922b15b44b7faf67d8",
    "command": "python3 gen_course.py",
    "expected": 0,
    "exit": 0,

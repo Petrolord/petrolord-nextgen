@@ -1,7 +1,7 @@
 // THE ONE PLACE AN SC4 WAVE SCRIPT LOADS THE VENDORED ENGINE.
 // Imports engines/supplychain/marineLogistics.js from SC4_ENGINES, the NextGen
 // canonical packages/engines root by default, where the whole closure is
-// vendored sha-identical with petrolord-engines 110f0a0 (the engine imports
+// vendored sha-identical with petrolord-engines e67e7ba (the engine imports
 // only lib/stats/stats.js and lib/conventions/percentile.js, both plain
 // JavaScript). Every wave script imports from here, so no script can load a
 // second copy of the engine from somewhere else.

@@ -88,7 +88,8 @@ both rounding rules.
 
 The deck plan: each voyage's units, area, weight and utilisations, the units in
 the order packed, every overflow unit with the engine's reason, the usable
-area, the voyages used, the lower bound and the packing order (the Ekene
+area, the voyages used, the lower bound over the units that fit an empty
+voyage, the units no voyage can ever carry and the packing order (the Ekene
 voyage of deck cargo by first-fit decreasing: 599.229600 m2 carried and 11
 units overflow). Controls for the deck area, the usable fraction, the deck
 load, the voyages, the packing rule, and each item line's length, width,

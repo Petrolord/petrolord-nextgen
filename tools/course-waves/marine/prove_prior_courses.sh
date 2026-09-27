@@ -2,10 +2,10 @@
 # PROVE THE SC4 FOUNDATION LEAVES EVERY EARLIER COURSE UNCHANGED.
 #
 # PART 1, THE TREE. This course vendors the marineLogistics.js closure at
-# engines 110f0a0 (vendor_marine.sh) at its CANONICAL paths and moves nothing
+# engines e67e7ba (vendor_marine.sh) at its CANONICAL paths and moves nothing
 # shared: every packages/engines path on this branch that differs from BASE
 # must be one of the ten paths VENDOR.json ledgers as group sc4-marine-course,
-# each byte-identical to petrolord-engines 110f0a0, plus VENDOR.json itself,
+# each byte-identical to petrolord-engines e67e7ba, plus VENDOR.json itself,
 # whose only change against BASE is those ten ledger entries. The runtime
 # paths the closure shares (lib/stats/stats.js, lib/conventions/percentile.js)
 # must be byte-identical to BASE. Nothing under packages/engines may be left
@@ -32,7 +32,7 @@ NG=${NG:-${SC4_REPO:-/root/wt-sc4-nextgen}}
 ENG="$NG/packages/engines"
 BASE=${BASE:-origin/main}
 ENG_CANON=${ENG_CANON:-/root/petrolord-engines}
-REV=${REV:-110f0a0}
+REV=${REV:-e67e7ba}
 SCR=$(mktemp -d /tmp/sc4-prior-XXXXXX); trap 'rm -rf "$SCR"' EXIT
 fail=0
 pin() { python3 -c "import json,sys;print(json.load(open(sys.argv[1]))[sys.argv[2]]['pins'][sys.argv[3]])" "$NG/tools/course-waves/waves.json" "$1" "$2"; }

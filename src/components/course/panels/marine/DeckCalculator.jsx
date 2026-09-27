@@ -64,8 +64,9 @@ export const DeckPlanResult = ({ r }) => (
     <TileGrid>
       <Tile label="Usable area, m2" value={six(r.usableAreaM2)} />
       <Tile label="Voyages used" value={String(r.voyagesUsed)} />
-      <Tile label="Lower bound on voyages" value={String(r.lowerBound)} />
+      <Tile label="Lower bound on voyages (units that fit an empty voyage)" value={String(r.lowerBound)} />
       <Tile label="Overflow units" value={String(r.overflow.length)} />
+      <Tile label="Units no voyage can ever carry" value={r.neverFit.length ? r.neverFit.join(', ') : 'none'} />
       <Tile label="Total area, m2" value={six(r.totalAreaM2)} />
       <Tile label="Total weight, t" value={six(r.totalWeightT)} />
     </TileGrid>
@@ -80,7 +81,8 @@ export const DECK_STARTS = [
   ['deckEkeneTwo', 'Ekene deck cargo, two voyages'], ['deckLightLoad', 'Ekene deck cargo on a light deck'], ['deckCgj60', 'The capacity 60 example'],
   ['deckCgj61', 'The capacity 61 example'], ['deckCgjFirstFit', 'The capacity 60 list by first fit'], ['deckHuangLu', 'Huang and Lu at capacity 75'],
   ['deckDosa', 'The tight worst case'], ['deckTies', 'Equal footprints'], ['deckExactFit', 'An exact fit'], ['deckTooLarge', 'A unit larger than the deck'],
-  ['deckTooHeavy', 'A unit heavier than the deck load'],
+  ['deckTooHeavy', 'A unit heavier than the deck load'], ['deckAreaStops', 'Usable area stops a unit'], ['deckLoadStops', 'Deck load stops a unit'],
+  ['deckBothStop', 'Both limits stop a unit'], ['deckNoOneVoyage', 'No one voyage has both'], ['deckExactRoom', 'The room used exactly'],
 ];
 
 export const DeckPlanMode = ({ initialCase = null, initialText = null, initialBlock = null, starts = DECK_STARTS }) => {

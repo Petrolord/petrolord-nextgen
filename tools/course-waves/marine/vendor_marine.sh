@@ -31,8 +31,10 @@ NG=${NG:-/root/wt-sc4-nextgen}
 RECUT=${RECUT:-origin/main}
 PIN=$(python3 -c "import json,sys;print(json.load(open(sys.argv[1]))['canonical']['commit'])" "$NG/packages/engines/VENDOR.json")
 # Vendored at 110f0a0 (engines main: PR #282 marineLogistics.js and its validation kit; PR #283
-# FINDINGS-marine.md with the lead's decisions).
-REV=${REV:-110f0a0}
+# FINDINGS-marine.md with the lead's decisions); re-vendored at e67e7ba (PR #284: the deckPlan overflow
+# reasons name the limit that stops a unit, lowerBound counts only units that fit an empty voyage and
+# neverFit names the rest; goldens 163 to 168, refusals 79).
+REV=${REV:-e67e7ba}
 FULL=$(git -C "$ENG" rev-parse "$REV^{commit}")
 EXP=$(mktemp -d)
 LEDGER_PY=$(mktemp)
@@ -188,7 +190,7 @@ for p in paths:
     added.append({
         'path': p, 'kind': kind, 'group': GROUP, 'vendoredSha': blob,
         'reason': (f"SC4 marine course: vendored sha-identical from petrolord-engines {full[:7]} "
-                   f"(PRs #282 and #283: engines/supplychain/marineLogistics.js, its jest suite, golden, the ekene-marine fixture and its writer, oracle, "
+                   f"(PRs #282 to #284: engines/supplychain/marineLogistics.js, its jest suite, golden, the ekene-marine fixture and its writer, oracle, "
                    f"timing script, negative control, FINDINGS) by the wave's vendor_marine.sh, 4 proofs per path; its runtime imports "
                    f"(lib/stats/stats.js, lib/conventions/percentile.js) were already vendored at the same blobs. "
                    f"{'New since' if kind == 'extra' else 'Differing from'} the canonical pin {pin[:7]}, which stays: moving it "

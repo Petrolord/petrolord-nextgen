@@ -4,7 +4,7 @@
 
 # PRECISION. Every distance, speed, time in hours or days, vessel-day, fuel tonnage, amount of money, area, weight, volume, fraction, utilisation, probability, factor, count that is not whole and queue figure prints to SIX decimals; whole counts (voyages rounded up, vessels, berths, units, draws, seeds) and whole inputs print as whole numbers; a figure of sixteen or more significant digits at six decimals prints with its thousands grouped by commas; an engine message, reason and basis is printed verbatim, figures and all. Inside a message the engine prints money rounded to the cent and a computed quantity to six decimals (both half away from zero, trailing zeros dropped), and a stated input as it was given.
 
-# ENGINE. engines/supplychain/marineLogistics.js, vendored sha-identical with petrolord-engines 110f0a0 (engines PRs #282 and #283, the second its validation record FINDINGS-marine.md with the lead's decisions), 909 lines, at its canonical path in the NextGen repository. It imports mulberry32, triInvCDF and basicStats from lib/stats/stats.js and EXCEEDANCE_DEFINITION from lib/conventions/percentile.js, and nothing else. It makes no network call.
+# ENGINE. engines/supplychain/marineLogistics.js, vendored sha-identical with petrolord-engines e67e7ba (engines PRs #282, #283 and #284: the engine, its validation record FINDINGS-marine.md with the lead's decisions, and the deckPlan overflow reasons that name the stopping limit with the lower bound over the units that fit), 932 lines, at its canonical path in the NextGen repository. It imports mulberry32, triInvCDF and basicStats from lib/stats/stats.js and EXCEEDANCE_DEFINITION from lib/conventions/percentile.js, and nothing else. It makes no network call.
 
 # AN APP COURSE. The Suite app for this course is the Marine Logistics Planner, in the Suite's Midstream & Downstream module, which runs this same engine file (the same blob). Every practical in this course also runs in the course's own four calculator panels, which call the vendored engine on the learner's own inputs, so a learner without a Suite seat can work every exercise.
 
@@ -25,7 +25,7 @@ Every function takes plain arrays and objects and returns either a result object
 | `voyagePlan` | the voyages of one vessel on a stated route | vessel, products, installations (each with its cargo), route, portHours, weather, fuelPricePerT | per voyage the legs, the hours by activity with the weather factor, the days, the fuel by activity, the fuel cost, the load, the utilisation of every capacity constraint, the binding constraint, every overloaded constraint and the reasons; the totals over the voyages |
 | `fleetSize` | the fleet a period's demand needs | vessel, products, installations (each with its demand and minimum visits), route, portHours, weather, fuelPricePerT, periodDays, vesselAvailableDays, voyageRounding, vesselRounding | per voyage set the voyages before and after rounding and what drives them, the hours, the voyage days and the vessel-days; the vessel-days, the vessels before and after rounding, spare or short vessel-days, the fleet utilisation, the fuel and its cost for the period |
 | `fleetVariability` | the fleet under weather and demand variability | every fleetSize input with the weather factor a number or a triangular, demandFactor, plannedVessels, iterations, seed | the plan at the modes; the vessel-days and the vessels required as mean, P90, P50, P10, min and max; the distribution of whole vessels; the probability of being short and the expected short vessel-days for the planned vessels; the exceedance sentence |
-| `deckPlan` | the deck cargo of a stated number of voyages | deck, items, voyages, rule | the packing order, the usable area, each voyage's units, area, weight and their utilisations, the voyages used, every overflow unit with its reason, the totals and the lower bound |
+| `deckPlan` | the deck cargo of a stated number of voyages | deck, items, voyages, rule | the packing order, the usable area, each voyage's units, area, weight and their utilisations, the voyages used, every overflow unit with its reason, the totals, the lower bound and the units no voyage can ever carry |
 | `shoreBase` | the berth queue at the supply base | berths, arrivalsPerDay, workingHoursPerDay, service, model, targetMeanWaitHours (optional) | the service hours, the arrivals an hour, the offered load, the berth utilisation, the probability of waiting (M/M/c), the mean queue, the mean wait, the mean time at the base, the mean in the system; with a target, the fewest berths that meet it |
 
 The stated constants, read from the exported `DEFAULTS` and `ACTIVITIES`:
@@ -78,7 +78,7 @@ The engine carries its citations in its own words. The `basis` of one call of ea
 | fleetSize (ekene-fleet-psv-milk-run) | source | voyages a period = the largest of demand / capacity per constraint and the minimum visits; vessel-days = voyages x voyage days; vessels = vessel-days / available days a vessel, by the stated rounding rule; sailing hours = distance / speed (Skoko et al. 2024: 10 knots is 240 nautical miles a day); fuel = hours in each activity x the stated tonnes an hour; fuel cost = tonnes x price (Skoko et al. 2024, Tables 1, 4 and 7) |
 | fleetVariability (ekene-variability-psv-milk-run) | rule | per iteration the weather factor is drawn first, then the demand factor, each only when it varies (lib/stats mulberry32 seed 20260927, triangular inverse CDF); the fleet is sized as fleetSize does; short means vessel-days above plannedVessels x available days; for a requirement P90 is the LOW figure (10th percentile) and P10 the HIGH figure (90th percentile) |
 | fleetVariability (ekene-variability-psv-milk-run) | source | lib/stats (mulberry32, triInvCDF, basicStats) and lib/conventions/percentile.js; voyages a period = the largest of demand / capacity per constraint and the minimum visits; vessel-days = voyages x voyage days; vessels = vessel-days / available days a vessel, by the stated rounding rule |
-| deckPlan (ekene-deck-one-voyage-ffd) | rule | first-fit decreasing by footprint area (ties: heavier first, then item id, then unit number); usable area = 800 m2 x 0.75; a unit goes to the first voyage whose area and deck load still hold it; the lower bound is the larger of total area / usable area and total weight / deck load, rounded up; an area bound with no stacking and no check of shapes |
+| deckPlan (ekene-deck-one-voyage-ffd) | rule | first-fit decreasing by footprint area (ties: heavier first, then item id, then unit number); usable area = 800 m2 x 0.75; a unit goes to the first voyage whose area and deck load still hold it; the lower bound counts only the units that fit an empty voyage (a unit larger than the usable area or heavier than the deck load is listed in neverFit and left out): the larger of their area / usable area and their weight / deck load, rounded up, and 0 when no unit fits; an overflow reason gives the most usable area and deck load left on any voyage at the unit's turn and names the limit that stops it; an area bound with no stacking and no check of shapes |
 | deckPlan (ekene-deck-one-voyage-ffd) | source | Johnson (1973) first-fit decreasing; Coffman, Garey and Johnson (1978) example as printed in Wikipedia, First-fit-decreasing bin packing (CC BY-SA 4.0); Aas, Halskau and Wallace (2009): deck cargo is measured in square metres and is not stacked; bulk travels in segregated tanks (taught by concept) |
 | shoreBase (ekene-base-mmc) | rule | working-hour clock: 3.2 arrivals a day over 24 working hours; service 8 hours = 2 fixed + 5 for lifts alongside 6 for bulk; M/M/c (Poisson arrivals, exponential service, first come first served) |
 | shoreBase (ekene-base-mmc) | source | Adan and Resing, Queueing Systems (2015): eq. (5.1) delay probability, computed by the stable recursion (11.3) and remark 11.3.2; eq. (5.2) E(Lq) = PiW rho / (1 - rho); eq. (5.3) E(W) = PiW / ((1 - rho) c mu); Little's law (section 3.4) |
@@ -599,7 +599,7 @@ THE AREA BOUND. A unit fits a voyage when the footprints already on it plus its 
 
 THE EKENE VOYAGE OF DECK CARGO (golden input ekene-deck-one-voyage-ffd): 61 units with footprints totalling 615.729600 m2 and weights totalling 515.600000 t (engine), against a usable area of 600.000000 m2 and a deck load of 2000 t.
 
-THE LOWER BOUND on voyages is the larger of the total area over the usable area and the total weight over the deck load, each rounded up at twelve digits: here 2 voyages (engine). No packing rule can carry the cargo on fewer; a rule may need more.
+THE LOWER BOUND on voyages counts only the units that fit an empty voyage: the larger of their area over the usable area and their weight over the deck load, each rounded up at twelve digits. A unit larger than the usable area or heavier than the deck load can never be carried; the engine lists it in `neverFit` and leaves it out of the bound. Here every unit fits an empty voyage (never fit: none) and the bound is 2 voyages (engine). No packing rule can carry the carriable cargo on fewer; a rule may need more.
 
 WHEN THE DECK LOAD BINDS. The same cargo on a deck rated at 300 t (golden input ekene-deck-light-load-limit, 2 voyages) packs as below (engine): the weights reach the deck load before the footprints fill the area.
 
@@ -610,10 +610,12 @@ WHEN THE DECK LOAD BINDS. The same cargo on a deck rated at 300 t (golden input 
 
 WHAT THE AREA BOUND LEAVES OUT, and the two overflow reasons no voyage count can cure (golden inputs):
 
-| golden input | the overflow reason, verbatim |
-| --- | --- |
-| deck-item-larger-than-deck | big is overflow: its footprint 12.5 m2 is larger than the usable deck area 10 m2 |
-| deck-item-heavier-than-deck-load | heavy is overflow: its weight 10.5 t is above the deck load 10 t |
+| golden input | the overflow reason, verbatim | never fit (engine) | lower bound (engine) |
+| --- | --- | --- | --- |
+| deck-item-larger-than-deck | big is overflow: its footprint 12.5 m2 is larger than the usable deck area 10 m2 | big | 1 |
+| deck-item-heavier-than-deck-load | heavy is overflow: its weight 10.5 t is above the deck load 10 t | heavy | 0 |
+
+On deck-item-larger-than-deck the two units that fit need 1 voyage and the bound is 1; on deck-item-heavier-than-deck-load no unit fits an empty voyage, so the bound is 0 (engine).
 
 The bound does not compare a basket's length with the deck's width, does not stack a skip on a container, does not keep a lane clear for the crane and does not balance the load; those are the deck foreman's, and a plan that passes the area bound can still fail on the deck (section 27).
 
@@ -629,8 +631,8 @@ THE EKENE CARGO ON ONE VOYAGE, BOTH RULES (golden inputs ekene-deck-one-voyage-f
 | ekene-deck-one-voyage-first-fit | first-fit | chem-ibc#1, chem-ibc#2, chem-ibc#3, chem-ibc#4 | 580.629600 | 477.600000 | 60 | 1 |
 
 First-fit decreasing puts the two casing bundles on first and leaves 11 small units behind, 16.500000 m2 of footprint (derived: the overflow footprints added). First fit in the booked order fills the deck with the small units first and strands a casing bundle, 35.100000 m2 (engine). The overflow reasons, verbatim:
-> skip#6 is overflow: no voyage has 4.5 m2 of usable area and 3 t of deck load left
-> pipe-bundle#2 is overflow: no voyage has 35.1 m2 of usable area and 38 t of deck load left
+> skip#6 is overflow: it needs 4.5 m2 of usable area and 3 t of deck load; at its turn the most left on any voyage was 3.1704 m2 (short) and 1503 t (enough); usable area stops it
+> pipe-bundle#2 is overflow: it needs 35.1 m2 of usable area and 38 t of deck load; at its turn the most left on any voyage was 19.3704 m2 (short) and 1522.4 t (enough); usable area stops it
 
 TWO VOYAGES (golden input ekene-deck-two-voyages-ffd): first-fit decreasing carries all 61 units, 599.229600 m2 on the first voyage and 16.500000 m2 on the second (engine), no overflow, matching the lower bound of 2.
 
@@ -638,7 +640,17 @@ TIES GO TO THE HEAVIER UNIT, THEN THE ITEM ID, THEN THE UNIT NUMBER (golden inpu
 
 A FIT IS INCLUSIVE. Two units of 2.500000 m2 and 1.5 t fill a usable area of 5.000000 m2 and a deck load of 3 t exactly (golden input deck-exact-fit-inclusive): both go on, area utilisation 1.000000. Footprints of 0.1 and 0.2 m2 fill a 0.3 m2 deck (golden input deck-decimal-footprints-fill-exactly: 2 units carried, the double sum 0.30000000000000004, engine).
 
-THE THREE OVERFLOW REASONS the engine writes: a footprint larger than the usable deck area; a weight above the deck load; and no voyage with the unit's area and weight left. The first two need a bigger deck; the third needs another voyage.
+THE OVERFLOW REASONS the engine writes. A unit that can never be carried says so: its footprint is larger than the usable deck area, or its weight is above the deck load (section 17); those need a bigger deck. Any other unit left behind is stopped by the room left at its turn, after every unit before it in the packing order is placed: the reason gives what the unit needs, the most usable area and the most deck load left on any voyage, each marked short or enough, and names the limit that stops it, in one of four endings. Those need another voyage. The four endings on their golden inputs, verbatim:
+
+| golden input | rule | voyages | the overflow reason, verbatim |
+| --- | --- | --- | --- |
+| deck-overflow-area-stops-it | first-fit-decreasing-area | 1 | b is overflow: it needs 2 m2 of usable area and 1 t of deck load; at its turn the most left on any voyage was 1 m2 (short) and 99 t (enough); usable area stops it |
+| deck-overflow-deck-load-stops-it | first-fit | 1 | b is overflow: it needs 1 m2 of usable area and 2 t of deck load; at its turn the most left on any voyage was 9 m2 (enough) and 1 t (short); deck load stops it |
+| deck-overflow-both-stop-it | first-fit | 1 | b is overflow: it needs 2 m2 of usable area and 2 t of deck load; at its turn the most left on any voyage was 1 m2 (short) and 1 t (short); usable area and deck load both stop it |
+| deck-overflow-no-one-voyage-has-both | first-fit | 2 | c is overflow: it needs 3 m2 of usable area and 1 t of deck load; at its turn the most left on any voyage was 9 m2 (enough) and 9 t (enough); no one voyage had both, so usable area and deck load together stop it |
+| deck-overflow-at-exact-remaining-room | first-fit | 1 | c is overflow: it needs 1 m2 of usable area and 1 t of deck load; at its turn the most left on any voyage was 0 m2 (short) and 0 t (short); usable area and deck load both stop it |
+
+The last ending is the one to read with care: on deck-overflow-no-one-voyage-has-both one voyage has the area and another has the deck load, so each limit alone reads enough and the pair still stops the unit. On deck-overflow-at-exact-remaining-room the unit before it fills the room exactly, which fits (a fit is inclusive), and nothing is left at its turn.
 
 # SECTION 19: Published packing examples: two capacities, a larger deck that needs more voyages, and a tight worst case (owned by Professional m06)
 
@@ -795,6 +807,8 @@ Each rule has its own boundary. None is global: some are inclusive, some strict,
 | short in the Monte Carlo | need = planned capacity: not short | one vessel fewer: always short | variability-at-capacity-is-not-short, variability-one-vessel-short-always |
 | iterations times voyage sets | 181818 with 11 sets: accepted | 181819: refused | variability-refuse-draws-cap |
 | a deck fit | an exact fill: fits | heavier than the deck load: overflow | deck-exact-fit-inclusive, deck-item-heavier-than-deck-load |
+| the room at a unit's turn | room used exactly: the unit fits | nothing left: overflow, both short | deck-overflow-at-exact-remaining-room |
+| the lower bound | a unit that fits an empty voyage: counted | too large or too heavy for any voyage: listed in neverFit and left out | deck-item-larger-than-deck, deck-item-heavier-than-deck-load |
 | the steady state | utilisation 0.9995: accepted | utilisation 1: refused, printing 19.999999 | base-just-below-saturation, base-refuse-saturated-exactly |
 | a printed bound | 26.666666 is printed (accepted) | 26.666667 would be refused | base-refuse-saturated-thirds |
 | the berth target | wait = target: met | target 0: unreachable, reported | base-target-met-exactly-by-current, base-target-zero-unreachable |

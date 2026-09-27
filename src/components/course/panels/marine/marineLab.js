@@ -2,7 +2,7 @@
 //
 // Every number this lab returns is a return value of the vendored engine
 // (packages/engines/engines/supplychain/marineLogistics.js, sha-identical with
-// petrolord-engines 110f0a0, with the canonical Monte Carlo it imports from
+// petrolord-engines e67e7ba, with the canonical Monte Carlo it imports from
 // lib/stats and the exceedance sentence it imports from
 // lib/conventions/percentile.js) on the vendored Ekene fixture
 // (test-data/supplychain/ekene-marine), on the INPUTS of the vendored golden
@@ -252,6 +252,11 @@ export const STARTS = Object.freeze({
   deckExactFit: G('deck-exact-fit-inclusive'),
   deckTooLarge: G('deck-item-larger-than-deck'),
   deckTooHeavy: G('deck-item-heavier-than-deck-load'),
+  deckAreaStops: G('deck-overflow-area-stops-it'),
+  deckLoadStops: G('deck-overflow-deck-load-stops-it'),
+  deckBothStop: G('deck-overflow-both-stop-it'),
+  deckNoOneVoyage: G('deck-overflow-no-one-voyage-has-both'),
+  deckExactRoom: G('deck-overflow-at-exact-remaining-room'),
   // shoreBase
   baseEkeneMmc: G('ekene-base-mmc'),
   baseEkeneMdc: G('ekene-base-mdc'),

@@ -177,7 +177,7 @@ const EXPORTS = [
   ['voyagePlan', 'the voyages of one vessel on a stated route', 'vessel, products, installations (each with its cargo), route, portHours, weather, fuelPricePerT', 'per voyage the legs, the hours by activity with the weather factor, the days, the fuel by activity, the fuel cost, the load, the utilisation of every capacity constraint, the binding constraint, every overloaded constraint and the reasons; the totals over the voyages'],
   ['fleetSize', 'the fleet a period\'s demand needs', 'vessel, products, installations (each with its demand and minimum visits), route, portHours, weather, fuelPricePerT, periodDays, vesselAvailableDays, voyageRounding, vesselRounding', 'per voyage set the voyages before and after rounding and what drives them, the hours, the voyage days and the vessel-days; the vessel-days, the vessels before and after rounding, spare or short vessel-days, the fleet utilisation, the fuel and its cost for the period'],
   ['fleetVariability', 'the fleet under weather and demand variability', 'every fleetSize input with the weather factor a number or a triangular, demandFactor, plannedVessels, iterations, seed', 'the plan at the modes; the vessel-days and the vessels required as mean, P90, P50, P10, min and max; the distribution of whole vessels; the probability of being short and the expected short vessel-days for the planned vessels; the exceedance sentence'],
-  ['deckPlan', 'the deck cargo of a stated number of voyages', 'deck, items, voyages, rule', 'the packing order, the usable area, each voyage\'s units, area, weight and their utilisations, the voyages used, every overflow unit with its reason, the totals and the lower bound'],
+  ['deckPlan', 'the deck cargo of a stated number of voyages', 'deck, items, voyages, rule', 'the packing order, the usable area, each voyage\'s units, area, weight and their utilisations, the voyages used, every overflow unit with its reason, the totals, the lower bound and the units no voyage can ever carry'],
   ['shoreBase', 'the berth queue at the supply base', 'berths, arrivalsPerDay, workingHoursPerDay, service, model, targetMeanWaitHours (optional)', 'the service hours, the arrivals an hour, the offered load, the berth utilisation, the probability of waiting (M/M/c), the mean queue, the mean wait, the mean time at the base, the mean in the system; with a target, the fewest berths that meet it'],
 ];
 
@@ -190,7 +190,7 @@ w('# THIS FILE IS THE ONLY TEACHING TRUTH FOR THIS COURSE. Every number in every
 w();
 w('# PRECISION. Every distance, speed, time in hours or days, vessel-day, fuel tonnage, amount of money, area, weight, volume, fraction, utilisation, probability, factor, count that is not whole and queue figure prints to SIX decimals; whole counts (voyages rounded up, vessels, berths, units, draws, seeds) and whole inputs print as whole numbers; a figure of sixteen or more significant digits at six decimals prints with its thousands grouped by commas; an engine message, reason and basis is printed verbatim, figures and all. Inside a message the engine prints money rounded to the cent and a computed quantity to six decimals (both half away from zero, trailing zeros dropped), and a stated input as it was given.');
 w();
-w(`# ENGINE. ${ENGINE_REL}, vendored sha-identical with petrolord-engines 110f0a0 (engines PRs #282 and #283, the second its validation record FINDINGS-marine.md with the lead's decisions), ${engineLines} lines, at its canonical path in the NextGen repository. It imports mulberry32, triInvCDF and basicStats from lib/stats/stats.js and EXCEEDANCE_DEFINITION from lib/conventions/percentile.js, and nothing else. It makes no network call.`);
+w(`# ENGINE. ${ENGINE_REL}, vendored sha-identical with petrolord-engines e67e7ba (engines PRs #282, #283 and #284: the engine, its validation record FINDINGS-marine.md with the lead's decisions, and the deckPlan overflow reasons that name the stopping limit with the lower bound over the units that fit), ${engineLines} lines, at its canonical path in the NextGen repository. It imports mulberry32, triInvCDF and basicStats from lib/stats/stats.js and EXCEEDANCE_DEFINITION from lib/conventions/percentile.js, and nothing else. It makes no network call.`);
 w();
 w('# AN APP COURSE. The Suite app for this course is the Marine Logistics Planner, in the Suite\'s Midstream & Downstream module, which runs this same engine file (the same blob). Every practical in this course also runs in the course\'s own four calculator panels, which call the vendored engine on the learner\'s own inputs, so a learner without a Suite seat can work every exercise.');
 w();
@@ -821,8 +821,8 @@ const ekDp = ekD1;
 w(`THE EKENE VOYAGE OF DECK CARGO (golden input ekene-deck-one-voyage-ffd): ${S(FX.deckItems.reduce((s, x) => s + x.quantity, 0))} units with footprints totalling ${f6(ekDp.totalAreaM2)} m2 and weights totalling ${f6(ekDp.totalWeightT)} t (engine), against a usable area of ${f6(ekDp.usableAreaM2)} m2 and a deck load of ${S(FX.deck.loadT)} t.`);
 must('the fixture has 61 units', FX.deckItems.reduce((s, x) => s + x.quantity, 0) === 61, 'units');
 w();
-w(`THE LOWER BOUND on voyages is the larger of the total area over the usable area and the total weight over the deck load, each rounded up at twelve digits: here ${S(ekDp.lowerBound)} voyages (engine). No packing rule can carry the cargo on fewer; a rule may need more.`);
-must('lower bound 2: the area ratio 1.026216 rounds up to 2', ekDp.lowerBound === 2 && Math.ceil(ekDp.totalAreaM2 / ekDp.usableAreaM2) === 2, ekDp.lowerBound);
+w(`THE LOWER BOUND on voyages counts only the units that fit an empty voyage: the larger of their area over the usable area and their weight over the deck load, each rounded up at twelve digits. A unit larger than the usable area or heavier than the deck load can never be carried; the engine lists it in \`neverFit\` and leaves it out of the bound. Here every unit fits an empty voyage (never fit: ${list(ekDp.neverFit)}) and the bound is ${S(ekDp.lowerBound)} voyages (engine). No packing rule can carry the carriable cargo on fewer; a rule may need more.`);
+must('lower bound 2: the area ratio 1.026216 rounds up to 2, and no Ekene unit is too large or heavy', ekDp.lowerBound === 2 && Math.ceil(ekDp.totalAreaM2 / ekDp.usableAreaM2) === 2 && ekDp.neverFit.length === 0, ekDp.lowerBound);
 w();
 const lgt = runG('ekene-deck-light-load-limit');
 const lgtA = argsOf('ekene-deck-light-load-limit');
@@ -835,11 +835,13 @@ must('the light deck packs the first voyage to its load', lgt.voyages[0].loadUti
 w();
 w('WHAT THE AREA BOUND LEAVES OUT, and the two overflow reasons no voyage count can cure (golden inputs):');
 w();
-table(['golden input', 'the overflow reason, verbatim'], [
-  ['deck-item-larger-than-deck', big.overflow.map((o) => o.reason).join(' / ')],
-  ['deck-item-heavier-than-deck-load', hvy.overflow.map((o) => o.reason).join(' / ')],
+table(['golden input', 'the overflow reason, verbatim', 'never fit (engine)', 'lower bound (engine)'], [
+  ['deck-item-larger-than-deck', big.overflow.map((o) => o.reason).join(' / '), list(big.neverFit), S(big.lowerBound)],
+  ['deck-item-heavier-than-deck-load', hvy.overflow.map((o) => o.reason).join(' / '), list(hvy.neverFit), S(hvy.lowerBound)],
 ]);
-must('one unit too large and one too heavy', big.overflow.length === 1 && hvy.overflow.length === 1, 'overflow');
+must('one unit too large and one too heavy, each listed as never fitting and left out of the bound', big.overflow.length === 1 && hvy.overflow.length === 1 && big.neverFit.join() === 'big' && hvy.neverFit.join() === 'heavy' && big.lowerBound === 1 && hvy.lowerBound === 0, `${big.lowerBound} ${hvy.lowerBound}`);
+w();
+w(`On deck-item-larger-than-deck the two units that fit need ${S(big.lowerBound)} voyage and the bound is ${S(big.lowerBound)}; on deck-item-heavier-than-deck-load no unit fits an empty voyage, so the bound is ${S(hvy.lowerBound)} (engine).`);
 w();
 w('The bound does not compare a basket\'s length with the deck\'s width, does not stack a skip on a container, does not keep a lane clear for the crane and does not balance the load; those are the deck foreman\'s, and a plan that passes the area bound can still fail on the deck (' + ref('notcomputed') + ').');
 
@@ -876,7 +878,13 @@ const dffA = argsOf('deck-decimal-footprints-fill-exactly');
 w(`A FIT IS INCLUSIVE. Two units of ${f6(exfA.items[0].lengthM * exfA.items[0].widthM)} m2 and ${S(exfA.items[0].weightT)} t fill a usable area of ${f6(exf.usableAreaM2)} m2 and a deck load of ${S(argsOf('deck-exact-fit-inclusive').deck.loadT)} t exactly (golden input deck-exact-fit-inclusive): both go on, area utilisation ${f6(exf.voyages[0].areaUtilisation)}. Footprints of ${S(dffA.items[0].lengthM)} and ${S(dffA.items[1].lengthM)} m2 fill a ${S(dffA.deck.areaM2)} m2 deck (golden input deck-decimal-footprints-fill-exactly: ${S(dff.voyages[0].units.length)} units carried, the double sum ${S(dff.voyages[0].areaM2)}, engine).`);
 must('exact fit carries both units and the decimal fill carries both', exf.voyages[0].units.length === 2 && exf.overflow.length === 0 && dff.voyages[0].units.length === 2, 'exact');
 w();
-w('THE THREE OVERFLOW REASONS the engine writes: a footprint larger than the usable deck area; a weight above the deck load; and no voyage with the unit\'s area and weight left. The first two need a bigger deck; the third needs another voyage.');
+w('THE OVERFLOW REASONS the engine writes. A unit that can never be carried says so: its footprint is larger than the usable deck area, or its weight is above the deck load (' + ref('deckcargo') + '); those need a bigger deck. Any other unit left behind is stopped by the room left at its turn, after every unit before it in the packing order is placed: the reason gives what the unit needs, the most usable area and the most deck load left on any voyage, each marked short or enough, and names the limit that stops it, in one of four endings. Those need another voyage. The four endings on their golden inputs, verbatim:');
+w();
+const STOPS = ['deck-overflow-area-stops-it', 'deck-overflow-deck-load-stops-it', 'deck-overflow-both-stop-it', 'deck-overflow-no-one-voyage-has-both', 'deck-overflow-at-exact-remaining-room'].map((id) => [id, runG(id)]);
+table(['golden input', 'rule', 'voyages', 'the overflow reason, verbatim'], STOPS.map(([id, r]) => [id, argsOf(id).rule, S(argsOf(id).voyages), r.overflow.map((o) => o.reason).join(' / ')]));
+must('the four endings each appear on their golden input', /usable area stops it$/.test(STOPS[0][1].overflow[0].reason) && /deck load stops it$/.test(STOPS[1][1].overflow[0].reason) && /both stop it$/.test(STOPS[2][1].overflow[0].reason) && /together stop it$/.test(STOPS[3][1].overflow[0].reason) && /\(short\) and 0 t \(short\)/.test(STOPS[4][1].overflow[0].reason), 'endings');
+w();
+w('The last ending is the one to read with care: on deck-overflow-no-one-voyage-has-both one voyage has the area and another has the deck load, so each limit alone reads enough and the pair still stops the unit. On deck-overflow-at-exact-remaining-room the unit before it fills the room exactly, which fits (a fit is inclusive), and nothing is left at its turn.');
 
 /* ============================================================ SECTION 19 */
 
@@ -1052,6 +1060,8 @@ const bndT = [
   ['short in the Monte Carlo', 'need = planned capacity: not short', 'one vessel fewer: always short', 'variability-at-capacity-is-not-short, variability-one-vessel-short-always', runG('variability-at-capacity-is-not-short').probabilityShort === 0 && runG('variability-one-vessel-short-always').probabilityShort === 1],
   ['iterations times voyage sets', '181818 with 11 sets: accepted', '181819: refused', 'variability-refuse-draws-cap', !!drw.error],
   ['a deck fit', 'an exact fill: fits', 'heavier than the deck load: overflow', 'deck-exact-fit-inclusive, deck-item-heavier-than-deck-load', exf.overflow.length === 0 && hvy.overflow.length === 1],
+  ['the room at a unit\'s turn', 'room used exactly: the unit fits', 'nothing left: overflow, both short', 'deck-overflow-at-exact-remaining-room', STOPS[4][1].voyages[0].units.length === 2 && STOPS[4][1].overflow.length === 1],
+  ['the lower bound', 'a unit that fits an empty voyage: counted', 'too large or too heavy for any voyage: listed in neverFit and left out', 'deck-item-larger-than-deck, deck-item-heavier-than-deck-load', big.lowerBound === 1 && hvy.lowerBound === 0 && hvy.neverFit.length === 1],
   ['the steady state', 'utilisation 0.9995: accepted', 'utilisation 1: refused, printing 19.999999', 'base-just-below-saturation, base-refuse-saturated-exactly', jb.berthUtilisation < 1 && /19\.999999/.test(satX.error)],
   ['a printed bound', '26.666666 is printed (accepted)', '26.666667 would be refused', 'base-refuse-saturated-thirds', /26\.666666 \(rounded down/.test(sat[1][1])],
   ['the berth target', 'wait = target: met', 'target 0: unreachable, reported', 'base-target-met-exactly-by-current, base-target-zero-unreachable', tg[2][1].target.berths === 1 && tg[3][1].target.berths === null],

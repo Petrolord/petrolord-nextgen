@@ -112,8 +112,8 @@ export const VARIANTS = {
     'list.sort((p, q) => (key12(p.areaM2) - key12(q.areaM2))',
   ],
   deck_load_ignored: [
-    ' && key12(b.weightT + u.weightT) <= key12(deck.loadT));',
-    ');',
+    'const loadFits = (b) => key12(b.weightT + u.weightT) <= key12(deck.loadT);',
+    'const loadFits = () => true;',
   ],
   last_fit: [
     'const bin = bins.find((b) =>',

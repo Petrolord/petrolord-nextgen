@@ -8,7 +8,7 @@
 # a Suite seat can work every exercise.
 #
 # Engine: engines/supplychain/marineLogistics.js, vendored sha-identical with
-# petrolord-engines 110f0a0 (engines PRs #282 and #283) at its canonical path;
+# petrolord-engines e67e7ba (engines PRs #282 to #284) at its canonical path;
 # its runtime imports (lib/stats/stats.js for the canonical Monte Carlo:
 # mulberry32, triInvCDF, basicStats; lib/conventions/percentile.js for the
 # exceedance sentence) were already vendored in NextGen at the same blobs, so

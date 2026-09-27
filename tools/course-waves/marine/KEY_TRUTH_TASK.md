@@ -70,7 +70,9 @@ PROVENANCE.
 10. First-fit decreasing packs the big units first: 599.229600 m2 carried.
 11. First fit in the booked order can strand a big unit: 35.100000 m2 left
     behind.
-12. The lower bound is the area bound: 2 voyages.
+12. The lower bound is the area bound over the units that fit an empty voyage:
+    2 voyages; a unit too large or too heavy for any voyage is listed as never
+    fitting and left out of it.
 
 ### Expert
 
