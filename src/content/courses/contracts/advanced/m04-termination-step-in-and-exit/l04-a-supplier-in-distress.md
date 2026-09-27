@@ -4,7 +4,7 @@ A supplier in financial distress can fail suddenly, and when it is critical the 
 
 ## Distress can outrun the accounts
 
-The UK Corporate Financial Distress guidance note (2025 edition), openly licensed UK good practice, warns: "Financial decline can arise quickly, therefore an entity’s financial statements may not include signs of distress." (section 2.4, p.8). It lists non-financial warning signs that can show distress before published accounts do: requests to be paid in advance, invoice discounting or factoring, key supply chain partners refusing to keep trading, and suppliers seeking to renegotiate contract terms (section 2.3.2 and Appendix 1).
+The UK Corporate Financial Distress guidance note (2025 edition), openly licensed UK good practice, warns: "Financial decline can arise quickly, therefore an entity’s financial statements may not include signs of distress." (section 2.4, p.8). Its non-financial warning signs, which can show distress before published accounts do, include key supply chain partners refusing to keep trading and a supplier seeking to renegotiate contract terms (section 2.3.2); its indicator table places requests to be paid in advance and invoice discounting or factoring among the financial signs (Appendix 1, Table 1).
 
 A contract manager often sees these signs first, in invoices, requests and late deliveries.
 

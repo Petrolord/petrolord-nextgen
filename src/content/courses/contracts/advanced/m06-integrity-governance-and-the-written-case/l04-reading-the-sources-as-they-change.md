@@ -8,7 +8,7 @@ The sources for this course were checked on 27 September 2026, and the course is
 
 ## Guidelines under an Act
 
-The NCDMB Guidelines for NCDMB Approvals of Nigerian Oil and Gas Industry Contracting Processes (2025 update) revise the guidelines issued in April 2018 to reflect an industry service level agreement of September 2023 and Presidential Directives of February 2024 (Purpose (ii)). They add the Nigerian Content Compliance Commitment at award (Purpose (vii) and Step 5). NCDMB's Joint Qualification System guideline (Issue D1), read by concept, makes that system the single platform for registration, pre-qualification, compliance certificates and reports (sections 1 and 2).
+The NCDMB Guidelines for NCDMB Approvals of Nigerian Oil and Gas Industry Contracting Processes (2025 update) revise the guidelines issued in April 2018 to reflect an industry service level agreement of September 2023 and Presidential Directives of February 2024 (Purpose (ii)). They add the Nigerian Content Compliance Commitment at award (Purpose (vii) and Step 5). NCDMB's Joint Qualification System guideline (Issue D1), read by concept, makes that system the single platform for registration, pre-qualification, compliance certificates and reports, in its first two sections.
 
 ## Doubts stay doubts
 
