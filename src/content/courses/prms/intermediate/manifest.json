@@ -1,0 +1,362 @@
+{
+ "app_slug": "prms",
+ "tier": "intermediate",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-project-maturity-sub-classes",
+   "title": "Project Maturity Sub-Classes",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-on-production-approved-and-justified",
+     "title": "On production, approved and justified",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "prms-classification-calculator",
+      "prms-reserves-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-investment-decision",
+     "title": "The investment decision and the sub-class",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "prms-reserves-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-pending-on-hold-unclarified-and-not-viable",
+     "title": "Pending, on hold, unclarified and not viable",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "prms-reserves-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-prospect-lead-and-play",
+     "title": "Prospect, lead and play",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "prms-reserves-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-a-sub-class-the-facts-contradict",
+     "title": "A sub-class the facts contradict",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "prms-reserves-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-the-seven-commerciality-criteria",
+   "title": "The Seven Commerciality Criteria",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-a-plan-money-and-a-time-frame",
+     "title": "A plan, money and a time-frame",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "prms-reserves-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-economics-market-facilities-and-approvals",
+     "title": "Economics, a market, facilities and approvals",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "prms-reserves-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-five-year-benchmark",
+     "title": "The five-year benchmark",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "prms-reserves-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-firm-intention-to-proceed",
+     "title": "The firm intention to proceed",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "prms-reserves-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-incremental-and-cumulative-categories",
+   "title": "Incremental and Cumulative Categories",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-increments-of-reserves",
+     "title": "Increments of reserves",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "prms-reserves-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-building-the-cumulative-from-increments",
+     "title": "Building the cumulative from increments",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "prms-reserves-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-increments-from-three-forecasts",
+     "title": "Increments from three forecasts",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "prms-reserves-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-a-zero-increment",
+     "title": "A zero increment",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "prms-reserves-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-the-economic-limit",
+   "title": "The Economic Limit",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-three-technical-forecasts",
+     "title": "Three technical forecasts",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "prms-reserves-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-canonical-cash-flow-underneath",
+     "title": "The canonical cash flow underneath",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "prms-reserves-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-trailing-years-cut-at-the-limit",
+     "title": "Trailing years cut at the limit",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "prms-reserves-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-economic-test",
+     "title": "The economic test",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "prms-reserves-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-low-case-that-fails",
+     "title": "The low case that fails",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "prms-reserves-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-entitlement-and-the-reporting-basis",
+   "title": "Entitlement and the Reporting Basis",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-gross-working-interest-and-net-entitlement",
+     "title": "Gross, working interest and net entitlement",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "prms-reserves-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-a-royalty-interest-and-a-production-tax",
+     "title": "A royalty interest and a production tax",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "prms-reserves-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-barrels-of-oil-equivalent",
+     "title": "Barrels of oil equivalent",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "prms-reserves-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-cash-flows-at-the-working-interest",
+     "title": "Cash flows at the working interest",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "prms-reserves-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-licence-expiry-and-time",
+   "title": "Licence Expiry and Time",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-production-beyond-the-licence",
+     "title": "Production beyond the licence",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "prms-reserves-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-when-renewal-is-expected",
+     "title": "When renewal is expected",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "prms-reserves-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-capital-after-the-expiry",
+     "title": "Capital after the expiry",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "prms-reserves-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "prms-reserves-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

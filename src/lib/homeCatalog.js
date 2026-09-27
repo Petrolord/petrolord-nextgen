@@ -88,6 +88,7 @@ export const HOME_COURSES = [
   c('gsa', 'economics', 'Gas Commercialisation & Gas Sales Agreements', 'Work take-or-pay, make-up and gas price formulas the way the contract writes them.', 'coming_soon', true),
   c('joa', 'economics', 'Joint Ventures, Operating Agreements & Cost Recovery', 'Work cash calls, carries, defaults and PSC cost recovery the way the agreement writes them.', 'coming_soon', true),
   c('farmout', 'economics', 'Farm-ins, Farm-outs & Asset Valuation', 'Work promotes, carries, deal value and the consent fee the way the deal terms write them.', 'coming_soon', true),
+  c('prms', 'economics', 'Reserves & Resources under SPE-PRMS 2018', 'Classify, categorise, add up and reconcile reserves and resources the way SPE-PRMS 2018 frames them.', 'coming_soon', true),
   c('riskchange', 'assurance', 'Risk, Change & Learning', 'Risk registers, MOC and lessons learned done properly.'),
   c('compliance', 'assurance', 'Compliance, Audit & Quality', 'Audit-ready teams and consistent quality.'),
   c('safetystats', 'hse', 'Safety Performance Statistics & KPIs', 'Act on real safety trends instead of noise in the data.'),

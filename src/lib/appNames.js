@@ -59,6 +59,7 @@ export const APP_NAMES = {
   gsa: 'Gas Commercialisation & Gas Sales Agreements',
   joa: 'Joint Ventures, Operating Agreements & Cost Recovery',
   farmout: 'Farm-ins, Farm-outs & Asset Valuation',
+  prms: 'Reserves & Resources under SPE-PRMS 2018',
   separation: 'Separation & Slug Catching',
   linesizing: 'Pipeline & Line Sizing',
   rotating: 'Rotating Equipment',

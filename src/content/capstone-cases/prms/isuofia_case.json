@@ -1,0 +1,136 @@
+{
+ "dataset": "ISUOFIA (synthetic)",
+ "label": "ISUOFIA, the aggregation and reconciliation of the Isuofia field (synthetic)",
+ "aggregate:reserves": {
+  "resourceClass": "reserves",
+  "level": "field",
+  "unit": "MMbbl",
+  "projects": [
+   {
+    "id": "ISF-1",
+    "name": "Isuofia Main (synthetic)",
+    "distribution": {
+     "type": "lognormal",
+     "mean": 7.35,
+     "stdDev": 2.15
+    }
+   },
+   {
+    "id": "ISF-2",
+    "name": "Isuofia North (synthetic)",
+    "distribution": {
+     "type": "normal",
+     "mean": 5.42,
+     "stdDev": 0.87
+    }
+   },
+   {
+    "id": "ISF-3",
+    "name": "Isuofia East (synthetic)",
+    "distribution": {
+     "type": "triangular",
+     "min": 2.1,
+     "mode": 3.65,
+     "max": 6.4
+    }
+   }
+  ],
+  "correlation": {
+   "type": "uniform",
+   "rho": 0.35
+  },
+  "seed": 20291204,
+  "iterations": 5000
+ },
+ "aggregate:contingent": {
+  "resourceClass": "contingent",
+  "level": "field",
+  "unit": "MMboe",
+  "projects": [
+   {
+    "id": "ISF-4",
+    "name": "Isuofia West gas (synthetic)",
+    "distribution": {
+     "type": "triangular",
+     "min": 1.8,
+     "mode": 3.2,
+     "max": 7.9
+    },
+    "chanceOfCommercialityPct": 55.5
+   },
+   {
+    "id": "ISF-5",
+    "name": "Isuofia Deep appraisal (synthetic)",
+    "distribution": {
+     "type": "lognormal",
+     "mean": 4.65,
+     "stdDev": 1.9
+    },
+    "chanceOfCommercialityPct": 38.25
+   },
+   {
+    "id": "ISF-6",
+    "name": "Isuofia South infill (synthetic)",
+    "distribution": {
+     "type": "normal",
+     "mean": 2.95,
+     "stdDev": 0.6
+    },
+    "chanceOfCommercialityPct": 71.4
+   }
+  ],
+  "correlation": {
+   "type": "uniform",
+   "rho": 0.2
+  },
+  "seed": 20291205,
+  "iterations": 5000
+ },
+ "reconcile": {
+  "resourceClass": "reserves",
+  "unit": "MMbbl",
+  "periodYears": 1,
+  "opening": {
+   "low": 24.6,
+   "best": 33.85,
+   "high": 45.2
+  },
+  "movements": [
+   {
+    "type": "production",
+    "quantity": 2.35
+   },
+   {
+    "type": "revisions",
+    "low": 0.42,
+    "best": -0.31,
+    "high": -1.05
+   },
+   {
+    "type": "extensions-and-discoveries",
+    "low": 1.15,
+    "best": 2.4,
+    "high": 3.95
+   },
+   {
+    "type": "divestments",
+    "low": 0.8,
+    "best": 1.1,
+    "high": 1.45
+   },
+   {
+    "type": "transfers",
+    "low": 2.2,
+    "best": 3.35,
+    "high": 4.6,
+    "note": "Isuofia West oil moved from Contingent Resources (synthetic)"
+   }
+  ],
+  "closing": {
+   "low": 25.3,
+   "best": 36.137,
+   "high": 49.35
+  },
+  "tolerance": 0.001
+ }
+}

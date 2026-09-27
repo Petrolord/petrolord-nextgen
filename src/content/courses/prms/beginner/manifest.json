@@ -1,0 +1,361 @@
+{
+ "app_slug": "prms",
+ "tier": "beginner",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-the-resources-framework",
+   "title": "The Resources Framework",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-why-a-common-classification",
+     "title": "Why a common classification",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "prms-classification-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-sources-and-the-dates-they-were-read",
+     "title": "Sources and the dates they were read",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "prms-classification-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-ekene-field-and-its-projects",
+     "title": "The Ekene field and its projects",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "prms-classification-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-project-as-the-unit",
+     "title": "The project as the unit of classification",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "prms-classification-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-calculator-panels-and-refusals",
+     "title": "The calculator panels and the refusals",
+     "order": 5,
+     "est_minutes": 14,
+     "panels": [
+      "prms-classification-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-discovered-and-undiscovered",
+   "title": "Discovered and Undiscovered",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-a-known-accumulation",
+     "title": "A known accumulation",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "prms-classification-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-prospective-resources",
+     "title": "Prospective Resources and their sub-classes",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "prms-classification-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-quantities-no-project-can-recover",
+     "title": "Quantities no project can recover",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "prms-classification-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-chance-of-commerciality",
+     "title": "The chance of commerciality",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "prms-classification-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-reserves-and-contingent-resources",
+   "title": "Reserves and Contingent Resources",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-what-makes-a-project-commercial",
+     "title": "What makes a project commercial",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "prms-classification-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-contingent-resources-and-what-holds-them",
+     "title": "Contingent Resources and what holds them back",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "prms-classification-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-developed-and-undeveloped-reserves",
+     "title": "Developed and undeveloped reserves",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "prms-classification-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-classifying-the-ekene-projects",
+     "title": "Classifying the Ekene projects",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "prms-classification-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-categories-and-the-range",
+   "title": "Categories and the Range of Uncertainty",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-low-best-and-high",
+     "title": "Low, best and high estimates",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "prms-classification-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-proved-probable-and-possible",
+     "title": "Proved, probable and possible",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "prms-classification-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-categories-of-the-other-classes",
+     "title": "Categories of the other classes",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "prms-classification-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-when-one-value-describes-the-range",
+     "title": "When one value describes the range",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "prms-classification-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-the-low-estimate-and-probability",
+   "title": "The Low Estimate and Probability",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-exceedance-probability",
+     "title": "Exceedance probability",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "prms-classification-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-low-estimate-carries-the-highest-probability",
+     "title": "The low estimate carries the highest probability",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "prms-classification-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-deterministic-and-probabilistic",
+     "title": "Deterministic and probabilistic methods",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "prms-classification-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-incremental-and-cumulative-in-words",
+     "title": "Incremental and cumulative, in words",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "prms-classification-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-reading-a-category-table",
+     "title": "Reading a category table",
+     "order": 5,
+     "est_minutes": 14,
+     "panels": [
+      "prms-classification-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-nigerian-terms-in-words",
+   "title": "Nigerian Terms in Words",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-declarations-after-an-appraisal",
+     "title": "Declarations after an appraisal",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "prms-classification-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-a-significant-discovery-and-its-retention",
+     "title": "A significant discovery and its retention",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "prms-classification-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-national-reserves-and-the-commission",
+     "title": "National reserves and the Commission",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "prms-classification-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "prms-classification-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}
