@@ -1901,7 +1901,7 @@
    "The grid rounded the project's value to a whole cell, and the hand value is the unrounded figure."
   ],
   "answer_index": 1,
-  "explanation": "Risked EMV is closed form, pos x npv_p50 - (1 - pos) x fail_cost. nullPosIsDefault returns 80.0000 and negativeFailCostIsZero 40.0000; a pos over 1 is refused by project name and never reaches the column."
+  "explanation": "Risked EMV is closed form, pos x npv_p50 - (1 - pos) x fail_cost. nullPosIsDefault returns 80.0000 and negativeFailCostIsZero 40.0000; a pos over 1 is refused by project name before it reaches the column."
  },
  {
   "app_slug": "portfolio",
@@ -1928,7 +1928,7 @@
   "prompt": "OKONO is solved exactly at every limit. On an inventory whose result reads solveMethod \"grid-feasible\", which checks does the method require even when overLimit reads false?",
   "options": [
    "None beyond the flag, since the fallback rounds every weight up and so its answer can be quoted without checking.",
-   "Re-run the optimizer on an exact solve chosen on request, and quote whichever answer has the larger EMV.",
+   "Re-run the optimizer on an exact solve chosen in the Studio, and quote whichever answer has the larger EMV.",
    "Read optimalityGap as the most risked EMV the set may leave out, and look for a left-out project that would still fit in money.",
    "Compare the funded set with the frontier's last point, since the two disagree whenever rounding has moved the answer."
   ],
@@ -3210,7 +3210,7 @@
    "27050000 as the table's forecast, since it shows what was authorised.",
    "27600000 and -550000 on the tiles, the table, both exports and the Top 5, all from the one rule.",
    "The one rule on screen, while the PDF and Excel exports print budget less actual so that earlier issued reports still reconcile.",
-   "27600000 on the tiles and table, while the Top 5 keeps its own old rule."
+   "27600000 on the tiles and table, while the Top 5 reads budget less actual."
   ],
   "answer_index": 1,
   "explanation": "The tiles, Cost Breakdown table, PDF, Excel and Top 5 read one rule, so a disagreement between two reports points at the data or the export date."
@@ -3223,8 +3223,8 @@
   "ord": 13,
   "prompt": "Every screen reads the one forecast rule. What does that settle, and what does it leave alone?",
   "options": [
-   "It fixed the forecast, which now extrapolates from progress and CPI.",
-   "Nothing, since every old screen already showed 27600000.",
+   "It makes each screen extrapolate the forecast from progress and CPI.",
+   "Nothing, since each report still sets its own forecast rule.",
    "It made the rule stricter, refusing a forecast below the spend.",
    "It makes the screens agree, and every screen still shares the rule's limits."
   ],
@@ -4349,7 +4349,7 @@
    "It does not disagree in substance, because at rho 0 the closed form and the simulation are the same model and the gap is sampling noise."
   ],
   "answer_index": 2,
-  "explanation": "At 300.0000 the same shortcut gives 108.3959 against a simulated 100.7698; a bell on a risked set misses the low case in either direction."
+  "explanation": "At 300.0000 the shortcut also sits above the simulation, 108.3959 against 100.7698; at 450.0000 it falls the other way, -57.1494 against a simulated -18.3574. A bell on a risked set misses the low case in either direction."
  },
  {
   "app_slug": "portfolio",
@@ -6023,7 +6023,7 @@
   "ord": 11,
   "prompt": "OKONO's 450.0000 set reads a Low case P90 of -15.1262 at 1000 iterations, -18.3574 at 10000 and -18.8524 at 40000, and -21.8586 to -15.3254 across seeds 1 to 3. What belongs to the set?",
   "options": [
-   "That the Low case P90 is below zero, which every run agrees on; its fourth decimal moves with the sample, and the engine prints no standard error for it.",
+   "That the Low case P90 is below zero, as every run agrees; it moves by several million USD with the sample, and the engine prints no standard error for it.",
    "The value -18.3574 to four decimals, because a percentile is read straight off the sorted draws with no averaging, and so carries no sampling error of its own.",
    "The value -57.1494, because the closed-form formula emv - 1.2816 x stdDev uses no draws at all and so removes the sampling noise that moves every simulated run.",
    "The average of the six runs, because averaging over seeds and iteration counts removes the sampling noise carried by each run."

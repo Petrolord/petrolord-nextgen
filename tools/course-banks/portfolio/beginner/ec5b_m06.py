@@ -21,7 +21,7 @@ q(1,
  ["The explorer's value comes from the seeded Monte Carlo, so it differs from the closed form by simulation noise at 10000 iterations.",
   "The explorer discounts the fail cost over the project life, which a hand calculation in one line cannot reproduce.",
   "The grid rounded the project's value to a whole cell, and the hand value is the unrounded figure."],
- "Risked EMV is closed form, pos x npv_p50 - (1 - pos) x fail_cost. nullPosIsDefault returns 80.0000 and negativeFailCostIsZero 40.0000; a pos over 1 is refused by project name and never reaches the column.")
+ "Risked EMV is closed form, pos x npv_p50 - (1 - pos) x fail_cost. nullPosIsDefault returns 80.0000 and negativeFailCostIsZero 40.0000; a pos over 1 is refused by project name before it reaches the column.")
 
 q(0,
  "Ranked by risked EMV per million USD, OK-3 comes last at 0.458333, yet the optimizer funds it at 450.0000. Why?",
@@ -35,7 +35,7 @@ q(2,
  "OKONO is solved exactly at every limit. On an inventory whose result reads solveMethod \"grid-feasible\", which checks does the method require even when overLimit reads false?",
  "Read optimalityGap as the most risked EMV the set may leave out, and look for a left-out project that would still fit in money.",
  ["None beyond the flag, since the fallback rounds every weight up and so its answer can be quoted without checking.",
-  "Re-run the optimizer on an exact solve chosen on request, and quote whichever answer has the larger EMV.",
+  "Re-run the optimizer on an exact solve chosen in the Studio, and quote whichever answer has the larger EMV.",
   "Compare the funded set with the frontier's last point, since the two disagree whenever rounding has moved the answer."],
  "overLimit reads false on every answer, fallback included. On gridUndershootFallback the fallback funds X + Y + Z for 660.0000 with its bound stated beside it, and W at 1499.0000 would still fit the money left.")
 

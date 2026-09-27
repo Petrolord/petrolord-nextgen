@@ -69,7 +69,7 @@ q(2,
  ["The multiplier belongs to P10, so the low case needs emv plus 1.2816 x stdDev, and the reviewer has quoted the high tail.",
   "The engine derives P90 from the closed-form stdDev only when rho is above 0, and at rho 0 it switches to a separate formula.",
   "It does not disagree in substance, because at rho 0 the closed form and the simulation are the same model and the gap is sampling noise."],
- "At 300.0000 the same shortcut gives 108.3959 against a simulated 100.7698; a bell on a risked set misses the low case in either direction.")
+ "At 300.0000 the shortcut also sits above the simulation, 108.3959 against 100.7698; at 450.0000 it falls the other way, -57.1494 against a simulated -18.3574. A bell on a risked set misses the low case in either direction.")
 
 q(1,
  "An analyst has a historical figure for how often two prospects in one basin succeed and fail in step, and enters that event correlation directly as rho. How does the risk summary come out?",

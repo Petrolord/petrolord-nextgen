@@ -112,7 +112,7 @@
  {
   "prompt": "OKONO's 450.0000 set reads a Low case P90 of -15.1262 at 1000 iterations, -18.3574 at 10000 and -18.8524 at 40000, and -21.8586 to -15.3254 across seeds 1 to 3. What belongs to the set?",
   "options": [
-   "That the Low case P90 is below zero, which every run agrees on; its fourth decimal moves with the sample, and the engine prints no standard error for it.",
+   "That the Low case P90 is below zero, as every run agrees; it moves by several million USD with the sample, and the engine prints no standard error for it.",
    "The value -18.3574 to four decimals, because a percentile is read straight off the sorted draws with no averaging, and so carries no sampling error of its own.",
    "The value -57.1494, because the closed-form formula emv - 1.2816 x stdDev uses no draws at all and so removes the sampling noise that moves every simulated run.",
    "The average of the six runs, because averaging over seeds and iteration counts removes the sampling noise carried by each run."

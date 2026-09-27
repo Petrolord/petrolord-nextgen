@@ -100,14 +100,14 @@ q(1,
  "27600000 and -550000 on the tiles, the table, both exports and the Top 5, all from the one rule.",
  ["27050000 as the table's forecast, since it shows what was authorised.",
   "The one rule on screen, while the PDF and Excel exports print budget less actual so that earlier issued reports still reconcile.",
-  "27600000 on the tiles and table, while the Top 5 keeps its own old rule."],
+  "27600000 on the tiles and table, while the Top 5 reads budget less actual."],
  "The tiles, Cost Breakdown table, PDF, Excel and Top 5 read one rule, so a disagreement between two reports points at the data or the export date.")
 
 q(3,
  "Every screen reads the one forecast rule. What does that settle, and what does it leave alone?",
  "It makes the screens agree, and every screen still shares the rule's limits.",
- ["It fixed the forecast, which now extrapolates from progress and CPI.",
-  "Nothing, since every old screen already showed 27600000.",
+ ["It makes each screen extrapolate the forecast from progress and CPI.",
+  "Nothing, since each report still sets its own forecast rule.",
   "It made the rule stricter, refusing a forecast below the spend."],
  "No screen forecasts a line under its budget without an entered forecast, and none reads progress, CPI or a non-positive entry as a forecast, so OFON-1's EAC is 27600000 on every screen.")
 

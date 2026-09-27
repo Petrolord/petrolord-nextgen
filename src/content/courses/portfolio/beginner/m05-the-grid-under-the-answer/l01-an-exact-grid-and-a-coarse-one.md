@@ -33,7 +33,7 @@ The mistake is to fear the unit and miss the real risk. Consistent scaling is ha
 
 ## What it refuses
 
-The engine offers no grid on request and no choice of method. The Capital Portfolio Studio prints "Solved exactly on the capital figures you entered" on an exact solve, and names the resolution and the bound only when the fallback ran.
+The Capital Portfolio Studio offers no choice of method; only a call that states a small `exactStateLimit` forces the fallback grid. The Studio prints "Solved exactly on the capital figures you entered" on an exact solve, and names the resolution and the bound only when the fallback ran.
 
 ## Exercise
 

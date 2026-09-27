@@ -33,6 +33,8 @@ export default [
   { q: 'advanced final 7', where: 'prompt', printed: '-12.4175', value: (L) => normalP90(L, rm(L, 'mixtureWithSpread')) },
   { q: 'advanced final 7', where: 'prompt', printed: '1.7148', value: (L) => rm(L, 'mixtureWithSpread').p90 },
   { q: 'advanced final 8', where: 'key', printed: '218.4079', value: (L) => normalP90(L, L.okono(600).risk) },
+  { q: 'advanced final 8', where: 'explanation', printed: '-57.1494', value: (L) => normalP90(L, L.okono(450).risk) },
+  { q: 'advanced final 8', where: 'explanation', printed: '-18.3574', value: (L) => L.okono(450).risk.p90 },
   { q: 'advanced final 16', where: 'key', printed: '232.0795', value: (L) => L.okono(600, { correlation: 0.9 }).risk.stdDev },
   { q: 'advanced final 16', where: 'key', printed: '0.049500', value: (L) => L.okono(600, { correlation: 0.9 }).risk.probLoss },
   { q: 'advanced final 16', where: 'explanation', printed: '239.8888', value: (L) => L.okono(600, { correlation: 1 }).risk.stdDev },
