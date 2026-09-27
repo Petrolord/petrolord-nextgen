@@ -297,6 +297,9 @@ export const PANELS = {
   'joa-account-calculator': React.lazy(() => import('@/components/course/panels/joa/AccountCalculator')),
   'joa-recovery-calculator': React.lazy(() => import('@/components/course/panels/joa/RecoveryCalculator')),
   'joa-agreement-calculator': React.lazy(() => import('@/components/course/panels/joa/AgreementCalculator')),
+  'farmout-earning-calculator': React.lazy(() => import('@/components/course/panels/farmout/EarningCalculator')),
+  'farmout-deal-calculator': React.lazy(() => import('@/components/course/panels/farmout/DealCalculator')),
+  'farmout-valuation-calculator': React.lazy(() => import('@/components/course/panels/farmout/ValuationCalculator')),
 };
 
 export function resolvePanel(id) {
