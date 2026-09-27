@@ -39,7 +39,7 @@ Only now read the Analyzer. The EKPAN lottery typed into it gives a gross voi of
 
 ## The mistake
 
-The careful mistake is the right number under the wrong question: 19.84 where the full lottery is asked, a withheld value written as 0.00, or the likelihood 0.850000 read as a posterior, which values the drill after a bright spot at 298.2500 instead of 207.7989.
+The careful mistake is the right number under the wrong question: 19.84 where the full lottery is asked, a withheld value written as 0.00, or the likelihood 0.850000 read as a posterior, which values the drill after a bright spot at 298.2500 where the posterior gives 207.7989.
 
 ## Exercise
 
