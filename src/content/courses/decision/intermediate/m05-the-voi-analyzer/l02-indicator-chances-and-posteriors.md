@@ -16,7 +16,7 @@ Weight each indicator's outcome chance by the chance of that indicator, and the 
 
 For the EKPAN lottery, 0.460000 x 0.646739 + 0.540000 x 0.097222 returns 0.350000, the stated prior.
 
-When an implied chance sits more than 0.005 from the stated one, the repaired Analyzer still reports the EMV without information and the EVPI, which use only the stated chances, and withholds the EMV with information, the value of information, the net value and the diagram. The EKPAN lottery typed with Bright spot at 56 percent and No bright spot at 44 percent, posteriors unchanged, is withheld: it reports 75.75 and 52.00 only. Before the repair the same inputs printed a gross value of 40.62.
+When an implied chance sits more than 0.005 from the stated one, the Analyzer still reports the EMV without information and the EVPI, which use only the stated chances, and withholds the EMV with information, the value of information, the net value and the diagram. The EKPAN lottery typed with Bright spot at 56 percent and No bright spot at 44 percent, posteriors unchanged, is withheld: it reports 75.75 and 52.00 only. Weighted as typed with nothing checking them against the stated prior, the same inputs would give a gross value of 40.62, which is why the Analyzer shows none.
 
 ## The best action after each indicator
 
@@ -30,7 +30,7 @@ Less the survey cost of 8.0000 that is 87.5875, the root of the drawn tree, show
 
 ## The mistake
 
-The careful mistake is typing a likelihood into a posterior box. The survey shows a bright spot over 0.850000 of successes; read as P(Success | Bright spot), it values Drill after a bright spot at 298.2500 in a rollback, against the posterior's 207.7989. Typed into the repaired Analyzer, the implied success chance lands far more than 0.005 from 0.350000, and the value is withheld instead of overstated.
+The careful mistake is typing a likelihood into a posterior box. The survey shows a bright spot over 0.850000 of successes; read as P(Success | Bright spot), it values Drill after a bright spot at 298.2500 in a rollback, against the posterior's 207.7989. Typed into the Analyzer, the implied success chance lands far more than 0.005 from 0.350000, and the value is withheld.
 
 ## What it refuses
 

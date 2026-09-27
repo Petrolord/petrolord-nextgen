@@ -1,6 +1,6 @@
 # The best action for each outcome
 
-Perfect information is valued by choosing, for each outcome, the action that pays most in that outcome, and only then weighting those best values by the prior. The maximum is taken outcome by outcome, never once for the whole lottery.
+Perfect information is valued by choosing, for each outcome, the action that pays most in that outcome, and only then weighting those best values by the prior. The maximum is taken outcome by outcome, and not once for the whole lottery.
 
 {{panel:ec-information-explorer}}
 
@@ -19,7 +19,7 @@ The Drill column is net of its 55.0000 cost: 420.0000 less 55.0000 is 365.0000, 
 
 ## A tie on the dry hole
 
-On Dry hole, Farm out and Walk away pay exactly the same, 0.0000. The engine keeps the first branch listed when a later branch is only equal, so it reports Farm out. The best value is 0.0000 whichever is named, so evWithPerfect does not depend on the label, but the label does depend on the listing. List Walk away first and the report names Walk away with the same number beside it. On a tied outcome, read the best value and treat the name as the listing order speaking.
+On Dry hole, Farm out and Walk away pay exactly the same, 0.0000. The two tie on value, and the table names Farm out only because it is listed first. evWithPerfect takes the best value, 0.0000, whichever is named, so it does not depend on the label, but the label does depend on the listing. List Walk away first and the table names Walk away with the same number beside it. On a tied outcome, read the best value and treat the name as the listing order speaking.
 
 ## Weighting the best values
 

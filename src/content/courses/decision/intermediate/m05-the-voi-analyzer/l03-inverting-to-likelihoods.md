@@ -21,7 +21,7 @@ The results are the survey's own likelihoods, 0.850000 and 0.250000 for a bright
 
 Each outcome's column sums to 1: 0.850000 + 0.150000 over a success, 0.250000 + 0.750000 over a dry hole. That is no accident. The Success column adds up the weighted posteriors and divides by the stated success chance, so it sums to the implied success chance over the stated one, and it sums to 1 exactly when the typing is consistent.
 
-Break the typing and the inversion shows it. With Bright spot typed at 56 percent and the posteriors unchanged, Bright spot given Success becomes 0.646739 x 56 percent / 0.350000, which is greater than 1. No survey shows a bright spot more often than always. The repaired Analyzer withholds the value on those inputs, and the inversion says why on paper.
+Break the typing and the inversion shows it. With Bright spot typed at 56 percent and the posteriors unchanged, Bright spot given Success becomes 0.646739 x 56 percent / 0.350000, which is greater than 1. No survey shows a bright spot more often than always. The Analyzer withholds the value on those inputs, and the inversion says why on paper.
 
 ## Why likelihoods are the survey
 
@@ -39,4 +39,4 @@ The Analyzer never inverts and never shows likelihoods. The inversion is a hand 
 
 ## Exercise
 
-Invert the No bright spot row to its two likelihoods and show that each outcome's column sums to 1. Then explain why Bright spot typed at 56 percent with the same posteriors inverts to a likelihood greater than 1, and what the repaired Analyzer does with those inputs.
+Invert the No bright spot row to its two likelihoods and show that each outcome's column sums to 1. Then explain why Bright spot typed at 56 percent with the same posteriors inverts to a likelihood greater than 1, and what the Analyzer does with those inputs.
