@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "The Ekene Deep-1 exploration well: EKO holds 70 and PA 30 percent; FIN pays 40 percent of a gross cost of 46000000.000000 to earn 30 percent from EKO; the event carries a cap on the gross cost of 44000000.000000 with the overrun rule \"post-deal-interests\", and it is completed. What does the engine return as FIN's payment for the well?",
+  "options": [
+   "16000000.000000, the stated 40 percent applied to the dry-hole cost of 40000000.000000.",
+   "13800000.000000, a heads-up 30 percent of the well that matches the participating interest FIN earns.",
+   "14000000.000000, which the engine's reason line prints beside FIN's name as its part of the well.",
+   "18200000.000000, which is 39.565217 percent of the gross cost."
+  ],
+  "answer": 3,
+  "explanation": "The engine's event row prints FIN paying 18200000.000000, 39.565217 percent of the 46000000.000000 well, and its reason line says the promote applies to 44000000 with the excess paid by the post-deal interests. 16000000.000000 would use the dry-hole cost, which is no term of the earning event. 13800000.000000 is PA's payment, a plain 30 percent of the well. 14000000.000000 is what EKO pays."
+ },
+ {
+  "prompt": "On the Ekene Deep-1 row the engine prints FIN paying 18200000.000000, EKO 14000000.000000 and PA 13800000.000000. What check does the course make with those three payments?",
+  "options": [
+   "Their total is 44000000.000000, the cap, with the excess billed to the parties later.",
+   "Their total is 46000000.000000, the gross cost of the well, so the whole well is paid.",
+   "FIN's payment equals EKO's and PA's together, the farminee paying for both.",
+   "EKO's payment equals PA's, since both licence parties hold what the farminee leaves after its promote."
+  ],
+  "answer": 1,
+  "explanation": "The course adds the three and finds the gross cost: 18200000.000000 + 14000000.000000 + 13800000.000000 = 46000000.000000 (derived), the whole well. The excess above the cap is paid inside the same split, so the total is the well and no later bill appears. FIN pays only the farmor's side of the well and none of PA's, and EKO's 14000000.000000 differs from PA's 13800000.000000."
+ },
+ {
+  "prompt": "Which function does the farmout engine import to split each gross cost among the parties outside the trade?",
+  "options": [
+   "calculatePartnerCosts, from engines/economics/afe.js.",
+   "applyJV, from engines/economics/cashflow.ts, which the engine imports for its working-interest scaling.",
+   "carryRecovery, from engines/economics/jointVenture.js, which runs the carry ledger after a farm-in.",
+   "portfolioRiskMetrics, from engines/economics/portfolio.js, the seeded Monte Carlo of the engine."
+  ],
+  "answer": 0,
+  "explanation": "The engine's basis says the other parties pay their own interests of each gross cost through calculatePartnerCosts from engines/economics/afe.js, imported and reused. applyJV scales a success-case value by a working interest, carryRecovery runs a development carry after the farm-in, and portfolioRiskMetrics is the one sampling routine; none of them splits a well among the parties."
+ },
+ {
+  "prompt": "PA holds 30 percent of the Ekene licence and takes no part in the farm-out between EKO and FIN. On the completed Ekene Deep-1 well, with a gross cost of 46000000.000000, what does the engine return as PA's payment?",
+  "options": [
+   "0.000000, since the farminee carries PA.",
+   "12000000.000000, its 30 percent of the dry-hole cost of 40000000.000000 in the fixture.",
+   "13800000.000000, its own 30 percent of the gross cost.",
+   "4400000.000000, its share of the carry that the farminee pays across the whole licence."
+  ],
+  "answer": 2,
+  "explanation": "The other parties pay their own interests of each gross cost, so PA pays 30 percent of 46000000.000000, which the engine returns as 13800000.000000. The farminee pays part of the farmor's share only, so PA is carried by nobody. The dry-hole cost is no term of the earning event, and the carry of 4400000.000000 is the part of EKO's share that FIN pays."
+ },
+ {
+  "prompt": "Drilled and completed: a 40000000.000000 well, uncapped, in which FIN takes 30 percent of EKO's 70 by paying 40 percent (PA keeps 30). What is the farmor's own payment?",
+  "options": [
+   "16000000.000000, the payment the engine prints for FIN on that same row.",
+   "28000000.000000, EKO's whole pre-deal 70 percent share of the 40000000.000000 well.",
+   "12000000.000000, the rest of EKO's own share after FIN's payment.",
+   "4000000.000000, the carry on that row."
+  ],
+  "answer": 2,
+  "explanation": "EKO held 70 percent and pays what is left of its share after FIN's payment: the engine returns 12000000.000000. 16000000.000000 is FIN's payment, 28000000.000000 would be EKO paying its whole pre-deal share as though there were no farm-out, and 4000000.000000 is the carry, the part of EKO's post-deal share that FIN pays."
+ },
+ {
+  "prompt": "EKO holds 70 and PA 30 percent. A box states one event in which FIN pays 25 percent of the well to earn 30 percent. What does the engine return?",
+  "options": [
+   "A refusal on events[0].farmineePaysPct: the share must be at or above 30, the interest held after the event.",
+   "A result with a promote of minus five points, the farmor carrying the farminee for part of its own share.",
+   "A refusal on events[0].earnedPct, saying the interest earned must be at most the 25 percent share paid.",
+   "A result in which the share paid is raised to 30 with a reason line saying the promote is at its floor."
+  ],
+  "answer": 0,
+  "explanation": "The engine refuses a negative promote, in its own words: \"events[0].farmineePaysPct must be at or above 30, the interest the farminee holds after the event (a promote of 0 or more); got 25\". It names the share paid, the term that breaks the rule, and it never adjusts a stated share. A farminee paid for by the farmor would be a different trade, which the earning call does not compute."
+ },
+ {
+  "prompt": "With EKO at 70 and PA at 30 percent, a box has FIN paying 75 percent of the well to earn 30. Why does the engine refuse it?",
+  "options": [
+   "No share paid may exceed twice the interest earned, putting this deal's ceiling at 60.",
+   "A promote above 40 points is refused as a matter of law under the 2024 Regulations.",
+   "The share paid may not pass 50 percent, the change-of-control line of PIA s.95(14), which 75 would cross.",
+   "The share paid is capped at 70, the farmor's pre-deal share: a farminee pays no other party's share."
+  ],
+  "answer": 3,
+  "explanation": "The engine's words: \"events[0].farmineePaysPct must be at most 70, the farmor's interest before the deal (the farminee pays no other party's share); got 75\". The limit is the farmor's pre-deal share, since the farminee pays only the farmor's side of the well. The engine states no ratio ceiling and no legal cap on a promote; the Regulations set none. The 50% of s.95(14) is a line on voting power in a holder and plays no part in the earning call."
+ },
+ {
+  "prompt": "Suppose FIN is to earn 71 percent of the licence from EKO, whose participating interest before the deal is 70. Which field does the refusal name, and against what limit?",
+  "options": [
+   "events[0].farmineePaysPct, at most 70, since earning more than the farmor holds needs a share paid above it.",
+   "events[0].earnedPct, at most the farmor's interest 70 less the 0 already earned.",
+   "parties, since FIN and PA would pass 100 after the deal.",
+   "farmor, since a farminee earning 71 percent would leave EKO with no participating interest to farm out."
+  ],
+  "answer": 1,
+  "explanation": "The engine's words: \"events[0].earnedPct must be at most 70, the farmor's interest 70 less 0 already earned; got 71\". The interest earned comes out of the farmor's alone, so the limit is the farmor's interest less whatever earlier events earned, here none. The parties check reads the stated shares before the deal, and the farmor field names a party."
+ },
+ {
+  "prompt": "HMRC's Oil Taxation Manual, page OT30048 (updated 1 May 2019), explains what it means by an obligation to undertake. What does it say the phrase covers?",
+  "options": [
+   "Every case where the farmer in commits to bear his and the farmer out's share of exploration or appraisal costs.",
+   "Every case where the farmer out commits to drill a well at its own cost before any assignment is made.",
+   "Only those cases where the farmer in pays cash to the farmer out for the sunk costs of the licence.",
+   "Only work carried out after the grant of consent, which the manual counts as the start of the farm in."
+  ],
+  "answer": 0,
+  "explanation": "OT30048 says the phrase is intended to cover all cases where the farmer in commits himself to bear his own and the farmer out's share of the costs of exploration or appraisal work. The farmer out drilling alone is no farm-in, a cash reimbursement of sunk costs is described on OT30021 and OT30081, and the manual ties the phrase to no consent date."
+ },
+ {
+  "prompt": "HMRC's page OT30021 (updated 2 February 2021) separates two orders of events. Which order does it call a Farm in?",
+  "options": [
+   "The work obligation completed first, and the assignment after it.",
+   "An assignment made on the day the farminee pays its cash bonus, whatever the state of the work.",
+   "An assignment at first production, once carried costs are recovered.",
+   "The assignment made, subject to government consent, before the work is undertaken."
+  ],
+  "answer": 3,
+  "explanation": "OT30021 says the assignment is normally made, subject to government consent, before the work is undertaken, and is called a Farm in; an agreement under which the work obligation is to be completed before the assignment is generally referred to as an earn-in. The manual ties neither order to a bonus date or to first production, which belongs to a development carry's payback."
+ },
+ {
+  "prompt": "Nothing has been drilled yet on a well of 40000000.000000: vesting is \"per-event\", 0 events are completed, and the stated terms (no cap; EKO 70, PA 30) oblige FIN to pay 40 percent for 30. Which figures do the event row and the totals print for FIN?",
+  "options": [
+   "Both show 0.000000 until the event is completed.",
+   "Both show 16000000.000000, since an obligation stated in the box counts as paid on signing.",
+   "The row shows an obligation of 16000000.000000; the totals show 0.000000 paid.",
+   "The row shows 0.000000 and the totals 16000000.000000, the whole obligation carried forward."
+  ],
+  "answer": 2,
+  "explanation": "The engine reports every event's split as the obligation and counts completed events only in its totals: the row prints 16000000.000000 for FIN, and the totals print 0.000000 paid and 0.000000 percent vested. Its reason line ends \"(not completed: the obligation only)\", and its vesting reason reports 0 of 1 event completed with 0% vesting. Nothing counts as paid on signing."
+ },
+ {
+  "prompt": "On the Ekene Deep-1 row the share paid reads 40.000000 while the share of the gross cost FIN pays reads 39.565217. What does the engine's reason line give as the cause?",
+  "options": [
+   "FIN's cash bonus of 2000000.000000 is netted off its well payment and shown as a lower share.",
+   "The gross cost exceeds the cap 44000000 by 2000000, and the post-deal interests pay the excess.",
+   "The past-cost reimbursement of 3600000.000000 is credited against FIN's part of the well.",
+   "The engine rounds every share paid down to the promote's whole points before it splits the well."
+  ],
+  "answer": 1,
+  "explanation": "The reason line reads: \"the gross cost exceeds the cap 44000000 by 2000000: the promote applies to 44000000; the excess is paid by the post-deal interests (FIN 30%, EKO 40%)\". The course reads that line as a record here and leaves the working of caps to a later tier. The bonus and the reimbursement leave the split of the well alone, and the engine rounds no stated share."
+ },
+ {
+  "prompt": "EKO holds the whole licence (100 percent). Its well costs 12000000.000000 with no cap, and FIN pays one third of it (the field prints 33.333333 percent) for 25 percent; the event is completed. What is EKO's payment?",
+  "options": [
+   "8000000.000000, EKO's 75 percent less the carry FIN pays.",
+   "9000000.000000, the 75 percent EKO holds after the event, applied to the whole well.",
+   "4000000.000000, the payment the engine prints for FIN, the farminee, on that row.",
+   "12000000.000000, the whole gross cost, since EKO is the only licence party."
+  ],
+  "answer": 0,
+  "explanation": "The engine returns FIN paying 4000000.000000 and EKO 8000000.000000 on the 12000000.000000 well, with a carry of 1000000.000000. 9000000.000000 would be EKO paying its whole post-deal share with no carry, which ignores the part FIN pays. 4000000.000000 is FIN's payment, and EKO pays the whole well only when no one farms in."
+ },
+ {
+  "prompt": "A deal's only well has no cap, and the learner leaves the cap out of the event in the box. What does the engine do?",
+  "options": [
+   "It runs the event as uncapped: a missing cap means none.",
+   "It runs the event with the gross cost as the cap, reached exactly.",
+   "It refuses only when the share paid is above the interest earned.",
+   "It refuses on events[0].cap, which must be stated, with on \"none\" when there is no cap."
+  ],
+  "answer": 3,
+  "explanation": "The engine's words: events[0].cap must be an object { on } with on \"none\", \"gross-cost\" or \"carry-amount\" (no default); got nothing. Every event's cap is a deal term with no default, so a missing cap is refused whatever the promote. A cap of \"none\" is a stated term; a missing cap is a gap the engine does not fill."
+ },
+ {
+  "prompt": "On the completed Ekene Deep-1 well (EKO 70, PA 30 percent), which party's payment is left unchanged when the learner changes the share FIN pays and runs the call again?",
+  "options": [
+   "EKO's, since the farmor's payment is fixed by its pre-deal share of 70 percent.",
+   "PA's, since a party outside the trade pays its own share.",
+   "FIN's, since the farminee's payment is fixed by the 30 percent interest it earns.",
+   "All three payments, since the gross cost of 46000000.000000 is left as stated."
+  ],
+  "answer": 1,
+  "explanation": "The other parties pay their own interests of each gross cost, so PA's 13800000.000000 does not move with the share FIN pays. FIN's payment follows the share it pays, and EKO pays what is left of its own share, so both move. The gross cost stays the same, and the split inside it changes between the farmor and the farminee."
+ }
+]

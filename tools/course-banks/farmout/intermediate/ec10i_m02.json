@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "The Ekene Deep drill-to-earn (synthetic) has two events. The exploration well costs 40000000.000000, with FIN paying 40.000000 percent to earn 20.000000 and no cap. The appraisal well costs 30000000.000000, with FIN paying 45.000000 percent to earn 15.000000 more, its carry capped at 3000000.000000. What promote does the appraisal well carry?",
+  "options": [
+   "30.000000 points, measured against the 15.000000 percent this well earns",
+   "25.000000 points, measured against the 20.000000 percent held before it",
+   "10.000000 points, a ratio of 1.285714",
+   "10.000000 points, ratio 1.333333"
+  ],
+  "answer": 2,
+  "explanation": "The engine measures a promote against the interest held AFTER the event: FIN holds 20.000000 before the appraisal well and 35.000000 after it, so 45.000000 paid is a promote of 10.000000 points and a ratio of 1.285714 (45 over 35). Measuring against the 15 percent earned on this well, or the 20 percent held before it, uses the wrong base. 1.333333 is the ratio of 40 paid for 30 held, the single-well Ekene terms."
+ },
+ {
+  "prompt": "Where does the Ekene Deep appraisal well sit against its carry-amount cap of 3000000.000000? It costs 30000000.000000 and FIN pays 45.000000 percent of it to earn 15.000000 on top of the 20.000000 already earned (EKO holds 70.000000 and PA 30.000000 before the deal).",
+  "options": [
+   "\"exactly\": its carry is 3000000.000000, with FIN paying 13500000.000000",
+   "\"below\": its carry stays under the 3000000.000000 cap",
+   "\"exceeded\": the carry passes the cap and is held there",
+   "\"exactly\", with FIN paying 7500000.000000"
+  ],
+  "answer": 0,
+  "explanation": "On earn-ekene-drill-to-earn-done the engine returns the appraisal well with cap state \"exactly\", FIN paying 13500000.000000, EKO 7500000.000000 and a carry of 3000000.000000: what FIN pays less its held 35 percent of the well reaches the cap to the dollar. 7500000.000000 is EKO's payment. A cap reached exactly splits the cost as a cap not reached would, so nothing is held back."
+ },
+ {
+  "prompt": "On the Ekene Deep exploration well (synthetic), which costs 40000000.000000 with no cap, FIN pays 40.000000 percent to earn 20.000000 percent from EKO's 70.000000. What does the engine return for the event?",
+  "options": [
+   "A promote of 10.000000 points and a ratio of 1.333333, the figures of the single-well terms where 40.000000 buys 30.000000",
+   "A promote of 20.000000 points and a carry of 4000000.000000, since the carry is the promote applied to the half of the cost EKO keeps",
+   "A promote of 20.000000 points and a carry of 16000000.000000, since FIN's whole payment counts as carry when it earns only a part",
+   "A promote of 20.000000 points, ratio 2.000000, carry 8000000.000000"
+  ],
+  "answer": 3,
+  "explanation": "The engine returns a promote of 20.000000 points (40 paid less 20 held after), a ratio of 2.000000, FIN paying 16000000.000000, EKO 12000000.000000 and a carry of 8000000.000000: FIN pays 16000000.000000 against its own 20 percent of the well, 8000000.000000. The 10-point promote belongs to the single well of 40 for 30. 16000000.000000 is FIN's whole payment, of which only the part above its held share is carry."
+ },
+ {
+  "prompt": "Under \"all-events\" vesting only the first Ekene well is done so far. Well one cost 40000000.000000, FIN paying 40.000000 percent for 20.000000, uncapped; well two, still to drill, costs 30000000.000000 at 45.000000 for 15.000000 with a 3000000.000000 carry cap. How much has vested?",
+  "options": [
+   "20.000000 percent, the completed well's interest",
+   "0.000000 percent, though FIN has paid 16000000.000000",
+   "35.000000 percent, assigned on signing",
+   "0.000000 percent, and FIN has paid nothing either, since no payment is counted until all events vest"
+  ],
+  "answer": 1,
+  "explanation": "The engine's reason is \"vesting \"all-events\": 1 of 2 events completed; nothing vests\", and the totals show 0.000000 vested while FIN has paid 16000000.000000. Under \"all-events\" nothing vests until every event is completed, so the 20 percent would vest only under \"per-event\". Completed events are counted as paid whatever the vesting rule."
+ },
+ {
+  "prompt": "Were the Ekene rule \"per-event\" at the same point, with just the exploration well finished (40000000.000000 gross, 40.000000 percent paid for 20.000000, no cap), which participating interests would the licence show?",
+  "options": [
+   "EKO 70.000000, PA 30.000000 and FIN 0.000000",
+   "EKO 50.000000, PA 30.000000 and FIN 20.000000",
+   "EKO 50.000000, PA 20.000000 and FIN 30.000000, the earned interest taken pro rata from both licence parties",
+   "EKO 35.000000, PA 30.000000 and FIN 35.000000"
+  ],
+  "answer": 1,
+  "explanation": "The engine's reason reads \"vesting \"per-event\": 1 of 2 events completed; 20% vests\", and the interests after are EKO 50.000000, PA 30.000000, FIN 20.000000. Each completed event vests its stated interest, and it comes out of the farmor's interest alone: PA keeps its 30 percent. EKO 70 and FIN 0 is the \"all-events\" outcome; the 35 percent vests only when both events are done."
+ },
+ {
+  "prompt": "Once the appraisal well is finished too, every earning event is complete and the \"all-events\" rule releases the interest. With 20.000000 earned on the first well and 15.000000 on the second, what vested interest does the engine report for FIN?",
+  "options": [
+   "20.000000 percent",
+   "15.000000 percent",
+   "42.142857 percent",
+   "35.000000 percent"
+  ],
+  "answer": 3,
+  "explanation": "With both events completed the engine vests 35.000000 percent and returns the interests EKO 35.000000, PA 30.000000, FIN 35.000000. Under \"all-events\" the whole earned interest vests at once when the last event completes; it is the sum of what each event earns. 42.142857 is the equivalent working interest, a measure of cost, which vests nothing."
+ },
+ {
+  "prompt": "Add up the finished Ekene programme: a 40000000.000000 well paid 40.000000 percent by FIN for 20.000000, then a 30000000.000000 well paid 45.000000 percent for 15.000000 with the carry capped at 3000000.000000, and no cash bonus or reimbursement. Which totals are returned?",
+  "options": [
+   "FIN paid 29500000.000000 and EKO 19500000.000000; the carry is 11000000.000000",
+   "FIN paid 13500000.000000 and EKO 7500000.000000, which is the split of the appraisal well taken on its own",
+   "FIN paid 29500000.000000 and EKO 19500000.000000, a carry of 8000000.000000 from the first well alone",
+   "FIN paid 16000000.000000; the appraisal well is only an obligation"
+  ],
+  "answer": 0,
+  "explanation": "The engine's totals are FIN 29500000.000000 (16000000.000000 plus 13500000.000000), EKO 19500000.000000 and a carry of 11000000.000000 (8000000.000000 plus the capped 3000000.000000); its reason reads \"consideration to EKO: carry 11000000 + cash bonus 0 + past-cost reimbursement 0 (0% of 0) = 11000000\". A carry of 8000000.000000 is the total with only the first event completed, and 13500000.000000 and 7500000.000000 are the appraisal well's split alone. Once completed, the second event's payment counts."
+ },
+ {
+  "prompt": "Express FIN's whole outlay on the two completed Ekene wells (29500000.000000 paid on 70000000.000000 of gross cost, no bonus, no reimbursement) as the heads-up share that would cost it the same. What equivalent working interest results?",
+  "options": [
+   "35.000000 percent",
+   "40.000000 percent",
+   "42.142857 percent",
+   "45.000000 percent"
+  ],
+  "answer": 2,
+  "explanation": "The engine's equivalent working interest divides the farminee's outlay, 29500000.000000 with no bonus or reimbursement, by the gross cost of the completed events, 70000000.000000: 42.142857 percent. It is the heads-up interest that would cost FIN the same. 35.000000 is the vested interest. 40 and 45 are the shares paid on each well, which the engine never applies to the whole programme."
+ },
+ {
+  "prompt": "Suppose the Ekene programme is signed and no well has been drilled yet: eventsCompleted is 0, the rule is \"all-events\", and both wells keep their terms (40.000000 for 20.000000, then 45.000000 for 15.000000). What comes back from the earning call?",
+  "options": [
+   "A refusal, since a deal with no completed event has no payment to report and the engine names eventsCompleted",
+   "Totals of 29500000.000000 for FIN, the obligation of both events counted as paid from the day the deal is signed",
+   "The first event's payment of 16000000.000000 in the totals, the exploration well being counted as committed",
+   "Each event's split as an obligation; totals of 0.000000"
+  ],
+  "answer": 3,
+  "explanation": "The engine reports every event's split as the obligation and counts only completed events in the totals, so 0.000000 is paid and vested and the interests stay EKO 70.000000, PA 30.000000, FIN 0.000000. Its reason is \"vesting \"all-events\": 0 of 2 events completed; nothing vests\". Zero events completed is a result with a reason, which is no refusal."
+ },
+ {
+  "prompt": "Midway through the Ekene programme, the exploration well (40000000.000000 gross, FIN paying 40.000000 percent for 20.000000, uncapped) is drilled and the appraisal well is not, and the deal vests nothing until both are done. No bonus or reimbursement is stated. Which consideration to EKO does the engine report at this point?",
+  "options": [
+   "8000000.000000, the first event's carry",
+   "11000000.000000, both events' carries",
+   "0.000000, since nothing has vested",
+   "3000000.000000, the appraisal carry"
+  ],
+  "answer": 0,
+  "explanation": "The engine's reason reads \"consideration to EKO: carry 8000000 + cash bonus 0 + past-cost reimbursement 0 (0% of 0) = 8000000\". The totals count completed events whatever has vested, so the first well's carry is counted though nothing vests yet. The appraisal well's obligation is reported and not counted until it is completed; 11000000.000000 is the consideration once both are done."
+ },
+ {
+  "prompt": "A learner types the vesting rule \"on-signing\" into the box of an earning call. What does the engine return?",
+  "options": [
+   "A result in which every earned interest vests on the day the deal is signed, before any work",
+   "vesting must be one of \"per-event\", \"all-events\"; got nothing",
+   "vesting must be one of \"per-event\", \"all-events\"; got \"on-signing\"",
+   "A result under \"per-event\", the rule the engine falls back on when a stated rule is unknown"
+  ],
+  "answer": 2,
+  "explanation": "The engine refuses an unknown vesting rule by name, in its own words: \"vesting must be one of \"per-event\", \"all-events\"; got \"on-signing\"\". It accepts only those two and substitutes none. The message ending \"got nothing\" is the one for a vesting rule set to not stated."
+ },
+ {
+  "prompt": "A one-event deal is stated with eventsCompleted set to 2. In the engine's words, what is the reply?",
+  "options": [
+   "A result with the extra count ignored",
+   "eventsCompleted must be at most 1, the number of events; got 2",
+   "eventsCompleted must be at most 2; got 2",
+   "A result that counts the event twice, doubling the totals"
+  ],
+  "answer": 1,
+  "explanation": "The refusal is the engine's: \"eventsCompleted must be at most 1, the number of events; got 2\". A count above the number of events is refused, and nothing is trimmed. No event is paid twice, and the bound is the number of events stated in the deal."
+ },
+ {
+  "prompt": "The first of two events earns 40 percent from a farmor holding 70; the second event is stated to earn 35 more. How does the engine answer?",
+  "options": [
+   "A result in which the farminee ends with 75 percent, the second event earning more than the farmor had left",
+   "events[1].earnedPct must be at most 70, the farmor's interest before the deal; got 35",
+   "A result with the second event trimmed to 30 percent and the trimming stated in a reason",
+   "events[1].earnedPct must be at most 30, the farmor's interest 70 less 40 already earned; got 35"
+  ],
+  "answer": 3,
+  "explanation": "The engine's words: \"events[1].earnedPct must be at most 30, the farmor's interest 70 less 40 already earned; got 35\". Interest is earned on top of what earlier events earned and comes out of the farmor's interest alone, so the cap is what the farmor has left. The engine trims nothing, and the limit is cumulative."
+ },
+ {
+  "prompt": "A two-event deal names both of its events \"well\". What does the engine return?",
+  "options": [
+   "events[1].name must be a name no other event has; got \"well\"",
+   "A result with the second event merged into the first one, their gross costs added together",
+   "events[0].name must be a name no other event has; got \"well\", the first of the pair",
+   "A result in which the two events are numbered in order and the shared name is kept for both"
+  ],
+  "answer": 0,
+  "explanation": "The engine refuses the second event by name, in its own words: \"events[1].name must be a name no other event has; got \"well\"\". Each event's reasons and vesting are reported under its name, so a repeated name would make them ambiguous. The refusal names the later event, the one that repeats a name already taken, and the engine merges and renumbers nothing."
+ },
+ {
+  "prompt": "How does the engine's basis tie its two vesting rules to the HMRC Oil Taxation Manual (OT30021), in its own words?",
+  "options": [
+   "\"all-events\": each completed event vests its stated interest (an earn in: the work after the assignment, HMRC OT30021)",
+   "\"all-events\": nothing vests until every event is completed (an earn in: the work before the assignment, HMRC OT30021)",
+   "\"per-event\": nothing vests until every event is completed (a farm in: the assignment before the work, HMRC OT30021)",
+   "\"per-event\": each event vests on signing, the work to follow (a farm in: consent first, HMRC OT30021)"
+  ],
+  "answer": 1,
+  "explanation": "The engine's bases read \"nothing vests until every event is completed (an earn in: the work before the assignment, HMRC OT30021)\" for \"all-events\" and \"each completed event vests its stated interest (a farm in: assignment with the work, HMRC OT30021)\" for \"per-event\". HMRC's manual separates a farm in, assigned before the work is undertaken, from an earn-in, where the work is completed before the assignment. The other options swap the rules or the orders."
+ }
+]

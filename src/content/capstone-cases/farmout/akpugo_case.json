@@ -1,0 +1,200 @@
+{
+ "dataset": "AKPUGO (synthetic)",
+ "label": "AKPUGO, a farm-out on the Akpugo licence (synthetic)",
+ "information": {
+  "parties": [
+   {
+    "id": "AKP",
+    "name": "Akpugo Oil (synthetic), operator",
+    "participatingPct": 72.5
+   },
+   {
+    "id": "OBR",
+    "name": "Obioma Resources (synthetic)",
+    "participatingPct": 27.5
+   }
+  ],
+  "farmor": "AKP",
+  "farminee": {
+   "id": "EZI",
+   "name": "Ezinifite Energy (synthetic)"
+  },
+  "project": {
+   "chanceOfSuccessPct": 18.5,
+   "wellCost": {
+    "success": 51380000.5,
+    "dry": 45260000.75
+   },
+   "successValue": {
+    "npv": 402750000.25
+   }
+  },
+  "deal": {
+   "farmineePaysPct": 46,
+   "earnedPct": 29.5,
+   "cap": {
+    "on": "none"
+   },
+   "cashBonus": 2150000.5,
+   "pastCosts": {
+    "amount": 9840000,
+    "reimbursedPct": 29.5
+   },
+   "assignorFees": 312500.25
+  },
+  "side": "farminee",
+  "information": {
+   "cost": 1650000.5,
+   "signals": [
+    {
+     "label": "strong amplitude",
+     "likelihoodsPct": [
+      72.5,
+      21.3
+     ]
+    },
+    {
+     "label": "weak amplitude",
+     "likelihoodsPct": [
+      27.5,
+      78.7
+     ]
+    }
+   ]
+  }
+ },
+ "price": {
+  "project": {
+   "chanceOfSuccessPct": 18.5,
+   "wellCost": {
+    "success": 51380000.5,
+    "dry": 45260000.75
+   },
+   "successValue": {
+    "npv": 402750000.25
+   }
+  },
+  "interestPct": 29.5,
+  "valueBasis": "risked",
+  "transaction": {
+   "price": 11240000.5
+  }
+ },
+ "devCarry": {
+  "parties": [
+   {
+    "id": "AKP",
+    "name": "Akpugo Oil (synthetic), operator",
+    "participatingPct": 72.5
+   },
+   {
+    "id": "OBR",
+    "name": "Obioma Resources (synthetic)",
+    "participatingPct": 27.5
+   }
+  ],
+  "farmor": "AKP",
+  "farminee": {
+   "id": "EZI",
+   "name": "Ezinifite Energy (synthetic)"
+  },
+  "earnedPct": 29.5,
+  "carriedPct": 60,
+  "years": [
+   {
+    "year": 2031,
+    "cost": 186400000.5,
+    "entitlement": 0
+   },
+   {
+    "year": 2032,
+    "cost": 244750000.25,
+    "entitlement": 0
+   },
+   {
+    "year": 2033,
+    "cost": 97300000,
+    "entitlement": 0
+   },
+   {
+    "year": 2034,
+    "cost": 0,
+    "entitlement": 212600000.5
+   },
+   {
+    "year": 2035,
+    "cost": 0,
+    "entitlement": 238450000.75
+   },
+   {
+    "year": 2036,
+    "cost": 0,
+    "entitlement": 221300000
+   },
+   {
+    "year": 2037,
+    "cost": 0,
+    "entitlement": 196800000.25
+   },
+   {
+    "year": 2038,
+    "cost": 0,
+    "entitlement": 174250000
+   }
+  ],
+  "uplift": {
+   "type": "compound",
+   "ratePctPerYear": 7.5
+  },
+  "recoverFromPct": 55,
+  "discountRate": 0.1,
+  "baseYear": 2030
+ },
+ "backIn": {
+  "parties": [
+   {
+    "id": "AKP",
+    "name": "Akpugo Oil (synthetic), operator",
+    "participatingPct": 72.5
+   },
+   {
+    "id": "OBR",
+    "name": "Obioma Resources (synthetic)",
+    "participatingPct": 27.5
+   }
+  ],
+  "farmor": "AKP",
+  "farminee": {
+   "id": "EZI",
+   "name": "Ezinifite Energy (synthetic)"
+  },
+  "earnedPct": 29.5,
+  "backIn": {
+   "party": "AKP",
+   "targetPct": 50,
+   "costs": [
+    {
+     "item": "Akpugo development wells",
+     "amount": 612400000.5,
+     "kind": "development"
+    },
+    {
+     "item": "Akpugo production facilities",
+     "amount": 48750000.25,
+     "kind": "production"
+    },
+    {
+     "item": "Akpugo-1 exploration well",
+     "amount": 51380000.5,
+     "kind": "exploration"
+    }
+   ],
+   "basis": "contract",
+   "refundableKinds": [
+    "development",
+    "production"
+   ],
+   "refundForm": "upfront"
+  }
+ }
+}

@@ -1,0 +1,18 @@
+-- ============================================================================
+-- EC10 PROFESSIONAL DEEP SEED: Farm-ins, Farm-outs & Asset Valuation, intermediate tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/farmout/intermediate.
+--
+-- What this tier owns: CAPS, VESTING, VALUE AND THE FEE. Gross-cost and carry-amount
+-- caps with the two overrun rules; drill-to-earn events and the two vesting
+-- rules; the value of the deal to each side by EMV; the break-even promote
+-- and the break-even chance of success; the consent fee of the 2024
+-- Regulations with the value of the transaction stated and the day rules.
+--
+-- AN ENGINE COURSE. There is no Suite app: the practicals run in the course's
+-- own deal calculator. The capstone grades six values of this tier, each identical
+-- under every reading the engine states and never a Monte Carlo draw.
+-- ============================================================================

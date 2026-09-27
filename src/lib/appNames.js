@@ -58,6 +58,7 @@ export const APP_NAMES = {
   pia: 'Petroleum Industry Act 2021 & Nigerian Fiscal Terms',
   gsa: 'Gas Commercialisation & Gas Sales Agreements',
   joa: 'Joint Ventures, Operating Agreements & Cost Recovery',
+  farmout: 'Farm-ins, Farm-outs & Asset Valuation',
   separation: 'Separation & Slug Catching',
   linesizing: 'Pipeline & Line Sizing',
   rotating: 'Rotating Equipment',

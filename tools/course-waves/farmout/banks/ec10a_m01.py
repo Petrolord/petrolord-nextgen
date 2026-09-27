@@ -1,0 +1,138 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# EC10 Expert m01, Information Value to Each Side. Every key rests on the
+# engine's informationValue return on a golden input (info-ekene-farminee,
+# info-ekene-farmor, info-ekene-too-dear, info-uninformative, the refusals) or
+# on a line the digest prints; scratch/bank-advanced/witness.mjs recomputes
+# each keyed figure through the vendored engine. The Ekene Deep prospect and
+# every party are synthetic. No capstone figure appears here.
+
+K = [2, 0, 3, 1, 1, 3, 0, 2, 3, 1, 0, 2, 2, 3, 0]
+_i = iter(K)
+def x(p, c, ds, e): q(next(_i), p, c, ds, e)
+
+# 1
+x("On the Ekene Deep deal (synthetic), FIN pays 40.000000 percent of the well to earn a 30.000000 percent participating interest, and the chance of success is 25.000000 percent. What is FIN's EVPI?",
+ "14393775.278136, the chance of success times its farm in success payoff of 57575101.112542",
+ ["6745331.458602, the value the stated two-signal seismic survey adds to FIN's position before its cost",
+  "19585775.278136, the value perfect foresight adds to EKO's position as farmor on the same prospect",
+  "17987550.556271, the EMV of farming in once a bright amplitude signal has been read by FIN"],
+ "FIN declines without information (EMV 0.000000). Knowing the outcome, it farms in on a success and declines on a dry hole, so its EMV with perfect information is 25.000000 percent of 57575101.112542: 14393775.278136, and EVPI is that less 0.000000. 6745331.458602 is the EVII of the real survey; 19585775.278136 is EKO's EVPI; 17987550.556271 is FIN's EMV after a bright signal.")
+
+# 2
+x("With perfect information, what is EKO's EMV as farmor on the Ekene Deep prospect at a 25.000000 percent chance of success?",
+ "39418808.982316: drill alone on a known success, walk away from a known dry hole",
+ ["26725365.162782: the chance-weighted EMV of its best action after each of the two amplitude signals",
+  "19833033.704181: its EMV after the farm-out on the stated terms, the best action without any survey",
+  "64837617.964633: the EMV of drilling alone once the survey has come back with a bright amplitude"],
+ "With perfect information EKO drills alone on a known success, where its 70.000000 percent pays 157675235.929265, and walks away on a known dry hole, worth 0.000000; 25.000000 percent of 157675235.929265 is 39418808.982316 (engine). 26725365.162782 is the EMV with the imperfect survey; 19833033.704181 is the EMV without information; 64837617.964633 is the EMV after a bright signal alone.")
+
+# 3
+x("The Ekene survey states likelihoods of 75.000000 percent given success and 25.000000 percent given a dry hole for the bright amplitude signal. At a 25.000000 percent chance of success, what chance of that signal does the engine return?",
+ "0.375000",
+ ["0.750000",
+  "0.625000",
+  "0.500000"],
+ "The chance of a bright signal is the chance of success times 75.000000 percent plus the chance of a dry hole times 25.000000 percent, and the engine returns 0.375000, consistent by construction with Bayes. 0.750000 confuses the likelihood given success with the chance of the signal; 0.625000 is the dim signal's chance; 0.500000 restates the posterior chance of success after bright as if it were the signal's chance.")
+
+# 4
+x("Once the survey reads dim, what posterior does informationValue print for a discovery at Ekene Deep?",
+ "10.000000 percent, down from the stated 25.000000",
+ ["25.000000 percent, the prior chance left unmoved by any signal",
+  "50.000000 percent, the posterior after bright",
+  "27.281304 percent, FIN's break-even chance"],
+ "The engine returns 10.000000 percent after a dim signal and 50.000000 after a bright one; the likelihoods move the chance of success in opposite directions. 25.000000 is the prior, which only an uninformative signal leaves unmoved; 27.281304 is FIN's break-even chance, a different figure of a named position.")
+
+# 5
+x("Why does a bright amplitude signal turn FIN from declining to farming in on the Ekene Deep terms?",
+ "It lifts the chance of success to 50.000000 percent, above FIN's break-even chance of 27.281304",
+ ["It lowers the share of the well FIN must pay, so the promote on the deal shrinks toward the break-even promote",
+  "It raises the success-case value at 100 percent, so FIN's success payoff grows",
+  "It removes the dry-hole outcome, so farming in can lose FIN nothing at all"],
+ "The signal changes only the chance of success the side acts on. FIN's EMV for farming in is negative below its break-even chance of 27.281304 percent and positive above it; the stated 25.000000 sits below, and a bright signal moves it to 50.000000. The deal terms, the promote and the success-case value do not move, and a bright signal still leaves a 50.000000 percent chance of a dry hole.")
+
+# 6
+x("How does the engine reach FIN's EMV with the Ekene survey, 6745331.458602?",
+ "0.375000 x 17987550.556271 for farming in after bright, plus 0.625000 x 0.000000 for declining after dim",
+ ["0.500000 x 57575101.112542 plus 0.500000 x -21600000.000000, the farm in payoffs at the two posteriors averaged",
+  "57575101.112542 x 25.000000 percent, less the survey's stated cost of 1500000.000000 taken off at the end",
+  "14393775.278136 less 1500000.000000, the EVPI of FIN reduced by the stated cost of the seismic survey"],
+ "The engine weights each signal's best EMV by the chance of that signal: 0.375000 x 17987550.556271 + 0.625000 x 0.000000 = 6745331.458602 (engine), and EVII is that less the EMV without information, 0.000000. The first distractor averages payoffs at posteriors with made-up weights; the second is the perfect-information path less the cost; the third mixes EVPI with the cost.")
+
+# 7
+x("A learner restates the Ekene survey for FIN at a cost of 9000000.000000 and changes nothing else. What does the engine return?",
+ "EVII still 6745331.458602, less the cost -2254668.541398: the information costs more than it is worth",
+ ["EVII falls to -2254668.541398, because the stated cost is subtracted from each signal's EMV before weighting",
+  "A refusal naming information.cost, because a survey dearer than its own EVII cannot be stated in the call",
+  "EVII rises to 9000000.000000, since the engine values the survey at whatever cost the call has stated"],
+ "The cost does not change what the signal tells FIN or what FIN does after it; it is subtracted at the end. On info-ekene-too-dear EVII is 6745331.458602 and EVII less the cost is -2254668.541398, with the reason that the information costs more than it is worth (engine). The call is a result, and no field is refused.")
+
+# 8
+x("On info-uninformative both signals carry likelihoods of 50.000000 percent given success and 50.000000 percent given a dry hole, and the stated cost is 0.000000. Which outcome does the engine report?",
+ "A result with EVII 0.000000 and the reason that the information is worth exactly its cost",
+ ["A refusal naming information.signals, since equal likelihoods tell nothing",
+  "A refusal naming information.cost, since a cost of 0.000000 is out of range",
+  "A result with EVII equal to FIN's EVPI of 14393775.278136"],
+ "After either signal the chance of success stays 25.000000 percent, FIN declines after both, and EVII is 0.000000 (engine). The comparison lands exactly on its edge and the engine says so in words: the information is worth exactly its cost. That is a result of a successful call; neither the signals nor the cost is refused, and EVII sits far below EVPI.")
+
+# 9
+x("An informationValue call states one signal only, labelled a, with likelihoods [100, 100]. The engine's own words in reply are which of these?",
+ "information.signals must be an array of at least 2 signals; got [{\"label\":\"a\",\"likelihoodsPct\":[100,100]}]",
+ ["information.signals must have likelihoodsPct[0] summing to 100 over the signals (P(signal | success)); got a sum of 95",
+  "information.signals[0].likelihoodsPct must be an array [P(signal | success), P(signal | dry hole)] in per cent; got [75]",
+  "information.signals must have at most 10 entries; got 11"],
+ "One signal tells nothing, so the engine refuses the array by its length and prints the whole array back, in its own words: information.signals must be an array of at least 2 signals. The summing message answers a likelihood column that does not sum to 100; the array message with got [75] answers a signal with one likelihood; the at-most-10 message answers eleven signals, above the cap of 10.")
+
+# 10
+x("The engine refuses a signal set with this message: information.signals must have likelihoodsPct[0] summing to 100 over the signals (P(signal | success)); got a sum of 95. Which rule failed?",
+ "The chances of every signal given success must add to 100 across the signals",
+ ["The two likelihoods of each signal, given success and given a dry hole, must add to 100 for that signal",
+  "The chance of success must be 100 less the chance of a dry hole",
+  "The engine's own signal chances must add to 100 before weighting"],
+ "likelihoodsPct[0] is P(signal | success), and the rule is a column rule: summed over the signals it must reach 100, because some signal is always returned when the well succeeds. A signal's own pair need not add to 100 (the Ekene pairs happen to, and 50 with 50 does too). The chance of success is one stated input, and the signal chances are computed by the engine, so neither can be the failed rule.")
+
+# 11
+x("A caller asks informationValue to value the survey for side \"partner\". What comes back?",
+ "side must be one of \"farmor\", \"farminee\"; got \"partner\"",
+ ["side must be the id of a licence party (EKO, PA); got \"partner\"",
+  "side is not an accepted key; the accepted keys at the top level are parties, farmor, farminee",
+  "A result for PA, the other licence party, whose EMV without information is 0.000000 on the deal"],
+ "The engine values one side per call, holds no default side and names the two it accepts, in its own words: side must be one of \"farmor\", \"farminee\"; got \"partner\". It does not read a party id for the side, side is an accepted key, and no position is built for the other licence party.")
+
+# 12
+x("On info-ekene-farmor, which action does EKO take after a bright amplitude signal, and with what EMV?",
+ "Drill alone, with an EMV of 64837617.964633",
+ ["Farm out on the stated terms, with an EMV of 3858013.481672 after the signal",
+  "Walk away, with an EMV of 0.000000",
+  "Farm out on the stated terms, with an EMV of 17987550.556271 after the signal"],
+ "At the posterior of 50.000000 percent the engine rolls EKO's three actions back and drilling alone wins at 64837617.964633 (engine). 3858013.481672 is EKO's EMV after a dim signal, where farming out is best; 17987550.556271 is FIN's farm in EMV after a bright signal, a different position; walking away is never best at that posterior.")
+
+# 13
+x("The same Ekene survey is worth 6892331.458602 to EKO and 6745331.458602 to FIN before its cost. What does the course give as the reason the two figures differ?",
+ "Each side values the survey on its own actions and payoffs under the deal",
+ ["The engine charges the survey's cost to EKO alone, as the operator that would shoot it",
+  "The farmor's EVII is taken at the prior chance and the farminee's at the posterior chance",
+  "A Monte Carlo draw of the two signals returns a different estimate for each side's call"],
+ "The course states it plainly: the two sides value the same information differently because their actions and payoffs differ. EKO has three actions (drill alone, farm out, walk away), FIN two (farm in, decline). Each call subtracts the stated cost from its own side's EVII, both use the same prior and posteriors, and informationValue draws nothing: evpi and evii are the canonical decision tree functions.")
+
+# 14
+x("On the Ekene deal stated with the farmor-side overrun rule, an informationValue call gives FIN a share paid of 31 percent. Which statement matches what the engine does?",
+ "It refuses deal.farmineePaysPct, naming a floor of 31.363637, rounded up so it is accepted",
+ ["It returns FIN's EVII on the stated terms and leaves the share paid unread",
+  "It refuses information.cost, checking the survey's cost before the deal",
+  "It returns a result for FIN with a reason saying the carry on the success well is below 0"],
+ "The information call builds the same positions as the deal call, so it applies the same check. The engine's words: deal.farmineePaysPct must be at or above 31.363637 (rounded up at the sixth decimal so that it is accepted), the share at which the carry is 0 when the farmor side pays the excess ... got 31. The share paid is read, the cost is untouched, and a carry below 0 is refused outright with no values returned.")
+
+# 15
+x("Where do the EVPI and EVII figures of informationValue come from inside the engine?",
+ "From evpi and evii of engines/economics/decisionTree.js, with Bayes applied to the stated likelihoods",
+ ["From portfolioRiskMetrics of engines/economics/portfolio.js, drawing signals under a stated seed",
+  "From an EMV routine written inside farmout.js for this course, separate from the decision course",
+  "From carryRecovery of engines/economics/jointVenture.js, the ledger the farm-in hands over"],
+ "The engine's basis names its source: evpi and evii from engines/economics/decisionTree.js (Bayes from the stated likelihoods, so the signal chances and posteriors are consistent by construction). farmout.js carries no decision tree or Monte Carlo code of its own; portfolio.js is the risk view's source, and jointVenture.js serves the carry and the back-in.")
+
+emit(Q, '/root/cat-wip-farmout/banks/ec10a_m01.json', expect_n=15)
+finish()

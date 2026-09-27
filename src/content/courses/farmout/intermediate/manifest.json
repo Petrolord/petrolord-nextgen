@@ -1,0 +1,362 @@
+{
+ "app_slug": "farmout",
+ "tier": "intermediate",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-caps-and-overrun-rules",
+   "title": "Caps and Overrun Rules",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-a-cap-on-the-gross-cost",
+     "title": "A cap on the gross cost",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "farmout-earning-calculator",
+      "farmout-deal-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-overrun-paid-by-the-post-deal-interests",
+     "title": "The overrun paid by the post-deal interests",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-deal-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-overrun-paid-by-the-farmor-side",
+     "title": "The overrun paid by the farmor side",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-deal-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-a-cap-on-the-carry-amount",
+     "title": "A cap on the carry amount",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "farmout-deal-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-a-cap-reached-exactly",
+     "title": "A cap reached exactly",
+     "order": 5,
+     "est_minutes": 12,
+     "panels": [
+      "farmout-deal-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-drill-to-earn-vesting",
+   "title": "Drill-to-Earn Vesting",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-earning-events",
+     "title": "Earning events",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "farmout-deal-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-vesting-event-by-event",
+     "title": "Vesting event by event",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-deal-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-vesting-when-every-event-is-complete",
+     "title": "Vesting when every event is complete",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-deal-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-obligation-and-the-payments-made",
+     "title": "The obligation and the payments made",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-deal-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-deal-value-to-each-side",
+   "title": "Deal Value to Each Side",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-a-risked-prospect-in-stated-terms",
+     "title": "A risked prospect in stated terms",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "farmout-deal-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-farmors-three-actions",
+     "title": "The farmor's three actions",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-deal-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-farminees-choice",
+     "title": "The farminee's choice",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-deal-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-value-moves-between-the-sides",
+     "title": "Value moves between the sides",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "farmout-deal-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-success-case-value-from-cash-flows",
+     "title": "The success-case value from cash flows",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-deal-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-break-even-promote-and-chance",
+   "title": "Break-Even Promote and Chance",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-the-break-even-promote",
+     "title": "The break-even promote",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-deal-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-breakpoints-under-a-carry-cap",
+     "title": "Breakpoints under a carry cap",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "farmout-deal-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-break-even-chance-of-success",
+     "title": "The break-even chance of success",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-deal-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-when-no-break-even-exists",
+     "title": "When no break-even exists",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "farmout-deal-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-the-consent-fee",
+   "title": "The Consent Fee",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-seven-per-cent-of-the-value",
+     "title": "Seven per cent of the value of the transaction",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "farmout-deal-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-value-of-the-transaction",
+     "title": "The value of the transaction, as the regulations define it",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "farmout-deal-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-an-intra-group-transfer-and-a-pel",
+     "title": "An intra group transfer and a PEL",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-deal-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-fee-in-the-farmors-position",
+     "title": "The fee in the farmor's position",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-deal-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-paying-the-fee-on-time",
+   "title": "Paying the Fee on Time",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-ninety-days-and-thirty-more",
+     "title": "Ninety days and thirty more",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "farmout-deal-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-surcharge-a-day",
+     "title": "The surcharge a day",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-deal-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-consent-deemed-withdrawn",
+     "title": "The consent deemed withdrawn",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-deal-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-deal-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

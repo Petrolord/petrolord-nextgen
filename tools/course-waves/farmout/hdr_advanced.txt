@@ -1,0 +1,19 @@
+-- ============================================================================
+-- EC10 EXPERT DEEP SEED: Farm-ins, Farm-outs & Asset Valuation, advanced tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/farmout/advanced.
+--
+-- What this tier owns: INFORMATION, RISK, PRICE AND AFTER THE FARM-IN. The value of
+-- information to each side; risk sharing through the seeded portfolio Monte
+-- Carlo, taught and never graded; value per percent of an interest and
+-- transaction ratios; a development carry and a back-in through the joint
+-- venture engine; the readings the engine states, the texts' quirks and the
+-- boundaries; what the engine does not compute and the farm-out report.
+--
+-- AN ENGINE COURSE. There is no Suite app: the practicals run in the course's
+-- own valuation calculator. The capstone grades six values of this tier, each identical
+-- under every reading the engine states and never a Monte Carlo draw.
+-- ============================================================================

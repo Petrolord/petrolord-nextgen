@@ -1,0 +1,361 @@
+{
+ "app_slug": "farmout",
+ "tier": "beginner",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-what-a-farm-out-is",
+   "title": "What a Farm-Out Is",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-an-interest-for-work",
+     "title": "An interest for work",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "farmout-earning-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-farmor-and-the-farminee",
+     "title": "The farmor and the farminee",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-earning-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-ekene-deep-prospect",
+     "title": "The Ekene Deep prospect",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-earning-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-sources-and-the-dates-they-were-read",
+     "title": "Sources and the dates they were read",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-earning-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-calculator-panels-and-refusals",
+     "title": "The calculator panels and the refusals",
+     "order": 5,
+     "est_minutes": 14,
+     "panels": [
+      "farmout-earning-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-the-earning-obligation",
+   "title": "The Earning Obligation",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-a-work-programme-as-the-price",
+     "title": "A work programme as the price",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "farmout-earning-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-share-paid-and-the-interest-earned",
+     "title": "The share paid and the interest earned",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-earning-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-other-parties-pay-their-own",
+     "title": "The other parties pay their own shares",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-earning-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-reading-the-earning-table",
+     "title": "Reading the earning table",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-earning-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-the-promote-and-its-ratio",
+   "title": "The Promote and Its Ratio",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-the-promote-in-points",
+     "title": "The promote in points",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "farmout-earning-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-promote-ratio",
+     "title": "The promote ratio",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-earning-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-carry-inside-a-promote",
+     "title": "The carry inside a promote",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "farmout-earning-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-heads-up-and-a-full-carry",
+     "title": "Heads up and a full carry",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-earning-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-cash-bonus-and-reimbursement",
+   "title": "Cash Bonus and Reimbursement",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-a-cash-bonus",
+     "title": "A cash bonus",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "farmout-earning-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-past-cost-reimbursement",
+     "title": "Past-cost reimbursement",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-earning-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-consideration-to-the-farmor",
+     "title": "The consideration to the farmor",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-earning-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-equivalent-working-interest",
+     "title": "The equivalent working interest",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "farmout-earning-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-the-consent-process-in-words",
+   "title": "The Consent Process in Words",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-an-assignment-needs-consent",
+     "title": "An assignment needs consent",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "farmout-earning-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-minister-and-the-commission",
+     "title": "The Minister and the Commission",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-earning-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-a-change-of-control",
+     "title": "A change of control",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-earning-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-notification-and-the-application",
+     "title": "The notification and the application",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-earning-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-fees-that-are-not-deductible",
+     "title": "Fees that are not deductible",
+     "order": 5,
+     "est_minutes": 12,
+     "panels": [
+      "farmout-earning-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-interests-after-the-deal",
+   "title": "Interests after the Deal",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-the-interests-after-the-farm-in",
+     "title": "The interests after the farm-in",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "farmout-earning-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-an-event-completed-and-vested",
+     "title": "An event completed and vested",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-earning-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-a-checklist-for-reading-a-farm-out",
+     "title": "A checklist for reading a farm-out",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-earning-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-earning-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}
