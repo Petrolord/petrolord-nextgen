@@ -300,6 +300,9 @@ export const PANELS = {
   'farmout-earning-calculator': React.lazy(() => import('@/components/course/panels/farmout/EarningCalculator')),
   'farmout-deal-calculator': React.lazy(() => import('@/components/course/panels/farmout/DealCalculator')),
   'farmout-valuation-calculator': React.lazy(() => import('@/components/course/panels/farmout/ValuationCalculator')),
+  'prms-classification-calculator': React.lazy(() => import('@/components/course/panels/prms/ClassificationCalculator')),
+  'prms-reserves-calculator': React.lazy(() => import('@/components/course/panels/prms/ReservesCalculator')),
+  'prms-aggregation-calculator': React.lazy(() => import('@/components/course/panels/prms/AggregationCalculator')),
 };
 
 export function resolvePanel(id) {

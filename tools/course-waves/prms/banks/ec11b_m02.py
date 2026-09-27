@@ -1,0 +1,119 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# EC11 Associate m02, Discovered and Undiscovered.
+# Sources: the engine's decision list; the unrecoverable classes; Prospective
+# Resources, their three sub-classes and the chance of commerciality; the
+# refusals of the classify function this module shows. Every key rests on a
+# digest line or an engine return re-run in
+# /root/cat-wip-prms/scratch/bank-beginner/witness.mjs.
+
+q(1, "A team states the discovery status of its accumulation as \"appraised\". What does the engine return?",
+ "A refusal naming `discovery`, since only \"discovered\" and \"undiscovered\" are accepted.",
+ ["The class Contingent Resources, since appraisal means a plan is pending.",
+  "A result that treats \"appraised\" as discovered and prints a note to say so.",
+  "The class Prospective Resources, since appraisal comes before a development decision."],
+ "The engine's own words are: discovery must be one of \"discovered\", \"undiscovered\"; got \"appraised\". It reads a stated status and checks it against the two it accepts; it maps no other word onto them. An appraised accumulation is a known one, so the team states \"discovered\", and the appraisal shows up in other facts such as a development plan.")
+
+q(3, "An accumulation has not yet been found by a well, and a recovery project with established technology could apply to it. Which class does the engine return?",
+ "Prospective Resources.",
+ ["Contingent Resources, held back.",
+  "Undiscovered Unrecoverable.",
+  "Reserves at the undeveloped status."],
+ "Undiscovered with a recovery project is Prospective Resources (PRMS 2.1.0.1, Table 1), with a stated sub-class and stated chances. Contingent Resources are discovered. Undiscovered Unrecoverable needs the recovery project to be none. Reserves need a discovered project that meets every commerciality criterion.")
+
+q(0, "Which Prospective sub-class does the Ekene file state for EKN-7, Ekene Shallow?",
+ "Lead: a potential accumulation that needs more data before it can become a prospect.",
+ ["Prospect: a potential accumulation that is defined well enough to be drilled.",
+  "Play: a family of potential accumulations across a basin with shared geology.",
+  "Development-pending, the sub-class the engine gives to every project still waiting on data."],
+ "EKN-7 is stated as a lead, and the engine's decision reads \"lead (stated)\" with PRMS 2.1.3.5.9 and Table 1. EKN-6, Ekene Deep, is the prospect, and the course's small case states a play. Development-pending is a Contingent sub-class, which the engine refuses on an undiscovered project.")
+
+q(2, "Which description fits a play, in the course's own words?",
+ "A family of potential accumulations across a basin, sharing the geology that could trap petroleum.",
+ ["A single potential accumulation mapped well enough that a well could be drilled on it next season.",
+  "A discovered accumulation that is waiting for the money and approvals it needs to be developed.",
+  "A known accumulation that no recovery project can reach with any technology available today."],
+ "A play is a family of such accumulations across a basin (PRMS 2.1.3.5.9, Table 1), the least mature of the three Prospective sub-classes. A single accumulation ready to drill is a prospect. A discovered one waiting on money and approvals is Contingent Resources, and a known one with no recovery project is Discovered Unrecoverable.")
+
+q(2, "A learner gives the lead a Contingent sub-class, development-pending. Which message comes back?",
+ "subClass must be one of \"prospect\", \"lead\", \"play\"; got \"development-pending\"",
+ ["subClass must be left out for unrecoverable quantities (no recovery project applies); got \"development-pending\"",
+  "A result with the class changed to Contingent Resources, since the stated sub-class belongs there.",
+  "The lead's result, with the sub-class reset to \"lead\"."],
+ "Those are the engine's own words for the golden case class-refuse-prospective-subclass. An undiscovered project with a recovery project is Prospective Resources, and only the three Prospective sub-classes are accepted. The engine changes no class to fit a sub-class, replaces nothing it was given, and gives the unrecoverable message only when the recovery project is none.")
+
+q(0, "Why does the engine refuse a commerciality block stated for an undiscovered accumulation?",
+ "The commerciality test applies to discovered quantities (PRMS 2.1.2).",
+ ["An undiscovered accumulation becomes Reserves once all seven criteria are true.",
+  "The commerciality block may be stated only once the chance of development has reached 50 percent.",
+  "The block is accepted until a criterion is false."],
+ "The engine refuses the block by name: commerciality must be left out for an undiscovered accumulation, citing PRMS 2.1.2. Nothing has been found yet to develop, so the class is Prospective Resources and the chances carry the uncertainty. No class is reached without its stated facts, and no chance threshold opens the test.")
+
+q(3, "The oil left behind in Ekene Main, which no project can reach, is classified in the calculator. Which class comes back, with which sections cited?",
+ "Discovered Unrecoverable, citing PRMS 2.1.0.1 and 2.1.1.2.",
+ ["Contingent Resources at development-not-viable, citing PRMS 2.1.3.5.6 and Table 1.",
+  "Reserves at developed-non-producing, citing Table 2.",
+  "Undiscovered Unrecoverable, citing PRMS 2.1.1.1."],
+ "The engine's reason reads, in its own words: recovery project: none applies with established technology or technology under development: Discovered Unrecoverable (PRMS 2.1.0.1, 2.1.1.2). A not-viable Contingent project still has a project. Reserves need every criterion met. EKN-8 is a known accumulation, so the undiscovered class cannot apply.")
+
+q(1, "Which class does the engine return for an undiscovered accumulation stated with a recovery project of none?",
+ "Undiscovered Unrecoverable.",
+ ["Prospective Resources, sub-class play.",
+  "Discovered Unrecoverable, as no project applies.",
+  "A refusal naming the recovery project."],
+ "The golden input class-undiscovered-unrecoverable returns \"Undiscovered Unrecoverable\". With no recovery project the engine stops at the second step, whether the accumulation is discovered or undiscovered, so there are two unrecoverable classes. Prospective Resources need a recovery project, and a recovery project of none is a stated value the engine accepts.")
+
+q(0, "Residual oil in Ekene Main is given the sub-class development-not-viable. How does the classify call respond?",
+ "subClass must be left out for unrecoverable quantities (no recovery project applies); got \"development-not-viable\"",
+ ["subClass must be one of \"prospect\", \"lead\", \"play\"; got \"development-not-viable\"",
+  "Contingent Resources, sub-class development-not-viable (stated).",
+  "Discovered Unrecoverable with the sub-class printed as stated."],
+ "Those are the engine's own words: unrecoverable quantities have no project, so no sub-class describes one. Development-not-viable is a Contingent sub-class, for a project that exists and is not expected to go ahead. The Prospective list applies only to undiscovered projects with a recovery project, and the class of EKN-8 is set by its facts, which the stated sub-class does not change.")
+
+q(1, "What does the engine return as the category labels of EKN-8, and what does its basis say?",
+ "No labels (null), and the basis reads \"none: unrecoverable quantities are not categorized\".",
+ ["The labels 1C, 2C and 3C, since discovered quantities without Reserves always fall into Contingent.",
+  "1U, 2U and 3U, since quantities no project can reach are counted as undiscovered ones.",
+  "The labels 1P, 2P and 3P at zero."],
+ "Unrecoverable quantities carry no categories: the engine returns labels null and gives its basis in its own words, none: unrecoverable quantities are not categorized. The C labels belong to Contingent Resources and the U labels to Prospective Resources. No zero-valued P labels are returned.")
+
+q(3, "Ekene Deep, EKN-6, states a chance of geologic discovery of 25.000000 percent and a chance of development of 80.000000 percent. What chance of commerciality does the engine return?",
+ "20.000000 percent, the product Pg x Pd.",
+ ["25.000000 percent, Pg alone.",
+  "80.000000 percent, Pd alone.",
+  "10.500000 percent, the figure the engine returns for every Prospective project in the Ekene file."],
+ "For an undiscovered project Pc = Pg x Pd (PRMS 2.1.3.3), and the engine's own decision line reads Pc = Pg x Pd = 25% x 80% = 20%. Either chance on its own leaves out the other judgement. 10.500000 percent is the chance of EKN-7, the lead, from its own stated chances.")
+
+q(2, "Multiply out the stated chances of Ekene Shallow, the lead (Pg 15.000000, Pd 70.000000 percent). Which figure does the classification calculator print in its Chance of commerciality tile?",
+ "10.500000 percent.",
+ ["15.000000 percent.",
+  "70.000000 percent.",
+  "5.000000 percent."],
+ "The engine multiplies the two stated chances: 15.000000 percent times 70.000000 percent is 10.500000 percent. Neither chance alone is the chance of commerciality of an undiscovered project. 5.000000 percent is the chance of the play case, from its own stated Pg of 10.000000 and Pd of 50.000000 percent; the engine derives no chance from the sub-class.")
+
+q(0, "The golden input class-pg-zero states a prospect with a chance of geologic discovery of 0.000000 percent. What does the engine return?",
+ "A Pc of 0.000000 percent, with the class still Prospective Resources and the sub-class prospect.",
+ ["A refusal, since a chance of geologic discovery must be above 0 for any prospect to be classified.",
+  "The class Undiscovered Unrecoverable, since a prospect with no chance of discovery cannot be recovered.",
+  "A Pc equal to the stated chance of development, since the zero chance is set aside."],
+ "The engine reports the product, 0.000000 percent, and keeps the class the facts give: Prospective Resources, sub-class prospect. A class is set by discovery and the recovery project, and the chance is a separate stated figure beside it. A Pg of 0 is inside the accepted range from 0 to 100.")
+
+q(3, "Someone types a chance of geologic discovery of 50 into the box of Ekene North appraisal, which is discovered. Which message is printed?",
+ "chances.geologicDiscoveryPct must be left out for a discovered accumulation (the chance of geologic discovery applies to Prospective Resources, PRMS 2.1.3.2); got 50",
+ ["chances must be left out for Reserves (PRMS 2.1.3.3 treats Reserves as near-certain to be commercial, so no chance figure is carried); got {\"developmentPct\":50}",
+  "A result with the class changed to Prospective Resources, since only a prospect carries that chance.",
+  "chances.developmentPct must be a number from 0 to 100; got nothing"],
+ "Those are the engine's own words. A discovered project has already been found, so its only chance is the chance of development, and Pc = Pd. The Reserves message applies to a project whose facts give Reserves, and EKN-4 is Contingent Resources. The engine multiplies nothing for a discovered project, and EKN-4 still states its chance of development.")
+
+q(1, "What does the chance of commerciality of a prospect do to its 1U, 2U and 3U?",
+ "Nothing: they stay the quantities the project would recover if it succeeds.",
+ ["It multiplies them, so the engine returns each category already risked by the chance.",
+  "It moves them into the 1C, 2C and 3C once the chance reaches 50 percent.",
+  "The low estimate becomes the chance times the best estimate, as the 1U is defined."],
+ "The chance says how likely the project is to reach Reserves, and it sits beside the categories without changing them. A figure multiplied by a named chance is a risked figure, and the classification calculator returns none; the Expert tier takes that question up. No chance threshold moves quantities between classes, and each estimate is stated.")
+
+emit(Q, '/root/cat-wip-prms/banks/ec11b_m02.json', expect_n=15)
+finish()

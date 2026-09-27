@@ -1,0 +1,19 @@
+-- ============================================================================
+-- EC11 EXPERT DEEP SEED: Reserves & Resources under SPE-PRMS 2018, advanced tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/prms/advanced.
+--
+-- What this tier owns: AGGREGATION, RECONCILIATION AND THE LIMITS. Arithmetic
+-- summation and the SEC rule; probabilistic aggregation through the seeded
+-- canonical Monte Carlo, taught and never graded; risked quantities and classes
+-- kept apart; the reconciliation of a category set; the two economic-limit
+-- rules and why the engine refuses where they disagree; the readings, the
+-- texts' quirks and the boundaries; what the engine does not compute.
+--
+-- AN ENGINE COURSE. There is no Suite app: the practicals run in the course's
+-- own aggregation calculator. The capstone grades six values of this tier, each identical
+-- under every reading the engine states and never a Monte Carlo draw.
+-- ============================================================================

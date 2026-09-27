@@ -1,0 +1,14 @@
+{
+ "money": {
+  "decimals": 6,
+  "match": "^(?:awkuzu_best_ncf_share|awkuzu_best_npv_share)$"
+ },
+ "share": {
+  "decimals": 6,
+  "match": "^(?:abagana_lead_pc_pct|abagana_prospect_pc_pct)$"
+ },
+ "volume": {
+  "decimals": 6,
+  "match": "^(?:abagana_contingent_2c|abagana_contingent_3c|abagana_reserves_p2|abagana_reserves_p3|awkuzu_2p_net_oil|awkuzu_high_beyond_licence_oil|awkuzu_p2_boe|awkuzu_p3_boe|isuofia_closing_1p|isuofia_closing_3p|isuofia_contingent_risked_mean|isuofia_difference_2p|isuofia_reserves_arith_1p|isuofia_reserves_arith_3p)$"
+ }
+}

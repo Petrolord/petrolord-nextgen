@@ -2298,6 +2298,76 @@
       "group": "ec45-decision-portfolio-recut",
       "vendoredSha": "19cf6156fa3aed7f08aa7c2435d02cc08c612c1c",
       "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, and that root has collapsed into them (deleted with its ledger entries). Clears as STALE when the pin moves to fb5a363 or later."
+    },
+    {
+      "path": "__tests__/economics.prms.test.js",
+      "kind": "extra",
+      "group": "ec11-prms-course",
+      "vendoredSha": "1d94383519e558eb6ee571c224851e131d1ceb6e",
+      "reason": "EC11 prms course: vendored sha-identical from petrolord-engines 42139e6 (PRs #278 to #280: engines/economics/prms.js, its jest suite, golden, the ekene-prms fixture and its writer, oracle, timing script, negative control, FINDINGS) by the wave's vendor_prms.sh, 4 proofs per path; its runtime imports (cashflow.ts, irrContract.js, lib/stats, lib/conventions/percentile.js) were already vendored at the same blobs. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 42139e6 or later."
+    },
+    {
+      "path": "engines/economics/prms.js",
+      "kind": "extra",
+      "group": "ec11-prms-course",
+      "vendoredSha": "7961ed0d01f8a14bd8b4f40dfcbf4cefd7b93277",
+      "reason": "EC11 prms course: vendored sha-identical from petrolord-engines 42139e6 (PRs #278 to #280: engines/economics/prms.js, its jest suite, golden, the ekene-prms fixture and its writer, oracle, timing script, negative control, FINDINGS) by the wave's vendor_prms.sh, 4 proofs per path; its runtime imports (cashflow.ts, irrContract.js, lib/stats, lib/conventions/percentile.js) were already vendored at the same blobs. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 42139e6 or later."
+    },
+    {
+      "path": "test-data/economics/ekene-prms/README.md",
+      "kind": "extra",
+      "group": "ec11-prms-course",
+      "vendoredSha": "4921ee24bd0fa82a4a7c09a3b435c50fb7c1021c",
+      "reason": "EC11 prms course: vendored sha-identical from petrolord-engines 42139e6 (PRs #278 to #280: engines/economics/prms.js, its jest suite, golden, the ekene-prms fixture and its writer, oracle, timing script, negative control, FINDINGS) by the wave's vendor_prms.sh, 4 proofs per path; its runtime imports (cashflow.ts, irrContract.js, lib/stats, lib/conventions/percentile.js) were already vendored at the same blobs. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 42139e6 or later."
+    },
+    {
+      "path": "test-data/economics/ekene-prms/ekene-prms.json",
+      "kind": "extra",
+      "group": "ec11-prms-course",
+      "vendoredSha": "40c628ef25e1977b67782b004cd84c3bad32e47a",
+      "reason": "EC11 prms course: vendored sha-identical from petrolord-engines 42139e6 (PRs #278 to #280: engines/economics/prms.js, its jest suite, golden, the ekene-prms fixture and its writer, oracle, timing script, negative control, FINDINGS) by the wave's vendor_prms.sh, 4 proofs per path; its runtime imports (cashflow.ts, irrContract.js, lib/stats, lib/conventions/percentile.js) were already vendored at the same blobs. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 42139e6 or later."
+    },
+    {
+      "path": "test-data/economics/goldens/prms_cases.json",
+      "kind": "extra",
+      "group": "ec11-prms-course",
+      "vendoredSha": "b4961326a61923d0ed231e66763e3f9dcaf874de",
+      "reason": "EC11 prms course: vendored sha-identical from petrolord-engines 42139e6 (PRs #278 to #280: engines/economics/prms.js, its jest suite, golden, the ekene-prms fixture and its writer, oracle, timing script, negative control, FINDINGS) by the wave's vendor_prms.sh, 4 proofs per path; its runtime imports (cashflow.ts, irrContract.js, lib/stats, lib/conventions/percentile.js) were already vendored at the same blobs. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 42139e6 or later."
+    },
+    {
+      "path": "tools/validation/economics/FINDINGS-prms.md",
+      "kind": "extra",
+      "group": "ec11-prms-course",
+      "vendoredSha": "26ded3c5dc66237fbf775122d3409599ea808da2",
+      "reason": "EC11 prms course: vendored sha-identical from petrolord-engines 42139e6 (PRs #278 to #280: engines/economics/prms.js, its jest suite, golden, the ekene-prms fixture and its writer, oracle, timing script, negative control, FINDINGS) by the wave's vendor_prms.sh, 4 proofs per path; its runtime imports (cashflow.ts, irrContract.js, lib/stats, lib/conventions/percentile.js) were already vendored at the same blobs. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 42139e6 or later."
+    },
+    {
+      "path": "tools/validation/economics/make_prms_fixtures.py",
+      "kind": "extra",
+      "group": "ec11-prms-course",
+      "vendoredSha": "0561222c07cb9b8bbe14fc49c3f519be28c81e04",
+      "reason": "EC11 prms course: vendored sha-identical from petrolord-engines 42139e6 (PRs #278 to #280: engines/economics/prms.js, its jest suite, golden, the ekene-prms fixture and its writer, oracle, timing script, negative control, FINDINGS) by the wave's vendor_prms.sh, 4 proofs per path; its runtime imports (cashflow.ts, irrContract.js, lib/stats, lib/conventions/percentile.js) were already vendored at the same blobs. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 42139e6 or later."
+    },
+    {
+      "path": "tools/validation/economics/negcontrol_prms.sh",
+      "kind": "extra",
+      "group": "ec11-prms-course",
+      "vendoredSha": "0572a3dfee782ab2230d8d8d63810046f68fad24",
+      "reason": "EC11 prms course: vendored sha-identical from petrolord-engines 42139e6 (PRs #278 to #280: engines/economics/prms.js, its jest suite, golden, the ekene-prms fixture and its writer, oracle, timing script, negative control, FINDINGS) by the wave's vendor_prms.sh, 4 proofs per path; its runtime imports (cashflow.ts, irrContract.js, lib/stats, lib/conventions/percentile.js) were already vendored at the same blobs. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 42139e6 or later."
+    },
+    {
+      "path": "tools/validation/economics/oracle_prms.py",
+      "kind": "extra",
+      "group": "ec11-prms-course",
+      "vendoredSha": "7d10c756f8042be05a8b006d136ccf8f66661d28",
+      "reason": "EC11 prms course: vendored sha-identical from petrolord-engines 42139e6 (PRs #278 to #280: engines/economics/prms.js, its jest suite, golden, the ekene-prms fixture and its writer, oracle, timing script, negative control, FINDINGS) by the wave's vendor_prms.sh, 4 proofs per path; its runtime imports (cashflow.ts, irrContract.js, lib/stats, lib/conventions/percentile.js) were already vendored at the same blobs. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 42139e6 or later."
+    },
+    {
+      "path": "tools/validation/economics/timing_prms.js",
+      "kind": "extra",
+      "group": "ec11-prms-course",
+      "vendoredSha": "d81558c78459eca38cf0dc9a874fd8564af922b6",
+      "reason": "EC11 prms course: vendored sha-identical from petrolord-engines 42139e6 (PRs #278 to #280: engines/economics/prms.js, its jest suite, golden, the ekene-prms fixture and its writer, oracle, timing script, negative control, FINDINGS) by the wave's vendor_prms.sh, 4 proofs per path; its runtime imports (cashflow.ts, irrContract.js, lib/stats, lib/conventions/percentile.js) were already vendored at the same blobs. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 42139e6 or later."
     }
   ]
 }
