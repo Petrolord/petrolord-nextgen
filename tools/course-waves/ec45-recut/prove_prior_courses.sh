@@ -119,6 +119,15 @@ for W in cashflow fiscal; do
   done
 done
 
+# EC6 fdp reads afe_cases.json (its EVM refusals and cases) in its digest and
+# fdpLab.js; its engines (fdp/*) stay held. The digest must rebuild identical.
+src="$NG/tools/course-waves/fdp"; dst="$SCR/fdp"; cp -rp "$src" "$dst"
+if (cd "$dst" && env TZ=UTC LC_ALL=C EC6_ENGINES="$ENG" node ./ec6_dump.mjs > digest.tmp 2> digest.err && mv digest.tmp digest.txt); then
+  cmp -s "$src/digest.txt" "$dst/digest.txt" && v=IDENTICAL || { v=DIFFERS; fail=1; }
+  [ "$(pin fdp digest.txt)" = "$(sha256sum "$dst/digest.txt" | cut -d' ' -f1)" ] && pv="matches its pin" || { pv="DOES NOT MATCH its pin"; fail=1; }
+  printf '%-4s %-12s %-15s %s, %s\n' EC6 fdp digest.txt "$v" "$pv"
+else echo "EC6 fdp: digest FAILED"; tail -n 3 "$dst/digest.err"; fail=1; fi
+
 echo; echo "PART 4: the re-cut courses (decision, portfolio) from their committed generators"
 for spec in EC4:decision:ec4 EC5:portfolio:ec5; do
   P=${spec%%:*}; rest=${spec#*:}; W=${rest%%:*}; e=${rest#*:}
@@ -133,4 +142,4 @@ for spec in EC4:decision:ec4 EC5:portfolio:ec5; do
     printf '%-4s %-10s %-11s %s, %s; new %s lines md5 %s; old (%s) %s lines md5 %s\n' "$P" "$W" "$f" "$v" "$pv" "$(wc -l < "$dst/$f")" "$(md5sum < "$dst/$f" | cut -c1-32)" "$BASE" "$oln" "$old"
   done
 done
-[ $fail = 0 ] && echo "PRIOR COURSES UNCHANGED: packages/engines differs from $BASE only by the thirty re-vendored paths (sha-identical to $REV) and their ledger entries; the ec10-farmout root is byte-identical to the canonical paths and farmout rebuilds byte-identical on them; D1-D5, H1, H3, H4, H5, SC2, EC7, EC8, EC9, cashflow and fiscal rebuild byte-identical; decision and portfolio rebuild to their committed re-cut" || { echo "PRIOR COURSES: A DIFFERENCE"; exit 1; }
+[ $fail = 0 ] && echo "PRIOR COURSES UNCHANGED: packages/engines differs from $BASE only by the thirty re-vendored paths (sha-identical to $REV) and their ledger entries; the ec10-farmout root is byte-identical to the canonical paths and farmout rebuilds byte-identical on them; D1-D5, H1, H3, H4, H5, SC2, EC7, EC8, EC6 fdp (digest), cashflow and fiscal rebuild byte-identical; EC9 joa fields and precision byte-identical${ALLOW_JOA_DIGEST:+ (its digest a KNOWN difference, printed above)}; decision and portfolio rebuild to their committed re-cut" || { echo "PRIOR COURSES: A DIFFERENCE"; exit 1; }
