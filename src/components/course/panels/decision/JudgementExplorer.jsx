@@ -15,7 +15,7 @@ import {
 // Every figure on this page is a return value from decisionLab, which is a
 // return value from the vendored decision tree engine or the VOI Analyzer. A
 // card the Analyzer withholds reads withheld. What the typed numbers would give
-// with nothing checking them is marked as unguarded arithmetic, never a card.
+// with nothing checking them is marked as unguarded arithmetic and is shown on no card.
 // The only outcome labels are on
 // the linked Monte Carlo NPV summary and the brief's economics rows, built from
 // the convention module.

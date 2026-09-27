@@ -11,6 +11,11 @@ import {
   mm, pr, Tbl, Sub, Line as Text, TreeRows, HandLines, Outcome, outcomeLabel, answerText,
 } from './decisionKit';
 
+// The engine rule lines are the teaching digest's own sentences. One of them
+// joins a clause with a comma before "never", which the owner copy rule keeps
+// off a learner's screen, so the panel says the same thing as its own sentence.
+const learnerLine = (l) => l.replace(/^- /, '').replace(/\u002c never rescaled\./, '. They are never rescaled.');
+
 // Tree explorer, the Associate tier. ONE PROSPECT ROLLED BACK: the EKPAN tree
 // with its node EMVs beside its branch values, chance nodes and what they
 // refuse, decision nodes and their ties, the OKRIKA appraisal sequence with and
@@ -84,7 +89,7 @@ export const TreeMode = ({ t, rules, refs, dn }) => {
         <>
           <Sub>What the engine assumes</Sub>
           <ul className="mt-2 text-xs text-slate-300 list-none pl-0 space-y-1">
-            {rules.lines.map((l) => <li key={l}>{l.replace(/^- /, '')}</li>)}
+            {rules.lines.map((l) => <li key={l}>{learnerLine(l)}</li>)}
           </ul>
           <Text>
             Payoffs enter the rollback as numbers already discounted: the success payoff {mm(rules.successPayoff)} and the dry
