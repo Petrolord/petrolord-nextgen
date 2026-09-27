@@ -49,10 +49,10 @@ q(0, "Rolled back without its walk-away branch, what does the EKPAN tree read at
 # ord 6
 q(3, "Which of these first moves is the tie rule speaking, and nothing else?",
  "Drill on the published drillFarmOut tree at success 0.200000, where both branches are 12.0000.",
- ["Farm out on the EKPAN lottery at 0.228571, where both branches print 21.7143 and the lottery keeps the branch the engine met first.",
+ ["Farm out on the EKPAN lottery at 0.228571, where both actions print 21.7143 and the lottery keeps the action it meets last.",
   "Develop in the EKPAN tree's marginal find, where 260.0000 less its cost of 90.0000 beats selling at 140.0000 within the rule's margin.",
   "Appraise on OKRIKA at 87.0000, because the appraisal is listed first of the three root branches and the rule favours that position."],
- "An exact tie at drillFarmOut's 0.200000 goes to Drill because it is listed first, with an advantage of 0.0000; the EKPAN lottery's Farm out at 0.228571 is residue of -7.11e-15, and Develop at 170.0000 and Appraise by 39.0000 are real margins.")
+ "An exact tie at drillFarmOut's 0.200000 is reported as a tie and Drill is marked because it is listed first, with nothing between the two. The EKPAN lottery at 0.228571 is a reported tie with Drill marked, and Develop at 170.0000 and Appraise by 39.0000 are real margins.")
 
 # ord 7
 q(1, "The EKPAN tree's drill branch is worth 105.0000. Which statement about what a drilled well delivers is right?",
@@ -79,12 +79,12 @@ q(1, "On the EKPAN lottery EVPI is 61.7143 at a success probability of 0.228571 
  "Perfect information is worth most where the prior decision is closest to turning; at the EKPAN lottery's stated 0.350000 the drill already leads 75.7500 to 33.2500, and at 0.050000 EVPI is only 13.5000.")
 
 # ord 10
-q(3, "The EKPAN lottery's information tree ties its two root branches at a survey cost of 24.8250. What does the engine recommend there?",
- "Acquire CSEM survey, the first branch listed on the lottery's information tree, by the tie rule.",
+q(3, "The EKPAN lottery's information tree ties its two root branches at a survey cost of 24.8250. What does the engine report there?",
+ "A tie, with Acquire CSEM survey marked because it is the first branch listed on the lottery's information tree.",
  ["No further information, because at a net value of 0.0000 on the lottery the engine declines to spend money that buys nothing.",
   "A refusal, since a lottery survey priced at its gross value leaves no best branch.",
   "No further information, because 24.8250 is judged against the lottery's EVPI of 52.0000 and falls short of perfect information."],
- "At a survey cost of 24.8250 both root branches of the EKPAN lottery's information tree are 75.7500 and the acquisition is listed first; the advantage is 0.0000, so the recommendation is only the tie rule.")
+ "At a survey cost of 24.8250 both root branches of the EKPAN lottery's information tree are 75.7500. The engine reports them tied and marks the acquisition, listed first.")
 
 # ord 11
 q(0, "The EKPAN lottery's survey typed into the VOI Analyzer gives a gross value of information of 19.84 in its guidance sentence, while the same survey is worth 24.8250 on the lottery. What separates them?",
@@ -95,12 +95,12 @@ q(0, "The EKPAN lottery's survey typed into the VOI Analyzer gives a gross value
  "With Farm out removed the EKPAN lottery's survey is worth 19.8375, the two-action number the Analyzer prints as 19.84; the posteriors were typed at full precision and the inputs read consistent true.")
 
 # ord 12
-q(2, "On IRRI both indicators are typed 20 / 80 percent. What does the repaired VOI Analyzer report for the value of information?",
+q(2, "On IRRI both indicators are typed 20 / 80 percent. What does the VOI Analyzer report for the value of information?",
  "It withholds it, with consistent false, and still reports EMV without information 15.00 and EVPI 63.00.",
- ["A gross value of -15.00, the figure printed on those inputs before the repair, which it now shows beside a warning.",
+ ["A gross value of -15.00, the figure the typed chances give with nothing checking them, shown beside a warning.",
   "A value of 0.00, since two readings with the same outcome chances cannot change the decision.",
   "A refusal before anything is computed, since chances that disagree are not chances at all."],
- "The typed numbers are chances that cannot all be true, implying 0.200000 success against a stated 0.300000; before the repair the Analyzer printed -15.00, which Bayes can never produce because information is never worth less than 0.")
+ "The typed numbers are chances that cannot all be true, implying 0.200000 success against a stated 0.300000. Weighted with nothing checking them they would give -15.00, which Bayes can never produce because information is never worth less than 0.")
 
 # ord 13
 q(3, "Rolling back a tree in writing, a learner's line disagrees with the explorer at one node. What does the working method say to do?",

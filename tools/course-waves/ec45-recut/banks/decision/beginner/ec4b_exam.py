@@ -31,7 +31,7 @@ q(3, "An analyst discounts the EKPAN tree's payoffs by hand, although another en
  "The engine has no rate, no date and no field for either, so 420.0000 and -25.0000 enter the drill chance node exactly as typed and a second discount leaves no trace.")
 
 # ord 4
-q(1, "A tree passes every check the engine makes: known node types, at least one branch per node, and probabilities summing to 1 within 1e-6. What has that established?",
+q(1, "A tree passes every check the engine makes: known node types, at least one branch per node, probabilities summing to 1 within 1e-6, and every cost and payoff a finite number. What has that established?",
  "Only that the tree is well formed; nothing about whether its payoffs are discounted, its probabilities true, or its branches complete.",
  ["That the recommended branch is robust, since a choice that turned inside the tolerance of 1e-6 would have been refused as ambiguous.",
   "That no better branch was left off, since a decision node refuses to roll back when a walk-away at 0.0000 would beat every branch it was given.",
@@ -55,12 +55,12 @@ q(3, "Inside the EKPAN tree's drill chance node the Marginal outcome carries 170
  "Weighting 260.0000 treats development as free and weighting 140.0000 forgets the owner would develop; either gives a drill node other than 160.0000, and the engine has nothing to refuse.")
 
 # ord 7
-q(0, "A four level tree in the shape of deepAlternation has its deepest chance node rebuilt with three branches typed at 0.333333 each. What does the engine return for the root?",
- "Nothing: that node is refused with its sum printed as 0.999999, and a refusal at any depth leaves no EMV anywhere in the tree.",
- ["The root EMV, because 0.999999 sits exactly 1e-6 from 1 and the tolerance accepts a sum lying on its own edge.",
+q(1, "A four level tree in the shape of deepAlternation has its deepest chance node rebuilt with three branches typed at 0.333333 each. What does the engine return for the root?",
+ "The root EMV, because 0.999999 sits exactly 1e-6 from 1 and the tolerance accepts a sum lying on its own edge.",
+ ["Nothing: that node is refused with its sum printed as 0.999999, and a refusal at any depth leaves no EMV anywhere in the tree.",
   "The root EMV with the deepest node rescaled so its three branches sum to 1, which restores the intended equal thirds before weighting.",
   "An EMV for the levels above the refused node, which enters its parent's weighting at 0.0000 until the probabilities are retyped."],
- "In binary the gap evaluates to 0.0000010000000000287557, just above 1e-6, so the node is refused, and depth hides nothing: the published sum of 0.200000 two levels down refuses a whole tree too.")
+ "The gap from 1 is a hair above 1e-6 in binary and passes because the test adds a 1e-12 allowance for binary representation, and the thirds are weighted as typed. Depth changes nothing: the published sum of 0.200000 two levels down still refuses a whole tree.")
 
 # ord 8
 q(2, "Refused at a printed sum of 0.999000 on a node of three equal outcomes, a reader adds the whole shortfall to the last branch and the tree is accepted. What has the fix done?",
@@ -72,7 +72,7 @@ q(2, "Refused at a printed sum of 0.999000 on a node of three equal outcomes, a 
 
 # ord 9
 q(0, "The published chanceRootWithBranchCosts tree has a chance node at its root, with a cost of 2.0000 on calm and 8.0000 on storm. What do the Decision Tree Builder's cards show?",
- "Optimal EMV -3.0000, Chance root on the first move card, and N/A for the next best alternative and the decision advantage.",
+ "Optimal EMV -3.0000, Chance root: no first decision to make on the first-move card, and N/A for the next best alternative and the decision advantage.",
  ["Optimal EMV -8.6000, because the Builder totals a chance root's costs and subtracts them once from the weighted children.",
   "Optimal EMV -3.0000 with calm as the recommended first move, since calm carries the larger probability of 0.600000 and the higher branch value.",
   "Optimal EMV 17.0000 for calm, with a decision advantage of 50.0000 over storm, read as if the chance root were a decision between them."],
@@ -152,19 +152,19 @@ q(3, "On the EKPAN lottery Drill crosses Walk away at 0.179775 and that crossing
 
 # ord 19
 q(2, "On equalEmvTie the branches read A 30.0000, B 30.0000 and C 29.9990. A reviewer relists them as C, A, B. Which branch does the engine name?",
- "A, because A is strictly greater than C and B only equals A.",
+ "A, because C sits outside the tie band, A and B tie, and the engine marks the first listed of that pair.",
  ["C, because the branch listed first keeps the decision whenever the values agree to the four decimals they are printed to.",
   "B, because once C takes the first place in the listing, the tie between A and B passes to the later of the two equal branches.",
   "C, since 29.9990 differs from 30.0000 by less than the probability tolerance of 1e-6 and the engine counts the two as a tie."],
- "A later branch displaces the best only when strictly greater: A beats C's 29.9990 and B at 30.0000 does not beat A, so the EMV stays 30.0000 and the name records the listing.")
+ "In the order C, A, B the engine reports A and B tied and marks A, the first of them; C's 29.9990 is 0.0010 short, far outside the tie band, although all three round to the same 30.00 card. The EMV stays 30.0000.")
 
 # ord 20
-q(1, "On the EKPAN lottery at 0.228571, with its actions listed Drill, Farm out, Walk away, the engine names Farm out. What would it name with the list reordered as Farm out, Drill, Walk away?",
- "Farm out again, because there Farm out is larger by rounding residue and listing order decides only an exact tie.",
- ["Drill, because a choice at a crossing follows listing order, as on the published drillFarmOut tree at 0.200000.",
-  "Drill, since with Farm out first the strictly greater comparison lets the next branch displace it by the EKPAN lottery's residue of -7.11e-15.",
-  "Neither, because the engine refuses a decision whose two leading branches print the same value, as the EKPAN lottery's two do at 21.7143."],
- "On the EKPAN lottery Drill less Farm out is -7.11e-15 in either order, so Drill is never strictly greater; on drillFarmOut the two are exactly 12.0000 and the first listed wins.")
+q(1, "On the EKPAN lottery at 0.228571, with its actions listed Drill, Farm out, Walk away, the engine prints Drill 21.7143 and Farm out 21.7143. What does it report with the list reordered as Farm out, Drill, Walk away?",
+ "The same two actions tied, with Farm out now carrying the action index because it is listed first.",
+ ["Drill as the single best action, because Drill comes out larger by the residue of -7.11e-15 in either order.",
+  "Farm out alone with indifferent false, since once it leads the listing the residue decides in its favour.",
+  "A refusal, because the engine refuses a lottery whose two leading actions print the same value, as these two do at 21.7143."],
+ "80 / 350 has no exact binary image, so Drill less Farm out is -7.11e-15, far inside the tie band of 1e-9 x max(1, |best|). The engine reports the tie in either order, and only the marked action follows the listing, as on drillFarmOut at 0.200000.")
 
 # ord 21
 q(0, "A team draws EKPAN's walk-away branch with a negative payoff equal to money already spent on the licence. What does that do to the tree?",
@@ -273,10 +273,10 @@ q(0, "A slide reads: EKPAN is worth 75.7500 million USD to drill and loses money
 # ord 34
 q(3, "About the published drillFarmOut sweep, Ada writes \"drill from 0.200000\" and Bola writes \"farm out up to 0.200000\". Whose reading is honest?",
  "Neither alone: at 0.200000 both branches are worth 12.0000 and the owner is indifferent, and the engine's Drill there is listing order.",
- ["Ada's, because the engine names Drill at 0.200000 and the recommendation there is the tree's own answer to the question.",
+ ["Ada's, because the engine marks Drill at 0.200000 and the mark there is the tree's own answer to the question.",
   "Bola's, because Farm out leads on every row below 0.200000 and a tie is resolved toward the action that held before it.",
   "Ada's, since the tie at 0.200000 is float residue of the kind the EKPAN lottery shows at its crossing, and Drill is larger by it."],
- "The engine keeps the first branch listed on an exact tie and has no tie flag; the advantage at 0.200000 is 0.0000, and above it Drill leads, 27.5000 to 15.0000 at 0.250000.")
+ "At 0.200000 the engine reports the two branches tied (indifferent true) and marks Drill because it is listed first; above it Drill leads, 27.5000 to 15.0000 at 0.250000.")
 
 # ord 35
 q(1, "On the EKPAN lottery at 0.350000 the drill loses money with probability 0.650000, and a reviewer concludes the rollback's Drill must be an error. What is the right response?",
@@ -303,20 +303,20 @@ q(0, "The VOI Analyzer's second action is Do Not, with every payoff 0. Set besid
  "On the EKPAN lottery Farm out pays 95 p, positive whenever success is possible, so walking away never wins; the Analyzer's gross value of 19.84 is the two action number, against 24.8250 with the farm-out.")
 
 # ord 38
-q(3, "At a survey cost of exactly 24.8250, the two root branches of the information tree built on the EKPAN lottery tie, and the engine recommends acquiring the survey. What decides that?",
- "The tie rule: acquiring is listed first, and a later branch replaces it only when strictly greater.",
+q(3, "At a survey cost of exactly 24.8250, the two root branches of the information tree built on the EKPAN lottery tie, and the optimal path marks acquiring the survey. What decides that mark?",
+ "The tie rule: the engine reports the two branches tied and marks acquiring because it is listed first.",
  ["The survey's positive gross value, since the EKPAN lottery's survey, worth 24.8250 before its cost, is always worth acquiring at that same price.",
   "Float residue at the crossing, as at the EKPAN lottery's switch of 0.228571, where the survey branch comes out larger in its last binary digits.",
   "A rule breaking ties toward the branch that carries more information, which the information tree applies before it compares values."],
- "The price that makes information neutral is its gross value, 24.8250 on the EKPAN lottery; at that cost the branches are equal and the name is listing order, as on drillFarmOut at 0.200000.")
+ "The price that makes information neutral is its gross value, 24.8250 on the EKPAN lottery. At that cost the branches tie, the engine reports the tie, and the mark is listing order, as on drillFarmOut at 0.200000.")
 
 # ord 39
-q(1, "Before its repair the VOI Analyzer printed a gross value of information of -15.00 for IRRI, whose indicators were both typed 20 / 80. What does the repaired Analyzer do there, and why?",
+q(1, "IRRI's indicators are both typed 20 / 80. Weighted by those typed chances with nothing checking them against the stated prior, the numbers give a gross value of information of -15.00. What does the VOI Analyzer do there, and why?",
  "Withholds the value of information, because the typed numbers imply a success chance that contradicts the stated one.",
  ["Prints 0.00 in place of -15.00, clamping the value at the floor information derived by Bayes never falls below.",
-  "Prints -15.00 as before beside a warning, since a negative value correctly tells the user that the survey is not worth buying.",
+  "Prints -15.00 beside a warning, since a negative value correctly tells the user that the survey is not worth buying.",
   "Refuses the form with a message naming the sum in percent, because an indicator typed 20 / 80 is not a distribution."],
- "Both indicators at 20 / 80 imply a success chance of 0.200000 against 0.3 stated; the repaired Analyzer keeps EMV without information at 15.00 and EVPI at 63.00 and withholds the rest.")
+ "Both indicators at 20 / 80 imply a success chance of 0.200000 against 0.3 stated. The Analyzer keeps EMV without information at 15.00 and EVPI at 63.00 and withholds the rest.")
 
 # ord 40
 q(2, "Checking a hand rollback against the explorer, a learner has 375.0000 for OKRIKA's good appraisal branch where the engine has 225.0000. What does the size of the gap point to?",

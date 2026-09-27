@@ -15,20 +15,20 @@ q(1, "Where do the EKPAN lottery's Drill and Farm out branches cross?",
  "The EKPAN lottery's sweep rows sit 0.050000 apart, so they bracket the switch between 0.200000 and 0.250000 and cannot place it; 0.179775 is Drill against Walk away, where Farm out already wins at 95 p.")
 
 # ord 2
-q(3, "At success 0.228571 on the EKPAN lottery the engine prints Drill 21.7143 and Farm out 21.7143 and names Farm out, although Drill is listed first. Why Farm out?",
- "Drill less Farm out comes out at -7.11e-15 on the lottery, because 80 / 350 has no exact binary image.",
- ["Ties go to the branch that cannot lose money, and the lottery's farm-out never loses.",
-  "The tie rule keeps the branch listed first, and the engine re-lists the lottery's actions by value, which puts Farm out first below the switch.",
-  "The engine treats a probability typed to six decimals as rounded, and on the lottery it falls back to the farm-out when two values look level."],
- "A true tie would go to Drill, the first branch listed; the EKPAN lottery's choice at 0.228571 is rounding residue under a strictly greater test, so report the switch and no winner at it.")
+q(3, "The EKPAN lottery's Drill and Farm out lines cross at a success probability of 0.228571, where both print 21.7143. What does the engine return at that probability?",
+ "A tie with indifferent true, and Drill carries the action index only because it is listed first.",
+ ["Farm out, because a tie goes to the action that cannot lose money and the lottery's farm-out never loses.",
+  "Drill alone with indifferent false, because the engine re-lists the actions by value and Drill comes first above the switch.",
+  "Farm out alone, because Drill less Farm out comes out at -7.11e-15 and the engine compares values to the last binary digit."],
+ "80 / 350 has no exact binary image, so the two values differ by -7.11e-15, far inside the tie band of 1e-9 x max(1, |best|). Report the switch point and no winner at it.")
 
 # ord 3
 q(0, "Swept, the published drillFarmOut tree reads Drill 12.0000 and Farm out 12.0000 at success 0.200000 and names Drill. How should that row be reported?",
- "The two are indifferent at 0.200000; Drill is named only because it is listed first, and the advantage is 0.0000.",
+ "The two are indifferent at 0.200000: the engine reports the tie and marks Drill only because it is listed first.",
  ["Drilling is better from 0.200000 upward, since the engine names Drill at the first row where it is no longer behind.",
   "Farm out is best up to and including 0.200000, since a tie on a published tree is resolved toward the branch that cannot lose.",
   "Drill wins by a residue too small to print, the same way the EKPAN lottery's crossing at 0.228571 is decided."],
- "The drillFarmOut tie is exact to the last digit, so the tie rule decides it; the EKPAN lottery's crossing is decided by -7.11e-15 of residue instead, and neither result is a recommendation.")
+ "The drillFarmOut tie is exact to the last digit, and the EKPAN lottery's crossing at 0.228571 is a reported tie too, its residue of -7.11e-15 inside the band; neither result is a recommendation.")
 
 # ord 4
 q(2, "The published drillFarmOut sweep moves its success probability in the drill's chance node and the farm-out's chance node together. Why both at once?",
@@ -39,12 +39,12 @@ q(2, "The published drillFarmOut sweep moves its success probability in the dril
  "Each row is a separate rollback with the payoffs held as typed, so at 0.200000 both branches are 12.0000 on one prospect. The engine checks each chance node's own sum and has no link between chance nodes, so a mismatched row would roll back without a warning.")
 
 # ord 5
-q(2, "What does the engine report to tell a reader that its recommended branch is tied with the runner-up?",
- "Nothing: it returns one best branch index whether the runner-up is behind by 25.0000 or by nothing.",
- ["A tie flag on the decision node, set when two branch values agree to four decimals.",
-  "The runner-up's index beside the best, so a tie shows as two branches on the optimal path.",
-  "A warning in place of a recommendation whenever two branch values agree within the same 1e-6 tolerance its chance nodes use."],
- "The rollback cannot tell an exact tie, like drillFarmOut's 12.0000 at 0.200000, from a residue of -7.11e-15 like the EKPAN lottery's at 0.228571; both come back as one best branch.")
+q(2, "What does the engine return to tell a reader that its best branch is tied with the runner-up?",
+ "The tied branches and an indifferent flag beside the best branch index, plus the set tied at card precision; the optimal path marks only the first listed.",
+ ["A tie flag set only when two branch values agree to four decimals, with nothing reported for a residue too small to print.",
+  "The runner-up's index beside the best, so that a tie shows as two branches marked on the optimal path.",
+  "A warning in place of a best branch whenever two branch values agree within the same 1e-6 tolerance its chance nodes use."],
+ "Two values tie when they differ by at most 1e-9 x max(1, |best|). drillFarmOut's exact 12.0000 at 0.200000 and the EKPAN lottery's residue of -7.11e-15 at 0.228571 both come back as reported ties, and the best branch index marks the first listed.")
 
 # ord 6
 q(0, "On the EKPAN lottery, moving success from 0.350000 to 0.400000 lifts the EMV from 75.7500 to 98.0000, and moving it from 0.200000 to 0.250000 lifts it from 19.0000 to 31.2500. Which move matters to a decision maker?",

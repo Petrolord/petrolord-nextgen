@@ -65,7 +65,7 @@ q(0, "On the EKPAN tree, the develop cost of 90.0000 is spent only after the wel
 # ord 8
 q(2, "An analyst applies a discount rate by hand to an NPV that is already discounted, then types the result as a terminal payoff. What happens to the tree?",
  "Every payoff shrinks while costs stay put, pulling the choice toward the cheaper branch, and nothing in the output shows it.",
- ["The engine detects the second discount and refuses the terminal with the message Distribution payoff has no finite mean.",
+ ["The engine detects the second discount and refuses the terminal as a distribution payoff with no finite mean.",
   "Nothing changes, because the rollback strips any rate applied to a payoff before it weights the payoff at its chance node.",
   "Payoffs and costs shrink alike, so the EMV falls in proportion and the recommended branch can never change as a result."],
  "The engine adds numbers at face value, so a smaller 420.0000 meets an unchanged cost of 55.0000. Neither discounting twice nor not at all leaves any trace in the output.")
@@ -74,17 +74,17 @@ q(2, "An analyst applies a discount rate by hand to an NPV that is already disco
 q(1, "A Builder terminal on a tree is linked to a saved Monte Carlo run, and the run is later revalued. What does the tree use for that terminal?",
  "The copy of the run's NPV mean, P90 and P10 stored when it was linked, until the terminal is linked again.",
  ["The revalued run, because the Builder re-reads every linked run each time the tree is rolled back and replaces the stored numbers.",
-  "A refusal, Distribution payoff has no finite mean, until the changed run is linked again.",
+  "A refusal saying the distribution payoff has no finite mean, until the changed run is linked again.",
   "The revalued P10 and P90 beside the old mean, since only the mean is copied at linking and the percentiles are read live from the run."],
  "Linking stores a copy in million USD at that moment and nothing re-reads the run, so a tree rolled back to 105.0000 on a stale copy gives no warning. Unlinking keeps the mean as a fixed payoff.")
 
 # ord 10
-q(0, "On the published equalEmvTie case, branches A and B are both worth 30.0000 and C is worth 29.9990, and the engine returns A. Listed with B first, what does it return?",
- "B, at the same EMV of 30.0000, because a later branch replaces the current best only when strictly greater.",
+q(0, "On the published equalEmvTie case, branches A and B are both worth 30.0000 and C is worth 29.9990, and the engine marks A. Listed with B first, what does it mark?",
+ "B, at the same EMV of 30.0000, because the engine reports A and B tied and marks the first listed of them.",
  ["A, because the engine sorts a decision node's branches by name before it compares their values.",
-  "No recommendation, because an exact tie is refused as ambiguous with a message naming the node.",
+  "No branch at all, because an exact tie is refused as ambiguous with a message naming the node.",
   "C, because 29.9990 lies within the engine's tolerance of 30.0000 and the last near tie listed is kept."],
- "Equal never displaces earlier, so the first of the tied branches keeps the root at 30.0000. In a tie the recommendation records the order of typing and nothing about the branches.")
+ "A and B tie, so the engine reports both with indifferent true and marks whichever is listed first, and the root stays 30.0000. The mark records the order of typing and nothing about the branches.")
 
 # ord 11
 q(3, "A tree with undiscounted payoffs, a success probability chosen to flatter the drill and conveniently ordered branches rolls back with no error. What does the absence of an error establish?",

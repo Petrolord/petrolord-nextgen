@@ -15,12 +15,12 @@ q(2, "Weighting the EKPAN tree's marginal find at 260.0000 gives a drill chance 
  "A chance node weights branch values. Develop is 260.0000 less 90.0000, which is 170.0000, and it beats Sell at 140.0000; the probabilities are untouched, so the engine has nothing to refuse.")
 
 # ord 2
-q(0, "A chance node with three equal outcomes paying 30, 60 and 90 has each probability typed as 0.333333. What does the engine return?",
- "A refusal printing the sum 0.999999, because a sum sitting at the edge of the 1e-6 tolerance is not accepted.",
- ["EMV 60.0000, since 0.999999 is within 1e-6 of 1 and the check is inclusive at its edge.",
+q(1, "A chance node with three equal outcomes paying 30, 60 and 90 has each probability typed as 0.333333. What does the engine return?",
+ "EMV 59.9999, since 0.999999 sits on the edge of the 1e-6 tolerance, the check includes its edge, and the thirds are weighted as typed.",
+ ["A refusal printing the sum 0.999999, because a sum sitting at the edge of the 1e-6 tolerance is not accepted.",
   "EMV 60.0000 from the weights rescaled to sum to 1, with the typed sum printed as a warning.",
   "EMV 35.0000, the published thirdsProbabilities result, since that case types its thirds to six decimals."],
- "Seven decimals, 0.3333333 each, are accepted at EMV 60.0000; six decimals print 0.999999 and are refused. The thirdsProbabilities case is a different tree whose 35.0000 matches its own golden.")
+ "The test is |sum - 1| at most 1e-6 plus a 1e-12 allowance for binary representation, so six decimals pass and the node is worth 0.333333 x (30 + 60 + 90) = 59.9999. Five decimals, 0.33333 each, are refused. The thirdsProbabilities case is a different tree whose 35.0000 matches its own golden.")
 
 # ord 3
 q(3, "Refused with thirds typed at 0.333 each, a reader adds the whole shortfall to the last branch of the node paying 30, 60 and 90. What does that produce?",
@@ -56,7 +56,7 @@ q(3, "A reader collects every cost on the chanceRootWithBranchCosts tree into on
 
 # ord 7
 q(0, "What do the Decision Tree Builder's cards show for the chanceRootWithBranchCosts tree, whose root is a chance node?",
- "Optimal EMV -3.0000, Chance root on the first-move card, and N/A on the next best alternative and decision advantage cards.",
+ "Optimal EMV -3.0000, Chance root: no first decision to make on the first-move card, and N/A on the next best alternative and decision advantage cards.",
  ["Calm as the recommended first move, being the likelier branch at 0.600000, with storm as the next best alternative and a decision advantage beside it.",
   "No cards, since the Builder needs a decision at the root and refuses to roll back a tree whose root is a chance node.",
   "Optimal EMV -8.6000, since the Builder subtracts the tree's costs once after the rollback to fill the card."],
@@ -80,11 +80,11 @@ q(3, "To be conservative, an analyst types the summary's P90 of 185 as the EKPAN
 
 # ord 10
 q(0, "A summary typed as a terminal payoff carries a P90 of 185, a P50 of 390 and a P10 of 710, and no mean. What does the engine return?",
- "A refusal, Distribution payoff has no finite mean, since the engine does not estimate a mean from the percentiles.",
+ "A refusal that names the terminal and says the distribution payoff has no finite mean, since the engine does not estimate a mean from the percentiles.",
  ["An EMV using the P50 of 390 as the payoff, since the middle of the distribution stands in for a mean the summary does not carry.",
   "An EMV using the midpoint of the P90 and the P10 as its estimate of the mean, printed with a warning.",
   "An EMV of 105.0000, from the mean last stored for that terminal when a run was linked to it."],
- "Only the mean enters the rollback, so a summary without one gives the engine nothing to weight. It refuses rather than guessing from 185, 390 and 710.")
+ "Only the mean enters the rollback, so a summary without one gives the engine nothing to weight. It refuses and does not guess a mean from 185, 390 and 710.")
 
 # ord 11
 q(1, "An analyst types the linked summary's P50 of 390 as the EKPAN tree's success payoff, because it is the middle of the distribution. What does the tree return?",

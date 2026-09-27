@@ -44,37 +44,37 @@
   "explanation": "A false flag says a branch is not reached under the best strategy, not that it is poor: Sell's 140.0000 is above 105.0000 and still off the path because Develop wins at 170.0000."
  },
  {
-  "prompt": "Drill pays 40.0000 at a cost of 10.0000 and Farm out pays 30.0000. The same two branches are typed once with Drill first and once with Farm out first. What does the engine return?",
+  "prompt": "Drill pays 40.0000 at a cost of 10.0000 and Farm out pays 30.0000. The same two branches are typed once with Drill first and once with Farm out first. What does the engine report?",
   "options": [
    "Drill in both orders, since the engine compares children before their costs and Drill's 40.0000 is the larger.",
-   "Drill when Drill is listed first and Farm out when Farm out is listed first, both at EMV 30.0000.",
+   "A tie both ways at EMV 30.0000, with Drill marked when Drill is listed first and Farm out marked when Farm out is.",
    "Farm out in both orders, since a branch with no cost wins an exact tie against a branch that carries one.",
    "A refusal in both orders, since two branches of exactly equal value leave the decision node without a best branch."
   ],
   "answer": 1,
-  "explanation": "Drill's branch value is 40.0000 less 10.0000, which is 30.0000, exactly Farm out's. A later branch displaces an earlier one only by being strictly greater, so the order of typing names the move."
+  "explanation": "Drill's branch value is 40.0000 less 10.0000, which is 30.0000, exactly Farm out's. The engine reports the two tied in either order, and the optimal path marks whichever is listed first."
  },
  {
-  "prompt": "At a success probability of 0.228571, the EKPAN lottery (the two-outcome model, not the EKPAN tree) prints Drill 21.7143 and Farm out 21.7143 and names Farm out, the second branch. Why?",
+  "prompt": "At a success probability of 0.228571 the EKPAN lottery, the two-outcome model, prints Drill 21.7143 and Farm out 21.7143, and Drill less Farm out is -7.11e-15. What does the engine report?",
   "options": [
-   "The tie rule, which on an exact tie keeps the branch carrying no cost rather than the branch that is listed first.",
-   "The tie rule, which keeps the last branch listed when two values print as equal to four decimals.",
-   "The engine rounds branch values to four decimals before comparing, and breaks the printed tie toward the safer branch.",
-   "The crossing has no exact binary image, so the values differ in their last binary digits and Farm out is larger by that residue; the tie rule plays no part."
+   "Farm out as the best action, because it is larger by the residue and the engine compares values to the last binary digit.",
+   "Drill as the single best action, because a branch that carries a cost wins an exact tie against one that carries none.",
+   "Neither action, because the engine rounds values to four decimals before comparing and refuses two actions that print alike.",
+   "A tie: the residue is far inside the band of 1e-9 x max(1, |best|), and Drill, listed first, carries the action index."
   ],
   "answer": 3,
-  "explanation": "Only an exact tie goes to the first branch. Two values printed as 21.7143 can be unequal, and the engine chooses between them without any tie involved."
+  "explanation": "Two values tie when they differ by at most 1e-9 x max(1, |best|). A residue of -7.11e-15 is far inside that, so the engine lists both actions as tied and only the mark goes to the first listed."
  },
  {
-  "prompt": "The published drillFarmOut tree, with its success probability swept, reads Drill 12.0000 and Farm out 12.0000 at 0.200000, and the engine reports Drill. Which reading is right?",
+  "prompt": "The published drillFarmOut tree, with its success probability swept, reads Drill 12.0000 and Farm out 12.0000 at 0.200000, and the optimal path marks Drill. Which reading is right?",
   "options": [
-   "Drill is named at 0.200000 only because it is listed first; Farm out leads at 0.150000, 9.0000 to -3.5000, and Drill leads at 0.250000, 27.5000 to 15.0000.",
-   "Drill is named because its value is larger in the last binary digits, the same residue that names Farm out on the EKPAN lottery.",
-   "Drill is named because a branch that carries a cost wins an exact tie against one that pays out without any cost.",
+   "Drill is marked at 0.200000 only because it is listed first; Farm out leads at 0.150000, 9.0000 to -3.5000, and Drill leads at 0.250000, 27.5000 to 15.0000.",
+   "Drill is marked because its value is larger in the last binary digits, a residue the engine reads as a lead.",
+   "Drill is marked because a branch that carries a cost wins an exact tie against one that pays out without any cost.",
    "Farm out should have been named, since the engine keeps the branch that led at the lower probability of 0.150000."
   ],
   "answer": 0,
-  "explanation": "This is an exact tie, 12.0000 against 12.0000, so the strictly greater rule keeps the first branch. The EKPAN lottery's crossing is a different case, a rounding residue, and borrowing that explanation here is the mistake examined."
+  "explanation": "This is an exact tie, 12.0000 against 12.0000: the engine reports both branches tied with indifferent true and marks Drill, the first listed. The EKPAN lottery's crossing at 0.228571 is a reported tie as well, its residue of -7.11e-15 inside the band."
  },
  {
   "prompt": "Which plan states the EKPAN tree's optimal strategy?",
