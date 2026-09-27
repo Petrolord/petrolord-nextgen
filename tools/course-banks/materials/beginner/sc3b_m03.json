@@ -27,7 +27,7 @@
    "A under at-or-below, and B under include-crossing, the higher class in each case.",
    "B under both rules, since its cumulative share of 83.536840 is above 80 either way.",
    "A under both rules, since the share before it, 78.753907, is below 80 either way.",
-   "B under at-or-below, and A under include-crossing."
+   "B under at-or-below, and A under include-crossing, since each rule reads a different share."
   ],
   "answer": 3,
   "explanation": "Under at-or-below the cumulative share including the item decides: \"CEM-G: cumulative share 83.53684% is at or below 95% and above 80%\", so B. Under include-crossing the share before it decides: \"CEM-G: cumulative share before it 78.753907% is below 80%\", so A. Each rule reads a different share, which is why the item that crosses a cut-off is the one they disagree on."
@@ -48,7 +48,7 @@
   "options": [
    "7 items, holding 83.536840 percent, the count under the other boundary rule.",
    "6 items, holding 80 percent exactly, since class A is filled up to its cut-off.",
-   "6 items, holding 78.753907 percent of the value.",
+   "6 items, holding 78.753907 percent, the share at GL-VALVE.",
    "3 items, holding 63.645911 percent, since class A closes at a third of the items."
   ],
   "answer": 2,
@@ -93,10 +93,10 @@
    "The classes under at-or-below, the rule most textbooks use, with a note that the rule was taken as read.",
    "Both rules side by side, so the learner can pick one after seeing the results printed.",
    "Crossing items left unclassed until a rule is stated, each flagged in its own reason.",
-   "\"boundaryRule must be 'at-or-below' (the cumulative share including the item decides) or 'include-crossing' (the share before the item decides, so the item crossing a cut-off joins the higher class)\""
+   "A refusal on boundaryRule, in a message that names both rules and what each one decides."
   ],
   "answer": 3,
-  "explanation": "The engine holds no boundary rule: leaving it out is refused with a message that names both rules and what each one decides. It picks neither and prints no side-by-side result. Neither rule is right in general, so a policy picks one and writes it down."
+  "explanation": "The engine holds no boundary rule: leaving it out is refused, in the engine's words \"boundaryRule must be 'at-or-below' (the cumulative share including the item decides) or 'include-crossing' (the share before the item decides, so the item crossing a cut-off joins the higher class)\". It picks neither and prints no side-by-side result. Neither rule is right in general, so a policy picks one and writes it down."
  },
  {
   "prompt": "The engine's basis for ABC cites Caplice, MIT ESD.260J (2006) lecture 11 slide 4. What does the course take from that citation about the cut-offs?",

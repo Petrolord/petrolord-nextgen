@@ -45,41 +45,41 @@ q(2, "A stated probe sets CHK-BEAN's cycle service level to 0.8. What reorder po
  "At 0.8 the reorder point is 10.882921, held as 11.000000 under the stated rule of rounding up to a whole set, and the service at 11 is 0.810643. The target 0.8 is met with room to spare, and 13.000000 at 0.938274 is the row for a level of 0.9.")
 
 q(0, "A planner asks for a cycle service level of 1 on the choke beans, meaning no stockout ever. What happens?",
- "The call is refused on serviceLevel, a probability strictly inside 0 to 1",
+ "A refusal on serviceLevel, a probability strictly inside 0 to 1",
  ["A reorder point at the largest level a normal table prints",
   "A reorder point of 16.000000, the held level at 0.99",
   "A refusal naming serviceMeasure, which cannot promise no stockout"],
  "A cycle service level is a probability strictly between 0 and 1. Normal demand has no ceiling, so no finite reorder point meets a level of 1, and the engine refuses it by name, in its own words: serviceLevel must be a number strictly between 0 and 1; got 1. It picks no level of its own.")
 
 q(3, "For a cycle service target, what algorithm supplies the inverse normal behind k?",
- "Phi^-1 by Wichura AS241, the inverse standard normal",
- ["A two-decimal table of the normal curve built into the engine",
+ "An exact inverse normal, Phi^-1 by Wichura AS241",
+ ["The normal curve read from a two-decimal table built into the engine",
   "A Monte Carlo draw of the normal curve on a stated seed",
   "A bisection on the unit normal loss G(k), the method for a fill rate"],
  "The basis reads: Phi^-1 by Wichura AS241; Phi through the regularised incomplete gamma (engines/hse/safetyStats.js); the fill-rate k by bisection to the last binary digit. The engine keeps no table of its own, draws no sample here, and keeps the bisection for the fill rate.")
 
-q(1, "Case ss-lead-time-variance-only reads its safety factor from a table to whole numbers at a cycle service level of 0.9. How much safety stock results?",
+q(1, "The start \"Lead-time spread alone\" in the stock calculator reads its safety factor from a table to whole numbers at a cycle service level of 0.9. How much safety stock results?",
  "30.000000, with k read as 1",
  ["130, the level held at k read as 1",
   "30.000000, with the exact k of 1.281552",
   "0.000000, with k read as 0"],
- "The reason reads: a cycle service level of 0.9 gives k = Phi^-1(0.9) = 1.281552, read as 1; safety stock 30 over a demand of 100 with sigma 30. The stated reading rounds the exact factor to whole numbers, so the factor used is 1 and the safety stock equals sigma. Rounding 1.281552 to whole numbers gives 1.")
+ "The reason reads: a cycle service level of 0.9 gives k = Phi^-1(0.9) = 1.281552, read as 1; safety stock 30 over a demand of 100 with sigma 30. Read to whole numbers, 1.281552 becomes 1, so the safety stock equals sigma, 30.000000. 130 is the level held, and a factor of 0 would need a reading that rounds down.")
 
-q(2, "Caplice, lecture 11 slide 24, prints a safety stock of 423 at a cycle service level of 0.95 on weekly data with a demand of 500 over the two-week lead time. With k read from a table to two decimals and the level held to the nearest unit, what level does the engine hold?",
- "923.000000, so the table-read safety stock is 423.000000",
+q(2, "Caplice, lecture 11 slide 24, prints a safety stock at a cycle service level of 0.95 on the weekly data. With k read from a table to two decimals and the level held to the nearest unit, what level does the engine hold?",
+ "923.000000, the printed 423 above the demand of 500.000000",
  ["830.000000, the level the table reading holds at 0.90",
   "839.179604, the reorder point of the fill-rate rule at 0.95",
-  "923.000000, so the safety stock is 424.518354"],
- "Read to two decimals, k is 1.64, and the level held to the nearest unit is 923.000000; less the demand over the lead time of 500.000000, that is the printed 423. The exact k gives a safety stock of 424.518354, which misses the print. 839.179604 belongs to the fill-rate column of the same slide.")
+  "923.000000, the exact k giving a safety stock of 424.518354"],
+ "Read to two decimals, k is 1.64, and the level held to the nearest unit is 923.000000. Less the demand over the two-week lead time, 500.000000, that is the printed 423. The exact k gives a safety stock of 424.518354, which misses the print. 839.179604 belongs to the fill-rate column of the same slide, and 830.000000 to the 0.90 row.")
 
-q(0, "At 0.99 the slide 24 cycle service column prints 601. Worked with the exact factor and no rounding, how much safety stock comes out?",
+q(0, "At 0.99 the cycle service column of Caplice, lecture 11 slide 24, prints 601. Worked with the exact factor and no rounding, how much safety stock comes out?",
  "A safety stock of 600.404410, which misses the print by less than a unit",
  ["A safety stock of 601.000000, which matches the print",
-  "A safety stock of 512.349286",
-  "A safety stock of 1101.000000"],
+  "A safety stock of 512.349286, the fill-rate figure at 0.99",
+  "A safety stock of 1101.000000, the level the table reading holds"],
  "With the exact k the engine's safety stock at 0.99 is 600.404410. The table reading, k read as 2.33 and the level held as 1101.000000, reproduces the printed 601. 512.349286 is the fill-rate figure at 0.99, and 1101.000000 is a held level, of which the safety stock is only the part above the mean.")
 
-q(3, "The lecture 11 data state a forecast error of 1,316 units a year. What weekly standard deviation do the golden inputs read it as?",
+q(3, "Caplice, lecture 11 slides 18 to 24, state a forecast error of 1,316 units a year. What weekly standard deviation do the golden inputs read it as?",
  "182.496365, the error over the square root of 52",
  ["1,316 unchanged, since the engine converts the year to weeks itself",
   "258.088834, the sigma over the two-week lead time",
@@ -102,7 +102,7 @@ q(3, "CHK-BEAN is stated with the safety factor reading { rule: 'none' } and dec
 
 q(0, "The service measure control is left blank on the choke bean case. Quote the engine's response.",
  "serviceMeasure must be 'cycle-service' (probability of no stockout in a replenishment cycle) or 'fill-rate' (fraction of demand met from stock)",
- ["A reorder point at the cycle service level of 0.95, the measure the case implies",
+ ["A reorder point at the cycle service level of 0.95, the measure the engine takes when a case states a level alone",
   "serviceLevel must be a number strictly between 0 and 1; got 0.95",
   "orderQuantity is required for a fill rate (units short are measured against the quantity each cycle brings)"],
  "A service level in this course always names its measure, and the engine refuses a call that does not, naming the two measures it knows. It supplies no measure of its own. The serviceLevel message answers a level outside 0 to 1, and the orderQuantity message a fill rate stated with no order quantity.")

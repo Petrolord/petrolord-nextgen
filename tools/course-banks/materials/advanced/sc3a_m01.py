@@ -81,11 +81,11 @@ x("A planner types a downtime cost of -1 a day into the ESP motor case. What doe
 
 # 9
 x("A supplier promises instant replacement, so a planner enters a lead time of 0 days for the ESP motor. How does the engine respond?",
- "It refuses the lead time by name, since an order that lands at once leaves nothing to size",
- ["a mean of 0 orders outstanding and 0 spares at no cost",
-  "leadTimeDays must be at most 260.714285; got 0",
-  "a one-row table: an instant replacement needs no search"],
- "A replacement that arrives the instant it is ordered leaves nothing outstanding, and the engine refuses the input in its own words: leadTimeDays must be a finite number above 0; got 0. It computes no mean and no table on a refused input. The message about 260.714285 is the cap on a lead time that is too long, which 0 is not.")
+ "leadTimeDays must be a finite number above 0; got 0, since an order that lands at once leaves nothing to size",
+ ["a mean of 0 orders outstanding and 0 spares at no cost, since nothing is ever on order",
+  "leadTimeDays must be at most 260.714285; got 0, since a lead time is capped at both of its ends",
+  "a one-row table: an instant replacement needs no search, and the shelf stays empty"],
+ "A replacement that arrives the instant it is ordered leaves nothing outstanding, and the engine refuses the input; the keyed message is its own words. It computes no mean and no table on a refused input. The message about 260.714285 is the cap on a lead time that is too long, which 0 is not.")
 
 # 10
 x("The ESP motor case is sent with daysPerYear left out. What happens?",

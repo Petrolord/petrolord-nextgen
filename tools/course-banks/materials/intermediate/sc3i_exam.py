@@ -12,8 +12,8 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 # Caplice slips are keyed as slips. No capstone name, input or value appears.
 
 # ---- quantity discounts (m01)
-q(1, "Which three stated inputs make up the bound that every fill-rate reason sets on G(k)?",
- "The order quantity, one less the fill rate, and sigma: Q x (1 - p) / sigma",
+q(1, "Which three figures make up the bound that every fill-rate reason sets on G(k)?",
+ "The order quantity Q, one less the fill rate, and the sigma",
  ["The safety factor and sigma alone, since G is read off k",
   "The cycle service level and the demand over the protection period",
   "The order quantity and the lead time only"],
@@ -23,7 +23,7 @@ q(1, "At the incremental order of 1789.000000 on the lecture 8 schedule, what ef
  ["40, the price of the band the order lands in, applied to every unit",
   "45, the price of band 1",
   "50, the band 0 price paid on the first units, applied to the whole lot"],
- "Under an incremental schedule each unit is priced by its own band, so the lot cost is F2 plus 40 times Q, with F2 7500.000000. Spread over 1789 units that is an effective unit price of 44.192286, which the slides print as 44.19. A single band price for the whole lot is the all-units reading.")
+ "Under an incremental schedule each unit is priced by its own band, so the lot cost is F2 plus 40 times Q, with F2 7500.000000. Spread over 1789 units that is an effective unit price of 44.192286, which lecture 8 slides 13 to 15 print as 44.19. A single band price for the whole lot is the all-units reading.")
 
 q(2, "With no discount at all, slide 9 of lecture 8 costs one location: 2000 a year, 500 an order, a holding rate of 0.25 on a price of 50. What yearly ordering and holding costs come back at the EOQ?",
  "2500.000000 each, a relevant cost of 5000.000000 at an EOQ of 400.000000",
@@ -32,12 +32,12 @@ q(2, "With no discount at all, slide 9 of lecture 8 costs one location: 2000 a y
   "1000.000000 each, at an EOQ of 1000.000000"],
  "The slide prints an order size of 400, an order cost of 2,500, a holding cost of 2,500 and a total of 5,000; the engine returns an EOQ of 400.000000, ordering cost 2500.000000, holding cost 2500.000000 and relevant cost 5000.000000. At the EOQ the two costs are equal. 105000.000000 adds the purchase cost at 50 a unit.")
 
-q(3, "The lecture 13 table prints 99.1% as the cumulative probability at level 3 on a mean of 0.8. What does the engine print there?",
+q(3, "At level 3 of the Poisson table on a weekly mean of 0.8 (Caplice, lecture 13 slides 11 and 12), what cumulative probability does the engine print?",
  "0.990920",
  ["0.998589",
   "0.952577",
   "0.038343"],
- "At level 3 the cumulative figure is 0.990920, shown as 99.1% by the slide. The other figures are the level 4 cumulative 0.998589, the level 2 cumulative 0.952577 and the level 3 probability 0.038343.")
+ "At level 3 the cumulative figure is 0.990920, which the slide prints to one decimal of a percent. The other figures are the level 4 cumulative 0.998589, the level 2 cumulative 0.952577 and the level 3 probability 0.038343.")
 q(0, "A golden input breaks a tie by dropping the second band's price to three quarters of band 0. What does the engine order now?",
  "The break of 200, costing 175 a year",
  ["100 in band 0, at a total cost of 200 a year, as the tie reading still takes the smaller lot",
@@ -45,18 +45,18 @@ q(0, "A golden input breaks a tie by dropping the second band's price to three q
   "175 units, the cost read as a quantity"],
  "The reason reads: order 200 at a total cost of 175 a year (band 1), the lowest of 2 candidates. With the price cut the break costs less than band 0's EOQ of 100 at 200 a year, so there is no tie left for the smaller-quantity reading to settle.")
 
-q(0, "A quantity discount call states a holding rate of 0. What does the engine return, in its own words?",
+q(0, "Someone types a holding rate of 0 into a quantity discount call, as if stock cost nothing to keep. How does the engine answer?",
  "A refusal on holdingRate, which must be above 0",
  ["breaks must be an array of at least 1 price band { minQuantity, unitPrice }",
-  "An order at the largest break, since holding costs nothing, with its total cost",
-  "rounding gives an order quantity of 0 from the band 0 EOQ 1.414214; state a smaller multiple or another rule"],
- "A holding rate of 0 would make every lot free to hold, and the engine refuses it by name: holdingRate must be a finite number above 0; got 0. The breaks message answers an empty schedule, and the rounding message a rule that orders nothing.")
+  "An order at the largest break, holding costing nothing",
+  "breaks[1].unitPrice must be below the band before it (50); got 50"],
+ "A holding rate of 0 would make every lot free to hold, and the engine refuses it by name: holdingRate must be a finite number above 0; got 0. The breaks message answers an empty schedule, and the unitPrice message a band whose price does not fall. The engine orders nothing on a holding rate it refuses.")
 
 q(3, "A price band is typed with the key price where the engine expects unitPrice. What comes back?",
  "breaks[0].price is not an accepted key; the accepted keys of breaks[0] are minQuantity, unitPrice",
  ["breaks[0].unitPrice must be a finite number above 0; got undefined",
-  "The order as usual, the misspelt key read as the price",
-  "The order as usual, the band priced at 0"],
+  "The order as usual, with the misspelt key price read as the band's unit price after all",
+  "The order as usual, with the band priced at 0 for want of a unit price"],
  "An input key a function does not read is refused at whatever level it sits, a price band included, with the path to the key and the full list of accepted keys. A misspelt key is refused; it is never dropped silently. The unknown key is refused before any missing input is read.")
 
 q(3, "How many price bands will one quantity discount call accept, and what does a schedule of twenty-one bands return?",
@@ -64,7 +64,7 @@ q(3, "How many price bands will one quantity discount call accept, and what does
  ["Any number, since every band a supplier offers must be costed",
   "At most 10, the cap on slow-moving bands, applied to prices too",
   "At most 20, with the bands past the cap dropped from the call"],
- "MAX_BREAKS caps one quantity discount call at 20 price bands, and the stated probe with twenty-one bands is refused: breaks has 21 entries; the cap is 20. The cap of 10 belongs to the slow-moving bands. A cap refuses; it drops nothing silently.")
+ "One quantity discount call accepts at most 20 price bands, and a schedule of twenty-one is refused whole: breaks has 21 entries; the cap is 20. The cap of 10 belongs to the slow-moving bands. A cap refuses the call and drops no band silently.")
 
 q(2, "Under all-units on the casing, band 1's EOQ is 77.459667. Under incremental, the same band's EOQ is 105.559733. Why do they differ?",
  "Incremental adds the band's fixed cost 3000.000000 to the order cost",
@@ -93,7 +93,7 @@ q(2, "A copy of the choke bean call removes the rounding rule altogether. What m
  ["A reorder point held as 13.316294, the exact level, as a missing rule means no rounding",
   "A reorder point held as 14.000000, the rule up to a multiple of 1 taken from the fixture",
   "safetyFactorRounding must be { rule: 'none' } or { rule: 'nearest', decimals } (a table read to that many decimals)"],
- "The rounding rule is a stated input with no default, and a call without one is refused by name. The stated probe on ss-ekene-choke-beans with rounding removed returns the message in the key. No rounding is a rule that must be stated as { rule: 'none' }. The safetyFactorRounding message is about the table reading of k.")
+ "The rounding rule is a stated input with no default, and a call without one is refused by name. The start \"The choke bean set, cycle service level\" with its rounding removed returns the message in the key. No rounding is a rule that must be stated as { rule: 'none' }. The safetyFactorRounding message is about the table reading of k.")
 
 q(0, "The choke bean target moves from 0.9 to 0.975 as a cycle service level. What happens to k and to the held reorder point?",
  "k rises from 1.281552 to 1.959964, and the held level from 13.000000 to 15.000000",
@@ -109,15 +109,15 @@ q(2, "At a cycle service level of 0.9, CHK-BEAN's reorder point 12.215679 is hel
   "0.969295"],
  "Rounding up raises the service, and the engine reports the service a held level achieves beside the target: at 0.9 the held level 13.000000 achieves 0.938274. 0.810643 is the achieved figure at 0.8 and 0.969295 at 0.95.")
 
-q(0, "Slide 24 prints 330 for the 0.90 row of its cycle service column. Reading k as a two-decimal table and holding to the whole unit, which level is held?",
- "830.000000 on a factor of 1.28",
- ["1101.000000, with k read as 2.33",
-  "717.000000, with k read as 0.84",
-  "923.000000, with k read as 1.64"],
- "Read to two decimals, k is 1.28 and the level is held as 830.000000; less the demand of 500.000000, that is the printed 330. The exact safety stock is 330.754149. 717.000000 is the held level at 0.80, 923.000000 the one at 0.95 and 1101.000000 the one at 0.99.")
+q(0, "The 0.90 row of the cycle service column on Caplice, lecture 11 slide 24, is reproduced when k comes off a two-decimal table and the level is rounded to a whole unit. Which reorder point results?",
+ "830.000000, on a table factor of 1.28",
+ ["1101.000000, on a table factor of 2.33",
+  "717.000000, on a table factor of 0.84",
+  "923.000000, on a table factor of 1.64"],
+ "Read to two decimals, k is 1.28 and the level is held as 830.000000; less the demand over the lead time of 500.000000, that is the 330 the slide prints. The exact safety stock is 330.754149. 717.000000 is the held level at 0.80, 923.000000 the one at 0.95 and 1101.000000 the one at 0.99.")
 
 q(1, "Over the two-week lead time of the lecture 11 check, what demand and sigma does the engine compute?",
- "A demand of 500.000000 and a sigma of 258.088834",
+ "A demand of 500.000000 and a sigma of 258.088834, over the two weeks",
  ["A demand of 250.000000 and a sigma of 182.496365, the weekly figures",
   "A demand of 13,000 and a sigma of 1,316, the annual figures",
   "A demand of 500.000000 and a sigma of 182.496365, the weekly spread unchanged"],
@@ -128,17 +128,17 @@ q(1, "A choke bean call states the safety factor reading as nearest with no deci
  ["A reorder point with k read to 0 decimals, the smallest reading",
   "A reorder point with the exact k, since no decimals means no table",
   "safetyFactorRounding.decimals must be left out when the rule is 'none'"],
- "A table reading needs its number of decimals, and the stated probe on ss-ekene-choke-beans returns, in its own words: safetyFactorRounding.decimals must be a whole number from 0 to 6; got undefined. The engine fills in no reading of its own. The message about leaving decimals out answers the rule none with decimals beside it.")
+ "A table reading needs its number of decimals, and the start \"The choke bean set, cycle service level\" returns, in its own words: safetyFactorRounding.decimals must be a whole number from 0 to 6; got undefined. The engine fills in no reading of its own. The message about leaving decimals out answers the rule none with decimals beside it.")
 
 # ---- fill rate (m04)
-q(2, "On the slide 24 fill-rate column, what does the engine give at 0.90 against the printed 252?",
+q(2, "Bisecting for k at a fill rate of 0.90 on the weekly data, which safety stock does the engine reach, beside the 252 printed on Caplice, lecture 11 slide 24?",
  "250.102945, with k 0.969058",
  ["252, as printed, with k read from a table",
   "330.754149, with k 1.281552",
   "147.444755, with k 0.571295"],
  "Solving for k by bisection at a fill rate of 0.90 gives 0.969058 and a safety stock of 250.102945, 1.897055 below the print, within the 2 units three rows agree to. 330.754149 is the exact cycle service figure at 0.90, and 147.444755 the fill-rate figure at 0.80.")
 
-q(0, "How far does each printed fill-rate safety stock on slide 24 sit from the engine's figure?",
+q(0, "How far does each printed fill-rate safety stock on Caplice, lecture 11 slide 24, sit from the engine's figure?",
  "0.650714, 8.820396, 1.897055 and 0.555245, from 0.99 down to 0.80",
  ["Within 2 units in every row, so the column holds no slip at all",
   "8.820396 in every row, a constant offset from a different k table",
@@ -150,7 +150,7 @@ q(1, "A golden input puts the band 0 EOQ beyond the only break, so the schedule 
  ["order 400 at a total cost of 105000 a year (band 0), the lowest of 1 candidate",
   "order 4600 at a total cost of 483717.83 a year (band 0), the lowest of 2 candidates",
   "band 0 gives no candidate, so the whole schedule is refused as offering no order at all"],
- "On qd-eoq-in-top-band the reason reads: order 4600 at a total cost of 483717.83 a year (band 1), the lowest of 1 candidate. Band 0's EOQ lies at or above the break, so band 0 offers nothing and band 1 offers the only candidate. The reason ordering 400 at 105000 is qd-single-band, a schedule with one band.")
+ "On that schedule the reason reads: order 4600 at a total cost of 483717.83 a year (band 1), the lowest of 1 candidate. Band 0's EOQ lies at or above the break, so band 0 offers nothing and band 1 offers the only candidate. The reason ordering 400 at 105000 belongs to a schedule with one band.")
 q(0, "An order quantity of 0 goes into the fill-rate choke bean case. How is it answered?",
  "Refused by name: the order quantity must be above 0",
  ["A fill rate of 0.98 met at any k, as no units are brought",
@@ -166,14 +166,14 @@ q(3, "Moving the choke bean set to monthly review adds a month to its protection
   "Neither grows, since sigma is set by the lead time alone"],
  "The rule multiplies the demand variance by P = leadTime + reviewPeriod, so a longer P widens that term; the lead-time variance d^2 sd_L^2 carries no review period. On the choke beans sigma goes from 3.029476 to 3.426036.")
 
-q(3, "On the lecture 12 check, the reason prints a loss target the slide rounds to 0.1733. What does the engine print?",
+q(3, "A fill rate of 0.95 on an order of 2000 sets a bound on G(k) that Caplice, lecture 12 slides 5 and 6, round to 0.1733. What bound does the reason carry?",
  "0.173279, from 2000 x (1 - 0.95) / 577.104177",
  ["0.044171, from 228 x (1 - 0.95) / 258.088834",
   "0.173279, from 2500 x (1 - 0.95) / 577.104177",
   "0.58, the safety factor as the table reads it"],
  "The reason reads: a fill rate of 0.95 needs G(k) at or below 2000 x (1 - 0.95) / 577.104177 = 0.173279. The order quantity is 2000, the demand over one review period; 2500 is the demand over the whole protection period. 0.044171 is the lecture 11 target at 0.95.")
 
-q(1, "What does the lecture 12 case state as its protection period and its demand over it?",
+q(1, "Caplice, lecture 12 slides 5 and 6, review every 8 weeks on a lead time of 2 weeks. Over what protection period, and on what demand over it, does the engine work?",
  "10 weeks and 2500.000000",
  ["8 weeks and 2000, the review period alone",
   "2 weeks and 500.000000, the lead time only",
@@ -200,7 +200,7 @@ q(3, "What expected units short beyond level 4 does the engine print for the PSV
   "0.218018"],
  "The loss column reads 2.000000, 1.135335, 0.541341, 0.218018, 0.075141 and 0.022488 for levels 0 to 5, so L(4) is 0.075141. 0.090224 is the probability of exactly four kits, 0.022488 the loss at level 5 and 0.218018 the loss at level 3.")
 
-q(1, "The Caplice lecture 13 table on a mean of 0.8: what does the engine give for no demand in a week, and what does the slide print?",
+q(1, "How likely is a week with no demand at all for the weekly slow mover of Caplice, lecture 13 slides 11 and 12, by the engine and by the print?",
  "0.449329 against the printed 44.9%",
  ["0.359463 against the printed 35.9%",
   "0.449329 against the printed 45%",
@@ -222,12 +222,12 @@ q(0, "Typing 1.2 as the target of a slow-mover call: what message comes back?",
  "A service level is a probability strictly between 0 and 1, in the Poisson view as in the normal one, and 1.2 is refused by name. The engine caps nothing silently, and no Poisson level reaches a cumulative probability of 1. The serviceMeasure message answers a missing or unknown measure.")
 
 # ---- across two modules
-q(0, "The choke bean set is the item for both service measures. Which target gives it the lower reorder point, a cycle service level of 0.95 or a fill rate of 0.98?",
- "The fill rate of 0.98: 11.442483 against 13.316294",
- ["The cycle service level of 0.95: 13.316294 against 11.442483",
-  "Neither: both give 13.316294, as the same sigma of 3.029476 serves each",
-  "The fill rate, but only after both levels are held as 14.000000"],
- "The fill-rate reorder point is 11.442483 with k 1.026327, and the cycle service one 13.316294 with k 1.644854. A fill rate measures units short against the 12 each order brings, so its higher stated number still asks for less stock.")
+q(0, "At a fill rate of 0.95 with k read to two decimals, how much safety stock does the engine report on the periodic review of Caplice, lecture 12 slides 5 and 6?",
+ "334.720422, from k read as 0.58 on a sigma of 577.104177",
+ ["2834.720422, the order-up-to level before it is held as 2835.000000",
+  "2500.000000, the demand over the ten-week protection period",
+  "577.104177, the sigma over the protection period at a factor of 1"],
+ "The engine's reason reads: safety stock 334.720422 over a demand of 2500 with sigma 577.104177 gives the order-up-to level S 2834.720422. The exact factor 0.583373 is read as 0.58, and 0.58 times the sigma is the safety stock. 2834.720422 is the level itself, 2500.000000 the demand the level covers and 577.104177 the sigma.")
 
 q(2, "On the lecture 11 weekly data at 0.95, the cycle service measure with exact k and the fill-rate measure give different safety stocks. Which pair does the engine return?",
  "424.518354 for cycle service and 339.179604 for the fill rate",
@@ -257,7 +257,7 @@ q(2, "What mean does each engine view take over the protection period when a rev
   "Neither adds the review period, which only sets how often stock is counted"],
  "The normal rule has P = leadTime + reviewPeriod and a level of d P + k sigma; the Poisson rule reads X ~ Poisson(demandRate x (leadTime + reviewPeriod)). So a review period lengthens the protection period in both: on the Poisson case with a review period of 1 the mean is 4.5, and on the choke beans the demand over P becomes 11.666550.")
 
-q(3, "A golden Poisson call at 2 a period, with a review period stated, asks for a lead time of 240. Which ceiling does the refusal quote?",
+q(3, "A stated Poisson call at 2 a period, with a review period stated, asks for a lead time of 240. Which ceiling does the refusal quote?",
  "229.5, as the review period counts toward the mean",
  ["250, the lead time that alone gives a mean of 500",
   "240, the stated lead time, since the review period is fixed",
@@ -293,7 +293,7 @@ q(0, "In this course's vocabulary, what does the term safety stock name?",
  "The vocabulary rule: safety stock is k times sigma over the protection period; the reorder point and the order-up-to level are named as such. On the choke beans the safety stock is 4.983044 and the reorder point 13.316294, two different figures.")
 
 q(3, "A slow mover's Poisson level comes back as a whole number. What does the engine report as its safety stock?",
- "The level less the Poisson mean",
+ "The level less the Poisson mean over the protection period",
  ["The level itself, as every kit on the shelf is safety stock",
   "k times sigma, with sigma the square root of the mean",
   "The level less one, the kit in use"],

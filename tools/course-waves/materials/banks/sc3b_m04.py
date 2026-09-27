@@ -4,9 +4,117 @@ Q=[]
 def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
 # SC3 Associate m04, The Economic Order Quantity.
-# A STUB written at the foundation. The bank writer replaces the question list
-# below (fifteen questions, BANK_TASK.md) and keeps the emit line, whose path is
-# literal because the kit's check-bank-sources reads literal paths only.
+# Sources: ordering cost and holding cost; Harris (1913) and his square root;
+# the rule the engine states; the relevant cost at the EOQ and at the quantity
+# ordered; the three Harris lots and the lecture 8 slide 9 check; the refusals
+# of eoq. Every keyed figure and message was re-run through the vendored
+# engine (eoq-ekene-baryte, the same case with the rule none and with a demand
+# of 1200, harris-1913-*, caplice-l8-eoq and the eoq-refuse-* cases).
+
+q(2, "The Ekene baryte case states a demand of 300 tonnes a year, an order cost of 1800, a unit cost of 260 and a holding rate of 0.22. What EOQ does the engine return?",
+ "137.408584 tonnes, the square root of 2 x 1800 x 300 over 57.2.",
+ ["140.000000 tonnes, the figure that goes on the purchase order.",
+  "274.817167 tonnes, the square root of 2 x 1800 x 300 over 57.2, doubled for the two costs.",
+  "7859.770989 tonnes, the square root of 2 x 1800 x 300 x 57.2."],
+ "The EOQ is sqrt(2 A D / h) with h = 0.22 x 260 = 57.2: 137.408584. 140.000000 is the quantity ordered, rounded up to a multiple of 10. 274.817167 is the EOQ at four times the demand. The square root of 2 A D h is the relevant cost at the EOQ, 7859.770989 a year, which is money and has no unit of tonnes.")
+
+q(0, "The baryte holding cost is stated as a rate of 0.22 a year on a unit cost of 260. What holding cost of a unit for a year does the engine report?",
+ "57.200000, the holding rate times the unit cost.",
+ ["0.22, the rate itself, read as money a tonne a year.",
+  "Half of 57.200000, since half a lot is held on average.",
+  "78000.000000, the rate applied to the whole year's purchase."],
+ "The engine reports holdingRate x unitCost = 0.22 x 260 = 57.200000 a tonne a year. Half a lot on average appears in the holding cost a year, h Q / 2, and it acts on h; it does not halve h itself. 78000.000000 is the purchase cost a year, 300 x 260, which the engine reports on its own line.")
+
+q(3, "Baryte is ordered 140 tonnes at a time against a demand of 300 a year and an order cost of 1800. What ordering cost a year does the engine report?",
+ "3857.142857, from 2.142857 orders a year at 1800 each.",
+ ["4004.000000, the holding cost a year at the same quantity ordered.",
+  "3929.885495, the ordering cost the engine reports at the unrounded EOQ.",
+  "1800, a single order a year."],
+ "The ordering cost a year is A D / Q = 1800 x 300 / 140 = 3857.142857, with D / Q = 2.142857 orders a year. 4004.000000 is the holding cost at 140, and 3929.885495 is each of the two equal costs at the EOQ itself. A lot of 140 tonnes covers less than half a year's demand of 300.")
+
+q(1, "On the baryte case, what is the holding cost a year at the quantity ordered of 140 tonnes?",
+ "4004.000000, from 57.2 x 140 / 2, with half a lot held on average.",
+ ["Twice 4004.000000, with the whole lot of 140 held all year long.",
+  "3857.142857, the ordering cost a year at the same quantity of 140.",
+  "57.200000, the cost of holding one tonne for a year."],
+ "Stock arrives a lot at a time and runs down steadily, so on average half a lot sits on the shelf: h Q / 2 = 57.2 x 140 / 2 = 4004.000000. Charging the whole lot all year doubles it. 3857.142857 is the ordering cost at 140, and 57.200000 is h, the cost for one tonne.")
+
+q(3, "The rule the engine states includes \"relevant cost at Q* = sqrt(2 A D h)\". What is the relevant cost at the EOQ for baryte?",
+ "7859.770989 a year, the lowest ordering plus holding cost on these stated figures.",
+ ["7861.142857 a year, the relevant cost the engine reports at the quantity ordered of 140 tonnes.",
+  "7859.770989 plus the purchase cost of 78000.000000, a year.",
+  "3929.885495 a year, the ordering cost alone at the EOQ, which the rule names."],
+ "sqrt(2 x 1800 x 300 x 57.2) = 7859.770989, the sum of the two equal costs at the EOQ. 7861.142857 is the relevant cost at 140, a little higher. The purchase cost is paid whatever the lot size, so it moves no EOQ and the engine leaves it out of the relevant cost. 3929.885495 is only one of the two equal halves.")
+
+q(0, "With the rounding rule set to none, the baryte order is the EOQ itself. What do the engine's ordering and holding costs a year show there?",
+ "Both are 3929.885495: at the EOQ the two costs are equal, and they sum to 7859.770989.",
+ ["The ordering cost is 3857.142857 and the holding cost 4004.000000, as at every quantity.",
+  "The holding cost is twice the ordering cost, since h Q / 2 is taken on a full lot of 137.408584.",
+  "Both are 7859.770989, since each cost equals the relevant cost at the EOQ in turn."],
+ "Setting A D / Q equal to h Q / 2 and solving for Q gives the EOQ, so at the EOQ the two costs are equal: 3929.885495 each, 7859.770989 together. 3857.142857 and 4004.000000 are the two costs at 140 tonnes, where they differ. Each cost is half the relevant cost at the EOQ.")
+
+q(2, "Baryte's purchase cost is 78000.000000 a year. Why does the engine report it on its own line and leave it out of the relevant cost?",
+ "It is paid whatever the lot size, so it moves no EOQ; it matters once the price depends on the lot.",
+ ["It is a sunk cost the moment the order is placed, so an EOQ call is refused when a price is stated.",
+  "It is paid by the supplier on delivery, so it falls outside what the store's own budget pays for in a year.",
+  "It is already inside the holding cost of 57.200000, so adding it again would count it twice."],
+ "Demand times unit cost, 300 x 260 = 78000.000000, is the same at any lot size, so it plays no part in choosing one. The relevant cost holds only the costs that move with the lot: ordering and holding. The holding rate acts on the unit cost to give h, which is a different figure from the year's purchase.")
+
+q(1, "Harris (1913) prints: \"it is of value to know that this consumption must increase four fold to warrant doubling the manufacturing quantities.\" What does the engine return for baryte with the demand raised from 300 to 1200 and the rule none?",
+ "An EOQ of 274.817167, twice 137.408584, as the root of four is two.",
+ ["An EOQ four times 137.408584, since the EOQ grows in step with demand.",
+  "An EOQ of 137.408584 again, since the demand does not enter the EOQ at all.",
+  "A refusal, since a demand above 1000 tonnes calls for a different rule."],
+ "The EOQ grows with the square root of demand, so four times the demand gives twice the lot: 274.817167. That is Harris's four-fold sentence, which follows from his square root. The demand does enter the EOQ, under the root, and no demand above 0 is refused.")
+
+q(0, "Harris (1913) writes the lot as \"the square root of (240MS divided by C)\", with M the monthly movement, S the set-up cost and C the unit cost. Where does his 240 come from?",
+ "It folds together the twelve months of a year and his ten per cent a year for interest and depreciation.",
+ ["It is his count of working days in a year, over which the set-up cost is spread evenly.",
+  "2 x 120, the hours of a two-week run on the machines of his day, over which the set-up cost S is charged.",
+  "A conversion factor from dollars to cents, since his unit cost is printed in cents."],
+ "Harris's 240 folds together the twelve months of a year and his ten per cent a year: 2 x 12 over 0.1 is 240. With an annual demand of 12 M and a holding rate of 0.1 it is the same formula the engine applies, sqrt(2 A D / h).")
+
+q(3, "How does the course read Harris's three 1913 examples as engine inputs?",
+ "Annual demand 12 times his monthly movement, order cost his set-up cost, his unit cost, and a holding rate of 0.1.",
+ ["Annual demand equal to his monthly movement, since he wrote his formula for a single month of use.",
+  "Order cost of 240 times his set-up cost, and a holding rate of 1, to carry his constant directly.",
+  "Annual demand 12 times his movement, and a holding rate of 0.22 taken from the Ekene baryte case."],
+ "The golden inputs read his figures as annual demand 12 M, order cost S, unit cost C and a holding rate of 0.1 for his ten per cent a year. Nothing else is assumed. The Ekene holding rate belongs to the baryte case alone.")
+
+q(1, "Harris prints his first lot as 2,190. What does the engine return on the course's reading of his inputs, and how does the course treat the two figures?",
+ "2190.890230; the course keeps both, noting that Harris prints each of his lots a little short of the formula.",
+ ["Exactly 2,190; the engine matches the print, which is why this example anchors the EOQ module.",
+  "2190.890230; the course replaces the print with the engine's figure, since the print is a misprint.",
+  "The nearest whole unit above 2,190; the engine rounds each lot, and Harris dropped the fraction."],
+ "The engine's EOQ on harris-1913-example is 2190.890230. Harris prints 2,190, 6,850 and 48.5 for figures the engine gives as 2190.890230, 6856.626965 and 48.554321: each short of the formula. Printed alike is one thing and equal another, so the course keeps the engine's figure to six decimals beside the print as printed. The rule none returns the EOQ unrounded.")
+
+q(2, "Lecture 8 slide 9 of Caplice, MIT ESD.260J (Fall 2006) states an order cost of 500, a demand of 2000 a year, a holding rate of 0.25 and a unit cost of 50. What does the engine return?",
+ "An EOQ of 400.000000, ordering and holding costs of 2500.000000 each, a relevant cost of 5000.000000.",
+ ["An EOQ of 400.000000, an ordering cost of 2500.000000 and a relevant cost of 2500.000000 in all.",
+  "An EOQ of 200.000000, with ordering and holding costs of 2500.000000 each and a relevant cost of 5000.000000 together.",
+  "An EOQ of 400.000000 and a relevant cost of 105000.000000 a year, once the purchase cost is added to it."],
+ "sqrt(2 x 500 x 2000 / (0.25 x 50)) = 400, and at the EOQ the ordering and holding costs are equal, 2500.000000 each, a relevant cost of 5000.000000. The slide's printed figures agree with the engine exactly. The relevant cost is the sum of both costs and leaves out the purchase cost.")
+
+q(0, "A learner sets the Annual demand control to 0 on the baryte case. What does the engine print?",
+ "\"annualDemand must be a finite number above 0; got 0\"",
+ ["An EOQ of 0.000000 tonnes.",
+  "An EOQ on the last demand typed, with a note that 0 was not accepted.",
+  "A refusal naming orderCost."],
+ "A demand of 0 gives no reason to order, and the engine refuses it by name before any figure is computed. The refusal names the field that failed, annualDemand; the order cost is still stated. The engine keeps no earlier input and returns no figure of zero in place of a refusal.")
+
+q(3, "A learner clears the Unit cost control on the baryte case and leaves the Holding rate control as it was. What comes back?",
+ "A refusal: \"unitCost is required with holdingRate (the holding cost is holdingRate x unitCost)\".",
+ ["An EOQ with a holding cost of 0.22 a unit a year, the rate read as a figure in money by the engine itself.",
+  "An EOQ with the holding cost left out, so the lot grows until the order cost is spread very thin over the year.",
+  "A refusal: \"holdingRate must be a finite number above 0; got 0\", since the rate has no price."],
+ "A holding rate is a fraction of the unit cost, so a rate with no unit cost gives no holding cost at all, and the engine refuses the pair by name. It never reads a rate as money. The holding rate itself is stated and above 0, so the refusal names unitCost.")
+
+q(1, "What does the engine's basis cite as the source of its EOQ rule?",
+ "Harris (1913), Factory 10(2) pp. 135-136, 152, and Caplice, MIT ESD.260J (2006) lecture 7 and lecture 8 slide 3.",
+ ["A licensed inventory textbook, by chapter and page, since the rule has no public-domain source.",
+  "The Ekene register's note on the baryte order cost, which states the rule beside the case.",
+  "MIL-HDBK-338B (1 October 1998) section 5.3.8, the handbook the course quotes for the square root."],
+ "The basis reads \"Harris (1913), How Many Parts to Make at Once, Factory 10(2) pp. 135-136, 152; Caplice, MIT ESD.260J (2006) lecture 7 and lecture 8 slide 3\". Harris's 1913 words are public domain and quoted; the lectures are cited by lecture and slide. The textbooks were not read, the register's note says what the order cost covers, and MIL-HDBK-338B is the course's source for spares.")
 
 emit(Q, '/root/cat-wip-materials/banks/sc3b_m04.json', expect_n=15)
 finish()

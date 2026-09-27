@@ -55,8 +55,8 @@ q(3, "The fill-rate choke bean case is loaded with its order quantity cleared. W
 
 q(0, "Ten units a period with no spread and three periods of lead time with no spread: a fill rate of 0.95 on an order of 10 is asked of this certain demand. What is the outcome?",
  "A refusal: demand over the protection period is certain, so a fill rate sets no safety factor",
- ["A reorder point of 30.000000 with a safety factor of 1.644854",
-  "A safety factor of 0.000000, the smallest k that meets any target",
+ ["A reorder point of 30.000000 with a safety factor of 1.644854, as the cycle service level gives",
+  "A safety factor of 0.000000, the smallest k that meets any fill-rate target on certain demand",
   "A safety stock of 0.000000 and a fill rate of 1"],
  "The engine's words: demandSd and leadTimeSd are both 0, so demand over the protection period is certain and a fill rate sets no safety factor. A fill rate protects against uncertainty, and with none there is nothing for k to solve. A cycle service target on the same certain demand is accepted and gives the reorder point 30.000000.")
 
@@ -74,8 +74,8 @@ q(1, "At its own safety stock of 339.179604 on the slide 24 case at 0.95, what f
   "An achieved fill rate of 0.99"],
  "At the engine's safety stock the achieved fill rate is 0.950000 and the expected units short a cycle are 11.400000: the rule meets its target exactly. Raising the stock to the printed 348 would overshoot it. 0.986135 is the choke bean set's achieved fill rate at 0.98, and 0.99 is the target of a different row of the column.")
 
-q(3, "Slide 24 prints 513 for a fill rate of 0.99. What figure does the bisection give?",
- "512.349286, with k 1.985166",
+q(3, "Caplice, lecture 11 slide 24, prints 513 for a fill rate of 0.99. What figure does the bisection give?",
+ "512.349286, with k 1.985166 from the bisection on G(k)",
  ["513, as printed, with k read from a table to two decimals",
   "600.404410, with the cycle service k 2.326348",
   "601.000000, as printed for 0.99 on the slide"],
@@ -96,11 +96,11 @@ q(0, "What does the engine's rule give for the expected units short per cycle an
  "The basis reads: expected units short per cycle = sigma G(k), G(k) = phi(k) - k (1 - Phi(k)); P2 = 1 - sigma G(k) / Q. Phi(k) is P1, the cycle service level, a different measure. The safety stock k sigma is no count of units short.")
 
 q(3, "On CHK-BEAN, a cycle service level of 0.95 gives k 1.644854 and a fill rate of 0.98 gives k 1.026327. Which target asks for more safety stock, and why?",
- "The cycle service level of 0.95, since it counts every short cycle",
+ "The cycle service level of 0.95, whose k of 1.644854 is the larger",
  ["The fill rate of 0.98, since 0.98 is the higher of the two stated levels",
   "Neither, since both are the same kind of service target",
   "The fill rate, since it counts units short against the order"],
- "A fill rate counts the units short against the order quantity each cycle brings, and a cycle service level counts the cycles with any shortage at all; on this item the cycle service target gives the larger k, 1.644854, and the larger reorder point, 13.316294 against 11.442483. Comparing the two stated levels as one scale is the mistake the vocabulary rule prevents.")
+ "The engine computes k 1.644854 for the cycle service level of 0.95 and k 1.026327 for the fill rate of 0.98 on the same sigma, 3.029476, so the cycle service target asks for the larger safety stock: a reorder point of 13.316294 against 11.442483. Comparing the two stated levels as one scale is the mistake the vocabulary rule prevents.")
 
 q(1, "What safety stock and reorder point go with k 1.026327 on the choke beans?",
  "Safety stock 3.109233, reorder point 11.442483",
@@ -109,7 +109,7 @@ q(1, "What safety stock and reorder point go with k 1.026327 on the choke beans?
   "Safety stock 11.442483, reorder point 12.000000"],
  "The reason reads: safety stock 3.109233 over a demand of 8.33325 with sigma 3.029476 gives the reorder point s 11.442483, held as 12. The reorder point adds the safety stock to the demand over the protection period, so it is never equal to the safety stock here. 12.000000 is the held level.")
 
-q(2, "How close does the engine come to slide 24 at the lowest printed fill rate, 0.80?",
+q(2, "How close does the engine come to Caplice, lecture 11 slide 24, at the lowest printed fill rate, 0.80?",
  "A safety stock of 147.444755 against the printed 148",
  ["A safety stock of 217.213043, against the printed 217, from the cycle service column",
   "A safety stock of 250.102945 against the printed 252",

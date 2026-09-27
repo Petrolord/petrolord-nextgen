@@ -131,11 +131,11 @@ x("What does the course say about the capstone fields and the readings the engin
 
 # 15
 x("Why do some of the engine's edges include the boundary and others exclude it?",
- "An edge is inclusive where the stated figure is a target to meet, and strict where it is a limit to pass",
+ "Each rule states its own edge in its own words (at or above, at or below, above), and none is global",
  ["Every edge includes the boundary, and a strict edge appears only where a figure is rounded by a stated rule",
-  "Every edge excludes the boundary, except where 12 significant digits make two of the figures tie",
+  "An edge is inclusive where the stated figure is a target to meet, and strict where it is a limit to pass",
   "The edge follows the tier: Associate rules include the boundary and Expert rules exclude it"],
- "A class minimum, a band's starting month, a cycle service target and a stock that covers the demand are targets, met at or above; cover above a limit and a lead-time demand above the reorder point are limits, passed strictly. No edge is global, none depends on rounding, and the tier does not decide it.")
+ "No single principle sorts the edges; each rule states its own. A class minimum and a band's starting month are met at or above. Under at-or-below an ABC cut-off is a limit, yet a cumulative share exactly on 80 stays A, and a Poisson fill-rate level is met when its expected units short are at or below what the target allows, so a limit can be inclusive. Excess cover counts only above its limit, and a lead-time demand equal to the reorder point is met. The engine prints those words in its reasons; no edge depends on rounding or on the tier.")
 
 emit(Q, '/root/cat-wip-materials/banks/sc3a_m05.json', expect_n=15)
 finish()

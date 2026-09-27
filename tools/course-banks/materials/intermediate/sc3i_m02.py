@@ -108,7 +108,7 @@ q(1, "The fixture's note on the CHK-BEAN case is quoted below. In what period ar
  "The fixture's note says the periods are months, and the engine reads every input in that one period. The lecture 11 checks are worked in weeks, and the register's annual usage column is a year, but neither sets the period of this case.")
 
 q(2, "An extra key named zFactor is slipped into the choke bean call to force the safety factor. How is it handled?",
- "A refusal naming zFactor as a key it does not accept",
+ "A refusal naming zFactor as a key it does not accept, before any input is read",
  ["The reorder point as usual, with zFactor read as the safety factor k in place of the one from the level",
   "The reorder point as usual, with the unknown key zFactor silently dropped from the call",
   "A refusal naming serviceLevel, which zFactor would replace"],

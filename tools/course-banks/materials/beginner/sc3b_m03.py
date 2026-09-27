@@ -26,7 +26,7 @@ q(0, "The total annual usage value of the Ekene register is 1580620.000000. What
  "An item's share is its annual usage value over the total, in percent: 370000.000000 over 1580620.000000 is 23.408536. The cumulative share after rank 2 is 45.425213, and 22.016677 is the casing's own share. 33.333333 is the share of the items that class A holds, a count that would treat a motor and an O-ring kit alike, which ABC exists to avoid.")
 
 q(3, "Class G cement CEM-G brings the cumulative share from 78.753907 to 83.536840 on the Ekene register, with A to 80 percent and B to 95. What class does it take under each boundary rule?",
- "B under at-or-below, and A under include-crossing.",
+ "B under at-or-below, and A under include-crossing, since each rule reads a different share.",
  ["A under at-or-below, and B under include-crossing, the higher class in each case.",
   "B under both rules, since its cumulative share of 83.536840 is above 80 either way.",
   "A under both rules, since the share before it, 78.753907, is below 80 either way."],
@@ -40,7 +40,7 @@ q(1, "On the Ekene register, which items take a different ABC class under includ
  "CEM-G crosses 80 percent and LUBE-OIL crosses 95 percent, from 94.197214 to 95.654870. Include-crossing places each crossing item in the higher class: CEM-G A, LUBE-OIL B. Every other item takes the same class under both rules. On a share exactly on a cut-off the two rules agree, because no item crosses a line there.")
 
 q(2, "Under the Ekene policy (A to 80, B to 95, at-or-below), how many items are class A, and what share of the annual usage value do they hold?",
- "6 items, holding 78.753907 percent of the value.",
+ "6 items, holding 78.753907 percent, the share at GL-VALVE.",
  ["7 items, holding 83.536840 percent, the count under the other boundary rule.",
   "6 items, holding 80 percent exactly, since class A is filled up to its cut-off.",
   "3 items, holding 63.645911 percent, since class A closes at a third of the items."],
@@ -68,11 +68,11 @@ q(1, "A policy states A to 80 percent and B also to 80 percent. What does the en
  "The B cut-off must lie above the A cut-off and below 100, so a policy that leaves no room for class B is refused before any item is ranked. The engine holds no cut-off of its own and merges no classes; it returns the policy to its author to state again.")
 
 q(3, "A learner sets the boundary rule control to not stated in the ABC view. What does the engine print?",
- "\"boundaryRule must be 'at-or-below' (the cumulative share including the item decides) or 'include-crossing' (the share before the item decides, so the item crossing a cut-off joins the higher class)\"",
+ "A refusal on boundaryRule, in a message that names both rules and what each one decides.",
  ["The classes under at-or-below, the rule most textbooks use, with a note that the rule was taken as read.",
   "Both rules side by side, so the learner can pick one after seeing the results printed.",
   "Crossing items left unclassed until a rule is stated, each flagged in its own reason."],
- "The engine holds no boundary rule: leaving it out is refused with a message that names both rules and what each one decides. It picks neither and prints no side-by-side result. Neither rule is right in general, so a policy picks one and writes it down.")
+ "The engine holds no boundary rule: leaving it out is refused, in the engine's words \"boundaryRule must be 'at-or-below' (the cumulative share including the item decides) or 'include-crossing' (the share before the item decides, so the item crossing a cut-off joins the higher class)\". It picks neither and prints no side-by-side result. Neither rule is right in general, so a policy picks one and writes it down.")
 
 q(2, "The engine's basis for ABC cites Caplice, MIT ESD.260J (2006) lecture 11 slide 4. What does the course take from that citation about the cut-offs?",
  "The classes are arbitrary, so the cut-offs are the caller's stated policy and the course states none as a standard.",

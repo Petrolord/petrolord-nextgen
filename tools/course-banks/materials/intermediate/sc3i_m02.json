@@ -158,7 +158,7 @@
   "options": [
    "The reorder point as usual, with zFactor read as the safety factor k in place of the one from the level",
    "The reorder point as usual, with the unknown key zFactor silently dropped from the call",
-   "A refusal naming zFactor as a key it does not accept",
+   "A refusal naming zFactor as a key it does not accept, before any input is read",
    "A refusal naming serviceLevel, which zFactor would replace"
   ],
   "answer": 2,

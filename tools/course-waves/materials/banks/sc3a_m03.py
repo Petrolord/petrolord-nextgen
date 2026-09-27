@@ -3,10 +3,139 @@ from bankkit import emit, finish
 Q=[]
 def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
-# SC3 Expert m03, Lead-Time Risk by Monte Carlo.
-# A STUB written at the foundation. The bank writer replaces the question list
-# below (fifteen questions, BANK_TASK.md) and keeps the emit line, whose path is
-# literal because the kit's check-bank-sources reads literal paths only.
+# SC3 Expert m03, Lead-Time Risk by Monte Carlo. Keys here are the method, the
+# seed, the draws, the draw order, the direction of the P-labels and the
+# engine's refusals. The one sampled figure keyed (the seal's P90 lead time) is
+# keyed as an estimate with its seed and draw count, as the course teaches it,
+# and is never graded. Every keyed figure and message is recomputed through the
+# vendored engine by scratch/bank-advanced/witness.mjs (ltr-ekene-mech-seal,
+# ltr-other-seed, ltr-refuse-seed-missing, ltr-refuse-iterations-zero,
+# ltr-refuse-iterations-cap, ltr-refuse-tri-order, ltr-refuse-tri-negative).
+# No capstone figure appears.
+
+K = [3, 1, 0, 2, 1, 0, 3, 2, 0, 1, 3, 2, 1, 0, 3]
+_i = iter(K)
+def x(p, c, ds, e): q(next(_i), p, c, ds, e)
+
+# 1
+x("Of the engine's nine functions, which one samples, and through what?",
+ "leadTimeRisk alone, through lib/stats: mulberry32 for the uniforms, triInvCDF for each value and basicStats for the percentiles",
+ ["insuranceSpares and leadTimeRisk both, each one through a sampler written inside the inventory engine itself for its own use alone",
+  "every function that takes a spread, through a normal sampler seeded from the system clock whenever no seed is typed in",
+  "poissonStock and leadTimeRisk, through a Poisson sampler that lib/stats keeps right beside its triangular inverse CDF"],
+ "The engine carries no sampler and no percentile code of its own; leadTimeRisk is the one function that samples, on the stated seed, through the canonical lib/stats pieces. insuranceSpares and poissonStock compute exact Poisson figures, the safety stock is closed form, and no seed is ever taken from a clock.")
+
+# 2
+x("For each draw of the mechanical seal, in what order does the engine spend its random numbers?",
+ "The lead time takes the first uniform of each draw and the rate the second, all from one mulberry32 stream",
+ ["One uniform for the demand rate, then one for the lead time, each drawn from its own separate stream of numbers",
+  "One uniform for every day of the drawn lead time, each turned into that day's demand rate",
+  "Two uniforms averaged into one, which then sets both the lead time and the demand rate together for the draw"],
+ "The basis states it: per iteration a uniform for the lead time then one for the demand rate, from one mulberry32(20270301) stream, each through triInvCDF. The order is fixed, which is why a second run on the same seed returns the same draws. There are no separate streams, no daily draws and no shared uniform.")
+
+# 3
+x("How does the engine turn one draw of the seal into a lead-time demand?",
+ "Rate times days: the rate drawn for that draw, kept for every day of its drawn lead time",
+ ["A fresh demand draw is added for each day of the drawn lead time, so that the busy and quiet days offset each other",
+  "It multiplies the modal demand of 0.016 a day by the drawn lead time, so only the lead time varies",
+  "It divides the drawn lead time by the drawn demand rate to give the days that one seal lasts"],
+ "The lead-time demand for a draw is the rate times the days, and the rate holds for the whole lead time, as the basis says. A fresh demand draw every day is the alternative the course names; holding the demand at its mode would sample the lead time alone; a ratio of days to rate is no demand at all.")
+
+# 4
+x("A lead-time risk call on the mechanical seal leaves out the seed. What does the engine return?",
+ "seed must be a whole number from 0 to 4294967295; it is required so that every run can be reproduced",
+ ["a result drawn on seed 0, the first seed the sampler accepts, with the seed printed in the basis",
+  "a result drawn on a seed taken from the clock, printed in the basis so that the run can be repeated",
+  "seed must be a whole number from 1 to 200000; it is required so that every run can be reproduced"],
+ "The seed is a stated input with no default, and a call without one is refused by name; the keyed message is the engine's own words. No seed is supplied for the user, from 0 or from a clock; 1 to 200000 is the range of the draw count.")
+
+# 5
+x("A planner asks for no sampling at all, an iteration count of 0. Which message or figure comes back?",
+ "iterations must be a whole number from 1 to 200000; got 0, since a run needs at least one draw",
+ ["iterations must be a whole number from 0 to 200000; got 0, since an empty run is read as no draws",
+  "a result with every sampled figure at 0 and no stockout counted in any cycle",
+  "a result on the 20000 draws that the Ekene case states for the mechanical seal"],
+ "The draw count is a whole number from 1 to the cap of 200000, and 0 is refused; the keyed message is the engine's own words. The range starts at 1, so a message allowing 0 is not the engine's; it returns no figures on a refused input and borrows no count from another case.")
+
+# 6
+x("On seed 20270301 and 20000 draws, what does the engine return as the P90 of the mechanical seal's lead time, and how is it read?",
+ "83.198487 days, an estimate on that seed and those draws: the low figure, met or exceeded in 90 percent of draws",
+ ["134.894691 days, the high figure that 90 percent of the sampled lead times fall at or below on that same run, as P90",
+  "106.453303 days, the mean lead time, which the engine prints under the P90 label for any sampled lead time it returns",
+  "103.503359 days, the middle sorted draw, which is the figure a P90 names for a sampled lead time"],
+ "The P90 of a sampled lead time is the low figure, 83.198487 days on seed 20270301 and 20000 draws (engine), an estimate that is not graded. 134.894691 is the P10, the high figure; 106.453303 is the mean; 103.503359 is the P50.")
+
+# 7
+x("With n draws sorted from smallest to largest, at which index does the engine read the P90 of a sampled lead time?",
+ "floor(0.1 n), the 10th percentile of the sorted draws",
+ ["floor(0.9 n), the 90th percentile of all the sorted draws",
+  "floor(0.5 n), the middle one of all of the sorted draws",
+  "ceil(0.95 x n) - 1, the index of the reorder point draw"],
+ "The basis reads P90 = index floor(0.1 n), P50 = floor(0.5 n), P10 = floor(0.9 n). floor(0.9 n) is where the P10 is read; floor(0.5 n) is the P50; ceil(0.95 x n) - 1 is the index of the reorder point for a cycle service level of 0.95.")
+
+# 8
+x("For the seal's lead-time demand, at which end of the sampled figures does the stockout risk sit, according to the engine's basis?",
+ "At the P10 end, the high figure, since more demand over the lead time is worse for stock",
+ ["At the P90 end, the high figure, since the 90th percentile is where demand runs out",
+  "At the P50, since a reorder point is always set at the middle of the sampled demand",
+  "At the minimum, since the shortest lead times leave the least time to reorder"],
+ "The basis says the stockout risk sits at the P10 end: for a lead time or a demand the P10 is the high figure, 2.780743 seals for the seal on seed 20270301 and 20000 draws. The P90 is the low figure; the P50 is the middle; the shortest lead times carry the least demand.")
+
+# 9
+x("Every lead-time risk call returns the sentence \"P90 means a 90% probability the actual quantity meets or exceeds this value, per SPE PRMS.\" How does this course treat SPE-PRMS 2018?",
+ "It is named only because the sentence names it; no sentence of it is quoted and the reserves and resources course teaches it",
+ ["It is quoted for its definitions of the percentiles, and the P-label sentence is its own wording of them, cited with its page",
+  "It is the source of the triangular sampler and the seed, which the engine takes from an appendix of that document",
+  "It sets the cycle service levels the spares calculator uses, which is why the sentence cites it by name"],
+ "SPE-PRMS 2018 (June 2018, CC BY-NC-ND 4.0) is named only, for the P-label sentence; no sentence of it is quoted; the prms course of the academy teaches the framework. The sentence is the platform's one convention for P-labels from lib/conventions/percentile.js; the sampler is lib/stats; a cycle service level or fill rate is a stated input.")
+
+# 10
+x("The same seal on seed 20270302 with 2000 draws gives a stockout probability of 0.065500, where seed 20270301 with 20000 draws gives 0.058600. What does the difference show?",
+ "A sampled figure is an estimate that moves with the seed and the draw count, which is why none is graded",
+ ["A slip in the second run, so the course keeps the first run as the engine's true stockout rate",
+  "The seed changes the triangles the engine fits, so the two runs describe two different mechanical seals",
+  "The two runs disagree because the engine rounds each estimate to four places before it is printed"],
+ "Each run is an estimate of the same quantities, and they differ because the draws differ; no graded figure is a Monte Carlo draw for that reason. Neither run is a slip; the seed moves no stated triangle; the reason prints the estimate with trailing zeros dropped, and the fields differ at six decimals too.")
+
+# 11
+x("A lead-time risk call states the seal's lead time with a minimum of 90, a mode of 70 and a maximum of 160. What does the engine return?",
+ "leadTimeDays must have min <= mode <= max; got min 90, mode 70, max 160",
+ ["a result on the triangle sorted into min 70, mode 90, max 160, with a note in the basis",
+  "leadTimeDays.mode must be at or above leadTimeDays.min; got 70",
+  "a result on a constant lead time of 70 days, the stated mode"],
+ "A triangle needs its minimum at or below its mode and its mode at or below its maximum; out of order it is refused by name, and the keyed message is the engine's own. The engine never reorders or replaces a stated input, and the message names leadTimeDays as a whole.")
+
+# 12
+x("What does the engine return when the seal's demand a day has a minimum of -0.01?",
+ "demandPerDay.min must be at or above 0; got -0.01, naming the term that carries the negative figure",
+ ["demandPerDay.min must be a finite number above 0; got -0.01, naming the triangle's lowest corner",
+  "a result with the negative minimum read as 0 seals a day, the least there can be",
+  "a result with the negative draws read as seals returned to stock, which lowers the count"],
+ "A negative demand is refused at the term that carries it, demandPerDay.min, and the keyed message is the engine's own words. A demand of 0 a day is accepted, so a message asking for a figure above 0 is not the engine's; the engine clips no stated input to 0 and reads no returns.")
+
+# 13
+x("Why does the engine sample through the canonical lib/stats Monte Carlo, with no sampler of its own?",
+ "So the same seed and draw count give the same draws anywhere on the platform, under one P-label convention",
+ ["So each call can pick the sampler that fits its inputs best, normal or triangular, without being told which to use",
+  "So the lead-time figures can be graded, since a canonical sampler makes every estimate exact",
+  "So the seed can be left out, since the canonical sampler supplies one that every course shares"],
+ "Using the platform's one seeded sampler means the Monte Carlo here behaves as it does everywhere else: stated seed and draws, the same draws, one convention for the P-labels. The engine picks no distribution for the user, a sampled figure stays an estimate and is never graded, and the seed is always a stated input.")
+
+# 14
+x("When the course replayed the mechanical seal's draws by hand from mulberry32 and triInvCDF on seed 20270301 with 20000 draws, what did it find?",
+ "1172 of 20000 draws with a lead-time demand above the reorder point 3, the engine's own count",
+ ["1172 of 20000 draws at or above the reorder point 3, which the engine then counts as met",
+  "1000 of 20000 draws above the reorder point, the count a stockout probability of 0.05 needs",
+  "a count that differs from the engine's, since a hand replay spends its uniforms in another order"],
+ "Replayed on seed 20270301, a lead-time uniform then a demand uniform per draw, each through triInvCDF, the 20000 draws give 1172 lead-time demands above the reorder point, the engine's count. The engine counts demands above the point, and equality is met; no 1000 figure appears; the replay used the stated order.")
+
+# 15
+x("The seal's lead time is a triangle of 70, 90 and 160 days. On seed 20270301 and 20000 draws, why does its sampled mean of 106.453303 days sit above the mode?",
+ "The triangle's long tail runs out to 160 days on the slow side, which pulls the mean above 90",
+ ["The sampler draws the lead time twice for each iteration and keeps whichever of the two is longer",
+  "The mean includes the demand rate, which is added to the lead time before the draws are averaged",
+  "The engine rounds each drawn lead time up to the next whole day before it averages them all"],
+ "The lead-time triangle leans right: 90 to 160 is a longer tail than 70 to 90, so the mean, 106.453303 days on seed 20270301 and 20000 draws (an estimate), sits above the mode. The engine takes one uniform for the lead time a draw, keeps lead time and demand apart, and rounds no draw.")
 
 emit(Q, '/root/cat-wip-materials/banks/sc3a_m03.json', expect_n=15)
 finish()

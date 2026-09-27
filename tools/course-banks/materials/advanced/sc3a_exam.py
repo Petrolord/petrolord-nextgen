@@ -66,14 +66,14 @@ x("Why does the course quote MIL-HDBK-338B word for word, while it cites the MIT
 # 7
 x("A downtime cost of 100 a day on the ESP motor moves the cheapest stock from four spares to none. What made the difference?",
  "Only the price of waiting moved: the first spare now saves 20455.05 of downtime against 37000 of holding",
- ["The mean orders outstanding fell below one half, so no spare is likely to be needed",
-  "A higher holding rate came with the lower downtime cost, which the engine links to it",
-  "The search limit fell to 0, since cheap downtime shortens the search for spares"],
+ ["The mean orders outstanding fell below one half, so no spare is likely to be needed in any lead time",
+  "A higher holding rate came with the lower downtime cost, which the engine links to it by a stated rule",
+  "The search limit fell to 0, since cheap downtime shortens the search for spares down to an empty stock"],
  "At 100 a day the failure rate, lead time and mean are unchanged, and only the downtime price moved; the engine's reason shows the first spare adding 37000 of holding and saving 20455.05 of downtime, so none is cheapest. The engine links no input to another, and the stated search limit of 6 is unchanged.")
 
 # 8
 x("With a holding rate of 0 and a search limit of 3 on the ESP motor, why does the engine flag its answer?",
- "Every spare is then free to hold and saves some downtime, so the largest number searched wins and sits on the limit",
+ "Every spare is then free to hold and saves some downtime, so the largest number searched wins",
  ["A holding rate of 0 is refused, and the flag marks the refusal on the search limit",
   "Three spares is the first row where the fill rate passes 0.99, and the flag marks that target",
   "The downtime saved by the third spare ties the holding it adds, and ties are flagged"],
@@ -161,11 +161,11 @@ x("The constant case of 2 a day over 10 days is run twice, at reorder points of 
 
 # 19
 x("The seal's reorder point for a cycle service level of 0.95 is 3.062282 on seed 20270301 with 20000 draws, and 3.113782 on seed 20270302 with 2000 draws. How should a planner read the pair?",
- "As two estimates of one quantity, each quoted with its seed and draws, the larger run the steadier",
+ "As two estimates of one quantity, each quoted with its seed and draws and neither graded",
  ["As a contradiction, since a seeded sampler must return one reorder point on every run",
   "As proof that the second seed is faulty, since its figure sits further from the stated 3",
   "As two exact reorder points, of which the policy should keep the higher for safety"],
- "Each figure is the sorted draw at ceil(0.95 x n) - 1 of its own run, and each run is an estimate that moves with the seed and the draw count; more draws average out more chance. A seed reproduces its own run, and no seed is faulty; neither figure is exact or graded.")
+ "Each figure is the sorted draw at ceil(0.95 x n) - 1 of its own run, and the course teaches that a sampled figure is an estimate that moves with its seed and draw count. A seed reproduces its own run, and no seed is faulty; neither figure is exact or graded.")
 
 # 20
 x("The inventory engine computes the standard normal cumulative probability without a normal table of its own. Through what?",
@@ -185,7 +185,7 @@ x("On the Ekene register, why is the PSV repair kit class V under the stated cri
 
 # 22
 x("Under the Ekene ABC cut-offs of 80 and 95 percent, why is CEM-G class B under one boundary rule and class A under the other?",
- "It is the item that crosses 80 percent: at-or-below reads the share with it, 83.536840, and include-crossing reads the share before it, 78.753907",
+ "It crosses 80 percent: at-or-below reads its share with it, 83.536840, and include-crossing the share before, 78.753907",
  ["Its share is exactly 80 percent, which at-or-below places in A and include-crossing places in B",
   "The two rules rank the items in a different order, so CEM-G sits seventh under one and fifth under the other",
   "Include-crossing rounds each cumulative share to a whole percent first, and 83.536840 rounds down to 80 there"],
@@ -257,7 +257,7 @@ x("Why does the engine refuse a Poisson call whose mean over the protection peri
 
 # 31
 x("Which subject does this course leave to the uncertainty course, and what does it take in its place?",
- "Distributions, correlation and Monte Carlo as a subject; this course applies the canonical sampler to lead-time risk",
+ "Distributions and Monte Carlo as a subject; this course applies the canonical sampler to lead-time risk",
  ["Safety stock under normal demand; this course takes a stated safety stock for each stocked item",
   "Failure rates from field data; this course samples each failure rate on a stated seed",
   "The Poisson table; this course reads Poisson probabilities from MIL-HDBK-338B alone"],
@@ -285,7 +285,7 @@ x("What does the engine's cap MAX_DECIMALS of 6 limit?",
  ["The decimals the engine prints for money inside each of its messages",
   "The decimals of any stated input that the engine will accept at all",
   "The decimals a sampled figure keeps before it is compared with another"],
- "MAX_DECIMALS caps safetyFactorRounding.decimals; seven is refused in the engine's words: safetyFactorRounding.decimals must be a whole number from 0 to 6; got 7. Money prints to the cent inside a message; stated inputs are taken as given; sampled figures are compared at 12 significant digits like every other figure.")
+ "MAX_DECIMALS caps safetyFactorRounding.decimals; seven is refused in the engine's words: safetyFactorRounding.decimals must be a whole number from 0 to 6; got 7. Money prints to the cent inside a message, stated inputs are taken as given, and the cap plays no part in the sampled figures.")
 
 # 35
 x("Which pair of terms does this course's vocabulary legislate for a sampled lead time?",
@@ -339,9 +339,9 @@ x("Why does the insurance call return the mean number of orders outstanding besi
 x("How does the probability of no shortage with 2 spares for the handbook lamps, 0.985612, tie the insurance model to MIL-HDBK-338B?",
  "It is the handbook's chance of two or fewer failures at the same mean of 0.500000, reproduced",
  ["It is the handbook's printed 0.986 carried into the engine as a stated input",
-  "It is the fill rate with 3 spares, which the handbook then calls the reliability of the whole mission",
+  "It is the fill rate with 2 spares, which the handbook then calls the reliability of the whole mission",
   "It is a Monte Carlo estimate on the handbook's own seed, which the engine then reproduces draw by draw"],
- "Restated as 0.365 failures a year over a lead time of 500 days and 365 days a year, the orders outstanding have the lamp mean of 0.500000, and P(X <= 2) = 0.985612 is the handbook's mission reliability, which it prints as 0.986. Nothing printed is an input; the handbook states no seed and nothing here is sampled.")
+ "Restated as 0.365 failures a year over a lead time of 500 days and 365 days a year, the orders outstanding have the lamp mean of 0.500000, and P(X <= 2) = 0.985612 is the handbook's mission reliability, which it prints as 0.986. The fill rate with 2 spares is the no-shortage probability with one spare fewer, a smaller figure. Nothing printed is an input; the handbook states no seed and nothing here is sampled.")
 
 # 42
 x("Which statement describes the engine's figures on the stated inputs of the course?",

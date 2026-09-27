@@ -50,12 +50,12 @@ x("A lead-time risk call on the mechanical seal leaves out the seed. What does t
  "The seed is a stated input with no default, and a call without one is refused by name; the keyed message is the engine's own words. No seed is supplied for the user, from 0 or from a clock; 1 to 200000 is the range of the draw count.")
 
 # 5
-x("What does the engine say to a lead-time risk call that asks for 0 draws?",
- "It is refused by name: a draw count runs from 1 to 200000, and 0 lies outside that",
- ["iterations must be a whole number from 0 to 200000; got 0 draws, as none were asked",
-  "a result with every sampled figure set at 0 and no stockout counted in any draw at all",
-  "a result on the 20000 draws that the Ekene case states"],
- "The draw count is a whole number from 1 to the cap of 200000, and 0 is refused in the engine's words: iterations must be a whole number from 1 to 200000; got 0. The range starts at 1, so a message allowing 0 is not the engine's; it returns no figures on a refused input and borrows no count from another case.")
+x("A planner asks for no sampling at all, an iteration count of 0. Which message or figure comes back?",
+ "iterations must be a whole number from 1 to 200000; got 0, since a run needs at least one draw",
+ ["iterations must be a whole number from 0 to 200000; got 0, since an empty run is read as no draws",
+  "a result with every sampled figure at 0 and no stockout counted in any cycle",
+  "a result on the 20000 draws that the Ekene case states for the mechanical seal"],
+ "The draw count is a whole number from 1 to the cap of 200000, and 0 is refused; the keyed message is the engine's own words. The range starts at 1, so a message allowing 0 is not the engine's; it returns no figures on a refused input and borrows no count from another case.")
 
 # 6
 x("On seed 20270301 and 20000 draws, what does the engine return as the P90 of the mechanical seal's lead time, and how is it read?",
@@ -107,11 +107,11 @@ x("A lead-time risk call states the seal's lead time with a minimum of 90, a mod
 
 # 12
 x("What does the engine return when the seal's demand a day has a minimum of -0.01?",
- "A refusal at the path demandPerDay.min, the term that carries the negative figure",
- ["demandPerDay.min must be a finite number above 0; got -0.01, as the stated minimum",
-  "a result with the negative minimum read as 0 seals a day, the least there can ever be",
+ "demandPerDay.min must be at or above 0; got -0.01, naming the term that carries the negative figure",
+ ["demandPerDay.min must be a finite number above 0; got -0.01, naming the triangle's lowest corner",
+  "a result with the negative minimum read as 0 seals a day, the least there can be",
   "a result with the negative draws read as seals returned to stock, which lowers the count"],
- "A negative demand is refused at the term that carries it, in the engine's words demandPerDay.min must be at or above 0; got -0.01. The shape message is for an input that is neither a number nor a triangle; the engine never clips a stated input to 0 and reads no returns.")
+ "A negative demand is refused at the term that carries it, demandPerDay.min, and the keyed message is the engine's own words. A demand of 0 a day is accepted, so a message asking for a figure above 0 is not the engine's; the engine clips no stated input to 0 and reads no returns.")
 
 # 13
 x("Why does the engine sample through the canonical lib/stats Monte Carlo, with no sampler of its own?",
@@ -122,7 +122,7 @@ x("Why does the engine sample through the canonical lib/stats Monte Carlo, with 
  "Using the platform's one seeded sampler means the Monte Carlo here behaves as it does everywhere else: stated seed and draws, the same draws, one convention for the P-labels. The engine picks no distribution for the user, a sampled figure stays an estimate and is never graded, and the seed is always a stated input.")
 
 # 14
-x("When the course replayed the mechanical seal's draws by hand from mulberry32 and triInvCDF, what did it find?",
+x("When the course replayed the mechanical seal's draws by hand from mulberry32 and triInvCDF on seed 20270301 with 20000 draws, what did it find?",
  "1172 of 20000 draws with a lead-time demand above the reorder point 3, the engine's own count",
  ["1172 of 20000 draws at or above the reorder point 3, which the engine then counts as met",
   "1000 of 20000 draws above the reorder point, the count a stockout probability of 0.05 needs",

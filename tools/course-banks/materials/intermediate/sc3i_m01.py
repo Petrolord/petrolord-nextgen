@@ -17,7 +17,7 @@ q(2, "The casing joint CSG-958 on the Ekene register states a demand of 240 a ye
  "Under all-units the band 2 EOQ of 78.590525 lies below its break, so the break quantity 120.000000 is the candidate, and at 349720.000000 it beats band 1's 77.000000 at 357689.090909. The order of 141.000000 at 365590.042553 is the incremental reading of the same schedule, and 76.112440 is the baseline every saving is measured from.")
 
 q(0, "The same casing schedule is stated with the discount type incremental, every other input unchanged. What quantity does the engine order, and at what total cost a year?",
- "141.000000 joints at 365590.042553 a year",
+ "141.000000 joints at 365590.042553 a year, band 2's EOQ rounded to the nearest joint",
  ["120.000000 joints at 349720.000000 a year, taking the break as all-units does",
   "106.000000 joints at 365856.981132 a year, the band 1 candidate",
   "141.213231 joints, the band 2 EOQ carried unrounded into the order"],
@@ -65,7 +65,7 @@ q(1, "Caplice, lecture 8 slides 13 to 15, work an incremental schedule priced 50
   "The break quantity 1000, where the band ends"],
  "Under an incremental schedule a band offers only its own EOQ, and only when that EOQ lies inside it. Band 1 runs from 500 to below 1000, and 1032.795559 lies above it, so band 1 gives no candidate. The slides print that EOQ as 1,033. An incremental band offers its own EOQ with A + Fi when that EOQ lies inside it, and no break quantity.")
 
-q(2, "On the lecture 8 incremental schedule the engine orders 1789.000000 at a total of 98826.043879 a year, and the slides print 98,825. Why does the print sit just below the engine's figure?",
+q(2, "On the incremental schedule of Caplice, lecture 8 slides 13 to 15, the engine orders 1789.000000 at a total of 98826.043879 a year, and the slides print 98,825. Why does the print sit just below the engine's figure?",
  "The slides round each cost line and add the rounded lines",
  ["The slides take the effective unit price as 44.19 before costing each line",
   "The engine adds a fixed cost 7500.000000 the slides leave out",
@@ -112,7 +112,7 @@ q(0, "The lecture 8 three-band schedule is read as all-units in place of increme
  ["1789.000000 at 98826.043879 a year, as under incremental",
   "500.000000 at 103062.500000",
   "400.000000 at 105000.000000"],
- "On the Caplice schedule read as all-units (golden input caplice-l8-schedule-all-units) the engine orders 1000.000000 at 86000.000000 a year. All-units gives the band 2 price to every unit of the lot, so the best order sits on the break. Incremental orders 1789.000000 at 98826.043879, and 500.000000 at 103062.500000 is the answer to the two-band schedule of slide 12.")
+ "On the schedule of lecture 8 slides 13 to 15 read as all-units, the engine orders 1000.000000 at 86000.000000 a year. All-units gives the band 2 price to every unit of the lot, so the best order sits on the break. Incremental orders 1789.000000 at 98826.043879, and 500.000000 at 103062.500000 is the answer to the two-band schedule of slide 12.")
 
 emit(Q, '/root/cat-wip-materials/banks/sc3i_m01.json', expect_n=15)
 finish()

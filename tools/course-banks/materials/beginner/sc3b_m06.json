@@ -121,7 +121,7 @@
   "explanation": "The engine's words are \"excessCoverMonths must be a finite number above 0; got 0\". A limit of 0 is refused by name. The engine switches no test off and restores no earlier value; it names the field it would not accept."
  },
  {
-  "prompt": "How many Ekene items fall in band slow, and what stock value and write-down does that band carry?",
+  "prompt": "What does the engine return for band slow on the Ekene register: how many items, what stock value and what write-down?",
   "options": [
    "3 items, a stock value of 126000.000000 and a write-down of 31500.000000.",
    "4 items, a stock value of 265700.000000 and half of it written down.",
@@ -154,7 +154,7 @@
   "explanation": "The basis reads \"the bands, write-down percentages and cover limit are the caller's stated policy; Caplice, MIT ESD.260J (2006) lecture 13 slide 13 (days of supply IOH / D to find dead stock)\". The engine holds no write-down schedule, the course reads no accounting standard, and a call without bands is refused by name."
  },
  {
-  "prompt": "One item in a slow-moving call has no months since its last issue in the box. What does the engine print?",
+  "prompt": "The first item in a slow-moving call has no months since its last issue in the box. What does the engine print?",
   "options": [
    "The item placed in band active, since an item with no record is taken to be in use.",
    "Band obsolete, since no record of an issue means the item has never moved off the shelf at all.",

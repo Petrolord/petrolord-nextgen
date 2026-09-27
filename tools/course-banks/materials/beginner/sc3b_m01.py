@@ -25,7 +25,7 @@ q(0, "Which four functions does the register calculator, the Associate tier's pa
  "The register calculator calls criticality, abcClassification, eoq and slowMoving: the four questions of this tier. The price schedule and the stock targets belong to the Professional tier's stock calculator. Every view of the register calculator runs in the course itself, and the Materials & Spares Planner gives the same figures on the same inputs.")
 
 q(3, "The course's table of sources gives each text a date it was read. What is that date?",
- "2026-09-27, the same for every text in the table.",
+ "2026-09-27, the same date for every text in the table, whatever its own edition.",
  ["February 1913, the issue date of the trade magazine that printed the square-root lot size.",
   "1 October 1998, the date the reliability handbook the course quotes was issued.",
   "Fall 2006, the term in which the MIT logistics lectures were taught and published."],

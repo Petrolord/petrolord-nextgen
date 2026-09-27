@@ -38,6 +38,10 @@ The schedule must also say how a band's price applies. Leave that out and the en
 
 > discountType must be 'all-units' (the band's price applies to the whole lot) or 'incremental' (each unit is priced by its own band)
 
+One call also takes at most 20 price bands. A schedule of twenty-one is refused whole, with no band dropped:
+
+> breaks has 21 entries; the cap is 20
+
 ## Exercise
 
 Open the register calculator, choose the view "The economic order quantity" and start from the blank case. Type annual demand 240, cost of an order 3500, unit cost 1450, holding rate 0.2, and the rounding rule to the nearest multiple with a multiple of 1. Read the EOQ, 76.112440, and the purchase cost a year, 348000.000000.

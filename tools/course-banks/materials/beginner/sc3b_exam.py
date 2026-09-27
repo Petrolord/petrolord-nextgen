@@ -34,8 +34,8 @@ q(3, "Two classes in a criticality policy are both labelled V, the first from 70
   "Every item from 0 to 70 labelled V, with a note beside the repeat."],
  "A class label may be used once only, and a repeat is refused on the field that repeats it. The engine merges nothing and renames nothing; the policy's author states the classes again.")
 
-q(0, "A criticality call lists two items that share the id X. What does the engine print?",
- "\"items[1].id repeats the id 'X'\"",
+q(0, "In a criticality call, the first two items share the id X. What does the engine print?",
+ "A refusal in the engine's words: \"items[1].id repeats the id 'X'\"",
  ["The classes, with the second X renamed so that both items appear in the result.",
   "Only the first X classed, the second dropped as a duplicate.",
   "One entry under X, with the two items' scores averaged."],
@@ -48,7 +48,7 @@ q(3, "A policy's criteria have the ids s and p, and its override list names safe
   "Every criterion taken as the override, to keep safety items safe."],
  "Each id in the override list must be one of the policy's own criteria, and the message lists them. The engine matches no id by its first letter and applies no override that was not stated.")
 
-q(3, "An item in a criticality call carries a score under the key q, while the policy's criteria are s and p. What comes back?",
+q(3, "The first item in a criticality call carries a score under the key q, while the policy's criteria are s and p. What comes back?",
  "A refusal: \"items[0].scores.q is not a criterion; the criteria are s, p\".",
  ["The class, with q ignored.",
   "The class, with q read as a third criterion of weight 0 in the weighted score.",
@@ -93,9 +93,9 @@ q(0, "Class C is the largest group on the Ekene register by count under at-or-be
 
 q(1, "The surface safety valve actuator SSV-ACT brings the cumulative share to 94.197214. What does that decide under at-or-below and the Ekene cut-offs?",
  "Class B: the share has passed 80 and has yet to pass 95, and SSV-ACT closes B.",
- ["It is within one point of 95, so it is class C.",
-  "Class A, since only the B cut-off is read at this rank.",
-  "Above 80, so every such share is C."],
+ ["Class C, since a share within one point of 95 is read as having reached it.",
+  "Class A, since only the B cut-off is read at this rank of the register.",
+  "Class C, since every share above 80 falls outside class A and so into C."],
  "SSV-ACT ranks 11th. Its cumulative share is above 80 and at or below 95, so it is B; the next item, LUBE-OIL, carries the share to 95.654870 and is C under at-or-below. The engine compares each share with both cut-offs at 12 significant digits.")
 
 q(0, "A policy states an A cut-off of 0 percent. What does the engine print?",
@@ -114,7 +114,7 @@ q(1, "How does the engine rank items for ABC, and at what precision does it comp
 
 # EOQ and rounding
 q(3, "With lots of 140.000000 tonnes, how often does the store reorder baryte, and how long does each lot last?",
- "2.142857 orders a year, a cycle of 0.466667 years.",
+ "2.142857 orders a year, a cycle of 0.466667 years, from D / Q and Q / D.",
  ["One order a year, a cycle of one year, since each lot is sized to the year.",
   "0.466667 orders a year, a cycle of 2.142857 years, each the other's inverse.",
   "3 orders a year, a cycle of four months, since lots are placed quarterly."],
@@ -174,7 +174,7 @@ q(2, "Why does a stated rounding rule cost baryte so little, whether up to 10 or
  ["The engine charges no holding cost on the part of a lot above the EOQ, so a larger lot is nearly free.",
   "The penalty is set against the purchase cost of 78000.000000, which dwarfs any change in the lot.",
   "The engine rounds every relevant cost to the cent before it compares them, which hides the difference."],
- "Near its minimum the relevant cost changes slowly with the lot size: 140 costs 0.017454 percent more a year and 150 costs 0.384604 percent more. The penalty is a percentage of the relevant cost at the EOQ, the purchase cost stays out of it, and the holding cost is charged on the whole lot. Money is rounded to the cent only inside a message.")
+ "Near its minimum the relevant cost changes slowly with the lot size: 140 costs 0.017454 percent more a year and 150 costs 0.384604 percent more. The penalty is a percentage of the relevant cost at the EOQ, the purchase cost stays out of it, and the holding cost is h Q / 2, charged on the units held. Money is rounded to the cent only inside a message.")
 
 q(2, "What does the Ekene register's note on the baryte case say the order cost of 1800 covers?",
  "The purchase order, the marine freight booking and receiving at the Ekene shore base.",
@@ -185,13 +185,13 @@ q(2, "What does the Ekene register's note on the baryte case say the order cost 
 
 # Slow-moving and obsolete
 q(0, "On the stated boundary items with the Ekene bands, AT12 has gone 12 months without an issue and BELOW12 has gone 11.99 months. What bands does the engine return?",
- "AT12 is slow and BELOW12 is active.",
+ "AT12 is slow and BELOW12 is active, since a band is reached at or above its minimum.",
  ["Both are slow, since 11.99 rounds to 12 at the engine's precision.",
   "Both are active, since a band starts only after its minimum is passed.",
   "AT12 is active and BELOW12 is slow, since the bands count down from 36."],
  "A band minimum is reached at or above it, the engine's stated choice: 12 months reaches slow and 11.99 months does not. Twelve significant digits separate 11.99 from 12 plainly, so no tie arises. Bands count up from active at 0 months.")
 
-q(0, "ONEUNIT reached 36 months without an issue and holds 26.000000 months of cover against a limit of 24. Band, write-down and excess?",
+q(0, "ONEUNIT holds 13 units and uses 0.5 a month. It has reached 36 months without an issue, and its 26.000000 months of cover sits against a limit of 24. Band, write-down and excess?",
  "Band obsolete, its whole stock value written down, and 1.000000 unit of excess.",
  ["Band very slow, half its value written down, since 36 is the top of that band.",
   "Band obsolete, written down in full, and no excess, since obsolete stock is not counted.",
@@ -205,7 +205,7 @@ q(0, "The surface safety valve actuator SSV-ACT holds 1 unit at 27500 and has go
   "0.000000, since its cover is inside the limit."],
  "The engine's reason reads \"SSV-ACT: 26 months since the last issue is at or above 24, band very slow (below 36), written down 50% of 27500 = 13750; cover 12.004802 months is at or below 24\". Slow runs from 12 to below 24, obsolete starts at 36, and cover decides excess, which leaves the write-down alone.")
 
-q(1, "SSV-ACT and GASKET-RJ are the Ekene items in band very slow. What do they carry between them?",
+q(1, "Band very slow holds just SSV-ACT and GASKET-RJ. What stock value and write-down does the engine print for it?",
  "32060.000000 held, with half of it, 16030.000000, written down.",
  ["4 items, 265700.000000 of stock.",
   "2 items, 32060.000000 of stock, all of it written down at the year end.",
@@ -227,7 +227,7 @@ q(3, "The pressure transmitter PT-XMTR holds 14 units and uses 0.8333 a month. W
  "Cover is on hand over monthly usage: 14 / 0.8333 = 16.800672 months, at or below 24, so there is no excess. Nine months since its last issue sets its band, active. The cover limit is the stated 24 months, and a band minimum has nothing to do with excess.")
 
 q(1, "The ESP motor ESP-MTR holds 1 unit and uses 0.1667 a month. What cover does the engine return?",
- "5.998800 months, inside the limit of 24.",
+ "5.998800 months, inside the limit of 24, from 1 divided by 0.1667.",
  ["6 months exactly, since 0.1667 is one sixth of a unit a month.",
   "7 months, the time since its last issue, which the engine reads as cover.",
   "0.1667 months, the usage itself, since it holds a single unit on hand."],
@@ -241,13 +241,13 @@ q(2, "A policy states its bands from 0, then 24, then 12 months. Which message d
  "Each band must start above the one before it, and the engine refuses the first band that fails, naming the minimum it had to exceed. The first-band message is for a first band that starts above 0, and the engine moves and merges nothing.")
 
 q(1, "A slow-moving call names two bands with the same label a. What does the engine print?",
- "\"bands[1].label repeats the label 'a'\"",
+ "Refused on the second band's field: \"bands[1].label repeats the label 'a'\"",
  ["The bands, with the second a renamed so that each label stays unique.",
   "The bands, with the two a bands merged into the first of them.",
-  "\"bands must be an array of at least 1 band { label, minMonths, writeDownPct }\""],
+  "A refusal in the engine's words: \"bands must be an array of at least 1 band { label, minMonths, writeDownPct }\""],
  "A band label may be used once only, and the repeat is refused on the second band's field. The engine renames and merges nothing. The message about an array of bands is for a call with no bands at all.")
 
-q(2, "An item in a slow-moving call has an on-hand figure of -1. What comes back?",
+q(2, "The first item in a slow-moving call has an on-hand figure of -1. What comes back?",
  "The figure is turned away on items[0].onHand, with the -1 echoed in the message.",
  ["The item's band, with its stock value of -1 times its unit cost added into the totals.",
   "A band with 0 read as on hand.",

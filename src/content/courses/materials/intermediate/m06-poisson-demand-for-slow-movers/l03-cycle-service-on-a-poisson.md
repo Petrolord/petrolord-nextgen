@@ -32,7 +32,9 @@ The mission is 500 hours, so the Poisson mean is 0.500000. The engine's cumulati
 
 ## Whole steps on a slow mover
 
-Each step up the table adds one whole unit. Stating 0.95 on the PSV kits buys an achieved 0.983436; stating 0.90 lands on level 4 at 0.947347, one kit fewer. On a slow mover, read the achieved figure beside the target.
+Each step up the table adds one whole unit. Stating 0.95 on the PSV kits buys an achieved 0.983436; stating 0.90 lands on level 4 at 0.947347, one kit fewer. A very slow mover can need no stock at all; on a mean of 0.05:
+
+> level 0: P(X <= 0) = 0.951229 is at or above 0.9 (Poisson mean 0.05)
 
 ## Exercise
 

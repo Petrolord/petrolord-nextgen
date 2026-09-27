@@ -54,7 +54,7 @@ q(3, "The engine builds the expected units short column by the loss recursion. O
  "The rule is L(0) = m, L(x + 1) = L(x) - (1 - F(x)): L(1) is 2.000000 less one less 0.135335, which is 1.135335. 0.270671 is the probability of exactly one kit, and 0.541341 is L(2). 0.406006 is the cumulative probability F(1).")
 
 q(0, "Caplice, lecture 13 slide 12, prints the expected units short beyond level 4 as 0.009 on a Poisson mean of 0.8. How does the course treat that figure?",
- "As a slip: the recursion the slide states gives 0.001619",
+ "As a slip: the recursion the slide itself states gives 0.001619 at level 4",
  ["As the rule's figure, which the engine prints as 0.001619 only because it rounds to six decimals",
   "As a correct figure, since 0.009 is 0.010699 at the precision the slide uses",
   "As a figure the engine cannot check, since level 4 lies beyond the slide's fill-rate level of 2"],
@@ -65,10 +65,10 @@ q(2, "The lecture 13 slow mover: 0.8 a week, weekly reviews, zero lead time, fil
  ["Level 1, with 0.249329 units short against an allowance of 0.08",
   "Level 3, with 0.010699 units short, the first level under 0.08 by a clear margin",
   "Level 4, the first level whose cumulative probability passes 0.99"],
- "The reason reads: level 2: expected units short 0.058121 is at or below 0.8 x (1 - 0.9) = 0.08; at 1 it is 0.249329 (Poisson mean 0.8). The slide prints the same level of 2. The engine takes the smallest level that meets the target, and level 1 misses it.")
+ "The reason reads: level 2: expected units short 0.058121 is at or below 0.8 x (1 - 0.9) = 0.08; at 1 it is 0.249329 (Poisson mean 0.8). Lecture 13 slides 11 and 12 print the same level of 2. The engine takes the smallest level that meets the target, and level 1 misses it.")
 
-q(1, "A golden input sets a cycle service target on a Poisson mean of 1 equal, to its last digit, to the cumulative probability at level 1 itself. What does the engine return?",
- "Level 1, the target met at or above it",
+q(1, "A stated case sets a cycle service target on a Poisson mean of 1 equal, to its last digit, to the cumulative probability at level 1 itself. What does the engine return?",
+ "Level 1, the target met at or above it, the engine's stated reading",
  ["Level 2, as a target equal to the cumulative probability is met only strictly above",
   "Level 0, whose cumulative probability 0.367879 is the nearest",
   "A refusal, since a target equal to a table figure is ambiguous"],
@@ -110,7 +110,7 @@ q(1, "MIL-HDBK-338B (1 October 1998), example 5.3.8.1, asks the chance of two la
  "A failure rate of 0.001 an hour over 500 hours is a Poisson mean of 0.500000, and the chance of two failures or fewer is 0.985612 (engine); the handbook prints 0.986. The engine prints its own figure at six decimals beside the print. 0.676676 is the level 2 cumulative of the PSV kits at a mean of 2.000000, and 0.952577 the level 2 cumulative of the lecture 13 table at a mean of 0.8.")
 
 q(2, "A Poisson call on the pressure safety valve repair kits carries a key lambda_ for the demand rate. What comes back?",
- "A refusal naming lambda_, with the accepted keys listed: demandRate, leadTime, reviewPeriod, serviceMeasure, serviceLevel, orderQuantity",
+ "A refusal naming lambda_ and listing the accepted keys at the top level",
  ["A level on a mean of 2.000000, with lambda_ read as the demand rate",
   "A level computed from the other inputs, with lambda_ dropped silently",
   "demandRate must be a finite number above 0; got undefined"],

@@ -69,8 +69,8 @@
   "prompt": "Ten units a period with no spread and three periods of lead time with no spread: a fill rate of 0.95 on an order of 10 is asked of this certain demand. What is the outcome?",
   "options": [
    "A refusal: demand over the protection period is certain, so a fill rate sets no safety factor",
-   "A reorder point of 30.000000 with a safety factor of 1.644854",
-   "A safety factor of 0.000000, the smallest k that meets any target",
+   "A reorder point of 30.000000 with a safety factor of 1.644854, as the cycle service level gives",
+   "A safety factor of 0.000000, the smallest k that meets any fill-rate target on certain demand",
    "A safety stock of 0.000000 and a fill rate of 1"
   ],
   "answer": 0,
@@ -99,12 +99,12 @@
   "explanation": "At the engine's safety stock the achieved fill rate is 0.950000 and the expected units short a cycle are 11.400000: the rule meets its target exactly. Raising the stock to the printed 348 would overshoot it. 0.986135 is the choke bean set's achieved fill rate at 0.98, and 0.99 is the target of a different row of the column."
  },
  {
-  "prompt": "Slide 24 prints 513 for a fill rate of 0.99. What figure does the bisection give?",
+  "prompt": "Caplice, lecture 11 slide 24, prints 513 for a fill rate of 0.99. What figure does the bisection give?",
   "options": [
    "513, as printed, with k read from a table to two decimals",
    "600.404410, with the cycle service k 2.326348",
    "601.000000, as printed for 0.99 on the slide",
-   "512.349286, with k 1.985166"
+   "512.349286, with k 1.985166 from the bisection on G(k)"
   ],
   "answer": 3,
   "explanation": "Solving for k by bisection gives 1.985166 and a safety stock of 512.349286, which agrees with the printed 513 to within a unit, as three rows of the column do. 600.404410 and 601 are the cycle service column at 0.99, a different measure on the same slide."
@@ -137,10 +137,10 @@
    "The fill rate of 0.98, since 0.98 is the higher of the two stated levels",
    "Neither, since both are the same kind of service target",
    "The fill rate, since it counts units short against the order",
-   "The cycle service level of 0.95, since it counts every short cycle"
+   "The cycle service level of 0.95, whose k of 1.644854 is the larger"
   ],
   "answer": 3,
-  "explanation": "A fill rate counts the units short against the order quantity each cycle brings, and a cycle service level counts the cycles with any shortage at all; on this item the cycle service target gives the larger k, 1.644854, and the larger reorder point, 13.316294 against 11.442483. Comparing the two stated levels as one scale is the mistake the vocabulary rule prevents."
+  "explanation": "The engine computes k 1.644854 for the cycle service level of 0.95 and k 1.026327 for the fill rate of 0.98 on the same sigma, 3.029476, so the cycle service target asks for the larger safety stock: a reorder point of 13.316294 against 11.442483. Comparing the two stated levels as one scale is the mistake the vocabulary rule prevents."
  },
  {
   "prompt": "What safety stock and reorder point go with k 1.026327 on the choke beans?",
@@ -154,7 +154,7 @@
   "explanation": "The reason reads: safety stock 3.109233 over a demand of 8.33325 with sigma 3.029476 gives the reorder point s 11.442483, held as 12. The reorder point adds the safety stock to the demand over the protection period, so it is never equal to the safety stock here. 12.000000 is the held level."
  },
  {
-  "prompt": "How close does the engine come to slide 24 at the lowest printed fill rate, 0.80?",
+  "prompt": "How close does the engine come to Caplice, lecture 11 slide 24, at the lowest printed fill rate, 0.80?",
   "options": [
    "A safety stock of 217.213043, against the printed 217, from the cycle service column",
    "A safety stock of 250.102945 against the printed 252",

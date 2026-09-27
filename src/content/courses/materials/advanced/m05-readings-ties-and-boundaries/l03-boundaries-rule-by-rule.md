@@ -35,7 +35,7 @@ The Expert rules close the table. A lead-time demand equal to the reorder point 
 
 ## Why the edges differ
 
-An edge is inclusive where the stated figure is a target to meet: a minimum score, a band's starting month, a cycle service target, a stock that covers the demand. It is strict where the stated figure is a limit to pass: cover above a limit, a lead-time demand above the reorder point. The words of each rule, at or above, or above, tell a learner which edge applies, and the engine prints those words in its reasons.
+No single principle sorts the edges. A class minimum, a band's starting month and a cycle service target are met at or above. An ABC share exactly on its cut-off under at-or-below stays in the higher class, and a Poisson fill-rate level is met when its expected units short are at or below what the target allows. Excess cover and a stockout count only above the line. The engine prints those words, at or above, at or below, or above, in its reasons.
 
 ## The caps are boundaries too
 
@@ -47,7 +47,7 @@ Above that mean, the normal safety stock of the Professional tier serves.
 
 ## How to use the table
 
-When a figure sits on an edge, find its rule here and read which side the engine puts it on. Each edge is the engine's stated choice, recorded where it acts, and none moves a graded figure. A policy that wants another edge states it and checks the result by hand.
+When a figure sits on an edge, find its rule here and read its side. Each edge is the engine's stated choice, recorded where it acts, and none moves a graded figure. A policy that wants another edge states it and checks the result by hand.
 
 ## Exercise
 

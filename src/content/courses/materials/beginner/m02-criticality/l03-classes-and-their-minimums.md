@@ -42,6 +42,10 @@ And a policy with a single class is no classification at all:
 
 A call may carry at most 10 classes. A label may be used once only.
 
+Each item id may be used once only as well. When the first two items share the id X, the repeat is refused on the second item's field:
+
+> items[1].id repeats the id 'X'
+
 ## Exercise
 
 Open the register calculator in "Criticality classes". Start from "A score exactly on a class minimum" and then "A score just below a class minimum", and copy each reason. Now start from the Ekene register and raise the class 2 minimum score control from 44 to 45. Before you look, predict GASKET-RJ's new class and the new count in each class; then check both against the panel. Restore the minimum to 44 and set the class 2 minimum to 70, and copy the refusal it gives.

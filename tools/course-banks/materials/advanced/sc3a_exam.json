@@ -69,9 +69,9 @@
   "prompt": "A downtime cost of 100 a day on the ESP motor moves the cheapest stock from four spares to none. What made the difference?",
   "options": [
    "Only the price of waiting moved: the first spare now saves 20455.05 of downtime against 37000 of holding",
-   "The mean orders outstanding fell below one half, so no spare is likely to be needed",
-   "A higher holding rate came with the lower downtime cost, which the engine links to it",
-   "The search limit fell to 0, since cheap downtime shortens the search for spares"
+   "The mean orders outstanding fell below one half, so no spare is likely to be needed in any lead time",
+   "A higher holding rate came with the lower downtime cost, which the engine links to it by a stated rule",
+   "The search limit fell to 0, since cheap downtime shortens the search for spares down to an empty stock"
   ],
   "answer": 0,
   "explanation": "At 100 a day the failure rate, lead time and mean are unchanged, and only the downtime price moved; the engine's reason shows the first spare adding 37000 of holding and saving 20455.05 of downtime, so none is cheapest. The engine links no input to another, and the stated search limit of 6 is unchanged."
@@ -82,7 +82,7 @@
    "A holding rate of 0 is refused, and the flag marks the refusal on the search limit",
    "Three spares is the first row where the fill rate passes 0.99, and the flag marks that target",
    "The downtime saved by the third spare ties the holding it adds, and ties are flagged",
-   "Every spare is then free to hold and saves some downtime, so the largest number searched wins and sits on the limit"
+   "Every spare is then free to hold and saves some downtime, so the largest number searched wins"
   ],
   "answer": 3,
   "explanation": "With free holding each extra spare lowers the total, so the cheapest found is always the last row, and the engine says: 3 spares: holding 0 a year against expected downtime 77347.41, total 77347.41, the lowest for 0 to 3; the search stopped at maxSpares 3, so a larger stock may cost less. A rate of 0 is accepted; the engine aims at no fill rate; no tie arises."
@@ -200,13 +200,13 @@
  {
   "prompt": "The seal's reorder point for a cycle service level of 0.95 is 3.062282 on seed 20270301 with 20000 draws, and 3.113782 on seed 20270302 with 2000 draws. How should a planner read the pair?",
   "options": [
-   "As two estimates of one quantity, each quoted with its seed and draws, the larger run the steadier",
+   "As two estimates of one quantity, each quoted with its seed and draws and neither graded",
    "As a contradiction, since a seeded sampler must return one reorder point on every run",
    "As proof that the second seed is faulty, since its figure sits further from the stated 3",
    "As two exact reorder points, of which the policy should keep the higher for safety"
   ],
   "answer": 0,
-  "explanation": "Each figure is the sorted draw at ceil(0.95 x n) - 1 of its own run, and each run is an estimate that moves with the seed and the draw count; more draws average out more chance. A seed reproduces its own run, and no seed is faulty; neither figure is exact or graded."
+  "explanation": "Each figure is the sorted draw at ceil(0.95 x n) - 1 of its own run, and the course teaches that a sampled figure is an estimate that moves with its seed and draw count. A seed reproduces its own run, and no seed is faulty; neither figure is exact or graded."
  },
  {
   "prompt": "The inventory engine computes the standard normal cumulative probability without a normal table of its own. Through what?",
@@ -235,7 +235,7 @@
   "options": [
    "Its share is exactly 80 percent, which at-or-below places in A and include-crossing places in B",
    "The two rules rank the items in a different order, so CEM-G sits seventh under one and fifth under the other",
-   "It is the item that crosses 80 percent: at-or-below reads the share with it, 83.536840, and include-crossing reads the share before it, 78.753907",
+   "It crosses 80 percent: at-or-below reads its share with it, 83.536840, and include-crossing the share before, 78.753907",
    "Include-crossing rounds each cumulative share to a whole percent first, and 83.536840 rounds down to 80 there"
   ],
   "answer": 2,
@@ -334,7 +334,7 @@
   "options": [
    "Safety stock under normal demand; this course takes a stated safety stock for each stocked item",
    "Failure rates from field data; this course samples each failure rate on a stated seed",
-   "Distributions, correlation and Monte Carlo as a subject; this course applies the canonical sampler to lead-time risk",
+   "Distributions and Monte Carlo as a subject; this course applies the canonical sampler to lead-time risk",
    "The Poisson table; this course reads Poisson probabilities from MIL-HDBK-338B alone"
   ],
   "answer": 2,
@@ -371,7 +371,7 @@
    "The decimals to which a safety factor may be read from a table"
   ],
   "answer": 3,
-  "explanation": "MAX_DECIMALS caps safetyFactorRounding.decimals; seven is refused in the engine's words: safetyFactorRounding.decimals must be a whole number from 0 to 6; got 7. Money prints to the cent inside a message; stated inputs are taken as given; sampled figures are compared at 12 significant digits like every other figure."
+  "explanation": "MAX_DECIMALS caps safetyFactorRounding.decimals; seven is refused in the engine's words: safetyFactorRounding.decimals must be a whole number from 0 to 6; got 7. Money prints to the cent inside a message, stated inputs are taken as given, and the cap plays no part in the sampled figures."
  },
  {
   "prompt": "Which pair of terms does this course's vocabulary legislate for a sampled lead time?",
@@ -444,11 +444,11 @@
   "options": [
    "It is the handbook's printed 0.986 carried into the engine as a stated input",
    "It is the handbook's chance of two or fewer failures at the same mean of 0.500000, reproduced",
-   "It is the fill rate with 3 spares, which the handbook then calls the reliability of the whole mission",
+   "It is the fill rate with 2 spares, which the handbook then calls the reliability of the whole mission",
    "It is a Monte Carlo estimate on the handbook's own seed, which the engine then reproduces draw by draw"
   ],
   "answer": 1,
-  "explanation": "Restated as 0.365 failures a year over a lead time of 500 days and 365 days a year, the orders outstanding have the lamp mean of 0.500000, and P(X <= 2) = 0.985612 is the handbook's mission reliability, which it prints as 0.986. Nothing printed is an input; the handbook states no seed and nothing here is sampled."
+  "explanation": "Restated as 0.365 failures a year over a lead time of 500 days and 365 days a year, the orders outstanding have the lamp mean of 0.500000, and P(X <= 2) = 0.985612 is the handbook's mission reliability, which it prints as 0.986. The fill rate with 2 spares is the no-shortage probability with one spare fewer, a smaller figure. Nothing printed is an input; the handbook states no seed and nothing here is sampled."
  },
  {
   "prompt": "Which statement describes the engine's figures on the stated inputs of the course?",

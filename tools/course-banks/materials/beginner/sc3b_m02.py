@@ -49,14 +49,14 @@ q(0, "Three criteria weighted 33.3, 33.3 and 33.4 each score 7 out of 10, and th
  ["E, since the stored sum is below 70 and the engine compares the stored numbers exactly as held.",
   "The call is refused, since weights of 33.3, 33.3 and 33.4 do not add to exactly 100 when stored.",
   "V, since the engine rounds every weighted score to a whole number before it compares it."],
- "The engine's reason reads \"T: weighted score 70 is at or above 70, the minimum for class V\". Comparing at 12 significant digits is its stated tie convention; exact comparison of the stored doubles is the alternative, and the course grades nothing that turns on it. The weights are accepted because they may miss 100 by a tiny tolerance, and no weighted score is rounded to a whole number.")
+ "The engine's reason reads \"T: weighted score 70 is at or above 70, the minimum for class V\". Comparing at 12 significant digits is its stated tie convention; exact comparison of the stored doubles is the alternative, and the course grades nothing that turns on it. The weights add to 100, so they are accepted; only the weighted score falls a hair short. No weighted score is rounded to a whole number.")
 
-q(3, "How many Ekene items does the stated criticality policy place in each class?",
- "6 in V, 5 in E and 7 in D.",
- ["5 in V, 6 in E and 7 in D, with PSV-KIT counted in E.",
-  "4 in V, 6 in E and 8 in D, with the two items on a minimum dropped a class each.",
+q(3, "What counts does the engine return for each class under the stated criticality policy on the Ekene register?",
+ "6 in V, 5 in E and 7 in D, with PSV-KIT in V by its override.",
+ ["5 in V, 6 in E and 7 in D, with PSV-KIT counted in E by its score.",
+  "6 in V, 7 in E and 5 in D, with CSG-958 and BARYTE lifted into E.",
   "6 in V, 6 in E and 6 in D, since the minimums are set to split the register evenly."],
- "The engine returns V 6, E 5, D 7. Counting PSV-KIT in E would ignore the safety override. Dropping MECH-SEAL and GASKET-RJ a class would apply a minimum met only strictly above it, which is the alternative the engine names. The minimums are the stated policy and split the register however its scores fall.")
+ "The engine returns V 6, E 5, D 7. Counting PSV-KIT in E would ignore the safety override. CSG-958 scores 42.000000 and BARYTE 30.000000, both below the E minimum of 44, so both stay in D. The minimums are the stated policy and split the register however its scores fall.")
 
 q(2, "A stated case scores out of 10 with the override on criterion s. Item X scores 9 on s, one below the maximum. What does the engine return for X?",
  "The class its weighted score gives, E at 45, since the override fires at the maximum only.",

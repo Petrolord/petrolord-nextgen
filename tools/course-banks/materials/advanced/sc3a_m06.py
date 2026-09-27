@@ -56,10 +56,10 @@ x("An insurance spares call on the ESP motor carries an extra key, holdingCost. 
 
 # 6
 x("The baryte EOQ case is sent with its rounding rule removed and an unknown key, roundTo, added. Which refusal comes back first?",
- "The refusal of roundTo as an unknown key, since accepted keys are checked before any input is read",
- ["rounding must be a stated rounding rule { rule: 'none' } or { rule: 'up' | 'down' | 'nearest', multiple }, since the rule is read first",
-  "both refusals, joined in one message that names roundTo first and rounding second, in the order the engine found them",
-  "a result at the EOQ of 137.408584, with roundTo read as a rounding rule of none, since no multiple is given beside it in the call"],
+ "the refusal of roundTo as an unknown key, since the accepted keys are checked before any input is read",
+ ["the refusal of the missing rounding rule, since each function reads its stated rules before its other keys",
+  "both refusals, joined in one message that names roundTo first and rounding second",
+  "a result at the EOQ of 137.408584, with roundTo read as a rounding rule of none"],
  "Every function checks its accepted keys before it reads an input, so the unknown key is refused first, in the engine's words roundTo is not an accepted key; the accepted keys at the top level are annualDemand, orderCost, holdingCostPerUnitYear, unitCost, holdingRate, rounding. The missing rounding rule would be refused next, but a call stops at its first refusal; the engine joins no messages, and an unknown key is read as no rule.")
 
 # 7
@@ -71,12 +71,12 @@ x("An ABC call carries 5001 items. What does the engine say, and what happens at
  "MAX_ITEMS is 5000 for one criticality, ABC or slow-moving call; 5001 is refused by name with the cap in the message, and 5000 is accepted. The engine drops no item and truncates no list; the cap applies to all three of those functions.")
 
 # 8
-x("An insurance call states a lead time of 365 days over 365 days a year, with a failure rate high enough that the mean orders outstanding would pass 500. What does the engine return?",
+x("An insurance call puts seven hundred failures a year on the motor, with a replacement that takes a whole year (365 days, in a year of 365 days), pushing the mean orders outstanding past 500. What does the engine return?",
  "leadTimeDays must be at most 260.714285 (rounded down at the sixth decimal so that it is accepted) so that the mean number of orders outstanding is at most 500; got 365",
- ["leadTimeDays must be at most 365 so that the mean number of orders outstanding is at most 500; got 365, the whole year stated",
-  "maxSpares must be a whole number from 0 to 1000; got 6, since a mean above 500 orders outstanding needs a far larger search limit",
-  "a result with 6 spares, flagged at the search limit, since a mean above 500 orders outstanding lies far beyond the stated limit of 6"],
- "The mean orders outstanding may not pass 500, and the engine refuses the lead time that pushes it over, printing the largest accepted value rounded toward the accepted side; the keyed message is its own words. It prints the limit to six decimals rounded down, refuses before any search, and accepts the stated maxSpares of 6.")
+ ["leadTimeDays must be at most 365 so that the mean number of orders outstanding is at most 500; got 365, the whole year stated as the lead time",
+  "maxSpares must be a whole number from 0 to 1000; got 6, since a mean above 500 orders outstanding needs a far larger search limit than 6",
+  "a result with 6 spares at the search limit, flagged so that a larger stock may cost less, since a mean above 500 lies far beyond the limit of 6"],
+ "The mean orders outstanding may not pass 500, and the engine refuses the lead time that pushes it over, printing the largest accepted value rounded toward the accepted side; the keyed message is its own words. It names the lead time and leaves the stated failure rate as it is, prints the limit to six decimals rounded down, refuses before any search, and accepts the stated maxSpares of 6.")
 
 # 9
 x("Which figures does the engine hold of its own, with no input stating them?",

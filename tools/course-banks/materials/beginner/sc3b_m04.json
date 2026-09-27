@@ -36,7 +36,7 @@
   "prompt": "On the baryte case, what is the holding cost a year at the quantity ordered of 140 tonnes?",
   "options": [
    "Twice 4004.000000, with the whole lot of 140 held all year long.",
-   "4004.000000, from 57.2 x 140 / 2.",
+   "4004.000000, from 57.2 x 140 / 2, with half a lot held on average.",
    "3857.142857, the ordering cost a year at the same quantity of 140.",
    "57.200000, the cost of holding one tonne for a year."
   ],
@@ -80,7 +80,7 @@
   "prompt": "Harris (1913) prints: \"it is of value to know that this consumption must increase four fold to warrant doubling the manufacturing quantities.\" What does the engine return for baryte with the demand raised from 300 to 1200 and the rule none?",
   "options": [
    "An EOQ four times 137.408584, since the EOQ grows in step with demand.",
-   "An EOQ of 274.817167, twice 137.408584.",
+   "An EOQ of 274.817167, twice 137.408584, as the root of four is two.",
    "An EOQ of 137.408584 again, since the demand does not enter the EOQ at all.",
    "A refusal, since a demand above 1000 tonnes calls for a different rule."
   ],

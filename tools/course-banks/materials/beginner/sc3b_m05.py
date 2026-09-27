@@ -33,7 +33,7 @@ q(3, "Rounding baryte up to a multiple of 50 orders 150.000000 tonnes, 12.591416
   "A refusal, since a multiple of 50 is more than a third of the EOQ and the order would overshoot it."],
  "The engine's reason reads \"EOQ = sqrt(2 x 1800 x 300 / 57.2) = 137.408584; ordered as 150 (up to a multiple of 50), a relevant cost of 7890 a year against 7859.77 at the EOQ\", a penalty of 0.384604 percent. An order 12.591416 units above the EOQ costs well under half a percent more a year. The multiple of 10 gives 0.017454. No multiple is refused for its size; only a rounding that orders nothing is.")
 
-q(1, "Which rule on the baryte case costs least above the EOQ itself, and at what penalty?",
+q(1, "Of these four rules, which costs least above the EOQ on the baryte case, and at what penalty?",
  "The nearest multiple of 1, which orders 137.000000 at a penalty of 0.000443 percent.",
  ["The rule up to a multiple of 10, which orders 140.000000 at 0.017454 percent, the Ekene policy.",
   "Down to a multiple of 10, which orders 130.000000 at 0.153633 percent.",
@@ -52,7 +52,7 @@ q(2, "Halfway between two multiples: an EOQ of exactly 50.000000 is rounded to t
  ["0, since a quantity exactly halfway rounds down to the lower multiple under the rule nearest.",
   "50.000000, since an EOQ with no nearer multiple is ordered as it stands, unrounded.",
   "A refusal, since an EOQ exactly halfway between two multiples leaves the rule nearest with no way to decide."],
- "The engine's reason orders 100 and names the rule as the nearest multiple of 100 with the words halves upward in brackets. Halves upward is the engine's stated reading; halves downward is the alternative, and on this case it would order nothing. No graded figure in the course depends on which is taken.")
+ "The engine's reason orders 100 and names the rule as the nearest multiple of 100 with the words halves upward in brackets. Halves upward is the engine's stated reading; halves downward is the alternative; under it the rounding gives 0, which the engine refuses. No graded figure in the course depends on which is taken.")
 
 q(3, "An EOQ that is already a whole multiple, 20.000000, meets the rule up to a multiple of 4. What is ordered?",
  "20.000000, since up takes the next multiple at or above the EOQ and 20 already is one.",
@@ -62,7 +62,7 @@ q(3, "An EOQ that is already a whole multiple, 20.000000, meets the rule up to a
  "Up takes the next multiple at or above the EOQ, so an EOQ already on a multiple stays where it is: 20.000000. The engine reads the quotient 20 / 4 at 12 significant digits, finds it whole, and multiplies back. Nothing is refused here, and a rule up with no rounding to do is a result.")
 
 q(1, "Under the rule nearest multiple of 10, what does an EOQ of 15.811388 become?",
- "20.000000, since 15.811388 is nearer 20 than 10.",
+ "20.000000, since 15.811388 lies past the midpoint of 10 and 20, so nearer 20.",
  ["10.000000, since the rule nearest takes the multiple at or below any EOQ that is not a whole multiple.",
   "15.811388, since the rule nearest leaves an EOQ unrounded when both multiples are within 10 of it.",
   "16, the closest whole unit, since the rule nearest rounds to a unit before it applies the multiple."],
@@ -71,7 +71,7 @@ q(1, "Under the rule nearest multiple of 10, what does an EOQ of 15.811388 becom
 q(2, "On a stated case whose EOQ is 400, the rounding rule and multiple would order a quantity of 0. What does the engine print?",
  "\"rounding gives an order quantity of 0 from the EOQ 400; state a smaller multiple or another rule\"",
  ["An order of 0.000000 with a relevant cost that grows without limit, since no order is ever placed.",
-  "An order of 100.000000, the smallest multiple above 0, since a store must order something.",
+  "An order of the smallest multiple above 0, since a store must order something.",
   "\"rounding.multiple must be a finite number above 0; got 0\", naming the multiple."],
  "A rounding that orders nothing is refused by name before any cost is computed, and the message says what to do: pick a multiple the EOQ can reach, or a rule that rounds up. The engine substitutes no multiple of its own. The multiple itself is above 0, so the refusal names rounding and leaves rounding.multiple alone.")
 

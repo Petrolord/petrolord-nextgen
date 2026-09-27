@@ -33,7 +33,7 @@
   "explanation": "The engine's reason reads \"EOQ = sqrt(2 x 1800 x 300 / 57.2) = 137.408584; ordered as 150 (up to a multiple of 50), a relevant cost of 7890 a year against 7859.77 at the EOQ\", a penalty of 0.384604 percent. An order 12.591416 units above the EOQ costs well under half a percent more a year. The multiple of 10 gives 0.017454. No multiple is refused for its size; only a rounding that orders nothing is."
  },
  {
-  "prompt": "Which rule on the baryte case costs least above the EOQ itself, and at what penalty?",
+  "prompt": "Of these four rules, which costs least above the EOQ on the baryte case, and at what penalty?",
   "options": [
    "The rule up to a multiple of 10, which orders 140.000000 at 0.017454 percent, the Ekene policy.",
    "The nearest multiple of 1, which orders 137.000000 at a penalty of 0.000443 percent.",
@@ -63,7 +63,7 @@
    "A refusal, since an EOQ exactly halfway between two multiples leaves the rule nearest with no way to decide."
   ],
   "answer": 2,
-  "explanation": "The engine's reason orders 100 and names the rule as the nearest multiple of 100 with the words halves upward in brackets. Halves upward is the engine's stated reading; halves downward is the alternative, and on this case it would order nothing. No graded figure in the course depends on which is taken."
+  "explanation": "The engine's reason orders 100 and names the rule as the nearest multiple of 100 with the words halves upward in brackets. Halves upward is the engine's stated reading; halves downward is the alternative; under it the rounding gives 0, which the engine refuses. No graded figure in the course depends on which is taken."
  },
  {
   "prompt": "An EOQ that is already a whole multiple, 20.000000, meets the rule up to a multiple of 4. What is ordered?",
@@ -80,7 +80,7 @@
   "prompt": "Under the rule nearest multiple of 10, what does an EOQ of 15.811388 become?",
   "options": [
    "10.000000, since the rule nearest takes the multiple at or below any EOQ that is not a whole multiple.",
-   "20.000000, since 15.811388 is nearer 20 than 10.",
+   "20.000000, since 15.811388 lies past the midpoint of 10 and 20, so nearer 20.",
    "15.811388, since the rule nearest leaves an EOQ unrounded when both multiples are within 10 of it.",
    "16, the closest whole unit, since the rule nearest rounds to a unit before it applies the multiple."
   ],
@@ -91,7 +91,7 @@
   "prompt": "On a stated case whose EOQ is 400, the rounding rule and multiple would order a quantity of 0. What does the engine print?",
   "options": [
    "An order of 0.000000 with a relevant cost that grows without limit, since no order is ever placed.",
-   "An order of 100.000000, the smallest multiple above 0, since a store must order something.",
+   "An order of the smallest multiple above 0, since a store must order something.",
    "\"rounding gives an order quantity of 0 from the EOQ 400; state a smaller multiple or another rule\"",
    "\"rounding.multiple must be a finite number above 0; got 0\", naming the multiple."
   ],

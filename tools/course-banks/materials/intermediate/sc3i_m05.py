@@ -24,7 +24,7 @@ q(0, "Monthly counts lengthen the choke bean protection period. What standard de
  "Over 3.500000 months the demand term of the rule grows with P while the lead-time term stays, so sigma rises from 3.029476 to 3.426036. 2.529822 is the demand part of sigma over 2.5 months alone, and 5.635328 is the safety stock at the review period of 1.")
 
 q(1, "Reviewed monthly, the choke bean set gets an order-up-to level S. What is S, and what is it held as?",
- "17.301878, held as 18.000000",
+ "17.301878, held as 18.000000 by the rule up",
  ["13.316294, held as 14.000000, the reorder point",
   "11.666550, the demand over 3.500000 months",
   "17.301878, held as it stands with no rounding"],
@@ -58,7 +58,7 @@ q(3, "Slides 5 and 6 of lecture 12 print a safety factor of 0.58. What does the 
   "0.173279 exact, the loss target"],
  "The reason reads: so k = 0.583373, read as 0.58. The slide prints 0.58, which the stated table reading reproduces. 0.173279 is the target on G that k must meet, and 1.314197 is the exact factor of the lecture 11 case at a fill rate of 0.95.")
 
-q(1, "What order-up-to level does the engine return on the lecture 12 case, and what does the slide print?",
+q(1, "What order-up-to level does the engine return on the case of Caplice, lecture 12 slides 5 and 6, and what does the slide print?",
  "2834.720422, held as 2835.000000 against the printed 2835",
  ["2835.000000 exact, which the slide prints unrounded",
   "2500.000000, the mean demand over the protection period",
@@ -79,7 +79,7 @@ q(2, "Weekly lecture 11 data, a requested cycle service level of 0.4, and a stat
   "k of 1.644854, as at a level of 0.95"],
  "The reason reads: a cycle service level of 0.4 gives k = Phi^-1(0.4) = -0.253347; below the stated minimum 0, so k = 0; safety stock 0 over a demand of 500 with sigma 258.088834 gives the reorder point s 500. The negative safety stock is what the same call returns with no floor. A level of 0.4 is a valid probability and is not refused.")
 
-q(3, "Same 0.4 request, but the floor is typed as null and no rounding is stated. What comes back now?",
+q(3, "Same 0.4 request, but the floor is typed as null and the rounding rule is none. What comes back now?",
  "A safety stock of -65.386058 and a reorder point of 434.613942",
  ["A safety stock of 0.000000 and a reorder point of 500.000000",
   "A refusal: minimumSafetyFactor must be a stated number or null for no floor; got null",
@@ -93,7 +93,7 @@ q(1, "A call on CHK-BEAN leaves minimumSafetyFactor out altogether. What does th
   "safetyFactorRounding must be { rule: 'none' } or { rule: 'nearest', decimals } (a table read to that many decimals)"],
  "The floor is a stated input with no default: a number, or null for no floor. Leaving it out is refused by name even where the floor would not act, as at 0.95, where k is 1.644854. The safetyFactorRounding message answers a missing table reading.")
 
-q(0, "Demand of 10 each period with zero spread meets a lead time of 3 periods with zero spread. At a cycle service target of 0.95 and no rounding, which figures result?",
+q(0, "Demand of 10 each period with zero spread meets a lead time of 3 periods with zero spread. At a cycle service target of 0.95 and the rounding rule none, which figures result?",
  "Sigma 0.000000, safety stock 0.000000, reorder point 30.000000",
  ["A refusal, since certain demand leaves nothing to protect",
   "Sigma 0.000000, safety stock 1.644854, the factor itself",
@@ -105,7 +105,7 @@ q(3, "On the certain-demand case, the engine still prints a safety factor of 1.6
  ["Because the engine sets k to 0 whenever demand is certain",
   "Because a floor of 0 on the safety factor holds it there",
   "Because the reorder point is rounded down to the demand"],
- "With no demand spread and no lead-time spread sigma is 0.000000, so the safety stock k times sigma is 0.000000 for any k, and the reorder point is the demand over the lead time, 30.000000. The engine keeps k at 1.644854 in its reason, and the case states no rounding.")
+ "With no demand spread and no lead-time spread sigma is 0.000000, so the safety stock k times sigma is 0.000000 for any k, and the reorder point is the demand over the lead time, 30.000000. The engine keeps k at 1.644854 in its reason, and the case states the rounding rule none.")
 
 q(2, "The engine's basis cites its sources for safety stock under periodic review. What does it say changes under (R, S)?",
  "L becomes R + L, and the rest of the rule is unchanged",

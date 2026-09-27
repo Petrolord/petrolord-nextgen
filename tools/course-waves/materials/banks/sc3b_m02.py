@@ -4,9 +4,115 @@ Q=[]
 def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
 # SC3 Associate m02, Criticality.
-# A STUB written at the foundation. The bank writer replaces the question list
-# below (fifteen questions, BANK_TASK.md) and keeps the emit line, whose path is
-# literal because the kit's check-bank-sources reads literal paths only.
+# Sources: criteria and weights; the weighted score; classes and their
+# minimums; the safety override; the refusals of criticality. Every keyed
+# score, class and message was re-run through the vendored engine on the
+# Ekene register (crit-ekene) and the stated golden cases.
+
+q(1, "The Ekene policy weights safety 40, production 30, leadTime 20 and redundancy 10, with scores out of 5. GL-VALVE scores 2, 4, 3 and 3 on those criteria. What weighted score does the engine return?",
+ "58.000000, from contributions of 16, 24, 12 and 6.",
+ ["60, the mean of its scores as a share of 5.",
+  "54.000000, the score the engine returns for the choke bean set CHK-BEAN.",
+  "12, the plain sum of its four scores."],
+ "Each criterion contributes its weight times the score over the scale of 5: 40 x 2 / 5 = 16, 30 x 4 / 5 = 24, 20 x 3 / 5 = 12 and 10 x 3 / 5 = 6, which sum to 58.000000, class E. The mean of the scores as a share of 5 ignores the weights, the plain sum ignores both the weights and the scale, and 54.000000 belongs to CHK-BEAN, which scores 2 on lead time.")
+
+q(3, "PSV-KIT, the pressure safety valve repair kit, has a weighted score of 68.000000 on the Ekene policy. Which criticality class does the engine give it, and why?",
+ "V, because it scores the maximum 5 on safety and the policy names safety as its override criterion.",
+ ["E, because 68.000000 is at or above the E minimum of 44 and below the V minimum of 70, and the class follows the score.",
+  "D, because its ABC class is C, and the engine lowers the criticality of low-value items.",
+  "V, because 68.000000 rounds to 70 when the engine compares figures at 12 significant digits, and so meets the V minimum."],
+ "The engine's reason reads \"PSV-KIT: scores the maximum 5 on safety, which places an item in class V whatever its weighted score (68, class E by score alone)\". E is what the score alone gives, before the override. The ABC class plays no part in criticality. Twelve significant digits separate 68 from 70 plainly; the tie convention only settles figures that agree to that many digits.")
+
+q(0, "On the Ekene policy, a learner types an empty list into the override criteria control and runs the criticality view again. What happens to PSV-KIT?",
+ "It becomes class E, and its weighted score stays 68.000000.",
+ ["The call is refused: the list may not be empty.",
+  "It stays class V, because a safety item keeps the top class under any policy.",
+  "It becomes class D, and its weighted score falls to 44.000000 as well."],
+ "An empty list is a stated policy with no override, which the engine accepts; only a list left out is refused. Without the override PSV-KIT takes the class its score gives: 68.000000 is at or above 44 and below 70, so E. The override changes the class only and leaves the weighted score as it was; nothing in the engine protects a safety item except a stated override.")
+
+q(2, "MECH-SEAL scores 70.000000 on the Ekene policy, exactly the V minimum. What class does the engine return, and on what footing?",
+ "V; the engine's stated choice is that a class minimum is met at or above it, and its reason says so.",
+ ["E; a score sits in a class only once it is strictly above that class's stated minimum, so 70 falls short of V.",
+  "V; the policy's override on safety fires for MECH-SEAL whenever its score is exactly 70.",
+  "Neither: a score equal to a minimum is refused as ambiguous until the minimum is moved."],
+ "The engine's reason reads \"MECH-SEAL: weighted score 70 is at or above 70, the minimum for class V\". Met at or above is the engine's stated choice; a minimum met only strictly above it is the alternative a policy could state, and no graded figure in the course moves between the two. MECH-SEAL scores 3 on safety, so the override does not fire, and a score on a minimum is a result with a reason.")
+
+q(1, "A learner lowers the redundancy weight from 10 to 9 and runs the Ekene criticality view. What comes back?",
+ "A refusal, in the engine's words: \"criteria weights must add to 100; they add to 99\".",
+ ["The classes, with the four weights scaled up in proportion until they add to 100 again.",
+  "Classes computed with the missing point of weight added to safety, the largest criterion of the four.",
+  "A result on a scale of 99, with a note that the weighted scores now run up to 99."],
+ "The weights are percentages that must add to 100, and weights that miss it are refused before any score is computed. The engine rescales nothing and moves no weight between criteria: a policy that does not add up is returned to its author to state again.")
+
+q(0, "Three criteria weighted 33.3, 33.3 and 33.4 each score 7 out of 10, and the V minimum is 70. The stored sum falls a hair below 70. Which class does the engine return?",
+ "V, since it compares figures at 12 significant digits, and at that precision the sum reads as 70.",
+ ["E, since the stored sum is below 70 and the engine compares the stored numbers exactly as held.",
+  "The call is refused, since weights of 33.3, 33.3 and 33.4 do not add to exactly 100 when stored.",
+  "V, since the engine rounds every weighted score to a whole number before it compares it."],
+ "The engine's reason reads \"T: weighted score 70 is at or above 70, the minimum for class V\". Comparing at 12 significant digits is its stated tie convention; exact comparison of the stored doubles is the alternative, and the course grades nothing that turns on it. The weights add to 100, so they are accepted; only the weighted score falls a hair short. No weighted score is rounded to a whole number.")
+
+q(3, "What counts does the engine return for each class under the stated criticality policy on the Ekene register?",
+ "6 in V, 5 in E and 7 in D, with PSV-KIT in V by its override.",
+ ["5 in V, 6 in E and 7 in D, with PSV-KIT counted in E by its score.",
+  "6 in V, 7 in E and 5 in D, with CSG-958 and BARYTE lifted into E.",
+  "6 in V, 6 in E and 6 in D, since the minimums are set to split the register evenly."],
+ "The engine returns V 6, E 5, D 7. Counting PSV-KIT in E would ignore the safety override. CSG-958 scores 42.000000 and BARYTE 30.000000, both below the E minimum of 44, so both stay in D. The minimums are the stated policy and split the register however its scores fall.")
+
+q(2, "A stated case scores out of 10 with the override on criterion s. Item X scores 9 on s, one below the maximum. What does the engine return for X?",
+ "The class its weighted score gives, E at 45, since the override fires at the maximum only.",
+ ["Class V, since a score within one point of the maximum is treated as the maximum.",
+  "A refusal, since an override criterion must be scored at its maximum or at zero.",
+  "Class V at a weighted score raised to the V minimum, so the reason stays consistent."],
+ "The engine's reason reads \"X: weighted score 45 is at or above 40, the minimum for class E, and below 70 for class V\". The override fires only on the maximum score; one below it does nothing. Any score from 0 to the scale is accepted on an override criterion, and the override never changes a weighted score.")
+
+q(1, "What does the course say about VED (vital, essential, desirable)?",
+ "It names VED as one scheme of stated criticality classes, and the Ekene policy happens to label its classes V, E and D.",
+ ["It teaches VED from a licensed maintenance standard, whose criteria and weights the engine applies to every register it is handed.",
+  "It treats VED as the engine's built-in scheme, used whenever a call leaves its criteria or class minimums unstated.",
+  "It replaces VED with ABC, since the two schemes rank the same items in the same order once the costs are known."],
+ "No licensed maintenance or reliability standard was read, so criteria and weights are the user's stated policy and VED is named only as one example. The engine holds no scheme: a call without criteria or classes is refused by name. Criticality and ABC answer different questions and rank the register differently: PSV-KIT is V and C, BARYTE D and A.")
+
+q(3, "On the Ekene policy, which criterion supplies 40.000000 of the wellhead master valve WH-MV's weighted score of 86.000000?",
+ "Safety, where WH-MV scores the maximum 5 at a weight of 40.",
+ ["Production, where WH-MV scores 4 at a weight of 30 and supplies the most.",
+  "Lead time, which carries the most weight.",
+  "Redundancy, since a valve with no installed backup is scored heaviest in the policy."],
+ "A criterion contributes its weight times the score over the scale: 40 x 5 / 5 = 40.000000 for safety. Production supplies 24.000000, lead time 16.000000 and redundancy 6.000000. The Ekene policy weighs safety most heavily and redundancy least. WH-MV is V both on its score and through the override, since it scores the maximum on safety.")
+
+q(0, "A policy lists its classes as V from 70 and E from 40, and stops there. What does the engine return?",
+ "A refusal: \"classes[1].minScore must be 0 so that every item takes a class; got 40\".",
+ ["The classes, with any item below 40 left unclassified and listed on its own at the foot of the result.",
+  "A third class added from 0 so that items scoring below 40 still take a class.",
+  "Every item below 40 placed in E, the last class the policy stated."],
+ "The last class minimum must be 0, so that every item takes a class; a policy that leaves low scorers with nowhere to go is refused before any score is computed. The engine adds no class of its own and leaves no item unclassified.")
+
+q(2, "Under a policy whose scale is 10, a learner enters 11 as the first item's score on criterion s. What comes back?",
+ "A refusal naming the field: \"items[0].scores.s must be a number from 0 to scoreMax 10; got 11\".",
+ ["The item's class, with the score of 11 capped at the scale of 10 before the weighted score is summed.",
+  "The item's class, with a weighted score above 100 that marks the item as more critical than any other.",
+  "A refusal naming scoreMax, since a scale of 10 is too small for the scores the policy uses."],
+ "Every score must lie from 0 to the stated scale, and a score outside it is refused on the item's own field, with the value printed. The engine caps nothing, so a weighted score never passes 100. The scale itself is accepted; the refusal names the score that broke it.")
+
+q(3, "A policy leaves out the override list entirely, stating no topClassOnMaxScore at all. What does the engine return?",
+ "A refusal: \"topClassOnMaxScore must be an array of criterion ids (empty for none)\".",
+ ["The classes with no override, since none was stated.",
+  "Safety taken as the override, as in most policies.",
+  "Every criterion made an override, so that any maximum forces the top class."],
+ "The override list must always be stated, even when it is empty. A list quietly assumed empty would drop a safety part to a lower class with nobody having chosen it, so the engine asks the author to decide. It picks no criterion on its own.")
+
+q(1, "A stated case names two override criteria, s and p. Item W scores the maximum 10 on p and has a weighted score of 50. What does the engine return for W?",
+ "Class V, with a reason naming p as the criterion that forced it and its score of 50 kept in view.",
+ ["Class E, since the override fires only when an item scores the maximum on every listed criterion.",
+  "A refusal, since a policy may name one override criterion and this one names two of them.",
+  "Class V, with the weighted score raised to 100 so that it agrees with the class it was given."],
+ "The engine's reason reads \"W: scores the maximum 10 on p, which places an item in class V whatever its weighted score (50, class E by score alone)\". A maximum on any listed criterion fires the override, a policy may list more than one, and the weighted score is left as it was.")
+
+q(0, "COMP-RP scores 66.000000 on the Ekene policy. How does the engine's reason place it?",
+ "E, at or above the E minimum of 44 and 4 short of the V minimum of 70.",
+ ["V, since 66.000000 is within the tolerance the engine allows on a class minimum.",
+  "D, since 66.000000 is below the V minimum and the engine drops such items two classes.",
+  "E, at or above 44, with no mention of V since the reason names only the class reached."],
+ "The engine's reason reads \"COMP-RP: weighted score 66 is at or above 44, the minimum for class E, and below 70 for class V\". Below the top class, a reason names both the minimum reached and the one missed, which shows how far the item sits from a change of class. The only tolerance is the 12-digit tie convention, and an item takes the highest class whose minimum it reaches.")
 
 emit(Q, '/root/cat-wip-materials/banks/sc3b_m02.json', expect_n=15)
 finish()

@@ -17,6 +17,7 @@ For normal demand over the protection period, the reorder point meets a cycle se
 | stated cycle service level | reorder point | held as | achieved cycle service at the held level |
 | --- | --- | --- | --- |
 | 0.8 | 10.882921 | 11.000000 | 0.810643 |
+| 0.9 | 12.215679 | 13.000000 | 0.938274 |
 | 0.95 | 13.316294 | 14.000000 | 0.969295 |
 | 0.99 | 15.380864 | 16.000000 | 0.994309 |
 
@@ -40,6 +41,6 @@ The target is policy. A class V spare and a class D consumable can carry differe
 
 ## Exercise
 
-Open the stock calculator, choose the view "Safety stock for normal demand" and start from "The choke bean set, cycle service level". Confirm the middle row of the table. Set the control "Service level (stated)" to 0.8, then to 0.99, and confirm the other two rows, reading the achieved cycle service each time.
+Open the stock calculator, choose the view "Safety stock for normal demand" and start from "The choke bean set, cycle service level". Confirm the middle row of the table. Set the control "Service level (stated)" to 0.8, then 0.9, then 0.99, and confirm the other three rows, reading the achieved cycle service each time.
 
 Then set the cycle service level to 1 and read the refusal, and to 0 and read it again. Restore 0.95, set the control "Service measure (stated)" to not stated, and read the third refusal.

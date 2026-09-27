@@ -58,8 +58,8 @@ x("Which reorder point would meet a cycle service level of 0.95 for the mechanic
  "On that seed and draw count the sorted draw for 0.95 is 3.062282 seals, and the stated point of 3 gives a sampled cycle service of 0.941400: just short of the target. Both are estimates and neither is graded. 2.780743 is the P10 and 1.986608 the mean of the lead-time demand; 0.058600 is the stockout probability.")
 
 # 6
-x("The reorder point for a cycle service level is the engine's stated reading at one sorted index. What alternative does the engine name for it?",
- "One sorted draw higher, a difference of one draw that lies well inside the noise of any seed",
+x("The reorder point for a cycle service level is the engine's stated reading at one sorted index, and the course runs it on the seal on seeds 20270301 and 20270302. What alternative does the engine name for it?",
+ "One sorted draw higher, a difference of one draw that lies well inside the noise of these two seeds",
  ["Taking the mean of the two sorted draws either side of the index, at the exact halfway point",
   "The same index read on the demand draws alone, with the lead time held fixed at its stated mode",
   "The largest draw of the run, so that no cycle at all in the sample runs out of stock"],
@@ -83,11 +83,11 @@ x("What does the engine return when a lead-time risk call states a cycle service
 
 # 9
 x("Can a reorder point of -1 be stated for the seal, and what comes back?",
- "No: it is refused by name, since a reorder point is stock on hand and cannot fall below 0",
- ["reorderPoint must be a finite number above 0; got -1",
-  "a result in which every draw with any demand at all counts as a stockout",
-  "a result with the reorder point read as 0, the lowest stock there can be"],
- "A reorder point is stock on hand and cannot be negative, so the engine refuses -1 in its own words: reorderPoint must be a finite number at or above 0; got -1. A reorder point of 0 is accepted (at or above 0), and then any draw with demand is a stockout, but -1 returns no result and is never clipped to 0.")
+ "reorderPoint must be a finite number at or above 0; got -1, because a reorder point counts seals held on the shelf when the next order goes out",
+ ["reorderPoint must be a finite number above 0; got -1, as a reorder point of 0 would hold no stock and so leave every cycle short",
+  "a result in which every draw with any demand counts as a stockout, since no stock is held against the demand over the lead time",
+  "a result with the reorder point read as 0, the lowest stock there can be on the shelf, and the run then sampled as usual"],
+ "A reorder point is stock on hand and cannot be negative, so the engine refuses -1; the keyed message is its own words. A reorder point of 0 is accepted (at or above 0), so a message asking for a figure above 0 is not the engine's. On 0 any draw with demand is a stockout, but -1 returns no result and is never clipped to 0.")
 
 # 10
 x("A case holds the demand constant at 1.5 a day and samples the lead time, 5000 draws on seed 42. How does the engine's sampling line mark the constant?",
@@ -98,12 +98,12 @@ x("A case holds the demand constant at 1.5 a day and samples the lead time, 5000
  "The basis keeps the stated order and names the constant: per iteration a uniform for the lead time then one for the demand rate (constant: no draw). A constant spends no uniform, and nothing is drawn and thrown away; the lead time still comes first and the constant is marked in place.")
 
 # 11
-x("A lead-time risk call runs exactly one draw (seed 0). What does the engine print for the lead-time demand's P90 and P10?",
+x("A lead-time risk call samples a demand of 1, 2 and 4 a day and a lead time of 5, 10 and 20 days (each a triangle: minimum, mode, maximum) and runs exactly one draw on seed 0. What does the engine print for the sampled lead-time demand's P90 and P10?",
  "9.768001 for both, since that one draw is every percentile",
  ["9.768001 for the P90 and none for the P10, which needs ten draws",
   "a refusal, since one draw cannot be sorted into any percentiles",
   "the triangle's minimum for the P90 and its maximum for the P10"],
- "With a single draw the sorted list has one value, so the P90, P10 and every other figure are that draw: 9.768001 (engine), and one draw leaves no spread to read. The draw count runs from 1, so one draw is accepted; no percentile is left empty; the triangle's ends are no draws.")
+ "With a single draw the sorted list has one value, so the P90, P10 and every other figure are that one sampled draw: 9.768001 (engine, seed 0, one draw), and one draw leaves no spread to read. The draw count runs from 1, so one draw is accepted; no percentile is left empty; the triangle's ends are no draws.")
 
 # 12
 x("At the stated reorder point of 3, what share of the seal's cycles runs without a stockout, estimated on seed 20270301 and 20000 draws?",
@@ -114,12 +114,12 @@ x("At the stated reorder point of 3, what share of the seal's cycles runs withou
  "The cycle service level is the share of draws with no stockout, one less 0.058600: 0.941400 on that seed and those draws, an estimate that is not graded. 0.95 is the stated target for the reorder point for a cycle service level; 0.058600 is the stockout probability itself; 0.969295 is a Professional figure for the choke beans.")
 
 # 13
-x("The engine holds one demand rate for a whole lead time. What does that stated choice do to the sampled lead-time demand?",
- "A high rate is never offset by a quiet day within the same lead time, which widens the spread of the lead-time demand",
+x("The engine holds one demand rate for a whole lead time. What does the lesson teach that stated choice does to the sampled lead-time demand?",
+ "A high rate is never offset by a quiet day within the same lead time, so a busy spell stays busy until the order lands",
  ["A fresh rate for each day would widen the spread of the lead-time demand, so holding one rate for the whole lead time narrows it",
   "It makes the lead-time demand equal the mean demand over the lead time in every single draw of the whole run",
   "It lets the busy days and the quiet days offset each other within each lead time drawn, as a daily draw would do"],
- "One rate a lead time means a busy spell stays busy until the order lands, so extreme lead-time demands stay in; a fresh draw every day, the alternative, would let quiet days offset busy ones and narrow the spread. The demand still varies from draw to draw.")
+ "The lesson teaches it as the engine's stated choice: one rate a lead time means a busy spell stays busy until the order lands, so extreme lead-time demands stay in. A fresh draw every day is the alternative the engine names, under which quiet days could offset busy ones; the course states the reading and grades no figure on it. The demand still varies from draw to draw.")
 
 # 14
 x("The seal could also be stocked with the normal safety stock of the Professional tier. What does the lead-time Monte Carlo keep that a normal curve would lose?",

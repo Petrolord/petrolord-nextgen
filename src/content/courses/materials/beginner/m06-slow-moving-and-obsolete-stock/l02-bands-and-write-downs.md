@@ -48,7 +48,13 @@ And a write-down is a percentage from 0 to 100:
 
 > bands[0].writeDownPct must be a number from 0 to 100; got 101
 
-A call may carry at most 10 bands, and each label may be used once only.
+A call may carry at most 10 bands, and each label may be used once only. Two bands both labelled a are refused on the second:
+
+> bands[1].label repeats the label 'a'
+
+Stock on hand cannot fall below zero. When the first item holds -1, the call is refused on its field:
+
+> items[0].onHand must be a finite number at or above 0; got -1
 
 ## Exercise
 

@@ -33,7 +33,7 @@ q(3, "Baryte is ordered 140 tonnes at a time against a demand of 300 a year and 
  "The ordering cost a year is A D / Q = 1800 x 300 / 140 = 3857.142857, with D / Q = 2.142857 orders a year. 4004.000000 is the holding cost at 140, and 3929.885495 is each of the two equal costs at the EOQ itself. A lot of 140 tonnes covers less than half a year's demand of 300.")
 
 q(1, "On the baryte case, what is the holding cost a year at the quantity ordered of 140 tonnes?",
- "4004.000000, from 57.2 x 140 / 2.",
+ "4004.000000, from 57.2 x 140 / 2, with half a lot held on average.",
  ["Twice 4004.000000, with the whole lot of 140 held all year long.",
   "3857.142857, the ordering cost a year at the same quantity of 140.",
   "57.200000, the cost of holding one tonne for a year."],
@@ -61,7 +61,7 @@ q(2, "Baryte's purchase cost is 78000.000000 a year. Why does the engine report 
  "Demand times unit cost, 300 x 260 = 78000.000000, is the same at any lot size, so it plays no part in choosing one. The relevant cost holds only the costs that move with the lot: ordering and holding. The holding rate acts on the unit cost to give h, which is a different figure from the year's purchase.")
 
 q(1, "Harris (1913) prints: \"it is of value to know that this consumption must increase four fold to warrant doubling the manufacturing quantities.\" What does the engine return for baryte with the demand raised from 300 to 1200 and the rule none?",
- "An EOQ of 274.817167, twice 137.408584.",
+ "An EOQ of 274.817167, twice 137.408584, as the root of four is two.",
  ["An EOQ four times 137.408584, since the EOQ grows in step with demand.",
   "An EOQ of 137.408584 again, since the demand does not enter the EOQ at all.",
   "A refusal, since a demand above 1000 tonnes calls for a different rule."],

@@ -40,6 +40,10 @@ A missing score is refused the same way, with the value printed as undefined:
 
 > items[0].scores.p must be a number from 0 to scoreMax 10; got undefined
 
+A score under a key the policy does not name is refused on that key, with the stated criteria listed:
+
+> items[0].scores.q is not a criterion; the criteria are s, p
+
 ## Exercise
 
 Open the register calculator in "Criticality classes" on the Ekene start. Work the weighted scores of GL-VALVE and COMP-RP by hand from the scores in the box, criterion by criterion, then check both against the contributions the panel prints. Next, start from "Twelve significant digits" and read the item's score and reason. Last, return to the Ekene start, change one of BARYTE's scores in the box to 6, and copy the refusal.

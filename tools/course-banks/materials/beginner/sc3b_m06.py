@@ -87,7 +87,7 @@ q(3, "In the slow-moving view, the Ekene cover limit of 24 months is replaced by
   "The Ekene limit of 24 months restored, with a note that 0 was not a limit."],
  "The engine's words are \"excessCoverMonths must be a finite number above 0; got 0\". A limit of 0 is refused by name. The engine switches no test off and restores no earlier value; it names the field it would not accept.")
 
-q(2, "How many Ekene items fall in band slow, and what stock value and write-down does that band carry?",
+q(2, "What does the engine return for band slow on the Ekene register: how many items, what stock value and what write-down?",
  "4 items, a stock value of 265700.000000 and a write-down of 66425.000000.",
  ["3 items, a stock value of 126000.000000 and a write-down of 31500.000000.",
   "4 items, a stock value of 265700.000000 and half of it written down.",
@@ -108,7 +108,7 @@ q(0, "What does the engine's basis for slow-moving stock say about the bands, wr
   "They come from the Ekene register, which the engine reads whenever a call leaves its bands unstated."],
  "The basis reads \"the bands, write-down percentages and cover limit are the caller's stated policy; Caplice, MIT ESD.260J (2006) lecture 13 slide 13 (days of supply IOH / D to find dead stock)\". The engine holds no write-down schedule, the course reads no accounting standard, and a call without bands is refused by name.")
 
-q(3, "One item in a slow-moving call has no months since its last issue in the box. What does the engine print?",
+q(3, "The first item in a slow-moving call has no months since its last issue in the box. What does the engine print?",
  "A refusal naming items[0].monthsSinceLastIssue, with the missing value printed as undefined.",
  ["The item placed in band active, since an item with no record is taken to be in use.",
   "Band obsolete, since no record of an issue means the item has never moved off the shelf at all.",

@@ -13,7 +13,7 @@
  {
   "prompt": "The same casing schedule is stated with the discount type incremental, every other input unchanged. What quantity does the engine order, and at what total cost a year?",
   "options": [
-   "141.000000 joints at 365590.042553 a year",
+   "141.000000 joints at 365590.042553 a year, band 2's EOQ rounded to the nearest joint",
    "120.000000 joints at 349720.000000 a year, taking the break as all-units does",
    "106.000000 joints at 365856.981132 a year, the band 1 candidate",
    "141.213231 joints, the band 2 EOQ carried unrounded into the order"
@@ -88,7 +88,7 @@
   "explanation": "Under an incremental schedule a band offers only its own EOQ, and only when that EOQ lies inside it. Band 1 runs from 500 to below 1000, and 1032.795559 lies above it, so band 1 gives no candidate. The slides print that EOQ as 1,033. An incremental band offers its own EOQ with A + Fi when that EOQ lies inside it, and no break quantity."
  },
  {
-  "prompt": "On the lecture 8 incremental schedule the engine orders 1789.000000 at a total of 98826.043879 a year, and the slides print 98,825. Why does the print sit just below the engine's figure?",
+  "prompt": "On the incremental schedule of Caplice, lecture 8 slides 13 to 15, the engine orders 1789.000000 at a total of 98826.043879 a year, and the slides print 98,825. Why does the print sit just below the engine's figure?",
   "options": [
    "The slides take the effective unit price as 44.19 before costing each line",
    "The engine adds a fixed cost 7500.000000 the slides leave out",
@@ -162,6 +162,6 @@
    "400.000000 at 105000.000000"
   ],
   "answer": 0,
-  "explanation": "On the Caplice schedule read as all-units (golden input caplice-l8-schedule-all-units) the engine orders 1000.000000 at 86000.000000 a year. All-units gives the band 2 price to every unit of the lot, so the best order sits on the break. Incremental orders 1789.000000 at 98826.043879, and 500.000000 at 103062.500000 is the answer to the two-band schedule of slide 12."
+  "explanation": "On the schedule of lecture 8 slides 13 to 15 read as all-units, the engine orders 1000.000000 at 86000.000000 a year. All-units gives the band 2 price to every unit of the lot, so the best order sits on the break. Incremental orders 1789.000000 at 98826.043879, and 500.000000 at 103062.500000 is the answer to the two-band schedule of slide 12."
  }
 ]
