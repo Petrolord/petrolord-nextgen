@@ -1,0 +1,41 @@
+{
+ "dataset": "OGBAKU (synthetic)",
+ "label": "OGBAKU, a farm-out on the Ogbaku licence (synthetic)",
+ "earning": {
+  "parties": [
+   {
+    "id": "OGB",
+    "name": "Ogbaku Petroleum (synthetic), operator",
+    "participatingPct": 60.25
+   },
+   {
+    "id": "NKW",
+    "name": "Nkwerre Energy (synthetic)",
+    "participatingPct": 39.75
+   }
+  ],
+  "farmor": "OGB",
+  "farminee": {
+   "id": "IHE",
+   "name": "Ihembosi Resources (synthetic)"
+  },
+  "events": [
+   {
+    "name": "Ogbaku-1 exploration well",
+    "grossCost": 37650000.5,
+    "farmineePaysPct": 44,
+    "earnedPct": 31.75,
+    "cap": {
+     "on": "none"
+    }
+   }
+  ],
+  "vesting": "per-event",
+  "eventsCompleted": 1,
+  "cashBonus": 1250000.75,
+  "pastCosts": {
+   "amount": 8430000.4,
+   "reimbursedPct": 31.75
+  }
+ }
+}

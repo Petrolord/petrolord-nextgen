@@ -1,0 +1,363 @@
+{
+ "app_slug": "farmout",
+ "tier": "advanced",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-information-value-to-each-side",
+   "title": "Information Value to Each Side",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-the-value-of-perfect-information",
+     "title": "The value of perfect information",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "farmout-valuation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-a-signal-and-its-likelihoods",
+     "title": "A signal and its likelihoods",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-valuation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-signal-that-turns-the-decision",
+     "title": "The signal that turns the decision",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "farmout-valuation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-information-worth-its-cost",
+     "title": "Information worth its cost",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-valuation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-same-survey-to-each-side",
+     "title": "The same survey to each side",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-valuation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-risk-sharing",
+   "title": "Risk Sharing",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-positions-as-holdings",
+     "title": "Positions as holdings",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "farmout-valuation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-spread-and-the-chance-of-a-loss",
+     "title": "Spread and the chance of a loss",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-valuation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-low-case-and-the-high-case",
+     "title": "The low case and the high case",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-valuation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-seed-draws-and-correlation",
+     "title": "Seed, draws and correlation",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-valuation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-pricing-an-interest",
+   "title": "Pricing an Interest",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-value-per-percent-of-working-interest",
+     "title": "Value per percent of working interest",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "farmout-valuation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-risked-and-success-case-bases",
+     "title": "Risked and success-case bases",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-valuation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-transaction-ratios-of-stated-inputs",
+     "title": "Transaction ratios of stated inputs",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "farmout-valuation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-ratios-that-are-only-reported",
+     "title": "Ratios that are only reported",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-valuation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-carries-and-back-ins-after-the-farm-in",
+   "title": "Carries and Back-Ins after the Farm-In",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-a-development-carry",
+     "title": "A development carry",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "farmout-valuation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-uplift-and-recovery-from-the-farmors-share",
+     "title": "Uplift and recovery from the farmor's share",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "farmout-valuation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-a-back-in-after-the-farm-in",
+     "title": "A back-in after the farm-in",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-valuation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-refundable-costs-and-the-refund",
+     "title": "Refundable costs and the refund",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-valuation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-joint-venture-engine-underneath",
+     "title": "The joint venture engine underneath",
+     "order": 5,
+     "est_minutes": 12,
+     "panels": [
+      "farmout-valuation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-readings-and-source-quirks",
+   "title": "Readings and Source Quirks",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-the-readings-the-engine-states",
+     "title": "The readings the engine states",
+     "order": 1,
+     "est_minutes": 14,
+     "panels": [
+      "farmout-deal-calculator",
+      "farmout-valuation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-a-table-with-two-numbers",
+     "title": "A table with two numbers",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-valuation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-regulations-as-printed",
+     "title": "The regulations as printed",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-deal-calculator",
+      "farmout-valuation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-boundaries-rule-by-rule",
+     "title": "Boundaries, rule by rule",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "farmout-valuation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-what-the-engine-does-not-compute",
+   "title": "What the Engine Does Not Compute",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-what-the-engine-leaves-out",
+     "title": "What the engine leaves out",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-valuation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-conventions-caps-and-refusals",
+     "title": "Conventions, caps and refusals",
+     "order": 2,
+     "est_minutes": 12,
+     "panels": [
+      "farmout-valuation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-writing-the-farm-out-report",
+     "title": "Writing the farm-out report",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-valuation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "farmout-valuation-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

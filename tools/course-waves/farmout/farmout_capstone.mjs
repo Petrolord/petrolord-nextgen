@@ -109,7 +109,8 @@ const OGBAKU = {
    excess paid by the post-deal interests, then an appraisal well under a
    carry-amount cap exceeded, both completed, vesting when every event is
    complete. The same deal on the Umunze prospect is valued by EMV with a
-   stated success-case value, and the consent fee is paid on time. */
+   stated success-case value and stated assignor fees, and the consent fee is
+   paid on time. */
 
 const UM_PARTIES = [
   { id: 'UMZ', name: 'Umunze Exploration (synthetic), operator', participatingPct: 65 },
@@ -143,7 +144,7 @@ const UMUNZE = {
       cap: { on: 'gross-cost', amount: 42000000, overrunRule: 'post-deal-interests' },
       cashBonus: 1875000.25,
       pastCosts: { amount: 14300000, reimbursedPct: 24 },
-      assignorFees: 450625.042,
+      assignorFees: 618400.25,
     },
   },
   fee: {
@@ -323,7 +324,7 @@ must('UMUNZE: both events completed; all-events vests the whole 36.5', ume.veste
 const umd = umD(F);
 must('UMUNZE: the farminee declines at the stated share, and its break-even is solved between its earned and asked shares', umd.farmineeSide.bestAction === 'decline' && umd.breakEvenPromote.status === 'solved' && umd.breakEvenPromote.farmineePaysPct > 24 && umd.breakEvenPromote.farmineePaysPct < 42, JSON.stringify(umd.breakEvenPromote).slice(0, 120));
 must('UMUNZE: the success well exceeds the cap and the dry hole is below it', umd.wellCostSplit.success.capState === 'exceeded' && umd.wellCostSplit.dry.capState === 'below', 'caps');
-must('UMUNZE: the deal states the consent fee, as it prints at six decimals, as its assignor fees', umd.terms.assignorFees.toFixed(6) === umF(F).fee.toFixed(6), `${umd.terms.assignorFees} ${umF(F).fee}`);
+must('UMUNZE: the deal states assignor fees of its own, apart from the graded consent fee', Math.abs(umd.terms.assignorFees - umF(F).fee) > 1, `${umd.terms.assignorFees} ${umF(F).fee}`);
 must('UMUNZE: the fee is paid on time with room on both day-count readings', umF(F).payment.status === 'on-time' && umF(F).payment.days < 89, umF(F).payment.days);
 const aki = akI(F);
 must('AKPUGO: the farminee declines without the survey, farms in on the strong signal and declines on the weak one', aki.emvPrior === 0 && aki.perSignal[0].bestAction === 'farm in' && aki.perSignal[1].bestAction === 'decline', JSON.stringify(aki.perSignal.map((s) => s.bestAction)));

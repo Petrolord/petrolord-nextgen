@@ -1,0 +1,108 @@
+{
+ "dataset": "UMUNZE (synthetic)",
+ "label": "UMUNZE, a drill-to-earn farm-out on the Umunze licence (synthetic)",
+ "earning": {
+  "parties": [
+   {
+    "id": "UMZ",
+    "name": "Umunze Exploration (synthetic), operator",
+    "participatingPct": 65
+   },
+   {
+    "id": "ORJ",
+    "name": "Orji Resources (synthetic)",
+    "participatingPct": 35
+   }
+  ],
+  "farmor": "UMZ",
+  "farminee": {
+   "id": "AMG",
+   "name": "Amaigbo Energy (synthetic)"
+  },
+  "events": [
+   {
+    "name": "Umunze-1 exploration well",
+    "grossCost": 52340000.25,
+    "farmineePaysPct": 42,
+    "earnedPct": 24,
+    "cap": {
+     "on": "gross-cost",
+     "amount": 48000000,
+     "overrunRule": "post-deal-interests"
+    }
+   },
+   {
+    "name": "Umunze-2 appraisal well",
+    "grossCost": 31275000.4,
+    "farmineePaysPct": 38.5,
+    "earnedPct": 12.5,
+    "cap": {
+     "on": "carry-amount",
+     "amount": 550000.5
+    }
+   }
+  ],
+  "vesting": "all-events",
+  "eventsCompleted": 2,
+  "cashBonus": 1875000.25,
+  "pastCosts": {
+   "amount": 14300000,
+   "reimbursedPct": 24
+  }
+ },
+ "deal": {
+  "parties": [
+   {
+    "id": "UMZ",
+    "name": "Umunze Exploration (synthetic), operator",
+    "participatingPct": 65
+   },
+   {
+    "id": "ORJ",
+    "name": "Orji Resources (synthetic)",
+    "participatingPct": 35
+   }
+  ],
+  "farmor": "UMZ",
+  "farminee": {
+   "id": "AMG",
+   "name": "Amaigbo Energy (synthetic)"
+  },
+  "project": {
+   "chanceOfSuccessPct": 22.5,
+   "wellCost": {
+    "success": 44650000.75,
+    "dry": 39120000.4
+   },
+   "successValue": {
+    "npv": 318400000.5
+   }
+  },
+  "deal": {
+   "farmineePaysPct": 42,
+   "earnedPct": 24,
+   "cap": {
+    "on": "gross-cost",
+    "amount": 42000000,
+    "overrunRule": "post-deal-interests"
+   },
+   "cashBonus": 1875000.25,
+   "pastCosts": {
+    "amount": 14300000,
+    "reimbursedPct": 24
+   },
+   "assignorFees": 618400.25
+  }
+ },
+ "fee": {
+  "licence": "PPL",
+  "transactionValue": 6437500.6,
+  "valueSource": "contract-amount",
+  "intraGroup": false,
+  "basis": "nuprc-2024-r19",
+  "payment": {
+   "notifiedOn": "2029-03-02",
+   "paidOn": "2029-05-14"
+  }
+ }
+}

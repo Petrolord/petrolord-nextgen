@@ -312,7 +312,7 @@ w(`- Chance of success ${f6(FX.project.chanceOfSuccessPct)} percent; exploration
 w(`- Success case at 100 percent: net cash flows ${S(FX.project.successValue.cashFlows[0].year)} to ${S(FX.project.successValue.cashFlows[FX.project.successValue.cashFlows.length - 1].year)}, discounted at ${f6(FX.project.successValue.discountRate)} (a fraction) to ${S(FX.project.successValue.baseYear)} by the canonical npv: ${f6(dE.successValue100)} (engine).`);
 w(`- The deal: ${FX.farminee.id} pays ${f6(FX.deal.farmineePaysPct)} percent of the exploration well to earn ${f6(FX.deal.earnedPct)} percent of the licence from ${FX.farmor}; cap on the ${FX.deal.cap.on} of ${f6(FX.deal.cap.amount)}, overrun rule "${FX.deal.cap.overrunRule}"; cash bonus ${f6(FX.deal.cashBonus)}; ${f6(FX.deal.pastCosts.reimbursedPct)} percent of ${f6(FX.deal.pastCosts.amount)} of past costs reimbursed; assignor fees ${f6(FX.deal.assignorFees)} (${ref('dealvalue')}).`);
 w(`- Drill-to-earn: two events, ${FX.earning.drillToEarn.events.map((ev) => `"${ev.name}" (gross cost ${f6(ev.grossCost)}, ${f6(ev.farmineePaysPct)} percent paid to earn ${f6(ev.earnedPct)} percent, cap "${ev.cap.on}"${ev.cap.amount !== undefined ? ` of ${f6(ev.cap.amount)}` : ''})`).join(' and ')}, vesting "${FX.earning.drillToEarn.vesting}" (${ref('drilltoearn')}).`);
-w(`- Consent: a ${FX.consent.licence}, value of the transaction ${f6(FX.consent.transactionValue)} ("${FX.consent.valueSource}"), not an intra group transfer, notified ${FX.consent.payment.notifiedOn} and paid ${FX.consent.payment.paidOn} (${ref('fee')}).`);
+w(`- Consent: a ${FX.consent.licence}, value of the transaction ${f6(FX.consent.transactionValue)} ("${FX.consent.valueSource}"), intraGroup ${S(FX.consent.intraGroup)}, notified ${FX.consent.payment.notifiedOn} and paid ${FX.consent.payment.paidOn} (${ref('fee')}).`);
 w(`- Information: a seismic survey costing ${f6(FX.information.cost)}, two signals, ${FX.information.signals.map((s) => `"${s.label}" with likelihoods ${f6(s.likelihoodsPct[0])} percent given success and ${f6(s.likelihoodsPct[1])} percent given a dry hole`).join(' and ')} (${ref('information')}).`);
 w(`- Development carry: ${FX.farminee.id} carries ${f6(FX.developmentCarry.carriedPct)} percent of ${FX.farmor}'s cost share with a ${FX.developmentCarry.uplift.type} uplift of ${f6(FX.developmentCarry.uplift.ratePctPerYear)} percent a year, recovered from ${f6(FX.developmentCarry.recoverFromPct)} percent of ${FX.farmor}'s share of production (${ref('aftercarry')}).`);
 w(`- Back-in: ${FX.backIn.backIn.party} backs in to ${f6(FX.backIn.backIn.targetPct)} percent, refund form "${FX.backIn.backIn.refundForm}" (${ref('aftercarry')}).`);
@@ -431,7 +431,7 @@ w('The engine\'s reasons, verbatim:');
 reasons(eS.reasons);
 w();
 const SIMPLE = ['earn-cap-gross-below', 'earn-third-for-a-quarter', 'earn-bonus-and-reimbursement', 'earn-none-completed'];
-w('SMALL CASES (golden inputs), each stated to show one rule. Parties EKO 70 and PA 30 percent unless the row says otherwise:');
+w(`SMALL CASES (golden inputs), each stated to show one rule. Parties ${argsOf('earn-cap-gross-below').parties.map((p) => `${p.id} ${S(p.participatingPct)}`).join(' and ')} percent unless the row says otherwise:`);
 w();
 table(EV_HEAD, SIMPLE.flatMap((id) => runG(id).events.map((ev) => evRow(id, ev))));
 w();
@@ -495,14 +495,16 @@ quote('cash bonus: none (stated as 0)');
 
 section('consent', 'The consent process in words: an assignment, the Minister and the Commission, a change of control, the application', ['Associate m05']);
 const feeE = runG('fee-ekene');
+const TEXTFIG = { pelDays: 60, notifyDays: 15, deemedDays: 60 };
+must('the text figures are the ones the quotations print', C('aoi_18_3_pel_decision').quote.includes(`within ${TEXTFIG.pelDays} working days`) && C('aoi_4_7_fifteen_days').quote.includes(`within ${TEXTFIG.notifyDays} working days`) && C('pia_95_7b_deemed').quote.includes(`within ${TEXTFIG.deemedDays} working days`), 'text figures');
 w('THE CONSENT, in the engine\'s basis (fee-ekene), verbatim:');
 quote(feeE.basis.consent);
 w();
 w('WHAT THE TEXTS SAY, each quoted in ' + ref('provisions') + ':');
 w(`- Every assignment of an interest in a petroleum prospecting licence or petroleum mining lease needs the prior written consent of the Minister, granted on the Commission's recommendation (${C('pia_95_2_recommendation').cite}; ${C('aoi_4_2_application').cite}).`);
 w(`- A change of control of the holder is an assignment (${C('pia_95_3_change_of_control').cite}); the Act puts the line at voting power that "exceeds ${S(NG.changeOfControlAbovePct)}%" (${C('pia_95_14_control').cite}), and the Regulations require the Minister's consent to a change in control of a holder not listed on a public exchange (${C('aoi_3_3_control').cite}).`);
-w(`- A petroleum exploration licence (PEL) is assigned with the consent of the Commission (${C('pia_95_15_pel').cite}; ${C('aoi_16c_pel_control').cite}), which answers within 60 working days (${C('aoi_18_3_pel_decision').cite}).`);
-w(`- The holder first notifies the Commission of its intention, stating the reason, the method and the expected benefits (${C('aoi_4_4b_reasons').cite}); the Commission answers within 15 working days or the notification is deemed approved (${C('aoi_4_7_fifteen_days').cite}). The Minister's silence for 60 working days after the Commission's recommendation is a deemed consent (${C('pia_95_7b_deemed').cite}).`);
+w(`- A petroleum exploration licence (PEL) is assigned with the consent of the Commission (${C('pia_95_15_pel').cite}; ${C('aoi_16c_pel_control').cite}), which answers within ${TEXTFIG.pelDays} working days (${C('aoi_18_3_pel_decision').cite}).`);
+w(`- The holder first notifies the Commission of its intention, stating the reason, the method and the expected benefits (${C('aoi_4_4b_reasons').cite}); the Commission answers within ${TEXTFIG.notifyDays} working days or the notification is deemed approved (${C('aoi_4_7_fifteen_days').cite}). The Minister's silence for ${TEXTFIG.deemedDays} working days after the Commission's recommendation is a deemed consent (${C('pia_95_7b_deemed').cite}).`);
 w(`- The fee is a percentage of the value of the transaction and is not tax deductible (${C('pia_95_12_fee').cite}; ${C('aoi_19_5_not_deductible').cite}); for companies income tax and hydrocarbon tax, fees paid for assigning rights to another party are not deductible (${C('pia_264_f_not_deductible').cite}; ${C('pia_302_12c_not_deductible').cite}). ${refCap('fee')} computes the fee.`);
 w(`- A farm-out agreement provides for a decommissioning and abandonment plan funded by the incoming parties in whole or in part (${C('pia_233_10_decommissioning').cite}); the engine computes no such share (${ref('notcomputed')}).`);
 w();
@@ -537,7 +539,7 @@ w('THE CAP RULE, in the engine\'s basis, verbatim:');
 quote(eS.basis.cap);
 w();
 const CAPS = ['earn-cap-gross-below', 'earn-cap-gross-exactly', 'earn-cap-gross-exceeded-post', 'earn-cap-gross-exceeded-farmor-side', 'earn-cap-carry-below', 'earn-cap-carry-exactly', 'earn-cap-carry-exceeded', 'earn-cap-carry-zero'];
-w('ONE WELL UNDER EACH CAP (golden inputs: EKO 70 and PA 30 percent; FIN pays 40 percent to earn 30 percent; no bonus, no reimbursement):');
+{ const a0 = argsOf('earn-cap-gross-below'); w(`ONE WELL UNDER EACH CAP (golden inputs: ${a0.parties.map((p) => `${p.id} ${S(p.participatingPct)}`).join(' and ')} percent; ${a0.farminee.id} pays ${S(a0.events[0].farmineePaysPct)} percent to earn ${S(a0.events[0].earnedPct)} percent; no bonus, no reimbursement):`); }
 w();
 table(['golden case', 'gross cost', 'cap (golden input)', 'overrun rule (golden input)', 'cap state', 'promoted cost', 'excess', 'carry before the cap', 'farminee pays', 'farmor pays', 'carry', 'PA pays'], CAPS.map((id) => {
   const a = argsOf(id).events[0]; const ev = runG(id).events[0];
@@ -622,7 +624,7 @@ reasons(dE.reasons);
 w();
 const tr = dE.transfer;
 const trSum = tr.farmorFarmOutEmv + tr.farmineeEmv + tr.assignorFees;
-w(`THE TRANSFER. The farmor alone ${f6(tr.farmorAloneEmv)}; after the farm-out ${f6(tr.farmorFarmOutEmv)}, the farminee ${f6(tr.farmineeEmv)} and the assignor fees ${f6(tr.assignorFees)}, which add to ${f6(trSum)} (derived). The engine returns their difference from the farmor alone as float residue, under 0.000001 in size, so the identity holds to the precision this course prints. On these terms the farmor's EMV rises by ${f6(tr.farmorFarmOutEmv - tr.farmorAloneEmv)} (derived) while the farminee's is below 0: the deal moves value from the farminee to the farmor, and the fees leave both.`);
+w(`THE TRANSFER. The farmor alone ${f6(tr.farmorAloneEmv)}; after the farm-out ${f6(tr.farmorFarmOutEmv)}, the farminee ${f6(tr.farmineeEmv)} and the assignor fees ${f6(tr.assignorFees)}, which add to ${f6(trSum)} (derived). The engine returns their difference from the farmor alone as float residue, under ${S(1e-6)} in size, so the identity holds to the precision this course prints. On these terms the farmor's EMV rises by ${f6(tr.farmorFarmOutEmv - tr.farmorAloneEmv)} (derived) while the farminee's is below 0: the deal moves value from the farminee to the farmor, and the fees leave both.`);
 must('the farm-out raises the farmor EMV and the farminee EMV is negative', tr.farmorFarmOutEmv > tr.farmorAloneEmv && tr.farmineeEmv < 0, 'direction');
 must('the transfer identity closes to 1e-6', Math.abs(tr.difference) < 1e-6 && Math.abs(trSum - tr.farmorAloneEmv) < 1e-6, tr.difference);
 w();
@@ -809,7 +811,7 @@ w(`A DRAW IS AN ESTIMATE. Both Ekene positions lose money on a dry hole and on n
 must('the Ekene draw estimates sit within five standard errors of the dry-hole chance', Math.abs(rA.probLoss - 0.75) < band && Math.abs(rB.probLoss - 0.75) < band, `${rA.probLoss} ${rB.probLoss} ${band}`);
 const sp = runG('risk-spread-four');
 const cr = runG('risk-correlated');
-w(`SPREADING ONE BET OVER FOUR. On risk-spread-four the same EMV of ${f6(sp.positions[0].emv)} is held as one prospect at 100 percent or four independent prospects at 25 percent; the standard deviation halves (${f6(sp.positions[0].stdDev)} and ${f6(sp.positions[1].stdDev)}, engine). With the four correlated (risk-correlated, correlation ${f6(cr.correlation)}) it is ${f6(cr.positions[0].stdDev)}.`);
+w(`SPREADING ONE BET OVER FOUR. On risk-spread-four the same EMV of ${f6(sp.positions[0].emv)} is held as one prospect at 100 percent or ${S(argsOf('risk-spread-four').positions[1].holdings.length)} independent prospects at ${S(100 / argsOf('risk-spread-four').positions[1].holdings.length)} percent; the standard deviation halves (${f6(sp.positions[0].stdDev)} and ${f6(sp.positions[1].stdDev)}, engine). With the four correlated (risk-correlated, correlation ${f6(cr.correlation)}) it is ${f6(cr.positions[0].stdDev)}.`);
 must('four independent quarters halve the standard deviation', Math.abs(sp.positions[1].stdDev * 2 - sp.positions[0].stdDev) < 1e-6, 'half');
 w('NOTHING HERE IS GRADED. The chance of a loss and the low and high cases come from draws; the course teaches them and grades none. The portfolio course teaches portfolio choice and its risk measures.');
 
@@ -866,7 +868,8 @@ w();
 w('The engine\'s reasons, verbatim; money prints to the cent inside a reason, and the course quotes the numeric fields at six decimals:');
 reasons(devE.reasons);
 const d33 = yr(devE.ledger, 2033);
-w(`For example the 2033 uplift reads 9629358.08 in the reason and ${f6(d33.uplift)} as the field (engine).`);
+const d33r = devE.reasons.find((t) => /^2033: .* adds /.test(t)).match(/adds ([\d.]+)$/)[1];
+w(`For example the 2033 uplift reads ${d33r} in the reason and ${f6(d33.uplift)} as the field (engine).`);
 must('the 2033 uplift reason prints to the cent', devE.reasons.some((t) => t.includes('adds 9629358.08')) && d33.uplift === 9629358.08, d33.uplift);
 w();
 const dnc = runG('devcarry-ekene-none-capped');
@@ -892,10 +895,11 @@ w();
 w(`SIMPLE AND COMPOUND AT THE SAME RATE. At ${f6(argsOf('devcarry-ekene-simple-ot18360').uplift.ratePctPerYear)} percent a year both forms recover the Ekene carry in ${S(devS.recoveredInYear)}; the simple form adds ${f6(devS.totals.uplift)} in all and the compound form ${f6(devE.totals.uplift)} (engine). The 2031 uplift shows why: simple interest is charged on the principal of ${f6(yr(devS.ledger, 2031).openingPrincipal)} alone (${f6(yr(devS.ledger, 2031).uplift)}), compound interest on the whole opening balance of ${f6(yr(devE.ledger, 2031).opening)}, which carries the 2030 uplift (${f6(yr(devE.ledger, 2031).uplift)}).`);
 must('both forms recover in 2036 and simple adds less', devS.recoveredInYear === 2036 && devE.recoveredInYear === 2036 && devS.totals.uplift < devE.totals.uplift, `${devS.totals.uplift} ${devE.totals.uplift}`);
 must('the 2031 simple uplift is 8 percent of the opening principal', Math.abs(yr(devS.ledger, 2031).uplift - 0.08 * yr(devS.ledger, 2031).openingPrincipal) < 1e-6, yr(devS.ledger, 2031).uplift);
-const a365 = argsOf('devcarry-ekene-simple-ot18360'); a365.uplift.dayBasis = 'actual/365';
+const DAYB = [365, 360];
+const a365 = argsOf('devcarry-ekene-simple-ot18360'); a365.uplift.dayBasis = `actual/${DAYB[0]}`;
 const s365 = success('developmentCarry on devcarry-ekene-simple-ot18360 with dayBasis "actual/365" (stated probe)', E.developmentCarry(a365));
 const y32 = yr(s365.ledger, 2032);
-w(`A DAY BASIS. "annual-period" counts each ledger year as one year; "actual/365" and "actual/360" count the days of the calendar year over 365 or 360. On the same carry with dayBasis "actual/365" (stated probe), 2032 has ${S(y32.yearDays)} days and its uplift is ${f6(y32.uplift)} against ${f6(yr(devS.ledger, 2032).uplift)} (engine); the 2032 reason, verbatim:`);
+w(`A DAY BASIS. "annual-period" counts each ledger year as one year; "actual/365" and "actual/360" count the days of the calendar year over ${DAYB.join(' or ')}. On the same carry with dayBasis "actual/365" (stated probe), 2032 has ${S(y32.yearDays)} days and its uplift is ${f6(y32.uplift)} against ${f6(yr(devS.ledger, 2032).uplift)} (engine); the 2032 reason, verbatim:`);
 quote(s365.reasons.find((t) => /^2032: 8% a year simple interest/.test(t)));
 must('2032 has 366 days under actual/365 and its uplift is 366/365 of the annual-period uplift', y32.yearDays === 366 && Math.abs(y32.uplift - yr(devS.ledger, 2032).uplift * 366 / 365) < 1e-6, y32.uplift);
 w();
@@ -939,11 +943,11 @@ w('It is no reading: the engine takes the amount and its source from the caller 
 /* ============================================================ SECTION 23 */
 
 section('quirks', 'Reference texts and their quirks: one table with two numbers, a regulation numbered twice, one value defined twice', ['Expert m05']);
-w(`A TABLE WITH TWO NUMBERS. The Penn State EME 801 page labels its payoff table "Table 6.1" where it first prints it and refers to "Table 10.1" when it computes the EMVs and the value at risk from the same figures (text, ${PSU.cite}, numbers only). The course cites the page and its printed figures and calls the table by its first label.`);
+w(`A TABLE WITH TWO NUMBERS. The Penn State EME 801 page labels its payoff table as Table 6.1 where it first prints it and refers to it as Table 10.1 when it computes the EMVs and the value at risk from the same figures (text, ${PSU.cite}, numbers only). The course cites the page and its printed figures and calls the table by its first label.`);
 const PSUT = fs.readFileSync(`${HERE}/sources/psu_eme801_node578.html`, 'utf8');
 must('the Penn State page prints both Table 6.1 and Table 10.1', /Table 6\.1/.test(PSUT) && /Table 10\.1/.test(PSUT), 'psu tables');
 w();
-w(`THE REGULATIONS NUMBER THEIR LAST PROVISIONS TWICE. The arrangement at the front lists "${dashfix(C('aoi_arrangement_citation').quote)}" (${C('aoi_arrangement_citation').cite}), while the body prints regulation 23 as guidelines ("${dashfix(C('aoi_23_guidelines').quote)}", ${C('aoi_23_guidelines').cite}) and numbers the citation 26 ("${dashfix(C('aoi_26_citation').quote)}", ${C('aoi_26_citation').cite}). A citation of "reg. 25" follows the arrangement; the body prints no regulation 25.`);
+w(`THE REGULATIONS NUMBER THEIR LAST PROVISIONS TWICE. The arrangement at the front lists "${dashfix(C('aoi_arrangement_citation').quote)}" (${C('aoi_arrangement_citation').cite}), while the body prints regulation ${C('aoi_23_guidelines').quote.match(/^\d+/)[0]} as guidelines ("${dashfix(C('aoi_23_guidelines').quote)}", ${C('aoi_23_guidelines').cite}) and numbers the citation ${C('aoi_26_citation').quote.match(/^\d+/)[0]} ("${dashfix(C('aoi_26_citation').quote)}", ${C('aoi_26_citation').cite}). A citation of "reg. ${C('aoi_arrangement_citation').quote.match(/(\d+)\. Citation/)[1]}" follows the arrangement; the body prints no regulation of that number.`);
 w(`THE TITLE ON THE COVER. The gazette cover lists the instrument as "${dashfix(C('aoi_cover_title').quote)}" (${C('aoi_cover_title').cite}); the citation names it the Nigerian Upstream Petroleum (Assignment of Interests) Regulations, 2024, the name this course uses.`);
 w();
 w(`ONE VALUE DEFINED TWICE. Reg. 19(3) makes the value of the transaction the amount payable to the assignor stated in the application or contract, or an amount the Commission prescribes; reg. 24 defines it as "the amount determined by the Commission to be the value receivable by the Assignor" (${C('aoi_24_value').cite}). The engine takes the amount and its source as stated inputs (${ref('fee')}).`);
@@ -975,11 +979,11 @@ table(['rule', 'at the boundary (probed)', 'engine result'], [
   ['chance of success', 'stated as 0 (deal-ekene-dry-hole)', `every EMV is its dry-hole payoff; the farmor's best action "${bz2.farmor.bestAction}"`],
   ['chance of success', 'stated as 100 (deal-ekene-certain)', `every EMV is its success payoff; the farmor's best action "${bc2.farmor.bestAction}"`],
   ['cash bonus', 'stated as 0 (deal-ekene-bonus-zero)', 'reported in a reason: "cash bonus: none (stated as 0)"'],
-  ['fee, day 90', 'paid 90 days after the notification (fee-day-90)', `"${runG('fee-day-90').payment.status}"`],
-  ['fee, day 91 and day 120', 'the first and last of the further 30 days (fee-day-91, fee-day-120)', `"${runG('fee-day-91').payment.status}", no surcharge`],
-  ['fee, day 121', 'the first surcharge day (fee-day-121)', `${S(runG('fee-day-121').payment.surchargeDays)} surcharge day, ${f6(runG('fee-day-121').payment.surcharge)}`],
-  ['fee, day 210', 'the ninetieth surcharge day (fee-day-210)', `${S(d210.surchargeDays)} surcharge days, ${f6(d210.surcharge)}; the consent stands`],
-  ['fee, day 211', 'one day more (fee-day-211)', `"${d211.status}"`],
+  [`fee, day ${S(runG('fee-day-90').payment.days)}`, `paid ${S(runG('fee-day-90').payment.days)} days after the notification (fee-day-90)`, `"${runG('fee-day-90').payment.status}"`],
+  [`fee, day ${S(runG('fee-day-91').payment.days)} and day ${S(runG('fee-day-120').payment.days)}`, `the first and last of the further ${S(NG.graceDays)} days (fee-day-91, fee-day-120)`, `"${runG('fee-day-91').payment.status}", no surcharge`],
+  [`fee, day ${S(runG('fee-day-121').payment.days)}`, 'the first surcharge day (fee-day-121)', `${S(runG('fee-day-121').payment.surchargeDays)} surcharge day, ${f6(runG('fee-day-121').payment.surcharge)}`],
+  [`fee, day ${S(d210.days)}`, 'the ninetieth surcharge day (fee-day-210)', `${S(d210.surchargeDays)} surcharge days, ${f6(d210.surcharge)}; the consent stands`],
+  [`fee, day ${S(d211.days)}`, 'one day more (fee-day-211)', `"${d211.status}"`],
   ['EVII against its cost', 'EVII EQUAL to the cost (info-uninformative)', 'reported: "the information is worth exactly its cost"'],
   ['price-to-value ratio', 'a value per percent at or below 0 (interest-negative-emv)', 'no ratio, and a reason says why'],
   ['carry recovered exactly', 'available EQUAL to the balance (devcarry-recovered-exactly)', `recovered that year; closing ${f6(dre.ledger[1].closing)}`],

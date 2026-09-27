@@ -1,0 +1,54 @@
+{
+ "slug": "farmout",
+ "prefix": "ec10",
+ "name": "Farm-ins, Farm-outs & Asset Valuation",
+ "pathOrder": 75,
+ "module": "economics",
+ "prerequisite": null,
+ "engineCourse": "An ENGINE COURSE: no Suite app. The practicals run in the course's own calculator panels (farmout-earning-calculator, farmout-deal-calculator, farmout-valuation-calculator) over the vendored engine engines/economics/farmout.js; the learning page says so plainly. Lead decisions (cat-brief): the same published fee and the same Associate/Professional/Expert certificate ladder as app courses; no Suite bridge mapping; prerequisite null.",
+ "repo": "/root/wt-ec10-nextgen",
+ "branch": "feat/ec10-farmout-course",
+ "goldens": [],
+ "goldensNote": "EMPTY BY DECISION, as EC9, EC8, SC2, EC7 and D5. The vendored golden test-data/economics/goldens/farmout_cases.json carries oracle output beside its inputs. The digest reads its INPUTS only and prints the engine's own figures (and asserts every refusal message equals the golden's); naming the golden here would let numsweep resolve a lesson literal against an oracle figure the digest never prints.",
+ "engines": [
+  "engines/economics/farmout.js",
+  "engines/economics/cashflow.ts",
+  "engines/economics/decisionTree.js",
+  "engines/economics/portfolio.js",
+  "engines/economics/afe.js",
+  "engines/economics/jointVenture.js"
+ ],
+ "enginesVendoredAt": "farmout.js and its whole runtime closure vendored sha-identical from petrolord-engines b7d305b (engines PRs #272 the engine, #273 FINDINGS-farmout.md, #274 the simple uplift) by vendor_farmout.sh under its OWN ROOT packages/engines/ec10-farmout: 19 paths, 4 proofs each, ledgered in VENDOR.json as kind extra, group ec10-farmout-course; pin 54cf7c4 unchanged; no canonical path moves. WHY ITS OWN ROOT: farmout.js needs the newer decisionTree.js (it reads tiedIndices) and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor ('pull only with the recut in the same deploy window'); the EC4 decision and EC5 portfolio digests do not rebuild on the newer blobs (EC4 teaches a blank payoff as 0, EC5 a pos above 1 clamped, both refused by the newer engine). The canonical jointVenture.js (the joa course's 3ae56e7 blob) also stays. When the EC4 and EC5 recut lands the root collapses into the canonical paths in the same change. The engine suite passes 153 of 153 from its root.",
+ "history": {
+  "position": "THIS COURSE TEACHES NO REPAIR HISTORY. The lead's decisions on the engine (every deal term a required input, the value of the transaction stated with reg. 19(3)'s definition taught, the Penn State figures as a cited check only, the simple uplift added in engines #274 without moving any value) landed before any lesson was written; that is provenance."
+ },
+ "regulatoryRule": "Every Act, regulation, guide and teaching text is named with its edition or gazette date and the date read (2026-09-27), printed in digest section 2 and asserted against the vendored FINDINGS-farmout.md. Every quotation is in concepts.json with its citation and is verified against the public text by quote_check.py (the files hash to the pinned sha256 prefixes, which FINDINGS records). The PIA 2021 gazette, the Assignment of Interests Regulations 2024 (S.I. No. 67) and the HMRC Oil Taxation Manual (OGL v3.0) are public and quoted with citation. Penn State EME 801 (CC BY-NC-SA 4.0) is used for its printed NUMBERS only, as a cited check, and never quoted: the course is sold. Licensed model farm-out and operating agreements (AIPN, AAPL, CAPL) are never quoted or named as a source. No legal figure is invented: the fee rates, days and surcharge of reg. 19(2), (7) to (9) and the 50 percent of PIA s.95(14) are cited; every deal term is a required input with no default.",
+ "openReadings": {
+  "valuation timing": "the success-case value at the valuation date; well costs, bonus, reimbursement and fees at the valuation date, undiscounted. Never graded: every field bit-identical under reading_costs_discounted_one_year (farmout_capstone.mjs, discriminate.mjs).",
+  "fee day count": "days from the notification to the payment, the notification day not counted (reg. 19(7)). Never graded: bit-identical under reading_days_count_notification_day.",
+  "ninetieth surcharge day": "surcharged; the consent is deemed withdrawn from the ninety-first (reg. 19(9)). Never graded: bit-identical under reading_withdrawn_on_the_ninetieth_surcharge_day.",
+  "simple uplift": "a simple-interest uplift (HMRC OT18360) pays the accrued interest first, then the principal, with interest on the outstanding principal only (jointVenture.carryRecovery, engines #274). Never graded: no capstone states uplift type simple (asserted).",
+  "value of the transaction": "a required input with its source (reg. 19(3)); taught as a stated input and no reading."
+ },
+ "scopeSeams": {
+  "carries, back-ins and the joint operating agreement": "OWNED BY the joa course; this course runs carryRecovery and backIn on the interests after a farm-in and refers there.",
+  "decision trees, EMV and the value of information as methods": "OWNED BY the decision course; this course applies the canonical rollback, evpi and evii to the two sides of a deal.",
+  "portfolio choice and risk measures": "OWNED BY the portfolio course; this course runs portfolioRiskMetrics on the two positions of a deal and grades none of it.",
+  "ledger arithmetic, discounting and NPV": "OWNED BY the cashflow course; this course imports the canonical npv and applyJV and refers there.",
+  "the Nigerian fiscal system": "OWNED BY the pia course; this course quotes PIA 2021 s.94, s.95, s.233(10), s.264(f) and s.302(12)(c) only."
+ },
+ "namingCollisions": {
+  "interest": "always qualified: participating, working, carried or vested interest; 'simple interest' or an 'uplift' for money added to a carry.",
+  "promote": "the share of the gross cost paid less the interest held after the event, in points; the promote ratio is the share paid over the interest held.",
+  "carry": "the part of the farmor's cost share the farminee pays; a development carry is the later development cost, recovered from the farmor's production.",
+  "consideration": "what the farmor receives: carry, cash bonus and reimbursement; the value of the transaction is reg. 19(3)'s amount.",
+  "EMV": "always of a named position.",
+  "break-even": "always of a named term: the break-even promote or the break-even chance of success.",
+  "farmor and farminee": "the engine's names; the texts' farmee, farmer in and farmer out are quoted as printed."
+ },
+ "plan": {
+  "state": "FOUNDATION: structure, digest, capstones, fields, precision, truth, panels, learning page, gates, writer briefs. Stops before lessons."
+ },
+ "fieldsDiscrimination": {},
+ "openItems": {}
+}
