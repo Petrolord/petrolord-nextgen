@@ -77,8 +77,9 @@ export const VARIANTS = {
   ],
   // The compound uplift charged on the year's new carried cost as well as on the opening balance.
   uplift_on_new_cost: [
-    "const upliftAmt = uplift.type === 'compound' ? (opening * uplift.ratePctPerYear) / 100",
-    "const upliftAmt = uplift.type === 'compound' ? ((opening + added[i]) * uplift.ratePctPerYear) / 100",
+    // engines #274 (fb5a363) assigns upliftAmt inside the non-simple branch; the substitution follows it.
+    "upliftAmt = uplift.type === 'compound' ? (opening * uplift.ratePctPerYear) / 100",
+    "upliftAmt = uplift.type === 'compound' ? ((opening + added[i]) * uplift.ratePctPerYear) / 100",
   ],
   // The recovery taken from the whole share, the stated recovery percentage ignored.
   recovery_share_ignored: [
