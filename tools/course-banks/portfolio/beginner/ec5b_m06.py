@@ -17,11 +17,11 @@ q(3,
 
 q(1,
  "Step one of the method compares a hand-risked EMV with the explorer's column, and a row disagrees. What does the method say a mismatch means?",
- "An input was typed wrong or a clamp fired: a pos over 1 read as 1, a pos under 0 as 0, or a negative fail_cost as 0.",
+ "An input was typed wrong, or a default fired: a pos left out read as 1, or a negative fail_cost read as 0.",
  ["The explorer's value comes from the seeded Monte Carlo, so it differs from the closed form by simulation noise at 10000 iterations.",
   "The explorer discounts the fail cost over the project life, which a hand calculation in one line cannot reproduce.",
   "The grid rounded the project's value to a whole cell, and the hand value is the unrounded figure."],
- "Risked EMV is closed form, pos x npv_p50 - (1 - pos) x fail_cost. The published posAboveOneClamps case reads a pos of 1.4 as 1 and returns 80.0000.")
+ "Risked EMV is closed form, pos x npv_p50 - (1 - pos) x fail_cost. nullPosIsDefault returns 80.0000 and negativeFailCostIsZero 40.0000; a pos over 1 is refused by project name and never reaches the column.")
 
 q(0,
  "Ranked by risked EMV per million USD, OK-3 comes last at 0.458333, yet the optimizer funds it at 450.0000. Why?",
@@ -32,12 +32,12 @@ q(0,
  "Greedy funds OK-1, OK-4 and OK-5 at 420.0000 for 287.7500 and cannot use the last 30.0000. The best set is not the best projects.")
 
 q(2,
- "OKONO's grid is exact at 1.0000. On an inventory whose resolution is anything else, which checks does the method require even when overLimit reads false?",
- "Sum the funded capex against the limit in money, look for a left-out project that would still fit, and look for an unfunded positive-EMV project with capex 0.0000.",
- ["None beyond the flag, since EC5-0 added overLimit precisely so that a coarse answer could be quoted without checking.",
-  "Re-run the optimizer at a finer resolution chosen on request, and quote whichever answer has the larger EMV.",
+ "OKONO is solved exactly at every limit. On an inventory whose result reads solveMethod \"grid-feasible\", which checks does the method require even when overLimit reads false?",
+ "Read optimalityGap as the most risked EMV the set may leave out, and look for a left-out project that would still fit in money.",
+ ["None beyond the flag, since the fallback rounds every weight up and so its answer can be quoted without checking.",
+  "Re-run the optimizer on an exact solve chosen on request, and quote whichever answer has the larger EMV.",
   "Compare the funded set with the frontier's last point, since the two disagree whenever rounding has moved the answer."],
- "overLimit catches only the overshoot, 2.0000 on gridOvershoot. The undershoot that left 200.0000 out and the free project charged a cell worth 10.0000 are both silent.")
+ "overLimit reads false on every answer, fallback included. On gridUndershootFallback the fallback funds X + Y + Z for 660.0000 with its bound stated beside it, and W at 1499.0000 would still fit the money left.")
 
 q(2,
  "A graded question solves OKONO at 450.0000 and then at 600.0000. Two shortcuts tempt: add OK-5 to the smaller set, or cut OK-2 from the larger one. How do they compare with solving each budget afresh?",
@@ -85,7 +85,7 @@ q(3,
  ["3900000, since a line with no entered forecast carries its budget as its forecast until one is typed.",
   "The actual less the budget, the overrun alone, since a forecast reports only what remains to be spent on the line.",
   "Nothing until a forecast is entered, since the forecast rule refuses a line whose forecast is not positive."],
- "The AFE's estimate at completion is 27600000, a variance at completion of -550000. A forecast copied from the budget would hide CSG-02's overrun, which the Suite did before EC5-0 whenever a line was edited.")
+ "The AFE's estimate at completion is 27600000, a variance at completion of -550000. A forecast copied from the budget would hide CSG-02's overrun.")
 
 q(2,
  "OFON-1 earns 15231500 with CPI 1.009377 at 2027-06-30 and again at 2027-08-15, while SPI reads 1.141290 and then 0.872063. Why does only SPI move?",
@@ -96,12 +96,12 @@ q(2,
  "CPI is earned value over actuals, 15231500 over 15090000 at every date. Planned value rises through the window, so the same earned value reads ahead in June and behind in August.")
 
 q(1,
- "OFON-1's S-curve ends with a Planned point of 24452483 against a budget of 27050000. What does the shortfall mean?",
- "Nothing at the well: the curve is built in monthly buckets and stops at the window end, short of the full budget.",
+ "OFON-1's last monthly S-curve point, \"Nov 27\", plans 24452483 against a budget of 27050000. What does the gap mean?",
+ "Nothing at the well: the curve closes on a point dated the window end, \"30 Nov 27\", which plans the whole 27050000.",
  ["An underspend of the plan, since the budget was phased to finish below its total and the rest is held as contingency.",
   "The work running behind schedule by that amount, since a Planned point below budget means progress fell short.",
-  "A curve that keeps walking past the end date, which moves the final month's plan into the following year."],
- "The last Planned point is 24452483, and past the as-of date the forecast jumps from the last actual of 15090000 to 19374834. Neither the shortfall nor the jump is an event at the well.")
+  "A curve that stops short of the window end, which leaves the last days of plan off the chart."],
+ "The closing point \"30 Nov 27\" carries Planned 27050000, the budget, and Forecast 27600000, the EAC; it adds the remaining 2597517 of plan after \"Nov 27\".")
 
 q(3,
  "A report states only 'SPI 0.872063' and 'funded set worth 291.0000'. What is missing from each figure?",
@@ -112,11 +112,11 @@ q(3,
  "An SPI read with no date means nothing: OFON-1 reads 1.141290 at 2027-06-30 and 0.872063 at 2027-08-15. A funded set is the answer at one limit, and at 600.0000 the value is 402.7500.")
 
 q(0,
- "Every step of the method checks out on OKONO at 450.0000: rows risked by hand, resolution 1.0000, the set proven at 291.0000 and the greedy set beaten. What does that still not prove?",
+ "Every step of the method checks out on OKONO at 450.0000: rows risked by hand, solveMethod \"exact\", the set proven at 291.0000 and the greedy set beaten. What does that still not prove?",
  "That the inputs were right: the arithmetic is proven, but no step can show that a pos or a fail_cost was a good estimate.",
  ["That the set is the optimum, since a proof by hand covers only the three funded projects and says nothing about the three left out of the set.",
   "That the frontier's last point matches the funded set, which only the Monte Carlo can confirm.",
-  "That the grid was exact, since a resolution of 1.0000 can still round a capex typed with decimals."],
+  "That the solve was exact, since solveMethod can read \"exact\" while a capex typed with decimals is rounded."],
  "The method funds projects whole, uses one average correlation and assumes a normal success spread. OK-3's 41.2500 is only as good as its pos of 0.250000 and its fail_cost of 85.0000.")
 
 q(1,
@@ -125,7 +125,7 @@ q(1,
  ["OK-3 is marginal at 0.458333 per million USD, so the optimizer rotates it in and out of the funded set to spread the exploration risk across budgets.",
   "The grid rounds OK-3's 90.0000 differently at each limit, which moves it across the edge of the knapsack.",
   "The optimizer builds each larger set on the one before and removes OK-3 whenever a better project is added."],
- "At 450.0000 OK-3 fills the 30.0000 greedy leaves, for 291.0000; at 600.0000 the set is OK-1, OK-2, OK-4 and OK-5 at 402.7500 without it. On OKONO's exact grid of 1.0000 nothing is rounded.")
+ "At 450.0000 OK-3 fills the 30.0000 greedy leaves, for 291.0000; at 600.0000 the set is OK-1, OK-2, OK-4 and OK-5 at 402.7500 without it. The solve is exact, so nothing is rounded.")
 
 emit(Q, '/root/wt-ec45-recut/tools/course-banks/portfolio/beginner/ec5b_m06.json', expect_n=15)
 finish()

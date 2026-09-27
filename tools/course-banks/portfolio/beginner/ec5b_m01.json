@@ -37,11 +37,11 @@
   "options": [
    "Because the seed fixes the average correlation between projects, which is the one simulation input the risk summary has no other field to display.",
    "So anyone can rerun the same simulation and reproduce its loss probability and percentiles exactly.",
-   "Because the loss probability is still read from a normal approximation, and the seed records which version of that approximation the run applied.",
+   "Because the loss probability is read from a normal approximation, and the seed records which version of that approximation the run applied.",
    "Because the optimizer breaks ties with it, so another seed can fund another set."
   ],
   "answer": 1,
-  "explanation": "The repaired engine simulates success, failure and the success NPV of each project in every one of 10000 iterations; before EC5-0 these figures came from a normal approximation with nothing to reproduce."
+  "explanation": "The engine simulates success, failure and the success NPV of each project in every one of 10000 iterations from the seed, so the same seed and iterations reproduce P(loss) 0.123600 and P90 -18.3574 exactly."
  },
  {
   "prompt": "For OKONO's 450.0000 set the risk summary reports P90 -18.3574 and P10 738.1043, in million USD. What is -18.3574?",
@@ -57,13 +57,13 @@
  {
   "prompt": "An analyst types OKONO's limit of 450.0000 million USD and every capex as counts of USD, keeping the NPVs in million USD. What in the output shows that anything changed?",
   "options": [
-   "A PortfolioInputError, since a limit above 5000 is outside the range the engine accepts and nothing is chosen.",
+   "A PortfolioInputError, since a capex in the hundreds of millions is outside the range the engine accepts and nothing is chosen.",
    "A unit warning, since the engine compares the limit with the NPVs and flags an inventory typed at the wrong scale.",
-   "Nothing, since risked EMV per million USD is a ratio whose unit cancels out of every optimizer step.",
-   "The resolution the engine reports, because the limit is now far above 5000 and the grid switches to the limit / 2000 per cell."
+   "The solveMethod, which reads \"grid-feasible\" once the capex is typed in USD, since figures that large leave the exact solve.",
+   "Nothing: solved exactly on the capex as typed, it funds OK-1 + OK-3 + OK-4 again with solveMethod \"exact\", and the engine holds no unit field."
   ],
   "answer": 3,
-  "explanation": "The exact grid of 1 million USD per cell needs whole numbers and a limit of at most 5000; the engine holds no currency or unit field, so the reported resolution is the only trace."
+  "explanation": "The published rawDollars case does the same with the classic inventory: limit 450000000.0000, A + B + D for 250.0000, solveMethod exact. The engine holds no currency or unit field, so a consistently scaled capex column is invisible and harmless."
  },
  {
   "prompt": "One OKONO row has its capex typed in USD while its npv_p50 stays in million USD, beside five rows typed consistently. What does the engine do?",
@@ -88,26 +88,26 @@
   "explanation": "The message uses the name, then the id, then the position from 0, so \"1\" is the second project; the check runs before any set is chosen and no partial answer comes back."
  },
  {
-  "prompt": "Before EC5-0 a capex of -150 was accepted without a word. Why does the repaired engine refuse it outright instead of clamping it?",
+  "prompt": "Why does the engine refuse a capex of -150 outright, with no clamp to 0?",
   "options": [
-   "A negative capex turns the risked EMV negative, and the engine refuses any project whose risked EMV is 0 or less rather than leaving it out.",
+   "A negative capex turns the risked EMV negative, and the engine refuses any project whose risked EMV is 0 or less, the same way it refuses a negative capex.",
    "The knapsack grid cannot store a negative weight, so the refusal protects the array the optimizer builds and says nothing about what the input means.",
    "A clamp to 0 would charge the project a grid cell for nothing, and the engine refuses every input that would take capacity the project never asked for.",
    "A project that pays you to fund it breaks the idea of a limit."
   ],
   "answer": 3,
-  "explanation": "Capex never enters the risked EMV line, and a project with EMV of 0 or less is excluded, not refused; the published message reads Project \"B\" has a negative capex (-150); capex must be 0 or more."
+  "explanation": "Capex never enters the risked EMV line, and a project with EMV of 0 or less is simply left out. The published message reads Project \"B\" has a negative capex (-150); capex must be 0 or more."
  },
  {
-  "prompt": "A one in four exploration well has its chance of success typed as a percentage and its fail cost typed with a minus sign to show it is a loss. The run returns no error. How is the well valued?",
+  "prompt": "A one in four exploration well has its chance of success typed correctly and its fail cost typed with a minus sign to show it is a loss. The run returns no error. How is the failure branch valued?",
   "options": [
-   "As a certain success worth its whole npv_p50, since pos clamps to 1 and a negative fail cost is read as 0.",
-   "As a certain failure, because a pos above 1 is out of range and the engine sets any out of range chance to 0 before it weights the two branches.",
-   "At its intended risked EMV, because the engine divides a pos above 1 by 100 and the typed minus sign cancels the minus sign in the formula.",
-   "It is never valued, since a pos outside 0 to 1 is refused with the same error as a negative capex."
+   "At nothing: a negative fail cost is read as 0, so a well like OK-3 would carry 105.0000, its success branch alone.",
+   "At twice the fail cost, since the minus sign typed in the field and the minus sign in the formula compound.",
+   "At its intended cost, because the engine takes the absolute value of a negative fail cost before it weights the branch.",
+   "It is never valued, since a negative fail cost is refused with the same error as a negative capex."
   ],
   "answer": 0,
-  "explanation": "The published posAboveOneClamps case returns 80.0000 for pos 1.4 on an npv_p50 of 80, and negativeFailCostIsZero returns 40.0000 for a fail cost of -30 at pos 0.5; neither sends an error or a note."
+  "explanation": "negativeFailCostIsZero returns 40.0000 for a fail cost of -30 at pos 0.5 on an npv_p50 of 80, the success branch alone. A pos typed as a percentage is caught: Project \"Appraisal\" has a pos outside 0 to 1 (30); pos must be a number from 0 to 1."
  },
  {
   "prompt": "Four inventories are run through the optimizer. Which one does the engine refuse outright?",
@@ -115,21 +115,21 @@
    "One with a limit of 30.0000 that sits under every project, since no set can be built and the knapsack has nothing it can return.",
    "One holding a project whose npv_p10 is entered below its npv_p90, since a success spread cannot be built from an inverted range.",
    "One holding a project with a capex of -0.5.",
-   "One holding a project with pos 1.4, since a chance of success above 1 lies outside the range the engine documents for pos."
+   "One holding a project with fail_cost -30, since a loss typed below zero is outside the range the engine documents for fail_cost."
   ],
   "answer": 2,
-  "explanation": "The negative capex is the one refusal; limitBelowEveryProject at 30.0000 funds nothing with capex 0.0000, and a pos of 1.4 is clamped to 1 and returns 80.0000."
+  "explanation": "The negative capex is refused: Project \"1\" has a negative capex (-0.5); capex must be 0 or more. limitBelowEveryProject at 30.0000 funds nothing, inverted percentiles give a spread of 0.0000, and a fail_cost of -30 is read as 0."
  },
  {
-  "prompt": "The published gridOvershoot case funds a set whose capex lands over its limit on the coarse grid. What does the repaired engine do with it?",
+  "prompt": "The published gridOvershoot case has projects costing 4000.0000, 2002.0000 and 1995.0000 against a limit of 6000.0000. What does the engine return?",
   "options": [
-   "Refuses the run with a PortfolioInputError, since a funded capex above the limit breaks the one constraint the knapsack is built to hold.",
-   "Returns the set and flags it, reporting overLimit true and overLimitBy 2.0000.",
-   "Drops the last project it added and returns the smaller set, so that the funded capex always comes back inside the limit it was given.",
-   "Reruns the whole inventory on the exact 1 million USD grid, which removes the overshoot and returns a set that spends no more than the limit."
+   "A PortfolioInputError, since two projects whose capex together pass the limit cannot be entered in one inventory.",
+   "A + C at capex 5995.0000 for 780.0000, solved exactly, with overLimit false and overLimitBy 0.0000.",
+   "A + B at capex 6002.0000 for 800.0000, flagged with overLimit true and overLimitBy 2.0000 for the reader to correct.",
+   "B + C at capex 3997.0000 for 580.0000, since the engine drops the largest project whenever a pair would breach the limit."
   ],
   "answer": 1,
-  "explanation": "A set over the limit is not refused, only flagged, and the overshoot here is 2.0000 million USD; the only refusal in the engine is a negative capex."
+  "explanation": "The exact solve never exceeds the limit: A + B would cost 6002.0000, so the best set that fits is A + C at 500.0000 plus 280.0000. overLimit and overLimitBy stay in every result and read false and 0.0000 on an exact solve."
  },
  {
   "prompt": "A board asks what the runner-up set at OKONO's 450.0000 limit was worth and why OK-2 dropped out. What can the engine's output answer?",
@@ -145,13 +145,13 @@
  {
   "prompt": "Sorting OKONO by risked EMV per million USD and funding down the list at 450.0000 gives OK-1 + OK-4 + OK-5 for 287.7500. Why does the engine reach 291.0000?",
   "options": [
-   "It ranks by plain risked EMV instead of the ratio, which puts the exploration well ahead of the workovers.",
+   "It ranks by plain risked EMV and ignores the ratio, which puts the exploration well ahead of the workovers.",
    "It risks each project again in the simulation, which marks down the workovers' certain success.",
    "It compares combinations of whole projects, while a list judges projects one at a time and stops when the next one does not fit.",
    "It uses a coarser grid than the hand list, and rounding lets the well's capex fit beside OK-1 and OK-4."
   ],
   "answer": 2,
-  "explanation": "OKONO's limits are whole and under 5000, so the grid is exact at a resolution of 1.0000; the gain of 3.2500 comes from choosing the set, not from rounding or risk."
+  "explanation": "OKONO is solved exactly, solveMethod \"exact\" with optimalityGap 0.0000; the gain of 3.2500 comes from choosing the set, with no rounding or risk involved."
  },
  {
   "prompt": "A board paper labels OK-1's capex of 120.0000 million USD with a P90. What is wrong with that label?",

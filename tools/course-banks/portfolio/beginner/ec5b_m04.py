@@ -29,7 +29,7 @@ q(3,
  ["OK-3 added on top of the set before at a diluted ratio, since its 41.2500 is spread across the capex of the projects already funded.",
   "Rounding residue the grid leaves between whole cells, repeated wherever a capex does not divide evenly into the cell size.",
   "Three different small projects that each happen to be worth 3.2500 of risked EMV once their fail costs are charged."],
- "OK-3 adds 41.2500 for 90.0000 and OK-5 takes away 38.0000 for 60.0000. On an exact grid of 1.0000 per cell there is no rounding to leave a residue.")
+ "OK-3 adds 41.2500 for 90.0000 and OK-5 takes away 38.0000 for 60.0000. The solve is exact, so there is no rounding to leave a residue.")
 
 q(1,
  "A reader expects the step ratios on the OKONO frontier to fall as the budget grows, the way diminishing returns usually look. What does the frontier show?",
@@ -61,7 +61,7 @@ q(0,
  ["At 750.0000 and 444.0000, because the last point is always printed at the limit whatever its set costs.",
   "At 1000.0000 and 588.0000, the value of all six projects, since a limit is rounded up to the next whole set.",
   "At 690.0000 with a grid undershoot, the coarse rounding that leaves a set out, which a finer cell would recover."],
- "A point is printed at what its set costs. OKONO solves on an exact grid of 1.0000 per cell, so the 60.0000 is genuine: OK-6 is the only project left and needs 310.0000.")
+ "A point is printed at what its set costs. OKONO is solved exactly, so the 60.0000 is genuine: OK-6 is the only project left and needs 310.0000.")
 
 q(2,
  "The OKONO frontier ends at 450.0000 and 291.0000. What does it say about the chance that the funded set loses money?",
@@ -69,7 +69,7 @@ q(2,
  ["That it is small, because a set on the efficient frontier is by definition the one with the least risk at its budget.",
   "That it is the lowest of any set at 450.0000, since the optimizer breaks ties between equal values toward the set with less spread.",
   "That it matches the 600.0000 set's, since both sit on one frontier and share every point up to 450.0000."],
- "The last point is the best value, not the safest. At seed 20260829 and 10000 iterations the 450.0000 set shows P(loss) 0.123600 and the 600.0000 set 0.001800, and the frontier shows neither.")
+ "The last point is the best value, and it need not be the safest. At seed 20260829 and 10000 iterations the 450.0000 set shows P(loss) 0.123600 and the 600.0000 set 0.001800, and the frontier shows neither.")
 
 q(3,
  "OKONO's best value at a budget of exactly 450.0000 million USD is 291.0000. What does one more million buy?",
@@ -105,7 +105,7 @@ q(1,
 
 q(0,
  "A programme funded at 450.0000 million USD is raised to 600.0000, and the planner keeps OK-1, OK-3 and OK-4 and adds whatever still fits. Where does building up stop?",
- "At 329.0000 on 510.0000, after adding OK-5, since OK-2's 180.0000 no longer fits; solving again reaches 402.7500.",
+ "At 329.0000 on 510.0000, after adding OK-5, since OK-2's 180.0000 then does not fit; solving again reaches 402.7500.",
  ["At 402.7500, since adding what fits to a solved set reproduces the solved set at the larger budget.",
   "At 402.7500 on 600.0000, after adding OK-2 and OK-5, the two projects the larger budget was always going to fund.",
   "At 313.0000 on 480.0000, the next frontier point, which is where a set built up from the smaller answer lands."],
@@ -117,7 +117,7 @@ q(3,
  ["Yes, since success-case NPV is what the projects return when they work and the larger programme returns less of it.",
   "Yes, because the optimizer at 600.0000 fell back to a coarser grid and lost the exploration well to rounding.",
   "No, because success-case NPV is reported only for the smaller set and the 473.0000 is a partial total of the larger one."],
- "The optimizer maximises risked EMV, not success-case NPV. OK-3 is worth 420.0000 if it works and 41.2500 risked, so dropping it costs little value.")
+ "The optimizer maximises risked EMV; success-case NPV plays no part. OK-3 is worth 420.0000 if it works and 41.2500 risked, so dropping it costs little value.")
 
 q(2,
  "The frontier run to 600.0000 million USD and the frontier run to 450.0000 are compared point by point. What do points 0 to 11 show?",

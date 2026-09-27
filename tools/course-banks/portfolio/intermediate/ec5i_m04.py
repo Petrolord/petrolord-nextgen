@@ -24,7 +24,7 @@ q(3,
  "The lines as entered carry no date, so earned value, actuals, CPI and EAC read the same on every as-of date, while time progress runs from 0.000000 on the first date to 1.000000 on the second.")
 
 q(2,
- "OFON-1's window opens on 2027-02-01. What SPI does the repaired engine report as of 2027-02-01 itself?",
+ "OFON-1's window opens on 2027-02-01. Which schedule reading does a report dated that very day carry?",
  "Null, because no whole day has elapsed on the start day, so time progress and planned value are both 0.",
  ["1.000000, because on the start day the job is exactly on schedule.",
   "Infinity, because earned value of 15231500 is divided by a planned value of 0 and the division is carried out as written.",
@@ -73,7 +73,7 @@ q(2,
 
 q(1,
  "As of 2028-01-10, after OFON-1's window closed on 2027-11-30, SPI is 0.563087. What does that number measure?",
- "Earned value over the whole budget, which is percent complete 56.3087 divided by 100, so it no longer measures pace against a plan.",
+ "Earned value over the whole budget, which is percent complete 56.3087 divided by 100, so it has stopped measuring pace against a plan.",
  ["Schedule pace against the window, which will keep falling on each later report as the AFE runs further past its end date and the plan keeps growing.",
   "Earned value over the EAC of 27600000, since after the end the plan is replaced by the forecast of what the work will cost.",
   "The average of the SPIs reported across the window, which the engine carries forward once no further planned value accrues."],
@@ -89,11 +89,11 @@ q(3,
 
 q(2,
  "The published case with no window dates returns time progress 1.000000 and SPI 0.250000. What does the engine do with an AFE saved without a window?",
- "Reports it as though the window had already ended, dividing earned value by the whole budget, a fallback EC5-0 did not change.",
+ "Reports it as though the window had already ended, dividing earned value by the whole budget, and the Suite labels its SPI unavailable.",
  ["Refuses it with AfeInputError, because planned value cannot be formed without a start date and an end date.",
   "Reports SPI null, as it does before the start, because with no window no day has elapsed inside it.",
   "Measures it against today, treating the report date as the end of the window so that time progress is always 1 on the day it runs."],
- "The fallback to time progress 1 remains in the engine as published, and the repaired Suite labels SPI unavailable for such an AFE; a low SPI there is not a late project.")
+ "Time progress falls back to 1 on an AFE without both dates, so a low SPI there is not a late project; the Suite labels SPI \"Unavailable\" for such an AFE.")
 
 q(0,
  "An as-of date of 30 February is passed to an AFE that has no window dates at all. What does the engine return?",
@@ -104,12 +104,12 @@ q(0,
  "The published refusals cover a string that is not a date, a month 13 and 30 February, and they fire on an AFE with no window as well.")
 
 q(3,
- "Before EC5-0 the AFE wizard asked for no dates. What SPI would a report on OFON-1 have shown on its first day of drilling?",
+ "OFON-1's lines are saved on an AFE with no window dates. What SPI does a report show on the first day of drilling?",
  "0.563087, the same as on its last day.",
  ["Null, because a report on the first day of drilling falls on the start of the window, where no whole day has elapsed.",
-  "Infinity, because the old engine divided earned value by a planned value of 0 whenever it was run before the plan had grown.",
-  "1.141290, because the old engine read the clock and the first day of drilling came early in the window, where the plan was small."],
- "With no window, time progress fell back to 1, so SPI equalled percent complete 56.3087 divided by 100 on whatever day the report was opened.")
+  "Infinity, because the engine divides earned value by a planned value of 0 whenever it is run before the plan has grown.",
+  "1.141290, because the engine reads the clock and the first day of drilling comes early in the window, where the plan is small."],
+ "With no window, time progress falls back to 1, so SPI equals percent complete 56.3087 divided by 100 on whatever day the report is opened; the Suite labels it unavailable.")
 
 q(2,
  "A monthly pack labelled as of 2027-08-15 divides OFON-1's earned value of 15231500 by a planned value of 13345861 and prints 1.141290. What went wrong?",
@@ -123,9 +123,9 @@ q(1,
  "A report dated 2027-01-15, before OFON-1's window opens, shows earned value 15231500 from DRL-01 at 72.0000 percent and CSG-02 at 100.0000 percent. What does the engine make of that?",
  "It reports it without complaint, since it never asks whether progress is plausible for the date, so the reader must suspect the window or the progress column.",
  ["It sets earned value to 0 before the start, since work cannot be earned before a window opens, and reports CPI null beside it.",
-  "It flags the AFE invalid, since earned value above planned value of 0 is the case the EC5-0 repair was written to catch.",
+  "It flags the AFE invalid, since earned value above a planned value of 0 is a combination the engine refuses to report.",
   "It reports SPI null and zeroes the progress it cannot schedule, leaving only CSG-02's finished line in earned value."],
- "Before the start SPI is null, but earned value 15231500, CPI 1.009377 and the EAC of 27600000 are all still reported, because they are read from the lines and not from the calendar.")
+ "Before the start SPI is null, but earned value 15231500, CPI 1.009377 and the EAC of 27600000 are all still reported, because they are read from the lines and the calendar plays no part in them.")
 
 emit(Q, '/root/wt-ec45-recut/tools/course-banks/portfolio/intermediate/ec5i_m04.json', expect_n=15)
 finish()

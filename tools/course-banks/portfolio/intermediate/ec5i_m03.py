@@ -32,12 +32,12 @@ q(2,
  "The budget is the weight and never the actual, which is what makes earned value useful against spend: CSG-02 earns 3900000 and spent 4300000.")
 
 q(0,
- "\"progress beyond 100 percent earns beyond the budget\" returns earned value 150.0000 against actuals of 90.0000 and CPI 1.666667. What does that CPI record?",
- "Progress typed past 100 percent, which the engine accepts and which earns beyond the budget without a dollar saved.",
- ["A genuine saving, since 150.0000 over 90.0000 is exact arithmetic on the line's own earned value and actuals.",
-  "A clamp, since the engine caps progress at 100 percent and 1.666667 is the index it reports at that cap.",
-  "An inverted index, actuals over earned value, which the engine switches to once progress passes 100 percent."],
- "The refusal message says progress runs from 0 to 100 percent, yet only negative progress is refused; the same case reports SPI 1.500000 from the same typing.")
+ "\"progress of exactly 100 percent is accepted and earns the whole budget\" returns earned value 140.0000 against actuals of 100.0000 and CPI 1.400000. What does that CPI record?",
+ "Work earned at its budgeted value set against the money spent: a line typed at 100 percent earns its whole budget, however the work was really done.",
+ ["A genuine saving proved by the arithmetic, since 140.0000 over 100.0000 is exact and progress cannot be typed wrongly at 100 percent.",
+  "A clamp, since the engine caps progress at 100 percent and 1.400000 is the index it reports at that cap.",
+  "An inverted index, actuals over earned value, which the engine switches to once a line reaches 100 percent."],
+ "Progress of exactly 100 is accepted and earns the whole budget; above 100 is refused, naming the line. The same case reports SPI 1.000000 from the same typing.")
 
 q(3,
  "CMP-05 is typed at 100.0000 percent complete with an actual of 0. What does it earn?",
@@ -56,20 +56,20 @@ q(2,
  "CMT-03 shows it plainly: it has earned 687500 for 640000 spent and still forecasts 1400000 against 1250000 because an engineer entered that figure.")
 
 q(1,
- "\"suite test: weighted earned value\" reports CPI 1.000000 with 110.0000 earned and nothing spent. How should that CPI be read?",
- "As undefined: with actuals of 0 the engine returns 1 whatever has been earned.",
- ["As work bought at exactly its budget, one for one.",
-  "As infinity clamped to 1, the largest index the engine reports.",
-  "As a null that the screens print as 1.000000 in place of a blank."],
- "CPI 1 before any spend is a finding left unrepaired; the same case reports SPI 0.275000, a real ratio of earned value to planned value, beside a CPI that is only a default.")
+ "\"suite test: weighted earned value (value earned, nothing spent: CPI null)\" has 110.0000 earned and nothing spent. What CPI does the engine report?",
+ "Null, with cpiStatus \"no-spend\": with actuals of 0 there is no cost efficiency to report.",
+ ["1.000000, work bought at exactly its budget, one for one, which is the neutral reading when nothing has yet been spent.",
+  "Infinity clamped to 1, since 110.0000 over nothing has no finite value and 1 is the largest index the engine reports.",
+  "0, since no money has yet bought any of the work, so the earned value is set against a spend of nothing."],
+ "With actuals of 0 there is nothing to divide by, so the engine prints no CPI and names the reason; beside it the case still reports SPI 0.275000 with status ok, earned value over planned value.")
 
 q(1,
- "\"suite test: empty AFE\" has nothing budgeted, earned or spent and returns CPI 1.000000 and SPI 1.000000. Where does each 1 come from?",
- "CPI from the default for zero actuals, and SPI from a zero-budget guard that fires before the null rule.",
- ["Both are measurements: an empty AFE has done all its scope, on budget and on time.",
-  "Both come from the zero-actuals default, which the engine applies to every index once nothing at all has been spent.",
-  "SPI from time progress falling back to 1 on an AFE without dates, and CPI from 0 over 0 being read as exactly 1."],
- "Where planned value is zero SPI is null, except that an AFE whose budget is 0 reports SPI 1 because its guard is checked first; neither 1 is a reading of performance.")
+ "\"suite test: empty AFE: no budget and no spend, so SPI and CPI are null\" has nothing budgeted, earned or spent. Why is each ratio null?",
+ "CPI for want of spend, cpiStatus \"no-spend\", and SPI for want of a budget, spiStatus \"no-budget\".",
+ ["Both are measurements: an empty AFE has done all its scope, on budget and on time, and null is how the engine prints a perfect score.",
+  "Both come from one zero-actuals guard, which the engine applies to every index once nothing at all has been spent.",
+  "SPI because time progress falls back to 1 on an AFE without dates, and CPI because 0 over 0 is read as exactly 1 and then hidden."],
+ "Each null carries its reason: cpiStatus \"no-spend\" when nothing has been spent, spiStatus \"no-budget\" when the AFE has no budget. A reported ratio carries \"ok\".")
 
 q(0,
  "As of 2027-08-15 OFON-1's planned value is 17466060. What is that figure?",
@@ -90,10 +90,10 @@ q(3,
 q(2,
  "As of 2027-02-01, the start day, OFON-1 has already earned 15231500 by its figures. What SPI does the engine report?",
  "Null, since no whole day has elapsed, planned value is 0 and there is nothing to divide by.",
- ["1, since a zero denominator gives 1, as CPI does before any spend.",
+ ["1, since a zero denominator gives a neutral ratio of 1 in place of a division.",
   "0.563087, since time progress falls back to 1 when no day has elapsed.",
   "Infinity, earned value over a planned value of 0, far ahead of schedule."],
- "SPI is null before the start and on the start day; before EC5-0 the engine reported Infinity before the start date when value had been earned, and a report that prints the null as 0 or 1 has made one up.")
+ "SPI is null with spiStatus \"no-planned-value\" before the start and on the start day, and a report that prints the null as 0 or 1 has made one up.")
 
 q(3,
  "From 2027-11-30 onward OFON-1's SPI reads 0.563087. Why that figure?",
@@ -104,12 +104,12 @@ q(3,
  "Time progress stops at 1.000000, so 2028-01-10 reads 15231500 over 27050000 exactly as the end day does.")
 
 q(1,
- "OFON-1's lines, saved through the pre-EC5-0 wizard that took no window dates, are reported on 2027-06-30. Which SPI does that old report print?",
- "0.563087, percent complete over 100, because time progress fell back to 1 on every day of the AFE's life.",
- ["Null on every day, since with no window the engine could not form a planned value and declined to divide.",
-  "1.141290, since the engine took the first invoice date, 2027-02-20, as the start of the missing window.",
-  "0.872063, since the engine read the clock and applied the fallback only to the days before any start date."],
- "The published \"no dates: time progress 1\" case still records the fallback; with the whole budget planned every day, SPI said nothing about the calendar.")
+ "OFON-1's lines are saved with no window dates and reported on 2027-06-30. Which SPI does that report print?",
+ "0.563087, percent complete over 100, because time progress falls back to 1 on every day of the AFE's life.",
+ ["Null on every day, since with no window the engine cannot form a planned value and declines to divide.",
+  "1.141290, since the engine takes the first invoice date, 2027-02-20, as the start of the missing window.",
+  "0.872063, since the engine reads the clock and applies the fallback only to the days before any start date."],
+ "The published \"no dates: time progress 1\" case records the fallback; with the whole budget planned every day, SPI says nothing about the calendar, and the Suite labels it unavailable.")
 
 q(0,
  "OFON-1 reads 55.7856 percent spent and 56.3087 percent complete. What does the pair show?",

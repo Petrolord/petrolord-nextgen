@@ -8,7 +8,7 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 # written by tools/course-waves/portfolio/recut/build.py. Edit the rows there, then re-run it.
 
 q(3,
- "A graded reading of OFON-1 is worked with every calculation right, but the explorer was left on its default as-of date of today instead of 2027-08-15. Which of its metric readings are wrong?",
+ "A graded reading of OFON-1 is worked with every calculation right, but the explorer was left on its default as-of date of today when the task named 2027-08-15. Which of its metric readings are wrong?",
  "Only time progress, planned value and SPI.",
  ["Every number that depends on the lines, since the explorer recomputes earned value and the EAC for the date it is set to.",
   "Earned value, CPI and SPI, since all three divide by a figure the engine reads on the day the report is run.",
@@ -33,11 +33,11 @@ q(0,
 
 q(2,
  "With CMT-03's budget of 1250000 and the 940000 already spent and committed, an entered forecast of 900000 gives an item forecast of 900000, and an entered forecast of 0 gives 1250000. What does the pair show?",
- "Any positive entered forecast is taken as typed, even one below the money already spent and committed (finding EC5-1), while 0 is not positive and falls back to the larger of budget and spend plus commitment.",
+ "Any positive entered forecast is taken as typed, even one below the money already spent and committed, where it is flagged, while 0 is not positive and falls back to the larger of budget and spend plus commitment.",
  ["The rule floors an entered forecast at the spend plus commitment, and 900000 passed only because it is within tolerance of 940000.",
   "The rule treats 0 as a request to close the line at budget and 900000 as a request to cut scope, so both are honoured.",
   "The rule reads 900000 as a saving to be booked against the budget, which is why the variance on that line becomes positive at once."],
- "The same line with an entered forecast of 1 forecasts 1, so a typing slip passes straight into the EAC, and a forecast of 0 meant as a descope saves nothing on the report.")
+ "Positive entries are trusted and marked when they undercut the money already out the door; a zero is no entry, so a descope typed as 0 saves nothing on the report.")
 
 q(0,
  "A partner sees OFON-1's cost performance index above 1 on one tile and an overrun of 550000 on another, and suspects one tile is wrong. What should the partner be told?",
@@ -64,12 +64,12 @@ q(1,
  "Only time progress, planned value and SPI move with the as-of date, so the three SPIs are three readings of the same lines on three days.")
 
 q(3,
- "The published weighted earned value case reports earned value 110.0000, actuals 0.0000 and CPI 1.000000. How should a reader take that CPI?",
- "As undefined: the engine returns CPI 1 whenever actuals are 0.",
- ["As on budget, since the work earned was delivered for nothing and an index of 1 is the cost neutral reading that the engine reports.",
-  "As a refusal marker standing in for null.",
-  "As the ratio of earned value to planned value, since with no spend the engine substitutes the schedule index for the cost index on that AFE."],
- "The finding is recorded and not repaired, so CPI 1.000000 beside any earned value with no spend, 110.0000 here, is a division the engine declined to do and printed as a neutral number.")
+ "OFON-1 is re-entered with every actual set to 0 and its progress unchanged, so earned value stays at 15231500. What does the report print for CPI?",
+ "No ratio: CPI is null with cpiStatus \"no-spend\", and the CPI tile reads N/A with \"Nothing spent yet, so no cost efficiency\".",
+ ["1.000000, on budget, since work earned for nothing is read as the cost-neutral index the engine falls back to.",
+  "Infinity, since 15231500 over a spend of 0 has no finite value and the engine prints the division as it stands.",
+  "The SPI in its place, since with no spend the engine substitutes the schedule index for the cost index on that AFE."],
+ "Value earned with nothing spent has no cost efficiency to report, so the engine returns null and names the reason; earned value itself is unchanged by the actuals.")
 
 q(2,
  "Why does a graded AFE reading compare the cost lines' actuals with the invoice total before any metric is quoted?",
@@ -80,12 +80,12 @@ q(2,
  "On OFON-1 both read 15090000 because the field was built that way; on a live AFE an accrual on a line or an invoice booked before the line is updated separates them, and an invoice the engine cannot date is kept off the curve and counted beside it.")
 
 q(0,
- "A reader takes OFON-1's last Forecast point, 24949669, as the money the job will spend, and calls the rest of the EAC of 27600000 a saving. What went wrong?",
- "The curve stops at its Nov 27 point, standing on the first of November, before the end of the window, so the EAC is read from the metrics and only the shape from the curve.",
+ "A reader takes OFON-1's Nov 27 Forecast, 24949669, as the money the job will spend, and calls the rest of the EAC of 27600000 a saving. What went wrong?",
+ "Nov 27 is only the last monthly point, standing on the first of November; the curve closes on \"30 Nov 27\", where Forecast is the EAC of 27600000.",
  ["The reader used the Forecast line where the Actual line applies, since past the as-of date the Actual line carries the committed spend to the end.",
-  "The reader ignored the as-of date, since the last Forecast point moves up to the EAC once a report is run after the window's end, when every projected point has become an actual.",
+  "The reader ignored the as-of date, since the Forecast rises to the EAC only once a report is run after the window's end, when every projected point has become an actual.",
   "Nothing, since the projected line nets the entered forecasts against their budgets and the gap is the saving it has identified."],
- "The last Planned point, 24452483, is short of the budget of 27050000 in the same way, a property of the engine as published; neither gap is money the job will not spend.")
+ "The closing point dated the window end carries Forecast 27600000 and Planned 27050000; a reader who stops at the last monthly point sees neither the EAC nor the budget.")
 
 q(3,
  "As of 2027-08-15, which of OFON-1's earned value, CPI and SPI can be rebuilt from the S-curve alone?",
@@ -96,12 +96,12 @@ q(3,
  "The curve plots no earned value, no point stands on the as-of date, and planned value 17466060 falls between Aug 27 and Sep 27, so SPI 0.872063 and CPI 1.009377 come only from the metrics.")
 
 q(2,
- "Two exports of OFON-1 from the repaired Suite agree on an EAC of 27600000 but show different SPIs. Where should the check start?",
+ "Two exports of OFON-1 from the Suite agree on an EAC of 27600000 but show different SPIs. Where should the check start?",
  "At the as-of date each export was run for.",
- ["At each line's forecast field, since after EC5-0 the exports still apply different forecast rules and a copied budget changes SPI.",
+ ["At each line's forecast field, since the exports apply different forecast rules and a copied budget changes SPI.",
   "At the invoices, since the S-curve feeds SPI and a late invoice moves the ratio in one export and not in the other.",
   "At the progress column, since progress is the only input SPI reads and the EAC agreeing proves the dates were the same."],
- "After EC5-0 every screen shares one forecast rule, so the EAC agrees; SPI moves with the date, 1.141290 on 2027-06-30 and 0.872063 on 2027-08-15 on identical lines.")
+ "Every screen shares one forecast rule, so the EAC agrees; SPI moves with the date, 1.141290 on 2027-06-30 and 0.872063 on 2027-08-15 on identical lines.")
 
 q(1,
  "A manager says OFON-1 is \"55.7856 percent done\" and cites its SPI of 0.563087 after the end as agreement. What has been mixed up?",
@@ -120,12 +120,12 @@ q(0,
  "EAC 27600000 is the rule's branches summed, earned value 15231500 is progress weighted by budget, and SPI 0.872063 divides that earned value by the planned value of 2027-08-15.")
 
 q(2,
- "A capstone answer gives OFON-1's planned value at the end of its window as 24452483, read off the last Planned point of the S-curve. Where should it have been read?",
- "From the metrics as of 2027-11-30, which give 27050000.",
+ "A capstone answer gives OFON-1's planned value at the end of its window as 24452483, read off the Nov 27 point of the S-curve. Where should it have been read?",
+ "From the metrics as of 2027-11-30, or the curve's closing point \"30 Nov 27\", which both give 27050000.",
  ["From the Forecast line's last point, 24949669, since the plan at completion is the EAC once the AFE has overrun its budget.",
-  "From the S-curve, which is the plan of record.",
+  "From the Nov 27 point, which is the plan of record for the whole window.",
   "From the metrics as of 2027-08-15, since planned value is fixed on the as-of date and is not carried to the end of the window."],
- "The walk stops at the first of November because the next step falls after 2027-11-30, so the chart ends 2597517 short; on the end day time progress is 1 and planned value the whole budget.")
+ "Nov 27 stands on the first of November; the curve closes on the end day, where time progress is 1 and planned value the whole budget, 2597517 more than the Nov 27 point.")
 
 emit(Q, '/root/wt-ec45-recut/tools/course-banks/portfolio/intermediate/ec5i_m06.json', expect_n=15)
 finish()

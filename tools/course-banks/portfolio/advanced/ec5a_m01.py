@@ -8,12 +8,12 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 # written by tools/course-waves/portfolio/recut/build.py. Edit the rows there, then re-run it.
 
 q(2,
- "One wildcat with pos 0.3, a success-case NPV of 300 and a fail cost of 50. Before EC5-0 the engine put its P90 at -150.5560. What is wrong with that figure?",
+ "One wildcat with pos 0.3, a success-case NPV of 300 and a fail cost of 50. A normal approximation puts its P90 at -150.5560. What is wrong with that figure?",
  "It sits beneath -50.0000, the worst outcome the well can produce, so it describes a loss this project can never book.",
  ["Nothing is wrong with it: a low case set beneath the worst outcome is a conservative margin, and the simulation has simply removed that margin.",
-  "It is the high case with its sign reversed, because the old engine ranked outcomes under the opposite percentile convention to the one used now.",
-  "It is right for the success case alone, since the old engine drew the failure lump in a separate pass and never added it back into the sum."],
- "The old P90 was emv minus 1.2816 x stdDev on a bell the well does not have: it fails with chance 0.700000 and then loses exactly 50.0000, which is the engine's P90 now, -50.0000.")
+  "It is the high case with its sign reversed, because the normal curve ranks outcomes under the opposite percentile convention to the one the engine uses.",
+  "It is right for the success case alone, since the normal curve is fitted to the success spread and leaves the failure lump out of the sum."],
+ "The normal P90 is emv minus 1.2816 x stdDev on a bell the well does not have: it fails with chance 0.700000 and then loses exactly 50.0000, which is the engine's P90, -50.0000.")
 
 q(0,
  "A reviewer proposes keeping the normal approximation and adding a fixed safety margin to its P(loss). The identical wildcat cases read 0.276275 against an exact 0.343000 for three wells and 0.200464 against 0.117649 for six. Why does the margin fail?",
@@ -40,10 +40,10 @@ q(1,
  "OK-3 fails with chance 0.750000 and books 85.0000 of loss each time, which is why its risked EMV is 0.250000 x 420.0000 - 0.750000 x 85.0000 = 41.2500 and why small portfolios have spikes.")
 
 q(2,
- "mixtureWithSpread pairs a risked project with a sure one. Before EC5-0 the engine put its P90 at -12.4175; the simulation reads 1.7148. What would a reader of the old figure have got wrong?",
+ "mixtureWithSpread pairs a risked project with a sure one. A normal approximation puts its P90 at -12.4175; the simulation reads 1.7148. What would a reader of the normal figure get wrong?",
  "That the low case loses money, when nine simulated outcomes in ten are gains.",
  ["Nothing of substance, since both figures sit close to zero and the gap between them is inside one standard error of the simulated count.",
-  "The sign of the high case, because under the exceedance convention the old P90 was the figure a committee would quote as the upside.",
+  "The sign of the high case, because under the exceedance convention the normal P90 is the figure a committee would quote as the upside.",
   "The worst case, because a P90 of -12.4175 is the floor of the portfolio and the simulation shows the floor is really a small gain."],
  "Under the exceedance convention P90 is the 10th percentile of simulated portfolio NPV, and at 1.7148 it is a gain; the bell fitted to emv and stdDev put it at a loss of 12.4175.")
 
@@ -93,7 +93,7 @@ q(2,
  ["Yes, because a reproducible seeded run ought to land on the exact P(loss).",
   "Yes, because the strict test drops iterations that net exactly zero, which biases the count below the exact loss chance.",
   "No, because the engine rounds P(loss) to the nearest standard error before printing it."],
- "probLoss is a proportion with standard error sqrt(p(1 - p) / n); the largest z on the published cases is 1.4289, and the old 0.365832 sat dozens of standard errors away.")
+ "probLoss is a proportion with standard error sqrt(p(1 - p) / n); the largest z on the published cases is 1.4289, and a normal approximation's 0.365832 sits dozens of standard errors away.")
 
 q(1,
  "identical6 loses with chance 0.117649 and OKONO's 450.0000 set with 0.123600. What does the pair show?",

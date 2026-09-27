@@ -8,12 +8,12 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 # written by tools/course-waves/portfolio/recut/build.py. Edit the rows there, then re-run it.
 
 q(1,
- "OFON-1 with every actual set to 0 and progress unchanged reports earned value 15231500 and CPI 1.000000. What does that CPI say about cost performance?",
- "Nothing: earned value over zero actuals has no value, and the engine returns 1 whenever actuals are 0, the number an AFE exactly on budget shows.",
- ["That the work done cost exactly what it earned, since earned value is compared with the 5000000 committed when no actual has posted.",
-  "That the AFE is on budget to the unit, because with nothing spent no line can yet have overrun its share of the 27050000 budget.",
-  "That CPI is capped at 1 until the first invoice posts, so the 1.009377 the lines earned is held back until the costs catch up with the progress."],
- "OFON-1 as entered reads 1.009377 on actuals of 15090000; with actuals at 0 the 15231500 earned is either costs not yet posted or progress typed ahead of the work, and CPI hides both.")
+ "OFON-1 with every actual set to 0 and progress unchanged reports earned value 15231500. What does the engine report for CPI, and what does that say about cost performance?",
+ "CPI null with cpiStatus \"no-spend\": earned value over zero actuals has no value, and the Suite's CPI tile reads \"N/A\", nothing spent yet.",
+ ["CPI 1.000000: the work done cost exactly what it earned, since earned value is compared with the 5000000 committed when no actual has posted.",
+  "CPI 1.000000: the AFE is on budget to the unit, because with nothing spent no line can yet have overrun its share of the budget.",
+  "CPI 1.009377, held from the last report until the first invoice posts."],
+ "OFON-1 as entered reads 1.009377 on actuals of 15090000; with actuals at 0 the 15231500 earned is either costs not yet posted or progress typed ahead of the work, a question the null ratio leaves to the reader.")
 
 q(3,
  "With every OFON-1 actual set to 0, which of its numbers as of 2027-08-15 still reads what it read before?",
@@ -26,10 +26,10 @@ q(3,
 q(0,
  "The published \"past window, all invoices unpaid: none dated\" case holds an invoice of 100 with no invoice_date field and one of 200 whose invoice_date is null. Its first and last Actual both read 0, and the engine reports 2 undated invoices. Why?",
  "Neither invoice carries a date the engine can read, so neither reaches a bucket, and the count beside the curve names both.",
- ["The null date counts from 1970, which is earlier than every bucket, so the 200 sits in all 12 points while the invoice with no date field never counts.",
-  "The curve falls back to the cost lines when no invoice carries a usable date, and the case's single line of budget 1200 has no actual typed on it.",
-  "Both invoices are placed at the window start, and the 100 is netted against the 200 as a credit because neither can be put in date order."],
- "At Jan 20 Planned is 0 and Actual 0, and at Dec 20 Actual is still 0 beside Planned 1101: the curve carries no money it cannot date, and the count of 2 says how many invoices it left out.")
+ ["The null date counts from 1970, earlier than every bucket, so the 200 sits in every point.",
+  "The curve falls back to the cost lines, and the case's single line has no actual typed on it.",
+  "Both invoices are placed at the window start and netted against each other."],
+ "At Jan 20 Planned is 0 and Actual 0, and at the closing point 31 Dec 20 Actual is still 0 beside Planned 1200: the curve carries no money it cannot date, and the count of 2 says how many invoices it left out.")
 
 q(2,
  "OFON-1's invoice of 5200000 is dated 2027-04-10. At which S-curve point does it first appear, and why?",
@@ -48,28 +48,28 @@ q(1,
  "An invoice the engine cannot date leaves the curve behind the lines however its date is missing, while the CPI of 1.009377 is computed from line actuals the curve never uses.")
 
 q(3,
- "OFON-1's window runs 2027-02-01 to 2027-11-30 on a budget of 27050000, and the S-curve's last Planned point is 24452483. Why does the plan end 2597517 short?",
- "Each point sits on the 1st of its month, so the last one is the 1st of November and the rest of the window to 2027-11-30 is never plotted.",
- ["The plan spreads the budget less the 5000000 already committed, since commitments are drawn on the Actual line and cannot be planned twice.",
-  "The plan holds back a contingency that is released only when the AFE closes, and the metrics carry that contingency inside the EAC instead.",
-  "EC5-0 cut the curve at the as-of date of 2027-08-15 and extended the plan past it from the monthly rate, which loses the last weeks."],
- "The metrics do reach the budget: as of 2027-11-30 time progress is 1.000000 and planned value 27050000, so the chart and the metrics disagree about the same plan.")
+ "OFON-1's window runs 2027-02-01 to 2027-11-30 on a budget of 27050000. The S-curve's last monthly point, \"Nov 27\", plans 24452483. Where does the rest of the plan appear?",
+ "On the closing point, \"30 Nov 27\", which carries Planned 27050000, the budget, adding the remaining 2597517.",
+ ["Nowhere: the plan spreads the budget less the 5000000 already committed, since commitments are drawn on the Actual line.",
+  "In the metrics only, since the chart holds back a contingency that is released when the AFE closes.",
+  "Beyond the window, since the plan runs on past 2027-11-30 at the monthly rate until it reaches the budget in December."],
+ "Each monthly point sits on the 1st of its month, and the closing point is dated the window end; as of 2027-11-30 the metrics also read time progress 1.000000 and planned value 27050000.")
 
 q(0,
- "A reader of OFON-1's S-curve alone sees the last Forecast point at 24949669, below the budget of 27050000. What does the AFE actually forecast?",
- "An overrun: an EAC of 27600000 and a variance at completion of -550000, cut short on the chart by the same last bucket that stops the plan.",
- ["A saving, since the Forecast line is the only projection that reads the invoices, while the metrics forecast every unposted line at its full budget.",
-  "Exactly the budget, because a line with no entered forecast forecasts its budget and the chart has simply not reached the last day yet.",
+ "A reader of OFON-1's S-curve stops at the last monthly point, \"Nov 27\", and sees Forecast 24949669, below the budget of 27050000. What does the AFE actually forecast?",
+ "An overrun: the closing point, \"30 Nov 27\", carries Forecast 27600000, the EAC, a variance at completion of -550000.",
+ ["A saving, since the Forecast line is the only projection that reads the invoices.",
+  "Exactly the budget, because every line with no entered forecast forecasts its budget.",
   "Both at once, an underrun on the chart and an overrun in the metrics, since the curve forecasts only to the as-of date and the metrics to completion."],
- "After the as-of date the Forecast line is the EAC spread from the start and stops at the last bucket; take the EAC and the variance from the metrics and use the curve for its shape.")
+ "The Nov 27 point sits on the 1st of November, a month before the window closes; the metrics agree with the closing point, an EAC of 27600000 against a budget of 27050000.")
 
 q(2,
  "The published \"future window ending on a bucket\" case has 13 points, and its last point reads Planned 2000 and Forecast 2450, the whole EAC. What decides whether a curve's last point reaches the budget?",
- "Where the end date falls against the month starts: a window ending on the 1st gets a point there, and OFON-1, ending on 2027-11-30, loses almost a month.",
- ["The size of the budget, since each monthly bucket of plan is rounded to whole units of the AFE currency, and a budget as small as 2000 loses nothing to that rounding.",
-  "Whether any invoices exist, since a curve with no invoices has no Actual line to cut off and so draws its plan to the end of the window.",
-  "The as-of date, since a default as-of date after the window lets the plan run to completion while a dated report stops the plan."],
- "The one-year 2020 case has 12 points and ends at Planned 1101 on Dec 20 against a budget of 1200, and OFON-1's last Planned point is 24452483 against 27050000.")
+ "Nothing decides it: every curve closes on a point dated the window end, with Planned the budget and Forecast the EAC.",
+ ["The size of the budget, since a small budget loses nothing to rounding.",
+  "Whether any invoices exist to cut the Actual line off early.",
+  "The as-of date, since a dated report stops the plan at that date."],
+ "OFON-1 closes on \"30 Nov 27\" at Planned 27050000 and Forecast 27600000, and the one-year 2020 case on \"31 Dec 20\" at Planned 1200; when a month step lands on the end date, the closing point replaces it.")
 
 q(3,
  "On OKONO's 450.0000 set at the default seed, P(loss) reads 0.123600 at 10000 iterations and 0.125975 at 40000. What did quadrupling the iterations buy?",
@@ -90,7 +90,7 @@ q(1,
 q(0,
  "OKONO's 450.0000 set reads a Low case P90 of -15.1262 at 1000 iterations, -18.3574 at 10000 and -18.8524 at 40000, and -21.8586 to -15.3254 across seeds 1 to 3. What belongs to the set?",
  "That the Low case P90 is below zero, which every run agrees on; its fourth decimal moves with the sample, and the engine prints no standard error for it.",
- ["The value -18.3574 to four decimals, because a percentile is read straight off the sorted draws rather than averaged from them, and so carries no sampling error of its own.",
+ ["The value -18.3574 to four decimals, because a percentile is read straight off the sorted draws with no averaging, and so carries no sampling error of its own.",
   "The value -57.1494, because the closed-form formula emv - 1.2816 x stdDev uses no draws at all and so removes the sampling noise that moves every simulated run.",
   "The average of the six runs, because averaging over seeds and iteration counts removes the sampling noise carried by each run."],
  "The Low case P90 is the 10th percentile of simulated portfolio NPV and wobbles by several million USD between runs; -57.1494 is the normal approximation, a different model.")

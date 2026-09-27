@@ -13,7 +13,7 @@ q(3,
  ["The optimizer holds back a reserve against the loss probability, sized from the simulated spread of the set it has just funded.",
   "OK-6's risked EMV per million USD is the lowest left, and the optimizer stops at the first project whose ratio falls under its cut-off.",
   "The grid is coarse at that limit and rounds each capex up, so the five projects fill every cell although their capex sums to 690.0000."],
- "750.0000 - 690.0000 = 60.0000 is left, and OK-6 needs 310.0000; the limit is whole and under 5000, so the grid is exact and nothing was rounded.")
+ "750.0000 - 690.0000 = 60.0000 is left, and OK-6 needs 310.0000; the knapsack is solved exactly, so nothing was rounded.")
 
 q(1,
  "A spreadsheet takes OKONO's 60.0000 left over at 750.0000, funds a matching slice of OK-6 with it, and reports a higher total than 444.0000. What is wrong?",
@@ -37,7 +37,7 @@ q(0,
  ["The optimizer ranks by plain risked EMV, where OK-3's 41.2500 beats OK-5's 38.0000.",
   "The optimizer credits the well with part of its success case of 420.0000, which the ratio leaves out.",
   "The optimizer lets the limit stretch by one grid cell, giving OK-3 room the ranked list lacked."],
- "Swapping the workovers for the well spends the last 30.0000 and gains 3.2500; the grid is exact at 450.0000, so no stretch or rounding is involved.")
+ "Swapping the workovers for the well spends the last 30.0000 and gains 3.2500; the solve is exact at 450.0000, so no stretch or rounding is involved.")
 
 q(2,
  "OKONO's greedy set, OK-1 + OK-4 + OK-5 at capex 420.0000 and risked EMV 287.7500, loses to the optimizer at 450.0000. Is it a bad set?",
@@ -58,7 +58,7 @@ q(3,
 q(1,
  "The published negativeEmvHugeBudget case has a limit of 10000.0000 and funds good + better for capex 120.0000 and risked EMV 75.0000. A third project, neg, would easily fit. Why is it left out?",
  "Its risked EMV is -44.0000, and funding it would lower the summed risked EMV by exactly that amount.",
- ["The limit is above 5000, so the coarse grid charges neg more cells than its capex of 20.0000 and it can no longer fit beside the others.",
+ ["The limit is above 5000, so a coarse grid charges neg more cells than its capex of 20.0000 and it cannot fit beside the others.",
   "It is refused as an input error, since a negative risked EMV breaks the knapsack.",
   "The optimizer only considers the projects the two largest risked EMVs need."],
  "A risked EMV of 0 or less is never funded however much money is left, so 10000.0000 - 120.0000 stays unspent and the engine reports no error.")
@@ -69,7 +69,7 @@ q(0,
  ["Its capex of 30.0000 cannot fit beside good, since a limit of 500.0000 is checked on a grid of the limit / 2000 per cell.",
   "The engine rejects a zero risked EMV row as unfinished and returns an error naming it.",
   "It would be funded under a tight limit, since a zero project is dropped only when money is left over and idle capex costs nothing."],
- "The engine funds good alone for capex 50.0000 and risked EMV 30.0000 with 450.0000 of the limit spare; 500.0000 is whole and under 5000, so the grid is exact.")
+ "The engine funds good alone for capex 50.0000 and risked EMV 30.0000 with 450.0000 of the limit spare, solved exactly.")
 
 q(0,
  "A licence commitment has a negative risked EMV but must be drilled. How is it handled with this optimizer?",
@@ -113,11 +113,11 @@ q(3,
 
 q(2,
  "At 450.0000 the optimizer's set beats the greedy set by 3.2500. If a revision to one project's inputs closed that gap to an exact tie, what would decide which set came back?",
- "The order the projects were entered in, since the first set built is kept against an equal one found later.",
+ "The capex spent: the optimizer keeps the tied set with less capex, OK-1 + OK-4 + OK-5 at 420.0000, whatever the entry order.",
  ["The loss probability, since a tie hands the choice to the risk summary and it favours the workovers' certain success over the well.",
   "The larger total success NPV, used by the optimizer as a second key, favouring the well.",
-  "The capex spent, since at equal value the knapsack prefers the set that leaves less unspent."],
- "The optimizer compares risked EMV alone and keeps a set unless another is strictly larger, so a tie between the set at 450.0000 and the set at capex 420.0000 is settled by entry order.")
+  "The order the projects were entered in, since the first set built is kept against an equal one found later."],
+ "Among sets tied on risked EMV the exact solve keeps the one with less capex, and entry order decides only between sets of equal capex and equal EMV. The two sets here cost 450.0000 and 420.0000.")
 
 q(1,
  "Raising OKONO's limit from 450.0000 to 600.0000 adds 150.0000 of budget. What happens to the funded set?",

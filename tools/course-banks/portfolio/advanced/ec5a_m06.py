@@ -8,12 +8,12 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 # written by tools/course-waves/portfolio/recut/build.py. Edit the rows there, then re-run it.
 
 q(2,
- "Before EC5-0 the risk summary gave the single wildcat (pos 0.300000, npv_p50 300.0000, fail_cost 50.0000) a Low case P90 of -150.5560. What was wrong with it?",
- "It lay below the worst possible outcome of -50.0000, a low case no portfolio could reach; the simulation's P90 is -50.0000, an outcome that can happen.",
- ["It was too optimistic, since the exact low case of a lone wildcat lies further below zero than -150.5560 once the fail cost is risked.",
-  "It was right but imprecise, since a normal approximation settles on the exact low case once enough projects are added to the portfolio.",
-  "It was right for the model and wrong for the inventory, since the wildcat's fail_cost of 50.0000 had been entered as a loss in every year."],
- "The same approximation put P(loss) at 0.365832 against an exact 0.700000; the engine now draws success and failure and reads 0.696100 at seed 20260829 and 10000 iterations.")
+ "A normal approximation gives the single wildcat (pos 0.300000, npv_p50 300.0000, fail_cost 50.0000) a Low case P90 of -150.5560. What is wrong with it?",
+ "It lies below the worst possible outcome of -50.0000, a low case no portfolio can reach; the simulation's P90 is -50.0000, an outcome that can happen.",
+ ["It is too optimistic, since the exact low case of a lone wildcat lies further below zero than -150.5560 once the fail cost is risked.",
+  "It is right but imprecise, since a normal approximation settles on the exact low case once enough projects are added to the portfolio.",
+  "It is right for the method and wrong for the inventory, since the wildcat's fail_cost of 50.0000 was entered as a loss in every year."],
+ "The same approximation puts P(loss) at 0.365832 against an exact 0.700000; the engine draws success and failure and reads 0.696100 at seed 20260829 and 10000 iterations.")
 
 q(0,
  "A reviewer raises the correlation on OKONO's 600.0000 set from 0 to 1 and expects its risked value to fall. What moves?",
@@ -33,19 +33,19 @@ q(3,
 
 q(1,
  "The capstone order starts with the inputs. Why write one risked EMV by hand, such as OK-3's, before running anything?",
- "A clamp or a default changes an input silently, so 0.250000 x 420.0000 - 0.750000 x 85.0000 = 41.2500 confirms the engine read what was typed.",
+ "A default or a quiet reading changes an input silently, so 0.250000 x 420.0000 - 0.750000 x 85.0000 = 41.2500 confirms the engine read what was typed.",
  ["The engine reports only the summed EMV of the funded set, so a project's own risked EMV exists nowhere unless it is worked out by hand.",
-  "OK-3's success-case NPV of 420.0000 is its value, and the hand calculation shows how much of that value the grid keeps after rounding.",
+  "OK-3's success-case NPV of 420.0000 is its value, and the hand calculation shows how much of that value the optimizer keeps.",
   "The hand figure is the one the capstone grades, since the engine rounds each project's risked EMV to a whole million USD."],
- "A pos of 1.4 or \"n/a\" returns 80.0000 on the published case with no warning; OK-3's risked EMV of 41.2500 is only 0.098214 of its success-case NPV.")
+ "An omitted pos defaults to 1 and a negative fail_cost reads as 0, with no warning; OK-3's risked EMV of 41.2500 is only 0.098214 of its success-case NPV.")
 
 q(2,
- "OKONO at 450.0000 funds OK-1 + OK-3 + OK-4 at resolution 1.0000 with overLimit false. On a run whose resolution is coarser than 1 million USD per cell, what must the answer add?",
- "Whether overLimit fired, and that an undershoot (D4) or a free project charged a cell (D2) would not be flagged.",
- ["Nothing further, because overLimit false on a coarse grid certifies both that the set is feasible and that no better set was missed.",
-  "The exact optimum, which the repaired engine reports beside the grid answer whenever the resolution is coarser than 1 million USD.",
-  "A rerun on a different seed, since a coarse grid is sampled rather than solved and the funded set moves from one seed to the next."],
- "gridUndershoot shows why: overLimit false and EMV 660.0000, where the exact optimum is 860.0000.")
+ "OKONO at 450.0000 funds OK-1 + OK-3 + OK-4, solveMethod exact with optimalityGap 0.0000. On a run whose solveMethod reads grid-feasible, what must the answer add?",
+ "The optimalityGap beside the EMV, the most a better set within the limit could add, since the fallback can fall short.",
+ ["Nothing further, because overLimit false on the fallback certifies both that the set fits and that no better set was missed.",
+  "The exact optimum, which the engine reports beside the fallback answer whenever the grid is used.",
+  "A rerun on a different seed, since a fallback grid is sampled and the funded set moves from one seed to the next."],
+ "The published gridUndershootFallback reads X + Y + Z at 660.0000 with optimalityGap 200.0000, where the exact optimum is 860.0000.")
 
 q(0,
  "OKONO's 450.0000 set reads P(loss) 0.123600 and a Low case P90 of -18.3574. What must be written beside them?",
@@ -73,19 +73,19 @@ q(1,
 
 q(2,
  "A capstone answer quotes OFON-1's CPI of 1.009377, correctly, with nothing beside it. Why does it lose marks?",
- "A CPI needs the actuals total beside it, 15090000 here, because 1.000000 is also what the engine reports when actuals are 0.",
+ "A CPI needs the actuals total beside it, 15090000 here, the amount earned value was divided by; with nothing spent CPI is null.",
  ["A CPI needs its as-of date beside it, because CPI moves with the date in the same way SPI moved from 1.141290 to 0.872063.",
   "A CPI needs its seed beside it, because every ratio in an expert capstone is simulated and moves from one run to the next.",
   "A CPI above 1 has to be reported as 1, because the engine caps each performance ratio at the budget before it writes the report."],
- "A correct number with its condition missing loses marks: a P90 without a seed, an SPI without an as-of date, a set without overLimit, and a CPI without the actuals total.")
+ "A correct number with its condition missing loses marks: a P90 without a seed, an SPI without an as-of date, a set without its solveMethod, and a CPI without the actuals total.")
 
 q(0,
- "An answer reports OFON-1's EAC as 24949669, read off the last Forecast point of the S-curve. What has it done?",
- "Turned an overrun into an apparent saving: the EAC is 27600000 with a variance of -550000, and the curve's last bucket cuts the Forecast line short.",
+ "An answer reports OFON-1's EAC as 24949669, read off the Forecast of the S-curve's last monthly point, \"Nov 27\". What has it done?",
+ "Turned an overrun into an apparent saving: the closing point and the metrics give the EAC as 27600000, a variance of -550000.",
  ["Reported the EAC correctly as of 2027-08-15, since the curve's Forecast line is the only projection that takes the as-of date into account.",
   "Reported the forecast before commitments, which the metrics add on top of the curve's last value to arrive at the EAC.",
-  "Reported the plan instead of the forecast, since the two lines trade places after the as-of date and that point belongs to Planned."],
- "The last Planned point is 24452483 and the last Forecast point 24949669, both below the budget of 27050000; take the EAC from the metrics and use the curve for its shape.")
+  "Reported the plan in place of the forecast, since the two lines trade places after the as-of date and that point belongs to Planned."],
+ "Nov 27 plans 24452483 and forecasts 24949669, both below the budget of 27050000; the closing point, \"30 Nov 27\", carries Planned 27050000 and Forecast 27600000.")
 
 q(3,
  "OKONO at 600.0000 is rerun on a different seed. Which of its results can change?",
@@ -93,7 +93,7 @@ q(3,
  ["P(loss) and the stdDev of 143.8374, which is the spread of the simulated draws and moves with them.",
   "P(loss) and the funded set as well, because the optimizer breaks ties between sets of equal EMV by a draw on the seed.",
   "None of them, because a seed fixes only the order of the draws, and every order of the same draws yields the same count of losses."],
- "emv and stdDev are closed form and the optimizer keeps the first best set it builds; at 450.0000, P(loss) runs from 0.119100 to 0.128500 across seeds 1 to 3.")
+ "emv and stdDev are closed form, and the optimizer is exact and deterministic; at 450.0000, P(loss) runs from 0.119100 to 0.128500 across seeds 1 to 3.")
 
 q(1,
  "Which question do the portfolio and AFE engines hand over to field development planning?",
@@ -109,7 +109,7 @@ q(0,
  ["P(loss) is 0.123600 on the default settings, with the standard error of 0.010050 that any probability counted from the draws carries.",
   "P(loss) is 0.142035, what this set's emv and stdDev give once the noise of any one seed is taken out.",
   "P(loss) is 0.123600 to six decimals, a figure the seed makes exact, so that no standard error needs to be printed beside it."],
- "0.010050 is the standard error at 1000 iterations, not at 10000; 0.142035 is what the normal approximation would have said, a different model.")
+ "0.010050 is the standard error at 1000 iterations, and 0.003291 the one at 10000; 0.142035 is the normal approximation's figure, a different model.")
 
 q(3,
  "Working the set, an answer places OKONO's 450.0000 optimum beside the ranking by EMV per million USD. What does the comparison show?",
@@ -120,12 +120,12 @@ q(3,
  "The ranking spends 420.0000 of the 450.0000; the best set is not the best projects, and OK-3 is funded at 450.0000 and dropped again at 600.0000.")
 
 q(2,
- "Checking OFON-1's inputs before the AFE is read, an answer finds every progress at 0 or more. What must it still point out?",
- "Any progress above 100 percent, which the engine accepts and which earns value beyond the budget, as the published case's CPI of 1.666667 shows.",
- ["Nothing more, because the engine refuses progress outside 0 to 100 percent, exactly as its message says, so a report that returns metrics has passed both bounds of the check.",
-  "Any line at 0 percent, because the engine treats a line not yet begun as refused progress and drops its budget from planned value.",
-  "Any line at 100 percent, such as CSG-02, because a complete line is clamped and its actual of 4300000 is taken out of CPI."],
- "Negative progress throws AfeInputError, but only the lower bound is enforced; CSG-02 sits at 100.0000 percent with actuals of 4300000 against a budget of 3900000 and could be pushed past 100 with no refusal.")
+ "Checking OFON-1's inputs before the AFE is read, an answer confirms every progress runs from 0 to 100 percent. Why does that check matter before the report is run?",
+ "Because a single line outside it stops the whole report: the engine returns no metrics until that line is corrected.",
+ ["A line above 100 percent is accepted and earns value beyond its budget, so it has to be read beside the CPI before the CPI is believed.",
+  "Any line at 0 percent is treated as refused progress, and its budget is dropped from planned value.",
+  "Any line at 100 percent, such as CSG-02, is clamped and its actual of 4300000 is taken out of CPI."],
+ "The published case at 150 percent reads Cost item \"0\" has progress above 100 percent (150 percent); CSG-02 sits at 100.0000 percent, the most a line can earn, with actuals of 4300000 against a budget of 3900000.")
 
 emit(Q, '/root/wt-ec45-recut/tools/course-banks/portfolio/advanced/ec5a_m06.json', expect_n=15)
 finish()

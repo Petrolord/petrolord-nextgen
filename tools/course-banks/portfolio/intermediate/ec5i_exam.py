@@ -24,12 +24,12 @@ q(0,
  "0.563087 over 0.493377 gives 1.141290 up to the rounding of the printed figures, and from the end day, where time progress is 1.000000, the same division leaves 0.563087.")
 
 q(3,
- "The dashboard shows OFON-1's EAC as 27600000, while the last point of the S-curve's Forecast series, Nov 27, reads 24949669. A partner concludes the chart runs on a different forecast rule. What is the better reading?",
- "Both carry the same EAC from the one itemForecast rule; the curve spreads it evenly from the start and its last monthly point stands on the first of November, before the end date.",
- ["The curve forecasts each line at its budget less its actual, the export rule from before the repair, so the projection carries none of the overrun on CSG-02 or CMT-03 and ends lower.",
+ "The dashboard shows OFON-1's EAC as 27600000. On the S-curve as of 2027-08-15 the Nov 27 point's Forecast reads 24949669, and a partner concludes the chart runs on a different forecast rule. What is the better reading?",
+ "Both carry the same EAC from the one itemForecast rule; the curve spreads it evenly from the start, Nov 27 is only the last monthly point, and the closing point \"30 Nov 27\" carries 27600000.",
+ ["The curve forecasts each line at its budget less its actual, a separate export rule, so the projection carries none of the overrun on CSG-02 or CMT-03 and ends lower.",
   "The curve projects spend from the invoices at the pace of the last four, so its Forecast is a burn-rate estimate that happens to land short of the rule's EAC.",
   "The curve's Forecast is the budget redrawn, and the distance between the two figures is the variance at completion of -550000 that the tiles report."],
- "Past the as-of date the Forecast is the EAC of 27600000 spread from 2027-02-01, and the walk stops at Nov 27, so the chart ends at 24949669 while the rule behind both figures is the same.")
+ "Past the as-of date the Forecast is the EAC of 27600000 spread from 2027-02-01. Nov 27 stands on the first of November, and the closing point dated 2027-11-30 carries Forecast 27600000, the dashboard's EAC.")
 
 q(1,
  "In the published case \"past window, all invoices unpaid: none dated\", the single line has a budget of 1200 and no actual typed on it, while the S-curve reads an Actual of 0 from its first point to its last and reports 2 undated invoices. What does each record say was spent?",
@@ -43,7 +43,7 @@ q(1,
  "Between OFON-1's reports dated 2027-06-30 and 2027-08-15 the lines were not touched. SPI falls from 1.141290 to 0.872063 and CPI holds at 1.009377. A manager takes the steady CPI as proof the crew kept working at budgeted efficiency through those weeks. What is wrong with that?",
  "CPI is earned value over actuals read from the lines as entered, so it prints 1.009377 on both dates whether the rig worked or nobody updated the progress column.",
  ["Nothing, since CPI and SPI share earned value as their numerator, and a CPI that holds while spend rises pins the growth in earned value to the growth in spend over the period.",
-  "CPI is taken against planned value on the report date, so it should have fallen with SPI, and its steadiness shows that one report was exported before the repair.",
+  "CPI is taken against planned value on the report date, so it should have fallen with SPI, and its steadiness shows that one report was exported from an older copy.",
   "A steady CPI beside a falling SPI means spend fell in step with progress, which is the signature of a rig held on standby at a reduced day rate."],
  "Earned value stood at 15231500 while planned value grew from 13345861 to 17466060; neither CPI nor SPI can say whether the work stopped or the progress was simply never updated.")
 
@@ -64,12 +64,12 @@ q(0,
  "Points stand on the start date stepped by whole months, so 17466060 falls between Aug 27 at 16212086 and Sep 27 at 18988742, and earned value is not plotted at all.")
 
 q(2,
- "DRL-01's progress is retyped from 72.0000 to a figure past 100 percent, and nothing else on OFON-1 changes. What does the repaired engine do?",
- "It accepts the figure: DRL-01 earns more than its 14200000 budget, so earned value, CPI, percent complete and every non-null SPI rise, while the EAC stays at 27600000.",
- ["It refuses the figure with a message naming the cost item, because its own message says progress runs from 0 to 100 percent.",
+ "DRL-01's progress is retyped from 72.0000 to 120 percent, and nothing else on OFON-1 changes. What does the engine do?",
+ "It refuses the report with an AfeInputError naming DRL-01: progress runs from 0 to 100 percent, so no line can earn past its budget.",
+ ["It accepts the figure: DRL-01 earns 120 percent of its 14200000 budget, so earned value, CPI and percent complete rise while the EAC stays put.",
   "It silently clamps the figure to 100 percent on the way in, so DRL-01 earns exactly its 14200000 budget and no reading can pass what the line was authorised to cost.",
   "It accepts the figure and lowers the EAC, because the forecast rule reads progress past 100 percent as work bought for less than its budget."],
- "The published case \"progress beyond 100 percent earns beyond the budget\" returns EV 150.0000 and CPI 1.666667; only negative progress is refused, and the forecast rule never reads progress.")
+ "The engine returns Cost item \"DRL-01\" has progress above 100 percent (120 percent). Progress runs from 0 to 100 percent. Progress of exactly 100 is accepted and earns the whole budget; the forecast rule never reads progress.")
 
 q(3,
  "OFON-1's invoice of 2390000, dated 2027-07-18, is found to have been billed in June and is redated to a June day. As of 2027-08-15, what changes?",
@@ -80,12 +80,12 @@ q(3,
  "Each point is cumulative to the first of its month, so Jul 27 moves from 12700000 to the full 15090000; the metrics read the line actuals, which were never touched.")
 
 q(2,
- "One line carries an entered forecast of -50; another, Completion, carries progress of -0.5 percent. How does the repaired AFE engine treat the two entries?",
- "The forecast is dropped without a word and the line falls back to the larger of its budget and actual + commitment; the progress stops the calculation with a message naming the cost item.",
- ["Both are refused with an AfeInputError naming the cost item, because the repair added one guard against negative entries across every column of a line.",
+ "One line carries an entered forecast of -50; another, Completion, carries progress of -0.5 percent. How does the AFE engine treat the two entries?",
+ "The forecast is replaced by the larger of budget and actual + commitment and the line is flagged forecastIgnored \"negative\"; the progress stops the calculation with a message naming the cost item.",
+ ["Both are refused with an AfeInputError naming the cost item, because one guard against negative entries covers every column of a line.",
   "Both are clamped to zero without a message, so the forecast becomes 0 and falls back to the rule, while the progress earns nothing on the line.",
   "The forecast is refused with a message, since a negative cost cannot be forecast, while the progress is clamped to zero so earned value can still be summed."],
- "The published line with a forecast of -50 returns EAC 100.0000 and variance 0.0000 silently, while negative progress fails with \"Progress runs from 0 to 100 percent.\"")
+ "The published line with a forecast of -50 returns EAC 100.0000 and variance 0.0000 with one line counted in linesForecastIgnored, while negative progress fails with \"Progress runs from 0 to 100 percent.\"")
 
 q(0,
  "CPI, SPI and percent complete each put OFON-1's earned value of 15231500 over something. Which of the three denominators moves with the as-of date?",
@@ -101,7 +101,7 @@ q(1,
  ["CMT-03 forecasts its new actual + commitment, since the rule takes the larger of the entered figure and the money already spent and committed.",
   "The EAC and the curve's Actual both rise, since an accrual is posted to the invoices so that the two records of spend stay in step.",
   "CMT-03 forecasts its budget of 1250000 again, because an entered forecast below the money already spent is read as not positive."],
- "A positive entered forecast wins unconditionally and is never compared with actual + commitment, so the line can report 1400000 on money already past it; the curve reads only the invoices.")
+ "A positive entered forecast is kept even when the money spent and committed passes it; the line is then flagged forecastBelowCommitted with the shortfall, and the curve reads only the invoices.")
 
 q(0,
  "What is the earliest as-of date on which OFON-1 reports an SPI that is not null?",
@@ -141,15 +141,15 @@ q(2,
  ["The SPI, which is null on an AFE with no window because the engine cannot build a plan without dates to spread it over.",
   "The planned value, which is 0 on an AFE with no window and the whole budget on one whose end date has passed.",
   "A refusal, since the engine rejects any as-of date on an AFE with no window, printing \"asOf is not a valid date\"."],
- "The published no-dates case returns time progress 1.000000 and SPI 0.250000, the published window read after its end returns 1.000000 and 0.940000; the repaired Suite labels SPI unavailable when there are no dates.")
+ "The published no-dates case returns time progress 1.000000 and SPI 0.250000, the published window read after its end returns 1.000000 and 0.940000; the Suite labels SPI unavailable when there are no dates.")
 
 q(0,
- "The published \"suite test: empty AFE\" returns SPI 1.000000, while OFON-1 as of 2027-01-15 returns SPI null. What separates the two?",
- "The empty AFE has a budget of 0, and a guard returns SPI 1 before planned value is considered; OFON-1 has a budget and a planned value of 0, which gives null.",
- ["The empty AFE has no window, so time progress falls back to 1 and planned value equals earned value, which makes the ratio exactly 1, the same fallback the no-dates case uses.",
-  "OFON-1 is dated before its start and the empty AFE after its end, and the engine prints null before a window and 1 after one.",
-  "Both are the same reading printed two ways: the empty AFE's report came from the Suite and OFON-1's came from the engine, which prints null for 1."],
- "The zero-budget guard fires first, so an AFE with nothing in it reports SPI 1.000000 while one with 27050000 of budget and no planned value reports null.")
+ "The published \"suite test: empty AFE: no budget and no spend, so SPI and CPI are null\" returns SPI null, and OFON-1 as of 2027-01-15 returns SPI null too. What separates the two nulls?",
+ "spiStatus: the empty AFE has no budget and reads \"no-budget\"; OFON-1 has a budget but no planned value yet and reads \"no-planned-value\".",
+ ["Nothing: both AFEs lack a window, so time progress falls back and the engine prints one null for every AFE without dates.",
+  "OFON-1 is dated before its start and the empty AFE after its end, and the engine prints null on both sides of a window.",
+  "The CPI: OFON-1's is null before the start and the empty AFE's is 1, and the SPI simply follows the CPI in each report."],
+ "The status says why the schedule index is missing: \"no-budget\" when there is nothing to plan against at all, \"no-planned-value\" when a budget exists but the window has not yet planned any of it.")
 
 q(1,
  "OFON-1's S-curve is redrawn as of 2027-06-30 in place of 2027-08-15. Which series is identical point for point in the two drawings?",
@@ -163,7 +163,7 @@ q(3,
  "As of 2028-01-10 OFON-1's planned value is 27050000 and its SPI 0.563087, though its EAC is 27600000. What can still change that SPI?",
  "Only progress entered on the lines, because planned value has stopped at the approved budget and a later date or a revised EAC cannot move it.",
  ["A later as-of date, since planned value keeps climbing past the end date toward the EAC, so the SPI falls further every month the AFE runs late.",
-  "A revised EAC, because after the end the engine divides earned value by the forecast at completion rather than by the approved budget.",
+  "A revised EAC, because after the end the engine divides earned value by the forecast at completion in place of the approved budget.",
   "A new invoice, because after the end of the window SPI is computed from the S-curve's Actual line in place of the typed progress."],
  "After the end SPI is 15231500 over 27050000, percent complete over 100; the -550000 overrun never enters the schedule measure.")
 
@@ -172,7 +172,7 @@ q(3,
  "The EAC and the variance at completion, since LOG-04 now forecasts its actual + commitment, and with them the projected Forecast; earned value, CPI, percent spent and SPI stay.",
  ["Percent spent and CPI as well as the EAC, because a placed order is counted as spend once it takes the line past its budget.",
   "Nothing until the order is invoiced, since commitments enter the forecast only when an invoice ties them to a line.",
-  "The EAC only, while the curve's Forecast stays put, because past the as-of date the curve reads the invoices rather than the rule."],
+  "The EAC only, while the curve's Forecast stays put, because past the as-of date the curve reads the invoices and skips the rule."],
  "The published line with 70 spent and 60 committed on a budget of 100 forecasts 130.0000; commitments enter the rule and no other reading, and the curve projects whatever EAC the rule gives.")
 
 q(1,
@@ -192,12 +192,12 @@ q(0,
  "15231500 over 17466060 weighs work by money and the calendar by money, and counts no days of delay on any line.")
 
 q(2,
- "The published window from 2020-01-01 to 2020-12-31, read as of 2020-06-30, has one line with a budget of 1200, an actual of 200, a commitment of 100 and an entered forecast of 1500. Its last point reads Planned 1101 and Forecast 1377. What is the line's EAC, and why is it not on the curve?",
- "1500, the entered forecast; the projection spreads it from the start and the last point stands on the first of December, so 1377 falls short of it as 1101 falls short of 1200.",
- ["1377, because past the as-of date the Forecast series is the EAC itself, and the last point is where the projection finishes.",
-  "1200, the budget, because an entered forecast is taken only when the actual + commitment of 300 has already passed the budget.",
-  "300, the actual + commitment, because the entered 1500 is set aside once invoices have been billed against the line."],
- "A positive entered forecast wins, and on 12 monthly points the Forecast and the Planned lines take the same share of the calendar, of 1500 and of 1200.")
+ "The published window from 2020-01-01 to 2020-12-31, read as of 2020-06-30, has one line with a budget of 1200, an actual of 200, a commitment of 100 and an entered forecast of 1500. What is the line's EAC, and where does it appear on the curve?",
+ "1500, the entered forecast; the projection spreads it from the start and the closing point \"31 Dec 20\" carries Forecast 1500 beside Planned 1200.",
+ ["1200, the budget, because past the as-of date the Forecast series follows the plan and the closing point carries only the budget.",
+  "300, the actual + commitment, because the entered 1500 is set aside once invoices have been billed against the line.",
+  "1377, the projection read on the first of December, since the curve stops at its last monthly step before the end date."],
+ "A positive entered forecast wins, so the EAC is 1500. The curve has 13 points and closes on \"31 Dec 20\", windowEnd true, with Planned 1200 and Forecast 1500; Actual there is null because the end is after the as-of date.")
 
 q(0,
  "Presenting OFON-1's S-curve, a cost engineer explains the rise in Forecast from 15090000 at Aug 27 to 19374834 at Sep 27 as the commitments falling due in September. What does produce the rise?",
@@ -209,25 +209,25 @@ q(0,
 
 q(2,
  "A new AFE is reported as of its start day. Progress is typed on its budgeted lines but no actuals have been entered. What CPI and SPI does the engine print?",
- "CPI 1 and SPI null: both ratios are undefined, but only the SPI says so, because CPI 1 whenever actuals are 0 is an unrepaired property.",
- ["CPI null and SPI null, because the repair made every division by zero across the AFE metrics return null in place of a number a chart could plot.",
+ "CPI null and SPI null: CPI with cpiStatus \"no-spend\" because nothing has been spent, and SPI with \"no-planned-value\" because no whole day has elapsed.",
+ ["CPI 1 and SPI null, because the engine prints a neutral CPI of 1 whenever nothing has been spent and keeps null for the schedule only.",
   "CPI 1 and SPI 1, because a single guard returns 1 for both ratios whenever nothing has been spent on the lines and nothing has yet been planned.",
   "A refusal for the CPI, which the engine cannot compute without spend on the lines, and an SPI of 0 because no planned value has yet accrued."],
- "The weighted earned value case shows CPI 1.000000 with 110.0000 earned and nothing spent, and OFON-1 on 2027-02-01 shows time progress 0.000000 and SPI null.")
+ "The published weighted earned value case shows CPI null (no-spend) with 110.0000 earned and nothing spent, and OFON-1 on 2027-02-01 shows time progress 0.000000 and SPI null (no-planned-value).")
 
 q(3,
  "A published S-curve on a window from 2090-01-01 to 2091-01-01 has three lines: budget 1200 with actual 900 and commitment 600; budget 500 with forecast 650; budget 300 with forecast -10. Its last Forecast point is 2450. Which reading of the lines produces that figure?",
  "The first line forecasts its actual + commitment of 1500, the second its entered 650, and the third its budget of 300, because -10 is not positive.",
  ["The first line forecasts its budget of 1200 with its 600 committed added on top, the second its entered 650, and the third drops out because a negative entry removes the line.",
-  "The rule before the repair, which took any non-zero entry: the first line at its actual + commitment, the second at 650 and the third at its entered -10.",
+  "Any non-zero entry is taken as typed: the first line at its actual + commitment, the second at 650 and the third at its entered -10.",
   "Every line forecasts its budget, 2000 in all, and the curve lifts the last point by the entered forecasts less the budgets they replace."],
- "The 13 points reach the whole EAC because a point stands on the end date, where Planned is 2000; the third line's -10 is ignored by the rule and by the curve.")
+ "The 13 points close on \"1 Jan 91\", the end date, where Planned is 2000 and Forecast the whole EAC; the third line's -10 is ignored by the rule and by the curve.")
 
 q(1,
  "A group capital summary adds OFON-1's operator share of 6762500 to the risked EMV of 402.7500 on OKONO's 600.0000 set. What is wrong with the sum?",
  "The two models share nothing: 6762500 is a share of an AFE budget in whole USD, 402.7500 a risked value in million USD, and no rescaling makes them one quantity.",
  ["Only the units: dividing 6762500 by a million and rounding to four decimals first makes the sum sound, since both figures are dollars of capital the operator stands behind.",
-  "Only the timing: the operator's share should be taken on the EAC of 27600000 rather than the budget, so that both figures describe the end of the programme and can be summed.",
+  "Only the timing: the operator's share should be taken on the EAC of 27600000 in place of the budget, so that both figures describe the end of the programme and can be summed.",
   "Nothing, since an operator's share and a risked EMV are both the operator's expected outlay, and they add directly."],
  "Mixing the two fields is the mistake examined here: 25.0000 percent of 27050000 is an authorised cost, and OKONO's figure is value from a different inventory in a different unit.")
 
@@ -256,12 +256,12 @@ q(3,
  "Earned value pays each line what its work was authorised to cost, 3900000, which is exactly what lets it be set against the 4300000 spent; the rule forecasts what the line has cost.")
 
 q(2,
- "Before the repair, an AFE whose window spanned today was opened on two days in a row with nothing changed on its lines. What differed between the two openings, and what does the repaired engine do instead?",
- "The SPI, because the engine read the clock for time progress; it now takes an explicit as-of date, so OFON-1 run for 2027-08-15 gives planned value 17466060 whenever it is run.",
- ["The EAC, because the forecast rule read today's date to decide which invoices counted toward each cost line, and the repaired rule reads the window's end date in its place instead.",
-  "The CPI, because actuals were pro-rated to today's date across the window, and the repaired engine now reads the actuals as they stood on the window's opening start date instead.",
-  "Nothing, since the old engine already took a report date, and the repair only renamed the field and added the refusal of an invalid one."],
- "The same clock also walked the S-curve on to the current month, 81 points for a 2020 AFE on 2026-09-14; now the date is an input and the curve stops at the window's end.")
+ "An AFE whose window spans today is opened on two days in a row with nothing changed on its lines, and the as-of box is left at its default each time. What differs between the two openings?",
+ "The SPI, because the dashboard passes today as the as-of date by default; OFON-1 run for 2027-08-15 gives planned value 17466060 on any day.",
+ ["The EAC, because the forecast rule reads the as-of date to decide which invoices count toward each cost line.",
+  "The CPI, because actuals are pro-rated to the as-of date across the window before they are divided into earned value.",
+  "Nothing, since the engine reads the window's end date for every calculation and the as-of date only labels the report."],
+ "The engine never reads the clock: every call states its as-of date, and only time progress, planned value and SPI move with it. The dashboard supplies today unless a date is typed into its As of box.")
 
 q(2,
  "CMP-05 has 1200000 committed, nothing spent and progress of 0.0000. What does the line put into OFON-1's readings?",
@@ -288,20 +288,20 @@ q(1,
  "Planned value is the budget times the elapsed fraction of the window, 0.645695 of 27050000 at 2027-08-15 on the true dates, so only the calendar readings follow a wrong start.")
 
 q(0,
- "Drawn as of 2027-06-30 rather than 2027-08-15, how many points does OFON-1's S-curve carry, and why?",
- "Still 10: the walk runs from the start date to the end date in monthly steps, and the as-of date decides only where Actual stops and Forecast projects.",
- ["Fewer, since the repaired walk stops at the as-of date and plots no point after the day the report was run for.",
+ "Drawn as of 2027-06-30, earlier than the usual 2027-08-15, how many points does OFON-1's S-curve carry, and why?",
+ "Still 11: ten monthly steps from the start date and a closing point on the end date; the as-of date decides only where Actual stops and Forecast projects.",
+ ["Fewer, since the walk stops at the as-of date and plots no point after the day the report was run for.",
   "One more, since a report dated inside the window adds a point on the as-of date so that the plan behind the SPI can be read.",
   "As many as the months to the present, since the walk runs on from the start date to the current calendar month."],
- "The repair bound the walk to the window, where before it a 2020 AFE drew 81 points on 2026-09-14; the as-of date moves null Actuals, never the count.")
+ "The walk is bound to the window and closes on \"30 Nov 27\" whatever the as-of date; the date moves null Actuals and the projected Forecast, and leaves the count alone.")
 
 q(0,
  "The published window from 2026-01-01 to 2027-12-31 returns SPI 1.139063 as of 2026-09-14 and SPI 0.940000 as of 2028-06-30. What is the second figure?",
  "Earned value over the whole budget, the case's percent complete divided by 100, because time progress stops at 1 after the end.",
  ["A schedule ratio that has fallen because the plan kept growing after the end date while earned value stood still on the lines.",
   "The first reading corrected for the 256 of 729 days, applied once the window closed to turn a mid-window ratio into a final one.",
-  "The case's CPI, which the engine substitutes for SPI once the window has closed and planned value can no longer be computed."],
- "At 2026-09-14 time progress is 0.351166, 256 of 729 days; after the end it is 1.000000, so the date can no longer move the 0.940000.")
+  "The case's CPI, which the engine substitutes for SPI once the window has closed and planned value cannot be computed any more."],
+ "At 2026-09-14 time progress is 0.351166, 256 of 729 days; after the end it is 1.000000, so the date cannot move the 0.940000.")
 
 q(1,
  "CMT-03's engineer clears the entered forecast of 1400000, leaving the field blank. What happens to the line and to OFON-1?",
@@ -312,12 +312,12 @@ q(1,
  "CMT-03's -150000 existed only because it was typed; the spend overrun on CSG-02, -400000, stays because it rests on money already spent.")
 
 q(2,
- "Which of these entries does the repaired AFE engine refuse outright with a message?",
+ "Which of these entries does the AFE engine refuse outright with a message?",
  "A progress figure below zero on a cost line, refused with a message that names the item.",
  ["An entered forecast smaller than the money already spent and committed on the line, which the rule declines to take.",
-  "An invoice whose date is null, which the curve refuses outright rather than leave it out of every bucket it draws.",
-  "Progress above 100 percent, which the message says lies outside the range from 0 to 100 percent."],
- "Negative progress fails with the item named, as the published message for CMP-02 at -20 percent shows; CMT-03 with 900000 entered is taken as typed, an invoice with a null date is left off the curve and counted beside it rather than refused, and progress past 100 percent is accepted, earning 150.0000 in its published case.")
+  "An invoice whose date is null, which the curve refuses outright and so leaves out of every bucket it draws.",
+  "An entered forecast below zero, which the message says lies outside what a line can cost."],
+ "Negative progress fails with the item named, as the published message for CMP-02 at -20 percent shows. CMT-03 with 900000 entered is kept and flagged forecastBelowCommitted, a null-dated invoice is left off the curve and counted, and a negative forecast is replaced and flagged forecastIgnored \"negative\".")
 
 q(3,
  "Past the as-of date the S-curve's Forecast is the EAC spread from the window's start. Could its first projected point sit below the last actual?",
@@ -325,7 +325,7 @@ q(3,
  ["No, because the projection adds the spend still to come onto the last actual it follows, so the series can only rise or hold level past the as-of date.",
   "No, because the EAC is never below actual + commitment, so no share of it can fall under the invoices at any point.",
   "Only when an entered forecast is negative, since the S-curve takes a negative entry at its face value and pulls the projected line down under the actuals."],
- "OFON-1 steps up from 15090000 to 19374834 because its invoices sit under the straight line; the size and sign of the step come from that distance, not from spending.")
+ "OFON-1 steps up from 15090000 to 19374834 because its invoices sit under the straight line; the size and sign of the step come from that distance, and no spending happens at that point.")
 
 q(0,
  "A partner asks how likely OFON-1's variance at completion of -550000 is to hold. What can the AFE engine say?",

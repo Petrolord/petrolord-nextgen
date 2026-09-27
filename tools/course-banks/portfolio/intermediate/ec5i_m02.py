@@ -21,7 +21,7 @@ q(3,
  ["940000, because the engine floors an entered forecast at the money already spent and committed before it accepts the figure.",
   "1250000, because a forecast below the spend to date is not credible and the rule falls back to the larger of its two formula figures.",
   "Nothing, because a forecast below actual plus commitment is refused with an input error that names the cost item carrying it."],
- "The rule never compares a positive entry with the spend (finding EC5-1); an entry of 1 on the same line forecasts 1.")
+ "A positive entry is kept as the forecast and compared with the spend: the line is flagged forecastBelowCommitted, forecastBelowCommittedBy 40000; an entry of 1 on the same line forecasts 1.")
 
 q(0,
  "CMP-05's completion work is cancelled and its forecast field is set to 0. What does the OFON-1 report show?",
@@ -53,7 +53,7 @@ q(1,
  ["The engine reads 1 as a forecast stated in millions and scales it up before comparing, while it reads 0 as a field left blank.",
   "A forecast of 1 is held for review and shown as entered, while a forecast of 0 is taken as a descope and the line keeps its budget.",
   "A floor at actual plus commitment applies only to a zero entry and leaves 1 alone."],
- "Nothing checks a positive entry against the 940000 already spent and committed, so 1 stands; 0 falls to the larger of 1250000 and 940000.")
+ "A positive entry is kept, so 1 stands, flagged forecastBelowCommitted with forecastBelowCommittedBy 939999; 0 is no entry at all and falls to the larger of 1250000 and 940000.")
 
 q(3,
  "OFON-1's variance at completion is -550000. How is it built?",
@@ -64,7 +64,7 @@ q(3,
  "Variance is budget less EAC, so an overrun is negative; the line variances add to the same -550000.")
 
 q(3,
- "\"suite test: entered forecast\" has nothing spent or committed and forecasts 140.0000 on a budget of 100. What makes its overrun different from the 130.0000 in \"suite test: committed past the budget\"?",
+ "\"suite test: entered forecast (nothing spent: CPI null)\" has nothing spent or committed and forecasts 140.0000 on a budget of 100. What makes its overrun different from the 130.0000 in \"suite test: committed past the budget\"?",
  "It rests on a typed judgment with nothing spent, while 130.0000 is money already spent and promised.",
  ["It is no overrun, since a variance is booked only once actuals are recorded.",
   "The engine leaves an entry with no spend out of the EAC until money is spent.",
@@ -77,39 +77,39 @@ q(2,
  ["The engine refuses the -50 with a message naming the line and restores the budget, as it does for a negative progress figure.",
   "The -50 is booked as a saving, and the variance is then clamped at 0.0000.",
   "The engine reads the minus sign as a typing slip and uses 50, then floors the forecast of that line at its budget of 100."],
- "Ignored is not refused: nothing on the screen says the -50 was never used, and the line returns EAC 100.0000 and variance 0.0000.")
+ "Ignored and flagged: the line returns EAC 100.0000 and variance 0.0000, carries forecastIgnored \"negative\", and the AFE counts it in linesForecastIgnored.")
 
 q(0,
- "CMP-05 forecasts 5600000. Can a reviewer tell from that whether its forecast field is blank, 0 or negative?",
- "No, since none of the three is positive and each falls back to the same 5600000 without a word.",
+ "CMP-05 forecasts 5600000. Can a reviewer tell whether its forecast field is blank, 0 or negative?",
+ "Partly: all three forecast the same 5600000, but a negative entry carries forecastIgnored \"negative\", while blank and 0 carry no flag.",
  ["Yes, since a negative forecast is refused with a message and a blank is not.",
   "Yes, since a zero forecast drops the line from the EAC and a blank does not.",
   "Yes, since the rule used column prints entered for any figure typed into the forecast field, whatever the sign of that figure."],
- "\"Not yet estimated\", \"cancel this work\" and a typing slip produce one forecast: the larger of 5600000 and the 1200000 spent and committed.")
+ "None of the three is positive, so each falls back to the larger of 5600000 and the 1200000 spent and committed. Blank and 0 mean no forecast was entered; a negative figure is replaced and flagged.")
 
 q(2,
- "Had CSG-02's budget of 3900000 been copied into its forecast field, as editing a line did before EC5-0, what would the line report?",
+ "Had CSG-02's budget of 3900000 been typed into its forecast field, what would the line report?",
  "A forecast of 3900000 and a variance of 0, hiding the 400000 overrun already spent.",
  ["4300000 and -400000, since entries are floored at the money spent.",
   "A refusal, since an entry below the actual of 4300000 is rejected.",
   "4300000 and -400000, since a forecast equal to its budget is ignored."],
- "A copied budget is a positive entered forecast and wins; the repaired Suite no longer copies it, but a figure copied by hand does the same damage.")
+ "A typed budget is a positive entered forecast and wins. The engine flags the line forecastBelowCommitted by 400000, but the forecast and the EAC carry 3900000.")
 
 q(1,
- "Before EC5-0 the Cost Breakdown table showed the budget as the forecast and the PDF and Excel variance was budget less actual. What does the repaired Suite show on OFON-1?",
+ "Which forecast figures does the Suite show for OFON-1 across the dashboard tiles, the Cost Breakdown table, the PDF and Excel exports and the Top 5?",
  "27600000 and -550000 on the tiles, the table, both exports and the Top 5, all from the one rule.",
  ["27050000 as the table's forecast, since it shows what was authorised.",
-  "The one rule on screen, while the PDF and Excel exports keep budget less actual so that earlier issued reports still reconcile.",
+  "The one rule on screen, while the PDF and Excel exports print budget less actual so that earlier issued reports still reconcile.",
   "27600000 on the tiles and table, while the Top 5 keeps its own old rule."],
- "After the Suite repair the tiles, Cost Breakdown table, PDF, Excel and Top 5 read one rule, so a disagreement between two reports points at the data or the export date.")
+ "The tiles, Cost Breakdown table, PDF, Excel and Top 5 read one rule, so a disagreement between two reports points at the data or the export date.")
 
 q(3,
- "Every repaired screen now reads the one forecast rule. What has that fixed, and what has it left alone?",
+ "Every screen reads the one forecast rule. What does that settle, and what does it leave alone?",
  "It makes the screens agree, and every screen still shares the rule's limits.",
  ["It fixed the forecast, which now extrapolates from progress and CPI.",
   "Nothing, since every old screen already showed 27600000.",
   "It made the rule stricter, refusing a forecast below the spend."],
- "No screen forecasts a line under its budget without an entered forecast, and none reads progress, CPI or a non-positive entry, so OFON-1's EAC is still 27600000.")
+ "No screen forecasts a line under its budget without an entered forecast, and none reads progress, CPI or a non-positive entry as a forecast, so OFON-1's EAC is 27600000 on every screen.")
 
 q(1,
  "A partner reads OFON-1's EAC of 27600000 as a projection from performance to date. What is it?",

@@ -42,7 +42,7 @@ q(2,
 q(0,
  "comonotoneIdentical3 has three wildcats at rho 1.000000, each pos 0.3, 300 on success and a fail cost of 50. Its exact P(loss) is 0.700000, the same as one wildcat. Why?",
  "At rho 1 the three wells hear only F1 and fail together whenever one fails, so the portfolio loses exactly when a single well would.",
- ["At rho 1 the three losses of 50.0000 are averaged rather than summed, so the portfolio is scored as one well carrying the average loss.",
+ ["At rho 1 the three losses of 50.0000 are averaged where they should be summed, so the portfolio is scored as one well carrying the average loss.",
   "At rho 1 the optimizer treats identical projects as duplicates and funds one well, so the risk summary is simulated for that one alone.",
   "At rho 1 the normal approximation becomes exact, and 0.700000 is the bell's reading for three perfectly correlated wells."],
  "Independent, the three fail together with chance 0.343000 and the copula case sits between at 0.469561; the low case is -150.0000 on all three rows, and only its frequency changes.")
@@ -59,7 +59,7 @@ q(3,
  "An analyst builds the spread formula for the 600.0000 set from success spreads, using OK-4's 78.0305 in place of its mixture sd of 121.9467. What happens to stdDev?",
  "It is understated at every rho, because success spreads leave out the gap between a success centred on 210.0000 and a failure costing 40.0000.",
  ["It is overstated, because success spreads are read from npv_p10 and npv_p90, which bracket a wider range than the mixture variance does.",
-  "It is unchanged at rho 1, where the formula reduces to the plain sum of the sds and it no longer matters which of its two sds each project contributes.",
+  "It is unchanged at rho 1, where the formula reduces to the plain sum of the sds and it stops mattering which of its two sds each project contributes.",
   "It changes only for OK-5, the one project in the set with pos 1.000000, since its two spread columns are the only ones that differ."],
  "The mixture sd is the square root of the success and failure variance taken together; only OK-5, with no fail cost, has the two columns agree, at 12.8750.")
 
@@ -76,8 +76,8 @@ q(2,
  "stdDev is the moment formula with rho on the project outcomes, while P90 comes from the simulation with rho on the latent drivers: two models that need not agree.",
  ["P90 carries the sampling noise of seed 20260829, and the mismatch is about one standard error that a longer run at 40000 iterations would close.",
   "The multiplier 1.2816 holds only at rho 0, and at rho 0.600000 the engine derives P90 from a z adjusted for the correlation it was given.",
-  "P90 is the high case under the exceedance convention, so the check should add 1.2816 x stdDev to emv rather than subtract it from it."],
- "The simulated P(loss), P90 and P10 are counted and sorted from outcomes; emv minus 1.2816 x stdDev was the normal approximation's P90 and is history since EC5-0.")
+  "P90 is the high case under the exceedance convention, so the check should add 1.2816 x stdDev to emv and drop the subtraction."],
+ "The simulated P(loss), P90 and P10 are counted and sorted from outcomes; emv minus 1.2816 x stdDev is a normal approximation's P90, a different method.")
 
 q(0,
  "In one iteration at rho 0.600000 the shared draw F1 comes out far above zero. What does that do to the funded projects?",
@@ -117,7 +117,7 @@ q(0,
  ["The weights sqrt(rho) and sqrt(1 - rho) add up to one at every rho, so the shared draw and the project's own draw always average back to its npv_p50.",
   "The engine re-centres the simulated values on the closed-form emv at the end of every run, so the mean is held by the construction of the output.",
   "Correlation reaches only the failures, and emv is computed from the success-case NPVs alone, which the shared driver never touches at all."],
- "The squared weights add to one, not the weights, and the average of a sum is the sum of the averages whatever the dependence. The emv printed is the closed form, with no simulated mean beside it.")
+ "The squared weights add to one while the weights do not, and the average of a sum is the sum of the averages whatever the dependence. The emv printed is the closed form, with no simulated mean beside it.")
 
 q(1,
  "As rho goes from 0.000000 to 1.000000, the 600.0000 set's P10 rises from 580.5960 to 674.8353. A reader concludes correlation made the portfolio more valuable. What is the reply?",

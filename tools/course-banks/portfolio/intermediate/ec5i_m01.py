@@ -34,7 +34,7 @@ q(3,
 q(1,
  "OFON-1 reads 55.7856 percent spent. What sits in the numerator of that figure?",
  "Only the 15090000 of actuals on the lines; the 5000000 committed stays outside it.",
- ["Actuals and commitments together, because money promised to a contractor is money the AFE can no longer spend on anything else.",
+ ["Actuals and commitments together, because money promised to a contractor is money the AFE cannot spend on anything else.",
   "The earned value of 15231500, since percent spent measures how much of the authorised budget the finished work has used up.",
   "The invoice total, because a spend percentage is a reading of money that has left the company and only the invoices carry a date."],
  "Percent spent is 15090000 over the budget of 27050000. CPI and percent spent read the line actuals only; commitments enter the forecast rule and nothing else.")
@@ -48,12 +48,12 @@ q(1,
  "The metrics read actuals from the cost lines and the S-curve reads the dated invoices; OFON-1's four invoices and its line actuals both total 15090000 only by construction.")
 
 q(3,
- "An invoice on an AFE is saved with a null date. What does the repaired engine do with it?",
+ "An invoice on an AFE is saved with a null date. What does the engine do with it?",
  "Leaves it off the S-curve and reports it in the count of undated invoices beside the curve.",
  ["Refuses the AFE with an error that names the invoice, in the way negative progress on a cost line is refused.",
   "Counts it from 1970, which is earlier than every bucket, so it appears in the S-curve from the first point on.",
   "Places it at the as-of date, so it lifts only the points from that day onward and leaves the earlier ones alone."],
- "The engine still does not refuse an undated invoice, but it no longer guesses a date for one: an invoice it cannot date reaches no bucket, and the count is reported beside the curve, 2 on the published undated case.")
+ "The engine does not refuse an undated invoice and does not guess a date for one: an invoice it cannot date reaches no bucket, and the count is reported beside the curve, 2 on the published undated case.")
 
 q(0,
  "A reviewer sees 15090000 of actuals on the OFON-1 dashboard and 15090000 at the last Actual point of its S-curve. What has the reviewer established?",
@@ -105,11 +105,11 @@ q(2,
 
 q(0,
  "One cost line is saved with a progress of -0.5 percent and another with progress past 100 percent. What does the engine do?",
- "Refuses the first with a message naming the cost item, and accepts the second, letting it earn more than its budget.",
- ["Refuses both, since its own message says progress runs from 0 to 100 percent.",
+ "Refuses both, each with a message naming its cost item, since progress runs from 0 to 100 percent.",
+ ["Refuses the first with a message naming the cost item, and accepts the second, letting it earn more than its budget.",
   "Clamps both into the range, reading the first as 0 and the second as 100, and reports the clamped figures as though they were typed.",
   "Accepts both with a flag, leaving the flagged lines out of earned value while still carrying their budgets in the EAC and the total."],
- "Negative progress stops the calculation with \"Progress runs from 0 to 100 percent.\" in the message, yet progress past 100 is taken, and earned value is only as good as the progress typed in.")
+ "Negative progress fails with \"Cost item \"Completion\" has negative progress (-0.5 percent).\" and progress above 100 fails the same way, naming the line; progress of exactly 100 is accepted and earns the whole budget.")
 
 q(3,
  "OFON-1 is reported again on a later date with every line unchanged. Which of its four headline readings can change?",

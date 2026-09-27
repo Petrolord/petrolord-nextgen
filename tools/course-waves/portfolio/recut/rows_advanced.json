@@ -825,7 +825,7 @@
    "Turned an overrun into an apparent saving: the closing point and the metrics give the EAC as 27600000, a variance of -550000.",
    "Reported the EAC correctly as of 2027-08-15, since the curve's Forecast line is the only projection that takes the as-of date into account.",
    "Reported the forecast before commitments, which the metrics add on top of the curve's last value to arrive at the EAC.",
-   "Reported the plan instead of the forecast, since the two lines trade places after the as-of date and that point belongs to Planned."
+   "Reported the plan in place of the forecast, since the two lines trade places after the as-of date and that point belongs to Planned."
   ],
   "answer_index": 0,
   "explanation": "Nov 27 plans 24452483 and forecasts 24949669, both below the budget of 27050000; the closing point, \"30 Nov 27\", carries Planned 27050000 and Forecast 27600000.",
@@ -910,5 +910,85 @@
   "answer_index": 3,
   "explanation": "The mixture sd is the square root of the success and failure variance taken together; only OK-5, with no fail cost, has the two columns agree, at 12.8750.",
   "why": "\"no longer\" framing in a distractor"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 20,
+  "prompt": "On the published split at 70 and 45 percent of a cost of 1000.00, the two partner amounts and the operator's add back to 1000.00. What does that reconciliation prove?",
+  "options": [
+   "That the allocation can be billed, because amounts that sum to the cost are how the engine defines valid.",
+   "That the engine rescaled the interests to the whole before allocating, so the amounts come back to the cost.",
+   "Nothing about the split, since the operator's -150.00 restores the sum; valid false and the partner total of 115.00 percent catch it.",
+   "That only the operator's figure needs editing to 0 percent, after which the partners' 700.00 and 450.00 can be billed as they stand."
+  ],
+  "answer_index": 2,
+  "explanation": "The note says the interests total 115.00 percent and the operator share is negative; the fix belongs in the partner list; the computed operator figure is left alone.",
+  "why": "Owner copy rule: the contrastive is reworded; the facts and the key are unchanged."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-correlation",
+  "ord": 5,
+  "prompt": "comonotoneIdentical3 has three wildcats at rho 1.000000, each pos 0.3, 300 on success and a fail cost of 50. Its exact P(loss) is 0.700000, the same as one wildcat. Why?",
+  "options": [
+   "At rho 1 the three wells hear only F1 and fail together whenever one fails, so the portfolio loses exactly when a single well would.",
+   "At rho 1 the three losses of 50.0000 are averaged where they should be summed, so the portfolio is scored as one well carrying the average loss.",
+   "At rho 1 the optimizer treats identical projects as duplicates and funds one well, so the risk summary is simulated for that one alone.",
+   "At rho 1 the normal approximation becomes exact, and 0.700000 is the bell's reading for three perfectly correlated wells."
+  ],
+  "answer_index": 0,
+  "explanation": "Independent, the three fail together with chance 0.343000 and the copula case sits between at 0.469561; the low case is -150.0000 on all three rows, and only its frequency changes.",
+  "why": "Owner copy rule: the contrastive is reworded; the facts and the key are unchanged."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m02-correlation",
+  "ord": 14,
+  "prompt": "Why does emv read 402.7500 at every rho on the correlation table?",
+  "options": [
+   "z1 = sqrt(rho) F1 + sqrt(1 - rho) e1 is still a standard normal, so each project succeeds with chance pos at any rho and only which projects succeed together changes.",
+   "The weights sqrt(rho) and sqrt(1 - rho) add up to one at every rho, so the shared draw and the project's own draw always average back to its npv_p50.",
+   "The engine re-centres the simulated values on the closed-form emv at the end of every run, so the mean is held by the construction of the output.",
+   "Correlation reaches only the failures, and emv is computed from the success-case NPVs alone, which the shared driver never touches at all."
+  ],
+  "answer_index": 0,
+  "explanation": "The squared weights add to one while the weights do not, and the average of a sum is the sum of the averages whatever the dependence. The emv printed is the closed form, with no simulated mean beside it.",
+  "why": "Owner copy rule: the contrastive is reworded; the facts and the key are unchanged."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-joint-venture-shares",
+  "ord": 3,
+  "prompt": "Where does OFON-1's operator share of 25.0000 percent come from?",
+  "options": [
+   "It is typed in as the operator's interest in the agreement, and the engine checks it against the partners' total before splitting.",
+   "It is the largest partner's interest less the others, 40.0000 less 22.5000 and 12.5000 plus the operator's own carried cost.",
+   "It is computed as 100 less the partnerTotal of 75.0000 and is not typed in, so the four percents add to 100 by construction.",
+   "It is a default the engine assigns to every operator, and partners are scaled to fill the remaining 75.0000 percent of cost."
+  ],
+  "answer_index": 2,
+  "explanation": "Against the budget of 27050000 the residual is 6762500 and against the actuals to date of 15090000 it is 3772500. The operator absorbs every gap and every excess in the partner list.",
+  "why": "Owner copy rule: the contrastive is reworded; the facts and the key are unchanged."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-numbers-to-distrust",
+  "ord": 11,
+  "prompt": "OKONO's 450.0000 set reads a Low case P90 of -15.1262 at 1000 iterations, -18.3574 at 10000 and -18.8524 at 40000, and -21.8586 to -15.3254 across seeds 1 to 3. What belongs to the set?",
+  "options": [
+   "That the Low case P90 is below zero, which every run agrees on; its fourth decimal moves with the sample, and the engine prints no standard error for it.",
+   "The value -18.3574 to four decimals, because a percentile is read straight off the sorted draws with no averaging, and so carries no sampling error of its own.",
+   "The value -57.1494, because the closed-form formula emv - 1.2816 x stdDev uses no draws at all and so removes the sampling noise that moves every simulated run.",
+   "The average of the six runs, because averaging over seeds and iteration counts removes the sampling noise carried by each run."
+  ],
+  "answer_index": 0,
+  "explanation": "The Low case P90 is the 10th percentile of simulated portfolio NPV and wobbles by several million USD between runs; -57.1494 is the normal approximation, a different model.",
+  "why": "Owner copy rule: the contrastive is reworded; the facts and the key are unchanged."
  }
 ]

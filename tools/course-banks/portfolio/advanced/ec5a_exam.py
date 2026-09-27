@@ -8,20 +8,20 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 # written by tools/course-waves/portfolio/recut/build.py. Edit the rows there, then re-run it.
 
 q(1,
- "A committee pack from before EC5-0 quotes -150.5560 as the P90 of a single exploration well that succeeds three times in ten, earns 300 on success and costs 50 on failure. What was wrong with that figure?",
+ "A committee pack built on a normal approximation quotes -150.5560 as the P90 of a single exploration well that succeeds three times in ten, earns 300 on success and costs 50 on failure. What is wrong with that figure?",
  "It lies beneath -50.0000, the worst outcome the well can produce, so it describes a loss no draw of this project can ever reach.",
  ["It was too optimistic, because a well failing 0.700000 of the time has a true low case further down than -150.5560.",
   "Nothing of substance, because a low case below the worst outcome only adds a margin a committee reads as conservative.",
   "It carried the wrong label, because under the exceedance convention the low case of that well is its P10."],
- "A risked project is success or a single failure point, and the bell smoothed that gap away; the simulation now returns P90 -50.0000, the failure itself.")
+ "A risked project is success or a single failure point, and the bell smooths that gap away; the simulation returns P90 -50.0000, the failure itself.")
 
 q(3,
- "Across identical wildcats the old approximation understated P(loss) with three wells (0.276275 against an exact 0.343000) and overstated it with six (0.200464 against 0.117649). Why can no fixed margin repair the old figures?",
+ "Across identical wildcats a normal approximation understates P(loss) with three wells (0.276275 against an exact 0.343000) and overstates it with six (0.200464 against 0.117649). Why can no fixed margin correct the normal figures?",
  "The error changes sign as wells are added, so nothing tells a reviewer which way to lean on a given portfolio.",
  ["The error shrinks steadily as wells are added, so a margin fitted on one well overcorrects every larger portfolio it is applied to.",
   "Only the P90 error changes sign between three and six wells, so a margin would repair the probabilities and leave the low cases wrong.",
   "The approximation turns exact once six wells are funded, so only smaller portfolios need a margin."],
- "With eight wells it understated again, 0.166046 against 0.255298, so the direction of the error follows the lumps and not a trend.")
+ "With eight wells it understates again, 0.166046 against 0.255298, so the direction of the error follows the lumps of the outcomes.")
 
 q(0,
  "In one simulated iteration OKONO's OK-3 (pos 0.250000, npv_p50 420.0000, fail cost 85.0000) fails. What does the risk simulation book for it?",
@@ -32,11 +32,11 @@ q(0,
  "A failure is one number, booked in about three iterations out of four; the mixture sd feeds only the closed-form stdDev and is never drawn.")
 
 q(2,
- "An analyst reruns OKONO's 450.0000 set, the same OK-1, OK-3 and OK-4, at seed 20260829 and 10000 iterations, but enters them as OK-4, OK-3, OK-1. P(loss) no longer reads 0.123600. What happened?",
+ "An analyst reruns OKONO's 450.0000 set, the same OK-1, OK-3 and OK-4, at seed 20260829 and 10000 iterations, but enters them as OK-4, OK-3, OK-1. P(loss) moves off 0.123600. What happened?",
  "The normals were dealt to the projects in a different order, so the same set at the same seed moved by sampling noise alone.",
  ["Project order decides which project hears the shared drivers F1 and F2, so the reordered set was simulated under a different correlation.",
   "Entering OK-4 first made its fail cost the threshold for every draw, so losses were counted from another zero.",
-  "A seeded run is meant to ignore how the list is typed, so a result that moves with the input order is a defect the repair left in place."],
+  "A seeded run is meant to ignore how the list is typed, so a result that moves with the input order is a defect in the engine."],
  "Each iteration draws F1, F2, then e1 and e2 per project in array order, so reproducing 0.123600 needs the seed, the iterations and the project order.")
 
 q(1,
@@ -56,18 +56,18 @@ q(3,
  "The engine reports no minimum, so the worst outcome, every well failing at 50.0000, is written by hand beside the P90.")
 
 q(0,
- "On mixtureWithSpread the normal approximation put P90 at -12.4175 and the simulation reads 1.7148. What would a reader of the old figure have concluded wrongly?",
+ "On mixtureWithSpread a normal approximation puts P90 at -12.4175 and the simulation reads 1.7148. What would a reader of the normal figure conclude wrongly?",
  "That the low case loses money, when nine outcomes in ten are at or above a small gain.",
  ["That -12.4175 was the very worst the portfolio could do, when the simulation shows its worst outcome is a gain of 1.7148.",
-  "That the portfolio was lumpy, when a success spread makes the outcomes continuous and the old approximation exact on such a case.",
+  "That the portfolio was lumpy, when a success spread makes the outcomes continuous and the normal approximation exact on such a case.",
   "That the high case was a gain, when the committee should have read P10 first because it is the low case under exceedance."],
- "The exact P90 outcome is 1.5838, so the sign of the low case changed with the model; the approximation was exact only on the pos1-normal cases.")
+ "The exact P90 outcome is 1.5838, so the sign of the low case changed with the method; the normal approximation is exact only on the pos1-normal cases.")
 
 q(2,
  "At rho 0.000000 OKONO's 600.0000 set prints emv 402.7500 and stdDev 143.8374. A reviewer derives its low case as emv - 1.2816 x stdDev. Why does that disagree with the reported P90 of 200.3575?",
- "That shortcut is the normal approximation EC5-0 retired, 218.4079 here, while the reported P90 is counted from simulated draws of success and failure.",
+ "That shortcut is a normal approximation, 218.4079 here, while the reported P90 is counted from simulated draws of success and failure.",
  ["The multiplier belongs to P10, so the low case needs emv plus 1.2816 x stdDev, and the reviewer has quoted the high tail.",
-  "The repaired engine derives P90 from the closed-form stdDev only when rho is above 0, and at rho 0 it switches to a separate formula.",
+  "The engine derives P90 from the closed-form stdDev only when rho is above 0, and at rho 0 it switches to a separate formula.",
   "It does not disagree in substance, because at rho 0 the closed form and the simulation are the same model and the gap is sampling noise."],
  "At 300.0000 the same shortcut gives 108.3959 against a simulated 100.7698; a bell on a risked set misses the low case in either direction.")
 
@@ -129,11 +129,11 @@ q(0,
 
 q(2,
  "In the Suite an analyst wants OKONO's 600.0000 set at full dependence and drags the correlation slider to its top. What does the screen show?",
- "The rho 0.900000 figures, stdDev 232.0795 and P(loss) 0.049500, because the slider stops at 0.9, an app item left unrepaired.",
- ["The rho 1.000000 figures, because EC5-0 extended the slider to the engine's full range when it replaced the normal approximation.",
+ "The rho 0.900000 figures, stdDev 232.0795 and P(loss) 0.049500, because the Suite's slider stops at 0.9.",
+ ["The rho 1.000000 figures, because the slider runs over the engine's full range of correlation from 0 to 1.",
   "An engine refusal, because the engine clamps correlation at 0.9 and throws for any value above it.",
   "The rho 1.000000 figures under a flag, since the slider's top is labelled 0.9 but passes the clamped maximum of 1 through to the engine."],
- "The engine accepts 1 and reads stdDev 239.8888 and P(loss) 0.059000 there; read the slider's top as the app's limit, never the engine's.")
+ "The engine accepts 1 and reads stdDev 239.8888 and P(loss) 0.059000 there; the slider's top is the app's limit on what can be set from the screen.")
 
 q(1,
  "An analyst sends Ofon Energy, at 40.0000 percent of OFON-1, a bill of 10820000 today. What is wrong with it?",
@@ -165,15 +165,15 @@ q(2,
  ["That the allocation can be billed, because amounts that sum to the cost are how the engine defines valid.",
   "That the engine rescaled the interests to the whole before allocating, so the amounts come back to the cost.",
   "That only the operator's figure needs editing to 0 percent, after which the partners' 700.00 and 450.00 can be billed as they stand."],
- "The note says the interests total 115.00 percent and the operator share is negative; the fix is in the partner list, never in the computed operator figure.")
+ "The note says the interests total 115.00 percent and the operator share is negative; the fix belongs in the partner list; the computed operator figure is left alone.")
 
 q(1,
- "Partner interests of 30 and -20 percent on a cost of 1000.00 leave the operator 90.0000 percent. Why did this split pass as valid before EC5-0?",
- "The only test was whether the operator share went below zero, and a partner total of 10 percent leaves the residual positive.",
- ["The engine zeroed the negative interest first, so the split it tested was 30 percent with the operator at 70.",
-  "valid was computed from the amounts, and a partner credit of -200.00 plus the operator's 900.00 and the 300.00 still sum to the cost.",
-  "A negative interest was read as a carry, which the split models as a credit owed from an earlier phase."],
- "Since EC5-0 it returns valid false naming Partner B at -20.00 percent; the negative entry moved 20 points onto an operator that would otherwise carry 70.")
+ "Partner interests of 30 and -20 percent on a cost of 1000.00 leave the operator 90.0000 percent, a share that is not negative. Why does the engine still mark the split valid false?",
+ "It checks every partner interest as well as the operator residual, and its note names Partner \"B\" at -20.00 percent.",
+ ["It zeroes the negative interest first, finds the operator at 70 percent, and flags the gap between that and the 90.0000 it was handed.",
+  "It compares the partner amounts with the cost, and a credit of -200.00 leaves the amounts short of the 1000.00 total.",
+  "It reads a negative interest as a carry, and a carry has to be entered in a field the split does not have."],
+ "A partner total of 10 percent leaves the residual positive, so a test on the operator share alone would pass this split; the note reads \"Partner \"B\" has a negative working interest (-20.00 percent). Correct the interests before billing.\"")
 
 q(3,
  "The AFE split flags a negative working interest, while the portfolio engine refuses a negative capex. What separates the two behaviours?",
@@ -193,27 +193,27 @@ q(0,
 
 q(2,
  "A project with npv_p50 80 and fail_cost 30 is typed with pos 1.4. What does the portfolio engine do?",
- "Reads pos as 1 and returns risked EMV 80.0000, with nothing on the result to say the input changed.",
- ["Refuses it with a PortfolioInputError naming the project, the same treatment it gives a negative capex before building a set.",
+ "Refuses it with a PortfolioInputError naming the project: \"has a pos outside 0 to 1 (1.4); pos must be a number from 0 to 1\".",
+ ["Reads pos as 1 and returns risked EMV 80.0000, with nothing on the result to say the input changed.",
   "Uses 1.4 as typed, so the risked EMV exceeds the success-case NPV and the project ranks above every certain project in the inventory.",
-  "Marks the project invalid and funds it anyway, the way the grid returns an overshooting set beside overLimit true."],
- "posAboveOneClamps returns 80.0000 and posBelowZeroClamps returns -30.0000; clamps are caught only by reading the inventory.")
+  "Marks the project invalid and funds it anyway, the way the partner split returns its allocation beside valid false."],
+ "The published posAboveOneRefused case carries the same message; a chance of success is a probability, so 1.4 has no reading the engine could take, and -0.2 is refused the same way.")
 
 q(1,
  "To get past the message that Project B has a negative capex (-150), an analyst types 0 in its place. What has the analyst made?",
- "A free project that the grid still charges one cell (D2), with whatever the negative number carried gone from the model.",
- ["A clean entry the optimizer funds at no cost under any limit, since a capex of 0 weighs nothing on a grid of 1 million USD per cell.",
-  "A second refusal, since a capex of 0 is below the smallest grid cell and throws another error.",
+ "A free project, funded whenever its EMV is positive, with whatever the negative number carried, such as a receipt, gone from the model.",
+ ["A project the optimizer can never fund, because a capex of 0 leaves its EMV per million USD undefined and the solve drops it.",
+  "A second refusal, since a capex of exactly 0 is read as a missing capex and throws another error.",
   "The same project with its receipt kept, because a refused capex is booked into the NPV first."],
- "In freeProjectTightLimit a free project with EMV 10.0000 is dropped beside A at 100.0000, so the engine returns 60.0000 where the exact optimum is 70.0000.")
+ "In freeProjectTightLimit a free project with EMV 10.0000 rides beside A at capex 100.0000 under a limit of 100.0000, and the engine funds free + A for 70.0000; the receipt belonged in the NPV.")
 
 q(3,
- "A published AFE case with progress beyond 100 percent returns earned value 150.0000, actuals 90.0000 and CPI 1.666667. How should that CPI be read?",
- "With suspicion, since only negative progress is refused and the line has earned more than its budget can hold.",
- ["As strong cost performance, because the engine refuses progress outside 0 to 100 percent and the input must therefore be valid.",
-  "As a clamped figure, because progress above 100 is read as 100 and the earned value of 150.0000 includes the line's commitment.",
-  "As SPI printed in the cost column, since progress past the whole moves only SPI."],
- "The refusal message says progress runs from 0 to 100 percent, yet the upper bound is not enforced; the same case reads SPI 1.500000.")
+ "An engineer wants CSG-02, at 100.0000 percent with actuals of 4300000 against a budget of 3900000, to show more earned value and types its progress as 110. What happens to OFON-1's report?",
+ "No report comes back: the AFE engine throws for that line, and the metrics return only once it is corrected.",
+ ["Earned value rises by a tenth of CSG-02's budget, lifting CPI above 1.009377 with nothing on the report to mark the entry.",
+  "CSG-02 is read at 100 percent and the report carries on unchanged, since progress past the whole is capped quietly.",
+  "The line is flagged beside the metrics, the way a negative working interest is flagged beside the allocation."],
+ "Progress runs from 0 to 100 percent and a value outside that range is refused by line; CSG-02 at 100.0000 percent already earns its whole budget.")
 
 q(0,
  "An as-of date of 30 February is refused on an AFE that has no window, where time progress falls back to 1.000000 and the date would move nothing. Why refuse it?",
@@ -224,44 +224,44 @@ q(0,
  "The published case throws \"asOf is not a valid date\" with no AFE dates; negative progress throws the same way, returning no metrics at all.")
 
 q(2,
- "gridOvershoot returns A + B at 800.0000 with overLimit true and overLimitBy 2.0000 against a limit of 6000.0000. What belongs in the committee's comparison?",
- "A + C at 780.0000, found by hand, since the flag marks A + B infeasible and never re-solves.",
- ["A + B at 800.0000, since 2.0000 over the limit is inside one grid cell of 3.000000 and the engine counts that as within the limit.",
-  "A + B with 2.0000 of capex trimmed, since overLimitBy tells the committee exactly how much to cut to make the higher EMV feasible.",
-  "A alone at 500.0000, since a flagged set is discarded and the engine falls back to the largest single project that fits the limit."],
- "The golden gap is 20.0000; ranking 800.0000 against 780.0000 prefers the set the budget cannot pay for.")
+ "Under a limit of 6000.0000 the published gridOvershoot case offers A (capex 4000.0000, EMV 500.0000), B (2002.0000, 300.0000) and C (1995.0000, 280.0000). A + B would return 800.0000. What does the optimizer fund?",
+ "A + C at capex 5995.0000 for 780.0000, solved exactly with overLimit false, since A + B does not fit the limit.",
+ ["A + B at 800.0000, since 2.0000 over the limit is inside one grid cell and the engine counts that as within the limit.",
+  "A + B with overLimit true and overLimitBy 2.0000, leaving the committee to trim 2.0000 of capex from the higher EMV.",
+  "A alone at 500.0000, since a set that would break the limit is discarded and the largest single project that fits is kept."],
+ "The result reads solveMethod exact and optimalityGap 0.0000; ranking 800.0000 against 780.0000 would prefer a set the budget cannot pay for.")
 
 q(3,
- "gridUndershoot funds X + Y + Z at 660.0000 with overLimit false. What does overLimit false tell the reader?",
- "Only that the set fits the limit; the exact optimum funds all four at 860.0000, and the undershoot (D4) is never flagged.",
- ["That the grid found the best set within the limit, since the flag reports any case rounding changed.",
-  "That the resolution of 3.000000 was fine enough, since a grid that misses a better set also flags.",
-  "That W was rightly dropped, since its EMV of 200.0000 is the lowest and a full grid drops the lowest."],
- "Rounding makes the four weigh 500, 500, 500 and 501 cells against a grid of 2000, so a gap of -200.0000 passes with no flag.")
+ "Called with exactStateLimit 3, the published gridUndershootFallback case funds X + Y + Z at 660.0000 with overLimit false and optimalityGap 200.0000. What do the two readings tell the reader?",
+ "overLimit false says only that the set fits; the gap bounds what a better set could add, and the exact solve funds all four at 860.0000.",
+ ["That the set is the best within the limit, since overLimit false is raised only when the fallback matches the exact optimum.",
+  "That 200.0000 of the limit was left unspent, since optimalityGap reports the capex the rounded-up grid could not use.",
+  "That W was rightly dropped, since its EMV of 200.0000 is the lowest of the four and the gap names the project left out."],
+ "Every weight is rounded up, to 500, 500, 500 and 501 cells against 2000, so the four cannot fit the grid together; rounded down they fit, and 860.0000 less 660.0000 is the gap.")
 
 q(1,
- "Which of these is a finding EC5-0 left in place, taught as a property of the engines as published?",
- "CPI reported as 1.000000 whenever actuals are 0.",
- ["SPI reported as Infinity before the start date when value had already been earned.",
-  "A normal approximation whose P90 sits beneath the worst outcome of a single wildcat.",
+ "Which of these is a property the course teaches as it stands in the engines and the Suite?",
+ "Time progress 1 on an AFE with no dates, so SPI there measures nothing and the Suite labels it unavailable.",
+ ["SPI reported as Infinity before the start date when value has already been earned.",
+  "A P90 read off a normal curve that sits beneath the worst outcome of a single wildcat.",
   "An S-curve that keeps walking past its end date to the current month."],
- "OFON-1 with every actual at 0 still earns 15231500 and reports CPI 1.000000, while SPI is now null before and on the start day and the curve stops at 10 points.")
+ "The published no-dates case reads time progress 1.000000 and SPI 0.250000; SPI is null before and on the start day, the risk summary is simulated, and the S-curve closes on a point dated the window end.")
 
 q(0,
- "Suppose OFON-1's cost postings are wiped so every line shows zero spend while progress stays as typed, and CPI now prints 1.000000. As of 2027-08-15, which reading keeps both its value and its meaning?",
+ "Suppose OFON-1's cost postings are wiped so every line shows zero spend while progress stays as typed, and CPI now prints null with cpiStatus \"no-spend\". As of 2027-08-15, which reading keeps both its value and its meaning?",
  "SPI 0.872063, because earned value ignores actuals and planned value comes from the calendar.",
  ["The EAC of 27600000, because the forecast rule reads budgets and entered forecasts and never looks at the actuals on a line.",
   "The variance at completion of -550000, because a zero actual moves only the S-curve's Actual line and none of the metrics.",
-  "CPI itself, because 1.000000 records that the work done matched the money spent to the unit, which is still true with nothing spent."],
+  "CPI itself, because a null CPI reads as exactly on budget whenever nothing has been spent on the lines."],
  "SPI is 15231500 over 17466060; CSG-02 forecast from its actual of 4300000, so zeroing the actuals does move the EAC.")
 
 q(3,
- "The published empty AFE reports CPI 1.000000 and SPI 1.000000. What should a report say about those two figures?",
- "Both are placeholders: CPI is 1 when actuals are 0, and SPI is 1 on a zero budget by a guard that fires before the null rule.",
- ["That the AFE is exactly on cost and exactly on schedule, since both ratios equal one and neither depends on the date.",
-  "That SPI should read null, since the repair made SPI null wherever planned value is zero and the published 1.000000 is a stale golden.",
-  "That CPI means something here and SPI does not, since 0.0000 over 0.0000 is defined as one."],
- "An AFE with no lines, no progress and no spend reads as perfect on cost and schedule at once; SPI 1 on a zero budget is a finding left unrepaired.")
+ "The published empty AFE, with no lines, no progress and no spend, is read for its CPI and SPI. What does the engine report?",
+ "CPI null with cpiStatus \"no-spend\" and SPI null with spiStatus \"no-budget\": neither ratio can be formed.",
+ ["CPI 1.000000 and SPI 1.000000, exactly on cost and on schedule, since both ratios equal one when nothing has happened.",
+  "CPI null with cpiStatus \"no-spend\" and SPI 0.000000, since a budget of 0 plans nothing and so earns against nothing.",
+  "An AfeInputError, since an AFE with no lines cannot be measured and is refused before any ratio is formed."],
+ "A reported ratio carries the status \"ok\"; here there is no spend to divide by and no budget to plan, and the Suite's SPI tile reads \"N/A\" with \"No budget to measure schedule against\".")
 
 q(2,
  "An S-curve reads Planned 0 and Actual 0 at its first point, and 2 undated invoices are reported beside it. What is the Actual line leaving out?",
@@ -269,36 +269,36 @@ q(2,
  ["Only the invoice whose invoice_date is null, because one with no invoice_date field is placed on the start day of the window instead.",
   "Nothing at all, because the count is a display note and both amounts are still carried into every bucket from the window's start day.",
   "The commitments, because the curve's Actual line adds the orders placed at the start of the window and drops them again once they are invoiced."],
- "In the published undated case the Actual reads 0 at Jan 20 and at Dec 20 while the engine reports 2 undated invoices; a dated invoice first shows at the point after its date.")
+ "In the published undated case the Actual reads 0 at Jan 20 and at the closing point 31 Dec 20 while the engine reports 2 undated invoices; a dated invoice first shows at the first point on or after its date.")
 
 q(1,
- "As of 2027-11-30 OFON-1's metrics report planned value 27050000, but the S-curve's last Planned point is 24452483. Which should a report quote as the plan?",
- "The metrics: time progress is 1.000000 on the end day, while the curve's last point sits on the first of November.",
- ["The curve, because the 2597517 it never plots is contingency the plan never meant to spend.",
-  "The curve, because the metrics read the plan from the budget while the curve builds it from invoices, which are the better record.",
+ "OFON-1 is read as of its end day, 2027-11-30. Its metrics give planned value 27050000, while the chart's Nov 27 point shows 24452483. Which figure is the plan?",
+ "The planned value in the metrics, 27050000, the same figure the chart shows at its window-end point.",
+ ["The Nov 27 point, because the 2597517 after it is contingency the plan never meant to spend.",
+  "The Nov 27 point, because the metrics read the plan from the budget while the curve builds it from invoices, the better record.",
   "Neither, because SPI is null on the end day and planned value is undefined once the window has closed."],
- "The plan stops 2597517 short because the monthly buckets end before the window does; use the curve for its shape and the metrics for the number.")
+ "Monthly points sit on the 1st, so Nov 27 falls a month early; the chart's last point is dated the end day and carries the whole budget.")
 
 q(3,
- "A project manager glances at OFON-1's chart, sees the final projected point of 24949669 sitting under the 27050000 authorisation, and tells the partners the well will come in cheap. What is the correction?",
- "The last bucket stops before the end date; the metrics forecast 27600000, a variance at completion of -550000.",
+ "A project manager stops at the last monthly point of OFON-1's chart, \"Nov 27\", sees Forecast 24949669 under the 27050000 authorisation, and tells the partners the well will come in cheap. What is the correction?",
+ "Read the chart to its end: on the window-end point the forecast is 27600000 beside a plan of 27050000, an overrun of 550000.",
  ["After the as-of date the Forecast line continues from the actual spend of 15090000, so 24949669 is the honest projection of the remaining work.",
   "The curve plots only budgets after the as-of date, so CMT-03's 1400000 is missing.",
-  "EC5-0 put one EAC rule on every screen except the chart, so the curve still forecasts from the budget and the manager's reading stands."],
- "After the as-of date Forecast is the EAC spread from the start, which is why it jumps from 15090000 to 19374834; take the EAC and variance from the metrics.")
+  "The chart draws one EAC rule and the metrics another, so the curve forecasts from the budget and the manager's reading stands."],
+ "After the as-of date Forecast is the EAC spread from the start, jumping from 15090000 to 19374834, and it reaches the EAC on the point dated 30 Nov 27.")
 
 q(0,
- "OKONO's 450.0000 set reads P(loss) 0.123600 at seed 20260829 with a standard error of 0.003291, where the old approximation said 0.142035. A reviewer proposes 40000 iterations to settle which is right. What will the run settle?",
+ "OKONO's 450.0000 set reads P(loss) 0.123600 at seed 20260829 with a standard error of 0.003291, where a normal approximation gives 0.142035. A reviewer proposes 40000 iterations to settle which is right. What will the run settle?",
  "Only the simulation's own precision, 0.125975 with a standard error of 0.001659; the gap to 0.142035 is a different model, which no iteration count closes.",
  ["Which model is right, because as iterations grow the simulated count converges on the normal approximation and the gap closes.",
   "Nothing at all, because the larger run reuses the default seed and so repeats the draws of the 10000 iteration run exactly.",
-  "That the approximation was nearer the truth, since 0.125975 sits closer to 0.142035 than 0.123600 did and the trend runs toward it."],
- "The published cases sit no further than 1.4289 standard errors from exact, while the old approximation missed the single wildcat's 0.700000 by dozens.")
+  "That the normal approximation is nearer the truth, since 0.125975 sits closer to 0.142035 than 0.123600 did and the trend runs toward it."],
+ "The published cases sit no further than 1.4289 standard errors from exact, while a normal approximation misses the single wildcat's 0.700000 by dozens.")
 
 q(2,
  "A team that wants the 450.0000 set to look safer tries seeds until it finds 0.119100 at seed 3, having also seen 0.128500 at seed 1, all at 10000 iterations, and reports only the seed 3 figure. What is wrong?",
  "It picked the draw that flatters the set; the seeds differ by what sampling alone produces, and the set's risk is unchanged.",
- ["Nothing, because seed 3's result is exactly reproducible and reproducibility is what EC5-0 added to the risk summary.",
+ ["Nothing, because seed 3's result is exactly reproducible and reproducibility is what the seed adds to the risk summary.",
   "Seed 3 is right for another reason: its standard error of 0.003239 is the smallest of the seeds.",
   "The team should average the seeds, since their mean is the true loss probability of the set."],
  "Standard errors between 0.003239 and 0.003346 make that spread ordinary noise; an honest report names the seed and iterations beside the figure.")
@@ -307,9 +307,9 @@ q(1,
  "At a limit of 750.0000 OKONO funds five projects for 690.0000 and leaves 60.0000 unspent. A manager asks why the engine did not fund part of OK-6 with it. What is the answer?",
  "Projects are funded whole; OK-6 costs 310.0000, and a farm-down or phased start does not exist for the engine.",
  ["OK-6's risked EMV per million USD of 0.464516 falls below the cut-off the optimizer applies to leftover money at the end of a solve.",
-  "A fraction of OK-6 would not fill one whole cell of the grid at 750.0000.",
+  "A fraction of OK-6 would fall below the smallest capex step the optimizer can fund at 750.0000.",
   "The risk summary rejects a set whose P(loss) rises, and a share of OK-6 would lift the set's 0.012800 above what the engine allows."],
- "The resolution is 1.0000 at that limit; at 1000.0000 the whole of OK-6 fits and the set reaches 588.0000.")
+ "The solve is exact at that limit, solveMethod exact with optimalityGap 0.0000; at 1000.0000 the whole of OK-6 fits and the set reaches 588.0000.")
 
 q(3,
  "OK-3's entered success range runs from 210.0000 at its low percentile to 700.0000 at its high one, with a median of 420.0000, so more room sits above the centre than below. What survives into the simulated successes?",
@@ -324,7 +324,7 @@ q(0,
  "OFON-1: SPI 0.872063.",
  ["OKONO at 450.0000: P(loss) 0.123600 at seed 20260829, 10000 iterations, correlation 0.",
   "OFON-1: CPI 1.009377 beside actuals of 15090000.",
-  "OKONO at 450.0000: OK-1 + OK-3 + OK-4, capex 450.0000, EMV 291.0000, resolution 1.0000, overLimit false."],
+  "OKONO at 450.0000: OK-1 + OK-3 + OK-4, capex 450.0000, EMV 291.0000, solveMethod exact, optimalityGap 0.0000."],
  "SPI moves with the date, 1.141290 at 2027-06-30 and 0.872063 at 2027-08-15 on the same lines, so an SPI without its as-of date is incomplete.")
 
 q(2,
@@ -339,7 +339,7 @@ q(1,
  "An inventory submitted to the Capital Portfolio Studio contains a project whose capex is -150. What P90 does the risk summary report?",
  "None, because the PortfolioInputError throws first and the engine returns no set, no frontier and no risk summary.",
  ["The P90 of the set with that project clamped to capex 0, as odd inputs are clamped.",
-  "A P90 carrying a flag, since the repaired engine returns the answer and marks the negative capex the way it marks an overshoot.",
+  "A P90 carrying a flag, since the engine returns the answer and marks the negative capex the way it marks an invalid partner split.",
   "The P90 of the set without that project, since a refused project is simply dropped."],
  "The message names the project, \"capex must be 0 or more\", and a simulated low case exists only for a set the engine agreed to build.")
 

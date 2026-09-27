@@ -57,7 +57,7 @@
  {
   "prompt": "At OFON-1's Aug 27 point the Actual is 15090000 and the Planned is 16212086. A reader calls the gap \"behind schedule\". What is the gap?",
   "options": [
-   "Earned value below planned value on the day of the point, which is the curve's plot of SPI in money rather than as a ratio at each of the monthly buckets it draws.",
+   "Earned value below planned value on the day of the point, which is the curve's plot of SPI in money in place of a ratio at each of the monthly buckets it draws.",
    "Commitments not yet invoiced, which the Actual line holds back until billing and which the Planned line already includes.",
    "Spend below a straight budget line, a cost comparison with no progress in it; the schedule measure is SPI 0.872063, earned value over planned value.",
    "Schedule slippage in money, since planned value and actual cost measured on the same day together form the schedule variance that the curve plots at every point."
@@ -70,7 +70,7 @@
   "options": [
    "Percent spent and CPI describe the actuals typed on the lines, the Actual line describes the dated invoices, and nothing on the screen says which is which, so the difference is a question about accruals, billing or a missing date.",
    "The same money on two schedules, since the curve converts line actuals into invoices by date and the gap is spend not yet reached by a bucket.",
-   "An error in the engine, since it forces the invoices to match the lines and a gap can only mean the curve was drawn before a repair.",
+   "An error in the engine, since it forces the invoices to match the lines and a gap can only mean the curve was drawn from stale data.",
    "Commitments, since the lines carry actual plus commitment and the curve carries the actual alone, and the gap is what is on order."
   ],
   "answer": 0,
@@ -85,7 +85,7 @@
    "Neither could be dated, so neither reached the curve, and the engine reported 2 undated invoices beside it."
   ],
   "answer": 3,
-  "explanation": "An invoice the engine cannot date reaches no bucket, however its date is missing; the count of undated invoices, 2 here, is reported beside the curve so the money is named rather than dropped in silence."
+  "explanation": "An invoice the engine cannot date reaches no bucket, however its date is missing; the count of undated invoices, 2 here, is reported beside the curve so the money is named."
  },
  {
   "prompt": "OFON-1's Forecast reads 15090000 at Aug 27 and 19374834 at Sep 27, the first point after the as-of date of 2027-08-15. What is the step?",
@@ -110,7 +110,7 @@
   "explanation": "The EAC exceeds the budget by a variance at completion of -550000 and the whole projected line carries that ratio; earned value and CPI play no part in the projection."
  },
  {
-  "prompt": "Before EC5-0, editing a line in the Suite copied its budget into its forecast. What would that have done to CSG-02 and to OFON-1's Forecast line?",
+  "prompt": "Suppose CSG-02's budget were typed into its forecast field. What would that do to CSG-02 and to OFON-1's Forecast line?",
   "options": [
    "The copy is a positive entered forecast, so the rule takes 3900000 whatever CSG-02 has spent, hiding its line variance of -400000 and settling the Forecast line toward the Planned line.",
    "Nothing to CSG-02, because the rule compares an entered forecast with actual plus commitment and keeps the larger 4300000.",
@@ -118,50 +118,50 @@
    "It would have removed CSG-02 from the EAC, since a forecast equal to the budget carries no variance and the line drops out."
   ],
   "answer": 0,
-  "explanation": "An entered forecast that is positive wins under the one rule, so a copied 3900000 replaces the 4300000 already spent; the repaired app no longer copies."
+  "explanation": "A positive entered forecast wins under the one rule, so a typed 3900000 replaces the 4300000 already spent in the EAC; the engine flags the line forecastBelowCommitted, but the forecast stands."
  },
  {
-  "prompt": "OFON-1's last Planned point, Nov 27, is 24452483 against a budget of 27050000. Does the engine's planned value itself stop short of the budget?",
+  "prompt": "OFON-1's Nov 27 point plans 24452483 against a budget of 27050000. Does the S-curve's plan stop short of the budget?",
   "options": [
    "Yes, because the curve spreads the budget over the months before the end month and leaves the final month for contingency that is never planned.",
    "Yes, because the engine deducts the 2597517 held for the month the as-of date falls in, and releases it once a later report is run.",
    "No, because the curve rescales its last point to the budget when the chart is drawn, and 24452483 is only the value in the underlying table.",
-   "No. The curve has no point on the end day; the metrics show 27050000 there."
+   "No. Nov 27 is only the last monthly point; the closing point \"30 Nov 27\" carries Planned 27050000, as the metrics do on the end day."
   ],
   "answer": 3,
-  "explanation": "The walk steps from 2027-02-01 by whole months; the next step, the first of December, falls after 2027-11-30, so the chart stops 2597517 short, a property the EC5-0 repair left in place."
+  "explanation": "The walk steps from 2027-02-01 by whole months; the next step falls after 2027-11-30, so the curve closes on a point dated the end, adding the last 2597517 of plan."
  },
  {
-  "prompt": "A published window from 2090-01-01 to 2091-01-01 returns 13 points with a last Forecast of 2450, the whole EAC. Why does that curve reach its EAC when OFON-1's last Forecast of 24949669 falls short of 27600000?",
+  "prompt": "A published window from 2090-01-01 to 2091-01-01 returns 13 points ending \"1 Jan 91\", and OFON-1 returns 11 ending \"30 Nov 27\". Both last points carry the whole EAC. Why is there no separate monthly point on 2091-01-01?",
   "options": [
-   "Its window lies in the future, so the whole curve is projection and a projected line always runs to the EAC, while OFON-1's mixes actuals in.",
-   "Its end date falls exactly on a monthly step, so a point stands on the end day; OFON-1's end, 2027-11-30, is not on a step from 2027-02-01.",
-   "It has no invoices, so no actuals hold the forecast back, while OFON-1's four invoices pull its projected points below the EAC.",
-   "It is thirteen months long, and the engine closes any window of more than a year on its end date, while OFON-1's is shorter."
+   "Its window lies wholly in the future, so the whole curve is projection, and the engine drops any monthly point that would only repeat the EAC already printed beside it.",
+   "Its end date falls exactly on a monthly step, so the closing point replaces that step and no date appears twice; OFON-1's end is not on a step from 2027-02-01.",
+   "It has no invoices, so no actual needs a point of its own, while OFON-1's four invoices each hold a monthly point open.",
+   "It is thirteen months long, and the engine merges the last two points of any window longer than a year so that a chart never carries more than thirteen labels."
   ],
   "answer": 1,
-  "explanation": "The published one-year window 2020-01-01 to 2020-12-31 stops short the same way as OFON-1, with 12 points and a last Planned of 1101, because its last step lands on the first of December."
+  "explanation": "Every curve closes on a point dated the window end with Planned the budget and Forecast the EAC. When a monthly step lands on the end, the closing point takes its place; OFON-1's steps land on the first of each month, so Nov 27 is followed by \"30 Nov 27\"."
  },
  {
-  "prompt": "The course draws OFON-1's first point as \"Feb 27\" with the timezone pinned to UTC. Drawn in America/Los_Angeles, the same AFE labels its first point \"Jan 27\" and every Planned value shifts. Why (finding EC5-5)?",
+  "prompt": "The course draws OFON-1's first point as \"Feb 27\". A viewer in America/Los_Angeles opens the same AFE. What does the curve show there?",
   "options": [
-   "The Suite converts AFE money into the viewer's local currency, which rescales the Planned line and relabels the buckets.",
-   "The Planned line is recomputed from today's date in the viewer's timezone, so a Pacific viewer sees a later as-of date.",
-   "The engine parses the window as UTC midnight but steps months and prints labels in local time, so west of UTC the start lands on the previous evening.",
-   "Invoices are stored in local time, and in Los Angeles the first invoice moves into January and carries the label with it, along with every Planned value that follows."
+   "The same amounts relabelled, since the Suite converts the month labels into the viewer's local calendar before drawing them.",
+   "A later as-of date, since the Planned line is recomputed from today's date in the viewer's time zone.",
+   "The same curve: the window, the as-of date, the monthly step, the day count and every label are read in UTC, so the first point is \"Feb 27\" there too.",
+   "A first point labelled \"Jan 27\" and every Planned value shifted, since the window is parsed at midnight and west of UTC that midnight falls on the previous evening."
   ],
   "answer": 2,
-  "explanation": "The metrics are unaffected, and Lagos, Tokyo and UTC agree with the course's table; a curve compared across offices can disagree on every Planned point."
+  "explanation": "The S-curve is read in UTC, so every zone draws what a UTC machine draws; the published February-start case labels its first point \"Feb 27\" in every zone, and OFON-1's Mar 27 plans 2507947 everywhere."
  },
  {
-  "prompt": "Before EC5-0 a 2020 AFE drew 81 points on 2026-09-14 and gained one a month. What did the repair change, and what did it leave?",
+  "prompt": "The published window 2020-01-01 to 2020-12-31 with two invoices returns 13 points. Where does the curve end, and what does its last point carry?",
   "options": [
-   "It now closes the curve on the as-of date, so an AFE read after its end draws no points beyond the day of the report.",
-   "It now adds a final point on the end day, so the last Planned value of every curve equals the budget of the AFE.",
-   "It now limits the curve to twelve points, the length of the longest window the Suite's wizard accepts for an AFE.",
-   "The walk now stops at the end date; the plan stopping short of the budget was not repaired."
+   "On the as-of date, so a window read after its end draws no point beyond the day of the report.",
+   "On the last monthly step, \"Dec 20\", which stands on the first of December, with Planned short of the budget of 1200 by the whole plan for December.",
+   "On the twelfth monthly point, since the engine limits every curve to twelve points whatever the window length.",
+   "On a closing point \"31 Dec 20\" dated the window end, with Planned 1200, the budget, and Actual 350 from the invoices to that day."
   ],
   "answer": 3,
-  "explanation": "The repaired curve for the published window 2020-01-01 to 2020-12-31 has 12 points ending at Dec 20 with a last Planned of 1101, still short of its budget of 1200."
+  "explanation": "Twelve monthly points from 2020-01-01 are followed by a closing point dated the end, windowEnd true, with Planned 1200 and Forecast 1200; its Actual counts the invoices dated on or before the end, 350."
  }
 ]

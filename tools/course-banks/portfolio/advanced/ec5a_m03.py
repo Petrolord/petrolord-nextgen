@@ -25,7 +25,7 @@ q(1,
 
 q(2,
  "Where does OFON-1's operator share of 25.0000 percent come from?",
- "It is computed as 100 less the partnerTotal of 75.0000, never typed in, so the four percents add to 100 by construction.",
+ "It is computed as 100 less the partnerTotal of 75.0000 and is not typed in, so the four percents add to 100 by construction.",
  ["It is typed in as the operator's interest in the agreement, and the engine checks it against the partners' total before splitting.",
   "It is the largest partner's interest less the others, 40.0000 less 22.5000 and 12.5000 plus the operator's own carried cost.",
   "It is a default the engine assigns to every operator, and partners are scaled to fill the remaining 75.0000 percent of cost."],
@@ -77,7 +77,7 @@ q(0,
  ["Nothing, since the operator share depends only on whether the partner total reaches 100, and a total of 10 percent leaves the operator at the same residual it would carry anyway.",
   "Reduced the operator's load by 20 percent, since a partner's negative interest is a contribution the operator deducts from its own share of cost.",
   "Split the credit between the operator and the positive partner, in proportion to their interests of 90.0000 and 30 percent of the cost."],
- "Before EC5-0 this split passed as valid, because the only test was whether the operator share went below zero; a check that the total is at most 100 also passes it.")
+ "A test on the operator share alone passes this split, since the residual is not below zero, and so does a check that the total is at most 100; the engine checks each interest and reports valid false with the partner named.")
 
 q(2,
  "The published case at 130 and -10 percent carries both errors. What does the note say, and in what order?",
@@ -100,8 +100,8 @@ q(1,
  "6036000 USD, 40.0000 percent of the actuals to date of 15090000.",
  ["10820000 USD, its share of the budget of 27050000 that the partners approved when the AFE was authorised.",
   "Its 40.0000 percent of the actuals plus the commitments of 5000000, since orders placed are costs the operator is already bound to.",
-  "Its 40.0000 percent of the EAC of 27600000, since a partner is billed on the forecast that every screen shares after EC5-0."],
- "Partners are billed on actuals, not the budget or the EAC. The four bills, 6036000 + 3395250 + 1886250 + 3772500, sum to 15090000.")
+  "Its 40.0000 percent of the EAC of 27600000, since a partner is billed on the forecast that every screen of the AFE shares."],
+ "Partners are billed on actuals; the budget is an authorisation and the EAC a forecast. The four bills, 6036000 + 3395250 + 1886250 + 3772500, sum to 15090000.")
 
 q(3,
  "Applied to OFON-1's EAC of 27600000, what does a partner's working interest give?",
@@ -115,17 +115,17 @@ q(0,
  "OFON-1 records actuals of 15090000 on its cost lines and an invoice total of 15090000. What should a partner bill say about that?",
  "Which total it split, because the two agree by construction on OFON-1 and need not agree on a real AFE.",
  ["Nothing, because the engine reconciles invoices with cost lines and refuses a split that disagrees.",
-  "That it split the larger of the two, since the rule every screen shares after EC5-0 takes the larger of any two recorded actuals.",
+  "That it split the larger of the two, since the one forecast rule every screen shares takes the larger of any two recorded actuals.",
   "That it split the invoices, since the cost lines hold commitments and not money spent."],
  "The metrics read actuals from the cost lines and the S-curve reads them from invoices. The split applies one set of interests to whatever total it is handed and converts nothing.")
 
 q(2,
- "Before EC5-0, what did the AFE summary PDF bill for an AFE whose saved partners were Ofon Energy, Enang Petroleum and Mfem Resources?",
- "Two invented partners, Partner A at 30 percent and Partner B at 10 percent, whatever partners had been saved.",
- ["The three saved partners on the budget of 27050000, because the PDF read the approved total rather than the actuals.",
-  "The three saved partners with the operator left out, so the operator's 25.0000 percent was missing from the printed split.",
-  "The three saved partners with no note, so an invalid split printed without its warning."],
- "The repaired PDF bills the AFE's saved partners and prints the engine note whenever the split is invalid; a screen that hides valid and the note bills an error quietly.")
+ "What does the AFE summary PDF bill for an AFE whose saved partners are Ofon Energy, Enang Petroleum and Mfem Resources, and what does it print when their split is invalid?",
+ "The three saved partners with the operator carrying the rest, and the engine note printed beside an invalid split.",
+ ["Only the partners whose interests are valid, since the PDF drops any partner the engine note names and bills the operator for the rest.",
+  "The three saved partners with the operator left out, so the operator's 25.0000 percent is missing from the printed split.",
+  "The three saved partners with no note, so an invalid split prints without its warning."],
+ "With no partners saved the operator carries 100 percent; a screen that hides valid and the note bills an error quietly.")
 
 emit(Q, '/root/wt-ec45-recut/tools/course-banks/portfolio/advanced/ec5a_m03.json', expect_n=15)
 finish()

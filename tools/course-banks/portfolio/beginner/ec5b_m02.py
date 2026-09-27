@@ -21,7 +21,7 @@ q(3,
  ["It refuses the row, since a project with no chance of success cannot be risked and the engine names the offending project in its error.",
   "At the middle of the range, since a missing chance of success is read as a coin toss until a value between 0 and 1 is entered.",
   "At its npv_p50 weighted by the average pos of the other projects, which is how the engine fills a chance nobody entered."],
- "The published unrisked case enters no pos and no fail_cost and returns 250.0000, its whole npv_p50 of 250, so a blank well is counted as if it cannot fail.")
+ "The published unrisked case enters no pos and no fail_cost and returns 250.0000, its whole npv_p50 of 250, so a well entered with no pos is counted as if it cannot fail. A pos typed as a blank is refused by name.")
 
 q(0,
  "OK-3's loss of 85.0000 million USD is typed with a minus sign in front, because a loss feels negative. What risked EMV does the engine return?",
@@ -34,7 +34,7 @@ q(0,
 q(2,
  "The published missingNpvIsZero case enters no npv_p50, a fail_cost of 8 and a pos of 0.25, and the engine returns -6.0000. What produced that number?",
  "The failure branch alone: a missing npv_p50 is 0, so 0.25 x 0 - (1 - 0.25) x 8 leaves only the loss.",
- ["The fail cost weighted by pos, since a row with no success case is charged its loss at its chance of success instead of its chance of failure.",
+ ["The fail cost weighted by pos, since a row with no success case is charged its loss at its chance of success where its chance of failure belongs.",
   "A default of 1 for the missing npv_p50, applied the way a missing pos defaults to 1.",
   "The capex of 10 weighted by the chance of failure, standing in for the loss."],
  "Every unit of -6.0000 is the failure branch: (1 - 0.25) x 8. The engine never links fail_cost to capex and never refuses a row with no NPV.")
@@ -61,7 +61,7 @@ q(3,
  ["Less than 402.7500, since projects that fail together drag the expected value down as well as widening the range of outcomes.",
   "More than 402.7500, since projects that succeed together compound their success cases in the same draws of the simulation.",
   "A value that depends on the seed, since emv is read from the simulated draws."],
- "89.7500 + 115.0000 + 160.0000 + 38.0000 = 402.7500; emv comes in closed form, and correlation moves how far outcomes spread around that mean, never the mean.")
+ "89.7500 + 115.0000 + 160.0000 + 38.0000 = 402.7500; emv comes in closed form, and correlation moves how far outcomes spread around that mean while the mean stays put.")
 
 q(2,
  "Two projects share capex, pos, npv_p50 and fail_cost, but one has an entered success range twice as wide as the other. How does the optimizer see them?",
@@ -104,12 +104,12 @@ q(2,
  "explicitStddev, with npv_stddev 40, returns 40.0000, so an entered value does win when it is positive; 0 is passed over and the percentile fallback gives 58.5229.")
 
 q(1,
- "A risky project's pos is mistyped as 1.4 and clamps to 1. Beyond its risked EMV, what else does the clamp change?",
+ "An appraisal well's row is saved with no pos field at all, and the optimizer values it at the default of 1. Where else does that default reach?",
  "The seeded risk summary draws it as a success in every iteration, so its funded set looks safer as well as more valuable.",
- ["Nothing else, because the risk summary reads pos as typed and only the risked EMV line applies the clamp.",
-  "The seed, because the engine reseeds the simulation whenever a clamp fires, recording the correction.",
-  "The grid, because a clamped row is charged an extra cell so the optimizer can mark it as corrected."],
- "posAboveOneClamps returns 80.0000, a certain success, and at seed 20260829 over 10000 iterations such a project never contributes a failure to P(loss) or to the P90 low case.")
+ ["Nothing else, because the risk summary draws its own success rate from the entered percentiles and only the risked EMV line uses the default.",
+  "The seed, because the engine reseeds the simulation whenever a default fires, recording the correction.",
+  "The optimizer's method, because a defaulted row sends the solve to the fallback grid so it can be marked."],
+ "nullPosIsDefault returns 80.0000, a certain success, and at seed 20260829 over 10000 iterations such a project never contributes a failure to P(loss) or to the P90 low case. A pos typed as 1.4 is refused before anything runs.")
 
 q(0,
  "OK-3's success spread is 191.1747 and its mixture standard deviation 238.6507, while OK-5 reads 12.8750 on both. Why do OK-5's two figures agree?",
@@ -120,12 +120,12 @@ q(0,
  "OK-3 drops from a success case of 420.0000 to a loss of 85.0000, which widens 191.1747 to 238.6507; OK-5 has pos 1.000000 and a fail cost of 0.0000.")
 
 q(3,
- "The published posBelowZeroClamps case enters pos -0.2 on npv_p50 80 and fail_cost 30, and returns -30.0000. What value of pos did the engine use?",
- "0, a certain failure worth minus its fail cost.",
- ["-0.2 as typed, which makes the success branch negative and weights the failure branch by more than one.",
-  "The default of 1, since a pos out of range is handled like a non-numeric one and replaced by the default.",
-  "0.2, since the engine takes the absolute value of a negative chance before it weights the two branches."],
- "pos is held between 0 and 1, so -0.2 becomes 0 and the result is -(1 - 0) x 30 = -30.0000, the same as the posZero case; no warning says a clamp fired.")
+ "The published posZero case enters pos 0 on npv_p50 80 and fail_cost 30, and returns -30.0000. What does that value describe?",
+ "A certain failure worth -30.0000, minus its fail cost, since a pos of 0 is inside the range the engine accepts.",
+ ["A pos typed below the range and read as 0, since the engine holds every chance of success between 0 and 1.",
+  "The default of 1 applied to a pos it could not read, with the success branch then charged at the fail cost.",
+  "The absolute value of the fail cost taken as a gain, since a chance of 0 reverses the sign of the failure branch."],
+ "-(1 - 0) x 30 = -30.0000. A pos below 0 is refused: posBelowZeroRefused gives Project \"a\" has a pos outside 0 to 1 (-0.2); pos must be a number from 0 to 1.")
 
 emit(Q, '/root/wt-ec45-recut/tools/course-banks/portfolio/beginner/ec5b_m02.json', expect_n=15)
 finish()

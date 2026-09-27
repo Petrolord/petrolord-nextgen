@@ -110,6 +110,9 @@ cap_new = {c['tier']: c for c in edits['capstones']}
 texts = []
 for p in lesson_files:
     for i, l in enumerate(open(p).read().splitlines(), 1):
+        # a manifest "key" is an identifier (progress rows and bank locators hang on it), never shown to a learner
+        if p.endswith('manifest.json') and re.match(r'\s*"key":', l):
+            continue
         texts.append((f'{os.path.relpath(p, COURSE)}:{i}', l))
 for r in after:
     for t in [r['prompt'], r['explanation']] + r['options']:

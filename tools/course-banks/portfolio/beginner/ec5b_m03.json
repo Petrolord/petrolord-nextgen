@@ -8,7 +8,7 @@
    "The only project left, OK-6, costs 310.0000, and the optimizer cannot fund part of a project."
   ],
   "answer": 3,
-  "explanation": "750.0000 - 690.0000 = 60.0000 is left, and OK-6 needs 310.0000; the limit is whole and under 5000, so the grid is exact and nothing was rounded."
+  "explanation": "750.0000 - 690.0000 = 60.0000 is left, and OK-6 needs 310.0000; the knapsack is solved exactly, so nothing was rounded."
  },
  {
   "prompt": "A spreadsheet takes OKONO's 60.0000 left over at 750.0000, funds a matching slice of OK-6 with it, and reports a higher total than 444.0000. What is wrong?",
@@ -41,7 +41,7 @@
    "The optimizer lets the limit stretch by one grid cell, giving OK-3 room the ranked list lacked."
   ],
   "answer": 0,
-  "explanation": "Swapping the workovers for the well spends the last 30.0000 and gains 3.2500; the grid is exact at 450.0000, so no stretch or rounding is involved."
+  "explanation": "Swapping the workovers for the well spends the last 30.0000 and gains 3.2500; the solve is exact at 450.0000, so no stretch or rounding is involved."
  },
  {
   "prompt": "OKONO's greedy set, OK-1 + OK-4 + OK-5 at capex 420.0000 and risked EMV 287.7500, loses to the optimizer at 450.0000. Is it a bad set?",
@@ -68,7 +68,7 @@
  {
   "prompt": "The published negativeEmvHugeBudget case has a limit of 10000.0000 and funds good + better for capex 120.0000 and risked EMV 75.0000. A third project, neg, would easily fit. Why is it left out?",
   "options": [
-   "The limit is above 5000, so the coarse grid charges neg more cells than its capex of 20.0000 and it can no longer fit beside the others.",
+   "The limit is above 5000, so a coarse grid charges neg more cells than its capex of 20.0000 and it cannot fit beside the others.",
    "Its risked EMV is -44.0000, and funding it would lower the summed risked EMV by exactly that amount.",
    "It is refused as an input error, since a negative risked EMV breaks the knapsack.",
    "The optimizer only considers the projects the two largest risked EMVs need."
@@ -85,7 +85,7 @@
    "It would be funded under a tight limit, since a zero project is dropped only when money is left over and idle capex costs nothing."
   ],
   "answer": 0,
-  "explanation": "The engine funds good alone for capex 50.0000 and risked EMV 30.0000 with 450.0000 of the limit spare; 500.0000 is whole and under 5000, so the grid is exact."
+  "explanation": "The engine funds good alone for capex 50.0000 and risked EMV 30.0000 with 450.0000 of the limit spare, solved exactly."
  },
  {
   "prompt": "A licence commitment has a negative risked EMV but must be drilled. How is it handled with this optimizer?",
@@ -147,11 +147,11 @@
   "options": [
    "The loss probability, since a tie hands the choice to the risk summary and it favours the workovers' certain success over the well.",
    "The larger total success NPV, used by the optimizer as a second key, favouring the well.",
-   "The order the projects were entered in, since the first set built is kept against an equal one found later.",
-   "The capex spent, since at equal value the knapsack prefers the set that leaves less unspent."
+   "The capex spent: the optimizer keeps the tied set with less capex, OK-1 + OK-4 + OK-5 at 420.0000, whatever the entry order.",
+   "The order the projects were entered in, since the first set built is kept against an equal one found later."
   ],
   "answer": 2,
-  "explanation": "The optimizer compares risked EMV alone and keeps a set unless another is strictly larger, so a tie between the set at 450.0000 and the set at capex 420.0000 is settled by entry order."
+  "explanation": "Among sets tied on risked EMV the exact solve keeps the one with less capex, and entry order decides only between sets of equal capex and equal EMV. The two sets here cost 450.0000 and 420.0000."
  },
  {
   "prompt": "Raising OKONO's limit from 450.0000 to 600.0000 adds 150.0000 of budget. What happens to the funded set?",

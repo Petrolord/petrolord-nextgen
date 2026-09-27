@@ -18,8 +18,11 @@
 //                   numeric check must go red.
 //   --plant-engine  NO SELF-COMPARISONS. Runs every check against copies of
 //                   the engines with defects planted (risked EMV, seed, spread
-//                   divisor, fallback grid, refusal wording, forecast rule, CPI,
-//                   time progress, partner split, S-curve rounding) and requires
+//                   divisor, cross terms, fallback grid, exact-solve report,
+//                   refusal wording, mixture moments, simulated outcome,
+//                   forecast rule and flag, earned value, CPI, time progress
+//                   and its no-dates branch, partner split and operator
+//                   residual, S-curve points) and requires
 //                   EVERY check's value to move under at least one plant. A
 //                   value that no engine defect can move was not computed by
 //                   the engine (a typed constant, or the input read back), and
@@ -93,6 +96,10 @@ if (plantEngine) {
     ['time progress', 'engines/economics/afe.js', 'return totalDuration > 0 ? elapsed / totalDuration : 1.0;', 'return totalDuration > 0 ? elapsed / (totalDuration + 3) : 0.5;'],
     ['partner split', 'engines/economics/afe.js', 'shareAmount: totalCost * (Number(p.working_interest) || 0) / 100,', 'shareAmount: totalCost * (Number(p.working_interest) || 0) / 99,'],
     ['S-curve points', 'engines/economics/afe.js', [['Planned: Math.round(cumPlanned),', 'Planned: Math.round(cumPlanned) + 11,'], ['Forecast: Math.round(cumForecast),', 'Forecast: Math.round(cumForecast) + 13,'], ['Planned: Math.round(totalBudget),', 'Planned: Math.round(totalBudget) + 17,']]],
+    ['mixture moments', 'engines/economics/portfolio.js', 'const secondMoment = pos * (sdS * sdS + muS * muS) + (1 - pos) * failCost * failCost;', 'const secondMoment = 1.05 * (pos * (sdS * sdS + muS * muS) + (1 - pos) * failCost * failCost);'],
+    ['simulated outcome', 'engines/economics/portfolio.js', 'total += normalCDF(z1) < q.pos ? q.muS + q.sdS * z2 : -q.failCost;', 'total += normalCDF(z1) < q.pos * 0.99 ? q.muS + q.sdS * z2 : -q.failCost * 1.01;'],
+    ['operator residual', 'engines/economics/afe.js', 'const operatorShare = 100 - partnerTotal;', 'const operatorShare = 100.5 - partnerTotal;'],
+    ['no-dates time progress', 'engines/economics/afe.js', "if (!afe?.start_date || !afe?.end_date) return 1.0;", "if (!afe?.start_date || !afe?.end_date) return 0.75;"],
     ['AFE wording', 'engines/economics/afe.js', [['Progress runs from 0 to 100 percent.', 'Progress runs 0 to 100.'], ["'asOf is not a valid date'", "'asOf is not a date'"]]],
   ];
   const base = await evalAll(checks);
