@@ -7,14 +7,14 @@ import { OUTCOME_LABELS } from '@petrolord/engines/lib/conventions/percentile.js
 import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
 // Governance explorer, the Expert tier. RISK, CORRELATION, SHARES AND WHAT TO
-// DISTRUST: the risk summary by simulation beside the exact answer and the old
-// normal approximation, the correlation sweep, joint venture splits, the
+// DISTRUST: the risk summary by simulation beside the exact answer and a
+// normal approximation of the summed NPV, the correlation sweep, joint venture splits, the
 // engines' refusals and flags, and the numbers to distrust.
 //
 // Every figure on this page is a return value from portfolioLab, which is a
 // return value from the vendored portfolio and AFE engines, a published golden
 // field shown beside it and named golden, or arithmetic the digest itself
-// labels derived (the old normal approximation rebuilt from the engine's own
+// labels derived (the normal approximation rebuilt from the engine's own
 // emv and stdDev, the spread formula, a standard error).
 //
 // P-LABELS. The only P-labels on this page are the low and high cases of a
@@ -32,11 +32,11 @@ const four = (v) => (Number.isFinite(v) ? Number(v).toFixed(4) : 'null');
 const two = (v) => (Number.isFinite(v) ? Number(v).toFixed(2) : 'null');
 
 export const MODES = [
-  ['simulation', 'Simulation: exact, the old normal approximation, the engine'],
+  ['simulation', 'Simulation: exact, a normal approximation, the engine'],
   ['correlation', 'Correlation: the rho sweep and the spread formula'],
   ['shares', 'Shares: OFON-1 split and billed, the invalid splits'],
-  ['refusals', 'Refusals: the engine messages and the overshoot flag'],
-  ['distrust', 'Distrust: CPI before spend, the undated invoice, the short plan, the seed'],
+  ['refusals', 'Refusals and flags: the engine messages, and what the engines flag without refusing'],
+  ['distrust', 'Distrust: CPI before spend, the undated invoice, the closing point, the seed'],
 ];
 
 const Outcome = ({ children }) => <span data-plabel="outcome" className="text-[#BFFF00] font-semibold">{children}</span>;
@@ -74,8 +74,8 @@ export const SimulationMode = ({ rm }) => {
   return (
     <>
       <p className="text-xs text-slate-400 mb-0">
-        The published method cases, each run by the engine at its stated seed and iterations, beside the exact answer and the
-        normal approximation the engine used before EC5-0. Money in million USD.
+        The published method cases, each run by the engine at its stated seed and iterations, beside the exact answer and a
+        normal approximation of the summed NPV (a normal curve with the portfolio mean and standard deviation). Money in million USD.
       </p>
       <Tbl
         head={[
@@ -219,14 +219,19 @@ export const RefusalsMode = ({ rf }) => {
       />
       <div className="mt-3">
         <TileGrid>
-          <Tile label="Published gridOvershoot, overLimit" value={String(go.overLimit)} />
+          <Tile label="Published gridOvershoot, solveMethod" value={go.solveMethod} />
+          <Tile label="overLimit" value={String(go.overLimit)} />
           <Tile label="overLimitBy" value={four(go.overLimitBy)} unit="million USD" />
           <Tile label={<CapexLabel>Capex chosen</CapexLabel>} value={four(go.totalCapex)} unit="million USD" />
           <Tile label={<BudgetLabel>Against a limit of</BudgetLabel>} value={four(go.capexLimit)} unit="million USD" />
         </TileGrid>
       </div>
-      <p className="text-xs text-slate-300 mt-3 mb-0">{rf.repaired}</p>
-      <p className="text-xs text-slate-400 mt-2 mb-0">{rf.notRepaired}</p>
+      <Tbl
+        head={['risk summary case', 'error', 'engine message, verbatim']}
+        rows={rf.riskSummary.map((a) => [a.id, a.ok ? 'accepted' : a.name, a.ok ? '' : a.error])}
+      />
+      <p className="text-xs text-slate-300 mt-3 mb-0">{rf.flags}</p>
+      <p className="text-xs text-slate-400 mt-2 mb-0">{rf.properties}</p>
       <Note>A refusal is the engine declining to compute; a flag is the engine computing and saying what went wrong. Read both.</Note>
     </>
   );
@@ -234,18 +239,19 @@ export const RefusalsMode = ({ rf }) => {
 
 export const DistrustMode = ({ d }) => {
   if (!d) return <Note>The engines returned nothing to distrust.</Note>;
+  const ov = d.overrun;
   return (
     <>
       <TileGrid>
-        <Tile label="CPI with every actual set to 0" value={six(d.cpiBeforeSpend.cpi)} unit={`on earned value ${usd(d.cpiBeforeSpend.earnedValue)} USD`} />
-        <Tile label="First S-curve Actual with a null-dated invoice" value={String(d.nullDated.firstActual)} />
-        <Tile label={<CostLabel>Last Planned point</CostLabel>} value={usd(d.shortPlan.lastPlanned)} unit={`USD, ${usd(d.shortPlan.shortDerived)} short of the budget (derived)`} />
-        <Tile label={<CostLabel>Last Forecast point</CostLabel>} value={usd(d.underrunPicture.lastForecast)} unit={`USD against an EAC of ${usd(d.underrunPicture.eac)}`} />
+        <Tile label="CPI with every actual set to 0" value={d.cpiBeforeSpend.cpi === null ? 'null' : six(d.cpiBeforeSpend.cpi)} unit={`cpiStatus ${d.cpiBeforeSpend.cpiStatus}, on earned value ${usd(d.cpiBeforeSpend.earnedValue)} USD`} />
+        <Tile label="Undated invoices beside the curve" value={String(d.nullDated.undated)} unit={`first Actual ${d.nullDated.firstActual}, last Actual ${d.nullDated.lastActual}`} />
+        <Tile label={<CostLabel>Closing point Forecast</CostLabel>} value={usd(ov.closingForecast)} unit={`USD against Planned ${usd(ov.closingPlanned)}`} />
+        <Tile label={<CostLabel>Last monthly point Forecast</CostLabel>} value={usd(ov.lastMonthlyForecast)} unit={`USD at "${ov.lastMonthlyLabel}", Planned ${usd(ov.lastMonthlyPlanned)}`} />
       </TileGrid>
       <p className="text-xs text-slate-400 mt-2 mb-0">
-        The engine returns CPI 1 whenever actuals are 0. In the published case &quot;{d.nullDated.name}&quot; (invoices {JSON.stringify(d.nullDated.invoices)}) the
-        null-dated amount counts from 1970 in every bucket and the missing date never counts. OFON-1&apos;s last Forecast point sits below the budget of
-        {' '}{usd(d.underrunPicture.totalBudget)} while its variance at completion is {usd(d.underrunPicture.variance)}: an overrun drawn as an underrun.
+        Value earned with nothing spent has no cost efficiency to report, so CPI is null. In the published case &quot;{d.nullDated.name}&quot; (invoices {JSON.stringify(d.nullDated.invoices)})
+        neither invoice carries a date the engine can read, so neither reaches the curve, and the count is named beside it. OFON-1&apos;s closing point carries the EAC
+        against the budget, a variance at completion of {usd(ov.variance)}; a reader who stops at the last month sees neither.
       </p>
       <Tbl
         head={['seed', 'iterations', <ProbabilityLabel key="p">chance of loss</ProbabilityLabel>, 'standard error sqrt(p(1 - p) / n) (derived)', <Outcome key="l">{LOW}</Outcome>]}

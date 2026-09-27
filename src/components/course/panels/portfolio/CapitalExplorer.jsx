@@ -3,7 +3,7 @@ import {
   ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine,
 } from 'recharts';
 import {
-  OKONO_LIMITS, FRONTIER_LIMITS, GRID_CASE_IDS, SPREAD_DIVISOR, setLabel,
+  OKONO_LIMITS, FRONTIER_LIMITS, GRID_CASE_IDS, SPREAD_DIVISOR, EXACT_STATE_LIMIT, FALLBACK_GRID_CELLS, BINARY_SUM_DERIVED, setLabel,
   engineRules, okonoInventory, okonoBudgets, okonoFrontiers, gridCases,
 } from './portfolioLab';
 import { OUTCOME_LABELS } from '@petrolord/engines/lib/conventions/percentile.js';
@@ -11,12 +11,13 @@ import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/comp
 
 // Capital explorer, the Associate tier. CHOOSING WHAT TO FUND: the OKONO
 // inventory risked one project at a time, the five budgets and what each funds,
-// the efficient frontier at two of them, and the grid the optimizer works on.
+// the efficient frontier at two of them, and the published cases the knapsack
+// solves exactly, beside the stated fallback grid.
 //
 // Every figure on this page is a return value from portfolioLab, which is a
 // return value from the vendored portfolio engine, or arithmetic the teaching
 // digest itself labels derived (unspent capex, frontier steps, the greedy
-// fill). Nothing here computes a risked EMV, a funded set or a frontier.
+// fill, the fallback grid's rounded-up cell weights). Nothing here computes a risked EMV, a funded set or a frontier.
 //
 // P-LABELS. The only P-labels on this page are the entered NPV percentiles of
 // a project (data-plabel="npvinput"), and every one is a string from
@@ -34,7 +35,7 @@ export const MODES = [
   ['inventory', 'Inventory: OKONO risked one project at a time'],
   ['budget', 'Budget: five limits, the funded sets, greedy against optimal'],
   ['frontier', 'Frontier: the best risked EMV at every spend'],
-  ['grid', 'Grid: the published grid cases, the overshoot and the undershoot'],
+  ['grid', 'Exact solve: awkward capex solved exactly, and the stated fallback grid'],
 ];
 
 const AXIS = { fill: '#94a3b8', fontSize: 11 };
@@ -106,24 +107,27 @@ export const InventoryMode = ({ inv, rules }) => {
       {rules && (
         <>
           <Tbl
-            head={['probe, NPV 80 and fail cost 30', 'risked EMV, million USD']}
-            rows={rules.posProbes.map((x) => [x.label, mm(x.emv)])}
+            head={['probe "Probe", NPV 80 and fail cost 30', 'risked EMV, million USD, or the engine message']}
+            rows={rules.posProbes.map((x) => [x.label, x.ok ? mm(x.emv) : x.error])}
           />
           <p className="text-xs text-slate-500 mt-1 mb-0">
-            A missing, null or non-numeric chance of success is read as 1, certain success. An empty one is the number 0, certain failure (finding EC5-6).
+            A missing or null chance of success is the documented default 1, certain success. A chance of success that is typed must be a number from 0 to 1;
+            a blank, a word or a figure outside 0 to 1 is refused, naming the project.
           </p>
           <p className="text-xs text-slate-400 mt-2 mb-0">
             A project with capex typed as text beside one with capex 40 at a limit of 100:{' '}
-            {rules.textCapexProbe.ok
-              ? `funded ${setLabel(rules.textCapexProbe.ids)}, total capex ${mm(rules.textCapexProbe.totalCapex)}, total EMV ${mm(rules.textCapexProbe.totalEmv)} million USD.`
-              : rules.textCapexProbe.error}
-            {' '}Text capex is neither refused nor flagged; it counts as 0 and weighs one grid cell (finding EC5-7).
+            {rules.textCapexProbe.ok ? `funded ${setLabel(rules.textCapexProbe.ids)}.` : rules.textCapexProbe.error}
+            {' '}Nothing is funded: the whole call is refused.
           </p>
+          <Tbl
+            head={['published case', 'chance of success typed', 'engine answer']}
+            rows={rules.projectRefusals.map((x) => [x.id, JSON.stringify(x.pos), x.ok ? mm(x.emv) : x.error])}
+          />
         </>
       )}
       <Tbl
         head={['published case', 'project', 'risked EMV, engine', 'golden']}
-        rows={inv.publishedEmv.map((c) => [c.id, JSON.stringify(c.project), mm(c.emv), mm(c.goldenEmv)])}
+        rows={[...(rules ? rules.defaultCases : []), ...inv.publishedEmv].map((c) => [c.id, JSON.stringify(c.project), mm(c.emv), mm(c.goldenEmv)])}
       />
       <Note>
         A risked EMV is an expected value over success and failure. It is not the NPV if the project works, and a
@@ -153,8 +157,8 @@ export const BudgetMode = ({ b, limit, onLimit }) => {
           <Tile label="Total risked EMV" value={mm(row.totalEmv)} unit="million USD" />
           <Tile label="Total success NPV" value={mm(row.totalNpvSuccess)} unit="million USD" />
           <Tile label={<BudgetLabel>Unspent (derived)</BudgetLabel>} value={mm(row.unspentDerived)} unit="million USD" />
-          <Tile label="Grid resolution" value={mm(row.resolution)} unit="million USD per cell" />
-          <Tile label="Over the limit" value={row.overLimit ? 'yes' : 'no'} />
+          <Tile label="Solve method" value={row.solveMethod} />
+          <Tile label="Optimality gap" value={mm(row.optimalityGap)} unit="million USD" />
         </TileGrid>
       </div>
       <Tbl
@@ -175,12 +179,12 @@ export const BudgetMode = ({ b, limit, onLimit }) => {
         </p>
       </div>
       <Tbl
-        head={['published case', <BudgetLabel key="l">limit</BudgetLabel>, 'engine set', <CapexLabel key="c">capex</CapexLabel>, 'EMV', 'golden optimal sets']}
-        rows={b.published.map((c) => [c.id, mm(c.capexLimit), setLabel(c.ids), mm(c.totalCapex), mm(c.totalEmv), c.goldenOptimalSets.map((s) => setLabel(s)).join(' or ')])}
+        head={['published case', <BudgetLabel key="l">limit</BudgetLabel>, 'engine set', <CapexLabel key="c">capex</CapexLabel>, 'EMV', 'solve method', 'golden optimal sets']}
+        rows={b.published.map((c) => [c.id, mm(c.capexLimit), setLabel(c.ids), mm(c.totalCapex), mm(c.totalEmv), c.solveMethod, c.goldenOptimalSets.map((s) => setLabel(s)).join(' or ')])}
       />
       <Note>
-        The optimizer keeps the first best set it builds and replaces it only with a strictly larger EMV, so on a tie the
-        order the projects were entered decides, and the result reports one set with no alternatives.
+        When two sets tie on risked EMV the optimizer keeps the one with less capex; at equal capex and equal EMV it keeps the
+        set built without the later project in the list. The result reports one set with no alternatives.
       </Note>
     </>
   );
@@ -242,42 +246,46 @@ export const FrontierMode = ({ fr, limit, onLimit }) => {
 };
 
 export const GridMode = ({ grid, caseId, onCase }) => {
-  if (!grid) return <Note>The optimizer did not return the grid cases.</Note>;
+  if (!grid) return <Note>The optimizer did not return the published cases.</Note>;
   const c = grid.find((x) => x.id === caseId) ?? grid[0];
   return (
     <>
       {onCase && (
         <FieldGrid>
-          <SelectField label="Published grid case" value={c.id} onChange={onCase} options={GRID_CASE_IDS.map((id) => [id, id])} />
+          <SelectField label="Published case" value={c.id} onChange={onCase} options={GRID_CASE_IDS.map((id) => [id, id])} />
         </FieldGrid>
       )}
       <div className="mt-3">
         <TileGrid>
           <Tile label={<BudgetLabel>Limit</BudgetLabel>} value={Number(c.capexLimit).toFixed(4)} />
-          <Tile label="Resolution per cell" value={Number(c.resolution).toFixed(6)} />
-          <Tile label="Grid cells (derived)" value={String(c.gridCellsDerived)} />
+          <Tile label="Solve method" value={c.solveMethod} />
+          <Tile label="exactStateLimit stated" value={c.exactStateLimit === null ? `none, default ${EXACT_STATE_LIMIT}` : String(c.exactStateLimit)} />
+          <Tile label="Resolution per cell" value={c.resolution === null ? 'null, no grid' : Number(c.resolution).toFixed(6)} />
           <Tile label="Engine set" value={setLabel(c.ids)} />
           <Tile label={<CapexLabel>Engine capex</CapexLabel>} value={Number(c.totalCapex).toFixed(4)} />
           <Tile label="Engine EMV" value={mm(c.totalEmv)} />
-          <Tile label="Over the limit" value={c.overLimit ? 'yes, flagged' : 'no'} />
-          <Tile label={<BudgetLabel>Over the limit by</BudgetLabel>} value={Number(c.overLimitBy).toFixed(4)} />
+          <Tile label="Optimality gap" value={mm(c.optimalityGap)} unit="million USD at most left out" />
+          <Tile label="Over the limit" value={c.overLimit ? 'yes' : 'no'} />
+          <Tile label={<BudgetLabel>Unspent (derived)</BudgetLabel>} value={Number(c.gridUnspentDerived).toFixed(4)} />
           <Tile label="Exact optimum EMV (golden)" value={mm(c.goldenExactEmv)} />
           <Tile label="Exact optimum sets (golden)" value={c.goldenExactSets.map((s) => setLabel(s)).join(' or ')} />
-          <Tile label="Gap (golden)" value={mm(c.goldenGap)} />
-          <Tile label={<BudgetLabel>Unspent (derived)</BudgetLabel>} value={Number(c.gridUnspentDerived).toFixed(4)} />
         </TileGrid>
       </div>
       <Tbl
-        head={['project', <CapexLabel key="c">capex</CapexLabel>, 'risked EMV', 'cells it weighs (derived)']}
-        rows={c.projects.map((p, i) => [p.id, Number(p.capex).toFixed(4), mm(p.emv), c.cellWeightsDerived[i].cells])}
+        head={['project', <CapexLabel key="c">capex</CapexLabel>, 'risked EMV', ...(c.fallback ? [`cells it weighs, rounded up (derived), of ${c.cells}`] : [])]}
+        rows={c.projects.map((p, i) => [p.id, Number(p.capex).toFixed(4), mm(p.emv), ...(c.fallback ? [c.cellWeightsDerived[i].cells] : [])])}
       />
       <Tbl
-        head={['published case', 'engine set', 'over the limit', <BudgetLabel key="b">over the limit by</BudgetLabel>, 'set changed by the grid (golden)']}
-        rows={grid.map((x) => [x.id, setLabel(x.ids), x.overLimit ? 'yes' : 'no', Number(x.overLimitBy).toFixed(4), x.goldenSetChanged ? 'yes' : 'no'])}
+        head={['published case', 'solve method', 'engine set', 'EMV', 'optimality gap', 'exact optimum EMV (golden)']}
+        rows={grid.map((x) => [x.id, x.solveMethod, setLabel(x.ids), mm(x.totalEmv), mm(x.optimalityGap), mm(x.goldenExactEmv)])}
       />
+      <p className="text-xs text-slate-500 mt-1 mb-0">
+        On decimalCapexExactSum the capex 0.1 and 0.2 add in binary to {BINARY_SUM_DERIVED} (derived); the engine reads them at their typed decimals, so they sum to exactly 0.3 and both are funded.
+      </p>
       <Note>
-        The overshoot is now flagged and still happens. The undershoot and the one cell charged to a free project are
-        unchanged (findings D2 and D4): read the resolution before trusting a funded set on a large or fractional limit.
+        The knapsack is solved exactly on the capex as typed, so the funded set is optimal and never exceeds the limit. Only when a
+        call states a small exactStateLimit (the default of {EXACT_STATE_LIMIT} is never reached by sixteen projects or fewer) does it fall back to a grid of{' '}
+        {FALLBACK_GRID_CELLS} cells with every capex rounded up: that set still fits the limit, and optimalityGap says how much EMV it may leave out.
       </Note>
     </>
   );
@@ -297,7 +305,7 @@ const CapitalExplorer = ({ initialMode = 'inventory' }) => {
   return (
     <PanelShell
       title="Capital explorer"
-      subtitle="The OKONO inventory risked project by project, the funded set at five budgets, the efficient frontier, and the grid under the answer. Money in million USD."
+      subtitle="The OKONO inventory risked project by project, the funded set at five budgets, the efficient frontier, and the exact solve beside the stated fallback grid. Money in million USD."
     >
       <FieldGrid>
         <SelectField label="View" value={mode} onChange={setMode} options={MODES} />
