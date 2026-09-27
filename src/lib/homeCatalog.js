@@ -84,7 +84,6 @@ export const HOME_COURSES = [
   c('refinery', 'commercial_trading', 'Refinery Feasibility & Planning', 'Test refinery economics before you commit capital.'),
   c('supply', 'supply_chain', 'Terminals, Depots & Fuel Supply', 'Storage and distribution with lean working capital.'),
   c('procurement', 'supply_chain', 'Procurement, Tendering & Contracting', 'Run a fair tender and choose the contract that fits the risk.', 'coming_soon', true),
-  c('contracts', 'supply_chain', 'Contract & Supplier Management', 'Run a contract from award to close-out and keep every supplier performing.', 'coming_soon', true),
   c('gasvalue', 'energy_transition', 'Flare Gas to Value & LPG/CNG', 'Turn a flare into a revenue stream.'),
   c('carbon', 'energy_transition', 'Carbon & Energy Efficiency', 'Cut emissions and energy cost. Stronger ESG reporting.'),
   c('cashflow', 'economics', 'Cash Flow & NPV', 'The common language of every investment decision.'),

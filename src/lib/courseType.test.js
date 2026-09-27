@@ -125,14 +125,17 @@ describe('course types', () => {
   });
 
   it('carries the course type onto the homepage catalogue, static and live', () => {
-    const contracts = HOME_COURSES.find((c) => c.slug === 'contracts');
-    expect(contracts).toMatchObject({ module: 'supply_chain', status: 'coming_soon', courseType: 'practice' });
-    expect(HOME_COURSES.filter((c) => c.courseType === 'practice').map((c) => c.slug)).toEqual(['contracts']);
+    // The contracts tile joins HOME_COURSES with its academy_apps row at the ship
+    // phase (appNames.test.js holds every tile to a migrated name), so today the
+    // catalogue carries the engine courses and no practice course.
+    expect(HOME_COURSES.filter((c) => c.courseType === 'practice')).toEqual([]);
     expect(HOME_COURSES.filter((c) => c.courseType === 'engine').map((c) => c.slug).sort())
       .toEqual([...ENGINE_COURSES].sort());
-    const merged = mergeCatalog(HOME_COURSES, [{ slug: 'contracts', status: 'available', course_type: 'practice' }, { slug: 'welldata', status: 'available', course_type: 'app' }]);
-    expect(merged.find((c) => c.slug === 'contracts').courseType).toBe('practice');
+    const withPractice = [...HOME_COURSES, { slug: 'contracts', module: 'supply_chain', name: 'Contract & Supplier Management', blurb: 'b', status: 'coming_soon', isNew: true, courseType: courseTypeOf('contracts') }];
+    const merged = mergeCatalog(withPractice, [{ slug: 'contracts', status: 'available', course_type: 'practice' }, { slug: 'welldata', status: 'available', course_type: 'app' }, { slug: 'procurement', status: 'available' }]);
+    expect(merged.find((c) => c.slug === 'contracts')).toMatchObject({ courseType: 'practice', status: 'available' });
     expect(merged.find((c) => c.slug === 'welldata').courseType).toBe('app');
+    expect(merged.find((c) => c.slug === 'procurement').courseType).toBe('engine');
   });
 });
 
