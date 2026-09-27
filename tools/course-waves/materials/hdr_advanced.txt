@@ -1,0 +1,19 @@
+-- ============================================================================
+-- SC3 EXPERT DEEP SEED: Materials, Spares & Inventory Management, advanced tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/materials/advanced.
+--
+-- What this tier owns: SPARES, LEAD-TIME RISK AND THE LIMITS. Insurance
+-- spares under the stated one-for-one model; the MIL-HDBK-338B Poisson anchor;
+-- lead-time risk by the canonical seeded Monte Carlo, never graded;
+-- stockouts and the reorder point for a service level; the readings, ties
+-- and boundaries; what the engine does not compute.
+--
+-- AN APP COURSE. The Suite app is the Materials & Spares Planner; the
+-- practicals also run in the course's own spares calculator. The capstone
+-- grades six values of this tier, each identical under every reading the
+-- engine states and never a Monte Carlo draw.
+-- ============================================================================

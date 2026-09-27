@@ -1,0 +1,21 @@
+-- ============================================================================
+-- SC3 ASSOCIATE DEEP SEED: Materials, Spares & Inventory Management, beginner tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/materials/beginner.
+--
+-- What this tier owns: CRITICALITY, CLASSES AND THE ORDER QUANTITY. The
+-- materials register and a stated policy for every figure; the texts with
+-- their editions, licences and read dates; criteria, weights, the weighted
+-- score, class minimums and the safety override; ABC by annual usage value
+-- and the item that crosses a cut-off; the economic order quantity and its
+-- cost at the optimum; the stated rounding rule and its cost; slow-moving and
+-- obsolete stock, write-downs, cover and excess.
+--
+-- AN APP COURSE. The Suite app is the Materials & Spares Planner; the
+-- practicals also run in the course's own register calculator. The capstone
+-- grades six values of this tier, each identical under every reading the
+-- engine states and never a Monte Carlo draw.
+-- ============================================================================

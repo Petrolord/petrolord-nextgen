@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "The casing joint CSG-958 on the Ekene register states a demand of 240 a year, an order cost of 3500, a holding rate of 0.2, prices of 1450 from 0, 1400 from 60 and 1360 from 120, rounded to the nearest whole joint, with the discount type all-units. What does the engine order?",
+  "options": [
+   "141.000000 joints in band 2, at 365590.042553 a year, pricing each joint by its own band",
+   "77.000000 joints in band 1, at 357689.090909 a year",
+   "120.000000 joints in band 2, at a total cost of 349720.000000 a year",
+   "76.112440 joints, the no-discount baseline at the band 0 price"
+  ],
+  "answer": 2,
+  "explanation": "Under all-units the band 2 EOQ of 78.590525 lies below its break, so the break quantity 120.000000 is the candidate, and at 349720.000000 it beats band 1's 77.000000 at 357689.090909. The order of 141.000000 at 365590.042553 is the incremental reading of the same schedule, and 76.112440 is the baseline every saving is measured from."
+ },
+ {
+  "prompt": "The same casing schedule is stated with the discount type incremental, every other input unchanged. What quantity does the engine order, and at what total cost a year?",
+  "options": [
+   "141.000000 joints at 365590.042553 a year, band 2's EOQ rounded to the nearest joint",
+   "120.000000 joints at 349720.000000 a year, taking the break as all-units does",
+   "106.000000 joints at 365856.981132 a year, the band 1 candidate",
+   "141.213231 joints, the band 2 EOQ carried unrounded into the order"
+  ],
+  "answer": 0,
+  "explanation": "Under incremental pricing band 2 offers its own EOQ, 141.213231, rounded by the stated rule to the nearest whole joint, 141.000000, at 365590.042553 a year, which is below band 1's 106.000000 at 365856.981132. The break quantity 120.000000 is the all-units answer, and the unrounded EOQ is the figure before the stated rule acts."
+ },
+ {
+  "prompt": "On the casing read as all-units, the engine's reason for band 0 is quoted below. What does it say the band offers?\n\n> band 0 at 1450: EOQ 76.11244 lies at or above the next break 60, so the band gives no candidate",
+  "options": [
+   "The break quantity 60, costed at the band 0 price",
+   "Its EOQ rounded to the nearest joint, in band 0",
+   "A refusal of the schedule as a policy that cannot work",
+   "No candidate, since a cheaper band covers that quantity"
+  ],
+  "answer": 3,
+  "explanation": "Under all-units a band whose EOQ falls at or above the next break offers no candidate, because a cheaper band covers that quantity. The engine does not refuse the schedule: it goes on to band 1 and band 2 and orders 120.000000. A band whose EOQ falls below its own break is the case that offers the break quantity."
+ },
+ {
+  "prompt": "Under all-units on the casing, band 2's EOQ is 78.590525 and its break is 120. What does band 2 offer as its candidate?",
+  "options": [
+   "Its EOQ 78.590525 rounded to the nearest joint, costed in band 1",
+   "The break quantity, 120.000000, at 349720.000000 a year",
+   "Nothing, because its EOQ lies outside the band",
+   "The EOQ as it stands, costed at the band 2 price of 1360 a joint"
+  ],
+  "answer": 1,
+  "explanation": "The engine's reason for band 2 reads: band 2 at 1360: EOQ 78.590525 lies below the break 120, so the break quantity is the candidate, total cost 349720 a year. Ordering less than 120 would lose the price, so an all-units band whose EOQ falls below its break offers the break. Offering nothing is the rule for an EOQ at or above the NEXT break."
+ },
+ {
+  "prompt": "Under the incremental reading of the casing schedule, what fixed cost F2 does the engine carry for band 2, the band that starts at 120?",
+  "options": [
+   "3000.000000",
+   "7500.000000",
+   "7800.000000",
+   "0.000000"
+  ],
+  "answer": 2,
+  "explanation": "The engine's basis states Fi = Fi-1 + (vi-1 - vi) Qi. Band 1 starts at 60 and costs 50 less than band 0, so F1 is 3000.000000; band 2 starts at 120 and costs 40 less than band 1, which lifts F2 to 7800.000000. The figure 7500.000000 belongs to the lecture 8 schedule priced from 50, and 0.000000 is the fixed cost of band 0 alone."
+ },
+ {
+  "prompt": "What saving against the no-discount baseline does the engine report for the casing under each discount type?",
+  "options": [
+   "4482.564905 all-units and 20352.607458 under incremental pricing",
+   "20352.607458 under both types",
+   "No saving under either type",
+   "20352.607458 all-units and 4482.564905 incremental"
+  ],
+  "answer": 3,
+  "explanation": "All-units orders 120.000000 at 349720.000000 a year, a saving of 20352.607458; incremental orders 141.000000 at 365590.042553, a saving of 4482.564905. Incremental gives the band 2 price only to the joints above 120, so the discount buys less. Both savings are measured from the EOQ 76.11244 at the band 0 price."
+ },
+ {
+  "prompt": "Caplice, lecture 8 slide 12, states a two per cent all-units discount from 500 units on a demand of 2000 a year, an order cost of 500, a holding rate of 0.25 and a price of 50, and prints no answer. What does the engine order?",
+  "options": [
+   "500.000000 at 103062.500000 a year",
+   "400.000000 at 105000.000000 a year, the band 0 EOQ",
+   "1000.000000 at 86000.000000",
+   "1789.000000 at 98826.043879 a year, the incremental order"
+  ],
+  "answer": 0,
+  "explanation": "The engine's reason reads: order 500 at a total cost of 103062.5 a year (band 1), the lowest of 2 candidates. Against 105000.000000 at the band 0 EOQ of 400.000000, the break is worth taking. The orders of 1000.000000 and 1789.000000 belong to the three-band schedule of slides 13 to 15, read as all-units and as incremental."
+ },
+ {
+  "prompt": "Caplice, lecture 8 slides 13 to 15, work an incremental schedule priced 50 below 500, 45 from 500 and 40 from 1000. Band 1's EOQ is 1032.795559. What does band 1 offer?",
+  "options": [
+   "Its EOQ as the slides print it, 1,033",
+   "No candidate, since its EOQ lies beyond its band",
+   "The break quantity 500, as an all-units band",
+   "The break quantity 1000, where the band ends"
+  ],
+  "answer": 1,
+  "explanation": "Under an incremental schedule a band offers only its own EOQ, and only when that EOQ lies inside it. Band 1 runs from 500 to below 1000, and 1032.795559 lies above it, so band 1 gives no candidate. The slides print that EOQ as 1,033. An incremental band offers its own EOQ with A + Fi when that EOQ lies inside it, and no break quantity."
+ },
+ {
+  "prompt": "On the incremental schedule of Caplice, lecture 8 slides 13 to 15, the engine orders 1789.000000 at a total of 98826.043879 a year, and the slides print 98,825. Why does the print sit just below the engine's figure?",
+  "options": [
+   "The slides take the effective unit price as 44.19 before costing each line",
+   "The engine adds a fixed cost 7500.000000 the slides leave out",
+   "The slides round each cost line and add the rounded lines",
+   "The slides order 1788.854382"
+  ],
+  "answer": 2,
+  "explanation": "The slide prints 44.19, 88,384, 559, 9,882, 98,825 and 105,000; it rounds each line, and its total is the sum of rounded lines. The engine sums the unrounded lines: purchase 88384.572387, ordering 558.971492 and holding 9882.500000. The slides print the same order of 1,789 and the same fixed cost of 7,500."
+ },
+ {
+  "prompt": "A golden input states a demand of 100 a year, an order cost of 50, a holding rate of 1 and two all-units bands whose candidates both cost 200 a year. What does the engine return?",
+  "options": [
+   "An order of 200 in band 1, as the larger lot buys at the lower price",
+   "A refusal: the tie leaves the order undecided",
+   "Two orders, one from each tied band",
+   "An order of 100 in band 0, with its tie reason"
+  ],
+  "answer": 3,
+  "explanation": "The engine compares the totals at 12 significant digits, finds 200.000000 and 200.000000 equal, and states its choice: order 100 at a total cost of 200 a year (band 0), the lowest of 2 candidates; tied on cost, the smaller quantity is taken. Taking the larger quantity is the alternative reading the engine names, and it is no refusal: a tie is a result."
+ },
+ {
+  "prompt": "On the Caplice schedule, breaks at 500 and 1000 are stated with a rounding rule to the nearest multiple of 300. What does the engine return?",
+  "options": [
+   "A refusal naming breaks[1].minQuantity, which must be a multiple of 300",
+   "A refusal naming rounding.multiple, which must divide the demand of 2000 a year",
+   "An order of 500 at the break, with the rounding rule set aside for a break quantity",
+   "An order of 1789 as before, since the rounding acts only after a band is chosen"
+  ],
+  "answer": 0,
+  "explanation": "The engine's words: breaks[1].minQuantity must be a multiple of rounding.multiple 300, so that ordering at the break keeps its price; got 500. When a rule rounds, every break must be a multiple of the rounding multiple, and a policy that cannot work is refused before any figure is computed. The field named is the break."
+ },
+ {
+  "prompt": "A schedule is stated whose first band starts at 10. What does the engine return?",
+  "options": [
+   "An order as usual, with quantities below 10 priced at the first band's price",
+   "A refusal: breaks[0].minQuantity must be 0 so that every quantity has a price; got 10",
+   "A refusal naming discountType, since a gapped schedule reads as neither type",
+   "An order on the bands from 10 up, with a warning on small lots"
+  ],
+  "answer": 1,
+  "explanation": "A schedule must price every quantity, so the first band must start at 0, and the engine refuses otherwise with the message quoted in the key. The discount type is refused only when it is missing or unknown."
+ },
+ {
+  "prompt": "A schedule priced from 50 states a second band also priced at 50. What does the engine return, in its own words?",
+  "options": [
+   "breaks[2].minQuantity must be above the band before it (500); got 500",
+   "breaks[1].unitPrice must be a finite number above 0; got 0",
+   "discountType must be 'all-units' (the band's price applies to the whole lot) or 'incremental' (each unit is priced by its own band)",
+   "breaks[1].unitPrice must be below the band before it (50); got 50"
+  ],
+  "answer": 3,
+  "explanation": "Each band must be a real discount, so each price must fall; a second band at the same price is refused on breaks[1].unitPrice with the message in the key. The message about minQuantity 500 is the refusal of breaks that do not rise, the one about a price of 0 is the stated probe on a zero price, and the discountType message answers a missing type."
+ },
+ {
+  "prompt": "A two-band schedule with prices of 1 and 0.5, the break at 100, and a demand, order cost and holding rate of 1 each is rounded down to a multiple of 100. What does the engine return?",
+  "options": [
+   "An order of 100 at the break, since rounding down stops at the first break quantity",
+   "An order of 1.414214, the band 0 EOQ, because a rule that gives nothing is skipped",
+   "A refusal: the rounding gives an order of 0 from the band 0 EOQ 1.414214",
+   "A refusal naming breaks[1].minQuantity, since the break is no multiple of the rounding"
+  ],
+  "answer": 2,
+  "explanation": "The engine's words: rounding gives an order quantity of 0 from the band 0 EOQ 1.414214; state a smaller multiple or another rule. A rounding rule that orders nothing is a policy that cannot work, and it is refused before any cost is computed. The break at 100 is a multiple of 100, so the break check passes."
+ },
+ {
+  "prompt": "The lecture 8 three-band schedule is read as all-units in place of incremental, everything else as stated. What does the engine order?",
+  "options": [
+   "1000.000000 at 86000.000000 a year",
+   "1789.000000 at 98826.043879 a year, as under incremental",
+   "500.000000 at 103062.500000",
+   "400.000000 at 105000.000000"
+  ],
+  "answer": 0,
+  "explanation": "On the schedule of lecture 8 slides 13 to 15 read as all-units, the engine orders 1000.000000 at 86000.000000 a year. All-units gives the band 2 price to every unit of the lot, so the best order sits on the break. Incremental orders 1789.000000 at 98826.043879, and 500.000000 at 103062.500000 is the answer to the two-band schedule of slide 12."
+ }
+]

@@ -1,0 +1,362 @@
+{
+ "app_slug": "materials",
+ "tier": "intermediate",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-quantity-discounts",
+   "title": "Quantity Discounts",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-a-price-schedule",
+     "title": "A price schedule",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "materials-register-calculator",
+      "materials-stock-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-all-units-discounts",
+     "title": "All-units discounts",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "materials-stock-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-incremental-discounts",
+     "title": "Incremental discounts",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "materials-stock-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-candidates-and-the-lowest-total-cost",
+     "title": "Candidates and the lowest total cost",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "materials-stock-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-rounding-against-the-breaks",
+     "title": "Rounding against the breaks",
+     "order": 5,
+     "est_minutes": 12,
+     "panels": [
+      "materials-stock-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-demand-over-the-lead-time",
+   "title": "Demand over the Lead Time",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-continuous-review-and-the-reorder-point",
+     "title": "Continuous review and the reorder point",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "materials-stock-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-demand-and-lead-time-variation",
+     "title": "Demand and lead-time variation",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "materials-stock-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-sigma-over-the-protection-period",
+     "title": "Sigma over the protection period",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "materials-stock-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-choke-bean-set",
+     "title": "The choke bean set",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "materials-stock-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-the-cycle-service-level",
+   "title": "The Cycle Service Level",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-the-probability-of-no-stockout",
+     "title": "The probability of no stockout",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "materials-stock-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-safety-factor-from-the-inverse-normal",
+     "title": "The safety factor from the inverse normal",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "materials-stock-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-a-safety-factor-read-from-a-table",
+     "title": "A safety factor read from a table",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "materials-stock-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-published-safety-stocks",
+     "title": "The published safety stocks",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "materials-stock-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-the-fill-rate",
+   "title": "The Fill Rate",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-units-short-per-cycle",
+     "title": "Units short per cycle",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "materials-stock-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-unit-normal-loss",
+     "title": "The unit normal loss",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "materials-stock-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-solving-for-the-safety-factor",
+     "title": "Solving for the safety factor",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "materials-stock-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-a-printed-figure-that-is-a-slip",
+     "title": "A printed figure that is a slip",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "materials-stock-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-periodic-review",
+   "title": "Periodic Review",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-the-review-period",
+     "title": "The review period",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "materials-stock-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-order-up-to-level",
+     "title": "The order-up-to level",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "materials-stock-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-a-floor-on-the-safety-factor",
+     "title": "A floor on the safety factor",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "materials-stock-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-certain-demand",
+     "title": "Certain demand",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "materials-stock-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-poisson-demand-for-slow-movers",
+   "title": "Poisson Demand for Slow Movers",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-when-the-normal-does-not-fit",
+     "title": "When the normal does not fit",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "materials-stock-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-poisson-table",
+     "title": "The Poisson table",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "materials-stock-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-cycle-service-on-a-poisson",
+     "title": "Cycle service on a Poisson",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "materials-stock-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-fill-rate-and-the-loss-recursion",
+     "title": "Fill rate and the loss recursion",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "materials-stock-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "materials-stock-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

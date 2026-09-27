@@ -1,0 +1,19 @@
+-- ============================================================================
+-- SC3 PROFESSIONAL DEEP SEED: Materials, Spares & Inventory Management, intermediate tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/materials/intermediate.
+--
+-- What this tier owns: SERVICE LEVELS, SAFETY STOCK AND DISCOUNTS. Quantity
+-- discounts, all-units and incremental; demand over the lead time and sigma
+-- over the protection period; the cycle service level and the safety factor;
+-- the fill rate and the unit normal loss; periodic review and the
+-- order-up-to level; Poisson demand for slow movers.
+--
+-- AN APP COURSE. The Suite app is the Materials & Spares Planner; the
+-- practicals also run in the course's own stock calculator. The capstone
+-- grades six values of this tier, each identical under every reading the
+-- engine states and never a Monte Carlo draw.
+-- ============================================================================
