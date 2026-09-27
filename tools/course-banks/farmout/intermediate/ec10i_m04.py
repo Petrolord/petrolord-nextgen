@@ -102,7 +102,7 @@ q(3, "The Ekene Deep deal is restated with the overrun rule \"farmor-side\" (FIN
  ["A deal FIN can sign at no promote, the best share for it on these terms and one the engine accepts",
   "The break-even share of EKO, since the table lists one breakpoint for each side of the deal",
   "The share at which the carry is 0, the smallest share the engine accepts under this rule"],
- "The engine rolls the EMV back at the earned interest to draw its line, and that point can sit below the smallest share a stated deal may carry. On these terms the engine refuses any share below 31.363636; stated at 31 it answers \"deal.farmineePaysPct must be at or above 31.363636, the share at which the carry is 0 when the farmor side pays the excess: paying 31% of the promoted 44000000 (13640000) against its held 30% of the success well cost 46000000 (13800000) leaves a carry of -160000; got 31\". The solved break-even, 35.960428, is above it. The table is FIN's alone, and the carry is 0 at 31.363636.")
+ "The engine rolls the EMV back at the earned interest to draw its line, and that point can sit below the smallest share a stated deal may carry. On these terms any share below 31.363636 leaves a carry below 0 on the success well, and the deal call refuses it by name. The solved break-even, 35.960428, is above it. The table is FIN's alone, and the carry is 0 at 31.363636.")
 
 q(0, "How does the engine solve the chance of success at which a named position's EMV is 0? Pick its basis as it prints it.",
  "EMV is linear in the chance of success: p* = -dry / (success - dry) when success and dry hole have opposite signs",

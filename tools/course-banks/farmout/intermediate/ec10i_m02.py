@@ -35,14 +35,14 @@ q(1, "Under \"all-events\" vesting only the first Ekene well is done so far. Wel
  ["20.000000 percent, the completed well's interest",
   "35.000000 percent, assigned on signing",
   "0.000000 percent, and FIN has paid nothing either, since no payment is counted until all events vest"],
- "The engine's reason is \"vesting \\\"all-events\\\": 1 of 2 events completed; nothing vests\", and the totals show 0.000000 vested while FIN has paid 16000000.000000. Under \"all-events\" nothing vests until every event is completed, so the 20 percent would vest only under \"per-event\". Completed events are counted as paid whatever the vesting rule.")
+ "The engine's reason is \"vesting \"all-events\": 1 of 2 events completed; nothing vests\", and the totals show 0.000000 vested while FIN has paid 16000000.000000. Under \"all-events\" nothing vests until every event is completed, so the 20 percent would vest only under \"per-event\". Completed events are counted as paid whatever the vesting rule.")
 
 q(1, "Were the Ekene rule \"per-event\" at the same point, with just the exploration well finished (40000000.000000 gross, 40.000000 percent paid for 20.000000, no cap), which participating interests would the licence show?",
  "EKO 50.000000, PA 30.000000 and FIN 20.000000",
  ["EKO 70.000000, PA 30.000000 and FIN 0.000000",
   "EKO 50.000000, PA 20.000000 and FIN 30.000000, the earned interest taken pro rata from both licence parties",
   "EKO 35.000000, PA 30.000000 and FIN 35.000000"],
- "The engine's reason reads \"vesting \\\"per-event\\\": 1 of 2 events completed; 20% vests\", and the interests after are EKO 50.000000, PA 30.000000, FIN 20.000000. Each completed event vests its stated interest, and it comes out of the farmor's interest alone: PA keeps its 30 percent. EKO 70 and FIN 0 is the \"all-events\" outcome; the 35 percent vests only when both events are done.")
+ "The engine's reason reads \"vesting \"per-event\": 1 of 2 events completed; 20% vests\", and the interests after are EKO 50.000000, PA 30.000000, FIN 20.000000. Each completed event vests its stated interest, and it comes out of the farmor's interest alone: PA keeps its 30 percent. EKO 70 and FIN 0 is the \"all-events\" outcome; the 35 percent vests only when both events are done.")
 
 q(3, "Once the appraisal well is finished too, every earning event is complete and the \"all-events\" rule releases the interest. With 20.000000 earned on the first well and 15.000000 on the second, what vested interest does the engine report for FIN?",
  "35.000000 percent",
@@ -70,7 +70,7 @@ q(3, "Suppose the Ekene programme is signed and no well has been drilled yet: ev
  ["A refusal, since a deal with no completed event has no payment to report and the engine names eventsCompleted",
   "Totals of 29500000.000000 for FIN, the obligation of both events counted as paid from the day the deal is signed",
   "The first event's payment of 16000000.000000 in the totals, the exploration well being counted as committed"],
- "The engine reports every event's split as the obligation and counts only completed events in the totals, so 0.000000 is paid and vested and the interests stay EKO 70.000000, PA 30.000000, FIN 0.000000. Its reason is \"vesting \\\"all-events\\\": 0 of 2 events completed; nothing vests\". Zero events completed is a result with a reason, which is no refusal.")
+ "The engine reports every event's split as the obligation and counts only completed events in the totals, so 0.000000 is paid and vested and the interests stay EKO 70.000000, PA 30.000000, FIN 0.000000. Its reason is \"vesting \"all-events\": 0 of 2 events completed; nothing vests\". Zero events completed is a result with a reason, which is no refusal.")
 
 q(0, "Midway through the Ekene programme, the exploration well (40000000.000000 gross, FIN paying 40.000000 percent for 20.000000, uncapped) is drilled and the appraisal well is not, and the deal vests nothing until both are done. No bonus or reimbursement is stated. Which consideration to EKO does the engine report at this point?",
  "8000000.000000, the first event's carry",
@@ -84,7 +84,7 @@ q(2, "A learner types the vesting rule \"on-signing\" into the box of an earning
  ["A result in which every earned interest vests on the day the deal is signed, before any work",
   "vesting must be one of \"per-event\", \"all-events\"; got nothing",
   "A result under \"per-event\", the rule the engine falls back on when a stated rule is unknown"],
- "The engine refuses an unknown vesting rule by name, in its own words: \"vesting must be one of \\\"per-event\\\", \\\"all-events\\\"; got \\\"on-signing\\\"\". It accepts only those two and substitutes none. The message ending \"got nothing\" is the one for a vesting rule set to not stated.")
+ "The engine refuses an unknown vesting rule by name, in its own words: \"vesting must be one of \"per-event\", \"all-events\"; got \"on-signing\"\". It accepts only those two and substitutes none. The message ending \"got nothing\" is the one for a vesting rule set to not stated.")
 
 q(1, "A one-event deal is stated with eventsCompleted set to 2. In the engine's words, what is the reply?",
  "eventsCompleted must be at most 1, the number of events; got 2",
@@ -105,7 +105,7 @@ q(0, "A two-event deal names both of its events \"well\". What does the engine r
  ["A result with the second event merged into the first one, their gross costs added together",
   "events[0].name must be a name no other event has; got \"well\", the first of the pair",
   "A result in which the two events are numbered in order and the shared name is kept for both"],
- "The engine refuses the second event by name, in its own words: \"events[1].name must be a name no other event has; got \\\"well\\\"\". Each event's reasons and vesting are reported under its name, so a repeated name would make them ambiguous. The refusal names the later event, the one that repeats a name already taken, and the engine merges and renumbers nothing.")
+ "The engine refuses the second event by name, in its own words: \"events[1].name must be a name no other event has; got \"well\"\". Each event's reasons and vesting are reported under its name, so a repeated name would make them ambiguous. The refusal names the later event, the one that repeats a name already taken, and the engine merges and renumbers nothing.")
 
 q(1, "How does the engine's basis tie its two vesting rules to the HMRC Oil Taxation Manual (OT30021), in its own words?",
  "\"all-events\": nothing vests until every event is completed (an earn in: the work before the assignment, HMRC OT30021)",
