@@ -15,7 +15,142 @@ def q(k,p,c,ds,e,src):
 # Every key rests on a PACK.md passage named in its src list; the
 # explanation cites the SOURCE by name and locator (an Act and its section,
 # a guidance and its paragraph), never a passage id or a pack section.
-# EMPTY AT THE FOUNDATION: the bank writers fill it.
+# ---- questions (Professional bank writer) ----
+q(0,
+  "The synthetic Ekene contract team adopts GovS 008 (version 2.2), clause 5.4.5, as practice for change control. What aim does that clause set for every contract change?",
+  "Changes are justified and controlled so the requirements still meet business needs and fit the organisation's financial processes",
+  ["Changes are agreed quickly on site by whoever is present, so that the supplier's work is never held up by any approvals or paperwork",
+   "Changes are approved by the supplier's project manager, who knows the work best",
+   "Changes are allowed only once a year, at the contract's annual review meeting"],
+  "GovS 008 at 5.4.5 says contract changes shall be justified and controlled to ensure the requirements continue to meet the organisation's business needs and align with its financial processes. Speed on site is not the aim, the operator's own delegated people approve its changes, and the standard sets no annual window for change. It is a UK text, read here as published practice for Ekene.",
+  ['P077'])
+
+q(2,
+  "FW-E (synthetic) asks for extra payment on EKC-05, the Ekene lump sum flowline works, to bury a section of flowline it says was outside its scope. The contract drawings show that section buried. Following the World Bank's Contract Management Practice guidance, taught by concept, what is the first question?",
+  "Whether the so-called extra work was already within the contract's scope and simply labelled as extra",
+  ["Whether FW-E's quoted price for burial is below the market rate for similar civil works in the Ekene area",
+   "Whether the Ekene contract owner has enough budget left this year to pay for the burial work",
+   "Whether FW-E has already finished the burial, in which case the change can be approved after the event"],
+  "The World Bank's Contract Management Practice guidance, taught by concept, puts the scope question first: was the extra work already in scope and mislabelled? Only after that are costs checked. Here the drawings show the section buried, so the work is paid within the lump sum. Price, budget and completed work all come after the scope question, and an approval given after the work is done gives the approver no real choice.",
+  ['P156'])
+
+q(3,
+  "On EKC-05 (synthetic), a weld made by FW-E fails its inspection, and FW-E asks for a paid variation to cut it out and remake it. Reading the Public Procurement Act 2007, s.53(3), as a published statement of public practice, whose cost is the remake?",
+  "FW-E's own cost",
+  ["Ekene's, as a paid change",
+   "Shared equally by both parties",
+   "Ekene's, taken from the retention"],
+  "The Public Procurement Act 2007, s.53(3), speaks of a variation order requiring a contractor at his own expense to repair or replace work carried out with inferior or defective materials or with less skill than the contract requires. That Act binds federal procuring entities; for an operator it states public practice. Putting right the contractor's own defective work is the contractor's cost, and the retention is security held against performance, which gives no ground for paying the contractor to remedy its own defect.",
+  ['P089'])
+
+q(1,
+  "On EKC-06 (synthetic), an Ekene production supervisor who holds no delegated authority under the contract tells IM-F's technician to install and maintain six extra pressure gauges. IM-F does the work and invoices it. What do the World Bank's Contract Management Practice guidance and good practice support?",
+  "The invoice waits until someone with delegated authority assesses and approves the change, because a decision holds only when its maker has authority",
+  ["Paying the invoice at once, because any Ekene employee on site can bind the operator to extra work",
+   "Rejecting the invoice for good, because work done without authority can never be approved later",
+   "Asking IM-F to remove the gauges at its own cost before any discussion of payment takes place"],
+  "The World Bank's Contract Management Practice guidance, taught by concept, notes that a contracting decision is valid and enforceable only when the person taking it holds the authority to take it. The supervisor had none, so the invoice waits for assessment and approval by someone who does. Site staff cannot bind the operator by default, the change can still be assessed on its merits, and removal at IM-F's cost ignores that IM-F acted in good faith.",
+  ['P021'])
+
+q(3,
+  "Ekene (synthetic) is writing the change section of the EKC-01 contract management plan for the WS-A framework. What does the World Bank's Contract Management Practice guidance, taught by concept, ask that section to set out?",
+  "Clear roles, with named people holding delegated authority to act on a change request or escalate it",
+  ["A rule that WS-A's field supervisor approves any change needed to keep a well services job running on the day",
+   "A rule that every change, however small, goes to the Board for its formal approval before it is instructed",
+   "A rule that changes are agreed by email between any two staff members, one from each of the parties"],
+  "The World Bank guidance asks for clear roles in change management, with named people holding delegated authority to act on a change request or to escalate it when there are problems. A supplier's supervisor cannot approve the operator's changes, the Board has no role in approving individual contract changes, and approval by any two staff members leaves no delegation at all.",
+  ['P087'])
+
+q(1,
+  "On EKC-02 (synthetic), MV-B's vessel carried out an extra standby duty for two weeks at the Ekene logistics lead's request. The contract manager now asks the contract owner to approve it. What does GovS 008 (version 2.2), clause 5.4.5, read as practice, say about this order of events?",
+  "Approvals are to be obtained before a change is implemented, so this approval ratifies a fact",
+  ["Approval after the event is the usual order, since the need for the work has now been fully proved",
+   "The order does not matter, provided the change register shows the approval date",
+   "The charter is void for the two weeks, since work before approval cancels the contract terms"],
+  "GovS 008 at 5.4.5 expects approvals to be obtained before implementation, with an audit trail in a change register. An approval given after the work gives the approver no real choice and only records what already happened. The order does matter, a register entry does not repair it, and no text says early work voids the charter.",
+  ['P078'])
+
+q(0,
+  "An Ekene manager (synthetic) cites the Public Procurement Act 2007, s.16(21), on the accountability of the accounting officer and any officer to whom responsibility is delegated. How does that section apply to Ekene?",
+  "It binds federal procuring entities; for an operator it states a sound principle that a delegation carries accountability with it",
+  ["It binds every oil and gas operator directly, because the content Act adopts the whole of the Public Procurement Act 2007 by reference",
+   "It binds Ekene only for those contracts whose value is above the threshold that the Bureau of Public Procurement publishes each year",
+   "It removes all accountability from any delegate, because the responsibility for each action stays with the accounting officer alone"],
+  "The Public Procurement Act 2007 binds federal procuring entities, and s.16(21) makes the accounting officer and any officer to whom responsibility is delegated responsible and accountable for actions taken or omitted. For an operator it is a published statement of practice. The content Act does not adopt it, no Bureau threshold brings Ekene under it, and the section makes the delegate accountable too.",
+  ['P012'])
+
+q(2,
+  "WS-A (synthetic) sends a one-line email asking to add a second nitrogen unit to a planned EKC-01 job at a day rate it quotes. What does the World Bank's Contract Management Practice guidance, taught by concept, expect a change request to carry?",
+  "Its contractual justification, an analysis, method statements, and evidence of where the extra cost comes from and why it is reasonable",
+  ["Nothing more, since a supplier's email is itself sufficient evidence of need",
+   "A signed waiver of any later claim for time arising from the same job",
+   "Written confirmation from the Board that the unit meets content targets"],
+  "The World Bank guidance expects a request for a change order or variation to carry proper contractual justification, analysis, method statements and evidence of where the extra cost came from and why it is reasonable. A one-line email carries none of these. A claim waiver and a Board confirmation are not what the guidance asks for, and a contract manager asks for the missing pieces before assessing.",
+  ['P088'])
+
+q(1,
+  "Assessing WS-A's request for a second nitrogen unit on EKC-01 (synthetic), the contract manager finds that the framework's schedule of rates already prices a nitrogen unit, while WS-A quoted a higher rate. Which price basis applies first, following the World Bank's Contract Management Practice guidance, taught by concept?",
+  "The contract's own rate from the schedule of rates",
+  ["WS-A's quoted rate, since the supplier proposed it first",
+   "A current market rate from three other suppliers",
+   "The average of the quoted and the scheduled rates"],
+  "The World Bank guidance tests the cost of a change against the contract's own unit rates first, then recorded historical costs, then market rates. EKC-01's schedule of rates prices the unit, so that rate applies. A supplier's quotation does not displace a contract rate, a market survey comes only where the contract and history give no rate, and averaging has no basis in the guidance.",
+  ['P156'])
+
+q(3,
+  "Reviewing a proposed change to EKC-06 (synthetic), the Ekene contract manager wants to know whether it tilts the economic balance toward IM-F. The UK guidance on Contract Modifications, para 23, read as practice, gives an example of such a tilt. Which one?",
+  "A change lifting the supplier's profit from 8% to 16%",
+  ["A change that shortens the contract by one month at the operator's request",
+   "A change that adds a KPI measuring the supplier's response to night calls",
+   "A change that moves the monthly service report date from the fifth to the tenth"],
+  "The UK guidance on Contract Modifications, para 23, lists changes likely to shift the economic balance toward the supplier: lifting its profit from 8% to 16%, transferring valuable intellectual property to it, or repeated additions amounting to a large volume of extra work. Shortening the term at the buyer's request, adding a KPI and moving a report date give the supplier no gain. The figures are the guidance's own illustration.",
+  ['P084'])
+
+q(0,
+  "Under the UK Procurement Act 2023 regime, as the UK guidance on Contract Modifications, para 1, describes it, what happens when a contracting authority wants a modification that cannot be justified on any of the permitted grounds?",
+  "The modification is not permitted, and a new procurement is needed if the authority still wants that subject-matter",
+  ["The modification may go ahead, provided the supplier agrees to it in writing and signs a variation before the work starts",
+   "The modification may go ahead once its value is split into several smaller changes that each fit one of the permitted grounds",
+   "The modification may go ahead if the authority publishes a notice of it within the following year"],
+  "The UK guidance on Contract Modifications, para 1, says that if a modification cannot be justified on at least one of the grounds it is not permitted, and a new procurement is carried out if the authority wishes to implement its subject-matter. The supplier's consent does not create a ground, splitting a change is the slicing the guidance warns against at para 15, and publication does not make an unpermitted change lawful.",
+  ['P079'])
+
+q(2,
+  "A synthetic Ekene analyst reads the UK below-threshold ground for modifications in the UK guidance on Contract Modifications, para 24. By how much may such a modification move a contract's estimated value?",
+  "By no more than 10% for goods or services, or 15% for works, with the total of such changes below the threshold",
+  ["By no more than 50% for any kind of contract, with no limit on how many such changes are made over its whole life",
+   "By no more than 15% for goods or services, or 10% for works, with each change counted separately",
+   "By no more than 10% of the maximum term, with no limit on the value that a single change may add"],
+  "The UK guidance on Contract Modifications, para 24, says a below-threshold modification may not move the estimated value by more than 10% for goods or services or 15% for works, and all such modifications together stay below the threshold for that type of contract. Fifty per cent is the unforeseeable circumstances cap, 15% for goods and 10% for works reverses the two figures, and 10% of the maximum term belongs to the non-substantial ground. None of these UK limits binds an Ekene contract.",
+  ['P081'])
+
+q(0,
+  "Over one year the Ekene contract manager (synthetic) approved four small changes to EKC-07, EM-G's environmental monitoring, each adding groundwater sampling at one more well and each below the manager's own approval limit. Which warning in the UK guidance on Contract Modifications, read as practice, does the pattern resemble?",
+  "Repeated small below-threshold changes made when one larger change could reasonably have been made",
+  ["A change made for unforeseeable circumstances that goes on to alter the overall nature of the whole contract",
+   "A change lifting the supplier's profit by a stated margin above the level of profit agreed at award",
+   "A change made after the contract termination notice was published on the central platform"],
+  "The UK guidance on Contract Modifications, para 15, says an authority should not make repeated small below-threshold modifications to buy more when those modifications could reasonably have been made as a single larger one. Four one-well additions over a year is that pattern. Nothing here was unforeseeable, no profit shift is described, and the contract is still running. For Ekene the guidance is practice: add the four together and let the contract owner decide.",
+  ['P083'])
+
+q(1,
+  "Under the World Bank Procurement Regulations (Seventh Edition, September 2025), taught by concept, when does a borrower seek the Bank's no objection before agreeing a variation on a contract under prior review?",
+  "When the variation, alone or with earlier ones, adds more than 15 percent to the original contract cost, extensions of time included",
+  ["When any single variation adds more than 50 percent to the value, with extensions of time left out",
+   "When the variation is the first one on the contract, whatever its value and whatever its urgency",
+   "When the variation adds more than 10 percent to the term, measured against the maximum at award"],
+  "The World Bank Procurement Regulations, Annex II para 9.1(c), taught by concept, ask a borrower to seek no objection before agreeing a variation that, alone or added to all earlier ones, increases the original contract cost by more than 15 percent, extensions of time included, with extreme urgency as the stated exception. Fifty per cent is a UK figure, the first variation is not a trigger on its own, and 10% of the term is the UK non-substantial test.",
+  ['P086'])
+
+q(3,
+  "An Ekene manager (synthetic) asks which of these texts binds a change to EKC-01, the Ekene well services framework: the UK modification grounds, the World Bank's 15 percent prior review rule, or the content Act. On the sources, what is the position?",
+  "The content Act, s.6, requires the contract to conform to it; the UK and World Bank limits are published practice",
+  ["All three bind EKC-01, because an operator's framework agreement has to satisfy every published procurement rule it can find",
+   "The UK grounds bind EKC-01, because WS-A's parent company is registered in the United Kingdom and trades there as well",
+   "The World Bank rule binds EKC-01, because every oil and gas framework in Nigeria counts as a Bank-financed contract"],
+  "The content Act (Act No. 2 of 2010), s.6, requires oil and gas contracts in Nigeria to conform to its provisions, so a change to EKC-01 conforms too. The UK grounds bind UK contracting authorities and the World Bank rule binds its borrowers on Bank-financed contracts; for Ekene both are a discipline worth borrowing. A supplier's place of registration does not import UK law, and EKC-01 is not Bank-financed.",
+  ['P102'])
+# ---- end of questions ----
 
 emit(Q, '/root/cat-wip-contracts/banks/sc5i_m03.json', expect_n=15)
 finish()
