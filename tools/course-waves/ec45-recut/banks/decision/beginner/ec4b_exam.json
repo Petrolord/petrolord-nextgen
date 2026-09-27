@@ -114,7 +114,7 @@
   "options": [
    "Nothing went wrong, since costs are additive and the order in which a hand rollback subtracts them cannot change the value at the root.",
    "The push cost should have been left out, because once push carries its cost of 6.0000 the decision beneath up switches to hold instead.",
-   "The costs should have come off after weighting at every level and never at the root, which is what the engine does to reach 6.0000.",
+   "The costs should have come off after weighting at every level below the root, which is what the engine does to reach 6.0000.",
    "The push cost was charged on the down branch too; paid only on up, weighted 0.500000, it costs the root half as much and the root is 6.0000."
   ],
   "answer": 3,

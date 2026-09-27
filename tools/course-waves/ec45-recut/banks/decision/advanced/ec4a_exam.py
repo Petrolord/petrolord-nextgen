@@ -68,7 +68,7 @@ q(2, "Three negative numbers come out of these tools: a gross voi of -15.00 from
  ["All three, because a value of information below zero, gross or net, is impossible for a signal that the decision maker is always free to ignore and never has to act on.",
   "The -15.00 and the -1.42e-14, since both are gross values of information below the floor of zero, while the -17.00 is a net value and therefore a legitimate answer.",
   "Only the -17.00, because the pricey case charges 50.0000 for a survey worth 33.00, and a value of information below its own cost means the typed chances disagree."],
- "A negative net value says the price is too high; a negative gross value says the entries contradict the stated prior. The engine reports EVII residue below 1e-9 as 0.0000.")
+ "A negative net value says the price is too high; a negative gross value says the entries contradict the stated prior. The engine returns an EVII of -1.42e-14, float residue that prints as 0.0000.")
 
 # ord 9
 q(3, "The threeByThree posteriors come out of the engine's Bayes step: after Bright, Flat and Dim, read with chances 0.320000, 0.380000 and 0.300000, Large stands at 0.437500, 0.105263 and 0.066667. Could posteriors built this way fail the implied-prior check that makes the Analyzer withhold a value?",
@@ -220,7 +220,7 @@ q(1, "The EKPAN lottery typed with posteriors of 64.7 and 9.7 percent gives an i
  ["The rounded one, because a delta of exactly zero is a stronger consistency result than the binary residue of 5.551115e-17 that the full-precision entry leaves behind.",
   "Both equally, because the Analyzer treats every entry whose delta is inside 0.005 as the same survey, and the gap between 19.89 and 19.84 is only rounding noise on the card.",
   "Neither, because a delta below 1e-12 falls inside the representation allowance and the Analyzer withholds what it cannot tell from zero."],
- "Six rounded EKPAN lottery rows pass the check with gross values from 18.41 to 20.51. The survey is the same in every row; a pass certifies agreement and says nothing of precision.")
+ "Five rounded EKPAN lottery rows pass the check with gross values from 18.41 to 20.51, and the sixth passing row is the full-precision 19.84 entry. The survey is the same in every row; a pass certifies agreement and says nothing of precision.")
 
 # ord 28
 q(3, "A colleague wants the Analyzer to print contradictingPosterior's unguarded 75.00 again, only capped at the 63.00 EVPI. What is wrong with that plan?",
@@ -228,7 +228,7 @@ q(3, "A colleague wants the Analyzer to print contradictingPosterior's unguarded
  ["Nothing, since the excess of 12 over EVPI is exactly the part the contradiction added, and removing it leaves the honest value of the survey.",
   "A cap sets the value too low, because EVPI binds only information derived by Bayes, and typed posteriors can legitimately be worth more than knowing the outcome in advance when the survey is a good one.",
   "The cap should be EMV without information, 15.00, since no survey can be worth more than the prospect it studies."],
- "The with side weights a prospect succeeding 0.420000 of the time against one stated at 0.300000, so the uplift is belief with no information in it. The Analyzer never clips and never repairs.")
+ "The with side weights a prospect succeeding 0.420000 of the time against one stated at 0.300000, so the uplift is belief with no information in it. The Analyzer withholds the value outright and prints no clipped figure.")
 
 # ord 29
 q(3, "The published three-outcome, four-action lottery records Farm out as the best action for Dry under perfect information. If Relinquish were listed before Farm out, what would change?",
@@ -256,7 +256,7 @@ q(2, "On a two-branch chance node paying 10 and 30, one probability is typed as 
 
 # ord 32
 q(1, "A reviewer checks, on the decision where A pays 20 meant at a cost of 5 and B pays 12, that A's branch value equals its payoff less the intended cost. One copy reads A at 20.0000, and another copy returns a refusal naming branch A. What does each reveal?",
- "At 20.0000 the cost was left out of the tree and read as 0; the refusal comes from a cost typed as text or below zero, which the engine will not read as money.",
+ "At 20.0000 the cost was left out of the tree and read as 0; the refusal comes from a cost typed as text that is not a number or below zero, which the engine will not read as money.",
  ["At 20.0000 the payoff was typed as the text \"20\", and the refusal comes from a probability typed as text on one of the branches.",
   "Both are refusals the reviewer missed, since the engine returns the payoff unchanged whenever it rejects a cost.",
   "At 20.0000 the cost was charged after the branch was chosen, and the refusal comes from a cost of 5 typed as the text \"5\"."],
@@ -332,12 +332,12 @@ q(0, "IRRI's two readings both put success at 20 percent, and the published usel
  ["Both are worth 0.0000 in truth, and IRRI is withheld only because the Analyzer cannot display a zero value of information without raising a consistency warning beside it.",
   "uselessSignal is derived from likelihoods and so exempt from every check, while IRRI is withheld because the Analyzer will not value two indicators typed with identical percents of outcome chances.",
   "IRRI is worth -15.00 because its readings point toward a poorer prospect, and the Analyzer withholds values that would discourage buying."],
- "Averaging Bayes posteriors over the readings returns the prior, which sets the floor of 0; uselessSignal's actions both read 43.0000. IRRI's readings return 20 percent, so the -15.00 its typed chances give with nothing checking them against the stated prior was never a value.")
+ "Averaging Bayes posteriors over the readings returns the prior, which sets the floor of 0; after either uselessSignal reading the actions read Drill 43, Farm out 18 and Do nothing 0, so the best value is 43.0000 after each. IRRI's readings return 20 percent, so the -15.00 its typed chances give with nothing checking them against the stated prior was never a value.")
 
 # ord 42
 q(0, "A survey's likelihoods given Success are typed as 0.333333 for each of three readings, and every other column is sound. What does the Bayes engine return?",
  "A value, since each likelihood column faces the chance-node test, |sum - 1| at most 1e-6 plus a 1e-12 allowance, and 0.333333 typed in six places passes.",
- ["A value, because likelihoods are checked across each reading's row and never down an outcome's column, and three readings of 0.333333 do not form a row.",
+ ["A value, because likelihoods are checked only across each reading's row, and three readings of 0.333333 do not form a row.",
   "A refusal naming the Success column at 0.999999, because each likelihood column faces the 1e-6 test with no binary allowance.",
   "A refusal naming the readings, because three readings with equal likelihoods carry no information and the engine will not value a signal that cannot change anything."],
  "Three copies of 0.333333 miss 1 by a binary hair above 1e-6, inside the 1e-12 allowance the same test carries for chance nodes and priors. The published likelihoodColumnShortByTwoMillionths case, summing to 0.999998, is refused.")

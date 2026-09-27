@@ -118,7 +118,7 @@
    "Only that the tree is well formed: known node types, at least one branch per node and probability sums within 1e-6 of 1."
   ],
   "answer": 3,
-  "explanation": "The engine checks shape and never truth. Any set of probabilities that sums to 1 within 1e-6 passes, and the EKPAN tree's 105.0000 is only as good as its inputs."
+  "explanation": "The engine checks shape only. Any set of probabilities that sums to 1 within 1e-6 passes, and the EKPAN tree's 105.0000 is only as good as its inputs."
  },
  {
   "prompt": "An owner picks the drill on the EKPAN tree because its success pays 420.0000, the largest number in the table. What is wrong with that reasoning, given that the tree also recommends Drill?",
@@ -151,7 +151,7 @@
    "-25.0000, 0.0000 and 0.0000, the worst outcome each branch can deliver, since the root guards against a loss."
   ],
   "answer": 0,
-  "explanation": "Nodes combine branch values and never raw child values: the drill's chance node is 160.0000 and its branch 105.0000. The root takes the largest, EMV 105.0000, best branch index 0."
+  "explanation": "Nodes combine branch values, each a child value less its branch cost: the drill's chance node is 160.0000 and its branch 105.0000. The root takes the largest, EMV 105.0000, best branch index 0."
  },
  {
   "prompt": "A decision node picks one of its branches. What does a chance node on the EKPAN tree pick?",

@@ -12,7 +12,7 @@ q(3, "A chance node named \"Three equal outcomes\" pays 30, 60 and 90, and each 
  ["An emv of 60.0000, because a sum of 0.999999 sits exactly 1e-6 from 1 and the tolerance on a chance node is inclusive at its edge, so the node passes.",
   "An emv of 60.0000, because the 1e-12 allowance absorbs the binary residue and the engine then rescales the thirds to sum to 1.",
   "A refusal, `Chance branch probabilities sum to 0.999999, expected 1`, because three copies of 0.333333 land a hair more than 1e-6 from 1 in binary and the sum check carries no allowance for that."],
- "The sum test is |sum - 1| at most 1e-6 plus a 1e-12 allowance for binary representation, inclusive, so the node passes and is worth 0.333333 x (30 + 60 + 90) = 59.9999; accepted probabilities are used as typed and never rescaled. Typed as 0.333 each the sum is 0.999000 and the node is refused.")
+ "The sum test is |sum - 1| at most 1e-6 plus a 1e-12 allowance for binary representation, inclusive, so the node passes and is worth 0.333333 x (30 + 60 + 90) = 59.9999; accepted probabilities are used exactly as typed. Typed as 0.333 each the sum is 0.999000 and the node is refused.")
 
 # ord 2
 q(0, "The published justInsideTolerance case states a success chance of 0.300000 and implies 0.305000. How does the implied-priors check read it, and why?",

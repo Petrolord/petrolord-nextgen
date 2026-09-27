@@ -20,7 +20,7 @@ q(1, "Which line is the EKPAN lottery's value with the CSEM survey, before its c
  ["0.350000 x 207.7989 + 0.650000 x 9.2361, weighting each signal's value by the prior of the outcome it points to",
   "0.460000 x 207.7989 + 0.540000 x -36.7361, keeping Drill after No bright spot because Drill is best at the prior",
   "0.460000 x 207.7989 + 0.540000 x 9.2361 less 8.0000, taking the survey cost out before the value is called gross"],
- "Weight by pSignal and never by the prior, and take the best action after each signal: Farm out at 9.2361 after No bright spot. EVII is 100.5750 less 75.7500 = 24.8250.")
+ "Weight each signal by its pSignal, and take the best action after each signal: Farm out at 9.2361 after No bright spot. EVII is 100.5750 less 75.7500 = 24.8250.")
 
 # ord 3
 q(2, "An analyst reads the CSEM survey's 0.850000 as the chance of success after a bright spot on the EKPAN lottery. What does that do?",
@@ -107,7 +107,7 @@ q(2, "Why can the tree engine never withhold a value of information the way the 
  "It takes likelihoods and derives the posteriors itself, so its inputs cannot contradict the stated outcome chances.",
  ["It quietly rescales any posteriors that fail the check so that they return the stated prior before it values the survey on its own.",
   "It has a wider consistency tolerance than the Analyzer, so inputs that fail 0.005 there pass here.",
-  "It does withhold, but its withheld values print as 0.0000 in the table and never as a missing card."],
+  "It does withhold, but its withheld values print as 0.0000 in the table, so no card looks missing."],
  "Contradictory inputs are only reachable when posteriors are typed by hand, which the Analyzer allows and the tree engine does not.")
 
 # ord 14

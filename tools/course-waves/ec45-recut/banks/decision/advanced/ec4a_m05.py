@@ -51,7 +51,7 @@ q(3, "On the Analyzer's default study the gross voi is 33.00. At a survey cost o
  "Since this rounds to zero, the information costs what it is worth, so acquiring it or not is indifferent on EMV grounds, because the verdict reads the card.",
  ["Since this is negative, the information costs more than the value it adds, because the verdict sets the cost against the EVPI card.",
   "Since this is positive, acquiring the information is financially advantageous, because the verdict tests the net value before it is rounded.",
-  "No verdict at all, since the Analyzer drops the sentence whenever the net card rounds to zero and leaves the whole choice between buying and not buying to the reader."],
+  "No verdict at all, since the Analyzer drops the sentence whenever the net card rounds to zero and leaves the whole choice of whether to buy the survey to the reader."],
  "The net VOI is rounded once to the two-decimal card, half away from zero with a 1e-12 allowance, and the verdict reads that same value. At 32.990 the card reads 0.01 and the sentence says positive; at 33.010 it reads -0.01 and says negative.")
 
 # ord 7

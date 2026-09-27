@@ -12,7 +12,7 @@ q(0, "An analyst values perfect information on the EKPAN lottery at its 0.350000
  ["365.0000, since perfect information turns the prospect into a known success and every well it recommends is drilled into a success.",
   "127.7500, since the value of deciding with the outcome known is itself the worth of the information that makes the deciding possible.",
   "61.7143, since the EVPI of a two outcome lottery is always read at the switch where Drill and Farm out are worth the same."],
- "Perfect information changes the action and never how often each outcome arrives: the EKPAN lottery is still dry 0.650000 of the time. Read as regret, 0.650000 x 80.0000 = 52.0000.")
+ "Perfect information changes the action while each outcome arrives as often as before: the EKPAN lottery is still dry 0.650000 of the time. Read as regret, 0.650000 x 80.0000 = 52.0000.")
 
 # ord 2
 q(1, "Sampling the EKPAN lottery at round probabilities gives an EVPI of 54.0000 at 0.200000 and 60.0000 at 0.250000, so a reader puts the peak at 0.250000. Where is the peak, and what locates it?",
@@ -87,7 +87,7 @@ q(0, "A contractor quotes 40.0000 for the CSEM survey on the EKPAN lottery, poin
  "EVPI caps a survey that never misreads, and this one lights up over 0.250000 of dry holes. At 40.0000 the root would choose No further information.")
 
 # ord 11
-q(0, "Two engine results on the EKPAN lottery sit at points of indifference: Drill marked at the success probability 0.228571, and Acquire CSEM survey marked at a price of 24.8250. What decides each mark?",
+q(0, "Two engine results on the EKPAN lottery sit at points of indifference: Drill marked at 80 / 350 (0.228571), and Acquire CSEM survey marked at a price of 24.8250. What decides each mark?",
  "The tie rule decides both: in each case the engine reports the two values tied and marks whichever was listed first.",
  ["Binary residue decides both, since 24.8250 printed to four decimals hides a last-digit gap between the two root branches as well.",
   "Neither is a tie: Farm out is worth more at 0.228571 by the printed precision, and at 24.8250 acquiring keeps a positive net value.",

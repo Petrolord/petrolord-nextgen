@@ -85,7 +85,7 @@
    "Only the -17.00, because the pricey case charges 50.0000 for a survey worth 33.00, and a value of information below its own cost means the typed chances disagree."
   ],
   "answer": 2,
-  "explanation": "A negative net value says the price is too high; a negative gross value says the entries contradict the stated prior. The engine reports EVII residue below 1e-9 as 0.0000."
+  "explanation": "A negative net value says the price is too high; a negative gross value says the entries contradict the stated prior. The engine returns an EVII of -1.42e-14, float residue that prints as 0.0000."
  },
  {
   "prompt": "The threeByThree posteriors come out of the engine's Bayes step: after Bright, Flat and Dim, read with chances 0.320000, 0.380000 and 0.300000, Large stands at 0.437500, 0.105263 and 0.066667. Could posteriors built this way fail the implied-prior check that makes the Analyzer withhold a value?",
@@ -294,7 +294,7 @@
    "Neither, because a delta below 1e-12 falls inside the representation allowance and the Analyzer withholds what it cannot tell from zero."
   ],
   "answer": 1,
-  "explanation": "Six rounded EKPAN lottery rows pass the check with gross values from 18.41 to 20.51. The survey is the same in every row; a pass certifies agreement and says nothing of precision."
+  "explanation": "Five rounded EKPAN lottery rows pass the check with gross values from 18.41 to 20.51, and the sixth passing row is the full-precision 19.84 entry. The survey is the same in every row; a pass certifies agreement and says nothing of precision."
  },
  {
   "prompt": "A colleague wants the Analyzer to print contradictingPosterior's unguarded 75.00 again, only capped at the 63.00 EVPI. What is wrong with that plan?",
@@ -305,7 +305,7 @@
    "A capped 63.00 still rests on posteriors implying 0.420000 against a stated 0.300000, and a cap never touches contradictions that print under the ceiling, such as 40.62 for the EKPAN lottery."
   ],
   "answer": 3,
-  "explanation": "The with side weights a prospect succeeding 0.420000 of the time against one stated at 0.300000, so the uplift is belief with no information in it. The Analyzer never clips and never repairs."
+  "explanation": "The with side weights a prospect succeeding 0.420000 of the time against one stated at 0.300000, so the uplift is belief with no information in it. The Analyzer withholds the value outright and prints no clipped figure."
  },
  {
   "prompt": "The published three-outcome, four-action lottery records Farm out as the best action for Dry under perfect information. If Relinquish were listed before Farm out, what would change?",
@@ -344,7 +344,7 @@
   "prompt": "A reviewer checks, on the decision where A pays 20 meant at a cost of 5 and B pays 12, that A's branch value equals its payoff less the intended cost. One copy reads A at 20.0000, and another copy returns a refusal naming branch A. What does each reveal?",
   "options": [
    "At 20.0000 the payoff was typed as the text \"20\", and the refusal comes from a probability typed as text on one of the branches.",
-   "At 20.0000 the cost was left out of the tree and read as 0; the refusal comes from a cost typed as text or below zero, which the engine will not read as money.",
+   "At 20.0000 the cost was left out of the tree and read as 0; the refusal comes from a cost typed as text that is not a number or below zero, which the engine will not read as money.",
    "Both are refusals the reviewer missed, since the engine returns the payoff unchanged whenever it rejects a cost.",
    "At 20.0000 the cost was charged after the branch was chosen, and the refusal comes from a cost of 5 typed as the text \"5\"."
   ],
@@ -448,13 +448,13 @@
    "IRRI is worth -15.00 because its readings point toward a poorer prospect, and the Analyzer withholds values that would discourage buying."
   ],
   "answer": 0,
-  "explanation": "Averaging Bayes posteriors over the readings returns the prior, which sets the floor of 0; uselessSignal's actions both read 43.0000. IRRI's readings return 20 percent, so the -15.00 its typed chances give with nothing checking them against the stated prior was never a value."
+  "explanation": "Averaging Bayes posteriors over the readings returns the prior, which sets the floor of 0; after either uselessSignal reading the actions read Drill 43, Farm out 18 and Do nothing 0, so the best value is 43.0000 after each. IRRI's readings return 20 percent, so the -15.00 its typed chances give with nothing checking them against the stated prior was never a value."
  },
  {
   "prompt": "A survey's likelihoods given Success are typed as 0.333333 for each of three readings, and every other column is sound. What does the Bayes engine return?",
   "options": [
    "A value, since each likelihood column faces the chance-node test, |sum - 1| at most 1e-6 plus a 1e-12 allowance, and 0.333333 typed in six places passes.",
-   "A value, because likelihoods are checked across each reading's row and never down an outcome's column, and three readings of 0.333333 do not form a row.",
+   "A value, because likelihoods are checked only across each reading's row, and three readings of 0.333333 do not form a row.",
    "A refusal naming the Success column at 0.999999, because each likelihood column faces the 1e-6 test with no binary allowance.",
    "A refusal naming the readings, because three readings with equal likelihoods carry no information and the engine will not value a signal that cannot change anything."
   ],

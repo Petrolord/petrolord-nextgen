@@ -59,7 +59,7 @@
   "options": [
    "Since this is negative, the information costs more than the value it adds, because the verdict sets the cost against the EVPI card.",
    "Since this is positive, acquiring the information is financially advantageous, because the verdict tests the net value before it is rounded.",
-   "No verdict at all, since the Analyzer drops the sentence whenever the net card rounds to zero and leaves the whole choice between buying and not buying to the reader.",
+   "No verdict at all, since the Analyzer drops the sentence whenever the net card rounds to zero and leaves the whole choice of whether to buy the survey to the reader.",
    "Since this rounds to zero, the information costs what it is worth, so acquiring it or not is indifferent on EMV grounds, because the verdict reads the card."
   ],
   "answer": 3,

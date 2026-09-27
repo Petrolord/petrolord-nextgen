@@ -91,7 +91,7 @@ q(3, "A reviewer rolls back deepAlternation with its two costs, 4.0000 on go and
  "The push cost was charged on the down branch too; paid only on up, weighted 0.500000, it costs the root half as much and the root is 6.0000.",
  ["Nothing went wrong, since costs are additive and the order in which a hand rollback subtracts them cannot change the value at the root.",
   "The push cost should have been left out, because once push carries its cost of 6.0000 the decision beneath up switches to hold instead.",
-  "The costs should have come off after weighting at every level and never at the root, which is what the engine does to reach 6.0000."],
+  "The costs should have come off after weighting at every level below the root, which is what the engine does to reach 6.0000."],
  "Push is paid only under up: 0.500000 x 23.0000 + 0.500000 x -3.0000 = 10.0000, less 4.0000 on go is 6.0000; chanceRootWithBranchCosts shows the same error at -8.6000 against -3.0000.")
 
 # ord 12

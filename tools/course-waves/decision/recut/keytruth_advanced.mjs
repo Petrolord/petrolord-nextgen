@@ -27,7 +27,7 @@ export default [
   { q: 'advanced final 18', where: 'key', printed: 'the EMV leaves 60.0000', value: (L) => L.refusal(() => L.D.rollback(L.thirds(0.333))) !== null && Math.abs(L.D.rollback(L.thirds([0.333, 0.333, 0.334])).emv - 60) > 1e-6 },
   // final 32: left out reads 0; text and negative are refused
   { q: 'advanced final 32', where: 'key', printed: 'At 20.0000 the cost was left out of the tree and read as 0', value: (L) => L.D.rollback(L.dec(undefined)).branches[0].branchValue === 20 },
-  { q: 'advanced final 32', where: 'key', printed: 'the refusal comes from a cost typed as text or below zero', value: (L) => /Branch "A"/.test(L.refusal(() => L.D.rollback(L.dec('abc'))) || '') && /Branch "A" has a negative cost/.test(L.refusal(() => L.D.rollback(L.dec(-5))) || '') },
+  { q: 'advanced final 32', where: 'key', printed: 'the refusal comes from a cost typed as text that is not a number or below zero', value: (L) => /Branch "A"/.test(L.refusal(() => L.D.rollback(L.dec('abc'))) || '') && /Branch "A" has a negative cost/.test(L.refusal(() => L.D.rollback(L.dec(-5))) || '') },
   { q: 'advanced final 32', where: 'explanation', printed: '15.0000', value: (L) => L.D.rollback(L.dec('5')).branches[0].branchValue },
   // final 33: a tie at both
   { q: 'advanced final 33', where: 'key', printed: 'A tie at both, each marking Drill as the first listed', value: (L) => { const r = L.lottery(L.SWITCH); const a = L.drillFarmOutAt(0.2); return r.indifferent === true && L.EKPAN_ACTIONS[r.actionIndex].label === 'Drill' && a.indifferent === true && a.branches[a.bestBranchIndex].label === 'Drill'; } },
@@ -48,7 +48,7 @@ export default [
   } },
   // final 41, 28, 19, 20: the Analyzer withholds or refuses
   { q: 'advanced final 41', where: 'explanation', printed: '43.0000', value: (L) => L.D.evii(L.clone(L.GC.evii.uselessSignal.outcomes), L.clone(L.GC.evii.uselessSignal.actions), L.clone(L.GC.evii.uselessSignal.signals), 0).perSignal[0].emv },
-  { q: 'advanced final 28', where: 'explanation', printed: 'The Analyzer never clips and never repairs', value: (L) => withheld(L, 'contradictingPosterior') },
+  { q: 'advanced final 28', where: 'explanation', printed: 'The Analyzer withholds the value outright and prints no clipped figure', value: (L) => withheld(L, 'contradictingPosterior') },
   { q: 'advanced final 19', where: 'explanation', printed: 'this case never reaches the implied-prior test', value: (L) => /sum to 110 percent/.test(voiRefusal(L, 'posteriorsOffsetButPriorsAgree') || '') },
   { q: 'advanced final 20', where: 'key', printed: 'which is why the Analyzer tests the inputs', value: (L) => withheld(L, 'certainPosteriorsWithheld') && /Indicator chances sum to 110/.test(voiRefusal(L, 'indicatorChancesAboveHundred') || '') },
   // final 42: a likelihood column at six places passes

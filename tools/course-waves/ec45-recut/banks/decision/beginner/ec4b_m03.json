@@ -16,7 +16,7 @@
    "It finds the wrong branch, since Sell at 140.0000 beats Develop once the develop cost of 90.0000 has been paid.",
    "It finds the right branch at a value 90.0000 too high, and that inflated value would then be weighted into the drill node.",
    "Nothing, since a decision node compares payoffs, and only a chance node needs branch values net of their costs.",
-   "Nothing, since a cost on a branch below a chance node is charged at the drill branch above it, alongside the 55.0000, and not where it sits."
+   "Nothing, since a cost on a branch below a chance node moves up to the drill branch above it and is charged there with the 55.0000."
   ],
   "answer": 1,
   "explanation": "A decision node only ever compares branch values: Develop is 260.0000 less 90.0000, which is 170.0000, against Sell's 140.0000. The drill chance node weights 170.0000."

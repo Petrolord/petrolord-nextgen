@@ -146,7 +146,7 @@
      "Only that the tree is well formed: known node types, at least one branch per node and probability sums within 1e-6 of 1."
     ],
     "answer_index": 3,
-    "explanation": "The engine checks shape and never truth. Any set of probabilities that sums to 1 within 1e-6 passes, and the EKPAN tree's 105.0000 is only as good as its inputs."
+    "explanation": "The engine checks shape only. Any set of probabilities that sums to 1 within 1e-6 passes, and the EKPAN tree's 105.0000 is only as good as its inputs."
    }
   },
   {
@@ -181,7 +181,7 @@
      "-25.0000, 0.0000 and 0.0000, the worst outcome each branch can deliver, since the root guards against a loss."
     ],
     "answer_index": 0,
-    "explanation": "Nodes combine branch values and never raw child values: the drill's chance node is 160.0000 and its branch 105.0000. The root takes the largest, EMV 105.0000, best branch index 0."
+    "explanation": "Nodes combine branch values, each a child value less its branch cost: the drill's chance node is 160.0000 and its branch 105.0000. The root takes the largest, EMV 105.0000, best branch index 0."
    }
   },
   {
@@ -391,7 +391,7 @@
      "It finds the wrong branch, since Sell at 140.0000 beats Develop once the develop cost of 90.0000 has been paid.",
      "It finds the right branch at a value 90.0000 too high, and that inflated value would then be weighted into the drill node.",
      "Nothing, since a decision node compares payoffs, and only a chance node needs branch values net of their costs.",
-     "Nothing, since a cost on a branch below a chance node is charged at the drill branch above it, alongside the 55.0000, and not where it sits."
+     "Nothing, since a cost on a branch below a chance node moves up to the drill branch above it and is charged there with the 55.0000."
     ],
     "answer_index": 1,
     "explanation": "A decision node only ever compares branch values: Develop is 260.0000 less 90.0000, which is 170.0000, against Sell's 140.0000. The drill chance node weights 170.0000."
@@ -611,7 +611,7 @@
      "The worst the company can reach along the optimal path, once the costs of go and push have both been paid."
     ],
     "answer_index": 0,
-    "explanation": "Win after push pays 50.0000 before the costs of 6.0000 and 4.0000, and down pays -3.0000 before the 4.0000; the root weights these, so 6.0000 is a mean and the path is a plan and never a forecast."
+    "explanation": "Win after push pays 50.0000 before the costs of 6.0000 and 4.0000, and down pays -3.0000 before the 4.0000; the root weights these, so 6.0000 is a mean, and the path is a plan to follow with no forecast in it."
    }
   },
   {
@@ -1178,7 +1178,7 @@
     "options": [
      "Nothing went wrong, since costs are additive and the order in which a hand rollback subtracts them cannot change the value at the root.",
      "The push cost should have been left out, because once push carries its cost of 6.0000 the decision beneath up switches to hold instead.",
-     "The costs should have come off after weighting at every level and never at the root, which is what the engine does to reach 6.0000.",
+     "The costs should have come off after weighting at every level below the root, which is what the engine does to reach 6.0000.",
      "The push cost was charged on the down branch too; paid only on up, weighted 0.500000, it costs the root half as much and the root is 6.0000."
     ],
     "answer_index": 3,
@@ -1644,7 +1644,7 @@
     "prompt": "A reader divides the EKPAN lottery joint chance 0.297500 by the prior 0.350000 and gets 0.850000. What went wrong?",
     "options": [
      "The posterior divides the joint by the chance of the reading, 0.460000, giving 0.646739; dividing by the prior returns the likelihood the calculation started from.",
-     "Nothing went wrong: the hit rate and the lottery's posterior coincide whenever the joint chance is taken with the success outcome and not the dry one.",
+     "Nothing went wrong: the hit rate and the lottery's posterior coincide whenever the joint chance is taken with the success outcome, leaving the dry one aside.",
      "The joint should first be multiplied by the lottery's pSignal of 0.460000 and only then divided by the prior 0.350000.",
      "The divisor should be the lottery's dry hole prior of 0.650000, since a posterior compares the reading with the alternative outcome."
     ],
@@ -1678,7 +1678,7 @@
    "new": {
     "prompt": "Reading the EKPAN lottery likelihood 0.850000 as the chance of success after a bright spot, what is Drill worth after a bright spot, and which way does the error push?",
     "options": [
-     "207.7989 either way, because Drill is still the lottery's best action after a bright spot and its value is read from the tree and not from the probability.",
+     "207.7989 either way, because Drill is still the lottery's best action after a bright spot and its value is read from the tree alone, whatever the probability.",
      "262.7989, the lottery's drill chance node, because 0.850000 enters the weighting before the drill cost of 55.0000 and never meets it.",
      "An understatement on the lottery, because 0.850000 leaves out the prior of 0.350000, which the posterior adds on top of the hit rate.",
      "298.2500 against the posterior's 207.7989, an overstatement on the reading that argues for drilling."
@@ -1826,7 +1826,7 @@
      "16.8250 on the lottery, the net value, since the tie comes when the price has used up everything the survey adds."
     ],
     "answer_index": 1,
-    "explanation": "On the EKPAN lottery the branches are equal when the price is 100.5750 less 75.7500 = 24.8250. EVPI is the neutral price of a survey that never misreads, and the neutral price compares two branches and never a branch with zero."
+    "explanation": "On the EKPAN lottery the branches are equal when the price is 100.5750 less 75.7500 = 24.8250. EVPI is the neutral price of a survey that never misreads, and the neutral price is where the two branches meet, one branch against the other."
    }
   },
   {
@@ -2147,7 +2147,7 @@
      "0.460000 x 207.7989 + 0.540000 x 9.2361 less 8.0000, taking the survey cost out before the value is called gross"
     ],
     "answer_index": 1,
-    "explanation": "Weight by pSignal and never by the prior, and take the best action after each signal: Farm out at 9.2361 after No bright spot. EVII is 100.5750 less 75.7500 = 24.8250."
+    "explanation": "Weight each signal by its pSignal, and take the best action after each signal: Farm out at 9.2361 after No bright spot. EVII is 100.5750 less 75.7500 = 24.8250."
    }
   },
   {
@@ -2322,7 +2322,7 @@
      "It quietly rescales any posteriors that fail the check so that they return the stated prior before it values the survey on its own.",
      "It has a wider consistency tolerance than the Analyzer, so inputs that fail 0.005 there pass here.",
      "It takes likelihoods and derives the posteriors itself, so its inputs cannot contradict the stated outcome chances.",
-     "It does withhold, but its withheld values print as 0.0000 in the table and never as a missing card."
+     "It does withhold, but its withheld values print as 0.0000 in the table, so no card looks missing."
     ],
     "answer_index": 2,
     "explanation": "Contradictory inputs are only reachable when posteriors are typed by hand, which the Analyzer allows and the tree engine does not."
@@ -2360,7 +2360,7 @@
      "61.7143, since the EVPI of a two outcome lottery is always read at the switch where Drill and Farm out are worth the same."
     ],
     "answer_index": 0,
-    "explanation": "Perfect information changes the action and never how often each outcome arrives: the EKPAN lottery is still dry 0.650000 of the time. Read as regret, 0.650000 x 80.0000 = 52.0000."
+    "explanation": "Perfect information changes the action while each outcome arrives as often as before: the EKPAN lottery is still dry 0.650000 of the time. Read as regret, 0.650000 x 80.0000 = 52.0000."
    }
   },
   {
@@ -2427,7 +2427,7 @@
     "explanation": "80 / 350 has no exact binary image, so the choice at the switch is rounding. 100.5750 less 24.8250 is exactly 75.7500, and at an exact tie the first branch listed, the acquisition, is kept."
    },
    "new": {
-    "prompt": "Two engine results on the EKPAN lottery sit at points of indifference: Drill marked at the success probability 0.228571, and Acquire CSEM survey marked at a price of 24.8250. What decides each mark?",
+    "prompt": "Two engine results on the EKPAN lottery sit at points of indifference: Drill marked at 80 / 350 (0.228571), and Acquire CSEM survey marked at a price of 24.8250. What decides each mark?",
     "options": [
      "The tie rule decides both: in each case the engine reports the two values tied and marks whichever was listed first.",
      "Binary residue decides both, since 24.8250 printed to four decimals hides a last-digit gap between the two root branches as well.",
@@ -2861,7 +2861,7 @@
      "The survey cost of 10.0000 is added to the with side where it should be subtracted, which lifts the gross value past its ceiling.",
      "The with side averages to a 0.420000 success chance against a stated 0.300000, so the subtraction includes the uplift of believing in a better prospect.",
      "The EVPI card comes from the two action form and the voi from a lottery with a farm-out, so the two numbers describe different lotteries.",
-     "EVPI caps expected value with information and not the value of information, so 75.00 above 63.00 is ordinary arithmetic on consistent inputs."
+     "EVPI caps only the expected value with information, leaving the value of information free, so 75.00 above 63.00 is ordinary arithmetic on consistent inputs."
     ],
     "answer_index": 1,
     "explanation": "Information derived by Bayes satisfies 0 <= evii <= evpi; 75.00 sets a 0.420000 prospect after the survey against a 0.300000 prospect before it, and the Analyzer withholds the value."
@@ -2901,7 +2901,7 @@
      "Contradictions also land below the ceiling: the EKPAN lottery typed with indicators at 56 and 44 percent gives 40.62 under an EVPI of 52.00."
     ],
     "answer_index": 3,
-    "explanation": "The honest value on those EKPAN lottery entries is 19.84, and indicatorChancesAboveHundred gives 33.00, the very card the consistent defaults print; a test on the output catches only the loudest cases, so the Analyzer tests the inputs."
+    "explanation": "The honest value on those EKPAN lottery entries is 19.84, and indicatorChancesAboveHundred gives 33.00, matching the defaults' own gross voi; a test on the output catches only the loudest cases, so the Analyzer tests the inputs."
    }
   },
   {
@@ -3007,10 +3007,10 @@
      "Nothing, since rescaling indicator chances by their sum leaves the posteriors alone, and the Analyzer prints 33.00.",
      "It sits inside the half percent allowance, so the check passes it, and the allowance would need narrowing to catch it.",
      "It contradicts the stated chances, so the value is withheld and EMV without information 15.00 and EVPI 63.00 remain on the screen beside the consistency warning.",
-     "It matches the card the consistent defaults print, and the entry is refused with \"Indicator chances sum to 110 percent, expected 100\"."
+     "It matches the defaults' own gross voi of 33.00, and the entry is refused with \"Indicator chances sum to 110 percent, expected 100\"."
     ],
     "answer_index": 3,
-    "explanation": "A 110 percent indicator set is not a distribution, so it is refused outright and never reaches the consistency check; an output test would have passed 33.00, which sits under 63.00."
+    "explanation": "A 110 percent indicator set is not a distribution, so it is refused outright before the consistency check; an output test would have passed 33.00, which sits under 63.00."
    }
   },
   {
@@ -3261,7 +3261,7 @@
      "An emv just under 60.0000, because the engine accepts the sum and weights the three payoffs by the thirds exactly as they were typed."
     ],
     "answer_index": 3,
-    "explanation": "The sum test is |sum - 1| at most 1e-6 plus a 1e-12 allowance for binary representation, inclusive, so the node passes and is worth 0.333333 x (30 + 60 + 90) = 59.9999; accepted probabilities are used as typed and never rescaled. Typed as 0.333 each the sum is 0.999000 and the node is refused."
+    "explanation": "The sum test is |sum - 1| at most 1e-6 plus a 1e-12 allowance for binary representation, inclusive, so the node passes and is worth 0.333333 x (30 + 60 + 90) = 59.9999; accepted probabilities are used exactly as typed. Typed as 0.333 each the sum is 0.999000 and the node is refused."
    }
   },
   {
@@ -3873,7 +3873,7 @@
     "options": [
      "Since this is negative, the information costs more than the value it adds, because the verdict sets the cost against the EVPI card.",
      "Since this is positive, acquiring the information is financially advantageous, because the verdict tests the net value before it is rounded.",
-     "No verdict at all, since the Analyzer drops the sentence whenever the net card rounds to zero and leaves the whole choice between buying and not buying to the reader.",
+     "No verdict at all, since the Analyzer drops the sentence whenever the net card rounds to zero and leaves the whole choice of whether to buy the survey to the reader.",
      "Since this rounds to zero, the information costs what it is worth, so acquiring it or not is indifferent on EMV grounds, because the verdict reads the card."
     ],
     "answer_index": 3,
@@ -4360,7 +4360,8 @@
    "module_key": null,
    "ord": 8,
    "changed_fields": [
-    "prompt"
+    "prompt",
+    "explanation"
    ],
    "key_moved": false,
    "w3_differs": false,
@@ -4385,7 +4386,7 @@
      "Only the -17.00, because the pricey case charges 50.0000 for a survey worth 33.00, and a value of information below its own cost means the typed chances disagree."
     ],
     "answer_index": 2,
-    "explanation": "A negative net value says the price is too high; a negative gross value says the entries contradict the stated prior. The engine reports EVII residue below 1e-9 as 0.0000."
+    "explanation": "A negative net value says the price is too high; a negative gross value says the entries contradict the stated prior. The engine returns an EVII of -1.42e-14, float residue that prints as 0.0000."
    }
   },
   {
@@ -4672,7 +4673,7 @@
      "Neither, because a delta below 1e-12 falls inside the representation allowance and the Analyzer withholds what it cannot tell from zero."
     ],
     "answer_index": 1,
-    "explanation": "Six rounded EKPAN lottery rows pass the check with gross values from 18.41 to 20.51. The survey is the same in every row; a pass certifies agreement and says nothing of precision."
+    "explanation": "Five rounded EKPAN lottery rows pass the check with gross values from 18.41 to 20.51, and the sixth passing row is the full-precision 19.84 entry. The survey is the same in every row; a pass certifies agreement and says nothing of precision."
    }
   },
   {
@@ -4708,7 +4709,7 @@
      "A capped 63.00 still rests on posteriors implying 0.420000 against a stated 0.300000, and a cap never touches contradictions that print under the ceiling, such as 40.62 for the EKPAN lottery."
     ],
     "answer_index": 3,
-    "explanation": "The with side weights a prospect succeeding 0.420000 of the time against one stated at 0.300000, so the uplift is belief with no information in it. The Analyzer never clips and never repairs."
+    "explanation": "The with side weights a prospect succeeding 0.420000 of the time against one stated at 0.300000, so the uplift is belief with no information in it. The Analyzer withholds the value outright and prints no clipped figure."
    }
   },
   {
@@ -4810,7 +4811,7 @@
     "prompt": "A reviewer checks, on the decision where A pays 20 meant at a cost of 5 and B pays 12, that A's branch value equals its payoff less the intended cost. One copy reads A at 20.0000, and another copy returns a refusal naming branch A. What does each reveal?",
     "options": [
      "At 20.0000 the payoff was typed as the text \"20\", and the refusal comes from a probability typed as text on one of the branches.",
-     "At 20.0000 the cost was left out of the tree and read as 0; the refusal comes from a cost typed as text or below zero, which the engine will not read as money.",
+     "At 20.0000 the cost was left out of the tree and read as 0; the refusal comes from a cost typed as text that is not a number or below zero, which the engine will not read as money.",
      "Both are refusals the reviewer missed, since the engine returns the payoff unchanged whenever it rejects a cost.",
      "At 20.0000 the cost was charged after the branch was chosen, and the refusal comes from a cost of 5 typed as the text \"5\"."
     ],
@@ -5032,7 +5033,7 @@
      "IRRI is worth -15.00 because its readings point toward a poorer prospect, and the Analyzer withholds values that would discourage buying."
     ],
     "answer_index": 0,
-    "explanation": "Averaging Bayes posteriors over the readings returns the prior, which sets the floor of 0; uselessSignal's actions both read 43.0000. IRRI's readings return 20 percent, so the -15.00 its typed chances give with nothing checking them against the stated prior was never a value."
+    "explanation": "Averaging Bayes posteriors over the readings returns the prior, which sets the floor of 0; after either uselessSignal reading the actions read Drill 43, Farm out 18 and Do nothing 0, so the best value is 43.0000 after each. IRRI's readings return 20 percent, so the -15.00 its typed chances give with nothing checking them against the stated prior was never a value."
    }
   },
   {
@@ -5064,7 +5065,7 @@
     "prompt": "A survey's likelihoods given Success are typed as 0.333333 for each of three readings, and every other column is sound. What does the Bayes engine return?",
     "options": [
      "A value, since each likelihood column faces the chance-node test, |sum - 1| at most 1e-6 plus a 1e-12 allowance, and 0.333333 typed in six places passes.",
-     "A value, because likelihoods are checked across each reading's row and never down an outcome's column, and three readings of 0.333333 do not form a row.",
+     "A value, because likelihoods are checked only across each reading's row, and three readings of 0.333333 do not form a row.",
      "A refusal naming the Success column at 0.999999, because each likelihood column faces the 1e-6 test with no binary allowance.",
      "A refusal naming the readings, because three readings with equal likelihoods carry no information and the engine will not value a signal that cannot change anything."
     ],

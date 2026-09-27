@@ -74,7 +74,7 @@
    "16.8250 on the lottery, the net value, since the tie comes when the price has used up everything the survey adds."
   ],
   "answer": 1,
-  "explanation": "On the EKPAN lottery the branches are equal when the price is 100.5750 less 75.7500 = 24.8250. EVPI is the neutral price of a survey that never misreads, and the neutral price compares two branches and never a branch with zero."
+  "explanation": "On the EKPAN lottery the branches are equal when the price is 100.5750 less 75.7500 = 24.8250. EVPI is the neutral price of a survey that never misreads, and the neutral price is where the two branches meet, one branch against the other."
  },
  {
   "prompt": "At a survey cost of exactly 24.8250 the EKPAN lottery information tree's root still marks the acquisition. What does that mark carry?",

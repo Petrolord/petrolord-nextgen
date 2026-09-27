@@ -8,7 +8,7 @@
    "61.7143, since the EVPI of a two outcome lottery is always read at the switch where Drill and Farm out are worth the same."
   ],
   "answer": 0,
-  "explanation": "Perfect information changes the action and never how often each outcome arrives: the EKPAN lottery is still dry 0.650000 of the time. Read as regret, 0.650000 x 80.0000 = 52.0000."
+  "explanation": "Perfect information changes the action while each outcome arrives as often as before: the EKPAN lottery is still dry 0.650000 of the time. Read as regret, 0.650000 x 80.0000 = 52.0000."
  },
  {
   "prompt": "Sampling the EKPAN lottery at round probabilities gives an EVPI of 54.0000 at 0.200000 and 60.0000 at 0.250000, so a reader puts the peak at 0.250000. Where is the peak, and what locates it?",
@@ -110,7 +110,7 @@
   "explanation": "EVPI caps a survey that never misreads, and this one lights up over 0.250000 of dry holes. At 40.0000 the root would choose No further information."
  },
  {
-  "prompt": "Two engine results on the EKPAN lottery sit at points of indifference: Drill marked at the success probability 0.228571, and Acquire CSEM survey marked at a price of 24.8250. What decides each mark?",
+  "prompt": "Two engine results on the EKPAN lottery sit at points of indifference: Drill marked at 80 / 350 (0.228571), and Acquire CSEM survey marked at a price of 24.8250. What decides each mark?",
   "options": [
    "The tie rule decides both: in each case the engine reports the two values tied and marks whichever was listed first.",
    "Binary residue decides both, since 24.8250 printed to four decimals hides a last-digit gap between the two root branches as well.",

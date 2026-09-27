@@ -104,7 +104,7 @@
    "The survey cost of 10.0000 is added to the with side where it should be subtracted, which lifts the gross value past its ceiling.",
    "The with side averages to a 0.420000 success chance against a stated 0.300000, so the subtraction includes the uplift of believing in a better prospect.",
    "The EVPI card comes from the two action form and the voi from a lottery with a farm-out, so the two numbers describe different lotteries.",
-   "EVPI caps expected value with information and not the value of information, so 75.00 above 63.00 is ordinary arithmetic on consistent inputs."
+   "EVPI caps only the expected value with information, leaving the value of information free, so 75.00 above 63.00 is ordinary arithmetic on consistent inputs."
   ],
   "answer": 1,
   "explanation": "Information derived by Bayes satisfies 0 <= evii <= evpi; 75.00 sets a 0.420000 prospect after the survey against a 0.300000 prospect before it, and the Analyzer withholds the value."
@@ -118,7 +118,7 @@
    "Contradictions also land below the ceiling: the EKPAN lottery typed with indicators at 56 and 44 percent gives 40.62 under an EVPI of 52.00."
   ],
   "answer": 3,
-  "explanation": "The honest value on those EKPAN lottery entries is 19.84, and indicatorChancesAboveHundred gives 33.00, the very card the consistent defaults print; a test on the output catches only the loudest cases, so the Analyzer tests the inputs."
+  "explanation": "The honest value on those EKPAN lottery entries is 19.84, and indicatorChancesAboveHundred gives 33.00, matching the defaults' own gross voi; a test on the output catches only the loudest cases, so the Analyzer tests the inputs."
  },
  {
   "prompt": "The published pricey case prints a netVoi card of -17.00, and IRRI's typed chances give a gross voi of -15.00 with nothing checking them against the stated prior. What separates the two?",
@@ -159,9 +159,9 @@
    "Nothing, since rescaling indicator chances by their sum leaves the posteriors alone, and the Analyzer prints 33.00.",
    "It sits inside the half percent allowance, so the check passes it, and the allowance would need narrowing to catch it.",
    "It contradicts the stated chances, so the value is withheld and EMV without information 15.00 and EVPI 63.00 remain on the screen beside the consistency warning.",
-   "It matches the card the consistent defaults print, and the entry is refused with \"Indicator chances sum to 110 percent, expected 100\"."
+   "It matches the defaults' own gross voi of 33.00, and the entry is refused with \"Indicator chances sum to 110 percent, expected 100\"."
   ],
   "answer": 3,
-  "explanation": "A 110 percent indicator set is not a distribution, so it is refused outright and never reaches the consistency check; an output test would have passed 33.00, which sits under 63.00."
+  "explanation": "A 110 percent indicator set is not a distribution, so it is refused outright before the consistency check; an output test would have passed 33.00, which sits under 63.00."
  }
 ]

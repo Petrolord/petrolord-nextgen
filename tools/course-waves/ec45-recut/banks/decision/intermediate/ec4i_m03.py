@@ -60,7 +60,7 @@ q(1, "At what survey price do the two root branches of the EKPAN lottery informa
  ["52.0000 on the lottery, the EVPI, since a price above the value of perfect information is the first price at which any survey loses money.",
   "100.5750 on the lottery, the price at which the acquisition branch reaches zero and stops adding anything to the root.",
   "16.8250 on the lottery, the net value, since the tie comes when the price has used up everything the survey adds."],
- "On the EKPAN lottery the branches are equal when the price is 100.5750 less 75.7500 = 24.8250. EVPI is the neutral price of a survey that never misreads, and the neutral price compares two branches and never a branch with zero.")
+ "On the EKPAN lottery the branches are equal when the price is 100.5750 less 75.7500 = 24.8250. EVPI is the neutral price of a survey that never misreads, and the neutral price is where the two branches meet, one branch against the other.")
 
 # ord 8
 q(0, "At a survey cost of exactly 24.8250 the EKPAN lottery information tree's root still marks the acquisition. What does that mark carry?",

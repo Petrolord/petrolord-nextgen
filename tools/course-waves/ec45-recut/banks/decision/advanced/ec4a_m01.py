@@ -83,7 +83,7 @@ q(1, "Weighted as typed with nothing checking them, the published contradictingP
  "The with side averages to a 0.420000 success chance against a stated 0.300000, so the subtraction includes the uplift of believing in a better prospect.",
  ["The survey cost of 10.0000 is added to the with side where it should be subtracted, which lifts the gross value past its ceiling.",
   "The EVPI card comes from the two action form and the voi from a lottery with a farm-out, so the two numbers describe different lotteries.",
-  "EVPI caps expected value with information and not the value of information, so 75.00 above 63.00 is ordinary arithmetic on consistent inputs."],
+  "EVPI caps only the expected value with information, leaving the value of information free, so 75.00 above 63.00 is ordinary arithmetic on consistent inputs."],
  "Information derived by Bayes satisfies 0 <= evii <= evpi; 75.00 sets a 0.420000 prospect after the survey against a 0.300000 prospect before it, and the Analyzer withholds the value.")
 
 # ord 11
@@ -92,7 +92,7 @@ q(3, "A reviewer proposes guarding the Analyzer by capping any value of informat
  ["Clipping would change the verdict sentence, which is computed from the unclipped value, so the card and the sentence would disagree.",
   "EVPI is itself withheld whenever the inputs contradict each other, so there would be no ceiling left to clip the value against.",
   "Capping 75.00 at 63.00 is what the Analyzer already does, so the proposal only duplicates a check it already carries."],
- "The honest value on those EKPAN lottery entries is 19.84, and indicatorChancesAboveHundred gives 33.00, the very card the consistent defaults print; a test on the output catches only the loudest cases, so the Analyzer tests the inputs.")
+ "The honest value on those EKPAN lottery entries is 19.84, and indicatorChancesAboveHundred gives 33.00, matching the defaults' own gross voi; a test on the output catches only the loudest cases, so the Analyzer tests the inputs.")
 
 # ord 12
 q(2, "The published pricey case prints a netVoi card of -17.00, and IRRI's typed chances give a gross voi of -15.00 with nothing checking them against the stated prior. What separates the two?",
@@ -120,11 +120,11 @@ q(1, "Why can typed inputs contradict each other in the VOI Analyzer when the De
 
 # ord 15
 q(3, "With nothing checking its sums, indicatorChancesAboveHundred, with indicator chances summing to 110 percent, gives a gross voi of 33.00. What makes that value dangerous, and what does the Analyzer do with the entry?",
- "It matches the card the consistent defaults print, and the entry is refused with \"Indicator chances sum to 110 percent, expected 100\".",
+ "It matches the defaults' own gross voi of 33.00, and the entry is refused with \"Indicator chances sum to 110 percent, expected 100\".",
  ["Nothing, since rescaling indicator chances by their sum leaves the posteriors alone, and the Analyzer prints 33.00.",
   "It sits inside the half percent allowance, so the check passes it, and the allowance would need narrowing to catch it.",
   "It contradicts the stated chances, so the value is withheld and EMV without information 15.00 and EVPI 63.00 remain on the screen beside the consistency warning."],
- "A 110 percent indicator set is not a distribution, so it is refused outright and never reaches the consistency check; an output test would have passed 33.00, which sits under 63.00.")
+ "A 110 percent indicator set is not a distribution, so it is refused outright before the consistency check; an output test would have passed 33.00, which sits under 63.00.")
 
 emit(Q, "/root/wt-ec45-recut/tools/course-waves/ec45-recut/banks/decision/advanced/ec4a_m01.json", label="ec4a_m01", expect_n=15)
 finish()
