@@ -12,7 +12,7 @@ q(3, "IRRI types both of the Analyzer's indicators as 20 / 80 percent against st
  ["A value of information of -15.00, worked out by hand from the typed chances, since the Analyzer prints none.",
   "A value of information of 0.00, since a withheld value means the survey cannot change the decision and so is worth nothing.",
   "No numbers at all, because indicator chances that contradict the stated ones are refused before the Analyzer computes anything."],
- "The two surviving cards depend only on the stated outcome chances. -15.00 is what the typed chances give with nothing checking them against the stated prior, below the zero floor that Bayes guarantees, and a withheld value is never written as 0.00.")
+ "15.00 and 63.00 need nothing but the stated chances, so they survive. The unguarded -15.00 falls under the zero floor Bayes guarantees, and a withheld value is never written as 0.00.")
 
 # ord 2
 q(1, "Weighted as typed with nothing checking them, published certainPosteriorsWithheld gives a gross voi of 245.00. What makes that number impossible on sight?",

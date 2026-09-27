@@ -24,7 +24,7 @@ q(0, "A report on IRRI copies the Analyzer and writes the net value of informati
 
 # ord 3
 q(0, "Two entries each sit exactly on the edge of their check in decimal: typed posteriors implying 0.305000 against a stated 0.300000, and three branches typed 0.333333 on the node \"Three equal outcomes\". What does the engine do with each?",
- "It accepts both: the half percent check and the 1e-6 sum test each add a 1e-12 allowance for binary representation, so 0.305000 reads consistent and the three branches roll back at 59.9999, used as typed.",
+ "It accepts both, since the half percent check and the 1e-6 sum test each add a 1e-12 allowance for binary representation; the node rolls back at 59.9999.",
  ["It refuses both, because each lands a hair outside its tolerance in binary arithmetic, 0.0050000000000000044 for the first and a sum printed as 0.999999 for the second.",
   "It accepts the second, rounding a sum of 0.999999 to 1 before comparing, and refuses the first, because the half percent check is exclusive at its boundary.",
   "It accepts the first, because the half percent check adds a 1e-12 allowance, and refuses the second, because the 1e-6 sum test compares against 1e-6 alone."],
@@ -32,11 +32,11 @@ q(0, "Two entries each sit exactly on the edge of their check in decimal: typed 
 
 # ord 4
 q(1, "A Decision Studio brief on a saved two-branch tree reads Optimal EMV 20.0000 with first move \"A\". Branch A pays 20 and was meant to carry a cost of 5; branch B pays 12. The provenance line names the saved tree. What does the brief tell a reader about that cost?",
- "That it was never charged: A is worth exactly its payoff, which is what a cost left out of the saved tree gives (clearing a cost box in the Builder removes the entry), and no line of the brief flags it.",
+ "That it was never charged: A is worth exactly its payoff, which is what a cost left out of the saved tree gives, and no line of the brief flags it.",
  ["That it was charged, since the rollback refuses a cost that is not a number, and Decision Studio cannot brief a tree that the engine has refused to roll back at all, whatever its provenance line says.",
   "That it was typed as the text \"5\", which the engine reads as a number and which leaves branch A at its full payoff of 20.",
   "Nothing either way, because the brief prints each root value before the cost on its branch, so 20.0000 would appear whether or not the 5 was charged."],
- "With the cost charged A is worth 15.0000. A cost typed as \"abc\" or left as an empty entry is refused by node label, so a brief that prints 20.0000 re-rolled a tree whose cost was left out, which the engine reads as 0 without a message.")
+ "With the cost charged A is worth 15.0000. A cost typed as \"abc\" or left as an empty entry is refused by node label, so a brief that prints 20.0000 re-rolled a tree whose cost was left out, which the engine reads as 0 without a message; clearing a cost box in the Builder removes the entry in just that way.")
 
 # ord 5
 q(1, "The published threeByThreeCost12 information tree is briefed in Decision Studio. Which decision rows does the brief print?",
@@ -48,19 +48,19 @@ q(1, "The published threeByThreeCost12 information tree is briefed in Decision S
 
 # ord 6
 q(3, "The published equalEmvTie tree in a brief and the Analyzer tie case (Success 25 percent paying 200, Dry hole 75 percent paying -50, decision cost 12.5) both sit on an exact tie. Where can a reader see that it is a tie?",
- "On both: the brief names A, B and C together on the first-move row and writes Indifferent at the precision shown on the advantage row, and the Analyzer's insight says both actions come to the same figure.",
- ["Only in the brief, through a Decision advantage row of 0.0000; the Analyzer names 'Drill Exploration Well' as optimal and prints no margin.",
+ "On both: the brief names A, B and C together and writes Indifferent at the precision shown, and the Analyzer's insight says both actions come to the same figure.",
+ ["Only in the brief, through a Decision advantage row of 0.0000 beside the first move, while the Analyzer names 'Drill Exploration Well' as the optimal decision and prints no margin at all.",
   "On neither, since both round the values to two decimals, so the tied branch and the one worth 29.9990 cannot be told apart from 30.0000 on either screen.",
-  "In the Analyzer, as a net value of 20.00 equal to EMV with information, and in the brief, by naming A and B together and leaving C off at 29.9990."],
+  "In the Analyzer, as a net value of 20.00 equal to EMV with information, and in the brief, by naming A and B together on the first-move row and leaving C off at 29.9990."],
  "The brief reads the card-precision tie set, where C's 29.9990 rounds to the same 30.00, and the Analyzer's insight opens by saying 'Drill Exploration Well' and 'Do Not Drill Exploration Well' both come to $0.00M, so the decision without new information is indifferent between them.")
 
 # ord 7
 q(0, "On the Analyzer's default study one survey is tendered at 32.996 and another at 33.004. A reviewer reads both netVoi cards and both verdict sentences. What should the report say?",
- "That both are priced at the gross voi of 33.00: both cards read 0.00 and both verdicts say the value rounds to zero, because the card and the verdict read one rounded net value.",
+ "That both are priced at the gross voi of 33.00: both cards read 0.00 and both verdicts say the value rounds to zero, from one rounded net value.",
  ["That the first is worth buying and the second is not, exactly as the verdict sentences state, since the unrounded net value is the more precise of the two readings.",
   "That the second is priced a hair above its value, since its card prints -0.00 and a negative zero keeps the sign of the unrounded net value.",
   "That neither can be judged, because the Analyzer withholds the net value once the survey cost comes within 0.005 of the gross value."],
- "The net VOI is rounded once, half away from zero with a 1e-12 allowance, to the two-decimal card, and the verdict reads that same rounded value; -0.00 is never printed. The neutral price is the gross value, 33.00 here, so both surveys are priced at their value.")
+ "One rounding feeds both the card and the sentence, so they cannot split; information turns neutral at a price equal to its gross value, 33.00 here, and both tenders sit within half a cent of it.")
 
 # ord 8
 q(2, "Three negative numbers come out of these tools: a gross voi of -15.00 from IRRI's typed chances weighted with nothing checking them against the stated prior, an EVII of -1.42e-14 for the symmetric EKPAN lottery survey at accuracy 0.550000, and a netVoi card of -17.00 on the pricey case. Which signals inputs that cannot all be true?",
@@ -223,7 +223,7 @@ q(1, "The EKPAN lottery typed with posteriors of 64.7 and 9.7 percent gives an i
  "Six rounded EKPAN lottery rows pass the check with gross values from 18.41 to 20.51. The survey is the same in every row; a pass certifies agreement, not precision.")
 
 # ord 28
-q(3, "Weighted as typed with nothing checking them, contradictingPosterior gives a gross voi of 75.00 beside an EVPI of 63.00. A colleague proposes printing such values capped at their EVPI. What is wrong with that?",
+q(3, "A colleague wants the Analyzer to print contradictingPosterior's unguarded 75.00 again, only capped at the 63.00 EVPI. What is wrong with that plan?",
  "A capped 63.00 still rests on posteriors implying 0.420000 against a stated 0.300000, and a cap never touches contradictions that print under the ceiling, such as 40.62 for the EKPAN lottery.",
  ["Nothing, since the excess of 12 over EVPI is exactly the part the contradiction added, and removing it leaves the honest value of the survey.",
   "A cap sets the value too low, because EVPI binds only information derived by Bayes, and typed posteriors can legitimately be worth more than knowing the outcome in advance when the survey is a good one.",
@@ -264,7 +264,7 @@ q(1, "A reviewer checks, on the decision where A pays 20 meant at a cost of 5 an
 
 # ord 33
 q(0, "At p = 80 / 350 on the EKPAN lottery and at success 0.200000 on the published drillFarmOut tree, Drill and Farm out print the same value. What does the engine report at each?",
- "A tie at both, each marking Drill as the first listed: drillFarmOut ties exactly at 12.0000, and the lottery's gap of -7.11e-15 is float residue inside the tie band.",
+ "A tie at both, each marking Drill as the first listed: drillFarmOut ties exactly at 12.0000, and the lottery's -7.11e-15 is residue inside the band.",
  ["A tie only on drillFarmOut; at 80 / 350 Farm out is larger by -7.11e-15 of residue, so the engine names it as the single best action.",
   "A tie only on the lottery, because at 0.228571 the EVPI peaks at 61.7143 and the engine reads that peak as indifference between the two actions.",
   "Neither, because the engine has no tie rule at all, and each of the two results comes from floating-point residue in the last binary digits of the two values."],
@@ -316,7 +316,7 @@ q(0, "Four entries reach the rollback: a payoff summary carrying NPV P90 185, NP
  ["The summary and \"20abc\"; the empty payoff is read as 0 and the \"abc\" cost is charged as 0, both without a message.",
   "Only \"20abc\", because a summary without a mean is valued at its NPV P50 of 390, and empty or text entries count as 0.",
   "The summary, the empty payoff and \"20abc\", while the cost typed \"abc\" passes alone, because a cost is optional and a payoff is not."],
- "The engine names the node in each message: a distribution payoff with no finite mean, a terminal payoff that is not a finite number (\"20abc\"), a blank terminal payoff, and a branch cost that is not a finite number (\"abc\"). Only a cost or payoff left out of the tree reads as 0.")
+ "Four messages come back, one per entry, each ending with the node it stopped at: the mean-less summary and \"20abc\" fail as payoffs, the empty box as a blank payoff and \"abc\" as a cost. An entry missing from the tree altogether is the one case read as 0.")
 
 # ord 40
 q(2, "The published three-outcome, four-action lottery is drawn in the Decision Tree Builder as a root decision with one costed branch per action, and briefed twice: with all four actions, and after Drill with partner is pruned as never best. What changes on the brief?",

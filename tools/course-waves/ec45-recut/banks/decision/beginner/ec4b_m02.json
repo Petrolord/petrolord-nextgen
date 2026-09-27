@@ -14,7 +14,7 @@
   "prompt": "A chance node with three equal outcomes paying 30, 60 and 90 has each probability typed as 0.333333. What does the engine return?",
   "options": [
    "A refusal printing the sum 0.999999, because a sum sitting at the edge of the 1e-6 tolerance is not accepted.",
-   "EMV 59.9999, since 0.999999 sits on the edge of the 1e-6 tolerance, the check includes its edge, and the thirds are weighted as typed.",
+   "EMV 59.9999: the check includes its edge, so 0.999999 passes and the thirds are weighted as typed.",
    "EMV 60.0000 from the weights rescaled to sum to 1, with the typed sum printed as a warning.",
    "EMV 35.0000, the published thirdsProbabilities result, since that case types its thirds to six decimals."
   ],
@@ -68,8 +68,8 @@
  {
   "prompt": "What do the Decision Tree Builder's cards show for the chanceRootWithBranchCosts tree, whose root is a chance node?",
   "options": [
-   "Optimal EMV -3.0000, Chance root: no first decision to make on the first-move card, and N/A on the next best alternative and decision advantage cards.",
-   "Calm as the recommended first move, being the likelier branch at 0.600000, with storm as the next best alternative and a decision advantage beside it.",
+   "-3.0000 for the tree, the chance-root label on the first-move card, and N/A on the two cards that would compare one move with another.",
+   "Calm as the recommended first move, being the likelier branch at 0.600000, with storm as the next best alternative and a decision advantage of 50.0000 beside it.",
    "No cards, since the Builder needs a decision at the root and refuses to roll back a tree whose root is a chance node.",
    "Optimal EMV -8.6000, since the Builder subtracts the tree's costs once after the rollback to fill the card."
   ],

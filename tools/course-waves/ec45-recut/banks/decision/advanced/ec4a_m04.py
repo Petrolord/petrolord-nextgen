@@ -31,15 +31,15 @@ q(3, "A reviewer argues that since the half percent check carries an allowance, 
  "The Analyzer still reports EMV without information 15.00 and EVPI 63.00. The gross voi of 35.10 these inputs give with nothing checking them is a number built on chances that cannot all be true.")
 
 # ord 4
-q(0, "One engine family holds two boundaries: a chance node's probabilities must sum to within 1e-6 of 1, and an implied chance must sit within 0.005 of the stated one. What happens exactly at each edge?",
+q(1, "One engine family holds two boundaries: a chance node's probabilities must sum to within 1e-6 of 1, and an implied chance must sit within 0.005 of the stated one. What happens exactly at each edge?",
  "Both edges hold, because each of the two comparisons adds the same 1e-12 allowance for binary representation error.",
  ["The implied-priors edge holds because of its 1e-12 allowance, while the sum edge has none, so thirds typed as 0.333333 are refused although their decimal gap equals the tolerance.",
   "Both edges fail, because binary rounding pushes a value sitting exactly on either threshold a hair past it and neither check makes any allowance for that.",
   "The sum edge holds because its message prints 0.999999, while the implied-priors edge fails at 0.305000 on 4.3e-18 of binary overshoot."],
- "0.305 less 0.3 evaluates to 0.0050000000000000044 and passes under the allowance; three copies of 0.333333 miss 1 by a binary hair above 1e-6 and pass under the same allowance, so both boundaries include their edge.")
+ "The implied-priors delta of 0.305 less 0.3 overshoots 0.005 by 4.3e-18 in binary, and a 0.333333 sum misses 1 by a hair more than 1e-6; one 1e-12 allowance absorbs each, so neither edge flips.")
 
 # ord 5
-q(0, "Branch A pays 20 with its cost typed as \"abc\", and branch B pays 12 at no cost. What does the rollback return?",
+q(1, "Branch A pays 20 with its cost typed as \"abc\", and branch B pays 12 at no cost. What does the rollback return?",
  "A refusal naming branch A, because the engine checks that every cost reads as a number in the same way that it checks every payoff.",
  ["An emv of 20.0000 with A best and no message, because a cost that does not read as a number is charged as zero.",
   "An emv of 15.0000 with A best, because text typed on a cost is converted to the number the user most likely meant, which here is 5.",

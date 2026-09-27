@@ -123,7 +123,7 @@ q(3, "With nothing checking its sums, indicatorChancesAboveHundred, with indicat
  "It matches the card the consistent defaults print, and the entry is refused with \"Indicator chances sum to 110 percent, expected 100\".",
  ["Nothing, since rescaling indicator chances by their sum leaves the posteriors alone, and the Analyzer prints 33.00.",
   "It sits inside the half percent allowance, so the check passes it, and the allowance would need narrowing to catch it.",
-  "It contradicts the stated chances, so the value is withheld and EMV without information 15.00 and EVPI 63.00 remain on the screen."],
+  "It contradicts the stated chances, so the value is withheld and EMV without information 15.00 and EVPI 63.00 remain on the screen beside the consistency warning."],
  "A 110 percent indicator set is not a distribution, so it is refused outright and never reaches the consistency check; an output test would have passed 33.00, which sits under 63.00.")
 
 emit(Q, "/root/wt-ec45-recut/tools/course-waves/ec45-recut/banks/decision/advanced/ec4a_m01.json", label="ec4a_m01", expect_n=15)

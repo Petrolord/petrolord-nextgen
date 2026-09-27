@@ -36,7 +36,7 @@ q(1, "On the EKPAN lottery's Dry hole row, the course's perfect-information tabl
  ["Nothing at all, because a tie is broken by the larger payoff in the other outcome, where the lottery's Farm out pays 95.0000 against 0.0000.",
   "evWithPerfect on the lottery, because Walk away is valued as a terminal and Farm out as a chance node, so the rollback reaches a different expectation.",
   "The prior decision, because listing order is also the order in which the engine weights the lottery's actions at 0.350000."],
- "Farm out and Walk away both pay 0.0000 on the EKPAN lottery's dry hole, and the table names the first listed of the tied pair; EVPI takes the best VALUE per outcome, so 52.0000 does not depend on the label.")
+ "The two tied actions pay the same 0.0000 when the well is dry, and the table simply names whichever comes first; since EVPI is built from the best value in each outcome, 52.0000 ignores the label.")
 
 # ord 5
 q(1, "dominantAction has outcomes at 0.300000 and 0.700000, and its better action pays 100.0000 or 50.0000, yet its EVPI is 0.0000. Why?",
@@ -76,7 +76,7 @@ q(2, "At 0.228571 on the EKPAN lottery both actions print 21.7143. What does the
  ["Farm out alone, because Drill comes out below it in the last binary digits and the engine compares values to that digit.",
   "Farm out, by a built-in preference for the action that never loses money when two lottery EMVs agree to four decimals.",
   "Farm out, because EVPI is 61.7143 under Farm out and lower under Drill, so the engine names the action that leaves the most to learn."],
- "80 / 350 has no exact binary image, so Drill less Farm out is -7.11e-15, far inside the tie band of 1e-9 x max(1, |best|). The engine reports the tie, and EVPI of 61.7143 is the same whichever action is marked.")
+ "The residue at the switch, -7.11e-15, sits far inside the band the engine allows a tie, so both actions are reported as tied; EVPI is 61.7143 whichever of them is marked.")
 
 # ord 10
 q(1, "On the EKPAN lottery at a success probability of 0.050000, EVPI is 13.5000. In which outcome does perfect information change the prior action?",

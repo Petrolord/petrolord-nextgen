@@ -183,7 +183,7 @@ q(3, "The EKPAN lottery is typed into the Analyzer with Bright spot at 46.000000
  "Percents that are not a distribution are refused first. Withholding is for percents that are distributions and still imply another prior, as with Bright spot at 56 percent.")
 
 # ord 23
-q(0, "Typed into the Analyzer, the EKPAN lottery with Bright spot at 56 percent and No bright spot at 44 percent passes the sum check with its posteriors unchanged. What does it report?",
+q(0, "With its posteriors unchanged, the lottery's survey is re-entered at 56 percent for one reading and 44 for the other, a pair that passes the sum check. Which results survive?",
  "75.75 and 52.00 only, withholding EMV with Information, both values of information and the diagram.",
  ["Every card, since the indicator chances sum to 100 and the posteriors are the Bayes results carried at full precision.",
   "Every card, after rescaling the posteriors until implied success returns to 0.350000.",
@@ -260,7 +260,7 @@ q(1, "On a known dry hole in the EKPAN lottery, Farm out and Walk away both pay 
  ["EVPI would fall, because naming Walk away gives up the farm-out's 95.0000 on a success that perfect information could still reveal.",
   "It rises to 61.7143, as the farm-out line no longer sets the switch.",
   "The engine refuses: a tie on one outcome leaves the best action undefined."],
- "The best value on a dry hole is 0.0000 whichever action is named. A tie on an outcome row names the first listed of the tied actions, which moves a label and leaves every value alone.")
+ "Perfect information takes the largest net value in each outcome, and on a dry hole that is 0.0000 whoever pays it, so relabelling the row leaves 52.0000 intact.")
 
 # ord 33
 q(0, "The CSEM survey on the EKPAN lottery is worth 24.8250, between the symmetric survey's 22.7000 at accuracy 0.800000 and 30.0250 at 0.850000. Why can no symmetric survey, at any accuracy, pass 52.0000?",

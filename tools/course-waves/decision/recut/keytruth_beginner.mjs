@@ -20,7 +20,7 @@ export default [
   // final 34, 38
   { q: 'beginner final 34', where: 'explanation', printed: 'marks Drill because it is listed first', value: (L) => { const a = L.drillFarmOutAt(0.2); return a.indifferent === true && a.branches[a.bestBranchIndex].label === 'Drill'; } },
   { q: 'beginner final 34', where: 'explanation', printed: '27.5000', value: (L) => L.drillFarmOutAt(0.25).branches[0].branchValue },
-  { q: 'beginner final 38', where: 'key', printed: 'the engine reports the two branches tied and marks acquiring', value: (L) => { const t = L.infoTree(24.825); return t.indifferent === true && t.branches[t.bestBranchIndex].label === L.INFO_LABEL; } },
+  { q: 'beginner final 38', where: 'key', printed: 'acquiring carries the mark as the branch typed first', value: (L) => { const t = L.infoTree(24.825); return t.indifferent === true && t.branches[t.bestBranchIndex].label === L.INFO_LABEL; } },
   { q: 'beginner final 38', where: 'explanation', printed: '24.8250', value: (L) => L.grossEvii() },
   // final 4: the checks now include money
   { q: 'beginner final 4', where: 'prompt', printed: 'every cost and payoff a finite number', value: (L) => L.refusal(() => L.D.rollback(L.dec('abc'))) !== null && L.refusal(() => L.D.rollback(L.dec(5, ''))) !== null },
@@ -50,11 +50,10 @@ export default [
   { q: 'beginner m03 7', where: 'key', printed: '-3.5000', value: (L) => L.drillFarmOutAt(0.15).branches[0].branchValue },
   { q: 'beginner m03 7', where: 'key', printed: '27.5000', value: (L) => L.drillFarmOutAt(0.25).branches[0].branchValue },
   // m05 2: what the engine returns at the switch
-  { q: 'beginner m05 2', where: 'key', printed: 'A tie with indifferent true', value: (L) => L.lottery(L.SWITCH).indifferent === true },
-  { q: 'beginner m05 2', where: 'key', printed: 'Drill carries the action index only because it is listed first', value: (L) => { const r = L.lottery(L.SWITCH); return r.actionIndex === 0 && L.same(r.tiedIndices, [0, 1]); } },
-  { q: 'beginner m05 2', where: 'prompt', printed: '21.7143', value: (L) => L.lottery(L.SWITCH).emv },
+  { q: 'beginner m05 2', where: 'key', printed: 'As indifference: both actions sit in the tied set', value: (L) => L.lottery(L.SWITCH).indifferent === true },
+  { q: 'beginner m05 2', where: 'key', printed: 'Drill holds the index only as the first action typed', value: (L) => { const r = L.lottery(L.SWITCH); return r.actionIndex === 0 && L.same(r.tiedIndices, [0, 1]); } },
   // m05 3
-  { q: 'beginner m05 3', where: 'key', printed: 'the engine reports the tie and marks Drill', value: (L) => { const a = L.drillFarmOutAt(0.2); return a.indifferent === true && a.branches[a.bestBranchIndex].label === 'Drill'; } },
+  { q: 'beginner m05 3', where: 'key', printed: 'Drill heads the tied pair only through the order of typing', value: (L) => { const a = L.drillFarmOutAt(0.2); return a.indifferent === true && a.branches[a.bestBranchIndex].label === 'Drill'; } },
   // m05 5: what a decision node returns
   { q: 'beginner m05 5', where: 'key', printed: 'The tied branches and an indifferent flag beside the best branch index, plus the set tied at card precision', value: (L) => { const a = L.drillFarmOutAt(0.2); return L.same(a.tiedIndices, [0, 1]) && a.indifferent === true && L.same(a.tiedIndicesAtCardPrecision, [0, 1]) && a.bestBranchIndex === 0; } },
   { q: 'beginner m05 5', where: 'key', printed: 'the optimal path marks only the first listed', value: (L) => { const a = L.D.rollback(L.clone(L.GC.rollback.drillFarmOut.tree)); const t = L.clone(L.GC.rollback.drillFarmOut.tree); t.branches.forEach((b) => { if (b.node.type === 'chance') { b.node.branches[0].probability = 0.2; b.node.branches[1].probability = 0.8; } }); const r = L.D.rollback(t); return a && r.branches[0].onOptimalPath === true && r.branches[1].onOptimalPath === false; } },

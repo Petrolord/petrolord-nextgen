@@ -39,7 +39,7 @@ q(2, "Suppose the CSEM survey's indicator chances for the EKPAN lottery are ente
  "The chances sum to 100, so nothing is refused, but they imply success 0.404952 against the stated 0.350000, more than 0.005 away. 40.62 is what these typed numbers give with nothing checking them against the stated prior; the check never repairs.")
 
 # ord 5
-q(0, "Weighted as typed with nothing checking them, a Positive Seismic posterior row summing to 130 percent gives a gross value of information of 69.00 beside an EVPI of 63.00. What does the Analyzer do with that row, and what is wrong with 69.00?",
+q(0, "One indicator's outcome chances add up to 130 percent. Left unchecked, that row would value the survey at 69.00 with EVPI at 63.00. What does the Analyzer return, and why is 69.00 impossible?",
  "The inputs are refused with \"Outcome chances given \"Positive Seismic\" sum to 130 percent, expected 100\"; 69.00 is a survey worth more than knowing the answer.",
  ["The value is withheld while 15.00 and 63.00 stay on their cards, since a row that sums past 100 contradicts the stated chances.",
   "The value is capped at 63.00, because EVPI is the ceiling and a survey can reach it but never pass it.",

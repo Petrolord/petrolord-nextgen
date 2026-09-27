@@ -33,30 +33,30 @@ q(0, "A small tree values Drill at 40.0000 less a cost of 10.0000 and Farm out a
 # ord 4
 q(2, "In the VOI Analyzer, Success at 25 percent pays 200, Dry hole at 75 percent pays -50, and the decision cost is 12.5. What does the insight say about the decision without new information, and why?",
  "That 'Drill Exploration Well' and 'Do Not Drill Exploration Well' both come to $0.00M, so it is indifferent between them, because acting is worth exactly 0.",
- ["That 'Drill Exploration Well' is optimal, because acting is worth a small binary residue above 0 once the cost is subtracted.",
+ ["That 'Drill Exploration Well' is the optimal decision, because acting is worth a small binary residue above 0 once the decision cost of 12.5 is subtracted.",
   "That drilling is optimal, because the Analyzer names the risky action whenever the net value is positive and the netVoi card reads 20.00.",
-  "That drilling leads by 12.5, because the Analyzer compares its actions before charging the decision cost of 12.5."],
+  "That drilling leads by 12.5, because the Analyzer compares its two actions on their payoffs alone and charges the decision cost of 12.5 only after it has chosen."],
  "0.25 x 200 plus 0.75 x -50 less 12.5 is exactly 0, and the insight names both actions. The gross voi of 25.00 is large because the prior decision is perfectly unsettled.")
 
 # ord 5
-q(0, "A Decision Studio brief for published equalEmvTie prints Optimal EMV 30.0000. Which rows show that the first move is a tie?",
+q(0, "Reading a Decision Studio brief of the published equalEmvTie tree, where would a reviewer see that no single first move is being recommended?",
  "Recommended first move, which names A, B and C as coming to the same figure, and Decision advantage, which reads Indifferent at the precision shown.",
  ["Only Decision advantage, which reads 0.0000 because Next best alternative is also 30.0000, beside a first move of \"A\".",
-  "Next best alternative, which reads 29.9990 for \"C\" and so shows that the runner-up sits only a hair below the choice.",
-  "Optimal EMV, which is printed without decimals when two branches tie so that a reader can see the value is shared."],
- "C at 29.9990 rounds to the same 30.00 card as A and B, so the brief names all three and writes Indifferent at the precision shown; it names no single branch its own figures cannot separate.")
+  "Next best alternative, which reads 29.9990 for \"C\" and so shows that the runner-up sits only a hair below the branch the brief names as its choice.",
+  "Optimal EMV, which is printed without decimals whenever two root branches tie, so that a reader can see at a glance that the value is shared."],
+ "All three root values print as 30.00 on a card, C included at 29.9990, so the first-move row lists them together and the advantage row carries the word Indifferent where a margin would be.")
 
 # ord 6
 q(3, "On the Analyzer's default study the gross voi is 33.00. At a survey cost of 32.996 the netVoi card reads 0.00. What does the verdict sentence say?",
  "Since this rounds to zero, the information costs what it is worth, so acquiring it or not is indifferent on EMV grounds, because the verdict reads the card.",
  ["Since this is negative, the information costs more than the value it adds, because the verdict sets the cost against the EVPI card.",
   "Since this is positive, acquiring the information is financially advantageous, because the verdict tests the net value before it is rounded.",
-  "No verdict at all, since the Analyzer drops the sentence whenever a card rounds to zero and leaves the choice to the reader."],
+  "No verdict at all, since the Analyzer drops the sentence whenever the net card rounds to zero and leaves the whole choice between buying and not buying to the reader."],
  "The net VOI is rounded once to the two-decimal card, half away from zero with a 1e-12 allowance, and the verdict reads that same value. At 32.990 the card reads 0.01 and the sentence says positive; at 33.010 it reads -0.01 and says negative.")
 
 # ord 7
 q(3, "Priced at 33.004, the default survey's net value card reads 0.00. What do the card and the verdict tell a reader?",
- "That the survey is priced at its gross value to the cent: the card reads 0.00 and the verdict says the value rounds to zero, both from one rounded net value.",
+ "It sits at its gross value to the cent: 33 less 33.004 rounds to a 0.00 card, and the sentence beside it reads that same card as zero.",
  ["That the cost is a hair above the value, since the card prints -0.00 to keep the sign of the unrounded net value.",
   "That the survey cost was entered as a negative receipt, which the Analyzer marks with a sign on an otherwise zero card.",
   "That the consistency check found a small disagreement, which the Analyzer reports as a signed zero in place of withholding."],

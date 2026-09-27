@@ -11,26 +11,26 @@
   "explanation": "The EKPAN lottery's sweep rows sit 0.050000 apart, so they bracket the switch between 0.200000 and 0.250000 and cannot place it; 0.179775 is Drill against Walk away, where Farm out already wins at 95 p."
  },
  {
-  "prompt": "The EKPAN lottery's Drill and Farm out lines cross at a success probability of 0.228571, where both print 21.7143. What does the engine return at that probability?",
+  "prompt": "A sensitivity sweep of the EKPAN lottery lands exactly on its switch, 0.228571. How should a report describe the engine's first move there?",
   "options": [
-   "Farm out, because a tie goes to the action that cannot lose money and the lottery's farm-out never loses.",
-   "Drill alone with indifferent false, because the engine re-lists the actions by value and Drill comes first above the switch.",
-   "Farm out alone, because Drill less Farm out comes out at -7.11e-15 and the engine compares values to the last binary digit.",
-   "A tie with indifferent true, and Drill carries the action index only because it is listed first."
+   "As Farm out, since at a switch the engine hands the tie to the action that cannot lose money on the lottery.",
+   "As Drill with indifferent false, since the engine re-lists actions by value and Drill heads the list above the switch.",
+   "As Farm out alone, since a gap of -7.11e-15 below Drill is still a gap and the engine compares values to the last binary digit.",
+   "As indifference: both actions sit in the tied set, and Drill holds the index only as the first action typed."
   ],
   "answer": 3,
-  "explanation": "80 / 350 has no exact binary image, so the two values differ by -7.11e-15, far inside the tie band of 1e-9 x max(1, |best|). Report the switch point and no winner at it."
+  "explanation": "Values within 1e-9 x max(1, |best|) of the best share the tied set, and 80 / 350 leaves a gap far smaller than that, so the sweep's honest entry at 0.228571 is a switch point with no winner."
  },
  {
   "prompt": "Swept, the published drillFarmOut tree reads Drill 12.0000 and Farm out 12.0000 at success 0.200000 and names Drill. How should that row be reported?",
   "options": [
-   "The two are indifferent at 0.200000: the engine reports the tie and marks Drill only because it is listed first.",
+   "Indifferent at 0.200000: Drill heads the tied pair only through the order of typing, so the row names no winner.",
    "Drilling is better from 0.200000 upward, since the engine names Drill at the first row where it is no longer behind.",
    "Farm out is best up to and including 0.200000, since a tie on a published tree is resolved toward the branch that cannot lose.",
    "Drill wins by a residue too small to print, the same way the EKPAN lottery's crossing at 0.228571 is decided."
   ],
   "answer": 0,
-  "explanation": "The drillFarmOut tie is exact to the last digit, and the EKPAN lottery's crossing at 0.228571 is a reported tie too, its residue of -7.11e-15 inside the band; neither result is a recommendation."
+  "explanation": "drillFarmOut's two branches meet exactly at 12.0000 there, and the EKPAN lottery's crossing at 0.228571 is a reported tie too, with a residue of -7.11e-15 inside the band; neither row is a recommendation."
  },
  {
   "prompt": "The published drillFarmOut sweep moves its success probability in the drill's chance node and the farm-out's chance node together. Why both at once?",
@@ -52,7 +52,7 @@
    "A warning in place of a best branch whenever two branch values agree within the same 1e-6 tolerance its chance nodes use."
   ],
   "answer": 2,
-  "explanation": "Two values tie when they differ by at most 1e-9 x max(1, |best|). drillFarmOut's exact 12.0000 at 0.200000 and the EKPAN lottery's residue of -7.11e-15 at 0.228571 both come back as reported ties, and the best branch index marks the first listed."
+  "explanation": "Exact equality and last-digit residue look the same on a card, so the engine reports both: drillFarmOut's 12.0000 at 0.200000 and the EKPAN lottery's 21.7143 at 0.228571 each come back with indifferent true."
  },
  {
   "prompt": "On the EKPAN lottery, moving success from 0.350000 to 0.400000 lifts the EMV from 75.7500 to 98.0000, and moving it from 0.200000 to 0.250000 lifts it from 19.0000 to 31.2500. Which move matters to a decision maker?",

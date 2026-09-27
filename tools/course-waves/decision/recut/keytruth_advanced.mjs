@@ -15,7 +15,7 @@ export default [
   { q: 'advanced final 4', where: 'explanation', printed: '15.0000', value: (L) => L.D.rollback(L.dec(5)).branches[0].branchValue },
   { q: 'advanced final 4', where: 'explanation', printed: 'A cost typed as "abc" or left as an empty entry is refused by node label', value: (L) => /\(at node "d"\)$/.test(L.refusal(() => L.D.rollback(L.dec('abc'))) || '') && /\(at node "d"\)$/.test(L.refusal(() => L.D.rollback(L.dec(''))) || '') },
   // final 6: both screens show the tie
-  { q: 'advanced final 6', where: 'key', printed: 'the brief names A, B and C together on the first-move row and writes Indifferent at the precision shown', value: (L) => { const b = L.briefRows(L.published('equalEmvTie')); return b.move === 'Indifferent: "A", "B" and "C" come to the same figure' && b.adv === 'Indifferent at the precision shown'; } },
+  { q: 'advanced final 6', where: 'key', printed: 'the brief names A, B and C together and writes Indifferent at the precision shown', value: (L) => { const b = L.briefRows(L.published('equalEmvTie')); return b.move === 'Indifferent: "A", "B" and "C" come to the same figure' && b.adv === 'Indifferent at the precision shown'; } },
   { q: 'advanced final 6', where: 'key', printed: "the Analyzer's insight says both actions come to the same figure", value: (L) => tieCase(L).insights.includes(BOTH) },
   // final 7: 32.996 and 33.004
   { q: 'advanced final 7', where: 'key', printed: 'both cards read 0.00 and both verdicts say the value rounds to zero', value: (L) => [32.996, 33.004].every((c) => { const x = L.analyzerAt(c); return x.kpis.netVoi === '0.00' && /Since this rounds to zero/.test(x.insights); }) },
@@ -93,7 +93,7 @@ export default [
   { q: 'advanced m05 6', where: 'key', printed: 'Since this rounds to zero, the information costs what it is worth, so acquiring it or not is indifferent on EMV grounds', value: (L) => L.analyzerAt(32.996).insights.match(/Since this[^.]*\./)[0].slice(0, -1) },
   { q: 'advanced m05 6', where: 'explanation', printed: '0.01', value: (L) => L.analyzerAt(32.99).kpis.netVoi },
   { q: 'advanced m05 6', where: 'explanation', printed: '-0.01', value: (L) => L.analyzerAt(33.01).kpis.netVoi },
-  { q: 'advanced m05 7', where: 'key', printed: 'the card reads 0.00 and the verdict says the value rounds to zero', value: (L) => { const x = L.analyzerAt(33.004); return x.kpis.netVoi === '0.00' && /Since this rounds to zero/.test(x.insights); } },
+  { q: 'advanced m05 7', where: 'key', printed: 'rounds to a 0.00 card', value: (L) => { const x = L.analyzerAt(33.004); return x.kpis.netVoi === '0.00' && /Since this rounds to zero/.test(x.insights); } },
   { q: 'advanced m05 8', where: 'explanation', printed: 'both round to a 0.00 card with the rounds-to-zero sentence', value: (L) => [32.996, 33.004].every((c) => { const x = L.analyzerAt(c); return x.kpis.netVoi === '0.00' && /Since this rounds to zero/.test(x.insights); }) },
   // m06
   { q: 'advanced m06 2', where: 'explanation', printed: 'The Analyzer reports 15.00 and 63.00 and withholds the rest', value: (L) => withheld(L, 'certainPosteriorsWithheld') },

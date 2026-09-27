@@ -158,7 +158,7 @@
   "options": [
    "Nothing, since rescaling indicator chances by their sum leaves the posteriors alone, and the Analyzer prints 33.00.",
    "It sits inside the half percent allowance, so the check passes it, and the allowance would need narrowing to catch it.",
-   "It contradicts the stated chances, so the value is withheld and EMV without information 15.00 and EVPI 63.00 remain on the screen.",
+   "It contradicts the stated chances, so the value is withheld and EMV without information 15.00 and EVPI 63.00 remain on the screen beside the consistency warning.",
    "It matches the card the consistent defaults print, and the entry is refused with \"Indicator chances sum to 110 percent, expected 100\"."
   ],
   "answer": 3,

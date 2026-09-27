@@ -76,7 +76,7 @@ q(0, "On IRRI, both indicators are typed 20 / 80 percent into the Analyzer defau
  ["A gross value of information of -15.00 and a net value of -25.00 on its cards, showing that a survey read this way is worse than useless to the decision.",
   "A refusal, because two identical rows of chances are not a distribution and cannot be valued.",
   "A gross value of 0.00, since two identical indicators move nothing and so leave the value at zero."],
- "The rows sum to 100 so nothing is refused, but the implied chance sits far more than 0.005 from the stated one. The -15.00 is what the typed chances give with nothing checking them against the stated prior, and information derived by Bayes is never worth less than 0.")
+ "Each row is a valid set of chances, which is why there is no refusal; together they point to a 0.200000 prospect where 0.300000 was stated. Bayes never makes information worth less than 0, so the unguarded -15.00 is a symptom and no value.")
 
 # ord 10
 q(2, "The EKPAN lottery's Drill action is chosen at 75.7500 against Farm out at 33.2500, although it loses 80.0000 with probability 0.650000. A manager wants the survey credited for sparing a dry hole. What does the tier's engine say?",

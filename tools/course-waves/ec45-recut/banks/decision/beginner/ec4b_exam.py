@@ -304,7 +304,7 @@ q(0, "The VOI Analyzer's second action is Do Not, with every payoff 0. Set besid
 
 # ord 38
 q(3, "At a survey cost of exactly 24.8250, the two root branches of the information tree built on the EKPAN lottery tie, and the optimal path marks acquiring the survey. What decides that mark?",
- "The tie rule: the engine reports the two branches tied and marks acquiring because it is listed first.",
+ "The tie rule: both branches come to 75.7500, and acquiring carries the mark as the branch typed first.",
  ["The survey's positive gross value, since the EKPAN lottery's survey, worth 24.8250 before its cost, is always worth acquiring at that same price.",
   "Float residue at the crossing, as at the EKPAN lottery's switch of 0.228571, where the survey branch comes out larger in its last binary digits.",
   "A rule breaking ties toward the branch that carries more information, which the information tree applies before it compares values."],
@@ -313,7 +313,7 @@ q(3, "At a survey cost of exactly 24.8250, the two root branches of the informat
 # ord 39
 q(1, "IRRI's indicators are both typed 20 / 80. Weighted by those typed chances with nothing checking them against the stated prior, the numbers give a gross value of information of -15.00. What does the VOI Analyzer do there, and why?",
  "Withholds the value of information, because the typed numbers imply a success chance that contradicts the stated one.",
- ["Prints 0.00 in place of -15.00, clamping the value at the floor information derived by Bayes never falls below.",
+ ["Prints 0.00 in place of -15.00, clamping the value at the floor information derived by Bayes never falls below on any survey.",
   "Prints -15.00 beside a warning, since a negative value correctly tells the user that the survey is not worth buying.",
   "Refuses the form with a message naming the sum in percent, because an indicator typed 20 / 80 is not a distribution."],
  "Both indicators at 20 / 80 imply a success chance of 0.200000 against 0.3 stated. The Analyzer keeps EMV without information at 15.00 and EVPI at 63.00 and withholds the rest.")

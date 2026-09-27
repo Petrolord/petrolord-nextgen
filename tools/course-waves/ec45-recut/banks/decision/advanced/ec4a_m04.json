@@ -35,23 +35,23 @@
  {
   "prompt": "One engine family holds two boundaries: a chance node's probabilities must sum to within 1e-6 of 1, and an implied chance must sit within 0.005 of the stated one. What happens exactly at each edge?",
   "options": [
-   "Both edges hold, because each of the two comparisons adds the same 1e-12 allowance for binary representation error.",
    "The implied-priors edge holds because of its 1e-12 allowance, while the sum edge has none, so thirds typed as 0.333333 are refused although their decimal gap equals the tolerance.",
+   "Both edges hold, because each of the two comparisons adds the same 1e-12 allowance for binary representation error.",
    "Both edges fail, because binary rounding pushes a value sitting exactly on either threshold a hair past it and neither check makes any allowance for that.",
    "The sum edge holds because its message prints 0.999999, while the implied-priors edge fails at 0.305000 on 4.3e-18 of binary overshoot."
   ],
-  "answer": 0,
-  "explanation": "0.305 less 0.3 evaluates to 0.0050000000000000044 and passes under the allowance; three copies of 0.333333 miss 1 by a binary hair above 1e-6 and pass under the same allowance, so both boundaries include their edge."
+  "answer": 1,
+  "explanation": "The implied-priors delta of 0.305 less 0.3 overshoots 0.005 by 4.3e-18 in binary, and a 0.333333 sum misses 1 by a hair more than 1e-6; one 1e-12 allowance absorbs each, so neither edge flips."
  },
  {
   "prompt": "Branch A pays 20 with its cost typed as \"abc\", and branch B pays 12 at no cost. What does the rollback return?",
   "options": [
-   "A refusal naming branch A, because the engine checks that every cost reads as a number in the same way that it checks every payoff.",
    "An emv of 20.0000 with A best and no message, because a cost that does not read as a number is charged as zero.",
+   "A refusal naming branch A, because the engine checks that every cost reads as a number in the same way that it checks every payoff.",
    "An emv of 15.0000 with A best, because text typed on a cost is converted to the number the user most likely meant, which here is 5.",
    "An emv of 12.0000 with B best, because the engine drops a branch whose cost cannot be read and rolls back only what remains."
   ],
-  "answer": 0,
+  "answer": 1,
   "explanation": "The engine refuses the cost with a message naming branch A and its node: the cost is not a finite number (\"abc\") and must be a number of 0 or more. Only a cost left out of the tree reads as 0, which gives 20.0000 against the intended 15.0000 with no message."
  },
  {

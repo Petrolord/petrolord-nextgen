@@ -8,7 +8,7 @@
    "EMV without information 15.00 and EVPI 63.00, with the value of information withheld because the inputs imply a success chance of 0.200000."
   ],
   "answer": 3,
-  "explanation": "The two surviving cards depend only on the stated outcome chances. -15.00 is what the typed chances give with nothing checking them against the stated prior, below the zero floor that Bayes guarantees, and a withheld value is never written as 0.00."
+  "explanation": "15.00 and 63.00 need nothing but the stated chances, so they survive. The unguarded -15.00 falls under the zero floor Bayes guarantees, and a withheld value is never written as 0.00."
  },
  {
   "prompt": "Weighted as typed with nothing checking them, published certainPosteriorsWithheld gives a gross voi of 245.00. What makes that number impossible on sight?",
