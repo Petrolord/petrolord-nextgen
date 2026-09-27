@@ -2368,6 +2368,76 @@
       "group": "ec11-prms-course",
       "vendoredSha": "d81558c78459eca38cf0dc9a874fd8564af922b6",
       "reason": "EC11 prms course: vendored sha-identical from petrolord-engines 42139e6 (PRs #278 to #280: engines/economics/prms.js, its jest suite, golden, the ekene-prms fixture and its writer, oracle, timing script, negative control, FINDINGS) by the wave's vendor_prms.sh, 4 proofs per path; its runtime imports (cashflow.ts, irrContract.js, lib/stats, lib/conventions/percentile.js) were already vendored at the same blobs. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 42139e6 or later."
+    },
+    {
+      "path": "__tests__/supplychain.marine.test.js",
+      "kind": "extra",
+      "group": "sc4-marine-course",
+      "vendoredSha": "ee359b933931c0b26ced26bbf2ef3d31647fbd20",
+      "reason": "SC4 marine course: vendored sha-identical from petrolord-engines 110f0a0 (PRs #282 and #283: engines/supplychain/marineLogistics.js, its jest suite, golden, the ekene-marine fixture and its writer, oracle, timing script, negative control, FINDINGS) by the wave's vendor_marine.sh, 4 proofs per path; its runtime imports (lib/stats/stats.js, lib/conventions/percentile.js) were already vendored at the same blobs. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 110f0a0 or later."
+    },
+    {
+      "path": "engines/supplychain/marineLogistics.js",
+      "kind": "extra",
+      "group": "sc4-marine-course",
+      "vendoredSha": "e1823a2ceb4715da3b0f45d392a15b5e292fdb59",
+      "reason": "SC4 marine course: vendored sha-identical from petrolord-engines 110f0a0 (PRs #282 and #283: engines/supplychain/marineLogistics.js, its jest suite, golden, the ekene-marine fixture and its writer, oracle, timing script, negative control, FINDINGS) by the wave's vendor_marine.sh, 4 proofs per path; its runtime imports (lib/stats/stats.js, lib/conventions/percentile.js) were already vendored at the same blobs. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 110f0a0 or later."
+    },
+    {
+      "path": "test-data/supplychain/ekene-marine/README.md",
+      "kind": "extra",
+      "group": "sc4-marine-course",
+      "vendoredSha": "339be1c7e1c554df1256c8f6c8be900b46d487c6",
+      "reason": "SC4 marine course: vendored sha-identical from petrolord-engines 110f0a0 (PRs #282 and #283: engines/supplychain/marineLogistics.js, its jest suite, golden, the ekene-marine fixture and its writer, oracle, timing script, negative control, FINDINGS) by the wave's vendor_marine.sh, 4 proofs per path; its runtime imports (lib/stats/stats.js, lib/conventions/percentile.js) were already vendored at the same blobs. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 110f0a0 or later."
+    },
+    {
+      "path": "test-data/supplychain/ekene-marine/marine.json",
+      "kind": "extra",
+      "group": "sc4-marine-course",
+      "vendoredSha": "bf401edd93d68c2e30a044785ded47fead636b9c",
+      "reason": "SC4 marine course: vendored sha-identical from petrolord-engines 110f0a0 (PRs #282 and #283: engines/supplychain/marineLogistics.js, its jest suite, golden, the ekene-marine fixture and its writer, oracle, timing script, negative control, FINDINGS) by the wave's vendor_marine.sh, 4 proofs per path; its runtime imports (lib/stats/stats.js, lib/conventions/percentile.js) were already vendored at the same blobs. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 110f0a0 or later."
+    },
+    {
+      "path": "test-data/supplychain/goldens/marine_cases.json",
+      "kind": "extra",
+      "group": "sc4-marine-course",
+      "vendoredSha": "5f03ca6ae8571a36354d7191c33bf95bef1c1275",
+      "reason": "SC4 marine course: vendored sha-identical from petrolord-engines 110f0a0 (PRs #282 and #283: engines/supplychain/marineLogistics.js, its jest suite, golden, the ekene-marine fixture and its writer, oracle, timing script, negative control, FINDINGS) by the wave's vendor_marine.sh, 4 proofs per path; its runtime imports (lib/stats/stats.js, lib/conventions/percentile.js) were already vendored at the same blobs. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 110f0a0 or later."
+    },
+    {
+      "path": "tools/validation/supplychain/FINDINGS-marine.md",
+      "kind": "extra",
+      "group": "sc4-marine-course",
+      "vendoredSha": "8f84a805ef411b3b614fdddf78160d68b9598e35",
+      "reason": "SC4 marine course: vendored sha-identical from petrolord-engines 110f0a0 (PRs #282 and #283: engines/supplychain/marineLogistics.js, its jest suite, golden, the ekene-marine fixture and its writer, oracle, timing script, negative control, FINDINGS) by the wave's vendor_marine.sh, 4 proofs per path; its runtime imports (lib/stats/stats.js, lib/conventions/percentile.js) were already vendored at the same blobs. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 110f0a0 or later."
+    },
+    {
+      "path": "tools/validation/supplychain/make_marine_fixtures.py",
+      "kind": "extra",
+      "group": "sc4-marine-course",
+      "vendoredSha": "256e0267466e1403d2bb50a3eed344e89dc8e069",
+      "reason": "SC4 marine course: vendored sha-identical from petrolord-engines 110f0a0 (PRs #282 and #283: engines/supplychain/marineLogistics.js, its jest suite, golden, the ekene-marine fixture and its writer, oracle, timing script, negative control, FINDINGS) by the wave's vendor_marine.sh, 4 proofs per path; its runtime imports (lib/stats/stats.js, lib/conventions/percentile.js) were already vendored at the same blobs. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 110f0a0 or later."
+    },
+    {
+      "path": "tools/validation/supplychain/negcontrol_marine.sh",
+      "kind": "extra",
+      "group": "sc4-marine-course",
+      "vendoredSha": "be204968bcbb22a09085be84e803c38eb123339c",
+      "reason": "SC4 marine course: vendored sha-identical from petrolord-engines 110f0a0 (PRs #282 and #283: engines/supplychain/marineLogistics.js, its jest suite, golden, the ekene-marine fixture and its writer, oracle, timing script, negative control, FINDINGS) by the wave's vendor_marine.sh, 4 proofs per path; its runtime imports (lib/stats/stats.js, lib/conventions/percentile.js) were already vendored at the same blobs. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 110f0a0 or later."
+    },
+    {
+      "path": "tools/validation/supplychain/oracle_marine.py",
+      "kind": "extra",
+      "group": "sc4-marine-course",
+      "vendoredSha": "69816aa92f030ad149f05587448cae443de99f2f",
+      "reason": "SC4 marine course: vendored sha-identical from petrolord-engines 110f0a0 (PRs #282 and #283: engines/supplychain/marineLogistics.js, its jest suite, golden, the ekene-marine fixture and its writer, oracle, timing script, negative control, FINDINGS) by the wave's vendor_marine.sh, 4 proofs per path; its runtime imports (lib/stats/stats.js, lib/conventions/percentile.js) were already vendored at the same blobs. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 110f0a0 or later."
+    },
+    {
+      "path": "tools/validation/supplychain/timing_marine.mjs",
+      "kind": "extra",
+      "group": "sc4-marine-course",
+      "vendoredSha": "67742364ae168673d3282a1d0067b5ecb6620ecb",
+      "reason": "SC4 marine course: vendored sha-identical from petrolord-engines 110f0a0 (PRs #282 and #283: engines/supplychain/marineLogistics.js, its jest suite, golden, the ekene-marine fixture and its writer, oracle, timing script, negative control, FINDINGS) by the wave's vendor_marine.sh, 4 proofs per path; its runtime imports (lib/stats/stats.js, lib/conventions/percentile.js) were already vendored at the same blobs. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 110f0a0 or later."
     }
   ]
 }
