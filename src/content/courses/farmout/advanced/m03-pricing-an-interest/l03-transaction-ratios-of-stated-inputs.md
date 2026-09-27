@@ -59,4 +59,4 @@ A price per MMboe on one deal and a price per MMboe on another are comparable on
 
 ## Exercise
 
-Open the valuation calculator on the view "A price for a working interest" and start from "The Ekene Deep price, risked". Read the price tiles and the reserve tiles. Change "Stated price (optional)" and confirm that every price ratio moves in proportion while the value tiles do not. In the box, change the reserve volume and read the price per unit. Delete the unit from the reserve entry and read the refusal. Then start from "A producing interest priced per flowing unit" and read the flowing-unit tiles.
+Open the valuation calculator on the view "A price for a working interest" and start from "The Ekene Deep price, risked". Read the price tiles and the reserve tiles. Change "Stated price (optional)" and confirm that every price ratio moves in proportion while the value tiles do not. In the box, change the reserve's gross volume and read the price per unit. Delete the volume unit from the transaction and read the refusal. Then start from "A producing interest priced per flowing unit" and read the flowing-unit tiles.

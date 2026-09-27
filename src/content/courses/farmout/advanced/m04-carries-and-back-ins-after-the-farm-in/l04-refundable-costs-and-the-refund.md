@@ -47,4 +47,4 @@ An upfront refund is paid at once. A refund from future entitlement is recovered
 
 ## Exercise
 
-Open the valuation calculator on the view "A back-in after the farm-in" and start from "The Ekene back-in, contract, upfront". Read the refundable, excluded and refund tiles and the refund received column. Change "Refundable cost kinds (stated)" so the exploration kind is included and read how the refundable costs and the refund move. Then choose the start **A back-in under PIA 2021 s.85(4)**, read the recovery reasons, and set "Refund form (stated)" to upfront to compare.
+Open the valuation calculator on the view "A back-in after the farm-in" and start from "The Ekene back-in, contract, upfront". Read the refundable, excluded and refund tiles and the refund received column. Change "Refundable cost kinds (stated)" so the exploration kind is included and read how the refundable costs and the refund move. Then choose the start **A back-in under PIA 2021 s.85(4)**, read the recovery reasons, and change "Recovered from, percent of the new share (stated)" to see how the year the refund is recovered moves.
