@@ -1,0 +1,317 @@
+[
+ {
+  "id": "pia_7i_national_reserves",
+  "text": "PIA",
+  "source": "pia_nuprc.txt",
+  "cite": "PIA s.7(i)",
+  "quote": "(i) undertake evaluation of national reserves and develop policies for prudent reservoir management practices ;",
+  "paraphrase": "One function of the Commission is to evaluate the national reserves and set policy for prudent reservoir management.",
+  "found": true
+ },
+ {
+  "id": "pia_78_8_upon_completion",
+  "text": "PIA",
+  "source": "pia_nuprc.txt",
+  "cite": "PIA s.78(8)",
+  "quote": "(8) The licensee shall, upon the completion of the appraisal program",
+  "paraphrase": "When the appraisal programme is complete the licensee makes one of three declarations.",
+  "found": true
+ },
+ {
+  "id": "pia_78_8ab_declarations",
+  "text": "PIA",
+  "source": "pia_nuprc.txt",
+  "cite": "PIA s.78(8)(a) and (b)",
+  "quote": "(a) declare a commercial discovery ; (b) declare a significant gas discovery or a significant crude oil discovery ; or",
+  "paraphrase": "The first two declarations are a commercial discovery, or a significant gas or crude oil discovery.",
+  "found": true
+ },
+ {
+  "id": "pia_78_8c_no_interest",
+  "text": "PIA",
+  "source": "pia_nuprc.txt",
+  "cite": "PIA s.78(8)(c)",
+  "quote": "(c) inform the Commission that the discovery is of no interest to the licensee.",
+  "paraphrase": "The third is to tell the Commission the discovery is of no interest.",
+  "found": true
+ },
+ {
+  "id": "pia_78_9_retain",
+  "text": "PIA",
+  "source": "pia_nuprc.txt",
+  "cite": "PIA s.78(9)",
+  "quote": "the licensee shall be entitled to retain the area of such significant gas discovery or significant crude oil discovery for a retention period as may be determined by the Commission,",
+  "paraphrase": "After a significant discovery is declared, the licensee may keep the area for a retention period the Commission sets.",
+  "found": true
+ },
+ {
+  "id": "pia_78_9_ten_years",
+  "text": "PIA",
+  "source": "pia_nuprc.txt",
+  "cite": "PIA s.78(9)",
+  "quote": "which shall not be more than 10 years from the day the declaration was made",
+  "paraphrase": "The retention period runs at most ten years from the declaration.",
+  "found": true
+ },
+ {
+  "id": "pia_78_13_relinquished",
+  "text": "PIA",
+  "source": "pia_nuprc.txt",
+  "cite": "PIA s.78(13)",
+  "quote": "(13) Where, upon the expiry of the retention period determined under subsection (9), the licensee has not declared a commercial discovery, the area declared under subsection (9) shall be immediately relinquished by the licensee.",
+  "paraphrase": "If no commercial discovery is declared by the end of the retention period, the area is relinquished at once.",
+  "found": true
+ },
+ {
+  "id": "pia_78_15_no_interest",
+  "text": "PIA",
+  "source": "pia_nuprc.txt",
+  "cite": "PIA s.78(15)",
+  "quote": "(15) Where a licensee declares a discovery of no interest under subsection (3) or (8), the Commission may require the relinquishment of the parcels that cover the structure of such discovery.",
+  "paraphrase": "A discovery declared of no interest may have to be relinquished over its structure.",
+  "found": true
+ },
+ {
+  "id": "pia_79_1_declares",
+  "text": "PIA",
+  "source": "pia_nuprc.txt",
+  "cite": "PIA s.79(1)",
+  "quote": "declares a commercial discovery under section 78 (8) (a) of this Act, the",
+  "paraphrase": "Section 79 applies once a licensee declares a commercial discovery.",
+  "found": true
+ },
+ {
+  "id": "pia_79_1_two_years",
+  "text": "PIA",
+  "source": "pia_nuprc.txt",
+  "cite": "PIA s.79(1)",
+  "quote": "licensee shall within two years of the declaration, submit to the Commission a",
+  "paraphrase": "The licensee then submits a field development plan to the Commission within two years of the declaration.",
+  "found": true
+ },
+ {
+  "id": "pia_318_commercial_discovery",
+  "text": "PIA",
+  "source": "pia_nuprc.txt",
+  "cite": "PIA s.318, \"commercial discovery\"",
+  "quote": "“commercial discovery” means a discovery of crude oil, natural gas or condensates within a petroleum prospecting licence or petroleum mining lease which can be economically developed in the opinion of the licensee or lessee after consideration of all relevant economic factors",
+  "paraphrase": "A commercial discovery is one the licensee judges can be economically developed after weighing all the relevant economic factors.",
+  "found": true
+ },
+ {
+  "id": "pia_318_significant_crude",
+  "text": "PIA",
+  "source": "pia_nuprc.txt",
+  "cite": "PIA s.318, \"significant crude oil discovery\"",
+  "quote": "“Significant crude oil discovery” means a discovery of crude oil that is substantial in terms of reserves and is potentially commercial, but cannot be declared commercial for one or both of the following reasons",
+  "paraphrase": "A significant crude oil discovery is substantial and potentially commercial, and cannot yet be declared commercial for one of two stated reasons.",
+  "found": true
+ },
+ {
+  "id": "pia_318_crude_reason_b",
+  "text": "PIA",
+  "source": "pia_nuprc.txt",
+  "cite": "PIA s.318, \"significant crude oil discovery\", (b)",
+  "quote": "(b) where the crude oil discovery would only be commercial when jointly developed with other existing discoveries or potential future discoveries ;",
+  "paraphrase": "One reason is that the discovery would be commercial only when developed jointly with other discoveries.",
+  "found": true
+ },
+ {
+  "id": "pia_318_significant_gas",
+  "text": "PIA",
+  "source": "pia_nuprc.txt",
+  "cite": "PIA s.318, \"significant gas discovery\"",
+  "quote": "“significant gas discovery” means a discovery of natural gas that is substantial in terms of reserves and is potentially commercial, but cannot be declared commercial for one or more of the following reasons",
+  "paraphrase": "A significant gas discovery is substantial and potentially commercial, and cannot yet be declared commercial for one or more stated reasons.",
+  "found": true
+ },
+ {
+  "id": "pia_318_gas_reasons_ab",
+  "text": "PIA",
+  "source": "pia_nuprc.txt",
+  "cite": "PIA s.318, \"significant gas discovery\", (a) and (b)",
+  "quote": "(a) no markets for natural gas within Nigeria ; (b) export markets need to be identified and developed ;",
+  "paraphrase": "Two of the reasons are no gas market in Nigeria and export markets still to be found.",
+  "found": true
+ },
+ {
+  "id": "si37_citation",
+  "text": "SI37",
+  "source": "n_Nigerian_Upstream_Significant_Crude_Oil_and_Gas_Recovery_Regulations_2023_d00669111fcd0e4ce060e86b.txt",
+  "cite": "S.I. No. 37 of 2023, the heading",
+  "quote": "S. I. No. 37 of 2023 PETROLEUM INDUSTRY ACT, NO. 6, 2021",
+  "paraphrase": "The Regulations are S.I. No. 37 of 2023, made under the Petroleum Industry Act 2021.",
+  "found": true
+ },
+ {
+  "id": "si37_3_reasons",
+  "text": "SI37",
+  "source": "n_Nigerian_Upstream_Significant_Crude_Oil_and_Gas_Recovery_Regulations_2023_d00669111fcd0e4ce060e86b.txt",
+  "cite": "S.I. No. 37 of 2023 reg. 3",
+  "quote": "be declared commercial due to one or both of the following reasons :",
+  "paraphrase": "Regulation 3 repeats the Act's two reasons a substantial crude oil discovery cannot yet be declared commercial.",
+  "found": true
+ },
+ {
+  "id": "si37_3_substantial",
+  "text": "SI37",
+  "source": "n_Nigerian_Upstream_Significant_Crude_Oil_and_Gas_Recovery_Regulations_2023_d00669111fcd0e4ce060e86b.txt",
+  "cite": "S.I. No. 37 of 2023 reg. 3",
+  "quote": "that is substantial in terms of reserves and is potentially commercial, but cannot",
+  "paraphrase": "A significant crude oil discovery is substantial in reserves terms and potentially commercial.",
+  "found": true
+ },
+ {
+  "id": "si37_4_gas",
+  "text": "SI37",
+  "source": "n_Nigerian_Upstream_Significant_Crude_Oil_and_Gas_Recovery_Regulations_2023_d00669111fcd0e4ce060e86b.txt",
+  "cite": "S.I. No. 37 of 2023 reg. 4",
+  "quote": "4. A Significant Gas Discovery shall be a discovery of natural gas that",
+  "paraphrase": "Regulation 4 defines a significant gas discovery.",
+  "found": true
+ },
+ {
+  "id": "si37_4_ab",
+  "text": "SI37",
+  "source": "n_Nigerian_Upstream_Significant_Crude_Oil_and_Gas_Recovery_Regulations_2023_d00669111fcd0e4ce060e86b.txt",
+  "cite": "S.I. No. 37 of 2023 reg. 4(a) and (b)",
+  "quote": "(a) there is no market for natural gas within Nigeria ; (b) export markets need to be identified and developed ;",
+  "paraphrase": "Its first two reasons are no gas market in Nigeria and export markets still to be developed.",
+  "found": true
+ },
+ {
+  "id": "si37_5_1_declared",
+  "text": "SI37",
+  "source": "n_Nigerian_Upstream_Significant_Crude_Oil_and_Gas_Recovery_Regulations_2023_d00669111fcd0e4ce060e86b.txt",
+  "cite": "S.I. No. 37 of 2023 reg. 5(1)",
+  "quote": "shall be declared by a licensee by notifying the Commission in writing within",
+  "paraphrase": "A significant discovery is declared by written notice to the Commission.",
+  "found": true
+ },
+ {
+  "id": "si37_5_1_sixty_days",
+  "text": "SI37",
+  "source": "n_Nigerian_Upstream_Significant_Crude_Oil_and_Gas_Recovery_Regulations_2023_d00669111fcd0e4ce060e86b.txt",
+  "cite": "S.I. No. 37 of 2023 reg. 5(1)",
+  "quote": "60 days after completion of an appraisal programme pursuant to section",
+  "paraphrase": "The notice is due within 60 days after the appraisal programme is completed.",
+  "found": true
+ },
+ {
+  "id": "si37_6_2_ninety_days",
+  "text": "SI37",
+  "source": "n_Nigerian_Upstream_Significant_Crude_Oil_and_Gas_Recovery_Regulations_2023_d00669111fcd0e4ce060e86b.txt",
+  "cite": "S.I. No. 37 of 2023 reg. 6(2)",
+  "quote": "(2) The Commission shall, within 90 days of receipt of a notification from a licensee under regulation 5 of these Regulations, approve the application.",
+  "paraphrase": "The Commission approves a declaration within 90 days of the notice.",
+  "found": true
+ },
+ {
+  "id": "si37_6_3_minimum",
+  "text": "SI37",
+  "source": "n_Nigerian_Upstream_Significant_Crude_Oil_and_Gas_Recovery_Regulations_2023_d00669111fcd0e4ce060e86b.txt",
+  "cite": "S.I. No. 37 of 2023 reg. 6(3)",
+  "quote": "(3) An approval pursuant to subregulation (2) of this regulation shall be for a minimum period of five years in the onshore and shallow water areas, and eight years in the deep-water areas,",
+  "paraphrase": "An approval of retention is for at least five years onshore and in shallow water and at least eight years in deep water.",
+  "found": true
+ },
+ {
+  "id": "si37_6_3_maximum",
+  "text": "SI37",
+  "source": "n_Nigerian_Upstream_Significant_Crude_Oil_and_Gas_Recovery_Regulations_2023_d00669111fcd0e4ce060e86b.txt",
+  "cite": "S.I. No. 37 of 2023 reg. 6(3)",
+  "quote": "but the Commission may, at its discretion grant the maximum period prescribed under the Act.",
+  "paraphrase": "The Commission may grant up to the maximum the Act allows.",
+  "found": true
+ },
+ {
+  "id": "si37_7_1b_choice",
+  "text": "SI37",
+  "source": "n_Nigerian_Upstream_Significant_Crude_Oil_and_Gas_Recovery_Regulations_2023_d00669111fcd0e4ce060e86b.txt",
+  "cite": "S.I. No. 37 of 2023 reg. 7(1)(b)",
+  "quote": "whether it intends to declare a commercial discovery or that the discovery is of no interest.",
+  "paraphrase": "A licensee whose declaration fails the criteria says whether it will declare a commercial discovery or none of interest.",
+  "found": true
+ },
+ {
+  "id": "si37_7_2_two_years",
+  "text": "SI37",
+  "source": "n_Nigerian_Upstream_Significant_Crude_Oil_and_Gas_Recovery_Regulations_2023_d00669111fcd0e4ce060e86b.txt",
+  "cite": "S.I. No. 37 of 2023 reg. 7(2)",
+  "quote": "(2) Where the licensee informs the Commission that it intends to declare a commercial discovery, the Commission shall grant the licensee two years within which to submit a field development plan for the area in accordance with section 79 of the Act.",
+  "paraphrase": "If it will declare a commercial discovery, it has two years to submit a field development plan.",
+  "found": true
+ },
+ {
+  "id": "si37_7_3_relinquish",
+  "text": "SI37",
+  "source": "n_Nigerian_Upstream_Significant_Crude_Oil_and_Gas_Recovery_Regulations_2023_d00669111fcd0e4ce060e86b.txt",
+  "cite": "S.I. No. 37 of 2023 reg. 7(3)",
+  "quote": "(3) Where the licensee informs the Commission that the discovery is of no interest, the Commission shall, pursuant to section 78(15) of the Act, require the licensee to relinquish the parcels that cover the structure of such discovery from its licence area.",
+  "paraphrase": "If the discovery is of no interest, the parcels over its structure are relinquished.",
+  "found": true
+ },
+ {
+  "id": "sec_1202_a3_sums",
+  "text": "SEC",
+  "source": "ecfr_229.1202.txt, ecfr_229.1203.txt, ecfr_210_4-10.txt",
+  "cite": "17 CFR 229.1202(a)(3)",
+  "quote": "(3) Reported total reserves shall be simple arithmetic sums of all estimates for individual properties or fields within each reserves category.",
+  "paraphrase": "For SEC reporting, total reserves are simple arithmetic sums of the property or field estimates, category by category.",
+  "found": true
+ },
+ {
+  "id": "sec_1202_a3_probabilistic",
+  "text": "SEC",
+  "source": "ecfr_229.1202.txt, ecfr_229.1203.txt, ecfr_210_4-10.txt",
+  "cite": "17 CFR 229.1202(a)(3)",
+  "quote": "When probabilistic methods are used, reserves should not be aggregated probabilistically beyond the field or property level;",
+  "paraphrase": "Probabilistic aggregation stops at the field or property level.",
+  "found": true
+ },
+ {
+  "id": "sec_1202_a3_arithmetic",
+  "text": "SEC",
+  "source": "ecfr_229.1202.txt, ecfr_229.1203.txt, ecfr_210_4-10.txt",
+  "cite": "17 CFR 229.1202(a)(3)",
+  "quote": "they should be aggregated by simple arithmetic summation.",
+  "paraphrase": "Above that level the SEC rule adds the estimates arithmetically.",
+  "found": true
+ },
+ {
+  "id": "sec_1203_d_five_years",
+  "text": "SEC",
+  "source": "ecfr_229.1202.txt, ecfr_229.1203.txt, ecfr_210_4-10.txt",
+  "cite": "17 CFR 229.1203(d)",
+  "quote": "(d) Explain the reasons why material amounts of proved undeveloped reserves in individual fields or countries remain undeveloped for five years or more after disclosure as proved undeveloped reserves.",
+  "paraphrase": "A registrant explains proved undeveloped reserves left undeveloped for five years or more.",
+  "found": true
+ },
+ {
+  "id": "sec_4_10_a22_proved",
+  "text": "SEC",
+  "source": "ecfr_229.1202.txt, ecfr_229.1203.txt, ecfr_210_4-10.txt",
+  "cite": "17 CFR 210.4-10(a)(22)",
+  "quote": "Proved oil and gas reserves are those quantities of oil and gas, which, by analysis of geoscience and engineering data, can be estimated with reasonable certainty to be economically producible",
+  "paraphrase": "The SEC defines proved reserves as quantities estimated with reasonable certainty to be economically producible.",
+  "found": true
+ },
+ {
+  "id": "sec_4_10_a22_expire",
+  "text": "SEC",
+  "source": "ecfr_229.1202.txt, ecfr_229.1203.txt, ecfr_210_4-10.txt",
+  "cite": "17 CFR 210.4-10(a)(22)",
+  "quote": "prior to the time at which contracts providing the right to operate expire, unless evidence indicates that renewal is reasonably certain,",
+  "paraphrase": "Proved reserves stop at the expiry of the right to operate unless renewal is reasonably certain.",
+  "found": true
+ },
+ {
+  "id": "sec_4_10_a24_ninety",
+  "text": "SEC",
+  "source": "ecfr_229.1202.txt, ecfr_229.1203.txt, ecfr_210_4-10.txt",
+  "cite": "17 CFR 210.4-10(a)(24)",
+  "quote": "If probabilistic methods are used, there should be at least a 90% probability that the quantities actually recovered will equal or exceed the estimate.",
+  "paraphrase": "With probabilistic methods, reasonable certainty means at least a 90 percent chance of meeting or exceeding the estimate.",
+  "found": true
+ }
+]

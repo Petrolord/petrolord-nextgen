@@ -1,0 +1,1104 @@
+# EC11 TEACHING DIGEST: Reserves & Resources under SPE-PRMS 2018
+
+# THIS FILE IS THE ONLY TEACHING TRUTH FOR THIS COURSE. Every number in every lesson, bank question, key truth and panel comes from a line below. The oracle, the golden file's expected figures, the fixture README, the negative control and the engine source comments are PROVENANCE and not teaching truth.
+
+# PRECISION. Every quantity, volume, barrel, BOE, Mscf, amount of money, cash flow, NPV, percentage, chance, probability, correlation, ratio and index prints to SIX decimals; years, year counts, project counts, draws, seeds and whole inputs print as whole numbers; a figure of sixteen or more significant digits at six decimals prints with its thousands grouped by commas; an engine message, reason and basis is printed verbatim, figures and all. Inside a message the engine prints money rounded to the cent (half away from zero, trailing zeros dropped), a computed quantity or percentage to six decimals (trailing zeros dropped), and a stated input as it was given.
+
+# ENGINE. engines/economics/prms.js, vendored sha-identical with petrolord-engines bb8ef5f (engines PR #278), 1035 lines, at its canonical path in the NextGen repository. It imports computeCashFlow and applyJV from engines/economics/cashflow.ts, mulberry32, createCorrelatedSampler, cholesky, fitTriangularToPercentiles, triInvCDF, normalCDF, quantile and mean from lib/stats/stats.js, and OUTCOME_LABELS, EXCEEDANCE_DEFINITION and outcomeOrderViolation from lib/conventions/percentile.js, and nothing else. It makes no network call.
+
+# AN ENGINE COURSE. There is no Suite app for this course. Every practical runs in the course's own calculator panels, which call this same vendored engine on the learner's own inputs.
+
+# THE DATA. Every Ekene project, forecast, price, cost, chance, distribution, estimate and movement is SYNTHETIC, written for this platform by a stated script. No real company, field, licence, reserves figure or regulator decision appears; the one national figure the course prints is the Commission's published total, cited with its date.
+
+# WHAT IS NEVER IN THIS FILE. No capstone field, no capstone case and no graded answer. The capstones run their own fields and the digest never names them.
+
+# NO PRMS PROSE. SPE-PRMS 2018 is licensed CC BY-NC-ND 4.0 and this course is sold, so the course cites its sections and teaches its ideas in its own words and never quotes it; the PRMS FAQs and the 2011 Application Guidelines are used the same way. Only public texts are quoted (section 3).
+
+# THIS COURSE TEACHES NO REPAIR HISTORY. Every section below describes what the engine does today.
+
+# SECTION 1: What this engine computes, and what it declines to compute (owned by Associate m01 and Expert m06)
+
+Every function takes plain arrays and objects and returns either a result object or an object with `error` and `field`, where `field` names the input it refused and the message starts with that name. Every result carries `reasons` (the working, in order) and a `basis` block naming the rules it applied and where they come from, so the working can be printed.
+
+| function | role | what it needs | what it returns |
+| --- | --- | --- | --- |
+| `classify` | the class and sub-class of one project | name (optional), discovery, recoveryProject, subClass, commerciality, economicStatus, projectStatus, reservesStatus, chances, nigeria (optional) | the class, the sub-class, the economic and reserves status, the chances and the chance of commerciality, each commerciality criterion met or not, the blockers, the category labels, the Nigerian notes and each decision with the section it applies |
+| `categorize` | the categories of one set of estimates | resourceClass, method, estimates, unit | the cumulative categories with their outcome labels, the incremental categories, the exceedance sentence and whether one value describes the range |
+| `economicLimit` | the economic limit and the entitlement of three technical forecasts | effectiveYear, forecasts, prices, costs, royalty, tax, workingInterestPct, licence, reportingBasis, discountRatePct, mscfPerBoe | per case the forecast years, the licence cut, the economic limit year and the trailing years cut, the undiscounted net cash flow and NPV at 100 percent and at the working interest, the technical, beyond-licence, beyond-limit, economic and reported quantities; the Reserves categories and increments or none; the status |
+| `aggregate` | the total of several projects of one class | resourceClass, level, unit, projects, correlation, seed, iterations | each project's low, best, high and mean, the arithmetic sums by category, the seeded Monte Carlo low, best, high and mean, the sum of the means, the portfolio effect, the risked mean for a risked class and what may be reported at the stated level |
+| `reconcile` | the reconciliation of a category set from one date to the next | resourceClass, unit, periodYears, opening, movements, closing, tolerance | each movement and the sum by type, the computed closing, the difference from the stated closing, whether it closes, the order and sign checks, the incremental form, and with production the replacement ratio and the life index |
+
+The stated constants, read from the exported `DEFAULTS` and `PRMS_FIGURES`:
+
+| constant | value | what it sets | where it comes from |
+| --- | --- | --- | --- |
+| `DEFAULTS.MAX_YEARS` | 100 | the most forecast years one economic-limit call accepts | cap |
+| `DEFAULTS.MAX_PROJECTS` | 50 | the most projects one aggregation accepts | cap |
+| `DEFAULTS.MAX_ITERATIONS` | 200000 | the most Monte Carlo draws one aggregation accepts | cap |
+| `DEFAULTS.MAX_DRAW_WORK` | 500000 | the most draws times projects one aggregation accepts | cap |
+| `DEFAULTS.MAX_MOVEMENTS` | 50 | the most movements one reconciliation accepts | cap |
+| `DEFAULTS.PSD_TOLERANCE` | 1e-9 | how far the Cholesky factor may miss a stated correlation matrix before the matrix is refused | engine convention |
+| `PRMS_FIGURES.reasonableTimeFrameYears` | 5 | the benchmark time-frame for development to start, in years | PRMS 2.1.2.3 and 2.1.3.6.4 (a recommended benchmark) |
+| `PRMS_FIGURES.significantDiscoveryRetentionMaxYears` | 10 | the most years a significant discovery area may be retained from its declaration | PIA 2021 s.78(9) |
+| `PRMS_FIGURES.retentionMinOnshoreShallowYears` | 5 | the fewest years a retention approval runs onshore and in shallow water | S.I. No. 37 of 2023 reg. 6(3) |
+| `PRMS_FIGURES.retentionMinDeepWaterYears` | 8 | the fewest years a retention approval runs in deep water | S.I. No. 37 of 2023 reg. 6(3) |
+| `PRMS_FIGURES.fieldDevelopmentPlanYears` | 2 | the years within which a field development plan follows a commercial discovery declaration | PIA 2021 s.79(1) |
+
+WHAT THE ENGINE DOES NOT DO, checked here against its exports and its source:
+- Its three imports are engines/economics/cashflow.ts (computeCashFlow for the economic limit, the cash flow and the NPV; applyJV for the working-interest and royalty scaling), lib/stats/stats.js (the canonical seeded Monte Carlo: mulberry32, createCorrelatedSampler, cholesky, the triangular fit and inverse, normalCDF, quantile and mean) and lib/conventions/percentile.js (the P90, P50 and P10 labels and the exceedance sentence). It carries no cash flow, NPV, discounting, sampler or percentile code of its own. The one function that samples is aggregate, on the stated seed.
+- It decides nothing an input or a text does not state. Every discovery status, recovery project, commerciality criterion, economic status, project status, sub-class, reserves status, chance, estimate, forecast, price, cost, royalty and its form, tax rate, allowance life, loss relief choice, working interest, licence expiry and renewal expectation, reporting basis, discount rate, BOE factor, distribution, correlation, seed, draw count, movement and tolerance is an input with no default, and a call without one is refused by name (section 6). The only figures it holds are the five in `PRMS_FIGURES`, each cited above, and its caps.
+- It reads no key it does not know. `ACCEPTED_KEYS` is exported with one shape for each of the 5 functions, and every call refuses an input key the function does not read, at every level, naming the key, its path and the accepted keys. A misspelt optional key is refused; it is never dropped silently.
+- It builds no production forecast, no in-place volume and no distribution from data, sets no price deck, computes no fiscal regime beyond a stated royalty and tax, and writes no reserves report. Section 28 lists each with the course that owns it.
+- Its exported names are, in full: ACCEPTED_KEYS, DEFAULTS, PRMS_FIGURES, aggregate, categorize, classify, economicLimit, reconcile.
+
+# SECTION 2: The sources, their editions and licences, and the date each was read (owned by Associate m01 l02 and Associate m06 and Expert m06 l02)
+
+THE RULE THIS COURSE FOLLOWS FOR EVERY STANDARD, LAW, REGULATION, GUIDE AND RELEASE IT USES. Each one is named with its edition or gazette date, its licence and the date it was read. Only publicly available texts are quoted, with their citation. A licensed or copyright text is taught by concept with its section numbers, and its printed figures are cited as figures; none of its prose is quoted. Every legal figure the engine applies was read from the cited text and is cited to its section or regulation; every other figure is a required input with no default. Every text below was read on 2026-09-27.
+
+| text | edition or date | licence | what the course reads from it | how the course uses it | date read |
+| --- | --- | --- | --- | --- | --- |
+| SPE-PRMS 2018, Petroleum Resources Management System (SPE, WPC, AAPG, SPEE, SEG, SPWLA, EAGE) | June 2018; the English text read from the SPE-hosted English-Chinese edition (Version 2023 V1.0, developed from PRMS 2018 V1.0, uploaded February 2024) | CC BY-NC-ND 4.0, as the SPE download page states | the classes, sub-classes, categories, the commerciality criteria, the economic limit, entitlement, aggregation and reconciliation, by section number | CITED BY SECTION, NEVER QUOTED: the licence is non-commercial and no-derivatives, and this course is sold | 2026-09-27 |
+| PRMS errata 2019 to 2022 (versions 1.01 to 1.03), consolidated | May 2022 | as SPE-PRMS 2018 | checked: no change to the sections the engine applies | cited, never quoted | 2026-09-27 |
+| SPE Oil and Gas Reserves Committee, PRMS Frequently Asked Questions | November 2022 (answers dated October 2022) | copyright SPE, all rights reserved | FAQ 3.3 and 3.4 (1P = 0 when the low case fails, with its example figures), 4.3 and 4.4 (the economic limit and the contract term), 6.9 (classes kept apart) | NUMBERS AND ANSWER NUMBERS ONLY: never quoted | 2026-09-27 |
+| Guidelines for Application of the PRMS | November 2011 (superseded by the 2022 edition, which is sold and was not used) | no licence printed; treated as copyright | 6.3 and Table 6.2 (arithmetic and probabilistic addition of two gas blocks, with its printed figures), 6.4 (risked volumes) | NUMBERS AND SECTION NUMBERS ONLY: never quoted | 2026-09-27 |
+| 17 CFR 229.1202 and 229.1203 (Regulation S-K Items 1202 and 1203) | the eCFR version current at 2026-09-01 | US federal text, public domain | 1202(a)(3), arithmetic sums above the field or property level; 1203(d), proved undeveloped reserves left undeveloped for five years or more | quoted, with citation | 2026-09-27 |
+| 17 CFR 210.4-10 (Regulation S-X Rule 4-10) | the eCFR version current at 2026-09-01 | US federal text, public domain | (a)(22) proved reserves and the expiry of the right to operate; (a)(24) the 90 percent probability | quoted, with citation | 2026-09-27 |
+| Petroleum Industry Act 2021 (Act No. 6) | Official Gazette No. 142, Vol. 108, 27 August 2021 | Nigerian federal law | s.7(i), the Commission's evaluation of national reserves; s.78(8), (9), (13) and (15), the declarations after an appraisal and retention; s.79(1), the field development plan; s.318, the definitions | quoted, with citation | 2026-09-27 |
+| Significant Crude Oil and Gas Discovery Regulations, 2023 | S.I. No. 37 of 2023, Official Gazette No. 111, Vol. 110, 20 June 2023 (made 24 May 2023) | Nigerian subsidiary legislation | regs 3 and 4, the two kinds of significant discovery; reg. 5(1), the declaration; reg. 6(2) and (3), the approval and the minimum retention periods; reg. 7(1)(b), (2) and (3), a declaration that does not meet the criteria | quoted, with citation | 2026-09-27 |
+| Nigerian Upstream Petroleum (Commercial) Regulations, 2025 | S.I. No. 7 of 2025, Official Gazette No. 84, Vol. 112, 5 May 2025 | Nigerian subsidiary legislation | reg. 6, a status report that includes a statement of the reserves situation | by concept only | 2026-09-27 |
+| NUPRC media release on the national annual petroleum reserves position as at 1 January 2026 | 1 April 2026 | a government release; its page reads all rights reserved | the 2P associated and non-associated gas figures and their total, and the reserves life indices | FIGURES ONLY, cited with the date: never quoted | 2026-09-27 |
+
+NOT FOUND, and said plainly. No gazetted NUPRC regulation or guideline on how reserves are booked or reported was found on the Commission's list of gazetted regulations read on 2026-09-27. The Nigerian content of this course is therefore the Act, S.I. No. 37 of 2023, the concept of the Commercial Regulations' status report, and the Commission's published national figures; the course states no Nigerian booking rule, because none was read.
+
+THE PAID 2022 GUIDELINES. The Guidelines for Application of the PRMS were revised in 2022; that edition is sold and was not read. The course cites the 2011 edition and names it so.
+
+The engine carries its citations in its own words. The `basis` of one call of each function, verbatim:
+
+| call | basis key | the engine's basis, verbatim |
+| --- | --- | --- |
+| classify (class-ekn-1) | classification | SPE-PRMS 2018 (June 2018, v1.03 with the 2022 errata; CC BY-NC-ND 4.0, cited by section): 2.1 and Table 1 |
+| classify (class-ekn-1) | categories | PRMS 2.2.2.2 |
+| classify (class-ekn-1) | nigeria | Petroleum Industry Act 2021 (Act No. 6), Official Gazette No. 142, Vol. 108, 27 August 2021 |
+| categorize (cat-reserves-cumulative) | categories | SPE-PRMS 2018 (June 2018, v1.03 with the 2022 errata; CC BY-NC-ND 4.0, cited by section): PRMS 2.2.2.2, 2.2.1.2, 2.2.2.8 |
+| categorize (cat-reserves-cumulative) | labels | lib/conventions/percentile.js (P90 = low estimate) |
+| economicLimit (econ-ekene) | economicLimit | computeCashFlow of engines/economics/cashflow.ts with apply_economic_limit (JV regime at 100%, the stated royalty and tax), checked against PRMS 3.1.3.1 |
+| economicLimit (econ-ekene) | economicTest | SPE-PRMS 2018 (June 2018, v1.03 with the 2022 errata; CC BY-NC-ND 4.0, cited by section): 3.1.2.1 (undiscounted cumulative net cash flow above 0, ADR included), 3.1.2.8 |
+| economicLimit (econ-ekene) | entitlement | applyJV of engines/economics/cashflow.ts (working interest and royalty scaling); PRMS 3.3.1 |
+| economicLimit (econ-ekene) | licence | PRMS 3.1.1.1(5), 3.1.3.1; FAQ 4.4 |
+| aggregate (agg-ekene-reserves) | aggregation | SPE-PRMS 2018 (June 2018, v1.03 with the 2022 errata; CC BY-NC-ND 4.0, cited by section): 4.2.5, 4.2.6; 17 CFR 229.1202(a)(3) (Regulation S-K Item 1202); Guidelines for Application of the PRMS (November 2011): 6.3 |
+| aggregate (agg-ekene-reserves) | monteCarlo | lib/stats/stats.js: createCorrelatedSampler (Gaussian copula, Cholesky), mulberry32, fitTriangularToPercentiles, quantile |
+| aggregate (agg-ekene-reserves) | labels | lib/conventions/percentile.js (P90 = the 0.1 quantile of the totals, the low estimate) |
+| reconcile (rec-ekene) | reconciliation | opening + movements = closing, category by category; production comes out of every Reserves category alike (the movement headings are the engine's stated convention) |
+| reconcile (rec-ekene) | sections | SPE-PRMS 2018 (June 2018, v1.03 with the 2022 errata; CC BY-NC-ND 4.0, cited by section): 3.1.3.5 (reconciliation, technical revision), 2.2.2.6 (reclassification without new information leaves the distribution unchanged) |
+
+LICENSED TEXTS IN THE ENGINE'S OWN WORDS. The basis lines cite SPE-PRMS 2018 by section with its licence, and the FAQ and the 2011 Guidelines by answer and section number; none of them quotes the texts' prose. A lesson that needs one of their ideas teaches it from the section number, the engine's stated arithmetic and the course's own words.
+
+# SECTION 3: The provisions this course quotes, verbatim, with their citations (owned by Associate m06 and Professional m06 l01 and Expert m01 l03)
+
+Each provision below is quoted exactly from a public text named in section 2, with whitespace collapsed; a dash the text prints is shown as a colon. Each is preceded by the course's plain paraphrase. A figure, a spelling or a space before a semicolon the text prints is quoted as printed. A gazette prints marginal notes beside its sections, and a quotation stops where a marginal note would break it.
+
+THE PETROLEUM INDUSTRY ACT 2021:
+
+PIA s.7(i): One function of the Commission is to evaluate the national reserves and set policy for prudent reservoir management.
+> "(i) undertake evaluation of national reserves and develop policies for prudent reservoir management practices ;" (PIA s.7(i))
+
+PIA s.78(8): When the appraisal programme is complete the licensee makes one of three declarations.
+> "(8) The licensee shall, upon the completion of the appraisal program" (PIA s.78(8))
+
+PIA s.78(8)(a) and (b): The first two declarations are a commercial discovery, or a significant gas or crude oil discovery.
+> "(a) declare a commercial discovery ; (b) declare a significant gas discovery or a significant crude oil discovery ; or" (PIA s.78(8)(a) and (b))
+
+PIA s.78(8)(c): The third is to tell the Commission the discovery is of no interest.
+> "(c) inform the Commission that the discovery is of no interest to the licensee." (PIA s.78(8)(c))
+
+PIA s.78(9): After a significant discovery is declared, the licensee may keep the area for a retention period the Commission sets.
+> "the licensee shall be entitled to retain the area of such significant gas discovery or significant crude oil discovery for a retention period as may be determined by the Commission," (PIA s.78(9))
+
+PIA s.78(9): The retention period runs at most ten years from the declaration.
+> "which shall not be more than 10 years from the day the declaration was made" (PIA s.78(9))
+
+PIA s.78(13): If no commercial discovery is declared by the end of the retention period, the area is relinquished at once.
+> "(13) Where, upon the expiry of the retention period determined under subsection (9), the licensee has not declared a commercial discovery, the area declared under subsection (9) shall be immediately relinquished by the licensee." (PIA s.78(13))
+
+PIA s.78(15): A discovery declared of no interest may have to be relinquished over its structure.
+> "(15) Where a licensee declares a discovery of no interest under subsection (3) or (8), the Commission may require the relinquishment of the parcels that cover the structure of such discovery." (PIA s.78(15))
+
+PIA s.79(1): Section 79 applies once a licensee declares a commercial discovery.
+> "declares a commercial discovery under section 78 (8) (a) of this Act, the" (PIA s.79(1))
+
+PIA s.79(1): The licensee then submits a field development plan to the Commission within two years of the declaration.
+> "licensee shall within two years of the declaration, submit to the Commission a" (PIA s.79(1))
+
+PIA s.318, "commercial discovery": A commercial discovery is one the licensee judges can be economically developed after weighing all the relevant economic factors.
+> "“commercial discovery” means a discovery of crude oil, natural gas or condensates within a petroleum prospecting licence or petroleum mining lease which can be economically developed in the opinion of the licensee or lessee after consideration of all relevant economic factors" (PIA s.318, "commercial discovery")
+
+PIA s.318, "significant crude oil discovery": A significant crude oil discovery is substantial and potentially commercial, and cannot yet be declared commercial for one of two stated reasons.
+> "“Significant crude oil discovery” means a discovery of crude oil that is substantial in terms of reserves and is potentially commercial, but cannot be declared commercial for one or both of the following reasons" (PIA s.318, "significant crude oil discovery")
+
+PIA s.318, "significant crude oil discovery", (b): One reason is that the discovery would be commercial only when developed jointly with other discoveries.
+> "(b) where the crude oil discovery would only be commercial when jointly developed with other existing discoveries or potential future discoveries ;" (PIA s.318, "significant crude oil discovery", (b))
+
+PIA s.318, "significant gas discovery": A significant gas discovery is substantial and potentially commercial, and cannot yet be declared commercial for one or more stated reasons.
+> "“significant gas discovery” means a discovery of natural gas that is substantial in terms of reserves and is potentially commercial, but cannot be declared commercial for one or more of the following reasons" (PIA s.318, "significant gas discovery")
+
+PIA s.318, "significant gas discovery", (a) and (b): Two of the reasons are no gas market in Nigeria and export markets still to be found.
+> "(a) no markets for natural gas within Nigeria ; (b) export markets need to be identified and developed ;" (PIA s.318, "significant gas discovery", (a) and (b))
+
+THE SIGNIFICANT CRUDE OIL AND GAS DISCOVERY REGULATIONS, 2023 (S.I. NO. 37 OF 2023):
+
+S.I. No. 37 of 2023, the heading: The Regulations are S.I. No. 37 of 2023, made under the Petroleum Industry Act 2021.
+> "S. I. No. 37 of 2023 PETROLEUM INDUSTRY ACT, NO. 6, 2021" (S.I. No. 37 of 2023, the heading)
+
+S.I. No. 37 of 2023 reg. 3: Regulation 3 repeats the Act's two reasons a substantial crude oil discovery cannot yet be declared commercial.
+> "be declared commercial due to one or both of the following reasons :" (S.I. No. 37 of 2023 reg. 3)
+
+S.I. No. 37 of 2023 reg. 3: A significant crude oil discovery is substantial in reserves terms and potentially commercial.
+> "that is substantial in terms of reserves and is potentially commercial, but cannot" (S.I. No. 37 of 2023 reg. 3)
+
+S.I. No. 37 of 2023 reg. 4: Regulation 4 defines a significant gas discovery.
+> "4. A Significant Gas Discovery shall be a discovery of natural gas that" (S.I. No. 37 of 2023 reg. 4)
+
+S.I. No. 37 of 2023 reg. 4(a) and (b): Its first two reasons are no gas market in Nigeria and export markets still to be developed.
+> "(a) there is no market for natural gas within Nigeria ; (b) export markets need to be identified and developed ;" (S.I. No. 37 of 2023 reg. 4(a) and (b))
+
+S.I. No. 37 of 2023 reg. 5(1): A significant discovery is declared by written notice to the Commission.
+> "shall be declared by a licensee by notifying the Commission in writing within" (S.I. No. 37 of 2023 reg. 5(1))
+
+S.I. No. 37 of 2023 reg. 5(1): The notice is due within 60 days after the appraisal programme is completed.
+> "60 days after completion of an appraisal programme pursuant to section" (S.I. No. 37 of 2023 reg. 5(1))
+
+S.I. No. 37 of 2023 reg. 6(2): The Commission approves a declaration within 90 days of the notice.
+> "(2) The Commission shall, within 90 days of receipt of a notification from a licensee under regulation 5 of these Regulations, approve the application." (S.I. No. 37 of 2023 reg. 6(2))
+
+S.I. No. 37 of 2023 reg. 6(3): An approval of retention is for at least five years onshore and in shallow water and at least eight years in deep water.
+> "(3) An approval pursuant to subregulation (2) of this regulation shall be for a minimum period of five years in the onshore and shallow water areas, and eight years in the deep-water areas," (S.I. No. 37 of 2023 reg. 6(3))
+
+S.I. No. 37 of 2023 reg. 6(3): The Commission may grant up to the maximum the Act allows.
+> "but the Commission may, at its discretion grant the maximum period prescribed under the Act." (S.I. No. 37 of 2023 reg. 6(3))
+
+S.I. No. 37 of 2023 reg. 7(1)(b): A licensee whose declaration fails the criteria says whether it will declare a commercial discovery or none of interest.
+> "whether it intends to declare a commercial discovery or that the discovery is of no interest." (S.I. No. 37 of 2023 reg. 7(1)(b))
+
+S.I. No. 37 of 2023 reg. 7(2): If it will declare a commercial discovery, it has two years to submit a field development plan.
+> "(2) Where the licensee informs the Commission that it intends to declare a commercial discovery, the Commission shall grant the licensee two years within which to submit a field development plan for the area in accordance with section 79 of the Act." (S.I. No. 37 of 2023 reg. 7(2))
+
+S.I. No. 37 of 2023 reg. 7(3): If the discovery is of no interest, the parcels over its structure are relinquished.
+> "(3) Where the licensee informs the Commission that the discovery is of no interest, the Commission shall, pursuant to section 78(15) of the Act, require the licensee to relinquish the parcels that cover the structure of such discovery from its licence area." (S.I. No. 37 of 2023 reg. 7(3))
+
+THE US CODE OF FEDERAL REGULATIONS, TITLE 17 (PUBLIC DOMAIN):
+
+17 CFR 229.1202(a)(3): For SEC reporting, total reserves are simple arithmetic sums of the property or field estimates, category by category.
+> "(3) Reported total reserves shall be simple arithmetic sums of all estimates for individual properties or fields within each reserves category." (17 CFR 229.1202(a)(3))
+
+17 CFR 229.1202(a)(3): Probabilistic aggregation stops at the field or property level.
+> "When probabilistic methods are used, reserves should not be aggregated probabilistically beyond the field or property level;" (17 CFR 229.1202(a)(3))
+
+17 CFR 229.1202(a)(3): Above that level the SEC rule adds the estimates arithmetically.
+> "they should be aggregated by simple arithmetic summation." (17 CFR 229.1202(a)(3))
+
+17 CFR 229.1203(d): A registrant explains proved undeveloped reserves left undeveloped for five years or more.
+> "(d) Explain the reasons why material amounts of proved undeveloped reserves in individual fields or countries remain undeveloped for five years or more after disclosure as proved undeveloped reserves." (17 CFR 229.1203(d))
+
+17 CFR 210.4-10(a)(22): The SEC defines proved reserves as quantities estimated with reasonable certainty to be economically producible.
+> "Proved oil and gas reserves are those quantities of oil and gas, which, by analysis of geoscience and engineering data, can be estimated with reasonable certainty to be economically producible" (17 CFR 210.4-10(a)(22))
+
+17 CFR 210.4-10(a)(22): Proved reserves stop at the expiry of the right to operate unless renewal is reasonably certain.
+> "prior to the time at which contracts providing the right to operate expire, unless evidence indicates that renewal is reasonably certain," (17 CFR 210.4-10(a)(22))
+
+17 CFR 210.4-10(a)(24): With probabilistic methods, reasonable certainty means at least a 90 percent chance of meeting or exceeding the estimate.
+> "If probabilistic methods are used, there should be at least a 90% probability that the quantities actually recovered will equal or exceed the estimate." (17 CFR 210.4-10(a)(24))
+
+35 provisions quoted: PIA 15, SI37 13, SEC 7. SPE-PRMS 2018, the FAQs, the 2011 Guidelines and the NUPRC release are not in this list: none of them is quoted.
+
+# SECTION 4: The published checks the engine reproduces (owned by Associate m06 l03 and Professional m04 l05 and Expert m01 l03 and Expert m02 l02 and Expert m03 l04)
+
+Four printed figures from the texts are run through the engine. The figures are cited as the texts print them (text); every other number is the engine's. quote_check.py checks that each text prints each figure cited here.
+
+CHECK ONE: THE FAQ 3.3 EXAMPLE (text: a technical low outcome of 5 and a best estimate of 7, the best being 5 + 2). The FAQ answer (numbers only, never quoted) takes the low case failing the economic test while the best passes. The golden input econ-faq33-low-fails states a one-year project: low 5000000, best 7000000 and high 9000000 barrels, an oil price of 10, capital of 60000000, no royalty, tax or opex, and the licence in the same year (stated). The engine returns (golden input):
+
+| case | undiscounted net cash flow at 100% | economic | reported oil |
+| --- | --- | --- | --- |
+| low | -10000000.000000 | false | 5000000.000000 |
+| best | 10000000.000000 | true | 7000000.000000 |
+| high | 30000000.000000 | true | 9000000.000000 |
+
+| category | oil |
+| --- | --- |
+| 1P | 0.000000 |
+| 2P | 7000000.000000 |
+| 3P | 9000000.000000 |
+| P1 | 0.000000 |
+| P2 | 7000000.000000 |
+| P3 | 2000000.000000 |
+
+The engine's reason on the low case, verbatim:
+> the low case is not economic: 1P = 0 and the 2P and 3P estimates stand (PRMS 3.1.2.8; FAQ 3.3); the low case quantities sit inside 2P, never in 1C (FAQ 3.4, no split classification)
+So 1P is 0.000000 and 2P is 7000000.000000, the whole best estimate: the P2 increment is 7000000.000000 (engine), and the low-case barrels are inside 2P. The same figures as a category set stated incrementally (golden input cat-faq33-incremental: first 5, second 2, third 3 MMbbl) give 1P 5.000000, 2P 7.000000 and 3P 10.000000 (engine) when the low case passes.
+
+CHECK TWO: THE 2011 GUIDELINES, TABLE 6.2 (text: two gas blocks A and B with an expectation of GIIP of 53.4 and 35.6, a Proved GIIP of 43.3 and 28.5 and a total Proved of 71.8, all in thousand million cubic metres; Fig. 6.5 prints the arithmetic Proved as 72 and the probabilistic Proved of independent blocks as 77). The Guidelines add the blocks by error propagation for symmetric distributions (section 6.3.3), so the golden input reads each block as a NORMAL distribution with the printed expectation as its mean and the expectation less the Proved as its 90 percent half-width: the standard deviation is that half-width over the standard normal 90th percentile. That reading is the Guidelines' own, stated as such; the engine takes whatever distribution a call states.
+
+| block | distribution (golden input) | mean | standard deviation | low estimate (engine) | the Proved the Guidelines print (text) |
+| --- | --- | --- | --- | --- | --- |
+| A | normal | 53.400000 | 7.881072 | 43.300000 | 43.3 |
+| B | normal | 35.600000 | 5.540159 | 28.500000 | 28.5 |
+
+ARITHMETIC. The arithmetic sum by category (engine): low 71.800000, best 89.000000, high 106.200000; the Guidelines print 71.8 in Table 6.2 and 72 on Fig. 6.5 (text).
+INDEPENDENT BLOCKS (golden input agg-ag2011-table62-independent: correlation 0, seed 2011, 200000 draws). The seeded Monte Carlo returns a P90 of 76.623299, a P50 of 89.004415 and a P10 of 101.376062, with a sampled mean of 89.020435 against the exact sum of the means 89.000000 (engine). The Guidelines print 77 (text). The exact low of a sum of two independent normals (derived: 89 less the square root of 10.1 squared plus 7.1 squared) is 76.654150; the sampled P90 differs from it by 0.030852 at these 200000 draws.
+NEAR TOTAL DEPENDENCE (golden input agg-ag2011-table62-dependent: correlation 0.999, seed 2011, 200000 draws). The sampled P90 returns to 71.774133 (engine), against the arithmetic 71.800000.
+THE SAME BLOCKS READ AS LOGNORMALS (stated probe). A lognormal through the same expectation and Proved (derived: its log standard deviation s solves s squared over 2 plus 1.2815515655446004 times s plus ln(Proved over expectation) = 0, and its standard deviation is the expectation times the square root of e to the s squared less 1) has a standard deviation of 8.289303 for A and 5.848198 for B; the engine reads their low estimates back as 43.300000 and 28.500000. On the same seed 2011 and 200000 draws the sampled P90 of the total is 76.434906 (engine). The reading moves the figure: the Guidelines' own symmetric reading is the one the golden input takes, and the course names both.
+
+CHECK THREE: THE NATIONAL GAS FIGURE (text: the NUPRC release of 1 April 2026 prints the 2P associated gas at 100.21 and the 2P non-associated gas at 114.98 trillion cubic feet as at 1 January 2026, a total of 215.19). The golden input agg-nuprc-2026-gas-2p states each published 2P figure as one value (a constant: low, best and high the same) at the above-field level, so the engine's category labels read 1P, 2P and 3P for the one stated figure; only the 2P is what was published.
+
+| project (golden input) | the stated 2P |
+| --- | --- |
+| AG, associated gas, 2P as published | 100.210000 |
+| NAG, non-associated gas, 2P as published | 114.980000 |
+
+The engine sums them to 215.190000 and reports "arithmetic" as what may be reported at the above-field level (engine, seed 1, 100 draws of two constants).
+
+CHECK FOUR: THE SEC SUMMATION RULE (17 CFR 229.1202(a)(3), quoted in section 3). The same projects aggregated at the "field" and at the "above-field" level (golden inputs agg-ekene-reserves and agg-ekene-reserves-above-field) return the same figures and differ in what may be reported:
+
+| golden input | level | arithmetic 1P | statistical P90 (seed and draws as stated) | reportable |
+| --- | --- | --- | --- | --- |
+| agg-ekene-reserves | field | 15.809794 | 17.300834 (seed 20271112, 20000 draws) | arithmetic-or-statistical |
+| agg-ekene-reserves-above-field | above-field | 15.809794 | 17.300834 (seed 20271112, 20000 draws) | arithmetic |
+
+The engine's reason at the above-field level, verbatim:
+> above the field level report the arithmetic sums, with the caution that the aggregate 1P may be very conservative and the aggregate 3P very optimistic (PRMS 4.2.5.4; 17 CFR 229.1202(a)(3) (Regulation S-K Item 1202)); the statistical figures serve portfolio analysis (PRMS 4.2.5.5)
+
+# SECTION 5: The Ekene field and its eight projects (owned by Associate m01 l03 and Associate m03 l04 and Professional m04 and Expert m01)
+
+Every teaching case in this course comes from one fixture file under test-data/economics/ekene-prms, written by a stated script that reproduces it. It is labelled SYNTHETIC in the file:
+> SYNTHETIC teaching data for the Ekene field (ours). No real company, field, licence, price, cost, reserves figure or regulator decision. The royalty, tax, prices and costs are synthetic stated figures, not the PIA 2021 or NTA 2025 rates.
+
+THE FIELD (fixture): Ekene field (synthetic) on the Ekene petroleum mining lease (synthetic). Operator EKO, Ekene Operator (synthetic), with a working interest of 70.000000 percent. Money in US$.
+
+THE EIGHT PROJECTS, each classified by the engine on the fixture's stated facts (the golden inputs class-ekn-1 to class-ekn-8 carry the same facts):
+
+| id | project (fixture) | discovery | recovery project | class (engine) | sub-class (engine) | chance of commerciality, percent (engine) | what holds it back (engine) |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| EKN-1 | Ekene Main waterflood (synthetic) | discovered | established-technology | Reserves | on-production | none | none |
+| EKN-2 | Ekene infill wells (synthetic) | discovered | established-technology | Reserves | approved-for-development | none | none |
+| EKN-3 | Ekene East gas (synthetic) | discovered | established-technology | Contingent Resources | development-on-hold | 50.000000 | financialAppropriations, timeFrame, economicStatus, market, facilities, firmIntention |
+| EKN-4 | Ekene North appraisal (synthetic) | discovered | established-technology | Contingent Resources | development-pending | 65.000000 | developmentPlan, financialAppropriations, approvals, firmIntention |
+| EKN-5 | Ekene West tight sand (synthetic) | discovered | technology-under-development | Contingent Resources | development-unclarified | 20.000000 | technology under development, developmentPlan, financialAppropriations, economicStatus, firmIntention |
+| EKN-6 | Ekene Deep prospect (synthetic) | undiscovered | established-technology | Prospective Resources | prospect | 20.000000 | none |
+| EKN-7 | Ekene Shallow lead (synthetic) | undiscovered | established-technology | Prospective Resources | lead | 10.500000 | none |
+| EKN-8 | Ekene Main residual oil (synthetic) | discovered | none | Discovered Unrecoverable | none | none | none |
+
+All 8 classes and sub-classes the fixture README states are the ones the engine returns (checked when this digest is built). Ekene Deep (EKN-6) is the same prospect the farm-out course prices, with the same chance of geologic discovery.
+
+THE ECONOMIC LIMIT OF EKN-1 (fixture): effective 2027; low, best and high technical forecasts from 2027 to 2041 (whole barrels a year, with gas at 0.800000 Mscf a barrel); oil at 65.000000 and gas at 2.500000 a unit, flat; opex 30000000.000000 a year; capital of 15000000.000000 in 2027; abandonment 40000000.000000; a 15.000000 percent royalty (form "royalty-interest"); tax at 30.000000 percent with 5-year straight-line allowances and loss carry forward true; a working interest of 70.000000 percent; a licence expiring in 2040 with renewal expected false; the "net-entitlement" basis; a discount rate of 10.000000 percent; 6.000000 Mscf per BOE (section 17).
+The royalty, the tax and the prices are synthetic figures chosen for teaching, and the fixture says so: they are not the rates of the Petroleum Industry Act 2021 or the Nigeria Tax Act 2025, which the pia course teaches.
+
+THE AGGREGATIONS (fixture): Reserves at the field level in MMbbl (EKN-1 triangular-fit, EKN-2 lognormal, EKN-U normal; correlation stated by pair; seed 20271112, 20000 draws), and Contingent Resources in MMboe (EKN-3 lognormal with a chance of commerciality of 50.000000 percent, EKN-4 triangular-fit with a chance of commerciality of 65.000000 percent, EKN-5 triangular with a chance of commerciality of 20.000000 percent; a uniform correlation of 0.300000; seed 20271113, 20000 draws) (section 21 and section 22).
+THE RECONCILIATION (fixture): the Ekene field Reserves in MMbbl over 1 year, opening 15.200000, 21.000000 and 27.500000, with 4 movements (production, revisions, transfers, improved-recovery) and a stated closing of 18.300000, 25.600000 and 33.900000 at a tolerance of 0.001000 (section 23).
+
+# SECTION 6: Every refusal, with the field it names and the engine's own words (owned by Associate m01 l05 and Associate m02 and Associate m04 and Professional m01 and Professional m02 and Professional m04 and Professional m06 and Expert m02 and Expert m03 and Expert m04 and Expert m06)
+
+A refusal is an object with `error` and `field`. The message starts with the name of the field it refuses and states the exact condition that failed: "<field> must <condition>; got <value>", the value as the engine prints it (a string in quotes, an absent value as nothing), or, for an unknown key, "<field> is not an accepted key; the accepted keys ... are ...". Each row below is a stated bad input from the golden file handed to the engine; the message is the engine's, verbatim. A result returned with a reason (a criterion not met, a low case that fails, a reconciliation that does not close) is a result. It is no refusal.
+
+| function | golden case | field | the engine's message, verbatim |
+| --- | --- | --- | --- |
+| `classify` | class-time-frame-6-contingent-subclass | `subClass` | subClass must be one of "development-pending", "development-on-hold", "development-unclarified", "development-not-viable" for Contingent Resources (not commercial: timeFrame); got "approved-for-development" |
+| `classify` | class-time-frame-6-project-status | `projectStatus` | projectStatus must be left out for Contingent Resources (the project status that sets a Reserves sub-class, PRMS 2.1.3.5); got {"finalInvestmentDecision":true,"onProduction":false} |
+| `classify` | class-refuse-nigeria-significant-reserves | `nigeria.declaration` | nigeria.declaration must be "commercial-discovery" for a project that meets every commerciality criterion: a significant discovery cannot be declared commercial (PIA 2021 s.318) and a discovery of no interest is not being developed (s.78(8)(c)); got "significant-gas-discovery" |
+| `classify` | class-refuse-nigeria-undiscovered | `nigeria` | nigeria must be left out for an undiscovered accumulation (PIA 2021 s.78(8) declarations follow a discovery); got {"declaration":"commercial-discovery","yearsSinceDeclaration":0} |
+| `classify` | class-refuse-nigeria-declaration | `nigeria.declaration` | nigeria.declaration must be one of "commercial-discovery", "significant-crude-oil-discovery", "significant-gas-discovery", "no-interest"; got "significant" |
+| `classify` | class-refuse-subclass-approved-stated-justified | `subClass` | subClass must be "approved-for-development" for this project (final investment decision taken; production yet to start: PRMS 2.1.3.5.5, Table 1); got "justified-for-development" |
+| `classify` | class-refuse-subclass-reserves-stated-pending | `subClass` | subClass must be "approved-for-development" for this project (final investment decision taken; production yet to start: PRMS 2.1.3.5.5, Table 1); got "development-pending" |
+| `classify` | class-refuse-subclass-contingent-stated-approved | `subClass` | subClass must be one of "development-pending", "development-on-hold", "development-unclarified", "development-not-viable" for Contingent Resources (not commercial: financialAppropriations, timeFrame, economicStatus, market, facilities, firmIntention); got "approved-for-development" |
+| `classify` | class-refuse-prospective-subclass | `subClass` | subClass must be one of "prospect", "lead", "play"; got "development-pending" |
+| `classify` | class-refuse-producing-without-fid | `projectStatus.finalInvestmentDecision` | projectStatus.finalInvestmentDecision must be true for a project on production (a producing project has passed its investment decision); got false |
+| `classify` | class-refuse-dp-not-producing | `reservesStatus` | reservesStatus must be "developed-non-producing" or "undeveloped" for a project that is not on production (developed producing reserves come from completion intervals open and producing, Table 2); got "developed-producing" |
+| `classify` | class-refuse-reserves-chances | `chances` | chances must be left out for Reserves (PRMS 2.1.3.3 requires a high degree of certainty in the chance of commerciality; no chance figure is carried); got {"developmentPct":95} |
+| `classify` | class-refuse-contingent-pg | `chances.geologicDiscoveryPct` | chances.geologicDiscoveryPct must be left out for a discovered accumulation (the chance of geologic discovery applies to Prospective Resources, PRMS 2.1.3.2); got 50 |
+| `classify` | class-refuse-contingent-no-chances | `chances` | chances must be an object { developmentPct } for Contingent Resources (PRMS 2.1.3.3: Pc = Pd); got nothing |
+| `classify` | class-refuse-contingent-project-status | `projectStatus` | projectStatus must be left out for Contingent Resources (the project status that sets a Reserves sub-class, PRMS 2.1.3.5); got {"finalInvestmentDecision":false,"onProduction":false} |
+| `classify` | class-refuse-prospective-commerciality | `commerciality` | commerciality must be left out for an undiscovered accumulation (PRMS 2.1.2 tests discovered quantities); got {"developmentPlan":true,"financialAppropriations":true,"timeFrame":{"startWithinYears":1,"longerJustified":false},"market":true,"facilities":true,"approvals":true,"firmIntention":true} |
+| `classify` | class-refuse-prospective-pd | `chances.developmentPct` | chances.developmentPct must be a number from 0 to 100; got nothing |
+| `classify` | class-refuse-unrecoverable-subclass | `subClass` | subClass must be left out for unrecoverable quantities (no recovery project applies); got "development-not-viable" |
+| `classify` | class-refuse-missing-criterion | `commerciality.market` | commerciality.market must be true or false (stated; no default); got nothing |
+| `classify` | class-refuse-criterion-not-boolean | `commerciality.approvals` | commerciality.approvals must be true or false (stated; no default); got "yes" |
+| `classify` | class-refuse-time-frame | `commerciality.timeFrame.startWithinYears` | commerciality.timeFrame.startWithinYears must be a finite number at or above 0; got -1 |
+| `classify` | class-refuse-economic-status | `economicStatus` | economicStatus must be one of "viable", "not-viable", "undetermined"; got "positive" |
+| `classify` | class-refuse-discovery | `discovery` | discovery must be one of "discovered", "undiscovered"; got "appraised" |
+| `classify` | class-refuse-unknown-key | `commerciality.markets` | commerciality.markets is not an accepted key; the accepted keys of commerciality are developmentPlan, financialAppropriations, timeFrame, market, facilities, approvals, firmIntention |
+| `classify` | class-refuse-unknown-top | `maturity` | maturity is not an accepted key; the accepted keys at the top level are name, discovery, recoveryProject, subClass, commerciality, economicStatus, projectStatus, reservesStatus, chances, nigeria |
+| `categorize` | cat-refuse-out-of-order | `estimates` | estimates must be ordered low <= best <= high (the P90 low estimate, the P50 best, the P10 high: P90 means a 90% probability the actual quantity meets or exceeds this value, per SPE PRMS.); got {"low":10,"best":8,"high":12} |
+| `categorize` | cat-refuse-prospective-incremental | `method` | method must be "cumulative" for Prospective Resources (PRMS 2.2.2.4 defines no incremental terms for them); got "incremental" |
+| `categorize` | cat-refuse-negative-increment | `estimates.second` | estimates.second must be a finite number at or above 0; got -1 |
+| `categorize` | cat-refuse-mixed-forms | `estimates.second` | estimates.second must be left out for the cumulative method (state low, best and high); got 1 |
+| `categorize` | cat-refuse-incremental-with-low | `estimates.low` | estimates.low must be left out for the incremental method (state first, second and third); got 1 |
+| `categorize` | cat-refuse-unit | `unit` | unit must be a non-empty string; got " " |
+| `categorize` | cat-refuse-class | `resourceClass` | resourceClass must be one of "reserves", "contingent", "prospective"; got "resources" |
+| `economicLimit` | econ-refuse-high-uneconomic | `forecasts.high` | forecasts.high must be a forecast that is economic when the best case is (tested on the same costs and prices, PRMS 2.2.0.3: an undiscounted net cash flow above 0); got -5000000 |
+| `economicLimit` | econ-refuse-limit-disagrees | `forecasts.low` | forecasts.low must be a forecast on which the canonical economic limit (cashflow.ts: trailing years whose revenue less royalty less opex is negative are cut, years with capital kept) and the PRMS 3.1.3.1 limit (the year the cumulative net cash flow before tax and ADR peaks) agree; they give 2030 and 2027; got "a low forecast from 2027 to 2030" |
+| `economicLimit` | econ-refuse-prices-short | `prices` | prices must have 15 rows, one a year from 2027 to 2041; got 14 |
+| `economicLimit` | econ-refuse-year-gap | `forecasts.best[3].year` | forecasts.best[3].year must be 2030 (one row a year from 2027, in order); got 2031 |
+| `economicLimit` | econ-refuse-capex-after-licence | `costs.capex[0].year` | costs.capex[0].year must be at most 2030, the licence expiry, when no renewal is expected; got 2031 |
+| `economicLimit` | econ-refuse-capex-duplicate | `costs.capex[1].year` | costs.capex[1].year must be a year no other capex row has; got 2027 |
+| `economicLimit` | econ-refuse-royalty-100 | `royalty.ratePct` | royalty.ratePct must be a number from 0 to below 100; got 100 |
+| `economicLimit` | econ-refuse-royalty-form | `royalty.form` | royalty.form must be one of "royalty-interest", "production-tax"; got "cash" |
+| `economicLimit` | econ-refuse-no-tax | `tax` | tax must be an object { ratePct, depreciationYears, lossCarryforward }; got nothing |
+| `economicLimit` | econ-refuse-loss-cf-unstated | `tax.lossCarryforward` | tax.lossCarryforward must be true or false (stated; no default); got nothing |
+| `economicLimit` | econ-refuse-wi-zero | `workingInterestPct` | workingInterestPct must be a number above 0 and at most 100; got 0 |
+| `economicLimit` | econ-refuse-licence-before | `licence.expiryYear` | licence.expiryYear must be an integer from 2027 to 2300; got 2026 |
+| `economicLimit` | econ-refuse-basis | `reportingBasis` | reportingBasis must be one of "gross", "working-interest", "net-entitlement"; got "net" |
+| `economicLimit` | econ-refuse-boe | `mscfPerBoe` | mscfPerBoe must be a finite number above 0; got 0 |
+| `economicLimit` | econ-refuse-opex-short | `costs.opex` | costs.opex must have 15 rows, one a year from 2027 to 2041; got 14 |
+| `economicLimit` | econ-refuse-negative-oil | `forecasts.low[0].oil` | forecasts.low[0].oil must be a finite number at or above 0; got -1 |
+| `economicLimit` | econ-refuse-unknown-key | `costs.adr` | costs.adr is not an accepted key; the accepted keys of costs are opex, capex, abandonment |
+| `aggregate` | agg-refuse-psd | `correlation` | correlation must be a positive semidefinite correlation matrix (the Cholesky factor misses the stated matrix by 0.8); got {"type":"uniform","rho":-0.6} |
+| `aggregate` | agg-refuse-rho-one | `correlation.rho` | correlation.rho must be a number above -1 and below 1 (the canonical sampler takes a correlation strictly between -1 and 1); got 1 |
+| `aggregate` | agg-refuse-missing-pair | `correlation.pairs` | correlation.pairs must be one pair for each of the 3 pairs of varying projects (0 is stated, never assumed); the first missing pair is EKN-2 and EKN-U; got "2 pairs" |
+| `aggregate` | agg-refuse-duplicate-pair | `correlation.pairs[3]` | correlation.pairs[3] must be a pair stated once; got {"a":"EKN-2","b":"EKN-1","rho":0.5} |
+| `aggregate` | agg-refuse-pair-constant | `correlation.pairs[3].b` | correlation.pairs[3].b must be one of "EKN-1", "EKN-2", "EKN-U"; got "EKN-C" |
+| `aggregate` | agg-refuse-no-correlation | `correlation` | correlation must be an object { type: "uniform", rho } or { type: "pairs", pairs } (stated; no default); got nothing |
+| `aggregate` | agg-refuse-no-seed | `seed` | seed must be an integer from 0 to 4294967295 (the mulberry32 seed; no default); got nothing |
+| `aggregate` | agg-refuse-iterations | `iterations` | iterations must be an integer from 100 to 200000; got 50 |
+| `aggregate` | agg-refuse-work | `iterations` | iterations must be at most 45454 for 11 projects (iterations x projects at most 500000); got 200000 |
+| `aggregate` | agg-refuse-tri-fit-inexact | `projects[0].estimates` | projects[0].estimates must be low, best and high that a triangular distribution passes through exactly (lib/stats fitTriangularToPercentiles): the best estimate sits too near the low estimate for any triangular; got {"low":10,"best":15,"high":24} |
+| `aggregate` | agg-refuse-tri-fit-negative | `projects[0].estimates` | projects[0].estimates must be low, best and high that a triangular distribution passes through exactly (lib/stats fitTriangularToPercentiles): the best estimate sits too near the low estimate for any triangular; got {"low":0.1,"best":1,"high":3} |
+| `aggregate` | agg-refuse-normal-negative-low | `projects[2].distribution` | projects[2].distribution must be a normal whose low estimate (the mean less 1.2815515655446004 standard deviations, here -0.281552) stays at or above 0; got {"type":"normal","mean":1,"stdDev":1} |
+| `aggregate` | agg-refuse-stated-with-estimates | `projects[1].estimates` | projects[1].estimates must be left out when the distribution is stated (the engine reads the estimates off it); got {"low":1,"best":2,"high":3} |
+| `aggregate` | agg-refuse-reserves-chance | `projects[0].chanceOfCommercialityPct` | projects[0].chanceOfCommercialityPct must be left out for Reserves (their chance of commerciality is not a stated figure, PRMS 2.1.3.3); got 100 |
+| `aggregate` | agg-refuse-contingent-no-chance | `projects[0].chanceOfCommercialityPct` | projects[0].chanceOfCommercialityPct must be a number from 0 to 100; got nothing |
+| `aggregate` | agg-refuse-duplicate-id | `projects[3].id` | projects[3].id must be an id no other project has; got "EKN-1" |
+| `aggregate` | agg-refuse-triangular-order | `projects[2].distribution` | projects[2].distribution must be a triangular with min <= mode <= max and min < max; got {"type":"triangular","min":3,"mode":2,"max":6} |
+| `aggregate` | agg-refuse-level | `level` | level must be one of "field", "above-field"; got "company" |
+| `aggregate` | agg-refuse-dist-type | `projects[0].distribution.type` | projects[0].distribution.type must be one of "triangular-fit", "triangular", "lognormal", "normal"; got "beta" |
+| `aggregate` | agg-refuse-unknown-key | `correlation.matrix` | correlation.matrix is not an accepted key; the accepted keys of correlation are type, rho, pairs |
+| `reconcile` | rec-refuse-contingent-production | `movements[0].type` | movements[0].type must be one of "revisions", "improved-recovery", "extensions-and-discoveries", "acquisitions", "divestments", "transfers" for Contingent Resources (produced quantities come out of Reserves; sub-economic production moves from Contingent Resources to production and is shown as a revision, PRMS 3.1.3.5); got "production" |
+| `reconcile` | rec-refuse-production-by-category | `movements[0].low` | movements[0].low must be left out for production (one quantity applies to every category); got 1 |
+| `reconcile` | rec-refuse-negative-addition | `movements[0].low` | movements[0].low must be a finite number at or above 0; got -1 |
+| `reconcile` | rec-refuse-negative-divestment | `movements[0].low` | movements[0].low must be a finite number at or above 0; got -1 |
+| `reconcile` | rec-refuse-quantity-on-revision | `movements[0].quantity` | movements[0].quantity must be left out for revisions (state low, best and high); got 1 |
+| `reconcile` | rec-refuse-type | `movements[0].type` | movements[0].type must be one of "revisions", "improved-recovery", "extensions-and-discoveries", "acquisitions", "divestments", "transfers", "production"; got "discoveries" |
+| `reconcile` | rec-refuse-opening-order | `opening` | opening must be ordered low <= best <= high (the P90 low estimate, the P50 best, the P10 high: P90 means a 90% probability the actual quantity meets or exceeds this value, per SPE PRMS.); got {"low":21,"best":15.2,"high":27.5} |
+| `reconcile` | rec-refuse-no-tolerance | `tolerance` | tolerance must be a finite number at or above 0; got nothing |
+| `reconcile` | rec-refuse-period | `periodYears` | periodYears must be a finite number above 0; got 0 |
+| `reconcile` | rec-refuse-class | `resourceClass` | resourceClass must be one of "reserves", "contingent"; got "prospective" |
+| `reconcile` | rec-refuse-unknown-key | `movements[0].year` | movements[0].year is not an accepted key; the accepted keys of movements[0] are type, low, best, high, quantity, note |
+
+80 refusals across 5 functions: classify 25, categorize 7, economicLimit 17, aggregate 20, reconcile 11.
+
+REFUSALS A PANEL CONTROL CAN PRODUCE. Each calculator panel writes every required input into the box through a visible control, and setting a control to "not stated" removes the input. The calls below are not golden cases; each is a golden input with one input removed or changed (stated probes), handed to the engine here, and the message is the engine's, verbatim:
+
+| golden input | the change (stated probe) | field | the engine's message, verbatim |
+| --- | --- | --- | --- |
+| class-ekn-1 | discovery removed (the discovery control set to not stated) | `discovery` | discovery must be one of "discovered", "undiscovered"; got nothing |
+| class-ekn-1 | commerciality.market removed | `commerciality.market` | commerciality.market must be true or false (stated; no default); got nothing |
+| class-ekn-1 | economicStatus removed | `economicStatus` | economicStatus must be one of "viable", "not-viable", "undetermined"; got nothing |
+| class-ekn-6 | chances.developmentPct removed | `chances.developmentPct` | chances.developmentPct must be a number from 0 to 100; got nothing |
+| cat-reserves-cumulative | method removed (the method control set to not stated) | `method` | method must be one of "cumulative", "incremental"; got nothing |
+| econ-ekene | royalty.form removed (the royalty form control set to not stated) | `royalty.form` | royalty.form must be one of "royalty-interest", "production-tax"; got nothing |
+| econ-ekene | licence.renewalExpected removed | `licence.renewalExpected` | licence.renewalExpected must be true or false (stated; no default); got nothing |
+| econ-ekene | reportingBasis removed (the reporting basis control set to not stated) | `reportingBasis` | reportingBasis must be one of "gross", "working-interest", "net-entitlement"; got nothing |
+| econ-ekene | mscfPerBoe removed | `mscfPerBoe` | mscfPerBoe must be a finite number above 0; got nothing |
+| agg-ekene-reserves | correlation removed (the correlation control set to not stated) | `correlation` | correlation must be an object { type: "uniform", rho } or { type: "pairs", pairs } (stated; no default); got nothing |
+| agg-ekene-reserves | seed removed | `seed` | seed must be an integer from 0 to 4294967295 (the mulberry32 seed; no default); got nothing |
+| agg-ekene-contingent | level removed (the level control set to not stated) | `level` | level must be one of "field", "above-field"; got nothing |
+| rec-ekene | tolerance removed | `tolerance` | tolerance must be a finite number at or above 0; got nothing |
+
+THE ORDER OF REFUSALS. A box that carries an unknown key AND lacks a required input is refused on the unknown key first: every function checks its accepted keys before it reads an input. On econ-ekene with reportingBasis removed and a key basis added (stated probe), the engine's message, verbatim:
+> basis is not an accepted key; the accepted keys at the top level are effectiveYear, forecasts, prices, costs, royalty, tax, workingInterestPct, licence, reportingBasis, discountRatePct, mscfPerBoe
+
+Four rules the table shows:
+- An input with no default is refused when it is missing, and the message says so: a discovery status, a recovery project, every commerciality criterion (each true or false, stated), an economic status, a project status for Reserves, a reserves status, the chances of a risked class, a category method, a royalty form, a loss relief choice, a renewal expectation, a reporting basis, a BOE factor, a distribution type, a correlation, a seed, a draw count and a reconciliation tolerance.
+- An input key a function does not read is refused at whatever level it sits (a top-level option, a criterion, a forecast row, a project, a distribution, a movement), with the path to the key and the full list of accepted keys.
+- An input that contradicts the class the facts give is refused and the message names the class: a sub-class the facts do not support, a chance stated for Reserves, a project status stated for Contingent Resources, a significant or no-interest declaration on a project that meets every commerciality criterion.
+- A stated figure inside a message is printed as it was given; a computed one prints to six decimals.
+
+# SECTION 7: What is graded, where the practicals run, and what is never graded (owned by Associate m01 l05 and Expert m02 l04 and Expert m06)
+
+EVERY GRADED NUMBER IN THIS COURSE IS A RETURN VALUE OF THIS ENGINE ON FIXED INPUTS. A capstone field, a question key and a panel figure are each computed by a function in the table of section 1 on inputs written down in advance. No graded figure comes from the Monte Carlo of aggregate, so the same inputs give the same number on any machine, and there is exactly one right answer.
+
+THE PRACTICALS RUN IN THE COURSE'S OWN CALCULATOR PANELS. This is an engine course with no Suite app. Each tier has a calculator panel that calls this same vendored engine: the classification calculator (Associate), the reserves calculator (Professional) and the aggregation calculator (Expert). A learner types or pastes their own inputs; the panel prints what the engine returns, every refusal in the engine's own words, and the reasons beside each figure.
+
+WHAT A CAPSTONE STATES. Each capstone runs its own synthetic field, which this digest does not print, and states every input a figure depends on: each project's discovery status, recovery project and chances; each category set with its class, method and unit; the three technical forecasts, prices, costs, royalty and its form, tax, working interest, licence, reporting basis, discount rate and BOE factor; each project's distribution and chance, the correlation, the seed and the draws; the opening, the movements, the stated closing and the tolerance. Each graded figure is quoted to six decimals as the panel prints it.
+
+WHAT IS NEVER GRADED. No graded figure depends on a reading the engine states (section 25): every capstone field is the same number under each reading the engine takes and under the alternative it names. No graded figure is a Monte Carlo draw: the statistical P90, P50, P10 and mean of section 21 are taught with their seed and draw count and are never graded as exact figures.
+
+WHAT A COMPUTED FIGURE DOES NOT SAY. A class is what the stated facts give; a category is a stated estimate put in its place; an economic limit is where the stated forecast, prices and costs stop paying; a total is a sum or a sampled distribution of stated distributions; a reconciliation is stated movements added up. None is an audit of the facts, a forecast of what a field will produce or a regulator's decision. Each figure is quoted with its inputs for that reason.
+
+# SECTION 8: The resources framework: discovered or undiscovered, a recovery project, and the class (owned by Associate m01 and Associate m02 l01 and Associate m02 l03)
+
+THE ENGINE'S DECISION LIST, in its own order (the reasons of every classify call print each step with the PRMS section it applies):
+1. Discovery: a known accumulation is discovered; a potential one is undiscovered (PRMS 2.1.1.1).
+2. A recovery project: established technology, technology under development, or none. With none, the quantities are Discovered Unrecoverable or Undiscovered Unrecoverable, and nothing else is read (PRMS 2.1.0.1, 2.1.1.2).
+3. Undiscovered with a project: Prospective Resources, with a stated sub-class and stated chances (PRMS 2.1.0.1, Table 1).
+4. Discovered with a project: the commerciality test. Every criterion met with established technology gives Reserves; anything else gives Contingent Resources, with each blocker named (PRMS 2.1.2.1, Table 1).
+
+UNRECOVERABLE. Ekene Main residual oil (fixture EKN-8) is discovered with no recovery project; the engine's reasons, verbatim:
+> discovery: discovered: a known accumulation (PRMS 2.1.1.1)
+> recovery project: none applies with established technology or technology under development: Discovered Unrecoverable (PRMS 2.1.0.1, 2.1.1.2)
+
+It returns class "Discovered Unrecoverable", no sub-class and no category labels (labels null); its basis reads, verbatim:
+> none: unrecoverable quantities are not categorized
+The same with an undiscovered accumulation (golden input class-undiscovered-unrecoverable) returns "Undiscovered Unrecoverable".
+
+THE EIGHT EKENE DECISIONS, each class and sub-class decision the engine records, verbatim (golden inputs class-ekn-1 to class-ekn-8):
+
+| id | decision | section | outcome |
+| --- | --- | --- | --- |
+| EKN-1 | class | PRMS 2.1.2.1, Table 1 | Reserves: every commerciality criterion is met with established technology |
+| EKN-1 | sub-class | PRMS 2.1.3.5, Table 1 | on-production: on production, selling petroleum to market |
+| EKN-2 | class | PRMS 2.1.2.1, Table 1 | Reserves: every commerciality criterion is met with established technology |
+| EKN-2 | sub-class | PRMS 2.1.3.5.5, Table 1 | approved-for-development: final investment decision taken; production yet to start |
+| EKN-3 | class | PRMS 2.1.2.1, Table 1 | Contingent Resources: not commercial (financialAppropriations, timeFrame, economicStatus, market, facilities, firmIntention) |
+| EKN-3 | sub-class | PRMS 2.1.3.5.6, Table 1 | development-on-hold (stated) |
+| EKN-4 | class | PRMS 2.1.2.1, Table 1 | Contingent Resources: not commercial (developmentPlan, financialAppropriations, approvals, firmIntention) |
+| EKN-4 | sub-class | PRMS 2.1.3.5.6, Table 1 | development-pending (stated) |
+| EKN-5 | class | PRMS Table 1 (Contingent Resources guidelines) | Contingent Resources: not commercial (technology under development, developmentPlan, financialAppropriations, economicStatus, firmIntention) |
+| EKN-5 | sub-class | PRMS 2.1.3.5.6, Table 1 | development-unclarified (stated) |
+| EKN-6 | class | PRMS 2.1.0.1, Table 1 | Prospective Resources |
+| EKN-6 | sub-class | PRMS 2.1.3.5.9, Table 1 | prospect (stated) |
+| EKN-7 | class | PRMS 2.1.0.1, Table 1 | Prospective Resources |
+| EKN-7 | sub-class | PRMS 2.1.3.5.9, Table 1 | lead (stated) |
+
+THE PROJECT IS THE UNIT. Every classify call classifies one project: the engine takes one set of facts and returns one class. A field with several projects (Ekene has eight) carries a class for each; the same accumulation can hold Reserves in one project and Contingent Resources in another.
+
+# SECTION 9: Prospective Resources: the sub-classes and the chance of commerciality (owned by Associate m02 l02 and Associate m02 l04 and Professional m01 l04)
+
+THE CHANCE OF COMMERCIALITY OF AN UNDISCOVERED PROJECT is the chance of geologic discovery times the chance of development: Pc = Pg x Pd (PRMS 2.1.3.3). The engine's decision line on Ekene Deep (golden input class-ekn-6), verbatim:
+> Pc = Pg x Pd = 25% x 80% = 20%
+
+| golden input | sub-class | Pg, percent (stated) | Pd, percent (stated) | Pc, percent (engine) |
+| --- | --- | --- | --- | --- |
+| class-ekn-6 | prospect | 25.000000 | 80.000000 | 20.000000 |
+| class-ekn-7 | lead | 15.000000 | 70.000000 | 10.500000 |
+| class-play | play | 10.000000 | 50.000000 | 5.000000 |
+| class-pg-zero | prospect | 0.000000 | 50.000000 | 0.000000 |
+
+A CHANCE OF GEOLOGIC DISCOVERY OF 0 (golden input class-pg-zero) gives a Pc of 0.000000 (engine): the class is still "Prospective Resources", sub-class "prospect".
+
+THE THREE SUB-CLASSES of Prospective Resources are stated, and the engine checks each is one of them: "prospect" (a potential accumulation mature enough to drill), "lead" (one that needs more data to become a prospect) and "play" (a family of such accumulations in a basin), in the course's own words (PRMS 2.1.3.5.9, Table 1). A sub-class outside the three is refused, verbatim (golden input class-refuse-prospective-subclass):
+> subClass must be one of "prospect", "lead", "play"; got "development-pending"
+
+Prospective Resources carry no commerciality test and no project status: stating either is refused (golden inputs class-refuse-prospective-commerciality and class-refuse-prospective-pd, in the table of section 6).
+
+# SECTION 10: Reserves and Contingent Resources: what makes a project commercial, and the reserves status (owned by Associate m03)
+
+COMMERCIAL, IN THE ENGINE'S TERMS. A discovered project with a recovery project is Reserves when every one of the seven commerciality criteria and the firm intention to proceed is met with established technology; otherwise it is Contingent Resources, and the engine names each criterion that holds it back. The criteria, as the engine names them in its reasons (golden input class-ekn-1), verbatim:
+
+| criterion key | the engine's wording | section | EKN-1 (engine) |
+| --- | --- | --- | --- |
+| developmentPlan | (1) a technically mature, feasible development plan | PRMS 2.1.2.1(1) | met |
+| financialAppropriations | (2) financial appropriations in place or highly likely to be secured | PRMS 2.1.2.1(2), 2.1.2.4 | met |
+| timeFrame | (3) a reasonable time-frame for development | PRMS 2.1.2.1(3), 2.1.2.3 | met |
+| economicStatus | (4) positive economics (economic status "viable") | PRMS 2.1.2.1(4), 2.1.3.7.1 | met |
+| market | (5) a reasonable expectation of a market for the sales quantities | PRMS 2.1.2.1(5) | met |
+| facilities | (6) production and transportation facilities available or can be made available | PRMS 2.1.2.1(6) | met |
+| approvals | (7) legal, contractual, environmental, regulatory and government approvals in place or forthcoming | PRMS 2.1.2.1(7) | met |
+| firmIntention | commitment: the entity's firm intention to proceed with development | PRMS 2.1.2.1, 2.1.2.3 | met |
+
+THE THREE EKENE CONTINGENT PROJECTS, each with the criteria that hold it back (engine):
+
+| id | project (fixture) | sub-class (stated, checked) | economic status (stated) | blockers (engine) | Pc = Pd, percent (engine) |
+| --- | --- | --- | --- | --- | --- |
+| EKN-3 | Ekene East gas (synthetic) | development-on-hold | undetermined | financialAppropriations, timeFrame, economicStatus, market, facilities, firmIntention | 50.000000 |
+| EKN-4 | Ekene North appraisal (synthetic) | development-pending | viable | developmentPlan, financialAppropriations, approvals, firmIntention | 65.000000 |
+| EKN-5 | Ekene West tight sand (synthetic) | development-unclarified | not-viable | technology under development, developmentPlan, financialAppropriations, economicStatus, firmIntention | 20.000000 |
+
+The class decision on EKN-5, verbatim:
+> Contingent Resources: not commercial (technology under development, developmentPlan, financialAppropriations, economicStatus, firmIntention)
+
+TECHNOLOGY UNDER DEVELOPMENT ALONE (golden input class-tech-under-development-only): every criterion met, and the recovery project states technology under development, so the class is "Contingent Resources" and the blockers are "technology under development" (engine).
+
+THE CHANCE OF COMMERCIALITY OF A DISCOVERED PROJECT is the chance of development alone: Pc = Pd (PRMS 2.1.3.3). The engine's decision line on EKN-4, verbatim:
+> Pc = Pd = 65%
+Reserves carry no chance figure; stating one is refused, verbatim (golden input class-refuse-reserves-chances):
+> chances must be left out for Reserves (PRMS 2.1.3.3 requires a high degree of certainty in the chance of commerciality; no chance figure is carried); got {"developmentPct":95}
+
+THE RESERVES STATUS is stated for Reserves and checked against the project status (PRMS 2.1.3.6, Table 2): "developed-producing", "developed-non-producing" or "undeveloped".
+
+| id | project (fixture) | sub-class (engine) | reserves status (stated) |
+| --- | --- | --- | --- |
+| EKN-1 | Ekene Main waterflood (synthetic) | on-production | developed-producing |
+| EKN-2 | Ekene infill wells (synthetic) | approved-for-development | undeveloped |
+
+Developed producing needs a project on production; stated on one that is not, it is refused, verbatim (golden input class-refuse-dp-not-producing):
+> reservesStatus must be "developed-non-producing" or "undeveloped" for a project that is not on production (developed producing reserves come from completion intervals open and producing, Table 2); got "developed-producing"
+
+# SECTION 11: Categories and the range of uncertainty: low, best and high in each class (owned by Associate m04)
+
+THREE ESTIMATES, THREE LABELS PER CLASS. Every class with a project carries a low, a best and a high estimate, and the engine labels each by its class (PRMS 2.2.2.2 to 2.2.2.4):
+
+| class | low | best | high | incremental labels (engine) |
+| --- | --- | --- | --- | --- |
+| Reserves | 1P | 2P | 3P | Proved (P1), Probable (P2), Possible (P3) |
+| Contingent Resources | 1C | 2C | 3C | C1, C2, C3 |
+| Prospective Resources | 1U | 2U | 3U | none (PRMS 2.2.2.4) |
+
+THE EKENE MAIN RESERVES (golden input cat-reserves-cumulative: 8.890000, 16.650000 and 24.990000 MMbbl, stated cumulatively):
+
+| label | case | probability label | value (engine) |
+| --- | --- | --- | --- |
+| 1P | low | P90 | 8.890000 |
+| 2P | best | P50 | 16.650000 |
+| 3P | high | P10 | 24.990000 |
+
+| increment | value (engine) |
+| --- | --- |
+| Proved (P1) | 8.890000 |
+| Probable (P2) | 7.760000 |
+| Possible (P3) | 8.340000 |
+
+The engine's reasons, verbatim:
+> Reserves, cumulative method (PRMS 2.2.2.2; PRMS 2.2.1.4, 2.2.2.1)
+> 1P (low estimate, P90: at least 90% probability of being met or exceeded when probabilistic, PRMS 2.2.1.2): 8.89 MMbbl
+> 2P (best estimate, P50: at least 50% probability of being met or exceeded when probabilistic, PRMS 2.2.1.2): 16.65 MMbbl
+> 3P (high estimate, P10: at least 10% probability of being met or exceeded when probabilistic, PRMS 2.2.1.2): 24.99 MMbbl
+> incremental: Proved (P1) 8.89, Probable (P2) 7.76, Possible (P3) 8.34 MMbbl; 1P = P1, 2P = P1 + P2, 3P = P1 + P2 + P3
+
+CONTINGENT RESOURCES BOTH WAYS. The same Ekene North estimates stated incrementally (golden input cat-contingent-incremental: C1 3.000000, C2 1.500000, C3 2.000000) and cumulatively (golden input cat-contingent-cumulative: 1C 3.000000, 2C 4.500000, 3C 6.500000) return the same categories (engine):
+
+| golden input | 1C | 2C | 3C | C1 | C2 | C3 |
+| --- | --- | --- | --- | --- | --- | --- |
+| cat-contingent-incremental | 3.000000 | 4.500000 | 6.500000 | 3.000000 | 1.500000 | 2.000000 |
+| cat-contingent-cumulative | 3.000000 | 4.500000 | 6.500000 | 3.000000 | 1.500000 | 2.000000 |
+
+PROSPECTIVE RESOURCES (golden input cat-prospective): 1U 12.000000, 2U 30.000000, 3U 70.000000 MMbbl (engine), and no increments; the engine's reason, verbatim:
+> incremental: no terms are defined for Prospective Resources (PRMS 2.2.2.4)
+Stating the incremental method for Prospective Resources is refused, verbatim (golden input cat-refuse-prospective-incremental):
+> method must be "cumulative" for Prospective Resources (PRMS 2.2.2.4 defines no incremental terms for them); got "incremental"
+
+ONE VALUE FOR THE RANGE (golden input cat-single-value: low, best and high all 2.000000). The engine returns singleValue true and adds, verbatim:
+> the low, best and high estimates are equal: a single value may describe the expected result (PRMS 2.2.1.3)
+
+OUT OF ORDER. The low estimate may not exceed the best, nor the best the high; the engine refuses, verbatim (golden input cat-refuse-out-of-order):
+> estimates must be ordered low <= best <= high (the P90 low estimate, the P50 best, the P10 high: P90 means a 90% probability the actual quantity meets or exceeds this value, per SPE PRMS.); got {"low":10,"best":8,"high":12}
+
+# SECTION 12: The low estimate and probability: exceedance, P90 as the low, and the two methods (owned by Associate m05)
+
+THE EXCEEDANCE SENTENCE, as the canonical percentile convention (lib/conventions/percentile.js) states it and the engine returns it on every categorize call, verbatim:
+> P90 means a 90% probability the actual quantity meets or exceeds this value, per SPE PRMS.
+
+| case | outcome label (lib/conventions/percentile.js) | what it means here |
+| --- | --- | --- |
+| low | P90 | at least 90 percent probability of being met or exceeded, when the method is probabilistic |
+| best | P50 | at least 50 percent probability |
+| high | P10 | at least 10 percent probability |
+
+THE LOW ESTIMATE CARRIES THE HIGHEST PROBABILITY. The P90 is the low estimate: the quantity that is met or exceeded with at least 90 percent probability is the smallest of the three. The engine prints the probability beside each category (golden input cat-reserves-cumulative), verbatim:
+> 1P (low estimate, P90: at least 90% probability of being met or exceeded when probabilistic, PRMS 2.2.1.2): 8.89 MMbbl
+> 2P (best estimate, P50: at least 50% probability of being met or exceeded when probabilistic, PRMS 2.2.1.2): 16.65 MMbbl
+> 3P (high estimate, P10: at least 10% probability of being met or exceeded when probabilistic, PRMS 2.2.1.2): 24.99 MMbbl
+
+DETERMINISTIC AND PROBABILISTIC. The engine takes three estimates however they were made: by a deterministic method (a low, a best and a high scenario each worked out on its own) or by a probabilistic one (read off a distribution). The probability wording holds when the method is probabilistic, and the engine says so in each line ("when probabilistic"). In a deterministic estimate the low scenario is chosen to carry a high degree of confidence; the course says so in its own words (PRMS 2.2.1.2 and 2.2.1.4).
+
+INCREMENTAL AND CUMULATIVE, IN WORDS. Cumulative categories count up from zero: 1P, then 2P that includes it, then 3P that includes both. Incremental categories are the slices: Proved (P1) is the 1P, Probable (P2) is what the 2P adds to it, Possible (P3) is what the 3P adds to the 2P. The Associate tier reads the two forms; the Professional tier builds one from the other (section 16).
+
+A CATEGORY TABLE, READ. A table of categories names the class, the unit, the method, the three labels, the probability label beside each and, where the class has them, the increments. The engine's cumulative rows carry exactly those fields: case, label, probability and value.
+
+# SECTION 13: Nigerian terms in words: the declarations after an appraisal, a significant discovery and its retention, the field development plan and the national figures (owned by Associate m06)
+
+WHAT THE ACT AND THE REGULATIONS PROVIDE, in the course's words (the provisions are quoted in section 3): when the appraisal programme is complete, the licensee declares a commercial discovery, a significant gas or crude oil discovery, or a discovery of no interest (PIA 2021 s.78(8)). A commercial discovery is followed by a field development plan within 2 years (s.79(1)). A significant discovery is substantial and potentially commercial and cannot yet be declared commercial (s.318; S.I. No. 37 of 2023 regs 3 and 4); the area may be retained for a period the Commission sets, at most 10 years from the declaration (s.78(9)), an approval running at least 5 years onshore and in shallow water and 8 in deep water (reg. 6(3)); if no commercial discovery is declared by the end, the area is relinquished (s.78(13)). A discovery of no interest may be relinquished over its structure (s.78(15)).
+
+THE ENGINE CARRIES THESE AS NOTES, optional and only for a discovered project (nigeria.declaration and nigeria.yearsSinceDeclaration, stated). The notes do not change the PRMS class: they are printed beside it.
+
+| golden input | what it states | class (engine) | the engine's Nigerian note, verbatim |
+| --- | --- | --- | --- |
+| class-ekn-3 | significant gas discovery, 3 years | Contingent Resources | significant gas discovery declared (PIA 2021 s.78(8)(b)): substantial and potentially commercial but not declarable as commercial (s.318); the licensee may retain the area for a period the Commission determines, at most 10 years from the declaration (s.78(9)), an approval being for at least 5 years onshore and in shallow water and 8 in deep water (Significant Crude Oil and Gas Discovery Regulations, 2023, reg. 6(3)); 3 years since the declaration |
+| class-nigeria-retention-10 | significant, 10 years | Contingent Resources | significant gas discovery declared (PIA 2021 s.78(8)(b)): substantial and potentially commercial but not declarable as commercial (s.318); the licensee may retain the area for a period the Commission determines, at most 10 years from the declaration (s.78(9)), an approval being for at least 5 years onshore and in shallow water and 8 in deep water (Significant Crude Oil and Gas Discovery Regulations, 2023, reg. 6(3)); 10 years since the declaration |
+| class-nigeria-retention-11 | significant, 11 years | Contingent Resources | significant crude oil discovery declared (PIA 2021 s.78(8)(b)): substantial and potentially commercial but not declarable as commercial (s.318); the licensee may retain the area for a period the Commission determines, at most 10 years from the declaration (s.78(9)), an approval being for at least 5 years onshore and in shallow water and 8 in deep water (Significant Crude Oil and Gas Discovery Regulations, 2023, reg. 6(3)); 11 years since the declaration: the retention period has ended, so the area is relinquished unless a commercial discovery was declared (s.78(13)) |
+| class-nigeria-fdp-2 | commercial, 2 years | Reserves | commercial discovery declared (PIA 2021 s.78(8)(a)); a field development plan is due within 2 years of the declaration (s.79(1)); 2 years since the declaration |
+| class-ekn-1 | commercial, per the fixture | Reserves | commercial discovery declared (PIA 2021 s.78(8)(a)); a field development plan is due within 2 years of the declaration (s.79(1)); 12 years since the declaration: the two-year period has passed |
+| class-nigeria-no-interest | no interest | Discovered Unrecoverable | discovery declared of no interest (PIA 2021 s.78(8)(c)); the Commission may require relinquishment of the parcels over the structure (s.78(15)) |
+
+A SIGNIFICANT DISCOVERY IS NOT DECLARED COMMERCIAL. A project that meets every commerciality criterion stated with a significant or a no-interest declaration is refused, verbatim (golden input class-refuse-nigeria-significant-reserves):
+> nigeria.declaration must be "commercial-discovery" for a project that meets every commerciality criterion: a significant discovery cannot be declared commercial (PIA 2021 s.318) and a discovery of no interest is not being developed (s.78(8)(c)); got "significant-gas-discovery"
+And the notes follow a discovery only, verbatim (golden input class-refuse-nigeria-undiscovered):
+> nigeria must be left out for an undiscovered accumulation (PIA 2021 s.78(8) declarations follow a discovery); got {"declaration":"commercial-discovery","yearsSinceDeclaration":0}
+
+NATIONAL RESERVES AND THE COMMISSION. The Act gives the Commission the evaluation of national reserves (s.7(i), quoted in section 3), and the Commission publishes the national position each year; its release of 1 April 2026 put the 2P gas at 215.19 trillion cubic feet as at 1 January 2026 (text; section 4). The Commercial Regulations 2025 ask for a status report that includes a statement of the reserves situation (reg. 6, by concept). No gazetted rule on how reserves are booked was found (section 2), so the course teaches the PRMS classes and states no Nigerian booking rule.
+
+# SECTION 14: Project maturity sub-classes: the facts that set them and the ones the engine refuses (owned by Professional m01)
+
+RESERVES SUB-CLASSES ARE DERIVED FROM THE PROJECT STATUS. For a project the engine finds commercial it reads two stated facts, whether the final investment decision is taken and whether the project is on production, and derives the sub-class (PRMS 2.1.3.5, Table 1); the stated sub-class must be the derived one.
+
+| golden input | final investment decision (stated) | on production (stated) | sub-class (engine) | the engine's sub-class decision, verbatim |
+| --- | --- | --- | --- | --- |
+| class-ekn-1 | true | true | on-production | on-production: on production, selling petroleum to market |
+| class-ekn-2 | true | false | approved-for-development | approved-for-development: final investment decision taken; production yet to start |
+| class-justified | false | false | justified-for-development | justified-for-development: no final investment decision yet |
+
+A SUB-CLASS THE FACTS CONTRADICT is refused, and the message names the one the facts give, verbatim:
+
+| golden input | the engine's message, verbatim |
+| --- | --- |
+| class-refuse-subclass-approved-stated-justified | subClass must be "approved-for-development" for this project (final investment decision taken; production yet to start: PRMS 2.1.3.5.5, Table 1); got "justified-for-development" |
+| class-refuse-subclass-reserves-stated-pending | subClass must be "approved-for-development" for this project (final investment decision taken; production yet to start: PRMS 2.1.3.5.5, Table 1); got "development-pending" |
+| class-refuse-subclass-contingent-stated-approved | subClass must be one of "development-pending", "development-on-hold", "development-unclarified", "development-not-viable" for Contingent Resources (not commercial: financialAppropriations, timeFrame, economicStatus, market, facilities, firmIntention); got "approved-for-development" |
+| class-refuse-producing-without-fid | projectStatus.finalInvestmentDecision must be true for a project on production (a producing project has passed its investment decision); got false |
+
+CONTINGENT SUB-CLASSES ARE STATED. The engine cannot see why development is pending or on hold, so it takes the stated Contingent sub-class and checks only that it is one of the four (PRMS 2.1.3.5.6, Table 1): "development-pending", "development-on-hold", "development-unclarified" and "development-not-viable". The Ekene examples (engine): EKN-4 development-pending, EKN-3 development-on-hold, EKN-5 development-unclarified; the economic status is stated beside each ("viable", "undetermined", "not-viable").
+
+PROSPECTIVE SUB-CLASSES are stated the same way (section 9).
+
+# SECTION 15: The seven commerciality criteria, the firm intention and the five-year benchmark (owned by Professional m02)
+
+THE CRITERIA are the seven of PRMS 2.1.2.1 and the commitment to proceed, as tabled in section 10; each is a stated true or false, with no default, except two the engine reads from other inputs: the time-frame (from a stated start and a stated justification) and positive economics (from the stated economic status "viable").
+
+THE FIVE-YEAR BENCHMARK. The engine reads the time-frame as met when development starts within 5 years, or later when a longer time-frame is stated as justified (PRMS 2.1.2.3, a recommended benchmark). 5 years exactly is met. The golden inputs, each otherwise commercial:
+
+| golden input | start within, years (stated) | longer justified (stated) | class (engine) | the engine's time-frame reason, verbatim |
+| --- | --- | --- | --- | --- |
+| class-time-frame-5-met | 5 | false | Reserves | time-frame: development starts within 5 years against the 5-year benchmark: met (PRMS 2.1.2.3) |
+| class-time-frame-6-contingent | 6 | false | Contingent Resources | time-frame: development starts within 6 years against the 5-year benchmark, no longer time-frame justified: not met (PRMS 2.1.2.3) |
+| class-time-frame-8-justified | 8 | true | Reserves | time-frame: development starts within 8 years against the 5-year benchmark, a longer time-frame stated as justified: met (PRMS 2.1.2.3) |
+
+ECONOMICS NOT YET SHOWN (golden input class-economics-undetermined): economic status "undetermined", every other criterion met: class "Contingent Resources", blockers "economicStatus" (engine).
+NO FIRM INTENTION (golden input class-no-firm-intention): every criterion met and the commitment not: class "Contingent Resources", blockers "firmIntention" (engine). The criterion line, verbatim:
+> commitment: the entity's firm intention to proceed with development: not met (PRMS 2.1.2.1, 2.1.2.3)
+
+EVERY CRITERION IS STATED. A criterion left out, or stated as anything other than true or false, is refused, verbatim (golden inputs class-refuse-missing-criterion and class-refuse-criterion-not-boolean):
+> commerciality.market must be true or false (stated; no default); got nothing
+> commerciality.approvals must be true or false (stated; no default); got "yes"
+
+# SECTION 16: Incremental and cumulative categories: building one from the other (owned by Professional m03)
+
+THE TWO FORMS REBUILD EACH OTHER EXACTLY (PRMS 2.2.1.4 and 2.2.2.1): 1P = P1, 2P = P1 + P2, 3P = P1 + P2 + P3; and P2 = 2P less 1P, P3 = 3P less 2P. The engine takes either form (method "cumulative" with low, best and high, or "incremental" with first, second and third) and returns both.
+
+| golden input | method | stated | cumulative (engine) | incremental (engine) |
+| --- | --- | --- | --- | --- |
+| cat-faq33-incremental | incremental | first 5.000000, second 2.000000, third 3.000000 | 1P 5.000000, 2P 7.000000, 3P 10.000000 | Proved (P1) 5.000000, Probable (P2) 2.000000, Possible (P3) 3.000000 |
+| cat-reserves-cumulative | cumulative | low 8.890000, best 16.650000, high 24.990000 | 1P 8.890000, 2P 16.650000, 3P 24.990000 | Proved (P1) 8.890000, Probable (P2) 7.760000, Possible (P3) 8.340000 |
+| cat-zero-increment | incremental | first 0.000000, second 7.000000, third 0.000000 | 1P 0.000000, 2P 7.000000, 3P 7.000000 | Proved (P1) 0.000000, Probable (P2) 7.000000, Possible (P3) 0.000000 |
+
+A ZERO INCREMENT (golden input cat-zero-increment). A Proved of 0.000000 and a Possible of 0.000000 are accepted: 1P is 0.000000, and 2P and 3P are both 7.000000 (engine). The engine's incremental line, verbatim:
+> incremental: Proved (P1) 0, Probable (P2) 7, Possible (P3) 0 MMbbl; 1P = P1, 2P = P1 + P2, 3P = P1 + P2 + P3
+
+THE FORMS DO NOT MIX. The refusals, verbatim:
+
+| golden input | the engine's message, verbatim |
+| --- | --- |
+| cat-refuse-negative-increment | estimates.second must be a finite number at or above 0; got -1 |
+| cat-refuse-mixed-forms | estimates.second must be left out for the cumulative method (state low, best and high); got 1 |
+| cat-refuse-incremental-with-low | estimates.low must be left out for the incremental method (state first, second and third); got 1 |
+
+INCREMENTS FROM THREE FORECASTS. The economic limit returns the categories of three forecasts in both forms (section 17): the increments there are the differences of the three truncated, entitled quantities.
+
+# SECTION 17: The economic limit of three technical forecasts: the canonical cash flow, the trailing trim, the economic test and the low case that fails (owned by Professional m04)
+
+THE RULE, in the engine's basis (golden input econ-ekene), verbatim:
+> computeCashFlow of engines/economics/cashflow.ts with apply_economic_limit (JV regime at 100%, the stated royalty and tax), checked against PRMS 3.1.3.1
+> SPE-PRMS 2018 (June 2018, v1.03 with the 2022 errata; CC BY-NC-ND 4.0, cited by section): 3.1.2.1 (undiscounted cumulative net cash flow above 0, ADR included), 3.1.2.8
+
+WHAT THE ENGINE DOES WITH THE THREE FORECASTS. For each of the low, best and high technical forecasts it (1) cuts the years after the licence expiry when no renewal is expected; (2) runs the canonical computeCashFlow of cashflow.ts at 100 percent under the JV regime with the stated prices, royalty, tax, allowance life, loss relief, abandonment and discount rate and no escalation, with its economic limit switched on; (3) keeps the years up to the canonical economic-limit year; (4) calls the case economic when its undiscounted net cash flow after tax and abandonment is above 0; then (5) reports the Reserves categories from the three kept quantities on the stated basis, or none when the best case fails.
+
+THE EKENE MAIN WATERFLOOD, EKN-1 (golden input econ-ekene, the fixture):
+
+| case | forecast | licence cut | economic limit | trailing years cut | undiscounted net cash flow at 100% | NPV at 100% | economic | technical oil | oil beyond the licence | oil beyond the limit | economic oil, gross | reported oil | reported BOE |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| low | 2027 to 2041 | 2040 | 2033 | 7 | 156927914.662500 | 147205926.399797 | true | 10854176.000000 | 98956.000000 | 1864516.000000 | 8890704.000000 | 5289968.880000 | 5995298.044167 |
+| best | 2027 to 2041 | 2040 | 2037 | 3 | 382377266.937500 | 318649106.969712 | true | 18252916.000000 | 308309.000000 | 1291471.000000 | 16653136.000000 | 9908615.920000 | 11229764.729167 |
+| high | 2027 to 2041 | 2040 | 2040 | 0 | 651707494.450000 | 493006746.199924 | true | 25590784.000000 | 601257.000000 | 0.000000 | 24989527.000000 | 14868768.565000 | 16851271.080000 |
+
+The engine's reasons, verbatim:
+> low case: forecast 2027 to 2041, cut at the licence expiry 2040 (no renewal expected); economic limit 2033 (7 trailing years cut); undiscounted net cash flow 156927914.66 at 100%: economic (PRMS 3.1.2.1: above 0); within the limit 8890704 bbl oil and 7112563 Mscf gas gross
+> best case: forecast 2027 to 2041, cut at the licence expiry 2040 (no renewal expected); economic limit 2037 (3 trailing years cut); undiscounted net cash flow 382377266.94 at 100%: economic (PRMS 3.1.2.1: above 0); within the limit 16653136 bbl oil and 13322509 Mscf gas gross
+> high case: forecast 2027 to 2041, cut at the licence expiry 2040 (no renewal expected); economic limit 2040 (0 trailing years cut); undiscounted net cash flow 651707494.45 at 100%: economic (PRMS 3.1.2.1: above 0); within the limit 24989527 bbl oil and 19991622 Mscf gas gross
+> Reserves: the best case is economic (PRMS 2.1.2.2, 3.1.2.1)
+> on the net-entitlement basis: 1P 5995298.044167, 2P 11229764.729167, 3P 16851271.08 BOE at 6 Mscf per BOE (supplementary, PRMS 3.2.9.3); P2 5234466.685, P3 5621506.350833
+> net entitlement: 70% working interest less the 15% royalty interest (PRMS 3.3.1.1)
+
+| category | oil | gas | BOE |
+| --- | --- | --- | --- |
+| 1P | 5289968.880000 | 4231974.985000 | 5995298.044167 |
+| 2P | 9908615.920000 | 7926892.855000 | 11229764.729167 |
+| 3P | 14868768.565000 | 11895015.090000 | 16851271.080000 |
+| P1 | 5289968.880000 | 4231974.985000 | 5995298.044167 |
+| P2 | 4618647.040000 | 3694917.870000 | 5234466.685000 |
+| P3 | 4960152.645000 | 3968122.235000 | 5621506.350833 |
+
+THE CANONICAL CASH FLOW UNDERNEATH (stated probe: the best case of econ-ekene handed to computeCashFlow of cashflow.ts directly, with the same regime and inputs). It returns an economic limit year of 2037, 3 years trimmed, an undiscounted net cash flow of 382377266.937500 and an NPV of 318649106.969712 (canonical engine): the figures the prms engine reports for the best case.
+
+THE TRAILING TRIM AT ITS BOUNDARY. The canonical limit cuts trailing years whose revenue less royalty less opex is below 0 and keeps a year where it is exactly 0. Two golden inputs differ by one barrel in the last year (20000 and 19999 barrels at 50 a barrel against opex of 1000000, stated):
+
+| golden input | last-year oil (stated) | economic limit (engine) | trailing years cut (engine) | 2P oil (engine) |
+| --- | --- | --- | --- | --- |
+| econ-tail-exactly-zero-kept | 20000 | 2029 | 0 | 170000.000000 |
+| econ-tail-one-below-cut | 19999 | 2028 | 1 | 150000.000000 |
+
+THE ECONOMIC TEST AT ITS BOUNDARY. A case is economic when its undiscounted net cash flow is above 0 (PRMS 3.1.2.1); exactly 0 is not economic:
+
+| golden input | best case undiscounted net cash flow (engine) | best economic (engine) | status (engine) |
+| --- | --- | --- | --- |
+| econ-exactly-zero-not-economic | 0.000000 | false | not commercial: the best case fails the economic test (PRMS 2.1.2.2, 3.1.2.1); the project stays in Contingent Resources, economically not viable (PRMS 2.1.3.7.1) |
+| econ-best-fails | -10000000.000000 | false | not commercial: the best case fails the economic test (PRMS 2.1.2.2, 3.1.2.1); the project stays in Contingent Resources, economically not viable (PRMS 2.1.3.7.1) |
+| econ-faq33-low-fails | 10000000.000000 | true | Reserves: the best case is economic (PRMS 2.1.2.2, 3.1.2.1) |
+
+THE LOW CASE THAT FAILS. When the best case passes and the low case fails, 1P is 0 and the 2P and 3P stand; the low-case barrels sit inside 2P and are not reported as 1C (PRMS 3.1.2.8; FAQ 3.3 and 3.4). Section 4 runs the FAQ's own figures; the engine's line is quoted there.
+
+THE HIGH CASE MAY NOT FAIL WHEN THE BEST PASSES. On the same costs and prices a smaller high case is refused, verbatim (golden input econ-refuse-high-uneconomic):
+> forecasts.high must be a forecast that is economic when the best case is (tested on the same costs and prices, PRMS 2.2.0.3: an undiscounted net cash flow above 0); got -5000000
+
+# SECTION 18: Entitlement and the reporting basis: gross, working interest and net entitlement, a royalty interest and a production tax, BOE and cash at the working interest (owned by Professional m05)
+
+THE RULE, in the engine's basis (golden input econ-ekene), verbatim:
+> applyJV of engines/economics/cashflow.ts (working interest and royalty scaling); PRMS 3.3.1
+
+THE SAME EKN-1 FORECASTS REPORTED FOUR WAYS (golden inputs; only the basis or the royalty form changes):
+
+| golden input | reporting basis (stated) | royalty form (stated) | 1P BOE | 2P BOE | 3P BOE | 2P oil |
+| --- | --- | --- | --- | --- | --- | --- |
+| econ-ekene-gross | gross | royalty-interest | 10076131.166667 | 18873554.166667 | 28321464.000000 | 16653136.000000 |
+| econ-ekene-working-interest | working-interest | royalty-interest | 7053291.816667 | 13211487.916667 | 19825024.800000 | 11657195.200000 |
+| econ-ekene | net-entitlement | royalty-interest | 5995298.044167 | 11229764.729167 | 16851271.080000 | 9908615.920000 |
+| econ-ekene-production-tax | net-entitlement | production-tax | 7053291.816667 | 13211487.916667 | 19825024.800000 | 11657195.200000 |
+
+The engine's net entitlement lines, verbatim (econ-ekene, then econ-ekene-production-tax):
+> net entitlement: 70% working interest less the 15% royalty interest (PRMS 3.3.1.1)
+> net entitlement: 70% working interest; the 15% payment is a production tax, so no volume is deducted (PRMS 3.3.1.2)
+
+The working-interest quantities above are the gross ones scaled by the stated 70.000000 percent through the canonical applyJV of cashflow.ts; the net entitlement further takes out the royalty interest. The same royalty stated as a production tax takes out no volume, and the net entitlement then prints the same figures as the working interest (engine).
+
+BARRELS OF OIL EQUIVALENT. BOE adds the oil and the gas at the stated 6.000000 Mscf per BOE; the engine calls it supplementary (PRMS 3.2.9.3) and checks the category order in BOE. On econ-ekene the 2P is 9908615.920000 barrels of oil and 7926892.855000 Mscf of gas, 11229764.729167 BOE (engine).
+
+| case | undiscounted net cash flow at 100% | at the working interest | NPV at 100% | NPV at the working interest |
+| --- | --- | --- | --- | --- |
+| low | 156927914.662500 | 109849540.263750 | 147205926.399797 | 103044148.479858 |
+| best | 382377266.937500 | 267664086.856250 | 318649106.969712 | 223054374.878798 |
+| high | 651707494.450000 | 456195246.115000 | 493006746.199924 | 345104722.339947 |
+
+CASH AT THE WORKING INTEREST. The engine runs the cash flow at 100 percent and scales the undiscounted net cash flow and the NPV by the stated working interest through applyJV (no royalty applied a second time): on the best case 382377266.937500 at 100 percent is 267664086.856250 at 70.000000 percent (engine).
+
+The loss relief choice is stated and acts on the tax only. On EKN-1 no case has a loss year to carry, so the choice moves no figure (golden input econ-ekene-no-loss-relief):
+| golden input | loss carry forward (stated) | best undiscounted net cash flow (engine) |
+| --- | --- | --- |
+| econ-ekene | true | 382377266.937500 |
+| econ-ekene-no-loss-relief | false | 382377266.937500 |
+
+# SECTION 19: Licence expiry and time: production beyond the licence, renewal expected, and capital after the expiry (owned by Professional m06)
+
+THE RULE, in the engine's basis, verbatim:
+> PRMS 3.1.1.1(5), 3.1.3.1; FAQ 4.4
+When no renewal is expected, the years after the stated expiry are cut before the cash flow is run, and the barrels in them are reported as beyond the licence. The SEC definition of proved reserves ends at the expiry of the right to operate unless renewal is reasonably certain (17 CFR 210.4-10(a)(22), quoted in section 3); PRMS 3.3.3.2, which the FAQ's answer 4.4 cites, keeps quantities produced after the expiry of the current agreement out of Reserves unless an extension is reasonably expected, and places them in Contingent Resources (section and answer numbers only). The engine reports them as beyond the licence and classifies none of them.
+
+| golden input | renewal expected (stated) | high case licence cut | high economic limit | high oil beyond the licence | 3P BOE |
+| --- | --- | --- | --- | --- | --- |
+| econ-ekene | false | 2040 | 2040 | 601257.000000 | 16851271.080000 |
+| econ-ekene-renewal-expected | true | none | 2041 | 0.000000 | 17256718.756667 |
+
+On EKN-1 the licence ends in 2040; the best case reaches its economic limit in 2037, before the expiry, so a renewal changes the 3P and leaves the 2P where it is (engine).
+
+CAPITAL AFTER THE EXPIRY. With no renewal expected, a capital year after the expiry is refused, verbatim (golden input econ-refuse-capex-after-licence):
+> costs.capex[0].year must be at most 2030, the licence expiry, when no renewal is expected; got 2031
+An expiry before the effective year is refused, verbatim (golden input econ-refuse-licence-before):
+> licence.expiryYear must be an integer from 2027 to 2300; got 2026
+
+# SECTION 20: Arithmetic aggregation: summing by category, above the field level, and a sum of low estimates (owned by Expert m01)
+
+THE RULE, in the engine's basis (golden input agg-ekene-reserves), verbatim:
+> SPE-PRMS 2018 (June 2018, v1.03 with the 2022 errata; CC BY-NC-ND 4.0, cited by section): 4.2.5, 4.2.6; 17 CFR 229.1202(a)(3) (Regulation S-K Item 1202); Guidelines for Application of the PRMS (November 2011): 6.3
+
+THE EKENE RESERVES, PROJECT BY PROJECT (golden input agg-ekene-reserves; each project's low, best and high are read off its stated distribution: a triangular fitted through stated estimates, a lognormal and a normal, each by the canonical closed-form readers of lib/stats):
+
+| project | distribution (stated) | low (engine) | best (engine) | high (engine) | mean (engine) |
+| --- | --- | --- | --- | --- | --- |
+| EKN-1 | triangular min 2.628420, mode 16.097684, max 31.737202 (fitted) | 8.890000 | 16.650000 | 24.990000 | 16.821102 |
+| EKN-2 | lognormal mean 6.000000, standard deviation 1.800000 | 3.945035 | 5.746958 | 8.371921 | 6.000000 |
+| EKN-U | normal mean 4.000000, standard deviation 0.800000 | 2.974759 | 4.000000 | 5.025241 | 4.000000 |
+
+| category | arithmetic sum (engine) |
+| --- | --- |
+| 1P | 15.809794 |
+| 2P | 26.396958 |
+| 3P | 38.387162 |
+
+The engine's reasons, verbatim:
+> Reserves, 3 projects at the field, property or project level; correlation stated for 3 pairs (PRMS 4.2.5.3)
+> arithmetic summation by category: 1P 15.809794, 2P 26.396958, 3P 38.387162 MMbbl (PRMS 4.2.5.2)
+> statistical aggregation (canonical Monte Carlo, seed 20271112, 20000 iterations): P90 17.300834, P50 26.430497, P10 36.465253, mean 26.699904 MMbbl
+> the arithmetic sum of the low estimates is not the P90 of the total: it is the P90 only when every project is totally dependent (PRMS 4.2.5.2); here the statistical low exceeds it by 1.49104 and the arithmetic high exceeds the statistical high by 1.921909
+> the mean of the total is the sum of the means (no portfolio effect in means, PRMS 4.2.5.2): 26.821102 exact, 26.699904 sampled
+> at the field, property or project level statistical aggregation may be reported (PRMS 4.2.5.4)
+
+A SUM OF LOW ESTIMATES IS THE LOW OF THE TOTAL ONLY WHEN EVERY PROJECT IS TOTALLY DEPENDENT: when one comes in low, all do. The engine says so in every aggregate call and prints how far the sampled low sits above the arithmetic one at the stated seed and draws (the fourth reason above).
+
+ABOVE THE FIELD LEVEL the engine reports "arithmetic" as what may be reported (section 4, check four): the arithmetic sums, with the caution that the aggregate 1P may be very conservative and the aggregate 3P very optimistic (PRMS 4.2.5.4), and the statistical figures kept for portfolio analysis (PRMS 4.2.5.5). The SEC rule is quoted in section 3.
+
+# SECTION 21: Probabilistic aggregation: the seeded Monte Carlo, the two Application Guidelines blocks, correlation, and the mean of a total (owned by Expert m02)
+
+THE MONTE CARLO UNDERNEATH, in the engine's basis, verbatim:
+> lib/stats/stats.js: createCorrelatedSampler (Gaussian copula, Cholesky), mulberry32, fitTriangularToPercentiles, quantile
+> lib/conventions/percentile.js (P90 = the 0.1 quantile of the totals, the low estimate)
+
+Every figure below is a seeded Monte Carlo estimate: it is printed with its seed and its draw count, it reproduces exactly on those two inputs, and it is never graded. The same Ekene Reserves projects under four stated correlations (golden inputs):
+
+| golden input | correlation (stated) | seed | draws | P90 | P50 | P10 | sampled mean | arithmetic 1P | arithmetic 3P |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| agg-ekene-reserves-independent | uniform 0 | 20271112 | 20000 | 18.487436 | 26.561729 | 35.154764 | 26.711647 | 15.809794 | 38.387162 |
+| agg-ekene-reserves | EKN-1 and EKN-2 0.5, EKN-1 and EKN-U 0.2, EKN-2 and EKN-U 0.2 | 20271112 | 20000 | 17.300834 | 26.430497 | 36.465253 | 26.699904 | 15.809794 | 38.387162 |
+| agg-ekene-reserves-strong | uniform 0.95 | 20271112 | 20000 | 15.891238 | 26.324143 | 38.110353 | 26.703026 | 15.809794 | 38.387162 |
+| agg-negative-correlation | uniform -0.4 | 20271112 | 20000 | 20.009881 | 26.582971 | 33.799166 | 26.737094 | 15.809794 | 38.387162 |
+
+Across these draws the sampled P90 moves toward the arithmetic 1P as the stated correlation rises (independent, then the stated pairs, then strong), and the arithmetic figures do not move at all: the arithmetic sum does not read the correlation.
+
+THE MEAN OF A TOTAL IS THE SUM OF THE MEANS, whatever the correlation. The exact sum of the means is 26.821102 (engine) on every row above; the sampled means differ from it by the sampling error of each run.
+
+SEED AND DRAWS. Run again on seed 20271112 the P90 is 17.300834 again (engine, identical); on seed 20271113 with the same 20000 draws it is 17.414533 (stated probe, engine). A Monte Carlo figure is quoted with its seed and draws for that reason, and never graded as exact.
+
+THE TWO BLOCKS FROM THE 2011 GUIDELINES are run in section 4 (check two), with the Guidelines' own symmetric reading and the lognormal reading beside it.
+
+CORRELATION IS STATED, NEVER ASSUMED. The refusals, verbatim:
+
+| golden input | the engine's message, verbatim |
+| --- | --- |
+| agg-refuse-no-correlation | correlation must be an object { type: "uniform", rho } or { type: "pairs", pairs } (stated; no default); got nothing |
+| agg-refuse-missing-pair | correlation.pairs must be one pair for each of the 3 pairs of varying projects (0 is stated, never assumed); the first missing pair is EKN-2 and EKN-U; got "2 pairs" |
+| agg-refuse-duplicate-pair | correlation.pairs[3] must be a pair stated once; got {"a":"EKN-2","b":"EKN-1","rho":0.5} |
+| agg-refuse-pair-constant | correlation.pairs[3].b must be one of "EKN-1", "EKN-2", "EKN-U"; got "EKN-C" |
+| agg-refuse-rho-one | correlation.rho must be a number above -1 and below 1 (the canonical sampler takes a correlation strictly between -1 and 1); got 1 |
+| agg-refuse-psd | correlation must be a positive semidefinite correlation matrix (the Cholesky factor misses the stated matrix by 0.8); got {"type":"uniform","rho":-0.6} |
+| agg-refuse-no-seed | seed must be an integer from 0 to 4294967295 (the mulberry32 seed; no default); got nothing |
+| agg-refuse-iterations | iterations must be an integer from 100 to 200000; got 50 |
+
+# SECTION 22: Risked quantities and classes: one class a call, the risked mean, distributions stated or fitted, and a national total (owned by Expert m03)
+
+ONE CLASS A CALL. The engine aggregates the projects of one class at a time: Reserves, Contingent Resources and Prospective Resources are never added into one figure, and each figure says whether it is risked (PRMS 4.2.6; FAQ 6.9; the 2011 Guidelines 6.4). A risked class carries a stated chance of commerciality on every project; Reserves carry none, and stating one is refused, verbatim (golden input agg-refuse-reserves-chance):
+> projects[0].chanceOfCommercialityPct must be left out for Reserves (their chance of commerciality is not a stated figure, PRMS 2.1.3.3); got 100
+
+THE EKENE CONTINGENT RESOURCES (golden input agg-ekene-contingent; seed 20271113, 20000 draws for the sampled figures):
+
+| project | distribution (stated) | chance of commerciality, percent (stated) | low | best | high | mean (engine) |
+| --- | --- | --- | --- | --- | --- | --- |
+| EKN-3 | lognormal | 50.000000 | 8.450961 | 12.425127 | 18.268192 | 13.000000 |
+| EKN-4 | triangular | 65.000000 | 3.000000 | 4.500000 | 6.500000 | 4.637674 |
+| EKN-5 | triangular | 20.000000 | 1.707107 | 2.837722 | 4.585786 | 3.000000 |
+
+THE RISKED MEAN is the sum of each project's chance of commerciality times its mean: 10.114488 MMboe (engine), against an unrisked sum of means of 20.637674. The engine's line, verbatim:
+> risked mean: the sum of chance of commerciality x mean, 10.114488 MMboe; state the classes separately and whether each figure is risked (PRMS 4.2.6; FAQ 6.9; AG 2011 6.4)
+
+PROSPECTIVE RESOURCES are risked the same way (golden input agg-prospective): a risked mean of 8.980000 against a sum of means of 49.333333 (engine).
+
+DISTRIBUTIONS STATED OR FITTED. A project states its distribution: "triangular" (min, mode and max), "lognormal" or "normal" (mean and standard deviation), or "triangular-fit" (a triangular fitted through stated low, best and high estimates by lib/stats). The engine refuses a fit it cannot make exactly or that goes below 0, and a normal whose low estimate would be below 0, verbatim:
+
+| golden input | the engine's message, verbatim |
+| --- | --- |
+| agg-refuse-tri-fit-inexact | projects[0].estimates must be low, best and high that a triangular distribution passes through exactly (lib/stats fitTriangularToPercentiles): the best estimate sits too near the low estimate for any triangular; got {"low":10,"best":15,"high":24} |
+| agg-refuse-tri-fit-negative | projects[0].estimates must be low, best and high that a triangular distribution passes through exactly (lib/stats fitTriangularToPercentiles): the best estimate sits too near the low estimate for any triangular; got {"low":0.1,"best":1,"high":3} |
+| agg-refuse-normal-negative-low | projects[2].distribution must be a normal whose low estimate (the mean less 1.2815515655446004 standard deviations, here -0.281552) stays at or above 0; got {"type":"normal","mean":1,"stdDev":1} |
+| agg-refuse-stated-with-estimates | projects[1].estimates must be left out when the distribution is stated (the engine reads the estimates off it); got {"low":1,"best":2,"high":3} |
+| agg-refuse-triangular-order | projects[2].distribution must be a triangular with min <= mode <= max and min < max; got {"type":"triangular","min":3,"mode":2,"max":6} |
+| agg-refuse-dist-type | projects[0].distribution.type must be one of "triangular-fit", "triangular", "lognormal", "normal"; got "beta" |
+
+TWO FIT REFUSALS, TWO MESSAGES. The golden input agg-refuse-tri-fit-negative returns the exactness message because no triangular passes through its three estimates at all. A fit that does pass through exactly and still reaches below 0 is refused with its own message. On a stated low of 1, best of 5.5 and high of 10 (stated probe), verbatim:
+> projects[0].estimates must be low, best and high whose fitted triangular stays at or above 0 (its minimum would be -2.640576); got {"low":1,"best":5.5,"high":10}
+
+A normal that stays at or above 0 at its low estimate can still draw below 0; the engine keeps those draws and says so. On a stated normal of mean 4.000000 and standard deviation 3.100000 (stated probe; its low estimate is 0.027190, engine), verbatim:
+> W: a normal distribution draws below 0 with chance 0.098469 (lib/stats normalCDF); those draws stay in the total
+The Ekene Upper sand normal (mean 4, standard deviation 0.8) has a chance below 0 of 2.871050e-7 (engine), which prints as 0 at six decimals, so the engine adds no such line for it.
+
+A CONSTANT. Equal low, best and high make a project a constant (golden input agg-constant-project: EKN-C at 1.200000), which adds its value to every draw and to every arithmetic category: the arithmetic 1P rises from 15.809794 to 17.009794 (engine).
+
+A NATIONAL TOTAL. The Commission's 2P gas figure is a sum of two published 2P figures (section 4, check three): the engine adds them arithmetically at the above-field level and reports only the arithmetic sum.
+
+# SECTION 23: Reconciliation: opening, movements and closing, production out of every category, and the closing check (owned by Expert m04)
+
+THE RULE, in the engine's basis (golden input rec-ekene), verbatim:
+> opening + movements = closing, category by category; production comes out of every Reserves category alike (the movement headings are the engine's stated convention)
+> SPE-PRMS 2018 (June 2018, v1.03 with the 2022 errata; CC BY-NC-ND 4.0, cited by section): 3.1.3.5 (reconciliation, technical revision), 2.2.2.6 (reclassification without new information leaves the distribution unchanged)
+
+THE EKENE FIELD RESERVES FROM ONE YEAR TO THE NEXT (golden input rec-ekene, the fixture):
+
+| movement | note (fixture) | 1P | 2P | 3P |
+| --- | --- | --- | --- | --- |
+| opening |  | 15.200000 | 21.000000 | 27.500000 |
+| production | Ekene Main 2027 production (synthetic) | -1.100000 | -1.100000 | -1.100000 |
+| revisions | waterflood performance review (synthetic) | 0.300000 | -0.200000 | -0.600000 |
+| transfers | Ekene infill wells moved from Contingent Resources at the investment decision (synthetic) | 3.400000 | 5.100000 | 6.900000 |
+| improved-recovery | water injection pattern change (synthetic) | 0.500000 | 0.800000 | 1.200000 |
+| computed closing |  | 18.300000 | 25.600000 | 33.900000 |
+| stated closing |  | 18.300000 | 25.600000 | 33.900000 |
+
+The engine's reasons, verbatim:
+> Reserves reconciliation in MMbbl: opening 1P 15.2, 2P 21, 3P 27.5
+> revisions of previous estimates (signed): 1P 0.3, 2P -0.2, 3P -0.6
+> improved recovery (additions): 1P 0.5, 2P 0.8, 3P 1.2
+> transfers between classes (signed; in positive, out negative): 1P 3.4, 2P 5.1, 3P 6.9
+> production (one quantity, subtracted from every category): 1P -1.1, 2P -1.1, 3P -1.1
+> computed closing: 1P 18.3, 2P 25.6, 3P 33.9; stated closing 1P 18.3, 2P 25.6, 3P 33.9
+> the reconciliation closes: every category within the stated tolerance 0.001
+> 2P replacement ratio: every movement other than production (additions, revisions and transfers) 5.7 over production 1.1 = 5.181818; 2P life index 23.272727 years at the period's production rate
+
+The difference at 2P prints as 0.000000 at six decimals and is not exactly 0 (a floating-point residue of the sums); the reconciliation closes because every difference is within the stated tolerance 0.001000 (engine, closes true).
+
+PRODUCTION COMES OUT OF EVERY RESERVES CATEGORY ALIKE: one quantity, subtracted from 1P, 2P and 3P. Stating it by category is refused, and production is refused in Contingent Resources, verbatim:
+
+| golden input | the engine's message, verbatim |
+| --- | --- |
+| rec-refuse-production-by-category | movements[0].low must be left out for production (one quantity applies to every category); got 1 |
+| rec-refuse-contingent-production | movements[0].type must be one of "revisions", "improved-recovery", "extensions-and-discoveries", "acquisitions", "divestments", "transfers" for Contingent Resources (produced quantities come out of Reserves; sub-economic production moves from Contingent Resources to production and is shown as a revision, PRMS 3.1.3.5); got "production" |
+| rec-refuse-negative-addition | movements[0].low must be a finite number at or above 0; got -1 |
+| rec-refuse-negative-divestment | movements[0].low must be a finite number at or above 0; got -1 |
+| rec-refuse-quantity-on-revision | movements[0].quantity must be left out for revisions (state low, best and high); got 1 |
+| rec-refuse-type | movements[0].type must be one of "revisions", "improved-recovery", "extensions-and-discoveries", "acquisitions", "divestments", "transfers", "production"; got "discoveries" |
+
+THE SIGNS. Revisions and transfers are signed; improved recovery, extensions and discoveries and acquisitions are entered positive and added; divestments are entered positive and subtracted (the engine's headings, its stated convention).
+
+| golden input | computed closing 1P, 2P, 3P (engine) | difference at 2P (engine) | tolerance (stated) | closes (engine) | order breaks (engine) |
+| --- | --- | --- | --- | --- | --- |
+| rec-ekene-not-closing | 18.300000, 25.600000, 33.900000 | 0.200000 | 0.001000 | false | false |
+| rec-difference-exactly-tolerance | 10.000000, 15.500000, 20.000000 | -0.250000 | 0.250000 | true | false |
+| rec-difference-above-tolerance | 10.000000, 15.500000, 20.000000 | -0.312500 | 0.250000 | false | false |
+| rec-contingent | 7.600000, 12.400000, 21.100000 | 0.000000 | 0.001000 | true | false |
+| rec-divest-acquire | 7.000000, 11.500000, 16.000000 | 0.000000 | 0.000000 | true | false |
+| rec-order-breaks | 13.000000, 12.000000, 14.000000 | 0.000000 | 0.500000 | false | true |
+| rec-no-production | 1.000000, 2.000000, 3.000000 | 0.000000 | 0.000000 | true | false |
+
+A RECONCILIATION THAT DOES NOT CLOSE is a result: the engine names each category that misses and by how much (golden input rec-ekene-not-closing), verbatim:
+> the reconciliation does not close: 2P differs by 0.2 (tolerance 0.001)
+A computed closing out of order is reported (golden input rec-order-breaks), verbatim:
+> the computed closing is out of order (1P <= 2P <= 3P fails)
+
+THE REPLACEMENT RATIO AND THE LIFE INDEX, printed when the period carries production (golden input rec-ekene): a replacement ratio of 5.181818 and a life index of 23.272727 years (engine). The engine's line, verbatim:
+> 2P replacement ratio: every movement other than production (additions, revisions and transfers) 5.7 over production 1.1 = 5.181818; 2P life index 23.272727 years at the period's production rate
+With divestments larger than the additions the ratio is negative (golden input rec-divest-acquire: -0.750000, engine). Without production neither is printed (golden input rec-no-production: null).
+
+# SECTION 24: Two economic-limit rules: the canonical trailing trim, the PRMS cumulative peak, and why the engine refuses where they disagree (owned by Expert m05 l01 and Expert m05 l02 and Expert m05 l03)
+
+RULE ONE, THE CANONICAL TRAILING TRIM (cashflow.ts, the economic limit every economics course in the academy uses): working backward from the last year, cut every trailing year whose revenue less royalty less opex is below 0; a year with capital is kept, and a year at exactly 0 is kept.
+RULE TWO, THE PRMS CUMULATIVE PEAK (PRMS 3.1.3.1 to 3.1.3.4): the economic limit is where the cumulative net cash flow, before income tax, allowances and abandonment, reaches its maximum; interim negative years count only when later positive years more than offset them.
+
+On a declining forecast with no late capital the two rules give the same year, and the engine uses the canonical one and checks it against the peak. On a profile with a late dip and a partial recovery they disagree, and the engine refuses and names both years. The golden input econ-refuse-limit-disagrees states such a profile: 100000, 10000, 25000 and 22000 barrels from 2027 to 2030 at 50 a barrel with opex of 1000000 a year (stated). The canonical cash flow of its low case, run directly (stated probe: the same inputs handed to computeCashFlow with the economic limit off), year by year:
+
+| year | revenue (canonical) | royalty (canonical) | opex (canonical) | capex (canonical) | revenue less royalty less opex (derived) | cumulative before tax and abandonment (derived) |
+| --- | --- | --- | --- | --- | --- | --- |
+| 2027 | 5000000.000000 | 0.000000 | 1000000.000000 | 0.000000 | 4000000.000000 | 4000000.000000 |
+| 2028 | 500000.000000 | 0.000000 | 1000000.000000 | 0.000000 | -500000.000000 | 3500000.000000 |
+| 2029 | 1250000.000000 | 0.000000 | 1000000.000000 | 0.000000 | 250000.000000 | 3750000.000000 |
+| 2030 | 1100000.000000 | 0.000000 | 1000000.000000 | 0.000000 | 100000.000000 | 3850000.000000 |
+
+The last year pays (so the trailing trim keeps every year to 2030) and the cumulative peaks in 2027 (so the PRMS limit is 2027). The engine's message, verbatim:
+> forecasts.low must be a forecast on which the canonical economic limit (cashflow.ts: trailing years whose revenue less royalty less opex is negative are cut, years with capital kept) and the PRMS 3.1.3.1 limit (the year the cumulative net cash flow before tax and ADR peaks) agree; they give 2030 and 2027; got "a low forecast from 2027 to 2030"
+
+WHY THE ENGINE REFUSES. Answering with either rule would move a Reserves figure by a choice the caller did not make: the canonical rule would count the late barrels, the PRMS rule would drop them. Changing the canonical cash flow to the PRMS rule would move every figure the academy's other economics courses and the Suite's economics app teach from cashflow.ts, so that change is a separate decision for the platform, and the engine keeps both rules visible by refusing where they part. The course teaches both rules, and no graded figure rests on a profile where they disagree.
+
+WHAT THE CALLER CAN DO. State a forecast on which the two agree (the technical forecast ends where the project stops paying), or split the project at the dip; the refusal names both years so the caller can see which barrels are in question.
+
+# SECTION 25: The readings the engine states, where each acts, and the alternative (owned by Expert m05 and Expert m06 l02)
+
+A READING is a choice the engine makes where the texts leave room, stated in its own reasons or basis. Each is printed here where it acts, with the alternative it names; no graded figure moves under any alternative (the capstone generator and the discriminate sweep prove it field by field).
+
+| reading | where it acts | the engine's words, verbatim | the alternative |
+| --- | --- | --- | --- |
+| READING ONE: the five-year benchmark is met at five years | classify | time-frame: development starts within 5 years against the 5-year benchmark: met (PRMS 2.1.2.3) | five years exactly not met |
+| READING TWO: an undiscounted net cash flow of exactly 0 is not economic | economicLimit | SPE-PRMS 2018 (June 2018, v1.03 with the 2022 errata; CC BY-NC-ND 4.0, cited by section): 3.1.2.1 (undiscounted cumulative net cash flow above 0, ADR included), 3.1.2.8 | exactly 0 economic |
+| READING THREE: the economic test includes abandonment | economicLimit | SPE-PRMS 2018 (June 2018, v1.03 with the 2022 errata; CC BY-NC-ND 4.0, cited by section): 3.1.2.1 (undiscounted cumulative net cash flow above 0, ADR included), 3.1.2.8 | the test before the abandonment cost, as the producibility determination of PRMS 3.1.2.1 is made |
+| READING FOUR: the canonical trailing trim is the economic limit, checked against the PRMS peak and refused where they disagree | economicLimit | computeCashFlow of engines/economics/cashflow.ts with apply_economic_limit (JV regime at 100%, the stated royalty and tax), checked against PRMS 3.1.3.1 | the limit placed at the PRMS cumulative peak |
+| READING FIVE: production comes out of every Reserves category alike | reconcile | opening + movements = closing, category by category; production comes out of every Reserves category alike (the movement headings are the engine's stated convention) | none offered by the engine: a production movement is refused by category |
+| READING SIX: the replacement ratio counts every movement other than production | reconcile | 2P replacement ratio: every movement other than production (additions, revisions and transfers) 5.7 over production 1.1 = 5.181818; 2P life index 23.272727 years at the period's production rate | the additions alone (revisions and transfers left out) |
+| READING SEVEN: the life index is read at the best estimate | reconcile | 2P replacement ratio: every movement other than production (additions, revisions and transfers) 5.7 over production 1.1 = 5.181818; 2P life index 23.272727 years at the period's production rate | the life index at the low estimate |
+| READING EIGHT: a difference equal to the tolerance closes | reconcile | the reconciliation closes: every category within the stated tolerance 0.25 | a difference equal to the tolerance does not close |
+| READING NINE: the Monte Carlo low is the 0.1 quantile of the totals | aggregate | lib/conventions/percentile.js (P90 = the 0.1 quantile of the totals, the low estimate) | the low read at the 0.9 quantile (P90 read as high) |
+
+THE GUIDELINES' TABLE 6.2 READ WITH NORMAL MARGINALS is a reading of the golden input, not of the engine: the engine takes the distribution a call states, and section 4 prints the normal reading and the lognormal one beside it.
+
+# SECTION 26: Reference texts and their quirks (owned by Expert m06 l02)
+
+A TABLE AND A FIGURE WITH TWO NUMBERS. The 2011 Guidelines print the arithmetic Proved of blocks A and B as 71.8 in Table 6.2 and as 72 on Fig. 6.5 (text): the figure rounds the table. The engine returns 71.800000 (section 4).
+
+A SUPERSEDED EDITION. The 2011 Guidelines were revised in 2022; the 2022 edition is sold and was not read. A lesson names the 2011 edition by its year.
+
+A STANDARD READ FROM A BILINGUAL EDITION. The English text of SPE-PRMS 2018 was read from the SPE-hosted English-Chinese edition (Version 2023 V1.0, developed from PRMS 2018 V1.0), whose English is the 2018 text; section numbers are the 2018 numbers.
+
+AN ERRATUM ON THE WORD ECONOMIC. The consolidated PRMS errata (May 2022, item 5) revise the glossary entry for "economic" so that it reads a zero percent discount rate, matching PRMS 3.1.2.1 (text, never quoted): the economic test is undiscounted, which is the test the engine applies.
+
+A RELEASE THAT PRINTS ONE FIGURE SHORT. The NUPRC release of 1 April 2026, as its page renders, prints the 2P crude oil figure as 09 billion barrels beside a condensate figure of 5.92 and a total of 37.01 billion barrels (text); the crude oil figure is truncated on the page, so the course uses only the gas figures and the total, and computes nothing from the truncated one.
+
+A FILE NAME THAT DIFFERS FROM THE TITLE. The Commission hosts S.I. No. 37 of 2023 under a file name that reads "Significant Crude Oil and Gas Recovery Regulations"; the gazette title is the Significant Crude Oil and Gas Discovery Regulations, 2023, and the course cites the gazette title.
+
+TWO CAPITALS FOR ONE TERM. The Act's interpretation section prints "Significant crude oil discovery" with a capital S and "significant gas discovery" without one (quoted as printed in section 3).
+
+A REGULATION WITH NO GAZETTE NUMBER. The Commission's posted copy of the Acreage Management and Petroleum (Drilling and Production) Regulation, 2024 prints placeholders for its instrument and gazette numbers; the course does not rely on it.
+
+# SECTION 27: Boundaries, rule by rule (owned by Expert m05 l04)
+
+Each rule has its own boundary. None is global: some are inclusive, some strict. Every row is the engine's answer on a golden input.
+
+| rule | at the boundary | one past it | golden inputs |
+| --- | --- | --- | --- |
+| the five-year benchmark | 5 years: met (Reserves) | 6 years: not met (Contingent) | class-time-frame-5-met, class-time-frame-6-contingent |
+| the economic test | undiscounted net cash flow exactly 0: not economic | above 0: economic | econ-exactly-zero-not-economic, econ-faq33-low-fails |
+| the trailing trim | last year exactly 0: kept | one barrel less: cut | econ-tail-exactly-zero-kept, econ-tail-one-below-cut |
+| the two limit rules | agree: a result | late dip not offset: refused | econ-ekene, econ-refuse-limit-disagrees |
+| the licence | the expiry year kept | later years beyond the licence | econ-ekene (high case) |
+| retention, PIA 2021 s.78(9) | 10 years: inside | 11 years: ended | class-nigeria-retention-10, class-nigeria-retention-11 |
+| the field development plan, s.79(1) | 2 years: inside | later: passed | class-nigeria-fdp-2, class-ekn-1 |
+| a chance of geologic discovery of 0 | Pc 0, still Prospective |  | class-pg-zero |
+| equal estimates | one value; a constant in aggregation |  | cat-single-value, agg-constant-project |
+| correlation | 0.999 accepted | 1 refused; a matrix that is not positive semidefinite refused | agg-ag2011-table62-dependent, agg-refuse-rho-one, agg-refuse-psd |
+| the reconciliation tolerance | difference equal to the tolerance: closes | above it: does not close | rec-difference-exactly-tolerance, rec-difference-above-tolerance |
+
+# SECTION 28: What the engine does not compute, and which course owns it (owned by Expert m06)
+
+The engine takes these as stated inputs, or leaves them out; each belongs to another course of the academy, which the lessons name in one sentence and do not re-teach:
+
+| not computed here | what the engine takes instead | the course that owns it |
+| --- | --- | --- |
+| a production forecast from rates (decline or type curves) | three stated technical forecasts, year by year | dca (Decline Curve Analysis) |
+| in-place volumes from pressure and production (material balance) | stated estimates or distributions | mbal (Material Balance) |
+| in-place and recoverable volumes from maps and rock properties (volumetrics) | stated estimates or distributions | reservoircalc (Reservoir Volumetrics) |
+| the cash flow ledger, discounting and NPV as a subject | the canonical computeCashFlow and applyJV, imported | cashflow (Petroleum Economics and Cash Flow) |
+| the Nigerian fiscal terms (royalty rates by terrain and price, hydrocarbon tax, companies income tax) | a stated royalty rate and form and a stated tax rate | pia (Petroleum Industry Act 2021 and Nigerian Fiscal Terms) |
+| distributions, correlation and Monte Carlo as a subject | the canonical seeded sampler of lib/stats, applied to aggregation | uncertainty |
+| a price deck or a price forecast | stated prices year by year | none: always a stated input |
+| an audit of the stated facts, or a regulator's decision | stated facts, each printed in the reasons | none: the reserves report names them |
+| a Nigerian booking or reporting rule | none: no gazetted rule was found | none |
+
+WHAT THE ENGINE SAYS IT DOES NOT DECIDE. The category labels of the economic limit and of aggregation are outcome labels only; the engine does not say a stated deterministic scenario has a 90 percent chance. The BOE is supplementary. The movement headings of a reconciliation are the engine's stated convention (section 23).
+
+# SECTION 29: Size caps and refusals at scale (owned by Expert m06 l01)
+
+| cap | value | stated call over the cap | the engine's message, verbatim |
+| --- | --- | --- | --- |
+| `MAX_YEARS` | 100 | economicLimit with a 101-year low forecast | forecasts.low must have at most 100 entries; got 101 |
+| `MAX_PROJECTS` | 50 | aggregate with 51 projects | projects must have at most 50 entries; got 51 |
+| `MAX_ITERATIONS` | 200000 | aggregate with 200001 draws | iterations must be an integer from 100 to 200000; got 200001 |
+| `MAX_MOVEMENTS` | 50 | reconcile with 51 movements | movements must have at most 50 entries; got 51 |
+
+THE DRAW WORK CAP. Draws times projects may not exceed 500000, because the correlated draw grows with the square of the project count; the refusal names the most draws the stated projects allow (golden input agg-refuse-work), verbatim:
+> iterations must be at most 45454 for 11 projects (iterations x projects at most 500000); got 200000
+A panel stays well inside these caps.
+
+# SECTION 30: Conventions that are choices, and the reserves report (owned by Expert m06 l03)
+
+CONVENTIONS THAT ARE CHOICES. Each is the engine's stated choice where no text fixes one; a different choice would move a figure, so each is named in any report that quotes the figure:
+
+| convention | the engine's choice | where it comes from |
+| --- | --- | --- |
+| the class | Reserves only when every commerciality criterion and the firm intention are met with established technology | PRMS 2.1.2.1, Table 1 |
+| the time-frame | met at five years or less, or later when stated as justified | a stated reading (section 25) |
+| a Reserves sub-class | derived from the investment decision and production status, checked against the stated one | PRMS 2.1.3.5, Table 1 |
+| the chance of commerciality | Pg x Pd for Prospective, Pd for Contingent, none for Reserves | PRMS 2.1.3.3 |
+| percentile labels | P90 the low case, P10 the high case | lib/conventions/percentile.js |
+| the economic limit | the canonical trailing trim, checked against the PRMS peak, refused where they disagree | a stated reading (section 25) |
+| the economic test | undiscounted net cash flow after tax and abandonment above 0 | a stated reading (section 25) |
+| 1P when the low case fails | 0, with 2P and 3P kept | PRMS 3.1.2.8; FAQ 3.3 |
+| entitlement | applyJV scaling; a royalty interest deducted from volumes, a production tax not | PRMS 3.3.1 |
+| BOE | oil plus gas at a stated Mscf per BOE, supplementary | PRMS 3.2.9.3 |
+| the Monte Carlo low | the 0.1 quantile of the sampled totals | a stated reading (section 25) |
+| a risked mean | the sum of chance of commerciality times mean | the 2011 Guidelines 6.4 |
+| reconciliation headings and signs | production out of every category; divestments subtracted; revisions and transfers signed | engine convention |
+| money in a reason | rounded to the cent, half away from zero, trailing zeros dropped; a computed quantity or percentage to six decimals; every numeric field keeps full precision | engine convention |
+
+WRITING THE RESERVES REPORT names: the field and each project (synthetic in this course) with its discovery status, recovery project, class, sub-class and the blockers of a Contingent project; every source applied with its edition, licence and the date read; the effective date; the three technical forecasts and where they came from; the prices, costs, royalty and its form, tax, working interest, licence expiry and renewal expectation, reporting basis, discount rate and BOE factor; each case's economic limit, the rule it rests on and the years cut; the categories in both forms on the stated basis; each aggregation with its level, distributions, correlation, seed and draws, the arithmetic sums and what may be reported; each risked figure with its chances; the reconciliation with its headings and whether it closes; and each reading the figures rest on.
+
+# SECTION 31: Vocabulary this course legislates before a word is written (owned by Associate m01 and Professional m01 and Expert m01)
+
+Seven terms in this course carry a narrower meaning than they have in conversation. The rule for each is binding on every lesson, bank question, key truth and panel.
+
+| term | what it can mean elsewhere | the rule here |
+| --- | --- | --- |
+| reserves | any stock of oil or gas, a national total, a company figure | the PRMS class: discovered, commercial and remaining; a national or company figure is "reported reserves" with its date and whoever reported it |
+| resources | anything in the ground | all quantities; each class is named in full (Contingent Resources, Prospective Resources) |
+| P90 | the 90th percentile of anything | always the low estimate: at least 90 percent probability of being met or exceeded when probabilistic |
+| proved | shown to be true | cumulative 1P, the low estimate of Reserves; the increment is "Proved (P1)"; the same pattern for probable (2P, P2) and possible (3P, P3) |
+| economic limit | the end of a field's life | always of a named rule (the canonical trailing trim, or the PRMS cumulative peak) and a named case |
+| risked | dangerous | multiplied by a named chance (the chance of commerciality, or of geologic discovery); a figure says whether it is risked |
+| entitlement | a right | the quantities on a named basis: gross, working interest or net entitlement |
+
+A FIGURE THAT DEPENDS ON AN INPUT is quoted with it: a class with its facts; a category with its class, unit and method; a chance with its parts; a reserves figure with its basis, forecast case, economic limit and licence; a Monte Carlo figure with its seed, draws and correlation; a risked mean with its chances; a reconciliation with its movements and tolerance; an NPV with its rate.

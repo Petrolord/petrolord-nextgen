@@ -35,7 +35,8 @@
 //
 // EVERY FIELD IS FREE OF EVERY STATED READING AND OF EVERY DRAW. The engine
 // states its readings (the five-year benchmark met at five years; an
-// undiscounted net cash flow of exactly 0 not economic; the canonical trailing
+// undiscounted net cash flow of exactly 0 not economic; the economic test
+// after the abandonment cost; the canonical trailing
 // trim as the economic limit, refused where the PRMS cumulative peak
 // disagrees; the replacement ratio over every movement other than production;
 // the life index on the best estimate; a reconciliation difference equal to
@@ -273,7 +274,7 @@ export const READ = {
 };
 
 /** The other side of each reading the engine states in prms.js. No graded value may move under any of them. */
-export const OPEN_READINGS = ['reading_time_frame_exclusive', 'reading_economic_at_zero', 'reading_limit_at_prms_peak',
+export const OPEN_READINGS = ['reading_time_frame_exclusive', 'reading_economic_at_zero', 'reading_economic_test_before_adr', 'reading_limit_at_prms_peak',
   'reading_replacement_additions_only', 'reading_life_index_on_low', 'reading_tolerance_exclusive', 'reading_mc_low_at_high_quantile'];
 
 /* ------------------------------------------------------------ the checks */

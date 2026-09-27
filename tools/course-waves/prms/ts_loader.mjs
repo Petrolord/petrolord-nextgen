@@ -82,10 +82,10 @@ export const VARIANTS = {
     'const kept = rows.filter((r) => r.year <= limitYear);',
     'const kept = rows;',
   ],
-  // The canonical economic limit switched off in the cash flow (the trailing years stay in the cash).
+  // The economic limit left out of the cash: the undiscounted net cash flow and the NPV of the whole forecast inside the licence.
   economic_limit_off_in_cash: [
-    '    apply_economic_limit: limit,',
-    '    apply_economic_limit: false,',
+    ['const undiscounted = on.kpis.total_net_cash_flow_nominal;', 'const undiscounted = off.kpis.total_net_cash_flow_nominal;'],
+    ['      npv: on.kpis.npv,', '      npv: off.kpis.npv,'],
   ],
   // 1P kept when the low case fails the economic test.
   low_kept_when_failing: [
@@ -172,6 +172,11 @@ export const VARIANTS = {
   reading_economic_at_zero: [
     'const economic = undiscounted > 0;',
     'const economic = undiscounted >= 0;',
+  ],
+  // The economic test read before the abandonment cost (the cost added back before the test; the cash figures unchanged).
+  reading_economic_test_before_adr: [
+    'const economic = undiscounted > 0;',
+    'const economic = undiscounted + a.costs.abandonment > 0;',
   ],
   // The economic limit placed at the PRMS 3.1.3.1 cumulative peak (where there is one) in place of the canonical trailing trim.
   reading_limit_at_prms_peak: [
