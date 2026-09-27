@@ -49,7 +49,7 @@ const LESSONS = [
     body: 'The funded set at five limits, money left unspent, and why filling greedily by EMV per million USD can lose to the optimum.' },
   { tier: 'Associate', title: 'The efficient frontier',
     body: 'The best risked EMV at every spend, the value of the next million USD, and funded sets that are not nested.' },
-  { tier: 'Associate', title: 'The exact solve and the stated fallback',
+  { tier: 'Associate', title: 'The exact solve and its fallback',
     body: 'The funded set is solved exactly on the capex as typed, in any unit. Above a stated size a grid with every weight rounded up takes over, and reports how much it may leave out.' },
   { tier: 'Associate', title: 'The Associate reading',
     body: 'OKONO end to end: what is funded at each budget, what it is worth risked, and what one project adds to the set.' },
