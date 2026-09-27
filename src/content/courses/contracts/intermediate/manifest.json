@@ -1,0 +1,335 @@
+{
+ "app_slug": "contracts",
+ "tier": "intermediate",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-segmenting-suppliers",
+   "title": "Segmenting Suppliers",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-why-suppliers-get-different-attention",
+     "title": "Why suppliers get different attention",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-profit-impact-and-supply-risk",
+     "title": "Profit impact and supply risk",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-tiering-contracts-by-risk-and-value",
+     "title": "Tiering contracts by risk and value",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-relationship-models-for-each-segment",
+     "title": "Relationship models for each segment",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-segmenting-the-ekene-suppliers",
+     "title": "Segmenting the Ekene suppliers",
+     "order": 5,
+     "est_minutes": 14,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-supplier-performance-reviews",
+   "title": "Supplier Performance Reviews",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-the-review-cycle",
+     "title": "The review cycle",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-scorecard-and-its-evidence",
+     "title": "The scorecard and its evidence",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-running-the-review-meeting",
+     "title": "Running the review meeting",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-improvement-plans-that-close",
+     "title": "Improvement plans that close",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-variations-and-change-control",
+   "title": "Variations and Change Control",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-what-counts-as-a-change",
+     "title": "What counts as a change",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-authority-to-instruct-a-change",
+     "title": "Authority to instruct a change",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-assessing-a-change-request",
+     "title": "Assessing a change request",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-limits-on-modifying-a-public-contract",
+     "title": "Limits on modifying a public contract",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-change-register",
+     "title": "The change register",
+     "order": 5,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-supplier-risk-and-resilience",
+   "title": "Supplier Risk and Resilience",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-risks-a-supplier-carries-in",
+     "title": "Risks a supplier carries into your operation",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-financial-standing-and-early-warnings",
+     "title": "Financial standing and early warnings",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-single-sources-and-continuity",
+     "title": "Single sources and continuity plans",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-resolution-planning",
+     "title": "Resolution planning for critical contracts",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-nigerian-content-obligations-in-depth",
+   "title": "Nigerian Content Obligations in Depth",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-the-nigerian-content-plan",
+     "title": "The Nigerian content plan",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-employment-and-expatriate-positions",
+     "title": "Employment and expatriate positions",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-training-and-capacity-building",
+     "title": "Training and capacity building",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-performance-reports-and-monitoring",
+     "title": "Performance reports and monitoring",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-poor-performance-and-remedies",
+   "title": "Poor Performance and Remedies",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-from-concern-to-formal-notice",
+     "title": "From concern to formal notice",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-remedies-the-contract-gives",
+     "title": "Remedies the contract gives",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-recording-poor-performance",
+     "title": "Recording poor performance",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-preparing-for-the-professional-exam",
+     "title": "Preparing for the Professional exam",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

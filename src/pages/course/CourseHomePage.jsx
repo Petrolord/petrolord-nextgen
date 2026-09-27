@@ -14,6 +14,9 @@ import { useCourse, moduleState, TIER_LABELS } from '@/components/course/useCour
 import LockedCard from '@/components/course/LockedCard';
 import { activeTiers, pickCourseTier, courseTierPath } from '@/lib/learningGate';
 import { courseNameFrom } from '@/lib/appNames';
+import { courseTypeOf } from '@/lib/courseType';
+import PracticeCourseNotice from '@/components/course/PracticeCourseNotice';
+import PracticeCertificateCard from '@/components/course/PracticeCertificateCard';
 
 // Course home: syllabus + per-module progress for one (app, tier). The
 // tier tabs only list tiers that have authored content; enrollment (and
@@ -45,6 +48,7 @@ const CourseHomePage = () => {
   }
 
   const appName = courseNameFrom(apps, appSlug);
+  const practice = courseTypeOf(appSlug, apps) === 'practice';
   const isEnrolled = enrolledTiers.has(tier);
   const base = `/dashboard/apps/${appSlug}/course/${tier}`;
   const allLessons = manifest ? flatLessons(manifest) : [];
@@ -64,7 +68,9 @@ const CourseHomePage = () => {
               <GraduationCap className="h-7 w-7 text-[#BFFF00]" /> {appName}
             </h1>
             <p className="mt-1 text-gray-400">
-              {manifest?.modules?.length} modules, {allLessons.length} lessons, about {Math.round(totalMinutes / 60)} hours of study. Modules unlock in order; each closes with a quiz, the course closes with a final exam and a graded practical.
+              {manifest?.modules?.length} modules, {allLessons.length} lessons, about {Math.round(totalMinutes / 60)} hours of study. Modules unlock in order; each closes with a quiz, {practice
+                ? 'and the course closes with a final exam that issues the certificate.'
+                : 'the course closes with a final exam and a graded practical.'}
             </p>
           </div>
           {isEnrolled && firstUnread && (
@@ -75,6 +81,8 @@ const CourseHomePage = () => {
             </Link>
           )}
         </div>
+
+        <PracticeCourseNotice app={appSlug} apps={apps} />
 
         {tiers.length > 1 && (
           <Tabs value={tier} onValueChange={(t) => navigate(courseTierPath(appSlug, t))}>
@@ -186,30 +194,34 @@ const CourseHomePage = () => {
             </CardContent>
           </Card>
 
-          <Card className={`bg-[#1E293B] border-gray-700 ${!progress?.capstone?.unlocked ? 'opacity-70' : ''}`}>
-            <CardHeader className="pb-2">
-              <CardTitle className="text-white text-lg flex items-center gap-2">
-                {progress?.capstone?.passed
-                  ? <CheckCircle2 className="h-5 w-5 text-emerald-400" />
-                  : progress?.capstone?.unlocked
-                    ? <Award className="h-5 w-5 text-[#BFFF00]" />
-                    : <Lock className="h-5 w-5 text-gray-500" />}
-                Capstone practical
-              </CardTitle>
-              <CardDescription>The graded interpretation exercise. Passing it issues your certificate.</CardDescription>
-            </CardHeader>
-            <CardContent>
-              {progress?.capstone?.passed ? (
-                <p className="text-emerald-300 text-sm mb-0">Passed. See <Link to="/dashboard/certificates" className="text-[#BFFF00] hover:underline">your certificates</Link>.</p>
-              ) : progress?.capstone?.unlocked ? (
-                <Link to={`${base}/capstone`}>
-                  <Button size="sm" className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold">Open the capstone</Button>
-                </Link>
-              ) : (
-                <p className="text-xs text-gray-500 mb-0">Locked until the final exam is passed.</p>
-              )}
-            </CardContent>
-          </Card>
+          {practice ? (
+            <PracticeCertificateCard app={appSlug} tier={tier} progress={progress} />
+          ) : (
+            <Card className={`bg-[#1E293B] border-gray-700 ${!progress?.capstone?.unlocked ? 'opacity-70' : ''}`}>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-white text-lg flex items-center gap-2">
+                  {progress?.capstone?.passed
+                    ? <CheckCircle2 className="h-5 w-5 text-emerald-400" />
+                    : progress?.capstone?.unlocked
+                      ? <Award className="h-5 w-5 text-[#BFFF00]" />
+                      : <Lock className="h-5 w-5 text-gray-500" />}
+                  Capstone practical
+                </CardTitle>
+                <CardDescription>The graded interpretation exercise. Passing it issues your certificate.</CardDescription>
+              </CardHeader>
+              <CardContent>
+                {progress?.capstone?.passed ? (
+                  <p className="text-emerald-300 text-sm mb-0">Passed. See <Link to="/dashboard/certificates" className="text-[#BFFF00] hover:underline">your certificates</Link>.</p>
+                ) : progress?.capstone?.unlocked ? (
+                  <Link to={`${base}/capstone`}>
+                    <Button size="sm" className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold">Open the capstone</Button>
+                  </Link>
+                ) : (
+                  <p className="text-xs text-gray-500 mb-0">Locked until the final exam is passed.</p>
+                )}
+              </CardContent>
+            </Card>
+          )}
         </div>
 
         {loading && <p className="text-xs text-gray-600">Refreshing progress...</p>}

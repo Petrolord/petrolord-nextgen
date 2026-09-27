@@ -1,0 +1,16 @@
+{
+ "course": "SC5",
+ "slug": "contracts",
+ "title": "Contract & Supplier Management",
+ "module": "supply_chain",
+ "path_order": 79,
+ "course_type": "practice",
+ "sources_checked_on": "2026-09-27",
+ "review_date": "2027-09-27",
+ "migration_prefix": "20261116_sc5_contracts_",
+ "platform_migration": "migrations/20261116_sc5_contracts_platform_course_types.sql",
+ "repo": "/root/wt-sc5-nextgen",
+ "wave_dir": "/root/cat-wip-contracts",
+ "kit": "practice",
+ "stage": "foundation"
+}
