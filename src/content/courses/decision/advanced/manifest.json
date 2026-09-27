@@ -181,7 +181,7 @@
         },
         {
           "key": "l03-a-cost-that-is-not-a-number",
-          "title": "A cost that is not a number",
+          "title": "A cost that is not a number is refused",
           "order": 3,
           "est_minutes": 13,
           "panels": [
@@ -228,7 +228,7 @@
         },
         {
           "key": "l02-an-exact-tie-reported-as-a-recommendation",
-          "title": "An exact tie reported as a recommendation",
+          "title": "An exact tie and what the screens say",
           "order": 2,
           "est_minutes": 13,
           "panels": [
@@ -238,7 +238,7 @@
         },
         {
           "key": "l03-a-kpi-rounded-before-the-verdict",
-          "title": "A KPI rounded before the verdict",
+          "title": "One rounded net value for the card and the verdict",
           "order": 3,
           "est_minutes": 12,
           "panels": [
