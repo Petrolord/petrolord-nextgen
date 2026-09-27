@@ -87,11 +87,11 @@ FILES="$SEEDS
 $GOLIVE"
 digest_for() {
   case $1 in
-    20261112_ec11_prms_course               ) echo 605f5486f7b833a898b6cfca61062fd135e0c663b944be95af8b186145530359 ;;
-    20261112_ec11_prms_beginner_deep        ) echo 49726cef046a0263587434f47b045823601db2bee5965b66c952ef6275661aaf ;;
-    20261112_ec11_prms_intermediate_deep    ) echo 2981aa4a24878d2d0c2dcb0cdd7a26cc5e92d29ab96fc59ff057ffc8410c8f60 ;;
-    20261112_ec11_prms_advanced_deep        ) echo 680250464edf90656b8218615d8b851f3b22f347eab63451e04cbf8124840e96 ;;
-    20261112_ec11_prms_go_live              ) echo 500f4496c502abb71e7314bb3157767cfd9892ecedf17481719bf3aecf26cd8f ;;
+    20261112_ec11_prms_course               ) echo 37e4fb86f549f73828a30a157cf3465c7492e20e8ada23d8a338627e4112fa83 ;;
+    20261112_ec11_prms_beginner_deep        ) echo 56361a06f90a830886915ab0057094d6b426fdfe64795f9734b78a153ee98a7b ;;
+    20261112_ec11_prms_intermediate_deep    ) echo ff6abf277f28ff805df4147815b9625c39e56a80b30b60665501bb82dfea2bff ;;
+    20261112_ec11_prms_advanced_deep        ) echo 178efdb32accbc4bcc7fca1c8963d7468437c17952eb6375be090a354c554c02 ;;
+    20261112_ec11_prms_go_live              ) echo 26c7a7061c93626d3a8da88410f0fe7b49cc99e0f88d7ab8493d545a3dc9e67d ;;
     *) echo UNPINNED ;;
   esac
 }

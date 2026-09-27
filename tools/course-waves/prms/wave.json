@@ -50,7 +50,7 @@
   "entitlement": "always of a named basis."
  },
  "plan": {
-  "state": "LESSONS WRITTEN AND TOUCHED UP: 78 lessons in band; the foundation touch-up (prospect, lead and play starts; the FAQ 3.3 starts relabelled; the cleared chance-of-development refusal and the normal-below-zero refusal printed whole) done; fields unchanged. Banks next."
+  "state": "SHIPPED FOR REVIEW: 21 banks written (396 questions), three key-truth audits 396/396, the fix pass applied (no answer_index moved; fields.json ba6ccd75); five migrations 20261112_ec11_prms_* with the HELD go-live (engine ledger, second route in SQL, oracle, traps); scratch dry run clean, idempotent, six controls and the 36-control sweep fired; PR opened. The owner applies with tools/course-waves/prms/apply_ec11_prms.sh."
  },
  "digest": {
   "lines": 1113,
