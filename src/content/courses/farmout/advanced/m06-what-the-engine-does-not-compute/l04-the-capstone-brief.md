@@ -2,7 +2,7 @@
 
 {{panel:farmout-valuation-calculator}}
 
-The Expert capstone grades the question this tier asked: what information is worth to one side, what an interest is priced at, and what happens after the farm-in. It is worked in the course's own valuation calculator, which calls the same vendored engine every lesson has quoted. There is no Suite app for this course: the calculator is the practical.
+The Expert capstone grades the question this tier asked: what information is worth to one side, what a working interest is priced at, and what happens after the farm-in. It is worked in the course's own valuation calculator, which calls the same vendored engine every lesson has quoted. There is no Suite app for this course: the calculator is the practical.
 
 ## What you receive
 

@@ -27,15 +27,15 @@ The engine's reasons, verbatim:
 
 ## What the figure leaves out
 
-The value per percent is the value of a heads-up interest: each percent pays its own share of the well and nothing more. It carries no promote, no bonus and no reimbursement. The difference is visible on the Ekene deal. Take the value of 30.000000 percent, 7893775.278136, and subtract the bonus of 2000000.000000 and the reimbursement of 3600000.000000: the result is 2293775.278136, which is FIN's EMV in the deal calculator when it pays 30.000000 percent of the well for 30.000000 percent. The promote on top of that is what took FIN's EMV below 0 in the deal as offered.
+The value per percent is the value of a heads-up working interest: each percent pays its own share of the well and nothing more. It carries no promote, no bonus and no reimbursement. Take the value of 30.000000 percent, 7893775.278136, and subtract the bonus of 2000000.000000 and the reimbursement of 3600000.000000: the result is 2293775.278136, which is FIN's EMV in the deal calculator when it pays 30.000000 percent of the well for 30.000000 percent. The promote on top of that is what took FIN's EMV below 0 in the deal as offered.
 
 ## The Penn State figures
 
-Priced as a 10.000000 percent interest, the drill yourself or farm out problem of Penn State EME 801, Lesson 6 (numbers only, CC BY-NC-SA 4.0) gives a 100 percent success of 500000.000000, a dry hole of -250000.000000 and an EMV at 35.000000 percent of 12500.000000. The risked value per percent is 125.000000 and the interest is worth 1250.000000 (engine, interest-psu-10pct).
+Priced as a 10.000000 percent working interest, the drill yourself or farm out problem of Penn State EME 801, Lesson 6 (numbers only, CC BY-NC-SA 4.0) gives a 100 percent success of 500000.000000, a dry hole of -250000.000000 and an EMV at 35.000000 percent of 12500.000000. The risked value per percent is 125.000000 and the working interest is worth 1250.000000 (engine, interest-psu-10pct).
 
 ## What the engine refuses
 
-The interest priced is stated, above 0 and at most 100:
+The working interest priced is stated, above 0 and at most 100:
 
 > interestPct must be a number above 0 and at most 100; got 0
 

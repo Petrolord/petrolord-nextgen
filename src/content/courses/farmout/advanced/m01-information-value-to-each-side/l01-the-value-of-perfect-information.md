@@ -2,7 +2,7 @@
 
 {{panel:farmout-valuation-calculator}}
 
-The Expert tier asks what a deal is worth once the sides can learn more before they commit, what risk each side keeps, what an interest is priced at, and what happens after the farm-in. This module starts with the first: what knowing the outcome in advance would be worth to the farmor and to the farminee.
+The Expert tier asks what a deal is worth once the sides can learn more before they commit, what risk each side keeps, what a working interest is priced at, and what happens after the farm-in. This module starts with the first: what knowing the outcome in advance would be worth to the farmor and to the farminee.
 
 ## The method, and where it is taught
 

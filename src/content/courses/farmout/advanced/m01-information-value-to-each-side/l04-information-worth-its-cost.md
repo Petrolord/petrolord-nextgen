@@ -29,7 +29,7 @@ That reason is a result. It is no refusal: the call succeeded and the comparison
 
 ## Reading the comparison with care
 
-EVII less the cost is an expectation over the stated signals at the stated chance of success. It depends on every term a side's positions depend on: the share paid, the interest earned, the cap, the bonus, the reimbursement, the assignor fees, the well costs and the success-case value. Change any of them and the EVII moves. Quote the net figure with the likelihoods, the cost and the side it belongs to.
+EVII less the cost is an expectation over the stated signals at the stated chance of success. It depends on every term a side's positions depend on: the share paid, the participating interest earned, the cap, the bonus, the reimbursement, the assignor fees, the well costs and the success-case value. Change any of them and the EVII moves. Quote the net figure with the likelihoods, the cost and the side it belongs to.
 
 The engine also does not decide who pays for the survey. A deal might have the farmor shoot it, the farminee pay for it as part of its obligation, or the two share it. Each is a set of terms the parties state, and each changes the positions the engine values. The engine takes the cost as the stated cost to the side valued.
 

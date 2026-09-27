@@ -22,7 +22,7 @@ The engine still reports the price per percent, 40000.000000, and says why the r
 
 > stated price 1000000 for 25%: 40000 a percent, 4000000 for 100%; no price-to-value ratio, the risked value per percent being -300000, at or below 0
 
-A buyer who pays 1000000.000000 for an interest whose risked value is -7500000.000000 is paying for something the stated terms do not show: a different view of the chance, a strategic reason, or a term outside the call. The engine cannot see any of those and does not guess.
+A buyer who pays 1000000.000000 for a working interest whose risked value is -7500000.000000 is paying for something the stated terms do not show: a different view of the chance, a strategic reason, or a term outside the call. The engine cannot see any of those and does not guess.
 
 ## Why reported and never graded as market truth
 
@@ -34,7 +34,7 @@ A consideration in shares, or in a royalty or net profit interest, would need it
 
 ## Writing a ratio into a report
 
-A report that quotes a transaction ratio names the price and the interest it was stated for, the value basis, the chance of success, the well costs and the success-case value with its rate and base year. It says the ratio is reported only.
+A report that quotes a transaction ratio names the price and the working interest it was stated for, the value basis, the chance of success, the well costs and the success-case value with its rate and base year. It says the ratio is reported only.
 
 ## Exercise
 

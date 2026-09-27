@@ -2,7 +2,7 @@
 
 {{panel:farmout-valuation-calculator}}
 
-A party backing in pays for the interest it takes by refunding part of the costs the others have already borne. Which costs count, how much is refunded and when it is paid are stated terms. On the Ekene back-in two bases give very different answers.
+A party backing in pays for the participating interest it takes by refunding part of the costs the others have already borne. Which costs count, how much is refunded and when it is paid are stated terms. On the Ekene back-in two bases give very different answers.
 
 ## The refund rule
 
@@ -10,7 +10,7 @@ The joint venture engine's rule, as the farm-out engine prints it:
 
 > new interest of another party = old x (100 - target) / (100 - current); refund = (target - current) / 100 x refundable costs, received in proportion to the interest given up
 
-The refund is the percentage points taken times the refundable costs. The parties who give up an interest receive it in proportion to what each gives up.
+The refund is the percentage points taken times the refundable costs. The parties who give up a participating interest receive it in proportion to what each gives up.
 
 ## Two bases on the same licence
 

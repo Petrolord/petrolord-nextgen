@@ -11,7 +11,7 @@ Back-ins belong to the joint ventures course, which teaches the instrument and i
 > backIn from engines/economics/jointVenture.js on the post-deal interests
 > new interest of another party = old x (100 - target) / (100 - current); refund = (target - current) / 100 x refundable costs, received in proportion to the interest given up
 
-Every other party gives up the same proportion of its interest.
+Every other party gives up the same proportion of its participating interest.
 
 ## The Ekene back-in
 
@@ -36,7 +36,7 @@ The engine does not decide when a back-in is triggered. The trigger is a contrac
 
 ## What the engine refuses
 
-A back-in raises an interest, so a target at or below the party's current interest is refused:
+A back-in raises a participating interest, so a target at or below the party's current interest is refused:
 
 > backIn.targetPct must be above the back-in party's current interest 40; got 35
 
@@ -50,7 +50,7 @@ And the farm-in cannot earn more than the farmor held:
 
 ## Reading a back-in into a farm-in
 
-A farminee weighing a farm-in into a licence with a back-in right on it is earning an interest that may shrink. Its value to the farminee depends on when the back-in can be exercised and what is refunded, and the next lesson reads the refund.
+A farminee weighing a farm-in into a licence with a back-in right on it is earning a participating interest that may shrink. Its value to the farminee depends on when the back-in can be exercised and what is refunded, and the next lesson reads the refund.
 
 ## Exercise
 

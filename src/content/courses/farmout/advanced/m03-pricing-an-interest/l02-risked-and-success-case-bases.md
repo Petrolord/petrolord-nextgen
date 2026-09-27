@@ -2,7 +2,7 @@
 
 {{panel:farmout-valuation-calculator}}
 
-The engine computes two values per percent for every interest, and the call states which one values the interest. The two answer different questions, and on an exploration prospect they are far apart.
+The engine computes two values per percent for every working interest, and the call states which one values the working interest. The two answer different questions, and on an exploration prospect they are far apart.
 
 ## The two bases
 
@@ -15,11 +15,11 @@ On the Ekene Deep prospect (synthetic), for 30.000000 percent (engine):
 | interest-ekene-risked | risked | 263125.842605 | 2252503.370418 | 7893775.278136 |
 | interest-ekene-success-case | success-case | 263125.842605 | 2252503.370418 | 67575101.112542 |
 
-Both per-percent figures are the same in both rows: the engine computes both every time. Only the value of the interest follows the stated basis. On the success-case basis 30.000000 percent is worth 67575101.112542; on the risked basis, 7893775.278136.
+Both per-percent figures are the same in both rows: the engine computes both every time. Only the value of the working interest follows the stated basis. On the success-case basis 30.000000 percent is worth 67575101.112542; on the risked basis, 7893775.278136.
 
 ## When each basis fits
 
-The risked basis prices an interest before the well is drilled, when the dry hole is still possible. The success-case basis describes what the interest would be worth once a discovery is made and before development spending. HMRC's manual makes the same point about valuing a right to future benefits:
+The risked basis prices a working interest before the well is drilled, when the dry hole is still possible. The success-case basis describes what the working interest would be worth once a discovery is made and before development spending. HMRC's manual makes the same point about valuing a right to future benefits:
 
 > "The value of the right will need to reflect the degree of probability that future benefits will accrue as well as their extent" (HMRC Oil Taxation Manual OT30131)
 
@@ -43,7 +43,7 @@ A call with no basis at all is refused as well:
 
 ## Choosing the basis for a report
 
-The two bases differ on Ekene Deep by a factor that comes entirely from the chance of success and the dry-hole cost. A success-case figure quoted for an undrilled prospect assumes the risk away. The engine prints both, and the basis stated in the call decides which one values the interest.
+The two bases differ on Ekene Deep by a factor that comes entirely from the chance of success and the dry-hole cost. A success-case figure quoted for an undrilled prospect assumes the risk away. The engine prints both, and the basis stated in the call decides which one values the working interest.
 
 ## Exercise
 

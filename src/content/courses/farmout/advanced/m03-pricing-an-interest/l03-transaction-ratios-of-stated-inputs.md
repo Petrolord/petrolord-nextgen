@@ -27,11 +27,11 @@ The engine's reasons, verbatim:
 > stated price 16000000 for 30%: 533333.33 a percent, 53333333.33 for 100%; 2.026914 times the risked value per percent
 > 2C (contingent, best estimate): 36 MMboe net to the interest; 444444.44 per MMboe
 
-The price per percent divides the stated price by the stated interest. The ratio 2.026914 divides that by the risked value per percent, 263125.842605. The volume net to the interest is 30.000000 percent of the stated 120.000000 MMboe, and the price per unit divides the price by it.
+The price per percent divides the stated price by the stated working interest. The ratio 2.026914 divides that by the risked value per percent, 263125.842605. The volume net to the interest is 30.000000 percent of the stated 120.000000 MMboe, and the price per unit divides the price by it.
 
 ## A producing interest
 
-The golden case interest-production-metric prices 20.000000 percent of a producing interest at a stated 18000000.000000, with a stated rate of 1000.000000 boe/d net to the interest (engine):
+The golden case interest-production-metric prices 20.000000 percent working interest in a producing field at a stated 18000000.000000, with a stated rate of 1000.000000 boe/d net to the interest (engine):
 
 | golden case | price per percent | price for 100% | price over value per percent | rate net to the interest | price per flowing unit |
 | --- | --- | --- | --- | --- | --- |
