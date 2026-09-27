@@ -115,10 +115,10 @@
    "It refuses the leg, since every leg distance must be a finite number above 0 NM.",
    "It merges the two stops and asks for two legs.",
    "It replaces the 0 with the smallest positive leg of the route so no leg takes no time.",
-   "It accepts it, and returns 6.000000 sailing hours and 12.000000 hours in all."
+   "It accepts it, and returns 6.000000 sailing hours for the voyage."
   ],
   "answer": 3,
-  "explanation": "A leg may be 0 NM: the rule is a finite number at or above 0, so the leg is accepted and the voyage sails 60 NM at 10 knots, 6.000000 hours, for 12.000000 hours in all. Only a negative leg is refused. The engine merges no stops and replaces no stated figure."
+  "explanation": "A leg may be 0 NM: the rule is a finite number at or above 0, so the leg is accepted and the voyage sails 60 NM at 10 knots, 6.000000 hours. Only a negative leg is refused. The engine merges no stops and replaces no stated figure."
  },
  {
   "prompt": "The Ekene milk run's stops are stated as EKA, EKJ, EKB, with EKF left out. What does the engine return?",

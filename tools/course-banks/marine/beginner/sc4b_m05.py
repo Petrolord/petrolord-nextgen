@@ -59,9 +59,9 @@ q(2, "Cargo of 81 t sits on a deck rated for 80 t, its 50 m2 footprint fills the
   "A refusal naming the deck cargo's weight."],
  "Deck load is at 1.012500, above every other utilisation, so it binds; its load is above its capacity, so it is overloaded. The engine's reasons: the binding constraint is deck load: 81 t of 80 t (101.25%) and overloaded: deck load needs 81 t against a capacity of 80 t. The tie rule acts at twelve digits and one tonne is far beyond it; the tie order applies only to equal utilisations; and an overload is a result.")
 
-q(1, "Two deck cargoes of 0.1 and 0.2 m2 fill a 0.3 m2 deck area capacity. The double sum comes back as 0.30000000000000004 and the utilisation as 1.0000000000000002. What does the engine return?",
+q(1, "Two deck cargoes of 0.1 and 0.2 m2 fill a 0.3 m2 deck area capacity. Held as binary doubles, the sum comes back a hair above 0.3 and the utilisation a hair above 1. What does the engine return?",
  "Feasible: compared at twelve digits the sum equals the 0.3 m2 exactly, so deck area binds at 1.000000.",
- ["An overloaded voyage on deck area, since 1.0000000000000002 is above 1 however small the excess.",
+ ["An overloaded voyage on deck area, since a utilisation a hair above 1 is above 1 however small the excess.",
   "A refusal: a footprint below 1 m2 is too small.",
   "A feasible voyage, since the engine rounds every load to six decimals before any capacity check."],
  "Decimal inputs are held as binary doubles, so the sum lands a hair above 0.3. The engine compares at twelve significant digits, where the load equals the capacity, so the voyage is feasible. Without the rule, rounding noise would decide the answer. The engine accepts small cargo, and six decimals is only how figures are printed.")

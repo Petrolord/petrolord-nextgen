@@ -80,11 +80,11 @@ q(0, "Why does one Ekene milk run take fewer days than the four dedicated voyage
  "The milk run sails 206.000000 NM, where the four dedicated voyages sail 124, 136, 148 and 190 NM, and it pays the port time once where the dedicated route pays it four times. The comparison holds the vessel, the speed, the field hours and the weather the same on both sides, so none of those can explain the gap, and a milk run stops at every installation.")
 
 q(3, "Two installations sit at one location. A milk run through them states legs of 30, 0 and 30 NM at 10 knots. What does the engine do with the leg of 0?",
- "It accepts it, and returns 6.000000 sailing hours and 12.000000 hours in all.",
+ "It accepts it, and returns 6.000000 sailing hours for the voyage.",
  ["It refuses the leg, since every leg distance must be a finite number above 0 NM.",
   "It merges the two stops and asks for two legs.",
   "It replaces the 0 with the smallest positive leg of the route so no leg takes no time."],
- "A leg may be 0 NM: the rule is a finite number at or above 0, so the leg is accepted and the voyage sails 60 NM at 10 knots, 6.000000 hours, for 12.000000 hours in all. Only a negative leg is refused. The engine merges no stops and replaces no stated figure.")
+ "A leg may be 0 NM: the rule is a finite number at or above 0, so the leg is accepted and the voyage sails 60 NM at 10 knots, 6.000000 hours. Only a negative leg is refused. The engine merges no stops and replaces no stated figure.")
 
 q(2, "The Ekene milk run's stops are stated as EKA, EKJ, EKB, with EKF left out. What does the engine return?",
  "A refusal, in its own words: route.stops must be an array naming each of the 4 installations once, in the order sailed; got [\"EKA\",\"EKJ\",\"EKB\"]",
