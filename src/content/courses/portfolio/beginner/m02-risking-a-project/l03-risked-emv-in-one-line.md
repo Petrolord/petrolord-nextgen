@@ -37,7 +37,7 @@ OK-3 never returns 41.2500. In any one outcome it either succeeds, around a succ
 
 ## The mistake
 
-The mistake is dropping a weight. Writing pos x npv_p50 alone forgets that a failure costs money. Writing pos x npv_p50 - fail_cost charges the full loss as if failure were certain. Both give a number, both are wrong, and the engine, which only ever runs its own line, never sees the hand calculation that disagrees with it. The check is cheap: a hand line that does not land on 41.2500 for OK-3, from 0.250000, 420.0000 and 85.0000, has dropped or doubled a weight somewhere, and the same line run over all six rows must reproduce every value in the table.
+The mistake is dropping a weight. Writing pos x npv_p50 alone forgets that a failure costs money. Writing pos x npv_p50 - fail_cost charges the full loss as if failure were certain. Both give a number, both are wrong, and the engine, which only ever runs its own line, does not see the hand calculation that disagrees with it. The check is cheap: a hand line that does not land on 41.2500 for OK-3, from 0.250000, 420.0000 and 85.0000, has dropped or doubled a weight somewhere, and the same line run over all six rows must reproduce every value in the table.
 
 ## Exercise
 

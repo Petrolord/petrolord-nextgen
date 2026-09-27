@@ -29,7 +29,7 @@ The Capital Portfolio engine answers that question separately at each limit:
 | 750.0000 | OK-1 + OK-2 + OK-3 + OK-4 + OK-5 | 690.0000 | 444.0000 |
 | 1000.0000 | OK-1 + OK-2 + OK-3 + OK-4 + OK-5 + OK-6 | 1000.0000 | 588.0000 |
 
-Read down the funded sets rather than the totals. OK-2 is in at 300.0000, out at 450.0000 and back in at 600.0000. OK-3 comes in at 450.0000, leaves at 600.0000 and returns at 750.0000. A project has no fixed place in the queue. Its place depends on what else the same money could buy.
+Read down the funded sets as well as the totals. OK-2 is in at 300.0000, out at 450.0000 and back in at 600.0000. OK-3 comes in at 450.0000, leaves at 600.0000 and returns at 750.0000. A project has no fixed place in the queue. Its place depends on what else the same money could buy.
 
 A limit can also buy nothing. The published case `limitBelowEveryProject` sets a limit of 30.0000 under the cheapest project and the engine funds no set at all, capex 0.0000 and EMV 0.0000.
 

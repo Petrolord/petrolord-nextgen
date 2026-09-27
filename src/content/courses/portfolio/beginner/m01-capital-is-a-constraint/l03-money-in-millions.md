@@ -20,9 +20,9 @@ The chance of success and every ratio print to six decimals and carry no currenc
 
 ## Where the unit changes the answer
 
-The unit does matter to the grid. The engine uses 1 million USD per cell only when the limit and every candidate capex are whole numbers and the limit is at most 5000. Otherwise each cell is the limit / 2000, and every project weighs max(1, round(capex / cell)) cells. OKONO's limits of 450.0000 and 600.0000 are whole and under 5000, so its resolution reads 1.0000 and the grid is exact.
+The unit does not change which set is funded. The knapsack is solved exactly on the capex figures as typed, read at their decimal precision, so OKONO at 450.0000 reports solveMethod "exact" and optimalityGap 0.0000. A grid of 2000 cells, with every capex rounded up to whole cells, appears only as a stated fallback when the exact solve would hold more than exactStateLimit partial portfolios, 200000 by default, which a sixteen-project inventory never reaches.
 
-Type that limit of 450.0000 million USD as a count of USD instead and the number is far above 5000, so the engine switches to the coarse grid of limit / 2000 per cell. Only the resolution the engine reports shows that the grid changed.
+The published rawDollars case types a classic four-project inventory in USD, with a limit of 450000000.0000. The engine funds A + B + D for 250.0000, solveMethod "exact", the same set the million USD version funds. Consistent scaling is harmless; the danger lies elsewhere.
 
 ## The mistake
 
@@ -36,4 +36,4 @@ It holds no currency field, no unit field and no scale check. The Suite labels i
 
 ## Exercise
 
-For OK-5, list every field that is money and every field that is a probability, with the precision each prints to. Then state the grid rule, say which grid OKONO runs on at a limit of 450.0000 and why, and describe what would happen to that grid if the limit were typed in USD.
+For OK-5, list every field that is money and every field that is a probability, with the precision each prints to. Then give the solveMethod and optimalityGap OKONO reports at a limit of 450.0000, and say what typing every amount in USD would change in the funded set, using the rawDollars case.

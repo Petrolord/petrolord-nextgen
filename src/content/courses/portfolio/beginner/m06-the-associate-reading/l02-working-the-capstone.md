@@ -1,16 +1,16 @@
 # Working the capstone
 
-A graded portfolio question hands you an inventory and a limit and asks what to fund and what it is worth. The method is to risk every row by hand, check the grid, solve and prove the set, beat the obvious alternatives, re-solve each budget from scratch, and only then read the risk.
+A graded portfolio question hands you an inventory and a limit and asks what to fund and what it is worth. The method is to risk every row by hand, read the solve method, solve and prove the set, beat the obvious alternatives, re-solve each budget from scratch, and only then read the risk.
 
 {{panel:ec-capital-explorer}}
 
 ## Step one: risk every row before solving
 
-Write capex, pos, npv_p50 and fail_cost for each project, and compute risked EMV yourself. On OKONO, OK-3 is 0.250000 x 420.0000 - 0.750000 x 85.0000 = 41.2500. Then compare each hand value with the explorer's risked EMV column. A mismatch means an input was typed wrong, or a clamp fired: a pos over 1 is read as 1, a pos under 0 as 0, and a negative fail_cost as 0. Strike out any project at 0.0000 or less, because it can never be funded. On OKONO all six are positive.
+Write capex, pos, npv_p50 and fail_cost for each project, and compute risked EMV yourself. On OKONO, OK-3 is 0.250000 x 420.0000 - 0.750000 x 85.0000 = 41.2500. Then compare each hand value with the explorer's risked EMV column. A mismatch means an input was typed wrong or a default fired: a pos left out is read as 1 and a negative fail_cost as 0. A pos over 1 or under 0 never reaches the table, because the engine refuses it by project name. Strike out any project at 0.0000 or less, because it can never be funded. On OKONO all six are positive.
 
-## Step two: read the grid first
+## Step two: read the solve method first
 
-Before trusting any set, read the resolution. OKONO's capexes and limits are all whole numbers under 5000, so the resolution is 1.0000 and nothing is rounded. If the resolution is anything else, three checks follow: sum the funded capex in money against the limit, whatever overLimit says; look for a left-out project that would still fit; and look for a positive-EMV project with capex 0.0000 that was not funded.
+Before trusting any set, read solveMethod. "exact" with optimalityGap 0.0000 means the funded set is the optimum inside the limit, and OKONO reads that at every limit. Only "grid-feasible", the stated fallback, needs more: read its optimalityGap as the most risked EMV it may have left out, and look for a left-out project that would still fit in money.
 
 ## Step three: solve and prove the set
 
@@ -43,4 +43,4 @@ It funds projects whole, uses one average correlation and assumes a normal succe
 
 ## Exercise
 
-Work OKONO at 450.0000 through all six steps: risk OK-3 by hand, state the resolution, prove the funded capex and EMV, show the greedy set and the swap that beats it, and quote P(loss) and P90 with the seed and iterations.
+Work OKONO at 450.0000 through all six steps: risk OK-3 by hand, state solveMethod and optimalityGap, prove the funded capex and EMV, show the greedy set and the swap that beats it, and quote P(loss) and P90 with the seed and iterations.
