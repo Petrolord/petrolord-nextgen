@@ -19,11 +19,11 @@ No survey is perfect. EKPAN's survey sees a bright spot on 0.850000 of successes
 
 ## What carries straight over
 
-The information tree is rolled back by the same engine this tier used: a decision to survey, a chance node for the reading, a decision after each reading. Its root is worth 92.5750, the survey branch 100.5750 less its cost of 8.0000. At a survey cost of exactly 24.8250 its two root branches tie, and the engine keeps the first listed, the acquisition: the tie rule again. OKRIKA's appraisal already showed the idea in miniature: 15.6000 when its result cannot change the action, and 87.0000 when a poor result leads to a sale.
+The information tree is rolled back by the same engine this tier used: a decision to survey, a chance node for the reading, a decision after each reading. Its root is worth 92.5750, the survey branch 100.5750 less its cost of 8.0000. At a survey cost of exactly 24.8250 its two root branches tie, and the engine reports the tie and marks the first listed, the acquisition, as it does on any tree. OKRIKA's appraisal already showed the idea in miniature: 15.6000 when its result cannot change the action, and 87.0000 when a poor result leads to a sale.
 
 ## What the Expert tier adds
 
-Numbers that cannot all be true. The VOI Analyzer offers two actions only, so EKPAN typed into it shows a gross voi of 19.84. On IRRI its typed inputs contradict the stated chances, and the repaired Analyzer withholds the value of information rather than printing one. Before the repair it printed a gross value of information of -15.00 there, a number Bayes can never produce, because information derived from chances that agree is never worth less than 0.
+Numbers that cannot all be true. The VOI Analyzer offers two actions only, so EKPAN typed into it shows a gross voi of 19.84. On IRRI its typed inputs contradict the stated chances, and the Analyzer withholds the value of information. Weighted by those typed chances with nothing checking them against the stated prior, the arithmetic would give a gross value of information of -15.00, a number Bayes can never produce, because information derived from chances that agree is never worth less than 0.
 
 ## Exercise
 

@@ -14,7 +14,7 @@ A threshold, a cap and a set of consequences are optional. The engine applies ea
 
 The engine's messages say plainly when a term has no default. A few, verbatim:
 
-> uplift must be an object { type } with type "none", "compound" or "multiple" (no default); got nothing
+> uplift must be an object { type } with type "none", "simple", "compound" or "multiple" (no default); got nothing
 
 > interest must be an object { annualRatePct, dayBasis, interestMethod, graceHours } (no default rate or method); got nothing
 

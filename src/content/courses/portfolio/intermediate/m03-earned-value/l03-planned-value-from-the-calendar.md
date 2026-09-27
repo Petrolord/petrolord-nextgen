@@ -27,9 +27,9 @@ The fraction counts whole days elapsed over the days in the window. The publishe
 
 The plan is the budget spread evenly over the calendar. The engine has no rig schedule, no mobilisation month and no completion campaign to shape it. On OFON-1, drilling carries 14200000 of the budget and would normally be spent early, completion carries 5600000 and would normally be spent late, and the planned value treats every day of the window as costing the same.
 
-## Before the repair
+## An AFE with no dates
 
-Before EC5-0 the AFE wizard asked for no dates. With no window the time progress fell back to 1, so planned value was the whole budget on every day of the AFE's life. The published case "no dates: time progress 1" still records that behaviour for an AFE entered without dates, returning time progress 1.000000. The repaired wizard asks for the window.
+With no window the time progress falls back to 1, so planned value is the whole budget on every day of the AFE's life. The published case "no dates: time progress 1" records that fallback, returning time progress 1.000000. It measures nothing, so the Suite labels SPI "Unavailable" for an AFE without both dates, and the AFE wizard asks for the window, a start date and an end date.
 
 ## What it refuses
 
@@ -37,7 +37,7 @@ It refuses an as-of date that is not a real date, with "asOf is not a valid date
 
 ## The mistake
 
-The mistake is reading planned value as a forecast of spend. 17466060 as of 2027-08-15 is not what OFON-1 should have spent by then under any real drilling plan; it is 0.645695 of the budget because 0.645695 of the calendar has passed. The second mistake is quoting planned value with no date. 13345861 and 17466060 are both OFON-1's planned value on the same lines, and without the as-of date neither means anything.
+The mistake is reading planned value as a forecast of spend. 17466060 as of 2027-08-15 does not say what OFON-1 should have spent by then under any real drilling plan. It is 0.645695 of the budget because 0.645695 of the calendar has passed. The second mistake is quoting planned value with no date. 13345861 and 17466060 are both OFON-1's planned value on the same lines, and without the as-of date neither means anything.
 
 ## Exercise
 

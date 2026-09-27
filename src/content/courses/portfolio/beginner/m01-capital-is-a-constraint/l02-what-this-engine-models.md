@@ -12,7 +12,7 @@ Each project carries a capex, a success-case NPV `npv_p50`, the entered NPV perc
 | --- | --- | --- | --- | --- | --- | --- |
 | OK-3 | 90.0000 | 420.0000 | 700.0000 | 210.0000 | 0.250000 | 85.0000 |
 
-`pos` runs from 0 to 1 and defaults to 1. `fail_cost` is 0 or more and defaults to 0. Every amount is million USD.
+`pos` runs from 0 to 1, and a `pos` left out (or null) is the default 1. `fail_cost` is 0 or more and defaults to 0. Every amount is million USD.
 
 ## Step one, a risked value
 
@@ -20,7 +20,7 @@ Risked EMV = pos x npv_p50 - (1 - pos) x fail_cost. For OK-3 by hand, 0.250000 x
 
 ## Step two, a set under a limit
 
-The optimizer is a 0/1 knapsack. It funds each project in full or not at all and maximises the summed risked EMV with total capex inside the limit on its grid. For OKONO every capex and limit is a whole number of at most 5000, so the grid is 1 million USD per cell and the resolution reads 1.0000. At a limit of 450.0000 it funds OK-1 + OK-3 + OK-4 for 291.0000. It also returns the efficient frontier, the best risked EMV reachable at each spending level up to the limit.
+The optimizer is a 0/1 knapsack. It funds each project in full or not at all and maximises the summed risked EMV with total capex within the limit. It solves that exactly on the capex figures as typed, so the funded set is the true optimum and never exceeds the limit; the result says so with solveMethod "exact" and an optimalityGap of 0.0000. At a limit of 450.0000 it funds OK-1 + OK-3 + OK-4 for 291.0000. It also returns the efficient frontier, the best risked EMV reachable at each spending level up to the limit.
 
 ## Step three, a risk summary
 
@@ -30,7 +30,7 @@ For the funded set the engine reports `emv` and `stdDev` in closed form, and rea
 | --- | --- | --- | --- | --- | --- | --- |
 | 291.0000 | 271.6522 | 0.123600 | -18.3574 | 738.1043 | 20260829 | 10000 |
 
-P90 is the low case, the 10th percentile of simulated portfolio NPV, and P10 the high case. Before EC5-0 the engine read the loss probability and these percentiles from a normal approximation of the summed NPV. The repaired engine simulates, and shows the seed so anyone can reproduce the run.
+P90 is the low case, the 10th percentile of simulated portfolio NPV, and P10 the high case. The loss probability and both percentiles are counted from the simulated outcomes, and the seed is shown so anyone can reproduce the run exactly.
 
 ## What it does not model
 

@@ -16,15 +16,15 @@ The root takes the maximum of 105.0000, 37.7500 and 0.0000. Its EMV is 105.0000 
 
 ## The decision inside the drill
 
-The marginal find is a decision node reached only through the drill's chance node. Develop leads to a payoff of 260.0000 at a cost of 90.0000, a branch value of 170.0000. Sell pays 140.0000 at no cost. The node takes 170.0000 and marks Develop. That value, not either payoff, is what the drill chance node weights at probability 0.150000. A decision node deep in a tree is solved exactly like the root, and its answer feeds the node above it.
+The marginal find is a decision node reached only through the drill's chance node. Develop leads to a payoff of 260.0000 at a cost of 90.0000, a branch value of 170.0000. Sell pays 140.0000 at no cost. The node takes 170.0000 and marks Develop. That value, and neither payoff, is what the drill chance node weights at probability 0.150000. A deep decision node is solved like the root, and feeds the node above it.
 
 ## A published check
 
-The published drillFarmOut tree has branch values Drill 43.0000, Farm out 18.0000 and Do nothing 0.0000. The engine returns EMV 43.0000 with best branch index 0, and the golden agrees at 43.0000. The pattern is the same: a risky branch whose weighted value, after its cost, beats a safer one.
+The published drillFarmOut tree has branch values Drill 43.0000, Farm out 18.0000 and Do nothing 0.0000. The engine returns EMV 43.0000 with best branch index 0, and the golden agrees at 43.0000. The pattern is the same.
 
 ## What the Builder's cards say
 
-The Decision Tree Builder reads four cards off the root. Optimal EMV is the root EMV, 105.0000 on the EKPAN tree. Recommended first move is the root's best branch label, Drill. Next best alternative is the largest other root branch value, the farm-out's 37.7500. Decision advantage is the difference, 67.2500. The advantage is how much EMV the owner gives up by taking the next best move instead. It is a difference of averages, and says nothing about how often the drill does worse than the farm-out.
+The Decision Tree Builder reads four cards off the root. Optimal EMV is the root EMV, 105.0000 on the EKPAN tree. Recommended first move is the root's best branch label, Drill; when root branches tie at card precision it names every tied branch instead, and the Decision advantage card reads Indifferent. Next best alternative is the largest other root branch value, the farm-out's 37.7500. Decision advantage is the difference, 67.2500. The advantage is how much EMV the owner gives up by taking the next best move. It is a difference of averages, and says nothing about how often the drill does worse than the farm-out.
 
 ## The mistake
 
@@ -32,7 +32,7 @@ The careful mistake is comparing the wrong numbers. Setting the drill node's 160
 
 ## What it refuses
 
-A decision node needs at least one branch, and one with none is refused with `Decision and chance nodes need at least one branch (at node "empty")`. Beyond that it takes no view. It does not add a walk-away branch that was never drawn, does not refuse a node where every branch loses money, and does not weigh how risky a branch is. It picks the largest branch value, and a later branch displaces an earlier one only by being strictly greater.
+A decision node needs at least one branch, and one with none is refused with `Decision and chance nodes need at least one branch (at node "empty")`. Beyond that it takes no view. It does not add a walk-away branch that was never drawn, does not refuse a node where every branch loses money, and does not weigh how risky a branch is. It picks the largest branch value, and where branches tie it reports the tie and marks the first listed.
 
 ## Exercise
 

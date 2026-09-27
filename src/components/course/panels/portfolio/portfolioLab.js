@@ -6,38 +6,39 @@
 // frontier point, every risk summary, every earned value, every S-curve point
 // and every partner share below is a return value of
 // engines/economics/portfolio.js (the Capital Portfolio Studio) or
-// engines/economics/afe.js (the AFE Cost Control Manager), as repaired in EC5-0.
+// engines/economics/afe.js (the AFE Cost Control Manager).
 //
 // NOTHING IN THIS FILE COMPUTES AN ECONOMIC QUANTITY. Where a reader carries a
 // value the digest calls "derived" (unspent capex, frontier steps, the greedy
-// fill, a line's forecast variance, the old normal approximation rebuilt from
-// the engine's own emv and stdDev), it is the digest's own arithmetic on
-// numbers the engine returned, and the key name says Derived. The lab and
-// /root/ec-wip-portfolio/digest.txt agree because both call the engines on the
-// same inputs, not because either copied the other.
+// fill, a line's forecast variance, the fallback grid's rounded-up cell
+// weights, the normal approximation rebuilt from the engine's own emv and
+// stdDev), it is the digest's own arithmetic on numbers the engine returned,
+// and the key name says Derived. The lab and
+// tools/course-waves/portfolio/digest.txt agree because both call the engines
+// on the same inputs; neither copies the other.
 //
 // UNITS. Portfolio money is million USD; AFE money is whole units of the AFE
 // currency (USD); percents run 0 to 100; probabilities and ratios are plain
 // fractions.
 //
 // THE CLOCK. Every AFE call passes an explicit asOf. The published cases that
-// carry no asOf of their own are run at DIGEST_CUT_DATE (sections 9 and 10,
-// where the digest's generator read the clock on the day it was cut) or at
-// UNDATED_METRICS_AS_OF (sections 7 and 8, the generator's own fallback). No
-// value here depends on the day it runs; a clock gate in portfolioLab.test.js
-// proves it under two faked system dates.
+// carry no asOf of their own are run at DIGEST_CUT_DATE (sections 9 and 10)
+// or at UNDATED_METRICS_AS_OF (sections 7 and 8, the generator's own
+// fallback); no printed value of those cases depends on which day inside those
+// windows is used. A clock gate in portfolioLab.test.js proves no value here
+// depends on the day it runs, under two faked system dates.
 //
 // PURITY. Every function is pure and deterministic; every Monte Carlo is the
 // engine's seeded one. Nothing is memoised.
 
 import portfolioGolden from '@petrolord/engines/test-data/economics/goldens/portfolio_cases.json';
 import afeGolden from '@petrolord/engines/test-data/economics/goldens/afe_cases.json';
-// Namespaces, not named imports: eslint's resolver follows the node_modules
-// symlink to the SHARED checkout's engines, which predate EC5-0 and export no
-// DEFAULT_RISK_SEED, DEFAULT_RISK_ITERATIONS or itemForecast. Vite and vitest
-// alias @petrolord/engines to this worktree's packages/engines, which do.
-// import/namespace still checks members against the shared copy, so it is off
-// for this file only; the vitest files prove every member resolves.
+// Namespaces in place of named imports: eslint's resolver follows the node_modules
+// symlink to the SHARED checkout's engines, which may export fewer members
+// than this worktree's vendored copy. Vite and vitest alias @petrolord/engines
+// to this worktree's packages/engines. import/namespace still checks members
+// against the shared copy, so it is off for this file only; the vitest files
+// prove every member resolves.
 /* eslint-disable import/namespace */
 import * as P from '@petrolord/engines/engines/economics/portfolio.js';
 import * as A from '@petrolord/engines/engines/economics/afe.js';
@@ -45,6 +46,8 @@ import * as ST from '@petrolord/engines/lib/stats/stats.js';
 
 export const DEFAULT_RISK_SEED = P.DEFAULT_RISK_SEED;
 export const DEFAULT_RISK_ITERATIONS = P.DEFAULT_RISK_ITERATIONS;
+export const EXACT_STATE_LIMIT = P.EXACT_STATE_LIMIT;
+export const FALLBACK_GRID_CELLS = P.FALLBACK_GRID_CELLS;
 
 // ---------------------------------------------------------------------------
 // Helpers. Pure, and none of them computes an economic quantity.
@@ -70,12 +73,12 @@ export const goldenCounts = () => ({
 });
 
 // ---------------------------------------------------------------------------
-// THE TEACHING FIELDS, copied VERBATIM from /root/ec-wip-portfolio/ec5_dump.mjs.
+// THE TEACHING FIELDS, copied VERBATIM from tools/course-waves/portfolio/ec5_dump.mjs.
 // None of them is a golden case and none of them is graded anywhere.
 // ---------------------------------------------------------------------------
 
-// THE TEACHING INVENTORY. Integer capex in million USD, so the exact 1 million
-// USD grid applies at every limit below 5000.
+// THE TEACHING INVENTORY. Integer capex in million USD; the knapsack is solved
+// exactly at every limit.
 export const OKONO = [
   { id: 'OK-1', name: 'Infill drilling', capex: 120, npv_p50: 95, npv_p10: 150, npv_p90: 50, pos: 0.95, fail_cost: 10 },
   { id: 'OK-2', name: 'Gas compression', capex: 180, npv_p50: 130, npv_p10: 190, npv_p90: 80, pos: 0.9, fail_cost: 20 },
@@ -109,7 +112,9 @@ export const OFON_PARTNERS = [
 
 /** The as-of date the digest reads OFON-1's lines, S-curve and shares at. */
 export const OFON_MID_AS_OF = '2027-08-15';
-/** The day the digest was cut: its generator read the clock for the undated published cases of sections 9 and 10. */
+/** The date OFON-1 is read after the end of its window, for the closing point. */
+export const OFON_AFTER_END_AS_OF = '2028-01-10';
+/** The as-of date the published S-curve and as-of cases without one of their own are run at. */
 export const DIGEST_CUT_DATE = '2026-09-14';
 /** The generator's own fallback for the undated published metrics cases of sections 7 and 8. */
 export const UNDATED_METRICS_AS_OF = '2030-01-01';
@@ -123,12 +128,13 @@ export const RHO_SWEEP = [0, 0.3, 0.6, 0.9, 1];
 export const CORRELATION_LIMIT = 600;
 /** The seed and iteration table of section 15, on the funded set at 450. */
 export const SEED_TABLE = [[P.DEFAULT_RISK_SEED, 1000], [P.DEFAULT_RISK_SEED, 10000], [P.DEFAULT_RISK_SEED, 40000], [1, 10000], [2, 10000], [3, 10000]];
-/** The z multiplier the old normal approximation used for its P90 card. */
-export const OLD_NORMAL_Z = 1.2816;
+/** z at 0.90: the normal approximation's P90 is emv less this many standard deviations. */
+export const NORMAL_Z = 1.2816;
 
 const okonoProject = (id) => clone(OKONO.find((p) => p.id === id));
 const okonoRun = (limit) => P.optimizePortfolio({ projects: clone(OKONO), capexLimit: limit });
 const ofonMetrics = (asOf, items = OFON_ITEMS, invoices = OFON_INVOICES) => A.calculateMetrics(clone(OFON_AFE), clone(items), clone(invoices), asOf);
+const ofonCurve = (asOf) => A.generateSCurveData(clone(OFON_AFE), clone(OFON_ITEMS), clone(OFON_INVOICES), asOf);
 
 /** A funded set as the digest joins it. */
 export const setLabel = (projectIds = []) => projectIds.join(' + ') || 'none';
@@ -137,12 +143,16 @@ export const setLabel = (projectIds = []) => projectIds.join(' + ') || 'none';
 // SECTION 1. The portfolio engine, what it models and what it refuses.
 // ---------------------------------------------------------------------------
 
-export const RISKED_EMV_RULE = 'Risked EMV per project = pos x npv_p50 - (1 - pos) x fail_cost, pos the chance of success (0 to 1, default 1), fail_cost the loss if it fails (0 or more, default 0).';
-export const KNAPSACK_RULE = 'The optimizer funds each project in full or not at all (a 0/1 knapsack) and maximises the summed risked EMV with total capex within the limit on its grid.';
-export const GRID_RULE = 'Grid: 1 million USD per cell when the limit and every candidate capex are whole numbers and the limit is at most 5000; otherwise limit / 2000 per cell, each project weighing max(1, round(capex / cell)) cells.';
-export const NEVER_FUNDED_RULE = 'A project with risked EMV of 0 or less is never funded; money may be left unspent.';
+export const RISKED_EMV_RULE = 'Risked EMV per project = pos x npv_p50 - (1 - pos) x fail_cost, pos the chance of success, fail_cost the loss if it fails (0 or more, default 0; a negative or non-numeric fail_cost reads as 0).';
+export const POS_RULE = 'pos: a missing or null pos is the documented default 1. A pos that is present must be a number, or a numeric string, from 0 to 1 inclusive; a blank, non-numeric or out-of-range pos is refused by project name.';
+export const CAPEX_RULE = 'capex: every project must carry a finite capex of 0 or more (a number or a numeric string); a missing, null, blank, non-numeric, infinite or negative capex is refused by project name. The optimizer checks every project in list order, capex before pos, before it computes anything, and reports the first failure.';
+export const KNAPSACK_RULE = 'The optimizer funds each project in full or not at all (a 0/1 knapsack) and maximises the summed risked EMV with total capex within the limit.';
+export const EXACT_SOLVE_RULE = 'Exact solve: the knapsack is solved exactly on the capex figures as typed (read at their decimal precision when one power of ten up to a million makes the limit and every capex whole numbers), so the funded set is optimal and never exceeds the limit. The result reports solveMethod "exact", optimalityGap 0 and resolution null (there is no grid), and a free project (capex 0) with positive EMV weighs nothing and is always funded.';
+export const FALLBACK_RULE = `Stated fallback: if the exact solve would hold more than exactStateLimit partial portfolios (default ${P.EXACT_STATE_LIMIT}; a call may state a smaller one), it falls back to a grid of ${P.FALLBACK_GRID_CELLS} cells of resolution limit / ${P.FALLBACK_GRID_CELLS}, every capex rounded UP to whole cells, so the funded set still fits the limit. The result then reports solveMethod "grid-feasible", the resolution, and optimalityGap, an upper bound on the risked EMV the fallback may leave out. A sixteen-project inventory has at most 65536 subsets, so it never reaches the default.`;
+export const NEVER_FUNDED_RULE = 'A project with risked EMV of 0 or less is never funded; money may be left unspent. overLimit (total capex above the limit) and overLimitBy stay in the result and read false and 0.';
 
-export const CLAMP_CASE_IDS = ['posAboveOneClamps', 'posBelowZeroClamps', 'negativeFailCostIsZero', 'nonNumericPosIsDefault', 'missingNpvIsZero'];
+/** The published projectEmv cases of section 1: the pos boundary, the defaults and a numeric string. */
+export const DEFAULT_CASE_IDS = ['posOneBoundary', 'nullPosIsDefault', 'numericStringPos', 'negativeFailCostIsZero', 'missingNpvIsZero'];
 
 const emvCase = (id) => {
   const c = GPC.projectEmv[id];
@@ -154,10 +164,10 @@ const portfolioRefusals = () => portfolioGolden.optimizeRefusals.map((c) => {
   return { id: c.id, ok: a.ok, name: a.name, error: a.error };
 });
 
-/** The pos probe of section 1: npv_p50 80, fail_cost 30, pos typed four ways. */
-export const POS_PROBE_PROJECT = { capex: 10, npv_p50: 80, fail_cost: 30 };
-export const POS_PROBES = [['pos left out', undefined], ['pos null', null], ['pos typed as an empty string ""', ''], ['pos typed as "n/a"', 'n/a']];
-/** The non-numeric capex probe of section 1 (finding EC5-7). */
+/** The pos probe of section 1: a project "Probe" with npv_p50 80 and fail_cost 30, pos typed seven ways. */
+export const POS_PROBE_PROJECT = { name: 'Probe', capex: 10, npv_p50: 80, fail_cost: 30 };
+export const POS_PROBES = [['pos left out', undefined], ['pos null', null], ['pos typed as an empty string ""', ''], ['pos typed as "n/a"', 'n/a'], ['pos 1.4', 1.4], ['pos -0.2', -0.2], ['pos typed as "0.4"', '0.4']];
+/** The non-numeric capex probe of section 1: the whole call is refused. */
 export const TEXT_CAPEX_PROBE = { projects: [{ id: 'T', capex: 'abc', npv_p50: 50 }, { id: 'U', capex: 40, npv_p50: 30 }], capexLimit: 100 };
 
 export const engineRules = () => {
@@ -165,18 +175,21 @@ export const engineRules = () => {
   return {
     seed: P.DEFAULT_RISK_SEED,
     iterations: P.DEFAULT_RISK_ITERATIONS,
-    rules: [RISKED_EMV_RULE, KNAPSACK_RULE, GRID_RULE, NEVER_FUNDED_RULE],
+    rules: [RISKED_EMV_RULE, POS_RULE, CAPEX_RULE, KNAPSACK_RULE, EXACT_SOLVE_RULE, FALLBACK_RULE, NEVER_FUNDED_RULE],
     refusals: portfolioRefusals(),
-    clampCases: CLAMP_CASE_IDS.map(emvCase),
-    // A blank pos is the number 0, certain failure; an absent, null or
-    // non-numeric one is read as 1 (finding EC5-6).
+    defaultCases: DEFAULT_CASE_IDS.map(emvCase),
+    projectRefusals: portfolioGolden.projectEmvRefusals.map((c) => {
+      const a = attempt(() => P.projectEmv(clone(c.project)));
+      return { id: c.id, pos: c.project.pos, ok: a.ok, emv: a.value, name: a.name, error: a.error };
+    }),
     posProbes: POS_PROBES.map(([label, pos]) => {
       const proj = pos === undefined ? clone(POS_PROBE_PROJECT) : { ...clone(POS_PROBE_PROJECT), pos };
-      return { label, emv: P.projectEmv(proj) };
+      const a = attempt(() => P.projectEmv(proj));
+      return { label, ok: a.ok, emv: a.value, name: a.name, error: a.error };
     }),
     textCapexProbe: textCapex.ok
-      ? { ok: true, error: null, ids: ids(textCapex.value.optimalProjects), totalCapex: textCapex.value.totalCapex, totalEmv: textCapex.value.totalEmv }
-      : { ok: false, error: textCapex.error, ids: [], totalCapex: null, totalEmv: null },
+      ? { ok: true, name: null, error: null, ids: ids(textCapex.value.optimalProjects) }
+      : { ok: false, name: textCapex.name, error: textCapex.error, ids: [] },
   };
 };
 
@@ -224,7 +237,7 @@ export const okonoInventory = () => {
 // SECTION 3. Choosing under a budget.
 // ---------------------------------------------------------------------------
 
-export const PUBLISHED_BUDGET_CASE_IDS = ['classic450', 'riskedVsSure', 'negativeNeverForced', 'zeroEmvExcluded', 'negativeEmvHugeBudget', 'limitBelowEveryProject', 'tieIdenticalProjects', 'tieDifferentComposition', 'exactFit'];
+export const PUBLISHED_BUDGET_CASE_IDS = ['classic450', 'riskedVsSure', 'negativeNeverForced', 'zeroEmvExcluded', 'negativeEmvHugeBudget', 'limitBelowEveryProject', 'tieIdenticalProjects', 'tieDifferentComposition', 'exactFit', 'numericStrings'];
 
 const runSummary = (o) => ({
   ids: ids(o.optimalProjects),
@@ -233,14 +246,22 @@ const runSummary = (o) => ({
   totalNpvSuccess: o.totalNpvSuccess,
   capexLimit: o.capexLimit,
   unspentDerived: o.capexLimit - o.totalCapex,
+  solveMethod: o.solveMethod,
+  optimalityGap: o.optimalityGap,
   resolution: o.resolution,
   overLimit: o.overLimit,
   overLimitBy: o.overLimitBy,
 });
 
-const publishedOptimize = (id) => {
+const publishedOptimize = (id, withStateLimit = false) => {
   const c = GPC.optimize[id];
-  const o = P.optimizePortfolio({ projects: clone(c.projects), capexLimit: c.capexLimit, correlation: c.correlation, ...(clone(c.riskOptions) || {}) });
+  const o = P.optimizePortfolio({
+    projects: clone(c.projects),
+    capexLimit: c.capexLimit,
+    correlation: c.correlation,
+    ...(withStateLimit ? { exactStateLimit: c.exactStateLimit } : {}),
+    ...(clone(c.riskOptions) || {}),
+  });
   return { id, capexLimit: c.capexLimit, o, c };
 };
 
@@ -270,9 +291,9 @@ export const okonoBudgets = () => {
     published: PUBLISHED_BUDGET_CASE_IDS.map((id) => {
       const { capexLimit, o, c } = publishedOptimize(id);
       return {
-        id, capexLimit, ids: ids(o.optimalProjects), totalCapex: o.totalCapex, totalEmv: o.totalEmv,
+        id, capexLimit, ids: ids(o.optimalProjects), totalCapex: o.totalCapex, totalEmv: o.totalEmv, solveMethod: o.solveMethod,
         projects: c.projects.map((p) => ({ id: p.id, capex: p.capex, emv: P.projectEmv(clone(p)) })),
-        goldenOptimalSets: c.expected.quantized.optimalSets.map((s) => s.ids),
+        goldenOptimalSets: c.expected.exact.optimalSets.map((s) => s.ids),
       };
     }),
   };
@@ -332,29 +353,38 @@ export const okonoFrontiers = () => {
 };
 
 // ---------------------------------------------------------------------------
-// SECTION 5. The grid under the answer.
+// SECTION 5. The exact solve and the stated fallback grid.
 // ---------------------------------------------------------------------------
 
-export const GRID_CASE_IDS = ['rawDollars', 'nonIntegerLimit', 'gridOvershoot', 'gridUndershoot', 'freeProjectZeroLimit', 'freeProjectTightLimit', 'freeProjectSlack'];
+/** The published cases whose capex or limits are awkward for a grid, each solved exactly. */
+export const EXACT_CASE_IDS = ['rawDollars', 'nonIntegerLimit', 'gridOvershoot', 'gridUndershoot', 'freeProjectZeroLimit', 'freeProjectTightLimit', 'freeProjectSlack', 'decimalCapexExactSum'];
+/** The published cases that state a small exactStateLimit, forcing the fallback grid. */
+export const FALLBACK_CASE_IDS = ['gridOvershootFallback', 'gridUndershootFallback'];
+/** Every case the grid view offers. */
+export const GRID_CASE_IDS = [...EXACT_CASE_IDS, ...FALLBACK_CASE_IDS];
 
+/** Every published case of section 5, exact solves first, then the stated fallback. */
 export const gridCases = () => GRID_CASE_IDS.map((id) => {
-  const { capexLimit, o, c } = publishedOptimize(id);
+  const fallback = FALLBACK_CASE_IDS.includes(id);
+  const { capexLimit, o, c } = publishedOptimize(id, fallback);
   return {
     id,
+    fallback,
+    exactStateLimit: fallback ? c.exactStateLimit : null,
     capexLimit,
-    resolution: o.resolution,
     projects: c.projects.map((p) => ({ id: p.id, capex: p.capex, emv: P.projectEmv(clone(p)) })),
     ...runSummary(o),
-    // The grid, DERIVED exactly as the digest restates the engine's rule.
-    gridCellsDerived: Math.round(Math.max(0, Number(c.capexLimit) || 0) / o.resolution),
-    cellWeightsDerived: c.projects.map((p) => ({ id: p.id, cells: Math.max(1, Math.round((Number(p.capex) || 0) / o.resolution)) })),
+    cells: fallback ? P.FALLBACK_GRID_CELLS : null,
+    // The fallback's rounded-up cell weights, DERIVED as the digest states them: ceil(capex / resolution).
+    cellWeightsDerived: fallback ? c.projects.map((p) => ({ id: p.id, cells: Math.ceil(Number(p.capex) / o.resolution) })) : null,
     gridUnspentDerived: Math.max(0, Number(c.capexLimit) - o.totalCapex),
     goldenExactEmv: c.expected.exact.optimalEmv,
     goldenExactSets: c.expected.exact.optimalSets.map((s) => s.ids),
-    goldenGap: c.expected.quantizationGap,
-    goldenSetChanged: c.expected.setChanged,
   };
 });
+
+/** 0.1 + 0.2 in binary floating point, as the digest prints it (derived). */
+export const BINARY_SUM_DERIVED = (0.1 + 0.2).toPrecision(17);
 
 // ---------------------------------------------------------------------------
 // SECTION 6. An AFE and its lines, OFON-1.
@@ -378,11 +408,16 @@ export const ofonLines = () => {
 // SECTION 7. One forecast rule.
 // ---------------------------------------------------------------------------
 
-export const FORECAST_RULE = 'itemForecast: the entered forecast when it is positive, otherwise the larger of the budget and actual + commitment.';
+export const FORECAST_RULE = 'itemForecast: the entered forecast when it is positive, otherwise the larger of the budget and actual + commitment (committed, the money already spent or contracted). itemForecastCheck returns the same forecast with two flags: forecastBelowCommitted (a positive entered forecast below committed is KEPT, since a re-baseline is legitimate, and flagged with forecastBelowCommittedBy, committed less the forecast) and forecastIgnored ("negative" when the entered forecast is a number below 0, which the standard rule replaces; a zero, blank or non-numeric forecast means none was entered and is not flagged).';
 /** CMT-03's budget, commitment and actual, with no forecast of its own: the probe line of section 7. */
 export const FORECAST_PROBE_LINE = { code: 'X', budget: 1250000, commitment: 300000, actual: 640000, progress: 55 };
 export const FORECAST_PROBES = [['entered forecast 0', 0], ['entered forecast 1 (below the 940000 already spent and committed)', 1], ['entered forecast 900000 (below the 940000 already spent and committed)', 900000], ['no entered forecast', undefined]];
-export const FORECAST_CASE_NAMES = ['suite test: entered forecast', 'suite test: under budget forecasts the budget', 'suite test: committed past the budget', 'negative entered forecast is ignored (the S-curve ignores it too)'];
+/** The negative entered forecast probed on the same line. */
+export const NEGATIVE_FORECAST_PROBE = -5;
+export const FORECAST_CASE_NAMES = ['suite test: entered forecast (nothing spent: CPI null)', 'suite test: under budget forecasts the budget', 'suite test: committed past the budget', 'negative entered forecast is ignored (the S-curve ignores it too)', 'EC5-1: a forecast below the money spent and committed is kept and flagged', 'EC5-1: a forecast equal to the money committed is not below it'];
+
+/** A published case name as a panel shows it: the golden's name without its tracking prefix. */
+const caseLabel = (name) => name.replace(/^EC\d+-\w+: /, '');
 
 const publishedMetrics = (name, fallbackAsOf) => {
   const c = GAC.metrics[name];
@@ -392,29 +427,39 @@ const publishedMetrics = (name, fallbackAsOf) => {
 
 export const forecastRule = () => {
   const mt = ofonMetrics(OFON_MID_AS_OF);
+  const negative = A.itemForecastCheck({ ...clone(FORECAST_PROBE_LINE), forecast: NEGATIVE_FORECAST_PROBE });
   return {
     rule: FORECAST_RULE,
     rows: clone(OFON_ITEMS).map((i) => {
-      const fc = A.itemForecast(i);
-      const spend = i.actual + i.commitment;
-      const rule = (Number(i.forecast) || 0) > 0 ? 'entered' : (spend > i.budget ? 'actual + commitment' : 'budget');
+      const ck = A.itemForecastCheck(i);
+      const rule = (Number(i.forecast) || 0) > 0 ? 'entered' : (ck.committed > i.budget ? 'actual + commitment' : 'budget');
       return {
-        code: i.code, budget: i.budget, spendDerived: spend, enteredForecast: i.forecast ? i.forecast : null,
-        itemForecast: fc, rule, lineVarianceDerived: i.budget - fc,
+        code: i.code, budget: i.budget, committed: ck.committed, enteredForecast: i.forecast ? i.forecast : null,
+        itemForecast: ck.forecast, rule, forecastBelowCommitted: ck.forecastBelowCommitted, lineVarianceDerived: i.budget - ck.forecast,
       };
     }),
     eac: mt.totalForecast,
     variance: mt.variance,
+    linesForecastBelowCommitted: mt.linesForecastBelowCommitted,
+    linesForecastIgnored: mt.linesForecastIgnored,
     // CMT-03's budget, commitment and actual with its entered forecast varied:
-    // 0 falls back to the formula; any positive entry is taken as typed, even
-    // one below the money already spent and committed (finding EC5-1).
+    // 0 falls back to the formula; any positive entry is taken as typed, and
+    // one below the money already spent and committed is flagged.
     probes: FORECAST_PROBES.map(([label, fc]) => {
       const item = fc === undefined ? clone(FORECAST_PROBE_LINE) : { ...clone(FORECAST_PROBE_LINE), forecast: fc };
-      return { label, enteredForecast: fc === undefined ? null : fc, itemForecast: A.itemForecast(item) };
+      const ck = A.itemForecastCheck(item);
+      return {
+        label, enteredForecast: fc === undefined ? null : fc, itemForecast: ck.forecast,
+        forecastBelowCommitted: ck.forecastBelowCommitted, forecastBelowCommittedBy: ck.forecastBelowCommittedBy, forecastIgnored: ck.forecastIgnored,
+      };
     }),
+    negativeProbe: { enteredForecast: NEGATIVE_FORECAST_PROBE, itemForecast: negative.forecast, forecastIgnored: negative.forecastIgnored },
     published: FORECAST_CASE_NAMES.map((name) => {
       const { c, asOfUsed, x } = publishedMetrics(name, UNDATED_METRICS_AS_OF);
-      return { name, asOfUsed, items: clone(c.inputs.costItems), eac: x.totalForecast, variance: x.variance };
+      return {
+        name, label: caseLabel(name), asOfUsed, items: clone(c.inputs.costItems), eac: x.totalForecast, variance: x.variance,
+        linesForecastBelowCommitted: x.linesForecastBelowCommitted, linesForecastIgnored: x.linesForecastIgnored,
+      };
     }),
   };
 };
@@ -423,8 +468,14 @@ export const forecastRule = () => {
 // SECTION 8. Earned value.
 // ---------------------------------------------------------------------------
 
-export const EARNED_CASE_NAMES = ['suite test: weighted earned value', 'suite test: CPI 1.25', 'progress beyond 100 percent earns beyond the budget', 'suite test: empty AFE'];
-export const PLANNED_VALUE_RULE = 'Planned value is the budget times the elapsed fraction of the window at the as-of date; SPI is earned value over planned value, and null where planned value is zero, except that an AFE whose budget is 0 reports SPI 1 by a guard that fires first (the published empty AFE below).';
+export const EARNED_CASE_NAMES = ['suite test: weighted earned value (value earned, nothing spent: CPI null)', 'suite test: CPI 1.25', 'progress of exactly 100 percent is accepted and earns the whole budget', 'suite test: empty AFE: no budget and no spend, so SPI and CPI are null', 'value earned with no spend: CPI null'];
+export const PROGRESS_REFUSAL_NAMES = ['negative progress named by code', 'progress beyond 100 percent is refused'];
+export const PLANNED_VALUE_RULE = 'Planned value is the budget times the elapsed fraction of the window at the as-of date. One rule for a ratio that is undefined: CPI is null with cpiStatus "no-spend" when nothing has been spent; SPI is null with spiStatus "no-budget" when the AFE has no budget, and null with spiStatus "no-planned-value" when there is a budget but no planned value yet (before or on the start day). A reported ratio carries the status "ok".';
+
+const afeRefusal = (c) => {
+  const a = attempt(() => A.calculateMetrics(clone(c.inputs.afe), clone(c.inputs.costItems), clone(c.inputs.invoices), c.inputs.asOf));
+  return { name: c.name, asOf: c.inputs.asOf, ok: a.ok, errorName: a.name, error: a.error };
+};
 
 export const earnedValue = () => {
   const mt = ofonMetrics(OFON_MID_AS_OF);
@@ -436,12 +487,15 @@ export const earnedValue = () => {
     earnedValue: mt.earnedValue,
     totalActuals: mt.totalActuals,
     cpi: mt.cpi,
+    cpiStatus: mt.cpiStatus,
     percentSpent: mt.percentSpent,
     percentComplete: mt.percentComplete,
+    rule: PLANNED_VALUE_RULE,
     published: EARNED_CASE_NAMES.map((name) => {
       const { asOfUsed, x } = publishedMetrics(name, UNDATED_METRICS_AS_OF);
-      return { name, asOfUsed, earnedValue: x.earnedValue, totalActuals: x.totalActuals, cpi: x.cpi, spi: x.spi };
+      return { name, asOfUsed, earnedValue: x.earnedValue, totalActuals: x.totalActuals, cpi: x.cpi, cpiStatus: x.cpiStatus, spi: x.spi, spiStatus: x.spiStatus };
     }),
+    progressRefusals: PROGRESS_REFUSAL_NAMES.map((n) => afeRefusal(afeGolden.metricsRefusals.find((x) => x.name === n))),
   };
 };
 
@@ -459,7 +513,7 @@ export const ofonAsOf = (asOf) => {
   const x = ofonMetrics(asOf);
   return {
     asOf, timeProgress: x.timeProgress, plannedValue: x.plannedValue, earnedValue: x.earnedValue,
-    spi: x.spi, cpi: x.cpi, totalActuals: x.totalActuals, totalForecast: x.totalForecast,
+    spi: x.spi, spiStatus: x.spiStatus, cpi: x.cpi, cpiStatus: x.cpiStatus, totalActuals: x.totalActuals, totalForecast: x.totalForecast,
   };
 };
 
@@ -490,6 +544,7 @@ export const asOfTable = () => ({
       asOfUsed,
       timeProgress: x.timeProgress,
       spi: x.spi,
+      spiStatus: x.spiStatus,
     };
   }),
 });
@@ -498,7 +553,7 @@ export const asOfTable = () => ({
 // SECTION 10. The S-curve.
 // ---------------------------------------------------------------------------
 
-export const S_CURVE_CASE_NAMES = ['suite test: 1200 over 2020 with two invoices', 'past window, asOf mid-year: actuals to June, forecast projected after', 'future window ending on a bucket: the last forecast point is the whole EAC', 'past window, all invoices unpaid: none dated'];
+export const S_CURVE_CASE_NAMES = ['suite test: 1200 over 2020 with two invoices', 'past window, asOf mid-year: actuals to June, forecast projected after', 'future window ending on a bucket: the last forecast point is the whole EAC', 'past window, all invoices unpaid: none dated', 'EC5-9b: a window ending on a month step, read after the end: the step becomes the closing point', 'February start labels Feb in every zone, asOf mid-window'];
 
 const publishedCurve = (name) => {
   const c = GAC.sCurve[name];
@@ -506,34 +561,40 @@ const publishedCurve = (name) => {
   return { c, asOfUsed, pts: A.generateSCurveData(clone(c.inputs.afe), clone(c.inputs.costItems), clone(c.inputs.invoices), asOfUsed) };
 };
 
-// TIMEZONE (finding EC5-5). generateSCurveData parses the window as UTC
-// midnight but steps months and prints labels in LOCAL time. Every value here
-// is the engine's, in whatever timezone the lab runs: the digest and the lab
-// tests are pinned to UTC, and a browser west of UTC (America/Los_Angeles, say)
-// labels OFON-1's first point "Jan 27" and shifts every Planned value. Lagos
-// agrees with UTC. The panels show what the lab returns and say so.
+// The window, the as-of date, the monthly step, the day count and every label
+// are read in UTC by the engine, so the same AFE draws the same curve in every
+// time zone.
 export const sCurve = () => {
-  const points = A.generateSCurveData(clone(OFON_AFE), clone(OFON_ITEMS), clone(OFON_INVOICES), OFON_MID_AS_OF);
+  const points = ofonCurve(OFON_MID_AS_OF);
   const mt = ofonMetrics(OFON_MID_AS_OF);
+  const monthly = points.filter((p) => !p.windowEnd);
+  const closing = points[points.length - 1];
+  const lastMonthly = monthly[monthly.length - 1];
   const cutIndex = points.map((p) => p.Actual !== null).lastIndexOf(true);
+  const afterEnd = ofonCurve(OFON_AFTER_END_AS_OF);
   return {
     asOf: OFON_MID_AS_OF,
     points,
     plannedAddedDerived: points.map((p, i) => (i ? p.Planned - points[i - 1].Planned : null)),
-    lastForecast: points[points.length - 1].Forecast,
     eac: mt.totalForecast,
     variance: mt.variance,
+    totalBudget: mt.totalBudget,
     pointCount: points.length,
+    monthlyCount: monthly.length,
+    closing,
+    lastMonthly,
+    closingAddedDerived: closing.Planned - lastMonthly.Planned,
     cutIndex,
     cutLabel: cutIndex >= 0 ? points[cutIndex].date : null,
-    lastPlanned: points[points.length - 1].Planned,
-    totalBudget: mt.totalBudget,
     lastActual: points[cutIndex].Actual,
     firstProjectedForecast: points.find((p) => p.Actual === null).Forecast,
+    undatedInvoices: A.countUndatedInvoices(clone(OFON_INVOICES)),
+    afterEnd: { asOf: OFON_AFTER_END_AS_OF, closing: afterEnd[afterEnd.length - 1] },
     published: S_CURVE_CASE_NAMES.map((name) => {
       const { c, asOfUsed, pts } = publishedCurve(name);
       return {
         name,
+        label: caseLabel(name),
         startDate: c.inputs.afe.start_date,
         endDate: c.inputs.afe.end_date,
         caseAsOf: c.inputs.asOf ?? null,
@@ -554,8 +615,8 @@ export const sCurve = () => {
 
 export const DRAW_ORDER = 'Draw order per iteration: F1, F2, then for each project in array order e1, e2, all from randomNormal on mulberry32(seed). z1 = sqrt(rho) F1 + sqrt(1 - rho) e1 decides success (normalCDF(z1) < pos); z2 = sqrt(rho) F2 + sqrt(1 - rho) e2 scales the success spread. Every normal is drawn whether or not it is used.';
 
-/** What the pre-EC5-0 normal approximation would have said, rebuilt from the engine's own emv and stdDev. */
-const oldNormalProbLoss = (risk) => (risk.stdDev > 0 ? ST.normalCDF(-risk.emv / risk.stdDev) : (risk.emv < 0 ? 1 : 0));
+/** A normal approximation of the summed NPV, rebuilt from the engine's own emv and stdDev: the method compared with the simulation. */
+const normalProbLoss = (risk) => (risk.stdDev > 0 ? ST.normalCDF(-risk.emv / risk.stdDev) : (risk.emv < 0 ? 1 : 0));
 
 export const riskMethods = () => ({
   drawOrder: DRAW_ORDER,
@@ -590,8 +651,8 @@ export const riskMethods = () => ({
     return {
       limit: lim, ids: ids(o.optimalProjects), emv: x.emv, stdDev: x.stdDev, probLoss: x.probLoss, p90: x.p90, p10: x.p10,
       seed: x.seed, iterations: x.iterations,
-      normalProbLossDerived: oldNormalProbLoss(x),
-      normalP90Derived: x.emv - OLD_NORMAL_Z * x.stdDev,
+      normalProbLossDerived: normalProbLoss(x),
+      normalP90Derived: x.emv - NORMAL_Z * x.stdDev,
     };
   }),
 });
@@ -674,20 +735,21 @@ export const partnerShares = () => {
 // SECTION 14. Refusals and flags.
 // ---------------------------------------------------------------------------
 
-export const REPAIRED = 'Repaired after this course was cut: an invoice the engine cannot date no longer reaches the S-curve at all, and the count of undated invoices is reported beside the curve, so the money is named instead of being counted from 1970 into every bucket. Repaired in EC5-0: the risk summary (simulation, seed shown), the overshoot flag, the negative capex refusal, the as-of date, SPI null, the S-curve bounded to its window, one forecast rule, negative progress refused, a negative working interest flagged. The Suite repair removed the invented partners and integrations, added AFE dates, one EAC rule on every screen and the resolution and overshoot on screen.';
-export const NOT_REPAIRED = 'Not repaired (findings, taught as properties): the grid undershoot (D4) and the free project charged a cell (D2); CPI reported as 1 before any money is spent; SPI 1 on a zero-budget AFE; time progress 1 on an AFE with no dates; an entered forecast below the money already spent taken as typed; progress above 100 percent accepted although the refusal message says progress runs from 0 to 100; a blank pos read as certain failure; a non-numeric capex neither refused nor flagged; S-curve labels and plan shifting with the viewer\'s timezone west of UTC; the S-curve plan stopping short of the budget and its forecast ignoring actuals after the as-of date; the correlation slider stopping at 0.9; the unused risk score.';
+export const FLAGS = 'Flags the engines raise without refusing: forecastBelowCommitted (an entered forecast below the money spent and committed, kept), forecastIgnored "negative" (a negative entered forecast, replaced by the standard rule), cpiStatus and spiStatus (why a ratio is null), the partner split\'s valid and note (a negative interest, or interests above 100 percent), and the count of undated invoices beside the S-curve.';
+export const PROPERTIES = 'Properties the course teaches as they stand: time progress 1 on an AFE with no dates (the Suite labels SPI unavailable there); a positive entered forecast taken as typed even below the money already spent (flagged); the S-curve forecast ignoring actuals after the as-of date; correlation in the risk summary clamped to 0 to 1, with the Suite\'s correlation slider stopping at 0.9; the Suite\'s risk score (1 to 10) stored with each project and read by neither the optimizer nor the risk summary; the stated fallback grid, never reached below the state limit.';
 
 export const refusalsAndFlags = () => {
   const { o } = publishedOptimize('gridOvershoot');
   return {
     portfolio: portfolioRefusals(),
-    afe: afeGolden.metricsRefusals.map((c) => {
-      const a = attempt(() => A.calculateMetrics(clone(c.inputs.afe), clone(c.inputs.costItems), clone(c.inputs.invoices), c.inputs.asOf));
-      return { name: c.name, asOf: c.inputs.asOf, ok: a.ok, errorName: a.name, error: a.error };
+    afe: afeGolden.metricsRefusals.map(afeRefusal),
+    overshoot: { id: 'gridOvershoot', overLimit: o.overLimit, overLimitBy: o.overLimitBy, totalCapex: o.totalCapex, capexLimit: o.capexLimit, solveMethod: o.solveMethod },
+    riskSummary: portfolioGolden.riskMetricsRefusals.map((c) => {
+      const a = attempt(() => P.portfolioRiskMetrics(clone(c.selected), c.correlation, clone(c.riskOptions)));
+      return { id: c.id, ok: a.ok, name: a.name, error: a.error };
     }),
-    overshoot: { id: 'gridOvershoot', overLimit: o.overLimit, overLimitBy: o.overLimitBy, totalCapex: o.totalCapex, capexLimit: o.capexLimit },
-    repaired: REPAIRED,
-    notRepaired: NOT_REPAIRED,
+    flags: FLAGS,
+    properties: PROPERTIES,
   };
 };
 
@@ -699,27 +761,31 @@ export const NULL_DATED_CASE_NAME = 'past window, all invoices unpaid: none date
 export const MODEL_LIMITS = 'What a portfolio model cannot tell you, as properties of these modules: projects are funded whole; capex is spent in one period and never phased; there is no time value beyond the NPVs entered; correlation is one average number; the success spread is normal; the AFE plan is a straight line; earned value is only as good as the progress typed in.';
 
 export const distrust = () => {
-  const noSpend = ofonMetrics(OFON_MID_AS_OF, OFON_ITEMS.map((i) => ({ ...i, actual: 0 })), []);
+  const noSpend = A.calculateMetrics(clone(OFON_AFE), clone(OFON_ITEMS).map((i) => ({ ...i, actual: 0 })), [], OFON_MID_AS_OF);
   const { c, asOfUsed, pts } = publishedCurve(NULL_DATED_CASE_NAME);
-  const curve = A.generateSCurveData(clone(OFON_AFE), clone(OFON_ITEMS), clone(OFON_INVOICES), OFON_MID_AS_OF);
+  const curve = ofonCurve(OFON_MID_AS_OF);
+  const monthly = curve.filter((p) => !p.windowEnd);
+  const closing = curve[curve.length - 1];
+  const lastMonthly = monthly[monthly.length - 1];
   const mt = ofonMetrics(OFON_MID_AS_OF);
   const set450 = okonoRun(GREEDY_LIMIT).optimalProjects;
-  const lastPlanned = curve[curve.length - 1].Planned;
   return {
-    cpiBeforeSpend: { asOf: OFON_MID_AS_OF, cpi: noSpend.cpi, earnedValue: noSpend.earnedValue, totalActuals: noSpend.totalActuals },
+    cpiBeforeSpend: { asOf: OFON_MID_AS_OF, cpi: noSpend.cpi, cpiStatus: noSpend.cpiStatus, earnedValue: noSpend.earnedValue, totalActuals: noSpend.totalActuals },
     nullDated: {
       name: NULL_DATED_CASE_NAME, asOfUsed, invoices: clone(c.inputs.invoices),
       firstActual: pts[0].Actual, lastActual: pts[pts.length - 1].Actual,
-      // EC6-1 took undated invoices off the curve. The count is reported so
-      // the money is named rather than dropped in silence; wasNull is the
-      // amount this case used to show at every point, kept as history.
-      undated: A.countUndatedInvoices(c.inputs.invoices),
-      wasNull: c.inputs.invoices.find((v) => 'invoice_date' in v && v.invoice_date === null)?.amount,
+      undated: A.countUndatedInvoices(clone(c.inputs.invoices)),
     },
-    shortPlan: { lastPlanned, totalBudget: mt.totalBudget, shortDerived: mt.totalBudget - lastPlanned },
-    // An overrun drawn as an underrun: the curve's last Forecast point sits
-    // below the budget while the EAC is above it.
-    underrunPicture: { lastForecast: curve[curve.length - 1].Forecast, totalBudget: mt.totalBudget, eac: mt.totalForecast, variance: mt.variance },
+    // Reading an overrun off the curve: the closing point carries the EAC
+    // against the budget; the last monthly point carries neither.
+    overrun: {
+      closingForecast: closing.Forecast,
+      closingPlanned: closing.Planned,
+      variance: mt.variance,
+      lastMonthlyLabel: lastMonthly.date,
+      lastMonthlyForecast: lastMonthly.Forecast,
+      lastMonthlyPlanned: lastMonthly.Planned,
+    },
     seedTable: {
       limit: GREEDY_LIMIT,
       ids: ids(set450),

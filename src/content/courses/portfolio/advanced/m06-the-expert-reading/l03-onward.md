@@ -18,7 +18,7 @@ A portfolio number without its seed, iterations and correlation is not a number,
 
 ## What you have finished
 
-Portfolio risk by simulation and why the normal approximation failed; one average correlation and what it never moves; joint venture shares and the flags on them; the refusals and the overshoot flag, repaired and not; and the numbers to read only with their conditions.
+Portfolio risk by simulation and where a normal approximation misleads; one average correlation and what it never moves; joint venture shares and the flags on them; the refusals and the flags; and the numbers to read only with their conditions.
 
 ## Exercise
 

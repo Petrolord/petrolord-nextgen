@@ -1,0 +1,346 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# EC4 decision, advanced, final exam.
+# One q() per served question, in ord order (ord = position, from 1).
+
+# ord 1
+q(2, "The EKPAN lottery goes into the VOI Analyzer twice with its full-precision posteriors kept. In the first entry No bright spot is typed at 64 percent beside Bright spot at 46.000000 percent; in the second the indicators read 56 and 44 percent. What does each entry show?",
+ "The first is refused with a message naming 110 percent and shows no card at all; the second keeps 75.75 and 52.00 and withholds the rest.",
+ ["Both are withheld in the same way, keeping EMV without information 75.75 and EVPI 52.00, because each entry breaks the agreement between the posteriors and the stated chances.",
+  "The first is rescaled to 100 percent and valued as typed, and the second prints its gross voi of 40.62 in the guidance sentence with a consistency warning beside it.",
+  "Both are refused before anything is computed, since an implied Success of 0.404952 is as far from being a distribution as a sum of 110 percent is."],
+ "Percents that are not a distribution are refused and nothing is computed; 56 and 44 do sum to 100, so they are chances that contradict the stated 0.350000 (implied 0.404952), and only the two cards built on the stated chances survive.")
+
+# ord 2
+q(0, "A report on IRRI copies the Analyzer and writes the net value of information as 0.00 million USD, on the grounds that nothing was computed. Why is that line wrong?",
+ "A withheld value is not zero: the entries imply 0.200000 against a stated 0.300000, so there is no net value to quote, and the report should say it is withheld and why.",
+ ["It should read -25.00, the net value the same inputs give once the survey cost of 10.0000 is taken off the gross value of -15.00 that Bayes produces for them.",
+  "It should read 23.00, the default study's net value, because IRRI is the default study and a consistency warning changes the wording of the guidance and not the price.",
+  "The zero is right but incomplete, since a net card of 0.00 means the survey is priced exactly at its gross value and the report must set the survey cost of 10.0000 beside it."],
+ "The Analyzer shows only EMV without information 15.00 and EVPI 63.00 on IRRI. The -15.00 gross and -25.00 net are what the typed chances give with nothing checking them against the stated prior, and writing 0.00 reads a withholding as a card priced at its value.")
+
+# ord 3
+q(0, "Two entries each sit exactly on the edge of their check in decimal: typed posteriors implying 0.305000 against a stated 0.300000, and three branches typed 0.333333 on the node \"Three equal outcomes\". What does the engine do with each?",
+ "It accepts both, since the half percent check and the 1e-6 sum test each add a 1e-12 allowance for binary representation; the node rolls back at 59.9999.",
+ ["It refuses both, because each lands a hair outside its tolerance in binary arithmetic, 0.0050000000000000044 for the first and a sum printed as 0.999999 for the second.",
+  "It accepts the second, rounding a sum of 0.999999 to 1 before comparing, and refuses the first, because the half percent check is exclusive at its boundary.",
+  "It accepts the first, because the half percent check adds a 1e-12 allowance, and refuses the second, because the 1e-6 sum test compares against 1e-6 alone."],
+ "0.305 - 0.3 is 0.0050000000000000044 in binary and passes by the 1e-12 allowance; three copies of 0.333333 miss 1 by a binary hair above 1e-6 and pass by the same allowance, so the node pays 30, 60 and 90 at 0.333333 each and is worth 59.9999.")
+
+# ord 4
+q(1, "A Decision Studio brief on a saved two-branch tree reads Optimal EMV 20.0000 with first move \"A\". Branch A pays 20 and was meant to carry a cost of 5; branch B pays 12. The provenance line names the saved tree. What does the brief tell a reader about that cost?",
+ "That it was never charged: A is worth exactly its payoff, which is what a cost left out of the saved tree gives, and no line of the brief flags it.",
+ ["That it was charged, since the rollback refuses a cost that is not a number, and Decision Studio cannot brief a tree that the engine has refused to roll back at all, whatever its provenance line says.",
+  "That it was typed as the text \"5\", which the engine reads as a number and which leaves branch A at its full payoff of 20.",
+  "Nothing either way, because the brief prints each root value before the cost on its branch, so 20.0000 would appear whether or not the 5 was charged."],
+ "With the cost charged A is worth 15.0000. A cost typed as \"abc\" or left as an empty entry is refused by node label, so a brief that prints 20.0000 re-rolled a tree whose cost was left out, which the engine reads as 0 without a message; clearing a cost box in the Builder removes the entry in just that way.")
+
+# ord 5
+q(1, "The published threeByThreeCost12 information tree is briefed in Decision Studio. Which decision rows does the brief print?",
+ "Optimal EMV 109.0000 on \"No further information\", a Next best alternative of 98.2000 and a Decision advantage of 10.8000, the size of the survey's negative net value.",
+ ["Optimal EMV 110.2000 on the acquisition, with a next best of 109.0000 and a Decision advantage of 1.2000, which is the gross value of the survey before its cost is paid.",
+  "Optimal EMV 98.2000 on the acquisition and a Decision advantage of -10.8000, which is the net value of the survey once its cost of 12.0000 has been paid, since a brief always leads with the acquisition.",
+  "Optimal EMV 109.0000 with first move \"Drill alone\" and no next best row, because the root of an information tree is read as a chance node."],
+ "The root branches are 98.2000 for acquiring and 109.0000 for no further information, so the next best is 98.2000 and the advantage, 109.0000 less 98.2000, is the amount by which the survey fails to pay (netEvii -10.8000).")
+
+# ord 6
+q(3, "The published equalEmvTie tree in a brief and the Analyzer tie case (Success 25 percent paying 200, Dry hole 75 percent paying -50, decision cost 12.5) both sit on an exact tie. Where can a reader see that it is a tie?",
+ "On both: the brief names A, B and C together and writes Indifferent at the precision shown, and the Analyzer's insight says both actions come to the same figure.",
+ ["Only in the brief, through a Decision advantage row of 0.0000 beside the first move, while the Analyzer names 'Drill Exploration Well' as the optimal decision and prints no margin at all.",
+  "On neither, since both round the values to two decimals, so the tied branch and the one worth 29.9990 cannot be told apart from 30.0000 on either screen.",
+  "In the Analyzer, as a net value of 20.00 equal to EMV with information, and in the brief, by naming A and B together on the first-move row and leaving C off at 29.9990."],
+ "The brief reads the card-precision tie set, where C's 29.9990 rounds to the same 30.00, and the Analyzer's insight opens by saying 'Drill Exploration Well' and 'Do Not Drill Exploration Well' both come to $0.00M, so the decision without new information is indifferent between them.")
+
+# ord 7
+q(0, "On the Analyzer's default study one survey is tendered at 32.996 and another at 33.004. A reviewer reads both netVoi cards and both verdict sentences. What should the report say?",
+ "That both are priced at the gross voi of 33.00: both cards read 0.00 and both verdicts say the value rounds to zero, from one rounded net value.",
+ ["That the first is worth buying and the second is not, exactly as the verdict sentences state, since the unrounded net value is the more precise of the two readings.",
+  "That the second is priced a hair above its value, since its card prints -0.00 and a negative zero keeps the sign of the unrounded net value.",
+  "That neither can be judged, because the Analyzer withholds the net value once the survey cost comes within 0.005 of the gross value."],
+ "One rounding feeds both the card and the sentence, so they cannot split; information turns neutral at a price equal to its gross value, 33.00 here, and both tenders sit within half a cent of it.")
+
+# ord 8
+q(2, "Three negative numbers come out of these tools: a gross voi of -15.00 from IRRI's typed chances weighted with nothing checking them against the stated prior, an EVII of -1.42e-14 for the symmetric EKPAN lottery survey at accuracy 0.550000, and a netVoi card of -17.00 on the pricey case. Which signals inputs that cannot all be true?",
+ "Only the -15.00: a gross value derived by Bayes cannot fall below 0, while -1.42e-14 is float residue printed as 0.0000 and -17.00 is a price above the value.",
+ ["All three, because a value of information below zero, gross or net, is impossible for a signal that the decision maker is always free to ignore and never has to act on.",
+  "The -15.00 and the -1.42e-14, since both are gross values of information below the floor of zero, while the -17.00 is a net value and therefore a legitimate answer.",
+  "Only the -17.00, because the pricey case charges 50.0000 for a survey worth 33.00, and a value of information below its own cost means the typed chances disagree."],
+ "A negative net value says the price is too high; a negative gross value says the entries contradict the stated prior. The engine returns an EVII of -1.42e-14, float residue that prints as 0.0000.")
+
+# ord 9
+q(3, "The threeByThree posteriors come out of the engine's Bayes step: after Bright, Flat and Dim, read with chances 0.320000, 0.380000 and 0.300000, Large stands at 0.437500, 0.105263 and 0.066667. Could posteriors built this way fail the implied-prior check that makes the Analyzer withhold a value?",
+ "No: posteriors derived from likelihoods and the stated prior average back to that prior by construction, and here they return Large at 0.200000.",
+ ["Yes, because three readings carry three rounding errors, and with every posterior printed to six places the average drifts past the allowance of 0.005.",
+  "Yes, whenever one of the readings never happens, since a posterior weighted by a pSignal of 0.000000 drops out of the average and counts as zero.",
+  "Only when a reading changes the action, because the check weights each posterior by its best action."],
+ "0.320000 x 0.437500 + 0.380000 x 0.105263 + 0.300000 x 0.066667 is 0.200000, the stated Large. A contradiction needs posteriors typed by a person, which the Analyzer accepts and the Decision Tree Builder never asks for.")
+
+# ord 10
+q(0, "In the engine, the published impossibleSignal case lists a reading \"Never\" with likelihoods 0.000000 / 0.000000. In the Analyzer, missingOutcomeChanceCountsAsZero leaves one outcome chance given Positive Seismic blank. How does each tool answer?",
+ "The engine accepts the survey, gives Never the priors as its posterior and returns evii 12.5000 with no warning; the Analyzer refuses, naming a sum of 60 percent.",
+ ["Both refuse, the engine because a reading with pSignal 0.000000 cannot be divided by, and the Analyzer because a blank entry lies outside the range of 0 to 100 percent.",
+  "Both accept and count the blank as zero, the engine returning evii 12.5000 and the Analyzer printing a gross voi of 41.00 in its guidance sentence beside its EVPI card of 63.00.",
+  "The engine refuses Never because its likelihoods sum to 0, and the Analyzer withholds the value while it keeps EMV without information 15.00."],
+ "Never adds 0 to each outcome's column, so both columns still sum to 1 and pSignal 0.000000 is the only sign. The Analyzer checks every distribution in percent first; 41.00 is what the typed numbers give with nothing checking them.")
+
+# ord 11
+q(1, "Two prunings: Drill with partner is deleted from the published three-outcome, four-action lottery, and Farm out is deleted from the EKPAN lottery before its survey is valued. Which pruning changes a number?",
+ "Only the EKPAN lottery one: the farm-out is best after No bright spot, so the survey falls from 24.8250 to 19.8375, while the partner is best nowhere and nothing on its lottery moves.",
+ ["Neither, because neither action is best at its stated prior, and an action that loses at the prior contributes nothing to EVPI or to EVII.",
+  "Only the partner one, since deleting a half-scale copy halves the EVPI of 24.0000, while the farm-out adds nothing that Drill or Walk away cannot match.",
+  "Both, the partner's removal pulling evWithPerfect below 133.0000 and the farm-out's removal pulling the EKPAN lottery's EVPI below 52.0000."],
+ "The test is whether an action is best after some reading or outcome. 19.8375 is the two-action value the Analyzer prints as 19.84, and without the farm-out the EKPAN lottery's EVPI stays 52.0000.")
+
+# ord 12
+q(2, "A cautious engineer replaces the EKPAN tree's linked success payoff with the summary's NPV P90 of 185.0000, typed as a plain number, to allow for risk. What has happened to the tree?",
+ "A risk preference is now hidden in a payoff: the tree rolls back to 37.7500 on the farm-out, where the mean of 420 gave 105.0000 on Drill, and nothing shows why.",
+ ["It has been made risk averse in the proper way, since the rollback now weights the low case, and Farm out at 37.7500 correctly reflects the downside of the drill.",
+  "Nothing, because the rollback reads only the mean of a distribution payoff, so the tree still returns 105.0000 on Drill whatever plain number is typed into the box.",
+  "The engine refuses the payoff, since a P-labelled figure typed where a mean belongs has no finite mean, and the rollback returns a message in place of any value for the tree."],
+ "Only the mean enters a linear rollback. A P90 (the low case) typed as the expected payoff gives a drill branch of 22.7500 and flips the root; the engine is risk neutral, so a preference belongs in words beside the tree.")
+
+# ord 13
+q(0, "A brief built today shows an economics section from a Monte Carlo run revalued last week, beside an Optimal EMV for a tree whose success payoff was linked to that run a month ago. What can a reader assume about the two?",
+ "Nothing about agreement: the tree was re-rolled today, but from the copy of the NPV mean stored when the link was made, so its EMV can rest on an older mean.",
+ ["That they agree, because the decision section is rolled back at brief time and re-reads every linked Monte Carlo run before it prints the Optimal EMV row for the tree.",
+  "That they agree, since Decision Studio refuses to assemble a brief whose linked run has been revalued at any point after the tree last took its copy of that run's summary.",
+  "That the EMV matches the NPV P50 row, which is the statistic the tree copies from a linked run as its payoff."],
+ "Linking stores a copy of the NPV mean, P90 and P10 and nothing re-reads the run. Both provenance lines are true while the page disagrees with itself, until the run is linked again.")
+
+# ord 14
+q(2, "On OKRIKA the brief prints a Next best alternative of 48.0000. A reviewer expected Develop now there, because the Builder drawing labels its node with the node's own EMV of 183.6000 and it is listed second. Who is right?",
+ "The brief: Develop now is worth 33.6000 once its cost of 150.0000 is paid, below Sell now at 48.0000, and next best means the largest other value wherever it is listed.",
+ ["The reviewer: 183.6000 is the value the root compares for that branch, so Develop now should outrank Appraise at 87.0000, and the brief has misread the saved tree it re-rolled at brief time.",
+  "The brief, but only because Sell now carries no cost, and the brief ranks the costless branches ahead of costed ones when choosing a next best.",
+  "The reviewer on the ordering, since the next best row is defined as the branch listed straight after the recommended move."],
+ "The drawing labels a node before the cost on the branch into it. 183.6000 less 150.0000 is 33.6000, so the advantage is 87.0000 less 48.0000, which is 39.0000.")
+
+# ord 15
+q(3, "The published chanceRootWithBranchCosts tree is shown in a Decision Studio brief and on the Decision Tree Builder's cards. What do the two surfaces show?",
+ "Both give -3.0000 and read Chance root: no first decision to make; the brief prints no next best or advantage row, and the Builder shows N/A on those two cards.",
+ ["Both give -8.6000 and recommend the calm branch, whose value of 17.0000 beats the storm branch at -33.0000 by a Decision advantage of 50 shown on both of the surfaces.",
+  "The brief gives -3.0000 with calm as the route the engine picked, while the Builder refuses the tree outright because a chance node cannot sit at the root of a tree.",
+  "Both give -3.0000 and read Chance root: no first decision to make, with the next best row printed as 0.0000 because there is no alternative worth anything."],
+ "A chance root offers no choice, so both screens share one first-move label and there is nothing to compare. The -3.0000 charges each cost on its own branch before weighting; subtracting the costs after weighting gives -8.6000.")
+
+# ord 16
+q(1, "A large tree has a single chance node, \"cc\", two levels below the root, whose probabilities sum to 0.200000. Every other branch is sound. What does the rollback return?",
+ "The message naming \"cc\" and the sum 0.200000, and nothing else: no root EMV, no best branch and no value for any healthy branch.",
+ ["A root EMV built from the healthy branches, with \"cc\" dropped from the maximum and its message attached to the result as a warning for the reader.",
+  "A root EMV with the probabilities at \"cc\" rescaled to sum to 1, the printed sum of 0.200000 being the figure the engine corrected them from.",
+  "A root EMV with \"cc\" weighted as typed, since the probability tolerance is enforced only on a chance node that sits directly under the root."],
+ "The engine returns \"Chance branch probabilities sum to 0.200000, expected 1 (at node \"cc\")\" and no number, so the node label is the only pointer to the fault.")
+
+# ord 17
+q(3, "The same slip is made in two tools: outcome chances that add to 90 percent are typed into the Analyzer, and priors that add to 0.900000 are passed to the Bayes engine. What does each return?",
+ "Each refuses before computing anything, the Analyzer with \"Outcome chances sum to 90 percent, expected 100\" and the engine with \"Outcome probabilities sum to 0.900000, expected 1\".",
+ ["Both refuse with the fraction message, since the Analyzer hands its percent entries straight to the same Bayes check as the engine and simply prints whatever message it gets back on screen.",
+  "The engine refuses, while the Analyzer rescales the outcome chances so that they add to 100 percent, values the survey on the rescaled chances and marks each of its cards as approximate.",
+  "The Analyzer withholds the value of information and keeps EMV without information and EVPI on screen, while the engine, which has no withholding state of its own, refuses the priors outright."],
+ "Chances that are not a distribution are refused in both, and the Analyzer names the sum in percent on a form that takes percent. Withholding is kept for distributions that contradict each other, as IRRI's do.")
+
+# ord 18
+q(0, "Two fixes are proposed: nudging one of three branches typed 0.333 up until the sum reaches 1, and nudging typed posteriors until the implied prior lands at 0.305000. What do the two fixes share?",
+ "Each makes a check pass by bending the inputs it protects: the thirds stop being equal and the EMV leaves 60.0000, and the posteriors keep the contradiction behind 34.75, only less of it.",
+ ["Each is the documented fix, since the rollback expects one branch to absorb the rounding error and the Analyzer's allowance exists for posteriors tuned onto its boundary on purpose by the person typing them.",
+  "Neither changes a value, because the nudge in each case is smaller than the tolerance it clears, 1e-6 on the sum and 0.005 on the implied prior.",
+  "Each is harmless for the thirds and harmful for the posteriors, because a sum nudged to 1 still weights the payoffs of 30, 60 and 90 equally."],
+ "Thirds typed to six places or more, 0.333333 or 0.3333333, pass without favouring a branch, at 59.9999 and 60.0000. A value accepted at 0.305000 is not certified: moving the default study there raised the gross voi from 33.00 to 34.75.")
+
+# ord 19
+q(2, "A reviewer tests a typed survey only by averaging its posteriors back to the priors, and on posteriorsOffsetButPriorsAgree the implied chances match the stated ones. What does the Analyzer do with that entry?",
+ "It refuses it before any consistency test, because the outcome chances given Positive Seismic sum to 110 percent and are not a distribution.",
+ ["It values it normally, since the only test standing between typed posteriors and a value is the implied-prior check, and this case passes that check.",
+  "It withholds the value of information and keeps EMV without information 15.00 and EVPI 63.00, the answer every failed check produces.",
+  "It prints a gross voi of 42.50 beside EVPI 63.00, because the allowance of 1e-4 percentage points covers a sum that misses by ten."],
+ "Each distribution is checked in percent first, so this case never reaches the implied-prior test. Weighted as typed with nothing checking them, the same entries give 42.50, plausible and under the ceiling.")
+
+# ord 20
+q(1, "Weighted as typed with nothing checking them, published certainPosteriorsWithheld gives a gross voi of 245.00, the EKPAN lottery typed with indicators at 56 and 44 percent gives 40.62, and indicatorChancesAboveHundred gives 33.00. Which could a check on the output, between 0 and EVPI, have caught?",
+ "Only the 245.00, above its EVPI of 63.00; 40.62 sits under 52.00 and 33.00 is the default study's genuine value, which is why the Analyzer tests the inputs.",
+ ["All three, because each differs from the value the same survey has when it is typed correctly, and an output check compares every printed figure against that value.",
+  "The 245.00 and the 40.62, since both exceed the honest EKPAN lottery value of 19.84, and an output check bounds each figure by the full-precision value of the survey.",
+  "None of them, because a gross voi appears only in the guidance sentence and the CSV export, where no check of any kind is applied."],
+ "A bound on the output sees only values outside 0 to EVPI. 40.62 against 52.00 and 33.00 against 63.00 look ordinary, so the Analyzer refuses or withholds on the inputs.")
+
+# ord 21
+q(0, "The CSEM survey on the EKPAN lottery cuts the chance of drilling a dry hole from 0.650000 to 0.162500. How much of that reduction is inside its EVII of 24.8250?",
+ "None of it: EVII is a difference of expected money, and the engine has no utility function through which a smaller chance of loss could add value.",
+ ["All of it, because the engine turns each drop in the chance of loss into money at the drill cost of 55.0000 before it weights the two readings by their chances.",
+  "About half, since a risk neutral engine counts a lower chance of loss at half the weight that a risk averse buyer of the same survey would give it in its own utility accounting.",
+  "The part after a bright spot, where the joint chance of 0.162500 enters the posterior and lowers the drill's value after that reading from 298.2500 to 207.7989."],
+ "Both modules maximise the mean. The fall from 0.650000 to 0.162500 is worth something to a company that cannot absorb a dry hole, and a risk averse buyer would pay more than 24.8250, by an amount the engine cannot say.")
+
+# ord 22
+q(3, "At accuracy 0.600000 a symmetric survey on the EKPAN lottery drops the success chance after \"reads dry\" to 0.264151. A geophysicist calls it informative and asks for a price. What is it worth, and what would first give it value?",
+ "0.0000, because 0.264151 is still above the drill against farm-out switch of 0.228571; value first appears at accuracy 0.645051, when a dry reading can change the action.",
+ ["0.7250, because any move of the posterior away from 0.35 raises expected money in proportion to how far the posterior has moved.",
+  "A small negative value printed as 0.0000, the residue of -1.42e-14, which disappears once the accuracy passes 0.650000.",
+  "0.0000 until the accuracy reaches 1.000000, where it jumps to the EVPI of 52.0000, since imperfect information never changes an action."],
+ "Both readings still lead to Drill, so weighting Drill's value at each posterior returns 75.7500, the value at the prior. By accuracy 0.650000 the survey is worth 0.7250.")
+
+# ord 23
+q(2, "A tree that rolls back cleanly has payoffs typed as undiscounted revenue, and it is briefed in Decision Studio. Which part of the toolchain objects?",
+ "None of it: neither module applies a rate, the rollback treats every payoff as money already discounted, and the provenance line names the tree without checking that.",
+ ["The rollback, which applies the discount rate saved with the tree to each terminal payoff before a chance node weights it.",
+  "Decision Studio, whose provenance line marks a tree whose payoffs did not come from a cash flow engine such as Petroleum Economics Studio.",
+  "The Decision Tree Builder, which discounts each payoff at the rate saved with a linked Monte Carlo run before it rolls back."],
+ "The EKPAN tree's 420.0000 and -25.0000 enter exactly as typed and roll back to 105.0000. A provenance line names a source; it does not certify that the payoffs are discounted.")
+
+# ord 24
+q(1, "An expert case hands over typed Analyzer percents and asks what the survey is worth. In what order does the expert reading work it?",
+ "Sum each set of percents, rebuild the implied prior against 0.005, value every action without information, then perfect and imperfect information, and read the Analyzer's cards last.",
+ ["Read the Analyzer's cards first, check each against its bounds of 0 and EVPI, and sum the percents only when a card falls outside those bounds.",
+  "Value the actions first, then rebuild the implied prior, and sum the percents only if the implied prior misses the stated one by more than 0.005.",
+  "Run the Bayes engine on the typed posteriors, compare its EVII with the gross voi, and treat any gap wider than 0.005 as a refusal."],
+ "A refused case has no value and a withheld one has only two numbers, so chances and their agreement come before any value; the tool comes last, where a two-action card or a card near zero is read against the actions and the cost.")
+
+# ord 25
+q(2, "The likelihood 0.850000 is used as a posterior twice: by hand in the EKPAN lottery's Bayes step, and in the Analyzer as the Success chance given Bright spot, with the Dry hole chance given Bright spot typed so the pair still sums to 100. What goes wrong in each?",
+ "By hand the drill after a bright spot is valued at 298.2500 where 207.7989 is right; in the Analyzer the implied Success misses 0.350000 by far more than 0.005, so the value is withheld.",
+ ["Both value the drill after a bright spot at 298.2500, because the Analyzer and the Bayes step put the same success chance against the same payoffs.",
+  "Nothing goes wrong in either, because a likelihood equals its posterior whenever every column of the survey sums to 1.",
+  "By hand nothing moves, because Bayes renormalises, and the Analyzer refuses the box as a likelihood typed where a posterior belongs."],
+ "0.850000 is the chance of a bright spot given success, and the posterior is 0.646739. Typed at 46.000000 percent, a Success chance that high after Bright spot averages back far above the stated chance, and the Analyzer never repairs it.")
+
+# ord 26
+q(0, "The EKPAN lottery's posterior after a bright spot is typed as 65 percent, and in three trials the posterior after none is typed as 10, 9 and 8 percent. Two trials print the same gross voi of 20.51 and the third is withheld. Why?",
+ "After No bright spot the Analyzer's best action is Do Not, worth 0 at either chance, so 10 and 9 never reach the value; 8 still drags the implied Success to 0.342200, past the allowance.",
+ ["The Analyzer rounds each posterior to the nearest ten percent before valuing it, so 10 and 9 merge, while 8 rounds down to zero and breaks the sum.",
+  "The accepted trials match because both are exactly consistent, and 8 is withheld because the Analyzer refuses any posterior below 10 percent.",
+  "After No bright spot the best action is the farm-out, which is worth the same at any success chance, and 8 is withheld because the farm-out is then refused by the Analyzer's range check on each entry."],
+ "Drill loses money after No bright spot at 10 or 9 percent, so the posterior multiplies a branch worth nothing. The check still reads it: at 8 percent the delta is -7.800000e-3.")
+
+# ord 27
+q(1, "The EKPAN lottery typed with posteriors of 64.7 and 9.7 percent gives an implied Success of exactly 0.350000, a delta of 0.000000e+0, and a gross voi of 19.89. At full precision the delta is 5.551115e-17 and the gross voi 19.84. Which entry describes the survey?",
+ "The full-precision one: a zero delta says only that the entries agree with the stated chance, and the rounded posteriors describe a slightly different survey.",
+ ["The rounded one, because a delta of exactly zero is a stronger consistency result than the binary residue of 5.551115e-17 that the full-precision entry leaves behind.",
+  "Both equally, because the Analyzer treats every entry whose delta is inside 0.005 as the same survey, and the gap between 19.89 and 19.84 is only rounding noise on the card.",
+  "Neither, because a delta below 1e-12 falls inside the representation allowance and the Analyzer withholds what it cannot tell from zero."],
+ "Five rounded EKPAN lottery rows pass the check with gross values from 18.41 to 20.51, and the sixth passing row is the full-precision 19.84 entry. The survey is the same in every row; a pass certifies agreement and says nothing of precision.")
+
+# ord 28
+q(3, "A colleague wants the Analyzer to print contradictingPosterior's unguarded 75.00 again, only capped at the 63.00 EVPI. What is wrong with that plan?",
+ "A capped 63.00 still rests on posteriors implying 0.420000 against a stated 0.300000, and a cap never touches contradictions that print under the ceiling, such as 40.62 for the EKPAN lottery.",
+ ["Nothing, since the excess of 12 over EVPI is exactly the part the contradiction added, and removing it leaves the honest value of the survey.",
+  "A cap sets the value too low, because EVPI binds only information derived by Bayes, and typed posteriors can legitimately be worth more than knowing the outcome in advance when the survey is a good one.",
+  "The cap should be EMV without information, 15.00, since no survey can be worth more than the prospect it studies."],
+ "The with side weights a prospect succeeding 0.420000 of the time against one stated at 0.300000, so the uplift is belief with no information in it. The Analyzer withholds the value outright and prints no clipped figure.")
+
+# ord 29
+q(3, "The published three-outcome, four-action lottery records Farm out as the best action for Dry under perfect information. If Relinquish were listed before Farm out, what would change?",
+ "The action recorded for Dry would read Relinquish, and evWithPerfect 133.0000 and the EVPI of 24.0000 would stay where they are.",
+ ["Nothing, because the engine prefers the action with positive payoffs in the other outcomes whenever two actions tie in one outcome.",
+  "evWithPerfect would fall, since Relinquish pays nothing in Large or Medium and perfect information averages each action over all three outcomes.",
+  "emvPrior would switch to Relinquish at 0.0000, because listing order decides the prior choice whenever two actions tie in any outcome."],
+ "Farm out and Relinquish both pay 0.0000 in Dry at no cost and tie, and the golden records the first listed of the pair. EVPI takes the best value per outcome, which is 0.0000 either way.")
+
+# ord 30
+q(0, "A write-up must report the value of the published threeByThree survey on the three-outcome, four-action lottery. Which report survives review?",
+ "Worth 1.2000 gross and -10.8000 net at a cost of 12.0000, against a ceiling of 24.0000, all of it from the Dim reading, with the four actions valued in the engine's lottery form.",
+ ["Worth buying, since Drill alone after a Bright reading is worth 227.1875, far above both the 109.0000 it is worth at the prior and the survey's cost of 12.0000, so the best reading carries the case.",
+  "Worth 110.2000 with information against 109.0000 without, which after the survey cost of 12.0000 leaves the acquisition branch of the information tree a net gain of 98.2000 to report.",
+  "Worth 1.2000 net of its cost against a ceiling of 24.0000, a figure the VOI Analyzer would reproduce exactly once the three-outcome lottery and its three readings are typed into its form."],
+ "Bright and Flat lead to Drill alone, the action the prior already chose, so only Dim's switch to Farm out adds value. The Analyzer offers two actions and would lose Drill with partner and Farm out on the way in.")
+
+# ord 31
+q(2, "On a two-branch chance node paying 10 and 30, one probability is typed as the text \"0.5\" beside 0.5; on a second copy the probability on the branch paying 10 is left empty beside 1 on the branch paying 30. What does each node roll back to?",
+ "20.0000 and 30.0000: text that reads as a number is converted, and an empty probability is read as 0, so the second node weights only the branch paying 30.",
+ ["20.0000 and a refusal, since an empty probability leaves the sum short of 1 and the engine returns a message that names the node at fault and gives no value.",
+  "A refusal and 30.0000, because a probability typed as text is not a number and is refused in the same way as a payoff typed as \"20abc\", before any weighting.",
+  "20.0000 both times, because an empty probability is shared out evenly with the other branch before the sum is checked."],
+ "A cleared probability usually surfaces as a sum that is not 1; it passes only when the other branches already sum to 1, and then its branch vanishes from the weighting without a message.")
+
+# ord 32
+q(1, "A reviewer checks, on the decision where A pays 20 meant at a cost of 5 and B pays 12, that A's branch value equals its payoff less the intended cost. One copy reads A at 20.0000, and another copy returns a refusal naming branch A. What does each reveal?",
+ "At 20.0000 the cost was left out of the tree and read as 0; the refusal comes from a cost typed as text that is not a number or below zero, which the engine will not read as money.",
+ ["At 20.0000 the payoff was typed as the text \"20\", and the refusal comes from a probability typed as text on one of the branches.",
+  "Both are refusals the reviewer missed, since the engine returns the payoff unchanged whenever it rejects a cost.",
+  "At 20.0000 the cost was charged after the branch was chosen, and the refusal comes from a cost of 5 typed as the text \"5\"."],
+ "A cost of \"5\" typed as text converts to 5 and gives 15.0000. A cost left out reads 0 with no message, while a cost of \"abc\", an empty entry or -5 is refused by node label, so only the arithmetic shows the omitted cost.")
+
+# ord 33
+q(0, "At p = 80 / 350 on the EKPAN lottery and at success 0.200000 on the published drillFarmOut tree, Drill and Farm out print the same value. What does the engine report at each?",
+ "A tie at both, each marking Drill as the first listed: drillFarmOut ties exactly at 12.0000, and the lottery's -7.11e-15 is residue inside the band.",
+ ["A tie only on drillFarmOut; at 80 / 350 Farm out is larger by -7.11e-15 of residue, so the engine names it as the single best action.",
+  "A tie only on the lottery, because at 0.228571 the EVPI peaks at 61.7143 and the engine reads that peak as indifference between the two actions.",
+  "Neither, because the engine has no tie rule at all, and each of the two results comes from floating-point residue in the last binary digits of the two values."],
+ "Two values tie when they differ by at most 1e-9 x max(1, |best|): 12.0000 against 12.0000 is exact, and -7.11e-15 is far inside the band. The engine reports indifferent true at both and marks Drill, listed first.")
+
+# ord 34
+q(2, "The Analyzer tie case (Success 25 percent paying 200, Dry hole 75 percent paying -50, decision cost 12.5, survey cost 5.0000) opens its insight by saying 'Drill Exploration Well' and 'Do Not Drill Exploration Well' both come to $0.00M, and gives a gross voi of 25.00. What do those two outputs tell a reader?",
+ "The prior decision is perfectly unsettled, since acting and Do Not are both worth 0, and a decision that unsettled can be tipped by any informative signal, which is why the survey is worth 25.00.",
+ ["Drilling is better by a margin of 25.00, the value the survey adds on top of the drill's EMV without information of 0.00.",
+  "The survey is worth 25.00 because the Analyzer drops the tied Do Not action and values the information against the drill alone.",
+  "The inputs are inconsistent, because a tied prior leaves the implied chances undefined, so the Analyzer should have withheld the 25.00."],
+ "Acting is 0.25 x 200 plus 0.75 x -50, less 12.5, which is 0. EVPI peaks at a switch for the same reason, 61.7143 at 0.228571 on the EKPAN lottery.")
+
+# ord 35
+q(3, "The EKPAN information tree is saved with a survey cost of 24.8250 and briefed in Decision Studio. What do its decision rows say?",
+ "Optimal EMV 75.7500, a first move naming \"Acquire CSEM survey\" and \"No further information\" as coming to the same figure, a next best of 75.7500 and an advantage of Indifferent at the precision shown.",
+ ["Optimal EMV 75.7500 on \"No further information\", because at a cost equal to the gross value the engine declines to spend money on an indifferent survey.",
+  "Optimal EMV 100.5750 on \"Acquire CSEM survey\" and an advantage of 24.8250, since the brief reports the information before its cost.",
+  "Optimal EMV 92.5750 and an advantage of 16.8250, the rows this tree prints whatever survey cost is saved with it."],
+ "Acquiring is 100.5750 less 24.8250, which is 75.7500, tying no further information, so the brief names both root branches on the first-move row and writes Indifferent at the precision shown on the advantage row.")
+
+# ord 36
+q(1, "The published dominantAction and certainOutcome lotteries both return an EVPI of 0.0000. What makes perfect information worthless in each?",
+ "On dominantAction, Always is best in both outcomes, so knowing the outcome changes nothing; on certainOutcome, Sure has probability 1.000000, so there is nothing to learn.",
+ ["Both have equally likely outcomes, so perfect information splits evenly and adds back to emvPrior, 65.0000 in one and 260.0000 in the other.",
+  "Both are refused before valuation and report 0.0000 in place of a message, since one outcome in each carries no payoff.",
+  "On dominantAction the two actions tie, and on certainOutcome the Never outcome pays nothing, so each 0.0000 is residue."],
+ "Always pays 100.0000 / 50.0000 against Never's 10.0000 / 5.0000, so emvPrior and evWithPerfect are both 65.0000; certainOutcome reads 260.0000 on both.")
+
+# ord 37
+q(0, "An analyst sweeps the success chance on the EKPAN tree's drill outcome node away from 0.350000, rebalancing its other branches, while the farm-out node keeps its typed 0.350000. What does the tree now describe?",
+ "Two different prospects, since chance nodes are independent unless drawn otherwise, and the two nodes shared 0.350000, 0.150000 and 0.500000 only because they were typed alike.",
+ ["The same prospect under a sensitivity, because the engine links chance nodes with matching outcome names and moves the farm-out with the drill.",
+  "Nothing at all, since two chance nodes with the same outcome names must carry the same probabilities or the rollback returns a message.",
+  "A correlated model in which the farm-out now depends on the drill result, priced by the rollback through a later decision node."],
+ "Neither module models correlation beyond what the tree is drawn with. A clean rollback of 105.0000 says nothing about whether the two nodes still describe one rock.")
+
+# ord 38
+q(3, "Which sentence reports the EKPAN lottery's CSEM survey value completely?",
+ "Worth 24.8250 gross and 16.8250 net at a cost of 8.0000, against a ceiling of 52.0000, with Drill, Farm out and Walk away available; the two-action Analyzer gives 19.84.",
+ ["Worth 19.84 gross and 11.84 net at a cost of 8.0000 against an EVPI card of 52.00, the survey's full value on the lottery.",
+  "Worth 16.8250 at a cost of 8.0000, below a ceiling of 52.0000, which is also the price at which buying it becomes neutral.",
+  "Worth 24.8250 net of its 8.0000 cost against a ceiling of 61.7143, the EVPI at the drill against farm-out switch."],
+ "A value of information needs its actions, its tree and its consistency: 19.84 is right for two actions, and the neutral price is the gross 24.8250; the net plays no part in it.")
+
+# ord 39
+q(0, "Four entries reach the rollback: a payoff summary carrying NPV P90 185, NPV P50 390 and NPV P10 710 but no mean; a payoff typed \"20abc\"; a payoff left empty; and a cost typed \"abc\". Which does the engine refuse?",
+ "All four, since each is an entry the engine cannot read as a number, and it refuses the tree and guesses no value for it.",
+ ["The summary and \"20abc\"; the empty payoff is read as 0 and the \"abc\" cost is charged as 0, both without a message.",
+  "Only \"20abc\", because a summary without a mean is valued at its NPV P50 of 390, and empty or text entries count as 0.",
+  "The summary, the empty payoff and \"20abc\", while the cost typed \"abc\" passes alone, because a cost is optional and a payoff is not."],
+ "Four messages come back, one per entry, each ending with the node it stopped at: the mean-less summary and \"20abc\" fail as payoffs, the empty box as a blank payoff and \"abc\" as a cost. An entry missing from the tree altogether is the one case read as 0.")
+
+# ord 40
+q(2, "The published three-outcome, four-action lottery is drawn in the Decision Tree Builder as a root decision with one costed branch per action, and briefed twice: with all four actions, and after Drill with partner is pruned as never best. What changes on the brief?",
+ "Optimal EMV stays 109.0000 on Drill alone, but the Next best alternative falls from 54.5000 to 31.0000 and the Decision advantage rises from 54.5000 to 78.0000.",
+ ["Nothing, because an action that is never best at any probability cannot enter any row the brief prints, just as pruning it leaves emvPrior 109.0000 and the EVPI of 24.0000 unchanged.",
+  "Optimal EMV falls to 54.5000, because pruning the partner removes the half-scale copy the rollback leaned on to reach 109.0000.",
+  "Only the Decision advantage, which the brief measures against whichever branch is listed second, while the Next best alternative row keeps its 54.5000 from the earlier save of the tree."],
+ "Next best is the largest other root branch value, and with the partner gone that is Farm out at 31.0000. No engine value moves, yet the brief's margin had been measured against an action that could never win.")
+
+# ord 41
+q(0, "IRRI's two readings both put success at 20 percent, and the published uselessSignal case's two readings both leave the posterior at 0.300000. Each signal says the same thing whatever it reads. Why is one worth 0.0000 and the other withheld?",
+ "uselessSignal's posteriors average back to the stated 0.300000, so ignoring it earns emvPrior and it is worth 0.0000; IRRI's average to 0.200000, a prospect nobody stated.",
+ ["Both are worth 0.0000 in truth, and IRRI is withheld only because the Analyzer cannot display a zero value of information without raising a consistency warning beside it.",
+  "uselessSignal is derived from likelihoods and so exempt from every check, while IRRI is withheld because the Analyzer will not value two indicators typed with identical percents of outcome chances.",
+  "IRRI is worth -15.00 because its readings point toward a poorer prospect, and the Analyzer withholds values that would discourage buying."],
+ "Averaging Bayes posteriors over the readings returns the prior, which sets the floor of 0; after either uselessSignal reading the actions read Drill 43, Farm out 18 and Do nothing 0, so the best value is 43.0000 after each. IRRI's readings return 20 percent, so the -15.00 its typed chances give with nothing checking them against the stated prior was never a value.")
+
+# ord 42
+q(0, "A survey's likelihoods given Success are typed as 0.333333 for each of three readings, and every other column is sound. What does the Bayes engine return?",
+ "A value, since each likelihood column faces the chance-node test, |sum - 1| at most 1e-6 plus a 1e-12 allowance, and 0.333333 typed in six places passes.",
+ ["A value, because likelihoods are checked only across each reading's row, and three readings of 0.333333 do not form a row.",
+  "A refusal naming the Success column at 0.999999, because each likelihood column faces the 1e-6 test with no binary allowance.",
+  "A refusal naming the readings, because three readings with equal likelihoods carry no information and the engine will not value a signal that cannot change anything."],
+ "Three copies of 0.333333 miss 1 by a binary hair above 1e-6, inside the 1e-12 allowance the same test carries for chance nodes and priors. The published likelihoodColumnShortByTwoMillionths case, summing to 0.999998, is refused.")
+
+emit(Q, "/root/wt-ec45-recut/tools/course-waves/ec45-recut/banks/decision/advanced/ec4a_exam.json", label="ec4a_exam", expect_n=42)
+finish()

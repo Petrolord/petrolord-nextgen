@@ -18,14 +18,13 @@ import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/comp
 // its earned value, the plan added per month). Nothing here computes a
 // forecast, an earned value or a planned value, and nothing reads the clock.
 //
-// P-LABELS. None. A forecast is a cost estimate, not an outcome, and a cost,
+// P-LABELS. None. A forecast is a cost estimate and carries no outcome label; a cost,
 // a budget or a forecast never carries a P-label. Budget and cost labels carry
 // data-plabel="cost", forecast labels data-plabel="forecast", and a gate reads
 // them back out of the rendered markup and finds no P-label in them.
 //
-// TIMEZONE (finding EC5-5). The S-curve labels and Planned values are the
-// engine's, which steps months in LOCAL time. In a browser west of UTC they
-// shift; the lab tests pin UTC, which Lagos shares.
+// TIME ZONE. The engine reads the window, the as-of date, the monthly step and
+// every S-curve label in UTC, so every browser draws the same curve.
 
 const usd = (v) => (Number.isFinite(v) ? Number(v).toLocaleString('en-US', { maximumFractionDigits: 0 }) : 'null');
 const six = (v) => (Number.isFinite(v) ? Number(v).toFixed(6) : 'null');
@@ -36,7 +35,7 @@ export const MODES = [
   ['forecast', 'Forecast: one rule for every line'],
   ['earned', 'Earned: earned value, CPI, spent against complete'],
   ['asof', 'As of: six dates, and what moves with them'],
-  ['scurve', 'S-curve: plan, actual and forecast by month'],
+  ['scurve', 'S-curve: plan, actual and forecast by month, closing on the end date'],
 ];
 
 const AXIS = { fill: '#94a3b8', fontSize: 11 };
@@ -103,29 +102,35 @@ export const ForecastMode = ({ fr }) => {
     <>
       <p className="text-sm text-slate-200 mb-0">{fr.rule}</p>
       <Tbl
-        head={['code', <CostLabel key="b">budget</CostLabel>, <CostLabel key="s">actual + commitment (derived)</CostLabel>, <ForecastLabel key="e">entered forecast</ForecastLabel>, <ForecastLabel key="i">itemForecast</ForecastLabel>, 'rule used', <ForecastLabel key="v">line variance, budget less itemForecast (derived)</ForecastLabel>]}
-        rows={fr.rows.map((i) => [i.code, usd(i.budget), usd(i.spendDerived), i.enteredForecast ? usd(i.enteredForecast) : 'none', usd(i.itemForecast), <ForecastLabel key={i.code}>{i.rule}</ForecastLabel>, usd(i.lineVarianceDerived)])}
+        head={['code', <CostLabel key="b">budget</CostLabel>, <CostLabel key="s">committed, actual + commitment</CostLabel>, <ForecastLabel key="e">entered forecast</ForecastLabel>, <ForecastLabel key="i">itemForecast</ForecastLabel>, 'rule used', <ForecastLabel key="f">below spent and committed</ForecastLabel>, <ForecastLabel key="v">line variance, budget less itemForecast (derived)</ForecastLabel>]}
+        rows={fr.rows.map((i) => [i.code, usd(i.budget), usd(i.committed), i.enteredForecast ? usd(i.enteredForecast) : 'none', usd(i.itemForecast), <ForecastLabel key={i.code}>{i.rule}</ForecastLabel>, i.forecastBelowCommitted ? 'yes' : 'no', usd(i.lineVarianceDerived)])}
       />
       <div className="mt-3">
         <TileGrid>
           <Tile label={<ForecastLabel>Estimate at completion (EAC)</ForecastLabel>} value={usd(fr.eac)} unit="USD" />
           <Tile label={<ForecastLabel>Variance at completion</ForecastLabel>} value={usd(fr.variance)} unit="USD, negative is an overrun" />
+          <Tile label={<ForecastLabel>Lines forecast below committed</ForecastLabel>} value={String(fr.linesForecastBelowCommitted)} />
+          <Tile label={<ForecastLabel>Lines with a negative forecast ignored</ForecastLabel>} value={String(fr.linesForecastIgnored)} />
         </TileGrid>
       </div>
       <Tbl
-        head={['CMT-03 with', <ForecastLabel key="f">itemForecast, USD</ForecastLabel>]}
-        rows={fr.probes.map((p) => [p.label, usd(p.itemForecast)])}
+        head={['CMT-03 with', <ForecastLabel key="f">itemForecast, USD</ForecastLabel>, <ForecastLabel key="b">below committed by, USD</ForecastLabel>, 'forecastIgnored']}
+        rows={[
+          ...fr.probes.map((p) => [p.label, usd(p.itemForecast), p.forecastBelowCommitted ? usd(p.forecastBelowCommittedBy) : 'not below', p.forecastIgnored ?? 'null']),
+          [`entered forecast ${fr.negativeProbe.enteredForecast}`, usd(fr.negativeProbe.itemForecast), 'not below', fr.negativeProbe.forecastIgnored ?? 'null'],
+        ]}
       />
       <p className="text-xs text-slate-500 mt-1 mb-0">
-        A forecast of 0 is not positive and falls back to the formula. Any positive entered forecast is taken as typed, even one below the money already spent and committed (finding EC5-1).
+        A forecast of 0 is not positive and falls back to the formula. Any positive entered forecast is taken as typed, and one below the money already spent and
+        committed is flagged with the amount it falls short. A negative entered forecast is replaced by the standard rule and flagged &quot;negative&quot;.
       </p>
       <Tbl
-        head={['published case', 'items', <ForecastLabel key="e">engine EAC</ForecastLabel>, <ForecastLabel key="v">variance</ForecastLabel>]}
-        rows={fr.published.map((c) => [c.name, JSON.stringify(c.items), four(c.eac), four(c.variance)])}
+        head={['published case', 'items', <ForecastLabel key="e">engine EAC</ForecastLabel>, <ForecastLabel key="v">variance</ForecastLabel>, 'lines below committed', 'lines with an ignored forecast']}
+        rows={fr.published.map((c) => [c.label, JSON.stringify(c.items), four(c.eac), four(c.variance), c.linesForecastBelowCommitted, c.linesForecastIgnored])}
       />
       <Note>
         A line with no entered forecast can never show a saving: its forecast is at least its budget, so its variance is 0
-        or negative. OFON-1&apos;s three variances of 0 are that floor, not evidence of being on budget.
+        or negative. OFON-1&apos;s three variances of 0 are that floor, and say nothing about being on budget.
       </Note>
     </>
   );
@@ -161,7 +166,7 @@ export const EarnedMode = ({ ev }) => {
         <TileGrid>
           <Tile label="Earned value" value={usd(ev.earnedValue)} unit="USD" />
           <Tile label={<CostLabel>Actuals</CostLabel>} value={usd(ev.totalActuals)} unit="USD" />
-          <Tile label="CPI, earned value over actuals" value={six(ev.cpi)} />
+          <Tile label="CPI, earned value over actuals" value={ev.cpi === null ? 'null' : six(ev.cpi)} unit={`cpiStatus ${ev.cpiStatus}`} />
           <Tile label={`As of ${ev.asOf}`} value="read from the lines" />
         </TileGrid>
       </div>
@@ -179,13 +184,17 @@ export const EarnedMode = ({ ev }) => {
         Percent spent {four(ev.percentSpent)} against percent complete {four(ev.percentComplete)}.
       </p>
       <p className="text-xs text-slate-500 mt-2 mb-0">
-        Planned value is the budget times the elapsed fraction of the window at the as-of date; SPI is earned value over planned value, and null where planned value is zero, except that an AFE whose budget is 0 reports SPI 1 by a guard that fires first.
+        {ev.rule}
       </p>
       <Tbl
-        head={['published case', 'engine EV', <CostLabel key="a">AC</CostLabel>, 'CPI', 'SPI']}
-        rows={ev.published.map((x) => [x.name, four(x.earnedValue), four(x.totalActuals), x.cpi === null ? 'null' : six(x.cpi), x.spi === null ? 'null' : six(x.spi)])}
+        head={['published case', 'engine EV', <CostLabel key="a">AC</CostLabel>, 'CPI', 'cpiStatus', 'SPI', 'spiStatus']}
+        rows={ev.published.map((x) => [x.name, four(x.earnedValue), four(x.totalActuals), x.cpi === null ? 'null' : six(x.cpi), x.cpiStatus, x.spi === null ? 'null' : six(x.spi), x.spiStatus])}
       />
-      <Note>Earned value is only as good as the progress typed in, and CPI reports 1 before any money is spent.</Note>
+      <Tbl
+        head={['published case', 'engine message, verbatim']}
+        rows={ev.progressRefusals.map((a) => [a.name, a.ok ? 'accepted' : a.error])}
+      />
+      <Note>Earned value is only as good as the progress typed in. Progress runs from 0 to 100 percent, and CPI is null with nothing spent.</Note>
     </>
   );
 };
@@ -206,21 +215,21 @@ export const AsOfMode = ({ table, asOf, onAsOf }) => {
           <Tile label="Time progress" value={six(row.timeProgress)} />
           <Tile label="Planned value" value={usd(row.plannedValue)} unit="USD" />
           <Tile label="Earned value" value={usd(row.earnedValue)} unit="USD" />
-          <Tile label="SPI" value={row.spi === null ? 'null, nothing planned yet' : six(row.spi)} />
-          <Tile label="CPI" value={six(row.cpi)} />
+          <Tile label="SPI" value={row.spi === null ? 'null' : six(row.spi)} unit={`spiStatus ${row.spiStatus}`} />
+          <Tile label="CPI" value={row.cpi === null ? 'null' : six(row.cpi)} />
           <Tile label={<ForecastLabel>EAC</ForecastLabel>} value={usd(row.totalForecast)} unit="USD" />
         </TileGrid>
       </div>
       <Tbl
-        head={['as of', 'time progress', 'planned value', 'earned value', 'SPI', 'CPI']}
-        rows={table.rows.map((x) => [x.asOf === row.asOf ? <span key="s" className="text-[#BFFF00]">{x.asOf}</span> : x.asOf, six(x.timeProgress), usd(x.plannedValue), usd(x.earnedValue), x.spi === null ? 'null' : six(x.spi), six(x.cpi)])}
+        head={['as of', 'time progress', 'planned value', 'earned value', 'SPI', 'spiStatus', 'CPI']}
+        rows={table.rows.map((x) => [x.asOf === row.asOf ? <span key="s" className="text-[#BFFF00]">{x.asOf}</span> : x.asOf, six(x.timeProgress), usd(x.plannedValue), usd(x.earnedValue), x.spi === null ? 'null' : six(x.spi), x.spiStatus, six(x.cpi)])}
       />
       <p className="text-xs text-slate-400 mt-2 mb-0">
         Whole days in the window: {dc.windowDaysDerived} (derived). {dc.elapsed.map((e) => `At ${e.asOf}, ${e.elapsedDaysDerived} elapsed, time progress ${six(e.timeProgressDerived)}`).join('; ')} (derived), matching the engine column.
       </p>
       <Tbl
-        head={['published case', 'window', 'as of', 'time progress', 'SPI']}
-        rows={table.published.map((x) => [x.name, `${x.startDate ?? 'none'} to ${x.endDate ?? 'none'}`, x.caseAsOf ?? 'none given', six(x.timeProgress), x.spi === null ? 'null' : six(x.spi)])}
+        head={['published case', 'window', 'as of', 'time progress', 'SPI', 'spiStatus']}
+        rows={table.published.map((x) => [x.name, `${x.startDate ?? 'none'} to ${x.endDate ?? 'none'}`, x.caseAsOf ?? 'none given', six(x.timeProgress), x.spi === null ? 'null' : six(x.spi), x.spiStatus])}
       />
       <Note>
         Only planned value, time progress and SPI move with the as-of date; earned value, actuals, CPI and EAC are read from
@@ -250,35 +259,37 @@ export const SCurveMode = ({ sc }) => {
         </ResponsiveContainer>
       </div>
       <Tbl
-        head={['point', 'label', <CostLabel key="p">Planned</CostLabel>, <CostLabel key="a">Planned added (derived)</CostLabel>, <CostLabel key="c">Actual</CostLabel>, <ForecastLabel key="f">Forecast</ForecastLabel>]}
+        head={['point', 'label', 'window end', <CostLabel key="p">Planned</CostLabel>, <CostLabel key="a">Planned added (derived)</CostLabel>, <CostLabel key="c">Actual</CostLabel>, <ForecastLabel key="f">Forecast</ForecastLabel>]}
         rows={sc.points.map((p, i) => [
           i === sc.cutIndex ? <span key="c" className="text-[#BFFF00]">{i}, the as-of cut</span> : i,
-          p.date, usd(p.Planned), sc.plannedAddedDerived[i] === null ? 'none' : usd(sc.plannedAddedDerived[i]),
+          p.date, p.windowEnd ? 'yes' : 'no', usd(p.Planned), sc.plannedAddedDerived[i] === null ? 'none' : usd(sc.plannedAddedDerived[i]),
           p.Actual === null ? 'null' : usd(p.Actual), usd(p.Forecast),
         ])}
       />
       <div className="mt-3">
         <TileGrid>
-          <Tile label="Points" value={String(sc.pointCount)} />
-          <Tile label={<CostLabel>Last Planned point</CostLabel>} value={usd(sc.lastPlanned)} unit={`USD against a budget of ${usd(sc.totalBudget)}`} />
+          <Tile label="Points" value={String(sc.pointCount)} unit={`${sc.monthlyCount} monthly, then the closing point "${sc.closing.date}"`} />
+          <Tile label={<CostLabel>Closing Planned</CostLabel>} value={usd(sc.closing.Planned)} unit={`USD, the budget ${usd(sc.totalBudget)}`} />
+          <Tile label={<ForecastLabel>Closing Forecast</ForecastLabel>} value={usd(sc.closing.Forecast)} unit={`USD, the EAC ${usd(sc.eac)}`} />
+          <Tile label={<CostLabel>Added by the closing point (derived)</CostLabel>} value={usd(sc.closingAddedDerived)} unit={`USD after "${sc.lastMonthly.date}"`} />
           <Tile label={<CostLabel>Last actual</CostLabel>} value={usd(sc.lastActual)} unit="USD" />
           <Tile label={<ForecastLabel>First projected Forecast</ForecastLabel>} value={usd(sc.firstProjectedForecast)} unit="USD" />
-          <Tile label={<ForecastLabel>Last Forecast point</ForecastLabel>} value={usd(sc.lastForecast)} unit={`USD, while the EAC is ${usd(sc.eac)}`} />
+          <Tile label="Undated invoices" value={String(sc.undatedInvoices)} />
         </TileGrid>
       </div>
       <p className="text-xs text-slate-500 mt-2 mb-0">
-        A label is a month and a two-digit year. Actual at a point counts invoices dated on or before that day. After the as-of date
-        Forecast ignores the actuals and is the EAC spread from the start, so its jump at the first projected point comes from
-        switching formulas, not from spending. Labels and Planned values are the engine&apos;s in this browser&apos;s timezone: west of UTC
-        they shift (finding EC5-5); Lagos and UTC agree.
+        A monthly label is a month and a two-digit year; the closing point carries its day. Actual at a point counts invoices dated on
+        or before that day. After the as-of date Forecast ignores the actuals and is the EAC spread from the start, so its jump at the
+        first projected point comes from switching formulas: no money is spent at that point. Every date and label is read in UTC, so
+        every time zone draws the same curve. Read after the end, as of {sc.afterEnd.asOf}, the closing point carries Actual {usd(sc.afterEnd.closing.Actual)}.
       </p>
       <Tbl
         head={['published case', 'points', 'first', 'last']}
-        rows={sc.published.map((c) => [c.name, c.pointCount, JSON.stringify(c.first), JSON.stringify(c.last)])}
+        rows={sc.published.map((c) => [c.label, c.pointCount, JSON.stringify(c.first), JSON.stringify(c.last)])}
       />
       <Note>
-        The monthly buckets stop before the plan reaches the budget, and the last Forecast point can sit below the budget
-        while the EAC is above it: an overrun drawn as an underrun.
+        Read an overrun off the closing point, where Planned is the budget and Forecast is the EAC. The last monthly point
+        shows neither.
       </Note>
     </>
   );

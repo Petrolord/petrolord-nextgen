@@ -27,7 +27,7 @@ import process from 'node:process';
 import { execFileSync } from 'node:child_process';
 
 const HERE = process.env.EC10_WAVE_DIR || '/root/cat-wip-farmout';
-const ENG = process.env.EC10_ENGINES || '/root/wt-ec10-nextgen/packages/engines/ec10-farmout';
+const ENG = process.env.EC10_ENGINES || '/root/wt-ec10-nextgen/packages/engines';
 const BRIEFS = ['BRIEF.md', 'LESSON_TASK.md', 'BANK_TASK.md', 'KEY_TRUTH_TASK.md', 'PANELS.md'];
 const PLANT = process.argv.includes('--plant-a-recon-figure');
 

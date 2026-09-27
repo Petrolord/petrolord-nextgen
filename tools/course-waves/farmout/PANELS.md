@@ -17,7 +17,7 @@ in plain words.
 Under `src/components/course/panels/farmout/` in the NextGen repository:
 
 * `farmoutLab.js`, the ONE teaching lab. It imports the vendored Ekene fixture
-  (`packages/engines/ec10-farmout/test-data/economics/ekene-farmout`) and the
+  (`packages/engines/test-data/economics/ekene-farmout`) and the
   INPUTS of the vendored golden file, carries thin routes to the engine for
   whatever a learner types, the view routes, the stated-input writer
   `setStated`, a JSON parser and the teaching readers. It holds no graded

@@ -38,7 +38,7 @@ If both readings led to Drill, the survey would be worth nothing, whatever it di
 
 ## Ties and what the engine assumes
 
-Walk away is worth 0.0000 after either reading and is never best, because Farm out cannot lose money. If two actions tied at a posterior, the engine would keep the one listed first. The choice is risk neutral: after a bright spot Drill still loses 80.0000 net of its cost with probability 0.353261, and the engine gives that loss no weight beyond its expectation.
+Walk away is worth 0.0000 after either reading and is never best, because Farm out cannot lose money. If two actions tied at a posterior, the engine would report both, in tiedActionIndices with indifferent true, and mark the first listed. The choice is risk neutral: after a bright spot Drill still loses 80.0000 net of its cost with probability 0.353261, and the engine gives that loss no weight beyond its expectation.
 
 ## The mistake
 

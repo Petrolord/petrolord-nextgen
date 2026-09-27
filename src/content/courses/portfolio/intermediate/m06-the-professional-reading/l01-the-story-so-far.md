@@ -8,7 +8,7 @@ OFON-1 is authorised in USD over a window from 2027-02-01 to 2027-11-30. Five co
 
 ## One forecast rule
 
-Each line forecasts its entered forecast when that is positive, and otherwise the larger of its budget and its actual plus commitment. CSG-02 forecasts 4300000 against a budget of 3900000, CMT-03 forecasts its entered 1400000, and DRL-01, LOG-04 and CMP-05 forecast their budgets. The EAC is 27600000 and the variance at completion is -550000, an overrun. After the EC5-0 repair the dashboard tiles, the Cost Breakdown table, the exports and the Top 5 all use this one rule.
+Each line forecasts its entered forecast when that is positive, flagged when it falls below the money spent and committed, and otherwise the larger of its budget and its actual plus commitment. CSG-02 forecasts 4300000 against a budget of 3900000, CMT-03 forecasts its entered 1400000, and DRL-01, LOG-04 and CMP-05 forecast their budgets. No OFON-1 line is flagged. The EAC is 27600000 and the variance at completion is -550000, an overrun. The dashboard tiles, the Cost Breakdown table, the exports and the Top 5 all use this one rule.
 
 ## Earned value
 
@@ -16,11 +16,11 @@ Earned value weights each line's progress by its budget. DRL-01 earns 10224000 a
 
 ## The as-of date
 
-Only time progress, planned value and SPI move with the as-of date. SPI is null before the start and on the start day, 1.141290 on 2027-06-30, 0.872063 on 2027-08-15, and 0.563087 on and after 2027-11-30, where it equals percent complete divided by 100. A date that is not a valid date is refused. Before EC5-0 the wizard asked for no dates, so every report read as though the window had already ended.
+Only time progress, planned value and SPI move with the as-of date. SPI is null before the start and on the start day, 1.141290 on 2027-06-30, 0.872063 on 2027-08-15, and 0.563087 on and after 2027-11-30, where it equals percent complete divided by 100. A date that is not a valid date is refused. An AFE saved without dates falls back to time progress 1, and the Suite labels its SPI unavailable.
 
 ## The S-curve
 
-As of 2027-08-15 the curve has 10 points, standing on the first of each month under labels like Feb 27. Planned is a straight line in days that ends at 24452483, short of the budget of 27050000. Actual comes from invoices and ends at 15090000. Forecast then jumps to 19374834, because past the as-of date it is the EAC spread from the start rather than a continuation of spend.
+As of 2027-08-15 the curve has 11 points: 10 on the first of each month under labels like Feb 27, and a closing point "30 Nov 27" on the window end. Planned is a straight line in days that reaches the budget of 27050000 on the closing point. Actual comes from invoices and ends at 15090000. Forecast then jumps to 19374834, because past the as-of date it is the EAC spread from the start, and it closes on the EAC of 27600000.
 
 ## The sentence the tier ends on
 

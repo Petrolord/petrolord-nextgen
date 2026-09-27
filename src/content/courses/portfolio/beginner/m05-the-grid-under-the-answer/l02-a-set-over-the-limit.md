@@ -1,6 +1,6 @@
-# A set over the limit
+# A set that fits the limit
 
-On a coarse grid a project's capex is rounded to the nearest cell, and a project rounded down can squeeze a set into the cells that costs more than the limit in money. The published gridOvershoot case funds capex 6002.0000 against a limit of 6000.0000, and the engine now says so with overLimit true and overLimitBy 2.0000.
+A rounded grid can squeeze a set into its cells that costs more than the limit in money. The exact solve never does that, and the stated fallback is built so it cannot either. The published gridOvershoot case shows both.
 
 {{panel:ec-capital-explorer}}
 
@@ -12,32 +12,34 @@ On a coarse grid a project's capex is rounded to the nearest cell, and a project
 | B | 2002.0000 | 300.0000 |
 | C | 1995.0000 | 280.0000 |
 
-The limit of 6000.0000 is whole but over 5000, so the grid is coarse: 6000.0000 over 2000 gives a resolution of 3.000000 million USD per cell. Each capex is divided by 3.000000 and rounded to whole cells. B's 2002.0000 does not divide evenly and rounds down, so B weighs slightly less in cells than it costs in money. A and B together fit inside the 2000 cells, and the knapsack funds them.
+The limit is 6000.0000. A plus B would cost 4000.0000 plus 2002.0000, which is 6002.0000, two million over. A plus C costs 5995.0000 and fits.
 
-## What the engine reports
+## The exact solve
 
-| engine set | capex | EMV | overLimit | overLimitBy | exact optimum (golden) | gap (golden) |
+| engine set | capex | EMV | unspent | solveMethod | optimalityGap | overLimit |
 | --- | --- | --- | --- | --- | --- | --- |
-| A + B | 6002.0000 | 800.0000 | true | 2.0000 | 780.0000 on A + C | 20.0000 |
+| A + C | 5995.0000 | 780.0000 | 5.0000 | exact | 0.0000 | false |
 
-A plus B costs 4000.0000 plus 2002.0000, which is 6002.0000, and returns 500.0000 plus 300.0000, which is 800.0000. That is 2.0000 over the limit. The best set that truly fits is A and C at 780.0000, since C's 1995.0000 keeps A inside the limit. The golden gap of 20.0000 is the engine's EMV less the exact optimum, and it is positive because the engine broke the limit to reach it. Set changed by the grid: true.
+The engine funds A and C for 500.0000 plus 280.0000, which is 780.0000, the golden exact optimum. overLimit and overLimitBy stay in every result and read false and 0.0000, as they do on every exact solve. A set worth 800.0000 exists on paper, but the budget cannot pay for it, so it was never a candidate.
 
-## Flagged, and still happening
+## The fallback on the same projects
 
-Before EC5-0 the engine returned A and B with nothing to mark the breach, and a total capex of 6002.0000 sat beside a limit of 6000.0000 for the reader to notice or miss. The repair added the flag. It did not remove the cause: the grid still rounds, the set is still A and B, and the EMV is still 800.0000. overLimit and overLimitBy report the overshoot; they do not correct it.
+The published gridOvershootFallback case runs the same three projects with `exactStateLimit` stated as 2, small enough to force the fallback. The grid divides 6000.0000 into 2000 cells of 3.000000 each and rounds every capex up to whole cells: A weighs 1334 cells, B 668 and C 665. A and B together now need 2002 cells, more than the 2000 the limit holds, so the rounding up keeps them out. The fallback funds A + C at capex 5995.0000 for 780.0000, with solveMethod "grid-feasible" and overLimit false.
 
-On OKONO the grid is exact at 1.0000 per cell and overLimit reads false at every limit, so this case can only arise on a coarse grid.
+A grid that rounded to the nearest cell would have weighed B at 667 cells and let A and B fit in 2000 cells while costing 6002.0000 in money. Rounding every weight up is what guarantees that any set fitting the grid also fits the limit.
+
+## A bound on what was left out
+
+The fallback reports optimalityGap 20.0000 here. It is an upper bound on the risked EMV the fallback may have left out, worked from the same grid with every weight rounded down, which is generous enough to admit A and B. The true shortfall is 0.0000, since A + C at 780.0000 is the exact optimum. The gap says how far the answer could be from the best; it does not say that it is.
 
 ## The mistake
 
-The mistake is to quote 800.0000 as the best value under the limit. It is the value of a set the budget cannot pay for. The reader who sees overLimit true and reports the funded set anyway has approved 2.0000 million USD of spend that was never authorised, and has overstated the programme by 20.0000 against the best set that fits.
-
-The smaller mistake is to treat 2.0000 as rounding noise. The limit is a hard number, and the whole point of a constrained optimum is that it respects it. A breach of any size means the answer belongs to a different problem.
+The mistake is to read optimalityGap 20.0000 as 20.0000 lost. On this case nothing was lost. The opposite mistake is to ignore the gap: on another inventory it may be exactly what the fallback left out.
 
 ## What it refuses
 
-The engine does not re-solve when it detects an overshoot, and it does not offer the best set inside the limit. It gives the flag and the amount. Finding A and C at 780.0000 is the reader's job, by checking which set actually fits in money.
+The fallback does not re-solve exactly to close its own gap. It states the method, the resolution and the bound, and leaves the reader to judge whether a bound of that size matters for the decision.
 
 ## Exercise
 
-Show why the limit of 6000.0000 uses a coarse grid and give its resolution. Then prove the engine's capex and EMV for A and B, state overLimit and overLimitBy, and name the best set that truly fits with its EMV.
+Prove that A + B does not fit 6000.0000 and that A + C does. Then give the cell weights of A, B and C in the fallback, show why A and B cannot both fit 2000 cells, and explain what the optimalityGap of 20.0000 does and does not tell you.

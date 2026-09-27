@@ -6,7 +6,7 @@ A refusal is part of the engine's answer. It says which input failed and why, in
 
 ## How a refusal reads
 
-A refusal is an object with `error` and `field`. The message starts with the field it refuses and states the exact condition that failed, then what it got: a string in quotes, an absent value as nothing. The course tables 78 refusals across 9 functions. Four rules run through them:
+A refusal is an object with `error` and `field`. The message starts with the field it refuses and states the exact condition that failed, then what it got: a string in quotes, an absent value as nothing. The course tables 83 refusals across 9 functions. Four rules run through them:
 
 - a contract term with no default is refused when it is missing, and the message says so;
 - an input key a function does not read is refused wherever it sits, with its path and the full list of accepted keys;

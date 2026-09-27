@@ -26,7 +26,7 @@ The mistake is to type an observed correlation of outcomes into rho. Suppose a t
 
 ## What it refuses
 
-A negative correlation is clamped to 0.000000, so a project that does well when the others do badly cannot be represented as a hedge. One project has nothing to correlate with: the published singleProject case uses correlation 0.900000 and reports stdDev 46.8183, which no value of rho can change. The Suite's correlation slider stops at 0.9, a finding left unrepaired, so rho 1.000000 is reachable through the engine but not from the slider.
+A negative correlation is clamped to 0.000000, so a project that does well when the others do badly cannot be represented as a hedge. One project has nothing to correlate with: the published singleProject case uses correlation 0.900000 and reports stdDev 46.8183, which no value of rho can change. The Suite's correlation slider stops at 0.9, so rho 1.000000 is reachable through the engine but not from the slider.
 
 ## Exercise
 

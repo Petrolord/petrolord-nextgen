@@ -5,7 +5,7 @@
 //
 // THE GATES IN THIS FILE:
 //   THE DATASET GATE   the lab reads the vendored fixture and the INPUTS of the
-//                      vendored golden file (packages/engines/ec10-farmout/
+//                      vendored golden file (packages/engines/
 //                      test-data/economics/goldens/farmout_cases.json) and never
 //                      its expected figures.
 //   THE DIGEST GATE    EVERY numeric leaf every teaching reader returns is
@@ -32,7 +32,7 @@ import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import process from 'node:process';
 import { fileURLToPath } from 'node:url';
-import * as E from '@petrolord/engines/ec10-farmout/engines/economics/farmout.js';
+import * as E from '@petrolord/engines/engines/economics/farmout.js';
 import * as L from './farmoutLab.js';
 import { waveInput, mirrorDir } from '../../../../../tools/course-waves/waveInputs.mjs';
 
@@ -42,7 +42,7 @@ const WAVE = 'farmout';
 const DIGEST = fs.readFileSync(waveInput(WAVE, 'digest.txt'), 'utf8');
 const FIELDS = JSON.parse(fs.readFileSync(waveInput(WAVE, 'fields.json'), 'utf8'));
 const LAB_SOURCE = fs.readFileSync(path.join(HERE, 'farmoutLab.js'), 'utf8');
-const ENGINES = path.join(ROOT, 'packages/engines/ec10-farmout');
+const ENGINES = path.join(ROOT, 'packages/engines');
 const GOLDEN = path.join(ENGINES, 'test-data/economics/goldens/farmout_cases.json');
 const clone = (o) => JSON.parse(JSON.stringify(o));
 

@@ -77,8 +77,9 @@ export const VARIANTS = {
   ],
   // The compound uplift charged on the year's new carried cost as well as on the opening balance.
   uplift_on_new_cost: [
-    "const upliftAmt = uplift.type === 'compound' ? (opening * uplift.ratePctPerYear) / 100",
-    "const upliftAmt = uplift.type === 'compound' ? ((opening + added[i]) * uplift.ratePctPerYear) / 100",
+    // engines #274 (fb5a363) assigns upliftAmt inside the non-simple branch; the substitution follows it.
+    "upliftAmt = uplift.type === 'compound' ? (opening * uplift.ratePctPerYear) / 100",
+    "upliftAmt = uplift.type === 'compound' ? ((opening + added[i]) * uplift.ratePctPerYear) / 100",
   ],
   // The recovery taken from the whole share, the stated recovery percentage ignored.
   recovery_share_ignored: [
@@ -142,8 +143,9 @@ export const VARIANTS = {
   ],
   // Reversion one period late: the whole of the payout year's share kept by the recovering parties.
   reversion_one_period_late: [
-    'return { year: y.year, opening, uplift: upliftAmt, added: added[i], due, share, available, recovered, closing, writtenOff, debtorReceives: share - recovered, reasons };',
-    'return { year: y.year, opening, uplift: upliftAmt, added: added[i], due, share, available, recovered, closing, writtenOff, debtorReceives: due > 0 ? 0 : share - recovered, reasons };',
+    // engines #274 (fb5a363) builds the row as a const before returning it; the substitution follows the line.
+    'const row = { year: y.year, opening, uplift: upliftAmt, added: added[i], due, share, available, recovered, closing, writtenOff, debtorReceives: share - recovered, reasons };',
+    'const row = { year: y.year, opening, uplift: upliftAmt, added: added[i], due, share, available, recovered, closing, writtenOff, debtorReceives: due > 0 ? 0 : share - recovered, reasons };',
   ],
   // The premium recovered from gross value, the deductions not taken off.
   deductions_not_taken_off: [

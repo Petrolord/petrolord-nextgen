@@ -11,7 +11,7 @@ golden, the fixture README and the engine's source comments are PROVENANCE.
 2. **The second reader of every bank, before the migrations.** Read prompt,
    options, explanation, digest and lesson for every question, one tier at a
    time, and CALL THE ENGINE (through a calculator panel, or node on the
-   vendored `packages/engines/ec10-farmout/engines/economics/farmout.js`
+   vendored `packages/engines/engines/economics/farmout.js`
    through the wave's `farmout_engine.mjs`) for every keyed figure. Swap roles
    where the explanation supports a distractor.
 

@@ -32,20 +32,20 @@ Earned value and actuals are read from the lines as entered, so CPI is 1.009377 
 
 | case | earned value | actuals | CPI |
 | --- | --- | --- | --- |
-| suite test: CPI 1.25 | 100.0000 | 80.0000 | 1.250000 |
-| progress beyond 100 percent earns beyond the budget | 150.0000 | 90.0000 | 1.666667 |
-| suite test: weighted earned value | 110.0000 | 0.0000 | 1.000000 |
+| suite test: CPI 1.25 | 100.0000 | 80.0000 | 1.250000 (ok) |
+| progress of exactly 100 percent is accepted and earns the whole budget | 140.0000 | 100.0000 | 1.400000 (ok) |
+| suite test: weighted earned value (value earned, nothing spent: CPI null) | 110.0000 | 0.0000 | null (no-spend) |
 
-100.0000 / 80.0000 = 1.250000 and 150.0000 / 90.0000 = 1.666667. The third row cannot be a division: nothing has been spent.
+100.0000 / 80.0000 = 1.250000 and 140.0000 / 100.0000 = 1.400000. The third row cannot be a division: nothing has been spent, and the engine reports no ratio.
 
 ## What it refuses
 
-When actuals are 0 the engine as published returns CPI 1, whatever has been earned. The weighted earned value case reports CPI 1.000000 with 110.0000 earned and nothing spent. This is recorded as a finding and has not been repaired, so CPI 1.000000 on an AFE with no spend means "undefined" and must be read that way. CPI also inherits every weakness of the progress figures: progress past 100 percent raised the second case to 1.666667 without a dollar being saved.
+When actuals are 0 the engine returns CPI null with cpiStatus "no-spend", whatever has been earned. The weighted earned value case reports CPI null with 110.0000 earned and nothing spent, and the CPI tile reads "N/A" with "Nothing spent yet, so no cost efficiency". A reported ratio carries cpiStatus "ok". CPI also inherits every weakness of the progress figures: a line typed at 100 percent earns its whole budget whether or not the work is done.
 
 ## The mistake
 
-The mistake is reading CPI 1.009377 as "under budget". OFON-1 is forecast to overrun by 550000 on the same day. CPI says work has been bought at slightly better than budget on average, weighted heavily by drilling; it says nothing about CSG-02, already finished over its line, or about CMT-03's entered overrun. Read CPI beside the variance at completion, never instead of it.
+The mistake is reading CPI 1.009377 as "under budget". OFON-1 is forecast to overrun by 550000 on the same day. CPI says work has been bought at slightly better than budget on average, weighted heavily by drilling; it says nothing about CSG-02, already finished over its line, or about CMT-03's entered overrun. Read CPI beside the variance at completion every time.
 
 ## Exercise
 
-Compute OFON-1's CPI from its earned value and actuals, and name the one line whose earned value is less than its actual. Then explain how the AFE can report CPI 1.009377 and a variance at completion of -550000 at the same time, and what CPI 1.000000 means on an AFE with no spend.
+Compute OFON-1's CPI from its earned value and actuals, and name the one line whose earned value is less than its actual. Then explain how the AFE can report CPI 1.009377 and a variance at completion of -550000 at the same time, and what the engine returns for CPI on an AFE with no spend.

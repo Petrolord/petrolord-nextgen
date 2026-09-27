@@ -130,7 +130,7 @@
         },
         {
           "key": "l03-a-tie-goes-to-the-first-branch",
-          "title": "A tie goes to the first branch",
+          "title": "A tie is reported, and the first branch is marked",
           "order": 3,
           "est_minutes": 12,
           "panels": [

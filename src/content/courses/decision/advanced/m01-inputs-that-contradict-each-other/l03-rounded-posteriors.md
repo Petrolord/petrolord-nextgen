@@ -22,7 +22,7 @@ EKPAN's survey has exact posteriors of 0.646739 after a bright spot and 0.097222
 
 ## Accepted, and still different
 
-Six rows pass, and the gross voi runs from 18.41 to 20.51 against 19.84 at full precision. The survey is the same survey in every row. Rounding to one decimal gives an implied chance of exactly 0.350000, a delta of 0.000000e+0, and still a card of 19.89 instead of 19.84. A perfect consistency result says the entries agree with the stated chance; it says nothing about whether they match the survey.
+Six rows pass, and the gross voi runs from 18.41 to 20.51 against 19.84 at full precision. The survey is the same survey in every row. Rounding to one decimal gives an implied chance of exactly 0.350000, a delta of 0.000000e+0, and still a card of 19.89 where full precision reads 19.84. A perfect consistency result says the entries agree with the stated chance; it says nothing about whether they match the survey.
 
 ## A posterior that does not reach the value
 

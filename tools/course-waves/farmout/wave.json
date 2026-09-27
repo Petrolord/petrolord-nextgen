@@ -18,7 +18,7 @@
   "engines/economics/afe.js",
   "engines/economics/jointVenture.js"
  ],
- "enginesVendoredAt": "farmout.js and its whole runtime closure vendored sha-identical from petrolord-engines 6626465 (engines PRs #272 the engine, #273 and #275 FINDINGS-farmout.md, #274 the simple uplift, #276 the negative-carry refusal under the farmor-side overrun rule) by vendor_farmout.sh under its OWN ROOT packages/engines/ec10-farmout: 19 paths, 4 proofs each, ledgered in VENDOR.json as kind extra, group ec10-farmout-course; pin 54cf7c4 unchanged; no canonical path moves. WHY ITS OWN ROOT: farmout.js needs the newer decisionTree.js (it reads tiedIndices) and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor ('pull only with the recut in the same deploy window'); the EC4 decision and EC5 portfolio digests do not rebuild on the newer blobs (EC4 teaches a blank payoff as 0, EC5 a pos above 1 clamped, both refused by the newer engine). The canonical jointVenture.js (the joa course's 3ae56e7 blob) also stays. When the EC4 and EC5 recut lands the root collapses into the canonical paths in the same change. The engine suite passes 162 of 162 from its root.",
+ "enginesVendoredAt": "farmout.js and its whole runtime closure vendored sha-identical from petrolord-engines 6626465 (engines PRs #272 the engine, #273 and #275 FINDINGS-farmout.md, #274 the simple uplift, #276 the negative-carry refusal under the farmor-side overrun rule) by vendor_farmout.sh under its OWN ROOT packages/engines/ec10-farmout: 19 paths, 4 proofs each, ledgered in VENDOR.json as kind extra, group ec10-farmout-course; pin 54cf7c4 unchanged; no canonical path moves. WHY ITS OWN ROOT: farmout.js needs the newer decisionTree.js (it reads tiedIndices) and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor ('pull only with the recut in the same deploy window'); the EC4 decision and EC5 portfolio digests do not rebuild on the newer blobs (EC4 teaches a blank payoff as 0, EC5 a pos above 1 clamped, both refused by the newer engine). The canonical jointVenture.js (the joa course's 3ae56e7 blob) also stays. When the EC4 and EC5 recut lands the root collapses into the canonical paths in the same change. The engine suite passes 162 of 162 from its root. Since the EC4/EC5 recut the closure sits on the canonical engine paths at fb5a363 (vendor_ec45.sh), byte-identical to the root it replaced.",
  "history": {
   "position": "THIS COURSE TEACHES NO REPAIR HISTORY. The lead's decisions on the engine (every deal term a required input, the value of the transaction stated with reg. 19(3)'s definition taught, the Penn State figures as a cited check only, the simple uplift added in engines #274 without moving any value) landed before any lesson was written; that is provenance."
  },
@@ -72,7 +72,7 @@
  "openItems": {
   "ENGINE FINDINGS": "The Professional lesson writer found a negative carry returned unrefused under the farmor-side overrun rule; repaired in engines 6626465 (#276, a refusal naming the smallest share; a carry of exactly 0 allowed; no earlier golden moved) and re-vendored at the touch-up. Every refusal golden (67) returns the golden message through the vendored engine (farmout_dump.mjs asserts each); the Penn State figures are reproduced to 1e-6; the oracle replays all 18 capstone fields within 5e-07 tolerances (worst 3.73e-03 tolerances, worst relative 3.76e-16); fields.json unchanged by the repair.",
   "PROVENANCE NOTE": "Resolved in engines #275: FINDINGS-farmout.md now cites the AOI Regulations' interpretation as reg. 24, as the gazette prints it.",
-  "VENDORING": "The closure sits in its own root (packages/engines/ec10-farmout) because the canonical decisionTree.js and portfolio.js are held for the EC4/EC5 recut; collapse it into the canonical paths in the change that lands that recut.",
+  "VENDORING": "The closure first sat in its own root (packages/engines/ec10-farmout) because the canonical decisionTree.js and portfolio.js were held for the EC4/EC5 recut. That recut (fix/decision-portfolio-recut) moved the canonical paths to petrolord-engines fb5a363 and collapsed the root: every file was proven byte-identical to its canonical path and this course's digest, fields and precision rebuild byte-identical on the canonical root (tools/course-waves/ec45-recut/prove_prior_courses.sh).",
   "readings": "Four stated readings are printed verbatim where each acts; every capstone field is bit-identical under the other side of the first three (ts_loader.mjs reading_* variants), and no capstone states the simple uplift, so the fourth cannot act (asserted)."
  },
  "digest": {
@@ -107,18 +107,18 @@
  },
  "gates": {
   "structure.py": {
-   "md5": "ec45499cfd667cab1d06be2260689788",
+   "md5": "9ba053492146f6802a093591a49abd16",
    "command": "python3 structure.py",
    "expected": 0,
    "exit": 0,
    "summary": "PROBLEMS: 0"
   },
   "prove_prior_courses.sh": {
-   "md5": "ed5918533cc8ecb7ec3a1916f74a4d16",
+   "md5": "f384cbf5b8d10c0c48575a9210bf0c66",
    "command": "bash prove_prior_courses.sh",
    "expected": 0,
    "exit": 0,
-   "summary": "PRIOR COURSES UNCHANGED: packages/engines differs from origin/main only by the nineteen ec10-farmout-course paths under ec10-farmout/ (sha-identical to fb5a363) and their ledger entries, with every canonical path the clo"
+   "summary": "PRIOR COURSES UNCHANGED: packages/engines differs from origin/main only by the thirty re-vendored paths (sha-identical to fb5a363) and their ledger entries; the ec10-farmout root is deleted (every file byte-identical at "
   },
   "scaffold.py --check": {
    "md5": "28d030a3c6996d399da0ea01d001e0e2",
@@ -149,14 +149,14 @@
    "summary": "make_fields: 18 field(s) unanswerable at the declared precision"
   },
   "oracle_check.py": {
-   "md5": "325116fdfa049370ff612ac668d67710",
+   "md5": "e78f3e025d177e5e748f79f5229a4797",
    "command": "python3 oracle_check.py",
    "expected": 0,
    "exit": 0,
    "summary": "oracle_check: 18 graded values replayed through the stdlib oracle in 1 s; every chain the oracle's own; worst relative difference 3.76e-16, worst 3.73e-03 tolerances; disagreements: 0"
   },
   "oracle_check.py NEGATIVE CONTROL": {
-   "md5": "325116fdfa049370ff612ac668d67710",
+   "md5": "e78f3e025d177e5e748f79f5229a4797",
    "command": "python3 oracle_check.py --plant",
    "expected": 1,
    "exit": 1,
@@ -184,14 +184,14 @@
    "summary": "NEGATIVE CONTROL: tolerances multiplied by 1000000000000000. Expected 18 WEAK routes, got 18."
   },
   "quote_check.py": {
-   "md5": "359dc6e933f7e42ac16c78f2b24de35b",
+   "md5": "f368f70ab43ae33d755f4b2a87da3de7",
    "command": "python3 quote_check.py",
    "expected": 0,
    "exit": 0,
    "summary": "MISMATCHES: 0"
   },
   "quote_check.py NEGATIVE CONTROL": {
-   "md5": "359dc6e933f7e42ac16c78f2b24de35b",
+   "md5": "f368f70ab43ae33d755f4b2a87da3de7",
    "command": "python3 quote_check.py --plant",
    "expected": 1,
    "exit": 1,
@@ -199,7 +199,7 @@
   },
   "digestrepro.sh": {
    "md5": "dc723d03530192367ddc22937fc0c673",
-   "command": "/root/dc-wavekit/digestrepro.sh cat-wip-farmout /root/wt-ec10-nextgen",
+   "command": "/root/dc-wavekit/digestrepro.sh cat-wip-farmout /root/wt-ec45-recut",
    "expected": 0,
    "exit": 0,
    "summary": "farmout_dump: 1425 label-and-call, measurement and claim assertions run, 0 failed; 28 sections"
@@ -289,35 +289,35 @@
    "summary": "0 figure(s) the digest cannot vouch for. Dates and the leakage-ban conditions are expected here; read the rest."
   },
   "gate_capstone_leak.mjs": {
-   "md5": "f6548ecfba654110cab61de73b7ae395",
+   "md5": "5494e02689f2ee320d56be841596750d",
    "command": "node gate_capstone_leak.mjs --no-banks",
    "expected": 0,
    "exit": 0,
    "summary": "FINDINGS: 0"
   },
   "gate_capstone_leak.mjs NEGATIVE CONTROL value": {
-   "md5": "f6548ecfba654110cab61de73b7ae395",
+   "md5": "5494e02689f2ee320d56be841596750d",
    "command": "node gate_capstone_leak.mjs --no-banks --plant-value",
    "expected": 1,
    "exit": 1,
    "summary": "NEGATIVE CONTROL --plant-value: expected a [2 values] finding, caught"
   },
   "gate_capstone_leak.mjs NEGATIVE CONTROL input": {
-   "md5": "f6548ecfba654110cab61de73b7ae395",
+   "md5": "5494e02689f2ee320d56be841596750d",
    "command": "node gate_capstone_leak.mjs --no-banks --plant-input",
    "expected": 1,
    "exit": 1,
    "summary": "NEGATIVE CONTROL --plant-input: expected a [1 inputs] finding, caught"
   },
   "gate_capstone_leak.mjs NEGATIVE CONTROL name": {
-   "md5": "f6548ecfba654110cab61de73b7ae395",
+   "md5": "5494e02689f2ee320d56be841596750d",
    "command": "node gate_capstone_leak.mjs --no-banks --plant-name",
    "expected": 1,
    "exit": 1,
    "summary": "NEGATIVE CONTROL --plant-name: expected a [4 names] finding, caught"
   },
   "gate_capstone_leak.mjs NEGATIVE CONTROL lesson": {
-   "md5": "f6548ecfba654110cab61de73b7ae395",
+   "md5": "5494e02689f2ee320d56be841596750d",
    "command": "node gate_capstone_leak.mjs --no-banks --plant-lesson",
    "expected": 1,
    "exit": 1,
@@ -422,29 +422,29 @@
    "summary": "lengths.py selftest OK: a heading counts, a table row does not, a 430 word lesson at fourteen minutes is UNDER its own floor of 500 where a flat 420 floor passed it, and an unwritten lesson is named rather than skipped"
   },
   "gate_claims.mjs": {
-   "md5": "01d7b2d7021a4b37e980d855dd6187dd",
+   "md5": "b7be5e7e1f0827d18035d1fe9139026a",
    "command": "node gate_claims.mjs",
    "expected": 0,
    "exit": 0,
    "summary": "FINDINGS: 0"
   },
   "gate_claims.mjs NEGATIVE CONTROL": {
-   "md5": "01d7b2d7021a4b37e980d855dd6187dd",
+   "md5": "b7be5e7e1f0827d18035d1fe9139026a",
    "command": "node gate_claims.mjs --plant-a-recon-figure",
    "expected": 1,
    "exit": 1,
    "summary": "NEGATIVE CONTROL: a figure from the recon report was planted in BRIEF.md. Expected it caught and named as a recon figure, got 2."
   },
   "gen_course.py (self checks)": {
-   "md5": "2ee7d1a409cf040ab21564166d2af3e7",
+   "md5": "4704c090a0c63ed6124c50026f907616",
    "command": "python3 gen_course.py",
    "expected": 0,
    "exit": 0,
-   "summary": "gen_course: engine run 18 of 18 fields.json values equal what farmout_capstone.mjs returned through /root/wt-ec10-nextgen/packages/engines/ec10-farmout, every tolerance the one gradedTolerance.js derives; case-file data "
+   "summary": "gen_course: engine run 18 of 18 fields.json values equal what farmout_capstone.mjs returned through /root/wt-ec45-recut/packages/engines, every tolerance the one gradedTolerance.js derives; case-file data re-read and equ"
   },
   "litsweep.py --lessons-only": {
    "md5": "76fcabb91a02adf5359d75f0d1c8add6",
-   "command": "python3 /root/dc-wavekit/litsweep.py cat-wip-farmout --lessons /root/wt-ec10-nextgen/src/content/courses/farmout --lessons-only",
+   "command": "python3 /root/dc-wavekit/litsweep.py cat-wip-farmout --lessons /root/wt-ec45-recut/src/content/courses/farmout --lessons-only",
    "expected": 0,
    "exit": 0,
    "summary": "... 46 more, pass --review-all to print them"
@@ -703,10 +703,10 @@
   },
   "check-bank-sources.py": {
    "md5": "ab6de6165648fe4580fa8ab2246ab46b",
-   "command": "python3 /root/wt-ec10-nextgen/tools/course-banks/check-bank-sources.py",
+   "command": "python3 /root/wt-ec45-recut/tools/course-banks/check-bank-sources.py",
    "expected": 0,
    "exit": 0,
-   "summary": "[course-banks] 672 committed pair(s) under /root/wt-ec10-nextgen/tools/course-banks: 672 reproduce, 0 drifted, 0 could not run, 12672 question(s) compared"
+   "summary": "[course-banks] 693 committed pair(s) under /root/wt-ec45-recut/tools/course-banks: 693 reproduce, 0 drifted, 0 could not run, 13068 question(s) compared"
   },
   "numsweep_farmout.mjs --banks": {
    "md5": "00828b703cf91002514747467232081d",
@@ -723,67 +723,11 @@
    "summary": "=> literals with 7+ significant figures checked: 533   unresolved: 0   (1548 round literal(s) skipped for trailing zeros, not checked)"
   },
   "gate_capstone_leak.mjs --banks": {
-   "md5": "f6548ecfba654110cab61de73b7ae395",
+   "md5": "5494e02689f2ee320d56be841596750d",
    "command": "node gate_capstone_leak.mjs --banks banks",
    "expected": 0,
    "exit": 0,
    "summary": "FINDINGS: 0"
-  },
-  "gen_seeds.sh HEAD": {
-   "md5": "ce37d2f4b672c0f70bb682da2696ee00",
-   "command": "bash gen_seeds.sh HEAD",
-   "expected": 0,
-   "exit": 0,
-   "summary": "AGREE: all five migrations and the three case files and their index regenerate byte for byte from the committed inputs at HEAD."
-  },
-  "verify_sql.py HEAD": {
-   "md5": "de71eb6d4bf87e6001e2ff0068829326",
-   "command": "python3 verify_sql.py HEAD",
-   "expected": 0,
-   "exit": 0,
-   "summary": "AGREE: all 396 questions (prompt, options, answer key, explanation), 78 lesson keys in 18 modules, 18 graded fields (key, expected, tolerance) and the catalogue row are byte for byte what the committed banks, manifests, "
-  },
-  "verify_sql.py CANARY text": {
-   "md5": "de71eb6d4bf87e6001e2ff0068829326",
-   "command": "python3 verify_sql.py HEAD --canary",
-   "expected": 2,
-   "exit": 2,
-   "summary": "intermediate/module/11 explanation: seed \"On deal-psu-eme801 the engine returns 12500.000000 for drilling yourself and 17500.000000 for farming out, which match the page's printed figures to six decimals (text, numbers o"
-  },
-  "verify_sql.py CANARY key": {
-   "md5": "de71eb6d4bf87e6001e2ff0068829326",
-   "command": "python3 verify_sql.py HEAD --canary-key",
-   "expected": 2,
-   "exit": 2,
-   "summary": "advanced/module/3 answer_index: seed '2' against bank '3'"
-  },
-  "verify_sql.py CANARY field": {
-   "md5": "de71eb6d4bf87e6001e2ff0068829326",
-   "command": "python3 verify_sql.py HEAD --canary-field",
-   "expected": 2,
-   "exit": 2,
-   "summary": "capstone field umunze_breakeven_share_pct expected: the seed differs from fields.json by 2.9530023262225313e-06"
-  },
-  "verify_sql.py CANARY lesson": {
-   "md5": "de71eb6d4bf87e6001e2ff0068829326",
-   "command": "python3 verify_sql.py HEAD --canary-lesson",
-   "expected": 2,
-   "exit": 2,
-   "summary": "beginner module m03-the-promote-and-its-ratio lesson keys differ from the manifest"
-  },
-  "gen_golive.py (self checks)": {
-   "md5": "b230354c617acfb0c65ed1b29c1f9a7f",
-   "command": "python3 -c import sys; sys.argv=[\"x\"]; sys.path.insert(0, \"/root/cat-wip-farmout\"); import gen_golive as G; sys.exit(1 if G.refused else 0)",
-   "expected": 0,
-   "exit": 0,
-   "summary": ""
-  },
-  "promptleak.py --sql": {
-   "md5": "e46b7e7196db51aa47fd95995fdb236c",
-   "command": "python3 /root/dc-wavekit/promptleak.py --sql /root/wt-ec10-nextgen/migrations/20261111_ec10_farmout_course.sql --course farmout",
-   "expected": 0,
-   "exit": 0,
-   "summary": "own-field leaks: 0   cross-tier leaks: 0   self leaks: 0   near misses: 0   small-integer notes: 0"
   }
  }
 }

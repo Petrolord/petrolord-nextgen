@@ -4,7 +4,7 @@ This tier priced information when the numbers describing it could all be true. T
 
 ## Inputs that cannot all be true
 
-The tree engine derives posteriors from likelihoods, so its inputs cannot contradict each other. The Analyzer takes posteriors typed by hand, and they can. On IRRI both indicators are typed 20 / 80 percent, which implies a success chance of 0.200000 against the 0.300000 stated. The repaired Analyzer keeps the EMV without information, 15.00, and the EVPI, 63.00, and withholds the rest. Before the repair it printed a gross value of information of -15.00 there, and on the published certainPosteriorsWithheld inputs 245.00 beside an EVPI of 63.00. The tier works out where the tolerance of 0.005 sits and why rounded posteriors pass or fail it.
+The tree engine derives posteriors from likelihoods, so its inputs cannot contradict each other. The Analyzer takes posteriors typed by hand, and they can. On IRRI both indicators are typed 20 / 80 percent, which implies a success chance of 0.200000 against the 0.300000 stated. The Analyzer keeps the EMV without information, 15.00, and the EVPI, 63.00, and withholds the rest. Weighted as typed with nothing checking them, those inputs would give a gross value of information of -15.00, and the published certainPosteriorsWithheld inputs 245.00 beside an EVPI of 63.00. The tier works out where the tolerance of 0.005 sits and why rounded posteriors pass or fail it.
 
 ## Bigger lotteries
 
@@ -16,7 +16,7 @@ Decision Studio turns a saved tree into a brief: an Optimal EMV, a recommended f
 
 ## Numbers to distrust
 
-On the EKPAN lottery Drill beats Farm out, 75.7500 against 33.2500, and loses 80.0000 with probability 0.650000; a risk neutral engine cannot prefer the farm-out. A net VOI card reads 0.00 at a survey cost of 32.996 and -0.00 at 33.004 while the verdicts say positive and negative, because the verdict reads the number before rounding.
+On the EKPAN lottery Drill beats Farm out, 75.7500 against 33.2500, and loses 80.0000 with probability 0.650000; a risk neutral engine cannot prefer the farm-out. At survey costs of 32.996, 33.000 and 33.004 the net VOI card reads 0.00 and the verdict says it rounds to zero: the card and the verdict read one rounded value.
 
 ## What to carry forward
 

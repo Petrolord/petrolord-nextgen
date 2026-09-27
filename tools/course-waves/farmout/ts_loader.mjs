@@ -28,10 +28,10 @@ import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 
 // esbuild comes from the NextGen repository the engine is vendored in, found
-// from EC10_ENGINES (<repo>/packages/engines/ec10-farmout) so the committed
+// from EC10_ENGINES (<repo>/packages/engines) so the committed
 // mirror runs on a CI runner; EC10_REPO overrides it.
-const ENG = process.env.EC10_ENGINES || '/root/wt-ec10-nextgen/packages/engines/ec10-farmout';
-const REPO = process.env.EC10_REPO || path.resolve(ENG, '..', '..', '..');
+const ENG = process.env.EC10_ENGINES || '/root/wt-ec10-nextgen/packages/engines';
+const REPO = process.env.EC10_REPO || path.resolve(ENG, '..', '..');
 const esbuild = createRequire(`${REPO}/package.json`)('esbuild');
 
 // [find, replace] or [[find, replace], ...]: every find is an exact string that must occur exactly once in farmout.js.

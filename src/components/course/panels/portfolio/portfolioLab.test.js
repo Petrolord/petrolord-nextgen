@@ -19,7 +19,7 @@
 // surface), and the clock gate (the AFE readers return identical output under
 // two faked system dates, with a control proving the clock moved).
 
-// FIRST: pin the timezone before anything makes a Date (finding EC5-5; see utcTimezone.js).
+// FIRST: pin the timezone before anything makes a Date (see utcTimezone.js).
 import { PINNED_TIMEZONE } from './utcTimezone.js';
 import { describe, it, expect, afterEach, vi } from 'vitest';
 import fs from 'node:fs';
@@ -60,6 +60,7 @@ const setIds = (list) => L.setLabel(list);
 const buildDigest = () => {
   const out = [];
   const w = (s = '') => out.push(s);
+  const refusalText = (a) => (a.ok ? 'accepted' : `${a.name}: "${a.error}"`);
 
   // Section 1
   const s1 = L.engineRules();
@@ -73,15 +74,17 @@ const buildDigest = () => {
   w('- P-labels follow the exceedance convention on an NPV outcome: P90 is the low case, P10 the high case. A capex, a cost or a probability never carries a P-label.');
   w();
   w('Refusals (published optimizeRefusals, engine messages verbatim):');
-  s1.refusals.forEach((a) => w(`- ${a.id}: ${a.ok ? 'accepted' : `${a.name}: "${a.error}"`}`));
-  const clampRow = (c) => `- published ${c.id}: ${JSON.stringify(c.project)} gives risked EMV ${m(c.emv)} (golden ${m(c.goldenEmv)}).`;
+  s1.refusals.forEach((a) => w(`- ${a.id}: ${refusalText(a)}`));
+  const emvRow = (c) => `- published ${c.id}: ${JSON.stringify(c.project)} gives risked EMV ${m(c.emv)} (golden ${m(c.goldenEmv)}).`;
   w();
-  s1.clampCases.forEach((c) => w(clampRow(c)));
-  s1.posProbes.forEach((p) => w(`- probe, npv_p50 80 and fail_cost 30 with ${p.label}: risked EMV ${m(p.emv)}.`));
-  w('# Commentary: an absent or null pos defaults to 1 (certain success) and a non-numeric one such as "n/a" is also read as 1, but an empty string is the number 0 and is read as certain failure (finding EC5-6).');
+  s1.defaultCases.forEach((c) => w(emvRow(c)));
+  w();
+  w('Refusals of a single project (published projectEmvRefusals, engine messages verbatim):');
+  s1.projectRefusals.forEach((c) => w(`- ${c.id}, pos ${JSON.stringify(c.pos)}: ${c.ok ? `accepted, risked EMV ${m(c.emv)}` : `${c.name}: "${c.error}"`}`));
+  s1.posProbes.forEach((p) => w(`- probe "Probe", npv_p50 80 and fail_cost 30 with ${p.label}: ${p.ok ? `risked EMV ${m(p.emv)}` : `${p.name}: "${p.error}"`}.`));
   const tc = s1.textCapexProbe;
-  w(`- probe, a project with capex "abc" beside one with capex 40 at a limit of 100: ${tc.ok ? `funded ${setIds(tc.ids)}, total capex ${m(tc.totalCapex)}, total EMV ${m(tc.totalEmv)}` : tc.error}. A non-numeric capex is neither refused nor flagged; it counts as capex 0 and weighs one grid cell (finding EC5-7).`);
-  w('# Commentary: the unnamed refusal names the project by its position counted from 0, so "Project "1"" is the second project in the list.');
+  w(`- probe, a project with capex "abc" beside one with capex 40 at a limit of 100: ${tc.ok ? `funded ${setIds(tc.ids)}` : `${tc.name}: "${tc.error}"`}. Nothing is funded: the whole call is refused.`);
+  w('# Commentary: a refusal names the project by its name, else its id, else (inside the optimizer and the risk summary) its position counted from 0, so "Project "1"" is the second project in the list. projectEmv called on one project with neither name nor id says "A project with no name or id".');
   w();
 
   // Section 2
@@ -97,7 +100,7 @@ const buildDigest = () => {
   const h = s2.hand;
   w(`OK-3 by hand: ${r(h.pos)} x ${m(h.npvP50)} - ${r(h.failWeightDerived)} x ${m(h.failCost)} = ${m(h.emv)} (engine). Its success-case NPV of ${m(h.npvP50)} is not its value: the EMV is ${r(h.emvShareOfSuccessDerived)} of it (derived).`);
   w();
-  s2.publishedEmv.forEach((c) => w(clampRow(c)));
+  s2.publishedEmv.forEach((c) => w(emvRow(c)));
   s2.publishedSpread.forEach((c) => w(`- published successStdDev ${c.id}: ${JSON.stringify(c.project)} gives ${m(c.sd)} (golden ${m(c.goldenSd)}).`));
   w();
 
@@ -105,18 +108,18 @@ const buildDigest = () => {
   const s3 = L.okonoBudgets();
   w('# SECTION 3: Choosing under a budget (owned by Associate m03)');
   w();
-  w('| capex limit | funded set | total capex | total risked EMV | total success NPV | unspent | resolution | overLimit |');
+  w('| capex limit | funded set | total capex | total risked EMV | total success NPV | unspent | solveMethod | optimalityGap |');
   w('| --- | --- | --- | --- | --- | --- | --- | --- |');
-  s3.rows.forEach((o) => w(`| ${m(o.limit)} | ${setIds(o.ids)} | ${m(o.totalCapex)} | ${m(o.totalEmv)} | ${m(o.totalNpvSuccess)} | ${m(o.unspentDerived)} (derived) | ${m(o.resolution)} | ${o.overLimit} |`));
+  s3.rows.forEach((o) => w(`| ${m(o.limit)} | ${setIds(o.ids)} | ${m(o.totalCapex)} | ${m(o.totalEmv)} | ${m(o.totalNpvSuccess)} | ${m(o.unspentDerived)} (derived) | ${o.solveMethod} | ${m(o.optimalityGap)} |`));
   w();
   w('Ranking OKONO by risked EMV per million USD of capex (derived):');
   s3.ranking.forEach((p) => w(`- ${p.id}: ${r(p.emvPerCapexDerived)}`));
   const g = s3.greedy;
   w(`Filling a ${m(g.limit)} limit greedily down that ranking funds ${setIds(g.ids)} at capex ${m(g.capexDerived)} and risked EMV ${m(g.emvDerived)} (derived); the optimizer funds ${setIds(g.optimalIds)} at ${m(g.optimalEmv)}.`);
-  w('# Commentary: the optimizer keeps the first best set it builds and replaces it only with a strictly larger EMV, so the order projects are entered decides between tied sets; the result reports one set and no alternatives, and the risk summary is simulated for that set only.');
+  w('# Commentary: when two sets tie on risked EMV the optimizer keeps the one with less capex; at equal capex and equal EMV it keeps the set built without the later project in the list, so the order projects are entered decides between exact twins. The result reports one set and no alternatives, and the risk summary is simulated for that set only.');
   w(`At ${m(s3.slack.limit)} the optimizer leaves ${m(s3.slack.unspentDerived)} unspent (derived): no remaining project fits, and OK-6 alone costs ${m(s3.slack.tieBackCapex)}.`);
   w();
-  s3.published.forEach((c) => w(`- published ${c.id}: limit ${m(c.capexLimit)}; projects ${c.projects.map((p) => `${p.id} capex ${m(p.capex)} risked EMV ${m(p.emv)}`).join('; ')}; engine set ${setIds(c.ids)}, capex ${m(c.totalCapex)}, EMV ${m(c.totalEmv)}; golden optimal sets ${JSON.stringify(c.goldenOptimalSets)}.`));
+  s3.published.forEach((c) => w(`- published ${c.id}: limit ${m(c.capexLimit)}; projects ${c.projects.map((p) => `${p.id} capex ${m(p.capex)} risked EMV ${m(p.emv)}`).join('; ')}; engine set ${setIds(c.ids)}, capex ${m(c.totalCapex)}, EMV ${m(c.totalEmv)}; solveMethod ${c.solveMethod}; golden optimal sets ${JSON.stringify(c.goldenOptimalSets)}.`));
   w();
 
   // Section 4
@@ -145,14 +148,23 @@ const buildDigest = () => {
   w();
 
   // Section 5
-  w('# SECTION 5: The grid under the answer (owned by Associate m05)');
+  const s5 = L.gridCases();
+  const projectsText = (c) => c.projects.map((p) => `${p.id} capex ${f(p.capex, 4)} EMV ${m(p.emv)}`).join('; ');
+  w('# SECTION 5: The exact solve and the stated fallback grid (owned by Associate m05)');
   w();
-  L.gridCases().forEach((c) => {
-    w(`- published ${c.id}: limit ${f(c.capexLimit, 4)}, resolution ${f(c.resolution, 6)}; projects ${c.projects.map((p) => `${p.id} capex ${f(p.capex, 4)} EMV ${m(p.emv)}`).join('; ')}.`);
-    w(`  grid cells ${c.gridCellsDerived}; cell weights ${c.cellWeightsDerived.map((x) => `${x.id} ${x.cells}`).join(', ')} (derived: max(1, round(capex / resolution))); unspent ${f(c.gridUnspentDerived, 4)} (derived).`);
-    w(`  engine set ${setIds(c.ids)}, capex ${f(c.totalCapex, 4)}, EMV ${m(c.totalEmv)}, overLimit ${c.overLimit}, overLimitBy ${f(c.overLimitBy, 4)}; exact optimum (golden) EMV ${m(c.goldenExactEmv)} on ${JSON.stringify(c.goldenExactSets)}; gap ${m(c.goldenGap)} (golden); set changed by the grid ${c.goldenSetChanged}.`);
+  w('The published optimize cases whose capex or limits are awkward for a grid: raw dollars, a non-integer limit, a set that a rounded grid would push over the limit, a set a rounded grid would leave short, free projects, and decimal capex. Each is solved exactly:');
+  s5.filter((c) => !c.fallback).forEach((c) => {
+    w(`- published ${c.id}: limit ${f(c.capexLimit, 4)}; projects ${projectsText(c)}.`);
+    w(`  engine set ${setIds(c.ids)}, capex ${f(c.totalCapex, 4)}, EMV ${m(c.totalEmv)}, unspent ${f(c.gridUnspentDerived, 4)} (derived); solveMethod ${c.solveMethod}, optimalityGap ${m(c.optimalityGap)}, resolution ${c.resolution === null ? 'null' : f(c.resolution, 6)}, overLimit ${c.overLimit}; exact optimum (golden) EMV ${m(c.goldenExactEmv)} on ${JSON.stringify(c.goldenExactSets)}.`);
   });
-  w('The overshoot is now flagged (overLimit, overLimitBy) and still happens; the undershoot and the one cell charged to a free project are unchanged (findings D2 and D4).');
+  w(`# Commentary: on decimalCapexExactSum the two capex 0.1 and 0.2 add in binary to ${L.BINARY_SUM_DERIVED} (derived), above the limit 0.3; the engine reads them at their typed decimals, so they sum to exactly 0.3 and both are funded.`);
+  w();
+  w('The stated fallback, forced on two published cases by stating a small exactStateLimit (the default is never reached by an inventory of sixteen projects or fewer):');
+  s5.filter((c) => c.fallback).forEach((c) => {
+    w(`- published ${c.id}: limit ${f(c.capexLimit, 4)}, exactStateLimit ${c.exactStateLimit}; projects ${projectsText(c)}.`);
+    w(`  solveMethod ${c.solveMethod}, resolution ${f(c.resolution, 6)} (${c.cells} cells), cell weights rounded up ${c.cellWeightsDerived.map((x) => `${x.id} ${x.cells}`).join(', ')} (derived: ceil(capex / resolution)); engine set ${setIds(c.ids)}, capex ${f(c.totalCapex, 4)}, EMV ${m(c.totalEmv)}, overLimit ${c.overLimit}, optimalityGap ${m(c.optimalityGap)}; exact optimum (golden) EMV ${m(c.goldenExactEmv)} on ${JSON.stringify(c.goldenExactSets)}.`);
+  });
+  w('The fallback always fits the limit, because every weight is rounded up. It can fall short of the exact optimum, and optimalityGap states how far at most: the optimum of the same grid with every weight rounded down, less the funded EMV.');
   w();
 
   // Section 6
@@ -173,14 +185,16 @@ const buildDigest = () => {
   w('# SECTION 7: One forecast rule (owned by Professional m02)');
   w();
   w(s7.rule);
-  w('| code | budget | actual + commitment | entered forecast | itemForecast | rule used | line variance (budget - itemForecast) |');
-  w('| --- | --- | --- | --- | --- | --- | --- |');
-  s7.rows.forEach((i) => w(`| ${i.code} | ${u(i.budget)} | ${u(i.spendDerived)} (derived) | ${i.enteredForecast ? u(i.enteredForecast) : 'none'} | ${u(i.itemForecast)} | ${i.rule} | ${u(i.lineVarianceDerived)} (derived) |`));
-  w(`AFE totals (engine): EAC ${u(s7.eac)}, variance at completion ${u(s7.variance)} (negative means an overrun).`);
-  s7.published.forEach((c) => w(`- published "${c.name}": items ${JSON.stringify(c.items)}; engine EAC ${f(c.eac, 4)}, variance ${f(c.variance, 4)}.`));
-  s7.probes.forEach((p) => w(`- CMT-03's budget, commitment and actual with ${p.label}: itemForecast ${u(p.itemForecast)}.`));
-  w('# Commentary: a forecast of 0 is not positive and falls back to the formula; any positive entered forecast is taken as typed, even one below the money already spent and committed (finding EC5-1). A line with no entered forecast can never show a saving: its forecast is at least its budget, so its variance is 0 or negative. OFON-1\'s three variances of 0 are that floor, not evidence of being on budget.');
-  w('# App surface: before EC5-0 the screens disagreed on this rule: the Cost Breakdown table showed the budget as the forecast, the PDF and Excel variance was budget less actual, the Top 5 used budget less (forecast or actual), and editing a line copied the budget into its forecast. After the EC5-0 Suite repair the dashboard tiles, the Cost Breakdown table, the PDF and Excel exports and the Top 5 all use this one rule, and editing a line no longer copies the budget into its forecast.');
+  w('| code | budget | committed | entered forecast | itemForecast | rule used | forecastBelowCommitted | line variance (budget - itemForecast) |');
+  w('| --- | --- | --- | --- | --- | --- | --- | --- |');
+  s7.rows.forEach((i) => w(`| ${i.code} | ${u(i.budget)} | ${u(i.committed)} | ${i.enteredForecast ? u(i.enteredForecast) : 'none'} | ${u(i.itemForecast)} | ${i.rule} | ${i.forecastBelowCommitted} | ${u(i.lineVarianceDerived)} (derived) |`));
+  w(`AFE totals (engine): EAC ${u(s7.eac)}, variance at completion ${u(s7.variance)} (negative means an overrun); linesForecastBelowCommitted ${s7.linesForecastBelowCommitted}, linesForecastIgnored ${s7.linesForecastIgnored}.`);
+  s7.published.forEach((c) => w(`- published "${c.name}": items ${JSON.stringify(c.items)}; engine EAC ${f(c.eac, 4)}, variance ${f(c.variance, 4)}, lines below committed ${c.linesForecastBelowCommitted}, lines with an ignored forecast ${c.linesForecastIgnored}.`));
+  s7.probes.forEach((p) => w(`- CMT-03's budget, commitment and actual with ${p.label}: itemForecast ${u(p.itemForecast)}, forecastBelowCommitted ${p.forecastBelowCommitted}, forecastBelowCommittedBy ${u(p.forecastBelowCommittedBy)}, forecastIgnored ${p.forecastIgnored === null ? 'null' : `"${p.forecastIgnored}"`}.`));
+  const np = s7.negativeProbe;
+  w(`- CMT-03's budget, commitment and actual with entered forecast ${np.enteredForecast}: itemForecast ${u(np.itemForecast)}, forecastIgnored "${np.forecastIgnored}".`);
+  w('# Commentary: a forecast of 0 is not positive and falls back to the formula; any positive entered forecast is taken as typed, and one below the money already spent and committed is flagged with the amount it falls short. A line with no entered forecast can never show a saving: its forecast is at least its budget, so its variance is 0 or negative. OFON-1\'s three variances of 0 are that floor, and say nothing about being on budget.');
+  w('# App surface: the AFE Cost Control Manager uses this one rule on every screen: the dashboard tiles, the Cost Breakdown table, the PDF and Excel exports and the Top 5. The Cost Breakdown table marks a line whose entered forecast is below the money spent and committed with the amount, "below spent and committed". Editing a line does not copy the budget into its forecast.');
   w();
 
   // Section 8
@@ -190,47 +204,50 @@ const buildDigest = () => {
   w('| code | budget | progress percent | earned value (budget x progress) | actual |');
   w('| --- | --- | --- | --- | --- |');
   s8.rows.forEach((i) => w(`| ${i.code} | ${u(i.budget)} | ${pc(i.progress)} | ${u(i.earnedDerived)} (derived) | ${u(i.actual)} |`));
-  w(`Engine: earned value ${u(s8.earnedValue)}, CPI ${r(s8.cpi)} (earned value over actuals), percent spent ${pc(s8.percentSpent)}, percent complete ${pc(s8.percentComplete)}.`);
-  w(L.PLANNED_VALUE_RULE);
-  s8.published.forEach((x) => w(`- published "${x.name}": engine EV ${f(x.earnedValue, 4)}, AC ${f(x.totalActuals, 4)}, CPI ${x.cpi === null ? 'null' : r(x.cpi)}, SPI ${x.spi === null ? 'null' : r(x.spi)}.`));
+  w(`Engine: earned value ${u(s8.earnedValue)}, CPI ${r(s8.cpi)} (earned value over actuals, cpiStatus "${s8.cpiStatus}"), percent spent ${pc(s8.percentSpent)}, percent complete ${pc(s8.percentComplete)}.`);
+  w(s8.rule);
+  s8.published.forEach((x) => w(`- published "${x.name}": engine EV ${f(x.earnedValue, 4)}, AC ${f(x.totalActuals, 4)}, CPI ${x.cpi === null ? 'null' : r(x.cpi)} (${x.cpiStatus}), SPI ${x.spi === null ? 'null' : r(x.spi)} (${x.spiStatus}).`));
   w();
-  {
-    const neg = L.refusalsAndFlags().afe.find((x) => x.name === 'negative progress named by code');
-    w(`Progress is refused below zero, naming the line. The published case "${neg.name}": ${neg.ok ? 'accepted' : `${neg.errorName}: "${neg.error}"`}`);
-    w();
-  }
+  w('Progress runs from 0 to 100 percent and is refused outside that range, naming the line:');
+  s8.progressRefusals.forEach((a) => w(`- published "${a.name}": ${a.ok ? 'accepted' : `${a.errorName}: "${a.error}"`}`));
+  w();
 
   // Section 9
   const s9 = L.asOfTable();
   w('# SECTION 9: The as-of date (owned by Professional m04)');
   w();
-  w('| as of | time progress | planned value | earned value | SPI | CPI |');
-  w('| --- | --- | --- | --- | --- | --- |');
-  s9.rows.forEach((x) => w(`| ${x.asOf} | ${r(x.timeProgress)} | ${u(x.plannedValue)} | ${u(x.earnedValue)} | ${x.spi === null ? 'null' : r(x.spi)} | ${r(x.cpi)} |`));
+  w('| as of | time progress | planned value | earned value | SPI | spiStatus | CPI |');
+  w('| --- | --- | --- | --- | --- | --- | --- |');
+  s9.rows.forEach((x) => w(`| ${x.asOf} | ${r(x.timeProgress)} | ${u(x.plannedValue)} | ${u(x.earnedValue)} | ${x.spi === null ? 'null' : r(x.spi)} | ${x.spiStatus} | ${r(x.cpi)} |`));
   const dc = s9.dayCounts;
   const [e1, e2] = dc.elapsed;
   w(`Whole days in the OFON-1 window ${L.OFON_AFE.start_date} to ${L.OFON_AFE.end_date}: ${dc.windowDaysDerived} (derived). Elapsed whole days at ${e1.asOf}: ${e1.elapsedDaysDerived}; at ${e2.asOf}: ${e2.elapsedDaysDerived} (derived). Time progress is elapsed over total: ${r(e1.timeProgressDerived)} and ${r(e2.timeProgressDerived)} (derived), matching the engine column.`);
   w('Only planned value, time progress and SPI move with the as-of date; earned value, actuals, CPI and EAC are read from the lines as entered.');
-  w('# Commentary: on the end day itself time progress is 1, so the whole budget is planned by the end date. An AFE with no dates still falls back to time progress 1 in the engine (the published no-dates case below): EC5-0 did not change that fallback; the repaired Suite labels SPI unavailable for such an AFE.');
-  w('# App surface: before EC5-0 the engine read the clock for time progress, so SPI on a live AFE changed from day to day, and before the start date it reported SPI as Infinity when value had been earned or NaN when not.');
-  w('On the start day no whole day has elapsed, so time progress is 0, planned value 0 and SPI null, exactly as before the start.');
-  s9.published.forEach((x) => w(`- published "${x.name}": window ${x.startDate ?? 'none'} to ${x.endDate ?? 'none'}, asOf ${x.caseAsOf ?? 'default'}; engine time progress ${r(x.timeProgress)}, SPI ${x.spi === null ? 'null' : r(x.spi)}.`));
-  w('# App surface: before EC5-0 the AFE wizard asked for no dates, so time progress fell back to 1 and SPI equalled percent complete divided by 100 (earned value over the whole budget); the repaired wizard asks for the window and the dashboard passes today as the as-of date.');
+  w('# Commentary: on the end day itself time progress is 1, so the whole budget is planned by the end date. An AFE with no dates falls back to time progress 1 in the engine (the published no-dates case below), a documented fallback that measures nothing; the Suite labels SPI unavailable for such an AFE.');
+  w('# App surface: the engine never reads the clock; every call states its as-of date. The AFE dashboard passes today by default and takes a typed as-of date. The SPI tile reads "Unavailable" for an AFE without both dates, "Not started" when SPI is null for want of planned value, and "N/A" with "No budget to measure schedule against" when the AFE has no budget. The CPI tile reads "N/A" with "Nothing spent yet, so no cost efficiency" when nothing has been spent.');
+  w('On the start day no whole day has elapsed, so time progress is 0, planned value 0 and SPI null (spiStatus "no-planned-value"), exactly as before the start.');
+  s9.published.forEach((x) => w(`- published "${x.name}": window ${x.startDate ?? 'none'} to ${x.endDate ?? 'none'}, asOf ${x.caseAsOf ?? 'default'}; engine time progress ${r(x.timeProgress)}, SPI ${x.spi === null ? 'null' : r(x.spi)} (${x.spiStatus}).`));
+  w('# App surface: the AFE wizard asks for the window, a start date and an end date, and refuses an end date before the start date; without both dates the schedule index is shown as unavailable.');
   w();
 
   // Section 10
   const s10 = L.sCurve();
+  const cl = s10.closing;
   w('# SECTION 10: The S-curve (owned by Professional m05)');
   w();
   w(`OFON-1 S-curve as of ${s10.asOf}:`);
-  w('| point | label | Planned | Planned added since the previous point (derived) | Actual | Forecast |');
-  w('| --- | --- | --- | --- | --- | --- |');
-  s10.points.forEach((p, i) => w(`| ${i} | ${p.date} | ${u(p.Planned)} | ${s10.plannedAddedDerived[i] === null ? 'none' : u(s10.plannedAddedDerived[i])} | ${p.Actual === null ? 'null' : u(p.Actual)} | ${u(p.Forecast)} |`));
-  w('# Commentary: a label is the month and a two-digit year ("Feb 27" is February 2027, not the 27th), and each point sits on the start date plus whole months (here the 1st). Actual at a point counts invoices dated on or before that day, so the 2027-07-18 invoice is not in the "Jul 27" point (12700000) and appears at "Aug 27". A month with more days adds more plan. After the as-of date Forecast ignores the actuals entirely and is the EAC spread from the start, so its jump at the first projected point comes from switching formulas, not from spending.');
-  w('# Commentary: this digest is built with the timezone pinned to UTC. The engine parses the window as UTC midnight but steps months and prints labels in local time, so the same AFE drawn in a timezone west of UTC (for example America/Los_Angeles) labels its first point "Jan 27" and shifts every Planned value (finding EC5-5); Lagos, Tokyo and UTC agree with this table.');
-  w('# App surface: before EC5-0 the curve kept walking past the end date to the current month (a 2020 AFE had 81 points on 2026-09-14 and gained one a month); it now stops at the end date.');
-  w(`${s10.pointCount} points, one per calendar month from the start date to the end date. The last Planned point is ${u(s10.lastPlanned)} against a budget of ${u(s10.totalBudget)}: the monthly buckets stop before the plan reaches the budget.`);
+  w('| point | label | windowEnd | Planned | Planned added since the previous point (derived) | Actual | Forecast |');
+  w('| --- | --- | --- | --- | --- | --- | --- |');
+  s10.points.forEach((p, i) => w(`| ${i} | ${p.date} | ${p.windowEnd} | ${u(p.Planned)} | ${s10.plannedAddedDerived[i] === null ? 'none' : u(s10.plannedAddedDerived[i])} | ${p.Actual === null ? 'null' : u(p.Actual)} | ${u(p.Forecast)} |`));
+  w('# Commentary: a monthly label is the month and a two-digit year ("Feb 27" is February 2027), and each monthly point sits on the start date plus whole months (here the 1st). Actual at a point counts invoices dated on or before that day, so the 2027-07-18 invoice is not in the "Jul 27" point (12700000) and appears at "Aug 27". A month with more days adds more plan. After the as-of date Forecast ignores the actuals entirely and is the EAC spread from the start, so its jump at the first projected point comes from switching formulas: no money is spent at that point.');
+  w('# Commentary: the window, the as-of date, the monthly step, the day count and every label are read in UTC, so the same AFE draws the same curve in every time zone.');
+  w(`${s10.pointCount} points: ${s10.monthlyCount} monthly points from the start date, then a closing point dated the window end, labelled with its day ("${cl.date}", windowEnd ${cl.windowEnd}). On the closing point Planned is the budget total ${u(cl.Planned)} (budget ${u(s10.totalBudget)}) and Forecast is the EAC ${u(cl.Forecast)} (EAC ${u(s10.eac)}); its Actual counts the invoices dated on or before the end when the end is on or before the as-of date, and is null otherwise (here ${cl.Actual === null ? 'null' : u(cl.Actual)}). When a monthly step lands exactly on the end date, the closing point replaces it, so no date appears twice.`);
+  w(`The last monthly point, "${s10.lastMonthly.date}", plans ${u(s10.lastMonthly.Planned)}; the closing point adds the remaining ${u(s10.closingAddedDerived)} (derived).`);
   w(`After the as-of date Forecast is the EAC spread linearly from the start, so it jumps from the last actual ${u(s10.lastActual)} to ${u(s10.firstProjectedForecast)} at the first projected point.`);
+  w(`Invoices with no date the engine can read never reach the curve; countUndatedInvoices reports how many there are (OFON-1: ${s10.undatedInvoices}), and the AFE dashboard names that count beside the curve.`);
+  const ae = s10.afterEnd.closing;
+  w(`OFON-1 read after the end, as of ${s10.afterEnd.asOf}: the closing point "${ae.date}" carries Planned ${u(ae.Planned)}, Actual ${u(ae.Actual)} and Forecast ${u(ae.Forecast)}.`);
+  w('# App surface: the curve stops at the window end date, with the closing point dated that day.');
   s10.published.forEach((c) => w(`- published "${c.name}": window ${c.startDate} to ${c.endDate}, asOf ${c.caseAsOf ?? 'default'}, lines ${JSON.stringify(c.lines)}, invoices ${JSON.stringify(c.invoices)}; ${c.pointCount} points; first ${JSON.stringify(c.first)}; last ${JSON.stringify(c.last)}.`));
   w();
 
@@ -238,7 +255,7 @@ const buildDigest = () => {
   const s11 = L.riskMethods();
   w('# SECTION 11: Portfolio risk by simulation (owned by Expert m01)');
   w();
-  w('The published riskMethod cases, each run by the engine at its stated seed and iterations, beside the exact answer and the normal approximation the engine used before EC5-0:');
+  w('The published riskMethod cases, each run by the engine at its stated seed and iterations, beside the exact answer and a normal approximation of the summed NPV (a normal curve with the portfolio mean and standard deviation):');
   w('| case | kind | exact P(loss) | normal approximation P(loss) | engine P(loss) | standard error | z | exact P90 outcome | normal P90 | engine P90 |');
   w('| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |');
   s11.published.forEach((c) => w(`| ${c.id} | ${c.kind} | ${r(c.goldenExactProbLoss)} | ${r(c.goldenNormalProbLoss)} | ${r(c.engineProbLoss)} | ${r(c.goldenStandardError)} | ${f(c.goldenZ, 4)} | ${c.goldenExactP90Outcome !== null ? m(c.goldenExactP90Outcome) : (c.goldenExactP90Continuous !== null ? `${m(c.goldenExactP90Continuous)} (continuous)` : 'n/a')} | ${m(c.goldenNormalP90)} | ${m(c.engineP90)} |`));
@@ -249,7 +266,7 @@ const buildDigest = () => {
   w(s11.drawOrder);
   w();
   w('OKONO funded sets through the risk summary (correlation 0, the optimizer default; default seed and iterations):');
-  w('| limit | set | emv | stdDev | engine P(loss) | engine P90 | engine P10 | seed | iterations | what the normal approximation would have said, P(loss) (derived) | normal P90 (derived: emv - 1.2816 x stdDev) |');
+  w(`| limit | set | emv | stdDev | engine P(loss) | engine P90 | engine P10 | seed | iterations | normal approximation P(loss) (derived: normalCDF(-emv / stdDev)) | normal P90 (derived: emv - ${L.NORMAL_Z} x stdDev) |`);
   w('| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |');
   s11.okono.forEach((x) => w(`| ${m(x.limit)} | ${setIds(x.ids)} | ${m(x.emv)} | ${m(x.stdDev)} | ${r(x.probLoss)} | ${m(x.p90)} | ${m(x.p10)} | ${x.seed} | ${x.iterations} | ${r(x.normalProbLossDerived)} | ${m(x.normalP90Derived)} |`));
   w();
@@ -279,7 +296,7 @@ const buildDigest = () => {
   w(`partnerTotal ${pc(s13.budget.partnerTotal)}, valid ${s13.budget.valid}, note ${s13.budget.note === null ? 'none' : `"${s13.budget.note}"`}. Shares sum to ${u(s13.budget.sharesSumDerived)} (derived).`);
   w(`Billing the actuals to date, ${u(s13.billed.cost)}: ${s13.billed.partners.map((p) => `${p.name} ${u(p.shareAmount)}`).join('; ')}; operator ${u(s13.billed.operatorAmount)}.`);
   s13.published.forEach((x) => w(`- published "${x.name}": cost ${f(x.cost, 2)}, interests ${JSON.stringify(x.interests)}; partner amounts ${x.partnerAmounts.map((a) => f(a, 2)).join(' / ') || 'none'}; operator share ${pc(x.operatorShare)}, operator amount ${f(x.operatorAmount, 2)}, valid ${x.valid}, note ${x.note === null ? 'none' : `"${x.note}"`}.`));
-  w('# App surface: before EC5-0 the AFE summary PDF billed two invented partners (Partner A at 30 percent and Partner B at 10 percent) whatever was saved; the repaired PDF bills the AFE\'s saved partners and prints the engine note when the split is invalid.');
+  w('# App surface: the AFE summary PDF bills the AFE\'s saved partners (with none, the operator carries 100 percent) and prints the engine note when the split is invalid.');
   w();
 
   // Section 14
@@ -289,22 +306,22 @@ const buildDigest = () => {
   s14.portfolio.forEach((a) => w(`- portfolio ${a.id}: ${a.name}: "${a.error}"`));
   s14.afe.forEach((a) => w(`- AFE "${a.name}": ${a.ok ? 'accepted' : `${a.errorName}: "${a.error}"`}`));
   const go = s14.overshoot;
-  w(`- flag: published gridOvershoot reports overLimit ${go.overLimit}, overLimitBy ${f(go.overLimitBy, 4)} (capex ${f(go.totalCapex, 4)} against ${f(go.capexLimit, 4)}).`);
+  w(`- flag: overLimit and overLimitBy stay in every optimizer result; on published gridOvershoot they read ${go.overLimit} and ${f(go.overLimitBy, 4)} (capex ${f(go.totalCapex, 4)} against ${f(go.capexLimit, 4)}), as on every exact solve.`);
+  s14.riskSummary.forEach((a) => w(`- portfolio risk summary ${a.id}: ${refusalText(a)}`));
   w();
-  w(s14.repaired);
-  w(s14.notRepaired);
+  w(s14.flags);
+  w(s14.properties);
   w();
 
   // Section 15
   const s15 = L.distrust();
+  const cb = s15.cpiBeforeSpend;
   w('# SECTION 15: Numbers to distrust (owned by Expert m05)');
   w();
-  w(`CPI before any spend: OFON-1 with every actual set to 0 (progress unchanged) reports CPI ${r(s15.cpiBeforeSpend.cpi)} with earned value ${u(s15.cpiBeforeSpend.earnedValue)}: the engine returns 1 whenever actuals are 0.`);
-  w(`An invoice with no date: published "${s15.nullDated.name}" (invoices ${JSON.stringify(s15.nullDated.invoices)}) gives a first point Actual of ${s15.nullDated.firstActual} and a last point Actual of ${s15.nullDated.lastActual}. Neither invoice carries a date the engine can read, so neither reaches the curve at all, and the engine reports ${s15.nullDated.undated} undated invoices beside it so the money is named rather than dropped in silence.`);
-  w(`# Commentary: this case used to read ${s15.nullDated.wasNull} at every point. An amount whose date was null was counted from 1970, which is before any window, so it landed in every bucket and the first point reported spending from before the work began. The figure was plausible, it reconciled with nothing, and no screen said a date was missing. It is the reason this section exists.`);
-  const up = s15.underrunPicture;
-  w(`An overrun drawn as an underrun: OFON-1's last Forecast point on the S-curve is ${u(up.lastForecast)}, below the budget of ${u(up.totalBudget)}, while the EAC is ${u(up.eac)} and the variance at completion ${u(up.variance)}.`);
-  w(`A plan that never reaches the budget: OFON-1's last Planned point ${u(s15.shortPlan.lastPlanned)} is ${u(s15.shortPlan.shortDerived)} short of the budget (derived).`);
+  w(`CPI before any spend: OFON-1 with every actual set to 0 (progress unchanged) reports CPI ${cb.cpi === null ? 'null' : r(cb.cpi)} (cpiStatus "${cb.cpiStatus}") with earned value ${u(cb.earnedValue)}: value earned with nothing spent has no cost efficiency to report.`);
+  w(`An invoice with no date: published "${s15.nullDated.name}" (invoices ${JSON.stringify(s15.nullDated.invoices)}) gives a first point Actual of ${s15.nullDated.firstActual} and a last point Actual of ${s15.nullDated.lastActual}. Neither invoice carries a date the engine can read, so neither reaches the curve at all, and the engine reports ${s15.nullDated.undated} undated invoices beside it so the money is named beside the curve.`);
+  const ov = s15.overrun;
+  w(`Reading an overrun off the curve: OFON-1's closing point carries Forecast ${u(ov.closingForecast)} against Planned ${u(ov.closingPlanned)}, the EAC against the budget, a variance at completion of ${u(ov.variance)}. The last MONTHLY point, "${ov.lastMonthlyLabel}", shows Forecast ${u(ov.lastMonthlyForecast)} and Planned ${u(ov.lastMonthlyPlanned)}: a reader who stops at the last month sees neither the budget nor the EAC.`);
   w();
   w(`Iterations and the standard error, OKONO funded set at ${m(s15.seedTable.limit)}:`);
   w('| seed | iterations | P(loss) | standard error sqrt(p(1 - p) / n) (derived) | P90 |');
@@ -347,7 +364,7 @@ const SECTION_KEYS = ['preamble', ...Array.from({ length: 16 }, (_, i) => `S${i 
 // ---------------------------------------------------------------------------
 
 describe('the digest on disk and the teaching fields', () => {
-  it('the tests run in UTC whatever the shell says, as build_digest.sh builds the digest (finding EC5-5)', () => {
+  it('the tests run in UTC whatever the shell says, as build_digest.sh builds the digest', () => {
     expect(PINNED_TIMEZONE).toBe('UTC');
     expect(new Date('2027-02-01').toLocaleDateString('en-US', { month: 'short', year: '2-digit' })).toBe('Feb 27');
     expect(L.sCurve().points[0].date).toBe('Feb 27');
@@ -373,7 +390,7 @@ describe('the digest on disk and the teaching fields', () => {
 
   it('the published goldens are both files, whole', () => {
     const c = L.goldenCounts();
-    expect(c.portfolio).toBe(83);
+    expect(c.portfolio).toBe(109);
     expect(c.afe).toBeGreaterThan(100);
   });
 });
@@ -389,7 +406,7 @@ describe('THE DIGEST, REBUILT FROM LAB RETURN VALUES, BYTE FOR BYTE', () => {
     S2: 'risking a project, OKONO',
     S3: 'choosing under a budget, the greedy fill and ties',
     S4: 'the efficient frontier',
-    S5: 'the grid under the answer',
+    S5: 'the exact solve and the stated fallback grid',
     S6: 'OFON-1 and its lines',
     S7: 'one forecast rule',
     S8: 'earned value',

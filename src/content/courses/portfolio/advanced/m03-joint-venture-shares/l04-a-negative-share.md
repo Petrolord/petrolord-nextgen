@@ -1,6 +1,6 @@
 # A negative share
 
-A partner with a negative working interest is billed a credit, and the operator is loaded with more than its share while the total can still look fine. Since EC5-0 the engine marks that split valid false and names the partner.
+A partner with a negative working interest is billed a credit, and the operator is loaded with more than its share while the total can still look fine. The engine marks that split valid false and names the partner.
 
 {{panel:ec-governance-explorer}}
 
@@ -15,7 +15,7 @@ A partner with a negative working interest is billed a credit, and the operator 
 
 In the first case the partners are at 30 and -20 percent. Their total is 10 percent, under the whole, so the operator's residual is 100 less 10, which is 90.0000 percent, or 900.00 of the cost. Nothing is negative on the operator line. Without the negative entry the operator would carry 100 less 30, which is 70 percent. The negative partner has quietly moved its magnitude onto the operator and handed itself a credit.
 
-Before EC5-0 this split passed as valid, because the only test was whether the operator share went below zero. The engine now reports valid false with the note: "Partner "B" has a negative working interest (-20.00 percent). Correct the interests before billing."
+A test on the operator share alone would pass this split, because the operator share is not below zero. The engine checks each interest as well, and reports valid false with the note: "Partner "B" has a negative working interest (-20.00 percent). Correct the interests before billing."
 
 ## Both errors at once
 
@@ -33,4 +33,4 @@ The second mistake is checking only the total. A list at 30 and -20 sums to 10 p
 
 ## Exercise
 
-For the published case at 30 and -20 percent, state the partner total, the operator share and amount, and valid, and say what the operator would carry without the negative entry. Then explain why this case passed as valid before EC5-0, and give the order of the two sentences in the note when both errors occur.
+For the published case at 30 and -20 percent, state the partner total, the operator share and amount, and valid, and say what the operator would carry without the negative entry. Then quote the note the engine writes, explain why a check on the operator share alone would not catch this case, and give the order of the two sentences in the note when both errors occur.

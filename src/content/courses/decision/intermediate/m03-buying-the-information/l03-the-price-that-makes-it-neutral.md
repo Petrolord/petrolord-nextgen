@@ -14,9 +14,9 @@ The acquire branch is evWithInfo less the price: 100.5750 less the cost. The no-
 | 24.8250 | 75.7500 | 75.7500 | 0.0000 | Acquire CSEM survey |
 | 28.0000 | 72.5750 | 75.7500 | -3.1750 | No further information |
 
-## The tie goes to the first branch
+## The tie is reported
 
-At 24.8250 the two branches are exactly equal, and the engine keeps the first branch listed, the acquisition. The root choice reads "Acquire CSEM survey" beside a net value of 0.0000. That label is the listing order speaking; in value the engine is indifferent. The published costExactlyNetZero case shows the same behaviour: root branch values 43.0000 and 43.0000, bestBranchIndex 0 and a root of 43.0000. List the no-information branch first and the same numbers would recommend doing without.
+At 24.8250 the two branches are exactly equal, and the engine reports tiedIndices [0, 1] and indifferent true, marking the first listed, the acquisition. The root choice reads "Acquire CSEM survey" beside a net value of 0.0000. That label is the listing order speaking; in value the engine is indifferent, and says so. The published costExactlyNetZero case shows the same behaviour: root branch values 43.0000 and 43.0000, bestBranchIndex 0 and a root of 43.0000. List the no-information branch first and the mark moves to it while the engine still reports indifferent.
 
 ## A ceiling for negotiation
 
@@ -32,8 +32,8 @@ EVPI, 52.0000, is the neutral price of a survey that never misreads. The CSEM su
 
 ## The mistake
 
-The careful error is to read the tie at 24.8250 as a recommendation to buy. At that price the value is identical either way, and a report that names "Acquire CSEM survey" reflects only the order in which the branches were listed. Nothing in the engine flags the tie: the report looks the same as at 8.0000, where the survey adds 16.8250. Read netEvii beside every root choice; a net value of 0.0000 means the recommendation carries no information about value.
+The careful error is to read the tie at 24.8250 as a recommendation to buy. At that price the value is identical either way, and a report that names "Acquire CSEM survey" reflects only the order in which the branches were listed. The engine flags the tie, indifferent true with tiedIndices [0, 1], but a root choice copied without those fields looks the same as at 8.0000, where the survey adds 16.8250. Read netEvii beside every root choice; a net value of 0.0000 means the recommendation carries no information about value.
 
 ## Exercise
 
-Write the acquire branch and the no-information branch for EKPAN as expressions in the survey cost, set them equal and solve for the price. State the root choice and net value at that price and at 24.0000 and 28.0000, and explain why the root names the acquisition at 24.8250.
+Write the acquire branch and the no-information branch for EKPAN as expressions in the survey cost, set them equal and solve for the price. State the root choice and net value at that price and at 24.0000 and 28.0000, and explain why the root marks the acquisition at 24.8250 and what the engine reports there.

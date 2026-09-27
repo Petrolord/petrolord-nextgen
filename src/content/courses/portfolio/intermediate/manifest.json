@@ -256,7 +256,7 @@
         },
         {
           "key": "l05-a-curve-that-stops-at-the-end",
-          "title": "A curve that stops at the end",
+          "title": "A curve that closes on the end date",
           "order": 5,
           "est_minutes": 12,
           "panels": [

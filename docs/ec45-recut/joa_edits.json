@@ -1,0 +1,38 @@
+{
+ "description": "EC9 joa question rows changed by the ec45 recut (engines #274 jointVenture.js on the canonical path, so the ec10-farmout root collapses). Identity is course/tier/scope/module_key/ord as served by 20261110_ec9_joa_*_deep.sql. Only the named field changes; answer_index and every other field stay.",
+ "edits": [
+  {
+   "course": "joa",
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m06-conventions-and-the-partner-report",
+   "ord": 9,
+   "field": "explanation",
+   "old": "The refusals table says a message starts with the name of the field it refuses and states the exact condition, and that an unknown key is refused wherever it sits with its path and the full list of accepted keys, for example uplift.rate is not an accepted key; the accepted keys of uplift are type, ratePctPerYear, multiplePct.",
+   "new": "The refusals table says a message starts with the name of the field it refuses and states the exact condition, and that an unknown key is refused wherever it sits with its path and the full list of accepted keys, for example uplift.rate is not an accepted key; the accepted keys of uplift are type, ratePctPerYear, multiplePct, dayBasis.",
+   "source": "tools/course-waves/joa/digest.txt carry-refuse-unknown-key row (engine message verbatim)"
+  },
+  {
+   "course": "joa",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 4,
+   "field": "options",
+   "old": [
+    "A list of aliases, such as wi, that it maps onto participatingPct.",
+    "One shape of accepted keys for each of its 9 functions.",
+    "The keys of the Ekene fixture file, for the panels to load at start.",
+    "A table of error codes, one code for each of the 78 refusals the course lists."
+   ],
+   "new": [
+    "A list of aliases, such as wi, that it maps onto participatingPct.",
+    "One shape of accepted keys for each of its 9 functions.",
+    "The keys of the Ekene fixture file, for the panels to load at start.",
+    "A table of error codes, one code for each of the 83 refusals the course lists."
+   ],
+   "answer_index": 1,
+   "source": "tools/course-waves/joa/digest.txt count line: 83 refusals across 9 functions"
+  }
+ ]
+}

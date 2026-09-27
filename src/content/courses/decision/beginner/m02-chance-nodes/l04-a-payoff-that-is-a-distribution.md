@@ -1,6 +1,6 @@
 # A payoff that is a distribution
 
-A terminal can carry a Monte Carlo summary instead of a single number, and the rollback uses only its mean. The spread travels with the payoff and moves no EMV.
+A terminal can carry a Monte Carlo summary in place of a single number, and the rollback uses only its mean. The spread travels with the payoff and moves no EMV.
 
 {{panel:ec-tree-explorer}}
 
@@ -35,7 +35,7 @@ The careful mistake is typing the P50 as the payoff because it is the middle of 
 
 ## What it refuses
 
-A summary with no mean, carrying only a P90 of 185, a P50 of 390 and a P10 of 710, is refused with `Distribution payoff has no finite mean`. The engine does not estimate a mean from the percentiles.
+A summary with no mean, carrying only a P90 of 185, a P50 of 390 and a P10 of 710, is refused with `Distribution payoff has no finite mean (at node "Success")`. The engine does not estimate a mean from the percentiles.
 
 ## Exercise
 

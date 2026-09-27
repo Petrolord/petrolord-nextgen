@@ -4,7 +4,7 @@
 
 # PRECISION. Every amount of money, interest, share, percentage, rate, multiple, balance and present value prints to SIX decimals; years, months, day counts, hours, party counts and whole inputs print as whole numbers; a figure of sixteen or more significant digits at six decimals prints with its thousands grouped by commas; an engine message, reason and basis is printed verbatim, figures and all. Inside a message, money prints rounded to the cent with trailing zeros dropped, and a percentage or rate prints as the shortest round-trip decimal of the double the engine holds.
 
-# ENGINE. engines/economics/jointVenture.js, vendored sha-identical with petrolord-engines 3ae56e7 (engines PR #270), 1118 lines. It imports applyPSC and npv from engines/economics/cashflow.ts and calculatePartnerCosts from engines/economics/afe.js, and nothing else. It makes no network call.
+# ENGINE. engines/economics/jointVenture.js, vendored sha-identical with petrolord-engines fb5a363 (engines PR #270, with the simple uplift of PR #274), 1156 lines. It imports applyPSC and npv from engines/economics/cashflow.ts and calculatePartnerCosts from engines/economics/afe.js, and nothing else. It makes no network call.
 
 # AN ENGINE COURSE. There is no Suite app for this course. Every practical runs in the course's own calculator panels, which call this same vendored engine on the learner's own agreement terms.
 
@@ -374,8 +374,13 @@ A refusal is an object with `error` and `field`. The message starts with the nam
 | `defaultCover` | default-refuse-all-default | `defaulters` | defaulters must be leaving at least one non-defaulting party with a paying interest above 0; got ["EKO","PA","PB"] |
 | `defaultCover` | default-refuse-unit | `suspension.unit` | suspension.unit must be one of "calendar-days", "working-days", "months"; got "business-days" |
 | `defaultCover` | default-refuse-unknown-key | `interest.compounding` | interest.compounding is not an accepted key; the accepted keys of interest are annualRatePct, dayBasis, interestMethod, graceHours |
+| `carryRecovery` | carry-refuse-simple-no-basis | `uplift.dayBasis` | uplift.dayBasis must be one of "annual-period", "actual/365", "actual/360"; got nothing |
+| `carryRecovery` | carry-refuse-simple-no-rate | `uplift.ratePctPerYear` | uplift.ratePctPerYear must be a finite number at or above 0; got nothing |
+| `carryRecovery` | carry-refuse-simple-bad-basis | `uplift.dayBasis` | uplift.dayBasis must be one of "annual-period", "actual/365", "actual/360"; got "30/360" |
+| `carryRecovery` | carry-refuse-compound-basis | `uplift.dayBasis` | uplift.dayBasis must be left out when type is "compound"; got "actual/365" |
+| `carryRecovery` | carry-refuse-pia-simple | `uplift.type` | uplift.type must be "none" under basis "pia-s85-4": the refund excludes interest, premium or markups on cost (PIA s.85(4)(c)); got "simple" |
 | `carryRecovery` | carry-refuse-pia-uplift | `uplift.type` | uplift.type must be "none" under basis "pia-s85-4": the refund excludes interest, premium or markups on cost (PIA s.85(4)(c)); got "compound" |
-| `carryRecovery` | carry-refuse-no-uplift | `uplift` | uplift must be an object { type } with type "none", "compound" or "multiple" (no default); got nothing |
+| `carryRecovery` | carry-refuse-no-uplift | `uplift` | uplift must be an object { type } with type "none", "simple", "compound" or "multiple" (no default); got nothing |
 | `carryRecovery` | carry-refuse-uplift-extra | `uplift.ratePctPerYear` | uplift.ratePctPerYear must be left out when type is "none"; got 5 |
 | `carryRecovery` | carry-refuse-multiple-below | `uplift.multiplePct` | uplift.multiplePct must be a number at or above 100 (100 recovers the cost alone); got 90 |
 | `carryRecovery` | carry-refuse-not-carried | `carried` | carried must be the carried party of one of the carries (NOC); got "PA" |
@@ -384,7 +389,7 @@ A refusal is an object with `error` and `field`. The message starts with the nam
 | `carryRecovery` | carry-refuse-basis | `basis` | basis must be one of "pia-s85-4", "contract"; got nothing |
 | `carryRecovery` | carry-refuse-npv-half | `baseYear` | baseYear must be an integer at or above 1; got nothing |
 | `carryRecovery` | carry-refuse-year-gap | `years[1].year` | years[1].year must be 2028, the year after 2027 (years are consecutive); got 2029 |
-| `carryRecovery` | carry-refuse-unknown-key | `uplift.rate` | uplift.rate is not an accepted key; the accepted keys of uplift are type, ratePctPerYear, multiplePct |
+| `carryRecovery` | carry-refuse-unknown-key | `uplift.rate` | uplift.rate is not an accepted key; the accepted keys of uplift are type, ratePctPerYear, multiplePct, dayBasis |
 | `backIn` | backin-refuse-pia-61 | `targetPct` | targetPct must be at most 60 under basis "pia-s85-4" (the right to participate up to 60%, PIA s.85(4)(a)); got 61 |
 | `backIn` | backin-refuse-pia-upfront | `refundForm` | refundForm must be "from-future-entitlement" under basis "pia-s85-4": no upfront payment by the Government (s.85(4)(d)); the refund is in cash or in kind from future production or entitlements (s.85(4)(f)); got "upfront" |
 | `backIn` | backin-refuse-pia-kinds | `refundableKinds` | refundableKinds must be left out under basis "pia-s85-4" (development and production, s.85(4)(c)); got ["exploration"] |
@@ -407,7 +412,7 @@ A refusal is an object with `error` and `field`. The message starts with the nam
 | `pscCostRecovery` | psc-refuse-year-share | `years[0].contractorProfitSharePct` | years[0].contractorProfitSharePct must be a number from 0 to 100; got 120 |
 | `pscCostRecovery` | psc-refuse-unknown-key | `costRecoveryLimitPct` | costRecoveryLimitPct is not an accepted key; the accepted keys at the top level are years, royaltyPct, costOilLimitPct, costOilLimitBase, contractorProfitSharePct, taxRatePct, openingCostPool, parties, discountRate, baseYear |
 
-78 refusals across 9 functions: participatingInterests 11, cashCalls 8, budgetControl 4, overhead 9, defaultCover 14, carryRecovery 11, backIn 8, nonConsent 7, pscCostRecovery 6.
+83 refusals across 9 functions: participatingInterests 11, cashCalls 8, budgetControl 4, overhead 9, defaultCover 14, carryRecovery 16, backIn 8, nonConsent 7, pscCostRecovery 6.
 
 REFUSALS A PANEL CONTROL CAN PRODUCE. Each calculator panel writes every required term into the box through a visible control, and setting a control to "not stated" removes the term. Four such calls are not golden cases; each is a golden input with one term removed or changed (stated probes), handed to the engine here, and the message is the engine's, verbatim:
 

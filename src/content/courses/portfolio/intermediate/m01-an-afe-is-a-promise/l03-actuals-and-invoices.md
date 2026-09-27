@@ -39,12 +39,12 @@ Enter a new invoice and forget the line, and the S-curve moves while CPI, percen
 
 ## What it refuses
 
-The engine does not reconcile invoices against actuals, and it does not attribute an invoice to a line. It still does not refuse an invoice with no date, but it no longer guesses one. An invoice the engine cannot date, whether its date is null or the field is missing, is kept off the S-curve altogether, and the count of undated invoices is reported beside the curve. In the published undated case neither invoice can be dated, so the curve holds neither and the count reads 2.
+The engine does not reconcile invoices against actuals, and it does not attribute an invoice to a line. It does not refuse an invoice with no date, and it does not guess one either. An invoice the engine cannot date, whether its date is null or the field is missing, is kept off the S-curve altogether, and the count of undated invoices is reported beside the curve. In the published undated case neither invoice can be dated, so the curve holds neither and the count reads 2.
 
 ## The mistake
 
-The mistake is to treat one agreement as proof of the other record. A reviewer who sees 15090000 on the dashboard and 15090000 at the last actual point of the curve has checked two totals, not two ledgers. Check the dates, check that every invoice has one, and check the sum of the invoices against the sum of the line actuals each time a report is issued. The second mistake is to read an invoice as a line's cost: the 5200000 dated 2027-04-10 could be drilling, casing or both, and the AFE cannot say.
+The mistake is to treat one agreement as proof of the other record. A reviewer who sees 15090000 on the dashboard and 15090000 at the last actual point of the curve has checked two totals. The two ledgers behind them are still unchecked. Check the dates, check that every invoice has one, and check the sum of the invoices against the sum of the line actuals each time a report is issued. The second mistake is to read an invoice as a line's cost: the 5200000 dated 2027-04-10 could be drilling, casing or both, and the AFE cannot say.
 
 ## Exercise
 
-Add OFON-1's four invoices and show that they equal the line actuals of 15090000. Then say which readings would move and which would stay put if a fifth invoice were entered without any line's actual being changed, and what the engine now does with an invoice it cannot date, and what it reports beside the curve.
+Add OFON-1's four invoices and show that they equal the line actuals of 15090000. Then say which readings would move and which would stay put if a fifth invoice were entered without any line's actual being changed, and what the engine does with an invoice it cannot date, and what it reports beside the curve.

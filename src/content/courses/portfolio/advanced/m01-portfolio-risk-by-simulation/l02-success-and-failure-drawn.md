@@ -1,6 +1,6 @@
 # Success and failure drawn
 
-The repaired risk summary does not sum bells. In every iteration it decides whether each funded project succeeded, and only then draws what the success was worth or books the fail cost.
+The risk summary does not sum bells. In every iteration it decides whether each funded project succeeded, and only then draws what the success was worth or books the fail cost.
 
 {{panel:ec-governance-explorer}}
 
@@ -23,7 +23,7 @@ Two spread columns sit side by side and only one is drawn. The success spread sc
 
 ## What a failure is worth
 
-A failure is a single number. OK-3 fails with chance 0.750000 and then books a loss of 85.0000 in every such iteration, never a little more or less. That is why the simulated distribution of a small portfolio has spikes: the 450.0000 set, OK-1 + OK-3 + OK-4, carries OK-3's failure in about three iterations out of four, and the successes of OK-1 and OK-4 spread the rest around it.
+A failure is a single number. OK-3 fails with chance 0.750000 and then books a loss of exactly 85.0000 in every such iteration. That is why the simulated distribution of a small portfolio has spikes: the 450.0000 set, OK-1 + OK-3 + OK-4, carries OK-3's failure in about three iterations out of four, and the successes of OK-1 and OK-4 spread the rest around it.
 
 A success is not a guaranteed gain either. It is a normal draw around npv_p50, so a wide success spread can occasionally put a success below zero.
 

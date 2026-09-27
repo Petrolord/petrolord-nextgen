@@ -19,14 +19,14 @@ Set them equal: 445 p - 80 = 95 p, so 350 p = 80 and p = 80 / 350 = 0.228571.
 | success probability | Drill | Farm out | best action |
 | --- | --- | --- | --- |
 | 0.200000 | 9.0000 | 19.0000 | Farm out |
-| 0.228571 | 21.7143 | 21.7143 | Farm out |
+| 0.228571 | 21.7143 | 21.7143 | tied (Drill marked) |
 | 0.250000 | 31.2500 | 23.7500 | Drill |
 
 Below 0.228571 the farm-out is worth more; above it the drill is.
 
 ## What the engine says at the crossing
 
-At 0.228571 the engine prints Drill 21.7143 and Farm out 21.7143 and names Farm out as best. That looks like a tie, and a tie would go to the branch listed first, which is Drill. It does not, because 80 / 350 has no exact binary image: Drill less Farm out comes out at -7.11e-15, so Drill is smaller by rounding residue and the engine's strictly greater comparison keeps Farm out. The choice exactly at the switch belongs to binary arithmetic and says nothing about either branch. Report the switch point; do not report a winner at it.
+At 0.228571 the engine prints Drill 21.7143 and Farm out 21.7143 and reports them tied: tiedIndices [0, 1], indifferent true. The two values are not bit for bit equal, because 80 / 350 has no exact binary image and Drill less Farm out comes out at -7.11e-15. That residue is far inside the engine's tie band of 1e-9 x max(1, |best|), so the engine calls it a tie and Drill, listed first, carries the actionIndex as a mark only. Report the switch point, and report no winner at it.
 
 ## A second crossing that does not matter
 

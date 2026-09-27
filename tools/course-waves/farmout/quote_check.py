@@ -39,7 +39,7 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SRC = os.environ.get('EC10_SOURCES', os.path.join(HERE, 'sources'))
-ENG = os.environ.get('EC10_ENGINES', '/root/wt-ec10-nextgen/packages/engines/ec10-farmout')
+ENG = os.environ.get('EC10_ENGINES', '/root/wt-ec10-nextgen/packages/engines')
 IN_FINDINGS = ['pia_nuprc.pdf', 'nuprc_assignment_regs_2023.pdf', 'hmrc_ot30021.json', 'hmrc_ot18360.json', 'psu_eme801_node578.html']
 TEXTS = {'PIA': 'pia_nuprc.txt', 'AOI': 'nuprc_assignment_regs_2024.txt', 'HMRC': 'hmrc_ot.txt'}
 # sha256 prefixes of the files as read on 2026-09-27

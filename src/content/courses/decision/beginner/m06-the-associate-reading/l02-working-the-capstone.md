@@ -29,7 +29,7 @@ EKPAN's drill chance node is 160.0000 and the drill branch is 105.0000; the Deci
 
 ## Step four: read the path and the cards
 
-Name the first move, the next best alternative and the decision advantage. OKRIKA appraises at 87.0000 against Sell now at 48.0000, an advantage of 39.0000; EKPAN drills at 105.0000 against Farm out at 37.7500, an advantage of 67.2500. List which branches are on the optimal path: every outcome under a taken branch is on it, only the best branch of each decision is, and nothing under an untaken branch ever is. If the advantage is 0.0000, the first move is only the tie rule, and say so.
+Name the first move, the next best alternative and the decision advantage. OKRIKA appraises at 87.0000 against Sell now at 48.0000, an advantage of 39.0000; EKPAN drills at 105.0000 against Farm out at 37.7500, an advantage of 67.2500. List which branches are on the optimal path: every outcome under a taken branch is on it, only the best branch of each decision is, and nothing under an untaken branch ever is. If the branches tie, the engine reports indifferent and the first move is only a mark; say so.
 
 ## Step five: move one probability
 

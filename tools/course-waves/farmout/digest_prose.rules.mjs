@@ -16,7 +16,7 @@ import path from 'node:path';
 
 const WAVE = process.env.EC10_WAVE_DIR || '/root/cat-wip-farmout';
 const DIGEST = path.join(WAVE, 'digest.txt');
-const ENGINES = process.env.EC10_ENGINES || '/root/wt-ec10-nextgen/packages/engines/ec10-farmout';
+const ENGINES = process.env.EC10_ENGINES || '/root/wt-ec10-nextgen/packages/engines';
 
 const refuse = (msg) => {
   console.log(`REFUSED by digest_prose.rules.mjs (EC10): ${msg}`);

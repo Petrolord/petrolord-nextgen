@@ -1,6 +1,6 @@
 # A Monte Carlo payoff enters at its mean
 
-A terminal payoff in a decision tree can be a linked Monte Carlo NPV summary instead of a single number. The rollback is linear, so only the summary's mean enters, and the spread travels with the tree without moving its EMV.
+A terminal payoff in a decision tree can be a linked Monte Carlo NPV summary in place of a single number. The rollback is linear, so only the summary's mean enters, and the spread travels with the tree without moving its EMV.
 
 {{panel:ec-judgement-explorer}}
 

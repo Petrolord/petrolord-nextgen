@@ -18,8 +18,9 @@ The Planned line on the S-curve is the budget spread evenly over the calendar da
 | 7 | Sep 27 | 18988742 | null |
 | 8 | Oct 27 | 21675828 | null |
 | 9 | Nov 27 | 24452483 | null |
+| 10 | 30 Nov 27 | 27050000 | null |
 
-At each point Planned is OFON-1's budget of 27050000 times the days elapsed since 2027-02-01 over the days in the window. Mar 27 reads 2507947, Apr 27 reads 5284603 and May 27 reads 7971689. The steps between points are not equal. The line is straight in days, so a long month adds more plan than a short one, and the month labels hide that.
+At each point Planned is OFON-1's budget of 27050000 times the days elapsed since 2027-02-01 over the days in the window. Mar 27 reads 2507947, Apr 27 reads 5284603 and May 27 reads 7971689. The closing point, 30 Nov 27, is the whole budget of 27050000, the last 2597517 of plan added after Nov 27. The steps between points are not equal. The line is straight in days, so a long month adds more plan than a short one, and the month labels hide that.
 
 ## What the plan does not know
 
@@ -35,7 +36,7 @@ At Aug 27 the Actual is 15090000 against a Planned 16212086. That gap is spendin
 
 ## The mistake
 
-The first mistake is treating each crossing of Actual over Planned as a change in performance. The deeper one is a forecast copied from the budget. A forecast drawn by following the Planned line to its end says the job will spend like a straight line and finish on budget, and it hides every overrun the lines already show: OFON-1's EAC is 27600000 against a budget of 27050000. Before EC5-0, editing a line in the Suite copied its budget into its forecast. The repaired app no longer does, and one forecast rule serves every screen.
+The first mistake is treating each crossing of Actual over Planned as a change in performance. The deeper one is a forecast copied from the budget. A forecast drawn by following the Planned line to its end says the job will spend like a straight line and finish on budget, and it hides every overrun the lines already show: OFON-1's EAC is 27600000 against a budget of 27050000. One forecast rule serves every screen, and editing a line does not copy its budget into its forecast.
 
 ## Exercise
 

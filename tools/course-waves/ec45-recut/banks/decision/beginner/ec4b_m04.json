@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "OKRIKA's appraisal chance node weights a good result at 0.400000 and a poor result at 0.600000. Which two values does it weight?",
+  "options": [
+   "375.0000 and 56.0000, the development chance nodes behind each result, since those are the next chance nodes to the right of it.",
+   "520.0000 and -60.0000, the large and small field payoffs, because a chance node always weights the terminals that sit beneath it.",
+   "225.0000 and 25.0000, the values of the two decisions that follow, each already reduced to its best branch after cost.",
+   "225.0000 and -94.0000, the development branch after each result, the action the appraisal exists to test."
+  ],
+  "answer": 2,
+  "explanation": "OKRIKA's appraisal node weights what its children are worth after their own choices: 0.400000 x 225.0000 + 0.600000 x 25.0000 = 105.0000, and the appraisal cost of 18.0000 makes the branch 87.0000."
+ },
+ {
+  "prompt": "Read left to right, OKRIKA is a 520.0000 prize and Develop now looks like the shortest road to it. What does the rollback make of Develop now?",
+  "options": [
+   "The worst of the three root branches: 183.6000 less its cost of 150.0000 is 33.6000, against Sell now at 48.0000 and Appraise at 87.0000.",
+   "The best root branch at 183.6000, since it reaches the large field without first paying the appraisal cost of 18.0000.",
+   "Second best, behind Appraise and ahead of Sell now at 48.0000, because developing today avoids the delay an appraisal adds.",
+   "Level with Appraise at 87.0000, because the chance of a large field is 0.420000 by either route and both weight the same two outcomes."
+  ],
+  "answer": 0,
+  "explanation": "Develop now weights 0.420000 x 520.0000 + 0.580000 x -60.0000 = 183.6000, the node value before the cost; the branch is 33.6000, and the root takes Appraise at 87.0000."
+ },
+ {
+  "prompt": "What is OKRIKA's decision after a poor appraisal worth, and which branch does it take?",
+  "options": [
+   "56.0000, the development, reading the development chance node before its cost of 150.0000 as if it were the branch value.",
+   "-94.0000, the development, because development is the only branch after an appraisal that can still reach the large field at 520.0000.",
+   "95.0000, the sale, using the sale price after a good appraisal, which the tree applies to any sale made once the appraisal is done.",
+   "25.0000, the sale, because developing is worth 56.0000 less 150.0000 = -94.0000 there."
+  ],
+  "answer": 3,
+  "explanation": "After a poor result the chance of a large field is 0.200000: 0.200000 x 520.0000 + 0.800000 x -60.0000 = 56.0000, less 150.0000 is -94.0000, which loses to the sale typed at 25.0000."
+ },
+ {
+  "prompt": "Delete both sales inside OKRIKA's appraisal branch, so the company must develop whatever the appraisal says. What does the root do?",
+  "options": [
+   "It still appraises at 87.0000, since the sale after a good appraisal was never taken and the one after a poor result was a fallback.",
+   "It sells now at 48.0000, because the appraisal branch falls to 0.400000 x 225.0000 + 0.600000 x -94.0000 = 33.6000, less 18.0000 = 15.6000.",
+   "It appraises at 33.6000, since without the sales the appraisal node equals Develop now and the appraisal is listed first.",
+   "It appraises at 71.4000, the value the appraisal branch keeps once the option to sell is taken out, still ahead of Sell now."
+  ],
+  "answer": 1,
+  "explanation": "Without the sales a poor result forces the development at -94.0000, the appraisal branch drops to 15.6000 and loses to Sell now at 48.0000, so the root sells today."
+ },
+ {
+  "prompt": "When OKRIKA's sales are deleted the appraisal branch moves from 87.0000 to 15.6000, a difference of 71.4000. What is 71.4000?",
+  "options": [
+   "The value of the appraisal itself, since it is exactly what the appraisal branch loses when the tree is drawn without it.",
+   "The value of the option to sell after a poor result, inside a branch that also pays the appraisal cost.",
+   "The value of reducing uncertainty about the field size, which the appraisal buys for the company whether or not a sale follows it.",
+   "The advantage of appraising over selling now, the margin the root holds over its best alternative."
+  ],
+  "answer": 1,
+  "explanation": "The whole difference sits on the poor side, carried at 0.600000, because the sale after a good result was never taken; the appraisal's advantage over Sell now is a different number, 39.0000."
+ },
+ {
+  "prompt": "On OKRIKA, Sell after a good appraisal reads onOptimalPath false and Sell after a poor appraisal reads true. What does that tell a reader who wants to prune the tree?",
+  "options": [
+   "Both can go, because each sale pays less than the large field's 520.0000 and a rollback only needs the branches that can win big.",
+   "Neither can go, since every branch enters its parent's weighting, on the optimal path or off it.",
+   "The one reading false carries the value, since the flag marks branches held in reserve.",
+   "The first can go without changing a number; the second carries 71.4000 of the appraisal branch's value."
+  ],
+  "answer": 3,
+  "explanation": "A decision node hands up only its best branch, so a branch never taken changes nothing when removed; the sale after a poor result is the branch taken, and removing it drops the appraisal branch from 87.0000 to 15.6000."
+ },
+ {
+  "prompt": "With both sales deleted, OKRIKA's appraisal chance node comes to 33.6000, exactly the value of Develop now. Why do the two agree?",
+  "options": [
+   "An appraisal that cannot change what the company does is the same development delayed, and the tree's chances agree: 0.400000 x 0.750000 + 0.600000 x 0.200000 = 0.420000.",
+   "The engine copies the root's Develop now value into any chance node whose later decisions have lost all their alternatives.",
+   "They agree by coincidence of the typed payoffs, and a tree with a different sale price after a poor result would pull them apart.",
+   "An appraisal with no sale behind it reduces no uncertainty, so the engine values its node at the chance of a large field known beforehand."
+  ],
+  "answer": 0,
+  "explanation": "Both lines weight 520.0000 and -60.0000 at a combined 0.420000 and pay 150.0000, so the appraisal only adds its 18.0000 bill; it earns value because a poor result leads to the sale, and uncertainty is reduced the same in both trees."
+ },
+ {
+  "prompt": "OKRIKA's later chances happen to agree with its earlier ones, 0.400000 x 0.750000 + 0.600000 x 0.200000 = 0.420000. What does the engine do with a tree whose later chances disagree?",
+  "options": [
+   "It refuses the tree, with the same message it gives a chance node whose probabilities do not sum to 1 within 1e-6.",
+   "It rescales the later probabilities until they reproduce the earlier chance, and then rolls the corrected tree back.",
+   "It rolls the tree back just the same, with no warning, because it has no link between chance nodes beyond the tree as drawn.",
+   "It rolls the tree back but marks every branch below the disagreeing chance nodes onOptimalPath false, so the reader can find them."
+  ],
+  "answer": 2,
+  "explanation": "The 1e-6 test looks at each chance node on its own; a tree whose appraisal results imply a different chance of a large field than the 0.420000 Develop now uses is accepted silently."
+ },
+ {
+  "prompt": "A published refusal places a chance node summing to 0.200000 two levels below an otherwise valid root. What comes back?",
+  "options": [
+   "A rollback of the valid parts, with the bad subtree valued at 0 and the message attached to the node named cc as a note.",
+   "A rollback with the bad node's probabilities scaled up to sum to 1, as a likely entry error.",
+   "A refusal only if the bad node lies under the root's best branch, since a branch the root would never take cannot move the answer.",
+   "A refusal of the whole tree: \"Chance branch probabilities sum to 0.200000, expected 1 (at node \"cc\")\"."
+  ],
+  "answer": 3,
+  "explanation": "Depth hides nothing from the checks and there is no partial rollback: a bad distribution anywhere refuses the tree, and on a valid tree like deepAlternation the root is 6.0000 only because every node below it passed."
+ },
+ {
+  "prompt": "The published chanceRootWithBranchCosts tree has calm at 0.600000 with cost 2.0000 over a child of 19.0000, and storm at 0.400000 with cost 8.0000 over -25.0000. The engine returns -3.0000. What produces -8.6000?",
+  "options": [
+   "Weighting the children first and subtracting both costs once afterwards, which charges each cost on the branch where it is not paid.",
+   "Charging each cost on its own branch before the root weights it, the engine's rule applied to a root that is a chance node.",
+   "Weighting each cost by its own branch probability and subtracting the result, the engine's order simply written the other way round.",
+   "Charging the storm cost of 8.0000 on its branch and again at the root, because a cost on a losing branch is counted against the whole tree."
+  ],
+  "answer": 0,
+  "explanation": "The engine pays 2.0000 only on calm and 8.0000 only on storm, giving branch values 17.0000 and -33.0000 and a root of -3.0000; taking both costs off the weighted sum charges each on every path."
+ },
+ {
+  "prompt": "In deepAlternation, push costs 6.0000 and sits under the up branch, which happens with probability 0.500000, while go costs 4.0000 at the root. Where is each cost paid?",
+  "options": [
+   "Both at the root, since a rollback gathers every cost in the tree and settles them once all the chance nodes have been weighted.",
+   "Push on both up and down, since a cost below a chance node is spread across its outcomes.",
+   "Push only on the up branch, before L1 weights it, and go on every path through the root's best branch.",
+   "Push only when win arrives, since a cost on the way into a chance node is charged against the outcome that justifies paying it."
+  ],
+  "answer": 2,
+  "explanation": "A cost is charged only when its branch is taken: L2 is 29.0000 less 6.0000 = 23.0000 against hold at 12.0000, L1 is 0.500000 x 23.0000 + 0.500000 x -3.0000 = 10.0000, and go makes the root 6.0000."
+ },
+ {
+  "prompt": "Which branches of deepAlternation read onOptimalPath false?",
+  "options": [
+   "Hold, stop, lose and down, every branch that leads somewhere worse than the best payoff available at its own node.",
+   "Hold and stop, the two decision branches the rollback did not take.",
+   "Stop, down and lose, the branches that end at a terminal paying less than the root's value of 6.0000.",
+   "Only stop, since hold sits beneath the root's best branch and everything under a taken branch stays on the path."
+  ],
+  "answer": 1,
+  "explanation": "A chance node does not choose, so up, down, win and lose all stay on the path under a taken branch; inside each decision only the best branch reads true, which leaves hold at 12.0000 and stop at 1.0000 off it."
+ },
+ {
+  "prompt": "deepAlternation rolls back to 6.0000 along a path that runs go, then up and down, then push, then win and lose. What is 6.0000?",
+  "options": [
+   "An average over paths that pay quite different amounts, none of which needs to be 6.0000.",
+   "The payoff of the most likely route through the tree, since the path follows the branches the rollback kept.",
+   "What the company receives if it follows the optimal path at every decision, whichever outcomes arrive along the way.",
+   "The worst the company can reach along the optimal path, once the costs of go and push have both been paid."
+  ],
+  "answer": 0,
+  "explanation": "Win after push pays 50.0000 before the costs of 6.0000 and 4.0000, and down pays -3.0000 before the 4.0000; the root weights these, so 6.0000 is a mean, and the path is a plan to follow with no forecast in it."
+ },
+ {
+  "prompt": "The Decision Tree Builder's drawing labels OKRIKA's development chance node after a good appraisal with its own value, 375.0000. What happens if that figure is weighted into the appraisal node?",
+  "options": [
+   "Nothing changes, because the drawing's label and the branch value are the same number whenever the branch lies on the optimal path.",
+   "The good branch is overstated by OKRIKA's sale price of 95.0000, which the drawing adds to the development as its fallback.",
+   "The appraisal branch comes out slightly low, because the label is rounded for display while the rollback weights the unrounded value.",
+   "The good branch is overstated by the whole 150.0000 development cost."
+  ],
+  "answer": 3,
+  "explanation": "A node label is the value before the cost on the branch into it; the appraisal node takes 225.0000 after a good result and 25.0000 after a poor one, and it never takes 375.0000 or 56.0000."
+ },
+ {
+  "prompt": "OKRIKA's appraisal cost of 18.0000 and development cost of 150.0000 are paid at different times, and its sale after a poor result is typed at 25.0000. What does the rollback check about either?",
+  "options": [
+   "It discounts the development cost by its depth, since each later layer stands for a later date.",
+   "It checks the sale after a poor result against the sale now at 48.0000 and refuses a later sale priced below today's.",
+   "Neither: it has no clock, so every number must arrive discounted to one date, and it takes each sale price as typed.",
+   "It discounts nothing but adds a risk premium at each layer, as a sequence carries more uncertainty."
+  ],
+  "answer": 2,
+  "explanation": "The engine is risk neutral with no discounting at every layer, and it does not ask whether a buyer would pay 25.0000 for a discovery just appraised as poor, although 25.0000 is below the 48.0000 on offer today."
+ }
+]

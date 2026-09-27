@@ -27,7 +27,7 @@ The CSEM survey shows a bright spot over 0.850000 of successes and 0.250000 of d
 
 ## Buying it
 
-At a survey cost of 8.0000 the net value is 16.8250, and the information tree shows it as a choice at its root: acquire at 92.5750 against no further information at 75.7500. The neutral price is the gross value, 24.8250, where the root branches tie and the engine keeps the acquisition, listed first.
+At a survey cost of 8.0000 the net value is 16.8250, and the information tree shows it as a choice at its root: acquire at 92.5750 against no further information at 75.7500. The neutral price is the gross value, 24.8250, where the root branches tie: the engine reports indifferent and marks the acquisition, listed first.
 
 ## Accuracy
 
@@ -35,11 +35,11 @@ A symmetric survey is worth 0.0000 until a dry reading can carry success under 0
 
 ## The Analyzer
 
-The VOI Analyzer takes posteriors as typed percents and offers two actions. The EKPAN lottery typed into it gives a gross value of 19.84 and a net value of 11.84, because after no bright spot it can only walk away. Its panel shows four cards, and the gross value is not one of them. The repaired Analyzer refuses percents that are not distributions and withholds the value when typed indicators contradict the stated chances, as on IRRI.
+The VOI Analyzer takes posteriors as typed percents and offers two actions. The EKPAN lottery typed into it gives a gross value of 19.84 and a net value of 11.84, because after no bright spot it can only walk away. Its panel shows four cards, and the gross value is not one of them. The Analyzer refuses percents that are not distributions and withholds the value when typed indicators contradict the stated chances, as on IRRI.
 
 ## What none of it does
 
-Every number here is risk neutral and undiscounted. The engines maximise the mean, keep the first branch in a tie, and refuse or withhold what cannot be true without repairing it.
+Every number here is risk neutral and undiscounted. The engines maximise the mean, report a tie and mark the first branch, and refuse or withhold what cannot be true without repairing it.
 
 ## Exercise
 

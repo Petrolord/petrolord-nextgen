@@ -95,7 +95,7 @@
         },
         {
           "key": "l05-clamps-and-defaults",
-          "title": "Clamps and defaults",
+          "title": "Refusals and defaults",
           "order": 5,
           "est_minutes": 12,
           "panels": [
@@ -221,12 +221,12 @@
     },
     {
       "key": "m05-the-grid-under-the-answer",
-      "title": "The Grid Under the Answer",
+      "title": "The Exact Solve and Its Fallback",
       "order": 5,
       "lessons": [
         {
           "key": "l01-an-exact-grid-and-a-coarse-one",
-          "title": "An exact grid and a coarse one",
+          "title": "An exact solve in any unit",
           "order": 1,
           "est_minutes": 13,
           "panels": [
@@ -236,7 +236,7 @@
         },
         {
           "key": "l02-a-set-over-the-limit",
-          "title": "A set over the limit",
+          "title": "A set that fits the limit",
           "order": 2,
           "est_minutes": 13,
           "panels": [
@@ -246,7 +246,7 @@
         },
         {
           "key": "l03-a-set-left-out",
-          "title": "A set left out",
+          "title": "A set the fallback leaves out",
           "order": 3,
           "est_minutes": 13,
           "panels": [
@@ -256,7 +256,7 @@
         },
         {
           "key": "l04-a-free-project-charged-a-cell",
-          "title": "A free project charged a cell",
+          "title": "A free project weighs nothing",
           "order": 4,
           "est_minutes": 12,
           "panels": [

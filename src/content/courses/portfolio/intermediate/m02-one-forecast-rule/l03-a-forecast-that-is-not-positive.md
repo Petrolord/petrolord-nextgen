@@ -1,6 +1,6 @@
 # A forecast that is not positive
 
-The entered forecast counts only when it is positive. A blank, a zero or a negative figure in the forecast field is passed over without a word, and the line is forecast at the larger of its budget and actual + commitment.
+The entered forecast counts only when it is positive. A blank, a zero or a negative figure in the forecast field is passed over, and the line is forecast at the larger of its budget and actual + commitment. Blank and zero mean no forecast was entered. A negative figure is replaced by the rule and flagged.
 
 {{panel:ec-cost-explorer}}
 
@@ -12,15 +12,15 @@ The entered forecast counts only when it is positive. A blank, a zero or a negat
 | --- | --- | --- | --- | --- | --- | --- |
 | 100 | 20 | 0 | -50 | 10 | 100.0000 | 0.0000 |
 
-The entered -50 is not positive, so the rule falls back. Actual + commitment is 20, the budget is 100, the larger is 100, and the EAC is 100.0000 with a variance of 0.0000. The S-curve's forecast series ignores the -50 as well, so the tiles and the curve agree.
+The entered -50 is not positive, so the rule falls back. Actual + commitment is 20, the budget is 100, the larger is 100, and the EAC is 100.0000 with a variance of 0.0000. The S-curve's forecast series ignores the -50 as well, so the tiles and the curve agree. The engine flags the line with forecastIgnored "negative" and counts it: lines with an ignored forecast 1.
 
-## Blank, zero and negative look the same
+## Blank, zero and negative give one forecast
 
-On OFON-1, CMP-05 has no entered forecast. Its budget is 5600000 and its actual + commitment is 1200000, so it forecasts 5600000. By the wording of the rule, the same line with a zero or a negative entered forecast forecasts exactly the same 5600000, because neither is positive. Three different things a person might have meant, "not yet estimated", "cancel this work" and a typing slip, produce one forecast, and the report cannot tell them apart.
+On OFON-1, CMP-05 has no entered forecast. Its budget is 5600000 and its actual + commitment is 1200000, so it forecasts 5600000. The same line with a zero or a negative entered forecast forecasts exactly the same 5600000, because neither is positive. The forecast cannot tell "not yet estimated" from "cancel this work". The flag separates the typing slip: CMT-03 with -5 entered forecasts 1250000 with forecastIgnored "negative", while CMT-03 with 0 entered forecasts 1250000 with forecastIgnored null.
 
-## Ignored is not refused
+## Ignored and flagged
 
-The engine refuses some bad inputs out loud. A negative progress figure stops the calculation with a message that names the cost item, such as "Cost item "Completion" has negative progress (-0.5 percent). Progress runs from 0 to 100 percent." A negative forecast gets no such message. It is dropped and the line carries on. Nothing on the screen says the typed figure was never used.
+The engine refuses some bad inputs out loud. A negative progress figure stops the calculation with a message that names the cost item, such as "Cost item "Completion" has negative progress (-0.5 percent). Progress runs from 0 to 100 percent." A negative forecast gets no refusal. It is replaced and the line carries on, with forecastIgnored "negative" on the line and the count in linesForecastIgnored on the AFE, so a reviewer can see that a typed figure was never used.
 
 ## What it refuses
 

@@ -27,7 +27,7 @@ Nothing inside the survey branch responds to the price. The chance of a bright s
 
 ## The flip
 
-The root chooses "Acquire CSEM survey" up to and including 24.8250, where the branches tie and the first listed is kept, and "No further information" at 28.0000 and 32.0000. The root value is the larger branch: 92.5750 at a cost of 8.0000, and 75.7500 once the survey is dearer than its gross value. The root never falls below 75.7500, because declining the survey is always available.
+The root chooses "Acquire CSEM survey" up to and including 24.8250, where the branches tie (the engine reports indifferent) and the first listed is marked, and "No further information" at 28.0000 and 32.0000. The root value is the larger branch: 92.5750 at a cost of 8.0000, and 75.7500 once the survey is dearer than its gross value. The root never falls below 75.7500, because declining the survey is always available.
 
 ## Published cases
 
@@ -37,7 +37,7 @@ The root chooses "Acquire CSEM survey" up to and including 24.8250, where the br
 | costExactlyNetZero | 43.0000 | 43.0000 | 0 | 43.0000 |
 | seismicCost20 | 35.5000 | 43.0000 | 1 | 43.0000 |
 
-The same pattern holds on the published seismic prospect. Its survey's evWithInfo is 55.5000, so each acquire branch is 55.5000 less the price, while the no-information branch stays at 43.0000 in every case. The exact tie keeps the first branch listed, and the dearer survey sends the root back to 43.0000.
+The same pattern holds on the published seismic prospect. Its survey's evWithInfo is 55.5000, so each acquire branch is 55.5000 less the price, while the no-information branch stays at 43.0000 in every case. At the exact tie the engine reports indifferent and marks the first listed, and the dearer survey sends the root back to 43.0000.
 
 ## What the sweep assumes
 

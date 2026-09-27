@@ -28,7 +28,7 @@ A positive net value says buy on EMV grounds, and a negative one says do not. Th
 | costEqualsValue | 12.5000 | 0.0000 |
 | costAboveValue | 12.5000 | -7.5000 |
 
-The survey, its posteriors and its gross value are identical in all three rows. At a net value of 0.0000 the survey exactly pays for itself.
+The survey, its posteriors and its gross value are identical in all three rows. At a net value of 0.0000 the survey costs what it is worth.
 
 ## Project value and survey value
 

@@ -24,7 +24,7 @@ The EKPAN information tree roots on acquiring the survey at 92.5750 against no f
 
 ## A tie
 
-The published equalEmvTie has root branches A 30.0000, B 30.0000 and C 29.9990. The brief prints Optimal EMV 30.0000, Recommended first move "A", Next best alternative 30.0000 and Decision advantage 0.0000. The engine keeps the first branch listed when a later one is only equal, so "A" is recommended because it comes first. An advantage of 0.0000 beside a named first move is a tie reported as a recommendation.
+The published equalEmvTie has root branches A 30.0000, B 30.0000 and C 29.9990. The brief prints Optimal EMV 30.0000, Recommended first move Indifferent: "A", "B" and "C" come to the same figure, Next best alternative 30.0000 and Decision advantage "Indifferent at the precision shown". A and B tie on value, and C at 29.9990 rounds to the same 30.00 card, so the brief names all three and recommends none of them.
 
 ## What the advantage does not say
 

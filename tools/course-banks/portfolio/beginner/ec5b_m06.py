@@ -1,0 +1,131 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# EC5 portfolio, beginner tier, The Associate Reading. Reconstructed from the served rows (the applied
+# migrations replayed on a local scratch database) with the EC5 engine re-cut applied;
+# written by tools/course-waves/portfolio/recut/build.py. Edit the rows there, then re-run it.
+
+q(3,
+ "OK-3 has a pos of 0.250000, a success-case NPV of 420.0000 million USD and a fail_cost of 85.0000. What is it worth to the programme?",
+ "41.2500 risked, 0.098214 of its success-case NPV.",
+ ["420.0000, the value the well delivers when it works, which is the outcome an exploration programme is drilled for.",
+  "The chance-weighted success case with the 85.0000 fail cost left out, because the loss is already sunk in the capex.",
+  "The success case less the fail cost, weighted by pos, which charges the 85.0000 only in the case the well works."],
+ "0.250000 x 420.0000 - 0.750000 x 85.0000 = 41.2500. Success-case NPV is what happens if the well works; risked EMV is what the chance of it working is worth.")
+
+q(1,
+ "Step one of the method compares a hand-risked EMV with the explorer's column, and a row disagrees. What does the method say a mismatch means?",
+ "An input was typed wrong, or a default fired: a pos left out read as 1, or a negative fail_cost read as 0.",
+ ["The explorer's value comes from the seeded Monte Carlo, so it differs from the closed form by simulation noise at 10000 iterations.",
+  "The explorer discounts the fail cost over the project life, which a hand calculation in one line cannot reproduce.",
+  "The grid rounded the project's value to a whole cell, and the hand value is the unrounded figure."],
+ "Risked EMV is closed form, pos x npv_p50 - (1 - pos) x fail_cost. nullPosIsDefault returns 80.0000 and negativeFailCostIsZero 40.0000; a pos over 1 is refused by project name before it reaches the column.")
+
+q(0,
+ "Ranked by risked EMV per million USD, OK-3 comes last at 0.458333, yet the optimizer funds it at 450.0000. Why?",
+ "It fills the space the ranking leaves: swapping OK-5 for OK-3 adds 3.2500 for 30.0000 and lifts 287.7500 to 291.0000.",
+ ["Its success-case NPV of 420.0000 is the largest in the inventory, and the optimizer breaks near-ties toward upside.",
+  "The ranking is computed on success-case NPV, and on risked EMV OK-3 actually ranks first per million USD.",
+  "The optimizer funds the cheapest projects first, and OK-3's 90.0000 is the lowest capex left after OK-5."],
+ "Greedy funds OK-1, OK-4 and OK-5 at 420.0000 for 287.7500 and cannot use the last 30.0000. The best set is not the best projects.")
+
+q(2,
+ "OKONO is solved exactly at every limit. On an inventory whose result reads solveMethod \"grid-feasible\", which checks does the method require even when overLimit reads false?",
+ "Read optimalityGap as the most risked EMV the set may leave out, and look for a left-out project that would still fit in money.",
+ ["None beyond the flag, since the fallback rounds every weight up and so its answer can be quoted without checking.",
+  "Re-run the optimizer on an exact solve chosen in the Studio, and quote whichever answer has the larger EMV.",
+  "Compare the funded set with the frontier's last point, since the two disagree whenever rounding has moved the answer."],
+ "overLimit reads false on every answer, fallback included. On gridUndershootFallback the fallback funds X + Y + Z for 660.0000 with its bound stated beside it, and W at 1499.0000 would still fit the money left.")
+
+q(2,
+ "A graded question solves OKONO at 450.0000 and then at 600.0000. Two shortcuts tempt: add OK-5 to the smaller set, or cut OK-2 from the larger one. How do they compare with solving each budget afresh?",
+ "Adding OK-5 reaches 329.0000 against 402.7500, and cutting OK-2 reaches 287.7500 against 291.0000; both fall short.",
+ ["Adding OK-5 reaches 402.7500 exactly, since the larger optimum is the smaller one with the projects that fit added on.",
+  "Cutting OK-2 reaches 291.0000 exactly, because the smaller optimum is always a subset of the larger one.",
+  "Both reach their budget's optimum, since two budgets on one frontier share every funded set up to the smaller limit."],
+ "291.0000 plus 38.0000 is 329.0000 at 510.0000, and 402.7500 less 115.0000 is 287.7500. OK-3 is in one optimum and not the other, so the sets are not nested.")
+
+q(0,
+ "Step six quotes the 450.0000 set's risk as P(loss) 0.123600. Why must the seed and the iterations be quoted beside it?",
+ "The figure is counted from a seeded Monte Carlo, seed 20260829 and 10000 iterations here, and the seed and count are what make it reproducible.",
+ ["They record the normal approximation's inputs, from which P(loss) is computed in closed form like risked EMV.",
+  "They identify the grid the optimizer solved on, which decides the funded set whose risk is being reported.",
+  "They are how the engine turns a probability into a percentile, so that 0.123600 can be quoted as the programme's P90."],
+ "emv and stdDev are closed form, while probLoss, p90 and p10 come from the simulation. The 600.0000 set on the same seed and iterations reads 0.001800.")
+
+q(3,
+ "OKONO's 450.0000 set shows a P90 of -18.3574 million USD. What does that number say?",
+ "The low case of simulated portfolio NPV is a loss, which fits a P(loss) of 0.123600.",
+ ["There are nine chances in ten that the programme loses 18.3574, since the label names the probability of the loss it prints.",
+  "The high case of the programme, the value beaten only one time in ten, so the programme is expected to lose money.",
+  "A cost overrun of 18.3574 on the funded capex in the low case, since the simulation draws spending as well as value."],
+ "P90 under the exceedance convention is the 10th percentile of simulated NPV. The 600.0000 set's P90 of 200.3575 sits well above zero, beside a P(loss) of 0.001800.")
+
+q(1,
+ "One inventory has a row with a capex of -150, and another has a row with a negative risked EMV. What does the engine do with each?",
+ "It refuses the first run with a PortfolioInputError, and solves the second but never funds the negative row.",
+ ["It clamps the negative capex to 0 and funds the row free, and funds the negative row only if the budget is large enough.",
+  "It refuses both, since a negative number anywhere in a project row is an invalid input the engine will not solve.",
+  "It solves the first with the capex read as a refund that adds to the limit, and drops the second before solving."],
+ "A negative capex such as -150 is refused outright. The published negativeEmvHugeBudget case leaves its row at -44.0000 out even at a limit of 10000.0000.")
+
+q(0,
+ "OFON-1's budget is 27050000 and OKONO's limit is 450.0000. Why does the method never set one against the other?",
+ "They are different models: OKONO is a capital inventory in million USD across projects, OFON-1 an AFE in whole USD across cost lines.",
+ ["They can be compared once OFON-1 is divided by a million, since both are dollars and the AFE is simply one project's spend.",
+  "OFON-1 is the AFE for OK-1, so its budget is a line inside OKONO's limit and must not be counted twice.",
+  "The AFE budget moves with the as-of date while the limit is fixed, so the two are never read on one date."],
+ "The two share nothing: OFON-1 runs a window from 2027-02-01 to 2027-11-30 across five cost lines, and its numbers are never mixed with OKONO's.")
+
+q(3,
+ "OFON-1's line CSG-02 has spent 4300000 against a budget of 3900000 with no entered forecast. What does it forecast, and why?",
+ "4300000, the larger of its budget and its actual plus commitment.",
+ ["3900000, since a line with no entered forecast carries its budget as its forecast until one is typed.",
+  "The actual less the budget, the overrun alone, since a forecast reports only what remains to be spent on the line.",
+  "Nothing until a forecast is entered, since the forecast rule refuses a line whose forecast is not positive."],
+ "The AFE's estimate at completion is 27600000, a variance at completion of -550000. A forecast copied from the budget would hide CSG-02's overrun.")
+
+q(2,
+ "OFON-1 earns 15231500 with CPI 1.009377 at 2027-06-30 and again at 2027-08-15, while SPI reads 1.141290 and then 0.872063. Why does only SPI move?",
+ "Earned value and actuals do not depend on the date; planned value comes from the calendar, so SPI changes with the as-of date.",
+ ["CPI is actuals over earned value and is fixed at the start of the window, while SPI is recomputed each month from the invoices received to date.",
+  "Progress was re-entered between the two reports, which moves SPI but not CPI because CPI ignores progress.",
+  "SPI is read from the S-curve, whose forecast jumps after the as-of date, while CPI is read from the budget and the actuals, which no date can change."],
+ "CPI is earned value over actuals, 15231500 over 15090000 at every date. Planned value rises through the window, so the same earned value reads ahead in June and behind in August.")
+
+q(1,
+ "OFON-1's last monthly S-curve point, \"Nov 27\", plans 24452483 against a budget of 27050000. What does the gap mean?",
+ "Nothing at the well: the curve closes on a point dated the window end, \"30 Nov 27\", which plans the whole 27050000.",
+ ["An underspend of the plan, since the budget was phased to finish below its total and the rest is held as contingency.",
+  "The work running behind schedule by that amount, since a Planned point below budget means progress fell short.",
+  "A curve that stops short of the window end, which leaves the last days of plan off the chart."],
+ "The closing point \"30 Nov 27\" carries Planned 27050000, the budget, and Forecast 27600000, the EAC; it adds the remaining 2597517 of plan after \"Nov 27\".")
+
+q(3,
+ "A report states only 'SPI 0.872063' and 'funded set worth 291.0000'. What is missing from each figure?",
+ "Its basis: the as-of date 2027-08-15 for the SPI and the limit 450.0000 for the funded set.",
+ ["Its seed and iterations, as though both were simulated.",
+  "Its unit alone, since USD for the SPI and million USD for the set would settle both readings.",
+  "Its sign convention, since SPI and risked EMV both invert when the reporting currency changes."],
+ "An SPI read with no date means nothing: OFON-1 reads 1.141290 at 2027-06-30 and 0.872063 at 2027-08-15. A funded set is the answer at one limit, and at 600.0000 the value is 402.7500.")
+
+q(0,
+ "Every step of the method checks out on OKONO at 450.0000: rows risked by hand, solveMethod \"exact\", the set proven at 291.0000 and the greedy set beaten. What does that still not prove?",
+ "That the inputs were right: the arithmetic is proven, but no step can show that a pos or a fail_cost was a good estimate.",
+ ["That the set is the optimum, since a proof by hand covers only the three funded projects and says nothing about the three left out of the set.",
+  "That the frontier's last point matches the funded set, which only the Monte Carlo can confirm.",
+  "That the solve was exact, since solveMethod can read \"exact\" while a capex typed with decimals is rounded."],
+ "The method funds projects whole, uses one average correlation and assumes a normal success spread. OK-3's 41.2500 is only as good as its pos of 0.250000 and its fail_cost of 85.0000.")
+
+q(1,
+ "OK-3 is out of the OKONO set at 300.0000, in at 450.0000, out at 600.0000 and back at 750.0000. What does that path show?",
+ "Each budget is solved afresh over the whole inventory, so a project's place in one funded set promises nothing at another limit.",
+ ["OK-3 is marginal at 0.458333 per million USD, so the optimizer rotates it in and out of the funded set to spread the exploration risk across budgets.",
+  "The grid rounds OK-3's 90.0000 differently at each limit, which moves it across the edge of the knapsack.",
+  "The optimizer builds each larger set on the one before and removes OK-3 whenever a better project is added."],
+ "At 450.0000 OK-3 fills the 30.0000 greedy leaves, for 291.0000; at 600.0000 the set is OK-1, OK-2, OK-4 and OK-5 at 402.7500 without it. The solve is exact, so nothing is rounded.")
+
+emit(Q, '/root/wt-ec45-recut/tools/course-banks/portfolio/beginner/ec5b_m06.json', expect_n=15)
+finish()

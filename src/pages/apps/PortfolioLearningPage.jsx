@@ -49,12 +49,12 @@ const LESSONS = [
     body: 'The funded set at five limits, money left unspent, and why filling greedily by EMV per million USD can lose to the optimum.' },
   { tier: 'Associate', title: 'The efficient frontier',
     body: 'The best risked EMV at every spend, the value of the next million USD, and funded sets that are not nested.' },
-  { tier: 'Associate', title: 'The grid under the answer',
-    body: 'The optimizer works on a grid. On a fractional or large limit it can overshoot, now flagged, or undershoot, still unflagged.' },
+  { tier: 'Associate', title: 'The exact solve and its fallback',
+    body: 'The funded set is solved exactly on the capex as typed, in any unit. Above a stated size a grid with every weight rounded up takes over, and reports how much it may leave out.' },
   { tier: 'Associate', title: 'The Associate reading',
-    body: 'OKONO end to end: what is funded at each budget, what it is worth risked, and what the grid did to the answer.' },
+    body: 'OKONO end to end: what is funded at each budget, what it is worth risked, and what one project adds to the set.' },
   { tier: 'Professional', title: 'An AFE is a promise',
-    body: 'Lines, budgets, commitments and actuals in the AFE currency, and invoices that the S-curve reads instead of the lines.' },
+    body: 'Lines, budgets, commitments and actuals in the AFE currency, and the invoices the S-curve reads beside the lines.' },
   { tier: 'Professional', title: 'One forecast rule',
     body: 'The entered forecast when it is positive, otherwise the larger of the budget and actual plus commitment, on every screen.' },
   { tier: 'Professional', title: 'Earned value',
@@ -62,19 +62,19 @@ const LESSONS = [
   { tier: 'Professional', title: 'The as-of date',
     body: 'Planned value, time progress and SPI move with the as-of date and nothing else does. On the start day SPI is null.' },
   { tier: 'Professional', title: 'The S-curve',
-    body: 'Monthly plan, actual and forecast over the window, a plan that stops short of the budget, and a forecast that ignores actuals.' },
+    body: 'Monthly plan, actual and forecast over the window, a closing point dated the window end, and a forecast that ignores actuals after the as-of date.' },
   { tier: 'Professional', title: 'The Professional reading',
     body: 'OFON-1 end to end at a stated date: EAC, variance at completion, earned value, CPI and SPI.' },
   { tier: 'Expert', title: 'Portfolio risk by simulation',
-    body: 'The chance of loss and the low and high cases come from a seeded simulation of success and failure, not a normal curve.' },
+    body: 'The chance of loss and the low and high cases come from a seeded simulation of success and failure, set beside a normal curve and the exact answer.' },
   { tier: 'Expert', title: 'Correlation',
     body: 'One rho widens the spread and leaves the mean alone, and the closed-form spread and the simulated one are two models.' },
   { tier: 'Expert', title: 'Joint venture shares',
-    body: 'The operator carries what the partners do not. An over-allocated or negative split is shown and flagged, never billed quietly.' },
+    body: 'The operator carries what the partners do not. An over-allocated or negative split is shown with the engine note beside it.' },
   { tier: 'Expert', title: 'Refusals and flags',
-    body: 'What the engines decline to compute, what they compute and flag, and the findings left unrepaired as properties.' },
+    body: 'What the engines decline to compute, the flags they raise without refusing, and the properties the course teaches as they stand.' },
   { tier: 'Expert', title: 'Numbers to distrust',
-    body: 'CPI of 1 before any spend, an undated invoice counted from 1970, a plan short of its budget, and a seed that buys only repeatability.' },
+    body: 'A CPI that is null before any spend, an invoice with no date, an overrun read off the curve, and a seed that buys only repeatability.' },
   { tier: 'Expert', title: 'The Expert reading',
     body: 'Risk, correlation and shares read together, with what a portfolio model cannot tell you.' },
 ];
@@ -199,8 +199,9 @@ const PortfolioLearningPage = () => {
                 exploration well {lab.hand.id} would be worth {fmt(lab.hand.npvP50)} million USD if it worked and carries
                 {' '}{fmt(lab.hand.emv)} risked. The teaching AFE OFON-1, read as of {lab.e.ofon.asOf}, forecasts
                 {' '}{fmt(lab.e.ofon.eac, 0)} USD at completion against its budget, a variance of {fmt(lab.e.ofon.variance, 0)} USD,
-                with a CPI of {fmt(lab.e.ofon.cpi, 6)} and an SPI of {fmt(lab.e.ofon.spi, 6)}. The same curve&apos;s last forecast point
-                shows {fmt(lab.d.underrunPicture.lastForecast, 0)} USD, below the budget: an overrun drawn as an underrun.
+                with a CPI of {fmt(lab.e.ofon.cpi, 6)} and an SPI of {fmt(lab.e.ofon.spi, 6)}. The same curve&apos;s last monthly point,
+                {' '}{lab.d.overrun.lastMonthlyLabel}, shows {fmt(lab.d.overrun.lastMonthlyForecast, 0)} USD; the overrun appears only on the closing
+                point, where the forecast reads {fmt(lab.d.overrun.closingForecast, 0)} USD against a plan of {fmt(lab.d.overrun.closingPlanned, 0)} USD.
                 {' '}This course is where each of those numbers comes from, and which of them to distrust.
                 {gate.quota?.own_data_upload === false && ' Your own data upload unlocks at the Associate tier.'}
               </p>
@@ -255,8 +256,10 @@ const PortfolioLearningPage = () => {
                   <>
                     {' '}On a limit of {fmt(lab.b.greedy.limit, 0)} million USD a greedy fill by EMV per million USD funds
                     {' '}{setLabel(lab.b.greedy.ids)} for {fmt(lab.b.greedy.emvDerived)}, while the optimizer finds {fmt(lab.b.greedy.optimalEmv)}.
-                    {' '}With every actual set to 0 the AFE engine still reports a CPI of {fmt(lab.d.cpiBeforeSpend.cpi, 6)}, and
-                    OFON-1&apos;s monthly plan stops {fmt(lab.d.shortPlan.shortDerived, 0)} USD short of its own budget.
+                    {' '}With every actual set to 0 the AFE engine reports no CPI at all (cpiStatus
+                    {' '}&quot;{lab.d.cpiBeforeSpend.cpiStatus}&quot;): value earned with nothing spent has no cost efficiency to report.
+                    {' '}OFON-1&apos;s last monthly point plans {fmt(lab.d.overrun.lastMonthlyPlanned, 0)} USD, and only the closing point
+                    {' '}reaches the budget of {fmt(lab.d.overrun.closingPlanned, 0)} USD.
                   </>
                 )}
                 {' '}None of this is an investment decision. It is the arithmetic under one, and the judgement stays with the
