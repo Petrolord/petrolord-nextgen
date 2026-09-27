@@ -6,9 +6,8 @@
 // file's expected figures, the fixture README, the negative control and the
 // engine's own source comments are PROVENANCE. Where they state a figure this
 // file recomputes it through the engine on the vendored golden INPUTS, on the
-// fixture, or on stated inputs, and prints it. (FINDINGS-farmout.md is not in
-// the engines tree at 944b8d2; the sources are cited from the texts
-// themselves, pinned by quote_check.py.)
+// fixture, or on stated inputs, and prints it. FINDINGS-farmout.md is
+// PROVENANCE too; the digest checks its source table and quotes one line.
 //
 // Usage:  sh /root/cat-wip-farmout/build_digest.sh > digest.tmp && mv digest.tmp digest.txt
 // Build THROUGH A TEMP FILE. A gate that reads a half written digest finds no
@@ -58,6 +57,7 @@ const GOLD = JSON.parse(fs.readFileSync(`${ROOT}/test-data/economics/goldens/far
 const FX = JSON.parse(fs.readFileSync(`${ROOT}/test-data/economics/ekene-farmout/ekene-farmout.json`, 'utf8'));
 const FXREADME = fs.readFileSync(`${ROOT}/test-data/economics/ekene-farmout/README.md`, 'utf8');
 const NEGCONTROL = fs.readFileSync(`${ROOT}/tools/validation/economics/negcontrol_farmout.sh`, 'utf8');
+const FINDINGS = fs.readFileSync(`${ROOT}/tools/validation/economics/FINDINGS-farmout.md`, 'utf8');
 const CONCEPTS = JSON.parse(fs.readFileSync(process.env.EC10_CONCEPTS || `${HERE}/concepts.json`, 'utf8'));
 const MODULES = JSON.parse(execFileSync('python3', [`${HERE}/structure.py`, '--modules'], { encoding: 'utf8' }));
 
@@ -168,7 +168,7 @@ w('# THIS FILE IS THE ONLY TEACHING TRUTH FOR THIS COURSE. Every number in every
 w();
 w('# PRECISION. Every amount of money, value, EMV, payment, cost, carry, fee, surcharge, price, NPV, balance, percentage, share, interest, promote, ratio, probability and chance prints to SIX decimals; years, day counts, event counts, draws, seeds and whole inputs print as whole numbers; a figure of sixteen or more significant digits at six decimals prints with its thousands grouped by commas; an engine message, reason and basis is printed verbatim, figures and all. Inside a message the engine prints money rounded to the cent (half away from zero, trailing zeros dropped), a computed percentage, probability or ratio to six decimals (trailing zeros dropped), and a stated input as it was given.');
 w();
-w(`# ENGINE. ${ENGINE_REL}, vendored sha-identical with petrolord-engines 944b8d2 (engines PR #272), ${engineLines} lines, with its whole runtime closure under its own root in the NextGen repository. It imports applyJV and npv from engines/economics/cashflow.ts, rollback, evpi and evii from engines/economics/decisionTree.js, portfolioRiskMetrics from engines/economics/portfolio.js, calculatePartnerCosts from engines/economics/afe.js, and carryRecovery and backIn from engines/economics/jointVenture.js, and nothing else. It makes no network call.`);
+w(`# ENGINE. ${ENGINE_REL}, vendored sha-identical with petrolord-engines b7d305b (engines PRs #272, #273 and #274), ${engineLines} lines, with its whole runtime closure under its own root in the NextGen repository. It imports applyJV and npv from engines/economics/cashflow.ts, rollback, evpi and evii from engines/economics/decisionTree.js, portfolioRiskMetrics from engines/economics/portfolio.js, calculatePartnerCosts from engines/economics/afe.js, and carryRecovery and backIn from engines/economics/jointVenture.js, and nothing else. It makes no network call.`);
 w();
 w('# AN ENGINE COURSE. There is no Suite app for this course. Every practical runs in the course\'s own calculator panels, which call this same vendored engine on the learner\'s own deal terms.');
 w();
@@ -248,7 +248,15 @@ const HMRC_DATES = { OT18320: '2019-01-23', OT18360: '2019-01-23', OT30020: '201
 const HMRC_TXT = fs.readFileSync(`${HERE}/sources/hmrc_ot.txt`, 'utf8');
 Object.entries(HMRC_DATES).forEach(([k, d]) => must(`the HMRC page ${k} was read as updated ${d}`, new RegExp(`/${k.toLowerCase()} \\| [^|]+ \\| updated ${d}T`).test(HMRC_TXT), k));
 w();
-w('WHERE NO PUBLIC TEXT PRINTS A WORKED SCHEDULE. No public text read for this course prints a worked farm-in schedule: an earning obligation with a cap, a break-even promote, a consent fee with its surcharge, or a development carry after a farm-in with its recovery year by year. Those figures are the stated deal arithmetic, run by the engine on stated terms. The one published worked figure is the Penn State problem, which ' + ref('dealvalue') + ' reproduces from its printed numbers.');
+must('FINDINGS records every source as read on 2026-09-27', FINDINGS.includes('## Sources (all read 2026-09-27)'), 'read date');
+[['5d158ca8a16f00b2', 'the PIA 2021 PDF'], ['af705aca5707b7ad', 'the Regulations PDF'], ['5a6712149a249bf2', 'OT30021'], ['68a35945c48dd12f', 'OT18360'], ['191c65725eb41d52', 'the Penn State page']].forEach(([h, what]) => must(`FINDINGS records the sha256 prefix of ${what}`, FINDINGS.includes(h), h));
+w('The validation record, FINDINGS-farmout.md, lists the same four texts with the sha256 of each file read, and this digest was checked against it when built.');
+w();
+w('WHERE NO PUBLIC TEXT PRINTS A WORKED SCHEDULE. The validation record states, verbatim:');
+const NOPUB = FINDINGS.match(/No public text prints a farm-in schedule or a break-even promote: those goldens come from the stated deal arithmetic in the oracle\./);
+must('FINDINGS records that no public farm-in schedule exists', !!NOPUB, 'no public schedule');
+quote(NOPUB ? NOPUB[0] : '');
+w('The earning obligation, cap, break-even, consent fee and carry figures of this course are therefore the stated deal arithmetic, run by the engine on stated terms. The one published worked figure is the Penn State problem, which ' + ref('dealvalue') + ' reproduces from its printed numbers.');
 w();
 w('The engine carries its citations in its own words. The `basis.source` of one call of each kind, verbatim:');
 w();
@@ -870,7 +878,26 @@ reasons(dre.reasons.slice(-1));
 w();
 w('THE UPLIFT FORM, the engine\'s note (devcarry-ekene), verbatim:');
 quote(devE.basis.note);
-w(`HMRC's manual says the recovery usually includes "an addition representing simple interest" (${C('hmrc_ot18360_simple_interest').cite}); the engine states the uplift as none, compound or a multiple, a required input, and the capstone states its own. ${refCap('readings')} records this as a reading.`);
+w(`HMRC's manual says the recovery usually includes "an addition representing simple interest" (${C('hmrc_ot18360_simple_interest').cite}), and OT30022 says the costs are recovered "probably with an interest element" (${C('hmrc_ot30022_recovered').cite}). The engine states the uplift as none, simple, compound or a multiple, a required input with no default, and the contract chooses.`);
+w();
+const devS = runG('devcarry-ekene-simple-ot18360');
+w(`A SIMPLE-INTEREST UPLIFT (golden input devcarry-ekene-simple-ot18360: the fixture's carry with uplift type "${argsOf('devcarry-ekene-simple-ot18360').uplift.type}", ${f6(argsOf('devcarry-ekene-simple-ot18360').uplift.ratePctPerYear)} percent a year, day basis "${argsOf('devcarry-ekene-simple-ot18360').uplift.dayBasis}"). The rule, in the engine's basis, verbatim:`);
+quote(devS.basis.uplift);
+w();
+table(['year', 'opening principal', 'uplift (simple interest)', 'carried cost added', 'due', 'available for recovery', 'recovered', 'of which interest', 'of which principal', 'principal after', 'accrued interest after', 'closing'], devS.ledger.filter((l) => l.year <= devS.recoveredInYear).map((l) => [S(l.year), f6(l.openingPrincipal), f6(l.uplift), f6(l.added), f6(l.due), f6(l.available), f6(l.recovered), f6(l.interestPaid), f6(l.principalPaid), f6(l.principalAfter), f6(l.accruedInterestAfter), f6(l.closing)]));
+w();
+w('The engine\'s reasons, verbatim:');
+reasons(devS.reasons);
+w();
+w(`SIMPLE AND COMPOUND AT THE SAME RATE. At ${f6(argsOf('devcarry-ekene-simple-ot18360').uplift.ratePctPerYear)} percent a year both forms recover the Ekene carry in ${S(devS.recoveredInYear)}; the simple form adds ${f6(devS.totals.uplift)} in all and the compound form ${f6(devE.totals.uplift)} (engine). The 2031 uplift shows why: simple interest is charged on the principal of ${f6(yr(devS.ledger, 2031).openingPrincipal)} alone (${f6(yr(devS.ledger, 2031).uplift)}), compound interest on the whole opening balance of ${f6(yr(devE.ledger, 2031).opening)}, which carries the 2030 uplift (${f6(yr(devE.ledger, 2031).uplift)}).`);
+must('both forms recover in 2036 and simple adds less', devS.recoveredInYear === 2036 && devE.recoveredInYear === 2036 && devS.totals.uplift < devE.totals.uplift, `${devS.totals.uplift} ${devE.totals.uplift}`);
+must('the 2031 simple uplift is 8 percent of the opening principal', Math.abs(yr(devS.ledger, 2031).uplift - 0.08 * yr(devS.ledger, 2031).openingPrincipal) < 1e-6, yr(devS.ledger, 2031).uplift);
+const a365 = argsOf('devcarry-ekene-simple-ot18360'); a365.uplift.dayBasis = 'actual/365';
+const s365 = success('developmentCarry on devcarry-ekene-simple-ot18360 with dayBasis "actual/365" (stated probe)', E.developmentCarry(a365));
+const y32 = yr(s365.ledger, 2032);
+w(`A DAY BASIS. "annual-period" counts each ledger year as one year; "actual/365" and "actual/360" count the days of the calendar year over 365 or 360. On the same carry with dayBasis "actual/365" (stated probe), 2032 has ${S(y32.yearDays)} days and its uplift is ${f6(y32.uplift)} against ${f6(yr(devS.ledger, 2032).uplift)} (engine); the 2032 reason, verbatim:`);
+quote(s365.reasons.find((t) => /^2032: 8% a year simple interest/.test(t)));
+must('2032 has 366 days under actual/365 and its uplift is 366/365 of the annual-period uplift', y32.yearDays === 366 && Math.abs(y32.uplift - yr(devS.ledger, 2032).uplift * 366 / 365) < 1e-6, y32.uplift);
 w();
 const biE = runG('backin-ekene');
 const biP = runG('backin-ekene-pia');
@@ -901,9 +928,9 @@ w(`The regulation says "within 90 days of notification" (${C('aoi_19_7_ninety_da
 w();
 w(`READING THREE: THE NINETIETH SURCHARGE DAY. The regulation imposes the surcharge "for 90 days failing which the consent is deemed withdrawn" (${C('aoi_19_9_surcharge').cite}). The engine charges the ninetieth surcharge day and deems the consent withdrawn from the ninety-first (fee-day-210 and fee-day-211); the other reading would withdraw it on the ninetieth.`);
 w();
-w('READING FOUR: THE UPLIFT OF A DEVELOPMENT CARRY. The engine\'s note (devcarry-ekene), verbatim:');
-quote(devE.basis.note);
-w('The contract states the form; the engine offers none, compound or a multiple, and a simple-interest form is not among them in this engine version.');
+w('READING FOUR: HOW A SIMPLE-INTEREST UPLIFT IS PAID. The engine\'s basis (devcarry-ekene-simple-ot18360), verbatim:');
+quote(devS.basis.uplift);
+w(`HMRC's manual says only that the recovery usually includes "an addition representing simple interest" (${C('hmrc_ot18360_simple_interest').cite}); it does not say whether a recovery pays the interest or the principal first. The engine pays the accrued interest first, then the principal, and charges interest on the outstanding principal only; paying principal first would leave more principal outstanding to earn interest. It acts only when a carry states uplift type "simple".`);
 w();
 w('THE VALUE OF THE TRANSACTION IS A STATED INPUT. The engine\'s basis (fee-ekene), verbatim:');
 quote(feeE.basis.value);
@@ -979,7 +1006,6 @@ table(['not computed', 'where it comes from', 'what the engine does instead'], [
   ['a decommissioning and abandonment plan funded by the incoming parties', 'PIA s.233(10)', 'nothing; concept only'],
   ['the tax on the deal (capital gains, hydrocarbon tax, companies income tax)', 'HMRC Oil Taxation Manual (UK); PIA s.264(f) and s.302(12)(c) for the fee', 'reports the fee as not tax deductible'],
   ['royalty, net profit and other subordinated interests granted as consideration', 'HMRC OT18320 and OT30131', 'nothing; a subordinated interest is valued outside'],
-  ['a simple-interest uplift on a development carry', 'HMRC OT18360', 'none, compound or a multiple (' + ref('readings') + ')'],
   ['well costs discounted to their own dates', 'the valuation timing', 'costs at the valuation date (' + ref('readings') + ')'],
   ['a market value for an interest', 'a transaction market', 'value per percent of stated figures and ratios of stated prices'],
   ['when a back-in is triggered', 'the contract', 'the caller reports the event and states the target'],

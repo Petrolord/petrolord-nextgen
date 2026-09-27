@@ -9,9 +9,10 @@ things and prints every count:
      2026-09-27 (the PIA 2021 gazette PDF and its text, the Assignment of
      Interests Regulations 2024 gazette PDF and its text, the nine HMRC Oil
      Taxation Manual pages as the GOV.UK content API returned them, the Penn
-     State EME 801 page) hash to the sha256 prefixes PINNED below. The engine's
-     FINDINGS-farmout.md is not in the engines tree at 944b8d2, so the pins
-     live here; hmrc_ot.txt is re-derived from the pinned JSON by
+     State EME 801 page) hash to the sha256 prefixes PINNED below, and every
+     prefix the vendored FINDINGS-farmout.md records (the two gazette PDFs,
+     OT30021, OT18360, the Penn State page) is the pinned one; hmrc_ot.txt is
+     re-derived from the pinned JSON by
      sources/make_hmrc_txt.py and must match the file on disk byte for byte.
   2. EVERY QUOTE IS IN ITS TEXT. Whitespace is collapsed on both sides and
      nothing else is normalised: a quote that differs by one character fails.
@@ -38,6 +39,8 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SRC = os.environ.get('EC10_SOURCES', os.path.join(HERE, 'sources'))
+ENG = os.environ.get('EC10_ENGINES', '/root/wt-ec10-nextgen/packages/engines/ec10-farmout')
+IN_FINDINGS = ['pia_nuprc.pdf', 'nuprc_assignment_regs_2023.pdf', 'hmrc_ot30021.json', 'hmrc_ot18360.json', 'psu_eme801_node578.html']
 TEXTS = {'PIA': 'pia_nuprc.txt', 'AOI': 'nuprc_assignment_regs_2024.txt', 'HMRC': 'hmrc_ot.txt'}
 # sha256 prefixes of the files as read on 2026-09-27
 PINS = {
@@ -80,6 +83,16 @@ def main():
         print(f'  {f}: sha256 {h[:16]} {"is" if ok else "IS NOT"} the pinned prefix')
         if not ok:
             bad.append(f'{f} hash')
+    findings = os.path.join(ENG, 'tools/validation/economics/FINDINGS-farmout.md')
+    if not os.path.exists(findings):
+        print(f'REFUSED: {findings} is missing')
+        return 2
+    fnd = open(findings, encoding='utf-8').read()
+    for f in IN_FINDINGS:
+        ok = PINS[f] in fnd
+        print(f'  FINDINGS-farmout.md {"records" if ok else "DOES NOT RECORD"} the prefix of {f}')
+        if not ok:
+            bad.append(f'{f} not in FINDINGS')
     spec = importlib.util.spec_from_file_location('mk', os.path.join(SRC, 'make_hmrc_txt.py'))
     mk = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mk)

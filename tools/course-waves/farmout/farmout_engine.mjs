@@ -5,7 +5,7 @@
 // jointVenture.js for carryRecovery and backIn) and imports
 // engines/economics/farmout.js from EC10_ENGINES, the NextGen
 // packages/engines/ec10-farmout root by default, where the whole closure is
-// vendored sha-identical with petrolord-engines 944b8d2. Every wave script
+// vendored sha-identical with petrolord-engines b7d305b. Every wave script
 // imports from here, so no script can load a second copy of the engine from
 // somewhere else.
 //

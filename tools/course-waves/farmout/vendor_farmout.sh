@@ -7,8 +7,10 @@
 # the ekene-farmout fixture through a spread `read(...)` helper the walker
 # cannot parse, so those, the fixture README, the fixture writer, the oracle,
 # the timing script and the negative control are NAMED with the reason they
-# travel. FINDINGS-farmout.md is not in the engines tree at 944b8d2, so it is
-# not vendored and the wave cites its sources from the texts themselves.
+# travel, with FINDINGS-farmout.md, the validation record (engines #273).
+# Vendored at b7d305b (engines #272 the engine, #273 FINDINGS, #274 the simple
+# uplift in jointVenture.carryRecovery, which farmout.developmentCarry passes
+# through).
 #
 # farmout.js imports engines/economics/cashflow.ts (applyJV, npv),
 # decisionTree.js (rollback, evpi, evii), portfolio.js (portfolioRiskMetrics),
@@ -22,8 +24,8 @@
 # ledgered in VENDOR.json as group "4-economics-revendor", "Pull only with the
 # recut in the same deploy window", and the EC4 decision and EC5 portfolio
 # courses teach and grade those blobs (their digests do not rebuild on the
-# 944b8d2 blobs: EC4 teaches a blank payoff as 0 and EC5 a pos above 1
-# clamped, both refused at 944b8d2). farmout.js cannot run on the older
+# engine-course blobs farmout needs: EC4 teaches a blank payoff as 0 and EC5 a pos above 1
+# clamped, both refused by the newer blobs). farmout.js cannot run on the older
 # decisionTree.js (it reads tiedIndices, which that blob does not return). So
 # the whole runtime closure is vendored, byte for byte, under one prefix whose
 # relative imports resolve among themselves, and NO canonical path moves. When
@@ -38,7 +40,7 @@ set -euo pipefail
 ENG=/root/petrolord-engines
 NG=${NG:-/root/wt-ec10-nextgen}
 PREFIX=ec10-farmout
-REV=${REV:-944b8d2}
+REV=${REV:-b7d305b}
 FULL=$(git -C "$ENG" rev-parse "$REV^{commit}")
 PIN=$(python3 -c "import json,sys;print(json.load(open(sys.argv[1]))['canonical']['commit'])" "$NG/packages/engines/VENDOR.json")
 EXP=$(mktemp -d)
@@ -78,7 +80,8 @@ for extra in \
   "tools/validation/economics/make_farmout_fixtures.py:writes the ekene-farmout fixture" \
   "tools/validation/economics/oracle_farmout.py:writes the golden the suite reads" \
   "tools/validation/economics/timing_farmout.js:times riskSharing against its work cap" \
-  "tools/validation/economics/negcontrol_farmout.sh:the negative control over the suite (31 engine plants, 6 oracle plants)"; do
+  "tools/validation/economics/negcontrol_farmout.sh:the negative control over the suite (31 engine plants, 6 oracle plants)" \
+  "tools/validation/economics/FINDINGS-farmout.md:the validation record (sources, editions, read dates, decisions, boundary table)"; do
   p="${extra%%:*}"; why="${extra#*:}"
   [ -f "$EXP/$p" ] || { echo "REFUSES: named closure member $p is not in the tree at ${FULL:0:7}"; exit 1; }
   [ -z "${CLOSURE[$p]+x}" ] && CLOSURE[$p]="NAMED, not walked: $why"
@@ -154,7 +157,7 @@ for p in paths:
     added.append({
         'path': p, 'kind': 'extra', 'group': GROUP, 'vendoredSha': blob,
         'reason': (f"EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines {full[:7]} "
-                   f"(PR #272) under its own root {prefix}/ by the wave's vendor_farmout.sh, 4 proofs per path. "
+                   f"(PRs #272, #273, #274) under its own root {prefix}/ by the wave's vendor_farmout.sh, 4 proofs per path. "
                    f"Its own root because farmout.js needs the {full[:7]} decisionTree.js and portfolio.js, whose canonical "
                    f"NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses "
                    f"(pull only with their recut). Remove this entry, and collapse the root into the canonical paths, "

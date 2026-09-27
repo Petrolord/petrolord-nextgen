@@ -1,0 +1,14 @@
+{
+ "money": {
+  "decimals": 6,
+  "match": "^(?:akpugo_2035_carry_balance|akpugo_backin_refund_to_obr|akpugo_ezi_evii|akpugo_risked_value_per_pct|ogbaku_carry|ogbaku_consideration|ogbaku_ihe_well_payment|ogbaku_ogb_well_payment|umunze_amg_emv|umunze_consent_fee|umunze_well1_amg_payment|umunze_well2_umz_payment)$"
+ },
+ "ratio": {
+  "decimals": 6,
+  "match": "^(?:akpugo_price_to_value|ogbaku_promote_ratio)$"
+ },
+ "share": {
+  "decimals": 6,
+  "match": "^(?:akpugo_strong_posterior_pct|ogbaku_equivalent_wi_pct|umunze_amg_breakeven_chance_pct|umunze_breakeven_share_pct)$"
+ }
+}
