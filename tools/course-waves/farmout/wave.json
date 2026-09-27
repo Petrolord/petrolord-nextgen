@@ -170,14 +170,14 @@
    "summary": "concepts.json: 50 quotations, every one found in its text: {'PIA': 14, 'AOI': 22, 'HMRC': 14}"
   },
   "discriminate.mjs": {
-   "md5": "83a41271fd52cb8e0f291aac946846c2",
+   "md5": "1c5907ddcc4336d53788a74f2dc653e7",
    "command": "node discriminate.mjs",
    "expected": 0,
    "exit": 0,
    "summary": "WEAK ROUTES: 0; READING-DEPENDENT: 0"
   },
   "discriminate.mjs NEGATIVE CONTROL": {
-   "md5": "83a41271fd52cb8e0f291aac946846c2",
+   "md5": "1c5907ddcc4336d53788a74f2dc653e7",
    "command": "node discriminate.mjs --slack-tolerances",
    "expected": 1,
    "exit": 1,
@@ -728,6 +728,62 @@
    "expected": 0,
    "exit": 0,
    "summary": "FINDINGS: 0"
+  },
+  "gen_seeds.sh HEAD": {
+   "md5": "ce37d2f4b672c0f70bb682da2696ee00",
+   "command": "bash gen_seeds.sh HEAD",
+   "expected": 0,
+   "exit": 0,
+   "summary": "AGREE: all five migrations and the three case files and their index regenerate byte for byte from the committed inputs at HEAD."
+  },
+  "verify_sql.py HEAD": {
+   "md5": "de71eb6d4bf87e6001e2ff0068829326",
+   "command": "python3 verify_sql.py HEAD",
+   "expected": 0,
+   "exit": 0,
+   "summary": "AGREE: all 396 questions (prompt, options, answer key, explanation), 78 lesson keys in 18 modules, 18 graded fields (key, expected, tolerance) and the catalogue row are byte for byte what the committed banks, manifests, "
+  },
+  "verify_sql.py CANARY text": {
+   "md5": "de71eb6d4bf87e6001e2ff0068829326",
+   "command": "python3 verify_sql.py HEAD --canary",
+   "expected": 2,
+   "exit": 2,
+   "summary": "intermediate/module/11 explanation: seed \"On deal-psu-eme801 the engine returns 12500.000000 for drilling yourself and 17500.000000 for farming out, which match the page's printed figures to six decimals (text, numbers o"
+  },
+  "verify_sql.py CANARY key": {
+   "md5": "de71eb6d4bf87e6001e2ff0068829326",
+   "command": "python3 verify_sql.py HEAD --canary-key",
+   "expected": 2,
+   "exit": 2,
+   "summary": "advanced/module/3 answer_index: seed '2' against bank '3'"
+  },
+  "verify_sql.py CANARY field": {
+   "md5": "de71eb6d4bf87e6001e2ff0068829326",
+   "command": "python3 verify_sql.py HEAD --canary-field",
+   "expected": 2,
+   "exit": 2,
+   "summary": "capstone field umunze_breakeven_share_pct expected: the seed differs from fields.json by 2.9530023262225313e-06"
+  },
+  "verify_sql.py CANARY lesson": {
+   "md5": "de71eb6d4bf87e6001e2ff0068829326",
+   "command": "python3 verify_sql.py HEAD --canary-lesson",
+   "expected": 2,
+   "exit": 2,
+   "summary": "beginner module m03-the-promote-and-its-ratio lesson keys differ from the manifest"
+  },
+  "gen_golive.py (self checks)": {
+   "md5": "b230354c617acfb0c65ed1b29c1f9a7f",
+   "command": "python3 -c import sys; sys.argv=[\"x\"]; sys.path.insert(0, \"/root/cat-wip-farmout\"); import gen_golive as G; sys.exit(1 if G.refused else 0)",
+   "expected": 0,
+   "exit": 0,
+   "summary": ""
+  },
+  "promptleak.py --sql": {
+   "md5": "e46b7e7196db51aa47fd95995fdb236c",
+   "command": "python3 /root/dc-wavekit/promptleak.py --sql /root/wt-ec10-nextgen/migrations/20261111_ec10_farmout_course.sql --course farmout",
+   "expected": 0,
+   "exit": 0,
+   "summary": "own-field leaks: 0   cross-tier leaks: 0   self leaks: 0   near misses: 0   small-integer notes: 0"
   }
  }
 }
