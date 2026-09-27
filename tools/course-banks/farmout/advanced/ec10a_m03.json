@@ -146,8 +146,8 @@
   "prompt": "Which reading of a reserve category does the engine apply when it prices 2C (contingent, best estimate)?",
   "options": [
    "None: it divides the stated price by the stated volume whatever the label says",
-   "It risks the 2C volume by the stated chance of success before dividing the price",
-   "It converts 2C to 2P at a stated factor, as its published classification requires",
+   "Risking the 2C volume by the stated chance of success before dividing the price",
+   "A conversion of 2C to 2P at a stated factor, as its published classification requires",
    "It refuses any category that is not a proved reserve under the published rules"
   ],
   "answer": 0,

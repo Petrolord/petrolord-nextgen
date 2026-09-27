@@ -122,8 +122,8 @@ x("A learner sets the working interest priced to 0 on the Ekene Deep price. What
 # 14
 x("Which reading of a reserve category does the engine apply when it prices 2C (contingent, best estimate)?",
  "None: it divides the stated price by the stated volume whatever the label says",
- ["It risks the 2C volume by the stated chance of success before dividing the price",
-  "It converts 2C to 2P at a stated factor, as its published classification requires",
+ ["Risking the 2C volume by the stated chance of success before dividing the price",
+  "A conversion of 2C to 2P at a stated factor, as its published classification requires",
   "It refuses any category that is not a proved reserve under the published rules"],
  "The source line: the reserve category and its volume are stated as the user classifies them. The engine classifies nothing: 2C is the fixture's label, and the price per MMboe is the stated price over the stated volume net to the working interest. It risks, converts and refuses no category.")
 

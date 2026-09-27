@@ -76,7 +76,7 @@ x("FIN's EVII on the Ekene survey, 6745331.458602, sits below its EVPI of 143937
 
 # ===== risk sharing (m02) =====
 # 8
-x("The farm-out lifts EKO's P90 on risk-ekene. Which drawn figure moves the other way for EKO?",
+x("On risk-ekene (seed 20271111, 20000 draws) the farm-out lifts EKO's P90. Which drawn figure moves the other way for EKO?",
  "Its high case, estimated at 157675235.929265 alone and 99708134.816723 after",
  ["Its EMV, which falls from 19833033.704181 alone to 18418808.982316 after",
   "Its standard deviation, which rises from 46115911.128875 to 80399735.584206",
@@ -89,7 +89,7 @@ x("On risk-spread-four, four independent prospects at 25 percent each, why does 
  ["The engine takes the low case from the dry-hole payoff in closed form, with no draws",
   "Spreading the bet lowers only the high case, and the low case is fixed at the fail cost",
   "The correlation of 0.500000 keeps the four wells failing together at the P90"],
- "The course explains it: the ninetieth percentile of exceedance still falls where every well fails, because that outcome keeps a chance above 10 percent. The low case is a drawn percentile, the call states a correlation of 0.000000 (0.500000 is risk-correlated), and nothing fixes a low case in advance.")
+ "The ninetieth percentile of exceedance still falls where every well fails: with a dry-hole chance of 0.750000 for each of four independent wells, all four fail together far more often than 10 percent of the time. The low case is a drawn percentile, the call states a correlation of 0.000000 (0.500000 is risk-correlated), and nothing fixes a low case in advance.")
 
 # 10
 x("On risk-psu, seed 7 and 50000 draws, the engine prints a chance of a loss of 0.651800 for drilling yourself, where the Penn State page states a dry-hole chance of 65.000000 percent. How should the two be read?",
@@ -183,7 +183,7 @@ x("The same Ekene price reads 2.026914 on the risked basis and 0.236774 on the s
 # 21
 x("HMRC's manual says the consideration for the disposal of an interest in a producing field is generally in the form of cash or shares (HMRC Oil Taxation Manual OT30023). What does the engine do with a consideration paid in shares?",
  "Nothing: it values no shares, so a ratio would need their value from outside",
- ["It counts the shares at their stated price in the value of the transaction",
+ ["Counts the shares at their stated price in the value of the transaction",
   "It prices the shares per percent of working interest on the risked basis",
   "It treats the shares as cash consideration, as OT30081 does for a reimbursement"],
  "The course: a consideration in shares, or in a royalty or net profit interest, would need its own value before any ratio could be taken, and the engine values none of those. OT30081 treats a reimbursement of earlier costs as cash consideration, which says nothing about shares.")
@@ -346,8 +346,8 @@ x("At the break-even promote exactly (deal-promote-exactly-break-even), FIN's EM
 # 41
 x("The Ekene well costs 46000000.000000 on a success. What does the engine compute for that cost discounted to the date it is spent?",
  "Nothing: every cost sits at the valuation date, undiscounted",
- ["Its present value at 0.100000 to 2027, by the canonical npv",
-  "Its present value at the rate of the success-case cash flows",
+ ["A present value at 0.100000 to 2027, by the canonical npv",
+  "Discounted at the rate of the success-case cash flows",
   "Its present value at a rate the call states for the well costs alone"],
  "The list of what is not computed includes well costs discounted to their own dates; in their place the engine puts every cost at the valuation date, undiscounted, the reading it states. The call has no rate for costs, and the canonical npv values only the success-case cash flows.")
 

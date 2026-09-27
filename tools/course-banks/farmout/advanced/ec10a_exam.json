@@ -77,7 +77,7 @@
   "explanation": "EVPI assumes the outcome is known; the survey only shifts the chance of success, to 50.000000 after bright and 10.000000 after dim, so FIN still farms in on some dry holes and walks away from some successes. EVII is before the cost (the net figure is 5245331.458602), and informationValue draws nothing."
  },
  {
-  "prompt": "The farm-out lifts EKO's P90 on risk-ekene. Which drawn figure moves the other way for EKO?",
+  "prompt": "On risk-ekene (seed 20271111, 20000 draws) the farm-out lifts EKO's P90. Which drawn figure moves the other way for EKO?",
   "options": [
    "Its EMV, which falls from 19833033.704181 alone to 18418808.982316 after",
    "Its high case, estimated at 157675235.929265 alone and 99708134.816723 after",
@@ -96,7 +96,7 @@
    "The correlation of 0.500000 keeps the four wells failing together at the P90"
   ],
   "answer": 2,
-  "explanation": "The course explains it: the ninetieth percentile of exceedance still falls where every well fails, because that outcome keeps a chance above 10 percent. The low case is a drawn percentile, the call states a correlation of 0.000000 (0.500000 is risk-correlated), and nothing fixes a low case in advance."
+  "explanation": "The ninetieth percentile of exceedance still falls where every well fails: with a dry-hole chance of 0.750000 for each of four independent wells, all four fail together far more often than 10 percent of the time. The low case is a drawn percentile, the call states a correlation of 0.000000 (0.500000 is risk-correlated), and nothing fixes a low case in advance."
  },
  {
   "prompt": "On risk-psu, seed 7 and 50000 draws, the engine prints a chance of a loss of 0.651800 for drilling yourself, where the Penn State page states a dry-hole chance of 65.000000 percent. How should the two be read?",
@@ -222,7 +222,7 @@
  {
   "prompt": "HMRC's manual says the consideration for the disposal of an interest in a producing field is generally in the form of cash or shares (HMRC Oil Taxation Manual OT30023). What does the engine do with a consideration paid in shares?",
   "options": [
-   "It counts the shares at their stated price in the value of the transaction",
+   "Counts the shares at their stated price in the value of the transaction",
    "It prices the shares per percent of working interest on the risked basis",
    "It treats the shares as cash consideration, as OT30081 does for a reimbursement",
    "Nothing: it values no shares, so a ratio would need their value from outside"
@@ -443,8 +443,8 @@
   "prompt": "The Ekene well costs 46000000.000000 on a success. What does the engine compute for that cost discounted to the date it is spent?",
   "options": [
    "Nothing: every cost sits at the valuation date, undiscounted",
-   "Its present value at 0.100000 to 2027, by the canonical npv",
-   "Its present value at the rate of the success-case cash flows",
+   "A present value at 0.100000 to 2027, by the canonical npv",
+   "Discounted at the rate of the success-case cash flows",
    "Its present value at a rate the call states for the well costs alone"
   ],
   "answer": 0,

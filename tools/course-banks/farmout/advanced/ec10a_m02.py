@@ -42,9 +42,9 @@ x("With seed 20271111 and 20000 draws, what chance of a loss does the engine pri
 # 4
 x("The course says the two Ekene estimates, 0.752450 and 0.747650, each sit within 0.015309 of 0.750000. What is 0.015309?",
  "Five standard errors of a proportion at a chance of 0.750000 over 20000 draws",
- ["The course tolerance of every graded field",
+ ["A course tolerance on every graded field",
   "The gap between the two positions' estimates",
-  "The standard deviation of the chance of a loss across seeds the engine has sampled"],
+  "One standard deviation of the chance of a loss across seeds the engine has sampled"],
  "The digest derives it: five standard errors of a proportion at that chance, with 20000 draws. It is a band for reading sampling noise. No graded field is a draw, so the course tolerance plays no part; the two estimates differ from each other only by accident of the draws, and the engine samples one seed per call.")
 
 # 5
@@ -85,7 +85,7 @@ x("Four prospects at 25 percent each are stated with a correlation of 0.500000 o
  ["53443895.816080, since correlation moves only the drawn estimates and leaves the spread",
   "106887791.632160, since a correlation above 0 makes four prospects act as one",
   "92230348.163821, the P10 high case of the four independent prospects drawn at seed 11"],
- "The correlation moves the closed-form standard deviation as well as the estimates: 82158383.625775 at 0.500000 against 53443895.816080 independent (engine). Correlated prospects tend to succeed and fail together, so spreading removes less risk, but only a correlation of 1 would make them act as one. 92230348.163821 is a drawn high case, no standard deviation.")
+ "The correlation moves the closed-form standard deviation as well as the estimates: 82158383.625775 at 0.500000 against 53443895.816080 independent (engine). Correlated prospects tend to succeed and fail together, so spreading removes less risk. 92230348.163821 is a drawn high case, no standard deviation.")
 
 # 10
 x("A risk call is sent with no seed. In its own words, what does the engine return?",

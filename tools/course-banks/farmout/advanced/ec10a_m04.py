@@ -123,9 +123,9 @@ x("After EKO backs in to 45.000000 percent on backin-ekene, what participating i
 # 14
 x("Under basis pia-s85-4, why does the engine exclude the 46000000.000000 Ekene Deep-1 exploration well from the refundable costs?",
  "PIA s.85(4)(c) allows development and production costs only, and exploration is neither",
- ["The well was a dry hole, and the Act refunds only the cost of wells that found oil and were tested and suspended",
+ ["A dry hole, and the Act refunds only the cost of wells that found oil and were tested and suspended",
   "The contract basis lists exploration as refundable and the Act basis removes the list",
-  "The exploration well was paid by FIN under the farm-in, so no party can claim it"],
+  "FIN paid for the exploration well under the farm-in, so no party can claim it"],
  "The engine's reason: Ekene Deep-1 exploration well: 46000000 (exploration) is not refundable (PIA s.85(4)(c): development and production costs only, no bonuses, penalties, interest, premium or markups). The Ekene well cost 46000000.000000 as a success, and on backin-ekene the contract basis excludes it too.")
 
 # 15

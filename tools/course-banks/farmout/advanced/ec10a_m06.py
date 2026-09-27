@@ -26,8 +26,8 @@ x("A farm-out pays EKO a carry, a cash bonus and a reimbursement. Which of them 
 x("What does the engine do with the Commission's metrics for good and valuable consideration under reg. 19(3)(b)?",
  "Nothing beyond taking a Commission-determined amount as a stated input",
  ["It applies them to the success-case value to set a Commission-determined amount",
-  "It applies them through the risked value per percent of the interest assigned",
-  "It refuses a commission-determined source, since the metrics are unpublished"],
+  "Applies them through the risked value per percent of the interest assigned",
+  "A refusal of a commission-determined source, since the metrics are unpublished"],
  "The digest's list: the Commission's metrics are not computed, and the engine takes a Commission-determined amount as a stated input (valueSource \"commission-determined\" is accepted). It derives no amount from any value it computes and refuses no such source.")
 
 # 3
@@ -59,7 +59,7 @@ x("A farm-out grants the farmor a net profit interest as part of its considerati
  "It does not; a subordinated interest is valued outside the call",
  ["As cash consideration, added to the carry, bonus and reimbursement",
   "As a carried interest, through carryRecovery of the joint venture engine",
-  "As a back-in, through backIn with the net profit share as the target"],
+  "Through backIn, with the net profit share as the target of a back-in"],
  "The digest's list: royalty, net profit and other subordinated interests granted as consideration (HMRC OT18320 and OT30131); the engine does nothing, and a subordinated interest is valued outside. The consideration the engine counts is carry, cash bonus and reimbursement only, and its carry and back-in functions model neither.")
 
 # 7
@@ -73,7 +73,7 @@ x("Which figure does the engine give as the market value of the 30.000000 percen
 # 8
 x("When is a back-in triggered on the Ekene licence, according to backInRight?",
  "At a contract event the caller reports, with the target stated; the engine fixes no trigger",
- ["When the development carry is recovered, in 2036 on the compound Ekene ledger",
+ ["Once the development carry is recovered, in 2036 on the compound Ekene ledger",
   "When the farminee's vested interest reaches 30.000000 percent on completion",
   "When the PIA s.85(4) basis is stated, from the first year of production after the refund falls due"],
  "The digest: a back-in's trigger is a contract event the caller reports; the engine does not decide when it happens. The carry payout year, the vesting of the farm-in and the basis named for the refund are all separate facts, and none of them fires a back-in.")

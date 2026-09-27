@@ -75,8 +75,8 @@ x("The Penn State EME 801, Lesson 6 page labels its payoff table in two ways. Ho
 # 8
 x("The engine's farm out EMV on deal-psu-eme801 prints as 17500.000000, and the page prints 17500.000000. What does the course claim about the two?",
  "The check passes within 0.000001; the double carries float residue, so no equality is keyed",
- ["They are equal, since both print the same six decimals",
-  "They differ by the rounding of the page to the nearest dollar",
+ ["Equal, since both print the same six decimals",
+  "Different by the rounding of the page to the nearest dollar",
   "They are equal to the last binary digit of the double"],
  "The digest: the engine's farm out EMV prints as 17500.000000 at six decimals; the double it holds carries float residue in its last binary digits, and the check passes within 0.000001. Printed alike is not equal, so the course keys the check within its stated bound and claims no equality.")
 

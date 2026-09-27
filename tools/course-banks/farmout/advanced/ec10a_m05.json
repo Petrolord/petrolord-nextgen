@@ -80,8 +80,8 @@
   "prompt": "The engine's farm out EMV on deal-psu-eme801 prints as 17500.000000, and the page prints 17500.000000. What does the course claim about the two?",
   "options": [
    "The check passes within 0.000001; the double carries float residue, so no equality is keyed",
-   "They are equal, since both print the same six decimals",
-   "They differ by the rounding of the page to the nearest dollar",
+   "Equal, since both print the same six decimals",
+   "Different by the rounding of the page to the nearest dollar",
    "They are equal to the last binary digit of the double"
   ],
   "answer": 0,
