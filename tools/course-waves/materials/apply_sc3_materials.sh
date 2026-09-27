@@ -94,7 +94,7 @@ digest_for() {
     20261114_sc3_materials_beginner_deep        ) echo 4a034b8da0fde480d35df8c4ed7b50fe9f127b2690ffc1e3b10cbece89b6cfcd ;;
     20261114_sc3_materials_intermediate_deep    ) echo bb9492e12aec5bebc48385546e8c25c93df2d3d3fe19f71ba0dea56fbcc15e1e ;;
     20261114_sc3_materials_advanced_deep        ) echo dbaf9bf10e84c472cbb640b6f48d7b24a279374067103459e7c5a49949fbe6bd ;;
-    20261114_sc3_materials_go_live              ) echo 3aa1340a84e89126a302ee36c99a8938efbc4a33f68c088b81452206d8de7496 ;;
+    20261114_sc3_materials_go_live              ) echo 928f0981867992702c34f17723caf44fc9c7f3a7e043a8343bfd2d1ce2ce2a4e ;;
     *) echo UNPINNED ;;
   esac
 }
