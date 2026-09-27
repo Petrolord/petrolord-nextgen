@@ -29,7 +29,7 @@ With no cap, the carry is the promote in points applied to the gross cost: 10.00
 
 ## Where a cap parts the two
 
-On the Ekene Deep well the promote is 10.000000 points of a well of 46000000.000000, and yet the engine's carry is 4400000.000000. The deal caps the promoted cost at 44000000.000000, and the engine's reason line says the promote applies to that amount alone. Ten points of 44000000.000000 is the carry of 4400000.000000. So the promote in points is a term of the deal, while the carry is money that also depends on the cap. The Professional tier works caps in full; at this tier, read the cap state column before you turn points into money.
+On the Ekene Deep well the promote is 10.000000 points of a well of 46000000.000000, and yet the engine's carry is 4400000.000000. The deal caps the promoted cost at 44000000.000000, and the engine's reason line says the promote applies to that amount alone. So the promote in points is a term of the deal, while the carry is money that also depends on the cap. The Professional tier works caps in full; at this tier, read the cap state column before you turn points into money.
 
 ## The carry and the joint ventures course
 
