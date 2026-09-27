@@ -63,28 +63,28 @@ q(0, "A stated case has three items worth 80.000000, 15.000000 and 5.000000, so 
 q(1, "A policy states A to 80 percent and B also to 80 percent. What does the engine return?",
  "A refusal: \"cutoffs.bPct must be a number above aPct 80 and below 100; got 80\".",
  ["The classes, with class B empty, since no cumulative share can lie above 80 and at or below 80.",
-  "The classes, with B moved up to 95 percent, the figure the engine holds for a missing B cut-off.",
-  "The classes, with A and B merged at 80 percent."],
+  "B moved up to 95 percent, the figure the engine holds for a missing B cut-off.",
+  "A single class for A and B, merged at 80 percent."],
  "The B cut-off must lie above the A cut-off and below 100, so a policy that leaves no room for class B is refused before any item is ranked. The engine holds no cut-off of its own and merges no classes; it returns the policy to its author to state again.")
 
 q(3, "A learner sets the boundary rule control to not stated in the ABC view. What does the engine print?",
  "\"boundaryRule must be 'at-or-below' (the cumulative share including the item decides) or 'include-crossing' (the share before the item decides, so the item crossing a cut-off joins the higher class)\"",
  ["The classes under at-or-below, the rule most textbooks use, with a note that the rule was taken as read.",
-  "The classes under both rules side by side, so the learner can pick one after seeing the results printed.",
-  "The classes with the crossing items left unclassed until a rule is stated, each flagged in its own reason."],
+  "Both rules side by side, so the learner can pick one after seeing the results printed.",
+  "Crossing items left unclassed until a rule is stated, each flagged in its own reason."],
  "The engine holds no boundary rule: leaving it out is refused with a message that names both rules and what each one decides. It picks neither and prints no side-by-side result. Neither rule is right in general, so a policy picks one and writes it down.")
 
 q(2, "The engine's basis for ABC cites Caplice, MIT ESD.260J (2006) lecture 11 slide 4. What does the course take from that citation about the cut-offs?",
  "The classes are arbitrary, so the cut-offs are the caller's stated policy and the course states none as a standard.",
  ["The lecture fixes A at 80 percent and B at 95 percent, and the engine applies those two figures to every register.",
-  "The lecture prints a table of cut-offs by industry, and the engine reads the oil and gas row whenever it is called.",
-  "The lecture sets the cut-offs by item count, and the engine converts them to shares of value before it classifies."],
+  "A table of cut-offs by industry, printed in the lecture, whose oil and gas row the engine reads.",
+  "Cut-offs by item count, set in the lecture, which the engine converts to shares of value before it classifies."],
  "The basis reads \"Caplice, MIT ESD.260J (2006) lecture 11 slide 4 (standard ABC analysis; the classes are arbitrary, so the cut-offs are the caller's stated policy)\". The source supports ranking by value; where the lines fall is a decision the policy writes down. 80 and 95 are the Ekene policy's choice, and the engine refuses a call that states no cut-offs.")
 
 q(1, "HEAT-TRC, the obsolete heat tracing controller, has an annual usage of 0 at a unit cost of 3100. How does the Ekene ABC run treat it?",
  "It is ranked last with a value of 0.000000 and a cumulative share of 100.000000, class C.",
  ["It is refused, since an item with no annual usage value cannot be placed in the ranking.",
-  "It is ranked by its unit cost of 3100, since its usage of zero would otherwise hide it from view.",
+  "It is ranked by its unit cost of 3100, since its usage of zero would otherwise hide it.",
   "It is left out of the ranking and listed apart, with a reason saying it holds no value."],
  "An item may have zero value; it ranks at the foot of the register, 18th, and is class C under either rule. Only a register in which every item has zero value is refused: \"items must carry some annual usage value; every annualUsage x unitCost is 0\". The engine ranks by annual usage value alone and leaves no item out.")
 

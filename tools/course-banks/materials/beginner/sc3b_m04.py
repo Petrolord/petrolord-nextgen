@@ -70,8 +70,8 @@ q(1, "Harris (1913) prints: \"it is of value to know that this consumption must 
 q(0, "Harris (1913) writes the lot as \"the square root of (240MS divided by C)\", with M the monthly movement, S the set-up cost and C the unit cost. Where does his 240 come from?",
  "It folds together the twelve months of a year and his ten per cent a year for interest and depreciation.",
  ["It is his count of working days in a year, over which the set-up cost is spread evenly.",
-  "It is 2 x 120, the hours of a two-week run on the machines of his day, over which the set-up cost S is charged.",
-  "It is a conversion factor from dollars to cents, since his unit cost is printed in cents."],
+  "2 x 120, the hours of a two-week run on the machines of his day, over which the set-up cost S is charged.",
+  "A conversion factor from dollars to cents, since his unit cost is printed in cents."],
  "Harris's 240 folds together the twelve months of a year and his ten per cent a year: 2 x 12 over 0.1 is 240. With an annual demand of 12 M and a holding rate of 0.1 it is the same formula the engine applies, sqrt(2 A D / h).")
 
 q(3, "How does the course read Harris's three 1913 examples as engine inputs?",

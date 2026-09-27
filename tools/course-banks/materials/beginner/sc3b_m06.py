@@ -62,7 +62,7 @@ q(0, "On the stated boundary items, COVER24 has exactly 24.000000 months of cove
 q(2, "On the stated boundary items, EMPTY has no stock on hand, no usage and 50 months since its last issue. What does the engine return for it?",
  "Band obsolete, with no excess, since there is no stock on hand to call excess.",
  ["A refusal, since an item with no stock and no usage has no place on a register.",
-  "Band obsolete with all its stock excess, as for any item that has no usage.",
+  "Band obsolete with all its stock excess, as for any item that has no usage at all.",
   "Band active, since an item holding nothing cannot be slow or obsolete."],
  "EMPTY is 50 months since its last issue, at or above the obsolete minimum of 36, so its band is obsolete, with a stock value of 0.000000 and nothing written down. With no usage all stock on hand is excess, and it has none, so it carries no excess. The engine accepts a zero stock and a zero usage.")
 
@@ -111,8 +111,8 @@ q(0, "What does the engine's basis for slow-moving stock say about the bands, wr
 q(3, "One item in a slow-moving call has no months since its last issue in the box. What does the engine print?",
  "A refusal naming items[0].monthsSinceLastIssue, with the missing value printed as undefined.",
  ["The item placed in band active, since an item with no record is taken to be in use.",
-  "The item placed in band obsolete, since no record of an issue means it has never moved off the shelf at all.",
-  "The item left out of the bands and the totals, with a note beside it in the result."],
+  "Band obsolete, since no record of an issue means the item has never moved off the shelf at all.",
+  "Nothing for that item: it is left out of the bands and the totals, with a note beside it."],
  "Every item needs its months since the last issue. The engine's words are \"items[0].monthsSinceLastIssue must be a finite number at or above 0; got undefined\". The engine places no item in a band it was not given the months for, and it drops nothing from the totals.")
 
 emit(Q, '/root/cat-wip-materials/banks/sc3b_m06.json', expect_n=15)

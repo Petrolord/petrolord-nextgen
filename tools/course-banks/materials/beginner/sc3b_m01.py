@@ -13,7 +13,7 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 q(2, "When the engine will not accept an input, what does it hand back?",
  "An object carrying an error and the field it refused, with a message that starts with that field's name and states the condition that failed.",
  ["A full result in which the refused input is replaced by a figure the engine picks for itself, with a warning printed under the reason column so the learner can see which input was swapped.",
-  "A result whose figures are all zero, so that any calculation built on the bad input visibly adds up to nothing at all.",
+  "Figures of zero throughout, so that any calculation built on the bad input visibly adds up to nothing at all.",
   "A blank panel with a generic error code, which the learner looks up in a table printed at the end of the course."],
  "A refusal is an object with an error and a field, and its message begins with the field it names and says exactly which condition failed. The engine never substitutes a figure of its own for a refused input, it never returns a result of zeros in place of a refusal, and every message is printed in the engine's own words in the panel, with no code to look up.")
 
@@ -63,7 +63,7 @@ q(1, "Which ABC policy does the Ekene register state?",
  "A to 80 percent of annual usage value and B to 95 percent, with the rule at-or-below.",
  ["A to 70 percent and B to 90 percent of annual usage value, with the rule include-crossing.",
   "A to 80 percent of the items by count and B to 95 percent of them, with the rule at-or-below.",
-  "None: the engine applies its own cut-offs when the register leaves them out."],
+  "None: the engine applies its own cut-offs whenever the register leaves them out of the call."],
  "The Ekene policy states A to 80 percent, B to 95 percent, at-or-below, and the cut-offs are shares of annual usage value. The engine holds no cut-off of its own: a call without cut-offs is refused by name. Other figures would be another policy, and the course quotes every ABC class with the cut-offs and rule it came from.")
 
 q(2, "The engine exports 12 figures of its own in DEFAULTS. What are they?",
@@ -76,8 +76,8 @@ q(2, "The engine exports 12 figures of its own in DEFAULTS. What are they?",
 q(3, "An EOQ call types the key holdingrate in lower case. What does the engine return?",
  "A refusal, in its own words: \"holdingrate is not an accepted key; the accepted keys at the top level are annualDemand, orderCost, holdingCostPerUnitYear, unitCost, holdingRate, rounding\".",
  ["The EOQ computed as if the holding rate were missing, with the misspelt key dropped silently and nothing said about it anywhere in the result, so the learner sees a figure and no sign that an input went unread.",
-  "The EOQ on the holding rate the key was meant to be, since the engine matches keys without regard to their case.",
-  "The EOQ with a note under the reason that one key was unread, so that the learner can correct it on the next run."],
+  "An EOQ on the holding rate the key was meant to be, since the engine matches keys without regard to their case.",
+  "A result with a note under the reason that one key was unread, so that the learner can correct it on the next run."],
  "The engine refuses any key it does not read, at every level, naming the key, where it sits and the keys it accepts. A key dropped in silence would leave an input unstated with nobody told, and the engine does not guess what a misspelling meant.")
 
 q(0, "A box carries a key the function does not read and also lacks a required input. Which refusal comes back?",
@@ -104,8 +104,8 @@ q(3, "In this course, what does the word EOQ name?",
 q(2, "The Ekene register carries HEAT-TRC, a \"Heat tracing controller (obsolete model)\". When does this course call an item obsolete?",
  "Only against a stated band: in the Ekene policy, 36 months or more since the last issue.",
  ["Whenever its name or the vendor says the model is out of production, whatever the store records.",
-  "Whenever its stock would last over 24 months of usage.",
-  "Whenever it has had no issue in the last twelve months, which the engine applies to every register."],
+  "Once its stock would last over 24 months of usage.",
+  "After twelve months with no issue, a rule the engine applies to every register."],
  "Obsolete, slow and excess are always of a stated band or a stated cover limit. HEAT-TRC is band obsolete because 40 months have passed since its last issue, at or above the band's minimum of 36. More than 24 months of cover is the Ekene excess limit, a separate measure, and no band is built into the engine.")
 
 q(1, "What does the course say about where its practicals run and what is graded?",

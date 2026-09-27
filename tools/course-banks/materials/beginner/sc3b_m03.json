@@ -81,8 +81,8 @@
   "options": [
    "The classes, with class B empty, since no cumulative share can lie above 80 and at or below 80.",
    "A refusal: \"cutoffs.bPct must be a number above aPct 80 and below 100; got 80\".",
-   "The classes, with B moved up to 95 percent, the figure the engine holds for a missing B cut-off.",
-   "The classes, with A and B merged at 80 percent."
+   "B moved up to 95 percent, the figure the engine holds for a missing B cut-off.",
+   "A single class for A and B, merged at 80 percent."
   ],
   "answer": 1,
   "explanation": "The B cut-off must lie above the A cut-off and below 100, so a policy that leaves no room for class B is refused before any item is ranked. The engine holds no cut-off of its own and merges no classes; it returns the policy to its author to state again."
@@ -91,8 +91,8 @@
   "prompt": "A learner sets the boundary rule control to not stated in the ABC view. What does the engine print?",
   "options": [
    "The classes under at-or-below, the rule most textbooks use, with a note that the rule was taken as read.",
-   "The classes under both rules side by side, so the learner can pick one after seeing the results printed.",
-   "The classes with the crossing items left unclassed until a rule is stated, each flagged in its own reason.",
+   "Both rules side by side, so the learner can pick one after seeing the results printed.",
+   "Crossing items left unclassed until a rule is stated, each flagged in its own reason.",
    "\"boundaryRule must be 'at-or-below' (the cumulative share including the item decides) or 'include-crossing' (the share before the item decides, so the item crossing a cut-off joins the higher class)\""
   ],
   "answer": 3,
@@ -102,9 +102,9 @@
   "prompt": "The engine's basis for ABC cites Caplice, MIT ESD.260J (2006) lecture 11 slide 4. What does the course take from that citation about the cut-offs?",
   "options": [
    "The lecture fixes A at 80 percent and B at 95 percent, and the engine applies those two figures to every register.",
-   "The lecture prints a table of cut-offs by industry, and the engine reads the oil and gas row whenever it is called.",
+   "A table of cut-offs by industry, printed in the lecture, whose oil and gas row the engine reads.",
    "The classes are arbitrary, so the cut-offs are the caller's stated policy and the course states none as a standard.",
-   "The lecture sets the cut-offs by item count, and the engine converts them to shares of value before it classifies."
+   "Cut-offs by item count, set in the lecture, which the engine converts to shares of value before it classifies."
   ],
   "answer": 2,
   "explanation": "The basis reads \"Caplice, MIT ESD.260J (2006) lecture 11 slide 4 (standard ABC analysis; the classes are arbitrary, so the cut-offs are the caller's stated policy)\". The source supports ranking by value; where the lines fall is a decision the policy writes down. 80 and 95 are the Ekene policy's choice, and the engine refuses a call that states no cut-offs."
@@ -114,7 +114,7 @@
   "options": [
    "It is refused, since an item with no annual usage value cannot be placed in the ranking.",
    "It is ranked last with a value of 0.000000 and a cumulative share of 100.000000, class C.",
-   "It is ranked by its unit cost of 3100, since its usage of zero would otherwise hide it from view.",
+   "It is ranked by its unit cost of 3100, since its usage of zero would otherwise hide it.",
    "It is left out of the ranking and listed apart, with a reason saying it holds no value."
   ],
   "answer": 1,

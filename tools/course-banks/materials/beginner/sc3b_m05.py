@@ -36,8 +36,8 @@ q(3, "Rounding baryte up to a multiple of 50 orders 150.000000 tonnes, 12.591416
 q(1, "Which rule on the baryte case costs least above the EOQ itself, and at what penalty?",
  "The nearest multiple of 1, which orders 137.000000 at a penalty of 0.000443 percent.",
  ["The rule up to a multiple of 10, which orders 140.000000 at 0.017454 percent, the Ekene policy.",
-  "The rule down to a multiple of 10, which orders 130.000000 at 0.153633 percent.",
-  "The rule up to a multiple of 50, which orders 150.000000 at 0.384604 percent."],
+  "Down to a multiple of 10, which orders 130.000000 at 0.153633 percent.",
+  "Up to a multiple of 50, which orders 150.000000 at 0.384604 percent."],
  "Of the stated rules the nearest multiple of 1 lands closest to 137.408584, at 137.000000, and costs 7859.805839 a year, a penalty of 0.000443 percent. The Ekene rule costs 0.017454, down to 10 costs 0.153633 and up to 50 costs 0.384604. The rule none costs nothing above the EOQ, since it orders the EOQ itself.")
 
 q(0, "The baryte EOQ of 137.408584 is rounded to the nearest multiple of 10. What does the engine order?",
@@ -78,15 +78,15 @@ q(2, "On a stated case whose EOQ is 400, the rounding rule and multiple would or
 q(0, "The rounding rule none is stated together with a multiple of 10. What does the engine return?",
  "A refusal: \"rounding.multiple must be left out when the rule is 'none'\".",
  ["The EOQ unrounded, with the multiple of 10 ignored since the rule none takes none.",
-  "The EOQ rounded to the nearest multiple of 10, since a stated multiple outranks the rule.",
-  "The EOQ rounded up to 10, the Ekene rule."],
+  "A quantity rounded to the nearest multiple of 10, since a stated multiple outranks the rule.",
+  "Up to 10, the Ekene rule."],
  "The rule none takes no multiple, so a multiple stated beside it is a contradiction and the engine refuses it by name. It ignores no input it was given and picks no rule for itself. The Ekene rule is up to a multiple of 10, a stated input of the baryte case alone.")
 
 q(1, "The baryte case is run with its rounding left blank in the box. Which message comes back?",
  "\"rounding must be a stated rounding rule { rule: 'none' } or { rule: 'up' | 'down' | 'nearest', multiple }\"",
  ["The EOQ with no rounding, since a rule that is not stated is read as the rule none by the engine.",
-  "The EOQ rounded to the nearest whole unit, as Harris rounded his stud to 49 in the year 1913.",
-  "The EOQ rounded up to a multiple of 10, the rule the Ekene register states for its baryte order."],
+  "A lot rounded to the nearest whole unit, as Harris rounded his stud to 49 in the year 1913.",
+  "Up to a multiple of 10, the rule the Ekene register states for its baryte order."],
  "The rounding rule is a stated input with no fallback, and leaving it out is refused with a message that spells out the shapes a rule can take. The engine takes neither the rule none nor any rule of Harris or of the Ekene register on its own.")
 
 q(3, "A stated case gives the holding cost directly as 4.5 a unit a year, with the rule down to a multiple of 25. What EOQ and purchase cost does the engine report with no unit cost stated?",
@@ -98,7 +98,7 @@ q(3, "A stated case gives the holding cost directly as 4.5 a unit a year, with t
 
 q(0, "Baryte's holding rate is set to 0 in a stated probe. What does the engine print?",
  "A refusal naming holdingRate: stock that costs nothing to hold has no EOQ.",
- ["An EOQ that grows without limit, since stock costs nothing to hold.",
+ ["An EOQ that grows without limit, since stock that costs nothing to hold can be bought in any lot.",
   "An EOQ of 0.000000, since a holding cost of zero cancels the square root.",
   "\"unitCost must be a finite number above 0; got 0\", since the holding cost falls to zero."],
  "The engine's words are \"holdingRate must be a finite number above 0; got 0\". A rate of 0 would make holding free, so the engine refuses the rate by name. The refusal names the field that holds the zero, holdingRate; the unit cost of 260 is still stated and above 0.")

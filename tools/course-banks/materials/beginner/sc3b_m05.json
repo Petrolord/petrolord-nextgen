@@ -37,8 +37,8 @@
   "options": [
    "The rule up to a multiple of 10, which orders 140.000000 at 0.017454 percent, the Ekene policy.",
    "The nearest multiple of 1, which orders 137.000000 at a penalty of 0.000443 percent.",
-   "The rule down to a multiple of 10, which orders 130.000000 at 0.153633 percent.",
-   "The rule up to a multiple of 50, which orders 150.000000 at 0.384604 percent."
+   "Down to a multiple of 10, which orders 130.000000 at 0.153633 percent.",
+   "Up to a multiple of 50, which orders 150.000000 at 0.384604 percent."
   ],
   "answer": 1,
   "explanation": "Of the stated rules the nearest multiple of 1 lands closest to 137.408584, at 137.000000, and costs 7859.805839 a year, a penalty of 0.000443 percent. The Ekene rule costs 0.017454, down to 10 costs 0.153633 and up to 50 costs 0.384604. The rule none costs nothing above the EOQ, since it orders the EOQ itself."
@@ -103,8 +103,8 @@
   "options": [
    "A refusal: \"rounding.multiple must be left out when the rule is 'none'\".",
    "The EOQ unrounded, with the multiple of 10 ignored since the rule none takes none.",
-   "The EOQ rounded to the nearest multiple of 10, since a stated multiple outranks the rule.",
-   "The EOQ rounded up to 10, the Ekene rule."
+   "A quantity rounded to the nearest multiple of 10, since a stated multiple outranks the rule.",
+   "Up to 10, the Ekene rule."
   ],
   "answer": 0,
   "explanation": "The rule none takes no multiple, so a multiple stated beside it is a contradiction and the engine refuses it by name. It ignores no input it was given and picks no rule for itself. The Ekene rule is up to a multiple of 10, a stated input of the baryte case alone."
@@ -114,8 +114,8 @@
   "options": [
    "The EOQ with no rounding, since a rule that is not stated is read as the rule none by the engine.",
    "\"rounding must be a stated rounding rule { rule: 'none' } or { rule: 'up' | 'down' | 'nearest', multiple }\"",
-   "The EOQ rounded to the nearest whole unit, as Harris rounded his stud to 49 in the year 1913.",
-   "The EOQ rounded up to a multiple of 10, the rule the Ekene register states for its baryte order."
+   "A lot rounded to the nearest whole unit, as Harris rounded his stud to 49 in the year 1913.",
+   "Up to a multiple of 10, the rule the Ekene register states for its baryte order."
   ],
   "answer": 1,
   "explanation": "The rounding rule is a stated input with no fallback, and leaving it out is refused with a message that spells out the shapes a rule can take. The engine takes neither the rule none nor any rule of Harris or of the Ekene register on its own."
@@ -135,7 +135,7 @@
   "prompt": "Baryte's holding rate is set to 0 in a stated probe. What does the engine print?",
   "options": [
    "A refusal naming holdingRate: stock that costs nothing to hold has no EOQ.",
-   "An EOQ that grows without limit, since stock costs nothing to hold.",
+   "An EOQ that grows without limit, since stock that costs nothing to hold can be bought in any lot.",
    "An EOQ of 0.000000, since a holding cost of zero cancels the square root.",
    "\"unitCost must be a finite number above 0; got 0\", since the holding cost falls to zero."
   ],

@@ -15,7 +15,7 @@
   "options": [
    "E, because 68.000000 is at or above the E minimum of 44 and below the V minimum of 70, and the class follows the score.",
    "D, because its ABC class is C, and the engine lowers the criticality of low-value items.",
-   "V, because 68.000000 rounds to 70 when the engine compares figures at 12 significant digits.",
+   "V, because 68.000000 rounds to 70 when the engine compares figures at 12 significant digits, and so meets the V minimum.",
    "V, because it scores the maximum 5 on safety and the policy names safety as its override criterion."
   ],
   "answer": 3,
@@ -48,8 +48,8 @@
   "options": [
    "The classes, with the four weights scaled up in proportion until they add to 100 again.",
    "A refusal, in the engine's words: \"criteria weights must add to 100; they add to 99\".",
-   "The classes, with the missing point of weight added to safety, the largest criterion of the four.",
-   "The classes on a scale of 99, with a note that the weighted scores now run up to 99."
+   "Classes computed with the missing point of weight added to safety, the largest criterion of the four.",
+   "A result on a scale of 99, with a note that the weighted scores now run up to 99."
   ],
   "answer": 1,
   "explanation": "The weights are percentages that must add to 100, and weights that miss it are refused before any score is computed. The engine rescales nothing and moves no weight between criteria: a policy that does not add up is returned to its author to state again."
@@ -114,8 +114,8 @@
   "options": [
    "A refusal: \"classes[1].minScore must be 0 so that every item takes a class; got 40\".",
    "The classes, with any item below 40 left unclassified and listed on its own at the foot of the result.",
-   "The classes, with a third class added from 0 so that items scoring below 40 still take a class.",
-   "The classes, with every item below 40 placed in E, the last class the policy stated."
+   "A third class added from 0 so that items scoring below 40 still take a class.",
+   "Every item below 40 placed in E, the last class the policy stated."
   ],
   "answer": 0,
   "explanation": "The last class minimum must be 0, so that every item takes a class; a policy that leaves low scorers with nowhere to go is refused before any score is computed. The engine adds no class of its own and leaves no item unclassified."
@@ -135,8 +135,8 @@
   "prompt": "A policy leaves out the override list entirely, stating no topClassOnMaxScore at all. What does the engine return?",
   "options": [
    "The classes with no override, since none was stated.",
-   "The classes with safety as the override, as in most policies.",
-   "The classes with every criterion as an override, so that any maximum forces the top class.",
+   "Safety taken as the override, as in most policies.",
+   "Every criterion made an override, so that any maximum forces the top class.",
    "A refusal: \"topClassOnMaxScore must be an array of criterion ids (empty for none)\"."
   ],
   "answer": 3,

@@ -20,7 +20,7 @@ q(3, "PSV-KIT, the pressure safety valve repair kit, has a weighted score of 68.
  "V, because it scores the maximum 5 on safety and the policy names safety as its override criterion.",
  ["E, because 68.000000 is at or above the E minimum of 44 and below the V minimum of 70, and the class follows the score.",
   "D, because its ABC class is C, and the engine lowers the criticality of low-value items.",
-  "V, because 68.000000 rounds to 70 when the engine compares figures at 12 significant digits."],
+  "V, because 68.000000 rounds to 70 when the engine compares figures at 12 significant digits, and so meets the V minimum."],
  "The engine's reason reads \"PSV-KIT: scores the maximum 5 on safety, which places an item in class V whatever its weighted score (68, class E by score alone)\". E is what the score alone gives, before the override. The ABC class plays no part in criticality. Twelve significant digits separate 68 from 70 plainly; the tie convention only settles figures that agree to that many digits.")
 
 q(0, "On the Ekene policy, a learner types an empty list into the override criteria control and runs the criticality view again. What happens to PSV-KIT?",
@@ -40,8 +40,8 @@ q(2, "MECH-SEAL scores 70.000000 on the Ekene policy, exactly the V minimum. Wha
 q(1, "A learner lowers the redundancy weight from 10 to 9 and runs the Ekene criticality view. What comes back?",
  "A refusal, in the engine's words: \"criteria weights must add to 100; they add to 99\".",
  ["The classes, with the four weights scaled up in proportion until they add to 100 again.",
-  "The classes, with the missing point of weight added to safety, the largest criterion of the four.",
-  "The classes on a scale of 99, with a note that the weighted scores now run up to 99."],
+  "Classes computed with the missing point of weight added to safety, the largest criterion of the four.",
+  "A result on a scale of 99, with a note that the weighted scores now run up to 99."],
  "The weights are percentages that must add to 100, and weights that miss it are refused before any score is computed. The engine rescales nothing and moves no weight between criteria: a policy that does not add up is returned to its author to state again.")
 
 q(0, "Three criteria weighted 33.3, 33.3 and 33.4 each score 7 out of 10, and the V minimum is 70. The stored sum falls a hair below 70. Which class does the engine return?",
@@ -82,8 +82,8 @@ q(3, "On the Ekene policy, which criterion supplies 40.000000 of the wellhead ma
 q(0, "A policy lists its classes as V from 70 and E from 40, and stops there. What does the engine return?",
  "A refusal: \"classes[1].minScore must be 0 so that every item takes a class; got 40\".",
  ["The classes, with any item below 40 left unclassified and listed on its own at the foot of the result.",
-  "The classes, with a third class added from 0 so that items scoring below 40 still take a class.",
-  "The classes, with every item below 40 placed in E, the last class the policy stated."],
+  "A third class added from 0 so that items scoring below 40 still take a class.",
+  "Every item below 40 placed in E, the last class the policy stated."],
  "The last class minimum must be 0, so that every item takes a class; a policy that leaves low scorers with nowhere to go is refused before any score is computed. The engine adds no class of its own and leaves no item unclassified.")
 
 q(2, "Under a policy whose scale is 10, a learner enters 11 as the first item's score on criterion s. What comes back?",
@@ -96,8 +96,8 @@ q(2, "Under a policy whose scale is 10, a learner enters 11 as the first item's 
 q(3, "A policy leaves out the override list entirely, stating no topClassOnMaxScore at all. What does the engine return?",
  "A refusal: \"topClassOnMaxScore must be an array of criterion ids (empty for none)\".",
  ["The classes with no override, since none was stated.",
-  "The classes with safety as the override, as in most policies.",
-  "The classes with every criterion as an override, so that any maximum forces the top class."],
+  "Safety taken as the override, as in most policies.",
+  "Every criterion made an override, so that any maximum forces the top class."],
  "The override list must always be stated, even when it is empty. A list quietly assumed empty would drop a safety part to a lower class with nobody having chosen it, so the engine asks the author to decide. It picks no criterion on its own.")
 
 q(1, "A stated case names two override criteria, s and p. Item W scores the maximum 10 on p and has a weighted score of 50. What does the engine return for W?",
