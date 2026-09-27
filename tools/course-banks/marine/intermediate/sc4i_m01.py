@@ -1,0 +1,117 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# SC4 Professional m01, Demand over a Period.
+# Every figure is quoted from digest.txt or returned by the vendored engine on
+# the stated input (single-field edits verified by the writer's probe). The
+# Ekene cluster is synthetic. No capstone name, input or value appears.
+
+q(2, "A voyage plan reads each installation's cargo. What does a fleetSize call read from each installation to size a fleet over the stated period?",
+ "Its demand over the period (deck m2, deck t and bulk m3 by product) and its minimum visits",
+ ["Its cargo for one voyage, which the engine multiplies by the voyages it expects in the period",
+  "A daily consumption rate held inside the engine, scaled by the stated periodDays",
+  "Only the deck area it asks for, because the bulk is sized by a separate tank call"],
+ "fleetSize reads `demand` and `minVisits` for each installation, in the same measures a voyage cargo uses: deck square metres, deck tonnes and bulk cubic metres by product. The engine holds no consumption rate, so nothing is scaled from a daily figure. A cargo key is refused in a fleet call, and the bulk is sized in the same call through the tank constraints.")
+
+q(0, "The Ekene week's deck demand is stated as EKA 520.000000, EKJ 900.000000, EKB 180.000000 and EKF 260.000000 m2. On a milk run through all four stops, what deck area demand does the single voyage set carry?",
+ "1860.000000 m2, the four stops added, because one voyage serves every stop",
+ ["900.000000 m2, the largest stop, since the heaviest customer sets a milk run",
+  "540.000000 m2, the deck area of one planned voyage of cargo on that route",
+  "600.000000 m2, the usable deck area of the PSV that sails the milk run"],
+ "On a milk run the voyage set's demand is the sum over its stops, 1860.000000 m2 for the Ekene week. The largest stop is only EKJ's share. 540.000000 m2 is one voyage's cargo, which the voyage plan reads. 600.000000 m2 is the PSV's deck area capacity, a divisor for the demand.")
+
+q(3, "A planner reuses a voyage-plan box in a fleet call, so the first installation carries a `cargo` key. What does the engine return?",
+ "A refusal in its own words: installations[0].cargo is not an accepted key; the accepted keys of installations[0] are id, name, distanceFromBaseNm, fieldHours, minVisits, demand",
+ ["A refusal in its own words: installations[0].cargo.deckAreaM2s is not an accepted key; the accepted keys of installations[0].cargo are deckAreaM2, deckWeightT, bulk",
+  "A fleet sized with the cargo key dropped silently, so the installation counts as having no demand at all and the other three stops set the voyage count",
+  "A refusal in its own words: installations[0].demand must be an object { deckAreaM2, deckWeightT, bulk }; got nothing"],
+ "Every call checks its accepted keys before it reads an input, so the unknown `cargo` key is refused first, naming the key and listing the accepted keys of an installation. The engine never drops a key silently. The message about a misspelt cargo key belongs to a voyage plan, where cargo is read. The message about a missing demand is what an installation with no demand and no stray key gets.")
+
+q(1, "On the Ekene PSV (800 m2 of deck at a usable fraction of 0.75), the milk run week asks for 1860.000000 m2 of deck cargo. How many voyages does deck area alone need, before any rounding?",
+ "3.100000, the week's deck demand over the 600.000000 m2 deck area capacity",
+ ["2.084143, the ratio of the week's deadweight demand over the vessel's deadweight",
+  "1.050000, the deck tonnes over the 2000 t deck load, read as the deck's own ratio",
+  "0.900000, the deck area utilisation of one planned voyage of the same cluster"],
+ "Each constraint's ratio is the period's demand over one voyage's capacity. The deck area capacity is 800 m2 times 0.75, 600.000000 m2, so 1860.000000 over 600.000000 is 3.100000. 2.084143 is deadweight's ratio and 1.050000 is deck load's, both other constraints. 0.900000 is one voyage's utilisation from a voyage plan.")
+
+q(1, "How does the engine build the deadweight demand of a period that it divides by the vessel's deadweight?",
+ "The period's deck weight plus every bulk volume times that product's stated density",
+ ["The bulk volumes alone in cubic metres, each one counted as a tonne a cubic metre",
+  "The deck weight alone, because bulk travels in its own tanks and has its own ratio",
+  "Deck and bulk tonnes times a stowage factor, which the engine applies to the deadweight"],
+ "Deadweight demand is built exactly as one voyage's deadweight load is: deck tonnes plus each bulk m3 times its stated density, 7294.500000 t for the Ekene week. Counting bulk at one tonne a cubic metre ignores the stated densities. Deck weight alone leaves out the bulk, which also weighs on the hull. The engine applies no stowage factor.")
+
+q(3, "The Ekene milk run week gives these demand ratios: deck area 3.100000, deadweight 2.084143, tank water 1.833333, tank diesel 1.712500. The largest minimum visits of the four stops is 3. What does the engine name as the driver?",
+ "Deck area, since its ratio of 3.100000 is the largest and sits above the 3 visits",
+ ["Minimum visits, since EKJ's 3 visits are a whole number and a ratio is only an average",
+  "Deadweight, since the week's 7294.500000 t is the heaviest figure in the whole table",
+  "Tank water, since the week's 2200.000000 m3 is the largest bulk volume of any product"],
+ "The voyages of demand are the largest ratio, and a constraint is named when its ratio is at or above the minimum visits. Deck area's 3.100000 beats every other ratio and EKJ's 3 visits. The size of a demand in tonnes or cubic metres decides nothing by itself; only its ratio to the matching capacity counts.")
+
+q(0, "On a milk run through EKA (2 visits), EKJ (3), EKB (1) and EKF (2), which minimum visits does the engine set against the voyages of demand?",
+ "The largest of the stops, 3, because one voyage calls at every stop",
+ ["The sum of the stops, 8, because every installation must be visited",
+  "The smallest of the stops, 1, since any voyage meets the other stops too",
+  "The visits of the first stop, 2, since the route begins at EKA"],
+ "One milk run voyage calls at every stop, so a count that satisfies the most demanding stop satisfies all of them: the set takes the largest minimum visits, EKJ's 3. Adding them would count each voyage once for every stop it serves. The smallest or the first stop's figure would leave EKJ under-served.")
+
+q(2, "A single installation on a dedicated route states 3 minimum visits and a period demand of 250.000000 m2 of deck cargo; its vessel's deck area capacity is 100 m2, and voyages are rounded up. What does the engine return for its voyages and driver?",
+ "3.000000 voyages before rounding and 3 after, driven by minimum visits",
+ ["3 voyages driven by deck area, since the deck demand rounds up to 3",
+  "2 voyages driven by deck area, dropping the fraction of the deck ratio",
+  "6 voyages, the deck ratio rounded up plus the 3 visits on top of it"],
+ "Deck area alone needs two and a half voyages; the visits are larger, so the voyages needed are 3.000000 and the engine names minimum visits. Rounding the deck ratio up also gives 3, which is why reading the driver matters: the count comes from the visits. Nothing is added on top, and dropping the fraction ignores both rules.")
+
+q(3, "Deck demand of 300.000000 m2 over a 100 m2 deck area capacity ties with 3 stated visits at exactly 3. What driver does the engine return?",
+ "Deck area: the engine's stated reading names the demand when its ratio is at or above the visits",
+ ["Minimum visits: the engine gives a tie to the whole-number input and names the stated visits",
+  "Both, printed together: the engine lists every figure that reaches the maximum count",
+  "None: a tie is refused, and the call must restate the visits so that one side wins out"],
+ "The engine returns deck area here. At a tie it names the demand, a reading it states; the alternative would name minimum visits, and no count moves between the two. It prints one driver, and a tie is a result, which the engine computes and names by its stated convention.")
+
+q(1, "Sized alone, an installation wants 10.000000 m2 on a deck whose area capacity is 100 m2 and 410 m3 of product d through a tank of 100 m3; it states 0 minimum visits, and voyages round up. What does the engine return?",
+ "4.100000 voyages before rounding, 5 voyages, driven by tank d",
+ ["1 voyage driven by deck area, since the deck is barely a tenth used",
+  "4 voyages driven by tank d, keeping the whole part of the tank ratio",
+  "4.100000 voyages, kept as the average and driven by tank d"],
+ "The tank ratio, 410 over 100, is the largest, so the voyages of demand are 4.100000 and the engine names tank d. Rounding up gives 5. Reading only the deck would plan one voyage. Keeping the whole part leaves a tenth of a voyage of bulk ashore, and the average is what the rule \"none\" would keep, while this call rounds up.")
+
+q(0, "A planner types 1.5 into an installation's minimum visits. What does the engine return, in its own words?",
+ "installations[0].minVisits must be a whole number from 0 to 1000; got 1.5",
+ ["A fleet with the visits rounded up to 2 and a reason saying the figure was rounded",
+  "A fleet sized with 1.5 visits, since a count before rounding may carry a fraction",
+  "installations[0].minVisits must be a whole number from 1 to 1000; got 1.5"],
+ "A visit is a call alongside, so the engine accepts only whole numbers from 0 to 1000 and refuses anything else by name. It rounds nothing on the planner's behalf and computes no fleet on a fractional visit. The lower bound in the message is 0, which lets a planner state no minimum in plain sight.")
+
+q(2, "On the Ekene PSV milk run week, a planner changes only the usable deck fraction from 0.75 to 1, so the deck area capacity becomes 800 m2. The largest minimum visits of the stops is 3. What driver and voyages does the engine return, voyages rounded up?",
+ "3 voyages, driven by minimum visits, as every demand ratio now sits below the 3 visits",
+ ["4 voyages, still driven by deck area, since deck area had the largest ratio before",
+  "3 voyages, driven by deadweight, since 2.084143 is now the largest demand ratio",
+  "3 voyages, driven by deck area, since its new ratio rounds up to exactly 3 voyages"],
+ "With 800 m2 of capacity the deck ratio falls below 3, and so does every other ratio, deadweight's 2.084143 included. The voyages needed are the larger of the largest ratio and the visits, so the visits set 3 and the engine names minimum visits. The deck ratio is compared unrounded, so it cannot claim the count by rounding up to 3.")
+
+q(1, "EKJ's minimum visits go from 3 to 4 while the rest of the rainy-season PSV milk run week, voyages rounded up, stays as stated. What does the engine return?",
+ "4 voyages driven by minimum visits, and the week still needs 10.345455 vessel-days",
+ ["4 voyages still driven by deck area, and the week still needs 10.345455 vessel-days",
+  "5 voyages driven by minimum visits, adding one voyage of 2.586364 days to the week",
+  "8 voyages, the 4 of deck area plus the 4 visits, and the vessel-days double"],
+ "The voyages needed are the larger of 3.100000 and 4, so they are 4.000000 and the visits are named. Rounded up, deck area also gave 4 voyages, so the vessel-days do not move: 4 times 2.586364 days is 10.345455. The driver changed and the count did not. Visits are compared with the ratio and never added to it.")
+
+q(3, "The Ekene week is sized on the PSV as dedicated voyages, one voyage set per installation. EKJ asks for 900.000000 m2 of deck cargo against 600.000000 m2 a voyage and states 3 visits. What does the engine name as the driver of each set?",
+ "Minimum visits for all four sets: EKA 2, EKJ 3, EKB 1 and EKF 2",
+ ["Deck area for all four sets, as it drove the milk run on the same demand",
+  "Deck area for EKJ, the heaviest customer, and minimum visits for the others",
+  "Tank mud for EKJ, the only stop that asks for mud, and deck area elsewhere"],
+ "Split one installation at a time, the demand is small against a whole PSV: EKJ's 900.000000 m2 over 600.000000 m2 is below its 3 visits, and the same holds at every stop. So every set is driven by its visits. The route changed what a voyage set is, which is why the milk run's deck area driver does not carry over.")
+
+q(0, "A fleet result names \"minimum visits\" as the driver of a voyage set. Which change moves that set's voyage count?",
+ "A change to the stated minimum visits, since the count comes from the service asked for",
+ ["A larger deck area or a higher usable fraction, since deck area is the usual lever on a count",
+  "A bigger tank for the heaviest bulk product, since a tank ratio sits below the visits",
+  "A faster vessel, since shorter voyages let the same visits carry more of the period's demand"],
+ "When the visits drive, every demand ratio sits at or below them, so a bigger deck, tank or speed changes a ratio that is already under the count. Only a change to the stated visits moves it, or a demand rise that lifts a ratio above them. Speed changes the voyage days and never the voyage count.")
+
+emit(Q, '/root/cat-wip-marine/banks/sc4i_m01.json', expect_n=15)
+finish()
