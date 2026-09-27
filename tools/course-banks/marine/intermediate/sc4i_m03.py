@@ -22,7 +22,7 @@ q(0, "A planner states 7.5 available days a vessel in a 7-day period. What does 
   "A refusal: vesselAvailableDays must be a finite number above 0; got 7.5"],
  "Available days above the period describe a week longer than itself, so the engine refuses them by name and says the bound. It trims nothing. The other message, above 0, is what a missing availability gets; 7.5 is above 0 and fails only against the period.")
 
-q(3, "A single dedicated installation's week is sized with 7 of 7 days available a vessel, available days equal to the period. How does the engine treat that input?",
+q(3, "A single dedicated installation's week of 1.416667 vessel-days is sized with 7 of 7 days available a vessel, available days equal to the period. How does the engine treat that input?",
  "It accepts it and returns 0.202381 vessels before rounding for that case",
  ["It refuses it, since a vessel must keep some days for crew change",
   "It refuses it, since available days must stay strictly below the period",

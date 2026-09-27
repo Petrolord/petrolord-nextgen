@@ -38,7 +38,7 @@ q(1, "In what order does the engine list and check a voyage's capacity constrain
   "From the highest utilisation to the lowest, so the binding constraint is always the first row."],
  "The stated order is deck area, deck load, deadweight, then the tanks in the order of the products. That order is what the tie rule uses, so it matters: a tie goes to the first constraint in it. The constraints table keeps that order whatever the utilisations are.")
 
-q(3, "One tank of 50 m3 holds 45 m3 of a product at 1 t a m3; the deck carries 5 m2 against 50 m2 usable and 4 t against an 80 t rating; the vessel's deadweight is 200 t. Which limit does the engine report?",
+q(3, "One tank of 50 m3 holds 45 m3 of a product d at 1 t a m3; the deck carries 5 m2 against 50 m2 usable and 4 t against an 80 t rating; the vessel's deadweight is 200 t. Which limit does the engine report?",
  "Tank d, at 0.900000, the fullest of the four constraints.",
  ["Deck area, since it is checked first.",
   "Deadweight, since bulk adds to it.",
@@ -52,7 +52,7 @@ q(0, "Every figure lands exactly on its limit: 50 m2 of cargo for 50 m2 of usabl
   "A refusal: three ties cannot be ranked."],
  "A constraint is overloaded only when its load is above its capacity at twelve digits, so a load exactly at capacity is feasible, and the three-way tie goes to the first in the order, deck area. The engine's reason: the binding constraint is deck area: 50 m2 of 50 m2 (100%). Reading a load at capacity as overloaded is the alternative the course names.")
 
-q(2, "Cargo of 81 t sits on a deck rated for 80 t, its 50 m2 footprint fills the 50 m2 usable deck, and a 50 m3 tank is full. What is the engine's verdict?",
+q(2, "Every limit holds but one: a deck rated for 80 t is handed 81 t. The footprint exactly fills the usable deck, the single tank is full, and the deadweight has room to spare. What is the engine's verdict?",
  "A voyage that is not feasible, with deck load binding at 1.012500 and named as overloaded.",
  ["Feasible: one tonne is within the tie rule.",
   "A voyage that is not feasible, with deck area binding at 1.000000 as the first in the order.",
@@ -83,12 +83,12 @@ q(2, "The Ekene milk run's cargo is put on the AHTS Ekene Tide. Which constraint
 q(3, "On the Ekene milk run, the PSV's brine tank is stated as 0 while the jack-up asks for 85 m3 of brine. What does the engine return?",
  "A refusal, in its own words: vessel.tanks.brine must be above 0 to carry brine: the installations on the milk run ask for 85 m3 of it; got 0",
  ["An overloaded voyage, with tank brine binding and a utilisation too large to print as a finite figure.",
-  "A voyage that carries the brine on deck in portable tanks, adding its area and weight to the deck.",
+  "A refusal, in its own words: vessel.tanks.brine must be stated for every product (0 when the vessel has no tank for it); got 0",
   "A voyage that leaves the brine at the base and names it in the reasons as cargo not carried."],
- "A load of a product the vessel has no tank for is refused by name, with the tank, the product, the m3 the stops ask for and the value it refused. There is no finite utilisation over a zero capacity, so it is no overload. The engine moves no bulk to the deck and drops no cargo from a plan.")
+ "A load of a product the vessel has no tank for is refused by name, with the tank, the product, the m3 the stops ask for and the value it refused. There is no finite utilisation over a zero capacity, so it is no overload. The brine tank is stated, as 0, so the message for a tank left out does not apply, and the engine drops no cargo from a plan.")
 
 q(1, "Why does the engine refuse a load of a product whose tank is stated as 0, where it plans an overloaded deck as a result?",
- "No finite utilisation exists for a load over a capacity of zero, and no number of voyages of that vessel could ever carry the product.",
+ "A load over a capacity of zero has no finite utilisation, and no voyage of that vessel could carry the product.",
  ["A tank of 0 is always a typing slip, so the engine asks for the tank to be typed again before it plans.",
   "A deck can take extra cargo by stacking units two high, where a tank has no such room to give.",
   "Bulk is priced per m3 where deck cargo is priced per m2, so the fuel bill cannot be worked out."],

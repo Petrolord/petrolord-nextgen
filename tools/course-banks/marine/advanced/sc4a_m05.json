@@ -11,7 +11,7 @@
   "explanation": "The engine states one rule for every comparison where binary doubles would mislead: two figures tie when they agree to 12 significant digits (DEFAULTS.TIE_DIGITS). A capacity check passes when the 12-digit load is at or below the 12-digit capacity; a count rounded up is the ceiling of the 12-digit figure; a binding tie goes to the first constraint in the stated order. Six decimals is only how figures print."
  },
  {
-  "prompt": "Dividing a week's demand of 2.1 by a capacity of 0.7 in binary doubles lands one step above 3. With voyages rounded up, what voyage count does the engine return?",
+  "prompt": "A week's only demand is 2.1 m2 of deck area, with no minimum visits, against a voyage capacity of 0.7 m2 of deck area; the division in binary doubles lands one step above 3. With voyages rounded up, what voyage count does the engine return?",
   "options": [
    "3 voyages, since the count rounds up on its twelve-digit figure, which is 3",
    "4 voyages, the ceiling of the raw double read straight from the binary arithmetic",
@@ -22,7 +22,7 @@
   "explanation": "The engine rounds a count up on its twelve-digit figure, which is exactly 3, and returns 3 voyages. That is the engine's stated reading; the alternative it names, the ceiling of the raw double, would give 4 for what is three voyages of demand. No graded figure moves under either."
  },
  {
-  "prompt": "A demand of 300.001 m2 of deck area meets a voyage capacity of 100 m2, with voyages rounded up. What does the engine return, and why does the twelve-digit rule not hold it at 3?",
+  "prompt": "A week's only demand, 300.001 m2 of deck area with no minimum visits, meets a voyage capacity of 100 m2 of deck area, with voyages rounded up. What does the engine return, and why does the twelve-digit rule not hold it at 3?",
   "options": [
    "3 voyages, since the twelve-digit rule reads anything within a thousandth as a tie",
    "4 voyages, since a thousandth of a square metre over 3 is plain at twelve digits",

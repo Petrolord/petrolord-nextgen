@@ -6,7 +6,7 @@ M/M/c assumes service times spread like an exponential: many short calls, some l
 
 ## Why the spread matters
 
-A queue forms when arrivals bunch, and it lasts longer when a long call holds a berth. With exponential service, some calls run far past the mean and the vessels behind them wait. With constant service, no call runs long, so the same arrivals and the same mean service produce a shorter queue. The berth utilisation is the same in both models, because it depends only on the mean service time. What changes is the wait.
+A queue forms when arrivals bunch, and it lasts longer when a long call holds a berth. With exponential service, some calls run far past the mean and the vessels behind them wait. With constant service, no call runs long, so the same arrivals and the same mean service produce a shorter queue. The berth utilisation is the same in both models, because it depends on the service only through its mean. What changes is the wait.
 
 ## The Ekene base both ways
 

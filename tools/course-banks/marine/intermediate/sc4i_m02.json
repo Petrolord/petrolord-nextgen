@@ -33,7 +33,7 @@
   "explanation": "\"none\" keeps the fraction: 3.100000 voyages is what the Ekene week averages over many periods, the right figure for a budget spread over a year. The fewest whole voyages is \"up\". No cargo is left ashore by either rule, and the visits still count under both, since rounding acts on the voyages needed."
  },
  {
-  "prompt": "A dedicated installation's deck demand is 2.1 m2 against a deck area capacity of 0.7 m2, voyages rounded up. The binary arithmetic returns the ratio a hair above 3 in its last digit. What voyage count does the engine return?",
+  "prompt": "A dedicated installation with 0 minimum visits has a deck demand of 2.1 m2 against a deck area capacity of 0.7 m2, voyages rounded up. The binary arithmetic returns the ratio a hair above 3 in its last digit. What voyage count does the engine return?",
   "options": [
    "4, the ceiling of the raw double, since the ratio sits a hair above exactly 3",
    "A hair over 3, since a count rounded up keeps the exact ratio",
@@ -71,7 +71,7 @@
    "10.345455, since weather changes neither voyages nor vessel-days",
    "8.017727, the week with its voyages kept as the fractional average",
    "2.238636, since the calm week needs only one voyage's days",
-   "8.954545, four calm voyages of 2.238636 days each"
+   "8.954545, the four voyages again, now at 2.238636 calm days each"
   ],
   "answer": 3,
   "explanation": "Weather reaches the fleet through time. The calm week sails the same 4 voyages, each shorter, so 4 times 2.238636 is 8.954545 vessel-days. 10.345455 is the rainy-season week. 8.017727 is the rainy-season week with voyages kept as the average. One voyage's days are the multiplier."
@@ -110,7 +110,7 @@
   "explanation": "EKJ's deck ratio is 900.000000 over 600.000000, which rounds up to 2 and now beats 1 visit, so deck area drives 2 voyages. One EKJ voyage of 1.518182 days drops out of the fleet total. The other rows keep their own demand, visits and drivers; a dedicated plan changes one row at a time."
  },
  {
-  "prompt": "One dedicated voyage takes 9.25 days because of 200 stated port hours, and a vessel is available 6.5 days of a 7-day period. What does the engine return?",
+  "prompt": "One dedicated voyage takes 9.25 days because of 200 stated port hours, and a vessel is available 6.5 days of a 7-day period, with vessels rounded up. What does the engine return?",
   "options": [
    "A refusal naming portHours, since no voyage may be longer than the days a vessel has in the period",
    "A result: 9.250000 vessel-days and 2 vessels, with a reason that the voyage is longer than the days available",
@@ -118,10 +118,10 @@
    "A result of 2 vessels with no reason, since two vessels hold more than the 9.250000 vessel-days"
   ],
   "answer": 1,
-  "explanation": "The engine computes the fleet and prints, in its own words: voyage X takes 9.25 days, longer than the 6.5 days a vessel is available in the period. It is a result with a reason, so every figure is shown. The division gives 2 vessels, and the reason warns that neither can sail a nine-and-a-quarter-day voyage inside the week."
+  "explanation": "The engine computes the fleet and prints, in its own words: voyage X takes 9.25 days, longer than the 6.5 days a vessel is available in the period. It is a result with a reason, so every figure is shown. The division, with vessels rounded up, gives 2 vessels, and the reason warns that neither can sail a nine-and-a-quarter-day voyage inside the week."
  },
  {
-  "prompt": "Take the 9.25-day dedicated voyage again and state vesselAvailableDays as 7, equal to the 7-day period. What does the engine return?",
+  "prompt": "Take the 9.25-day dedicated voyage again and state vesselAvailableDays as 7, equal to the 7-day period, vessels still rounded up. What does the engine return?",
   "options": [
    "The reason disappears, since available days equal to the period cover any single voyage it sails",
    "A refusal, since vesselAvailableDays equal to periodDays leaves no time for maintenance",
@@ -129,7 +129,7 @@
    "The reason stays, now naming 7 days, since 9.25 days is still longer than the days available"
   ],
   "answer": 3,
-  "explanation": "The check is each voyage's days against the stated available days: 9.25 is above 7, so the engine still prints the reason, with 7 in it. Available days equal to the period are accepted; only above the period is refused. The vessel-days of 9.250000 over 7 still round up to 2 vessels."
+  "explanation": "The check is each voyage's days against the stated available days: 9.25 is above 7, so the engine still prints the reason, with 7 in it. Available days equal to the period are accepted; only above the period is refused. The vessel-days of 9.250000 over 7 still give 2 vessels, rounded up."
  },
  {
   "prompt": "Which of these fleetSize inputs does the engine refuse, where the others return a result?",
@@ -137,10 +137,10 @@
    "One voyage of 9.25 days against 6.5 days a vessel is available in the period",
    "Vessels rounded to the nearest, leaving the week short by 2.916667 vessel-days",
    "A dedicated set whose count is driven by the minimum visits alone",
-   "A period of zero days: periodDays must be a finite number above 0; got 0"
+   "A period of zero days, which the engine refuses by naming periodDays"
   ],
   "answer": 3,
-  "explanation": "A period of zero cannot be computed, so the engine refuses it by name and returns no figures. A voyage longer than the days available and a short fleet are results with reasons: the engine computes them and prints what deserves attention. A set driven by its visits is an ordinary result."
+  "explanation": "A period of zero cannot be computed, so the engine refuses it by name and returns no figures: periodDays must be a finite number above 0; got 0. A voyage longer than the days available and a short fleet are results with reasons: the engine computes them and prints what deserves attention. A set driven by its visits is an ordinary result."
  },
  {
   "prompt": "One Ekene PSV milk run voyage takes 2.586364 days, and a vessel is available 6.5 days of the week. Does the engine print a reason about voyage length?",

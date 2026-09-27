@@ -9,7 +9,7 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 # Ekene cluster is synthetic. No capstone name, input or value appears.
 
 q(1, "The Ekene 20 ft offshore container is stated as 6.060000 m long, 2.440000 m wide and 12.000000 t. What footprint does the deck plan give one unit?",
- "14.786400 m2, the length times the width",
+ "14.786400 m2, its length of 6.060000 m times its width",
  ["12.000000 m2, its weight in tonnes read as an area",
   "6.060000 m2, the length alone, as the unit is loaded lengthwise",
   "7.295600 m2, the footprint of the 10 ft container on the same list"],

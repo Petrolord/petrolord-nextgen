@@ -11,11 +11,11 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 # the heavy-liquid golden and stated probes (the fraction set to 1).
 
 q(0, "PSV Ekene Star states a deck area of 800 m2 and a usable deck fraction of 0.75. What deck area capacity does the engine return?",
- "600.000000 m2, the deck area times the usable fraction.",
- ["800.000000 m2, the whole stated deck, since the usable fraction trims the deck load and leaves the area as stated.",
+ "600.000000 m2, the stated deck area of 800 m2 times the usable fraction of 0.75.",
+ ["800.000000 m2, the whole stated deck, as the fraction trims only the deck load.",
   "412.5 m2, the capacity the engine gives the AHTS Ekene Tide's smaller deck at the same fraction.",
   "540.000000 m2, the deck cargo the Ekene milk run carries, which sets the deck it needs."],
- "The deck area capacity is the stated deck area times the stated usable fraction: 800 times 0.75 is 600.000000 m2. The fraction applies to the deck area only. 412.5 m2 is the AHTS's capacity from its 550 m2 deck, and 540.000000 m2 is the load on the PSV's deck, a load and no capacity.")
+ "The deck area capacity is the stated deck area times the stated usable fraction: 800 times 0.75 is 600.000000 m2. The fraction applies to the deck area only. 412.5 m2 is the AHTS's capacity from its 550 m2 deck, and 540.000000 m2 is the load on the PSV's deck.")
 
 q(2, "A planner types 1.1 into the usable deck fraction control. What does the engine return?",
  "Refused by name, and the message reads: vessel.deckUsableFraction must be a number above 0 and at most 1; got 1.1",
@@ -25,11 +25,11 @@ q(2, "A planner types 1.1 into the usable deck fraction control. What does the e
  "The usable fraction must be above 0 and at most 1, and 1.1 would claim more deck than the vessel has, so it is refused on vessel.deckUsableFraction with the value it got. The engine changes no stated input, the deck area is not at fault, and it stacks no cargo.")
 
 q(1, "On the Ekene PSV milk run in the rainy season, the usable deck fraction is changed from 0.75 to 1 and nothing else. Which constraint does the engine name as binding?",
- "Deadweight, at 0.682857, since the full 800 m2 of deck leaves the cargo's area far from the limit.",
+ "Deadweight, at 0.682857, now above the deck area's 540 of 800 m2 and the highest of all.",
  ["Deck area, still at 0.900000, since the fraction changes the capacity of no constraint the engine checks.",
   "Deck area, at 1.000000, since a usable fraction of 1 means the cargo fills the whole of the deck.",
   "None: the engine refuses the call, since the usable fraction must stay strictly below 1."],
- "A fraction of 1 is accepted and makes the deck area capacity the full 800 m2. Reading the utilisations, the deadweight at 0.682857 is then the highest, and the engine names it. 0.900000 was deck area's utilisation at 0.75, a fraction of 1 does not fill the deck, and 1 is inside the accepted range.")
+ "A fraction of 1 is accepted and makes the deck area capacity the full 800 m2. Reading the utilisations, deck area's 540 of 800 m2 now sits just below the deadweight's 0.682857, so the deadweight is the highest, and the engine names it. 0.900000 was deck area's utilisation at 0.75, a fraction of 1 does not fill the deck, and 1 is inside the accepted range.")
 
 q(3, "Which capacity constraints does the usable deck fraction reduce?",
  "The deck area alone; the deck load, the deadweight and the tanks are each a capacity stated in its own right.",
@@ -39,7 +39,7 @@ q(3, "Which capacity constraints does the usable deck fraction reduce?",
  "The engine's basis states the rule: deck area capacity is the deck area times the usable fraction. The deck load is stated in tonnes, the deadweight in tonnes and each tank in m3, each as a capacity the call states directly, so the fraction touches none of them.")
 
 q(1, "On the Ekene milk run the deck cargo weighs 635.000000 t, and the PSV's deck load is stated at 2000 t. What utilisation does the engine return for the deck load?",
- "0.317500, the deck cargo's weight over the deck load.",
+ "0.317500, the deck cargo's 635 t over the deck load of 2000 t, its own constraint.",
  ["0.900000, the deck area's utilisation, which the engine reports for the deck as a whole.",
   "0.682857, the deadweight's utilisation, since deck weight counts against the deadweight.",
   "0.620833, the utilisation of the water tank, the fullest of the six tanks on the voyage."],
@@ -52,8 +52,8 @@ q(2, "On the Ekene milk run, 635.000000 t of deck cargo sails with diesel 460, w
   "2200 t, the cargo deadweight that the AHTS Ekene Tide states for the same cargo and route."],
  "The deadweight load is the deck weight plus every bulk m3 times its stated density, which the engine returns as 2390.000000 t, a utilisation of 0.682857 against 3500 t. Bulk counts against both its tank and the deadweight. 3500 and 2200 are the two vessels' capacities.")
 
-q(0, "A small case states 60 t of deck cargo and 50 m3 of a product d at 2.9 t a m3, against a cargo deadweight of 200 t. What does the engine return?",
- "A deadweight load of 205.000000 t, overloaded at 1.025000, returned as a result with its reasons.",
+q(0, "A small case states deck cargo of 5 m2 and 60 t on a deck of 50 m2 usable rated for 80 t, and 50 m3 of a product d at 2.9 t a m3 filling its 50 m3 tank, against a cargo deadweight of 200 t. What does the engine return?",
+ "A deadweight load of 205.000000 t, overloaded at 1.025000, and returned with its reasons.",
  ["A refusal, since a density above 2.1 t a m3 lies outside the range of the products the engine accepts.",
   "A deadweight load of 60 t, since bulk carried in the tanks is left out of the cargo deadweight.",
   "A feasible plan at a deadweight utilisation of 1.000000, since 205 t is read as close enough to 200 t."],
@@ -75,17 +75,17 @@ q(2, "On the Ekene PSV milk run, which of the six tanks does the engine report a
 
 q(0, "A vessel copied from another job states tanks for five of the six Ekene products and leaves mud out. What does the engine return?",
  "A refusal, in its own words: vessel.tanks.mud must be stated for every product (0 when the vessel has no tank for it); got nothing",
- ["A plan that treats the missing mud tank as unlimited, so the mud always fits without ever binding.",
-  "A plan that treats the missing tank as a tank of 0, refusing only if an installation asks for mud.",
-  "A plan that moves the mud to the deck in portable tanks, using the deck area and the deck load."],
- "Every product needs a stated tank, stated as 0 when the vessel has none, and a missing tank is refused by name whether or not any mud is loaded. A missing tank read as no limit would let a plan carry mud the vessel has nowhere to put, and the engine moves no cargo from tanks to deck.")
+ ["The missing mud tank is read as unlimited, so the mud always fits without ever binding.",
+  "A refusal, in its own words: vessel.tanks.mud must be above 0 to carry mud; got nothing",
+  "Mud moved to the deck in portable tanks, using up deck area and deck load for the voyage."],
+ "Every product needs a stated tank, stated as 0 when the vessel has none, and a missing tank is refused by name as unstated, whether or not any mud is loaded; the message about carrying mud belongs to a tank stated as 0. A missing tank read as no limit would let a plan carry mud the vessel has nowhere to put, and the engine moves no cargo from tanks to deck.")
 
 q(1, "The vessel's tanks include one keyed methanol, and the call's products are diesel, water, mud, brine, cement and barite. What does the engine return?",
  "A refusal, in its own words: vessel.tanks.methanol is not a product id; the accepted keys of vessel.tanks are the product ids diesel, water, mud, brine, cement, barite",
  ["A plan that carries the methanol tank empty on every voyage and reports its utilisation as 0.000000 in the constraints table.",
   "A plan that adds methanol as a seventh product at the density of water, 1.000000 t a m3, and checks the tank against it.",
-  "A refusal asking for methanol's kind and density, since every product in a call needs both of them stated."],
- "A tank key must be one of the call's product ids, and a key the engine does not read is refused with the full list of accepted keys. The engine creates no product from a tank key and ignores no key silently. Methanol is not a product of this call, so its kind and density are not asked for.")
+  "A refusal, in its own words: products[6].densityTPerM3 must be a finite number above 0; got nothing"],
+ "A tank key must be one of the call's product ids, and a key the engine does not read is refused with the full list of accepted keys. The engine creates no product from a tank key and ignores no key silently. Methanol is not a product of this call, and the engine adds no seventh product, so it asks for nothing at products[6].")
 
 q(3, "Cement and barite are stated with the kind dry. How does the engine treat them on a voyage?",
  "Like any product: a volume in m3 against its own tank, and a weight through its stated density into the deadweight.",
@@ -95,7 +95,7 @@ q(3, "Cement and barite are stated with the kind dry. How does the engine treat 
  "Each product states its kind, liquid or dry, and the engine checks every tank the same way: a volume against its capacity, and a weight through the density into the deadweight. Bulk travels in segregated tanks, one product to a tank, so cement and barite each have their own, and neither goes on deck.")
 
 q(0, "Why does the engine measure deck cargo as an area in square metres?",
- "Deck cargo is set side by side with nothing stacked, an idea the course takes by concept from Aas, Halskau and Wallace (2009).",
+ "Deck cargo sits side by side with nothing stacked, an idea taken by concept from Aas, Halskau and Wallace (2009).",
  ["Deck cargo is stacked two high on a supply vessel, so an area stands in for a volume at half its height.",
   "Skoko et al. print every vessel's deck capacity in square metres, and the engine reads that table.",
   "A unit's weight is unknown until the installation weighs it, so area is the only figure a plan can state."],

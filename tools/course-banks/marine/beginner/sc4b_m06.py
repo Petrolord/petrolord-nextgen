@@ -19,7 +19,7 @@ q(1, "The PSV (11 knots) and the AHTS (12 knots) sail the Ekene milk run with th
  "The AHTS covers the 206.000000 NM at 12 knots, so its sailing hours are fewer, and with the same port and field hours its voyage is 60.200000 hours against the PSV's 62.072727. The weather input is the same for both and names no port time, and the engine applies it whatever the vessel's speed.")
 
 q(3, "On the Ekene milk run the AHTS burns 23.880000 t against the PSV's 19.876364 t, though its voyage is shorter. Why?",
- "It burns more an hour in every activity: 0.600000, 0.040000 and 0.400000 t against the PSV's 0.5, 0.03 and 0.3.",
+ "It burns more an hour in every activity: 0.600000, 0.040000 and 0.400000 t against the PSV's 0.500000, 0.030000 and 0.300000.",
  ["It sails a longer route, since the AHTS's milk run adds a leg out to an anchor-handling site.",
   "Its weather factor is higher, since the engine slows an AHTS more than a PSV in the same swell and the same rainy season.",
   "Its fuel is priced higher, since the engine charges an AHTS at a different price a tonne."],
@@ -47,10 +47,10 @@ q(2, "How long, in days, is one PSV voyage round the four Ekene stops with a fac
  "A voyage's days are its total hours after the weather factor, over 24: 53.727273 calm hours are 2.238636 days and 62.072727 rainy-season hours are 2.586364 days. 2.686364 is the rainy-season voyage with port time named as well, which this plan does not state, and 53.727273 and 62.072727 are hours.")
 
 q(1, "Which checks on the course's pre-sailing checklist does the engine enforce for the planner, refusing an input that breaks one?",
- "The input checks: a tank and density for every product, every stop named once with one more leg than stops, and a stated weather factor with its activities.",
+ "The input checks: a tank and density for every product, each stop named once with one more leg than stops, and a stated weather input.",
  ["The reading checks: whether the voyage is feasible, which constraint binds and whether the voyage's days fit the vessel's time.",
   "Every check on the list, so a plan the engine accepts without a refusal is ready to sail as it stands.",
-  "None of them, since the engine plans whatever it is given and reports any fault only afterwards."],
+  "None of them, since the engine plans whatever it is given and reports any fault in the reasons afterwards."],
  "The first three checks are about inputs, and an input that breaks one is refused by name. The last four are about reading the result, the verdict, the binding constraint, the days and the fuel with its price, and only the planner can make them: an overloaded voyage is a result and the engine knows no period at this tier.")
 
 q(0, "Why does the checklist leave it to the planner to confirm that a voyage's days fit the time the vessel has?",
@@ -68,7 +68,7 @@ q(3, "A colleague quotes the rainy-season Ekene fuel cost as 17292.436364. What 
  "A figure that depends on an input is quoted with it: a fuel cost with its burns and price, and the hours under it with the route, speed and weather. The weather choice alone moves the bill by 2829.872727. The binding constraint and the deck area do not enter the fuel, and the engine confirms no input for the planner.")
 
 q(1, "Which question does this tier's voyage plan leave to the procurement course?",
- "Which vessel a company should hire, and at what rate.",
+ "Which vessel a company should hire for the work, and at what day rate or contract.",
  ["Which vessel carries a stated cargo on a stated route within its capacities.",
   "How long a voyage takes at a stated speed, with its port and field hours.",
   "What a voyage's fuel costs at a stated burn for each activity and a stated price."],
@@ -96,14 +96,14 @@ q(2, "The AHTS's reasons on the Ekene milk run name three overloaded constraints
  "An overloaded voyage is a result that names what does not fit, so the fixes are about the cargo, the vessel or the route. The weather factor and the fuel price change time and money and leave every capacity where it is, and a usable fraction above 1 is refused by name.")
 
 q(3, "Why is the comparison of the two Ekene vessels on the milk run a fair one?",
- "Only the vessel changes: the route, the cargo, the port and field hours, the weather input and the price are the same in both.",
+ "Only the vessel changes: route, cargo, port and field hours, weather input and price are the same in both.",
  ["Both vessels state the same speed, so every difference between the two rows comes from the tanks.",
   "The engine scales each vessel to the same deck before it compares them, so the decks cancel out.",
   "Both are run in calm weather, so the weather cannot favour one of the two vessels over the other."],
  "Every difference in the table comes from the vessels' own stated figures because nothing else changed. The PSV states 11 knots and the AHTS 12, the engine scales nothing, and both rows carry the rainy-season factor of 1.2 on sailing and field time. Change the weather on one side and the comparison would mix two effects.")
 
 q(0, "On the Ekene PSV milk run the deck area's utilisation is 0.900000 and the deadweight's 0.682857. What does that pair tell a planner?",
- "Deck area runs out first: the vessel has more room by weight than by area, so dense cargo with a small footprint fits more easily.",
+ "Deck area runs out first, so the vessel has more room by weight than by area for dense, compact cargo.",
  ["Deadweight binds, since it is the constraint nearest to its limit when the limits are counted in tonnes.",
   "The voyage is overloaded by weight, since 0.682857 of the 3500 t deadweight is above the 2000 t deck load.",
   "Nothing a planner can use, since the utilisations of two constraints in different units cannot be compared."],

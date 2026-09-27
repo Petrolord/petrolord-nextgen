@@ -48,7 +48,7 @@ x("What does the demand factor of a draw multiply, in the engine's Monte Carlo?"
  "The demand factor multiplies every installation's demand, deck area, deck weight and each bulk product alike, and each draw then sizes the fleet exactly as fleetSize does. The minimum visits are a stated count and do not scale; the voyages and the vessel-days follow from the scaled demand through the stated rounding.")
 
 # 5
-x("On the Ekene week (the PSV milk run, weather triangular 1, 1.2, 1.6 on sailing and field time, demand triangular 0.85, 1, 1.3, 2 planned vessels), what does the engine return as the plan at the modes?",
+x("On the Ekene week (the PSV milk run, weather triangular 1, 1.2, 1.6 on sailing and field time, demand triangular 0.85, 1, 1.3, 2 planned vessels, seed 20260927, 20000 draws), what does the engine return as the plan at the modes?",
  "10.345455 vessel-days and 2 vessels, the figures fleetSize returns for the same week, no draw",
  ["10.239206 vessel-days and 2.001400 vessels, the mean of the sampled weeks on seed 20260927",
   "10.412277 vessel-days, the P50 of the draws, which is the plan once the draws are sorted",

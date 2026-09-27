@@ -18,7 +18,7 @@ q(2, "When the engine will not accept an input, what does the call hand back?",
  "A refusal is an object with an error and a field, and the message starts with the name of the field it refuses and states the condition that failed. The engine keeps no typical figure to swap in, it never returns zeros in place of a refusal, and every message is printed in the engine's own words, so there is no code to look up.")
 
 q(0, "Which five functions does the engine export for the course's calculator panels to call?",
- "voyagePlan, fleetSize, fleetVariability, deckPlan and shoreBase.",
+ "voyagePlan, fleetSize, fleetVariability, deckPlan and shoreBase, one function for each question.",
  ["voyagePlan, fleetSize, deckPlan, shoreBase and a scheduler that sets each departure time by the clock.",
   "Only voyagePlan and fleetSize, since the deck and the base are worked in the Suite app alone.",
   "A single planner function that takes every input at once and returns the voyage, the fleet, the deck and the base together."],
@@ -26,7 +26,7 @@ q(0, "Which five functions does the engine export for the course's calculator pa
 
 q(3, "The course's table of sources gives each text the date it was read. What is that date?",
  "2026-09-27, the same date for every text in the table, whatever the text's own edition.",
- ["26 March 2015, the date printed on the Eindhoven queueing lecture notes of Adan and Resing.",
+ ["26 March 2015, the date printed on Adan and Resing's queueing lecture notes.",
   "20 June 2001, the draft date of Iversen's handbook.",
   "1 February 2024, the issue date of the Skoko et al. paper, which is the main offshore source."],
  "Every text was read on 2026-09-27. The other three dates are real, and each is an edition date of one text: 26 March 2015 for Adan and Resing, 20 June 2001 for Iversen's draft and 1 February 2024 for Skoko et al. The table gives each edition beside the date it was read.")
@@ -88,7 +88,7 @@ q(2, "In the voyage plan view a box states the key fuelPrice where fuelPricePerT
  "The unknown key is refused first. The engine's own words are: fuelPrice is not an accepted key; the accepted keys at the top level are vessel, products, installations, route, portHours, weather, fuelPricePerT. A call returns one refusal at a time, and the engine drops no key silently, so a misspelt price is refused where it would otherwise have seemed to apply.")
 
 q(1, "Which of these does the engine answer with a refusal?",
- "A voyage plan box that leaves the vessel's speed unstated.",
+ "A voyage plan box that leaves the vessel's speed unstated, an input the engine needs to time the voyage.",
  ["A milk run whose deck cargo is larger than the vessel's usable deck area, so deck area is overloaded.",
   "A voyage whose deadweight load, bulk included, comes out above the vessel's stated cargo deadweight.",
   "A plan whose binding constraint sits exactly at a utilisation of 1.000000, the capacity itself."],
@@ -102,14 +102,14 @@ q(0, "What is every graded number in this course?",
  "Every graded number is a return value of the engine on fixed inputs, so the same inputs give the same number on any machine. No graded figure is a Monte Carlo draw, none is a source's printed figure, and none is a judgement: each is quoted to six decimals as the panel prints it.")
 
 q(3, "Which statement about the Marine Logistics Planner, the Suite app for this course, is true?",
- "It runs the same engine file as the course, and every practical here also runs in the course's own calculator panels.",
+ "It runs the same engine file as the course, and every practical also runs in the course's own panels.",
  ["A learner has to open it to finish each exercise, because the course panels only display the figures it sends them.",
   "It runs its own copy of the engine, tuned separately, so its figures can differ from the course's in the sixth decimal.",
   "It is where the capstone is graded, since the course's calculator panels cannot read a capstone case file at all."],
  "The planner, in the Suite's Midstream & Downstream module, runs the same engine file on the same Ekene fixture. The course's four calculator panels call the vendored engine on the learner's own inputs, so a learner without a Suite seat can work every exercise, and the Associate capstone is worked in the voyage and fleet calculator.")
 
 q(2, "The course gives the word voyage a narrow meaning of its own. Which meaning?",
- "One sailing from the base and back: a milk run is one voyage through every stop, and a dedicated voyage serves one installation.",
+ "One sailing from the base and back: a milk run through all of its stops counts as one voyage.",
  ["Any leg between two points of the route, so a milk run with four stops is made of five voyages.",
   "Each call at an installation, so a milk run through four installations counts as four voyages.",
   "All the sailing one vessel does in a week, however many times it returns to the base in that week."],

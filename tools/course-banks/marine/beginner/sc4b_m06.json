@@ -16,7 +16,7 @@
    "It sails a longer route, since the AHTS's milk run adds a leg out to an anchor-handling site.",
    "Its weather factor is higher, since the engine slows an AHTS more than a PSV in the same swell and the same rainy season.",
    "Its fuel is priced higher, since the engine charges an AHTS at a different price a tonne.",
-   "It burns more an hour in every activity: 0.600000, 0.040000 and 0.400000 t against the PSV's 0.5, 0.03 and 0.3."
+   "It burns more an hour in every activity: 0.600000, 0.040000 and 0.400000 t against the PSV's 0.500000, 0.030000 and 0.300000."
   ],
   "answer": 3,
   "explanation": "Fuel is hours by activity times the stated burn for each activity. The AHTS's stated burns are higher in all three, so it burns more fuel in all even over fewer hours. The two vessels sail the same legs under the same weather input, and the price enters the cost and leaves the tonnes alone: the fuel cost is 20775.600000 against 17292.436364 at the same 870."
@@ -58,9 +58,9 @@
   "prompt": "Which checks on the course's pre-sailing checklist does the engine enforce for the planner, refusing an input that breaks one?",
   "options": [
    "The reading checks: whether the voyage is feasible, which constraint binds and whether the voyage's days fit the vessel's time.",
-   "The input checks: a tank and density for every product, every stop named once with one more leg than stops, and a stated weather factor with its activities.",
+   "The input checks: a tank and density for every product, each stop named once with one more leg than stops, and a stated weather input.",
    "Every check on the list, so a plan the engine accepts without a refusal is ready to sail as it stands.",
-   "None of them, since the engine plans whatever it is given and reports any fault only afterwards."
+   "None of them, since the engine plans whatever it is given and reports any fault in the reasons afterwards."
   ],
   "answer": 1,
   "explanation": "The first three checks are about inputs, and an input that breaks one is refused by name. The last four are about reading the result, the verdict, the binding constraint, the days and the fuel with its price, and only the planner can make them: an overloaded voyage is a result and the engine knows no period at this tier."
@@ -91,7 +91,7 @@
   "prompt": "Which question does this tier's voyage plan leave to the procurement course?",
   "options": [
    "Which vessel carries a stated cargo on a stated route within its capacities.",
-   "Which vessel a company should hire, and at what rate.",
+   "Which vessel a company should hire for the work, and at what day rate or contract.",
    "How long a voyage takes at a stated speed, with its port and field hours.",
    "What a voyage's fuel costs at a stated burn for each activity and a stated price."
   ],
@@ -137,7 +137,7 @@
    "Both vessels state the same speed, so every difference between the two rows comes from the tanks.",
    "The engine scales each vessel to the same deck before it compares them, so the decks cancel out.",
    "Both are run in calm weather, so the weather cannot favour one of the two vessels over the other.",
-   "Only the vessel changes: the route, the cargo, the port and field hours, the weather input and the price are the same in both."
+   "Only the vessel changes: route, cargo, port and field hours, weather input and price are the same in both."
   ],
   "answer": 3,
   "explanation": "Every difference in the table comes from the vessels' own stated figures because nothing else changed. The PSV states 11 knots and the AHTS 12, the engine scales nothing, and both rows carry the rainy-season factor of 1.2 on sailing and field time. Change the weather on one side and the comparison would mix two effects."
@@ -145,7 +145,7 @@
  {
   "prompt": "On the Ekene PSV milk run the deck area's utilisation is 0.900000 and the deadweight's 0.682857. What does that pair tell a planner?",
   "options": [
-   "Deck area runs out first: the vessel has more room by weight than by area, so dense cargo with a small footprint fits more easily.",
+   "Deck area runs out first, so the vessel has more room by weight than by area for dense, compact cargo.",
    "Deadweight binds, since it is the constraint nearest to its limit when the limits are counted in tonnes.",
    "The voyage is overloaded by weight, since 0.682857 of the 3500 t deadweight is above the 2000 t deck load.",
    "Nothing a planner can use, since the utilisations of two constraints in different units cannot be compared."

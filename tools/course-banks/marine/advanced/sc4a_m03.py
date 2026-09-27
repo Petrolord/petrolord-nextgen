@@ -28,16 +28,16 @@ x("On the Ekene base run as M/D/c, what does the engine return for the probabili
  "No figure: the engine gives no delay probability for M/D/c and its basis says so",
  ["0.371014, carried over unchanged from the M/M/c run of the same base",
   "0.106417, the figure the three-berth M/M/c run returns for the base",
-  "1.000000, since with a constant service every arriving vessel is made to wait"],
- "The engine's basis for M/D/c ends \"probabilityWait is not given for M/D/c\", and the calculator's tile reads \"not given for M/D/c\". 0.371014 belongs to M/M/c alone; 0.106417 is the three-berth M/M/c figure; vessels that find a free berth wait nothing under either model.")
+  "The M/M/c probability halved, as the wait it scales is halved for a constant service"],
+ "The engine's basis for M/D/c ends \"probabilityWait is not given for M/D/c\", and the calculator's tile reads \"not given for M/D/c\". 0.371014 belongs to M/M/c alone; 0.106417 is the three-berth M/M/c figure; vessels that find a free berth wait nothing under either model, and no probability is halved along with the wait.")
 
 # 3
 x("Switching the Ekene base from M/M/c to M/D/c with every input held, which figure stays at the same value in the engine's return?",
- "The berth utilisation, 0.533333, which depends only on the mean service time",
+ "The berth utilisation, 0.533333, set by the service only through its mean",
  ["The mean wait, 3.180124 hours, as the arrivals are unchanged",
   "The mean time at the base, 11.180124 hours",
   "The probability of waiting, 0.371014, since both models share Erlang's C formula"],
- "The berth utilisation is the arrivals an hour times the mean service over the berths, and neither term depends on how the service times spread, so it is 0.533333 under both models. What the model changes is the wait (1.665786 hours as M/D/c against 3.180124 as M/M/c), and so the time at the base; M/D/c returns no probability of waiting.")
+ "The berth utilisation is the arrivals an hour times the mean service over the berths, so it depends on the service only through its mean; how the service times spread does not enter, and it is 0.533333 under both models. What the model changes is the wait (1.665786 hours as M/D/c, the Cosmetatos approximation, against 3.180124 as M/M/c), and so the time at the base; M/D/c returns no probability of waiting.")
 
 # 4
 x("As Liu et al. print it in eq. (2), how is the M/D/c mean wait built from the M/M/c wait at the same berths and load?",
@@ -65,18 +65,18 @@ x("One berth, a constant service of 1 hour and a berth utilisation of 0.900000. 
 
 # 7
 x("A stated case puts 3 berths at a berth utilisation of 0.800000 with 1-hour calls. Comparing the two queue models on it, which pair of waits comes back?",
- "0.552578 hours as M/D/c against 1.078652 hours as M/M/c",
- ["0.259397 hours as M/D/c, the Ekene three-berth figure, against 1.078652",
-  "1.078652 hours as M/D/c, since the two models agree above one berth",
+ "0.552578 hours as M/D/c (the Cosmetatos approximation), 1.078652 as M/M/c",
+ ["0.259397 hours as M/D/c, the Ekene three-berth figure, against 1.078652 as M/M/c",
+  "1.078652 hours under both models, since the two models agree above one berth",
   "0.552578 hours under both models, the service time being fixed at 1"],
  "The engine returns 0.552578 hours as M/D/c and 1.078652 as M/M/c on the same inputs: a little over half, because the correction of eq. (2) adds to the halved wait at three berths. 0.259397 belongs to the Ekene base at three berths, a different load. The two models part at every berth count, and the M/M/c call knows nothing of the service being constant.")
 
 # 8
-x("On the Ekene base the engine returns 1.665786 hours as M/D/c and 3.180124 as M/M/c. What ratio of the two does the course derive, and what does it show?",
- "0.523812: a half, plus a correction of a few hundredths from eq. (2)",
- ["0.500000: an exact half, the correction vanishing",
+x("On the Ekene base the engine returns 1.665786 hours as M/D/c (the Cosmetatos approximation) and 3.180124 as M/M/c. What ratio of the two does the course derive, and what does it show?",
+ "0.523812: a half, plus the Cosmetatos correction of eq. (2)",
+ ["0.500000: an exact half, the correction vanishing at two berths",
   "0.371014: the probability of waiting, which scales the M/D/c wait down",
-  "0.533333: the berth utilisation of the base"],
+  "0.533333: the berth utilisation of the base, which the ratio copies"],
  "1.665786 over 3.180124 is 0.523812: the halving plus a correction, since the Ekene base has 2 berths and the (c - 1) factor is 1. The correction vanishes only at one berth. The ratio is set by c and rho through eq. (2); it is no copy of the berth utilisation.")
 
 # 9
@@ -97,11 +97,11 @@ x("Holding the two-berth Ekene quay to a 1-hour mean wait under M/M/c: what reas
 
 # 11
 x("Under M/D/c, which berth count and wait does the search report for the Ekene base's 1-hour target?",
- "Three, where the constant-service wait falls to 0.259397 hours",
+ "3 berths, where the constant-service wait falls to 0.259397 hours, inside the target",
  ["2 berths, since the M/D/c wait at 2 berths is short enough to meet the 1-hour target",
   "3 berths with a wait of 0.440347 hours, the same figure the M/M/c search returns",
   "No berth count, since M/D/c gives no delay probability for the search to work from"],
- "The search uses the stated model: as M/D/c two berths wait 1.665786 hours, above the target, and three wait 0.259397, so the engine returns 3 berths with that reason. 0.440347 is the three-berth wait as M/M/c. The M/D/c search needs only the wait, which the approximation gives.")
+ "The search uses the stated model: as M/D/c two berths wait 1.665786 hours, above the target, and three wait 0.259397 (the Cosmetatos approximation), so the engine returns 3 berths with that reason. 0.440347 is the three-berth wait as M/M/c. The M/D/c search needs only the wait, which the approximation gives.")
 
 # 12
 x("How does the engine's berth-target search choose where to start and where to stop?",

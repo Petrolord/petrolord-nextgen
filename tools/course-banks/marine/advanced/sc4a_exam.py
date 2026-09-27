@@ -27,12 +27,12 @@ x("Lifts take 5.000000 hours and bulk 6.000000 hours on an Ekene call, run side 
  "Side by side, only the longer of the two working terms counts toward the berth time, so the pumping governs here and the whole call comes to 8.000000 hours with its 2 fixed hours. Summing the pair belongs to calls stated as one after the other; the crane leads nothing by rule, and the fixed part is added in both cases.")
 
 # 2
-x("With the lifts and the bulk at the Ekene base stated one after the other, what service time does a call take in the engine's return?",
- "13.000000 hours: 2 fixed plus 5 for the lifts plus 6 for the bulk",
- ["8.000000 hours: 2 fixed plus the larger of the two terms, 6 for the bulk",
-  "11.180124 hours: the M/M/c mean time at the base on 2 berths",
-  "6.000000 hours: the bulk alone, since it follows the lifts"],
- "Concurrent false adds both terms: 2 plus 5 plus 6 is 13.000000 hours, and the berths then run at 0.866667. 8.000000 is the concurrent service; 11.180124 is a time at the base (wait plus service) on the concurrent base; 6.000000 leaves out the fixed hours and the lifts.")
+x("The Ekene base's calls are restated with the lifts and the bulk one after the other, every other input held. By how much does a call lengthen, and at what berth utilisation do the berths then run?",
+ "By 5.000000 hours, to 13.000000, with the berths at 0.866667",
+ ["By 6.000000 hours, to 14.000000, with the berths at 0.866667",
+  "By 0 hours, the call held at 8.000000, the berths at 0.533333",
+  "By 3.180124 hours, the M/M/c wait added, the berths at 0.533333"],
+ "Concurrent false adds both terms: 2 plus 5 plus 6 is 13.000000 hours against 8.000000 alongside, 5.000000 hours more, which is the lift hours now added, and the berths then run at 0.866667. Adding the 6 bulk hours to the 8.000000 counts the bulk twice; holding the call at 8.000000 ignores the change; 3.180124 is the M/M/c wait of the concurrent base, a time in the queue.")
 
 # 3
 x("The shore base calculator prints the mean wait in hours and again in working days. How is the second figure made from the first?",
@@ -77,7 +77,7 @@ x("Which sentence about the Ekene base follows the course's vocabulary?",
 # ---- Erlang C and M/M/c
 # 8
 x("Ten servers at an occupation of 0.9 with a mean service of 1: Adan and Resing (Queueing Systems, 26 March 2015) print 0.67 as the wait. What does the engine give?",
- "0.668732, which rounds to the printed 0.67",
+ "0.668732, rounded by the table to 0.67",
  ["0.67 exactly, a figure taken from the printed row",
   "1.524986, the engine's wait at five servers",
   "0.275385, the engine's wait at twenty servers"],
@@ -85,16 +85,16 @@ x("Ten servers at an occupation of 0.9 with a mean service of 1: Adan and Resing
 
 # 9
 x("At one server in Adan and Resing's Table 5.1, with an occupation rate of 0.9 and a mean service of 1, which two figures does the engine return?",
- "A delay probability of 0.900000 and a mean wait of 9.000000",
- ["The two-server pair, 0.852632 and a mean wait of 4.263158",
-  "A delay probability of 0.900000, but a mean wait of just 4.500000",
-  "A delay probability of 1.000000 and a wait again of 9.000000"],
+ "0.900000 as the chance of waiting, 9.000000 as the mean wait",
+ ["The two-server pair, 0.852632 and 4.263158",
+  "0.900000 as the chance of waiting, but only 4.500000 as the mean wait",
+  "1.000000 as the chance of waiting, with 9.000000 again as the mean wait"],
  "At one server the delay probability of M/M/1 is the occupation rate, 0.900000, and the mean wait is 9.000000, both matching the printed 0.90 and 9.00. 0.852632 and 4.263158 are the two-server row; 4.500000 is the M/D/1 wait at the same load; a delay probability of 1 would mean saturation.")
 
 # 10
 x("Iversen's first delay system (Teletraffic Engineering Handbook, draft of 20 June 2001) has 32 channels, a mean service of 100 and 20 erlang. What does the engine return for it?",
- "20.000000 erlang offered, 0.008964 of arrivals delayed, 0.074697 as the average wait",
- ["Offered load 2.000000, a delay probability of 0.059701 and a mean wait of 0.199005",
+ "An offered load of 20.000000, a delay probability of 0.008964 and a mean wait of 0.074697",
+ ["An offered load of 2.000000, a delay probability of 0.059701 and a mean wait of 0.199005",
   "An offered load of 20.000000, a delay probability of 0.008964 and a mean wait of 0.075 exactly",
   "An offered load of 20.000000, a delay probability of 0.059701 and a mean wait of 0.273702"],
  "On the golden inputs (a fixed service of 100, 32 berths, 2 arrivals a day over a 10-hour day) the engine returns 20.000000, 0.008964 and 0.074697, and the wait rounds to the printed 0.075. The second system's figures are 2.000000, 0.059701 and 0.199005; 0.273702 is the two waits added.")
@@ -154,7 +154,7 @@ x("Across the cases the course runs, where does the engine's M/D/c wait sit agai
  ["Below half at every berth count, since constant service removes most of the wait",
   "Exactly half at every berth count, since the correction never changes the figure",
   "Above the whole M/M/c wait at three berths, since the correction grows with c"],
- "At one berth the correction is zero and the M/D/1 wait is half the M/M/1 wait (4.500000 against 9.000000). At two berths the Ekene ratio is 0.523812, and at three berths 0.552578 against 1.078652 is again a little over half. The correction is never negative, so the wait is never below half.")
+ "At one berth the correction is zero and the M/D/1 wait is half the M/M/1 wait (4.500000 against 9.000000). At two berths the Ekene ratio is 0.523812, and at three berths 0.552578 (the Cosmetatos approximation) against 1.078652 is again a little over half. The correction is never negative, so the wait is never below half.")
 
 # 18
 x("Which formula gives the M/D/c wait at one berth, where the engine's approximation is exact?",
@@ -178,15 +178,15 @@ x("A base's calls are much the same length every time. Which queue model sits cl
  ["M/M/c sits closer, since any real call varies, and its figure is also the one that understates the wait",
   "M/D/c sits closer, and its figure is the safe one to quote, being the longer wait of the two models",
   "Neither model applies to calls of fixed length, so the engine refuses such a base as a matter of rule"],
- "Constant service is the D of M/D/c, so a base of like calls is closer to it; a real base sits between the two models. The M/D/c wait is the shorter (1.665786 hours against 3.180124 on the Ekene quay), so the M/M/c figure is the one that does not understate, quoted with its model named. The engine refuses no base for its service spread.")
+ "Constant service is the D of M/D/c, so a base of like calls is closer to it; a real base sits between the two models. The M/D/c wait (the Cosmetatos approximation) is the shorter (1.665786 hours against 3.180124 on the Ekene quay), so the M/M/c figure is the one that does not understate, quoted with its model named. The engine refuses no base for its service spread.")
 
 # 21
-x("A planner wants the Ekene quay's mean wait held to 0.3 hours or less. What does the berth search return under each queue model?",
+x("A planner wants the Ekene quay's mean wait held to 0.3 hours or less. What does the berth search return under each queue model, M/D/c being the Cosmetatos approximation?",
  "4 berths under M/M/c at 0.068902 hours, and 3 under M/D/c at 0.259397",
- ["3 berths under both models, at 0.440347 and 0.259397 hours",
+ ["3 berths under both models, at 0.440347 hours as M/M/c and 0.259397 hours as M/D/c",
   "4 berths under both models, the M/D/c wait at four berths being lower still",
   "2 berths under M/D/c, its wait being about half the M/M/c one"],
- "Under M/M/c three berths wait 0.440347 hours, above the target, so the search goes on to four, which wait 0.068902. Under M/D/c three berths already wait 0.259397, inside it. Two berths wait 1.665786 hours as M/D/c, far above. The search runs the model the call states, and here the model changes the count.")
+ "Under M/M/c three berths wait 0.440347 hours, above the target, so the search goes on to four, which wait 0.068902. Under M/D/c (the Cosmetatos approximation) three berths already wait 0.259397, inside it. Two berths wait 1.665786 hours as M/D/c, far above. The search runs the model the call states, and here the model changes the count.")
 
 # ---- Weather and demand variability
 # 22
@@ -239,9 +239,9 @@ x("A fleetVariability call asks for 200001 draws on the Ekene milk run. What doe
 
 # 28
 x("On seed 11 and 5000 draws, the AHTS on dedicated voyages is short in 0.085000 of its draws with 2 planned vessels. What does that say against the PSV milk run's 0.001400 on seed 20260927 and 20000 draws?",
- "The same two vessels leave a much thinner margin on the AHTS dedicated week, as estimates",
+ "The same two vessels leave a thinner margin on the AHTS week, as estimates",
  ["The AHTS figure is the exact probability and the PSV figure only an estimate",
-  "The two are equal once the draws are matched, since both plan 2 vessels",
+  "The two are equal once the draws are matched, since both weeks plan 2 vessels",
   "The AHTS needs a third vessel in every week, since any shortfall means that"],
  "Both are seeded estimates on their own seeds and draws, and neither is graded. With the same 2 planned vessels, the AHTS on dedicated voyages is short far more often than the PSV milk run, a thinner margin; neither figure says a third vessel is needed every week, and matching draws would not make them equal.")
 
@@ -255,7 +255,7 @@ x("Why does no capstone field in this course depend on one of the readings the e
  "The capstones were built so that every graded figure is identical under each reading the engine takes and under the alternative it names; the readings are taught with their alternatives and graded nowhere. Most readings act on voyages, fleets, decks and berth targets, far beyond the Monte Carlo, and the tolerance is set once for the course.")
 
 # 30
-x("Deck area and deck load share a utilisation of 0.500000 on a voyage. Which constraint does the engine name as binding, and on what footing?",
+x("Deck area and deck load share a utilisation of 0.500000 on a voyage, and every other constraint sits lower. Which constraint does the engine name as binding, and on what footing?",
  "Deck area, the first in the stated order, by the engine's stated tie reading",
  ["Deck load, the last of the tied pair, since the heavier limit governs any tie",
   "Both at once, since a tie at twelve digits names every tied constraint",
@@ -276,7 +276,7 @@ x("When does the engine add \"(rounded down at the sixth decimal so that it is a
  ["Every time it prints a bound, whether or not it moved the figure at all",
   "Only when the exact bound is a whole number, such as 20 arrivals a day",
   "Only when the arrivals typed were more than twice the exact bound itself"],
- "The note marks a moved figure. Where the true limit is 20, that limit is itself refused, so 19.999999 appears with the note; where it repeats, the usual six-decimal rounding would land above it, so the message moves down a step and says so. A limit that is already accepted at six decimals would print as it is, with no note.")
+ "The note marks a moved figure. Where the true limit is 20, that limit is itself refused, so 19.999999 appears with the note; where it repeats, the usual six-decimal rounding would land above it, so the message moves down a step and says so.")
 
 # 33
 x("How does the five-server row of Adan and Resing's Table 5.1 check against itself, confirming the printed 1.53 as a slip?",
@@ -338,10 +338,10 @@ x("A deck foreman asks the engine whether a load can be stacked two high and las
 # 40
 x("A planner adds a stowage factor to the deck terms of a deck plan call. What does the engine return?",
  "deck.stowageFactor is not an accepted key; the accepted keys of deck are name, areaM2, usableFraction, loadT",
- ["A plan with the usable area scaled by the stowage factor, the factor printed in the basis",
-  "A plan that ignores the factor quietly, since the usable fraction already covers stowage",
-  "deck.usableFraction must be a number above 0 and at most 1; got nothing, the factor read in its place"],
- "The engine holds no stowage factor: for the deck it takes an area bound with a stated usable fraction and deck load, and for bulk the user's net deadweight and stated densities. An unknown key is refused by name with the accepted keys, verbatim as the key shows; nothing is dropped quietly.")
+ ["A plan with the usable area scaled by the stowage factor, and the factor printed in the basis of the plan",
+  "A plan that ignores the factor quietly, since the usable fraction already covers the stowage of the deck",
+  "deck.usableFraction must be a number above 0 and at most 1; got nothing"],
+ "The engine holds no stowage factor: for the deck it takes an area bound with a stated usable fraction and deck load, and for bulk the user's net deadweight and stated densities. An unknown key is refused by name with the accepted keys, verbatim as the key shows; nothing is dropped quietly. The usable fraction message belongs to a deck call with that input left out.")
 
 # 41
 x("The Ekene base waits 3.180124 hours as M/M/c. Which claim can a plan rest on that figure?",

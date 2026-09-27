@@ -58,7 +58,7 @@ x("Which course owns the stock levels, spares and reorder points of the cargo a 
 x("The Ekene base is stated with 101 berths. What does the engine return, in its own words?",
  "berths must be a whole number from 1 to 100; got 101",
  ["A result on 100 berths, the cap applied and noted in the basis",
-  "items has 101 entries; the cap is 100, the berth list overflowing",
+  "berths has 101 entries; the cap is 100",
   "A result on 101 berths with a note that the cap was passed"],
  "MAX_BERTHS is 100, and the target search stops there too. The engine refuses 101 by name, verbatim as the key shows; it trims nothing to the cap, and an \"entries\" message belongs to a list such as the installations or the item lines.")
 

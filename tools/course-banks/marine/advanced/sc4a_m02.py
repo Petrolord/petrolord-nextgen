@@ -42,9 +42,9 @@ x("Eq. 5.2 of Adan and Resing takes PiW = 0.371014 and rho = 0.533333 from the t
 x("On the same Ekene base as M/M/c, which mean wait in hours does the engine return by eq. 5.3, E(W) = PiW S / (c (1 - rho))?",
  "3.180124 hours in the queue, on the working-hour clock, before a berth comes free",
  ["11.180124 hours, which is the wait with the 8.000000-hour service added on top of it",
-  "1.665786 hours, the figure the same base returns once its model is stated as M/D/c",
+  "1.665786 hours, the M/D/c figure for the same base (the Cosmetatos approximation)",
   "0.440347 hours, the figure the same inputs return when a third berth is stated"],
- "With PiW 0.371014, S 8.000000 hours, c 2 and rho 0.533333, eq. 5.3 gives 3.180124 hours, which is the course's wait: the mean time in the queue on the working-hour clock. 11.180124 is the mean time at the base; 1.665786 is the M/D/c wait; 0.440347 is the three-berth probe.")
+ "With PiW 0.371014, S 8.000000 hours, c 2 and rho 0.533333, eq. 5.3 gives 3.180124 hours, which is the course's wait: the mean time in the queue on the working-hour clock. 11.180124 is the mean time at the base; 1.665786 is the M/D/c wait (the Cosmetatos approximation); 0.440347 is the three-berth probe.")
 
 # 5
 x("A vessel at the two-berth Ekene quay waits 3.180124 hours on average under M/M/c and is then served for 8 hours. How long is its mean stay at the base?",
@@ -88,15 +88,15 @@ x("Add two berths to the Ekene quay, four in all, under M/M/c. What mean wait co
 
 # 10
 x("Over which vessels is the M/M/c mean wait of 3.180124 hours on the Ekene base averaged?",
- "Every arriving vessel, those that find a berth free and wait nothing included",
+ "Every arriving vessel, the ones finding a berth free and waiting nothing included",
  ["Only the vessels that find both berths taken, the others waiting nothing",
-  "The vessels alongside a berth at the moment a planner looks",
-  "Those that wait longer than one 8.000000-hour service"],
+  "The vessels alongside a berth at the moment a planner looks at the base",
+  "Those that wait longer than one 8.000000-hour service at the quay"],
  "The mean wait is averaged over all arrivals, the zeros of those that find a free berth included; that is why the vessels that do wait wait longer than 3.180124 hours on average. A plan that quotes the figure says so, with the model, berths, arrivals, working day and service beside it.")
 
 # 11
 x("Adan and Resing's Table 5.1 (Queueing Systems, 26 March 2015) holds the occupation rate at 0.9 with a mean service of 1. Stated as 2 berths, 18 arrivals a day, a 10-hour working day and 1 fixed hour a call, what mean wait does the engine return, against the printed figure?",
- "4.263158, which rounds to the 4.26 the table prints",
+ "4.263158, which rounds to the 4.26 the table prints for that row",
  ["4.26 exactly, the printed figure, which the engine takes from the table",
   "9.000000, which is the wait of the table's one-server row at the same load",
   "0.852632, which is the engine's delay probability on that row of the table"],
@@ -130,9 +130,9 @@ x("Iversen's Example 12.3.1 (Teletraffic Engineering Handbook, draft of 20 June 
 x("A planner types servers where the shore base call expects its berth count. What does the engine return?",
  "servers is not an accepted key; the accepted keys at the top level are berths, arrivalsPerDay, workingHoursPerDay, service, model, targetMeanWaitHours",
  ["A result that reads servers as the berth count, since Adan and Resing and Iversen both write their formulas with servers, and a note",
-  "berths must be a whole number from 1 to 100; got nothing, because the berth count was left out and the unknown key is read later",
+  "servers is not an accepted key; the accepted keys at the top level are arrivalsPerDay, workingHoursPerDay, service, model, targetMeanWaitHours",
   "A result on one berth with the servers key dropped, followed by the saturation refusal once the load is found to be above one"],
- "The engine checks its accepted keys before it reads an input, so an unknown key is refused first, by name, with the full list, in its own words as the key shows. It maps no synonym to an input and drops no key silently.")
+ "The engine checks its accepted keys before it reads an input, so an unknown key is refused first, by name, with the full list, in its own words as the key shows. It maps no synonym to an input and drops no key silently. The accepted keys it lists include berths, the key the planner meant.")
 
 emit(Q, '/root/cat-wip-marine/banks/sc4a_m02.json', expect_n=15)
 finish()

@@ -15,7 +15,7 @@
   "options": [
    "A refusal, in its own words: vessel.deckArea is not an accepted key; the accepted keys of vessel are name, speedKnots, deckAreaM2, deckUsableFraction, deckLoadT, deadweightT, tanks, fuelTPerHour",
    "A plan that reads deckArea as the deck area in m2, since the engine matches a key it does not know to the nearest accepted key it has and plans on.",
-   "A refusal saying that vessel.deckAreaM2 must be a finite number above 0, since the deck area the voyage needs was never stated under its own key.",
+   "A refusal, in its own words: vessel.deckAreaM2 must be a finite number above 0; got nothing",
    "A plan that sets deckArea aside and carries on, planning the deck with no area limit on the deck cargo at all."
   ],
   "answer": 0,
@@ -60,7 +60,7 @@
    "A list of the Suite screens where the same figures appear, so a learner can find them in the planner.",
    "The figures the engine filled in for any input the call left out, with the source of each one.",
    "A margin of error for each figure, taken from the rounding of the published tables.",
-   "The rules the call applied and where each comes from, in the engine's own words, so the working can be printed beside the figures."
+   "The rules the call applied and the source of each, in the engine's own words, to print beside the figures."
   ],
   "answer": 3,
   "explanation": "Every result carries a basis naming its rules and their sources, for example that sailing hours are the distance over the speed, citing Skoko et al. The engine fills in no missing input, since a call without one is refused, it prints no error margins, and the basis describes the call and no Suite screen."
@@ -90,13 +90,13 @@
  {
   "prompt": "Of the four Ekene dedicated voyages in the rainy season, which takes the most days, and why?",
   "options": [
-   "EKJ, at 1.518182 days, because the jack-up's 8 field hours are the longest call in the cluster.",
-   "EKA, at 1.363636 days, because it is the first installation the milk run calls at.",
-   "EKB, at 1.372727 days, because the wellhead platform has the fewest field hours to fill.",
-   "EKF, at 1.613636 days, because it lies farthest from the base at 95.000000 NM."
+   "EKJ, because the jack-up's 8 field hours are the longest call in the cluster.",
+   "EKA, because it is the first installation the milk run calls at.",
+   "EKB, because the wellhead platform has the fewest field hours to fill.",
+   "EKF, because it lies farthest from the base, at 95.000000 NM."
   ],
   "answer": 3,
-  "explanation": "Every dedicated voyage pays the same 12 port hours, so distance decides most of the gap: EKF's 190.000000 NM out and back take 20.727273 sailing hours, for 1.613636 days. EKJ's longer field time does not make up for its shorter distance, and EKA and EKB are the two shortest voyages."
+  "explanation": "Every dedicated voyage pays the same 12 port hours, so distance decides most of the gap: EKF's 190.000000 NM out and back take 20.727273 sailing hours, for 1.613636 days. EKJ takes 1.518182 days, its longer field time not making up for its shorter distance, and EKA at 1.363636 and EKB at 1.372727 are the two shortest voyages."
  },
  {
   "prompt": "A planner reverses the order of the Ekene milk run's stops, to EKF, EKB, EKJ, EKA. What must happen to the legs?",
@@ -136,8 +136,8 @@
   "options": [
    "The plan runs on the dedicated route and sets the unused stops aside without mentioning them anywhere in the result.",
    "The plan sails the stops as a milk run, since a stops list is taken to override the stated route mode.",
-   "The refusal names route.legsNm, since a stops list without legs is incomplete on any route mode.",
-   "The stops list is refused by name, because only a milk run reads stops and a dedicated voyage goes from the base to one installation and back."
+   "The refusal names route.legsNm, since a stops list without legs is incomplete on any route mode the engine plans.",
+   "The stops list is refused by name, since only a milk run reads stops; a dedicated voyage sails to one installation and back."
   ],
   "answer": 3,
   "explanation": "Each route mode reads its own inputs, and an input given to the mode that does not read it is refused by name, so nothing is set aside silently and nothing switches the mode. The engine's words begin: route.stops is read only when route.mode is \"milk-run\"."
@@ -151,7 +151,7 @@
    "Sailing and field time equally, since the factor of 1.2 applies to both of them at once."
   ],
   "answer": 2,
-  "explanation": "With the factor on sailing and field time, field time is 27.600000 hours and sailing 22.472727, so the vessel spends more hours alongside the installations than sailing between them, as in a compact cluster. Port time is 12.000000 hours, and the same factor on two activities leaves their hours as different as their calm times were."
+  "explanation": "With the factor on sailing and field time, field time is 27.600000 hours and sailing 22.472727, so the vessel spends more hours alongside the installations than sailing between them, as in a compact cluster. Port time is 12.000000 hours, and the same factor on two activities leaves their hours in the same proportion as their calm times."
  },
  {
   "prompt": "Why does the engine keep sailing, port and field time apart, where it could add them into one figure?",
@@ -187,7 +187,7 @@
   "explanation": "Field time is the longest activity, 27.600000 hours against 22.472727 sailing, but it burns 0.3 t an hour against sailing's 0.5, so it burns 8.280000 t against 11.236364 t. Port burns 0.03 t an hour. Fuel is hours times each activity's own burn, so equal factors do not make equal fuel."
  },
  {
-  "prompt": "In the Skoko et al. Table 1 check, a PSV at 10 knots sails a dedicated voyage of 120 NM each way. What sailing hours does the engine return, and which printed figure do they confirm?",
+  "prompt": "In the Skoko et al. Table 1 check, a PSV at 10 knots sails a dedicated voyage of 120 NM each way at a weather factor of 1. What sailing hours does the engine return, and which printed figure do they confirm?",
   "options": [
    "12.000000 hours for the voyage, since each 120 NM leg at 10 knots is sailed in half a day and the legs overlap in the table.",
    "24.000000 hours for 264.000000 NM, the distance Skoko et al. print for a PSV's day at sea.",
@@ -214,13 +214,13 @@
    "A weather window, opening and closing the voyage by the forecast for the stated season.",
    "Wave height, turned into a speed loss through a curve of speed against the sea state.",
    "Waiting on weather at an installation, added as standby hours whenever the factor exceeds 1.",
-   "Nothing beyond one stated factor on the stated activities: no weather window, wave height or waiting-on-weather rule."
+   "Only one stated factor on the stated activities; no weather window, wave height or waiting rule."
   ],
   "answer": 3,
   "explanation": "Aas, Halskau and Wallace describe weather limits on sailing and on loading at the installation, and the course takes that idea by concept in the simplest stated form: one factor on named time. A plan that needs windows, wave heights or waiting rules states them outside the engine and reflects them in the factor it chooses."
  },
  {
-  "prompt": "Skoko et al. print a daily distance of 264 NM for an AHTS. Which stated inputs make the engine reproduce that figure?",
+  "prompt": "Skoko et al. print a daily distance of 264 NM for an AHTS. Which stated inputs, at a weather factor of 1, make the engine reproduce that figure?",
   "options": [
    "The AHTS Ekene Tide's stated 12 knots over a dedicated voyage of 120 NM each way, which is a day at sea.",
    "A speed of 11 knots over a dedicated voyage of 132 NM each way: 264.000000 NM in 24.000000 hours.",
@@ -267,7 +267,7 @@
   "prompt": "Why does the engine require a stated density for every product, with no assumed value?",
   "options": [
    "The density sets each tank's capacity in m3, so without it no tank could be checked at all.",
-   "A planner who treated brine or mud as water would understate the deadweight and could plan a voyage the vessel cannot carry.",
+   "Treating brine or mud as water would understate the deadweight, so a voyage the vessel cannot carry could pass.",
    "Fuel burn in port depends on it, since heavy products take longer to pump ashore.",
    "The density turns deck cargo from square metres into tonnes for the deck load check."
   ],
@@ -275,7 +275,7 @@
   "explanation": "Density turns a bulk volume into a weight in the deadweight. Tanks are stated in m3 and checked by volume, fuel burns are stated per activity, and deck cargo states its weight directly. A product's weight can be far from water's, so no single value can stand in for it."
  },
  {
-  "prompt": "A product is stated with a density of 0 t a m3. Which field is refused, and what must it be?",
+  "prompt": "The first product in the list is stated with a density of 0 t a m3. Which field is refused, and what must it be?",
   "options": [
    "The product's tank, since a product that weighs nothing cannot be held in a tank.",
    "Nothing is refused: the product simply adds no weight to the voyage's deadweight load.",
@@ -291,10 +291,10 @@
    "A refusal, in the engine's own words: products[0].kind must be one of \"liquid\", \"dry\"; got \"gas\"",
    "A plan that treats the gas as a liquid and checks it against its own tank by volume, as for diesel.",
    "A plan that puts the gas on deck in cylinders and adds their weight to the deck load check.",
-   "A refusal naming products[0].densityTPerM3, since a gas has no density per m3."
+   "A refusal, in the engine's own words: products[0].kind must be one of \"liquid\", \"dry\", \"deck\"; got \"gas\""
   ],
   "answer": 0,
-  "explanation": "Each product states its kind as liquid or dry, and any other kind is refused by name, with the value it got in quotation marks. The engine reinterprets no kind and moves no product to the deck."
+  "explanation": "Each product states its kind as liquid or dry, the only two kinds, and any other kind is refused by name, with the value it got in quotation marks. The engine reinterprets no kind and moves no product to the deck."
  },
  {
   "prompt": "Which inputs does the engine's deadweight load depend on?",
@@ -335,7 +335,7 @@
    "Deck area binding at 0.900000, since the tanks are checked after the deck in the stated order.",
    "Tank water binding at 1.000000, with the voyage marked as overloaded on the water tank.",
    "A refusal naming vessel.tanks.water, since the tank is cut to exactly the load it carries.",
-   "Tank water binding at 1.000000, and the voyage still feasible."
+   "Tank water binding at 1.000000 on a feasible voyage: 745 m3 fits a 745 m3 tank."
   ],
   "answer": 3,
   "explanation": "745 m3 of water in a 745 m3 tank is a utilisation of 1.000000, above deck area's 0.900000, so the water tank binds. By the engine's stated reading a load exactly at capacity is feasible. The stated order matters only for a tie, and a tank above 0 is a valid capacity however full."
@@ -365,7 +365,7 @@
  {
   "prompt": "Of these four outcomes on a voyage plan, which one comes back as a refusal?",
   "options": [
-   "A load of a product whose tank the vessel states as 0.",
+   "A load of a product whose tank the vessel states as 0, with a stop asking for that product.",
    "The same cargo on a smaller vessel, overloaded on deck area, deadweight and tank water.",
    "A deck area and a deck load that share the top utilisation, tied at twelve digits.",
    "A load of deck cargo exactly equal to the deck area capacity, at a utilisation of 1.000000."
@@ -443,7 +443,7 @@
   "prompt": "A planner needs departure times, and an installation works cargo only in daylight. What does the engine offer?",
   "options": [
    "Overnight holding by a daylight rule, at any installation stated as working days only.",
-   "No schedule by the clock; the planner can state longer field hours for daylight-only cargo work and name that in the plan.",
+   "No clock times; the planner states longer field hours for daylight-only cargo work and names that in the plan.",
    "A departure time for each voyage, set by the engine from the port hours and the voyage's days.",
    "A refusal, since an installation that works in daylight only cannot be served on a milk run."
   ],
@@ -456,7 +456,7 @@
    "The engine plans the capacities once in calm weather and copies the verdict to every season.",
    "The rainy-season factor lowers the usable deck fraction by just enough to cancel the extra hours.",
    "The factor of 1.2 is too small to change a verdict, where a larger factor would overload the deck.",
-   "The factor multiplies time and so fuel; the loads and capacities, and so every utilisation, are the same in both seasons."
+   "The factor multiplies time and fuel; loads and capacities, and so every utilisation, stay the same in both seasons."
   ],
   "answer": 3,
   "explanation": "Weather changes the hours, the days and the fuel, and leaves the cargo where it is, so the verdict and the binding deck area at 0.900000 hold in both seasons. No factor, however large, changes a capacity, and the usable fraction is a stated input the weather does not touch."

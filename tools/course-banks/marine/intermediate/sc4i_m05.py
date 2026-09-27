@@ -96,8 +96,8 @@ q(2, "A reason reads: c is overflow: it needs 3 m2 of usable area and 1 t of dec
  "The spare area is on one voyage and the spare load on another, so c needs another voyage",
  ["The engine made an error, since a unit with enough area and enough load always fits",
   "c is too large for this deck and needs a larger deck or a stronger one to be carried",
-  "A larger usable area alone would carry c, since the area limit is the one named first"],
- "Each figure is the most left on any voyage, and here they sit on different voyages, so each limit alone reads enough and no single voyage passes both. c fits an empty voyage, so it needs another voyage; with 3 voyages stated the engine puts c on voyage 3. Neither a larger nor a stronger deck alone helps.")
+  "c can never ride this deck, so the engine lists it as never fitting"],
+ "Each figure is the most left on any voyage, and here they sit on different voyages, so each limit alone reads enough and no single voyage passes both. c fits an empty voyage, so it needs another voyage; with 3 voyages stated the engine puts c on voyage 3. A unit listed as never fitting is one too large or too heavy for an empty voyage, and c is neither.")
 
 q(0, "On a 10 m2, 10 t deck packed by first fit onto 1 voyage, unit a (9 m2, 9 t) goes first, then b (1 m2, 1 t), then c (1 m2, 1 t). What does the engine return for c?",
  "Overflow, 0 m2 (short) and 0 t (short) left; usable area and deck load both stop it",

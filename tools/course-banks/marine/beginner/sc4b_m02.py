@@ -70,7 +70,7 @@ q(1, "The four Ekene dedicated voyages take 1.363636, 1.518182, 1.372727 and 1.6
  ["1.613636 days, the longest of the four, since the four voyages are taken to sail at the same time.",
   "2.586364 days, the same as the milk run, since both routes serve exactly the same four installations.",
   "5.868182 days for the milk run and 2.586364 for the dedicated route, as the milk run sails further."],
- "When a route has several voyages the engine adds them, so the dedicated total is 5.868182 days, and the milk run is a single voyage of 2.586364 days. One vessel sails the dedicated voyages one after another, so the longest alone is not the total, and the milk run is the shorter of the two routes here.")
+ "When a route has several voyages the engine adds the voyages' days, so the dedicated total is 5.868182 days, and the milk run is a single voyage of 2.586364 days. One vessel sails the dedicated voyages one after another, so the longest alone is not the total, and the milk run is the shorter of the two routes here.")
 
 q(0, "Why does one Ekene milk run take fewer days than the four dedicated voyages together, with the same vessel, speed, field hours and weather?",
  "It sails fewer NM in all, because the installations sit close together, and it pays the 12 port hours once.",
@@ -102,10 +102,10 @@ q(0, "A milk run's stops are typed as EKA, EKJ, EKA, EKF. Which field does the e
 
 q(1, "A milk run box also states distanceFromBaseNm of 62 for EKA, the first installation in the call. What does the engine return?",
  "A refusal, in its own words: installations[0].distanceFromBaseNm is read only when route.mode is \"dedicated\"; a milk run takes its distances from route.legsNm",
- ["A voyage plan that sails 62 NM out to EKA first and then sails the stated legs from there, adding the distance as an extra leg at the start of the milk run.",
+ ["The 62 NM is sailed out to EKA first and the stated legs from there, the distance added as an extra leg at the start of the milk run, with the rest unchanged.",
   "A voyage plan that sails the stated legs and quietly drops the distance from the base, since a milk run has no use for it, with no word about it in the reasons.",
-  "A voyage plan on a dedicated route, since a distance from the base switches the route mode over from a milk run to dedicated voyages for every installation."],
- "Each route mode reads its own distances, and a distance given to the mode that does not read it is refused by name. The engine drops no input silently, adds no leg of its own and switches no mode: the route mode is a required input the call states.")
+  "A refusal, in its own words: installations[0].distanceFromBaseNm must equal route.legsNm[0] on a milk run; got 62"],
+ "Each route mode reads its own distances, and a distance given to the mode that does not read it is refused by name. The engine compares no distance with a leg, drops no input silently and adds no leg of its own: the route mode is a required input the call states.")
 
 q(3, "A milk run through four stops states only four legs, 62, 9, 12 and 28 NM. Which input is refused, and why?",
  "route.legsNm, since four stops need 5 legs, and the last one, back to the base, is missing.",

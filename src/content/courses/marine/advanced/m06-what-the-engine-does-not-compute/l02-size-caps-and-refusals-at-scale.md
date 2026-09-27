@@ -6,6 +6,10 @@
 
 The engine holds almost no figures of its own. Apart from the twelve-digit tie rule, the only numbers it states are its caps: the largest call of each kind it accepts. A cap is no domain figure. It says nothing about how many berths a base should have or how many draws a Monte Carlo needs; it keeps one call inside the time and memory a calculator can give it.
 
+## What the engine is made of
+
+The engine imports two canonical files, lib/stats/stats.js and lib/conventions/percentile.js, and nothing else, and it makes no network call. It exports, in full, its five functions (deckPlan, fleetSize, fleetVariability, shoreBase, voyagePlan) and three constants: `ACCEPTED_KEYS`, the input keys each function reads; `ACTIVITIES`, the three kinds of voyage time a weather factor can slow; and `DEFAULTS`, the caps below and the twelve-digit tie rule.
+
 ## The caps
 
 | cap | value | the engine's message over the cap, verbatim |

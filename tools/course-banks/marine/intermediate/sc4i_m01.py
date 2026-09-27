@@ -71,7 +71,7 @@ q(3, "Deck demand of 300.000000 m2 over a 100 m2 deck area capacity ties with 3 
   "None: a tie is refused, and the call must restate the visits so that one side wins out"],
  "The engine returns deck area here. At a tie it names the demand, a reading it states; the alternative would name minimum visits, and no count moves between the two. It prints one driver, and a tie is a result, which the engine computes and names by its stated convention.")
 
-q(1, "Sized alone, an installation wants 10.000000 m2 on a deck whose area capacity is 100 m2 and 410 m3 of product d through a tank of 100 m3; it states 0 minimum visits, and voyages round up. What does the engine return?",
+q(1, "Sized alone, an installation wants 10.000000 m2 on a deck whose area capacity is 100 m2 and 410 m3 of product d, at 1 t a m3, through a tank of 100 m3 on a vessel of 1000 t deadweight; it states 0 minimum visits, and voyages round up. What does the engine return?",
  "4.100000 voyages before rounding, 5 voyages, driven by tank d",
  ["1 voyage driven by deck area, since the deck is barely a tenth used",
   "4 voyages driven by tank d, keeping the whole part of the tank ratio",
@@ -111,7 +111,7 @@ q(0, "A fleet result names \"minimum visits\" as the driver of a voyage set. Whi
  ["A larger deck area or a higher usable fraction, since deck area is the usual lever on a count",
   "A bigger tank for the heaviest bulk product, since a tank ratio sits below the visits",
   "A faster vessel, since shorter voyages let the same visits carry more of the period's demand"],
- "When the visits drive, every demand ratio sits at or below them, so a bigger deck, tank or speed changes a ratio that is already under the count. Only a change to the stated visits moves it, or a demand rise that lifts a ratio above them. Speed changes the voyage days while the voyage count stays put.")
+ "When the visits drive, every demand ratio sits below them, so a bigger deck, tank or speed changes a ratio that is already under the count. Only a change to the stated visits moves it, or a demand rise that lifts a ratio above them. Speed changes the voyage days while the voyage count stays put.")
 
 emit(Q, '/root/cat-wip-marine/banks/sc4i_m01.json', expect_n=15)
 finish()

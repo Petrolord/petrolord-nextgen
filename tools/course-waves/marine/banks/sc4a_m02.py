@@ -3,10 +3,136 @@ from bankkit import emit, finish
 Q=[]
 def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
-# SC4 Expert m02, Erlang C and M/M/c.
-# A STUB written at the foundation. The bank writer replaces the question list
-# below (fifteen questions, BANK_TASK.md) and keeps the emit line, whose path is
-# literal because the kit's check-bank-sources reads literal paths only.
+# SC4 Expert m02, Erlang C and M/M/c. Every numeric or refusal key is a return
+# of the vendored engine on the Ekene supply base, a stated probe of it, or a
+# published check (Adan and Resing Tables 5.1 and 5.2, Iversen Example
+# 12.3.1); scratch/bank-advanced/witness.mjs recomputes each keyed figure. The
+# printed 1.53 is taught as a slip. No key is a Monte Carlo figure and no
+# capstone figure appears.
+
+K = [1, 3, 0, 2, 3, 1, 0, 2, 1, 3, 0, 2, 3, 0, 1]
+_i = iter(K)
+def x(p, c, ds, e): q(next(_i), p, c, ds, e)
+
+# 1
+x("The Ekene base runs as M/M/c with 2 berths, 3.2 arrivals a day over 24 working hours and an 8-hour concurrent service. What probability of waiting does the engine return?",
+ "0.371014, Erlang's C figure for an offered load of 1.066667 on 2 berths",
+ ["0.533333, the berth utilisation read as a share of arrivals",
+  "0.106417, which is the figure the same base returns once a third berth is stated",
+  "0.424017, the mean number of vessels in the queue, read as though it were a share"],
+ "The delay probability is Erlang's C formula (Adan and Resing, Queueing Systems, 26 March 2015, eq. 5.1; Iversen, Teletraffic Engineering Handbook, draft of 20 June 2001, s. 12.2): 0.371014 on the Ekene base. 0.533333 is the berth utilisation, which is a different quantity; 0.106417 is the three-berth probe; 0.424017 is the mean queue.")
+
+# 2
+x("How does the engine compute Erlang's C delay probability for a base with many berths?",
+ "By the stable Erlang B recursion, one berth at a time, then turning the B figure into the delay probability",
+ ["By writing the factorials and powers of the offered load out directly, just as eq. 5.1 is set down on the page",
+  "By a seeded Monte Carlo of arrivals and service times drawn through lib/stats on the stated seed and draws",
+  "By looking the row up in Adan and Resing's Tables 5.1 and 5.2 and interpolating between the printed rows"],
+ "The engine follows Adan and Resing, s. 11.3 (recursion 11.3 and remark 11.3.2): Erlang's B figure is built one berth at a time from the one before, and the delay probability follows from it. Written out directly, the factorials and powers outgrow what a computer holds long before a large base; the one sampler in the engine serves fleetVariability alone; the published tables are checks the engine reproduces, and it looks nothing up.")
+
+# 3
+x("Eq. 5.2 of Adan and Resing takes PiW = 0.371014 and rho = 0.533333 from the two-berth Ekene quay. What mean queue results, as the engine returns it?",
+ "0.424017 vessels, the probability of waiting times rho over 1 less rho",
+ ["0.371014 vessels, the probability of waiting read as a count",
+  "1.490683 vessels, which counts the vessels alongside the berths as well as those queued",
+  "3.180124 vessels, the mean wait in hours read as a count"],
+ "Adan and Resing's eq. 5.2 gives E(Lq) = PiW rho / (1 - rho): 0.371014 times 0.533333, over 1 less 0.533333, gives 0.424017 as the engine returns it. 1.490683 is the mean in the system, the queue plus the offered load; 0.371014 is a probability; 3.180124 is the mean wait in hours.")
+
+# 4
+x("On the same Ekene base as M/M/c, which mean wait in hours does the engine return by eq. 5.3, E(W) = PiW S / (c (1 - rho))?",
+ "3.180124 hours in the queue, on the working-hour clock, before a berth comes free",
+ ["11.180124 hours, which is the wait with the 8.000000-hour service added on top of it",
+  "1.665786 hours, the M/D/c figure for the same base (the Cosmetatos approximation)",
+  "0.440347 hours, the figure the same inputs return when a third berth is stated"],
+ "With PiW 0.371014, S 8.000000 hours, c 2 and rho 0.533333, eq. 5.3 gives 3.180124 hours, which is the course's wait: the mean time in the queue on the working-hour clock. 11.180124 is the mean time at the base; 1.665786 is the M/D/c wait (the Cosmetatos approximation); 0.440347 is the three-berth probe.")
+
+# 5
+x("A vessel at the two-berth Ekene quay waits 3.180124 hours on average under M/M/c and is then served for 8 hours. How long is its mean stay at the base?",
+ "11.180124 hours, the mean wait plus the service time of one call",
+ ["3.180124 hours, since the wait already covers the whole stay at the quay for a vessel",
+  "8.000000 hours, the service time of one call alone",
+  "1.490683 hours, the mean in the system read across as a time in hours at the base"],
+ "The engine's mean time at the base is the wait plus the service: 3.180124 plus 8.000000 is 11.180124 hours. The course keeps the words apart: the wait is the time in the queue, and the time at the base adds the service. 1.490683 is the mean in the system, a count of vessels.")
+
+# 6
+x("On the Ekene base as M/M/c, the mean queue is 0.424017 and the offered load 1.066667. What mean in the system does the engine return?",
+ "1.490683 vessels, the mean queue plus the vessels at the berths",
+ ["0.424017 vessels, the queue alone counted as the system",
+  "1.066667 vessels, the offered load alone, the vessels at the berths at any moment",
+  "0.533333 vessels, the berth utilisation read as a count"],
+ "The mean in the system is the mean queue plus the offered load, since the vessels being served average the arrivals an hour times the service time: 0.424017 plus 1.066667 is 1.490683. The other three are each one part of it, or the berth utilisation.")
+
+# 7
+x("A planner checks the Ekene M/M/c figures by Little's law (Adan and Resing, s. 3.4). Which product should reproduce the engine's mean queue of 0.424017?",
+ "The arrivals an hour, 0.133333, times the mean wait of 3.180124 hours",
+ ["The berth utilisation, 0.533333, times the mean time at the base of 11.180124 hours",
+  "The arrivals a day, 3.2, times the mean wait in working days",
+  "The probability of waiting, 0.371014, times 8.000000 hours"],
+ "Little's law makes the mean number in any part of the base the arrivals an hour times the mean time spent in that part; for the queue that is 0.133333 times 3.180124, which gives 0.424017. The arrivals and the time must be on the same clock, the working hour. The other products mix a share with a time or a daily count with an hourly one.")
+
+# 8
+x("What does Little's law need to hold at the base, and so for which of the engine's two queue models does it hold?",
+ "Only a steady state, so it holds for M/M/c and M/D/c alike",
+ ["Poisson arrivals and exponential service, so it holds for M/M/c only",
+  "A constant service time, so it holds exactly for the M/D/c model only",
+  "One berth and a steady state, so it holds for neither model beyond c = 1"],
+ "Little's law asks nothing about the arrivals or the service beyond a steady state, so it converts a wait to a queue (or back) for either model. It does not compute a wait from nothing: the engine computes the M/M/c wait by eq. 5.3 and the M/D/c wait by an approximation, and the law gives each model's mean queue from its wait.")
+
+# 9
+x("Add two berths to the Ekene quay, four in all, under M/M/c. What mean wait comes back?",
+ "0.068902 hours, a few minutes, with the berth utilisation down at 0.266667",
+ ["0.440347 hours, which is the wait the same base returns with three berths",
+  "0.010236 hours, the wait the same base returns once five berths are stated",
+  "0.025264 hours, the probability of waiting at four berths read as hours"],
+ "At 4 berths the berth utilisation is 0.266667 and the engine's mean wait is 0.068902 hours. 0.440347 and 0.010236 are the three- and five-berth waits; 0.025264 is the four-berth probability of waiting, a share of arrivals. The fourth and fifth berths buy minutes once the third has cut the wait below half an hour.")
+
+# 10
+x("Over which vessels is the M/M/c mean wait of 3.180124 hours on the Ekene base averaged?",
+ "Every arriving vessel, the ones finding a berth free and waiting nothing included",
+ ["Only the vessels that find both berths taken, the others waiting nothing",
+  "The vessels alongside a berth at the moment a planner looks at the base",
+  "Those that wait longer than one 8.000000-hour service at the quay"],
+ "The mean wait is averaged over all arrivals, the zeros of those that find a free berth included; that is why the vessels that do wait wait longer than 3.180124 hours on average. A plan that quotes the figure says so, with the model, berths, arrivals, working day and service beside it.")
+
+# 11
+x("Adan and Resing's Table 5.1 (Queueing Systems, 26 March 2015) holds the occupation rate at 0.9 with a mean service of 1. Stated as 2 berths, 18 arrivals a day, a 10-hour working day and 1 fixed hour a call, what mean wait does the engine return, against the printed figure?",
+ "4.263158, which rounds to the 4.26 the table prints for that row",
+ ["4.26 exactly, the printed figure, which the engine takes from the table",
+  "9.000000, which is the wait of the table's one-server row at the same load",
+  "0.852632, which is the engine's delay probability on that row of the table"],
+ "Eighteen arrivals over 10 hours on a 1-hour service run 2 berths at a berth utilisation of 0.900000, and the engine returns 4.263158, which rounds to the printed 4.26. The engine computes the formula and reads no table. 9.000000 is the one-server row; 0.852632 is the delay probability at two servers.")
+
+# 12
+x("At five servers in Adan and Resing's Table 5.1 the engine returns a mean wait of 1.524986, and the table prints 1.53. How does the course read the printed figure?",
+ "As a slip in the table, since 1.524986 rounds to 1.52 under any rounding convention",
+ ["As the engine's figure rounded half up at two decimals, which is how the table works",
+  "As a sign that the engine's Erlang C routine drifts at five servers and needs repair",
+  "As a figure that the course adopts, since a printed table outranks a computed value"],
+ "The third decimal of 1.524986 is a 4, so half up, half even or half away from zero all give 1.52, and the printed 1.53 sits 0.005014 above the engine's figure, more than the half unit a two-decimal rounding allows. Every other figure in Tables 5.1 and 5.2 is the engine's rounded, and the row's own delay probability of 0.762493 gives 1.524986 by eq. 5.3. The course names the slip and quotes the engine's figure.")
+
+# 13
+x("Adan and Resing's Table 5.2 holds the surplus capacity at 0.1 of a server. At 20 servers and a berth utilisation of 0.995000, which figures does the engine return for the mean wait and the mean in the system?",
+ "9.737327 and 213.672804, which round to the printed 9.74 and 214",
+ ["9.000000 and 9.000000, the one-server row of the same table",
+  "0.275385 and 213.672804, the wait taken from Table 5.1 at 20",
+  "9.74 and 214 exactly, the printed figures read straight back"],
+ "On 199 arrivals a day over 10 hours with a 1-hour service, 20 berths run at 0.995000, and the engine returns a mean wait of 9.737327 and a mean in the system of 213.672804, printed as 9.74 and 214. Holding the spare capacity fixed holds the wait nearly steady while the occupation climbs. 0.275385 is Table 5.1's wait at 20 servers, where the occupation is 0.9.")
+
+# 14
+x("Iversen's Example 12.3.1 (Teletraffic Engineering Handbook, draft of 20 June 2001) prints mean waits of 0.075 and 0.199, 0.274 in total. What do the engine's two waits add to?",
+ "0.273702, which rounds to the printed 0.274 at three decimals",
+ ["0.274 exactly, since the engine takes the printed total straight from the example",
+  "0.074697, the first system's wait alone, since the second is read in hours",
+  "0.199005, the second system's wait, the first being too small to count"],
+ "The engine returns 0.074697 and 0.199005, which add to 0.273702 and round to the printed 0.274; each also rounds to its own printed figure. The golden inputs read the example's second as the working hour, which changes no figure because every time in the call is in the same unit.")
+
+# 15
+x("A planner types servers where the shore base call expects its berth count. What does the engine return?",
+ "servers is not an accepted key; the accepted keys at the top level are berths, arrivalsPerDay, workingHoursPerDay, service, model, targetMeanWaitHours",
+ ["A result that reads servers as the berth count, since Adan and Resing and Iversen both write their formulas with servers, and a note",
+  "servers is not an accepted key; the accepted keys at the top level are arrivalsPerDay, workingHoursPerDay, service, model, targetMeanWaitHours",
+  "A result on one berth with the servers key dropped, followed by the saturation refusal once the load is found to be above one"],
+ "The engine checks its accepted keys before it reads an input, so an unknown key is refused first, by name, with the full list, in its own words as the key shows. It maps no synonym to an input and drops no key silently. The accepted keys it lists include berths, the key the planner meant.")
 
 emit(Q, '/root/cat-wip-marine/banks/sc4a_m02.json', expect_n=15)
 finish()

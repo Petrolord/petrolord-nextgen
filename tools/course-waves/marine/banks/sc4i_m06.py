@@ -4,9 +4,117 @@ Q=[]
 def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
 # SC4 Professional m06, Published Packing Examples.
-# A STUB written at the foundation. The bank writer replaces the question list
-# below (fifteen questions, BANK_TASK.md) and keeps the emit line, whose path is
-# literal because the kit's check-bank-sources reads literal paths only.
+# Every figure is quoted from digest.txt or returned by the vendored engine on
+# the stated input (single-field edits verified by the writer's probe). The
+# packing examples are cited from the Wikipedia article on first-fit-decreasing
+# bin packing, revision 1317275412 (17 October 2025), CC BY-SA 4.0, read on
+# 2026-09-27, by example and never by its wording. No capstone name, input or
+# value appears.
+
+q(1, "How do the course's packing cases turn the bins of a capacity in the Wikipedia article on first-fit decreasing (revision 1317275412) into a deck plan the engine can pack?",
+ "Each number is a footprint one metre wide with the number as its length, on a usable fraction of 1 with no weight",
+ ["Each number is a weight in tonnes against a deck load equal to the capacity, with every footprint set to 1 m2",
+  "Each number is a square footprint whose side is the number, on a deck whose area is the capacity squared",
+  "Each number is a count of units of 1 m2, on a deck whose usable fraction is the capacity over one hundred"],
+ "A footprint one metre wide whose length is the number has an area equal to the number, so a deck of that area is a bin of that capacity. The usable fraction of 1 and zero weight leave area as the only limit. Ten voyages are stated, more than any packing needs, and the voyages used are the result.")
+
+q(3, "The Coffman, Garey and Johnson example, as the Wikipedia article on first-fit decreasing (revision 1317275412) prints it, packs 44, 24, 24, 22, 21, 17, 8, 8, 6 and 6 at capacity 60. What does the engine return?",
+ "{44,8,8}, {24,24,6,6}, {22,21,17}: 3 voyages, with a lower bound of 3",
+ ["{44,17}, {24,24,8}, {22,21,8,6}, {6}: 4 voyages, with a lower bound of 3",
+  "{44,8,6}, {24,24,8}, {22,21,17}, {6}: 4 voyages, with a lower bound of 4",
+  "{44,8,8}, {24,24,6,6}, {22,21,17}: 3 voyages, with a lower bound of 2"],
+ "The engine packs the capacity 60 list into the three sets the article prints, each filled exactly, since a fit is inclusive. The footprints add to three decks of 60, so the bound is 3. The four-set packing is the one at capacity 61. A bound of 2 would ignore that the list adds to more than two decks.")
+
+q(0, "The same ten footprints are packed by first-fit decreasing on a deck of 61. What does the engine return, and what does it show?",
+ "4 voyages against a bound of 3: first-fit decreasing is not monotone in the deck area",
+ ["3 voyages, since a larger deck can only hold the same list on the same or fewer voyages",
+  "2 voyages, since one more square metre on each deck lets two voyages carry the whole list",
+  "4 voyages against a bound of 4, since the larger deck raises the area bound by one voyage"],
+ "At 61 the engine packs {44,17}, {24,24,8}, {22,21,8,6}, {6}, four voyages, while the lower bound stays at 3. A larger deck needed more voyages. The bound cannot rise when the deck grows, and two decks of 61 still hold less than the list.")
+
+q(2, "Why does the deck of 61 end up needing a fourth voyage for the ten footprints?",
+ "The 44 and the 17 now fit together on voyage 1, and the rest falls into a worse pattern",
+ ["The larger deck changes the sort, so the 17 is placed ahead of the 22 and the 21",
+  "The 61st square metre is reserved for the crane, so each deck holds only 60",
+  "The 6s are too small to be placed by the rule and are sent to a voyage of their own"],
+ "One square metre more lets the 17 join the 44 exactly on voyage 1. The 17 that closed voyage 3 beside the 22 and the 21 at 60 is spent, the 8s and 6s land differently, and one 6 is left for a fourth voyage. The sort is by footprint and does not depend on the deck. The engine reserves nothing beyond the stated usable fraction.")
+
+q(1, "On the capacity 61 list, a planner states the deck area as 62, first-fit decreasing. What does the engine return?",
+ "3 voyages, matching the lower bound of 3 again",
+ ["4 voyages, since a larger deck repeats the result at 61",
+  "2 voyages, since the list now fits on two decks by area",
+  "5 voyages, since a larger deck always needs one more"],
+ "The engine packs {44,17}, {24,24,8,6}, {22,21,8,6} at 62: three voyages, the bound. Non-monotone means the voyage count can rise as the deck grows, and it can fall again. The list adds to more than two decks of 62, so 2 is below the bound.")
+
+q(3, "The Wikipedia article on first-fit decreasing (revision 1317275412, CC BY-SA 4.0) prints Example 5.1 of Huang and Lu (2021), a list packed at capacity 75. What does the engine return on that list?",
+ "{51,12,12}, {28,28,10}, {28,27,10,10}, {25,10,10,10,10,10}: 4 voyages, set for set",
+ ["{51,12,12}, {28,28,10}, {28,27,10,10}, {25,10,10,10,10,10}: 4 voyages and one overflow",
+  "{51,12,10}, {28,28,12}, {28,27,10,10}, {25,10,10,10,10}, {10}: 5 voyages",
+  "{51,12,12}, {28,28,10,10}, {28,27,10}, {25,10,10,10,10,10}: 4 voyages, set for set"],
+ "The engine packs the course's case into exactly the four sets the article prints. Nothing overflows, since ten voyages are stated. The five-set packing moves a 10 and a 12 the rule does not move, and another packing moves a 10 from the third set to the second, which would then overfill its 75.")
+
+q(0, "The Huang and Lu list at capacity 75 (Wikipedia, revision 1317275412) is booked in decreasing order. A planner switches the rule to \"first-fit\". What does the engine return?",
+ "The same four sets and 4 voyages, since the booked order is already the sorted order",
+ ["A packing on 5 voyages, since first fit ignores the sizes and packs the list as booked",
+  "The same four sets, placed in the reverse order of voyages, since first fit starts small",
+  "A packing on 3 voyages, since first fit fills each voyage before it opens the next one"],
+ "When the booked order is already largest first, first fit places the units in the same order as first-fit decreasing and gives the same packing: {51,12,12}, {28,28,10}, {28,27,10,10}, {25,10,10,10,10,10}. The rules differ only in the order they take the units. Three voyages would be below the lower bound of 4.")
+
+q(2, "Dosa's (2007) tight worst case, scaled to capacity 400, is cited from the Wikipedia article on first-fit decreasing, revision 1317275412. The engine packs it by first-fit decreasing. What does it return?",
+ "8 voyages against a lower bound of 6; the text's optimum is 6 bins",
+ ["6 voyages against a lower bound of 6, the text's optimum",
+  "8 voyages against a lower bound of 8, since the bound is the rule's count",
+  "7 voyages against a lower bound of 6, one above the text's optimum"],
+ "The engine uses 8 voyages, {204,108} four times, {104,104,104}, {104,92,92,92}, {92,92,92,92} and {92}, and prints a lower bound of 6, the area bound. The text states the optimum of 6 and that 8 is 11/9 of it plus 6/9. The engine searches for no optimum, and the bound is area over the usable deck.")
+
+q(1, "On Dosa's tight case (Wikipedia, revision 1317275412), why does first-fit decreasing need 8 voyages where 6 would do?",
+ "Each 204 takes a 108 early, leaving gaps too small for every later 104 or 92",
+ ["Being the smallest, the 92s are packed first and fill the early voyages",
+  "The deck load binds before the area, since each unit weighs its own length",
+  "A margin of area kept on each voyage by the engine, which the text's optimum uses"],
+ "The large units go first and each 204 pairs with a 108, the largest unit that still fits. The gap left on each of the first four voyages is smaller than any unit still waiting, and a single 92 ends alone on voyage 8. The examples carry no weight, and the engine holds no margin beyond the stated usable fraction.")
+
+q(3, "On Dosa's tight case (Wikipedia, revision 1317275412), the booked list reads four 204s, four 104s, four 92s, four 108s and four 92s. Packed by first fit in that order, what does the engine return?",
+ "7 voyages against the same lower bound of 6, one fewer than first-fit decreasing",
+ ["8 voyages, since first fit and first-fit decreasing agree on every published list",
+  "6 voyages, the text's optimum, since the booked order is the best packing",
+  "9 voyages, since first fit without the sort always does worse than the sorted rule"],
+ "First fit in this booked order packs each 204 with a 104 and a 92, then three 108s together, and uses 7 voyages. On this list the unsorted rule beats the sorted one, which uses 8. It still misses the bound of 6, and on the capacity 60 list booked smallest first the sorted rule did better, 3 voyages against 4, so neither rule wins everywhere.")
+
+q(0, "What does a tight worst case such as Dosa's (Wikipedia, revision 1317275412) say about first-fit decreasing?",
+ "It bounds how far the rule can land from the best packing, and says nothing of how often",
+ ["It shows the rule usually needs about a third more voyages than the best packing",
+  "It shows the rule fails on published lists and is unsafe for planning a deck",
+  "It sets the engine's lower bound on voyages, which is 11/9 of the area bound"],
+ "A worst case is a bound on the rule, a promise about how bad it can get. On the Ekene cargo the rule used 2 voyages, its lower bound. The engine's lower bound is the area bound, unrelated to 11/9. The rule is stated and repeatable; the planner reads its count beside the bound.")
+
+q(2, "A deck plan returns voyages used above its lower bound. What should a planner take from that?",
+ "A better packing may exist, so the gap is worth a look before promising the count",
+ ["The engine has made an error, since a packing can never use more voyages than the bound",
+  "The lower bound is wrong for this cargo and should be raised to the voyages used",
+  "No packing can do better, since the rule returns the fewest voyages there are"],
+ "The lower bound is the fewest voyages any packing could use, and a stated rule may use more, as on the capacity 61 list and on Dosa's case, both printed in the Wikipedia article (revision 1317275412). A gap means the rule, or the cargo, may allow fewer, and the deck foreman may find it by hand. When the count equals the bound, no packing can do better.")
+
+q(1, "The capacity 60 list is booked smallest first, 6, 6, 8, 8, 17, 21, 22, 24, 24, 44, and packed by first fit. What does the engine return?",
+ "{6,6,8,8,17}, {21,22}, {24,24}, {44}: 4 voyages, as the small items open the packing",
+ ["{44,8,8}, {24,24,6,6}, {22,21,17}: 3 voyages, the very same packing as the sorted rule",
+  "{6,6,8,8,17,21}, {22,24}, {24}, {44}: 4 voyages, the 21 joining the small items",
+  "{6,6,8,8}, {17,21,22}, {24,24}, {44}: 4 voyages, the 17 held back for the 21 and 22"],
+ "First fit keeps the booked order: the small items fill voyage 1 up to 45, the 21 and 22 share voyage 2, the 24s voyage 3 and the 44 sails alone. The three-set packing is first-fit decreasing's. Adding the 21 to the first voyage would exceed 60, and first fit puts the 17 on voyage 1, where it fits.")
+
+q(3, "Why does the course run published packings through the engine as well as the synthetic Ekene cargo?",
+ "A packing printed by someone else, matched set for set, shows the rule is the published one",
+ ["The synthetic cargo cannot be packed by first-fit decreasing, as its units have weights",
+  "The published lists set the tolerance on the deck values that the capstone grades",
+  "A synthetic check alone would let the engine choose its own rule for each voyage"],
+ "A synthetic case only proves the engine agrees with itself. A list printed in an independent source, packed into the same sets, shows the engine computes the rule the Wikipedia article (revision 1317275412) describes. The Ekene cargo packs by either rule, weights and all. Tolerances are set in one place in the platform, and the rule is always a stated input.")
+
+q(2, "How does the course cite the Wikipedia article on first-fit-decreasing bin packing?",
+ "Revision 1317275412 of 17 October 2025, CC BY-SA 4.0, read on 2026-09-27, by example",
+ ["The current page on the day a learner reads it, since the article is kept up to date",
+  "Johnson's 1973 thesis in its place, since the rule is his and the article is secondary",
+  "Revision 1317275412, quoted in full, since a CC BY-SA 4.0 text may be pasted freely"],
+ "The article changes over time, so the course cites one revision and its examples as that revision prints them, by section and example, without pasting its wording. Johnson's thesis and Dosa's paper were not read directly, so the article is cited with its citations. The licence does not change the course rule of quoting no source prose.")
 
 emit(Q, '/root/cat-wip-marine/banks/sc4i_m06.json', expect_n=15)
 finish()

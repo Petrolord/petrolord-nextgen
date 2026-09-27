@@ -3,10 +3,137 @@ from bankkit import emit, finish
 Q=[]
 def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
-# SC4 Expert m05, Readings and Boundaries.
-# A STUB written at the foundation. The bank writer replaces the question list
-# below (fifteen questions, BANK_TASK.md) and keeps the emit line, whose path is
-# literal because the kit's check-bank-sources reads literal paths only.
+# SC4 Expert m05, Readings and Boundaries. Every key on a reading asks what the
+# engine returns and names the reading as the engine's, with its alternative;
+# none presents a reading as the law. Every numeric and refusal key is a return
+# of the vendored engine on a golden case or a published check;
+# scratch/bank-advanced/witness.mjs recomputes each. Figures that print alike
+# are never keyed as equal. No key is a Monte Carlo figure and no capstone
+# figure appears.
+
+K = [2, 0, 1, 3, 0, 3, 2, 1, 0, 2, 3, 1, 3, 0, 2]
+_i = iter(K)
+def x(p, c, ds, e): q(next(_i), p, c, ds, e)
+
+# 1
+x("To how many significant digits must two figures agree for the engine to treat them as a tie, and where does it apply that rule?",
+ "12, its DEFAULTS.TIE_DIGITS: for a tie, a capacity check and a count rounded up",
+ ["6, the decimals it prints every figure to, for each comparison it makes in a message",
+  "16, the digits of a binary double, so that two figures tie only when they are equal",
+  "2, the decimals of Adan and Resing's printed waits, for the published checks alone"],
+ "The engine states one rule for every comparison where binary doubles would mislead: two figures tie when they agree to 12 significant digits (DEFAULTS.TIE_DIGITS). A capacity check passes when the 12-digit load is at or below the 12-digit capacity; a count rounded up is the ceiling of the 12-digit figure; a binding tie goes to the first constraint in the stated order. Six decimals is only how figures print.")
+
+# 2
+x("A week's only demand is 2.1 m2 of deck area, with no minimum visits, against a voyage capacity of 0.7 m2 of deck area; the division in binary doubles lands one step above 3. With voyages rounded up, what voyage count does the engine return?",
+ "3 voyages, since the count rounds up on its twelve-digit figure, which is 3",
+ ["4 voyages, the ceiling of the raw double read straight from the binary arithmetic",
+  "A fractional count just above 3, since a count rounded up keeps its binary tail",
+  "A refusal, since a demand ratio must come out a whole number to be rounded"],
+ "The engine rounds a count up on its twelve-digit figure, which is exactly 3, and returns 3 voyages. That is the engine's stated reading; the alternative it names, the ceiling of the raw double, would give 4 for what is three voyages of demand. No graded figure moves under either.")
+
+# 3
+x("A week's only demand, 300.001 m2 of deck area with no minimum visits, meets a voyage capacity of 100 m2 of deck area, with voyages rounded up. What does the engine return, and why does the twelve-digit rule not hold it at 3?",
+ "4 voyages, since a thousandth of a square metre over 3 is plain at twelve digits",
+ ["3 voyages, since the twelve-digit rule reads anything within a thousandth as a tie",
+  "3 voyages and a remainder, since a count keeps the small excess that it carries",
+  "A refusal, since a demand that is not a whole multiple of a capacity is not accepted"],
+ "The ratio sits a hundred-thousandth above 3, a difference in the sixth significant digit, so its twelve-digit ceiling is 4 and the engine returns 4 voyages. The rule absorbs the binary noise of a double, a step far beyond the twelfth digit, and blurs no real difference.")
+
+# 4
+x("Two deck cargoes of 0.1 and 0.2 m2 go on a deck whose area capacity is 0.3 m2. In binary doubles their sum, and so the deck area utilisation, lands a hair above the capacity. What does the engine return?",
+ "Feasible, with deck area binding at 1.000000, read at capacity by the twelve-digit rule",
+ ["Overloaded on deck area, since the utilisation in the double lies a hair above 1",
+  "A refusal on the deck cargo, since decimal areas cannot be summed exactly by the engine",
+  "Feasible, since the engine rounds every utilisation to six decimals before it checks it"],
+ "The double sum sits a hair above 0.3, so the utilisation sits a hair above 1; the twelve-digit rule reads the load as at the capacity, and a load exactly at a capacity is feasible, the engine's first stated reading. The engine checks at twelve significant digits; six decimals is only how the figure prints.")
+
+# 5
+x("The engine refuses a base with 2 berths at 30 arrivals a day, whose exact bound is a repeating decimal printed as 26.666667. Which most-arrivals figure does its message print, and why?",
+ "26.666666, rounded down at the sixth decimal so that the printed figure is accepted",
+ ["26.666667, the exact bound at six decimals, rounded half up in the usual way",
+  "26, the whole part of the bound, since arrivals a day are counted whole",
+  "30, the arrivals as typed, with the berth utilisation of 1.125 beside them"],
+ "Ordinary rounding gives 26.666667, which is above the exact bound and would itself be refused. The engine prints the six-decimal figure nearest the bound on the accepted side, 26.666666, and adds \"(rounded down at the sixth decimal so that it is accepted)\" because it differs from the exact bound. Typing it back in passes.")
+
+# 6
+x("A base with 2 berths is stated at exactly 20 arrivals a day, which puts its berth utilisation at 1. Which most-arrivals figure does the engine's refusal print?",
+ "19.999999, since the exact bound of 20 is itself refused",
+ ["20, the exact bound, which the engine accepts as the edge",
+  "19, the largest whole number of arrivals below the bound",
+  "20.000000, the exact bound written out to six decimals"],
+ "A steady state needs a berth utilisation strictly below 1, so 20 arrivals a day is refused. The engine prints 19.999999, the nearest six-decimal figure its rule accepts, with the note that it was rounded down. Arrivals a day need not be whole.")
+
+# 7
+x("Two units on a deck plan share the same footprint area. Under first-fit decreasing, which does the engine place first, and on what footing?",
+ "The heavier one, then by item id and unit number, on the engine's stated tie reading",
+ ["The lighter one, so that the deck load fills more slowly on the early voyages of the plan",
+  "The one booked first, since first-fit decreasing keeps the booking order among equal areas",
+  "Whichever has the longer side, since a longer unit is harder to place once the deck fills up"],
+ "The engine sorts by footprint area and breaks a tie by the heavier unit first, then the item id, then the unit number; its basis says so. That is the engine's stated reading, and the alternative it names puts the lighter first. First fit in the booked order is a different rule, and the engine checks no deck shape, so a unit's length never enters the order.")
+
+# 8
+x("Which of these is a choice a call must state, and so the engine's input, as distinct from a reading the engine itself states?",
+ "The queue model, M/M/c or M/D/c, a required input a plan names",
+ ["That a berth target is met at or below the target wait, the engine's own",
+  "Short counted only strictly above the planned capacity in vessel-days",
+  "The P90 of a requirement taken as its low figure, met in 90 percent of draws"],
+ "The activities the weather slows, the voyage and vessel rounding rules, the packing rule, the queue model and the concurrent choice are inputs, each required, and a capstone states each one it uses. The inclusive berth target, short strictly above and the low P90 are readings the engine states where no source fixes a convention.")
+
+# 9
+x("Which pair of the engine's boundaries shows that no single boundary rule runs through the whole engine?",
+ "A load at a capacity is feasible, while a berth utilisation of exactly 1 is refused",
+ ["A load at a capacity is feasible, and a wait equal to a target meets the target",
+  "A need at the planned capacity in vessel-days is covered, as is an exact deck fill",
+  "A weather factor of 1 is accepted, as is a usable fraction of exactly 1 on a deck"],
+ "Each rule draws its own edge. A capacity is inclusive (a load at it is feasible) while the steady state is strict (a berth utilisation of 1 has no steady state and is refused). The other three pairs each join two inclusive edges, so they show no difference between rules.")
+
+# 10
+x("On the voyage and fleet calculators, which weather factors does the engine accept and which does it refuse?",
+ "1 is accepted as the calm factor; 0.9 and 10.5 are refused, below the floor and above the cap",
+ ["0.9 is accepted as a fair-weather factor; 10.5 is refused as above the cap of 10 set at the top of the range",
+  "Every factor above 0 is accepted, since the weather factor is a stated input with no bounds",
+  "1 is refused as a factor that changes nothing; 0.9 and 10.5 are both accepted with a warning"],
+ "The weather factor must be a finite number from 1 to 10: 1 is the calm factor and accepted, and the engine refuses 0.9 and 10.5, each with \"weather.factor must be a finite number from 1 to 10\" and the figure it got. The same floor and cap hold inside a triangular in the Monte Carlo.")
+
+# 11
+x("Skoko et al. (J. Mar. Sci. Eng. 12(2), 263, 1 February 2024, CC BY 4.0) print the PSV's optimal fuel cost as USD 186,274.10. What do their rounded Table 5 days give through the engine, and what does the course do?",
+ "186214.104000, 59.996000 short, so the course leaves the PSV total out and uses the AHTS row",
+ ["USD 186,274.10 exactly, the printed total, which the engine rebuilds from the days",
+  "80847.360000, the PSV total once the days are read as field time at the sailing burn",
+  "186214.104000, which the course treats as a slip and corrects in the printed total"],
+ "The rounded days of Table 5 give 186214.104000 through the engine, 59.996000 short of the printed USD 186,274.10, so the table's rounded days cannot rebuild its total. The course uses the AHTS row, whose USD 80,847.36 the engine reproduces as 80847.360000, and leaves the PSV total out; it corrects no one's table.")
+
+# 12
+x("Iversen's Example 12.3.1 is set in seconds. How do the golden inputs handle that, and does it move any figure?",
+ "They read the second as the working hour, which moves no figure since every time is in one unit",
+ ["They convert each second to a fraction of an hour, which moves every wait by one factor",
+  "They read the second as a working day, which leaves the waits in days to be converted",
+  "They drop the units altogether, and the engine refuses any time stated without one"],
+ "Iversen's handbook was read in its ITU-D draft of 20 June 2001. The golden inputs read its second as the working hour; because the service, the arrivals and the waits are all in that one unit, no figure moves, and both waits reproduce the printed 0.075 and 0.199 at three decimals.")
+
+# 13
+x("Why does the course cite the Wikipedia article on first-fit decreasing as revision 1317275412 of 17 October 2025?",
+ "Because the page changes over time, the course cites the revision whose examples it ran",
+ ["Because that revision fixed an error in the capacity 60 and 61 example the engine needed",
+  "Because the licence of the article, CC BY-SA 4.0, applies only to one named revision",
+  "Because Johnson's 1973 thesis is quoted in that revision and in no other"],
+ "A living page moves, so the course names the revision it read and takes the examples as that revision prints them, citing it without pasting its wording. The licence covers every revision, no revision is described as a repair, and Johnson's 1973 thesis and Dosa's 2007 paper were not read directly.")
+
+# 14
+x("Skoko et al. treat 85% of a vessel's carrying capacity as usable, and the Ekene fixture states a usable deck fraction of 0.75. Which does the engine hold?",
+ "Neither: the usable fraction is a required input on every call, with no figure held",
+ ["The 85% of Skoko et al., since a published figure is applied wherever the call is silent",
+  "The 0.75 of the Ekene fixture, since the synthetic cluster sets the engine's usual fraction",
+  "Both, applying 0.75 to the deck area and 85% to the deadweight of every vessel"],
+ "The engine holds no domain figure: the usable fraction is required on every call, and a call without it is refused by name. A usable fraction of 1 is accepted, and 0 and 1.1 are refused. The two figures come from two places, and each call states its own.")
+
+# 15
+x("On a fleet case whose vessels before rounding come to 1.500000, with the vessel rounding stated as nearest, what does the engine return?",
+ "2 vessels, on the engine's stated reading that the nearest whole vessel rounds a half up",
+ ["1 vessel, since a half rounds down to keep the fleet as small as the rounding rule allows",
+  "1.500000 vessels, since the nearest rule leaves a figure that is exactly at a half as it is",
+  "2 vessels, because every rounding rule the engine offers takes a fleet count up in the end"],
+ "Under the nearest rule the engine rounds a half up and returns 2 vessels. That is its stated reading; the alternative, halves rounded down, would give 1 vessel and a short week. The same rule rounds 1.416667 down to 1 and reports the shortfall; only the up rule always rounds up.")
 
 emit(Q, '/root/cat-wip-marine/banks/sc4a_m05.json', expect_n=15)
 finish()

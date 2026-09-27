@@ -16,10 +16,10 @@
    "A plan in which every activity the factor names runs a tenth faster than its calm time.",
    "A refusal, in its own words: weather.factor must be a finite number from 1 to 10; got 0.9",
    "A plan with the factor raised to 1, the calm floor, and a note of the change in the reasons.",
-   "A refusal naming weather.appliesTo, since a factor below 1 cannot apply to any activity."
+   "A refusal, in its own words: weather.factor must be a finite number above 1; got 0.9"
   ],
   "answer": 1,
-  "explanation": "A factor below 1 would make bad weather faster than calm, so the engine refuses it on weather.factor, printing the value it got. It changes no stated input to fit, and the activities are a separate input with their own refusals."
+  "explanation": "A factor below 1 would make bad weather faster than calm, so the engine refuses it on weather.factor, printing the value it got. It changes no stated input to fit, and the activities are a separate input with their own refusals. A factor of exactly 1, the calm plan, is accepted, so the range starts at 1."
  },
  {
   "prompt": "Port time on the Ekene milk run is stated as 12 hours. If the planner puts port in the list the 1.2 allowance slows, how long is port time in the plan?",
@@ -49,15 +49,15 @@
    "A plan with the factor applied to all three activities, the list the engine assumes when none is given.",
    "A plan with the factor applied to sailing alone, the activity the weather slows the most at sea, with port and field time kept at their calm hours.",
    "A refusal, in its own words: weather.appliesTo must be an array naming at least one of \"sailing\", \"port\", \"field\"; got nothing",
-   "A calm plan with the stated factor set aside, since no activity has been named to apply it to."
+   "A refusal, in its own words: weather.factor must be 1 when weather.appliesTo is left out; got 1.2"
   ],
   "answer": 2,
-  "explanation": "The list of activities is a required input with no assumed value, so leaving it out is refused by name. The engine applies the factor to no activity of its own choosing and sets no stated input aside: the plan names both the factor and what it slows."
+  "explanation": "The list of activities is a required input with no assumed value, so leaving it out is refused by name, on weather.appliesTo itself whatever the factor. The engine applies the factor to no activity of its own choosing and sets no stated input aside: the plan names both the factor and what it slows."
  },
  {
-  "prompt": "A planner wants standby time slowed by the weather and types standby into weather.appliesTo. What does the engine return, and what can the planner do?",
+  "prompt": "A planner wants standby time slowed by the weather and adds standby to weather.appliesTo after sailing. What does the engine return, and what can the planner do?",
   "options": [
-   "A refusal, since the engine knows only sailing, port and field; standby time is stated inside the port or field hours and named in the plan.",
+   "A refusal: the activities are sailing, port and field only, so standby is folded into the stated port or field hours.",
    "A plan with a fourth activity added for standby, burning fuel at a rate read from Skoko et al.'s tables.",
    "A plan that treats standby as port time and applies the factor to it without a word in the reasons.",
    "A refusal asking for standby to be stated in days, since standby is counted by the day offshore."
@@ -132,7 +132,7 @@
   "explanation": "The allowance adds 2829.872727 to the bill, the difference of the two engine fuel costs. 62.640000 is what naming port time adds on top of that. The calm voyage still burns fuel, so the whole rainy-season bill is not the allowance, and a factor of 1.2 on two activities does not double anything."
  },
  {
-  "prompt": "The PSV day of Skoko et al. (Tables 1 and 4) is put through the engine as one out-and-back trip of 120 NM each way at 10 knots, with 24 hours alongside the base, burning 0.5 t an hour under way and 0.03 in port, fuel priced at 870. What comes back?",
+  "prompt": "The PSV day of Skoko et al. (Tables 1 and 4) is put through the engine as one out-and-back trip of 120 NM each way at 10 knots, with 24 hours alongside the base, no field hours and a weather factor of 1, burning 0.5 t an hour under way and 0.03 in port, fuel priced at 870. What comes back?",
   "options": [
    "A fuel cost of 11066.400000, whose sailing part 10440.000000 and port part 626.400000 are the two daily figures the table prints.",
    "A fuel cost of 10440.000000 in all, since the table counts the sailing day only and a day in port burns nothing.",
@@ -143,7 +143,7 @@
   "explanation": "The voyage sails 240.000000 NM in 24.000000 hours and burns 12.000000 t sailing and 0.720000 t in port, for 11066.400000 at 870. The two parts, 10440.000000 and 626.400000, are exactly the daily sailing and port costs the paper prints. A port day burns 0.03 t an hour, a small amount that is still counted."
  },
  {
-  "prompt": "For the AHTS optimal month in Skoko et al.'s Tables 5 and 7, the course states 168 field hours, navigation as a dedicated voyage of 79.2 NM each way at 11 knots, 57.6 port hours, burns of 0.5 t an hour sailing and in the field and 0.03 in port, and 870 a tonne. Which fuel cost results?",
+  "prompt": "For the AHTS optimal month in Skoko et al.'s Tables 5 and 7, the course states 168 field hours, navigation as a dedicated voyage of 79.2 NM each way at 11 knots, 57.6 port hours, burns of 0.5 t an hour sailing and in the field and 0.03 in port, a weather factor of 1, and 870 a tonne. Which fuel cost results?",
   "options": [
    "186214.104000, the figure the table's rounded days give for the month through the engine.",
    "11066.400000, the fuel cost of one day of a PSV at sea and one in port, at the same price.",
@@ -157,7 +157,7 @@
   "prompt": "Why does the course leave out Skoko et al.'s printed PSV month total of USD 186,274.10 and use the AHTS row?",
   "options": [
    "The PSV row is priced at a fuel price other than USD 870 a tonne, so it cannot be set beside the AHTS row.",
-   "The rounded days the table prints give 186214.104000 through the engine, 59.996000 short of the total, so the printed total cannot be reproduced.",
+   "The printed rounded days give 186214.104000 through the engine, 59.996000 short, so the total cannot be reproduced.",
    "The paper withdrew the PSV row in the edition of 1 February 2024 that the course read on 2026-09-27.",
    "The engine refuses the PSV month, because its sailing days would need a weather factor above the cap of 10."
   ],

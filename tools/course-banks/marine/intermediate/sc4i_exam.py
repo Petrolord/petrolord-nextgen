@@ -13,7 +13,7 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 # ---- m01 Demand over a Period ----
 
 q(1, "Across the Ekene week, EKA draws 610.000000 t of deck cargo, EKJ 1100.000000 t, EKB 150.000000 t and EKF 240.000000 t. What deck weight demand does fleetSize give the milk run's one voyage set?",
- "2100.000000 t, all four stops summed into the set",
+ "2100.000000 t, the four stops' deck weight summed into one set",
  ["1100.000000 t, the jack-up's share, the largest single customer",
   "2000.000000 t, the PSV's deck load, the most one voyage lifts",
   "635.000000 t, the deck weight of one planned voyage's cargo"],
@@ -40,19 +40,19 @@ q(3, "A lone installation states no demand and 0 visits, and the engine returns 
   "A refusal, since visits need some demand to go with them"],
  "The voyages needed are the larger of the demand ratio and the visits, so one stated visit gives 1 voyage, and the engine names minimum visits because the visits are larger than a demand of nothing. \"no demand\" is kept for neither demand nor a visit. A visit with no cargo is a valid need.")
 
-q(3, "Enlarge tank d from 100 m3 to 500 m3 for an installation whose 410 m3 of that product outweighed its 10.000000 m2 on a 100 m2 deck area capacity (0 visits, voyages up). What returns?",
+q(3, "Suppose a site's single product, d (1 t a m3), fills 410 m3 of demand, far more than its 100 m3 tank, while its deck share is only a tenth: 10.000000 m2 against 100 m2 of area capacity. The vessel carries 1000 t deadweight, the site asks for 0 visits and voyages round up. Now the tank grows to 500 m3. What returns?",
  "1 voyage, still driven by tank d, whose ratio stays above the deck's tenth",
  ["1 voyage, now driven by deck area, since the tank stops limiting anything",
   "5 voyages, still driven by tank d, since the demand of 410 m3 is unchanged",
   "0 voyages, since one tank now holds all of the product the period needs"],
  "410 over 500 is under one voyage, and it is still the largest ratio against the deck's 10 over 100, so tank d is named and the count rounds up to 1. A driver is the largest ratio even when it is small. Any demand at all needs at least one voyage once rounded up.")
 
-q(1, "An installation in a fleet call has no demand object at all. What does the engine return, in its own words?",
- "installations[0].demand must be an object { deckAreaM2, deckWeightT, bulk }; got nothing",
- ["installations[0].demand is not an accepted key; the accepted keys of installations[0] are id, name, cargo",
-  "A fleet sized with that installation's demand read as zero, with a reason naming the missing object",
-  "installations[0].minVisits must be a whole number from 0 to 1000; got nothing"],
- "Demand has no default, so a missing demand is refused by name. The engine never reads a missing input as zero. demand is an accepted key of an installation, and cargo is not; the visits message is the refusal for a missing minVisits.")
+q(1, "A fleet call states a 7-day period and leaves the days a vessel is available out, expecting the engine to assume a working week. What comes back?",
+ "A refusal: vesselAvailableDays must be a finite number above 0; got nothing",
+ ["A refusal: vesselAvailableDays must be at most periodDays (7); got nothing",
+  "A result with all 7 days used for each vessel and a reason noting the assumption",
+  "A result with 6.5 days assumed, the figure the Ekene week states for its vessels"],
+ "The engine assumes no availability: an unstated figure is refused by name, and the message gives the lower end of the accepted range. The bound at the period is the message for a figure above 7. Neither 7 nor 6.5 is filled in on the planner's behalf; the call states its own figure.")
 
 q(0, "A planner wants no minimum visits for one installation and leaves the input out. What does the engine do, and what should the planner write?",
  "It refuses the call as got nothing; the planner writes 0 to state no minimum",
@@ -77,11 +77,11 @@ q(1, "For the same Ekene PSV milk run, \"up\" asks for 10.345455 vessel-days in 
   "An error in the fractional rule, which drops a tenth of the cargo"],
  "Both rules use the same 2.586364-day voyage; only the voyage count differs, 4 against 3.100000. The gap is the fourth voyage's worth of time a single week must sail to carry the last tenth of demand. Weather is in both. Spare vessel-days come from the vessel rule, and the fractional rule carries all the demand on average.")
 
-q(3, "Deck cargo of 0.3 m2 over a 0.1 m2 deck area capacity comes back from the binary arithmetic a hair below 3 voyages of demand. With \"up\", what count does the engine give?",
+q(3, "Deck cargo of 0.3 m2 over a 0.1 m2 deck area capacity comes back from the binary arithmetic a hair below 3 voyages of demand, with 0 minimum visits. With \"up\", what count does the engine give?",
  "3, since the figure agrees with 3 to twelve significant digits",
- ["2, since the ratio falls a hair short of 3 in binary",
-  "A hair under 3, since the ratio is kept exact",
-  "4, since a ratio below 3 is rounded up past it"],
+ ["2, since the ratio falls a hair short of 3 in its binary double",
+  "A hair under 3, left as the ratio for the planner to read",
+  "4, since a ratio a hair below 3 is rounded up past it to 4"],
  "The engine compares counts at twelve significant digits, and the ratio agrees with 3 there, so three voyages of demand are 3. Dropping to 2 would leave a third of the cargo ashore. Rounding up returns a whole count, and the ceiling of a figure equal to 3 is 3.")
 
 q(3, "Which of these changes leaves the vessel-days of a fleet result exactly where they were?",
@@ -98,14 +98,14 @@ q(2, "Why might a planner still choose dedicated voyages for the Ekene cluster, 
   "The engine recommends dedicated voyages whenever minimum visits drive every set"],
  "A dedicated plan sends each installation its own vessel, so no stop waits behind others on the route. It is dearer in time and fuel: 85.461818 t against 79.505455. Both weeks round to 2 vessels on the PSV. The engine computes both and chooses neither; the planner states the route.")
 
-q(0, "A planner trims a single-installation call's port hours from 200 to 12, the call whose one voyage had run past its vessel's 6.5-day week. How many vessels, and is a reason printed?",
+q(0, "A planner trims a single-installation call's port hours from 200 to 12, the call whose one voyage had run past its vessel's 6.5-day week, with vessels rounded up. How many vessels, and is a reason printed?",
  "The reason disappears and the fleet is 1 vessel",
  ["The reason stays, since the voyage count is unchanged",
   "The reason disappears and the fleet stays at 2 vessels",
   "A refusal, since the port hours changed by too much"],
  "With 12 port hours the voyage takes well under the 6.5 days a vessel has, so no reason is printed, and its vessel-days now fit one vessel, which rounds up to 1. The reason depends on voyage days alone. Any port time at or above 0 is accepted.")
 
-q(0, "A deck demand of 300 square metres per period meets 100 m2 of deck area capacity, with the voyage rule \"up\". What count results?",
+q(0, "A deck demand of 300 square metres per period meets 100 m2 of deck area capacity, with 0 minimum visits and the voyage rule \"up\". What count results?",
  "3, the exact ratio with nothing to round",
  ["4, since rounding up always adds a voyage",
   "3.000000, kept as the ratio for the planner",
@@ -189,11 +189,11 @@ q(1, "What comes back when an item line of a deck plan is typed with a width of 
 q(2, "A deck plan's item lines add up to 2001 units. What does the engine return?",
  "items hold 2001 units in all; the cap is 2000",
  ["A plan of the first 2000 units, the last one as overflow",
-  "items has 2001 entries; the cap is 500",
+  "items hold 2001 units in all; the cap is 1000",
   "A plan of all 2001 units across the stated voyages"],
- "The units cap is 2000, and a plan over it is refused as a whole, naming the count. The engine never truncates a list. The item-line cap is 500 lines, a different limit with its own message.")
+ "The units cap is 2000, and a plan over it is refused as a whole, naming the count. The engine truncates no list, and the cap in the message is 2000 units.")
 
-q(0, "A deck of 20 m2 at a usable fraction of 0.5 carries big (12.5 m2) and two small units; the engine lists big as never fitting and prints a bound of 1. A planner states the fraction as 1. What does the engine return?",
+q(0, "A deck of 20 m2 at a usable fraction of 0.5, rated for 50 t, carries big (12.5 m2, 5 t) and two small units of 2 m by 2 m, 1 t each; the engine lists big as never fitting and prints a bound of 1. A planner states the fraction as 1. What does the engine return?",
  "big fits, no unit is listed as never fitting, and the lower bound rises to 2",
  ["big still never fits, since its footprint was compared with the whole deck",
   "big fits, and the lower bound stays at 1, since the small units set it",
@@ -238,11 +238,11 @@ q(0, "How near to its deck load does the first voyage of the two-voyage Ekene fi
  "Voyage 1 carries 599.229600 m2 of 600.000000 usable and only 499.600000 t of 2000 t, so area moves the later units to voyage 2. Voyage 2 carries the small units. The sort is by area, with weight used only to break ties.")
 
 q(1, "Six-square-metre footprints b (two units at 1 t), a and c again tie, and now a and c both weigh 4 t. In what order does first-fit decreasing take them?",
- "a, c, b#1, b#2: a and c tie on area and weight, and the id puts a first",
+ "a, c, b#1, b#2: by the stated reading a full tie goes to the id",
  ["c, a, b#1, b#2: c was first before and keeps its place at the head",
   "b#1, b#2, a, c: the order in which the item lines were booked",
   "a, b#1, b#2, c: a leads the list, and c drops to the very end"],
- "a and c now tie on footprint and on weight, so the item id decides, a before c, and b's lighter units follow in number order. The earlier order rested on c's weight alone. The booked order is first fit's, and c still outweighs b.")
+ "The engine's stated reading gives a tie on footprint to the heavier unit and a tie on both to the item id; a and c now tie on footprint and on weight, so a goes before c, and b's lighter units follow in number order. The earlier order rested on c's weight alone. The booked order is first fit's, and c still outweighs b.")
 
 q(3, "Why does first-fit decreasing place the largest footprints before the small ones?",
  "A large unit needs a large clear space, which every voyage still offers early on",
@@ -268,11 +268,11 @@ q(2, "One overflow unit's reason names its footprint as larger than the usable d
 # ---- m06 Published Packing Examples ----
 
 q(0, "Packed at 60, every voyage of the Coffman, Garey and Johnson example (Wikipedia revision 1317275412) sums to exactly 60 square metres. What lets a voyage be filled to its last square metre?",
- "A fit is inclusive, so a unit that brings a voyage to exactly 60 still goes on",
+ "Under the engine's stated reading, a unit that brings a voyage to exactly 60 fits",
  ["Each voyage's area is rounded to the capacity by the engine when the gap is small",
   "The list was chosen so that no unit is placed until its voyage has room to spare",
   "The usable fraction of 1 adds a margin that lets each voyage take one more unit"],
- "Each set adds to 60, and the engine's area check is inclusive at twelve digits, so the unit that fills a voyage exactly fits. The engine rounds no areas. A usable fraction of 1 makes the usable area equal to the deck area, with no margin added.")
+ "Each set adds to 60, and under the engine's stated reading a unit that fills the deck exactly fits, compared at twelve digits; a strict reading would refuse that last unit. The engine rounds no areas. A usable fraction of 1 makes the usable area equal to the deck area, with no margin added.")
 
 q(3, "The ten footprints of that list add to exactly three decks of 60. What lower bound does the engine print at 60 and at 61, and why?",
  "3 at both, since the total footprint is more than two decks of either size",
@@ -313,7 +313,7 @@ q(1, "The Ekene deck cargo packed by first-fit decreasing onto 2 voyages uses 2 
  "The packing cannot be beaten: it already sits at the fewest voyages possible",
  ["A better rule might carry it on 1 voyage, as the bound is only an estimate",
   "The deck foreman should try a hand packing, since a gap to the bound remains",
-  "The rule found the optimum, which the engine then prints as the bound"],
+  "The bound is read off this packing, so a worse rule would raise it too"],
  "The lower bound is the fewest voyages any packing could use, so a packing that meets it cannot be beaten. The bound is a firm area and weight quotient. There is no gap here to look into. The bound is computed from the cargo before any rule runs, and the engine searches for no optimum.")
 
 emit(Q, '/root/cat-wip-marine/banks/sc4i_exam.json', expect_n=42)

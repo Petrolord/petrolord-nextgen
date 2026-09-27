@@ -11,7 +11,7 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 # 2026-09-27, by example and never by its wording. No capstone name, input or
 # value appears.
 
-q(1, "How do the course's packing cases turn the article's bins of a capacity into a deck plan the engine can pack?",
+q(1, "How do the course's packing cases turn the bins of a capacity in the Wikipedia article on first-fit decreasing (revision 1317275412) into a deck plan the engine can pack?",
  "Each number is a footprint one metre wide with the number as its length, on a usable fraction of 1 with no weight",
  ["Each number is a weight in tonnes against a deck load equal to the capacity, with every footprint set to 1 m2",
   "Each number is a square footprint whose side is the number, on a deck whose area is the capacity squared",
@@ -53,7 +53,7 @@ q(3, "The Wikipedia article on first-fit decreasing (revision 1317275412, CC BY-
   "{51,12,12}, {28,28,10,10}, {28,27,10}, {25,10,10,10,10,10}: 4 voyages, set for set"],
  "The engine packs the course's case into exactly the four sets the article prints. Nothing overflows, since ten voyages are stated. The five-set packing moves a 10 and a 12 the rule does not move, and another packing moves a 10 from the third set to the second, which would then overfill its 75.")
 
-q(0, "The Huang and Lu list at capacity 75 is booked in decreasing order. A planner switches the rule to \"first-fit\". What does the engine return?",
+q(0, "The Huang and Lu list at capacity 75 (Wikipedia, revision 1317275412) is booked in decreasing order. A planner switches the rule to \"first-fit\". What does the engine return?",
  "The same four sets and 4 voyages, since the booked order is already the sorted order",
  ["A packing on 5 voyages, since first fit ignores the sizes and packs the list as booked",
   "The same four sets, placed in the reverse order of voyages, since first fit starts small",
@@ -62,38 +62,38 @@ q(0, "The Huang and Lu list at capacity 75 is booked in decreasing order. A plan
 
 q(2, "Dosa's (2007) tight worst case, scaled to capacity 400, is cited from the Wikipedia article on first-fit decreasing, revision 1317275412. The engine packs it by first-fit decreasing. What does it return?",
  "8 voyages against a lower bound of 6; the text's optimum is 6 bins",
- ["6 voyages, since the engine finds the optimum the text states",
+ ["6 voyages against a lower bound of 6, the text's optimum",
   "8 voyages against a lower bound of 8, since the bound is the rule's count",
   "7 voyages against a lower bound of 6, one above the text's optimum"],
  "The engine uses 8 voyages, {204,108} four times, {104,104,104}, {104,92,92,92}, {92,92,92,92} and {92}, and prints a lower bound of 6, the area bound. The text states the optimum of 6 and that 8 is 11/9 of it plus 6/9. The engine searches for no optimum, and the bound is area over the usable deck.")
 
-q(1, "On Dosa's tight case, why does first-fit decreasing need 8 voyages where 6 would do?",
+q(1, "On Dosa's tight case (Wikipedia, revision 1317275412), why does first-fit decreasing need 8 voyages where 6 would do?",
  "Each 204 takes a 108 early, leaving gaps too small for every later 104 or 92",
  ["Being the smallest, the 92s are packed first and fill the early voyages",
   "The deck load binds before the area, since each unit weighs its own length",
   "A margin of area kept on each voyage by the engine, which the text's optimum uses"],
  "The large units go first and each 204 pairs with a 108, the largest unit that still fits. The gap left on each of the first four voyages is smaller than any unit still waiting, and a single 92 ends alone on voyage 8. The examples carry no weight, and the engine holds no margin beyond the stated usable fraction.")
 
-q(3, "On Dosa's tight case, the booked list reads four 204s, four 104s, four 92s, four 108s and four 92s. Packed by first fit in that order, what does the engine return?",
+q(3, "On Dosa's tight case (Wikipedia, revision 1317275412), the booked list reads four 204s, four 104s, four 92s, four 108s and four 92s. Packed by first fit in that order, what does the engine return?",
  "7 voyages against the same lower bound of 6, one fewer than first-fit decreasing",
  ["8 voyages, since first fit and first-fit decreasing agree on every published list",
   "6 voyages, the text's optimum, since the booked order is the best packing",
   "9 voyages, since first fit without the sort always does worse than the sorted rule"],
  "First fit in this booked order packs each 204 with a 104 and a 92, then three 108s together, and uses 7 voyages. On this list the unsorted rule beats the sorted one, which uses 8. It still misses the bound of 6, and on the capacity 60 list booked smallest first the sorted rule did better, 3 voyages against 4, so neither rule wins everywhere.")
 
-q(0, "What does a tight worst case such as Dosa's say about first-fit decreasing?",
+q(0, "What does a tight worst case such as Dosa's (Wikipedia, revision 1317275412) say about first-fit decreasing?",
  "It bounds how far the rule can land from the best packing, and says nothing of how often",
  ["It shows the rule usually needs about a third more voyages than the best packing",
   "It shows the rule fails on published lists and is unsafe for planning a deck",
   "It sets the engine's lower bound on voyages, which is 11/9 of the area bound"],
- "A worst case is a bound on the rule, a promise about how bad it can get. The Ekene cargo packed onto 2 voyages, its lower bound, so the rule is not usually that far off. The engine's lower bound is the area bound, unrelated to 11/9. The rule is stated and repeatable; the planner reads its count beside the bound.")
+ "A worst case is a bound on the rule, a promise about how bad it can get. On the Ekene cargo the rule used 2 voyages, its lower bound. The engine's lower bound is the area bound, unrelated to 11/9. The rule is stated and repeatable; the planner reads its count beside the bound.")
 
 q(2, "A deck plan returns voyages used above its lower bound. What should a planner take from that?",
  "A better packing may exist, so the gap is worth a look before promising the count",
  ["The engine has made an error, since a packing can never use more voyages than the bound",
   "The lower bound is wrong for this cargo and should be raised to the voyages used",
   "No packing can do better, since the rule returns the fewest voyages there are"],
- "The lower bound is the fewest voyages any packing could use, and a stated rule may use more, as on the capacity 61 list and on Dosa's case. A gap means the rule, or the cargo, may allow fewer, and the deck foreman may find it by hand. When the count equals the bound, no packing can do better.")
+ "The lower bound is the fewest voyages any packing could use, and a stated rule may use more, as on the capacity 61 list and on Dosa's case, both printed in the Wikipedia article (revision 1317275412). A gap means the rule, or the cargo, may allow fewer, and the deck foreman may find it by hand. When the count equals the bound, no packing can do better.")
 
 q(1, "The capacity 60 list is booked smallest first, 6, 6, 8, 8, 17, 21, 22, 24, 24, 44, and packed by first fit. What does the engine return?",
  "{6,6,8,8,17}, {21,22}, {24,24}, {44}: 4 voyages, as the small items open the packing",
@@ -107,7 +107,7 @@ q(3, "Why does the course run published packings through the engine as well as t
  ["The synthetic cargo cannot be packed by first-fit decreasing, as its units have weights",
   "The published lists set the tolerance on the deck values that the capstone grades",
   "A synthetic check alone would let the engine choose its own rule for each voyage"],
- "A synthetic case only proves the engine agrees with itself. A list printed in an independent source, packed into the same sets, shows the engine computes the rule the article describes. The Ekene cargo packs by either rule, weights and all. Tolerances are set in one place in the platform, and the rule is always a stated input.")
+ "A synthetic case only proves the engine agrees with itself. A list printed in an independent source, packed into the same sets, shows the engine computes the rule the Wikipedia article (revision 1317275412) describes. The Ekene cargo packs by either rule, weights and all. Tolerances are set in one place in the platform, and the rule is always a stated input.")
 
 q(2, "How does the course cite the Wikipedia article on first-fit-decreasing bin packing?",
  "Revision 1317275412 of 17 October 2025, CC BY-SA 4.0, read on 2026-09-27, by example",

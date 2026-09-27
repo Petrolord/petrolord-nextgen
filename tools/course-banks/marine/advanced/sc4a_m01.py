@@ -43,7 +43,7 @@ x("Shorten the Ekene quay's working day to 12 hours and give it a third berth, k
  "0.711111, an offered load of 2.133333 carried by the 3 berths",
  ["0.355556, the three-berth figure the same base returns on a 24-hour working day",
   "2.133333, the offered load, taken as though it were already a berth utilisation",
-  "0.533333, as though halving the working day left the arrival rate where it was"],
+  "0.533333, the figure the two-berth base returns on a 24-hour working day"],
  "Over 12 working hours the 3.2 arrivals come at 0.266667 an hour; times 8.000000 hours the offered load is 2.133333, and over 3 berths the berth utilisation is 0.711111. 0.355556 is three berths on the 24-hour clock; 2.133333 is the load before it is spread; 0.533333 is the two-berth base on 24 hours. Halving the working day doubles the arrivals an hour.")
 
 # 5
@@ -90,17 +90,17 @@ x("A base is stated so that its berth utilisation comes to 0.999500. What kind o
 x("A shore base call states every input except whether the lifts and the bulk run at the same time. What does the engine return?",
  "service.concurrent must be true (lifts and bulk at the same time) or false (one after the other); there is no default; got nothing",
  ["A result with the lifts and the bulk run one after the other, the slower of the two choices, and a line in its basis saying so",
-  "service must give a service time above 0 hours (fixed hours, lifts or bulk); got 0, since no service time can be built at all",
+  "service must give a service time above 0 hours (fixed hours, lifts or bulk); got 0",
   "Figures computed with the lifts and bulk alongside, the choice that gives the shorter service time, and a note of the choice"],
- "The concurrent choice is a required input with no default, because whether a base can crane and pump at once depends on crews, hoses and safety rules the engine cannot see. The engine's own words are the key. The \"service must give a service time above 0 hours\" message belongs to a call whose terms add to no time at all; the engine never picks either choice for the planner.")
+ "The concurrent choice is a required input with no default, because whether a base can crane and pump at once depends on crews, hoses and safety rules the engine cannot see. The engine's own words are the key. The \"service must give a service time above 0 hours\" message belongs to a call whose terms add to no time at all, and no service time can be built from it; the engine never picks either choice for the planner.")
 
 # 11
 x("A call states a working day of 25 hours for the base. What does the engine return, in its own words?",
  "workingHoursPerDay must be a number above 0 and at most 24; got 25",
  ["A result on the 24-hour clock with the extra hour dropped and a note in the basis",
   "Figures on a 25-hour clock, the arrivals an hour taken over the 25 hours as typed",
-  "berths must be a whole number from 1 to 100; got 25, since the day was read as berths"],
- "The working day is a number above 0 and at most 24, and the engine refuses anything else by name, verbatim: \"workingHoursPerDay must be a number above 0 and at most 24; got 25\". It neither trims the figure to 24 nor runs on it, and the field it names is the working day.")
+  "berths must be a whole number from 1 to 100; got 25"],
+ "The working day is a number above 0 and at most 24, and the engine refuses anything else by name, verbatim: \"workingHoursPerDay must be a number above 0 and at most 24; got 25\". It neither trims the figure to 24 nor runs on it, and the field it names is the working day. The berths message would read the 25 as a berth count, which no field of this call is.")
 
 # 12
 x("A call states 0 lifts an hour for the crane at the base, with lifts to make. What does the engine return?",
