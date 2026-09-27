@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # PROVE THE EC11 FOUNDATION LEAVES EVERY EARLIER COURSE UNCHANGED.
 #
-# PART 1, THE TREE. This course vendors the prms.js closure at engines cc6ba77
+# PART 1, THE TREE. This course vendors the prms.js closure at engines 42139e6
 # (vendor_prms.sh) at its CANONICAL paths and moves nothing shared: every
 # packages/engines path on this branch that differs from BASE must be one of
 # the ten paths VENDOR.json ledgers as group ec11-prms-course, each
-# byte-identical to petrolord-engines cc6ba77, plus VENDOR.json itself, whose
+# byte-identical to petrolord-engines 42139e6, plus VENDOR.json itself, whose
 # only change against BASE is those ten ledger entries. The runtime paths the
 # closure shares (engines/economics/cashflow.ts, irrContract.js,
 # lib/stats/stats.js, lib/conventions/percentile.js) must be byte-identical to
@@ -32,7 +32,7 @@ NG=${NG:-${EC11_REPO:-/root/wt-ec11-nextgen}}
 ENG="$NG/packages/engines"
 BASE=${BASE:-origin/main}
 ENG_CANON=${ENG_CANON:-/root/petrolord-engines}
-REV=${REV:-cc6ba77}
+REV=${REV:-42139e6}
 SCR=$(mktemp -d /tmp/ec11-prior-XXXXXX); trap 'rm -rf "$SCR"' EXIT
 fail=0
 pin() { python3 -c "import json,sys;print(json.load(open(sys.argv[1]))[sys.argv[2]]['pins'][sys.argv[3]])" "$NG/tools/course-waves/waves.json" "$1" "$2"; }

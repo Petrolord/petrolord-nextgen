@@ -173,15 +173,11 @@ the two aggregations and the reconciliation all come from the same file.
 
 ## THE REFUSALS
 
-Digest section 6 tables 80 refusals across 5 functions, each with the field
+Digest section 6 tables 81 refusals across 5 functions, each with the field
 it names and the engine's message verbatim. **Quote a refusal in a blockquote
 as the engine's own words.** A result returned with a reason (a criterion not
 met, a low case that fails, a reconciliation that does not close) is a result.
-It is no refusal. The refusal of a missing correlation pair and the reason
-line of a failing low case carry the words ", never" as the engine writes
-them, and the refusal of a chance stated for Reserves repeats a phrase of
-PRMS 2.1.3.3: quote them only verbatim, as the engine's words, and never
-write either wording as your own.
+It is no refusal.
 
 ## WHAT IS GRADED, AND WHAT IS NEVER IN THE DIGEST
 

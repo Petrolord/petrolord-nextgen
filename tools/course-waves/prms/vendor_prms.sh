@@ -33,8 +33,9 @@ NG=${NG:-/root/wt-ec11-nextgen}
 RECUT=${RECUT:-origin/main}
 PIN=$(python3 -c "import json,sys;print(json.load(open(sys.argv[1]))['canonical']['commit'])" "$NG/packages/engines/VENDOR.json")
 # Vendored at bb8ef5f (engines PR #278, prms.js and its validation kit); re-vendored at
-# cc6ba77 (engines PR #279, FINDINGS-prms.md; no engine, test, golden or fixture byte changed).
-REV=${REV:-cc6ba77}
+# cc6ba77 (engines PR #279, FINDINGS-prms.md) and at 42139e6 (engines PR #280: four engine strings reworded,
+# the negative-fit golden added; no figure changed).
+REV=${REV:-42139e6}
 FULL=$(git -C "$ENG" rev-parse "$REV^{commit}")
 EXP=$(mktemp -d)
 LEDGER_PY=$(mktemp)
@@ -190,7 +191,7 @@ for p in paths:
     added.append({
         'path': p, 'kind': kind, 'group': GROUP, 'vendoredSha': blob,
         'reason': (f"EC11 prms course: vendored sha-identical from petrolord-engines {full[:7]} "
-                   f"(PRs #278 and #279: engines/economics/prms.js, its jest suite, golden, the ekene-prms fixture and its writer, oracle, "
+                   f"(PRs #278 to #280: engines/economics/prms.js, its jest suite, golden, the ekene-prms fixture and its writer, oracle, "
                    f"timing script, negative control, FINDINGS) by the wave's vendor_prms.sh, 4 proofs per path; its runtime imports "
                    f"(cashflow.ts, irrContract.js, lib/stats, lib/conventions/percentile.js) were already vendored at the same blobs. "
                    f"{'New since' if kind == 'extra' else 'Differing from'} the canonical pin {pin[:7]}, which stays: moving it "

@@ -114,7 +114,7 @@ a graded one.
 
 ## THE REFUSALS, BY NAME
 
-Digest section 6 tables 80 refusals. **Quote the engine's message in a
+Digest section 6 tables 81 refusals. **Quote the engine's message in a
 blockquote.** The ones each tier must teach:
 
 * Associate m01 l05 to m06: an unknown key, a discovery status the engine does

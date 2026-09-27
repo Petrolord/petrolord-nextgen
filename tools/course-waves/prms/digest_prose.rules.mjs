@@ -110,7 +110,7 @@ for (const re of CLEARED) {
 const PINNED = [
   ['computeCashFlow of engines/economics/cashflow.ts with apply_economic_limit (JV regime at 100%, the stated royalty and tax), checked against PRMS 3.1.3.1', 'engines/economics/prms.js'],
   ['(undiscounted cumulative net cash flow above 0, ADR included), 3.1.2.8', 'engines/economics/prms.js'],
-  ['the low case quantities sit inside 2P, never in 1C (FAQ 3.4, no split classification)', 'engines/economics/prms.js'],
+  ['the low case quantities remain within 2P; FAQ 3.4 keeps them out of 1C, since a project carries a single classification', 'engines/economics/prms.js'],
   ['opening + movements = closing, category by category; production comes out of every Reserves category alike', 'engines/economics/prms.js'],
   ['every movement other than production (additions, revisions and transfers)', 'engines/economics/prms.js'],
   ['the mean of the total is the sum of the means (no portfolio effect in means, PRMS 4.2.5.2)', 'engines/economics/prms.js'],

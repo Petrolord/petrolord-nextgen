@@ -16,7 +16,7 @@
   "lib/stats/stats.js",
   "lib/conventions/percentile.js"
  ],
- "enginesVendoredAt": "prms.js vendored sha-identical from petrolord-engines bb8ef5f (engines PR #278) at its CANONICAL path by vendor_prms.sh, re-vendored at cc6ba77 (engines PR #279, FINDINGS-prms.md; no other byte changed), with its jest suite, golden, the ekene-prms fixture and README, the fixture writer, the oracle, the timing script, the negative control and FINDINGS: 10 new paths ledgered in VENDOR.json as kind extra, group ec11-prms-course; pin 54cf7c4 unchanged. Its runtime imports (engines/economics/cashflow.ts, engines/economics/irrContract.js, lib/stats/stats.js, lib/conventions/percentile.js) were ALREADY vendored in NextGen at the bb8ef5f blobs, and at the same blobs on fix/decision-portfolio-recut (proved, four proofs a path), so nothing shared moved. The suite passes 171 of 171 on NextGen's copies. The oracle's two helper imports (oracle_jointventure.py, oracle_screening.py) are older blobs in NextGen than bb8ef5f and reproduce all 139 golden cases identically. The digest checks FINDINGS-prms.md's sources table and quote_check.py pins every file.",
+ "enginesVendoredAt": "prms.js vendored sha-identical from petrolord-engines bb8ef5f (engines PR #278) at its CANONICAL path by vendor_prms.sh, re-vendored at cc6ba77 (engines PR #279, FINDINGS-prms.md) and at 42139e6 (engines PR #280, four strings reworded and the negative-fit golden; no figure changed), with its jest suite, golden, the ekene-prms fixture and README, the fixture writer, the oracle, the timing script, the negative control and FINDINGS: 10 new paths ledgered in VENDOR.json as kind extra, group ec11-prms-course; pin 54cf7c4 unchanged. Its runtime imports (engines/economics/cashflow.ts, engines/economics/irrContract.js, lib/stats/stats.js, lib/conventions/percentile.js) were ALREADY vendored in NextGen at the bb8ef5f blobs, and at the same blobs on fix/decision-portfolio-recut (proved, four proofs a path), so nothing shared moved. The suite passes 171 of 171 on NextGen's copies. The oracle's two helper imports (oracle_jointventure.py, oracle_screening.py) are older blobs in NextGen than bb8ef5f and reproduce all 139 golden cases identically. The digest checks FINDINGS-prms.md's sources table and quote_check.py pins every file.",
  "history": {
   "position": "THIS COURSE TEACHES NO REPAIR HISTORY. The lead's decisions on the engine (the refusal where the canonical trailing trim and the PRMS 3.1.3.1 cumulative peak disagree; the 2011 Guidelines' Table 6.2 read with normal marginals as the Guidelines' own reading; P90 as the low estimate per lib/conventions/percentile.js; no PRMS, FAQ or Guidelines prose quoted) landed before any lesson was written; that is provenance."
  },
@@ -53,10 +53,10 @@
   "state": "FOUNDATION: structure, digest, capstones, fields, precision, truth, panels, learning page, gates, writer briefs. Stops before lessons."
  },
  "digest": {
-  "lines": 1107,
+  "lines": 1108,
   "sections": 31,
-  "md5": "c6f4c787ab220d9a1da5ec1b7b5cdb31",
-  "sha256": "fbb4ad116b7ba8d157308599c7576e952e3c780198780831f9a1335c80da5382"
+  "md5": "50e6c43afa18cdb3effcb2ac3245a666",
+  "sha256": "1b4ce715e371b3cd97e0322c868515fa03502ad9af94067d2ec871a91dc0dd1f"
  },
  "fields": {
   "count": 18,
@@ -91,11 +91,11 @@
    "summary": "PROBLEMS: 0"
   },
   "prove_prior_courses.sh": {
-   "md5": "df3b832d217621babf9cc19c39c0a393",
+   "md5": "e171cdee43aef8f1f855ca1be7eea964",
    "command": "bash prove_prior_courses.sh",
    "expected": 0,
    "exit": 0,
-   "summary": "PRIOR COURSES UNCHANGED: packages/engines differs from origin/main only by the ten ec11-prms-course paths (sha-identical to cc6ba77) and their ledger entries, with the shared runtime paths byte-identical; D1 to D5, H1, H"
+   "summary": "PRIOR COURSES UNCHANGED: packages/engines differs from origin/main only by the ten ec11-prms-course paths (sha-identical to 42139e6) and their ledger entries, with the shared runtime paths byte-identical; D1 to D5, H1, H"
   },
   "scaffold.py --check": {
    "md5": "48f37779455d6a3bf12cdb411be2da4e",
@@ -105,11 +105,11 @@
    "summary": "scaffold: 3 manifests, 0 stubs written, 78 existing lesson files left alone, 0 drift"
   },
   "vendor_prms.sh (the closure re-proved, four proofs a path)": {
-   "md5": "85605e2d8a01892ecc17dfc5f7cecb99",
+   "md5": "e27e1e54004c51b8e1e561f816f34875",
    "command": "bash vendor_prms.sh",
    "expected": 0,
    "exit": 0,
-   "summary": "Tests:       171 passed, 171 total"
+   "summary": "Tests:       172 passed, 172 total"
   },
   "prms_capstone.mjs": {
    "md5": "90d6baae858d45fa7f00588440090a1e",
@@ -186,14 +186,14 @@
    "command": "/root/dc-wavekit/digestrepro.sh cat-wip-prms /root/wt-ec11-nextgen",
    "expected": 0,
    "exit": 0,
-   "summary": "prms_dump: 1121 label-and-call, measurement and claim assertions run, 0 failed; 31 sections"
+   "summary": "prms_dump: 1124 label-and-call, measurement and claim assertions run, 0 failed; 31 sections"
   },
   "digestprose.mjs": {
    "md5": "97dda85819e61737a76d8caf5badb46d",
    "command": "node /root/dc-wavekit/digestprose.mjs digest.txt --rules cat-wip-prms",
    "expected": 0,
    "exit": 0,
-   "summary": "[digestprose] /root/cat-wip-prms/digest.txt: 1107 line(s), 31 section title(s) and 133 in-body marker(s) swept against their blocks, 32 history framings, 10 engine pin(s); 3 warned for a human read and 0 framed as curric"
+   "summary": "[digestprose] /root/cat-wip-prms/digest.txt: 1108 line(s), 31 section title(s) and 133 in-body marker(s) swept against their blocks, 32 history framings, 10 engine pin(s); 3 warned for a human read and 0 framed as curric"
   },
   "digestprose.mjs --selftest": {
    "md5": "97dda85819e61737a76d8caf5badb46d",
@@ -308,77 +308,77 @@
    "summary": "NEGATIVE CONTROL --plant-lesson: expected a [10 lessons numeric] finding, caught"
   },
   "gate_copy_rule.py": {
-   "md5": "4c8cdaa7f1d5d6b10fa115f08f33cd53",
+   "md5": "b4896479d2ec8ffbb67e070ffc872045",
    "command": "python3 gate_copy_rule.py",
    "expected": 0,
    "exit": 0,
    "summary": "VIOLATIONS: 0"
   },
   "gate_copy_rule.py NEGATIVE CONTROL": {
-   "md5": "4c8cdaa7f1d5d6b10fa115f08f33cd53",
+   "md5": "b4896479d2ec8ffbb67e070ffc872045",
    "command": "python3 gate_copy_rule.py --plant",
    "expected": 1,
    "exit": 1,
    "summary": "NEGATIVE CONTROL: a contrastive and a dash were planted in the digest with a rather-than; expected 3 caught, got 3"
   },
   "gate_copy_rule.py NEGATIVE CONTROL bank": {
-   "md5": "4c8cdaa7f1d5d6b10fa115f08f33cd53",
+   "md5": "b4896479d2ec8ffbb67e070ffc872045",
    "command": "python3 gate_copy_rule.py --plant-bank",
    "expected": 1,
    "exit": 1,
    "summary": "NEGATIVE CONTROL: a contrastive and a dash were planted in a bank string with an instead-of; expected 3 caught, got 3"
   },
   "gate_typed_literals.py": {
-   "md5": "9ed8c510934630caf9f81b7ad7d82434",
+   "md5": "fc62cf84e91fe38acac98011c89e1c51",
    "command": "python3 gate_typed_literals.py",
    "expected": 0,
    "exit": 0,
    "summary": "UNEXPLAINED TYPED NUMBERS: 0"
   },
   "gate_typed_literals.py NEGATIVE CONTROL": {
-   "md5": "9ed8c510934630caf9f81b7ad7d82434",
+   "md5": "fc62cf84e91fe38acac98011c89e1c51",
    "command": "python3 gate_typed_literals.py --plant",
    "expected": 1,
    "exit": 1,
    "summary": "NEGATIVE CONTROL: a typed 4.217 was planted in a printed line; caught 1"
   },
   "gate_vocabulary.py": {
-   "md5": "7adfeb12eec41fcab582e675ddb37975",
+   "md5": "65bc9277ebe5a322bb8238e1b91d30cc",
    "command": "python3 gate_vocabulary.py",
    "expected": 0,
    "exit": 0,
-   "summary": "exemptions declared: 1, dead: []"
+   "summary": "exemptions declared: 0, dead: []"
   },
   "gate_vocabulary.py NEGATIVE CONTROL": {
-   "md5": "7adfeb12eec41fcab582e675ddb37975",
+   "md5": "65bc9277ebe5a322bb8238e1b91d30cc",
    "command": "python3 gate_vocabulary.py --plant",
    "expected": 1,
    "exit": 1,
    "summary": "NEGATIVE CONTROL: expected a repair-history framing and an AI claim caught; got ['a repair-history framing', 'an AI claim']"
   },
   "gate_vocabulary.py NEGATIVE CONTROL licensed": {
-   "md5": "7adfeb12eec41fcab582e675ddb37975",
+   "md5": "65bc9277ebe5a322bb8238e1b91d30cc",
    "command": "python3 gate_vocabulary.py --plant-licensed",
    "expected": 1,
    "exit": 1,
    "summary": "NEGATIVE CONTROL: a quoted PRMS sentence was planted in a lesson line; caught 1"
   },
   "gate_no_prms_prose.py": {
-   "md5": "03869584574d9ce08ceb0a847a2261fb",
+   "md5": "676657e82860ee48e70e4c911db716b1",
    "command": "python3 gate_no_prms_prose.py",
    "expected": 0,
    "exit": 0,
    "summary": "RUNS OF LICENSED PROSE FOUND: 0"
   },
   "gate_no_prms_prose.py NEGATIVE CONTROL": {
-   "md5": "03869584574d9ce08ceb0a847a2261fb",
+   "md5": "676657e82860ee48e70e4c911db716b1",
    "command": "python3 gate_no_prms_prose.py --plant",
    "expected": 1,
    "exit": 1,
    "summary": "NEGATIVE CONTROL: a sentence of licensed prose was planted in digest.txt; caught"
   },
   "gate_no_prms_prose.py NEGATIVE CONTROL lesson": {
-   "md5": "03869584574d9ce08ceb0a847a2261fb",
+   "md5": "676657e82860ee48e70e4c911db716b1",
    "command": "python3 gate_no_prms_prose.py --plant-lesson",
    "expected": 1,
    "exit": 1,
@@ -474,9 +474,9 @@
   "isuofia_difference_2p": "production added, divestments added (engine plants), the revisions left out, the computed less the stated"
  },
  "openItems": {
-  "ENGINE FINDINGS (wording; reported to the lead; repair first, before lessons)": "(1) Two engine strings carry the owner copy rule's ', never': the economicLimit reason 'the low case quantities sit inside 2P, never in 1C (FAQ 3.4, no split classification)' and the aggregate refusal of a missing pair '(0 is stated, never assumed)'. (2) The classify refusal of a chance stated for Reserves repeats ten words of PRMS 2.1.3.3 ('requires a high degree of certainty in the chance of commerciality'), which the no-prose rule for a CC BY-NC-ND text forbids. (3) The classify time-frame reason 'no longer time-frame justified' reads as a repair-history framing. Each is exempted by EXACT STRING in its gate (gate_copy_rule.py, gate_no_prms_prose.py, gate_vocabulary.py), each exemption dies and fails the gate when the wording changes, and the briefs tell writers to quote them only verbatim. No figure is affected. (4) Coverage note, no engine defect: the golden agg-refuse-tri-fit-negative returns the exactness refusal (no triangular passes through 0.1, 1 and 3 at all), so no golden exercises the negative-fit refusal; the digest shows that refusal on a stated probe (1, 5.5, 10).",
   "VENDORING": "prms.js on its canonical path; cashflow.ts, irrContract.js, lib/stats and lib/conventions/percentile.js already at the bb8ef5f/cc6ba77 blobs on NextGen main (after the #275 recut merge, 03f8399aa) and untouched; FINDINGS-prms.md vendored from cc6ba77 (#279). The oracle's helpers oracle_jointventure.py and oracle_screening.py are older blobs in NextGen than cc6ba77; the oracle reproduces all 139 golden cases identically on them.",
   "MERGE": "origin/main (03f8399aa, the EC4/EC5/joa recut #275) merged into this branch; VENDOR.json taken from main and the ec11-prms-course entries re-ledgered by vendor_prms.sh; prove_prior_courses.sh green on the merged tree (every full kit, cashflow, fiscal, fdp, decision and portfolio byte-identical and matching their pins).",
-  "readings": "Nine readings are printed where each acts (seven with the engine's own words in BRIEF.md); every capstone field is bit-identical under the other side of eight of them (ts_loader.mjs reading_* variants) and on a second seed and draw count; the ninth (the Guidelines' normal marginals) is a golden-input reading no field uses."
+  "readings": "Nine readings are printed where each acts (seven with the engine's own words in BRIEF.md); every capstone field is bit-identical under the other side of eight of them (ts_loader.mjs reading_* variants) and on a second seed and draw count; the ninth (the Guidelines' normal marginals) is a golden-input reading no field uses.",
+  "ENGINE FINDINGS": "The four wording findings of the foundation (two ', never' strings, a classify refusal repeating ten words of PRMS 2.1.3.3, the 'no longer time-frame justified' reason, and no golden for the negative-fit refusal) were repaired in engines #280 (42139e6): the strings reworded, agg-refuse-tri-fit-negative now pins the negative-fit refusal (1, 5, 9) and the old case is agg-refuse-tri-fit-inexact-small; 140 goldens, 81 refusals; no figure or field changed. Re-vendored at 42139e6; every gate exemption for the old wording removed."
  }
 }

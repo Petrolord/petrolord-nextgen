@@ -64,11 +64,7 @@ REPORT = [
     ('economic limit with no rule or case nearby', re.compile(r'\beconomic limit\b(?![^.\n]{0,60}\b(?:rule|trim|peak|case|year|cashflow|canonical)\b)', re.I)),
 ]
 
-# An engine reason the digest prints verbatim, whose words the repair-history
-# rule would read as a framing: "no longer time-frame justified" (no time-frame
-# longer than the benchmark stated as justified). By exact string; a dead
-# exemption fails. Reported to the lead as an engine wording finding.
-EXEMPT = ['no longer time-frame justified']
+EXEMPT = []
 
 
 def unwrap(text):

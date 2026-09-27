@@ -4,7 +4,7 @@
 
 # PRECISION. Every quantity, volume, barrel, BOE, Mscf, amount of money, cash flow, NPV, percentage, chance, probability, correlation, ratio and index prints to SIX decimals; years, year counts, project counts, draws, seeds and whole inputs print as whole numbers; a figure of sixteen or more significant digits at six decimals prints with its thousands grouped by commas; an engine message, reason and basis is printed verbatim, figures and all. Inside a message the engine prints money rounded to the cent (half away from zero, trailing zeros dropped), a computed quantity or percentage to six decimals (trailing zeros dropped), and a stated input as it was given.
 
-# ENGINE. engines/economics/prms.js, vendored sha-identical with petrolord-engines bb8ef5f (engines PR #278; its validation record FINDINGS-prms.md from cc6ba77, engines PR #279), 1035 lines, at its canonical path in the NextGen repository. It imports computeCashFlow and applyJV from engines/economics/cashflow.ts, mulberry32, createCorrelatedSampler, cholesky, fitTriangularToPercentiles, triInvCDF, normalCDF, quantile and mean from lib/stats/stats.js, and OUTCOME_LABELS, EXCEEDANCE_DEFINITION and outcomeOrderViolation from lib/conventions/percentile.js, and nothing else. It makes no network call.
+# ENGINE. engines/economics/prms.js, vendored sha-identical with petrolord-engines bb8ef5f (engines PR #278; its validation record FINDINGS-prms.md and four reworded strings from petrolord-engines 42139e6, engines PRs #279 and #280), 1035 lines, at its canonical path in the NextGen repository. It imports computeCashFlow and applyJV from engines/economics/cashflow.ts, mulberry32, createCorrelatedSampler, cholesky, fitTriangularToPercentiles, triInvCDF, normalCDF, quantile and mean from lib/stats/stats.js, and OUTCOME_LABELS, EXCEEDANCE_DEFINITION and outcomeOrderViolation from lib/conventions/percentile.js, and nothing else. It makes no network call.
 
 # AN ENGINE COURSE. There is no Suite app for this course. Every practical runs in the course's own calculator panels, which call this same vendored engine on the learner's own inputs.
 
@@ -235,7 +235,7 @@ CHECK ONE: THE FAQ 3.3 EXAMPLE (text: a technical low outcome of 5 and a best es
 | P3 | 2000000.000000 |
 
 The engine's reason on the low case, verbatim:
-> the low case is not economic: 1P = 0 and the 2P and 3P estimates stand (PRMS 3.1.2.8; FAQ 3.3); the low case quantities sit inside 2P, never in 1C (FAQ 3.4, no split classification)
+> the low case is not economic: 1P = 0 and the 2P and 3P estimates stand (PRMS 3.1.2.8; FAQ 3.3); the low case quantities remain within 2P; FAQ 3.4 keeps them out of 1C, since a project carries a single classification
 So 1P is 0.000000 and 2P is 7000000.000000, the whole best estimate: the P2 increment is 7000000.000000 (engine), and the low-case barrels are inside 2P. The same figures as a category set stated incrementally (golden input cat-faq33-incremental: first 5, second 2, third 3 MMbbl) give 1P 5.000000, 2P 7.000000 and 3P 10.000000 (engine) when the low case passes.
 
 CHECK TWO: THE 2011 GUIDELINES, TABLE 6.2 (text: two gas blocks A and B with an expectation of GIIP of 53.4 and 35.6, a Proved GIIP of 43.3 and 28.5 and a total Proved of 71.8, all in thousand million cubic metres; Fig. 6.5 prints the arithmetic Proved as 72 and the probabilistic Proved of independent blocks as 77). The Guidelines add the blocks by error propagation for symmetric distributions (section 6.3.3), so the golden input reads each block as a NORMAL distribution with the printed expectation as its mean and the expectation less the Proved as its 90 percent half-width: the standard deviation is that half-width over the standard normal 90th percentile. That reading is the Guidelines' own, stated as such; the engine takes whatever distribution a call states.
@@ -314,7 +314,7 @@ A refusal is an object with `error` and `field`. The message starts with the nam
 | `classify` | class-refuse-prospective-subclass | `subClass` | subClass must be one of "prospect", "lead", "play"; got "development-pending" |
 | `classify` | class-refuse-producing-without-fid | `projectStatus.finalInvestmentDecision` | projectStatus.finalInvestmentDecision must be true for a project on production (a producing project has passed its investment decision); got false |
 | `classify` | class-refuse-dp-not-producing | `reservesStatus` | reservesStatus must be "developed-non-producing" or "undeveloped" for a project that is not on production (developed producing reserves come from completion intervals open and producing, Table 2); got "developed-producing" |
-| `classify` | class-refuse-reserves-chances | `chances` | chances must be left out for Reserves (PRMS 2.1.3.3 requires a high degree of certainty in the chance of commerciality; no chance figure is carried); got {"developmentPct":95} |
+| `classify` | class-refuse-reserves-chances | `chances` | chances must be left out for Reserves (PRMS 2.1.3.3 treats Reserves as near-certain to be commercial, so no chance figure is carried); got {"developmentPct":95} |
 | `classify` | class-refuse-contingent-pg | `chances.geologicDiscoveryPct` | chances.geologicDiscoveryPct must be left out for a discovered accumulation (the chance of geologic discovery applies to Prospective Resources, PRMS 2.1.3.2); got 50 |
 | `classify` | class-refuse-contingent-no-chances | `chances` | chances must be an object { developmentPct } for Contingent Resources (PRMS 2.1.3.3: Pc = Pd); got nothing |
 | `classify` | class-refuse-contingent-project-status | `projectStatus` | projectStatus must be left out for Contingent Resources (the project status that sets a Reserves sub-class, PRMS 2.1.3.5); got {"finalInvestmentDecision":false,"onProduction":false} |
@@ -354,7 +354,7 @@ A refusal is an object with `error` and `field`. The message starts with the nam
 | `economicLimit` | econ-refuse-unknown-key | `costs.adr` | costs.adr is not an accepted key; the accepted keys of costs are opex, capex, abandonment |
 | `aggregate` | agg-refuse-psd | `correlation` | correlation must be a positive semidefinite correlation matrix (the Cholesky factor misses the stated matrix by 0.8); got {"type":"uniform","rho":-0.6} |
 | `aggregate` | agg-refuse-rho-one | `correlation.rho` | correlation.rho must be a number above -1 and below 1 (the canonical sampler takes a correlation strictly between -1 and 1); got 1 |
-| `aggregate` | agg-refuse-missing-pair | `correlation.pairs` | correlation.pairs must be one pair for each of the 3 pairs of varying projects (0 is stated, never assumed); the first missing pair is EKN-2 and EKN-U; got "2 pairs" |
+| `aggregate` | agg-refuse-missing-pair | `correlation.pairs` | correlation.pairs must be one pair for each of the 3 pairs of varying projects (a correlation of 0 is entered as a pair like any other); the first missing pair is EKN-2 and EKN-U; got "2 pairs" |
 | `aggregate` | agg-refuse-duplicate-pair | `correlation.pairs[3]` | correlation.pairs[3] must be a pair stated once; got {"a":"EKN-2","b":"EKN-1","rho":0.5} |
 | `aggregate` | agg-refuse-pair-constant | `correlation.pairs[3].b` | correlation.pairs[3].b must be one of "EKN-1", "EKN-2", "EKN-U"; got "EKN-C" |
 | `aggregate` | agg-refuse-no-correlation | `correlation` | correlation must be an object { type: "uniform", rho } or { type: "pairs", pairs } (stated; no default); got nothing |
@@ -362,7 +362,8 @@ A refusal is an object with `error` and `field`. The message starts with the nam
 | `aggregate` | agg-refuse-iterations | `iterations` | iterations must be an integer from 100 to 200000; got 50 |
 | `aggregate` | agg-refuse-work | `iterations` | iterations must be at most 45454 for 11 projects (iterations x projects at most 500000); got 200000 |
 | `aggregate` | agg-refuse-tri-fit-inexact | `projects[0].estimates` | projects[0].estimates must be low, best and high that a triangular distribution passes through exactly (lib/stats fitTriangularToPercentiles): the best estimate sits too near the low estimate for any triangular; got {"low":10,"best":15,"high":24} |
-| `aggregate` | agg-refuse-tri-fit-negative | `projects[0].estimates` | projects[0].estimates must be low, best and high that a triangular distribution passes through exactly (lib/stats fitTriangularToPercentiles): the best estimate sits too near the low estimate for any triangular; got {"low":0.1,"best":1,"high":3} |
+| `aggregate` | agg-refuse-tri-fit-inexact-small | `projects[0].estimates` | projects[0].estimates must be low, best and high that a triangular distribution passes through exactly (lib/stats fitTriangularToPercentiles): the best estimate sits too near the low estimate for any triangular; got {"low":0.1,"best":1,"high":3} |
+| `aggregate` | agg-refuse-tri-fit-negative | `projects[0].estimates` | projects[0].estimates must be low, best and high whose fitted triangular stays at or above 0 (its minimum would be -2.236068); got {"low":1,"best":5,"high":9} |
 | `aggregate` | agg-refuse-normal-negative-low | `projects[2].distribution` | projects[2].distribution must be a normal whose low estimate (the mean less 1.2815515655446004 standard deviations, here -0.281552) stays at or above 0; got {"type":"normal","mean":1,"stdDev":1} |
 | `aggregate` | agg-refuse-stated-with-estimates | `projects[1].estimates` | projects[1].estimates must be left out when the distribution is stated (the engine reads the estimates off it); got {"low":1,"best":2,"high":3} |
 | `aggregate` | agg-refuse-reserves-chance | `projects[0].chanceOfCommercialityPct` | projects[0].chanceOfCommercialityPct must be left out for Reserves (their chance of commerciality is not a stated figure, PRMS 2.1.3.3); got 100 |
@@ -384,7 +385,7 @@ A refusal is an object with `error` and `field`. The message starts with the nam
 | `reconcile` | rec-refuse-class | `resourceClass` | resourceClass must be one of "reserves", "contingent"; got "prospective" |
 | `reconcile` | rec-refuse-unknown-key | `movements[0].year` | movements[0].year is not an accepted key; the accepted keys of movements[0] are type, low, best, high, quantity, note |
 
-80 refusals across 5 functions: classify 25, categorize 7, economicLimit 17, aggregate 20, reconcile 11.
+81 refusals across 5 functions: classify 25, categorize 7, economicLimit 17, aggregate 21, reconcile 11.
 
 REFUSALS A PANEL CONTROL CAN PRODUCE. Each calculator panel writes every required input into the box through a visible control, and setting a control to "not stated" removes the input. The calls below are not golden cases; each is a golden input with one input removed or changed (stated probes), handed to the engine here, and the message is the engine's, verbatim:
 
@@ -512,7 +513,7 @@ TECHNOLOGY UNDER DEVELOPMENT ALONE (golden input class-tech-under-development-on
 THE CHANCE OF COMMERCIALITY OF A DISCOVERED PROJECT is the chance of development alone: Pc = Pd (PRMS 2.1.3.3). The engine's decision line on EKN-4, verbatim:
 > Pc = Pd = 65%
 Reserves carry no chance figure; stating one is refused, verbatim (golden input class-refuse-reserves-chances):
-> chances must be left out for Reserves (PRMS 2.1.3.3 requires a high degree of certainty in the chance of commerciality; no chance figure is carried); got {"developmentPct":95}
+> chances must be left out for Reserves (PRMS 2.1.3.3 treats Reserves as near-certain to be commercial, so no chance figure is carried); got {"developmentPct":95}
 
 THE RESERVES STATUS is stated for Reserves and checked against the project status (PRMS 2.1.3.6, Table 2): "developed-producing", "developed-non-producing" or "undeveloped".
 
@@ -649,7 +650,7 @@ THE FIVE-YEAR BENCHMARK. The engine reads the time-frame as met when development
 | golden input | start within, years (stated) | longer justified (stated) | class (engine) | the engine's time-frame reason, verbatim |
 | --- | --- | --- | --- | --- |
 | class-time-frame-5-met | 5 | false | Reserves | time-frame: development starts within 5 years against the 5-year benchmark: met (PRMS 2.1.2.3) |
-| class-time-frame-6-contingent | 6 | false | Contingent Resources | time-frame: development starts within 6 years against the 5-year benchmark, no longer time-frame justified: not met (PRMS 2.1.2.3) |
+| class-time-frame-6-contingent | 6 | false | Contingent Resources | time-frame: development starts within 6 years against the 5-year benchmark, a longer time-frame not stated as justified: not met (PRMS 2.1.2.3) |
 | class-time-frame-8-justified | 8 | true | Reserves | time-frame: development starts within 8 years against the 5-year benchmark, a longer time-frame stated as justified: met (PRMS 2.1.2.3) |
 
 ECONOMICS NOT YET SHOWN (golden input class-economics-undetermined): economic status "undetermined", every other criterion met: class "Contingent Resources", blockers "economicStatus" (engine).
@@ -851,7 +852,7 @@ CORRELATION IS ALWAYS STATED. The refusals, verbatim:
 | golden input | the engine's message, verbatim |
 | --- | --- |
 | agg-refuse-no-correlation | correlation must be an object { type: "uniform", rho } or { type: "pairs", pairs } (stated; no default); got nothing |
-| agg-refuse-missing-pair | correlation.pairs must be one pair for each of the 3 pairs of varying projects (0 is stated, never assumed); the first missing pair is EKN-2 and EKN-U; got "2 pairs" |
+| agg-refuse-missing-pair | correlation.pairs must be one pair for each of the 3 pairs of varying projects (a correlation of 0 is entered as a pair like any other); the first missing pair is EKN-2 and EKN-U; got "2 pairs" |
 | agg-refuse-duplicate-pair | correlation.pairs[3] must be a pair stated once; got {"a":"EKN-2","b":"EKN-1","rho":0.5} |
 | agg-refuse-pair-constant | correlation.pairs[3].b must be one of "EKN-1", "EKN-2", "EKN-U"; got "EKN-C" |
 | agg-refuse-rho-one | correlation.rho must be a number above -1 and below 1 (the canonical sampler takes a correlation strictly between -1 and 1); got 1 |
@@ -882,14 +883,14 @@ DISTRIBUTIONS STATED OR FITTED. A project states its distribution: "triangular" 
 | golden input | the engine's message, verbatim |
 | --- | --- |
 | agg-refuse-tri-fit-inexact | projects[0].estimates must be low, best and high that a triangular distribution passes through exactly (lib/stats fitTriangularToPercentiles): the best estimate sits too near the low estimate for any triangular; got {"low":10,"best":15,"high":24} |
-| agg-refuse-tri-fit-negative | projects[0].estimates must be low, best and high that a triangular distribution passes through exactly (lib/stats fitTriangularToPercentiles): the best estimate sits too near the low estimate for any triangular; got {"low":0.1,"best":1,"high":3} |
+| agg-refuse-tri-fit-inexact-small | projects[0].estimates must be low, best and high that a triangular distribution passes through exactly (lib/stats fitTriangularToPercentiles): the best estimate sits too near the low estimate for any triangular; got {"low":0.1,"best":1,"high":3} |
+| agg-refuse-tri-fit-negative | projects[0].estimates must be low, best and high whose fitted triangular stays at or above 0 (its minimum would be -2.236068); got {"low":1,"best":5,"high":9} |
 | agg-refuse-normal-negative-low | projects[2].distribution must be a normal whose low estimate (the mean less 1.2815515655446004 standard deviations, here -0.281552) stays at or above 0; got {"type":"normal","mean":1,"stdDev":1} |
 | agg-refuse-stated-with-estimates | projects[1].estimates must be left out when the distribution is stated (the engine reads the estimates off it); got {"low":1,"best":2,"high":3} |
 | agg-refuse-triangular-order | projects[2].distribution must be a triangular with min <= mode <= max and min < max; got {"type":"triangular","min":3,"mode":2,"max":6} |
 | agg-refuse-dist-type | projects[0].distribution.type must be one of "triangular-fit", "triangular", "lognormal", "normal"; got "beta" |
 
-TWO FIT REFUSALS, TWO MESSAGES. The golden input agg-refuse-tri-fit-negative returns the exactness message because no triangular passes through its three estimates at all. A fit that does pass through exactly and still reaches below 0 is refused with its own message. On a stated low of 1, best of 5.5 and high of 10 (stated probe), verbatim:
-> projects[0].estimates must be low, best and high whose fitted triangular stays at or above 0 (its minimum would be -2.640576); got {"low":1,"best":5.5,"high":10}
+TWO FIT REFUSALS, TWO MESSAGES. A fit no triangular can pass through at all is refused with the exactness message (golden inputs agg-refuse-tri-fit-inexact and agg-refuse-tri-fit-inexact-small); a fit that does pass through exactly and still reaches below 0 is refused with its own message (golden input agg-refuse-tri-fit-negative), both in the table above.
 
 A normal that stays at or above 0 at its low estimate can still draw below 0; the engine keeps those draws and says so. On a stated normal of mean 4.000000 and standard deviation 3.100000 (stated probe; its low estimate is 0.027190, engine), verbatim:
 > W: a normal distribution draws below 0 with chance 0.098469 (lib/stats normalCDF); those draws stay in the total

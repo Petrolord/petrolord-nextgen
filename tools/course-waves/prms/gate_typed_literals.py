@@ -167,7 +167,7 @@ def main():
     # the extraction records) or, for PLANTED, the fixture record's list of
     # planted defects, every item of which planted() asserts against the
     # engine. They are INPUTS, typed once, and never a measurement.
-    body_src = strip_decls(body_src, ['ORDER', 'SOURCES', 'EXPORTS', 'DSRC', 'PSRC', 'GROUPS', 'PANEL_REFUSALS', 'CAPR', 'NG', 'TF', 'PROS', 'RECS', 'CORR', 'EB', 'SUBR', 'CASE_HEAD', 'bnd', 'wideN', 'negFit', 'lnArgs', 'TEXT'])
+    body_src = strip_decls(body_src, ['ORDER', 'SOURCES', 'EXPORTS', 'DSRC', 'PSRC', 'GROUPS', 'PANEL_REFUSALS', 'CAPR', 'NG', 'TF', 'PROS', 'RECS', 'CORR', 'EB', 'SUBR', 'CASE_HEAD', 'bnd', 'wideN', 'lnArgs', 'TEXT'])
     # EC11 ADDRESSES: a section of SPE-PRMS 2018, an answer of the FAQs, a
     # section, table or figure of the 2011 Guidelines, a CFR section, a
     # regulation of S.I. No. 37 of 2023. Removed by SHAPE.

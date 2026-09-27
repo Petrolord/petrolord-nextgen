@@ -12,13 +12,10 @@ The digest is swept because every lesson is written from it, so a contrastive
 in the digest becomes a contrastive in a lesson. structure.py is NOT swept for
 prose: its own gate lines have to contain the characters this gate looks for.
 
-ENGINE TEXT. Two engine strings the digest must print verbatim carry ", never"
-(a reason of economicLimit when the low case fails, and the refusal of a
-missing correlation pair). The course cannot rewrite the engine's words, so
-ENGINE_TEXT exempts each BY EXACT STRING; both are reported to the lead as an
-engine wording finding (repair first, before lessons), and each row clears
-when the engine's wording changes. A DEAD exemption fails this gate: a row that
-clears nothing is a claim about work never done.
+ENGINE TEXT. Every engine message the digest quotes meets the owner copy rule
+(engines #280 reworded the two that did not), so ENGINE_TEXT exempts nothing.
+An exemption added there is BY EXACT STRING, and a DEAD exemption fails this
+gate: a row that clears nothing is a claim about work never done.
 
 --plant is THE NEGATIVE CONTROL: it plants a contrastive and an em dash in the
 digest text in memory and must exit 1 with both caught. --plant-bank plants the
@@ -41,12 +38,7 @@ APP_TEXT = [os.path.join(REPO, 'src/components/course/panels/prms', f) for f in
 DASHES = re.compile('[—–]')
 CONTRASTIVE = re.compile(r',\s+not\s+\w|\brather than\b|,\s+never\b|\binstead of\b', re.I)
 
-ENGINE_TEXT = {
-    'the low case quantities sit inside 2P, never in 1C (FAQ 3.4, no split classification)':
-        'economicLimit reason when the low case fails; engine wording finding reported to the lead',
-    'one pair for each of the 3 pairs of varying projects (0 is stated, never assumed)':
-        'aggregate refusal of a missing correlation pair (golden agg-refuse-missing-pair); engine wording finding reported to the lead',
-}
+ENGINE_TEXT = {}
 
 
 def sweep(label, text):

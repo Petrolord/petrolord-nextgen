@@ -29,9 +29,9 @@ wherever it appears exactly, before the sweep; nothing else is masked.
 ENGINE TEXT. An engine message the digest prints verbatim is course content,
 and the course cannot rewrite it. ENGINE_TEXT exempts such a message BY EXACT
 STRING, with its reason, and a DEAD exemption (one that clears nothing) fails
-this gate. The one exemption is an engine refusal whose wording repeats ten
-words of PRMS 2.1.3.3; it is reported to the lead as an engine finding and
-clears when the engine's wording changes.
+this gate. Every engine message the digest quotes is clear of the three
+texts (engines #280 reworded the one that was not), so ENGINE_TEXT exempts
+nothing.
 
     python3 gate_no_prms_prose.py [--plant | --plant-lesson]
 
@@ -59,10 +59,7 @@ BRIEFS = [os.path.join(HERE, f) for f in ('BRIEF.md', 'PANELS.md', 'LESSON_TASK.
 TEXTS = {'SPE-PRMS 2018': 'prms_en.txt', 'the PRMS FAQs': 'faqs.txt', 'the 2011 Application Guidelines': 'PRMS_Guidelines_Nov2011.txt'}
 N = 8
 
-ENGINE_TEXT = {
-    'chances must be left out for Reserves (PRMS 2.1.3.3 requires a high degree of certainty in the chance of commerciality; no chance figure is carried); got {"developmentPct":95}':
-        'engine refusal (golden class-refuse-reserves-chances) repeats ten words of PRMS 2.1.3.3; reported to the lead as an engine wording finding',
-}
+ENGINE_TEXT = {}
 
 
 def toks(t):
