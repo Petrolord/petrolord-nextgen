@@ -63,6 +63,15 @@ for (const [wave, entry] of Object.entries(waves)) {
   }
   if (missing) continue;
 
+  // A PRACTICE COURSE (Catalog Regroup plan section 3) has no engine, so no
+  // digest and no graded fields. Its teaching truth is PACK.md, built from
+  // passages.json and sources/SOURCES.json, and those three are what it pins.
+  if (entry.kit === 'practice') {
+    checkPractice(wave, entry, dir);
+    console.log('');
+    continue;
+  }
+
   // CONTENT. The two files every suite pins its numbers against.
   const pinned = entry.pins || {};
   const nextPins = {};
@@ -153,6 +162,58 @@ for (const [wave, entry] of Object.entries(waves)) {
     console.log(`  note ${allowedFields.length} graded field name(s) are spelled by no committed generator, as recorded: ${allowedFields.join(', ')}`);
   }
   console.log('');
+}
+
+// THE PRACTICE KIT. Three things, each printed:
+//   CONTENT    PACK.md, passages.json and sources/SOURCES.json match the
+//              sha256 pinned in waves.json (re-pin with --update in the same
+//              commit as a re-cut, where a reviewer sees it);
+//   STRUCTURE  every SECTION heading PACK.md prints is spelled by a committed
+//              generator: its title whole, with the owner clause the generator
+//              builds from structure.py; at least ten sections;
+//   SHAPE      no fields.json and no digest.txt (a practice course grades no
+//              numeric field), every passage id PACK.md prints is in
+//              passages.json, and every passage cites a source in SOURCES.json.
+function checkPractice(wave, entry, dir) {
+  const PINNED = ['PACK.md', 'passages.json', 'sources/SOURCES.json'];
+  const pinned = entry.pins || {};
+  const next = {};
+  for (const f of PINNED) {
+    const p = path.join(dir, f);
+    if (!fs.existsSync(p)) { fail(`${wave}/${f} is a practice kit's pinned input and is not committed`); return; }
+    const got = sha(p);
+    next[f] = got;
+    if (pinned[f] === got) console.log(`  ok   ${f} matches its pinned sha256`);
+    else if (UPDATE) { console.log(`  PIN  ${f} ${pinned[f] ? `${pinned[f].slice(0, 12)} -> ` : 'now pinned at '}${got.slice(0, 12)}`); updated += 1; }
+    else fail(`${wave}/${f} is ${got.slice(0, 12)} and waves.json pins ${pinned[f] ? pinned[f].slice(0, 12) : 'nothing'}. If the pack was re-cut, re-pin it in the same commit with --update.`);
+  }
+  if (UPDATE) entry.pins = next;
+  for (const f of ['fields.json', 'digest.txt']) {
+    if (fs.existsSync(path.join(dir, f))) fail(`${wave}/${f} is committed, and a practice course grades no numeric field and has no engine digest`);
+  }
+  const generators = fs.readdirSync(dir).filter((f) => f.endsWith('.mjs') || f.endsWith('.py'));
+  const haystack = generators.map((f) => fs.readFileSync(path.join(dir, f), 'utf8')).join('\n').replace(/\\(['"`])/g, '$1');
+  const pack = fs.readFileSync(path.join(dir, 'PACK.md'), 'utf8');
+  const headings = pack.match(SECTION) || [];
+  if (headings.length < 10) fail(`${wave}/PACK.md prints ${headings.length} section headings, which is too few to be a whole pack`);
+  const CLAUSE = /\s*\((?:owned|shared)\b[^)]*\)\s*$/i;
+  const buildsClauses = /\(owned by \{/.test(haystack);
+  const unspelled = headings.map((h) => h.replace(/^#?\s*/, '').trim()).filter((h) => {
+    const title = h.replace(/^SECTION\s+\d+\s*:\s*/i, '').replace(CLAUSE, '').trim();
+    return !(haystack.includes(h) || (buildsClauses && title && haystack.includes(title)));
+  });
+  console.log(`  ok   PACK.md: ${headings.length} section heading(s), ${headings.length - unspelled.length} spelled by ${generators.length} committed generator(s)`);
+  if (unspelled.length) fail(`${wave}/PACK.md has ${unspelled.length} section heading(s) no committed generator spells: ${unspelled.map((h) => h.slice(0, 60)).join(' | ')}`);
+  const passages = JSON.parse(fs.readFileSync(path.join(dir, 'passages.json'), 'utf8')).passages || [];
+  const sources = new Set(JSON.parse(fs.readFileSync(path.join(dir, 'sources/SOURCES.json'), 'utf8')).map((x) => x.id));
+  const ids = new Set(passages.map((x) => x.id));
+  const printed = [...new Set(pack.match(/^\[P\d{3}\]/gm) || [])].map((x) => x.slice(1, -1));
+  const unknown = printed.filter((x) => !ids.has(x));
+  const orphan = passages.filter((x) => !sources.has(x.source)).map((x) => x.id);
+  console.log(`  ok   passages.json: ${passages.length} passage(s), ${printed.length} printed by PACK.md, over ${sources.size} source(s)`);
+  if (!passages.length || unknown.length || orphan.length || printed.length !== passages.length) {
+    fail(`${wave}: PACK.md and passages.json disagree (unknown ${unknown.join(', ') || 'none'}; citing no source ${orphan.join(', ') || 'none'}; printed ${printed.length} of ${passages.length})`);
+  }
 }
 
 if (UPDATE) {
