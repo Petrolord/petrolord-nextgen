@@ -153,7 +153,7 @@ w('# THIS FILE IS THE ONLY TEACHING TRUTH FOR THIS COURSE. Every number in every
 w();
 w('# PRECISION. Every amount of money, interest, share, percentage, rate, multiple, balance and present value prints to SIX decimals; years, months, day counts, hours, party counts and whole inputs print as whole numbers; a figure of sixteen or more significant digits at six decimals prints with its thousands grouped by commas; an engine message, reason and basis is printed verbatim, figures and all. Inside a message, money prints rounded to the cent with trailing zeros dropped, and a percentage or rate prints as the shortest round-trip decimal of the double the engine holds.');
 w();
-w(`# ENGINE. ${ENGINE_REL}, vendored sha-identical with petrolord-engines 3ae56e7 (engines PR #270), ${engineLines} lines. It imports applyPSC and npv from engines/economics/cashflow.ts and calculatePartnerCosts from engines/economics/afe.js, and nothing else. It makes no network call.`);
+w(`# ENGINE. ${ENGINE_REL}, vendored sha-identical with petrolord-engines fb5a363 (engines PR #270, with the simple uplift of PR #274), ${engineLines} lines. It imports applyPSC and npv from engines/economics/cashflow.ts and calculatePartnerCosts from engines/economics/afe.js, and nothing else. It makes no network call.`);
 w();
 w('# AN ENGINE COURSE. There is no Suite app for this course. Every practical runs in the course\'s own calculator panels, which call this same vendored engine on the learner\'s own agreement terms.');
 w();
@@ -349,7 +349,7 @@ w();
 w(`${REF.length} refusals across ${Object.keys(byFn).length} functions: ${list(Object.entries(byFn).map(([k, v]) => `${k} ${v}`))}.`);
 must('every exported function has at least one refusal tabled', EXPORTS.every(([n]) => byFn[n] > 0), JSON.stringify(byFn));
 must('no refusal message carries an em or en dash', REFUSED.every((r) => !/[–—]/.test(r[3])), 'dash');
-must('seventy-eight refusal cases in the golden file', REF.length === 78, REF.length);
+must('eighty-three refusal cases in the golden file', REF.length === 83, REF.length);
 w();
 w('REFUSALS A PANEL CONTROL CAN PRODUCE. Each calculator panel writes every required term into the box through a visible control, and setting a control to "not stated" removes the term. Four such calls are not golden cases; each is a golden input with one term removed or changed (stated probes), handed to the engine here, and the message is the engine\'s, verbatim:');
 w();

@@ -85,7 +85,7 @@ x("How does every refusal message of the engine begin, and what does an unknown 
  ["It starts with the function's name; an unknown key's message adds the nearest accepted key as a spelling suggestion to try next",
   "It starts with a numbered refusal code from the engine's table; an unknown key's message names the key and nothing further",
   "It starts with the value it was given; an unknown key's message adds the rule the key would have set"],
- "The refusals table says a message starts with the name of the field it refuses and states the exact condition, and that an unknown key is refused wherever it sits with its path and the full list of accepted keys, for example uplift.rate is not an accepted key; the accepted keys of uplift are type, ratePctPerYear, multiplePct.")
+ "The refusals table says a message starts with the name of the field it refuses and states the exact condition, and that an unknown key is refused wherever it sits with its path and the full list of accepted keys, for example uplift.rate is not an accepted key; the accepted keys of uplift are type, ratePctPerYear, multiplePct, dayBasis.")
 
 # 10
 x("A partner report quotes the Ekene March cover: EKO 1230769.230769 and PA 769230.769231 of PB's unpaid 2000000.000000, with NOC carried in full. What must it say about the figures' footing?",

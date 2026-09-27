@@ -9,7 +9,7 @@
 # the three tier headers, the oracle check and the discriminate sweep), the 21
 # bank JSONs under tools/course-banks/farmout, the three manifests, the
 # tolerance module gradedTolerance.js and the whole of packages/engines (the
-# vendored farmout.js closure under ec10-farmout, and
+# vendored farmout.js closure on the canonical engine paths, and
 # the vendored stdlib oracle), and the root package.json, whose "type":
 # "module" makes Node read gradedTolerance.js as the ES module it is. Every generator is then run from that export,
 # pointed at that export. The ENGINE the course generator runs is the committed
@@ -71,7 +71,7 @@ done
 
 # The course and capstone migration and the case files, off the exported
 # fields and the EXPORTED ENGINE, which the course generator runs.
-export EC10_WAVE="$W" EC10_WAVE_DIR="$W" EC10_REPO="$STAGE/repo" EC10_ENGINES="$STAGE/repo/packages/engines/ec10-farmout" \
+export EC10_WAVE="$W" EC10_WAVE_DIR="$W" EC10_REPO="$STAGE/repo" EC10_ENGINES="$STAGE/repo/packages/engines" \
        EC10_TOLERANCE="$STAGE/repo/src/components/course/panels/$SLUG/gradedTolerance.js"
 ( cd "$W" && EC10_COURSE_OUT="$OUTDIR/${DATE}_${PREFIX}_${SLUG}_course.sql" EC10_CASES_OUT="$OUTDIR/cases" \
     python3 "$W/gen_course.py" --cases --migration | tail -1 )

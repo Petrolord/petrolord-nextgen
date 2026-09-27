@@ -1,12 +1,12 @@
 // THE EC10 TEACHING LAB: Farm-ins, Farm-outs & Asset Valuation.
 //
 // Every number this lab returns is a return value of the vendored engine
-// (packages/engines/ec10-farmout/engines/economics/farmout.js, sha-identical
+// (packages/engines/engines/economics/farmout.js, sha-identical
 // with petrolord-engines b7d305b, with the applyJV and npv it imports from
 // cashflow.ts, the rollback, evpi and evii from decisionTree.js, the
 // portfolioRiskMetrics from portfolio.js, the calculatePartnerCosts from afe.js
-// and the carryRecovery and backIn from jointVenture.js, the whole closure under
-// its own root) on the vendored Ekene Deep fixture
+// and the carryRecovery and backIn from jointVenture.js, the whole closure on the
+// canonical engine paths) on the vendored Ekene Deep fixture
 // (test-data/economics/ekene-farmout), on the INPUTS of the vendored golden file
 // (test-data/economics/goldens/farmout_cases.json), or on the terms a learner
 // types into a calculator panel. The golden file's expected figures are oracle
@@ -31,12 +31,12 @@
 //
 // Nothing here reads a clock, a random number or a locale. The one Monte Carlo
 // (riskSharing) is seeded by the seed the box states.
-import FX from '@petrolord/engines/ec10-farmout/test-data/economics/ekene-farmout/ekene-farmout.json';
-import GOLD from '@petrolord/engines/ec10-farmout/test-data/economics/goldens/farmout_cases.json';
+import FX from '@petrolord/engines/test-data/economics/ekene-farmout/ekene-farmout.json';
+import GOLD from '@petrolord/engines/test-data/economics/goldens/farmout_cases.json';
 import {
   earningObligation, dealValue, informationValue, interestValue, riskSharing, consentFee,
   developmentCarry, backInRight, DEFAULTS, NIGERIA_ASSIGNMENT,
-} from '@petrolord/engines/ec10-farmout/engines/economics/farmout.js';
+} from '@petrolord/engines/engines/economics/farmout.js';
 
 export { DEFAULTS, NIGERIA_ASSIGNMENT };
 

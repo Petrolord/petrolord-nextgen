@@ -142,8 +142,9 @@ export const VARIANTS = {
   ],
   // Reversion one period late: the whole of the payout year's share kept by the recovering parties.
   reversion_one_period_late: [
-    'return { year: y.year, opening, uplift: upliftAmt, added: added[i], due, share, available, recovered, closing, writtenOff, debtorReceives: share - recovered, reasons };',
-    'return { year: y.year, opening, uplift: upliftAmt, added: added[i], due, share, available, recovered, closing, writtenOff, debtorReceives: due > 0 ? 0 : share - recovered, reasons };',
+    // engines #274 (fb5a363) builds the row as a const before returning it; the substitution follows the line.
+    'const row = { year: y.year, opening, uplift: upliftAmt, added: added[i], due, share, available, recovered, closing, writtenOff, debtorReceives: share - recovered, reasons };',
+    'const row = { year: y.year, opening, uplift: upliftAmt, added: added[i], due, share, available, recovered, closing, writtenOff, debtorReceives: due > 0 ? 0 : share - recovered, reasons };',
   ],
   // The premium recovered from gross value, the deductions not taken off.
   deductions_not_taken_off: [

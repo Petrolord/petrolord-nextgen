@@ -151,7 +151,7 @@ behaviour that finds each.
 
 ## THE REFUSALS
 
-Digest section 5 tables 78 refusals across 9 functions, each with the field it
+Digest section 5 tables 83 refusals across 9 functions, each with the field it
 names and the engine's message verbatim. **Quote a refusal in a blockquote as
 the engine's own words.** A result returned with a reason (a month with no
 cash call, a carry not recovered by the last year, a consequence not

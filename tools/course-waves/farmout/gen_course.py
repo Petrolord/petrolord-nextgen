@@ -51,7 +51,7 @@ Usage:
    python3 gen_course.py --migration     also write the course migration
    EC10_WAVE        the wave directory (default /root/cat-wip-farmout)
    EC10_REPO        the nextgen clone   (default /root/wt-ec10-nextgen)
-   EC10_ENGINES     packages/engines/ec10-farmout to run the capstone through
+   EC10_ENGINES     packages/engines to run the capstone through
    EC10_TOLERANCE   gradedTolerance.js
    EC10_COURSE_OUT  where to write the migration
    EC10_CASES_OUT   where to write the case files (default $EC10_REPO/src/content/capstone-cases/farmout)
@@ -65,7 +65,7 @@ import sys
 
 W = os.environ.get('EC10_WAVE', '/root/cat-wip-farmout')
 REPO = os.environ.get('EC10_REPO', '/root/wt-ec10-nextgen')
-ENGINES = os.environ.get('EC10_ENGINES', f'{REPO}/packages/engines/ec10-farmout')
+ENGINES = os.environ.get('EC10_ENGINES', f'{REPO}/packages/engines')
 TOLPATH = os.environ.get(
     'EC10_TOLERANCE', f'{REPO}/src/components/course/panels/farmout/gradedTolerance.js')
 DATE = '20261111'

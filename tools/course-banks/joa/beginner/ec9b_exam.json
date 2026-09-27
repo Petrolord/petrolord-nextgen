@@ -38,7 +38,7 @@
    "A list of aliases, such as wi, that it maps onto participatingPct.",
    "One shape of accepted keys for each of its 9 functions.",
    "The keys of the Ekene fixture file, for the panels to load at start.",
-   "A table of error codes, one code for each of the 78 refusals the course lists."
+   "A table of error codes, one code for each of the 83 refusals the course lists."
   ],
   "answer": 1,
   "explanation": "ACCEPTED_KEYS is exported with one shape for each of the 9 functions, and every call refuses an input key its function does not read, at every level. The engine maps no alias onto a key it reads, the fixture is a separate file, and a refusal is an object with error and field, carrying a message in words and no code."

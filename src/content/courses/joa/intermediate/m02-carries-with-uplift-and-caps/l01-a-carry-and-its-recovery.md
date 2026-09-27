@@ -27,9 +27,9 @@ The carried cost totals 28400000.000000. NOC's share of entitlement is 0.000000 
 
 ## The terms a carry needs
 
-A recovery ledger cannot be written until the contract states four things: the uplift (none, a compound rate or a multiple), the share of the carried party's entitlement that the recovery may take, the basis (a contract's terms or PIA 2021 s.85(4)), and any cap. The engine holds none of them. A carry with no uplift stated is refused by name:
+A recovery ledger cannot be written until the contract states four things: the uplift (none, a simple rate with its day basis, a compound rate or a multiple), the share of the carried party's entitlement that the recovery may take, the basis (a contract's terms or PIA 2021 s.85(4)), and any cap. The engine holds none of them. A carry with no uplift stated is refused by name:
 
-> uplift must be an object { type } with type "none", "compound" or "multiple" (no default); got nothing
+> uplift must be an object { type } with type "none", "simple", "compound" or "multiple" (no default); got nothing
 
 So is a carry recovery that names a party no carry covers:
 

@@ -40,6 +40,14 @@ VENDORED=$(sed -n '/^PATHS=\$(cat <<.P.$/,/^P$/p' "$NG/tools/course-waves/ec45-r
 nv=$(printf '%s\n' "$VENDORED" | grep -c .); [ "$nv" = 30 ] || { echo "  vendor_ec45.sh lists $nv paths, expected 30"; fail=1; }
 for p in $(git -C "$NG" diff --name-only "$BASE" -- packages/engines | sed 's|^packages/engines/||'); do
   [ "$p" = VENDOR.json ] && continue
+  if [ "${p#ec10-farmout/}" != "$p" ]; then
+    # THE COLLAPSE: a file of the old root must be deleted, and at BASE it must
+    # have been byte-identical to the canonical path that replaces it here.
+    if [ -e "$ENG/$p" ]; then echo "  PRESENT   $p (the ec10-farmout root must be gone)"; fail=1; continue; fi
+    a=$(git -C "$NG" rev-parse "$BASE:packages/engines/$p"); b=$(git hash-object "$ENG/${p#ec10-farmout/}")
+    [ "$a" = "$b" ] && echo "  collapsed $p  = canonical ${p#ec10-farmout/} (${a:0:10})" || { echo "  DIFFERS   $p at $BASE from canonical ${p#ec10-farmout/}"; fail=1; }
+    continue
+  fi
   if printf '%s\n' "$VENDORED" | grep -qxF "$p"; then
     a=$(git -C "$ENG_CANON" rev-parse "$REV:$p"); b=$(git hash-object "$ENG/$p")
     [ "$a" = "$b" ] && echo "  vendored  $p  = $REV (${a:0:10})" || { echo "  DIFFERS   $p from $REV"; fail=1; }
@@ -54,32 +62,28 @@ G = 'ec45-decision-portfolio-recut'
 key = lambda e: json.dumps(e, sort_keys=True)
 o = {key(e) for e in old['knownDeviations']}; n = {key(e) for e in new['knownDeviations']}
 removed = [json.loads(k) for k in o - n]; added = [json.loads(k) for k in n - o]
-ok = new['canonical'] == old['canonical'] and all(e['path'] in vend for e in removed) and all(e['group'] == G and e['path'] in vend for e in added)
+oldp = {e['path']: e for e in old['knownDeviations']}; newp = {e['path']: e for e in new['knownDeviations']}
+# a group-4 entry whose reason text was refreshed (lead decision 5): same path, kind, group and pin
+refreshed = [p for p in oldp if p in newp and oldp[p] != newp[p] and oldp[p].get('group') == '4-economics-revendor'
+             and {k: v for k, v in oldp[p].items() if k != 'reason'} == {k: v for k, v in newp[p].items() if k != 'reason'}]
+removed = [e for e in removed if e['path'] not in refreshed]; added = [e for e in added if e['path'] not in refreshed]
+farm = [e for e in removed if e.get('group') == 'ec10-farmout-course']
+ok = new['canonical'] == old['canonical'] and all(e['path'] in vend or e.get('group') == 'ec10-farmout-course' for e in removed) and all(e['group'] == G and e['path'] in vend for e in added)
+ok = ok and len(farm) == 19 and not any(e.get('group') == 'ec10-farmout-course' for e in new['knownDeviations'])
 ok = ok and {k: v for k, v in new.items() if k != 'knownDeviations'} == {k: v for k, v in old.items() if k != 'knownDeviations'}
-print(f"  VENDOR.json: pin {new['canonical']['commit'][:7]} unchanged; {len(removed)} entries removed (all vendored paths), {len(added)} added ({G}): {'OK' if ok else 'UNEXPECTED CHANGE'}")
+print(f"  VENDOR.json: pin {new['canonical']['commit'][:7]} unchanged; {len(removed) - len(farm)} vendored-path entries removed, the {len(farm)} ec10-farmout-course entries removed, {len(added)} added ({G}), {len(refreshed)} group-4 reasons refreshed: {'OK' if ok else 'UNEXPECTED CHANGE'}")
 sys.exit(0 if ok else 1)
 PY
 u=$(git -C "$NG" status --porcelain -- packages/engines | grep -v node_modules || true)
 [ -z "$u" ] || { echo "  UNCOMMITTED under packages/engines:"; echo "$u"; fail=1; }
 
-echo; echo "PART 2: the ec10-farmout root against the canonical paths"
-for p in $(cd "$ENG/ec10-farmout" && find . -type f | sed 's|^\./||' | sort); do
-  if cmp -s "$ENG/ec10-farmout/$p" "$ENG/$p"; then echo "  identical  ec10-farmout/$p = $p ($(git hash-object "$ENG/$p" | cut -c1-10))"
-  else echo "  DIFFERS    ec10-farmout/$p vs $p"; fail=1; fi
-done
-dst="$SCR/farmout"; src="$NG/tools/course-waves/farmout"; cp -rp "$src" "$dst"
-export EC10_WAVE_DIR="$dst" EC10_ENGINES="$ENG" EC10_REPO="$NG" EC10_TOLERANCE="$NG/src/components/course/panels/farmout/gradedTolerance.js"
-if (cd "$dst" && sh ./build_digest.sh > digest.tmp 2> digest.err && mv digest.tmp digest.txt && node ./make_fields.mjs > fields.log 2>&1); then
-  for f in digest.txt fields.json precision.json; do
-    cmp -s "$src/$f" "$dst/$f" && v=IDENTICAL || { v=DIFFERS; fail=1; }
-    printf 'EC10 farmout (canonical root) %-15s %s  sha256 %s\n' "$f" "$v" "$(sha256sum "$dst/$f" | cut -c1-16)"
-  done
-  for f in digest.txt fields.json; do [ "$(pin farmout $f)" = "$(sha256sum "$dst/$f" | cut -d' ' -f1)" ] && echo "EC10 farmout $f matches its waves.json pin" || { echo "EC10 farmout $f DOES NOT MATCH its pin"; fail=1; }; done
-else echo "EC10 farmout: rebuild on the canonical root FAILED"; tail -n 3 "$dst/digest.err" "$dst/fields.log"; fail=1; fi
-unset EC10_WAVE_DIR EC10_ENGINES EC10_REPO EC10_TOLERANCE
-
+echo; echo "PART 2: the collapse"
+[ -e "$ENG/ec10-farmout" ] && { echo "  packages/engines/ec10-farmout still exists"; fail=1; } || echo "  packages/engines/ec10-farmout is gone"
+left=$(git -C "$NG" grep -l "ec10-farmout" -- src tools/course-waves/farmout ':!tools/course-waves/farmout/*.md' ':!tools/course-waves/farmout/wave.json' ':!tools/course-waves/farmout/vendor_farmout.sh' ':!tools/course-waves/farmout/apply_ec10_farmout.sh' ':!tools/course-waves/farmout/structure.py' 2>/dev/null || true)
+[ -z "$left" ] && echo "  no panel or kit code names the old root" || { echo "  still naming the old root: $left"; fail=1; }
+echo "  (the EC10 farmout course itself is rebuilt with the other full kits in PART 3, on the canonical root)"
 echo; echo "PART 3: the courses that run shared files, rebuilt from their committed kits"
-for spec in D1:dataqc D2:mlcore D3:facies D4:forecastml D5:appliedai H1:safetystats H3:lopa H4:consequence H5:qra SC2:procurement EC7:pia EC8:gsa EC9:joa; do
+for spec in D1:dataqc D2:mlcore D3:facies D4:forecastml D5:appliedai H1:safetystats H3:lopa H4:consequence H5:qra SC2:procurement EC7:pia EC8:gsa EC9:joa EC10:farmout; do
   P=${spec%%:*}; W=${spec#*:}; src="$NG/tools/course-waves/$W"; dst="$SCR/$W"; cp -rp "$src" "$dst"
   export ${P}_WAVE_DIR="$dst" ${P}_ENGINES="$ENG" ${P}_REPO="$NG" ${P}_TOLERANCE="$NG/src/components/course/panels/$W/gradedTolerance.js"
   known=""
@@ -142,4 +146,4 @@ for spec in EC4:decision:ec4 EC5:portfolio:ec5; do
     printf '%-4s %-10s %-11s %s, %s; new %s lines md5 %s; old (%s) %s lines md5 %s\n' "$P" "$W" "$f" "$v" "$pv" "$(wc -l < "$dst/$f")" "$(md5sum < "$dst/$f" | cut -c1-32)" "$BASE" "$oln" "$old"
   done
 done
-[ $fail = 0 ] && echo "PRIOR COURSES UNCHANGED: packages/engines differs from $BASE only by the thirty re-vendored paths (sha-identical to $REV) and their ledger entries; the ec10-farmout root is byte-identical to the canonical paths and farmout rebuilds byte-identical on them; D1-D5, H1, H3, H4, H5, SC2, EC7, EC8, EC6 fdp (digest), cashflow and fiscal rebuild byte-identical; EC9 joa fields and precision byte-identical${ALLOW_JOA_DIGEST:+ (its digest a KNOWN difference, printed above)}; decision and portfolio rebuild to their committed re-cut" || { echo "PRIOR COURSES: A DIFFERENCE"; exit 1; }
+[ $fail = 0 ] && echo "PRIOR COURSES UNCHANGED: packages/engines differs from $BASE only by the thirty re-vendored paths (sha-identical to $REV) and their ledger entries; the ec10-farmout root is deleted (every file byte-identical at $BASE to the canonical path that replaces it) and farmout rebuilds byte-identical on the canonical root; D1-D5, H1, H3, H4, H5, SC2, EC7, EC8, EC6 fdp (digest), cashflow and fiscal rebuild byte-identical; EC9 joa fields and precision byte-identical${ALLOW_JOA_DIGEST:+ (its digest a KNOWN difference, printed above)}; decision and portfolio rebuild to their committed re-cut" || { echo "PRIOR COURSES: A DIFFERENCE"; exit 1; }

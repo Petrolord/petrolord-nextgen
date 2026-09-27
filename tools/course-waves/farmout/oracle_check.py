@@ -31,7 +31,7 @@ import sys
 import time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ENG = os.environ.get('EC10_ENGINES', '/root/wt-ec10-nextgen/packages/engines/ec10-farmout')
+ENG = os.environ.get('EC10_ENGINES', '/root/wt-ec10-nextgen/packages/engines')
 sys.path.insert(0, os.path.join(ENG, 'tools', 'validation', 'economics'))
 PLANT = '--plant' in sys.argv
 PLANTED_KEY = 'umunze_amg_emv'

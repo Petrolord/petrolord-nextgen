@@ -96,7 +96,7 @@
    "It starts with the value it was given; an unknown key's message adds the rule the key would have set"
   ],
   "answer": 0,
-  "explanation": "The refusals table says a message starts with the name of the field it refuses and states the exact condition, and that an unknown key is refused wherever it sits with its path and the full list of accepted keys, for example uplift.rate is not an accepted key; the accepted keys of uplift are type, ratePctPerYear, multiplePct."
+  "explanation": "The refusals table says a message starts with the name of the field it refuses and states the exact condition, and that an unknown key is refused wherever it sits with its path and the full list of accepted keys, for example uplift.rate is not an accepted key; the accepted keys of uplift are type, ratePctPerYear, multiplePct, dayBasis."
  },
  {
   "prompt": "A partner report quotes the Ekene March cover: EKO 1230769.230769 and PA 769230.769231 of PB's unpaid 2000000.000000, with NOC carried in full. What must it say about the figures' footing?",

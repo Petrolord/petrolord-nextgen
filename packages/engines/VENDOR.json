@@ -2188,249 +2188,116 @@
       "reason": "EC9 joa course: vendored sha-identical from petrolord-engines 3ae56e7 (PR #270: engines/economics/jointVenture.js, its jest suite, golden, the ekene-jv fixture and its writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_joa.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 3ae56e7 or later."
     },
     {
-      "path": "ec10-farmout/__tests__/economics.farmout.test.js",
-      "kind": "extra",
-      "group": "ec10-farmout-course",
-      "vendoredSha": "25ea8fd4252b98aac7e725056bb6f1e82df49197",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
-    },
-    {
-      "path": "ec10-farmout/engines/economics/afe.js",
-      "kind": "extra",
-      "group": "ec10-farmout-course",
-      "vendoredSha": "52d840d950b16f55675bcc4862102e58760c2184",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
-    },
-    {
-      "path": "ec10-farmout/engines/economics/cashflow.ts",
-      "kind": "extra",
-      "group": "ec10-farmout-course",
-      "vendoredSha": "92906576c0cc9afdeee45dd6d640f997dcb9fb49",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
-    },
-    {
-      "path": "ec10-farmout/engines/economics/decisionTree.js",
-      "kind": "extra",
-      "group": "ec10-farmout-course",
-      "vendoredSha": "50ac7531ccf97001e32ef6e50476f32c88551f4c",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
-    },
-    {
-      "path": "ec10-farmout/engines/economics/farmout.js",
-      "kind": "extra",
-      "group": "ec10-farmout-course",
-      "vendoredSha": "d6b4ad421a8ab1ff9d4dfcad971e7861dcc9561b",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
-    },
-    {
-      "path": "ec10-farmout/engines/economics/irrContract.js",
-      "kind": "extra",
-      "group": "ec10-farmout-course",
-      "vendoredSha": "88a2d3c11858d6c84df765411d8fee79bea06d10",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
-    },
-    {
-      "path": "ec10-farmout/engines/economics/jointVenture.js",
-      "kind": "extra",
-      "group": "ec10-farmout-course",
-      "vendoredSha": "e843192b4b84ab4ba94fac3bb7da12911ac14f3c",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
-    },
-    {
-      "path": "ec10-farmout/engines/economics/portfolio.js",
-      "kind": "extra",
-      "group": "ec10-farmout-course",
-      "vendoredSha": "c0ae041b624e176dc31e533d443105dad7e65fb6",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
-    },
-    {
-      "path": "ec10-farmout/lib/dates/dates.js",
-      "kind": "extra",
-      "group": "ec10-farmout-course",
-      "vendoredSha": "15dba4d7ecb833fd1d9c2bf8b32942fbe4e5a382",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
-    },
-    {
-      "path": "ec10-farmout/lib/stats/stats.js",
-      "kind": "extra",
-      "group": "ec10-farmout-course",
-      "vendoredSha": "92985b59a8f78fb16d3d132a13fcbadb1a7ec4ee",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
-    },
-    {
-      "path": "ec10-farmout/test-data/economics/ekene-farmout/README.md",
-      "kind": "extra",
-      "group": "ec10-farmout-course",
-      "vendoredSha": "41889716b393d59b8d0753a97e289514989f171c",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
-    },
-    {
-      "path": "ec10-farmout/test-data/economics/ekene-farmout/ekene-farmout.json",
-      "kind": "extra",
-      "group": "ec10-farmout-course",
-      "vendoredSha": "4eae68d9b649b307da9195849d136a2195f195fb",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
-    },
-    {
-      "path": "ec10-farmout/test-data/economics/goldens/farmout_cases.json",
-      "kind": "extra",
-      "group": "ec10-farmout-course",
-      "vendoredSha": "ca6abfa4c9ce17a1f720521be93710750f2ee0fd",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
-    },
-    {
-      "path": "ec10-farmout/tools/validation/economics/FINDINGS-farmout.md",
-      "kind": "extra",
-      "group": "ec10-farmout-course",
-      "vendoredSha": "ccc08a9602221ed9b41e9e52c28da3a4118cf9b7",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
-    },
-    {
-      "path": "ec10-farmout/tools/validation/economics/make_farmout_fixtures.py",
-      "kind": "extra",
-      "group": "ec10-farmout-course",
-      "vendoredSha": "d503b594fb9bd3b112e913dd483594371c2e51a7",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
-    },
-    {
-      "path": "ec10-farmout/tools/validation/economics/negcontrol_farmout.sh",
-      "kind": "extra",
-      "group": "ec10-farmout-course",
-      "vendoredSha": "e0c3dacfc9551b8e15e7b53db76123c575d68775",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
-    },
-    {
-      "path": "ec10-farmout/tools/validation/economics/oracle_farmout.py",
-      "kind": "extra",
-      "group": "ec10-farmout-course",
-      "vendoredSha": "3c8f22842ac3246ef78b5edf438ad84975e6f4c0",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
-    },
-    {
-      "path": "ec10-farmout/tools/validation/economics/oracle_jointventure.py",
-      "kind": "extra",
-      "group": "ec10-farmout-course",
-      "vendoredSha": "256521c34f9f1e0f593d2f405f293bd8277dc326",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
-    },
-    {
-      "path": "ec10-farmout/tools/validation/economics/timing_farmout.js",
-      "kind": "extra",
-      "group": "ec10-farmout-course",
-      "vendoredSha": "19cf6156fa3aed7f08aa7c2435d02cc08c612c1c",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
-    },
-    {
       "path": "engines/economics/jointVenture.js",
       "kind": "extra",
       "group": "ec45-decision-portfolio-recut",
       "vendoredSha": "e843192b4b84ab4ba94fac3bb7da12911ac14f3c",
-      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, so that root collapses. Clears as STALE when the pin moves to fb5a363 or later."
+      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, and that root has collapsed into them (deleted with its ledger entries). Clears as STALE when the pin moves to fb5a363 or later."
     },
     {
       "path": "engines/economics/farmout.js",
       "kind": "extra",
       "group": "ec45-decision-portfolio-recut",
       "vendoredSha": "d6b4ad421a8ab1ff9d4dfcad971e7861dcc9561b",
-      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, so that root collapses. Clears as STALE when the pin moves to fb5a363 or later."
+      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, and that root has collapsed into them (deleted with its ledger entries). Clears as STALE when the pin moves to fb5a363 or later."
     },
     {
       "path": "__tests__/economics.jointVenture.test.js",
       "kind": "extra",
       "group": "ec45-decision-portfolio-recut",
       "vendoredSha": "6abaec3cd2466faa57e14fb07fef2c08fe04c7e8",
-      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, so that root collapses. Clears as STALE when the pin moves to fb5a363 or later."
+      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, and that root has collapsed into them (deleted with its ledger entries). Clears as STALE when the pin moves to fb5a363 or later."
     },
     {
       "path": "__tests__/economics.farmout.test.js",
       "kind": "extra",
       "group": "ec45-decision-portfolio-recut",
       "vendoredSha": "25ea8fd4252b98aac7e725056bb6f1e82df49197",
-      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, so that root collapses. Clears as STALE when the pin moves to fb5a363 or later."
+      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, and that root has collapsed into them (deleted with its ledger entries). Clears as STALE when the pin moves to fb5a363 or later."
     },
     {
       "path": "test-data/economics/goldens/jointventure_cases.json",
       "kind": "extra",
       "group": "ec45-decision-portfolio-recut",
       "vendoredSha": "a135ae266a8aa35d2b71fee6dfb3f4efe4b0e70e",
-      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, so that root collapses. Clears as STALE when the pin moves to fb5a363 or later."
+      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, and that root has collapsed into them (deleted with its ledger entries). Clears as STALE when the pin moves to fb5a363 or later."
     },
     {
       "path": "test-data/economics/goldens/farmout_cases.json",
       "kind": "extra",
       "group": "ec45-decision-portfolio-recut",
       "vendoredSha": "ca6abfa4c9ce17a1f720521be93710750f2ee0fd",
-      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, so that root collapses. Clears as STALE when the pin moves to fb5a363 or later."
+      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, and that root has collapsed into them (deleted with its ledger entries). Clears as STALE when the pin moves to fb5a363 or later."
     },
     {
       "path": "test-data/economics/ekene-farmout/README.md",
       "kind": "extra",
       "group": "ec45-decision-portfolio-recut",
       "vendoredSha": "41889716b393d59b8d0753a97e289514989f171c",
-      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, so that root collapses. Clears as STALE when the pin moves to fb5a363 or later."
+      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, and that root has collapsed into them (deleted with its ledger entries). Clears as STALE when the pin moves to fb5a363 or later."
     },
     {
       "path": "test-data/economics/ekene-farmout/ekene-farmout.json",
       "kind": "extra",
       "group": "ec45-decision-portfolio-recut",
       "vendoredSha": "4eae68d9b649b307da9195849d136a2195f195fb",
-      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, so that root collapses. Clears as STALE when the pin moves to fb5a363 or later."
+      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, and that root has collapsed into them (deleted with its ledger entries). Clears as STALE when the pin moves to fb5a363 or later."
     },
     {
       "path": "tools/validation/economics/FINDINGS-jointVenture.md",
       "kind": "extra",
       "group": "ec45-decision-portfolio-recut",
       "vendoredSha": "c75677f3ebc46ab7778a6a040733107c0624c50e",
-      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, so that root collapses. Clears as STALE when the pin moves to fb5a363 or later."
+      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, and that root has collapsed into them (deleted with its ledger entries). Clears as STALE when the pin moves to fb5a363 or later."
     },
     {
       "path": "tools/validation/economics/FINDINGS-farmout.md",
       "kind": "extra",
       "group": "ec45-decision-portfolio-recut",
       "vendoredSha": "ccc08a9602221ed9b41e9e52c28da3a4118cf9b7",
-      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, so that root collapses. Clears as STALE when the pin moves to fb5a363 or later."
+      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, and that root has collapsed into them (deleted with its ledger entries). Clears as STALE when the pin moves to fb5a363 or later."
     },
     {
       "path": "tools/validation/economics/oracle_jointventure.py",
       "kind": "extra",
       "group": "ec45-decision-portfolio-recut",
       "vendoredSha": "256521c34f9f1e0f593d2f405f293bd8277dc326",
-      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, so that root collapses. Clears as STALE when the pin moves to fb5a363 or later."
+      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, and that root has collapsed into them (deleted with its ledger entries). Clears as STALE when the pin moves to fb5a363 or later."
     },
     {
       "path": "tools/validation/economics/oracle_farmout.py",
       "kind": "extra",
       "group": "ec45-decision-portfolio-recut",
       "vendoredSha": "3c8f22842ac3246ef78b5edf438ad84975e6f4c0",
-      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, so that root collapses. Clears as STALE when the pin moves to fb5a363 or later."
+      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, and that root has collapsed into them (deleted with its ledger entries). Clears as STALE when the pin moves to fb5a363 or later."
     },
     {
       "path": "tools/validation/economics/negcontrol_jointventure.sh",
       "kind": "extra",
       "group": "ec45-decision-portfolio-recut",
       "vendoredSha": "54ee15f8cb4edcdd58ffd4d5297b3cf5780382e7",
-      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, so that root collapses. Clears as STALE when the pin moves to fb5a363 or later."
+      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, and that root has collapsed into them (deleted with its ledger entries). Clears as STALE when the pin moves to fb5a363 or later."
     },
     {
       "path": "tools/validation/economics/negcontrol_farmout.sh",
       "kind": "extra",
       "group": "ec45-decision-portfolio-recut",
       "vendoredSha": "e0c3dacfc9551b8e15e7b53db76123c575d68775",
-      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, so that root collapses. Clears as STALE when the pin moves to fb5a363 or later."
+      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, and that root has collapsed into them (deleted with its ledger entries). Clears as STALE when the pin moves to fb5a363 or later."
     },
     {
       "path": "tools/validation/economics/make_farmout_fixtures.py",
       "kind": "extra",
       "group": "ec45-decision-portfolio-recut",
       "vendoredSha": "d503b594fb9bd3b112e913dd483594371c2e51a7",
-      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, so that root collapses. Clears as STALE when the pin moves to fb5a363 or later."
+      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, and that root has collapsed into them (deleted with its ledger entries). Clears as STALE when the pin moves to fb5a363 or later."
     },
     {
       "path": "tools/validation/economics/timing_farmout.js",
       "kind": "extra",
       "group": "ec45-decision-portfolio-recut",
       "vendoredSha": "19cf6156fa3aed7f08aa7c2435d02cc08c612c1c",
-      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, so that root collapses. Clears as STALE when the pin moves to fb5a363 or later."
+      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, and that root has collapsed into them (deleted with its ledger entries). Clears as STALE when the pin moves to fb5a363 or later."
     }
   ]
 }
