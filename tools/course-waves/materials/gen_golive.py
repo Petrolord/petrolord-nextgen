@@ -281,7 +281,10 @@ w('    from public.academy_capstones c, lateral jsonb_array_elements(c.fields) f
 w(f"   where c.app_slug = '{S}'")
 w("     and (jsonb_typeof(f->'expected') <> 'number' or jsonb_typeof(f->'tol') <> 'number'")
 w("          or abs((f->>'expected')::numeric) <= 0.001")
-w("          or abs((f->>'expected')::numeric - round((f->>'expected')::numeric)) <= 0.001")
+# A probability near 1 (the no-shortage probability 0.999165) is not a
+# whole number: "whole" is read as within the field's own tolerance of one,
+# the distance at which a whole-number answer would pass the grader.
+w("          or abs((f->>'expected')::numeric - round((f->>'expected')::numeric)) <= (f->>'tol')::numeric")
 w(f"          or (f->>'tol')::numeric is distinct from (select t.tol from (values {TOL_ROWS}) t(tier, k, tol) where t.tier = c.tier and t.k = f->>'key')")
 w("          or coalesce(f->>'label', '') = '' or coalesce(f->>'unit', '') = '');")
 w('  if v_n <> 0 then')
