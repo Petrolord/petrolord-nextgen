@@ -149,7 +149,7 @@ q(0, "On default-monthly-compound-uncured PB's 2000000.000000 is still unpaid fo
  ["55916.666667 on 122 days",
   "0.000000, the 72-hour grace suspending default interest while a default is open",
   "56718.750000, compounding the four months and the 72 hours of grace on top"],
- "The reason prints \"interest 2000000 x ((1 + 8.25% / 12)^4 x (1 + 8.25% x 0 days / 360) - 1), 4 whole months and 0 days = 55569.79\". 55916.666667 is the simple figure on the same days. Past the grace, default interest runs from the due date.")
+ "The reason prints \"interest 2000000 x ((1 + 8.25% / 12)^4 x (1 + 8.25% x 0 days / 360) - 1), 4 whole months and 0 days = 55569.79\". 55916.666667 is the simple figure on the same days. The 72 hours are long past, and under its stated grace the engine then counts from the due date itself.")
 
 q(2, "On default-monthly-compound-whole-months PB (2000000.000000 unpaid, 8.250000 percent, monthly-compound, 360-day basis, grace 0 hours) cures on 2027-05-01, due 2027-03-01. What does the engine count?",
  "27594.531250: two whole months, no days left over",
@@ -161,7 +161,7 @@ q(2, "On default-monthly-compound-whole-months PB (2000000.000000 unpaid, 8.2500
 q(1, "On default-monthly-compound-month-end party C owes 200000.000000 from 2027-01-31, open at asOf 2027-04-15, at 12 percent, monthly-compound, 365-day basis, grace 0 hours. How does the engine count the time?",
  "2 whole months and then 15 days, giving 5026.126027",
  ["74 days simple on a 365-day year",
-  "2 whole months ending 2027-03-31, then 15 days, each month taken to the month end",
+  "2 whole months ending 2027-03-28, February's last day kept as the day of the month, then the rest as days",
   "3 whole months, the part-month rounded up"],
  "The reason prints \"interest 200000 x ((1 + 12% / 12)^2 x (1 + 12% x 15 days / 365) - 1), 2 whole months and 15 days = 5026.13\"; the field is 5026.126027. A month from a month end keeps the day of the month, the last day when the month is shorter.")
 
@@ -239,7 +239,7 @@ q(0, "PIA 2021 s.311(2)(a)(iii) sets a cost oil limit of not more than 60 percen
 
 # m06, the published PSC checks
 
-q(2, "Divide the one-barrel profit oil of IMF FARI TNM/16/01 (February 2016) Figure 5 as the engine does: the contractor holds 40 percent of it, cost oil is capped at half of what royalty leaves, tax is 30 percent, and the barrel sells for 100. Who gets what?",
+q(2, "Divide the one-barrel profit oil of IMF FARI TNM/16/01 (February 2016) Figure 5 as the engine does: the contractor holds 40 percent of it, cost oil is capped at half of what royalty leaves, tax is 30 percent, there is no royalty, costs reach the cap, and the barrel sells for 100. Who gets what?",
  "Contractor 20.000000 and government 30.000000",
  ["Contractor 30.000000 and government 20.000000",
   "Contractor 26.000000 and government 39.000000",
@@ -291,7 +291,7 @@ q(3, "The engine cites the Act for both a back-in and PSC cost recovery. Which p
  "The engine's basis.source for backIn reads the Petroleum Industry Act 2021 (Act No. 6), Official Gazette No. 142, Vol. 108, 27 August 2021 s.85(4); for pscCostRecovery it adds s.85(2)(a) and s.311(2)(a)(iii) and engines/economics/cashflow.ts applyPSC. Section 85(4) governs the concession agreement of s.85(2)(d).")
 
 q(0, "The Kenya Model PSC 2015, Participation Agreement, is quoted in the cash call module and the default module. Which of its figures does the engine hold?",
- "None: its rate, grace and refund timing are stated inputs, the golden input stating the 72 hours",
+ "None: its rate and grace are stated inputs and no refund timing is held; the golden input states the 72 hours",
  ["The 72-hour grace of Art. 6.7, which the engine applies whenever a contract states no grace of its own",
   "The margin over LIBOR that Art. 6.7 prints, which the engine adds to every stated default interest rate",
   "The fifteen-day refund of an excess advance"],

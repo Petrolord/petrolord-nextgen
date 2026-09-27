@@ -11,7 +11,7 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
 q(1, "The Ekene carry (synthetic) states a compound uplift of 8.000000 percent a year, carry recovery from 50.000000 percent of NOC's share of entitlement and basis \"contract\". NOC's carried cost is 16400000.000000 in 2027 and 12000000.000000 in 2028. What uplift does the engine charge in 2028?",
  "1312000.000000, 8 percent of the opening balance of 16400000.000000 alone",
- ["2376960.000000, 8 percent of the balance once the year's carried cost of 12000000.000000 has been added to it",
+ ["2376960.000000, 8 percent of the 2028 due of 29712000.000000, the year's uplift and carried cost both included",
   "0.000000, since no uplift accrues until NOC's entitlement starts",
   "8200000.000000, the uplift added in the first year a cost is carried"],
  "The engine's basis reads \"8% a year on the opening balance, compounded yearly; a year's new cost earns none in its own year\", and its reason reads \"2028: 8% a year on the opening balance 16400000 adds 1312000\". 2376960.000000 is the 2029 uplift, charged on 2029's opening balance of 29712000.000000. The uplift runs from the first opening balance, before any entitlement. 8200000.000000 is what the 150 percent multiple adds in 2027 on a different carry.")
@@ -97,7 +97,7 @@ q(3, "The golden input carry-cost-while-recovering states a compound uplift of 2
  "175.000000",
  ["200.000000, with the 25 percent uplift charged on the year's new cost as well as on the opening balance",
   "225, the amount due, since nothing is recovered while the carry is still adding cost",
-  "150.000000, as the year's new cost is added only after the year's carry recovery is taken and earns no uplift"],
+  "150.000000, as a year that carries new cost charges no uplift on its opening balance until the cost stops"],
  "The engine charges the uplift on the opening balance alone (25.000000 on 100.000000), adds the year's carried cost, and recovers from the same year's entitlement at the year end: \"2028: 50 recovered of 225 due; 175 carried to 2029\". Carry recovery runs while cost is still being carried, so the due of 225 is reduced by the 50 recovered.")
 
 q(0, "On the carry with 8.000000 percent compounding, half of NOC's share taken and basis \"contract\", the carriers get back 7267760.617882 in 2033. How is that sum divided?",

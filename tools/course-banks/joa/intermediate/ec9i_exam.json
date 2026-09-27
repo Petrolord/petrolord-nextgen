@@ -206,7 +206,7 @@
    "56718.750000, compounding the four months and the 72 hours of grace on top"
   ],
   "answer": 0,
-  "explanation": "The reason prints \"interest 2000000 x ((1 + 8.25% / 12)^4 x (1 + 8.25% x 0 days / 360) - 1), 4 whole months and 0 days = 55569.79\". 55916.666667 is the simple figure on the same days. Past the grace, default interest runs from the due date."
+  "explanation": "The reason prints \"interest 2000000 x ((1 + 8.25% / 12)^4 x (1 + 8.25% x 0 days / 360) - 1), 4 whole months and 0 days = 55569.79\". 55916.666667 is the simple figure on the same days. The 72 hours are long past, and under its stated grace the engine then counts from the due date itself."
  },
  {
   "prompt": "On default-monthly-compound-whole-months PB (2000000.000000 unpaid, 8.250000 percent, monthly-compound, 360-day basis, grace 0 hours) cures on 2027-05-01, due 2027-03-01. What does the engine count?",
@@ -224,7 +224,7 @@
   "options": [
    "74 days simple on a 365-day year",
    "2 whole months and then 15 days, giving 5026.126027",
-   "2 whole months ending 2027-03-31, then 15 days, each month taken to the month end",
+   "2 whole months ending 2027-03-28, February's last day kept as the day of the month, then the rest as days",
    "3 whole months, the part-month rounded up"
   ],
   "answer": 1,
@@ -341,7 +341,7 @@
   "explanation": "The engine's basis reads \"PIA s.311(2)(a)(iii): a renegotiated production sharing contract features a cost oil limit of not more than 60% of the total oil production; the limit here is the contract's stated figure\", and PIA_JV.renegotiatedPscCostOilLimitPct is reported in the basis only. The limit is a required input."
  },
  {
-  "prompt": "Divide the one-barrel profit oil of IMF FARI TNM/16/01 (February 2016) Figure 5 as the engine does: the contractor holds 40 percent of it, cost oil is capped at half of what royalty leaves, tax is 30 percent, and the barrel sells for 100. Who gets what?",
+  "prompt": "Divide the one-barrel profit oil of IMF FARI TNM/16/01 (February 2016) Figure 5 as the engine does: the contractor holds 40 percent of it, cost oil is capped at half of what royalty leaves, tax is 30 percent, there is no royalty, costs reach the cap, and the barrel sells for 100. Who gets what?",
   "options": [
    "Contractor 30.000000 and government 20.000000",
    "Contractor 26.000000 and government 39.000000",
@@ -420,7 +420,7 @@
  {
   "prompt": "The Kenya Model PSC 2015, Participation Agreement, is quoted in the cash call module and the default module. Which of its figures does the engine hold?",
   "options": [
-   "None: its rate, grace and refund timing are stated inputs, the golden input stating the 72 hours",
+   "None: its rate and grace are stated inputs and no refund timing is held; the golden input states the 72 hours",
    "The 72-hour grace of Art. 6.7, which the engine applies whenever a contract states no grace of its own",
    "The margin over LIBOR that Art. 6.7 prints, which the engine adds to every stated default interest rate",
    "The fifteen-day refund of an excess advance"

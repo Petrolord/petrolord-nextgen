@@ -109,7 +109,7 @@ q(3, f"NOC holds a participating interest of 20.000000 in the Ekene joint ventur
   "Its beneficial interest of 20.000000 percent of every forecast, since cash calls follow the share of production"],
  "Every split of a joint account amount is calculatePartnerCosts on the paying interests, and NOC's paying interest is 0.000000 under the carry; every NOC row of the ledger prints a forecast share, call and balance of 0.000000. Its beneficial interest stays 20.000000, because a carry moves cost and never moves production. The carriers pay NOC's share through their own paying interests (EKO 50.000000, PA 31.250000, PB 18.750000); nothing is billed to NOC through the cash calls.")
 
-q(1, "The golden input cc-year-boundary states parties A 50, B 30 and C 20 percent, a lag of 1 month and the rule \"carry\". December 2026 is forecast at 1000.000000 and spends 900.000000. What does the engine call in January 2027, a month forecast at 1000.000000?",
+q(1, "The golden input cc-year-boundary states parties A 50, B 30 and C 20 percent, a lag of 1 month, the rule \"carry\" and no threshold. December 2026 is forecast at 1000.000000 and spends 900.000000. What does the engine call in January 2027, a month forecast at 1000.000000?",
  "900.000000, with December's over-call of 100 credited across the year boundary",
  ["1000.000000, as each year settles its own differences",
   "1000.000000 in January, with the 100.000000 over-call refunded in December as its own negative call",

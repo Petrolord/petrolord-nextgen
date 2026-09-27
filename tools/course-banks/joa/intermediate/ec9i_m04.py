@@ -52,7 +52,7 @@ q(1, "Seventy-two hours of grace are written into a contract (default-grace-last
  ["1375.000000 on 3 days, since a grace only postpones the start of default interest and never cancels it",
   "1833.333333 on 4 days, the cure day counted",
   "0.000000 for three days, then default interest from the cure date on the rest of the month"],
- "The engine's reason reads \"PB: share of the call 2250000, paid 250000, unpaid 2000000; no interest: 3 days (72 hours, from 2027-03-01 to the cure on 2027-03-04, the last date excluded) are within the stated grace of 72 hours\". Cured exactly at the grace is inside it, which is the boundary. 1375.000000 is the 3-day figure of the 71.5-hour grace, which is exceeded.")
+ "The engine's reason reads \"PB: share of the call 2250000, paid 250000, unpaid 2000000; no interest: 3 days (72 hours, from 2027-03-01 to the cure on 2027-03-04, the last date excluded) are within the stated grace of 72 hours\". Cured exactly at the grace is inside it, which is the boundary, and the engine's stated grace charges nothing within it. 1375.000000 is the 3-day figure of the 71.5-hour grace, which is exceeded.")
 
 q(2, "On default-grace-exceeded (8.25 percent simple, 360 days, a grace of 72 hours) the late partner pays on 2027-03-05, four days after the due date. Reading the grace as the engine states it, what is charged?",
  "1833.333333 on 4 days, with default interest running from the due date",
@@ -66,9 +66,9 @@ q(0, "Suppose a contract's grace were 71.5 hours at 8.25 percent simple over 360
  ["0.000000, as 71.5 hours rounds to three days and the cure falls inside it",
   "A refusal: whole hours only",
   "1833.333333, counting the half-hour past the grace as a whole further day"],
- "Seventy-two hours have passed, which is more than 71.5, so the grace is exceeded and default interest runs over all 3 days: 1375.000000. Hours are compared as stated; the engine rounds no grace to whole days, and a fractional grace is a valid input.")
+ "Seventy-two hours have passed, which is more than 71.5, so the grace is exceeded, and as the engine states its grace, default interest runs from the due date over all 3 days: 1375.000000. Hours are compared as stated; the engine rounds no grace to whole days, and a fractional grace is a valid input.")
 
-q(3, "A learner sets the default interest method control to \"compound\" on the Ekene default. What does the engine return?",
+q(3, "A learner types interestMethod \"compound\" into the recovery calculator's box for the Ekene default, a word the method control does not offer. What does the engine return?",
  "Refused by name: the method takes only the words \"simple\" and \"monthly-compound\"",
  ["20210.781250, reading \"compound\" as monthly compounding, the only compounding the engine computes",
   "Daily compounding on the stated day basis",

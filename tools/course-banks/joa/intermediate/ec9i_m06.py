@@ -23,9 +23,9 @@ q(3, "A limit of 60 percent of gross, a royalty of 10 percent, costs of 25 and g
  ["60 percent of the revenue after royalty of 90, since applyPSC reads every limit on that base",
   "A limit of 60.000000 with 60.000000 recovered, as a limit is always taken in full",
   "25.000000, the costs, since a limit cannot exceed what there is to recover"],
- "The engine returns a limit of 60.000000, as the note prints (\"60 percent of the gross revenue or US$60\"), and its basis reads \"the limit is stated on gross revenue and passed to applyPSC as the fraction 60 / (100 - 10) of revenue after royalty\". The engine keeps no copy of applyPSC of its own. The cost recovered is 25.000000, below the limit of 60.000000; the limit is a ceiling.")
+ "The engine returns a limit of 60.000000, as the note prints (\"60 percent of the gross revenue or US$60\"), and, as with the Ekene variant, the engine passes a limit stated on gross to the canonical applyPSC as a fraction of revenue after royalty. The engine keeps no copy of applyPSC of its own. The cost recovered is 25.000000, below the limit of 60.000000; the limit is a ceiling.")
 
-q(0, "In the World Bank Note 8 (November 2007) two-barrel case the costs of 25 are recovered in full; the contractor's profit share is 40 percent and tax 30 percent. Which contractor profit oil and income tax result?",
+q(0, "In the World Bank Note 8 (November 2007) two-barrel case (gross 100, royalty 10 percent) the costs of 25 are recovered in full; the contractor's profit share is 40 percent and tax 30 percent. Which contractor profit oil and income tax result?",
  "Contractor profit oil 26.000000 and tax 7.800000, the taxable income of 26 being the contractor's profit oil here",
  ["Contractor profit oil 39.000000, the government's 60 percent read as the contractor's, taxed at 30 percent",
   "Contractor profit oil 26.000000 and tax 0.000000, since in a production sharing contract the government's profit oil stands in for any income tax",
@@ -39,7 +39,7 @@ q(2, "Which does World Bank Briefing Note No. 8 (November 2007) pay first in its
   "The profit oil split, at 60 percent to the government, before royalty is charged"],
  f"The note prints \"the royalty is paid first. At 10 percent, this amounts to $10 going to the government.\" ({W}); the engine returns royalty 10.000000. The engine's order reads \"royalty = royaltyPct % of gross; cost oil limit = costOilLimitPct % of revenue after royalty (or of gross, as stated); cost recovered = min(pool + capex + opex, limit); profit oil = revenue after royalty - cost recovered\".")
 
-q(2, "IMF FARI TNM/16/01 (February 2016), Figure 5, runs one barrel at 100 with the limit at 50 percent of revenue after royalty, a contractor share of 40 percent and tax 30 percent. The figure prints government revenue of USD30 in profit oil and USD6 in income tax. What does the engine return?",
+q(2, "IMF FARI TNM/16/01 (February 2016), Figure 5, runs one barrel at 100 with no royalty, costs at or above the limit, the limit at 50 percent of revenue after royalty, a contractor share of 40 percent and tax 30 percent. The figure prints government revenue of USD30 in profit oil and USD6 in income tax. What does the engine return?",
  "Cost recovered 50.000000, government profit oil 30.000000, income tax 6.000000, and 36.000000 to the government",
  ["Cost recovered 50.000000, with income tax on cost petroleum plus profit petroleum and no deduction",
   "Cost recovered 60.000000, as the figure states its limit on gross like the World Bank note",
