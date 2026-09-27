@@ -12,5 +12,254 @@
  "repo": "/root/wt-sc5-nextgen",
  "wave_dir": "/root/cat-wip-contracts",
  "kit": "practice",
- "stage": "foundation"
+ "stage": "foundation",
+ "pack": {
+  "lines": 452,
+  "sections": 22,
+  "passages": 215,
+  "quoted": 99,
+  "sources": 32,
+  "sha256": "3d75ce6647ff53fb423ef0b033b03f437a5b8f86b88466753c7926fd3f774b7c"
+ },
+ "gates": {
+  "structure.py": {
+   "md5": "515aa45d51e9142dce192d3f93412d81",
+   "command": "python3 structure.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "PROBLEMS: 0"
+  },
+  "scaffold.py --check": {
+   "md5": "b9822d82e0df5554d2552320f7b61d97",
+   "command": "python3 scaffold.py --check",
+   "expected": 0,
+   "exit": 0,
+   "summary": "scaffold: 3 manifests, 0 stubs written, 78 existing lesson files left alone, 0 drift"
+  },
+  "curate_pack.py --check": {
+   "md5": "f527cc2e9c62d627cb454a3172353156",
+   "command": "python3 curate_pack.py --check",
+   "expected": 0,
+   "exit": 0,
+   "summary": "curate --check: both reproduce"
+  },
+  "build_pack.py --check": {
+   "md5": "17c4924bd2146cce6e789cfc02b63ccd",
+   "command": "python3 build_pack.py --check",
+   "expected": 0,
+   "exit": 0,
+   "summary": "build_pack --check: PACK.md and SOURCES.md reproduce byte for byte"
+  },
+  "gate_quotes.py": {
+   "md5": "c9ae56b77bd18247da07f9400087c07d",
+   "command": "python3 gate_quotes.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "BREACHES: 0"
+  },
+  "gate_quotes.py NEGATIVE CONTROL": {
+   "md5": "c9ae56b77bd18247da07f9400087c07d",
+   "command": "python3 gate_quotes.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a changed word and a quoted concept-only text were planted; caught 2 of 2"
+  },
+  "gate_source_trace.py": {
+   "md5": "0c1431ee3d9fd8ba758a737b8df8303c",
+   "command": "python3 gate_source_trace.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "BREACHES: 0"
+  },
+  "gate_source_trace.py NEGATIVE CONTROL figure": {
+   "md5": "0c1431ee3d9fd8ba758a737b8df8303c",
+   "command": "python3 gate_source_trace.py --plant-figure",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-figure: caught 1"
+  },
+  "gate_source_trace.py NEGATIVE CONTROL trace": {
+   "md5": "0c1431ee3d9fd8ba758a737b8df8303c",
+   "command": "python3 gate_source_trace.py --plant-trace",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-trace: caught 1"
+  },
+  "gate_source_trace.py NEGATIVE CONTROL leak": {
+   "md5": "0c1431ee3d9fd8ba758a737b8df8303c",
+   "command": "python3 gate_source_trace.py --plant-leak",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-leak: caught 3"
+  },
+  "gate_source_trace.py NEGATIVE CONTROL sha": {
+   "md5": "0c1431ee3d9fd8ba758a737b8df8303c",
+   "command": "python3 gate_source_trace.py --plant-sha",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-sha: caught 1"
+  },
+  "gate_copy_rule.py": {
+   "md5": "75d97ffb37f7cc37e6553613a1581919",
+   "command": "python3 gate_copy_rule.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "VIOLATIONS: 0"
+  },
+  "gate_copy_rule.py NEGATIVE CONTROL": {
+   "md5": "75d97ffb37f7cc37e6553613a1581919",
+   "command": "python3 gate_copy_rule.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a not-contrastive, a dash, an instead-of and an and-not were planted in the pack; caught 4 of 4"
+  },
+  "gate_copy_rule.py NEGATIVE CONTROL bank": {
+   "md5": "75d97ffb37f7cc37e6553613a1581919",
+   "command": "python3 gate_copy_rule.py --plant-bank",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a not-contrastive, a dash, an instead-of and an and-not were planted in a bank string; caught 4 of 4"
+  },
+  "gate_vocabulary.py": {
+   "md5": "6f6460516913ed9fb6eca717b5882a2f",
+   "command": "python3 gate_vocabulary.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "BREACHES: 0"
+  },
+  "gate_vocabulary.py NEGATIVE CONTROL": {
+   "md5": "6f6460516913ed9fb6eca717b5882a2f",
+   "command": "python3 gate_vocabulary.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: expected a repair-history framing and an AI claim caught; got ['a repair-history framing', 'an AI claim']"
+  },
+  "gate_vocabulary.py NEGATIVE CONTROL licensed": {
+   "md5": "6f6460516913ed9fb6eca717b5882a2f",
+   "command": "python3 gate_vocabulary.py --plant-licensed",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a quoted LOGIC clause was planted in a lesson line; caught 1"
+  },
+  "gate_licensed_prose.py": {
+   "md5": "6a41d119de38fda3cffadeb0f6cbcdc9",
+   "command": "python3 gate_licensed_prose.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "BREACHES: 0"
+  },
+  "gate_licensed_prose.py NEGATIVE CONTROL": {
+   "md5": "6a41d119de38fda3cffadeb0f6cbcdc9",
+   "command": "python3 gate_licensed_prose.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant: twelve words of S17 planted; caught 1"
+  },
+  "gate_licensed_prose.py NEGATIVE CONTROL lesson": {
+   "md5": "6a41d119de38fda3cffadeb0f6cbcdc9",
+   "command": "python3 gate_licensed_prose.py --plant-lesson",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-lesson: twelve words of S17 planted; caught 1"
+  },
+  "gate_brief_claims.py": {
+   "md5": "93041cd48a1184633583fda37ea1328e",
+   "command": "python3 gate_brief_claims.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "BREACHES: 0"
+  },
+  "gate_brief_claims.py NEGATIVE CONTROL": {
+   "md5": "93041cd48a1184633583fda37ea1328e",
+   "command": "python3 gate_brief_claims.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: an invented day count planted in BRIEF.md; caught 1"
+  },
+  "lengths.py": {
+   "md5": "1fd3483894ab5958d0005cf836a0ff9d",
+   "command": "python3 lengths.py",
+   "expected": 1,
+   "exit": 1,
+   "summary": "tiers read: 3  out of band: 79  not written yet: 0",
+   "stage": "foundation: expected to refuse on the 78 stubs for the stated reason"
+  },
+  "lengths.py --selftest": {
+   "md5": "1fd3483894ab5958d0005cf836a0ff9d",
+   "command": "python3 lengths.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "lengths.py selftest OK: a heading counts, a table row does not, a 430 word lesson at fourteen minutes is UNDER its own floor of 500 where a flat 420 floor passed it, and an unwritten lesson is named rather than skipped"
+  },
+  "gate_banks.py": {
+   "md5": "24433f4799e8d6b4e33b77594081e70f",
+   "command": "python3 gate_banks.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "BREACHES: 0"
+  },
+  "gate_banks.py NEGATIVE CONTROL": {
+   "md5": "24433f4799e8d6b4e33b77594081e70f",
+   "command": "python3 gate_banks.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: sc5b_m01 declared at 14 in memory; caught 1"
+  },
+  "dupaxes.py --selftest": {
+   "md5": "de6a2216f5b921b10022ed60be07df1b",
+   "command": "python3 dupaxes.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[dupaxes] selftest OK"
+  },
+  "lengthtails.py --selftest": {
+   "md5": "3ad5008fafb05e024e9c9be8073983e7",
+   "command": "python3 lengthtails.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[lengthtails] selftest OK"
+  },
+  "bankrepro.py --selftest": {
+   "md5": "8f7a1541304ef66d890d774c78b345b7",
+   "command": "python3 bankrepro.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[bankrepro] selftest OK: a freshly emitted bank is clean, a JSON edited without its source is caught with the exact question named, re-emitting returns it to clean, a source that refuses to write fails rather than passin"
+  },
+  "crosspair.py --selftest": {
+   "md5": "64e9daba9d808c271fdd39d75eb44c21",
+   "command": "python3 crosspair.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "negative control: ALL PASS"
+  },
+  "bankleak.py --selftest": {
+   "md5": "7da6706b78092de1c00eba51aabac8ab",
+   "command": "python3 bankleak.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[bankleak] selftest OK"
+  },
+  "dryrun_platform.sh (scratch Postgres, with its negative control)": {
+   "md5": "d3e2b703029d0c19e50acdf806e7dca7",
+   "command": "env NEG=1 bash dryrun_platform.sh",
+   "expected": 0,
+   "exit": 0,
+   "summary": "=== negative control: 5 of 5 plants red"
+  },
+  "prove_prior_courses.sh": {
+   "md5": "7439005ed59400017c6e90f9cba94af1",
+   "command": "bash prove_prior_courses.sh",
+   "expected": 0,
+   "exit": 0,
+   "summary": "PRIOR COURSES UNCHANGED: packages/engines byte-identical to origin/main; D1 to D5, H1, H3, H4, H5, SC2 and EC7 to EC11 digests, fields and precision rebuild byte-identical; cashflow, fiscal, fdp (digest), decision and po"
+  },
+  "gen_course.py (self checks)": {
+   "md5": "5675b6e60e6c8ea8dd80d691f75b4f59",
+   "command": "python3 gen_course.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "gen_course: self checks passed"
+  }
+ }
 }
