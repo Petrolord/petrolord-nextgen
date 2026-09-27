@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "OFON-1's earned value is 15231500. How does the engine reach it?",
+  "options": [
+   "The actuals of 15090000 scaled by CPI, which is how much work each dollar spent has bought across the AFE.",
+   "The average of the five progress figures applied to the budget of 27050000 as a single percent complete.",
+   "Each line's actual times its progress, with the invoice total standing in for lines that have not reported.",
+   "Each line's budget times its progress, added: 10224000 + 3900000 + 687500 + 420000 + 0."
+  ],
+  "answer": 3,
+  "explanation": "DRL-01 at 72.0000 percent of 14200000 earns 10224000; divided by the budget of 27050000 the sum gives percent complete 56.3087."
+ },
+ {
+  "prompt": "A progress report averages OFON-1's five progress figures to give the AFE's percent complete. What is wrong with that?",
+  "options": [
+   "Nothing, since a plain mean of five percents gives the same 56.3087 percent as weighting each line by its budget.",
+   "It gives CMT-03's 55.0000 percent on a 1250000 line the same vote as DRL-01's 72.0000 percent on 14200000.",
+   "It should weight each line by its actuals, since a line counts for what it has cost, and that gives the engine's 56.3087.",
+   "It double counts CSG-02, which is 100.0000 percent complete and should leave the average once the line has closed."
+  ],
+  "answer": 1,
+  "explanation": "The engine weights by budget, so its 56.3087 percent is mostly a statement about drilling, which earns 10224000 of the 15231500."
+ },
+ {
+  "prompt": "CSG-02 is 100.0000 percent complete, having spent 4300000 against a budget of 3900000. What does it earn?",
+  "options": [
+   "4300000, what the finished line actually cost, since complete work earns whatever was paid to get it done.",
+   "Its budget less its overrun, since earned value nets off any overspend on a line before it is added up.",
+   "3900000, its budget, since earned value pays each line what its work was authorised to cost.",
+   "The larger of its budget and its actual, the same choice the forecast rule makes on a line with no forecast."
+  ],
+  "answer": 2,
+  "explanation": "The budget is the weight and never the actual, which is what makes earned value useful against spend: CSG-02 earns 3900000 and spent 4300000."
+ },
+ {
+  "prompt": "\"progress beyond 100 percent earns beyond the budget\" returns earned value 150.0000 against actuals of 90.0000 and CPI 1.666667. What does that CPI record?",
+  "options": [
+   "Progress typed past 100 percent, which the engine accepts and which earns beyond the budget without a dollar saved.",
+   "A genuine saving, since 150.0000 over 90.0000 is exact arithmetic on the line's own earned value and actuals.",
+   "A clamp, since the engine caps progress at 100 percent and 1.666667 is the index it reports at that cap.",
+   "An inverted index, actuals over earned value, which the engine switches to once progress passes 100 percent."
+  ],
+  "answer": 0,
+  "explanation": "The refusal message says progress runs from 0 to 100 percent, yet only negative progress is refused; the same case reports SPI 1.500000 from the same typing."
+ },
+ {
+  "prompt": "CMP-05 is typed at 100.0000 percent complete with an actual of 0. What does it earn?",
+  "options": [
+   "Nothing, since earned value on a line is capped at the money that has actually been spent on that line so far.",
+   "Nothing, since the engine refuses a line claiming complete work with no spend and names CMP-05 in its message.",
+   "Its commitment of 1200000, since a line with no actuals earns only against the contractor orders already placed.",
+   "Its whole budget of 5600000, since the engine multiplies typed progress by budget and never checks it against spend."
+  ],
+  "answer": 3,
+  "explanation": "The engine does not measure metres drilled or stages completed; it reads a percentage and multiplies, so earned value is only as good as the progress typed in."
+ },
+ {
+  "prompt": "OFON-1 reports CPI 1.009377 and a variance at completion of -550000 on the same day. How can both be true?",
+  "options": [
+   "One of them is stale, since CPI is taken at the as-of date and the variance at completion is taken at the window end.",
+   "CPI above 1 means the overrun will be recovered by completion, so the variance is a figure that closes to 0 as work finishes.",
+   "They read different columns: CPI reads progress and actuals, the forecast rule reads budgets, spend, commitment and entries.",
+   "The variance counts the 5000000 committed and CPI does not yet, so the two agree once the open orders are paid."
+  ],
+  "answer": 2,
+  "explanation": "CMT-03 shows it plainly: it has earned 687500 for 640000 spent and still forecasts 1400000 against 1250000 because an engineer entered that figure."
+ },
+ {
+  "prompt": "\"suite test: weighted earned value\" reports CPI 1.000000 with 110.0000 earned and nothing spent. How should that CPI be read?",
+  "options": [
+   "As work bought at exactly its budget, one for one.",
+   "As undefined: with actuals of 0 the engine returns 1 whatever has been earned.",
+   "As infinity clamped to 1, the largest index the engine reports.",
+   "As a null that the screens print as 1.000000 in place of a blank."
+  ],
+  "answer": 1,
+  "explanation": "CPI 1 before any spend is a finding left unrepaired; the same case reports SPI 0.275000, a real ratio of earned value to planned value, beside a CPI that is only a default."
+ },
+ {
+  "prompt": "\"suite test: empty AFE\" has nothing budgeted, earned or spent and returns CPI 1.000000 and SPI 1.000000. Where does each 1 come from?",
+  "options": [
+   "Both are measurements: an empty AFE has done all its scope, on budget and on time.",
+   "CPI from the default for zero actuals, and SPI from a zero-budget guard that fires before the null rule.",
+   "Both come from the zero-actuals default, which the engine applies to every index once nothing at all has been spent.",
+   "SPI from time progress falling back to 1 on an AFE without dates, and CPI from 0 over 0 being read as exactly 1."
+  ],
+  "answer": 1,
+  "explanation": "Where planned value is zero SPI is null, except that an AFE whose budget is 0 reports SPI 1 because its guard is checked first; neither 1 is a reading of performance."
+ },
+ {
+  "prompt": "As of 2027-08-15 OFON-1's planned value is 17466060. What is that figure?",
+  "options": [
+   "The budget of 27050000 times 0.645695, the share of the window's whole days elapsed by that date.",
+   "What OFON-1 should have spent by then under its front-loaded drilling plan.",
+   "The total of the invoices dated on or before 2027-08-15, which is the spend the calendar can see by the date of the report.",
+   "The budget times percent complete, the work credited by that date."
+  ],
+  "answer": 0,
+  "explanation": "The plan is a straight line from 0 on 2027-02-01 to the whole budget on 2027-11-30: 195 of 302 days have passed, and the engine has no rig schedule to bend it."
+ },
+ {
+  "prompt": "OFON-1 reads SPI 1.141290 in one report and 0.872063 in another on identical lines. What separates them?",
+  "options": [
+   "Progress typed between the two reports, which lifted earned value ahead of the plan in June and let it fall back by August.",
+   "The invoice dated 2027-07-18, which raised the actuals between the two dates and pulled the schedule index down with them.",
+   "CPI moving from ahead to behind between the two dates, which SPI inherits because it divides by the cost index.",
+   "The as-of date: planned value is 13345861 at 2027-06-30 and 17466060 at 2027-08-15 against earned value of 15231500."
+  ],
+  "answer": 3,
+  "explanation": "Earned value does not move with the date and planned value does, so the same lines read ahead at 1.141290 and behind at 0.872063."
+ },
+ {
+  "prompt": "As of 2027-02-01, the start day, OFON-1 has already earned 15231500 by its figures. What SPI does the engine report?",
+  "options": [
+   "1, since a zero denominator gives 1, as CPI does before any spend.",
+   "0.563087, since time progress falls back to 1 when no day has elapsed.",
+   "Null, since no whole day has elapsed, planned value is 0 and there is nothing to divide by.",
+   "Infinity, earned value over a planned value of 0, far ahead of schedule."
+  ],
+  "answer": 2,
+  "explanation": "SPI is null before the start and on the start day; before EC5-0 the engine reported Infinity before the start date when value had been earned, and a report that prints the null as 0 or 1 has made one up."
+ },
+ {
+  "prompt": "From 2027-11-30 onward OFON-1's SPI reads 0.563087. Why that figure?",
+  "options": [
+   "The engine freezes SPI at its last reading inside the window once the as-of date passes the end of that window.",
+   "SPI is scaled down by the days of delay counted since 2027-11-30.",
+   "The plan runs on past the end, so planned value grows beyond 27050000.",
+   "Planned value has reached the whole budget, so SPI is percent complete, 56.3087, divided by 100."
+  ],
+  "answer": 3,
+  "explanation": "Time progress stops at 1.000000, so 2028-01-10 reads 15231500 over 27050000 exactly as the end day does."
+ },
+ {
+  "prompt": "OFON-1's lines, saved through the pre-EC5-0 wizard that took no window dates, are reported on 2027-06-30. Which SPI does that old report print?",
+  "options": [
+   "Null on every day, since with no window the engine could not form a planned value and declined to divide.",
+   "0.563087, percent complete over 100, because time progress fell back to 1 on every day of the AFE's life.",
+   "1.141290, since the engine took the first invoice date, 2027-02-20, as the start of the missing window.",
+   "0.872063, since the engine read the clock and applied the fallback only to the days before any start date."
+  ],
+  "answer": 1,
+  "explanation": "The published \"no dates: time progress 1\" case still records the fallback; with the whole budget planned every day, SPI said nothing about the calendar."
+ },
+ {
+  "prompt": "OFON-1 reads 55.7856 percent spent and 56.3087 percent complete. What does the pair show?",
+  "options": [
+   "Their ratio is CPI 1.009377, because they share the budget; neither says which lines are over budget.",
+   "That OFON-1 is 55.7856 percent done, the scope the money has delivered.",
+   "That OFON-1 is on schedule, since percent complete running ahead of percent spent is what an SPI above 1 means.",
+   "That no line is over budget, or complete would sit below spent."
+  ],
+  "answer": 0,
+  "explanation": "Percent spent is actuals over budget and percent complete is earned value over budget, so the budget cancels; CSG-02 finished over its line inside that matched pair."
+ },
+ {
+  "prompt": "SPI sets budget-weighted progress against a straight-line plan across the window. What does that do on an AFE like OFON-1?",
+  "options": [
+   "Nothing distorting, since the engine bends the plan around the rig schedule.",
+   "It names the late lines, since SPI is formed line by line and the dashboard reports the lowest of the line indices.",
+   "Drilling done early lifts it and completion still to come drags it, since every day of the plan costs the same.",
+   "It counts the days of delay, since planned value converts each dollar behind the plan back into calendar days on the window."
+  ],
+  "answer": 2,
+  "explanation": "OFON-1 carries 14200000 of drilling, usually spent early, and 5600000 of completion, usually spent late, and the plan gives each of the 302 days the same share of 27050000."
+ }
+]

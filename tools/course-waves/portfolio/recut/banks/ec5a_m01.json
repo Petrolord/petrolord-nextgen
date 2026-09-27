@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "One wildcat with pos 0.3, a success-case NPV of 300 and a fail cost of 50. Before EC5-0 the engine put its P90 at -150.5560. What is wrong with that figure?",
+  "options": [
+   "Nothing is wrong with it: a low case set beneath the worst outcome is a conservative margin, and the simulation has simply removed that margin.",
+   "It is the high case with its sign reversed, because the old engine ranked outcomes under the opposite percentile convention to the one used now.",
+   "It sits beneath -50.0000, the worst outcome the well can produce, so it describes a loss this project can never book.",
+   "It is right for the success case alone, since the old engine drew the failure lump in a separate pass and never added it back into the sum."
+  ],
+  "answer": 2,
+  "explanation": "The old P90 was emv minus 1.2816 x stdDev on a bell the well does not have: it fails with chance 0.700000 and then loses exactly 50.0000, which is the engine's P90 now, -50.0000."
+ },
+ {
+  "prompt": "A reviewer proposes keeping the normal approximation and adding a fixed safety margin to its P(loss). The identical wildcat cases read 0.276275 against an exact 0.343000 for three wells and 0.200464 against 0.117649 for six. Why does the margin fail?",
+  "options": [
+   "The error changes sign as wells are added, understated with three and overstated with six, so no single margin leans the right way.",
+   "A fixed margin would have to be reset for every seed, since the approximation is redrawn on each run.",
+   "The margin would move P(loss) and leave P90 untouched, because the approximation read the two figures off two different fitted curves.",
+   "The approximation is already conservative on every published case, so a margin double counts risk."
+  ],
+  "answer": 0,
+  "explanation": "An error that flips sign cannot be corrected by leaning one way: with eight wells it understates again, 0.166046 against an exact 0.255298."
+ },
+ {
+  "prompt": "On which published cases does the normal approximation give the exact P(loss)?",
+  "options": [
+   "The large identical wildcat cases, where eight wells are enough outcomes for the lumps to converge on a normal curve and the approximation settles.",
+   "The comonotone cases, where every project fails together, so the portfolio behaves as one project and a single fitted curve describes it exactly.",
+   "The three mixed wildcats, where the different fail costs spread the lumps apart and smooth the sum into the shape of a normal distribution.",
+   "The pos1-normal cases, projects that always succeed with a normal spread, where the portfolio value really is a bell."
+  ],
+  "answer": 3,
+  "explanation": "normalPairIndependent reads 0.001571 both ways and normalThreeCorrelated 0.231959, while comonotoneIdentical3 reads 0.365832 against 0.700000 and identical8 0.166046 against 0.255298."
+ },
+ {
+  "prompt": "In a simulated iteration where OK-3 fails, what does the engine book for it?",
+  "options": [
+   "Its npv_p90 of 210.0000, the low percentile of its entered range, which is the value a well lands on when its success driver misses.",
+   "Minus 85.0000 exactly, in every failing iteration, since the success spread scales a success and a failure is a single number.",
+   "Minus 85.0000 plus its success spread of 191.1747 times z2, because both of its drivers are drawn in every iteration and both are applied.",
+   "A normal draw around minus 85.0000 scaled by its mixture sd of 238.6507, which folds in the failure lump."
+  ],
+  "answer": 1,
+  "explanation": "OK-3 fails with chance 0.750000 and books 85.0000 of loss each time, which is why its risked EMV is 0.250000 x 420.0000 - 0.750000 x 85.0000 = 41.2500 and why small portfolios have spikes."
+ },
+ {
+  "prompt": "mixtureWithSpread pairs a risked project with a sure one. Before EC5-0 the engine put its P90 at -12.4175; the simulation reads 1.7148. What would a reader of the old figure have got wrong?",
+  "options": [
+   "Nothing of substance, since both figures sit close to zero and the gap between them is inside one standard error of the simulated count.",
+   "The sign of the high case, because under the exceedance convention the old P90 was the figure a committee would quote as the upside.",
+   "That the low case loses money, when nine simulated outcomes in ten are gains.",
+   "The worst case, because a P90 of -12.4175 is the floor of the portfolio and the simulation shows the floor is really a small gain."
+  ],
+  "answer": 2,
+  "explanation": "Under the exceedance convention P90 is the 10th percentile of simulated portfolio NPV, and at 1.7148 it is a gain; the bell fitted to emv and stdDev put it at a loss of 12.4175."
+ },
+ {
+  "prompt": "OK-3's npv_p10 of 700.0000 sits further above its npv_p50 of 420.0000 than its npv_p90 of 210.0000 sits below it. What does the simulation keep of that shape?",
+  "options": [
+   "The skew as well, since a success above the median is scaled by the upper half of the range and one below it by the narrower lower half.",
+   "Nothing of the percentiles at all, because a project with pos 0.250000 is drawn from its mixture sd of 238.6507 on every iteration.",
+   "The upper half of the range only, since a success is never drawn below its npv_p50 of 420.0000 and a failure books the downside instead.",
+   "Only the width, as a success spread of 191.1747 drawn symmetrically around 420.0000, so the skew is discarded."
+  ],
+  "answer": 3,
+  "explanation": "The success spread is (700.0000 - 210.0000) / 2.5631 = 191.1747 and z2 is a symmetric normal, so a wide spread can occasionally put a success below zero."
+ },
+ {
+  "prompt": "Two runs at the default seed differ only in one project's pos. Why is the gap between their results readable as the effect of that change?",
+  "options": [
+   "The draw order never depends on the inputs, so every project receives the same normals in both runs and only the change moves the result.",
+   "The engine reseeds each project from its id, so a project whose pos is untouched redraws exactly what it drew before, while the edited one draws afresh.",
+   "A project with a different pos skips its unused e1 draw, and skipping one normal shifts the stream by a known amount that the engine corrects for.",
+   "The seed advances by one for each run, so two runs always differ by a single step of sampling noise and the rest of the gap is the edit."
+  ],
+  "answer": 0,
+  "explanation": "Each iteration draws F1, F2, then e1 and e2 per project in array order from mulberry32(20260829), and every normal is drawn whether or not it is used."
+ },
+ {
+  "prompt": "An analyst lists the 450.0000 set's projects in a different order and P(loss) moves off 0.123600, with the seed and iterations unchanged. Why?",
+  "options": [
+   "The optimizer breaks ties by entry order, so the reordered list funds a different set at 450.0000 and the risk summary is simulated for that set.",
+   "F1 and F2 are drawn after the last project, so moving a project changes which shared draws it hears.",
+   "The e1 and e2 normals are dealt to projects in array order, so a new order hands each project different draws and the figure moves by sampling noise.",
+   "The grid charges cells in entry order, so the reordered set weighs differently and its capex is simulated at a new total."
+  ],
+  "answer": 2,
+  "explanation": "The set is still OK-1 + OK-3 + OK-4 and the seed still 20260829; anyone reproducing a figure needs the seed, the iteration count and the project order."
+ },
+ {
+  "prompt": "A team tries seeds until P(loss) for OKONO's 450.0000 set prints 0.119100, which seed 3 gives, and reports that figure. The default seed reads 0.123600 with a standard error of 0.003291. What is the problem with the report?",
+  "options": [
+   "There is none, because every seed is exactly reproducible and any reproducible figure is as true as the default one.",
+   "0.119100 is below the exact P(loss) of the set, which the engine prints as 0.123600 whenever it runs at its default seed.",
+   "0.119100 is a 1000 iteration figure, since the engine drops to 1000 iterations whenever a seed other than the default is given.",
+   "It picks the draw that flatters the set and reduces no risk; an honest report names the seed and iterations beside the figure."
+  ],
+  "answer": 3,
+  "explanation": "At 10000 iterations seeds 1 to 3 give 0.119100 to 0.128500; each is reproducible and none is the answer, and a difference smaller than the standard error is noise."
+ },
+ {
+  "prompt": "A user runs the risk summary with a seed that is not a whole number and an iteration count of 0. What runs?",
+  "options": [
+   "Seed 20260829 and 10000 iterations, the defaults, taken silently in place of what was typed.",
+   "Nothing: the input is refused with an error, as a negative capex is.",
+   "The seed rounded to a whole number and one iteration, the smallest sample it takes.",
+   "The closed-form emv and stdDev only, with P(loss), P90 and P10 returned as null because no simulation could be drawn."
+  ],
+  "answer": 0,
+  "explanation": "A seed that is not a whole number falls back to 20260829 and an iteration count below 1 falls back to 10000, so the figures are the default run whatever the label says."
+ },
+ {
+  "prompt": "The engine counts P(loss) 0.696100 for the single wildcat against an exact 0.700000, with a standard error of 0.004583. Is the engine wrong?",
+  "options": [
+   "Yes, because a reproducible seeded run ought to land on the exact P(loss).",
+   "Yes, because the strict test drops iterations that net exactly zero, which biases the count below the exact loss chance.",
+   "No, it sits 0.8510 standard errors from the exact figure, where a count from 10000 iterations should land.",
+   "No, because the engine rounds P(loss) to the nearest standard error before printing it."
+  ],
+  "answer": 2,
+  "explanation": "probLoss is a proportion with standard error sqrt(p(1 - p) / n); the largest z on the published cases is 1.4289, and the old 0.365832 sat dozens of standard errors away."
+ },
+ {
+  "prompt": "identical6 loses with chance 0.117649 and OKONO's 450.0000 set with 0.123600. What does the pair show?",
+  "options": [
+   "identical6 is the safer portfolio, since its loss chance is lower and six wells spread the risk.",
+   "P(loss) counts how often and never how much: every identical6 loss is -300.0000, while the 450.0000 set's low case is -18.3574.",
+   "The two carry the same downside, because equal loss chances over 10000 iterations imply equal average losses when those losses happen.",
+   "The 450.0000 figure is the weaker one, because a set whose successes carry a spread cannot be counted and is approximated instead."
+  ],
+  "answer": 1,
+  "explanation": "identical6 loses only when all six wells fail at 50.0000 each; two portfolios with nearly the same P(loss) can hold very different downsides, so the figure is read beside the low case."
+ },
+ {
+  "prompt": "The 600.0000 set reads P(loss) 0.001800 and the 450.0000 set 0.123600. A committee concludes the optimizer picked a safer set at 600.0000. What is wrong?",
+  "options": [
+   "The optimizer maximises risked EMV under the limit and never reads P(loss), so the lower figure is a by-product of a different budget's set.",
+   "Nothing, since the engine deducts each candidate set's simulated loss chance from its EMV before solving, so safety is part of every choice it makes.",
+   "The two figures come from different seeds, since each limit is simulated on a seed of its own and the comparison mixes two samples.",
+   "The 600.0000 set looks safer only because it holds more projects, and the optimizer is written to prefer the larger set whenever two sets tie."
+  ],
+  "answer": 0,
+  "explanation": "Both sets were simulated at seed 20260829 and 10000 iterations; a committee that wants less loss chance has to state that as its own constraint and test sets by hand."
+ },
+ {
+  "prompt": "The engine prints P(loss) 0.001800 for OKONO's 600.0000 set, to six decimals. What should a reader add before relying on it?",
+  "options": [
+   "Nothing, because six decimals at 10000 iterations resolve a loss probability to one part in a million and leave no room for error.",
+   "The exact P(loss) the risk summary prints beside every OKONO set, which is the figure the simulated count is there to confirm.",
+   "The normal approximation's 0.002555, which is the more precise figure for a small probability because it needs no count.",
+   "Its standard error, worked by hand as sqrt(p(1 - p) / n), because the engine prints none and a small count is the least precise relative to its size."
+  ],
+  "answer": 3,
+  "explanation": "Few iterations fall below zero at 0.001800, so the count rests on a handful of draws; the engine reports no exact figure for OKONO and no standard error beside any P(loss)."
+ },
+ {
+  "prompt": "identical8 is eight wildcats, each pos 0.3, 300 on success and a fail cost of 50. The engine's P90 is -50.0000. What outcome is that?",
+  "options": [
+   "The worst case, since P90 under the exceedance convention is the floor beneath which no simulated outcome of the portfolio falls.",
+   "The 10th percentile: one success at 300 and seven failures at 50 each, a low case the portfolio reaches but not its worst, which is all eight failing.",
+   "A single well's failure, because the engine reports the P90 of the largest funded project in place of a percentile of the whole portfolio.",
+   "The high case of the portfolio, the value exceeded by only one outcome in ten, which the exceedance convention labels P90."
+  ],
+  "answer": 1,
+  "explanation": "P90 is the low case, the 10th percentile of simulated portfolio NPV. The engine reports no minimum, so the worst outcome of a risked set is written by hand, here eight failures at 50.0000 each."
+ }
+]

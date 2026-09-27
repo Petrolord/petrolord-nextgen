@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "OK-3 has a pos of 0.250000, a success-case NPV of 420.0000 million USD and a fail_cost of 85.0000. What is it worth to the programme?",
+  "options": [
+   "420.0000, the value the well delivers when it works, which is the outcome an exploration programme is drilled for.",
+   "The chance-weighted success case with the 85.0000 fail cost left out, because the loss is already sunk in the capex.",
+   "The success case less the fail cost, weighted by pos, which charges the 85.0000 only in the case the well works.",
+   "41.2500 risked, 0.098214 of its success-case NPV."
+  ],
+  "answer": 3,
+  "explanation": "0.250000 x 420.0000 - 0.750000 x 85.0000 = 41.2500. Success-case NPV is what happens if the well works; risked EMV is what the chance of it working is worth."
+ },
+ {
+  "prompt": "Step one of the method compares a hand-risked EMV with the explorer's column, and a row disagrees. What does the method say a mismatch means?",
+  "options": [
+   "The explorer's value comes from the seeded Monte Carlo, so it differs from the closed form by simulation noise at 10000 iterations.",
+   "An input was typed wrong or a clamp fired: a pos over 1 read as 1, a pos under 0 as 0, or a negative fail_cost as 0.",
+   "The explorer discounts the fail cost over the project life, which a hand calculation in one line cannot reproduce.",
+   "The grid rounded the project's value to a whole cell, and the hand value is the unrounded figure."
+  ],
+  "answer": 1,
+  "explanation": "Risked EMV is closed form, pos x npv_p50 - (1 - pos) x fail_cost. The published posAboveOneClamps case reads a pos of 1.4 as 1 and returns 80.0000."
+ },
+ {
+  "prompt": "Ranked by risked EMV per million USD, OK-3 comes last at 0.458333, yet the optimizer funds it at 450.0000. Why?",
+  "options": [
+   "It fills the space the ranking leaves: swapping OK-5 for OK-3 adds 3.2500 for 30.0000 and lifts 287.7500 to 291.0000.",
+   "Its success-case NPV of 420.0000 is the largest in the inventory, and the optimizer breaks near-ties toward upside.",
+   "The ranking is computed on success-case NPV, and on risked EMV OK-3 actually ranks first per million USD.",
+   "The optimizer funds the cheapest projects first, and OK-3's 90.0000 is the lowest capex left after OK-5."
+  ],
+  "answer": 0,
+  "explanation": "Greedy funds OK-1, OK-4 and OK-5 at 420.0000 for 287.7500 and cannot use the last 30.0000. The best set is not the best projects."
+ },
+ {
+  "prompt": "OKONO's grid is exact at 1.0000. On an inventory whose resolution is anything else, which checks does the method require even when overLimit reads false?",
+  "options": [
+   "None beyond the flag, since EC5-0 added overLimit precisely so that a coarse answer could be quoted without checking.",
+   "Re-run the optimizer at a finer resolution chosen on request, and quote whichever answer has the larger EMV.",
+   "Sum the funded capex against the limit in money, look for a left-out project that would still fit, and look for an unfunded positive-EMV project with capex 0.0000.",
+   "Compare the funded set with the frontier's last point, since the two disagree whenever rounding has moved the answer."
+  ],
+  "answer": 2,
+  "explanation": "overLimit catches only the overshoot, 2.0000 on gridOvershoot. The undershoot that left 200.0000 out and the free project charged a cell worth 10.0000 are both silent."
+ },
+ {
+  "prompt": "A graded question solves OKONO at 450.0000 and then at 600.0000. Two shortcuts tempt: add OK-5 to the smaller set, or cut OK-2 from the larger one. How do they compare with solving each budget afresh?",
+  "options": [
+   "Adding OK-5 reaches 402.7500 exactly, since the larger optimum is the smaller one with the projects that fit added on.",
+   "Cutting OK-2 reaches 291.0000 exactly, because the smaller optimum is always a subset of the larger one.",
+   "Adding OK-5 reaches 329.0000 against 402.7500, and cutting OK-2 reaches 287.7500 against 291.0000; both fall short.",
+   "Both reach their budget's optimum, since two budgets on one frontier share every funded set up to the smaller limit."
+  ],
+  "answer": 2,
+  "explanation": "291.0000 plus 38.0000 is 329.0000 at 510.0000, and 402.7500 less 115.0000 is 287.7500. OK-3 is in one optimum and not the other, so the sets are not nested."
+ },
+ {
+  "prompt": "Step six quotes the 450.0000 set's risk as P(loss) 0.123600. Why must the seed and the iterations be quoted beside it?",
+  "options": [
+   "The figure is counted from a seeded Monte Carlo, seed 20260829 and 10000 iterations here, and the seed and count are what make it reproducible.",
+   "They record the normal approximation's inputs, from which P(loss) is computed in closed form like risked EMV.",
+   "They identify the grid the optimizer solved on, which decides the funded set whose risk is being reported.",
+   "They are how the engine turns a probability into a percentile, so that 0.123600 can be quoted as the programme's P90."
+  ],
+  "answer": 0,
+  "explanation": "emv and stdDev are closed form, while probLoss, p90 and p10 come from the simulation. The 600.0000 set on the same seed and iterations reads 0.001800."
+ },
+ {
+  "prompt": "OKONO's 450.0000 set shows a P90 of -18.3574 million USD. What does that number say?",
+  "options": [
+   "There are nine chances in ten that the programme loses 18.3574, since the label names the probability of the loss it prints.",
+   "The high case of the programme, the value beaten only one time in ten, so the programme is expected to lose money.",
+   "A cost overrun of 18.3574 on the funded capex in the low case, since the simulation draws spending as well as value.",
+   "The low case of simulated portfolio NPV is a loss, which fits a P(loss) of 0.123600."
+  ],
+  "answer": 3,
+  "explanation": "P90 under the exceedance convention is the 10th percentile of simulated NPV. The 600.0000 set's P90 of 200.3575 sits well above zero, beside a P(loss) of 0.001800."
+ },
+ {
+  "prompt": "One inventory has a row with a capex of -150, and another has a row with a negative risked EMV. What does the engine do with each?",
+  "options": [
+   "It clamps the negative capex to 0 and funds the row free, and funds the negative row only if the budget is large enough.",
+   "It refuses the first run with a PortfolioInputError, and solves the second but never funds the negative row.",
+   "It refuses both, since a negative number anywhere in a project row is an invalid input the engine will not solve.",
+   "It solves the first with the capex read as a refund that adds to the limit, and drops the second before solving."
+  ],
+  "answer": 1,
+  "explanation": "A negative capex such as -150 is refused outright. The published negativeEmvHugeBudget case leaves its row at -44.0000 out even at a limit of 10000.0000."
+ },
+ {
+  "prompt": "OFON-1's budget is 27050000 and OKONO's limit is 450.0000. Why does the method never set one against the other?",
+  "options": [
+   "They are different models: OKONO is a capital inventory in million USD across projects, OFON-1 an AFE in whole USD across cost lines.",
+   "They can be compared once OFON-1 is divided by a million, since both are dollars and the AFE is simply one project's spend.",
+   "OFON-1 is the AFE for OK-1, so its budget is a line inside OKONO's limit and must not be counted twice.",
+   "The AFE budget moves with the as-of date while the limit is fixed, so the two are never read on one date."
+  ],
+  "answer": 0,
+  "explanation": "The two share nothing: OFON-1 runs a window from 2027-02-01 to 2027-11-30 across five cost lines, and its numbers are never mixed with OKONO's."
+ },
+ {
+  "prompt": "OFON-1's line CSG-02 has spent 4300000 against a budget of 3900000 with no entered forecast. What does it forecast, and why?",
+  "options": [
+   "3900000, since a line with no entered forecast carries its budget as its forecast until one is typed.",
+   "The actual less the budget, the overrun alone, since a forecast reports only what remains to be spent on the line.",
+   "Nothing until a forecast is entered, since the forecast rule refuses a line whose forecast is not positive.",
+   "4300000, the larger of its budget and its actual plus commitment."
+  ],
+  "answer": 3,
+  "explanation": "The AFE's estimate at completion is 27600000, a variance at completion of -550000. A forecast copied from the budget would hide CSG-02's overrun, which the Suite did before EC5-0 whenever a line was edited."
+ },
+ {
+  "prompt": "OFON-1 earns 15231500 with CPI 1.009377 at 2027-06-30 and again at 2027-08-15, while SPI reads 1.141290 and then 0.872063. Why does only SPI move?",
+  "options": [
+   "CPI is actuals over earned value and is fixed at the start of the window, while SPI is recomputed each month from the invoices received to date.",
+   "Progress was re-entered between the two reports, which moves SPI but not CPI because CPI ignores progress.",
+   "Earned value and actuals do not depend on the date; planned value comes from the calendar, so SPI changes with the as-of date.",
+   "SPI is read from the S-curve, whose forecast jumps after the as-of date, while CPI is read from the budget and the actuals, which no date can change."
+  ],
+  "answer": 2,
+  "explanation": "CPI is earned value over actuals, 15231500 over 15090000 at every date. Planned value rises through the window, so the same earned value reads ahead in June and behind in August."
+ },
+ {
+  "prompt": "OFON-1's S-curve ends with a Planned point of 24452483 against a budget of 27050000. What does the shortfall mean?",
+  "options": [
+   "An underspend of the plan, since the budget was phased to finish below its total and the rest is held as contingency.",
+   "Nothing at the well: the curve is built in monthly buckets and stops at the window end, short of the full budget.",
+   "The work running behind schedule by that amount, since a Planned point below budget means progress fell short.",
+   "A curve that keeps walking past the end date, which moves the final month's plan into the following year."
+  ],
+  "answer": 1,
+  "explanation": "The last Planned point is 24452483, and past the as-of date the forecast jumps from the last actual of 15090000 to 19374834. Neither the shortfall nor the jump is an event at the well."
+ },
+ {
+  "prompt": "A report states only 'SPI 0.872063' and 'funded set worth 291.0000'. What is missing from each figure?",
+  "options": [
+   "Its seed and iterations, as though both were simulated.",
+   "Its unit alone, since USD for the SPI and million USD for the set would settle both readings.",
+   "Its sign convention, since SPI and risked EMV both invert when the reporting currency changes.",
+   "Its basis: the as-of date 2027-08-15 for the SPI and the limit 450.0000 for the funded set."
+  ],
+  "answer": 3,
+  "explanation": "An SPI read with no date means nothing: OFON-1 reads 1.141290 at 2027-06-30 and 0.872063 at 2027-08-15. A funded set is the answer at one limit, and at 600.0000 the value is 402.7500."
+ },
+ {
+  "prompt": "Every step of the method checks out on OKONO at 450.0000: rows risked by hand, resolution 1.0000, the set proven at 291.0000 and the greedy set beaten. What does that still not prove?",
+  "options": [
+   "That the inputs were right: the arithmetic is proven, but no step can show that a pos or a fail_cost was a good estimate.",
+   "That the set is the optimum, since a proof by hand covers only the three funded projects and says nothing about the three left out of the set.",
+   "That the frontier's last point matches the funded set, which only the Monte Carlo can confirm.",
+   "That the grid was exact, since a resolution of 1.0000 can still round a capex typed with decimals."
+  ],
+  "answer": 0,
+  "explanation": "The method funds projects whole, uses one average correlation and assumes a normal success spread. OK-3's 41.2500 is only as good as its pos of 0.250000 and its fail_cost of 85.0000."
+ },
+ {
+  "prompt": "OK-3 is out of the OKONO set at 300.0000, in at 450.0000, out at 600.0000 and back at 750.0000. What does that path show?",
+  "options": [
+   "OK-3 is marginal at 0.458333 per million USD, so the optimizer rotates it in and out of the funded set to spread the exploration risk across budgets.",
+   "Each budget is solved afresh over the whole inventory, so a project's place in one funded set promises nothing at another limit.",
+   "The grid rounds OK-3's 90.0000 differently at each limit, which moves it across the edge of the knapsack.",
+   "The optimizer builds each larger set on the one before and removes OK-3 whenever a better project is added."
+  ],
+  "answer": 1,
+  "explanation": "At 450.0000 OK-3 fills the 30.0000 greedy leaves, for 291.0000; at 600.0000 the set is OK-1, OK-2, OK-4 and OK-5 at 402.7500 without it. On OKONO's exact grid of 1.0000 nothing is rounded."
+ }
+]

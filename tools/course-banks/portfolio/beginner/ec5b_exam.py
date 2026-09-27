@@ -1,0 +1,347 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# EC5 portfolio, beginner tier, final exam. Reconstructed from the served rows (the applied
+# migrations replayed on a local scratch database) with the EC5 engine re-cut applied;
+# written by tools/course-waves/portfolio/recut/build.py. Edit the rows there, then re-run it.
+
+q(2,
+ "An analyst retypes OKONO's inventory with every capex and the limit as a count of USD instead of million USD, and changes nothing else. What changes in how the engine solves it, and where would the analyst see the change?",
+ "The limit is no longer at most 5000, so the grid turns coarse at the limit divided by 2000 per cell, and only the reported resolution shows the switch.",
+ ["Nothing changes in the solve, because risked EMV per million USD is a ratio whose unit cancels, so the ranking and the set come out identical.",
+  "The engine refuses the run with a PortfolioInputError, since a capex that large beside NPVs in million USD fails the engine's scale check.",
+  "The grid stays at 1 million USD per cell but every project now weighs a million times more cells, so none of them fits under the limit and nothing is funded at all."],
+ "The exact grid needs whole numbers and a limit of at most 5000; the published rawDollars case runs on a cell of 225000.000000 USD and still reaches the exact 250.0000, with a gap of 0.0000.")
+
+q(0,
+ "A board minute says the optimizer picked the safe portfolio when it chose OKONO's 600.0000 set over its 450.0000 one. What role did the simulated loss probabilities play in selecting either set?",
+ "None: the optimizer and the frontier rank on risked EMV alone, and the seeded risk summary is computed afterwards for the set already chosen.",
+ ["They broke a near tie, because the engine penalises each set's risked EMV by its simulated loss probability before comparing it with the rest of the frontier.",
+  "They screened the inventory, since any project whose failure branch lifts a set's P(loss) above the default is dropped before the knapsack runs.",
+  "They decided OK-3, which the simulation found worth its risk at 450.0000 and not worth it at 600.0000, where a safer set was available."],
+ "The 600.0000 set wins because 402.7500 beats every other set that fits, not because it is safer; a lower-risk set of nearly equal value is never offered.")
+
+q(3,
+ "OKONO's 450.0000 set totals 725.0000 of success-case NPV and its 600.0000 set only 473.0000. Why does the larger budget fund less success NPV?",
+ "OK-3 and its 420.0000 success case leave the set at 600.0000, and the optimizer maximises risked EMV, which rises to 402.7500.",
+ ["The larger frontier is solved on a coarser grid, so the success cases of the funded projects are rounded down to whole cells before they are summed.",
+  "Success NPV is capped at the limit, so a larger budget spreads the same cap over more projects.",
+  "The optimizer at 600.0000 trades success NPV for a lower P(loss), which is why the safer set carries less upside than the riskier one."],
+ "Success NPV adds every best case as if all worked at once; risked EMV goes from 291.0000 to 402.7500 while success NPV falls, and only risked EMV is maximised.")
+
+q(1,
+ "A risky project's chance of success is left blank in an inventory. Beyond its risked EMV, what does the blank do to the seeded risk summary of a set that funds it?",
+ "The default of 1 travels into the simulation, so the project succeeds in every iteration, never adds a failure to P(loss) and never drags down the P90.",
+ ["Nothing, since the simulation draws its own success rate from the entered percentiles whatever pos says, and only the optimizer uses the default.",
+  "The simulation refuses to run for that set and reports P(loss) as null until a chance of success is entered for every funded project.",
+  "The simulation treats the blank as a coin toss and draws success half the time, so the set looks riskier than its risked EMV would suggest."],
+ "A defaulted value is used everywhere the project is used; at seed 20260829 and 10000 iterations the project is a certain success, so one blank row makes a set look both more valuable and safer.")
+
+q(2,
+ "A study already paid for elsewhere is added to OKONO as a project with capex 0.0000 and a positive risked EMV, and the limit stays at 450.0000. Can the engine's answer hold it together with OK-1 + OK-3 + OK-4?",
+ "No: the grid charges it one cell, and OK-1 + OK-3 + OK-4 already use all 450.0000 cells, so no spare cell is left for it.",
+ ["Yes, because a project with capex 0.0000 weighs nothing on any grid and rides along with every set whose risked EMV it raises.",
+  "Yes, but only with overLimit true and overLimitBy of 1 million USD, since the engine lets a free project squeeze in over a limit that is already spent.",
+  "No, because a capex of 0.0000 is refused by the check that stops a negative capex."],
+ "Every project weighs max(1, round(capex / cell)) cells, finding D2; in freeProjectTightLimit the same effect costs 10.0000 of EMV at a limit of 100.0000 while overLimit stays false.")
+
+q(3,
+ "The greedy walk down OKONO's EMV per million ranking at 450.0000 stops at OK-1 + OK-4 + OK-5. Where does that set sit on the efficient frontier?",
+ "On point 10, the best set for 420.0000, one step short of the answer.",
+ ["Below the frontier, since a set built from a ranking is always beaten at its own capex by some solved set of whole projects.",
+  "On point 11, level with the optimum, since both sets report the frontier's last value once rounding to cells is allowed for.",
+  "Nowhere, since the frontier records only sets that spend the whole limit, and the greedy set leaves 30.0000 of it unspent."],
+ "Point 10 is 420.0000 and 287.7500; the last step swaps OK-5 for OK-3 and adds 3.2500 for 30.0000 to reach 291.0000.")
+
+q(1,
+ "Two answers leave money idle: OKONO at 750.0000 spends 690.0000, and the gridUndershoot case spends 4500.0000 of 6000.0000. Why is only the second a reason to distrust the set?",
+ "OKONO solves on an exact grid and its one left-out project, OK-6 at 310.0000, cannot fit, while the undershoot runs on a coarse grid where rounded-up weights squeezed out W, which fits in money.",
+ ["The second leaves a quarter of its limit idle and the first under a tenth, and the engine marks an answer unreliable once idle money passes a set share of the limit.",
+  "The undershoot reports overLimit true, which marks a grid problem, while OKONO at 750.0000 reports false and so needs no further check by the reader.",
+  "Both are equally suspect, since money left unspent always means the knapsack stopped early and a better set of whole projects exists somewhere."],
+ "The golden gap of -200.0000 is exactly W's risked EMV and no flag reports it (finding D4); OKONO's 60.0000 is genuine because nothing that remains fits.")
+
+q(0,
+ "In tieDifferentComposition the engine returns A for 80.0000 where B + C also reaches 80.0000. What would a reviewer need in order to compare the P(loss) of the two sets?",
+ "A separate simulation of B + C, because the engine's risk summary covers only the set it returned and its output names no alternative optimum.",
+ ["Nothing extra, since the risk summary averages P(loss) over every set that ties on risked EMV and reports the blended figure beside the funded set.",
+  "Nothing extra, since tied sets share their risked EMV and therefore share their P(loss) and their P90 as well, whatever projects they hold.",
+  "A rerun on a finer grid, since the engine lists alternative optima in its output only when the resolution drops below 1.0000."],
+ "The knapsack keeps the first set it builds and replaces it only with a strictly larger EMV; A is one bet and B + C spreads the same 80.0000 over two, so their risk can differ widely.")
+
+q(3,
+ "Three inventories each hide a problem: a capex typed as -150, a coarse grid that funds 6002.0000 against 6000.0000, and a coarse grid that leaves out a project worth 200.0000. How does the engine treat each?",
+ "It refuses the first, flags the second with overLimit true, and says nothing about the third.",
+ ["It refuses all three, because each one breaks a condition the knapsack needs before it can honestly return a set under the limit.",
+  "It flags the first and second through overLimit, and flags the third by printing a negative gap to the exact optimum beside the set.",
+  "It refuses the first and the second, since a set over the limit is rejected like a negative capex, and reports the third as money unspent."],
+ "The only refusal is a negative capex; the overshoot flag reads overLimitBy 2.0000, and the undershoot's -200.0000 gap exists only in the golden, never in the engine's output.")
+
+q(2,
+ "Working a graded inventory, a candidate finds the reported resolution is not 1.0000. Which checks does the Associate method require before the funded set is quoted?",
+ "Sum the funded capex in money against the limit whatever overLimit says, look for a left-out project that would still fit, and look for an unfunded positive project with capex 0.0000.",
+ ["Confirm that overLimit reads false, since a coarse grid can only go wrong by overshooting and the repaired flag now reports every overshoot.",
+  "Rerun with a smaller limit until the resolution returns to 1.0000, since the engine offers its exact grid on request once asked.",
+  "Nothing extra, since both published coarse cases, rawDollars and nonIntegerLimit, reached the exact optimum with a gap of 0.0000."],
+ "A coarse grid can overshoot, which is flagged, or undershoot or charge a free project a cell, which are silent (findings D4 and D2); only gridOvershoot's overLimitBy 2.0000 is reported.")
+
+q(1,
+ "A reviewer who counts rows from one opens an inventory without names or ids after a PortfolioInputError that blames Project \"1\" for a capex of -0.5. Which row holds the bad capex?",
+ "The second project in the list, since an unnamed project is named by its position counted from zero.",
+ ["The first project in the list, since the engine numbers its rows from one in the same way the Suite's inventory table does.",
+  "Any project with a capex of -0.5, since the number in quotes counts the refused projects rather than naming a position.",
+  "No row at all, since a capex of -0.5 rounds to zero cells and the message is a warning that the run continues past."],
+ "The message names a project by name, then id, then position from 0, and the check runs before any set is chosen, so no partial answer comes back.")
+
+q(0,
+ "A geologist enters OK-3's npv_p50 as 41.2500 because that is what the well is worth, and keeps pos at 0.250000 and fail_cost at 85.0000. What has gone wrong?",
+ "The well is risked twice, and with 0.750000 x 85.0000 now outweighing a quarter of 41.2500 its risked EMV turns negative, so it is never funded.",
+ ["Nothing, since the engine sees a success case smaller than the fail cost and restores the entered npv_p10 of 700.0000 as the success case.",
+  "Only the spread moves, because npv_p10 and npv_p90 are rescaled around 41.2500, while the well's risked EMV of 41.2500 stays as entered.",
+  "The well is valued at 41.2500 as intended, because the optimizer reads npv_p50 directly and pos enters only the Monte Carlo draws."],
+ "npv_p50 is the success case, 420.0000 for OK-3, and the one line applies pos to it; a value already risked is discounted again and the failure branch dominates.")
+
+q(2,
+ "The workovers' two spread measures agree exactly and the exploration well's do not. What makes the well's mixture standard deviation the wider of its pair?",
+ "The mixture counts the drop from a success to a loss of 85.0000 three times in four, and OK-5 cannot fail, so it has no such drop.",
+ ["The mixture uses an explicit npv_stddev where one is entered, and OK-3 carries one while OK-5 falls back to its entered percentiles.",
+  "The success spread is taken from npv_p10 less npv_p90 and the mixture from npv_p10 less npv_p50, which is wider for a well with a long upside.",
+  "The mixture adds the capex of 90.0000 as a second source of variance, and OK-5's capex is too small against its NPV to register."],
+ "The success spread describes the well only when it works, (700.0000 - 210.0000) / 2.5631 = 191.1747; failure widens the range, and fail costs set the floor of every simulated outcome.")
+
+q(3,
+ "Two rows enter percentiles of 200 and 50: one as npv_p10 200 and npv_p90 50, the other with the two swapped. Which row is more dangerous, and why?",
+ "The swapped row, whose spread of 0.0000 silently removes its success range from the risk summary.",
+ ["The first, since its spread of 58.5229 exceeds the explicit 40.0000 the engine would prefer and so overstates the risk summary.",
+  "Neither, since the engine sorts the two percentiles before it divides, so both rows return a spread of 58.5229.",
+  "The swapped row, because the engine refuses inverted percentiles with a PortfolioInputError and the set can then not be solved at all."],
+ "In the right order the spread is (200 - 50) / 2.5631 = 58.5229; inverted, the published case returns 0.0000 with no error, because nothing checks that npv_p10 sits above npv_p90.")
+
+q(1,
+ "A greedy analyst funds OKONO straight down its ratio table until the money for 450.0000 runs out. Which candidate is the earliest one passed over, and why?",
+ "OK-2, because after OK-1 and OK-4 reach 360.0000 its 180.0000 would take the total to 540.0000.",
+ ["OK-3, since its 0.458333 is the lowest ratio and a greedy walk never reaches it.",
+  "OK-6, because at 310.0000 it is the largest capex in the inventory and could not fit beside OK-1 at any stage of the walk.",
+  "OK-5, since after OK-1, OK-4 and OK-2 reach 540.0000 no room remains."],
+ "The walk then adds OK-5 for 420.0000, and neither OK-6 nor OK-3 fits the 30.0000 left, so it ends at 287.7500 against the optimizer's 291.0000.")
+
+q(2,
+ "A planner argues the greedy ranking must be sound because at 600.0000 it fills the budget exactly and matches the optimizer. What does that coincidence establish about other budgets?",
+ "Nothing: the same ranking loses 3.2500 at 450.0000, and nothing in a ranking says in advance which budgets it will fill.",
+ ["That a ranking is exact whenever it spends the whole limit, which it misses at 450.0000 only because 30.0000 of that limit is left idle.",
+  "That the optimizer runs the ranking itself, so its 291.0000 at 450.0000 is a rounding artefact.",
+  "That the frontier's step ratios fall steadily past 450.0000, which is the condition under which a ranking always fills a budget."],
+ "At 600.0000 the walk funds OK-1, OK-4, OK-2 and OK-5 for 402.7500, the optimizer's own set; at 450.0000 it stops at 287.7500, and only solving the set tells the two budgets apart.")
+
+q(0,
+ "A licence commitment must be drilled although its risked EMV is negative. How does an analyst get it into OKONO's programme?",
+ "Take its capex off the limit before the run and optimise the rest, because the engine has no must-fund flag and never funds a project at 0 or less.",
+ ["Raise the limit until the optimizer has room, since negativeEmvHugeBudget shows that a large enough budget eventually funds everything that fits.",
+  "Enter a pos of 1.4 so the clamp lifts it to certain success, which is the supported way to mark a project as mandatory.",
+  "Leave it in the inventory as it is, since the optimizer spends any unspent money on the next project whatever its value."],
+ "In negativeEmvHugeBudget a limit of 10000.0000 funds good + better for 120.0000 and still leaves the negative project out; funding it lowers expected value by exactly its negative EMV.")
+
+q(3,
+ "zeroEmvExcluded holds a project whose risked EMV is exactly 0.0000, under a limit of 500.0000 with room to spare. Why does the engine leave that project out?",
+ "It adds nothing to the objective and would still use capex.",
+ ["The engine treats a risked EMV of exactly zero as a missing value and refuses the row before the knapsack starts.",
+  "The grid charges every project a cell, and a project worth zero can never win that cell against the good project.",
+  "It is an input error the engine corrected by a clamp, since any risked EMV below its fail cost is read as zero."],
+ "The engine funds good alone for 50.0000 and 30.0000; a project at 0 or less is never funded, and money may be left unspent.")
+
+q(1,
+ "An auditor wants to export the 60.0000 that OKONO's five-project answer at 750.0000 leaves idle. Which part of the engine's return carries it?",
+ "Nowhere as a field: the engine returns the limit, the set, its capex and its EMV, and the reader derives the unspent amount by subtraction.",
+ ["As overLimitBy with a negative sign, since that flag measures the distance between the funded capex and the limit on either side.",
+  "As the resolution, which rises to 60.0000 whenever a limit cannot be spent exactly in whole projects on the exact grid.",
+  "As a partial slice of OK-6, which the engine funds with the leftover money and reports beside the five whole projects."],
+ "Every unspent figure is derived, 750.0000 - 690.0000 = 60.0000, and it is genuine because OK-6 alone costs 310.0000; the frontier's last point is printed at 690.0000, not at the limit.")
+
+q(2,
+ "tieIdenticalProjects funds twinA, and the golden accepts twinA or twinB. If the inventory is re-sorted so twinB is entered first, what should a reviewer expect?",
+ "twinB can come back instead, because the knapsack keeps the first best set it builds and an equal set found later never displaces it.",
+ ["twinA again, since ties are broken by the alphabetical order of project ids before the knapsack begins building sets.",
+  "Both twins, since a limit of 100.0000 holding two sets of 50.0000 funds the pair and reports 100.0000 of risked EMV.",
+  "An error, since the engine refuses any inventory in which two different sets tie on the objective."],
+ "The output has no field for alternative optima, so entry order decides between tied sets; nothing in the inputs separates the twins at 50.0000.")
+
+q(0,
+ "A budget of 150.0000 is proposed for OKONO, halfway between the frontier points at 120.0000 and 180.0000. What is the best risked EMV it buys?",
+ "89.7500, the lower point's value, since no whole set between those two capexes does better.",
+ ["The midpoint of 89.7500 and 127.7500, read along the straight line the chart draws between those two frontier points.",
+  "127.7500, since OK-1 and OK-5 together fit once the budget passes the halfway mark between the points.",
+  "A share of the 38.0000 the next step adds, priced at that step's 0.633333 per extra million USD."],
+ "The frontier is a staircase of whole sets; every budget from 120.0000 to just short of 180.0000 buys exactly OK-1's 89.7500.")
+
+q(3,
+ "Step 3 of OKONO's frontier reads 1.616667 per extra million USD, while OK-1 earns 0.747917 per million of its own capex. Why are the two so different?",
+ "Step 3 is the swap of OK-3 for OK-1, gaining 48.5000 for 30.0000.",
+ ["Step 3 counts OK-1's success-case NPV where the project ratio uses its risked EMV, so the step overstates the project.",
+  "Step 3 is measured in the frontier's cells while the project ratio uses million USD, and each cell there is worth more.",
+  "Step 3 adds OK-1 on top of OK-3, so its gain counts OK-3's risked EMV a second time beside OK-1's own."],
+ "89.7500 less 41.2500 is 48.5000 over 120.0000 less 90.0000; only a step that adds a project on top reads as that project's ratio, as steps 4 and 10 show OK-5's 0.633333.")
+
+q(1,
+ "A reviewer sees the frontier's smallest gain recur on three separate steps and suspects the grid is repeating itself. What does each of those steps actually trade?",
+ "The same trade: OK-5 out and OK-3 in, 41.2500 less 38.0000 for 90.0000 less 60.0000.",
+ ["OK-3 added on top of a smaller set, its 41.2500 split across three budgets in the pieces the grid allows.",
+  "Three different trades that coincide because every capex is a multiple of 30.0000.",
+  "A rounding step the exact grid inserts when no whole project fits."],
+ "At point 11 that swap turns the greedy set's 287.7500 into the optimum's 291.0000, so its ratio of 0.108333 does not mean the last 30.0000 was badly spent.")
+
+q(2,
+ "A sponsor offers OKONO a single extra million on top of the 450.0000 limit, citing the 0.733333 per extra million USD that the next frontier step reads. What does that million add?",
+ "0.0000 more, since the value stays at 291.0000 until the budget reaches 480.0000, where it steps to 313.0000.",
+ ["0.733333, the next step's ratio, bought a million at a time as the budget climbs toward the next point.",
+  "0.108333, the ratio of the step just taken, which is the best available estimate of what the next million returns.",
+  "A share of OK-5, whose 0.633333 per million is the cheapest way to put a small increment on top of the optimum."],
+ "The ratio 0.733333 is 22.0000 over 30.0000, an average across a whole step; no project is funded in part, so a million inside a step buys nothing.")
+
+q(0,
+ "Told to trim OKONO's 600.0000 programme back to 450.0000, a manager strikes the gas compression project and keeps the rest. How does the trimmed programme compare with re-solving?",
+ "It leaves OK-1 + OK-4 + OK-5 at 420.0000 for 287.7500, 3.2500 short of the 291.0000 re-solving finds by bringing back OK-3.",
+ ["It reaches the re-solved answer, because optimal sets are nested across budgets.",
+  "It beats re-solving, because the manager keeps OK-5, the one certain project, where the optimizer would trade it for a riskier well.",
+  "It matches the re-solved value with a different set, since both reach 291.0000 and the engine breaks such a tie by entry order."],
+ "No single drop from the 600.0000 set reaches the 450.0000 answer, because that answer holds OK-3, which the larger set left out.")
+
+q(1,
+ "Handed a raised budget of 600.0000, a manager tops up the solved 450.0000 set with whatever else fits rather than re-running the optimizer. Where does topping up stop?",
+ "At 329.0000 for 510.0000, with OK-5 added and nothing else fitting, against 402.7500 from solving again.",
+ ["At 402.7500, since adding in ratio order to a solved set reaches the next one.",
+  "At 444.0000, with OK-2 and OK-5 both added, since the extra 150.0000 of budget covers the pair of them together.",
+  "At 291.0000, since the engine refuses a project added to a solved set by hand."],
+ "After OK-5 only 90.0000 is left and OK-2 costs 180.0000; the solved set at 600.0000 gives up OK-3 to fund OK-1 + OK-2 + OK-4 + OK-5.")
+
+q(3,
+ "Both OKONO frontiers pass through the same first dozen points up to 450.0000 and 291.0000. What does that agreement prove, and what does it leave unproven?",
+ "The best value at each budget nests; the winning set at the larger limit does not.",
+ ["It shows the 600.0000 answer contains the 450.0000 answer, since the longer frontier is built by extending the shorter one.",
+  "It shows nothing, because the second frontier is solved on a coarser grid and agrees with the first only through rounding.",
+  "It shows the extra 150.0000 goes to the same projects in the same order, which is why the first points agree."],
+ "Both frontiers pass through 450.0000 and 291.0000, yet OK-3 is funded at 450.0000 and dropped at 600.0000, where OK-1 + OK-2 + OK-4 + OK-5 reach 402.7500.")
+
+q(2,
+ "A report shows OKONO's frontier ending at 450.0000 and 291.0000 beside a funded set worth 287.7500. What should the reader conclude?",
+ "The two were not run on the same inventory and limit, so find which input changed before quoting either.",
+ ["The funded set is the greedy set and the frontier is the optimum, which the engine prints side by side so the loss can be seen.",
+  "The grid has undershot, and the 3.2500 between them is a project rounding left out.",
+  "The frontier includes projects the funded set excludes for risk, so its last point always sits a little above the set."],
+ "The last point is the best risked EMV inside the whole limit and must match the funded set; at 450.0000 both read OK-1 + OK-3 + OK-4 for 291.0000 on a resolution of 1.0000.")
+
+q(0,
+ "rawDollars reports a resolution of 225000.000000 and nonIntegerLimit a resolution of 0.225250. What does a resolution measure?",
+ "The size of one capex cell in the money units entered, USD in the first case and million USD in the second.",
+ ["The precision of the risked EMV, so the second case's answer is reliable to a far finer margin than the first's.",
+  "The number of cells the limit is divided into, which grows when the capexes are typed in USD.",
+  "The standard error of the simulated P(loss), which the engine shrinks as the limit grows."],
+ "The coarse cell is the limit over 2000: 450000000.0000 over 2000 is 225000.000000 and 450.5000 over 2000 is 0.225250, and both still reach 250.0000 with a gap of 0.0000.")
+
+q(1,
+ "In gridOvershoot, A weighs 1333 cells and B 667, together exactly the 2000 cells of a limit of 6000.0000. Why does the pair fit on the grid but not in money?",
+ "Both capexes round down on a cell of 3.000000, B's 2002.0000 included, so the pair weighs less in cells than the 6002.0000 it costs.",
+ ["The limit of 6000.0000 is a whole number, so the grid is exact at 1 million USD per cell and the overshoot is only a rounding of the printed totals.",
+  "The engine adds a tolerance of one cell to every limit, so that a set landing on the boundary of the grid is not lost to rounding.",
+  "A is charged the minimum of one cell as a large project, so the grid undercounts it by nearly its whole capex of 4000.0000."],
+ "A limit over 5000 sends the grid coarse at 6000.0000 over 2000; the engine flags overLimit true and overLimitBy 2.0000 but still returns 800.0000, against 780.0000 for A + C, which truly fits.")
+
+q(3,
+ "gridOvershoot's golden gap is 20.0000 and gridUndershoot's is -200.0000. What does the sign of each gap say about the engine's set?",
+ "A positive gap means the set beat the exact optimum by breaking the limit; a negative one means a better fitting set was squeezed out.",
+ ["Both mean the grid was coarse by that many cells, with the sign recording only whether the capexes were rounded up or rounded down.",
+  "A positive gap is a genuine improvement the coarse grid found over exact arithmetic, and a negative one is the grid's unavoidable rounding cost.",
+  "The engine prints both gaps beside overLimit so that a user running any inventory can see how far the run sits from the exact optimum."],
+ "The gap is the engine's EMV less the exact optimum: 800.0000 less 780.0000, and 660.0000 less 860.0000, the second exactly W's 200.0000.")
+
+q(2,
+ "A capital committee cannot see why gridUndershoot's four candidates, whose money totals sit inside its coarse limit, are never funded together. What stops the fourth?",
+ "On a cell of 3.000000 every capex rounds up, and the four rounded weights need more than the 2000 cells the limit holds.",
+ ["The engine caps a funded set at three projects on a coarse grid, which keeps the knapsack inside its time budget.",
+  "Z's 1502.0000 is refused as over a per-project ceiling of 1500.0000, and the grid drops W with it as the least valuable.",
+  "The four together would overshoot in money, so the overshoot flag removes the cheapest project before the answer is reported."],
+ "W, X and Y weigh 500 cells each and Z 501, one cell more than 2000; the engine funds X + Y + Z for 660.0000 and overLimit reads false (finding D4).")
+
+q(1,
+ "Between the tight and the slack free-project cases the only change is one extra million of limit, yet funded EMV rises by 10.0000 while funded capex does not move. What did that million pay for?",
+ "Only the cell the grid charges the free project; the money itself is never spent.",
+ ["The free project's capex, which the engine rounds up from 0.0000 to 1 million USD whenever a limit allows it.",
+  "A change of grid, since a limit of 101.0000 is coarse and every project's weight in cells is recalculated.",
+  "Nothing real, since both runs share one optimum and the 10.0000 between them is a tie the engine breaks by entry order."],
+ "The free project weighs max(1, round(capex / cell)), one cell (finding D2); at 100.0000 A uses every cell and the golden optimum of 70.0000 is missed by 10.0000.")
+
+q(0,
+ "An inventory is typed entirely in USD instead of million USD. Why can a check of risked EMV per million of capex, project by project, never reveal the slip?",
+ "Both amounts sit in the same unit, so it cancels, and OK-1's 0.747917 would come out of a USD inventory unchanged.",
+ ["The ratio prints to six decimals, which is too coarse to show a factor of a million between two inventories.",
+  "The engine converts USD to million USD before computing risked EMV, so every ratio is taken on corrected numbers.",
+  "The ratio divides by capex in grid cells, and a cell is the same size in either unit."],
+ "The engine holds no currency field, no unit field and no scale check; what a USD inventory does change is the grid, which turns coarse once the limit is over 5000.")
+
+q(2,
+ "A candidate project spends its capex over three years, most of it in the last one. How does the portfolio engine represent that phasing?",
+ "It does not: capex is one amount spent in one period, and no time value is added beyond the NPVs entered.",
+ ["It discounts later years at a rate implied by npv_p50, so it weighs less.",
+  "It splits the project into one knapsack item per year, each funded whole.",
+  "It charges the full capex against the limit but only the first year's share against the grid, at one cell per year of spend."],
+ "Projects are funded whole with capex never phased; OKONO's 450.0000 limit is met by 120.0000 plus 90.0000 plus 240.0000 as single amounts.")
+
+q(1,
+ "OK-3 costs 90.0000 to fund and loses 85.0000 if it fails. A modeller leaves fail_cost blank on the grounds that the engine already knows the capex. What does the engine use?",
+ "A fail cost of 0, because fail_cost is typed and never inferred from capex, so the dry hole is valued as free.",
+ ["The capex of 90.0000, since a missing fail cost defaults to the money spent.",
+  "The success-case NPV with its sign reversed, since failure is modelled as losing the prize the well was drilled for.",
+  "Nothing: the row is refused until a fail cost is entered, because the one line cannot be evaluated with a term missing."],
+ "A missing fail_cost defaults to 0; in missingNpvIsZero a typed fail_cost of 8 at pos 0.25 gives -6.0000, all of it from the failure branch.")
+
+q(3,
+ "An asset team wants the optimizer to favour the steadier of two look-alike wells whose rows match everywhere except entered percentiles running twice as wide on one. What does the knapsack do with the pair?",
+ "As identical: the percentiles feed only the risk summary.",
+ ["It prefers the narrower one, because the one line subtracts the success spread from npv_p50 before weighting it by pos.",
+  "It prefers the wider one, because a wider range raises npv_p10 and the one line counts upside above the success case.",
+  "It funds the two together as a hedge, since the knapsack spreads a limit across projects whose ranges differ."],
+ "Risked EMV = pos x npv_p50 - (1 - pos) x fail_cost, so equal inputs give equal EMVs; where only one fits, entry order decides, as in tieIdenticalProjects.")
+
+q(0,
+ "A slide divides OFON-1's estimate at completion of 27600000 by OKONO's limit of 450.0000 to show the AFE's share of the capital programme. What is wrong with it?",
+ "The two models share nothing: OKONO is a capital inventory in million USD and OFON-1 an AFE in whole USD, so the ratio mixes units and describes no real programme.",
+ ["Nothing is wrong, since both figures are amounts of planned spend, and a forecast from one model can be read against a limit from the other.",
+  "The estimate at completion should carry a P-label first, since it is a percentile of cost and must be named before any comparison.",
+  "The limit should be replaced by the 291.0000 of risked EMV, since a share of a programme is measured against its value."],
+ "This question examines the mix itself: OKONO's 450.0000 is million USD and OFON-1's 27600000 is USD, and the course never divides one model's numbers by the other's.")
+
+q(2,
+ "The Associate reading closes on OFON-1: as of 2027-08-15 its CPI is 1.009377 and its SPI 0.872063. Which of the two would read differently on a report dated another day inside the window?",
+ "SPI, because planned value comes from the calendar, while CPI rests on an earned value of 15231500 that is the same at every as-of date.",
+ ["CPI, because actual cost is read at the as-of date, while SPI is fixed once the progress on each line has been entered.",
+  "Both of them, since each index is a ratio to planned value and planned value is read from the calendar.",
+  "Neither of them, since both indices are computed once when the AFE is created and stored against each line."],
+ "OFON-1 earns 15231500 at every as-of date with CPI 1.009377; SPI is 1.141290 at 2027-06-30 and 0.872063 at 2027-08-15.")
+
+q(1,
+ "A capstone answer writes P90 capex 450.0000, P90 NPV -18.3574 and P(loss) 0.123600. Which P-label is used correctly?",
+ "Only the P90 on the NPV, the low case of simulated portfolio NPV at seed 20260829.",
+ ["Only the P90 on the capex, since a capex is an estimate and estimates take the exceedance convention while outcomes do not.",
+  "Both, since P90 names the value exceeded nine times in ten, cost or NPV.",
+  "Neither, since the engine's P90 is the high case of NPV."],
+ "This examines a mislabel: P-labels belong to a portfolio NPV outcome alone, with P90 the low case, and a capex, a limit or a probability never carries one.")
+
+q(3,
+ "Risking every row by hand before solving, a candidate's value for one project differs from the explorer's risked EMV column. What causes does the method name?",
+ "A mistyped input, or a clamp that fired: pos over 1 read as 1, pos under 0 as 0, a negative fail_cost as 0.",
+ ["Grid rounding, since the column shows EMV after capex is rounded to cells.",
+  "The simulation, since the column reports the mean of the seeded Monte Carlo draws, which never lands exactly on the hand line.",
+  "Correlation, which the explorer applies to each project's EMV before printing."],
+ "The engine keeps no record of the value typed before a clamp; OK-3's hand line, 0.250000 x 420.0000 - 0.750000 x 85.0000 = 41.2500, matching the engine shows the row was read as typed.")
+
+q(0,
+ "freeProjectZeroLimit and limitBelowEveryProject both return an empty set with an EMV of 0.0000. Which of them left value behind that the exact optimum would have taken?",
+ "freeProjectZeroLimit, where a project costing 0.0000 and worth 10.0000 needed one cell that a limit of 0.0000 does not hold; below every project nothing fits in money either.",
+ ["limitBelowEveryProject, since a limit of 30.0000 could have funded part of A, and the knapsack's refusal to split a project into fractions is where the value was lost in that case.",
+  "Both of them, since an empty set always means the grid has undershot and a better set of whole projects was squeezed out.",
+  "Neither, since an empty set is the engine refusing a limit it cannot use, and no optimum exists for either input."],
+ "The golden optimum for freeProjectZeroLimit is 10.0000 on free, a gap of -10.0000 (finding D2), while the golden optimum for limitBelowEveryProject is the empty set.")
+
+emit(Q, '/root/wt-ec45-recut/tools/course-banks/portfolio/beginner/ec5b_exam.json', expect_n=42)
+finish()

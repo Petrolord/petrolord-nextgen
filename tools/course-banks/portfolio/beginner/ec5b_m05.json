@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "Every OKONO limit from 300.0000 to 1000.0000 million USD reports a resolution of 1.0000. Why is the 450.0000 answer free of rounding?",
+  "options": [
+   "The money is entered in million USD, and any limit in million USD is solved on a grid of one million per cell.",
+   "Every capex and the limit are whole numbers and the limit is at most 5000, so each project weighs exactly its capex in cells.",
+   "overLimit reads false at every limit, and a false flag is the engine's certificate that no rounding changed the set.",
+   "The limit is under 2000, so the grid has more cells than million USD and rounds every capex finer than it is entered."
+  ],
+  "answer": 1,
+  "explanation": "The exact grid needs whole numbers and a limit of at most 5000; OKONO's capexes run from 60.0000 to 310.0000, all whole. The nonIntegerLimit case is in million USD too and still turns coarse at 0.225250."
+ },
+ {
+  "prompt": "The published nonIntegerLimit case enters its money in million USD with a limit of 450.5000. What grid does it solve on?",
+  "options": [
+   "The exact grid at 1.0000 per cell, since every capex is whole and the limit is far under 5000.",
+   "A coarse one at 225000.000000 per cell, since any limit that is not whole is converted to raw dollars before the cells are laid.",
+   "The exact grid with one extra cell for the 0.5000 of headroom, which is how a fractional limit is honoured.",
+   "A coarse one at 0.225250 per cell, because the limit is not a whole number."
+  ],
+  "answer": 3,
+  "explanation": "The cell is 450.5000 over 2000, which is 0.225250 million USD. Typing a little headroom moves the whole solve off the exact grid without any change to the projects."
+ },
+ {
+  "prompt": "The published rawDollars case reports a resolution of 225000.000000. What is that number?",
+  "options": [
+   "A capex cell in the money units entered, 450000000.0000 USD over 2000, because the limit is far over 5000.",
+   "The precision of the answer's value, meaning the risked EMV is reliable only to within 225000.000000 of the true optimum.",
+   "A cell in million USD, since the engine always solves portfolio money in million USD whatever units were typed.",
+   "The number of cells in the grid, which is why a raw-dollar inventory takes far longer to solve than one in million USD."
+  ],
+  "answer": 0,
+  "explanation": "Resolution is capex per cell and not precision in value: 225000.000000 USD here and 0.225250 million USD in nonIntegerLimit. The grid holds 2000 cells whenever it turns coarse."
+ },
+ {
+  "prompt": "rawDollars and nonIntegerLimit both solve on a coarse grid and both land on A, B and D at 250.0000 with a golden gap of 0.0000. What should a reader take from that?",
+  "options": [
+   "That a coarse grid is safe for these projects, since two matching answers show the rounding cancels out on this inventory.",
+   "That the grid does not matter once the golden gap is 0.0000, so the resolution can be ignored on a user's own inventory.",
+   "A coarse grid can give the exact answer and is still unproven, so the funded capex must be checked against the limit in money.",
+   "That both inventories are really the same exact problem, since the engine converts raw dollars to million USD before solving."
+  ],
+  "answer": 2,
+  "explanation": "Once capexes are rounded to cells the knapsack solves a nearby problem. A user running their own inventory has no golden, so a gap of 0.0000 is never available to them."
+ },
+ {
+  "prompt": "In the published gridOvershoot case, A costs 4000.0000 and B 2002.0000 against a limit of 6000.0000 million USD at 3.000000 per cell. How do A and B fit on the grid?",
+  "options": [
+   "B's 2002.0000 does not divide evenly and rounds down to 667 cells, so A's 1333 and B's 667 fit inside the 2000.",
+   "The limit is whole, so the grid is exact and A and B are simply charged their capex in one million USD cells.",
+   "The engine tolerates a breach smaller than one cell, and 2.0000 is under the 3.000000 a cell holds.",
+   "C's 1995.0000 rounds up to fill the spare cells, which pushes the knapsack toward B as the better value per cell."
+  ],
+  "answer": 0,
+  "explanation": "2002.0000 over 3.000000 rounds to 667 cells, and 1333 plus 667 fills the 2000 exactly. In money the pair costs 6002.0000, 2.0000 over the limit."
+ },
+ {
+  "prompt": "gridOvershoot returns A and B at 800.0000 with overLimit true and overLimitBy 2.0000. What is the best value that truly fits the limit?",
+  "options": [
+   "800.0000, since the flag records the breach and the set it flags is still the optimum the engine solved for.",
+   "780.0000 on A and C, found by checking in money, since the engine does not re-solve when it detects the overshoot.",
+   "800.0000 less a charge for the 2.0000 overshoot, since a flagged set is priced back inside the limit.",
+   "B and C, the only pair that leaves the 4000.0000 project out and so cannot breach the limit."
+  ],
+  "answer": 1,
+  "explanation": "C's 1995.0000 keeps A inside 6000.0000, giving 500.0000 plus 280.0000, which is 780.0000. The golden gap of 20.0000 is the value the engine reached by breaking the limit."
+ },
+ {
+  "prompt": "What did the EC5-0 repair change in the gridOvershoot case?",
+  "options": [
+   "It re-solves any overshooting set in money, so the case now returns A and C at 780.0000 with the flag kept for the record.",
+   "It moved limits over 5000 onto the exact grid, which removes the rounding that let B squeeze into the cells.",
+   "It refuses a set over the limit with an input error, the way a negative capex is refused, and funds nothing.",
+   "It added the overLimit and overLimitBy flag; the grid still rounds and the set is still A and B at 800.0000."
+  ],
+  "answer": 3,
+  "explanation": "Before EC5-0 a total capex of 6002.0000 sat beside a limit of 6000.0000 with nothing to mark it. The flag reports the overshoot of 2.0000 and does not correct it."
+ },
+ {
+  "prompt": "The golden gap on gridOvershoot is 20.0000, and on gridUndershoot it is -200.0000. Why are their signs opposite?",
+  "options": [
+   "Positive gaps are the grid rounding value up and negative gaps the grid rounding value down, both at 3.000000 per cell.",
+   "The sign follows overLimitBy, which is 2.0000 on one case and a negative shortfall on the other.",
+   "One case solves on the exact grid and the other on a coarse one, and the exact grid always overstates the value.",
+   "The gap is the engine's EMV less the exact optimum: positive where the engine broke the limit, negative where it left value out."
+  ],
+  "answer": 3,
+  "explanation": "800.0000 less 780.0000 is 20.0000, and 660.0000 less 860.0000 is -200.0000. The positive gap is value the budget cannot pay for."
+ },
+ {
+  "prompt": "gridUndershoot funds X, Y and Z at 4500.0000 against a limit of 6000.0000 million USD, with overLimit false and overLimitBy 0.0000. What does the false flag establish?",
+  "options": [
+   "That the grid did not change the answer, since the flag is raised whenever rounding moves the funded set in either direction.",
+   "That the 1500.0000 unspent is genuine, because the engine checks every left-out project against the unrounded capexes.",
+   "Only that the set is not over the limit; it cannot say a better set was squeezed out, and here W worth 200.0000 was.",
+   "That the answer is the exact optimum, since EC5-0 repaired the undershoot along with the overshoot."
+  ],
+  "answer": 2,
+  "explanation": "The flag watches the limit from one side only. The exact optimum funds all four at 860.0000, and finding D4 left this undershoot silent."
+ },
+ {
+  "prompt": "In gridUndershoot all four projects, W, X, Y and Z, fit inside 6000.0000 million USD in money. Why does the knapsack fund only three?",
+  "options": [
+   "At 3.000000 per cell 1499.0000 and 1502.0000 both round up, to 500 and 501 cells, so the four weigh one cell more than the 2000 the limit holds.",
+   "Z's 1502.0000 pushes the money total of the four over 6000.0000, so one project has to leave the set, and the knapsack drops W because it is the least valuable of them.",
+   "The knapsack keeps one project's capex unspent on a coarse grid, as a reserve against rounding up.",
+   "W's EMV of 200.0000 falls below the value the grid assigns to a single cell at this resolution, so its value is rounded to nothing and it cannot win a place in the set."
+  ],
+  "answer": 0,
+  "explanation": "Three weights of 500 and one of 501 exceed 2000 cells, so the knapsack drops W, the least valuable. The gap of -200.0000 is exactly W's risked EMV."
+ },
+ {
+  "prompt": "Two answers leave money unspent: OKONO at 750.0000 leaves 60.0000, and gridUndershoot leaves 1500.0000. Which unspent money is genuine?",
+  "options": [
+   "Both, because the optimizer never leaves money unspent unless no left-out project fits in the space.",
+   "OKONO's, because its grid is exact at 1.0000 and OK-6, the only project left, costs 310.0000; gridUndershoot's hides W, which fits in money.",
+   "gridUndershoot's, since a coarse grid is solved in cells, and a count of whole cells cannot leave out a project whose capex still fits inside the limit.",
+   "Neither, since unspent money on any grid means the knapsack stopped before it filled the limit."
+  ],
+  "answer": 1,
+  "explanation": "On OKONO no remaining project fits in 60.0000. On gridUndershoot the 1500.0000 left over would pay for W at 1499.0000."
+ },
+ {
+  "prompt": "freeProjectTightLimit has a free project with capex 0.0000 and EMV 10.0000 beside A at capex 100.0000 and EMV 60.0000, at a limit of 100.0000. Why does the engine fund A alone?",
+  "options": [
+   "A project with capex 0.0000 is treated as unentered and skipped, the same way a missing npv_p50 is read as zero.",
+   "The free project's EMV of 10.0000 is too small to beat A's, and the optimizer funds the single best project at a tight limit.",
+   "The grid weighs every project at max(1, round(capex / cell)), so the free project takes one cell and A already fills all 100.",
+   "overLimit would read true if both were funded, so the engine drops the cheaper project to keep the flag false."
+  ],
+  "answer": 2,
+  "explanation": "The golden optimum funds both for 70.0000, but on the grid they need one cell more than the limit holds. This is finding D2, which EC5-0 left as it was."
+ },
+ {
+  "prompt": "freeProjectSlack raises the limit to 101.0000 and the engine funds the free project and A at capex 100.0000 for 70.0000. What did the extra million buy?",
+  "options": [
+   "The one cell the grid charges the free project; the million itself is never spent.",
+   "A share of A's capex overrun, since the engine lets a tight budget fund A only once it has a million of contingency.",
+   "The free project's 10.0000 at a price of one million USD, which is its true cost once its capex is read correctly.",
+   "Nothing; the free project was funded because the larger limit moved the solve onto a coarse grid where zero capex rounds away."
+  ],
+  "answer": 0,
+  "explanation": "Funded capex is 100.0000 against a limit of 101.0000, so 1.0000 stays unspent. The gap to the golden optimum closes to 0.0000."
+ },
+ {
+  "prompt": "In the three published free-project cases, at limits of 0.0000, 100.0000 and 101.0000, overLimit reads false. Why does the flag stay quiet where the engine loses 10.0000?",
+  "options": [
+   "The flag counts cells rather than money, and a free project's one cell is inside the limit in every case.",
+   "EC5-0 repaired the free-project case, so the 10.0000 can no longer be lost.",
+   "A set worth less than its exact optimum raises overLimitBy instead, which reads 10.0000 in two of the three cases.",
+   "The engine's set is inside the limit in money every time, and the flag only watches for a set over it."
+  ],
+  "answer": 3,
+  "explanation": "The engine funds nothing, then A alone, then both, always within the limit. Finding D2 is left as it was, so a positive-EMV project with capex 0.0000 left out has to be noticed by hand."
+ },
+ {
+  "prompt": "The engine gives a user running their own coarse-grid inventory no gap to the exact optimum. Where did the golden's 860.0000 on gridUndershoot come from?",
+  "options": [
+   "The engine's own exact re-check in money, which it runs and prints beside the answer whenever the reported resolution is not 1.0000.",
+   "The test suite solved the exact problem separately; the engine never tests its answer against the unrounded capexes.",
+   "The overLimitBy field, read as the value a larger limit would have added to the funded set.",
+   "The Suite's resolution display, which shows the gap to the exact optimum whenever the grid turns coarse."
+  ],
+  "answer": 1,
+  "explanation": "A user sees 660.0000 and a clean flag, and the 200.0000 left out is found only by checking the unrounded capexes in money."
+ }
+]

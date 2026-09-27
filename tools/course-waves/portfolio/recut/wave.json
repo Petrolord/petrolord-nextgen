@@ -13,7 +13,7 @@
   "2.5631": "twice z at 0.90, the P10 to P90 spread divisor",
   "1.2816": "z at 0.90"
  },
- "repo": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-nextgen-ec6",
+ "repo": "/root/wt-ec45-recut",
  "leakScales": [
   "1",
   "x1e3",
