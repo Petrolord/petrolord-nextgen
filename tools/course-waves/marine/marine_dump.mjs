@@ -156,12 +156,22 @@ const { EXCEEDANCE_DEFINITION } = PCT;
 // checked against its text by quote_check.py (which reads the texts), and
 // each is printed as the text prints it. None is computed from.
 const TEXT = {
-  ar51: { cite: 'Adan and Resing (2015), Table 5.1', rows: [['1', '0.90', '9.00'], ['2', '0.85', '4.26'], ['5', '0.76', '1.53'], ['10', '0.67', '0.67'], ['20', '0.55', '0.28']] },
+  ar51: { cite: 'Adan and Resing (2015), Table 5.1', mu: '1', rho: '0.9', servers: '1, 2, 5, 10 and 20', rows: [['1', '0.90', '9.00'], ['2', '0.85', '4.26'], ['5', '0.76', '1.53'], ['10', '0.67', '0.67'], ['20', '0.55', '0.28']] },
   ar52: { cite: 'Adan and Resing (2015), Table 5.2', rows: [['1', '0.90', '9.00', '9'], ['2', '0.95', '9.26', '19'], ['5', '0.98', '9.50', '51'], ['10', '0.99', '9.64', '105'], ['20', '0.995', '9.74', '214']] },
   iv: { cite: 'Iversen (2001), Example 12.3.1', s1: '100', a1: '20', n1: '32', w1: '0.075', s2: '10', a2: '2', n2: '5', w2: '0.199', total: '0.274' },
   sk1: { cite: 'Skoko et al. (2024), Tables 1 and 4', sail: '0.5', port: '0.03', price: '870', sailDay: '10,440.00', portDay: '626.4', psvNmDay: '240', ahtsNmDay: '264', usable: '85%' },
   sk5: { cite: 'Skoko et al. (2024), Tables 5 and 7', ahtsMarine: '7.00', ahtsNav: '0.60', ahtsPort: '2.40', ahtsFuel: '80,847.36', psvPort: '3.81', psvSail: '13.18', psvFacility: '2.40', psvStbyPort: '2.40', psvSupply: '4.14', psvFuel: '186,274.10' },
-  ffd: { cite: 'Wikipedia, First-fit-decreasing bin packing (revision 1317275412)', b60: '{44,8,8}, {24,24,6,6}, {22,21,17}', b61: '{44,17}, {24,24,8}, {22,21,8,6}, {6}', hl: '{51,12,12}, {28,28,10}, {28,27,10,10}, {25,10,10,10,10,10}', dosaBins: '8', dosaOpt: '6' },
+  ffd: { cite: 'Wikipedia, First-fit-decreasing bin packing (revision 1317275412)', cap60: '60', cap61: '61', cap75: '75', example: 'Example 5.1', bound: '11/9 of the optimum plus 6/9', b60: '{44,8,8}, {24,24,6,6}, {22,21,17}', b61: '{44,17}, {24,24,8}, {22,21,8,6}, {6}', hl: '{51,12,12}, {28,28,10}, {28,27,10,10}, {25,10,10,10,10,10}', dosaBins: '8', dosaOpt: '6' },
+};
+// THE FORMULAS THE SOURCES PRINT, typed once with their citation, in the
+// course's own notation (the engine's basis states the same formulas).
+const FORMULA = {
+  lq: 'E(Lq) = PiW rho / (1 - rho)',
+  wq: 'E(W) = PiW S / (c (1 - rho))',
+  cosmetatos: 'the M/M/c wait over 2, times 1 plus (1 - rho)(c - 1)(sqrt(4 + 5c) - 2) / (16 rho c)',
+  pk: 'rho S / (2 (1 - rho))',
+  mdOne: 'At c = 1 the correction term is 0',
+  utilBelow: 'utilisation rho = a / c below 1',
 };
 const EXPORTS = [
   ['voyagePlan', 'the voyages of one vessel on a stated route', 'vessel, products, installations (each with its cargo), route, portHours, weather, fuelPricePerT', 'per voyage the legs, the hours by activity with the weather factor, the days, the fuel by activity, the fuel cost, the load, the utilisation of every capacity constraint, the binding constraint, every overloaded constraint and the reasons; the totals over the voyages'],
@@ -285,7 +295,7 @@ w();
 const two = (x) => (Math.round(x * 100) / 100).toFixed(2);
 const r51 = [1, 2, 5, 10, 20].map((c) => runG(`adan-resing-table-5-1-c${c}`));
 const a51 = [1, 2, 5, 10, 20].map((c) => argsOf(`adan-resing-table-5-1-c${c}`));
-w(`CHECK ONE: ADAN AND RESING, TABLE 5.1 (text: the M/M/c delay probability and mean wait for a mean service time of 1 and an occupation rate of 0.9, at 1, 2, 5, 10 and 20 servers). The golden inputs adan-resing-table-5-1-c1 to adan-resing-table-5-1-c20 state a service of ${S(a51[0].service.fixedHours)} fixed hour, a working day of ${S(a51[0].workingHoursPerDay)} hours and ${a51.map((a) => S(a.arrivalsPerDay)).join(', ')} arrivals a day, so the offered load is 0.9 per berth. The engine returns:`);
+w(`CHECK ONE: ADAN AND RESING, TABLE 5.1 (text: the M/M/c delay probability and mean wait for a mean service time of ${TEXT.ar51.mu} and an occupation rate of ${TEXT.ar51.rho}, at ${TEXT.ar51.servers} servers). The golden inputs adan-resing-table-5-1-c1 to adan-resing-table-5-1-c20 state a service of ${S(a51[0].service.fixedHours)} fixed hour, a working day of ${S(a51[0].workingHoursPerDay)} hours and ${a51.map((a) => S(a.arrivalsPerDay)).join(', ')} arrivals a day, so the offered load is ${f6(r51[0].berthUtilisation)} per berth (engine). The engine returns:`);
 w();
 table(['golden input', 'berths', 'arrivals a day (golden input)', 'berth utilisation (engine)', 'delay probability (engine)', 'printed (text)', 'mean wait (engine)', 'the engine\'s mean wait at two decimals (derived)', 'printed (text)'],
   r51.map((r, i) => [`adan-resing-table-5-1-c${TEXT.ar51.rows[i][0]}`, TEXT.ar51.rows[i][0], S(a51[i].arrivalsPerDay), f6(r.berthUtilisation), f6(r.probabilityWait), TEXT.ar51.rows[i][1], f6(r.meanWaitHours), two(r.meanWaitHours), TEXT.ar51.rows[i][2]]));
@@ -296,13 +306,13 @@ r51.forEach((r, i) => {
 must('AR 5.1 c=5: the exact mean wait rounds to 1.52 and the table prints 1.53', two(r51[2].meanWaitHours) === '1.52' && TEXT.ar51.rows[2][2] === '1.53', r51[2].meanWaitHours);
 const slip = Number(TEXT.ar51.rows[2][2]) - r51[2].meanWaitHours;
 w();
-w(`A PRINTED SLIP AT FIVE BERTHS. Every printed figure in the table is the engine's figure rounded to two decimals except one: at 5 berths the engine's mean wait is ${f6(r51[2].meanWaitHours)}, which rounds to ${two(r51[2].meanWaitHours)}, and the table prints ${TEXT.ar51.rows[2][2]} (text). The printed figure sits ${f6(slip)} above the engine's (derived: ${TEXT.ar51.rows[2][2]} less ${f6(r51[2].meanWaitHours)}), which is more than the half unit of 0.005 a two-decimal rounding allows. The course teaches it as a slip in the printed table; the engine's figure is the one the formula gives.`);
+w(`A PRINTED SLIP AT FIVE BERTHS. Every printed figure in the table is the engine's figure rounded to two decimals except one: at ${TEXT.ar51.rows[2][0]} berths the engine's mean wait is ${f6(r51[2].meanWaitHours)}, which rounds to ${two(r51[2].meanWaitHours)}, and the table prints ${TEXT.ar51.rows[2][2]} (text). The printed figure sits ${f6(slip)} above the engine's (derived: ${TEXT.ar51.rows[2][2]} less ${f6(r51[2].meanWaitHours)}), which is more than the half unit a two-decimal rounding allows. The course teaches it as a slip in the printed table; the engine's figure is the one the formula gives.`);
 must('the slip is above 0.005', slip > 0.005 && slip < 0.0051, slip);
 w();
 // Table 5.2
 const r52 = [1, 2, 5, 10, 20].map((c) => runG(`adan-resing-table-5-2-c${c}`));
 const a52 = [1, 2, 5, 10, 20].map((c) => argsOf(`adan-resing-table-5-2-c${c}`));
-w('CHECK TWO: ADAN AND RESING, TABLE 5.2 (text: a fixed surplus capacity of 0.1 server, so the occupation rate rises with the number of servers). The golden inputs adan-resing-table-5-2-c1 to adan-resing-table-5-2-c20 state the same service and working day with the arrivals below:');
+w('CHECK TWO: ADAN AND RESING, TABLE 5.2 (text: the surplus capacity held at 0.1 of a server, so the occupation rate rises with the number of servers). The golden inputs adan-resing-table-5-2-c1 to adan-resing-table-5-2-c20 state the same service and working day with the arrivals below:');
 w();
 table(['golden input', 'berths', 'arrivals a day (golden input)', 'berth utilisation (engine)', 'printed rho (text)', 'mean wait (engine)', 'printed (text)', 'mean in the system (engine)', 'printed (text)'],
   r52.map((r, i) => [`adan-resing-table-5-2-c${TEXT.ar52.rows[i][0]}`, TEXT.ar52.rows[i][0], S(a52[i].arrivalsPerDay), f6(r.berthUtilisation), TEXT.ar52.rows[i][1], f6(r.meanWaitHours), TEXT.ar52.rows[i][2], f6(r.meanInSystem), TEXT.ar52.rows[i][3]]));
@@ -358,7 +368,7 @@ const psvArgs = {
 };
 const psv = success('voyagePlan on the Skoko Table 5 PSV days (stated probe)', E.voyagePlan(clone(psvArgs)));
 const psvGap = 186274.10 - psv.voyages[0].fuelCost;
-w(`CHECK SIX, A PRINTED TOTAL THE ROUNDED DAYS DO NOT REPRODUCE: SKOKO ET AL., TABLES 5 AND 7, THE PSV (text: the optimal month of the PSV has ${TEXT.sk5.psvPort} days in port, ${TEXT.sk5.psvSail} days sailing, ${TEXT.sk5.psvFacility} days of standby at the facility, ${TEXT.sk5.psvStbyPort} days of standby in port and ${TEXT.sk5.psvSupply} days of offshore supply; Table 7 prints an optimal fuel cost of USD ${TEXT.sk5.psvFuel}). A stated probe puts the sailing days on a dedicated voyage of ${f6(psvArgs.installations[0].distanceFromBaseNm)} NM each way at ${S(psvArgs.vessel.speedKnots)} knots, the offshore supply days at the sailing burn as ${f6(psvArgs.installations[0].fieldHours)} field hours, and the port and both standby days at the port burn as ${f6(psvArgs.portHours)} port hours, at USD 870 a tonne. The engine returns ${f6(psv.voyages[0].fuelT.total)} t and a fuel cost of ${f6(psv.voyages[0].fuelCost)}, which is ${f6(psvGap)} short of the printed total (derived). The rounded days the table prints do not reproduce the printed figure, so the course uses the AHTS row and leaves the PSV total out.`);
+w(`CHECK SIX, A PRINTED TOTAL THE ROUNDED DAYS DO NOT REPRODUCE: SKOKO ET AL., TABLES 5 AND 7, THE PSV (text: the optimal month of the PSV has ${TEXT.sk5.psvPort} days in port, ${TEXT.sk5.psvSail} days sailing, ${TEXT.sk5.psvFacility} days of standby at the facility, ${TEXT.sk5.psvStbyPort} days of standby in port and ${TEXT.sk5.psvSupply} days of offshore supply; Table 7 prints an optimal fuel cost of USD ${TEXT.sk5.psvFuel}). A stated probe puts the sailing days on a dedicated voyage of ${f6(psvArgs.installations[0].distanceFromBaseNm)} NM each way at ${S(psvArgs.vessel.speedKnots)} knots, the offshore supply days at the sailing burn as ${f6(psvArgs.installations[0].fieldHours)} field hours, and the port and both standby days at the port burn as ${f6(psvArgs.portHours)} port hours, at USD ${S(psvArgs.fuelPricePerT)} a tonne. The engine returns ${f6(psv.voyages[0].fuelT.total)} t and a fuel cost of ${f6(psv.voyages[0].fuelCost)}, which is ${f6(psvGap)} short of the printed total (derived). The rounded days the table prints do not reproduce the printed figure, so the course uses the AHTS row and leaves the PSV total out.`);
 must('the Skoko PSV probe gives 186214.104 and misses the printed total by 59.996', Math.abs(psv.voyages[0].fuelCost - 186214.104) < 1e-6 && Math.abs(psvGap - 59.996) < 1e-6, psv.voyages[0].fuelCost);
 w();
 // Wikipedia FFD
@@ -374,7 +384,7 @@ const f60 = ffdRun('ffd-wikipedia-cgj-capacity-60');
 const f61 = ffdRun('ffd-wikipedia-cgj-capacity-61');
 const fhl = ffdRun('ffd-wikipedia-huang-lu-capacity-75');
 const fds = ffdRun('ffd-wikipedia-dosa-tight-example');
-w(`CHECK SEVEN: THE FIRST-FIT DECREASING EXAMPLE AT CAPACITY 60 AND 61 (text: ${TEXT.ffd.cite}, the example of Coffman, Garey and Johnson (1978): ten items packed into bins of capacity 60 give ${TEXT.ffd.b60}, and into bins of capacity 61 give ${TEXT.ffd.b61}). The golden inputs state each item as a footprint one metre wide with its size as its length, a usable fraction of 1 and no weight, and ${S(f60.a.voyages)} voyages. The engine packs, by the voyage each footprint lands on:`);
+w(`CHECK SEVEN: THE FIRST-FIT DECREASING EXAMPLE AT CAPACITY ${TEXT.ffd.cap60} AND ${TEXT.ffd.cap61} (text: ${TEXT.ffd.cite}, the example of Coffman, Garey and Johnson (1978): ten items packed into bins of capacity ${TEXT.ffd.cap60} give ${TEXT.ffd.b60}, and into bins of capacity ${TEXT.ffd.cap61} give ${TEXT.ffd.b61}). The golden inputs state each item as a footprint one metre wide with its size as its length, a usable fraction of ${S(f60.a.deck.usableFraction)} and no weight, and ${S(f60.a.voyages)} voyages. The engine packs, by the voyage each footprint lands on:`);
 w();
 table(['golden input', 'deck area', 'the engine\'s voyages, by footprint', 'voyages used (engine)', 'lower bound (engine)'], [
   ['ffd-wikipedia-cgj-capacity-60', S(f60.a.deck.areaM2), f60.printed, S(f60.r.voyagesUsed), S(f60.r.lowerBound)],
@@ -382,13 +392,13 @@ table(['golden input', 'deck area', 'the engine\'s voyages, by footprint', 'voya
 ]);
 must('FFD 60 and 61 pack exactly as printed', f60.printed === TEXT.ffd.b60 && f61.printed === TEXT.ffd.b61, `${f60.printed} / ${f61.printed}`);
 w();
-w(`A LARGER DECK, MORE VOYAGES. With capacity 61 the same ten footprints take ${S(f61.r.voyagesUsed)} voyages where capacity 60 takes ${S(f60.r.voyagesUsed)}, while the lower bound stays at ${S(f61.r.lowerBound)} (engine): first-fit decreasing is not monotone in the capacity.`);
+w(`A LARGER DECK, MORE VOYAGES. With capacity ${S(f61.a.deck.areaM2)} the same ten footprints take ${S(f61.r.voyagesUsed)} voyages where capacity ${S(f60.a.deck.areaM2)} takes ${S(f60.r.voyagesUsed)}, while the lower bound stays at ${S(f61.r.lowerBound)} (engine): first-fit decreasing is not monotone in the capacity.`);
 must('FFD is not monotone here: 61 uses more voyages than 60', f61.r.voyagesUsed > f60.r.voyagesUsed && f61.r.lowerBound === f60.r.lowerBound, 'monotone');
 w();
-w(`CHECK EIGHT: HUANG AND LU (2021), EXAMPLE 5.1, AS THE ARTICLE PRINTS IT (text: capacity 75, four bins ${TEXT.ffd.hl}). The engine packs the golden input ffd-wikipedia-huang-lu-capacity-75 into ${fhl.printed}, ${S(fhl.r.voyagesUsed)} voyages (engine).`);
+w(`CHECK EIGHT: HUANG AND LU (2021), ${TEXT.ffd.example.toUpperCase()}, AS THE ARTICLE PRINTS IT (text: at capacity ${TEXT.ffd.cap75} the list packs into ${TEXT.ffd.hl}). The engine packs the golden input ffd-wikipedia-huang-lu-capacity-75 into ${fhl.printed}, ${S(fhl.r.voyagesUsed)} voyages (engine).`);
 must('Huang and Lu packs as printed', fhl.printed === TEXT.ffd.hl, fhl.printed);
 w();
-w(`CHECK NINE: THE TIGHT WORST CASE OF DOSA (2007), SCALED TO CAPACITY ${S(fds.a.deck.areaM2)} (text: the optimum packs the items into ${TEXT.ffd.dosaOpt} bins and first-fit decreasing uses ${TEXT.ffd.dosaBins}, which is 11/9 of the optimum plus 6/9). The engine uses ${S(fds.r.voyagesUsed)} voyages on the golden input ffd-wikipedia-dosa-tight-example, packing ${fds.printed}, with a lower bound of ${S(fds.r.lowerBound)} (engine). The lower bound is the area bound; the optimum of ${TEXT.ffd.dosaOpt} is the text's, and the engine does not search for an optimum.`);
+w(`CHECK NINE: THE TIGHT WORST CASE OF DOSA (2007), SCALED TO CAPACITY ${S(fds.a.deck.areaM2)} (text: the optimum packs the items into ${TEXT.ffd.dosaOpt} bins and first-fit decreasing uses ${TEXT.ffd.dosaBins}, which is ${TEXT.ffd.bound}). The engine uses ${S(fds.r.voyagesUsed)} voyages on the golden input ffd-wikipedia-dosa-tight-example, packing ${fds.printed}, with a lower bound of ${S(fds.r.lowerBound)} (engine). The lower bound is the area bound; the optimum of ${TEXT.ffd.dosaOpt} is the text's, and the engine does not search for an optimum.`);
 must('Dosa: 8 voyages used, lower bound 6', fds.r.voyagesUsed === 8 && fds.r.lowerBound === 6, `${fds.r.voyagesUsed} ${fds.r.lowerBound}`);
 
 /* ============================================================ SECTION 4 */
@@ -506,7 +516,7 @@ const PANEL_REFUSALS = [
   ['ekene-deck-one-voyage-ffd', 'rule'], ['ekene-deck-one-voyage-ffd', 'voyages'], ['ekene-deck-one-voyage-ffd', 'deck.loadT'],
   ['ekene-base-mmc', 'model'], ['ekene-base-mmc', 'service.concurrent'], ['ekene-base-mmc', 'workingHoursPerDay'], ['ekene-base-mmc', 'berths'],
 ];
-const fieldOfPath = (p) => p.replace(/\.(\d+)(?=\.|$)/g, '[$1]');
+const fieldOfPath = (p) => p.replace(/\.(\d+)(?=\.|$)/g, (m, d) => `[${d}]`);
 table(['golden input', 'the input removed (stated probe)', 'field', 'the engine\'s message, verbatim'], PANEL_REFUSALS.map(([id, path]) => {
   const want = fieldOfPath(path);
   const r = refusal(`${GC[id].fn} on ${id} with ${path} removed`, E[GC[id].fn](dropAt(argsOf(id), path)), want);
@@ -519,9 +529,9 @@ w('THE ORDER OF REFUSALS. A box that carries an unknown key AND lacks a required
 quote(orderR.error);
 w();
 w('Four rules the tables show:');
-w('- An input with no default is refused when it is missing, and the message says so: a speed, a deck area and its usable fraction, a deck load, a deadweight, a tank for every product (0 when the vessel has none), every fuel burn, a density and a kind for every product, the route and its legs, port hours, the weather factor and the activities it slows, the fuel price, the period and the available days, both rounding rules, the minimum visits, the packing rule and the voyages of a deck plan, the berths, the arrivals, the working day, every service term, the concurrent choice, the queue model, the demand factor, the planned vessels, the draws and the seed.');
+w('- An input with no default is refused when it is missing, and the message says so: a speed, a deck area and its usable fraction, a deck load, a deadweight, a tank for every product (none stated as zero capacity), every fuel burn, a density and a kind for every product, the route and its legs, port hours, the weather factor and the activities it slows, the fuel price, the period and the available days, both rounding rules, the minimum visits, the packing rule and the voyages of a deck plan, the berths, the arrivals, the working day, every service term, the concurrent choice, the queue model, the demand factor, the planned vessels, the draws and the seed.');
 w('- An input key a function does not read is refused at whatever level it sits (a top-level option, a vessel term, a fuel activity, a cargo, a bulk product, a tank, an item, a deck term, a triangular, a service term), with the path to the key and the full list of accepted keys.');
-w('- An input that contradicts the route or the vessel is refused by name: a distance from the base on a milk run, legs or stops on a dedicated voyage, a load of a product the vessel has no tank for, available days above the period, a weather factor below 1 or above the cap, a berth utilisation at or above 1.');
+w('- An input that contradicts the route or the vessel is refused by name: a distance from the base on a milk run, legs or stops on a dedicated voyage, a load of a product the vessel has no tank for, available days above the period, a weather factor below the calm factor or above the cap, a berth utilisation at or above 1.');
 w('- A stated figure inside a message is printed as it was given; a computed one prints to six decimals, and a printed bound is moved to the accepted side at the sixth decimal (' + ref('boundaries') + ').');
 
 /* ============================================================ SECTION 6 */
@@ -574,17 +584,17 @@ must('the four dedicated voyages together take longer than the one milk run', ek
 w();
 const zl = runG('voyage-zero-distance-leg');
 const zlA = argsOf('voyage-zero-distance-leg');
-w(`A LEG OF ZERO. Two installations at one location are a leg of 0 NM, which is accepted (golden input voyage-zero-distance-leg: legs ${zlA.route.legsNm.map(S).join(', ')} NM at ${S(zlA.vessel.speedKnots)} knots). The engine returns ${f6(zl.voyages[0].hours.sailing)} sailing hours and ${f6(zl.voyages[0].hours.total)} hours in all.`);
+w(`A LEG OF ZERO. Two installations at one location are a leg of ${S(zlA.route.legsNm[1])} NM, which is accepted (golden input voyage-zero-distance-leg: legs ${zlA.route.legsNm.map(S).join(', ')} NM at ${S(zlA.vessel.speedKnots)} knots). The engine returns ${f6(zl.voyages[0].hours.sailing)} sailing hours and ${f6(zl.voyages[0].hours.total)} hours in all.`);
 
 /* ============================================================ SECTION 9 */
 
-section('weather', 'Weather: one stated factor and the activities it slows', ['Associate m03 l01', 'Associate m03 l02', 'Associate m06 l02']);
-w(`ONE STATED FACTOR. Weather enters as one stated factor from 1 to ${S(D.MAX_WEATHER_FACTOR)} that multiplies the time of the activities the call names in weather.appliesTo (any of sailing, port and field, at least one, none repeated). An activity the call does not name keeps its calm time. The list of activities is required, so the call says which activities the weather slows; fuel follows time. A factor of 1 is calm.`);
-w();
 const ekC = runG('ekene-voyage-calm');
 const ekW = runG('ekene-voyage-weather-on-all-activities');
 const cA = argsOf('ekene-voyage-calm');
 const wA = argsOf('ekene-voyage-weather-on-all-activities');
+section('weather', 'Weather: one stated factor and the activities it slows', ['Associate m03 l01', 'Associate m03 l02', 'Associate m06 l02']);
+w(`ONE STATED FACTOR. Weather enters as one stated factor from ${S(cA.weather.factor)} to ${S(D.MAX_WEATHER_FACTOR)} that multiplies the time of the activities the call names in weather.appliesTo (any of sailing, port and field, at least one, none repeated). An activity the call does not name keeps its calm time. The list of activities is required, so the call says which activities the weather slows; fuel follows time. A factor of ${S(cA.weather.factor)} is calm (golden input ekene-voyage-calm).`);
+w();
 w('THE SAME MILK RUN THREE WAYS (golden inputs, the Ekene PSV):');
 w();
 table(['golden input', 'weather factor', 'applies to', 'sailing hours', 'port hours', 'field hours', 'total hours', 'days'], [
@@ -612,7 +622,7 @@ must('fuel is hours times the burn by activity and the cost is tonnes times the 
 w();
 w(`At the fixture burns (${E.ACTIVITIES.map((a) => `${a} ${S(gEk.vessel.fuelTPerHour[a])} t an hour`).join(', ')}) and USD ${S(gEk.fuelPricePerT)} a tonne, the rainy-season allowance on sailing and field time adds ${f6(ekVv.fuelCost - ekC.voyages[0].fuelCost)} to the calm voyage\'s fuel bill (derived: the two engine fuel costs, less). Adding port time to the allowance adds ${f6(ekW.voyages[0].fuelCost - ekVv.fuelCost)} more (derived), because port burns ${S(gEk.vessel.fuelTPerHour.port)} t an hour.`);
 w();
-w(`THE PUBLISHED FUEL FIGURES. Skoko et al. (2024) print the daily fuel cost of a PSV at 0.5 and 0.03 t an hour and USD 870 a tonne, and the optimal fuel of an AHTS month; the engine reproduces both (${ref('published')}, checks four and five).`);
+w(`THE PUBLISHED FUEL FIGURES. Skoko et al. (2024) print the daily fuel cost of a PSV at ${TEXT.sk1.sail} and ${TEXT.sk1.port} t an hour and USD ${TEXT.sk1.price} a tonne, and the optimal fuel of an AHTS month; the engine reproduces both (${ref('published')}, checks four and five).`);
 
 /* ============================================================ SECTION 11 */
 
@@ -634,7 +644,7 @@ w(`A LIQUID HEAVIER THAN WATER (golden input voyage-deadweight-from-density: ${S
 reasons(dwd.voyages[0].reasons);
 w();
 const tz = runG('voyage-tank-zero-capacity-empty-ok');
-w(`A TANK OF 0. Every product needs a stated tank, 0 when the vessel has none for it. A tank of 0 with nothing loaded in it is accepted (golden input voyage-tank-zero-capacity-empty-ok: feasible ${S(tz.voyages[0].feasible)}, its utilisation reported as ${f6(tz.voyages[0].constraints.find((c) => c.constraint.startsWith('tank')).utilisation)}); a load of that product is refused by name, and a missing tank is refused too (${ref('refusals')}: voyage-refuse-tank-zero-capacity, voyage-refuse-milk-run-tank-zero, voyage-refuse-tank-missing).`);
+w(`A TANK OF ZERO. Every product needs a stated tank, stated as zero when the vessel has none for it. A zero tank with nothing loaded in it is accepted (golden input voyage-tank-zero-capacity-empty-ok: feasible ${S(tz.voyages[0].feasible)}, its utilisation reported as ${f6(tz.voyages[0].constraints.find((c) => c.constraint.startsWith('tank')).utilisation)}); a load of that product is refused by name, and a missing tank is refused too (${ref('refusals')}: voyage-refuse-tank-zero-capacity, voyage-refuse-milk-run-tank-zero, voyage-refuse-tank-missing).`);
 
 /* ============================================================ SECTION 12 */
 
@@ -646,6 +656,7 @@ const bnd2 = runG('voyage-one-over-deck-load');
 const bnd3 = runG('voyage-binding-tie-goes-to-deck-area');
 const bnd4 = runG('voyage-binding-tank');
 const bnd5 = runG('voyage-decimal-sum-at-capacity');
+const bnd5A = argsOf('voyage-decimal-sum-at-capacity');
 const rowB = (id, r) => { const v = r.voyages[0]; return [id, `${v.binding.constraint} at ${f6(v.binding.utilisation)}`, S(v.feasible), list(v.overloaded), v.reasons.join(' / ')]; };
 table(['golden input', 'binding (engine)', 'feasible (engine)', 'overloaded (engine)', 'the engine\'s reasons, verbatim'], [
   rowB('voyage-at-capacity-feasible', bnd1), rowB('voyage-one-over-deck-load', bnd2), rowB('voyage-binding-tie-goes-to-deck-area', bnd3),
@@ -657,7 +668,7 @@ must('the tie case has deck area and deck load at the same utilisation', tieRows
 w();
 w(`THE TIE. On voyage-binding-tie-goes-to-deck-area, ${tieRows.join(' and ')} share a utilisation of ${f6(bnd3.voyages[0].binding.utilisation)} (engine), and the engine names deck area, the first in the order.`);
 w();
-w(`A DECIMAL SUM AT CAPACITY. On voyage-decimal-sum-at-capacity two deck cargoes of 0.1 and 0.2 m2 fill a 0.3 m2 deck; the double sum is ${S(bnd5.voyages[0].load.deckAreaM2)} and its utilisation ${S(bnd5.voyages[0].binding.utilisation)} (engine, printed in full), and the twelve-digit rule reads it as at capacity, so the voyage is feasible.`);
+w(`A DECIMAL SUM AT CAPACITY. On voyage-decimal-sum-at-capacity two deck cargoes of ${S(bnd5A.installations[0].cargo.deckAreaM2)} and ${S(bnd5A.installations[1].cargo.deckAreaM2)} m2 fill a ${S(bnd5A.vessel.deckAreaM2)} m2 deck; the double sum is ${S(bnd5.voyages[0].load.deckAreaM2)} and its utilisation ${S(bnd5.voyages[0].binding.utilisation)} (engine, printed in full), and the twelve-digit rule reads it as at capacity, so the voyage is feasible.`);
 w();
 const ekA = runG('ekene-voyage-milk-run-ahts');
 w(`AN OVERLOADED VOYAGE. The same voyage cargo on the Ekene AHTS milk run (golden input ekene-voyage-milk-run-ahts) is overloaded on ${list(ekA.voyages[0].overloaded)}, with ${ekA.voyages[0].binding.constraint} binding at ${f6(ekA.voyages[0].binding.utilisation)} (engine). The engine\'s reasons, verbatim:`);
@@ -670,7 +681,7 @@ w('READING A VOYAGE PLAN, in the order the engine returns it: the legs and their
 /* ============================================================ SECTION 13 */
 
 section('endtoend', 'Planning a voyage end to end: a PSV and an AHTS on one route, calm and rainy season', ['Associate m06']);
-w('THE TWO VESSELS ON THE SAME MILK RUN AND THE SAME CARGO (golden inputs ekene-voyage-milk-run-psv and ekene-voyage-milk-run-ahts, weather factor 1.2 on sailing and field time):');
+w(`THE TWO VESSELS ON THE SAME MILK RUN AND THE SAME CARGO (golden inputs ekene-voyage-milk-run-psv and ekene-voyage-milk-run-ahts, weather factor ${S(gEk.weather.factor)} on ${gEk.weather.appliesTo.join(' and ')} time):`);
 w();
 table(['vessel', 'speed, knots (fixture)', 'total hours (engine)', 'fuel t (engine)', 'fuel cost (engine)', 'binding (engine)', 'feasible (engine)'], [
   [FX.vessels.psv.name, S(FX.vessels.psv.speedKnots), f6(ekVv.hours.total), f6(ekVv.fuelT.total), f6(ekVv.fuelCost), `${ekVv.binding.constraint} at ${f6(ekVv.binding.utilisation)}`, S(ekVv.feasible)],
@@ -704,11 +715,12 @@ const mvE = runG('fleet-min-visits-equal-demand-names-demand');
 const nd = runG('fleet-no-demand-no-visits');
 const td = runG('fleet-tank-drives');
 const drv = (id, r) => { const a = argsOf(id); const s = r.voyageSets[0]; return [id, `${f6(a.installations[0].demand.deckAreaM2)} m2${a.installations[0].demand.bulk ? `, ${bulkOf(a.installations[0].demand.bulk)} m3` : ''}`, S(a.installations[0].minVisits), f6(s.voyagesExact), S(s.voyages), s.drivenBy]; };
-w('WHAT DRIVES THE COUNT (golden inputs, one dedicated installation, a deck area capacity of 100 m2 and a tank of 100 m3):');
+w(`WHAT DRIVES THE COUNT (golden inputs, one dedicated installation, a deck area capacity of ${S(td.voyageSets[0].constraints[0].capacity)} m2 and a tank of ${S(td.voyageSets[0].constraints[3].capacity)} m3):`);
 w();
 table(['golden input', 'demand', 'minimum visits', 'voyages before rounding (engine)', 'voyages (engine)', 'driven by (engine)'], [
   drv('fleet-demand-exactly-three-voyages', runG('fleet-demand-exactly-three-voyages')), drv('fleet-min-visits-drive', mv), drv('fleet-min-visits-equal-demand-names-demand', mvE),
   drv('fleet-no-demand-no-visits', nd), drv('fleet-tank-drives', td)]);
+must('the four fleet probes share a 100 m2 deck area capacity and a 100 m3 tank', ['fleet-demand-exactly-three-voyages', 'fleet-min-visits-drive', 'fleet-min-visits-equal-demand-names-demand', 'fleet-no-demand-no-visits', 'fleet-tank-drives'].every((id) => runG(id).voyageSets[0].constraints[0].capacity === 100 && runG(id).voyageSets[0].constraints[3].capacity === 100), 'caps');
 must('minimum visits drive at 3 over 2.5; demand named at an equal 3; no demand; the tank drives', mv.voyageSets[0].drivenBy === 'minimum visits' && mvE.voyageSets[0].drivenBy === 'deck area' && nd.voyageSets[0].drivenBy === 'no demand' && td.voyageSets[0].drivenBy.startsWith('tank'), 'drivers');
 w();
 w('The engine names a constraint when its ratio is at or above the minimum visits (a tie names the demand), "minimum visits" when the visits are larger, and "no demand" when there is neither demand nor a visit.');
@@ -716,7 +728,7 @@ w('The engine names a constraint when its ratio is at or above the minimum visit
 /* ============================================================ SECTION 15 */
 
 section('vesseldays', 'Voyages and vessel-days: rounding voyages, voyage days, dedicated sets, and a voyage longer than the days available', ['Professional m02']);
-w('ROUNDING VOYAGES is a stated rule: "up" to whole voyages (the ceiling of the twelve-digit figure), or "none", which keeps the fractional average. Vessel-days for a voyage set are its voyages times its voyage days (the voyage\'s hours after the weather factor, over 24); the fleet\'s vessel-days are the sum over the voyage sets.');
+w('ROUNDING VOYAGES is a stated rule: "up" to whole voyages (the ceiling of the twelve-digit figure), or "none", which keeps the fractional average. Vessel-days for a voyage set are its voyages times its voyage days (the voyage\'s hours after the weather factor, in days); the fleet\'s vessel-days are the sum over the voyage sets.');
 w();
 const ekFf = runG('ekene-fleet-fractional');
 table(['golden input', 'voyage rounding', 'voyages before rounding (engine)', 'voyages (engine)', 'voyage days (engine)', 'vessel-days (engine)'], [
@@ -798,7 +810,7 @@ w('FUEL FOR THE PERIOD is the voyages of each set times the fuel of one of its v
 /* ============================================================ SECTION 17 */
 
 section('deckcargo', 'Deck cargo and footprints: items, units, the area bound with no stacking, and the lower bound', ['Professional m04']);
-w('ITEMS AND UNITS. A deck plan states each item line with an id, a length and a width in metres, a weight in tonnes and a whole quantity. The footprint of one unit is its length times its width. A line of one unit is named by its id; a line of several is named id#1, id#2 and so on. The usable area is the deck area times the stated usable fraction, and the deck load is stated in tonnes.');
+w(`ITEMS AND UNITS. A deck plan states each item line with an id, a length and a width in metres, a weight in tonnes and a whole quantity. The footprint of one unit is its length times its width. A line of one unit is named by its id; a line of several names each unit by the id, a # sign and the unit number (engine: ${ekD1.packingOrder[0]}). The usable area is the deck area times the stated usable fraction, and the deck load is stated in tonnes.`);
 w();
 w(`THE AREA BOUND. A unit fits a voyage when the footprints already on it plus its own stay at or below the usable area AND the weights stay at or below the deck load, both at twelve digits (inclusive). Cargo is never stacked and footprints are never checked against the deck\'s shape: the plan is an area bound, the same measure Aas, Halskau and Wallace (2009) describe for deck cargo (taught by concept). A deck plan is packed onto a stated number of voyages; a unit no voyage can take is OVERFLOW, named with its reason.`);
 w();
@@ -855,8 +867,10 @@ w(`TIES GO TO THE HEAVIER UNIT, THEN THE ITEM ID, THEN THE UNIT NUMBER (golden i
 must('the tie order is c, a, b#1, b#2', tie.packingOrder.join() === 'c,a,b#1,b#2', tie.packingOrder.join());
 w();
 const exf = runG('deck-exact-fit-inclusive');
+const exfA = argsOf('deck-exact-fit-inclusive');
 const dff = runG('deck-decimal-footprints-fill-exactly');
-w(`A FIT IS INCLUSIVE. Two units of 2.5 m2 and 1.5 t fill a usable area of ${f6(exf.usableAreaM2)} m2 and a deck load of ${S(argsOf('deck-exact-fit-inclusive').deck.loadT)} t exactly (golden input deck-exact-fit-inclusive): both go on, area utilisation ${f6(exf.voyages[0].areaUtilisation)}. Footprints of 0.1 and 0.2 m2 fill a 0.3 m2 deck (golden input deck-decimal-footprints-fill-exactly: ${S(dff.voyages[0].units.length)} units carried, the double sum ${S(dff.voyages[0].areaM2)}, engine).`);
+const dffA = argsOf('deck-decimal-footprints-fill-exactly');
+w(`A FIT IS INCLUSIVE. Two units of ${f6(exfA.items[0].lengthM * exfA.items[0].widthM)} m2 and ${S(exfA.items[0].weightT)} t fill a usable area of ${f6(exf.usableAreaM2)} m2 and a deck load of ${S(argsOf('deck-exact-fit-inclusive').deck.loadT)} t exactly (golden input deck-exact-fit-inclusive): both go on, area utilisation ${f6(exf.voyages[0].areaUtilisation)}. Footprints of ${S(dffA.items[0].lengthM)} and ${S(dffA.items[1].lengthM)} m2 fill a ${S(dffA.deck.areaM2)} m2 deck (golden input deck-decimal-footprints-fill-exactly: ${S(dff.voyages[0].units.length)} units carried, the double sum ${S(dff.voyages[0].areaM2)}, engine).`);
 must('exact fit carries both units and the decimal fill carries both', exf.voyages[0].units.length === 2 && exf.overflow.length === 0 && dff.voyages[0].units.length === 2, 'exact');
 w();
 w('THE THREE OVERFLOW REASONS the engine writes: a footprint larger than the usable deck area; a weight above the deck load; and no voyage with the unit\'s area and weight left. The first two need a bigger deck; the third needs another voyage.');
@@ -868,20 +882,20 @@ w(`The four packings of ${ref('published')} (checks seven to nine) are the textb
 w();
 const cgjFF = runG('ffd-wikipedia-cgj-first-fit-order');
 const cgjFFA = argsOf('ffd-wikipedia-cgj-first-fit-order');
-w(`FIRST FIT ON THE SAME LIST. The golden input ffd-wikipedia-cgj-first-fit-order states the capacity 60 items in the order ${cgjFFA.items.map((x) => S(x.lengthM)).join(', ')} with the rule "first-fit": they are already in decreasing order, so first fit packs ${bins(Object.assign(cgjFF, { _items: Object.fromEntries(cgjFFA.items.map((x) => [x.id, x.lengthM])) }))} (engine), the same as first-fit decreasing.`);
+w(`FIRST FIT ON THE SAME LIST. The golden input ffd-wikipedia-cgj-first-fit-order states the capacity ${S(cgjFFA.deck.areaM2)} items in the order ${cgjFFA.items.map((x) => S(x.lengthM)).join(', ')} with the rule "first-fit": they are already in decreasing order, so first fit packs ${bins(Object.assign(cgjFF, { _items: Object.fromEntries(cgjFFA.items.map((x) => [x.id, x.lengthM])) }))} (engine), the same as first-fit decreasing.`);
 must('first fit on a sorted list equals FFD', JSON.stringify(cgjFF.voyages.map((v) => v.units)) === JSON.stringify(f60.r.voyages.map((v) => v.units)), 'ff sorted');
 w();
 const f60ff = success('deckPlan on the capacity 60 list in ascending order with first-fit (stated probe)', E.deckPlan({ ...argsOf('ffd-wikipedia-cgj-capacity-60'), items: argsOf('ffd-wikipedia-cgj-capacity-60').items.slice().reverse(), rule: 'first-fit' }));
 f60ff._items = Object.fromEntries(argsOf('ffd-wikipedia-cgj-capacity-60').items.map((x) => [x.id, x.lengthM]));
-w(`THE BOOKED ORDER MATTERS. The same capacity 60 list booked smallest first and packed by first fit (stated probe: the golden input ffd-wikipedia-cgj-capacity-60 with its items reversed and the rule "first-fit") gives ${bins(f60ff)}, ${S(f60ff.voyagesUsed)} voyages (engine), where first-fit decreasing gives ${S(f60.r.voyagesUsed)}.`);
+w(`THE BOOKED ORDER MATTERS. The same capacity ${S(f60.a.deck.areaM2)} list booked smallest first and packed by first fit (stated probe: the golden input ffd-wikipedia-cgj-capacity-60 with its items reversed and the rule "first-fit") gives ${bins(f60ff)}, ${S(f60ff.voyagesUsed)} voyages (engine), where first-fit decreasing gives ${S(f60.r.voyagesUsed)}.`);
 must('first fit on the reversed capacity 60 list needs more voyages than FFD', f60ff.voyagesUsed > f60.r.voyagesUsed, f60ff.voyagesUsed);
 w();
-w(`WHAT THE EXAMPLES TEACH, each from the engine\'s own packings above: first-fit decreasing can need more voyages on a larger deck (${S(f60.r.voyagesUsed)} at capacity 60, ${S(f61.r.voyagesUsed)} at 61); it can use ${S(fds.r.voyagesUsed)} voyages where the text\'s optimum is ${TEXT.ffd.dosaOpt} and the engine\'s lower bound is ${S(fds.r.lowerBound)}; and it is a rule, stated and repeatable, with no search for the best packing.`);
+w(`WHAT THE EXAMPLES TEACH, each from the engine\'s own packings above: first-fit decreasing can need more voyages on a larger deck (${S(f60.r.voyagesUsed)} at capacity ${S(f60.a.deck.areaM2)}, ${S(f61.r.voyagesUsed)} at ${S(f61.a.deck.areaM2)}); it can use ${S(fds.r.voyagesUsed)} voyages where the text\'s optimum is ${TEXT.ffd.dosaOpt} and the engine\'s lower bound is ${S(fds.r.lowerBound)}; and it is a rule, stated and repeatable, with no search for the best packing.`);
 
 /* ============================================================ SECTION 20 */
 
 section('queue', 'The shore base as a queue: the working-hour clock, the service time, the offered load and the berth utilisation', ['Expert m01']);
-w('THE WORKING-HOUR CLOCK. The base is modelled on its working hours: arrivals an hour are the stated arrivals a day over the stated working hours a day (at most 24), and every time the queue returns is in working hours. A call\'s SERVICE TIME is the stated fixed hours plus the lift hours (lifts over the stated lifts an hour) and the bulk hours (m3 over the stated m3 an hour), the two added when they run one after the other (concurrent false) or the larger of the two when they run at the same time (concurrent true); the choice is required. The OFFERED LOAD is the arrivals an hour times the service time, and the BERTH UTILISATION is the offered load over the berths.');
+w('THE WORKING-HOUR CLOCK. The base is modelled on its working hours: arrivals an hour are the stated arrivals a day over the stated working hours a day (at most a whole day), and every time the queue returns is in working hours. A call\'s SERVICE TIME is the stated fixed hours plus the lift hours (lifts over the stated lifts an hour) and the bulk hours (m3 over the stated m3 an hour), the two added when they run one after the other (concurrent false) or the larger of the two when they run at the same time (concurrent true); the choice is required. The OFFERED LOAD is the arrivals an hour times the service time, and the BERTH UTILISATION is the offered load over the berths.');
 w();
 const seqB = runG('ekene-base-sequential-service');
 const twB = runG('ekene-base-twelve-hour-day');
@@ -905,7 +919,7 @@ must('just below saturation is accepted with a very long wait', jb.berthUtilisat
 /* ============================================================ SECTION 21 */
 
 section('mmc', 'Erlang C and M/M/c: the probability of waiting, mean wait and mean queue, Little\'s law, the published tables and a printed slip', ['Expert m02']);
-w('M/M/c. Poisson arrivals, exponential service times, c berths, first come first served. With offered load a and utilisation rho = a / c below 1: the delay probability PiW is Erlang\'s C formula (Adan and Resing 2015, eq. 5.1; Iversen 2001, s. 12.2), which the engine computes by the stable Erlang B recursion (Adan and Resing, s. 11.3, recursion 11.3 and remark 11.3.2); the mean queue is E(Lq) = PiW rho / (1 - rho) (eq. 5.2); the mean wait is E(W) = PiW S / (c (1 - rho)) with S the service time (eq. 5.3); the mean time at the base is the wait plus S; the mean in the system is E(Lq) plus a.');
+w(`M/M/c. Poisson arrivals, exponential service times, c berths, first come first served. With offered load a and ${FORMULA.utilBelow}: the delay probability PiW is Erlang's C formula (Adan and Resing 2015, eq. 5.1; Iversen 2001, s. 12.2), which the engine computes by the stable Erlang B recursion (Adan and Resing, s. 11.3, recursion 11.3 and remark 11.3.2); the mean queue is ${FORMULA.lq} (eq. 5.2); the mean wait is ${FORMULA.wq} with S the service time (eq. 5.3); the mean time at the base is the wait plus S; the mean in the system is E(Lq) plus a.`);
 w();
 w('THE EKENE BASE WITH MORE BERTHS (stated probes: ekene-base-mmc with the berths stated as below):');
 w();
@@ -927,12 +941,12 @@ w('WHAT M/M/c ASSUMES. Arrivals at random (Poisson), service times spread like a
 /* ============================================================ SECTION 22 */
 
 section('mdc', 'Constant service and M/D/c: the Cosmetatos approximation, one berth and the exact formula, and the berth target', ['Expert m03']);
-w('M/D/c. Poisson arrivals and a constant service time. There is no closed form for the M/D/c mean wait (Liu, Pantelidis, Tam and Chow, arXiv 2102.05851v2, CC BY 4.0); the engine uses the Cosmetatos (1975) approximation as that paper prints it in eq. (2): the M/D/c wait is the M/M/c wait over 2, times 1 plus (1 - rho)(c - 1)(sqrt(4 + 5c) - 2) / (16 rho c). The engine labels it an approximation and returns no delay probability for M/D/c.');
+w(`M/D/c. Poisson arrivals and a constant service time. There is no closed form for the M/D/c mean wait (Liu, Pantelidis, Tam and Chow, arXiv 2102.05851v2, CC BY 4.0); the engine uses the Cosmetatos (1975) approximation as that paper prints it in eq. (2): the M/D/c wait is ${FORMULA.cosmetatos}. The engine labels it an approximation and returns no delay probability for M/D/c.`);
 w();
 const md1 = runG('base-md1-pollaczek-khinchin');
 const md1A = argsOf('base-md1-pollaczek-khinchin');
 const pk = (md1.berthUtilisation * md1.serviceHours) / (2 * (1 - md1.berthUtilisation));
-w(`ONE BERTH, EXACT. At c = 1 the correction term is 0 and the formula is the Pollaczek-Khinchin mean value formula for M/D/1 (Adan and Resing 2015, eqs 7.14 to 7.16): the wait is rho S / (2 (1 - rho)). On the golden input base-md1-pollaczek-khinchin (${S(md1A.berths)} berth, a service of ${S(md1A.service.fixedHours)} hour, rho ${f6(md1.berthUtilisation)}) the engine returns a mean wait of ${f6(md1.meanWaitHours)} hours; the formula gives ${f6(pk)} (derived), half of the M/M/1 wait at the same load, ${f6(runG('adan-resing-table-5-1-c1').meanWaitHours)} hours (engine, golden input adan-resing-table-5-1-c1).`);
+w(`ONE BERTH, EXACT. ${FORMULA.mdOne} and the formula is the Pollaczek-Khinchin mean value formula for M/D/1 (Adan and Resing 2015, eqs 7.14 to 7.16): the wait is ${FORMULA.pk}. On the golden input base-md1-pollaczek-khinchin (${S(md1A.berths)} berth, a service of ${S(md1A.service.fixedHours)} hour, rho ${f6(md1.berthUtilisation)}) the engine returns a mean wait of ${f6(md1.meanWaitHours)} hours; the formula gives ${f6(pk)} (derived), half of the M/M/1 wait at the same load, ${f6(runG('adan-resing-table-5-1-c1').meanWaitHours)} hours (engine, golden input adan-resing-table-5-1-c1).`);
 must('M/D/1 is the P-K formula and half of M/M/1', Math.abs(md1.meanWaitHours - pk) < 1e-12 && Math.abs(md1.meanWaitHours * 2 - runG('adan-resing-table-5-1-c1').meanWaitHours) < 1e-12, md1.meanWaitHours);
 w();
 const md3 = runG('base-mdc-three-berths');
@@ -940,13 +954,13 @@ const mm3 = E.shoreBase({ ...argsOf('base-mdc-three-berths'), model: 'M/M/c' });
 w(`SEVERAL BERTHS, APPROXIMATE. On base-mdc-three-berths (${S(argsOf('base-mdc-three-berths').berths)} berths, rho ${f6(md3.berthUtilisation)}) the engine returns an M/D/c mean wait of ${f6(md3.meanWaitHours)} hours; the same inputs as M/M/c (stated probe) give ${f6(mm3.meanWaitHours)} hours (engine). On the Ekene base with two berths, M/D/c gives ${f6(ekBd.meanWaitHours)} hours against M/M/c\'s ${f6(ekB.meanWaitHours)} (engine), a ratio of ${f6(ekBd.meanWaitHours / ekB.meanWaitHours)} (derived).`);
 must('M/D/c waits less than M/M/c at three berths and on the Ekene base', md3.meanWaitHours < mm3.meanWaitHours && ekBd.meanWaitHours < ekB.meanWaitHours, 'mdc less');
 w();
-w('HOW MANY BERTHS MEET A TARGET. With a stated targetMeanWaitHours the engine searches from the fewest berths that keep the utilisation below 1 (the whole part of the offered load, plus one) up to ' + S(D.MAX_BERTHS) + ', and returns the fewest whose mean wait is at or below the target (inclusive), with its reason. The search uses the stated model.');
+w('HOW MANY BERTHS MEET A TARGET. With a stated targetMeanWaitHours the engine searches from the fewest berths that keep the utilisation below saturation (the whole part of the offered load, plus one) up to ' + S(D.MAX_BERTHS) + ', and returns the fewest whose mean wait is at or below the target (inclusive), with its reason. The search uses the stated model.');
 w();
 const tg = ['ekene-base-mmc-target-one-hour', 'ekene-base-mdc-target-one-hour', 'base-target-met-exactly-by-current', 'base-target-zero-unreachable'].map((id) => [id, runG(id)]);
 table(['golden input', 'model', 'target, hours (golden input)', 'berths (engine)', 'mean wait there, hours (engine)', 'the engine\'s reason, verbatim'], tg.map(([id, r]) => [id, r.model, S(r.target.targetMeanWaitHours), r.target.berths === null ? 'none' : S(r.target.berths), r.target.meanWaitHours === null ? 'none' : f6(r.target.meanWaitHours), r.target.reason]));
 must('the target is inclusive and zero is unreachable', tg[2][1].target.berths === 1 && tg[3][1].target.berths === null, 'target');
 w();
-w('A target met exactly is met: on base-target-met-exactly-by-current the wait at one berth is the target itself. A target of 0 hours is never met, and the engine reports it with no berth count.');
+w(`A target met exactly is met: on base-target-met-exactly-by-current the wait at one berth is the target itself. A target of ${S(tg[3][1].target.targetMeanWaitHours)} hours is never met, and the engine reports it with no berth count.`);
 
 /* ============================================================ SECTION 23 */
 
@@ -973,8 +987,9 @@ table(['whole vessels (engine)', 'share of the draws (engine)'], vk.vesselsDistr
 w();
 w(`THE CHANCE OF BEING SHORT with ${S(vk.plannedVessels)} planned vessels (capacity ${f6(vk.capacityDays)} vessel-days, engine): ${f6(vk.probabilityShort)} of the draws need more vessel-days than that (strictly above, at twelve digits), and the expected shortfall over all the draws is ${f6(vk.expectedShortVesselDays)} vessel-days (engine; seed ${S(vkA.seed)}, ${S(vkA.iterations)} draws).`);
 w();
-const vs7 = success('fleetVariability on ekene-variability-psv-milk-run with seed 7 (stated probe)', E.fleetVariability({ ...argsOf('ekene-variability-psv-milk-run'), seed: 7 }));
-w(`ANOTHER SEED, ANOTHER ESTIMATE (stated probe: the same inputs on seed 7 and ${S(vkA.iterations)} draws): mean vessel-days ${f6(vs7.vesselDays.mean)}, P90 ${f6(vs7.vesselDays.p90)}, P10 ${f6(vs7.vesselDays.p10)}, probability short ${f6(vs7.probabilityShort)} (engine). The figures move with the seed, which is why a Monte Carlo figure is always quoted with its seed and its draws and no Monte Carlo figure is graded; the plan at the modes does not move (${f6(vs7.plan.vesselDays)} vessel-days).`);
+const SEED2 = 7;
+const vs7 = success('fleetVariability on ekene-variability-psv-milk-run with a second seed (stated probe)', E.fleetVariability({ ...argsOf('ekene-variability-psv-milk-run'), seed: SEED2 }));
+w(`ANOTHER SEED, ANOTHER ESTIMATE (stated probe: the same inputs on seed ${S(SEED2)} and ${S(vkA.iterations)} draws): mean vessel-days ${f6(vs7.vesselDays.mean)}, P90 ${f6(vs7.vesselDays.p90)}, P10 ${f6(vs7.vesselDays.p10)}, probability short ${f6(vs7.probabilityShort)} (engine). The figures move with the seed, which is why a Monte Carlo figure is always quoted with its seed and its draws and no Monte Carlo figure is graded; the plan at the modes does not move (${f6(vs7.plan.vesselDays)} vessel-days).`);
 must('another seed moves the estimates and leaves the plan', vs7.vesselDays.mean !== vk.vesselDays.mean && vs7.plan.vesselDays === vk.plan.vesselDays, 'seed');
 w();
 const vrow2 = (id) => { const r = runG(id); const a = argsOf(id); return [id, typeof a.weather.factor === 'number' ? S(a.weather.factor) : `${S(a.weather.factor.min)}, ${S(a.weather.factor.mode)}, ${S(a.weather.factor.max)}`, typeof a.demandFactor === 'number' ? S(a.demandFactor) : `${S(a.demandFactor.min)}, ${S(a.demandFactor.mode)}, ${S(a.demandFactor.max)}`, S(a.plannedVessels), `${S(a.seed)} / ${S(a.iterations)}`, f6(r.vesselDays.mean), f6(r.vesselDays.p90), f6(r.vesselDays.p10), f6(r.probabilityShort), f6(r.expectedShortVesselDays)]; };
@@ -1044,7 +1059,10 @@ table(['rule', 'at the boundary', 'one past it', 'golden inputs'], bndT.map((r) 
 bndT.forEach((r) => must(`boundary: ${r[0]}`, r[4], r[0]));
 must('the draws cap row states the printed limit', /at most 181818 with 11 voyage sets/.test(drw.error), drw.error);
 w();
-w('A PRINTED BOUND ON THE ACCEPTED SIDE. When a refusal names the most a figure may be, the engine prints the six-decimal figure nearest the exact bound that its own rule accepts, and adds "(rounded down at the sixth decimal so that it is accepted)" when that figure differs from the exact bound: typing the printed figure back in passes. On base-refuse-saturated-thirds the exact bound is 26.666667 at six decimals and would be refused, so the engine prints 26.666666.');
+const thA = argsOf('base-refuse-saturated-thirds');
+const thirdsBound = (thA.berths * thA.workingHoursPerDay) / thA.service.fixedHours;
+must('the thirds bound rounds up at six decimals, so the printed figure is one millionth below it', f6(thirdsBound) === '26.666667' && sat[1][1].includes(`${f6(thirdsBound - 1e-6)} `) && sat[1][1].includes('rounded down at the sixth decimal'), thirdsBound);
+w(`A PRINTED BOUND ON THE ACCEPTED SIDE. When a refusal names the most a figure may be, the engine prints the six-decimal figure nearest the exact bound that its own rule accepts, and adds "(rounded down at the sixth decimal so that it is accepted)" when that figure differs from the exact bound: typing the printed figure back in passes. On base-refuse-saturated-thirds the exact bound is ${f6(thirdsBound)} at six decimals and would be refused, so the engine prints ${f6(thirdsBound - 1e-6)}.`);
 
 /* ============================================================ SECTION 26 */
 
@@ -1057,7 +1075,7 @@ w('A HANDBOOK IN DRAFT. Iversen\'s Teletraffic Engineering Handbook was read in 
 w();
 w('A LIVING PAGE. The Wikipedia article on first-fit decreasing changes over time, so the course cites revision 1317275412 of 17 October 2025 and the examples as that revision prints them. Johnson\'s 1973 thesis and Dosa\'s 2007 paper were not read directly; the rule and the examples are taken as the article states them, with its citations.');
 w();
-w('AN APPROXIMATION READ AT SECOND HAND. Cosmetatos (1975) was not read directly; the formula is taken as Liu, Pantelidis, Tam and Chow print it (arXiv 2102.05851v2, eq. 2, CC BY 4.0), and the engine labels it an approximation.');
+w('AN APPROXIMATION READ AT SECOND HAND. Cosmetatos (1975) was not read directly; the formula is taken as Liu, Pantelidis, Tam and Chow print it (arXiv 2102.05851v2, eq. (2), CC BY 4.0), and the engine labels it an approximation.');
 w();
 w(`A USABLE SHARE STATED TWO WAYS. Skoko et al. use ${TEXT.sk1.usable} of a vessel\'s carrying capacity as usable (text, beside Table 4); the Ekene fixture states a usable deck fraction of ${S(FX.vessels.psv.deckUsableFraction)}. Neither is a default: the usable fraction is a required input on every call.`);
 w();

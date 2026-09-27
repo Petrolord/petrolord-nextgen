@@ -309,7 +309,7 @@ export const baseReader = () => {
   return { utilisation: m.berthUtilisation, probabilityWait: m.probabilityWait, meanQueue: m.meanQueue, mmcWait: m.meanWaitHours, mdcWait: d.meanWaitHours, service: m.serviceHours };
 };
 
-/** The Ekene week under variability: seeded estimates, never graded. */
+/** The Ekene week under variability: seeded estimates; none of them is graded. */
 export const variabilityReader = () => {
   const r = fleetVariabilityOf(STARTS.varEkenePsv);
   return {

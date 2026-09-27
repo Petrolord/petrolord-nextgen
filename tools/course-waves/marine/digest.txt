@@ -91,7 +91,7 @@ THE ENGINE'S OWN WORDS ARE NOT A QUOTATION. The basis lines cite each source by 
 
 Nine printed figures or sets of figures from the sources are run through the engine. Each printed figure is cited as its source prints it (text); every other number is the engine's. quote_check.py checks that each text prints each figure cited here.
 
-CHECK ONE: ADAN AND RESING, TABLE 5.1 (text: the M/M/c delay probability and mean wait for a mean service time of 1 and an occupation rate of 0.9, at 1, 2, 5, 10 and 20 servers). The golden inputs adan-resing-table-5-1-c1 to adan-resing-table-5-1-c20 state a service of 1 fixed hour, a working day of 10 hours and 9, 18, 45, 90, 180 arrivals a day, so the offered load is 0.9 per berth. The engine returns:
+CHECK ONE: ADAN AND RESING, TABLE 5.1 (text: the M/M/c delay probability and mean wait for a mean service time of 1 and an occupation rate of 0.9, at 1, 2, 5, 10 and 20 servers). The golden inputs adan-resing-table-5-1-c1 to adan-resing-table-5-1-c20 state a service of 1 fixed hour, a working day of 10 hours and 9, 18, 45, 90, 180 arrivals a day, so the offered load is 0.900000 per berth (engine). The engine returns:
 
 | golden input | berths | arrivals a day (golden input) | berth utilisation (engine) | delay probability (engine) | printed (text) | mean wait (engine) | the engine's mean wait at two decimals (derived) | printed (text) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -101,9 +101,9 @@ CHECK ONE: ADAN AND RESING, TABLE 5.1 (text: the M/M/c delay probability and mea
 | adan-resing-table-5-1-c10 | 10 | 90 | 0.900000 | 0.668732 | 0.67 | 0.668732 | 0.67 | 0.67 |
 | adan-resing-table-5-1-c20 | 20 | 180 | 0.900000 | 0.550769 | 0.55 | 0.275385 | 0.28 | 0.28 |
 
-A PRINTED SLIP AT FIVE BERTHS. Every printed figure in the table is the engine's figure rounded to two decimals except one: at 5 berths the engine's mean wait is 1.524986, which rounds to 1.52, and the table prints 1.53 (text). The printed figure sits 0.005014 above the engine's (derived: 1.53 less 1.524986), which is more than the half unit of 0.005 a two-decimal rounding allows. The course teaches it as a slip in the printed table; the engine's figure is the one the formula gives.
+A PRINTED SLIP AT FIVE BERTHS. Every printed figure in the table is the engine's figure rounded to two decimals except one: at 5 berths the engine's mean wait is 1.524986, which rounds to 1.52, and the table prints 1.53 (text). The printed figure sits 0.005014 above the engine's (derived: 1.53 less 1.524986), which is more than the half unit a two-decimal rounding allows. The course teaches it as a slip in the printed table; the engine's figure is the one the formula gives.
 
-CHECK TWO: ADAN AND RESING, TABLE 5.2 (text: a fixed surplus capacity of 0.1 server, so the occupation rate rises with the number of servers). The golden inputs adan-resing-table-5-2-c1 to adan-resing-table-5-2-c20 state the same service and working day with the arrivals below:
+CHECK TWO: ADAN AND RESING, TABLE 5.2 (text: the surplus capacity held at 0.1 of a server, so the occupation rate rises with the number of servers). The golden inputs adan-resing-table-5-2-c1 to adan-resing-table-5-2-c20 state the same service and working day with the arrivals below:
 
 | golden input | berths | arrivals a day (golden input) | berth utilisation (engine) | printed rho (text) | mean wait (engine) | printed (text) | mean in the system (engine) | printed (text) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -139,7 +139,7 @@ CHECK SEVEN: THE FIRST-FIT DECREASING EXAMPLE AT CAPACITY 60 AND 61 (text: Wikip
 
 A LARGER DECK, MORE VOYAGES. With capacity 61 the same ten footprints take 4 voyages where capacity 60 takes 3, while the lower bound stays at 3 (engine): first-fit decreasing is not monotone in the capacity.
 
-CHECK EIGHT: HUANG AND LU (2021), EXAMPLE 5.1, AS THE ARTICLE PRINTS IT (text: capacity 75, four bins {51,12,12}, {28,28,10}, {28,27,10,10}, {25,10,10,10,10,10}). The engine packs the golden input ffd-wikipedia-huang-lu-capacity-75 into {51,12,12}, {28,28,10}, {28,27,10,10}, {25,10,10,10,10,10}, 4 voyages (engine).
+CHECK EIGHT: HUANG AND LU (2021), EXAMPLE 5.1, AS THE ARTICLE PRINTS IT (text: at capacity 75 the list packs into {51,12,12}, {28,28,10}, {28,27,10,10}, {25,10,10,10,10,10}). The engine packs the golden input ffd-wikipedia-huang-lu-capacity-75 into {51,12,12}, {28,28,10}, {28,27,10,10}, {25,10,10,10,10,10}, 4 voyages (engine).
 
 CHECK NINE: THE TIGHT WORST CASE OF DOSA (2007), SCALED TO CAPACITY 400 (text: the optimum packs the items into 6 bins and first-fit decreasing uses 8, which is 11/9 of the optimum plus 6/9). The engine uses 8 voyages on the golden input ffd-wikipedia-dosa-tight-example, packing {204,108}, {204,108}, {204,108}, {204,108}, {104,104,104}, {104,92,92,92}, {92,92,92,92}, {92}, with a lower bound of 6 (engine). The lower bound is the area bound; the optimum of 6 is the text's, and the engine does not search for an optimum.
 
@@ -333,9 +333,9 @@ THE ORDER OF REFUSALS. A box that carries an unknown key AND lacks a required in
 > queue is not an accepted key; the accepted keys at the top level are berths, arrivalsPerDay, workingHoursPerDay, service, model, targetMeanWaitHours
 
 Four rules the tables show:
-- An input with no default is refused when it is missing, and the message says so: a speed, a deck area and its usable fraction, a deck load, a deadweight, a tank for every product (0 when the vessel has none), every fuel burn, a density and a kind for every product, the route and its legs, port hours, the weather factor and the activities it slows, the fuel price, the period and the available days, both rounding rules, the minimum visits, the packing rule and the voyages of a deck plan, the berths, the arrivals, the working day, every service term, the concurrent choice, the queue model, the demand factor, the planned vessels, the draws and the seed.
+- An input with no default is refused when it is missing, and the message says so: a speed, a deck area and its usable fraction, a deck load, a deadweight, a tank for every product (none stated as zero capacity), every fuel burn, a density and a kind for every product, the route and its legs, port hours, the weather factor and the activities it slows, the fuel price, the period and the available days, both rounding rules, the minimum visits, the packing rule and the voyages of a deck plan, the berths, the arrivals, the working day, every service term, the concurrent choice, the queue model, the demand factor, the planned vessels, the draws and the seed.
 - An input key a function does not read is refused at whatever level it sits (a top-level option, a vessel term, a fuel activity, a cargo, a bulk product, a tank, an item, a deck term, a triangular, a service term), with the path to the key and the full list of accepted keys.
-- An input that contradicts the route or the vessel is refused by name: a distance from the base on a milk run, legs or stops on a dedicated voyage, a load of a product the vessel has no tank for, available days above the period, a weather factor below 1 or above the cap, a berth utilisation at or above 1.
+- An input that contradicts the route or the vessel is refused by name: a distance from the base on a milk run, legs or stops on a dedicated voyage, a load of a product the vessel has no tank for, available days above the period, a weather factor below the calm factor or above the cap, a berth utilisation at or above 1.
 - A stated figure inside a message is printed as it was given; a computed one prints to six decimals, and a printed bound is moved to the accepted side at the sixth decimal (section 25).
 
 # SECTION 6: What is graded, where the practicals run, the Suite app, and what is never graded (owned by Associate m01 l05 and Expert m04 l05 and Expert m06)
@@ -392,7 +392,7 @@ A LEG OF ZERO. Two installations at one location are a leg of 0 NM, which is acc
 
 # SECTION 9: Weather: one stated factor and the activities it slows (owned by Associate m03 l01 and Associate m03 l02 and Associate m06 l02)
 
-ONE STATED FACTOR. Weather enters as one stated factor from 1 to 10 that multiplies the time of the activities the call names in weather.appliesTo (any of sailing, port and field, at least one, none repeated). An activity the call does not name keeps its calm time. The list of activities is required, so the call says which activities the weather slows; fuel follows time. A factor of 1 is calm.
+ONE STATED FACTOR. Weather enters as one stated factor from 1 to 10 that multiplies the time of the activities the call names in weather.appliesTo (any of sailing, port and field, at least one, none repeated). An activity the call does not name keeps its calm time. The list of activities is required, so the call says which activities the weather slows; fuel follows time. A factor of 1 is calm (golden input ekene-voyage-calm).
 
 THE SAME MILK RUN THREE WAYS (golden inputs, the Ekene PSV):
 
@@ -444,7 +444,7 @@ A LIQUID HEAVIER THAN WATER (golden input voyage-deadweight-from-density: 60 t o
 > the binding constraint is deadweight: 205 t of 200 t (102.5%)
 > overloaded: deadweight needs 205 t against a capacity of 200 t
 
-A TANK OF 0. Every product needs a stated tank, 0 when the vessel has none for it. A tank of 0 with nothing loaded in it is accepted (golden input voyage-tank-zero-capacity-empty-ok: feasible true, its utilisation reported as 0.000000); a load of that product is refused by name, and a missing tank is refused too (section 5: voyage-refuse-tank-zero-capacity, voyage-refuse-milk-run-tank-zero, voyage-refuse-tank-missing).
+A TANK OF ZERO. Every product needs a stated tank, stated as zero when the vessel has none for it. A zero tank with nothing loaded in it is accepted (golden input voyage-tank-zero-capacity-empty-ok: feasible true, its utilisation reported as 0.000000); a load of that product is refused by name, and a missing tank is refused too (section 5: voyage-refuse-tank-zero-capacity, voyage-refuse-milk-run-tank-zero, voyage-refuse-tank-missing).
 
 # SECTION 12: Utilisation, the binding constraint and its tie rule, and an overloaded voyage (owned by Associate m05)
 
@@ -523,7 +523,7 @@ The engine names a constraint when its ratio is at or above the minimum visits (
 
 # SECTION 15: Voyages and vessel-days: rounding voyages, voyage days, dedicated sets, and a voyage longer than the days available (owned by Professional m02)
 
-ROUNDING VOYAGES is a stated rule: "up" to whole voyages (the ceiling of the twelve-digit figure), or "none", which keeps the fractional average. Vessel-days for a voyage set are its voyages times its voyage days (the voyage's hours after the weather factor, over 24); the fleet's vessel-days are the sum over the voyage sets.
+ROUNDING VOYAGES is a stated rule: "up" to whole voyages (the ceiling of the twelve-digit figure), or "none", which keeps the fractional average. Vessel-days for a voyage set are its voyages times its voyage days (the voyage's hours after the weather factor, in days); the fleet's vessel-days are the sum over the voyage sets.
 
 | golden input | voyage rounding | voyages before rounding (engine) | voyages (engine) | voyage days (engine) | vessel-days (engine) |
 | --- | --- | --- | --- | --- | --- |
@@ -592,7 +592,7 @@ FUEL FOR THE PERIOD is the voyages of each set times the fuel of one of its voya
 
 # SECTION 17: Deck cargo and footprints: items, units, the area bound with no stacking, and the lower bound (owned by Professional m04)
 
-ITEMS AND UNITS. A deck plan states each item line with an id, a length and a width in metres, a weight in tonnes and a whole quantity. The footprint of one unit is its length times its width. A line of one unit is named by its id; a line of several is named id#1, id#2 and so on. The usable area is the deck area times the stated usable fraction, and the deck load is stated in tonnes.
+ITEMS AND UNITS. A deck plan states each item line with an id, a length and a width in metres, a weight in tonnes and a whole quantity. The footprint of one unit is its length times its width. A line of one unit is named by its id; a line of several names each unit by the id, a # sign and the unit number (engine: pipe-bundle#1). The usable area is the deck area times the stated usable fraction, and the deck load is stated in tonnes.
 
 THE AREA BOUND. A unit fits a voyage when the footprints already on it plus its own stay at or below the usable area AND the weights stay at or below the deck load, both at twelve digits (inclusive). Cargo is never stacked and footprints are never checked against the deck's shape: the plan is an area bound, the same measure Aas, Halskau and Wallace (2009) describe for deck cargo (taught by concept). A deck plan is packed onto a stated number of voyages; a unit no voyage can take is OVERFLOW, named with its reason.
 
@@ -635,7 +635,7 @@ TWO VOYAGES (golden input ekene-deck-two-voyages-ffd): first-fit decreasing carr
 
 TIES GO TO THE HEAVIER UNIT, THEN THE ITEM ID, THEN THE UNIT NUMBER (golden input deck-ties-heavier-first-then-id: b 2 m by 3 m at 1 t, quantity 2; a 3 m by 2 m at 1 t, quantity 1; c 6 m by 1 m at 4 t, quantity 1; every footprint is 6.000000 m2). The engine sorts them c, a, b#1, b#2 and packs voyage 1: c, a; voyage 2: b#1, b#2.
 
-A FIT IS INCLUSIVE. Two units of 2.5 m2 and 1.5 t fill a usable area of 5.000000 m2 and a deck load of 3 t exactly (golden input deck-exact-fit-inclusive): both go on, area utilisation 1.000000. Footprints of 0.1 and 0.2 m2 fill a 0.3 m2 deck (golden input deck-decimal-footprints-fill-exactly: 2 units carried, the double sum 0.30000000000000004, engine).
+A FIT IS INCLUSIVE. Two units of 2.500000 m2 and 1.5 t fill a usable area of 5.000000 m2 and a deck load of 3 t exactly (golden input deck-exact-fit-inclusive): both go on, area utilisation 1.000000. Footprints of 0.1 and 0.2 m2 fill a 0.3 m2 deck (golden input deck-decimal-footprints-fill-exactly: 2 units carried, the double sum 0.30000000000000004, engine).
 
 THE THREE OVERFLOW REASONS the engine writes: a footprint larger than the usable deck area; a weight above the deck load; and no voyage with the unit's area and weight left. The first two need a bigger deck; the third needs another voyage.
 
@@ -651,7 +651,7 @@ WHAT THE EXAMPLES TEACH, each from the engine's own packings above: first-fit de
 
 # SECTION 20: The shore base as a queue: the working-hour clock, the service time, the offered load and the berth utilisation (owned by Expert m01)
 
-THE WORKING-HOUR CLOCK. The base is modelled on its working hours: arrivals an hour are the stated arrivals a day over the stated working hours a day (at most 24), and every time the queue returns is in working hours. A call's SERVICE TIME is the stated fixed hours plus the lift hours (lifts over the stated lifts an hour) and the bulk hours (m3 over the stated m3 an hour), the two added when they run one after the other (concurrent false) or the larger of the two when they run at the same time (concurrent true); the choice is required. The OFFERED LOAD is the arrivals an hour times the service time, and the BERTH UTILISATION is the offered load over the berths.
+THE WORKING-HOUR CLOCK. The base is modelled on its working hours: arrivals an hour are the stated arrivals a day over the stated working hours a day (at most a whole day), and every time the queue returns is in working hours. A call's SERVICE TIME is the stated fixed hours plus the lift hours (lifts over the stated lifts an hour) and the bulk hours (m3 over the stated m3 an hour), the two added when they run one after the other (concurrent false) or the larger of the two when they run at the same time (concurrent true); the choice is required. The OFFERED LOAD is the arrivals an hour times the service time, and the BERTH UTILISATION is the offered load over the berths.
 
 | golden input | berths | arrivals a day | working hours | concurrent | lift hours (engine) | bulk hours (engine) | service hours (engine) | arrivals an hour (engine) | offered load (engine) | berth utilisation (engine) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -701,7 +701,7 @@ ONE BERTH, EXACT. At c = 1 the correction term is 0 and the formula is the Polla
 
 SEVERAL BERTHS, APPROXIMATE. On base-mdc-three-berths (3 berths, rho 0.800000) the engine returns an M/D/c mean wait of 0.552578 hours; the same inputs as M/M/c (stated probe) give 1.078652 hours (engine). On the Ekene base with two berths, M/D/c gives 1.665786 hours against M/M/c's 3.180124 (engine), a ratio of 0.523812 (derived).
 
-HOW MANY BERTHS MEET A TARGET. With a stated targetMeanWaitHours the engine searches from the fewest berths that keep the utilisation below 1 (the whole part of the offered load, plus one) up to 100, and returns the fewest whose mean wait is at or below the target (inclusive), with its reason. The search uses the stated model.
+HOW MANY BERTHS MEET A TARGET. With a stated targetMeanWaitHours the engine searches from the fewest berths that keep the utilisation below saturation (the whole part of the offered load, plus one) up to 100, and returns the fewest whose mean wait is at or below the target (inclusive), with its reason. The search uses the stated model.
 
 | golden input | model | target, hours (golden input) | berths (engine) | mean wait there, hours (engine) | the engine's reason, verbatim |
 | --- | --- | --- | --- | --- | --- |
@@ -812,7 +812,7 @@ A HANDBOOK IN DRAFT. Iversen's Teletraffic Engineering Handbook was read in its 
 
 A LIVING PAGE. The Wikipedia article on first-fit decreasing changes over time, so the course cites revision 1317275412 of 17 October 2025 and the examples as that revision prints them. Johnson's 1973 thesis and Dosa's 2007 paper were not read directly; the rule and the examples are taken as the article states them, with its citations.
 
-AN APPROXIMATION READ AT SECOND HAND. Cosmetatos (1975) was not read directly; the formula is taken as Liu, Pantelidis, Tam and Chow print it (arXiv 2102.05851v2, eq. 2, CC BY 4.0), and the engine labels it an approximation.
+AN APPROXIMATION READ AT SECOND HAND. Cosmetatos (1975) was not read directly; the formula is taken as Liu, Pantelidis, Tam and Chow print it (arXiv 2102.05851v2, eq. (2), CC BY 4.0), and the engine labels it an approximation.
 
 A USABLE SHARE STATED TWO WAYS. Skoko et al. use 85% of a vessel's carrying capacity as usable (text, beside Table 4); the Ekene fixture states a usable deck fraction of 0.75. Neither is a default: the usable fraction is a required input on every call.
 

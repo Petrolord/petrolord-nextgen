@@ -1,0 +1,20 @@
+-- ============================================================================
+-- SC4 PROFESSIONAL DEEP SEED: Offshore & Marine Logistics, intermediate tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/marine/intermediate.
+--
+-- What this tier owns: FLEET SIZING AND DECK PLANNING. Demand over a period and
+-- what drives the voyage count; voyages rounded up or kept as the average,
+-- voyage days and vessel-days; available days, the vessel rounding rule, spare
+-- and short vessel-days; deck cargo footprints, the area bound and the lower
+-- bound; first-fit decreasing and first fit in the booked order; the
+-- published packing examples.
+--
+-- AN APP COURSE. The Suite app is the Marine Logistics Planner; the practicals
+-- also run in the course's own voyage and fleet calculator and deck
+-- calculator. The capstone grades six values of this tier, each identical under
+-- every reading the engine states and never a Monte Carlo draw.
+-- ============================================================================
