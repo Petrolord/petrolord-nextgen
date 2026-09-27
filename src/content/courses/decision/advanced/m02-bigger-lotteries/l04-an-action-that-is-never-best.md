@@ -27,7 +27,7 @@ The partner column is half the Drill alone column in every row. The sweep has on
 
 ## Never best under perfect information either
 
-With the outcome known first, the published golden records the best actions for Large, Medium and Dry as indices 0, 0 and 2. The partner, index 1, appears nowhere; Relinquish, index 3, ties Farm out in Dry and loses on listing order. Since neither is the maximum anywhere, deleting either leaves emvPrior 109.0000, evWithPerfect 133.0000 and the EVPI of 24.0000 where they are.
+With the outcome known first, the published golden records the best actions for Large, Medium and Dry as indices 0, 0 and 2. The partner, index 1, appears nowhere; Relinquish, index 3, ties Farm out in Dry and is recorded second on listing order. Since neither is the maximum anywhere, deleting either leaves emvPrior 109.0000, evWithPerfect 133.0000 and the EVPI of 24.0000 where they are.
 
 ## Never best at the prior is not worthless
 
