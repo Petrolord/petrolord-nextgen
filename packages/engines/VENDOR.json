@@ -953,49 +953,49 @@
       "kind": "differing",
       "group": "4-economics-revendor",
       "vendoredSha": "94675046e9e8f909a69776532a435a40a7f629ce",
-      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; the own-property hunk only is now carried. #231 own-property hunk backported, remaining difference unchanged (2026-09-21, fix/held-copy-pass-and-231: only the engines #231 own-property guard was hand-ported onto this held blob, proved by __tests__/prototypeChainLookups.test.js; every course wave that reads this file regenerates byte-identical)."
+      "reason": "Value moving. Audit Group 4. The EC1/EC2 halves were reconciled by the #138 recut (cashflow.ts, fiscalRegime.js), and the EC4 decision / EC5 portfolio half by fix/decision-portfolio-recut (decisionTree.js, voi.js, portfolio.js, afe.js re-vendored at engines fb5a363 with both courses re-cut). What is still held is montecarlo.ts, screening.js and fdp/*: they carry the EC3 uncertainty and EC6 fdp courses, breakeven.js and the MD2 refinery course (modularRefinery.js imports screening.js), whose recuts are pending. Pull only with those recuts in the same deploy window. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; the own-property hunk only is now carried. #231 own-property hunk backported, remaining difference unchanged (2026-09-21, fix/held-copy-pass-and-231: only the engines #231 own-property guard was hand-ported onto this held blob, proved by __tests__/prototypeChainLookups.test.js; every course wave that reads this file regenerates byte-identical)."
     },
     {
       "path": "engines/economics/fdp/facilitiesCalculations.js",
       "kind": "differing",
       "group": "4-economics-revendor",
       "vendoredSha": "d20c1d97a81f570555f09c3fe5ec701fe781360f",
-      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+      "reason": "Value moving. Audit Group 4. The EC1/EC2 halves were reconciled by the #138 recut (cashflow.ts, fiscalRegime.js), and the EC4 decision / EC5 portfolio half by fix/decision-portfolio-recut (decisionTree.js, voi.js, portfolio.js, afe.js re-vendored at engines fb5a363 with both courses re-cut). What is still held is montecarlo.ts, screening.js and fdp/*: they carry the EC3 uncertainty and EC6 fdp courses, breakeven.js and the MD2 refinery course (modularRefinery.js imports screening.js), whose recuts are pending. Pull only with those recuts in the same deploy window."
     },
     {
       "path": "engines/economics/fdp/fdpCalculations.js",
       "kind": "differing",
       "group": "4-economics-revendor",
       "vendoredSha": "bc641603fcd05a6054018051af9a68b34d3c5aa6",
-      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+      "reason": "Value moving. Audit Group 4. The EC1/EC2 halves were reconciled by the #138 recut (cashflow.ts, fiscalRegime.js), and the EC4 decision / EC5 portfolio half by fix/decision-portfolio-recut (decisionTree.js, voi.js, portfolio.js, afe.js re-vendored at engines fb5a363 with both courses re-cut). What is still held is montecarlo.ts, screening.js and fdp/*: they carry the EC3 uncertainty and EC6 fdp courses, breakeven.js and the MD2 refinery course (modularRefinery.js imports screening.js), whose recuts are pending. Pull only with those recuts in the same deploy window."
     },
     {
       "path": "engines/economics/fdp/scheduleCalculations.js",
       "kind": "differing",
       "group": "4-economics-revendor",
       "vendoredSha": "6727c25f942087e98f44707c4d1fed16bcb0121d",
-      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+      "reason": "Value moving. Audit Group 4. The EC1/EC2 halves were reconciled by the #138 recut (cashflow.ts, fiscalRegime.js), and the EC4 decision / EC5 portfolio half by fix/decision-portfolio-recut (decisionTree.js, voi.js, portfolio.js, afe.js re-vendored at engines fb5a363 with both courses re-cut). What is still held is montecarlo.ts, screening.js and fdp/*: they carry the EC3 uncertainty and EC6 fdp courses, breakeven.js and the MD2 refinery course (modularRefinery.js imports screening.js), whose recuts are pending. Pull only with those recuts in the same deploy window."
     },
     {
       "path": "engines/economics/fdp/wellCalculations.js",
       "kind": "differing",
       "group": "4-economics-revendor",
       "vendoredSha": "91e8eada5637361a5e9107ac49f26e67d864c386",
-      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; the own-property hunk only is now carried. #231 own-property hunk backported, remaining difference unchanged (2026-09-21, fix/held-copy-pass-and-231: only the engines #231 own-property guard was hand-ported onto this held blob, proved by __tests__/prototypeChainLookups.test.js; every course wave that reads this file regenerates byte-identical)."
+      "reason": "Value moving. Audit Group 4. The EC1/EC2 halves were reconciled by the #138 recut (cashflow.ts, fiscalRegime.js), and the EC4 decision / EC5 portfolio half by fix/decision-portfolio-recut (decisionTree.js, voi.js, portfolio.js, afe.js re-vendored at engines fb5a363 with both courses re-cut). What is still held is montecarlo.ts, screening.js and fdp/*: they carry the EC3 uncertainty and EC6 fdp courses, breakeven.js and the MD2 refinery course (modularRefinery.js imports screening.js), whose recuts are pending. Pull only with those recuts in the same deploy window. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; the own-property hunk only is now carried. #231 own-property hunk backported, remaining difference unchanged (2026-09-21, fix/held-copy-pass-and-231: only the engines #231 own-property guard was hand-ported onto this held blob, proved by __tests__/prototypeChainLookups.test.js; every course wave that reads this file regenerates byte-identical)."
     },
     {
       "path": "engines/economics/montecarlo.ts",
       "kind": "differing",
       "group": "4-economics-revendor",
       "vendoredSha": "3f73b78488c9996848443b26375c3e25cc5e429a",
-      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+      "reason": "Value moving. Audit Group 4. The EC1/EC2 halves were reconciled by the #138 recut (cashflow.ts, fiscalRegime.js), and the EC4 decision / EC5 portfolio half by fix/decision-portfolio-recut (decisionTree.js, voi.js, portfolio.js, afe.js re-vendored at engines fb5a363 with both courses re-cut). What is still held is montecarlo.ts, screening.js and fdp/*: they carry the EC3 uncertainty and EC6 fdp courses, breakeven.js and the MD2 refinery course (modularRefinery.js imports screening.js), whose recuts are pending. Pull only with those recuts in the same deploy window."
     },
     {
       "path": "engines/economics/screening.js",
       "kind": "differing",
       "group": "4-economics-revendor",
       "vendoredSha": "9dab5bc3995fd010ec4da833319b6de09989e4fd",
-      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window. MD-0 (2026-09-19): the canonical file's additive lossCarryForward option (engines #219, default false) is patched onto this deliberately older copy, and nothing else, because the Commercial & Trading course MD2 (refinery) calls it through engines/downstream/modularRefinery.js feasibilityEconomics. With the option off every economics output is unchanged, so no graded Economics value moves; the rest of the value-moving pull still waits for its recut."
+      "reason": "Value moving. Audit Group 4. The EC1/EC2 halves were reconciled by the #138 recut (cashflow.ts, fiscalRegime.js), and the EC4 decision / EC5 portfolio half by fix/decision-portfolio-recut (decisionTree.js, voi.js, portfolio.js, afe.js re-vendored at engines fb5a363 with both courses re-cut). What is still held is montecarlo.ts, screening.js and fdp/*: they carry the EC3 uncertainty and EC6 fdp courses, breakeven.js and the MD2 refinery course (modularRefinery.js imports screening.js), whose recuts are pending. Pull only with those recuts in the same deploy window. MD-0 (2026-09-19): the canonical file's additive lossCarryForward option (engines #219, default false) is patched onto this deliberately older copy, and nothing else, because the Commercial & Trading course MD2 (refinery) calls it through engines/downstream/modularRefinery.js feasibilityEconomics. With the option off every economics output is unchanged, so no graded Economics value moves; the rest of the value-moving pull still waits for its recut."
     },
     {
       "path": "engines/drilling/profileDesign.js",
