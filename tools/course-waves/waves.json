@@ -1794,5 +1794,44 @@
       "digest.txt": "649a0e1be5b7284e3781887685bd862085acbab55d22c92803f10c2b2d90d275",
       "fields.json": "1f9065fc160c7377d678a887d992d115956f3866f3abcdca7407d803483b8c4c"
     }
+  },
+  "farmout": {
+    "course": "EC10",
+    "live": "/root/cat-wip-farmout",
+    "kit": "full",
+    "kitNote": "Full kit, committed at the foundation (the note is completed when the foundation is).",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "precision.json",
+      "wave.json",
+      "build_digest.sh",
+      "concepts.json",
+      "make_concepts.py",
+      "digest_prose.rules.mjs",
+      "digestpromise_farmout.py",
+      "discriminate.mjs",
+      "gate_capstone_leak.mjs",
+      "gate_claims.mjs",
+      "gate_typed_literals.py",
+      "gate_vocabulary.py",
+      "gen_course.py",
+      "harvest_farmout.py",
+      "lengths.py",
+      "make_fields.mjs",
+      "numsweep_farmout.mjs",
+      "oracle_check.py",
+      "farmout_capstone.mjs",
+      "farmout_dump.mjs",
+      "farmout_engine.mjs",
+      "quote_check.py",
+      "scaffold.py",
+      "structure.py",
+      "truth-farmout.json",
+      "truth_check.py",
+      "ts_loader.mjs",
+      "vendor_farmout.sh"
+    ],
+    "pins": {}
   }
 }
