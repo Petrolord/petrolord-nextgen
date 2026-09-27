@@ -9,10 +9,12 @@
 -- economics and assurance, and differ everywhere else:
 --
 --   Academy module       course(s)                         Suite module slug
---   supply_chain         supply, materials, marine         midstream-downstream
+--   supply_chain         supply, materials, marine,        midstream-downstream
+--                        procurement, contracts
 --   commercial_trading   crude, refinery                   midstream-downstream
 --   energy_transition    carbon, gasvalue                  midstream-downstream
---   hse                  lopa, consequence, qra            process-safety
+--   hse                  lopa, consequence, qra,           process-safety
+--                        hygiene, safetystats
 --   data_ai              dataqc, mlcore, facies,           data-ai
 --                        forecastml, appliedai
 --
@@ -24,12 +26,13 @@
 --   4. re-stamps their UNREDEEMED bridge codes with the Suite slug.
 --      Redeemed codes are history and are never touched.
 --
--- Left unmapped on purpose (no Suite app; an owner decision): procurement
--- (supply_chain), hygiene and safetystats (hse). Their codes keep the
--- Academy module and still match no Suite module.
+-- Courses with no Suite app of their own (owner decision 2026-09-27): their
+-- codes point at the Suite module nearest their subject. procurement and
+-- contracts (supply chain) take midstream-downstream, where the Suite's
+-- supply chain planners sit; hygiene and safetystats (HSE) take
+-- process-safety.
 --
--- materials (SC3) and marine (SC4) have no academy_apps row until their
--- course migrations run. Step 3 is keyed on slug, so a missing row is a
+-- Step 3 is keyed on slug, so a course whose row does not exist yet is a
 -- no-op; if a course migration runs after this file, run this file again
 -- (idempotent) or set suite_module in that course migration.
 --
@@ -70,6 +73,8 @@ update public.academy_apps a
     ('supply',      'midstream-downstream'),
     ('materials',   'midstream-downstream'),
     ('marine',      'midstream-downstream'),
+    ('procurement', 'midstream-downstream'),
+    ('contracts',   'midstream-downstream'),
     ('crude',       'midstream-downstream'),
     ('refinery',    'midstream-downstream'),
     ('carbon',      'midstream-downstream'),
@@ -77,6 +82,8 @@ update public.academy_apps a
     ('lopa',        'process-safety'),
     ('consequence', 'process-safety'),
     ('qra',         'process-safety'),
+    ('hygiene',     'process-safety'),
+    ('safetystats', 'process-safety'),
     ('dataqc',      'data-ai'),
     ('mlcore',      'data-ai'),
     ('facies',      'data-ai'),
