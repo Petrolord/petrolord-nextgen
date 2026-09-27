@@ -51,30 +51,207 @@
  "intermediate/m06-poor-performance-and-remedies/l02-remedies-the-contract-gives": [],
  "intermediate/m06-poor-performance-and-remedies/l03-recording-poor-performance": [],
  "intermediate/m06-poor-performance-and-remedies/l04-preparing-for-the-professional-exam": [],
- "advanced/m01-contract-strategy/l01-what-a-contract-strategy-decides": [],
- "advanced/m01-contract-strategy/l02-delivery-models-and-make-or-buy": [],
- "advanced/m01-contract-strategy/l03-packaging-the-work": [],
- "advanced/m01-contract-strategy/l04-choosing-the-price-basis": [],
- "advanced/m01-contract-strategy/l05-a-strategy-for-an-ekene-campaign": [],
- "advanced/m02-claims/l01-what-a-claim-is": [],
- "advanced/m02-claims/l02-notice-and-its-timing": [],
- "advanced/m02-claims/l03-entitlement-and-evidence": [],
- "advanced/m02-claims/l04-assessing-a-claim-fairly": [],
- "advanced/m03-disputes-and-their-resolution/l01-the-escalation-ladder": [],
- "advanced/m03-disputes-and-their-resolution/l02-negotiation-and-mediation": [],
- "advanced/m03-disputes-and-their-resolution/l03-expert-determination-and-adjudication": [],
- "advanced/m03-disputes-and-their-resolution/l04-arbitration-and-the-courts": [],
- "advanced/m04-termination-step-in-and-exit/l01-grounds-for-termination": [],
- "advanced/m04-termination-step-in-and-exit/l02-step-in-and-other-interventions": [],
- "advanced/m04-termination-step-in-and-exit/l03-exit-planning": [],
- "advanced/m04-termination-step-in-and-exit/l04-a-supplier-in-distress": [],
- "advanced/m05-close-out-and-lessons-learned/l01-completion-and-acceptance": [],
- "advanced/m05-close-out-and-lessons-learned/l02-the-final-account": [],
- "advanced/m05-close-out-and-lessons-learned/l03-evaluating-the-supplier-at-close": [],
- "advanced/m05-close-out-and-lessons-learned/l04-lessons-learned": [],
- "advanced/m06-integrity-governance-and-the-written-case/l01-conflicts-of-interest-and-gifts": [],
- "advanced/m06-integrity-governance-and-the-written-case/l02-fraud-and-corruption-in-execution": [],
- "advanced/m06-integrity-governance-and-the-written-case/l03-governance-and-assurance": [],
- "advanced/m06-integrity-governance-and-the-written-case/l04-reading-the-sources-as-they-change": [],
- "advanced/m06-integrity-governance-and-the-written-case/l05-the-written-case-brief": []
+ "advanced/m01-contract-strategy/l01-what-a-contract-strategy-decides": [
+  "P011",
+  "P004",
+  "P144",
+  "P145"
+ ],
+ "advanced/m01-contract-strategy/l02-delivery-models-and-make-or-buy": [
+  "P142",
+  "P143",
+  "P010",
+  "P105",
+  "P131"
+ ],
+ "advanced/m01-contract-strategy/l03-packaging-the-work": [
+  "P145",
+  "P057",
+  "P058",
+  "P004",
+  "P118",
+  "P204"
+ ],
+ "advanced/m01-contract-strategy/l04-choosing-the-price-basis": [
+  "P026",
+  "P027",
+  "P028",
+  "P146",
+  "P029",
+  "P147",
+  "P148",
+  "P149",
+  "P150"
+ ],
+ "advanced/m01-contract-strategy/l05-a-strategy-for-an-ekene-campaign": [
+  "P146",
+  "P011",
+  "P151",
+  "P019",
+  "P102",
+  "P137"
+ ],
+ "advanced/m02-claims/l01-what-a-claim-is": [
+  "P161",
+  "P153",
+  "P157"
+ ],
+ "advanced/m02-claims/l02-notice-and-its-timing": [
+  "P152",
+  "P161",
+  "P157",
+  "P160",
+  "P171"
+ ],
+ "advanced/m02-claims/l03-entitlement-and-evidence": [
+  "P154",
+  "P159",
+  "P155",
+  "P160",
+  "P185"
+ ],
+ "advanced/m02-claims/l04-assessing-a-claim-fairly": [
+  "P156",
+  "P158",
+  "P154",
+  "P161",
+  "P088",
+  "P078"
+ ],
+ "advanced/m03-disputes-and-their-resolution/l01-the-escalation-ladder": [
+  "P165",
+  "P163",
+  "P162",
+  "P166"
+ ],
+ "advanced/m03-disputes-and-their-resolution/l02-negotiation-and-mediation": [
+  "P170",
+  "P171",
+  "P172",
+  "P173",
+  "P021"
+ ],
+ "advanced/m03-disputes-and-their-resolution/l03-expert-determination-and-adjudication": [
+  "P163",
+  "P164",
+  "P161"
+ ],
+ "advanced/m03-disputes-and-their-resolution/l04-arbitration-and-the-courts": [
+  "P167",
+  "P162",
+  "P166",
+  "P168",
+  "P169",
+  "P174",
+  "P175"
+ ],
+ "advanced/m04-termination-step-in-and-exit/l01-grounds-for-termination": [
+  "P182",
+  "P183",
+  "P176",
+  "P178",
+  "P133",
+  "P184",
+  "P185"
+ ],
+ "advanced/m04-termination-step-in-and-exit/l02-step-in-and-other-interventions": [
+  "P068",
+  "P187",
+  "P076",
+  "P186",
+  "P067"
+ ],
+ "advanced/m04-termination-step-in-and-exit/l03-exit-planning": [
+  "P200",
+  "P197",
+  "P179",
+  "P180",
+  "P195",
+  "P112"
+ ],
+ "advanced/m04-termination-step-in-and-exit/l04-a-supplier-in-distress": [
+  "P095",
+  "P096",
+  "P090",
+  "P094",
+  "P097",
+  "P098"
+ ],
+ "advanced/m05-close-out-and-lessons-learned/l01-completion-and-acceptance": [
+  "P198",
+  "P055",
+  "P190",
+  "P137",
+  "P195"
+ ],
+ "advanced/m05-close-out-and-lessons-learned/l02-the-final-account": [
+  "P194",
+  "P055",
+  "P022",
+  "P191",
+  "P192",
+  "P134",
+  "P140"
+ ],
+ "advanced/m05-close-out-and-lessons-learned/l03-evaluating-the-supplier-at-close": [
+  "P193",
+  "P196",
+  "P038",
+  "P039",
+  "P199",
+  "P041",
+  "P185"
+ ],
+ "advanced/m05-close-out-and-lessons-learned/l04-lessons-learned": [
+  "P190",
+  "P192",
+  "P193",
+  "P196",
+  "P140",
+  "P011"
+ ],
+ "advanced/m06-integrity-governance-and-the-written-case/l01-conflicts-of-interest-and-gifts": [
+  "P212",
+  "P203",
+  "P202",
+  "P213",
+  "P214",
+  "P208"
+ ],
+ "advanced/m06-integrity-governance-and-the-written-case/l02-fraud-and-corruption-in-execution": [
+  "P211",
+  "P204",
+  "P205",
+  "P206",
+  "P133",
+  "P209",
+  "P210"
+ ],
+ "advanced/m06-integrity-governance-and-the-written-case/l03-governance-and-assurance": [
+  "P002",
+  "P001",
+  "P003",
+  "P004",
+  "P012",
+  "P054",
+  "P136",
+  "P130"
+ ],
+ "advanced/m06-integrity-governance-and-the-written-case/l04-reading-the-sources-as-they-change": [
+  "P139",
+  "P137",
+  "P141",
+  "P052",
+  "P186"
+ ],
+ "advanced/m06-integrity-governance-and-the-written-case/l05-the-written-case-brief": [
+  "P007",
+  "P154",
+  "P182",
+  "P190",
+  "P184",
+  "P185",
+  "P076",
+  "P102"
+ ]
 }
