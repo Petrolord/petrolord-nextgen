@@ -2331,134 +2331,134 @@
       "path": "ec10-farmout/__tests__/economics.farmout.test.js",
       "kind": "extra",
       "group": "ec10-farmout-course",
-      "vendoredSha": "70c816a7c9c6aa9163c2cf8747b741e0684b2d35",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines 6626465 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the 6626465 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
+      "vendoredSha": "25ea8fd4252b98aac7e725056bb6f1e82df49197",
+      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
     },
     {
       "path": "ec10-farmout/engines/economics/afe.js",
       "kind": "extra",
       "group": "ec10-farmout-course",
       "vendoredSha": "52d840d950b16f55675bcc4862102e58760c2184",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines 6626465 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the 6626465 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
+      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
     },
     {
       "path": "ec10-farmout/engines/economics/cashflow.ts",
       "kind": "extra",
       "group": "ec10-farmout-course",
       "vendoredSha": "92906576c0cc9afdeee45dd6d640f997dcb9fb49",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines 6626465 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the 6626465 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
+      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
     },
     {
       "path": "ec10-farmout/engines/economics/decisionTree.js",
       "kind": "extra",
       "group": "ec10-farmout-course",
       "vendoredSha": "50ac7531ccf97001e32ef6e50476f32c88551f4c",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines 6626465 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the 6626465 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
+      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
     },
     {
       "path": "ec10-farmout/engines/economics/farmout.js",
       "kind": "extra",
       "group": "ec10-farmout-course",
-      "vendoredSha": "61f5845714a41b296d5bbbdb62974f6d6a00bd9b",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines 6626465 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the 6626465 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
+      "vendoredSha": "d6b4ad421a8ab1ff9d4dfcad971e7861dcc9561b",
+      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
     },
     {
       "path": "ec10-farmout/engines/economics/irrContract.js",
       "kind": "extra",
       "group": "ec10-farmout-course",
       "vendoredSha": "88a2d3c11858d6c84df765411d8fee79bea06d10",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines 6626465 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the 6626465 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
+      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
     },
     {
       "path": "ec10-farmout/engines/economics/jointVenture.js",
       "kind": "extra",
       "group": "ec10-farmout-course",
       "vendoredSha": "e843192b4b84ab4ba94fac3bb7da12911ac14f3c",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines 6626465 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the 6626465 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
+      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
     },
     {
       "path": "ec10-farmout/engines/economics/portfolio.js",
       "kind": "extra",
       "group": "ec10-farmout-course",
       "vendoredSha": "c0ae041b624e176dc31e533d443105dad7e65fb6",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines 6626465 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the 6626465 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
+      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
     },
     {
       "path": "ec10-farmout/lib/dates/dates.js",
       "kind": "extra",
       "group": "ec10-farmout-course",
       "vendoredSha": "15dba4d7ecb833fd1d9c2bf8b32942fbe4e5a382",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines 6626465 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the 6626465 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
+      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
     },
     {
       "path": "ec10-farmout/lib/stats/stats.js",
       "kind": "extra",
       "group": "ec10-farmout-course",
       "vendoredSha": "92985b59a8f78fb16d3d132a13fcbadb1a7ec4ee",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines 6626465 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the 6626465 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
+      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
     },
     {
       "path": "ec10-farmout/test-data/economics/ekene-farmout/README.md",
       "kind": "extra",
       "group": "ec10-farmout-course",
       "vendoredSha": "41889716b393d59b8d0753a97e289514989f171c",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines 6626465 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the 6626465 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
+      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
     },
     {
       "path": "ec10-farmout/test-data/economics/ekene-farmout/ekene-farmout.json",
       "kind": "extra",
       "group": "ec10-farmout-course",
       "vendoredSha": "4eae68d9b649b307da9195849d136a2195f195fb",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines 6626465 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the 6626465 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
+      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
     },
     {
       "path": "ec10-farmout/test-data/economics/goldens/farmout_cases.json",
       "kind": "extra",
       "group": "ec10-farmout-course",
-      "vendoredSha": "595b67c160811fb19e9f3eeb1518cd806afcb579",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines 6626465 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the 6626465 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
+      "vendoredSha": "ca6abfa4c9ce17a1f720521be93710750f2ee0fd",
+      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
     },
     {
       "path": "ec10-farmout/tools/validation/economics/FINDINGS-farmout.md",
       "kind": "extra",
       "group": "ec10-farmout-course",
-      "vendoredSha": "142c695846646b61a04b6e22918eadeb347ebeb4",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines 6626465 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the 6626465 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
+      "vendoredSha": "ccc08a9602221ed9b41e9e52c28da3a4118cf9b7",
+      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
     },
     {
       "path": "ec10-farmout/tools/validation/economics/make_farmout_fixtures.py",
       "kind": "extra",
       "group": "ec10-farmout-course",
       "vendoredSha": "d503b594fb9bd3b112e913dd483594371c2e51a7",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines 6626465 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the 6626465 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
+      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
     },
     {
       "path": "ec10-farmout/tools/validation/economics/negcontrol_farmout.sh",
       "kind": "extra",
       "group": "ec10-farmout-course",
-      "vendoredSha": "9347ad0d0c004ad327a8d4affeff5e6ccba7a5a5",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines 6626465 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the 6626465 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
+      "vendoredSha": "e0c3dacfc9551b8e15e7b53db76123c575d68775",
+      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
     },
     {
       "path": "ec10-farmout/tools/validation/economics/oracle_farmout.py",
       "kind": "extra",
       "group": "ec10-farmout-course",
-      "vendoredSha": "c4ed085ac2d3c76292d48c65507a50979af312ca",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines 6626465 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the 6626465 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
+      "vendoredSha": "3c8f22842ac3246ef78b5edf438ad84975e6f4c0",
+      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
     },
     {
       "path": "ec10-farmout/tools/validation/economics/oracle_jointventure.py",
       "kind": "extra",
       "group": "ec10-farmout-course",
       "vendoredSha": "256521c34f9f1e0f593d2f405f293bd8277dc326",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines 6626465 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the 6626465 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
+      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
     },
     {
       "path": "ec10-farmout/tools/validation/economics/timing_farmout.js",
       "kind": "extra",
       "group": "ec10-farmout-course",
       "vendoredSha": "19cf6156fa3aed7f08aa7c2435d02cc08c612c1c",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines 6626465 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the 6626465 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
+      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
     }
   ]
 }
