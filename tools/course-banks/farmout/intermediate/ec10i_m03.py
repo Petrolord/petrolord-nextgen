@@ -83,7 +83,7 @@ q(3, "The Ekene Deep deal is restated with a carry-amount cap of 3000000.000000 
 q(3, "Penn State EME 801, Lesson 6 prints a drill yourself or farm out problem: a producer chance of 35.000000 percent, drilling yourself paying -250000.000000 on a dry hole and 500000.000000 on a producer, farming out paying 0.000000 and 50000.000000. What EMVs does the engine return on those figures as a stated deal?",
  "12500.000000 and 17500.000000",
  ["17500.000000 and 12500.000000, the drill-yourself EMV being the larger of the two",
-  "162500.000000 and 17500.000000, the dry-hole cost left out of the drilling EMV",
+  "500000.000000 and 17500.000000, the dry-hole cost left out of the drilling EMV",
   "12500.000000 and 50000.000000, the farm-out payoff taken as its own EMV"],
  "On deal-psu-eme801 the engine returns 12500.000000 for drilling yourself and 17500.000000 for farming out, the figures the page prints (text, numbers only; the licence is non-commercial, so the course cites the figures and none of the words). Farming out is the larger EMV. Leaving out the dry hole, or taking a payoff as its EMV, ignores the chance.")
 
@@ -113,7 +113,7 @@ q(1, "On the Ekene Deep deal FIN's position pays 57575101.112542 on a success an
  ["27.281304 percent, the chance at which FIN's EMV is 0",
   "35.000000 percent, the producer chance of the Penn State problem, which the engine applies to every farm-out",
   "25.000000 percent, a chance the engine assigns to every exploration prospect it values"],
- "The chance of success is the fixture's stated term, 25.000000 percent, and the engine's source line says \"every chance, value, cost, share and amount is a stated input with no default\". 27.281304 is FIN's break-even chance, a result. The Penn State chance belongs to that problem alone, and the engine assigns no chance to any prospect.")
+ "The chance of success is the fixture's stated term, 25.000000 percent, and the engine's source line lists every chance as a stated input with no default. 27.281304 is FIN's break-even chance, a result. The Penn State chance belongs to that problem alone, and the engine assigns no chance to any prospect.")
 
 emit(Q, '/root/cat-wip-farmout/banks/ec10i_m03.json', expect_n=15)
 finish()

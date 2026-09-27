@@ -113,7 +113,7 @@
   "prompt": "Penn State EME 801, Lesson 6 prints a drill yourself or farm out problem: a producer chance of 35.000000 percent, drilling yourself paying -250000.000000 on a dry hole and 500000.000000 on a producer, farming out paying 0.000000 and 50000.000000. What EMVs does the engine return on those figures as a stated deal?",
   "options": [
    "17500.000000 and 12500.000000, the drill-yourself EMV being the larger of the two",
-   "162500.000000 and 17500.000000, the dry-hole cost left out of the drilling EMV",
+   "500000.000000 and 17500.000000, the dry-hole cost left out of the drilling EMV",
    "12500.000000 and 50000.000000, the farm-out payoff taken as its own EMV",
    "12500.000000 and 17500.000000"
   ],
@@ -162,6 +162,6 @@
    "25.000000 percent, a chance the engine assigns to every exploration prospect it values"
   ],
   "answer": 1,
-  "explanation": "The chance of success is the fixture's stated term, 25.000000 percent, and the engine's source line says \"every chance, value, cost, share and amount is a stated input with no default\". 27.281304 is FIN's break-even chance, a result. The Penn State chance belongs to that problem alone, and the engine assigns no chance to any prospect."
+  "explanation": "The chance of success is the fixture's stated term, 25.000000 percent, and the engine's source line lists every chance as a stated input with no default. 27.281304 is FIN's break-even chance, a result. The Penn State chance belongs to that problem alone, and the engine assigns no chance to any prospect."
  }
 ]

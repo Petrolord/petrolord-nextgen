@@ -14,8 +14,8 @@
   "prompt": "Where does the Ekene Deep appraisal well sit against its carry-amount cap of 3000000.000000? It costs 30000000.000000 and FIN pays 45.000000 percent of it to earn 15.000000 on top of the 20.000000 already earned (EKO holds 70.000000 and PA 30.000000 before the deal).",
   "options": [
    "\"exactly\": its carry is 3000000.000000, with FIN paying 13500000.000000",
-   "\"below\": its carry is 2250000.000000, under the cap",
-   "\"exceeded\": its carry of 4500000.000000 is held at the cap",
+   "\"below\": its carry stays under the 3000000.000000 cap",
+   "\"exceeded\": the carry passes the cap and is held there",
    "\"exactly\", with FIN paying 7500000.000000"
   ],
   "answer": 0,
@@ -69,12 +69,12 @@
   "prompt": "Add up the finished Ekene programme: a 40000000.000000 well paid 40.000000 percent by FIN for 20.000000, then a 30000000.000000 well paid 45.000000 percent for 15.000000 with the carry capped at 3000000.000000, and no cash bonus or reimbursement. Which totals are returned?",
   "options": [
    "FIN paid 29500000.000000 and EKO 19500000.000000; the carry is 11000000.000000",
-   "FIN paid 30000000.000000 and EKO 19000000.000000, 40 and 45 percent run on the two wells with no carry cap",
+   "FIN paid 13500000.000000 and EKO 7500000.000000, which is the split of the appraisal well taken on its own",
    "FIN paid 29500000.000000 and EKO 19500000.000000, a carry of 8000000.000000 from the first well alone",
    "FIN paid 16000000.000000; the appraisal well is only an obligation"
   ],
   "answer": 0,
-  "explanation": "The engine's totals are FIN 29500000.000000 (16000000.000000 plus 13500000.000000), EKO 19500000.000000 and a carry of 11000000.000000 (8000000.000000 plus the capped 3000000.000000); its reason reads \"consideration to EKO: carry 11000000 + cash bonus 0 + past-cost reimbursement 0 (0% of 0) = 11000000\". A carry of 8000000.000000 is the total with only the first event completed. Once completed, the second event's payment counts."
+  "explanation": "The engine's totals are FIN 29500000.000000 (16000000.000000 plus 13500000.000000), EKO 19500000.000000 and a carry of 11000000.000000 (8000000.000000 plus the capped 3000000.000000); its reason reads \"consideration to EKO: carry 11000000 + cash bonus 0 + past-cost reimbursement 0 (0% of 0) = 11000000\". A carry of 8000000.000000 is the total with only the first event completed, and 13500000.000000 and 7500000.000000 are the appraisal well's split alone. Once completed, the second event's payment counts."
  },
  {
   "prompt": "Express FIN's whole outlay on the two completed Ekene wells (29500000.000000 paid on 70000000.000000 of gross cost, no bonus, no reimbursement) as the heads-up share that would cost it the same. What equivalent working interest results?",
