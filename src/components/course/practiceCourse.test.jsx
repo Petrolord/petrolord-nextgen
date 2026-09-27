@@ -27,18 +27,13 @@ import { CourseCard } from '@/pages/LandingPage';
 import CourseHomePage from '@/pages/course/CourseHomePage';
 import { PracticeCourseBody } from '@/pages/apps/PracticeCourseLearningPage';
 import { HOME_COURSES } from '@/lib/homeCatalog';
-import { courseTypeOf } from '@/lib/courseType';
 import { getManifest } from '@/lib/courseContent';
 
 const html = (el) => renderToStaticMarkup(el);
-// The contracts tile, as the ship phase adds it to HOME_COURSES (its type from
-// the one courseTypeOf every tile uses).
-const CONTRACTS = {
-  slug: 'contracts', module: 'supply_chain', name: 'Contract & Supplier Management',
-  blurb: 'Run a contract from award to close-out and keep every supplier performing.',
-  status: 'coming_soon', isNew: true, courseType: courseTypeOf('contracts'),
-};
-const card = (slug) => html(<CourseCard c={slug === 'contracts' ? CONTRACTS : HOME_COURSES.find((c) => c.slug === slug)} />);
+// The contracts tile is a HOME_COURSES row since the ship phase, beside its
+// academy_apps row (20261116_sc5_contracts_course.sql).
+const CONTRACTS = HOME_COURSES.find((c) => c.slug === 'contracts');
+const card = (slug) => html(<CourseCard c={HOME_COURSES.find((c) => c.slug === slug)} />);
 const count = (s, needle) => s.split(needle).length - 1;
 const NOW = new Date('2026-10-01T00:00:00Z');
 
@@ -55,7 +50,7 @@ describe('the practice course badge', () => {
     expect(c).toContain('Coming soon');
     expect(c).toContain('Contract &amp; Supplier Management');
     for (const slug of ['procurement', 'prms', 'welldata', 'supply']) expect(card(slug)).not.toContain('Practice course');
-    const badged = [...HOME_COURSES, CONTRACTS].filter((co) => html(<CourseCard c={co} />).includes('Practice course')).map((co) => co.slug);
+    const badged = HOME_COURSES.filter((co) => html(<CourseCard c={co} />).includes('Practice course')).map((co) => co.slug);
     expect(badged).toEqual(['contracts']);
     expect(html(<CourseCard c={{ ...CONTRACTS, status: 'available' }} />)).toContain('Associate · Professional · Expert');
   });

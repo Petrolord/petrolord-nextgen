@@ -12,14 +12,14 @@
  "repo": "/root/wt-sc5-nextgen",
  "wave_dir": "/root/cat-wip-contracts",
  "kit": "practice",
- "stage": "foundation",
+ "stage": "banks",
  "pack": {
-  "lines": 452,
+  "lines": 458,
   "sections": 22,
-  "passages": 215,
-  "quoted": 99,
+  "passages": 217,
+  "quoted": 100,
   "sources": 32,
-  "sha256": "3d75ce6647ff53fb423ef0b033b03f437a5b8f86b88466753c7926fd3f774b7c"
+  "sha256": "d8336c9ce75e051c559d4b43a4a12532f257a4ebb052956e6451352c10880a6d"
  },
  "gates": {
   "structure.py": {
@@ -37,7 +37,7 @@
    "summary": "scaffold: 3 manifests, 0 stubs written, 78 existing lesson files left alone, 0 drift"
   },
   "curate_pack.py --check": {
-   "md5": "f527cc2e9c62d627cb454a3172353156",
+   "md5": "23baa2ff2d78ee743e5ad38f6183baa5",
    "command": "python3 curate_pack.py --check",
    "expected": 0,
    "exit": 0,
@@ -179,10 +179,9 @@
   "lengths.py": {
    "md5": "1fd3483894ab5958d0005cf836a0ff9d",
    "command": "python3 lengths.py",
-   "expected": 1,
-   "exit": 1,
-   "summary": "tiers read: 3  out of band: 79  not written yet: 0",
-   "stage": "foundation: expected to refuse on the 78 stubs for the stated reason"
+   "expected": 0,
+   "exit": 0,
+   "summary": "tiers read: 3  out of band: 0  not written yet: 0"
   },
   "lengths.py --selftest": {
    "md5": "1fd3483894ab5958d0005cf836a0ff9d",
@@ -248,18 +247,60 @@
    "summary": "=== negative control: 5 of 5 plants red"
   },
   "prove_prior_courses.sh": {
-   "md5": "7439005ed59400017c6e90f9cba94af1",
+   "md5": "cfd2c8ffc69a6a81c4132c21bae60b50",
    "command": "bash prove_prior_courses.sh",
    "expected": 0,
    "exit": 0,
    "summary": "PRIOR COURSES UNCHANGED: packages/engines byte-identical to origin/main; D1 to D5, H1, H3, H4, H5, SC2 and EC7 to EC11 digests, fields and precision rebuild byte-identical; cashflow, fiscal, fdp (digest), decision and po"
   },
   "gen_course.py (self checks)": {
-   "md5": "5675b6e60e6c8ea8dd80d691f75b4f59",
+   "md5": "fa069cc1eee032100b59f1ce095937f7",
    "command": "python3 gen_course.py",
    "expected": 0,
    "exit": 0,
    "summary": "gen_course: self checks passed"
+  },
+  "lengthtails.py sc5b": {
+   "md5": "3ad5008fafb05e024e9c9be8073983e7",
+   "command": "python3 lengthtails.py banks --prefix sc5b",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[lengthtails] worst single strategy on any bank: 36.7 pct (chance 25.0, refuse above 40.0)"
+  },
+  "dupaxes.py sc5b": {
+   "md5": "de6a2216f5b921b10022ed60be07df1b",
+   "command": "python3 dupaxes.py banks --prefix sc5b --threshold 0.45",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[dupaxes] 0 pair(s) at or above 0.45  within=0  exam-vs-module=0  module-vs-module=0"
+  },
+  "lengthtails.py sc5i": {
+   "md5": "3ad5008fafb05e024e9c9be8073983e7",
+   "command": "python3 lengthtails.py banks --prefix sc5i",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[lengthtails] worst single strategy on any bank: 33.3 pct (chance 25.0, refuse above 40.0)"
+  },
+  "dupaxes.py sc5i": {
+   "md5": "de6a2216f5b921b10022ed60be07df1b",
+   "command": "python3 dupaxes.py banks --prefix sc5i --threshold 0.45",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[dupaxes] 0 pair(s) at or above 0.45  within=0  exam-vs-module=0  module-vs-module=0"
+  },
+  "lengthtails.py sc5a": {
+   "md5": "3ad5008fafb05e024e9c9be8073983e7",
+   "command": "python3 lengthtails.py banks --prefix sc5a",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[lengthtails] worst single strategy on any bank: 35.6 pct (chance 25.0, refuse above 40.0)"
+  },
+  "dupaxes.py sc5a": {
+   "md5": "de6a2216f5b921b10022ed60be07df1b",
+   "command": "python3 dupaxes.py banks --prefix sc5a --threshold 0.45",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[dupaxes] 0 pair(s) at or above 0.45  within=0  exam-vs-module=0  module-vs-module=0"
   }
  }
 }

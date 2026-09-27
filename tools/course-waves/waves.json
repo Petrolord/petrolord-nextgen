@@ -1966,7 +1966,7 @@
     "course": "SC5",
     "live": "/root/cat-wip-contracts",
     "kit": "practice",
-    "kitNote": "PRACTICE KIT (Catalog Regroup plan section 3), the first one: no engine, so no digest, no graded fields, no oracle and no capstone. The teaching truth is PACK.md, built by build_pack.py from passages.json and sources/SOURCES.json, which curate_pack.py writes from the drafts made when the texts were fetched and read (sources/SOURCES_draft.json, sources/passages_draft.json, sources/NOTES.md), applying and printing each licensing decision. The three are pinned here in place of digest.txt and fields.json. The fetched texts themselves stay in the wave directory, pinned by sha256 in SOURCES.json (the World Bank texts among them are licensed for non-commercial reproduction only). Mirrored beside them: the structure and the scaffold that writes the 78 lesson stubs and three manifests (panels: [], exercise: written-scenario); TRACE.json, where each lesson records the passages it rests on; the shared gate reader packlib.py and every gate with its negative control (quotes, source trace, copy rule, vocabulary, licensed prose, brief claims, banks) and the tier-scoped lengths gate; the platform dry run on a scratch Postgres with its negative control; the prior-course proof; the course row generator (no capstone); the runner that pins every gate's md5 into wave.json; the five writer briefs (PANELS.md records that there are no panels); and the 21 bank stubs, each writing to its literal path and keeping one passage trace per question. The Expert exam bank is the written-case bank that replaces the capstone.",
+    "kitNote": "PRACTICE KIT (Catalog Regroup plan section 3), the first one: no engine, so no digest, no graded fields, no oracle and no capstone. The teaching truth is PACK.md, built by build_pack.py from passages.json and sources/SOURCES.json, which curate_pack.py writes from the drafts made when the texts were fetched and read (sources/SOURCES_draft.json, sources/passages_draft.json, sources/NOTES.md), applying and printing each licensing decision. The three are pinned here in place of digest.txt and fields.json. The fetched texts themselves stay in the wave directory, pinned by sha256 in SOURCES.json (the World Bank texts among them are licensed for non-commercial reproduction only). Mirrored beside them: the structure and the scaffold that writes the 78 lesson stubs and three manifests (panels: [], exercise: written-scenario); TRACE.json, where each lesson records the passages it rests on; the shared gate reader packlib.py and every gate with its negative control (quotes, source trace, copy rule, vocabulary, licensed prose, brief claims, banks) and the tier-scoped lengths gate; the platform dry run on a scratch Postgres with its negative control; the prior-course proof; the course row generator (no capstone); the runner that pins every gate's md5 into wave.json; the five writer briefs (PANELS.md records that there are no panels); and the 21 bank stubs, each writing to its literal path and keeping one passage trace per question. The Expert exam bank is the written-case bank that replaces the capstone. At the ship phase the mirror adds the three tier headers, gen_golive.py (the practice go-live: platform, row, no capstone, structure, bank digest, spread and copy assertions), gen_seeds.sh (the course seed, the three deep seeds and the go-live regenerated from the committed tree and diffed), scratch_extract.py and scratch_db.sh (a scratch Postgres carrying the real deep-course tables and learner functions), dryrun_sc5.sh (the six files rolled back, twice for idempotence, seven negative controls, then applied one transaction each, re-applied as a no-op, and a practice certificate claimed end to end at every tier) and apply_sc5_contracts.sh (the owner's content-pinned ladder, the platform migration first).",
     "inputs": [
       "wave.json",
       "PACK.md",
@@ -1994,6 +1994,15 @@
       "run_gates.py",
       "prove_prior_courses.sh",
       "dryrun_platform.sh",
+      "hdr_beginner.txt",
+      "hdr_intermediate.txt",
+      "hdr_advanced.txt",
+      "gen_golive.py",
+      "gen_seeds.sh",
+      "scratch_extract.py",
+      "scratch_db.sh",
+      "dryrun_sc5.sh",
+      "apply_sc5_contracts.sh",
       "mirror.sh",
       "BRIEF.md",
       "LESSON_TASK.md",
@@ -2023,8 +2032,8 @@
       "banks/sc5a_exam.py"
     ],
     "pins": {
-      "PACK.md": "3d75ce6647ff53fb423ef0b033b03f437a5b8f86b88466753c7926fd3f774b7c",
-      "passages.json": "dec6ae2e95c3e9363e3109a9a46199d22fc5aa2db86e16fff300ff651c3d4997",
+      "PACK.md": "d8336c9ce75e051c559d4b43a4a12532f257a4ebb052956e6451352c10880a6d",
+      "passages.json": "406bbe4b86d81761e2a848481fa0f9720d02f62649242cbcbf11bf159ba6b5df",
       "sources/SOURCES.json": "094ab81d616d1f60761f0e4ee93295b9eac837a9fc978cbc0ea777cf1ff9a6c6"
     }
   }

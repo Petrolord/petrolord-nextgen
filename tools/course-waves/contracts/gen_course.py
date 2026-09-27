@@ -21,6 +21,7 @@ At the FOUNDATION it runs its self checks and writes nothing:
     python3 gen_course.py            self checks only
     python3 gen_course.py --sql      self checks, then print the course migration
     python3 gen_course.py --write    ship phase only (SC5_STAGE=final): write it
+                                     (to SC5_COURSE_OUT when set, as gen_seeds.sh does)
 """
 import os
 import re
@@ -134,8 +135,9 @@ def main():
         if K.STAGE != 'final':
             print('  gen_course REFUSES: --write is the ship phase (SC5_STAGE=final), and this is the foundation')
             return 1
-        open(MIG, 'w', encoding='utf-8').write(sql())
-        print(f'  wrote {MIG}')
+        out = os.environ.get('SC5_COURSE_OUT', MIG)
+        open(out, 'w', encoding='utf-8').write(sql())
+        print(f'  wrote {out}')
     print('  gen_course: self checks passed')
     return 0
 
