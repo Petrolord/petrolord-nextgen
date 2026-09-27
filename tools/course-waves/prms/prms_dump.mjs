@@ -453,6 +453,8 @@ const PANEL_REFUSALS = [
   ['class-ekn-1', 'commerciality.market removed', (a) => dropAt(a, 'commerciality.market'), 'commerciality.market'],
   ['class-ekn-1', 'economicStatus removed', (a) => dropAt(a, 'economicStatus'), 'economicStatus'],
   ['class-ekn-6', 'chances.developmentPct removed', (a) => dropAt(a, 'chances.developmentPct'), 'chances.developmentPct'],
+  ['class-ekn-4', 'chances.developmentPct removed on a Contingent project (the chance of development control set to not stated; the empty chances object stays)', (a) => dropAt(a, 'chances.developmentPct'), 'chances.developmentPct'],
+  ['class-ekn-4', 'chances removed whole', (a) => dropAt(a, 'chances'), 'chances'],
   ['cat-reserves-cumulative', 'method removed (the method control set to not stated)', (a) => dropAt(a, 'method'), 'method'],
   ['econ-ekene', 'royalty.form removed (the royalty form control set to not stated)', (a) => dropAt(a, 'royalty.form'), 'royalty.form'],
   ['econ-ekene', 'licence.renewalExpected removed', (a) => dropAt(a, 'licence.renewalExpected'), 'licence.renewalExpected'],
@@ -900,6 +902,9 @@ table(['golden input', 'the engine\'s message, verbatim'], ['agg-refuse-tri-fit-
 w();
 w('TWO FIT REFUSALS, TWO MESSAGES. A fit no triangular can pass through at all is refused with the exactness message (golden inputs agg-refuse-tri-fit-inexact and agg-refuse-tri-fit-inexact-small); a fit that does pass through exactly and still reaches below 0 is refused with its own message (golden input agg-refuse-tri-fit-negative), both in the table above.');
 must('the negative-fit golden returns its own message', /stays at or above 0/.test(E.aggregate(argsOf('agg-refuse-tri-fit-negative')).error) && /passes through exactly/.test(E.aggregate(argsOf('agg-refuse-tri-fit-inexact-small')).error), 'fits');
+w();
+w('THE NORMAL WHOSE LOW ESTIMATE IS BELOW 0, its refusal whole (golden input agg-refuse-normal-negative-low), verbatim:');
+quote(E.aggregate(argsOf('agg-refuse-normal-negative-low')).error);
 const wideN = { resourceClass: 'reserves', level: 'field', unit: 'MMbbl', projects: [{ id: 'W', name: 'a wide normal (stated)', distribution: { type: 'normal', mean: 4, stdDev: 3.1 } }], correlation: { type: 'uniform', rho: 0 }, seed: 1, iterations: 1000 };
 const wideR = success('aggregate on one wide normal (stated probe)', E.aggregate(clone(wideN)));
 const nBelow = wideR.reasons.find((r) => /draws below 0/.test(r));

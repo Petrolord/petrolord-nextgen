@@ -28,13 +28,13 @@ The status on the first two, verbatim:
 
 ## Exactly 0 is not economic: a reading
 
-A net cash flow of exactly 0 is not above 0, so the engine calls it not economic. That is the engine's stated reading of the test, and it names the alternative: exactly 0 economic. No graded figure rests on the edge.
+A net cash flow of exactly 0 is not above 0, so the engine calls it not economic. That is its stated reading, and it names the alternative: exactly 0 economic. No graded figure rests on the edge.
 
 The test also includes abandonment, as the basis says. That too is a reading; the alternative the engine names is the test before the abandonment cost. On EKN-1 every case passes either way.
 
 ## The high case may not fail
 
-If the best case passes, the high case on the same costs and prices must pass too, because a high forecast that loses money when the best makes money describes no sensible range. The engine refuses it, verbatim:
+If the best case passes, the high case on the same costs and prices must pass too: a high forecast that loses money when the best makes money is no range. The engine refuses it, verbatim:
 
 > forecasts.high must be a forecast that is economic when the best case is (tested on the same costs and prices, PRMS 2.2.0.3: an undiscounted net cash flow above 0); got -5000000
 
@@ -52,5 +52,5 @@ Work in the reserves calculator, in the view "The economic limit and the entitle
 
 1. Start from "An undiscounted net cash flow of exactly 0". Read each case's net cash flow and verdict, and the status.
 2. Start from "The best case fails" and read the status. Compare the two starts' capital in the box.
-3. Start from "The FAQ 3.3 figures: the low case fails". In the box, change the high forecast's oil to a figure of your own whose revenue at 10 a barrel falls short of the capital of 60000000, and read the refusal.
+3. Start from "Low case fails (FAQ 3.3 example)". In the box, change the high forecast's oil to a figure of your own whose revenue at 10 a barrel falls short of the capital of 60000000, and read the refusal.
 4. On "EKN-1 Ekene Main waterflood, net entitlement", read the economic column and the status.

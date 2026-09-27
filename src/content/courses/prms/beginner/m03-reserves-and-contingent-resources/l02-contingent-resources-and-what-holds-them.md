@@ -24,7 +24,11 @@ A discovered accumulation with a recovery project that falls short of the commer
 
 ## The chance of development
 
-A discovered project carries one chance, the chance of development, and it is the chance of commerciality: Pc = Pd (PRMS 2.1.3.3). It is a stated input, and for Contingent Resources it is required. Leaving it out is refused:
+A discovered project carries one chance, the chance of development, and it is the chance of commerciality: Pc = Pd (PRMS 2.1.3.3). It is a stated input, and for Contingent Resources it is required. Clearing the chance of development in the panel is refused by name:
+
+> chances.developmentPct must be a number from 0 to 100; got nothing
+
+Leaving out the whole chances object is refused too:
 
 > chances must be an object { developmentPct } for Contingent Resources (PRMS 2.1.3.3: Pc = Pd); got nothing
 

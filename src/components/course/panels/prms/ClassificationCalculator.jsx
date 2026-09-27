@@ -201,7 +201,7 @@ export const CategorizeResult = ({ r }) => (
 );
 
 export const CATEGORIZE_STARTS = [
-  ['catReservesCumulative', 'Ekene Main Reserves, stated cumulatively'], ['catFaq33', 'The FAQ 3.3 figures, stated incrementally'],
+  ['catReservesCumulative', 'Ekene Main Reserves, stated cumulatively'], ['catFaq33', 'Incremental example (FAQ 3.3)'],
   ['catContingentIncremental', 'Ekene North, stated incrementally'], ['catContingentCumulative', 'Ekene North, stated cumulatively'],
   ['catProspective', 'Prospective Resources'], ['catSingleValue', 'One value for the range'], ['catZeroIncrement', 'A zero increment'],
 ];

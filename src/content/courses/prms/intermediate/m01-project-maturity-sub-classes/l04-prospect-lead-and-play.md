@@ -41,9 +41,9 @@ The sub-class tells a reader how much is known; the chance tells them how likely
 
 ## Exercise
 
-Work in the reserves calculator, in the view "Sub-classes and the commerciality criteria". Its starts are discovered projects, so this exercise builds a prospect in the box.
+Work in the reserves calculator, in the view "Sub-classes and the commerciality criteria".
 
 1. Start from "EKN-4 development pending" and set "Discovery (stated)" to undiscovered. Read the field the refusal names.
-2. Replace the whole box with a prospect of your own: `{"discovery":"undiscovered","recoveryProject":"established-technology","subClass":"prospect","chances":{"geologicDiscoveryPct":25,"developmentPct":80}}`. Read the class, the sub-class and the chance of commerciality.
-3. Set "Sub-class (stated)" to lead, then to play. Read the sub-class decision each time.
+2. Start from "EKN-6 Ekene Deep prospect". Read the class, the sub-class and the chance of commerciality.
+3. Start from "EKN-7 Ekene Shallow lead", then from "A play". Read the sub-class decision and the chance of commerciality each time, and match them to the table above.
 4. Set "Chance of development, percent (stated)" to not stated and read the refusal.

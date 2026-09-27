@@ -395,6 +395,8 @@ REFUSALS A PANEL CONTROL CAN PRODUCE. Each calculator panel writes every require
 | class-ekn-1 | commerciality.market removed | `commerciality.market` | commerciality.market must be true or false (stated; no default); got nothing |
 | class-ekn-1 | economicStatus removed | `economicStatus` | economicStatus must be one of "viable", "not-viable", "undetermined"; got nothing |
 | class-ekn-6 | chances.developmentPct removed | `chances.developmentPct` | chances.developmentPct must be a number from 0 to 100; got nothing |
+| class-ekn-4 | chances.developmentPct removed on a Contingent project (the chance of development control set to not stated; the empty chances object stays) | `chances.developmentPct` | chances.developmentPct must be a number from 0 to 100; got nothing |
+| class-ekn-4 | chances removed whole | `chances` | chances must be an object { developmentPct } for Contingent Resources (PRMS 2.1.3.3: Pc = Pd); got nothing |
 | cat-reserves-cumulative | method removed (the method control set to not stated) | `method` | method must be one of "cumulative", "incremental"; got nothing |
 | econ-ekene | royalty.form removed (the royalty form control set to not stated) | `royalty.form` | royalty.form must be one of "royalty-interest", "production-tax"; got nothing |
 | econ-ekene | licence.renewalExpected removed | `licence.renewalExpected` | licence.renewalExpected must be true or false (stated; no default); got nothing |
@@ -891,6 +893,9 @@ DISTRIBUTIONS STATED OR FITTED. A project states its distribution: "triangular" 
 | agg-refuse-dist-type | projects[0].distribution.type must be one of "triangular-fit", "triangular", "lognormal", "normal"; got "beta" |
 
 TWO FIT REFUSALS, TWO MESSAGES. A fit no triangular can pass through at all is refused with the exactness message (golden inputs agg-refuse-tri-fit-inexact and agg-refuse-tri-fit-inexact-small); a fit that does pass through exactly and still reaches below 0 is refused with its own message (golden input agg-refuse-tri-fit-negative), both in the table above.
+
+THE NORMAL WHOSE LOW ESTIMATE IS BELOW 0, its refusal whole (golden input agg-refuse-normal-negative-low), verbatim:
+> projects[2].distribution must be a normal whose low estimate (the mean less 1.2815515655446004 standard deviations, here -0.281552) stays at or above 0; got {"type":"normal","mean":1,"stdDev":1}
 
 A normal that stays at or above 0 at its low estimate can still draw below 0; the engine keeps those draws and says so. On a stated normal of mean 4.000000 and standard deviation 3.100000 (stated probe; its low estimate is 0.027190, engine), verbatim:
 > W: a normal distribution draws below 0 with chance 0.098469 (lib/stats normalCDF); those draws stay in the total

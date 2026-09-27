@@ -47,7 +47,7 @@ A company with a marginal low case could be tempted to report a 1P from barrels 
 
 Work in the reserves calculator, in the view "The economic limit and the entitlement".
 
-1. Start from "The FAQ 3.3 figures: the low case fails". Read each case's verdict, the category table and the tile "1P set to 0 (the low case fails)".
+1. Start from "Low case fails (FAQ 3.3 example)". Read each case's verdict, the category table and the tile "1P set to 0 (the low case fails)".
 2. In the box, lower the capital until it equals the low case's revenue, its 5000000 barrels at 10 a barrel. Read the low case's net cash flow and verdict, and the tile, and explain the result from the economic test.
 3. Lower the capital again, to any figure of your own below that revenue, and read the 1P.
-4. Open the view "Incremental and cumulative categories", choose the first start in its selector, the FAQ 3.3 figures as increments, and set the first, second and third increments to 0, 7 and 2. Compare the categories, in MMbbl, with the ones in step 1.
+4. Open the view "Incremental and cumulative categories", choose the start "Incremental example (FAQ 3.3)" and set the first, second and third increments to 0, 7 and 2. Compare the categories, in MMbbl, with the ones in step 1.

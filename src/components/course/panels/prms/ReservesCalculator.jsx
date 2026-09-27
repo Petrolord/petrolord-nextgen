@@ -79,7 +79,7 @@ export const EconomicLimitResult = ({ r }) => (
 export const ECON_STARTS = [
   ['econEkene', 'EKN-1 Ekene Main waterflood, net entitlement'], ['econGross', 'EKN-1 reported gross'], ['econWorkingInterest', 'EKN-1 at the working interest'],
   ['econProductionTax', 'EKN-1 with the royalty as a production tax'], ['econRenewal', 'EKN-1 with a renewal expected'], ['econNoLossRelief', 'EKN-1 with no loss carry forward'],
-  ['econFaq33', 'The FAQ 3.3 figures: the low case fails'], ['econBestFails', 'The best case fails'], ['econExactlyZero', 'An undiscounted net cash flow of exactly 0'],
+  ['econFaq33', 'Low case fails (FAQ 3.3 example)'], ['econBestFails', 'The best case fails'], ['econExactlyZero', 'An undiscounted net cash flow of exactly 0'],
   ['econTailZeroKept', 'A last year at exactly 0'], ['econTailOneBelow', 'A last year one barrel short'], ['econLimitsDisagree', 'The two economic-limit rules disagree'],
 ];
 
@@ -104,9 +104,10 @@ const PRO_CLASSIFY_STARTS = [
   ['classEkn4', 'EKN-4 development pending'], ['classEkn3', 'EKN-3 development on hold'], ['classEkn5', 'EKN-5 development unclarified'],
   ['classTimeFrame5', 'Development starting at five years'], ['classTimeFrame6', 'Development starting at six years'], ['classTimeFrame8', 'Eight years, a longer time-frame justified'],
   ['classEconomicsUndetermined', 'Economics undetermined'], ['classNoFirmIntention', 'No firm intention to proceed'], ['classFdp2', 'A commercial discovery two years on'],
+  ['classEkn6', 'EKN-6 Ekene Deep prospect'], ['classEkn7', 'EKN-7 Ekene Shallow lead'], ['classPlay', 'A play'],
 ];
 const PRO_CATEGORIZE_STARTS = [
-  ['catFaq33', 'The FAQ 3.3 figures, stated incrementally'], ['catReservesCumulative', 'Ekene Main Reserves, stated cumulatively'],
+  ['catFaq33', 'Incremental example (FAQ 3.3)'], ['catReservesCumulative', 'Ekene Main Reserves, stated cumulatively'],
   ['catZeroIncrement', 'A zero increment'], ['catContingentIncremental', 'Ekene North, stated incrementally'],
 ];
 

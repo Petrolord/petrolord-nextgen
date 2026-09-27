@@ -60,6 +60,14 @@ describe('THE WRITERS BEHIND THE CONTROLS', () => {
   });
 });
 
+describe('WHAT A CLEARED CHANCE OF DEVELOPMENT PRINTS', () => {
+  it('clearing only the chance of development on a Contingent project leaves the chances object and is refused on chances.developmentPct', () => {
+    const t = JSON.parse(L.setStated(L.pretty(L.STARTS.classEkn4), 'classify', 'chances.developmentPct', undefined).text);
+    expect(t.chances).toEqual({});
+    expect(L.classifyOf(t).field).toBe('chances.developmentPct');
+  });
+});
+
 describe('THE PASTE PATH THROUGH EVERY VIEW', () => {
   const VIEWS = [
     [ClassificationCalculator, 'classify', 'abagana', 'classify:prospect', ['Block of the case file', 'Discovery (stated)', 'Recovery project (stated)', 'Sub-class (stated)', 'Chance of geologic discovery, percent (stated)', 'Chance of development, percent (stated)']],

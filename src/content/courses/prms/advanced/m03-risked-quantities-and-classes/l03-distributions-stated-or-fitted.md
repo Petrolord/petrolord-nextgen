@@ -38,9 +38,9 @@ A fit that passes through exactly can still reach below zero, and that is refuse
 
 ## A normal below zero
 
-A normal has no floor. For a mean of 1 and a standard deviation of 1 the low would be -0.281552, and the engine refuses it. The refusal opens, verbatim:
+A normal has no floor. For a mean of 1 and a standard deviation of 1 the low would be -0.281552, and the engine refuses it, verbatim:
 
-> projects[2].distribution must be a normal whose low estimate (the mean less 1.2815515655446004 standard deviations, here -0.281552) stays at or above 0
+> projects[2].distribution must be a normal whose low estimate (the mean less 1.2815515655446004 standard deviations, here -0.281552) stays at or above 0; got {"type":"normal","mean":1,"stdDev":1}
 
 A normal whose low stays at or above zero can still draw below it. On a stated project W, a normal of mean 4.000000 and standard deviation 3.100000 with a low estimate of 0.027190, the engine keeps those draws and says so, verbatim:
 

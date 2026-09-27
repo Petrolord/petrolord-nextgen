@@ -46,7 +46,7 @@ A cumulative set must be ordered low, best, high, and an out-of-order set is ref
 
 Work in the reserves calculator, in the view "Incremental and cumulative categories".
 
-1. The view opens on the FAQ 3.3 figures as increments, the first start in its selector. Read both tables and check each cumulative figure as a running sum.
+1. The view opens on the start "Incremental example (FAQ 3.3)", the first in its selector. Read both tables and check each cumulative figure as a running sum.
 2. Set "Method (stated)" to cumulative. The control rewrites the estimates for the new method; fill "low estimate (stated)", "best estimate (stated)" and "high estimate (stated)" with the three cumulative figures from step 1 and confirm the increments come back.
 3. In the box, add a `"second": 1` beside the three cumulative estimates and read the refusal.
 4. Set "Method (stated)" to not stated and read the refusal.
