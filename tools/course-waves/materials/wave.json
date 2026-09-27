@@ -1,0 +1,60 @@
+{
+ "slug": "materials",
+ "prefix": "sc3",
+ "name": "Materials, Spares & Inventory Management",
+ "pathOrder": 77,
+ "module": "supply_chain",
+ "prerequisite": null,
+ "appCourse": "AN APP COURSE (plan section 5): the Suite app is the Materials & Spares Planner (Suite #740, merged ce912b35b; route /dashboard/apps/midstream-downstream/materials-spares-planner, Suite module Midstream & Downstream; its tile migrations are HELD for the owner). The course names the Suite app on its learning page and in its lessons, and the course's own calculator panels (materials-register-calculator, materials-stock-calculator, materials-spares-calculator) carry every practical over the same vendored engine engines/supplychain/inventory.js for a learner without a Suite seat. Lead decisions (cat-brief): the same published fee and the same Associate/Professional/Expert certificate ladder as the other courses; prerequisite null. OPEN (reported to the lead): the Expert certificate's Suite bridge code snapshots academy_apps.module ('supply_chain'), which matches no Suite module slug, so it cannot be redeemed against the Planner until the bridge maps a course to its Suite module (see openItems).",
+ "repo": "/root/wt-sc3-nextgen",
+ "branch": "feat/sc3-materials-course",
+ "goldens": [],
+ "goldensNote": "EMPTY BY DECISION, as EC11, EC10, EC9, EC8, SC2, EC7 and D5. The vendored golden test-data/supplychain/goldens/inventory_cases.json carries oracle output beside its inputs. The digest reads its INPUTS only and prints the engine's own figures (and asserts every refusal message equals the golden's); naming the golden here would let numsweep resolve a lesson literal against an oracle figure the digest never prints.",
+ "engines": [
+  "engines/supplychain/inventory.js",
+  "engines/hse/safetyStats.js",
+  "lib/stats/stats.js",
+  "lib/conventions/percentile.js"
+ ],
+ "enginesVendoredAt": "inventory.js vendored sha-identical from petrolord-engines 110f0a0 (engines PRs #281 and #283) at its CANONICAL path by vendor_materials.sh, with its jest suite, golden, the ekene-materials fixture and README, the fixture writer, the oracle, the timing script, the negative control and FINDINGS-inventory.md: 10 new paths ledgered in VENDOR.json as kind extra, group sc3-materials-course; pin 54cf7c4 unchanged. Its runtime imports (engines/hse/safetyStats.js, lib/stats/stats.js, lib/conventions/percentile.js) were ALREADY vendored in NextGen at the 110f0a0 blobs, so nothing shared moved (four proofs a path). The suite passes 216 of 216 on NextGen's copies.",
+ "history": {
+  "position": "THIS COURSE TEACHES NO REPAIR HISTORY. The lead's decisions on the engine (all seven FINDINGS defaults accepted; MIT OpenCourseWare cited by lecture and slide and never reproduced; the two printed Caplice slips taught as slips with the rule's figure beside the print; the one-for-one insurance-spares model stated plainly as the engine's model with its MIL-HDBK-338B anchor) landed before any lesson was written; that is provenance."
+ },
+ "regulatoryRule": "Every text is named with its edition or date, its licence and the date read (2026-09-27), printed in digest section 2; quote_check.py pins every source file's sha256 prefix and cross-checks each against FINDINGS-inventory.md. Public-domain texts (Harris 1913, the 1913 words only; MIL-HDBK-338B) are quoted with citation, each quotation in concepts.json and verified against its text. The MIT OpenCourseWare lectures of ESD.260J (CC BY-NC-SA 4.0; the course is sold) are cited by lecture and slide for their figures only and never reproduced: quote_check.py checks each cited figure in the lecture text, and gate_no_ocw_prose.py refuses any eight-word run of the lecture text anywhere a learner reads. SPE-PRMS 2018 is named only, because the P-label sentence lib/conventions/percentile.js returns ends by naming it. No legal or regulatory figure: every cost, rate, service level, band, cut-off and rounding rule is a stated input.",
+ "openReadings": {
+  "twelve significant digits": "two figures that agree to 12 significant digits tie. Never graded: every field bit-identical under reading_exact_comparison.",
+  "halves upward": "the nearest multiple takes halves upward. Never graded: bit-identical under reading_nearest_halves_down.",
+  "class minimum": "met at or above it. Never graded: bit-identical under reading_class_minimum_exclusive.",
+  "discount tie": "the smaller quantity. Never graded: bit-identical under reading_discount_tie_larger.",
+  "Poisson cycle-service target": "met at or above it. Never graded: bit-identical under reading_poisson_target_exclusive.",
+  "Poisson fill-rate target": "met at or below the units short it allows. Never graded: bit-identical under reading_poisson_fill_exclusive.",
+  "ABC tie": "ranked by id ascending. Never graded: bit-identical under reading_abc_ties_by_id_descending.",
+  "spares tie": "fewer spares. Never graded: bit-identical under reading_spares_tie_more.",
+  "slow-moving band minimum": "reached at or above it. Never graded: bit-identical under reading_band_minimum_exclusive.",
+  "cover limit": "excess strictly above it. Never graded: bit-identical under reading_cover_limit_inclusive.",
+  "stockout at equality": "a lead-time demand equal to the reorder point is met. Never graded: bit-identical under reading_stockout_at_equality.",
+  "reorder point for a service level": "the sorted draw at ceil(level x n) - 1. Never graded: bit-identical under reading_service_index_one_high.",
+  "Monte Carlo P90": "the low figure (lib/conventions/percentile.js). Never graded: bit-identical under reading_p90_as_high, and on a second seed and draw count."
+ },
+ "scopeSeams": {
+  "tendering, bid evaluation and contract types": "OWNED BY the procurement course (SC2); this course takes a stated price schedule and discount type.",
+  "terminal and depot stock, product supply and tankage": "OWNED BY the supply course (Terminals, Depots & Fuel Supply).",
+  "failure rates from field data and reliability modelling": "OWNED BY the rotating course and the reliability parts of the academy; this course takes a failure rate as a stated input.",
+  "distributions, correlation and Monte Carlo as a subject": "OWNED BY the uncertainty course; this course applies the canonical sampler to lead-time risk.",
+  "discounting and NPV": "OWNED BY the cashflow course; nothing here is discounted.",
+  "the PRMS framework behind the P-label sentence": "OWNED BY the prms course; this course names SPE-PRMS only where the engine's sentence names it."
+ },
+ "namingCollisions": {
+  "service level": "always names its measure: the cycle service level or the fill rate.",
+  "safety stock": "k times sigma over the protection period; the reorder point and the order-up-to level are named as such.",
+  "EOQ": "the unrounded square-root figure; the quantity ordered is the rounded one.",
+  "criticality class": "the class of the stated criticality policy (V, E, D in the Ekene policy), a different thing from the ABC class.",
+  "P90": "of a sampled lead time or demand, the low figure.",
+  "obsolete, slow and excess": "always of a stated band or cover limit.",
+  "insurance spare": "always of the stated one-for-one model."
+ },
+ "plan": {
+  "state": "FOUNDATION: structure, digest, capstones, fields, precision, truth, panels, learning page, gates, writer briefs, 78 lesson stubs and 21 bank stubs. Stops before lessons."
+ },
+ "openItems": {}
+}
