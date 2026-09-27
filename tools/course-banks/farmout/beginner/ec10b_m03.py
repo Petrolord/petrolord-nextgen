@@ -84,7 +84,7 @@ q(3, "Two worked cases pay the same promote ratio of 1.333333: forty paid for th
 q(0, "The earn-third-for-a-quarter reason line prints FIN's share paid with every digit of the double that was stated, while the field prints 33.333333. Which does the course tell a learner to reason with?",
  "The field at six decimals; a message prints a stated input exactly as it was given.",
  ["The message, the engine's own words.",
-  "Neither of them: round the share to 33 percent, the nearest whole point.",
+  "Neither of them: round the share to the nearest whole percent first.",
   "The message's figure rounded to the cent."],
  "The digest's precision rule: inside a message the engine prints a stated input as it was given, and every numeric field keeps full precision, quoted at six decimals. The course reasons with the field, 33.333333, and quotes a message only verbatim. Rounding to a whole point changes the deal, and cent rounding applies to money in a reason.")
 

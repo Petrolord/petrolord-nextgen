@@ -114,7 +114,7 @@
   "options": [
    "The field at six decimals; a message prints a stated input exactly as it was given.",
    "The message, the engine's own words.",
-   "Neither of them: round the share to 33 percent, the nearest whole point.",
+   "Neither of them: round the share to the nearest whole percent first.",
    "The message's figure rounded to the cent."
   ],
   "answer": 0,
