@@ -21,7 +21,7 @@ At both probabilities the drill has turned negative and the farm-out takes the r
 
 ## Why walking away never wins on the EKPAN tree
 
-The farm-out has no cost and pays 95.0000, 30.0000 or 0.0000. None of those is negative, so its weighted value can never be below walking away's 0.0000, and it is strictly above whenever success or a marginal find has any chance at all. On the EKPAN tree the walk-away branch is dominated by the farm-out, and its presence is a record of the option, not a live contender.
+The farm-out has no cost and pays 95.0000, 30.0000 or 0.0000. None of those is negative, so its weighted value can never be below walking away's 0.0000, and it is strictly above whenever success or a marginal find has any chance at all. On the EKPAN tree the walk-away branch is dominated by the farm-out, and its presence is a record of the option with no chance of being chosen here.
 
 ## Where walking away matters
 

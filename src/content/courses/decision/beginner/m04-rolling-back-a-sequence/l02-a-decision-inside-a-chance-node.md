@@ -28,9 +28,9 @@ Both Good and Poor read true, because a chance node does not choose: every outco
 
 ## The mistake
 
-The careful mistake is weighting a node value where a branch value belongs. The development chance node after a good appraisal is 375.0000, and the Decision Tree Builder's drawing labels a node with its own value, before the cost on the branch into it. Weighted into the appraisal node, that figure overstates the good branch by the whole 150.0000, a cost the company pays on every development it undertakes. The number the appraisal node takes is the decision's value, 225.0000, and for a poor result it takes the sale at 25.0000, never the development chance node's 56.0000.
+The careful mistake is weighting a node value where a branch value belongs. The development chance node after a good appraisal is 375.0000, and the Decision Tree Builder's drawing labels a node with its own value, before the cost on the branch into it. Weighted into the appraisal node, that figure overstates the good branch by the whole 150.0000, a cost the company pays on every development it undertakes. The number the appraisal node takes is the decision's value, 225.0000, and for a poor result it takes the sale at 25.0000 and leaves aside the development chance node's 56.0000.
 
-The second mistake is to average the two later decisions' branches instead of taking their best. A decision node never weights; the company gets to choose, and the rollback gives it that choice once the result is known.
+The second mistake is to average the two later decisions' branches where the rollback takes their best. A decision node never weights; the company gets to choose, and the rollback gives it that choice once the result is known.
 
 ## What it refuses
 
