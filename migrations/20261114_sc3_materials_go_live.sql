@@ -468,7 +468,7 @@ begin
    where c.app_slug = 'materials'
      and (jsonb_typeof(f->'expected') <> 'number' or jsonb_typeof(f->'tol') <> 'number'
           or abs((f->>'expected')::numeric) <= 0.001
-          or abs((f->>'expected')::numeric - round((f->>'expected')::numeric)) <= 0.001
+          or abs((f->>'expected')::numeric - round((f->>'expected')::numeric)) <= (f->>'tol')::numeric
           or (f->>'tol')::numeric is distinct from (select t.tol from (values ('beginner', 'igbariam_trim_weighted_score', 5e-07::numeric), ('beginner', 'igbariam_inhibitor_cumulative_pct', 5e-07::numeric), ('beginner', 'igbariam_inhibitor_eoq', 5e-07::numeric), ('beginner', 'igbariam_inhibitor_relevant_cost', 5e-07::numeric), ('beginner', 'igbariam_inhibitor_rounding_penalty_pct', 5e-07::numeric), ('beginner', 'igbariam_total_write_down', 5e-07::numeric), ('intermediate', 'ogidi_tubing_discount_quantity', 5e-07::numeric), ('intermediate', 'ogidi_tubing_discount_total_cost', 5e-07::numeric), ('intermediate', 'ogidi_filter_csl_safety_stock', 5e-07::numeric), ('intermediate', 'ogidi_filter_fill_rate_k', 5e-07::numeric), ('intermediate', 'ogidi_filter_periodic_level', 5e-07::numeric), ('intermediate', 'ogidi_kit_poisson_short', 5e-07::numeric), ('advanced', 'umuchu_motor_total_cost', 5e-07::numeric), ('advanced', 'umuchu_motor_downtime_cost', 5e-07::numeric), ('advanced', 'umuchu_motor_no_shortage', 5e-07::numeric), ('advanced', 'umuchu_motor_fill_rate', 5e-07::numeric), ('advanced', 'umuchu_seal_poisson_short', 5e-07::numeric), ('advanced', 'umuchu_seal_poisson_fill_rate', 5e-07::numeric)) t(tier, k, tol) where t.tier = c.tier and t.k = f->>'key')
           or coalesce(f->>'label', '') = '' or coalesce(f->>'unit', '') = '');
   if v_n <> 0 then
