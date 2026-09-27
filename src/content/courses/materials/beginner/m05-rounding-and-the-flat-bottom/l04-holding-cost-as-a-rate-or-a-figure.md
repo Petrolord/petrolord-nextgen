@@ -14,7 +14,7 @@ A policy can also state the holding cost directly, as a figure per unit per year
 
 ## What the unit cost still does
 
-With a directly stated holding cost the unit cost no longer enters the EOQ. It still matters for one line of the result, the purchase cost a year. On the case above the purchase cost is reported as none when no unit cost is stated, and as 36000.000000 when a unit cost of 30 is stated beside the holding cost. The EOQ is the same either way.
+With a directly stated holding cost the unit cost plays no part in the EOQ. It still matters for one line of the result, the purchase cost a year. On the case above the purchase cost is reported as none when no unit cost is stated, and as 36000.000000 when a unit cost of 30 is stated beside the holding cost. The EOQ is the same either way.
 
 | stated case | holding cost stated as | unit cost | EOQ | purchase cost a year |
 | --- | --- | --- | --- | --- |

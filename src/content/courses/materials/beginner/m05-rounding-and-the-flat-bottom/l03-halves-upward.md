@@ -6,11 +6,11 @@ The rule nearest has one case the plain word does not settle: an EOQ that sits e
 
 ## The exact half
 
-On a stated case with an order cost of 25, a demand of 50 a year and a holding cost of 1 a unit a year, the EOQ is exactly 50.000000. Round it to the nearest multiple of 100 and it sits exactly between 0 and 100. The engine takes it upward, to 100.000000, and its reason says so in brackets, verbatim:
+On a stated case the EOQ is exactly 50.000000, and the rule is the nearest multiple of 100. The EOQ sits exactly between 0 and 100, with neither nearer. The engine takes it upward, to 100.000000, and its reason says how, in brackets: the quantity is ordered as 100, the nearest multiple of 100, with the words "halves upward" beside it.
 
-> EOQ = sqrt(2 x 25 x 50 / 1) = 50; ordered as 100 (the nearest multiple of 100 (halves upward)), a relevant cost of 62.5 a year against 50 at the EOQ
+Every reason for the rule nearest carries those two words, so a reader never has to guess what happened at a tie. You can see the same bracket on the Harris stud, rounded to the nearest multiple of 1:
 
-Every reason for the rule nearest carries the words "halves upward", so a reader never has to guess what happened at a tie.
+> EOQ = sqrt(2 x 1.85 x 360 / 0.565) = 48.554321; ordered as 49 (the nearest multiple of 1 (halves upward)), a relevant cost of 27.43 a year against 27.43 at the EOQ
 
 ## A stated choice, with its alternative
 

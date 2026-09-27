@@ -32,7 +32,7 @@ No usage value on any item at all:
 
 > items must carry some annual usage value; every annualUsage x unitCost is 0
 
-Each is a policy that cannot work, refused before anything is computed. Each module of this tier shows the refusals of its own function. When a box carries an unknown key and also lacks a required input, the unknown key is refused first.
+Each is a policy that cannot work. Each module of this tier shows the refusals of its own function. When a box carries an unknown key and also lacks a required input, the unknown key is refused first.
 
 ## A result with a reason is a result
 
