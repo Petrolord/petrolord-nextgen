@@ -164,7 +164,7 @@
   "scope": "final",
   "module_key": null,
   "ord": 36,
-  "prompt": "Drawn as of 2027-06-30 rather than 2027-08-15, how many points does OFON-1's S-curve carry, and why?",
+  "prompt": "Drawn as of 2027-06-30, earlier than the usual 2027-08-15, how many points does OFON-1's S-curve carry, and why?",
   "options": [
    "Still 11: ten monthly steps from the start date and a closing point on the end date; the as-of date decides only where Actual stops and Forecast projects.",
    "Fewer, since the walk stops at the as-of date and plots no point after the day the report was run for.",
