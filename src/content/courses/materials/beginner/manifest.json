@@ -1,0 +1,361 @@
+{
+ "app_slug": "materials",
+ "tier": "beginner",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-materials-and-the-register",
+   "title": "Materials and the Register",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-why-a-materials-register",
+     "title": "Why a materials register",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "materials-register-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-sources-and-the-dates-they-were-read",
+     "title": "Sources and the dates they were read",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "materials-register-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-ekene-register-and-its-items",
+     "title": "The Ekene register and its items",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "materials-register-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-a-stated-policy-for-every-figure",
+     "title": "A stated policy for every figure",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "materials-register-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-calculator-panels-the-planner-and-refusals",
+     "title": "The calculator panels, the planner and the refusals",
+     "order": 5,
+     "est_minutes": 14,
+     "panels": [
+      "materials-register-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-criticality",
+   "title": "Criticality",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-criteria-and-weights",
+     "title": "Criteria and weights",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "materials-register-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-weighted-score",
+     "title": "The weighted score",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "materials-register-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-classes-and-their-minimums",
+     "title": "Classes and their minimums",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "materials-register-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-safety-override",
+     "title": "The safety override",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "materials-register-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-abc-by-annual-usage-value",
+   "title": "ABC by Annual Usage Value",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-annual-usage-value",
+     "title": "Annual usage value",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "materials-register-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-ranking-and-the-cumulative-share",
+     "title": "Ranking and the cumulative share",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "materials-register-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-item-that-crosses-a-cut-off",
+     "title": "The item that crosses a cut-off",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "materials-register-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-criticality-and-abc-side-by-side",
+     "title": "Criticality and ABC side by side",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "materials-register-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-the-economic-order-quantity",
+   "title": "The Economic Order Quantity",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-ordering-cost-and-holding-cost",
+     "title": "Ordering cost and holding cost",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "materials-register-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-harris-and-the-lot-size",
+     "title": "Harris and the lot size",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "materials-register-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-square-root-formula",
+     "title": "The square root formula",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "materials-register-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-relevant-cost-at-the-optimum",
+     "title": "The relevant cost at the optimum",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "materials-register-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-three-lots-from-a-trade-magazine",
+     "title": "Three lots from a trade magazine",
+     "order": 5,
+     "est_minutes": 14,
+     "panels": [
+      "materials-register-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-rounding-and-the-flat-bottom",
+   "title": "Rounding and the Flat Bottom",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-a-stated-rounding-rule",
+     "title": "A stated rounding rule",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "materials-register-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-cost-of-rounding",
+     "title": "The cost of rounding",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "materials-register-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-halves-upward",
+     "title": "Halves upward",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "materials-register-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-holding-cost-as-a-rate-or-a-figure",
+     "title": "Holding cost as a rate or a figure",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "materials-register-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-slow-moving-and-obsolete-stock",
+   "title": "Slow-Moving and Obsolete Stock",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-months-since-the-last-issue",
+     "title": "Months since the last issue",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "materials-register-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-bands-and-write-downs",
+     "title": "Bands and write-downs",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "materials-register-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-cover-and-excess",
+     "title": "Cover and excess",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "materials-register-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "materials-register-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}
