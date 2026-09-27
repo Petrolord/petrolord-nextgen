@@ -3,10 +3,364 @@ from bankkit import emit, finish
 Q=[]
 def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
-# EC11 Expert final exam, forty-two questions across the tier's six modules.
-# A STUB written at the foundation. The bank writer replaces the question list
-# below (BANK_TASK.md) and keeps the emit line, whose path is literal because
-# the kit's check-bank-sources reads literal paths only.
+# EC11 Expert final exam, forty-two questions, seven from each of the tier's six
+# modules, each on a fact the module bank does not key. Every numeric or refusal
+# key is a return of the vendored engine on a golden input or on a stated call
+# the digest prints; scratch/bank-advanced/witness.mjs recomputes each one. No
+# key is a Monte Carlo figure. The Ekene field is synthetic. No capstone figure.
+
+K = [3, 2, 1, 2, 1, 2, 0, 3, 0, 1, 1, 2, 0, 2, 0, 3, 3, 1, 2, 1, 0,
+     3, 0, 3, 1, 2, 3, 2, 1, 0, 1, 3, 1, 3, 2, 3, 0, 2, 0, 1, 0, 0]
+_i = iter(K)
+def x(p, c, ds, e): q(next(_i), p, c, ds, e)
+
+# ---- m01 arithmetic aggregation ----
+
+# 1
+x("Summing the best estimates of EKN-1, EKN-2 and EKN-U, which 2P does arithmetic aggregation report in MMbbl?",
+ "26.396958",
+ ["26.821102",
+  "26.430497",
+  "16.650000"],
+ "The arithmetic 2P adds the three best estimates, 16.650000, 5.746958 and 4.000000: 26.396958 (engine). The sum of the means, 26.821102, is printed beside it and is no category; 26.430497 is a sampled figure; 16.650000 is one project.")
+
+# 2
+x("For the Ekene Upper sand, a normal centred on 4.000000 with spread 0.800000, which figure enters the 1P sum?",
+ "2.974759",
+ ["4.000000",
+  "3.945035",
+  "5.025241"],
+ "The low estimate of a normal is its mean less the standard normal 90th percentile times its standard deviation: 2.974759 (engine). 4.000000 is the mean and best estimate; 3.945035 is EKN-2's low estimate, read off its lognormal; 5.025241 is the high estimate, exceeded with only 10 percent probability.")
+
+# 3
+x("Which sources does the engine's basis line cite for an aggregation?",
+ "SPE-PRMS 2018 4.2.5 and 4.2.6, 17 CFR 229.1202(a)(3), and the 2011 Guidelines 6.3",
+ ["SPE-PRMS 2018 3.1.2.1 and 3.1.2.8, with the FAQ answers 3.3 and 3.4",
+  "The 2022 Guidelines for Application of the PRMS alone, since they supersede every earlier text",
+  "17 CFR 210.4-10(a)(24) alone, which sets the 90 percent probability for every total"],
+ "The aggregation basis cites SPE-PRMS 2018 4.2.5 and 4.2.6, 17 CFR 229.1202(a)(3) (Regulation S-K Item 1202) and the Guidelines for Application of the PRMS (November 2011) 6.3. 3.1.2.1, 3.1.2.8 and the FAQ answers belong to the economic test; the 2022 Guidelines were not read; 210.4-10(a)(24) is the SEC's probability wording for proved reserves.")
+
+# 4
+x("Blocks A and B of the 2011 Guidelines' Table 6.2 are added arithmetically by the engine. What are the low, best and high of the sum?",
+ "71.800000, 89.000000 and 106.200000, each an exact sum",
+ ["76.654150, 89.000000 and a sampled high",
+  "71.800000 for the low, the rest left to the sampler",
+  "72 for the low as Fig. 6.5 rounds it, the rest rounded alike"],
+ "The engine adds lows, bests and highs: 71.800000, 89.000000 and 106.200000 (engine), and the Guidelines print 71.8 in Table 6.2. 76.654150 is the exact low of an independent sum, a different method; the arithmetic call sets every category itself; and 72 is the figure's rounding of the table, which the engine does not round.")
+
+# 5
+x("The first line of the engine's reasons on the Ekene Reserves call names the class, the project count and the level. What else does it state?",
+ "that correlation is stated for 3 pairs, citing PRMS 4.2.5.3",
+ ["that the three projects are independent unless the caller states a matrix",
+  "the seed and the draw count, citing lib/stats as the source of both of them",
+  "that the call is at the above-field level, so only arithmetic sums will follow"],
+ "The engine's opening line reads: Reserves, 3 projects at the field, property or project level; correlation stated for 3 pairs (PRMS 4.2.5.3). Nothing is assumed independent, since correlation is always stated; the seed and draws appear in the statistical line; and this call is at the field level.")
+
+# 6
+x("Set the arithmetic 3P of 38.387162 beside the sampled P10 of the Ekene total on the stated pairs (seed 20271112, 20000 draws). Which is larger?",
+ "The arithmetic 3P, by the gap the engine's fourth reason prints",
+ ["The sampled P10, since sampling widens the high end of a total",
+  "Neither: the two agree once the pairs are stated for every project",
+  "They cannot be set side by side, since one is a sum and the other a quantile of a different class"],
+ "On that seed and those draws the sampled P10 of the total is 36.465253, and the engine's reason line reports the arithmetic high above the statistical high by 1.921909. Adding every project's high assumes they all come in high together, which overstates the top of the range; pair correlations of 0.5 and 0.2 fall short of total dependence, and both figures are Reserves in MMbbl.")
+
+# 7
+x("Why does EKN-1's mean of 16.821102 differ from its best estimate of 16.650000?",
+ "Its fitted triangular is skewed, so its mean and its best estimate part",
+ ["The engine adds a risk margin to the mean of every Reserves project it aggregates",
+  "The best estimate is rounded to two decimals and the mean is not",
+  "The mean is the sampled mean of the total on seed 20271112"],
+ "The triangular fitted through 8.890000, 16.650000 and 24.990000 runs from 2.628420 to 31.737202 with its mode at 16.097684; a skewed distribution has a mean apart from its median, and the engine reads 16.821102 off it in closed form. No margin is added, the estimates are stated figures, and the project mean is closed-form.")
+
+# ---- m02 probabilistic aggregation ----
+
+# 8
+x("For the Guidelines' independent blocks the sampled P90 on seed 2011 and 200000 draws is 76.623299, against the exact low 76.654150. What is the 0.030852 between them?",
+ "Sampling error at those draws: the seeded Monte Carlo estimates a figure the closed form gives exactly",
+ ["A defect in lib/stats, since a correct sampler returns the exact low",
+  "The gap between a normal reading and a lognormal reading of the blocks",
+  "A rounding difference, since the Guidelines print 77 for the figure"],
+ "The exact low of two independent normals is 76.654150 (derived); the sampled P90 differs from it by 0.030852 at these 200000 draws, the sampling error every Monte Carlo carries. It is no defect; the lognormal reading gives a different sampled figure, 76.434906; and the Guidelines' 77 is a rounding of either.")
+
+# 9
+x("The pair EKN-2 and EKN-1 turns up twice in a pairs correlation, once in each order. Which message does the engine give?",
+ "correlation.pairs[3] must be a pair stated once; got {\"a\":\"EKN-2\",\"b\":\"EKN-1\",\"rho\":0.5}",
+ ["a result that keeps the later of the two statements of the pair",
+  "a result that averages the two statements of the pair",
+  "correlation.pairs must be one pair for each of the 3 pairs of varying projects; got \"4 pairs\""],
+ "A pair may be stated once, in either order, and the engine refuses the repeat by its index in the engine's own words. It keeps neither statement for the caller and averages nothing; the \"one pair for each\" message is for a pair left out.")
+
+# 10
+x("A pairs correlation names EKN-C, the constant project, as the second member of a pair. What does the engine return?",
+ "correlation.pairs[3].b must be one of \"EKN-1\", \"EKN-2\", \"EKN-U\"; got \"EKN-C\"",
+ ["a result, since a correlation stated on a constant has no effect on any of the draws",
+  "a refusal saying a constant must be given a correlation of 0",
+  "a result with EKN-C left out of the total"],
+ "Correlations are stated between varying projects, and a constant is not one: the engine refuses the pair and lists the three varying ids. It does not accept and ignore the pair, it asks for no special value, and a constant stays in every total, adding its value to every draw.")
+
+# 11
+x("Fifty Monte Carlo draws are requested for a total. How does the engine respond?",
+ "iterations must be an integer from 100 to 200000; got 50",
+ ["a result on 100 draws, the smallest the engine accepts",
+  "a result on 50 draws, with a warning about sampling error",
+  "iterations must be at most 45454 for 11 projects (iterations x projects at most 500000); got 50"],
+ "The draw count is a stated input from 100 to 200000, and 50 is refused in the engine's own words. It raises no count on its own and returns no result on too few draws; the draw-work message caps draws times projects from above.")
+
+# 12
+x("The correlation block is missing from a call to aggregate. What comes back?",
+ "correlation must be an object { type: \"uniform\", rho } or { type: \"pairs\", pairs } (stated; no default); got nothing",
+ ["a result on independent projects, the usual assumption",
+  "a result on total dependence, which matches the arithmetic sums",
+  "correlation.rho must be a number above -1 and below 1 (the canonical sampler takes a correlation strictly between -1 and 1); got nothing"],
+ "Correlation is always stated, and a call without it is refused, naming the two shapes it accepts. The engine assumes neither independence nor total dependence; the rho message is for a uniform correlation whose rho is out of range.")
+
+# 13
+x("A \"triangular-fit\" project gives three estimates. Which lib/stats function named in the engine's Monte Carlo basis turns them into a distribution?",
+ "fitTriangularToPercentiles",
+ ["createCorrelatedSampler, which fits each marginal as it draws",
+  "mulberry32, the seeded generator",
+  "quantile"],
+ "The Monte Carlo basis names lib/stats/stats.js: createCorrelatedSampler (Gaussian copula, Cholesky), mulberry32, fitTriangularToPercentiles and quantile. The fit is fitTriangularToPercentiles; the sampler correlates the draws and fits nothing; mulberry32 generates the seeded numbers; quantile reads the P90, P50 and P10 off the totals.")
+
+# 14
+x("For the Guidelines' independent blocks, what exact mean of the total does the engine print beside the sampled mean of 89.020435 (seed 2011, 200000 draws)?",
+ "89.000000, the sum of the two expectations",
+ ["89.020435, since the sampled mean is the exact one at 200000 draws",
+  "76.654150, the exact low of the independent sum",
+  "71.800000"],
+ "The mean of a total is the sum of the means: 53.400000 and 35.600000 give 89.000000 (engine), printed as exact; the sampled 89.020435 differs by sampling error. 76.654150 is the exact low of the sum; 71.800000 is the arithmetic sum of the lows.")
+
+# ---- m03 risked quantities and classes ----
+
+# 15
+x("Which chance does the engine use for each Ekene Contingent project when it computes the risked mean?",
+ "Its chance of commerciality, which for a discovered project is the chance of development",
+ ["Its chance of geologic discovery, which for a discovered project is 100",
+  "The product of the chance of geologic discovery and of development, as for a prospect or a lead",
+  "The average of the three projects' chances, applied to the sum of the means"],
+ "For a discovered project Pc = Pd (PRMS 2.1.3.3), and the risked mean takes each project's stated chance of commerciality times its mean. A chance of geologic discovery is refused for a discovered accumulation; Pg x Pd is the Prospective case; and no average chance is used.")
+
+# 16
+x("Which low estimate comes off the triangular stated for Ekene West tight sand (EKN-5)?",
+ "1.707107",
+ ["2.837722",
+  "3.000000",
+  "4.585786"],
+ "The engine reads a stated triangular's low, best and high in closed form: 1.707107, 2.837722 and 4.585786 MMboe, with a mean of 3.000000 (engine). The best and the mean are different figures, and 4.585786 is the high estimate, met or exceeded with only 10 percent probability.")
+
+# 17
+x("A stated triangular gives min 3, mode 2 and max 6. What does the engine return?",
+ "projects[2].distribution must be a triangular with min <= mode <= max and min < max; got {\"type\":\"triangular\",\"min\":3,\"mode\":2,\"max\":6}",
+ ["a triangular with the min and mode swapped into order",
+  "a result read as a triangular-fit through 3, 2 and 6",
+  "a refusal saying the fitted triangular would reach below 0"],
+ "A stated triangular must run min <= mode <= max with min < max, and the engine refuses one out of order in its own words. It reorders nothing, fits nothing it was not asked to fit, and the below-zero refusal belongs to a fit through estimates.")
+
+# 18
+x("EKN-4 in the Ekene Contingent Resources is a triangular fitted through stated low, best and high of 3.000000, 4.500000 and 6.500000. What mean does the engine read off it?",
+ "4.637674",
+ ["4.500000",
+  "6.500000",
+  "13.000000"],
+ "The engine reads the mean of the fitted triangular in closed form: 4.637674 MMboe (engine), above its best estimate of 4.500000 because the triangular is skewed. 6.500000 is its high estimate; 13.000000 is EKN-3's mean.")
+
+# 19
+x("A report quotes the Ekene Contingent figure 20.637674 MMboe. How must it be described?",
+ "As the unrisked sum of the means of EKN-3, EKN-4 and EKN-5, with no chance of commerciality applied",
+ ["As the risked mean of the Ekene Contingent Resources",
+  "As the arithmetic 2C of the three Contingent projects",
+  "As the Ekene Reserves and Contingent Resources together"],
+ "20.637674 is the sum of means with no chance applied; the risked mean on the stated chances is 10.114488 (engine). A sum of means is no category, and the classes are never added into one figure; \"risked\" always names its chance, so the unrisked figure says it is unrisked.")
+
+# 20
+x("On what correlation, seed and draws are the Ekene Contingent Resources sampled?",
+ "A uniform correlation of 0.300000, seed 20271113 and 20000 draws, all stated",
+ ["The Reserves pair correlations, seed 20271112 and 20000 draws, reused from that call",
+  "No correlation, since risked projects are sampled independently",
+  "A correlation fitted from the three chances of commerciality"],
+ "The fixture states a uniform correlation of 0.300000 with seed 20271113 and 20000 draws for the Contingent call. Every call states its own correlation, seed and draws; nothing is reused from another call, assumed or fitted from the chances.")
+
+# 21
+x("Why does the engine return only an arithmetic figure as reportable on the national gas total of 215.190000?",
+ "The call is made at the above-field level, where the engine reports the arithmetic sums",
+ ["The figures are constants, and constants cannot be sampled",
+  "The Commission forbids statistical totals in its release",
+  "Gas figures are always added arithmetically, whatever the level"],
+ "The golden input states the two published figures at the above-field level, and above the field the engine reports \"arithmetic\". Constants can be sampled and simply return their value on every draw; the release is cited for its figures and sets no method; and the level, whatever the fluid, decides what may be reported.")
+
+# ---- m04 reconciliation ----
+
+# 22
+x("After one year of movements, what best-estimate closing does reconcile compute for the Ekene field?",
+ "25.600000",
+ ["21.000000",
+  "26.396958",
+  "33.900000"],
+ "21 less 1.1, less 0.2, plus 5.1 and 0.8 gives 25.600000 (engine). 21.000000 is the opening; 26.396958 is an aggregation figure from another call; and 33.900000 is the computed closing 3P.")
+
+# 23
+x("The Ekene transfers movement is +3.4, +5.1 and +6.9. What does the fixture's note say it records?",
+ "Ekene infill wells moved from Contingent Resources at the investment decision",
+ ["Ekene Main production for 2027",
+  "A waterflood performance review of the Ekene Main project and its injection wells",
+  "A water injection pattern change that added recovery"],
+ "Transfers between classes are signed, positive in and negative out, and the Ekene note records the infill wells moving in from Contingent Resources at the investment decision. Production, the waterflood performance review and the injection pattern change are the other three movements, a production, a revision and improved recovery.")
+
+# 24
+x("Someone types a single quantity of 1 on a revisions row, the shape production takes. Which refusal follows?",
+ "movements[0].quantity must be left out for revisions (state low, best and high); got 1",
+ ["a result applying the quantity to every category, as for production",
+  "a result applying the quantity to the 2P alone",
+  "movements[0].low must be left out for production (one quantity applies to every category); got 1"],
+ "Revisions take a low, a best and a high; one quantity is the shape of production alone. The engine refuses the quantity in its own words and spreads it nowhere; the other message is the mirror refusal for production stated by category.")
+
+# 25
+x("A caller asks reconcile to roll Prospective Resources forward a year. What comes back?",
+ "resourceClass must be one of \"reserves\", \"contingent\"; got \"prospective\"",
+ ["a result with the movements applied to 1U, 2U and 3U",
+  "a result, provided no production movement is stated",
+  "a refusal naming the movement types for Contingent Resources"],
+ "Reconcile takes Reserves and Contingent Resources only, and it refuses the Prospective class by name in its own words. It returns no 1U, 2U or 3U roll-forward, whatever the movements, and the message listing the Contingent movement types is the one for production stated in Contingent Resources.")
+
+# 26
+x("An opening of 21 at 1P, 15.2 at 2P and 27.5 at 3P is typed into reconcile. What happens?",
+ "a refusal: opening must be ordered low <= best <= high",
+ ["a result that sorts the opening into order before the movements are added",
+  "a refusal: opening.best must be at least the low; got 15.2",
+  "the low and the best swapped, with a line in the reasons"],
+ "An opening out of order is refused with the message that opens: opening must be ordered low <= best <= high, and goes on to the percentile sentence. A computed closing out of order is reported as a result; a stated opening is checked on entry, with no reordering.")
+
+# 27
+x("A reconciliation period has additions and revisions but carries no production (rec-no-production). What replacement ratio and life index are printed?",
+ "null for both, since the period carries no production",
+ ["0.000000 for both",
+  "an infinite ratio, since additions are divided by zero production",
+  "a refusal, since a Reserves period must carry production"],
+ "Without production neither the replacement ratio nor the life index is printed: both are null (engine), and the reconciliation still closes. The engine divides by nothing; a period without production is a legitimate Reserves reconciliation.")
+
+# 28
+x("Reconcile names two SPE-PRMS 2018 sections in its basis. Which are they, and what does each cover?",
+ "3.1.3.5 for reconciliation and technical revision, and 2.2.2.6 for reclassification without new information",
+ ["4.2.5 and 4.2.6, the aggregation sections",
+  "3.1.2.1 and 3.1.2.8, the economic test",
+  "2.1.3.3 alone, the chance of commerciality"],
+ "The reconcile basis cites SPE-PRMS 2018 3.1.3.5 (reconciliation, technical revision) and 2.2.2.6 (a reclassification without new information leaves the distribution unchanged). 4.2.5 and 4.2.6 are cited for aggregation; 3.1.2.1 and 3.1.2.8 for the economic test; 2.1.3.3 for the chance of commerciality.")
+
+# ---- m05 two economic-limit rules ----
+
+# 29
+x("On EKN-1, what are the canonical economic limits of the low and the high cases?",
+ "Low 2033 with 7 trailing years cut; high 2040 with 0 cut",
+ ["Low 2037 with 3 cut; high 2041, the last year of the forecast, with 0 cut",
+  "Low 2040 with 0 cut; high 2033 with 7 cut",
+  "Low and high both 2037"],
+ "The engine returns 2033 with 7 trailing years cut for the low case and 2040 with 0 years cut for the high case, which reaches the licence expiry (engine). 2037 with 3 cut is the best case; 2041 is the last forecast year and lies beyond the licence; the cases do not share a limit.")
+
+# 30
+x("What does the canonical trailing trim look at in each year?",
+ "Revenue less royalty less opex; tax, allowances and abandonment play no part",
+ ["The net cash flow after tax in that year, including the allowances and the abandonment",
+  "The cumulative net cash flow before tax and abandonment",
+  "The discounted net cash flow at the stated discount rate"],
+ "The trim cuts a trailing year whose revenue less royalty less opex is below 0, keeping capital years and a year at exactly 0. Tax and allowances enter the economic test; the cumulative before tax and abandonment is the PRMS peak; the trim reads no discounting.")
+
+# 31
+x("Under the PRMS cumulative peak, when do interim negative years count against the limit?",
+ "Only when later positive years more than offset them",
+ ["Always: the first negative year ends the field's life",
+  "Never: interim years are ignored and only the last year is read",
+  "Only when they fall after the licence expiry"],
+ "The PRMS rule places the limit at the cumulative maximum, so interim negative years are carried through only when later positive years more than offset them; otherwise the cumulative never regains its peak and the limit stays at the peak year. The first negative year alone ends nothing; the last year alone is the trim's reading; the licence is a separate cut.")
+
+# 32
+x("Development is planned 8 years out, and the caller states that the longer wait is justified; every other criterion is met. Which class results?",
+ "Reserves: the time-frame is met because the longer time-frame is stated as justified",
+ ["Contingent Resources: 8 years is beyond the five-year benchmark whatever justification is stated",
+  "A refusal: a time-frame above 5 years must be left out of the stated commerciality facts",
+  "Contingent Resources, sub-class development-on-hold"],
+ "The engine reads the time-frame as met within 5 years, or later when a longer time-frame is stated as justified (PRMS 2.1.2.3, a recommended benchmark): 8 years, justified, gives Reserves (engine). The benchmark yields to a stated justification, nothing is refused, and no Contingent sub-class applies.")
+
+# 33
+x("A prospect states a chance of geologic discovery of 0 and a chance of development of 50 percent. What does the engine return?",
+ "Prospective Resources, sub-class prospect, with a chance of commerciality of 0.000000",
+ ["Undiscovered Unrecoverable, since no accumulation can be found when the chance of discovery is 0",
+  "A refusal: the chance of geologic discovery must be above 0",
+  "Prospective Resources with a chance of commerciality of 50.000000, the chance of development alone"],
+ "Pc = Pg x Pd = 0.000000, and the class is still Prospective Resources, sub-class prospect (engine): a chance of 0 is a boundary the engine accepts. Unrecoverable follows from having no recovery project; 0 is inside the accepted range; Pd alone is the chance for a discovered project.")
+
+# 34
+x("Which reading does the engine state for its economic limit, and what alternative does it name?",
+ "The canonical trailing trim, checked against the PRMS peak and refused where they disagree; the alternative is the limit placed at the PRMS cumulative peak",
+ ["The PRMS cumulative peak, checked against the trim; the alternative is the trim",
+  "The licence expiry; the alternative is the last forecast year",
+  "The first year of negative net cash flow after tax; the alternative is the last"],
+ "Reading four: the canonical trailing trim is the economic limit, checked against the PRMS peak and refused where they disagree, and the alternative named is the limit placed at the PRMS cumulative peak. The peak is the check; the licence is a separate cut; and the trim reads revenue less royalty less opex before tax.")
+
+# 35
+x("A commercial discovery was declared 2 years ago on class-nigeria-fdp-2, and 12 years ago on EKN-1. What do the engine's Nigerian notes say about the field development plan?",
+ "At 2 years the plan is still due within the period; at 12 years the two-year period has passed",
+ ["At both, the period has passed, since the plan was due on the very day the declaration was made to the Commission",
+  "At both, the plan is still due, since s.79(1) sets no end",
+  "The class of EKN-1 moves to Contingent Resources once the two-year period has passed without a plan"],
+ "PIA 2021 s.79(1) gives two years from a commercial discovery declaration: 2 years is inside the period and at 12 years the engine notes that the two-year period has passed. The notes are printed beside the class and leave it unchanged; EKN-1 stays Reserves.")
+
+# ---- m06 what the engine does not compute ----
+
+# 36
+x("The Act's interpretation section prints \"Significant crude oil discovery\" with a capital S and \"significant gas discovery\" without one. How does the course quote them?",
+ "As printed, each with its own capital",
+ ["Both with a capital S, for consistency",
+  "Both in lower case, since the gazette capital is a typographical slip the course corrects",
+  "In the course's own words only, since the Act may not be quoted"],
+ "The course quotes public texts exactly, a spelling or a capital included, so each definition keeps the capital the Act prints. It corrects nothing in a quotation, and the Act is a public Nigerian law that the course quotes with citation.")
+
+# 37
+x("Why does the course place no reliance on the Commission's posted copy of the Acreage Management and Petroleum (Drilling and Production) Regulation, 2024?",
+ "Its posted copy prints placeholders for its instrument and gazette numbers",
+ ["It was revoked by S.I. No. 37 of 2023",
+  "It is sold and was not read",
+  "It sets reserves booking rules the engine does not apply"],
+ "The posted copy prints placeholders where its instrument and gazette numbers belong, so the course does not rely on it. S.I. No. 37 of 2023 is an earlier instrument on significant discoveries; the copy is posted by the Commission; and no Nigerian booking rule was found at all.")
+
+# 38
+x("What does DEFAULTS.PSD_TOLERANCE of 1e-9 set?",
+ "How far the Cholesky factor may miss a stated correlation matrix before the matrix is refused",
+ ["The tolerance a reconciliation closes within when none is stated",
+  "The smallest chance of commerciality the engine accepts",
+  "The largest sampling error allowed before a Monte Carlo run is repeated"],
+ "PSD_TOLERANCE is an engine convention for the positive semidefinite check on a stated correlation. A reconciliation tolerance is a required input with no default; chances run from 0 to 100; and a seeded run is never repeated to shrink its error.")
+
+# 39
+x("From which edition was the English text of SPE-PRMS 2018 read for this course?",
+ "The SPE-hosted English-Chinese edition (Version 2023 V1.0, developed from PRMS 2018 V1.0), whose English is the 2018 text",
+ ["The 2022 edition, which revised the section numbers",
+  "The paid 2022 Guidelines, which reprint the whole standard",
+  "A summary on the NUPRC site"],
+ "The English text was read from the SPE-hosted English-Chinese edition, whose English is the 2018 text, and the section numbers are the 2018 numbers. The standard read is the 2018 text, with its 2019 to 2022 errata checked; the 2022 Guidelines are sold and were not read; the Commission's site was read for its own release and regulations.")
+
+# 40
+x("The Commission hosts S.I. No. 37 of 2023 under a file name that reads \"Significant Crude Oil and Gas Recovery Regulations\". Which title does the course cite?",
+ "The gazette title, the Significant Crude Oil and Gas Discovery Regulations, 2023",
+ ["The file name, since the Commission's own hosting is authoritative over the gazette",
+  "Both, as two separate regulations made under the Act in 2023, one on discovery and one on recovery",
+  "Neither: the course cites the PIA 2021 alone"],
+ "The gazette title is the Significant Crude Oil and Gas Discovery Regulations, 2023 (S.I. No. 37 of 2023, Official Gazette No. 111, Vol. 110, 20 June 2023), and the course cites it. The file name is a quirk of the hosting; there is one instrument; and the course quotes its regulations 3 to 7.")
+
+# 41
+x("How does the engine print money inside a reason?",
+ "Rounded to the cent, half away from zero, with trailing zeros dropped; every numeric field keeps full precision",
+ ["To six decimals, as every quantity is printed",
+  "Rounded to the nearest thousand",
+  "Truncated to whole units"],
+ "Inside a message the engine prints money rounded to the cent, half away from zero, trailing zeros dropped (156927914.66 in the EKN-1 low-case reason); a computed quantity or percentage prints to six decimals, trailing zeros dropped; and every numeric field keeps full precision. It neither rounds to thousands nor truncates.")
+
+# 42
+x("Which course of the academy owns distributions, correlation and Monte Carlo as a subject?",
+ "The uncertainty course; this engine applies the canonical seeded sampler of lib/stats to aggregation",
+ ["This course, whose aggregation module teaches sampling from first principles",
+  "The cashflow course",
+  "The reservoircalc course"],
+ "Distributions, correlation and Monte Carlo as a subject belong to the uncertainty course, and this engine applies the canonical sampler of lib/stats to aggregation without re-teaching it. The cashflow course owns the ledger, discounting and NPV; reservoircalc owns volumetrics.")
 
 emit(Q, '/root/cat-wip-prms/banks/ec11a_exam.json', expect_n=42)
 finish()

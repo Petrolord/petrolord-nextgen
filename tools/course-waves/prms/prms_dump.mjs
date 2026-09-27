@@ -888,7 +888,7 @@ quote(E.aggregate(argsOf('agg-refuse-reserves-chance')).error);
 w();
 w(`THE EKENE CONTINGENT RESOURCES (golden input agg-ekene-contingent; seed ${S(argsOf('agg-ekene-contingent').seed)}, ${S(argsOf('agg-ekene-contingent').iterations)} draws for the sampled figures):`);
 w();
-table(['project', 'distribution (stated)', 'chance of commerciality, percent (stated)', 'low', 'best', 'high', 'mean (engine)'], aC.projects.map((p) => [p.id, p.distribution.type, f6(p.chanceOfCommercialityPct), f6(p.low), f6(p.best), f6(p.high), f6(p.mean)]));
+table(['project', 'distribution (stated)', 'chance of commerciality, percent (stated)', 'low', 'best', 'high', 'mean (engine)'], aC.projects.map((p, i) => [p.id, argsOf('agg-ekene-contingent').projects[i].distribution.type, f6(p.chanceOfCommercialityPct), f6(p.low), f6(p.best), f6(p.high), f6(p.mean)]));
 w();
 w(`THE RISKED MEAN is the sum of each project's chance of commerciality times its mean: ${f6(aC.riskedMean)} ${aC.unit} (engine), against an unrisked sum of means of ${f6(aC.sumOfMeans)}. The engine's line, verbatim:`);
 quote(aC.reasons.find((r) => r.startsWith('risked mean')));

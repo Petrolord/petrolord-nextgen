@@ -4,9 +4,115 @@ Q=[]
 def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
 # EC11 Professional m06, Licence Expiry and Time.
-# A STUB written at the foundation. The bank writer replaces the question list
-# below (fifteen questions, BANK_TASK.md) and keeps the emit line, whose path is
-# literal because the kit's check-bank-sources reads literal paths only.
+# Every figure and every engine message is quoted from digest.txt, where the
+# engine returned it on the Ekene fixture or a stated golden input, and every
+# key was re-run through the vendored engine by the writer's witness
+# (scratch/bank-intermediate). No capstone name, input or value appears.
+
+q(3, "The Ekene petroleum mining lease is stated to expire in 2040 with no renewal expected, and every EKN-1 forecast runs to 2041. How much high-case oil does the engine report beyond the licence?",
+ "601257.000000 barrels",
+ ["308309.000000 barrels",
+  "98956.000000 barrels",
+  "0.000000 barrels"],
+ "The licence cut removes 2041 from each case, and the high case loses 601257.000000 barrels to it; the best loses 308309.000000 and the low 98956.000000. A case that is still paying is cut all the same, because the cut comes before the cash flow runs whenever no renewal is expected.")
+
+q(0, "The golden input econ-ekene-renewal-expected differs from the EKN-1 start only in stating a renewal as expected. What 3P in BOE does it report on the net-entitlement basis?",
+ "17256718.756667",
+ ["16851271.080000",
+  "28321464.000000",
+  "19825024.800000"],
+ "With a renewal expected the whole forecast runs, the high case reaches its economic limit in 2041, nothing is beyond the licence, and the 3P rises to 17256718.756667 BOE. 16851271.080000 is the 3P with the licence cut in 2040. 28321464.000000 and 19825024.800000 are the 3P on the gross and working-interest bases, and this input reports net entitlement.")
+
+q(2, "On that renewal-expected input, the 2P stays at 11229764.729167 BOE. Why does the renewal leave it alone?",
+ "The best case stops paying in 2037, before the expiry",
+ ["A renewal is applied to the high forecast only by rule",
+  "The 2P is always cut at the licence whatever is stated",
+  "The engine holds the 2P fixed and moves the 3P to match"],
+ "Each case is cut at its own canonical economic limit, and the best case reaches it in 2037, three years before the 2040 expiry, so the years a renewal restores add nothing to it. The renewal applies to every case alike; it matters only for a case that would still pay after the expiry. A stated renewal removes the licence cut from the 2P as well, and the engine computes each category from its own case.")
+
+q(1, "On the EKN-1 start with no renewal, which case has the licence as the thing that stops it?",
+ "The high case, whose economic limit is the expiry year 2040",
+ ["The low case, whose limit of 2033 falls well before the expiry",
+  "The best case, whose limit of 2037 is set by the licence",
+  "All three alike, since each loses its 2041 row"],
+ "The high case would still pay after 2040, so its limit is the expiry year itself, 2040, with 0 trailing years cut. The low and best cases stop paying first, in 2033 and 2037, so the trailing trim ends them well inside the licence. Every case loses 2041 to the licence, and only the high case would otherwise have produced at a profit then.")
+
+q(0, "A licence expires in 2040. Which year is the first one the no-renewal cut removes?",
+ "2041: the expiry year itself stays inside the licence",
+ ["2040, the year the right to operate ends",
+  "The year before the expiry, the last full one",
+  "None: the licence is read only by the economic test"],
+ "The cut removes the years after the stated expiry, and the expiry year produces as the forecast says. On EKN-1 each case loses 2041 alone. Cutting 2040 or the year before it would remove years the licence covers. The licence cut is applied to the forecast before the cash flow runs, ahead of the economic limit and the test.")
+
+q(3, "The golden input econ-refuse-capex-after-licence states a licence expiring in 2030, no renewal expected, and a capital row in 2031. What comes back?",
+ "costs.capex[0].year must be at most 2030, the licence expiry, when no renewal is expected; got 2031",
+ ["The capital moved to 2030, the last year inside the licence",
+  "The capital dropped with the cut years and the rest computed",
+  "A renewal read as expected, since capital is planned after the expiry"],
+ "Capital after the expiry would be spent in a period with no right to operate, on barrels the engine has already removed, so it refuses and names the row, the expiry and the condition. It never moves or drops the capital or guesses the renewal, since each would change a Reserves figure by a choice the caller did not make.")
+
+q(1, "A second capital row for 2027 is added beside the first. How does the engine treat the pair?",
+ "It refuses costs.capex[1].year: a year no other capex row has",
+ ["It adds the two rows together and runs the canonical cash flow on their sum",
+  "It keeps the first row for 2027 and silently drops the second one it finds",
+  "It moves the second row on to 2028, the next free year"],
+ "Two rows for one year would leave the engine to decide how to combine them, so it refuses the later row with the message \"costs.capex[1].year must be a year no other capex row has; got 2027\". It sums, drops and moves nothing, since each of those would be a choice the caller did not make.")
+
+q(2, "On EKN-1, effective 2027, the licence expiry is stated as 2026. What is the result?",
+ "A refusal: licence.expiryYear must be an integer from 2027 to 2300",
+ ["Every forecast year cut, with 0.000000 barrels of Reserves left in each of the three cases",
+  "The expiry moved to 2027, the effective year",
+  "The whole forecast run, since the expiry has already passed"],
+ "A licence must run at least to the effective year, so the engine refuses: \"licence.expiryYear must be an integer from 2027 to 2300; got 2026\". It returns no figures from a refused input, rewrites no stated year, and reads no past expiry as a renewal.")
+
+q(3, "The renewal control is set to not stated. What does the engine print?",
+ "A refusal naming licence.renewalExpected, a stated fact with no default",
+ ["The figures with no renewal, the cautious reading of a blank",
+  "The figures with a renewal, since the forecast runs past the expiry",
+  "licence.expiryYear must be an integer from 2027 to 2300; got nothing"],
+ "The engine's message reads \"licence.renewalExpected must be true or false (stated; no default); got nothing\". A missing renewal expectation is refused by name. The engine assumes neither answer, since either would move the 3P on EKN-1. The expiry year is still stated on this input, so the refusal names the renewal field.")
+
+q(0, "Where does the engine put the barrels it reports beyond the licence?",
+ "Nowhere: it reports them and classifies none of them",
+ ["In the 3P, since they may be produced under a renewal",
+  "In Contingent Resources, as a 1C of the same project",
+  "Out of the report, with no figure printed for them"],
+ "PRMS 3.3.3.2, which answer 4.4 of the PRMS FAQs cites, places such quantities in Contingent Resources unless an extension is reasonably expected; the engine's call covers one Reserves project, so it reports the barrels beyond the licence and leaves the Contingent quantity for the estimator to state as a project of its own. A project carries a single classification, and the figure is printed for every case.")
+
+q(2, "For US filers, what does 17 CFR 210.4-10(a)(22) (the eCFR current at 2026-09-01) ask before proved reserves may run past the expiry of the right to operate?",
+ "Evidence indicating that renewal is reasonably certain",
+ ["A reasonable expectation of renewal, as the PRMS asks",
+  "A renewal that has already been granted in writing by the regulator",
+  "Nothing: proved reserves always stop at the expiry"],
+ "The rule ends proved reserves \"prior to the time at which contracts providing the right to operate expire, unless evidence indicates that renewal is reasonably certain,\" (17 CFR 210.4-10(a)(22)). The PRMS test is a reasonable expectation, a weaker one. The SEC text asks for evidence of reasonable certainty, and it lets proved reserves run past the expiry when that evidence exists.")
+
+q(1, "The low forecast of EKN-1 reaches its economic limit in 2033. Which years does each rule remove from it?",
+ "The licence takes 2041; the limit takes the 7 years after 2033",
+ ["The licence takes every year after 2033, and the limit takes none of them",
+  "The limit takes 2041, and the licence takes all the years after 2033",
+  "Both remove the same 8 years together"],
+ "The licence cut comes first and removes the year after the 2040 expiry, 2041; the canonical trailing trim then removes the 7 years after 2033 that stop paying. The two remove different years: the licence ends in 2040, and it is the trim that ends the low case in 2033.")
+
+q(0, "The Petroleum Industry Act 2021 caps retention of a significant discovery at 10 years from the declaration (s.78(9)) and asks for a field development plan within 2 years of a commercial discovery declaration (s.79(1)). What part do these play in the economic limit calculation?",
+ "None: the engine prints them as notes beside a classification",
+ ["The 10 years become the licence expiry of any significant discovery",
+  "The 2 years set the latest capital year the engine accepts",
+  "They set the renewal expectation once the declaration is stated"],
+ "The Act's clocks are carried as Nigerian notes on a classification, and none of them sets a licence expiry in the economic limit: the expiry and the renewal expectation are stated facts of the licence held. The capital check reads the stated expiry alone, and the renewal is a stated true or false.")
+
+q(3, "On what basis is the oil beyond the licence reported?",
+ "Gross, before any reporting basis is applied",
+ ["On the stated reporting basis, like the categories",
+  "At the working interest, the company's share",
+  "In BOE only, converted at the stated Mscf per BOE"],
+ "The engine reports the barrels beyond the licence gross, as it reports the technical, beyond-limit and economic gross quantities of each case; the stated basis is applied to the reported categories. So the high case shows 601257.000000 barrels beyond the licence whatever basis is stated, and in oil as well as BOE.")
+
+q(1, "On a copy of EKN-1, the licence expiry is moved to 2041 with no renewal expected. What licence cut does the engine report?",
+ "None: every forecast ends in the expiry year",
+ ["2041 for every case, the expiry year itself",
+  "2040 for every case, as on the start",
+  "A refusal: expiry must fall before the last forecast year"],
+ "The cut removes the years after the stated expiry, and the forecasts end in 2041, so with an expiry in 2041 nothing lies beyond the licence and the licence cut column is empty for every case. The expiry year itself is kept. An expiry from 2027 to 2300 is accepted, and 2041 is well inside that range.")
 
 emit(Q, '/root/cat-wip-prms/banks/ec11i_m06.json', expect_n=15)
 finish()

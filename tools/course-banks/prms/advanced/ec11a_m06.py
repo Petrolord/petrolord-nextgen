@@ -56,9 +56,9 @@ x("What Nigerian booking or reporting rule does the engine apply to a reserves f
 # 6
 x("Fifty-one projects go into one aggregate call. Which message comes back?",
  "projects must have at most 50 entries; got 51",
- ["a result on the first 50 projects, with the 51st named as dropped",
+ ["a result on the first 50 projects, the 51st dropped",
   "iterations must be at most 45454 for 11 projects (iterations x projects at most 500000); got 51",
-  "a result, since the project cap applies only above the field level"],
+  "a result, since the cap binds only above the field level"],
  "DEFAULTS.MAX_PROJECTS is 50, and a call over it is refused in the engine's own words. Nothing is truncated; the draw-work message is a separate cap on draws times projects; and every cap applies at every level.")
 
 # 7

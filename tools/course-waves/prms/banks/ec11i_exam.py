@@ -4,9 +4,311 @@ Q=[]
 def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
 # EC11 Professional final exam, forty-two questions across the tier's six modules.
-# A STUB written at the foundation. The bank writer replaces the question list
-# below (BANK_TASK.md) and keeps the emit line, whose path is literal because
-# the kit's check-bank-sources reads literal paths only.
+# Every figure and every engine message is quoted from digest.txt, where the
+# engine returned it on the Ekene fixture or a stated golden input, and every
+# key was re-run through the vendored engine by the writer's witness
+# (scratch/bank-intermediate). The exam asks each module's material from
+# angles the module banks do not use. No capstone name, input or value appears.
+
+# Maturity sub-classes
+q(0, "A commercial project moves from approved-for-development to on-production. Which stated fact changes to move it?",
+ "Its first sales begin, so onProduction becomes true",
+ ["Its final investment decision turns from false to true",
+  "Its reserves status is restated as developed-producing first",
+  "Its chance of development reaches 100 percent"],
+ "The Reserves sub-classes lie along one path: justified becomes approved when the investment decision is taken, and approved becomes on-production when production starts (PRMS 2.1.3.5, Table 1). An approved project already has its decision. A developed-producing status is open only once the project is on production, so it follows the change and cannot lead it. A Reserves project carries no chance at all.")
+
+q(2, "A play states a chance of geologic discovery of 10.000000 percent and a chance of development of 50.000000 percent. What chance of commerciality comes back?",
+ "5.000000 percent",
+ ["10.000000 percent",
+  "50.000000 percent",
+  "None for a play"],
+ "Every Prospective sub-class carries the product Pc = Pg x Pd (PRMS 2.1.3.3), and the golden input class-play returns 5.000000 percent. Either chance alone leaves out the other. The sub-class records how much is known, and a play carries its chances like a prospect or a lead.")
+
+q(1, "A copy of a Reserves project states chances.developmentPct as 95. What does the engine do?",
+ "Refuses chances, which must be left out for Reserves",
+ ["Returns the class with a chance of commerciality of 95 percent",
+  "Returns Contingent Resources, since a chance below 100 means risk remains",
+  "Ignores the stated chance and returns the class unchanged"],
+ "The engine's message reads \"chances must be left out for Reserves (PRMS 2.1.3.3 treats Reserves as near-certain to be commercial, so no chance figure is carried); got {\"developmentPct\":95}\". No chance is carried for Reserves, the stated chance does not reopen the class, and the engine ignores no stated input silently.")
+
+q(0, "On a copy of Ekene North appraisal (EKN-4), the whole chances object is removed. Which message comes back?",
+ "chances must be an object { developmentPct } for Contingent Resources (PRMS 2.1.3.3: Pc = Pd); got nothing",
+ ["Contingent Resources with a chance of commerciality of 0 and every blocker unchanged",
+  "chances.geologicDiscoveryPct must be a number from 0 to 100; got nothing",
+  "Contingent Resources with no chance printed, as for Reserves"],
+ "A Contingent project must state its chance of development, since its chance of commerciality is Pd alone, so a missing chances object is refused whole. The engine reads no missing chance as 0. A chance of geologic discovery belongs to an undiscovered project and is refused on this one. Only Reserves leave chances out.")
+
+q(2, "Ekene West tight sand (EKN-5) states a chance of development of 20.000000 percent and the sub-class development-unclarified. What chance of commerciality does the engine print for it?",
+ "20.000000 percent",
+ ["None: it is not viable",
+  "65.000000 percent",
+  "10.500000 percent"],
+ "EKN-5 is discovered, so Pc = Pd and the engine returns 20.000000 percent (PRMS 2.1.3.3). A not-viable economic status is a blocker and removes no chance. 65.000000 percent is EKN-4's Pd. A product of two chances applies to an undiscovered project, such as the Ekene Shallow lead with its 10.500000 percent.")
+
+q(3, "In what order does the engine read the facts of a discovered project?",
+ "Class from the criteria first, then the facts that set a sub-class of that class",
+ ["The stated sub-class first, and then only the criteria that the stated sub-class needs",
+  "Reserves status first, then the project status, then the criteria",
+  "The chance of development first, since it decides whether the criteria are read"],
+ "The engine decides the class from the commerciality criteria, and only then reads the facts that set a sub-class of that class: a project status for Reserves, a stated sub-class for Contingent Resources. So a stated sub-class cannot make a project commercial, a project status is read for Reserves alone, and the reserves status is checked last against the project status. The chance of development sets the chance of commerciality and decides no class.")
+
+q(3, "A justified-for-development project, with no investment decision and no production, states a reserves status. Which statuses does the engine accept?",
+ "developed-non-producing or undeveloped",
+ ["developed-producing only, once every criterion is met",
+  "undeveloped only, since no decision has been taken",
+  "Any of the three, since the status is a stated fact"],
+ "A justified project has no wells flowing to sales, so of the three statuses (PRMS 2.1.3.6, Table 2) it may carry the two that describe quantities yet to flow; the developed producing status waits for production. The engine does not tie the status to the investment decision, and a stated status is checked against the project status.")
+
+# The commerciality criteria
+q(1, "Which criteria does the engine name as holding back Ekene West tight sand (EKN-5)?",
+ "technology under development, developmentPlan, financialAppropriations, economicStatus, firmIntention",
+ ["developmentPlan, financialAppropriations, approvals, firmIntention",
+  "economicStatus alone, since its status is stated as not-viable",
+  "financialAppropriations, timeFrame, economicStatus, market, facilities, firmIntention"],
+ "EKN-5's class decision reads \"Contingent Resources: not commercial (technology under development, developmentPlan, financialAppropriations, economicStatus, firmIntention)\". The four-item list is Ekene North appraisal's and the six-item list Ekene East gas's. A not-viable status is one blocker of five on EKN-5, and the recovery project on technology under development is another.")
+
+q(0, "A project starting development within 6 years, with no justification stated for the longer wait, states the sub-class approved-for-development. What does the refusal show?",
+ "It names subClass and prints timeFrame as the reason the project is not commercial",
+ ["It names projectStatus, since an approved project must state its investment decision too",
+  "It names commerciality.timeFrame, which must fall at or below 5 years",
+  "It names subClass and lists the six blockers of Ekene East gas"],
+ "The engine decides the class first: the time-frame fails, so the project is Contingent Resources, and a Reserves sub-class is refused with \"(not commercial: timeFrame)\" in the message beside the four Contingent sub-classes. The start of 6 is a valid input. The six-blocker message belongs to a different golden input, and the field the refusal names is subClass.")
+
+q(2, "The same 6-year project instead states a project status with the investment decision taken. Which field is refused?",
+ "projectStatus, since a Contingent project leaves it out",
+ ["subClass, which must become approved-for-development",
+  "commerciality.timeFrame.longerJustified, which the decision implies",
+  "None: a decision taken turns the project into Reserves"],
+ "The engine's message reads \"projectStatus must be left out for Contingent Resources (the project status that sets a Reserves sub-class, PRMS 2.1.3.5); got {\"finalInvestmentDecision\":true,\"onProduction\":false}\". The criteria decide the class, and a taken decision neither justifies the wait nor makes the project commercial.")
+
+q(2, "How does the engine hold the five-year benchmark of the time-frame criterion?",
+ "As PRMS_FIGURES.reasonableTimeFrameYears, 5, a recommended benchmark cited to PRMS 2.1.2.3 and 2.1.3.6.4",
+ ["As a rule of the Petroleum Industry Act 2021, cited to its section on field development plans",
+  "As the SEC's five years for proved undeveloped reserves, cited to 17 CFR 229.1203(d)",
+  "As a panel setting the learner may change in place of the stated start"],
+ "The engine holds five figures, each with its citation, and the benchmark is one: PRMS 2.1.2.3 and 2.1.3.6.4, a recommended benchmark of the standard. The Act's figure for a field development plan is 2 years (s.79(1)). The SEC's five years is a disclosure rule the engine does not carry. The start and its justification are the stated facts; the benchmark is fixed with its source.")
+
+q(1, "Regulation S-K Item 1203 (the eCFR current at 2026-09-01), paragraph (d), carries a five-year figure too. What does it require of a filer?",
+ "To explain why material proved undeveloped reserves remain undeveloped for five years or more after disclosure",
+ ["To book no proved undeveloped reserves whose development starts later than five years out",
+  "To add every field's estimates arithmetically when it reports its proved reserves",
+  "To state a firm intention to proceed before any reserves are disclosed"],
+ "The text reads \"(d) Explain the reasons why material amounts of proved undeveloped reserves in individual fields or countries remain undeveloped for five years or more after disclosure as proved undeveloped reserves.\" (17 CFR 229.1203(d)). It is a disclosure rule for filed reserves, and the engine applies the PRMS benchmark and carries no SEC time-frame rule. The arithmetic-sum rule is 229.1202(a)(3), and the firm intention is a PRMS criterion.")
+
+q(0, "On a copy of Ekene East gas (EKN-3), the market and facilities criteria are set to true. Which blockers remain?",
+ "financialAppropriations, timeFrame, economicStatus, firmIntention",
+ ["firmIntention alone, since the gas now has a buyer and a pipeline",
+  "None: a gas project needs only a market and facilities to be Reserves",
+  "financialAppropriations, timeFrame, firmIntention, the status being met"],
+ "Setting the two outward criteria true clears two of EKN-3's six blockers and leaves the money, the time-frame, the economic status and the commitment unmet, so the class stays Contingent Resources. The economic status is stated undetermined, and only viable meets criterion (4). Every criterion and the commitment must be met for Reserves.")
+
+q(2, "The Petroleum Industry Act 2021 defines a commercial discovery by the licensee's own judgement (s.318). How does the engine use a stated Nigerian declaration?",
+ "As a note printed beside the class, which moves no class",
+ ["As the eighth commerciality criterion, in place of the firm intention",
+  "As the class itself: a commercial discovery is read as Reserves",
+  "As the sub-class of a Contingent project"],
+ "The declaration is the licensee's statement to the Commission, and the engine prints it as a note beside the PRMS class. It refuses a note that contradicts a commercial project, keeping the two consistent, and lets neither change the class. The firm intention stays its own stated fact, and the sub-classes are the PRMS ones.")
+
+# Incremental and cumulative categories
+q(2, "The golden input cat-contingent-cumulative gives 1C, 2C and 3C of 3.000000, 4.500000 and 6.500000. Which third increment comes back?",
+ "2.000000",
+ ["6.500000",
+  "1.500000",
+  "4.500000"],
+ "C3 is the 3C less the 2C, 6.500000 less 4.500000, and the engine returns 2.000000 (golden input cat-contingent-cumulative), the same as when the set is stated incrementally. 6.500000 is the cumulative 3C. 1.500000 is the C2. 4.500000 is the 2C, a cumulative figure.")
+
+q(2, "The golden input cat-prospective states 12, 30 and 70 MMbbl cumulatively. What does the engine return?",
+ "1U, 2U and 3U of 12.000000, 30.000000 and 70.000000, with no increments",
+ ["1U, 2U and 3U, each followed by the increment above the one before",
+  "1P, 2P and 3P of 12.000000, 30.000000 and 70.000000",
+  "A refusal, since Prospective Resources carry no categories of their own at all"],
+ "Prospective Resources carry the categories 1U, 2U and 3U and no incremental terms (PRMS 2.2.2.4), and the engine's reason says so. The labels 1P, 2P and 3P belong to Reserves. The cumulative method is the one Prospective sets accept, so the call returns categories.")
+
+q(1, "On EKN-1's net-entitlement categories, the 3P oil is 14868768.565000 and the 2P oil 9908615.920000. What Possible (P3) oil does the engine report?",
+ "4960152.645000 barrels",
+ ["14868768.565000 barrels, the 3P",
+  "4618647.040000 barrels, the slice below it",
+  "5621506.350833, the Possible (P3) in BOE"],
+ "The Possible (P3) is the 3P less the 2P, which the engine returns as 4960152.645000 barrels of oil. 14868768.565000 is the cumulative 3P. 4618647.040000 is the Probable (P2) oil. 5621506.350833 is the same increment in BOE, which adds the gas.")
+
+q(0, "On EKN-1's net-entitlement BOE rows, how does the Proved (P1) compare with the 1P?",
+ "They are the same figure, 5995298.044167",
+ ["The Proved (P1) is smaller, being a slice of the 1P",
+  "The Proved (P1) is 5234466.685000, the slice above the 1P",
+  "They differ: the Proved (P1) is blank, since increments start at P2"],
+ "The first increment is the 1P itself: 1P = P1, and the engine prints both rows at 5995298.044167 BOE. 5234466.685000 is the Probable (P2), the slice between the 1P and the 2P. The engine prints all three increments, P1 included.")
+
+q(3, "Under the course's vocabulary, what does \"proved\" alone mean?",
+ "The cumulative 1P, the low estimate of Reserves",
+ ["The increment Proved (P1), whatever the form of the set",
+  "Any quantity shown to be true by a well test",
+  "The 2P, which a reserves report treats as its headline"],
+ "Proved alone is the cumulative 1P; the increment is always written Proved (P1), and the same pattern holds for probable (2P, P2) and possible (3P, P3). In conversation proved can mean shown to be true, and the course narrows it. The 2P is the best estimate, the probable category in cumulative form.")
+
+q(3, "Why does the engine accept a Proved (P1) of 0 and refuse a Probable (P2) of -1?",
+ "A zero slice states nothing at that confidence; a negative one breaks the order",
+ ["A zero is read as not stated at all, and a negative figure as a simple typing slip",
+  "Only the first increment may be 0, and every later increment must lie strictly above it",
+  "A negative increment is accepted only for Contingent Resources"],
+ "Zero is a statement about the evidence: nothing is confident enough to be called proved, and 1P, 2P and 3P of 0.000000, 7.000000 and 7.000000 come back for the golden zero. A negative slice would make a cumulative category smaller than the one below it, and every increment of every class must be at or above 0. The engine reads a stated 0 as stated.")
+
+q(1, "EKN-1's increments come from three forecasts cut at three different limit years. Why are they still exact differences?",
+ "The engine subtracts the three cut quantities as cumulative estimates",
+ ["The engine first cuts all three forecasts back to one common limit year",
+  "The increments are rounded to six decimals before they are added",
+  "The engine rebuilds the cases from the increments afterwards"],
+ "Each case is cut at its own economic limit and put on the stated basis, and the engine then takes the three kept quantities as the 1P, 2P and 3P and subtracts, so P2 = 2P less 1P and P3 = 3P less 2P hold exactly. No common year is used, the engine rounds nothing it computes, and it builds the increments from the cases.")
+
+# The economic limit
+q(3, "Does the EKN-1 low case pass the economic test, and on what figure?",
+ "156927914.662500, which passes",
+ ["147205926.399797, which passes",
+  "109849540.263750, which passes",
+  "156927914.662500, which fails"],
+ "The low case keeps 2027 to 2033 and returns 156927914.662500 undiscounted at 100 percent, above 0, so it is economic. 147205926.399797 is its NPV at 10.000000 percent, and 109849540.263750 its undiscounted figure at the 70.000000 percent working interest. A figure above 0 passes the test.")
+
+q(0, "The trailing trim ends the EKN-1 best forecast in 2037. What volume of oil falls in the trimmed years?",
+ "1291471.000000 barrels",
+ ["308309.000000 barrels",
+  "1864516.000000 barrels",
+  "0.000000 barrels"],
+ "The best case reaches its limit in 2037 with 3 trailing years cut, and the engine reports 1291471.000000 barrels beyond the limit. 308309.000000 is the best case's oil beyond the licence, a different cut. 1864516.000000 is the low case's oil beyond the limit. The high case is the one that loses nothing to the limit.")
+
+q(0, "Starting from 10854176.000000 technical barrels, what economic oil, gross, is left in the low forecast once the licence and the limit have cut it?",
+ "8890704.000000 barrels",
+ ["10854176.000000 barrels, before any cut",
+  "5289968.880000 barrels, net of the royalty interest",
+  "7112563, its gas in Mscf"],
+ "The technical low forecast of 10854176.000000 barrels loses 98956.000000 to the licence and 1864516.000000 to the limit, leaving 8890704.000000 barrels of economic oil, gross. 5289968.880000 is the same case on the net-entitlement basis, the 1P oil. 7112563 is the low case's gas within the limit, in Mscf, as its reason prints it.")
+
+q(3, "A price table for EKN-1 arrives with one row missing. Which message comes back?",
+ "prices must have 15 rows, one a year from 2027 to 2041; got 14",
+ ["The cash flow run on 14 years, with 2041 left out",
+  "prices must be one flat price for the whole forecast; got 14 rows",
+  "forecasts.best must have 14 rows to match the prices; got 15"],
+ "Each case, the prices and the opex must have one row a year from the effective year, in order, and a short table is refused before any arithmetic, since a missing year would otherwise vanish from the sums. The engine shortens no forecast to fit the prices, and a price is stated per year.")
+
+q(2, "The tax block is removed from EKN-1. What does the engine return?",
+ "tax must be an object { ratePct, depreciationYears, lossCarryforward }; got nothing",
+ ["The cash flow run with no tax, since the royalty alone is stated",
+  "tax.ratePct must be a number from 0 to below 100; got nothing",
+  "The Reserves figures on the stated basis, with the tax line left blank"],
+ "The tax is a stated input with no default, and the whole block is refused when it is missing, with the three keys it needs named. The engine runs no cash flow without it and prints no Reserves figure from a refused call. The message names the block itself because the block as a whole is absent.")
+
+q(1, "On the golden input econ-faq33-low-fails, what does the high case return?",
+ "30000000.000000 undiscounted, economic",
+ ["10000000.000000 undiscounted, economic",
+  "-10000000.000000 undiscounted, which fails the test",
+  "9000000.000000 undiscounted, economic"],
+ "The high case's 9000000 barrels at 10 a barrel against capital of 60000000 give 30000000.000000, above 0. 10000000.000000 is the best case and -10000000.000000 the low case, which fails. 9000000.000000 is the high case's reported oil, the 3P, in barrels.")
+
+q(0, "Which step comes first when the engine works a technical forecast?",
+ "Cutting the years after the licence expiry when no renewal is expected",
+ ["Running the canonical cash flow over the whole forecast, every year included",
+  "Finding the economic limit year of each case by the canonical trailing trim",
+  "Scaling the barrels to the stated reporting basis"],
+ "The engine works five steps in order: the licence cut, the canonical cash flow at 100 percent, the years kept up to the economic limit, the economic test, and the Reserves categories on the stated basis. So the cash flow never sees the years beyond an expiry with no renewal, and the basis is applied last.")
+
+q(0, "The first row of the low forecast states -1 barrels of oil. What does the engine return?",
+ "A refusal on forecasts.low[0].oil, which prints the -1 back",
+ ["The low case run with the row read as 0 barrels",
+  "forecasts.low must be ordered at or below the best forecast, row by row; got -1",
+  "The low case marked not economic, with 1P set to 0"],
+ "A forecast cannot hold a negative quantity, and the engine's message reads \"forecasts.low[0].oil must be a finite number at or above 0; got -1\". It rewrites no stated figure to 0. No order check between forecasts is involved here, and a refused input gives no economic verdict.")
+
+# Entitlement and the reporting basis
+q(1, "On the gross basis, what 1P in BOE does EKN-1 report?",
+ "10076131.166667",
+ ["5995298.044167",
+  "7053291.816667",
+  "18873554.166667"],
+ "Gross is the whole project at 100 percent, and the low case's economic quantities give a 1P of 10076131.166667 BOE (golden input econ-ekene-gross). 5995298.044167 is the net-entitlement 1P and 7053291.816667 the working-interest 1P. 18873554.166667 is the gross 2P.")
+
+q(3, "Discounted at the stated 10.000000 percent and scaled to the operator's share, what is the EKN-1 best case worth?",
+ "223054374.878798",
+ ["318649106.969712",
+  "267664086.856250",
+  "345104722.339947"],
+ "The best NPV at 100 percent is 318649106.969712, and applyJV multiplies it by the operator's share to give 223054374.878798. The undiscounted best share, 267664086.856250, carries no discounting, and 345104722.339947 belongs to the high forecast.")
+
+q(2, "Undiscounted, what is the EKN-1 high case worth to the 70.000000 percent partner?",
+ "456195246.115000",
+ ["651707494.450000",
+  "345104722.339947",
+  "267664086.856250"],
+ "Taken whole, the high case returns 651707494.450000 before discounting, and the partner's 70 percent of it is 456195246.115000. 345104722.339947 discounts that share at 10 percent, and 267664086.856250 is what the best forecast gives the partner.")
+
+q(3, "Which royalty form takes volume out of the net entitlement, and under which section?",
+ "The royalty interest, under PRMS 3.3.1.1",
+ ["The production tax, under PRMS 3.3.1.2",
+  "Both forms alike, under PRMS 3.3.1",
+  "Neither form: net entitlement is the working interest"],
+ "A royalty holder who owns a share of the production takes that share out of what the company may report, and the engine's line reads \"net entitlement: 70% working interest less the 15% royalty interest (PRMS 3.3.1.1)\". A production tax is paid in money and takes out no volume (PRMS 3.3.1.2). The two forms print different figures, and net entitlement equals the working interest only under the tax.")
+
+q(1, "A box states royalty.form as \"cash\". Which message comes back?",
+ "royalty.form must be one of \"royalty-interest\", \"production-tax\"; got \"cash\"",
+ ["The royalty read as a production tax, since cash is paid",
+  "royalty.ratePct must be restated as a money amount for a royalty paid in cash; got nothing",
+  "The royalty read as a royalty interest, the cautious reading"],
+ "The form is one of two stated words and the engine refuses anything else, printing the value. It maps no word onto either form, since the form moves every net-entitlement figure. The rate is a separate input and is stated on this call.")
+
+q(1, "A cost table carries a key adr beside opex, capex and abandonment. What happens?",
+ "costs.adr is refused as an unknown key, with opex, capex and abandonment listed",
+ ["The adr cost is added to the abandonment in the final year",
+  "costs.adr is dropped silently and the cash flow runs as stated",
+  "The adr cost replaces the abandonment row"],
+ "The engine's message reads \"costs.adr is not an accepted key; the accepted keys of costs are opex, capex, abandonment\". The engine reads no key it does not know and drops none silently, so nothing is added, dropped or replaced; the abandonment cost is stated under its own key.")
+
+q(3, "Under the course's vocabulary, what must the word entitlement always carry?",
+ "A named basis: gross, working interest or net entitlement",
+ ["The date of the licence that grants the right to produce it",
+  "The chance of commerciality of the project that holds it",
+  "A discount rate used for the NPV"],
+ "Entitlement is always the quantities on a named basis, and a figure quoted without its basis answers none of the three questions the bases answer. A licence date, a chance and a discount rate are each quoted with the figures they set, and none of them names whose share a quantity is.")
+
+# Licence expiry and time
+q(3, "The lease ends in 2040 with no renewal. Which volume of the low forecast sits past it?",
+ "98956.000000 barrels",
+ ["1864516.000000 barrels",
+  "601257.000000 barrels",
+  "0.000000 barrels"],
+ "The low case loses its 2041 row to the licence, 98956.000000 barrels. 1864516.000000 is the low case's oil beyond the economic limit, a different cut. 601257.000000 is the high case's oil beyond the licence. The low case stops paying in 2033 and still loses 2041 to the licence cut, which comes first.")
+
+q(2, "With a renewal expected on EKN-1, what economic limit and oil beyond the licence does the high case return?",
+ "2041, with 0.000000 barrels beyond the licence",
+ ["2040, with 601257.000000 barrels beyond the licence",
+  "2041, with 601257.000000 barrels beyond the licence",
+  "2040, with 0.000000 barrels beyond the licence"],
+ "With a renewal expected no year is cut for the licence, so the high case runs to 2041, which pays, and its limit becomes 2041 with nothing beyond the licence. 2040 and 601257.000000 are the figures with no renewal, where the cut removes 2041 before the cash flow runs.")
+
+q(3, "An EKN-1 box lacks reportingBasis and also carries an unknown top-level key basis. Which refusal comes first?",
+ "The refusal on basis as a key the engine does not read",
+ ["The missing input: reportingBasis must be one of the three bases; got nothing",
+  "Neither: basis is read as the reporting basis and the call runs",
+  "Both together, in one message naming the two fields"],
+ "Every function checks its accepted keys before it reads an input, so the engine returns \"basis is not an accepted key; the accepted keys at the top level are effectiveYear, forecasts, prices, costs, royalty, tax, workingInterestPct, licence, reportingBasis, discountRatePct, mscfPerBoe\". The missing basis is refused only once the key is fixed. The engine reads no near-match as a known key, and it refuses one field at a time.")
+
+q(2, "EKN-1 states a commercial discovery declared 12 years ago. Which Nigerian note does the engine print?",
+ "The note that a field development plan was due within 2 years and the two-year period has passed",
+ ["A refusal, since a field development plan is overdue under PIA 2021 s.79(1)",
+  "The note that the area is relinquished at the end of a 10-year retention",
+  "A change of class to Contingent Resources until the plan is filed"],
+ "The engine's note reads \"commercial discovery declared (PIA 2021 s.78(8)(a)); a field development plan is due within 2 years of the declaration (s.79(1)); 12 years since the declaration: the two-year period has passed\". Notes are printed beside the class and move no class; the engine refuses nothing for elapsed time. Retention and relinquishment belong to a significant discovery, and EKN-1 declares a commercial one.")
+
+q(1, "The year of the fourth row of the EKN-1 best forecast is changed to 2031. Which message comes back?",
+ "forecasts.best[3].year must be 2030 (one row a year from 2027, in order); got 2031",
+ ["The best case run with 2030 left out of the sums",
+  "forecasts.best must be sorted by year; got 2031",
+  "prices must have 15 rows, one a year from 2027 to 2041; got 14"],
+ "The rows are checked before any arithmetic, and a gap is refused by the row's path with the year it must hold, so no year can vanish from the sums unseen. The price table is complete here; the gap is in the forecast.")
+
+q(0, "Under the course's vocabulary, which inputs does a quoted Reserves figure carry with it?",
+ "Its basis, its forecast case, its economic limit and its licence",
+ ["Its unit and its category method alone",
+  "Its chance of geologic discovery and its chance of development if found",
+  "Its discount rate alone, since the NPV sets its value"],
+ "A figure that depends on an input is quoted with it, and a Reserves figure depends on the basis, the case, the economic limit and the licence. A unit and a method describe a category set, the two chances to a chance of commerciality, and the discount rate to an NPV.")
 
 emit(Q, '/root/cat-wip-prms/banks/ec11i_exam.json', expect_n=42)
 finish()

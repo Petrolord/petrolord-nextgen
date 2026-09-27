@@ -25,9 +25,9 @@ x("The Ekene field Reserves (synthetic) open the year at 15.200000, 21.000000 an
 # 2
 x("Carry the same Ekene movements through to the high category. Where does the 3P close?",
  "33.900000",
- ["27.500000, the opening 3P, since production and revisions offset the additions",
-  "25.600000, the 2P closing",
-  "38.387162, the arithmetic 3P of the Ekene Reserves aggregation"],
+ ["27.500000",
+  "25.600000",
+  "38.387162"],
  "27.5 less 1.1, less 0.6, plus 6.9 and 1.2 gives 33.900000 (engine). The movements do not offset one another; 25.600000 is the 2P closing; and 38.387162 is an aggregation figure from a different call, a sum of three projects' high estimates.")
 
 # 3
@@ -35,11 +35,11 @@ x("In a Reserves reconciliation, how does the engine apply a production movement
  "As one quantity subtracted from the 1P, the 2P and the 3P alike",
  ["From the 1P alone, since production draws on the proved volumes first",
   "In proportion to each category, so the 3P loses the most barrels",
-  "From the 2P alone, with the 1P and 3P moved by revisions"],
+  "From the 2P alone, with the 1P and the 3P moved by the revisions"],
  "The engine's basis reads that production comes out of every Reserves category alike: one quantity, 1.1 in the Ekene case, is subtracted from 1P, 2P and 3P. That is the engine's stated convention, printed as a reading; no category is spared and nothing is prorated.")
 
 # 4
-x("A caller states the Ekene production movement with a low, a best and a high. What does the engine return?",
+x("The Ekene production movement is typed as a low of 1 with a best and a high. What does the engine return?",
  "movements[0].low must be left out for production (one quantity applies to every category); got 1",
  ["a result that subtracts each stated figure from its own category",
   "movements[0].quantity must be left out for revisions (state low, best and high); got 1",
@@ -88,7 +88,7 @@ x("When the 2P miss is -0.250000 and the stated tolerance is exactly 0.250000 (r
 
 # 10
 x("Suppose the 2P miss grows to -0.312500 while the stated tolerance stays 0.250000 (golden input rec-difference-above-tolerance). Does the call close?",
- "closes false",
+ "closes false, since the miss of 0.312500 exceeds the tolerance in size",
  ["closes true, because the difference is negative and so below the tolerance",
   "closes true, because the tolerance is read as a share of the 2P",
   "a refusal naming the tolerance, since the difference exceeds it"],
@@ -97,9 +97,9 @@ x("Suppose the 2P miss grows to -0.312500 while the stated tolerance stays 0.250
 # 11
 x("The Ekene reconciliation carries 1.1 of production. What 2P replacement ratio does the engine return?",
  "5.181818",
- ["23.272727, since the replacement ratio is the 2P over the production",
-  "5.7, the movements other than production before any division",
-  "0.300000, the 1P revision over the production"],
+ ["23.272727",
+  "5.7",
+  "0.300000"],
  "The engine divides every movement other than production at 2P (revisions -0.2, transfers 5.1 and improved recovery 0.8, together 5.7) by the production 1.1: 5.181818. 23.272727 is the 2P life index, a different figure; 5.7 is the numerator before the division; 0.300000 is the 1P revision alone.")
 
 # 12
@@ -112,10 +112,10 @@ x("The engine's 2P life index on the Ekene reconciliation is 23.272727 years. Ho
 
 # 13
 x("On the golden input rec-divest-acquire the divestments exceed the additions. What 2P replacement ratio does the engine return?",
- "-0.750000",
- ["0.750000, since the ratio is reported by its size",
-  "null, since a divestment period has no ratio",
-  "a refusal: the ratio cannot be negative"],
+ "-0.750000, reported with its sign",
+ ["0.750000, reported by its size alone",
+  "null, as for a period with no ratio",
+  "a refusal, as a ratio cannot be negative"],
  "Every movement other than production counts, divestments subtracted, so the ratio can fall below 0: -0.750000 (engine). The sign is kept, a figure is printed, and nothing is refused; the ratio is null only when the period carries no production.")
 
 # 14

@@ -2,9 +2,9 @@
  {
   "prompt": "The Ekene Main Reserves are stated cumulatively as 8.890000, 16.650000 and 24.990000 MMbbl. What Probable (P2) does the engine return?",
   "options": [
-   "16.650000 MMbbl, the best estimate itself",
-   "8.340000 MMbbl, the slice above the 2P",
-   "8.890000 MMbbl, the Proved (P1) slice",
+   "16.650000 MMbbl",
+   "8.340000 MMbbl",
+   "8.890000 MMbbl",
    "7.760000 MMbbl"
   ],
   "answer": 3,
@@ -35,10 +35,10 @@
  {
   "prompt": "Ekene North's Contingent Resources are stated incrementally as C1 3.000000, C2 1.500000 and C3 2.000000. What 2C does the engine return?",
   "options": [
-   "1.500000, the stated second increment",
-   "6.500000, the sum of all three increments",
+   "1.500000",
+   "6.500000",
    "4.500000",
-   "3.000000, the 1C carried unchanged"
+   "3.000000"
   ],
   "answer": 2,
   "explanation": "The 2C is C1 plus C2, 3.000000 plus 1.500000, and the engine returns 4.500000, the same figure it gives when the set is stated cumulatively (golden input cat-contingent-cumulative). 1.500000 is the slice C2 alone. 6.500000 is the 3C, which adds C3. 3.000000 is the 1C, the first slice."
@@ -123,10 +123,10 @@
  {
   "prompt": "On Ekene Main waterflood (EKN-1) the net-entitlement categories give a 2P oil of 9908615.920000 and a 1P oil of 5289968.880000 barrels. What Probable (P2) oil does the engine report?",
   "options": [
-   "9908615.920000 barrels, the 2P",
+   "9908615.920000 barrels",
    "4618647.040000 barrels",
-   "5289968.880000 barrels, which is the Proved (P1) slice",
-   "4960152.645000 barrels, the increment above the 2P"
+   "5289968.880000 barrels",
+   "4960152.645000 barrels"
   ],
   "answer": 1,
   "explanation": "Increments from three forecasts are exact differences of the three cut, entitled quantities, so the Probable (P2) oil is 9908615.920000 less 5289968.880000, which the engine returns as 4618647.040000. 9908615.920000 is the cumulative 2P. 5289968.880000 is the Proved (P1), equal to the 1P. 4960152.645000 is the Possible (P3) oil."
@@ -136,7 +136,7 @@
   "options": [
    "The high case runs longer before its canonical economic limit",
    "The Possible (P3) carries the P10 label, which always sits highest",
-   "The engine scales the Possible (P3) by the gas factor only",
+   "The engine scales the Possible (P3) alone by the stated gas factor",
    "A mistake in the forecast, which the engine would refuse on order"
   ],
   "answer": 0,

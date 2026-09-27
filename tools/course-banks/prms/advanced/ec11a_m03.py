@@ -41,9 +41,9 @@ x("The Ekene Prospective Resources (EKN-6 and EKN-7) are aggregated with their c
 # 4
 x("A caller wants one total for the Ekene Reserves, Contingent Resources and Prospective Resources together. What does the engine allow?",
  "One class a call: each class is aggregated on its own, and each figure says whether it is risked",
- ["One call with every project, each class weighted by its chance before the categories are summed into one",
+ ["Every project in one call, each class weighted by its chance before the categories are summed into one",
   "One call with every project, the Reserves entered at a chance of commerciality of 100",
-  "One call with every project once the level is set above the field, where the classes merge"],
+  "A single call once the level is set above the field, where the classes merge"],
  "The engine aggregates the projects of one class at a time; the classes are not added into one figure (PRMS 4.2.6; FAQ 6.9; the 2011 Guidelines 6.4). No weighting merges them; a chance stated on Reserves is refused; and the level decides only what may be reported.")
 
 # 5
@@ -91,11 +91,11 @@ x("A project states a normal with mean 1 and standard deviation 1. What does the
  "a refusal, because its low estimate would be -0.281552",
  ["a result whose negative draws are set to 0 before the total is read",
   "a refusal, because a normal is accepted only for Contingent Resources",
-  "a result with a warning that the normal draws below 0 at a chance of 0.098469"],
- "The engine refuses a normal whose low estimate, the mean less the standard normal 90th percentile times the standard deviation, is below 0: here -0.281552. It truncates no draw; a normal is taken for any class; and the warning line is for a normal whose low estimate stays at or above 0 but which can still draw below 0.")
+  "a result with a line in the reasons that the normal draws below 0 at a chance of 0.098469"],
+ "The engine refuses a normal whose low estimate, the mean less the standard normal 90th percentile times the standard deviation, is below 0: here -0.281552. It truncates no draw; a normal is taken for any class; and the line in the reasons is for a normal whose low estimate stays at or above 0 but which can still draw below 0.")
 
 # 11
-x("A stated probe gives a normal of mean 4.000000 and standard deviation 3.100000, whose low estimate is 0.027190. What does the engine do with its draws below 0?",
+x("A stated project W is a normal of mean 4.000000 and standard deviation 3.100000, whose low estimate is 0.027190. What does the engine do with its draws below 0?",
  "It keeps them in the total and prints a line with their chance, 0.098469, from lib/stats normalCDF",
  ["It refuses the normal, since any chance below 0 is a refusal",
   "It discards them and draws again until each draw is at or above 0, so the total can never fall below 0",

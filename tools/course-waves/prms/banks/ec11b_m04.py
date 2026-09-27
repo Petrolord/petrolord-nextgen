@@ -12,9 +12,9 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
 q(1, "Which labels does the engine give the low, best and high estimates of Contingent Resources?",
  "1C, 2C and 3C.",
- ["1P, 2P and 3P, the labels the engine uses for every class that has a recovery project.",
-  "1U, 2U and 3U, since the quantities are still contingent on a decision.",
-  "C1, C2 and C3, which name the three cumulative figures of a Contingent project."],
+ ["1P, 2P and 3P.",
+  "1U, 2U and 3U.",
+  "C1, C2 and C3."],
  "Each class has its own letter (PRMS 2.2.2.2 to 2.2.2.4): P for Reserves, C for Contingent Resources and U for Prospective Resources, with the number counting up from the low estimate. C1, C2 and C3 are the incremental slices of Contingent Resources, which the engine returns beside the cumulative 1C, 2C and 3C.")
 
 q(3, "The Ekene Main Reserves are stated cumulatively as 8.890000, 16.650000 and 24.990000 MMbbl. What is the 2P, and which probability label does the engine print beside it?",
@@ -33,16 +33,16 @@ q(0, "What Probable (P2) does the engine return for the Ekene Main Reserves (1P 
 
 q(2, "In the same Ekene Main set, which figure is the Possible (P3)?",
  "8.340000 MMbbl.",
- ["24.990000 MMbbl, the 3P, which is also the possible slice.",
-  "7.760000 MMbbl, the slice between the 1P and the 2P.",
-  "16.650000 MMbbl, the 2P, since the possible range begins at the best estimate."],
+ ["24.990000 MMbbl.",
+  "7.760000 MMbbl.",
+  "16.650000 MMbbl."],
  "Possible (P3) is the top slice: take the 2P of 16.650000 from the 3P of 24.990000 and 8.340000 is left, the figure the increments table prints. The 3P itself is cumulative and holds all three slices. 7.760000 is the middle slice, and 16.650000 is the best estimate.")
 
 q(0, "The Ekene North estimates are stated incrementally as C1 3.000000, C2 1.500000 and C3 2.000000. What 3C does the engine return?",
  "6.500000.",
- ["2.000000, since the 3C is the third slice.",
-  "4.500000, the sum of the first two slices, which is the best estimate of the project.",
-  "1.500000, the C2 slice."],
+ ["2.000000.",
+  "4.500000.",
+  "1.500000."],
  "The 3C is cumulative: C1 plus C2 plus C3, 3.000000 plus 1.500000 plus 2.000000, which is 6.500000, and the engine returns the same figure when the set is stated cumulatively. 2.000000 is the C3 slice and 4.500000 is the 2C.")
 
 q(2, "The Ekene North set is entered twice: once as slices and once as totals of 3.000000, 4.500000 and 6.500000. What does the engine return for the two calls?",
@@ -66,7 +66,7 @@ q(1, "A learner sets the method of the Prospective case to incremental. What doe
   "estimates.low must be left out for the incremental method (state first, second and third); got 12"],
  "Those are the engine's own words for the golden case cat-refuse-prospective-incremental. The \"got nothing\" message answers a method left out, and the estimates.low message answers a low stated with the incremental method on a class that has slices. The engine invents no slices for a prospect.")
 
-q(1, "The Class control of the categories view is set to \"resources\". What does the engine print?",
+q(1, "The box of the categories view states resourceClass \"resources\". What does the engine print?",
  "resourceClass must be one of \"reserves\", \"contingent\", \"prospective\"; got \"resources\"",
  ["A result with the labels 1R, 2R and 3R, one set for all quantities together in the field.",
   "resourceClass must be one of \"reserves\", \"contingent\"; got \"resources\"",
@@ -104,7 +104,7 @@ q(3, "A learner raises the high estimate of \"One value for the range\" by a sma
 q(0, "A unit of a single space is stated in the categories view. What does the engine print?",
  "unit must be a non-empty string; got \" \"",
  ["A result with no unit printed in the Unit tile.",
-  "A result in MMbbl.",
+  "A result in MMbbl, the unit of the start.",
   "unit must be one of \"MMbbl\", \"MMboe\", \"tcf\"; got \" \""],
  "Those are the engine's own words for the golden case cat-refuse-unit. The unit is a stated input with no default, and a blank string is refused. The engine does not fill in a unit, and it holds no list of accepted units: any non-empty string is accepted.")
 

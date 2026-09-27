@@ -2,10 +2,10 @@
  {
   "prompt": "Which labels does the engine give the low, best and high estimates of Contingent Resources?",
   "options": [
-   "1P, 2P and 3P, the labels the engine uses for every class that has a recovery project.",
+   "1P, 2P and 3P.",
    "1C, 2C and 3C.",
-   "1U, 2U and 3U, since the quantities are still contingent on a decision.",
-   "C1, C2 and C3, which name the three cumulative figures of a Contingent project."
+   "1U, 2U and 3U.",
+   "C1, C2 and C3."
   ],
   "answer": 1,
   "explanation": "Each class has its own letter (PRMS 2.2.2.2 to 2.2.2.4): P for Reserves, C for Contingent Resources and U for Prospective Resources, with the number counting up from the low estimate. C1, C2 and C3 are the incremental slices of Contingent Resources, which the engine returns beside the cumulative 1C, 2C and 3C."
@@ -35,10 +35,10 @@
  {
   "prompt": "In the same Ekene Main set, which figure is the Possible (P3)?",
   "options": [
-   "24.990000 MMbbl, the 3P, which is also the possible slice.",
-   "7.760000 MMbbl, the slice between the 1P and the 2P.",
+   "24.990000 MMbbl.",
+   "7.760000 MMbbl.",
    "8.340000 MMbbl.",
-   "16.650000 MMbbl, the 2P, since the possible range begins at the best estimate."
+   "16.650000 MMbbl."
   ],
   "answer": 2,
   "explanation": "Possible (P3) is the top slice: take the 2P of 16.650000 from the 3P of 24.990000 and 8.340000 is left, the figure the increments table prints. The 3P itself is cumulative and holds all three slices. 7.760000 is the middle slice, and 16.650000 is the best estimate."
@@ -47,9 +47,9 @@
   "prompt": "The Ekene North estimates are stated incrementally as C1 3.000000, C2 1.500000 and C3 2.000000. What 3C does the engine return?",
   "options": [
    "6.500000.",
-   "2.000000, since the 3C is the third slice.",
-   "4.500000, the sum of the first two slices, which is the best estimate of the project.",
-   "1.500000, the C2 slice."
+   "2.000000.",
+   "4.500000.",
+   "1.500000."
   ],
   "answer": 0,
   "explanation": "The 3C is cumulative: C1 plus C2 plus C3, 3.000000 plus 1.500000 plus 2.000000, which is 6.500000, and the engine returns the same figure when the set is stated cumulatively. 2.000000 is the C3 slice and 4.500000 is the 2C."
@@ -88,7 +88,7 @@
   "explanation": "Those are the engine's own words for the golden case cat-refuse-prospective-incremental. The \"got nothing\" message answers a method left out, and the estimates.low message answers a low stated with the incremental method on a class that has slices. The engine invents no slices for a prospect."
  },
  {
-  "prompt": "The Class control of the categories view is set to \"resources\". What does the engine print?",
+  "prompt": "The box of the categories view states resourceClass \"resources\". What does the engine print?",
   "options": [
    "A result with the labels 1R, 2R and 3R, one set for all quantities together in the field.",
    "resourceClass must be one of \"reserves\", \"contingent\", \"prospective\"; got \"resources\"",
@@ -147,7 +147,7 @@
   "options": [
    "unit must be a non-empty string; got \" \"",
    "A result with no unit printed in the Unit tile.",
-   "A result in MMbbl.",
+   "A result in MMbbl, the unit of the start.",
    "unit must be one of \"MMbbl\", \"MMboe\", \"tcf\"; got \" \""
   ],
   "answer": 0,

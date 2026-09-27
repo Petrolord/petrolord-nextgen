@@ -19,9 +19,9 @@ q(1, "A team states the discovery status of its accumulation as \"appraised\". W
 
 q(3, "An accumulation has not yet been found by a well, and a recovery project with established technology could apply to it. Which class does the engine return?",
  "Prospective Resources.",
- ["Contingent Resources, held back by every commerciality criterion until a well is drilled on it.",
-  "Undiscovered Unrecoverable, since nothing can be recovered from an accumulation no well has found.",
-  "Reserves at the undeveloped status, which the engine gives any project that has established technology."],
+ ["Contingent Resources, held back.",
+  "Undiscovered Unrecoverable.",
+  "Reserves at the undeveloped status."],
  "Undiscovered with a recovery project is Prospective Resources (PRMS 2.1.0.1, Table 1), with a stated sub-class and stated chances. Contingent Resources are discovered. Undiscovered Unrecoverable needs the recovery project to be none. Reserves need a discovered project that meets every commerciality criterion.")
 
 q(0, "Which Prospective sub-class does the Ekene file state for EKN-7, Ekene Shallow?",
@@ -61,9 +61,9 @@ q(3, "The oil left behind in Ekene Main, which no project can reach, is classifi
 
 q(1, "Which class does the engine return for an undiscovered accumulation stated with a recovery project of none?",
  "Undiscovered Unrecoverable.",
- ["Prospective Resources with the sub-class play, since no project has yet been designed for it.",
-  "Discovered Unrecoverable, the one unrecoverable class the engine returns.",
-  "A refusal, because an undiscovered accumulation must always state a recovery project."],
+ ["Prospective Resources, sub-class play.",
+  "Discovered Unrecoverable, as no project applies.",
+  "A refusal naming the recovery project."],
  "The golden input class-undiscovered-unrecoverable returns \"Undiscovered Unrecoverable\". With no recovery project the engine stops at the second step, whether the accumulation is discovered or undiscovered, so there are two unrecoverable classes. Prospective Resources need a recovery project, and a recovery project of none is a stated value the engine accepts.")
 
 q(0, "Residual oil in Ekene Main is given the sub-class development-not-viable. How does the classify call respond?",
@@ -89,9 +89,9 @@ q(3, "Ekene Deep, EKN-6, states a chance of geologic discovery of 25.000000 perc
 
 q(2, "Multiply out the stated chances of Ekene Shallow, the lead (Pg 15.000000, Pd 70.000000 percent). Which figure does the classification calculator print in its Chance of commerciality tile?",
  "10.500000 percent.",
- ["15.000000 percent, the chance of geologic discovery alone.",
-  "70.000000 percent, the chance of development alone.",
-  "5.000000 percent, since a lead is scored one step below a prospect."],
+ ["15.000000 percent.",
+  "70.000000 percent.",
+  "5.000000 percent."],
  "The engine multiplies the two stated chances: 15.000000 percent times 70.000000 percent is 10.500000 percent. Neither chance alone is the chance of commerciality of an undiscovered project. 5.000000 percent is the chance of the play case, from its own stated Pg of 10.000000 and Pd of 50.000000 percent; the engine derives no chance from the sub-class.")
 
 q(0, "The golden input class-pg-zero states a prospect with a chance of geologic discovery of 0.000000 percent. What does the engine return?",

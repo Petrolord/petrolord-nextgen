@@ -71,7 +71,7 @@ x("17 CFR 229.1202(a)(3) (the eCFR current at 2026-09-01) is quoted in this cour
  "Item 1202(a)(3) of Regulation S-K requires reported totals to be simple arithmetic sums of the estimates for individual properties or fields within each category. It does not call for a company-level probabilistic total, a sum of means as 2P, or a risked total: Reserves carry no chance figure.")
 
 # 8
-x("What does 17 CFR 229.1202(a)(3) say about probabilistic methods?",
+x("Which limit on probabilistic methods does paragraph (a)(3) of Item 1202 of Regulation S-K (17 CFR 229.1202, the eCFR current at 2026-09-01) set?",
  "Reserves are not aggregated probabilistically beyond the field or property level",
  ["Probabilistic aggregation is required at the company level whenever more than two fields are reported",
   "Probabilistic totals may be reported at any level when the correlation between fields is stated as 0",
@@ -120,7 +120,7 @@ x("EKN-1 states low, best and high of 8.890000, 16.650000 and 24.990000 as a \"t
 
 # 14
 x("The Ekene Reserves are run under four stated correlations: uniform 0, the stated pairs, uniform 0.95 and uniform -0.4. What happens to the arithmetic 1P?",
- "It is 15.809794 on every run",
+ "It stays 15.809794 on every run, since a sum of lows reads no correlation",
  ["It falls toward the sampled low as the stated correlation rises from 0 to 0.95",
   "It rises under the negative correlation, because the projects offset one another",
   "It is recomputed from the sampled low of each run and so differs a little each time"],

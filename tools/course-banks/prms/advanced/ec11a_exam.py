@@ -19,17 +19,17 @@ def x(p, c, ds, e): q(next(_i), p, c, ds, e)
 # 1
 x("Summing the best estimates of EKN-1, EKN-2 and EKN-U, which 2P does arithmetic aggregation report in MMbbl?",
  "26.396958",
- ["26.821102, the exact sum of the three means, which is the figure a 2P reports",
-  "26.430497, the sampled best of the total on seed 20271112 and 20000 draws",
-  "16.650000, the best estimate of EKN-1, the project on production"],
+ ["26.821102",
+  "26.430497",
+  "16.650000"],
  "The arithmetic 2P adds the three best estimates, 16.650000, 5.746958 and 4.000000: 26.396958 (engine). The sum of the means, 26.821102, is printed beside it and is no category; 26.430497 is a sampled figure; 16.650000 is one project.")
 
 # 2
 x("For the Ekene Upper sand, a normal centred on 4.000000 with spread 0.800000, which figure enters the 1P sum?",
  "2.974759",
- ["4.000000, since the normal is symmetric and its low sits on its mean",
-  "3.945035, the low estimate the engine reads for a lognormal",
-  "5.025241, the value exceeded with 90 percent probability"],
+ ["4.000000",
+  "3.945035",
+  "5.025241"],
  "The low estimate of a normal is its mean less the standard normal 90th percentile times its standard deviation: 2.974759 (engine). 4.000000 is the mean and best estimate; 3.945035 is EKN-2's low estimate, read off its lognormal; 5.025241 is the high estimate, exceeded with only 10 percent probability.")
 
 # 3
@@ -42,10 +42,10 @@ x("Which sources does the engine's basis line cite for an aggregation?",
 
 # 4
 x("Blocks A and B of the 2011 Guidelines' Table 6.2 are added arithmetically by the engine. What are the low, best and high of the sum?",
- "71.800000, 89.000000 and 106.200000",
- ["76.654150, 89.000000 and the sampled high, since independent blocks do not add",
-  "71.800000 for the low alone, the best and the high left to the sampler",
-  "72 for the low, as Fig. 6.5 rounds it, with the best and high rounded the same way"],
+ "71.800000, 89.000000 and 106.200000, each an exact sum",
+ ["76.654150, 89.000000 and a sampled high",
+  "71.800000 for the low, the rest left to the sampler",
+  "72 for the low as Fig. 6.5 rounds it, the rest rounded alike"],
  "The engine adds lows, bests and highs: 71.800000, 89.000000 and 106.200000 (engine), and the Guidelines print 71.8 in Table 6.2. 76.654150 is the exact low of an independent sum, a different method; the arithmetic call sets every category itself; and 72 is the figure's rounding of the table, which the engine does not round.")
 
 # 5
@@ -143,9 +143,9 @@ x("Which chance does the engine use for each Ekene Contingent project when it co
 # 16
 x("Which low estimate comes off the triangular stated for Ekene West tight sand (EKN-5)?",
  "1.707107",
- ["2.837722, its best estimate, which the engine reads as its low",
-  "3.000000, its mean, the figure that enters the risked mean",
-  "4.585786, the value met or exceeded with 90 percent probability"],
+ ["2.837722",
+  "3.000000",
+  "4.585786"],
  "The engine reads a stated triangular's low, best and high in closed form: 1.707107, 2.837722 and 4.585786 MMboe, with a mean of 3.000000 (engine). The best and the mean are different figures, and 4.585786 is the high estimate, met or exceeded with only 10 percent probability.")
 
 # 17
@@ -157,12 +157,12 @@ x("A stated triangular gives min 3, mode 2 and max 6. What does the engine retur
  "A stated triangular must run min <= mode <= max with min < max, and the engine refuses one out of order in its own words. It reorders nothing, fits nothing it was not asked to fit, and the below-zero refusal belongs to a fit through estimates.")
 
 # 18
-x("EKN-4 in the Ekene Contingent Resources states a triangular. What mean does the engine read off it?",
+x("EKN-4 in the Ekene Contingent Resources is a triangular fitted through stated low, best and high of 3.000000, 4.500000 and 6.500000. What mean does the engine read off it?",
  "4.637674",
- ["4.500000, its best estimate",
-  "6.500000, its high estimate",
+ ["4.500000",
+  "6.500000",
   "13.000000"],
- "The engine reads the mean of a stated triangular in closed form: 4.637674 MMboe (engine), above its best estimate of 4.500000 because the triangular is skewed. 6.500000 is its high estimate; 13.000000 is EKN-3's mean.")
+ "The engine reads the mean of the fitted triangular in closed form: 4.637674 MMboe (engine), above its best estimate of 4.500000 because the triangular is skewed. 6.500000 is its high estimate; 13.000000 is EKN-3's mean.")
 
 # 19
 x("A report quotes the Ekene Contingent figure 20.637674 MMboe. How must it be described?",
@@ -193,9 +193,9 @@ x("Why does the engine return only an arithmetic figure as reportable on the nat
 # 22
 x("After one year of movements, what best-estimate closing does reconcile compute for the Ekene field?",
  "25.600000",
- ["21.000000, the opening 2P",
-  "26.396958, the arithmetic 2P of the Ekene Reserves aggregation",
-  "33.900000, the closing of the 3P"],
+ ["21.000000",
+  "26.396958",
+  "33.900000"],
  "21 less 1.1, less 0.2, plus 5.1 and 0.8 gives 25.600000 (engine). 21.000000 is the opening; 26.396958 is an aggregation figure from another call; and 33.900000 is the computed closing 3P.")
 
 # 23
@@ -207,7 +207,7 @@ x("The Ekene transfers movement is +3.4, +5.1 and +6.9. What does the fixture's 
  "Transfers between classes are signed, positive in and negative out, and the Ekene note records the infill wells moving in from Contingent Resources at the investment decision. Production, the waterflood performance review and the injection pattern change are the other three movements, a production, a revision and improved recovery.")
 
 # 24
-x("Someone types a single quantity on a revisions row, the shape production takes. Which refusal follows?",
+x("Someone types a single quantity of 1 on a revisions row, the shape production takes. Which refusal follows?",
  "movements[0].quantity must be left out for revisions (state low, best and high); got 1",
  ["a result applying the quantity to every category, as for production",
   "a result applying the quantity to the 2P alone",
@@ -226,9 +226,9 @@ x("A caller asks reconcile to roll Prospective Resources forward a year. What co
 x("An opening of 21 at 1P, 15.2 at 2P and 27.5 at 3P is typed into reconcile. What happens?",
  "a refusal: opening must be ordered low <= best <= high",
  ["a result that sorts the opening into order before the movements are added",
-  "a result that reports the opening out of order and carries on with the movements",
-  "a result that swaps the low and the best and prints a warning line"],
- "An opening out of order is refused, the message carrying the percentile sentence: opening must be ordered low <= best <= high (the P90 low estimate, the P50 best, the P10 high). A computed closing out of order is reported as a result; a stated opening is checked on entry, with no reordering.")
+  "a refusal: opening.best must be at least the low; got 15.2",
+  "the low and the best swapped, with a line in the reasons"],
+ "An opening out of order is refused with the message that opens: opening must be ordered low <= best <= high, and goes on to the percentile sentence. A computed closing out of order is reported as a result; a stated opening is checked on entry, with no reordering.")
 
 # 27
 x("A reconciliation period has additions and revisions but carries no production (rec-no-production). What replacement ratio and life index are printed?",

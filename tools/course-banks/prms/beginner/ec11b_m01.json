@@ -118,7 +118,7 @@
    "Neither: an unknown key is dropped silently and the class is returned with a warning."
   ],
   "answer": 1,
-  "explanation": "The engine refuses on the unknown key first, in its own words: \"maturity is not an accepted key; the accepted keys at the top level are name, discovery, recoveryProject, subClass, commerciality, economicStatus, projectStatus, reservesStatus, chances, nigeria\". It names one field a refusal, and a misspelt or unknown key is refused by name, so nothing is dropped silently."
+  "explanation": "The engine refuses on the unknown key first, in its own words: \"maturity is not an accepted key; the accepted keys at the top level are name, discovery, recoveryProject, subClass, commerciality, economicStatus, projectStatus, reservesStatus, chances, nigeria\". It names one field per refusal, and a misspelt or unknown key is refused by name, so nothing is dropped silently."
  },
  {
   "prompt": "EKN-4 comes back as Contingent Resources with a list of criteria that are not met. How does the course describe that output?",
@@ -145,10 +145,10 @@
  {
   "prompt": "Which of these is outside what the engine does?",
   "options": [
-   "Naming each criterion that keeps a discovered project out of Reserves when the facts are stated.",
+   "Naming each criterion that keeps a project out of Reserves.",
    "Building a production forecast from well rates.",
-   "Returning the categories of three stated estimates with the probability label beside each one.",
-   "Refusing an input key it does not read, at whatever level of the box the key sits."
+   "Labelling three stated estimates with their probabilities.",
+   "Refusing an input key it does not read, at any level."
   ],
   "answer": 1,
   "explanation": "The engine builds no production forecast, no in-place volume and no distribution from data; a forecast from well rates belongs to the decline curve analysis course. Naming the blockers is part of classify, the categories are what categorize returns, and every call refuses an unknown key by name."
@@ -156,9 +156,9 @@
  {
   "prompt": "A report calls Nigeria's published national 2P gas figure \"Nigeria's gas reserves\". How does this course word that figure?",
   "options": [
-   "As Reserves in the class sense, since a national total adds up the Reserves projects of every licence.",
-   "As Contingent Resources, because a national figure has passed no project's commerciality test.",
-   "As resources, since the word covers every quantity in the ground without naming a class.",
+   "As Reserves in the class sense, summed over every licence.",
+   "As Contingent Resources, since no project test was passed.",
+   "As resources, the word for every quantity in the ground.",
    "As reported reserves, with its date and whoever reported it."
   ],
   "answer": 3,

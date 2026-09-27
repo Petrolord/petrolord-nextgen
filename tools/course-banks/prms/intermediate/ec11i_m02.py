@@ -16,7 +16,7 @@ q(2, "Ekene North appraisal (EKN-4) states economic status viable, a start withi
   "None: a viable economic status settles commerciality by itself"],
  "The engine returns Contingent Resources for EKN-4 with the blockers developmentPlan, financialAppropriations, approvals and firmIntention. Positive economics is one criterion of seven plus the commitment, and every one must be met, so viable economics settles nothing alone and the commitment is one blocker among four. The six-item list belongs to Ekene East gas (EKN-3), which lacks a market and facilities.")
 
-q(0, "Six criteria and the commitment are each stated as true or false. Which two does the engine read from other inputs?",
+q(0, "Of the seven criteria and the commitment, six are stated as true or false. Which two does the engine read from other inputs?",
  "The time-frame, from a stated start and justification, and positive economics, from the economic status",
  ["The market and the facilities, which it reads from the stated forecast and prices",
   "The plan and the money, which it reads from the capital rows of the cost table",
@@ -37,11 +37,11 @@ q(1, "When the start is 8 years away and the box says the longer wait is justifi
   "time-frame: not tested, since the justification replaces the benchmark"],
  "A start beyond five years meets the criterion when a longer time-frame is stated as justified, and the engine prints the justification in its line, so the class is Reserves. The not-met line would need the justification false. No start of 0 or more is refused on its size, and the engine tests the time-frame on every discovered project with a recovery project, printing the justification it was given.")
 
-q(1, "An otherwise commercial project is due to begin development in exactly 5 years, with nothing stated about a longer wait. How is the time-frame criterion treated?",
+q(1, "An otherwise commercial project is due to begin development in exactly 5 years, with nothing stated about a longer wait. What does the engine return for the time-frame criterion?",
  "Met, with the class Reserves",
- ["Not met, with the class Contingent Resources and one blocker, timeFrame",
-  "A refusal: a start of exactly 5 sits on the benchmark and must be justified",
-  "Met only after a longer time-frame is also stated as justified"],
+ ["Not met, with one blocker, timeFrame",
+  "A refusal until the edge is justified",
+  "Met once a longer wait is justified"],
  "The engine prints \"time-frame: development starts within 5 years against the 5-year benchmark: met (PRMS 2.1.2.3)\" and returns Reserves. Reading five years exactly as met is the engine's stated reading of the edge; the alternative it names reads it as not met, and no graded figure rests on the edge. A start on the benchmark is a valid input, and no justification is needed within five years.")
 
 q(3, "The golden input class-economics-undetermined meets every other criterion and states economic status undetermined. What does the engine return?",

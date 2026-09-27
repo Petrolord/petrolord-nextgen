@@ -11,9 +11,9 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
 q(3, "The Ekene Main Reserves are stated cumulatively as 8.890000, 16.650000 and 24.990000 MMbbl. What Probable (P2) does the engine return?",
  "7.760000 MMbbl",
- ["16.650000 MMbbl, the best estimate itself",
-  "8.340000 MMbbl, the slice above the 2P",
-  "8.890000 MMbbl, the Proved (P1) slice"],
+ ["16.650000 MMbbl",
+  "8.340000 MMbbl",
+  "8.890000 MMbbl"],
  "The increment is a difference: Probable (P2) is the 2P less the 1P, and the engine returns 7.760000 MMbbl. 16.650000 is the cumulative 2P, which already includes the Proved (P1). 8.340000 is the Possible (P3), the 3P less the 2P. 8.890000 is the Proved (P1), which equals the 1P.")
 
 q(1, "On the same cumulative Ekene Main set, which figure carries the P90 label, and as which category?",
@@ -32,9 +32,9 @@ q(0, "The golden input cat-faq33-incremental states Reserves as a first incremen
 
 q(2, "Ekene North's Contingent Resources are stated incrementally as C1 3.000000, C2 1.500000 and C3 2.000000. What 2C does the engine return?",
  "4.500000",
- ["1.500000, the stated second increment",
-  "6.500000, the sum of all three increments",
-  "3.000000, the 1C carried unchanged"],
+ ["1.500000",
+  "6.500000",
+  "3.000000"],
  "The 2C is C1 plus C2, 3.000000 plus 1.500000, and the engine returns 4.500000, the same figure it gives when the set is stated cumulatively (golden input cat-contingent-cumulative). 1.500000 is the slice C2 alone. 6.500000 is the 3C, which adds C3. 3.000000 is the 1C, the first slice.")
 
 q(0, "In the engine's category output, which rows carry a probability label such as P90, P50 or P10?",
@@ -88,15 +88,15 @@ q(3, "The method control is set to not stated. Which message comes back?",
 
 q(1, "On Ekene Main waterflood (EKN-1) the net-entitlement categories give a 2P oil of 9908615.920000 and a 1P oil of 5289968.880000 barrels. What Probable (P2) oil does the engine report?",
  "4618647.040000 barrels",
- ["9908615.920000 barrels, the 2P",
-  "5289968.880000 barrels, which is the Proved (P1) slice",
-  "4960152.645000 barrels, the increment above the 2P"],
+ ["9908615.920000 barrels",
+  "5289968.880000 barrels",
+  "4960152.645000 barrels"],
  "Increments from three forecasts are exact differences of the three cut, entitled quantities, so the Probable (P2) oil is 9908615.920000 less 5289968.880000, which the engine returns as 4618647.040000. 9908615.920000 is the cumulative 2P. 5289968.880000 is the Proved (P1), equal to the 1P. 4960152.645000 is the Possible (P3) oil.")
 
 q(0, "On EKN-1 in BOE, the Possible (P3) is 5621506.350833 and the Probable (P2) is 5234466.685000. Why is the slice above the 2P the larger one?",
  "The high case runs longer before its canonical economic limit",
  ["The Possible (P3) carries the P10 label, which always sits highest",
-  "The engine scales the Possible (P3) by the gas factor only",
+  "The engine scales the Possible (P3) alone by the stated gas factor",
   "A mistake in the forecast, which the engine would refuse on order"],
  "Each forecast is cut at its own canonical economic limit year: the best case in 2037 and the high case in 2040, so the high case keeps more years and the slice between the 2P and the 3P comes out larger. An increment carries no probability label. BOE converts the gas at 6.000000 Mscf per BOE for every row alike, and the cumulative categories are in order, so nothing is refused.")
 

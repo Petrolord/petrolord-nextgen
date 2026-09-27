@@ -12,16 +12,16 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 # The resources framework
 q(2, "Which of the engine's functions takes three stated estimates with a class, a method and a unit, and returns the categories?",
  "`categorize`.",
- ["`classify`, which returns the category labels beside the class of one project.",
-  "`aggregate`, which adds the estimates of one project into a total.",
-  "`reconcile`, which rebuilds the categories from an opening figure."],
+ ["`classify`.",
+  "`aggregate`.",
+  "`reconcile`."],
  "categorize returns the cumulative categories with their outcome labels, the increments, the exceedance sentence and whether one value describes the range. classify returns the class, the sub-class and the category labels only, with no figures. aggregate and reconcile work on several projects or on movements, which belong to the Expert tier.")
 
 q(3, "What did the course find when it checked the consolidated PRMS errata (versions 1.01 to 1.03, May 2022)?",
  "No change to the sections the engine applies.",
- ["A change to the chance of commerciality, which now adds the two chances together.",
-  "A change to the categories that renames the 3P as the high case for Reserves only.",
-  "That the errata withdraw the 2018 text, so the course cites the errata alone."],
+ ["A change that adds the two chances together.",
+  "A change that renames the 3P for Reserves only.",
+  "A withdrawal of the 2018 text by the errata."],
  "The errata were checked and change none of the sections the engine applies; they are cited by item and their prose is not quoted. Pc remains the product of Pg and Pd for a prospect, the labels are unchanged, and the course cites SPE-PRMS 2018 by section.")
 
 q(3, "From which document did the course read the English text of SPE-PRMS 2018?",
@@ -33,9 +33,9 @@ q(3, "From which document did the course read the English text of SPE-PRMS 2018?
 
 q(0, "Who operates the synthetic Ekene field in the course's fixture?",
  "EKO, Ekene Operator (synthetic).",
- ["The Commission, which holds the Ekene lease on behalf of the Federation.",
-  "A real Niger Delta operator whose name the fixture hides behind a code.",
-  "No operator is named, since the fixture states only the eight projects and their facts."],
+ ["The Commission, for the Federation.",
+  "A real operator hidden behind a code.",
+  "No operator; the fixture names none."],
  "The fixture names EKO, Ekene Operator (synthetic), with a working interest of 70.000000 percent, on the Ekene petroleum mining lease (synthetic). Every name and figure in it is synthetic, and no real company appears. The working interest returns in the Professional tier.")
 
 q(0, "A box for EKN-1 carries the misspelt key `markets` inside `commerciality`. What does the engine print?",
@@ -43,7 +43,7 @@ q(0, "A box for EKN-1 carries the misspelt key `markets` inside `commerciality`.
  ["commerciality.market must be true or false (stated; no default); got nothing",
   "A result with the class Reserves, since the misspelt key is set aside and the true market is assumed.",
   "maturity is not an accepted key; the accepted keys at the top level are name, discovery, recoveryProject, subClass, commerciality, economicStatus, projectStatus, reservesStatus, chances, nigeria"],
- "Those are the engine's own words for the golden case class-refuse-unknown-key. The accepted keys are checked before any input is read, so the unknown key is named first, with its path and the full list of keys the block does read. A misspelt key is refused; it is never set aside. The maturity message answers an unknown key at the top level.")
+ "Those are the engine's own words for the golden case class-refuse-unknown-key. The accepted keys are checked before any input is read, so the unknown key is named first, with its path and the full list of keys the block does read. A misspelt key is refused. The maturity message answers an unknown key at the top level.")
 
 q(2, "Ekene Deep, EKN-6, also appears in another course of the academy. What is the link?",
  "It is the same prospect the farm-out course prices, with the same chance of geologic discovery.",
@@ -76,9 +76,9 @@ q(3, "Ekene Deep's chance of development is cleared in the panel before the call
 
 q(1, "The course's small case \"A play\" states a Pg of 10.000000 percent and a Pd of 50.000000 percent. What chance of commerciality does the engine print?",
  "5.000000 percent.",
- ["10.000000 percent, the chance of geologic discovery, since a play has no development stage.",
-  "50.000000 percent, since a play is judged on its chance of development alone.",
-  "20.000000 percent, the figure of Ekene Deep, since every Prospective sub-class shares one chance."],
+ ["10.000000 percent.",
+  "50.000000 percent.",
+  "20.000000 percent."],
  "The play follows the same rule as the prospect and the lead (PRMS 2.1.3.3): Pg times Pd, whatever the sub-class, so 10.000000 percent times 50.000000 percent gives 5.000000 percent. Taking one stated chance on its own drops a judgement, and 20.000000 percent belongs to Ekene Deep's own chances.")
 
 q(3, "The decision table for EKN-6 reads \"prospect (stated)\" in its sub-class row. What does the word \"stated\" signal?",
@@ -105,9 +105,9 @@ q(3, "The course's case \"A discovery of no interest\" states a discovered proje
 # Reserves and Contingent Resources
 q(1, "Which reserves status does the Ekene file state for EKN-1, the waterflood on production?",
  "Developed-producing.",
- ["Undeveloped, since the waterflood still needs injection wells.",
-  "Developed-non-producing, since part of the field is shut in behind pipe.",
-  "None: a producing project carries a sub-class and no status."],
+ ["Undeveloped.",
+  "Developed-non-producing.",
+  "No status at all."],
  "The waterflood is on production, and its sub-class decision reads on-production: on production, selling petroleum to market. A developed-producing status needs exactly that, wells open and producing now. Injection wells still to drill and zones shut in behind pipe describe the other two statuses.")
 
 q(2, "Two of the eight commerciality conditions are read from inputs other than a plain true or false. Which two?",
@@ -119,9 +119,9 @@ q(2, "Two of the eight commerciality conditions are read from inputs other than 
 
 q(3, "Which of the three Ekene Contingent projects states its economic status as viable?",
  "EKN-4, Ekene North appraisal.",
- ["EKN-3, Ekene East gas, whose economic status is stated as undetermined.",
-  "EKN-5, Ekene West tight sand, stated not viable.",
-  "None of them, since a viable project is always Reserves."],
+ ["EKN-3, Ekene East gas.",
+  "EKN-5, Ekene West tight sand.",
+  "None of the three."],
  "EKN-4 is stated viable and is held back by its plan, money, approvals and firm intention. EKN-3 is undetermined and EKN-5 not-viable, which is why economicStatus is among their blockers. Viable economics is one criterion of eight, so a viable project can still be Contingent Resources.")
 
 q(0, "Why does the chance column read none for EKN-1 and EKN-2?",
@@ -172,7 +172,7 @@ q(1, "A set is stated incrementally with a second slice of -1. What does the eng
  ["A result with a 2P below the 1P and a warning line in the reasons.",
   "estimates must be ordered low <= best <= high; got -1",
   "estimates.second must be left out for the cumulative method (state low, best and high); got -1"],
- "In the engine's own words (golden case cat-refuse-negative-increment): estimates.second must be a finite number at or above 0; got -1. A slice may be zero but never negative. The ordering message answers cumulative figures out of order, and the mixed-forms message answers a slice key under the cumulative method. A refused box returns no categories.")
+ "In the engine's own words (golden case cat-refuse-negative-increment): estimates.second must be a finite number at or above 0; got -1. A slice may be zero or above. The ordering message answers cumulative figures out of order, and the mixed-forms message answers a slice key under the cumulative method. A refused box returns no categories.")
 
 q(0, "Under the incremental method, a Reserves box keeps a leftover `low` of 1 from its cumulative form. Which message comes back?",
  "estimates.low must be left out for the incremental method (state first, second and third); got 1",
@@ -253,7 +253,7 @@ q(2, "Which of the Ekene Main Reserves figures carries at least a 10 percent pro
  "The high estimate carries P10: at least a 10 percent probability of being met or exceeded, so it is the 3P of 24.990000. The 1P carries P90 and the 2P P50. A slice such as the Possible (P3) is not an estimate of the whole quantity and carries no probability.")
 
 # Nigerian terms in words
-q(1, "How does s.318 of the Act define a commercial discovery, in the course's words?",
+q(1, "How does s.318 of the Petroleum Industry Act 2021 define a commercial discovery, in the course's words?",
  "One the licensee judges can be economically developed after weighing all relevant economic factors.",
  ["One whose 2P has been booked by the Commission under its reserves regulation.",
   "One with a field development plan approved within two years of the declaration.",
@@ -267,7 +267,7 @@ q(3, "Which Nigerian note does the engine print for EKN-3, Ekene East gas?",
   "No note, since a Contingent Resources project carries no Nigerian declaration."],
  "EKN-3 is stated as a significant gas discovery declared 3 years ago, and the engine's note cites s.78(8)(b), s.318, s.78(9) and reg. 6(3) and ends 3 years since the declaration. The commercial discovery note is EKN-1's. A discovered Contingent project may carry a note, and the note leaves its class unchanged.")
 
-q(0, "Which two reasons in s.318 of the Act for a significant gas discovery concern markets?",
+q(0, "Which two reasons in s.318 of the Petroleum Industry Act 2021 for a significant gas discovery concern markets?",
  "No markets for natural gas within Nigeria, and export markets that still need to be identified and developed.",
  ["A royalty rate too high for the gas to pay, and a tax rate above the one in the pia course.",
   "No field development plan within two years, and no approval from the Commission within 90 days.",
@@ -293,7 +293,7 @@ q(1, "The engine's Nigerian note on EKN-1 ends \"12 years since the declaration:
  ["It lowers EKN-1 to Contingent Resources until a late field development plan is filed.",
   "It turns EKN-1 into Discovered Unrecoverable, since the plan period has lapsed.",
   "A refusal comes back, since the years since the declaration are above two."],
- "The notes do not change the PRMS class: EKN-1 meets every criterion and is Reserves, and the note reports that the two-year plan period of s.79(1) has passed. The engine accepts any stated count of years and prints what the Act provides beside the class.")
+ "The notes do not change the PRMS class: EKN-1 meets every criterion and is Reserves, and the note reports that the two-year plan period of s.79(1) has passed. The engine accepts any stated count of years at or above 0 and prints what the Act provides beside the class.")
 
 q(3, "How does the course use the Nigerian Upstream Petroleum (Commercial) Regulations, 2025 (S.I. No. 7 of 2025)?",
  "By concept only: reg. 6 asks for a status report that includes a statement of the reserves situation.",

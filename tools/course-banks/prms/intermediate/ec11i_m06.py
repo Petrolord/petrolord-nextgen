@@ -11,16 +11,16 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
 q(3, "The Ekene petroleum mining lease is stated to expire in 2040 with no renewal expected, and every EKN-1 forecast runs to 2041. How much high-case oil does the engine report beyond the licence?",
  "601257.000000 barrels",
- ["308309.000000 barrels, the best case's final year",
-  "98956.000000 barrels, the low case's final year",
-  "0.000000 barrels, since the high case is still paying"],
+ ["308309.000000 barrels",
+  "98956.000000 barrels",
+  "0.000000 barrels"],
  "The licence cut removes 2041 from each case, and the high case loses 601257.000000 barrels to it; the best loses 308309.000000 and the low 98956.000000. A case that is still paying is cut all the same, because the cut comes before the cash flow runs whenever no renewal is expected.")
 
 q(0, "The golden input econ-ekene-renewal-expected differs from the EKN-1 start only in stating a renewal as expected. What 3P in BOE does it report on the net-entitlement basis?",
  "17256718.756667",
- ["16851271.080000, as with no renewal",
-  "28321464.000000, the gross 3P",
-  "19825024.800000, the working-interest 3P"],
+ ["16851271.080000",
+  "28321464.000000",
+  "19825024.800000"],
  "With a renewal expected the whole forecast runs, the high case reaches its economic limit in 2041, nothing is beyond the licence, and the 3P rises to 17256718.756667 BOE. 16851271.080000 is the 3P with the licence cut in 2040. 28321464.000000 and 19825024.800000 are the 3P on the gross and working-interest bases, and this input reports net entitlement.")
 
 q(2, "On that renewal-expected input, the 2P stays at 11229764.729167 BOE. Why does the renewal leave it alone?",
@@ -104,7 +104,7 @@ q(3, "On what basis is the oil beyond the licence reported?",
  "Gross, before any reporting basis is applied",
  ["On the stated reporting basis, like the categories",
   "At the working interest, the company's share",
-  "In BOE only, at the stated Mscf per BOE"],
+  "In BOE only, converted at the stated Mscf per BOE"],
  "The engine reports the barrels beyond the licence gross, as it reports the technical, beyond-limit and economic gross quantities of each case; the stated basis is applied to the reported categories. So the high case shows 601257.000000 barrels beyond the licence whatever basis is stated, and in oil as well as BOE.")
 
 q(1, "On a copy of EKN-1, the licence expiry is moved to 2041 with no renewal expected. What licence cut does the engine report?",

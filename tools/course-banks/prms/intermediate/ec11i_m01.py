@@ -11,9 +11,9 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
 q(1, "A discovered project meets every commerciality criterion with established technology. Its investment has been sanctioned and its wells are still being built. Which Reserves sub-class does the engine derive?",
  "approved-for-development",
- ["justified-for-development, since no barrel has been sold yet",
-  "on-production, because the investment decision has been taken",
-  "development-pending, while the project waits for first oil"],
+ ["justified-for-development",
+  "on-production",
+  "development-pending"],
  "The engine derives the sub-class from the two stated facts: decision taken and no production gives approved-for-development (PRMS 2.1.3.5.5, Table 1), the sub-class of Ekene infill wells (EKN-2). Justified-for-development is the step before, with no investment decision yet. On-production needs the project on production. Development-pending is a Contingent Resources sub-class and cannot apply to a commercial project.")
 
 q(3, "The golden input class-justified states a commercial project with the final investment decision not taken and production not started. What sub-class does the engine return?",
@@ -53,16 +53,16 @@ q(0, "How does the engine set the sub-class of a Contingent Resources project?",
 
 q(3, "In a copy of Ekene East gas (EKN-3), the stated sub-class development-on-hold is changed to development-not-viable, and nothing else moves. What does the engine return?",
  "Contingent Resources, sub-class development-not-viable (stated)",
- ["A refusal: not-viable needs a not-viable economic status",
+ ["A refusal: the not-viable sub-class needs a not-viable economic status",
   "Contingent Resources, with the sub-class reset to development-on-hold",
   "Discovered Unrecoverable, since no project is planned for it any more"],
  "The engine accepts any of the four Contingent sub-classes on any Contingent project, so it returns the class with development-not-viable as stated and the same six blockers. Nothing ties the sub-class to the economic status, and the engine never rewrites a stated input. Discovered Unrecoverable needs no recovery project at all, and EKN-3 states one with established technology. Whether the sub-class fits the blockers is a judgement left to the person who signs the report.")
 
 q(1, "The appraisal project EKN-4, already discovered, carries a stated Pd of 65.000000 percent. Which Pc appears in its decisions?",
  "65.000000 percent, from Pc = Pd",
- ["No figure: a discovered project carries no chance",
-  "50.000000 percent, the figure Ekene East gas carries",
-  "A refusal until a chance of geologic discovery is stated"],
+ ["No figure for a discovered project",
+  "50.000000 percent, as Ekene East gas",
+  "A refusal until a Pg is stated first"],
  "A discovered project has already met its geology, so its chance of commerciality is the chance of development alone (PRMS 2.1.3.3). The engine's decision line is \"Pc = Pd = 65%\". Only Reserves carry no chance. 50.000000 percent is EKN-3's Pd. A chance of geologic discovery on a discovered project is refused, so asking for one would be the error.")
 
 q(0, "A copy of a Contingent project states chances.geologicDiscoveryPct as 50 beside its chance of development. Which field does the engine refuse?",
@@ -74,9 +74,9 @@ q(0, "A copy of a Contingent project states chances.geologicDiscoveryPct as 50 b
 
 q(2, "Ekene Shallow lead (EKN-7) states a chance of geologic discovery of 15.000000 percent and a chance of development of 70.000000 percent. What chance of commerciality does the engine return?",
  "10.500000 percent",
- ["15.000000 percent, the chance of geologic discovery",
-  "70.000000 percent, the chance of development alone",
-  "20.000000 percent, the figure of the Ekene Deep prospect"],
+ ["15.000000 percent",
+  "70.000000 percent",
+  "20.000000 percent"],
  "For an undiscovered project the chance of commerciality is the product Pc = Pg x Pd (PRMS 2.1.3.3), and the engine returns 10.500000 percent for EKN-7. Pg alone ignores the chance of development if found; Pd alone is the discovered-project rule. 20.000000 percent is EKN-6, whose Pg of 25.000000 and Pd of 80.000000 give a different product.")
 
 q(3, "The golden input class-pg-zero states a prospect with a chance of geologic discovery of 0 and a chance of development of 50.000000 percent. What does the engine return?",

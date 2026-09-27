@@ -20,9 +20,9 @@ q(0, "A commercial project moves from approved-for-development to on-production.
 
 q(2, "A play states a chance of geologic discovery of 10.000000 percent and a chance of development of 50.000000 percent. What chance of commerciality comes back?",
  "5.000000 percent",
- ["10.000000 percent, the geologic chance",
-  "50.000000 percent, the development chance",
-  "None: a play is too immature to carry one"],
+ ["10.000000 percent",
+  "50.000000 percent",
+  "None for a play"],
  "Every Prospective sub-class carries the product Pc = Pg x Pd (PRMS 2.1.3.3), and the golden input class-play returns 5.000000 percent. Either chance alone leaves out the other. The sub-class records how much is known, and a play carries its chances like a prospect or a lead.")
 
 q(1, "A copy of a Reserves project states chances.developmentPct as 95. What does the engine do?",
@@ -41,9 +41,9 @@ q(0, "On a copy of Ekene North appraisal (EKN-4), the whole chances object is re
 
 q(2, "Ekene West tight sand (EKN-5) states a chance of development of 20.000000 percent and the sub-class development-unclarified. What chance of commerciality does the engine print for it?",
  "20.000000 percent",
- ["None, since its economic status is not-viable",
-  "65.000000 percent, the Ekene North figure",
-  "10.500000 percent, the product of two chances"],
+ ["None: it is not viable",
+  "65.000000 percent",
+  "10.500000 percent"],
  "EKN-5 is discovered, so Pc = Pd and the engine returns 20.000000 percent (PRMS 2.1.3.3). A not-viable economic status is a blocker and removes no chance. 65.000000 percent is EKN-4's Pd. A product of two chances applies to an undiscovered project, such as the Ekene Shallow lead with its 10.500000 percent.")
 
 q(3, "In what order does the engine read the facts of a discovered project?",
@@ -89,7 +89,7 @@ q(2, "How does the engine hold the five-year benchmark of the time-frame criteri
   "As a panel setting the learner may change in place of the stated start"],
  "The engine holds five figures, each with its citation, and the benchmark is one: PRMS 2.1.2.3 and 2.1.3.6.4, a recommended benchmark of the standard. The Act's figure for a field development plan is 2 years (s.79(1)). The SEC's five years is a disclosure rule the engine does not carry. The start and its justification are the stated facts; the benchmark is fixed with its source.")
 
-q(1, "Regulation S-K Item 1203, paragraph (d), carries a five-year figure too. What does it require of a filer?",
+q(1, "Regulation S-K Item 1203 (the eCFR current at 2026-09-01), paragraph (d), carries a five-year figure too. What does it require of a filer?",
  "To explain why material proved undeveloped reserves remain undeveloped for five years or more after disclosure",
  ["To book no proved undeveloped reserves whose development starts later than five years out",
   "To add every field's estimates arithmetically when it reports its proved reserves",
@@ -113,9 +113,9 @@ q(2, "The Petroleum Industry Act 2021 defines a commercial discovery by the lice
 # Incremental and cumulative categories
 q(2, "The golden input cat-contingent-cumulative gives 1C, 2C and 3C of 3.000000, 4.500000 and 6.500000. Which third increment comes back?",
  "2.000000",
- ["6.500000, the 3C itself",
-  "1.500000, the C2 slice",
-  "4.500000, the 2C"],
+ ["6.500000",
+  "1.500000",
+  "4.500000"],
  "C3 is the 3C less the 2C, 6.500000 less 4.500000, and the engine returns 2.000000 (golden input cat-contingent-cumulative), the same as when the set is stated incrementally. 6.500000 is the cumulative 3C. 1.500000 is the C2. 4.500000 is the 2C, a cumulative figure.")
 
 q(2, "The golden input cat-prospective states 12, 30 and 70 MMbbl cumulatively. What does the engine return?",

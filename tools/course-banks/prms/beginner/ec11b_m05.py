@@ -27,9 +27,9 @@ q(0, "What does the label P50 beside a best estimate mean when the method is pro
 
 q(3, "Which of the three Ekene Main Reserves figures carries the label P90?",
  "8.890000 MMbbl, the 1P.",
- ["24.990000 MMbbl, the 3P, since 90 is the largest of the three probability numbers.",
-  "16.650000 MMbbl, the 2P, since most outcomes cluster around the best estimate.",
-  "7.760000 MMbbl, the Probable (P2), since the slice is the most likely part of the range."],
+ ["24.990000 MMbbl, the 3P.",
+  "16.650000 MMbbl, the 2P.",
+  "7.760000 MMbbl, the Probable (P2)."],
  "P90 is always the low estimate: the smallest figure is the one most likely to be met or exceeded, so it carries the largest probability number. The engine prints P90 beside the 1P of 8.890000, P50 beside the 2P and P10 beside the 3P. A slice such as the Probable (P2) carries no probability label.")
 
 q(1, "A newcomer reads P90 the way an ordinary statistics table does. Where do they put it, and what is wrong with that?",

@@ -134,7 +134,7 @@ x("On EKN-1 the licence expires in 2040 with no renewal expected. What happens t
  ["The expiry year is cut along with every later year, since the licence ends as that year begins",
   "The later years are kept and reported in the 3P, since the high case is the one that reaches them",
   "The later years are kept and moved into Contingent Resources by the engine, with their class printed"],
- "The licence boundary keeps the expiry year, and the years after it are cut before the cash flow is run, their barrels reported as beyond the licence: 601257.000000 barrels of oil on the high case (engine). The engine classifies none of them; the texts place such quantities outside Reserves unless an extension is reasonably expected.")
+ "The licence boundary keeps the expiry year, and the years after it are cut before the cash flow is run, their barrels reported as beyond the licence: 601257.000000 barrels of oil on the high case (engine). The engine classifies none of them; SPE-PRMS 2018 3.3.3.2 (cited in FAQ answer 4.4) keeps such quantities outside Reserves unless an extension is reasonably expected.")
 
 emit(Q, '/root/cat-wip-prms/banks/ec11a_m05.json', expect_n=15)
 finish()

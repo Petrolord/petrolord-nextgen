@@ -38,7 +38,7 @@ x("The Ekene Reserves are sampled on seed 20271112 with 20000 draws, then again 
  ["The sampler is broken, because a correct Monte Carlo returns one P90 on every seed",
   "The second seed is the better one, because its P90 lies closer to the arithmetic 1P",
   "The draws are too few, and at 200000 draws every seed returns the same P90 exactly"],
- "On seed 20271112 the P90 is 17.300834 on both runs; on seed 20271113 it is 17.414533 (engine, 20000 draws each). Every seeded Monte Carlo moves with its seed by the sampling error; no seed is better; and more draws shrink the spread between seeds without making it vanish.")
+ "On seed 20271112 the P90 is 17.300834 on both runs; on seed 20271113 it is 17.414533 (engine, 20000 draws each). Every seeded Monte Carlo moves with its seed by the sampling error; no seed is better; and more draws narrow the sampling error without removing it: at 200000 draws on seed 2011 the independent P90 of the 2011 Guidelines' two blocks still sits 0.030852 from the exact low (engine).")
 
 # 4
 x("The Ekene Reserves are sampled on seed 20271112 and 20000 draws under uniform 0, the stated pairs and uniform 0.95. What does the sampled P90 do as the stated correlation rises?",
@@ -102,7 +102,7 @@ x("A caller states a uniform correlation of 1 between the Ekene projects. What d
  ["the arithmetic sums returned as the sampled figures, since total dependence makes the two methods agree exactly and no draw is then needed at all",
   "a result with the correlation capped at 0.999 and a warning line in the reasons",
   "the refusal: correlation must be a positive semidefinite correlation matrix; got 1"],
- "The engine's own words refuse a rho of 1 by name: correlation.rho must be a number above -1 and below 1, because the canonical sampler takes a correlation strictly inside that range. It substitutes no arithmetic answer and caps nothing; the positive semidefinite refusal is a different message for a matrix the Cholesky factor cannot reproduce.")
+ "The engine refuses a rho of 1 by name, in its own words: correlation.rho must be a number above -1 and below 1 (the canonical sampler takes a correlation strictly between -1 and 1); got 1. It substitutes no arithmetic answer and caps nothing; the positive semidefinite refusal is a different message for a matrix the Cholesky factor cannot reproduce.")
 
 # 12
 x("Three varying projects are given a uniform correlation of -0.6. What does the engine return, in its own words?",
@@ -110,7 +110,7 @@ x("Three varying projects are given a uniform correlation of -0.6. What does the
  ["correlation.rho must be a number above -1 and below 1 (the canonical sampler takes a correlation strictly between -1 and 1); got -0.6",
   "a sampled total with the correlation clipped to 0 and a line saying the matrix was adjusted",
   "correlation must be an object { type: \"uniform\", rho } or { type: \"pairs\", pairs } (stated; no default); got -0.6"],
- "Three variables cannot all be correlated at -0.6: the matrix is not positive semidefinite and the engine refuses it, naming how far the Cholesky factor misses (0.8). -0.6 is inside the range the rho check allows, so that message does not fire; nothing is clipped or repaired; and the object-shape message is for a correlation left out.")
+ "Three variables cannot all be correlated at -0.6: the matrix is not positive semidefinite and the engine refuses it, naming how far the Cholesky factor misses (0.8). -0.6 is inside the range the rho check allows, so that message does not fire; nothing is clipped or adjusted; and the object-shape message is for a correlation left out.")
 
 # 13
 x("A pairs correlation on the three Ekene Reserves projects states only two pairs. What does the engine return?",
@@ -132,8 +132,8 @@ x("The seed is removed from an aggregation call. What does the engine return, in
 x("Which of these figures from an Expert aggregation can be a graded figure in this course?",
  "the arithmetic 1P, a return of the engine on fixed inputs",
  ["the sampled P90 on the stated seed and draws",
-  "the sampled mean on the stated seed and draws",
-  "the sampled P50, since it is the best estimate of the total"],
+  "a Monte Carlo mean on the stated seed and draws",
+  "the P50 of the total, since it is the best estimate"],
  "Every graded number is a return value of the engine on fixed inputs, and none comes from the Monte Carlo. The sampled P90, P50, P10 and mean are taught with their seed and draw count, and none is graded as an exact figure; the arithmetic sums are closed-form and can be graded.")
 
 emit(Q, '/root/cat-wip-prms/banks/ec11a_m02.json', expect_n=15)

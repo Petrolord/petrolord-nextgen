@@ -27,9 +27,9 @@ q(0, "Which criteria does the engine list as holding back EKN-4, Ekene North app
 
 q(3, "Ekene East gas, EKN-3, is held back by six criteria. Which two criteria does it meet?",
  "developmentPlan and approvals.",
- ["market and facilities, since a gas discovery always has a buyer lined up before it is appraised.",
-  "timeFrame and economicStatus, the two criteria the engine reads from inputs other than true or false.",
-  "financialAppropriations and firmIntention, since the licensee has declared a significant gas discovery."],
+ ["market and facilities.",
+  "timeFrame and economicStatus.",
+  "financialAppropriations and firmIntention."],
  "The engine lists financialAppropriations, timeFrame, economicStatus, market, facilities and firmIntention as the blockers of EKN-3, so of the eight conditions the two it meets are the development plan and the approvals. Its market and facilities are among the blockers, and a significant gas discovery declaration is a Nigerian note printed beside the class.")
 
 q(1, "The golden case class-tech-under-development-only states every criterion met, with the recovery project stated as technology under development. What does the engine return?",
@@ -44,7 +44,7 @@ q(0, "A learner states the economic status of a project as \"positive\". Which m
  ["commerciality.market must be true or false (stated; no default); got \"positive\"",
   "Criterion (4) read as met.",
   "economicStatus must be true or false (stated; no default); got \"positive\""],
- "Those are the engine's own words for the golden case class-refuse-economic-status. Positive economics is read from a stated economic status, and only the three named values are accepted. The economic status is one of three words and is not a true-or-false input. The engine does not read an unaccepted word as met.")
+ "Those are the engine's own words for the golden case class-refuse-economic-status. Positive economics is read from a stated economic status, and only the three named values are accepted. The economic status is stated as one of three words. The engine does not read an unaccepted word as met.")
 
 q(3, "What chance of commerciality does the engine return for Ekene East gas, EKN-3, a discovered project with a stated chance of development of 50.000000 percent?",
  "50.000000 percent, since Pc = Pd for a discovered project.",
@@ -61,10 +61,10 @@ q(2, "EKN-5 has five blockers and a chance of development of 20.000000 percent; 
  "The chance of development is a stated input: the engine multiplies nothing and derives no chance from the number or kind of blockers. That is why the chances do not follow the count of blockers. The Nigerian note on EKN-3 is printed beside its class and changes no chance.")
 
 q(1, "What reserves status does the Ekene file state for EKN-2, Ekene infill wells, whose investment decision is taken and whose production is yet to start?",
- "Undeveloped.",
- ["Developed-producing, since the project has already passed its final investment decision.",
-  "Developed-non-producing, since the wells are drilled and waiting on a pipeline to be connected.",
-  "None, since a reserves status is stated only once a project is on production."],
+ "Undeveloped, since its production is yet to start.",
+ ["Developed-producing, since the decision is now taken.",
+  "Developed-non-producing, since the wells wait on a pipeline.",
+  "None, since a status is stated only with production."],
  "EKN-2 is Reserves, sub-class approved-for-development, with a stated reserves status of undeveloped (PRMS 2.1.3.6, Table 2). Developed-producing needs a project on production, which EKN-2 is not. The Ekene file has no developed-non-producing project. Every Reserves project carries a stated status, producing or not.")
 
 q(3, "The Reserves status control on Ekene infill wells is set to developed-producing. Which message does the engine print?",
@@ -104,7 +104,7 @@ q(3, "EKN-2 has its final investment decision and is not yet producing. A learne
 
 q(0, "Which section does the engine cite in the class decision of EKN-5, Ekene West tight sand, and which blocker does that decision list first?",
  "PRMS Table 1 (Contingent Resources guidelines), listing technology under development first.",
- ["PRMS 2.1.2.1 and Table 1, listing developmentPlan first, as for Ekene North appraisal.",
+ ["PRMS 2.1.2.1 and Table 1, listing developmentPlan first, just as for Ekene North appraisal.",
   "PRMS 2.1.3.5.6 and Table 1, listing economicStatus first, because the economics are stated not viable.",
   "PRMS 2.1.1.2, listing firmIntention first."],
  "The engine's decision on EKN-5 cites PRMS Table 1 (Contingent Resources guidelines) and reads Contingent Resources: not commercial (technology under development, developmentPlan, financialAppropriations, economicStatus, firmIntention). PRMS 2.1.2.1 and Table 1 is what the other Contingent and the Reserves projects cite; 2.1.3.5.6 is the sub-class decision, and 2.1.1.2 belongs to the unrecoverable classes.")

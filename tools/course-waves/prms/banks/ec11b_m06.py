@@ -18,14 +18,14 @@ q(3, "Under s.78(8) of the Petroleum Industry Act 2021 (Official Gazette No. 142
   "Relinquish the area unless a commercial discovery is declared on the day the appraisal ends."],
  "Section 78(8) gives the three declarations: (a) a commercial discovery, (b) a significant gas or crude oil discovery, or (c) informing the Commission of no interest. A field development plan follows a commercial discovery within two years (s.79(1)); 90 days is the Commission's approval of a significant discovery notice under reg. 6(2). No gazetted booking rule was found, and relinquishment follows the end of a retention period.")
 
-q(1, "After a licensee declares a commercial discovery, within what period does s.79(1) of the Act require a field development plan?",
+q(1, "After a licensee declares a commercial discovery, within what period does s.79(1) of the Petroleum Industry Act 2021 require a field development plan?",
  "Within two years of the declaration.",
- ["Within 60 days of the declaration, the same period as a significant discovery notice.",
-  "Within 10 years of the declaration, the longest retention period the Act allows.",
-  "Within five years, the benchmark for development to start."],
+ ["Within 60 days of the declaration.",
+  "Within 10 years of the declaration date.",
+  "Within five years of the declaration."],
  "The quoted text reads: \"licensee shall within two years of the declaration, submit to the Commission a\" (PIA s.79(1)). Sixty days is the notice of a significant discovery under reg. 5(1) of S.I. No. 37 of 2023, 10 years is the retention cap of s.78(9), and the five-year benchmark is a PRMS figure for the time-frame criterion.")
 
-q(0, "For how long at most may a licensee retain the area of a significant discovery under s.78(9) of the Act?",
+q(0, "For how long at most may a licensee retain the area of a significant discovery under s.78(9) of the Petroleum Industry Act 2021?",
  "Not more than 10 years from the day the declaration was made.",
  ["Not more than 8 years in deep water and 5 years onshore and in shallow water.",
   "For as long as the Commission decides, since the Act sets no upper limit.",
@@ -60,19 +60,19 @@ q(0, "EKN-1, which meets every commerciality criterion, is stated with a signifi
   "Reserves with no note, since the Nigerian block is dropped when it contradicts the class."],
  "The engine's own words are: nigeria.declaration must be \"commercial-discovery\" for a project that meets every commerciality criterion: a significant discovery cannot be declared commercial (PIA 2021 s.318) and a discovery of no interest is not being developed (s.78(8)(c)); got \"significant-gas-discovery\". The notes do not change the class, so the contradiction is refused. Nothing in the box is dropped silently.")
 
-q(1, "A learner adds a `nigeria` block with a commercial discovery declaration to EKN-6, the Ekene Deep prospect. Which message comes back?",
+q(1, "A learner adds the `nigeria` block {\"declaration\":\"commercial-discovery\",\"yearsSinceDeclaration\":0} to EKN-6, the Ekene Deep prospect. Which message comes back?",
  "nigeria must be left out for an undiscovered accumulation (PIA 2021 s.78(8) declarations follow a discovery); got {\"declaration\":\"commercial-discovery\",\"yearsSinceDeclaration\":0}",
  ["nigeria.declaration must be one of \"commercial-discovery\", \"significant-crude-oil-discovery\", \"significant-gas-discovery\", \"no-interest\"; got \"commercial-discovery\"",
   "A result with the class Reserves, since a declared commercial discovery passes the commerciality test.",
   "A result with Prospective Resources and a note that a field development plan is due within 2 years."],
- "Those are the engine's own words for the golden case class-refuse-nigeria-undiscovered: the declarations of s.78(8) follow an appraisal, and a prospect has not been discovered. The accepted-keys message answers a declaration outside the four keys, and commercial-discovery is one of them. A declaration sets no class.")
+ "Those are the engine's own words for the golden case class-refuse-nigeria-undiscovered: the declarations of s.78(8) follow an appraisal, and a prospect has not been discovered. The message listing the four accepted declarations answers a declaration outside them, and commercial-discovery is one of them. A declaration sets no class.")
 
 q(1, "What does the engine answer when the Nigerian declaration is stated as \"significant\"?",
  "nigeria.declaration must be one of \"commercial-discovery\", \"significant-crude-oil-discovery\", \"significant-gas-discovery\", \"no-interest\"; got \"significant\"",
  ["A note for a significant gas discovery, the one the engine assumes when the kind is not given.",
   "nigeria.declaration must be \"commercial-discovery\" for a project that meets every commerciality criterion; got \"significant\"",
   "A note for a significant crude oil discovery, since oil is the first kind the Act names."],
- "Those are the engine's own words for the golden case class-refuse-nigeria-declaration: the declaration must be one of four stated keys, and the short form names neither kind of significant discovery. The engine assumes no kind. The commerciality message answers a significant declaration on a project that meets every criterion.")
+ "Those are the engine's own words for the golden case class-refuse-nigeria-declaration: the declaration must be one of the four accepted declarations, and the short form names neither kind of significant discovery. The engine assumes no kind. The commerciality message answers a significant declaration on a project that meets every criterion.")
 
 q(3, "How does a Nigerian note change the PRMS class the engine returns?",
  "It does not: the note is printed beside the class, which comes from the stated facts.",
@@ -81,7 +81,7 @@ q(3, "How does a Nigerian note change the PRMS class the engine returns?",
   "Any no-interest note turns the project into Undiscovered Unrecoverable."],
  "The Act's declaration is a legal step with the regulator, and the PRMS class describes the project's maturity; the engine carries the first as a note and leaves the second to the facts. Where the two contradict, as a significant declaration on a project meeting every criterion, the engine refuses. The no-interest case is discovered, and its class is Discovered Unrecoverable because its recovery project is none.")
 
-q(2, "What does s.78(15) of the Act allow the Commission to do after a licensee declares a discovery of no interest?",
+q(2, "What does s.78(15) of the Petroleum Industry Act 2021 allow the Commission to do after a licensee declares a discovery of no interest?",
  "Require relinquishment of the parcels that cover the structure of the discovery.",
  ["Grant a retention period of at least five years before any relinquishment.",
   "Declare the discovery commercial on the licensee's behalf and require a field development plan.",
@@ -102,7 +102,7 @@ q(1, "What did the course find when it looked for a gazetted NUPRC regulation on
   "The 1 April 2026 release, which the Commission uses as its booking guideline."],
  "No gazetted regulation or guideline on booking or reporting reserves was on the list read on 2026-09-27, so the course teaches the PRMS classes and states no Nigerian booking rule. The Commercial Regulations, 2025 ask for a status report and are used by concept only. Regulation 7 of S.I. No. 37 of 2023 covers a declaration that does not meet the criteria, and the release is a statement of figures.")
 
-q(3, "What does the Act's s.7(i) give the Commission among its functions?",
+q(3, "What does s.7(i) of the Petroleum Industry Act 2021 give the Commission among its functions?",
  "The evaluation of national reserves and policies for prudent reservoir management.",
  ["The classification of each licensee's projects into the PRMS classes.",
   "The approval of every licensee's 1P before it is reported to shareholders.",

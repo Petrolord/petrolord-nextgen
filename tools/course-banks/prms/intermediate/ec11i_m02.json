@@ -11,7 +11,7 @@
   "explanation": "The engine returns Contingent Resources for EKN-4 with the blockers developmentPlan, financialAppropriations, approvals and firmIntention. Positive economics is one criterion of seven plus the commitment, and every one must be met, so viable economics settles nothing alone and the commitment is one blocker among four. The six-item list belongs to Ekene East gas (EKN-3), which lacks a market and facilities."
  },
  {
-  "prompt": "Six criteria and the commitment are each stated as true or false. Which two does the engine read from other inputs?",
+  "prompt": "Of the seven criteria and the commitment, six are stated as true or false. Which two does the engine read from other inputs?",
   "options": [
    "The time-frame, from a stated start and justification, and positive economics, from the economic status",
    "The market and the facilities, which it reads from the stated forecast and prices",
@@ -44,12 +44,12 @@
   "explanation": "A start beyond five years meets the criterion when a longer time-frame is stated as justified, and the engine prints the justification in its line, so the class is Reserves. The not-met line would need the justification false. No start of 0 or more is refused on its size, and the engine tests the time-frame on every discovered project with a recovery project, printing the justification it was given."
  },
  {
-  "prompt": "An otherwise commercial project is due to begin development in exactly 5 years, with nothing stated about a longer wait. How is the time-frame criterion treated?",
+  "prompt": "An otherwise commercial project is due to begin development in exactly 5 years, with nothing stated about a longer wait. What does the engine return for the time-frame criterion?",
   "options": [
-   "Not met, with the class Contingent Resources and one blocker, timeFrame",
+   "Not met, with one blocker, timeFrame",
    "Met, with the class Reserves",
-   "A refusal: a start of exactly 5 sits on the benchmark and must be justified",
-   "Met only after a longer time-frame is also stated as justified"
+   "A refusal until the edge is justified",
+   "Met once a longer wait is justified"
   ],
   "answer": 1,
   "explanation": "The engine prints \"time-frame: development starts within 5 years against the 5-year benchmark: met (PRMS 2.1.2.3)\" and returns Reserves. Reading five years exactly as met is the engine's stated reading of the edge; the alternative it names reads it as not met, and no graded figure rests on the edge. A start on the benchmark is a valid input, and no justification is needed within five years."

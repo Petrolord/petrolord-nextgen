@@ -86,7 +86,7 @@ q(1, "A box carries an unknown top-level key, `maturity`, and also lacks its dis
  ["The missing discovery status, since a required input always comes first.",
   "Both problems, listed in one message in the order they appear in the box.",
   "Neither: an unknown key is dropped silently and the class is returned with a warning."],
- "The engine refuses on the unknown key first, in its own words: \"maturity is not an accepted key; the accepted keys at the top level are name, discovery, recoveryProject, subClass, commerciality, economicStatus, projectStatus, reservesStatus, chances, nigeria\". It names one field a refusal, and a misspelt or unknown key is refused by name, so nothing is dropped silently.")
+ "The engine refuses on the unknown key first, in its own words: \"maturity is not an accepted key; the accepted keys at the top level are name, discovery, recoveryProject, subClass, commerciality, economicStatus, projectStatus, reservesStatus, chances, nigeria\". It names one field per refusal, and a misspelt or unknown key is refused by name, so nothing is dropped silently.")
 
 q(3, "EKN-4 comes back as Contingent Resources with a list of criteria that are not met. How does the course describe that output?",
  "As a result: the list is a finding about the project.",
@@ -104,16 +104,16 @@ q(0, "What is every graded number in this course?",
 
 q(1, "Which of these is outside what the engine does?",
  "Building a production forecast from well rates.",
- ["Naming each criterion that keeps a discovered project out of Reserves when the facts are stated.",
-  "Returning the categories of three stated estimates with the probability label beside each one.",
-  "Refusing an input key it does not read, at whatever level of the box the key sits."],
+ ["Naming each criterion that keeps a project out of Reserves.",
+  "Labelling three stated estimates with their probabilities.",
+  "Refusing an input key it does not read, at any level."],
  "The engine builds no production forecast, no in-place volume and no distribution from data; a forecast from well rates belongs to the decline curve analysis course. Naming the blockers is part of classify, the categories are what categorize returns, and every call refuses an unknown key by name.")
 
 q(3, "A report calls Nigeria's published national 2P gas figure \"Nigeria's gas reserves\". How does this course word that figure?",
  "As reported reserves, with its date and whoever reported it.",
- ["As Reserves in the class sense, since a national total adds up the Reserves projects of every licence.",
-  "As Contingent Resources, because a national figure has passed no project's commerciality test.",
-  "As resources, since the word covers every quantity in the ground without naming a class."],
+ ["As Reserves in the class sense, summed over every licence.",
+  "As Contingent Resources, since no project test was passed.",
+  "As resources, the word for every quantity in the ground."],
  "In this course reserves is the PRMS class: discovered, commercial and remaining. A national or company figure is written as reported reserves, with its date and who reported it, which for the national gas figure is the Commission's release of 1 April 2026. Contingent Resources is a class of projects. Resources alone means all quantities together.")
 
 emit(Q, '/root/cat-wip-prms/banks/ec11b_m01.json', expect_n=15)

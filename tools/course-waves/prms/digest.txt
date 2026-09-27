@@ -872,7 +872,7 @@ THE EKENE CONTINGENT RESOURCES (golden input agg-ekene-contingent; seed 20271113
 | project | distribution (stated) | chance of commerciality, percent (stated) | low | best | high | mean (engine) |
 | --- | --- | --- | --- | --- | --- | --- |
 | EKN-3 | lognormal | 50.000000 | 8.450961 | 12.425127 | 18.268192 | 13.000000 |
-| EKN-4 | triangular | 65.000000 | 3.000000 | 4.500000 | 6.500000 | 4.637674 |
+| EKN-4 | triangular-fit | 65.000000 | 3.000000 | 4.500000 | 6.500000 | 4.637674 |
 | EKN-5 | triangular | 20.000000 | 1.707107 | 2.837722 | 4.585786 | 3.000000 |
 
 THE RISKED MEAN is the sum of each project's chance of commerciality times its mean: 10.114488 MMboe (engine), against an unrisked sum of means of 20.637674. The engine's line, verbatim:

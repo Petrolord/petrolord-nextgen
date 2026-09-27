@@ -36,7 +36,7 @@ There is no commerciality test, because there is nothing yet to develop; stating
 
 ## The engine's decisions on EKN-6
 
-The decision table for Ekene Deep holds two rows: the class, citing PRMS 2.1.0.1 and Table 1, and the sub-class, citing PRMS 2.1.3.5.9 and Table 1 with the outcome "prospect (stated)". The word "stated" in the outcome is a reminder that the engine took the sub-class from you and checked it against the list.
+The decision table for Ekene Deep holds five rows: the discovery, citing PRMS 2.1.1.1; the recovery project, citing PRMS 2.1.0.1; the class, citing PRMS 2.1.0.1 and Table 1; the sub-class, citing PRMS 2.1.3.5.9 and Table 1 with the outcome "prospect (stated)"; and the chance of commerciality, citing PRMS 2.1.3.3. The word "stated" in the outcome is a reminder that the engine took the sub-class from you and checked it against the list.
 
 ## A sub-class is not a chance
 
