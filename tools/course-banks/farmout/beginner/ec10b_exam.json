@@ -1,0 +1,464 @@
+[
+ {
+  "prompt": "HMRC's Oil Taxation Manual, page OT30023 (updated 2 February 2021), turns from exploration acreage to a producing field. What form does it say the consideration for an interest in a producing field generally takes?",
+  "options": [
+   "The buyer undertaking to bear future drilling costs on the field.",
+   "A development carry recovered with simple interest from production.",
+   "Cash or shares, the form OT30023 names.",
+   "A royalty on the field's output for the life of the licence."
+  ],
+  "answer": 2,
+  "explanation": "OT30023 says the consideration for the disposal of an interest in a producing field is generally in the form of cash or shares. Bearing future drilling costs is how OT30021 describes the consideration on relatively unexplored acreage, a development carry is OT30022, and a royalty or other subordinated interest is something the engine does not compute."
+ },
+ {
+  "prompt": "What may the holder of a marginal field do with its discovery under PIA s.94(4)(b)?",
+  "options": [
+   "Farm it out, with the consent of the Commission and on terms the Commission may approve under regulations.",
+   "Farm it out with no consent at all, since a marginal field holder is outside s.95.",
+   "Farm it out with the Minister's consent alone, on a percentage fee set by the Act.",
+   "Sell it outright for cash or shares, as HMRC's manual describes a producing field."
+  ],
+  "answer": 0,
+  "explanation": "Section 94(4)(b) lets the holder, with the consent of the Commission and on terms and conditions as the Commission may approve under regulations, farm out the discovery; s.94(5) adds that the farmee presents a field development plan. The Act sets no percentage fee itself: s.95(12) leaves the fee to regulation. HMRC's manual is United Kingdom guidance."
+ },
+ {
+  "prompt": "The course quotes HM Revenue and Customs' Oil Taxation Manual, which is United Kingdom tax guidance. What does it take from the manual?",
+  "options": [
+   "The United Kingdom's tax on a farm-out, which the engine applies to the Ekene deal as a reference case for every tier.",
+   "Consent rules for an assignment, since the Nigerian texts leave the consent to the parties.",
+   "The promote and the promote ratio, which the manual defines in points on its page OT30048.",
+   "What a farm in, an earn-in, a reimbursement and a development carry are, while applying none of its tax rules."
+  ],
+  "answer": 3,
+  "explanation": "The course reads HMRC's manual under the Open Government Licence for what a farm in, an earn-in, a reimbursement and a development carry are, and applies none of its tax rules; the engine computes no tax on the deal. Consent comes from the Act and the 2024 Regulations. The promote and its ratio are the engine's stated convention."
+ },
+ {
+  "prompt": "Why are the earning, promote and consideration figures of this tier the stated deal arithmetic run by the engine?",
+  "options": [
+   "The 2024 Regulations print a worked farm-in schedule, which the engine copies figure for figure.",
+   "No public text prints a farm-in schedule, as the engine's validation record says in its own words.",
+   "The Penn State page prints the Ekene schedule.",
+   "Licensed model agreements print the schedules, and the course may quote none of them here."
+  ],
+  "answer": 1,
+  "explanation": "The validation record states: \"No public text prints a farm-in schedule or a break-even promote: those goldens come from the stated deal arithmetic in the oracle.\" So these figures show what a set of terms produces, checked by an independent oracle. The Regulations print no worked example, and the Penn State problem is a separate cited check on another subject."
+ },
+ {
+  "prompt": "A learner types limit inside an event's cap object in the earning box. What does the engine's refusal name?",
+  "options": [
+   "The top-level key cap, with the eight top-level keys listed as the ones the earning call accepts.",
+   "The path events[0].cap.limit, with on, amount and overrunRule as the accepted keys.",
+   "Nothing: limit is read as the cap amount and the call runs.",
+   "The field events[0].cap.amount, said to be missing."
+  ],
+  "answer": 1,
+  "explanation": "The engine refuses an unknown key at whatever level it sits, with its path and the accepted keys at that level. Its words: events[0].cap.limit is not an accepted key; the accepted keys of events[0].cap are on, amount, overrunRule. It reads no key it does not know, and it names the unknown key before any missing term."
+ },
+ {
+  "prompt": "Suppose the farmor field reads XX, an id the licence (EKO 70, PA 30) does not contain. What comes back from the engine?",
+  "options": [
+   "A result in which XX joins the licence at 0 percent and farms out nothing to FIN.",
+   "A refusal on farminee.id, since the farminee must deal with a known farmor first.",
+   "A result in which EKO, the largest holder, is taken as the farmor in place of XX.",
+   "A refusal on farmor, naming EKO and PA as the parties it may be."
+  ],
+  "answer": 3,
+  "explanation": "Its words: farmor must be one of \"EKO\", \"PA\"; got \"XX\". Only a party holding a participating interest can give one up, and the call leaves that choice to the box: no party is added at 0 percent and none is substituted. The farminee's id has a check of its own."
+ },
+ {
+  "prompt": "What happens when the gross cost of an event is stated as 0?",
+  "options": [
+   "It refuses on events[0].grossCost, which must be a finite number above 0.",
+   "It returns a result in which every payment, the carry and the promote are 0.000000.",
+   "It returns a result with the promote in points and no money figures, since the well is free.",
+   "It refuses on the promote, since there is no cost."
+  ],
+  "answer": 0,
+  "explanation": "The engine's words: \"events[0].grossCost must be a finite number above 0; got 0\". A gross cost is a stated term with its own condition, and the refusal names the field that broke it and returns no figures. The promote is set by the share paid and the interest held, and the engine never divides by the gross cost to get it."
+ },
+ {
+  "prompt": "Which texts does the basis.source of an earningObligation call cite?",
+  "options": [
+   "The 2024 Regulations at reg. 19, and the Act at s.264(f) and s.302(12)(c) on the tax treatment of fees.",
+   "Penn State EME 801, Lesson 6, and HMRC's manual OT30021, with every chance and value a stated input.",
+   "HMRC's Oil Taxation Manual OT30021, and the Petroleum Industry Act 2021 at s.94(8)(b) and s.95.",
+   "The AOI Regulations at reg. 24 alone, whose definition of a petroleum agreement names farm-in agreements."
+  ],
+  "answer": 2,
+  "explanation": "The engine's source line for an earning call names HMRC's Oil Taxation Manual OT30021 (the work programme as consideration; a cash reimbursement of sunk costs) and the Act's s.94(8)(b) (farm-out defined) and s.95 (every assignment needs consent). Regulation 19 and the tax sections are the consent fee's sources, and the Penn State line belongs to the deal value call of a later tier."
+ },
+ {
+  "prompt": "Why can a graded figure in this course have exactly one right answer?",
+  "options": [
+   "Each is rounded to a whole number before it is graded, so that small differences between machines disappear.",
+   "Each is checked against a market survey of farm-out deals, which fixes the accepted value.",
+   "Each is taken from the Ekene Deep deal, whose figures the lessons print in full.",
+   "Each is an engine return value on fixed inputs, and none comes from the Monte Carlo of riskSharing."
+  ],
+  "answer": 3,
+  "explanation": "The course states that every graded number is a return value of the engine on fixed inputs, and that no graded figure comes from the Monte Carlo of riskSharing, so the same terms give the same number on any machine. Graded figures are quoted to six decimals, no market survey is involved, and each capstone runs its own synthetic deal, which the lessons never print."
+ },
+ {
+  "prompt": "Of a 46000000.000000 well, FIN funds 18200000.000000 and PA 13800000.000000. How much falls to EKO, the farmor, on the engine's row?",
+  "options": [
+   "14000000.000000, the farmor's payment on the capped well.",
+   "18200000.000000, which is the payment the engine prints for FIN on the same row.",
+   "12000000.000000, which is EKO's payment on the uncapped 40000000.000000 teaching well.",
+   "13800000.000000, EKO's 30 percent of the well."
+  ],
+  "answer": 0,
+  "explanation": "The engine returns EKO paying 14000000.000000, FIN 18200000.000000 and PA 13800000.000000, which make up the 46000000.000000 well. 12000000.000000 is EKO's payment on a different, uncapped well of 40000000.000000. 13800000.000000 is PA's payment, and EKO holds 40 percent after the deal."
+ },
+ {
+  "prompt": "Heads up, no cap: FIN takes 30 percent of EKO's share by paying 30 percent of a drilled 40000000.000000 well. PA, at 30 percent, stays outside the deal. What is PA's bill?",
+  "options": [
+   "16000000.000000, EKO's payment, since EKO holds 40 percent after the deal.",
+   "0.000000, FIN covering PA.",
+   "4000000.000000, PA's carry.",
+   "12000000.000000, PA's share at its 30 percent."
+  ],
+  "answer": 3,
+  "explanation": "The engine's other-party split returns PA paying 12000000.000000, its own 30 percent of the well, beside FIN's 12000000.000000 and EKO's 16000000.000000. Those three make up the 40000000.000000 well. A heads-up deal has a carry of 0.000000, and no farminee pays another party's share."
+ },
+ {
+  "prompt": "On an earning event with no cap, how does the share of the gross cost the farminee pays compare with the stated share paid?",
+  "options": [
+   "The share of the gross cost is always the lower, by the promote in points.",
+   "They are the same figure: with no cap the farminee pays its stated share of the whole gross cost.",
+   "The share of the gross cost is always the higher, by the cash bonus over the gross cost.",
+   "They differ by the reimbursement, which the engine adds to the farminee's side of the well."
+  ],
+  "answer": 1,
+  "explanation": "With no cap the promote applies to the whole gross cost, so the engine's column equals the stated share: 40.000000 against 40.000000 on earn-bonus-and-reimbursement, and 70.000000 on the full carry. The two part company only when a cap binds, as on the Ekene well (39.565217 against 40.000000). The bonus and the reimbursement leave the split of the well alone."
+ },
+ {
+  "prompt": "Totals count completed events only. On an undrilled deal (0 of 1 events done, \"per-event\"; EKO 70, PA 30) where FIN is bound to fund 40 percent of an uncapped 40000000.000000 well for 30, which farmor payment do the totals show?",
+  "options": [
+   "12000000.000000 in both, since EKO pays its own share whether or not FIN drills.",
+   "28000000.000000, EKO's whole pre-deal share, until the event is completed.",
+   "0.000000 in the totals, beside a row obligation of 12000000.000000 for EKO.",
+   "16000000.000000, the farminee's obligation, which the farmor pays until completion."
+  ],
+  "answer": 2,
+  "explanation": "Only completed events enter the totals, so the farmor's total reads 0.000000 while its row keeps the obligation of 12000000.000000. EKO's pre-deal 70 percent of the well is no payment of any kind, and the 16000000.000000 obligation belongs to FIN."
+ },
+ {
+  "prompt": "On relatively unexplored acreage, what does HMRC's page OT30021 say the consideration will generally consist of?",
+  "options": [
+   "Wholly or mainly the Farmer in undertaking to bear future costs, drilling for example.",
+   "Cash paid on signing, with the drilling left to the Farmer out alone.",
+   "Shares in the Farmer in, issued to the Farmer out at the date of the assignment.",
+   "A reimbursement of the Farmer out's sunk costs, in full and in cash."
+  ],
+  "answer": 0,
+  "explanation": "OT30021 says that for relatively unexplored acreage consideration will generally consist wholly, or mainly, of the Farmer in undertaking to bear future costs (e.g. drilling). The same page adds that the Farmer in may also pay a cash reimbursement for sunk costs relating to the proportionate interest acquired. Cash or shares is OT30023, for a producing field."
+ },
+ {
+  "prompt": "The earning rule in the engine's basis ends with one sentence about the deal's terms. What does that sentence say?",
+  "options": [
+   "Every cap, share and interest is read from the licence file when the box leaves it out",
+   "Every cap is set to none when it is missing, and every share to the interest earned",
+   "Every cap, share and interest is a stated input with no default",
+   "Every share is capped at the farmor's interest"
+  ],
+  "answer": 2,
+  "explanation": "The basis ends: \"Every cap, share and interest is a stated input with no default\". A missing term is refused by name. The engine holds no licence file of deal terms, fills in no cap or share, and the limit on the share paid is a refusal on a stated term."
+ },
+ {
+  "prompt": "Seventy for thirty: with EKO the farmor at 70 and PA at 30, FIN funds 70 percent of an uncapped 40000000.000000 well to get 30. Which promote ratio is printed?",
+  "options": [
+   "1.333333, forty for thirty.",
+   "1.000000, heads up.",
+   "1.724638, the promote-adjusted ratio of the Ekene Deep deal.",
+   "2.333333, seventy paid over thirty held."
+  ],
+  "answer": 3,
+  "explanation": "70 paid over 30 held is 2.333333 (engine, earn-full-carry), with a promote of 40.000000 points. 1.333333 is forty for thirty. Heads up means paying the share earned, which the full carry does not. 1.724638 is the Ekene deal's promote-adjusted ratio."
+ },
+ {
+  "prompt": "Step the share paid up from 30 toward 70 on an uncapped 40000000.000000 well where FIN earns 30 (EKO 70, PA 30 before). How do the promote, the ratio, the carry and the farmor's payment move?",
+  "options": [
+   "The promote, the ratio and the carry all rise, and the farmor's payment falls to 0.000000.",
+   "The promote rises while the carry stays at 0.000000, since the carry is set by the interest earned.",
+   "The farmor's payment rises with the promote, since the farmor matches the farminee's share.",
+   "The participating interests after the deal shift toward FIN as the share it pays rises."
+  ],
+  "answer": 0,
+  "explanation": "The engine returns a promote of 0.000000 points and a carry of 0.000000 at 30, then 10.000000 points and 4000000.000000 at 40, up to 40.000000 points, a ratio of 2.333333 and a carry of 16000000.000000 at 70, where EKO pays 0.000000. The interests after are set by the interest earned and stay the same."
+ },
+ {
+  "prompt": "Explain the full carry's carry of 16000000.000000: 70 paid for 30 held on a well of 40000000.000000 that has no cap.",
+  "options": [
+   "It is FIN's own 30 percent of the well plus the ten points of a standard promote.",
+   "It is the 40 promote points applied to the well, with no cap to hold it.",
+   "It is EKO's pre-deal share of the well less the reimbursement FIN pays in cash.",
+   "It is the whole of FIN's payment for the well, which the engine counts as carry."
+  ],
+  "answer": 1,
+  "explanation": "With no cap the carry is the promote in points applied to the gross cost: 40.000000 points of 40000000.000000, which is EKO's whole 40 percent post-deal share. By the basis rule it is also FIN's payment of 28000000.000000 less its own 12000000.000000. The engine states no standard promote, and the deal has no reimbursement."
+ },
+ {
+  "prompt": "Can a heads-up deal carry a cash bonus?",
+  "options": [
+   "No: a bonus turns the deal into a promoted one, and the engine refuses a bonus on a heads-up deal.",
+   "No: a heads-up deal has a consideration of 0.000000 by definition, so any bonus is dropped.",
+   "Yes: it has no promote, and a bonus is a separate stated term the engine adds to the consideration.",
+   "Yes, but the engine counts the bonus as carry and reports a promote above 0 points."
+  ],
+  "answer": 2,
+  "explanation": "The promote is set by the share paid and the interest held, and the cash sits beside them. On the heads-up well with a stated bonus of 2000000.000000, the engine returns a promote of 0.000000 points and a consideration of 2000000.000000. The consideration of 0.000000 on the course's heads-up case comes from its stated bonus of 0, and the bonus is never carry."
+ },
+ {
+  "prompt": "On a deal with a single earning event, which figure is the participating interest the farminee holds after the event?",
+  "options": [
+   "The share of the gross cost it pays, since the promote vests with the payment.",
+   "The farmor's interest before the deal, since the whole share passes on completion.",
+   "The interest earned less the promote in points, the part the promote pays for.",
+   "The interest the event earns, since the farminee held none before it."
+  ],
+  "answer": 3,
+  "explanation": "The engine's held-after column adds the interest earned to what the farminee held before, and a newcomer holds 0 before: on the Ekene well the held-after figure is 30.000000, the same as the interest earned. The share paid sets the payment, the farmor keeps what it does not farm out, and the promote is measured against the held-after figure."
+ },
+ {
+  "prompt": "With no cap, what does a promote of 10 points on a 40000000.000000 well mean in money?",
+  "options": [
+   "A carry of 4000000.000000 paid beyond the farminee's own share.",
+   "A cash bonus of 4000000.000000 paid to the farmor on signing the deal.",
+   "A payment of 10000000.000000 for FIN's own share.",
+   "A reimbursement of 4000000.000000 of the farmor's past costs on the licence."
+  ],
+  "answer": 0,
+  "explanation": "A promote in points reads straight onto money: 10 points of the gross cost beyond the farminee's own share, which with no cap is the carry, 4000000.000000 on earn-bonus-and-reimbursement (engine). The bonus and the reimbursement are separate stated terms, and FIN's own share of that well is 12000000.000000."
+ },
+ {
+  "prompt": "Past costs of 9000000.000000, with 30 percent of them repaid by FIN (earn-bonus-and-reimbursement): what reimbursement figure does the engine print?",
+  "options": [
+   "3600000.000000, the Ekene reimbursement at the same 30 percent share.",
+   "9000000.000000, the past costs in full.",
+   "1500000.000000, the bonus.",
+   "2700000.000000, 30 percent of 9000000.000000."
+  ],
+  "answer": 3,
+  "explanation": "Thirty percent of 9000000.000000 is the engine's 2700000.000000. The Ekene deal repays the same share of a larger sum, 12000000.000000, giving 3600000.000000; repaying the whole would need a stated 100 percent; and the bonus of 1500000.000000 is a separate term of the same case."
+ },
+ {
+  "prompt": "FIN earns 25 percent of sole holder EKO's licence by paying 33.333333 percent of a drilled 12000000.000000 well; there is no cap, no bonus and no reimbursement. What consideration reaches EKO?",
+  "options": [
+   "4000000.000000, the whole of FIN's payment for the well, counted as consideration.",
+   "0.000000, as no cash is stated.",
+   "1000000.000000, the carry alone.",
+   "8000000.000000, EKO's own payment for the well."
+  ],
+  "answer": 2,
+  "explanation": "The engine's line reads \"consideration to EKO: carry 1000000 + cash bonus 0 + past-cost reimbursement 0 (0% of 0) = 1000000\". With no cash the consideration is the carry, the part of EKO's share FIN pays. FIN's own share of the well is no consideration, and EKO's own payment is a cost to it."
+ },
+ {
+  "prompt": "On the Ekene deal the share reimbursed (30 percent) equals the participating interest FIN earns. Does the engine tie the two together?",
+  "options": [
+   "No: the reimbursed percent is its own stated term, and the engine computes whatever share the deal states.",
+   "Yes: it refuses any reimbursed percent that differs from the interest earned by the farminee.",
+   "Yes: it overwrites the reimbursed percent with the interest earned, and says so in a reason line.",
+   "No: it ignores the reimbursed percent and always reimburses the whole of the stated past costs."
+  ],
+  "answer": 0,
+  "explanation": "The engine reads the reimbursed percent as its own stated term: stating 50 on the Ekene past costs of 12000000.000000 returns a reimbursement of half of them. HMRC's manual speaks of sunk costs relating to the proportionate interest acquired, and the Ekene deal states the same 30 percent, but the engine holds no rule linking the two."
+ },
+ {
+  "prompt": "Sum what FIN hands over on earn-bonus-and-reimbursement: 16000000.000000 toward the drilled well, 1500000.000000 as bonus and 2700000.000000 as reimbursement. Which total does the engine print as its outlay?",
+  "options": [
+   "8200000.000000, which is the consideration to EKO on the same case, carry included.",
+   "16000000.000000, which is FIN's payment for the well alone, the cash left out.",
+   "23800000.000000, which is FIN's outlay on the Ekene Deep deal, a different well.",
+   "20200000.000000, well payment and cash."
+  ],
+  "answer": 3,
+  "explanation": "Adding the three stated sums gives the engine's 20200000.000000. On this case EKO's consideration is 8200000.000000, which counts the carry in place of FIN's whole payment; 16000000.000000 omits the bonus and the reimbursement; and 23800000.000000 comes from a different well and different cash."
+ },
+ {
+  "prompt": "Why does the equivalent working interest sit above the share paid on a deal with a bonus and a reimbursement?",
+  "options": [
+   "It divides by the vested interest, which is always below the share paid.",
+   "It adds the cash to the well payment, so more cash moves it further above.",
+   "It counts the carry twice, once in the payment and once as consideration.",
+   "It uses the dry-hole cost as its gross cost, which is the smaller of the two."
+  ],
+  "answer": 1,
+  "explanation": "The equivalent working interest is the farminee's payment, cash bonus and reimbursement over the gross cost of the completed events: on earn-cap-gross-below, with no cash, it is 40.000000, the share paid, and on earn-bonus-and-reimbursement it is 50.500000. Dividing by the vested interest gives the promote-adjusted ratio, the carry is inside the payment only, and the gross cost is the completed events' cost."
+ },
+ {
+  "prompt": "What does the course say the equivalent working interest is?",
+  "options": [
+   "A market value for the participating interest, which the engine reads from recent deals.",
+   "A forecast of what another party would pay for the same interest after the farm-out.",
+   "Arithmetic on stated terms: the heads-up share of the well the farminee's money would buy.",
+   "The interest that vests to the farminee once every earning event of the deal is complete."
+  ],
+  "answer": 2,
+  "explanation": "The basis calls it \"the heads-up interest that would cost the farminee the same\", computed from the stated payment, bonus and reimbursement. The engine asserts no market value and forecasts no price; a later tier prices an interest with a separate function on a stated basis. The vested interest is a separate figure, 30.000000 on the Ekene deal against 51.739130."
+ },
+ {
+  "prompt": "In which two of the engine's totals does the cash bonus appear?",
+  "options": [
+   "The farmor's consideration and the farminee's outlay.",
+   "The farminee's well payment and the carry, since the bonus is paid through the well.",
+   "The farmor's well payment and the other parties' payments, split by participating interest.",
+   "The promote in points and the promote ratio, which the bonus raises for the farminee."
+  ],
+  "answer": 0,
+  "explanation": "The bonus moves money from the farminee to the farmor, so the engine counts it in the consideration (beside the carry and the reimbursement) and in the outlay (beside the well payment and the reimbursement). It changes no split of the well, no party's payment for it, and no promote."
+ },
+ {
+  "prompt": "Under reg. 4(2) of the 2024 Regulations, to whom is an application for the Minister's consent made?",
+  "options": [
+   "To the Minister directly, who then asks the Commission for its recommendation on the deal.",
+   "To the Commission, in the manner the Regulations prescribe.",
+   "To the farmee's own board, which forwards it with a field development plan attached.",
+   "To the other licence parties, whose agreement stands in."
+  ],
+  "answer": 1,
+  "explanation": "Regulation 4(2): application for consent of the Minister under the Act and these Regulations shall be made to the Commission in the manner prescribed in these Regulations. The Minister then decides on the Commission's recommendation (PIA s.95(2)). No text the course reads lets the parties' agreement stand in for consent."
+ },
+ {
+  "prompt": "Under PIA s.95(4), how does a holder that wishes to transfer its interest apply?",
+  "options": [
+   "To the Minister, in a format the Act sets out in a schedule to the Act itself.",
+   "To the High Court, which approves the transfer as a matter of contract law.",
+   "To no authority: the Act lets holders transfer by notice once the fee is paid.",
+   "To the Commission, in the format the Commission prescribes."
+  ],
+  "answer": 3,
+  "explanation": "Section 95(4) says the holder shall make an application for approval of the transfer to the Commission in the format prescribed by the Commission. The Minister consents on the Commission's recommendation, and the fee is a condition of consent and no replacement for it."
+ },
+ {
+  "prompt": "How does reg. 24 of the 2024 Regulations define a \"Petroleum Agreement\" so that it reaches a farm-in?",
+  "options": [
+   "It includes farm-in agreements in its list, beside production sharing contracts and joint operating agreements.",
+   "It limits the term to production sharing contracts, so a farm-in agreement falls outside it.",
+   "It defines the term by the value of the transaction, above the amount the Commission sets.",
+   "It leaves farm-ins to the Act's marginal field section, which alone defines a farm-out."
+  ],
+  "answer": 0,
+  "explanation": "Regulation 24 says \"Petroleum Agreement\" includes production sharing contracts, joint operating agreements, joint venture agreements, farm-in-agreements or any other document. The value of the transaction is defined in reg. 19(3) and again in reg. 24, and the Act's s.94(8)(b) definition sits in its marginal field section without limiting the Regulations."
+ },
+ {
+  "prompt": "Which party does limb (d) of the definition of \"Assignment\" in reg. 24 of the 2024 Regulations reach?",
+  "options": [
+   "Only the holder of a petroleum mining lease, since the Regulations treat a prospecting licence as incapable of any assignment.",
+   "Only a company listed on a public exchange, whose shares change hands without consent.",
+   "A contractor or joint venture partner under an upstream petroleum arrangement, a sole risk award or a marginal field included.",
+   "The Minister alone, when the Minister transfers a licence from one holder to another."
+  ],
+  "answer": 2,
+  "explanation": "Limb (d) covers an assignment by a contractor or joint venture partner under an upstream petroleum arrangement, including joint venture arrangements, production sharing contracts and agreements, service contracts, a sole risk award or a marginal field. The Ekene farm-out is on a prospecting licence, which the consent rules reach, and a listed holder is the exception in reg. 3(3)."
+ },
+ {
+  "prompt": "On what does PIA s.95(12) say the assignment fee is based?",
+  "options": [
+   "The farminee's outlay for the deal, bonus and reimbursement included.",
+   "The consideration the farmor receives, carry included.",
+   "A flat sum per licence.",
+   "A percentage of the value of the transaction."
+  ],
+  "answer": 3,
+  "explanation": "Section 95(12) says the Commission shall make regulation to prescribe fees as a condition for any transaction under s.95(1), which fee shall be based on a percentage of the value of the transaction and shall not be tax deductible. The value of the transaction is a stated amount with its source, and the Professional tier computes the fee on it. The consideration and the outlay are the engine's own totals."
+ },
+ {
+  "prompt": "The engine will not apply the gazetted fee basis to a PEL. What does its refusal tell the caller to do?",
+  "options": [
+   "Restate the licence as a PPL, since every exploration licence is treated as a prospecting licence.",
+   "State the PEL's rates under basis \"stated\", since reg. 19(2) sets the fee for the Minister's consent.",
+   "Leave the fee out, since a PEL assignment needs no consent and pays no fee to anyone.",
+   "Apply to the Minister, whose consent a PEL assignment needs in place of the Commission's."
+  ],
+  "answer": 1,
+  "explanation": "The engine's words: licence must be \"PPL\" or \"PML\" under basis \"nuprc-2024-r19\": reg. 19(2) sets the fee for the consent of the Minister, and a PEL assignment needs the consent of the Commission (reg. 16); state its rates under basis \"stated\"; got \"PEL\". A PEL's consent is the Commission's, and restating the licence type would misstate the deal."
+ },
+ {
+  "prompt": "What do the earning calculator's participating interests after the deal assume about consent?",
+  "options": [
+   "That the assignment goes through: the vesting rule says nothing about consent.",
+   "That consent was refused, so the table shows the interests the deal would have moved.",
+   "That consent is deemed after 15 working days.",
+   "That the fee has been paid in full."
+  ],
+  "answer": 0,
+  "explanation": "The engine's vesting rule reports when a participating interest vests under the deal's terms and says nothing about consent, so the table after the deal assumes the assignment goes through. A farm-out signed but not consented has moved no participating interest. The engine computes no consent, counts no working days and checks no payment in the earning call."
+ },
+ {
+  "prompt": "Cash aside, earn-bonus-and-reimbursement moves 30 percent from EKO (70 before) to FIN; PA holds 30; the well is drilled under \"per-event\". Which shares follow?",
+  "options": [
+   "EKO 40.000000, PA 30.000000 and FIN 30.000000, less the reimbursed share of EKO's past costs.",
+   "Unchanged at EKO 70.000000, PA 30.000000 and FIN 0.000000, until the bonus has been paid over in full.",
+   "A 40, 30, 30 table for EKO, PA and FIN: the cash moves no share.",
+   "EKO 20.000000, PA 30.000000 and FIN 50.500000, taking the equivalent interest as the vested one."
+  ],
+  "answer": 2,
+  "explanation": "The engine returns EKO 40.000000, PA 30.000000 and FIN 30.000000: the interest earned moves from the farmor, and the bonus and the reimbursement change what FIN pays for it. The equivalent working interest of 50.500000 is a measure of price, and no text or term the engine reads makes the interest wait on the bonus."
+ },
+ {
+  "prompt": "What vested participating interest does the engine return on the Ekene Deep deal, one event completed under \"per-event\"?",
+  "options": [
+   "40.000000, the share paid.",
+   "51.739130, the equivalent working interest of FIN's outlay on the deal.",
+   "0.000000 until consent.",
+   "30.000000, the interest the one event earns."
+  ],
+  "answer": 3,
+  "explanation": "Each completed event vests its stated interest, and the engine returns a vested participating interest of 30.000000. 40.000000 is the share paid and 51.739130 the equivalent working interest, both measures of price. The engine computes no consent, so vesting follows the deal's terms."
+ },
+ {
+  "prompt": "What is the first line of the course's checklist for reading a farm-out, and what check goes with it?",
+  "options": [
+   "The licence and its parties with their participating interests before the deal, which must sum to 100.",
+   "The consideration to the farmor, which must equal the value of the transaction on the application.",
+   "The promote in points, which must lie between 0 and the farmor's interest before the deal.",
+   "The consent needed, which must be granted before any other line of the checklist is read."
+  ],
+  "answer": 0,
+  "explanation": "The checklist opens with the licence and its parties and their participating interests before the deal, and the engine refuses shares that do not sum to 100. The consideration and the value of the transaction are kept apart, the promote is read from the event line, and consent is line 8, read from the texts."
+ },
+ {
+  "prompt": "Line 9 of the checklist asks for every source applied, with its edition and the date read. Where does a learner find the sources the engine applied?",
+  "options": [
+   "In the reasons, whose last line lists each text the engine read for the call.",
+   "In the Source block, which prints the engine's basis.source for the call.",
+   "In the start selector, which names the source text of each worked case it loads.",
+   "In the refusal message, which cites a text for every term it checks."
+  ],
+  "answer": 1,
+  "explanation": "Every result carries a basis block with its source, and the panel prints it in the Source block; for an earning call it names HMRC's OT30021 and the Act's s.94(8)(b) and s.95. The course's sources table gives each text's edition and the date it was read, 2026-09-27 for all. The reasons explain figures, and a refusal names a field and its condition."
+ },
+ {
+  "prompt": "At which levels of a box does the engine refuse a key it does not read?",
+  "options": [
+   "At the top level only, since an event's keys are read by the engine as free text and never checked.",
+   "Only inside a cap object, since a misspelt cap is the one mistake that moves money.",
+   "At whatever level the key sits, naming its path and the full list of accepted keys there.",
+   "At no level: an unknown key is dropped quietly and the rest of the box runs."
+  ],
+  "answer": 2,
+  "explanation": "The course states that an input key a function does not read is refused at whatever level it sits (a top-level option, an event, a cap, a project, a signal, a holding), with the path to the key and the full list of accepted keys. A misspelt optional key is refused so that no term is silently dropped."
+ },
+ {
+  "prompt": "The full carry case has FIN paying 70 percent of a completed 40000000.000000 well with no cap for 30 percent, with no bonus and no past costs. What equivalent working interest does the engine return?",
+  "options": [
+   "30.000000, which is the participating interest that FIN earns and vests on this deal.",
+   "2.333333, which is the promote ratio of seventy paid for thirty on the same well.",
+   "40.000000, which is the promote in points of the same deal, read as a percentage.",
+   "70.000000, the share of the well paid."
+  ],
+  "answer": 3,
+  "explanation": "With no cash the outlay is the well payment, 28000000.000000, which over the 40000000.000000 well is 70.000000 percent (engine). The interest earned is 30.000000, the promote ratio is 2.333333 and the promote is 40.000000 points: each is a different figure from the heads-up share the outlay would buy."
+ },
+ {
+  "prompt": "In what currency and unit does the Ekene farm-out fixture state its money?",
+  "options": [
+   "Nigerian naira, converted at a rate stated in the fixture's header for each year.",
+   "US dollars, in whole dollars.",
+   "US dollars in thousands.",
+   "The currency each party reports in, which the engine converts to a common unit."
+  ],
+  "answer": 1,
+  "explanation": "The course's fixture section says money is in US$, whole dollars, and the fixture file names US$ as its currency. No exchange rate appears in the file, and the figures are used as stated, with no scaling. The engine converts nothing."
+ }
+]
