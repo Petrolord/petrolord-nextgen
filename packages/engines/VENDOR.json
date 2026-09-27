@@ -2298,6 +2298,76 @@
       "group": "ec45-decision-portfolio-recut",
       "vendoredSha": "19cf6156fa3aed7f08aa7c2435d02cc08c612c1c",
       "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, and that root has collapsed into them (deleted with its ledger entries). Clears as STALE when the pin moves to fb5a363 or later."
+    },
+    {
+      "path": "__tests__/supplychain.inventory.test.js",
+      "kind": "extra",
+      "group": "sc3-materials-course",
+      "vendoredSha": "fa0c16d94cdf725ea354ba119bef12f514321062",
+      "reason": "SC3 materials course: vendored sha-identical from petrolord-engines 110f0a0 (PRs #281 and #283: engines/supplychain/inventory.js, its jest suite, golden, the ekene-materials fixture and its writer, oracle, timing script, negative control, FINDINGS) by the wave's vendor_materials.sh, 4 proofs per path; its runtime imports (engines/hse/safetyStats.js, lib/stats, lib/conventions/percentile.js) and the suite's test-data/ekene-dynamic/field.json were already vendored at the same blobs. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 110f0a0 or later."
+    },
+    {
+      "path": "engines/supplychain/inventory.js",
+      "kind": "extra",
+      "group": "sc3-materials-course",
+      "vendoredSha": "516304c7449deff007e9df832c61f400f286814f",
+      "reason": "SC3 materials course: vendored sha-identical from petrolord-engines 110f0a0 (PRs #281 and #283: engines/supplychain/inventory.js, its jest suite, golden, the ekene-materials fixture and its writer, oracle, timing script, negative control, FINDINGS) by the wave's vendor_materials.sh, 4 proofs per path; its runtime imports (engines/hse/safetyStats.js, lib/stats, lib/conventions/percentile.js) and the suite's test-data/ekene-dynamic/field.json were already vendored at the same blobs. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 110f0a0 or later."
+    },
+    {
+      "path": "test-data/supplychain/ekene-materials/README.md",
+      "kind": "extra",
+      "group": "sc3-materials-course",
+      "vendoredSha": "544e8c951330f7291e3b73aadb772489dff268db",
+      "reason": "SC3 materials course: vendored sha-identical from petrolord-engines 110f0a0 (PRs #281 and #283: engines/supplychain/inventory.js, its jest suite, golden, the ekene-materials fixture and its writer, oracle, timing script, negative control, FINDINGS) by the wave's vendor_materials.sh, 4 proofs per path; its runtime imports (engines/hse/safetyStats.js, lib/stats, lib/conventions/percentile.js) and the suite's test-data/ekene-dynamic/field.json were already vendored at the same blobs. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 110f0a0 or later."
+    },
+    {
+      "path": "test-data/supplychain/ekene-materials/register.json",
+      "kind": "extra",
+      "group": "sc3-materials-course",
+      "vendoredSha": "feae81730a67db2a05ca4b7d60ddbf4d0aeaf63d",
+      "reason": "SC3 materials course: vendored sha-identical from petrolord-engines 110f0a0 (PRs #281 and #283: engines/supplychain/inventory.js, its jest suite, golden, the ekene-materials fixture and its writer, oracle, timing script, negative control, FINDINGS) by the wave's vendor_materials.sh, 4 proofs per path; its runtime imports (engines/hse/safetyStats.js, lib/stats, lib/conventions/percentile.js) and the suite's test-data/ekene-dynamic/field.json were already vendored at the same blobs. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 110f0a0 or later."
+    },
+    {
+      "path": "test-data/supplychain/goldens/inventory_cases.json",
+      "kind": "extra",
+      "group": "sc3-materials-course",
+      "vendoredSha": "dd25c9b897c4e697b9894aaa8a039becc82bd4ea",
+      "reason": "SC3 materials course: vendored sha-identical from petrolord-engines 110f0a0 (PRs #281 and #283: engines/supplychain/inventory.js, its jest suite, golden, the ekene-materials fixture and its writer, oracle, timing script, negative control, FINDINGS) by the wave's vendor_materials.sh, 4 proofs per path; its runtime imports (engines/hse/safetyStats.js, lib/stats, lib/conventions/percentile.js) and the suite's test-data/ekene-dynamic/field.json were already vendored at the same blobs. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 110f0a0 or later."
+    },
+    {
+      "path": "tools/validation/supplychain/FINDINGS-inventory.md",
+      "kind": "extra",
+      "group": "sc3-materials-course",
+      "vendoredSha": "711f86582f9f59357245cd679b6e47be74396b3a",
+      "reason": "SC3 materials course: vendored sha-identical from petrolord-engines 110f0a0 (PRs #281 and #283: engines/supplychain/inventory.js, its jest suite, golden, the ekene-materials fixture and its writer, oracle, timing script, negative control, FINDINGS) by the wave's vendor_materials.sh, 4 proofs per path; its runtime imports (engines/hse/safetyStats.js, lib/stats, lib/conventions/percentile.js) and the suite's test-data/ekene-dynamic/field.json were already vendored at the same blobs. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 110f0a0 or later."
+    },
+    {
+      "path": "tools/validation/supplychain/make_inventory_fixtures.py",
+      "kind": "extra",
+      "group": "sc3-materials-course",
+      "vendoredSha": "6c0219224bbe9ab17dee34dab85ad2cc1de765ee",
+      "reason": "SC3 materials course: vendored sha-identical from petrolord-engines 110f0a0 (PRs #281 and #283: engines/supplychain/inventory.js, its jest suite, golden, the ekene-materials fixture and its writer, oracle, timing script, negative control, FINDINGS) by the wave's vendor_materials.sh, 4 proofs per path; its runtime imports (engines/hse/safetyStats.js, lib/stats, lib/conventions/percentile.js) and the suite's test-data/ekene-dynamic/field.json were already vendored at the same blobs. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 110f0a0 or later."
+    },
+    {
+      "path": "tools/validation/supplychain/negcontrol_inventory.sh",
+      "kind": "extra",
+      "group": "sc3-materials-course",
+      "vendoredSha": "d797ae53386a3b59252ad05972d213fe83d9d511",
+      "reason": "SC3 materials course: vendored sha-identical from petrolord-engines 110f0a0 (PRs #281 and #283: engines/supplychain/inventory.js, its jest suite, golden, the ekene-materials fixture and its writer, oracle, timing script, negative control, FINDINGS) by the wave's vendor_materials.sh, 4 proofs per path; its runtime imports (engines/hse/safetyStats.js, lib/stats, lib/conventions/percentile.js) and the suite's test-data/ekene-dynamic/field.json were already vendored at the same blobs. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 110f0a0 or later."
+    },
+    {
+      "path": "tools/validation/supplychain/oracle_inventory.py",
+      "kind": "extra",
+      "group": "sc3-materials-course",
+      "vendoredSha": "73b2b7dcc69037d3bf12408a362b50e5701d75f3",
+      "reason": "SC3 materials course: vendored sha-identical from petrolord-engines 110f0a0 (PRs #281 and #283: engines/supplychain/inventory.js, its jest suite, golden, the ekene-materials fixture and its writer, oracle, timing script, negative control, FINDINGS) by the wave's vendor_materials.sh, 4 proofs per path; its runtime imports (engines/hse/safetyStats.js, lib/stats, lib/conventions/percentile.js) and the suite's test-data/ekene-dynamic/field.json were already vendored at the same blobs. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 110f0a0 or later."
+    },
+    {
+      "path": "tools/validation/supplychain/timing_inventory.js",
+      "kind": "extra",
+      "group": "sc3-materials-course",
+      "vendoredSha": "90e6c3a1871bb70343502f2640df38e50cdebaef",
+      "reason": "SC3 materials course: vendored sha-identical from petrolord-engines 110f0a0 (PRs #281 and #283: engines/supplychain/inventory.js, its jest suite, golden, the ekene-materials fixture and its writer, oracle, timing script, negative control, FINDINGS) by the wave's vendor_materials.sh, 4 proofs per path; its runtime imports (engines/hse/safetyStats.js, lib/stats, lib/conventions/percentile.js) and the suite's test-data/ekene-dynamic/field.json were already vendored at the same blobs. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 110f0a0 or later."
     }
   ]
 }
