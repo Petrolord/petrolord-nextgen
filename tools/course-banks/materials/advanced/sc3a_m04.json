@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "A constant demand of 2 a day over a constant 10 days meets a reorder point of 20, on 50 draws and seed 1. What does the engine's reason say?",
+  "options": [
+   "50 of 50 draws have a lead-time demand at the reorder point 20: a stockout probability of 1 a cycle",
+   "0 of 50 draws have a lead-time demand above the reorder point 20: a stockout probability of 0 a cycle",
+   "25 of 50 draws have a lead-time demand above the reorder point 20, half the cycles on a tie",
+   "leadTimeDays must be a triangular distribution { min, mode, max }; got 10 as a constant"
+  ],
+  "answer": 1,
+  "explanation": "A stockout is a lead-time demand above the reorder point, and a demand equal to it is met: every draw is exactly 20, so the engine counts none, in the keyed words. Counting equality as a stockout is the alternative it names, which the engine does not apply; no tie is split; a constant is accepted as a plain number."
+ },
+ {
+  "prompt": "The same constant case is run with a reorder point of 19.5. What does the engine return?",
+  "options": [
+   "No stockout at all, since 19.5 rounds to the 20 the draws need over the lead time",
+   "A stockout in half the draws, since 19.5 sits halfway between two whole units of stock",
+   "A refusal, since a reorder point must be a whole number of units whenever demand is constant",
+   "Every draw a stockout, 50 of 50, each 0.500000 short, a stockout probability of 1 a cycle"
+  ],
+  "answer": 3,
+  "explanation": "Each draw has a lead-time demand of 20, which is 0.500000 above 19.5, so all 50 draws run short and the reason reads 50 of 50 draws above the reorder point 19.5: a stockout probability of 1 a cycle. The engine rounds no reorder point, splits no draws, and accepts any stated point at or above 0."
+ },
+ {
+  "prompt": "Which reading does the engine state for a lead-time demand exactly equal to the reorder point, and what alternative does it name?",
+  "options": [
+   "It is met; the alternative counts equality as a stockout",
+   "It is a stockout; the alternative counts equality as met",
+   "It counts half a stockout; the alternative counts a whole one",
+   "It is met for whole units; a fraction counts as a stockout"
+  ],
+  "answer": 0,
+  "explanation": "The engine's reading is that a lead-time demand equal to the reorder point is met, and the alternative it names counts equality as a stockout. On constant inputs the choice is the whole answer, 0 against 1; with sampled inputs a draw almost never lands exactly on the point. No half counting or special rule for fractions exists."
+ },
+ {
+  "prompt": "When a cycle service level is stated, how does the engine find the reorder point for it among the sampled lead-time demands?",
+  "options": [
+   "It adds k times the sampled standard deviation to the sampled mean of the lead-time demand, with k from the inverse normal",
+   "It reads the P90 of the lead-time demand, the figure that is met or exceeded in 90 percent of all the draws it made",
+   "It sorts the draws and reads the one at index ceil(level x draws) - 1, the smallest that at least that share of draws does not exceed",
+   "It raises the stated reorder point one unit at a time until the counted stockouts fall below the share the target allows"
+  ],
+  "answer": 2,
+  "explanation": "The engine reads the sorted lead-time demand at index ceil(0.95 x n) - 1 for a level of 0.95: the smallest draw that at least 95 percent of draws do not exceed. A mean plus k sigma is the normal safety stock of the Professional tier; the P90 is the low figure; the engine searches no stated point unit by unit."
+ },
+ {
+  "prompt": "Which reorder point would meet a cycle service level of 0.95 for the mechanical seal, as the engine estimates it on seed 20270301 and 20000 draws?",
+  "options": [
+   "Exactly 3 seals, since the stated point was set to meet 0.95 and achieves it on these same draws",
+   "An estimate of 2.780743 seals, the P10, while the stated 3 achieves a cycle service of 0.95 exactly",
+   "An estimate of 3.062282 seals, while the stated 3 achieves a sampled cycle service of 0.941400",
+   "An estimate of 1.986608 seals, the mean, while the stated 3 achieves 0.058600 of service"
+  ],
+  "answer": 2,
+  "explanation": "On that seed and draw count the sorted draw for 0.95 is 3.062282 seals, and the stated point of 3 gives a sampled cycle service of 0.941400: just short of the target. Both are estimates and neither is graded. 2.780743 is the P10 and 1.986608 the mean of the lead-time demand; 0.058600 is the stockout probability."
+ },
+ {
+  "prompt": "The reorder point for a cycle service level is the engine's stated reading at one sorted index, and the course runs it on the seal on seeds 20270301 and 20270302. What alternative does the engine name for it?",
+  "options": [
+   "One sorted draw higher, a difference of one draw that lies well inside the noise of these two seeds",
+   "Taking the mean of the two sorted draws either side of the index, at the exact halfway point",
+   "The same index read on the demand draws alone, with the lead time held fixed at its stated mode",
+   "The largest draw of the run, so that no cycle at all in the sample runs out of stock"
+  ],
+  "answer": 0,
+  "explanation": "The engine's words are reorderPointForService is the sorted lead-time demand at index ceil(0.95 x n) - 1, and the alternative it names is one sorted draw higher. No averaging, no fixed lead time and no maximum enters either reading; the course states the reading so a learner can reproduce the figure exactly."
+ },
+ {
+  "prompt": "A lead-time risk call on the seal states no cycle service level. What happens to the reorder point for a cycle service level?",
+  "options": [
+   "The call is refused, since serviceLevel is a required input of every lead-time risk call",
+   "It is read at a cycle service level of 0.95, the level the Ekene case happens to state",
+   "It is set to the stated reorder point of 3, and the stockout count is left out of the result",
+   "It comes back as none, and the service line of the basis says: no serviceLevel stated"
+  ],
+  "answer": 3,
+  "explanation": "The cycle service level is the one optional input of the call: left out, the reorder point for a cycle service level is none and the basis says no serviceLevel stated, while the stockout count on the stated reorder point of 3 is unchanged. Nothing is refused, no level is borrowed, and the count is still returned."
+ },
+ {
+  "prompt": "What does the engine return when a lead-time risk call states a cycle service level of 1?",
+  "options": [
+   "the largest sampled lead-time demand, the only point that no draw exceeds",
+   "serviceLevel must be a number strictly between 0 and 1; got 1",
+   "serviceLevel must be a number from 0 to 1; got 1",
+   "a reorder point of none, as if no cycle service level had been stated"
+  ],
+  "answer": 1,
+  "explanation": "A cycle service level of 1 would need a point above every possible draw, and the engine refuses it by name; the keyed message is its own words. It returns no maximum and no none on a refused input, and the range it states is strict at both ends."
+ },
+ {
+  "prompt": "Can a reorder point of -1 be stated for the seal, and what comes back?",
+  "options": [
+   "reorderPoint must be a finite number at or above 0; got -1, because a reorder point counts seals held on the shelf when the next order goes out",
+   "reorderPoint must be a finite number above 0; got -1, as a reorder point of 0 would hold no stock and so leave every cycle short",
+   "a result in which every draw with any demand counts as a stockout, since no stock is held against the demand over the lead time",
+   "a result with the reorder point read as 0, the lowest stock there can be on the shelf, and the run then sampled as usual"
+  ],
+  "answer": 0,
+  "explanation": "A reorder point is stock on hand and cannot be negative, so the engine refuses -1; the keyed message is its own words. A reorder point of 0 is accepted (at or above 0), so a message asking for a figure above 0 is not the engine's. On 0 any draw with demand is a stockout, but -1 returns no result and is never clipped to 0."
+ },
+ {
+  "prompt": "A case holds the demand constant at 1.5 a day and samples the lead time, 5000 draws on seed 42. How does the engine's sampling line mark the constant?",
+  "options": [
+   "per iteration a uniform for the lead time only; the demand rate is fixed once in the header",
+   "per iteration a uniform for the demand rate (constant: 1.5) then one for the lead time",
+   "per iteration a uniform for the lead time then one for the demand rate (constant: no draw)",
+   "per iteration two uniforms, the second one discarded because the demand rate is fixed"
+  ],
+  "answer": 2,
+  "explanation": "The basis keeps the stated order and names the constant: per iteration a uniform for the lead time then one for the demand rate (constant: no draw). A constant spends no uniform, and nothing is drawn and thrown away; the lead time still comes first and the constant is marked in place."
+ },
+ {
+  "prompt": "A lead-time risk call samples a demand of 1, 2 and 4 a day and a lead time of 5, 10 and 20 days (each a triangle: minimum, mode, maximum) and runs exactly one draw on seed 0. What does the engine print for the sampled lead-time demand's P90 and P10?",
+  "options": [
+   "9.768001 for the P90 and none for the P10, which needs ten draws",
+   "a refusal, since one draw cannot be sorted into any percentiles",
+   "the triangle's minimum for the P90 and its maximum for the P10",
+   "9.768001 for both, since that one draw is every percentile"
+  ],
+  "answer": 3,
+  "explanation": "With a single draw the sorted list has one value, so the P90, P10 and every other figure are that one sampled draw: 9.768001 (engine, seed 0, one draw), and one draw leaves no spread to read. The draw count runs from 1, so one draw is accepted; no percentile is left empty; the triangle's ends are no draws."
+ },
+ {
+  "prompt": "At the stated reorder point of 3, what share of the seal's cycles runs without a stockout, estimated on seed 20270301 and 20000 draws?",
+  "options": [
+   "0.950000, the stated target, which the engine returns for any stated point",
+   "0.941400, an estimate: one less the sampled stockout probability of 0.058600",
+   "0.058600, the share of the draws that the stated reorder point of 3 covers fully",
+   "0.969295, the service a reorder point held up to a whole seal achieves"
+  ],
+  "answer": 1,
+  "explanation": "The cycle service level is the share of draws with no stockout, one less 0.058600: 0.941400 on that seed and those draws, an estimate that is not graded. 0.95 is the stated target for the reorder point for a cycle service level; 0.058600 is the stockout probability itself; 0.969295 is a Professional figure for the choke beans."
+ },
+ {
+  "prompt": "The engine holds one demand rate for a whole lead time. What does the lesson teach that stated choice does to the sampled lead-time demand?",
+  "options": [
+   "A high rate is never offset by a quiet day within the same lead time, so a busy spell stays busy until the order lands",
+   "A fresh rate for each day would widen the spread of the lead-time demand, so holding one rate for the whole lead time narrows it",
+   "It makes the lead-time demand equal the mean demand over the lead time in every single draw of the whole run",
+   "It lets the busy days and the quiet days offset each other within each lead time drawn, as a daily draw would do"
+  ],
+  "answer": 0,
+  "explanation": "The lesson teaches it as the engine's stated choice: one rate a lead time means a busy spell stays busy until the order lands, so extreme lead-time demands stay in. A fresh draw every day is the alternative the engine names, under which quiet days could offset busy ones; the course states the reading and grades no figure on it. The demand still varies from draw to draw."
+ },
+ {
+  "prompt": "The seal could also be stocked with the normal safety stock of the Professional tier. What does the lead-time Monte Carlo keep that a normal curve would lose?",
+  "options": [
+   "The stated seed of the normal run",
+   "A fill rate for the seal as its target",
+   "Each graded reorder point of the case",
+   "The skew of the stated triangles"
+  ],
+  "answer": 3,
+  "explanation": "The Monte Carlo reads the stated triangles directly, and both lean right, so it keeps their skew; a normal curve is symmetric. The normal safety stock is closed form and takes no seed; a fill rate is a target either tool may be given; nothing sampled is graded."
+ },
+ {
+  "prompt": "The seal's reason prints \"a stockout probability of 0.0586 a cycle\" while the field reads 0.058600. Why the difference?",
+  "options": [
+   "The reason is rounded to four decimals, while the field keeps all six decimals of the estimate",
+   "Two samples differ: the field is computed on 20000 draws and the reason on the first 2000",
+   "Inside a message a computed probability prints to six decimals with its trailing zeros dropped",
+   "The reason prints a percentage in place of a probability, and the field a fraction"
+  ],
+  "answer": 2,
+  "explanation": "The print rule inside a message is money to the cent and a computed quantity, factor or probability to six decimal places with trailing zeros dropped, so 0.058600 prints as 0.0586. Both come from the same 20000 draws on seed 20270301; neither is a percentage; no four-decimal rounding is applied."
+ }
+]

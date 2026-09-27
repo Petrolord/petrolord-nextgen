@@ -150,6 +150,7 @@
 .ng-home .course .tiers i{width:9px;height:9px;border-radius:50%;display:inline-block}
 .ng-home .pill{font:600 10px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;background:var(--paper-2);color:var(--muted);padding:5px 8px;border-radius:999px;align-self:flex-start}
 .ng-home .pill.new{background:#E4F3C4;color:#3C5A12}
+.ng-home .pill.practice{background:#DCEBFA;color:#1D4E89}
 .ng-home .empty{padding:28px;text-align:center;color:var(--muted);grid-column:1/-1}
 .ng-home .more{text-align:center;margin-top:26px}
 

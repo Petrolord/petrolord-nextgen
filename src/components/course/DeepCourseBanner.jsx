@@ -4,6 +4,7 @@ import { GraduationCap, ArrowRight } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { hasDeepCourse, getManifest, flatLessons, estMinutes } from '@/lib/courseContent';
+import { courseTypeOf } from '@/lib/courseType';
 
 // Steers learners from an app's Learning Mode page to its full deep
 // course. Renders nothing until the (app, tier) has authored content, so
@@ -20,7 +21,9 @@ const DeepCourseBanner = ({ app, tier }) => {
           <GraduationCap className="h-6 w-6 text-[#BFFF00] shrink-0" />
           <p className="text-gray-300 text-sm mb-0">
             The full course is open: {manifest.modules.length} modules, {lessons.length} lessons,
-            about {hours} hours of study, with module quizzes and a final exam before the capstone.
+            about {hours} hours of study, with module quizzes and {courseTypeOf(app) === 'practice'
+              ? 'a final exam that issues the certificate.'
+              : 'a final exam before the capstone.'}
           </p>
         </div>
         <Link to={`/dashboard/apps/${app}/course/${tier}`}>

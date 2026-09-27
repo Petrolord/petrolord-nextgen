@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { ArrowRight, Check, Menu, Search, X } from 'lucide-react';
 import { listAcademyApps } from '@/services/academyService';
 import { HOME_COURSES, HOME_MODULES, mergeCatalog, catalogStats } from '@/lib/homeCatalog';
+import PracticeCourseBadge from '@/components/course/PracticeCourseBadge';
 import './LandingPage.css';
 
 // Homepage, regal redesign (2026-09-25, owner approved). Written for two
@@ -45,6 +46,29 @@ const FEES = [
 ];
 
 const moduleLabel = (key) => HOME_MODULES.find((m) => m.key === key)?.label ?? key;
+
+// One catalogue card. Exported for the card test: a practice course carries
+// the "Practice course" badge beside its status pill.
+export function CourseCard({ c }) {
+  const soon = c.status !== 'available';
+  return (
+    <article className="course">
+      <span className="mod">{moduleLabel(c.module)}</span>
+      {soon ? <span className="pill">Coming soon</span> : c.isNew ? <span className="pill new">New</span> : null}
+      <PracticeCourseBadge show={c.courseType === 'practice'} variant="home" />
+      <h4>{c.name}</h4>
+      <p>{c.blurb}</p>
+      {!soon && (
+        <div className="tiers">
+          <i style={{ background: 'var(--assoc)' }} />
+          <i style={{ background: 'var(--prof)' }} />
+          <i style={{ background: 'var(--expert)' }} />
+          &nbsp;Associate · Professional · Expert
+        </div>
+      )}
+    </article>
+  );
+}
 
 function Catalogue({ courses, stats }) {
   const [active, setActive] = React.useState('all');
@@ -97,25 +121,7 @@ function Catalogue({ courses, stats }) {
         {shown.length === 0 && (
           <p className="empty">No course matches that search yet. Try a broader word, or browse by discipline.</p>
         )}
-        {shown.map((c) => {
-          const soon = c.status !== 'available';
-          return (
-            <article className="course" key={c.slug}>
-              <span className="mod">{moduleLabel(c.module)}</span>
-              {soon ? <span className="pill">Coming soon</span> : c.isNew ? <span className="pill new">New</span> : null}
-              <h4>{c.name}</h4>
-              <p>{c.blurb}</p>
-              {!soon && (
-                <div className="tiers">
-                  <i style={{ background: 'var(--assoc)' }} />
-                  <i style={{ background: 'var(--prof)' }} />
-                  <i style={{ background: 'var(--expert)' }} />
-                  &nbsp;Associate · Professional · Expert
-                </div>
-              )}
-            </article>
-          );
-        })}
+        {shown.map((c) => <CourseCard key={c.slug} c={c} />)}
       </div>
       {capped && (
         <div className="more">

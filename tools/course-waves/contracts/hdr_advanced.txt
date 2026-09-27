@@ -1,0 +1,24 @@
+-- ============================================================================
+-- SC5 EXPERT DEEP SEED: Contract & Supplier Management, advanced tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/contracts/advanced.
+--
+-- What this tier owns: STRATEGY, DISPUTES AND CLOSE-OUT. Contract strategy;
+-- claims; disputes and their resolution; termination, step-in and exit;
+-- close-out and lessons learned; integrity, governance and the written case.
+--
+-- A PRACTICE COURSE. No engine, no calculator panel, no Suite app and no
+-- capstone: every key traces to a cited passage of the dated source pack
+-- (tools/course-waves/contracts/PACK.md), and the tier certificate is issued
+-- from its passed final exam by academy_claim_practice_certificate. The 42
+-- question final exam is the WRITTEN-CASE BANK that replaces the capstone:
+-- scenario questions, each set in a synthetic Ekene contract and keyed to a
+-- cited passage, auto-graded multiple choice, with no numeric field.
+--
+-- REQUIRES 20261116_sc5_contracts_platform_course_types.sql and
+-- 20261116_sc5_contracts_course.sql first (the foreign key on app_slug).
+-- No transaction lines of its own. Idempotent.
+-- ============================================================================

@@ -1,0 +1,335 @@
+{
+ "app_slug": "contracts",
+ "tier": "beginner",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-contract-management-and-its-sources",
+   "title": "Contract Management and Its Sources",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-what-contract-management-is",
+     "title": "What contract management is",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-contract-lifecycle",
+     "title": "The contract lifecycle from award to close",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-owners-managers-and-the-supplier",
+     "title": "Owners, managers and the supplier",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-sources-and-their-dates",
+     "title": "The sources and the dates they were checked",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-a-practice-course-and-its-written-work",
+     "title": "A practice course and its written work",
+     "order": 5,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-award-handover-and-mobilisation",
+   "title": "Award Handover and Mobilisation",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-from-tender-team-to-contract-team",
+     "title": "From tender team to contract team",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-contract-management-plan",
+     "title": "The contract management plan",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-kick-off-meeting",
+     "title": "The kick-off meeting",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-mobilisation-and-first-deliveries",
+     "title": "Mobilisation and first deliveries",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-reading-the-contract-you-manage",
+   "title": "Reading the Contract You Manage",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-scope-and-specification",
+     "title": "Scope and specification",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-price-basis",
+     "title": "The price basis and what it asks of you",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-order-of-precedence",
+     "title": "The order of precedence between documents",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-clauses-a-contract-manager-uses",
+     "title": "Clauses a contract manager uses every week",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-kpis-and-service-levels",
+   "title": "KPIs and Service Levels",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-what-a-kpi-measures",
+     "title": "What a key performance indicator measures",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-designing-an-indicator",
+     "title": "Designing an indicator that drives the right behaviour",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-service-levels-and-service-credits",
+     "title": "Service levels and service credits",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-data-evidence-and-a-disputed-score",
+     "title": "Data, evidence and a disputed score",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-payment-records-and-the-audit-trail",
+   "title": "Payment, Records and the Audit Trail",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-checking-an-invoice",
+     "title": "Checking an invoice against the contract",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-certifying-work-done",
+     "title": "Certifying work done",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-records-that-survive-an-audit",
+     "title": "Records that survive an audit",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-correspondence-and-instructions",
+     "title": "Correspondence and instructions in writing",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-nigerian-content-in-execution",
+   "title": "Nigerian Content in Execution",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-the-content-act-and-the-board",
+     "title": "The content Act and the Board",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-first-consideration-in-practice",
+     "title": "First consideration in practice",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-nigerians-employed-and-trained",
+     "title": "Nigerians employed and trained on the job",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-plans-and-reports-a-contract-carries",
+     "title": "Plans and reports a contract carries",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-preparing-for-the-associate-exam",
+     "title": "Preparing for the Associate exam",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [],
+     "has_exercise": true,
+     "exercise": "written-scenario",
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

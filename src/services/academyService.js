@@ -301,6 +301,19 @@ export async function submitCapstone(appSlug, tier, answers) {
   return data;
 }
 
+// A practice course has no numeric capstone: each tier's certificate is
+// issued from its final exam, passed at the existing pass mark
+// (academy_claim_practice_certificate refuses any other course type, an
+// unpassed final exam and a tier without an active enrolment).
+export async function claimPracticeCertificate(appSlug, tier) {
+  const { data, error } = await supabase.rpc('academy_claim_practice_certificate', {
+    p_app: appSlug,
+    p_tier: tier,
+  });
+  if (error) throw error;
+  return data;
+}
+
 // ---- N3.4 certificates v2 ----
 
 // Public, no-auth certificate verification (anon-executable definer fn).
@@ -312,19 +325,24 @@ export async function verifyCertificate(verifyCode) {
   return data; // null when not found
 }
 
-// Adds course_name (academy_apps.name, the catalog title) to each
-// certificate row. academy_certifications has no foreign key to the
-// catalog, so the names come from one anon-readable catalog read; when that
-// read fails the pages fall back to the static map in lib/appNames.
+// Adds course_name (academy_apps.name, the catalog title) and course_type
+// (so a practice course's certificate says it is one) to each certificate
+// row. academy_certifications has no foreign key to the catalog, so the
+// names come from one anon-readable catalog read; when that read fails the
+// pages fall back to the static maps in lib/appNames and lib/courseType.
 async function withCourseNames(rows) {
   if (!rows?.length) return rows || [];
   const slugs = [...new Set(rows.map((c) => c.app_slug))];
   const { data: apps } = await supabase
     .from('academy_apps')
-    .select('slug, name')
+    .select('*') // course_type is read when the column exists, and never fails the read before it does
     .in('slug', slugs);
-  const byslug = Object.fromEntries((apps || []).map((a) => [a.slug, a.name]));
-  return rows.map((c) => ({ ...c, course_name: byslug[c.app_slug] || null }));
+  const byslug = Object.fromEntries((apps || []).map((a) => [a.slug, a]));
+  return rows.map((c) => ({
+    ...c,
+    course_name: byslug[c.app_slug]?.name || null,
+    course_type: byslug[c.app_slug]?.course_type || null,
+  }));
 }
 
 export async function listMyCertifications() {

@@ -1,0 +1,363 @@
+{
+ "app_slug": "materials",
+ "tier": "advanced",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-insurance-spares",
+   "title": "Insurance Spares",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-a-spare-held-against-failure",
+     "title": "A spare held against failure",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "materials-spares-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-orders-outstanding-one-for-one",
+     "title": "Orders outstanding, one for one",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "materials-spares-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-holding-against-downtime",
+     "title": "Holding against downtime",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "materials-spares-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-marginal-spare",
+     "title": "The marginal spare",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "materials-spares-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-esp-motor",
+     "title": "The ESP motor",
+     "order": 5,
+     "est_minutes": 14,
+     "panels": [
+      "materials-spares-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-the-poisson-anchor",
+   "title": "The Poisson Anchor",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-the-handbook-lamps",
+     "title": "The handbook lamps",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "materials-spares-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-no-shortage-and-the-fill-rate",
+     "title": "No shortage and the fill rate",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "materials-spares-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-expected-units-down",
+     "title": "Expected units down",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "materials-spares-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-search-limit",
+     "title": "The search limit",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "materials-spares-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-lead-time-risk-by-monte-carlo",
+   "title": "Lead-Time Risk by Monte Carlo",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-the-canonical-sampler",
+     "title": "The canonical sampler",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "materials-spares-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-lead-time-drawn-first",
+     "title": "The lead time drawn first",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "materials-spares-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-low-figure-and-the-high-figure",
+     "title": "The low figure and the high figure",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "materials-spares-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-seed-draws-and-what-is-never-graded",
+     "title": "Seed, draws and what is never graded",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "materials-spares-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-stockouts-and-the-reorder-point",
+   "title": "Stockouts and the Reorder Point",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-demand-equal-to-the-stock",
+     "title": "Demand equal to the stock",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "materials-spares-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-a-reorder-point-for-a-service-level",
+     "title": "A reorder point for a service level",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "materials-spares-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-mechanical-seal",
+     "title": "The mechanical seal",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "materials-spares-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-constant-inputs",
+     "title": "Constant inputs",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "materials-spares-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-readings-ties-and-boundaries",
+   "title": "Readings, Ties and Boundaries",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-twelve-significant-digits",
+     "title": "Twelve significant digits",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "materials-stock-calculator",
+      "materials-spares-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-ties-and-the-smaller-choice",
+     "title": "Ties and the smaller choice",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "materials-stock-calculator",
+      "materials-spares-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-boundaries-rule-by-rule",
+     "title": "Boundaries, rule by rule",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "materials-spares-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-readings-and-source-quirks",
+     "title": "Readings and source quirks",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "materials-spares-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-what-the-engine-does-not-compute",
+   "title": "What the Engine Does Not Compute",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-what-the-engine-leaves-out",
+     "title": "What the engine leaves out",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "materials-spares-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-size-caps-and-refusals",
+     "title": "Size caps and refusals",
+     "order": 2,
+     "est_minutes": 12,
+     "panels": [
+      "materials-spares-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-conventions-that-are-choices",
+     "title": "Conventions that are choices",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "materials-spares-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-writing-the-stock-policy",
+     "title": "Writing the stock policy",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "materials-spares-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "materials-spares-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

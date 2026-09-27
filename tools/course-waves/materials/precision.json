@@ -1,0 +1,22 @@
+{
+ "factor": {
+  "decimals": 6,
+  "match": "^(?:ogidi_filter_fill_rate_k)$"
+ },
+ "money": {
+  "decimals": 6,
+  "match": "^(?:igbariam_inhibitor_relevant_cost|igbariam_total_write_down|ogidi_tubing_discount_total_cost|umuchu_motor_downtime_cost|umuchu_motor_total_cost)$"
+ },
+ "probability": {
+  "decimals": 6,
+  "match": "^(?:umuchu_motor_fill_rate|umuchu_motor_no_shortage|umuchu_seal_poisson_fill_rate)$"
+ },
+ "quantity": {
+  "decimals": 6,
+  "match": "^(?:igbariam_inhibitor_eoq|ogidi_filter_csl_safety_stock|ogidi_filter_periodic_level|ogidi_kit_poisson_short|ogidi_tubing_discount_quantity|umuchu_seal_poisson_short)$"
+ },
+ "share": {
+  "decimals": 6,
+  "match": "^(?:igbariam_inhibitor_cumulative_pct|igbariam_inhibitor_rounding_penalty_pct|igbariam_trim_weighted_score)$"
+ }
+}

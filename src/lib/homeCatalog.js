@@ -1,3 +1,5 @@
+import { courseTypeOf } from '@/lib/courseType';
+
 // Homepage course catalogue: the marketing copy for every academy course,
 // keyed by academy_apps.slug. Status comes from academy_apps when the page
 // can read it (anon SELECT is allowed), so a course whose go-live migration
@@ -6,6 +8,10 @@
 //
 // Add a row here alongside any new academy_apps row. homeCatalog.test.js
 // checks slugs are unique and every module key is known.
+//
+// Each course also carries its courseType (lib/courseType.js): the static
+// type here, and the live academy_apps.course_type once mergeCatalog has the
+// live rows. The catalogue card shows the "Practice course" badge from it.
 
 export const HOME_MODULES = [
   { key: 'geoscience', label: 'Geoscience', tagline: 'Find it, and find it right.' },
@@ -22,7 +28,9 @@ export const HOME_MODULES = [
   { key: 'data_ai', label: 'Data & AI', tagline: 'The newest school in the academy.' },
 ];
 
-const c = (slug, module, name, blurb, status = 'available', isNew = false) => ({ slug, module, name, blurb, status, isNew });
+const c = (slug, module, name, blurb, status = 'available', isNew = false) => ({
+  slug, module, name, blurb, status, isNew, courseType: courseTypeOf(slug),
+});
 
 export const HOME_COURSES = [
   c('welldata', 'geoscience', 'Well Data Management', 'Clean, trusted well data stops bad logs from becoming bad wells.'),
@@ -76,6 +84,8 @@ export const HOME_COURSES = [
   c('refinery', 'commercial_trading', 'Refinery Feasibility & Planning', 'Test refinery economics before you commit capital.'),
   c('supply', 'supply_chain', 'Terminals, Depots & Fuel Supply', 'Storage and distribution with lean working capital.'),
   c('procurement', 'supply_chain', 'Procurement, Tendering & Contracting', 'Run a fair tender and choose the contract that fits the risk.', 'coming_soon', true),
+  c('materials', 'supply_chain', 'Materials, Spares & Inventory Management', 'Set criticality, order quantities, safety stock and insurance spares the way a stated stock policy writes them.', 'coming_soon', true),
+  c('contracts', 'supply_chain', 'Contract & Supplier Management', 'Run a contract from award to close-out and keep every supplier performing.', 'coming_soon', true),
   c('gasvalue', 'energy_transition', 'Flare Gas to Value & LPG/CNG', 'Turn a flare into a revenue stream.'),
   c('carbon', 'energy_transition', 'Carbon & Energy Efficiency', 'Cut emissions and energy cost. Stronger ESG reporting.'),
   c('cashflow', 'economics', 'Cash Flow & NPV', 'The common language of every investment decision.'),
@@ -115,6 +125,7 @@ export function mergeCatalog(courses, liveApps) {
   return courses.map((co) => ({
     ...co,
     status: bySlug.get(co.slug) === 'available' ? 'available' : 'coming_soon',
+    courseType: courseTypeOf(co.slug, liveApps),
   }));
 }
 

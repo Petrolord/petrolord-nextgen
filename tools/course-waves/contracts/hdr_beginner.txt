@@ -1,0 +1,23 @@
+-- ============================================================================
+-- SC5 ASSOCIATE DEEP SEED: Contract & Supplier Management, beginner tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/contracts/beginner.
+--
+-- What this tier owns: FROM AWARD TO STEADY RUNNING. Contract management and
+-- its sources; award handover and mobilisation; reading the contract you
+-- manage; KPIs and service levels; payment, records and the audit trail;
+-- Nigerian content in execution.
+--
+-- A PRACTICE COURSE. No engine, no calculator panel, no Suite app and no
+-- capstone: every key traces to a cited passage of the dated source pack
+-- (tools/course-waves/contracts/PACK.md), and the tier certificate is issued
+-- from its passed final exam by academy_claim_practice_certificate. The 42
+-- question final exam is this tier's certificate exam.
+--
+-- REQUIRES 20261116_sc5_contracts_platform_course_types.sql and
+-- 20261116_sc5_contracts_course.sql first (the foreign key on app_slug).
+-- No transaction lines of its own. Idempotent.
+-- ============================================================================

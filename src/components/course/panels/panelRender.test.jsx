@@ -26,7 +26,7 @@ import React from 'react';
 const panels = {
   ...import.meta.glob('/src/components/course/panels/**/*Explorer.jsx'),
   ...import.meta.glob('/src/components/course/panels/**/*Lab.jsx'),
-  // Courses whose practicals are calculator panels (SC2 procurement, EC7 pia, EC8 gsa, EC9 joa, EC10 farmout, EC11 prms, SC4 marine).
+  // Engine courses whose practicals are calculator panels (SC2 procurement, EC7 pia, EC8 gsa, EC9 joa, EC10 farmout, EC11 prms), and the SC3 materials and SC4 marine app courses' calculators.
   ...import.meta.glob('/src/components/course/panels/**/*Calculator.jsx'),
 };
 
@@ -511,6 +511,34 @@ describe('every course panel renders with no props', () => {
       }
     }
     expect(rendered).toBe(9);
+  }, 120000);
+  it('finds the SC3 materials calculator panels', () => {
+    const names = entries.map(([p]) => p.split('/panels/')[1]);
+    expect(names).toContain('materials/RegisterCalculator.jsx');
+    expect(names).toContain('materials/StockCalculator.jsx');
+    expect(names).toContain('materials/SparesCalculator.jsx');
+  });
+  it('every SC3 materials view renders its first start, and every view renders the blank case with the engine refusing', async () => {
+    const MODES = {
+      'materials/RegisterCalculator.jsx': ['criticality', 'abcClassification', 'eoq', 'slowMoving'],
+      'materials/StockCalculator.jsx': ['quantityDiscount', 'safetyStock', 'poissonStock'],
+      'materials/SparesCalculator.jsx': ['insuranceSpares', 'poissonStock', 'leadTimeRisk'],
+    };
+    let rendered = 0;
+    for (const [name, modes] of Object.entries(MODES)) {
+      const entry = entries.find(([p]) => p.endsWith(`/${name}`));
+      expect(entry, `${name} is not in the panel sweep`).toBeTruthy();
+      const mod = await entry[1]();
+      expect(mod.MODES.map((m) => m[0]), `${name} declares different modes`).toEqual(modes);
+      for (const mode of modes) {
+        const html = renderToStaticMarkup(React.createElement(mod.default, { initialMode: mode }));
+        expect(html, `${name} in the ${mode} view refused its own start`).not.toContain('THE ENGINE REFUSED');
+        const blank = renderToStaticMarkup(React.createElement(mod.default, { initialMode: mode, initialText: '{}' }));
+        expect(blank, `${name} in the ${mode} view on the blank case`).toContain('THE ENGINE REFUSED');
+        rendered += 1;
+      }
+    }
+    expect(rendered).toBe(10);
   }, 120000);
   it('finds the SC4 marine calculator panels', () => {
     const names = entries.map(([p]) => p.split('/panels/')[1]);
