@@ -1,0 +1,84 @@
+{
+ "dataset": "OGIDI (synthetic)",
+ "label": "OGIDI, the stock policy of the Ogidi field (synthetic)",
+ "quantityDiscount": {
+  "annualDemand": 420,
+  "orderCost": 2650,
+  "holdingRate": 0.22,
+  "breaks": [
+   {
+    "minQuantity": 0,
+    "unitPrice": 318
+   },
+   {
+    "minQuantity": 100,
+    "unitPrice": 296.5
+   },
+   {
+    "minQuantity": 250,
+    "unitPrice": 281.25
+   }
+  ],
+  "discountType": "incremental",
+  "rounding": {
+   "rule": "none"
+  }
+ },
+ "safetyStock:cycle-service": {
+  "demandMean": 11.5,
+  "demandSd": 4.2,
+  "leadTime": 1.75,
+  "leadTimeSd": 0.35,
+  "reviewPeriod": 0,
+  "serviceMeasure": "cycle-service",
+  "serviceLevel": 0.975,
+  "safetyFactorRounding": {
+   "rule": "none"
+  },
+  "minimumSafetyFactor": 0,
+  "rounding": {
+   "rule": "none"
+  }
+ },
+ "safetyStock:fill-rate": {
+  "demandMean": 11.5,
+  "demandSd": 4.2,
+  "leadTime": 1.75,
+  "leadTimeSd": 0.35,
+  "reviewPeriod": 0,
+  "serviceMeasure": "fill-rate",
+  "serviceLevel": 0.985,
+  "orderQuantity": 46,
+  "safetyFactorRounding": {
+   "rule": "none"
+  },
+  "minimumSafetyFactor": 0,
+  "rounding": {
+   "rule": "none"
+  }
+ },
+ "safetyStock:periodic": {
+  "demandMean": 11.5,
+  "demandSd": 4.2,
+  "leadTime": 1.75,
+  "leadTimeSd": 0,
+  "reviewPeriod": 1,
+  "serviceMeasure": "cycle-service",
+  "serviceLevel": 0.95,
+  "safetyFactorRounding": {
+   "rule": "none"
+  },
+  "minimumSafetyFactor": 0,
+  "rounding": {
+   "rule": "none"
+  }
+ },
+ "poissonStock": {
+  "demandRate": 0.35,
+  "leadTime": 3.5,
+  "reviewPeriod": 1,
+  "serviceMeasure": "fill-rate",
+  "serviceLevel": 0.97,
+  "orderQuantity": 2
+ }
+}
