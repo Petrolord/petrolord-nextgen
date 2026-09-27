@@ -85,6 +85,7 @@ export const HOME_COURSES = [
   c('supply', 'supply_chain', 'Terminals, Depots & Fuel Supply', 'Storage and distribution with lean working capital.'),
   c('procurement', 'supply_chain', 'Procurement, Tendering & Contracting', 'Run a fair tender and choose the contract that fits the risk.', 'coming_soon', true),
   c('materials', 'supply_chain', 'Materials, Spares & Inventory Management', 'Set criticality, order quantities, safety stock and insurance spares the way a stated stock policy writes them.', 'coming_soon', true),
+  c('marine', 'supply_chain', 'Offshore & Marine Logistics', 'Plan supply voyages, size the vessel fleet and queue the shore base the way a stated logistics plan writes them.', 'coming_soon', true),
   c('contracts', 'supply_chain', 'Contract & Supplier Management', 'Run a contract from award to close-out and keep every supplier performing.', 'coming_soon', true),
   c('gasvalue', 'energy_transition', 'Flare Gas to Value & LPG/CNG', 'Turn a flare into a revenue stream.'),
   c('carbon', 'energy_transition', 'Carbon & Energy Efficiency', 'Cut emissions and energy cost. Stronger ESG reporting.'),
