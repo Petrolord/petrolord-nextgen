@@ -803,7 +803,7 @@ fee-day-210, the payment reason, verbatim:
 fee-day-211, the payment reason, verbatim:
 > paid 211 days after the notification: more than 90 surcharge days after the 90 + 30 days; the consent is deemed withdrawn (reg. 19(9))
 
-THE SURCHARGE IS STRAIGHT LINE. It is 0.01 percent of the fee a day on the fee alone, never on an earlier surcharge: one day costs 39.200000 and ninety days 3528.000000 on the 392000.000000 fee (engine). After the ninetieth surcharge day the consent is deemed withdrawn and the engine returns no total paid (fee-day-211: none).
+THE SURCHARGE IS STRAIGHT LINE. It is 0.01 percent of the fee a day, charged on the fee alone: one day costs 39.200000 and ninety days 3528.000000 on the 392000.000000 fee (engine). After the ninetieth surcharge day the consent is deemed withdrawn and the engine returns no total paid (fee-day-211: none).
 
 HOW THE DAYS ARE COUNTED. Days run from the notification date to the payment date, the notification day not counted: fee-ekene is notified 2027-05-03 and paid 2027-07-30, 88 days (engine), on time. Section 22 names this count as a reading.
 

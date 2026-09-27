@@ -49,6 +49,403 @@
  "plan": {
   "state": "FOUNDATION: structure, digest, capstones, fields, precision, truth, panels, learning page, gates, writer briefs. Stops before lessons."
  },
- "fieldsDiscrimination": {},
- "openItems": {}
+ "fieldsDiscrimination": {
+  "ogbaku_ihe_well_payment": "the earned share alone, the promote points alone, the share of the farmor's interest, the bonus counted in the payment",
+  "ogbaku_ogb_well_payment": "the farmor's post-deal share, its whole interest, the promote as its payment, the bonus taken off",
+  "ogbaku_promote_ratio": "the ratio over the farmor's retained interest (engine plant), the points as the ratio, the ratio inverted, the ratio over the farmor's interest",
+  "ogbaku_carry": "the whole payment as the carry, the carry on the farmor's share, the farmor's payment as the carry",
+  "ogbaku_consideration": "the bonus counted twice and the whole past costs reimbursed (engine plants), the carry left out, the whole payment counted",
+  "ogbaku_equivalent_wi_pct": "the outlay without the cash and the whole past costs (engine plants), the share paid as the equivalent, the outlay over the farmor's share",
+  "umunze_well1_amg_payment": "the gross cap ignored and the overrun rules swapped (engine plants), the excess at the share paid, the excess at the farmor's interest",
+  "umunze_well2_umz_payment": "the carry cap ignored (engine plant), the cap left out, the farmor's pre-deal share less the share paid, the event's own interest",
+  "umunze_amg_emv": "no dry-hole cost, the bonus twice, the whole past costs, the scaling applied twice, the gross cap ignored (engine plants)",
+  "umunze_breakeven_share_pct": "solved on the farmor's EMV, no dry-hole cost, the bonus twice, the whole past costs (engine plants)",
+  "umunze_amg_breakeven_chance_pct": "the wrong side of the line, no dry-hole cost, the bonus twice, the gross cap ignored (engine plants)",
+  "umunze_consent_fee": "the premium alone (engine plant), the processing fee alone, seven per cent of the bonus, seven per cent of the bonus and the reimbursement",
+  "akpugo_ezi_evii": "the likelihoods swapped, no dry-hole cost, the bonus twice (engine plants), the EVPI as the EVII",
+  "akpugo_strong_posterior_pct": "the likelihoods swapped (engine plant), the likelihood as the posterior, the prior unchanged, the signal chance",
+  "akpugo_risked_value_per_pct": "the value per percent unrisked and no dry-hole cost (engine plants), the success value before the well, the risked success value alone",
+  "akpugo_price_to_value": "priced on the unrisked value and no dry-hole cost (engine plants), the price over the 100% value, the interest left out",
+  "akpugo_2035_carry_balance": "no uplift, recovered from the whole share, carried in full (wrong terms through the engine)",
+  "akpugo_backin_refund_to_obr": "exploration refunded (a wrong term through the engine), the refund on the target interest, in equal parts, on the licence interest"
+ },
+ "openItems": {
+  "ENGINE FINDINGS": "No engine defect found at the foundation. Every refusal golden (61) returns the golden message through the vendored engine (farmout_dump.mjs asserts each); the Penn State figures are reproduced to 1e-6; the oracle replays all 18 capstone fields within 5e-07 tolerances (worst 3.73e-03 tolerances, worst relative 3.76e-16).",
+  "PROVENANCE NOTE": "FINDINGS-farmout.md (engines #273) cites the definitions as reg. 25; the gazette prints Interpretation as reg. 24 in both the arrangement and the body (the arrangement numbers the citation 25 and the body 26). The digest cites reg. 24 from the text and teaches the double numbering as a quirk.",
+  "VENDORING": "The closure sits in its own root (packages/engines/ec10-farmout) because the canonical decisionTree.js and portfolio.js are held for the EC4/EC5 recut; collapse it into the canonical paths in the change that lands that recut.",
+  "readings": "Four stated readings are printed verbatim where each acts; every capstone field is bit-identical under the other side of the first three (ts_loader.mjs reading_* variants), and no capstone states the simple uplift, so the fourth cannot act (asserted)."
+ },
+ "digest": {
+  "lines": 1216,
+  "sections": 28,
+  "md5": "2b9cd68590f4a15e3aeaad59b43e3bd6",
+  "sha256": "17a759a66420cca72c87c1402650cdcbc64336ced18c224fb8ea9fc9580947b3"
+ },
+ "fields": {
+  "count": 18,
+  "sha256": "a6d9b7c7825d4a1c961a91588b55469fcce8e0eb76904daf9f363ea2654e762d",
+  "keys": [
+   "ogbaku_ihe_well_payment",
+   "ogbaku_ogb_well_payment",
+   "ogbaku_promote_ratio",
+   "ogbaku_carry",
+   "ogbaku_consideration",
+   "ogbaku_equivalent_wi_pct",
+   "umunze_well1_amg_payment",
+   "umunze_well2_umz_payment",
+   "umunze_amg_emv",
+   "umunze_breakeven_share_pct",
+   "umunze_amg_breakeven_chance_pct",
+   "umunze_consent_fee",
+   "akpugo_ezi_evii",
+   "akpugo_strong_posterior_pct",
+   "akpugo_risked_value_per_pct",
+   "akpugo_price_to_value",
+   "akpugo_2035_carry_balance",
+   "akpugo_backin_refund_to_obr"
+  ]
+ },
+ "gates": {
+  "structure.py": {
+   "md5": "e4dfdd2493f49a29bd25c714814a022c",
+   "command": "python3 structure.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "PROBLEMS: 0"
+  },
+  "prove_prior_courses.sh": {
+   "md5": "38d106a0e8ed3aaae420b5aa2bc390d9",
+   "command": "bash prove_prior_courses.sh",
+   "expected": 0,
+   "exit": 0,
+   "summary": "PRIOR COURSES UNCHANGED: packages/engines differs from origin/main only by the nineteen ec10-farmout-course paths under ec10-farmout/ (sha-identical to b7d305b) and their ledger entries, with every canonical path the clo"
+  },
+  "scaffold.py --check": {
+   "md5": "28d030a3c6996d399da0ea01d001e0e2",
+   "command": "python3 scaffold.py --check",
+   "expected": 0,
+   "exit": 0,
+   "summary": "scaffold: 3 manifests, 0 stubs written, 78 existing lesson files left alone, 0 drift"
+  },
+  "farmout_capstone.mjs": {
+   "md5": "d1ea2bcd46a52021d04b273a9483e03c",
+   "command": "node farmout_capstone.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "farmout_capstone: 293 assertions, 0 failed; 3 stated readings, every field bit-identical under each"
+  },
+  "make_fields.mjs": {
+   "md5": "35caf8f2d0ed6598203b6cb9cca30deb",
+   "command": "node make_fields.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "make_fields: 0 field(s) unanswerable at the declared precision"
+  },
+  "make_fields.mjs NEGATIVE CONTROL": {
+   "md5": "35caf8f2d0ed6598203b6cb9cca30deb",
+   "command": "node make_fields.mjs --bare-stated-tolerances",
+   "expected": 1,
+   "exit": 1,
+   "summary": "make_fields: 18 field(s) unanswerable at the declared precision"
+  },
+  "oracle_check.py": {
+   "md5": "325116fdfa049370ff612ac668d67710",
+   "command": "python3 oracle_check.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "oracle_check: 18 graded values replayed through the stdlib oracle in 1 s; every chain the oracle's own; worst relative difference 3.76e-16, worst 3.73e-03 tolerances; disagreements: 0"
+  },
+  "oracle_check.py NEGATIVE CONTROL": {
+   "md5": "325116fdfa049370ff612ac668d67710",
+   "command": "python3 oracle_check.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: umunze_amg_emv was moved by ten tolerances; caught"
+  },
+  "make_concepts.py (every quotation found in its text)": {
+   "md5": "21e4459c5dc7ce8c56a0071f67a78fe8",
+   "command": "python3 make_concepts.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "concepts.json: 50 quotations, every one found in its text: {'PIA': 14, 'AOI': 22, 'HMRC': 14}"
+  },
+  "discriminate.mjs": {
+   "md5": "83a41271fd52cb8e0f291aac946846c2",
+   "command": "node discriminate.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "WEAK ROUTES: 0; READING-DEPENDENT: 0"
+  },
+  "discriminate.mjs NEGATIVE CONTROL": {
+   "md5": "83a41271fd52cb8e0f291aac946846c2",
+   "command": "node discriminate.mjs --slack-tolerances",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: tolerances multiplied by 1000000000000000. Expected 18 WEAK routes, got 18."
+  },
+  "quote_check.py": {
+   "md5": "359dc6e933f7e42ac16c78f2b24de35b",
+   "command": "python3 quote_check.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "MISMATCHES: 0"
+  },
+  "quote_check.py NEGATIVE CONTROL": {
+   "md5": "359dc6e933f7e42ac16c78f2b24de35b",
+   "command": "python3 quote_check.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: one character of pia_94_8b_farmout was altered in memory; caught"
+  },
+  "digestrepro.sh": {
+   "md5": "dc723d03530192367ddc22937fc0c673",
+   "command": "/root/dc-wavekit/digestrepro.sh cat-wip-farmout /root/wt-ec10-nextgen",
+   "expected": 0,
+   "exit": 0,
+   "summary": "farmout_dump: 1330 label-and-call, measurement and claim assertions run, 0 failed; 28 sections"
+  },
+  "digestprose.mjs": {
+   "md5": "97dda85819e61737a76d8caf5badb46d",
+   "command": "node /root/dc-wavekit/digestprose.mjs digest.txt --rules cat-wip-farmout",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestprose] /root/cat-wip-farmout/digest.txt: 1216 line(s), 28 section title(s) and 125 in-body marker(s) swept against their blocks, 32 history framings, 10 engine pin(s); 2 warned for a human read and 0 framed as cur"
+  },
+  "digestprose.mjs --selftest": {
+   "md5": "97dda85819e61737a76d8caf5badb46d",
+   "command": "node /root/dc-wavekit/digestprose.mjs --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestprose] selftest OK: the founding heading case is caught by the corrected pairing and missed by the broken one; both real keyword cases fail inside a teaching section; FC3 line 683 WARNS where the keyword family ca"
+  },
+  "digestfigures.py": {
+   "md5": "f3428a1fab68f45527c0a34f8b51f29c",
+   "command": "python3 /root/dc-wavekit/digestfigures.py cat-wip-farmout",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestfigures] 0 FAILED, 0 outstanding for a human read (0 sentence(s) cleared by name in wave.json)"
+  },
+  "digestfigures.py --selftest": {
+   "md5": "f3428a1fab68f45527c0a34f8b51f29c",
+   "command": "python3 /root/dc-wavekit/digestfigures.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestfigures] selftest OK"
+  },
+  "digestpromise_farmout.py": {
+   "md5": "08155d9bec4984860a9378a81ca2bcd8",
+   "command": "python3 digestpromise_farmout.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "=> 0 completeness problem(s), all checks applied"
+  },
+  "digestpromise_farmout.py NEGATIVE CONTROL": {
+   "md5": "08155d9bec4984860a9378a81ca2bcd8",
+   "command": "python3 digestpromise_farmout.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a promise of section 99 was planted; caught"
+  },
+  "digestpromise.py --selftest": {
+   "md5": "f22dd5d57795e134faa73d625358eed7",
+   "command": "python3 /root/dc-wavekit/digestpromise.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "negative control: ALL PASS"
+  },
+  "digestleak.py": {
+   "md5": "b03f1c2f90ff332d4f54c55995944634",
+   "command": "python3 /root/dc-wavekit/digestleak.py cat-wip-farmout",
+   "expected": 0,
+   "exit": 0,
+   "summary": "=> 0 graded answer(s) reachable from this digest"
+  },
+  "collisions.py": {
+   "md5": "a5636d0b84e634d5fdc0cbfbdb023044",
+   "command": "python3 /root/dc-wavekit/collisions.py cat-wip-farmout",
+   "expected": 0,
+   "exit": 0,
+   "summary": "fields checked: 18  fatal collisions: 0  notes: 0"
+  },
+  "gradeprecision.py": {
+   "md5": "1ceee19667cba7d10f293abd0b97f509",
+   "command": "python3 /root/dc-wavekit/gradeprecision.py cat-wip-farmout",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[gradeprecision] /root/cat-wip-farmout: 18 graded field(s), 18 OF 18 CLASSIFIED against 3 precision clause(s) in the digest header and 3 declared class(es)"
+  },
+  "briefleak.py": {
+   "md5": "2b5acd7c2b4eea5fbcf9ec657684851f",
+   "command": "python3 /root/dc-wavekit/briefleak.py cat-wip-farmout",
+   "expected": 0,
+   "exit": 0,
+   "summary": "0 graded answer(s) reachable from this brief"
+  },
+  "briefcheck.py": {
+   "md5": "4c7fcb25e09b0dd3110a38a1128d3dfb",
+   "command": "python3 /root/dc-wavekit/briefcheck.py cat-wip-farmout",
+   "expected": 0,
+   "exit": 0,
+   "summary": "0 figure(s) the digest cannot vouch for. Dates and the leakage-ban conditions are expected here; read the rest."
+  },
+  "gate_capstone_leak.mjs": {
+   "md5": "f6548ecfba654110cab61de73b7ae395",
+   "command": "node gate_capstone_leak.mjs --no-banks",
+   "expected": 0,
+   "exit": 0,
+   "summary": "FINDINGS: 0"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL value": {
+   "md5": "f6548ecfba654110cab61de73b7ae395",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-value",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-value: expected a [2 values] finding, caught"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL input": {
+   "md5": "f6548ecfba654110cab61de73b7ae395",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-input",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-input: expected a [1 inputs] finding, caught"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL name": {
+   "md5": "f6548ecfba654110cab61de73b7ae395",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-name",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-name: expected a [4 names] finding, caught"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL lesson": {
+   "md5": "f6548ecfba654110cab61de73b7ae395",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-lesson",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-lesson: expected a [10 lessons numeric] finding, caught"
+  },
+  "gate_copy_rule.py": {
+   "md5": "ae4ca34250e795629695b05cfed7e625",
+   "command": "python3 gate_copy_rule.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "VIOLATIONS: 0"
+  },
+  "gate_copy_rule.py NEGATIVE CONTROL": {
+   "md5": "ae4ca34250e795629695b05cfed7e625",
+   "command": "python3 gate_copy_rule.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a contrastive and a dash were planted in the digest with a rather-than; expected 3 caught, got 3"
+  },
+  "gate_copy_rule.py NEGATIVE CONTROL bank": {
+   "md5": "ae4ca34250e795629695b05cfed7e625",
+   "command": "python3 gate_copy_rule.py --plant-bank",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a contrastive and a dash were planted in a bank string with an instead-of; expected 3 caught, got 3"
+  },
+  "gate_typed_literals.py": {
+   "md5": "594effff3b1a368e9b7a0fedb72c55df",
+   "command": "python3 gate_typed_literals.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "UNEXPLAINED TYPED NUMBERS: 0"
+  },
+  "gate_typed_literals.py NEGATIVE CONTROL": {
+   "md5": "594effff3b1a368e9b7a0fedb72c55df",
+   "command": "python3 gate_typed_literals.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a typed 4.217 was planted in a printed line; caught 1"
+  },
+  "gate_vocabulary.py": {
+   "md5": "2a71fecc12f2022f2efd3398dafdf3a5",
+   "command": "python3 gate_vocabulary.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "exemptions declared: 0, dead: []"
+  },
+  "gate_vocabulary.py NEGATIVE CONTROL": {
+   "md5": "2a71fecc12f2022f2efd3398dafdf3a5",
+   "command": "python3 gate_vocabulary.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: expected a repair-history framing and an AI claim caught; got ['a repair-history framing', 'an AI claim']"
+  },
+  "gate_vocabulary.py NEGATIVE CONTROL licensed": {
+   "md5": "2a71fecc12f2022f2efd3398dafdf3a5",
+   "command": "python3 gate_vocabulary.py --plant-licensed",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a quoted AIPN clause was planted in a lesson line; caught 1"
+  },
+  "truth_check.py": {
+   "md5": "d7363c03fd4ec3396231055401213064",
+   "command": "python3 truth_check.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "truth_check: truth-farmout.json (613 digest lines) IS the harvest of digest.txt"
+  },
+  "truth_check.py NEGATIVE CONTROL": {
+   "md5": "d7363c03fd4ec3396231055401213064",
+   "command": "python3 truth_check.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a line was planted in the scratch digest; expected a mismatch, caught"
+  },
+  "numsweep_farmout.mjs": {
+   "md5": "00828b703cf91002514747467232081d",
+   "command": "node numsweep_farmout.mjs",
+   "expected": "held NOT ONE literal of seven or more significant figures",
+   "exit": 1,
+   "summary": "This gate does not pass on an empty or unreadable sweep.",
+   "stage": "foundation: expected to refuse on the 78 stubs for the stated reason"
+  },
+  "numsweep_farmout.mjs --selftest": {
+   "md5": "00828b703cf91002514747467232081d",
+   "command": "node numsweep_farmout.mjs --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "numsweep_farmout selftest OK"
+  },
+  "lengths.py": {
+   "md5": "118e0a1fea5cf8d61bbc52d048dffbda",
+   "command": "python3 lengths.py",
+   "expected": [
+    "UNDER ITS OWN FLOOR",
+    78
+   ],
+   "exit": 1,
+   "summary": "tiers read: 3  out of band: 79  not written yet: 0",
+   "stage": "foundation: expected to refuse on the 78 stubs for the stated reason"
+  },
+  "lengths.py --selftest": {
+   "md5": "118e0a1fea5cf8d61bbc52d048dffbda",
+   "command": "python3 lengths.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "lengths.py selftest OK: a heading counts, a table row does not, a 430 word lesson at fourteen minutes is UNDER its own floor of 500 where a flat 420 floor passed it, and an unwritten lesson is named rather than skipped"
+  },
+  "gate_claims.mjs": {
+   "md5": "01d7b2d7021a4b37e980d855dd6187dd",
+   "command": "node gate_claims.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "FINDINGS: 0"
+  },
+  "gate_claims.mjs NEGATIVE CONTROL": {
+   "md5": "01d7b2d7021a4b37e980d855dd6187dd",
+   "command": "node gate_claims.mjs --plant-a-recon-figure",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a figure from the recon report was planted in BRIEF.md. Expected it caught and named as a recon figure, got 2."
+  },
+  "gen_course.py (self checks)": {
+   "md5": "f857d70edc4fcd3cf1af4436763c7c72",
+   "command": "python3 gen_course.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "gen_course: engine run 18 of 18 fields.json values equal what farmout_capstone.mjs returned through /root/wt-ec10-nextgen/packages/engines/ec10-farmout, every tolerance the one gradedTolerance.js derives; case-file data "
+  }
+ }
 }

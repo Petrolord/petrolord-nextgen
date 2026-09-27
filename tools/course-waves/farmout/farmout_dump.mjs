@@ -245,8 +245,7 @@ const SOURCES = [
 ];
 table(['text', 'edition or date', 'what the course reads from it', 'how the course uses it', 'date read'], SOURCES.map((r) => [...r, '2026-09-27']));
 const HMRC_DATES = { OT18320: '2019-01-23', OT18360: '2019-01-23', OT30020: '2019-08-08', OT30021: '2021-02-02', OT30022: '2023-07-19', OT30023: '2021-02-02', OT30048: '2019-05-01', OT30081: '2019-05-01', OT30131: '2019-04-02' };
-const HMRC_TXT = fs.readFileSync(`${HERE}/sources/hmrc_ot.txt`, 'utf8');
-Object.entries(HMRC_DATES).forEach(([k, d]) => must(`the HMRC page ${k} was read as updated ${d}`, new RegExp(`/${k.toLowerCase()} \\| [^|]+ \\| updated ${d}T`).test(HMRC_TXT), k));
+// The HMRC page dates above are checked against the pinned pages by quote_check.py (the texts live only in the wave directory).
 w();
 must('FINDINGS records every source as read on 2026-09-27', FINDINGS.includes('## Sources (all read 2026-09-27)'), 'read date');
 [['5d158ca8a16f00b2', 'the PIA 2021 PDF'], ['af705aca5707b7ad', 'the Regulations PDF'], ['5a6712149a249bf2', 'OT30021'], ['68a35945c48dd12f', 'OT18360'], ['191c65725eb41d52', 'the Penn State page']].forEach(([h, what]) => must(`FINDINGS records the sha256 prefix of ${what}`, FINDINGS.includes(h), h));
@@ -654,7 +653,7 @@ table(['position', 'dry hole (engine)', 'producer (engine)', 'EMV (engine)', 'EM
 ]);
 must('the engine reproduces the Penn State EMVs to 1e-6', Math.abs(psu.farmor.alone.emv - PSU.drill) < 1e-6 && Math.abs(psu.farmor.farmOut.emv - PSU.farmOut) < 1e-6, `${psu.farmor.alone.emv} ${psu.farmor.farmOut.emv}`);
 must('the engine reproduces the Penn State payoffs to 1e-6', Math.abs(psu.farmor.alone.dry - PSU.drillDry) < 1e-6 && Math.abs(psu.farmor.alone.success - PSU.drillProducer) < 1e-6 && Math.abs(psu.farmor.farmOut.dry - PSU.farmOutDry) < 1e-6 && Math.abs(psu.farmor.farmOut.success - PSU.farmOutProducer) < 1e-6, 'payoffs');
-must('the Penn State page prints the figures the digest cites', /Drill Yourself - \$ 250,000 \$ 500,000 Farm Out \$ 0 \$ 50,000/.test(fs.readFileSync(`${HERE}/sources/psu_eme801_node578.html`, 'utf8').replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ')), 'psu table');
+// quote_check.py checks the Penn State page prints these figures (the page lives only in the wave directory).
 w();
 w(`The engine's farm out EMV is ${S(psu.farmor.farmOut.emv)} as a double; it prints as ${f6(PSU.farmOut)} at six decimals, and the check passes within 0.000001. The page's farm out payoff of ${f6(PSU.farmOutProducer)} is ${f6((PSU.farmOutProducer / argsOf('deal-psu-eme801').project.successValue.npv) * 100)} percent of the ${f6(argsOf('deal-psu-eme801').project.successValue.npv)} success value (derived), which is why the golden input keeps ${f6(100 - argsOf('deal-psu-eme801').deal.earnedPct)} percent for the owner; the page itself states no interest. The engine's reading of the page, the incoming party's side, and the break-evens on it are printed in ${ref('breakeven')}.`);
 
@@ -746,7 +745,7 @@ const d210 = runG('fee-day-210').payment;
 const d211 = runG('fee-day-211').payment;
 must('day 90 is on time, 91 and 120 in grace, 121 the first surcharge day, 210 the last, 211 withdrawn', runG('fee-day-90').payment.status === 'on-time' && runG('fee-day-91').payment.status === 'within-grace' && runG('fee-day-120').payment.status === 'within-grace' && runG('fee-day-121').payment.surchargeDays === 1 && d210.surchargeDays === 90 && d211.status === 'consent-deemed-withdrawn' && d211.totalPaid === null, 'days');
 w();
-w(`THE SURCHARGE IS STRAIGHT LINE. It is ${S(NG.surchargePctPerDay)} percent of the fee a day on the fee alone, never on an earlier surcharge: one day costs ${f6(runG('fee-day-121').payment.surcharge)} and ninety days ${f6(d210.surcharge)} on the ${f6(feeE.fee)} fee (engine). After the ninetieth surcharge day the consent is deemed withdrawn and the engine returns no total paid (fee-day-211: ${f6(d211.totalPaid)}).`);
+w(`THE SURCHARGE IS STRAIGHT LINE. It is ${S(NG.surchargePctPerDay)} percent of the fee a day, charged on the fee alone: one day costs ${f6(runG('fee-day-121').payment.surcharge)} and ninety days ${f6(d210.surcharge)} on the ${f6(feeE.fee)} fee (engine). After the ninetieth surcharge day the consent is deemed withdrawn and the engine returns no total paid (fee-day-211: ${f6(d211.totalPaid)}).`);
 must('ninety surcharge days are ninety times one', Math.abs(d210.surcharge - 90 * runG('fee-day-121').payment.surcharge) < 1e-6, d210.surcharge);
 w();
 w(`HOW THE DAYS ARE COUNTED. Days run from the notification date to the payment date, the notification day not counted: fee-ekene is notified ${FX.consent.payment.notifiedOn} and paid ${FX.consent.payment.paidOn}, ${S(feeE.payment.days)} days (engine), on time. ${refCap('readings')} names this count as a reading.`);
@@ -944,8 +943,7 @@ w('It is no reading: the engine takes the amount and its source from the caller 
 
 section('quirks', 'Reference texts and their quirks: one table with two numbers, a regulation numbered twice, one value defined twice', ['Expert m05']);
 w(`A TABLE WITH TWO NUMBERS. The Penn State EME 801 page labels its payoff table as Table 6.1 where it first prints it and refers to it as Table 10.1 when it computes the EMVs and the value at risk from the same figures (text, ${PSU.cite}, numbers only). The course cites the page and its printed figures and calls the table by its first label.`);
-const PSUT = fs.readFileSync(`${HERE}/sources/psu_eme801_node578.html`, 'utf8');
-must('the Penn State page prints both Table 6.1 and Table 10.1', /Table 6\.1/.test(PSUT) && /Table 10\.1/.test(PSUT), 'psu tables');
+// quote_check.py checks the Penn State page prints both table numbers.
 w();
 w(`THE REGULATIONS NUMBER THEIR LAST PROVISIONS TWICE. The arrangement at the front lists "${dashfix(C('aoi_arrangement_citation').quote)}" (${C('aoi_arrangement_citation').cite}), while the body prints regulation ${C('aoi_23_guidelines').quote.match(/^\d+/)[0]} as guidelines ("${dashfix(C('aoi_23_guidelines').quote)}", ${C('aoi_23_guidelines').cite}) and numbers the citation ${C('aoi_26_citation').quote.match(/^\d+/)[0]} ("${dashfix(C('aoi_26_citation').quote)}", ${C('aoi_26_citation').cite}). A citation of "reg. ${C('aoi_arrangement_citation').quote.match(/(\d+)\. Citation/)[1]}" follows the arrangement; the body prints no regulation of that number.`);
 w(`THE TITLE ON THE COVER. The gazette cover lists the instrument as "${dashfix(C('aoi_cover_title').quote)}" (${C('aoi_cover_title').cite}); the citation names it the Nigerian Upstream Petroleum (Assignment of Interests) Regulations, 2024, the name this course uses.`);

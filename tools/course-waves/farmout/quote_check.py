@@ -100,6 +100,20 @@ def main():
     print(f'  hmrc_ot.txt {"is" if same else "IS NOT"} the text make_hmrc_txt.py derives from the pinned pages')
     if not same:
         bad.append('hmrc_ot.txt derivation')
+    # THE DIGEST'S FIGURES READ FROM THE PAGES THEMSELVES (moved here from the
+    # dump so the committed dump rebuilds without the texts): the HMRC page
+    # update dates, and the Penn State figures and its two table numbers.
+    HMRC_DATES = {'OT18320': '2019-01-23', 'OT18360': '2019-01-23', 'OT30020': '2019-08-08', 'OT30021': '2021-02-02', 'OT30022': '2023-07-19',
+                  'OT30023': '2021-02-02', 'OT30048': '2019-05-01', 'OT30081': '2019-05-01', 'OT30131': '2019-04-02'}
+    htxt = open(os.path.join(SRC, 'hmrc_ot.txt'), encoding='utf-8').read()
+    for k, d in HMRC_DATES.items():
+        if not re.search(r'/%s \| [^|]+ \| updated %sT' % (k.lower(), d), htxt):
+            bad.append(f'HMRC {k} is not updated {d}')
+    psu = re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', ' ', open(os.path.join(SRC, 'psu_eme801_node578.html'), encoding='utf-8').read()).replace('&nbsp;', ' '))
+    for want in ('Drill Yourself - $ 250,000 $ 500,000 Farm Out $ 0 $ 50,000', 'Table 6.1', 'Table 10.1', '12,500', '17,500'):
+        if want not in psu:
+            bad.append(f'the Penn State page does not print {want}')
+    print(f'  HMRC page dates checked: {len(HMRC_DATES)}; Penn State figures and table numbers checked: 5')
     body = {k: norm(open(os.path.join(SRC, t), encoding='utf-8').read()) for k, t in TEXTS.items()}
     concepts = json.load(open(os.path.join(HERE, 'concepts.json'), encoding='utf-8'))
     if len(concepts) < 40:
