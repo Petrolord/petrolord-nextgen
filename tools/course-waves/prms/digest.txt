@@ -4,7 +4,7 @@
 
 # PRECISION. Every quantity, volume, barrel, BOE, Mscf, amount of money, cash flow, NPV, percentage, chance, probability, correlation, ratio and index prints to SIX decimals; years, year counts, project counts, draws, seeds and whole inputs print as whole numbers; a figure of sixteen or more significant digits at six decimals prints with its thousands grouped by commas; an engine message, reason and basis is printed verbatim, figures and all. Inside a message the engine prints money rounded to the cent (half away from zero, trailing zeros dropped), a computed quantity or percentage to six decimals (trailing zeros dropped), and a stated input as it was given.
 
-# ENGINE. engines/economics/prms.js, vendored sha-identical with petrolord-engines bb8ef5f (engines PR #278), 1035 lines, at its canonical path in the NextGen repository. It imports computeCashFlow and applyJV from engines/economics/cashflow.ts, mulberry32, createCorrelatedSampler, cholesky, fitTriangularToPercentiles, triInvCDF, normalCDF, quantile and mean from lib/stats/stats.js, and OUTCOME_LABELS, EXCEEDANCE_DEFINITION and outcomeOrderViolation from lib/conventions/percentile.js, and nothing else. It makes no network call.
+# ENGINE. engines/economics/prms.js, vendored sha-identical with petrolord-engines bb8ef5f (engines PR #278; its validation record FINDINGS-prms.md from cc6ba77, engines PR #279), 1035 lines, at its canonical path in the NextGen repository. It imports computeCashFlow and applyJV from engines/economics/cashflow.ts, mulberry32, createCorrelatedSampler, cholesky, fitTriangularToPercentiles, triInvCDF, normalCDF, quantile and mean from lib/stats/stats.js, and OUTCOME_LABELS, EXCEEDANCE_DEFINITION and outcomeOrderViolation from lib/conventions/percentile.js, and nothing else. It makes no network call.
 
 # AN ENGINE COURSE. There is no Suite app for this course. Every practical runs in the course's own calculator panels, which call this same vendored engine on the learner's own inputs.
 
@@ -57,8 +57,8 @@ THE RULE THIS COURSE FOLLOWS FOR EVERY STANDARD, LAW, REGULATION, GUIDE AND RELE
 
 | text | edition or date | licence | what the course reads from it | how the course uses it | date read |
 | --- | --- | --- | --- | --- | --- |
-| SPE-PRMS 2018, Petroleum Resources Management System (SPE, WPC, AAPG, SPEE, SEG, SPWLA, EAGE) | June 2018; the English text read from the SPE-hosted English-Chinese edition (Version 2023 V1.0, developed from PRMS 2018 V1.0, uploaded February 2024) | CC BY-NC-ND 4.0, as the SPE download page states | the classes, sub-classes, categories, the commerciality criteria, the economic limit, entitlement, aggregation and reconciliation, by section number | CITED BY SECTION, NEVER QUOTED: the licence is non-commercial and no-derivatives, and this course is sold | 2026-09-27 |
-| PRMS errata 2019 to 2022 (versions 1.01 to 1.03), consolidated | May 2022 | as SPE-PRMS 2018 | checked: no change to the sections the engine applies | cited, never quoted | 2026-09-27 |
+| SPE-PRMS 2018, Petroleum Resources Management System (SPE, WPC, AAPG, SPEE, SEG, SPWLA, EAGE) | June 2018; the English text read from the SPE-hosted English-Chinese edition (Version 2023 V1.0, developed from PRMS 2018 V1.0, uploaded February 2024) | CC BY-NC-ND 4.0, as the SPE download page states | the classes, sub-classes, categories, the commerciality criteria, the economic limit, entitlement, aggregation and reconciliation, by section number | CITED BY SECTION ONLY: the licence is non-commercial and no-derivatives, and this course is sold | 2026-09-27 |
+| PRMS errata 2019 to 2022 (versions 1.01 to 1.03), consolidated | May 2022 | as SPE-PRMS 2018 | checked: no change to the sections the engine applies | cited by item; its prose is not quoted | 2026-09-27 |
 | SPE Oil and Gas Reserves Committee, PRMS Frequently Asked Questions | November 2022 (answers dated October 2022) | copyright SPE, all rights reserved | FAQ 3.3 and 3.4 (1P = 0 when the low case fails, with its example figures), 4.3 and 4.4 (the economic limit and the contract term), 6.9 (classes kept apart) | NUMBERS AND ANSWER NUMBERS ONLY: never quoted | 2026-09-27 |
 | Guidelines for Application of the PRMS | November 2011 (superseded by the 2022 edition, which is sold and was not used) | no licence printed; treated as copyright | 6.3 and Table 6.2 (arithmetic and probabilistic addition of two gas blocks, with its printed figures), 6.4 (risked volumes) | NUMBERS AND SECTION NUMBERS ONLY: never quoted | 2026-09-27 |
 | 17 CFR 229.1202 and 229.1203 (Regulation S-K Items 1202 and 1203) | the eCFR version current at 2026-09-01 | US federal text, public domain | 1202(a)(3), arithmetic sums above the field or property level; 1203(d), proved undeveloped reserves left undeveloped for five years or more | quoted, with citation | 2026-09-27 |
@@ -67,6 +67,9 @@ THE RULE THIS COURSE FOLLOWS FOR EVERY STANDARD, LAW, REGULATION, GUIDE AND RELE
 | Significant Crude Oil and Gas Discovery Regulations, 2023 | S.I. No. 37 of 2023, Official Gazette No. 111, Vol. 110, 20 June 2023 (made 24 May 2023) | Nigerian subsidiary legislation | regs 3 and 4, the two kinds of significant discovery; reg. 5(1), the declaration; reg. 6(2) and (3), the approval and the minimum retention periods; reg. 7(1)(b), (2) and (3), a declaration that does not meet the criteria | quoted, with citation | 2026-09-27 |
 | Nigerian Upstream Petroleum (Commercial) Regulations, 2025 | S.I. No. 7 of 2025, Official Gazette No. 84, Vol. 112, 5 May 2025 | Nigerian subsidiary legislation | reg. 6, a status report that includes a statement of the reserves situation | by concept only | 2026-09-27 |
 | NUPRC media release on the national annual petroleum reserves position as at 1 January 2026 | 1 April 2026 | a government release; its page reads all rights reserved | the 2P associated and non-associated gas figures and their total, and the reserves life indices | FIGURES ONLY, cited with the date: never quoted | 2026-09-27 |
+
+The validation record, FINDINGS-prms.md (engines PR #279), lists the same texts with the sha256 of each file read and their licences, and this digest was checked against it when built. It records what was not found, verbatim:
+> Not found: a gazetted NUPRC reserves reporting regulation or booking guideline (none on the gazetted list read 2026-09-27)
 
 NOT FOUND, and said plainly. No gazetted NUPRC regulation or guideline on how reserves are booked or reported was found on the Commission's list of gazetted regulations read on 2026-09-27. The Nigerian content of this course is therefore the Act, S.I. No. 37 of 2023, the concept of the Commercial Regulations' status report, and the Commission's published national figures; the course states no Nigerian booking rule, because none was read.
 
@@ -214,7 +217,7 @@ THE US CODE OF FEDERAL REGULATIONS, TITLE 17 (PUBLIC DOMAIN):
 
 Four printed figures from the texts are run through the engine. The figures are cited as the texts print them (text); every other number is the engine's. quote_check.py checks that each text prints each figure cited here.
 
-CHECK ONE: THE FAQ 3.3 EXAMPLE (text: a technical low outcome of 5 and a best estimate of 7, the best being 5 + 2). The FAQ answer (numbers only, never quoted) takes the low case failing the economic test while the best passes. The golden input econ-faq33-low-fails states a one-year project: low 5000000, best 7000000 and high 9000000 barrels, an oil price of 10, capital of 60000000, no royalty, tax or opex, and the licence in the same year (stated). The engine returns (golden input):
+CHECK ONE: THE FAQ 3.3 EXAMPLE (text: a technical low outcome of 5 and a best estimate of 7, the best being 5 + 2). The FAQ answer (its numbers only; its prose is not quoted) takes the low case failing the economic test while the best passes. The golden input econ-faq33-low-fails states a one-year project: low 5000000, best 7000000 and high 9000000 barrels, an oil price of 10, capital of 60000000, no royalty, tax or opex, and the licence in the same year (stated). The engine returns (golden input):
 
 | case | undiscounted net cash flow at 100% | economic | reported oil |
 | --- | --- | --- | --- |
@@ -268,8 +271,8 @@ The engine's reason at the above-field level, verbatim:
 
 # SECTION 5: The Ekene field and its eight projects (owned by Associate m01 l03 and Associate m03 l04 and Professional m04 and Expert m01)
 
-Every teaching case in this course comes from one fixture file under test-data/economics/ekene-prms, written by a stated script that reproduces it. It is labelled SYNTHETIC in the file:
-> SYNTHETIC teaching data for the Ekene field (ours). No real company, field, licence, price, cost, reserves figure or regulator decision. The royalty, tax, prices and costs are synthetic stated figures, not the PIA 2021 or NTA 2025 rates.
+Every teaching case in this course comes from one fixture file under test-data/economics/ekene-prms, written by a stated script that reproduces it. It is labelled SYNTHETIC in the file, whose statement opens, verbatim:
+> SYNTHETIC teaching data for the Ekene field (ours). No real company, field, licence, price, cost, reserves figure or regulator decision.
 
 THE FIELD (fixture): Ekene field (synthetic) on the Ekene petroleum mining lease (synthetic). Operator EKO, Ekene Operator (synthetic), with a working interest of 70.000000 percent. Money in US$.
 
@@ -843,7 +846,7 @@ SEED AND DRAWS. Run again on seed 20271112 the P90 is 17.300834 again (engine, i
 
 THE TWO BLOCKS FROM THE 2011 GUIDELINES are run in section 4 (check two), with the Guidelines' own symmetric reading and the lognormal reading beside it.
 
-CORRELATION IS STATED, NEVER ASSUMED. The refusals, verbatim:
+CORRELATION IS ALWAYS STATED. The refusals, verbatim:
 
 | golden input | the engine's message, verbatim |
 | --- | --- |
@@ -995,7 +998,7 @@ A READING is a choice the engine makes where the texts leave room, stated in its
 | READING EIGHT: a difference equal to the tolerance closes | reconcile | the reconciliation closes: every category within the stated tolerance 0.25 | a difference equal to the tolerance does not close |
 | READING NINE: the Monte Carlo low is the 0.1 quantile of the totals | aggregate | lib/conventions/percentile.js (P90 = the 0.1 quantile of the totals, the low estimate) | the low read at the 0.9 quantile (P90 read as high) |
 
-THE GUIDELINES' TABLE 6.2 READ WITH NORMAL MARGINALS is a reading of the golden input, not of the engine: the engine takes the distribution a call states, and section 4 prints the normal reading and the lognormal one beside it.
+THE GUIDELINES' TABLE 6.2 READ WITH NORMAL MARGINALS is a reading the golden input takes. The engine takes whatever distribution a call states, and section 4 prints the normal reading and the lognormal one beside it.
 
 # SECTION 26: Reference texts and their quirks (owned by Expert m06 l02)
 
@@ -1005,7 +1008,7 @@ A SUPERSEDED EDITION. The 2011 Guidelines were revised in 2022; the 2022 edition
 
 A STANDARD READ FROM A BILINGUAL EDITION. The English text of SPE-PRMS 2018 was read from the SPE-hosted English-Chinese edition (Version 2023 V1.0, developed from PRMS 2018 V1.0), whose English is the 2018 text; section numbers are the 2018 numbers.
 
-AN ERRATUM ON THE WORD ECONOMIC. The consolidated PRMS errata (May 2022, item 5) revise the glossary entry for "economic" so that it reads a zero percent discount rate, matching PRMS 3.1.2.1 (text, never quoted): the economic test is undiscounted, which is the test the engine applies.
+AN ERRATUM ON THE WORD ECONOMIC. The consolidated PRMS errata (May 2022, item 5) revise the glossary entry for "economic" so that it reads a zero percent discount rate, matching PRMS 3.1.2.1 (text; its prose is not quoted): the economic test is undiscounted, which is the test the engine applies.
 
 A RELEASE THAT PRINTS ONE FIGURE SHORT. The NUPRC release of 1 April 2026, as its page renders, prints the 2P crude oil figure as 09 billion barrels beside a condensate figure of 5.92 and a total of 37.01 billion barrels (text); the crude oil figure is truncated on the page, so the course uses only the gas figures and the total, and computes nothing from the truncated one.
 

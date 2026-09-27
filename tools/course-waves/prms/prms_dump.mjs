@@ -7,7 +7,8 @@
 // engine's own source comments and the draft validation record are
 // PROVENANCE. Where they state a figure this file recomputes it through the
 // engine on the vendored golden INPUTS, on the fixture, or on stated inputs,
-// and prints it.
+// and prints it. FINDINGS-prms.md (engines #279) is PROVENANCE too; the digest
+// checks its source table and quotes one line.
 //
 // Usage:  sh /root/cat-wip-prms/build_digest.sh > digest.tmp && mv digest.tmp digest.txt
 // Build THROUGH A TEMP FILE. A gate that reads a half written digest finds no
@@ -66,6 +67,7 @@ const GOLD = JSON.parse(fs.readFileSync(`${ROOT}/test-data/economics/goldens/prm
 const FX = JSON.parse(fs.readFileSync(`${ROOT}/test-data/economics/ekene-prms/ekene-prms.json`, 'utf8'));
 const FXREADME = fs.readFileSync(`${ROOT}/test-data/economics/ekene-prms/README.md`, 'utf8');
 const NEGCONTROL = fs.readFileSync(`${ROOT}/tools/validation/economics/negcontrol_prms.sh`, 'utf8');
+const FINDINGS = fs.readFileSync(`${ROOT}/tools/validation/economics/FINDINGS-prms.md`, 'utf8');
 const CONCEPTS = JSON.parse(fs.readFileSync(process.env.EC11_CONCEPTS || `${HERE}/concepts.json`, 'utf8'));
 const MODULES = JSON.parse(execFileSync('python3', [`${HERE}/structure.py`, '--modules'], { encoding: 'utf8' }));
 
@@ -183,7 +185,7 @@ w('# THIS FILE IS THE ONLY TEACHING TRUTH FOR THIS COURSE. Every number in every
 w();
 w('# PRECISION. Every quantity, volume, barrel, BOE, Mscf, amount of money, cash flow, NPV, percentage, chance, probability, correlation, ratio and index prints to SIX decimals; years, year counts, project counts, draws, seeds and whole inputs print as whole numbers; a figure of sixteen or more significant digits at six decimals prints with its thousands grouped by commas; an engine message, reason and basis is printed verbatim, figures and all. Inside a message the engine prints money rounded to the cent (half away from zero, trailing zeros dropped), a computed quantity or percentage to six decimals (trailing zeros dropped), and a stated input as it was given.');
 w();
-w(`# ENGINE. ${ENGINE_REL}, vendored sha-identical with petrolord-engines bb8ef5f (engines PR #278), ${engineLines} lines, at its canonical path in the NextGen repository. It imports computeCashFlow and applyJV from engines/economics/cashflow.ts, mulberry32, createCorrelatedSampler, cholesky, fitTriangularToPercentiles, triInvCDF, normalCDF, quantile and mean from lib/stats/stats.js, and OUTCOME_LABELS, EXCEEDANCE_DEFINITION and outcomeOrderViolation from lib/conventions/percentile.js, and nothing else. It makes no network call.`);
+w(`# ENGINE. ${ENGINE_REL}, vendored sha-identical with petrolord-engines bb8ef5f (engines PR #278; its validation record FINDINGS-prms.md from cc6ba77, engines PR #279), ${engineLines} lines, at its canonical path in the NextGen repository. It imports computeCashFlow and applyJV from engines/economics/cashflow.ts, mulberry32, createCorrelatedSampler, cholesky, fitTriangularToPercentiles, triInvCDF, normalCDF, quantile and mean from lib/stats/stats.js, and OUTCOME_LABELS, EXCEEDANCE_DEFINITION and outcomeOrderViolation from lib/conventions/percentile.js, and nothing else. It makes no network call.`);
 w();
 w('# AN ENGINE COURSE. There is no Suite app for this course. Every practical runs in the course\'s own calculator panels, which call this same vendored engine on the learner\'s own inputs.');
 w();
@@ -248,8 +250,8 @@ section('sources', 'The sources, their editions and licences, and the date each 
 w('THE RULE THIS COURSE FOLLOWS FOR EVERY STANDARD, LAW, REGULATION, GUIDE AND RELEASE IT USES. Each one is named with its edition or gazette date, its licence and the date it was read. Only publicly available texts are quoted, with their citation. A licensed or copyright text is taught by concept with its section numbers, and its printed figures are cited as figures; none of its prose is quoted. Every legal figure the engine applies was read from the cited text and is cited to its section or regulation; every other figure is a required input with no default. Every text below was read on 2026-09-27.');
 w();
 const SOURCES = [
-  ['SPE-PRMS 2018, Petroleum Resources Management System (SPE, WPC, AAPG, SPEE, SEG, SPWLA, EAGE)', 'June 2018; the English text read from the SPE-hosted English-Chinese edition (Version 2023 V1.0, developed from PRMS 2018 V1.0, uploaded February 2024)', 'CC BY-NC-ND 4.0, as the SPE download page states', 'the classes, sub-classes, categories, the commerciality criteria, the economic limit, entitlement, aggregation and reconciliation, by section number', 'CITED BY SECTION, NEVER QUOTED: the licence is non-commercial and no-derivatives, and this course is sold'],
-  ['PRMS errata 2019 to 2022 (versions 1.01 to 1.03), consolidated', 'May 2022', 'as SPE-PRMS 2018', 'checked: no change to the sections the engine applies', 'cited, never quoted'],
+  ['SPE-PRMS 2018, Petroleum Resources Management System (SPE, WPC, AAPG, SPEE, SEG, SPWLA, EAGE)', 'June 2018; the English text read from the SPE-hosted English-Chinese edition (Version 2023 V1.0, developed from PRMS 2018 V1.0, uploaded February 2024)', 'CC BY-NC-ND 4.0, as the SPE download page states', 'the classes, sub-classes, categories, the commerciality criteria, the economic limit, entitlement, aggregation and reconciliation, by section number', 'CITED BY SECTION ONLY: the licence is non-commercial and no-derivatives, and this course is sold'],
+  ['PRMS errata 2019 to 2022 (versions 1.01 to 1.03), consolidated', 'May 2022', 'as SPE-PRMS 2018', 'checked: no change to the sections the engine applies', 'cited by item; its prose is not quoted'],
   ['SPE Oil and Gas Reserves Committee, PRMS Frequently Asked Questions', 'November 2022 (answers dated October 2022)', 'copyright SPE, all rights reserved', 'FAQ 3.3 and 3.4 (1P = 0 when the low case fails, with its example figures), 4.3 and 4.4 (the economic limit and the contract term), 6.9 (classes kept apart)', 'NUMBERS AND ANSWER NUMBERS ONLY: never quoted'],
   ['Guidelines for Application of the PRMS', 'November 2011 (superseded by the 2022 edition, which is sold and was not used)', 'no licence printed; treated as copyright', '6.3 and Table 6.2 (arithmetic and probabilistic addition of two gas blocks, with its printed figures), 6.4 (risked volumes)', 'NUMBERS AND SECTION NUMBERS ONLY: never quoted'],
   ['17 CFR 229.1202 and 229.1203 (Regulation S-K Items 1202 and 1203)', 'the eCFR version current at 2026-09-01', 'US federal text, public domain', '1202(a)(3), arithmetic sums above the field or property level; 1203(d), proved undeveloped reserves left undeveloped for five years or more', 'quoted, with citation'],
@@ -260,6 +262,15 @@ const SOURCES = [
   ['NUPRC media release on the national annual petroleum reserves position as at 1 January 2026', '1 April 2026', 'a government release; its page reads all rights reserved', 'the 2P associated and non-associated gas figures and their total, and the reserves life indices', 'FIGURES ONLY, cited with the date: never quoted'],
 ];
 table(['text', 'edition or date', 'licence', 'what the course reads from it', 'how the course uses it', 'date read'], SOURCES.map((r) => [...r, '2026-09-27']));
+w();
+must('FINDINGS records every source as read on 2026-09-27', FINDINGS.includes('## Sources (all read 2026-09-27)'), 'read date');
+[['c6493ee7b7a7e163', 'the SPE PRMS page'], ['da67c0e0e0710d23', 'the bilingual PRMS edition'], ['185da097d801c033', 'the errata'], ['71aa4d77e0e37d70', 'the FAQ page'], ['3faa7e8d919ef3ba', 'the 2011 Guidelines'],
+  ['ce10d8b9ae96b1ee', '17 CFR 229.1202'], ['a87e712adbdb71fb', '17 CFR 210.4-10'], ['5d158ca8a16f00b2', 'the PIA 2021 PDF'], ['72f0b83400813bc5', 'S.I. No. 37 of 2023'], ['3bdd50309a308f24', 'the Commercial Regulations'], ['95402c8204fffcaf', 'the NUPRC release']]
+  .forEach(([h, what]) => must(`FINDINGS records the sha256 prefix of ${what}`, FINDINGS.includes(h), h));
+w('The validation record, FINDINGS-prms.md (engines PR #279), lists the same texts with the sha256 of each file read and their licences, and this digest was checked against it when built. It records what was not found, verbatim:');
+const NOTFOUND = FINDINGS.match(/Not found: a gazetted NUPRC reserves reporting regulation or booking guideline \(none on the gazetted list read 2026-09-27\)/);
+must('FINDINGS records that no NUPRC reserves reporting regulation was found', !!NOTFOUND, 'not found');
+quote(NOTFOUND ? NOTFOUND[0] : '');
 w();
 w('NOT FOUND, and said plainly. No gazetted NUPRC regulation or guideline on how reserves are booked or reported was found on the Commission\'s list of gazetted regulations read on 2026-09-27. The Nigerian content of this course is therefore the Act, S.I. No. 37 of 2023, the concept of the Commercial Regulations\' status report, and the Commission\'s published national figures; the course states no Nigerian booking rule, because none was read.');
 w();
@@ -306,7 +317,7 @@ w();
 const fq = runG('econ-faq33-low-fails');
 const fqc = runG('cat-faq33-incremental');
 const fqA = argsOf('econ-faq33-low-fails');
-w(`CHECK ONE: THE FAQ 3.3 EXAMPLE (text: a technical low outcome of ${S(TEXT.faq33.low)} and a best estimate of ${S(TEXT.faq33.best)}, the best being ${S(TEXT.faq33.low)} + ${S(TEXT.faq33.increment)}). The FAQ answer (numbers only, never quoted) takes the low case failing the economic test while the best passes. The golden input econ-faq33-low-fails states a one-year project: low ${S(fqA.forecasts.low[0].oil)}, best ${S(fqA.forecasts.best[0].oil)} and high ${S(fqA.forecasts.high[0].oil)} barrels, an oil price of ${S(fqA.prices[0].oil)}, capital of ${S(fqA.costs.capex[0].amount)}, no royalty, tax or opex, and the licence in the same year (stated). The engine returns (golden input):`);
+w(`CHECK ONE: THE FAQ 3.3 EXAMPLE (text: a technical low outcome of ${S(TEXT.faq33.low)} and a best estimate of ${S(TEXT.faq33.best)}, the best being ${S(TEXT.faq33.low)} + ${S(TEXT.faq33.increment)}). The FAQ answer (its numbers only; its prose is not quoted) takes the low case failing the economic test while the best passes. The golden input econ-faq33-low-fails states a one-year project: low ${S(fqA.forecasts.low[0].oil)}, best ${S(fqA.forecasts.best[0].oil)} and high ${S(fqA.forecasts.high[0].oil)} barrels, an oil price of ${S(fqA.prices[0].oil)}, capital of ${S(fqA.costs.capex[0].amount)}, no royalty, tax or opex, and the licence in the same year (stated). The engine returns (golden input):`);
 w();
 table(['case', 'undiscounted net cash flow at 100%', 'economic', 'reported oil'], ['low', 'best', 'high'].map((k) => [k, f6(fq.cases[k].undiscountedNetCashFlow), S(fq.cases[k].economic), f6(fq.cases[k].reported.oil)]));
 w();
@@ -371,8 +382,10 @@ quote(aAF.reasons.find((r) => r.startsWith('above the field level')));
 /* ============================================================ SECTION 5 */
 
 section('dataset', 'The Ekene field and its eight projects', ['Associate m01 l03', 'Associate m03 l04', 'Professional m04', 'Expert m01']);
-w('Every teaching case in this course comes from one fixture file under test-data/economics/ekene-prms, written by a stated script that reproduces it. It is labelled SYNTHETIC in the file:');
-quote(FX.synthetic);
+w('Every teaching case in this course comes from one fixture file under test-data/economics/ekene-prms, written by a stated script that reproduces it. It is labelled SYNTHETIC in the file, whose statement opens, verbatim:');
+const SYN = FX.synthetic.match(/^SYNTHETIC teaching data for the Ekene field \(ours\)\. No real company, field, licence, price, cost, reserves figure or regulator decision\./);
+must('the fixture statement opens with its two SYNTHETIC sentences', !!SYN, FX.synthetic.slice(0, 80));
+quote(SYN ? SYN[0] : '');
 must('the fixture carries its SYNTHETIC statement and names its writer', FX.synthetic.startsWith('SYNTHETIC') && FX.generatedBy === 'tools/validation/economics/make_prms_fixtures.py', FX.generatedBy);
 w();
 w(`THE FIELD (fixture): ${FX.field}. Operator ${FX.operator.id}, ${FX.operator.name}, with a working interest of ${f6(FX.operator.workingInterestPct)} percent. Money in ${FX.currency}.`);
@@ -859,7 +872,7 @@ must('the same seed reproduces and another seed moves the P90', rep1.statistical
 w();
 w(`THE TWO BLOCKS FROM THE 2011 GUIDELINES are run in ${ref('published')} (check two), with the Guidelines' own symmetric reading and the lognormal reading beside it.`);
 w();
-w('CORRELATION IS STATED, NEVER ASSUMED. The refusals, verbatim:');
+w('CORRELATION IS ALWAYS STATED. The refusals, verbatim:');
 w();
 table(['golden input', 'the engine\'s message, verbatim'], ['agg-refuse-no-correlation', 'agg-refuse-missing-pair', 'agg-refuse-duplicate-pair', 'agg-refuse-pair-constant', 'agg-refuse-rho-one', 'agg-refuse-psd', 'agg-refuse-no-seed', 'agg-refuse-iterations'].map((id) => [id, refusal(id, E.aggregate(argsOf(id))).error]));
 
@@ -991,7 +1004,7 @@ table(['reading', 'where it acts', 'the engine\'s words, verbatim', 'the alterna
   ['READING NINE: the Monte Carlo low is the 0.1 quantile of the totals', 'aggregate', aF.basis.labels, 'the low read at the 0.9 quantile (P90 read as high)'],
 ]);
 w();
-w(`THE GUIDELINES\' TABLE 6.2 READ WITH NORMAL MARGINALS is a reading of the golden input, not of the engine: the engine takes the distribution a call states, and ${ref('published')} prints the normal reading and the lognormal one beside it.`);
+w(`THE GUIDELINES\' TABLE 6.2 READ WITH NORMAL MARGINALS is a reading the golden input takes. The engine takes whatever distribution a call states, and ${ref('published')} prints the normal reading and the lognormal one beside it.`);
 
 /* ============================================================ SECTION 26 */
 
@@ -1002,7 +1015,7 @@ w('A SUPERSEDED EDITION. The 2011 Guidelines were revised in 2022; the 2022 edit
 w();
 w('A STANDARD READ FROM A BILINGUAL EDITION. The English text of SPE-PRMS 2018 was read from the SPE-hosted English-Chinese edition (Version 2023 V1.0, developed from PRMS 2018 V1.0), whose English is the 2018 text; section numbers are the 2018 numbers.');
 w();
-w(`AN ERRATUM ON THE WORD ECONOMIC. The consolidated PRMS errata (May 2022, item ${S(TEXT.errataItem)}) revise the glossary entry for "economic" so that it reads a zero percent discount rate, matching PRMS 3.1.2.1 (text, never quoted): the economic test is undiscounted, which is the test the engine applies.`);
+w(`AN ERRATUM ON THE WORD ECONOMIC. The consolidated PRMS errata (May 2022, item ${S(TEXT.errataItem)}) revise the glossary entry for "economic" so that it reads a zero percent discount rate, matching PRMS 3.1.2.1 (text; its prose is not quoted): the economic test is undiscounted, which is the test the engine applies.`);
 w();
 w(`A RELEASE THAT PRINTS ONE FIGURE SHORT. The NUPRC release of 1 April 2026, as its page renders, prints the 2P crude oil figure as ${TEXT.nuprc.crudeAsRendered} billion barrels beside a condensate figure of ${TEXT.nuprc.condensate} and a total of ${TEXT.nuprc.oilAndCondensate} billion barrels (text); the crude oil figure is truncated on the page, so the course uses only the gas figures and the total, and computes nothing from the truncated one.`);
 w();

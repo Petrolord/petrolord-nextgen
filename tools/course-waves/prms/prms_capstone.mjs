@@ -229,7 +229,7 @@ const ISUOFIA = {
       { type: 'divestments', low: 0.8, best: 1.1, high: 1.45 },
       { type: 'transfers', low: 2.2, best: 3.35, high: 4.6, note: 'Isuofia West oil moved from Contingent Resources (synthetic)' },
     ],
-    closing: { low: 25.3, best: 36.1, high: 49.35 },
+    closing: { low: 25.3, best: 36.137, high: 49.35 },
     tolerance: 0.001,
   },
 };

@@ -8,11 +8,12 @@ course's paraphrase and an EXACT excerpt of the text. This gate proves four
 things and prints every count:
 
   1. THE TEXTS ARE THE EDITIONS THE COURSE NAMES. Every file read on
-     2026-09-27 hashes to the sha256 prefix PINNED below; the prefixes of the
-     files the draft validation record lists (the PRMS page and bilingual PDF,
-     the errata, the FAQ page, the 2011 Guidelines, the eCFR sections, the
-     PIA gazette, S.I. No. 37, the Commercial Regulations, the NUPRC release)
-     are the ones it gives.
+     2026-09-27 hashes to the sha256 prefix PINNED below, and every prefix the
+     vendored FINDINGS-prms.md (engines #279) records for a file it lists (the
+     PRMS page and bilingual PDF, the errata, the key changes, the FAQ page,
+     the 2011 Guidelines, the eCFR sections, the PIA gazette, S.I. No. 37, the
+     Acreage Regulation, the Commercial Regulations, the NUPRC release) is the
+     pinned one.
   2. EVERY QUOTE IS IN ITS TEXT. Whitespace is collapsed on both sides and
      nothing else is normalised: a quote that differs by one character fails.
   3. EVERY QUOTE THE DIGEST PRINTS IS THE QUOTE, with each em or en dash the
@@ -75,7 +76,8 @@ PINS = {
     'n_Acreage_Management_and_Petroleum_Drilling_Regulation_2024_0f9b5bfd8c31b64eb380c32a.pdf': '9da025bbbd4a1a15',
     'nuprc_reserves_2026.html': '95402c8204fffcaf',
 }
-# The prefixes the draft validation record (FINDINGS-prms.md, sources table) gives for the files it lists.
+ENG = os.environ.get('EC11_ENGINES', '/root/wt-ec11-nextgen/packages/engines')
+# The files the vendored validation record (FINDINGS-prms.md, sources table) lists with a sha256 prefix.
 FINDINGS_PREFIXES = {
     'prms2018page.html': 'c6493ee7b7a7e163', 'prms_2018_english-chinese_feb_2024.pdf': 'da67c0e0e0710d23',
     'errata_2019_-_202011_consolidated_202205_final.pdf': '185da097d801c033', 'prms2018keychanges.pdf': '6f652658c4a6dfc8',
@@ -117,10 +119,20 @@ def main():
         print(f'  {f[:70]}: sha256 {h[:16]} {"is" if ok else "IS NOT"} the pinned prefix')
         if not ok:
             bad.append(f'{f} hash')
+    fpath = os.path.join(ENG, 'tools/validation/economics/FINDINGS-prms.md')
+    if not os.path.exists(fpath):
+        print(f'REFUSED: {fpath} is missing')
+        return 2
+    fnd = open(fpath, encoding='utf-8').read()
+    agree = 0
     for f, pre in FINDINGS_PREFIXES.items():
         if PINS[f] != pre:
-            bad.append(f'{f}: the pin differs from the validation record\'s prefix {pre}')
-    print(f'  validation-record prefixes agreeing with the pins: {sum(PINS[f] == p for f, p in FINDINGS_PREFIXES.items())} of {len(FINDINGS_PREFIXES)}')
+            bad.append(f'{f}: the pin differs from the listed prefix {pre}')
+        elif pre not in fnd:
+            bad.append(f'{f}: FINDINGS-prms.md does not record the prefix {pre}')
+        else:
+            agree += 1
+    print(f'  FINDINGS-prms.md records the pinned prefix of {agree} of {len(FINDINGS_PREFIXES)} files it lists')
     digest = open(os.path.join(HERE, 'digest.txt'), encoding='utf-8').read()
     ndig = norm(digest)
 

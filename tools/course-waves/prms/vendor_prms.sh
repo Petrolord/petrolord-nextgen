@@ -6,9 +6,8 @@
 # export of the commit (never a working tree). The suite reads its golden and
 # the ekene-prms fixture through a spread `read(...)` helper the walker cannot
 # parse, so those, the fixture README, the fixture writer, the oracle, the
-# timing script and the negative control are NAMED with the reason they
-# travel. FINDINGS-prms.md is not in the engines tree at bb8ef5f (the lead
-# commits it separately); the course's sources table is printed in the digest.
+# timing script, the negative control and FINDINGS-prms.md (the validation
+# record, engines #279) are NAMED with the reason they travel.
 #
 # prms.js imports engines/economics/cashflow.ts (computeCashFlow, applyJV),
 # lib/stats/stats.js (the canonical Monte Carlo) and
@@ -18,10 +17,10 @@
 # CANONICAL PATHS, NO PRIVATE ROOT. Every runtime file of the closure other than
 # prms.js is ALREADY vendored in NextGen at the very blob engines bb8ef5f
 # carries (proved below, four proofs per path, and against the
-# fix/decision-portfolio-recut branch too, which moves the shared economics
-# files: the same four blobs there). So prms.js goes to its canonical path
-# engines/economics/prms.js and nothing shared moves. When that recut merges,
-# re-run this script on the rebased branch: it refuses if any shared blob moved.
+# fix/decision-portfolio-recut branch, merged to main as 03f8399aa (#275): the
+# same four blobs there). So prms.js goes to its canonical path
+# engines/economics/prms.js and nothing shared moves. Re-run after any merge of
+# main: it refuses if any shared blob moved.
 #
 # LEDGER MODE: THE PIN DOES NOT MOVE. New paths are ledgered as kind "extra",
 # group "ec11-prms-course", pinned to the vendored blob, and clear by the
@@ -31,10 +30,11 @@
 set -euo pipefail
 ENG=/root/petrolord-engines
 NG=${NG:-/root/wt-ec11-nextgen}
-RECUT=${RECUT:-origin/fix/decision-portfolio-recut}
+RECUT=${RECUT:-origin/main}
 PIN=$(python3 -c "import json,sys;print(json.load(open(sys.argv[1]))['canonical']['commit'])" "$NG/packages/engines/VENDOR.json")
-# Vendored at bb8ef5f (engines PR #278, prms.js and its validation kit).
-REV=${REV:-bb8ef5f}
+# Vendored at bb8ef5f (engines PR #278, prms.js and its validation kit); re-vendored at
+# cc6ba77 (engines PR #279, FINDINGS-prms.md; no engine, test, golden or fixture byte changed).
+REV=${REV:-cc6ba77}
 FULL=$(git -C "$ENG" rev-parse "$REV^{commit}")
 EXP=$(mktemp -d)
 LEDGER_PY=$(mktemp)
@@ -77,7 +77,8 @@ for extra in \
   "tools/validation/economics/make_prms_fixtures.py:writes the ekene-prms fixture" \
   "tools/validation/economics/oracle_prms.py:writes the golden the suite reads" \
   "tools/validation/economics/timing_prms.js:times aggregate against its work cap" \
-  "tools/validation/economics/negcontrol_prms.sh:the negative control over the suite (34 engine plants, 6 oracle plants)"; do
+  "tools/validation/economics/negcontrol_prms.sh:the negative control over the suite (34 engine plants, 6 oracle plants)" \
+  "tools/validation/economics/FINDINGS-prms.md:the validation record (sources, editions, read dates, licences, decisions, boundary table)"; do
   p="${extra%%:*}"; why="${extra#*:}"
   [ -f "$EXP/$p" ] || { echo "REFUSES: named closure member $p is not in the tree at ${FULL:0:7}"; exit 1; }
   [ -z "${CLOSURE[$p]+x}" ] && CLOSURE[$p]="NAMED, not walked: $why"
@@ -94,7 +95,7 @@ if [ -n "$MISSED" ]; then echo "REFUSES: prms paths in ${FULL:0:7} outside the c
 echo "  every prms path at ${FULL:0:7} is in the closure"
 echo
 
-echo "SHARED RUNTIME PATHS: already vendored at the bb8ef5f blob in NextGen main AND on $RECUT (nothing moves):"
+echo "SHARED RUNTIME PATHS: already vendored at the ${FULL:0:7} blob in NextGen AND on $RECUT (nothing moves):"
 for p in $SHAREDLIST; do
   [ -n "${CLOSURE[$p]+x}" ] || { echo "REFUSES: shared path $p is not in the closure"; exit 1; }
   blobE=$(git -C "$ENG" rev-parse "$FULL:$p"); blobN=$(git hash-object "$NG/packages/engines/$p")
@@ -189,8 +190,8 @@ for p in paths:
     added.append({
         'path': p, 'kind': kind, 'group': GROUP, 'vendoredSha': blob,
         'reason': (f"EC11 prms course: vendored sha-identical from petrolord-engines {full[:7]} "
-                   f"(PR #278: engines/economics/prms.js, its jest suite, golden, the ekene-prms fixture and its writer, oracle, "
-                   f"timing script, negative control) by the wave's vendor_prms.sh, 4 proofs per path; its runtime imports "
+                   f"(PRs #278 and #279: engines/economics/prms.js, its jest suite, golden, the ekene-prms fixture and its writer, oracle, "
+                   f"timing script, negative control, FINDINGS) by the wave's vendor_prms.sh, 4 proofs per path; its runtime imports "
                    f"(cashflow.ts, irrContract.js, lib/stats, lib/conventions/percentile.js) were already vendored at the same blobs. "
                    f"{'New since' if kind == 'extra' else 'Differing from'} the canonical pin {pin[:7]}, which stays: moving it "
                    f"would also move paths other courses grade. "
