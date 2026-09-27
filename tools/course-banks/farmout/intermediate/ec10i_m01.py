@@ -94,12 +94,12 @@ q(1, "One point higher, at 36 percent paid on that farmor-side well (48000000.00
   "FIN pays 12000000.000000 and EKO 21600000.000000, the farmor side paying it all"],
  "At 36 percent the engine accepts the share and returns a carry of 0.000000, with FIN paying 14400000.000000 and EKO 19200000.000000 (engine, the course's boundary case). The boundary is inclusive: a carry of exactly 0 runs and one point below is refused. The 16000000.000000 split belongs to a share of 40 percent. A payment of 12000000.000000 would be 30 percent paid, which this rule refuses.")
 
-q(0, "Restate the Ekene Deep deal (synthetic) with \"farmor-side\": FIN earns 30.000000 percent under a 44000000.000000 gross-cost cap, the success well costing 46000000.000000 and the dry hole 40000000.000000. Which is the smallest share paid the engine will accept?",
+q(0, "Restate the Ekene Deep deal (synthetic) with \"farmor-side\": FIN earns 30.000000 percent under a 44000000.000000 gross-cost cap, the success well costing 46000000.000000 and the dry hole 40000000.000000; EKO holds 70.000000 percent and PA 30.000000 before the deal. Which floor for the share paid does the engine name when it refuses a smaller one?",
  "31.363636 percent, a floor set by the success well above the cap",
  ["30.000000 percent, the earned interest, first in the breakpoint table",
   "36.000000 percent, which zeroes the carry on any well above its cap",
   "35.960428 percent, the break-even share, below which it refuses"],
- "The engine refuses 31 and names the smallest share: \"deal.farmineePaysPct must be at or above 31.363636, the share at which the carry is 0 when the farmor side pays the excess: paying 31% of the promoted 44000000 (13640000) against its held 30% of the success well cost 46000000 (13800000) leaves a carry of -160000; got 31\". The check runs on both outcomes, and the success well above the cap sets it. 30.000000 is a breakpoint of the EMV line, which a stated deal at that share would fail. 36 is the minimum of a different well. 35.960428 is the solved break-even, a result that sets no minimum.")
+ "The engine refuses 31 and names the floor: \"deal.farmineePaysPct must be at or above 31.363636, the share at which the carry is 0 when the farmor side pays the excess: paying 31% of the promoted 44000000 (13640000) against its held 30% of the success well cost 46000000 (13800000) leaves a carry of -160000; got 31\". The check runs on both outcomes, and the success well above the cap sets it. 30.000000 is a breakpoint of the EMV line, which a stated deal at that share would fail. 36 is the minimum of a different well. 35.960428 is the solved break-even, a result that sets no minimum.")
 
 q(1, "The Ekene Deep dry hole costs 40000000.000000, under the deal's gross-cost cap of 44000000.000000, with FIN paying 40.000000 percent for 30.000000 and EKO holding 70.000000 before. What cap state and carry does the dry hole get?",
  "\"below\", and a carry of 4000000.000000",

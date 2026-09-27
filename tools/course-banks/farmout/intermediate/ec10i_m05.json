@@ -129,7 +129,7 @@
    "only a change of control needs consent (reg. 3(3))"
   ],
   "answer": 2,
-  "explanation": "The engine's basis reads \"a PPL or PML assignment needs the prior written consent of the Minister on the Commission's recommendation (PIA s.95(1) and (2)); a change of control above 50% is an assignment (s.95(3) and (14)); a PEL assignment needs the consent of the Commission (s.95(15); reg. 16)\". The Act's line is voting power that \"exceeds 50%\" (PIA s.95(14)), so exactly 50 percent is no change of control. The Commission alone consents only for a PEL."
+  "explanation": "The engine's basis reads \"a PPL or PML assignment needs the prior written consent of the Minister on the Commission's recommendation (PIA s.95(1) and (2)); a change of control above 50% is an assignment (s.95(3) and (14)); a PEL assignment needs the consent of the Commission (s.95(15); reg. 16)\". The Act's line is voting power that \"exceeds 50%\" (PIA s.95(14)), so exactly 50 percent is no change of control. For a PEL the consent is the Commission's (PIA s.95(15); AOI Regulations 2024 reg. 16(c))."
  },
  {
   "prompt": "Carry the consent fee into the value of the deal: dealValue is handed assignor fees of 392000.000000, the fee on the Ekene 5600000.000000 (PPL, 2027-05-03 and 2027-07-30). Where is it counted?",

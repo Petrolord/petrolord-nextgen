@@ -94,7 +94,7 @@ q(2, "Whose approval does a Nigerian assignment need? The engine prints its answ
  ["every assignment needs the consent of the Commission alone, which the Minister then notes (PIA s.95(15))",
   "a PPL or PML assignment needs the Minister's consent; a change of control at 50% or more is an assignment",
   "only a change of control needs consent (reg. 3(3))"],
- "The engine's basis reads \"a PPL or PML assignment needs the prior written consent of the Minister on the Commission's recommendation (PIA s.95(1) and (2)); a change of control above 50% is an assignment (s.95(3) and (14)); a PEL assignment needs the consent of the Commission (s.95(15); reg. 16)\". The Act's line is voting power that \"exceeds 50%\" (PIA s.95(14)), so exactly 50 percent is no change of control. The Commission alone consents only for a PEL.")
+ "The engine's basis reads \"a PPL or PML assignment needs the prior written consent of the Minister on the Commission's recommendation (PIA s.95(1) and (2)); a change of control above 50% is an assignment (s.95(3) and (14)); a PEL assignment needs the consent of the Commission (s.95(15); reg. 16)\". The Act's line is voting power that \"exceeds 50%\" (PIA s.95(14)), so exactly 50 percent is no change of control. For a PEL the consent is the Commission's (PIA s.95(15); AOI Regulations 2024 reg. 16(c)).")
 
 q(0, "Carry the consent fee into the value of the deal: dealValue is handed assignor fees of 392000.000000, the fee on the Ekene 5600000.000000 (PPL, 2027-05-03 and 2027-07-30). Where is it counted?",
  "In EKO's position in both outcomes: its dry hole after the farm-out is -6792000.000000",

@@ -20,7 +20,7 @@ q(2, "Of the 46000000.000000 Ekene Deep success well (synthetic), how much falls
  ["12000000.000000, what EKO pays on the dry hole, which sits inside the cap",
   "17600000.000000",
   "15200000.000000, the farmor's payment on a well of 48000000.000000"],
- "EKO's payment on the success well is 14000000.000000 in the engine's event table: its share of the promoted 44000000.000000 less FIN's promote, plus its post-deal 40 percent of the 2000000.000000 above the cap. On the 40000000.000000 dry hole it pays 12000000.000000. The other two figures come from the 48000000.000000 teaching well under its two overrun rules.")
+ "EKO's payment on the success well is 14000000.000000 in the engine's event table: what FIN's 40 percent leaves of EKO's own 70 percent of the promoted 44000000.000000, plus its post-deal 40 percent of the 2000000.000000 above the cap. On the 40000000.000000 dry hole it pays 12000000.000000. The other two figures come from the 48000000.000000 teaching well under its two overrun rules.")
 
 q(0, "A 40000000.000000 well has its carry capped at exactly 4000000.000000, the carry the promote produces when FIN pays 40.000000 percent to earn 30.000000 (EKO 70.000000, PA 30.000000 before). Which cap state and payment come back?",
  "\"exactly\", FIN paying 16000000.000000",
@@ -129,7 +129,7 @@ q(3, "Strike the cap from the Ekene deal altogether (cap \"none\"), so FIN pays 
  ["-1806224.721864, as under the gross-cost cap of 44000000.000000",
   "-1656224.721864, the figure under the farmor-side rule",
   "-706224.721864, the figure under a carry-amount cap"],
- "On deal-ekene-no-cap the engine returns FIN -1856224.721864 and EKO after the farm-out 19883033.704181: without the cap FIN pays 40 percent of the whole success well, so its EMV falls and EKO's rises by the same amount. -1806224.721864 is the fixture deal with its cap; the other two belong to two other stated caps.")
+ "On deal-ekene-no-cap the engine returns FIN -1856224.721864 and EKO after the farm-out 19883033.704181: without the cap FIN pays 40 percent of the whole success well, so its EMV falls and EKO's rises by the same amount. -1806224.721864 is the fixture deal with its cap; -1656224.721864 belongs to the \"farmor-side\" overrun rule and -706224.721864 to a carry-amount cap.")
 
 q(1, "Under the overrun rule \"farmor-side\", with every other Ekene Deep term unchanged (gross-cost cap 44000000.000000, 40.000000 percent paid for 30.000000, chance 25.000000 percent), what is FIN's EMV?",
  "-1656224.721864, still below 0",
@@ -222,7 +222,7 @@ q(0, "The Ekene Deep deal restated with \"farmor-side\" refuses any stated share
  ["31.363636 percent, where FIN's EMV is 0",
   "30.000000 percent, the first breakpoint",
   "35.594574 percent, the post-deal figure"],
- "On deal-ekene-farmor-side the engine solves 35.960428 percent, above the smallest share the stated-deal check accepts. The breakpoint table still lists 30.000000, a point on the EMV line; a deal stated there is refused. 35.594574 is the break-even under \"post-deal-interests\", and the smallest share is set by the carry reaching 0.")
+ "On deal-ekene-farmor-side the engine solves 35.960428 percent, above the floor the stated-deal check names. The breakpoint table still lists 30.000000, a point on the EMV line; a deal stated there is refused. 35.594574 is the break-even under \"post-deal-interests\", and the floor is set by the carry reaching 0.")
 
 # ---- the consent fee ----
 
@@ -282,7 +282,7 @@ q(0, "Which provision of the 2024 Regulations gives an assignor that has not pai
  ["Reg. 19(7), which sets both periods in one sentence",
   "Reg. 19(9), which opens with the 30 days of grace",
   "PIA s.95(12), which prescribes the fee"],
- "Reg. 19(8) reads \"the Assignor shall have an additional 30 days within which to pay or complete payment.\" Reg. 19(7) sets the 90 days, reg. 19(9) the surcharge of 0.01 percent a day for 90 days, and PIA s.95(12) the fee as a percentage of the value of the transaction. The engine's constants cite each.")
+ "Reg. 19(8) reads \"the Assignor shall have an additional 30 days within which to pay or complete payment.\" Reg. 19(7) sets the 90 days, reg. 19(9) the surcharge of 0.01 percent a day for 90 days, and PIA s.95(12) the fee as a percentage of the value of the transaction. The engine's constants cite each of the three regulations.")
 
 q(3, "On a PPL fee of 392000.000000 (5600000.000000, \"contract-amount\", intraGroup false) notified 2027-01-01, what is the most surcharge the engine ever charges before the consent is deemed withdrawn?",
  "3528.000000, on the ninetieth surcharge day",

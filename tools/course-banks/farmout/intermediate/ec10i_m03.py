@@ -85,7 +85,7 @@ q(3, "Penn State EME 801, Lesson 6 prints a drill yourself or farm out problem: 
  ["17500.000000 and 12500.000000, the drill-yourself EMV being the larger of the two",
   "500000.000000 and 17500.000000, the dry-hole cost left out of the drilling EMV",
   "12500.000000 and 50000.000000, the farm-out payoff taken as its own EMV"],
- "On deal-psu-eme801 the engine returns 12500.000000 for drilling yourself and 17500.000000 for farming out, the figures the page prints (text, numbers only; the licence is non-commercial, so the course cites the figures and none of the words). Farming out is the larger EMV. Leaving out the dry hole, or taking a payoff as its EMV, ignores the chance.")
+ "On deal-psu-eme801 the engine returns 12500.000000 for drilling yourself and 17500.000000 for farming out, which match the page's printed figures to six decimals (text, numbers only; the licence is non-commercial, so the course cites the figures and none of the words). Farming out is the larger EMV. Leaving out the dry hole, or taking a payoff as its EMV, ignores the chance.")
 
 q(0, "A deal's EMVs depend on when each payment falls. What does the engine's basis say about the timing it uses?",
  "the success-case value is at the valuation date; well costs, bonus, reimbursement and fees fall at the valuation date, undiscounted",

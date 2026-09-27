@@ -82,19 +82,19 @@ q(3, "By a typing slip the payment date, 2027-01-09, lands a day before the noti
   "payment.notifiedOn must be on or before the payment 2027-01-09; got \"2027-01-10\", the earlier field named"],
  "The engine refuses the payment date by name, in its own words: \"payment.paidOn must be on or after the notification 2027-01-10; got \"2027-01-09\"\". The days run from the notification of the consent, so a payment before it is refused; the engine moves no date.")
 
-q(1, "A notification date of 2027-02-30 is keyed in, with payment 2027-03-01, for the PPL fee on 5600000.000000 (contract amount). Which answer appears?",
+q(1, "A notification date of 2027-02-30 is keyed in, with payment 2027-03-01, for the PPL fee on 5600000.000000 (contract amount, intraGroup false). Which answer appears?",
  "payment.notifiedOn must be a real date 'YYYY-MM-DD'; got \"2027-02-30\"",
  ["A result counting from 2027-03-02, the overflow carried",
   "A result counting from 2027-02-28, with the change noted",
   "payment.paidOn must be on or after the notification 2027-02-30; got \"2027-03-01\""],
  "The engine refuses the notification date, in its own words: \"payment.notifiedOn must be a real date 'YYYY-MM-DD'; got \"2027-02-30\"\". There is no 30 February, and the engine rolls no date forward or back. It refuses the date before it compares the two dates.")
 
-q(2, "Before the consent is even notified, a learner prices it with both date controls cleared: a PPL at the gazetted rates on 5600000.000000 (\"contract-amount\", intraGroup false), no notification and no payment date. What comes back?",
+q(2, "Before the consent is even notified, a learner prices it with no payment entry in the call at all: a PPL at the gazetted rates on 5600000.000000 (\"contract-amount\", intraGroup false), no notification date and no payment date. What comes back?",
  "The fee of 392000.000000, and nothing on timing: payment none",
- ["A refusal: payment.notifiedOn must be a real date 'YYYY-MM-DD'; got nothing, the dates being required",
+ ["A refusal naming payment, since a call at the gazetted rates must carry both of its dates",
   "The fee with a status of \"on-time\", a payment with no dates being taken as made on the day of notification",
   "The fee with the full 90 days of surcharge added"],
- "On fee-no-payment the engine computes the fee, 392000.000000, and returns payment none: a call with no payment dates says nothing about timing. The dates are optional as a group; the panel removes the whole payment entry when both date controls are cleared, so no empty payment reaches the engine. It assumes no payment date and adds no surcharge.")
+ "On fee-no-payment the engine computes the fee, 392000.000000, and returns payment none: a call with no payment dates says nothing about timing. The dates are optional, so leaving them out is no refusal. The engine assumes no payment date, so it reports no status and adds no surcharge.")
 
 q(0, "Why does ninety days of lateness cost only 3528.000000 on the 392000.000000 fee (value 5600000.000000; notice 2027-01-01, payment 2027-07-30)?",
  "0.01 percent of the fee a day, straight line: 39.200000 a day for 90 days",

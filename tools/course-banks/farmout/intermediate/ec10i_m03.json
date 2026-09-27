@@ -118,7 +118,7 @@
    "12500.000000 and 17500.000000"
   ],
   "answer": 3,
-  "explanation": "On deal-psu-eme801 the engine returns 12500.000000 for drilling yourself and 17500.000000 for farming out, the figures the page prints (text, numbers only; the licence is non-commercial, so the course cites the figures and none of the words). Farming out is the larger EMV. Leaving out the dry hole, or taking a payoff as its EMV, ignores the chance."
+  "explanation": "On deal-psu-eme801 the engine returns 12500.000000 for drilling yourself and 17500.000000 for farming out, which match the page's printed figures to six decimals (text, numbers only; the licence is non-commercial, so the course cites the figures and none of the words). Farming out is the larger EMV. Leaving out the dry hole, or taking a payoff as its EMV, ignores the chance."
  },
  {
   "prompt": "A deal's EMVs depend on when each payment falls. What does the engine's basis say about the timing it uses?",
