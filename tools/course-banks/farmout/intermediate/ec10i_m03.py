@@ -87,7 +87,7 @@ q(3, "Penn State EME 801, Lesson 6 prints a drill yourself or farm out problem: 
   "12500.000000 and 50000.000000, the farm-out payoff taken as its own EMV"],
  "On deal-psu-eme801 the engine returns 12500.000000 for drilling yourself and 17500.000000 for farming out, the figures the page prints (text, numbers only; the licence is non-commercial, so the course cites the figures and none of the words). Farming out is the larger EMV. Leaving out the dry hole, or taking a payoff as its EMV, ignores the chance.")
 
-q(0, "Which sentence is the engine's stated timing choice for a deal's EMVs, as its basis prints it?",
+q(0, "A deal's EMVs depend on when each payment falls. What does the engine's basis say about the timing it uses?",
  "the success-case value is at the valuation date; well costs, bonus, reimbursement and fees fall at the valuation date, undiscounted",
  ["the success-case value is discounted to first production; well costs fall in the year each is drilled and are discounted at the stated rate",
   "every payment is discounted at the success-case rate from the year it falls in",
@@ -108,7 +108,7 @@ q(2, "A learner types a chance of success of 101 into the deal calculator's box.
   "A result at the stated 101, with a dry-hole weight of -1 and every EMV above its success payoff"],
  "The engine refuses the chance by name: \"project.chanceOfSuccessPct must be a number from 0 to 100; got 101\". It clamps nothing to 100 and computes no weight below 0. The message ending \"got nothing\" is the one for a chance removed from the box.")
 
-q(1, "On the Ekene Deep deal FIN's position pays 57575101.112542 on a success and -21600000.000000 on a dry hole. At what chance of success does the engine roll back its EMV, and where does that chance come from?",
+q(1, "FIN's Ekene Deep EMV of -1806224.721864 rests on a chance of success. Which chance is it, and where does it come from?",
  "25.000000 percent, a stated input of the deal with no default",
  ["27.281304 percent, the chance at which FIN's EMV is 0",
   "35.000000 percent, the producer chance of the Penn State problem, which the engine applies to every farm-out",

@@ -100,12 +100,12 @@ q(3, "The first of two events earns 40 percent from a farmor holding 70; the sec
   "A result with the second event trimmed to 30 percent and the trimming stated in a reason"],
  "The engine's words: \"events[1].earnedPct must be at most 30, the farmor's interest 70 less 40 already earned; got 35\". Interest is earned on top of what earlier events earned and comes out of the farmor's interest alone, so the cap is what the farmor has left. The engine trims nothing, and the limit is cumulative.")
 
-q(0, "On the Ekene single-well terms a learner sets the vesting control to \"not stated\". What does the engine reply?",
- "vesting must be one of \"per-event\", \"all-events\"; got nothing",
- ["A result vesting the event's interest, as a single well needs no rule",
-  "vesting must be one of \"per-event\", \"all-events\"; got \"not stated\"",
-  "A result vesting nothing, with a reason that the rule is missing"],
- "The engine's message for a vesting rule removed from the box is \"vesting must be one of \\\"per-event\\\", \\\"all-events\\\"; got nothing\": the vesting rule is a deal term with no default, even for one event. The control removes the term; it never writes the words \"not stated\" into the box. No result is returned, so nothing vests or fails to vest.")
+q(0, "A two-event deal names both of its events \"well\". What does the engine return?",
+ "events[1].name must be a name no other event has; got \"well\"",
+ ["A result with the second event merged into the first one, their gross costs added together",
+  "events[0].name must be a name no other event has; got \"well\", the first of the pair",
+  "A result in which the two events are numbered in order and the shared name is kept for both"],
+ "The engine refuses the second event by name, in its own words: \"events[1].name must be a name no other event has; got \\\"well\\\"\". Each event's reasons and vesting are reported under its name, so a repeated name would make them ambiguous. The refusal names the later event, the one that repeats a name already taken, and the engine merges and renumbers nothing.")
 
 q(1, "How does the engine's basis tie its two vesting rules to the HMRC Oil Taxation Manual (OT30021), in its own words?",
  "\"all-events\": nothing vests until every event is completed (an earn in: the work before the assignment, HMRC OT30021)",
