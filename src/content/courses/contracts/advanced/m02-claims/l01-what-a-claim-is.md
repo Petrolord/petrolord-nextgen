@@ -4,7 +4,7 @@ In this course a claim is a request for more time or money under the contract, a
 
 ## Claims live inside the contract
 
-Many international works contracts use the FIDIC conditions (Second Edition 2017, reprinted 2022), which are licensed and taught here by concept only. In their approach, the conditions define what counts as a claim, set a procedure of notice followed by detailed particulars, and give the Engineer, or the Employer's Representative in design and build forms, the task of making a fair determination under the contract. The contract manager reads the signed contract for the procedure it actually holds.
+Many international works contracts use the FIDIC conditions (Second Edition 2017, reprinted 2022), which are licensed and taught here by concept only. In their approach, the conditions define what counts as a claim, set a procedure of notice followed by detailed particulars, and give the Engineer, or the Employer's Representative in EPC or turnkey forms, the task of making a fair determination under the contract. The contract manager reads the signed contract for the procedure it actually holds.
 
 ## What a claim must state
 

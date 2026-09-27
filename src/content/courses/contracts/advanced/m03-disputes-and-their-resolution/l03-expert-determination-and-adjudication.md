@@ -10,7 +10,7 @@ The World Bank Procurement Regulations for IPF Borrowers (Seventh Edition, Septe
 
 ## The Engineer's determination
 
-Under the FIDIC conditions (Second Edition 2017, reprinted 2022), licensed and taught by concept, the Engineer, or the Employer's Representative in design and build forms, makes a fair determination of a claim under the contract. It is the first decision on a claim; the contract then provides what a party does if it disagrees.
+Under the FIDIC conditions (Second Edition 2017, reprinted 2022), licensed and taught by concept, the Engineer, or the Employer's Representative in EPC or turnkey forms, makes a fair determination of a claim under the contract. It is the first decision on a claim; the contract then provides what a party does if it disagrees.
 
 ## Reading the clause
 
@@ -29,4 +29,4 @@ EKC-06 is the synthetic instrument maintenance service with supplier IM-F (synth
 
 ### A reading
 
-An expert suits this question: it is technical and turns on records. The current contract has no such rung, so one can be used now only if both parties agree. For the renewal, the World Bank guidance supports setting the mechanism up in the contract from the start. The clause should settle who decides and how they are appointed, which questions they decide, whether the decision binds, and the steps and times to take it further. The KPI definition itself should also be fixed.
+An expert suits this question: it is technical and turns on records. The current contract has no such rung, so an expert whose decision binds both sides can be added now only by agreement with IM-F, and the renewal should build an expert rung into the contract. For the renewal, the World Bank guidance supports setting the mechanism up in the contract from the start. The clause should settle who decides and how they are appointed, which questions they decide, whether the decision binds, and the steps and times to take it further. The KPI definition itself should also be fixed.

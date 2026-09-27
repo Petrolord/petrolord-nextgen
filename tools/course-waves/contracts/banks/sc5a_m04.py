@@ -58,9 +58,9 @@ q(1, "EKC-01 is the synthetic well services call-off framework with WS-A (synthe
 
 q(0, "EKC-03 is the synthetic camp catering contract with CF-C (synthetic). CF-C withdrew half its staff last month. Ekene wants to terminate for abandonment. The file shows Ekene paid CF-C's monthly fee three months late in a row, and CF-C wrote that it could not pay its staff. What does the World Bank Contract Management Practice guidance (Second Edition, 2024), taught by concept, point to?",
   "Termination for abandonment may be indefensible where Ekene's own late payment forced the withdrawal",
-  ["Termination is secure, since a supplier's withdrawal of its staff is abandonment whatever caused the withdrawal",
-   "Termination is secure once the service credits for the missing staff have first been deducted in full",
-   "Termination is barred by law for any contract on which the buyer has ever paid one invoice late"],
+  ["Ekene's termination is secure, since any withdrawal of staff is abandonment whatever caused it",
+   "Once the service credits for the missing staff are deducted in full, termination is secure",
+   "The law bars termination on any contract where the buyer has ever paid one invoice late"],
   "A World Bank case study (Contract Management Practice guidance, Second Edition, 2024, Figure XVI, p.40) describes an employer whose own late payments forced the contractor to suspend work, which made termination for abandonment indefensible. The employer meets its own obligations, including timely payment, before relying on the contractor's default. Cause matters, service credits do not cure Ekene's default, and the source states no legal bar.",
   ['P185'])
 
@@ -80,12 +80,12 @@ q(3, "A synthetic Ekene strategy team wants its next services contracts to prote
   "The Sourcing Playbook (June 2023), Chapter 5, p.41, lists protections against supply chain risk: step-in rights, the approval of key sub-contractors and assignment and novation provisions. It does not list retention increases, sub-contracting bans, weekly price reviews or cancellation without payment, and it sets no rate of delay damages.",
   ['P187'])
 
-q(2, "EKC-05 is the synthetic flowline replacement works contract with FW-E (synthetic). FW-E has left a defect uncorrected on a finished section. On the World Bank Contract Management Practice guidance (Second Edition, 2024), taught by concept, which order of employer remedies under a works contract does the guidance list, from first to last?",
-  "Notice to correct, withholding payment, calling the performance security, delay damages, then termination on a contractual termination event",
-  ["Termination, then calling the performance security, then withholding payment, then a notice to correct if FW-E asks for another chance",
-   "Calling the performance security first, then a notice to correct, then termination, with withholding and delay damages never used",
-   "Withholding every payment first, then termination, since a notice to correct is needed only under a consultancy contract"],
-  "The World Bank Contract Management Practice guidance (Second Edition, 2024), Contractual Remedies, Figure XII, p.37, lists typical employer remedies under a works contract in rising order: a notice to correct a default, withholding payment, calling the performance security, delay damages for late completion, and termination when a contractual termination event occurs. The other orders reverse or skip that ladder.",
+q(2, "EKC-05 is the synthetic flowline replacement works contract with FW-E (synthetic). The scenario adds its own fact: one section of the flowline will be finished well after the time the contract stipulates. The World Bank Contract Management Practice guidance (Second Edition, 2024), taught by concept, gives an example list of employer remedies under a works contract, each beside the situation that may trigger it (Figure XII, p.37). Which remedy does that list tie to this situation?",
+  "Delay damages, which the list ties to works or a section not completed within the stipulated time",
+  ["Termination, which the list ties to any section finished late, whatever termination events the contract specifies",
+   "Calling the environmental and social performance security, which the list ties to late completion of a section",
+   "A referral to the dispute review board, which the list ties to every delay on a major works contract"],
+  "The World Bank Contract Management Practice guidance (Second Edition, 2024), Figure XII, p.37, gives as an example employer remedies with their triggers: delay damages when the works or a section are not completed within the stipulated time; termination on a termination event the contract specifies; calling the environmental and social performance security when the contractor breaches its environmental and social obligations; and, on major works, referrals of sexual exploitation and abuse or harassment concerns to the dispute review board. The list is an example and states no order of severity; the Ekene contract's own terms decide which remedies it holds.",
   ['P076'])
 
 q(0, "A synthetic Ekene draft works contract copies a delay damages limit of 10% of the contract price, and the drafter says the World Bank requires that figure. What does the World Bank Contract Management Practice guidance (Second Edition, 2024), taught by concept, say about the 10%?",

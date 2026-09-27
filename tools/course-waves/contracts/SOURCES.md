@@ -39,4 +39,4 @@ Every text the course teaches from, with its edition, URL, licence, the sha256 o
 
 Quoting: `quote` a public text quoted word for word with its citation; `short-quote` a text that may be quoted only briefly with its citation; `concept` a licensed or reserved text taught in the course's own words and never quoted.
 
-Passages per source: S01 15, S02 16, S03 1, S04 2, S05 1, S06 2, S07 4, S08 3, S09 6, S10 7, S11 6, S12 1, S13 1, S14 3, S15 5, S16 3, S17 33, S18 20, S19 3, S20 37, S22 20, S23 4, S25 1, S26 9, S27 5, S28 1, S29 1, S30 1, S31 1, S32 1, S33 2.
+Passages per source: S01 15, S02 16, S03 1, S04 2, S05 1, S06 2, S07 4, S08 3, S09 6, S10 7, S11 6, S12 1, S13 1, S14 3, S15 5, S16 3, S17 33, S18 20, S19 3, S20 37, S22 20, S23 4, S25 1, S26 10, S27 6, S28 1, S29 1, S30 1, S31 1, S32 1, S33 2.

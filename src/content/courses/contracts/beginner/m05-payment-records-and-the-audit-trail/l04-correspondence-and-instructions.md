@@ -1,6 +1,6 @@
 # Correspondence and instructions in writing
 
-Much of a contract is managed in conversation: on site, on the phone, in a meeting. Conversation is fine for working things out. Anything that changes what the supplier must do, or what the buyer must pay, belongs in writing, from someone with the authority to give it.
+Much of a contract is managed in conversation: on site, on the phone, in a meeting. Anything that changes what the supplier must do, or what the buyer must pay, belongs in writing, from someone with the authority to give it.
 
 ## Why writing matters
 
@@ -16,11 +16,11 @@ A field supervisor who asks a supplier for extra work may be well meaning and st
 
 ## Changes go through change control
 
-The UK Government Functional Standard GovS 008: Commercial (version 2.2, issued 1 April 2026) says at 5.4.5 that "Contract changes shall be justified and controlled", and expects approvals to be obtained before a change is implemented, with an audit trail in a change register. That is UK practice, and the habit applies on any contract. At Associate level the job is to recognise a change request and send it through the contract's change clause. How it is assessed is taught at the Professional tier.
+The UK Government Functional Standard GovS 008: Commercial (version 2.2, issued 1 April 2026) says at 5.4.5 that "Contract changes shall be justified and controlled", and expects approvals to be obtained before a change is implemented, with an audit trail in a change register. That is UK practice. At Associate level the job is to recognise a change request and send it through the contract's change clause. How it is assessed is taught at the Professional tier.
 
 ## A written instruction for defects
 
-Nigeria's Public Procurement Act 2007 (Act No. 14, Official Gazette No. 65, Vol. 94, 19 June 2007), which binds federal procuring entities and is published practice for an operator, gives one example of a written instruction at s.53(3): a variation order requiring a contractor, at its own expense, to repair or replace work done with inferior or defective materials. Even an instruction to put defects right is written.
+Nigeria's Public Procurement Act 2007 (Act No. 14, Official Gazette No. 65, Vol. 94, 19 June 2007), which binds federal procuring entities and is published practice for an operator, gives one example of a written instruction at s.53(3): the Bureau, on the procuring entity's advice or after a review or an investigation, may issue a variation order requiring a contractor, at its own expense, to repair or replace work done with inferior or defective materials. Even an instruction to put defects right is written.
 
 ## Exercise
 

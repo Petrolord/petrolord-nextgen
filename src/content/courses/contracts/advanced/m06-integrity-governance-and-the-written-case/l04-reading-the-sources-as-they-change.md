@@ -4,7 +4,7 @@ Every rule this course teaches comes from a dated text, and texts change. An exp
 
 ## This course's own dates
 
-The sources for this course were checked on 27 September 2026, and the course is due for review by 27 September 2027. Each lesson names the edition it read: the Nigerian Oil and Gas Industry Content Development Act 2010 (the content Act, Act No. 2 of 2010, commenced 22 April 2010); the Public Procurement Act 2007 (Act No. 14, Official Gazette No. 65, Vol. 94, 19 June 2007); GovS 008 (version 2.2, issued 1 April 2026); the Sourcing Playbook (June 2023); the World Bank Procurement Regulations for IPF Borrowers (Seventh Edition, September 2025); and the World Bank Contract Management Practice guidance (Second Edition, 2024). The UK Procurement Act 2023 was read as enacted; later amendments are not reflected in the copy read.
+The sources for this course were checked on 27 September 2026, and the course is due for review by 27 September 2027. Each lesson names the edition it read: the Nigerian Oil and Gas Industry Content Development Act 2010 (the content Act, Act No. 2 of 2010, commenced 22 April 2010); the Public Procurement Act 2007 (Act No. 14, Official Gazette No. 65, Vol. 94, 19 June 2007); GovS 008 (version 2.2, issued 1 April 2026); the Sourcing Playbook (June 2023); the World Bank Procurement Regulations for IPF Borrowers (Seventh Edition, September 2025); and the World Bank Contract Management Practice guidance (Second Edition, 2024). The UK Procurement Act 2023 was read as enacted, dated 26 October 2023 on its title page; amendments made after enactment are not shown in that copy, so a rule from it is checked against the current text before a decision relies on it.
 
 ## Guidelines under an Act
 

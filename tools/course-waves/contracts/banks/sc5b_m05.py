@@ -47,7 +47,7 @@ q(1, "Under Nigeria's Public Procurement Act 2007, s.37(2), when does a payment 
   "When the contractor says it is late, whatever the date the invoice was sent.",
   "When the Bureau has not approved it by the end of the financial year."],
  "Section 37(2) provides that any payment due after more than sixty days from the date of submission of the invoice, valuation certificate and confirmation or authentication by the procuring body is a delayed payment. It binds federal procuring entities and is published public practice for an operator. The 30 day figure belongs to the UK Procurement Act 2023 payment term, and neither the contractor's say-so nor the Bureau sets the clock.",
- ['P047'])
+ ['P047', 'P045'])
 
 q(0, "A federal body pays a contractor late. What do s.37(3) and (4) of Nigeria's Public Procurement Act 2007 provide?",
  "Interest at the rate the contract specifies, and every contract must include late-payment interest terms.",
@@ -73,7 +73,7 @@ q(3, "EKC-05 is a synthetic flowline replacement: FW-E (synthetic) is paid a lum
  "The World Bank Contract Management Practice guidance reminds its reader that a contract is managed on its own terms, and this milestone as defined includes the pressure test. A certificate rests on the inspection and tests the contract requires, so it waits for the test. A partial certificate is possible only where the contract pays that way, and the World Bank Regulations (Annex IX para 2.14) describe retention as released once the contractor has met its obligations, which is not yet the case.",
  ['P007', 'P055'])
 
-q(2, "The EKC-05 pressure test passes on a Friday. The manager plans to sign FW-E's certificate at the end of next month to ease Ekene's cash flow. What does the World Bank Contract Management Practice guidance (p.40) teach about the employer's side?",
+q(2, "EKC-05 is the synthetic flowline replacement works contract with FW-E (synthetic). Its pressure test passes on a Friday. The manager plans to sign FW-E's certificate at the end of next month to ease Ekene's cash flow. What does the World Bank Contract Management Practice guidance (p.40) teach about the employer's side?",
  "The employer must meet its own obligations, timely payment included.",
  ["Delay is prudent, since certifying late costs the employer nothing under any contract.",
   "Waiting is fine if FW-E has not complained before.",
@@ -99,7 +99,7 @@ q(2, "EKC-01 is a synthetic well services framework with WS-A (synthetic). An NC
 
 q(1, "Under Nigeria's Public Procurement Act 2007, s.38(5), who may inspect a federal procuring entity's procurement records on request?",
  "The Bureau, an investigator the Bureau appoints, and the Auditor-General.",
- ["Any bidder that lost the tender, together with its lawyers.",
+ ["The contractor's bank, to confirm the payments it has received.",
   "Only the procuring entity's own staff, since the records are confidential.",
   "The Board, which audits every public procurement under the content Act."],
  "Section 38(5) makes the records and documents maintained by procuring entities available for inspection by the Bureau, an investigator appointed by the Bureau and the Auditor-General upon request. It binds federal procuring entities and is public practice for an operator. The Board's audit function under the content Act, s.70(k), concerns Nigerian content, which is a separate matter.",
@@ -129,12 +129,12 @@ q(1, "EKC-06 is a synthetic instrument maintenance contract with IM-F (synthetic
  "The World Bank Contract Management Practice guidance, taught by concept, asks for named people holding delegated authority to act on a change request, and a decision binds only when its maker holds the authority to take it. A supervisor's spoken request is well meant but unauthorised, so the work waits for a written instruction under the change clause, and any hours already spent are recorded. Good faith does not turn unlisted work into contract scope.",
  ['P087', 'P021'])
 
-q(2, "A federal procuring entity finds that part of a contractor's work was done with defective materials. Under Nigeria's Public Procurement Act 2007, s.53(3), what kind of instruction puts it right?",
- "A variation order requiring the contractor to repair or replace the work at its own expense.",
- ["A spoken request on site, since defects need no paperwork.",
-  "A new contract let to another firm, paid by the entity.",
-  "A service credit deducted automatically from the next payment."],
- "Section 53(3) provides for a variation order requiring a contractor, at its own expense, to repair, replace or do anything left undone or carried out with inferior or defective materials or with less skill than the contract requires. So even an instruction to put defects right is written. The 2007 Act binds federal procuring entities and is published practice for an operator.",
+q(2, "A federal procuring entity finds that part of a contractor's work was done with defective materials. Under Nigeria's Public Procurement Act 2007, s.53(3), what written instruction may the Bureau issue, on the entity's advice or after a review or an investigation?",
+ "A variation order making the contractor repair or replace the work at its own expense.",
+ ["A spoken warning to the contractor, since defects need no written instruction.",
+  "An order cancelling the contract and letting the work to another firm at public cost.",
+  "A service credit deducted automatically from the contractor's next payment."],
+ "Section 53(3) lets the Bureau, on the procuring entity's advice, the results of its review or an investigation report, issue a variation order requiring a contractor, at its own expense, to repair, replace or do anything left undone or carried out with inferior or defective materials or with less skill than the contract requires. So even an instruction to put defects right is written. The 2007 Act binds federal procuring entities and is published practice for an operator.",
  ['P089'])
 
 emit(Q, '/root/cat-wip-contracts/banks/sc5b_m05.json', expect_n=15)

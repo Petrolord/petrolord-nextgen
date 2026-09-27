@@ -1,6 +1,6 @@
 # Step-in and other interventions
 
-Between a formal notice and termination lies a range of stronger interventions. The Professional tier taught the first remedies; this lesson reads the heavier ones and the order in which a contract manager reaches for them.
+Between a formal notice and termination lies a range of stronger interventions. The Professional tier taught the first remedies; this lesson reads the heavier ones and how a contract manager chooses among them.
 
 ## The tools the contract may hold
 
@@ -8,9 +8,9 @@ The UK Contract Management Principles, published by the Crown Commercial Service
 
 The Principles call them contractual options: each exists on an Ekene contract only if that contract grants it, and works on the terms the contract sets.
 
-## The ladder of remedies
+## Remedies and their triggers
 
-The World Bank Contract Management Practice guidance (Second Edition, 2024), taught by concept as published practice, lists typical employer remedies under a works contract in rising order: a notice to correct a default, withholding payment, calling the performance security, delay damages for late completion, and termination when a contractual termination event occurs (Figure XII, p.37).
+The World Bank Contract Management Practice guidance (Second Edition, 2024), taught by concept as published practice, gives an example list of employer remedies under a works contract, each beside its trigger: a notice to correct a default; withholding payment; calling the performance security when the contractor breaches its obligations; calling the environmental and social security; delay damages for late completion; termination on a termination event the contract specifies; and, on major works, referrals to the dispute review board (Figure XII, p.37). The list sets no order of severity.
 
 On delay damages the same guidance explains that they are deducted as a percentage or an amount for late completion, usually with an aggregate limit; it gives 10% of the contract price as an illustration of such a limit. Reaching the limit usually permits termination, though continuing may still be the better option (p.38). The 10% is an illustration from World Bank guidance. An Ekene contract states its own rate and limit, if it has any.
 

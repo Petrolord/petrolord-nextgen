@@ -6,7 +6,7 @@ A contract manager makes decisions worth money to the supplier every week: certi
 
 The UK Conflicts of Interest guidance under the Procurement Act 2023 (2024), used as published good practice, defines it: "A conflict of interest arises in a procurement context where there is a conflict between the interests of a person acting in relation to a procurement and those of the procurement itself." (para 2).
 
-The Public Procurement Act 2007 (Act No. 14, Official Gazette No. 65, Vol. 94, 19 June 2007) binds federal procuring entities; for an operator it is a published statement of public procurement practice. Its s.57(12) lists what counts as a conflict, including a direct or indirect interest in or relationship with a supplier or contractor that could bring personal gain, taking personal advantage of an opportunity that belongs to the entity, and passing confidential information to a supplier or contractor.
+The Public Procurement Act 2007 (Act No. 14, Official Gazette No. 65, Vol. 94, 19 June 2007) binds federal procuring entities; for an operator it is a published statement of public procurement practice. Its s.57(12) lists what counts as a conflict, including a direct or indirect interest in or relationship with a supplier or contractor that could bring personal gain, taking personal advantage of an opportunity that belongs to the entity, and disclosing confidential information, a supplier's or contractor's included, to unauthorised persons (s.57(12)(b), (f) and (h)).
 
 ## Declare at once
 

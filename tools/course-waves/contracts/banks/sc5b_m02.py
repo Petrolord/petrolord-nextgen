@@ -18,10 +18,10 @@ def q(k,p,c,ds,e,src):
 # FILLED AT THE BANK STAGE (Associate bank writer).
 
 q(1, "EKC-01 is a synthetic well services framework with WS-A (synthetic). Ekene named its contract manager a week after award, and nobody from the tender team briefed that person. Which UK Contract Management Principle did this miss?",
- "Principle 1: appoint resource well before award and hand over effectively from sourcing.",
- ["Principle 7, on a balanced scorecard.",
-  "Principle 4, on directing resource by risk.",
-  "Principle 2, on accountability."],
+ "Principle 1, on early resourcing and handover from sourcing.",
+ ["Principle 7, on a balanced scorecard of measures.",
+  "Principle 4, on directing resource where the risk is.",
+  "Principle 2, on clear accountability for the contract."],
  "The UK Contract Management Principles, principle 1, say to make sure adequate resource is identified and appointed well before award and that there is an effective handover or transition from sourcing to contract management. A late appointment with no briefing misses both halves. Principles 2, 4 and 7 deal with roles, risk-based resourcing and measurement, which are real duties but different ones.",
  ['P013'])
 
@@ -31,7 +31,7 @@ q(3, "The new manager of EKC-01, the synthetic WS-A framework, needs a baseline 
   "A copy of WS-A's audited accounts, which the Board uses to fix the Nigerian share of each call-off.",
   "The minimum Nigerian labour percentage the Board had stipulated for WS-A's cadres under its labour clause."],
  "Under the content Act, s.22, the operator gives the Board before award the selected contractor, designated sub-contractors, commencement and completion dates and, for construction or service contracts, the estimated Nigerian employment in person-hours. Those award-stage numbers become the baseline the manager reports against. The content Act asks for no audited accounts here, and a labour clause percentage arises under s.34 only for contracts whose total budget exceeds $100 million (USD).",
- ['P108'])
+ ['P108', 'P118'])
 
 q(0, "Responsibility for EKC-04, the synthetic casing and tubulars frame agreement with TB-D (synthetic), passes from the procurement team to a contract management team. What does the UK guidance on conflicts of interest under the Procurement Act 2023 (para 24) recommend at this point?",
  "Refresh the conflicts assessment for the people now running the contract.",
@@ -66,8 +66,8 @@ q(0, "When should the contract management plan for EKC-05, the synthetic FW-E fl
  ['P018'])
 
 q(3, "EKC-01, the synthetic WS-A framework, has a Nigerian content plan with quarterly reporting. Which heading from the World Bank list of what a contract management plan typically covers (Procurement Regulations, Seventh Edition, Annex XI para 3.1) will feed that reporting most directly?",
- "Local labour monitoring.",
- ["Milestones and the critical path, which show when WS-A mobilises each crew.",
+ "Local labour monitoring, kept for each crew and each call-off.",
+ ["Milestones and the critical path, which show when WS-A mobilises.",
   "Key terms, which repeat the framework's call-off procedure for each well.",
   "Variation and change control, which record every change to the scope of work."],
  "The World Bank list in Annex XI para 3.1 includes local labour monitoring, and on an Ekene contract that heading feeds the Nigerian content reporting the content Act requires. Milestones, key terms and change control belong in the plan too, but none of them records who worked the hours, which is what the content report needs.",
@@ -98,8 +98,8 @@ q(3, "EKC-02 is a synthetic vessel charter with MV-B (synthetic). At the kick-of
  ['P024'])
 
 q(1, "FW-E (synthetic) is mobilising for EKC-05, a complex synthetic works contract. On a contract like this, what does GovS 008, the UK commercial functional standard, expect to be confirmed during mobilisation (5.4.1)?",
- "The roles for managing the contract are confirmed.",
- ["The contract is retendered if FW-E's crew has not arrived within a week.",
+ "Who holds each role in managing it, commercial specialists included, is confirmed.",
+ ["A retender of the contract if FW-E's crew has not arrived within a week.",
   "The senior business owner hands the contract to FW-E to manage on Ekene's behalf.",
   "The retention is released early so that FW-E can fund its mobilisation costs."],
  "GovS 008 at 5.4.1 treats mobilisation as the start of delivery and, for more complex contracts, expects the roles for managing the contract (senior business owner, contract manager, commercial specialists) to be confirmed during it. Simple, low cost contracts may need no commercial specialist support. Retendering, handing management to the supplier and releasing retention early are not what the standard describes.",
@@ -119,7 +119,7 @@ q(0, "A trainee reads that Nigeria's Public Procurement Act 2007, s.35(1), allow
   "Not more than 15%, and binding on Ekene exactly as it binds a federal procuring entity.",
   "Any amount the parties agree, since s.35(1) sets no ceiling on the fee."],
  "The Public Procurement Act 2007, s.35(1), provides that a mobilisation fee of not more than 15% may be paid to a supplier or contractor, supported by the items the section lists. The 2007 Act binds federal procuring entities, and for an operator such as Ekene it is a published statement of public practice. The 10% figure belongs to the performance guarantee in s.36, and treating the 2007 Act as binding on an operator mistakes whom it governs.",
- ['P049'])
+ ['P049', 'P051'])
 
 q(2, "A federal procuring entity has paid a mobilisation fee to a contractor. Under Nigeria's Public Procurement Act 2007, s.35(2), what must exist before any further payment is made?",
  "An interim performance certificate issued in accordance with the contract.",
@@ -135,7 +135,7 @@ q(1, "Under Nigeria's Public Procurement Act 2007, s.36, a federal procuring ent
   "Whatever the contractor offers, as s.36 leaves it open.",
   "At least 5% of the project sum, as in the content Act."],
  "Section 36 makes a Performance Guarantee a precondition for any contract on which a mobilisation fee is paid, of not less than 10% of the contract value or an amount equal to the fee requested, whichever is higher. The 15% figure is the ceiling on the fee in s.35(1), and the five per cent in the content Act, s.68, is a fine, which is a different thing altogether.",
- ['P051'])
+ ['P051', 'P049', 'P133'])
 
 emit(Q, '/root/cat-wip-contracts/banks/sc5b_m02.json', expect_n=15)
 finish()

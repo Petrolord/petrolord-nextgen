@@ -1,6 +1,6 @@
 # Negotiation and mediation
 
-Negotiation is the parties settling a matter between themselves. Mediation brings in a neutral mediator who helps them reach their own settlement without deciding it for them. For mediation seated in Nigeria, the Arbitration and Mediation Act 2023 (Nigeria), which repeals the Arbitration and Conciliation Act, sets the rules this lesson reads by section.
+Negotiation is the parties settling a matter between themselves. For mediation seated in Nigeria, the Arbitration and Mediation Act 2023 (Nigeria), which repeals the Arbitration and Conciliation Act, sets the rules this lesson reads by section. Its s.91(1) defines mediation as a process in which the parties ask a third person, the mediator, "to assist them in their attempt to reach an amicable settlement of their dispute", and "the mediator does not have the authority to impose upon the parties a solution to the dispute".
 
 ## Negotiating from the record
 
@@ -18,7 +18,7 @@ Section 71(1) protects the time a party has to bring its claim:
 
 ## What is said stays confidential
 
-Under s.76, unless the parties agree otherwise, everything about the mediation stays confidential. The exceptions are disclosure required by law, disclosure needed to implement or enforce the settlement, and disclosure needed to prevent or reveal a crime or a threat to a party. The contract manager keeps mediation papers apart from the ordinary contract file.
+Under s.76, unless the parties agree otherwise, everything about the mediation stays confidential. There are four exceptions: disclosure required by law; disclosure to implement or enforce a settlement agreement; disclosure needed to prevent or reveal a crime, its concealment or a threat to a party; and disclosure needed to protect public order, only as the law prescribes. The contract manager keeps mediation papers apart from the ordinary contract file.
 
 ## The settlement binds
 
@@ -26,7 +26,7 @@ Section 82(2) states that "the settlement agreement resulting from the mediation
 
 ## Exercise
 
-EKC-07 is the synthetic environmental monitoring consultancy with supplier EM-G (synthetic), paid a time-based fee against approved timesheets, with a named key person and a report acceptance step. The scenario adds its own facts: Ekene has rejected two quarterly reports as incomplete and withheld the related fees; EM-G says the reports meet the terms of reference. Senior meetings have failed, and the contract requires mediation before arbitration. Write the headings of the mediation invitation and a note of what you will do with the outcome.
+EKC-07 is the synthetic environmental monitoring consultancy with supplier EM-G (synthetic), paid a time-based fee against approved timesheets. The scenario adds its own facts: Ekene has rejected two quarterly reports as incomplete and withheld the related fees; EM-G says the reports meet the terms of reference. Senior meetings have failed, and the contract requires mediation before arbitration. Write the headings of the mediation invitation and a note of what you will do with the outcome.
 
 ### A reading
 

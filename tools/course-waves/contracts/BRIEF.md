@@ -11,8 +11,8 @@ visible "Practice course" badge and a review date.
 ## THE ONE RULE ABOUT TRUTH
 
 **`PACK.md` is the only teaching truth for this course.** It is built by
-`build_pack.py` from `sources/SOURCES.json` and `passages.json` and prints 215
-numbered passages (P001 to P215) from 32 sources, each with its source, edition,
+`build_pack.py` from `sources/SOURCES.json` and `passages.json` and prints 217
+numbered passages (P001 to P217) from 32 sources, each with its source, edition,
 locator and mode. Things around this wave that look like truth and are not:
 
 | file | what it is |

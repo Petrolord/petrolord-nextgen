@@ -117,7 +117,8 @@
   "P160",
   "P038",
   "P039",
-  "P042"
+  "P042",
+  "P007"
  ],
  "beginner/m05-payment-records-and-the-audit-trail/l01-checking-an-invoice": [
   "P054",
@@ -276,7 +277,8 @@
   "P082",
   "P083",
   "P086",
-  "P102"
+  "P102",
+  "P085"
  ],
  "intermediate/m03-variations-and-change-control/l05-the-change-register": [
   "P078",
@@ -350,7 +352,8 @@
   "P182",
   "P068",
   "P186",
-  "P185"
+  "P185",
+  "P183"
  ],
  "intermediate/m06-poor-performance-and-remedies/l03-recording-poor-performance": [
   "P071",
@@ -445,7 +448,8 @@
   "P171",
   "P172",
   "P173",
-  "P021"
+  "P021",
+  "P216"
  ],
  "advanced/m03-disputes-and-their-resolution/l03-expert-determination-and-adjudication": [
   "P163",
@@ -558,7 +562,8 @@
   "P137",
   "P141",
   "P052",
-  "P186"
+  "P186",
+  "P217"
  ],
  "advanced/m06-integrity-governance-and-the-written-case/l05-the-written-case-brief": [
   "P007",

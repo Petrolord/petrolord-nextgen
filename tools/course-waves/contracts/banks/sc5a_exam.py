@@ -72,7 +72,7 @@ q(3, "Case. Ekene's synthetic portfolio has two contract managers. The strategy 
   ['P004'])
 
 q(2, "Case. EKC-04 is the synthetic casing and tubulars frame agreement with supplier TB-D (synthetic). TB-D is the Nigerian agent of a foreign mill. The draft renewal leaves out every Nigerian content term, and a reviewer argues that a contract with a foreign mill's agent falls outside the content Act. Question: what do the sources support?",
-  "The renewal must conform to the content Act under s.6, and every contractor in the industry considers Nigerian content under s.2",
+  "The content Act, s.6, requires the renewal to conform to it, and s.2 has every contractor in the industry consider Nigerian content",
   ["The content Act applies only to operators, so a contractor such as TB-D carries no content duties under its agreement with the operator",
    "The content Act applies only to contracts above $100 million (USD), so the frame agreement needs no content terms",
    "The content Act binds only where the Public Procurement Act 2007 also applies, so an operator's contract is outside it in every respect"],
@@ -140,19 +140,19 @@ q(2, "Case. A synthetic review of all Ekene claims over two years finds that mos
 # ---- Cases 15 to 21: disputes (Expert m03) ----
 
 q(1, "Case. EKC-02 is the synthetic platform supply vessel time charter with supplier MV-B (synthetic). The charter requires mediation before arbitration. After senior meetings on a disputed off-hire period failed, MV-B sent Ekene a written invitation to mediate, stating no time for acceptance. Ekene's reply has sat in a draft folder for six weeks. Question: under the Arbitration and Mediation Act 2023 (Nigeria), s.70(1) and (2), what is MV-B's position?",
-  "Six weeks of silence let MV-B treat its invitation as rejected, since no acceptance came within the 30 days that apply when no time is stated",
-  ["MV-B must wait for Ekene's reply however long it takes, since an invitation stays open until it is answered in writing",
-   "MV-B's invitation lapses after six weeks and must be sent again by the court, since s.70 names a court process for it",
-   "MV-B may treat Ekene's silence as acceptance and appoint the mediator alone, since silence counts as consent under s.70 under the Arbitration and Mediation Act"],
+  "MV-B may treat the invitation as rejected, since no acceptance came within the 30 days that apply by default",
+  ["Ekene's draft reply keeps the invitation open, since an invitation to mediate stays live until it is answered in writing",
+   "A court must now reissue the invitation, since s.70 routes an invitation left unanswered through a court process",
+   "Silence counts as consent under s.70, so MV-B may appoint the mediator alone and open the mediation"],
   "Under the Arbitration and Mediation Act 2023 (Nigeria), s.70(1) and (2), an invitation to mediate that meets no acceptance within 30 days of being sent, or within any other period the invitation itself sets, may be treated by the party who sent it as rejected. MV-B set no period, so 30 days ran and Ekene's draft reply came too late. Nothing in s.70 keeps an invitation open indefinitely, routes it through the court, or turns silence into consent.",
   ['P170'])
 
-q(3, "Case. EKC-03 is the synthetic camp catering and facility services contract with supplier CF-C (synthetic). A mediation in Nigeria ended in a signed settlement under which CF-C would refund two months of service credits. CF-C has not paid. Ekene's lawyers want to put the settlement and the mediation papers it depends on before the court to enforce it. CF-C's lawyer says the Arbitration and Mediation Act 2023 bars any use of mediation material. Question: what does that Act provide?",
+q(3, "Case. EKC-03 is the synthetic camp catering and facility services contract with supplier CF-C (synthetic). A mediation in Nigeria ended in a signed settlement under which CF-C would refund two months of service credits. CF-C has not paid. Ekene's lawyers want to put the settlement before the court to enforce it. CF-C's lawyer says the Arbitration and Mediation Act 2023 bars any use of mediation material. Question: what does that Act provide?",
   "Section 76 lets a party disclose what is needed to implement or enforce the settlement, and s.82(2) makes the settlement enforceable in court",
   ["Section 76 bars every disclosure without exception, so Ekene must start the whole dispute again from the first rung of the ladder",
    "Section 76 lets Ekene publish the whole mediation file to anyone, since a party in breach of a settlement loses all confidentiality in any circumstances",
    "Section 76 permits disclosure only to the Board, since the mediation of any oil and gas contract is reported to the Board alone"],
-  "Confidentiality under the Arbitration and Mediation Act 2023 (Nigeria), s.76, has named exceptions, and disclosure needed to implement or enforce the settlement is one of them, beside disclosure required by law and disclosure to prevent or reveal a crime or a threat. Section 82(2) makes the settlement binding and enforceable in court as a contract, consent judgment or consent award. So Ekene may use what enforcement needs, and no more: the exception does not open the whole file to the public, and the Board has no part in it.",
+  "Confidentiality under the Arbitration and Mediation Act 2023 (Nigeria), s.76, has named exceptions, and disclosure needed to implement or enforce the settlement is one of them, beside disclosure required by law, disclosure to prevent or reveal a crime or a threat, and disclosure to protect public order as the law prescribes. Section 82(2) makes the settlement binding and enforceable in court as a contract, consent judgment or consent award. So Ekene may use what enforcement needs, and no more: the exception does not open the whole file to the public, and the Board has no part in it.",
   ['P172', 'P173'])
 
 q(0, "Case. EKC-07 is the synthetic environmental monitoring consultancy with supplier EM-G (synthetic), whose contract holds an arbitration clause seated in Nigeria. EM-G sued Ekene in court over withheld fees. Ekene's lawyers filed a full defence on the merits last month without mentioning arbitration, and now wish to ask the court to refer the matter to arbitration. Question: what does the Arbitration and Mediation Act 2023 (Nigeria), s.5(1), make the key issue?",
@@ -165,18 +165,18 @@ q(0, "Case. EKC-07 is the synthetic environmental monitoring consultancy with su
 
 q(2, "Case. EKC-02 is the synthetic platform supply vessel time charter with supplier MV-B (synthetic). A tribunal seated in Lagos decided an off-hire dispute for MV-B, and Ekene's legal department logged receipt of the award the day it arrived. The department now proposes to hold back any challenge until MV-B moves to enforce, which may be a year away. Question: under the Arbitration and Mediation Act 2023 (Nigeria), s.55(4), what is wrong with holding back?",
   "The time to apply to set the award aside ends three months after Ekene received it, whatever MV-B does",
-  ["Nothing, since a challenge to an award may wait until the winning party asks a court to enforce it in the courts",
+  ["Nothing, since a challenge to an award may wait until the winning party applies to a court to enforce it",
    "Nothing, since the time for any challenge starts only when MV-B serves its notice of enforcement",
-   "The award lapses unless Ekene challenges it within 30 days of the final hearing held in Lagos"],
+   "The award lapses unless Ekene challenges it within 30 days of the tribunal's final hearing"],
   "Section 55(4) of the Arbitration and Mediation Act 2023 (Nigeria) bars an application for setting aside once three months have elapsed from the date the applicant received the award. Receipt was logged, so the period is already running, and MV-B's timing on enforcement does not pause it. The section does not make an award lapse, and 30 days is the s.70 period for an unanswered invitation to mediate.",
   ['P174'])
 
 q(1, "Case. EKC-04 is the synthetic casing and tubulars frame agreement with supplier TB-D (synthetic). Ekene and TB-D disagree whether a batch of casing met the specification's hardness test, a question an independent metallurgist could settle in days. The agreement's dispute clause runs from senior meetings straight to arbitration, with no expert rung. Question: what do the sources support?",
-  "An expert may be used now only if both parties agree, and the renewal should set up an expert rung in the contract from the start",
+  "An expert whose decision binds both sides can be added now only by agreement with TB-D, and the renewal should build an expert rung into the contract",
   ["Ekene may appoint an expert alone and bind TB-D to the finding, since a technical question overrides the dispute clause as written",
    "The matter must go to arbitration at once, since the sources forbid any expert where the contract omits an expert rung from its ladder",
    "The renewal should leave out any expert rung, since the World Bank guidance says experts work best when chosen later"],
-  "The World Bank Contract Management Practice guidance (Second Edition, 2024), p.36, says alternative mechanisms such as a dispute review expert should be set up on time, since creating one after a dispute starts tends to fail, and a contract is managed on its own terms (p.1). The current clause has no expert, so one can be used only by agreement, and the renewal should build it in.",
+  "The World Bank Contract Management Practice guidance (Second Edition, 2024), p.36, says alternative mechanisms such as a dispute review expert should be set up on time, since creating one after a dispute starts tends to fail, and a contract is managed on its own terms (p.1). The current clause has no expert, so an expert whose decision binds both sides can be added only by agreement with TB-D, and the renewal should build that rung in.",
   ['P163', 'P007'])
 
 q(3, "Case. EKC-05 is the synthetic flowline replacement works contract with supplier FW-E (synthetic). FW-E disputes the valuation of two variations. The contract's dispute clause provides a meeting of senior representatives, then mediation, then arbitration. FW-E's director writes that meetings waste time and he will start arbitration next week. Question: what do the sources support Ekene's reply saying?",
@@ -188,10 +188,10 @@ q(3, "Case. EKC-05 is the synthetic flowline replacement works contract with sup
   ['P162', 'P007'])
 
 q(0, "Case. EKC-04 is the synthetic casing and tubulars frame agreement with supplier TB-D (synthetic). A tribunal seated abroad, under the agreement's arbitration clause, has made an award in Ekene's favour. TB-D refuses to pay and says a foreign award has no effect in Nigeria. Question: what does the Arbitration and Mediation Act 2023 (Nigeria), s.57(1) and (3), provide for Ekene?",
-  "The 2023 Act treats the award as binding although it was made abroad, and Ekene may apply in writing to the Court to enforce it",
-  ["The award binds only in the country of the seat, so Ekene must bring a new claim in a Nigerian court",
-   "The award has effect only if TB-D signs a consent to it, since a foreign award needs the loser's consent",
-   "The award must be reheard in full before a Nigerian judge, who may then substitute a decision of the Court of the Federal High Court"],
+  "Ekene may apply in writing to the Court to enforce the award, which the 2023 Act treats as binding wherever made",
+  ["The award binds only in the country of the seat, so Ekene must bring a fresh claim before a Nigerian court",
+   "TB-D must first sign a consent to the award, since a foreign award has effect in Nigeria only with the loser's consent",
+   "A Nigerian judge must rehear the whole dispute and decide it afresh before anything can be enforced"],
   "Under the Arbitration and Mediation Act 2023 (Nigeria), s.57(1) and (3), the country where an award was made does not decide its force: the award is recognised as binding, and the Court enforces it when Ekene applies in writing. TB-D's argument therefore fails. Ekene need not bring a fresh claim, obtain TB-D's consent or have the dispute heard again.",
   ['P175'])
 
@@ -240,14 +240,14 @@ q(2, "Case. EKC-02 is the synthetic platform supply vessel time charter with sup
 q(1, "Case. EKC-06 is the synthetic instrument maintenance service with supplier IM-F (synthetic). The contract holds a financial distress clause modelled on the UK Model Services Contract. This quarter IM-F's technicians report late wages and a sub-supplier has stopped extending credit to IM-F, yet IM-F has reported nothing under the clause. Ekene last looked at IM-F's finances at award. Question: what do the UK texts on supplier financial standing, used as published good practice, expect?",
   "IM-F should promptly report a distress event or anything that could cause one, and Ekene should monitor IM-F's standing on an ongoing basis",
   ["IM-F need report only once formal insolvency proceedings begin, since the clause covers nothing short of a court process",
-   "Ekene should look at IM-F's finances again only at renewal, since the UK texts confine financial checks to the award stage and its sub-suppliers",
+   "Ekene should look at IM-F's finances again only at renewal, since the UK texts confine financial checks to the award stage",
    "IM-F's board confirms its solvency once at award, and nothing more is expected of either party until the contract ends"],
   "The UK Economic and Financial Standing guidance note (2026 edition), paras 4.6.1 to 4.6.2, explains that under the Model Services Contract suppliers should promptly report a Financial Distress Event or anything that could cause one, with an annual board confirmation for critical service contracts. The Sourcing Playbook (June 2023), Chapter 11, p.65, commits to monitoring the financial standing of key suppliers on an ongoing basis. Reporting starts well before insolvency, and monitoring does not stop at award.",
   ['P094', 'P090'])
 
 q(3, "Case. EKC-01 is the synthetic well services call-off framework with supplier WS-A (synthetic). WS-A's coiled tubing unit has failed twice on the same well. Ekene's well site leader proposes that Ekene's own crew take over WS-A's unit and run the job. The framework contains a rectification plan clause and nothing about step-in. Question: what do the sources support?",
   "Ekene holds no step-in right under this framework, so it relies on the rectification plan clause and the framework's remaining terms",
-  ["Step-in is open to any operator once equipment fails twice, whether or not the framework grants that right anywhere in its terms in the framework",
+  ["Step-in is open to any operator once equipment fails twice, whether or not the framework grants that right",
    "The content Act implies step-in into every Nigerian framework, so Ekene's crew may take the unit",
    "Use step-in before any rectification plan, since the Principles list it as the first contractual option"],
   "The UK Contract Management Principles, principle 3, name Remedial Advisors, Rectification Plans and Step In rights as contractual options, and the Sourcing Playbook (June 2023), Chapter 5, p.41, lists step-in rights among the protections a contract may include. Each exists only where the contract grants it, and corrective action is taken within the contract's terms. No failure count or Act supplies a step-in right the framework omits.",
@@ -267,11 +267,11 @@ q(0, "Case. EKC-01 is the synthetic well services call-off framework with suppli
   "Within sixty days of the beginning of the year, covering all of Ekene's projects, with spend, employment and procurement achievement",
   ["Within 30 days after the end of each quarter, covering only contracts above $1,000,000 (USD) awarded during that quarter",
    "Within three months of the end of the financial year, sent to the Bureau of Public Procurement for its procurement records",
-   "Only when the Board asks for one, since the annual report is voluntary for an operator under the content Act's reporting part for its annual filings"],
+   "Only when the Board asks for one, since the content Act leaves the annual report to the operator's choice"],
   "The content Act, s.60, requires each operator to submit its annual Nigerian Content Performance Report within sixty days of the beginning of each year, covering all its projects and activities for the year under review, and s.61 has it show content by category of spend, employment as hours or days worked by Nigerian and foreign workers, and procurement as quantity and tonnage of local and foreign materials. So WS-A's data is gathered before close. The quarterly listing is s.24(1), and copies to the Bureau within three months belong to the Public Procurement Act 2007, s.16(13).",
   ['P127', 'P128'])
 
-q(3, "Case. EKC-05 is the synthetic flowline replacement works contract with supplier FW-E (synthetic), with a retention held from each milestone payment and a defects period. FW-E has handed over the last flowline and asks for the whole retention now. The contract ties release of retention to FW-E meeting its obligations, and the defects period has months to run. Question: on the World Bank Procurement Regulations for IPF Borrowers (Seventh Edition, September 2025), taught by concept, when is a reasonable retention released?",
+q(3, "Case. EKC-05 is the synthetic flowline replacement works contract with supplier FW-E (synthetic), with a retention held from each milestone payment until completion and a defects period. The scenario adds its own facts: the contract ties release of retention to FW-E meeting its obligations, the defects period has months to run, and FW-E has handed over the last flowline and asks for the whole retention now. Question: on the World Bank Procurement Regulations for IPF Borrowers (Seventh Edition, September 2025), taught by concept, when is a reasonable retention released?",
   "Once the contractor has met its obligations, read here from the contract's own release terms",
   ["On handover of the last item, since handover is itself proof that all obligations are met",
    "At the end of the financial year, since retention is an annual reserve held by the employer",
@@ -280,11 +280,11 @@ q(3, "Case. EKC-05 is the synthetic flowline replacement works contract with sup
   ['P055'])
 
 q(1, "Case. EKC-07 is the synthetic environmental monitoring consultancy with supplier EM-G (synthetic). The final quarterly report has been accepted, but one invoice is still disputed and unpaid. The contract owner wants the contract recorded as discharged and the file archived today. Ekene uses the UK Contract Terminations guidance (Procurement Act 2023), para 8, as a model of how a contract ends. Question: can the contract be treated as discharged today?",
-  "No: on that model discharge needs obligations fulfilled, payments made and disputes settled, and a disputed invoice is still open",
+  "No: on that model a contract is discharged when, for example, obligations are fulfilled, payments made and disputes settled; a disputed invoice is still open",
   ["Yes: discharge follows acceptance of the final report, since payments and disputes play no part in how a contract ends on that model",
    "Yes: discharge follows the owner's decision, since the guidance lets the contract owner declare any contract discharged whenever it wishes",
    "No: discharge needs a court order in every case, since only a court may bring any public or private contract to an end before its term"],
-  "The UK Contract Terminations guidance (Procurement Act 2023), para 8 (s.80(3)), lists the ways a contract ends, including discharge, which it describes as obligations fulfilled, payments made and disputes settled. The disputed invoice means payments and disputes are still open. Discharge does not rest on acceptance alone or on an owner's declaration, and a court order is only one of the other listed routes.",
+  "The UK Contract Terminations guidance (Procurement Act 2023), para 8 (s.80(3)), lists, without claiming to be exhaustive, the ways a contract ends, including discharge, which it illustrates as obligations or deliverables fulfilled, payments made and any disputes settled, by mutual agreement or frustration. The disputed invoice means payments and disputes are still open. Discharge does not rest on acceptance alone or on an owner's declaration, and a court order is only one of the other listed routes.",
   ['P198'])
 
 q(2, "Case. EKC-03 is the synthetic camp catering and facility services contract with supplier CF-C (synthetic). At close, the record shows CF-C missed the cleanliness service level in four months, three of them months when Ekene's water supply to the camp failed. Camp residents' surveys rate CF-C's staff well. The contract manager must write the close evaluation. Question: what do the sources support the evaluation doing?",
@@ -322,7 +322,7 @@ q(1, "Case. EKC-05 is the synthetic flowline replacement works contract with sup
   ['P202', 'P213'])
 
 q(3, "Case. EKC-01 is the synthetic well services call-off framework with supplier WS-A (synthetic). An internal check of framework payments turns up three things: extra call-offs issued with no clause to support them, a pump specification rewritten so that only WS-A's equipment now qualifies, and one nitrogen job billed on two separate invoices. Question: on the World Bank Contract Management Practice guidance (Second Edition, 2024), taught by concept, how should the contract manager proceed?",
-  "Treat them as warning signs of fraud and corruption, keep the records intact, hold the disputed sums under the payment terms and report through Ekene's integrity route",
+  "Treat them as fraud warning signs: keep the records intact, hold the disputed sums under the payment terms and report through Ekene's integrity route",
   ["Treat them as clerical errors and let WS-A correct them on its next invoice, since the guidance places fraud risk at the tender stage only",
    "Confront WS-A's staff with the findings and settle the matter privately, since the guidance leaves suspected fraud to the contract manager",
    "Terminate the framework at once, since the guidance treats these findings as proof of fraud that ends any contract by itself"],
@@ -330,15 +330,15 @@ q(3, "Case. EKC-01 is the synthetic well services call-off framework with suppli
   ['P211', 'P210'])
 
 q(0, "Case. EKC-03 is the synthetic camp catering and facility services contract with supplier CF-C (synthetic). CF-C disputes three months of service credits, and the contract manager must decide them this month. CF-C's regional manager offers to cater the contract manager's daughter's wedding free of charge. Question: using the World Bank Procurement Regulations for IPF Borrowers (Seventh Edition, September 2025), taught by concept as published practice, how should the offer be treated?",
-  "Declined and recorded, since offering anything of value to influence a decision improperly is a corrupt practice",
-  ["Accepted, since catering is a service and only cash counts as something of value",
-   "Put off until the credits are decided and then accepted, since the offer then influences nothing",
-   "Shared out among other staff, since spreading a gift across a team removes it"],
+  "Declined and recorded, since offering anything of value to influence a decision improperly is corrupt",
+  ["Accepted, since catering is a service in kind and only a cash payment counts as something of value",
+   "Put off until the credit decision is made and accepted afterwards, since a later gift influences nothing",
+   "Shared out among the contract team, since spreading a gift across several people removes its purpose"],
   "The World Bank Regulations, Annex IV para 2.2 a.i, define a corrupt practice as offering, giving, receiving or soliciting anything of value, directly or indirectly, to influence another party's actions improperly. A free wedding offered while a decision is pending falls within it; catering has value, timing does not cure it, and sharing it more widely does not change its purpose. Ekene's own policy sets any gift limits.",
   ['P208'])
 
 q(2, "Case. EKC-06 is the synthetic instrument maintenance service with supplier IM-F (synthetic). NCDMB's monitoring team asks IM-F for its site attendance records and payroll to verify the Nigerian employment hours IM-F reported. IM-F refuses, and its contract with Ekene contains no clause on content reporting. Question: what does the content Act provide, and what does the gap in the contract show?",
-  "Contractors must give the Board access to documents substantiating reported content (s.64), and operators must bind contractors to report content information (s.65)",
+  "The Board may inspect contractors' records under s.64, and s.65 has the operator bind contractors to report content",
   ["Contractors may refuse any request from the Board, since s.64 gives the Board access only to the operator's own records",
    "The Board may see content records only in the operator's annual report under s.60, so IM-F's refusal stands in full",
    "The contract's silence frees IM-F, since the content Act reaches a contractor only through its contract with an operator"],
@@ -367,7 +367,7 @@ q(0, "Case. EKC-07 is the synthetic environmental monitoring consultancy with su
    "Retain the ten years and remove the 10%, since s.16(12) plainly prints a ten-year period in the gazetted copy of that Act",
    "Drop the ten years and keep the 10%, since the World Bank guidance makes its delay damages limit binding on all works"],
   "The printed Public Procurement Act 2007, s.16(12), gives its retention period as 'often years from the date of the award', which looks like a misprint, so no period is taught until an official copy confirms one; records are archived under the organisation's retention policy (GovS 008, 5.4.7). The World Bank Contract Management Practice guidance (Second Edition, 2024), p.38, gives 10% of the contract price only as an illustration of a delay damages limit.",
-  ['P052', 'P186'])
+  ['P052', 'P186', 'P195'])
 
 emit(Q, '/root/cat-wip-contracts/banks/sc5a_exam.json', expect_n=42)
 finish()

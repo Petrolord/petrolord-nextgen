@@ -1,6 +1,6 @@
 # From concern to formal notice
 
-Poor performance can start as a concern at a site meeting, grow into a pattern in the scorecard, survive an improvement plan, and come to need a formal notice. This module follows that path, starting with the move from a spoken concern to a written one.
+Poor performance can start as a concern at a site meeting and grow into a need for a formal notice. This module follows that path, starting with the move from a spoken concern to a written one.
 
 Every text in this lesson was read on 27 September 2026.
 
@@ -37,4 +37,4 @@ Write the first written step.
 
 ### A reading
 
-The first step is a letter to EM-G's named representative, from the contract manager. It states the facts with dates, cites the contract term naming the key person, records that the matter was raised by telephone on the stated dates, and asks EM-G for the cause and a plan to restore the key person's involvement by a stated date. The World Bank guidance also describes a client asking a consultant to correct or replace staff under the contract; the letter can ask for either, as the contract allows.
+The first step is a letter to EM-G's named representative, from the contract manager. It states the facts with dates, cites the contract term naming the key person, records the telephone calls, and asks EM-G for the cause and a plan to restore the key person's involvement by a stated date. The World Bank guidance describes a client asking a consultant, under the contract, to correct or replace staff, and then, if the consultant does nothing, moving to the further remedies the contract holds. The letter can ask for either correction or replacement, as the contract allows.

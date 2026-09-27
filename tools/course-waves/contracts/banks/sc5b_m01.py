@@ -51,10 +51,10 @@ q(1, "A question arrives on EKC-07, a synthetic environmental monitoring consult
 
 q(1, "The World Bank Procurement Regulations for IPF Borrowers (Seventh Edition, September 2025), Annex XI para 2.1, describe contract management done systematically. Which set of verbs do they use?",
  "Planned, carried out, monitored and evaluated.",
- ["Tendered, awarded, signed and filed away until the contract's expiry date.",
-  "Negotiated, renegotiated and settled whenever the supplier asks for it.",
-  "Delegated in full to the supplier, then audited once after the final payment."],
- "Annex XI para 2.1 calls for contract management that is planned, carried out, monitored and evaluated systematically, so that performance is optimised and risks are managed. Tender and award are the procurement course's ground, renegotiation on request is not a system, and a single audit after the final payment leaves the whole life of the contract unwatched.",
+ ["Tendered, awarded, signed and then filed away.",
+  "Negotiated, renegotiated and settled on request.",
+  "Delegated to the supplier, audited once at the end."],
+ "Annex XI para 2.1 calls for contract management that is planned, carried out, monitored and evaluated systematically, so that performance is optimised and risks are managed. Tender and award are the procurement course's ground, renegotiation on request is not a system, and a single audit at the end leaves the whole life of the contract unwatched.",
  ['P009'])
 
 q(3, "EKC-05, the synthetic flowline replacement with FW-E (synthetic), has been completed, and the defects period is over. The UK Government Functional Standard GovS 008 (version 2.2) at 5.4.7 describes what happens to the contract documentation on closure. What does it say?",
@@ -91,9 +91,9 @@ q(0, "An Ekene contract manager wants to cite Nigeria's Public Procurement Act 2
 
 q(1, "EKC-02 is a synthetic platform supply vessel charter with MV-B (synthetic). A colleague drafts a note telling MV-B that the World Bank Regulations require monthly performance reporting. Which statement fixes the note?",
  "The charter answers to its own terms and to the content Act; World Bank texts are practice here.",
- ["The note is sound, because World Bank rules apply to any contract signed in a member country.",
+ ["It is sound, because World Bank rules apply to any contract signed in a member country.",
   "The note should cite the UK Procurement Act 2023, which binds every vessel charter in Nigerian waters.",
-  "The note should cite GovS 008 instead, since UK guidance overrides the World Bank on offshore charters."],
+  "Citing GovS 008 would fix it, since UK guidance overrides the World Bank on offshore charters."],
  "The Nigerian Oil and Gas Industry Content Development Act 2010 (the content Act), s.6, requires Ekene's contracts to conform to it, and the charter is managed on its own terms. The World Bank Regulations bind borrowers on Bank-financed contracts, so the note may say what World Bank practice recommends and then point to the reporting duty the charter itself states. UK texts bind UK contracting authorities only.",
  ['P102', 'P007'])
 
@@ -131,7 +131,7 @@ q(0, "An Ekene manager wants to know which published NCDMB text sets out who doe
 
 q(2, "EKC-02, the synthetic vessel charter with MV-B (synthetic), is handed to a new manager hired from outside the marine team. What does the UK Sourcing Playbook (June 2023), Chapter 12, ask of whoever oversees an outsourced service?",
  "An appropriately qualified contract manager who understands how the contract operates.",
- ["A manager drawn from the supplier's own staff, since MV-B knows the vessel best.",
+ ["Someone drawn from the supplier's own staff, since MV-B knows the vessel best.",
   "A legal adviser in place of a manager, since a charter is mostly a legal document.",
   "A committee of every department that uses the vessel, with no single named manager."],
  "The Sourcing Playbook, Chapter 12, asks for outsourced services to be built on a robust contractual relationship overseen by an appropriately qualified contract manager with a clear operational understanding of the contract. It is UK practice, and the point for Ekene is a named, competent manager on the buyer's side. A supplier's employee, a lawyer alone or a committee with no named manager does not meet it.",

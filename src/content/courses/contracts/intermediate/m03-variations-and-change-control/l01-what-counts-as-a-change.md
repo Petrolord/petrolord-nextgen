@@ -1,6 +1,6 @@
 # What counts as a change
 
-This module teaches how a change is recognised, authorised, assessed, limited and recorded. It starts with recognition, because much of the trouble begins when nobody noticed a change happening.
+This module teaches how a change is recognised, authorised, assessed, limited and recorded. It starts with recognition, since trouble often begins with an unnoticed change.
 
 Every text in this lesson was read on 27 September 2026.
 
@@ -26,7 +26,7 @@ Under the UK guidance on Contract Modifications (Crown copyright 2024), a change
 
 ## Defective work is the contractor's cost
 
-Nigeria's Public Procurement Act 2007 (Act No. 14, Official Gazette No. 65, Vol. 94, 19 June 2007) binds federal procuring entities; for an operator it is a published statement of public practice. Its s.53(3) speaks of a variation order requiring a contractor "at his own expense to repair, replace, or to do anything in his or her contract left undone or found to have been carried out with inferior or defective materials". Putting right the contractor's own defective work is the contractor's cost, whatever the order is called.
+Nigeria's Public Procurement Act 2007 (Act No. 14, Official Gazette No. 65, Vol. 94, 19 June 2007) binds federal procuring entities; for an operator it is a published statement of public practice. Its s.53(3) gives the Bureau, on the procuring entity's advice or after a review or investigation, power to issue a variation order requiring a contractor "at his own expense to repair, replace, or to do anything in his or her contract left undone or found to have been carried out with inferior or defective materials". Putting right the contractor's own defective work is the contractor's cost.
 
 ## Exercise
 

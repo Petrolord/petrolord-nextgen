@@ -5,7 +5,7 @@ teaches from.
 Inputs (written when the sources were fetched and read, 2026-09-27):
   sources/SOURCES_draft.json    33 sources with editions, URLs, licences,
                                 sha256 of the fetched files and read dates;
-  sources/passages_draft.json   217 candidate passages (quotes verified word
+  sources/passages_draft.json   219 candidate passages (quotes verified word
                                 for word by sources/verify_quotes.py).
 Outputs:
   sources/SOURCES.json          the sources the course cites;
@@ -75,7 +75,7 @@ REWRITE = {
     'P157': 'The guidance expects the contract manager to see that a claim is backed by an analysis of its costs and by documents such as invoices, reports and records.',
     'P161': 'The guidance expects the contract manager to know in advance which costs, possible extra costs included, sit with the contractor and which sit elsewhere.',
     'P162': 'The guidance lists what to record: how the supplier performed and delivered, every communication and notice, the dates, and who was involved.',
-    'P164': 'The guidance treats arbitration and litigation as the last resort for resolving a dispute.',
+    'P164': 'The guidance describes dispute resolution as a range of techniques, from informal talks, through formal negotiation, to mediation and arbitration; it asks that a dispute be managed actively and at the right level or levels, and it treats arbitration and litigation as the last resort for resolving a dispute.',
     'P185': 'The guidance calls termination the ultimate remedy for a default.',
     'P192': 'The Regulations require an evaluation of how the contract was carried out, made at completion, to assess performance and, where it applies, to draw lessons for later contracts.',
     'P193': "Among the checks the Regulations list for value for money, the Borrower confirms that the final price of the contract compares well with comparable benchmarks.",

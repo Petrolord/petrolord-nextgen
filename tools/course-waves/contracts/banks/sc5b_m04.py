@@ -77,7 +77,7 @@ q(3, "Under the UK Cabinet Office guidance on KPIs under the Procurement Act 202
  "Where performance could not appropriately be assessed through KPIs.",
  ["Where the supplier objects to KPIs in writing before the contract is signed.",
   "Where the contract is worth more than £5 million and has a service level already.",
-  "Where the buyer has no contract manager available to read the scores each quarter."],
+  "If the buyer has no contract manager available to read the scores each quarter."],
  "The UK KPI guidance (para 10) says the duty falls away where the authority considers that performance could not appropriately be assessed through KPIs, and gives a one-off delivery of off-the-shelf goods as its example. A supplier's objection, a staffing gap or an existing service level does not remove the duty. It is UK practice, and for Ekene the lesson is that a simple supply may need an acceptance check and nothing more.",
  ['P037'])
 
@@ -106,19 +106,19 @@ q(2, "What does the UK Government Functional Standard GovS 008 (version 2.2) say
  ['P054'])
 
 q(0, "EKC-02 is a synthetic vessel charter with MV-B (synthetic), with availability as its service level. Ekene's log shows the vessel unavailable after an engine fault; MV-B says part of that time it was waiting for a berth. What does the World Bank Contract Management Practice guidance (Figure XIV) point the manager to?",
- "Records made at the time: performance, communications and notices, dates, and who was involved.",
+ "The recorded performance, communications and notices, dates and people involved.",
  ["MV-B's account of events, since the supplier knows its own vessel.",
   "A memo written today from memory by whoever was on shift.",
-  "The average availability of other vessels in the area."],
- "The World Bank guidance, taught by concept, lists what to record: how the supplier performed and delivered, every communication and notice, the dates and who was involved. Records made at the time, such as the daily log, engine and deck logs and berth records, are compared against the charter's definition of availability. A memo written later, one side's account or other vessels' figures cannot settle this vessel's hours.",
+  "The average availability of other vessels working in the same area."],
+ "The World Bank guidance, taught by concept, lists what to record: how the supplier performed and delivered, every communication and notice, the dates and who was involved. Here those records are the daily log, the engine and deck logs, the berth records and the messages exchanged, read against the charter's definition of availability. A memo written later, one side's account or other vessels' figures cannot settle this vessel's hours.",
  ['P160'])
 
-q(3, "The UK Cabinet Office guidance on KPIs under the Procurement Act 2023 (para 14) sets how often a UK contracting authority assesses a supplier against its KPIs. What does it say?",
+q(3, "The UK Cabinet Office guidance on KPIs under the Procurement Act 2023 (para 14) explains how often the Act, s.71, requires a UK contracting authority to assess a supplier against its KPIs. What does it say?",
  "At least once in every twelve months, and on termination.",
  ["Only once, at the end of the contract, when all the data is in.",
   "Every month without exception, whatever the length of the contract.",
   "Whenever the supplier asks for its score, and at no other time."],
- "The UK KPI guidance (para 14) requires the authority, at least once in every twelve month period during the lifetime of the contract and on termination, to assess the supplier's performance against those KPIs. That duty binds UK contracting authorities. The practice it models for Ekene is simple: assess on a fixed cycle, against the stated indicator, so a disagreement is caught early.",
+ "The UK Procurement Act 2023, s.71, as the KPI guidance (para 14) explains, requires the authority, at least once in every twelve month period during the lifetime of the contract and on termination, to assess the supplier's performance against those KPIs. That duty binds UK contracting authorities. The practice it models for Ekene is simple: assess on a fixed cycle, against the stated indicator, so a disagreement is caught early.",
  ['P038'])
 
 q(1, "Which list gives the five ratings that published KPI assessments use under the UK Procurement Act 2023 regime, as the UK KPI guidance (para 15) sets them out?",

@@ -16,7 +16,7 @@ The UK Government Functional Standard GovS 008: Commercial (version 2.2, issued 
 
 ## Warning signs
 
-The World Bank Contract Management Practice guidance (Second Edition, 2024), taught here by concept, lists red flags of fraud and corruption during execution. Among them are payments that do not follow the contract, and false or duplicate invoices. The guidance also says payment errors found before the final payment should be corrected.
+The World Bank Contract Management Practice guidance (Second Edition, 2024), taught here by concept, lists red flags of fraud and corruption during execution. Among them are change orders issued with no contractual justification, specifications or contract conditions changed without justification, payments that do not follow the contract, and false or duplicate invoices. The guidance also says payment errors found before the final payment should be corrected.
 
 ## Paying on time is the buyer's duty
 

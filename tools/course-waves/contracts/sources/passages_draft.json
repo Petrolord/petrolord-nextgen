@@ -617,9 +617,9 @@
  {
   "id": "P059",
   "source": "S19",
-  "locator": "WB PPSD Guidance (Aug 2025), Tool: Supplier Preferencing, Figure VI, p.28 (detailed in Annex A)",
+  "locator": "WB PPSD Guidance (Aug 2025), Tool: Supplier Preferencing, Figure VI, p.28, and Annex A (the supplier preferencing matrix and its table)",
   "mode": "paraphrase",
-  "text": "Supplier preferencing places the buyer in one of four segments (Development, Core, Nuisance, Exploitable) using two dimensions: the value of the buyer's business to the supplier and how attractive that business is. A buyer that suppliers see as core or worth developing tends to get more effort from them.",
+  "text": "Supplier preferencing places the buyer in one of four segments (Development, Core, Nuisance, Exploitable) using two dimensions: the value of the buyer's business to the supplier and how attractive that business is. Core business is of high value and attractive; Development business is attractive but of lower value, and a supplier may want to grow it; Nuisance business is of low value and little appeal, which a supplier may avoid as costly to serve; Exploitable business is of high value but little appeal, which a supplier may exploit over the short term. A buyer that suppliers see as core or worth developing tends to get more effort from them.",
   "topics": [
    "T06"
   ],
@@ -744,7 +744,7 @@
  {
   "id": "P071",
   "source": "S09",
-  "locator": "Guidance: Contract Performance Notices (Procurement Act 2023), para 26 and s.71(3)",
+  "locator": "Guidance: Contract Performance Notices (Procurement Act 2023), paras 26 and 27",
   "mode": "paraphrase",
   "text": "A breach triggers a contract performance notice only when it has led to partial termination, an award of damages, or a settlement agreement. A breach that ends in full termination is reported in the contract termination notice.",
   "topics": [
@@ -802,7 +802,7 @@
   "source": "S17",
   "locator": "WB Contract Management Practice (June 2024), Contractual Remedies, Figure XII, p.37",
   "mode": "paraphrase",
-  "text": "World Bank guidance lists typical employer remedies under a works contract in rising order: a notice to correct a default, withholding payment, calling the performance security, delay damages for late completion, and termination when a contractual termination event occurs.",
+  "text": "As an example based on a works contract, World Bank guidance lists employer remedies, each beside the situation that may trigger it: a notice to correct a default (a default by the contractor); withholding payment (work or obligations not performed as the contract requires); calling the performance security (the contractor breaching its contractual obligations); calling the environmental and social performance security; delay damages (the works or a section not finished in the stipulated time); termination (a termination event the contract specifies); and, on major works, referring sexual exploitation and abuse or sexual harassment concerns to the dispute review board. The list states no order of severity.",
   "topics": [
    "T07",
    "T14"
@@ -1017,9 +1017,9 @@
  {
   "id": "P096",
   "source": "S06",
-  "locator": "Corporate Financial Distress guidance note (2025), section 2.3.2 and Appendix 1",
+  "locator": "Corporate Financial Distress guidance note (2025), section 2.3.2 and Appendix 1, Table 1",
   "mode": "paraphrase",
-  "text": "Non-financial warning signs can show distress before published accounts do: requests to be paid in advance, invoice discounting or factoring, key supply chain partners refusing to keep trading, and suppliers seeking to renegotiate contract terms.",
+  "text": "Section 2.3.2 lists non-financial warning signs, among them a supplier seeking to renegotiate aspects of the contract and key supply chain partners unwilling to keep trading with it, which can warn of distress earlier than backward-looking published accounts. Appendix 1, Table 1, places requests for payments in advance and invoice discounting or factoring among the financial indicators, under liquidity and solvency.",
   "topics": [
    "T09"
   ],
@@ -1858,7 +1858,7 @@
   "source": "S26",
   "locator": "Arbitration and Mediation Act 2023 (Nigeria), s.76",
   "mode": "paraphrase",
-  "text": "Unless the parties agree otherwise, everything about a mediation stays confidential, with exceptions for disclosure required by law, disclosure needed to implement or enforce the settlement, and disclosure needed to prevent or reveal a crime or a threat to a party.",
+  "text": "Unless the parties agree otherwise, everything about a mediation stays confidential, with four exceptions: disclosure required by law; disclosure for implementing or enforcing a settlement agreement; disclosure needed to prevent or reveal a crime, its concealment or a threat to a party; and disclosure needed to protect public order, only under the conditions and in the scope the law prescribes.",
   "topics": [
    "T13"
   ],
@@ -2141,7 +2141,7 @@
   "source": "S11",
   "locator": "Guidance: Contract Terminations (Procurement Act 2023), para 8 (s.80(3))",
   "mode": "paraphrase",
-  "text": "For the UK termination notice, 'termination' covers every way a contract ends: discharge (obligations fulfilled, payments made, disputes settled), expiry, termination by a party, rescission, or being set aside by a court.",
+  "text": "For the UK termination notice, s.80(3) makes 'termination' cover every way a contract comes to an end, in a list that is not exhaustive: discharge (for example, obligations or deliverables fulfilled, payments made and any disputes settled, by mutual agreement or frustration), expiry, termination by a party, rescission, or being set aside by a court.",
   "topics": [
    "T15",
    "T14"
@@ -2194,9 +2194,9 @@
  {
   "id": "P205",
   "source": "S22",
-  "locator": "Public Procurement Act 2007 (Nigeria), s.57(12)",
+  "locator": "Public Procurement Act 2007 (Nigeria), s.57(12)(b), (f) and (h)",
   "mode": "paraphrase",
-  "text": "The Nigerian Act lists what counts as a conflict of interest, including a direct or indirect interest in or relationship with a supplier or contractor that could bring personal gain, taking personal advantage of an opportunity that belongs to the entity, and passing confidential information to a supplier or contractor.",
+  "text": "The Nigerian Act lists what counts as a conflict of interest, including a direct or indirect interest in or relationship with a supplier or contractor that could bring personal gain, taking personal advantage of an opportunity that belongs to the entity, and disclosing confidential information, whether it belongs to the entity, the Government or a supplier or contractor, to unauthorised persons.",
   "topics": [
    "T16"
   ],
@@ -2333,5 +2333,27 @@
    "T16"
   ],
   "anchor": "divest himself of any interest or relationships which are actually or potentially"
+ },
+ {
+  "id": "P218",
+  "source": "S26",
+  "locator": "Arbitration and Mediation Act 2023 (Nigeria), s.91(1)",
+  "mode": "quote",
+  "text": "\"mediation\" means a process, whether referred to by the expression mediation, conciliation or an expression of similar import, where parties request a third person (\"the mediator\") to assist them in their attempt to reach an amicable settlement of their dispute arising out of or relating to a contractual or other legal relationship but the mediator does not have the authority to impose upon the parties a solution to the dispute;",
+  "topics": [
+   "T13"
+  ]
+ },
+ {
+  "id": "P219",
+  "source": "S27",
+  "locator": "Procurement Act 2023, title page (as enacted, dated [26th October 2023]); legislation.gov.uk PDF",
+  "mode": "paraphrase",
+  "text": "The copy of the UK Act read for this course is the Act as enacted, dated 26 October 2023 on its title page. Amendments made to the Act after enactment are not shown in that copy, so a rule taken from it is checked against the current text before a decision relies on it.",
+  "topics": [
+   "T01",
+   "T16"
+  ],
+  "anchor": "[26th October 2023]"
  }
 ]

@@ -62,13 +62,13 @@ q(2,
   ['P075'])
 
 q(0,
-  "FW-E (synthetic) has left defects unremedied on EKC-05. The World Bank's Contract Management Practice guidance, taught by concept, lists typical employer remedies under a works contract in rising order. Which comes first?",
+  "FW-E (synthetic) has defaulted on EKC-05 by leaving defects unremedied, and the Ekene contract manager wants the most proportionate first step. The World Bank's Contract Management Practice guidance, taught by concept, gives example works remedies, each with its trigger, and GovS 008 (version 2.2), 5.4.7, keeps early termination as a last resort. Which remedy does the course advise first?",
   "A notice to correct the default",
   ["Calling the performance security",
    "Deducting delay damages for late completion",
    "Termination for a contractual termination event"],
-  "The World Bank guidance lists the usual employer remedies under a works contract in rising order: a notice to correct a default, withholding payment, calling the performance security, delay damages for late completion, and termination when a contractual termination event occurs. The order guides proportion, so the notice to correct comes first and the other three sit higher on the ladder.",
-  ['P076'])
+  "The World Bank guidance, Figure XII, pairs a notice to correct a default with a default by the contractor, which fits FW-E's unremedied defects. Its list states no order of severity; the course advises the least remedy that will work, and GovS 008 at 5.4.7, a UK text read as practice, keeps early termination for when contractual remedies are exhausted. Calling the security and delay damages answer other triggers (a breach of obligations, late completion), and termination needs a termination event the contract specifies.",
+  ['P076', 'P182'])
 
 q(3,
   "After two missed service levels on EKC-03 (synthetic), an Ekene manager proposes ending CF-C's catering contract early to make an example of it. What does GovS 008 (version 2.2), clause 5.4.7, read as practice, say about early termination?",
@@ -107,12 +107,12 @@ q(3,
   ['P185'])
 
 q(2,
-  "A synthetic Ekene manager studies when a UK authority publishes a contract performance notice for a breach, as the UK guidance on Contract Performance Notices, para 26, describes. Which breaches trigger one?",
+  "A synthetic Ekene manager studies when a UK authority publishes a contract performance notice for a breach, as the UK guidance on Contract Performance Notices, paras 26 and 27, describes. Which breaches trigger one?",
   "A breach that has led to partial termination, an award of damages, or a settlement agreement",
   ["Every breach of any kind, however minor, reported on the very day the breach is first noticed",
    "Only a breach that ends in full termination, reported in a separate performance notice of its own",
    "Only a breach that the supplier admits in writing within a set period after it is raised"],
-  "The UK guidance on Contract Performance Notices, para 26, with s.71(3) of the UK Procurement Act 2023, says a breach triggers a performance notice only when it has led to partial termination, an award of damages, or a settlement agreement. A breach ending in full termination is reported in the contract termination notice. Minor breaches and admissions are not the triggers. The scheme binds UK authorities; no Ekene contract publishes such notices.",
+  "The UK guidance on Contract Performance Notices, paras 26 and 27, with s.71(3) of the UK Procurement Act 2023, says a breach triggers a performance notice only when it has led to partial termination, an award of damages, or a settlement agreement. A breach ending in full termination is reported in the contract termination notice. Minor breaches and admissions are not the triggers. The scheme binds UK authorities; no Ekene contract publishes such notices.",
   ['P071'])
 
 q(0,
@@ -126,7 +126,7 @@ q(0,
 
 q(3,
   "A synthetic Ekene analyst reads para 10 of the UK guidance on Contract Performance Notices. What consequence can a published notice have for the supplier?",
-  "A discretionary exclusion ground in later procurements, if published within the preceding 5 years and the circumstances continue or are likely to recur",
+  "A discretionary exclusion ground later, if published in the preceding 5 years and the circumstances continue or may recur",
   ["An automatic ban from every future public contract for life, whatever has happened since the notice appeared",
    "A fine of five per cent of the contract sum, collected by the contracting authority from the next invoice",
    "No consequence at all, since the notice is a private record held only by the authority that published it"],
@@ -145,7 +145,7 @@ q(0,
 q(2,
   "MV-B's (synthetic) vessel on EKC-02 breaks down and is out of service for three days. The charter pays a day rate with off-hire for breakdown. What remedy does Ekene apply first?",
   "Off-hire for the three days, as the charter provides",
-  ["A service credit deducted from the month's charter hire",
+  ["Service credits deducted from the month's charter hire",
    "A formal notice ending the charter because of the breakdown",
    "A claim against MV-B's parent for lost production"],
   "The World Bank's Contract Management Practice guidance, taught by concept, reminds that a contract is managed by its own terms, and EKC-02's terms put the vessel off-hire during breakdown, so the day rate is not paid for those days. EKC-02 states no service credit, a single breakdown is far from the last resort of termination, and nothing in the charter points to a claim against the parent.",

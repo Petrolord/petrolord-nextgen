@@ -65,11 +65,11 @@ q(1, "EKC-01 is the synthetic well services call-off framework with WS-A (synthe
   ['P170'])
 
 q(2, "EKC-06 is the synthetic instrument maintenance service with IM-F (synthetic). Ekene and IM-F mediate a KPI dispute in Nigeria. Afterwards a manager wants to show the mediator's notes to another supplier as an example. The parties made no agreement on confidentiality. What does the Arbitration and Mediation Act 2023 (Nigeria), s.76, provide?",
-  "Everything about the mediation stays confidential, with exceptions only for disclosure required by law, disclosure to implement or enforce the settlement, and disclosure to prevent or reveal a crime or a threat",
-  ["The notes become public once the mediation ends, since s.76 protects confidentiality only while the parties are still in the room with the mediator",
-   "Either party may share the notes with other suppliers, since s.76 limits only what the mediator may disclose about the matter to third parties",
-   "Confidentiality applies only to the settlement figure, since s.76 leaves the notes and the parties' statements open to any use by either party"],
-  "The Arbitration and Mediation Act 2023 (Nigeria), s.76, provides that, unless the parties agree otherwise, everything about a mediation stays confidential, with exceptions for disclosure required by law, disclosure needed to implement or enforce the settlement, and disclosure needed to prevent or reveal a crime or a threat to a party. Showing the notes to another supplier fits none of those, and s.76 is neither time-limited, mediator-only nor limited to the figure.",
+  "The notes stay confidential: s.76 keeps all mediation information confidential, and showing an example fits none of its four exceptions",
+  ["The notes become public once the mediation ends, since s.76 protects confidentiality only while the parties sit with the mediator",
+   "Either party may share the notes with other suppliers, since s.76 limits only what the mediator may disclose to third parties",
+   "Only the settlement figure is protected, since s.76 leaves the notes and the parties' statements open to any use by either party"],
+  "The Arbitration and Mediation Act 2023 (Nigeria), s.76, provides that, unless the parties agree otherwise, all information relating to the mediation stays confidential, with four exceptions: disclosure required by law; disclosure to implement or enforce a settlement agreement; disclosure needed to prevent or reveal a crime, its concealment or a threat to a party; and disclosure needed to protect public order, only as the law prescribes. Showing the notes to another supplier as an example fits none of those, and s.76 is neither time-limited, mediator-only nor limited to the figure.",
   ['P172'])
 
 q(0, "EKC-02 is the synthetic platform supply vessel time charter with MV-B (synthetic). A mediation in Nigeria ends with a signed settlement agreement on disputed off-hire. MV-B later says the settlement was only advisory. What does the Arbitration and Mediation Act 2023 (Nigeria), s.82(2), provide?",
@@ -113,7 +113,7 @@ q(0, "EKC-04 is the synthetic casing and tubulars frame agreement with TB-D (syn
   ['P168'])
 
 q(3, "EKC-02 is the synthetic platform supply vessel time charter with MV-B (synthetic). Its arbitration clause is seated in Nigeria and says nothing about the number of arbitrators, and the parties have not agreed a number since. How is the tribunal made up under the Arbitration and Mediation Act 2023 (Nigeria), s.6(2)?",
-  "It consists of a sole arbitrator",
+  "It consists of a sole arbitrator, the section's default",
   ["It consists of three arbitrators, one named by each party",
    "It consists of as many arbitrators as the court appoints",
    "It cannot be formed until the parties agree on a number"],

@@ -20,7 +20,7 @@ The guidance adds detail to the walk-through (item 3): everyone should come away
 
 ## Roles and authority
 
-The UK Government Functional Standard GovS 008: Commercial (version 2.2, issued 1 April 2026) treats mobilisation as the start of delivery, and for more complex contracts expects the roles for managing the contract to be confirmed during it (5.4.1). The kick-off is where that confirmation happens in front of both parties. The World Bank guidance also asks the contract manager to confirm at the start that each party has its authorisations and delegations in place. A kick-off that lists names and leaves out what each person may decide has done half the job.
+The UK Government Functional Standard GovS 008: Commercial (version 2.2, issued 1 April 2026) treats mobilisation as the start of delivery (5.4.1). A simple, low cost contract may need no commercial specialist support at all; for a more complex contract the standard expects the roles for managing it to be confirmed during mobilisation. The kick-off is where that confirmation happens in front of both parties. The World Bank guidance also asks the contract manager to confirm at the start that each party has its authorisations and delegations in place. A kick-off that lists names and leaves out what each person may decide has done half the job.
 
 ## The record of the meeting
 

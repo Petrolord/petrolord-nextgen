@@ -25,11 +25,11 @@ q(0, "A synthetic Ekene integrity briefing borrows a definition of a conflict of
   ['P212'])
 
 q(2, "EKC-04 is the synthetic casing and tubulars frame agreement with TB-D (synthetic). The contract manager is found to have sent TB-D a copy of a rival mill's confidential price offer. Taking the Public Procurement Act 2007 as published practice for an operator, how does s.57(12) treat this?",
-  "It lists passing confidential information to a supplier or contractor among the things that count as a conflict of interest",
+  "It lists disclosing confidential information, a supplier's included, to unauthorised persons among the kinds of conflict of interest",
   ["It treats the matter as a commercial choice for the contract manager, since price information is shared freely in a frame agreement",
    "It treats the matter as a breach of the content Act, since s.57(12) of that Act governs any price information about foreign mills",
    "It says nothing on information, since s.57(12) lists only shareholdings held by an officer or by a member of the officer's family"],
-  "The Public Procurement Act 2007, s.57(12), lists what counts as a conflict of interest, including a direct or indirect interest in or relationship with a supplier that could bring personal gain, taking personal advantage of an opportunity belonging to the entity, and passing confidential information to a supplier or contractor. That Act binds federal procuring entities and serves Ekene as published practice. Section 57(12) is a provision of that Act, and its list is wider than shareholdings.",
+  "The Public Procurement Act 2007, s.57(12), lists what counts as a conflict of interest, including a direct or indirect interest in or relationship with a supplier that could bring personal gain, taking personal advantage of an opportunity belonging to the entity, and, at s.57(12)(h), disclosing confidential information, whether the entity's, the Government's or a supplier's or contractor's, to unauthorised persons. That Act binds federal procuring entities and serves Ekene as published practice. Section 57(12) is a provision of that Act, and its list is wider than shareholdings.",
   ['P203'])
 
 q(3, "EKC-01 is the synthetic well services call-off framework with WS-A (synthetic). The contract manager is about to take a paid consultancy role with a company that owns part of WS-A. On the Public Procurement Act 2007, s.57(10), used as published practice for an operator, what should the contract manager do?",
@@ -49,7 +49,7 @@ q(1, "EKC-02 is the synthetic platform supply vessel time charter with MV-B (syn
   ['P213', 'P214'])
 
 q(2, "A synthetic Ekene integrity briefing borrows from the World Bank Procurement Regulations for IPF Borrowers (Seventh Edition, September 2025), taught by concept, to say whose conduct the Bank's ethical standard covers and for how long. What do the Regulations, Annex IV para 2.1, require?",
-  "Borrowers, bidders, contractors, suppliers, sub-contractors, agents and all their personnel keep the highest ethical standard through procurement and contract execution",
+  "Borrowers, bidders, contractors, suppliers, sub-contractors, agents and their personnel, through procurement and execution",
   ["Only the borrower's procurement staff keep the ethical standard, and only until the contract is awarded to the winning bidder",
    "Only the lead contractor keeps the ethical standard, since sub-contractors and agents fall outside the Bank's requirements",
    "Suppliers keep the ethical standard during the tender only, since execution is governed by the contract's own terms alone"],
@@ -72,12 +72,12 @@ q(1, "A synthetic Ekene integrity briefing uses the Public Procurement Act 2007,
   "The Public Procurement Act 2007, s.58(4), lists offences including collusive pricing, procurement fraud by corrupt acts, bribery or undue influence, splitting tenders to dodge thresholds, bid-rigging, altering procurement documents, using fake documents and refusing the Bureau access to procurement records. Late payment is dealt with by interest under s.37, and the other distractors describe ordinary management choices.",
   ['P204'])
 
-q(3, "A synthetic Ekene training note uses the Public Procurement Act 2007 as published practice and asks what s.58(6) sets for a supplier convicted of an offence under that Act. Which answer matches the section?",
+q(3, "A synthetic Ekene training note uses the Public Procurement Act 2007 as published practice and asks what s.58(6) sets for a supplier company (a legal person) convicted of an offence under that Act. Which answer matches the section?",
   "Debarment from all public procurements for not less than 5 calendar years and a fine equivalent to 25% of the value of the procurement in issue",
   ["A fine of five per cent of the project sum for each project, or cancellation of the project, as the only penalties the section provides",
    "Deduction at source of one per cent of every contract the supplier holds, paid into a fund for as long as the conviction stands",
    "A written warning from the Bureau for a first offence, with debarment reserved for a supplier convicted of repeated offences"],
-  "The Public Procurement Act 2007, s.58(6), provides debarment from all public procurements for a period not less than 5 calendar years and a fine equivalent to 25% of the value of the procurement in issue. Five per cent of the project sum or cancellation is the content Act, s.68; one per cent at source is the content Act, s.104(2); and s.58(6) sets no warning stage.",
+  "The Public Procurement Act 2007, s.58(6), provides for a legal person that contravenes that Act debarment from all public procurements for a period not less than 5 calendar years and a fine equivalent to 25% of the value of the procurement in issue. Five per cent of the project sum or cancellation is the content Act, s.68; one per cent at source is the content Act, s.104(2); and s.58(6) sets no warning stage.",
   ['P205'])
 
 q(2, "Ekene's synthetic assurance lead wants to know what inspection rights over records the Bank writes into the contracts it finances, as a model for Ekene's own audit clause. What do the Bank's Procurement Regulations for IPF Borrowers (Seventh Edition, September 2025), read by concept, require?",
@@ -134,7 +134,7 @@ q(3, "A synthetic Ekene procedure relies on the UK Procurement Act 2023 for a mo
    "Only the date the procedure was approved, since the edition of a UK Act has no bearing on how a model rule is applied at Ekene",
    "That the UK Act binds Ekene's contracts from its enactment date, since a UK statute governs any contract that borrows one of its rules as a model"],
   "The UK Procurement Act 2023 was read as enacted, 26 October 2023, and later amendments are not reflected in that copy. Each source is recorded with its edition and the date read and checked again before a decision relies on it. An enacted Act can be amended, the edition matters to what the rule says, and a UK statute binds no Ekene contract even when Ekene borrows one of its rules as a model.",
-  ['P035'])
+  ['P035', 'P217'])
 
 emit(Q, '/root/cat-wip-contracts/banks/sc5a_m06.json', expect_n=15)
 finish()

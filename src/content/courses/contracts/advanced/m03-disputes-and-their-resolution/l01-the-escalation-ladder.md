@@ -12,7 +12,7 @@ The World Bank Contract Management Practice guidance (Second Edition, 2024), tau
 
 ## The top of the ladder
 
-The World Bank guidance treats arbitration and litigation as the last resort (p.35). In Nigerian public contracts, the Public Procurement Act 2007 (Act No. 14, Official Gazette No. 65, Vol. 94, 19 June 2007), which binds federal procuring entities and serves an operator as published practice, provides at s.16(26): "All procurement contracts shall contain provisions for arbitral proceedings as the primary forms of dispute resolution."
+The World Bank guidance describes a range of techniques, from informal talks, through formal negotiation, to mediation and arbitration; it asks that a dispute be managed actively and at the right level, which is where senior representatives come in, and it treats arbitration and litigation as the last resort (p.35). In Nigerian public contracts, the Public Procurement Act 2007 (Act No. 14, Official Gazette No. 65, Vol. 94, 19 June 2007), which binds federal procuring entities and serves an operator as published practice, provides at s.16(26): "All procurement contracts shall contain provisions for arbitral proceedings as the primary forms of dispute resolution."
 
 ## A typical ladder
 

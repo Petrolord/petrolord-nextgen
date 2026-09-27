@@ -4,7 +4,7 @@ Close-out starts when the supplier says the work is done. Completion is a claim 
 
 ## Every way a contract ends
 
-The UK Contract Terminations guidance under the Procurement Act 2023 (April 2026 edition), used as published good practice, gives a broad meaning of termination for its notices: discharge (obligations fulfilled, payments made, disputes settled), expiry, termination by a party, rescission, or being set aside by a court (para 8). Discharge, in that list, needs obligations fulfilled, payments made and disputes settled.
+The UK Contract Terminations guidance under the Procurement Act 2023 (April 2026 edition), used as published good practice, gives a broad meaning of termination for its notices, in a list that is not exhaustive: discharge (for example, obligations fulfilled, payments made and any disputes settled, by mutual agreement or frustration), expiry, termination by a party, rescission, or being set aside by a court (para 8). On that model a contract with a payment or a dispute still open has not yet been discharged.
 
 ## Testing completion
 

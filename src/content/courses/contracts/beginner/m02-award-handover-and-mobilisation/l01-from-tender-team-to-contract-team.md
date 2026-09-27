@@ -16,7 +16,7 @@ The UK Sourcing Playbook (June 2023), Chapter 12, adds that how a contract will 
 
 ## What passes across
 
-A handover file usually carries the signed contract and every schedule, the clarifications agreed during tender, the supplier's key people, the reasons behind unusual clauses, and the risks the tender team saw. On an Ekene contract it also carries the Nigerian content numbers given at award. Under the Nigerian Oil and Gas Industry Content Development Act 2010 (the content Act; Act No. 2 of 2010, commenced 22 April 2010), s.22, the operator gives the Board, before award, the selected contractor, designated sub-contractors, start and completion dates and, for construction or service contracts, the estimated Nigerian employment in person-hours. Those award-stage numbers become the baseline the contract manager later reports against.
+A handover file usually carries the signed contract and every schedule, the supplier's key people, and the risks the tender team saw. On an Ekene contract it also carries the Nigerian content numbers given at award. Under the Nigerian Oil and Gas Industry Content Development Act 2010 (the content Act; Act No. 2 of 2010, commenced 22 April 2010), s.22, the operator gives the Board, before award, the selected contractor, designated sub-contractors, start and completion dates and, for construction or service contracts, the estimated Nigerian employment in person-hours. Those award-stage numbers become the baseline the contract manager later reports against.
 
 ## Authority and conflicts
 
@@ -30,4 +30,4 @@ You are the new contract manager. Write a handover checklist of five lines you w
 
 ### A reading
 
-A sound list asks for the signed framework with its schedule of rates and every schedule; the stated KPIs and how each is measured; the Nigerian content plan with the award-stage figures given to the Board under the content Act, s.22, as the reporting baseline; the named people and delegations on both sides, confirmed in writing; and a note of the tender team's known risks and any clarifications agreed during tender. A line on refreshing conflicts of interest for the new team is a good addition drawn from UK practice.
+A sound list asks for the signed framework with its schedule of rates and every schedule; the stated KPIs and how each is measured; the Nigerian content plan with the award-stage figures given to the Board under the content Act, s.22, as the reporting baseline; the named people and delegations on both sides, confirmed in writing; and a note of the tender team's known risks. A line on refreshing conflicts of interest for the new team is a good addition drawn from UK practice.

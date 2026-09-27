@@ -80,7 +80,7 @@ q(0, "EKC-04 is the synthetic casing and tubulars frame agreement with TB-D (syn
   "The World Bank Contract Management Practice guidance (Second Edition, 2024), Cost Control, p.20, expects the contract manager to know in advance which costs, possible extra costs included, sit with the contractor and which sit elsewhere. Mapping the allocation only after a claim, at close-out or in arbitration leaves the first check on entitlement unanswered when it is needed.",
   ['P159'])
 
-q(3, "EKC-03 is the synthetic camp catering contract with CF-C (synthetic). CF-C sends a one-page claim for extra meals served during a plant shutdown, giving a single total and no breakdown. On the World Bank Contract Management Practice guidance (Second Edition, 2024), taught by concept, what should the contract manager ask IM-F to provide?",
+q(3, "EKC-03 is the synthetic camp catering contract with CF-C (synthetic). CF-C sends a one-page claim for extra meals served during a plant shutdown, giving a single total and no breakdown. On the World Bank Contract Management Practice guidance (Second Edition, 2024), taught by concept, what should the contract manager ask CF-C to provide?",
   "An analysis of the costs claimed, backed by documents such as meal counts, reports and invoices",
   ["A letter from CF-C's managing director confirming that the total claimed is accurate for the shutdown",
    "Nothing further, since a claim under a fixed-fee contract is paid on the total the supplier states",
@@ -97,7 +97,7 @@ q(1, "EKC-01 is the synthetic well services call-off framework with WS-A (synthe
   ['P185'])
 
 q(2, "EKC-05 is the synthetic flowline replacement works contract with FW-E (synthetic), a lump sum. FW-E claims the cost of an extra coating on each weld as additional work. The specification in the contract already requires that coating on every weld. What question does the World Bank Contract Management Practice guidance (Second Edition, 2024), taught by concept, put first?",
-  "Whether the so-called extra work was already in scope and has been labelled extra by mistake",
+  "Whether FW-E's so-called extra work was already in scope and was labelled extra by mistake",
   ["Whether FW-E's market rate for coating is lower than the rate a second contractor would charge",
    "Whether FW-E gave notice of the coating within the period the arbitration clause of the contract states",
    "Whether FW-E's crew was released to other work during the time the coating was being applied"],

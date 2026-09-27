@@ -1,6 +1,6 @@
 # Limits on modifying a public contract
 
-Public procurement law limits how far a contract can move after award. This lesson teaches the UK limits and one World Bank rule as published practice, and asks what they mean for an Ekene contract.
+This lesson teaches the UK limits on modifying a contract after award and one World Bank rule, as published practice, and asks what they mean for an Ekene contract.
 
 Every text in this lesson was read on 27 September 2026.
 
@@ -12,30 +12,32 @@ The UK guidance on Contract Modifications (Crown copyright 2024), para 1, states
 
 ## Some of the grounds
 
-Three grounds the guidance describes show the shape:
+Three grounds show the shape:
 
 * **Non-substantial change.** The term moves by no more than 10% of the maximum term at award, with no material change of scope or of economic balance toward the supplier.
-* **Below-threshold change.** A modification may not move the estimated value by more than 10% for goods or services or 15% for works, and all such modifications together must stay below the threshold for that type of contract.
+* **Below-threshold change.** No more than 10% of the estimated value for goods or services, or 15% for works, with all such modifications together below the threshold for that type of contract.
 * **Unforeseeable circumstances.** Circumstances not reasonably foreseeable before award, the contract's overall nature unchanged, and a value rise of no more than 50% (a cap that does not apply to utilities contracts).
 
-## No slicing
+## Publication and no slicing
 
-The guidance, para 15, adds that a contracting authority "should not make repeated small below-threshold modifications to a contract in order to purchase additional goods, services or works when those modifications could reasonably have been made as a single (larger) modification".
+Para 8 adds that where a change needs a contract change notice on a contract worth more than £5 million including the change, the Act also requires publication of the modification or of the contract as modified, subject to listed exemptions.
+
+Para 15 adds that an authority "should not make repeated small below-threshold modifications to a contract in order to purchase additional goods, services or works when those modifications could reasonably have been made as a single (larger) modification".
 
 ## The World Bank rule
 
-Under the World Bank Procurement Regulations (Seventh Edition, September 2025), taught by concept, for a contract under the Bank's prior review, before agreeing a variation that, alone or with all earlier ones, adds more than 15 percent to the original contract cost, extensions of time included, the Borrower seeks the Bank's no objection. Extreme urgency is the stated exception.
+Under the World Bank Procurement Regulations (Seventh Edition, September 2025), taught by concept, on a contract under the Bank's prior review the Borrower seeks the Bank's no objection before agreeing a variation that, alone or with all earlier ones, adds more than 15 percent to the original contract cost, extensions of time included, save in extreme urgency.
 
 ## What this means for Ekene
 
-None of these limits binds an Ekene contract: they are UK law for UK public bodies and a World Bank rule for its borrowers. The content Act (Act No. 2 of 2010, commenced 22 April 2010), s.6, requires Ekene's contracts to conform to that Act. What the UK and World Bank texts offer is a discipline: count changes cumulatively, compare the total with the original contract, and ask when the work should be competed afresh, at a point Ekene's own policy sets.
+None of these limits binds an Ekene contract: they are UK law for UK public bodies and a World Bank rule for its borrowers. The content Act (Act No. 2 of 2010, commenced 22 April 2010), s.6, requires Ekene's contracts to conform to that Act. The UK and World Bank texts offer a discipline: count changes cumulatively, compare the total with the original contract, and ask when to compete the work afresh, at a point Ekene's policy sets.
 
 ## Exercise
 
-EKC-07 is the synthetic Ekene environmental monitoring consultancy by EM-G. The scenario adds its own facts: over one year the contract manager approved four small changes, each adding groundwater sampling at one more well, each below the manager's approval limit.
+EKC-07 is the synthetic Ekene environmental monitoring consultancy by EM-G. The scenario adds its own facts: in one year the contract manager approved four small changes, each adding groundwater sampling at one more well, each below the manager's limit.
 
-Write a note to the contract owner on what the pattern shows and what happens next.
+Write a note to the contract owner on what the pattern shows and what next.
 
 ### A reading
 
-The pattern looks like the slicing the UK guidance warns against: four small changes that could reasonably have been made as one. No UK rule binds EKC-07, yet the note adds the four together, compares the total with the original contract, and asks the contract owner to decide whether groundwater sampling becomes one assessed change or a new scope to be competed.
+The pattern looks like the slicing the UK guidance warns against. No UK rule binds EKC-07, yet the note adds the four, compares the total with the original contract, and asks the contract owner whether groundwater sampling becomes one assessed change or new scope to compete.

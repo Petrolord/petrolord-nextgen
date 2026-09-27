@@ -27,7 +27,7 @@ q(1,
 
 q(0,
   "The Board (NCDMB) holds a public review of Ekene's (synthetic) Nigerian Content Plan for a new project. Under the content Act, ss.8 and 9, what follows?",
-  "If satisfied, the Board issues a Certificate of Authorization, and a public review ends with the certificate issued or denied within 30 days from its start",
+  "The Board issues a Certificate of Authorization if satisfied, the certificate issued or denied within 30 days of the review's start",
   ["The Bureau of Public Procurement issues a no objection certificate within sixty days of receiving the plan",
    "The plan is approved automatically if the Board has not objected by the end of the project's first quarter",
    "The Board registers the plan on the Joint Qualification System, which serves as the project's approval"],

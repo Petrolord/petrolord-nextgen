@@ -14,7 +14,7 @@ The exam holds 42 written cases, seven from the material of each Expert module. 
 
 **3. Put the steps in order.** For a claim, the World Bank guidance checks entitlement, then that the cost was incurred and reasonable, then causation (p.51). For poor performance, GovS 008 (version 2.2, issued 1 April 2026) says at 5.4.7: "Early termination of a contract should be a last resort only enacted after other provisions for the delivery of the contract, including contractual remedies for improving performance, have been exhausted."
 
-**4. Check the record and Ekene's own conduct.** A written record carries a decision; a verbal warning does not. Before relying on a supplier's default, check that Ekene met its own obligations.
+**4. Check the record and Ekene's own conduct.** A decision rests on the written record, so any warning given aloud is confirmed in writing. Before relying on a supplier's default, check that Ekene met its own obligations.
 
 **5. Look ahead.** A good answer protects the next step: the evidence a later dispute needs, or the completion evaluation the World Bank Procurement Regulations for IPF Borrowers (Seventh Edition, September 2025) describe (Annex XI, para 2.4).
 

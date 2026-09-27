@@ -21,7 +21,7 @@ q(1, "A synthetic Ekene contract manager reads the UK Contract Terminations guid
   ["Termination by the buyer for the supplier's default, and nothing else",
    "Expiry only, since a contract that is performed in full never terminates",
    "Rescission and court orders only, since both parties' consent ends nothing"],
-  "The UK Contract Terminations guidance (Procurement Act 2023), para 8 (s.80(3)), gives termination a broad meaning for the termination notice: discharge (obligations fulfilled, payments made, disputes settled), expiry, termination by a party, rescission, or being set aside by a court. Each distractor keeps only part of that list.",
+  "The UK Contract Terminations guidance (Procurement Act 2023), para 8 (s.80(3)), gives termination a broad meaning for the termination notice, in a list that is not exhaustive: discharge (for example, obligations fulfilled, payments made and any disputes settled, by mutual agreement or frustration), expiry, termination by a party, rescission, or being set aside by a court. Each distractor keeps only part of that list.",
   ['P198'])
 
 q(3, "EKC-07 is the synthetic environmental monitoring consultancy with EM-G (synthetic). Ekene models its close-out on the UK Procurement Act 2023 regime and wants to know how quickly that regime has a contract termination notice published once a public contract ends. What does the UK Contract Terminations guidance, para 26, say?",
@@ -93,7 +93,7 @@ q(3, "EKC-02 is the synthetic platform supply vessel time charter with MV-B (syn
   ["Ten per cent of the contract value is retained in a Nigerian bank account and paid into the Fund at completion",
    "Five per cent of the project sum is paid into the Fund as a completion fee once the certificate is issued",
    "No deduction applies to service contracts, since s.104(2) covers only supply of goods upstream"],
-  "The content Act, s.104(2), provides that one per cent of every contract awarded to any operator, contractor, subcontractor, alliance partner or other entity in the upstream sector shall be deducted at source and paid into the Fund. Ten per cent is the s.52(3)(f) share of revenue kept in a Nigerian bank account, five per cent is the s.68 fine, and s.104(2) covers every contract.",
+  "The content Act, s.104(2), provides that one per cent of every contract awarded to any operator, contractor, subcontractor, alliance partner or other entity in the upstream sector shall be deducted at source and paid into the Fund. Ten per cent is the s.52(3)(f) share of revenue kept in a Nigerian bank account, five per cent is the s.68 fine, and s.104(2) covers every contract awarded in the upstream sector, services included.",
   ['P134'])
 
 q(0, "EKC-04 is the synthetic casing and tubulars frame agreement with TB-D (synthetic), and Ekene is preparing a replacement agreement. What do the NCDMB Guidelines for NCDMB Approvals of Nigerian Oil and Gas Industry Contracting Processes (2025 update) ask for, at the Nigerian Content Plan stage of a replacement contract?",

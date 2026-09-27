@@ -4,13 +4,13 @@ A KPI score is only as good as the data behind it. When a supplier disagrees wit
 
 ## What to record as you go
 
-The World Bank Contract Management Practice guidance (Second Edition, 2024), taught here by concept, lists what a manager should record: how the supplier performed and delivered, every communication and notice, the dates, and who was involved (Figure XIV). Records made at the time carry more weight than a reconstruction made after a disagreement starts.
+The World Bank Contract Management Practice guidance (Second Edition, 2024), taught here by concept, lists what a manager should record: how the supplier performed and delivered, every communication and notice, the dates, and who was involved (Figure XIV).
 
 For each indicator, the evidence should match its definition. If the contract measures availability from a daily log, the daily log is the evidence; an email written a month later is a poor substitute.
 
 ## A regular assessment
 
-The UK Cabinet Office guidance on KPIs under the Procurement Act 2023 (April 2026 PDF) describes the UK duty to assess a supplier's performance against its KPIs "at least once in every twelve month period during the lifetime of the contract and on termination" (para 14), with published ratings set by regulation: Good, Approaching target, Requires improvement, Inadequate, and Other (para 15). That duty binds UK contracting authorities. The practice it models is simple: assess on a fixed cycle, against the stated indicator, with a stated rating, so a disagreement is caught early.
+The UK Cabinet Office guidance on KPIs under the Procurement Act 2023 (April 2026 PDF) explains the duty the UK Act's s.71 sets: to assess a supplier's performance against its KPIs "at least once in every twelve month period during the lifetime of the contract and on termination" (para 14), with published ratings set by regulation: Good (meeting or exceeding the KPI), Approaching target, Requires improvement (below the KPI), Inadequate (significantly below the KPI), and Other (para 15). That duty binds UK contracting authorities. The practice it models is simple: assess on a fixed cycle, against the stated indicator, with a stated rating, so a disagreement is caught early.
 
 ## When a score is contested
 

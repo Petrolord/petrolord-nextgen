@@ -25,7 +25,7 @@ q(2, "EKC-06 is the synthetic instrument maintenance service with supplier IM-F 
   ['P011'])
 
 q(0, "EKC-03 is the synthetic camp catering and facility services contract with supplier CF-C (synthetic). A delivery model assessment compares keeping camp maintenance with the market against taking it in-house. Ekene has no maintenance supervisor who knows the camp contract. Which point from the Sourcing Playbook (June 2023), UK good practice, bears on the market option?",
-  "Outsourced services should rest on a robust contractual relationship overseen by a qualified contract manager with a clear operational understanding of the contract",
+  "Outsourced services need a robust contractual relationship, overseen by a qualified contract manager who understands how the contract operates",
   ["Outsourced services need no contract manager where the supplier reports its own performance each month against the service levels",
    "A market option wins wherever the fee is fixed, since a fixed monthly fee moves the performance risk onto the supplier",
    "The contract manager's skills matter only for in-house delivery, since a supplier on the market is managed by its own staff"],

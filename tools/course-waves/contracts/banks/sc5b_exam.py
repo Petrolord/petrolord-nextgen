@@ -22,20 +22,20 @@ def q(k,p,c,ds,e,src):
 
 # Module 1: contract management and its sources.
 q(1, "EKC-07 is a synthetic environmental monitoring consultancy with EM-G (synthetic). Three Ekene departments use its reports, and each assumes one of the others manages the contract. Which practice from the World Bank Contract Management Practice guidance (Second Edition, 2024) addresses this?",
- "Appointing a contract manager for each contract.",
+ "Appointing a contract manager for each contract, EKC-07 among them.",
  ["Letting EM-G's key person act as the manager for all three departments.",
-  "Rotating the manager's job monthly among the three departments that use the reports.",
+  "Rotating the job monthly among the three departments that use it.",
   "Leaving management to whichever department last received a quarterly report."],
  "The World Bank guidance, taught by concept, treats appointing a contract manager for each contract as good practice. A manager drawn from the supplier cannot hold Ekene's side, and a rotating or default arrangement leaves no one accountable from month to month.",
  ['P006'])
 
 q(2, "On EKC-05, the synthetic FW-E flowline replacement, the works are finished and the defects period is running. A colleague wants to close the file of Nigerian labour hours kept during the works. Why does that record stay live?",
- "It feeds the operator's annual report, which under the content Act, s.60, is filed in the first sixty days of the next year.",
+ "It feeds the operator's annual content report, filed under s.60 within sixty days of the new year.",
  ["It has to be returned to FW-E so that FW-E can file the annual content report itself.",
   "It is needed only if FW-E asks for a price increase, so it can be destroyed now.",
   "It stays live for ten years under the Public Procurement Act 2007, s.16(12)."],
  "Under the Nigerian Oil and Gas Industry Content Development Act 2010 (the content Act), s.60, each operator files its annual Nigerian Content Performance Report within sixty days of the beginning of each year, covering all its projects. A contract's content record is therefore read after the work is done. The annual report is the operator's duty, and the printed Public Procurement Act 2007 garbles its retention period in s.16(12), so no ten year period is taught from it.",
- ['P127'])
+ ['P127', 'P052'])
 
 q(3, "EM-G (synthetic) proposes to replace the named key person on EKC-07, the synthetic environmental monitoring consultancy. On the course's split of roles, whom should the contract manager tell?",
  "The contract owner, since the change touches the outcome the contract buys.",
@@ -70,10 +70,10 @@ q(2, "An Ekene officer who approved a payment under a written delegation later t
  ['P012'])
 
 q(1, "Why, on Annex XI para 2.1 of the World Bank's Regulations for IPF Borrowers, should managing a contract follow a system?",
- "Optimising performance and managing risks.",
+ "Optimising performance and managing the contract's risks.",
  ["Reducing the number of suppliers on the approved list each year.",
   "Ensuring that every contract is renewed with the same supplier.",
-  "Allowing the buyer to change the scope without the supplier's agreement."],
+  "Letting the buyer change the scope without the supplier's agreement."],
  "Annex XI para 2.1, taught by concept, calls for contract management that is planned, carried out, monitored and evaluated systematically, so that performance is optimised and risks are managed. Shrinking a supplier list, renewing by default and changing scope unilaterally are not purposes it states.",
  ['P009'])
 
@@ -144,10 +144,10 @@ q(2, "The UK Contract Management Framework Summary (Area 8, item 10) lists contr
  ['P025'])
 
 q(1, "The UK Sourcing Playbook (June 2023), Chapter 7, recommends its model services contract as a starting point. Which items does it list for users to tailor?",
- "Performance indicators and service credits, insurance, invoicing and indexation, and financial distress, among others.",
- ["The Nigerian content schedule, the labour clause and the Board's approvals.",
-  "Only the parties' names and addresses, since the rest is fixed.",
-  "The FIDIC general conditions, which the model contract reproduces."],
+ "Performance indicators, service credits, insurance, invoicing, indexation and financial distress.",
+ ["The Nigerian content schedule, the labour clause and the Board's approvals for each award.",
+  "Only the parties' names and addresses, since everything else in it is fixed.",
+  "The FIDIC general conditions, which the model contract reproduces in full."],
  "The Sourcing Playbook, Chapter 7, lists what users should tailor: performance indicators and service credits, insurance and parent company guarantees, invoicing and indexation, pricing, benchmarking, financial distress, and the governance and contract management structure. It is a UK text, so Nigerian content terms are not on its list, and it is no FIDIC form.",
  ['P151'])
 
@@ -201,12 +201,12 @@ q(2, "Ekene makes a one-off purchase of a batch of standard, off-the-shelf press
  ['P037'])
 
 q(1, "EKC-02 is a synthetic vessel charter with MV-B (synthetic), whose availability is measured from Ekene's daily log. A month after a disputed outage, MV-B sends an email describing the vessel as ready throughout. How much weight should the email carry against the log?",
- "Little, because evidence should match the indicator's definition and be made at the time.",
+ "Little, because the evidence should match the indicator's definition, which here points to the daily log.",
  ["Full weight, since a supplier's written statement always overrides a buyer's own operational log.",
   "Equal weight, so the manager splits the hours between the two sources.",
   "More weight than the log, since an email is a formal notice."],
- "The World Bank Contract Management Practice guidance (Figure XIV), taught by concept, lists what to record as it happens: performance, communications and notices, dates and who was involved. Where the indicator is measured from a daily log, the log is the evidence, and a reconstruction written after a disagreement starts is a poor substitute. Splitting hours by source ignores the evidence.",
- ['P160'])
+ "A contract is managed on its own terms, as the World Bank Contract Management Practice guidance reminds its reader (p.1), and the same guidance, taught by concept, lists what to record: performance, communications and notices, dates and who was involved (Figure XIV). Where the indicator is measured from a daily log, the log is the evidence, and an email written a month later is a poor substitute. Splitting hours by source ignores the evidence.",
+ ['P160', 'P007'])
 
 q(0, "Under the UK KPI guidance (para 15), what separates the ratings Requires improvement and Inadequate in a published KPI assessment?",
  "Requires improvement is below the KPI, and Inadequate is significantly below it.",
@@ -229,7 +229,7 @@ q(3, "CF-C (synthetic) disputes a cleanliness score on EKC-03, the synthetic cam
  ["Average the two figures and record the result as agreed.",
   "Accept CF-C's figure, since the supplier did the cleaning and knows the facts.",
   "Refer the score straight to formal dispute resolution under the contract."],
- "A contract is managed on its own terms, as the World Bank Contract Management Practice guidance reminds its reader, so a contested score starts with the indicator's definition in the contract, then compares both sides' records for the period, made at the time (Figure XIV). Averaging or deferring to one side skips the evidence, and a score the evidence can settle need never go further.",
+ "A contract is managed on its own terms, as the World Bank Contract Management Practice guidance reminds its reader, so a contested score starts with the indicator's definition in the contract, then compares both sides' records for the period (Figure XIV). Averaging or deferring to one side skips the evidence, and a score the evidence can settle need never go further.",
  ['P007', 'P160'])
 
 q(2, "When does the UK Procurement Act 2023, s.52(1), require a contracting authority to set its key performance indicators for a public contract worth more than £5 million?",
@@ -237,7 +237,7 @@ q(2, "When does the UK Procurement Act 2023, s.52(1), require a contracting auth
  ["Within twelve months after the contract starts.",
   "Only when the supplier first misses a service level.",
   "At the end of the contract, for the final assessment."],
- "The UK Act fixes the moment: KPIs are set before the authority enters into a public contract worth over £5 million, so the supplier signs up to them. Annual assessment is a later, separate duty in the guidance. None of this governs an Ekene contract; it is UK law used as practice.",
+ "The UK Act fixes the moment: KPIs are set before the authority enters into a public contract worth over £5 million, so the supplier signs up to them. Assessment at least once in every twelve months is a later, separate duty under the UK Act, s.71, as the KPI guidance (para 14) explains. None of this governs an Ekene contract; it is UK law used as practice.",
  ['P035'])
 
 q(3, "CF-C (synthetic) offers to run an extra weekend barbecue for residents if Ekene waives this month's service credit on EKC-03, the synthetic camp services contract. What should the manager do?",
@@ -258,7 +258,7 @@ q(0, "EKC-04 is a synthetic casing frame agreement with TB-D (synthetic). A prem
  ['P160'])
 
 q(3, "Among the functions the content Act, s.70(k), gives the Board, which one bears on the records an Ekene contract keeps?",
- "Making auditing procedures and conducting regular audits to monitor compliance with the content Act.",
+ "Making auditing procedures and running regular audits of compliance with the content Act.",
  ["Setting the unit prices for casing and tubulars supplied to operators.",
   "Approving each invoice before an operator pays its contractor.",
   "Keeping the only copy of every operator's contract file."],
@@ -274,8 +274,8 @@ q(0, "FW-E (synthetic) has shipped line pipe and valves to the EKC-05 site ahead
  ['P055'])
 
 q(1, "A federal agency's contractor asks which papers start the clock on a delayed payment (Public Procurement Act 2007, s.37(2)). Which submission starts it?",
- "The invoice, the valuation certificate and the confirmation or authentication of the procuring body.",
- ["The contract's signature, whatever happens after it.",
+ "The invoice, the valuation certificate and the procuring body's confirmation.",
+ ["The contract's signature, whatever happens after it is signed.",
   "The contractor's first reminder letter about the unpaid sum.",
   "The Bureau's approval of the procurement plan for that year."],
  "The clock in s.37(2) starts when the contractor submits its invoice and valuation certificate and the agency confirms or authenticates them; that is why a certificate matters for timing as well as for approval. Signature, reminder letters and the Bureau's plan approval are not the trigger. Ekene reads this federal rule as practice.",
@@ -335,7 +335,7 @@ q(2, "A synthetic Ekene contract has a total budget above $100 million (USD) and
  ["The supplier, which chooses a figure in its bid and keeps to it throughout.",
   "The content Act itself, in a figure printed in s.34.",
   "The contract manager, who sets it at the kick-off meeting with the supplier."],
- "The content Act, s.34, requires the labour clause to mandate a minimum percentage of Nigerian labour in specific cadres as may be stipulated by the Board. The percentage is the Board's to stipulate, and no passage the course relies on prints it, so none is taught. The supplier and the manager do not set it.",
+ "The content Act, s.34, requires the labour clause to mandate a minimum percentage of Nigerian labour in specific cadres as may be stipulated by the Board. The percentage is the Board's to stipulate, and the course states none. The supplier and the manager do not set it.",
  ['P118'])
 
 q(0, "Under the content Act, s.12, a Nigerian Content Plan sets out how the operator and its contractors will give first consideration to what?",

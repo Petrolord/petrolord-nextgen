@@ -58,10 +58,10 @@ q(0, "EKC-03, the synthetic camp catering contract with CF-C, deducts a service 
  ['P028'])
 
 q(3, "EKC-06 is a synthetic instrument maintenance contract: IM-F (synthetic) is paid stated hourly rates plus materials at cost. What does the World Bank Contract Management Practice guidance (Cost Control, p.20) expect the manager to know before costs arise?",
- "Which costs sit with IM-F and which sit with Ekene.",
- ["Nothing in advance, since hourly rates mean the supplier carries every cost and every overrun.",
+ "Which costs, possible extra costs included, sit with IM-F and which sit with Ekene.",
+ ["Nothing in advance, since hourly rates put every overrun on the supplier.",
   "Only IM-F's profit margin, which the manager can reduce when a monthly invoice looks high.",
-  "The price of each instrument part on the open market, so IM-F can be told where to buy."],
+  "The open-market price of each part, so IM-F can be told where to buy."],
  "The World Bank guidance, taught by concept, expects the contract manager to know in advance which costs, possible extra costs included, sit with the contractor and which sit elsewhere. Under hourly rates plus materials at cost, Ekene carries the quantity, so the manager's checks move to hours and evidence. The supplier does not carry every cost on this basis, and cutting a margin or directing purchases is not the manager's to do unilaterally.",
  ['P159'])
 
@@ -135,7 +135,7 @@ q(2, "Ekene is checking whether a synthetic contract must carry a labour clause 
   "Whether the contract runs longer than 18 months, when indexation becomes usual.",
   "Whether the supplier has any Nigerian labour at all on the day of award."],
  "The content Act, s.34, requires that all projects or contracts whose total budget exceeds $100 million (USD) contain a labour clause mandating a minimum percentage of Nigerian labour in specific cadres as the Board may stipulate. So the budget is the fact to check. The 18 month figure is the World Bank's note on price adjustment, and the other two tests appear nowhere in s.34.",
- ['P118'])
+ ['P118', 'P150'])
 
 emit(Q, '/root/cat-wip-contracts/banks/sc5b_m03.json', expect_n=15)
 finish()

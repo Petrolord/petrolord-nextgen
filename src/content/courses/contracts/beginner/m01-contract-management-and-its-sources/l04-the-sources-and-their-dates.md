@@ -1,10 +1,10 @@
 # The sources and the dates they were checked
 
-Everything this course teaches comes from a named text read on a stated date. This lesson shows the kinds of text and how each is used.
+Everything this course teaches comes from a named text read on a stated date.
 
 ## Three kinds of text
 
-**Nigerian law.** The Nigerian Oil and Gas Industry Content Development Act 2010 (the content Act; Act No. 2 of 2010, commenced 22 April 2010) binds operators, contractors and sub-contractors in the industry. Its s.6 requires every later contract in the Nigerian oil and gas industry to "be in conformity with the provisions of this Act", so every Ekene contract sits inside it. Nigeria's Public Procurement Act 2007 (Act No. 14, Official Gazette No. 65, Vol. 94, 19 June 2007) binds federal procuring entities; for an operator it is a published statement of public practice. The Board's Guidelines for NCDMB Approvals of Nigerian Oil and Gas Industry Contracting Processes (2025 update) set out who does what at each stage of tendering and execution.
+**Nigerian law.** The Nigerian Oil and Gas Industry Content Development Act 2010 (the content Act; Act No. 2 of 2010, commenced 22 April 2010) binds operators, contractors and sub-contractors in the industry. Its s.6 requires every later contract in the Nigerian oil and gas industry to "be in conformity with the provisions of this Act", so every Ekene contract sits inside it. Nigeria's Public Procurement Act 2007 (Act No. 14, Official Gazette No. 65, Vol. 94, 19 June 2007) binds federal procuring entities; for an operator it is a published statement of public practice. The Board's Guidelines for NCDMB Approvals of Nigerian Oil and Gas Industry Contracting Processes (2025 update) bring the April 2018 guidelines into line with the industry service level agreement of September 2023 and the Presidential Directives of February 2024, and set out who does what at each stage of tendering and execution.
 
 **UK law and government guidance.** The UK Procurement Act 2023 as enacted, the UK Government Functional Standard GovS 008: Commercial (version 2.2, issued 1 April 2026) and the UK Sourcing Playbook (June 2023) bind UK contracting authorities. The course teaches them as openly licensed good practice and names them as UK texts.
 
@@ -22,7 +22,7 @@ Every text was read on or before 27 September 2026, and the course is due for re
 
 ## Doubts taught as doubts
 
-The printed copy of the Public Procurement Act 2007 gives its record retention period at s.16(12) in garbled words, so this course teaches no retention period. Where a text can be read two ways, the course names the doubt and leaves it open.
+The printed copy of the Public Procurement Act 2007 gives its record retention period at s.16(12) in garbled words, so this course teaches no retention period.
 
 ## Exercise
 

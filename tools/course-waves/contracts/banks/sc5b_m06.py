@@ -31,13 +31,13 @@ q(1, "An operator, contractor or sub-contractor carries out a project contrary t
   "A fine set by the Bureau of Public Procurement, of up to 15% of the value of the contract concerned.",
   "A written warning only, since the content Act creates no offence of its own."],
  "The content Act, s.68, says an operator, contractor or sub-contractor who carries out any project contrary to its provisions commits an offence and is liable upon conviction to a fine of five per cent of the project sum for each project in which the offence is committed, or cancellation of the project. The one per cent in s.104(2) is a deduction into the Fund, which is no penalty, and 15% is the ceiling on a mobilisation fee in the Public Procurement Act 2007, s.35(1).",
- ['P133'])
+ ['P133', 'P134', 'P049'])
 
 q(2, "How does the content Act, s.106, define Nigerian content?",
- "The quantum of composite value added to or created in the Nigerian economy through the deliberate use of Nigerian human and material resources and services.",
+ "The composite value added to or created in the Nigerian economy by deliberate use of Nigerian human and material resources.",
  ["The share of a contract's value paid to companies with a registered office in Nigeria.",
-  "The number of Nigerian citizens on a project's payroll on the day of award.",
-  "The percentage of a project's steel that is bought from Nigerian mills."],
+  "The number of Nigerian citizens on a project's payroll on the day the contract is awarded.",
+  "The percentage of a project's steel and pipe that is bought from Nigerian mills."],
  "Section 106 defines Nigerian content as the quantum of composite value added to or created in the Nigerian economy by a systematic development of capacity and capabilities through the deliberate utilisation of Nigerian human, material resources and services in the Nigerian oil and gas industry. A registered office, a headcount on one day or a single material each captures only a sliver of that value added.",
  ['P135'])
 
@@ -66,7 +66,7 @@ q(0, "A supplier on a synthetic Ekene contract plans to place part of its insura
  ['P122'])
 
 q(3, "A trainee asks what minimum Nigerian content percentages apply to the items on EKC-04, the synthetic TB-D casing frame agreement. What does the content Act, s.11(3), say, as this course teaches it?",
- "Operators, alliance partners and contractors comply with the minimums in the schedule to the content Act, which is read in the content Act itself.",
+ "They comply with the minimums set out in the schedule printed in the content Act itself.",
  ["There are no minimums, since the content Act leaves content levels to each supplier's choice.",
   "The minimums are set by each operator's contract manager at the kick-off meeting.",
   "The minimums are 50% for every item, as the content Act applies one level across the board."],
@@ -100,7 +100,7 @@ q(3, "An MV-B (synthetic) crew list on EKC-02, the synthetic vessel charter, sho
 q(0, "MV-B (synthetic) says no qualified Nigerian seafarer was available for a trainee position on EKC-02, the synthetic vessel charter. Under the content Act, s.30, what does the operator have to ensure where Nigerians are not employed for lack of training?",
  "That every reasonable effort is made within a reasonable time to supply that training, locally or elsewhere.",
  ["That the position is filled permanently by a foreign seafarer, since training takes too long to be reasonable.",
-  "That the Board pays for the training out of the Fund.",
+  "Board funding for the training, paid out of the Fund.",
   "That the charter is ended and let to another owner."],
  "The content Act, s.30, provides that where Nigerians are not employed because of their lack of training, the operator shall ensure, to the satisfaction of the Board, that every reasonable effort is made within a reasonable time to supply such training locally or elsewhere. So the manager asks MV-B what training is under way. A permanent foreign hire, a Board-funded course or ending the charter are not what s.30 provides.",
  ['P114'])
@@ -127,13 +127,13 @@ q(1, "Ekene files its annual Nigerian Content Performance Report. What deadline 
   "Within twelve months of the last contract in the year being awarded.",
   "At any time the Board asks, with no fixed date at all."],
  "The content Act, s.60, says that within sixty days of the beginning of each year, each operator shall submit to the Board its annual Nigerian Content Performance Report covering all its projects and activities for the year under review. The thirty day window belongs to the quarterly contract listing under s.24(1), and s.60 does fix a date.",
- ['P127'])
+ ['P127', 'P109'])
 
 q(2, "Under the content Act, s.24(1), what does Ekene submit to the Board within 30 days at the end of each quarter?",
- "A listing of the contracts, subcontracts and purchase orders above $1,000,000 (USD) awarded in the previous quarter.",
- ["A copy of every invoice paid in the quarter, whatever its value.",
-  "The annual Nigerian Content Performance Report for the year before.",
-  "A list of every supplier whose KPIs were missed during the quarter."],
+ "A listing of contracts, subcontracts and purchase orders over $1,000,000 (USD) awarded last quarter.",
+ ["A copy of every invoice paid to a contractor in the quarter, whatever its value.",
+  "The annual Nigerian Content Performance Report for the year before, in full.",
+  "A list of every supplier whose KPIs were missed at any point during the quarter."],
  "The content Act, s.24(1), requires the operator to submit to the Board, within 30 days at the end of each quarter, a listing of all contracts, subcontracts and purchase orders exceeding $1,000,000 (USD), or such other limit as the Board may determine, awarded in the previous quarter. The annual report falls under s.60, and the content Act asks for no quarterly invoice copies or KPI lists.",
  ['P109'])
 
