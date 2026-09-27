@@ -69,9 +69,9 @@
   "prompt": "FIN's EVII on the Ekene survey, 6745331.458602, sits below its EVPI of 14393775.278136. Why?",
   "options": [
    "The survey is imperfect: bright still leaves a dry-hole chance of 50.000000 percent, and dim hides a 10.000000 percent chance of success",
-   "The survey's stated cost of 1500000.000000 is taken off EVII before it is compared with EVPI",
-   "EVPI is computed at the posterior chance and EVII at the prior chance of 25.000000 percent",
-   "EVII is a Monte Carlo estimate over the signals, and EVPI is the exact closed-form ceiling"
+   "The survey's stated cost of 1500000.000000 is taken off EVII before the engine compares it with EVPI, so the gap is the cost",
+   "EVPI is computed at the posterior chance after each signal and EVII at the prior chance of 25.000000 percent",
+   "EVII is a Monte Carlo estimate drawn over the two signals, while EVPI is the exact closed-form ceiling above it"
   ],
   "answer": 0,
   "explanation": "EVPI assumes the outcome is known; the survey only shifts the chance of success, to 50.000000 after bright and 10.000000 after dim, so FIN still farms in on some dry holes and walks away from some successes. EVII is before the cost (the net figure is 5245331.458602), and informationValue draws nothing."
@@ -107,7 +107,7 @@
    "A sample of 50000 seeded draws landing near the 65.000000 percent the page states"
   ],
   "answer": 3,
-  "explanation": "Drilling yourself loses on every dry hole and on nothing else, and the draws estimate 0.651800 of the dry-hole chance the page states, 65.000000 percent. The farm out never loses (its chance of a loss is 0.000000), and a draw is an estimate, so no disagreement follows."
+  "explanation": "Drilling yourself loses on every dry hole and on nothing else, so the draws estimate the dry-hole chance the page states, 65.000000 percent, as 0.651800. The farm out never loses (its chance of a loss is 0.000000), and a draw is an estimate, so no disagreement follows."
  },
  {
   "prompt": "risk-spread-four prints a chance of a loss of 0.341480 for four independent prospects (50000 draws, seed 11) and risk-correlated prints 0.480300 for four correlated ones (20000 draws, seed 11). What must a reader check before comparing them?",
@@ -118,7 +118,7 @@
    "Nothing: estimates at the same seed compare directly whatever the draw count"
   ],
   "answer": 0,
-  "explanation": "The course: read the draw counts before comparing estimates; the two rows state 50000 and 20000 draws. Both EMVs are 20000000.000000 and both seeds are 11. The standard deviations are closed form and compare directly."
+  "explanation": "Read the draw counts before comparing estimates: the two rows state 50000 and 20000 draws. Both EMVs are 20000000.000000 and both seeds are 11. The standard deviations are closed form and compare directly."
  },
  {
   "prompt": "A riskSharing call asks for 200001 draws. What does the engine do?",
@@ -145,9 +145,9 @@
  {
   "prompt": "On risk-ekene, which holdings make up EKO's position after the farm-out?",
   "options": [
-   "Ekene Deep 70% at 25.000000 percent (success 157675235.929265, fail cost 28000000.000000) less the cash",
-   "Ekene Deep 40% at 25.000000 percent (success 99708134.816723, fail cost 6792000.000000) alone",
-   "Ekene Deep 30% at 25.000000 percent and the consideration of 10000000.000000 at 100",
+   "Ekene Deep 70% at 25.000000 percent (success 157675235.929265, fail cost 28000000.000000) less the cash it receives",
+   "Ekene Deep 40% at 25.000000 percent (success 99708134.816723, fail cost 6792000.000000) alone, with no cash holding",
+   "Ekene Deep 30% at 25.000000 percent and the whole consideration of 10000000.000000 held as cash at 100",
    "Ekene Deep 40% at 25.000000 percent (success 94500134.816723, fail cost 12000000.000000) and cash of 5208000.000000 at 100"
   ],
   "answer": 3,
@@ -203,10 +203,10 @@
    "transaction.volumeUnit must be left out when no reserves are stated; got \"boe\"",
    "transaction.reserves must have at most 10 entries; got 11",
    "transaction.volumeUnit must be a non-empty string; got nothing",
-   "transaction.price must be a finite number above 0; got nothing"
+   "interestPct must be a number above 0 and at most 100; got 0"
   ],
   "answer": 2,
-  "explanation": "Here the category and volume arrive and the unit is missing, and the engine names the unit field: transaction.volumeUnit must be a non-empty string; got nothing. The reverse case gets its own left-out message; eleven reserve categories break the cap of 10; and no price message of that shape exists."
+  "explanation": "Here the category and volume arrive and the unit is missing, and the engine names the unit field: transaction.volumeUnit must be a non-empty string; got nothing. The reverse case gets its own left-out message; eleven reserve categories break the cap of 10; and the interestPct message answers a working interest of 0."
  },
  {
   "prompt": "The same Ekene price reads 2.026914 on the risked basis and 0.236774 on the success-case basis. What follows for a report?",
@@ -220,7 +220,7 @@
   "explanation": "The course: a reader who is not told the basis cannot tell which one they are reading, and a report that quotes a value per percent or a ratio names its basis every time. The engine prints both per-percent figures; neither is the correct one in general, and the average is no engine figure."
  },
  {
-  "prompt": "HMRC's manual says the consideration for the disposal of an interest in a producing field is generally in the form of cash or shares (HMRC Oil Taxation Manual OT30023). What does the engine do with a consideration paid in shares?",
+  "prompt": "HMRC's manual says \"The consideration for the disposal of an interest in a producing field is generally in the form of cash or shares\" (HMRC Oil Taxation Manual OT30023). What does the engine do with a consideration paid in shares?",
   "options": [
    "Counts the shares at their stated price in the value of the transaction",
    "It prices the shares per percent of working interest on the risked basis",
@@ -250,7 +250,7 @@
    "100000000.000000: the recovery up to the stated cap, 44000000.000000 written off"
   ],
   "answer": 0,
-  "explanation": "devcarry-ekene recovers 190353141.996585 by 2036, with nothing written off (engine). the simple uplift of 44438966.681600 belongs to the other ledger; 100000000.000000 with 44000000.000000 written off is devcarry-ekene-none-capped, a different stated carry with no uplift and a cap."
+  "explanation": "devcarry-ekene recovers 190353141.996585 by 2036, with nothing written off (engine). The simple uplift of 44438966.681600 belongs to the other ledger; 100000000.000000 with 44000000.000000 written off is devcarry-ekene-none-capped, a different stated carry with no uplift and a cap."
  },
  {
   "prompt": "The Ekene simple carry is restated with dayBasis \"actual/365\" (a stated probe). What uplift does the engine add in 2032, and why does it differ from 11520000.000000?",
@@ -268,11 +268,11 @@
   "options": [
    "12000000.000000, in proportion to the 2.500000 points it cedes",
    "24000000.000000, the whole refund, since PA is the larger other party",
-   "A share of the 24000000.000000 in proportion to its 30.000000 percent participating interest before the back-in",
+   "144000000.000000, the refund PA pays when it backs in to 60.000000 percent under the PIA basis",
    "0.000000, since a back-in refund is paid to the Government alone"
   ],
   "answer": 0,
-  "explanation": "The refund of 24000000.000000 is received in proportion to the interest given up; PA and FIN each cede 2.500000 points, so each receives 12000000.000000 (engine). A refund split by the pre-back-in interests is not the rule, and the contract basis names no Government."
+  "explanation": "The refund of 24000000.000000 is received in proportion to the interest given up; PA and FIN each cede 2.500000 points, so each receives 12000000.000000 (engine). 144000000.000000 is the refund PA itself pays on backin-ekene-pia, a different back-in; the refund goes only to the parties that cede, and the contract basis names no Government."
  },
  {
   "prompt": "On backin-ekene-pia the refund of 144000000.000000 is recovered from future entitlement. In which year is it recovered, and what is carried into that year?",
@@ -332,13 +332,13 @@
  {
   "prompt": "Reg. 19(6) says consent is not granted until the application and processing fees are paid in full, while reg. 19(7) gives 90 days from the notification of the grant. How does the engine handle the two?",
   "options": [
-   "It charges the processing fee before consent and the premium within 90 days of the grant",
-   "It refuses any payment date, since the two provisions cannot both apply",
-   "It applies reg. 19(6) alone and treats any later payment as a withdrawal",
+   "It charges the processing fee before consent and the premium within 90 days of the grant, splitting the seven per cent",
+   "It refuses any payment date, since the two provisions cannot both apply to the same fee",
+   "It applies reg. 19(6) alone and treats any payment after the consent as a withdrawal of it",
    "It applies the timing of reg. 19(7) to (9) to the whole seven per cent and computes no application fee"
   ],
   "answer": 3,
-  "explanation": "The digest: the engine applies the timing of reg. 19(7) to (9) to the whole seven per cent and computes no application fee (reg. 19(1) leaves it to other regulations). The texts print both provisions, and the course shows the quirk as they print it."
+  "explanation": "The course: the engine applies the timing of reg. 19(7) to (9) to the whole seven per cent and computes no application fee (reg. 19(1) leaves it to other regulations). The texts print both provisions, and the course shows the quirk as they print it."
  },
  {
   "prompt": "HMRC's manual separates a farm in, assigned before the work, from an earn-in, where the work is completed before the assignment (OT30021). Which engine terms answer those two orders?",
@@ -382,7 +382,7 @@
    "In s.94(8), the marginal field section; the engine refuses a farm-out outside a marginal field"
   ],
   "answer": 0,
-  "explanation": "Section 94(8) opens For the purpose of this section, and s.94 is the marginal field section; the Act uses the word again in s.233(10) and the tax sections without a second definition. The engine's arithmetic applies to any farm-out a caller states, and it refuses nothing by field type."
+  "explanation": "Section 94(8) opens \"For the purpose of this section\", and s.94 is the marginal field section; the Act uses the word again in s.233(10) and the tax sections without a second definition. The engine's arithmetic applies to any farm-out a caller states, and it refuses nothing by field type."
  },
  {
   "prompt": "A PEL assignment is priced on fee-pel-stated under basis stated, with 1.500000 percent processing and 0.000000 percent premium on 1000000.000000. What does the engine return?",
@@ -409,9 +409,9 @@
  {
   "prompt": "A call to earningObligation carries the key carryCap, which the function does not read. What does the engine do with it?",
   "options": [
-   "Reads it as the cap of the first event, since the name says what it means",
-   "Ignores it and returns the obligation without a cap on any event",
-   "Refuses the first event's cap, since a cap may be stated only once",
+   "Reads it as the cap of the first event, since the name of the key says what it means",
+   "Ignores it and returns the obligation without a cap on any event of the call",
+   "Refuses the first event's cap, since a cap may be stated only once in one call",
    "Refuses it: carryCap is not an accepted key, with the accepted keys at the top level listed"
   ],
   "answer": 3,
@@ -453,12 +453,12 @@
  {
   "prompt": "What does every graded number of this course have in common?",
   "options": [
-   "Each is quoted in the digest beside its own capstone",
+   "Each is quoted in the lessons beside its own capstone",
    "Each is a return value of the engine on fixed inputs",
    "Each is a seeded draw that repeats the same on any machine",
    "Each rests on one of the four stated readings"
   ],
   "answer": 1,
-  "explanation": "The course: every graded number is a return value of this engine on fixed inputs; the capstones run their own synthetic deals, which the digest never prints; no graded figure is a Monte Carlo draw; and none depends on a reading."
+  "explanation": "The course: every graded number is a return value of this engine on fixed inputs; the capstones run their own synthetic deals, which the lessons never print; no graded figure is a Monte Carlo draw; and none depends on a reading."
  }
 ]

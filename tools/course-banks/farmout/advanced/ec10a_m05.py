@@ -22,7 +22,7 @@ x("The engine states that the success-case value is at the valuation date; well 
  ["On the consent fee alone, whose day count starts on the date of the valuation",
   "On the risk view's draws alone, whose seed is fixed at the valuation date",
   "Nowhere a figure depends on it, since every cost is first discounted to the base year by the canonical npv"],
- "The digest says the valuation timing acts on every EMV of the deal: a deal whose well costs, bonus, reimbursement and fees fell a year after the valuation date would discount them at the success-case rate and give different EMVs. The fee days count from the notification, the draws depend on the seed, and the costs are undiscounted by this very reading.")
+ "The course says the valuation timing acts on every EMV of the deal: a deal whose well costs, bonus, reimbursement and fees fell a year after the valuation date would discount them at the success-case rate and give different EMVs. The fee days count from the notification, the draws depend on the seed, and the costs are undiscounted by this very reading.")
 
 # 2
 x("fee-ekene is notified on 2027-05-03 and paid on 2027-07-30. How many days does the engine count, and what status does it return?",
@@ -38,7 +38,7 @@ x("Reading two names an alternative day count for reg. 19(7): counting the notif
  ["The fee: the seven per cent would be charged on the value of the transaction plus one day",
   "The surcharge: 0.01 percent of the fee would be charged for the notification day itself",
   "Nothing: the engine's count and the alternative agree on every day the table probes, from day 90 to day 211"],
- "The digest states it: counting that day as well would move a payment on day 90 into the grace days. The reading acts only at the day boundaries of the payment rules. The fee is seven per cent of the stated value whatever the dates, and no surcharge runs inside the 90 days or the 30 days of grace.")
+ "The course states it: counting that day as well would move a payment on day 90 into the grace days. The reading acts only at the day boundaries of the payment rules. The fee is seven per cent of the stated value whatever the dates, and no surcharge runs inside the 90 days or the 30 days of grace.")
 
 # 4
 x("On fee-day-210 the payment comes 90 days after the 90 + 30 days. How does the engine read reg. 19(9)'s surcharge for 90 days failing which the consent is deemed withdrawn?",
@@ -46,7 +46,7 @@ x("On fee-day-210 the payment comes 90 days after the 90 + 30 days. How does the
  ["It deems the consent withdrawn on the ninetieth surcharge day itself, so day 210 returns no total paid at all",
   "It charges 90 days at 39.200000 each and keeps the consent standing on every day after, with the surcharge still running",
   "It refuses payment.paidOn for any date after day 120, since the regulation's grace days have then run out"],
- "The engine charges 0.01 percent of the fee a day straight line: 90 days cost 3528.000000 and the consent stands on day 210; on day 211 it returns consent-deemed-withdrawn and no total paid (engine). Withdrawing on the ninetieth day is the other reading, which the digest names; the engine refuses no late date, since a withdrawn consent is a result.")
+ "The engine charges 0.01 percent of the fee a day straight line: 90 days cost 3528.000000 and the consent stands on day 210; on day 211 it returns consent-deemed-withdrawn and no total paid (engine). Withdrawing on the ninetieth day is the other reading, which the course names; the engine refuses no late date, since a withdrawn consent is a result.")
 
 # 5
 x("Reading four names the other order a simple-interest recovery could follow, principal first. What does the course say that order would do, and when does the reading act at all?",
@@ -54,7 +54,7 @@ x("Reading four names the other order a simple-interest recovery could follow, p
  ["Leave the ledger as it is, since accrued simple interest earns none under either order of payment",
   "Lower every year's uplift, whatever uplift type the carry states in its terms",
   "Raise the uplift only under the compound form, where it runs on the whole balance"],
- "The digest: paying principal first would leave more principal outstanding to earn interest, and the reading acts only when a carry states uplift type simple. Simple interest runs on the principal alone, so the order moves the ledger; under the compound form the uplift is charged on the whole opening balance, and the order of payment has nothing to act on.")
+ "The course: paying principal first would leave more principal outstanding to earn interest, and the reading acts only when a carry states uplift type simple. Simple interest runs on the principal alone, so the order moves the ledger; under the compound form the uplift is charged on the whole opening balance, and the order of payment has nothing to act on.")
 
 # 6
 x("Which of these does the course treat as a stated input with its source, and no reading at all?",
@@ -62,7 +62,7 @@ x("Which of these does the course treat as a stated input with its source, and n
  ["The day count from notification to payment",
   "The ninetieth surcharge day of reg. 19(9) and the day of withdrawal",
   "The valuation timing of well costs, bonus, reimbursement and fees"],
- "The digest separates it: the value of the transaction is a stated input (the sum payable to the Assignor stated in the application or contract, or an amount the Commission determines); it is no reading. The engine takes the amount and its source from the caller and charges the gazetted rates on it. The other three are readings the engine states in its bases.")
+ "The course separates it: the value of the transaction is a stated input (the sum payable to the Assignor stated in the application or contract, or an amount the Commission determines); it is no reading. The engine takes the amount and its source from the caller and charges the gazetted rates on it. The other three are readings the engine states in its bases.")
 
 # 7
 x("The Penn State EME 801, Lesson 6 page labels its payoff table in two ways. How does the course handle that?",
@@ -75,10 +75,10 @@ x("The Penn State EME 801, Lesson 6 page labels its payoff table in two ways. Ho
 # 8
 x("The engine's farm out EMV on deal-psu-eme801 prints as 17500.000000, and the page prints 17500.000000. What does the course claim about the two?",
  "The check passes within 0.000001; the double carries float residue, so no equality is keyed",
- ["Equal, since both print the same six decimals",
-  "Different by the rounding of the page to the nearest dollar",
-  "They are equal to the last binary digit of the double"],
- "The digest: the engine's farm out EMV prints as 17500.000000 at six decimals; the double it holds carries float residue in its last binary digits, and the check passes within 0.000001. Printed alike is not equal, so the course keys the check within its stated bound and claims no equality.")
+ ["Equal, since the engine and the page both print the same six decimals",
+  "Different, by the rounding the page applies to the nearest whole dollar",
+  "They are equal to the last binary digit of the double the engine holds"],
+ "The course: the engine's farm out EMV prints as 17500.000000 at six decimals; the double it holds carries float residue in its last binary digits, and the check passes within 0.000001. Printed alike is not equal, so the course keys the check within its stated bound and claims no equality.")
 
 # 9
 x("The arrangement of regulations at the front of the Assignment of Interests Regulations, 2024 lists 22. General provisions 23. Revocation 24. Interpretation 25. Citation. How does the body number its citation provision?",
@@ -94,7 +94,7 @@ x("How does the gazette cover of S.I. No. 67 of 2024 list the instrument, and wh
  ["The cover and the citation both say Nigerian Upstream Petroleum (Assignment of Interests) Regulations, 2024",
   "The cover says Nigerian Upstream Petroleum (Assignment of Interests) Regulations, 2024; the course uses a shorter name",
   "The cover names the instrument by its number alone, S.I. No. 67, and the course takes its name from reg. 1"],
- "The digest quotes the cover as 67 Nigeria Upstream Petroleum (Assignment of Interest) Regulations, 2024, a shorter title, while the citation names it the Nigerian Upstream Petroleum (Assignment of Interests) Regulations, 2024, the name this course uses. The course takes the name from the citation provision, which the body numbers 26.")
+ "The course quotes the cover as 67 Nigeria Upstream Petroleum (Assignment of Interest) Regulations, 2024, a shorter title, while the citation names it the Nigerian Upstream Petroleum (Assignment of Interests) Regulations, 2024, the name this course uses. The course takes the name from the citation provision, which the body numbers 26.")
 
 # 11
 x("Reg. 19(3) and reg. 24 of the 2024 Regulations both define the value of the transaction. How do the two definitions differ?",
@@ -118,7 +118,7 @@ x("Why does the course cite the Penn State EME 801 page for its figures and quot
  ["Its figures are rounded, so only the engine's six-decimal figures can be quoted",
   "It is a licensed model agreement, taught by concept only under the regulatory rule",
   "Its text is United Kingdom tax guidance, quoted only for concepts under OGL v3.0"],
- "The digest's source table says numbers only: the licence is non-commercial and this course is sold, so no sentence of it is quoted. It is a teaching page and no model agreement; the Open Government Licence text is HMRC's manual. The engine reproduces the page's printed EMVs, so rounding is no obstacle.")
+ "The course's source table says numbers only: the licence is non-commercial and this course is sold, so no sentence of it is quoted. It is a teaching page and no model agreement; the Open Government Licence text is HMRC's manual. The engine reproduces the page's printed EMVs, so rounding is no obstacle.")
 
 # 14
 x("The validation record says no public text prints a farm-in schedule or a break-even promote. Where do those figures of the course come from?",

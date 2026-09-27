@@ -68,8 +68,8 @@ x("The fixture states 120.000000 MMboe of 2C (contingent, best estimate) for the
  "444444.444444, the price over 36.000000 MMboe net to the working interest",
  ["533333.333333, the stated price per percent of working interest priced",
   "263125.842605, the risked value per percent, read as a price per MMboe",
-  "444444.444444, the price over the gross 2C volume after a reserve adjustment"],
- "The volume net to the working interest is 30.000000 percent of 120.000000, 36.000000 MMboe, and the engine divides the stated price by it: 444444.444444 (engine). 533333.333333 is the price per percent and 263125.842605 the risked value per percent, neither of them per MMboe, and the engine applies no reserve adjustment: the category is a stated label.")
+  "53333333.333333, the stated price for the working interest scaled up to 100 percent"],
+ "The volume net to the working interest is 30.000000 percent of 120.000000, 36.000000 MMboe, and the engine divides the stated price by it: 444444.444444 (engine). 533333.333333 is the price per percent, 53333333.333333 the price scaled to 100 percent and 263125.842605 the risked value per percent, none of them per MMboe; the engine applies no reserve adjustment, the category being a stated label.")
 
 # 8
 x("interest-production-metric prices a 20.000000 percent working interest in a producing field with a chance of success of 100 and a success well cost of 0. Why do the two per-percent figures agree?",
@@ -97,11 +97,11 @@ x("A price call states a transaction with a volume unit of boe and no reserves. 
 
 # 11
 x("Take the risked value of the 30.000000 percent working interest, 7893775.278136, less the bonus of 2000000.000000 and the reimbursement of 3600000.000000. Which figure does the course say that gives?",
- "2293775.278136, FIN's EMV in deal-ekene paying 30.000000 percent for 30.000000",
+ "2293775.278136, which prints as FIN's EMV in deal-ekene paying 30.000000 percent for 30.000000",
  ["-1806224.721864, FIN's EMV in deal-ekene paying 40.000000 percent for 30.000000",
-  "2293775.278136, EKO's EMV gain from farming out on the stated Ekene terms",
+  "1414224.721864, the rise in EKO's EMV from farming out on the stated Ekene terms",
   "4293775.278136, FIN's EMV paying its own share with no bonus stated at all"],
- "The digest derives the identity: 7893775.278136 less 2000000.000000 and 3600000.000000 is 2293775.278136, FIN's EMV at the first breakpoint, paying only its own share (engine). -1806224.721864 is FIN at the 40.000000 percent asked; EKO's EMV rises by 1414224.721864; 4293775.278136 is the first breakpoint of deal-ekene-bonus-zero, where the reimbursement is also removed.")
+ "The course derives the identity: 7893775.278136 less 2000000.000000 and 3600000.000000 is 2293775.278136, and FIN's EMV at the first breakpoint, paying only its own share, prints as 2293775.278136 (engine). The two agree at the six decimals the course prints; the engine's doubles differ in their last digits, so the course calls them alike in print. -1806224.721864 is FIN at the 40.000000 percent asked; 1414224.721864 is the rise in EKO's EMV; 4293775.278136 is the first breakpoint of deal-ekene-bonus-zero, whose cash bonus is 0 while the reimbursement stays.")
 
 # 12
 x("Priced as a 10.000000 percent working interest, the drill yourself or farm out figures of Penn State EME 801, Lesson 6 (numbers only) give a risked value per percent of what?",
@@ -128,7 +128,7 @@ x("Which reading of a reserve category does the engine apply when it prices 2C (
  "The source line: the reserve category and its volume are stated as the user classifies them. The engine classifies nothing: 2C is the fixture's label, and the price per MMboe is the stated price over the stated volume net to the working interest. It risks, converts and refuses no category.")
 
 # 15
-x("HMRC's manual says the value of a right will need to reflect the degree of probability that future benefits will accrue as well as their extent (HMRC Oil Taxation Manual OT30131). Which basis of the price view weighs that probability?",
+x("HMRC's manual says \"The value of the right will need to reflect the degree of probability that future benefits will accrue as well as their extent\" (HMRC Oil Taxation Manual OT30131). Which basis of the price view weighs that probability?",
  "The risked basis, which rolls both outcomes back at the stated chance",
  ["The success-case basis, the success-case value less the success well cost over 100",
   "Both bases alike, since each is computed on every call the engine answers",

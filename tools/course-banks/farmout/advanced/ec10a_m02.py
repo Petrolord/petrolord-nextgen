@@ -45,15 +45,15 @@ x("The course says the two Ekene estimates, 0.752450 and 0.747650, each sit with
  ["A course tolerance on every graded field",
   "The gap between the two positions' estimates",
   "One standard deviation of the chance of a loss across seeds the engine has sampled"],
- "The digest derives it: five standard errors of a proportion at that chance, with 20000 draws. It is a band for reading sampling noise. No graded field is a draw, so the course tolerance plays no part; the two estimates differ from each other only by accident of the draws, and the engine samples one seed per call.")
+ "The course derives it: five standard errors of a proportion at that chance, with 20000 draws. It is a band for reading sampling noise. No graded field is a draw, so the course tolerance plays no part; the two estimates differ from each other only by accident of the draws, and the engine samples one seed per call.")
 
 # 5
 x("On risk-ekene, EKO after the farm-out holds a certain holding of 5208000.000000. What does that figure stand for?",
  "The cash bonus 2000000.000000 plus the reimbursement 3600000.000000, less the assignor fees 392000.000000",
- ["The consideration 10000000.000000 less the Ekene carry of 4400000.000000 and the assignor fees",
+ ["The consideration 10000000.000000 less the assignor fees 392000.000000, all of it received as cash",
   "The fee of 392000.000000 plus the value of the transaction of 5600000.000000 stated to consentFee",
   "EKO's expected carry of 4100000.000000 plus the bonus, with the reimbursement left for later years"],
- "The digest derives it: 2000000.000000 + 3600000.000000 - 392000.000000 = 5208000.000000, the cash EKO receives for certain in both outcomes. The carry is already inside EKO's 40.000000 percent holding (its success value 94500134.816723 and fail cost 12000000.000000), the fee is paid by EKO and never added, and the expected carry is a deal-view figure.")
+ "The course derives it: 2000000.000000 + 3600000.000000 - 392000.000000 = 5208000.000000, the cash EKO receives for certain in both outcomes. The carry is already inside EKO's 40.000000 percent holding (its success value 94500134.816723 and fail cost 12000000.000000), the fee is paid by EKO and never added, and the expected carry is a deal-view figure. The consideration less the fees still counts the carry, which reaches EKO as well costs FIN pays and is no cash.")
 
 # 6
 x("Under the platform's percentile convention, which label does the engine give the low case of a position?",

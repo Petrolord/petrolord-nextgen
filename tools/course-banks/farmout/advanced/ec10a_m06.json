@@ -19,7 +19,7 @@
    "A refusal of a commission-determined source, since the metrics are unpublished"
   ],
   "answer": 0,
-  "explanation": "The digest's list: the Commission's metrics are not computed, and the engine takes a Commission-determined amount as a stated input (valueSource \"commission-determined\" is accepted). It derives no amount from any value it computes and refuses no such source."
+  "explanation": "The course's list of what the engine does not compute: the Commission's metrics are not computed, and the engine takes a Commission-determined amount as a stated input (valueSource \"commission-determined\" is accepted). It derives no amount from any value it computes and refuses no such source."
  },
  {
   "prompt": "Which fee of an assignment does the engine leave uncomputed although reg. 19(6) says consent is not granted until it is paid?",
@@ -30,7 +30,7 @@
    "The surcharge, which reg. 19(9) sets at 0.01 percent of the fee a day for up to 90 days after the grace"
   ],
   "answer": 2,
-  "explanation": "The digest's list: the application fee, AOI 2024 reg. 19(1), set by other regulations of the Commission; the engine computes nothing for it. The processing fee, the premium and the surcharge are the gazetted figures it does apply, each cited to reg. 19(2) or 19(9)."
+  "explanation": "The course's list of what the engine does not compute: the application fee, AOI 2024 reg. 19(1), set by other regulations of the Commission; the engine computes nothing for it. The processing fee, the premium and the surcharge are the gazetted figures it does apply, each cited to reg. 19(2) or 19(9)."
  },
  {
   "prompt": "PIA s.233(10) requires a farm-out agreement to provide for a decommissioning and abandonment plan funded in whole or in part by the incoming parties. What does the engine compute for it?",
@@ -41,7 +41,7 @@
    "The incoming parties' share, at the stated share paid of each well"
   ],
   "answer": 1,
-  "explanation": "The digest's list: a decommissioning and abandonment plan funded by the incoming parties, PIA s.233(10); the engine does nothing, concept only. A deal team values a farminee's share of a future abandonment cost outside the call and states it beside the engine's figures."
+  "explanation": "The course's list of what the engine does not compute: a decommissioning and abandonment plan funded by the incoming parties, PIA s.233(10); the engine does nothing, concept only. A deal team values a farminee's share of a future abandonment cost outside the call and states it beside the engine's figures."
  },
  {
   "prompt": "What does the engine report about tax on a farm-out deal?",
@@ -63,18 +63,18 @@
    "Through backIn, with the net profit share as the target of a back-in"
   ],
   "answer": 2,
-  "explanation": "The digest's list: royalty, net profit and other subordinated interests granted as consideration (HMRC OT18320 and OT30131); the engine does nothing, and a subordinated interest is valued outside. The consideration the engine counts is carry, cash bonus and reimbursement only, and its carry and back-in functions model neither."
+  "explanation": "The course's list of what the engine does not compute: royalty, net profit and other subordinated interests granted as consideration (HMRC OT18320 and OT30131); the engine does nothing, and a subordinated interest is valued outside. The consideration the engine counts is carry, cash bonus and reimbursement only, and its carry and back-in functions model neither."
  },
  {
   "prompt": "Which figure does the engine give as the market value of the 30.000000 percent Ekene working interest?",
   "options": [
-   "16000000.000000, the price the fixture states for the interest",
-   "7893775.278136, the risked value of the working interest priced",
-   "53333333.333333, the stated price scaled up to 100 percent",
+   "16000000.000000, the price the fixture states for the working interest",
+   "7893775.278136, the risked value of the 30.000000 percent working interest",
+   "53333333.333333, the stated price scaled up to 100 percent of the licence",
    "None; it reports value per percent of stated figures and ratios of stated prices"
   ],
   "answer": 3,
-  "explanation": "The digest's list: a market value for an interest comes from a transaction market; the engine computes value per percent of stated figures and ratios of stated prices. 16000000.000000 is a stated input, 7893775.278136 a value on stated terms and 53333333.333333 a price ratio, and none is asserted as market value."
+  "explanation": "The course's list of what the engine does not compute: a market value for an interest comes from a transaction market; the engine computes value per percent of stated figures and ratios of stated prices. 16000000.000000 is a stated input, 7893775.278136 a value on stated terms and 53333333.333333 the stated price scaled to 100 percent, and none is asserted as market value."
  },
  {
   "prompt": "When is a back-in triggered on the Ekene licence, according to backInRight?",
@@ -85,7 +85,7 @@
    "When the PIA s.85(4) basis is stated, from the first year of production after the refund falls due"
   ],
   "answer": 1,
-  "explanation": "The digest: a back-in's trigger is a contract event the caller reports; the engine does not decide when it happens. The carry payout year, the vesting of the farm-in and the basis named for the refund are all separate facts, and none of them fires a back-in."
+  "explanation": "The course: a back-in's trigger is a contract event the caller reports; the engine does not decide when it happens. The carry payout year, the vesting of the farm-in and the basis named for the refund are all separate facts, and none of them fires a back-in."
  },
  {
   "prompt": "An assignment is made without consent, or a beneficial ownership notice is late. What does the engine compute for the administrative fines of AOI 2024 reg. 21?",
@@ -96,7 +96,7 @@
    "The premium of five per cent"
   ],
   "answer": 2,
-  "explanation": "The digest's list: the administrative fines for an assignment without consent or a late beneficial ownership notice, AOI 2024 reg. 21; the engine does nothing. The surcharge runs only on a late fee payment, and the seven per cent is the consent fee itself."
+  "explanation": "The course's list of what the engine does not compute: the administrative fines for an assignment without consent or a late beneficial ownership notice, AOI 2024 reg. 21; the engine does nothing. The surcharge runs only on a late fee payment, and the seven per cent is the consent fee itself."
  },
  {
   "prompt": "An earningObligation call lists 21 licence parties. In the engine's words, what comes back?",
@@ -118,7 +118,7 @@
    "vest is not an accepted key; the accepted keys at the top level are parties, farmor, farminee, events, vesting, eventsCompleted, cashBonus, pastCosts"
   ],
   "answer": 3,
-  "explanation": "Every function checks its accepted keys before it reads a term, so the unknown key is refused first, with the path and the full list of accepted keys (the digest prints this probe verbatim). A misspelt optional key is refused and never silently dropped; the engine returns one refusal at a time and never reads vest as vesting."
+  "explanation": "Every function checks its accepted keys before it reads a term, so the unknown key is refused first, with the path and the full list of accepted keys (the course prints this probe verbatim). A misspelt optional key is refused and never silently dropped; the engine returns one refusal at a time and never reads vest as vesting."
  },
  {
   "prompt": "The 2033 uplift of the Ekene development carry reads 9629358.08 in the engine's reason. Which figure should a report reason with?",
@@ -140,7 +140,7 @@
    "It carries no NPV, decision tree or Monte Carlo code of its own; riskSharing alone samples, through portfolio.js"
   ],
   "answer": 3,
-  "explanation": "The digest: its five imports are cashflow.ts, decisionTree.js, portfolio.js, afe.js and jointVenture.js; it carries no NPV, decision tree or Monte Carlo code of its own, and the one function that samples is riskSharing, through the seeded portfolio Monte Carlo. The other parties' shares of the farm-in come from calculatePartnerCosts of afe.js."
+  "explanation": "The course: its five imports are cashflow.ts, decisionTree.js, portfolio.js, afe.js and jointVenture.js; it carries no NPV, decision tree or Monte Carlo code of its own, and the one function that samples is riskSharing, through the seeded portfolio Monte Carlo. The other parties' shares of the farm-in come from calculatePartnerCosts of afe.js."
  },
  {
   "prompt": "Beside its size caps and its sum tolerance, which figures does the engine hold as its own constants?",
@@ -151,7 +151,7 @@
    "An uplift of 8 percent a year for any carry stated without one"
   ],
   "answer": 0,
-  "explanation": "The digest: every deal term is an input with no default, and a call without one is refused by name; the only figures it holds are the gazetted ones in NIGERIA_ASSIGNMENT (2 and 5 per cent, 90 and 30 days, 0.01 per cent a day for 90 days, 50 percent for a change of control). The Ekene figures are fixture terms, stated in each golden input."
+  "explanation": "The course: every deal term is an input with no default, and a call without one is refused by name; the only figures it holds are the gazetted ones in NIGERIA_ASSIGNMENT (2 and 5 per cent, 90 and 30 days, 0.01 per cent a day for 90 days, 50 percent for a change of control). The Ekene figures are fixture terms, stated in each golden input."
  },
  {
   "prompt": "FIN's EMV on the Ekene deal is -1806224.721864. What does the course say such a computed figure does not say?",
@@ -162,6 +162,6 @@
    "It is no figure on fixed terms, being drawn at a seed"
   ],
   "answer": 2,
-  "explanation": "The digest: an EMV is what the stated chance and payoffs produce; none of the computed figures is a forecast of what a partner will pay or a statement of market value, and each is quoted with its terms. It is the EMV of FIN's farm-in position, it is a return value on fixed terms, and nothing in dealValue is drawn."
+  "explanation": "The course: an EMV is what the stated chance and payoffs produce; none of the computed figures is a forecast of what a partner will pay or a statement of market value, and each is quoted with its terms. It is the EMV of FIN's farm-in position, it is a return value on fixed terms, and nothing in dealValue is drawn."
  }
 ]

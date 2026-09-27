@@ -84,7 +84,7 @@ x("An informationValue call states one signal only, labelled a, with likelihoods
  ["information.signals must have likelihoodsPct[0] summing to 100 over the signals (P(signal / success)); got a sum of 95",
   "information.signals[0].likelihoodsPct must be an array [P(signal / success), P(signal / dry hole)] in per cent; got [75]",
   "information.signals must have at most 10 entries; got 11"],
- "One signal tells nothing, so the engine refuses the array by its length and prints the whole array back, in its own words: information.signals must be an array of at least 2 signals. The second message answers a likelihood column that does not sum to 100; the third answers a signal with one likelihood; the fourth answers eleven signals, above the cap of 10.")
+ "One signal tells nothing, so the engine refuses the array by its length and prints the whole array back, in its own words: information.signals must be an array of at least 2 signals. The summing message answers a likelihood column that does not sum to 100; the array message with got [75] answers a signal with one likelihood; the at-most-10 message answers eleven signals, above the cap of 10.")
 
 # 10
 x("The engine refuses a signal set with this message: information.signals must have likelihoodsPct[0] summing to 100 over the signals (P(signal / success)); got a sum of 95. Which rule failed?",
@@ -121,9 +121,9 @@ x("The same Ekene survey is worth 6892331.458602 to EKO and 6745331.458602 to FI
 # 14
 x("On the Ekene deal stated with the farmor-side overrun rule, an informationValue call gives FIN a share paid of 31 percent. Which statement matches what the engine does?",
  "It refuses deal.farmineePaysPct, naming 31.363636 as the share at which the carry is 0",
- ["It returns FIN's EVII on the stated terms, leaving the share paid unread",
-  "It refuses information.cost, checking the deal before pricing the survey",
-  "It returns a result whose reason says the carry is below 0"],
+ ["It returns FIN's EVII on the stated terms and leaves the share paid unread",
+  "It refuses information.cost, checking the survey's cost before the deal",
+  "It returns a result for FIN with a reason saying the carry on the success well is below 0"],
  "The information call builds the same positions as the deal call, so it applies the same check. The engine's words: deal.farmineePaysPct must be at or above 31.363636, the share at which the carry is 0 when the farmor side pays the excess ... got 31. The share paid is read, the cost is untouched, and a carry below 0 is refused outright with no values returned.")
 
 # 15

@@ -28,7 +28,7 @@ x("What does the engine do with the Commission's metrics for good and valuable c
  ["It applies them to the success-case value to set a Commission-determined amount",
   "Applies them through the risked value per percent of the interest assigned",
   "A refusal of a commission-determined source, since the metrics are unpublished"],
- "The digest's list: the Commission's metrics are not computed, and the engine takes a Commission-determined amount as a stated input (valueSource \"commission-determined\" is accepted). It derives no amount from any value it computes and refuses no such source.")
+ "The course's list of what the engine does not compute: the Commission's metrics are not computed, and the engine takes a Commission-determined amount as a stated input (valueSource \"commission-determined\" is accepted). It derives no amount from any value it computes and refuses no such source.")
 
 # 3
 x("Which fee of an assignment does the engine leave uncomputed although reg. 19(6) says consent is not granted until it is paid?",
@@ -36,7 +36,7 @@ x("Which fee of an assignment does the engine leave uncomputed although reg. 19(
  ["The processing fee, which reg. 19(2) sets at two per cent of the stated value",
   "The premium, which reg. 19(2) sets at five per cent of the stated value",
   "The surcharge, which reg. 19(9) sets at 0.01 percent of the fee a day for up to 90 days after the grace"],
- "The digest's list: the application fee, AOI 2024 reg. 19(1), set by other regulations of the Commission; the engine computes nothing for it. The processing fee, the premium and the surcharge are the gazetted figures it does apply, each cited to reg. 19(2) or 19(9).")
+ "The course's list of what the engine does not compute: the application fee, AOI 2024 reg. 19(1), set by other regulations of the Commission; the engine computes nothing for it. The processing fee, the premium and the surcharge are the gazetted figures it does apply, each cited to reg. 19(2) or 19(9).")
 
 # 4
 x("PIA s.233(10) requires a farm-out agreement to provide for a decommissioning and abandonment plan funded in whole or in part by the incoming parties. What does the engine compute for it?",
@@ -44,7 +44,7 @@ x("PIA s.233(10) requires a farm-out agreement to provide for a decommissioning 
  ["The farminee's share, at its vested interest times the dry-hole cost",
   "A reserve in the farmor's position, at the stated assignor fees",
   "The incoming parties' share, at the stated share paid of each well"],
- "The digest's list: a decommissioning and abandonment plan funded by the incoming parties, PIA s.233(10); the engine does nothing, concept only. A deal team values a farminee's share of a future abandonment cost outside the call and states it beside the engine's figures.")
+ "The course's list of what the engine does not compute: a decommissioning and abandonment plan funded by the incoming parties, PIA s.233(10); the engine does nothing, concept only. A deal team values a farminee's share of a future abandonment cost outside the call and states it beside the engine's figures.")
 
 # 5
 x("What does the engine report about tax on a farm-out deal?",
@@ -60,15 +60,15 @@ x("A farm-out grants the farmor a net profit interest as part of its considerati
  ["As cash consideration, added to the carry, bonus and reimbursement",
   "As a carried interest, through carryRecovery of the joint venture engine",
   "Through backIn, with the net profit share as the target of a back-in"],
- "The digest's list: royalty, net profit and other subordinated interests granted as consideration (HMRC OT18320 and OT30131); the engine does nothing, and a subordinated interest is valued outside. The consideration the engine counts is carry, cash bonus and reimbursement only, and its carry and back-in functions model neither.")
+ "The course's list of what the engine does not compute: royalty, net profit and other subordinated interests granted as consideration (HMRC OT18320 and OT30131); the engine does nothing, and a subordinated interest is valued outside. The consideration the engine counts is carry, cash bonus and reimbursement only, and its carry and back-in functions model neither.")
 
 # 7
 x("Which figure does the engine give as the market value of the 30.000000 percent Ekene working interest?",
  "None; it reports value per percent of stated figures and ratios of stated prices",
- ["16000000.000000, the price the fixture states for the interest",
-  "7893775.278136, the risked value of the working interest priced",
-  "53333333.333333, the stated price scaled up to 100 percent"],
- "The digest's list: a market value for an interest comes from a transaction market; the engine computes value per percent of stated figures and ratios of stated prices. 16000000.000000 is a stated input, 7893775.278136 a value on stated terms and 53333333.333333 a price ratio, and none is asserted as market value.")
+ ["16000000.000000, the price the fixture states for the working interest",
+  "7893775.278136, the risked value of the 30.000000 percent working interest",
+  "53333333.333333, the stated price scaled up to 100 percent of the licence"],
+ "The course's list of what the engine does not compute: a market value for an interest comes from a transaction market; the engine computes value per percent of stated figures and ratios of stated prices. 16000000.000000 is a stated input, 7893775.278136 a value on stated terms and 53333333.333333 the stated price scaled to 100 percent, and none is asserted as market value.")
 
 # 8
 x("When is a back-in triggered on the Ekene licence, according to backInRight?",
@@ -76,7 +76,7 @@ x("When is a back-in triggered on the Ekene licence, according to backInRight?",
  ["Once the development carry is recovered, in 2036 on the compound Ekene ledger",
   "When the farminee's vested interest reaches 30.000000 percent on completion",
   "When the PIA s.85(4) basis is stated, from the first year of production after the refund falls due"],
- "The digest: a back-in's trigger is a contract event the caller reports; the engine does not decide when it happens. The carry payout year, the vesting of the farm-in and the basis named for the refund are all separate facts, and none of them fires a back-in.")
+ "The course: a back-in's trigger is a contract event the caller reports; the engine does not decide when it happens. The carry payout year, the vesting of the farm-in and the basis named for the refund are all separate facts, and none of them fires a back-in.")
 
 # 9
 x("An assignment is made without consent, or a beneficial ownership notice is late. What does the engine compute for the administrative fines of AOI 2024 reg. 21?",
@@ -84,7 +84,7 @@ x("An assignment is made without consent, or a beneficial ownership notice is la
  ["The surcharge of reg. 19(9)",
   "Seven per cent of the value",
   "The premium of five per cent"],
- "The digest's list: the administrative fines for an assignment without consent or a late beneficial ownership notice, AOI 2024 reg. 21; the engine does nothing. The surcharge runs only on a late fee payment, and the seven per cent is the consent fee itself.")
+ "The course's list of what the engine does not compute: the administrative fines for an assignment without consent or a late beneficial ownership notice, AOI 2024 reg. 21; the engine does nothing. The surcharge runs only on a late fee payment, and the seven per cent is the consent fee itself.")
 
 # 10
 x("An earningObligation call lists 21 licence parties. In the engine's words, what comes back?",
@@ -100,7 +100,7 @@ x("A box carries an unknown key vest and lacks the vesting rule. Which refusal d
  ["vesting must be one of \"per-event\", \"all-events\"; got nothing",
   "vesting must be one of \"per-event\", \"all-events\"; got \"vest\"",
   "Both refusals in one message, the missing vesting rule listed first and then the unknown key vest with the full list of the accepted keys"],
- "Every function checks its accepted keys before it reads a term, so the unknown key is refused first, with the path and the full list of accepted keys (the digest prints this probe verbatim). A misspelt optional key is refused and never silently dropped; the engine returns one refusal at a time and never reads vest as vesting.")
+ "Every function checks its accepted keys before it reads a term, so the unknown key is refused first, with the path and the full list of accepted keys (the course prints this probe verbatim). A misspelt optional key is refused and never silently dropped; the engine returns one refusal at a time and never reads vest as vesting.")
 
 # 12
 x("The 2033 uplift of the Ekene development carry reads 9629358.08 in the engine's reason. Which figure should a report reason with?",
@@ -116,7 +116,7 @@ x("Which statement about the engine's own code matches its declared imports?",
  ["It carries its own seeded Monte Carlo for riskSharing and imports the canonical npv for the success case",
   "It re-implements rollback for the break-even promote and imports evpi and evii for information",
   "It imports carryRecovery for both the farm-in split and the development carry after it"],
- "The digest: its five imports are cashflow.ts, decisionTree.js, portfolio.js, afe.js and jointVenture.js; it carries no NPV, decision tree or Monte Carlo code of its own, and the one function that samples is riskSharing, through the seeded portfolio Monte Carlo. The other parties' shares of the farm-in come from calculatePartnerCosts of afe.js.")
+ "The course: its five imports are cashflow.ts, decisionTree.js, portfolio.js, afe.js and jointVenture.js; it carries no NPV, decision tree or Monte Carlo code of its own, and the one function that samples is riskSharing, through the seeded portfolio Monte Carlo. The other parties' shares of the farm-in come from calculatePartnerCosts of afe.js.")
 
 # 14
 x("Beside its size caps and its sum tolerance, which figures does the engine hold as its own constants?",
@@ -124,7 +124,7 @@ x("Beside its size caps and its sum tolerance, which figures does the engine hol
  ["The Ekene deal terms of the fixture, which fill in any term a call happens to leave out",
   "A chance of success of 25 percent and a discount rate of 0.1 for every success case",
   "An uplift of 8 percent a year for any carry stated without one"],
- "The digest: every deal term is an input with no default, and a call without one is refused by name; the only figures it holds are the gazetted ones in NIGERIA_ASSIGNMENT (2 and 5 per cent, 90 and 30 days, 0.01 per cent a day for 90 days, 50 percent for a change of control). The Ekene figures are fixture terms, stated in each golden input.")
+ "The course: every deal term is an input with no default, and a call without one is refused by name; the only figures it holds are the gazetted ones in NIGERIA_ASSIGNMENT (2 and 5 per cent, 90 and 30 days, 0.01 per cent a day for 90 days, 50 percent for a change of control). The Ekene figures are fixture terms, stated in each golden input.")
 
 # 15
 x("FIN's EMV on the Ekene deal is -1806224.721864. What does the course say such a computed figure does not say?",
@@ -132,7 +132,7 @@ x("FIN's EMV on the Ekene deal is -1806224.721864. What does the course say such
  ["It is no EMV of a named position, since the chance of success is stated by the caller",
   "It carries no weight until the survey is shot, since information may change the chance",
   "It is no figure on fixed terms, being drawn at a seed"],
- "The digest: an EMV is what the stated chance and payoffs produce; none of the computed figures is a forecast of what a partner will pay or a statement of market value, and each is quoted with its terms. It is the EMV of FIN's farm-in position, it is a return value on fixed terms, and nothing in dealValue is drawn.")
+ "The course: an EMV is what the stated chance and payoffs produce; none of the computed figures is a forecast of what a partner will pay or a statement of market value, and each is quoted with its terms. It is the EMV of FIN's farm-in position, it is a return value on fixed terms, and nothing in dealValue is drawn.")
 
 emit(Q, '/root/cat-wip-farmout/banks/ec10a_m06.json', expect_n=15)
 finish()

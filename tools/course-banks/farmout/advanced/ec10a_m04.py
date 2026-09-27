@@ -25,12 +25,12 @@ x("After the Ekene farm-in EKO holds a 40.000000 percent participating interest,
  "The engine reports a carried interest of 20.000000 points (engine): the carried share of the farmor's cost share, 50.000000 percent of 40.000000. carriedPct is the stated share of the cost share, FIN's 30.000000 percent is its own vested interest, and 35.000000 belongs to the drill-to-earn case, a different deal.")
 
 # 2
-x("The Ekene development spends 240000000 gross in 2029. Using the engine's rule, how much of it is carried for EKO that year?",
+x("In 2029 the Ekene development costs 240000000 gross. With EKO at 40 and a stated carriedPct of 50, what carried cost does the engine's rule add that year?",
  "48000000.000000, cost x 40 x 50 / 10,000",
  ["144000000.000000, the carried cost of all three years",
-  "120000000.000000, the half of the cost FIN pays in all",
+  "24000000.000000, the carried cost the ledger adds in 2031",
   "72000000.000000, the gross cost times PA's 30 percent"],
- "The engine's rule: carried cost = cost x participating interest x carriedPct / 10,000. 240000000 x 40 x 50 / 10,000 = 48000000.000000, the 2029 carried cost added (engine). 144000000.000000 is the carried cost of 2029 to 2031 together; FIN pays 120000000 in 2029 in all, its own share plus the carry; PA pays its own 72000000.")
+ "The engine's rule: carried cost = cost x participating interest x carriedPct / 10,000. 240000000 x 40 x 50 / 10,000 = 48000000.000000, the 2029 carried cost added (engine). 144000000.000000 is the carried cost of 2029 to 2031 together; 24000000.000000 is the carried cost added in 2031, a later year; 72000000.000000 is PA's own 30 percent share of the 2029 cost, which nobody carries.")
 
 # 3
 x("Under the compound uplift of 8.000000 percent a year, what does the engine add in 2031 on the Ekene development carry, and on what?",
