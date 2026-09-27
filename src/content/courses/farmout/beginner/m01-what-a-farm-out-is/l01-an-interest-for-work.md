@@ -18,7 +18,7 @@ The Petroleum Industry Act 2021 (Official Gazette No. 142, Vol. 108, 27 August 2
 
 > "(b) “farm-out” means an agreement between the holder of a petroleum mining lease or petroleum prospecting licence and a third party, which permits the third party to explore, prospect, win, work and carry away any petroleum encountered in a licence or lease area" (PIA s.94(8)(b))
 
-The definition sits in s.94, and the Act uses the word again in later sections without a second definition. The engine's arithmetic applies to any farm-out a deal states.
+The engine's arithmetic applies to any farm-out a deal states.
 
 ## The price is a share of a well
 

@@ -38,7 +38,7 @@ The engine computes no decommissioning share.
 
 ## Where the fee sits beside the deal
 
-The earning calculator's consideration is carry, bonus and reimbursement, and its farminee outlay is the well payment, bonus and reimbursement. Neither contains the fee. The fee is a payment by the assignor to the Commission's account, and the Professional tier's deal calculator adds it as a stated input when it values the deal for each side.
+The earning calculator's consideration and farminee outlay contain no fee. The Professional tier's deal calculator adds the fee as a stated input when it values the deal for each side.
 
 ## Exercise
 

@@ -28,7 +28,7 @@ The engine carries the consent rule in the basis of its fee call, in its own wor
 
 > a PPL or PML assignment needs the prior written consent of the Minister on the Commission's recommendation (PIA s.95(1) and (2)); a change of control above 50% is an assignment (s.95(3) and (14)); a PEL assignment needs the consent of the Commission (s.95(15); reg. 16)
 
-That one line is the map for this module. The next lesson takes the Minister and the Commission, the one after it a change of control, then the notification and the application, and the last the fees and their tax treatment.
+That one line is the map for this module, and the next four lessons take its parts in turn.
 
 ## Why an Associate reads this
 
