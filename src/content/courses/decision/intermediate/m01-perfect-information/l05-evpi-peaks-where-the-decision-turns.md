@@ -31,7 +31,7 @@ Drill is worth 445 p - 80 and Farm out 95 p. They are equal at p = 80 / 350 = 0.
 
 ## An engine detail at the switch
 
-At 0.228571 the engine reports Farm out as best. That is floating-point residue: 80 / 350 has no exact binary image, and Drill comes out below Farm out in the last binary digits. The EVPI of 61.7143 is the same whichever of the two is named.
+At 0.228571 the engine reports Drill and Farm out tied. 80 / 350 has no exact binary image, so the two differ by a residue of -7.11e-15 in the last binary digits, far inside the engine's tie band; Drill, listed first, carries the actionIndex as a mark. The EVPI of 61.7143 is the same whichever of the two is marked.
 
 ## Where it does not peak
 

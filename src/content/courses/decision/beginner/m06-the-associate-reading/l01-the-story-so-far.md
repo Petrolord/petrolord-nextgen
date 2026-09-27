@@ -4,7 +4,7 @@ Two teaching fields and one engine carry every number this tier owns: EKPAN roll
 
 ## What the engine is
 
-Three node types do all the work. A decision takes the maximum of its branch values, a chance node their probability-weighted sum, a terminal its payoff. A branch value is the child's value less the branch cost. The engine is risk neutral, applies no discounting to payoffs that arrive already discounted, keeps the first branch listed on a tie, and refuses a chance node whose probabilities do not sum to 1 within 1e-6.
+Three node types do all the work. A decision takes the maximum of its branch values, a chance node their probability-weighted sum, a terminal its payoff. A branch value is the child's value less the branch cost. The engine is risk neutral, applies no discounting to payoffs that arrive already discounted, reports a tie and marks the first branch listed, and refuses a chance node whose probabilities miss 1 by more than 1e-6 plus a 1e-12 allowance.
 
 ## EKPAN, one tree
 
@@ -24,7 +24,7 @@ Rolled back right to left, the development chance nodes are 375.0000 after a goo
 
 ## Where the decision turns
 
-On the EKPAN lottery, with two outcomes, Drill is 445 p - 80 and Farm out is 95 p. They cross at 80 / 350 = 0.228571; at the stated 0.350000 the drill is worth 75.7500 against 33.2500. A tie goes to the first branch listed: the published drillFarmOut tree ties at 0.200000 and names Drill.
+On the EKPAN lottery, with two outcomes, Drill is 445 p - 80 and Farm out is 95 p. They cross at 80 / 350 = 0.228571; at the stated 0.350000 the drill is worth 75.7500 against 33.2500. A tie is reported and the first listed branch is marked: the published drillFarmOut tree ties at 0.200000, and the engine reports indifferent with Drill marked.
 
 ## What the tier cannot tell you
 
@@ -32,4 +32,4 @@ Whether the probabilities are right, what a loss of 80.0000 means to the company
 
 ## Exercise
 
-Roll back EKPAN's tree and OKRIKA's sequence by hand and confirm 105.0000 and 87.0000. Then give EKPAN's drill against farm-out switch point, and name one number in this tier that looks like a recommendation and is only the tie rule.
+Roll back EKPAN's tree and OKRIKA's sequence by hand and confirm 105.0000 and 87.0000. Then give EKPAN's drill against farm-out switch point, and name one place in this tier where the engine reports a tie that the printed figures alone would hide or only suggest.

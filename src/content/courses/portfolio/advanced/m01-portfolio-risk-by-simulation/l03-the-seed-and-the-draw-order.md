@@ -12,7 +12,7 @@ The defaults are seed 20260829 and 10000 iterations. A seed that is not a whole 
 
 ## What a fixed order buys
 
-Because the stream never depends on the inputs, two runs that differ only in one project's pos or fail cost hand every project the same normals. The gap between the two results is the change you made, not fresh sampling noise. That is what makes a sensitivity run readable.
+Because the stream never depends on the inputs, two runs that differ only in one project's pos or fail cost hand every project the same normals. The gap between the two results is the change you made, with no fresh sampling noise mixed in. That is what makes a sensitivity run readable.
 
 Reorder the projects, or insert one, and the normals are dealt out differently. The portfolio is the same, the seed is the same, and the numbers still move by sampling noise. Anyone reproducing a figure needs the seed, the iteration count and the project order.
 

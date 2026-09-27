@@ -1,38 +1,40 @@
-# An exact grid and a coarse one
+# An exact solve in any unit
 
-The optimizer counts capex in cells, and the size of a cell decides whether the answer is exact or approximate. When the limit and every candidate capex are whole numbers and the limit is at most 5000, a cell is 1 million USD; otherwise a cell is the limit divided by 2000.
+The optimizer answers the knapsack exactly on the capex figures as typed. The unit you type them in, whole or decimal, millions or single dollars, does not change the funded set, and the result says how it was solved.
 
 {{panel:ec-capital-explorer}}
 
-## The exact grid on OKONO
+## What the result reports
 
-Every OKONO capex is a whole number of million USD, from 60.0000 for OK-5 to 310.0000 for OK-6, and every limit run on it is whole and far under 5000. The engine reports a resolution of 1.0000 at each of the five limits from 300.0000 to 1000.0000, and overLimit reads false at every one. On this grid a project weighs exactly its capex in cells, so the knapsack solves the real question: the 450.0000 answer of OK-1, OK-3 and OK-4 at 291.0000 is the true optimum.
+Every run carries three fields about the solve itself. `solveMethod` reads "exact" when the knapsack was solved on the capex as entered. `optimalityGap` is 0.0000 on an exact solve, because nothing can have been left out. `resolution` is null, because there is no grid. On OKONO all five limits from 300.0000 to 1000.0000 report solveMethod "exact" and optimalityGap 0.0000, so the 450.0000 answer of OK-1, OK-3 and OK-4 at 291.0000 is the true optimum.
 
-## When the grid turns coarse
+## Two awkward inventories
 
-The coarse grid is limit / 2000 per cell, and each project weighs max(1, round(capex / cell)) cells. The limit is then always 2000 cells, and each capex is rounded to the nearest cell. Two published cases reach it by different doors.
+Two published cases type the same four projects in a way a grid would find awkward:
 
-| case | limit | resolution | engine set | capex | EMV | gap (golden) |
+| case | limit | engine set | capex | EMV | unspent | solveMethod |
 | --- | --- | --- | --- | --- | --- | --- |
-| rawDollars | 450000000.0000 | 225000.000000 | A + B + D | 450000000.0000 | 250.0000 | 0.0000 |
-| nonIntegerLimit | 450.5000 | 0.225250 | A + B + D | 450.0000 | 250.0000 | 0.0000 |
+| rawDollars | 450000000.0000 | A + B + D | 450000000.0000 | 250.0000 | 0.0000 | exact |
+| nonIntegerLimit | 450.5000 | A + B + D | 450.0000 | 250.0000 | 0.5000 | exact |
 
-In rawDollars the capexes are entered in whole USD, A at 100000000.0000 and B at 200000000.0000, so the limit is far over 5000 and the cell is 450000000.0000 over 2000, which is 225000.000000. In nonIntegerLimit the money is in million USD, but the limit of 450.5000 is not a whole number, so the cell is 450.5000 over 2000, which is 0.225250. Both land on A, B and D at an EMV of 250.0000, matching the exact optimum, and the golden gap is 0.0000 in each.
+In rawDollars every capex is typed in whole USD, A at 100000000.0000 and B at 200000000.0000. In nonIntegerLimit the money is in million USD but the limit carries a half. Both land on A, B and D at 250.0000, which is the golden exact optimum, with resolution null and optimalityGap 0.0000. The half million of headroom in nonIntegerLimit is simply left unspent, because no project costs that little.
 
-## Coarse is not wrong, only unproven
+## Decimals read as typed
 
-A coarse grid can still give the exact answer, and both of these cases do. Once capexes are rounded to cells, though, the knapsack is solving a nearby problem, and a set that fits in cells may cost a little more or a little less than the limit in money. On a coarse grid the answer must be checked against the limit in money every time.
+The engine reads decimal capex at their typed precision. It looks for one power of ten, up to a million, that makes the limit and every capex whole numbers, and adds the capex as whole numbers at that scale. The published decimalCapexExactSum case shows why this matters. At a limit of 0.3000, projects costing 0.1000 and 0.2000 add in binary arithmetic to 0.30000000000000004, a hair above the limit. Read as typed they sum to exactly 0.3000, and the engine funds both, a + b, for an EMV of 2.0000.
+
+## When a grid does appear
+
+A grid appears only as a stated fallback. If the exact solve would have to hold more than `exactStateLimit` partial portfolios, 200000 by default, the engine divides the limit into 2000 cells and rounds every capex up to whole cells. The result then says solveMethod "grid-feasible" and prints the resolution and an optimalityGap. An inventory of sixteen projects or fewer has at most 65536 subsets and can never reach the default, so an Associate inventory is always solved exactly.
 
 ## The mistake
 
-The quiet mistake is a unit slip. An inventory typed in raw dollars, or a limit typed as 450.5000 to leave a little headroom, moves the whole solve from the exact grid to the coarse one without any change to the projects. Both published answers look identical, which hides it. The grid matters whenever capexes do not divide evenly into cells.
-
-The second mistake reads resolution as precision in value. It is a capex cell in the money units entered, 225000.000000 USD in one case and 0.225250 million USD in the other.
+The mistake is to fear the unit and miss the real risk. Consistent scaling is harmless: the rawDollars answer is the million USD answer. What the engine cannot catch is a mixed inventory, with some capex in USD and some in million USD, which it will solve exactly and wrongly.
 
 ## What it refuses
 
-The engine chooses the grid from the inputs; it offers no finer grid on request. The Suite now shows the resolution and the overshoot flag on screen.
+The Capital Portfolio Studio offers no choice of method; only a call that states a small `exactStateLimit` forces the fallback grid. The Studio prints "Solved exactly on the capital figures you entered" on an exact solve, and names the resolution and the bound only when the fallback ran.
 
 ## Exercise
 
-For rawDollars and nonIntegerLimit, say which condition sends each to the coarse grid and show the cell size as limit over 2000. Then give OKONO's resolution at 450.0000 and explain why its answer involves no rounding.
+For rawDollars and nonIntegerLimit, give the funded set, its capex, its EMV, the unspent capex and the solveMethod. Then explain why 0.1000 and 0.2000 fit a limit of 0.3000, and say when a grid would appear at all.

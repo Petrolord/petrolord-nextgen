@@ -30,19 +30,19 @@ The only gross value of information on screen is inside the sentence.
 
 ## The verdict
 
-The sentence chooses its ending by the sign of net VOI:
+The sentence chooses its ending by the net VOI card, the value rounded once to two decimals: positive, negative, or rounds to zero.
 
 | survey cost | netVoi card | verdict |
 | --- | --- | --- |
 | 10.0000 | 23.00 | "Since this is positive, acquiring the information is financially advantageous." |
 | 50.0000 | -17.00 | "Since this is negative, the information costs more than the value it adds, so acquiring it is not justified on EMV grounds." |
-| 33.0000 | 0.00 | "The information exactly pays for itself, so the decision is value-neutral on EMV grounds." |
+| 33.0000 | 0.00 | "Since this rounds to zero, the information costs what it is worth, so acquiring it or not is indifferent on EMV grounds." |
 
-At a cost of 33.0000 the drawn tree's root still reads "Acquire 3D Seismic Survey": the two root branches tie and the first branch listed is kept. At 40.0000 the card reads -7.00 and the root reads "No further information".
+At a cost of 33.0000 the drawn tree's root still reads "Acquire 3D Seismic Survey": the two root branches tie, the engine reports indifferent, and the first listed is marked. At 40.0000 the card reads -7.00 and the root reads "No further information".
 
 ## When values are withheld
 
-If the typed indicators contradict the stated outcome chances, the repaired Analyzer keeps the two cards that depend only on the stated chances, EMV without Information and EVPI, and withholds EMV with Information, Net VOI, the gross value and the diagram. On IRRI, both indicators typed 20 / 80 percent, it reports 15.00 and 63.00 and withholds the rest. Before the repair it printed a gross value of -15.00 and a net value of -25.00 there, and information derived by Bayes can never be worth less than 0.
+If the typed indicators contradict the stated outcome chances, the Analyzer keeps the two cards that depend only on the stated chances, EMV without Information and EVPI, and withholds EMV with Information, Net VOI, the gross value and the diagram. On IRRI, both indicators typed 20 / 80 percent, it reports 15.00 and 63.00 and withholds the rest. Weighted as typed with nothing checking them against the stated prior, those inputs would give a gross value of -15.00 and a net value of -25.00, and information derived by Bayes can never be worth less than 0. That is why the value is withheld.
 
 ## The mistake
 

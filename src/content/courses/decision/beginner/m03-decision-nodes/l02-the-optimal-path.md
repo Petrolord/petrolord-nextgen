@@ -30,7 +30,7 @@ The path reads as a plan for every contingency: drill; if the well succeeds, tak
 
 ## Branches below a branch not taken
 
-A branch below a branch that is not taken is never on the optimal path. The farm-out's three outcomes read false, false and false, even though the farm-out's success at 95.0000 is a perfectly good outcome. They are off the path because the owner never reaches them, not because they are poor. The same holds for Sell under the marginal find: it is off the path because Develop is better there, and it would be off the path anyway if the owner had not drilled.
+A branch below a branch that is not taken is never on the optimal path. The farm-out's three outcomes read false, false and false, even though the farm-out's success at 95.0000 is a perfectly good outcome. They are off the path because the owner never reaches them; their payoffs play no part in it. The same holds for Sell under the marginal find: it is off the path because Develop is better there, and it would be off the path anyway if the owner had not drilled.
 
 ## The mistake
 
@@ -38,7 +38,7 @@ The careful mistake is reading the optimal path as the single line from the root
 
 ## What it refuses
 
-The path is a label on the tree the engine was given. It never adds a branch, never marks a branch the owner would reach only by changing a decision, and never distinguishes a likely outcome from an unlikely one: a true flag on Success and a true flag on Dry hole mean the same thing, reachable under the best strategy.
+The path is a label on the tree the engine was given. It adds no branch, marks no branch the owner would reach only by changing a decision, and does not distinguish a likely outcome from an unlikely one: a true flag on Success and a true flag on Dry hole mean the same thing, reachable under the best strategy.
 
 ## Exercise
 

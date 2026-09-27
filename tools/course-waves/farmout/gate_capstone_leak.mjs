@@ -57,7 +57,7 @@ import { execFileSync } from 'node:child_process';
 
 const HERE = process.env.EC10_WAVE_DIR || '/root/cat-wip-farmout';
 const REPO = process.env.EC10_REPO || '/root/wt-ec10-nextgen';
-const ENG = process.env.EC10_ENGINES || path.join(REPO, 'packages/engines/ec10-farmout');
+const ENG = process.env.EC10_ENGINES || path.join(REPO, 'packages/engines');
 const WAVES = process.env.EC10_WAVES || path.join(REPO, 'tools/course-waves');
 const args = process.argv.slice(2);
 const has = (f) => args.includes(f);

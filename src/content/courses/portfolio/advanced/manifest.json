@@ -10,7 +10,7 @@
       "lessons": [
         {
           "key": "l01-why-the-normal-approximation-failed",
-          "title": "Why the normal approximation failed",
+          "title": "Where a normal curve misleads",
           "order": 1,
           "est_minutes": 14,
           "panels": [
@@ -191,7 +191,7 @@
         },
         {
           "key": "l03-an-overshoot-flagged",
-          "title": "An overshoot flagged",
+          "title": "A limit the answer always fits",
           "order": 3,
           "est_minutes": 13,
           "panels": [
@@ -201,7 +201,7 @@
         },
         {
           "key": "l04-what-was-repaired-and-what-was-not",
-          "title": "What was repaired and what was not",
+          "title": "Flags and standing properties",
           "order": 4,
           "est_minutes": 14,
           "panels": [
@@ -238,7 +238,7 @@
         },
         {
           "key": "l03-a-plan-that-never-reaches-the-budget",
-          "title": "A plan that never reaches the budget",
+          "title": "Reading an overrun off the curve",
           "order": 3,
           "est_minutes": 13,
           "panels": [

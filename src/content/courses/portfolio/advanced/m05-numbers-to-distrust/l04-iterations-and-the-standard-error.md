@@ -33,7 +33,7 @@ The published riskMethod cases carry the exact answer, a golden standard error a
 
 ## What neither buys
 
-The normal approximation used before EC5-0 would have given this set a P(loss) of 0.142035 and a P90 of -57.1494, a different model of the same projects. The simulation's own model funds projects whole, uses one average correlation and assumes a normal success spread. A seed buys a reproducible number, iterations buy a smaller standard error, and neither buys a correct model of the projects.
+A normal approximation gives this set a P(loss) of 0.142035 and a P90 of -57.1494, a different model of the same projects. The simulation's own model funds projects whole, uses one average correlation and assumes a normal success spread. A seed buys a reproducible number, iterations buy a smaller standard error, and neither buys a correct model of the projects.
 
 ## The mistake
 

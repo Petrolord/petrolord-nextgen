@@ -30,7 +30,7 @@ const INPUTS = JSON.parse(execFileSync('node', [path.join(mirrorDir('farmout'), 
   env: {
     ...process.env,
     EC10_WAVE_DIR: mirrorDir('farmout'),
-    EC10_ENGINES: path.join(ROOT, 'packages/engines/ec10-farmout'),
+    EC10_ENGINES: path.join(ROOT, 'packages/engines'),
     EC10_REPO: ROOT,
     EC10_TOLERANCE: path.join(HERE, 'gradedTolerance.js'),
   },

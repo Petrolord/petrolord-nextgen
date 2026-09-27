@@ -12,7 +12,7 @@ The success probability is moved in both chance nodes together, so the drill and
 | --- | --- | --- | --- | --- |
 | 0.100000 | -19.0000 | 6.0000 | 0.0000 | Farm out |
 | 0.150000 | -3.5000 | 9.0000 | 0.0000 | Farm out |
-| 0.200000 | 12.0000 | 12.0000 | 0.0000 | Drill |
+| 0.200000 | 12.0000 | 12.0000 | 0.0000 | tied (Drill marked) |
 | 0.250000 | 27.5000 | 15.0000 | 0.0000 | Drill |
 | 0.300000 | 43.0000 | 18.0000 | 0.0000 | Drill |
 
@@ -20,13 +20,13 @@ The last row is the published tree as stated: Drill 43.0000, Farm out 18.0000, D
 
 ## An exact tie
 
-At 0.200000 both branches are worth 12.0000 to the last digit, and the engine reports Drill. That is the tie rule: a decision node keeps the first branch listed unless a later one is strictly greater, and Drill is listed first. The recommendation at 0.200000 carries no information about which branch is better, and the decision advantage there is 0.0000.
+At 0.200000 both branches are worth 12.0000 to the last digit, and the engine reports the tie: tiedIndices [0, 1], indifferent true, and the same pair at card precision. The optimal path marks Drill only because it is listed first, and the Decision advantage card reads Indifferent.
 
-List the same two branches the other way round and the tie goes the other way. The published tie cases show it: Drill at 40.0000 less a cost of 10.0000 against Farm out at 30.0000 recommends Drill when Drill is listed first and Farm out when Farm out is listed first, with the EMV 30.0000 both times.
+List the same two branches the other way round and only the mark moves. The exact tie of Drill at 40.0000 less a cost of 10.0000 against Farm out at 30.0000 shows it: in either order the engine reports tiedIndices [0, 1] and indifferent true at EMV 30.0000, and the optimal path marks whichever branch is listed first.
 
 ## Two crossings compared
 
-The EKPAN lottery crosses at 80 / 350 = 0.228571, a probability with no exact binary image, where the engine reads 21.7143 for both branches and names Farm out because Drill comes out smaller by -7.11e-15. The published tree crosses at 0.200000 exactly, and the engine names Drill by listing order. Both results look like a recommendation and neither is one. On EKPAN the switch falls between the sweep rows 0.200000 and 0.250000; on the published tree it falls on a row.
+The EKPAN lottery crosses at 80 / 350 = 0.228571, a probability with no exact binary image, where the engine reads 21.7143 for both branches and reports them tied, because the residue of -7.11e-15 is inside its tie band. The published tree crosses at 0.200000 exactly and is reported tied too. Both crossings are reported as ties, and the marked branch at each is only the one listed first. On EKPAN the switch falls between the sweep rows 0.200000 and 0.250000; on the published tree it falls on a row.
 
 ## The mistake
 
@@ -34,8 +34,8 @@ The careful mistake is reading the row at 0.200000 as the first probability at w
 
 ## What it refuses
 
-The engine has no tie flag. It returns one best branch index whether the runner-up is behind by 25.0000 or by nothing at all, and the rollback cannot tell an exact tie from a residue of -7.11e-15.
+The engine reports ties: tiedIndices, indifferent and the card-precision pair. It still returns one best branch index, and that index is a mark: it reads the same whether the runner-up is tied or behind by 25.0000, so the tie fields are the ones to read. A residue of -7.11e-15 is inside the band and reads as a tie.
 
 ## Exercise
 
-From the sweep, state the success probability at which the published tree switches and the value of both branches there, and explain why the engine names Drill. Then say what it would name if Farm out were listed first, and why EKPAN's crossing at 0.228571 is not decided by the tie rule.
+From the sweep, state the success probability at which the published tree switches and the value of both branches there, and explain why the engine reports a tie and which branch it marks. Then say what it would mark if Farm out were listed first, and why EKPAN's crossing at 0.228571 is reported as a tie although the two values differ by -7.11e-15.

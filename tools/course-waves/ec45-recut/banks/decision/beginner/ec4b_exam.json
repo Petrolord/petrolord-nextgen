@@ -1,0 +1,464 @@
+[
+ {
+  "prompt": "A board says it cannot survive a loss of 80.0000 million USD on one well, and the EKPAN tree still recommends the drill at 105.0000. Why does the board's position change nothing in the rollback?",
+  "options": [
+   "The loss is already priced in, because the EKPAN tree's dry hole of -25.0000 was discounted at a risk premium before it was typed into its terminal.",
+   "The limit bears on the farm-out as well, so it lowers both branch values together and leaves their order at the root unchanged.",
+   "The engine is risk neutral: it maximises expected money and has no utility function or risk aversion setting where that limit could be entered.",
+   "The EKPAN tree's drill cost of 55.0000 is charged before weighting, which caps the loss the rollback can see at the cost and leaves the whole dry hole outcome out."
+  ],
+  "answer": 2,
+  "explanation": "On the EKPAN tree the drill loses money with probability 0.500000 and still wins, 105.0000 against 37.7500, because the rollback ranks branches by their averages alone."
+ },
+ {
+  "prompt": "A tree arrives with one of its nodes typed \"lottery\" and every probability inside the range 0 to 1. What does the engine return?",
+  "options": [
+   "A refusal naming an unknown node type at that node, and no EMV for any part of the tree.",
+   "An ordinary rollback that treats the node as a chance node, since a lottery is a set of weighted outcomes and its probabilities already sum to 1.",
+   "A rollback of the valid remainder, with the unrecognised node entered in its parent as a terminal worth 0.0000 until it is retyped.",
+   "The EMV of every level above the node, stopping where the tree stops being well formed and reporting the deepest valid value as the root."
+  ],
+  "answer": 0,
+  "explanation": "The engine knows decision, chance and terminal nodes only and never guesses what a malformed node meant; as the published sum of 0.200000 two levels down shows, a refusal anywhere returns nothing."
+ },
+ {
+  "prompt": "An analyst discounts the EKPAN tree's payoffs by hand, although another engine had already discounted them, and leaves the drill cost of 55.0000 as typed. What does the rollback report?",
+  "options": [
+   "A refusal, because the engine compares each payoff against the rate stored with its linked run and detects the second discount.",
+   "The same 105.0000 for the EKPAN tree, since the rollback restates every payoff to the date of the root decision before it weights them.",
+   "A larger EMV, because a smaller dry hole loss lifts the drill's weighted value by more than the shrunken success payoff takes away.",
+   "A smaller EMV with no warning, pulled toward the branch that carries less cost, because every payoff shrank while the cost stayed at face value."
+  ],
+  "answer": 3,
+  "explanation": "The engine has no rate, no date and no field for either, so 420.0000 and -25.0000 enter the drill chance node exactly as typed and a second discount leaves no trace."
+ },
+ {
+  "prompt": "A tree passes every check the engine makes: known node types, at least one branch per node, probabilities summing to 1 within 1e-6, and every cost and payoff a finite number. What has that established?",
+  "options": [
+   "That the recommended branch is robust, since a choice that turned inside the tolerance of 1e-6 would have been refused as ambiguous.",
+   "Only that the tree is well formed; nothing about whether its payoffs are discounted, its probabilities true, or its branches complete.",
+   "That no better branch was left off, since a decision node refuses to roll back when a walk-away at 0.0000 would beat every branch it was given.",
+   "That the chance nodes agree across stages, because the engine checks every later chance node against the ones above it."
+  ],
+  "answer": 1,
+  "explanation": "The published allNegative case passes every check and recommends a branch worth -52.0000, because no walk-away was drawn and the engine never adds one."
+ },
+ {
+  "prompt": "A Builder terminal was linked to a saved Monte Carlo run with an NPV mean of 420, and the run has since been revalued. What does the tree roll back with?",
+  "options": [
+   "The revalued mean, because the Builder re-reads every linked run each time a rollback is requested from the explorer.",
+   "The mean copied when the terminal was linked, until someone links it again.",
+   "The revalued P90, the low case, because a linked terminal falls back to that end of its summary whenever the run behind it has changed.",
+   "Nothing at all, because a stale link is refused with the message that the distribution payoff has no finite mean."
+  ],
+  "answer": 1,
+  "explanation": "Linking stores a copy of the run's mean, P90 and P10 at that moment and nothing re-reads the run, so the EKPAN tree stays at 105.0000 whatever the run now holds."
+ },
+ {
+  "prompt": "Inside the EKPAN tree's drill chance node the Marginal outcome carries 170.0000, although the develop payoff below it is 260.0000. Where does 170.0000 come from?",
+  "options": [
+   "The chance node averages the marginal find's Develop and Sell branches, because the later decision has not yet been made when the drill outcome is weighted.",
+   "The EKPAN tree's develop cost of 90.0000 is charged at the drill chance node after weighting, and 170.0000 is the figure the node shows once that charge is made.",
+   "It is the sale at 140.0000 plus the share of the develop payoff the owner keeps, since a marginal find is split between the two later choices.",
+   "On the EKPAN tree the marginal find is a decision; its best branch, Develop, is 260.0000 less its 90.0000 cost, and the chance node weights that branch value."
+  ],
+  "answer": 3,
+  "explanation": "Weighting 260.0000 treats development as free and weighting 140.0000 forgets the owner would develop; either gives a drill node other than 160.0000, and the engine has nothing to refuse."
+ },
+ {
+  "prompt": "A four level tree in the shape of deepAlternation has its deepest chance node rebuilt with three branches typed at 0.333333 each. What does the engine return for the root?",
+  "options": [
+   "Nothing: that node is refused with its sum printed as 0.999999, and a refusal at any depth leaves no EMV anywhere in the tree.",
+   "The root EMV, because 0.999999 sits exactly 1e-6 from 1 and the tolerance accepts a sum lying on its own edge.",
+   "The root EMV with the deepest node rescaled so its three branches sum to 1, which restores the intended equal thirds before weighting.",
+   "An EMV for the levels above the refused node, which enters its parent's weighting at 0.0000 until the probabilities are retyped."
+  ],
+  "answer": 1,
+  "explanation": "The gap from 1 is a hair above 1e-6 in binary and passes because the test adds a 1e-12 allowance for binary representation, and the thirds are weighted as typed. Depth changes nothing: the published sum of 0.200000 two levels down still refuses a whole tree."
+ },
+ {
+  "prompt": "Refused at a printed sum of 0.999000 on a node of three equal outcomes, a reader adds the whole shortfall to the last branch and the tree is accepted. What has the fix done?",
+  "options": [
+   "Nothing the engine would treat differently, because it rescales every accepted sum to exactly 1 before weighting and the shortfall is absorbed there.",
+   "Restored the equal thirds, since a shortfall that small spread over one branch is below the precision the probabilities are printed to.",
+   "Given the last outcome more weight than the other two, which were meant to be equal.",
+   "Left the value unchanged, because the payoffs on three equal outcomes are symmetric and moving weight between them cannot move their average."
+  ],
+  "answer": 2,
+  "explanation": "The engine checks a sum and never repairs one; typed at 0.3333333 each the thirds sum to 1.000000 and the node on payoffs of 30, 60 and 90 is worth 60.0000."
+ },
+ {
+  "prompt": "The published chanceRootWithBranchCosts tree has a chance node at its root, with a cost of 2.0000 on calm and 8.0000 on storm. What do the Decision Tree Builder's cards show?",
+  "options": [
+   "Optimal EMV -3.0000, Chance root: no first decision to make on the first-move card, and N/A for the next best alternative and the decision advantage.",
+   "Optimal EMV -8.6000, because the Builder totals a chance root's costs and subtracts them once from the weighted children.",
+   "Optimal EMV -3.0000 with calm as the recommended first move, since calm carries the larger probability of 0.600000 and the higher branch value.",
+   "Optimal EMV 17.0000 for calm, with a decision advantage of 50.0000 over storm, read as if the chance root were a decision between them."
+  ],
+  "answer": 0,
+  "explanation": "Each branch pays its own cost before weighting, 0.600000 x 17.0000 + 0.400000 x -33.0000 = -3.0000, and a chance root offers no move to recommend."
+ },
+ {
+  "prompt": "Subtracting every cost on chanceRootWithBranchCosts once, after weighting, gives -8.6000 against the engine's -3.0000. Where does the difference come from?",
+  "options": [
+   "It weights each cost by the other branch's probability, so the storm cost of 8.0000 is counted at 0.600000 where 0.400000 belongs.",
+   "The hand figure charges the storm's cost in the calm and the calm's cost in the storm.",
+   "It is the engine rounding each cost to four decimals before weighting, a step that a hand calculation carried at full precision avoids.",
+   "It counts the chance root's own cost twice, because the engine charges a root cost once and the hand calculation applies it on both branches."
+  ],
+  "answer": 1,
+  "explanation": "A cost is paid only when its branch occurs: 2.0000 only in the calm and 8.0000 only in the storm, and -8.6000 is never refused because no engine ever sees a hand calculation."
+ },
+ {
+  "prompt": "A reviewer rolls back deepAlternation with its two costs, 4.0000 on go and 6.0000 on push, gathered and taken off together at the root, and gets 3.0000. What went wrong?",
+  "options": [
+   "Nothing went wrong, since costs are additive and the order in which a hand rollback subtracts them cannot change the value at the root.",
+   "The push cost should have been left out, because once push carries its cost of 6.0000 the decision beneath up switches to hold instead.",
+   "The costs should have come off after weighting at every level below the root, which is what the engine does to reach 6.0000.",
+   "The push cost was charged on the down branch too; paid only on up, weighted 0.500000, it costs the root half as much and the root is 6.0000."
+  ],
+  "answer": 3,
+  "explanation": "Push is paid only under up: 0.500000 x 23.0000 + 0.500000 x -3.0000 = 10.0000, less 4.0000 on go is 6.0000; chanceRootWithBranchCosts shows the same error at -8.6000 against -3.0000."
+ },
+ {
+  "prompt": "On the EKPAN tree, reading the linked success summary at its P50 of 390 keeps Drill, while reading it at its P90 of 185 hands the root to Farm out. What does that pair reveal that the rollback at the mean does not?",
+  "options": [
+   "That the P50 is the payoff to type, because the switch sits below it and a middle case keeps the tree on the safe side of the choice.",
+   "Nothing about the choice, since the engine refuses to value a terminal at any statistic of a summary other than its mean.",
+   "The success payoff at which the EKPAN tree's choice turns lies inside the summary's spread, which the mean alone never shows.",
+   "That the choice turns at the mean of 420 itself, because a linked payoff can flip a tree only when its mean is the value that moves."
+  ],
+  "answer": 2,
+  "explanation": "On the EKPAN tree the drill branch is 22.7500 at a payoff of 185.0000 and 94.5000 at 390.0000, bracketing the farm-out's 37.7500; at the mean the root reads 105.0000 and reports none of that spread."
+ },
+ {
+  "prompt": "Read at its summary's P90 of 185, the EKPAN tree's root becomes 37.7500, exactly the farm-out branch value. Why exactly that number?",
+  "options": [
+   "The EKPAN tree's drill branch falls to 22.7500, below the farm-out, so the root takes the farm-out, whose value never depended on the drill's success payoff.",
+   "The engine floors a root at its next best alternative when the best branch collapses, so the EKPAN tree's 37.7500 is a clamp and not a branch value.",
+   "Reading a P90 lowers every success payoff in the tree to its low case, and the farm-out's weighting happens to land on the same figure.",
+   "The root averages Drill and Farm out when a linked payoff is read away from its mean, and on the EKPAN tree the two values meet at 37.7500."
+  ],
+  "answer": 0,
+  "explanation": "On the EKPAN tree a decision node takes its largest branch value, 37.7500 against 22.7500 and 0.0000; the flip puts a risk preference where the engine expects a mean, and at the mean the root is 105.0000 with Drill."
+ },
+ {
+  "prompt": "The Builder shows the EKPAN tree's decision advantage as 67.2500 for Drill over Farm out, and a manager reads it as the extra money drilling will make. What is it?",
+  "options": [
+   "The margin by which drilling beats the farm-out in every outcome, since a decision node compares its branches outcome by outcome before it chooses.",
+   "The drill's gain on its most likely outcome, since the card reads the difference between the two branches at the outcome carrying the largest probability.",
+   "What the owner gives up by walking away, since the card sets the recommended move against the branch worth 0.0000 on the EKPAN tree.",
+   "A difference of two averages on the EKPAN tree, 105.0000 less 37.7500; in the dry hole, with probability 0.500000, the drill leaves less than the farm-out."
+  ],
+  "answer": 3,
+  "explanation": "On the EKPAN tree the next best alternative is 37.7500, so the advantage is 67.2500; in the dry hole the drill leaves -80.0000 against the farm-out's 0.0000."
+ },
+ {
+  "prompt": "At a success probability of 0.100000 the EKPAN tree's root takes Farm out. What happens there to the onOptimalPath flag on the drill's dry hole?",
+  "options": [
+   "It stays true, since a dry hole worth -25.0000 is the outcome most worth planning for when success on the EKPAN tree is that unlikely.",
+   "It reads false like every drill outcome, and the farm-out's three outcomes read true, because the flags follow the branch the root takes.",
+   "It stays true, because a flag records how likely an outcome is, and the EKPAN tree's dry hole rises to 0.750000 at that success probability.",
+   "Every outcome on both branches reads true, since at 0.100000 no branch of the EKPAN tree's root clearly dominates the other two."
+  ],
+  "answer": 1,
+  "explanation": "At success 0.100000 the EKPAN tree reads Drill -6.2500, Farm out 14.0000 and Walk away 0.0000, so Farm out is taken and nothing under Drill is reachable, however likely it is."
+ },
+ {
+  "prompt": "The Builder's cards for OKRIKA read Optimal EMV 87.0000 and Recommended first move Appraise. What do the other two cards read?",
+  "options": [
+   "Next best alternative 183.6000 for Develop now, read off its development chance node before the 150.0000 cost is paid on the branch.",
+   "Next best alternative 33.6000 for Develop now, because the card skips a sale, which is a terminal leading to no further node.",
+   "Next best alternative 48.0000 for Sell now and a decision advantage of 39.0000, since Develop now is worth 33.6000 after its cost.",
+   "Next best alternative 15.6000, since the card sets the appraisal against its own version with no option to sell."
+  ],
+  "answer": 2,
+  "explanation": "Next best is the largest other root branch value: Develop now is 183.6000 less 150.0000 = 33.6000 and Sell now is 48.0000, so the advantage is 87.0000 less 48.0000 = 39.0000."
+ },
+ {
+  "prompt": "On the published allNegative case the Builder names B with a decision advantage of 3.0000 over A. What does that advantage tell a reader?",
+  "options": [
+   "Only that B loses 3.0000 less than A on average, and nothing about whether either should be taken.",
+   "That B earns 3.0000 on average, since the card reports the winner's margin above a zero floor.",
+   "That B is the safer branch, because the advantage is worked out on the worst outcome of each branch and ignores their averages.",
+   "That the engine found both branches negative, added a walk-away at 0.0000, and reported B's margin over A as a fallback."
+  ],
+  "answer": 0,
+  "explanation": "The engine returns EMV -52.0000 against -55.0000; it has no zero floor and never adds a walk-away, so the recommendation is an instruction to lose 52.0000 on average."
+ },
+ {
+  "prompt": "On the EKPAN lottery Drill crosses Walk away at 0.179775 and that crossing never decides the first move, while on allNegative an undrawn walk-away would have decided it. What separates the two?",
+  "options": [
+   "The lottery sweeps its success probability and allNegative holds its values fixed, and walking away can only win on a tree whose probabilities never move.",
+   "The EKPAN lottery's crossing lies within the tolerance of 1e-6 of the farm-out switch, so the engine reads walking away there as a tie and keeps Drill.",
+   "allNegative lists its best branch second, and the tie rule lets a walk-away listed after it win where the lottery lists Walk away last.",
+   "The EKPAN lottery's farm-out pays 0.0000 at worst and beats walking away at every positive success probability; allNegative has no branch with a floor at zero."
+  ],
+  "answer": 3,
+  "explanation": "On the EKPAN lottery Farm out beats both other actions below 0.228571, so the walk-away crossing sits in a region it can never win; on allNegative a walk-away at 0.0000 would beat B at -52.0000."
+ },
+ {
+  "prompt": "On equalEmvTie the branches read A 30.0000, B 30.0000 and C 29.9990. A reviewer relists them as C, A, B. Which branch does the engine name?",
+  "options": [
+   "C, because the branch listed first keeps the decision whenever the values agree to the four decimals they are printed to.",
+   "B, because once C takes the first place in the listing, the tie between A and B passes to the later of the two equal branches.",
+   "A, because C sits outside the tie band, A and B tie, and the engine marks the first listed of that pair.",
+   "C, since 29.9990 differs from 30.0000 by less than the probability tolerance of 1e-6 and the engine counts the two as a tie."
+  ],
+  "answer": 2,
+  "explanation": "In the order C, A, B the engine reports A and B tied and marks A, the first of them; C's 29.9990 is 0.0010 short, far outside the tie band, although all three round to the same 30.00 card. The EMV stays 30.0000."
+ },
+ {
+  "prompt": "On the EKPAN lottery at 0.228571, with its actions listed Drill, Farm out, Walk away, the engine prints Drill 21.7143 and Farm out 21.7143. What does it report with the list reordered as Farm out, Drill, Walk away?",
+  "options": [
+   "Drill as the single best action, because Drill comes out larger by the residue of -7.11e-15 in either order.",
+   "The same two actions tied, with Farm out now carrying the action index because it is listed first.",
+   "Farm out alone with indifferent false, since once it leads the listing the residue decides in its favour.",
+   "A refusal, because the engine refuses a lottery whose two leading actions print the same value, as these two do at 21.7143."
+  ],
+  "answer": 1,
+  "explanation": "80 / 350 has no exact binary image, so Drill less Farm out is -7.11e-15, far inside the tie band of 1e-9 x max(1, |best|). The engine reports the tie in either order, and only the marked action follows the listing, as on drillFarmOut at 0.200000."
+ },
+ {
+  "prompt": "A team draws EKPAN's walk-away branch with a negative payoff equal to money already spent on the licence. What does that do to the tree?",
+  "options": [
+   "Biases it against walking away, because money spent before the decision is spent on every branch alike and has been charged to one.",
+   "Corrects it, since walking away forfeits the licence, and a branch that ignores a real loss overstates what walking away is worth.",
+   "Nothing to the choice, because the rollback treats money spent before the root as sunk and restates it to zero before weighting.",
+   "Makes the engine refuse it, because a terminal on a decision branch cannot carry a payoff below the costs on the branches beside it."
+  ],
+  "answer": 0,
+  "explanation": "Walking away is worth 0.0000 and competes as a branch like any other, so charging it money already gone lowers it against branches that were never charged the same sum."
+ },
+ {
+  "prompt": "Rolling back twoStageSequential, why can the test result chance node not be valued before the decision that follows a Good result?",
+  "options": [
+   "The Test cost of 5.0000 has to come off first, and it sits below the chance node in the order drawn.",
+   "A chance node weights terminals directly, and its Good branch has no terminal until the later decision is removed from the tree.",
+   "The engine rolls back from the root outward, taking the root's branches before the nodes beneath them so costs are paid in time order.",
+   "Its Good branch is worth whatever that decision takes, which is unknown until Develop and Sell are compared."
+  ],
+  "answer": 3,
+  "explanation": "Develop is 200.0000 less 50.0000 = 150.0000 against Sell at 80.0000; only then 0.400000 x 150.0000 + 0.600000 x 20.0000 = 72.0000, less 5.0000 = 67.0000."
+ },
+ {
+  "prompt": "What does OKRIKA's appraisal chance node weight on its Poor branch, and why not the 56.0000 of the development node beneath it?",
+  "options": [
+   "56.0000, because a chance node weights the node beneath each outcome and the development cost is charged once, at the appraisal branch.",
+   "The sale at 25.0000, because development after a poor result is 56.0000 less 150.0000 = -94.0000 and the decision takes the larger branch.",
+   "-94.0000, since a company that has paid 18.0000 for the appraisal is committed to developing, and the sale is a fallback off the path.",
+   "The average of 25.0000 and -94.0000, because the decision after a poor result has not been made when the appraisal node is weighted."
+  ],
+  "answer": 1,
+  "explanation": "A decision hands its chance parent its maximum, so OKRIKA's appraisal node is 0.400000 x 225.0000 + 0.600000 x 25.0000 = 105.0000, less 18.0000 = 87.0000."
+ },
+ {
+  "prompt": "OKRIKA's appraisal branch is 87.0000 with the option to sell after a poor result and 15.6000 without it. A memo calls the 71.4000 between them the value of the appraisal. What is it?",
+  "options": [
+   "The value of the option to sell after a poor result, inside a branch that still pays the appraisal cost.",
+   "The value of the uncertainty the appraisal removes, since both versions of the tree appraise and only the later sale differs between them.",
+   "The appraisal's margin over its best alternative, Sell now, which the Builder prints as the decision advantage for the root.",
+   "The worth of the sale after a good result, which the appraisal unlocks and the tree without sales loses."
+  ],
+  "answer": 0,
+  "explanation": "The value lives on the poor side, weighted 0.600000; after a good result the sale was never taken, and against Sell now the appraisal's margin is 39.0000."
+ },
+ {
+  "prompt": "OKRIKA's stages agree: 0.400000 x 0.750000 + 0.600000 x 0.200000 = 0.420000, the large field chance for Develop now. What would the engine do with a tree whose stages disagreed?",
+  "options": [
+   "Refuse the tree, naming the stage whose probabilities disagree in the same way it names a node whose sum is off.",
+   "Rescale the later chance nodes so their weighted mixture matches the earlier chance before it takes any maximum.",
+   "Roll it back just the same, with no warning.",
+   "Accept it only while the disagreement stays inside the tolerance of 1e-6 it applies to the sum at every chance node."
+  ],
+  "answer": 2,
+  "explanation": "The engine has no link between chance nodes beyond the tree as drawn; it checks that each node's probabilities sum to 1 within 1e-6 and nothing about how 0.420000 relates to the stages."
+ },
+ {
+  "prompt": "Which of OKRIKA's two later sales can be deleted without changing any number the rollback returns?",
+  "options": [
+   "The sale after a poor appraisal, since at 25.0000 it is the smallest payoff in the appraisal subtree and so cannot move a maximum.",
+   "Either one, because the appraisal is valued by what it reveals, and deleting a later branch leaves what it reveals unchanged.",
+   "Neither, because every branch in a subtree whose first branch is taken is on the optimal path and carries part of its value.",
+   "The sale after a good appraisal, which reads false and was never taken; the sale after a poor one reads true and carries 71.4000 of the branch."
+  ],
+  "answer": 3,
+  "explanation": "Removing a later choice is safe only where it was never taken: without the poor side sale the appraisal falls from 87.0000 to 15.6000 and the root sells now at 48.0000."
+ },
+ {
+  "prompt": "Without its later sales, OKRIKA's appraisal chance node is 33.6000, exactly the value of Develop now. What does that coincidence show?",
+  "options": [
+   "That the development chance nodes after the appraisal count the 0.420000 chance twice, so the tree values the same field on two branches.",
+   "An appraisal that cannot change the action is the same development delayed, worth less than acting now by exactly its cost of 18.0000.",
+   "That the appraisal removes no uncertainty, because a result known in advance collapses into the development it would have predicted.",
+   "That the development cost is paid twice when appraising, once with the appraisal and once after it, so the two branches net to the same."
+  ],
+  "answer": 1,
+  "explanation": "0.400000 x 225.0000 + 0.600000 x -94.0000 = 33.6000, and less 18.0000 the branch is 15.6000; information of any kind is worth something only when it can change a choice."
+ },
+ {
+  "prompt": "A reviewer reads deepAlternation's optimal path as the forecast go, up, push, win. Which branches does the engine flag false?",
+  "options": [
+   "hold and stop, and nothing else.",
+   "down and lose, the two outcomes that pay less than the branch above them, along with hold and stop.",
+   "stop, hold and down, since the down outcome leads to no later decision and so drops out of the plan.",
+   "stop alone, because a branch below a taken branch is always on the path whether or not it wins its own decision."
+  ],
+  "answer": 0,
+  "explanation": "A chance node picks nothing, so up, down, win and lose all stay on the path; push at 23.0000 beats hold at 12.0000 and go at 6.0000 beats stop at 1.0000."
+ },
+ {
+  "prompt": "Sweeping the EKPAN tree, an analyst raises success to 0.400000 and leaves the marginal find at 0.150000 and the dry hole at 0.500000. What comes back for that row?",
+  "options": [
+   "A row with success weighted at 0.400000 and the other two outcomes scaled down so the drill chance node still sums to 1.",
+   "A row valued with the surplus probability ignored, since the engine caps a chance node's sum at 1 before it weights the branches.",
+   "A refusal, because the drill chance node no longer sums to 1 within 1e-6, and no EMV at all.",
+   "The EKPAN lottery's 98.0000 at 0.400000, since a swept tree takes its row values from the two outcome model of the same prospect."
+  ],
+  "answer": 2,
+  "explanation": "When success rises the dry hole must fall by the same amount, as at 0.100000 where the EKPAN tree's dry hole takes 0.750000; the engine checks sums and never rescales, and quoting the EKPAN lottery's 98.0000 mixes the two models."
+ },
+ {
+  "prompt": "Asked for the success probability at which the EKPAN lottery's first move changes, a reader quotes 0.250000, the first sweep row where Drill wins. What should the answer be?",
+  "options": [
+   "0.250000, because the engine evaluates probabilities only on its sweep grid and a switch between two rows has no meaning to it.",
+   "0.179775, where the EKPAN lottery's Drill first stops losing money against walking away, which is the move that changes first on the lottery.",
+   "0.200000, the EKPAN lottery's last Farm out row, since a switch is reported at the last probability where the earlier action still holds.",
+   "0.228571, solved from the EKPAN lottery's lines Drill = 445 p - 80 and Farm out = 95 p, a crossing the sweep can bracket and cannot place."
+  ],
+  "answer": 3,
+  "explanation": "On the EKPAN lottery 350 p = 80 gives 80 / 350 = 0.228571; quoting 0.250000 overstates the probability the drill needs, and the engine never returns a switch point at all."
+ },
+ {
+  "prompt": "A draft of the EKPAN lottery leaves the farm-out off because its terms are not agreed. Where does that draft put its switch?",
+  "options": [
+   "At the EKPAN lottery's 0.228571 still, because a switch belongs to the drill's own line and not to the branches that happen to be drawn beside it.",
+   "At 0.179775, where the EKPAN lottery's Drill crosses Walk away, misplaced by the whole width of the farm-out region.",
+   "At 0.200000, the first EKPAN lottery row where Drill is positive, since without a farm-out the draft has no crossing left to solve.",
+   "Nowhere, since the engine refuses to sweep a probability through a decision node that has fewer than three branches."
+  ],
+  "answer": 1,
+  "explanation": "With only the EKPAN lottery's Drill = 445 p - 80 against 0.0000 the draft walks below 80 / 445 and drills above it, while with the farm-out drawn Farm out wins every probability up to 0.228571."
+ },
+ {
+  "prompt": "A geologist cannot say whether the EKPAN lottery's success chance is 0.200000 or 0.250000. What can the engine do with that doubt?",
+  "options": [
+   "Take it as a distribution on the branch probability, which the rollback reduces to its mean just as it reduces a linked Monte Carlo payoff summary.",
+   "Report the average of the two rows' EMVs, which is the value the engine returns for a branch whose probability is typed as a range.",
+   "Nothing directly: it takes one probability per branch, so the doubt means separate rollbacks, and here they straddle the switch and disagree.",
+   "Refuse the tree, since a probability typed as a range fails the check that each branch lies between 0 and 1."
+  ],
+  "answer": 2,
+  "explanation": "On the EKPAN lottery Farm out leads 19.0000 to 9.0000 at 0.200000 and Drill leads 31.2500 to 23.7500 at 0.250000, either side of 0.228571; only a payoff may carry a summary that enters at its mean."
+ },
+ {
+  "prompt": "A slide reads: EKPAN is worth 75.7500 million USD to drill and loses money with probability 0.500000. What is wrong with it?",
+  "options": [
+   "It mixes two models: 75.7500 is the EKPAN lottery's drill action, which loses with probability 0.650000, and 0.500000 belongs to the EKPAN tree, whose drill branch is 105.0000.",
+   "Nothing, because both numbers come from the EKPAN lottery at its stated success probability of 0.350000.",
+   "The loss chance should be 0.350000, the EKPAN lottery's success probability, since a drill loses whenever the prospect is short of a clear success.",
+   "The value should be 160.0000, the EKPAN tree's drill node, because a loss chance is stated before the drill cost is paid."
+  ],
+  "answer": 0,
+  "explanation": "Mixing the two models is exactly the error: the EKPAN tree has a marginal find at 0.150000 and a dry hole at 0.500000, while the EKPAN lottery folds the marginal find into a dry hole at 0.650000."
+ },
+ {
+  "prompt": "About the published drillFarmOut sweep, Ada writes \"drill from 0.200000\" and Bola writes \"farm out up to 0.200000\". Whose reading is honest?",
+  "options": [
+   "Ada's, because the engine marks Drill at 0.200000 and the mark there is the tree's own answer to the question.",
+   "Bola's, because Farm out leads on every row below 0.200000 and a tie is resolved toward the action that held before it.",
+   "Ada's, since the tie at 0.200000 is float residue of the kind the EKPAN lottery shows at its crossing, and Drill is larger by it.",
+   "Neither alone: at 0.200000 both branches are worth 12.0000 and the owner is indifferent, and the engine's Drill there is listing order."
+  ],
+  "answer": 3,
+  "explanation": "At 0.200000 the engine reports the two branches tied (indifferent true) and marks Drill because it is listed first; above it Drill leads, 27.5000 to 15.0000 at 0.250000."
+ },
+ {
+  "prompt": "On the EKPAN lottery at 0.350000 the drill loses money with probability 0.650000, and a reviewer concludes the rollback's Drill must be an error. What is the right response?",
+  "options": [
+   "The reviewer is right, because the engine refuses to recommend an action whose most likely outcome is a loss and this one has slipped through.",
+   "The loss chance does not overturn expected money: the EKPAN lottery's Drill at 75.7500 still beats Farm out at 33.2500, and a company that cannot absorb a loss of 80.0000 holds a preference the engine cannot express.",
+   "The reviewer is right, since at 0.650000 the EKPAN lottery drill's expected value is -80.0000 and the table's 75.7500 is the value on success.",
+   "The loss chance is beside the point, because 0.650000 is the EKPAN tree's dry hole probability and belongs to a different model."
+  ],
+  "answer": 1,
+  "explanation": "Calling 0.650000 the EKPAN tree's figure mixes the two models, since it is the EKPAN lottery's own dry hole and the EKPAN tree's is 0.500000; on the lottery 0.350000 x 365.0000 + 0.650000 x -80.0000 = 75.7500; the rollback maximises expected money and reports no chance of loss or worst case."
+ },
+ {
+  "prompt": "The expected value of perfect information on the EKPAN lottery is 52.0000 at the stated 0.350000 and 61.7143 at 0.228571. Why is it larger at the second probability?",
+  "options": [
+   "Because at 0.228571 the EKPAN lottery's drill is worth more than at 0.350000, and perfect information is a fixed share of the best action's value.",
+   "Because a lower success probability makes the dry hole likelier, and perfect information is worth most wherever a loss is likeliest.",
+   "0.228571 is the drill against farm-out switch, where the choice made without information is most fragile and knowing the outcome first is worth most.",
+   "Because the EKPAN lottery's residue of -7.11e-15 at the crossing is added to the value with information, inflating it at that one point."
+  ],
+  "answer": 2,
+  "explanation": "On the EKPAN lottery at 0.350000 knowing the outcome gives 0.350000 x 365.0000 + 0.650000 x 0.0000 = 127.7500 against 75.7500, a difference of 52.0000; the peak of 61.7143 sits on the switch this tier solves."
+ },
+ {
+  "prompt": "The VOI Analyzer's second action is Do Not, with every payoff 0. Set beside the EKPAN lottery's three actions, which one is it, and what does offering it in place of the farm-out do?",
+  "options": [
+   "It is Walk away, which the farm-out dominates, so the Analyzer keeps the alternative that is never best and drops the one that can be.",
+   "It is the farm-out with its payoffs cleared, so the Analyzer still values the same three actions, with one of them simply set to 0.0000.",
+   "It is Drill at no cost, the Analyzer's way of pricing the decision without the EKPAN lottery's drill cost of 55.0000.",
+   "It is a placeholder the Analyzer ignores, so the survey is valued on Drill alone as if the owner had no alternative."
+  ],
+  "answer": 0,
+  "explanation": "On the EKPAN lottery Farm out pays 95 p, positive whenever success is possible, so walking away never wins; the Analyzer's gross value of 19.84 is the two action number, against 24.8250 with the farm-out."
+ },
+ {
+  "prompt": "At a survey cost of exactly 24.8250, the two root branches of the information tree built on the EKPAN lottery tie, and the optimal path marks acquiring the survey. What decides that mark?",
+  "options": [
+   "The survey's positive gross value, since the EKPAN lottery's survey, worth 24.8250 before its cost, is always worth acquiring at that same price.",
+   "Float residue at the crossing, as at the EKPAN lottery's switch of 0.228571, where the survey branch comes out larger in its last binary digits.",
+   "A rule breaking ties toward the branch that carries more information, which the information tree applies before it compares values.",
+   "The tie rule: both branches come to 75.7500, and acquiring carries the mark as the branch typed first."
+  ],
+  "answer": 3,
+  "explanation": "The price that makes information neutral is its gross value, 24.8250 on the EKPAN lottery. At that cost the branches tie, the engine reports the tie, and the mark is listing order, as on drillFarmOut at 0.200000."
+ },
+ {
+  "prompt": "IRRI's indicators are both typed 20 / 80. Weighted by those typed chances with nothing checking them against the stated prior, the numbers give a gross value of information of -15.00. What does the VOI Analyzer do there, and why?",
+  "options": [
+   "Prints 0.00 in place of -15.00, clamping the value at the floor information derived by Bayes never falls below on any survey.",
+   "Withholds the value of information, because the typed numbers imply a success chance that contradicts the stated one.",
+   "Prints -15.00 beside a warning, since a negative value correctly tells the user that the survey is not worth buying.",
+   "Refuses the form with a message naming the sum in percent, because an indicator typed 20 / 80 is not a distribution."
+  ],
+  "answer": 1,
+  "explanation": "Both indicators at 20 / 80 imply a success chance of 0.200000 against 0.3 stated. The Analyzer keeps EMV without information at 15.00 and EVPI at 63.00 and withholds the rest."
+ },
+ {
+  "prompt": "Checking a hand rollback against the explorer, a learner has 375.0000 for OKRIKA's good appraisal branch where the engine has 225.0000. What does the size of the gap point to?",
+  "options": [
+   "A probability typed wrongly in the development chance node, since moving weight between 0.750000 and 0.250000 shifts the value by that much.",
+   "The sale at 95.0000 taken in place of development, which leaves the good branch short by the difference between the two figures.",
+   "A node value read where the branch value belongs: the gap is exactly the 150.0000 development cost on the branch into that node.",
+   "Payoffs the learner left undiscounted, which the engine discounts on the way back from 520.0000 toward the appraisal node."
+  ],
+  "answer": 2,
+  "explanation": "A value read off a node where the branch was asked for is wrong by exactly the branch cost; the Builder's drawing invites it by labelling a node before that cost, as with the EKPAN tree's drill node at 160."
+ },
+ {
+  "prompt": "OKRIKA's appraisal cost of 18.0000 is paid today and its development cost of 150.0000 only after a result is known. What must hold for the root's 87.0000 to mean anything?",
+  "options": [
+   "Every cost and payoff must already be discounted to the date of the root decision, because the rollback takes them at face value.",
+   "The development cost must be typed undiscounted, since the engine discounts each deeper level of the tree by one stage before weighting it.",
+   "Nothing about timing, because costs paid in different years cancel out of any comparison between branches that contain them.",
+   "The appraisal cost must be charged at the root and kept off its branch, so that money paid today stays apart from later money."
+  ],
+  "answer": 0,
+  "explanation": "The engine has no rate and no date in any node, so a tree is only as well discounted as its typed numbers; the EKPAN tree's develop cost of 90.0000 after a marginal find needs the same care."
+ },
+ {
+  "prompt": "A chance node has one branch typed at a probability of 1.5. Which check stops it, and what comes back?",
+  "options": [
+   "The sum check, reporting a sum above 1 against an expected 1, since the engine tests the range of probabilities only on their totals.",
+   "No check: the engine clips the branch to 1 and sets the others to 0, so the node rolls back to that one branch's value.",
+   "The branch count check, reporting that the node needs at least one branch, because a probability above 1 voids the branch that carries it.",
+   "The range check on that branch, before any sum is taken, and no EMV."
+  ],
+  "answer": 3,
+  "explanation": "The published message reads Branch \"a\" needs a probability between 0 and 1 (at node \"bad\"); the engine checks and reports and never repairs, and a sum of 1.2 is refused as well."
+ }
+]

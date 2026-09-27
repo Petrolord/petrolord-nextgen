@@ -25,7 +25,7 @@ At each point of the curve the Actual is the sum of every invoice dated on or be
 | 6 | Aug 27 | 15090000 |
 | 7 | Sep 27 | null |
 
-Past the as-of date the Actual is null at Sep 27, Oct 27 and Nov 27. The curve plots no actual after the report's date, even though the window runs on to 2027-11-30.
+Past the as-of date the Actual is null at Sep 27, Oct 27, Nov 27 and the closing point 30 Nov 27. The curve plots no actual after the report's date, even though the window runs on to 2027-11-30.
 
 ## Two sources of actual
 

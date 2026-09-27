@@ -6,13 +6,15 @@
 #
 # Engine: engines/economics/farmout.js, vendored sha-identical with
 # petrolord-engines 6626465 (engines PRs #272, #273 and #275 FINDINGS, #274
-# the simple uplift, #276 the negative-carry refusal) under its own root
-# packages/engines/ec10-farmout, with its whole runtime closure (cashflow.ts
+# the simple uplift, #276 the negative-carry refusal), first under its own root
+# packages/engines/ec10-farmout and, since the EC4/EC5 recut, on the canonical
+# paths at fb5a363, with its whole runtime closure (cashflow.ts
 # for applyJV and npv, decisionTree.js for rollback, evpi and evii,
 # portfolio.js for portfolioRiskMetrics, afe.js for calculatePartnerCosts,
-# jointVenture.js for carryRecovery and backIn). The closure has its own root
-# because the canonical NextGen decisionTree.js and portfolio.js are held at
-# older blobs for the EC4 and EC5 courses (vendor_farmout.sh says why).
+# jointVenture.js for carryRecovery and backIn). The closure had its own root
+# while the canonical NextGen decisionTree.js and portfolio.js were held at
+# older blobs for the EC4 and EC5 courses (vendor_farmout.sh says why); the
+# EC4/EC5 recut collapsed it.
 # vendor_farmout.sh walks the closure from the jest suite (nineteen paths with
 # FINDINGS) and the engine's own suite passes 162 of 162 from that root.
 #

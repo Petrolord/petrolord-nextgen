@@ -26,7 +26,7 @@ So a brief whose economics section comes from a later run than the one the tree 
 
 ## What provenance cannot certify
 
-A provenance line names a source. It does not check that the probabilities are realistic, that the payoffs are already discounted, that a cleared cost box was meant to be zero, or that a drill branch worth 105.0000 is acceptable when it loses money with probability 0.500000.
+A provenance line names a source. It does not check that the probabilities are realistic, that the payoffs are already discounted, that a cost box cleared in the Builder (removed, so read as 0) was meant to be zero, or that a drill branch worth 105.0000 is acceptable when it loses money with probability 0.500000.
 
 ## The mistake
 

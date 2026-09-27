@@ -6,11 +6,11 @@ An expert capstone asks for a portfolio's risk and an AFE's control in one answe
 
 ## The inputs before any run
 
-Read every project's capex, pos, npv_p50 and fail_cost before running anything. A negative capex refuses with PortfolioInputError; a pos of 1.4 or "n/a" does not, and on the published case quietly returns 80.0000. Write one risked EMV by hand for the project the answer leans on most. On OKONO that is OK-3: 0.250000 x 420.0000 - 0.750000 x 85.0000 = 41.2500, and its success-case NPV of 420.0000 is not its value. On the AFE side, check that every progress is 0 or more, and point out any above 100 percent, which the engine accepts.
+Read every project's capex, pos, npv_p50 and fail_cost before running anything. A negative or non-numeric capex and a pos of 1.4 or "n/a" all refuse with PortfolioInputError, naming the project; a pos left out is the default of 1. Write one risked EMV by hand for the project the answer leans on most. On OKONO that is OK-3: 0.250000 x 420.0000 - 0.750000 x 85.0000 = 41.2500, and its success-case NPV of 420.0000 is not its value. On the AFE side, check that every progress runs from 0 to 100 percent, since the engine refuses any outside it.
 
 ## The set and its flags
 
-Run the limit in the explorer and read four fields beside the set: capex, risked EMV, resolution and overLimit. OKONO at 450.0000 funds OK-1 + OK-3 + OK-4 for 291.0000 at resolution 1.0000 with overLimit false. Set it beside the ranking by EMV per million USD, which funds OK-1 + OK-4 + OK-5 at 287.7500. When the resolution is coarser than 1 million USD per cell, say whether overLimit fired, and say that an undershoot (D4) or a free project charged a cell (D2) would not be flagged.
+Run the limit in the explorer and read four fields beside the set: capex, risked EMV, solveMethod and optimalityGap. OKONO at 450.0000 funds OK-1 + OK-3 + OK-4 for 291.0000, solveMethod exact with optimalityGap 0.0000. Set it beside the ranking by EMV per million USD, which funds OK-1 + OK-4 + OK-5 at 287.7500. When solveMethod reads grid-feasible, quote optimalityGap beside the EMV as the most a better set could add.
 
 ## The risk summary with its settings
 
@@ -32,16 +32,16 @@ Give every party's working interest and share, the operator's remainder, and val
 
 | Check | What passing looks like |
 | --- | --- |
-| Inputs | refusals named, clamps spotted, one risked EMV by hand |
-| Set | capex, EMV, resolution and overLimit read |
+| Inputs | refusals named, defaults spotted, one risked EMV by hand |
+| Set | capex, EMV, solveMethod and optimalityGap read |
 | Risk | seed, iterations and correlation beside P(loss) and the P90 |
 | AFE | as-of date, EAC rule, CPI beside the actuals total, SPI |
 | Shares | interests, operator remainder, valid and any note |
-| Distrust | CPI before spend, undated invoices, the plan's last point, the standard error |
+| Distrust | earned value with nothing spent, undated invoices, the last monthly point, the standard error |
 
 ## The mistake
 
-The careful mistake is a correct number with its condition missing. A P90 without a seed, an SPI without an as-of date, a CPI without the actuals total and a set without its overLimit are each right, and each loses marks. The other is quoting the S-curve's last Forecast point, 24949669 on OFON-1, as the EAC.
+The careful mistake is a correct number with its condition missing. A P90 without a seed, an SPI without an as-of date, a CPI without the actuals total and a set without its solveMethod are each right, and each loses marks. The other is quoting the Forecast of the S-curve's last monthly point, Nov 27's 24949669 on OFON-1, as the EAC.
 
 ## Exercise
 

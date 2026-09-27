@@ -17,7 +17,7 @@ A project that fails does not merely return nothing: a dry hole or an abandoned 
 
 The fail cost enters the risked EMV with a minus sign, multiplied by 1 - pos. For OK-6, 0.550000 x 360.0000 - (1 - 0.550000) x 120.0000 = 144.0000. For OK-3, 0.250000 x 420.0000 - 0.750000 x 85.0000 = 41.2500. OK-5 cannot fail, so its fail cost of 0.0000 is weighted by nothing and its risked EMV is its `npv_p50` of 38.0000.
 
-## A fail cost is typed, never inferred
+## A fail cost is typed by hand
 
 The engine does not link `fail_cost` to capex. OK-3 costs 90.0000 to fund and loses 85.0000 if it fails; those are two separate entries, and the second is a judgement about what is lost once the well is dry. A missing `fail_cost` defaults to 0. The published case `missingNpvIsZero` enters no `npv_p50`, a `fail_cost` of 8 and a `pos` of 0.25, so the risked EMV is 0.25 x 0 - (1 - 0.25) x 8 = -6.0000. Every unit of that value is the failure branch.
 

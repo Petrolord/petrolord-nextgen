@@ -29,7 +29,7 @@ Step 14 gains 35.7500 at 1.191667, the same figures as step 8. It is the same tr
 
 ## The mistake
 
-The expensive mistake is to extrapolate the last step. At 450.0000 the step just taken bought 0.108333 per extra million USD, and a reader who projects that forward argues that more budget is barely worth having. The next step buys 0.733333, and step 14 buys 1.191667. On a frontier of whole projects the ratios do not fall steadily, so the value of more money is read from the points ahead, never from the step behind. The honest figure for this budget change is the difference between two last points: 402.7500 at 600.0000 against 291.0000 at 450.0000.
+The expensive mistake is to extrapolate the last step. At 450.0000 the step just taken bought 0.108333 per extra million USD, and a reader who projects that forward argues that more budget is barely worth having. The next step buys 0.733333, and step 14 buys 1.191667. On a frontier of whole projects the ratios do not fall steadily, so the value of more money is read from the points ahead; the step behind does not tell you. The honest figure for this budget change is the difference between two last points: 402.7500 at 600.0000 against 291.0000 at 450.0000.
 
 The opposite mistake asks for one more million because 0.733333 looks attractive. That million buys 0.0000; the argument needs the full 30.0000 to 480.0000.
 

@@ -36,4 +36,4 @@ Two careful errors each give a plausible drill node that is not 160.0000. The fi
 
 ## Exercise
 
-Write both weighting lines for the EKPAN tree and check them against 160.0000 and 37.7500. Explain why the Marginal branch enters at 170.0000 rather than at 260.0000 or 140.0000, and say where the drill cost of 55.0000 is subtracted and what the Drill branch is worth once it is.
+Write both weighting lines for the EKPAN tree and check them against 160.0000 and 37.7500. Explain why the Marginal branch enters at 170.0000, and at neither 260.0000 nor 140.0000, and say where the drill cost of 55.0000 is subtracted and what the Drill branch is worth once it is.

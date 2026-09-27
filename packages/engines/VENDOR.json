@@ -949,81 +949,53 @@
       "reason": "Value moving. Audit Group 3: 80 test moves behind esp, surveillance, rodpump, flowassurance, gaswell, gaslift, nodal, network and intervention. Needs a re-vendor plus a recut migration per course in one deploy window. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; the own-property hunk only is now carried. #231 own-property hunk backported, remaining difference unchanged (2026-09-21, fix/held-copy-pass-and-231: only the engines #231 own-property guard was hand-ported onto this held blob, proved by __tests__/prototypeChainLookups.test.js; every course wave that reads this file regenerates byte-identical)."
     },
     {
-      "path": "engines/economics/afe.js",
-      "kind": "differing",
-      "group": "4-economics-revendor",
-      "vendoredSha": "f5262a523739be110b3a1c7b04e8c70ec2d1ce37",
-      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
-    },
-    {
-      "path": "engines/economics/decisionTree.js",
-      "kind": "differing",
-      "group": "4-economics-revendor",
-      "vendoredSha": "0e6b723987506b5da772c85bdbddd35b150940fc",
-      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
-    },
-    {
       "path": "engines/economics/fdp/costCalculations.js",
       "kind": "differing",
       "group": "4-economics-revendor",
       "vendoredSha": "94675046e9e8f909a69776532a435a40a7f629ce",
-      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; the own-property hunk only is now carried. #231 own-property hunk backported, remaining difference unchanged (2026-09-21, fix/held-copy-pass-and-231: only the engines #231 own-property guard was hand-ported onto this held blob, proved by __tests__/prototypeChainLookups.test.js; every course wave that reads this file regenerates byte-identical)."
+      "reason": "Value moving. Audit Group 4. The EC1/EC2 halves were reconciled by the #138 recut (cashflow.ts, fiscalRegime.js), and the EC4 decision / EC5 portfolio half by fix/decision-portfolio-recut (decisionTree.js, voi.js, portfolio.js, afe.js re-vendored at engines fb5a363 with both courses re-cut). What is still held is montecarlo.ts, screening.js and fdp/*: they carry the EC3 uncertainty and EC6 fdp courses, breakeven.js and the MD2 refinery course (modularRefinery.js imports screening.js), whose recuts are pending. Pull only with those recuts in the same deploy window. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; the own-property hunk only is now carried. #231 own-property hunk backported, remaining difference unchanged (2026-09-21, fix/held-copy-pass-and-231: only the engines #231 own-property guard was hand-ported onto this held blob, proved by __tests__/prototypeChainLookups.test.js; every course wave that reads this file regenerates byte-identical)."
     },
     {
       "path": "engines/economics/fdp/facilitiesCalculations.js",
       "kind": "differing",
       "group": "4-economics-revendor",
       "vendoredSha": "d20c1d97a81f570555f09c3fe5ec701fe781360f",
-      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+      "reason": "Value moving. Audit Group 4. The EC1/EC2 halves were reconciled by the #138 recut (cashflow.ts, fiscalRegime.js), and the EC4 decision / EC5 portfolio half by fix/decision-portfolio-recut (decisionTree.js, voi.js, portfolio.js, afe.js re-vendored at engines fb5a363 with both courses re-cut). What is still held is montecarlo.ts, screening.js and fdp/*: they carry the EC3 uncertainty and EC6 fdp courses, breakeven.js and the MD2 refinery course (modularRefinery.js imports screening.js), whose recuts are pending. Pull only with those recuts in the same deploy window."
     },
     {
       "path": "engines/economics/fdp/fdpCalculations.js",
       "kind": "differing",
       "group": "4-economics-revendor",
       "vendoredSha": "bc641603fcd05a6054018051af9a68b34d3c5aa6",
-      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+      "reason": "Value moving. Audit Group 4. The EC1/EC2 halves were reconciled by the #138 recut (cashflow.ts, fiscalRegime.js), and the EC4 decision / EC5 portfolio half by fix/decision-portfolio-recut (decisionTree.js, voi.js, portfolio.js, afe.js re-vendored at engines fb5a363 with both courses re-cut). What is still held is montecarlo.ts, screening.js and fdp/*: they carry the EC3 uncertainty and EC6 fdp courses, breakeven.js and the MD2 refinery course (modularRefinery.js imports screening.js), whose recuts are pending. Pull only with those recuts in the same deploy window."
     },
     {
       "path": "engines/economics/fdp/scheduleCalculations.js",
       "kind": "differing",
       "group": "4-economics-revendor",
       "vendoredSha": "6727c25f942087e98f44707c4d1fed16bcb0121d",
-      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+      "reason": "Value moving. Audit Group 4. The EC1/EC2 halves were reconciled by the #138 recut (cashflow.ts, fiscalRegime.js), and the EC4 decision / EC5 portfolio half by fix/decision-portfolio-recut (decisionTree.js, voi.js, portfolio.js, afe.js re-vendored at engines fb5a363 with both courses re-cut). What is still held is montecarlo.ts, screening.js and fdp/*: they carry the EC3 uncertainty and EC6 fdp courses, breakeven.js and the MD2 refinery course (modularRefinery.js imports screening.js), whose recuts are pending. Pull only with those recuts in the same deploy window."
     },
     {
       "path": "engines/economics/fdp/wellCalculations.js",
       "kind": "differing",
       "group": "4-economics-revendor",
       "vendoredSha": "91e8eada5637361a5e9107ac49f26e67d864c386",
-      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; the own-property hunk only is now carried. #231 own-property hunk backported, remaining difference unchanged (2026-09-21, fix/held-copy-pass-and-231: only the engines #231 own-property guard was hand-ported onto this held blob, proved by __tests__/prototypeChainLookups.test.js; every course wave that reads this file regenerates byte-identical)."
+      "reason": "Value moving. Audit Group 4. The EC1/EC2 halves were reconciled by the #138 recut (cashflow.ts, fiscalRegime.js), and the EC4 decision / EC5 portfolio half by fix/decision-portfolio-recut (decisionTree.js, voi.js, portfolio.js, afe.js re-vendored at engines fb5a363 with both courses re-cut). What is still held is montecarlo.ts, screening.js and fdp/*: they carry the EC3 uncertainty and EC6 fdp courses, breakeven.js and the MD2 refinery course (modularRefinery.js imports screening.js), whose recuts are pending. Pull only with those recuts in the same deploy window. Canonical 16fd6c9 also carries the engines #231 own-property lookup repair for this file; the own-property hunk only is now carried. #231 own-property hunk backported, remaining difference unchanged (2026-09-21, fix/held-copy-pass-and-231: only the engines #231 own-property guard was hand-ported onto this held blob, proved by __tests__/prototypeChainLookups.test.js; every course wave that reads this file regenerates byte-identical)."
     },
     {
       "path": "engines/economics/montecarlo.ts",
       "kind": "differing",
       "group": "4-economics-revendor",
       "vendoredSha": "3f73b78488c9996848443b26375c3e25cc5e429a",
-      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
-    },
-    {
-      "path": "engines/economics/portfolio.js",
-      "kind": "differing",
-      "group": "4-economics-revendor",
-      "vendoredSha": "9255c481cd30269195c0396729425f6664cce075",
-      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+      "reason": "Value moving. Audit Group 4. The EC1/EC2 halves were reconciled by the #138 recut (cashflow.ts, fiscalRegime.js), and the EC4 decision / EC5 portfolio half by fix/decision-portfolio-recut (decisionTree.js, voi.js, portfolio.js, afe.js re-vendored at engines fb5a363 with both courses re-cut). What is still held is montecarlo.ts, screening.js and fdp/*: they carry the EC3 uncertainty and EC6 fdp courses, breakeven.js and the MD2 refinery course (modularRefinery.js imports screening.js), whose recuts are pending. Pull only with those recuts in the same deploy window."
     },
     {
       "path": "engines/economics/screening.js",
       "kind": "differing",
       "group": "4-economics-revendor",
       "vendoredSha": "9dab5bc3995fd010ec4da833319b6de09989e4fd",
-      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window. MD-0 (2026-09-19): the canonical file's additive lossCarryForward option (engines #219, default false) is patched onto this deliberately older copy, and nothing else, because the Commercial & Trading course MD2 (refinery) calls it through engines/downstream/modularRefinery.js feasibilityEconomics. With the option off every economics output is unchanged, so no graded Economics value moves; the rest of the value-moving pull still waits for its recut."
-    },
-    {
-      "path": "engines/economics/voi.js",
-      "kind": "differing",
-      "group": "4-economics-revendor",
-      "vendoredSha": "04302a01f008a12cde1b703825b13ba289155800",
-      "reason": "Value moving. Audit Group 4: 271 test moves. The EC1 and EC2 halves of this group were reconciled by the #138 recut, which pulled cashflow.ts and fiscalRegime.js with their suites, goldens and oracles and moved the courses' graded values in the same change. The EC3 recut is written and unapplied; EC4, EC5 and EC6 have none. Pull only with the recut in the same deploy window."
+      "reason": "Value moving. Audit Group 4. The EC1/EC2 halves were reconciled by the #138 recut (cashflow.ts, fiscalRegime.js), and the EC4 decision / EC5 portfolio half by fix/decision-portfolio-recut (decisionTree.js, voi.js, portfolio.js, afe.js re-vendored at engines fb5a363 with both courses re-cut). What is still held is montecarlo.ts, screening.js and fdp/*: they carry the EC3 uncertainty and EC6 fdp courses, breakeven.js and the MD2 refinery course (modularRefinery.js imports screening.js), whose recuts are pending. Pull only with those recuts in the same deploy window. MD-0 (2026-09-19): the canonical file's additive lossCarryForward option (engines #219, default false) is patched onto this deliberately older copy, and nothing else, because the Commercial & Trading course MD2 (refinery) calls it through engines/downstream/modularRefinery.js feasibilityEconomics. With the option off every economics output is unchanged, so no graded Economics value moves; the rest of the value-moving pull still waits for its recut."
     },
     {
       "path": "engines/drilling/profileDesign.js",
@@ -1138,24 +1110,10 @@
       "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
     },
     {
-      "path": "__tests__/economics.afe.test.js",
-      "kind": "differing",
-      "group": "6-test-layer-drift",
-      "vendoredSha": "b83184db6a07f9424f1e3568285ff326d7adad39",
-      "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
-    },
-    {
       "path": "__tests__/economics.breakeven.test.js",
       "kind": "differing",
       "group": "6-test-layer-drift",
       "vendoredSha": "149d7f08d7d5332bdfbbae7c9421426055f7138b",
-      "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
-    },
-    {
-      "path": "__tests__/economics.decision.test.js",
-      "kind": "differing",
-      "group": "6-test-layer-drift",
-      "vendoredSha": "5fe20d6cdcb3f3486af6becee530250a6b4f4a96",
       "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
     },
     {
@@ -1170,13 +1128,6 @@
       "kind": "differing",
       "group": "6-test-layer-drift",
       "vendoredSha": "05ef37def1868014e3aabe4fe5f3a3265a303fa3",
-      "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
-    },
-    {
-      "path": "__tests__/economics.portfolio.test.js",
-      "kind": "differing",
-      "group": "6-test-layer-drift",
-      "vendoredSha": "c5513c156fbb87ce31ece53063c0c7a3678bf74e",
       "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
     },
     {
@@ -1299,20 +1250,6 @@
       "reason": "NextGen vendors a different revision of this suite from canonical. Its goldens are what its courses teach, so it moves only with a recut."
     },
     {
-      "path": "test-data/economics/goldens/afe_cases.json",
-      "kind": "differing",
-      "group": "6-test-layer-drift",
-      "vendoredSha": "148b45a792da2d12c677d0181b1af7941888ba19",
-      "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it."
-    },
-    {
-      "path": "test-data/economics/goldens/decision_cases.json",
-      "kind": "differing",
-      "group": "6-test-layer-drift",
-      "vendoredSha": "d41f49d6a6b564dd8ed0680862972f2340b16ee7",
-      "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it."
-    },
-    {
       "path": "test-data/economics/goldens/fdp_cases.json",
       "kind": "differing",
       "group": "6-test-layer-drift",
@@ -1325,13 +1262,6 @@
       "group": "6-test-layer-drift",
       "vendoredSha": "499c2a4697717707b94f650d020b85546d83f0bd",
       "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it. EC7 PIA recut (2026-09-26): engines #262 (3778451) added \"pia_legacy_pre_audit\": true to the four PIA case configs of this golden; that four-line change is backported onto the held blob (no other line moves), so the held montecarlo suite keeps its pre-audit numbers against the re-vendored cashflow.ts."
-    },
-    {
-      "path": "test-data/economics/goldens/portfolio_cases.json",
-      "kind": "differing",
-      "group": "6-test-layer-drift",
-      "vendoredSha": "198a864f94fb5d0518db5e621ebf90903a8ca12b",
-      "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it."
     },
     {
       "path": "test-data/economics/goldens/screening_cases.json",
@@ -1439,13 +1369,6 @@
       "reason": "Validation tooling vendored at a different revision from canonical."
     },
     {
-      "path": "tools/validation/economics/FINDINGS-decision.md",
-      "kind": "differing",
-      "group": "6-test-layer-drift",
-      "vendoredSha": "3290956d27e095e9d1fbf4dd2477940bf576ad4c",
-      "reason": "Validation tooling vendored at a different revision from canonical."
-    },
-    {
       "path": "tools/validation/economics/FINDINGS-fdp.md",
       "kind": "differing",
       "group": "6-test-layer-drift",
@@ -1453,24 +1376,10 @@
       "reason": "Validation tooling vendored at a different revision from canonical."
     },
     {
-      "path": "tools/validation/economics/oracle_afe.py",
-      "kind": "differing",
-      "group": "6-test-layer-drift",
-      "vendoredSha": "db98222c7f6d7fef9791cb73ddde472275ef3f50",
-      "reason": "Validation tooling vendored at a different revision from canonical."
-    },
-    {
       "path": "tools/validation/economics/oracle_breakeven.py",
       "kind": "differing",
       "group": "6-test-layer-drift",
       "vendoredSha": "2a4588d80945687377658c40464cba27592274cd",
-      "reason": "Validation tooling vendored at a different revision from canonical."
-    },
-    {
-      "path": "tools/validation/economics/oracle_decision.py",
-      "kind": "differing",
-      "group": "6-test-layer-drift",
-      "vendoredSha": "7d4fa9822562024f82b7d2a26684c188a62a4f8c",
       "reason": "Validation tooling vendored at a different revision from canonical."
     },
     {
@@ -1485,13 +1394,6 @@
       "kind": "differing",
       "group": "6-test-layer-drift",
       "vendoredSha": "07ea0264b059969de9ed637f7694b35bd87550ca",
-      "reason": "Validation tooling vendored at a different revision from canonical."
-    },
-    {
-      "path": "tools/validation/economics/oracle_portfolio.py",
-      "kind": "differing",
-      "group": "6-test-layer-drift",
-      "vendoredSha": "0c5b88c52cd19b6d6e4395673d6a99736d4e9bab",
       "reason": "Validation tooling vendored at a different revision from canonical."
     },
     {
@@ -2258,20 +2160,6 @@
       "reason": "EC8 gsa course: vendored sha-identical from petrolord-engines 7f5d462 (PRs #267 and #268: engines/economics/gasContract.js, its jest suite, golden, the ekene-gsa fixtures and their writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_procurement.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 7f5d462 or later."
     },
     {
-      "path": "__tests__/economics.jointVenture.test.js",
-      "kind": "extra",
-      "group": "ec9-joa-course",
-      "vendoredSha": "530694a5f1a1a73f01877354ba7872500686e8d3",
-      "reason": "EC9 joa course: vendored sha-identical from petrolord-engines 3ae56e7 (PR #270: engines/economics/jointVenture.js, its jest suite, golden, the ekene-jv fixture and its writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_joa.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 3ae56e7 or later."
-    },
-    {
-      "path": "engines/economics/jointVenture.js",
-      "kind": "extra",
-      "group": "ec9-joa-course",
-      "vendoredSha": "364f766339c81af2a05a52f85f6ec19d759004b4",
-      "reason": "EC9 joa course: vendored sha-identical from petrolord-engines 3ae56e7 (PR #270: engines/economics/jointVenture.js, its jest suite, golden, the ekene-jv fixture and its writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_joa.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 3ae56e7 or later."
-    },
-    {
       "path": "test-data/economics/ekene-jv/README.md",
       "kind": "extra",
       "group": "ec9-joa-course",
@@ -2286,38 +2174,10 @@
       "reason": "EC9 joa course: vendored sha-identical from petrolord-engines 3ae56e7 (PR #270: engines/economics/jointVenture.js, its jest suite, golden, the ekene-jv fixture and its writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_joa.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 3ae56e7 or later."
     },
     {
-      "path": "test-data/economics/goldens/jointventure_cases.json",
-      "kind": "extra",
-      "group": "ec9-joa-course",
-      "vendoredSha": "69ac8a69041443b0988183bc9a0bd11584371d41",
-      "reason": "EC9 joa course: vendored sha-identical from petrolord-engines 3ae56e7 (PR #270: engines/economics/jointVenture.js, its jest suite, golden, the ekene-jv fixture and its writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_joa.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 3ae56e7 or later."
-    },
-    {
-      "path": "tools/validation/economics/FINDINGS-jointVenture.md",
-      "kind": "extra",
-      "group": "ec9-joa-course",
-      "vendoredSha": "480032d07f9bfe798b0311bf2edefb688d4b7e8d",
-      "reason": "EC9 joa course: vendored sha-identical from petrolord-engines 3ae56e7 (PR #270: engines/economics/jointVenture.js, its jest suite, golden, the ekene-jv fixture and its writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_joa.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 3ae56e7 or later."
-    },
-    {
       "path": "tools/validation/economics/make_jv_fixtures.py",
       "kind": "extra",
       "group": "ec9-joa-course",
       "vendoredSha": "fea723b6da1a5f228df63da479f2960aea33811c",
-      "reason": "EC9 joa course: vendored sha-identical from petrolord-engines 3ae56e7 (PR #270: engines/economics/jointVenture.js, its jest suite, golden, the ekene-jv fixture and its writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_joa.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 3ae56e7 or later."
-    },
-    {
-      "path": "tools/validation/economics/negcontrol_jointventure.sh",
-      "kind": "extra",
-      "group": "ec9-joa-course",
-      "vendoredSha": "bc3afa57ceafa3a5fa2d3e5e577c3049df802732",
-      "reason": "EC9 joa course: vendored sha-identical from petrolord-engines 3ae56e7 (PR #270: engines/economics/jointVenture.js, its jest suite, golden, the ekene-jv fixture and its writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_joa.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 3ae56e7 or later."
-    },
-    {
-      "path": "tools/validation/economics/oracle_jointventure.py",
-      "kind": "extra",
-      "group": "ec9-joa-course",
-      "vendoredSha": "22bd3bfab89fcecfce1999b6aa023e8352cfd739",
       "reason": "EC9 joa course: vendored sha-identical from petrolord-engines 3ae56e7 (PR #270: engines/economics/jointVenture.js, its jest suite, golden, the ekene-jv fixture and its writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_joa.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 3ae56e7 or later."
     },
     {
@@ -2328,137 +2188,116 @@
       "reason": "EC9 joa course: vendored sha-identical from petrolord-engines 3ae56e7 (PR #270: engines/economics/jointVenture.js, its jest suite, golden, the ekene-jv fixture and its writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_joa.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 3ae56e7 or later."
     },
     {
-      "path": "ec10-farmout/__tests__/economics.farmout.test.js",
+      "path": "engines/economics/jointVenture.js",
       "kind": "extra",
-      "group": "ec10-farmout-course",
-      "vendoredSha": "25ea8fd4252b98aac7e725056bb6f1e82df49197",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
-    },
-    {
-      "path": "ec10-farmout/engines/economics/afe.js",
-      "kind": "extra",
-      "group": "ec10-farmout-course",
-      "vendoredSha": "52d840d950b16f55675bcc4862102e58760c2184",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
-    },
-    {
-      "path": "ec10-farmout/engines/economics/cashflow.ts",
-      "kind": "extra",
-      "group": "ec10-farmout-course",
-      "vendoredSha": "92906576c0cc9afdeee45dd6d640f997dcb9fb49",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
-    },
-    {
-      "path": "ec10-farmout/engines/economics/decisionTree.js",
-      "kind": "extra",
-      "group": "ec10-farmout-course",
-      "vendoredSha": "50ac7531ccf97001e32ef6e50476f32c88551f4c",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
-    },
-    {
-      "path": "ec10-farmout/engines/economics/farmout.js",
-      "kind": "extra",
-      "group": "ec10-farmout-course",
-      "vendoredSha": "d6b4ad421a8ab1ff9d4dfcad971e7861dcc9561b",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
-    },
-    {
-      "path": "ec10-farmout/engines/economics/irrContract.js",
-      "kind": "extra",
-      "group": "ec10-farmout-course",
-      "vendoredSha": "88a2d3c11858d6c84df765411d8fee79bea06d10",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
-    },
-    {
-      "path": "ec10-farmout/engines/economics/jointVenture.js",
-      "kind": "extra",
-      "group": "ec10-farmout-course",
+      "group": "ec45-decision-portfolio-recut",
       "vendoredSha": "e843192b4b84ab4ba94fac3bb7da12911ac14f3c",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
+      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, and that root has collapsed into them (deleted with its ledger entries). Clears as STALE when the pin moves to fb5a363 or later."
     },
     {
-      "path": "ec10-farmout/engines/economics/portfolio.js",
+      "path": "engines/economics/farmout.js",
       "kind": "extra",
-      "group": "ec10-farmout-course",
-      "vendoredSha": "c0ae041b624e176dc31e533d443105dad7e65fb6",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
+      "group": "ec45-decision-portfolio-recut",
+      "vendoredSha": "d6b4ad421a8ab1ff9d4dfcad971e7861dcc9561b",
+      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, and that root has collapsed into them (deleted with its ledger entries). Clears as STALE when the pin moves to fb5a363 or later."
     },
     {
-      "path": "ec10-farmout/lib/dates/dates.js",
+      "path": "__tests__/economics.jointVenture.test.js",
       "kind": "extra",
-      "group": "ec10-farmout-course",
-      "vendoredSha": "15dba4d7ecb833fd1d9c2bf8b32942fbe4e5a382",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
+      "group": "ec45-decision-portfolio-recut",
+      "vendoredSha": "6abaec3cd2466faa57e14fb07fef2c08fe04c7e8",
+      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, and that root has collapsed into them (deleted with its ledger entries). Clears as STALE when the pin moves to fb5a363 or later."
     },
     {
-      "path": "ec10-farmout/lib/stats/stats.js",
+      "path": "__tests__/economics.farmout.test.js",
       "kind": "extra",
-      "group": "ec10-farmout-course",
-      "vendoredSha": "92985b59a8f78fb16d3d132a13fcbadb1a7ec4ee",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
+      "group": "ec45-decision-portfolio-recut",
+      "vendoredSha": "25ea8fd4252b98aac7e725056bb6f1e82df49197",
+      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, and that root has collapsed into them (deleted with its ledger entries). Clears as STALE when the pin moves to fb5a363 or later."
     },
     {
-      "path": "ec10-farmout/test-data/economics/ekene-farmout/README.md",
+      "path": "test-data/economics/goldens/jointventure_cases.json",
       "kind": "extra",
-      "group": "ec10-farmout-course",
-      "vendoredSha": "41889716b393d59b8d0753a97e289514989f171c",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
+      "group": "ec45-decision-portfolio-recut",
+      "vendoredSha": "a135ae266a8aa35d2b71fee6dfb3f4efe4b0e70e",
+      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, and that root has collapsed into them (deleted with its ledger entries). Clears as STALE when the pin moves to fb5a363 or later."
     },
     {
-      "path": "ec10-farmout/test-data/economics/ekene-farmout/ekene-farmout.json",
+      "path": "test-data/economics/goldens/farmout_cases.json",
       "kind": "extra",
-      "group": "ec10-farmout-course",
-      "vendoredSha": "4eae68d9b649b307da9195849d136a2195f195fb",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
-    },
-    {
-      "path": "ec10-farmout/test-data/economics/goldens/farmout_cases.json",
-      "kind": "extra",
-      "group": "ec10-farmout-course",
+      "group": "ec45-decision-portfolio-recut",
       "vendoredSha": "ca6abfa4c9ce17a1f720521be93710750f2ee0fd",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
+      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, and that root has collapsed into them (deleted with its ledger entries). Clears as STALE when the pin moves to fb5a363 or later."
     },
     {
-      "path": "ec10-farmout/tools/validation/economics/FINDINGS-farmout.md",
+      "path": "test-data/economics/ekene-farmout/README.md",
       "kind": "extra",
-      "group": "ec10-farmout-course",
+      "group": "ec45-decision-portfolio-recut",
+      "vendoredSha": "41889716b393d59b8d0753a97e289514989f171c",
+      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, and that root has collapsed into them (deleted with its ledger entries). Clears as STALE when the pin moves to fb5a363 or later."
+    },
+    {
+      "path": "test-data/economics/ekene-farmout/ekene-farmout.json",
+      "kind": "extra",
+      "group": "ec45-decision-portfolio-recut",
+      "vendoredSha": "4eae68d9b649b307da9195849d136a2195f195fb",
+      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, and that root has collapsed into them (deleted with its ledger entries). Clears as STALE when the pin moves to fb5a363 or later."
+    },
+    {
+      "path": "tools/validation/economics/FINDINGS-jointVenture.md",
+      "kind": "extra",
+      "group": "ec45-decision-portfolio-recut",
+      "vendoredSha": "c75677f3ebc46ab7778a6a040733107c0624c50e",
+      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, and that root has collapsed into them (deleted with its ledger entries). Clears as STALE when the pin moves to fb5a363 or later."
+    },
+    {
+      "path": "tools/validation/economics/FINDINGS-farmout.md",
+      "kind": "extra",
+      "group": "ec45-decision-portfolio-recut",
       "vendoredSha": "ccc08a9602221ed9b41e9e52c28da3a4118cf9b7",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
+      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, and that root has collapsed into them (deleted with its ledger entries). Clears as STALE when the pin moves to fb5a363 or later."
     },
     {
-      "path": "ec10-farmout/tools/validation/economics/make_farmout_fixtures.py",
+      "path": "tools/validation/economics/oracle_jointventure.py",
       "kind": "extra",
-      "group": "ec10-farmout-course",
-      "vendoredSha": "d503b594fb9bd3b112e913dd483594371c2e51a7",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
-    },
-    {
-      "path": "ec10-farmout/tools/validation/economics/negcontrol_farmout.sh",
-      "kind": "extra",
-      "group": "ec10-farmout-course",
-      "vendoredSha": "e0c3dacfc9551b8e15e7b53db76123c575d68775",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
-    },
-    {
-      "path": "ec10-farmout/tools/validation/economics/oracle_farmout.py",
-      "kind": "extra",
-      "group": "ec10-farmout-course",
-      "vendoredSha": "3c8f22842ac3246ef78b5edf438ad84975e6f4c0",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
-    },
-    {
-      "path": "ec10-farmout/tools/validation/economics/oracle_jointventure.py",
-      "kind": "extra",
-      "group": "ec10-farmout-course",
+      "group": "ec45-decision-portfolio-recut",
       "vendoredSha": "256521c34f9f1e0f593d2f405f293bd8277dc326",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
+      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, and that root has collapsed into them (deleted with its ledger entries). Clears as STALE when the pin moves to fb5a363 or later."
     },
     {
-      "path": "ec10-farmout/tools/validation/economics/timing_farmout.js",
+      "path": "tools/validation/economics/oracle_farmout.py",
       "kind": "extra",
-      "group": "ec10-farmout-course",
+      "group": "ec45-decision-portfolio-recut",
+      "vendoredSha": "3c8f22842ac3246ef78b5edf438ad84975e6f4c0",
+      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, and that root has collapsed into them (deleted with its ledger entries). Clears as STALE when the pin moves to fb5a363 or later."
+    },
+    {
+      "path": "tools/validation/economics/negcontrol_jointventure.sh",
+      "kind": "extra",
+      "group": "ec45-decision-portfolio-recut",
+      "vendoredSha": "54ee15f8cb4edcdd58ffd4d5297b3cf5780382e7",
+      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, and that root has collapsed into them (deleted with its ledger entries). Clears as STALE when the pin moves to fb5a363 or later."
+    },
+    {
+      "path": "tools/validation/economics/negcontrol_farmout.sh",
+      "kind": "extra",
+      "group": "ec45-decision-portfolio-recut",
+      "vendoredSha": "e0c3dacfc9551b8e15e7b53db76123c575d68775",
+      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, and that root has collapsed into them (deleted with its ledger entries). Clears as STALE when the pin moves to fb5a363 or later."
+    },
+    {
+      "path": "tools/validation/economics/make_farmout_fixtures.py",
+      "kind": "extra",
+      "group": "ec45-decision-portfolio-recut",
+      "vendoredSha": "d503b594fb9bd3b112e913dd483594371c2e51a7",
+      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, and that root has collapsed into them (deleted with its ledger entries). Clears as STALE when the pin moves to fb5a363 or later."
+    },
+    {
+      "path": "tools/validation/economics/timing_farmout.js",
+      "kind": "extra",
+      "group": "ec45-decision-portfolio-recut",
       "vendoredSha": "19cf6156fa3aed7f08aa7c2435d02cc08c612c1c",
-      "reason": "EC10 farmout course: the farmout.js closure vendored sha-identical from petrolord-engines fb5a363 (PRs #272 to #276) under its own root ec10-farmout/ by the wave's vendor_farmout.sh, 4 proofs per path. Its own root because farmout.js needs the fb5a363 decisionTree.js and portfolio.js, whose canonical NextGen paths are held at older blobs by group 4-economics-revendor for the EC4 and EC5 courses (pull only with their recut). Remove this entry, and collapse the root into the canonical paths, in the change that lands that recut."
+      "reason": "EC4/EC5 decision and portfolio recut: vendored sha-identical from petrolord-engines fb5a363 by tools/course-waves/ec45-recut/vendor_ec45.sh (4 proofs per path). New since the canonical pin 54cf7c4, which stays: the farmout.js closure (EC10) and the jointVenture.js closure it needs (engines #274 simple uplift) now sit on their canonical paths, byte-identical to the ec10-farmout/ root copies, and that root has collapsed into them (deleted with its ledger entries). Clears as STALE when the pin moves to fb5a363 or later."
     }
   ]
 }

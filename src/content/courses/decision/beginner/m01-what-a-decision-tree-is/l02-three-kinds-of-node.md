@@ -21,7 +21,7 @@ The root, "EKPAN prospect", is a decision node. "Drill outcome" and "Farm-out ou
 
 ## Branch value: the child less the cost
 
-A branch carries a value of its own: the EMV of the node it leads to, less any cost on that branch. Drill leads to a chance node worth 160.0000 and costs 55.0000, so the branch is worth 105.0000. Develop leads to a terminal of 260.0000 and costs 90.0000, so it is worth 170.0000. A branch with no cost is worth exactly its child. Nodes combine branch values, never raw child values.
+A branch carries a value of its own: the EMV of the node it leads to, less any cost on that branch. Drill leads to a chance node worth 160.0000 and costs 55.0000, so the branch is worth 105.0000. Develop leads to a terminal of 260.0000 and costs 90.0000, so it is worth 170.0000. A branch with no cost is worth exactly its child. Nodes combine branch values and leave raw child values alone.
 
 ## The rules, from the leaves up
 

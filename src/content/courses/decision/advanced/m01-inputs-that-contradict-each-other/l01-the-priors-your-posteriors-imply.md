@@ -33,7 +33,7 @@ IRRI is the Analyzer's default study with both indicators typed as 20 / 80 perce
 
 ## What the check does and refuses to do
 
-On IRRI the repaired Analyzer reports consistent false and withheld true. It keeps EMV without information 15.00 and EVPI 63.00, the two cards that use only the stated outcome chances, and withholds EMV with information, the value of information, the net value and the diagram. EKPAN typed with indicators at 56 and 44 percent, posteriors unchanged, still sums to 100 and still fails: 75.75 and 52.00 survive, the rest is withheld.
+On IRRI the Analyzer reports consistent false and withheld true. It keeps EMV without information 15.00 and EVPI 63.00, the two cards that use only the stated outcome chances, and withholds EMV with information, the value of information, the net value and the diagram. EKPAN typed with indicators at 56 and 44 percent, posteriors unchanged, still sums to 100 and still fails: 75.75 and 52.00 survive, the rest is withheld.
 
 The check never repairs. It does not say which set is wrong and does not rescale anything to fit. A pass says only that the three sets agree.
 

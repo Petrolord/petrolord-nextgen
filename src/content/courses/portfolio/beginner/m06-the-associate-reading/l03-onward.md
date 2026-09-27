@@ -8,7 +8,7 @@ OFON-1 is an AFE in USD with a window from 2027-02-01 to 2027-11-30 and five cos
 
 ## One forecast rule
 
-A line forecasts its entered forecast when that is positive, and otherwise the larger of its budget and its actual plus commitment. CSG-02 has spent 4300000 against a budget of 3900000, so it forecasts 4300000. CMT-03 carries an entered 1400000. The AFE's estimate at completion is 27600000, a variance at completion of -550000, an overrun. A forecast copied from the budget would hide both lines, and before EC5-0 the Suite copied the budget into a line's forecast whenever the line was edited.
+A line forecasts its entered forecast when that is positive, and otherwise the larger of its budget and its actual plus commitment. CSG-02 has spent 4300000 against a budget of 3900000, so it forecasts 4300000. CMT-03 carries an entered 1400000. The AFE's estimate at completion is 27600000, a variance at completion of -550000, an overrun. A forecast copied from the budget would hide both lines.
 
 ## Earned value and the as-of date
 
@@ -22,7 +22,7 @@ Earned value weights each line's progress by its budget, 15231500 on OFON-1, and
 
 ## The S-curve
 
-The curve is built in monthly buckets and stops at the window end, so its last Planned point is 24452483 against a budget of 27050000. Past the as-of date the forecast jumps from the last actual of 15090000 to 19374834. Neither the shortfall nor the jump is an event at the well.
+The curve is built in monthly buckets and closes on a point dated the window end. The last monthly point, "Nov 27", plans 24452483; the closing point "30 Nov 27" carries Planned 27050000, the budget, and Forecast 27600000, the EAC. Past the as-of date the forecast jumps from the last actual of 15090000 to 19374834, a switch of formula and no event at the well.
 
 ## What carries forward
 

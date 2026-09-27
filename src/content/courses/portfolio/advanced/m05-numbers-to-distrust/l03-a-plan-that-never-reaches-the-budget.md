@@ -1,43 +1,42 @@
-# A plan that never reaches the budget
+# Reading an overrun off the curve
 
-The S-curve's Planned line is the budget spread in a straight line across the window, with one point per calendar month. The points stop at the start of the last month, so the plan ends short of the budget it is meant to reach.
+The S-curve's Planned line is the budget spread in a straight line across the window, with one point per calendar month and a closing point dated the window end. The closing point is where the curve states the budget and the EAC. A reader who stops one point early sees neither.
 
 {{panel:ec-governance-explorer}}
 
-## OFON-1's plan
+## OFON-1's curve
 
 The window runs 2027-02-01 to 2027-11-30 on a budget of 27050000, read as of 2027-08-15:
 
-| point | label | Planned | Forecast |
-| --- | --- | --- | --- |
-| 0 | Feb 27 | 0 | 0 |
-| 6 | Aug 27 | 16212086 | 15090000 |
-| 7 | Sep 27 | 18988742 | 19374834 |
-| 8 | Oct 27 | 21675828 | 22116556 |
-| 9 | Nov 27 | 24452483 | 24949669 |
+| point | label | windowEnd | Planned | Forecast |
+| --- | --- | --- | --- | --- |
+| 0 | Feb 27 | false | 0 | 0 |
+| 6 | Aug 27 | false | 16212086 | 15090000 |
+| 7 | Sep 27 | false | 18988742 | 19374834 |
+| 8 | Oct 27 | false | 21675828 | 22116556 |
+| 9 | Nov 27 | false | 24452483 | 24949669 |
+| 10 | 30 Nov 27 | true | 27050000 | 27600000 |
 
-There are 10 points. Each Planned value is the budget times the share of the window elapsed at the start of its month, so the last point sits on the first of November and the rest of the window to 2027-11-30 is never plotted. The last Planned point is 24452483 against a budget of 27050000, and 2597517 of the plan never appears.
+There are 11 points: 10 monthly points from the start date, then the closing point labelled with its day, "30 Nov 27", with windowEnd true. On the closing point Planned is the budget total, 27050000, and Forecast is the EAC, 27600000. The last monthly point sits on the first of November, and the closing point adds the remaining 2597517 of plan.
 
-The metrics do reach the budget. As of 2027-11-30 time progress is 1.000000 and planned value is 27050000. The chart and the metrics disagree about the same plan.
+## The overrun, read at the end
 
-## The forecast stops short too
+OFON-1's EAC of 27600000 against its budget of 27050000 is a variance at completion of -550000, an overrun, and the closing point shows it as Forecast above Planned. The metrics agree: as of 2027-11-30 time progress is 1.000000 and planned value is 27050000.
 
-After the as-of date the Forecast line is the EAC spread linearly from the start, and the same last bucket cuts it off. OFON-1's EAC is 27600000, a variance at completion of -550000, which is an overrun. The last Forecast point is 24949669, below the budget of 27050000. A reader of the chart alone sees a forecast finishing under budget on an AFE that forecasts an overrun.
+## Reading one point early
 
-The forecast also jumps, from the last actual of 15090000 to 19374834 at the first projected point, because the projected points sit on the EAC line from the start and never continue from the spend.
+The last MONTHLY point, "Nov 27", shows Forecast 24949669 and Planned 24452483. Both sit below the budget. A reader who takes that row as the end of the chart sees a forecast finishing under 27050000 on an AFE that forecasts an overrun of 550000, and a plan that seems never to reach the money authorised. Neither is true of the AFE. Both come from stopping a month short of the window end.
 
-## When the plan does reach it
+The same care applies at the other end of the forecast. After the as-of date the Forecast line is the EAC spread linearly from the start, so it jumps from the last actual of 15090000 to 19374834 at the first projected point. No money is spent at that jump: the line switches from counting invoices to drawing the EAC.
 
-A published case whose window ends exactly on a bucket has 13 points, and its last point reads Planned 2000 and Forecast 2450, the whole EAC. A published case over one calendar year has 12 points and ends at Planned 1101 at Dec 20. The shortfall depends on where the end date falls against the month starts. OFON-1 ends on 2027-11-30, so it loses almost a whole month of plan.
+## When a month step lands on the end
 
-## Left as published
-
-EC5-0 bounded the curve to its window, so it no longer runs past the end. It did not add a point on the end date. The plan stopping short is a finding, taught as a property of the engine as published.
+A published case whose window ends exactly on a month step, 2026-01-01 to 2026-05-01, has 5 points, and the step on 1 May becomes the closing point, so no date appears twice. Its closing point "1 May 26" carries Planned 400, the budget, and Forecast 380, the EAC. Wherever the end date falls against the month starts, the closing point carries the budget and the EAC.
 
 ## The mistake
 
-The first mistake is reading the gap between the last Planned point and the budget as money the plan never meant to spend. The second is reading the last Forecast point as the EAC. On OFON-1 the first treats 2597517 as slack, and the second turns a variance of -550000 into an apparent saving. Take the EAC, the variance at completion and planned value from the metrics, and use the curve for its shape.
+The mistake is taking the EAC from the last monthly point. On OFON-1 that turns a variance of -550000 into an apparent saving. Read the closing point by its windowEnd flag, and take the EAC, the variance at completion and planned value from the metrics, with the curve for its shape.
 
 ## Exercise
 
-Give OFON-1's last Planned point, its budget and the shortfall, and explain why the last point falls short. Then give the last Forecast point and the EAC, and say what a reader of the chart alone would conclude about how the AFE finishes.
+Give OFON-1's closing point with its label, Planned and Forecast, and the variance at completion they imply. Then give the last monthly point's Planned and Forecast, and say what a reader who stopped there would conclude about how the AFE finishes.

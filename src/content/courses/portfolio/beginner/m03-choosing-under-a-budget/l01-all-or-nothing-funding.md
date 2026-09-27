@@ -26,11 +26,11 @@ The published case `limitBelowEveryProject` shows the extreme: a limit of 30.000
 
 ## Why the set changes shape
 
-Because projects come whole, a larger limit can reorganise the set instead of adding to it. At 450.0000 OK-3 is in and OK-2 is out; at 600.0000 OK-2 is in and OK-3 is out. Raising the limit from 450.0000 to 600.0000 did not buy one more project on top of the smaller set. It bought a different combination, OK-1 + OK-2 + OK-4 + OK-5, worth 402.7500.
+Because projects come whole, a larger limit can reorganise the set where you might expect it to add to it. At 450.0000 OK-3 is in and OK-2 is out; at 600.0000 OK-2 is in and OK-3 is out. Raising the limit from 450.0000 to 600.0000 did not buy one more project on top of the smaller set. It bought a different combination, OK-1 + OK-2 + OK-4 + OK-5, worth 402.7500.
 
 ## What all or nothing refuses
 
-The optimizer funds no fraction, phases no capex over years and holds no minimum or maximum count of projects. It cannot be told that two projects must go together or that one excludes another. It has one constraint, the capex limit, applied on its grid, and one objective, the summed risked EMV. Anything else a real capital committee weighs, from rig availability to a partner's approval, has to be settled before the inventory is typed in.
+The optimizer funds no fraction, phases no capex over years and holds no minimum or maximum count of projects. It cannot be told that two projects must go together or that one excludes another. It has one constraint, the capex limit, applied exactly on the capex as typed, and one objective, the summed risked EMV. Anything else a real capital committee weighs, from rig availability to a partner's approval, has to be settled before the inventory is typed in.
 
 ## The mistake
 

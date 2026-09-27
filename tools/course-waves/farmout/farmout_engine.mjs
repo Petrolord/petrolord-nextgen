@@ -4,7 +4,7 @@
 // portfolio.js for portfolioRiskMetrics, afe.js for calculatePartnerCosts and
 // jointVenture.js for carryRecovery and backIn) and imports
 // engines/economics/farmout.js from EC10_ENGINES, the NextGen
-// packages/engines/ec10-farmout root by default, where the whole closure is
+// canonical packages/engines root by default (the course's own engine root collapsed into it in the EC4/EC5 recut), where the whole closure is
 // vendored sha-identical with petrolord-engines 6626465. Every wave script
 // imports from here, so no script can load a second copy of the engine from
 // somewhere else.
@@ -16,7 +16,7 @@ import { register } from 'node:module';
 import process from 'node:process';
 
 register('./ts_loader.mjs', import.meta.url);
-export const ROOT = process.env.EC10_ENGINES || '/root/wt-ec10-nextgen/packages/engines/ec10-farmout';
+export const ROOT = process.env.EC10_ENGINES || '/root/wt-ec10-nextgen/packages/engines';
 export const ENGINE_REL = 'engines/economics/farmout.js';
 export const F = await import(`${ROOT}/${ENGINE_REL}`);
 export const JV = await import(`${ROOT}/engines/economics/jointVenture.js`);

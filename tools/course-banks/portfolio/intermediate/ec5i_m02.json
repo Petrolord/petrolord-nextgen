@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "CMT-03 has a budget of 1250000, has spent and committed 940000, and forecasts 1400000. What sets that forecast?",
+  "options": [
+   "The larger of its budget and actual plus commitment, raised by a contingency the engine adds to every line still in progress.",
+   "The positive forecast its engineer entered, which the rule takes ahead of both the budget and the spend.",
+   "Its 640000 spent projected to completion at its progress of 55.0000 percent, which the rule switches to once a line is past half done.",
+   "Its actual plus commitment of 940000, carried up by the overrun the line has already booked against its budget of 1250000."
+  ],
+  "answer": 1,
+  "explanation": "Left to the fallback, CMT-03 would forecast its budget of 1250000; the entered 1400000 wins, so its variance of -150000 exists only because someone typed it."
+ },
+ {
+  "prompt": "CMT-03's entered forecast is replaced by 900000, below the 940000 already spent and committed on the line. What does the line forecast?",
+  "options": [
+   "940000, because the engine floors an entered forecast at the money already spent and committed before it accepts the figure.",
+   "1250000, because a forecast below the spend to date is not credible and the rule falls back to the larger of its two formula figures.",
+   "Nothing, because a forecast below actual plus commitment is refused with an input error that names the cost item carrying it.",
+   "900000, because any positive entered forecast is taken as typed."
+  ],
+  "answer": 3,
+  "explanation": "A positive entry is kept as the forecast and compared with the spend: the line is flagged forecastBelowCommitted, forecastBelowCommittedBy 40000; an entry of 1 on the same line forecasts 1."
+ },
+ {
+  "prompt": "CMP-05's completion work is cancelled and its forecast field is set to 0. What does the OFON-1 report show?",
+  "options": [
+   "No saving: the line still forecasts 5600000, the EAC stays 27600000 and the variance stays -550000.",
+   "A saving of 5600000, because a zero forecast takes the line out of the EAC while its budget stays in the authorised total.",
+   "An EAC that drops to take in only the 1200000 committed on the line, since a cancelled line still owes the orders already placed.",
+   "A refusal naming CMP-05, since a forecast of 0 fails the input check in the same way that a negative progress figure does."
+  ],
+  "answer": 0,
+  "explanation": "0 is not positive, so the rule falls back to the larger of the 5600000 budget and the 1200000 spent and committed; a descope saves nothing until the budget itself is changed."
+ },
+ {
+  "prompt": "DRL-01 has spent 9800000 and committed 2600000 on a budget of 14200000 and is 72.0000 percent complete, with no entered forecast. Why does it forecast 14200000?",
+  "options": [
+   "The rule projects the 9800000 spent from 72.0000 percent complete, capped at budget.",
+   "A line forecasts its budget until its progress reaches 100.0000 percent.",
+   "The rule takes the larger of the budget and the 12400000 spent and committed, and the budget is larger.",
+   "The engine divides the budget by the AFE's CPI of 1.009377 and rounds the result back up to the budget, as the line is ahead."
+  ],
+  "answer": 2,
+  "explanation": "The fallback reads money spent and promised and nothing else; it never reads progress or CPI, so DRL-01's 72.0000 percent plays no part in its forecast."
+ },
+ {
+  "prompt": "DRL-01, LOG-04 and CMP-05 each show a line variance of 0. What does that 0 establish?",
+  "options": [
+   "Only that spend plus commitment has not yet passed the budget and nobody has entered a forecast.",
+   "That the three lines are on budget, since each will finish at its authorisation.",
+   "That the lines will save money, since the fallback rounds an underrun down to 0.",
+   "That the three lines have not started, since only progress books a variance."
+  ],
+  "answer": 0,
+  "explanation": "0 is the rule's floor: without an entered forecast a line's forecast is at least its budget. DRL-01 is 72.0000 percent complete and still shows 0."
+ },
+ {
+  "prompt": "With CMT-03's other figures unchanged, an entered forecast of 1 makes it forecast 1, and an entered forecast of 0 makes it forecast 1250000. What separates them?",
+  "options": [
+   "The engine reads 1 as a forecast stated in millions and scales it up before comparing, while it reads 0 as a field left blank.",
+   "Only the sign test: 1 is positive and taken as typed, while 0 is not positive and falls back to the formula.",
+   "A forecast of 1 is held for review and shown as entered, while a forecast of 0 is taken as a descope and the line keeps its budget.",
+   "A floor at actual plus commitment applies only to a zero entry and leaves 1 alone."
+  ],
+  "answer": 1,
+  "explanation": "A positive entry is kept, so 1 stands, flagged forecastBelowCommitted with forecastBelowCommittedBy 939999; 0 is no entry at all and falls to the larger of 1250000 and 940000."
+ },
+ {
+  "prompt": "OFON-1's variance at completion is -550000. How is it built?",
+  "options": [
+   "Budget less actuals less commitments, the money the AFE has left to spend.",
+   "The overrun on CSG-02 alone, with the AFE's CPI of 1.009377 applied to the rest of the budget to project the lines not yet done.",
+   "Actuals of 15090000 set against planned value on the report date, since a variance compares money spent with the calendar.",
+   "Budget 27050000 less EAC 27600000, which is -400000 on CSG-02, -150000 on CMT-03 and 0 on the other lines."
+  ],
+  "answer": 3,
+  "explanation": "Variance is budget less EAC, so an overrun is negative; the line variances add to the same -550000."
+ },
+ {
+  "prompt": "\"suite test: entered forecast (nothing spent: CPI null)\" has nothing spent or committed and forecasts 140.0000 on a budget of 100. What makes its overrun different from the 130.0000 in \"suite test: committed past the budget\"?",
+  "options": [
+   "It is no overrun, since a variance is booked only once actuals are recorded.",
+   "The engine leaves an entry with no spend out of the EAC until money is spent.",
+   "Nothing, since both lines forecast the larger of budget and actual plus commitment.",
+   "It rests on a typed judgment with nothing spent, while 130.0000 is money already spent and promised."
+  ],
+  "answer": 3,
+  "explanation": "The first returns variance -40.0000 on an entry of 140 alone; the second has 70 spent and 60 committed, which pass the budget of 100 and give -30.0000."
+ },
+ {
+  "prompt": "The published line \"negative entered forecast is ignored (the S-curve ignores it too)\" has a budget of 100, 20 spent and an entered forecast of -50. Why does it forecast 100.0000?",
+  "options": [
+   "The engine refuses the -50 with a message naming the line and restores the budget, as it does for a negative progress figure.",
+   "The -50 is booked as a saving, and the variance is then clamped at 0.0000.",
+   "-50 is not positive, so the rule compares the budget of 100 with the 20 spent and takes the larger.",
+   "The engine reads the minus sign as a typing slip and uses 50, then floors the forecast of that line at its budget of 100."
+  ],
+  "answer": 2,
+  "explanation": "Ignored and flagged: the line returns EAC 100.0000 and variance 0.0000, carries forecastIgnored \"negative\", and the AFE counts it in linesForecastIgnored."
+ },
+ {
+  "prompt": "CMP-05 forecasts 5600000. Can a reviewer tell whether its forecast field is blank, 0 or negative?",
+  "options": [
+   "Partly: all three forecast the same 5600000, but a negative entry carries forecastIgnored \"negative\", while blank and 0 carry no flag.",
+   "Yes, since a negative forecast is refused with a message and a blank is not.",
+   "Yes, since a zero forecast drops the line from the EAC and a blank does not.",
+   "Yes, since the rule used column prints entered for any figure typed into the forecast field, whatever the sign of that figure."
+  ],
+  "answer": 0,
+  "explanation": "None of the three is positive, so each falls back to the larger of 5600000 and the 1200000 spent and committed. Blank and 0 mean no forecast was entered; a negative figure is replaced and flagged."
+ },
+ {
+  "prompt": "Had CSG-02's budget of 3900000 been typed into its forecast field, what would the line report?",
+  "options": [
+   "4300000 and -400000, since entries are floored at the money spent.",
+   "A refusal, since an entry below the actual of 4300000 is rejected.",
+   "A forecast of 3900000 and a variance of 0, hiding the 400000 overrun already spent.",
+   "4300000 and -400000, since a forecast equal to its budget is ignored."
+  ],
+  "answer": 2,
+  "explanation": "A typed budget is a positive entered forecast and wins. The engine flags the line forecastBelowCommitted by 400000, but the forecast and the EAC carry 3900000."
+ },
+ {
+  "prompt": "Which forecast figures does the Suite show for OFON-1 across the dashboard tiles, the Cost Breakdown table, the PDF and Excel exports and the Top 5?",
+  "options": [
+   "27050000 as the table's forecast, since it shows what was authorised.",
+   "27600000 and -550000 on the tiles, the table, both exports and the Top 5, all from the one rule.",
+   "The one rule on screen, while the PDF and Excel exports print budget less actual so that earlier issued reports still reconcile.",
+   "27600000 on the tiles and table, while the Top 5 reads budget less actual."
+  ],
+  "answer": 1,
+  "explanation": "The tiles, Cost Breakdown table, PDF, Excel and Top 5 read one rule, so a disagreement between two reports points at the data or the export date."
+ },
+ {
+  "prompt": "Every screen reads the one forecast rule. What does that settle, and what does it leave alone?",
+  "options": [
+   "It makes each screen extrapolate the forecast from progress and CPI.",
+   "Nothing, since each report still sets its own forecast rule.",
+   "It made the rule stricter, refusing a forecast below the spend.",
+   "It makes the screens agree, and every screen still shares the rule's limits."
+  ],
+  "answer": 3,
+  "explanation": "No screen forecasts a line under its budget without an entered forecast, and none reads progress, CPI or a non-positive entry as a forecast, so OFON-1's EAC is 27600000 on every screen."
+ },
+ {
+  "prompt": "A partner reads OFON-1's EAC of 27600000 as a projection from performance to date. What is it?",
+  "options": [
+   "The budget of 27050000 scaled up by the ratio of actuals to earned value across the lines, which is how cost performance is projected.",
+   "14200000 + 4300000 + 1400000 + 2100000 + 5600000: three budgets, one spend and one entered figure, added.",
+   "The actuals of 15090000 plus the remaining budget divided by CPI, the standard projection of cost to completion from performance.",
+   "The 15090000 spent plus the 5000000 committed plus the budgets of unstarted lines."
+  ],
+  "answer": 1,
+  "explanation": "The rule reads budgets, actual plus commitment and entered forecasts and never progress, so the EAC carries no reading of performance."
+ },
+ {
+  "prompt": "A line is half done and already past its budget on spend and commitment, with no entered forecast. What does the rule forecast for the half still to do?",
+  "options": [
+   "Nothing, since it forecasts only what is spent and committed until someone enters a forecast.",
+   "The rest of the budget at the line's progress rate, since the rule extrapolates a line from its progress once spend passes the budget.",
+   "Twice its spend and commitment, projected from its half-done progress.",
+   "The whole budget again, as a line past its budget gets a fresh one."
+  ],
+  "answer": 0,
+  "explanation": "The rule refuses to forecast what has not been committed; CSG-02 forecasts 4300000 because its spend passes its budget and nothing more is committed, and a half-done line past its budget would stop at its spend and commitment just the same, whatever its progress."
+ }
+]

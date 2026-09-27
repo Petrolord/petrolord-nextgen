@@ -1,6 +1,6 @@
 # A report dated once
 
-An AFE report is true on one day. The repaired engine takes that day as an explicit as-of date, and only the numbers that depend on the calendar move when it changes.
+An AFE report is true on one day. The engine takes that day as an explicit as-of date, and only the numbers that depend on the calendar move when it changes.
 
 {{panel:ec-cost-explorer}}
 
@@ -31,9 +31,9 @@ A date the engine cannot read is refused with AfeInputError: "asOf is not a vali
 
 An AFE with no window is accepted. The published case with no dates returns time progress 1.000000 and SPI 0.250000, as if the window were already over.
 
-## History: the report with no date
+## The AFE saved with no dates
 
-Before EC5-0 the AFE wizard asked for no dates. Time progress fell back to 1, so SPI equalled percent complete divided by 100: on OFON-1, 0.563087 from a percent complete of 56.3087, on whatever day the report was opened. The repaired wizard asks for the window.
+The AFE wizard asks for the window, a start date and an end date, and refuses an end date before the start date. An AFE saved without both dates falls back to time progress 1, so its SPI equals percent complete divided by 100: on OFON-1 that would be 0.563087 from a percent complete of 56.3087, on whatever day the report was opened. The Suite labels SPI "Unavailable" for such an AFE.
 
 ## The mistake
 

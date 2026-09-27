@@ -32,7 +32,7 @@ The engine refuses and does not rescale. A column that misses 1 is never quietly
 
 ## Likelihoods are not posteriors
 
-0.850000 is the chance of a bright spot given Success. The chance of Success given a bright spot is a different quantity, 0.646739, once the prior of 0.350000 and the false alarms among the 0.650000 of dry outcomes are counted. Read the likelihood as the posterior and Drill after a bright spot is valued at 298.2500 instead of 207.7989. The overstatement falls on the very reading that argues for drilling.
+0.850000 is the chance of a bright spot given Success. The chance of Success given a bright spot is a different quantity, 0.646739, once the prior of 0.350000 and the false alarms among the 0.650000 of dry outcomes are counted. Read the likelihood as the posterior and Drill after a bright spot is valued at 298.2500 where the posterior gives 207.7989. The overstatement falls on the very reading that argues for drilling.
 
 ## The mistake
 

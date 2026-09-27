@@ -21,7 +21,7 @@ The operator share is 100 less 115.00, which is -15.0000 percent, and 15.0000 pe
 
 Each partner is still allocated its full percentage of the cost. Add the two partner amounts to the operator's -150.00 and the total comes back to 1000.00. That is what makes a share over the whole dangerous: the most common reconciliation check, that the bills sum to the cost, passes. The partners are billed for 115.00 percent of the work and the operator is shown as receiving money for running it.
 
-## Flagged, not refused
+## Flagged and still returned
 
 The engine does not throw on this input. A negative capex in the portfolio engine or a negative progress on a cost line is refused with an error and no result. A partner list over the whole returns a full result with valid false. The design choice is that the numbers stay visible so the person fixing the list can see how far over it is, and the note tells them not to bill until they do.
 

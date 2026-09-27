@@ -13,11 +13,11 @@ Two different sets of projects can fit the same limit and return the same summed
 
 In `tieIdenticalProjects` two identical projects each fill the limit of 100.0000 for 50.0000. The engine funds `twinA`, and the golden accepts either one, because nothing in the inputs separates them.
 
-`tieDifferentComposition` is the harder tie. The engine funds project A alone for 80.0000. The golden lists a second optimum, B + C, reaching the same 80.0000 with two projects instead of one. The tie holds on the objective and on nothing else: one set is a single bet, the other spreads the same value over two.
+`tieDifferentComposition` is the harder tie. The engine funds project A alone for 80.0000. The golden lists a second optimum, B + C, reaching the same 80.0000 with two projects where A uses one. The tie holds on the objective and on nothing else: one set is a single bet, the other spreads the same value over two.
 
 ## How the engine picks
 
-The knapsack keeps the first set it builds for a given capacity and replaces it only with a set of strictly larger risked EMV. An equal set found later does not displace it. Which of two tied sets comes back therefore depends on the order the projects were entered, and it can change if the inventory is re-sorted. The output holds `optimalProjects`, the total capex and the risked EMV; it has no field for alternative optima.
+Among sets tied on risked EMV the optimizer keeps the one with less capex. At equal capex and equal EMV it keeps the set built without the later project in the list, so between exact twins the order the projects were entered decides, and re-sorting the inventory can change the answer. Both published ties spend 100.0000 either way: `twinA` comes back because `twinB` is later in the list, and A comes back because B + C holds C, the last project entered. The output holds `optimalProjects`, the total capex and the risked EMV; it has no field for alternative optima.
 
 ## What a tie hides
 
@@ -25,7 +25,7 @@ Tied sets can differ in everything the optimizer ignores. They can hold differen
 
 ## Near ties on OKONO
 
-At 450.0000 the optimizer's set, OK-1 + OK-3 + OK-4, returns 291.0000, and the set filled from the ranking by risked EMV per million, OK-1 + OK-4 + OK-5, returns 287.7500 for capex 420.0000. The gap is 3.2500. The two sets are not tied, but their risk profiles differ sharply: the first holds the exploration well, with a `pos` of 0.250000 and a fail cost of 85.0000, and the second holds the workovers, with a `pos` of 1.000000 and none. A small revision to one project's inputs could close the gap, and then the order the projects were entered in would decide which set came back.
+At 450.0000 the optimizer's set, OK-1 + OK-3 + OK-4, returns 291.0000, and the set filled from the ranking by risked EMV per million, OK-1 + OK-4 + OK-5, returns 287.7500 for capex 420.0000. The gap is 3.2500. The two sets are not tied, but their risk profiles differ sharply: the first holds the exploration well, with a `pos` of 0.250000 and a fail cost of 85.0000, and the second holds the workovers, with a `pos` of 1.000000 and none. If a revision to one project's inputs closed the gap to an exact tie, the optimizer would return the set with less capex, OK-1 + OK-4 + OK-5 at 420.0000, whatever the entry order.
 
 ## The mistake
 

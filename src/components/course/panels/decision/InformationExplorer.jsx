@@ -147,7 +147,10 @@ export const BuyMode = ({ it, cs }) => {
         strong={(i) => cs.rows[i].isTie}
         rows={cs.rows.map((x) => [mm(x.cost), mm(x.acquire), mm(x.noInformation), mm(x.netEvii), x.rootChoice])}
       />
-      <Note>At a cost equal to the gross EVII, {mm(cs.tieCost)}, the two root branches tie and the engine keeps the acquisition, listed first.</Note>
+      <Note>
+        At a cost equal to the gross EVII, {mm(cs.tieCost)}, the two root branches tie. The engine reports the tie (indifferent
+        {' '}{String(cs.tieAtGross.indifferent)}) and the optimal path marks {cs.tieAtGross.rootChoice} only because it is listed first.
+      </Note>
       <Sub>Published information trees</Sub>
       <Tbl
         head={['case', 'survey cost', 'root', 'root EMV', 'best branch index', 'root branch values', 'golden EMV']}

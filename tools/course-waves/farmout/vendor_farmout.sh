@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+# SUPERSEDED (EC4/EC5 recut, fix/decision-portfolio-recut): the ec10-farmout/ root
+# this script wrote has collapsed into the canonical paths, vendored at fb5a363 by
+# tools/course-waves/ec45-recut/vendor_ec45.sh. Kept as the record of the EC10
+# vendoring; it refuses to run so it cannot re-create the root.
+echo 'vendor_farmout.sh is superseded by tools/course-waves/ec45-recut/vendor_ec45.sh (the ec10-farmout root collapsed)'; exit 2
 # VENDOR THE EC10 FARMOUT CLOSURE (engines/economics/farmout.js) INTO NEXTGEN,
 # SHA-IDENTICAL, AND PROVE IT. Adapted from EC9's vendor_joa.sh.
 #

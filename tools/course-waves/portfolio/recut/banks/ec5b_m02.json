@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "An analyst types OK-3's npv_p50 as 41.2500, its already risked value, and keeps pos 0.250000 and fail_cost 85.0000 beside it. What happens to the well?",
+  "options": [
+   "Nothing changes, because the engine notices a success case smaller than the weighted fail cost and reads the entry as a value already risked.",
+   "It is risked twice, and the discounted row drops out of every budget it was funded in.",
+   "The engine sets pos to 1 for that row, since a risked npv_p50 already carries its chance and the default is applied to the weight instead.",
+   "It is funded more often, because a smaller npv_p50 narrows the success spread and the risk summary of any set holding it improves."
+  ],
+  "answer": 1,
+  "explanation": "Weighted again by 0.250000 and still charged 0.750000 x 85.0000, the row goes below zero, and a risked EMV of 0 or less is never funded; the real 41.2500 comes from a success case of 420.0000."
+ },
+ {
+  "prompt": "An exploration well is entered with an npv_p50 and a fail_cost, but the pos field is left out of the row entirely. How does the engine value it?",
+  "options": [
+   "It refuses the row, since a project with no chance of success cannot be risked and the engine names the offending project in its error.",
+   "At the middle of the range, since a missing chance of success is read as a coin toss until a value between 0 and 1 is entered.",
+   "At its npv_p50 weighted by the average pos of the other projects, which is how the engine fills a chance nobody entered.",
+   "As a certain success worth its npv_p50, since an absent pos defaults to 1."
+  ],
+  "answer": 3,
+  "explanation": "The published unrisked case enters no pos and no fail_cost and returns 250.0000, its whole npv_p50 of 250, so a well entered with no pos is counted as if it cannot fail. A pos typed as a blank is refused by name."
+ },
+ {
+  "prompt": "OK-3's loss of 85.0000 million USD is typed with a minus sign in front, because a loss feels negative. What risked EMV does the engine return?",
+  "options": [
+   "The success branch alone, because a fail_cost below 0 is read as 0 and the dry hole becomes free.",
+   "The same 41.2500, because the formula already subtracts the fail cost and the engine takes its absolute value before weighting it.",
+   "More than the success branch, since minus a negative fail cost adds the loss back as a gain.",
+   "No value, since fail_cost must be 0 or more and the engine refuses it like a negative capex."
+  ],
+  "answer": 0,
+  "explanation": "The published negativeFailCostIsZero case, pos 0.5, npv_p50 80 and fail_cost -30, returns 40.0000, which is 0.5 x 80 with no failure branch and no warning."
+ },
+ {
+  "prompt": "The published missingNpvIsZero case enters no npv_p50, a fail_cost of 8 and a pos of 0.25, and the engine returns -6.0000. What produced that number?",
+  "options": [
+   "The fail cost weighted by pos, since a row with no success case is charged its loss at its chance of success where its chance of failure belongs.",
+   "A default of 1 for the missing npv_p50, applied the way a missing pos defaults to 1.",
+   "The failure branch alone: a missing npv_p50 is 0, so 0.25 x 0 - (1 - 0.25) x 8 leaves only the loss.",
+   "The capex of 10 weighted by the chance of failure, standing in for the loss."
+  ],
+  "answer": 2,
+  "explanation": "Every unit of -6.0000 is the failure branch: (1 - 0.25) x 8. The engine never links fail_cost to capex and never refuses a row with no NPV."
+ },
+ {
+  "prompt": "OK-3 has OKONO's largest success-case NPV, 420.0000 million USD, yet its risked EMV of 41.2500 ranks fifth of six. What takes the value away?",
+  "options": [
+   "Three chances in four of a dry hole losing 85.0000, a branch that removes more than half of what the one in four success adds.",
+   "Its capex of 90.0000, which the engine subtracts from the success case before weighting what is left by the chance of success on the well.",
+   "Its wide success spread of 191.1747, charged against the success case as a penalty for uncertainty.",
+   "Its npv_p90 of 210.0000, which the engine uses as the success value when pos is below one half."
+  ],
+  "answer": 0,
+  "explanation": "0.250000 x 420.0000 - 0.750000 x 85.0000 = 41.2500, which is 0.098214 of the success case; capex and the percentiles never enter the line."
+ },
+ {
+  "prompt": "At OKONO's 450.0000 limit the funded set shows a total success NPV of 725.0000, and at 600.0000 one of 473.0000. Which reading is right?",
+  "options": [
+   "The 450.0000 set is worth more, since success NPV counts every project at its npv_p50 and that is a set's value.",
+   "The 600.0000 set is worth more, 402.7500 of risked EMV against 291.0000; the larger success total comes from holding the exploration well.",
+   "The optimizer maximises success NPV at 450.0000 and risked EMV at 600.0000, where the budget can carry risk.",
+   "The two sets are worth the same, since success NPV and risked EMV converge once 10000 iterations are simulated."
+  ],
+  "answer": 1,
+  "explanation": "Success NPV adds every best case as if all worked at once, and 725.0000 includes OK-3's 420.0000 which happens one time in four; the optimizer maximises risked EMV only."
+ },
+ {
+  "prompt": "The risk summary for OKONO's 600.0000 set reads emv 402.7500 at a correlation of 0.000000. What does emv read at a correlation of 1.000000?",
+  "options": [
+   "Less than 402.7500, since projects that fail together drag the expected value down as well as widening the range of outcomes.",
+   "More than 402.7500, since projects that succeed together compound their success cases in the same draws of the simulation.",
+   "A value that depends on the seed, since emv is read from the simulated draws.",
+   "402.7500 again, since emv is the sum of the four risked EMVs and correlation changes only the spread."
+  ],
+  "answer": 3,
+  "explanation": "89.7500 + 115.0000 + 160.0000 + 38.0000 = 402.7500; emv comes in closed form, and correlation moves how far outcomes spread around that mean while the mean stays put."
+ },
+ {
+  "prompt": "Two projects share capex, pos, npv_p50 and fail_cost, but one has an entered success range twice as wide as the other. How does the optimizer see them?",
+  "options": [
+   "It prefers the narrower one, since the knapsack penalises spread and a riskier project needs more EMV.",
+   "It prefers the wider one, since a wider range lifts npv_p10 and the engine averages it into the success case.",
+   "As identical, since the success spread feeds only the risk summary and never the risked EMV the optimizer maximises.",
+   "It cannot compare them until each has an npv_stddev, which the optimizer needs to rank projects."
+  ],
+  "answer": 2,
+  "explanation": "The line is pos x npv_p50 - (1 - pos) x fail_cost; the spread, such as (200 - 50) / 2.5631 = 58.5229, is used only when the engine describes risk."
+ },
+ {
+  "prompt": "What does OK-3's risked EMV of 41.2500 million USD describe?",
+  "options": [
+   "The most likely single result of drilling the well, since it lies between the success case and the loss.",
+   "The NPV the well delivers in a typical case, its success case moved down by the chance of success.",
+   "The median of the well's simulated outcomes, read at seed 20260829 over 10000 iterations.",
+   "An average over many such bets; in any one outcome the well succeeds around 420.0000 or fails and loses 85.0000."
+  ],
+  "answer": 3,
+  "explanation": "No single outcome is 41.2500, and with a pos of 0.250000 the likeliest result is the loss; a set of a few risked projects can sit far from its EMV, as the 450.0000 set's P(loss) of 0.123600 shows."
+ },
+ {
+  "prompt": "A hand check writes OK-3's value as pos x npv_p50 - fail_cost. What has it done wrong?",
+  "options": [
+   "Nothing, since the engine also charges the whole fail cost and weights only the success case.",
+   "Charged the full loss as if failure were certain, dropping the 0.750000 weight on the failure branch.",
+   "Counted the capex twice, since a fail cost already includes the capital spent and subtracting it again takes the capex off a second time.",
+   "Dropped the success weight, since the correct line multiplies the difference between npv_p50 and fail_cost by pos as a single term."
+  ],
+  "answer": 1,
+  "explanation": "The hand line gives 20.0000, while 0.250000 x 420.0000 - 0.750000 x 85.0000 = 41.2500 is the engine value; a hand line that misses 41.2500 has dropped or doubled a weight."
+ },
+ {
+  "prompt": "A project is entered with npv_p10 50 and npv_p90 200, the wrong way round, and no npv_stddev. What does the engine do with it?",
+  "options": [
+   "Returns a success spread of 0.0000, silently removing the success range from the risk summary.",
+   "Refuses the project, since an npv_p10 below npv_p90 breaks the exceedance convention.",
+   "Swaps them, since (npv_p10 - npv_p90) / 2.5631 is taken as an absolute value and gives the same 58.5229 whichever way they are typed.",
+   "Uses the negative spread, which widens the simulated range exactly as far as percentiles entered in the right order would have done."
+  ],
+  "answer": 0,
+  "explanation": "The published invertedPercentiles case returns 0.0000 where the correct order gives 58.5229; there is no check that npv_p10 sits above npv_p90 and no message."
+ },
+ {
+  "prompt": "The published zeroStddevFallsBack case enters npv_stddev 0 with npv_p10 200 and npv_p90 50, and the success spread comes back 58.5229. Why not 0?",
+  "options": [
+   "The engine holds npv_stddev at a floor of 58.5229, so that no project is ever simulated with a success spread narrower than that.",
+   "An entered standard deviation is always ignored when percentiles are present, which is why explicitStddev also returns 58.5229.",
+   "Only a positive entered standard deviation wins; a zero falls back to (200 - 50) / 2.5631.",
+   "A zero is read as missing, and a missing field takes the default of 1, which the engine then scales up by the percentile range."
+  ],
+  "answer": 2,
+  "explanation": "explicitStddev, with npv_stddev 40, returns 40.0000, so an entered value does win when it is positive; 0 is passed over and the percentile fallback gives 58.5229."
+ },
+ {
+  "prompt": "An appraisal well's row is saved with no pos field at all, and the optimizer values it at the default of 1. Where else does that default reach?",
+  "options": [
+   "Nothing else, because the risk summary draws its own success rate from the entered percentiles and only the risked EMV line uses the default.",
+   "The seeded risk summary draws it as a success in every iteration, so its funded set looks safer as well as more valuable.",
+   "The seed, because the engine reseeds the simulation whenever a default fires, recording the correction.",
+   "The optimizer's method, because a defaulted row sends the solve to the fallback grid so it can be marked."
+  ],
+  "answer": 1,
+  "explanation": "nullPosIsDefault returns 80.0000, a certain success, and at seed 20260829 over 10000 iterations such a project never contributes a failure to P(loss) or to the P90 low case. A pos typed as 1.4 is refused before anything runs."
+ },
+ {
+  "prompt": "OK-3's success spread is 191.1747 and its mixture standard deviation 238.6507, while OK-5 reads 12.8750 on both. Why do OK-5's two figures agree?",
+  "options": [
+   "The mixture also counts the drop from a success to a loss, and OK-5 cannot fail, so it has no such drop.",
+   "OK-5's percentiles are narrow, and the mixture scales the spread by the ratio of npv_p10 to npv_p90, which is close to one for the workovers.",
+   "The mixture adds capex to the spread when pos is below 1, and OK-5's pos of 1.000000 adds nothing.",
+   "The mixture is simulated, and a certain success converges so fast that the two figures meet."
+  ],
+  "answer": 0,
+  "explanation": "OK-3 drops from a success case of 420.0000 to a loss of 85.0000, which widens 191.1747 to 238.6507; OK-5 has pos 1.000000 and a fail cost of 0.0000."
+ },
+ {
+  "prompt": "The published posZero case enters pos 0 on npv_p50 80 and fail_cost 30, and returns -30.0000. What does that value describe?",
+  "options": [
+   "A pos typed below the range and read as 0, since the engine holds every chance of success between 0 and 1.",
+   "The default of 1 applied to a pos it could not read, with the success branch then charged at the fail cost.",
+   "The absolute value of the fail cost taken as a gain, since a chance of 0 reverses the sign of the failure branch.",
+   "A certain failure worth -30.0000, minus its fail cost, since a pos of 0 is inside the range the engine accepts."
+  ],
+  "answer": 3,
+  "explanation": "-(1 - 0) x 30 = -30.0000. A pos below 0 is refused: posBelowZeroRefused gives Project \"a\" has a pos outside 0 to 1 (-0.2); pos must be a number from 0 to 1."
+ }
+]

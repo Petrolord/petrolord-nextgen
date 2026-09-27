@@ -29,7 +29,7 @@ That beats "Do Not" at 0, so the Analyzer drills and reports an EMV without info
 
 ## Percents that must be distributions
 
-The repaired Analyzer checks each set of typed percents before it computes a single card, and names the sum it found:
+The Analyzer checks each set of typed percents before it computes a single card, and names the sum it found:
 
 | typed input | engine message |
 | --- | --- |
@@ -42,11 +42,13 @@ The repaired Analyzer checks each set of typed percents before it computes a sin
 
 The EKPAN lottery typed with No bright spot at 64 percent beside Bright spot at 46.000000 percent is refused with "Indicator chances sum to 110 percent, expected 100".
 
-These refusals are new. Before the repair the Analyzer printed a gross value of information of 69.00 beside an EVPI of 63.00 for the posterior row summing to 130 percent: a survey worth more than knowing the answer, from inputs that were not chances at all.
+It checks money too: the survey cost and the decision cost must be numbers of 0 or more, and each payoff a finite number. A blank survey cost reads "Information scenario "3D Seismic Survey" has a blank cost; a cost must be a number of 0 or more".
+
+Why refuse the percents? Weighted as typed with nothing checking them, the posterior row summing to 130 percent gives a gross value of information of 69.00 beside an EVPI of 63.00: a survey worth more than knowing the answer, from inputs that are not chances at all.
 
 ## What it refuses to do
 
-The Analyzer carries one decision, one survey and two actions. It is risk neutral, it does not discount, and it has no sequence: nothing can be learned after the survey and before the decision except the one indicator. A decision with a farm-out, a partner option or an appraisal step has to be squeezed into "act or do not", and whatever is squeezed out is missing from every number the Analyzer returns.
+The Analyzer carries one decision, one survey and two actions. It is risk neutral, does not discount, and has no sequence. A decision with a farm-out, a partner option or an appraisal step has to be squeezed into "act or do not", and whatever is squeezed out is missing from every number the Analyzer returns.
 
 ## The mistake
 
@@ -54,4 +56,4 @@ The careful mistake is typing payoffs that are already net of the decision cost.
 
 ## Exercise
 
-Roll back the default study at its stated chances and confirm the 15.00. Then name the two actions the Analyzer offers, state the message for indicator chances summing to 110 percent, and explain what the Analyzer printed before the repair for a posterior row summing to 130 percent and why that number was impossible.
+Roll back the default study at its stated chances and confirm the 15.00. Then name the two actions the Analyzer offers, state the message for indicator chances summing to 110 percent, and explain what the unguarded arithmetic gives for a posterior row summing to 130 percent and why that number is impossible.

@@ -27,7 +27,7 @@ The maximum is 109.0000, so emvPrior is 109.0000 with Drill alone. The cost here
 
 With the outcome known first, the published golden records the best action for Large, Medium and Dry as indices 0, 0 and 2: Drill alone, Drill alone, Farm out. That gives evWithPerfect 133.0000 and an EVPI of 24.0000.
 
-The Dry column hides a tie. Drill alone pays -20.0000 there before its 60.0000 cost, the partner -10.0000 before 30.0000, and Farm out and Relinquish both pay 0.0000 at no cost. Farm out is recorded because it is listed before Relinquish and the comparison is strictly greater. Listed the other way round the golden would name Relinquish, and evWithPerfect would not move.
+The Dry column hides a tie. Drill alone pays -20.0000 there before its 60.0000 cost, the partner -10.0000 before 30.0000, and Farm out and Relinquish both pay 0.0000 at no cost. The two tie on value in the Dry column, and Farm out is recorded because it is listed before Relinquish. Listed the other way round the golden would name Relinquish, and evWithPerfect would not move.
 
 Only Dry changes the action away from Drill alone, so perfect information is worth what it saves in the 0.300000 of cases that come up dry.
 

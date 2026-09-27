@@ -1,6 +1,6 @@
 # Probabilities that must sum to one
 
-A chance node's probabilities must add to 1 within 1e-6, or the engine refuses the whole tree. It checks the sum and reports it. It never rescales.
+A chance node's probabilities must add to 1 within 1e-6 (inclusive, with a 1e-12 allowance for binary representation), or the engine refuses the whole tree. It checks the sum and reports it. It never rescales.
 
 {{panel:ec-tree-explorer}}
 
@@ -16,12 +16,12 @@ A chance node with three equal outcomes paying 30, 60 and 90 is worth 60.0000 wh
 | --- | --- | --- |
 | 0.3333333333 | 1.000000 | accepted, emv 60.0000 |
 | 0.3333333 | 1.000000 | accepted, emv 60.0000 |
-| 0.333333 | 0.999999 | refused |
+| 0.333333 | 0.999999 | accepted, emv 59.9999 |
 | 0.33333 | 0.999990 | refused |
 | 0.3333 | 0.999900 | refused |
 | 0.333 | 0.999000 | refused |
 
-Seven decimals pass. Six decimals, which looks precise, is refused with `Chance branch probabilities sum to 0.999999, expected 1 (at node "Three equal outcomes")`. The printed sum sits right at the edge of the tolerance and the engine does not accept it, so a sum at the edge is never safe to rely on. The published thirdsProbabilities case rolls back to 35.0000, matching its golden 35.0000.
+Seven and six decimals pass. Six gives 0.999999, exactly the tolerance away from 1, and the allowance keeps it inside; the node is worth 59.9999 because the probabilities are used as typed and never rescaled to sum to 1. Five decimals, 0.999990, is refused with `Chance branch probabilities sum to 0.999990, expected 1 (at node "Three equal outcomes")`. The published thirdsProbabilities case rolls back to 35.0000, matching its golden 35.0000.
 
 ## Sums that are not close
 
@@ -29,7 +29,7 @@ Further from 1 the message is the same shape. A node summing to 0.9 is refused w
 
 ## What the check does and does not say
 
-A refusal returns no EMV for any part of the tree, including the parts that were well formed. An acceptance says only that the numbers add up. Any set of probabilities that sums to 1 within 1e-6 passes, whether or not it describes the prospect, and the engine has no way to test the difference.
+A refusal returns no EMV for any part of the tree, including the parts that were well formed. An acceptance says only that the numbers add up. Any set of probabilities that sums to 1 within 1e-6, inclusive, passes whether or not it describes the prospect, and the engine has no way to test the difference.
 
 ## The mistake
 

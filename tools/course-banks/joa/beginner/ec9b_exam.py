@@ -37,7 +37,7 @@ q(1, "What does the engine export under the name ACCEPTED_KEYS?",
  "One shape of accepted keys for each of its 9 functions.",
  ["A list of aliases, such as wi, that it maps onto participatingPct.",
   "The keys of the Ekene fixture file, for the panels to load at start.",
-  "A table of error codes, one code for each of the 78 refusals the course lists."],
+  "A table of error codes, one code for each of the 83 refusals the course lists."],
  "ACCEPTED_KEYS is exported with one shape for each of the 9 functions, and every call refuses an input key its function does not read, at every level. The engine maps no alias onto a key it reads, the fixture is a separate file, and a refusal is an object with error and field, carrying a message in words and no code.")
 
 q(2, "Six items make up the Ekene 2027 budget. How many could a single budgetControl call take?",

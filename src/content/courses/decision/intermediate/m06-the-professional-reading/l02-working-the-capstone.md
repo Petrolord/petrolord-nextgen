@@ -25,7 +25,7 @@ Check twice: the signal chances sum to 1, and 0.460000 x 0.646739 + 0.540000 x 0
 
 ## Step four: act after each signal, then weight
 
-Compare each posterior with the switch. 0.646739 is on the drill side, worth 207.7989; 0.097222 is on the farm-out side, worth 9.2361. Weight by pSignal, never by the prior:
+Compare each posterior with the switch. 0.646739 is on the drill side, worth 207.7989; 0.097222 is on the farm-out side, worth 9.2361. Weight by pSignal and leave the prior out of this step:
 
 0.460000 x 207.7989 + 0.540000 x 9.2361 = 100.5750
 
@@ -35,13 +35,13 @@ EVII is 100.5750 less 75.7500 = 24.8250, and 0 <= 24.8250 <= 52.0000 holds.
 
 Subtract the survey cost once, after the Bayes value: at 8.0000 the net value is 16.8250, and the information tree's root reads 92.5750 against 75.7500. State the neutral price, 24.8250, so the answer survives a changed quote.
 
-## Use the panel to check, not to start
+## Use the panel to check your working
 
 Work each step on paper, then set the same inputs in the explorer and compare line by line. Where they disagree, find the step: a joint chance, a posterior, an action, a weight. If an answer quotes the VOI Analyzer, count its actions, say which number is gross and which is net, and confirm its inputs are consistent before quoting a value.
 
 ## The mistakes that cost marks
 
-- Weighting the post-signal values by the prior instead of by pSignal.
+- Weighting the post-signal values by the prior where pSignal belongs.
 - Reading a likelihood as a posterior: 0.850000 in place of 0.646739 values Drill after a bright spot at 298.2500.
 - Subtracting the survey cost inside each signal branch as well as at the root.
 - Quoting a net value as the gross, or setting a net value beside EVPI.

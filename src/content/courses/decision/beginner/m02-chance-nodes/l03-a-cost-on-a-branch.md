@@ -29,11 +29,11 @@ The drill cost of 55.0000 sits on the Drill branch at the root, above the drill 
 
 ## What the Builder shows for a chance root
 
-The Decision Tree Builder's four cards assume a decision at the root. For a tree like chanceRootWithBranchCosts, whose root is a chance node, the first-move card reads "Chance root" and the next best alternative and decision advantage cards read N/A. There is no move to recommend: -3.0000 is the value of facing that chance.
+The Decision Tree Builder's four cards assume a decision at the root. For a tree like chanceRootWithBranchCosts, whose root is a chance node, the first-move card reads "Chance root: no first decision to make" and the next best alternative and decision advantage cards read N/A. There is no move to recommend: -3.0000 is the value of facing that chance.
 
 ## The mistake
 
-The careful mistake is to collect every cost on a tree into one total and subtract it from the weighted payoffs, the way a budget would. That gives -8.6000 here. The other half of the mistake is reading the node label instead of the branch value. The Builder's drawing labels each node with its value before the cost on the branch leading into it, so the EKPAN tree's drill node reads EMV 160 while the drill branch is worth 105.0000.
+The careful mistake is to collect every cost on a tree into one total and subtract it from the weighted payoffs, the way a budget would. That gives -8.6000 here. The other half of the mistake is reading the node label where the branch value belongs. The Builder's drawing labels each node with its value before the cost on the branch leading into it, so the EKPAN tree's drill node reads EMV 160 while the drill branch is worth 105.0000.
 
 ## What it refuses
 

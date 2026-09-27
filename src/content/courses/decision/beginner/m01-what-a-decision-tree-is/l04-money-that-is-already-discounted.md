@@ -26,7 +26,7 @@ The careful mistake is typing an undiscounted value, cash summed over a field's 
 
 ## What it refuses
 
-On time, nothing. There is no field for a date, a rate or a currency, and no warning for a stale linked copy. The only refusal that touches a linked payoff concerns its shape: a distribution with no mean is refused with `Distribution payoff has no finite mean`.
+On time, nothing. There is no field for a date, a rate or a currency, and no warning for a stale linked copy. The only refusal that touches a linked payoff concerns its shape: a distribution with no mean is refused with `Distribution payoff has no finite mean (at node "<label>")`, naming the terminal.
 
 ## Exercise
 

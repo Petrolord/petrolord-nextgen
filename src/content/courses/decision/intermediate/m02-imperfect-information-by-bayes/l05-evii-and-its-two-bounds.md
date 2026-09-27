@@ -24,7 +24,7 @@ EVII is evWithInfo less emvPrior: 100.5750 less 75.7500 is 24.8250.
 
 EVII cannot be negative. A company holding the survey can always ignore it and take the prior action, so deciding after the reading can never be worth less than deciding before it. The engine derives its posteriors from the prior and the likelihoods, so its inputs cannot be probabilistically inconsistent and its EVII cannot fall below 0. The bound is reached when no reading changes the action: the published uselessSignal case keeps its posteriors at 0.300000 and 0.700000 after both readings and returns evii 0.0000.
 
-A negative value of information therefore means broken inputs. Before the repair the VOI Analyzer printed a gross value of -15.00 for typed indicator numbers that contradicted the stated outcome chances. The repaired Analyzer withholds that value.
+A negative value of information therefore means broken inputs. Typed indicator numbers that contradict the stated outcome chances, weighted with nothing checking them against the stated prior, give a gross value of -15.00 on IRRI. That is why the VOI Analyzer withholds the value on such inputs.
 
 ## The upper bound
 

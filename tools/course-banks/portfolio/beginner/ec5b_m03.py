@@ -1,0 +1,131 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# EC5 portfolio, beginner tier, Choosing Under a Budget. Reconstructed from the served rows (the applied
+# migrations replayed on a local scratch database) with the EC5 engine re-cut applied;
+# written by tools/course-waves/portfolio/recut/build.py. Edit the rows there, then re-run it.
+
+q(3,
+ "At a limit of 750.0000 million USD the engine funds OK-1 + OK-2 + OK-3 + OK-4 + OK-5 for capex 690.0000. Why is the rest of the limit left unspent?",
+ "The only project left, OK-6, costs 310.0000, and the optimizer cannot fund part of a project.",
+ ["The optimizer holds back a reserve against the loss probability, sized from the simulated spread of the set it has just funded.",
+  "OK-6's risked EMV per million USD is the lowest left, and the optimizer stops at the first project whose ratio falls under its cut-off.",
+  "The grid is coarse at that limit and rounds each capex up, so the five projects fill every cell although their capex sums to 690.0000."],
+ "750.0000 - 690.0000 = 60.0000 is left, and OK-6 needs 310.0000; the knapsack is solved exactly, so nothing was rounded.")
+
+q(1,
+ "A spreadsheet takes OKONO's 60.0000 left over at 750.0000, funds a matching slice of OK-6 with it, and reports a higher total than 444.0000. What is wrong?",
+ "It describes a portfolio that cannot be built, since a slice of a tie-back delivers no share of its NPV.",
+ ["Nothing, since the optimizer would reach that total on a finer grid and 444.0000 is a rounding.",
+  "The slice should be priced at OK-6's ratio of 0.464516, which the spreadsheet overstated.",
+  "The slice leaves out OK-6's fail cost of 120.0000, which has to be charged in full against any fraction of the project that is funded."],
+ "Projects are funded whole or not at all, so 444.0000 is the best buildable answer at 750.0000; OK-6 comes in only when the limit reaches 1000.0000.")
+
+q(2,
+ "Walking OKONO's ranking by risked EMV per million USD at a limit of 450.0000, funding each project that still fits, which project is the first to be skipped?",
+ "OK-2, which would take the running capex from 360.0000 to 540.0000.",
+ ["OK-5, whose ratio of 0.633333 falls below the cut-off once OK-4 is funded and more than half of the limit has been committed.",
+  "OK-3, whose capex of 90.0000 is skipped straight after OK-1 because the exploration well ranks last on the ratio list.",
+  "OK-4, whose capex of 240.0000 pushes the total past the limit once OK-1 and OK-2 have both been funded ahead of it."],
+ "The order is OK-1 at 0.747917, OK-4 at 0.666667, OK-2 at 0.638889 and OK-5 at 0.633333; OK-2 does not fit, OK-5 does, and the walk stops at capex 420.0000.")
+
+q(0,
+ "The greedy set at 450.0000 is OK-1 + OK-4 + OK-5 for 287.7500, and the optimizer funds OK-1 + OK-3 + OK-4 for 291.0000. How does the project with the lowest ratio get into the best set?",
+ "It uses the 30.0000 the list left idle: 41.2500 on 90.0000 beats 38.0000 on 60.0000 once the whole limit counts.",
+ ["The optimizer ranks by plain risked EMV, where OK-3's 41.2500 beats OK-5's 38.0000.",
+  "The optimizer credits the well with part of its success case of 420.0000, which the ratio leaves out.",
+  "The optimizer lets the limit stretch by one grid cell, giving OK-3 room the ranked list lacked."],
+ "Swapping the workovers for the well spends the last 30.0000 and gains 3.2500; the solve is exact at 450.0000, so no stretch or rounding is involved.")
+
+q(2,
+ "OKONO's greedy set, OK-1 + OK-4 + OK-5 at capex 420.0000 and risked EMV 287.7500, loses to the optimizer at 450.0000. Is it a bad set?",
+ "No: it is the best set for 420.0000, a point on OKONO's efficient frontier, and only not the best for 450.0000.",
+ ["Yes, since a set that leaves money unspent is always beaten by one that spends the whole limit.",
+  "Yes, since a set built by walking a ranked list is never optimal and never on the frontier.",
+  "No, since the two sets tie at 450.0000 once loss probability is weighed against the 3.2500 gap."],
+ "The frontier has a point at capex 420.0000 and risked EMV 287.7500; at 750.0000 the optimizer itself leaves 60.0000 unspent, so idle money alone does not mark a set as beaten.")
+
+q(3,
+ "At OKONO's 600.0000 limit the walk down the ratio ranking funds OK-1 + OK-2 + OK-4 + OK-5, the optimizer's own set, for 402.7500. What does that agreement show?",
+ "Only that the ranking happened to fill this budget; nothing in it tells you in advance which budgets it will fill.",
+ ["That the ranking is optimal whenever the limit is over half of OKONO's total capex of 1000.0000.",
+  "That the 450.0000 result was a grid artefact, since the methods agree once rounding is avoided.",
+  "That the optimizer itself walks the ratio ranking and departs only to break a tie between sets."],
+ "The walk runs 120.0000, 360.0000, 540.0000 and 600.0000 and fills the limit exactly, while at 450.0000 the same walk stops 3.2500 short; only solving the set tells the two apart.")
+
+q(1,
+ "The published negativeEmvHugeBudget case has a limit of 10000.0000 and funds good + better for capex 120.0000 and risked EMV 75.0000. A third project, neg, would easily fit. Why is it left out?",
+ "Its risked EMV is -44.0000, and funding it would lower the summed risked EMV by exactly that amount.",
+ ["The limit is above 5000, so a coarse grid charges neg more cells than its capex of 20.0000 and it cannot fit beside the others.",
+  "It is refused as an input error, since a negative risked EMV breaks the knapsack.",
+  "The optimizer only considers the projects the two largest risked EMVs need."],
+ "A risked EMV of 0 or less is never funded however much money is left, so 10000.0000 - 120.0000 stays unspent and the engine reports no error.")
+
+q(0,
+ "In the published zeroEmvExcluded case a project with capex 30.0000 and risked EMV 0.0000 sits beside good at a limit of 500.0000. Why does the engine leave it out?",
+ "It adds nothing to the objective and still uses capex, so a risked EMV of 0 or less is never funded.",
+ ["Its capex of 30.0000 cannot fit beside good, since a limit of 500.0000 is checked on a grid of the limit / 2000 per cell.",
+  "The engine rejects a zero risked EMV row as unfinished and returns an error naming it.",
+  "It would be funded under a tight limit, since a zero project is dropped only when money is left over and idle capex costs nothing."],
+ "The engine funds good alone for capex 50.0000 and risked EMV 30.0000 with 450.0000 of the limit spare, solved exactly.")
+
+q(0,
+ "A licence commitment has a negative risked EMV but must be drilled. How is it handled with this optimizer?",
+ "Outside the optimizer, by taking its capex off the limit before the run, since no flag can force a project in.",
+ ["By marking it must-fund in the inventory, a flag the knapsack honours before it fills the rest of the limit with the best set.",
+  "By typing its pos as 1, which funds it while the risk summary still draws its real failure chance.",
+  "By raising the limit to 10000.0000, since a big enough budget forces every project in."],
+ "negativeEmvHugeBudget leaves its negative project out even at a limit of 10000.0000; a pos of 1 is used everywhere, so it would also hide the failure from the simulation.")
+
+q(2,
+ "Where in the engine's output does OKONO's 60.0000 of unspent money at a limit of 750.0000 appear?",
+ "Nowhere; it is derived by subtracting the funded capex of 690.0000 from the limit.",
+ ["In the risk summary, as cash the simulation carries beside the funded set as a project that can neither succeed nor fail.",
+  "In the funded set, as a placeholder project the optimizer adds so that the total capex it reports always equals the limit.",
+  "In an unspent field beside the total capex, which the engine fills in whenever the funded set stops short of the limit."],
+ "The engine returns the limit, the funded set, its capex and its risked EMV of 444.0000; every unspent figure, including 60.0000, is worked out by hand.")
+
+q(3,
+ "OKONO's greedy walk leaves 30.0000 idle at 450.0000, and the optimizer leaves 60.0000 idle at 750.0000. Which idle money signals that a better set existed?",
+ "Only the 30.0000, since OK-1 + OK-3 + OK-4 spends all of 450.0000 for 291.0000, while no set at 750.0000 beats 444.0000.",
+ ["Only the 60.0000, since it is the larger share of its limit and the optimizer should have topped the set up.",
+  "Both, since any capital left unspent is value given up and a set that spends more always exists.",
+  "Neither, since the engine carries no time value, so idle money costs nothing at either limit."],
+ "At 450.0000 the idle 30.0000 cost 3.2500 of risked EMV; at 750.0000 OK-6 needs 310.0000, so 444.0000 is the best whole project answer.")
+
+q(1,
+ "In the published tieIdenticalProjects case, twinA and twinB each cost 100.0000 and return a risked EMV of 50.0000 at a limit of 100.0000. The engine funds twinA. Why twinA?",
+ "It was built first, and the knapsack replaces a set only with one of strictly larger risked EMV.",
+ ["Its name sorts first, since the engine sorts projects alphabetically before solving.",
+  "The seed 20260829 decided it, since the engine separates tied sets with a random draw so that repeated runs of the inventory agree.",
+  "Its simulated P(loss) came out lower, since the risk summary is run on both tied sets and breaks the tie in favour of the safer one."],
+ "The golden accepts twinA or twinB at 50.0000; the choice follows the order the projects were entered, and re-sorting the inventory can change it.")
+
+q(3,
+ "In the published tieDifferentComposition case the engine funds A alone for 80.0000 at a limit of 100.0000, and the golden also accepts B + C at 80.0000. What does the engine's output tell a reviewer about B + C?",
+ "Nothing: it has no field for alternative optima, and its risk summary is simulated for A alone.",
+ ["That it is worse, since the engine returns the unique best set and B + C must have fallen short of 80.0000 once placed on the grid.",
+  "That it carries more risk, since the optimizer prefers a single project only after comparing the simulated spreads of the two sets.",
+  "That it was found and flagged, since the engine lists every tied set beside optimalProjects whenever two sets reach the same value."],
+ "B costs 40.0000 and C 60.0000, together 100.0000 for the same 80.0000; the tied set is never simulated, so a lower risk alternative stays invisible.")
+
+q(2,
+ "At 450.0000 the optimizer's set beats the greedy set by 3.2500. If a revision to one project's inputs closed that gap to an exact tie, what would decide which set came back?",
+ "The capex spent: the optimizer keeps the tied set with less capex, OK-1 + OK-4 + OK-5 at 420.0000, whatever the entry order.",
+ ["The loss probability, since a tie hands the choice to the risk summary and it favours the workovers' certain success over the well.",
+  "The larger total success NPV, used by the optimizer as a second key, favouring the well.",
+  "The order the projects were entered in, since the first set built is kept against an equal one found later."],
+ "Among sets tied on risked EMV the exact solve keeps the one with less capex, and entry order decides only between sets of equal capex and equal EMV. The two sets here cost 450.0000 and 420.0000.")
+
+q(1,
+ "Raising OKONO's limit from 450.0000 to 600.0000 adds 150.0000 of budget. What happens to the funded set?",
+ "It is rebuilt: OK-3 leaves, OK-2 and OK-5 come in, and OK-1 + OK-2 + OK-4 + OK-5 returns 402.7500.",
+ ["It grows: OK-1 + OK-3 + OK-4 is kept and OK-2 is added on top, since a larger budget only ever buys projects in addition to the old set.",
+  "It grows: OK-5 and part of OK-2 are added, since the extra budget goes to the next projects down the list of risked EMV per million USD.",
+  "It stays as approved at 450.0000 and leaves 150.0000 unspent."],
+ "Adding OK-2 to the 450.0000 set would overrun the limit of 600.0000 by 30.0000; the whole combination is solved again, and OK-3 is out at 600.0000.")
+
+emit(Q, '/root/wt-ec45-recut/tools/course-banks/portfolio/beginner/ec5b_m03.json', expect_n=15)
+finish()

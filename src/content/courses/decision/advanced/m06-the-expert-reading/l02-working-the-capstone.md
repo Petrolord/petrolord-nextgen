@@ -10,11 +10,11 @@ Add every set of percents before running anything: the outcome chances, the indi
 
 ## Second, do they agree?
 
-Rebuild the implied prior by hand. For the EKPAN lottery's survey, 0.460000 x 0.646739 gives 0.297500, 0.540000 x 0.097222 gives 0.052500, and the sum is 0.350000, the stated prior. The delta sits inside 0.005, so the case is consistent. For IRRI the same arithmetic gives 0.200000 against a stated 0.3, and the value of information is withheld. Write the two numbers that survive, EMV without information 15.00 and EVPI 63.00, and say in words that the rest is withheld and why. Never compute the withheld value yourself: a number built from those inputs is what the Analyzer printed before the repair, -15.00.
+Rebuild the implied prior by hand. For the EKPAN lottery's survey, 0.460000 x 0.646739 gives 0.297500, 0.540000 x 0.097222 gives 0.052500, and the sum is 0.350000, the stated prior. The delta sits inside 0.005, so the case is consistent. For IRRI the same arithmetic gives 0.200000 against a stated 0.3, and the value of information is withheld. Write the two numbers that survive, EMV without information 15.00 and EVPI 63.00, and say in words that the rest is withheld and why. Never compute the withheld value yourself: a number built from those inputs is the unguarded arithmetic, -15.00, which Bayes rules out.
 
 ## Third, the decision without information
 
-Value every action, including one that can never win. On the EKPAN lottery at 0.35: Drill 75.7500, Farm out 33.2500, Walk away 0.0000. Check the margin for a tie, because a tie goes to the branch listed first. On a bigger lottery, list the action that is never best too, such as Drill with partner at 54.5000 beside Drill alone at 109.0000.
+Value every action, including one that can never win. On the EKPAN lottery at 0.35: Drill 75.7500, Farm out 33.2500, Walk away 0.0000. Check the margin for a tie: the engine reports it (indifferent) and marks the branch listed first. On a bigger lottery, list the action that is never best too, such as Drill with partner at 54.5000 beside Drill alone at 109.0000.
 
 ## Fourth, perfect then imperfect
 
@@ -39,7 +39,7 @@ Only now read the Analyzer. The EKPAN lottery typed into it gives a gross voi of
 
 ## The mistake
 
-The careful mistake is the right number under the wrong question: 19.84 where the full lottery is asked, a withheld value written as 0.00, or the likelihood 0.850000 read as a posterior, which values the drill after a bright spot at 298.2500 instead of 207.7989.
+The careful mistake is the right number under the wrong question: 19.84 where the full lottery is asked, a withheld value written as 0.00, or the likelihood 0.850000 read as a posterior, which values the drill after a bright spot at 298.2500 where the posterior gives 207.7989.
 
 ## Exercise
 

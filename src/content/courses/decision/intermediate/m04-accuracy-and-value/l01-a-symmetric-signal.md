@@ -35,7 +35,7 @@ As accuracy climbs from 0.500000 to 1.000000, the chance of a success reading fa
 
 ## The average never moves
 
-The posteriors, weighted by the chances of their readings, return the prior: at 0.800000, 0.410000 x 0.682927 + (1 less 0.410000) x 0.118644 gives back 0.350000. A survey moves belief up on one reading and down on the other, never on average, which makes this the quickest check on a posterior worked by hand.
+The posteriors, weighted by the chances of their readings, return the prior: at 0.800000, 0.410000 x 0.682927 + (1 less 0.410000) x 0.118644 gives back 0.350000. A survey moves belief up on one reading and down on the other and leaves it unchanged on average, which makes this the quickest check on a posterior worked by hand.
 
 ## The mistake
 

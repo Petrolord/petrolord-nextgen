@@ -1,12 +1,12 @@
 # Monthly buckets
 
-The S-curve samples an AFE once a month across its window. Each point is a set of cumulative totals on a single day, under a month label that is easy to misread.
+The S-curve samples an AFE once a month across its window and closes on the window end date. Each point is a set of cumulative totals on a single day, under a month label that is easy to misread.
 
 {{panel:ec-cost-explorer}}
 
-## Ten points for OFON-1
+## Eleven points for OFON-1
 
-OFON-1's window runs from 2027-02-01 to 2027-11-30. As of 2027-08-15 the engine returns 10 points, one per calendar month from the start date to the end date.
+OFON-1's window runs from 2027-02-01 to 2027-11-30. As of 2027-08-15 the engine returns 11 points: 10 monthly points from the start date, then a closing point dated the window end.
 
 | point | label | Planned | Actual | Forecast |
 | --- | --- | --- | --- | --- |
@@ -20,10 +20,11 @@ OFON-1's window runs from 2027-02-01 to 2027-11-30. As of 2027-08-15 the engine 
 | 7 | Sep 27 | 18988742 | null | 19374834 |
 | 8 | Oct 27 | 21675828 | null | 22116556 |
 | 9 | Nov 27 | 24452483 | null | 24949669 |
+| 10 | 30 Nov 27 | 27050000 | null | 27600000 |
 
 ## What a label means
 
-"Feb 27" is February of the window's year, a short month name followed by a two-digit year. It is not a day of February. Each point stands on the start date stepped forward by whole months, which on OFON-1 is the first day of each month, and every column is cumulative to that day.
+"Feb 27" is February of the window's year, a short month name followed by a two-digit year. It names a month and no day in it. Each monthly point stands on the start date stepped forward by whole months, which on OFON-1 is the first day of each month, and every column is cumulative to that day.
 
 The invoices prove it. OFON-1 is billed 3100000 on 2027-02-20, 5200000 on 2027-04-10, 4400000 on 2027-06-05 and 2390000 on 2027-07-18. The Feb 27 point shows an Actual of 0 although an invoice is dated inside February, and that invoice first appears at Mar 27. At Jun 27 the Actual is 8300000, which is 3100000 plus 5200000; the June invoice of 4400000 first appears at Jul 27, making 12700000. The July invoice of 2390000 first appears at Aug 27, taking the total to 15090000.
 
@@ -33,7 +34,7 @@ The metrics report a planned value of 17466060 as of 2027-08-15. That number is 
 
 ## What the buckets refuse
 
-The buckets are a fixed calendar grid. There is no weekly or daily resolution, no point on the as-of date, and no point on the end date unless the end falls exactly on a monthly step. OFON-1's end, 2027-11-30, is not on a step from 2027-02-01, so its last point is Nov 27. Before EC5-0 the walk did not stop at the window: it ran on to the current month. The repaired walk stops at the window's end.
+The buckets are a fixed calendar grid. There is no weekly or daily resolution and no point on the as-of date. The one point off the monthly steps is the closing point, dated the window end and labelled with its day: OFON-1's end, 2027-11-30, is not on a step from 2027-02-01, so after Nov 27 the curve closes on "30 Nov 27". When a monthly step lands exactly on the end date, the closing point replaces it, so no date appears twice. No point is drawn after the end.
 
 ## The mistake
 

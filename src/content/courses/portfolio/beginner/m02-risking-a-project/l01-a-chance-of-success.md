@@ -37,7 +37,7 @@ The same `pos` drives the risk summary. In each Monte Carlo iteration a project 
 
 The expensive mistake is risking twice. If the `npv_p50` typed in is already a risked value, a chance of success typed beside it discounts it again. OK-3's 420.0000 is a success case; entering 41.2500 there with `pos` 0.250000 would shrink the well to a fraction of its real risked value and keep it out of every budget.
 
-The opposite mistake is leaving `pos` blank on a risky project. The default is 1, so a blank exploration well is counted as if it cannot fail.
+The opposite mistake is leaving `pos` out on a risky project. An omitted or null `pos` is the default 1, so an exploration well entered with no `pos` at all is counted as if it cannot fail. A `pos` typed as a blank is refused by name: Project "Wildcat" has a blank pos; pos must be a number from 0 to 1.
 
 ## What the engine will not tell you
 

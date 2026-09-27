@@ -1,10 +1,10 @@
 # The story so far
 
-One inventory, one optimizer and every number this tier owns, read once from a single project's risk to the grid under the answer.
+One inventory, one optimizer and every number this tier owns, read once from a single project's risk to the exact solve under the answer.
 
 ## What the engine models
 
-A project's risked EMV is pos x npv_p50 - (1 - pos) x fail_cost, with pos the chance of success between 0 and 1 and fail_cost the loss if it fails, 0 or more. Money is million USD, and a negative capex is refused outright with a PortfolioInputError. The optimizer funds each project in full or not at all and maximises summed risked EMV with capex inside the limit. A project at 0 or less is never funded, and money may be left unspent.
+A project's risked EMV is pos x npv_p50 - (1 - pos) x fail_cost, with pos the chance of success between 0 and 1 and fail_cost the loss if it fails, 0 or more. Money is million USD. A capex that is missing, blank, non-numeric, infinite or negative, and a pos that is typed but blank, non-numeric or outside 0 to 1, are refused by project name with a PortfolioInputError; a pos left out is the default 1. The optimizer funds each project in full or not at all and maximises summed risked EMV with capex inside the limit. A project at 0 or less is never funded, and money may be left unspent.
 
 ## Risking OKONO
 
@@ -27,9 +27,9 @@ Ranked by risked EMV per million USD, OK-1 leads at 0.747917 and OK-3 comes last
 
 The frontier to 450.0000 ends on the answer, 450.0000 and 291.0000, and its last step swaps OK-5 for OK-3 for 3.2500 more. Its steps rise and fall, from 0.108333 per extra million USD to 1.616667, so no step prices the next one. At 600.0000 the set is OK-1, OK-2, OK-4 and OK-5 for 402.7500, and OK-3 is gone: optimal sets are not nested. At 750.0000 the optimizer spends 690.0000 and leaves 60.0000 unspent.
 
-## The grid
+## The exact solve
 
-OKONO solves on an exact grid of 1.0000 million USD per cell. A limit over 5000, or any capex or limit that is not whole, turns the grid coarse at limit / 2000. The published gridOvershoot case funds 6002.0000 against 6000.0000 for 800.0000 where the best set that fits gives 780.0000, and the engine now flags overLimit true and overLimitBy 2.0000. The undershoot, a project worth 200.0000 left out, and the free project charged a cell, worth 10.0000, are still silent.
+Every OKONO limit is solved exactly: solveMethod "exact", optimalityGap 0.0000, resolution null. Awkward inventories are solved exactly too: gridOvershoot funds A + C at 5995.0000 for 780.0000, gridUndershoot funds W + X + Y + Z at 5999.0000 for 860.0000, and a free project with positive EMV is always funded. A grid runs only as a stated fallback beyond exactStateLimit, with every weight rounded up and optimalityGap reported, 200.0000 on gridUndershootFallback.
 
 ## Risk beside value
 
@@ -37,4 +37,4 @@ By the seeded Monte Carlo at seed 20260829 and 10000 iterations, the 450.0000 se
 
 ## Exercise
 
-Risk OK-3 by hand and give its fraction of success-case NPV. Then state the greedy and optimal sets at 450.0000 with their values, the set at 600.0000, and one grid behaviour that the overLimit flag does not catch.
+Risk OK-3 by hand and give its fraction of success-case NPV. Then state the greedy and optimal sets at 450.0000 with their values, the set at 600.0000, and what solveMethod and optimalityGap read at 450.0000 and what the fallback would add to the result.

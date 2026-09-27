@@ -124,7 +124,7 @@ is owned across all three tiers.
 ## THE DATASET
 
 One Ekene exploration prospect, the vendored fixture file under
-`packages/engines/ec10-farmout/test-data/economics/ekene-farmout`, written by a
+`packages/engines/test-data/economics/ekene-farmout`, written by a
 stated script and labelled SYNTHETIC in the file. EKO holds 70.000000 percent
 and PA 30.000000; FIN farms in for 30.000000 percent by paying 40.000000
 percent of the exploration well, which costs 40000000.000000 as a dry hole and
