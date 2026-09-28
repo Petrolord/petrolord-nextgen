@@ -50,7 +50,7 @@ export const KPICard = ({ title, value, subtext, trend, icon: Icon, tone = 'prim
 
   return (
     <Card className="transition-all hover:border-pl-border-strong">
-      <CardContent className="p-6">
+      <CardContent className="p-4 md:p-6">
         <div className="flex justify-between items-start gap-2">
           <div className="min-w-0">
             <p className="text-sm font-medium text-pl-muted">{title}</p>

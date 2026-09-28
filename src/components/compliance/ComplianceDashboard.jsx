@@ -52,7 +52,7 @@ const ComplianceDashboard = () => {
     return (
         <div className="space-y-6">
             {/* KPI Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <KPICard title="Compliance Score" value="98%" icon={ShieldCheck} tone="success" subtext="System secure" />
                 <KPICard title="Active Alerts" value={alerts.length} icon={AlertTriangle} tone={alerts.length > 0 ? "danger" : "neutral"} />
                 <KPICard title="Failed Access" value={stats.failedLogins} icon={Lock} tone="warning" />

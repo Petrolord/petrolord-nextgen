@@ -183,7 +183,7 @@ const AdminComplianceReportsPage = () => {
                     <div className="lg:col-span-2 space-y-6">
                         <div className="bg-pl-surface p-4 md:p-6 rounded-lg border border-pl-border space-y-6">
                             <Tabs value={reportType} onValueChange={val => { setOriginalReportData(null); setDisplayReportData(null); setReportType(val); }}>
-                                <TabsList className="grid w-full h-auto grid-cols-2 sm:grid-cols-4 lg:grid-cols-8">
+                                <TabsList className="grid w-full h-auto grid-cols-2 sm:grid-cols-4">
                                     {Object.entries(REPORT_TYPES).map(([key, { title, icon: Icon }]) => <TabsTrigger key={key} value={key}><Icon className="w-4 h-4 mr-2" />{title}</TabsTrigger>)}
                                 </TabsList>
                             </Tabs>

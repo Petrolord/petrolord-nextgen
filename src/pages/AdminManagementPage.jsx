@@ -165,7 +165,7 @@ const AdminManagementPage = () => {
             ) : (
                 <>
                     {/* Top Level KPIs */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                         <KPICard title="Total Users" value={systemMetrics?.userCount || 0} icon={Users} tone="info" />
                         <KPICard title="Learners" value={systemMetrics?.learnerCount || 0} icon={Users} tone="primary" />
                         <KPICard title="Active Today" value={systemMetrics?.activeUsers || 0} icon={RefreshCw} tone="success" />

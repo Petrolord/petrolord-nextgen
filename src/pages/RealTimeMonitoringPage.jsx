@@ -29,7 +29,7 @@ const STAT_TONES = {
 
 const StatCard = ({ title, value, icon: Icon, tone, trend }) => (
   <Card>
-    <CardContent className="p-6">
+    <CardContent className="p-4 md:p-6">
       <div className="flex items-center justify-between">
         <div>
           <p className="text-sm font-medium text-pl-muted">{title}</p>
@@ -226,7 +226,7 @@ const RealTimeMonitoringPage = () => {
       </div>
 
       {/* Metric Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <StatCard title="Active Users (1h)" value={stats.activeUsers} icon={Users} tone="info" />
         <StatCard title="Events Today" value={stats.actionsToday} icon={Database} tone="primary" />
         <StatCard title="Logins Today" value={stats.loginsToday} icon={CheckCircle} tone="success" />
@@ -302,7 +302,7 @@ const RealTimeMonitoringPage = () => {
                         <TableCell>
                            <div className="flex flex-col">
                               <span className="text-sm text-pl-text">{log.user_email || 'System'}</span>
-                              <span className="text-xs text-pl-muted capitalize">{log.actor_role || 'n/a'}</span>
+                              <span className={`text-xs text-pl-muted ${log.actor_role ? 'capitalize' : ''}`}>{log.actor_role || 'n/a'}</span>
                            </div>
                         </TableCell>
                         <TableCell>

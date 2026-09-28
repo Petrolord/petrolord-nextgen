@@ -23,7 +23,7 @@ const AdminCompliancePage = () => {
         </div>
 
         <Tabs defaultValue="dashboard" className="space-y-6">
-          <TabsList className="p-1 w-full md:w-auto flex flex-wrap h-auto">
+          <TabsList className="p-1 w-full md:w-auto flex md:inline-flex flex-wrap h-auto">
             <TabsTrigger value="dashboard" className="gap-2 px-6">
               <Activity className="w-4 h-4" /> Dashboard
             </TabsTrigger>
