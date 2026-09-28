@@ -312,3 +312,48 @@ earth modeling (`/dashboard/apps/earthmodel`) and basin and charge
   `geo3bHarness.jsx` and `geo3bStubs.js` (the four standard checks per app,
   every tier with both capstone outcomes, the Learning Mode gate, dark, every
   plot in a chart frame with the chart mark, none of the old plate colours).
+
+## 6. Batch 2C: admin II (as built)
+
+Live monitoring (`/dashboard/admin/monitoring`), admin roles
+(`/dashboard/admin/admin-mgmt`), system analytics
+(`/dashboard/admin/analytics`), analytics and reporting
+(`/dashboard/analytics`, with `AnalyticsDashboard` and `AnalyticsReports`),
+the compliance centre (`/dashboard/compliance`, with `ComplianceDashboard`,
+`AuditLogViewer` and `RetentionPolicies`) and compliance reports
+(`/dashboard/reports`, with the `components/reports/*` panels, report views
+and schedule dialog) are on the roles and registered in
+`src/design/rollout/w2c.js`.
+
+- Every file these screens own is used by 2C screens alone, so each moved
+  straight to roles with no legacy branch. That includes
+  `charts/DashboardWidgets` (admin roles, `/dashboard/analytics`,
+  `/dashboard/compliance`) and `charts/ActionsTrendChart` (system
+  analytics).
+- Charts: the widgets and every chart on these screens use the 1B chart
+  kit: a `ChartPanel` card with a `ChartFrame` (white plate, Petrolord mark),
+  `GRID_STYLE`, `AXIS_TICK`, `PINNED_TOOLTIP_PROPS`, `LEGEND_PROPS`, and
+  series colours from `seriesColor(n)`. The two pie charts without a legend
+  gained one, so each colour has its name.
+- `KPICard` takes `tone` (`primary`, `accent`, `info`, `success`, `warning`,
+  `danger`, `neutral`) for its icon chip in place of a colour class. A
+  status tone sits only on a card whose title or subtext says the status.
+  The trend arrow carries a hidden up or down word.
+- Lime is gone: actions are the default (petrol green) `Button`, heading
+  icons gold (`accent`), and the per-page overrides on `Input`,
+  `SelectTrigger`, `SelectContent`, `DialogContent`, `TabsList` and
+  `TabsTrigger` were dropped. Status words sit on the status roles: event
+  and audit outcomes (the live feed now prints Success or Failure next to
+  its icon), severity (critical solid danger, high danger tint, medium
+  warning), report detail status and system health.
+- Empty cells show `n/a` (actor role and resource in the live feed, report
+  detail cells, summary cards, KPI values, the report author).
+- All six screens use the pilot's page padding (`px-4 py-8 md:px-8`). KPI
+  grids go two across on phones; the eight report type tabs sit in a
+  four-column grid (they overlapped at desktop width in eight).
+- Tests: one theme test per screen in `src/pages/__tests__/` on
+  `admin2cHarness.jsx` and `admin2cStubs.js` (a local Supabase fake that
+  answers the admin list and the audit feed and throws on anything else).
+  The harness mounts each page straight in `Layout`: DashboardPage is only
+  a route table for the three admin pages, and importing it costs about
+  85 s of collection per file.

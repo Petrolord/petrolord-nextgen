@@ -85,18 +85,18 @@ const AuditLogViewer = () => {
 
   const getStatusBadge = (status) => {
     switch(status) {
-      case 'success': return <Badge className="bg-emerald-500/20 text-emerald-400 border-0">Success</Badge>;
-      case 'failure': return <Badge className="bg-red-500/20 text-red-400 border-0">Failure</Badge>;
-      default: return <Badge variant="outline" className="text-slate-400">{status}</Badge>;
+      case 'success': return <Badge className="bg-pl-success-bg text-pl-success-text border-0">Success</Badge>;
+      case 'failure': return <Badge className="bg-pl-danger-bg text-pl-danger-text border-0">Failure</Badge>;
+      default: return <Badge variant="outline" className="text-pl-muted">{status || 'n/a'}</Badge>;
     }
   };
 
   const getSeverityBadge = (severity) => {
       if (!severity) return null;
       switch(severity) {
-          case 'critical': return <Badge className="bg-red-600 text-white border-0">CRITICAL</Badge>;
-          case 'high': return <Badge className="bg-orange-500 text-white border-0">HIGH</Badge>;
-          case 'medium': return <Badge className="bg-yellow-500 text-black border-0">MEDIUM</Badge>;
+          case 'critical': return <Badge className="bg-pl-danger text-pl-danger-fg border-0">CRITICAL</Badge>;
+          case 'high': return <Badge className="bg-pl-danger-bg text-pl-danger-text border-0">HIGH</Badge>;
+          case 'medium': return <Badge className="bg-pl-warning-bg text-pl-warning-text border-0">MEDIUM</Badge>;
           default: return null;
       }
   };
@@ -104,23 +104,23 @@ const AuditLogViewer = () => {
   return (
     <div className="space-y-4">
       {/* Filters Bar */}
-      <div className="flex flex-col md:flex-row gap-4 justify-between items-end md:items-center bg-[#1E293B] p-4 rounded-lg border border-slate-800">
+      <div className="flex flex-col md:flex-row gap-4 justify-between items-end md:items-center bg-pl-surface p-4 rounded-lg border border-pl-border">
         <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto">
           <div className="relative w-full md:w-64">
-            <Search className="absolute left-2 top-2.5 h-4 w-4 text-slate-400" />
+            <Search className="absolute left-2 top-2.5 h-4 w-4 text-pl-muted" />
             <Input 
               placeholder="Search actions or resources..." 
-              className="pl-8 bg-slate-900 border-slate-700 text-white"
+              className="pl-8"
               value={filters.search}
               onChange={(e) => handleFilterChange('search', e.target.value)}
             />
           </div>
           
           <Select value={filters.logType} onValueChange={(val) => handleFilterChange('logType', val)}>
-            <SelectTrigger className="w-[150px] bg-slate-900 border-slate-700 text-white">
+            <SelectTrigger className="w-full md:w-[150px]">
               <SelectValue placeholder="Log Type" />
             </SelectTrigger>
-            <SelectContent className="bg-slate-900 border-slate-700 text-white">
+            <SelectContent>
               <SelectItem value="all">All Types</SelectItem>
               <SelectItem value="action">Action</SelectItem>
               <SelectItem value="access">Access</SelectItem>
@@ -130,10 +130,10 @@ const AuditLogViewer = () => {
           </Select>
 
           <Select value={filters.status} onValueChange={(val) => handleFilterChange('status', val)}>
-            <SelectTrigger className="w-[150px] bg-slate-900 border-slate-700 text-white">
+            <SelectTrigger className="w-full md:w-[150px]">
               <SelectValue placeholder="Status" />
             </SelectTrigger>
-            <SelectContent className="bg-slate-900 border-slate-700 text-white">
+            <SelectContent>
               <SelectItem value="all">All Status</SelectItem>
               <SelectItem value="success">Success</SelectItem>
               <SelectItem value="failure">Failure</SelectItem>
@@ -141,59 +141,59 @@ const AuditLogViewer = () => {
           </Select>
         </div>
 
-        <Button variant="outline" className="border-slate-700 hover:bg-slate-800 text-slate-200" onClick={handleExport}>
+        <Button variant="outline" onClick={handleExport}>
           <Download className="w-4 h-4 mr-2" /> Export
         </Button>
       </div>
 
       {/* Data Table */}
-      <Card className="bg-[#1E293B] border-slate-800">
+      <Card>
         <CardContent className="p-0">
           <Table>
-            <TableHeader className="bg-slate-900/50">
-              <TableRow className="hover:bg-transparent border-slate-800">
-                <TableHead className="text-slate-400">Timestamp</TableHead>
-                <TableHead className="text-slate-400">Severity</TableHead>
-                <TableHead className="text-slate-400">User</TableHead>
-                <TableHead className="text-slate-400">Action</TableHead>
-                <TableHead className="text-slate-400">Resource</TableHead>
-                <TableHead className="text-slate-400">Status</TableHead>
-                <TableHead className="text-right text-slate-400">Details</TableHead>
+            <TableHeader className="bg-pl-sunken">
+              <TableRow className="hover:bg-transparent border-pl-border">
+                <TableHead className="text-pl-muted">Timestamp</TableHead>
+                <TableHead className="text-pl-muted">Severity</TableHead>
+                <TableHead className="text-pl-muted">User</TableHead>
+                <TableHead className="text-pl-muted">Action</TableHead>
+                <TableHead className="text-pl-muted">Resource</TableHead>
+                <TableHead className="text-pl-muted">Status</TableHead>
+                <TableHead className="text-right text-pl-muted">Details</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {loading ? (
                 <TableRow>
                   <TableCell colSpan={7} className="h-24 text-center">
-                    <Loader2 className="w-6 h-6 animate-spin mx-auto text-[#BFFF00]" />
+                    <Loader2 className="w-6 h-6 animate-spin mx-auto text-pl-primary" />
                   </TableCell>
                 </TableRow>
               ) : logs.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={7} className="h-24 text-center text-slate-500">
+                  <TableCell colSpan={7} className="h-24 text-center text-pl-muted">
                     No logs found matching your criteria.
                   </TableCell>
                 </TableRow>
               ) : (
                 logs.map((log) => (
-                  <TableRow key={log.id} className="border-slate-800 hover:bg-slate-800/50">
-                    <TableCell className="text-slate-300 whitespace-nowrap">
+                  <TableRow key={log.id} className="border-pl-border hover:bg-pl-sunken/60">
+                    <TableCell className="text-pl-text whitespace-nowrap">
                       {new Date(log.timestamp).toLocaleString()}
                     </TableCell>
                     <TableCell>
                         {getSeverityBadge(log.severity)}
                     </TableCell>
-                    <TableCell className="text-slate-300">
-                      {log.profiles?.email || <span className="text-slate-500 italic">System</span>}
+                    <TableCell className="text-pl-text">
+                      {log.profiles?.email || <span className="text-pl-muted italic">System</span>}
                     </TableCell>
-                    <TableCell className="text-white font-medium">{log.action}</TableCell>
-                    <TableCell className="text-slate-300">
-                      {log.resource_type} <span className="text-slate-500 text-xs">#{log.resource_id?.slice(0, 8)}</span>
+                    <TableCell className="text-pl-text font-medium">{log.action}</TableCell>
+                    <TableCell className="text-pl-text">
+                      {log.resource_type} <span className="text-pl-muted text-xs">#{log.resource_id?.slice(0, 8)}</span>
                     </TableCell>
                     <TableCell>{getStatusBadge(log.status)}</TableCell>
                     <TableCell className="text-right">
-                      <Button variant="ghost" size="sm" onClick={() => openLogDetails(log)}>
-                        <Eye className="w-4 h-4 text-slate-400 hover:text-white" />
+                      <Button variant="ghost" size="sm" aria-label="View details" onClick={() => openLogDetails(log)}>
+                        <Eye className="w-4 h-4 text-pl-muted hover:text-pl-text" />
                       </Button>
                     </TableCell>
                   </TableRow>
@@ -205,7 +205,7 @@ const AuditLogViewer = () => {
       </Card>
 
       {/* Pagination */}
-      <div className="flex items-center justify-between text-sm text-slate-400">
+      <div className="flex items-center justify-between gap-2 text-sm text-pl-muted">
         <div>
           Showing {((page - 1) * pageSize) + 1} to {Math.min(page * pageSize, totalCount)} of {totalCount} entries
         </div>
@@ -215,7 +215,6 @@ const AuditLogViewer = () => {
             size="sm" 
             onClick={() => setPage(p => Math.max(1, p - 1))}
             disabled={page === 1}
-            className="border-slate-700 hover:bg-slate-800"
           >
             <ChevronLeft className="w-4 h-4" />
           </Button>
@@ -224,7 +223,6 @@ const AuditLogViewer = () => {
             size="sm" 
             onClick={() => setPage(p => p + 1)}
             disabled={page * pageSize >= totalCount}
-            className="border-slate-700 hover:bg-slate-800"
           >
             <ChevronRight className="w-4 h-4" />
           </Button>
@@ -233,10 +231,10 @@ const AuditLogViewer = () => {
 
       {/* Details Dialog */}
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent className="bg-[#1E293B] border-slate-700 text-white max-w-2xl">
+        <DialogContent className="max-w-2xl">
           <DialogHeader>
             <DialogTitle>Audit Log Details</DialogTitle>
-            <DialogDescription className="text-slate-400">
+            <DialogDescription>
               Transaction ID: {selectedLog?.id}
             </DialogDescription>
           </DialogHeader>
@@ -245,41 +243,41 @@ const AuditLogViewer = () => {
             <div className="space-y-4">
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
-                  <label className="text-slate-500 block mb-1">Timestamp</label>
-                  <div className="text-slate-200">{new Date(selectedLog.timestamp).toLocaleString()}</div>
+                  <label className="text-pl-muted block mb-1">Timestamp</label>
+                  <div className="text-pl-text">{new Date(selectedLog.timestamp).toLocaleString()}</div>
                 </div>
                 <div>
-                  <label className="text-slate-500 block mb-1">User Agent</label>
-                  <div className="text-slate-200 truncate" title={selectedLog.user_agent}>{selectedLog.user_agent}</div>
+                  <label className="text-pl-muted block mb-1">User Agent</label>
+                  <div className="text-pl-text truncate" title={selectedLog.user_agent}>{selectedLog.user_agent}</div>
                 </div>
                 <div>
-                  <label className="text-slate-500 block mb-1">Action</label>
-                  <div className="text-slate-200 font-mono">{selectedLog.action}</div>
+                  <label className="text-pl-muted block mb-1">Action</label>
+                  <div className="text-pl-text font-mono">{selectedLog.action}</div>
                 </div>
                  <div>
-                  <label className="text-slate-500 block mb-1">Status</label>
-                  <div className="text-slate-200">{selectedLog.status.toUpperCase()}</div>
+                  <label className="text-pl-muted block mb-1">Status</label>
+                  <div className="text-pl-text">{selectedLog.status.toUpperCase()}</div>
                 </div>
               </div>
 
-              <div className="border-t border-slate-700 pt-4">
-                <label className="text-slate-500 block mb-2">Technical Details (JSON)</label>
-                <pre className="bg-slate-950 p-4 rounded-md overflow-x-auto text-xs font-mono text-emerald-400">
+              <div className="border-t border-pl-border pt-4">
+                <label className="text-pl-muted block mb-2">Technical Details (JSON)</label>
+                <pre className="bg-pl-sunken p-4 rounded-md overflow-x-auto text-xs font-mono text-pl-text">
                   {JSON.stringify(selectedLog.details, null, 2)}
                 </pre>
               </div>
 
               {(selectedLog.old_value || selectedLog.new_value) && (
-                <div className="grid grid-cols-2 gap-4 border-t border-slate-700 pt-4">
+                <div className="grid grid-cols-2 gap-4 border-t border-pl-border pt-4">
                   <div>
-                    <label className="text-slate-500 block mb-2">Old Value</label>
-                    <pre className="bg-slate-950 p-2 rounded text-xs text-red-300 overflow-x-auto">
+                    <label className="text-pl-muted block mb-2">Old Value</label>
+                    <pre className="bg-pl-sunken p-2 rounded text-xs font-mono text-pl-danger-text overflow-x-auto">
                         {selectedLog.old_value ? JSON.stringify(selectedLog.old_value, null, 2) : 'null'}
                     </pre>
                   </div>
                   <div>
-                    <label className="text-slate-500 block mb-2">New Value</label>
-                    <pre className="bg-slate-950 p-2 rounded text-xs text-emerald-300 overflow-x-auto">
+                    <label className="text-pl-muted block mb-2">New Value</label>
+                    <pre className="bg-pl-sunken p-2 rounded text-xs font-mono text-pl-success-text overflow-x-auto">
                         {selectedLog.new_value ? JSON.stringify(selectedLog.new_value, null, 2) : 'null'}
                     </pre>
                   </div>

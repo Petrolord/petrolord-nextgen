@@ -14,9 +14,9 @@ const AdvancedFilterPanel = () => {
     };
 
     return (
-        <div className="bg-[#1E293B] p-4 rounded-lg border border-gray-700 space-y-4">
-            <h3 className="font-semibold text-white flex items-center"><SlidersHorizontal className="w-5 h-5 mr-2" /> Advanced Filters</h3>
-            <div className="text-center text-gray-400 py-6">
+        <div className="bg-pl-surface p-4 rounded-lg border border-pl-border space-y-4">
+            <h3 className="font-semibold text-pl-text flex items-center"><SlidersHorizontal className="w-5 h-5 mr-2" /> Advanced Filters</h3>
+            <div className="text-center text-pl-muted py-6">
                 <p>Advanced filtering and preset options will be available here.</p>
                 <p className="text-sm">This is a placeholder for a more complex UI.</p>
             </div>
