@@ -81,7 +81,7 @@ function ThicknessMap({ grid, label }) {
   let max = 0;
   for (const v of grid) if (!NULLISH(v) && v > max) max = v;
   return (
-    <SvgChartFrame width={W} height={H} label={`Zone thickness map: ${label}`} minWidth={420}>
+    <SvgChartFrame width={W} height={H} label={`Zone thickness map: ${label}`} minWidth={420} maxWidth={720}>
       {Array.from(grid).map((v, j) => {
         if (NULLISH(v)) return null;
         const r = Math.floor(j / nx);
@@ -108,7 +108,7 @@ function BlockMap({ labels }) {
   const { x0, y0, dx, dy, nx } = MODEL_SPEC;
   const poly = FAULT_POLYGON.map(([x, y], i) => `${i ? 'L' : 'M'}${sx(x).toFixed(1)},${sy(y).toFixed(1)}`).join(' ') + ' Z';
   return (
-    <SvgChartFrame width={W} height={H} label="Fault-block map with the fault polygon" minWidth={420}>
+    <SvgChartFrame width={W} height={H} label="Fault-block map with the fault polygon" minWidth={420} maxWidth={720}>
       {Array.from(labels).map((lab, j) => {
         const r = Math.floor(j / nx);
         const c = j % nx;

@@ -70,7 +70,7 @@ function HeatColumnPlot({ nodes, temps }) {
   const path = temps.map((t, i) => `${i ? 'L' : 'M'}${sx(t).toFixed(1)},${sy(nodes[i].z).toFixed(1)}`).join(' ');
   const zIface = HEAT_FIXTURE.layers[0].h_m;
   return (
-    <SvgChartFrame width={W} height={H} label="Temperature against depth in the steady heat column" minWidth={420}>
+    <SvgChartFrame width={W} height={H} label="Temperature against depth in the steady heat column" minWidth={420} maxWidth={720}>
       <line x1={PADL} y1={10} x2={PADL} y2={H - PADB} {...AXIS_LINE_PROPS} />
       <line x1={PADL} y1={H - PADB} x2={W - 12} y2={H - PADB} {...AXIS_LINE_PROPS} />
       {[0, 20, 40, 60].map((t) => (
@@ -94,7 +94,7 @@ function RampPlot({ ramps }) {
   const sy = (ro) => H - PADB - (ro / roMax) * (H - PADB - 12);
   const colors = { 1: seriesColor(0), 3: seriesColor(4), 10: seriesColor(2) };
   return (
-    <SvgChartFrame width={W} height={H} label="Easy%Ro maturation for three heating rates" minWidth={420}>
+    <SvgChartFrame width={W} height={H} label="Easy%Ro maturation for three heating rates" minWidth={420} maxWidth={720}>
       <line x1={PADL} y1={10} x2={PADL} y2={H - PADB} {...AXIS_LINE_PROPS} />
       <line x1={PADL} y1={H - PADB} x2={W - 12} y2={H - PADB} {...AXIS_LINE_PROPS} />
       {[50, 100, 150, 200].map((t) => (
@@ -126,7 +126,7 @@ function BurialPlot({ results, srcIdx }) {
   const sy = (z) => 10 + (z / maxZ) * (H - PADB - 10);
   const colors = [seriesColor(0), seriesColor(2), seriesColor(1), seriesColor(4)];
   return (
-    <SvgChartFrame width={W} height={H} label="Burial history of the reference basin" minWidth={420}>
+    <SvgChartFrame width={W} height={H} label="Burial history of the reference basin" minWidth={420} maxWidth={720}>
       <line x1={PADL} y1={10} x2={PADL} y2={H - PADB} {...AXIS_LINE_PROPS} />
       <line x1={PADL} y1={H - PADB} x2={W - 12} y2={H - PADB} {...AXIS_LINE_PROPS} />
       {[150, 100, 50, 0].map((a) => (

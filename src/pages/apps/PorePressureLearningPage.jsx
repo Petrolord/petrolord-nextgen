@@ -77,7 +77,7 @@ function PressurePlot({ prof, showPP }) {
     ] : []),
   ];
   return (
-    <SvgChartFrame width={W} height={H} label="Pressure against depth" minWidth={420}>
+    <SvgChartFrame width={W} height={H} label="Pressure against depth" minWidth={420} maxWidth={720}>
       <line x1={PADL} y1={10} x2={PADL} y2={H - PADB} {...AXIS_LINE_PROPS} />
       <line x1={PADL} y1={H - PADB} x2={W - 12} y2={H - PADB} {...AXIS_LINE_PROPS} />
       {[0, 1000, 2000, 3000, 4000].map((z) => (

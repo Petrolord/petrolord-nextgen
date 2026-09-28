@@ -71,7 +71,7 @@ function OilMap({ vols }) {
   const ch = (spec.dy / (y1 - spec.y0)) * H;
 
   return (
-    <SvgChartFrame width={W} height={H} label="Oil extent map with the well posts" minWidth={420}>
+    <SvgChartFrame width={W} height={H} label="Oil extent map with the well posts" minWidth={420} maxWidth={720}>
       {oilNodes.map(({ j, t }) => {
         const r = Math.floor(j / spec.nx);
         const c = j % spec.nx;

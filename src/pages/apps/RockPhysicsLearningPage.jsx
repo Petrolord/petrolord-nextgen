@@ -71,7 +71,7 @@ function AvoCurves({ curves }) {
   const sy = (r) => H - PAD - ((r - rMin) / (rMax - rMin)) * (H - PAD - 10);
   const path = (pts) => pts.map((p, i) => `${i ? 'L' : 'M'}${sx(p.theta).toFixed(1)},${sy(p.r).toFixed(1)}`).join(' ');
   return (
-    <SvgChartFrame width={W} height={H} label="AVO curves of the brine sand and the gas sand" minWidth={420}>
+    <SvgChartFrame width={W} height={H} label="AVO curves of the brine sand and the gas sand" minWidth={420} maxWidth={720}>
       <line x1={PAD} y1={sy(0)} x2={W - 10} y2={sy(0)} {...REFERENCE_LINE_PROPS} />
       <line x1={PAD} y1={10} x2={PAD} y2={H - PAD} {...AXIS_LINE_PROPS} />
       <line x1={PAD} y1={H - PAD} x2={W - 10} y2={H - PAD} {...AXIS_LINE_PROPS} />
@@ -96,7 +96,7 @@ function TuningPlot({ tuning }) {
   const sy = (a) => H - PAD - (a / aMax) * (H - PAD - 12);
   const path = amps.map((a, i) => `${i ? 'L' : 'M'}${sx(tuning.thicknessesMs[i]).toFixed(1)},${sy(a).toFixed(1)}`).join(' ');
   return (
-    <SvgChartFrame width={W} height={H} label="Tuning curve: peak amplitude against wedge thickness" minWidth={420}>
+    <SvgChartFrame width={W} height={H} label="Tuning curve: peak amplitude against wedge thickness" minWidth={420} maxWidth={720}>
       <line x1={PAD} y1={10} x2={PAD} y2={H - PAD} {...AXIS_LINE_PROPS} />
       <line x1={PAD} y1={H - PAD} x2={W - 10} y2={H - PAD} {...AXIS_LINE_PROPS} />
       {[0, 10, 20, 30, 40, 50, 60].map((ms) => (
