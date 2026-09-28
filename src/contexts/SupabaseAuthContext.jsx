@@ -20,7 +20,9 @@ const defaultState = {
   profile: null
 };
 
-const AuthContext = createContext(defaultState);
+// Exported for the design-system scope (src/design/ThemeProvider.jsx), which
+// reads the signed-in user without requiring a provider.
+export const AuthContext = createContext(defaultState);
 
 export const useAuth = () => {
   const context = useContext(AuthContext);

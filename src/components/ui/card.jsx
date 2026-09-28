@@ -1,16 +1,25 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
+import { useDsTheme } from '@/design/themeContext';
 
-const Card = React.forwardRef(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      "rounded-lg border bg-card text-card-foreground shadow-sm",
-      className
-    )}
-    {...props}
-  />
-));
+// Design system: inside a scope the card uses the theme roles (as the
+// Suite's card); outside one the legacy classes render unchanged.
+const THEMED_CARD = "rounded-lg border border-pl-border bg-pl-surface text-pl-text shadow-pl-sm";
+const THEMED_DESCRIPTION = "text-sm text-pl-muted";
+
+const Card = React.forwardRef(({ className, ...props }, ref) => {
+  const ds = useDsTheme();
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        ds ? THEMED_CARD : "rounded-lg border bg-card text-card-foreground shadow-sm",
+        className
+      )}
+      {...props}
+    />
+  );
+});
 Card.displayName = "Card";
 
 const CardHeader = React.forwardRef(({ className, ...props }, ref) => (
@@ -34,13 +43,16 @@ const CardTitle = React.forwardRef(({ className, ...props }, ref) => (
 ));
 CardTitle.displayName = "CardTitle";
 
-const CardDescription = React.forwardRef(({ className, ...props }, ref) => (
-  <p
-    ref={ref}
-    className={cn("text-sm text-muted-foreground", className)}
-    {...props}
-  />
-));
+const CardDescription = React.forwardRef(({ className, ...props }, ref) => {
+  const ds = useDsTheme();
+  return (
+    <p
+      ref={ref}
+      className={cn(ds ? THEMED_DESCRIPTION : "text-sm text-muted-foreground", className)}
+      {...props}
+    />
+  );
+});
 CardDescription.displayName = "CardDescription";
 
 const CardContent = React.forwardRef(({ className, ...props }, ref) => (

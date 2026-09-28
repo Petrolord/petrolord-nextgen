@@ -10,6 +10,7 @@ import { ApplicationLayoutProvider } from '@/contexts/ApplicationLayoutContext.j
 import ErrorBoundary from '@/components/ErrorBoundary.jsx';
 import { Loader2 } from 'lucide-react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { coldLoadTheme, ThemedLoadingScreen } from '@/design/scopePaths';
 
 // Critical Core Components
 import Layout from '@/components/Layout';
@@ -42,7 +43,16 @@ const queryClient = new QueryClient({
   },
 });
 
-const AppLoading = () => (
+// Legacy loader, byte for byte, except on the routes that render inside the
+// design-system scope (src/design/scopePaths.jsx), where it paints the
+// theme this device last resolved.
+const AppLoading = () => {
+    const theme = coldLoadTheme(typeof window !== 'undefined' ? window.location.pathname : '');
+    if (theme) return <ThemedLoadingScreen theme={theme} />;
+    return <LegacyAppLoading />;
+};
+
+const LegacyAppLoading = () => (
     <div className="h-screen w-full flex flex-col items-center justify-center bg-[#0F172A] text-white gap-4">
         <Loader2 className="w-12 h-12 animate-spin text-emerald-500" />
         <div className="flex flex-col items-center gap-1">
