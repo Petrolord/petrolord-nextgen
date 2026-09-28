@@ -370,14 +370,16 @@ const StudentHome = () => {
     );
 };
 
+// The modules placeholder (/dashboard/modules/*, batch 1A) renders only
+// inside the signed-in scope, so it uses theme roles directly.
 const ModulePlaceholder = ({ name, icon: Icon, description }) => (
-  <div className="flex flex-col items-center justify-center min-h-[60vh] text-center space-y-6 animate-in fade-in duration-500">
-    <div className="p-6 rounded-full bg-slate-800 border border-slate-700 shadow-xl shadow-slate-900/50">
-      <Icon className="h-16 w-16 text-[#BFFF00]" />
+  <div className="flex flex-col items-center justify-center min-h-[60vh] text-center space-y-6 animate-in fade-in duration-500 px-4 py-8 md:px-8">
+    <div className="p-6 rounded-full bg-pl-surface border border-pl-border shadow-pl-md">
+      <Icon className="h-16 w-16 text-pl-accent-text" aria-hidden="true" />
     </div>
     <div className="space-y-2">
-      <h2 className="text-3xl font-bold text-white">{name}</h2>
-      <p className="text-slate-400 max-w-lg mx-auto text-lg">
+      <h2 className="text-3xl font-bold tracking-tight text-pl-text">{name}</h2>
+      <p className="text-pl-muted max-w-lg mx-auto text-lg">
         {description || "This module is currently active and ready for data integration."}
       </p>
     </div>

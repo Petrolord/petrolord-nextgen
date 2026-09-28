@@ -19,7 +19,9 @@ const SearchPage = () => {
     // Let's assume it should be authenticated.
 
     return (
-        <div className="min-h-screen bg-[#020617]">
+        // Design system (batch 1A): /search renders inside the signed-in
+        // scope, which paints the page background.
+        <div className="min-h-screen">
              <AdvancedSearch />
         </div>
     );
