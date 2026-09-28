@@ -282,7 +282,7 @@ roles with no legacy branch.
   Supabase replaced by the 1A `frameStubs.js` stub, `fetch` counted and
   asserted unused).
 
-## Batch 3A: geoscience I course apps (as built)
+## 6. Batch 3A: geoscience I course apps (as built)
 
 Petrophysics, Well Data, Well Correlation, Seismolord and Mapping
 (`/dashboard/apps/<slug>`, exact paths) are on the roles and registered in
