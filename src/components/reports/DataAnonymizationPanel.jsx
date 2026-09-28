@@ -47,14 +47,14 @@ const DataAnonymizationPanel = ({ onAnonymize, onReset, isAnonymized }) => {
     };
 
     return (
-        <div className="bg-[#1E293B] p-4 rounded-lg border border-gray-700 space-y-4">
+        <div className="bg-pl-surface p-4 rounded-lg border border-pl-border space-y-4">
             <div className="flex items-center justify-between">
-                <h3 className="font-semibold text-white flex items-center"><UserX className="w-5 h-5 mr-2" /> Data Anonymization</h3>
+                <h3 className="font-semibold text-pl-text flex items-center"><UserX className="w-5 h-5 mr-2" /> Data Anonymization</h3>
                 <Switch id="anonymization-toggle" checked={enabled} onCheckedChange={setEnabled} />
             </div>
             {enabled && (
                 <div className="space-y-4">
-                    <p className="text-sm text-gray-400">Select fields to anonymize in the report. This action will be logged.</p>
+                    <p className="text-sm text-pl-muted">Select fields to anonymize in the report. This action will be logged.</p>
                     <div className="grid grid-cols-2 gap-2">
                         {ANONYMIZATION_FIELDS.map(field => (
                             <div key={field.id} className="flex items-center space-x-2">
@@ -63,13 +63,13 @@ const DataAnonymizationPanel = ({ onAnonymize, onReset, isAnonymized }) => {
                                     checked={selectedFields.includes(field.id)}
                                     onCheckedChange={(checked) => handleFieldChange(field.id, checked)}
                                 />
-                                <Label htmlFor={field.id} className="text-gray-300 font-normal">{field.label}</Label>
+                                <Label htmlFor={field.id} className="text-pl-text font-normal">{field.label}</Label>
                             </div>
                         ))}
                     </div>
                      <div className="flex justify-end gap-2">
                          {isAnonymized && <Button variant="outline" size="sm" onClick={handleReset}>Reset Anonymization</Button>}
-                        <Button size="sm" onClick={handleApply} className="bg-[#BFFF00] text-black hover:bg-lime-400">
+                        <Button size="sm" onClick={handleApply}>
                            <ShieldCheck className="w-4 h-4 mr-2" /> Apply
                         </Button>
                     </div>

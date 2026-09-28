@@ -14,23 +14,23 @@ const AdminCompliancePage = () => {
         <title>Compliance & Audit | Petrolord Admin</title>
       </Helmet>
       
-      <div className="p-6 space-y-6 max-w-[1600px] mx-auto">
+      <div className="px-4 py-8 md:px-8 space-y-6 max-w-[1600px] mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-white tracking-tight">Compliance Center</h1>
-            <p className="text-slate-400 mt-1">Audit logs, security monitoring, and data retention management.</p>
+            <h1 className="text-3xl font-bold text-pl-text tracking-tight">Compliance Center</h1>
+            <p className="text-pl-muted mt-1">Audit logs, security monitoring, and data retention management.</p>
           </div>
         </div>
 
         <Tabs defaultValue="dashboard" className="space-y-6">
-          <TabsList className="bg-[#1E293B] border border-slate-800 p-1 w-full md:w-auto flex flex-wrap h-auto">
-            <TabsTrigger value="dashboard" className="data-[state=active]:bg-[#BFFF00] data-[state=active]:text-black gap-2 px-6">
+          <TabsList className="p-1 w-full md:w-auto flex flex-wrap h-auto">
+            <TabsTrigger value="dashboard" className="gap-2 px-6">
               <Activity className="w-4 h-4" /> Dashboard
             </TabsTrigger>
-            <TabsTrigger value="audit-logs" className="data-[state=active]:bg-[#BFFF00] data-[state=active]:text-black gap-2 px-6">
+            <TabsTrigger value="audit-logs" className="gap-2 px-6">
               <FileText className="w-4 h-4" /> Audit Logs
             </TabsTrigger>
-            <TabsTrigger value="retention" className="data-[state=active]:bg-[#BFFF00] data-[state=active]:text-black gap-2 px-6">
+            <TabsTrigger value="retention" className="gap-2 px-6">
               <Settings className="w-4 h-4" /> Policies
             </TabsTrigger>
             {/* Reports are linked via separate page usually, but can be embedded if simple */}

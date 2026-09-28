@@ -8,7 +8,11 @@ import { getDashboardAnalytics } from '@/lib/reportAnalyticsUtils';
 import { BarChart, Download, Loader2, FileText, CheckCircle, Hash } from 'lucide-react';
 import ActionsTrendChart from '@/components/charts/ActionsTrendChart';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip } from 'recharts';
+import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
+import { ChartPanel } from '@/components/ui/chart-panel';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { PINNED_TOOLTIP_PROPS, LEGEND_PROPS } from '@/utils/chartTheme';
+import { seriesColor } from '@/utils/chartSvg';
 
 const DATE_RANGES = {
     '7d': 'Last 7 Days',
@@ -16,8 +20,6 @@ const DATE_RANGES = {
     '90d': 'Last 90 Days',
     'all': 'All Time',
 };
-
-const COLORS = ['#BFFF00', '#38BDF8', '#A78BFA', '#F472B6', '#FB923C', '#FACC15'];
 
 const AdminReportAnalyticsPage = () => {
     const { toast } = useToast();
@@ -59,12 +61,12 @@ const AdminReportAnalyticsPage = () => {
 
     const renderRecentReports = () => {
         if (!analyticsData?.recentReports || analyticsData.recentReports.length === 0) {
-            return <p className="text-gray-400 text-center py-4">No recent reports found for this period.</p>;
+            return <p className="text-pl-muted text-center py-4">No recent reports found for this period.</p>;
         }
         return (
             <div className="overflow-x-auto">
-                <table className="w-full text-sm text-left text-gray-400">
-                    <thead className="text-xs text-gray-300 uppercase bg-[#0F172A]">
+                <table className="w-full text-sm text-left text-pl-text">
+                    <thead className="text-xs text-pl-muted uppercase bg-pl-sunken">
                         <tr>
                             <th scope="col" className="px-6 py-3">Report Name</th>
                             <th scope="col" className="px-6 py-3">Created By</th>
@@ -74,9 +76,9 @@ const AdminReportAnalyticsPage = () => {
                     </thead>
                     <tbody>
                         {analyticsData.recentReports.map((report, index) => (
-                            <tr key={index} className="border-b border-gray-800 hover:bg-slate-800/50">
-                                <td className="px-6 py-4 font-medium text-white">{report.name.replace(/_/g, ' ')}</td>
-                                <td className="px-6 py-4">{report.created_by}</td>
+                            <tr key={index} className="border-b border-pl-border hover:bg-pl-sunken/60">
+                                <td className="px-6 py-4 font-medium text-pl-text">{report.name.replace(/_/g, ' ')}</td>
+                                <td className="px-6 py-4">{report.created_by || 'n/a'}</td>
                                 <td className="px-6 py-4">{new Date(report.created_at).toLocaleDateString()}</td>
                                 <td className="px-6 py-4">{report.rule_count}</td>
                             </tr>
@@ -90,25 +92,25 @@ const AdminReportAnalyticsPage = () => {
     return (
         <>
             <Helmet><title>Report Analytics - Petrolord</title></Helmet>
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-                <div className="flex justify-between items-center mb-8">
-                    <h1 className="text-3xl font-bold text-white flex items-center"><BarChart className="mr-3" /> Report Analytics</h1>
-                     <div className="flex items-center gap-4">
-                        <Select value={dateRangeKey} onValueChange={setDateRangeKey}><SelectTrigger className="w-[180px] bg-slate-900 border-slate-700 text-white"><SelectValue /></SelectTrigger><SelectContent>{Object.entries(DATE_RANGES).map(([key, value]) => (<SelectItem key={key} value={key}>{value}</SelectItem>))}</SelectContent></Select>
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="px-4 py-8 md:px-8">
+                <div className="flex flex-wrap justify-between items-center gap-4 mb-8">
+                    <h1 className="text-3xl font-bold text-pl-text flex items-center"><BarChart className="mr-3" /> Report Analytics</h1>
+                     <div className="flex flex-wrap items-center gap-4">
+                        <Select value={dateRangeKey} onValueChange={setDateRangeKey}><SelectTrigger className="w-[180px]"><SelectValue /></SelectTrigger><SelectContent>{Object.entries(DATE_RANGES).map(([key, value]) => (<SelectItem key={key} value={key}>{value}</SelectItem>))}</SelectContent></Select>
                         <Button variant="outline" onClick={handleNotImplemented}><Download className="mr-2 h-4 w-4" /> Export</Button>
                     </div>
                 </div>
 
                 {loading ? (
                     <div className="flex justify-center items-center h-96">
-                        <Loader2 className="w-12 h-12 animate-spin text-[#BFFF00]" />
+                        <Loader2 className="w-12 h-12 animate-spin text-pl-primary" />
                     </div>
                 ) : analyticsData ? (
                     <div className="space-y-6">
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <Card className="bg-[#1E293B] border-gray-700 text-white"><CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2"><CardTitle className="text-sm font-medium">Total Reports Generated</CardTitle><FileText className="h-4 w-4 text-gray-400" /></CardHeader><CardContent><div className="text-2xl font-bold">{analyticsData.stats.totalReports}</div></CardContent></Card>
-                            <Card className="bg-[#1E293B] border-gray-700 text-white"><CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2"><CardTitle className="text-sm font-medium">Total Anonymization Rules</CardTitle><CheckCircle className="h-4 w-4 text-gray-400" /></CardHeader><CardContent><div className="text-2xl font-bold">{analyticsData.stats.totalRules}</div></CardContent></Card>
-                            <Card className="bg-[#1E293B] border-gray-700 text-white"><CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2"><CardTitle className="text-sm font-medium">Avg Rules Per Report</CardTitle><Hash className="h-4 w-4 text-gray-400" /></CardHeader><CardContent><div className="text-2xl font-bold">{analyticsData.stats.avgRulesPerReport}</div></CardContent></Card>
+                            <Card><CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2"><CardTitle className="text-sm font-medium text-pl-text">Total Reports Generated</CardTitle><FileText className="h-4 w-4 text-pl-muted" aria-hidden="true" /></CardHeader><CardContent><div className="text-2xl font-bold text-pl-text tabular-nums">{analyticsData.stats.totalReports}</div></CardContent></Card>
+                            <Card><CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2"><CardTitle className="text-sm font-medium text-pl-text">Total Anonymization Rules</CardTitle><CheckCircle className="h-4 w-4 text-pl-muted" aria-hidden="true" /></CardHeader><CardContent><div className="text-2xl font-bold text-pl-text tabular-nums">{analyticsData.stats.totalRules}</div></CardContent></Card>
+                            <Card><CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2"><CardTitle className="text-sm font-medium text-pl-text">Avg Rules Per Report</CardTitle><Hash className="h-4 w-4 text-pl-muted" aria-hidden="true" /></CardHeader><CardContent><div className="text-2xl font-bold text-pl-text tabular-nums">{analyticsData.stats.avgRulesPerReport}</div></CardContent></Card>
                         </div>
                         
                         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
@@ -116,31 +118,29 @@ const AdminReportAnalyticsPage = () => {
                                 <ActionsTrendChart data={analyticsData.charts.reportsOverTime} loading={false} />
                             </div>
                             <div className="lg:col-span-2">
-                                <Card className="bg-[#1E293B] border-gray-700 text-white h-full">
-                                    <CardHeader><CardTitle>Anonymization Rule Distribution</CardTitle></CardHeader>
-                                    <CardContent>
-                                        <ResponsiveContainer width="100%" height={245}>
-                                            <PieChart>
-                                                <Pie data={analyticsData.charts.ruleDistribution} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} fill="#8884d8" label>
-                                                    {analyticsData.charts.ruleDistribution.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)}
-                                                </Pie>
-                                                <Tooltip contentStyle={{ backgroundColor: '#0F172A', border: '1px solid #374151' }} />
-                                            </PieChart>
-                                        </ResponsiveContainer>
-                                    </CardContent>
-                                </Card>
+                                <ChartPanel title="Anonymization Rule Distribution" className="h-full">
+                                    <ChartFrame height={240}>
+                                        <PieChart>
+                                            <Pie data={analyticsData.charts.ruleDistribution} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} fill={seriesColor(0)} label>
+                                                {analyticsData.charts.ruleDistribution.map((entry, index) => <Cell key={`cell-${index}`} fill={seriesColor(index)} />)}
+                                            </Pie>
+                                            <Tooltip {...PINNED_TOOLTIP_PROPS} />
+                                            <Legend {...LEGEND_PROPS} />
+                                        </PieChart>
+                                    </ChartFrame>
+                                </ChartPanel>
                             </div>
                         </div>
 
-                         <Card className="bg-[#1E293B] border-gray-700 text-white">
-                            <CardHeader><CardTitle>Recent Reports</CardTitle></CardHeader>
+                         <Card>
+                            <CardHeader><CardTitle className="text-pl-text">Recent Reports</CardTitle></CardHeader>
                             <CardContent>
                                 {renderRecentReports()}
                             </CardContent>
                         </Card>
                     </div>
                 ) : (
-                    <div className="text-center py-16 text-gray-500">
+                    <div className="text-center py-16 text-pl-muted">
                         <p>No analytics data available.</p>
                         <p className="text-sm">Try selecting a different date range or generate some reports.</p>
                     </div>

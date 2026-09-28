@@ -17,7 +17,7 @@ const ScheduleReportModal = ({ isOpen, onClose, reportType, filters }) => {
 
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
-            <DialogContent className="sm:max-w-[425px] bg-[#1E293B] border-gray-700 text-white">
+            <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
                     <DialogTitle>Schedule Report</DialogTitle>
                     <DialogDescription>
@@ -25,7 +25,7 @@ const ScheduleReportModal = ({ isOpen, onClose, reportType, filters }) => {
                     </DialogDescription>
                 </DialogHeader>
                 <div className="py-4">
-                   <p className="text-center text-gray-400">Scheduling options will be available here.</p>
+                   <p className="text-center text-pl-muted">Scheduling options will be available here.</p>
                 </div>
                  <div className="flex justify-end gap-2">
                     <Button variant="outline" onClick={onClose}>Cancel</Button>
