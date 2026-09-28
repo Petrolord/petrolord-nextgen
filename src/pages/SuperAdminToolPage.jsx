@@ -72,7 +72,6 @@ const SuperAdminToolPage = () => {
         title: 'Invitation Sent',
         description: `Invitation sent to ${email}.`,
         variant: "default",
-        className: "bg-[#BFFF00] text-[#0F172A]"
       });
       setEmail('');
       fetchSuperAdmins();
@@ -140,47 +139,48 @@ const SuperAdminToolPage = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
+        className="px-4 py-8 md:px-8"
       >
-        <h1 className="text-4xl font-bold text-white mb-2">Super Admin Management</h1>
-        <p className="text-xl text-gray-400 mb-8">Create and manage Super Admin accounts.</p>
+        <h1 className="text-3xl md:text-4xl font-bold text-pl-text mb-2">Super Admin Management</h1>
+        <p className="text-base md:text-xl text-pl-muted mb-8">Create and manage Super Admin accounts.</p>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Invitation Card */}
           <div className="lg:col-span-1">
-            <div className="bg-[#1E293B] rounded-lg p-8 border border-gray-800 shadow-lg">
+            <div className="bg-pl-surface rounded-lg p-6 md:p-8 border border-pl-border shadow-pl-sm">
               <div className="flex items-center space-x-3 mb-6">
-                <div className="p-2 bg-[#BFFF00]/10 rounded-lg">
-                   <ShieldCheck className="w-6 h-6 text-[#BFFF00]" />
+                <div className="p-2 bg-pl-accent/15 rounded-lg">
+                   <ShieldCheck className="w-6 h-6 text-pl-accent-text" aria-hidden="true" />
                 </div>
-                <h2 className="text-2xl font-bold text-white">Create New Admin</h2>
+                <h2 className="text-2xl font-bold text-pl-text">Create New Admin</h2>
               </div>
               
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+                  <label htmlFor="email" className="block text-sm font-medium text-pl-text mb-2">
                     Admin Email Address
                   </label>
                   <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500" />
+                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-pl-muted" />
                     <input
                       id="email"
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full pl-10 pr-4 py-3 bg-[#0F172A] border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#BFFF00] transition-colors"
+                      className="w-full pl-10 pr-4 py-3 rounded-lg border border-pl-border-strong bg-pl-surface text-pl-text placeholder:text-pl-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus transition-colors"
                       placeholder="new.admin@petrolord.com"
                       required
                     />
                   </div>
-                  <p className="text-xs text-gray-500 mt-2">
+                  <p className="text-xs text-pl-muted mt-2">
                     Invitation link redirects to: <br/>
-                    <span className="text-[#BFFF00] font-mono">{appUrl}/reset-password</span>
+                    <span className="text-pl-primary-text font-mono break-all">{appUrl}/reset-password</span>
                   </p>
                 </div>
                 <Button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold py-3 text-lg shadow-[0_0_15px_rgba(191,255,0,0.3)]"
+                  className="w-full font-semibold py-3 text-lg"
                 >
                   <Plus className="w-5 h-5 mr-2" />
                   {loading ? 'Sending Invitation...' : 'Invite Super Admin'}
@@ -191,38 +191,38 @@ const SuperAdminToolPage = () => {
           
           {/* List Card */}
           <div className="lg:col-span-2">
-            <div className="bg-[#1E293B] rounded-lg border border-gray-800 shadow-lg overflow-hidden">
-              <div className="p-6 border-b border-gray-800 flex justify-between items-center">
-                <h2 className="text-2xl font-bold text-white">Active Super Admins</h2>
-                <span className="px-3 py-1 bg-[#0F172A] rounded-full text-xs text-gray-400 border border-gray-700">
+            <div className="bg-pl-surface rounded-lg border border-pl-border shadow-pl-sm overflow-hidden">
+              <div className="p-6 border-b border-pl-border flex justify-between items-center">
+                <h2 className="text-2xl font-bold text-pl-text">Active Super Admins</h2>
+                <span className="whitespace-nowrap px-3 py-1 bg-pl-sunken rounded-full text-xs text-pl-muted border border-pl-border">
                   {superAdmins.length} Active
                 </span>
               </div>
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead className="bg-[#0F172A]">
+                  <thead className="bg-pl-sunken">
                     <tr>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">Display Name</th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">Email</th>
-                      <th className="px-6 py-4 text-right text-sm font-semibold text-gray-300">Actions</th>
+                      <th className="px-6 py-4 text-left text-sm font-semibold text-pl-text">Display Name</th>
+                      <th className="px-6 py-4 text-left text-sm font-semibold text-pl-text">Email</th>
+                      <th className="px-6 py-4 text-right text-sm font-semibold text-pl-text">Actions</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-800">
+                  <tbody className="divide-y divide-pl-border">
                     {superAdmins.length > 0 ? (
                       superAdmins.map((admin) => (
-                        <tr key={admin.id} className="hover:bg-[#0F172A]/50 transition-colors">
+                        <tr key={admin.id} className="hover:bg-pl-sunken/60 transition-colors">
                           <td className="px-6 py-4">
                             <div className="flex items-center">
-                                <div className="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center mr-3 text-xs font-bold text-white">
+                                <div className="w-8 h-8 rounded-full bg-pl-sunken flex items-center justify-center mr-3 text-xs font-bold text-pl-text">
                                     {admin.display_name ? admin.display_name.charAt(0).toUpperCase() : 'A'}
                                 </div>
-                                <span className="text-white font-medium">{admin.display_name || 'N/A'}</span>
+                                <span className="text-pl-text font-medium">{admin.display_name || 'n/a'}</span>
                                 {admin.id === user?.id && (
-                                    <span className="ml-2 text-[10px] bg-[#BFFF00]/20 text-[#BFFF00] px-2 py-0.5 rounded border border-[#BFFF00]/30">YOU</span>
+                                    <span className="ml-2 text-[10px] bg-pl-accent/20 text-pl-accent-text px-2 py-0.5 rounded border border-pl-accent/40">YOU</span>
                                 )}
                             </div>
                           </td>
-                          <td className="px-6 py-4 text-gray-400 font-mono text-sm">{admin.email}</td>
+                          <td className="px-6 py-4 text-pl-muted font-mono text-sm">{admin.email}</td>
                           <td className="px-6 py-4 text-right">
                              {admin.id !== user?.id ? (
                                <AlertDialog>
@@ -232,7 +232,6 @@ const SuperAdminToolPage = () => {
                                       size="sm" 
                                       disabled={deactivateLoading === admin.id}
                                       onClick={() => setSelectedAdminForDeactivation(admin)}
-                                      className="hover:bg-red-600/90 border border-red-900/50"
                                     >
                                       {deactivateLoading === admin.id ? (
                                         <span className="animate-pulse">Deactivating...</span>
@@ -244,23 +243,23 @@ const SuperAdminToolPage = () => {
                                       )}
                                     </Button>
                                  </AlertDialogTrigger>
-                                 <AlertDialogContent className="bg-[#1E293B] border-gray-800 text-white">
+                                 <AlertDialogContent>
                                    <AlertDialogHeader>
-                                     <AlertDialogTitle className="flex items-center text-red-500">
+                                     <AlertDialogTitle className="flex items-center text-pl-danger-text">
                                        <AlertTriangle className="w-5 h-5 mr-2" />
                                        Confirm Deactivation
                                      </AlertDialogTitle>
-                                     <AlertDialogDescription className="text-gray-400">
+                                     <AlertDialogDescription className="text-pl-muted">
                                        Are you sure you want to deactivate <strong>{admin.email}</strong>? 
                                        <br/><br/>
                                        This action will immediately prevent the user from logging in and revoke all access tokens. You can reactivate them later via direct database access if needed.
                                      </AlertDialogDescription>
                                    </AlertDialogHeader>
                                    <AlertDialogFooter>
-                                     <AlertDialogCancel className="bg-transparent border-gray-700 text-white hover:bg-gray-800 hover:text-white">Cancel</AlertDialogCancel>
+                                     <AlertDialogCancel>Cancel</AlertDialogCancel>
                                      <AlertDialogAction 
                                        onClick={handleDeactivate}
-                                       className="bg-red-600 hover:bg-red-700 text-white"
+                                       className="bg-pl-danger text-pl-danger-fg hover:bg-pl-danger/90"
                                      >
                                        Yes, Deactivate User
                                      </AlertDialogAction>
@@ -268,16 +267,16 @@ const SuperAdminToolPage = () => {
                                  </AlertDialogContent>
                                </AlertDialog>
                              ) : (
-                                <span className="text-xs text-gray-600 italic">Current User</span>
+                                <span className="text-xs text-pl-muted italic">Current User</span>
                              )}
                           </td>
                         </tr>
                       ))
                     ) : (
                       <tr>
-                        <td colSpan="3" className="px-6 py-12 text-center text-gray-500">
+                        <td colSpan="3" className="px-6 py-12 text-center text-pl-muted">
                           <div className="flex flex-col items-center justify-center">
-                            <ShieldCheck className="w-12 h-12 text-gray-700 mb-4" />
+                            <ShieldCheck className="w-12 h-12 text-pl-muted mb-4" />
                             <p>No other super admins found.</p>
                           </div>
                         </td>

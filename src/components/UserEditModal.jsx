@@ -62,7 +62,7 @@ const UserEditModal = ({ user, isOpen, onClose, onSave }) => {
                 </DialogHeader>
                 <div className="space-y-4 py-4">
                     <div className="grid grid-cols-4 items-center gap-4">
-                        <label className="text-right text-sm font-medium text-slate-300">Role</label>
+                        <label className="text-right text-sm font-medium text-pl-text">Role</label>
                         <Select value={role} onValueChange={setRole} disabled={!isSuperAdmin && (user.role === 'admin' || user.role === 'super_admin')}>
                             <SelectTrigger className="col-span-3"><SelectValue /></SelectTrigger>
                             <SelectContent>
@@ -79,7 +79,7 @@ const UserEditModal = ({ user, isOpen, onClose, onSave }) => {
                     </div>
                     
                     <div className="grid grid-cols-4 items-center gap-4">
-                        <label className="text-right text-sm font-medium text-slate-300">Status</label>
+                        <label className="text-right text-sm font-medium text-pl-text">Status</label>
                         <Select value={status} onValueChange={setStatus} className="col-span-3">
                             <SelectTrigger className="col-span-3"><SelectValue /></SelectTrigger>
                             <SelectContent>
@@ -89,14 +89,14 @@ const UserEditModal = ({ user, isOpen, onClose, onSave }) => {
                         </Select>
                     </div>
                     {!isSuperAdmin && (user.role === 'admin' || user.role === 'super_admin') && (
-                        <p className="text-xs text-amber-500 text-center bg-amber-500/10 p-2 rounded">
+                        <p className="text-xs text-pl-warning-text text-center bg-pl-warning-bg p-2 rounded">
                             You cannot modify the role of an Admin or Super Admin.
                         </p>
                     )}
                 </div>
                 <DialogFooter>
                     <Button variant="ghost" onClick={onClose}>Cancel</Button>
-                    <Button onClick={handleSave} disabled={loading} className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600]">
+                    <Button onClick={handleSave} disabled={loading}>
                         {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                         Save Changes
                     </Button>
