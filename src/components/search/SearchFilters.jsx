@@ -18,10 +18,10 @@ const SearchFilters = () => {
   const activeFilterCount = Object.values(filters).filter(v => v !== 'All').length;
 
   return (
-    <div className="bg-[#1E293B] border border-slate-700 rounded-lg p-4 space-y-4">
+    <div className="bg-pl-surface border border-pl-border rounded-lg p-4 space-y-4">
       <div className="flex items-center justify-between">
-        <h3 className="text-white font-medium flex items-center gap-2">
-          <Filter className="w-4 h-4 text-[#BFFF00]" />
+        <h3 className="text-pl-text font-medium flex items-center gap-2">
+          <Filter className="w-4 h-4 text-pl-accent-text" aria-hidden="true" />
           Filters
         </h3>
         {activeFilterCount > 0 && (
@@ -29,7 +29,7 @@ const SearchFilters = () => {
             variant="ghost" 
             size="sm" 
             onClick={clearFilters}
-            className="text-xs text-slate-400 hover:text-white h-6 px-2"
+            className="text-xs h-6 px-2"
           >
             Clear All
           </Button>
@@ -39,14 +39,14 @@ const SearchFilters = () => {
       <div className="space-y-4">
         {/* Module Filter */}
         <div className="space-y-2">
-          <label className="text-xs text-slate-400 uppercase font-semibold">Module</label>
+          <label className="text-xs text-pl-muted uppercase font-semibold">Module</label>
           <div className="flex flex-wrap gap-2">
             <button
               onClick={() => handleFilterChange('module', 'All')}
-              className={`text-xs px-2.5 py-1 rounded-full border transition-colors ${
+              className={`text-xs px-2.5 py-1 rounded-full border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus ${
                 filters.module === 'All' 
-                  ? 'bg-[#BFFF00]/20 border-[#BFFF00] text-[#BFFF00]' 
-                  : 'bg-slate-800 border-slate-700 text-slate-300 hover:border-slate-500'
+                  ? 'bg-pl-primary/10 border-pl-primary text-pl-primary-text' 
+                  : 'bg-pl-sunken border-pl-border text-pl-text hover:border-pl-border-strong'
               }`}
             >
               All
@@ -55,10 +55,10 @@ const SearchFilters = () => {
               <button
                 key={mod}
                 onClick={() => handleFilterChange('module', mod)}
-                className={`text-xs px-2.5 py-1 rounded-full border transition-colors ${
+                className={`text-xs px-2.5 py-1 rounded-full border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus ${
                   filters.module === mod 
-                    ? 'bg-[#BFFF00]/20 border-[#BFFF00] text-[#BFFF00]' 
-                    : 'bg-slate-800 border-slate-700 text-slate-300 hover:border-slate-500'
+                    ? 'bg-pl-primary/10 border-pl-primary text-pl-primary-text' 
+                    : 'bg-pl-sunken border-pl-border text-pl-text hover:border-pl-border-strong'
                 }`}
               >
                 {mod}
@@ -69,16 +69,16 @@ const SearchFilters = () => {
 
         {/* Status Filter */}
         <div className="space-y-2">
-          <label className="text-xs text-slate-400 uppercase font-semibold">Status</label>
+          <label className="text-xs text-pl-muted uppercase font-semibold">Status</label>
           <div className="flex flex-wrap gap-2">
             {['All', 'Active', 'Coming Soon'].map(status => (
               <button
                 key={status}
                 onClick={() => handleFilterChange('status', status)}
-                className={`text-xs px-2.5 py-1 rounded-full border transition-colors ${
+                className={`text-xs px-2.5 py-1 rounded-full border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus ${
                   filters.status === status 
-                    ? 'bg-[#BFFF00]/20 border-[#BFFF00] text-[#BFFF00]' 
-                    : 'bg-slate-800 border-slate-700 text-slate-300 hover:border-slate-500'
+                    ? 'bg-pl-primary/10 border-pl-primary text-pl-primary-text' 
+                    : 'bg-pl-sunken border-pl-border text-pl-text hover:border-pl-border-strong'
                 }`}
               >
                 {status}
@@ -89,16 +89,16 @@ const SearchFilters = () => {
         
         {/* Type Filter */}
         <div className="space-y-2">
-          <label className="text-xs text-slate-400 uppercase font-semibold">Type</label>
+          <label className="text-xs text-pl-muted uppercase font-semibold">Type</label>
           <div className="flex flex-wrap gap-2">
             {['All', 'Application', 'Settings', 'Content'].map(type => (
               <button
                 key={type}
                 onClick={() => handleFilterChange('type', type)}
-                className={`text-xs px-2.5 py-1 rounded-full border transition-colors ${
+                className={`text-xs px-2.5 py-1 rounded-full border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus ${
                   filters.type === type 
-                    ? 'bg-[#BFFF00]/20 border-[#BFFF00] text-[#BFFF00]' 
-                    : 'bg-slate-800 border-slate-700 text-slate-300 hover:border-slate-500'
+                    ? 'bg-pl-primary/10 border-pl-primary text-pl-primary-text' 
+                    : 'bg-pl-sunken border-pl-border text-pl-text hover:border-pl-border-strong'
                 }`}
               >
                 {type}

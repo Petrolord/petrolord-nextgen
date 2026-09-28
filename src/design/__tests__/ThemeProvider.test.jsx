@@ -16,7 +16,6 @@ import {
   isThemedPath, coldLoadTheme, matchesRoute, ThemedLoadingScreen,
 } from '@/design/scopePaths';
 import { THEMED_ROUTES } from '@/design/rollout';
-import W0_ROUTES from '@/design/rollout/w0.js';
 
 const root = () => document.querySelector('[data-pl-root]');
 
@@ -156,13 +155,12 @@ describe('route registry and cold load', () => {
     expect(matchesRoute('/dashboard/apps/dca/x', '/dashboard/apps/:slug')).toBe(false);
   });
 
-  it('wave 0 themes the dashboard home only', () => {
-    // Each batch adds its own routes to THEMED_ROUTES; wave 0's file holds
-    // only the dashboard home, and the registry keeps it first.
-    expect(W0_ROUTES).toEqual(['/dashboard']);
-    expect(THEMED_ROUTES[0]).toBe('/dashboard');
-    expect(isThemedPath('/dashboard')).toBe(true);
-    for (const p of ['/', '/login', '/dashboard/enroll', '/dashboard/apps/dca', '/dashboard/modules/x', '/search']) {
+  it('wave 0 themes the dashboard home, and 1A the search page and the modules placeholder', () => {
+    expect(THEMED_ROUTES).toEqual(expect.arrayContaining(['/dashboard', '/search', '/dashboard/modules/*']));
+    for (const p of ['/dashboard', '/search', '/dashboard/modules', '/dashboard/modules/x']) {
+      expect({ p, themed: isThemedPath(p) }).toEqual({ p, themed: true });
+    }
+    for (const p of ['/', '/login', '/dashboard/enroll', '/dashboard/apps/dca', '/searchx']) {
       expect({ p, themed: isThemedPath(p) }).toEqual({ p, themed: false });
     }
   });
