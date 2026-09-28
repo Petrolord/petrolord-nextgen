@@ -3,6 +3,7 @@ import {
   computeWedge, WEDGE_FREQS, WEDGE, TUNING_PRODUCT_HZ_MS,
 } from '@/lib/seismolordTeaching';
 import { PanelShell, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { SVG_CHART as CH, CHART_PLATE_CLASS } from '@/components/course/panels/readerChart';
 
 // Wedge explorer: the Expert-tier tuning panel. Two charts, because the
 // tier needs both. The upper one is the tuning curve, a property of the
@@ -47,66 +48,66 @@ const WedgeExplorer = () => {
       subtitle={`An equal and opposite pair of ${WEDGE.rcTop} and ${WEDGE.rcBase} on a wedge from 0 to ${WEDGE.maxThicknessMs} ms, sampled at ${WEDGE.dtMs} ms. The capstone reads 25 Hz and 40 Hz.`}>
 
       <div className="flex flex-wrap gap-2 items-center">
-        <span className="text-xs text-gray-400">wavelet frequency</span>
+        <span className="text-xs text-pl-muted">wavelet frequency</span>
         {WEDGE_FREQS.map((f) => (
           <button key={f} type="button" onClick={() => setFreq(f)}
             className={`px-3 py-1.5 rounded-md border text-sm ${freq === f
-              ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold'
-              : 'bg-gray-800 text-gray-300 border-gray-600'}`}>
+              ? 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold'
+              : 'bg-pl-sunken text-pl-muted border-pl-border hover:text-pl-text'}`}>
             {f} Hz
           </button>
         ))}
       </div>
 
       <div className="flex items-center gap-3">
-        <span className="text-xs text-gray-400 whitespace-nowrap">bed thickness</span>
+        <span className="text-xs text-pl-muted whitespace-nowrap">bed thickness</span>
         <input type="range" min={0} max={WEDGE.maxThicknessMs} step={WEDGE.dtMs}
           value={row.thicknessMs} onChange={(e) => setThickness(Number(e.target.value))}
-          className="w-full accent-[#BFFF00]" aria-label="Bed thickness in milliseconds" />
-        <span className="text-sm text-white whitespace-nowrap">{row.thicknessMs} ms</span>
+          className="w-full accent-pl-primary" aria-label="Bed thickness in milliseconds" />
+        <span className="text-sm text-pl-text whitespace-nowrap">{row.thicknessMs} ms</span>
       </div>
 
-      <div className="overflow-x-auto">
+      <div data-canvas="chart" className={CHART_PLATE_CLASS}>
         <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ minWidth: 460 }} role="img"
           aria-label="Tuning curve: amplitude against bed thickness">
-          <rect x="0" y="0" width={W} height={H} fill="#0F172A" />
-          <line x1={PAD.left} y1={cy(0)} x2={W - PAD.right} y2={cy(0)} stroke="#334155" />
+          <rect x="0" y="0" width={W} height={H} fill={CH.plate} />
+          <line x1={PAD.left} y1={cy(0)} x2={W - PAD.right} y2={cy(0)} stroke={CH.grid} />
           <line x1={PAD.left} y1={cy(model.isoAmp)} x2={W - PAD.right} y2={cy(model.isoAmp)}
-            stroke="#64748b" strokeDasharray="4 4" />
-          <text x={W - PAD.right} y={cy(model.isoAmp) - 4} fill="#64748b" fontSize="9" textAnchor="end">
+            stroke={CH.axis} strokeDasharray="4 4" />
+          <text x={W - PAD.right} y={cy(model.isoAmp) - 4} fill={CH.text} fontSize="9" textAnchor="end">
             isolated {fmt(model.isoAmp, 4)}
           </text>
-          <polyline points={curve} fill="none" stroke="#38bdf8" strokeWidth="1.8" />
-          <circle cx={cx(model.tuneMs)} cy={cy(model.tuneAmp)} r="4.5" fill="#BFFF00" stroke="#fff" strokeWidth="1" />
-          <text x={cx(model.tuneMs)} y={cy(model.tuneAmp) - 9} fill="#BFFF00" fontSize="10" textAnchor="middle">
+          <polyline points={curve} fill="none" stroke={CH.blue} strokeWidth="1.8" />
+          <circle cx={cx(model.tuneMs)} cy={cy(model.tuneAmp)} r="4.5" fill={CH.green} stroke={CH.halo} strokeWidth="1" />
+          <text x={cx(model.tuneMs)} y={cy(model.tuneAmp) - 9} fill={CH.green} fontSize="10" textAnchor="middle">
             tuning {model.tuneMs} ms, {fmt(model.tuneAmp, 4)}
           </text>
-          <circle cx={cx(row.thicknessMs)} cy={cy(row.amp)} r="3.5" fill="#f472b6" />
-          <text x="6" y={cy(maxAmp / 1.12) + 3} fill="#64748b" fontSize="9">{fmt(maxAmp / 1.12, 3)}</text>
-          <text x="6" y={cy(0) + 3} fill="#64748b" fontSize="9">0.000</text>
-          <text x={PAD.left} y={H - 10} fill="#64748b" fontSize="9">0 ms</text>
-          <text x={W - PAD.right} y={H - 10} fill="#64748b" fontSize="9" textAnchor="end">
+          <circle cx={cx(row.thicknessMs)} cy={cy(row.amp)} r="3.5" fill={CH.pink} />
+          <text x="6" y={cy(maxAmp / 1.12) + 3} fill={CH.text} fontSize="9">{fmt(maxAmp / 1.12, 3)}</text>
+          <text x="6" y={cy(0) + 3} fill={CH.text} fontSize="9">0.000</text>
+          <text x={PAD.left} y={H - 10} fill={CH.text} fontSize="9">0 ms</text>
+          <text x={W - PAD.right} y={H - 10} fill={CH.text} fontSize="9" textAnchor="end">
             {WEDGE.maxThicknessMs} ms
           </text>
-          <text x={W / 2} y={H - 10} fill="#64748b" fontSize="9" textAnchor="middle">bed thickness</text>
+          <text x={W / 2} y={H - 10} fill={CH.text} fontSize="9" textAnchor="middle">bed thickness</text>
         </svg>
       </div>
 
-      <div className="overflow-x-auto">
+      <div data-canvas="chart" className={CHART_PLATE_CLASS}>
         <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ minWidth: 460 }} role="img"
           aria-label="The composite trace at the selected bed thickness">
-          <rect x="0" y="0" width={W} height={H} fill="#0F172A" />
-          <line x1={PAD.left} y1={ty(0)} x2={W - PAD.right} y2={ty(0)} stroke="#334155" />
+          <rect x="0" y="0" width={W} height={H} fill={CH.plate} />
+          <line x1={PAD.left} y1={ty(0)} x2={W - PAD.right} y2={ty(0)} stroke={CH.grid} />
           <line x1={tx(topMs)} y1={PAD.top} x2={tx(topMs)} y2={H - PAD.bottom}
-            stroke="#BFFF00" strokeDasharray="3 4" />
-          <text x={tx(topMs) + 4} y={PAD.top + 9} fill="#BFFF00" fontSize="9">top</text>
+            stroke={CH.green} strokeDasharray="3 4" />
+          <text x={tx(topMs) + 4} y={PAD.top + 9} fill={CH.green} fontSize="9">top</text>
           <line x1={tx(topMs + row.thicknessMs)} y1={PAD.top} x2={tx(topMs + row.thicknessMs)}
-            y2={H - PAD.bottom} stroke="#f472b6" strokeDasharray="3 4" />
-          <text x={tx(topMs + row.thicknessMs) + 4} y={PAD.top + 9} fill="#f472b6" fontSize="9">base</text>
-          <polyline points={tracePts} fill="none" stroke="#e2e8f0" strokeWidth="1.6" />
-          <text x={PAD.left} y={H - 10} fill="#64748b" fontSize="9">0 ms</text>
-          <text x={W - PAD.right} y={H - 10} fill="#64748b" fontSize="9" textAnchor="end">{traceMs} ms</text>
-          <text x={W / 2} y={H - 10} fill="#64748b" fontSize="9" textAnchor="middle">two way time</text>
+            y2={H - PAD.bottom} stroke={CH.pink} strokeDasharray="3 4" />
+          <text x={tx(topMs + row.thicknessMs) + 4} y={PAD.top + 9} fill={CH.pink} fontSize="9">base</text>
+          <polyline points={tracePts} fill="none" stroke={CH.ink} strokeWidth="1.6" />
+          <text x={PAD.left} y={H - 10} fill={CH.text} fontSize="9">0 ms</text>
+          <text x={W - PAD.right} y={H - 10} fill={CH.text} fontSize="9" textAnchor="end">{traceMs} ms</text>
+          <text x={W / 2} y={H - 10} fill={CH.text} fontSize="9" textAnchor="middle">two way time</text>
         </svg>
       </div>
 

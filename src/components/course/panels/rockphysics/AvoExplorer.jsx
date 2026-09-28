@@ -3,6 +3,7 @@ import {
   TEACHING_FREQ_HZ, CLASS_THRESHOLDS, ANGLE_MAX_DEG, computeAvoDetail, ekeneInterface,
 } from '@/lib/rockphysicsTeaching';
 import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { SVG_CHART as CH, CHART_PLATE_CLASS } from '@/components/course/panels/readerChart';
 
 // AVO explorer: both fluid cases screened under the Ekene shale across
 // angle, with the Shuey approximation drawn against the exact Zoeppritz
@@ -13,7 +14,7 @@ const H = 320;
 const PAD = { left: 58, top: 18, right: 18, bottom: 42 };
 
 const fmt = (v, d = 4) => (Number.isFinite(v) ? v.toFixed(d) : '-');
-const COLOR = { brine: '#38bdf8', gas: '#fbbf24' };
+const COLOR = { brine: CH.blue, gas: CH.amber };
 
 // The panel opens on the Ekene teaching interface, with the gas twin carried
 // from the substitution at full precision. "Type an interface" swaps in
@@ -69,13 +70,13 @@ const AvoExplorer = () => {
         <NumField label="Wavelet frequency (Hz)" value={freq} onChange={setFreq} />
         <SelectField label="Class II band on |A|" value={threshold} onChange={setThreshold}
           options={CLASS_THRESHOLDS.map((v) => [String(v), v.toFixed(2)])} />
-        <div className="text-xs text-gray-500">
+        <div className="text-xs text-pl-muted">
           The class II band is a documented convention. Widen it and watch which case changes name.
         </div>
       </div>
       {mode === 'typed' && LAYERS.map(([p, name]) => (
         <div key={p} className="grid gap-3 grid-cols-2 sm:grid-cols-4 items-end">
-          <div className="text-xs text-gray-400">{name}</div>
+          <div className="text-xs text-pl-muted">{name}</div>
           <NumField label="vp (m/s)" value={typed[`${p}Vp`]} onChange={set(`${p}Vp`)} />
           <NumField label="vs (m/s)" value={typed[`${p}Vs`]} onChange={set(`${p}Vs`)} />
           <NumField label="Density (kg/m3)" value={typed[`${p}Rho`]} onChange={set(`${p}Rho`)} />
@@ -107,12 +108,12 @@ const AvoExplorer = () => {
       subtitle="A shale over a sand, screened for the brine case and its gas-substituted twin; it opens on the Ekene shale and sand. Solid lines are the exact Zoeppritz solution and dashed lines are the Shuey approximation, so the gap between them is a reading rather than a claim.">
       {controls}
 
-      <div className="overflow-x-auto">
+      <div data-canvas="chart" className={CHART_PLATE_CLASS}>
         <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ minWidth: 420 }} role="img"
           aria-label="Reflection coefficient against incidence angle for the brine and gas cases">
-          <rect x="0" y="0" width={W} height={H} fill="#0F172A" />
-          <line x1={PAD.left} y1={sy(0)} x2={W - PAD.right} y2={sy(0)} stroke="#475569" strokeDasharray="3 3" />
-          <line x1={PAD.left} y1={PAD.top} x2={PAD.left} y2={H - PAD.bottom} stroke="#334155" />
+          <rect x="0" y="0" width={W} height={H} fill={CH.plate} />
+          <line x1={PAD.left} y1={sy(0)} x2={W - PAD.right} y2={sy(0)} stroke={CH.axis} strokeDasharray="3 3" />
+          <line x1={PAD.left} y1={PAD.top} x2={PAD.left} y2={H - PAD.bottom} stroke={CH.grid} />
           {['brine', 'gas'].map((k) => (
             <g key={k}>
               <path d={line(d[k].curve, 'exact')} fill="none" stroke={COLOR[k]} strokeWidth="2" />
@@ -126,12 +127,12 @@ const AvoExplorer = () => {
           ))}
           {d.brine.crossingDeg !== null && (
             <line x1={sx(d.brine.crossingDeg)} y1={PAD.top} x2={sx(d.brine.crossingDeg)} y2={H - PAD.bottom}
-              stroke="#f87171" strokeWidth="1" strokeDasharray="4 4" />
+              stroke={CH.red} strokeWidth="1" strokeDasharray="4 4" />
           )}
-          <text x={PAD.left} y={H - 14} fill="#64748b" fontSize="9">0 deg</text>
-          <text x={W - PAD.right - 40} y={H - 14} fill="#64748b" fontSize="9">{ANGLE_MAX_DEG} deg</text>
-          <text x={6} y={PAD.top + 10} fill="#64748b" fontSize="9">{fmt(rMax, 3)}</text>
-          <text x={6} y={H - PAD.bottom} fill="#64748b" fontSize="9">{fmt(rMin, 3)}</text>
+          <text x={PAD.left} y={H - 14} fill={CH.text} fontSize="9">0 deg</text>
+          <text x={W - PAD.right - 40} y={H - 14} fill={CH.text} fontSize="9">{ANGLE_MAX_DEG} deg</text>
+          <text x={6} y={PAD.top + 10} fill={CH.text} fontSize="9">{fmt(rMax, 3)}</text>
+          <text x={6} y={H - PAD.bottom} fill={CH.text} fontSize="9">{fmt(rMin, 3)}</text>
         </svg>
       </div>
 

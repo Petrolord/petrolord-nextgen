@@ -4,6 +4,7 @@ import {
   computePopulation, parsePolygon, polygonText,
 } from '@/lib/earthmodelTeaching';
 import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { SVG_CHART as CH, CHART_PLATE_CLASS } from '@/components/course/panels/readerChart';
 
 // Population explorer: zone-A porosity populated per fault block, drawn
 // along the model row through y = 2200 because that row crosses the fault
@@ -54,9 +55,9 @@ const PopulationExplorer = () => {
         <NumField label="Probe y (m)" value={probeY} onChange={setProbeY} />
       </div>
       <div>
-        <label className="text-gray-400 text-xs mb-1 block" htmlFor="em-fault-poly">Fault polygon, block 1 inside (x,y; x,y; ...)</label>
+        <label className="text-pl-muted text-xs mb-1 block" htmlFor="em-fault-poly">Fault polygon, block 1 inside (x,y; x,y; ...)</label>
         <input id="em-fault-poly" type="text" value={poly} onChange={(e) => setPoly(e.target.value)}
-          className="w-full bg-gray-700 text-white border border-gray-600 rounded-md h-8 text-sm px-2" />
+          className="w-full bg-pl-surface text-pl-text border border-pl-border-strong rounded-md h-8 text-sm px-2" />
       </div>
     </div>
   );
@@ -95,33 +96,33 @@ const PopulationExplorer = () => {
       subtitle={`Zone-A porosity along the model row at y = ${m.profileY}, populated per fault block from the zone-A control points (weight = MD interval). ${crossX != null ? `The fault crosses this row between x = ${m.jump.xBlock1} and x = ${m.jump.xBlock0}.` : 'The fault does not cross this row.'} It opens on the golden fault and variogram.`}>
       {controls}
 
-      <div className="overflow-x-auto">
+      <div data-canvas="chart" className={CHART_PLATE_CLASS}>
         <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ minWidth: 420 }} role="img"
           aria-label={`Porosity along the row through y equals ${m.profileY}`}>
-          <rect x="0" y="0" width={W} height={H} fill="#0F172A" />
-          <line x1={PAD.left} y1={H - PAD.bottom} x2={W - PAD.right} y2={H - PAD.bottom} stroke="#334155" />
-          <line x1={PAD.left} y1={PAD.top} x2={PAD.left} y2={H - PAD.bottom} stroke="#334155" />
+          <rect x="0" y="0" width={W} height={H} fill={CH.plate} />
+          <line x1={PAD.left} y1={H - PAD.bottom} x2={W - PAD.right} y2={H - PAD.bottom} stroke={CH.grid} />
+          <line x1={PAD.left} y1={PAD.top} x2={PAD.left} y2={H - PAD.bottom} stroke={CH.grid} />
           {faultX != null && (
             <g>
-              <line x1={faultX} y1={PAD.top} x2={faultX} y2={H - PAD.bottom} stroke="#F97316" strokeDasharray="4 3" />
-              <text x={faultX + 4} y={PAD.top + 12} fill="#F97316" fontSize="9">fault</text>
+              <line x1={faultX} y1={PAD.top} x2={faultX} y2={H - PAD.bottom} stroke={CH.orange} strokeDasharray="4 3" />
+              <text x={faultX + 4} y={PAD.top + 12} fill={CH.orange} fontSize="9">fault</text>
             </g>
           )}
-          <path d={seg(1)} fill="none" stroke="#38BDF8" strokeWidth="2" />
-          <path d={seg(0)} fill="none" stroke="#BFFF00" strokeWidth="2" />
+          <path d={seg(1)} fill="none" stroke={CH.blue} strokeWidth="2" />
+          <path d={seg(0)} fill="none" stroke={CH.green} strokeWidth="2" />
           {m.byBlock[0].concat(m.byBlock[1]).filter((p) => Math.abs(p.y - m.profileY) < 1).map((p) => (
             <g key={p.well}>
-              <circle cx={sx(p.x)} cy={sy(p.v)} r="5" fill="#fff" />
-              <text x={sx(p.x) + 7} y={sy(p.v) - 5} fill="#fff" fontSize="9">{p.well} {fmt(p.v, 4)}</text>
+              <circle cx={sx(p.x)} cy={sy(p.v)} r="5" fill={CH.halo} stroke={CH.casing} strokeWidth="1.5" />
+              <text x={sx(p.x) + 7} y={sy(p.v) - 5} fill={CH.ink} fontSize="9">{p.well} {fmt(p.v, 4)}</text>
             </g>
           ))}
-          <text x={PAD.left + 4} y={H - PAD.bottom - 6} fill="#38BDF8" fontSize="9">block 1</text>
-          <text x={W - PAD.right - 56} y={H - PAD.bottom - 6} fill="#BFFF00" fontSize="9">block 0</text>
-          <text x={PAD.left} y={H - 14} fill="#64748b" fontSize="9">x 1000</text>
-          <text x={W - PAD.right - 44} y={H - 14} fill="#64748b" fontSize="9">x 2200</text>
-          <text x={6} y={PAD.top + 10} fill="#64748b" fontSize="9">{fmt(vMax, 3)}</text>
-          <text x={6} y={H - PAD.bottom} fill="#64748b" fontSize="9">{fmt(vMin, 3)}</text>
-          <text x={6} y={H / 2} fill="#64748b" fontSize="9">phi</text>
+          <text x={PAD.left + 4} y={H - PAD.bottom - 6} fill={CH.blue} fontSize="9">block 1</text>
+          <text x={W - PAD.right - 56} y={H - PAD.bottom - 6} fill={CH.green} fontSize="9">block 0</text>
+          <text x={PAD.left} y={H - 14} fill={CH.text} fontSize="9">x 1000</text>
+          <text x={W - PAD.right - 44} y={H - 14} fill={CH.text} fontSize="9">x 2200</text>
+          <text x={6} y={PAD.top + 10} fill={CH.text} fontSize="9">{fmt(vMax, 3)}</text>
+          <text x={6} y={H - PAD.bottom} fill={CH.text} fontSize="9">{fmt(vMin, 3)}</text>
+          <text x={6} y={H / 2} fill={CH.text} fontSize="9">phi</text>
         </svg>
       </div>
 

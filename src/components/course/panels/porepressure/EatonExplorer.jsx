@@ -4,6 +4,7 @@ import {
   EXPLORER_N_OPTIONS_PRO, EXPLORER_THRESHOLDS_MPA, computeEatonExplorer,
 } from '@/lib/porepressureTeaching';
 import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { SVG_CHART as CH, CHART_PLATE_CLASS } from '@/components/course/panels/readerChart';
 
 // Eaton explorer: the full prognosis down the golden well with the tier's
 // three levers exposed: the exponent, the trend the ratio is measured
@@ -74,38 +75,40 @@ const EatonExplorer = () => {
     <PanelShell title="Eaton explorer"
       subtitle="The prognosis over the golden sonic. The exponent, the trend and the onset threshold are the choices an interpreter actually makes, so all three are exposed.">
       {inputs}
-      <div className="text-xs text-gray-500">
+      <div className="text-xs text-pl-muted">
         The panel opens on the teaching case: the golden well&apos;s header at n = {TEACHING_EATON_N}, a 0.05 MPa
         onset threshold and Poisson&apos;s ratio {PARAMS.nu}. Try {EXPLORER_N_OPTIONS_PRO.join(', ')} for the exponent
         and {EXPLORER_THRESHOLDS_MPA.join(', ')} MPa for the threshold. A capstone brief states a setting of its
         own; type it in.
       </div>
 
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full mt-3" role="img"
-        aria-label="Pore pressure, fracture pressure, hydrostatic and overburden against depth">
-        <rect x={PAD.left} y={PAD.top} width={plotW} height={plotH} fill="none" stroke="#d4d4d8" />
-        {[0, 20, 40, 60, 80].map((p) => (
-          <g key={p}>
-            <line x1={sx(p)} y1={PAD.top} x2={sx(p)} y2={PAD.top + plotH} stroke="#f1f1f4" />
-            <text x={sx(p)} y={H - 12} fontSize="10" textAnchor="middle" fill="#71717a">{p}</text>
-          </g>
-        ))}
-        {[0, 1000, 2000, 3000, 4000].map((z) => (
-          <text key={z} x={PAD.left - 6} y={sy(z) + 3} fontSize="10" textAnchor="end" fill="#71717a">{z}</text>
-        ))}
-        <line x1={PAD.left} y1={sy(RAMP_TOP_M)} x2={PAD.left + plotW} y2={sy(RAMP_TOP_M)} stroke="#f59e0b" strokeDasharray="3 3" />
-        <text x={PAD.left + plotW - 4} y={sy(RAMP_TOP_M) - 4} fontSize="9" textAnchor="end" fill="#b45309">ramp top 2500 m</text>
-        <path d={path('hydroMpa')} fill="none" stroke="#0ea5e9" strokeWidth="1.4" strokeDasharray="5 3" />
-        <path d={path('obMpa')} fill="none" stroke="#525252" strokeWidth="1.4" strokeDasharray="5 3" />
-        <path d={path('fpMpa')} fill="none" stroke="#16a34a" strokeWidth="1.6" />
-        <path d={path('ppMpa')} fill="none" stroke="#dc2626" strokeWidth="2" />
-        {m.onsetM != null && (
-          <circle cx={sx(m.curve.find((p) => p.z >= m.onsetM)?.ppMpa ?? 0)} cy={sy(m.onsetM)} r="4" fill="#dc2626" />
-        )}
-        <text x={PAD.left + 6} y={PAD.top + 12} fontSize="10" fill="#0369a1">hydrostatic</text>
-        <text x={PAD.left + plotW - 6} y={PAD.top + 12} fontSize="10" textAnchor="end" fill="#404040">overburden</text>
-        <text x={W / 2} y={H - 2} fontSize="10" textAnchor="middle" fill="#71717a">pressure (MPa); pore pressure red, fracture green</text>
-      </svg>
+      <div data-canvas="chart" className={`${CHART_PLATE_CLASS} mt-3`}>
+        <svg viewBox={`0 0 ${W} ${H}`} className="w-full" role="img"
+          aria-label="Pore pressure, fracture pressure, hydrostatic and overburden against depth">
+          <rect x={PAD.left} y={PAD.top} width={plotW} height={plotH} fill="none" stroke={CH.axis} />
+          {[0, 20, 40, 60, 80].map((p) => (
+            <g key={p}>
+              <line x1={sx(p)} y1={PAD.top} x2={sx(p)} y2={PAD.top + plotH} stroke={CH.grid} />
+              <text x={sx(p)} y={H - 12} fontSize="10" textAnchor="middle" fill={CH.text}>{p}</text>
+            </g>
+          ))}
+          {[0, 1000, 2000, 3000, 4000].map((z) => (
+            <text key={z} x={PAD.left - 6} y={sy(z) + 3} fontSize="10" textAnchor="end" fill={CH.text}>{z}</text>
+          ))}
+          <line x1={PAD.left} y1={sy(RAMP_TOP_M)} x2={PAD.left + plotW} y2={sy(RAMP_TOP_M)} stroke={CH.amber} strokeDasharray="3 3" />
+          <text x={PAD.left + plotW - 4} y={sy(RAMP_TOP_M) - 4} fontSize="9" textAnchor="end" fill="#b45309">ramp top 2500 m</text>
+          <path d={path('hydroMpa')} fill="none" stroke={CH.blue} strokeWidth="1.4" strokeDasharray="5 3" />
+          <path d={path('obMpa')} fill="none" stroke="#525252" strokeWidth="1.4" strokeDasharray="5 3" />
+          <path d={path('fpMpa')} fill="none" stroke={CH.green} strokeWidth="1.6" />
+          <path d={path('ppMpa')} fill="none" stroke={CH.red} strokeWidth="2" />
+          {m.onsetM != null && (
+            <circle cx={sx(m.curve.find((p) => p.z >= m.onsetM)?.ppMpa ?? 0)} cy={sy(m.onsetM)} r="4" fill={CH.red} />
+          )}
+          <text x={PAD.left + 6} y={PAD.top + 12} fontSize="10" fill="#0369a1">hydrostatic</text>
+          <text x={PAD.left + plotW - 6} y={PAD.top + 12} fontSize="10" textAnchor="end" fill="#404040">overburden</text>
+          <text x={W / 2} y={H - 2} fontSize="10" textAnchor="middle" fill={CH.text}>pressure (MPa); pore pressure red, fracture green</text>
+        </svg>
+      </div>
 
       <TileGrid>
         <Tile label="Overpressure onset" value={m.onsetM == null ? 'none' : String(m.onsetM)} unit="m bml" />

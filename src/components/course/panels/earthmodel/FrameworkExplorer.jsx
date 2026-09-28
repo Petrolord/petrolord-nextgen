@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { MODEL_SPEC, SOURCE_COVER, computeFramework } from '@/lib/earthmodelTeaching';
 import { isNull } from '@petrolord/engines/engines/earthmodeling/framework.js';
 import { PanelShell, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { SVG_CHART as CH, CHART_PLATE_CLASS } from '@/components/course/panels/readerChart';
 
 // Framework explorer: the three clamped surfaces and the two zone
 // thickness grids on the model frame. Zone B is drawn with its pinched
@@ -25,7 +26,7 @@ const VIEWS = [
 function ramp(t, kind) {
   const f = Math.max(0, Math.min(1, t));
   if (kind === 'surface') {
-    return `rgb(${Math.round(191 + (56 - 191) * f)},${Math.round(255 + (89 - 255) * f)},${Math.round(0 + (189 - 0) * f)})`;
+    return `rgb(${Math.round(217 + (56 - 217) * f)},${Math.round(119 + (89 - 119) * f)},${Math.round(6 + (189 - 6) * f)})`;
   }
   return `rgb(${Math.round(226 + (22 - 226) * f)},${Math.round(232 + (128 - 232) * f)},${Math.round(170 + (61 - 170) * f)})`;
 }
@@ -123,8 +124,8 @@ const FrameworkExplorer = () => {
         <rect key={`${r}-${c}`}
           x={PAD.left + c * cw} y={PAD.top + (S.ny - 1 - r) * ch}
           width={cw + 0.5} height={ch + 0.5}
-          fill={pinched ? '#0F172A' : ramp(t, v.kind)}
-          stroke={pinched ? '#f472b6' : 'none'} strokeWidth={pinched ? 0.4 : 0} />,
+          fill={pinched ? CH.plate : ramp(t, v.kind)}
+          stroke={pinched ? CH.pink : 'none'} strokeWidth={pinched ? 0.4 : 0} />,
       );
     }
   }
@@ -137,28 +138,28 @@ const FrameworkExplorer = () => {
         {VIEWS.map((x) => (
           <button key={x.key} type="button" onClick={() => setView(x.key)}
             className={`px-3 py-1.5 rounded-md border text-sm ${view === x.key
-              ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold'
-              : 'bg-gray-800 text-gray-300 border-gray-600'}`}>
+              ? 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold'
+              : 'bg-pl-sunken text-pl-muted border-pl-border hover:text-pl-text'}`}>
             {x.label}
           </button>
         ))}
       </div>
 
-      <div className="overflow-x-auto">
+      <div data-canvas="chart" className={CHART_PLATE_CLASS}>
         <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ minWidth: 420 }} role="img"
           aria-label={`${v.label} on the model frame`}>
-          <rect x="0" y="0" width={W} height={H} fill="#0F172A" />
+          <rect x="0" y="0" width={W} height={H} fill={CH.plate} />
           {cells}
-          <text x="12" y="16" fill="#e2e8f0" fontSize="10">{v.label}</text>
-          <text x={W - 12} y="16" fill="#64748b" fontSize="9" textAnchor="end">
+          <text x="12" y="16" fill={CH.ink} fontSize="10">{v.label}</text>
+          <text x={W - 12} y="16" fill={CH.text} fontSize="9" textAnchor="end">
             {v.kind === 'surface' ? 'pale is shallow, dark is deep' : 'pale is thin, dark is thick'}
           </text>
           {v.kind === 'thickness' && stats.zero > 0 && (
-            <text x="12" y={H - 10} fill="#f472b6" fontSize="9">
+            <text x="12" y={H - 10} fill={CH.pink} fontSize="9">
               {stats.zero} pinched nodes outlined in pink carry zero thickness
             </text>
           )}
-          <text x={W - 12} y={H - 10} fill="#64748b" fontSize="9" textAnchor="end">
+          <text x={W - 12} y={H - 10} fill={CH.text} fontSize="9" textAnchor="end">
             origin ({S.x0}, {S.y0}), north up
           </text>
         </svg>

@@ -3,6 +3,7 @@ import { HEAT_FIXTURE, heatColumn, twoLayerHeat } from '@/lib/basinTeaching';
 import { BurialCompactionEngine } from '@petrolord/engines/engines/basin/BurialCompactionEngine.js';
 import { getCompactionParams } from '@petrolord/engines/engines/basin/CompactionModelLibrary.js';
 import { PanelShell, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { SVG_CHART as CH, CHART_PLATE_CLASS } from '@/components/course/panels/readerChart';
 
 // Burial and heat explorer: the compaction curve for a lithology the
 // learner picks, the decompaction of a 100 m layer from a depth they
@@ -97,8 +98,8 @@ const BurialHeatExplorer = () => {
         {LITHS.map((l) => (
           <button key={l} type="button" onClick={() => setLith(l)}
             className={`px-3 py-1.5 rounded-md border text-sm ${lith === l
-              ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold'
-              : 'bg-gray-800 text-gray-300 border-gray-600'}`}>
+              ? 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold'
+              : 'bg-pl-sunken text-pl-muted border-pl-border hover:text-pl-text'}`}>
             {l}
           </button>
         ))}
@@ -106,7 +107,7 @@ const BurialHeatExplorer = () => {
       <div className="grid gap-3 grid-cols-2 sm:grid-cols-4 items-end">
         <NumField label="Depth for porosity (m)" value={depth} onChange={setDepth} />
         <NumField label="Burial depth of a 100 m layer (m)" value={burial} onChange={setBurial} />
-        <div className="text-xs text-gray-500 sm:col-span-2">
+        <div className="text-xs text-pl-muted sm:col-span-2">
           The worked case reads shale porosity at 2000 m and restores a 100 m shale from 1000 m.
         </div>
       </div>
@@ -117,26 +118,26 @@ const BurialHeatExplorer = () => {
         <NumField label="Lower layer k (W/m/K)" value={heatIn.kLower} onChange={setH('kLower')} />
       </div>
 
-      <div className="overflow-x-auto">
+      <div data-canvas="chart" className={CHART_PLATE_CLASS}>
         <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ minWidth: 460 }} role="img"
           aria-label={`Compaction curve for ${lith} and the steady heat column`}>
-          <rect x="0" y="0" width={W} height={H} fill="#0F172A" />
+          <rect x="0" y="0" width={W} height={H} fill={CH.plate} />
 
-          <polyline points={phiPts.join(' ')} fill="none" stroke="#38bdf8" strokeWidth="1.8" />
+          <polyline points={phiPts.join(' ')} fill="none" stroke={CH.blue} strokeWidth="1.8" />
           <line x1={sxPhi(read.phi)} y1={syZ(zRaw)} x2={PAD.left} y2={syZ(zRaw)}
-            stroke="#e2e8f0" strokeWidth="0.8" strokeDasharray="3 3" />
-          <circle cx={sxPhi(read.phi)} cy={syZ(zRaw)} r="3.5" fill="#38bdf8" stroke="#fff" strokeWidth="1" />
-          <text x={PAD.left} y="14" fill="#38bdf8" fontSize="9">porosity of {lith} (0 to 0.7)</text>
-          <text x={PAD.left} y={H - 14} fill="#64748b" fontSize="9">0 to {MAX_Z} m depth</text>
+            stroke={CH.ink} strokeWidth="0.8" strokeDasharray="3 3" />
+          <circle cx={sxPhi(read.phi)} cy={syZ(zRaw)} r="3.5" fill={CH.blue} stroke={CH.halo} strokeWidth="1" />
+          <text x={PAD.left} y="14" fill={CH.blue} fontSize="9">porosity of {lith} (0 to 0.7)</text>
+          <text x={PAD.left} y={H - 14} fill={CH.text} fontSize="9">0 to {MAX_Z} m depth</text>
 
-          <polyline points={heatPts.join(' ')} fill="none" stroke="#f87171" strokeWidth="1.8" />
+          <polyline points={heatPts.join(' ')} fill="none" stroke={CH.red} strokeWidth="1.8" />
           <line x1={sxT(0)} y1={syH(1000)} x2={sxT(tMax)} y2={syH(1000)}
-            stroke="#64748b" strokeWidth="0.8" strokeDasharray="3 4" />
-          <text x={sxT(0)} y="14" fill="#f87171" fontSize="9">steady temperature (0 to {tMax} degC)</text>
-          <text x={sxT(0) + 4} y={syH(500)} fill="#94a3b8" fontSize="9">{fmt(gradTop, 1)} degC/km</text>
-          <text x={sxT(0) + 4} y={syH(1500)} fill="#94a3b8" fontSize="9">{fmt(gradBot, 1)} degC/km</text>
-          <text x={sxT(tMax)} y={syH(1000) - 4} fill="#64748b" fontSize="9" textAnchor="end">k changes at 1000 m</text>
-          <text x={sxT(0)} y={H - 14} fill="#64748b" fontSize="9">0 to {zHeatMax} m</text>
+            stroke={CH.axis} strokeWidth="0.8" strokeDasharray="3 4" />
+          <text x={sxT(0)} y="14" fill={CH.red} fontSize="9">steady temperature (0 to {tMax} degC)</text>
+          <text x={sxT(0) + 4} y={syH(500)} fill={CH.text} fontSize="9">{fmt(gradTop, 1)} degC/km</text>
+          <text x={sxT(0) + 4} y={syH(1500)} fill={CH.text} fontSize="9">{fmt(gradBot, 1)} degC/km</text>
+          <text x={sxT(tMax)} y={syH(1000) - 4} fill={CH.text} fontSize="9" textAnchor="end">k changes at 1000 m</text>
+          <text x={sxT(0)} y={H - 14} fill={CH.text} fontSize="9">0 to {zHeatMax} m</text>
         </svg>
       </div>
 

@@ -4,6 +4,7 @@ import {
   computeBlockModel,
 } from '@/lib/reservoircalcTeaching';
 import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { SVG_CHART as CH, CHART_PLATE_CLASS } from '@/components/course/panels/readerChart';
 
 // Block explorer: partition the Ekene accumulation with a sealing fault the
 // learner can move, and give each block its own contact. The map colours
@@ -12,8 +13,8 @@ import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/compo
 const W = 560;
 const H = 460;
 const PAD = { left: 48, top: 16, right: 16, bottom: 40 };
-const WEST_FILL = '#38bdf8';
-const EAST_FILL = '#fbbf24';
+const WEST_FILL = CH.blue;
+const EAST_FILL = CH.amber;
 
 const fmt = (v, d = 2) => (Number.isFinite(v) ? v.toFixed(d) : '-');
 const pct = (v) => `${fmt(v * 100, 1)} pct`;
@@ -77,22 +78,22 @@ const BlockExplorer = () => {
         <NumField label="West block contact (m)" value={owcWest} onChange={setOwcWest} />
         <NumField label="East block contact (m)" value={owcEast} onChange={setOwcEast} />
       </div>
-      <div className="text-xs text-gray-500">
+      <div className="text-xs text-pl-muted">
         The panel opens on the teaching case: the fault at {FAULT_X_M} m and both contacts at
         {' '}{TEACHING_OWC_M} m. Try {BLOCK_OWC_OPTIONS.join(', ')} m on either side. A capstone brief
         states its own fault and contacts; type them in here.
       </div>
 
-      <div className="overflow-x-auto">
+      <div data-canvas="chart" className={CHART_PLATE_CLASS}>
         <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ minWidth: 420 }} role="img"
           aria-label={`Fault block map of the Ekene SAND with the fault at ${fmt(model.faultX, 0)} m`}>
-          <rect x="0" y="0" width={W} height={H} fill="#0F172A" />
+          <rect x="0" y="0" width={W} height={H} fill={CH.plate} />
           {cells}
 
           {/* the fault trace, drawn on the boundary the label test uses */}
           <line x1={sx(model.faultX)} y1={PAD.top} x2={sx(model.faultX)} y2={H - PAD.bottom}
-            stroke="#f87171" strokeWidth="2" strokeDasharray="6 3" />
-          <text x={sx(model.faultX) + 4} y={PAD.top + 10} fill="#f87171" fontSize="9">
+            stroke={CH.red} strokeWidth="2" strokeDasharray="6 3" />
+          <text x={sx(model.faultX) + 4} y={PAD.top + 10} fill={CH.red} fontSize="9">
             fault {fmt(model.faultX, 0)} m
           </text>
 
@@ -101,17 +102,17 @@ const BlockExplorer = () => {
             return (
               <g key={w.name}>
                 <circle cx={sx(w.x)} cy={sy(w.y)} r="4"
-                  fill={dry ? '#0F172A' : '#fff'} stroke={dry ? '#f87171' : '#fff'} strokeWidth="1.5" />
+                  fill={CH.halo} stroke={dry ? CH.red : CH.casing} strokeWidth="1.5" />
                 <text x={sx(w.x) + 7} y={sy(w.y) - 4} fontSize="9"
-                  fill={dry ? '#f87171' : (w.west ? WEST_FILL : EAST_FILL)}>
+                  fill={dry ? CH.red : (w.west ? WEST_FILL : EAST_FILL)}>
                   {w.name} {w.west ? 'W' : 'E'}{dry ? ' dry' : ''}
                 </text>
               </g>
             );
           })}
 
-          <text x={PAD.left} y={H - 14} fill="#64748b" fontSize="9">x {xMin} to {xMax} m</text>
-          <text x={PAD.left} y={12} fill="#64748b" fontSize="9">y {yMin} to {yMax} m (north up)</text>
+          <text x={PAD.left} y={H - 14} fill={CH.text} fontSize="9">x {xMin} to {xMax} m</text>
+          <text x={PAD.left} y={12} fill={CH.text} fontSize="9">y {yMin} to {yMax} m (north up)</text>
         </svg>
       </div>
 

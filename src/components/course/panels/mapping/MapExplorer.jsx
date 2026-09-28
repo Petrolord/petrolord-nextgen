@@ -5,6 +5,7 @@ import {
 import { isNull } from '@petrolord/engines/lib/gridding/gridmath.js';
 import { PanelShell, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 import { useMappingCase } from '@/components/course/panels/mapping/caseInputs';
+import { SVG_CHART as CH, CHART_PLATE_CLASS } from '@/components/course/panels/readerChart';
 
 // Map explorer: grid the Ekene TOP_SAND surface at a cell size the
 // learner chooses, then read the map. Control points are posted and the
@@ -16,13 +17,13 @@ const PAD = { left: 48, top: 16, right: 16, bottom: 40 };
 
 const fmt = (v, d = 2) => (Number.isFinite(v) ? v.toFixed(d) : '-');
 
-// Depth colour: shallow (crest) lime through to deep slate.
+// Depth colour: shallow (crest) amber through to deep blue.
 function depthColor(z, zMin, zMax) {
   if (!Number.isFinite(z) || zMax === zMin) return 'transparent';
   const t = (z - zMin) / (zMax - zMin);
-  const r = Math.round(191 + (56 - 191) * t);
-  const g = Math.round(255 + (89 - 255) * t);
-  const b = Math.round(0 + (189 - 0) * t);
+  const r = Math.round(217 + (56 - 217) * t);
+  const g = Math.round(119 + (89 - 119) * t);
+  const b = Math.round(6 + (189 - 6) * t);
   return `rgb(${r},${g},${b})`;
 }
 
@@ -89,23 +90,23 @@ const MapExplorer = () => {
       {c.ui}
       <div className="grid gap-3 grid-cols-2 sm:grid-cols-4 items-end">
         <NumField label="Cell size (m)" value={cell} onChange={setCell} />
-        <div className="text-xs text-gray-500 sm:col-span-3">
+        <div className="text-xs text-pl-muted sm:col-span-3">
           The Ekene map is read at {TEACHING_CELL_M} m. Try 50 and 200 m: the crest barely moves,
           but the node counts change completely.
         </div>
       </div>
 
-      <div className="overflow-x-auto">
+      <div data-canvas="chart" className={CHART_PLATE_CLASS}>
         <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ minWidth: 420 }} role="img"
           aria-label={`Depth map of the ${TOP_NAME} surface`}>
-          <rect x="0" y="0" width={W} height={H} fill="#0F172A" />
+          <rect x="0" y="0" width={W} height={H} fill={CH.plate} />
           {cells}
 
           {contours.map((c) => (
             <g key={c.level}>
               {c.lines.map((pts, i) => (
                 <polyline key={i} points={pts.map(([x, y]) => `${sx(x)},${sy(y)}`).join(' ')}
-                  fill="none" stroke="#e2e8f0" strokeWidth="0.9" opacity="0.75" />
+                  fill="none" stroke={CH.ink} strokeWidth="0.9" opacity="0.75" />
               ))}
             </g>
           ))}
@@ -115,8 +116,8 @@ const MapExplorer = () => {
             const top = w.tops.find((t) => t.name === TOP_NAME);
             return (
               <g key={w.name}>
-                <circle cx={sx(w.surface_x)} cy={sy(w.surface_y)} r="4" fill="#0F172A" stroke="#fff" strokeWidth="1.5" />
-                <text x={sx(w.surface_x) + 7} y={sy(w.surface_y) - 4} fill="#e2e8f0" fontSize="9">
+                <circle cx={sx(w.surface_x)} cy={sy(w.surface_y)} r="4" fill={CH.halo} stroke={CH.casing} strokeWidth="1.5" />
+                <text x={sx(w.surface_x) + 7} y={sy(w.surface_y) - 4} fill={CH.ink} fontSize="9">
                   {w.name} {top.md_m}
                 </text>
               </g>
@@ -126,12 +127,12 @@ const MapExplorer = () => {
           {/* prospect */}
           <g>
             <path d={`M ${sx(T.x)} ${sy(T.y) - 6} L ${sx(T.x) + 6} ${sy(T.y)} L ${sx(T.x)} ${sy(T.y) + 6} L ${sx(T.x) - 6} ${sy(T.y)} Z`}
-              fill="#f472b6" stroke="#fff" strokeWidth="1" />
-            <text x={sx(T.x) + 9} y={sy(T.y) + 12} fill="#f472b6" fontSize="9">{T.label}</text>
+              fill={CH.pink} stroke={CH.halo} strokeWidth="1" />
+            <text x={sx(T.x) + 9} y={sy(T.y) + 12} fill={CH.pink} fontSize="9">{T.label}</text>
           </g>
 
-          <text x={PAD.left} y={H - 14} fill="#64748b" fontSize="9">x {xMin} to {xMax} m</text>
-          <text x={PAD.left} y={12} fill="#64748b" fontSize="9">y {yMin} to {yMax} m (north up)</text>
+          <text x={PAD.left} y={H - 14} fill={CH.text} fontSize="9">x {xMin} to {xMax} m</text>
+          <text x={PAD.left} y={12} fill={CH.text} fontSize="9">y {yMin} to {yMax} m (north up)</text>
         </svg>
       </div>
 

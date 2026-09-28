@@ -3,6 +3,7 @@ import {
   TEACHING_OWC_M, TEACHING_WELLS, WELL_PHI, PROPS, P1, PROPERTY_METHODS, computePropertyModel,
 } from '@/lib/reservoircalcTeaching';
 import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { SVG_CHART as CH, CHART_PLATE_CLASS } from '@/components/course/panels/readerChart';
 
 // Property explorer: fill the porosity grid from the six well values by
 // each of the three population methods and read what the choice is worth.
@@ -20,13 +21,13 @@ const METHOD_LABEL = {
   krige: 'krige (spherical, honours data)',
 };
 
-// Low porosity slate to high porosity lime.
+// Low porosity blue to high porosity amber.
 function phiColor(v, lo, hi) {
   if (!Number.isFinite(v) || hi === lo) return 'transparent';
   const f = Math.max(0, Math.min(1, (v - lo) / (hi - lo)));
-  const r = Math.round(56 + (191 - 56) * f);
-  const g = Math.round(89 + (255 - 89) * f);
-  const b = Math.round(189 + (0 - 189) * f);
+  const r = Math.round(56 + (217 - 56) * f);
+  const g = Math.round(89 + (119 - 89) * f);
+  const b = Math.round(189 + (6 - 189) * f);
   return `rgb(${r},${g},${b})`;
 }
 
@@ -111,7 +112,7 @@ const PropertyExplorer = () => {
       <div className="grid gap-3 grid-cols-1 sm:grid-cols-3 items-end">
         <SelectField label="Population method" value={method} onChange={setMethod}
           options={PROPERTY_METHODS.map((v) => [v, METHOD_LABEL[v]])} />
-        <div className="text-xs text-gray-500 sm:col-span-2">
+        <div className="text-xs text-pl-muted sm:col-span-2">
           The panel opens on the teaching case, the trend at a {TEACHING_OWC_M} m contact. Switch to
           constant and to krige and watch the booking, the porosity at P-1 and the well residuals
           move together. A capstone brief states its own contact and well values; type them below.
@@ -119,10 +120,10 @@ const PropertyExplorer = () => {
       </div>
       {inputs}
 
-      <div className="overflow-x-auto">
+      <div data-canvas="chart" className={CHART_PLATE_CLASS}>
         <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ minWidth: 420 }} role="img"
           aria-label={`Porosity model of the Ekene SAND by the ${method} method`}>
-          <rect x="0" y="0" width={W} height={H} fill="#0F172A" />
+          <rect x="0" y="0" width={W} height={H} fill={CH.plate} />
           {cells}
 
           {m.residuals.map((r) => {
@@ -130,26 +131,27 @@ const PropertyExplorer = () => {
             const off = Math.abs(miss) > 1e-9;
             return (
               <g key={r.name}>
-                <circle cx={sx(r.x)} cy={sy(r.y)} r="4" fill="#fff"
-                  stroke={off ? '#f87171' : '#4ade80'} strokeWidth="1.5" />
-                <text x={sx(r.x) + 7} y={sy(r.y) - 4} fill="#e2e8f0" fontSize="9">
+                <circle cx={sx(r.x)} cy={sy(r.y)} r="4" fill={CH.halo}
+                  stroke={off ? CH.red : CH.green} strokeWidth="1.5" />
+                <text x={sx(r.x) + 7} y={sy(r.y) - 4} fill={CH.ink} fontSize="9">
                   {r.name} {fmt(r.measured, 2)}
                 </text>
                 <text x={sx(r.x) + 7} y={sy(r.y) + 6} fontSize="9"
-                  fill={off ? '#f87171' : '#4ade80'}>
+                  fill={off ? CH.red : CH.green}>
                   model {fmt(r.modelled, 4)} ({miss >= 0 ? '+' : ''}{fmt(miss, 4)})
                 </text>
               </g>
             );
           })}
 
-          <circle cx={sx(P1.x)} cy={sy(P1.y)} r="4" fill="none" stroke="#BFFF00" strokeWidth="2" />
-          <text x={sx(P1.x) + 7} y={sy(P1.y) + 12} fill="#BFFF00" fontSize="9">
+          <circle cx={sx(P1.x)} cy={sy(P1.y)} r="4" fill="none" stroke={CH.casing} strokeWidth="4" />
+          <circle cx={sx(P1.x)} cy={sy(P1.y)} r="4" fill="none" stroke={CH.lime} strokeWidth="2" />
+          <text x={sx(P1.x) + 7} y={sy(P1.y) + 12} fill={CH.ink} fontSize="9">
             P-1 {fmt(m.phiAtP1, 4)}
           </text>
 
-          <text x={PAD.left} y={H - 14} fill="#64748b" fontSize="9">x {xMin} to {xMax} m</text>
-          <text x={PAD.left} y={12} fill="#64748b" fontSize="9">y {yMin} to {yMax} m (north up)</text>
+          <text x={PAD.left} y={H - 14} fill={CH.text} fontSize="9">x {xMin} to {xMax} m</text>
+          <text x={PAD.left} y={12} fill={CH.text} fontSize="9">y {yMin} to {yMax} m (north up)</text>
         </svg>
       </div>
 

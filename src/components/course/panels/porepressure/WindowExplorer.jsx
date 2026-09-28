@@ -4,6 +4,7 @@ import {
   computeWindowExplorer, computeBowersFacts,
 } from '@/lib/porepressureTeaching';
 import { PanelShell, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { SVG_CHART as CH, CHART_PLATE_CLASS } from '@/components/course/panels/readerChart';
 
 // Window explorer: the prognosis converted to the driller's unit. The two
 // walls of the mud-weight window are drawn in equivalent mud weight against
@@ -84,36 +85,38 @@ const WindowExplorer = () => {
     <PanelShell title="Window explorer"
       subtitle="The mud-weight window down the golden well, referenced to sea level. The shaded band is where a mud weight may sit; the exponent moves its floor.">
       {inputs}
-      <div className="text-xs text-gray-500">
+      <div className="text-xs text-pl-muted">
         The panel opens on the teaching case: n = {TEACHING_EATON_N} (try 1.2, the low calibration) on the
         golden well&apos;s header, and the golden Bowers fixture (A {BOWERS_TEACHING.A}, B {BOWERS_TEACHING.B},
         sigma max {BOWERS_TEACHING.sigmaMaxMPa} MPa, U {BOWERS_TEACHING.U}). A capstone brief states a setting of
         its own; type it in.
       </div>
 
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full mt-3" role="img"
-        aria-label="Mud-weight window in equivalent mud weight against depth">
-        <rect x={PAD.left} y={PAD.top} width={plotW} height={plotH} fill="none" stroke="#d4d4d8" />
-        {[1000, 1250, 1500, 1750, 2000, 2250].map((e) => (
-          <g key={e}>
-            <line x1={sx(e)} y1={PAD.top} x2={sx(e)} y2={PAD.top + plotH} stroke="#f1f1f4" />
-            <text x={sx(e)} y={H - 12} fontSize="10" textAnchor="middle" fill="#71717a">{e}</text>
-          </g>
-        ))}
-        {[0, 1000, 2000, 3000, 4000].map((z) => (
-          <text key={z} x={PAD.left - 6} y={sy(z) + 3} fontSize="10" textAnchor="end" fill="#71717a">{z}</text>
-        ))}
-        <polygon points={band} fill="#bbf7d0" opacity="0.5" />
-        <line x1={PAD.left} y1={sy(RAMP_TOP_M)} x2={PAD.left + plotW} y2={sy(RAMP_TOP_M)} stroke="#f59e0b" strokeDasharray="3 3" />
-        <text x={PAD.left + plotW - 4} y={sy(RAMP_TOP_M) - 4} fontSize="9" textAnchor="end" fill="#b45309">ramp top 2500 m</text>
-        <path d={path('hydroEmw')} fill="none" stroke="#0ea5e9" strokeWidth="1.2" strokeDasharray="5 3" />
-        <path d={path('obEmw')} fill="none" stroke="#525252" strokeWidth="1.2" strokeDasharray="5 3" />
-        <path d={path('ppEmw')} fill="none" stroke="#dc2626" strokeWidth="2" />
-        <path d={path('fpEmw')} fill="none" stroke="#16a34a" strokeWidth="2" />
-        <text x={PAD.left + 6} y={PAD.top + 12} fontSize="10" fill="#0369a1">hydrostatic EMW</text>
-        <text x={PAD.left + plotW - 6} y={PAD.top + 12} fontSize="10" textAnchor="end" fill="#404040">overburden EMW</text>
-        <text x={W / 2} y={H - 2} fontSize="10" textAnchor="middle" fill="#71717a">equivalent mud weight (kg/m3); floor red, ceiling green</text>
-      </svg>
+      <div data-canvas="chart" className={`${CHART_PLATE_CLASS} mt-3`}>
+        <svg viewBox={`0 0 ${W} ${H}`} className="w-full" role="img"
+          aria-label="Mud-weight window in equivalent mud weight against depth">
+          <rect x={PAD.left} y={PAD.top} width={plotW} height={plotH} fill="none" stroke={CH.axis} />
+          {[1000, 1250, 1500, 1750, 2000, 2250].map((e) => (
+            <g key={e}>
+              <line x1={sx(e)} y1={PAD.top} x2={sx(e)} y2={PAD.top + plotH} stroke={CH.grid} />
+              <text x={sx(e)} y={H - 12} fontSize="10" textAnchor="middle" fill={CH.text}>{e}</text>
+            </g>
+          ))}
+          {[0, 1000, 2000, 3000, 4000].map((z) => (
+            <text key={z} x={PAD.left - 6} y={sy(z) + 3} fontSize="10" textAnchor="end" fill={CH.text}>{z}</text>
+          ))}
+          <polygon points={band} fill="#bbf7d0" opacity="0.5" />
+          <line x1={PAD.left} y1={sy(RAMP_TOP_M)} x2={PAD.left + plotW} y2={sy(RAMP_TOP_M)} stroke={CH.amber} strokeDasharray="3 3" />
+          <text x={PAD.left + plotW - 4} y={sy(RAMP_TOP_M) - 4} fontSize="9" textAnchor="end" fill="#b45309">ramp top 2500 m</text>
+          <path d={path('hydroEmw')} fill="none" stroke={CH.blue} strokeWidth="1.2" strokeDasharray="5 3" />
+          <path d={path('obEmw')} fill="none" stroke="#525252" strokeWidth="1.2" strokeDasharray="5 3" />
+          <path d={path('ppEmw')} fill="none" stroke={CH.red} strokeWidth="2" />
+          <path d={path('fpEmw')} fill="none" stroke={CH.green} strokeWidth="2" />
+          <text x={PAD.left + 6} y={PAD.top + 12} fontSize="10" fill="#0369a1">hydrostatic EMW</text>
+          <text x={PAD.left + plotW - 6} y={PAD.top + 12} fontSize="10" textAnchor="end" fill="#404040">overburden EMW</text>
+          <text x={W / 2} y={H - 2} fontSize="10" textAnchor="middle" fill={CH.text}>equivalent mud weight (kg/m3); floor red, ceiling green</text>
+        </svg>
+      </div>
 
       <TileGrid>
         <Tile label="Floor at TD (pore pressure)" value={fmt(m.ppEmwTd)} unit="kg/m3" />
