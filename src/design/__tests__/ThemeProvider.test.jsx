@@ -160,8 +160,20 @@ describe('route registry and cold load', () => {
     for (const p of ['/dashboard', '/search', '/dashboard/modules', '/dashboard/modules/x']) {
       expect({ p, themed: isThemedPath(p) }).toEqual({ p, themed: true });
     }
-    // /legacy-probe is the test-only unregistered route (3C registered /dashboard/apps/dca)
-    for (const p of ['/', '/login', '/dashboard/enroll', '/legacy-probe', '/searchx']) {
+    // /legacy-probe is the test-only unregistered route (2A registered /dashboard/enroll, 3C /dashboard/apps/dca)
+    for (const p of ['/', '/login', '/legacy-probe', '/searchx']) {
+      expect({ p, themed: isThemedPath(p) }).toEqual({ p, themed: false });
+    }
+  });
+
+  it('2A themes the learner and account pages', () => {
+    const w2a = ['/dashboard/enroll', '/dashboard/get-started', '/dashboard/devices', '/dashboard/waiver/:appSlug',
+      '/dashboard/certificates', '/dashboard/settings', '/dashboard/notifications', '/dashboard/sponsor'];
+    expect(THEMED_ROUTES).toEqual(expect.arrayContaining(w2a));
+    for (const p of ['/dashboard/enroll', '/dashboard/waiver/welldata', '/dashboard/certificates', '/dashboard/sponsor']) {
+      expect({ p, themed: isThemedPath(p) }).toEqual({ p, themed: true });
+    }
+    for (const p of ['/dashboard/waiver', '/dashboard/waiver/a/b', '/dashboard/settingsx']) {
       expect({ p, themed: isThemedPath(p) }).toEqual({ p, themed: false });
     }
   });
@@ -170,7 +182,8 @@ describe('route registry and cold load', () => {
     expect(coldLoadTheme('/dashboard')).toBe('light');
     window.localStorage.setItem(LAST_THEME_KEY, 'dark');
     expect(coldLoadTheme('/dashboard')).toBe('dark');
-    expect(coldLoadTheme('/dashboard/enroll')).toBeNull();
+    expect(coldLoadTheme('/legacy-probe')).toBeNull();
+    expect(coldLoadTheme('/dashboard/enroll')).toBe('dark');
     expect(coldLoadTheme('/')).toBeNull();
     render(<ThemedLoadingScreen theme="dark" />);
     expect(screen.getByTestId('themed-loading').getAttribute('data-pl-theme')).toBe('dark');

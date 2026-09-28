@@ -18,22 +18,25 @@ import {
 // N3.3 activation gate — a per-account, one-time flow: read the orientation,
 // then take the short entry assessment. Clearing the gate is what lets
 // academy_has_scope() resolve scope (server-side), unlocking Learning Mode.
+//
+// Design system (batch 2A): the page renders inside the signed-in scope
+// (src/design/rollout/w2a.js) and uses theme roles directly.
 
 const ORIENTATION_POINTS = [
   { icon: Compass, title: 'One account, four doors',
-    body: 'Your personal email is your Academy account — it stays with you after graduation, along with your certificates and alumni standing. You enrol per course through whichever door fits (self, campus, sponsored, residency).' },
+    body: 'Your personal email is your Academy account. It stays with you after graduation, along with your certificates and alumni standing. You enrol per course through whichever door fits (self, campus, sponsored, residency).' },
   { icon: BookOpen, title: 'Learn inside the real apps',
-    body: 'Each course is a real Petrolord app. You start in Learning Mode against bundled teaching datasets, then earn working, advanced and full capability as you certify Associate → Professional → Expert.' },
+    body: 'Each course is a real Petrolord app. You start in Learning Mode against bundled teaching datasets, then earn working, advanced and full capability as you certify at Associate, then Professional, then Expert.' },
   { icon: Database, title: 'Use only the provided datasets',
-    body: 'In Learning Mode you work on the Academy’s teaching datasets — the same golden files your practicals are graded against. Uploading your own data unlocks once you reach the Associate tier.' },
+    body: 'In Learning Mode you work on the Academy’s teaching datasets, the same golden files your practicals are graded against. Uploading your own data unlocks once you reach the Associate tier.' },
   { icon: ShieldCheck, title: 'Two devices, honest work',
     body: 'Your account is limited to two registered devices, and sessions are monitored. Academic-integrity rules apply to every assessment and certificate.' },
 ];
 
 const TIER_COPY = {
   beginner: 'We recommend starting at the Beginner tier.',
-  intermediate: 'Nice — you can consider starting at the Intermediate tier.',
-  advanced: 'Strong result — the Advanced tier is within reach.',
+  intermediate: 'Nice. You can consider starting at the Intermediate tier.',
+  advanced: 'Strong result. The Advanced tier is within reach.',
 };
 
 const GetStartedPage = () => {
@@ -103,7 +106,6 @@ const GetStartedPage = () => {
         toast({
           title: 'You’re all set',
           description: 'Learning Mode is unlocked.',
-          className: 'bg-[#BFFF00] text-slate-900',
         });
       } else if (res.retake_after) {
         toast({
@@ -122,7 +124,7 @@ const GetStartedPage = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <Loader2 className="h-8 w-8 animate-spin text-[#BFFF00]" />
+        <Loader2 className="h-8 w-8 animate-spin text-pl-primary-text" />
       </div>
     );
   }
@@ -136,95 +138,96 @@ const GetStartedPage = () => {
       <motion.div
         initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className="max-w-3xl mx-auto p-6 space-y-6"
+        className="max-w-3xl mx-auto px-4 py-6 sm:p-6 space-y-6"
       >
         <div>
-          <h1 className="text-3xl font-bold text-white flex items-center gap-2">
-            <GraduationCap className="h-7 w-7 text-[#BFFF00]" /> Get started
+          <h1 className="text-3xl font-bold tracking-tight text-pl-text flex items-center gap-2">
+            <GraduationCap className="h-7 w-7 text-pl-primary-text" aria-hidden="true" /> Get started
           </h1>
-          <p className="mt-1 text-gray-400">
+          <p className="mt-1 text-pl-muted">
             A quick orientation and a short placement assessment activate your account and unlock Learning Mode.
           </p>
         </div>
 
         {/* progress */}
-        <div className="flex items-center gap-3 text-sm">
-          <span className={`inline-flex items-center gap-1 ${orientationDone ? 'text-emerald-400' : 'text-[#BFFF00]'}`}>
+        <div className="flex flex-wrap items-center gap-3 text-sm">
+          <span className={`inline-flex items-center gap-1 ${orientationDone ? 'text-pl-success-text' : 'text-pl-primary-text font-medium'}`}>
             {orientationDone ? <CheckCircle2 className="h-4 w-4" /> : <Compass className="h-4 w-4" />} Orientation
           </span>
-          <span className="text-gray-600">→</span>
-          <span className={`inline-flex items-center gap-1 ${status?.assessment_taken ? 'text-emerald-400' : orientationDone ? 'text-[#BFFF00]' : 'text-gray-500'}`}>
+          <span className="text-pl-muted" aria-hidden="true">→</span>
+          <span className={`inline-flex items-center gap-1 ${status?.assessment_taken ? 'text-pl-success-text' : orientationDone ? 'text-pl-primary-text font-medium' : 'text-pl-muted'}`}>
             {status?.assessment_taken ? <CheckCircle2 className="h-4 w-4" /> : <ClipboardList className="h-4 w-4" />} Entry assessment
           </span>
-          <span className="text-gray-600">→</span>
-          <span className={`inline-flex items-center gap-1 ${status?.activated ? 'text-emerald-400' : 'text-gray-500'}`}>
+          <span className="text-pl-muted" aria-hidden="true">→</span>
+          <span className={`inline-flex items-center gap-1 ${status?.activated ? 'text-pl-success-text' : 'text-pl-muted'}`}>
             {status?.activated ? <CheckCircle2 className="h-4 w-4" /> : <GraduationCap className="h-4 w-4" />} Activated
           </span>
         </div>
 
         {status?.activated ? (
-          <Card className="bg-[#1E293B] border-emerald-700">
+          <Card className="border-pl-success/40">
             <CardContent className="py-8 text-center space-y-2">
-              <CheckCircle2 className="h-10 w-10 text-[#BFFF00] mx-auto" />
-              <p className="text-white text-lg font-semibold">Your account is active.</p>
-              <p className="text-gray-400 text-sm">Taking you to your dashboard…</p>
+              <CheckCircle2 className="h-10 w-10 text-pl-success-text mx-auto" aria-hidden="true" />
+              <p className="text-pl-text text-lg font-semibold">Your account is active.</p>
+              <p className="text-pl-muted text-sm">Taking you to your dashboard…</p>
             </CardContent>
           </Card>
         ) : !orientationDone ? (
-          <Card className="bg-[#1E293B] border-gray-700">
+          <Card>
             <CardHeader>
-              <CardTitle className="text-white">Orientation</CardTitle>
-              <CardDescription>How the Academy works — a one-minute read.</CardDescription>
+              <CardTitle className="text-pl-text">Orientation</CardTitle>
+              <CardDescription>How the Academy works, in a one-minute read.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               {ORIENTATION_POINTS.map((p) => (
                 <div key={p.title} className="flex gap-3">
-                  <p.icon className="h-5 w-5 text-[#BFFF00] shrink-0 mt-0.5" />
+                  <p.icon className="h-5 w-5 text-pl-primary-text shrink-0 mt-0.5" aria-hidden="true" />
                   <div>
-                    <p className="text-white font-medium">{p.title}</p>
-                    <p className="text-sm text-gray-400">{p.body}</p>
+                    <p className="text-pl-text font-medium">{p.title}</p>
+                    <p className="text-sm text-pl-muted">{p.body}</p>
                   </div>
                 </div>
               ))}
               <Button
                 onClick={handleOrientation} disabled={busy}
-                className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold"
+                className="font-semibold"
               >
                 {busy ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <CheckCircle2 className="mr-2 h-4 w-4" />}
-                I’ve read this — continue
+                I’ve read this, continue
               </Button>
             </CardContent>
           </Card>
         ) : result && !result.activated && result.retake_after ? (
-          <Card className="bg-[#1E293B] border-yellow-700">
+          <Card className="border-pl-warning/40">
             <CardContent className="py-8 text-center space-y-2">
-              <p className="text-white text-lg font-semibold">Score: {result.score}%</p>
-              <p className="text-gray-400 text-sm">
+              <p className="text-pl-text text-lg font-semibold">Score: {result.score}%</p>
+              <p className="text-pl-warning-text text-sm">
                 You can retake the assessment after {new Date(result.retake_after).toLocaleString()}.
               </p>
             </CardContent>
           </Card>
         ) : (
-          <Card className="bg-[#1E293B] border-gray-700">
+          <Card>
             <CardHeader>
-              <CardTitle className="text-white">Entry assessment</CardTitle>
+              <CardTitle className="text-pl-text">Entry assessment</CardTitle>
               <CardDescription>
-                A short placement quiz. It helps us recommend a starting tier — answer as best you can.
+                A short placement quiz. It helps us recommend a starting tier, so answer as best you can.
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               {questions.map((q, qi) => (
                 <div key={q.id} className="space-y-2">
-                  <p className="text-white font-medium">{qi + 1}. {q.prompt}</p>
+                  <p className="text-pl-text font-medium">{qi + 1}. {q.prompt}</p>
                   <div className="grid gap-2">
                     {q.options.map((opt, oi) => (
                       <button
                         key={oi} type="button"
                         onClick={() => setAnswers((a) => ({ ...a, [q.id]: oi }))}
-                        className={`text-left px-3 py-2 rounded-md border text-sm transition-colors ${
+                        aria-pressed={answers[q.id] === oi}
+                        className={`text-left px-3 py-2 rounded-md border text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus ${
                           answers[q.id] === oi
-                            ? 'bg-[#BFFF00]/10 border-[#BFFF00] text-white'
-                            : 'bg-gray-700 border-gray-600 text-gray-300 hover:border-gray-500'
+                            ? 'bg-pl-primary/10 border-pl-primary text-pl-text font-medium'
+                            : 'bg-pl-surface border-pl-border-strong text-pl-text hover:border-pl-primary'
                         }`}
                       >
                         {opt}
@@ -235,13 +238,13 @@ const GetStartedPage = () => {
               ))}
               <Button
                 onClick={handleSubmit} disabled={busy || !allAnswered}
-                className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold"
+                className="font-semibold"
               >
                 {busy ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <ClipboardList className="mr-2 h-4 w-4" />}
                 Submit assessment
               </Button>
               {status?.recommended_tier && (
-                <p className="text-sm text-gray-400">{TIER_COPY[status.recommended_tier]}</p>
+                <p className="text-sm text-pl-muted">{TIER_COPY[status.recommended_tier]}</p>
               )}
             </CardContent>
           </Card>

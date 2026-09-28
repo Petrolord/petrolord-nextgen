@@ -254,7 +254,66 @@ panelKit atoms around them are already on roles (1B).
 - `readerHarness.jsx` mounts a route inside `Layout`; `offlineSupabase.js`
   is the offline client the tests mock in.
 
-## 5. Batch 3C: reservoir course apps (as built)
+## 5. Batch 2A: learner and account pages (as built)
+
+As built: enroll, get started, devices, the prerequisite waiver exam, my
+certificates, settings, notifications and the sponsor console
+(`src/design/rollout/w2a.js`) render on theme roles. Every file they own
+(the notification center, item and preferences, `SponsorProgressPanel`,
+`useUserSettings`) is used by these screens only, so it moved straight to
+roles with no legacy branch.
+
+- **A certificate is a document.** `AcademyCertificatesPage` mounts
+  `CertificateView` through a portal into `document.body`, inside a
+  `data-canvas="document"` region and a `ThemeContext` of `null`. The
+  viewer is then outside every scope: it renders its pre-rollout markup,
+  colours and A4 print sheet byte for byte, and the ui `Button` in its
+  toolbar takes its legacy look. Use the same pattern for any other page
+  that must show legacy artwork from inside a scope.
+- **Native selects** take `THEMED_INPUT` from `components/ui/input.jsx`,
+  the Suite input styling.
+- **Choice buttons** (tier picker, assessment answers, pool cards, the
+  stored interface preference) carry `aria-pressed` and mark the chosen
+  one with the primary role.
+- **Toasts** lost their lime and emerald `className`: the root toaster
+  themes them.
+- **Tests:** `src/pages/__tests__/LearnerPages.theme.test.jsx` and
+  `AccountPages.theme.test.jsx` (harness `learnerAccountHarness.jsx`,
+  Supabase replaced by the 1A `frameStubs.js` stub, `fetch` counted and
+  asserted unused).
+
+## Batch 3B: geoscience II course apps (as built)
+
+Reservoir volumetrics (`/dashboard/apps/reservoircalc`), rock physics
+(`/dashboard/apps/rockphysics`), pore pressure (`/dashboard/apps/porepressure`),
+earth modeling (`/dashboard/apps/earthmodel`) and basin and charge
+(`/dashboard/apps/basin`) are on the roles and registered in
+`src/design/rollout/w3b.js`.
+
+- Each learning page is the only file with colour its app owns; the course
+  panels these apps teach with are reader-only and were moved by 1C. No
+  shared file changed.
+- The page recipe is 3A's: cards on `surface`, tiles and lessons on `sunken`,
+  option and tier buttons primary when chosen, capstone results on the
+  success and danger roles with their words, certificate number and award
+  icon gold, lime toasts on the success roles, empty values `n/a`.
+- The nine hand-drawn plots are in `SvgChartFrame` (`minWidth` 420,
+  `maxWidth` 720) with kit colours: axes `AXIS_LINE_PROPS`, ticks
+  `SVG_CHART.tick`, labels `SVG_CHART.label` and `note`. Old sky goes to
+  `seriesColor(0)`, green to `(1)`, orange to `(2)`, the lime ramp and the
+  violet layer to `(4)`; yellow guide lines (ramp top, conductivity
+  interface) take `REFERENCE_LINE_PROPS`; the fault polygon is an ink dashed
+  line; well posts are white markers. The oil and thickness maps keep their
+  green cells ("Green cells hold oil; darker means a thicker column") on
+  `seriesColor(1)`.
+- The earth model well-tie table marked the worst tie by colour alone; it
+  now also prints "largest tie" beside that residual.
+- Tests: `src/pages/__tests__/Geoscience3B.theme.test.jsx` on
+  `geo3bHarness.jsx` and `geo3bStubs.js` (the four standard checks per app,
+  every tier with both capstone outcomes, the Learning Mode gate, dark, every
+  plot in a chart frame with the chart mark, none of the old plate colours).
+
+## Batch 3C: reservoir course apps (as built)
 
 - Routes (`rollout/w3c.js`): `/dashboard/apps/` `dca`, `mbal`, `scal`,
   `waterflood`, `sim`, `fluid` and `welltest`, exact. Their course reader
