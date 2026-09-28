@@ -165,3 +165,31 @@ still render them outside a scope.
   round-trips, with a negative control.
 - `src/components/charts/__tests__/chartKit.test.jsx`: the chart kit's API,
   watermark, series contrast on white and the frames.
+
+## Learner and account pages (batch 2A)
+
+As built: enroll, get started, devices, the prerequisite waiver exam, my
+certificates, settings, notifications and the sponsor console
+(`src/design/rollout/w2a.js`) render on theme roles. Every file they own
+(the notification center, item and preferences, `SponsorProgressPanel`,
+`useUserSettings`) is used by these screens only, so it moved straight to
+roles with no legacy branch.
+
+- **A certificate is a document.** `AcademyCertificatesPage` mounts
+  `CertificateView` through a portal into `document.body`, inside a
+  `data-canvas="document"` region and a `ThemeContext` of `null`. The
+  viewer is then outside every scope: it renders its pre-rollout markup,
+  colours and A4 print sheet byte for byte, and the ui `Button` in its
+  toolbar takes its legacy look. Use the same pattern for any other page
+  that must show legacy artwork from inside a scope.
+- **Native selects** take `THEMED_INPUT` from `components/ui/input.jsx`,
+  the Suite input styling.
+- **Choice buttons** (tier picker, assessment answers, pool cards, the
+  stored interface preference) carry `aria-pressed` and mark the chosen
+  one with the primary role.
+- **Toasts** lost their lime and emerald `className`: the root toaster
+  themes them.
+- **Tests:** `src/pages/__tests__/LearnerPages.theme.test.jsx` and
+  `AccountPages.theme.test.jsx` (harness `learnerAccountHarness.jsx`,
+  Supabase replaced by the 1A `frameStubs.js` stub, `fetch` counted and
+  asserted unused).
