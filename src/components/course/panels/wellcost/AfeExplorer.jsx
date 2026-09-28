@@ -518,7 +518,7 @@ const Contingency = () => {
         </table>
       </div>
       <div className="mt-3 text-xs text-pl-text">
-        Raise the fraction and watch the green row climb the table. At the published
+        Raise the fraction and watch the gold row climb the table. At the published
         {' '}{fmt(CONTINGENCY_FRAC, 5)} the provision is already the number
         {' '}{fmt(contingencySweep([CONTINGENCY_FRAC])[0].rank, 0)} line on this estimate, ahead of
         the casing, the completion services and the mud. At {fmt(crossing.frac, 6)} it passes

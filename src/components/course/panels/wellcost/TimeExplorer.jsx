@@ -120,7 +120,7 @@ const Drill = () => {
         </table>
       </div>
       <div className="mt-3 text-xs text-pl-text">
-        The pink line is flat. Whatever the rate does, rate times hours comes back to the same
+        The violet line is flat. Whatever the rate does, rate times hours comes back to the same
         {' '}{fmt(rows[0].footageM, 0)} m, because the metres are the thing you asked for and the
         hours are what they cost. That is a HYPERBOLA and not a line: halving the rate from 10 to 5
         multiplies the hours by exactly {half && full ? fmt(half.hr / full.hr, 6) : '-'}, and the
@@ -303,7 +303,7 @@ const Casing = () => {
         </table>
       </div>
       <div className="mt-3 text-xs text-pl-text">
-        This form is AFFINE, not proportional, and the pink line is the reason. The green curve
+        This form is AFFINE, not proportional, and the violet line is the reason. The green curve
         falls as the speed rises and then stops falling, flattening onto
         {' '}{fmt(rows[0].floorHr, 4)} h. Ask for a billion metres per hour and the activity still
         takes {fmt(enormous.hr, 4)} h, because rigging up, circulating, cementing and waiting on
@@ -498,7 +498,7 @@ const Schedule = () => {
       </div>
       <div className="mt-3 text-xs text-pl-text">
         The classic drilling curve, and it is a staircase for a reason: it slopes while a drill
-        activity is running and it stands vertical through everything else. The green rows are the
+        activity is running and it stands vertical through everything else. The gold rows are the
         only ones that move the hole. On this programme {fmt(program.rows.filter((r) => r.kind === 'drill').length, 0)}
         {' '}of the {fmt(program.rows.length, 0)} activities advance depth at all, and the last row
         ends at {fmt(last.endHr, 3)} h, which is the same number as the elapsed total

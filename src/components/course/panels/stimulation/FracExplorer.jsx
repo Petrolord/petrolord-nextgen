@@ -212,8 +212,8 @@ const Models = () => {
       <div className="mt-3 text-xs text-pl-text">
         Two findings, both visible above. KGD is about {fmt(last.widthRatioKgdOverPkn, 2)} times
         wider than PKN at the same conditions, and the ratio bar chart shows it barely moving down
-        the sweep. And the two net pressures move in OPPOSITE directions: read the sky blue line
-        going up and the pink line coming down. PKN net pressure RISES from
+        the sweep. And the two net pressures move in OPPOSITE directions: read the blue line
+        going up and the violet line coming down. PKN net pressure RISES from
         {' '}{mpa(first.pknPNetPa)} to {mpa(last.pknPNetPa)} MPa as the fracture lengthens, while
         KGD net pressure FALLS from {mpa(first.kgdPNetPa)} to {mpa(last.kgdPNetPa)}.
       </div>
