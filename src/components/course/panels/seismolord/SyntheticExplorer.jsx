@@ -1,11 +1,15 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, Legend,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, Legend,
 } from 'recharts';
 import {
   computeSynthetic, waveletRows, traceRows, TEACHING_FREQ_HZ, DT_MS, NS, V_OVERBURDEN_MS, WELL,
 } from '@/lib/seismolordTeaching';
 import { PanelShell, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { SVG_CHART as CH } from '@/components/course/panels/readerChart';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { AXIS_TICK } from '@/utils/chartSvg';
 
 // Synthetic explorer: build the seismogram from the teaching well at a
 // wavelet frequency the learner chooses, and read the summary the
@@ -69,7 +73,7 @@ const SyntheticExplorer = () => {
     <PanelShell title="Synthetic explorer"
       subtitle={`The teaching well from ${top} to ${base} m through the full pipeline: velocity and density to impedance, impedance to reflection coefficients, placed in time at a ${vel} m/s overburden and convolved with a ${fmt(f, 0)} Hz Ricker wavelet on a ${DT_MS} ms grid. It opens on the whole log at 2000 m/s and 25 Hz.`}>
       {inputs}
-      <div className="text-xs text-gray-500">
+      <div className="text-xs text-pl-muted">
         The whole-log reading is at {TEACHING_FREQ_HZ} Hz. Try 15 and 40 Hz too and watch both the
         strongest amplitude and its time move; then narrow the window and change the velocity.
       </div>
@@ -87,41 +91,37 @@ const SyntheticExplorer = () => {
 
       <div className="grid gap-4 lg:grid-cols-3">
         <div className="lg:col-span-1">
-          <p className="text-xs text-gray-400 mb-1">Ricker wavelet</p>
-          <div style={{ height: 180 }}>
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={wRows} margin={{ top: 5, right: 8, bottom: 5, left: 0 }}>
-                <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-                <XAxis dataKey="t" tick={{ fill: '#94a3b8', fontSize: 10 }} />
-                <YAxis domain={[-0.6, 1.05]} tick={{ fill: '#94a3b8', fontSize: 10 }} />
-                <Tooltip contentStyle={{ background: '#0F172A', border: '1px solid #334155', color: '#fff' }}
-                  formatter={(v) => fmt(Number(v))} />
-                <ReferenceLine y={0} stroke="#475569" />
-                <Line type="monotone" dataKey="a" name="amplitude" stroke="#BFFF00" dot={false} strokeWidth={1.5} />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
+          <p className="text-xs text-pl-muted mb-1">Ricker wavelet</p>
+          <ChartFrame height={180}>
+            <LineChart data={wRows} margin={{ top: 5, right: 8, bottom: 5, left: 0 }}>
+              <CartesianGrid stroke={CH.grid} strokeDasharray="3 3" />
+              <XAxis dataKey="t" tick={AXIS_TICK} />
+              <YAxis domain={[-0.6, 1.05]} tick={AXIS_TICK} />
+              <Tooltip contentStyle={TOOLTIP_STYLE}
+                formatter={(v) => fmt(Number(v))} />
+              <ReferenceLine y={0} stroke={CH.axis} />
+              <Line type="monotone" dataKey="a" name="amplitude" stroke={CH.green} dot={false} strokeWidth={1.5} />
+            </LineChart>
+          </ChartFrame>
         </div>
 
         <div className="lg:col-span-2">
-          <p className="text-xs text-gray-400 mb-1">Reflectivity and synthetic trace against two-way time</p>
-          <div style={{ height: 180 }}>
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={tRows} margin={{ top: 5, right: 8, bottom: 5, left: 0 }}>
-                <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-                <XAxis dataKey="twt" tick={{ fill: '#94a3b8', fontSize: 10 }} />
-                <YAxis tick={{ fill: '#94a3b8', fontSize: 10 }} />
-                <Tooltip contentStyle={{ background: '#0F172A', border: '1px solid #334155', color: '#fff' }}
-                  formatter={(v) => fmt(Number(v), 6)} />
-                <Legend wrapperStyle={{ fontSize: 10 }} />
-                <ReferenceLine y={0} stroke="#475569" />
-                <ReferenceLine x={s.rcPeakTwt} stroke="#f472b6" strokeDasharray="4 3" />
-                <ReferenceLine x={s.synPeakTwt} stroke="#38bdf8" strokeDasharray="4 3" />
-                <Line type="monotone" dataKey="rc" name="reflectivity" stroke="#f472b6" dot={false} strokeWidth={1.2} />
-                <Line type="monotone" dataKey="syn" name="synthetic" stroke="#38bdf8" dot={false} strokeWidth={1.5} />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
+          <p className="text-xs text-pl-muted mb-1">Reflectivity and synthetic trace against two-way time</p>
+          <ChartFrame height={180}>
+            <LineChart data={tRows} margin={{ top: 5, right: 8, bottom: 5, left: 0 }}>
+              <CartesianGrid stroke={CH.grid} strokeDasharray="3 3" />
+              <XAxis dataKey="twt" tick={AXIS_TICK} />
+              <YAxis tick={AXIS_TICK} />
+              <Tooltip contentStyle={TOOLTIP_STYLE}
+                formatter={(v) => fmt(Number(v), 6)} />
+              <Legend wrapperStyle={{ fontSize: 10 }} />
+              <ReferenceLine y={0} stroke={CH.axis} />
+              <ReferenceLine x={s.rcPeakTwt} stroke={CH.pink} strokeDasharray="4 3" />
+              <ReferenceLine x={s.synPeakTwt} stroke={CH.blue} strokeDasharray="4 3" />
+              <Line type="monotone" dataKey="rc" name="reflectivity" stroke={CH.pink} dot={false} strokeWidth={1.2} />
+              <Line type="monotone" dataKey="syn" name="synthetic" stroke={CH.blue} dot={false} strokeWidth={1.5} />
+            </LineChart>
+          </ChartFrame>
         </div>
       </div>
 
