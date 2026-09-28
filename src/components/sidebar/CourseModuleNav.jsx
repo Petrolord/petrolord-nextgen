@@ -88,7 +88,7 @@ const CourseModuleNav = () => {
   const expanded = touched ? openModule : (openModule ?? activeModule);
 
   return (
-    <div className="mb-6">
+    <div className="mb-6 pt-4">
       <h3 className="px-3 text-[11px] font-semibold text-pl-accent-text uppercase tracking-[0.14em] mb-2">
         Courses
       </h3>

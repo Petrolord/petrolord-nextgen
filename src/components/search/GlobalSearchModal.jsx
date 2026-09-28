@@ -42,7 +42,7 @@ const GlobalSearchModal = () => {
   const dialog = (
     <Dialog open={isGlobalSearchOpen} onOpenChange={setIsGlobalSearchOpen}>
       <DialogContent className={tc("max-w-2xl bg-[#1E293B] border-slate-700 p-0 overflow-hidden shadow-2xl", "max-w-2xl p-0 overflow-hidden")}>
-        <div className={tc("flex items-center px-4 border-b border-slate-700", "flex items-center px-4 border-b border-pl-border")}>
+        <div className={tc("flex items-center px-4 border-b border-slate-700", "flex items-center pl-4 pr-12 border-b border-pl-border")}>
           <Search className={tc("w-5 h-5 text-slate-400 mr-3", "w-5 h-5 text-pl-muted mr-3")} aria-hidden={tc(undefined, 'true')} />
           <Input 
             aria-label={tc(undefined, 'Search')}

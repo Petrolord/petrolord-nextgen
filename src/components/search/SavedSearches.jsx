@@ -26,9 +26,9 @@ const SavedSearches = () => {
 
   return (
     <div className="bg-pl-surface border border-pl-border rounded-lg p-4 space-y-4">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-2">
         <h3 className="text-pl-text font-medium flex items-center gap-2">
-          <Bookmark className="w-4 h-4 text-pl-accent-text" aria-hidden="true" />
+          <Bookmark className="w-4 h-4 shrink-0 text-pl-accent-text" aria-hidden="true" />
           Saved Searches
         </h3>
         

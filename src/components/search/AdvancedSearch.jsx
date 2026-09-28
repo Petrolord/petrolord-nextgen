@@ -35,16 +35,16 @@ const AdvancedSearch = () => {
           />
         </div>
 
-        <div className="grid lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
           {/* Left Sidebar - Filters & Saved */}
-          <div className="lg:col-span-1 space-y-6">
+          <div className="lg:col-span-1 space-y-6 min-w-0">
             <SearchFilters />
             <SavedSearches />
             <SearchAnalytics />
           </div>
 
           {/* Main Content - Results or Suggestions */}
-          <div className="lg:col-span-3 space-y-6">
+          <div className="lg:col-span-3 space-y-6 min-w-0">
             <SearchHistory />
             
             <div className="bg-pl-surface border border-pl-border rounded-xl p-6 min-h-[500px]">

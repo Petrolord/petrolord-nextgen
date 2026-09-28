@@ -40,6 +40,7 @@ const SidebarItem = ({ to, icon: Icon, label, exact = false }) => {
   return (
     <NavLink
       to={to}
+      end={exact}
       className={({ isActive: linkActive }) => cn(
         RAIL_ITEM,
         'font-medium',
