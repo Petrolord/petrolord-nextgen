@@ -126,10 +126,19 @@ describe('the frames', () => {
     expect(svg.getAttribute('viewBox')).toBe('0 0 400 200');
     expect(svg.style.minWidth).toBe('460px');
     expect(svg.parentElement.className).toBe('overflow-x-auto');
+    expect(svg.style.maxWidth).toBe('');
     expect(svg.querySelector('rect').getAttribute('fill')).toBe('#ffffff');
     expect(frame.querySelector('img[alt="Petrolord"]')).not.toBeNull();
     fireEvent.click(screen.getByRole('button', { name: 'Download chart as PNG' }));
     expect(exportSpy).toHaveBeenCalledWith(frame.id, 'phi');
+  });
+
+  it('SvgChartFrame maxWidth caps and centres the plot', () => {
+    render(<SvgChartFrame width={300} height={150} label="Small" maxWidth={640}><g /></SvgChartFrame>);
+    const svg = screen.getByRole('img', { name: 'Small' });
+    expect(svg.style.maxWidth).toBe('640px');
+    expect(svg.style.margin).toBe('0px auto');
+    expect(svg.parentElement.getAttribute('data-canvas')).toBe('chart');
   });
 
   it('ChartPanel is a titled white chart canvas in both themes, with no legacy chrome', () => {

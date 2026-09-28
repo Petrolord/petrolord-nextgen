@@ -16,20 +16,22 @@ import { SVG_CHART } from '@/utils/chartSvg';
  *
  * `width` and `height` are the viewBox; the svg scales to the frame's width.
  * `label` is the accessible name (role="img"). `minWidth` keeps a wide plot
- * legible on a phone: the plot scrolls sideways inside the frame. The white
- * plate is drawn for you. `svgProps` go on the <svg> element.
+ * legible on a phone: the plot scrolls sideways inside the frame. `maxWidth`
+ * stops a small plot from stretching (and its text from growing) on a wide
+ * screen; the plot is centred. The white plate is drawn for you. `svgProps` go on the <svg> element.
  */
 const DEFAULT_LOGO_HEIGHT = 40;
 
 const SvgChartFrame = ({
-  width, height, label, minWidth = null, className = '', exportFilename = null,
+  width, height, label, minWidth = null, maxWidth = null, className = '', exportFilename = null,
   logoHeight = DEFAULT_LOGO_HEIGHT, header = null, svgProps = {}, children,
 }) => {
   const frameId = useId().replace(/[^a-zA-Z0-9_-]/g, '');
   const elementId = `chart-frame-${frameId}`;
   const svg = (
     <svg viewBox={`0 0 ${width} ${height}`} width="100%" role="img" aria-label={label}
-      style={minWidth ? { minWidth } : undefined} {...svgProps}>
+      style={minWidth || maxWidth ? { minWidth: minWidth || undefined, maxWidth: maxWidth || undefined, margin: maxWidth ? '0 auto' : undefined, display: maxWidth ? 'block' : undefined } : undefined}
+      {...svgProps}>
       <rect x="0" y="0" width={width} height={height} fill={SVG_CHART.plate} />
       {children}
     </svg>
