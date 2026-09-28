@@ -2,9 +2,10 @@
 // pages). Mounts a route as the app does: Layout with the header and the
 // signed-in scope around DashboardPage's routes, or around a page App.jsx
 // mounts on its own (/dashboard/certificates), with a signed-in user.
-// Network is blocked: the tests mock the Supabase client with
-// offlineSupabase.js, and installNetworkGuard() makes fetch reject and
-// counts the calls so a test can assert that none happened.
+// Network is blocked: the tests mock the Supabase client with the 1A
+// frame stub (frameStubs.js, it throws on any use), and
+// installNetworkGuard() makes fetch reject and counts the calls so a test
+// can assert that none happened.
 import React from 'react';
 import { render } from '@testing-library/react';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';

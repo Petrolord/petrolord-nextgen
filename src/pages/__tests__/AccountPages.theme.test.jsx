@@ -16,7 +16,8 @@ import {
 } from '@/design/testing/themeAssertions';
 import { renderRoute, installNetworkGuard, openTab, USER_ID } from './learnerAccountHarness';
 
-vi.mock('@/lib/customSupabaseClient', async () => (await import('./offlineSupabase.js')).offlineSupabaseModule());
+// The 1A frame stub: a Supabase client that throws on any use.
+vi.mock('@/lib/customSupabaseClient', async () => (await import('./frameStubs')).supabaseStub());
 
 const FAR = '2099-01-01T00:00:00Z';
 const data = {};

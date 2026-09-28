@@ -18,7 +18,8 @@ import {
 } from '@/design/testing/themeAssertions';
 import { renderRoute, installNetworkGuard, openTab, USER_ID } from './learnerAccountHarness';
 
-vi.mock('@/lib/customSupabaseClient', async () => (await import('./offlineSupabase.js')).offlineSupabaseModule());
+// The 1A frame stub: a Supabase client that throws on any use.
+vi.mock('@/lib/customSupabaseClient', async () => (await import('./frameStubs')).supabaseStub());
 
 // What the mocked services serve; each test may change it before it renders.
 const data = {};
@@ -257,7 +258,7 @@ describe('Devices and the waiver exam, further states', () => {
       () => renderRoute('/dashboard/devices'),
       async () => {
         await screen.findByText('this device');
-        expect(screen.getByText('n/a')).toBeTruthy();
+        expect(screen.getAllByText('n/a').some((el) => el.className.includes('truncate'))).toBe(true);
         expect(screen.getByText('Blocked (device limit)').className).toContain('text-pl-danger-text');
       },
     );
