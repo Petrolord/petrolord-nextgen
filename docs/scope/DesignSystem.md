@@ -165,3 +165,29 @@ still render them outside a scope.
   round-trips, with a negative control.
 - `src/components/charts/__tests__/chartKit.test.jsx`: the chart kit's API,
   watermark, series contrast on white and the frames.
+
+## Batch 3C as built: reservoir course apps
+
+- Routes (`rollout/w3c.js`): `/dashboard/apps/` `dca`, `mbal`, `scal`,
+  `waterflood`, `sim`, `fluid` and `welltest`, exact. Their course reader
+  pages stay on 1C's pattern entry.
+- The seven learning pages are fully owned and on roles: lime is gone
+  (primary for the tier toggle and the submit button, gold accent for the
+  Learning Mode pill and the certificate number, the success and danger
+  roles with their words for the grading result).
+- The 21 panels under `components/course/panels/{dca,mbal,scal,waterflood,sim,fluid,welltest}`
+  are scope-aware with `useThemeClass`, because the reader and the handbook
+  also render them. Outside a scope their classes match a fixture captured
+  from main `1fbbedf34` before any change
+  (`panels/__tests__/rc3cPanelsLegacy.test.jsx`, 71 scenes).
+- Every chart is on the kit in both places: 16 hand-made plots in
+  `SvgChartFrame`, the two well test Recharts plots in `ChartFrame` with
+  `GRID_STYLE`, `AXIS_TICK` and `TOOLTIP_STYLE`. Colours follow the map in
+  section 1, with these choices: an oil and water rate pair uses
+  `getStreamPalette`; a guide, a target band or an excluded point uses
+  `SVG_CHART.reference`; where a lesson already named a colour (the SCAL
+  "blue water curve" and "red oil curve", the DCA "blue points") the series
+  keeps that name.
+- Lessons that named a retired chart colour (lime, cyan, pink, orange,
+  yellow) in the DCA, MBAL and waterflood courses now name the new colour.
+  Only the colour word changed.
