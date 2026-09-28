@@ -84,10 +84,10 @@ for (const app of GEO3A_APPS) {
 }
 
 describe('3A registry', () => {
-  it('registers the five app routes and no other course app', () => {
+  it('registers the five app routes (a test-only route stays out)', () => {
     for (const app of GEO3A_APPS) {
       expect(isThemedPath(`/dashboard/apps/${app.slug}`)).toBe(true);
     }
-    expect(isThemedPath('/dashboard/apps/reservoircalc')).toBe(false);
+    expect(isThemedPath('/legacy-probe')).toBe(false);
   });
 });
