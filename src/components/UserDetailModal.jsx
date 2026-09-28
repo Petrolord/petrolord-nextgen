@@ -8,11 +8,11 @@ import { supabase } from '@/lib/customSupabaseClient';
 
 const DetailItem = ({ icon, label, value }) => (
     <div className="flex items-start py-3">
-        <div className="w-1/3 text-gray-400 font-medium flex items-center">
+        <div className="w-1/3 text-pl-muted font-medium flex items-center">
             {React.createElement(icon, { className: "w-4 h-4 mr-2" })}
             {label}
         </div>
-        <div className="w-2/3 text-white">{value}</div>
+        <div className="w-2/3 text-pl-text">{value}</div>
     </div>
 );
 
@@ -57,30 +57,30 @@ const UserDetailModal = ({ user, isOpen, onClose, onEdit }) => {
     // Helper for role color
     const getRoleColor = (role) => {
         switch(role) {
-            case 'super_admin': return 'text-purple-400';
-            case 'admin': return 'text-blue-400';
-            case 'university_admin': return 'text-orange-400';
-            case 'lecturer': return 'text-yellow-400';
-            default: return 'text-slate-400';
+            case 'super_admin': return 'text-pl-accent-text';
+            case 'admin': return 'text-pl-info-text';
+            case 'university_admin': return 'text-pl-primary-text';
+            case 'lecturer': return 'text-pl-text';
+            default: return 'text-pl-muted';
         }
     };
 
     const roleColor = getRoleColor(user.role);
-    const statusColor = user.status === 'active' ? 'text-green-400' : 'text-gray-400';
+    const statusColor = user.status === 'active' ? 'text-pl-success-text' : 'text-pl-muted';
 
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
-            <DialogContent className="max-w-2xl bg-[#1E293B] border-slate-800 text-slate-200">
+            <DialogContent className="max-w-2xl">
                 <DialogHeader>
-                    <DialogTitle className="text-2xl text-white">User Details</DialogTitle>
-                    <DialogDescription className="text-slate-400">
+                    <DialogTitle className="text-2xl text-pl-text">User Details</DialogTitle>
+                    <DialogDescription className="text-pl-muted">
                         Viewing full details for {user.display_name}.
                     </DialogDescription>
                 </DialogHeader>
                 {loading ? (
-                    <div className="flex justify-center items-center h-64"><Loader2 className="w-8 h-8 animate-spin text-[#BFFF00]" /></div>
+                    <div className="flex justify-center items-center h-64"><Loader2 className="w-8 h-8 animate-spin text-pl-primary" /></div>
                 ) : (
-                    <div className="mt-4 divide-y divide-slate-800">
+                    <div className="mt-4 divide-y divide-pl-border">
                         <DetailItem icon={User} label="Display Name" value={user.display_name} />
                         <DetailItem icon={Mail} label="Email" value={user.email} />
                         <DetailItem icon={Shield} label="Role" value={<span className={`font-semibold capitalize ${roleColor}`}>{user.role.replace('_', ' ')}</span>} />
@@ -96,8 +96,8 @@ const UserDetailModal = ({ user, isOpen, onClose, onEdit }) => {
                     </div>
                 )}
                 <div className="mt-6 flex justify-end space-x-2">
-                    <Button variant="ghost" onClick={onClose} className="hover:bg-slate-800 hover:text-white">Close</Button>
-                    <Button onClick={() => onEdit(user)} className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600]">Edit User</Button>
+                    <Button variant="ghost" onClick={onClose}>Close</Button>
+                    <Button onClick={() => onEdit(user)}>Edit User</Button>
                 </div>
             </DialogContent>
         </Dialog>
