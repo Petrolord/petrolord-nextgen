@@ -18,21 +18,30 @@ import { ACTIONS, LOG_TYPES } from '@/services/auditService';
 
 const POLL_INTERVAL = 5000; // 5 seconds
 
-const StatCard = ({ title, value, icon: Icon, color, trend }) => (
-  <Card className="bg-[#1E293B] border-slate-800">
-    <CardContent className="p-6">
+// Icon chip tints on the theme roles. The danger chip sits on "Errors Today",
+// so the colour always comes with its word.
+const STAT_TONES = {
+  info: 'bg-pl-info-bg text-pl-info-text',
+  primary: 'bg-pl-primary/10 text-pl-primary-text',
+  success: 'bg-pl-success-bg text-pl-success-text',
+  danger: 'bg-pl-danger-bg text-pl-danger-text',
+};
+
+const StatCard = ({ title, value, icon: Icon, tone, trend }) => (
+  <Card>
+    <CardContent className="p-4 md:p-6">
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-sm font-medium text-slate-400">{title}</p>
-          <h3 className="text-2xl font-bold text-white mt-2">{value}</h3>
+          <p className="text-sm font-medium text-pl-muted">{title}</p>
+          <h3 className="text-2xl font-bold text-pl-text mt-2 tabular-nums">{value}</h3>
         </div>
-        <div className={`p-3 rounded-full bg-${color}-500/10`}>
-          <Icon className={`w-6 h-6 text-${color}-500`} />
+        <div className={`p-3 rounded-full ${STAT_TONES[tone] || STAT_TONES.primary}`}>
+          <Icon className="w-6 h-6" aria-hidden="true" />
         </div>
       </div>
       {trend && (
-        <div className="mt-4 flex items-center text-xs text-slate-500">
-          <span className="text-emerald-400 font-medium mr-1">{trend}</span> since last hour
+        <div className="mt-4 flex items-center text-xs text-pl-muted">
+          <span className="text-pl-success-text font-medium mr-1">{trend}</span> since last hour
         </div>
       )}
     </CardContent>
@@ -151,13 +160,13 @@ const RealTimeMonitoringPage = () => {
 
   const getActionColor = (action) => {
     switch (action) {
-      case 'LOGIN': return 'text-blue-400 bg-blue-400/10 border-blue-400/20';
-      case 'LOGOUT': return 'text-slate-400 bg-slate-400/10 border-slate-400/20';
-      case 'QUIZ_SUBMIT': return 'text-purple-400 bg-purple-400/10 border-purple-400/20';
-      case 'GRADE_CHANGE': return 'text-orange-400 bg-orange-400/10 border-orange-400/20';
-      case 'SYSTEM_ERROR': return 'text-red-400 bg-red-400/10 border-red-400/20';
-      case 'COURSE_COMPLETE': return 'text-[#BFFF00] bg-[#BFFF00]/10 border-[#BFFF00]/20';
-      default: return 'text-slate-300 bg-slate-800 border-slate-700';
+      case 'LOGIN': return 'text-pl-info-text bg-pl-info-bg border-pl-info/30';
+      case 'LOGOUT': return 'text-pl-muted bg-pl-sunken border-pl-border';
+      case 'QUIZ_SUBMIT': return 'text-pl-primary-text bg-pl-primary/10 border-pl-primary/30';
+      case 'GRADE_CHANGE': return 'text-pl-warning-text bg-pl-warning-bg border-pl-warning/30';
+      case 'SYSTEM_ERROR': return 'text-pl-danger-text bg-pl-danger-bg border-pl-danger/30';
+      case 'COURSE_COMPLETE': return 'text-pl-success-text bg-pl-success-bg border-pl-success/30';
+      default: return 'text-pl-text bg-pl-sunken border-pl-border';
     }
   };
 
@@ -191,59 +200,59 @@ const RealTimeMonitoringPage = () => {
   };
 
   return (
-    <div className="space-y-6 animate-in fade-in duration-500">
+    <div className="px-4 py-8 md:px-8 space-y-6 animate-in fade-in duration-500">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-white flex items-center gap-2">
-            <Activity className="h-8 w-8 text-[#BFFF00]" /> Real-Time Monitoring
+          <h1 className="text-3xl font-bold tracking-tight text-pl-text flex items-center gap-2">
+            <Activity className="h-8 w-8 text-pl-accent-text" aria-hidden="true" /> Real-Time Monitoring
           </h1>
-          <p className="text-slate-400 mt-1">
+          <p className="text-pl-muted mt-1">
             Live system event feed. Last updated: {format(lastRefreshed, 'HH:mm:ss')}
           </p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
            <Button 
             variant={autoRefresh ? "secondary" : "outline"}
             onClick={() => setAutoRefresh(!autoRefresh)}
-            className={autoRefresh ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/50" : "border-slate-700"}
+            className={autoRefresh ? "bg-pl-success-bg text-pl-success-text border border-pl-success/40 hover:bg-pl-success-bg" : undefined}
            >
              <RefreshCw className={`w-4 h-4 mr-2 ${autoRefresh ? 'animate-spin' : ''}`} />
              {autoRefresh ? 'Live Updates On' : 'Live Updates Off'}
            </Button>
-           <Button onClick={exportLogs} variant="outline" className="border-slate-700 hover:bg-slate-800 text-slate-200">
+           <Button onClick={exportLogs} variant="outline">
              <Download className="w-4 h-4 mr-2" /> Export
            </Button>
         </div>
       </div>
 
       {/* Metric Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <StatCard title="Active Users (1h)" value={stats.activeUsers} icon={Users} color="blue" />
-        <StatCard title="Events Today" value={stats.actionsToday} icon={Database} color="purple" />
-        <StatCard title="Logins Today" value={stats.loginsToday} icon={CheckCircle} color="emerald" />
-        <StatCard title="Errors Today" value={stats.errorsToday} icon={AlertTriangle} color="red" />
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <StatCard title="Active Users (1h)" value={stats.activeUsers} icon={Users} tone="info" />
+        <StatCard title="Events Today" value={stats.actionsToday} icon={Database} tone="primary" />
+        <StatCard title="Logins Today" value={stats.loginsToday} icon={CheckCircle} tone="success" />
+        <StatCard title="Errors Today" value={stats.errorsToday} icon={AlertTriangle} tone="danger" />
       </div>
 
       {/* Main Log Feed */}
-      <Card className="bg-[#1E293B] border-slate-800">
+      <Card>
         <CardHeader className="pb-3">
            <div className="flex flex-col md:flex-row justify-between gap-4">
-             <CardTitle className="text-white text-lg font-medium">Event Stream</CardTitle>
+             <CardTitle className="text-pl-text text-lg font-medium">Event Stream</CardTitle>
              <div className="flex flex-wrap gap-2">
                 <div className="relative w-full md:w-64">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-pl-muted" />
                     <Input 
                       placeholder="Search actor, resource..." 
-                      className="pl-9 bg-[#0F172A] border-slate-700 text-slate-200 h-9 text-sm"
+                      className="pl-9 h-9 text-sm"
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
                     />
                 </div>
                 <Select value={filterAction} onValueChange={setFilterAction}>
-                    <SelectTrigger className="w-[140px] h-9 bg-[#0F172A] border-slate-700 text-slate-200 text-sm">
+                    <SelectTrigger className="w-[140px] h-9 text-sm">
                         <SelectValue placeholder="Action" />
                     </SelectTrigger>
-                    <SelectContent className="bg-[#1E293B] border-slate-700 text-slate-200">
+                    <SelectContent>
                         <SelectItem value="all">All Actions</SelectItem>
                         <SelectItem value="LOGIN">Login</SelectItem>
                         <SelectItem value="QUIZ_SUBMIT">Quiz Submit</SelectItem>
@@ -252,10 +261,10 @@ const RealTimeMonitoringPage = () => {
                     </SelectContent>
                 </Select>
                 <Select value={filterRole} onValueChange={setFilterRole}>
-                    <SelectTrigger className="w-[140px] h-9 bg-[#0F172A] border-slate-700 text-slate-200 text-sm">
+                    <SelectTrigger className="w-[140px] h-9 text-sm">
                         <SelectValue placeholder="Role" />
                     </SelectTrigger>
-                    <SelectContent className="bg-[#1E293B] border-slate-700 text-slate-200">
+                    <SelectContent>
                         <SelectItem value="all">All Roles</SelectItem>
                         <SelectItem value="student">Student</SelectItem>
                         <SelectItem value="lecturer">Lecturer</SelectItem>
@@ -266,23 +275,23 @@ const RealTimeMonitoringPage = () => {
            </div>
         </CardHeader>
         <CardContent>
-          <div className="rounded-md border border-slate-800 overflow-hidden">
+          <div className="rounded-md border border-pl-border overflow-x-auto">
              <Table>
-                <TableHeader className="bg-[#0F172A]">
-                  <TableRow className="border-slate-800 hover:bg-transparent">
-                    <TableHead className="text-slate-400 w-[180px]">Timestamp</TableHead>
-                    <TableHead className="text-slate-400">Action</TableHead>
-                    <TableHead className="text-slate-400">Actor</TableHead>
-                    <TableHead className="text-slate-400">Resource</TableHead>
-                    <TableHead className="text-slate-400 text-center">Status</TableHead>
-                    <TableHead className="text-slate-400 text-right">Details</TableHead>
+                <TableHeader className="bg-pl-sunken">
+                  <TableRow className="border-pl-border hover:bg-transparent">
+                    <TableHead className="text-pl-muted w-[180px]">Timestamp</TableHead>
+                    <TableHead className="text-pl-muted">Action</TableHead>
+                    <TableHead className="text-pl-muted">Actor</TableHead>
+                    <TableHead className="text-pl-muted">Resource</TableHead>
+                    <TableHead className="text-pl-muted text-center">Status</TableHead>
+                    <TableHead className="text-pl-muted text-right">Details</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {filteredLogs.length > 0 ? (
                     filteredLogs.map((log) => (
-                      <TableRow key={log.id} className="border-slate-800 hover:bg-slate-800/50">
-                        <TableCell className="font-mono text-xs text-slate-400">
+                      <TableRow key={log.id} className="border-pl-border hover:bg-pl-sunken/60">
+                        <TableCell className="font-mono text-xs text-pl-muted whitespace-nowrap">
                           {format(new Date(log.timestamp), 'MMM d, HH:mm:ss')}
                         </TableCell>
                         <TableCell>
@@ -292,23 +301,23 @@ const RealTimeMonitoringPage = () => {
                         </TableCell>
                         <TableCell>
                            <div className="flex flex-col">
-                              <span className="text-sm text-slate-200">{log.user_email || 'System'}</span>
-                              <span className="text-xs text-slate-500 capitalize">{log.actor_role}</span>
+                              <span className="text-sm text-pl-text">{log.user_email || 'System'}</span>
+                              <span className={`text-xs text-pl-muted ${log.actor_role ? 'capitalize' : ''}`}>{log.actor_role || 'n/a'}</span>
                            </div>
                         </TableCell>
                         <TableCell>
-                            <span className="text-sm text-slate-300">{log.resource_name || log.resource_id || '-'}</span>
-                            {log.resource_type && <span className="text-xs text-slate-500 ml-1">({log.resource_type})</span>}
+                            <span className="text-sm text-pl-text">{log.resource_name || log.resource_id || 'n/a'}</span>
+                            {log.resource_type && <span className="text-xs text-pl-muted ml-1">({log.resource_type})</span>}
                         </TableCell>
                         <TableCell className="text-center">
                            {log.status === 'success' ? (
-                             <CheckCircle className="w-4 h-4 text-emerald-500 mx-auto" />
+                             <span className="inline-flex items-center gap-1 text-xs text-pl-success-text"><CheckCircle className="w-4 h-4" aria-hidden="true" />Success</span>
                            ) : (
-                             <XCircle className="w-4 h-4 text-red-500 mx-auto" />
+                             <span className="inline-flex items-center gap-1 text-xs text-pl-danger-text"><XCircle className="w-4 h-4" aria-hidden="true" />Failure</span>
                            )}
                         </TableCell>
                         <TableCell className="text-right">
-                           <Button variant="ghost" size="sm" className="h-6 w-6 p-0 text-slate-400 hover:text-white">
+                           <Button variant="ghost" size="sm" className="h-6 w-6 p-0 text-pl-muted hover:text-pl-text" aria-label="Details">
                               <Search className="w-3 h-3" />
                            </Button>
                         </TableCell>
@@ -316,7 +325,7 @@ const RealTimeMonitoringPage = () => {
                     ))
                   ) : (
                     <TableRow>
-                      <TableCell colSpan={6} className="text-center py-8 text-slate-500">
+                      <TableCell colSpan={6} className="text-center py-8 text-pl-muted">
                         No events found matching current filters.
                       </TableCell>
                     </TableRow>
