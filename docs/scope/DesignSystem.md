@@ -166,6 +166,94 @@ still render them outside a scope.
 - `src/components/charts/__tests__/chartKit.test.jsx`: the chart kit's API,
   watermark, series contrast on white and the frames.
 
+## 3. Batch 2B: admin I (as built)
+
+Academy doors (`/dashboard/admin/academy-doors`, with `AdminSponsorPools`),
+certifications (`/dashboard/admin/certifications`), the user directory
+(`/dashboard/admin/users`, with `UserDetailModal` and `UserEditModal`),
+audit logs (`/dashboard/admin/audit-logs`, with `AuditDetailModal`), super
+admins (`/dashboard/admin/super-admins`) and system settings
+(`/dashboard/admin/settings`) are on the roles and registered in
+`src/design/rollout/w2b.js`.
+
+- Every file the six screens own is used by that screen alone, so each moved
+  straight to roles with no legacy branch.
+- The ui kit carries the look: lime buttons became the default (petrol
+  green) `Button`, and the per-page overrides on `Input`, `SelectTrigger`,
+  `SelectContent`, `DropdownMenuContent`, `DialogContent`,
+  `AlertDialogContent`, `TabsList` and `TabsTrigger` were dropped. Native
+  `<select>`s use the Suite input styling (`border-pl-border-strong`,
+  `bg-pl-surface`, focus ring). Destructive actions use the danger roles.
+- Status words sit on the status roles: residency, session, certificate,
+  feature flag and health states. The audit table now prints Success or
+  Failure next to its icon. Role and action pills are tints of accent,
+  primary, info, warning and danger, each with its word.
+- Lime toast overrides (`className: 'bg-[#BFFF00] ...'`) were removed; the
+  toaster's own themed default shows them.
+- Empty cells show `n/a`.
+- The user directory, audit logs, super admins and system settings gain the
+  pilot's page padding (`px-4 py-8 md:px-8`), which they never had.
+- Tests: one theme test per screen in `src/pages/__tests__/` on a shared
+  harness (`admin2bHarness.jsx`, `admin2bStubs.js` with a local Supabase
+  fake that answers the two table reads and throws on anything else).
+
+## 4. The course reader and the handbook (batch 1C)
+
+Registered in `src/design/rollout/w1c.js`: `/dashboard/apps/:slug/course/*`
+(course home, module, lesson, module quiz, final exam and the capstone
+redirect) and `/dashboard/admin/handbook`.
+
+| piece | file | inside the scope |
+|---|---|---|
+| course home, module, lesson, module quiz, final exam | `pages/course/*.jsx` | roles only; actions are the themed `Button` (primary), module and lesson icons gold (`accent-text`), passed and read marks on `success-text` with the word beside them |
+| lesson renderer | `components/course/MarkdownLesson.jsx` | headings and body on `text`, links on `primary-text`, callouts, code and tables on `sunken` with `border` hairlines; a panel slot and its loader on `sunken` |
+| handbook frame | `pages/AdminCourseHandbookPage.jsx` | toolbar, course tabs, loader, error and locked states on roles |
+| handbook document | the `#handbook-doc` element | a printable document: `data-canvas="document"` pinned to the light roles (`data-pl-theme="light"`) on the white chart surface, so it reads as the printed page in both themes. The print stylesheet and the HTML download are unchanged |
+
+Both users of `MarkdownLesson` (the reader and the handbook) are in 1C, so
+it moved straight to roles with no legacy branch.
+
+### The reader-only teaching panels
+
+Twenty-three geoscience panels are imported by no learning page, only by
+the panel registry, so the reader is their one screen (the rollout plan
+counts them in the lesson reader's own files): mapping (map, isochore,
+validation, with `gridPlot` and the mapping case inputs), basin (burial
+and heat, kinetics, charge), earth model (framework, tie, population), pore
+pressure (frame, Eaton, window), rock physics (fluid, substitution, AVO),
+reservoircalc (volume, block, property), seismolord (synthetic, shift,
+wedge) and well correlation (flatten, prediction). They are on roles, and
+every plot sits in `SvgChartFrame` (the Recharts pair in the synthetic
+explorer in `ChartFrame`).
+
+Colours come from `components/course/panels/readerChart.js`, which takes
+the chart kit's values (`utils/chartSvg.js`) and adds only the hues a
+lesson names: the lessons read "the white path", "each orange dot", "the
+pink dashed line" and "a hollow lime circle", and teaching content is not
+changed by the rollout. A light mark (the white well path and dots, the
+lime P-1 circle) is drawn over an ink casing so it reads on white. The
+well correlation case inputs are shared with that course's learning page
+(batch 3A) and are scope-aware.
+
+Every other course's panels still render their own legacy classes and dark
+plates inside the reader until their course app batch migrates them; the
+panelKit atoms around them are already on roles (1B).
+
+### Tests
+
+- `src/pages/course/__tests__/CourseReader.theme.test.jsx`: every reader
+  page mounted as its route mounts it, with the standard four checks; the
+  lesson with an embedded panel in dark, its plots in chart frames with the
+  chart mark and no lime; a locked module; the capstone redirect route
+  registered; an unregistered route left legacy.
+- `CourseHandbook.theme.test.jsx`: the frame, the document body light in
+  the dark theme, the print stylesheet kept, the locked state for a learner.
+- `ReaderPanels.theme.test.jsx`: each reader-only panel in both themes
+  (roles outside the plots, every plot in a chart frame, lime only on the
+  P-1 circle), the correlation case inputs byte for byte outside a scope.
+- `readerHarness.jsx` mounts a route inside `Layout`; `offlineSupabase.js`
+  is the offline client the tests mock in.
+
 ## Batch 3C as built: reservoir course apps
 
 - Routes (`rollout/w3c.js`): `/dashboard/apps/` `dca`, `mbal`, `scal`,

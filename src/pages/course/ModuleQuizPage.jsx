@@ -37,7 +37,7 @@ const ModuleQuizPage = () => {
     <>
       <Helmet><title>{mod.title} quiz - Petrolord NextGen Academy</title></Helmet>
       <div className="max-w-3xl mx-auto p-6 space-y-6">
-        <Link to={`${base}/${mod.key}`} className="text-sm text-gray-400 hover:text-gray-200 flex items-center gap-1">
+        <Link to={`${base}/${mod.key}`} className="text-sm text-pl-muted hover:text-pl-text flex items-center gap-1">
           <ArrowLeft className="h-4 w-4" /> Back to the module
         </Link>
         <QuizRunner

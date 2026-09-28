@@ -39,11 +39,11 @@ export function useMappingCase({ appraisal = false } = {}) {
       {mode === 'typed' && (
         <>
           <div>
-            <label className="text-gray-400 text-xs mb-1 block" htmlFor="map-well-table">
+            <label className="text-pl-muted text-xs mb-1 block" htmlFor="map-well-table">
               One well per line: name, x, y, TOP_SAND MD, BASE_SAND MD
             </label>
             <textarea id="map-well-table" rows={7} value={table} onChange={(e) => setTable(e.target.value)}
-              className="w-full bg-gray-700 text-white border border-gray-600 rounded-md text-sm px-2 py-1 font-mono" />
+              className="w-full bg-pl-surface text-pl-text border border-pl-border-strong rounded-md text-sm px-2 py-1 font-mono" />
           </div>
           <div className="grid gap-3 grid-cols-2 sm:grid-cols-5 items-end">
             <NumField label="Prospect x (m)" value={p.tx} onChange={setK('tx')} />
