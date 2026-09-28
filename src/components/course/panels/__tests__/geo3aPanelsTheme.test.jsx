@@ -1,7 +1,8 @@
 // @vitest-environment jsdom
 //
-// Batch 3A: the geoscience I panels INSIDE a design-system scope (their
-// learning pages, and the course reader once batch 1C registers it). Every
+// Batch 3A: the panels the geoscience I learning pages render, inside a
+// design-system scope (their learning pages and the course reader). They are
+// on roles with no legacy branch: both of their screens are themed. Every
 // scene renders with no legacy console colour outside its charts in light and
 // in dark, no lime anywhere, and every chart on the white chart kit. The
 // detector is proven live with a negative control.

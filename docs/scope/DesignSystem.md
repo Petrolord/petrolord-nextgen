@@ -197,46 +197,93 @@ admins (`/dashboard/admin/super-admins`) and system settings
   harness (`admin2bHarness.jsx`, `admin2bStubs.js` with a local Supabase
   fake that answers the two table reads and throws on anything else).
 
+## 4. The course reader and the handbook (batch 1C)
+
+Registered in `src/design/rollout/w1c.js`: `/dashboard/apps/:slug/course/*`
+(course home, module, lesson, module quiz, final exam and the capstone
+redirect) and `/dashboard/admin/handbook`.
+
+| piece | file | inside the scope |
+|---|---|---|
+| course home, module, lesson, module quiz, final exam | `pages/course/*.jsx` | roles only; actions are the themed `Button` (primary), module and lesson icons gold (`accent-text`), passed and read marks on `success-text` with the word beside them |
+| lesson renderer | `components/course/MarkdownLesson.jsx` | headings and body on `text`, links on `primary-text`, callouts, code and tables on `sunken` with `border` hairlines; a panel slot and its loader on `sunken` |
+| handbook frame | `pages/AdminCourseHandbookPage.jsx` | toolbar, course tabs, loader, error and locked states on roles |
+| handbook document | the `#handbook-doc` element | a printable document: `data-canvas="document"` pinned to the light roles (`data-pl-theme="light"`) on the white chart surface, so it reads as the printed page in both themes. The print stylesheet and the HTML download are unchanged |
+
+Both users of `MarkdownLesson` (the reader and the handbook) are in 1C, so
+it moved straight to roles with no legacy branch.
+
+### The reader-only teaching panels
+
+Twenty-three geoscience panels are imported by no learning page, only by
+the panel registry, so the reader is their one screen (the rollout plan
+counts them in the lesson reader's own files): mapping (map, isochore,
+validation, with `gridPlot` and the mapping case inputs), basin (burial
+and heat, kinetics, charge), earth model (framework, tie, population), pore
+pressure (frame, Eaton, window), rock physics (fluid, substitution, AVO),
+reservoircalc (volume, block, property), seismolord (synthetic, shift,
+wedge) and well correlation (flatten, prediction). They are on roles, and
+every plot sits in `SvgChartFrame` (the Recharts pair in the synthetic
+explorer in `ChartFrame`).
+
+Colours come from `components/course/panels/readerChart.js`, which takes
+the chart kit's values (`utils/chartSvg.js`) and adds only the hues a
+lesson names: the lessons read "the white path", "each orange dot", "the
+pink dashed line" and "a hollow lime circle", and teaching content is not
+changed by the rollout. A light mark (the white well path and dots, the
+lime P-1 circle) is drawn over an ink casing so it reads on white. The
+well correlation case inputs are shared with that course's learning page
+(batch 3A) and are scope-aware.
+
+Every other course's panels still render their own legacy classes and dark
+plates inside the reader until their course app batch migrates them; the
+panelKit atoms around them are already on roles (1B).
+
+### Tests
+
+- `src/pages/course/__tests__/CourseReader.theme.test.jsx`: every reader
+  page mounted as its route mounts it, with the standard four checks; the
+  lesson with an embedded panel in dark, its plots in chart frames with the
+  chart mark and no lime; a locked module; the capstone redirect route
+  registered; an unregistered route left legacy.
+- `CourseHandbook.theme.test.jsx`: the frame, the document body light in
+  the dark theme, the print stylesheet kept, the locked state for a learner.
+- `ReaderPanels.theme.test.jsx`: each reader-only panel in both themes
+  (roles outside the plots, every plot in a chart frame, lime only on the
+  P-1 circle), the correlation case inputs byte for byte outside a scope.
+- `readerHarness.jsx` mounts a route inside `Layout`; `offlineSupabase.js`
+  is the offline client the tests mock in.
+
 ## Batch 3A: geoscience I course apps (as built)
 
 Petrophysics, Well Data, Well Correlation, Seismolord and Mapping
 (`/dashboard/apps/<slug>`, exact paths) are on the roles and registered in
 `src/design/rollout/w3a.js`.
 
-- The five learning pages and `petrophysics/WellPicker` are used by one
-  screen each, so they moved straight to roles. Lime buttons became the
-  default `Button`, tier toggles use `primary` for the active tier, the
-  Learning Mode pill is an accent (gold) tint, certificate numbers and the
-  award icon are `accent-text`, pass and fail boxes are the success and
-  danger roles with their words, and the capstone toasts use the success
-  roles.
-- The 16 panels the course reader also embeds (`panelRegistry.js`), with
-  their helpers `welldata/UserLasPicker` and the two `caseInputs`, are
-  scope-aware (`useThemeClass`, two-argument form) while the reader is
-  unmigrated. `panels/__tests__/geo3aPanelsLegacy.test.jsx` proves every
-  class outside the charts is unchanged outside a scope, against
-  `fixtures/geo3aLegacyClasses.json` captured from main `1fbbedf34`
-  (`UPDATE_GEO3A_LEGACY=1`; do not recapture while the reader is
-  unmigrated).
-- Every chart is on the chart kit in both places: Recharts in `ChartFrame`
-  (with `GRID_STYLE`, `AXIS_TICK`, `TOOLTIP_STYLE`), hand-made SVG in
-  `SvgChartFrame` (`minWidth` as before, `maxWidth` 720). Series follow the
-  old-dark-chart map; pink `#f472b6` went to `seriesColor(4)` (violet), or
-  `seriesColor(3)` where violet was already a series (Flatten explorer).
-  White point outlines stay white; the dark well dots on the maps became
-  white dots with a dark outline, so "white circles are wells" still reads
-  true. The map colour ramps are pale to deep blue (depth) and pale to deep
-  green (thickness) on the white plate, and the Mapping page contours are
-  darker hues of the same ramp.
-- Copy that named a chart colour follows the new colours (Porosity lab and
-  Petrophysics shading, Pickett water line, Synthetic explorer reference
-  line, Map explorer prospect). Lines touched follow the copy rule; the
-  Petrophysics net-pay empty cells show `n/a`.
-- Status words on the panels: a dead curve is `danger-text`; a non-uniform
-  step, a missing TOP_B and a missing pick are `warning-text`.
+- The five learning pages, `petrophysics/WellPicker` and the panels the
+  pages render (porosity lab, Pickett explorer, shaly-sand lab, Rw
+  triangulator, LAS inspector, import and campaign explorers with
+  `UserLasPicker`, the well correlation section explorer) moved straight to
+  roles: their only other screen is the course reader, themed by 1C. The
+  reader-only panels (flatten, prediction, seismolord, mapping) and the
+  correlation case inputs are 1C's and were left as 1C built them.
+- Lime buttons became the default `Button`; tier and file toggles use
+  `primary` for the active one; the Learning Mode pill is an accent (gold)
+  tint; certificate numbers and the award icon are `accent-text`; pass and
+  fail boxes are the success and danger roles with their words; the
+  capstone toasts use the success roles. On the panels a dead curve is
+  `danger-text`, a non-uniform step and a missing pick `warning-text`.
+- Charts: Recharts in `ChartFrame` (`GRID_STYLE`, `AXIS_TICK`,
+  `TOOLTIP_STYLE`), the Mapping page structure map and the section explorer
+  in `SvgChartFrame`; series by `seriesColor(n)` from the old-dark-chart map
+  (pink to `seriesColor(4)`). The Mapping page contours keep their hue ramp
+  at a darker lightness so they read on white.
+- Copy that named a chart colour follows the new colours (Petrophysics and
+  porosity lab shading, the Pickett water line). Lines touched follow the
+  copy rule; the Petrophysics net-pay empty cells show `n/a`.
 - Tests: `src/pages/__tests__/Geoscience3A.theme.test.jsx` (harness
   `geo3aHarness.jsx` with `HelmetProvider` and the toaster, stubs
   `geo3aStubs.js` on top of `frameStubs.js`) walks each app through its
   three tiers, both capstone outcomes, the Learning Mode gate and dark;
-  `geo3aPanelsTheme.test.jsx` renders every panel scene inside a scope in
-  light and dark.
+  `panels/__tests__/geo3aPanelsTheme.test.jsx` renders every page panel
+  scene inside a scope in light and dark.

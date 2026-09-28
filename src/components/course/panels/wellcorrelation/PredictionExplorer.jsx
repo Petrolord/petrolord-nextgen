@@ -2,9 +2,8 @@ import React, { useMemo, useState } from 'react';
 import { computeAdvanced } from '@/lib/correlationTeaching';
 import { useSectionWells } from '@/components/course/panels/wellcorrelation/caseInputs';
 import { PanelShell, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
-import { useThemeClass } from '@/design/themeClass';
+import { SVG_CHART as CH } from '@/components/course/panels/readerChart';
 import SvgChartFrame from '@/components/charts/SvgChartFrame';
-import { seriesColor, SVG_CHART } from '@/utils/chartSvg';
 
 // Prediction explorer: predict Ekene-4's missing TOP_B from a marker the
 // learner chooses, and show BOTH estimates against each other. The
@@ -21,7 +20,6 @@ const fmt = (v, d = 2) => (Number.isFinite(v) ? v.toFixed(d) : '-');
 const pickOf = (w, n) => w.tops.find((t) => t.name === n)?.md_m ?? null;
 
 const PredictionExplorer = () => {
-  const tc = useThemeClass();
   const [marker, setMarker] = useState('TOP_A');
   const c = useSectionWells();
   const A = useMemo(() => {
@@ -70,8 +68,8 @@ const PredictionExplorer = () => {
         {MARKERS.map((m) => (
           <button key={m.key} type="button" onClick={() => setMarker(m.key)}
             className={`px-3 py-1.5 rounded-md border text-sm ${marker === m.key
-              ? tc('bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold', 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold')
-              : tc('bg-gray-800 text-gray-300 border-gray-600', 'bg-pl-surface text-pl-text border-pl-border-strong')}`}>
+              ? 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold'
+              : 'bg-pl-sunken text-pl-muted border-pl-border hover:text-pl-text'}`}>
             {m.label}
           </button>
         ))}
@@ -80,7 +78,7 @@ const PredictionExplorer = () => {
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
-            <tr className={tc('text-gray-400 border-b border-gray-700', 'text-pl-muted border-b border-pl-border')}>
+            <tr className="text-pl-muted border-b border-pl-border">
               <th className="text-left py-2 pr-4">well</th>
               <th className="text-left py-2 pr-4">{marker}</th>
               <th className="text-left py-2 pr-4">TOP_B</th>
@@ -89,42 +87,43 @@ const PredictionExplorer = () => {
           </thead>
           <tbody>
             {model.intervals.map((r) => (
-              <tr key={r.id} className={tc('border-b border-gray-800', 'border-b border-pl-border')}>
-                <td className={tc('py-2 pr-4 text-white', 'py-2 pr-4 text-pl-text')}>{r.name}</td>
-                <td className={tc('py-2 pr-4 text-gray-300', 'py-2 pr-4 text-pl-text')}>{r.from}</td>
-                <td className={tc('py-2 pr-4 text-gray-300', 'py-2 pr-4 text-pl-text')}>{r.topB}</td>
-                <td className={tc('py-2 text-gray-300', 'py-2 text-pl-text')}>{fmt(r.interval)}</td>
+              <tr key={r.id} className="border-b border-pl-border">
+                <td className="py-2 pr-4 text-pl-text">{r.name}</td>
+                <td className="py-2 pr-4 text-pl-text">{r.from}</td>
+                <td className="py-2 pr-4 text-pl-text">{r.topB}</td>
+                <td className="py-2 text-pl-text">{fmt(r.interval)}</td>
               </tr>
             ))}
-            <tr className={tc('border-b border-gray-800', 'border-b border-pl-border')}>
-              <td className={tc('py-2 pr-4 text-[#BFFF00]', 'py-2 pr-4 text-pl-primary-text')}>{TARGET.name}</td>
-              <td className={tc('py-2 pr-4 text-[#BFFF00]', 'py-2 pr-4 text-pl-primary-text')}>{model.anchor}</td>
-              <td className={tc('py-2 pr-4 text-[#f472b6]', 'py-2 pr-4 text-pl-warning-text')}>missing</td>
-              <td className={tc('py-2 text-gray-500', 'py-2 text-pl-muted')}>mean {fmt(model.mean)}</td>
+            <tr className="border-b border-pl-border">
+              <td className="py-2 pr-4 font-semibold text-pl-accent-text">{TARGET.name}</td>
+              <td className="py-2 pr-4 font-semibold text-pl-accent-text">{model.anchor}</td>
+              <td className="py-2 pr-4 text-pl-warning-text">missing</td>
+              <td className="py-2 text-pl-muted">mean {fmt(model.mean)}</td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <SvgChartFrame width={W} height={H} label="The two TOP_B predictions and the spread between them" minWidth={460} maxWidth={720}>
-        <text x="40" y="24" fill={SVG_CHART.label} fontSize="10">Both estimates of {TARGET.name} TOP_B</text>
-        <line x1={sx(axLo)} y1="120" x2={sx(axHi)} y2="120" stroke={SVG_CHART.axis} strokeWidth="1.5" />
-        <rect x={sx(lo)} y="104" width={sx(hi) - sx(lo)} height="32" fill={seriesColor(0)} fillOpacity="0.14" />
-        <line x1={sx(lo)} y1="96" x2={sx(lo)} y2="144" stroke={seriesColor(1)} strokeWidth="2" />
-        <line x1={sx(hi)} y1="96" x2={sx(hi)} y2="144" stroke={seriesColor(4)} strokeWidth="2" />
-        <text x={sx(A.w4TopBLayercake)} y="88" fill={seriesColor(1)} fontSize="10" textAnchor="middle">
+      <SvgChartFrame width={W} height={H} minWidth={460}
+        label="The two TOP_B predictions and the spread between them">
+        <text x="40" y="24" fill={CH.ink} fontSize="10">Both estimates of {TARGET.name} TOP_B</text>
+        <line x1={sx(axLo)} y1="120" x2={sx(axHi)} y2="120" stroke={CH.grid} strokeWidth="1.5" />
+        <rect x={sx(lo)} y="104" width={sx(hi) - sx(lo)} height="32" fill={CH.green} fillOpacity="0.14" />
+        <line x1={sx(lo)} y1="96" x2={sx(lo)} y2="144" stroke={CH.blue} strokeWidth="2" />
+        <line x1={sx(hi)} y1="96" x2={sx(hi)} y2="144" stroke={CH.pink} strokeWidth="2" />
+        <text x={sx(A.w4TopBLayercake)} y="88" fill={CH.blue} fontSize="10" textAnchor="middle">
           {fmt(A.w4TopBLayercake)} from TOP_A
         </text>
-        <text x={sx(A.w4TopBFromSand)} y="164" fill={seriesColor(4)} fontSize="10" textAnchor="middle">
+        <text x={sx(A.w4TopBFromSand)} y="164" fill={CH.pink} fontSize="10" textAnchor="middle">
           {fmt(A.w4TopBFromSand)} from TOP_SAND
         </text>
-        <text x={(sx(lo) + sx(hi)) / 2} y="196" fill={seriesColor(0)} fontSize="11" textAnchor="middle">
+        <text x={(sx(lo) + sx(hi)) / 2} y="196" fill={CH.green} fontSize="11" textAnchor="middle">
           spread {fmt(A.predictionSpread)} m
         </text>
-        <text x={(sx(lo) + sx(hi)) / 2} y="214" fill={SVG_CHART.note} fontSize="9" textAnchor="middle">
-          this band is the real uncertainty
+        <text x={(sx(lo) + sx(hi)) / 2} y="214" fill={CH.text} fontSize="9" textAnchor="middle">
+          this band is the uncertainty, not a rounding
         </text>
-        <text x="40" y={H - 12} fill={SVG_CHART.tick} fontSize="9">measured depth, m</text>
+        <text x="40" y={H - 12} fill={CH.text} fontSize="9">measured depth, m</text>
       </SvgChartFrame>
 
       <TileGrid>

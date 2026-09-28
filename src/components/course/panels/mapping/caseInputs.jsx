@@ -3,7 +3,6 @@ import {
   TEACHING_WELLS, TARGET, E7, parseWellTable, wellTableText,
 } from '@/lib/mappingTeaching';
 import { SelectField, NumField } from '@/components/course/panels/petrophysics/panelKit';
-import { useThemeClass } from '@/design/themeClass';
 
 // The mapping panels open on the Ekene wells, the teaching case. "Type a
 // well set" swaps in a case of the learner's own (the capstone states one):
@@ -11,7 +10,6 @@ import { useThemeClass } from '@/design/themeClass';
 // It starts from the Ekene values so it is never blank; nothing here
 // preloads the capstone's case.
 export function useMappingCase({ appraisal = false } = {}) {
-  const tc = useThemeClass();
   const [mode, setMode] = useState('ekene');
   const [table, setTable] = useState(wellTableText(TEACHING_WELLS));
   const [p, setP] = useState({ tx: String(TARGET.x), ty: String(TARGET.y), ex: String(E7.x), ey: String(E7.y), ea: String(E7.actual) });
@@ -41,11 +39,11 @@ export function useMappingCase({ appraisal = false } = {}) {
       {mode === 'typed' && (
         <>
           <div>
-            <label className={tc('text-gray-400 text-xs mb-1 block', 'text-pl-muted text-xs mb-1 block')} htmlFor="map-well-table">
+            <label className="text-pl-muted text-xs mb-1 block" htmlFor="map-well-table">
               One well per line: name, x, y, TOP_SAND MD, BASE_SAND MD
             </label>
             <textarea id="map-well-table" rows={7} value={table} onChange={(e) => setTable(e.target.value)}
-              className={tc('w-full bg-gray-700 text-white border border-gray-600 rounded-md text-sm px-2 py-1 font-mono', 'w-full border-pl-border-strong bg-pl-surface text-pl-text border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus rounded-md text-sm px-2 py-1 font-mono')} />
+              className="w-full bg-pl-surface text-pl-text border border-pl-border-strong rounded-md text-sm px-2 py-1 font-mono" />
           </div>
           <div className="grid gap-3 grid-cols-2 sm:grid-cols-5 items-end">
             <NumField label="Prospect x (m)" value={p.tx} onChange={setK('tx')} />

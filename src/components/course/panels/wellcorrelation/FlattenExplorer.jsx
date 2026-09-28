@@ -2,9 +2,8 @@ import React, { useMemo, useState } from 'react';
 import { INTERMEDIATE_DATUM } from '@/lib/correlationTeaching';
 import { useSectionWells } from '@/components/course/panels/wellcorrelation/caseInputs';
 import { PanelShell, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
-import { useThemeClass } from '@/design/themeClass';
+import { SVG_CHART as CH } from '@/components/course/panels/readerChart';
 import SvgChartFrame from '@/components/charts/SvgChartFrame';
-import { seriesColor, SVG_CHART } from '@/utils/chartSvg';
 
 // Flatten explorer: pick a flattening top and a datum, and read the
 // shifts, displayed depths and the growth range. Intervals are shown
@@ -19,7 +18,6 @@ const fmt = (v, d = 1) => (Number.isFinite(v) ? v.toFixed(d) : '-');
 const pickOf = (w, name) => w.tops.find((t) => t.name === name)?.md_m ?? null;
 
 const FlattenExplorer = () => {
-  const tc = useThemeClass();
   const [topName, setTopName] = useState(INTERMEDIATE_DATUM.topName);
   const [datum, setDatum] = useState(String(INTERMEDIATE_DATUM.datumM));
 
@@ -70,7 +68,7 @@ const FlattenExplorer = () => {
   const plotH = H - PAD.top - PAD.bottom;
   const colX = (i) => PAD.left + (i + 0.5) * (plotW / rows.length);
   const sy = (d) => PAD.top + ((d - dMin) / Math.max(1, dMax - dMin)) * plotH;
-  const COLORS = { TOP_A: seriesColor(0), TOP_SAND: seriesColor(1), BASE_SAND: seriesColor(4), TOP_B: seriesColor(3) };
+  const COLORS = { TOP_A: CH.green, TOP_SAND: CH.blue, BASE_SAND: CH.violet, TOP_B: CH.pink };
 
   return (
     <PanelShell title="Flatten explorer"
@@ -80,15 +78,16 @@ const FlattenExplorer = () => {
         {TOPS.map((t) => (
           <button key={t} type="button" onClick={() => setTopName(t)}
             className={`px-3 py-1.5 rounded-md border text-sm ${topName === t
-              ? tc('bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold', 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold')
-              : tc('bg-gray-800 text-gray-300 border-gray-600', 'bg-pl-surface text-pl-text border-pl-border-strong')}`}>
+              ? 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold'
+              : 'bg-pl-sunken text-pl-muted border-pl-border hover:text-pl-text'}`}>
             {t}
           </button>
         ))}
         <NumField label="Datum (m)" value={datum} onChange={setDatum} />
       </div>
 
-      <SvgChartFrame width={W} height={H} label={`Section flattened on ${topName} at ${fmt(datumM)} m`} minWidth={460} maxWidth={720}>
+      <SvgChartFrame width={W} height={H} minWidth={460}
+        label={`Section flattened on ${topName} at ${fmt(datumM)} m`}>
         {TOPS.map((tn) => {
           const pts = rows
             .map((r, i) => ({ r, i, t: r.tops.find((x) => x.name === tn) }))
@@ -100,22 +99,22 @@ const FlattenExplorer = () => {
         })}
         {rows.map((r, i) => (
           <g key={r.id}>
-            <line x1={colX(i)} y1={PAD.top} x2={colX(i)} y2={H - PAD.bottom} stroke={SVG_CHART.axis} strokeWidth="1" />
-            <text x={colX(i)} y={PAD.top - 10} fill={SVG_CHART.label} fontSize="9" textAnchor="middle">{r.name}</text>
+            <line x1={colX(i)} y1={PAD.top} x2={colX(i)} y2={H - PAD.bottom} stroke={CH.grid} strokeWidth="1" />
+            <text x={colX(i)} y={PAD.top - 10} fill={CH.ink} fontSize="9" textAnchor="middle">{r.name}</text>
             {r.tops.map((t) => (t.displayed == null ? null : (
               <circle key={t.name} cx={colX(i)} cy={sy(t.displayed)} r="3" fill={COLORS[t.name]} />
             )))}
           </g>
         ))}
-        <text x="10" y={sy(dMin) + 3} fill={SVG_CHART.tick} fontSize="9">{fmt(dMin)}</text>
-        <text x="10" y={sy(dMax) + 3} fill={SVG_CHART.tick} fontSize="9">{fmt(dMax)}</text>
-        <text x={W - 12} y={H - 10} fill={SVG_CHART.tick} fontSize="9" textAnchor="end">displayed depth, m</text>
+        <text x="10" y={sy(dMin) + 3} fill={CH.text} fontSize="9">{fmt(dMin)}</text>
+        <text x="10" y={sy(dMax) + 3} fill={CH.text} fontSize="9">{fmt(dMax)}</text>
+        <text x={W - 12} y={H - 10} fill={CH.text} fontSize="9" textAnchor="end">displayed depth, m</text>
       </SvgChartFrame>
 
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
-            <tr className={tc('text-gray-400 border-b border-gray-700', 'text-pl-muted border-b border-pl-border')}>
+            <tr className="text-pl-muted border-b border-pl-border">
               <th className="text-left py-2 pr-4">well</th>
               <th className="text-left py-2 pr-4">{topName} pick</th>
               <th className="text-left py-2 pr-4">shift</th>
@@ -126,15 +125,15 @@ const FlattenExplorer = () => {
           </thead>
           <tbody>
             {rows.map((r) => (
-              <tr key={r.id} className={tc('border-b border-gray-800', 'border-b border-pl-border')}>
-                <td className={tc('py-2 pr-4 text-white', 'py-2 pr-4 text-pl-text')}>{r.name}</td>
-                <td className={tc('py-2 pr-4 text-gray-300', 'py-2 pr-4 text-pl-text')}>{r.anchor ?? 'missing'}</td>
-                <td className={tc('py-2 pr-4 text-gray-300', 'py-2 pr-4 text-pl-text')}>{r.shift == null ? '-' : fmt(r.shift)}</td>
-                <td className={tc('py-2 pr-4 text-gray-300', 'py-2 pr-4 text-pl-text')}>
+              <tr key={r.id} className="border-b border-pl-border">
+                <td className="py-2 pr-4 text-pl-text">{r.name}</td>
+                <td className="py-2 pr-4 text-pl-text">{r.anchor ?? 'missing'}</td>
+                <td className="py-2 pr-4 text-pl-text">{r.shift == null ? '-' : fmt(r.shift)}</td>
+                <td className="py-2 pr-4 text-pl-text">
                   {fmt(r.tops.find((t) => t.name === 'TOP_SAND')?.displayed)}
                 </td>
-                <td className={tc('py-2 pr-4 text-gray-300', 'py-2 pr-4 text-pl-text')}>{fmt(r.aToSand)}</td>
-                <td className={`py-2 ${r.allFour ? tc('text-gray-500', 'text-pl-muted') : tc('text-[#f472b6] font-semibold', 'text-pl-warning-text font-semibold')}`}>
+                <td className="py-2 pr-4 text-pl-text">{fmt(r.aToSand)}</td>
+                <td className={`py-2 ${r.allFour ? 'text-pl-muted' : 'text-pl-warning-text font-semibold'}`}>
                   {r.allFour ? 'yes' : 'no, TOP_B missing'}
                 </td>
               </tr>

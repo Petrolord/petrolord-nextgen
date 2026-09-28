@@ -1,7 +1,7 @@
 import React from 'react';
 import { isNull } from '@petrolord/engines/lib/gridding/gridmath.js';
+import { SVG_CHART as CH } from '@/components/course/panels/readerChart';
 import SvgChartFrame from '@/components/charts/SvgChartFrame';
-import { seriesColor, SVG_CHART } from '@/utils/chartSvg';
 
 // Shared map canvas for the two deep mapping panels. Draws the live
 // nodes of a grid, its contours and a set of posted markers in world
@@ -13,11 +13,10 @@ const PAD = { left: 48, top: 16, right: 16, bottom: 40 };
 
 const lerp = (a, b, t) => Math.round(a + (b - a) * t);
 
-// On the white chart plate: depth runs from a pale blue at the crest to a
-// deep blue; thickness from a pale green (thin) to a deep green (thick).
+// Depth: shallow amber to deep blue. Thickness: thin sky blue to thick amber.
 const RAMPS = {
-  depth: [[191, 219, 254], [30, 64, 175]],
-  thickness: [[167, 243, 208], [4, 120, 87]],
+  depth: [[217, 119, 6], [56, 89, 189]],
+  thickness: [[56, 189, 248], [251, 191, 36]],
 };
 
 function shade(v, min, max, ramp) {
@@ -56,14 +55,15 @@ export const GridMap = ({ spec, z, contours, zMin, zMax, ramp = 'depth', markers
   }
 
   return (
-    <SvgChartFrame width={W} height={H} label={label} minWidth={420} maxWidth={720}>
+    <SvgChartFrame width={W} height={H} minWidth={420}
+      label={label}>
       {cells}
 
       {contours.map((c) => (
         <g key={c.level}>
           {c.lines.map((pts, i) => (
             <polyline key={i} points={pts.map(([x, y]) => `${sx(x)},${sy(y)}`).join(' ')}
-              fill="none" stroke={SVG_CHART.note} strokeWidth="0.9" opacity="0.75" />
+              fill="none" stroke={CH.ink} strokeWidth="0.9" opacity="0.75" />
           ))}
         </g>
       ))}
@@ -75,8 +75,8 @@ export const GridMap = ({ spec, z, contours, zMin, zMax, ramp = 'depth', markers
           return (
             <g key={m.key || m.text}>
               <path d={`M ${cx} ${cy - 6} L ${cx + 6} ${cy} L ${cx} ${cy + 6} L ${cx - 6} ${cy} Z`}
-                fill={seriesColor(4)} stroke={SVG_CHART.marker} strokeWidth="1" />
-              <text x={cx + 9} y={cy + 12} fill={seriesColor(4)} fontSize="9">{m.text}</text>
+                fill={CH.pink} stroke={CH.halo} strokeWidth="1" />
+              <text x={cx + 9} y={cy + 12} fill={CH.pink} fontSize="9">{m.text}</text>
             </g>
           );
         }
@@ -84,15 +84,15 @@ export const GridMap = ({ spec, z, contours, zMin, zMax, ramp = 'depth', markers
         return (
           <g key={m.key || m.text}>
             <circle cx={cx} cy={cy} r="4"
-              fill={open ? 'none' : SVG_CHART.marker}
-              stroke={open ? seriesColor(2) : SVG_CHART.label} strokeWidth={open ? 2 : 1.5} />
-            <text x={cx + 7} y={cy - 4} fill={open ? seriesColor(2) : SVG_CHART.label} fontSize="9">{m.text}</text>
+              fill={open ? 'none' : CH.halo}
+              stroke={open ? CH.amber : CH.casing} strokeWidth={open ? 2 : 1.5} />
+            <text x={cx + 7} y={cy - 4} fill={open ? CH.amber : CH.ink} fontSize="9">{m.text}</text>
           </g>
         );
       })}
 
-      <text x={PAD.left} y={H - 14} fill={SVG_CHART.tick} fontSize="9">x {xMin} to {xMax} m</text>
-      <text x={PAD.left} y={12} fill={SVG_CHART.tick} fontSize="9">y {yMin} to {yMax} m (north up)</text>
+      <text x={PAD.left} y={H - 14} fill={CH.text} fontSize="9">x {xMin} to {xMax} m</text>
+      <text x={PAD.left} y={12} fill={CH.text} fontSize="9">y {yMin} to {yMax} m (north up)</text>
     </SvgChartFrame>
   );
 };

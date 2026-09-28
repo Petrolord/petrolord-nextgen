@@ -5,7 +5,6 @@ import {
 import { useSectionWells } from '@/components/course/panels/wellcorrelation/caseInputs';
 import { depthToY, columnX } from '@petrolord/engines/engines/wellcorrelation/section.js';
 import { PanelShell, NumField, SelectField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
-import { useThemeClass } from '@/design/themeClass';
 import SvgChartFrame from '@/components/charts/SvgChartFrame';
 import { seriesColor, SVG_CHART, GRID_LINE_PROPS } from '@/utils/chartSvg';
 
@@ -28,7 +27,6 @@ const PLOT = { left: 56, top: 24, width: W - 76, height: H - 56 };
 const fmt = (v, d = 1) => (Number.isFinite(v) ? v.toFixed(d) : '-');
 
 const SectionExplorer = () => {
-  const tc = useThemeClass();
   const [mode, setMode] = useState('structural');
   const [topName, setTopName] = useState('TOP_SAND');
   const [datumM, setDatumM] = useState('1500');
@@ -96,7 +94,7 @@ const SectionExplorer = () => {
         <SelectField label="Datum top" value={topName} onChange={setTopName}
           options={section.topNames.map((t) => [t, t])} />
         <NumField label="Datum depth (m)" value={datumM} onChange={setDatumM} />
-        <div className={tc('text-xs text-gray-500', 'text-xs text-pl-muted')}>
+        <div className="text-xs text-pl-muted">
           {mode === 'structural'
             ? 'Every well at true depth, no shifts.'
             : `${topName} pinned to ${datumM} m in every well that has it.`}
@@ -147,7 +145,7 @@ const SectionExplorer = () => {
 
       <div className="flex flex-wrap gap-3 text-xs">
         {section.topNames.map((t) => (
-          <span key={t} className={tc('flex items-center gap-1.5 text-gray-400', 'flex items-center gap-1.5 text-pl-muted')}>
+          <span key={t} className="flex items-center gap-1.5 text-pl-muted">
             <span style={{ background: TOP_COLORS[t] || SVG_CHART.note }} className="inline-block w-3 h-0.5" />
             {t}
           </span>
@@ -157,22 +155,22 @@ const SectionExplorer = () => {
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
-            <tr className={tc('text-left text-gray-400 border-b border-gray-700', 'text-left text-pl-muted border-b border-pl-border')}>
+            <tr className="text-left text-pl-muted border-b border-pl-border">
               <th className="py-2 pr-4">Well</th>
               <th className="py-2 pr-4">Shift (m)</th>
               {section.topNames.map((t) => <th key={t} className="py-2 pr-4">{t}</th>)}
               <th className="py-2 pr-4">{ZONE.top} to {ZONE.base}</th>
             </tr>
           </thead>
-          <tbody className={tc('text-gray-300', 'text-pl-text')}>
+          <tbody className="text-pl-text">
             {section.rows.map((r) => (
-              <tr key={r.id} className={tc('border-b border-gray-800', 'border-b border-pl-border')}>
-                <td className={tc('py-2 pr-4 text-white', 'py-2 pr-4 text-pl-text')}>{r.name}</td>
+              <tr key={r.id} className="border-b border-pl-border">
+                <td className="py-2 pr-4 text-pl-text">{r.name}</td>
                 <td className="py-2 pr-4">{r.shift === null ? 'not flattened' : fmt(r.shift)}</td>
                 {section.topNames.map((t) => {
                   const hit = r.tops.find((x) => x.name === t);
                   return (
-                    <td key={t} className={`py-2 pr-4 ${hit ? '' : tc('text-red-400', 'text-pl-danger-text')}`}>
+                    <td key={t} className={`py-2 pr-4 ${hit ? '' : 'text-pl-danger-text'}`}>
                       {hit ? fmt(hit.displayed) : 'missing'}
                     </td>
                   );

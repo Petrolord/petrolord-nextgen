@@ -10,6 +10,9 @@ import { useThemeClass } from '@/design/themeClass';
 // from the Ekene picks so it is never blank; nothing here preloads the
 // capstone's section.
 export function useSectionWells() {
+  // Shared with the Well Correlation learning page (batch 3A), so it is
+  // scope-aware: legacy classes outside a scope, theme roles inside one (the
+  // lesson reader, batch 1C).
   const tc = useThemeClass();
   const [mode, setMode] = useState('ekene');
   const [table, setTable] = useState(sectionTableText(TEACHING_WELLS));
@@ -28,7 +31,7 @@ export function useSectionWells() {
             One well per line: name, TOP_A, TOP_SAND, BASE_SAND, TOP_B (MD in m; a dash for a top not reached)
           </label>
           <textarea id="wc-section-table" rows={5} value={table} onChange={(e) => setTable(e.target.value)}
-            className={tc('w-full bg-gray-700 text-white border border-gray-600 rounded-md text-sm px-2 py-1 font-mono', 'w-full border-pl-border-strong bg-pl-surface text-pl-text border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus rounded-md text-sm px-2 py-1 font-mono')} />
+            className={tc('w-full bg-gray-700 text-white border border-gray-600 rounded-md text-sm px-2 py-1 font-mono', 'w-full bg-pl-surface text-pl-text border border-pl-border-strong rounded-md text-sm px-2 py-1 font-mono')} />
         </div>
       )}
     </div>

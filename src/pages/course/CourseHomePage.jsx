@@ -64,10 +64,10 @@ const CourseHomePage = () => {
       <div className="max-w-5xl mx-auto p-6 space-y-6">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
-            <h1 className="text-3xl font-bold text-white flex items-center gap-2">
-              <GraduationCap className="h-7 w-7 text-[#BFFF00]" /> {appName}
+            <h1 className="text-3xl font-bold text-pl-text flex items-center gap-2">
+              <GraduationCap className="h-7 w-7 text-pl-accent-text" /> {appName}
             </h1>
-            <p className="mt-1 text-gray-400">
+            <p className="mt-1 text-pl-muted">
               {manifest?.modules?.length} modules, {allLessons.length} lessons, about {Math.round(totalMinutes / 60)} hours of study. Modules unlock in order; each closes with a quiz, {practice
                 ? 'and the course closes with a final exam that issues the certificate.'
                 : 'the course closes with a final exam and a graded practical.'}
@@ -75,7 +75,7 @@ const CourseHomePage = () => {
           </div>
           {isEnrolled && firstUnread && (
             <Link to={`${base}/${firstUnread.moduleKey}/${firstUnread.key}`}>
-              <Button className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold">
+              <Button className="font-semibold">
                 Continue <ArrowRight className="h-4 w-4 ml-1" />
               </Button>
             </Link>
@@ -86,9 +86,9 @@ const CourseHomePage = () => {
 
         {tiers.length > 1 && (
           <Tabs value={tier} onValueChange={(t) => navigate(courseTierPath(appSlug, t))}>
-            <TabsList className="bg-[#1E293B] border border-gray-700">
+            <TabsList className="flex-wrap h-auto justify-start">
               {tiers.map((t) => (
-                <TabsTrigger key={t} value={t} className="data-[state=active]:bg-[#BFFF00] data-[state=active]:text-[#0F172A]">
+                <TabsTrigger key={t} value={t}>
                   {TIER_LABELS[t] || t}
                 </TabsTrigger>
               ))}
@@ -97,13 +97,13 @@ const CourseHomePage = () => {
         )}
 
         {!isEnrolled && (
-          <Card className="bg-[#1E293B] border-[#BFFF00]/40">
+          <Card className="border-pl-accent/60">
             <CardContent className="p-4 flex flex-wrap items-center justify-between gap-3">
-              <p className="text-gray-300 text-sm mb-0">
+              <p className="text-pl-text text-sm mb-0">
                 You are not enrolled in the {TIER_LABELS[tier] || tier} course. You can browse the syllabus; enrolling opens the lessons, quizzes and certification.
               </p>
               <Link to="/dashboard/enroll">
-                <Button size="sm" className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold">Enrol</Button>
+                <Button size="sm" className="font-semibold">Enrol</Button>
               </Link>
             </CardContent>
           </Card>
@@ -112,7 +112,7 @@ const CourseHomePage = () => {
         {isEnrolled && (
           <div>
             <Progress value={pct} className="h-2" />
-            <p className="text-xs text-gray-500 mt-1">{readSet.size}/{allLessons.length} lessons read ({pct}%)</p>
+            <p className="text-xs text-pl-muted mt-1">{readSet.size}/{allLessons.length} lessons read ({pct}%)</p>
           </div>
         )}
 
@@ -122,43 +122,43 @@ const CourseHomePage = () => {
             const unlocked = isEnrolled && st.unlocked;
             const mins = estMinutes(mod.lessons);
             return (
-              <Card key={mod.key} className={`bg-[#1E293B] border-gray-700 ${!unlocked ? 'opacity-70' : ''}`}>
+              <Card key={mod.key} className={`${!unlocked ? 'opacity-70' : ''}`}>
                 <CardHeader className="pb-2">
                   <div className="flex items-center justify-between gap-3">
-                    <CardTitle className="text-white text-lg flex items-center gap-2">
+                    <CardTitle className="text-pl-text text-lg flex items-center gap-2">
                       {st.complete
-                        ? <CheckCircle2 className="h-5 w-5 text-emerald-400" />
+                        ? <CheckCircle2 className="h-5 w-5 text-pl-success-text" />
                         : unlocked
-                          ? <BookOpen className="h-5 w-5 text-[#BFFF00]" />
-                          : <Lock className="h-5 w-5 text-gray-500" />}
+                          ? <BookOpen className="h-5 w-5 text-pl-accent-text" />
+                          : <Lock className="h-5 w-5 text-pl-muted" />}
                       Module {mi + 1}: {mod.title}
                     </CardTitle>
-                    <span className="text-xs text-gray-500 flex items-center gap-1 shrink-0">
+                    <span className="text-xs text-pl-muted flex items-center gap-1 shrink-0">
                       <Clock className="h-3.5 w-3.5" /> ~{mins} min
                     </span>
                   </div>
                   <CardDescription>
                     {mod.lessons.length} lessons
-                    {isEnrolled && ` , ${st.lessons_read} read`}
-                    {st.quiz_passed ? ' , quiz passed' : (isEnrolled && st.lessons_read === mod.lessons.length ? ' , quiz open' : '')}
+                    {isEnrolled && `, ${st.lessons_read} read`}
+                    {st.quiz_passed ? ', quiz passed' : (isEnrolled && st.lessons_read === mod.lessons.length ? ', quiz open' : '')}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="flex flex-wrap items-center gap-2">
                   {unlocked ? (
                     <>
                       <Link to={`${base}/${mod.key}`}>
-                        <Button size="sm" variant="outline" className="border-gray-600 text-gray-200">Open module</Button>
+                        <Button size="sm" variant="outline">Open module</Button>
                       </Link>
                       {st.lessons_read === mod.lessons.length && !st.quiz_passed && (
                         <Link to={`${base}/quiz/${mod.key}`}>
-                          <Button size="sm" className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold">
+                          <Button size="sm" className="font-semibold">
                             <FileQuestion className="h-4 w-4 mr-1" /> Take the module quiz
                           </Button>
                         </Link>
                       )}
                     </>
                   ) : (
-                    <p className="text-xs text-gray-500 mb-0">
+                    <p className="text-xs text-pl-muted mb-0">
                       {isEnrolled ? 'Locked. Finish the previous module (all lessons plus its quiz) to open this one.' : 'Enrol to open this module.'}
                     </p>
                   )}
@@ -169,27 +169,27 @@ const CourseHomePage = () => {
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
-          <Card className={`bg-[#1E293B] border-gray-700 ${!progress?.final_exam?.unlocked ? 'opacity-70' : ''}`}>
+          <Card className={`${!progress?.final_exam?.unlocked ? 'opacity-70' : ''}`}>
             <CardHeader className="pb-2">
-              <CardTitle className="text-white text-lg flex items-center gap-2">
+              <CardTitle className="text-pl-text text-lg flex items-center gap-2">
                 {progress?.final_exam?.passed
-                  ? <CheckCircle2 className="h-5 w-5 text-emerald-400" />
+                  ? <CheckCircle2 className="h-5 w-5 text-pl-success-text" />
                   : progress?.final_exam?.unlocked
-                    ? <FileQuestion className="h-5 w-5 text-[#BFFF00]" />
-                    : <Lock className="h-5 w-5 text-gray-500" />}
+                    ? <FileQuestion className="h-5 w-5 text-pl-accent-text" />
+                    : <Lock className="h-5 w-5 text-pl-muted" />}
                 Final exam
               </CardTitle>
               <CardDescription>Randomized exam across the whole course. Opens when every module is complete.</CardDescription>
             </CardHeader>
             <CardContent>
               {progress?.final_exam?.passed ? (
-                <p className="text-emerald-300 text-sm mb-0">Passed.</p>
+                <p className="text-pl-success-text text-sm mb-0">Passed.</p>
               ) : progress?.final_exam?.unlocked ? (
                 <Link to={`${base}/exam`}>
-                  <Button size="sm" className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold">Sit the exam</Button>
+                  <Button size="sm" className="font-semibold">Sit the exam</Button>
                 </Link>
               ) : (
-                <p className="text-xs text-gray-500 mb-0">Locked.</p>
+                <p className="text-xs text-pl-muted mb-0">Locked.</p>
               )}
             </CardContent>
           </Card>
@@ -197,34 +197,34 @@ const CourseHomePage = () => {
           {practice ? (
             <PracticeCertificateCard app={appSlug} tier={tier} progress={progress} />
           ) : (
-            <Card className={`bg-[#1E293B] border-gray-700 ${!progress?.capstone?.unlocked ? 'opacity-70' : ''}`}>
+            <Card className={`${!progress?.capstone?.unlocked ? 'opacity-70' : ''}`}>
               <CardHeader className="pb-2">
-                <CardTitle className="text-white text-lg flex items-center gap-2">
+                <CardTitle className="text-pl-text text-lg flex items-center gap-2">
                   {progress?.capstone?.passed
-                    ? <CheckCircle2 className="h-5 w-5 text-emerald-400" />
+                    ? <CheckCircle2 className="h-5 w-5 text-pl-success-text" />
                     : progress?.capstone?.unlocked
-                      ? <Award className="h-5 w-5 text-[#BFFF00]" />
-                      : <Lock className="h-5 w-5 text-gray-500" />}
+                      ? <Award className="h-5 w-5 text-pl-accent-text" />
+                      : <Lock className="h-5 w-5 text-pl-muted" />}
                   Capstone practical
                 </CardTitle>
                 <CardDescription>The graded interpretation exercise. Passing it issues your certificate.</CardDescription>
               </CardHeader>
               <CardContent>
                 {progress?.capstone?.passed ? (
-                  <p className="text-emerald-300 text-sm mb-0">Passed. See <Link to="/dashboard/certificates" className="text-[#BFFF00] hover:underline">your certificates</Link>.</p>
+                  <p className="text-pl-success-text text-sm mb-0">Passed. See <Link to="/dashboard/certificates" className="text-pl-primary-text hover:text-pl-primary-text-hover hover:underline">your certificates</Link>.</p>
                 ) : progress?.capstone?.unlocked ? (
                   <Link to={`${base}/capstone`}>
-                    <Button size="sm" className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold">Open the capstone</Button>
+                    <Button size="sm" className="font-semibold">Open the capstone</Button>
                   </Link>
                 ) : (
-                  <p className="text-xs text-gray-500 mb-0">Locked until the final exam is passed.</p>
+                  <p className="text-xs text-pl-muted mb-0">Locked until the final exam is passed.</p>
                 )}
               </CardContent>
             </Card>
           )}
         </div>
 
-        {loading && <p className="text-xs text-gray-600">Refreshing progress...</p>}
+        {loading && <p className="text-xs text-pl-muted">Refreshing progress...</p>}
       </div>
     </>
   );

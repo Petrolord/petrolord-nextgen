@@ -84,11 +84,10 @@ for (const app of GEO3A_APPS) {
 }
 
 describe('3A registry', () => {
-  it('registers exactly the five app routes, not their course reader pages', () => {
+  it('registers the five app routes and no other course app', () => {
     for (const app of GEO3A_APPS) {
       expect(isThemedPath(`/dashboard/apps/${app.slug}`)).toBe(true);
     }
-    expect(isThemedPath('/dashboard/apps/petrophysics/course/beginner/m01')).toBe(false);
     expect(isThemedPath('/dashboard/apps/reservoircalc')).toBe(false);
   });
 });

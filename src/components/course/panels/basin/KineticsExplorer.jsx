@@ -1,6 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import { computeKineticsExplorer, KEROGEN_TYPES, RAMP_RATES, easyRoRamp } from '@/lib/basinTeaching';
 import { PanelShell, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { SVG_CHART as CH } from '@/components/course/panels/readerChart';
+import SvgChartFrame from '@/components/charts/SvgChartFrame';
 
 // Kinetics explorer: the three golden Easy%Ro ramps on a log reflectance
 // axis, and the kerogen clock at a temperature the learner picks. The
@@ -17,7 +19,7 @@ const RO_LO = 0.18;
 const RO_HI = 5.0;
 const ISO_MAX_MA = 100;
 
-const RATE_COLORS = { 1: '#f87171', 3: '#BFFF00', 10: '#38bdf8' };
+const RATE_COLORS = { 1: CH.red, 3: CH.green, 10: CH.blue };
 const TYPE_LABELS = { type1: 'Type I', type2: 'Type II', type3: 'Type III' };
 
 const fmt = (v, d = 6) => (Number.isFinite(v) ? v.toFixed(d) : '-');
@@ -69,21 +71,21 @@ const KineticsExplorer = () => {
     <PanelShell title="Kinetics explorer"
       subtitle="Left: the three golden Easy%Ro ramps, 20 to 200 degC, reflectance on a log axis with the 150 degC marker. Right: the kerogen clock at the temperature and type you pick.">
       <div className="flex flex-wrap gap-2 items-center">
-        <span className="text-xs text-gray-400">Heating rate (degC/Ma):</span>
+        <span className="text-xs text-pl-muted">Heating rate (degC/Ma):</span>
         {RAMP_RATES.map((r) => (
           <button key={r} type="button" onClick={() => setRate(r)}
             className={`px-3 py-1.5 rounded-md border text-sm ${rate === r
-              ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold'
-              : 'bg-gray-800 text-gray-300 border-gray-600'}`}>
+              ? 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold'
+              : 'bg-pl-sunken text-pl-muted border-pl-border hover:text-pl-text'}`}>
             {r}
           </button>
         ))}
-        <span className="text-xs text-gray-400 ml-3">Kerogen:</span>
+        <span className="text-xs text-pl-muted ml-3">Kerogen:</span>
         {KEROGEN_TYPES.map((k) => (
           <button key={k} type="button" onClick={() => setKtype(k)}
             className={`px-3 py-1.5 rounded-md border text-sm ${ktype === k
-              ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold'
-              : 'bg-gray-800 text-gray-300 border-gray-600'}`}>
+              ? 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold'
+              : 'bg-pl-sunken text-pl-muted border-pl-border hover:text-pl-text'}`}>
             {TYPE_LABELS[k]}
           </button>
         ))}
@@ -92,46 +94,43 @@ const KineticsExplorer = () => {
         <NumField label="Isothermal temperature (degC)" value={isoTemp} onChange={setIsoTemp} />
         <NumField label="Your heating rate (degC/Ma)" value={ownRate} onChange={setOwnRate} />
         <NumField label="Read Ro at (whole degC)" value={readT} onChange={setReadT} />
-        <div className="text-xs text-gray-500">
+        <div className="text-xs text-pl-muted">
           The worked case reads the golden ramps at 150 degC and the Type II clock at 100 degC.
           {tOk ? '' : ' Enter an isothermal temperature between 60 and 180.'}
           {ownOk ? '' : ' Your ramp takes a rate from 0.5 to 20 and a whole degree from 20 to 200.'}
         </div>
       </div>
 
-      <div className="overflow-x-auto">
-        <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ minWidth: 460 }} role="img"
-          aria-label="Easy%Ro ramps and the isothermal kerogen transformation curve">
-          <rect x="0" y="0" width={W} height={H} fill="#0F172A" />
+      <SvgChartFrame width={W} height={H} minWidth={460}
+        label="Easy%Ro ramps and the isothermal kerogen transformation curve">
 
-          {[0.2, 0.5, 1, 2, 4].map((ro) => (
-            <g key={ro}>
-              <line x1={sxT(T0)} y1={syRo(ro)} x2={sxT(T1)} y2={syRo(ro)}
-                stroke="#1e293b" strokeWidth="1" />
-              <text x={sxT(T0) - 4} y={syRo(ro) + 3} fill="#64748b" fontSize="8" textAnchor="end">{ro}</text>
-            </g>
-          ))}
-          <line x1={sxT(150)} y1={PAD.top} x2={sxT(150)} y2={PAD.top + plotH}
-            stroke="#e2e8f0" strokeWidth="0.8" strokeDasharray="3 3" />
-          <text x={sxT(150)} y={PAD.top + plotH + 12} fill="#e2e8f0" fontSize="8" textAnchor="middle">150</text>
-          {rampLines.map(({ r, pts }) => (
-            <polyline key={r} points={pts} fill="none" stroke={RATE_COLORS[r]}
-              strokeWidth={r === rate ? 2.4 : 1.2} opacity={r === rate ? 1 : 0.75} />
-          ))}
-          <text x={PAD.left} y="13" fill="#94a3b8" fontSize="9">Ro (log), rates 1 / 3 / 10 degC per Ma</text>
-          <text x={PAD.left} y={H - 8} fill="#64748b" fontSize="9">20 to 200 degC</text>
+        {[0.2, 0.5, 1, 2, 4].map((ro) => (
+          <g key={ro}>
+            <line x1={sxT(T0)} y1={syRo(ro)} x2={sxT(T1)} y2={syRo(ro)}
+              stroke={CH.grid} strokeWidth="1" />
+            <text x={sxT(T0) - 4} y={syRo(ro) + 3} fill={CH.text} fontSize="8" textAnchor="end">{ro}</text>
+          </g>
+        ))}
+        <line x1={sxT(150)} y1={PAD.top} x2={sxT(150)} y2={PAD.top + plotH}
+          stroke={CH.ink} strokeWidth="0.8" strokeDasharray="3 3" />
+        <text x={sxT(150)} y={PAD.top + plotH + 12} fill={CH.ink} fontSize="8" textAnchor="middle">150</text>
+        {rampLines.map(({ r, pts }) => (
+          <polyline key={r} points={pts} fill="none" stroke={RATE_COLORS[r]}
+            strokeWidth={r === rate ? 2.4 : 1.2} opacity={r === rate ? 1 : 0.75} />
+        ))}
+        <text x={PAD.left} y="13" fill={CH.text} fontSize="9">Ro (log), rates 1 / 3 / 10 degC per Ma</text>
+        <text x={PAD.left} y={H - 8} fill={CH.text} fontSize="9">20 to 200 degC</text>
 
-          {[0.25, 0.5, 0.75].map((tr) => (
-            <line key={tr} x1={sxMa(0)} y1={syTr(tr)} x2={sxMa(ISO_MAX_MA)} y2={syTr(tr)}
-              stroke="#1e293b" strokeWidth="1" />
-          ))}
-          <polyline points={isoPts} fill="none" stroke="#fb923c" strokeWidth="2" />
-          <text x={sxMa(0)} y="13" fill="#fb923c" fontSize="9">
-            TR at {tOk ? tRaw : 100} degC, {TYPE_LABELS[ktype]} (0 to 1)
-          </text>
-          <text x={sxMa(0)} y={H - 8} fill="#64748b" fontSize="9">0 to {ISO_MAX_MA} Ma</text>
-        </svg>
-      </div>
+        {[0.25, 0.5, 0.75].map((tr) => (
+          <line key={tr} x1={sxMa(0)} y1={syTr(tr)} x2={sxMa(ISO_MAX_MA)} y2={syTr(tr)}
+            stroke={CH.grid} strokeWidth="1" />
+        ))}
+        <polyline points={isoPts} fill="none" stroke={CH.amber} strokeWidth="2" />
+        <text x={sxMa(0)} y="13" fill={CH.amber} fontSize="9">
+          TR at {tOk ? tRaw : 100} degC, {TYPE_LABELS[ktype]} (0 to 1)
+        </text>
+        <text x={sxMa(0)} y={H - 8} fill={CH.text} fontSize="9">0 to {ISO_MAX_MA} Ma</text>
+      </SvgChartFrame>
 
       <TileGrid>
         <Tile label="Ro at zero reaction" value={fmt(m.roF0, 8)} unit="%Ro" />

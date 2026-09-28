@@ -8,7 +8,6 @@ import {
 import { useWell } from './wellContext';
 import { Button } from '@/components/ui/button';
 import { PanelShell, NumField, Tile, TileGrid, Note } from './panelKit';
-import { useThemeClass } from '@/design/themeClass';
 import ChartFrame from '@/components/charts/ChartFrame';
 import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
 import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
@@ -17,7 +16,6 @@ import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 // and fits the water line themselves. A wrong window gives a wrong fit;
 // that is the point.
 const PickettExplorer = () => {
-  const tc = useThemeClass();
   const well = useWell();
   const { DEPTH, CURVES, WATER_LEG } = well;
   const [win, setWin] = useState({ top: String(WATER_LEG[0]), base: String(WATER_LEG[1]) });
@@ -74,7 +72,7 @@ const PickettExplorer = () => {
         <NumField label="Window top (m)" value={win.top} onChange={(v) => setWin((w) => ({ ...w, top: v }))} />
         <NumField label="Window base (m)" value={win.base} onChange={(v) => setWin((w) => ({ ...w, base: v }))} />
         <NumField label="n (iso-Sw lines)" value={nExp} onChange={setNExp} />
-        <Button onClick={runFit} className={tc('bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold h-8', 'font-semibold h-8')}>
+        <Button onClick={runFit} className="font-semibold h-8">
           Fit water line
         </Button>
       </div>

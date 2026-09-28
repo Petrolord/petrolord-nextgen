@@ -6,14 +6,12 @@ import {
 import { Button } from '@/components/ui/button';
 import { PanelShell, NumField, Tile, TileGrid, FieldGrid, Note } from './panelKit';
 import { useWell } from './wellContext';
-import { useThemeClass } from '@/design/themeClass';
 
 // Rw triangulator: the Expert workflow end to end. The learner corrects
 // the lab sample with Arps, converts the SP reading, fits the water leg,
 // checks the leg reads Sw ~ 1, and books SAND_A with an Rw they choose.
 // Bookings are produced on demand; nothing is pre-booked.
 const RwTriangulator = () => {
-  const tc = useThemeClass();
   const well = useWell();
   const { WATER_LEG } = well;
   const [g, setG] = useState({
@@ -78,12 +76,12 @@ const RwTriangulator = () => {
       <div className="grid gap-3 grid-cols-2 sm:grid-cols-4 items-end">
         <NumField label="Book SAND_A with Rw (ohm.m)" value={bookRwInput}
           onChange={setBookRwInput} placeholder="your adopted Rw" />
-        <Button onClick={runBooking} className={tc('bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold h-8', 'font-semibold h-8')}>
+        <Button onClick={runBooking} className="font-semibold h-8">
           Book SAND_A
         </Button>
         {bookings.length > 0 && (
           <Button variant="outline" onClick={() => setBookings([])}
-            className={tc('border-gray-600 text-gray-300 h-8', 'border-pl-border-strong text-pl-text h-8')}>
+            className="border-pl-border-strong text-pl-text h-8">
             Clear bookings
           </Button>
         )}
@@ -93,7 +91,7 @@ const RwTriangulator = () => {
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className={tc('text-gray-400 text-xs border-b border-gray-700', 'text-pl-muted text-xs border-b border-pl-border')}>
+              <tr className="text-pl-muted text-xs border-b border-pl-border">
                 <th className="text-left py-2 pr-4">Booked with Rw</th>
                 <th className="text-left py-2 pr-4">Net (m)</th>
                 <th className="text-left py-2 pr-4">NTG</th>
@@ -101,10 +99,10 @@ const RwTriangulator = () => {
                 <th className="text-left py-2 pr-4">Pay-avg Sw</th>
               </tr>
             </thead>
-            <tbody className={tc('text-gray-300', 'text-pl-text')}>
+            <tbody className="text-pl-text">
               {bookings.map((b) => (
-                <tr key={b.rw} className={tc('border-b border-gray-800', 'border-b border-pl-border')}>
-                  <td className={tc('py-2 pr-4 text-white', 'py-2 pr-4 text-pl-text')}>{fmt(b.rw)}</td>
+                <tr key={b.rw} className="border-b border-pl-border">
+                  <td className="py-2 pr-4 text-pl-text">{fmt(b.rw)}</td>
                   <td className="py-2 pr-4">{b.summary.net_m?.toFixed(1)}</td>
                   <td className="py-2 pr-4">{fmt(b.summary.ntg, 3)}</td>
                   <td className="py-2 pr-4">{fmt(b.summary.phi_avg)}</td>

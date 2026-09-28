@@ -5,9 +5,8 @@ import {
 import { isNull } from '@petrolord/engines/lib/gridding/gridmath.js';
 import { PanelShell, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 import { useMappingCase } from '@/components/course/panels/mapping/caseInputs';
-import { useThemeClass } from '@/design/themeClass';
+import { SVG_CHART as CH } from '@/components/course/panels/readerChart';
 import SvgChartFrame from '@/components/charts/SvgChartFrame';
-import { seriesColor, SVG_CHART } from '@/utils/chartSvg';
 
 // Map explorer: grid the Ekene TOP_SAND surface at a cell size the
 // learner chooses, then read the map. Control points are posted and the
@@ -19,19 +18,17 @@ const PAD = { left: 48, top: 16, right: 16, bottom: 40 };
 
 const fmt = (v, d = 2) => (Number.isFinite(v) ? v.toFixed(d) : '-');
 
-// Depth colour on the white chart plate: shallow (crest) pale blue through
-// to deep blue, the same ramp as the shared map canvas (gridPlot.jsx).
+// Depth colour: shallow (crest) amber through to deep blue.
 function depthColor(z, zMin, zMax) {
   if (!Number.isFinite(z) || zMax === zMin) return 'transparent';
   const t = (z - zMin) / (zMax - zMin);
-  const r = Math.round(191 + (30 - 191) * t);
-  const g = Math.round(219 + (64 - 219) * t);
-  const b = Math.round(254 + (175 - 254) * t);
+  const r = Math.round(217 + (56 - 217) * t);
+  const g = Math.round(119 + (89 - 119) * t);
+  const b = Math.round(6 + (189 - 6) * t);
   return `rgb(${r},${g},${b})`;
 }
 
 const MapExplorer = () => {
-  const tc = useThemeClass();
   const [cell, setCell] = useState(String(TEACHING_CELL_M));
   const c = useMappingCase();
 
@@ -94,20 +91,21 @@ const MapExplorer = () => {
       {c.ui}
       <div className="grid gap-3 grid-cols-2 sm:grid-cols-4 items-end">
         <NumField label="Cell size (m)" value={cell} onChange={setCell} />
-        <div className={tc('text-xs text-gray-500 sm:col-span-3', 'text-xs text-pl-muted sm:col-span-3')}>
+        <div className="text-xs text-pl-muted sm:col-span-3">
           The Ekene map is read at {TEACHING_CELL_M} m. Try 50 and 200 m: the crest barely moves,
           but the node counts change completely.
         </div>
       </div>
 
-      <SvgChartFrame width={W} height={H} label={`Depth map of the ${TOP_NAME} surface`} minWidth={420} maxWidth={720}>
+      <SvgChartFrame width={W} height={H} minWidth={420}
+        label={`Depth map of the ${TOP_NAME} surface`}>
         {cells}
 
         {contours.map((c) => (
           <g key={c.level}>
             {c.lines.map((pts, i) => (
               <polyline key={i} points={pts.map(([x, y]) => `${sx(x)},${sy(y)}`).join(' ')}
-                fill="none" stroke={SVG_CHART.note} strokeWidth="0.9" opacity="0.75" />
+                fill="none" stroke={CH.ink} strokeWidth="0.9" opacity="0.75" />
             ))}
           </g>
         ))}
@@ -117,8 +115,8 @@ const MapExplorer = () => {
           const top = w.tops.find((t) => t.name === TOP_NAME);
           return (
             <g key={w.name}>
-              <circle cx={sx(w.surface_x)} cy={sy(w.surface_y)} r="4" fill={SVG_CHART.marker} stroke={SVG_CHART.label} strokeWidth="1.5" />
-              <text x={sx(w.surface_x) + 7} y={sy(w.surface_y) - 4} fill={SVG_CHART.label} fontSize="9">
+              <circle cx={sx(w.surface_x)} cy={sy(w.surface_y)} r="4" fill={CH.halo} stroke={CH.casing} strokeWidth="1.5" />
+              <text x={sx(w.surface_x) + 7} y={sy(w.surface_y) - 4} fill={CH.ink} fontSize="9">
                 {w.name} {top.md_m}
               </text>
             </g>
@@ -128,12 +126,12 @@ const MapExplorer = () => {
         {/* prospect */}
         <g>
           <path d={`M ${sx(T.x)} ${sy(T.y) - 6} L ${sx(T.x) + 6} ${sy(T.y)} L ${sx(T.x)} ${sy(T.y) + 6} L ${sx(T.x) - 6} ${sy(T.y)} Z`}
-            fill={seriesColor(4)} stroke={SVG_CHART.marker} strokeWidth="1" />
-          <text x={sx(T.x) + 9} y={sy(T.y) + 12} fill={seriesColor(4)} fontSize="9">{T.label}</text>
+            fill={CH.pink} stroke={CH.halo} strokeWidth="1" />
+          <text x={sx(T.x) + 9} y={sy(T.y) + 12} fill={CH.pink} fontSize="9">{T.label}</text>
         </g>
 
-        <text x={PAD.left} y={H - 14} fill={SVG_CHART.tick} fontSize="9">x {xMin} to {xMax} m</text>
-        <text x={PAD.left} y={12} fill={SVG_CHART.tick} fontSize="9">y {yMin} to {yMax} m (north up)</text>
+        <text x={PAD.left} y={H - 14} fill={CH.text} fontSize="9">x {xMin} to {xMax} m</text>
+        <text x={PAD.left} y={12} fill={CH.text} fontSize="9">y {yMin} to {yMax} m (north up)</text>
       </SvgChartFrame>
 
       <TileGrid>
@@ -149,11 +147,11 @@ const MapExplorer = () => {
       </TileGrid>
 
       <Note>
-        White circles are wells, labelled with their own picks; the violet diamond is prospect
-        {' '}{T.label}, where there is no well. Every coloured node is an estimate; only the
-        posted picks are measured. Compare the crest against the shallowest posted pick: a smooth
-        interpolator can bow above every well, and that overshoot is a property of the method. It
-        is no discovery.
+        White circles are wells, labelled with their own picks; the pink diamond is prospect
+        {' '}{T.label}, where there is no well. Every coloured node is an estimate, not a
+        measurement. Compare the crest against the shallowest posted pick: a smooth interpolator
+        can bow above every well, and that overshoot is a property of the method rather than a
+        discovery.
       </Note>
     </PanelShell>
   );
