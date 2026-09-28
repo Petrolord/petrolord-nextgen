@@ -197,7 +197,7 @@ admins (`/dashboard/admin/super-admins`) and system settings
   harness (`admin2bHarness.jsx`, `admin2bStubs.js` with a local Supabase
   fake that answers the two table reads and throws on anything else).
 
-## Learner and account pages (batch 2A)
+## 4. Batch 2A: learner and account pages (as built)
 
 As built: enroll, get started, devices, the prerequisite waiver exam, my
 certificates, settings, notifications and the sponsor console
