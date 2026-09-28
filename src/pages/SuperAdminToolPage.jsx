@@ -141,8 +141,8 @@ const SuperAdminToolPage = () => {
         transition={{ duration: 0.8 }}
         className="px-4 py-8 md:px-8"
       >
-        <h1 className="text-4xl font-bold text-pl-text mb-2">Super Admin Management</h1>
-        <p className="text-xl text-pl-muted mb-8">Create and manage Super Admin accounts.</p>
+        <h1 className="text-3xl md:text-4xl font-bold text-pl-text mb-2">Super Admin Management</h1>
+        <p className="text-base md:text-xl text-pl-muted mb-8">Create and manage Super Admin accounts.</p>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Invitation Card */}
@@ -194,7 +194,7 @@ const SuperAdminToolPage = () => {
             <div className="bg-pl-surface rounded-lg border border-pl-border shadow-pl-sm overflow-hidden">
               <div className="p-6 border-b border-pl-border flex justify-between items-center">
                 <h2 className="text-2xl font-bold text-pl-text">Active Super Admins</h2>
-                <span className="px-3 py-1 bg-pl-sunken rounded-full text-xs text-pl-muted border border-pl-border">
+                <span className="whitespace-nowrap px-3 py-1 bg-pl-sunken rounded-full text-xs text-pl-muted border border-pl-border">
                   {superAdmins.length} Active
                 </span>
               </div>

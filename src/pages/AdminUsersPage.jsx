@@ -177,8 +177,8 @@ const AdminUsersPage = () => {
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="px-4 py-8 md:px-8">
                 <div className="flex justify-between items-center mb-8">
                     <div>
-                        <h1 className="text-4xl font-bold text-pl-text mb-2 flex items-center"><Users className="w-8 h-8 mr-4" />User Management</h1>
-                        <p className="text-xl text-pl-muted">View, edit, and manage all users.</p>
+                        <h1 className="text-3xl md:text-4xl font-bold text-pl-text mb-2 flex items-center"><Users className="w-8 h-8 mr-4" />User Management</h1>
+                        <p className="text-base md:text-xl text-pl-muted">View, edit, and manage all users.</p>
                     </div>
                 </div>
 

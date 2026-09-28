@@ -132,7 +132,7 @@ export default function AdminSponsorPools() {
             <Label className="text-pl-text mb-1 block">What one seat buys</Label>
             <div className="flex flex-col gap-1 text-sm text-pl-text">
               {Object.entries(SEAT_SCOPES).map(([k, label]) => (
-                <label key={k} className="flex items-center gap-2"><input type="radio" name="seat-scope" checked={seatScope === k} onChange={() => setSeatScope(k)} data-testid={`admin-seat-scope-${k}`} />{label}</label>
+                <label key={k} className="flex items-center gap-2"><input type="radio" className="accent-pl-primary" name="seat-scope" checked={seatScope === k} onChange={() => setSeatScope(k)} data-testid={`admin-seat-scope-${k}`} />{label}</label>
               ))}
             </div>
             <p className="text-xs text-pl-muted mt-1">Course scope: the learner's later tiers of a course they already hold a seat for take no further seat (pioneer cohorts: seats = learners x courses each).</p>
@@ -141,7 +141,7 @@ export default function AdminSponsorPools() {
             <Label className="text-pl-text mb-1 block">Tiers allowed (none ticked = any)</Label>
             <div className="flex gap-3 flex-wrap text-sm text-pl-text">
               {TIERS.map((t) => (
-                <label key={t} className="flex items-center gap-1"><input type="checkbox" checked={tiers.includes(t)} onChange={() => setTiers((s) => (s.includes(t) ? s.filter((x) => x !== t) : [...s, t]))} />{TIER_LABELS[t]}</label>
+                <label key={t} className="flex items-center gap-1"><input type="checkbox" className="accent-pl-primary" checked={tiers.includes(t)} onChange={() => setTiers((s) => (s.includes(t) ? s.filter((x) => x !== t) : [...s, t]))} />{TIER_LABELS[t]}</label>
               ))}
             </div>
           </div>
@@ -149,7 +149,7 @@ export default function AdminSponsorPools() {
             <Label className="text-pl-text mb-1 block">Courses allowed (none ticked = any available course)</Label>
             <div className="max-h-40 overflow-y-auto grid grid-cols-2 gap-1 text-sm text-pl-text rounded border border-pl-border p-2">
               {availableApps.map((a) => (
-                <label key={a.slug} className="flex items-center gap-1"><input type="checkbox" checked={appSlugs.includes(a.slug)} onChange={() => setAppSlugs((s) => (s.includes(a.slug) ? s.filter((x) => x !== a.slug) : [...s, a.slug]))} />{a.name}</label>
+                <label key={a.slug} className="flex items-center gap-1"><input type="checkbox" className="accent-pl-primary" checked={appSlugs.includes(a.slug)} onChange={() => setAppSlugs((s) => (s.includes(a.slug) ? s.filter((x) => x !== a.slug) : [...s, a.slug]))} />{a.name}</label>
               ))}
             </div>
           </div>

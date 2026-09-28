@@ -198,7 +198,7 @@ const AdminCertificationsPage = () => {
                       const status = certificateStatus(c);
                       return (
                         <tr key={c.id} className="border-b border-pl-border text-pl-text">
-                          <td className="py-2 pr-4 font-mono text-xs">
+                          <td className="py-2 pr-4 font-mono text-xs whitespace-nowrap">
                             <a href={verificationUrl(c.verify_code)} target="_blank" rel="noreferrer"
                               className="text-pl-primary-text hover:text-pl-primary-text-hover hover:underline">{c.certificate_number}</a>
                           </td>

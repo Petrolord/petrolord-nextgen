@@ -97,17 +97,17 @@ const AdminAuditLogsPage = () => {
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="px-4 py-8 md:px-8">
                 <div className="flex justify-between items-center mb-8">
                     <div>
-                        <h1 className="text-4xl font-bold text-pl-text mb-2 flex items-center"><FileText className="w-8 h-8 mr-4" />Audit Logs</h1>
-                        <p className="text-xl text-pl-muted">Track all important activities across the system.</p>
+                        <h1 className="text-3xl md:text-4xl font-bold text-pl-text mb-2 flex items-center"><FileText className="w-8 h-8 mr-4" />Audit Logs</h1>
+                        <p className="text-base md:text-xl text-pl-muted">Track all important activities across the system.</p>
                     </div>
                 </div>
 
                 <div className="bg-pl-surface rounded-lg p-4 mb-6 border border-pl-border flex flex-wrap items-center gap-4">
-                    <div className="relative flex-grow min-w-[200px]"><Search className="absolute left-3 top-1/2 -translate-y-1/2 text-pl-muted h-5 w-5" /><Input placeholder="Search user, resource, or description..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-10 w-full" /></div>
-                    <Select value={filters.userId} onValueChange={value => setFilters(f => ({ ...f, userId: value }))}><SelectTrigger className="flex-grow min-w-[150px]"><SelectValue placeholder="Filter by User" /></SelectTrigger><SelectContent><SelectItem value="all">All Users</SelectItem>{users.map(u => <SelectItem key={u.id} value={u.id}>{u.display_name || u.email}</SelectItem>)}</SelectContent></Select>
-                    <Select value={filters.action} onValueChange={value => setFilters(f => ({ ...f, action: value }))}><SelectTrigger className="flex-grow min-w-[150px]"><SelectValue /></SelectTrigger><SelectContent>{ACTIONS.map(a => <SelectItem key={a} value={a}>{a.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</SelectItem>)}</SelectContent></Select>
-                    <Select value={filters.resourceType} onValueChange={value => setFilters(f => ({ ...f, resourceType: value }))}><SelectTrigger className="flex-grow min-w-[150px]"><SelectValue /></SelectTrigger><SelectContent>{RESOURCE_TYPES.map(r => <SelectItem key={r} value={r}>{r.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</SelectItem>)}</SelectContent></Select>
-                    <Select value={filters.status} onValueChange={value => setFilters(f => ({ ...f, status: value }))}><SelectTrigger className="flex-grow min-w-[150px]"><SelectValue /></SelectTrigger><SelectContent>{STATUSES.map(s => <SelectItem key={s} value={s}>{s.charAt(0).toUpperCase() + s.slice(1)}</SelectItem>)}</SelectContent></Select>
+                    <div className="relative w-full lg:w-auto lg:flex-[2] min-w-[200px]"><Search className="absolute left-3 top-1/2 -translate-y-1/2 text-pl-muted h-5 w-5" /><Input placeholder="Search user, resource, or description..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-10 w-full" /></div>
+                    <Select value={filters.userId} onValueChange={value => setFilters(f => ({ ...f, userId: value }))}><SelectTrigger className="w-auto flex-1 min-w-[150px]"><SelectValue placeholder="Filter by User" /></SelectTrigger><SelectContent><SelectItem value="all">All Users</SelectItem>{users.map(u => <SelectItem key={u.id} value={u.id}>{u.display_name || u.email}</SelectItem>)}</SelectContent></Select>
+                    <Select value={filters.action} onValueChange={value => setFilters(f => ({ ...f, action: value }))}><SelectTrigger className="w-auto flex-1 min-w-[150px]"><SelectValue /></SelectTrigger><SelectContent>{ACTIONS.map(a => <SelectItem key={a} value={a}>{a.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</SelectItem>)}</SelectContent></Select>
+                    <Select value={filters.resourceType} onValueChange={value => setFilters(f => ({ ...f, resourceType: value }))}><SelectTrigger className="w-auto flex-1 min-w-[150px]"><SelectValue /></SelectTrigger><SelectContent>{RESOURCE_TYPES.map(r => <SelectItem key={r} value={r}>{r.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</SelectItem>)}</SelectContent></Select>
+                    <Select value={filters.status} onValueChange={value => setFilters(f => ({ ...f, status: value }))}><SelectTrigger className="w-auto flex-1 min-w-[150px]"><SelectValue /></SelectTrigger><SelectContent>{STATUSES.map(s => <SelectItem key={s} value={s}>{s.charAt(0).toUpperCase() + s.slice(1)}</SelectItem>)}</SelectContent></Select>
                 </div>
 
                 <div className="bg-pl-surface rounded-lg border border-pl-border overflow-hidden">
