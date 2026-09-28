@@ -162,7 +162,7 @@ const BuildupExplorer = () => {
               domain={[1, 4000]} allowDataOverflow
               ticks={[1, 10, 100, 1000]} tick={AXIS_TICK} />
             <YAxis dataKey="pws" type="number" domain={['dataMin - 20', 'dataMax + 20']}
-              tick={AXIS_TICK} />
+              tick={AXIS_TICK} width={52} tickFormatter={(v) => fmt(v, 0)} />
             <Tooltip contentStyle={TOOLTIP_STYLE}
               formatter={(v) => fmt(v, 2)} />
             <Scatter data={points.filter((p) => !p.inFit)} dataKey="pws" fill={SVG_CHART.reference} />
