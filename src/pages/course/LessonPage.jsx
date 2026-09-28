@@ -92,13 +92,13 @@ const LessonPage = () => {
       <Helmet><title>{lesson.title} - Petrolord NextGen Academy</title></Helmet>
       <div className="max-w-3xl mx-auto p-6 space-y-6">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <Link to={base} className="text-sm text-gray-400 hover:text-gray-200 flex items-center gap-1">
+          <Link to={base} className="text-sm text-pl-muted hover:text-pl-text flex items-center gap-1">
             <ArrowLeft className="h-4 w-4" /> Course home
           </Link>
-          <span className="text-xs text-gray-500 flex items-center gap-1">
+          <span className="text-xs text-pl-muted flex items-center gap-1">
             <Clock className="h-3.5 w-3.5" /> ~{lesson.est_minutes} min
             {alreadyRead && (
-              <span className="text-emerald-400 flex items-center gap-1 ml-2">
+              <span className="text-pl-success-text flex items-center gap-1 ml-2">
                 <CheckCircle2 className="h-3.5 w-3.5" /> read
               </span>
             )}
@@ -106,26 +106,26 @@ const LessonPage = () => {
         </div>
 
         <div>
-          <p className="text-xs uppercase tracking-wide text-gray-500 mb-1">{mod.title}</p>
-          <h1 className="text-2xl font-bold text-white">
+          <p className="text-xs uppercase tracking-wide text-pl-accent-text mb-1">{mod.title}</p>
+          <h1 className="text-2xl font-bold text-pl-text">
             Lesson {flatIndex + 1}: {lesson.title}
           </h1>
         </div>
 
         {loadError ? (
-          <p className="text-red-300">{loadError}</p>
+          <p className="text-pl-danger-text">{loadError}</p>
         ) : raw === null ? (
           <div className="flex items-center justify-center h-40">
-            <Loader2 className="h-8 w-8 animate-spin text-[#BFFF00]" />
+            <Loader2 className="h-8 w-8 animate-spin text-pl-primary-text" />
           </div>
         ) : (
           <MarkdownLesson raw={raw} app={appSlug} tier={tier} moduleKey={moduleKey} />
         )}
 
-        <div className="flex flex-wrap items-center justify-between gap-3 border-t border-gray-700 pt-4">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-t border-pl-border pt-4">
           {prev ? (
             <Link to={`${base}/${prev.moduleKey}/${prev.key}`}>
-              <Button variant="outline" className="border-gray-600 text-gray-200">
+              <Button variant="outline">
                 <ArrowLeft className="h-4 w-4 mr-1" /> Previous
               </Button>
             </Link>
@@ -133,7 +133,7 @@ const LessonPage = () => {
           <Button
             onClick={markAndContinue}
             disabled={marking || raw === null}
-            className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold"
+            className="font-semibold"
           >
             {marking ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
             {alreadyRead ? 'Continue' : 'Mark as read and continue'}

@@ -3,6 +3,8 @@ import {
   TEACHING_WELLS, TEACHING_OWC_M, PROPS, computeVolumes,
 } from '@/lib/reservoircalcTeaching';
 import { PanelShell, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { SVG_CHART as CH } from '@/components/course/panels/readerChart';
+import SvgChartFrame from '@/components/charts/SvgChartFrame';
 
 // Volume explorer: clip the Ekene SAND against an oil water contact the
 // learner chooses, then read the volumetric chain. Dry wells are posted
@@ -105,41 +107,38 @@ const VolumeExplorer = () => {
         <NumField label="Water saturation" value={sw} onChange={setSw} />
         <NumField label="Bo (rb/stb)" value={bo} onChange={setBo} />
       </div>
-      <div className="text-xs text-gray-500">
+      <div className="text-xs text-pl-muted">
         The panel opens on the teaching case: a {TEACHING_OWC_M} m contact with NTG {PROPS.ntg},
         porosity {PROPS.phi}, Sw {PROPS.sw} and Bo {PROPS.bo}. Try 1550 and 1570 m: the properties
         never change, and the volume moves by a factor of five. A capstone brief states its own
         contact and properties; type them in here.
       </div>
 
-      <div className="overflow-x-auto">
-        <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ minWidth: 420 }} role="img"
-          aria-label={`Oil column map of the Ekene SAND above a ${fmt(owcM, 0)} m contact`}>
-          <rect x="0" y="0" width={W} height={H} fill="#0F172A" />
-          {cells}
+      <SvgChartFrame width={W} height={H} minWidth={420}
+        label={`Oil column map of the Ekene SAND above a ${fmt(owcM, 0)} m contact`}>
+        {cells}
 
-          {/* control wells, posted with their oil column at this contact */}
-          {TEACHING_WELLS.map((w) => {
-            const top = w.tops.find((t) => t.name === 'TOP_SAND').md_m;
-            const base = w.tops.find((t) => t.name === 'BASE_SAND').md_m;
-            const col = Math.min(base, owcM) - top;
-            const dry = col <= 0;
-            return (
-              <g key={w.name}>
-                <circle cx={sx(w.surface_x)} cy={sy(w.surface_y)} r="4"
-                  fill={dry ? '#0F172A' : '#fff'} stroke={dry ? '#f87171' : '#fff'} strokeWidth="1.5" />
-                <text x={sx(w.surface_x) + 7} y={sy(w.surface_y) - 4}
-                  fill={dry ? '#f87171' : '#e2e8f0'} fontSize="9">
-                  {w.name} {dry ? 'dry' : `${fmt(col, 0)} m`}
-                </text>
-              </g>
-            );
-          })}
+        {/* control wells, posted with their oil column at this contact */}
+        {TEACHING_WELLS.map((w) => {
+          const top = w.tops.find((t) => t.name === 'TOP_SAND').md_m;
+          const base = w.tops.find((t) => t.name === 'BASE_SAND').md_m;
+          const col = Math.min(base, owcM) - top;
+          const dry = col <= 0;
+          return (
+            <g key={w.name}>
+              <circle cx={sx(w.surface_x)} cy={sy(w.surface_y)} r="4"
+                fill={CH.halo} stroke={dry ? CH.red : CH.casing} strokeWidth="1.5" />
+              <text x={sx(w.surface_x) + 7} y={sy(w.surface_y) - 4}
+                fill={dry ? CH.red : CH.ink} fontSize="9">
+                {w.name} {dry ? 'dry' : `${fmt(col, 0)} m`}
+              </text>
+            </g>
+          );
+        })}
 
-          <text x={PAD.left} y={H - 14} fill="#64748b" fontSize="9">x {xMin} to {xMax} m</text>
-          <text x={PAD.left} y={12} fill="#64748b" fontSize="9">y {yMin} to {yMax} m (north up)</text>
-        </svg>
-      </div>
+        <text x={PAD.left} y={H - 14} fill={CH.text} fontSize="9">x {xMin} to {xMax} m</text>
+        <text x={PAD.left} y={12} fill={CH.text} fontSize="9">y {yMin} to {yMax} m (north up)</text>
+      </SvgChartFrame>
 
       <TileGrid>
         <Tile label="Oil-bearing cells" value={String(s.oilCells)} unit={`of ${spec.nx * spec.ny}`} />

@@ -31,12 +31,12 @@ const PETROLORD_LOGO = 'https://horizons-cdn.hostinger.com/80504870-35f5-4fc9-ba
 const QuestionList = ({ questions }) => (
   <ol className="space-y-4">
     {(questions || []).map((qq, i) => (
-      <li key={i} className="rounded-md border border-gray-700 bg-[#0F172A] p-4 break-inside-avoid">
-        <p className="text-white text-sm font-medium mb-2">{i + 1}. {qq.prompt}</p>
+      <li key={i} className="rounded-md border border-pl-border bg-pl-raised p-4 break-inside-avoid">
+        <p className="text-pl-text text-sm font-medium mb-2">{i + 1}. {qq.prompt}</p>
         <div className="grid gap-1.5 sm:grid-cols-2">
           {(qq.options || []).map((opt, oi) => (
-            <p key={oi} className="text-gray-300 text-sm mb-0">
-              <span className="text-gray-500 font-mono mr-1.5">{OPTION_LETTERS[oi] || oi + 1}.</span>
+            <p key={oi} className="text-pl-text text-sm mb-0">
+              <span className="text-pl-muted font-mono mr-1.5">{OPTION_LETTERS[oi] || oi + 1}.</span>
               {opt}
             </p>
           ))}
@@ -84,13 +84,13 @@ const AdminCourseHandbookPage = () => {
   if (!isStaff) {
     return (
       <div className="max-w-xl mx-auto p-8 text-center space-y-4">
-        <Lock className="h-10 w-10 text-[#BFFF00] mx-auto" />
-        <h2 className="text-2xl font-bold text-white">Course handbook</h2>
-        <p className="text-gray-400">
+        <Lock className="h-10 w-10 text-pl-accent-text mx-auto" />
+        <h2 className="text-2xl font-bold text-pl-text">Course handbook</h2>
+        <p className="text-pl-muted">
           The handbook is available to lecturers and administrators.
         </p>
         <Link to="/dashboard">
-          <Button variant="outline" className="border-gray-600 text-gray-200">Back to dashboard</Button>
+          <Button variant="outline">Back to dashboard</Button>
         </Link>
       </div>
     );
@@ -99,9 +99,9 @@ const AdminCourseHandbookPage = () => {
   if (courses.length === 0) {
     return (
       <div className="max-w-xl mx-auto p-8 text-center space-y-4">
-        <BookOpen className="h-10 w-10 text-[#BFFF00] mx-auto" />
-        <h2 className="text-2xl font-bold text-white">No deep courses yet</h2>
-        <p className="text-gray-400">
+        <BookOpen className="h-10 w-10 text-pl-accent-text mx-auto" />
+        <h2 className="text-2xl font-bold text-pl-text">No deep courses yet</h2>
+        <p className="text-pl-muted">
           The handbook fills in as course content ships.
         </p>
       </div>
@@ -193,20 +193,19 @@ const AdminCourseHandbookPage = () => {
       <div className="max-w-4xl mx-auto p-6 space-y-6">
         <div className="flex flex-wrap items-start justify-between gap-3 print:hidden">
           <div>
-            <h1 className="text-3xl font-bold text-white flex items-center gap-2">
-              <BookOpen className="h-7 w-7 text-[#BFFF00]" /> Course handbook
+            <h1 className="text-3xl font-bold text-pl-text flex items-center gap-2">
+              <BookOpen className="h-7 w-7 text-pl-accent-text" /> Course handbook
             </h1>
-            <p className="mt-1 text-gray-400">
+            <p className="mt-1 text-pl-muted">
               The full course as learners see it, plus the question banks. Answer keys stay on the server and are never shown here.
             </p>
           </div>
           <div className="flex gap-2">
             <Button onClick={downloadHandbook} disabled={!ready}
-              className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold">
+              className="font-semibold">
               <Download className="h-4 w-4 mr-1" /> Download
             </Button>
-            <Button onClick={() => window.print()} disabled={!ready} variant="outline"
-              className="border-[#BFFF00] text-[#BFFF00] hover:bg-[#BFFF00] hover:text-[#0F172A]">
+            <Button onClick={() => window.print()} disabled={!ready} variant="outline">
               <Printer className="h-4 w-4 mr-1" /> Print
             </Button>
           </div>
@@ -214,10 +213,9 @@ const AdminCourseHandbookPage = () => {
 
         {courses.length > 1 && (
           <Tabs value={String(selected)} onValueChange={(v) => setSelected(Number(v))} className="print:hidden">
-            <TabsList className="bg-[#1E293B] border border-gray-700 flex-wrap h-auto">
+            <TabsList className="flex-wrap h-auto justify-start">
               {courses.map((c, i) => (
-                <TabsTrigger key={`${c.app_slug}/${c.tier}`} value={String(i)}
-                  className="data-[state=active]:bg-[#BFFF00] data-[state=active]:text-[#0F172A]">
+                <TabsTrigger key={`${c.app_slug}/${c.tier}`} value={String(i)}>
                   {appName(c.app_slug)} ({TIER_LABELS[c.tier] || c.tier})
                 </TabsTrigger>
               ))}
@@ -226,20 +224,25 @@ const AdminCourseHandbookPage = () => {
         )}
 
         {error && (
-          <Card className="bg-[#1E293B] border-red-800">
-            <CardContent className="p-4 text-red-300 text-sm">{error}</CardContent>
+          <Card className="border-pl-danger bg-pl-danger-bg">
+            <CardContent className="p-4 text-pl-danger-text text-sm">{error}</CardContent>
           </Card>
         )}
 
         {manifest && (bodies === null || banks === null) && !error && (
           <div className="flex items-center justify-center h-40">
-            <Loader2 className="h-8 w-8 animate-spin text-[#BFFF00]" />
+            <Loader2 className="h-8 w-8 animate-spin text-pl-primary-text" />
           </div>
         )}
 
         {manifest && bodies && banks && (
-          <div id="handbook-doc" className="space-y-8">
-            <div className="border-b border-gray-700 pb-4">
+          <div
+            id="handbook-doc"
+            data-canvas="document"
+            data-pl-theme="light"
+            className="space-y-8 rounded-lg border border-pl-border bg-pl-chart-surface p-6 shadow-pl-sm sm:p-10 print:rounded-none print:border-0 print:p-0 print:shadow-none"
+          >
+            <div className="border-b border-pl-border pb-4">
               {/* Width/height attributes, not Tailwind, so the standalone
                   HTML download sizes the logo correctly too. */}
               <img
@@ -249,14 +252,14 @@ const AdminCourseHandbookPage = () => {
                 height="56"
                 className="mb-4 rounded-lg"
               />
-              <p className="text-xs uppercase tracking-[0.3em] text-gray-500 mb-1">
+              <p className="text-xs uppercase tracking-[0.3em] text-pl-accent-text mb-1">
                 Petrolord NextGen Academy staff handbook
               </p>
-              <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-                <GraduationCap className="h-6 w-6 text-[#BFFF00]" />
+              <h2 className="text-2xl font-bold text-pl-text flex items-center gap-2">
+                <GraduationCap className="h-6 w-6 text-pl-accent-text" />
                 {appName(manifest.app_slug)}: {TIER_LABELS[manifest.tier] || manifest.tier}
               </h2>
-              <p className="text-sm text-gray-400 mt-1 mb-0">
+              <p className="text-sm text-pl-muted mt-1 mb-0">
                 Content version {manifest.content_version}. {manifest.modules.length} modules,{' '}
                 {allLessons.length} lessons, about {Math.round(totalMinutes / 60)} hours of study.{' '}
                 {moduleQuestionTotal} module quiz questions and {(banks.final_bank || []).length} final
@@ -266,18 +269,18 @@ const AdminCourseHandbookPage = () => {
 
             {manifest.modules.map((mod, mi) => (
               <section key={mod.key}>
-                <h3 className="text-xl font-bold text-white border-b border-gray-700 pb-2">
+                <h3 className="text-xl font-bold text-pl-text border-b border-pl-border pb-2">
                   Module {mi + 1}: {mod.title}
-                  <span className="ml-2 text-sm font-normal text-gray-500">
+                  <span className="ml-2 text-sm font-normal text-pl-muted">
                     {mod.lessons.length} lessons, ~{estMinutes(mod.lessons)} min
                   </span>
                 </h3>
 
                 {mod.lessons.map((les, li) => (
                   <div key={les.key} className="mt-6 break-inside-avoid-page">
-                    <h4 className="text-lg font-semibold text-[#BFFF00]">
+                    <h4 className="text-lg font-semibold text-pl-primary-text">
                       {mi + 1}.{li + 1} {les.title}
-                      <span className="ml-2 text-xs font-normal text-gray-500">~{les.est_minutes} min</span>
+                      <span className="ml-2 text-xs font-normal text-pl-muted">~{les.est_minutes} min</span>
                     </h4>
                     <div className="mt-2">
                       <MarkdownLesson
@@ -292,8 +295,8 @@ const AdminCourseHandbookPage = () => {
                 ))}
 
                 <div className="mt-6">
-                  <h4 className="text-lg font-semibold text-white flex items-center gap-2">
-                    <FileQuestion className="h-5 w-5 text-[#BFFF00]" />
+                  <h4 className="text-lg font-semibold text-pl-text flex items-center gap-2">
+                    <FileQuestion className="h-5 w-5 text-pl-accent-text" />
                     Module quiz bank ({(moduleBankByKey[mod.key] || []).length} questions)
                   </h4>
                   <div className="mt-3">
@@ -304,7 +307,7 @@ const AdminCourseHandbookPage = () => {
             ))}
 
             <section>
-              <h3 className="text-xl font-bold text-white border-b border-gray-700 pb-2">
+              <h3 className="text-xl font-bold text-pl-text border-b border-pl-border pb-2">
                 Final exam bank ({(banks.final_bank || []).length} questions)
               </h3>
               <div className="mt-3">
