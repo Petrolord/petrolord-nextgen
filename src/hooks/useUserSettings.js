@@ -41,7 +41,6 @@ export const useUserSettings = () => {
       toast({
         title: "Preferences saved",
         description: "Your settings have been updated successfully.",
-        className: "bg-emerald-600 text-white border-none"
       });
       return updated;
     } catch (error) {

@@ -15,6 +15,8 @@ import LockedCard from '@/components/course/LockedCard';
 // bank, 70%, no enrolment, no sponsor seat) and the prerequisite is met
 // for 12 months. Everything that matters is server-side
 // (academy_get_prereq_waiver_exam / academy_submit_prereq_waiver_exam).
+// Design system (batch 2A): inside the signed-in scope, on theme roles;
+// QuizRunner and LockedCard are the 1B course kit and theme themselves.
 const PrereqWaiverPage = () => {
   const { appSlug } = useParams();
   const [root, setRoot] = useState(undefined);
@@ -29,7 +31,7 @@ const PrereqWaiverPage = () => {
   const submit = useCallback((attemptId, answers) => submitPrereqWaiverExam(attemptId, answers), []);
 
   if (root === undefined) {
-    return <div className="flex items-center justify-center h-64"><Loader2 className="h-8 w-8 animate-spin text-[#BFFF00]" /></div>;
+    return <div className="flex items-center justify-center h-64"><Loader2 className="h-8 w-8 animate-spin text-pl-primary-text" /></div>;
   }
   if (!root) {
     return <LockedCard title="No waiver exam for this course" note="Waiver exams exist only for courses that are a prerequisite of others." backTo="/dashboard/enroll" backLabel="Back to Enroll" />;
@@ -38,13 +40,13 @@ const PrereqWaiverPage = () => {
   return (
     <>
       <Helmet><title>{root.name} waiver exam - Petrolord NextGen Academy</title></Helmet>
-      <div className="max-w-3xl mx-auto p-6 space-y-6">
-        <Link to="/dashboard/enroll" className="text-sm text-gray-400 hover:text-gray-200 flex items-center gap-1">
+      <div className="max-w-3xl mx-auto px-4 py-6 sm:p-6 space-y-6">
+        <Link to="/dashboard/enroll" className="text-sm text-pl-muted hover:text-pl-text flex items-center gap-1 w-fit">
           <ArrowLeft className="h-4 w-4" /> Back to Enroll
         </Link>
-        <Card className="bg-[#1E293B] border-[#BFFF00]/40">
-          <CardContent className="p-4 flex items-start gap-3 text-sm text-gray-300">
-            <BadgeCheck className="h-5 w-5 text-[#BFFF00] shrink-0 mt-0.5" />
+        <Card className="border-pl-accent/60">
+          <CardContent className="p-4 flex items-start gap-3 text-sm text-pl-text">
+            <BadgeCheck className="h-5 w-5 text-pl-accent-text shrink-0 mt-0.5" aria-hidden="true" />
             <p className="mb-0">
               {root.name} is the prerequisite root of the geoscience path. This exam is free, needs no
               enrollment and takes no sponsor seat. Pass it and every course that lists {root.name} as a
