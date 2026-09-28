@@ -214,7 +214,7 @@ const SponsorConsolePage = () => {
 
             <Card className="lg:col-span-2 min-w-0">
               <CardHeader className="flex flex-row flex-wrap items-start justify-between gap-4 space-y-0">
-                <div>
+                <div className="min-w-[14rem] flex-1 basis-0">
                   <CardTitle className="text-pl-text">Where the seats went</CardTitle>
                   <CardDescription>
                     {summary.total} assignment{summary.total === 1 ? '' : 's'}: {summary.active} active, {summary.cancelled} cancelled ({summary.returned} seat{summary.returned === 1 ? '' : 's'} returned), {summary.certified} certified.

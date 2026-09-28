@@ -169,7 +169,7 @@ export default function SponsorProgressPanel({ poolId, fileStem = 'sponsor' }) {
   return (
     <Card className="min-w-0" data-testid="sponsor-progress">
       <CardHeader className="flex flex-row flex-wrap items-start justify-between gap-4 space-y-0">
-        <div>
+        <div className="min-w-[14rem] flex-1 basis-0">
           <CardTitle className="text-pl-text flex items-center gap-2"><TrendingUp className="h-4 w-4 text-pl-primary-text" aria-hidden="true" />Learner progress</CardTitle>
           <CardDescription>
             {sum.learners} active learner{sum.learners === 1 ? '' : 's'}, {sum.avgProgressPct}% average progress, {sum.finalPassed} final exam{sum.finalPassed === 1 ? '' : 's'} passed, {sum.capstonePassed} capstone{sum.capstonePassed === 1 ? '' : 's'} passed, {sum.certified} certified.
