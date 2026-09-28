@@ -17,7 +17,7 @@ import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/compo
 
 const fmt = (v, d = 4) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: Math.min(d, 2) })
-  : '-');
+  : 'n/a');
 // Pressures in MPa to 6 dp, which is 1 Pa: the precision the course grades them at.
 const MPa = (v) => fmt(v / 1e6, 6);
 

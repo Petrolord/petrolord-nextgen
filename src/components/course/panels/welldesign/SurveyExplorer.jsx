@@ -17,7 +17,7 @@ import { PanelShell, SelectField, Tile, TileGrid, Note } from '@/components/cour
 
 const fmt = (v, d = 4) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: Math.min(d, 2) })
-  : '-');
+  : 'n/a');
 
 const MODES = [
   { value: 'listing', label: 'Survey listing' },

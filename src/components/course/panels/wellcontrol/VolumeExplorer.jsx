@@ -7,7 +7,7 @@ import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/compo
 
 const fmt = (v, d = 4) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: Math.min(d, 2) })
-  : '-');
+  : 'n/a');
 
 const MODES = [
   { value: 'volumes', label: 'Volumes and strokes' },
@@ -35,9 +35,9 @@ const Volumes = ({ initialWell = 'horizontal' }) => {
         <Tile label="String volume" value={fmt(v.stringVolumeM3, 8)} unit="m3" />
         <Tile label="Annulus volume" value={fmt(v.annulusVolumeM3, 8)} unit="m3" />
         <Tile label="Total circulating" value={fmt(v.totalCirculatingM3, 8)} unit="m3" />
-        <Tile label="Strokes to the bit" value={ok ? fmt(v.stringVolumeM3 / q, 6) : '-'} />
-        <Tile label="Bottoms up" value={ok ? fmt(v.annulusVolumeM3 / q, 6) : '-'} />
-        <Tile label="Full cycle" value={ok ? fmt(v.totalCirculatingM3 / q, 6) : '-'} />
+        <Tile label="Strokes to the bit" value={ok ? fmt(v.stringVolumeM3 / q, 6) : 'n/a'} />
+        <Tile label="Bottoms up" value={ok ? fmt(v.annulusVolumeM3 / q, 6) : 'n/a'} />
+        <Tile label="Full cycle" value={ok ? fmt(v.totalCirculatingM3 / q, 6) : 'n/a'} />
         <Tile label="Bit measured depth" value={fmt(v.bitMd, 1)} unit="m" />
         <Tile label="TVD at the bit" value={fmt(v.tvdBhM, 6)} unit="m" />
         <Tile label="TVD at the shoe" value={fmt(v.tvdShoeM, 6)} unit="m" />

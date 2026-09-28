@@ -17,7 +17,7 @@ import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/compo
 
 const fmt = (v, d = 4) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: Math.min(d, 2) })
-  : '-');
+  : 'n/a');
 const kN = (v) => fmt(v / 1000, 3);
 const N = (v) => fmt(v, 2);
 const Nm = (v) => fmt(v, 3);
@@ -149,7 +149,7 @@ const Oracle = () => {
               <tr key={r.stepM} className="border-t border-pl-border">
                 <td className="p-2 text-right text-pl-text">{fmt(r.stepM, 2)}</td>
                 <td className="p-2 text-right text-pl-text">{fmt(r.hookloadN, 3)}</td>
-                <td className="p-2 text-right text-pl-muted">{r.vsOracleN == null ? '-' : fmt(r.vsOracleN, 3)}</td>
+                <td className="p-2 text-right text-pl-muted">{r.vsOracleN == null ? 'n/a' : fmt(r.vsOracleN, 3)}</td>
               </tr>
             ))}
           </tbody>

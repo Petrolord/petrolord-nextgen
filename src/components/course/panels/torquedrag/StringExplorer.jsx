@@ -16,7 +16,7 @@ import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/compo
 
 const fmt = (v, d = 2) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: Math.min(d, 2) })
-  : '-');
+  : 'n/a');
 const kN = (v) => fmt(v / 1000, 3);
 // Hookloads and tensions in newtons to 2 dp, torques in N.m to 3 dp: the
 // precision the course grades them at.

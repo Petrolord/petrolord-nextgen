@@ -16,11 +16,11 @@ import { PanelShell, SelectField, Tile, TileGrid, Note } from '@/components/cour
 
 const fmt = (v, d = 3) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: Math.min(d, 2) })
-  : '-');
+  : 'n/a');
 const MPa = (v) => fmt(v / 1e6, 3);
 const kN = (v) => fmt(v / 1e3, 1);
 // Ratings in whole pascals, the precision the course grades them at.
-const Pa = (v) => (Number.isFinite(v) ? Math.round(v).toLocaleString('en-US') : '-');
+const Pa = (v) => (Number.isFinite(v) ? Math.round(v).toLocaleString('en-US') : 'n/a');
 
 const ROW_OPTIONS = ROWS.map((r) => ({ value: `${r.odIn}|${r.weightLbFt}`, label: `${r.designation} (${r.kind})` }));
 const GRADE_OPTIONS = CASING_GRADES.map((g) => ({ value: g.name, label: g.name }));

@@ -16,7 +16,7 @@ import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/compo
 
 const fmt = (v, d = 4) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: Math.min(d, 2) })
-  : '-');
+  : 'n/a');
 const MPa = (v) => fmt(v / 1e6, 5);
 
 const MODES = [
@@ -77,7 +77,7 @@ const Profile = () => {
           <Tile label="Samples clamped" value={s.clampedCount} unit={`of ${PROFILE.tvdM.length}`} />
           <Tile label="Ordering breaches" value={viol.length} unit={`of ${PROFILE.tvdM.length}`} />
           <Tile label="Quality score" value={q.score} unit="of 100" />
-          <Tile label="Deepest breach" value={viol.length ? fmt(viol[viol.length - 1].tvdM, 0) : '-'} unit="m" />
+          <Tile label="Deepest breach" value={viol.length ? fmt(viol[viol.length - 1].tvdM, 0) : 'n/a'} unit="m" />
         </TileGrid>
       )}
       <Note>

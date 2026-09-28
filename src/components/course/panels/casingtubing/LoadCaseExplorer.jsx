@@ -15,7 +15,7 @@ import { PanelShell, SelectField, Tile, TileGrid, Note } from '@/components/cour
 
 const fmt = (v, d = 4) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: Math.min(d, 2) })
-  : '-');
+  : 'n/a');
 const sf = (v) => (Number.isFinite(v) ? fmt(v, 6) : 'none');
 
 const CASE_OPTIONS = LOAD_CASE_KINDS.map((k) => ({ value: k, label: k }));
@@ -72,10 +72,10 @@ const Profile = () => {
               <tr key={`sec${i + 1}`}>
                 <td className="pr-3">{i + 1}</td>
                 <td className="text-right pr-3">{sf(s.burstSF)}</td>
-                <td className="text-right pr-3">{s.burstAtTvdM == null ? '-' : fmt(s.burstAtTvdM, 3)}</td>
+                <td className="text-right pr-3">{s.burstAtTvdM == null ? 'n/a' : fmt(s.burstAtTvdM, 3)}</td>
                 <td className="text-right pr-3">{sf(s.collapseSF)}</td>
-                <td className="text-right pr-3">{s.collapseAtTvdM == null ? '-' : fmt(s.collapseAtTvdM, 3)}</td>
-                <td className="text-right pr-3">{s.collapseRegime || '-'}</td>
+                <td className="text-right pr-3">{s.collapseAtTvdM == null ? 'n/a' : fmt(s.collapseAtTvdM, 3)}</td>
+                <td className="text-right pr-3">{s.collapseRegime || 'n/a'}</td>
                 <td className="text-right pr-3">{sf(s.tensionSF)}</td>
                 <td className="text-right pr-3">{sf(s.triaxSF)}</td>
                 <td className={`text-right ${STATUS_COLOUR[s.status]}`}>{s.status}</td>
