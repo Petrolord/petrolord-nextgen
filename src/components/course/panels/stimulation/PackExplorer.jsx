@@ -1,8 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid,
+  LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid,
   Tooltip, Legend, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   PARAMS, PROPPANT, CFD_OPTIMUM, CFD_RANGE, M2_PER_DARCY,
   balanceOf, scheduleOf, leakoffSweep, packOf, publishedPack, publishedPkn,
@@ -55,47 +58,43 @@ const Schedule = () => {
         <Tile label="Ramp steps" value={sch.steps.length} />
       </TileGrid>
       <div className="grid gap-3 lg:grid-cols-2 mt-3">
-        <div className="h-64">
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-              <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-              <XAxis dataKey="etaFrac" type="number" domain={[0, 1]}
-                tick={{ fill: '#94a3b8', fontSize: 11 }}
-                label={{ value: 'fluid efficiency', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-              <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} domain={[0, 1]}
-                label={{ value: 'pad fraction', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-              <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-                formatter={(x) => fmt(x, 6)} />
-              <Legend wrapperStyle={{ fontSize: 11 }} />
-              <ReferenceLine x={bal.etaFrac} stroke="#f472b6"
-                label={{ value: 'this job', fill: '#f472b6', fontSize: 10, position: 'top' }} />
-              <Line type="monotone" dataKey="oneMinusEta" name="one minus efficiency, WRONG" stroke="#f472b6" dot isAnimationActive={false} />
-              <Line type="monotone" dataKey="padFrac" name="the engine pad fraction" stroke="#BFFF00" dot isAnimationActive={false} />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
-        <div className="h-64">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-              <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-              <XAxis dataKey="etaFrac" tickFormatter={(x) => fmt(x, 3)}
-                tick={{ fill: '#94a3b8', fontSize: 10 }}
-                label={{ value: 'fluid efficiency', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-              <YAxis tick={{ fill: '#94a3b8', fontSize: 10 }}
-                label={{ value: 'error in the pad fraction', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-              <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-                formatter={(x) => fmt(x, 6)} />
-              <Legend wrapperStyle={{ fontSize: 11 }} />
-              <ReferenceLine y={0} stroke="#64748b" />
-              <Bar dataKey="padFracError" name="how much too much pad" fill="#f472b6" isAnimationActive={false} />
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
+        <ChartFrame height={256}>
+          <LineChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+            <CartesianGrid {...GRID_STYLE} />
+            <XAxis dataKey="etaFrac" type="number" domain={[0, 1]}
+              tick={AXIS_TICK}
+              label={{ value: 'fluid efficiency', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+            <YAxis tick={AXIS_TICK} domain={[0, 1]}
+              label={{ value: 'pad fraction', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+            <Tooltip contentStyle={TOOLTIP_STYLE}
+              formatter={(x) => fmt(x, 6)} />
+            <Legend wrapperStyle={{ fontSize: 11 }} />
+            <ReferenceLine x={bal.etaFrac} stroke={seriesColor(4)}
+              label={{ value: 'this job', fill: seriesColor(4), fontSize: 10, position: 'top' }} />
+            <Line type="monotone" dataKey="oneMinusEta" name="one minus efficiency, WRONG" stroke={seriesColor(4)} dot isAnimationActive={false} />
+            <Line type="monotone" dataKey="padFrac" name="the engine pad fraction" stroke={seriesColor(1)} dot isAnimationActive={false} />
+          </LineChart>
+        </ChartFrame>
+        <ChartFrame height={256}>
+          <BarChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+            <CartesianGrid {...GRID_STYLE} />
+            <XAxis dataKey="etaFrac" tickFormatter={(x) => fmt(x, 3)}
+              tick={{ ...AXIS_TICK, fontSize: 10 }}
+              label={{ value: 'fluid efficiency', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+            <YAxis tick={{ ...AXIS_TICK, fontSize: 10 }}
+              label={{ value: 'error in the pad fraction', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+            <Tooltip contentStyle={TOOLTIP_STYLE}
+              formatter={(x) => fmt(x, 6)} />
+            <Legend wrapperStyle={{ fontSize: 11 }} />
+            <ReferenceLine y={0} stroke={SVG_CHART.reference} />
+            <Bar dataKey="padFracError" name="how much too much pad" fill={seriesColor(4)} isAnimationActive={false} />
+          </BarChart>
+        </ChartFrame>
       </div>
       <div className="mt-3 grid gap-3 lg:grid-cols-2">
         <div className="overflow-x-auto">
-          <table className="text-xs text-slate-300 w-full">
-            <thead className="text-slate-500">
+          <table className="text-xs text-pl-text w-full">
+            <thead className="text-pl-muted">
               <tr>
                 <th className="text-left pr-3">leakoff</th>
                 <th className="text-right pr-3">efficiency</th>
@@ -109,17 +108,17 @@ const Schedule = () => {
                 <tr key={r.clMSqrtS}>
                   <td className="pr-3">{r.clMSqrtS === 0 ? 'none' : r.clMSqrtS.toExponential(1)}</td>
                   <td className="text-right pr-3">{fmt(r.etaFrac, 5)}</td>
-                  <td className="text-right pr-3 text-emerald-400">{fmt(r.padFrac, 5)}</td>
-                  <td className="text-right pr-3 text-rose-400">{fmt(r.oneMinusEta, 5)}</td>
-                  <td className="text-right text-amber-400">{fmt(r.padFracError, 5)}</td>
+                  <td className="text-right pr-3 text-pl-text">{fmt(r.padFrac, 5)}</td>
+                  <td className="text-right pr-3 text-pl-text">{fmt(r.oneMinusEta, 5)}</td>
+                  <td className="text-right text-pl-text">{fmt(r.padFracError, 5)}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
         <div className="overflow-x-auto">
-          <table className="text-xs text-slate-300 w-full">
-            <thead className="text-slate-500">
+          <table className="text-xs text-pl-text w-full">
+            <thead className="text-pl-muted">
               <tr>
                 <th className="text-left pr-3">step</th>
                 <th className="text-right pr-3">start (min)</th>
@@ -142,7 +141,7 @@ const Schedule = () => {
           </table>
         </div>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         Read the two lines on the left chart. The pad fraction is
         {' '}(one minus efficiency) divided by (one plus efficiency), and NOT one minus efficiency.
         On this job the engine asks for {fmt(sch.padFrac, 4)} and the naive form asks for
@@ -198,21 +197,19 @@ const Pack = () => {
         <Tile label="Published areal concentration" value={fmt(pub.arealKgM2, 6)} unit="kg/m2" />
         <Tile label="Dimensionless conductivity" value={fmt(prod.cfd, 6)} />
       </TileGrid>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={bars} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="name" tick={{ fill: '#94a3b8', fontSize: 11 }} />
-            <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'width (mm)', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(x) => fmt(x, 5)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Bar dataKey="v" name="width" fill="#38bdf8" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <ChartFrame height={224} className="mt-3">
+        <BarChart data={bars} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="name" tick={AXIS_TICK} />
+          <YAxis tick={AXIS_TICK}
+            label={{ value: 'width (mm)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(x) => fmt(x, 5)} />
+          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Bar dataKey="v" name="width" fill={seriesColor(0)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
+      <div className="mt-3 text-xs text-pl-text">
         The fracture you created is {mm(created)} mm across and the pack you left in it is only
         {' '}{mm(pack.wpM)} mm, a factor of {fmt(created / pack.wpM, 2)}. The fracture closes on
         the proppant and the propped width is set by how much proppant is there, not by how wide
@@ -251,44 +248,40 @@ const Conductivity = () => {
         <Tile label="Published sits" value={prod.cfd < CFD_OPTIMUM ? 'BELOW the optimum' : 'above the optimum'} />
       </TileGrid>
       <div className="grid gap-3 lg:grid-cols-2 mt-3">
-        <div className="h-64">
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-              <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-              <XAxis dataKey="xfM" type="number" scale="log" domain={['dataMin', 'dataMax']}
-                tick={{ fill: '#94a3b8', fontSize: 11 }}
-                label={{ value: 'half-length (m, log)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-              <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }}
-                label={{ value: 'dimensionless conductivity', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-              <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-                formatter={(x) => fmt(x, 5)} />
-              <Legend wrapperStyle={{ fontSize: 11 }} />
-              <ReferenceLine y={CFD_OPTIMUM} stroke="#f472b6"
-                label={{ value: `the engine optimum ${CFD_OPTIMUM}`, fill: '#f472b6', fontSize: 10, position: 'insideTopRight' }} />
-              <Line type="monotone" dataKey="cfd" name="dimensionless conductivity" stroke="#BFFF00" dot isAnimationActive={false} />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
-        <div className="h-64">
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-              <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-              <XAxis dataKey="xfM" type="number" scale="log" domain={['dataMin', 'dataMax']}
-                tick={{ fill: '#94a3b8', fontSize: 11 }}
-                label={{ value: 'half-length (m, log)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-              <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }}
-                label={{ value: 'pseudo-skin', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-              <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-                formatter={(x) => fmt(x, 5)} />
-              <Legend wrapperStyle={{ fontSize: 11 }} />
-              <Line type="monotone" dataKey="sF" name="pseudo-skin, lower is better" stroke="#38bdf8" dot isAnimationActive={false} />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
+        <ChartFrame height={256}>
+          <LineChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+            <CartesianGrid {...GRID_STYLE} />
+            <XAxis dataKey="xfM" type="number" scale="log" domain={['dataMin', 'dataMax']}
+              tick={AXIS_TICK}
+              label={{ value: 'half-length (m, log)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+            <YAxis tick={AXIS_TICK}
+              label={{ value: 'dimensionless conductivity', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+            <Tooltip contentStyle={TOOLTIP_STYLE}
+              formatter={(x) => fmt(x, 5)} />
+            <Legend wrapperStyle={{ fontSize: 11 }} />
+            <ReferenceLine y={CFD_OPTIMUM} stroke={seriesColor(4)}
+              label={{ value: `the engine optimum ${CFD_OPTIMUM}`, fill: seriesColor(4), fontSize: 10, position: 'insideTopRight' }} />
+            <Line type="monotone" dataKey="cfd" name="dimensionless conductivity" stroke={seriesColor(1)} dot isAnimationActive={false} />
+          </LineChart>
+        </ChartFrame>
+        <ChartFrame height={256}>
+          <LineChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+            <CartesianGrid {...GRID_STYLE} />
+            <XAxis dataKey="xfM" type="number" scale="log" domain={['dataMin', 'dataMax']}
+              tick={AXIS_TICK}
+              label={{ value: 'half-length (m, log)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+            <YAxis tick={AXIS_TICK}
+              label={{ value: 'pseudo-skin', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+            <Tooltip contentStyle={TOOLTIP_STYLE}
+              formatter={(x) => fmt(x, 5)} />
+            <Legend wrapperStyle={{ fontSize: 11 }} />
+            <Line type="monotone" dataKey="sF" name="pseudo-skin, lower is better" stroke={seriesColor(0)} dot isAnimationActive={false} />
+          </LineChart>
+        </ChartFrame>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">xf (m)</th>
               <th className="text-right pr-3">propped width (mm)</th>
@@ -303,7 +296,7 @@ const Conductivity = () => {
               <tr key={r.xfM}>
                 <td className="pr-3">{fmt(r.xfM, 0)}</td>
                 <td className="text-right pr-3">{mm(r.wpM)}</td>
-                <td className={`text-right pr-3 ${r.cfd > CFD_OPTIMUM ? 'text-emerald-400' : 'text-rose-400'}`}>{fmt(r.cfd, 5)}</td>
+                <td className="text-right pr-3 text-pl-text">{fmt(r.cfd, 5)}</td>
                 <td className="text-right pr-3">{fmt(r.f, 5)}</td>
                 <td className="text-right pr-3">{fmt(r.sF, 5)}</td>
                 <td className="text-right">{fmt(r.rwPrimeM, 4)}</td>
@@ -312,7 +305,7 @@ const Conductivity = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         The proppant volume is held fixed down the whole table, so a longer fracture is a thinner
         one and the conductivity falls on every row. The pseudo-skin does not fall with it. It
         turns, which means somewhere between a short fat fracture and a long thin one there is a
@@ -339,23 +332,23 @@ const Optimum = () => {
   const gap = found.cfd - found.publishedConstant;
   return (
     <>
-      <div className="rounded-md border border-[#BFFF00]/40 bg-[#BFFF00]/5 p-4 mb-3">
-        <p className="text-xs text-gray-400 mb-1">The headline result of the course</p>
+      <div className="rounded-md border border-pl-accent/40 bg-pl-accent/5 p-4 mb-3">
+        <p className="text-xs text-pl-muted mb-1">The headline result of the course</p>
         <div className="grid gap-3 sm:grid-cols-3 items-end">
           <div>
-            <p className="text-gray-500 text-xs mb-0">Searched on the engine</p>
-            <p className="text-[#BFFF00] text-3xl font-bold mb-0">{fmt(found.cfd, 4)}</p>
+            <p className="text-pl-muted text-xs mb-0">Searched on the engine</p>
+            <p className="text-pl-accent-text text-3xl font-bold mb-0">{fmt(found.cfd, 4)}</p>
           </div>
           <div>
-            <p className="text-gray-500 text-xs mb-0">The published constant</p>
-            <p className="text-white text-3xl font-bold mb-0">{fmt(found.publishedConstant, 4)}</p>
+            <p className="text-pl-muted text-xs mb-0">The published constant</p>
+            <p className="text-pl-text text-3xl font-bold mb-0">{fmt(found.publishedConstant, 4)}</p>
           </div>
           <div>
-            <p className="text-gray-500 text-xs mb-0">Apart by</p>
-            <p className="text-white text-3xl font-bold mb-0">{fmt(100 * Math.abs(found.ratioToConstant - 1), 2)}<span className="text-sm text-gray-400 ml-1">pct</span></p>
+            <p className="text-pl-muted text-xs mb-0">Apart by</p>
+            <p className="text-pl-text text-3xl font-bold mb-0">{fmt(100 * Math.abs(found.ratioToConstant - 1), 2)}<span className="text-sm text-pl-muted ml-1">pct</span></p>
           </div>
         </div>
-        <p className="text-xs text-gray-400 mt-2 mb-0">
+        <p className="text-xs text-pl-muted mt-2 mb-0">
           A golden-section search on the engine's OWN pseudo-skin, which has never been shown the
           constant, walks the length and width trade at fixed proppant volume and stops at
           {' '}{fmt(found.cfd, 6)}. The engine publishes {fmt(found.publishedConstant, 2)}. The gap
@@ -377,48 +370,44 @@ const Optimum = () => {
         <Tile label="The published job is" value={prod.cfd < found.publishedConstant ? 'conductivity-starved' : 'length-starved'} />
       </TileGrid>
       <div className="grid gap-3 lg:grid-cols-2 mt-3">
-        <div className="h-64">
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={around} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-              <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-              <XAxis dataKey="xfM" type="number" scale="log" domain={['dataMin', 'dataMax']}
-                tickFormatter={(x) => fmt(x, 0)} tick={{ fill: '#94a3b8', fontSize: 11 }}
-                label={{ value: 'half-length (m, log)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-              <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }}
-                label={{ value: 'pseudo-skin', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-              <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-                formatter={(x) => fmt(x, 6)} />
-              <Legend wrapperStyle={{ fontSize: 11 }} />
-              <ReferenceLine x={found.xfM} stroke="#BFFF00"
-                label={{ value: 'the search stops here', fill: '#BFFF00', fontSize: 10, position: 'top' }} />
-              <Line type="monotone" dataKey="sF" name="pseudo-skin, the thing being minimised" stroke="#38bdf8" dot isAnimationActive={false} />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
-        <div className="h-64">
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={around} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-              <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-              <XAxis dataKey="xfM" type="number" scale="log" domain={['dataMin', 'dataMax']}
-                tickFormatter={(x) => fmt(x, 0)} tick={{ fill: '#94a3b8', fontSize: 11 }}
-                label={{ value: 'half-length (m, log)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-              <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }}
-                label={{ value: 'dimensionless conductivity', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-              <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-                formatter={(x) => fmt(x, 6)} />
-              <Legend wrapperStyle={{ fontSize: 11 }} />
-              <ReferenceLine y={found.publishedConstant} stroke="#f472b6"
-                label={{ value: `published ${fmt(found.publishedConstant, 2)}`, fill: '#f472b6', fontSize: 10, position: 'insideTopRight' }} />
-              <ReferenceLine x={found.xfM} stroke="#BFFF00"
-                label={{ value: `searched ${fmt(found.cfd, 3)}`, fill: '#BFFF00', fontSize: 10, position: 'top' }} />
-              <Line type="monotone" dataKey="cfd" name="dimensionless conductivity" stroke="#BFFF00" dot isAnimationActive={false} />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
+        <ChartFrame height={256}>
+          <LineChart data={around} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+            <CartesianGrid {...GRID_STYLE} />
+            <XAxis dataKey="xfM" type="number" scale="log" domain={['dataMin', 'dataMax']}
+              tickFormatter={(x) => fmt(x, 0)} tick={AXIS_TICK}
+              label={{ value: 'half-length (m, log)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+            <YAxis tick={AXIS_TICK}
+              label={{ value: 'pseudo-skin', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+            <Tooltip contentStyle={TOOLTIP_STYLE}
+              formatter={(x) => fmt(x, 6)} />
+            <Legend wrapperStyle={{ fontSize: 11 }} />
+            <ReferenceLine x={found.xfM} stroke={seriesColor(1)}
+              label={{ value: 'the search stops here', fill: seriesColor(1), fontSize: 10, position: 'top' }} />
+            <Line type="monotone" dataKey="sF" name="pseudo-skin, the thing being minimised" stroke={seriesColor(0)} dot isAnimationActive={false} />
+          </LineChart>
+        </ChartFrame>
+        <ChartFrame height={256}>
+          <LineChart data={around} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+            <CartesianGrid {...GRID_STYLE} />
+            <XAxis dataKey="xfM" type="number" scale="log" domain={['dataMin', 'dataMax']}
+              tickFormatter={(x) => fmt(x, 0)} tick={AXIS_TICK}
+              label={{ value: 'half-length (m, log)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+            <YAxis tick={AXIS_TICK}
+              label={{ value: 'dimensionless conductivity', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+            <Tooltip contentStyle={TOOLTIP_STYLE}
+              formatter={(x) => fmt(x, 6)} />
+            <Legend wrapperStyle={{ fontSize: 11 }} />
+            <ReferenceLine y={found.publishedConstant} stroke={seriesColor(4)}
+              label={{ value: `published ${fmt(found.publishedConstant, 2)}`, fill: seriesColor(4), fontSize: 10, position: 'insideTopRight' }} />
+            <ReferenceLine x={found.xfM} stroke={seriesColor(1)}
+              label={{ value: `searched ${fmt(found.cfd, 3)}`, fill: seriesColor(1), fontSize: 10, position: 'top' }} />
+            <Line type="monotone" dataKey="cfd" name="dimensionless conductivity" stroke={seriesColor(1)} dot isAnimationActive={false} />
+          </LineChart>
+        </ChartFrame>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">xf (m)</th>
               <th className="text-right pr-3">propped width (mm)</th>
@@ -429,7 +418,7 @@ const Optimum = () => {
           </thead>
           <tbody>
             {around.map((r) => (
-              <tr key={r.xfM} className={Math.abs(r.xfM - found.xfM) < 1e-9 ? 'text-[#BFFF00]' : ''}>
+              <tr key={r.xfM} className={Math.abs(r.xfM - found.xfM) < 1e-9 ? 'text-pl-accent-text font-semibold' : ''}>
                 <td className="pr-3">{fmt(r.xfM, 2)}</td>
                 <td className="text-right pr-3">{mm(r.wpM)}</td>
                 <td className="text-right pr-3">{fmt(r.cfd, 5)}</td>
@@ -440,7 +429,7 @@ const Optimum = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         The last column is zero on exactly one row and positive on every other, which is what an
         interior minimum looks like. Go shorter and the fracture is fat but does not reach; go
         longer and it reaches but cannot carry. The searched conductivity at that point is

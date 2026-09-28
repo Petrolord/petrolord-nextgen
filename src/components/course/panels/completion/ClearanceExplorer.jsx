@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   IN, PUBLISHED, publishedClearance, publishedThroughBore, publishedVolumes,
   clearanceByTightness, fitMatrix, fitCheck, EQUIPMENT_CATALOG,
@@ -21,7 +24,7 @@ const MODES = [
   { value: 'fit', label: 'Size matrix' },
 ];
 
-const STATUS_COLOR = { PASS: 'text-emerald-400', WARN: 'text-amber-400', FAIL: 'text-rose-400', UNKNOWN: 'text-slate-400' };
+const STATUS_COLOR = { PASS: 'text-pl-success-text', WARN: 'text-pl-warning-text', FAIL: 'text-pl-danger-text', UNKNOWN: 'text-pl-muted' };
 
 const RunIn = () => {
   const [margin, setMargin] = useState('');
@@ -44,8 +47,8 @@ const RunIn = () => {
         <Tile label="Ratio, first row to tightest" value={fmt(res.rows[0].clearanceM / res.worst.clearanceM, 4)} />
       </TileGrid>
       <div className="mt-3 overflow-x-auto" style={{ maxHeight: 260 }}>
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">component</th>
               <th className="text-right pr-3">OD (in)</th>
@@ -71,20 +74,18 @@ const RunIn = () => {
           </tbody>
         </table>
       </div>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={bars} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="name" tick={{ fill: '#94a3b8', fontSize: 10 }} interval={0} angle={-25} textAnchor="end" height={60} />
-            <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'clearance (mm)', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(x) => fmt(x, 4)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Bar dataKey="mm" name="radial clearance" fill="#38bdf8" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <BarChart data={bars} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="name" tick={{ ...AXIS_TICK, fontSize: 10 }} interval={0} angle={-25} textAnchor="end" height={60} />
+          <YAxis tick={AXIS_TICK}
+            label={{ value: 'clearance (mm)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(x) => fmt(x, 4)} />
+          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Bar dataKey="mm" name="radial clearance" fill={seriesColor(0)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
       <Note>
         Each row is checked against the tightest bore anywhere ABOVE it, not the bore at its own
         depth, because a component has to pass everything on the way down. The table is sorted
@@ -109,22 +110,20 @@ const Bore = () => {
         <Tile label="Displacement" value={fmt(vol.stringDisplacementM3, 6)} unit="m3" />
         <Tile label="Steel" value={fmt(vol.stringDisplacementM3 - vol.stringCapacityM3, 6)} unit="m3" />
       </TileGrid>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="i" tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'component, top down', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'bore (mm)', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(x) => fmt(x, 3)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Bar dataKey="own" name="own bore" fill="#334155" isAnimationActive={false} />
-            <Bar dataKey="cum" name="smallest so far" fill="#BFFF00" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3">
+        <BarChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="i" tick={AXIS_TICK}
+            label={{ value: 'component, top down', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS_TICK}
+            label={{ value: 'bore (mm)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(x) => fmt(x, 3)} />
+          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Bar dataKey="own" name="own bore" fill={SVG_CHART.reference} isAnimationActive={false} />
+          <Bar dataKey="cum" name="smallest so far" fill={seriesColor(1)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
       <Note>
         The green bars are a running minimum, so they can only step down. A tool run on wireline
         stops at the first bar that is smaller than the tool, and the number a completion is
@@ -158,8 +157,8 @@ const Fit = () => {
         <Tile label="First casing that fails" value={worst ? `${worst.casingOdIn} in ${worst.casingWeightLbFt} lb/ft` : 'none'} />
       </TileGrid>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">casing</th>
               <th className="text-right pr-3">drift (m)</th>
@@ -174,14 +173,14 @@ const Fit = () => {
                 <td className="pr-3">{fmt(r.casingOdIn, 3)} in {fmt(r.casingWeightLbFt, 1)} lb/ft</td>
                 <td className="text-right pr-3">{fmt(r.driftM, 7)}</td>
                 <td className="text-right pr-3">{fmt(r.tightestM * 1000, 3)}</td>
-                <td className={`text-right pr-3 ${r.failCount ? 'text-rose-400' : 'text-emerald-400'}`}>{r.failCount}</td>
+                <td className={`text-right pr-3 ${r.failCount ? 'text-pl-danger-text' : 'text-pl-success-text'}`}>{r.failCount}</td>
                 <td>{r.fails.join(', ')}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         A single item decides the completion size. {fmt(fitCheck(3.5, 5.5, 20).failCount, 0)} of the
         3-1/2 inch kit will not go into 5-1/2 inch 20 lb/ft casing, and they are the same three
         every time: the side pocket mandrel, the safety valve and the expansion joint. The tubing

@@ -1,8 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid,
+  LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid,
   Tooltip, Legend, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   PSI, G, PARAMS, RP90_MAWOP_FACTORS, MAASP_ELEMENTS, MAWOP_CANDIDATES,
   maaspRows, publishedMaasp, publishedMawop, factorSweep, densitySweep,
@@ -79,24 +82,22 @@ const Maasp = () => {
         <Tile label="Negative row flagged" value={out.negative ? 'YES, this is a finding' : 'no'} />
         <Tile label="Published MAASP" value={mpa(published.maaspPa)} unit="MPa" />
       </TileGrid>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={bars} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="name" tick={{ fill: '#94a3b8', fontSize: 11 }} />
-            <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'MPa', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(x) => fmt(x, 4)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={0} stroke="#64748b" />
-            <Bar dataKey="v" name="contribution to the allowable" fill="#BFFF00" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <BarChart data={bars} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="name" tick={AXIS_TICK} />
+          <YAxis tick={AXIS_TICK}
+            label={{ value: 'MPa', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(x) => fmt(x, 4)} />
+          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <ReferenceLine y={0} stroke={SVG_CHART.reference} />
+          <Bar dataKey="v" name="contribution to the allowable" fill={seriesColor(1)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">term</th>
               <th className="text-right pr-3">MPa</th>
@@ -107,26 +108,26 @@ const Maasp = () => {
           <tbody>
             <tr>
               <td className="pr-3">rating term</td>
-              <td className="text-right pr-3 text-emerald-400">{mpa(ratingPa)}</td>
+              <td className="text-right pr-3 text-pl-text">{mpa(ratingPa)}</td>
               <td className="text-right pr-3">{psi(ratingPa)}</td>
-              <td className="text-slate-400">the same element brought to surface, where the head is zero</td>
+              <td className="text-pl-muted">the same element brought to surface, where the head is zero</td>
             </tr>
             <tr>
               <td className="pr-3">hydrostatic term</td>
-              <td className="text-right pr-3 text-rose-400">{mpa(-headPa)}</td>
+              <td className="text-right pr-3 text-pl-text">{mpa(-headPa)}</td>
               <td className="text-right pr-3">{psi(-headPa)}</td>
-              <td className="text-slate-400">the column the annulus already carries down to the element</td>
+              <td className="text-pl-muted">the column the annulus already carries down to the element</td>
             </tr>
             <tr>
               <td className="pr-3">allowed at surface</td>
               <td className="text-right pr-3">{mpa(row.allowSurfacePa)}</td>
               <td className="text-right pr-3">{psi(row.allowSurfacePa)}</td>
-              <td className="text-slate-400">what a gauge at the wellhead may read</td>
+              <td className="text-pl-muted">what a gauge at the wellhead may read</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         The element is rated {mpa(row.limitPa)} MPa and the design factor of {fmt(row.factor, 2)}
         {' '}keeps {mpa(ratingPa)} MPa of that. The annulus fluid has already spent
         {' '}{mpa(headPa)} MPa of it getting down to {fmt(row.tvdM, 1)} m, so the gauge at surface
@@ -166,26 +167,26 @@ const Mawop = () => {
         <NumField label={`Annulus fluid density (kg/m3, published ${PARAMS.annulusFluidDensityKgM3})`}
           value={rho} onChange={setRho} placeholder={String(PARAMS.annulusFluidDensityKgM3)} />
       </div>
-      <div className="rounded-md border border-[#BFFF00]/40 bg-[#BFFF00]/5 p-4 my-3">
-        <p className="text-xs text-gray-400 mb-1">The reduction over the rows, which is LOGIC and not arithmetic</p>
+      <div className="rounded-md border border-pl-accent/40 bg-pl-accent/5 p-4 my-3">
+        <p className="text-xs text-pl-muted mb-1">The reduction over the rows, which is LOGIC and not arithmetic</p>
         <div className="grid gap-3 sm:grid-cols-3 items-end">
           <div>
-            <p className="text-gray-500 text-xs mb-0">The FIRST row is</p>
-            <p className="text-white text-2xl font-bold mb-0">{mpa(first.allowSurfacePa)}<span className="text-sm text-gray-400 ml-1">MPa</span></p>
-            <p className="text-gray-500 text-xs mb-0">{first.name}</p>
+            <p className="text-pl-muted text-xs mb-0">The FIRST row is</p>
+            <p className="text-pl-text text-2xl font-bold mb-0">{mpa(first.allowSurfacePa)}<span className="text-sm text-pl-muted ml-1">MPa</span></p>
+            <p className="text-pl-muted text-xs mb-0">{first.name}</p>
           </div>
           <div>
-            <p className="text-gray-500 text-xs mb-0">The MINIMUM row is</p>
-            <p className="text-[#BFFF00] text-2xl font-bold mb-0">{mpa(minRow.allowSurfacePa)}<span className="text-sm text-gray-400 ml-1">MPa</span></p>
-            <p className="text-gray-500 text-xs mb-0">{minRow.name}</p>
+            <p className="text-pl-muted text-xs mb-0">The MINIMUM row is</p>
+            <p className="text-pl-accent-text text-2xl font-bold mb-0">{mpa(minRow.allowSurfacePa)}<span className="text-sm text-pl-muted ml-1">MPa</span></p>
+            <p className="text-pl-muted text-xs mb-0">{minRow.name}</p>
           </div>
           <div>
-            <p className="text-gray-500 text-xs mb-0">The engine reports</p>
-            <p className="text-white text-2xl font-bold mb-0">{mpa(out.mawopPa)}<span className="text-sm text-gray-400 ml-1">MPa</span></p>
-            <p className="text-gray-500 text-xs mb-0">governing: {out.governing}</p>
+            <p className="text-pl-muted text-xs mb-0">The engine reports</p>
+            <p className="text-pl-text text-2xl font-bold mb-0">{mpa(out.mawopPa)}<span className="text-sm text-pl-muted ml-1">MPa</span></p>
+            <p className="text-pl-muted text-xs mb-0">governing: {out.governing}</p>
           </div>
         </div>
-        <p className="text-xs text-gray-400 mt-2 mb-0">
+        <p className="text-xs text-pl-muted mt-2 mb-0">
           The governing candidate is row {data.findIndex((r) => r.name === out.governing) + 1} of
           {' '}{rows.length} and not row 1, and taking the first row instead would report
           {' '}{mpa(first.allowSurfacePa - minRow.allowSurfacePa)} MPa more pressure than the
@@ -204,25 +205,23 @@ const Mawop = () => {
         <Tile label="Negative row flagged" value={out.negative ? 'YES, this is a finding' : 'no'} />
         <Tile label="Engine" value={out.engine} />
       </TileGrid>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="name" tick={{ fill: '#94a3b8', fontSize: 9 }} interval={0} />
-            <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'allowed at surface (MPa)', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(x) => fmt(x, 4)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={out.mawopPa / 1e6} stroke="#BFFF00"
-              label={{ value: 'MAWOP, the minimum', fill: '#BFFF00', fontSize: 10, position: 'insideTopRight' }} />
-            <Bar dataKey="mpa" name="allowed at surface" fill="#38bdf8" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3">
+        <BarChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="name" tick={{ ...AXIS_TICK, fontSize: 9 }} interval={0} />
+          <YAxis tick={AXIS_TICK}
+            label={{ value: 'allowed at surface (MPa)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(x) => fmt(x, 4)} />
+          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <ReferenceLine y={out.mawopPa / 1e6} stroke={seriesColor(1)}
+            label={{ value: 'MAWOP, the minimum', fill: seriesColor(1), fontSize: 10, position: 'insideTopRight' }} />
+          <Bar dataKey="mpa" name="allowed at surface" fill={seriesColor(0)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">order</th>
               <th className="text-left pr-3">candidate</th>
@@ -237,7 +236,7 @@ const Mawop = () => {
           </thead>
           <tbody>
             {data.map((r) => (
-              <tr key={r.name} className={r.name === out.governing ? 'text-[#BFFF00]' : ''}>
+              <tr key={r.name} className={r.name === out.governing ? 'text-pl-accent-text font-semibold' : ''}>
                 <td className="pr-3">{r.order}</td>
                 <td className="pr-3">{r.name}</td>
                 <td className="pr-3">{r.kind || '-'}</td>
@@ -252,7 +251,7 @@ const Mawop = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         Read the allowed column down the table. It does not fall in order, it goes
         {' '}{mpa(rows[0].allowSurfacePa)}, then UP, then down, and the smallest number is the last
         row rather than the first. The annulus can only be worked to the weakest thing on it, so
@@ -308,23 +307,21 @@ const Factors = () => {
           <Tile label="The bare rating, not derated" value={fmt(RP90_MAWOP_FACTORS.rating, 2)} />
         </TileGrid>
       </div>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="role" tick={{ fill: '#94a3b8', fontSize: 9 }} interval={0} />
-            <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'MAWOP (MPa)', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(x) => fmt(x, 4)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Bar dataKey="mpa" name="MAWOP at this role" fill="#BFFF00" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <BarChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="role" tick={{ ...AXIS_TICK, fontSize: 9 }} interval={0} />
+          <YAxis tick={AXIS_TICK}
+            label={{ value: 'MAWOP (MPa)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(x) => fmt(x, 4)} />
+          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Bar dataKey="mpa" name="MAWOP at this role" fill={seriesColor(1)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">role</th>
               <th className="text-right pr-3">factor</th>
@@ -336,19 +333,19 @@ const Factors = () => {
           </thead>
           <tbody>
             {data.map((r) => (
-              <tr key={r.role} className={r.role === candidate.role ? 'text-[#BFFF00]' : ''}>
+              <tr key={r.role} className={r.role === candidate.role ? 'text-pl-accent-text font-semibold' : ''}>
                 <td className="pr-3">{r.role}</td>
                 <td className="text-right pr-3">{fmt(r.factor, 3)}</td>
                 <td className="text-right pr-3">{fmt(r.mpa, 4)}</td>
                 <td className="text-right pr-3">{psi(r.mpa * 1e6)}</td>
-                <td className="text-right pr-3 text-amber-400">{r.ratio == null ? '-' : fmt(r.ratio, 5)}</td>
-                <td className="text-right text-rose-400">{r.lostPa == null ? '-' : mpa(r.lostPa)}</td>
+                <td className="text-right pr-3 text-pl-text">{r.ratio == null ? 'n/a' : fmt(r.ratio, 5)}</td>
+                <td className="text-right text-pl-text">{r.lostPa == null ? 'n/a' : mpa(r.lostPa)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         One piece of steel, one depth, one annulus fluid, and {data.length} different answers. The
         role is not a description of the element, it is a decision about how much of its rating you
         are willing to spend, and the outer casing at {fmt(RP90_MAWOP_FACTORS['outer-casing-burst'], 2)}
@@ -418,29 +415,27 @@ const Differential = () => {
         <Tile label="Head that density change carries" value={mpa(dRho * G * el.tvdM)} unit="MPa" />
         <Tile label="Rows going negative here" value={fmt(negatives.length, 0)} />
       </TileGrid>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="rho" type="number" domain={['dataMin', 'dataMax']}
-              tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'annulus fluid density (kg/m3)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'allowed at surface (MPa)', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(x) => fmt(x, 4)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={0} stroke="#f472b6"
-              label={{ value: 'zero, below which it is a finding', fill: '#f472b6', fontSize: 10, position: 'insideBottomRight' }} />
-            <Line type="monotone" dataKey="published" name={`backup ${el.backupDensityKgM3} kg/m3, the published element`} stroke="#BFFF00" dot isAnimationActive={false} />
-            <Line type="monotone" dataKey="chosen" name={`backup ${fmt(backupDensityKgM3, 0)} kg/m3, the row itself`} stroke="#38bdf8" dot isAnimationActive={false} />
-            <Line type="monotone" dataKey="reported" name="what the engine REPORTS after the clamp" stroke="#f472b6" strokeDasharray="4 3" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3">
+        <LineChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="rho" type="number" domain={['dataMin', 'dataMax']}
+            tick={AXIS_TICK}
+            label={{ value: 'annulus fluid density (kg/m3)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS_TICK}
+            label={{ value: 'allowed at surface (MPa)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(x) => fmt(x, 4)} />
+          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <ReferenceLine y={0} stroke={seriesColor(4)}
+            label={{ value: 'zero, below which it is a finding', fill: seriesColor(4), fontSize: 10, position: 'insideBottomRight' }} />
+          <Line type="monotone" dataKey="published" name={`backup ${el.backupDensityKgM3} kg/m3, the published element`} stroke={seriesColor(1)} dot isAnimationActive={false} />
+          <Line type="monotone" dataKey="chosen" name={`backup ${fmt(backupDensityKgM3, 0)} kg/m3, the row itself`} stroke={seriesColor(0)} dot isAnimationActive={false} />
+          <Line type="monotone" dataKey="reported" name="what the engine REPORTS after the clamp" stroke={seriesColor(4)} strokeDasharray="4 3" dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">annulus fluid (kg/m3)</th>
               <th className="text-right pr-3">allowed with the published backup (MPa)</th>
@@ -454,15 +449,15 @@ const Differential = () => {
               <tr key={r.rho}>
                 <td className="pr-3">{fmt(r.rho, 0)}</td>
                 <td className="text-right pr-3">{fmt(r.published, 4)}</td>
-                <td className={`text-right pr-3 ${r.chosen < 0 ? 'text-rose-400' : 'text-emerald-400'}`}>{fmt(r.chosen, 4)}</td>
+                <td className="text-right pr-3 text-pl-text">{fmt(r.chosen, 4)}</td>
                 <td className="text-right pr-3">{fmt(r.reported, 4)}</td>
-                <td className={r.negative ? 'text-rose-400' : 'text-slate-500'}>{r.negative ? 'NEGATIVE, a finding' : 'clear'}</td>
+                <td className={r.negative ? 'text-pl-danger-text' : 'text-pl-muted'}>{r.negative ? 'NEGATIVE, a finding' : 'clear'}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         Two columns, one element, and the only difference between them is what stands on the far
         side of the wall. A rating is a DIFFERENTIAL across that wall, so a heavier column behind
         it pushes back and buys margin, and taking that column away spends the margin. Across the

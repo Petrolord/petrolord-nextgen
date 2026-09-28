@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   IN, driftTable, driftClasses, publishedStack, publishedProfile, publishedVolumes,
   publishedThroughBore, throughBoreExtent, governingDriftTo,
@@ -53,8 +56,8 @@ const Drift = ({ initialKind = TUBING_CLASS }) => {
         ))}
       </TileGrid>
       <div className="mt-3 overflow-x-auto" style={{ maxHeight: 300 }}>
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">tubular</th>
               <th className="text-right pr-3">OD (in)</th>
@@ -104,8 +107,8 @@ const Stack = () => {
         <Tile label="Capacity" value={fmt(vol.stringCapacityM3, 6)} unit="m3" />
       </TileGrid>
       <div className="mt-3 overflow-x-auto" style={{ maxHeight: 300 }}>
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">component</th>
               <th className="text-right pr-3">top (m)</th>
@@ -154,8 +157,8 @@ const Profile = () => {
   return (
     <>
       <div className="mt-1 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">from (m MD)</th><th className="text-left pr-3">to</th>
               <th className="text-right pr-3">ID (in)</th><th className="text-right pr-3">drift (m)</th>
@@ -175,21 +178,19 @@ const Profile = () => {
           </tbody>
         </table>
       </div>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="md" tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'measured depth (m)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} domain={[0.14, 0.23]}
-              label={{ value: 'governing drift (m)', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(x) => fmt(x, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Bar dataKey="drift" name="governing drift" fill="#BFFF00" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <BarChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="md" tick={AXIS_TICK}
+            label={{ value: 'measured depth (m)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS_TICK} domain={[0.14, 0.23]}
+            label={{ value: 'governing drift (m)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(x) => fmt(x, 6)} />
+          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Bar dataKey="drift" name="governing drift" fill={seriesColor(1)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
       <Note>
         The profile keeps the INNERMOST bore wherever two strings overlap, and the governing drift
         to a depth is the smallest one anywhere above it. That is why the curve only ever steps

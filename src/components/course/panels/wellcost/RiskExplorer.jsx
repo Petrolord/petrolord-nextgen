@@ -1,8 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
+  LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
   Legend, ReferenceLine, ReferenceDot, Cell,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   CONTINGENCY_FRAC, NPT_FRAC, MC_ANALYTIC, RISK_DOC, RISK_UNCERTAINTIES, MC_UNCERTAINTIES,
   publishedCostCurve, publishedCostCurveCheckpoint, unlinkedLumpCurve,
@@ -48,9 +51,9 @@ const MODES = [
   ['risked', 'The percentiles, with their conventions'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const GRID = <CartesianGrid stroke="#334155" strokeDasharray="3 3" />;
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const GRID = <CartesianGrid {...GRID_STYLE} />;
 
 const Curve = () => {
   const [lump, setLump] = useState('');
@@ -85,27 +88,25 @@ const Curve = () => {
           <Tile label="Does the curve ever fall" value={nonDecreasing ? 'no' : 'yes'} />
         </TileGrid>
       </div>
-      <div className="h-72 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={points} margin={{ top: 10, right: 20, bottom: 18, left: 20 }}>
-            {GRID}
-            <XAxis dataKey="tHr" type="number" tick={AXIS}
-              label={{ value: 'elapsed hours', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS} tickFormatter={(v) => usd(v)}
-              label={{ value: 'cumulative USD', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => usd(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine x={checkpoint.tHr} stroke="#f472b6" strokeDasharray="4 3"
-              label={{ value: 'checkpoint', fill: '#f472b6', fontSize: 10, position: 'top' }} />
-            <ReferenceDot x={checkpoint.tHr} y={checkpoint.usd} r={5} fill="#f472b6" stroke="none" />
-            <Line type="linear" dataKey="usd" name="cumulative base cost"
-              stroke="#BFFF00" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={288} className="mt-3">
+        <LineChart data={points} margin={{ top: 10, right: 20, bottom: 18, left: 20 }}>
+          {GRID}
+          <XAxis dataKey="tHr" type="number" tick={AXIS}
+            label={{ value: 'elapsed hours', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS} tickFormatter={(v) => usd(v)}
+            label={{ value: 'cumulative USD', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => usd(v)} />
+          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <ReferenceLine x={checkpoint.tHr} stroke={seriesColor(4)} strokeDasharray="4 3"
+            label={{ value: 'checkpoint', fill: seriesColor(4), fontSize: 10, position: 'top' }} />
+          <ReferenceDot x={checkpoint.tHr} y={checkpoint.usd} r={5} fill={seriesColor(4)} stroke="none" />
+          <Line type="linear" dataKey="usd" name="cumulative base cost"
+            stroke={seriesColor(1)} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">elapsed, h</th>
               <th className="text-left pr-3">cumulative, USD</th>
@@ -114,7 +115,7 @@ const Curve = () => {
           </thead>
           <tbody>
             {points.map((p, i) => (
-              <tr key={p.tHr} className={Math.abs(p.tHr - checkpoint.tHr) < 1e-9 ? 'text-[#f472b6]' : ''}>
+              <tr key={p.tHr} className={Math.abs(p.tHr - checkpoint.tHr) < 1e-9 ? 'text-pl-accent-text font-semibold' : ''}>
                 <td className="pr-3">{fmt(p.tHr, 4)}</td>
                 <td className="pr-3">{usd(p.usd)}</td>
                 <td>{i === 0 ? '-' : usd(p.usd - points[i - 1].usd)}</td>
@@ -123,7 +124,7 @@ const Curve = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         The curve accrues day-rate money smoothly with the clock, per-meter money with the hole,
         and lump money as a STEP at the end of the activity it is linked to. That is why the steps
         are uneven: the big ones are the casing, the wellhead and the completion landing all at
@@ -158,12 +159,12 @@ const Identity = () => {
   const overACent = sweep.filter((r) => r.absErrorUsd > 0.01).length;
   return (
     <>
-      <div className={`rounded-md border p-4 ${exact ? 'border-emerald-600 bg-emerald-900/20' : 'border-rose-700 bg-rose-900/20'}`}>
-        <p className="text-xs text-gray-400 mb-1">The last point on the curve, against the AFE base subtotal</p>
-        <p className="text-2xl font-bold text-white mb-1">
-          {cents(check.endUsd)} <span className="text-[#BFFF00]">=</span> {cents(check.baseUsd)} USD
+      <div className={`rounded-md border p-4 ${exact ? 'border-pl-success/30 bg-pl-success-bg' : 'border-pl-danger/30 bg-pl-danger-bg'}`}>
+        <p className="text-xs text-pl-muted mb-1">The last point on the curve, against the AFE base subtotal</p>
+        <p className="text-2xl font-bold text-pl-text mb-1">
+          {cents(check.endUsd)} <span className="text-pl-accent-text">=</span> {cents(check.baseUsd)} USD
         </p>
-        <p className="text-sm mb-0 text-emerald-300">
+        <p className="text-sm mb-0 text-pl-success-text">
           {exact ? 'Identical, to every digit a double can hold.' : 'These two do not agree, and one of them is wrong.'}
           {' '}The difference is {cents(check.absErrorUsd)} USD, and the strict equality test returns
           {' '}{String(exact)}.
@@ -181,30 +182,28 @@ const Identity = () => {
           <Tile label="Is that gap the contingency" value={gapMatchesContingency ? 'yes, exactly' : 'no'} />
         </TileGrid>
       </div>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={[
-            { name: 'curve, last point', v: check.endUsd },
-            { name: 'AFE base subtotal', v: check.baseUsd },
-            { name: 'AFE total', v: check.totalUsd },
-          ]} margin={{ top: 10, right: 16, bottom: 5, left: 20 }}>
-            {GRID}
-            <XAxis dataKey="name" tick={{ fill: '#94a3b8', fontSize: 10 }} />
-            <YAxis tick={AXIS} tickFormatter={(v) => usd(v)} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => cents(v)} />
-            <ReferenceLine y={check.baseUsd} stroke="#BFFF00" strokeDasharray="5 3"
-              label={{ value: 'the base subtotal, where the curve lands', fill: '#BFFF00', fontSize: 10, position: 'insideBottomRight' }} />
-            <Bar dataKey="v" name="USD" isAnimationActive={false}>
-              <Cell fill="#BFFF00" />
-              <Cell fill="#BFFF00" />
-              <Cell fill="#f472b6" />
-            </Bar>
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <BarChart data={[
+          { name: 'curve, last point', v: check.endUsd },
+          { name: 'AFE base subtotal', v: check.baseUsd },
+          { name: 'AFE total', v: check.totalUsd },
+        ]} margin={{ top: 10, right: 16, bottom: 5, left: 20 }}>
+          {GRID}
+          <XAxis dataKey="name" tick={{ ...AXIS_TICK, fontSize: 10 }} />
+          <YAxis tick={AXIS} tickFormatter={(v) => usd(v)} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => cents(v)} />
+          <ReferenceLine y={check.baseUsd} stroke={seriesColor(1)} strokeDasharray="5 3"
+            label={{ value: 'the base subtotal, where the curve lands', fill: seriesColor(1), fontSize: 10, position: 'insideBottomRight' }} />
+          <Bar dataKey="v" name="USD" isAnimationActive={false}>
+            <Cell fill={seriesColor(1)} />
+            <Cell fill={seriesColor(1)} />
+            <Cell fill={seriesColor(4)} />
+          </Bar>
+        </BarChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">allowance on the schedule</th>
               <th className="text-left pr-3">curve ends at, USD</th>
@@ -215,18 +214,18 @@ const Identity = () => {
           </thead>
           <tbody>
             {sweep.map((r) => (
-              <tr key={r.nptFrac} className={r.nptFrac === NPT_FRAC ? 'text-white' : ''}>
+              <tr key={r.nptFrac} className={r.nptFrac === NPT_FRAC ? 'text-pl-text font-semibold' : ''}>
                 <td className="pr-3">{fmt(r.nptFrac, 6)}</td>
                 <td className="pr-3">{cents(r.endUsd)}</td>
                 <td className="pr-3">{cents(r.baseUsd)}</td>
-                <td className="pr-3 text-[#BFFF00]">{tiny(r.absErrorUsd)}</td>
+                <td className="pr-3 text-pl-text">{tiny(r.absErrorUsd)}</td>
                 <td>{tiny(r.relError)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         The identity is not a coincidence of one fixture's round numbers. Across
         {' '}{fmt(sweep.length, 0)} different schedules, from no allowance at all to double the
         work, the worst disagreement anywhere is {tiny(worst.absErrorUsd)} USD on a
@@ -289,24 +288,22 @@ const Uncertainty = () => {
           <Tile label="The gap between them" value={usd(gapUsd)} unit="USD" />
         </TileGrid>
       </div>
-      <div className="h-60 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={rows} margin={{ top: 10, right: 16, bottom: 30, left: 10 }}>
-            {GRID}
-            <XAxis dataKey="id" tick={{ fill: '#94a3b8', fontSize: 10 }} />
-            <YAxis tick={AXIS}
-              label={{ value: 'mean minus mode, in the field units', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 4)} />
-            <ReferenceLine y={0} stroke="#94a3b8" />
-            <Bar dataKey="lean" name="how far the mean sits from the mode" isAnimationActive={false}>
-              {rows.map((r) => <Cell key={r.key} fill={r.lean >= 0 ? '#BFFF00' : '#38bdf8'} />)}
-            </Bar>
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={240} className="mt-3">
+        <BarChart data={rows} margin={{ top: 10, right: 16, bottom: 30, left: 10 }}>
+          {GRID}
+          <XAxis dataKey="id" tick={{ ...AXIS_TICK, fontSize: 10 }} />
+          <YAxis tick={AXIS}
+            label={{ value: 'mean minus mode, in the field units', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 4)} />
+          <ReferenceLine y={0} stroke={SVG_CHART.reference} />
+          <Bar dataKey="lean" name="how far the mean sits from the mode" isAnimationActive={false}>
+            {rows.map((r) => <Cell key={r.key} fill={r.lean >= 0 ? seriesColor(1) : seriesColor(0)} />)}
+          </Bar>
+        </BarChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">what varies</th>
               <th className="text-left pr-3">field</th>
@@ -326,13 +323,13 @@ const Uncertainty = () => {
                 <td className="pr-3">{fmt(r.mode, 4)}</td>
                 <td className="pr-3">{fmt(r.max, 4)}</td>
                 <td className="pr-3">{fmt(r.mean, 4)}</td>
-                <td className={r.lean >= 0 ? 'text-[#BFFF00]' : 'text-[#38bdf8]'}>{fmt(r.lean, 4)}</td>
+                <td className="text-pl-text">{fmt(r.lean, 4)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         A triangular mean is the average of its three corners and not its mode, so a base case
         built at the modes is a mode-of-modes and lands wherever the corners put it. On the linear
         fixture that is {usd(fixture.totalUsd)} USD against an analytic mean of
@@ -425,30 +422,28 @@ const Risked = () => {
           <Tile label="Dearest realization" value={usd(run.maxUsd)} unit="USD" />
         </TileGrid>
       </div>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={bins} margin={{ top: 10, right: 20, bottom: 18, left: 20 }}>
-            {GRID}
-            <XAxis dataKey="midUsd" type="number" domain={['dataMin', 'dataMax']} tick={AXIS}
-              tickFormatter={(v) => usd(v)}
-              label={{ value: 'total cost of a realization, USD', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS}
-              label={{ value: 'realizations', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 0)} labelFormatter={(v) => `${usd(v)} USD`} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine x={run.base.totalUsd} stroke="#f472b6"
-              label={{ value: 'the deterministic base', fill: '#f472b6', fontSize: 10, position: 'top' }} />
-            <ReferenceLine x={run.sampler.p90} stroke="#38bdf8" strokeDasharray="4 3"
-              label={{ value: 'sampler p90, the cheap tail', fill: '#38bdf8', fontSize: 10, position: 'insideTopLeft' }} />
-            <ReferenceLine x={run.sampler.p10} stroke="#38bdf8" strokeDasharray="4 3"
-              label={{ value: 'sampler p10, the dear tail', fill: '#38bdf8', fontSize: 10, position: 'insideTopRight' }} />
-            <Bar dataKey="count" name="realizations in the bin" fill="#BFFF00" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3">
+        <BarChart data={bins} margin={{ top: 10, right: 20, bottom: 18, left: 20 }}>
+          {GRID}
+          <XAxis dataKey="midUsd" type="number" domain={['dataMin', 'dataMax']} tick={AXIS}
+            tickFormatter={(v) => usd(v)}
+            label={{ value: 'total cost of a realization, USD', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS}
+            label={{ value: 'realizations', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 0)} labelFormatter={(v) => `${usd(v)} USD`} />
+          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <ReferenceLine x={run.base.totalUsd} stroke={seriesColor(4)}
+            label={{ value: 'the deterministic base', fill: seriesColor(4), fontSize: 10, position: 'top' }} />
+          <ReferenceLine x={run.sampler.p90} stroke={seriesColor(0)} strokeDasharray="4 3"
+            label={{ value: 'sampler p90, the cheap tail', fill: seriesColor(0), fontSize: 10, position: 'insideTopLeft' }} />
+          <ReferenceLine x={run.sampler.p10} stroke={seriesColor(0)} strokeDasharray="4 3"
+            label={{ value: 'sampler p10, the dear tail', fill: seriesColor(0), fontSize: 10, position: 'insideTopRight' }} />
+          <Bar dataKey="count" name="realizations in the bin" fill={seriesColor(1)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">the sampler calls it</th>
               <th className="text-left pr-3">USD</th>
@@ -460,11 +455,11 @@ const Risked = () => {
           <tbody>
             {rows.map((r) => (
               <tr key={r.key}>
-                <td className="pr-3 text-[#BFFF00]">{r.key}</td>
+                <td className="pr-3 text-pl-text">{r.key}</td>
                 <td className="pr-3">{usd(r.valueUsd)}</td>
-                <td className="pr-3 text-slate-400">{r.read}</td>
-                <td className="pr-3 text-slate-400">{r.petroleum}</td>
-                <td className="text-[#f472b6]">{r.cost}</td>
+                <td className="pr-3 text-pl-muted">{r.read}</td>
+                <td className="pr-3 text-pl-muted">{r.petroleum}</td>
+                <td className="text-pl-text">{r.cost}</td>
               </tr>
             ))}
           </tbody>
@@ -478,7 +473,7 @@ const Risked = () => {
           <Tile label="Its cost-convention percentile" value={pct(basePctile, 1)} />
         </TileGrid>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         Every percentile above is labelled twice on purpose. The suite's canonical sampler was
         written for reserves, where higher confidence points DOWNWARD, so it crosses its own labels
         over: its p10 field is read nine tenths of the way up the sorted list and its p90 field one

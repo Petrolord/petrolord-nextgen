@@ -1,8 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid,
+  BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid,
   Tooltip, Legend, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   PARAMS, KT_RPD_RANGE, KT_HD_MAX, publishedGun, skinOf, prOf, PUBLISHED_KEYS,
   catalogSweep, zeroCrossing, outOfRange, phasingSweep, sensitivity, reSweep,
@@ -62,24 +65,22 @@ const Components = () => {
         <Tile label="hD" value={fmt(s.hD, 6)} />
         <Tile label="rpD" value={fmt(s.rpD, 6)} />
       </TileGrid>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={bars} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="name" tick={{ fill: '#94a3b8', fontSize: 11 }} />
-            <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'skin', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(x) => fmt(x, 5)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={0} stroke="#64748b" />
-            <Bar dataKey="v" name="skin component" fill="#38bdf8" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <BarChart data={bars} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="name" tick={AXIS_TICK} />
+          <YAxis tick={AXIS_TICK}
+            label={{ value: 'skin', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(x) => fmt(x, 5)} />
+          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <ReferenceLine y={0} stroke={SVG_CHART.reference} />
+          <Bar dataKey="v" name="skin component" fill={seriesColor(0)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">one input moved</th>
               <th className="text-right pr-3">plane flow</th>
@@ -127,25 +128,23 @@ const Catalog = () => {
         <Tile label="Rows out of range" value={out.length} />
         <Tile label="Which" value={out.map((r) => `${r.odIn} in`).join(', ') || 'none'} />
       </TileGrid>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="od" tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'gun outside diameter (in)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'total skin', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(x) => fmt(x, 5)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={0} stroke="#BFFF00" />
-            <Bar dataKey="total" name="total skin" fill="#f472b6" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3">
+        <BarChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="od" tick={AXIS_TICK}
+            label={{ value: 'gun outside diameter (in)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS_TICK}
+            label={{ value: 'total skin', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(x) => fmt(x, 5)} />
+          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <ReferenceLine y={0} stroke={seriesColor(1)} />
+          <Bar dataKey="total" name="total skin" fill={seriesColor(4)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">gun</th>
               <th className="text-right pr-3">phasing</th>
@@ -165,15 +164,17 @@ const Catalog = () => {
                 <td className="text-right pr-3">{fmt(r.sH, 4)}</td>
                 <td className="text-right pr-3">{fmt(r.sV, 4)}</td>
                 <td className="text-right pr-3">{fmt(r.sCz, 4)}</td>
-                <td className={`text-right pr-3 ${r.total > 0 ? 'text-rose-400' : 'text-emerald-400'}`}>{fmt(r.total, 4)}</td>
+                <td className="text-right pr-3 text-pl-text">{fmt(r.total, 4)}</td>
                 <td className="text-right pr-3">{fmt(r.ratio, 4)}</td>
-                <td className={`text-right ${r.warnings.length ? 'text-amber-400' : ''}`}>{fmt(r.rpD, 5)}</td>
+                <td className={`text-right ${r.warnings.length ? 'text-pl-warning-text' : ''}`}>
+                  {fmt(r.rpD, 5)}{r.warnings.length ? <span className="ml-1 text-[10px]">out of range</span> : null}
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         Every row is the same rock and the same wellbore, so the only thing changing down the table
         is the gun. The two rows above the line are the through-tubing guns, and both shoot in
         line at zero phasing. The amber rpD is the one row whose dimensionless perforation radius
@@ -206,27 +207,25 @@ const Phasing = () => {
         <Tile label="Of which plane flow" value={fmt(100 * (zero.sH - best.sH) / (zero.total - best.total), 3)} unit="pct" />
         <Tile label="Ratio gained" value={fmt(best.ratio - zero.ratio, 6)} />
       </TileGrid>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={sw} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="phasingDeg" type="number" domain={[0, 180]} ticks={[0, 45, 60, 90, 120, 180]}
-              tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'phasing (deg)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'skin', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(x) => fmt(x, 5)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={0} stroke="#64748b" />
-            <Line type="monotone" dataKey="sH" name="plane flow" stroke="#38bdf8" dot isAnimationActive={false} />
-            <Line type="monotone" dataKey="total" name="total" stroke="#BFFF00" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3">
+        <LineChart data={sw} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="phasingDeg" type="number" domain={[0, 180]} ticks={[0, 45, 60, 90, 120, 180]}
+            tick={AXIS_TICK}
+            label={{ value: 'phasing (deg)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS_TICK}
+            label={{ value: 'skin', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(x) => fmt(x, 5)} />
+          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <ReferenceLine y={0} stroke={SVG_CHART.reference} />
+          <Line type="monotone" dataKey="sH" name="plane flow" stroke={seriesColor(0)} dot isAnimationActive={false} />
+          <Line type="monotone" dataKey="total" name="total" stroke={seriesColor(1)} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">phasing</th><th className="text-right pr-3">alpha</th>
               <th className="text-right pr-3">rw prime (m)</th><th className="text-right pr-3">plane flow</th>
@@ -288,23 +287,21 @@ const Ratio = () => {
         <Tile label="Gas underbalance" value={`${ub.gas.minPsi} to ${ub.gas.maxPsi}`} unit="psi" />
         <Tile label="Oil band" value={`${fmt(ub.oil.minPa / 1e6, 4)} to ${fmt(ub.oil.maxPa / 1e6, 4)}`} unit="MPa" />
       </TileGrid>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={sw} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="reM" type="number" scale="log" domain={['dataMin', 'dataMax']}
-              tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'drainage radius (m, log)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'productivity ratio', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(x) => fmt(x, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={1} stroke="#64748b" />
-            <Line type="monotone" dataKey="ratio" name="productivity ratio" stroke="#BFFF00" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={sw} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="reM" type="number" scale="log" domain={['dataMin', 'dataMax']}
+            tick={AXIS_TICK}
+            label={{ value: 'drainage radius (m, log)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS_TICK}
+            label={{ value: 'productivity ratio', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(x) => fmt(x, 6)} />
+          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <ReferenceLine y={1} stroke={SVG_CHART.reference} />
+          <Line type="monotone" dataKey="ratio" name="productivity ratio" stroke={seriesColor(1)} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Note>
         The ratio compares the perforated completion against an open hole of the same radius with
         no skin at all. It is not a rate and it is not a comparison against another gun. And it

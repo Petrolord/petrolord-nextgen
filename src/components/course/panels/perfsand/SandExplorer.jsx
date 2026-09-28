@@ -1,8 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid,
+  LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid,
   Tooltip, Legend, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   UM, THOU, PARAMS, SAUCIER_RANGE, rungTable, saucierSweep, gaugeTable, packFor,
   publishedStats, sandControlAdvisor, screenSelection, sieveStats, ptsOf, RUNG_SANDS,
@@ -40,8 +43,8 @@ const Ladder = () => {
         <Tile label="Sands shown" value={rows.length} />
       </TileGrid>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">rule</th><th className="text-right pr-3">holds</th>
               <th className="text-left">indication</th>
@@ -51,7 +54,7 @@ const Ladder = () => {
             {published.advisor.checks.map((c) => (
               <tr key={c.rule}>
                 <td className="pr-3">{c.rule}</td>
-                <td className={`text-right pr-3 ${c.pass ? 'text-emerald-400' : 'text-slate-500'}`}>{c.pass ? 'yes' : 'no'}</td>
+                <td className={`text-right pr-3 ${c.pass ? 'text-pl-success-text' : 'text-pl-muted'}`}>{c.pass ? 'yes' : 'no'}</td>
                 <td>{c.indication}</td>
               </tr>
             ))}
@@ -59,8 +62,8 @@ const Ladder = () => {
         </table>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">sand</th><th className="text-right pr-3">D50 (um)</th>
               <th className="text-right pr-3">uniformity</th><th className="text-right pr-3">fines (pct)</th>
@@ -80,7 +83,7 @@ const Ladder = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         Look at the third and fourth rows. Their uniformity is within a fifth of a point of each
         other and they land on different rungs, because the FINES moved. In the middle of the
         range the fines decide, and the uniformity only takes over at the extremes.
@@ -127,8 +130,8 @@ const Gravel = () => {
         <Tile label="Saucier range" value={SAUCIER_RANGE.join(' to ')} unit="x D50" />
       </TileGrid>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">formation D50 (um)</th><th className="text-right pr-3">band (um)</th>
               <th className="text-left pr-3">matches</th><th className="text-left">nearest</th>
@@ -139,7 +142,7 @@ const Gravel = () => {
               <tr key={r.d50Um}>
                 <td className="pr-3">{r.d50Um}</td>
                 <td className="text-right pr-3">{fmt(r.bandMinM / UM, 1)} to {fmt(r.bandMaxM / UM, 1)}</td>
-                <td className={`pr-3 ${r.noMatch ? 'text-amber-400' : 'text-emerald-400'}`}>{r.noMatch ? 'none' : r.matches.join(', ')}</td>
+                <td className={`pr-3 ${r.noMatch ? 'text-pl-warning-text' : 'text-pl-success-text'}`}>{r.noMatch ? 'none' : r.matches.join(', ')}</td>
                 <td>{r.nearest}</td>
               </tr>
             ))}
@@ -147,8 +150,8 @@ const Gravel = () => {
         </table>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">gravel</th><th className="text-right pr-3">smallest grain (um)</th>
               <th className="text-right pr-3">gauge (thou)</th><th className="text-right">margin (um)</th>
@@ -226,29 +229,27 @@ const Sanding = () => {
         <Tile label="Boost for zero margin" value={zero == null ? '-' : fmt(zero, 8)} />
         <Tile label="Screening grade" value="yes" />
       </TileGrid>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="md" type="number" domain={['dataMin', 'dataMax']}
-              tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'measured depth (m)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'MPa', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(x) => fmt(x, 5)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={0} stroke="#f472b6" />
-            <Line type="monotone" dataKey="cdpMPa" name="drawdown margin" stroke="#BFFF00" dot isAnimationActive={false} />
-            <Line type="monotone" dataKey="ppMPa" name="pore pressure" stroke="#38bdf8" dot={false} isAnimationActive={false} />
-            <Line type="monotone" dataKey="pwfMPa" name="critical flowing pressure" stroke="#94a3b8" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3">
+        <LineChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="md" type="number" domain={['dataMin', 'dataMax']}
+            tick={AXIS_TICK}
+            label={{ value: 'measured depth (m)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS_TICK}
+            label={{ value: 'MPa', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(x) => fmt(x, 5)} />
+          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <ReferenceLine y={0} stroke={seriesColor(4)} />
+          <Line type="monotone" dataKey="cdpMPa" name="drawdown margin" stroke={seriesColor(1)} dot isAnimationActive={false} />
+          <Line type="monotone" dataKey="ppMPa" name="pore pressure" stroke={seriesColor(0)} dot={false} isAnimationActive={false} />
+          <Line type="monotone" dataKey="pwfMPa" name="critical flowing pressure" stroke={SVG_CHART.reference} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 grid grid-cols-2 gap-3">
         <div className="overflow-x-auto">
-          <table className="text-xs text-slate-300 w-full">
-            <thead className="text-slate-500">
+          <table className="text-xs text-pl-text w-full">
+            <thead className="text-pl-muted">
               <tr>
                 <th className="text-left pr-3">step (m)</th><th className="text-right pr-3">rows</th>
                 <th className="text-right pr-3">last row</th><th className="text-right">governing (MPa)</th>
@@ -266,22 +267,20 @@ const Sanding = () => {
             </tbody>
           </table>
         </div>
-        <div className="h-48">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={bs} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-              <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-              <XAxis dataKey="boostFactor" tick={{ fill: '#94a3b8', fontSize: 10 }}
-                label={{ value: 'strength boost', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-              <YAxis tick={{ fill: '#94a3b8', fontSize: 10 }} />
-              <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-                formatter={(x) => fmt(x / 1e6, 4)} />
-              <ReferenceLine y={0} stroke="#f472b6" />
-              <Bar dataKey="governingCdpPa" name="governing margin" fill="#38bdf8" isAnimationActive={false} />
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
+        <ChartFrame height={192}>
+          <BarChart data={bs} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+            <CartesianGrid {...GRID_STYLE} />
+            <XAxis dataKey="boostFactor" tick={{ ...AXIS_TICK, fontSize: 10 }}
+              label={{ value: 'strength boost', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+            <YAxis tick={{ ...AXIS_TICK, fontSize: 10 }} />
+            <Tooltip contentStyle={TOOLTIP_STYLE}
+              formatter={(x) => fmt(x / 1e6, 4)} />
+            <ReferenceLine y={0} stroke={seriesColor(4)} />
+            <Bar dataKey="governingCdpPa" name="governing margin" fill={seriesColor(0)} isAnimationActive={false} />
+          </BarChart>
+        </ChartFrame>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         Every step size in the left table ends at the same depth, which is the interval bottom.
         That was not always true: a step that did not divide the interval used to stop at the last
         whole step, and on the weak profile in the drop-down the row it dropped was the one that

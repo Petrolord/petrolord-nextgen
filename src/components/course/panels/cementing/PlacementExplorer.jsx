@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   WELLS, PROGRAMS, caseOf, placementFor, rateSweep, rateWindow, previousShoeMdOf,
   YOUR_JOB_FIELDS, YOUR_JOB_DEFAULT, jobFromTyped, yourJob,
@@ -50,27 +53,25 @@ const Job = () => {
         <SelectField label="Programme" value={program} onChange={setProgram} options={PROGRAM_OPTIONS} />
         <NumField label={`Pump rate (m3/s, default ${c.pumpRateM3s})`} value={rate} onChange={setRate} placeholder={String(c.pumpRateM3s)} />
       </div>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={rows} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="pumped" type="number" domain={[0, 'auto']} tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'pumped (m3)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-            <YAxis yAxisId="p" tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'MPa', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <YAxis yAxisId="e" orientation="right" tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'ECD (kg/m3)', angle: 90, position: 'insideRight', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(v) => fmt(v, 3)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine yAxisId="p" y={0} stroke="#f59e0b" strokeDasharray="4 4" />
-            <Line yAxisId="p" dataKey="uTubeMPa" name="U-tube (MPa)" stroke="#BFFF00" strokeWidth={2} dot={false} isAnimationActive={false} />
-            <Line yAxisId="p" dataKey="pumpMPa" name="pump pressure (MPa)" stroke="#fb7185" strokeWidth={1} dot={false} isAnimationActive={false} />
-            <Line yAxisId="e" dataKey="ecdPrev" name="ECD at previous shoe" stroke="#38bdf8" strokeWidth={2} dot={false} isAnimationActive={false} />
-            <Line yAxisId="e" dataKey="ecdShoe" name="ECD at the shoe" stroke="#94a3b8" strokeWidth={1} dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3">
+        <LineChart data={rows} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="pumped" type="number" domain={[0, 'auto']} tick={AXIS_TICK}
+            label={{ value: 'pumped (m3)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis yAxisId="p" tick={AXIS_TICK}
+            label={{ value: 'MPa', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis yAxisId="e" orientation="right" tick={AXIS_TICK}
+            label={{ value: 'ECD (kg/m3)', angle: 90, position: 'insideRight', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(v) => fmt(v, 3)} />
+          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <ReferenceLine yAxisId="p" y={0} stroke={seriesColor(2)} strokeDasharray="4 4" />
+          <Line yAxisId="p" dataKey="uTubeMPa" name="U-tube (MPa)" stroke={seriesColor(1)} strokeWidth={2} dot={false} isAnimationActive={false} />
+          <Line yAxisId="p" dataKey="pumpMPa" name="pump pressure (MPa)" stroke={seriesColor(3)} strokeWidth={1} dot={false} isAnimationActive={false} />
+          <Line yAxisId="e" dataKey="ecdPrev" name="ECD at previous shoe" stroke={seriesColor(0)} strokeWidth={2} dot={false} isAnimationActive={false} />
+          <Line yAxisId="e" dataKey="ecdShoe" name="ECD at the shoe" stroke={SVG_CHART.reference} strokeWidth={1} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <TileGrid>
         <Tile label="End pump pressure" value={fmt(r.endPumpPressurePa / 1e6, 6)} unit="MPa" />
         <Tile label="Float differential" value={fmt(r.floatDiffPa / 1e6, 6)} unit="MPa" />
@@ -80,7 +81,7 @@ const Job = () => {
         <Tile label="Steps in free fall" value={r.series.filter((s) => s.freeFall).length} unit="of 61" />
       </TileGrid>
       {r.warnings.length > 0 && (
-        <div className="mt-3 text-xs text-amber-400">
+        <div className="mt-3 text-xs text-pl-warning-text">
           {r.warnings.map((w) => <p key={w} className="mb-1">{w}</p>)}
         </div>
       )}
@@ -101,8 +102,8 @@ const Compare = () => {
     <>
       <SelectField label="Well" value={well} onChange={setWell} options={WELL_OPTIONS} />
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">programme</th><th className="text-right pr-3">end pump (MPa)</th>
               <th className="text-right pr-3">float diff (MPa)</th><th className="text-right pr-3">peak ECD</th>
@@ -117,13 +118,13 @@ const Compare = () => {
                 <td className="text-right pr-3">{fmt(r.floatDiffPa / 1e6, 4)}</td>
                 <td className="text-right pr-3">{fmt(r.maxEcdPrevShoeKgM3, 4)}</td>
                 <td className="text-right pr-3">{fmt(r.achievedTocMd, 2)}</td>
-                <td className={`text-right ${r.freeFall ? 'text-rose-400' : 'text-[#BFFF00]'}`}>{r.freeFall ? 'yes' : 'no'}</td>
+                <td className={`text-right ${r.freeFall ? 'text-pl-danger-text' : 'text-pl-success-text'}`}>{r.freeFall ? 'yes' : 'no'}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         Both programmes place the same total slurry and reach the same top of cement. The neat one
         replaces the lighter lead with more of the heavy tail, and that costs pump pressure, float
         differential and peak ECD on both wells. On the horizontal well it also costs a free-fall
@@ -158,28 +159,26 @@ const Window = () => {
         <SelectField label="Programme" value={program} onChange={setProgram} options={PROGRAM_OPTIONS} />
         <NumField label="Fracture limit at the previous shoe (kg/m3)" value={limit} onChange={setLimit} />
       </div>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={rows} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="q" type="number" domain={['auto', 'auto']} tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'pump rate (m3/s)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-            <YAxis yAxisId="e" tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'peak ECD (kg/m3)', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <YAxis yAxisId="u" orientation="right" tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'worst U-tube (MPa)', angle: 90, position: 'insideRight', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(v) => fmt(v, 4)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            {lim > 0 && <ReferenceLine yAxisId="e" y={lim} stroke="#fb7185" strokeDasharray="4 4" />}
-            <ReferenceLine yAxisId="u" y={0} stroke="#f59e0b" strokeDasharray="4 4" />
-            {w?.minRateNoFreeFallM3s != null && <ReferenceLine yAxisId="e" x={w.minRateNoFreeFallM3s} stroke="#BFFF00" strokeDasharray="4 4" />}
-            {w?.maxRateUnderEcdM3s != null && <ReferenceLine yAxisId="e" x={w.maxRateUnderEcdM3s} stroke="#38bdf8" strokeDasharray="4 4" />}
-            <Line yAxisId="e" dataKey="ecd" name="peak ECD" stroke="#38bdf8" strokeWidth={2} dot isAnimationActive={false} />
-            <Line yAxisId="u" dataKey="worstMPa" name="worst U-tube" stroke="#BFFF00" strokeWidth={2} dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3">
+        <LineChart data={rows} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="q" type="number" domain={['auto', 'auto']} tick={AXIS_TICK}
+            label={{ value: 'pump rate (m3/s)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis yAxisId="e" tick={AXIS_TICK}
+            label={{ value: 'peak ECD (kg/m3)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis yAxisId="u" orientation="right" tick={AXIS_TICK}
+            label={{ value: 'worst U-tube (MPa)', angle: 90, position: 'insideRight', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(v) => fmt(v, 4)} />
+          <Legend wrapperStyle={{ fontSize: 11 }} />
+          {lim > 0 && <ReferenceLine yAxisId="e" y={lim} stroke={seriesColor(3)} strokeDasharray="4 4" />}
+          <ReferenceLine yAxisId="u" y={0} stroke={seriesColor(2)} strokeDasharray="4 4" />
+          {w?.minRateNoFreeFallM3s != null && <ReferenceLine yAxisId="e" x={w.minRateNoFreeFallM3s} stroke={seriesColor(1)} strokeDasharray="4 4" />}
+          {w?.maxRateUnderEcdM3s != null && <ReferenceLine yAxisId="e" x={w.maxRateUnderEcdM3s} stroke={seriesColor(0)} strokeDasharray="4 4" />}
+          <Line yAxisId="e" dataKey="ecd" name="peak ECD" stroke={seriesColor(0)} strokeWidth={2} dot isAnimationActive={false} />
+          <Line yAxisId="u" dataKey="worstMPa" name="worst U-tube" stroke={seriesColor(1)} strokeWidth={2} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       {w && (
         <>
           <TileGrid>
@@ -190,7 +189,7 @@ const Window = () => {
             <Tile label="Previous shoe" value={fmt(previousShoeMdOf(well), 0)} unit="m MD" />
             <Tile label="Design rate" value={fmt(caseOf(well).pumpRateM3s, 4)} unit="m3/s" />
           </TileGrid>
-          <div className="mt-3 text-xs text-slate-300">
+          <div className="mt-3 text-xs text-pl-text">
             {w.open
               ? 'The two constraints leave a band of rates that satisfy both. Pump inside it.'
               : 'The two constraints CROSS: there is no rate that both avoids free fall and keeps the ECD under the limit. The programme has to change, not the rate.'}
@@ -228,14 +227,14 @@ const Yours = () => {
     <>
       <div className="grid grid-cols-2 gap-2">
         <SelectField label="Trajectory" value={well} onChange={setWell} options={WELL_OPTIONS} />
-        <button type="button" className="text-xs text-slate-300 underline self-end pb-2 text-left"
+        <button type="button" className="text-xs text-pl-text underline self-end pb-2 text-left"
           onClick={() => setTyped(YOUR_JOB_DEFAULT)}>
           Back to the lessons&apos; job
         </button>
       </div>
       {groups.map(([title, fields]) => (
         <div key={title} className="mt-3">
-          <p className="text-[11px] text-gray-400 mb-1">{title}</p>
+          <p className="text-[11px] text-pl-muted mb-1">{title}</p>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
             {fields.map((f) => <NumField key={f.key} label={f.label} value={typed[f.key]} onChange={set(f.key)} />)}
           </div>
@@ -256,7 +255,7 @@ const Yours = () => {
             <Tile label="Slurry" value={fmt(r.volumes.slurryM3, 4)} unit="m3" />
           </TileGrid>
           {r.placement.warnings.length > 0 && (
-            <div className="mt-3 text-xs text-amber-400">
+            <div className="mt-3 text-xs text-pl-warning-text">
               {r.placement.warnings.map((w) => <p key={w} className="mb-1">{w}</p>)}
             </div>
           )}

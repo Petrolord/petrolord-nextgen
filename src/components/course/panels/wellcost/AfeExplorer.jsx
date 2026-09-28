@@ -1,8 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
+  LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
   Legend, ReferenceLine, Cell,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   COST_BASES, COST_CATEGORIES, CONTINGENCY_FRAC, NOMINAL_USD,
   publishedAfe, publishedAfeItems, publishedAfeSplit, publishedTotals,
@@ -34,15 +37,25 @@ const MODES = [
   ['contingency', 'The provision and where it ranks'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const GRID = <CartesianGrid stroke="#334155" strokeDasharray="3 3" />;
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const GRID = <CartesianGrid {...GRID_STYLE} />;
 
-const BASIS_TEXT = {
-  'per-day': 'text-[#BFFF00]',
-  'per-meter': 'text-[#38bdf8]',
-  lump: 'text-[#f472b6]',
+// The basis word carries a swatch in its chart colour (the bar and line
+// charts below colour each basis the same way).
+const BASIS_COLOR = {
+  'per-day': seriesColor(1),
+  'per-meter': seriesColor(0),
+  lump: seriesColor(4),
 };
+const BasisCell = ({ basis }) => (
+  <td className="pr-3">
+    {BASIS_COLOR[basis] && (
+      <span aria-hidden="true" className="inline-block h-2 w-2 rounded-full mr-1.5 align-middle" style={{ backgroundColor: BASIS_COLOR[basis] }} />
+    )}
+    {basis}
+  </td>
+);
 
 const BASIS_MEANING = {
   'per-day': 'rate times elapsed days',
@@ -77,25 +90,23 @@ const Lines = () => {
         <Tile label="Bases the engine accepts" value={COST_BASES.join(', ')} />
         <Tile label="Categories the engine accepts" value={COST_CATEGORIES.join(', ')} />
       </TileGrid>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={afe.byItem} margin={{ top: 10, right: 16, bottom: 40, left: 10 }}>
-            {GRID}
-            <XAxis dataKey="label" tick={{ fill: '#94a3b8', fontSize: 9 }} interval={0} angle={-20} textAnchor="end" height={60} />
-            <YAxis tick={AXIS}
-              label={{ value: 'USD', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => usd(v)} />
-            <Bar dataKey="amountUsd" name="amount" isAnimationActive={false}>
-              {afe.byItem.map((r) => (
-                <Cell key={r.id} fill={r.basis === 'per-day' ? '#BFFF00' : r.basis === 'per-meter' ? '#38bdf8' : '#f472b6'} />
-              ))}
-            </Bar>
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3">
+        <BarChart data={afe.byItem} margin={{ top: 10, right: 16, bottom: 40, left: 10 }}>
+          {GRID}
+          <XAxis dataKey="label" tick={{ ...AXIS_TICK, fontSize: 9 }} interval={0} angle={-20} textAnchor="end" height={60} />
+          <YAxis tick={AXIS}
+            label={{ value: 'USD', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => usd(v)} />
+          <Bar dataKey="amountUsd" name="amount" isAnimationActive={false}>
+            {afe.byItem.map((r) => (
+              <Cell key={r.id} fill={r.basis === 'per-day' ? seriesColor(1) : r.basis === 'per-meter' ? seriesColor(0) : seriesColor(4)} />
+            ))}
+          </Bar>
+        </BarChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">line</th>
               <th className="text-left pr-3">basis</th>
@@ -108,8 +119,8 @@ const Lines = () => {
             {afe.byItem.map((r) => (
               <tr key={r.id}>
                 <td className="pr-3">{r.label}</td>
-                <td className={`pr-3 ${BASIS_TEXT[r.basis] || ''}`}>{r.basis}</td>
-                <td className="pr-3 text-slate-400">{BASIS_MEANING[r.basis] || '-'}</td>
+                <BasisCell basis={r.basis} />
+                <td className="pr-3 text-pl-muted">{BASIS_MEANING[r.basis] || 'n/a'}</td>
                 <td className="pr-3">{r.category}</td>
                 <td>{usd(r.amountUsd)}</td>
               </tr>
@@ -118,8 +129,8 @@ const Lines = () => {
         </table>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">basis</th>
               <th className="text-left pr-3">lines</th>
@@ -130,7 +141,7 @@ const Lines = () => {
           <tbody>
             {byBasis.map((r) => (
               <tr key={r.basis}>
-                <td className={`pr-3 ${BASIS_TEXT[r.basis] || ''}`}>{r.basis}</td>
+                <BasisCell basis={r.basis} />
                 <td className="pr-3">{fmt(r.count, 0)}</td>
                 <td className="pr-3">{usd(r.amountUsd)}</td>
                 <td>{pct(r.amountUsd / afe.baseUsd, 2)}</td>
@@ -139,7 +150,7 @@ const Lines = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         Every line carries two labels at once and they answer different questions. The BASIS says
         what the money is multiplied by, which is where the risk lives:
         {' '}{pct(byBasis[0].amountUsd / afe.baseUsd, 2)} of this base is on day rates and moves
@@ -197,27 +208,25 @@ const Bases = () => {
           <Tile label="Metres, every slip" value={fmt(base.drilledM, 3)} unit="m" />
         </TileGrid>
       </div>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 20 }}>
-            {GRID}
-            <XAxis dataKey="slipFactor" type="number" tick={AXIS}
-              label={{ value: 'schedule slip, multiplier on elapsed time', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS} tickFormatter={(v) => usd(v)}
-              label={{ value: 'USD on the line', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => usd(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine x={1} stroke="#94a3b8" strokeDasharray="4 3"
-              label={{ value: 'the plan', fill: '#94a3b8', fontSize: 10, position: 'top' }} />
-            <Line type="linear" dataKey="perDayUsd" name="per-day line" stroke="#BFFF00" dot isAnimationActive={false} />
-            <Line type="linear" dataKey="perMeterUsd" name="per-meter line" stroke="#38bdf8" dot isAnimationActive={false} />
-            <Line type="linear" dataKey="lumpUsd" name="lump" stroke="#f472b6" strokeDasharray="5 3" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3">
+        <LineChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 20 }}>
+          {GRID}
+          <XAxis dataKey="slipFactor" type="number" tick={AXIS}
+            label={{ value: 'schedule slip, multiplier on elapsed time', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS} tickFormatter={(v) => usd(v)}
+            label={{ value: 'USD on the line', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => usd(v)} />
+          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <ReferenceLine x={1} stroke={SVG_CHART.reference} strokeDasharray="4 3"
+            label={{ value: 'the plan', fill: SVG_CHART.note, fontSize: 10, position: 'top' }} />
+          <Line type="linear" dataKey="perDayUsd" name="per-day line" stroke={seriesColor(1)} dot isAnimationActive={false} />
+          <Line type="linear" dataKey="perMeterUsd" name="per-meter line" stroke={seriesColor(0)} dot isAnimationActive={false} />
+          <Line type="linear" dataKey="lumpUsd" name="lump" stroke={seriesColor(4)} strokeDasharray="5 3" dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">slip</th>
               <th className="text-left pr-3">days</th>
@@ -230,20 +239,20 @@ const Bases = () => {
           </thead>
           <tbody>
             {rows.map((r) => (
-              <tr key={r.slipFactor} className={r.slipFactor === 1 ? 'text-white' : ''}>
+              <tr key={r.slipFactor} className={r.slipFactor === 1 ? 'text-pl-text font-semibold' : ''}>
                 <td className="pr-3">{fmt(r.slipFactor, 4)}</td>
                 <td className="pr-3">{fmt(r.totalDays, 4)}</td>
                 <td className="pr-3">{fmt(r.drilledM, 3)}</td>
-                <td className="pr-3 text-[#BFFF00]">{usd(r.perDayUsd)}</td>
-                <td className="pr-3 text-[#38bdf8]">{usd(r.perMeterUsd)}</td>
-                <td className="pr-3 text-[#f472b6]">{usd(r.lumpUsd)}</td>
+                <td className="pr-3 text-pl-text">{usd(r.perDayUsd)}</td>
+                <td className="pr-3 text-pl-text">{usd(r.perMeterUsd)}</td>
+                <td className="pr-3 text-pl-text">{usd(r.lumpUsd)}</td>
                 <td>{usd(r.baseUsd)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         Three lines that cost exactly the same {usd(NOMINAL_USD)} USD on the plan, and only one of
         them moves. The per-day line tracks the slip one for one because it buys TIME. The
         per-meter line has {fmt(meters.size, 0)} distinct value across the whole sweep and the lump
@@ -251,10 +260,10 @@ const Bases = () => {
         is a price. So the exposure of an estimate to schedule risk is not its size, it is the
         share of it sitting on day rates.
       </div>
-      <div className="mt-4 text-xs text-slate-400 font-medium">The mirror: metres at a fixed schedule</div>
+      <div className="mt-4 text-xs text-pl-muted font-medium">The mirror: metres at a fixed schedule</div>
       <div className="mt-2 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">extra hole, m</th>
               <th className="text-left pr-3">rate that keeps the clock still, m/hr</th>
@@ -272,15 +281,15 @@ const Bases = () => {
                 <td className="pr-3">{fmt(r.ropMPerHr, 4)}</td>
                 <td className="pr-3">{fmt(r.totalDays, 4)}</td>
                 <td className="pr-3">{fmt(r.drilledM, 3)}</td>
-                <td className="pr-3 text-[#BFFF00]">{usd(r.perDayUsd)}</td>
-                <td className="pr-3 text-[#38bdf8]">{usd(r.perMeterUsd)}</td>
-                <td className="text-[#f472b6]">{usd(r.lumpUsd)}</td>
+                <td className="pr-3 text-pl-text">{usd(r.perDayUsd)}</td>
+                <td className="pr-3 text-pl-text">{usd(r.perMeterUsd)}</td>
+                <td className="text-pl-text">{usd(r.lumpUsd)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         The same three lines, deepened instead of delayed. The last drill activity is extended and
         its rate raised by exactly enough to keep its hours where they were, so the clock stands
         still at {fmt(deeper[0].totalDays, 4)} days across every row, with
@@ -332,22 +341,20 @@ const Split = () => {
           value={twoThirds ? fmt(twoThirds.rank, 0) : '-'} />
         <Tile label="Largest single line" value={usd(ranked[0].amountUsd)} unit="USD" />
       </TileGrid>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={bars} margin={{ top: 10, right: 16, bottom: 5, left: 10 }}>
-            {GRID}
-            <XAxis dataKey="category" tick={AXIS} />
-            <YAxis tick={AXIS} tickFormatter={(v) => usd(v)} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => usd(v)} />
-            <ReferenceLine y={split.baseUsd} stroke="#f472b6"
-              label={{ value: 'the base subtotal', fill: '#f472b6', fontSize: 10, position: 'top' }} />
-            <Bar dataKey="amountUsd" name="USD" fill="#BFFF00" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <BarChart data={bars} margin={{ top: 10, right: 16, bottom: 5, left: 10 }}>
+          {GRID}
+          <XAxis dataKey="category" tick={AXIS} />
+          <YAxis tick={AXIS} tickFormatter={(v) => usd(v)} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => usd(v)} />
+          <ReferenceLine y={split.baseUsd} stroke={seriesColor(4)}
+            label={{ value: 'the base subtotal', fill: seriesColor(4), fontSize: 10, position: 'top' }} />
+          <Bar dataKey="amountUsd" name="USD" fill={seriesColor(1)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">rank</th>
               <th className="text-left pr-3">line</th>
@@ -360,10 +367,10 @@ const Split = () => {
           </thead>
           <tbody>
             {ranked.map((r) => (
-              <tr key={r.id} className={twoThirds && r.rank === twoThirds.rank ? 'text-white' : ''}>
+              <tr key={r.id} className={twoThirds && r.rank === twoThirds.rank ? 'text-pl-text font-semibold' : ''}>
                 <td className="pr-3">{fmt(r.rank, 0)}</td>
                 <td className="pr-3">{r.label}</td>
-                <td className={`pr-3 ${BASIS_TEXT[r.basis] || ''}`}>{r.basis}</td>
+                <BasisCell basis={r.basis} />
                 <td className="pr-3">{r.category}</td>
                 <td className="pr-3">{usd(r.amountUsd)}</td>
                 <td className="pr-3">{usd(r.cumUsd)}</td>
@@ -373,7 +380,7 @@ const Split = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         Sorted, the estimate says something the alphabetical list cannot. The top
         {' '}{twoThirds ? fmt(twoThirds.rank, 0) : '-'} lines carry more than two thirds of the
         base, and their bases are the thing to read next: this well is held up by day rates, so its
@@ -440,28 +447,26 @@ const Contingency = () => {
           <Tile label="Fraction where it does" value={fmt(crossing.frac, 6)} />
         </TileGrid>
       </div>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 20 }}>
-            {GRID}
-            <XAxis dataKey="contingencyFrac" type="number" tick={AXIS}
-              label={{ value: 'contingency fraction of the base', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS} tickFormatter={(v) => usd(v)}
-              label={{ value: 'USD', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => usd(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={biggest.amountUsd} stroke="#f472b6" strokeDasharray="5 3"
-              label={{ value: 'the largest contracted line', fill: '#f472b6', fontSize: 10, position: 'insideTopLeft' }} />
-            <ReferenceLine x={crossing.frac} stroke="#f472b6"
-              label={{ value: 'the crossing', fill: '#f472b6', fontSize: 10, position: 'top' }} />
-            <Line type="linear" dataKey="contingencyUsd" name="the provision" stroke="#BFFF00" dot isAnimationActive={false} />
-            <Line type="linear" dataKey="baseUsd" name="base subtotal" stroke="#38bdf8" strokeDasharray="4 3" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3">
+        <LineChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 20 }}>
+          {GRID}
+          <XAxis dataKey="contingencyFrac" type="number" tick={AXIS}
+            label={{ value: 'contingency fraction of the base', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS} tickFormatter={(v) => usd(v)}
+            label={{ value: 'USD', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => usd(v)} />
+          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <ReferenceLine y={biggest.amountUsd} stroke={seriesColor(4)} strokeDasharray="5 3"
+            label={{ value: 'the largest contracted line', fill: seriesColor(4), fontSize: 10, position: 'insideTopLeft' }} />
+          <ReferenceLine x={crossing.frac} stroke={seriesColor(4)}
+            label={{ value: 'the crossing', fill: seriesColor(4), fontSize: 10, position: 'top' }} />
+          <Line type="linear" dataKey="contingencyUsd" name="the provision" stroke={seriesColor(1)} dot isAnimationActive={false} />
+          <Line type="linear" dataKey="baseUsd" name="base subtotal" stroke={seriesColor(0)} strokeDasharray="4 3" dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">fraction</th>
               <th className="text-left pr-3">base, USD</th>
@@ -474,14 +479,14 @@ const Contingency = () => {
           </thead>
           <tbody>
             {rows.map((r) => (
-              <tr key={r.contingencyFrac} className={r.contingencyFrac === chosen ? 'text-white' : ''}>
+              <tr key={r.contingencyFrac} className={r.contingencyFrac === chosen ? 'text-pl-text font-semibold' : ''}>
                 <td className="pr-3">{fmt(r.contingencyFrac, 6)}</td>
                 <td className="pr-3">{usd(r.baseUsd)}</td>
-                <td className="pr-3 text-[#BFFF00]">{usd(r.contingencyUsd)}</td>
+                <td className="pr-3 text-pl-text">{usd(r.contingencyUsd)}</td>
                 <td className="pr-3">{usd(r.totalUsd)}</td>
                 <td className="pr-3">{pct(r.contingencyUsd / r.totalUsd, 3)}</td>
                 <td className="pr-3">{fmt(r.rank, 0)}</td>
-                <td className={r.outranksLargestItem ? 'text-[#f472b6]' : 'text-slate-400'}>
+                <td className={r.outranksLargestItem ? 'text-pl-accent-text font-semibold' : 'text-pl-muted'}>
                   {r.outranksLargestItem ? 'yes' : 'no'}
                 </td>
               </tr>
@@ -489,12 +494,12 @@ const Contingency = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-4 text-xs text-slate-400 font-medium">
+      <div className="mt-4 text-xs text-pl-muted font-medium">
         The sorted estimate with the provision in its place, at {fmt(chosen, 5)}
       </div>
       <div className="mt-2 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">place</th>
               <th className="text-left pr-3">line</th>
@@ -503,7 +508,7 @@ const Contingency = () => {
           </thead>
           <tbody>
             {merged.map((r, i) => (
-              <tr key={r.key} className={r.provision ? 'text-[#BFFF00]' : ''}>
+              <tr key={r.key} className={r.provision ? 'text-pl-accent-text font-semibold' : ''}>
                 <td className="pr-3">{fmt(i + 1, 0)}</td>
                 <td className="pr-3">{r.provision ? `${r.label}, a provision` : r.label}</td>
                 <td>{usd(r.amountUsd)}</td>
@@ -512,7 +517,7 @@ const Contingency = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         Raise the fraction and watch the green row climb the table. At the published
         {' '}{fmt(CONTINGENCY_FRAC, 5)} the provision is already the number
         {' '}{fmt(contingencySweep([CONTINGENCY_FRAC])[0].rank, 0)} line on this estimate, ahead of

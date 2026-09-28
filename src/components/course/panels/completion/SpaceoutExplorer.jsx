@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceArea,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceArea,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   spaceOutAt, spaceOutSweep, spaceOutBand, minPbrLength, dr6LengthChanges, dr6SpaceOut, GOLDEN,
 } from './completionLab';
@@ -70,24 +73,22 @@ const Sweep = () => {
         <Tile label="Band width" value={band.open ? fmt(band.widthM, 4) : '-'} unit="m" />
         <Tile label="Middle of the band" value={band.open ? fmt(band.midM, 4) : '-'} unit="m" />
       </TileGrid>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="insert" type="number" domain={['dataMin', 'dataMax']}
-              tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'insertion (m)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'remaining after the move (m)', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(x) => fmt(x, 4)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            {band.open && <ReferenceArea x1={band.loM} x2={band.hiM} fill="#BFFF00" fillOpacity={0.12} />}
-            <Line type="monotone" dataKey="up" name="after elongation" stroke="#38bdf8" dot={false} isAnimationActive={false} />
-            <Line type="monotone" dataKey="down" name="after contraction" stroke="#f472b6" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3">
+        <LineChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="insert" type="number" domain={['dataMin', 'dataMax']}
+            tick={AXIS_TICK}
+            label={{ value: 'insertion (m)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS_TICK}
+            label={{ value: 'remaining after the move (m)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(x) => fmt(x, 4)} />
+          <Legend wrapperStyle={{ fontSize: 11 }} />
+          {band.open && <ReferenceArea x1={band.loM} x2={band.hiM} fill={seriesColor(1)} fillOpacity={0.12} />}
+          <Line type="monotone" dataKey="up" name="after elongation" stroke={seriesColor(0)} dot={false} isAnimationActive={false} />
+          <Line type="monotone" dataKey="down" name="after contraction" stroke={seriesColor(4)} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Note>
         The two lines cross because the insertion depth splits a FIXED budget. Every metre you gain
         against elongation you lose against contraction, and the shaded band is where both are
@@ -117,8 +118,8 @@ const Sizing = () => {
         <Tile label="Band at the chosen PBR" value={fmt(Math.max(0, v.pbr - need), 4)} unit="m" />
       </TileGrid>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">PBR (m)</th><th className="text-right pr-3">band open</th>
               <th className="text-right pr-3">shallowest</th><th className="text-right pr-3">deepest</th>
@@ -129,7 +130,7 @@ const Sizing = () => {
             {rows.map((r) => (
               <tr key={r.pbr}>
                 <td className="pr-3">{fmt(r.pbr, 2)}</td>
-                <td className={`text-right pr-3 ${r.open ? 'text-emerald-400' : 'text-rose-400'}`}>{r.open ? 'yes' : 'no'}</td>
+                <td className={`text-right pr-3 ${r.open ? 'text-pl-success-text' : 'text-pl-danger-text'}`}>{r.open ? 'yes' : 'no'}</td>
                 <td className="text-right pr-3">{r.open ? fmt(r.lo, 4) : '-'}</td>
                 <td className="text-right pr-3">{r.open ? fmt(r.hi, 4) : '-'}</td>
                 <td className="text-right">{r.open ? fmt(r.width, 4) : '-'}</td>
@@ -173,8 +174,8 @@ const Dr6 = () => {
         <Tile label="Band open" value={d.band.open ? 'yes' : 'no'} />
       </TileGrid>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">case</th>
               <th className="text-right pr-3">length change (m)</th>
@@ -188,11 +189,11 @@ const Dr6 = () => {
               <tr key={c.name}>
                 <td className="pr-3">{c.name}</td>
                 <td className="text-right pr-3">{fmt(c.dLM, 6)}</td>
-                <td className={`text-right pr-3 ${c.strokeOkAt1p5M ? 'text-emerald-400' : 'text-rose-400'}`}>
+                <td className={`text-right pr-3 ${c.strokeOkAt1p5M ? 'text-pl-success-text' : 'text-pl-danger-text'}`}>
                   {c.strokeOkAt1p5M ? 'carried' : 'stroked out'}
                 </td>
                 <td className="text-right pr-3">{d.atMid ? fmt(d.atMid[i].remainingM, 6) : '-'}</td>
-                <td className={`text-right ${d.atMid && d.atMid[i].status === 'PASS' ? 'text-emerald-400' : 'text-rose-400'}`}>
+                <td className={`text-right ${d.atMid && d.atMid[i].status === 'PASS' ? 'text-pl-success-text' : 'text-pl-danger-text'}`}>
                   {d.atMid ? d.atMid[i].status : 'no band'}
                 </td>
               </tr>
@@ -200,7 +201,7 @@ const Dr6 = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         These are the same three tubing cases the Casing and Tubing Design course ends on, run here
         against a polished bore instead of a 1.5 metre seal stroke. Two of the three stroked out
         there. All three are carried here, landed at {fmt(d.band.midM, 4)} m, and the bore that does
