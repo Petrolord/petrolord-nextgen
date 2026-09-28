@@ -13,7 +13,7 @@ import { installDomShims } from '@/design/testing/domShims';
 import { describeScreenTheme, expectNoLegacyChrome, getScopeRoot } from '@/design/testing/themeAssertions';
 import { renderRoute, USER_ID } from './readerHarness';
 
-vi.mock('@/lib/customSupabaseClient', async () => ({ supabase: (await import('./readerStubs')).offlineSupabase() }));
+vi.mock('@/lib/customSupabaseClient', async () => ({ supabase: (await import('./offlineSupabase')).offlineSupabase() }));
 
 vi.mock('@/services/academyService', async (importOriginal) => ({
   ...(await importOriginal()),

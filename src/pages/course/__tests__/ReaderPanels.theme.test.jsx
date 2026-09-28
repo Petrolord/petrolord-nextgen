@@ -13,9 +13,9 @@
 // page (batch 3A), so they are scope-aware: outside a scope they render the
 // legacy classes byte for byte.
 //
-// panelKit (1B) is replaced by a role-only stand-in until 1B lands.
+// panelKit is batch 1B's scope-aware kit and renders for real.
 import React from 'react';
-import { describe, it, expect, vi, beforeAll, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, beforeAll, beforeEach, afterEach } from 'vitest';
 import { render, cleanup, fireEvent, screen, waitFor } from '@testing-library/react';
 import { ThemedApp, themeStorageKey } from '@/design/ThemeProvider';
 import { installDomShims } from '@/design/testing/domShims';
@@ -48,7 +48,6 @@ import { useSectionWells } from '@/components/course/panels/wellcorrelation/case
 import { useMappingCase } from '@/components/course/panels/mapping/caseInputs';
 import { PANELS } from '@/content/courses/panelRegistry';
 
-vi.mock('@/components/course/panels/petrophysics/panelKit', async () => (await import('./readerStubs')).stubPanelKit());
 
 const READER_PANELS = {
   'mp-map-explorer': MapExplorer,
@@ -109,9 +108,12 @@ describe('the reader-only teaching panels inside a scope', () => {
         expect(legacyChromeClasses()).toEqual([]);
         const found = plots();
         for (const plot of found) {
+          // SvgChartFrame or ChartFrame (1B chart kit): a white chart canvas
+          // with the Petrolord chart mark
           const plate = plot.closest('[data-canvas="chart"]');
           expect(plate).toBeTruthy();
-          expect(plate.className).toContain('bg-pl-chart-surface');
+          expect(plate.className).toContain('bg-white');
+          expect(plate.querySelector('img[alt]')).toBeTruthy();
         }
         const svgMarkup = [...document.querySelectorAll('svg[role="img"]')].map((s) => s.outerHTML).join('');
         if (id === 'rc-property-explorer') {

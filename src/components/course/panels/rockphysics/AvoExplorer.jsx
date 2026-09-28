@@ -3,7 +3,8 @@ import {
   TEACHING_FREQ_HZ, CLASS_THRESHOLDS, ANGLE_MAX_DEG, computeAvoDetail, ekeneInterface,
 } from '@/lib/rockphysicsTeaching';
 import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
-import { SVG_CHART as CH, CHART_PLATE_CLASS } from '@/components/course/panels/readerChart';
+import { SVG_CHART as CH } from '@/components/course/panels/readerChart';
+import SvgChartFrame from '@/components/charts/SvgChartFrame';
 
 // AVO explorer: both fluid cases screened under the Ekene shale across
 // angle, with the Shuey approximation drawn against the exact Zoeppritz
@@ -108,33 +109,30 @@ const AvoExplorer = () => {
       subtitle="A shale over a sand, screened for the brine case and its gas-substituted twin; it opens on the Ekene shale and sand. Solid lines are the exact Zoeppritz solution and dashed lines are the Shuey approximation, so the gap between them is a reading rather than a claim.">
       {controls}
 
-      <div data-canvas="chart" className={CHART_PLATE_CLASS}>
-        <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ minWidth: 420 }} role="img"
-          aria-label="Reflection coefficient against incidence angle for the brine and gas cases">
-          <rect x="0" y="0" width={W} height={H} fill={CH.plate} />
-          <line x1={PAD.left} y1={sy(0)} x2={W - PAD.right} y2={sy(0)} stroke={CH.axis} strokeDasharray="3 3" />
-          <line x1={PAD.left} y1={PAD.top} x2={PAD.left} y2={H - PAD.bottom} stroke={CH.grid} />
-          {['brine', 'gas'].map((k) => (
-            <g key={k}>
-              <path d={line(d[k].curve, 'exact')} fill="none" stroke={COLOR[k]} strokeWidth="2" />
-              <path d={line(d[k].curve, 'shuey')} fill="none" stroke={COLOR[k]} strokeWidth="1.5"
-                strokeDasharray="5 3" opacity="0.85" />
-              <text x={W - PAD.right - 84} y={sy(d[k].curve[ANGLE_MAX_DEG].exact) + 4}
-                fill={COLOR[k]} fontSize="10">
-                {k} class {d[k].klass}
-              </text>
-            </g>
-          ))}
-          {d.brine.crossingDeg !== null && (
-            <line x1={sx(d.brine.crossingDeg)} y1={PAD.top} x2={sx(d.brine.crossingDeg)} y2={H - PAD.bottom}
-              stroke={CH.red} strokeWidth="1" strokeDasharray="4 4" />
-          )}
-          <text x={PAD.left} y={H - 14} fill={CH.text} fontSize="9">0 deg</text>
-          <text x={W - PAD.right - 40} y={H - 14} fill={CH.text} fontSize="9">{ANGLE_MAX_DEG} deg</text>
-          <text x={6} y={PAD.top + 10} fill={CH.text} fontSize="9">{fmt(rMax, 3)}</text>
-          <text x={6} y={H - PAD.bottom} fill={CH.text} fontSize="9">{fmt(rMin, 3)}</text>
-        </svg>
-      </div>
+      <SvgChartFrame width={W} height={H} minWidth={420}
+        label="Reflection coefficient against incidence angle for the brine and gas cases">
+        <line x1={PAD.left} y1={sy(0)} x2={W - PAD.right} y2={sy(0)} stroke={CH.axis} strokeDasharray="3 3" />
+        <line x1={PAD.left} y1={PAD.top} x2={PAD.left} y2={H - PAD.bottom} stroke={CH.grid} />
+        {['brine', 'gas'].map((k) => (
+          <g key={k}>
+            <path d={line(d[k].curve, 'exact')} fill="none" stroke={COLOR[k]} strokeWidth="2" />
+            <path d={line(d[k].curve, 'shuey')} fill="none" stroke={COLOR[k]} strokeWidth="1.5"
+              strokeDasharray="5 3" opacity="0.85" />
+            <text x={W - PAD.right - 84} y={sy(d[k].curve[ANGLE_MAX_DEG].exact) + 4}
+              fill={COLOR[k]} fontSize="10">
+              {k} class {d[k].klass}
+            </text>
+          </g>
+        ))}
+        {d.brine.crossingDeg !== null && (
+          <line x1={sx(d.brine.crossingDeg)} y1={PAD.top} x2={sx(d.brine.crossingDeg)} y2={H - PAD.bottom}
+            stroke={CH.red} strokeWidth="1" strokeDasharray="4 4" />
+        )}
+        <text x={PAD.left} y={H - 14} fill={CH.text} fontSize="9">0 deg</text>
+        <text x={W - PAD.right - 40} y={H - 14} fill={CH.text} fontSize="9">{ANGLE_MAX_DEG} deg</text>
+        <text x={6} y={PAD.top + 10} fill={CH.text} fontSize="9">{fmt(rMax, 3)}</text>
+        <text x={6} y={H - PAD.bottom} fill={CH.text} fontSize="9">{fmt(rMin, 3)}</text>
+      </SvgChartFrame>
 
       <TileGrid>
         <Tile label="Brine intercept A" value={fmt(d.brine.a, 6)} />

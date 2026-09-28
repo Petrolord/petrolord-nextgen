@@ -4,7 +4,8 @@ import {
   computeSubstitutionAt, computeShearEstimate,
 } from '@/lib/rockphysicsTeaching';
 import { PanelShell, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
-import { SVG_CHART as CH, CHART_PLATE_CLASS } from '@/components/course/panels/readerChart';
+import { SVG_CHART as CH } from '@/components/course/panels/readerChart';
+import SvgChartFrame from '@/components/charts/SvgChartFrame';
 
 // Substitution explorer: run inverse-then-forward Gassmann on the logged
 // Ekene sand with the pore fluid mixed at a saturation the learner chooses,
@@ -101,24 +102,21 @@ const SubstitutionExplorer = () => {
       subtitle={`A logged brine sand (${inp.vp} m/s, ${inp.vs} m/s, ${inp.rho} kg/m3) with its brine replaced by a brine and gas mix. It opens on the Ekene sand. Porosity and the mineral modulus are assumptions rather than measurements, so both are exposed.`}>
       {inputs}
 
-      <div data-canvas="chart" className={CHART_PLATE_CLASS}>
-        <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ minWidth: 420 }} role="img"
-          aria-label="Compressional velocity against water saturation">
-          <rect x="0" y="0" width={W} height={H} fill={CH.plate} />
-          <line x1={PAD.left} y1={H - PAD.bottom} x2={W - PAD.right} y2={H - PAD.bottom} stroke={CH.grid} />
-          <line x1={PAD.left} y1={PAD.top} x2={PAD.left} y2={H - PAD.bottom} stroke={CH.grid} />
-          <path d={path} fill="none" stroke={CH.green} strokeWidth="2" />
-          <circle cx={sx(here.sw)} cy={sy(here.vp)} r="5" fill={CH.halo} stroke={CH.casing} strokeWidth="1.5" />
-          <text x={sx(here.sw) + 8} y={sy(here.vp) - 6} fill={CH.ink} fontSize="10">
-            Sw {fmt(here.sw, 2)}, {fmt(here.vp, 1)} m/s
-          </text>
-          <text x={PAD.left} y={H - 14} fill={CH.text} fontSize="9">Sw 1.0 (brine)</text>
-          <text x={W - PAD.right - 66} y={H - 14} fill={CH.text} fontSize="9">Sw 0.0 (gas)</text>
-          <text x={6} y={PAD.top + 10} fill={CH.text} fontSize="9">{fmt(vMax, 0)}</text>
-          <text x={6} y={H - PAD.bottom} fill={CH.text} fontSize="9">{fmt(vMin, 0)}</text>
-          <text x={6} y={H / 2} fill={CH.text} fontSize="9">vp m/s</text>
-        </svg>
-      </div>
+      <SvgChartFrame width={W} height={H} minWidth={420}
+        label="Compressional velocity against water saturation">
+        <line x1={PAD.left} y1={H - PAD.bottom} x2={W - PAD.right} y2={H - PAD.bottom} stroke={CH.grid} />
+        <line x1={PAD.left} y1={PAD.top} x2={PAD.left} y2={H - PAD.bottom} stroke={CH.grid} />
+        <path d={path} fill="none" stroke={CH.green} strokeWidth="2" />
+        <circle cx={sx(here.sw)} cy={sy(here.vp)} r="5" fill={CH.halo} stroke={CH.casing} strokeWidth="1.5" />
+        <text x={sx(here.sw) + 8} y={sy(here.vp) - 6} fill={CH.ink} fontSize="10">
+          Sw {fmt(here.sw, 2)}, {fmt(here.vp, 1)} m/s
+        </text>
+        <text x={PAD.left} y={H - 14} fill={CH.text} fontSize="9">Sw 1.0 (brine)</text>
+        <text x={W - PAD.right - 66} y={H - 14} fill={CH.text} fontSize="9">Sw 0.0 (gas)</text>
+        <text x={6} y={PAD.top + 10} fill={CH.text} fontSize="9">{fmt(vMax, 0)}</text>
+        <text x={6} y={H - PAD.bottom} fill={CH.text} fontSize="9">{fmt(vMin, 0)}</text>
+        <text x={6} y={H / 2} fill={CH.text} fontSize="9">vp m/s</text>
+      </SvgChartFrame>
 
       <TileGrid>
         <Tile label="Shear modulus (fluid blind)" value={fmt(m.mu / 1e9, 4)} unit="GPa" />

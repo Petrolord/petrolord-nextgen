@@ -1,7 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import { TIE_WELL_NAMES, computeTieDetail, typedWell } from '@/lib/earthmodelTeaching';
 import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
-import { SVG_CHART as CH, CHART_PLATE_CLASS } from '@/components/course/panels/readerChart';
+import { SVG_CHART as CH } from '@/components/course/panels/readerChart';
+import SvgChartFrame from '@/components/charts/SvgChartFrame';
 
 // Tie explorer: one well's trajectory drawn through the clamped surface
 // stack in an east-west section at the well's y, with every pick landed in
@@ -101,38 +102,35 @@ const TieExplorer = () => {
       subtitle={`${m.well.name} (head ${m.well.x}, ${m.well.y}, KB ${m.well.kb_m} m) against the clamped golden stack in an east-west section at y = ${m.well.y}. Residual = pick TVDSS minus the surface there; positive means the pick sits deeper than the surface.`}>
       {controls}
 
-      <div data-canvas="chart" className={CHART_PLATE_CLASS}>
-        <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ minWidth: 420 }} role="img"
-          aria-label="Well trajectory and surfaces in cross-section">
-          <rect x="0" y="0" width={W} height={H} fill={CH.plate} />
-          <line x1={PAD.left} y1={H - PAD.bottom} x2={W - PAD.right} y2={H - PAD.bottom} stroke={CH.grid} />
-          <line x1={PAD.left} y1={PAD.top} x2={PAD.left} y2={H - PAD.bottom} stroke={CH.grid} />
-          {['topA', 'topB', 'baseB'].map((k) => (
-            <path key={k} d={surfPath(k)} fill="none" stroke={SURF_COLORS[k]} strokeWidth="1.5" opacity="0.9" />
-          ))}
-          <path d={trajPath} fill="none" stroke={CH.casing} strokeWidth="4" />
-          <path d={trajPath} fill="none" stroke={CH.halo} strokeWidth="2" />
-          {m.rows.map((r) => (
-            <g key={r.top}>
-              {r.surfaceZ != null && (
-                <line x1={sx(r.x)} y1={sz(r.tvdss)} x2={sx(r.x)} y2={sz(r.surfaceZ)}
-                  stroke={CH.orange} strokeWidth="2" strokeDasharray="3 2" />
-              )}
-              <circle cx={sx(r.x)} cy={sz(r.tvdss)} r="4" fill={CH.orange} />
-              <text x={sx(r.x) + 6} y={sz(r.tvdss) - 4} fill={CH.ink} fontSize="9">
-                {r.top} {r.residualM != null ? (r.residualM >= 0 ? '+' : '') + fmt(r.residualM, 1) : 'null'}
-              </text>
-            </g>
-          ))}
-          <text x={PAD.left + 4} y={PAD.top + 10} fill={CH.blue} fontSize="9">TopA</text>
-          <text x={PAD.left + 44} y={PAD.top + 10} fill={CH.green} fontSize="9">TopB</text>
-          <text x={PAD.left + 84} y={PAD.top + 10} fill={CH.pink} fontSize="9">BaseB</text>
-          <text x={PAD.left} y={H - 12} fill={CH.text} fontSize="9">x {fmt(xMin, 0)} m</text>
-          <text x={W - PAD.right - 70} y={H - 12} fill={CH.text} fontSize="9">x {fmt(xMax, 0)} m</text>
-          <text x={6} y={PAD.top + 10} fill={CH.text} fontSize="9">{fmt(zMin, 0)}</text>
-          <text x={6} y={H - PAD.bottom} fill={CH.text} fontSize="9">{fmt(zMax, 0)}</text>
-        </svg>
-      </div>
+      <SvgChartFrame width={W} height={H} minWidth={420}
+        label="Well trajectory and surfaces in cross-section">
+        <line x1={PAD.left} y1={H - PAD.bottom} x2={W - PAD.right} y2={H - PAD.bottom} stroke={CH.grid} />
+        <line x1={PAD.left} y1={PAD.top} x2={PAD.left} y2={H - PAD.bottom} stroke={CH.grid} />
+        {['topA', 'topB', 'baseB'].map((k) => (
+          <path key={k} d={surfPath(k)} fill="none" stroke={SURF_COLORS[k]} strokeWidth="1.5" opacity="0.9" />
+        ))}
+        <path d={trajPath} fill="none" stroke={CH.casing} strokeWidth="4" />
+        <path d={trajPath} fill="none" stroke={CH.halo} strokeWidth="2" />
+        {m.rows.map((r) => (
+          <g key={r.top}>
+            {r.surfaceZ != null && (
+              <line x1={sx(r.x)} y1={sz(r.tvdss)} x2={sx(r.x)} y2={sz(r.surfaceZ)}
+                stroke={CH.orange} strokeWidth="2" strokeDasharray="3 2" />
+            )}
+            <circle cx={sx(r.x)} cy={sz(r.tvdss)} r="4" fill={CH.orange} />
+            <text x={sx(r.x) + 6} y={sz(r.tvdss) - 4} fill={CH.ink} fontSize="9">
+              {r.top} {r.residualM != null ? (r.residualM >= 0 ? '+' : '') + fmt(r.residualM, 1) : 'null'}
+            </text>
+          </g>
+        ))}
+        <text x={PAD.left + 4} y={PAD.top + 10} fill={CH.blue} fontSize="9">TopA</text>
+        <text x={PAD.left + 44} y={PAD.top + 10} fill={CH.green} fontSize="9">TopB</text>
+        <text x={PAD.left + 84} y={PAD.top + 10} fill={CH.pink} fontSize="9">BaseB</text>
+        <text x={PAD.left} y={H - 12} fill={CH.text} fontSize="9">x {fmt(xMin, 0)} m</text>
+        <text x={W - PAD.right - 70} y={H - 12} fill={CH.text} fontSize="9">x {fmt(xMax, 0)} m</text>
+        <text x={6} y={PAD.top + 10} fill={CH.text} fontSize="9">{fmt(zMin, 0)}</text>
+        <text x={6} y={H - PAD.bottom} fill={CH.text} fontSize="9">{fmt(zMax, 0)}</text>
+      </SvgChartFrame>
 
       <TileGrid>
         {m.rows.map((r) => (

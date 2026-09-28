@@ -3,7 +3,8 @@ import {
   CONDITIONS, OIL_RHO0, FRAME, TEACHING_SW, computeFluids, quartzClayFrame,
 } from '@/lib/rockphysicsTeaching';
 import { PanelShell, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
-import { SVG_CHART as CH, CHART_PLATE_CLASS } from '@/components/course/panels/readerChart';
+import { SVG_CHART as CH } from '@/components/course/panels/readerChart';
+import SvgChartFrame from '@/components/charts/SvgChartFrame';
 
 // Fluid explorer: mix the Ekene pore fluid at a water saturation the
 // learner chooses. The compliance split is drawn on purpose, because
@@ -94,38 +95,35 @@ const FluidExplorer = () => {
         conditions over the Ekene ones.
       </div>
 
-      <div data-canvas="chart" className={CHART_PLATE_CLASS}>
-        <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ minWidth: 420 }} role="img"
-          aria-label={`Compliance split of the mixed pore fluid at water saturation ${fmt(swV, 2)}`}>
-          <rect x="0" y="0" width={W} height={H} fill={CH.plate} />
-          <text x="12" y="24" fill={CH.ink} fontSize="12">Where the softness comes from</text>
-          <text x="12" y="44" fill={CH.text} fontSize="10">
-            Wood mixes compliance (1/K), so the soft phase dominates.
-          </text>
+      <SvgChartFrame width={W} height={H} minWidth={420}
+        label={`Compliance split of the mixed pore fluid at water saturation ${fmt(swV, 2)}`}>
+        <text x="12" y="24" fill={CH.ink} fontSize="12">Where the softness comes from</text>
+        <text x="12" y="44" fill={CH.text} fontSize="10">
+          Wood mixes compliance (1/K), so the soft phase dominates.
+        </text>
 
-          {/* compliance bar */}
-          <rect x="12" y="60" width={barW} height="34" fill={CH.grid} />
-          <rect x="12" y="60" width={(barW * brineShare) / 100} height="34" fill={CH.blue} />
-          <rect x={12 + (barW * brineShare) / 100} y="60" width={(barW * gasShare) / 100} height="34" fill={CH.pink} />
-          <text x="18" y="82" fill={CH.ink} fontSize="11">brine {fmt(brineShare, 1)}%</text>
-          <text x={W - 12} y="82" fill={CH.ink} fontSize="11" textAnchor="end">
-            gas {fmt(gasShare, 1)}%
-          </text>
+        {/* compliance bar */}
+        <rect x="12" y="60" width={barW} height="34" fill={CH.grid} />
+        <rect x="12" y="60" width={(barW * brineShare) / 100} height="34" fill={CH.blue} />
+        <rect x={12 + (barW * brineShare) / 100} y="60" width={(barW * gasShare) / 100} height="34" fill={CH.pink} />
+        <text x="18" y="82" fill={CH.ink} fontSize="11">brine {fmt(brineShare, 1)}%</text>
+        <text x={W - 12} y="82" fill={CH.ink} fontSize="11" textAnchor="end">
+          gas {fmt(gasShare, 1)}%
+        </text>
 
-          {/* volume bar, for contrast */}
-          <text x="12" y="122" fill={CH.text} fontSize="10">By volume, the same fluid is:</text>
-          <rect x="12" y="132" width={barW} height="20" fill={CH.grid} />
-          <rect x="12" y="132" width={barW * swV} height="20" fill={CH.blue} opacity="0.55" />
-          <rect x={12 + barW * swV} y="132" width={barW * (1 - swV)} height="20" fill={CH.pink} opacity="0.55" />
-          <text x="18" y="147" fill={CH.ink} fontSize="10">brine {fmt(swV * 100, 1)}%</text>
-          <text x={W - 12} y="147" fill={CH.ink} fontSize="10" textAnchor="end">
-            gas {fmt((1 - swV) * 100, 1)}%
-          </text>
-          <text x="12" y="176" fill={CH.text} fontSize="10">
-            A small gas volume buys a large share of the compliance.
-          </text>
-        </svg>
-      </div>
+        {/* volume bar, for contrast */}
+        <text x="12" y="122" fill={CH.text} fontSize="10">By volume, the same fluid is:</text>
+        <rect x="12" y="132" width={barW} height="20" fill={CH.grid} />
+        <rect x="12" y="132" width={barW * swV} height="20" fill={CH.blue} opacity="0.55" />
+        <rect x={12 + barW * swV} y="132" width={barW * (1 - swV)} height="20" fill={CH.pink} opacity="0.55" />
+        <text x="18" y="147" fill={CH.ink} fontSize="10">brine {fmt(swV * 100, 1)}%</text>
+        <text x={W - 12} y="147" fill={CH.ink} fontSize="10" textAnchor="end">
+          gas {fmt((1 - swV) * 100, 1)}%
+        </text>
+        <text x="12" y="176" fill={CH.text} fontSize="10">
+          A small gas volume buys a large share of the compliance.
+        </text>
+      </SvgChartFrame>
 
       <TileGrid>
         <Tile label="Brine density" value={fmt(br.rho, 4)} unit="kg/m3" />

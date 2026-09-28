@@ -3,7 +3,8 @@ import {
   TEACHING_OWC_M, TEACHING_WELLS, WELL_PHI, PROPS, P1, PROPERTY_METHODS, computePropertyModel,
 } from '@/lib/reservoircalcTeaching';
 import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
-import { SVG_CHART as CH, CHART_PLATE_CLASS } from '@/components/course/panels/readerChart';
+import { SVG_CHART as CH } from '@/components/course/panels/readerChart';
+import SvgChartFrame from '@/components/charts/SvgChartFrame';
 
 // Property explorer: fill the porosity grid from the six well values by
 // each of the three population methods and read what the choice is worth.
@@ -120,40 +121,37 @@ const PropertyExplorer = () => {
       </div>
       {inputs}
 
-      <div data-canvas="chart" className={CHART_PLATE_CLASS}>
-        <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ minWidth: 420 }} role="img"
-          aria-label={`Porosity model of the Ekene SAND by the ${method} method`}>
-          <rect x="0" y="0" width={W} height={H} fill={CH.plate} />
-          {cells}
+      <SvgChartFrame width={W} height={H} minWidth={420}
+        label={`Porosity model of the Ekene SAND by the ${method} method`}>
+        {cells}
 
-          {m.residuals.map((r) => {
-            const miss = r.modelled - r.measured;
-            const off = Math.abs(miss) > 1e-9;
-            return (
-              <g key={r.name}>
-                <circle cx={sx(r.x)} cy={sy(r.y)} r="4" fill={CH.halo}
-                  stroke={off ? CH.red : CH.green} strokeWidth="1.5" />
-                <text x={sx(r.x) + 7} y={sy(r.y) - 4} fill={CH.ink} fontSize="9">
-                  {r.name} {fmt(r.measured, 2)}
-                </text>
-                <text x={sx(r.x) + 7} y={sy(r.y) + 6} fontSize="9"
-                  fill={off ? CH.red : CH.green}>
-                  model {fmt(r.modelled, 4)} ({miss >= 0 ? '+' : ''}{fmt(miss, 4)})
-                </text>
-              </g>
-            );
-          })}
+        {m.residuals.map((r) => {
+          const miss = r.modelled - r.measured;
+          const off = Math.abs(miss) > 1e-9;
+          return (
+            <g key={r.name}>
+              <circle cx={sx(r.x)} cy={sy(r.y)} r="4" fill={CH.halo}
+                stroke={off ? CH.red : CH.green} strokeWidth="1.5" />
+              <text x={sx(r.x) + 7} y={sy(r.y) - 4} fill={CH.ink} fontSize="9">
+                {r.name} {fmt(r.measured, 2)}
+              </text>
+              <text x={sx(r.x) + 7} y={sy(r.y) + 6} fontSize="9"
+                fill={off ? CH.red : CH.green}>
+                model {fmt(r.modelled, 4)} ({miss >= 0 ? '+' : ''}{fmt(miss, 4)})
+              </text>
+            </g>
+          );
+        })}
 
-          <circle cx={sx(P1.x)} cy={sy(P1.y)} r="4" fill="none" stroke={CH.casing} strokeWidth="4" />
-          <circle cx={sx(P1.x)} cy={sy(P1.y)} r="4" fill="none" stroke={CH.lime} strokeWidth="2" />
-          <text x={sx(P1.x) + 7} y={sy(P1.y) + 12} fill={CH.ink} fontSize="9">
-            P-1 {fmt(m.phiAtP1, 4)}
-          </text>
+        <circle cx={sx(P1.x)} cy={sy(P1.y)} r="4" fill="none" stroke={CH.casing} strokeWidth="4" />
+        <circle cx={sx(P1.x)} cy={sy(P1.y)} r="4" fill="none" stroke={CH.lime} strokeWidth="2" />
+        <text x={sx(P1.x) + 7} y={sy(P1.y) + 12} fill={CH.ink} fontSize="9">
+          P-1 {fmt(m.phiAtP1, 4)}
+        </text>
 
-          <text x={PAD.left} y={H - 14} fill={CH.text} fontSize="9">x {xMin} to {xMax} m</text>
-          <text x={PAD.left} y={12} fill={CH.text} fontSize="9">y {yMin} to {yMax} m (north up)</text>
-        </svg>
-      </div>
+        <text x={PAD.left} y={H - 14} fill={CH.text} fontSize="9">x {xMin} to {xMax} m</text>
+        <text x={PAD.left} y={12} fill={CH.text} fontSize="9">y {yMin} to {yMax} m (north up)</text>
+      </SvgChartFrame>
 
       <TileGrid>
         <Tile label="Arithmetic mean of the wells" value={fmt(m.means.arithmeticWells, 6)} unit="v/v" />

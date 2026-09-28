@@ -2,7 +2,8 @@ import React, { useMemo, useState } from 'react';
 import { MODEL_SPEC, SOURCE_COVER, computeFramework } from '@/lib/earthmodelTeaching';
 import { isNull } from '@petrolord/engines/engines/earthmodeling/framework.js';
 import { PanelShell, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
-import { SVG_CHART as CH, CHART_PLATE_CLASS } from '@/components/course/panels/readerChart';
+import { SVG_CHART as CH } from '@/components/course/panels/readerChart';
+import SvgChartFrame from '@/components/charts/SvgChartFrame';
 
 // Framework explorer: the three clamped surfaces and the two zone
 // thickness grids on the model frame. Zone B is drawn with its pinched
@@ -145,25 +146,22 @@ const FrameworkExplorer = () => {
         ))}
       </div>
 
-      <div data-canvas="chart" className={CHART_PLATE_CLASS}>
-        <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ minWidth: 420 }} role="img"
-          aria-label={`${v.label} on the model frame`}>
-          <rect x="0" y="0" width={W} height={H} fill={CH.plate} />
-          {cells}
-          <text x="12" y="16" fill={CH.ink} fontSize="10">{v.label}</text>
-          <text x={W - 12} y="16" fill={CH.text} fontSize="9" textAnchor="end">
-            {v.kind === 'surface' ? 'pale is shallow, dark is deep' : 'pale is thin, dark is thick'}
+      <SvgChartFrame width={W} height={H} minWidth={420}
+        label={`${v.label} on the model frame`}>
+        {cells}
+        <text x="12" y="16" fill={CH.ink} fontSize="10">{v.label}</text>
+        <text x={W - 12} y="16" fill={CH.text} fontSize="9" textAnchor="end">
+          {v.kind === 'surface' ? 'pale is shallow, dark is deep' : 'pale is thin, dark is thick'}
+        </text>
+        {v.kind === 'thickness' && stats.zero > 0 && (
+          <text x="12" y={H - 10} fill={CH.pink} fontSize="9">
+            {stats.zero} pinched nodes outlined in pink carry zero thickness
           </text>
-          {v.kind === 'thickness' && stats.zero > 0 && (
-            <text x="12" y={H - 10} fill={CH.pink} fontSize="9">
-              {stats.zero} pinched nodes outlined in pink carry zero thickness
-            </text>
-          )}
-          <text x={W - 12} y={H - 10} fill={CH.text} fontSize="9" textAnchor="end">
-            origin ({S.x0}, {S.y0}), north up
-          </text>
-        </svg>
-      </div>
+        )}
+        <text x={W - 12} y={H - 10} fill={CH.text} fontSize="9" textAnchor="end">
+          origin ({S.x0}, {S.y0}), north up
+        </text>
+      </SvgChartFrame>
 
       <TileGrid>
         <Tile label="Frame" value={`${S.nx} x ${S.ny}`} unit={`= ${S.nx * S.ny} nodes`} />

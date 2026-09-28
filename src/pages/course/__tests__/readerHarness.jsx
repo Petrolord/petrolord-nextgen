@@ -1,7 +1,7 @@
 // TEST-ONLY harness for the course reader and handbook theme tests (batch
 // 1C). Mounts a route as the app does (Layout, header, DashboardPage) with a
-// signed-in user. The stand-ins for the 1B course kit live in
-// readerStubs.jsx.
+// signed-in user. The offline Supabase client the tests mock in is in
+// offlineSupabase.js.
 import React from 'react';
 import { render } from '@testing-library/react';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';

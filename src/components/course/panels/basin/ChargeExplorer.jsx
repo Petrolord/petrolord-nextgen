@@ -1,7 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { computeErosionScenario } from '@/lib/basinTeaching';
 import { PanelShell, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
-import { SVG_CHART as CH, CHART_PLATE_CLASS } from '@/components/course/panels/readerChart';
+import { SVG_CHART as CH } from '@/components/course/panels/readerChart';
+import SvgChartFrame from '@/components/charts/SvgChartFrame';
 
 // Charge explorer: the full reference-basin forward model, run live at an
 // erosion amount the learner picks, always against the no-erosion twin.
@@ -106,35 +107,29 @@ const ChargeExplorer = () => {
         ))}
       </div>
 
-      <div data-canvas="chart" className={CHART_PLATE_CLASS}>
-        <svg viewBox={`0 0 ${W} ${H1}`} width="100%" style={{ minWidth: 460 }} role="img"
-          aria-label="Source layer burial history">
-          <rect x="0" y="0" width={W} height={H1} fill={CH.plate} />
-          <polyline points={topPts} fill="none" stroke={CH.blue} strokeWidth="1.8" />
-          <polyline points={botPts} fill="none" stroke={CH.blue} strokeWidth="1.2" opacity="0.6" />
-          <text x={PAD.left} y="13" fill={CH.blue} fontSize="9">source top and bottom depth (0 to {zMax} m)</text>
-          <text x={PAD.left} y={H1 - 8} fill={CH.text} fontSize="9">150 Ma (left) to present (right)</text>
-        </svg>
-      </div>
+      <SvgChartFrame width={W} height={H1} minWidth={460}
+        label="Source layer burial history">
+        <polyline points={topPts} fill="none" stroke={CH.blue} strokeWidth="1.8" />
+        <polyline points={botPts} fill="none" stroke={CH.blue} strokeWidth="1.2" opacity="0.6" />
+        <text x={PAD.left} y="13" fill={CH.blue} fontSize="9">source top and bottom depth (0 to {zMax} m)</text>
+        <text x={PAD.left} y={H1 - 8} fill={CH.text} fontSize="9">150 Ma (left) to present (right)</text>
+      </SvgChartFrame>
 
-      <div data-canvas="chart" className={CHART_PLATE_CLASS}>
-        <svg viewBox={`0 0 ${W} ${H2}`} width="100%" style={{ minWidth: 460 }} role="img"
-          aria-label="Source temperature and reflectance histories, and the mass curves">
-          <rect x="0" y="0" width={W} height={H2} fill={CH.plate} />
-          <polyline points={tempPts} fill="none" stroke={CH.red} strokeWidth="1.6" />
-          <polyline points={roPts} fill="none" stroke={CH.green} strokeWidth="1.8" />
-          <polyline points={genPts} fill="none" stroke={CH.violet} strokeWidth="1.4" />
-          <polyline points={capPts} fill="none" stroke={CH.axis} strokeWidth="1"
-            strokeDasharray="4 3" />
-          <polyline points={expPts} fill="none" stroke={CH.amber} strokeWidth="1.8" />
-          <text x={PAD.left} y="13" fill={CH.red} fontSize="9">temperature (0 to {tMax} degC)</text>
-          <text x={PAD.left + 170} y="13" fill={CH.green} fontSize="9">Ro (0 to {roMax})</text>
-          <text x={PAD.left + 240} y="13" fill={CH.violet} fontSize="9">generated</text>
-          <text x={PAD.left + 300} y="13" fill={CH.text} fontSize="9">cap</text>
-          <text x={PAD.left + 330} y="13" fill={CH.amber} fontSize="9">expelled (0 to {massMax} kg/m2)</text>
-          <text x={PAD.left} y={H2 - 8} fill={CH.text} fontSize="9">150 Ma (left) to present (right)</text>
-        </svg>
-      </div>
+      <SvgChartFrame width={W} height={H2} minWidth={460}
+        label="Source temperature and reflectance histories, and the mass curves">
+        <polyline points={tempPts} fill="none" stroke={CH.red} strokeWidth="1.6" />
+        <polyline points={roPts} fill="none" stroke={CH.green} strokeWidth="1.8" />
+        <polyline points={genPts} fill="none" stroke={CH.violet} strokeWidth="1.4" />
+        <polyline points={capPts} fill="none" stroke={CH.axis} strokeWidth="1"
+          strokeDasharray="4 3" />
+        <polyline points={expPts} fill="none" stroke={CH.amber} strokeWidth="1.8" />
+        <text x={PAD.left} y="13" fill={CH.red} fontSize="9">temperature (0 to {tMax} degC)</text>
+        <text x={PAD.left + 170} y="13" fill={CH.green} fontSize="9">Ro (0 to {roMax})</text>
+        <text x={PAD.left + 240} y="13" fill={CH.violet} fontSize="9">generated</text>
+        <text x={PAD.left + 300} y="13" fill={CH.text} fontSize="9">cap</text>
+        <text x={PAD.left + 330} y="13" fill={CH.amber} fontSize="9">expelled (0 to {massMax} kg/m2)</text>
+        <text x={PAD.left} y={H2 - 8} fill={CH.text} fontSize="9">150 Ma (left) to present (right)</text>
+      </SvgChartFrame>
 
       <TileGrid>
         <Tile label="Final Ro" value={fmt(m.finalRo, 8)} unit="%Ro" />

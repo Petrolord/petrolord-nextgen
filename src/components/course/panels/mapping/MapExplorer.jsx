@@ -5,7 +5,8 @@ import {
 import { isNull } from '@petrolord/engines/lib/gridding/gridmath.js';
 import { PanelShell, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 import { useMappingCase } from '@/components/course/panels/mapping/caseInputs';
-import { SVG_CHART as CH, CHART_PLATE_CLASS } from '@/components/course/panels/readerChart';
+import { SVG_CHART as CH } from '@/components/course/panels/readerChart';
+import SvgChartFrame from '@/components/charts/SvgChartFrame';
 
 // Map explorer: grid the Ekene TOP_SAND surface at a cell size the
 // learner chooses, then read the map. Control points are posted and the
@@ -96,45 +97,42 @@ const MapExplorer = () => {
         </div>
       </div>
 
-      <div data-canvas="chart" className={CHART_PLATE_CLASS}>
-        <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ minWidth: 420 }} role="img"
-          aria-label={`Depth map of the ${TOP_NAME} surface`}>
-          <rect x="0" y="0" width={W} height={H} fill={CH.plate} />
-          {cells}
+      <SvgChartFrame width={W} height={H} minWidth={420}
+        label={`Depth map of the ${TOP_NAME} surface`}>
+        {cells}
 
-          {contours.map((c) => (
-            <g key={c.level}>
-              {c.lines.map((pts, i) => (
-                <polyline key={i} points={pts.map(([x, y]) => `${sx(x)},${sy(y)}`).join(' ')}
-                  fill="none" stroke={CH.ink} strokeWidth="0.9" opacity="0.75" />
-              ))}
-            </g>
-          ))}
-
-          {/* control points, posted with their picks */}
-          {WELLS.map((w) => {
-            const top = w.tops.find((t) => t.name === TOP_NAME);
-            return (
-              <g key={w.name}>
-                <circle cx={sx(w.surface_x)} cy={sy(w.surface_y)} r="4" fill={CH.halo} stroke={CH.casing} strokeWidth="1.5" />
-                <text x={sx(w.surface_x) + 7} y={sy(w.surface_y) - 4} fill={CH.ink} fontSize="9">
-                  {w.name} {top.md_m}
-                </text>
-              </g>
-            );
-          })}
-
-          {/* prospect */}
-          <g>
-            <path d={`M ${sx(T.x)} ${sy(T.y) - 6} L ${sx(T.x) + 6} ${sy(T.y)} L ${sx(T.x)} ${sy(T.y) + 6} L ${sx(T.x) - 6} ${sy(T.y)} Z`}
-              fill={CH.pink} stroke={CH.halo} strokeWidth="1" />
-            <text x={sx(T.x) + 9} y={sy(T.y) + 12} fill={CH.pink} fontSize="9">{T.label}</text>
+        {contours.map((c) => (
+          <g key={c.level}>
+            {c.lines.map((pts, i) => (
+              <polyline key={i} points={pts.map(([x, y]) => `${sx(x)},${sy(y)}`).join(' ')}
+                fill="none" stroke={CH.ink} strokeWidth="0.9" opacity="0.75" />
+            ))}
           </g>
+        ))}
 
-          <text x={PAD.left} y={H - 14} fill={CH.text} fontSize="9">x {xMin} to {xMax} m</text>
-          <text x={PAD.left} y={12} fill={CH.text} fontSize="9">y {yMin} to {yMax} m (north up)</text>
-        </svg>
-      </div>
+        {/* control points, posted with their picks */}
+        {WELLS.map((w) => {
+          const top = w.tops.find((t) => t.name === TOP_NAME);
+          return (
+            <g key={w.name}>
+              <circle cx={sx(w.surface_x)} cy={sy(w.surface_y)} r="4" fill={CH.halo} stroke={CH.casing} strokeWidth="1.5" />
+              <text x={sx(w.surface_x) + 7} y={sy(w.surface_y) - 4} fill={CH.ink} fontSize="9">
+                {w.name} {top.md_m}
+              </text>
+            </g>
+          );
+        })}
+
+        {/* prospect */}
+        <g>
+          <path d={`M ${sx(T.x)} ${sy(T.y) - 6} L ${sx(T.x) + 6} ${sy(T.y)} L ${sx(T.x)} ${sy(T.y) + 6} L ${sx(T.x) - 6} ${sy(T.y)} Z`}
+            fill={CH.pink} stroke={CH.halo} strokeWidth="1" />
+          <text x={sx(T.x) + 9} y={sy(T.y) + 12} fill={CH.pink} fontSize="9">{T.label}</text>
+        </g>
+
+        <text x={PAD.left} y={H - 14} fill={CH.text} fontSize="9">x {xMin} to {xMax} m</text>
+        <text x={PAD.left} y={12} fill={CH.text} fontSize="9">y {yMin} to {yMax} m (north up)</text>
+      </SvgChartFrame>
 
       <TileGrid>
         <Tile label="Control points" value={String(s.nPoints)} unit="wells" />

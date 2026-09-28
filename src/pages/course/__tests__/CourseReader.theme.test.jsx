@@ -9,9 +9,8 @@
 // chart plates) and in dark. The capstone redirect is covered by the
 // pattern registration. A route outside the rollout keeps the legacy frame.
 //
-// The 1B course kit (LockedCard, QuizRunner, the practice course pieces,
-// panelKit) is replaced by role-only stand-ins until 1B lands (see
-// readerStubs.jsx).
+// The course kit (QuizRunner, LockedCard, panelKit ...) is batch 1B's and is
+// rendered for real: inside the scope it is on roles too.
 import React from 'react';
 import { describe, it, expect, vi, beforeAll, beforeEach, afterEach } from 'vitest';
 import { screen, cleanup } from '@testing-library/react';
@@ -22,7 +21,7 @@ import {
 import { isThemedPath } from '@/design/scopePaths';
 import { renderRoute, USER_ID } from './readerHarness';
 
-vi.mock('@/lib/customSupabaseClient', async () => ({ supabase: (await import('./readerStubs')).offlineSupabase() }));
+vi.mock('@/lib/customSupabaseClient', async () => ({ supabase: (await import('./offlineSupabase')).offlineSupabase() }));
 
 const APP = 'seismolord';
 const TIER = 'advanced';
@@ -35,7 +34,7 @@ const progress = {
     { key: 'm01-the-wedge-experiment', unlocked: true, complete: true, quiz_passed: true, lessons_read: 5, lesson_keys_read: [] },
     { key: MOD, unlocked: true, complete: false, quiz_passed: false, lessons_read: 1, lesson_keys_read: ['l01-the-workflow-end-to-end'] },
   ],
-  final_exam: { unlocked: false, passed: false },
+  final_exam: { unlocked: true, passed: false },
   capstone: { unlocked: false, passed: false },
 };
 
@@ -50,8 +49,8 @@ vi.mock('@/services/academyService', async (importOriginal) => ({
   mySponsorPools: async () => [],
   getCourseProgress: async () => progress,
   markLessonRead: async () => ({ lessons_read: 2, lessons_total: 5 }),
-  getModuleQuiz: async () => ({ attempt_id: 'a1', questions: [] }),
-  getFinalExam: async () => ({ attempt_id: 'a2', questions: [] }),
+  getModuleQuiz: async () => ({ attempt_id: 'a1', questions: [{ id: 'q1', prompt: 'Question 1: where does tuning sit?', options: ['Below a quarter wavelength', 'Above it'] }] }),
+  getFinalExam: async () => ({ attempt_id: 'a2', questions: [{ id: 'q1', prompt: 'Question 1: what rises below tuning?', options: ['Amplitude', 'Frequency'] }] }),
 }));
 
 vi.mock('@/contexts/NotificationContext', () => ({
@@ -59,11 +58,6 @@ vi.mock('@/contexts/NotificationContext', () => ({
   useNotifications: () => ({ notifications: [], unreadCount: 0, markAllAsRead: () => {}, markAsRead: () => {} }),
 }));
 
-vi.mock('@/components/course/LockedCard', async () => ({ default: (await import('./readerStubs')).StubLockedCard }));
-vi.mock('@/components/course/QuizRunner', async () => ({ default: (await import('./readerStubs')).StubQuizRunner }));
-vi.mock('@/components/course/PracticeCourseNotice', async () => ({ default: (await import('./readerStubs')).StubNothing }));
-vi.mock('@/components/course/PracticeCertificateCard', async () => ({ default: (await import('./readerStubs')).StubNothing }));
-vi.mock('@/components/course/panels/petrophysics/panelKit', async () => (await import('./readerStubs')).stubPanelKit());
 
 const SCREENS = [
   {
@@ -84,12 +78,12 @@ const SCREENS = [
   {
     name: 'Module quiz',
     route: `${BASE}/quiz/${MOD}`,
-    ready: async () => { await screen.findByTestId('quiz-runner'); },
+    ready: async () => { await screen.findByText(/Module 6 quiz/); await screen.findByText(/Question 1/); },
   },
   {
     name: 'Final exam',
     route: `${BASE}/exam`,
-    ready: async () => { await screen.findByTestId('quiz-runner'); },
+    ready: async () => { await screen.findByText(/Final exam:/); await screen.findByText(/Question 1/); },
   },
 ];
 
@@ -124,7 +118,11 @@ describe('Course reader, further states', () => {
     expectNoLegacyChrome();
     const svgs = [...document.querySelectorAll('svg[role="img"]')];
     expect(svgs.length).toBe(2);
-    for (const svg of svgs) expect(svg.closest('[data-canvas="chart"]')).toBeTruthy();
+    for (const svg of svgs) {
+      const frame = svg.closest('[data-canvas="chart"]');
+      expect(frame).toBeTruthy();
+      expect(frame.querySelector('img[alt]')).toBeTruthy(); // the Petrolord chart mark
+    }
     // the retired console lime is gone from the plots
     for (const svg of svgs) expect(svg.outerHTML).not.toMatch(/#BFFF00/i);
   });
@@ -139,6 +137,12 @@ describe('Course reader, further states', () => {
       .map((el) => el.getAttribute('class'))
       .filter((c) => hasLegacyChrome(c));
     expect(legacy).toEqual([]);
+  });
+
+  it('a locked module shows the locked card on roles', async () => {
+    renderRoute(`${BASE}/m02-two-reflections-meeting`);
+    await screen.findByText('This module is locked');
+    expectNoLegacyChrome();
   });
 
   it('a route the rollout has not reached keeps the legacy frame (negative control)', async () => {

@@ -4,7 +4,8 @@ import {
   computeBlockModel,
 } from '@/lib/reservoircalcTeaching';
 import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
-import { SVG_CHART as CH, CHART_PLATE_CLASS } from '@/components/course/panels/readerChart';
+import { SVG_CHART as CH } from '@/components/course/panels/readerChart';
+import SvgChartFrame from '@/components/charts/SvgChartFrame';
 
 // Block explorer: partition the Ekene accumulation with a sealing fault the
 // learner can move, and give each block its own contact. The map colours
@@ -84,37 +85,34 @@ const BlockExplorer = () => {
         states its own fault and contacts; type them in here.
       </div>
 
-      <div data-canvas="chart" className={CHART_PLATE_CLASS}>
-        <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ minWidth: 420 }} role="img"
-          aria-label={`Fault block map of the Ekene SAND with the fault at ${fmt(model.faultX, 0)} m`}>
-          <rect x="0" y="0" width={W} height={H} fill={CH.plate} />
-          {cells}
+      <SvgChartFrame width={W} height={H} minWidth={420}
+        label={`Fault block map of the Ekene SAND with the fault at ${fmt(model.faultX, 0)} m`}>
+        {cells}
 
-          {/* the fault trace, drawn on the boundary the label test uses */}
-          <line x1={sx(model.faultX)} y1={PAD.top} x2={sx(model.faultX)} y2={H - PAD.bottom}
-            stroke={CH.red} strokeWidth="2" strokeDasharray="6 3" />
-          <text x={sx(model.faultX) + 4} y={PAD.top + 10} fill={CH.red} fontSize="9">
-            fault {fmt(model.faultX, 0)} m
-          </text>
+        {/* the fault trace, drawn on the boundary the label test uses */}
+        <line x1={sx(model.faultX)} y1={PAD.top} x2={sx(model.faultX)} y2={H - PAD.bottom}
+          stroke={CH.red} strokeWidth="2" strokeDasharray="6 3" />
+        <text x={sx(model.faultX) + 4} y={PAD.top + 10} fill={CH.red} fontSize="9">
+          fault {fmt(model.faultX, 0)} m
+        </text>
 
-          {model.wells.map((w) => {
-            const dry = w.top >= (w.west ? Number(owcWest) : Number(owcEast));
-            return (
-              <g key={w.name}>
-                <circle cx={sx(w.x)} cy={sy(w.y)} r="4"
-                  fill={CH.halo} stroke={dry ? CH.red : CH.casing} strokeWidth="1.5" />
-                <text x={sx(w.x) + 7} y={sy(w.y) - 4} fontSize="9"
-                  fill={dry ? CH.red : (w.west ? WEST_FILL : EAST_FILL)}>
-                  {w.name} {w.west ? 'W' : 'E'}{dry ? ' dry' : ''}
-                </text>
-              </g>
-            );
-          })}
+        {model.wells.map((w) => {
+          const dry = w.top >= (w.west ? Number(owcWest) : Number(owcEast));
+          return (
+            <g key={w.name}>
+              <circle cx={sx(w.x)} cy={sy(w.y)} r="4"
+                fill={CH.halo} stroke={dry ? CH.red : CH.casing} strokeWidth="1.5" />
+              <text x={sx(w.x) + 7} y={sy(w.y) - 4} fontSize="9"
+                fill={dry ? CH.red : (w.west ? WEST_FILL : EAST_FILL)}>
+                {w.name} {w.west ? 'W' : 'E'}{dry ? ' dry' : ''}
+              </text>
+            </g>
+          );
+        })}
 
-          <text x={PAD.left} y={H - 14} fill={CH.text} fontSize="9">x {xMin} to {xMax} m</text>
-          <text x={PAD.left} y={12} fill={CH.text} fontSize="9">y {yMin} to {yMax} m (north up)</text>
-        </svg>
-      </div>
+        <text x={PAD.left} y={H - 14} fill={CH.text} fontSize="9">x {xMin} to {xMax} m</text>
+        <text x={PAD.left} y={12} fill={CH.text} fontSize="9">y {yMin} to {yMax} m (north up)</text>
+      </SvgChartFrame>
 
       <TileGrid>
         <Tile label="West block: cells" value={String(west.cells)} unit={`of ${total.cells}`} />

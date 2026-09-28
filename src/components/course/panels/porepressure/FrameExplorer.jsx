@@ -5,7 +5,8 @@ import {
 import { nctDt } from '@petrolord/engines/engines/porepressure/nct.js';
 import { gardnerRho } from '@petrolord/engines/engines/porepressure/gardner.js';
 import { PanelShell, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
-import { SVG_CHART as CH, CHART_PLATE_CLASS } from '@/components/course/panels/readerChart';
+import { SVG_CHART as CH } from '@/components/course/panels/readerChart';
+import SvgChartFrame from '@/components/charts/SvgChartFrame';
 
 // Frame explorer: the Beginner pressure frame down the golden well.
 // Depth runs downward, as a pressure plot always does. The log transit
@@ -113,40 +114,37 @@ const FrameExplorer = () => {
         brief states a setting of its own; type it in.
       </div>
 
-      <div data-canvas="chart" className={CHART_PLATE_CLASS}>
-        <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ minWidth: 420 }} role="img"
-          aria-label={`Pressure frame of the golden well read at ${read.z} m below mudline`}>
-          <rect x="0" y="0" width={W} height={H} fill={CH.plate} />
+      <SvgChartFrame width={W} height={H} minWidth={420}
+        label={`Pressure frame of the golden well read at ${read.z} m below mudline`}>
 
-          {/* transit-time overlay, drawn faint behind the pressure curves */}
-          <path d={path(logPts)} fill="none" stroke={CH.amber} strokeWidth="1.2" opacity="0.55" />
-          <path d={path(wellPts)} fill="none" stroke={CH.amber} strokeWidth="1" opacity="0.35" strokeDasharray="4 3" />
-          <path d={path(fitPts)} fill="none" stroke={CH.violet} strokeWidth="1" opacity="0.45" strokeDasharray="2 3" />
+        {/* transit-time overlay, drawn faint behind the pressure curves */}
+        <path d={path(logPts)} fill="none" stroke={CH.amber} strokeWidth="1.2" opacity="0.55" />
+        <path d={path(wellPts)} fill="none" stroke={CH.amber} strokeWidth="1" opacity="0.35" strokeDasharray="4 3" />
+        <path d={path(fitPts)} fill="none" stroke={CH.violet} strokeWidth="1" opacity="0.45" strokeDasharray="2 3" />
 
-          {/* pressure curves */}
-          <path d={path(hydroPts)} fill="none" stroke={CH.blue} strokeWidth="1.8" />
-          <path d={path(obPts)} fill="none" stroke={CH.red} strokeWidth="1.8" />
+        {/* pressure curves */}
+        <path d={path(hydroPts)} fill="none" stroke={CH.blue} strokeWidth="1.8" />
+        <path d={path(obPts)} fill="none" stroke={CH.red} strokeWidth="1.8" />
 
-          {/* ramp top and the read depth */}
-          <line x1={PAD.left} y1={sy(RAMP_TOP_M)} x2={W - PAD.right} y2={sy(RAMP_TOP_M)}
-            stroke={CH.axis} strokeWidth="0.8" strokeDasharray="3 4" />
-          <text x={W - PAD.right} y={sy(RAMP_TOP_M) - 4} fill={CH.text} fontSize="9" textAnchor="end">
-            ramp top {RAMP_TOP_M} m
-          </text>
-          <line x1={PAD.left} y1={sy(read.z)} x2={W - PAD.right} y2={sy(read.z)}
-            stroke={CH.ink} strokeWidth="0.9" />
-          <circle cx={sxP(read.hydroPa / MPA)} cy={sy(read.z)} r="3.5" fill={CH.blue} stroke={CH.halo} strokeWidth="1" />
-          <circle cx={sxP(read.obPa / MPA)} cy={sy(read.z)} r="3.5" fill={CH.red} stroke={CH.halo} strokeWidth="1" />
+        {/* ramp top and the read depth */}
+        <line x1={PAD.left} y1={sy(RAMP_TOP_M)} x2={W - PAD.right} y2={sy(RAMP_TOP_M)}
+          stroke={CH.axis} strokeWidth="0.8" strokeDasharray="3 4" />
+        <text x={W - PAD.right} y={sy(RAMP_TOP_M) - 4} fill={CH.text} fontSize="9" textAnchor="end">
+          ramp top {RAMP_TOP_M} m
+        </text>
+        <line x1={PAD.left} y1={sy(read.z)} x2={W - PAD.right} y2={sy(read.z)}
+          stroke={CH.ink} strokeWidth="0.9" />
+        <circle cx={sxP(read.hydroPa / MPA)} cy={sy(read.z)} r="3.5" fill={CH.blue} stroke={CH.halo} strokeWidth="1" />
+        <circle cx={sxP(read.obPa / MPA)} cy={sy(read.z)} r="3.5" fill={CH.red} stroke={CH.halo} strokeWidth="1" />
 
-          <text x="12" y="14" fill={CH.blue} fontSize="9">hydrostatic</text>
-          <text x="92" y="14" fill={CH.red} fontSize="9">overburden</text>
-          <text x="176" y="14" fill={CH.amber} fontSize="9">sonic (solid) and well trend (dashed)</text>
-          <text x="176" y="26" fill={CH.violet} fontSize="9">fitted trend</text>
-          <text x="12" y={H - 12} fill={CH.text} fontSize="9">0 to {fmt(obMaxMpa, 0)} MPa, and {dtMin} to {dtMax} us/m</text>
-          <text x="12" y={PAD.top - 6} fill={CH.text} fontSize="9">0 m</text>
-          <text x="12" y={H - PAD.bottom + 2} fill={CH.text} fontSize="9">{TD_M} m</text>
-        </svg>
-      </div>
+        <text x="12" y="14" fill={CH.blue} fontSize="9">hydrostatic</text>
+        <text x="92" y="14" fill={CH.red} fontSize="9">overburden</text>
+        <text x="176" y="14" fill={CH.amber} fontSize="9">sonic (solid) and well trend (dashed)</text>
+        <text x="176" y="26" fill={CH.violet} fontSize="9">fitted trend</text>
+        <text x="12" y={H - 12} fill={CH.text} fontSize="9">0 to {fmt(obMaxMpa, 0)} MPa, and {dtMin} to {dtMax} us/m</text>
+        <text x="12" y={PAD.top - 6} fill={CH.text} fontSize="9">0 m</text>
+        <text x="12" y={H - PAD.bottom + 2} fill={CH.text} fontSize="9">{TD_M} m</text>
+      </SvgChartFrame>
 
       <TileGrid>
         <Tile label="Depth read" value={String(read.z)} unit="m bml" />

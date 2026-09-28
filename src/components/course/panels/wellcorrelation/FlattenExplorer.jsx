@@ -2,7 +2,8 @@ import React, { useMemo, useState } from 'react';
 import { INTERMEDIATE_DATUM } from '@/lib/correlationTeaching';
 import { useSectionWells } from '@/components/course/panels/wellcorrelation/caseInputs';
 import { PanelShell, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
-import { SVG_CHART as CH, CHART_PLATE_CLASS } from '@/components/course/panels/readerChart';
+import { SVG_CHART as CH } from '@/components/course/panels/readerChart';
+import SvgChartFrame from '@/components/charts/SvgChartFrame';
 
 // Flatten explorer: pick a flattening top and a datum, and read the
 // shifts, displayed depths and the growth range. Intervals are shown
@@ -85,33 +86,30 @@ const FlattenExplorer = () => {
         <NumField label="Datum (m)" value={datum} onChange={setDatum} />
       </div>
 
-      <div data-canvas="chart" className={CHART_PLATE_CLASS}>
-        <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ minWidth: 460 }} role="img"
-          aria-label={`Section flattened on ${topName} at ${fmt(datumM)} m`}>
-          <rect x="0" y="0" width={W} height={H} fill={CH.plate} />
-          {TOPS.map((tn) => {
-            const pts = rows
-              .map((r, i) => ({ r, i, t: r.tops.find((x) => x.name === tn) }))
-              .filter((p) => p.t && p.t.displayed != null)
-              .map((p) => `${colX(p.i)},${sy(p.t.displayed)}`);
-            return pts.length > 1 ? (
-              <polyline key={tn} points={pts.join(' ')} fill="none" stroke={COLORS[tn]} strokeWidth="1.6" opacity="0.9" />
-            ) : null;
-          })}
-          {rows.map((r, i) => (
-            <g key={r.id}>
-              <line x1={colX(i)} y1={PAD.top} x2={colX(i)} y2={H - PAD.bottom} stroke={CH.grid} strokeWidth="1" />
-              <text x={colX(i)} y={PAD.top - 10} fill={CH.ink} fontSize="9" textAnchor="middle">{r.name}</text>
-              {r.tops.map((t) => (t.displayed == null ? null : (
-                <circle key={t.name} cx={colX(i)} cy={sy(t.displayed)} r="3" fill={COLORS[t.name]} />
-              )))}
-            </g>
-          ))}
-          <text x="10" y={sy(dMin) + 3} fill={CH.text} fontSize="9">{fmt(dMin)}</text>
-          <text x="10" y={sy(dMax) + 3} fill={CH.text} fontSize="9">{fmt(dMax)}</text>
-          <text x={W - 12} y={H - 10} fill={CH.text} fontSize="9" textAnchor="end">displayed depth, m</text>
-        </svg>
-      </div>
+      <SvgChartFrame width={W} height={H} minWidth={460}
+        label={`Section flattened on ${topName} at ${fmt(datumM)} m`}>
+        {TOPS.map((tn) => {
+          const pts = rows
+            .map((r, i) => ({ r, i, t: r.tops.find((x) => x.name === tn) }))
+            .filter((p) => p.t && p.t.displayed != null)
+            .map((p) => `${colX(p.i)},${sy(p.t.displayed)}`);
+          return pts.length > 1 ? (
+            <polyline key={tn} points={pts.join(' ')} fill="none" stroke={COLORS[tn]} strokeWidth="1.6" opacity="0.9" />
+          ) : null;
+        })}
+        {rows.map((r, i) => (
+          <g key={r.id}>
+            <line x1={colX(i)} y1={PAD.top} x2={colX(i)} y2={H - PAD.bottom} stroke={CH.grid} strokeWidth="1" />
+            <text x={colX(i)} y={PAD.top - 10} fill={CH.ink} fontSize="9" textAnchor="middle">{r.name}</text>
+            {r.tops.map((t) => (t.displayed == null ? null : (
+              <circle key={t.name} cx={colX(i)} cy={sy(t.displayed)} r="3" fill={COLORS[t.name]} />
+            )))}
+          </g>
+        ))}
+        <text x="10" y={sy(dMin) + 3} fill={CH.text} fontSize="9">{fmt(dMin)}</text>
+        <text x="10" y={sy(dMax) + 3} fill={CH.text} fontSize="9">{fmt(dMax)}</text>
+        <text x={W - 12} y={H - 10} fill={CH.text} fontSize="9" textAnchor="end">displayed depth, m</text>
+      </SvgChartFrame>
 
       <div className="overflow-x-auto">
         <table className="w-full text-sm">

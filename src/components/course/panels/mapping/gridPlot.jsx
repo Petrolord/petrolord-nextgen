@@ -1,6 +1,7 @@
 import React from 'react';
 import { isNull } from '@petrolord/engines/lib/gridding/gridmath.js';
-import { SVG_CHART as CH, CHART_PLATE_CLASS } from '@/components/course/panels/readerChart';
+import { SVG_CHART as CH } from '@/components/course/panels/readerChart';
+import SvgChartFrame from '@/components/charts/SvgChartFrame';
 
 // Shared map canvas for the two deep mapping panels. Draws the live
 // nodes of a grid, its contours and a set of posted markers in world
@@ -54,47 +55,45 @@ export const GridMap = ({ spec, z, contours, zMin, zMax, ramp = 'depth', markers
   }
 
   return (
-    <div data-canvas="chart" className={CHART_PLATE_CLASS}>
-      <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ minWidth: 420 }} role="img" aria-label={label}>
-        <rect x="0" y="0" width={W} height={H} fill={CH.plate} />
-        {cells}
+    <SvgChartFrame width={W} height={H} minWidth={420}
+      label={label}>
+      {cells}
 
-        {contours.map((c) => (
-          <g key={c.level}>
-            {c.lines.map((pts, i) => (
-              <polyline key={i} points={pts.map(([x, y]) => `${sx(x)},${sy(y)}`).join(' ')}
-                fill="none" stroke={CH.ink} strokeWidth="0.9" opacity="0.75" />
-            ))}
-          </g>
-        ))}
+      {contours.map((c) => (
+        <g key={c.level}>
+          {c.lines.map((pts, i) => (
+            <polyline key={i} points={pts.map(([x, y]) => `${sx(x)},${sy(y)}`).join(' ')}
+              fill="none" stroke={CH.ink} strokeWidth="0.9" opacity="0.75" />
+          ))}
+        </g>
+      ))}
 
-        {markers.map((m) => {
-          const cx = sx(m.x);
-          const cy = sy(m.y);
-          if (m.kind === 'target') {
-            return (
-              <g key={m.key || m.text}>
-                <path d={`M ${cx} ${cy - 6} L ${cx + 6} ${cy} L ${cx} ${cy + 6} L ${cx - 6} ${cy} Z`}
-                  fill={CH.pink} stroke={CH.halo} strokeWidth="1" />
-                <text x={cx + 9} y={cy + 12} fill={CH.pink} fontSize="9">{m.text}</text>
-              </g>
-            );
-          }
-          const open = m.kind === 'withheld';
+      {markers.map((m) => {
+        const cx = sx(m.x);
+        const cy = sy(m.y);
+        if (m.kind === 'target') {
           return (
             <g key={m.key || m.text}>
-              <circle cx={cx} cy={cy} r="4"
-                fill={open ? 'none' : CH.halo}
-                stroke={open ? CH.amber : CH.casing} strokeWidth={open ? 2 : 1.5} />
-              <text x={cx + 7} y={cy - 4} fill={open ? CH.amber : CH.ink} fontSize="9">{m.text}</text>
+              <path d={`M ${cx} ${cy - 6} L ${cx + 6} ${cy} L ${cx} ${cy + 6} L ${cx - 6} ${cy} Z`}
+                fill={CH.pink} stroke={CH.halo} strokeWidth="1" />
+              <text x={cx + 9} y={cy + 12} fill={CH.pink} fontSize="9">{m.text}</text>
             </g>
           );
-        })}
+        }
+        const open = m.kind === 'withheld';
+        return (
+          <g key={m.key || m.text}>
+            <circle cx={cx} cy={cy} r="4"
+              fill={open ? 'none' : CH.halo}
+              stroke={open ? CH.amber : CH.casing} strokeWidth={open ? 2 : 1.5} />
+            <text x={cx + 7} y={cy - 4} fill={open ? CH.amber : CH.ink} fontSize="9">{m.text}</text>
+          </g>
+        );
+      })}
 
-        <text x={PAD.left} y={H - 14} fill={CH.text} fontSize="9">x {xMin} to {xMax} m</text>
-        <text x={PAD.left} y={12} fill={CH.text} fontSize="9">y {yMin} to {yMax} m (north up)</text>
-      </svg>
-    </div>
+      <text x={PAD.left} y={H - 14} fill={CH.text} fontSize="9">x {xMin} to {xMax} m</text>
+      <text x={PAD.left} y={12} fill={CH.text} fontSize="9">y {yMin} to {yMax} m (north up)</text>
+    </SvgChartFrame>
   );
 };
 

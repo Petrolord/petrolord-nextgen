@@ -4,7 +4,8 @@ import {
   EXPLORER_N_OPTIONS_PRO, EXPLORER_THRESHOLDS_MPA, computeEatonExplorer,
 } from '@/lib/porepressureTeaching';
 import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
-import { SVG_CHART as CH, CHART_PLATE_CLASS } from '@/components/course/panels/readerChart';
+import { SVG_CHART as CH } from '@/components/course/panels/readerChart';
+import SvgChartFrame from '@/components/charts/SvgChartFrame';
 
 // Eaton explorer: the full prognosis down the golden well with the tier's
 // three levers exposed: the exponent, the trend the ratio is measured
@@ -82,33 +83,31 @@ const EatonExplorer = () => {
         own; type it in.
       </div>
 
-      <div data-canvas="chart" className={`${CHART_PLATE_CLASS} mt-3`}>
-        <svg viewBox={`0 0 ${W} ${H}`} className="w-full" role="img"
-          aria-label="Pore pressure, fracture pressure, hydrostatic and overburden against depth">
-          <rect x={PAD.left} y={PAD.top} width={plotW} height={plotH} fill="none" stroke={CH.axis} />
-          {[0, 20, 40, 60, 80].map((p) => (
-            <g key={p}>
-              <line x1={sx(p)} y1={PAD.top} x2={sx(p)} y2={PAD.top + plotH} stroke={CH.grid} />
-              <text x={sx(p)} y={H - 12} fontSize="10" textAnchor="middle" fill={CH.text}>{p}</text>
-            </g>
-          ))}
-          {[0, 1000, 2000, 3000, 4000].map((z) => (
-            <text key={z} x={PAD.left - 6} y={sy(z) + 3} fontSize="10" textAnchor="end" fill={CH.text}>{z}</text>
-          ))}
-          <line x1={PAD.left} y1={sy(RAMP_TOP_M)} x2={PAD.left + plotW} y2={sy(RAMP_TOP_M)} stroke={CH.amber} strokeDasharray="3 3" />
-          <text x={PAD.left + plotW - 4} y={sy(RAMP_TOP_M) - 4} fontSize="9" textAnchor="end" fill="#b45309">ramp top 2500 m</text>
-          <path d={path('hydroMpa')} fill="none" stroke={CH.blue} strokeWidth="1.4" strokeDasharray="5 3" />
-          <path d={path('obMpa')} fill="none" stroke="#525252" strokeWidth="1.4" strokeDasharray="5 3" />
-          <path d={path('fpMpa')} fill="none" stroke={CH.green} strokeWidth="1.6" />
-          <path d={path('ppMpa')} fill="none" stroke={CH.red} strokeWidth="2" />
-          {m.onsetM != null && (
-            <circle cx={sx(m.curve.find((p) => p.z >= m.onsetM)?.ppMpa ?? 0)} cy={sy(m.onsetM)} r="4" fill={CH.red} />
-          )}
-          <text x={PAD.left + 6} y={PAD.top + 12} fontSize="10" fill="#0369a1">hydrostatic</text>
-          <text x={PAD.left + plotW - 6} y={PAD.top + 12} fontSize="10" textAnchor="end" fill="#404040">overburden</text>
-          <text x={W / 2} y={H - 2} fontSize="10" textAnchor="middle" fill={CH.text}>pressure (MPa); pore pressure red, fracture green</text>
-        </svg>
-      </div>
+      <SvgChartFrame width={W} height={H} className="mt-3"
+        label="Pore pressure, fracture pressure, hydrostatic and overburden against depth">
+        <rect x={PAD.left} y={PAD.top} width={plotW} height={plotH} fill="none" stroke={CH.axis} />
+        {[0, 20, 40, 60, 80].map((p) => (
+          <g key={p}>
+            <line x1={sx(p)} y1={PAD.top} x2={sx(p)} y2={PAD.top + plotH} stroke={CH.grid} />
+            <text x={sx(p)} y={H - 12} fontSize="10" textAnchor="middle" fill={CH.text}>{p}</text>
+          </g>
+        ))}
+        {[0, 1000, 2000, 3000, 4000].map((z) => (
+          <text key={z} x={PAD.left - 6} y={sy(z) + 3} fontSize="10" textAnchor="end" fill={CH.text}>{z}</text>
+        ))}
+        <line x1={PAD.left} y1={sy(RAMP_TOP_M)} x2={PAD.left + plotW} y2={sy(RAMP_TOP_M)} stroke={CH.amber} strokeDasharray="3 3" />
+        <text x={PAD.left + plotW - 4} y={sy(RAMP_TOP_M) - 4} fontSize="9" textAnchor="end" fill="#b45309">ramp top 2500 m</text>
+        <path d={path('hydroMpa')} fill="none" stroke={CH.blue} strokeWidth="1.4" strokeDasharray="5 3" />
+        <path d={path('obMpa')} fill="none" stroke="#525252" strokeWidth="1.4" strokeDasharray="5 3" />
+        <path d={path('fpMpa')} fill="none" stroke={CH.green} strokeWidth="1.6" />
+        <path d={path('ppMpa')} fill="none" stroke={CH.red} strokeWidth="2" />
+        {m.onsetM != null && (
+          <circle cx={sx(m.curve.find((p) => p.z >= m.onsetM)?.ppMpa ?? 0)} cy={sy(m.onsetM)} r="4" fill={CH.red} />
+        )}
+        <text x={PAD.left + 6} y={PAD.top + 12} fontSize="10" fill="#0369a1">hydrostatic</text>
+        <text x={PAD.left + plotW - 6} y={PAD.top + 12} fontSize="10" textAnchor="end" fill="#404040">overburden</text>
+        <text x={W / 2} y={H - 2} fontSize="10" textAnchor="middle" fill={CH.text}>pressure (MPa); pore pressure red, fracture green</text>
+      </SvgChartFrame>
 
       <TileGrid>
         <Tile label="Overpressure onset" value={m.onsetM == null ? 'none' : String(m.onsetM)} unit="m bml" />
