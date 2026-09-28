@@ -166,7 +166,38 @@ still render them outside a scope.
 - `src/components/charts/__tests__/chartKit.test.jsx`: the chart kit's API,
   watermark, series contrast on white and the frames.
 
-## 3. The course reader and the handbook (batch 1C)
+## 3. Batch 2B: admin I (as built)
+
+Academy doors (`/dashboard/admin/academy-doors`, with `AdminSponsorPools`),
+certifications (`/dashboard/admin/certifications`), the user directory
+(`/dashboard/admin/users`, with `UserDetailModal` and `UserEditModal`),
+audit logs (`/dashboard/admin/audit-logs`, with `AuditDetailModal`), super
+admins (`/dashboard/admin/super-admins`) and system settings
+(`/dashboard/admin/settings`) are on the roles and registered in
+`src/design/rollout/w2b.js`.
+
+- Every file the six screens own is used by that screen alone, so each moved
+  straight to roles with no legacy branch.
+- The ui kit carries the look: lime buttons became the default (petrol
+  green) `Button`, and the per-page overrides on `Input`, `SelectTrigger`,
+  `SelectContent`, `DropdownMenuContent`, `DialogContent`,
+  `AlertDialogContent`, `TabsList` and `TabsTrigger` were dropped. Native
+  `<select>`s use the Suite input styling (`border-pl-border-strong`,
+  `bg-pl-surface`, focus ring). Destructive actions use the danger roles.
+- Status words sit on the status roles: residency, session, certificate,
+  feature flag and health states. The audit table now prints Success or
+  Failure next to its icon. Role and action pills are tints of accent,
+  primary, info, warning and danger, each with its word.
+- Lime toast overrides (`className: 'bg-[#BFFF00] ...'`) were removed; the
+  toaster's own themed default shows them.
+- Empty cells show `n/a`.
+- The user directory, audit logs, super admins and system settings gain the
+  pilot's page padding (`px-4 py-8 md:px-8`), which they never had.
+- Tests: one theme test per screen in `src/pages/__tests__/` on a shared
+  harness (`admin2bHarness.jsx`, `admin2bStubs.js` with a local Supabase
+  fake that answers the two table reads and throws on anything else).
+
+## 4. The course reader and the handbook (batch 1C)
 
 Registered in `src/design/rollout/w1c.js`: `/dashboard/apps/:slug/course/*`
 (course home, module, lesson, module quiz, final exam and the capstone
