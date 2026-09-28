@@ -10,6 +10,8 @@ import { useToast } from '@/components/ui/use-toast';
 import { useRole } from '@/contexts/RoleContext';
 import { hasDeepCourse } from '@/lib/courseContent';
 import DeepCourseBanner from '@/components/course/DeepCourseBanner';
+import SvgChartFrame from '@/components/charts/SvgChartFrame';
+import { seriesColor, SVG_CHART, AXIS_LINE_PROPS, REFERENCE_LINE_PROPS } from '@/utils/chartSvg';
 import {
   Loader2, Gauge, GraduationCap, Lock, CheckCircle2, XCircle,
   BookOpen, Award, ArrowRight,
@@ -56,7 +58,7 @@ function ScopeGate() {
   );
 }
 
-const num = (v, dp = 2) => (v == null || Number.isNaN(v) ? '—' : Number(v).toFixed(dp));
+const num = (v, dp = 2) => (v == null || Number.isNaN(v) ? 'n/a' : Number(v).toFixed(dp));
 
 // Pressure-depth plot: hydro / overburden always, PP + FP when given.
 function PressurePlot({ prof, showPP }) {
@@ -67,35 +69,35 @@ function PressurePlot({ prof, showPP }) {
   const sy = (z) => 10 + (z / TD_M) * (H - PADB - 10);
   const path = (arr) => arr.map((p, i) => `${i ? 'L' : 'M'}${sx(p / 1e6).toFixed(1)},${sy(zs[i]).toFixed(1)}`).join(' ');
   const series = [
-    ['hydrostatic', prof.hydrostaticPa, '#38bdf8'],
-    ['overburden', prof.overburdenPa, '#94a3b8'],
+    ['hydrostatic', prof.hydrostaticPa, seriesColor(0)],
+    ['overburden', prof.overburdenPa, SVG_CHART.label],
     ...(showPP ? [
-      ['pore pressure', prof.porePressurePa, '#f97316'],
-      ['fracture', prof.fracPressurePa, '#22c55e'],
+      ['pore pressure', prof.porePressurePa, seriesColor(2)],
+      ['fracture', prof.fracPressurePa, seriesColor(1)],
     ] : []),
   ];
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto bg-[#0F172A] rounded-md border border-gray-700">
-      <line x1={PADL} y1={10} x2={PADL} y2={H - PADB} stroke="#334155" />
-      <line x1={PADL} y1={H - PADB} x2={W - 12} y2={H - PADB} stroke="#334155" />
+    <SvgChartFrame width={W} height={H} label="Pressure against depth" minWidth={420} maxWidth={720}>
+      <line x1={PADL} y1={10} x2={PADL} y2={H - PADB} {...AXIS_LINE_PROPS} />
+      <line x1={PADL} y1={H - PADB} x2={W - 12} y2={H - PADB} {...AXIS_LINE_PROPS} />
       {[0, 1000, 2000, 3000, 4000].map((z) => (
         <g key={z}>
-          <line x1={PADL - 3} y1={sy(z)} x2={PADL} y2={sy(z)} stroke="#334155" />
-          <text x={PADL - 6} y={sy(z) + 3} fontSize="9" fill="#64748b" textAnchor="end">{z}</text>
+          <line x1={PADL - 3} y1={sy(z)} x2={PADL} y2={sy(z)} {...AXIS_LINE_PROPS} />
+          <text x={PADL - 6} y={sy(z) + 3} fontSize="9" fill={SVG_CHART.tick} textAnchor="end">{z}</text>
         </g>
       ))}
       {[0, 25, 50, 75].map((p) => (
-        <text key={p} x={sx(p)} y={H - PADB + 14} fontSize="9" fill="#64748b" textAnchor="middle">{p} MPa</text>
+        <text key={p} x={sx(p)} y={H - PADB + 14} fontSize="9" fill={SVG_CHART.tick} textAnchor="middle">{p} MPa</text>
       ))}
-      <line x1={PADL} y1={sy(RAMP_TOP_M)} x2={W - 12} y2={sy(RAMP_TOP_M)} stroke="#eab308" strokeDasharray="5 4" opacity="0.6" />
-      <text x={W - 16} y={sy(RAMP_TOP_M) - 5} fontSize="9" fill="#eab308" textAnchor="end">ramp top {RAMP_TOP_M} m</text>
+      <line x1={PADL} y1={sy(RAMP_TOP_M)} x2={W - 12} y2={sy(RAMP_TOP_M)} {...REFERENCE_LINE_PROPS} />
+      <text x={W - 16} y={sy(RAMP_TOP_M) - 5} fontSize="9" fill={SVG_CHART.note} textAnchor="end">ramp top {RAMP_TOP_M} m</text>
       {series.map(([label, arr, color], i) => (
         <g key={label}>
           <path d={path(arr)} fill="none" stroke={color} strokeWidth="1.8" />
           <text x={PADL + 8} y={24 + i * 13} fontSize="10" fill={color}>{label}</text>
         </g>
       ))}
-    </svg>
+    </SvgChartFrame>
   );
 }
 
@@ -152,9 +154,9 @@ const PorePressureLearningPage = () => {
       const res = await submitCapstone(APP, tier, numeric);
       setResult(res);
       if (res.passed && res.certificate_number) {
-        toast({ title: `Capstone passed. ${CERT_LABELS[res.tier] || 'Associate'} certified!`, description: res.certificate_number, className: 'bg-[#BFFF00] text-slate-900' });
+        toast({ title: `Capstone passed. ${CERT_LABELS[res.tier] || 'Associate'} certified!`, description: res.certificate_number, className: 'border-pl-success/40 bg-pl-success-bg text-pl-success-text' });
       } else if (res.passed) {
-        toast({ title: 'Passed — you were already certified', className: 'bg-[#BFFF00] text-slate-900' });
+        toast({ title: 'Passed. You were already certified', className: 'border-pl-success/40 bg-pl-success-bg text-pl-success-text' });
       } else {
         toast({
           title: 'Not passing yet',
@@ -181,7 +183,7 @@ const PorePressureLearningPage = () => {
     || actualRole === 'super_admin';
 
   if (gate.loading) {
-    return <div className="flex items-center justify-center h-64"><Loader2 className="h-8 w-8 animate-spin text-[#BFFF00]" /></div>;
+    return <div className="flex items-center justify-center h-64"><Loader2 className="h-8 w-8 animate-spin text-pl-primary-text" /></div>;
   }
   if (!gate.allowed) return <ScopeGate />;
 
@@ -191,17 +193,17 @@ const PorePressureLearningPage = () => {
       <div className="relative max-w-6xl mx-auto p-6 space-y-6">
         {watermark && (
           <div className="pointer-events-none fixed inset-0 z-0 flex items-center justify-center overflow-hidden">
-            <span className="text-white/5 text-[8rem] font-black -rotate-45 select-none">TRAINING</span>
+            <span className="text-pl-text/5 text-[8rem] font-black -rotate-45 select-none">TRAINING</span>
           </div>
         )}
 
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="relative z-10 space-y-6">
           <div>
-            <h1 className="text-3xl font-bold text-white flex items-center gap-2">
-              <Gauge className="h-7 w-7 text-[#BFFF00]" /> Pore Pressure
-              <span className="text-xs px-2 py-0.5 rounded-full bg-[#BFFF00]/20 text-[#BFFF00] border border-[#BFFF00]/40">Learning Mode</span>
+            <h1 className="text-3xl font-bold text-pl-text flex items-center gap-2">
+              <Gauge className="h-7 w-7 text-pl-primary-text" /> Pore Pressure
+              <span className="text-xs px-2 py-0.5 rounded-full bg-pl-accent/15 text-pl-accent-text border border-pl-accent/40">Learning Mode</span>
             </h1>
-            <p className="mt-1 text-gray-400">
+            <p className="mt-1 text-pl-muted">
               The golden synthetic well: 0 to {TD_M} m below mudline in {PARAMS.waterDepthM} m of water,
               normally compacted to {RAMP_TOP_M} m, then a 4 kPa/m overpressure ramp encoded into the sonic.
               {gate.quota?.own_data_upload === false && ' Your own data upload unlocks at the Associate tier.'}
@@ -213,16 +215,16 @@ const PorePressureLearningPage = () => {
           {/* Legacy pocket lessons: superseded by the deep course. They
               only render for tiers whose full content has not shipped. */}
           {!deep && (
-          <Card className="bg-[#1E293B] border-gray-700">
+          <Card className="bg-pl-surface border-pl-border">
             <CardHeader>
-              <CardTitle className="text-white flex items-center gap-2"><BookOpen className="h-5 w-5 text-[#BFFF00]" /> Lessons</CardTitle>
+              <CardTitle className="text-pl-text flex items-center gap-2"><BookOpen className="h-5 w-5 text-pl-primary-text" /> Lessons</CardTitle>
               <CardDescription>From a sonic log to the mud-weight window.</CardDescription>
             </CardHeader>
             <CardContent className="grid gap-3 sm:grid-cols-2">
               {LESSONS.map((l) => (
-                <div key={l.n} className="rounded-md border border-gray-700 bg-[#0F172A] p-3">
-                  <p className="text-white text-sm font-medium">{l.n}. {l.title}</p>
-                  <p className="text-xs text-gray-400 mt-1">{l.body}</p>
+                <div key={l.n} className="rounded-md border border-pl-border bg-pl-sunken p-3">
+                  <p className="text-pl-text text-sm font-medium">{l.n}. {l.title}</p>
+                  <p className="text-xs text-pl-muted mt-1">{l.body}</p>
                 </div>
               ))}
             </CardContent>
@@ -231,11 +233,11 @@ const PorePressureLearningPage = () => {
 
           {/* Beginner panel: the pressure frame */}
           {basics.error ? (
-            <p className="text-red-400 text-sm">Engine error: {basics.error}</p>
+            <p className="text-pl-danger-text text-sm">Engine error: {basics.error}</p>
           ) : (
-            <Card className="bg-[#1E293B] border-gray-700">
+            <Card className="bg-pl-surface border-pl-border">
               <CardHeader>
-                <CardTitle className="text-white">The pressure frame</CardTitle>
+                <CardTitle className="text-pl-text">The pressure frame</CardTitle>
                 <CardDescription>
                   Hydrostatic and overburden bound the problem; the NCT ({NCT_PICKS.picks_z_m.length} shale
                   picks, exact least squares with matrix dt {NCT_PICKS.dt_ma} µs/m) sets the yardstick.
@@ -252,13 +254,13 @@ const PorePressureLearningPage = () => {
                     ['Fitted NCT mudline dt', `${num(basics.fit.dtMl, 2)} µs/m`],
                     ['Fitted compaction constant', `${num(basics.fit.c * 1000, 4)} per km`],
                   ].map(([k, v]) => (
-                    <div key={k} className="rounded-md border border-gray-700 bg-[#0F172A] p-3">
-                      <p className="text-gray-500 text-xs">{k}</p>
-                      <p className="text-white">{v}</p>
+                    <div key={k} className="rounded-md border border-pl-border bg-pl-sunken p-3">
+                      <p className="text-pl-muted text-xs">{k}</p>
+                      <p className="text-pl-text">{v}</p>
                     </div>
                   ))}
                 </div>
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-pl-muted">
                   The fit comes back with mudline dt {num(basics.fit.dtMl, 1)} and c {num(basics.fit.c * 1000, 2)}/km
                   because the picks were generated on a slightly different trend than the well&apos;s own
                   ({PARAMS.nct.dtMlUsPerM} / {PARAMS.nct.cPerM * 1000}). Fitting recovers what the DATA say.
@@ -271,7 +273,7 @@ const PorePressureLearningPage = () => {
           <div className="flex gap-2">
             {LEARN_TIERS.map((t) => (
               <button key={t} type="button" onClick={() => setTier(t)}
-                className={`px-3 py-1.5 rounded-md border text-sm capitalize ${tier === t ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold' : 'bg-gray-800 text-gray-300 border-gray-600'}`}>
+                className={`px-3 py-1.5 rounded-md border text-sm capitalize ${tier === t ? 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold' : 'bg-pl-surface text-pl-text border-pl-border-strong'}`}>
                 {t} tier
               </button>
             ))}
@@ -280,9 +282,9 @@ const PorePressureLearningPage = () => {
           {tier === 'intermediate' && (() => {
             const prog = computePrognosis(TEACHING_EATON_N);
             return (
-              <Card className="bg-[#1E293B] border-gray-700">
+              <Card className="bg-pl-surface border-pl-border">
                 <CardHeader>
-                  <CardTitle className="text-white">Eaton prognosis (Intermediate), n = {TEACHING_EATON_N}</CardTitle>
+                  <CardTitle className="text-pl-text">Eaton prognosis (Intermediate), n = {TEACHING_EATON_N}</CardTitle>
                   <CardDescription>
                     The full pipeline over the golden sonic: density → overburden → NCT ratio → Eaton →
                     fracture pressure. Onset = the first sample more than 0.05 MPa above hydrostatic.
@@ -298,13 +300,13 @@ const PorePressureLearningPage = () => {
                       ['Overpressure at TD', `${num(prog.overpressureTdPa / 1e6, 3)} MPa`],
                       ['Fracture pressure at TD', `${num(prog.fpTdPa / 1e6, 3)} MPa`],
                     ].map(([k, v]) => (
-                      <div key={k} className="rounded-md border border-gray-700 bg-[#0F172A] p-3">
-                        <p className="text-gray-500 text-xs">{k}</p>
-                        <p className="text-white">{v}</p>
+                      <div key={k} className="rounded-md border border-pl-border bg-pl-sunken p-3">
+                        <p className="text-pl-muted text-xs">{k}</p>
+                        <p className="text-pl-text">{v}</p>
                       </div>
                     ))}
                   </div>
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-pl-muted">
                     Sanity check the machine: the well imposes 4 kPa/m of overpressure from {RAMP_TOP_M} m,
                     so TD should carry 4 × {(TD_M - RAMP_TOP_M) / 1000} km = 6 MPa above hydrostatic. It does,
                     exactly. That is the forward-inverse consistency the goldens were built for.
@@ -318,9 +320,9 @@ const PorePressureLearningPage = () => {
             const mw = computeMudWindow();
             const shown = eatonN === TEACHING_EATON_N ? mw.base : mw.alt;
             return (
-              <Card className="bg-[#1E293B] border-gray-700">
+              <Card className="bg-pl-surface border-pl-border">
                 <CardHeader>
-                  <CardTitle className="text-white">Mud-weight window and the Bowers cross-check (Advanced)</CardTitle>
+                  <CardTitle className="text-pl-text">Mud-weight window and the Bowers cross-check (Advanced)</CardTitle>
                   <CardDescription>
                     Pressures become drilling numbers: equivalent mud weight referenced to sea level
                     (P / g·(z + water depth)). The teaching case reads the n = {TEACHING_EATON_N} window.
@@ -336,23 +338,23 @@ const PorePressureLearningPage = () => {
                       ['Bowers unloading σ from v = 3125.8 m/s', `${num(mw.bowersSigmaUnload / 1e6, 2)} MPa`],
                       ['PP at TD with n = 1.2', `${num(mw.ppTdN12Pa / 1e6, 3)} MPa`],
                     ].map(([k, v]) => (
-                      <div key={k} className="rounded-md border border-gray-700 bg-[#0F172A] p-3">
-                        <p className="text-gray-500 text-xs">{k}</p>
-                        <p className="text-white">{v}</p>
+                      <div key={k} className="rounded-md border border-pl-border bg-pl-sunken p-3">
+                        <p className="text-pl-muted text-xs">{k}</p>
+                        <p className="text-pl-text">{v}</p>
                       </div>
                     ))}
                   </div>
                   <div className="flex gap-2 items-center">
-                    <span className="text-xs text-gray-500">Eaton exponent:</span>
+                    <span className="text-xs text-pl-muted">Eaton exponent:</span>
                     {EATON_N_OPTIONS.map((n) => (
                       <button key={n} type="button" onClick={() => setEatonN(n)}
-                        className={`px-3 py-1.5 rounded-md border text-sm ${eatonN === n ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold' : 'bg-gray-800 text-gray-300 border-gray-600'}`}>
+                        className={`px-3 py-1.5 rounded-md border text-sm ${eatonN === n ? 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold' : 'bg-pl-surface text-pl-text border-pl-border-strong'}`}>
                         n = {n}
                       </button>
                     ))}
                   </div>
                   <PressurePlot prof={shown.prof} showPP />
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-pl-muted">
                     Dropping the exponent from 3.0 to 1.2 shaves {num((mw.base.ppTdPa - mw.ppTdN12Pa) / 1e6, 2)} MPa
                     off the TD prognosis: the exponent is a calibration lever, not a constant of nature. Bowers
                     reads the same physics through effective stress, and its unloading form catches velocity
@@ -364,19 +366,19 @@ const PorePressureLearningPage = () => {
           })()}
 
           {/* Capstone */}
-          <Card className="bg-[#1E293B] border-gray-700">
+          <Card className="bg-pl-surface border-pl-border">
             <CardHeader>
-              <CardTitle className="text-white">{capstone?.title || 'Capstone'}</CardTitle>
+              <CardTitle className="text-pl-text">{capstone?.title || 'Capstone'}</CardTitle>
               <CardDescription>{capstone?.prompt}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               {!capstoneOpen ? (
-                <div className="rounded-md border border-gray-700 bg-[#0F172A] p-4 text-sm text-gray-300 flex items-start gap-2">
-                  <Lock className="h-4 w-4 text-[#BFFF00] mt-0.5 shrink-0" />
+                <div className="rounded-md border border-pl-border bg-pl-sunken p-4 text-sm text-pl-text flex items-start gap-2">
+                  <Lock className="h-4 w-4 text-pl-primary-text mt-0.5 shrink-0" />
                   <p className="mb-0">
                     The capstone unlocks after the course: finish the lessons, pass each module quiz
                     and the final exam, then submit here.{' '}
-                    <Link to={`/dashboard/apps/${APP}/course/${tier}`} className="text-[#BFFF00] hover:underline">
+                    <Link to={`/dashboard/apps/${APP}/course/${tier}`} className="text-pl-primary-text hover:underline">
                       Open the course
                     </Link>
                   </p>
@@ -386,16 +388,16 @@ const PorePressureLearningPage = () => {
                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                   {(capstone?.fields || []).map((f) => (
                     <div key={f.key}>
-                      <Label className="text-gray-400 text-xs mb-1 block">{f.label} ({f.unit})</Label>
+                      <Label className="text-pl-muted text-xs mb-1 block">{f.label} ({f.unit})</Label>
                       <Input type="text" inputMode="decimal" autoComplete="off" value={answers[f.key] ?? ''}
                         onChange={(e) => setAnswers((a) => ({ ...a, [f.key]: e.target.value }))}
-                        className="bg-gray-700 text-white border-gray-600 h-8 text-sm" />
+                        className="h-8 text-sm" />
                     </div>
                   ))}
                 </div>
 
                 <Button onClick={submit} disabled={submitting || !capstone}
-                  className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold">
+                  className="font-semibold">
                   {submitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <GraduationCap className="mr-2 h-4 w-4" />}
                   Submit for grading
                 </Button>
@@ -403,33 +405,33 @@ const PorePressureLearningPage = () => {
               )}
 
               {result && (
-                <div className={`rounded-md border p-4 ${result.passed ? 'border-emerald-700 bg-emerald-900/20' : 'border-red-800 bg-red-900/20'}`}>
+                <div className={`rounded-md border p-4 ${result.passed ? 'border-pl-success/40 bg-pl-success-bg' : 'border-pl-danger/40 bg-pl-danger-bg'}`}>
                   {result.passed ? (
                     <>
-                      <p className="text-emerald-300 font-medium flex items-center gap-2">
+                      <p className="text-pl-success-text font-medium flex items-center gap-2">
                         <CheckCircle2 className="h-5 w-5" /> Passed ({result.score}/{result.max_score})
                       </p>
                       {result.certificate_number ? (
-                        <div className="mt-2 text-sm text-gray-300 space-y-1">
-                          <p className="flex items-center gap-2"><Award className="h-4 w-4 text-[#BFFF00]" />
-                            {CERT_LABELS[result.tier] || 'Associate'} certificate <span className="font-mono text-[#BFFF00]">{result.certificate_number}</span> issued.
+                        <div className="mt-2 text-sm text-pl-text space-y-1">
+                          <p className="flex items-center gap-2"><Award className="h-4 w-4 text-pl-accent-text" />
+                            {CERT_LABELS[result.tier] || 'Associate'} certificate <span className="font-mono text-pl-accent-text">{result.certificate_number}</span> issued.
                             {result.tier === 'expert' && ' Your 50% Suite discount code is on your certificates page.'}
                           </p>
                           <div className="flex gap-3">
-                            <Link to="/dashboard/certificates" className="text-[#BFFF00] hover:underline inline-flex items-center gap-1">
+                            <Link to="/dashboard/certificates" className="text-pl-primary-text hover:underline inline-flex items-center gap-1">
                               My certificates <ArrowRight className="h-3 w-3" />
                             </Link>
-                            <a href={verificationUrl(result.verify_code)} target="_blank" rel="noreferrer" className="text-gray-400 hover:underline">
+                            <a href={verificationUrl(result.verify_code)} target="_blank" rel="noreferrer" className="text-pl-muted hover:underline">
                               Public verification
                             </a>
                           </div>
                         </div>
                       ) : (
-                        <p className="mt-1 text-sm text-gray-400">You were already certified for this tier.</p>
+                        <p className="mt-1 text-sm text-pl-muted">You were already certified for this tier.</p>
                       )}
                     </>
                   ) : (
-                    <p className="text-red-300 font-medium flex items-center gap-2">
+                    <p className="text-pl-danger-text font-medium flex items-center gap-2">
                       <XCircle className="h-5 w-5" /> {result.score}/{result.max_score} within tolerance. Type the setting the brief states into the course panels and read them again.
                     </p>
                   )}
