@@ -115,26 +115,32 @@ import NotificationCenterPage from '@/pages/NotificationCenterPage';
 import { listAcademyApps, listMyEnrollments, listMyCertifications } from '@/services/academyService';
 import { MODULE_LABELS, moduleLabel } from '@/lib/academyModules';
 import { courseNameFrom } from '@/lib/appNames';
+import { useThemeClass } from '@/design/themeClass';
 
 // --- Role Specific Home Components ---
+//
+// Design system pilot (wave 0, docs/scope/DesignSystem-Rollout.md): the four
+// homes render only at /dashboard, which sits inside the signed-in scope, so
+// they use theme roles directly. The routes below them (/dashboard/modules/*
+// and the rest) keep their legacy look until their batch lands.
 
 const AdminHomeCard = ({ to, title, description, cta }) => (
-    <Card className="bg-[#1E293B] border-slate-800 hover:border-slate-600 transition-colors">
-        <CardHeader><CardTitle className="text-white">{title}</CardTitle></CardHeader>
+    <Card className="h-full transition-all hover:border-pl-border-strong hover:shadow-pl-md">
+        <CardHeader><CardTitle className="text-lg text-pl-text">{title}</CardTitle></CardHeader>
         <CardContent>
-            <p className="text-slate-400 mb-4">{description}</p>
+            <p className="text-sm text-pl-muted mb-4">{description}</p>
             <Link to={to}>
-                <Button variant="outline" className="w-full border-slate-700 text-slate-200">{cta}</Button>
+                <Button variant="outline" className="w-full">{cta}</Button>
             </Link>
         </CardContent>
     </Card>
 );
 
 const SuperAdminHome = () => (
-    <div className="space-y-6 animate-in fade-in duration-500 py-16">
+    <div className="space-y-6 animate-in fade-in duration-500 px-4 py-8 md:px-8 md:py-10">
       <div className="flex flex-col space-y-2">
-        <h1 className="text-3xl font-bold tracking-tight text-white">Super Admin Control Center</h1>
-        <p className="text-slate-400">Full system oversight and administration.</p>
+        <h1 className="text-3xl font-bold tracking-tight text-pl-text">Super Admin Control Center</h1>
+        <p className="text-pl-muted">Full system oversight and administration.</p>
       </div>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <AdminHomeCard to="/dashboard/admin/academy-doors" title="Academy Doors" description="Issue cohort and sponsorship codes, decide residency applications." cta="Open Doors Console" />
@@ -148,10 +154,10 @@ const SuperAdminHome = () => (
 );
 
 const PetrolordAdminHome = () => (
-    <div className="space-y-6 animate-in fade-in duration-500 py-16">
+    <div className="space-y-6 animate-in fade-in duration-500 px-4 py-8 md:px-8 md:py-10">
       <div className="flex flex-col space-y-2">
-        <h1 className="text-3xl font-bold tracking-tight text-white">Admin Dashboard</h1>
-        <p className="text-slate-400">Manage academy learners, doors and certificates.</p>
+        <h1 className="text-3xl font-bold tracking-tight text-pl-text">Admin Dashboard</h1>
+        <p className="text-pl-muted">Manage academy learners, doors and certificates.</p>
       </div>
        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         <AdminHomeCard to="/dashboard/admin/academy-doors" title="Academy Doors" description="Issue cohort and sponsorship codes, decide residency applications." cta="Open Doors Console" />
@@ -164,10 +170,10 @@ const PetrolordAdminHome = () => (
 );
 
 const LecturerHome = () => (
-    <div className="space-y-6 animate-in fade-in duration-500 py-16">
+    <div className="space-y-6 animate-in fade-in duration-500 px-4 py-8 md:px-8 md:py-10">
       <div className="flex flex-col space-y-2">
-        <h1 className="text-3xl font-bold tracking-tight text-white">Lecturer Dashboard</h1>
-        <p className="text-slate-400">Support learners and manage certifications.</p>
+        <h1 className="text-3xl font-bold tracking-tight text-pl-text">Lecturer Dashboard</h1>
+        <p className="text-pl-muted">Support learners and manage certifications.</p>
       </div>
       <div className="grid gap-4 md:grid-cols-2">
         <AdminHomeCard to="/dashboard/admin/certifications" title="Certifications" description="Issue and revoke academy certificates for your learners." cta="Open Certifications" />
@@ -186,27 +192,27 @@ const YourCourses = ({ enrollments, apps, isLearner, activation }) => {
     if (!enrollments.length) return null;
     const nameOf = (slug) => courseNameFrom(apps, slug);
     return (
-        <div className="rounded-lg border border-[#BFFF00]/30 bg-[#1E293B] p-6 shadow-lg">
+        <div className="rounded-lg border border-pl-accent/60 bg-pl-surface p-6 shadow-pl-sm">
             <div className="flex items-baseline justify-between mb-1">
-                <h3 className="text-lg font-medium text-slate-200">Your courses</h3>
-                <span className="text-xs text-slate-500">{enrollments.length} active</span>
+                <h3 className="text-lg font-medium text-pl-text">Your courses</h3>
+                <span className="text-xs text-pl-muted">{enrollments.length} active</span>
             </div>
-            <p className="text-slate-400 text-sm mb-4">Courses with an active enrollment on your account, newest first.</p>
+            <p className="text-pl-muted text-sm mb-4">Courses with an active enrollment on your account, newest first.</p>
             <div className="space-y-2">
                 {enrollments.map((e) => {
                     const act = enrollmentAction(e, { isLearner, activation, hasCourse: hasDeepCourse });
                     return (
-                        <div key={e.id} className="flex flex-wrap items-center justify-between gap-2 rounded-md border border-slate-700 bg-slate-800 px-4 py-3">
+                        <div key={e.id} className="flex flex-wrap items-center justify-between gap-2 rounded-md border border-pl-border bg-pl-raised px-4 py-3">
                             <div>
-                                <p className="text-white font-medium">
+                                <p className="text-pl-text font-medium">
                                     {nameOf(e.app_slug)}
-                                    <span className="text-slate-400 font-normal"> · {TIER_LABELS[e.course_tier] || e.course_tier}</span>
+                                    <span className="text-pl-muted font-normal"> · {TIER_LABELS[e.course_tier] || e.course_tier}</span>
                                 </p>
-                                <p className="text-xs text-slate-500">{DOOR_LABELS[e.door] || e.door} · {new Date(e.created_at).toLocaleDateString()}</p>
+                                <p className="text-xs text-pl-muted">{DOOR_LABELS[e.door] || e.door} · {new Date(e.created_at).toLocaleDateString()}</p>
                             </div>
                             {act && act.to && (
                                 <Link to={act.to}>
-                                    <Button size="sm" className="bg-[#BFFF00] text-black hover:bg-[#a3d900] font-bold">
+                                    <Button size="sm" className="font-semibold">
                                         {act.kind === 'start' ? <PlayCircle className="w-4 h-4 mr-1" /> : <ArrowRight className="w-4 h-4 mr-1" />}
                                         {act.label}
                                     </Button>
@@ -269,46 +275,46 @@ const StudentHome = () => {
     });
 
     return (
-        <div className="space-y-8 animate-in fade-in duration-500 py-16">
+        <div className="space-y-8 animate-in fade-in duration-500 px-4 py-8 md:px-8 md:py-10">
         {/* N3.3 activation gate prompt (learners who haven't cleared it) */}
         <ActivationBanner />
 
         <div className="flex flex-col gap-2">
-            <h1 className="text-3xl font-bold tracking-tight text-white">
+            <h1 className="text-3xl font-bold tracking-tight text-pl-text">
                 Welcome{profile?.display_name ? `, ${profile.display_name}` : ''}
             </h1>
-            <p className="text-slate-400">Your NextGen Academy dashboard.</p>
+            <p className="text-pl-muted">Your NextGen Academy dashboard.</p>
         </div>
 
         <div className="grid gap-4 md:grid-cols-3">
-            <Card className="bg-[#1E293B] border-slate-800">
+            <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium text-slate-200">Active Enrollments</CardTitle>
-                    <GraduationCap className="h-4 w-4 text-[#BFFF00]" />
+                    <CardTitle className="text-sm font-medium text-pl-text">Active Enrollments</CardTitle>
+                    <GraduationCap className="h-4 w-4 text-pl-primary-text" aria-hidden="true" />
                 </CardHeader>
                 <CardContent>
-                    <div className="text-2xl font-bold text-white">{loading ? '—' : activeEnrollments.length}</div>
-                    <p className="text-xs text-slate-500">Courses you can work in right now</p>
+                    <div className="text-2xl font-bold text-pl-text tabular-nums">{loading ? '—' : activeEnrollments.length}</div>
+                    <p className="text-xs text-pl-muted">Courses you can work in right now</p>
                 </CardContent>
             </Card>
-            <Card className="bg-[#1E293B] border-slate-800">
+            <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium text-slate-200">Live Certificates</CardTitle>
-                    <Award className="h-4 w-4 text-emerald-400" />
+                    <CardTitle className="text-sm font-medium text-pl-text">Live Certificates</CardTitle>
+                    <Award className="h-4 w-4 text-pl-accent-text" aria-hidden="true" />
                 </CardHeader>
                 <CardContent>
-                    <div className="text-2xl font-bold text-white">{loading ? '—' : liveCerts.length}</div>
-                    <p className="text-xs text-slate-500">Valid certifications on your account</p>
+                    <div className="text-2xl font-bold text-pl-text tabular-nums">{loading ? '—' : liveCerts.length}</div>
+                    <p className="text-xs text-pl-muted">Valid certifications on your account</p>
                 </CardContent>
             </Card>
-            <Card className="bg-[#1E293B] border-slate-800">
+            <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium text-slate-200">Enroll</CardTitle>
-                    <BookOpen className="h-4 w-4 text-sky-400" />
+                    <CardTitle className="text-sm font-medium text-pl-text">Enroll</CardTitle>
+                    <BookOpen className="h-4 w-4 text-pl-primary-text" aria-hidden="true" />
                 </CardHeader>
                 <CardContent>
                     <Link to="/dashboard/enroll">
-                        <Button className="w-full bg-[#BFFF00] text-black hover:bg-[#a3d900] font-bold">
+                        <Button className="w-full font-semibold">
                             Browse Courses <ArrowRight className="w-4 h-4 ml-2" />
                         </Button>
                     </Link>
@@ -324,27 +330,27 @@ const StudentHome = () => {
         />
 
         {modules.map((mod) => (
-            <div key={mod} className="rounded-lg border border-slate-800 bg-[#1E293B] p-6 shadow-lg">
+            <div key={mod} className="rounded-lg border border-pl-border bg-pl-surface p-6 shadow-pl-sm">
                 <div className="flex items-baseline justify-between mb-1">
-                    <h3 className="text-lg font-medium text-slate-200">{moduleLabel(mod)}</h3>
-                    <span className="text-xs text-slate-500">{byModule[mod].length} course{byModule[mod].length === 1 ? '' : 's'}</span>
+                    <h3 className="text-lg font-medium text-pl-text">{moduleLabel(mod)}</h3>
+                    <span className="text-xs text-pl-muted">{byModule[mod].length} course{byModule[mod].length === 1 ? '' : 's'}</span>
                 </div>
-                <p className="text-slate-400 text-sm mb-4">Courses in the {moduleLabel(mod)} module, in learning-path order.</p>
+                <p className="text-pl-muted text-sm mb-4">Courses in the {moduleLabel(mod)} module, in learning-path order.</p>
                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                     {byModule[mod].map((app) => {
                         const cert = liveCerts.filter((c) => c.app_slug === app.slug)
                             .sort((a, b) => new Date(b.issued_at) - new Date(a.issued_at))[0];
                         return (
                             <Link key={app.slug} to={`/dashboard/apps/${app.slug}`}
-                                className="p-4 bg-slate-800 rounded border border-slate-700 hover:bg-slate-700 transition-all hover:scale-[1.02] block">
+                                className="block rounded-md border border-pl-border bg-pl-raised p-4 transition-all hover:border-pl-border-strong hover:shadow-pl-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus">
                                 <div className="flex items-center justify-between">
-                                    <span className="text-sm font-medium text-slate-200">{app.name}</span>
+                                    <span className="text-sm font-medium text-pl-text">{app.name}</span>
                                     {cert ? (
-                                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-pl-success-bg text-pl-success-text border border-pl-success/30">
                                             {TIER_LABELS[cert.tier] || cert.tier}
                                         </span>
                                     ) : enrolledSlugs.has(app.slug) ? (
-                                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-sky-500/10 text-sky-400 border border-sky-500/20">Enrolled · open</span>
+                                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-pl-info-bg text-pl-info-text border border-pl-info/30">Enrolled · open</span>
                                     ) : null}
                                 </div>
                             </Link>
@@ -354,9 +360,9 @@ const StudentHome = () => {
             </div>
         ))}
 
-        <div className="rounded-lg border border-slate-800 bg-[#1E293B] p-6 text-center">
-            <h3 className="text-sm font-medium text-slate-300">More modules are on the way</h3>
-            <p className="text-slate-500 text-xs mt-1">
+        <div className="rounded-lg border border-dashed border-pl-border-strong/60 bg-pl-surface p-6 text-center">
+            <h3 className="text-sm font-medium text-pl-text">More modules are on the way</h3>
+            <p className="text-pl-muted text-xs mt-1">
                 {Object.keys(MODULE_LABELS).filter((m) => !byModule[m]).map((m) => MODULE_LABELS[m]).join(' · ')}
             </p>
         </div>
@@ -381,11 +387,12 @@ const ModulePlaceholder = ({ name, icon: Icon, description }) => (
 const DashboardPage = () => {
   const { loading } = useAuth();
   const { viewRole } = useRole();
+  const tc = useThemeClass();
 
   if (loading) {
     return (
-        <div className="flex items-center justify-center h-screen bg-[#0F172A]">
-            <div className="text-white animate-pulse">Loading Dashboard...</div>
+        <div className={tc("flex items-center justify-center h-screen bg-[#0F172A]", "flex items-center justify-center h-screen")}>
+            <div className={tc("text-white animate-pulse", "text-pl-muted animate-pulse")}>Loading Dashboard...</div>
         </div>
     );
   }
