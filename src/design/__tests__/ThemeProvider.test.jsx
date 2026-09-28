@@ -155,10 +155,12 @@ describe('route registry and cold load', () => {
     expect(matchesRoute('/dashboard/apps/dca/x', '/dashboard/apps/:slug')).toBe(false);
   });
 
-  it('wave 0 themes the dashboard home only', () => {
-    expect(THEMED_ROUTES).toEqual(['/dashboard']);
-    expect(isThemedPath('/dashboard')).toBe(true);
-    for (const p of ['/', '/login', '/dashboard/enroll', '/dashboard/apps/dca', '/dashboard/modules/x', '/search']) {
+  it('wave 0 themes the dashboard home, and 1A the search page and the modules placeholder', () => {
+    expect(THEMED_ROUTES).toEqual(expect.arrayContaining(['/dashboard', '/search', '/dashboard/modules/*']));
+    for (const p of ['/dashboard', '/search', '/dashboard/modules', '/dashboard/modules/x']) {
+      expect({ p, themed: isThemedPath(p) }).toEqual({ p, themed: true });
+    }
+    for (const p of ['/', '/login', '/dashboard/enroll', '/dashboard/apps/dca', '/searchx']) {
       expect({ p, themed: isThemedPath(p) }).toEqual({ p, themed: false });
     }
   });
