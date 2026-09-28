@@ -4,6 +4,7 @@ import { parseLas } from '@petrolord/engines/engines/welldata/lasParse.js';
 import { depthUnitToMetres, prepareLogs, uniformStepM } from '@petrolord/engines/engines/welldata/lasImport.js';
 import { PanelShell, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 import UserLasPicker, { mergeFiles } from './UserLasPicker';
+import { useThemeClass } from '@/design/themeClass';
 
 // Import explorer: run the prepareLogs pipeline on any teaching file and
 // show what it decided. The converted flag and the kind are the two
@@ -41,6 +42,7 @@ function runImport(file) {
 }
 
 const ImportExplorer = () => {
+  const tc = useThemeClass();
   const [fileId, setFileId] = useState('feet_20');
   const [userFiles, setUserFiles] = useState([]);
   const allFiles = [...TEACHING_FILES, ...userFiles];
@@ -60,7 +62,7 @@ const ImportExplorer = () => {
         <div className="flex flex-wrap gap-2">
           {allFiles.map((f) => (
             <button key={f.id} type="button" onClick={() => setFileId(f.id)}
-              className="px-3 py-1.5 rounded-md border text-sm bg-gray-800 text-gray-300 border-gray-600">{f.label}</button>
+              className={tc('px-3 py-1.5 rounded-md border text-sm bg-gray-800 text-gray-300 border-gray-600', 'px-3 py-1.5 rounded-md border text-sm bg-pl-surface text-pl-text border-pl-border-strong')}>{f.label}</button>
           ))}
         </div>
       </PanelShell>
@@ -75,8 +77,8 @@ const ImportExplorer = () => {
         {allFiles.map((f) => (
           <button key={f.id} type="button" onClick={() => setFileId(f.id)}
             className={`px-3 py-1.5 rounded-md border text-sm ${fileId === f.id
-              ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold'
-              : 'bg-gray-800 text-gray-300 border-gray-600'}`}>
+              ? tc('bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold', 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold')
+              : tc('bg-gray-800 text-gray-300 border-gray-600', 'bg-pl-surface text-pl-text border-pl-border-strong')}`}>
             {f.label}
           </button>
         ))}
@@ -85,7 +87,7 @@ const ImportExplorer = () => {
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
-            <tr className="text-gray-400 border-b border-gray-700">
+            <tr className={tc('text-gray-400 border-b border-gray-700', 'text-pl-muted border-b border-pl-border')}>
               <th className="text-left py-2 pr-4">curve</th>
               <th className="text-left py-2 pr-4">kind</th>
               <th className="text-left py-2 pr-4">unit before</th>
@@ -95,12 +97,12 @@ const ImportExplorer = () => {
           </thead>
           <tbody>
             {r.prep.logs.map((l, i) => (
-              <tr key={l.mnemonic} className="border-b border-gray-800">
-                <td className="py-2 pr-4 text-white">{l.mnemonic}{i === 0 ? ' (index)' : ''}</td>
-                <td className="py-2 pr-4 text-gray-300">{l.kind || 'not recognised'}</td>
-                <td className="py-2 pr-4 text-gray-300">{l.sourceUnit || '-'}</td>
-                <td className="py-2 pr-4 text-gray-300">{l.unit || '-'}</td>
-                <td className={`py-2 ${l.converted ? 'text-[#BFFF00] font-semibold' : 'text-gray-500'}`}>
+              <tr key={l.mnemonic} className={tc('border-b border-gray-800', 'border-b border-pl-border')}>
+                <td className={tc('py-2 pr-4 text-white', 'py-2 pr-4 text-pl-text')}>{l.mnemonic}{i === 0 ? ' (index)' : ''}</td>
+                <td className={tc('py-2 pr-4 text-gray-300', 'py-2 pr-4 text-pl-text')}>{l.kind || 'not recognised'}</td>
+                <td className={tc('py-2 pr-4 text-gray-300', 'py-2 pr-4 text-pl-text')}>{l.sourceUnit || '-'}</td>
+                <td className={tc('py-2 pr-4 text-gray-300', 'py-2 pr-4 text-pl-text')}>{l.unit || '-'}</td>
+                <td className={`py-2 ${l.converted ? tc('text-[#BFFF00] font-semibold', 'text-pl-primary-text font-semibold') : tc('text-gray-500', 'text-pl-muted')}`}>
                   {l.converted ? 'YES' : 'no'}
                 </td>
               </tr>

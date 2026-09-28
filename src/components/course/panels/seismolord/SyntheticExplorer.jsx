@@ -1,11 +1,15 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, Legend,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, Legend,
 } from 'recharts';
 import {
   computeSynthetic, waveletRows, traceRows, TEACHING_FREQ_HZ, DT_MS, NS, V_OVERBURDEN_MS, WELL,
 } from '@/lib/seismolordTeaching';
 import { PanelShell, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { useThemeClass } from '@/design/themeClass';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, CHART_COLORS } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 
 // Synthetic explorer: build the seismogram from the teaching well at a
 // wavelet frequency the learner chooses, and read the summary the
@@ -21,6 +25,7 @@ const LOG_TOP = WELL.md[0];
 const LOG_BASE = WELL.md[WELL.md.length - 1];
 
 const SyntheticExplorer = () => {
+  const tc = useThemeClass();
   const [freq, setFreq] = useState(String(TEACHING_FREQ_HZ));
   const [vel, setVel] = useState(String(V_OVERBURDEN_MS));
   const [top, setTop] = useState(String(LOG_TOP));
@@ -69,7 +74,7 @@ const SyntheticExplorer = () => {
     <PanelShell title="Synthetic explorer"
       subtitle={`The teaching well from ${top} to ${base} m through the full pipeline: velocity and density to impedance, impedance to reflection coefficients, placed in time at a ${vel} m/s overburden and convolved with a ${fmt(f, 0)} Hz Ricker wavelet on a ${DT_MS} ms grid. It opens on the whole log at 2000 m/s and 25 Hz.`}>
       {inputs}
-      <div className="text-xs text-gray-500">
+      <div className={tc('text-xs text-gray-500', 'text-xs text-pl-muted')}>
         The whole-log reading is at {TEACHING_FREQ_HZ} Hz. Try 15 and 40 Hz too and watch both the
         strongest amplitude and its time move; then narrow the window and change the velocity.
       </div>
@@ -87,48 +92,44 @@ const SyntheticExplorer = () => {
 
       <div className="grid gap-4 lg:grid-cols-3">
         <div className="lg:col-span-1">
-          <p className="text-xs text-gray-400 mb-1">Ricker wavelet</p>
-          <div style={{ height: 180 }}>
-            <ResponsiveContainer width="100%" height="100%">
+          <p className={tc('text-xs text-gray-400 mb-1', 'text-xs text-pl-muted mb-1')}>Ricker wavelet</p>
+          <ChartFrame height={180}>
               <LineChart data={wRows} margin={{ top: 5, right: 8, bottom: 5, left: 0 }}>
-                <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-                <XAxis dataKey="t" tick={{ fill: '#94a3b8', fontSize: 10 }} />
-                <YAxis domain={[-0.6, 1.05]} tick={{ fill: '#94a3b8', fontSize: 10 }} />
-                <Tooltip contentStyle={{ background: '#0F172A', border: '1px solid #334155', color: '#fff' }}
+                <CartesianGrid {...GRID_STYLE} />
+                <XAxis dataKey="t" tick={AXIS_TICK} />
+                <YAxis domain={[-0.6, 1.05]} tick={AXIS_TICK} />
+                <Tooltip contentStyle={TOOLTIP_STYLE}
                   formatter={(v) => fmt(Number(v))} />
-                <ReferenceLine y={0} stroke="#475569" />
-                <Line type="monotone" dataKey="a" name="amplitude" stroke="#BFFF00" dot={false} strokeWidth={1.5} />
+                <ReferenceLine y={0} stroke={SVG_CHART.reference} />
+                <Line type="monotone" dataKey="a" name="amplitude" stroke={seriesColor(0)} dot={false} strokeWidth={1.5} />
               </LineChart>
-            </ResponsiveContainer>
-          </div>
+          </ChartFrame>
         </div>
 
         <div className="lg:col-span-2">
-          <p className="text-xs text-gray-400 mb-1">Reflectivity and synthetic trace against two-way time</p>
-          <div style={{ height: 180 }}>
-            <ResponsiveContainer width="100%" height="100%">
+          <p className={tc('text-xs text-gray-400 mb-1', 'text-xs text-pl-muted mb-1')}>Reflectivity and synthetic trace against two-way time</p>
+          <ChartFrame height={180}>
               <LineChart data={tRows} margin={{ top: 5, right: 8, bottom: 5, left: 0 }}>
-                <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-                <XAxis dataKey="twt" tick={{ fill: '#94a3b8', fontSize: 10 }} />
-                <YAxis tick={{ fill: '#94a3b8', fontSize: 10 }} />
-                <Tooltip contentStyle={{ background: '#0F172A', border: '1px solid #334155', color: '#fff' }}
+                <CartesianGrid {...GRID_STYLE} />
+                <XAxis dataKey="twt" tick={AXIS_TICK} />
+                <YAxis tick={AXIS_TICK} />
+                <Tooltip contentStyle={TOOLTIP_STYLE}
                   formatter={(v) => fmt(Number(v), 6)} />
-                <Legend wrapperStyle={{ fontSize: 10 }} />
-                <ReferenceLine y={0} stroke="#475569" />
-                <ReferenceLine x={s.rcPeakTwt} stroke="#f472b6" strokeDasharray="4 3" />
-                <ReferenceLine x={s.synPeakTwt} stroke="#38bdf8" strokeDasharray="4 3" />
-                <Line type="monotone" dataKey="rc" name="reflectivity" stroke="#f472b6" dot={false} strokeWidth={1.2} />
-                <Line type="monotone" dataKey="syn" name="synthetic" stroke="#38bdf8" dot={false} strokeWidth={1.5} />
+                <Legend wrapperStyle={{ fontSize: 10, color: CHART_COLORS.legendText }} />
+                <ReferenceLine y={0} stroke={SVG_CHART.reference} />
+                <ReferenceLine x={s.rcPeakTwt} stroke={seriesColor(4)} strokeDasharray="4 3" />
+                <ReferenceLine x={s.synPeakTwt} stroke={seriesColor(0)} strokeDasharray="4 3" />
+                <Line type="monotone" dataKey="rc" name="reflectivity" stroke={seriesColor(4)} dot={false} strokeWidth={1.2} />
+                <Line type="monotone" dataKey="syn" name="synthetic" stroke={seriesColor(0)} dot={false} strokeWidth={1.5} />
               </LineChart>
-            </ResponsiveContainer>
-          </div>
+          </ChartFrame>
         </div>
       </div>
 
       <Note>
-        Pink dashed line: the strongest reflection coefficient. Blue dashed line: the strongest
+        Violet dashed line: the strongest reflection coefficient. Blue dashed line: the strongest
         synthetic amplitude. They sit at different times because the trace is a sum of overlapping
-        wavelet copies, not a picture of individual reflections. The grid runs 0 to {(NS - 1) * DT_MS} ms
+        wavelet copies, so no single peak marks a single reflection. The grid runs 0 to {(NS - 1) * DT_MS} ms
         while the log occupies only {fmt(s.twtLogTop, 0)} to {fmt(s.twtLogBase, 0)} ms; samples outside
         the live window are gaps and are excluded from every statistic here.
       </Note>

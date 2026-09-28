@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { readUserFiles } from '@/lib/welldataTeaching';
+import { useThemeClass } from '@/design/themeClass';
 
 // "Open your own LAS files": reads files from the learner's computer (the
 // capstone case files, or any LAS they have) so a panel can run them through
 // the same parser and pipeline as the teaching files. Nothing is uploaded;
 // the text is read in the browser.
 const UserLasPicker = ({ onFiles, label = 'Open your own LAS files' }) => {
+  const tc = useThemeClass();
   const [error, setError] = useState(null);
   return (
-    <div className="flex flex-wrap items-center gap-2 text-xs text-gray-400">
-      <label className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-dashed border-gray-500 text-gray-300 cursor-pointer hover:border-[#BFFF00]">
+    <div className={tc('flex flex-wrap items-center gap-2 text-xs text-gray-400', 'flex flex-wrap items-center gap-2 text-xs text-pl-muted')}>
+      <label className={tc('inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-dashed border-gray-500 text-gray-300 cursor-pointer hover:border-[#BFFF00]', 'inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-dashed border-pl-border-strong text-pl-text cursor-pointer hover:border-pl-primary')}>
         {label}
         <input type="file" multiple accept=".las,.LAS,.txt" className="hidden" data-testid="user-las-input"
           onChange={async (e) => {
@@ -23,7 +25,7 @@ const UserLasPicker = ({ onFiles, label = 'Open your own LAS files' }) => {
             e.target.value = '';
           }} />
       </label>
-      {error && <span className="text-red-400">Could not read that file: {error}</span>}
+      {error && <span className={tc('text-red-400', 'text-pl-danger-text')}>Could not read that file: {error}</span>}
     </div>
   );
 };

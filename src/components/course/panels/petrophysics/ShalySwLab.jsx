@@ -4,6 +4,7 @@ import {
 } from './typewellLab';
 import { useWell } from './wellContext';
 import { PanelShell, NumField, Tile, TileGrid, FieldGrid, Note } from './panelKit';
+import { useThemeClass } from '@/design/themeClass';
 
 // Shaly-sand saturation lab: Archie, Simandoux and Indonesia side by
 // side on the course conventions (neutron-density porosity, linear Vsh),
@@ -15,6 +16,7 @@ const METHODS = [
 ];
 
 const ShalySwLab = () => {
+  const tc = useThemeClass();
   const well = useWell();
   const { DEPTH, ZONES } = well;
   const [p, setP] = useState({
@@ -70,17 +72,17 @@ const ShalySwLab = () => {
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="text-gray-400 text-xs border-b border-gray-700">
+                <tr className={tc('text-gray-400 text-xs border-b border-gray-700', 'text-pl-muted text-xs border-b border-pl-border')}>
                   <th className="text-left py-2 pr-4">Model</th>
                   <th className="text-left py-2 pr-4">Sample at {DEPTH[iSample]} m</th>
                   <th className="text-left py-2 pr-4">SAND_A mean</th>
                   <th className="text-left py-2 pr-4">SAND_B mean</th>
                 </tr>
               </thead>
-              <tbody className="text-gray-300">
+              <tbody className={tc('text-gray-300', 'text-pl-text')}>
                 {METHODS.map(([method, label]) => (
-                  <tr key={method} className="border-b border-gray-800">
-                    <td className="py-2 pr-4 text-white">{label}</td>
+                  <tr key={method} className={tc('border-b border-gray-800', 'border-b border-pl-border')}>
+                    <td className={tc('py-2 pr-4 text-white', 'py-2 pr-4 text-pl-text')}>{label}</td>
                     <td className="py-2 pr-4">{fmt(sw[method][iSample])}</td>
                     <td className="py-2 pr-4">{fmt(zoneMean(sw[method], ZONES.SAND_A, well))}</td>
                     <td className="py-2 pr-4">{fmt(zoneMean(sw[method], ZONES.SAND_B, well))}</td>

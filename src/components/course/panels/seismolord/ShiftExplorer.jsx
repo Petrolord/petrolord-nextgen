@@ -3,6 +3,9 @@ import {
   computeSynthetic, shiftScan, TEACHING_LAG_MS, WITHHELD_LAG_MS, DT_MS,
 } from '@/lib/seismolordTeaching';
 import { PanelShell, SelectField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { useThemeClass } from '@/design/themeClass';
+import SvgChartFrame from '@/components/charts/SvgChartFrame';
+import { seriesColor, SVG_CHART } from '@/utils/chartSvg';
 
 // Shift explorer: the bulk-shift correlation scan, plus the frequency
 // switch the capstone requires. The scan curve is drawn rather than
@@ -24,6 +27,7 @@ const TRACES = [
 ];
 
 const ShiftExplorer = () => {
+  const tc = useThemeClass();
   const [freq, setFreq] = useState(25);
   const [trace, setTrace] = useState('teaching');
 
@@ -57,40 +61,36 @@ const ShiftExplorer = () => {
         <SelectField label="Observed trace" value={trace} onChange={setTrace} options={TRACES} />
       </div>
       <div className="flex flex-wrap gap-2 items-center">
-        <span className="text-xs text-gray-400">wavelet frequency</span>
+        <span className={tc('text-xs text-gray-400', 'text-xs text-pl-muted')}>wavelet frequency</span>
         {FREQS.map((f) => (
           <button key={f} type="button" onClick={() => setFreq(f)}
             className={`px-3 py-1.5 rounded-md border text-sm ${freq === f
-              ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold'
-              : 'bg-gray-800 text-gray-300 border-gray-600'}`}>
+              ? tc('bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold', 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold')
+              : tc('bg-gray-800 text-gray-300 border-gray-600', 'bg-pl-surface text-pl-text border-pl-border-strong')}`}>
             {f} Hz
           </button>
         ))}
-        <span className="text-xs text-gray-500">the frequency moves the amplitude tiles, never the scan</span>
+        <span className={tc('text-xs text-gray-500', 'text-xs text-pl-muted')}>the frequency moves the amplitude tiles, never the scan</span>
       </div>
 
-      <div className="overflow-x-auto">
-        <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ minWidth: 460 }} role="img"
-          aria-label="Correlation against bulk shift lag">
-          <rect x="0" y="0" width={W} height={H} fill="#0F172A" />
-          <line x1={PAD.left} y1={sy(0)} x2={W - PAD.right} y2={sy(0)} stroke="#334155" strokeWidth="1" />
-          <line x1={sx(0)} y1={PAD.top} x2={sx(0)} y2={H - PAD.bottom} stroke="#334155" strokeWidth="1" strokeDasharray="3 4" />
-          <polyline points={pts} fill="none" stroke="#38bdf8" strokeWidth="1.8" />
-          <circle cx={sx(scan.lagMs)} cy={sy(scan.corr)} r="4" fill="#BFFF00" stroke="#fff" strokeWidth="1" />
-          <text x={sx(scan.lagMs)} y={sy(scan.corr) - 10} fill="#BFFF00" fontSize="10" textAnchor="middle">
-            best {scan.lagMs} ms, corr {fmt(scan.corr, 3)}
-          </text>
-          <circle cx={sx(0)} cy={sy(zero.corr)} r="3.5" fill="#f472b6" />
-          <text x={sx(0) + 6} y={sy(zero.corr) + 4} fill="#f472b6" fontSize="9">
-            zero lag {fmt(zero.corr, 4)}
-          </text>
-          <text x="8" y={sy(1) + 3} fill="#64748b" fontSize="9">1.0</text>
-          <text x="8" y={sy(0) + 3} fill="#64748b" fontSize="9">0.0</text>
-          <text x={PAD.left} y={H - 12} fill="#64748b" fontSize="9">{lagMin} ms</text>
-          <text x={W - PAD.right} y={H - 12} fill="#64748b" fontSize="9" textAnchor="end">{lagMax} ms</text>
-          <text x={W / 2} y={H - 12} fill="#64748b" fontSize="9" textAnchor="middle">lag applied to the synthetic</text>
-        </svg>
-      </div>
+      <SvgChartFrame width={W} height={H} label="Correlation against bulk shift lag" minWidth={460} maxWidth={720}>
+        <line x1={PAD.left} y1={sy(0)} x2={W - PAD.right} y2={sy(0)} stroke={SVG_CHART.axis} strokeWidth="1" />
+        <line x1={sx(0)} y1={PAD.top} x2={sx(0)} y2={H - PAD.bottom} stroke={SVG_CHART.axis} strokeWidth="1" strokeDasharray="3 4" />
+        <polyline points={pts} fill="none" stroke={seriesColor(1)} strokeWidth="1.8" />
+        <circle cx={sx(scan.lagMs)} cy={sy(scan.corr)} r="4" fill={seriesColor(0)} stroke={SVG_CHART.marker} strokeWidth="1" />
+        <text x={sx(scan.lagMs)} y={sy(scan.corr) - 10} fill={seriesColor(0)} fontSize="10" textAnchor="middle">
+          best {scan.lagMs} ms, corr {fmt(scan.corr, 3)}
+        </text>
+        <circle cx={sx(0)} cy={sy(zero.corr)} r="3.5" fill={seriesColor(4)} />
+        <text x={sx(0) + 6} y={sy(zero.corr) + 4} fill={seriesColor(4)} fontSize="9">
+          zero lag {fmt(zero.corr, 4)}
+        </text>
+        <text x="8" y={sy(1) + 3} fill={SVG_CHART.tick} fontSize="9">1.0</text>
+        <text x="8" y={sy(0) + 3} fill={SVG_CHART.tick} fontSize="9">0.0</text>
+        <text x={PAD.left} y={H - 12} fill={SVG_CHART.tick} fontSize="9">{lagMin} ms</text>
+        <text x={W - PAD.right} y={H - 12} fill={SVG_CHART.tick} fontSize="9" textAnchor="end">{lagMax} ms</text>
+        <text x={W / 2} y={H - 12} fill={SVG_CHART.tick} fontSize="9" textAnchor="middle">lag applied to the synthetic</text>
+      </SvgChartFrame>
 
       <TileGrid>
         <Tile label="Suggested bulk shift" value={String(scan.lagMs)} unit="ms" />
