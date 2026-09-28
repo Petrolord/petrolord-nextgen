@@ -55,7 +55,7 @@ const Window = () => {
           <CartesianGrid {...GRID_STYLE} />
           <XAxis dataKey="md" type="number" domain={['auto', 'auto']} tick={AXIS_TICK}
             label={{ value: 'measured depth (m)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
-          <YAxis domain={[900, 3200]} tick={AXIS_TICK}
+          <YAxis domain={[900, 3200]} tick={AXIS_TICK} tickFormatter={(v) => fmt(v, 0)}
             label={{ value: 'EMW (kg/m3)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP_STYLE}
             formatter={(v) => fmt(v, 3)} />
