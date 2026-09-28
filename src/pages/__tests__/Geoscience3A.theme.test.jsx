@@ -13,7 +13,7 @@ import { screen, cleanup, fireEvent, waitFor } from '@testing-library/react';
 import { installDomShims } from '@/design/testing/domShims';
 import { describeScreenTheme, expectNoLegacyChrome, getScopeRoot } from '@/design/testing/themeAssertions';
 import { isThemedPath } from '@/design/scopePaths';
-import { renderApp, USER_ID } from './frameHarness';
+import { renderCourseApp as renderApp, USER_ID } from './geo3aHarness';
 import { GEO3A_APPS } from './geo3aStubs';
 
 vi.mock('@/lib/customSupabaseClient', async () => (await import('./frameStubs')).supabaseStub());
@@ -64,7 +64,7 @@ for (const app of GEO3A_APPS) {
         globalThis.__geo3a = { pass: tier !== 'intermediate' };
         await waitFor(() => expect(submit.disabled).toBe(false));
         fireEvent.click(submit);
-        await screen.findByText(/within tolerance|Passed/, undefined, { timeout: 5000 });
+        await screen.findAllByText(/within tolerance|Passed/, undefined, { timeout: 5000 });
         expectNoLegacyChrome();
         expectChartsWhite();
       }

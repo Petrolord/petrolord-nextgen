@@ -196,3 +196,47 @@ admins (`/dashboard/admin/super-admins`) and system settings
 - Tests: one theme test per screen in `src/pages/__tests__/` on a shared
   harness (`admin2bHarness.jsx`, `admin2bStubs.js` with a local Supabase
   fake that answers the two table reads and throws on anything else).
+
+## Batch 3A: geoscience I course apps (as built)
+
+Petrophysics, Well Data, Well Correlation, Seismolord and Mapping
+(`/dashboard/apps/<slug>`, exact paths) are on the roles and registered in
+`src/design/rollout/w3a.js`.
+
+- The five learning pages and `petrophysics/WellPicker` are used by one
+  screen each, so they moved straight to roles. Lime buttons became the
+  default `Button`, tier toggles use `primary` for the active tier, the
+  Learning Mode pill is an accent (gold) tint, certificate numbers and the
+  award icon are `accent-text`, pass and fail boxes are the success and
+  danger roles with their words, and the capstone toasts use the success
+  roles.
+- The 16 panels the course reader also embeds (`panelRegistry.js`), with
+  their helpers `welldata/UserLasPicker` and the two `caseInputs`, are
+  scope-aware (`useThemeClass`, two-argument form) while the reader is
+  unmigrated. `panels/__tests__/geo3aPanelsLegacy.test.jsx` proves every
+  class outside the charts is unchanged outside a scope, against
+  `fixtures/geo3aLegacyClasses.json` captured from main `1fbbedf34`
+  (`UPDATE_GEO3A_LEGACY=1`; do not recapture while the reader is
+  unmigrated).
+- Every chart is on the chart kit in both places: Recharts in `ChartFrame`
+  (with `GRID_STYLE`, `AXIS_TICK`, `TOOLTIP_STYLE`), hand-made SVG in
+  `SvgChartFrame` (`minWidth` as before, `maxWidth` 720). Series follow the
+  old-dark-chart map; pink `#f472b6` went to `seriesColor(4)` (violet), or
+  `seriesColor(3)` where violet was already a series (Flatten explorer).
+  White point outlines stay white; the dark well dots on the maps became
+  white dots with a dark outline, so "white circles are wells" still reads
+  true. The map colour ramps are pale to deep blue (depth) and pale to deep
+  green (thickness) on the white plate, and the Mapping page contours are
+  darker hues of the same ramp.
+- Copy that named a chart colour follows the new colours (Porosity lab and
+  Petrophysics shading, Pickett water line, Synthetic explorer reference
+  line, Map explorer prospect). Lines touched follow the copy rule; the
+  Petrophysics net-pay empty cells show `n/a`.
+- Status words on the panels: a dead curve is `danger-text`; a non-uniform
+  step, a missing TOP_B and a missing pick are `warning-text`.
+- Tests: `src/pages/__tests__/Geoscience3A.theme.test.jsx` (harness
+  `geo3aHarness.jsx` with `HelmetProvider` and the toaster, stubs
+  `geo3aStubs.js` on top of `frameStubs.js`) walks each app through its
+  three tiers, both capstone outcomes, the Learning Mode gate and dark;
+  `geo3aPanelsTheme.test.jsx` renders every panel scene inside a scope in
+  light and dark.
