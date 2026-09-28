@@ -213,7 +213,7 @@ const AdminCourseHandbookPage = () => {
 
         {courses.length > 1 && (
           <Tabs value={String(selected)} onValueChange={(v) => setSelected(Number(v))} className="print:hidden">
-            <TabsList className="flex-wrap h-auto">
+            <TabsList className="flex-wrap h-auto justify-start">
               {courses.map((c, i) => (
                 <TabsTrigger key={`${c.app_slug}/${c.tier}`} value={String(i)}>
                   {appName(c.app_slug)} ({TIER_LABELS[c.tier] || c.tier})

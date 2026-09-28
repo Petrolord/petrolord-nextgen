@@ -86,7 +86,7 @@ const CourseHomePage = () => {
 
         {tiers.length > 1 && (
           <Tabs value={tier} onValueChange={(t) => navigate(courseTierPath(appSlug, t))}>
-            <TabsList>
+            <TabsList className="flex-wrap h-auto justify-start">
               {tiers.map((t) => (
                 <TabsTrigger key={t} value={t}>
                   {TIER_LABELS[t] || t}
