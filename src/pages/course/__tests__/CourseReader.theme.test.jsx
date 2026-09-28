@@ -13,7 +13,7 @@
 // rendered for real: inside the scope it is on roles too.
 import React from 'react';
 import { describe, it, expect, vi, beforeAll, beforeEach, afterEach } from 'vitest';
-import { screen, cleanup } from '@testing-library/react';
+import { screen, cleanup, waitFor } from '@testing-library/react';
 import { installDomShims } from '@/design/testing/domShims';
 import {
   describeScreenTheme, expectNoLegacyChrome, getScopeRoot, hasLegacyChrome,
@@ -146,9 +146,11 @@ describe('Course reader, further states', () => {
   });
 
   it('a route the rollout has not reached keeps the legacy frame (negative control)', async () => {
-    renderRoute('/dashboard/modules/anything');
-    await screen.findByText('Engineering Modules');
-    expect(document.querySelector('[data-pl-theme]')).toBeNull();
+    // the course's learning page belongs to its course app batch (3A)
+    renderRoute(`/dashboard/apps/${APP}`);
+    await waitFor(() => expect(document.querySelector('header')).toBeTruthy());
+    expect(screen.queryByTestId('signed-in-theme-scope')).toBeNull();
+    expect(screen.queryByTestId('theme-toggle')).toBeNull();
     expect(document.querySelector('header').className).toContain('bg-[#1E293B]');
   });
 });
