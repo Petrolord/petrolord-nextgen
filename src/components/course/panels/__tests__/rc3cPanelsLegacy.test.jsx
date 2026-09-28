@@ -13,6 +13,7 @@
 //    same white charts as the learning pages. No lime or dark plate is left
 //    inside a chart.
 import fs from 'node:fs';
+import process from 'node:process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, it, expect, afterEach, beforeAll } from 'vitest';
