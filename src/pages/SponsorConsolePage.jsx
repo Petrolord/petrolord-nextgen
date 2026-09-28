@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Input, THEMED_INPUT } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { useToast } from '@/components/ui/use-toast';
@@ -23,9 +23,13 @@ import { courseName, courseNameFrom } from '@/lib/appNames';
 // each sponsored learner's progress and scores. Petrolord admins
 // see every sponsor. All mutations are definer functions; this page is a
 // shell over them, not the enforcement layer.
+//
+// Design system (batch 2A): the console renders inside the signed-in scope
+// (src/design/rollout/w2a.js) on theme roles. Pool states and seat status
+// use the status text roles next to their words.
 
 const STATE_LABEL = { active: 'Active', closed: 'Closed', expired: 'Expired', not_started: 'Not started yet', full: 'All seats used' };
-const STATE_CLS = { active: 'text-emerald-400', closed: 'text-gray-400', expired: 'text-red-400', not_started: 'text-yellow-400', full: 'text-yellow-400' };
+const STATE_CLS = { active: 'text-pl-success-text', closed: 'text-pl-muted', expired: 'text-pl-danger-text', not_started: 'text-pl-warning-text', full: 'text-pl-warning-text' };
 const fmtDate = (iso) => (iso ? new Date(iso).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) : '');
 
 function toCsv(rows) {
@@ -87,7 +91,7 @@ const SponsorConsolePage = () => {
     setBusy(true);
     try {
       const res = await sponsorAssign({ poolId: pool.id, email: email.trim(), appSlug, tier, note: note || null });
-      toast({ title: res.seat_consumed === false ? 'Enrolled, no seat used' : 'Seat assigned', description: assignToast({ ...res, email }, courseNameFrom(apps, appSlug), TIER_LABELS[tier]), className: 'bg-[#BFFF00] text-slate-900' });
+      toast({ title: res.seat_consumed === false ? 'Enrolled, no seat used' : 'Seat assigned', description: assignToast({ ...res, email }, courseNameFrom(apps, appSlug), TIER_LABELS[tier]) });
       setEmail(''); setNote('');
       await refresh(); await loadReport(pool.id); setProgressKey((k) => k + 1);
     } catch (err) {
@@ -118,11 +122,11 @@ const SponsorConsolePage = () => {
   };
 
   if (loading) {
-    return <div className="flex items-center justify-center h-64"><Loader2 className="h-8 w-8 animate-spin text-[#BFFF00]" /></div>;
+    return <div className="flex items-center justify-center h-64"><Loader2 className="h-8 w-8 animate-spin text-pl-primary-text" /></div>;
   }
   if (!pools.length) {
     return (
-      <div className="p-8 text-gray-400" data-testid="sponsor-none">
+      <div className="px-4 py-8 sm:p-8 text-pl-muted" data-testid="sponsor-none">
         You are not a training lead for any sponsor. A Petrolord admin adds leads from the Academy Doors console.
       </div>
     );
@@ -130,18 +134,17 @@ const SponsorConsolePage = () => {
 
   const state = poolState(pool);
   const left = pool ? daysLeft(pool) : null;
-  const inputCls = 'bg-gray-700 text-white border-gray-600';
 
   return (
     <>
       <Helmet><title>Sponsor console - NextGen Academy</title></Helmet>
-      <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="max-w-6xl mx-auto p-6 space-y-6">
+      <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="max-w-6xl mx-auto px-4 py-6 sm:p-6 space-y-6">
         <div className="flex items-start justify-between gap-4 flex-wrap">
           <div>
-            <h1 className="text-3xl font-bold text-white">Sponsor console</h1>
-            <p className="mt-1 text-gray-400">Assign your organisation's enrolments, reassign them when roles change, see where every seat went, and follow each learner's progress and scores.</p>
+            <h1 className="text-3xl font-bold tracking-tight text-pl-text">Sponsor console</h1>
+            <p className="mt-1 text-pl-muted">Assign your organisation's enrolments, reassign them when roles change, see where every seat went, and follow each learner's progress and scores.</p>
           </div>
-          <Button variant="outline" onClick={() => { refresh(); loadReport(poolId); setProgressKey((k) => k + 1); }} className="border-gray-600 text-gray-200"><RefreshCw className="h-4 w-4 mr-2" />Refresh</Button>
+          <Button variant="outline" onClick={() => { refresh(); loadReport(poolId); setProgressKey((k) => k + 1); }}><RefreshCw className="h-4 w-4 mr-2" />Refresh</Button>
         </div>
 
         <div className="grid gap-4 md:grid-cols-3">
@@ -149,10 +152,11 @@ const SponsorConsolePage = () => {
             const st = poolState(p);
             return (
               <button key={p.id} type="button" onClick={() => setPoolId(p.id)} data-testid={`sponsor-pool-${p.id}`}
-                className={`text-left rounded-lg border p-4 bg-[#1E293B] ${p.id === poolId ? 'border-[#BFFF00]' : 'border-gray-700 hover:border-gray-500'}`}>
-                <div className="text-xs text-gray-400">{p.sponsor_name}</div>
-                <div className="text-lg font-semibold text-white">{p.name}</div>
-                <div className="text-2xl font-bold text-white mt-1">{seatsRemaining(p)} <span className="text-sm font-normal text-gray-400">of {p.seats} seats left</span></div>
+                aria-pressed={p.id === poolId}
+                className={`text-left rounded-lg border p-4 bg-pl-surface shadow-pl-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus ${p.id === poolId ? 'border-pl-primary ring-1 ring-pl-primary' : 'border-pl-border hover:border-pl-border-strong'}`}>
+                <div className="text-xs text-pl-muted">{p.sponsor_name}</div>
+                <div className="text-lg font-semibold text-pl-text">{p.name}</div>
+                <div className="text-2xl font-bold text-pl-text tabular-nums mt-1">{seatsRemaining(p)} <span className="text-sm font-normal text-pl-muted">of {p.seats} seats left</span></div>
                 <div className={`text-xs mt-1 ${STATE_CLS[st]}`}>{STATE_LABEL[st]}{p.valid_until ? `, until ${fmtDate(p.valid_until)}` : ''}</div>
               </button>
             );
@@ -161,9 +165,9 @@ const SponsorConsolePage = () => {
 
         {pool && (
           <div className="grid gap-6 lg:grid-cols-3">
-            <Card className="bg-[#1E293B] border-gray-700 lg:col-span-1">
+            <Card className="lg:col-span-1">
               <CardHeader>
-                <CardTitle className="text-white flex items-center gap-2"><UserPlus className="h-4 w-4" />Assign a seat</CardTitle>
+                <CardTitle className="text-pl-text flex items-center gap-2"><UserPlus className="h-4 w-4 text-pl-primary-text" aria-hidden="true" />Assign a seat</CardTitle>
                 <CardDescription>
                   {formatPrice(pool) ? `${formatPrice(pool)} for ${pool.seats} seats. ` : ''}
                   {left != null ? (left >= 0 ? `${left} days left. ` : 'Expired. ') : ''}
@@ -172,91 +176,91 @@ const SponsorConsolePage = () => {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <Label className="text-gray-300 mb-1 block">Learner email</Label>
-                  <Input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="name@company.com" className={inputCls} data-testid="sponsor-assign-email" />
+                  <Label className="text-pl-text mb-1 block">Learner email</Label>
+                  <Input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="name@company.com" data-testid="sponsor-assign-email" />
                 </div>
                 <div>
-                  <Label className="text-gray-300 mb-1 block">Tier</Label>
-                  <select value={tier} onChange={(e) => setTier(e.target.value)} className={`${inputCls} w-full rounded-md h-10 px-3`} data-testid="sponsor-assign-tier">
+                  <Label className="text-pl-text mb-1 block">Tier</Label>
+                  <select value={tier} onChange={(e) => setTier(e.target.value)} className={THEMED_INPUT} data-testid="sponsor-assign-tier">
                     {TIERS.filter((t) => poolCovers(pool, appSlug || '__any__', t) || !(pool.tiers || []).length || (pool.tiers || []).includes(t)).map((t) => <option key={t} value={t}>{TIER_LABELS[t]}</option>)}
                   </select>
                 </div>
                 <div>
-                  <Label className="text-gray-300 mb-1 block">Course</Label>
-                  <select value={appSlug} onChange={(e) => setAppSlug(e.target.value)} className={`${inputCls} w-full rounded-md h-10 px-3`} data-testid="sponsor-assign-course">
+                  <Label className="text-pl-text mb-1 block">Course</Label>
+                  <select value={appSlug} onChange={(e) => setAppSlug(e.target.value)} className={THEMED_INPUT} data-testid="sponsor-assign-course">
                     {availableApps.map((a) => <option key={a.slug} value={a.slug}>{a.name}</option>)}
                   </select>
-                  {!availableApps.length && <p className="text-xs text-yellow-400 mt-1">This pool covers no course at this tier.</p>}
+                  {!availableApps.length && <p className="text-xs text-pl-warning-text mt-1">This pool covers no course at this tier.</p>}
                   {isBonusTier(apps.find((a) => a.slug === appSlug), tier) && (
-                    <p className="text-xs text-emerald-400 mt-1" data-testid="sponsor-bonus-note">Bonus tier: this enrolment takes no seat from the pool.</p>
+                    <p className="text-xs text-pl-success-text mt-1" data-testid="sponsor-bonus-note">Bonus tier: this enrolment takes no seat from the pool.</p>
                   )}
                   {apps.find((a) => a.slug === appSlug)?.prereq_slug && (
-                    <p className="text-xs text-gray-400 mt-1" data-testid="sponsor-prereq-note">
+                    <p className="text-xs text-pl-muted mt-1" data-testid="sponsor-prereq-note">
                       Prerequisite: {apps.find((a) => a.slug === apps.find((b) => b.slug === appSlug)?.prereq_slug)?.name || 'the root course'} (Associate certification, or the free waiver exam the learner takes from their Enroll page).
                     </p>
                   )}
                 </div>
                 <div>
-                  <Label className="text-gray-300 mb-1 block">Note (development plan, role)</Label>
-                  <Input value={note} onChange={(e) => setNote(e.target.value)} placeholder="optional" className={inputCls} data-testid="sponsor-assign-note" />
+                  <Label className="text-pl-text mb-1 block">Note (development plan, role)</Label>
+                  <Input value={note} onChange={(e) => setNote(e.target.value)} placeholder="optional" data-testid="sponsor-assign-note" />
                 </div>
-                <Button onClick={handleAssign} disabled={busy || !canAssign(pool) || !email.trim() || !appSlug} className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold" data-testid="sponsor-assign">
+                <Button onClick={handleAssign} disabled={busy || !canAssign(pool) || !email.trim() || !appSlug} className="font-semibold" data-testid="sponsor-assign">
                   {busy ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Briefcase className="mr-2 h-4 w-4" />}
                   Assign seat
                 </Button>
-                {!canAssign(pool) && <p className="text-xs text-gray-400">{STATE_LABEL[state]}: no new assignments from this pool.</p>}
+                {!canAssign(pool) && <p className="text-xs text-pl-muted">{STATE_LABEL[state]}: no new assignments from this pool.</p>}
               </CardContent>
             </Card>
 
-            <Card className="bg-[#1E293B] border-gray-700 lg:col-span-2">
-              <CardHeader className="flex flex-row items-start justify-between gap-4">
+            <Card className="lg:col-span-2 min-w-0">
+              <CardHeader className="flex flex-row flex-wrap items-start justify-between gap-4 space-y-0">
                 <div>
-                  <CardTitle className="text-white">Where the seats went</CardTitle>
+                  <CardTitle className="text-pl-text">Where the seats went</CardTitle>
                   <CardDescription>
                     {summary.total} assignment{summary.total === 1 ? '' : 's'}: {summary.active} active, {summary.cancelled} cancelled ({summary.returned} seat{summary.returned === 1 ? '' : 's'} returned), {summary.certified} certified.
                   </CardDescription>
                 </div>
-                <Button variant="outline" onClick={exportCsv} disabled={!report.length} className="border-gray-600 text-gray-200"><Download className="h-4 w-4 mr-2" />CSV</Button>
+                <Button variant="outline" onClick={exportCsv} disabled={!report.length}><Download className="h-4 w-4 mr-2" />CSV</Button>
               </CardHeader>
               <CardContent>
-                {reportLoading ? <Loader2 className="h-5 w-5 animate-spin text-[#BFFF00]" /> : (
+                {reportLoading ? <Loader2 className="h-5 w-5 animate-spin text-pl-primary-text" /> : (
                   <div className="overflow-x-auto">
                     <table className="w-full text-sm" data-testid="sponsor-report">
-                      <thead className="text-xs uppercase text-gray-500">
+                      <thead className="text-xs uppercase text-pl-muted">
                         <tr><th className="text-left py-1 pr-3">Learner</th><th className="text-left py-1 pr-3">Course</th><th className="text-left py-1 pr-3">Tier</th><th className="text-left py-1 pr-3">Status</th><th className="text-left py-1 pr-3">Assigned</th><th className="text-left py-1 pr-3">Note</th><th></th></tr>
                       </thead>
                       <tbody>
                         {report.map((r) => (
-                          <tr key={r.assignment_id} className="border-t border-gray-700 text-gray-200" data-testid={`sponsor-row-${r.assignment_id}`}>
-                            <td className="py-1.5 pr-3"><div>{r.display_name || r.email}</div><div className="text-xs text-gray-500">{r.email}</div></td>
+                          <tr key={r.assignment_id} className="border-t border-pl-border text-pl-text" data-testid={`sponsor-row-${r.assignment_id}`}>
+                            <td className="py-1.5 pr-3"><div>{r.display_name || r.email}</div><div className="text-xs text-pl-muted">{r.email}</div></td>
                             <td className="py-1.5 pr-3">{courseName(r.app_slug, r.course_name)}</td>
                             <td className="py-1.5 pr-3">{TIER_LABELS[r.course_tier] || r.course_tier}</td>
                             <td className="py-1.5 pr-3">
-                              {r.status === 'active' ? <span className="text-emerald-400">active</span> : <span className="text-gray-400">cancelled{r.seat_returned ? ', seat returned' : ', seat consumed'}</span>}
-                              {r.certified ? <span className="ml-2 text-[#BFFF00]">certified</span> : null}
-                              {r.cancel_reason ? <div className="text-xs text-gray-500">{r.cancel_reason}</div> : null}
+                              {r.status === 'active' ? <span className="text-pl-success-text font-medium">active</span> : <span className="text-pl-muted">cancelled{r.seat_returned ? ', seat returned' : ', seat consumed'}</span>}
+                              {r.certified ? <span className="ml-2 text-pl-accent-text font-medium">certified</span> : null}
+                              {r.cancel_reason ? <div className="text-xs text-pl-muted">{r.cancel_reason}</div> : null}
                             </td>
                             <td className="py-1.5 pr-3 whitespace-nowrap">{fmtDate(r.assigned_at)}</td>
-                            <td className="py-1.5 pr-3 text-gray-400">{r.note || ''}</td>
+                            <td className="py-1.5 pr-3 text-pl-muted">{r.note || ''}</td>
                             <td className="py-1.5">
                               {r.status === 'active' && (
-                                <button type="button" onClick={() => setCancelling({ id: r.assignment_id, reason: '' })} className="text-red-400 hover:text-red-300 text-xs flex items-center gap-1" data-testid={`sponsor-cancel-${r.assignment_id}`}><XCircle className="h-3.5 w-3.5" />Cancel</button>
+                                <button type="button" onClick={() => setCancelling({ id: r.assignment_id, reason: '' })} className="text-pl-danger-text hover:underline text-xs flex items-center gap-1" data-testid={`sponsor-cancel-${r.assignment_id}`}><XCircle className="h-3.5 w-3.5" />Cancel</button>
                               )}
                             </td>
                           </tr>
                         ))}
-                        {!report.length && <tr><td colSpan={7} className="py-3 text-gray-500">No seats assigned from this pool yet.</td></tr>}
+                        {!report.length && <tr><td colSpan={7} className="py-3 text-pl-muted">No seats assigned from this pool yet.</td></tr>}
                       </tbody>
                     </table>
                   </div>
                 )}
                 {cancelling && (
-                  <div className="mt-4 rounded border border-red-500/40 bg-red-500/5 p-3 space-y-2" data-testid="sponsor-cancel-box">
-                    <p className="text-sm text-gray-200">Cancel this assignment? The learner's enrolment ends now. The seat returns to the pool unless they have already earned the certification for this tier.</p>
-                    <Input value={cancelling.reason} onChange={(e) => setCancelling({ ...cancelling, reason: e.target.value })} placeholder="reason (role change, left the company)" className={inputCls} data-testid="sponsor-cancel-reason" />
-                    <div className="flex gap-2">
-                      <Button onClick={handleCancel} disabled={busy} className="bg-red-500 hover:bg-red-400 text-white" data-testid="sponsor-cancel-confirm">Cancel assignment</Button>
-                      <Button variant="ghost" onClick={() => setCancelling(null)} className="text-gray-300">Keep it</Button>
+                  <div className="mt-4 rounded-md border border-pl-danger/40 bg-pl-danger-bg p-3 space-y-2" data-testid="sponsor-cancel-box">
+                    <p className="text-sm text-pl-text">Cancel this assignment? The learner's enrolment ends now. The seat returns to the pool unless they have already earned the certification for this tier.</p>
+                    <Input value={cancelling.reason} onChange={(e) => setCancelling({ ...cancelling, reason: e.target.value })} placeholder="reason (role change, left the company)" data-testid="sponsor-cancel-reason" />
+                    <div className="flex flex-wrap gap-2">
+                      <Button variant="destructive" onClick={handleCancel} disabled={busy} data-testid="sponsor-cancel-confirm">Cancel assignment</Button>
+                      <Button variant="outline" onClick={() => setCancelling(null)}>Keep it</Button>
                     </div>
                   </div>
                 )}
