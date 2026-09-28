@@ -1,7 +1,7 @@
-// The one opt-in helper for SHARED components: pieces that render inside an
-// opted-in design-system app and in unmigrated apps alike (the ui kit, the
-// Studio kit, workstation shells, shared forms). See
-// docs/scope/DesignSystem.md section 4.
+// The one opt-in helper for SHARED components: pieces that render on themed
+// and unthemed screens alike while the rollout runs (the ui kit, the header,
+// the course kit, shared panels). NextGen port of the Suite's helper; see
+// docs/scope/DesignSystem-Rollout.md section 4.
 //
 // Two call shapes, both inert outside a <ThemedApp> scope:
 //

@@ -1,4 +1,20 @@
 /** @type {import('tailwindcss').Config} */
+// Design system roles (src/design/tokens.js). They resolve only inside an
+// opted-in scope ([data-pl-theme], set by <ThemedApp>); the legacy shadcn
+// colours below are untouched. Kept in step with THEMES by
+// src/design/__tests__/tokens.test.js. Same mapping as the Suite's config.
+const PL_ROLES = [
+	'bg', 'surface', 'raised', 'sunken', 'border', 'border-strong', 'text', 'muted',
+	'primary', 'primary-hover', 'primary-fg', 'primary-text', 'primary-text-hover',
+	'accent', 'accent-fg', 'accent-text',
+	'success', 'success-fg', 'success-bg', 'success-text',
+	'warning', 'warning-fg', 'warning-bg', 'warning-text',
+	'danger', 'danger-fg', 'danger-bg', 'danger-text',
+	'info', 'info-fg', 'info-bg', 'info-text',
+	'focus', 'chart-surface',
+];
+const plColors = Object.fromEntries(PL_ROLES.map((r) => [r, `rgb(var(--pl-${r}) / <alpha-value>)`]));
+
 module.exports = {
 	darkMode: ['class'],
 	content: [
@@ -17,6 +33,7 @@ module.exports = {
 		},
 		extend: {
 			colors: {
+				pl: plColors,
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
@@ -51,10 +68,22 @@ module.exports = {
 					foreground: 'hsl(var(--card-foreground))',
 				},
 			},
+			fontFamily: {
+				'pl-display': ['var(--pl-font-display)'],
+				'pl-sans': ['var(--pl-font-sans)'],
+				'pl-mono': ['var(--pl-font-mono)'],
+			},
+			boxShadow: {
+				'pl-sm': 'var(--pl-shadow-sm)',
+				'pl-md': 'var(--pl-shadow-md)',
+				'pl-lg': 'var(--pl-shadow-lg)',
+			},
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)',
+				// canvas frames keep 8px inside a design-system scope (tokens.js CANVAS_RADIUS)
+				'pl-canvas': 'var(--pl-radius-canvas, 0.5rem)',
 			},
 			keyframes: {
 				'accordion-down': {

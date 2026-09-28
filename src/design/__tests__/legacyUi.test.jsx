@@ -15,7 +15,7 @@ import { UI_SCENES, normaliseMarkup } from './uiScenes';
 import { installDomShims } from '@/design/testing/domShims';
 
 const FIXTURE = path.join(path.dirname(fileURLToPath(import.meta.url)), 'fixtures/legacyUiMarkup.json');
-const UPDATE = process.env.UPDATE_LEGACY_UI === '1';
+const UPDATE = globalThis.process?.env?.UPDATE_LEGACY_UI === '1';
 const captured = {};
 
 describe('the ui kit outside a scope', () => {
