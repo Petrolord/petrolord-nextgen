@@ -18,6 +18,7 @@ const EVENT_LABEL = {
 
 // Learner self-service: manage the two registered devices and review the
 // session-monitoring feed for this account (N3.3).
+// Design system (batch 2A): inside the signed-in scope, on theme roles.
 const DevicesPage = () => {
   const { toast } = useToast();
   const [devices, setDevices] = useState([]);
@@ -59,7 +60,7 @@ const DevicesPage = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <Loader2 className="h-8 w-8 animate-spin text-[#BFFF00]" />
+        <Loader2 className="h-8 w-8 animate-spin text-pl-primary-text" />
       </div>
     );
   }
@@ -70,42 +71,42 @@ const DevicesPage = () => {
       <motion.div
         initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className="max-w-3xl mx-auto p-6 space-y-6"
+        className="max-w-3xl mx-auto px-4 py-6 sm:p-6 space-y-6"
       >
         <div>
-          <h1 className="text-3xl font-bold text-white flex items-center gap-2">
-            <MonitorSmartphone className="h-7 w-7 text-[#BFFF00]" /> Devices & sessions
+          <h1 className="text-3xl font-bold tracking-tight text-pl-text flex items-center gap-2">
+            <MonitorSmartphone className="h-7 w-7 text-pl-primary-text" aria-hidden="true" /> Devices & sessions
           </h1>
-          <p className="mt-1 text-gray-400">
+          <p className="mt-1 text-pl-muted">
             Your account is limited to two registered devices. Sign out a device to free a slot.
           </p>
         </div>
 
-        <Card className="bg-[#1E293B] border-gray-700">
+        <Card>
           <CardHeader>
-            <CardTitle className="text-white">Registered devices ({devices.length})</CardTitle>
+            <CardTitle className="text-pl-text">Registered devices ({devices.length})</CardTitle>
             <CardDescription>Signing out a device frees it immediately.</CardDescription>
           </CardHeader>
           <CardContent>
             {devices.length === 0 ? (
-              <p className="text-gray-500 text-sm">No registered devices.</p>
+              <p className="text-pl-muted text-sm">No registered devices.</p>
             ) : (
               <div className="space-y-2">
                 {devices.map((d) => (
-                  <div key={d.id} className="flex items-center justify-between rounded-md border border-gray-700 bg-[#0F172A] px-4 py-3">
-                    <div>
-                      <p className="text-white font-medium flex items-center gap-2">
+                  <div key={d.id} className="flex flex-wrap items-center justify-between gap-3 rounded-md border border-pl-border bg-pl-raised px-4 py-3">
+                    <div className="min-w-0">
+                      <p className="text-pl-text font-medium flex items-center gap-2">
                         {d.label || 'Device'}
                         {d.device_id === thisDevice && (
-                          <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-[#BFFF00]/20 text-[#BFFF00] border border-[#BFFF00]/40">this device</span>
+                          <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-pl-primary/10 text-pl-primary-text border border-pl-primary/40">this device</span>
                         )}
                       </p>
-                      <p className="text-xs text-gray-500 truncate max-w-md">{d.user_agent || '—'}</p>
-                      <p className="text-xs text-gray-600">last active {new Date(d.last_seen).toLocaleString()}</p>
+                      <p className="text-xs text-pl-muted truncate max-w-md">{d.user_agent || 'n/a'}</p>
+                      <p className="text-xs text-pl-muted">last active {new Date(d.last_seen).toLocaleString()}</p>
                     </div>
                     <Button
                       size="sm" variant="outline" disabled={busy}
-                      className="border-red-700 text-red-400 hover:bg-red-900/30"
+                      className="border-pl-danger/50 text-pl-danger-text hover:bg-pl-danger-bg hover:text-pl-danger-text"
                       onClick={() => handleRevoke(d.device_id)}
                     >
                       <LogOut className="h-4 w-4 mr-1" /> Sign out
@@ -117,23 +118,23 @@ const DevicesPage = () => {
           </CardContent>
         </Card>
 
-        <Card className="bg-[#1E293B] border-gray-700">
+        <Card>
           <CardHeader>
-            <CardTitle className="text-white flex items-center gap-2">
-              <Shield className="h-5 w-5 text-[#BFFF00]" /> Recent session activity
+            <CardTitle className="text-pl-text flex items-center gap-2">
+              <Shield className="h-5 w-5 text-pl-primary-text" aria-hidden="true" /> Recent session activity
             </CardTitle>
           </CardHeader>
           <CardContent>
             {sessions.length === 0 ? (
-              <p className="text-gray-500 text-sm">No activity yet.</p>
+              <p className="text-pl-muted text-sm">No activity yet.</p>
             ) : (
               <div className="space-y-1">
                 {sessions.map((s) => (
-                  <div key={s.id} className="flex items-center justify-between text-sm border-b border-gray-800 py-1.5">
-                    <span className={s.event === 'denied' ? 'text-red-400' : 'text-gray-300'}>
+                  <div key={s.id} className="flex items-center justify-between gap-3 text-sm border-b border-pl-border py-1.5">
+                    <span className={s.event === 'denied' ? 'text-pl-danger-text font-medium' : 'text-pl-text'}>
                       {EVENT_LABEL[s.event] || s.event}
                     </span>
-                    <span className="text-gray-500 text-xs">{new Date(s.created_at).toLocaleString()}</span>
+                    <span className="text-pl-muted text-xs">{new Date(s.created_at).toLocaleString()}</span>
                   </div>
                 ))}
               </div>

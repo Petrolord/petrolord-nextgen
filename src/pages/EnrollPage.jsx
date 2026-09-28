@@ -3,7 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Input, THEMED_INPUT } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -30,14 +30,18 @@ import { courseName } from '@/lib/appNames';
 // courses, same certificates — only the payer differs. Learning-Mode
 // access is granted server-side (enrollment → entitlement trigger); this
 // page only drives the door functions.
+//
+// Design system (batch 2A): the page renders inside the signed-in scope
+// (src/design/rollout/w2a.js), so it uses theme roles directly. Status
+// colour comes from the status roles and always sits next to its word.
 
 const TIER_LABELS = { beginner: 'Beginner', intermediate: 'Intermediate', advanced: 'Advanced' };
 
 const STATUS_PILL = {
-  active: 'bg-emerald-900/40 text-emerald-300 border-emerald-700',
-  pending: 'bg-yellow-900/40 text-yellow-300 border-yellow-700',
-  completed: 'bg-sky-900/40 text-sky-300 border-sky-700',
-  cancelled: 'bg-red-900/40 text-red-300 border-red-700',
+  active: 'bg-pl-success-bg text-pl-success-text border-pl-success/30',
+  pending: 'bg-pl-warning-bg text-pl-warning-text border-pl-warning/30',
+  completed: 'bg-pl-info-bg text-pl-info-text border-pl-info/30',
+  cancelled: 'bg-pl-danger-bg text-pl-danger-text border-pl-danger/30',
 };
 
 const DOOR_LABELS = {
@@ -56,11 +60,11 @@ function CourseTierPicker({ apps, tier, setTier, appSlug, setAppSlug, fees, feeK
   return (
     <div className="space-y-4">
       <div>
-        <Label className="text-gray-300 mb-1 block">Course</Label>
+        <Label className="text-pl-text mb-1 block">Course</Label>
         <select
           value={appSlug}
           onChange={(e) => setAppSlug(e.target.value)}
-          className="w-full px-3 py-2 rounded-md bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-[#BFFF00] focus:border-[#BFFF00] text-sm"
+          className={THEMED_INPUT}
         >
           {available.map((a) => (
             <option key={a.slug} value={a.slug}>{a.name}</option>
@@ -69,40 +73,41 @@ function CourseTierPicker({ apps, tier, setTier, appSlug, setAppSlug, fees, feeK
             <option key={a.slug} value={a.slug} disabled>{a.name} (coming soon)</option>
           ))}
         </select>
-        <p className="mt-1 text-xs text-gray-500">
-          One app = one course. The geoscience learning path follows the daily loop:
-          Well Data Management → Petrophysics → Well Correlation → Seismic Interpretation → Subsurface Mapping → Reservoir Volumetrics.
+        <p className="mt-1 text-xs text-pl-muted">
+          One app is one course. The geoscience learning path follows the daily loop, in this order:
+          Well Data Management, Petrophysics, Well Correlation, Seismic Interpretation, Subsurface Mapping and Reservoir Volumetrics.
         </p>
         <PrereqNote apps={apps} appSlug={appSlug} status={prereq} />
       </div>
       <div>
-        <Label className="text-gray-300 mb-1 block">Tier</Label>
+        <Label className="text-pl-text mb-1 block">Tier</Label>
         <div className="grid grid-cols-3 gap-2">
           {TIERS.map((t) => (
             <button
               key={t}
               type="button"
               onClick={() => setTier(t)}
-              className={`px-3 py-2 rounded-md border text-sm transition-colors ${
+              aria-pressed={tier === t}
+              className={`px-3 py-2 rounded-md border text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus ${
                 tier === t
-                  ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold'
-                  : 'bg-gray-700 text-gray-300 border-gray-600 hover:border-gray-500'
+                  ? 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold'
+                  : 'bg-pl-surface text-pl-text border-pl-border-strong hover:border-pl-primary'
               }`}
             >
               {TIER_LABELS[t]}
             </button>
           ))}
         </div>
-        <p className="mt-1 text-xs text-gray-500">
-          Beginner → Associate, Intermediate → Professional, Advanced → Expert certification.
+        <p className="mt-1 text-xs text-pl-muted">
+          Beginner leads to Associate, Intermediate to Professional and Advanced to Expert certification.
         </p>
       </div>
       {feeKind && (
-        <p className="text-sm text-gray-300">
+        <p className="text-sm text-pl-text">
           {feeKind === 'course' ? 'Published fee: ' : 'Personal registration fee, in addition to your university scholarship: '}
-          <span className="text-[#BFFF00] font-semibold">{formatFee(fee)}</span>
+          <span className="text-pl-accent-text font-semibold">{formatFee(fee)}</span>
           {feeKind === 'course' && isBonusTier(apps.find((a) => a.slug === appSlug), tier) && (
-            <span className="ml-2 text-xs text-gray-400" data-testid="enroll-bonus-note">Bonus tier: free, and it takes no sponsor seat.</span>
+            <span className="ml-2 text-xs text-pl-muted" data-testid="enroll-bonus-note">Bonus tier: free, and it takes no sponsor seat.</span>
           )}
         </p>
       )}
@@ -121,12 +126,12 @@ function PrereqNote({ apps, appSlug, status }) {
     required: true, prereq_slug: sel.prereq_slug, prereq_name: courseName(sel.prereq_slug, root?.name), satisfied: false, exam_available: true,
   });
   if (view.kind === 'none') return null;
-  const cls = view.kind === 'satisfied' ? 'text-emerald-400' : 'text-amber-400';
+  const cls = view.kind === 'satisfied' ? 'text-pl-success-text' : 'text-pl-warning-text';
   return (
     <p className={`mt-1 text-xs ${cls}`} data-testid="enroll-prereq-note" data-kind={view.kind}>
       {view.text}{' '}
       {view.kind === 'open' && (
-        <Link to={`/dashboard/waiver/${sel.prereq_slug}`} className="text-[#BFFF00] hover:underline font-semibold" data-testid="enroll-waiver-link">
+        <Link to={`/dashboard/waiver/${sel.prereq_slug}`} className="text-pl-primary-text hover:text-pl-primary-text-hover hover:underline font-semibold" data-testid="enroll-waiver-link">
           Take the free waiver exam
         </Link>
       )}
@@ -219,8 +224,7 @@ const EnrollPage = () => {
         if (result?.status === 'success' || result?.status === 'already_processed') {
           toast({
             title: 'Payment confirmed',
-            description: 'Your enrollment is active — Learning Mode is unlocked.',
-            className: 'bg-[#BFFF00] text-slate-900',
+            description: 'Your enrollment is active and Learning Mode is unlocked.',
           });
         } else {
           toast({
@@ -252,7 +256,7 @@ const EnrollPage = () => {
       const res = await startSelfEnrollment(selfApp, selfTier);
       const outcome = selfEnrolOutcome(res);
       if (outcome.next === 'enrolled') {
-        toast({ title: 'Enrolled', description: outcome.message, className: 'bg-[#BFFF00] text-slate-900' });
+        toast({ title: 'Enrolled', description: outcome.message });
         await refresh();
         setBusy(false);
         return;
@@ -273,7 +277,6 @@ const EnrollPage = () => {
         toast({
           title: 'Cohort code accepted',
           description: 'Your campus enrollment is active.',
-          className: 'bg-[#BFFF00] text-slate-900',
         });
         await refresh();
         setBusy(false);
@@ -294,7 +297,6 @@ const EnrollPage = () => {
       toast({
         title: 'Sponsorship code accepted',
         description: 'Your sponsored enrollment is active.',
-        className: 'bg-[#BFFF00] text-slate-900',
       });
       await refresh();
     } catch (err) {
@@ -311,7 +313,6 @@ const EnrollPage = () => {
       toast({
         title: 'Application submitted',
         description: 'Your residency application is under review. Selection creates your enrollment.',
-        className: 'bg-[#BFFF00] text-slate-900',
       });
       setResMotivation('');
       await refresh();
@@ -330,7 +331,7 @@ const EnrollPage = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <Loader2 className="h-8 w-8 animate-spin text-[#BFFF00]" />
+        <Loader2 className="h-8 w-8 animate-spin text-pl-primary-text" />
       </div>
     );
   }
@@ -344,19 +345,19 @@ const EnrollPage = () => {
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className="max-w-5xl mx-auto p-6 space-y-8"
+        className="max-w-5xl mx-auto px-4 py-6 sm:p-6 space-y-8"
       >
         <div>
-          <h1 className="text-3xl font-bold text-white">Enroll in a course</h1>
-          <p className="mt-1 text-gray-400">
-            One account, four ways in — the account, courses and certificates are the same
-            whichever door you use; only the payer differs.
+          <h1 className="text-3xl font-bold tracking-tight text-pl-text">Enroll in a course</h1>
+          <p className="mt-1 text-pl-muted">
+            One account, four ways in. The account, courses and certificates are the same
+            whichever door you use, and only the payer differs.
           </p>
         </div>
 
         {verifying && (
-          <Card className="bg-[#1E293B] border-yellow-700">
-            <CardContent className="flex items-center gap-3 py-4 text-yellow-300">
+          <Card className="border-pl-warning/40 bg-pl-warning-bg" role="status">
+            <CardContent className="flex items-center gap-3 py-4 text-pl-warning-text">
               <Loader2 className="h-5 w-5 animate-spin" />
               Confirming your payment with Paystack…
             </CardContent>
@@ -364,7 +365,7 @@ const EnrollPage = () => {
         )}
 
         <Tabs defaultValue="self" className="w-full">
-          <TabsList className="grid w-full grid-cols-4 bg-[#1E293B]">
+          <TabsList className="grid h-auto w-full grid-cols-2 sm:grid-cols-4">
             <TabsTrigger value="self"><CreditCard className="h-4 w-4 mr-2" />Self-enroll</TabsTrigger>
             <TabsTrigger value="campus"><GraduationCap className="h-4 w-4 mr-2" />Campus</TabsTrigger>
             <TabsTrigger value="sponsored"><Briefcase className="h-4 w-4 mr-2" />Sponsored</TabsTrigger>
@@ -372,9 +373,9 @@ const EnrollPage = () => {
           </TabsList>
 
           <TabsContent value="self">
-            <Card className="bg-[#1E293B] border-gray-700">
+            <Card>
               <CardHeader>
-                <CardTitle className="text-white">Self-enrollment</CardTitle>
+                <CardTitle className="text-pl-text">Self-enrollment</CardTitle>
                 <CardDescription>
                   Pay the published fee at registration and start immediately in Learning Mode. Free tiers activate at once.
                 </CardDescription>
@@ -387,7 +388,7 @@ const EnrollPage = () => {
                 />
                 <Button
                   onClick={handleSelfEnroll} disabled={busy}
-                  className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold"
+                  className="font-semibold"
                 >
                   {busy ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <CreditCard className="mr-2 h-4 w-4" />}
                   Enroll & pay with Paystack
@@ -397,9 +398,9 @@ const EnrollPage = () => {
           </TabsContent>
 
           <TabsContent value="campus">
-            <Card className="bg-[#1E293B] border-gray-700">
+            <Card>
               <CardHeader>
-                <CardTitle className="text-white">Campus cohort</CardTitle>
+                <CardTitle className="text-pl-text">Campus cohort</CardTitle>
                 <CardDescription>
                   For university cohorts only. Enter the cohort code from your university liaison:
                   your scholarship covers the course fee, and a small personal registration fee
@@ -415,25 +416,24 @@ const EnrollPage = () => {
                 />
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
-                    <Label className="text-gray-300 mb-1 block">Cohort code</Label>
+                    <Label className="text-pl-text mb-1 block">Cohort code</Label>
                     <Input
                       value={campusCode} onChange={(e) => setCampusCode(e.target.value)}
                       placeholder="CMP-XXXXXXXX"
-                      className="bg-gray-700 text-white border-gray-600 uppercase"
+                      className="uppercase"
                     />
                   </div>
                   <div>
-                    <Label className="text-gray-300 mb-1 block">University email</Label>
+                    <Label className="text-pl-text mb-1 block">University email</Label>
                     <Input
                       type="email" value={campusEmail} onChange={(e) => setCampusEmail(e.target.value)}
                       placeholder="you@university.edu.ng"
-                      className="bg-gray-700 text-white border-gray-600"
-                    />
+                                          />
                   </div>
                 </div>
                 <Button
                   onClick={handleCampusRedeem} disabled={busy || !campusCode || !campusEmail}
-                  className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold"
+                  className="font-semibold"
                 >
                   {busy ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <GraduationCap className="mr-2 h-4 w-4" />}
                   Redeem cohort code
@@ -443,9 +443,9 @@ const EnrollPage = () => {
           </TabsContent>
 
           <TabsContent value="sponsored">
-            <Card className="bg-[#1E293B] border-gray-700">
+            <Card>
               <CardHeader>
-                <CardTitle className="text-white">Employer-sponsored</CardTitle>
+                <CardTitle className="text-pl-text">Employer-sponsored</CardTitle>
                 <CardDescription>
                   Redeem the sponsorship code from your employer: the sponsor is billed, and your
                   enrollment activates immediately. If your employer runs an enrolment pool, your
@@ -460,16 +460,16 @@ const EnrollPage = () => {
                   tier={sponsorTier} setTier={setSponsorTier}
                 />
                 <div>
-                  <Label className="text-gray-300 mb-1 block">Sponsorship code</Label>
+                  <Label className="text-pl-text mb-1 block">Sponsorship code</Label>
                   <Input
                     value={sponsorCode} onChange={(e) => setSponsorCode(e.target.value)}
                     placeholder="SPN-XXXXXXXX"
-                    className="bg-gray-700 text-white border-gray-600 uppercase sm:max-w-xs"
+                    className="uppercase sm:max-w-xs"
                   />
                 </div>
                 <Button
                   onClick={handleSponsorRedeem} disabled={busy || !sponsorCode}
-                  className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold"
+                  className="font-semibold"
                 >
                   {busy ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Briefcase className="mr-2 h-4 w-4" />}
                   Redeem sponsorship code
@@ -479,19 +479,19 @@ const EnrollPage = () => {
           </TabsContent>
 
           <TabsContent value="residency">
-            <Card className="bg-[#1E293B] border-gray-700">
+            <Card>
               <CardHeader>
-                <CardTitle className="text-white">Residency</CardTitle>
+                <CardTitle className="text-pl-text">Residency</CardTitle>
                 <CardDescription>
                   A selective, in-person, time-boxed intake at the Lordsway facility with instructor
-                  supervision and a small number of places. It is a different programme from the
-                  online courses, not a cheaper way into them.
+                  supervision and a small number of places. It is a separate programme from the
+                  online courses and is no cheaper way into them.
                 </CardDescription>
               </CardHeader>
               {!doors.residency_open ? (
                 <CardContent>
-                  <div className="rounded-md border border-gray-700 bg-[#0F172A] p-4 text-sm text-gray-300 flex items-start gap-2" data-testid="residency-closed">
-                    <Clock className="h-4 w-4 text-[#BFFF00] mt-0.5 shrink-0" />
+                  <div className="rounded-md border border-pl-border bg-pl-sunken p-4 text-sm text-pl-text flex items-start gap-2" data-testid="residency-closed">
+                    <Clock className="h-4 w-4 text-pl-accent-text mt-0.5 shrink-0" />
                     <p className="mb-0">{doors.residency_notice || 'Residency intakes are not open yet. Applications are not being accepted.'}</p>
                   </div>
                 </CardContent>
@@ -503,25 +503,24 @@ const EnrollPage = () => {
                   tier="beginner" setTier={() => {}}
                 />
                 <div>
-                  <Label className="text-gray-300 mb-1 block">Motivation</Label>
+                  <Label className="text-pl-text mb-1 block">Motivation</Label>
                   <Textarea
                     value={resMotivation} onChange={(e) => setResMotivation(e.target.value)}
                     rows={4} placeholder="Tell us why you're applying (at least 30 characters)…"
-                    className="bg-gray-700 text-white border-gray-600"
-                  />
+                                      />
                 </div>
                 <Button
                   onClick={handleResidencyApply} disabled={busy || resMotivation.trim().length < 30}
-                  className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold"
+                  className="font-semibold"
                 >
                   {busy ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Microscope className="mr-2 h-4 w-4" />}
                   Submit application
                 </Button>
                 {residencyApps.length > 0 && (
-                  <div className="space-y-2 pt-2 border-t border-gray-700">
-                    <p className="text-sm font-medium text-gray-300">Your applications</p>
+                  <div className="space-y-2 pt-2 border-t border-pl-border">
+                    <p className="text-sm font-medium text-pl-text">Your applications</p>
                     {residencyApps.map((a) => (
-                      <div key={a.id} className="flex items-center justify-between text-sm text-gray-400">
+                      <div key={a.id} className="flex items-center justify-between text-sm text-pl-muted">
                         <span>{courseName(a.app_slug, appName[a.app_slug])}</span>
                         <span className={`px-2 py-0.5 rounded-full border text-xs ${
                           a.status === 'accepted' ? STATUS_PILL.active
@@ -539,29 +538,29 @@ const EnrollPage = () => {
           </TabsContent>
         </Tabs>
 
-        <Card className="bg-[#1E293B] border-gray-700">
+        <Card>
           <CardHeader>
-            <CardTitle className="text-white flex items-center gap-2">
-              <BadgeCheck className="h-5 w-5 text-[#BFFF00]" />
+            <CardTitle className="text-pl-text flex items-center gap-2">
+              <BadgeCheck className="h-5 w-5 text-pl-primary-text" />
               My enrollments
             </CardTitle>
           </CardHeader>
           <CardContent>
             {enrollments.length === 0 ? (
-              <p className="text-gray-500 text-sm">No enrollments yet — pick a door above.</p>
+              <p className="text-pl-muted text-sm">No enrollments yet. Pick a door above.</p>
             ) : (
               <div className="space-y-2">
                 {enrollments.map((e) => (
                   <div
                     key={e.id}
-                    className="flex flex-wrap items-center justify-between gap-2 rounded-md border border-gray-700 bg-[#0F172A] px-4 py-3"
+                    className="flex flex-wrap items-center justify-between gap-2 rounded-md border border-pl-border bg-pl-raised px-4 py-3"
                   >
                     <div>
-                      <p className="text-white font-medium">
+                      <p className="text-pl-text font-medium">
                         {courseName(e.app_slug, appName[e.app_slug])}
-                        <span className="text-gray-400 font-normal"> · {TIER_LABELS[e.course_tier]}</span>
+                        <span className="text-pl-muted font-normal"> · {TIER_LABELS[e.course_tier]}</span>
                       </p>
-                      <p className="text-xs text-gray-500">{DOOR_LABELS[e.door]} · {new Date(e.created_at).toLocaleDateString()}</p>
+                      <p className="text-xs text-pl-muted">{DOOR_LABELS[e.door]} · {new Date(e.created_at).toLocaleDateString()}</p>
                     </div>
                     <div className="flex items-center gap-2">
                       <span className={`px-2 py-0.5 rounded-full border text-xs ${STATUS_PILL[e.status] || STATUS_PILL.pending}`}>
@@ -576,7 +575,7 @@ const EnrollPage = () => {
                         if (!act || act.kind === 'pay') return null;
                         return (
                           <Link to={act.to}>
-                            <Button size="sm" className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold">
+                            <Button size="sm" className="font-semibold">
                               {act.kind === 'start' ? <PlayCircle className="h-4 w-4 mr-1" /> : <ArrowRight className="h-4 w-4 mr-1" />}
                               {act.label}
                             </Button>
@@ -586,7 +585,6 @@ const EnrollPage = () => {
                       {e.status === 'pending' && (
                         <Button
                           size="sm" variant="outline"
-                          className="border-[#BFFF00] text-[#BFFF00] hover:bg-[#BFFF00] hover:text-[#0F172A]"
                           disabled={busy}
                           onClick={async () => {
                             setBusy(true);
