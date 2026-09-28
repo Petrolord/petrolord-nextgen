@@ -148,6 +148,11 @@ describe('route registry and cold load', () => {
     expect(matchesRoute('/dashboard/apps/dca', '/dashboard/apps/dca/*')).toBe(true);
     expect(matchesRoute('/dashboard/apps/dca/course/beginner', '/dashboard/apps/dca/*')).toBe(true);
     expect(matchesRoute('/dashboard/apps/dcax', '/dashboard/apps/dca/*')).toBe(false);
+    expect(matchesRoute('/dashboard/apps/dca/course/beginner/m1', '/dashboard/apps/:slug/course/*')).toBe(true);
+    expect(matchesRoute('/dashboard/apps/dca/course', '/dashboard/apps/:slug/course/*')).toBe(true);
+    expect(matchesRoute('/dashboard/apps/dca', '/dashboard/apps/:slug/course/*')).toBe(false);
+    expect(matchesRoute('/dashboard/apps/dca', '/dashboard/apps/:slug')).toBe(true);
+    expect(matchesRoute('/dashboard/apps/dca/x', '/dashboard/apps/:slug')).toBe(false);
   });
 
   it('wave 0 themes the dashboard home only', () => {

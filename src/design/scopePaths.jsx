@@ -22,14 +22,18 @@ export const PUBLIC_LIGHT_ROUTES = Object.freeze([]);
 
 const trimSlash = (p) => (p.length > 1 && p.endsWith('/') ? p.slice(0, -1) : p);
 
-/** True when `pathname` matches a registry entry ('/x' exactly, '/x/*' and below). */
+/**
+ * True when `pathname` matches a registry entry: '/x' that path exactly,
+ * '/x/*' that path and everything under it, and a ':name' segment matches
+ * any one segment ('/dashboard/apps/:slug/course/*' covers every course
+ * reader page).
+ */
 export function matchesRoute(pathname, entry) {
-  const p = trimSlash(pathname);
-  if (entry.endsWith('/*')) {
-    const base = entry.slice(0, -2);
-    return p === base || p.startsWith(`${base}/`);
-  }
-  return p === trimSlash(entry);
+  const p = trimSlash(pathname).split('/');
+  const prefix = entry.endsWith('/*');
+  const e = trimSlash(prefix ? entry.slice(0, -2) : entry).split('/');
+  if (prefix ? p.length < e.length : p.length !== e.length) return false;
+  return e.every((seg, i) => (seg.startsWith(':') ? p[i] !== '' : seg === p[i]));
 }
 
 /** True when `pathname` is a public or auth page that always renders light. */

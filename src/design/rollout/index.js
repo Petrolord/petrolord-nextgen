@@ -5,6 +5,7 @@
 // parallel batches never edit the same file); do not edit this index.
 //   '/dashboard/enroll'    that path exactly
 //   '/dashboard/apps/dca/*' that path and everything under it
+//   '/dashboard/apps/:slug/course/*' a :name segment matches any one segment
 // At the end state (wave 7) this registry and the gate in Layout are deleted
 // and the scope is unconditional.
 import w0 from './w0.js';

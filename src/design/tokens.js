@@ -13,8 +13,8 @@
 // `node scripts/design/build-theme-css.mjs`; src/design/__tests__/tokens.test.js
 // fails when the two drift, and checks WCAG AA contrast for every text role.
 //
-// Every colour is a 6-digit hex. Roles, not hues: components ask for
-// `surface` or `muted`, never for "green".
+// Every colour is a 6-digit hex. Components ask for roles such as
+// `surface` or `muted`; no component asks for a hue such as "green".
 //
 // NEXTGEN COPY. This file is a byte-for-byte port of the Suite's
 // src/design/tokens.js (Petrolord/petrolord-suite, main e7807a1da,
