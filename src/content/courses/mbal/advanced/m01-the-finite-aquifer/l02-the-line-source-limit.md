@@ -34,7 +34,7 @@ Set the aquifer aside for a moment and ask only whether the line source would be
 
 {{panel:mb-pd-explorer}}
 
-Set the selector to $r_{eD}$ 20 and look at the plot rather than the tiles. On the logarithmic time axis the blue line source curve starts far below the orange bounded curve, climbs steeply, and only merges with it towards the right hand end. Note that the merge happens on the right, not the left. Then set the selector to $r_{eD}$ 2 and watch the orange curve leave the blue one almost immediately after they touch. Between those two extremes you can see both halves of the story: a left hand gap that belongs to the point source, and a right hand gap that belongs to the wall.
+Set the selector to $r_{eD}$ 20 and look at the plot rather than the tiles. On the logarithmic time axis the blue line source curve starts far below the amber bounded curve, climbs steeply, and only merges with it towards the right hand end. Note that the merge happens on the right, not the left. Then set the selector to $r_{eD}$ 2 and watch the amber curve leave the blue one almost immediately after they touch. Between those two extremes you can see both halves of the story: a left hand gap that belongs to the point source, and a right hand gap that belongs to the wall.
 
 ## Exercise
 

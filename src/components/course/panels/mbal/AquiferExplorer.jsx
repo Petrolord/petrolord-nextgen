@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { fetkovichMarch, AHMED_1010 } from './tankLab';
 import { PanelShell, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { useThemeClass } from '@/design/themeClass';
 
 // Aquifer explorer: Fetkovich constants from editable geometry, with a toggle
 // between the pseudo-steady-state denominator and plain ln(reD) so the 47
@@ -31,6 +32,7 @@ const FIELDS = [
 ];
 
 const AquiferExplorer = () => {
+  const tc = useThemeClass();
   const g = AHMED_1010.given;
   const [vals, setVals] = useState(() => Object.fromEntries(FIELDS.map(([k]) => [k, String(TEACHING[k])])));
   const [pss, setPss] = useState(true);
@@ -63,10 +65,10 @@ const AquiferExplorer = () => {
       </div>
 
       <div className="flex items-center gap-2">
-        <span className="text-xs text-gray-500">Productivity index denominator:</span>
+        <span className={tc('text-xs text-gray-500', 'text-xs text-pl-muted')}>Productivity index denominator:</span>
         {[[true, 'ln(reD) - 0.75  (pseudo steady state)'], [false, 'ln(reD)  (the trap)']].map(([v, label]) => (
           <button key={String(v)} type="button" onClick={() => setPss(v)}
-            className={`px-3 py-1.5 rounded-md border text-xs ${pss === v ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold' : 'bg-gray-800 text-gray-300 border-gray-600'}`}>
+            className={tc(`px-3 py-1.5 rounded-md border text-xs ${pss === v ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold' : 'bg-gray-800 text-gray-300 border-gray-600'}`, `px-3 py-1.5 rounded-md border text-xs ${pss === v ? 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold' : 'bg-pl-surface text-pl-text border-pl-border-strong'}`)}>
             {label}
           </button>
         ))}
@@ -86,8 +88,8 @@ const AquiferExplorer = () => {
           </TileGrid>
 
           <div className="overflow-x-auto">
-            <table className="w-full text-xs text-gray-300">
-              <thead className="text-gray-500">
+            <table className={tc('w-full text-xs text-gray-300', 'w-full text-xs text-pl-text')}>
+              <thead className={tc('text-gray-500', 'text-pl-muted')}>
                 <tr>
                   {['n', 'engine We (MMbbl)', 'printed We (MMbbl)', 'printed dWe', 'printed pr_bar'].map((h) => (
                     <th key={h} className="text-left font-normal py-1 pr-3">{h}</th>
@@ -98,7 +100,7 @@ const AquiferExplorer = () => {
                 {out.We.map((w, i) => {
                   const p = atBook ? out.printed.find((r) => r.n === i) : null;
                   return (
-                    <tr key={i} className="border-t border-gray-800">
+                    <tr key={i} className={tc('border-t border-gray-800', 'border-t border-pl-border')}>
                       <td className="py-1 pr-3">{i}</td>
                       <td className="py-1 pr-3">{fmt(w / 1e6, 6)}</td>
                       <td className="py-1 pr-3">{p ? p.We_MMbbl : '-'}</td>

@@ -8,7 +8,7 @@ For a bounded circle of dimensionless outer radius $r_{eD}$, the late time dimen
 
 $$p_D(t_D) \;\longrightarrow\; \frac{2 t_D}{r_{eD}^2 - 1} + \ln r_{eD} - \frac{3}{4}$$
 
-and the teaching lab exposes exactly that expression as `pssAsymptote(tD, reD)`, which is what the panel draws as the yellow dashed line.
+and the teaching lab exposes exactly that expression as `pssAsymptote(tD, reD)`, which is what the panel draws as the grey dashed line.
 
 Read it as a straight line in $t_D$, because that is what it is. The slope is $2/(r_{eD}^2 - 1)$, which for $r_{eD}$ 5 is 0.0833333333333333 per unit of dimensionless time. The intercept is $\ln r_{eD} - 0.75$. Two facts follow immediately and both matter.
 
@@ -40,7 +40,7 @@ So the exact solution runs parallel to the asymptote, displaced upward by a cons
 
 {{panel:mb-pd-explorer}}
 
-Set the selector to $r_{eD}$ 3: the yellow dashed asymptote is below the orange bounded curve on the right hand side of the plot, and the two run parallel. Read the pair of tiles **pD finite at tD 100** and **PSS asymptote at tD 100**, which are shown to nine figures: 25.5779553 and 25.3486123. At $r_{eD}$ 5, the capstone's case, the same two tiles give you its value and its check.
+Set the selector to $r_{eD}$ 3: the grey dashed asymptote is below the amber bounded curve on the right hand side of the plot, and the two run parallel. Read the pair of tiles **pD finite at tD 100** and **PSS asymptote at tD 100**, which are shown to nine figures: 25.5779553 and 25.3486123. At $r_{eD}$ 5, the capstone's case, the same two tiles give you its value and its check.
 
 Now set the selector to $r_{eD}$ 20 and read the same two tiles again: 2.74197107 and 2.74698541. The order has reversed, and the dashed line now sits above the curve at the right hand edge of the plot. Nothing is broken. The onset of pseudo steady state moves out in time as $r_{eD}^2$, so at $r_{eD}$ 20 the aquifer has not finished its transient by $t_D$ 100 and the asymptote is describing a regime the aquifer has not entered yet. An asymptote is a statement about late time, and late is measured relative to the size of the thing.
 

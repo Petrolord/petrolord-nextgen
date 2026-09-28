@@ -3,6 +3,9 @@ import {
   patternLedger, patternAdvice, allocationAudit, fieldLedger, surveillanceWith, PATTERNS, ALLOCATION,
 } from './floodLab';
 import { PanelShell, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { useThemeClass } from '@/design/themeClass';
+import SvgChartFrame from '@/components/charts/SvgChartFrame';
+import { seriesColor, SVG_CHART, GRID_LINE_PROPS, REFERENCE_LINE_PROPS } from '@/utils/chartSvg';
 
 // Pattern explorer: the same flood split by allocation. The field line never
 // moves; the pattern line does, and the gap between them is the argument for
@@ -16,30 +19,37 @@ const PAD = { left: 46, top: 14, right: 16, bottom: 34 };
 
 // A typed number box, dressed like the sliders (the capstone states values
 // the sliders do not reach).
-const NumBox = ({ label, value, onChange }) => (
+const NumBox = ({ label, value, onChange }) => {
+  const tc = useThemeClass();
+  return (
   <div>
-    <p className="text-gray-400 text-xs mb-1">{label}</p>
+    <p className={tc('text-gray-400 text-xs mb-1', 'text-pl-muted text-xs mb-1')}>{label}</p>
     <input value={value} onChange={(e) => onChange(e.target.value)}
-      className="w-full bg-gray-800 border border-gray-600 rounded-md text-white text-xs px-2 py-1.5" />
+      className={tc('w-full bg-gray-800 border border-gray-600 rounded-md text-white text-xs px-2 py-1.5', 'w-full bg-pl-surface border border-pl-border-strong rounded-md text-pl-text text-xs px-2 py-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus')} />
   </div>
-);
+  );
+};
 
 const fmt = (v, d = 4) => (Number.isFinite(v) ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d }) : '-');
 
-const RangeField = ({ label, value, min, max, step, onChange }) => (
+const RangeField = ({ label, value, min, max, step, onChange }) => {
+  const tc = useThemeClass();
+  return (
   <div>
-    <p className="text-gray-400 text-xs mb-1">
-      {label}: <span className="text-white">{value}</span>
+    <p className={tc('text-gray-400 text-xs mb-1', 'text-pl-muted text-xs mb-1')}>
+      {label}: <span className={tc('text-white', 'text-pl-text')}>{value}</span>
     </p>
     <input
       type="range" min={min} max={max} step={step} value={value}
       onChange={(e) => onChange(Number(e.target.value))}
-      className="w-full accent-[#BFFF00]"
+      className={tc('w-full accent-[#BFFF00]', 'w-full accent-pl-primary')}
     />
   </div>
-);
+  );
+};
 
 const PatternExplorer = () => {
+  const tc = useThemeClass();
   const [name, setName] = useState(PATTERNS[0].name);
   const [target, setTarget] = useState(1.0);
   const [win, setWin] = useState(3);
@@ -98,14 +108,14 @@ const PatternExplorer = () => {
   return (
     <PanelShell
       title="Pattern explorer"
-      subtitle="One flood, two elements. The field cumulative VRR is the pink line and does not move; the pattern is the lime line."
+      subtitle="One flood, two elements. The field cumulative VRR is the violet line and does not move; the pattern is the blue line."
     >
       <div className="grid gap-4 sm:grid-cols-3 items-end">
         <div>
-          <p className="text-gray-400 text-xs mb-1">Pattern</p>
+          <p className={tc('text-gray-400 text-xs mb-1', 'text-pl-muted text-xs mb-1')}>Pattern</p>
           <select
             value={name} onChange={(e) => setName(e.target.value)}
-            className="w-full bg-gray-800 border border-gray-600 rounded-md text-white text-xs px-2 py-1.5"
+            className={tc('w-full bg-gray-800 border border-gray-600 rounded-md text-white text-xs px-2 py-1.5', 'w-full bg-pl-surface border border-pl-border-strong rounded-md text-pl-text text-xs px-2 py-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus')}
           >
             {PATTERNS.map((p) => <option key={p.name} value={p.name}>{p.name}</option>)}
             <option value="Unrouted element">Unrouted element (no allocation)</option>
@@ -121,36 +131,36 @@ const PatternExplorer = () => {
         ))}
         <NumBox label="Target VRR (typed)" value={targetT} onChange={setTargetT} />
       </div>
-      <p className="text-xs text-gray-500 mt-1">
+      <p className={tc('text-xs text-gray-500 mt-1', 'text-xs text-pl-muted mt-1')}>
         The allocation opens on the teaching matrix and the target on the slider. A capstone brief states its own; type it in.
       </p>
 
       {pat ? (
-        <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto bg-[#0F172A] rounded-md border border-gray-700">
+        <SvgChartFrame width={W} height={H} label="Pattern and field cumulative VRR by month" minWidth={460} maxWidth={720}>
           {[0.6, 0.8, 1.0, 1.2, 1.4].map((v) => (
             <g key={v}>
-              <line x1={PAD.left} y1={y(v)} x2={W - PAD.right} y2={y(v)} stroke="#334155" strokeWidth="1" />
-              <text x={PAD.left - 6} y={y(v) + 4} textAnchor="end" fill="#94A3B8" fontSize="10">{v.toFixed(1)}</text>
+              <line x1={PAD.left} y1={y(v)} x2={W - PAD.right} y2={y(v)} {...GRID_LINE_PROPS} />
+              <text x={PAD.left - 6} y={y(v) + 4} textAnchor="end" fill={SVG_CHART.tick} fontSize="10">{v.toFixed(1)}</text>
             </g>
           ))}
-          <line x1={PAD.left} y1={y(target)} x2={W - PAD.right} y2={y(target)} stroke="#BFFF00" strokeWidth="1" strokeDasharray="5 4" opacity="0.6" />
-          <path d={line(field.series.map((r) => r.cumulativeVRR))} fill="none" stroke="#F472B6" strokeWidth="2" />
-          <path d={line(pat.series.map((r) => r.cumulativeVRR))} fill="none" stroke="#BFFF00" strokeWidth="2" />
-          <path d={line(pat.rolling)} fill="none" stroke="#38BDF8" strokeWidth="1.5" opacity="0.75" />
-          <text x={PAD.left} y={H - 10} fill="#94A3B8" fontSize="10">{field.series[0].label}</text>
-          <text x={W - PAD.right} y={H - 10} textAnchor="end" fill="#94A3B8" fontSize="10">{field.series[n - 1].label}</text>
-        </svg>
+          <line x1={PAD.left} y1={y(target)} x2={W - PAD.right} y2={y(target)} {...REFERENCE_LINE_PROPS} />
+          <path d={line(field.series.map((r) => r.cumulativeVRR))} fill="none" stroke={seriesColor(4)} strokeWidth="2" />
+          <path d={line(pat.series.map((r) => r.cumulativeVRR))} fill="none" stroke={seriesColor(0)} strokeWidth="2" />
+          <path d={line(pat.rolling)} fill="none" stroke={seriesColor(1)} strokeWidth="1.5" opacity="0.75" />
+          <text x={PAD.left} y={H - 10} fill={SVG_CHART.tick} fontSize="10">{field.series[0].label}</text>
+          <text x={W - PAD.right} y={H - 10} textAnchor="end" fill={SVG_CHART.tick} fontSize="10">{field.series[n - 1].label}</text>
+        </SvgChartFrame>
       ) : (
         <Note>No pattern by that name is defined in the fixture.</Note>
       )}
 
       <div className="mt-3">
-        <p className="text-gray-400 text-xs mb-1">Where every injected barrel went ({fmt(totalAlloc, 0)} bbl)</p>
-        <div className="flex w-full h-5 rounded overflow-hidden border border-gray-700">
+        <p className={tc('text-gray-400 text-xs mb-1', 'text-pl-muted text-xs mb-1')}>Where every injected barrel went ({fmt(totalAlloc, 0)} bbl)</p>
+        <div className={tc('flex w-full h-5 rounded overflow-hidden border border-gray-700', 'flex w-full h-5 rounded overflow-hidden border border-pl-border')}>
           {bars.map((b, i) => (
             <div
               key={b.label}
-              style={{ width: `${(b.value / totalAlloc) * 100}%`, background: b.label === 'out of zone' ? '#64748B' : ['#BFFF00', '#38BDF8', '#F472B6', '#FBBF24'][i % 4] }}
+              style={{ width: `${(b.value / totalAlloc) * 100}%`, background: b.label === 'out of zone' ? SVG_CHART.reference : [seriesColor(0), seriesColor(1), seriesColor(4), seriesColor(2)][i % 4] }}
               title={`${b.label}: ${fmt(b.value, 0)} bbl`}
             />
           ))}
@@ -169,13 +179,13 @@ const PatternExplorer = () => {
       </TileGrid>
 
       <div className="mt-4">
-        <p className="text-gray-400 text-xs mb-1">Surveillance diagnostics on the daily rows (opens on the whole record, pressure above the reference, smoothing 3)</p>
+        <p className={tc('text-gray-400 text-xs mb-1', 'text-pl-muted text-xs mb-1')}>Surveillance diagnostics on the daily rows (opens on the whole record, pressure above the reference, smoothing 3)</p>
         <div className="grid gap-4 sm:grid-cols-4 items-end">
           <NumBox label="Rows through (YYYY-MM-DD, blank for all)" value={through} onChange={setThrough} />
           <NumBox label="Chan smoothing (points)" value={smooth} onChange={setSmooth} />
           <button
             type="button" onClick={() => setAbove((v) => !v)}
-            className={`px-3 py-1.5 rounded-md border text-xs ${above ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold' : 'bg-gray-800 text-gray-300 border-gray-600'}`}
+            className={tc(`px-3 py-1.5 rounded-md border text-xs ${above ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold' : 'bg-gray-800 text-gray-300 border-gray-600'}`, `px-3 py-1.5 rounded-md border text-xs ${above ? 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold' : 'bg-pl-surface text-pl-text border-pl-border-strong'}`)}
           >
             {above ? 'Hall on pressure above the reference' : 'Hall on absolute pressure'}
           </button>

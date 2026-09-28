@@ -41,7 +41,7 @@ Now ask what that means physically. $p_D$ is a dimensionless pressure drop, so t
 
 {{panel:mb-pd-explorer}}
 
-The panel opens at $r_{eD} = 5$. The horizontal axis is logarithmic in $t_D$, which is the only way to see both ends of this behaviour at once. The blue curve is the line source, the orange curve is the bounded circle at the selected $r_{eD}$, and the yellow dashed line is the pseudo steady state asymptote that lesson 3 is about.
+The panel opens at $r_{eD} = 5$. The horizontal axis is logarithmic in $t_D$, which is the only way to see both ends of this behaviour at once. The blue curve is the line source, the amber curve is the bounded circle at the selected $r_{eD}$, and the grey dashed line is the pseudo steady state asymptote that lesson 3 is about.
 
 Read the tile marked **tD 0.1, finite / line source**. The tiles round the ratios to six figures, so it reads 25.2235, the full engine value being 25.2235278833518. Now move the **Aquifer radius ratio reD** selector through its five options, 2, 3, 5, 10 and 20, and watch that tile. It moves once, to 25.2239 at $r_{eD}$ 2, and otherwise not at all. Watch the tile marked **tD 100, finite / line source** at the same time: it runs from 24.7316 at $r_{eD}$ 2 down to 1.01241 at $r_{eD}$ 20, which are the values 24.7315675449140 and 1.01240501395299. One tile is blind to the aquifer size and the other is dominated by it. That contrast is the whole lesson.
 

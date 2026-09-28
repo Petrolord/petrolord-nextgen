@@ -3,6 +3,9 @@ import {
   deviatedPath, validationCases, gridSummary, datumDepthFt, DESIGN,
 } from './simLab';
 import { PanelShell, Tile, TileGrid, Note, SelectField } from '@/components/course/panels/petrophysics/panelKit';
+import { useThemeClass } from '@/design/themeClass';
+import SvgChartFrame from '@/components/charts/SvgChartFrame';
+import { seriesColor, SVG_CHART } from '@/utils/chartSvg';
 
 // Build explorer: the two things the Expert tier actually does. Trajectory
 // mode intersects a well path against the grid and shows the connection list
@@ -13,6 +16,7 @@ const CELL = 13;
 const fmt = (v, d = 4) => (Number.isFinite(v) ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d }) : '-');
 
 const BuildExplorer = () => {
+  const tc = useThemeClass();
   const [mode, setMode] = useState('trajectory');
   const [toX, setToX] = useState(DESIGN.deviated.to.x);
   const [toY, setToY] = useState(DESIGN.deviated.to.y);
@@ -55,19 +59,19 @@ const BuildExplorer = () => {
         {mode === 'trajectory' && (
           <>
             <div>
-              <p className="text-gray-400 text-xs mb-1">Toe easting: <span className="text-white">{toX} m</span></p>
+              <p className={tc('text-gray-400 text-xs mb-1', 'text-pl-muted text-xs mb-1')}>Toe easting: <span className={tc('text-white', 'text-pl-text')}>{toX} m</span></p>
               <input
                 type="range" min={1200} max={2600} step={100} value={toX}
                 onChange={(e) => setToX(Number(e.target.value))}
-                className="w-full accent-[#BFFF00]"
+                className={tc('w-full accent-[#BFFF00]', 'w-full accent-pl-primary')}
               />
             </div>
             <div>
-              <p className="text-gray-400 text-xs mb-1">Toe northing: <span className="text-white">{toY} m</span></p>
+              <p className={tc('text-gray-400 text-xs mb-1', 'text-pl-muted text-xs mb-1')}>Toe northing: <span className={tc('text-white', 'text-pl-text')}>{toY} m</span></p>
               <input
                 type="range" min={1200} max={2700} step={100} value={toY}
                 onChange={(e) => setToY(Number(e.target.value))}
-                className="w-full accent-[#BFFF00]"
+                className={tc('w-full accent-[#BFFF00]', 'w-full accent-pl-primary')}
               />
             </div>
           </>
@@ -83,8 +87,7 @@ const BuildExplorer = () => {
             <Tile label="Toe cell" value={path.toCell ? `(${path.toCell.i}, ${path.toCell.j})` : '-'} />
           </TileGrid>
 
-          <div className="overflow-x-auto">
-            <svg width={span * CELL + 2} height={span * CELL + 2} role="img" aria-label="Cells the trajectory crosses">
+          <SvgChartFrame width={span * CELL + 2} height={span * CELL + 2} label="Cells the trajectory crosses" maxWidth={360}>
               {Array.from({ length: span * span }, (_, idx) => {
                 const i = iMin + (idx % span);
                 const j = jMin + Math.floor(idx / span);
@@ -96,18 +99,17 @@ const BuildExplorer = () => {
                     y={(jMin + span - 1 - j) * CELL + 1}
                     width={CELL}
                     height={CELL}
-                    fill={hit ? '#BFFF00' : '#0F172A'}
-                    stroke="#334155"
+                    fill={hit ? seriesColor(0) : SVG_CHART.plate}
+                    stroke={SVG_CHART.grid}
                     strokeWidth={0.6}
                   />
                 );
               })}
-            </svg>
-          </div>
+          </SvgChartFrame>
 
           <div className="overflow-x-auto">
-            <table className="w-full text-xs text-gray-300">
-              <thead className="text-gray-500">
+            <table className={tc('w-full text-xs text-gray-300', 'w-full text-xs text-pl-text')}>
+              <thead className={tc('text-gray-500', 'text-pl-muted')}>
                 <tr><th className="text-left py-1">i</th><th className="text-left">j</th><th className="text-left">k</th><th className="text-right">Length (ft)</th><th className="text-left pl-3">Dir</th></tr>
               </thead>
               <tbody>
@@ -137,10 +139,10 @@ const BuildExplorer = () => {
           </TileGrid>
           <div className="space-y-2">
             {cases.map((c) => (
-              <div key={c.case} className="rounded border border-gray-700 bg-black/30 p-2">
-                <p className="text-xs text-[#BFFF00] mb-1">{c.case}</p>
+              <div key={c.case} className={tc('rounded border border-gray-700 bg-black/30 p-2', 'rounded border border-pl-border bg-pl-sunken p-2')}>
+                <p className={tc('text-xs text-[#BFFF00] mb-1', 'text-xs text-pl-primary-text mb-1')}>{c.case}</p>
                 {c.errors.map((e) => (
-                  <p key={e} className="text-xs text-gray-400 mb-0">{e}</p>
+                  <p key={e} className={tc('text-xs text-gray-400 mb-0', 'text-xs text-pl-muted mb-0')}>{e}</p>
                 ))}
               </div>
             ))}

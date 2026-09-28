@@ -3,6 +3,9 @@ import {
   ledgerWith, pressureView, trackedFvfLedger, periodVoidage, TARGET_BAND, LEDGER_FVF,
 } from './floodLab';
 import { PanelShell, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { useThemeClass } from '@/design/themeClass';
+import SvgChartFrame from '@/components/charts/SvgChartFrame';
+import { seriesColor, SVG_CHART, GRID_LINE_PROPS } from '@/utils/chartSvg';
 
 // Ledger explorer: the Ekene flood read through the real voidage engine. The
 // window slider shows that a rolling average is a lag, not a smoother; the band
@@ -16,30 +19,37 @@ const PAD = { left: 46, top: 14, right: 46, bottom: 34 };
 
 // A typed number box, dressed like the sliders (the capstone states values
 // the sliders do not reach).
-const NumBox = ({ label, value, onChange }) => (
+const NumBox = ({ label, value, onChange }) => {
+  const tc = useThemeClass();
+  return (
   <div>
-    <p className="text-gray-400 text-xs mb-1">{label}</p>
+    <p className={tc('text-gray-400 text-xs mb-1', 'text-pl-muted text-xs mb-1')}>{label}</p>
     <input value={value} onChange={(e) => onChange(e.target.value)}
-      className="w-full bg-gray-800 border border-gray-600 rounded-md text-white text-xs px-2 py-1.5" />
+      className={tc('w-full bg-gray-800 border border-gray-600 rounded-md text-white text-xs px-2 py-1.5', 'w-full bg-pl-surface border border-pl-border-strong rounded-md text-pl-text text-xs px-2 py-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus')} />
   </div>
-);
+  );
+};
 
 const fmt = (v, d = 4) => (Number.isFinite(v) ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d }) : '-');
 
-const RangeField = ({ label, value, min, max, step, onChange }) => (
+const RangeField = ({ label, value, min, max, step, onChange }) => {
+  const tc = useThemeClass();
+  return (
   <div>
-    <p className="text-gray-400 text-xs mb-1">
-      {label}: <span className="text-white">{value}</span>
+    <p className={tc('text-gray-400 text-xs mb-1', 'text-pl-muted text-xs mb-1')}>
+      {label}: <span className={tc('text-white', 'text-pl-text')}>{value}</span>
     </p>
     <input
       type="range" min={min} max={max} step={step} value={value}
       onChange={(e) => onChange(Number(e.target.value))}
-      className="w-full accent-[#BFFF00]"
+      className={tc('w-full accent-[#BFFF00]', 'w-full accent-pl-primary')}
     />
   </div>
-);
+  );
+};
 
 const LedgerExplorer = () => {
+  const tc = useThemeClass();
   const [win, setWin] = useState(3);
   const [bandMin, setBandMin] = useState(TARGET_BAND.min);
   const [bandMax, setBandMax] = useState(TARGET_BAND.max);
@@ -102,7 +112,7 @@ const LedgerExplorer = () => {
         <RangeField label="Band maximum" value={bandMax} min={1.0} max={1.4} step={0.01} onChange={setBandMax} />
         <button
           type="button" onClick={() => setTracked((v) => !v)}
-          className={`px-3 py-1.5 rounded-md border text-xs ${tracked ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold' : 'bg-gray-800 text-gray-300 border-gray-600'}`}
+          className={tc(`px-3 py-1.5 rounded-md border text-xs ${tracked ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold' : 'bg-gray-800 text-gray-300 border-gray-600'}`, `px-3 py-1.5 rounded-md border text-xs ${tracked ? 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold' : 'bg-pl-surface text-pl-text border-pl-border-strong'}`)}
         >
           {tracked ? 'Bo tracked on pressure' : 'Bo frozen at 1.21584'}
         </button>
@@ -116,34 +126,34 @@ const LedgerExplorer = () => {
         <NumBox label="Band maximum (typed)" value={bandMaxT} onChange={setBandMaxT} />
         <NumBox label="Read month (YYYY-MM)" value={month} onChange={setMonth} />
       </div>
-      <p className="text-xs text-gray-500 mt-1">
+      <p className={tc('text-xs text-gray-500 mt-1', 'text-xs text-pl-muted mt-1')}>
         The panel opens on the teaching factor set (Bo {LEDGER_FVF.Bo}, Bw {LEDGER_FVF.Bw}, Rs {LEDGER_FVF.Rs}) and the
         1.00 to 1.20 band. A typed band overrides the sliders. A capstone brief states its own factors, band and month.
       </p>
 
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto bg-[#0F172A] rounded-md border border-gray-700">
+      <SvgChartFrame width={W} height={H} label="Voidage replacement ratio by month with reservoir pressure" minWidth={460} maxWidth={720}>
         <rect
           x={PAD.left} y={y(band.max)} width={W - PAD.left - PAD.right}
-          height={Math.max(0, y(band.min) - y(band.max))} fill="#BFFF00" opacity="0.08"
+          height={Math.max(0, y(band.min) - y(band.max))} fill={SVG_CHART.reference} opacity="0.12"
         />
         {[0.6, 0.8, 1.0, 1.2].map((v) => (
           <g key={v}>
-            <line x1={PAD.left} y1={y(v)} x2={W - PAD.right} y2={y(v)} stroke="#334155" strokeWidth="1" />
-            <text x={PAD.left - 6} y={y(v) + 4} textAnchor="end" fill="#94A3B8" fontSize="10">{v.toFixed(1)}</text>
+            <line x1={PAD.left} y1={y(v)} x2={W - PAD.right} y2={y(v)} {...GRID_LINE_PROPS} />
+            <text x={PAD.left - 6} y={y(v) + 4} textAnchor="end" fill={SVG_CHART.tick} fontSize="10">{v.toFixed(1)}</text>
           </g>
         ))}
-        <path d={line(led.series.map((r) => r.instantaneousVRR), y)} fill="none" stroke="#38BDF8" strokeWidth="1.5" opacity="0.7" />
-        <path d={line(led.rolling, y)} fill="none" stroke="#BFFF00" strokeWidth="2" />
-        <path d={line(cumSeries, y)} fill="none" stroke="#F472B6" strokeWidth="2" />
-        <path d={line(pv.track.map((r) => r.p_end_psia), yp)} fill="none" stroke="#FBBF24" strokeWidth="1.5" strokeDasharray="4 3" />
-        <path d={line(pv.attached.map((r) => r.pressure), yp)} fill="none" stroke="#FBBF24" strokeWidth="1" opacity="0.5" />
+        <path d={line(led.series.map((r) => r.instantaneousVRR), y)} fill="none" stroke={seriesColor(1)} strokeWidth="1.5" opacity="0.7" />
+        <path d={line(led.rolling, y)} fill="none" stroke={seriesColor(0)} strokeWidth="2" />
+        <path d={line(cumSeries, y)} fill="none" stroke={seriesColor(4)} strokeWidth="2" />
+        <path d={line(pv.track.map((r) => r.p_end_psia), yp)} fill="none" stroke={seriesColor(2)} strokeWidth="1.5" strokeDasharray="4 3" />
+        <path d={line(pv.attached.map((r) => r.pressure), yp)} fill="none" stroke={seriesColor(2)} strokeWidth="1" opacity="0.5" />
         {led.fillUp && (
-          <line x1={x(led.fillUp.index)} y1={PAD.top} x2={x(led.fillUp.index)} y2={H - PAD.bottom} stroke="#F472B6" strokeWidth="1" strokeDasharray="3 3" />
+          <line x1={x(led.fillUp.index)} y1={PAD.top} x2={x(led.fillUp.index)} y2={H - PAD.bottom} stroke={seriesColor(4)} strokeWidth="1" strokeDasharray="3 3" />
         )}
-        <text x={PAD.left} y={H - 10} fill="#94A3B8" fontSize="10">{led.series[0].label}</text>
-        <text x={W - PAD.right} y={H - 10} textAnchor="end" fill="#94A3B8" fontSize="10">{led.series[n - 1].label}</text>
-        <text x={W - PAD.right + 6} y={yp(2120) + 4} fill="#FBBF24" fontSize="10">psia</text>
-      </svg>
+        <text x={PAD.left} y={H - 10} fill={SVG_CHART.tick} fontSize="10">{led.series[0].label}</text>
+        <text x={W - PAD.right} y={H - 10} textAnchor="end" fill={SVG_CHART.tick} fontSize="10">{led.series[n - 1].label}</text>
+        <text x={W - PAD.right + 6} y={yp(2120) + 4} fill={seriesColor(2)} fontSize="10">psia</text>
+      </SvgChartFrame>
 
       <TileGrid>
         <Tile label="Cumulative VRR" value={fmt(cumLast, 6)} unit="rb/rb" />
@@ -160,7 +170,7 @@ const LedgerExplorer = () => {
       </TileGrid>
 
       <Note>
-        Cyan is instantaneous VRR, lime is the rolling window, pink is cumulative, and the pink dashed line marks fill-up.
+        Green is instantaneous VRR, blue is the rolling window, violet is cumulative, and the violet dashed line marks fill-up.
         The bright amber line is the closed-form pressure track; the faint one is what a six-monthly survey cadence
         interpolates. {tracked ? 'Bo is being read off the pressure track through the PVT table.' : 'Bo is frozen at the flood-era 1.21584 rb/stb.'}
       </Note>

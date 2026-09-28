@@ -55,7 +55,7 @@ Read that as a story. The first survey lands almost exactly on the floor of the 
 
 {{panel:mb-pd-explorer}}
 
-Set the selector to $r_{eD}$ 5 (the panel opens at 10) and read the three ratio tiles across the top row, which are shown to six figures: 25.2235 at $t_D$ 0.1, 1.11701 at $t_D$ 5, and the $t_D$ 100 tile, the right branch. Those three numbers are the left branch, the floor and the right branch of the curve you have just read. On the plot, put your eye on the vertical gap between the blue and orange curves and sweep left to right: wide, narrowing, narrowest a little past the middle, then widening again. That gap is the ratio column drawn as a picture.
+Set the selector to $r_{eD}$ 5 (the panel opens at 10) and read the three ratio tiles across the top row, which are shown to six figures: 25.2235 at $t_D$ 0.1, 1.11701 at $t_D$ 5, and the $t_D$ 100 tile, the right branch. Those three numbers are the left branch, the floor and the right branch of the curve you have just read. On the plot, put your eye on the vertical gap between the blue and amber curves and sweep left to right: wide, narrowing, narrowest a little past the middle, then widening again. That gap is the ratio column drawn as a picture.
 
 ## Exercise
 

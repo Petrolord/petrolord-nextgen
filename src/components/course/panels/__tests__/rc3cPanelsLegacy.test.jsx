@@ -61,7 +61,8 @@ describe('reservoir panels outside a scope (the unmigrated reader)', () => {
       if (UPDATE) return;
       const { container } = render(scene.element);
       if (scene.act) await scene.act({ screen, fireEvent, waitFor });
-      for (const svg of container.querySelectorAll('svg:not(.lucide)')) {
+      // Every drawing that is not an icon (lucide icons stroke currentColor).
+      for (const svg of container.querySelectorAll('svg:not([stroke="currentColor"])')) {
         expect(svg.closest('[data-canvas="chart"]')).not.toBeNull();
       }
       for (const rc of container.querySelectorAll('.recharts-responsive-container')) {
