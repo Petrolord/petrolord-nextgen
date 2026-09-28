@@ -253,3 +253,34 @@ panelKit atoms around them are already on roles (1B).
   P-1 circle), the correlation case inputs byte for byte outside a scope.
 - `readerHarness.jsx` mounts a route inside `Layout`; `offlineSupabase.js`
   is the offline client the tests mock in.
+
+## Batch 3B: geoscience II course apps (as built)
+
+Reservoir volumetrics (`/dashboard/apps/reservoircalc`), rock physics
+(`/dashboard/apps/rockphysics`), pore pressure (`/dashboard/apps/porepressure`),
+earth modeling (`/dashboard/apps/earthmodel`) and basin and charge
+(`/dashboard/apps/basin`) are on the roles and registered in
+`src/design/rollout/w3b.js`.
+
+- Each learning page is the only file with colour its app owns; the course
+  panels these apps teach with are reader-only and were moved by 1C. No
+  shared file changed.
+- The page recipe is 3A's: cards on `surface`, tiles and lessons on `sunken`,
+  option and tier buttons primary when chosen, capstone results on the
+  success and danger roles with their words, certificate number and award
+  icon gold, lime toasts on the success roles, empty values `n/a`.
+- The nine hand-drawn plots are in `SvgChartFrame` (`minWidth` 420,
+  `maxWidth` 720) with kit colours: axes `AXIS_LINE_PROPS`, ticks
+  `SVG_CHART.tick`, labels `SVG_CHART.label` and `note`. Old sky goes to
+  `seriesColor(0)`, green to `(1)`, orange to `(2)`, the lime ramp and the
+  violet layer to `(4)`; yellow guide lines (ramp top, conductivity
+  interface) take `REFERENCE_LINE_PROPS`; the fault polygon is an ink dashed
+  line; well posts are white markers. The oil and thickness maps keep their
+  green cells ("Green cells hold oil; darker means a thicker column") on
+  `seriesColor(1)`.
+- The earth model well-tie table marked the worst tie by colour alone; it
+  now also prints "largest tie" beside that residual.
+- Tests: `src/pages/__tests__/Geoscience3B.theme.test.jsx` on
+  `geo3bHarness.jsx` and `geo3bStubs.js` (the four standard checks per app,
+  every tier with both capstone outcomes, the Learning Mode gate, dark, every
+  plot in a chart frame with the chart mark, none of the old plate colours).
