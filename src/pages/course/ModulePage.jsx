@@ -39,13 +39,13 @@ const ModulePage = () => {
     <>
       <Helmet><title>{mod.title} - Petrolord NextGen Academy</title></Helmet>
       <div className="max-w-3xl mx-auto p-6 space-y-6">
-        <Link to={base} className="text-sm text-gray-400 hover:text-gray-200 flex items-center gap-1">
+        <Link to={base} className="text-sm text-pl-muted hover:text-pl-text flex items-center gap-1">
           <ArrowLeft className="h-4 w-4" /> Course home
         </Link>
 
         <div>
-          <h1 className="text-2xl font-bold text-white">Module {modIndex + 1}: {mod.title}</h1>
-          <p className="text-gray-400 mt-1">
+          <h1 className="text-2xl font-bold text-pl-text">Module {modIndex + 1}: {mod.title}</h1>
+          <p className="text-pl-muted mt-1">
             {mod.lessons.length} lessons, about {estMinutes(mod.lessons)} minutes. Read them in order; the module closes with a quiz.
           </p>
         </div>
@@ -53,15 +53,15 @@ const ModulePage = () => {
         <div className="space-y-3">
           {mod.lessons.map((l, li) => (
             <Link key={l.key} to={`${base}/${mod.key}/${l.key}`} className="block">
-              <Card className="bg-[#1E293B] border-gray-700 hover:border-[#BFFF00]/50 transition-colors">
+              <Card className="hover:border-pl-primary/60 transition-colors">
                 <CardContent className="p-4 flex items-center justify-between gap-3">
                   <div className="flex items-center gap-3">
                     {readSet.has(l.key)
-                      ? <CheckCircle2 className="h-5 w-5 text-emerald-400 shrink-0" />
-                      : <BookOpen className="h-5 w-5 text-gray-500 shrink-0" />}
-                    <p className="text-white text-sm font-medium mb-0">{li + 1}. {l.title}</p>
+                      ? <CheckCircle2 className="h-5 w-5 text-pl-success-text shrink-0" />
+                      : <BookOpen className="h-5 w-5 text-pl-muted shrink-0" />}
+                    <p className="text-pl-text text-sm font-medium mb-0">{li + 1}. {l.title}</p>
                   </div>
-                  <span className="text-xs text-gray-500 flex items-center gap-1 shrink-0">
+                  <span className="text-xs text-pl-muted flex items-center gap-1 shrink-0">
                     <Clock className="h-3.5 w-3.5" /> ~{l.est_minutes} min
                   </span>
                 </CardContent>
@@ -70,27 +70,27 @@ const ModulePage = () => {
           ))}
         </div>
 
-        <Card className={`bg-[#1E293B] border-gray-700 ${!allRead && !st.quiz_passed ? 'opacity-70' : ''}`}>
+        <Card className={`${!allRead && !st.quiz_passed ? 'opacity-70' : ''}`}>
           <CardHeader className="pb-2">
-            <CardTitle className="text-white text-lg flex items-center gap-2">
+            <CardTitle className="text-pl-text text-lg flex items-center gap-2">
               {st.quiz_passed
-                ? <CheckCircle2 className="h-5 w-5 text-emerald-400" />
-                : <FileQuestion className="h-5 w-5 text-[#BFFF00]" />}
+                ? <CheckCircle2 className="h-5 w-5 text-pl-success-text" />
+                : <FileQuestion className="h-5 w-5 text-pl-accent-text" />}
               Module quiz
             </CardTitle>
             <CardDescription>A randomized set from this module's question bank. Opens once every lesson is read.</CardDescription>
           </CardHeader>
           <CardContent>
             {st.quiz_passed ? (
-              <p className="text-emerald-300 text-sm mb-0">Passed.</p>
+              <p className="text-pl-success-text text-sm mb-0">Passed.</p>
             ) : allRead ? (
               <Link to={`${base}/quiz/${mod.key}`}>
-                <Button size="sm" className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold">
+                <Button size="sm" className="font-semibold">
                   Take the quiz
                 </Button>
               </Link>
             ) : (
-              <p className="text-xs text-gray-500 mb-0">Read all the lessons first.</p>
+              <p className="text-xs text-pl-muted mb-0">Read all the lessons first.</p>
             )}
           </CardContent>
         </Card>
