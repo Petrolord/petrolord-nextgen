@@ -16,6 +16,7 @@ import {
   isThemedPath, coldLoadTheme, matchesRoute, ThemedLoadingScreen,
 } from '@/design/scopePaths';
 import { THEMED_ROUTES } from '@/design/rollout';
+import W0_ROUTES from '@/design/rollout/w0.js';
 
 const root = () => document.querySelector('[data-pl-root]');
 
@@ -156,7 +157,10 @@ describe('route registry and cold load', () => {
   });
 
   it('wave 0 themes the dashboard home only', () => {
-    expect(THEMED_ROUTES).toEqual(['/dashboard']);
+    // Each batch adds its own routes to THEMED_ROUTES; wave 0's file holds
+    // only the dashboard home, and the registry keeps it first.
+    expect(W0_ROUTES).toEqual(['/dashboard']);
+    expect(THEMED_ROUTES[0]).toBe('/dashboard');
     expect(isThemedPath('/dashboard')).toBe(true);
     for (const p of ['/', '/login', '/dashboard/enroll', '/dashboard/apps/dca', '/dashboard/modules/x', '/search']) {
       expect({ p, themed: isThemedPath(p) }).toEqual({ p, themed: false });
