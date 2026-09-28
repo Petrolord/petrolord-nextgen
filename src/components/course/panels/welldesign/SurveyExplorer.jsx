@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, ComposedChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+  ComposedChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   LISTING_WELLS, TEACHING_WELL, surveyListing, surveyMethods, ADE_PUBLISHED, buildHoldCase,
   sProfileCase, S_PROFILE_COUNT, tvdCrossingCases,
@@ -34,19 +37,17 @@ const Listing = ({ initialWell = TEACHING_WELL.id }) => {
   return (
     <>
       <SelectField label="Well" value={id} onChange={setId} options={WELLS} />
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart data={s.rows} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="vs" type="number" tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: `vertical section (${s.mdUnit})`, position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-            <YAxis dataKey="tvd" type="number" reversed tick={{ fill: '#94a3b8', fontSize: 11 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(v) => fmt(v, 2)} />
-            <Line dataKey="tvd" stroke="#BFFF00" dot={{ r: 2 }} strokeWidth={2} isAnimationActive={false} />
-          </ComposedChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <ComposedChart data={s.rows} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="vs" type="number" tick={AXIS_TICK}
+            label={{ value: `vertical section (${s.mdUnit})`, position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis dataKey="tvd" type="number" reversed tick={AXIS_TICK} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(v) => fmt(v, 2)} />
+          <Line dataKey="tvd" stroke={seriesColor(0)} dot={{ r: 2 }} strokeWidth={2} isAnimationActive={false} />
+        </ComposedChart>
+      </ChartFrame>
       <TileGrid>
         <Tile label="Stations" value={String(s.rows.length)} />
         <Tile label="Total MD" value={fmt(s.totalMd, 1)} unit={s.mdUnit} />
@@ -59,9 +60,9 @@ const Listing = ({ initialWell = TEACHING_WELL.id }) => {
         <Tile label="Worst dogleg" value={fmt(s.maxDls30m, 4)} unit="deg/30m" />
         <Tile label="The same dogleg" value={fmt(s.maxDls100ft, 4)} unit="deg/100ft" />
       </TileGrid>
-      <div className="mt-4 rounded border border-gray-700 overflow-x-auto max-h-64">
+      <div className="mt-4 rounded border border-pl-border overflow-x-auto max-h-64">
         <table className="w-full text-xs">
-          <thead className="bg-black/40 text-gray-400 sticky top-0">
+          <thead className="bg-pl-sunken text-pl-muted sticky top-0">
             <tr>
               {['MD', 'Inc', 'Azi', 'TVD', 'N', 'E', 'DLS/30m', 'VS'].map((h) => (
                 <th key={h} className="text-right p-1.5">{h}</th>
@@ -70,15 +71,15 @@ const Listing = ({ initialWell = TEACHING_WELL.id }) => {
           </thead>
           <tbody>
             {s.rows.map((r) => (
-              <tr key={r.md} className="border-t border-gray-800">
-                <td className="p-1.5 text-right text-white">{fmt(r.md, 1)}</td>
-                <td className="p-1.5 text-right text-gray-200">{fmt(r.inc, 2)}</td>
-                <td className="p-1.5 text-right text-gray-200">{fmt(r.azi, 2)}</td>
-                <td className="p-1.5 text-right text-gray-200">{fmt(r.tvd, 3)}</td>
-                <td className="p-1.5 text-right text-gray-400">{fmt(r.n, 3)}</td>
-                <td className="p-1.5 text-right text-gray-400">{fmt(r.e, 3)}</td>
-                <td className="p-1.5 text-right text-gray-400">{fmt(r.dls30m, 3)}</td>
-                <td className="p-1.5 text-right text-gray-400">{fmt(r.vs, 3)}</td>
+              <tr key={r.md} className="border-t border-pl-border">
+                <td className="p-1.5 text-right text-pl-text">{fmt(r.md, 1)}</td>
+                <td className="p-1.5 text-right text-pl-text">{fmt(r.inc, 2)}</td>
+                <td className="p-1.5 text-right text-pl-text">{fmt(r.azi, 2)}</td>
+                <td className="p-1.5 text-right text-pl-text">{fmt(r.tvd, 3)}</td>
+                <td className="p-1.5 text-right text-pl-muted">{fmt(r.n, 3)}</td>
+                <td className="p-1.5 text-right text-pl-muted">{fmt(r.e, 3)}</td>
+                <td className="p-1.5 text-right text-pl-muted">{fmt(r.dls30m, 3)}</td>
+                <td className="p-1.5 text-right text-pl-muted">{fmt(r.vs, 3)}</td>
               </tr>
             ))}
           </tbody>
@@ -99,15 +100,15 @@ const Methods = () => {
   const m = useMemo(() => surveyMethods(), []);
   return (
     <>
-      <p className="text-[11px] text-gray-400">
+      <p className="text-[11px] text-pl-muted">
         The Applied Drilling Engineering chapter 8 example: a due-north build at 3 deg per 100 ft
         from vertical to {m.finalInc} deg at {m.finalMd} ft measured depth, over {m.stations}
         {' '}stations. Published minimum-curvature results: TVD {ADE_PUBLISHED.minimumCurvature.tvd} ft,
         north {ADE_PUBLISHED.minimumCurvature.northDisplacement} ft.
       </p>
-      <div className="mt-3 rounded border border-gray-700 overflow-x-auto">
+      <div className="mt-3 rounded border border-pl-border overflow-x-auto">
         <table className="w-full text-xs">
-          <thead className="bg-black/40 text-gray-400">
+          <thead className="bg-pl-sunken text-pl-muted">
             <tr>
               <th className="text-left p-2">Method</th>
               <th className="text-right p-2">TVD (ft)</th>
@@ -119,17 +120,17 @@ const Methods = () => {
           </thead>
           <tbody>
             {m.methods.map((x) => (
-              <tr key={x.name} className="border-t border-gray-800">
-                <td className="p-2 text-white">{x.name}</td>
-                <td className="p-2 text-right text-gray-200">{fmt(x.tvd, 4)}</td>
-                <td className="p-2 text-right text-gray-200">{fmt(x.north, 4)}</td>
-                <td className={`p-2 text-right ${Math.abs(x.tvdError) > 1 ? 'text-amber-400' : 'text-gray-400'}`}>
+              <tr key={x.name} className="border-t border-pl-border">
+                <td className="p-2 text-pl-text">{x.name}</td>
+                <td className="p-2 text-right text-pl-text">{fmt(x.tvd, 4)}</td>
+                <td className="p-2 text-right text-pl-text">{fmt(x.north, 4)}</td>
+                <td className={`p-2 text-right ${Math.abs(x.tvdError) > 1 ? 'text-pl-warning-text' : 'text-pl-muted'}`}>
                   {fmt(x.tvdError, 4)}
                 </td>
-                <td className={`p-2 text-right ${Math.abs(x.northError) > 1 ? 'text-amber-400' : 'text-gray-400'}`}>
+                <td className={`p-2 text-right ${Math.abs(x.northError) > 1 ? 'text-pl-warning-text' : 'text-pl-muted'}`}>
                   {fmt(x.northError, 4)}
                 </td>
-                <td className="p-2 text-gray-500">{x.implemented ? 'yes' : 'computed here for comparison'}</td>
+                <td className="p-2 text-pl-muted">{x.implemented ? 'yes' : 'computed here for comparison'}</td>
               </tr>
             ))}
           </tbody>
@@ -155,7 +156,7 @@ const Design = () => {
   }));
   return (
     <>
-      <p className="text-[11px] text-gray-400">
+      <p className="text-[11px] text-pl-muted">
         A build and hold: {bh.design.kop} {bh.design.mdUnit} vertical, then build at
         {' '}{bh.design.rate} deg per {bh.design.mdUnit === 'ft' ? '100ft' : '30m'} to
         {' '}{bh.design.targetInc} deg, then hold {bh.design.holdLen}. Compiled into a station
@@ -173,9 +174,9 @@ const Design = () => {
         <SelectField label="S profile" value={idx} onChange={setIdx} options={options} />
       </div>
       {sp.feasible ? (
-        <div className="mt-3 rounded border border-gray-700 overflow-x-auto">
+        <div className="mt-3 rounded border border-pl-border overflow-x-auto">
           <table className="w-full text-xs">
-            <thead className="bg-black/40 text-gray-400">
+            <thead className="bg-pl-sunken text-pl-muted">
               <tr><th className="text-left p-2">Quantity</th><th className="text-right p-2">Solver</th><th className="text-right p-2">Published</th></tr>
             </thead>
             <tbody>
@@ -183,18 +184,18 @@ const Design = () => {
                 ['Build length', sp.report.buildLen, sp.published.buildLen],
                 ['Hold length', sp.report.holdLen, sp.published.holdLen],
                 ['Drop length', sp.report.dropLen, sp.published.dropLen]].map(([k, a, b]) => (
-                  <tr key={k} className="border-t border-gray-800">
-                    <td className="p-2 text-gray-400">{k}</td>
-                    <td className="p-2 text-right text-white">{fmt(a, 6)}</td>
-                    <td className="p-2 text-right text-gray-500">{fmt(b, 6)}</td>
+                  <tr key={k} className="border-t border-pl-border">
+                    <td className="p-2 text-pl-muted">{k}</td>
+                    <td className="p-2 text-right text-pl-text">{fmt(a, 6)}</td>
+                    <td className="p-2 text-right text-pl-muted">{fmt(b, 6)}</td>
                   </tr>
                 ))}
             </tbody>
           </table>
         </div>
       ) : (
-        <div className="mt-3 rounded border border-amber-700/60 bg-amber-950/30 p-3">
-          <p className="text-[11px] text-amber-200/90">{sp.error}</p>
+        <div className="mt-3 rounded border border-pl-warning/30 bg-pl-warning-bg p-3">
+          <p className="text-[11px] text-pl-text">{sp.error}</p>
         </div>
       )}
       <Note>

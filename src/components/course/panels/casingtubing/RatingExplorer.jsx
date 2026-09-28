@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   ROWS, CASING_GRADES, CONNECTION_EFFICIENCIES, rating, gradeSweep, tensionSweep,
   ratingTable, regimeCensus, boundariesOf,
@@ -72,28 +75,26 @@ const One = () => {
         <Tile label="Adjusted yield" value={MPa(r.adjustedYieldPa)} unit="MPa" />
         <Tile label="Area" value={fmt(r.areaM2 * 1e4, 3)} unit="cm2" />
       </TileGrid>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={sweep} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="fraction" type="number" domain={[0, 0.9]} tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'axial stress / yield', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'MPa or ksi', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(v) => fmt(v, 3)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine x={Number(frac)} stroke="#f59e0b" strokeDasharray="4 4" />
-            <Line dataKey="collapseMPa" name="collapse (MPa)" stroke="#BFFF00" strokeWidth={2} dot={false} isAnimationActive={false} />
-            <Line dataKey="adjustedKsi" name="adjusted yield (ksi)" stroke="#38bdf8" strokeWidth={1} dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={sweep} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="fraction" type="number" domain={[0, 0.9]} tick={AXIS_TICK}
+            label={{ value: 'axial stress / yield', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS_TICK}
+            label={{ value: 'MPa or ksi', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(v) => fmt(v, 3)} />
+          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <ReferenceLine x={Number(frac)} stroke={seriesColor(2)} strokeDasharray="4 4" />
+          <Line dataKey="collapseMPa" name="collapse (MPa)" stroke={seriesColor(0)} strokeWidth={2} dot={false} isAnimationActive={false} />
+          <Line dataKey="adjustedKsi" name="adjusted yield (ksi)" stroke={seriesColor(1)} strokeWidth={1} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
+      <div className="mt-3 text-xs text-pl-text">
         The three D over t boundaries at this grade are
         {' '}{fmt(r.boundaries.dtYp, 10)}, {fmt(r.boundaries.dtPt, 10)} and {fmt(r.boundaries.dtTe, 10)},
         and this pipe sits at {fmt(r.dt, 10)}, which is why it collapses in the
-        {' '}<span className="text-[#BFFF00]">{r.regime}</span> regime. Those three numbers belong to the
+        {' '}<span className="text-pl-accent-text">{r.regime}</span> regime. Those three numbers belong to the
         GRADE and not to the pipe: change the grade and they all move, change the weight and they do not.
       </div>
       <Note>
@@ -129,24 +130,22 @@ const Grades = () => {
         <SelectField label="Catalog row" value={row} onChange={setRow} options={ROW_OPTIONS} />
         <SelectField label="Axial, as a fraction of yield" value={frac} onChange={setFrac} options={FRACTIONS} />
       </div>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="ksi" type="number" domain={['auto', 'auto']} tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'yield strength (ksi)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'MPa', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(v) => fmt(v, 3)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line dataKey="burstMPa" name="burst" stroke="#fb7185" strokeWidth={2} dot isAnimationActive={false} />
-            <Line dataKey="collapseMPa" name="collapse" stroke="#BFFF00" strokeWidth={2} dot isAnimationActive={false} />
-            <Line dataKey="deratedMPa" name="collapse under tension" stroke="#38bdf8" strokeWidth={1} dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <ChartFrame height={256} className="mt-3">
+        <LineChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="ksi" type="number" domain={['auto', 'auto']} tick={AXIS_TICK}
+            label={{ value: 'yield strength (ksi)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS_TICK}
+            label={{ value: 'MPa', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(v) => fmt(v, 3)} />
+          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Line dataKey="burstMPa" name="burst" stroke={seriesColor(3)} strokeWidth={2} dot isAnimationActive={false} />
+          <Line dataKey="collapseMPa" name="collapse" stroke={seriesColor(0)} strokeWidth={2} dot isAnimationActive={false} />
+          <Line dataKey="deratedMPa" name="collapse under tension" stroke={seriesColor(1)} strokeWidth={1} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
+      <div className="mt-3 text-xs text-pl-text">
         {flat
           ? 'Collapse is FLAT across all ten grades on this row, because every one of them is in the elastic regime and the elastic formula does not contain the yield strength. Burst rises by a factor of more than three over the same span.'
           : 'Collapse rises with grade on this row, because at least one grade is out of the elastic regime and the other three formulas all contain the yield strength.'}
@@ -177,14 +176,14 @@ const Census = () => {
           <Tile key={k} label={k} value={`${base[k] || 0} -> ${hot[k] || 0}`} unit="of 280" />
         ))}
       </TileGrid>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         Two hundred and eighty pipes, twenty eight catalog rows at ten grades. Tension moves the
         census DOWNWARD, toward the yield regime, because it lowers the yield the boundaries are
         computed from and every boundary rises when the yield falls.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr><th className="text-left pr-3">grade</th><th className="text-right pr-3">yield/plastic</th><th className="text-right pr-3">plastic/transition</th><th className="text-right">transition/elastic</th></tr>
           </thead>
           <tbody>

@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   OFFSET_WELLS, CLEARANCE_PARAMS, clearanceCase, clearanceSensitivity,
   wmmCheck, magneticFieldAt, azimuthConversion,
@@ -22,7 +25,7 @@ const MODES = [
 ];
 const WELL_OPTIONS = OFFSET_WELLS.map((w) => ({ value: w, label: w }));
 
-const STATUS_COLOUR = { 'no-go': 'text-red-400', review: 'text-amber-400', clear: 'text-emerald-400' };
+const STATUS_COLOUR = { 'no-go': 'text-pl-danger-text', review: 'text-pl-warning-text', clear: 'text-pl-success-text' };
 
 // The ladder opens on offset 05, a review case. Offsets 01, 09 and 10 are
 // graded by the Expert capstone and sit one select away. `initialWell` exists
@@ -36,22 +39,20 @@ const Ladder = ({ initialWell = LADDER_DEFAULT_WELL }) => {
   return (
     <>
       <SelectField label="Offset well" value={well} onChange={setWell} options={WELL_OPTIONS} />
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={series} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="md" type="number" tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'reference MD (m)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} domain={['auto', 'auto']} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(v) => fmt(v, 4)} />
-            <ReferenceLine y={1.5} stroke="#f59e0b" strokeDasharray="4 4" />
-            <ReferenceLine y={1.0} stroke="#ef4444" strokeDasharray="4 4" />
-            <ReferenceLine y={0} stroke="#64748b" />
-            <Line dataKey="sf" stroke="#BFFF00" dot={false} strokeWidth={2} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={series} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="md" type="number" tick={AXIS_TICK}
+            label={{ value: 'reference MD (m)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS_TICK} domain={['auto', 'auto']} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(v) => fmt(v, 4)} />
+          <ReferenceLine y={1.5} stroke={seriesColor(2)} strokeDasharray="4 4" />
+          <ReferenceLine y={1.0} stroke={seriesColor(3)} strokeDasharray="4 4" />
+          <ReferenceLine y={0} stroke={SVG_CHART.reference} />
+          <Line dataKey="sf" stroke={seriesColor(0)} dot={false} strokeWidth={2} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <TileGrid>
         <Tile label="Minimum separation factor" value={fmt(c.minSf, 6)} />
         <Tile label="Published minimum" value={fmt(c.publishedMinSf, 6)} />
@@ -60,7 +61,7 @@ const Ladder = ({ initialWell = LADDER_DEFAULT_WELL }) => {
         <Tile label="Stations" value={String(c.md.length)} />
         <Tile label="Classification" value={c.classification.status} />
       </TileGrid>
-      <div className={`mt-3 text-xs ${STATUS_COLOUR[c.classification.status] || 'text-gray-300'}`}>
+      <div className={`mt-3 text-xs ${STATUS_COLOUR[c.classification.status] || 'text-pl-text'}`}>
         {c.classification.violations.length} station
         {c.classification.violations.length === 1 ? '' : 's'} below the review threshold of
         {' '}{c.classification.thresholds.review}, of which
@@ -68,9 +69,9 @@ const Ladder = ({ initialWell = LADDER_DEFAULT_WELL }) => {
         threshold of {c.classification.thresholds.noGo}.
       </div>
       {c.minSf < 0 && (
-        <div className="mt-3 rounded border border-amber-700/60 bg-amber-950/30 p-3">
-          <p className="text-amber-300 text-xs font-medium mb-1">This separation factor is negative</p>
-          <p className="text-[11px] text-amber-200/90">
+        <div className="mt-3 rounded border border-pl-warning/30 bg-pl-warning-bg p-3">
+          <p className="text-pl-warning-text text-xs font-medium mb-1">This separation factor is negative</p>
+          <p className="text-[11px] text-pl-text">
             The two uncertainty envelopes overlap. A negative separation factor and a positive one
             are not two points on the same scale: the numerator has gone below zero, so anything
             that enlarges the denominator moves the number towards zero and makes it look better.
@@ -88,9 +89,9 @@ const Sensitivity = () => {
   return (
     <>
       <SelectField label="Offset well" value={well} onChange={setWell} options={WELL_OPTIONS} />
-      <div className="mt-3 rounded border border-gray-700 overflow-x-auto">
+      <div className="mt-3 rounded border border-pl-border overflow-x-auto">
         <table className="w-full text-xs">
-          <thead className="bg-black/40 text-gray-400">
+          <thead className="bg-pl-sunken text-pl-muted">
             <tr>
               <th className="text-left p-2">Assumption</th>
               <th className="text-right p-2">Minimum separation factor</th>
@@ -99,10 +100,10 @@ const Sensitivity = () => {
           </thead>
           <tbody>
             {s.sweep.map((r, i) => (
-              <tr key={r.label} className="border-t border-gray-800">
-                <td className="p-2 text-white">{r.label}</td>
-                <td className="p-2 text-right text-gray-200">{fmt(r.minSf, 6)}</td>
-                <td className={`p-2 text-right ${i === 0 ? 'text-gray-600' : r.minSf > s.sweep[0].minSf ? 'text-emerald-400' : 'text-red-400'}`}>
+              <tr key={r.label} className="border-t border-pl-border">
+                <td className="p-2 text-pl-text">{r.label}</td>
+                <td className="p-2 text-right text-pl-text">{fmt(r.minSf, 6)}</td>
+                <td className={`p-2 text-right ${i === 0 ? 'text-pl-muted' : r.minSf > s.sweep[0].minSf ? 'text-pl-success-text' : 'text-pl-danger-text'}`}>
                   {i === 0 ? 'baseline' : fmt(r.minSf - s.sweep[0].minSf, 6)}
                 </td>
               </tr>
@@ -156,9 +157,9 @@ const Magnetics = () => {
           <Tile label="The same, on grid north" value={fmt(conversion.grid, 5)} unit="deg grid" />
         </TileGrid>
       )}
-      <div className="mt-4 rounded border border-gray-700 overflow-x-auto max-h-56">
+      <div className="mt-4 rounded border border-pl-border overflow-x-auto max-h-56">
         <table className="w-full text-xs">
-          <thead className="bg-black/40 text-gray-400 sticky top-0">
+          <thead className="bg-pl-sunken text-pl-muted sticky top-0">
             <tr>
               <th className="text-right p-1.5">Lat</th><th className="text-right p-1.5">Lon</th>
               <th className="text-right p-1.5">Published D</th><th className="text-right p-1.5">Engine D</th>
@@ -167,12 +168,12 @@ const Magnetics = () => {
           </thead>
           <tbody>
             {check.rows.map((r) => (
-              <tr key={`${r.latDeg}-${r.lonDeg}-${r.date}-${r.heightKm}`} className="border-t border-gray-800">
-                <td className="p-1.5 text-right text-gray-200">{fmt(r.latDeg, 0)}</td>
-                <td className="p-1.5 text-right text-gray-200">{fmt(r.lonDeg, 0)}</td>
-                <td className="p-1.5 text-right text-gray-400">{fmt(r.publishedD, 2)}</td>
-                <td className="p-1.5 text-right text-white">{fmt(r.declinationDeg, 5)}</td>
-                <td className="p-1.5 text-right text-gray-500">{fmt(r.dError, 6)}</td>
+              <tr key={`${r.latDeg}-${r.lonDeg}-${r.date}-${r.heightKm}`} className="border-t border-pl-border">
+                <td className="p-1.5 text-right text-pl-text">{fmt(r.latDeg, 0)}</td>
+                <td className="p-1.5 text-right text-pl-text">{fmt(r.lonDeg, 0)}</td>
+                <td className="p-1.5 text-right text-pl-muted">{fmt(r.publishedD, 2)}</td>
+                <td className="p-1.5 text-right text-pl-text">{fmt(r.declinationDeg, 5)}</td>
+                <td className="p-1.5 text-right text-pl-muted">{fmt(r.dError, 6)}</td>
               </tr>
             ))}
           </tbody>
@@ -196,7 +197,7 @@ const ClearanceExplorer = ({ initialMode = 'ladder', initialWell } = {}) => {
       subtitle="The ISCWSA standard example wells, the assumptions behind a separation factor, and the north it is all measured from"
     >
       <SelectField label="View" value={mode} onChange={setMode} options={MODES} />
-      <p className="text-[11px] text-gray-500 mt-2">
+      <p className="text-[11px] text-pl-muted mt-2">
         Pedal-curve method at k {CLEARANCE_PARAMS.k}, surface position sigma
         {' '}{CLEARANCE_PARAMS.sigmaPa} m, tool projection allowance {CLEARANCE_PARAMS.Sm} m,
         reference radius {CLEARANCE_PARAMS.refRadius} m, offset radius {CLEARANCE_PARAMS.offRadius} m.

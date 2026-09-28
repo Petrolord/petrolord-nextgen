@@ -6,7 +6,7 @@ import { NumField, Note } from '@/components/course/panels/petrophysics/panelKit
 // explorers. Blank boxes keep the selected case's own mud.
 const MudBoxes = ({ typed, setTyped, valid }) => (
   <div className="mt-2">
-    <p className="text-[11px] text-gray-500">
+    <p className="text-[11px] text-pl-muted">
       Your mud: type all four readings and a density to run your own mud in every view. Blank boxes
       keep the selected case&apos;s own mud.
     </p>

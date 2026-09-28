@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import { WELLS, SCENARIOS, sheet, volumes, INFLUX_GAS_MAX_KGM3, INFLUX_LIQUID_MIN_KGM3 } from './wellcontrolLab';
 import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
@@ -70,32 +73,30 @@ const Schedule = () => {
         <SelectField label="Scenario" value={scn} onChange={setScn} options={SCEN_OPTIONS} />
         <NumField label="Steps" value={steps} onChange={setSteps} />
       </div>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={s.schedule.map((r) => ({ strokes: r.strokes, p: r.pressurePa / 1e6 }))}
-            margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="strokes" type="number" tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'strokes', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} domain={['auto', 'auto']}
-              label={{ value: 'drill pipe pressure (MPa)', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(v) => fmt(v, 5)} />
-            <ReferenceLine y={s.fcpPa / 1e6} stroke="#f59e0b" strokeDasharray="4 4" />
-            <Line dataKey="p" stroke="#BFFF00" strokeWidth={2} dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <div className="mt-3 rounded border border-gray-700 overflow-x-auto max-h-48">
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={s.schedule.map((r) => ({ strokes: r.strokes, p: r.pressurePa / 1e6 }))}
+          margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="strokes" type="number" tick={AXIS_TICK}
+            label={{ value: 'strokes', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS_TICK} domain={['auto', 'auto']}
+            label={{ value: 'drill pipe pressure (MPa)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(v) => fmt(v, 5)} />
+          <ReferenceLine y={s.fcpPa / 1e6} stroke={seriesColor(2)} strokeDasharray="4 4" />
+          <Line dataKey="p" stroke={seriesColor(0)} strokeWidth={2} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
+      <div className="mt-3 rounded border border-pl-border overflow-x-auto max-h-48">
         <table className="w-full text-xs">
-          <thead className="bg-black/40 text-gray-400 sticky top-0">
+          <thead className="bg-pl-sunken text-pl-muted sticky top-0">
             <tr><th className="text-right p-2">Strokes</th><th className="text-right p-2">Drill pipe pressure (MPa)</th></tr>
           </thead>
           <tbody>
             {s.schedule.map((r) => (
-              <tr key={r.strokes} className="border-t border-gray-800">
-                <td className="p-2 text-right text-gray-200">{fmt(r.strokes, 4)}</td>
-                <td className="p-2 text-right text-white">{MPa(r.pressurePa)}</td>
+              <tr key={r.strokes} className="border-t border-pl-border">
+                <td className="p-2 text-right text-pl-text">{fmt(r.strokes, 4)}</td>
+                <td className="p-2 text-right text-pl-text">{MPa(r.pressurePa)}</td>
               </tr>
             ))}
           </tbody>
@@ -143,8 +144,8 @@ const Influx = () => {
         </TileGrid>
       )}
       {s && s.warnings?.length > 0 && (
-        <div className="mt-3 rounded border border-amber-700/60 bg-amber-950/30 p-3">
-          {s.warnings.map((w) => <p key={w} className="text-[11px] text-amber-200/90 mb-1">{w}</p>)}
+        <div className="mt-3 rounded border border-pl-warning/30 bg-pl-warning-bg p-3">
+          {s.warnings.map((w) => <p key={w} className="text-[11px] text-pl-text mb-1">{w}</p>)}
         </div>
       )}
       <Note>
@@ -166,7 +167,7 @@ const KillSheetExplorer = () => {
       subtitle="Six numbers a driller writes down, the pressures they imply, and what they say about the influx"
     >
       <SelectField label="View" value={mode} onChange={setMode} options={MODES} />
-      <p className="text-[11px] text-gray-500 mt-2">
+      <p className="text-[11px] text-pl-muted mt-2">
         Mud 1440 kg/m3, pump 0.012 m3/stroke, slow circulating rate pressure 4.5 MPa.
       </p>
       <div className="mt-3">

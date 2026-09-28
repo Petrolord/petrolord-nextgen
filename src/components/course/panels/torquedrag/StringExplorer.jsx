@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, Legend,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, Legend,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   WELLS, wellSummary, stringWeights, broomstick, operationTable, runCase, verticalClosedForm,
   TEACHING_MUD_KGM3, mudOver,
@@ -35,9 +38,9 @@ const Weights = ({ over }) => {
   return (
     <>
       <SelectField label="Well" value={well} onChange={setWell} options={WELL_OPTIONS} />
-      <div className="mt-3 rounded border border-gray-700 overflow-x-auto">
+      <div className="mt-3 rounded border border-pl-border overflow-x-auto">
         <table className="w-full text-xs">
-          <thead className="bg-black/40 text-gray-400">
+          <thead className="bg-pl-sunken text-pl-muted">
             <tr>
               <th className="text-left p-2">Component</th>
               <th className="text-right p-2">Length (m)</th>
@@ -49,13 +52,13 @@ const Weights = ({ over }) => {
           </thead>
           <tbody>
             {s.string.map((c) => (
-              <tr key={c.type} className="border-t border-gray-800">
-                <td className="p-2 text-white uppercase">{c.type}</td>
-                <td className="p-2 text-right text-gray-200">{fmt(c.lengthM, 0)}</td>
-                <td className="p-2 text-right text-gray-200">{fmt(c.odM, 5)}</td>
-                <td className="p-2 text-right text-gray-200">{fmt(c.idM, 5)}</td>
-                <td className="p-2 text-right text-gray-200">{fmt(c.weightKgM, 4)}</td>
-                <td className="p-2 text-right text-gray-400">{kN(c.weightKgM * c.lengthM * 9.80665)}</td>
+              <tr key={c.type} className="border-t border-pl-border">
+                <td className="p-2 text-pl-text uppercase">{c.type}</td>
+                <td className="p-2 text-right text-pl-text">{fmt(c.lengthM, 0)}</td>
+                <td className="p-2 text-right text-pl-text">{fmt(c.odM, 5)}</td>
+                <td className="p-2 text-right text-pl-text">{fmt(c.idM, 5)}</td>
+                <td className="p-2 text-right text-pl-text">{fmt(c.weightKgM, 4)}</td>
+                <td className="p-2 text-right text-pl-muted">{kN(c.weightKgM * c.lengthM * 9.80665)}</td>
               </tr>
             ))}
           </tbody>
@@ -98,24 +101,22 @@ const Broomstick = ({ over }) => {
   return (
     <>
       <SelectField label="Well" value={well} onChange={setWell} options={WELL_OPTIONS} />
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={rows} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="md" type="number" tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'measured depth (m)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'tension (kN)', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(v) => fmt(v, 2)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={0} stroke="#ef4444" strokeDasharray="4 4" />
-            <Line dataKey="pickup" name="pick up" stroke="#BFFF00" dot={false} strokeWidth={2} isAnimationActive={false} />
-            <Line dataKey="rotating" name="rotate off bottom" stroke="#38bdf8" dot={false} strokeWidth={2} isAnimationActive={false} />
-            <Line dataKey="slackoff" name="slack off" stroke="#f59e0b" dot={false} strokeWidth={2} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3">
+        <LineChart data={rows} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="md" type="number" tick={AXIS_TICK}
+            label={{ value: 'measured depth (m)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS_TICK}
+            label={{ value: 'tension (kN)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(v) => fmt(v, 2)} />
+          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <ReferenceLine y={0} stroke={seriesColor(3)} strokeDasharray="4 4" />
+          <Line dataKey="pickup" name="pick up" stroke={seriesColor(0)} dot={false} strokeWidth={2} isAnimationActive={false} />
+          <Line dataKey="rotating" name="rotate off bottom" stroke={seriesColor(1)} dot={false} strokeWidth={2} isAnimationActive={false} />
+          <Line dataKey="slackoff" name="slack off" stroke={seriesColor(2)} dot={false} strokeWidth={2} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <TileGrid>
         <Tile label="Pick up" value={N(b.pickupN)} unit="N" />
         <Tile label="Rotate off bottom" value={N(b.rotatingN)} unit="N" />
@@ -125,9 +126,9 @@ const Broomstick = ({ over }) => {
         <Tile label="Total swing" value={N(b.dragSwingN)} unit="N" />
       </TileGrid>
       {b.slackoffN < 0 && (
-        <div className="mt-3 rounded border border-amber-700/60 bg-amber-950/30 p-3">
-          <p className="text-amber-300 text-xs font-medium mb-1">The slack-off hookload is negative</p>
-          <p className="text-[11px] text-amber-200/90">
+        <div className="mt-3 rounded border border-pl-warning/30 bg-pl-warning-bg p-3">
+          <p className="text-pl-warning-text text-xs font-medium mb-1">The slack-off hookload is negative</p>
+          <p className="text-[11px] text-pl-text">
             The model is saying the string will not fall into this hole under its own weight: it
             would have to be pushed, and a drill string in compression buckles rather than pushes.
             Read the tension curve: it crosses zero and keeps going, which is where the soft-string
@@ -150,9 +151,9 @@ const Operations = ({ over }) => {
   return (
     <>
       <SelectField label="Well" value={well} onChange={setWell} options={WELL_OPTIONS} />
-      <div className="mt-3 rounded border border-gray-700 overflow-x-auto">
+      <div className="mt-3 rounded border border-pl-border overflow-x-auto">
         <table className="w-full text-xs">
-          <thead className="bg-black/40 text-gray-400">
+          <thead className="bg-pl-sunken text-pl-muted">
             <tr>
               <th className="text-left p-2">Operation</th>
               <th className="text-right p-2">Hookload (N)</th>
@@ -164,13 +165,13 @@ const Operations = ({ over }) => {
           </thead>
           <tbody>
             {t.map((r) => (
-              <tr key={r.operation} className="border-t border-gray-800">
-                <td className="p-2 text-white">{r.operation.replace(/_/g, ' ')}</td>
-                <td className={`p-2 text-right ${r.hookloadN < 0 ? 'text-red-400' : 'text-gray-200'}`}>{N(r.hookloadN)}</td>
-                <td className="p-2 text-right text-gray-200">{Nm(r.surfaceTorqueNm)}</td>
-                <td className="p-2 text-right text-gray-400">{N(r.minTensionN)}</td>
-                <td className="p-2 text-right text-gray-400">{fmt(r.maxSideForceNPerM, 4)}</td>
-                <td className={`p-2 text-right ${r.bucklingFirstMd == null ? 'text-gray-600' : 'text-amber-400'}`}>
+              <tr key={r.operation} className="border-t border-pl-border">
+                <td className="p-2 text-pl-text">{r.operation.replace(/_/g, ' ')}</td>
+                <td className={`p-2 text-right ${r.hookloadN < 0 ? 'text-pl-danger-text' : 'text-pl-text'}`}>{N(r.hookloadN)}</td>
+                <td className="p-2 text-right text-pl-text">{Nm(r.surfaceTorqueNm)}</td>
+                <td className="p-2 text-right text-pl-muted">{N(r.minTensionN)}</td>
+                <td className="p-2 text-right text-pl-muted">{fmt(r.maxSideForceNPerM, 4)}</td>
+                <td className={`p-2 text-right ${r.bucklingFirstMd == null ? 'text-pl-muted' : 'text-pl-warning-text'}`}>
                   {r.bucklingFirstMd == null ? 'none' : `${fmt(r.bucklingFirstMd, 0)} m`}
                 </td>
               </tr>
@@ -202,7 +203,7 @@ const StringExplorer = () => {
         <NumField label={`Mud density (kg/m3), blank for the lessons' ${TEACHING_MUD_KGM3}`} value={mud}
           onChange={setMud} placeholder={String(TEACHING_MUD_KGM3)} />
       </div>
-      <p className="text-[11px] text-gray-500 mt-2">
+      <p className="text-[11px] text-pl-muted mt-2">
         Drill collars, heavy weight and drill pipe in {over?.mudDensityKgM3 ?? TEACHING_MUD_KGM3} kg/m3 mud,
         friction 0.25 cased and 0.35 open hole, 120 rpm, 0.3 m/s trip speed, 89 kN weight on bit,
         2.7 kN.m bit torque. Type a mud density to run your own case.

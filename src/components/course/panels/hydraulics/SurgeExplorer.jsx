@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   CASES, surgeSwab, tripSweep, closedOverOpen, speedLimit, pressureSplit, CLINGING_CONSTANT,
   BLANK_MUD, mudOver,
@@ -35,26 +38,24 @@ const Sweep = ({ over }) => {
         <SelectField label="String" value={mode} onChange={setMode}
           options={[{ value: 'closed', label: 'closed (float or plugged)' }, { value: 'open', label: 'open (flowing through)' }]} />
       </div>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={sw} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="tripSpeedMs" type="number" tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'trip speed (m/s)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} domain={['auto', 'auto']}
-              label={{ value: 'EMW (kg/m3)', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(v) => fmt(v, 3)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={rho} stroke="#94a3b8" strokeDasharray="4 4" />
-            <Line dataKey="surgeEmwKgM3" name="surge, running in" stroke="#ef4444" strokeWidth={2} isAnimationActive={false} />
-            <Line dataKey="swabEmwKgM3" name="swab, pulling out" stroke="#38bdf8" strokeWidth={2} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <div className="mt-3 rounded border border-gray-700 overflow-x-auto">
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={sw} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="tripSpeedMs" type="number" tick={AXIS_TICK}
+            label={{ value: 'trip speed (m/s)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS_TICK} domain={['auto', 'auto']}
+            label={{ value: 'EMW (kg/m3)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(v) => fmt(v, 3)} />
+          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <ReferenceLine y={rho} stroke={SVG_CHART.reference} strokeDasharray="4 4" />
+          <Line dataKey="surgeEmwKgM3" name="surge, running in" stroke={seriesColor(3)} strokeWidth={2} isAnimationActive={false} />
+          <Line dataKey="swabEmwKgM3" name="swab, pulling out" stroke={seriesColor(0)} strokeWidth={2} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
+      <div className="mt-3 rounded border border-pl-border overflow-x-auto">
         <table className="w-full text-xs">
-          <thead className="bg-black/40 text-gray-400">
+          <thead className="bg-pl-sunken text-pl-muted">
             <tr>
               <th className="text-right p-2">Speed (m/s)</th>
               <th className="text-right p-2">Pressure (MPa)</th>
@@ -64,11 +65,11 @@ const Sweep = ({ over }) => {
           </thead>
           <tbody>
             {sw.map((r) => (
-              <tr key={r.tripSpeedMs} className="border-t border-gray-800">
-                <td className="p-2 text-right text-white">{fmt(r.tripSpeedMs, 2)}</td>
-                <td className="p-2 text-right text-gray-200">{fmt(r.dpPa / 1e6, 6)}</td>
-                <td className="p-2 text-right text-gray-400">{fmt(r.surgeEmwKgM3, 4)}</td>
-                <td className="p-2 text-right text-gray-400">{fmt(r.swabEmwKgM3, 4)}</td>
+              <tr key={r.tripSpeedMs} className="border-t border-pl-border">
+                <td className="p-2 text-right text-pl-text">{fmt(r.tripSpeedMs, 2)}</td>
+                <td className="p-2 text-right text-pl-text">{fmt(r.dpPa / 1e6, 6)}</td>
+                <td className="p-2 text-right text-pl-muted">{fmt(r.surgeEmwKgM3, 4)}</td>
+                <td className="p-2 text-right text-pl-muted">{fmt(r.swabEmwKgM3, 4)}</td>
               </tr>
             ))}
           </tbody>
