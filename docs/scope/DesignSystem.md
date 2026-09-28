@@ -254,7 +254,7 @@ panelKit atoms around them are already on roles (1B).
 - `readerHarness.jsx` mounts a route inside `Layout`; `offlineSupabase.js`
   is the offline client the tests mock in.
 
-## Batch 3C as built: reservoir course apps
+## 5. Batch 3C: reservoir course apps (as built)
 
 - Routes (`rollout/w3c.js`): `/dashboard/apps/` `dca`, `mbal`, `scal`,
   `waterflood`, `sim`, `fluid` and `welltest`, exact. Their course reader
@@ -264,10 +264,13 @@ panelKit atoms around them are already on roles (1B).
   Learning Mode pill and the certificate number, the success and danger
   roles with their words for the grading result).
 - The 21 panels under `components/course/panels/{dca,mbal,scal,waterflood,sim,fluid,welltest}`
-  are scope-aware with `useThemeClass`, because the reader and the handbook
-  also render them. Outside a scope their classes match a fixture captured
-  from main `1fbbedf34` before any change
-  (`panels/__tests__/rc3cPanelsLegacy.test.jsx`, 71 scenes).
+  are scope-aware with `useThemeClass`: the batch started while the reader
+  and the handbook (1C) were unmigrated, and they render these panels too.
+  With 1C merged every screen that shows them is inside a scope, so the
+  legacy branch is only reached outside any scope; wave 7 drops it. Outside
+  a scope their classes match a fixture captured from main `1fbbedf34`
+  before any change (`panels/__tests__/rc3cPanelsLegacy.test.jsx`, 71
+  scenes); `rc3cPanelsTheme.test.jsx` walks the same scenes inside a scope.
 - Every chart is on the kit in both places: 16 hand-made plots in
   `SvgChartFrame`, the two well test Recharts plots in `ChartFrame` with
   `GRID_STYLE`, `AXIS_TICK` and `TOOLTIP_STYLE`. Colours follow the map in
