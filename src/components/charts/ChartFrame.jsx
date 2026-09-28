@@ -1,0 +1,73 @@
+import React, { useId } from 'react';
+import { ResponsiveContainer } from 'recharts';
+import { Download } from 'lucide-react';
+import ChartLogo from '@/components/charts/ChartLogo';
+import { exportChartAsImage } from '@/utils/chartExport';
+
+/**
+ * Standard Petrolord chart frame. Ported from the Suite
+ * (src/components/charts/ChartFrame.jsx, main e7807a1da) with the same API;
+ * the PNG export comes from '@/utils/chartExport' (NextGen has no DCA module).
+ *
+ * White chart surface with a reserved footer band for the ChartLogo watermark,
+ * so the logo never overlaps the plot area or the X-axis annotations. Use this
+ * to wrap any Recharts chart across the Suite instead of placing ChartLogo
+ * directly over a ResponsiveContainer.
+ *
+ *   <ChartFrame height={260}>
+ *     <LineChart data={...}> ... </LineChart>
+ *   </ChartFrame>
+ *
+ * `height` is the plot height in px (ResponsiveContainer needs a fixed height
+ * because the parent's height is content-driven). The logo sits in a reserved
+ * band below that (logoHeight + 20px, 60px at the default), clear of the axis
+ * labels. Optional `logoHeight` shrinks or grows the watermark and its band;
+ * apps whose layouts crowd the default mark pass a smaller value.
+ *
+ * Optional `exportFilename` (MB7, kit-level and backward compatible): when
+ * set, a small download button in the top-right captures the frame (chart +
+ * watermark) as a PNG named `<exportFilename>.png`, via the shared
+ * exportChartAsImage helper (html2canvas) the DCA and MBAL plots use.
+ *
+ * Optional `header` (fiscal naming wave 2026-09-14, backward compatible): text
+ * rendered inside the captured frame above the plot, so an exported PNG carries
+ * it. Use it for a metric's definition, which must travel with the image.
+ */
+// px; the reserved band below the plot scales with it. 40px is the suite
+// standard watermark size (2026-08-26 owner directive rolling back the
+// 2.5x enlargement of 2026-08-16, which read as oversized).
+const DEFAULT_LOGO_HEIGHT = 40;
+
+const ChartFrame = ({ height = 260, className = '', exportFilename = null, logoHeight = DEFAULT_LOGO_HEIGHT, header = null, children }) => {
+  const frameId = useId().replace(/[^a-zA-Z0-9_-]/g, '');
+  const elementId = `chart-frame-${frameId}`;
+  return (
+    <div
+      data-canvas="chart"
+      className={`relative bg-white rounded-b-lg ${className}`}
+      style={{ paddingBottom: logoHeight + 20 }}
+      id={exportFilename ? elementId : undefined}
+    >
+      {header && (
+        <p className="chart-frame-header px-3 pt-2 pr-10 text-[11px] leading-snug text-slate-600">{header}</p>
+      )}
+      <ResponsiveContainer width="100%" height={height}>
+        {children}
+      </ResponsiveContainer>
+      <ChartLogo style={{ height: `${logoHeight}px`, bottom: '10px', opacity: 0.55 }} />
+      {exportFilename && (
+        <button
+          type="button"
+          onClick={() => exportChartAsImage(elementId, exportFilename)}
+          title="Download chart as PNG"
+          aria-label="Download chart as PNG"
+          className="absolute top-2 right-2 p-1.5 rounded border border-slate-200 bg-white/90 text-slate-500 hover:text-slate-800 hover:bg-white shadow-sm"
+        >
+          <Download className="h-3.5 w-3.5" />
+        </button>
+      )}
+    </div>
+  );
+};
+
+export default ChartFrame;
