@@ -65,6 +65,8 @@ function renderAt(path) {
         <RoleProvider>
           <Routes>
             <Route path="/dashboard/*" element={<ApplicationLayoutProvider><Layout><DashboardPage /></Layout></ApplicationLayoutProvider>} />
+            {/* a signed-in route no batch registers (the gate's negative control) */}
+            <Route path="/legacy-probe" element={<ApplicationLayoutProvider><Layout><h1>Legacy probe</h1></Layout></ApplicationLayoutProvider>} />
           </Routes>
         </RoleProvider>
       </MemoryRouter>
@@ -110,9 +112,12 @@ describe('Dashboard home, further states', () => {
   });
 
   it('a route the rollout has not reached keeps the legacy frame (negative control)', async () => {
-    renderAt('/dashboard/modules/anything');
-    await screen.findByText('Engineering Modules');
-    expect(document.querySelector('[data-pl-theme]')).toBeNull();
+    // 1A registered /dashboard/modules/*, so the control mounts Layout on a
+    // route no batch registers. The ink rail (1A) is a fixed dark scope on
+    // every route; nothing else carries a theme there.
+    renderAt('/legacy-probe');
+    await screen.findByText('Legacy probe');
+    expect(document.querySelector('[data-pl-theme]:not([data-testid="sidebar-rail"])')).toBeNull();
     expect(screen.queryByTestId('theme-toggle')).toBeNull();
     expect(document.querySelector('header').className).toContain('bg-[#1E293B]');
     // the detector finds nothing only because there is no scope to scan

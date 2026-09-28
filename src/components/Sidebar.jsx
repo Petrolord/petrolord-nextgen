@@ -20,6 +20,16 @@ import { useRole } from '@/contexts/RoleContext';
 import { useApplicationLayout } from '@/contexts/ApplicationLayoutContext';
 import CourseModuleNav from '@/components/sidebar/CourseModuleNav';
 import useIsSponsorLead from '@/hooks/useIsSponsorLead';
+import { FixedTheme } from '@/design/ThemeProvider';
+import { RAIL_ITEM, RAIL_ITEM_ACTIVE, RAIL_ITEM_IDLE } from '@/components/sidebar/railClasses';
+
+// Design system (docs/scope/DesignSystem-Rollout.md section 5.2, batch 1A):
+// the rail is the family's dark ink rail in both themes, on every signed-in
+// route. It sits outside the page scope; its root carries
+// data-pl-theme="dark" inside a FixedTheme (no storage, no toggle), so the
+// pl-* roles below resolve to the dark ink palette whatever the page next
+// to it uses. Lime is retired: the active item is a raised fill with a gold
+// edge, group titles are gold eyebrows.
 
 const SidebarItem = ({ to, icon: Icon, label, exact = false }) => {
   const location = useLocation();
@@ -31,13 +41,12 @@ const SidebarItem = ({ to, icon: Icon, label, exact = false }) => {
     <NavLink
       to={to}
       className={({ isActive: linkActive }) => cn(
-        "flex items-center gap-3 px-3 py-2 rounded-md transition-all duration-200 group text-sm font-medium",
-        (exact ? linkActive : isActive)
-          ? "bg-[#BFFF00] text-black shadow-[0_0_15px_rgba(191,255,0,0.3)]"
-          : "text-slate-400 hover:text-white hover:bg-white/5"
+        RAIL_ITEM,
+        'font-medium',
+        (exact ? linkActive : isActive) ? RAIL_ITEM_ACTIVE : RAIL_ITEM_IDLE
       )}
     >
-      <Icon className={cn("w-5 h-5", isActive ? "text-black" : "group-hover:text-[#BFFF00]")} />
+      <Icon className={cn("w-5 h-5", isActive ? "text-pl-accent-text" : "group-hover:text-pl-accent-text")} aria-hidden="true" />
       <span className="truncate">{label}</span>
     </NavLink>
   );
@@ -45,7 +54,7 @@ const SidebarItem = ({ to, icon: Icon, label, exact = false }) => {
 
 const SidebarGroup = ({ title, children }) => (
   <div className="mb-6">
-    <h3 className="px-3 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
+    <h3 className="px-3 text-[11px] font-semibold text-pl-accent-text uppercase tracking-[0.14em] mb-2">
       {title}
     </h3>
     <div className="space-y-1">
@@ -65,18 +74,21 @@ const Sidebar = () => {
   const isSponsorLead = useIsSponsorLead();
 
   return (
-    <aside className={cn(
-        "hidden md:flex flex-col bg-[#0F172A] border-r border-slate-800 h-screen overflow-y-auto whitespace-nowrap",
+    <FixedTheme theme="dark">
+    <aside
+      data-pl-theme="dark"
+      data-testid="sidebar-rail"
+      aria-label="Main navigation"
+      className={cn(
+        "hidden md:flex flex-col bg-pl-surface border-r border-pl-border h-screen overflow-y-auto whitespace-nowrap font-pl-sans",
         isFullScreen ? "invisible" : "visible w-64"
     )}>
       {/* Brand */}
       <div className="p-6 flex items-center gap-3">
-        <div className="w-8 h-8 rounded-lg bg-[#BFFF00] flex items-center justify-center shadow-[0_0_15px_rgba(191,255,0,0.4)]">
-          <Activity className="w-5 h-5 text-black" />
-        </div>
+        <img src="/favicon.png" alt="" aria-hidden="true" className="w-8 h-8 rounded-lg object-contain shrink-0" />
         <div>
-          <h1 className="text-lg font-bold text-white tracking-tight">Petrolord</h1>
-          <p className="text-[10px] text-slate-400 font-mono tracking-widest">NEXTGEN SUITE</p>
+          <h1 className="text-lg font-bold text-pl-text tracking-tight">Petrolord</h1>
+          <p className="text-[10px] text-pl-accent-text font-pl-mono tracking-widest">NEXTGEN SUITE</p>
         </div>
       </div>
 
@@ -152,10 +164,11 @@ const Sidebar = () => {
         )}
       </div>
 
-      <div className="p-4 border-t border-slate-800">
+      <div className="p-4 border-t border-pl-border">
         <SidebarItem to="/dashboard/settings" icon={Settings} label="Settings" />
       </div>
     </aside>
+    </FixedTheme>
   );
 };
 

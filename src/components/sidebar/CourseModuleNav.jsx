@@ -23,6 +23,7 @@ import { cn } from '@/lib/utils';
 import { listAcademyApps } from '@/services/academyService';
 import { MODULE_LABELS, moduleLabel } from '@/lib/academyModules';
 import { COURSE_ICONS } from '@/components/sidebar/courseIcons';
+import { RAIL_ITEM, RAIL_ITEM_ACTIVE, RAIL_ITEM_IDLE } from '@/components/sidebar/railClasses';
 
 // The order modules are taught in, which is the order the Suite's own
 // modules were built. Anything not named here sorts after, alphabetically,
@@ -88,7 +89,7 @@ const CourseModuleNav = () => {
 
   return (
     <div className="mb-6">
-      <h3 className="px-3 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
+      <h3 className="px-3 text-[11px] font-semibold text-pl-accent-text uppercase tracking-[0.14em] mb-2">
         Courses
       </h3>
       <div className="space-y-0.5">
@@ -110,11 +111,11 @@ const CourseModuleNav = () => {
                   setOpenModule(isOpen ? null : mod);
                 }}
                 className={cn(
-                  'w-full flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors',
+                  'w-full flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus',
                   isEmpty
-                    ? 'text-slate-600 cursor-default'
-                    : 'text-slate-300 hover:text-white hover:bg-white/5',
-                  isOpen && !isEmpty && 'text-white bg-white/5'
+                    ? 'text-pl-muted opacity-60 cursor-default'
+                    : 'text-pl-muted hover:text-pl-text hover:bg-pl-raised/60',
+                  isOpen && !isEmpty && 'text-pl-text bg-pl-raised/60'
                 )}
               >
                 <ChevronRight
@@ -131,18 +132,18 @@ const CourseModuleNav = () => {
                 <span
                   className={cn(
                     'text-xs font-mono tabular-nums',
-                    isEmpty ? 'text-slate-700' : 'text-[#BFFF00]'
+                    isEmpty ? 'text-pl-muted' : 'text-pl-accent-text'
                   )}
                   title={isEmpty
                     ? 'No courses built yet'
                     : `${built} course${built === 1 ? '' : 's'} built, ${live} live`}
                 >
-                  {isEmpty ? '—' : built}
+                  {isEmpty ? 'n/a' : built}
                 </span>
               </button>
 
               {isOpen && !isEmpty && (
-                <div className="ml-4 pl-3 border-l border-slate-800 space-y-0.5 py-1">
+                <div className="ml-4 pl-3 border-l border-pl-border space-y-0.5 py-1">
                   {list.map((app) => {
                     const Icon = COURSE_ICONS[app.slug] || BookOpen;
                     const available = app.status === 'available';
@@ -152,7 +153,7 @@ const CourseModuleNav = () => {
                       return (
                         <div
                           key={app.slug}
-                          className="flex items-center gap-3 px-3 py-2 rounded-md text-sm text-slate-600"
+                          className="flex items-center gap-3 px-3 py-2 rounded-md text-sm text-pl-muted opacity-60"
                           title="Built and seeded; not released yet"
                         >
                           <Lock className="w-4 h-4 shrink-0 opacity-50" />
@@ -166,13 +167,11 @@ const CourseModuleNav = () => {
                         key={app.slug}
                         to={`/dashboard/apps/${app.slug}`}
                         className={({ isActive }) => cn(
-                          'flex items-center gap-3 px-3 py-2 rounded-md transition-all duration-200 group text-sm',
-                          isActive
-                            ? 'bg-[#BFFF00] text-black shadow-[0_0_15px_rgba(191,255,0,0.3)] font-medium'
-                            : 'text-slate-400 hover:text-white hover:bg-white/5'
+                          RAIL_ITEM,
+                          isActive ? RAIL_ITEM_ACTIVE : RAIL_ITEM_IDLE
                         )}
                       >
-                        <Icon className="w-4 h-4 shrink-0 group-hover:text-[#BFFF00]" />
+                        <Icon className="w-4 h-4 shrink-0 group-hover:text-pl-accent-text" aria-hidden="true" />
                         <span className="truncate">{app.name}</span>
                       </NavLink>
                     );
