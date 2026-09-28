@@ -20,8 +20,8 @@ const SettingInput = ({ setting, value, onChange }) => {
         return (
             <div className="flex items-center justify-between py-2">
                 <Label htmlFor={setting.setting_key} className="flex flex-col gap-1">
-                    <span className="font-medium text-slate-200">{setting.setting_key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</span>
-                    <span className="font-normal text-xs text-slate-400">{setting.description}</span>
+                    <span className="font-medium text-pl-text">{setting.setting_key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</span>
+                    <span className="font-normal text-xs text-pl-muted">{setting.description}</span>
                 </Label>
                 <Switch 
                     id={setting.setting_key}
@@ -34,7 +34,7 @@ const SettingInput = ({ setting, value, onChange }) => {
 
     return (
         <div className="space-y-2 py-2">
-            <Label htmlFor={setting.setting_key} className="text-slate-200">
+            <Label htmlFor={setting.setting_key} className="text-pl-text">
                 {setting.setting_key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
             </Label>
             {setting.setting_type === 'number' ? (
@@ -43,7 +43,6 @@ const SettingInput = ({ setting, value, onChange }) => {
                     id={setting.setting_key} 
                     value={value} 
                     onChange={(e) => onChange(e.target.value)}
-                    className="bg-slate-900 border-slate-700"
                 />
             ) : (
                 <Input 
@@ -51,22 +50,21 @@ const SettingInput = ({ setting, value, onChange }) => {
                     id={setting.setting_key} 
                     value={value} 
                     onChange={(e) => onChange(e.target.value)}
-                    className="bg-slate-900 border-slate-700"
                 />
             )}
-            <p className="text-xs text-slate-500">{setting.description}</p>
+            <p className="text-xs text-pl-muted">{setting.description}</p>
         </div>
     );
 };
 
 const FeatureToggleRow = ({ feature, onToggle }) => (
-    <div className="flex items-center justify-between p-4 rounded-lg border border-slate-800 bg-[#0F172A]">
+    <div className="flex items-center justify-between p-4 rounded-lg border border-pl-border bg-pl-sunken">
         <div className="space-y-1">
-            <h4 className="font-medium text-slate-200">{feature.feature_key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</h4>
-            <p className="text-sm text-slate-500">{feature.description}</p>
+            <h4 className="font-medium text-pl-text">{feature.feature_key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</h4>
+            <p className="text-sm text-pl-muted">{feature.description}</p>
         </div>
         <div className="flex items-center gap-2">
-            <span className={`text-xs font-medium ${feature.is_enabled ? 'text-emerald-400' : 'text-slate-500'}`}>
+            <span className={`text-xs font-medium ${feature.is_enabled ? 'text-pl-success-text' : 'text-pl-muted'}`}>
                 {feature.is_enabled ? 'Enabled' : 'Disabled'}
             </span>
             <Switch 
@@ -187,37 +185,37 @@ const AdminSystemSettingsPage = () => {
     if (loading) {
         return (
             <div className="flex items-center justify-center h-96">
-                <Loader2 className="w-8 h-8 animate-spin text-[#BFFF00]" />
+                <Loader2 className="w-8 h-8 animate-spin text-pl-primary" />
             </div>
         );
     }
 
     return (
-        <div className="space-y-6 animate-in fade-in duration-500">
+        <div className="space-y-6 px-4 py-8 md:px-8 animate-in fade-in duration-500">
             <Helmet><title>System Settings - Petrolord Admin</title></Helmet>
 
             <div className="flex flex-col space-y-2">
-                <h1 className="text-3xl font-bold tracking-tight text-white flex items-center gap-2">
-                    <Settings className="w-8 h-8 text-[#BFFF00]" /> System Configuration
+                <h1 className="text-3xl font-bold tracking-tight text-pl-text flex items-center gap-2">
+                    <Settings className="w-8 h-8 text-pl-accent-text" aria-hidden="true" /> System Configuration
                 </h1>
-                <p className="text-slate-400">Manage global settings, feature flags, and system maintenance.</p>
+                <p className="text-pl-muted">Manage global settings, feature flags, and system maintenance.</p>
             </div>
 
             <Tabs defaultValue="general" value={activeTab} onValueChange={setActiveTab} className="space-y-4">
-                <TabsList className="bg-[#1E293B] border-slate-800 p-1 flex-wrap h-auto">
-                    <TabsTrigger value="general" className="data-[state=active]:bg-[#BFFF00] data-[state=active]:text-black">General</TabsTrigger>
-                    <TabsTrigger value="license" className="data-[state=active]:bg-[#BFFF00] data-[state=active]:text-black">License</TabsTrigger>
-                    <TabsTrigger value="email" className="data-[state=active]:bg-[#BFFF00] data-[state=active]:text-black flex gap-2"><Mail className="w-4 h-4"/> Email</TabsTrigger>
-                    <TabsTrigger value="security" className="data-[state=active]:bg-[#BFFF00] data-[state=active]:text-black flex gap-2"><Shield className="w-4 h-4"/> Security</TabsTrigger>
-                    <TabsTrigger value="features" className="data-[state=active]:bg-[#BFFF00] data-[state=active]:text-black flex gap-2"><ToggleLeft className="w-4 h-4"/> Features</TabsTrigger>
-                    <TabsTrigger value="maintenance" className="data-[state=active]:bg-[#BFFF00] data-[state=active]:text-black flex gap-2"><Database className="w-4 h-4"/> Maintenance</TabsTrigger>
+                <TabsList className="p-1 flex-wrap h-auto justify-start">
+                    <TabsTrigger value="general">General</TabsTrigger>
+                    <TabsTrigger value="license">License</TabsTrigger>
+                    <TabsTrigger value="email" className="flex gap-2"><Mail className="w-4 h-4"/> Email</TabsTrigger>
+                    <TabsTrigger value="security" className="flex gap-2"><Shield className="w-4 h-4"/> Security</TabsTrigger>
+                    <TabsTrigger value="features" className="flex gap-2"><ToggleLeft className="w-4 h-4"/> Features</TabsTrigger>
+                    <TabsTrigger value="maintenance" className="flex gap-2"><Database className="w-4 h-4"/> Maintenance</TabsTrigger>
                 </TabsList>
 
                 {/* GENERAL SETTINGS */}
                 <TabsContent value="general">
-                    <Card className="bg-[#1E293B] border-slate-800">
+                    <Card className="bg-pl-surface border-pl-border">
                         <CardHeader>
-                            <CardTitle className="text-white">General Configuration</CardTitle>
+                            <CardTitle className="text-pl-text">General Configuration</CardTitle>
                             <CardDescription>Basic system identity and localization settings.</CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-4">
@@ -230,8 +228,8 @@ const AdminSystemSettingsPage = () => {
                                 />
                             ))}
                         </CardContent>
-                        <CardFooter className="border-t border-slate-800 pt-6">
-                            <Button onClick={() => saveSettings('general')} className="bg-[#BFFF00] text-black hover:bg-[#a3d900]">
+                        <CardFooter className="border-t border-pl-border pt-6">
+                            <Button onClick={() => saveSettings('general')}>
                                 <Save className="w-4 h-4 mr-2" /> Save Changes
                             </Button>
                         </CardFooter>
@@ -240,9 +238,9 @@ const AdminSystemSettingsPage = () => {
 
                 {/* LICENSE SETTINGS */}
                 <TabsContent value="license">
-                    <Card className="bg-[#1E293B] border-slate-800">
+                    <Card className="bg-pl-surface border-pl-border">
                         <CardHeader>
-                            <CardTitle className="text-white">Licensing & Grace Periods</CardTitle>
+                            <CardTitle className="text-pl-text">Licensing & Grace Periods</CardTitle>
                             <CardDescription>Configure default durations for student access.</CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-4">
@@ -255,8 +253,8 @@ const AdminSystemSettingsPage = () => {
                                 />
                             ))}
                         </CardContent>
-                        <CardFooter className="border-t border-slate-800 pt-6">
-                            <Button onClick={() => saveSettings('license')} className="bg-[#BFFF00] text-black hover:bg-[#a3d900]">
+                        <CardFooter className="border-t border-pl-border pt-6">
+                            <Button onClick={() => saveSettings('license')}>
                                 <Save className="w-4 h-4 mr-2" /> Save Changes
                             </Button>
                         </CardFooter>
@@ -265,13 +263,13 @@ const AdminSystemSettingsPage = () => {
 
                 {/* EMAIL SETTINGS */}
                 <TabsContent value="email">
-                    <Card className="bg-[#1E293B] border-slate-800">
+                    <Card className="bg-pl-surface border-pl-border">
                         <CardHeader>
-                            <CardTitle className="text-white">Email Service</CardTitle>
+                            <CardTitle className="text-pl-text">Email Service</CardTitle>
                             <CardDescription>SMTP configuration for system notifications.</CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-4">
-                            <Alert className="bg-blue-500/10 border-blue-500/30 text-blue-400 mb-4">
+                            <Alert variant="info" className="mb-4">
                                 <AlertTriangle className="w-4 h-4" />
                                 <AlertTitle>Sensitive Information</AlertTitle>
                                 <AlertDescription>SMTP credentials are stored securely but displayed here for verification.</AlertDescription>
@@ -285,11 +283,11 @@ const AdminSystemSettingsPage = () => {
                                 />
                             ))}
                         </CardContent>
-                        <CardFooter className="border-t border-slate-800 pt-6 flex justify-between">
-                            <Button variant="outline" className="border-slate-700 text-slate-300">
+                        <CardFooter className="border-t border-pl-border pt-6 flex justify-between">
+                            <Button variant="outline">
                                 Send Test Email
                             </Button>
-                            <Button onClick={() => saveSettings('email')} className="bg-[#BFFF00] text-black hover:bg-[#a3d900]">
+                            <Button onClick={() => saveSettings('email')}>
                                 <Save className="w-4 h-4 mr-2" /> Save Configuration
                             </Button>
                         </CardFooter>
@@ -298,9 +296,9 @@ const AdminSystemSettingsPage = () => {
 
                 {/* SECURITY SETTINGS */}
                 <TabsContent value="security">
-                    <Card className="bg-[#1E293B] border-slate-800">
+                    <Card className="bg-pl-surface border-pl-border">
                         <CardHeader>
-                            <CardTitle className="text-white">Security Policies</CardTitle>
+                            <CardTitle className="text-pl-text">Security Policies</CardTitle>
                             <CardDescription>Password rules, timeouts, and access controls.</CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-4">
@@ -313,8 +311,8 @@ const AdminSystemSettingsPage = () => {
                                 />
                             ))}
                         </CardContent>
-                        <CardFooter className="border-t border-slate-800 pt-6">
-                            <Button onClick={() => saveSettings('security')} className="bg-[#BFFF00] text-black hover:bg-[#a3d900]">
+                        <CardFooter className="border-t border-pl-border pt-6">
+                            <Button onClick={() => saveSettings('security')}>
                                 <Save className="w-4 h-4 mr-2" /> Save Policies
                             </Button>
                         </CardFooter>
@@ -323,9 +321,9 @@ const AdminSystemSettingsPage = () => {
 
                 {/* FEATURE TOGGLES */}
                 <TabsContent value="features">
-                    <Card className="bg-[#1E293B] border-slate-800">
+                    <Card className="bg-pl-surface border-pl-border">
                         <CardHeader>
-                            <CardTitle className="text-white">Feature Flags</CardTitle>
+                            <CardTitle className="text-pl-text">Feature Flags</CardTitle>
                             <CardDescription>Enable or disable system features in real-time without deployment.</CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-4">
@@ -343,62 +341,61 @@ const AdminSystemSettingsPage = () => {
                 {/* SYSTEM MAINTENANCE */}
                 <TabsContent value="maintenance">
                     <div className="grid gap-6 md:grid-cols-2">
-                        <Card className="bg-[#1E293B] border-slate-800">
+                        <Card className="bg-pl-surface border-pl-border">
                             <CardHeader>
-                                <CardTitle className="text-white">Database Operations</CardTitle>
+                                <CardTitle className="text-pl-text">Database Operations</CardTitle>
                                 <CardDescription>Manage data integrity and backups.</CardDescription>
                             </CardHeader>
                             <CardContent className="space-y-4">
-                                <div className="flex justify-between items-center p-3 rounded bg-slate-900 border border-slate-800">
+                                <div className="flex justify-between items-center p-3 rounded bg-pl-sunken border border-pl-border">
                                     <div>
-                                        <h5 className="text-sm font-medium text-slate-200">System Backup</h5>
-                                        <p className="text-xs text-slate-500">Create a full snapshot of the database.</p>
+                                        <h5 className="text-sm font-medium text-pl-text">System Backup</h5>
+                                        <p className="text-xs text-pl-muted">Create a full snapshot of the database.</p>
                                     </div>
                                     <Button 
                                         onClick={() => handleMaintenanceAction('backup')} 
                                         disabled={backupLoading}
                                         variant="outline"
-                                        className="border-slate-700 hover:bg-slate-800"
                                     >
                                         {backupLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Database className="w-4 h-4 mr-2" />}
                                         Backup Now
                                     </Button>
                                 </div>
-                                <div className="flex justify-between items-center p-3 rounded bg-slate-900 border border-slate-800">
+                                <div className="flex justify-between items-center p-3 rounded bg-pl-sunken border border-pl-border">
                                     <div>
-                                        <h5 className="text-sm font-medium text-slate-200">Optimize Tables</h5>
-                                        <p className="text-xs text-slate-500">Run vacuum and re-index operations.</p>
+                                        <h5 className="text-sm font-medium text-pl-text">Optimize Tables</h5>
+                                        <p className="text-xs text-pl-muted">Run vacuum and re-index operations.</p>
                                     </div>
-                                    <Button variant="outline" className="border-slate-700 hover:bg-slate-800">Optimize</Button>
+                                    <Button variant="outline">Optimize</Button>
                                 </div>
                             </CardContent>
                         </Card>
 
-                        <Card className="bg-[#1E293B] border-slate-800">
+                        <Card className="bg-pl-surface border-pl-border">
                             <CardHeader>
-                                <CardTitle className="text-white">System Health</CardTitle>
+                                <CardTitle className="text-pl-text">System Health</CardTitle>
                                 <CardDescription>Diagnostic checks and cache management.</CardDescription>
                             </CardHeader>
                             <CardContent className="space-y-4">
                                 <div className="space-y-2">
                                     <div className="flex justify-between text-sm">
-                                        <span className="text-slate-400">Database Connection</span>
-                                        <span className="text-emerald-400 flex items-center gap-1"><CheckCircle className="w-3 h-3" /> Healthy</span>
+                                        <span className="text-pl-muted">Database Connection</span>
+                                        <span className="text-pl-success-text flex items-center gap-1"><CheckCircle className="w-3 h-3" aria-hidden="true" /> Healthy</span>
                                     </div>
                                     <div className="flex justify-between text-sm">
-                                        <span className="text-slate-400">Storage Service</span>
-                                        <span className="text-emerald-400 flex items-center gap-1"><CheckCircle className="w-3 h-3" /> Operational</span>
+                                        <span className="text-pl-muted">Storage Service</span>
+                                        <span className="text-pl-success-text flex items-center gap-1"><CheckCircle className="w-3 h-3" aria-hidden="true" /> Operational</span>
                                     </div>
                                     <div className="flex justify-between text-sm">
-                                        <span className="text-slate-400">Email Gateway</span>
-                                        <span className="text-emerald-400 flex items-center gap-1"><CheckCircle className="w-3 h-3" /> Connected</span>
+                                        <span className="text-pl-muted">Email Gateway</span>
+                                        <span className="text-pl-success-text flex items-center gap-1"><CheckCircle className="w-3 h-3" aria-hidden="true" /> Connected</span>
                                     </div>
                                 </div>
-                                <div className="pt-4 border-t border-slate-800">
+                                <div className="pt-4 border-t border-pl-border">
                                     <Button 
                                         onClick={() => handleMaintenanceAction('cache')} 
                                         variant="destructive" 
-                                        className="w-full bg-red-900/50 hover:bg-red-900/70 border border-red-900"
+                                        className="w-full"
                                     >
                                         <RefreshCw className="w-4 h-4 mr-2" /> Clear System Cache
                                     </Button>
