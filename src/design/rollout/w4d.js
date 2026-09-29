@@ -3,4 +3,5 @@
 // batch 1C's pattern entry.
 export default [
   '/dashboard/apps/cashflow',
+  '/dashboard/apps/fiscal',
 ];

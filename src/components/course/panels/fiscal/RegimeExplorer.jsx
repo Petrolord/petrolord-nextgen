@@ -1,8 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, ComposedChart, BarChart, Bar, Line, Cell, XAxis, YAxis, CartesianGrid,
+  ComposedChart, BarChart, Bar, Line, Cell, XAxis, YAxis, CartesianGrid,
   Tooltip, Legend, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import {
   ODIDI_LABEL, PROJECT_KEYS,
   templates, projects, ledger, projectLife, volumeProbe, priceProbe, templateTotals,
@@ -32,22 +35,22 @@ const MODES = [
   ['totals', 'Totals: all six templates on one project'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const GRID = <CartesianGrid stroke="#334155" strokeDasharray="3 3" />;
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const GRID = <CartesianGrid {...GRID_STYLE} />;
 const compact = (v) => (Math.abs(v) >= 1000 ? `${(v / 1000).toFixed(1)}k` : Number(v).toFixed(0));
 
 const PROJECT_OPTIONS = PROJECT_KEYS.map((k) => [k, k === 'odidi' ? 'ODIDI, the teaching field' : (k === 'default' ? 'DEFAULT PROJECT, published' : 'TEST PROJECT, published')]);
 
 const Tbl = ({ head, rows, highlight = -1 }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>{head.map((h, i) => <th key={i} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>)}</tr>
       </thead>
       <tbody>
         {rows.map((r, i) => (
-          <tr key={i} className={i === highlight ? 'text-white font-semibold' : ''}>
+          <tr key={i} className={i === highlight ? 'text-pl-text font-semibold' : ''}>
             {r.map((c, j) => <td key={j} className={`${j < r.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{c}</td>)}
           </tr>
         ))}
@@ -65,29 +68,29 @@ const Instruments = () => {
     <>
       <div className="grid gap-3 lg:grid-cols-2">
         {list.map((t) => (
-          <div key={t.id} className="rounded-md border border-gray-700 bg-[#0F172A] p-3">
-            <p className="text-white text-sm font-medium mb-0">{t.name}</p>
-            <p className="text-xs text-slate-500 font-mono mb-1">{t.id}</p>
-            <p className="text-xs text-slate-400 mt-1 mb-2">{t.description}</p>
-            <div className="grid grid-cols-2 gap-2 text-xs text-slate-300">
+          <div key={t.id} className="rounded-md border border-pl-border bg-pl-sunken p-3">
+            <p className="text-pl-text text-sm font-medium mb-0">{t.name}</p>
+            <p className="text-xs text-pl-muted font-mono mb-1">{t.id}</p>
+            <p className="text-xs text-pl-muted mt-1 mb-2">{t.description}</p>
+            <div className="grid grid-cols-2 gap-2 text-xs text-pl-text">
               <div>
-                <p className="text-slate-500 mb-0">Royalty</p>
+                <p className="text-pl-muted mb-0">Royalty</p>
                 <p className="mb-0">{t.royaltyType === 'sliding_price'
                   ? t.royalty.tiers.map((x) => `${x.threshold} USD/bbl to ${x.rate} percent`).join(', ')
                   : t.royaltyText}</p>
               </div>
               <div>
-                <p className="text-slate-500 mb-0">Cost recovery limit</p>
+                <p className="text-pl-muted mb-0">Cost recovery limit</p>
                 <p className="mb-0">{t.costLimitText}</p>
               </div>
               <div>
-                <p className="text-slate-500 mb-0">Profit split</p>
+                <p className="text-pl-muted mb-0">Profit split</p>
                 <p className="mb-0">{t.profitSplitType === 'tiered_r_factor'
                   ? t.profitSplit.tiers.map((x) => `R ${x.threshold} to ${x.split} percent`).join(', ')
                   : t.splitText}</p>
               </div>
               <div>
-                <p className="text-slate-500 mb-0">Tax stack</p>
+                <p className="text-pl-muted mb-0">Tax stack</p>
                 <p className="mb-0">CIT {t.tax.cit}, RRT {t.tax.rrt}, minimum {t.tax.minTax} percent{t.rrtUpliftPct === null ? '' : `, RRT uplift ${t.rrtUpliftPct} percent`}</p>
               </div>
             </div>
@@ -124,7 +127,7 @@ const Ledger = () => {
         <SelectField label="Template" value={regimeId} onChange={setRegimeId} options={list.map((t) => [t.id, t.name])} />
         <SelectField label="Project" value={projectKey} onChange={setProjectKey} options={PROJECT_OPTIONS} />
       </FieldGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">{led.regimeLine}.</p>
+      <p className="text-xs text-pl-muted mt-2 mb-0">{led.regimeLine}.</p>
       <div className="mt-3">
         <TileGrid>
           <Tile label="Total gross revenue" value={mm(led.totals.rev)} unit="million USD" />
@@ -149,27 +152,25 @@ const Ledger = () => {
           mm(x.tax), mm(x.opex), mm(x.capex), mm(x.contractorNCF), mm(x.governmentTake), mm(x.cumulativeNCF), ratio(x.rFactor),
         ])}
       />
-      <p className="text-xs text-slate-500 mt-1 mb-0">
+      <p className="text-xs text-pl-muted mt-1 mb-0">
         The bold row is the payback year, the first year cumulative contractor net cash flow is above zero.
         {led.paybackYear === null ? ' On these inputs there is no such year and nothing is marked.' : ''}
       </p>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            {GRID}
-            <XAxis dataKey="year" tick={AXIS} />
-            <YAxis tick={AXIS} tickFormatter={compact} label={{ value: 'million USD', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => mm(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={0} stroke="#64748b" />
-            <Bar dataKey="ncf" name="contractor net cash flow" isAnimationActive={false}>
-              {chart.map((c) => <Cell key={c.year} fill={c.ncf < 0 ? '#f87171' : '#38bdf8'} />)}
-            </Bar>
-            <Line type="monotone" dataKey="cumulative" name="cumulative contractor net cash flow" stroke="#BFFF00" dot={false} isAnimationActive={false} />
-            <Line type="monotone" dataKey="gov" name="government cash flow" stroke="#f472b6" dot={false} isAnimationActive={false} />
-          </ComposedChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3">
+        <ComposedChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          {GRID}
+          <XAxis dataKey="year" tick={AXIS} />
+          <YAxis tick={AXIS} tickFormatter={compact} label={{ value: 'million USD', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => mm(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine y={0} stroke={SVG_CHART.reference} />
+          <Bar dataKey="ncf" name="contractor net cash flow" isAnimationActive={false}>
+            {chart.map((c) => <Cell key={c.year} fill={c.ncf < 0 ? seriesColor(3) : seriesColor(1)} />)}
+          </Bar>
+          <Line type="monotone" dataKey="cumulative" name="cumulative contractor net cash flow" stroke={seriesColor(0)} dot={false} isAnimationActive={false} />
+          <Line type="monotone" dataKey="gov" name="government cash flow" stroke={seriesColor(4)} dot={false} isAnimationActive={false} />
+        </ComposedChart>
+      </ChartFrame>
       <Note>
         Read the columns left to right and the cascade is the whole subject. Royalty comes off GROSS revenue before
         any cost is deducted. Cost recovered is the smaller of the recoverable pool and the limit applied to revenue
@@ -198,28 +199,26 @@ const Project = () => {
       <FieldGrid>
         <SelectField label="Project" value={projectKey} onChange={setProjectKey} options={PROJECT_OPTIONS} />
       </FieldGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">{info ? info.line : ''}.</p>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            {GRID}
-            <XAxis dataKey="year" tick={AXIS} />
-            <YAxis yAxisId="v" tick={AXIS} label={{ value: 'million bbl or million Mscf', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <YAxis yAxisId="p" orientation="right" tick={AXIS} label={{ value: 'applied oil price, USD per bbl', angle: 90, position: 'insideRight', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => ratio(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line yAxisId="v" type="monotone" dataKey="oil" name="oil, million bbl" stroke="#38bdf8" dot={false} isAnimationActive={false} />
-            <Line yAxisId="v" type="monotone" dataKey="ngl" name="NGL, million bbl" stroke="#BFFF00" dot={false} isAnimationActive={false} />
-            <Line yAxisId="v" type="monotone" dataKey="gas" name="gas, million Mscf" stroke="#f472b6" dot={false} isAnimationActive={false} />
-            <Line yAxisId="p" type="stepAfter" dataKey="price" name="applied oil price" stroke="#fbbf24" dot={false} isAnimationActive={false} />
-          </ComposedChart>
-        </ResponsiveContainer>
-      </div>
+      <p className="text-xs text-pl-muted mt-2 mb-0">{info ? info.line : ''}.</p>
+      <ChartFrame height={256} className="mt-3">
+        <ComposedChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          {GRID}
+          <XAxis dataKey="year" tick={AXIS} />
+          <YAxis yAxisId="v" tick={AXIS} label={{ value: 'million bbl or million Mscf', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis yAxisId="p" orientation="right" tick={AXIS} label={{ value: 'applied oil price, USD per bbl', angle: 90, position: 'insideRight', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => ratio(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line yAxisId="v" type="monotone" dataKey="oil" name="oil, million bbl" stroke={seriesColor(1)} dot={false} isAnimationActive={false} />
+          <Line yAxisId="v" type="monotone" dataKey="ngl" name="NGL, million bbl" stroke={seriesColor(0)} dot={false} isAnimationActive={false} />
+          <Line yAxisId="v" type="monotone" dataKey="gas" name="gas, million Mscf" stroke={seriesColor(4)} dot={false} isAnimationActive={false} />
+          <Line yAxisId="p" type="stepAfter" dataKey="price" name="applied oil price" stroke={seriesColor(2)} dot={false} isAnimationActive={false} />
+        </ComposedChart>
+      </ChartFrame>
       <Tbl
         head={['year', 'oil, million bbl', 'gas, million Mscf', 'NGL, million bbl', 'applied oil price, USD/bbl']}
         rows={vol.byYear.map((x, i) => [x.year, ratio(x.oil), ratio(x.gas), ratio(x.ngl), ratio(price.applied[i])])}
       />
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         Neither table is a forecast anybody uploaded. The engine GENERATES the profile from an initial rate and a
         decline over a fixed horizon of 25 years, and there is no input that changes the horizon. Two properties are
         visible in the volume columns and both matter. The decline is applied AFTER the year is booked, so year 1 is
@@ -256,20 +255,18 @@ const Totals = () => {
           mm(t.totalCostRecovered), mm(t.closingUnrecoveredPool), yr(t.paybackYear), yr(t.payoutYear), mm(t.npv), Number(t.irrPct).toFixed(4),
         ])}
       />
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={bars} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            {GRID}
-            <XAxis dataKey="name" tick={{ fill: '#94a3b8', fontSize: 9 }} interval={0} angle={-12} textAnchor="end" height={60} />
-            <YAxis tick={AXIS} tickFormatter={compact} label={{ value: 'million USD', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => mm(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={0} stroke="#64748b" />
-            <Bar dataKey="contractor" name="total contractor net cash flow" fill="#BFFF00" isAnimationActive={false} />
-            <Bar dataKey="government" name="total government cash flow" fill="#f472b6" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3">
+        <BarChart data={bars} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          {GRID}
+          <XAxis dataKey="name" tick={{ ...AXIS_TICK, fontSize: 9 }} interval={0} angle={-12} textAnchor="end" height={60} />
+          <YAxis tick={AXIS} tickFormatter={compact} label={{ value: 'million USD', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => mm(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine y={0} stroke={SVG_CHART.reference} />
+          <Bar dataKey="contractor" name="total contractor net cash flow" fill={seriesColor(0)} isAnimationActive={false} />
+          <Bar dataKey="government" name="total government cash flow" fill={seriesColor(4)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
       <Note>
         Total revenue is identical down the column, because the regime never touches production or price. Everything
         else moves. Payback is the first year cumulative contractor net cash flow is above zero and payout is the

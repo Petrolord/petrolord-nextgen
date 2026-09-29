@@ -33,21 +33,21 @@ export const DEFINITION_ROWS = [
 export const BASIS_NOTE = `Every ratio states its basis. The default is ${basisLabel()}; a discounted value is labelled with its rate, for example "${metricLabel('governmentTake', 10)}". Neither ratio is a tax rate: royalty and the government's share of profit oil are in the numerator.`;
 
 const FiscalDefinitions = () => (
-  <div className="rounded-lg border border-gray-700 bg-[#1E293B] p-4" data-testid="fiscal-definitions">
-    <h3 className="text-white font-semibold mb-2">Definitions</h3>
+  <div className="rounded-lg border border-pl-border bg-pl-surface p-4" data-testid="fiscal-definitions">
+    <h3 className="text-pl-text font-semibold mb-2">Definitions</h3>
     <dl className="space-y-2 text-sm">
       {DEFINITION_ROWS.map((row) => (
         <div key={row.key}>
-          <dt className="text-[#BFFF00] font-semibold" title={row.hover}>{row.term}</dt>
-          <dd className="text-slate-300">
-            <span className="text-slate-400">{row.role}</span>
+          <dt className="text-pl-primary-text font-semibold" title={row.hover}>{row.term}</dt>
+          <dd className="text-pl-text">
+            <span className="text-pl-muted">{row.role}</span>
             {' '}
             {row.definition}
           </dd>
         </div>
       ))}
     </dl>
-    <p className="text-xs text-slate-400 mt-3 mb-0">{BASIS_NOTE}</p>
+    <p className="text-xs text-pl-muted mt-3 mb-0">{BASIS_NOTE}</p>
   </div>
 );
 
