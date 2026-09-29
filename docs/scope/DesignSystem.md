@@ -624,3 +624,53 @@ Production networks (`/dashboard/apps/network`), well intervention
   (every view and sub-view of every panel in both themes, every plot on the
   white plate with the mark, every series in a kit colour, and a source
   scan with a negative control).
+
+## 12. Batch 4D: economics course apps (as built)
+
+Cash flow and NPV (`/dashboard/apps/cashflow`), fiscal regime design
+(`/dashboard/apps/fiscal`), probabilistic economics
+(`/dashboard/apps/uncertainty`), decision analysis
+(`/dashboard/apps/decision`), capital portfolio (`/dashboard/apps/portfolio`)
+and field development planning (`/dashboard/apps/fdp`) are on the roles and
+registered in `src/design/rollout/w4d.js`.
+
+- The eighteen panels, with the fiscal `FiscalDefinitions` list and the
+  decision `decisionKit` atoms, are used by their learning page, the lesson
+  reader and the handbook, which 1C already themes, so they moved straight to
+  roles with no legacy branch. No file is shared with another batch. The
+  economics labs (`*Lab.js`) and the vendored engines are untouched: every
+  value, label and interaction is as before.
+- The page recipe is 4C's: cards on `surface`, lessons and the locked
+  capstone note on `sunken`, tier buttons primary when chosen (with
+  `aria-pressed`), capstone results and toasts on the success and danger
+  roles with their words, certificate number and award icon gold.
+- Every chart (42, all Recharts) is in `ChartFrame` with `GRID_STYLE`,
+  `AXIS_TICK`, `TOOLTIP_STYLE`, axis titles on `SVG_CHART.note` and
+  `LEGEND_PROPS`; a labelled x-axis takes `XAXIS_LABEL_HEIGHT`. Lime goes to
+  `seriesColor(0)`, sky and emerald to `(1)`, orange and yellow to `(2)`,
+  red to `(3)` (the cash flow course's "red point" stays red), pink and
+  violet to `(4)`; the six-series basis chart and fiscal comparison take the
+  five kit colours in order and the ink note for the sixth. Slate guides take
+  `SVG_CHART.reference`, the old slate-600 bars (low case, minus 30 percent,
+  float) `SVG_CHART.note`, and hollow dots a white fill.
+- The uncertainty run buttons are the primary action. Outcome P-labels and a
+  highlighted row or as-of date are gold (`accent-text`); an NPV input label
+  and the definition terms are `primary-text`. Flags and refusals sit on the
+  warning and danger roles beside their words.
+- Empty values on the pages print `n/a`. The panels' `null`, `withheld` and
+  `-` readings are the engine's own answers that the lessons teach, so they
+  are unchanged.
+- No lesson in these six courses names a chart colour, so no lesson text
+  changed.
+- Screen fixes: three net cash flow bar charts coloured each bar and gave
+  the bar series no fill, so the legend swatch printed black; it now shows
+  the positive-year colour. The fiscal royalty threshold tooltip printed a
+  raw float price and now uses the panel's six-decimal format.
+- Tests: `src/pages/__tests__/Economics4D.theme.test.jsx` (the four standard
+  checks per app, every tier in both themes with no lime left and the charts
+  on the white plate, capstone pass, fail and locked, the Learning Mode gate,
+  no network) and
+  `src/components/course/panels/__tests__/Economics4DPanels.theme.test.jsx`
+  (every view and sub-view of every panel in both themes, every plot on the
+  white plate with the mark, every series in a kit colour, and a source scan
+  with a negative control).
