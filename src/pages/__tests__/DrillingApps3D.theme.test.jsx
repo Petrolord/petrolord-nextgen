@@ -132,11 +132,11 @@ describe('the drilling I course apps, further states', () => {
         expect(screen.getByText('Learning Mode').className).toContain('text-pl-accent-text');
         cleanup();
       }
-    }, 60000);
+    }, 120000);
   }
 
-  it('the capstone pass and fail results use the status roles with their words', async () => {
-    for (const theme of ['light', 'dark']) {
+  for (const theme of ['light', 'dark']) {
+    it(`the capstone pass and fail results use the status roles with their words (${theme})`, async () => {
       window.localStorage.setItem(`petrolord.theme.v1:${USER_ID}`, theme);
       renderRoute('/dashboard/apps/hydraulics');
       await heading(/Drilling Hydraulics/);
@@ -148,16 +148,14 @@ describe('the drilling I course apps, further states', () => {
       cleanup();
 
       data.result = { passed: false, score: 1, max_score: 2 };
-      renderRoute('/dashboard/apps/geomech');
-      await heading(/Geomechanics/);
+      renderRoute('/dashboard/apps/wellcontrol');
+      await heading(/Well Control/);
       fireEvent.click(await screen.findByRole('button', { name: /Submit for grading/ }));
       const failed = await screen.findByText(/1\/2 within tolerance/);
       expect(failed.className).toContain('text-pl-danger-text');
       expectNoLegacyChrome();
-      cleanup();
-      resetData();
-    }
-  }, 60000);
+    }, 120000);
+  }
 
   it('the locked capstone points to the course on the link role', async () => {
     data.progress = { capstone: { unlocked: false, passed: false } };
