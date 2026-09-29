@@ -1,7 +1,10 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine, ReferenceDot,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine, ReferenceDot,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import {
   blowdownMarch, depressuringTime, stepStudy, pointSource,
 } from './reliefLab';
@@ -50,13 +53,13 @@ export const MODES = [
   ['radiation', 'The point source asked both ways, and two engines with the same four rows'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
 
 const Tbl = ({ head, rows }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>{head.map((h, i) => <th key={h} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>)}</tr>
       </thead>
       <tbody>
@@ -71,17 +74,17 @@ const Tbl = ({ head, rows }) => (
 );
 
 const Held = ({ children }) => (
-  <div className="mt-3 rounded-md border border-amber-700/60 bg-amber-950/20 p-3">
-    <p className="text-amber-300 text-xs font-medium mb-1">HELD FOR LITERATURE</p>
-    <p className="text-xs text-slate-300 mb-0">{children}</p>
+  <div className="mt-3 rounded-md border border-pl-warning/40 bg-pl-warning-bg p-3">
+    <p className="text-pl-warning-text text-xs font-medium mb-1">HELD FOR LITERATURE</p>
+    <p className="text-xs text-pl-text mb-0">{children}</p>
   </div>
 );
 
 /** A soft state the engine reports on a call that succeeded. The text is the engine's. */
 const Soft = ({ label, message }) => (
-  <div className="mt-2 rounded-md border border-amber-800/60 bg-amber-950/20 p-2">
-    <p className="text-amber-300 text-xs font-medium mb-1">{label}</p>
-    <p className="text-xs text-slate-300 font-mono mb-0">{message}</p>
+  <div className="mt-2 rounded-md border border-pl-warning/40 bg-pl-warning-bg p-2">
+    <p className="text-pl-warning-text text-xs font-medium mb-1">{label}</p>
+    <p className="text-xs text-pl-text font-mono mb-0">{message}</p>
   </div>
 );
 
@@ -108,22 +111,20 @@ export const MarchMode = ({ b }) => {
         <Tile label="Starting inventory" value={four(b.initialMassLb)} unit="lb" />
         <Tile label="Final temperature" value={six(b.finalTR)} unit="degR" />
       </TileGrid>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 14, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="t" type="number" domain={[0, 'dataMax']} tick={AXIS} label={{ value: 'time, s', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -8 }} />
-            <YAxis yAxisId="p" tick={AXIS} />
-            <YAxis yAxisId="t" orientation="right" tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine yAxisId="p" y={b.finalPPsia} stroke="#BFFF00" strokeDasharray="4 3" label={{ value: `the end pressure, ${six(b.finalPPsia)} psia`, fill: '#BFFF00', fontSize: 10 }} />
-            <ReferenceLine yAxisId="p" x={b.closedFormS} stroke="#f472b6" strokeDasharray="2 3" label={{ value: 'the closed form', fill: '#f472b6', fontSize: 10, position: 'insideTopLeft' }} />
-            <Line yAxisId="p" dataKey="p" name="pressure, psia" stroke="#38bdf8" strokeWidth={2} dot={false} isAnimationActive={false} />
-            <Line yAxisId="t" dataKey="temp" name="temperature, degR" stroke="#fbbf24" strokeWidth={2} dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 14, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="t" type="number" domain={[0, 'dataMax']} tick={AXIS} label={{ value: 'time, s', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -8 }} />
+          <YAxis yAxisId="p" tick={AXIS} />
+          <YAxis yAxisId="t" orientation="right" tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine yAxisId="p" y={b.finalPPsia} stroke={seriesColor(1)} strokeDasharray="4 3" label={{ value: `the end pressure, ${six(b.finalPPsia)} psia`, fill: seriesColor(1), fontSize: 10 }} />
+          <ReferenceLine yAxisId="p" x={b.closedFormS} stroke={seriesColor(4)} strokeDasharray="2 3" label={{ value: 'the closed form', fill: seriesColor(4), fontSize: 10, position: 'insideTopLeft' }} />
+          <Line yAxisId="p" dataKey="p" name="pressure, psia" stroke={seriesColor(0)} strokeWidth={2} dot={false} isAnimationActive={false} />
+          <Line yAxisId="t" dataKey="temp" name="temperature, degR" stroke={seriesColor(2)} strokeWidth={2} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Note>
         The pink line is the closed-form integral of the SAME mass balance the march evaluates, built from the engine&apos;s
         own coefficient C, the measured universal gas constant of {twelve(b.universalGasConstant)} and the stated
@@ -136,7 +137,7 @@ export const MarchMode = ({ b }) => {
         head={['case', 'marched time s', 'closed form time s', 'ratio']}
         rows={closed.map((c) => [c.label, six(c.marched), six(c.closedForm), twelve(c.ratio)])}
       />
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         The discharge coefficient is the caller&apos;s figure and nothing multiplies it. The same vessel at three
         coefficients gives {six(b.cdCases[0].timeS)} s, {six(b.cdCases[1].timeS)} s and {six(b.cdCases[2].timeS)} s, so
         the ratio of the first time to the last is {twelve(b.cdTimeRatioDerived)} against a coefficient ratio of
@@ -177,21 +178,19 @@ export const StepMode = ({ s }) => {
         <Tile label="Total movement in the time" value={twelve(s.totalMovementSDerived)} unit="s" />
         <Tile label="Steps subdivided at the stated step" value={`${s.statedSubsteps} of ${s.statedSteps}`} />
       </TileGrid>
-      <div className="h-60 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 14, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="logDt" tick={AXIS} tickFormatter={(v) => `1e${v.toFixed(1)}`} label={{ value: 'time step, s', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -8 }} />
-            <YAxis yAxisId="t" tick={AXIS} domain={['dataMin', 'dataMax']} tickFormatter={(v) => v.toFixed(4)} />
-            <YAxis yAxisId="r" orientation="right" tick={AXIS} tickFormatter={(v) => v.toFixed(6)} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => twelve(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine yAxisId="r" y={1} stroke="#BFFF00" strokeDasharray="4 3" label={{ value: 'the finest step', fill: '#BFFF00', fontSize: 10 }} />
-            <Line yAxisId="t" dataKey="time" name="time, s" stroke="#38bdf8" strokeWidth={2} dot isAnimationActive={false} />
-            <Line yAxisId="r" dataKey="ratio" name="time against the finest, ratio" stroke="#f472b6" strokeWidth={2} dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={240} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 14, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="logDt" tick={AXIS} tickFormatter={(v) => `1e${v.toFixed(1)}`} label={{ value: 'time step, s', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -8 }} />
+          <YAxis yAxisId="t" tick={AXIS} domain={['dataMin', 'dataMax']} tickFormatter={(v) => v.toFixed(4)} />
+          <YAxis yAxisId="r" orientation="right" tick={AXIS} tickFormatter={(v) => v.toFixed(6)} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => twelve(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine yAxisId="r" y={1} stroke={seriesColor(1)} strokeDasharray="4 3" label={{ value: 'the finest step', fill: seriesColor(1), fontSize: 10 }} />
+          <Line yAxisId="t" dataKey="time" name="time, s" stroke={seriesColor(0)} strokeWidth={2} dot isAnimationActive={false} />
+          <Line yAxisId="r" dataKey="ratio" name="time against the finest, ratio" stroke={seriesColor(4)} strokeWidth={2} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Note>
         An explicit march has a step and a reader is entitled to know what that step is worth. The step is halved
         {' '}{s.halvings} times over a CONTIGUOUS sequence, because a convergence table is only honest over a contiguous
@@ -203,7 +202,7 @@ export const StepMode = ({ s }) => {
         head={['time step s, stated', 'time s', 'final temperature degR', 'steps', 'substeps', 'time against the finest, ratio']}
         rows={s.rows.map((r) => [six(r.dtS), six(r.timeS), six(r.finalTR), r.steps, r.substeps, twelve(r.ratioToFinestDerived)])}
       />
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         The march lands ON the end pressure rather than stepping past it: it finishes at
         {' '}{twelve(s.landsOnTheEndPressure.finalPPsia)} psia against a target of
         {' '}{six(s.landsOnTheEndPressure.targetPsia)} psia, a difference of
@@ -236,22 +235,20 @@ export const OrificeMode = ({ d }) => {
         <Tile label="Distinct final temperatures across the sweep" value={d.distinctFinalTemperatures} />
         <Tile label="Doubling the orifice multiplies the time by" value={twelve(d.doublingRatioDerived)} />
       </TileGrid>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 14, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="d" type="number" domain={[0.5, 3]} tick={AXIS} label={{ value: 'blowdown orifice, in', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -8 }} />
-            <YAxis yAxisId="t" tick={AXIS} />
-            <YAxis yAxisId="k" orientation="right" tick={AXIS} domain={[300, 380]} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine yAxisId="t" y={d.fifteenMinuteTimeS} stroke="#BFFF00" strokeDasharray="4 3" label={{ value: `the customary fifteen minutes, ${six(d.fifteenMinuteTimeS)} s`, fill: '#BFFF00', fontSize: 10 }} />
-            <ReferenceDot yAxisId="t" x={d.fifteenMinuteOrificeIn} y={d.fifteenMinuteTimeS} r={5} fill="#BFFF00" stroke="none" label={{ value: `${six(d.fifteenMinuteOrificeIn)} in`, fill: '#BFFF00', fontSize: 10, position: 'right' }} />
-            <Line yAxisId="t" dataKey="time" name="time, s" stroke="#38bdf8" strokeWidth={2} dot isAnimationActive={false} />
-            <Line yAxisId="k" dataKey="temp" name="final temperature, degR" stroke="#f472b6" strokeWidth={2} dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 14, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="d" type="number" domain={[0.5, 3]} tick={AXIS} label={{ value: 'blowdown orifice, in', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -8 }} />
+          <YAxis yAxisId="t" tick={AXIS} />
+          <YAxis yAxisId="k" orientation="right" tick={AXIS} domain={[300, 380]} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine yAxisId="t" y={d.fifteenMinuteTimeS} stroke={seriesColor(1)} strokeDasharray="4 3" label={{ value: `the customary fifteen minutes, ${six(d.fifteenMinuteTimeS)} s`, fill: seriesColor(1), fontSize: 10 }} />
+          <ReferenceDot yAxisId="t" x={d.fifteenMinuteOrificeIn} y={d.fifteenMinuteTimeS} r={5} fill={seriesColor(1)} stroke="none" label={{ value: `${six(d.fifteenMinuteOrificeIn)} in`, fill: seriesColor(1), fontSize: 10, position: 'right' }} />
+          <Line yAxisId="t" dataKey="time" name="time, s" stroke={seriesColor(0)} strokeWidth={2} dot isAnimationActive={false} />
+          <Line yAxisId="k" dataKey="temp" name="final temperature, degR" stroke={seriesColor(4)} strokeWidth={2} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Note>
         The pink line is flat, and that flatness is the harder of the two teaching points on this chart. The end state is
         fixed by the pressure ratio and the isentropic exponent, so the orifice decides only how long the vessel takes to
@@ -264,7 +261,7 @@ export const OrificeMode = ({ d }) => {
         head={['orifice in, stated', 'time s', 'time min, derived', 'final temperature degR', 'steps', 'substeps']}
         rows={d.orificeRows.map((r) => [six(r.orificeDIn), six(r.timeS), six(r.timeMinDerived), six(r.finalTR), r.steps, r.substeps])}
       />
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         What DOES move the end state is the end pressure, because that is what fixes the expansion ratio. The march
         states its own limit as well: it assumes choked flow the whole way down, and the engine names the pressure below
         which that stops holding at {six(d.chokedFloorPsia)} psia.
@@ -289,19 +286,17 @@ export const RadiationMode = ({ p }) => {
         <Tile label="The solid angle, measured" value={twelve(p.solidAngle)} />
         <Tile label="Round trip through the inverse" value={twelve(p.roundTrip.ratioDerived)} />
       </TileGrid>
-      <div className="h-60 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 14, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="d" type="number" scale="log" domain={['dataMin', 'dataMax']} tick={AXIS} label={{ value: 'distance from the flare, m', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -8 }} />
-            <YAxis scale="log" domain={['dataMin', 'dataMax']} tick={AXIS} tickFormatter={(v) => Number(v).toFixed(3)} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceDot x={p.flare.statedDistanceM} y={p.flare.intensityAtStatedKWm2} r={5} fill="#BFFF00" stroke="none" label={{ value: `${six(p.flare.statedDistanceM)} m`, fill: '#BFFF00', fontSize: 10, position: 'top' }} />
-            <Line dataKey="k" name="radiant intensity, kW/m2" stroke="#38bdf8" strokeWidth={2} dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={240} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 14, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="d" type="number" scale="log" domain={['dataMin', 'dataMax']} tick={AXIS} label={{ value: 'distance from the flare, m', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -8 }} />
+          <YAxis scale="log" domain={['dataMin', 'dataMax']} tick={AXIS} tickFormatter={(v) => Number(v).toFixed(3)} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceDot x={p.flare.statedDistanceM} y={p.flare.intensityAtStatedKWm2} r={5} fill={seriesColor(1)} stroke="none" label={{ value: `${six(p.flare.statedDistanceM)} m`, fill: seriesColor(1), fontSize: 10, position: 'top' }} />
+          <Line dataKey="k" name="radiant intensity, kW/m2" stroke={seriesColor(0)} strokeWidth={2} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Note>
         The intensity falls with the square of the distance, which is why both axes are logarithmic and the curve is a
         straight line. Read any two rows and form the ratio of the intensities against the ratio of the squared
@@ -315,7 +310,7 @@ export const RadiationMode = ({ p }) => {
         head={['radiated fraction, stated', 'transmissivity, stated', 'intensity at the stated distance kW/m2']}
         rows={p.factorRows.map((r) => [six(r.fractionRadiated), six(r.transmissivity), six(r.intensityKWm2)])}
       />
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         The engine carries this model in both directions, and the inverse against a STATED allowable is the second half.
         At a stated {six(p.roundTrip.statedDistanceM)} m the forward direction returns
         {' '}{twelve(p.roundTrip.intensityKWm2)} kW/m2, and handing that figure back as the allowable returns
@@ -329,7 +324,7 @@ export const RadiationMode = ({ p }) => {
         head={['release kW', 'stated allowable kW/m2', 'published distance m', 'engine distance m']}
         rows={p.publishedInverseRows.map((r) => [four(r.qKw), six(r.allowableKwM2), six(r.distanceM), six(r.engineDistanceM)])}
       />
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         THE SETBACK IS NOT TAUGHT HERE. A flare setback computed from a heat release, the pool fire behind it and the four
         customary allowable intensities is owned by {p.setbackOwnedBy}. This course teaches the point source as this
         engine&apos;s second copy of the same model and hands the setback question back by name. What is worth showing is
