@@ -9,7 +9,7 @@
 // test.
 import React from 'react';
 import { describe, it, expect, vi, beforeAll, beforeEach, afterEach, afterAll } from 'vitest';
-import { screen, cleanup, fireEvent } from '@testing-library/react';
+import { screen, cleanup, fireEvent, within } from '@testing-library/react';
 import { installDomShims } from '@/design/testing/domShims';
 import {
   describeScreenTheme, expectNoLegacyChrome, getScopeRoot,
@@ -155,13 +155,23 @@ describe('Settings, further states', () => {
     }
   });
 
-  it('the stored interface preference keeps its pressed state (a server-side setting, unchanged)', async () => {
+  // Owner decision 2026-09-29: the header toggle is the only theme control.
+  // The Preferences tab no longer shows the idle Light/Dark/System buttons
+  // (they saved user_preferences.theme, which nothing applied). The other
+  // preferences on the tab are still there.
+  it('the Preferences tab has no theme buttons and keeps language and timezone', async () => {
     renderRoute('/dashboard/settings');
     await screen.findByText('Profile Information');
     openTab(fireEvent, screen.getByRole('tab', { name: /Preferences/ }));
-    const dark = await screen.findByRole('button', { name: /Dark/ });
-    expect(dark.getAttribute('aria-pressed')).toBe('true');
-    expect(screen.getByRole('button', { name: /Light/ }).getAttribute('aria-pressed')).toBe('false');
+    const panel = await screen.findByRole('tabpanel');
+    const { getByText, queryByText, queryByRole } = within(panel);
+    expect(getByText('Language')).toBeTruthy();
+    expect(getByText('Timezone')).toBeTruthy();
+    expect(queryByText('Theme Preference')).toBeNull();
+    for (const name of ['Light', 'Dark', 'System']) {
+      expect(queryByRole('button', { name })).toBeNull();
+    }
+    expect(panel.querySelector('[aria-pressed]')).toBeNull();
   });
 
   it('the deactivate dialog opens in a themed portal and is clean in dark', async () => {

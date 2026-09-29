@@ -10,10 +10,7 @@ import {
   LogOut, 
   Save, 
   Loader2,
-  Trash2,
-  Moon,
-  Sun,
-  Monitor
+  Trash2
 } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
@@ -260,48 +257,9 @@ const SettingsPage = () => {
                 <Card>
                     <CardHeader>
                         <CardTitle className="text-pl-text">Interface Settings</CardTitle>
-                        <CardDescription>Customize the look and feel of the platform.</CardDescription>
+                        <CardDescription>Set your language and timezone. Use the theme button in the header to switch between light and dark.</CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-6">
-                        {/* Theme */}
-                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                            <div className="space-y-1">
-                                <Label className="text-base">Theme Preference</Label>
-                                <p className="text-sm text-pl-muted">Choose your preferred visual theme.</p>
-                            </div>
-                            <div className="flex flex-wrap gap-2 bg-pl-sunken p-1 rounded-lg border border-pl-border">
-                                <Button 
-                                    size="sm"
-                                    variant="ghost"
-                                    onClick={() => handlePreferenceChange('theme', 'light')}
-                                    aria-pressed={preferences?.theme === 'light'}
-                                    className={preferences?.theme === 'light' ? 'bg-pl-surface text-pl-text shadow-pl-sm' : 'text-pl-muted'}
-                                >
-                                    <Sun className="w-4 h-4 mr-2" /> Light
-                                </Button>
-                                <Button 
-                                    size="sm"
-                                    variant="ghost"
-                                    onClick={() => handlePreferenceChange('theme', 'dark')}
-                                    aria-pressed={preferences?.theme === 'dark' || !preferences?.theme}
-                                    className={preferences?.theme === 'dark' || !preferences?.theme ? 'bg-pl-surface text-pl-text shadow-pl-sm' : 'text-pl-muted'}
-                                >
-                                    <Moon className="w-4 h-4 mr-2" /> Dark
-                                </Button>
-                                <Button 
-                                    size="sm"
-                                    variant="ghost"
-                                    onClick={() => handlePreferenceChange('theme', 'system')}
-                                    aria-pressed={preferences?.theme === 'system'}
-                                    className={preferences?.theme === 'system' ? 'bg-pl-surface text-pl-text shadow-pl-sm' : 'text-pl-muted'}
-                                >
-                                    <Monitor className="w-4 h-4 mr-2" /> System
-                                </Button>
-                            </div>
-                        </div>
-
-                        <Separator />
-
                         {/* Language */}
                         <div className="grid gap-4 sm:grid-cols-2">
                              <div className="space-y-2">

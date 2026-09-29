@@ -57,7 +57,7 @@ const AdminReportAnalyticsPage = () => {
         fetchData();
     }, [fetchData]);
 
-    const handleNotImplemented = () => toast({ title: "🚧 This feature isn't implemented yet—but don't worry! You can request it in your next prompt! 🚀" });
+    const handleNotImplemented = () => toast({ title: 'Coming soon', description: 'Exporting report analytics is not available yet.' });
 
     const renderRecentReports = () => {
         if (!analyticsData?.recentReports || analyticsData.recentReports.length === 0) {
