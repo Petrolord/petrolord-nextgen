@@ -1,8 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid,
+  LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid,
   Tooltip, Legend, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
+import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   PARAMS, ACID, ACID_MU_PA_S, hawkinsOf, hawkinsSweep, radiusSweep,
   sandstoneOf, acidSweep, carbonateOf, carbonateSweep, matrixCeilingOf, ceilingSweep,
@@ -58,44 +61,40 @@ const Damage = () => {
         <Tile label="Skin at contrast one" value={fmt(hawkinsOf({ kOverKs: 1, rsM }), 6)} />
       </TileGrid>
       <div className="grid gap-3 lg:grid-cols-2 mt-3">
-        <div className="h-56">
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={contrast} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-              <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-              <XAxis dataKey="kOverKs" type="number" domain={['dataMin', 'dataMax']}
-                tick={{ fill: '#94a3b8', fontSize: 11 }}
-                label={{ value: 'permeability contrast k/ks', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-              <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }}
-                label={{ value: 'skin', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-              <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-                formatter={(x) => fmt(x, 5)} />
-              <Legend wrapperStyle={{ fontSize: 11 }} />
-              <ReferenceLine y={0} stroke="#64748b" />
-              <Line type="monotone" dataKey="skin" name="skin against contrast" stroke="#BFFF00" dot isAnimationActive={false} />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
-        <div className="h-56">
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={radius} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-              <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-              <XAxis dataKey="rsM" type="number" scale="log" domain={['dataMin', 'dataMax']}
-                tick={{ fill: '#94a3b8', fontSize: 11 }}
-                label={{ value: 'damaged radius (m, log)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-              <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }}
-                label={{ value: 'skin', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-              <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-                formatter={(x) => fmt(x, 5)} />
-              <Legend wrapperStyle={{ fontSize: 11 }} />
-              <Line type="monotone" dataKey="skin" name="skin against radius" stroke="#38bdf8" dot isAnimationActive={false} />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
+        <ChartFrame height={224}>
+          <LineChart data={contrast} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+            <CartesianGrid {...GRID_STYLE} />
+            <XAxis dataKey="kOverKs" type="number" domain={['dataMin', 'dataMax']}
+              tick={AXIS_TICK}
+              label={{ value: 'permeability contrast k/ks', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+            <YAxis tick={AXIS_TICK}
+              label={{ value: 'skin', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+            <Tooltip contentStyle={TOOLTIP_STYLE}
+              formatter={(x) => fmt(x, 5)} />
+            <Legend {...LEGEND_PROPS} />
+            <ReferenceLine y={0} stroke={SVG_CHART.reference} />
+            <Line type="monotone" dataKey="skin" name="skin against contrast" stroke={seriesColor(1)} dot isAnimationActive={false} />
+          </LineChart>
+        </ChartFrame>
+        <ChartFrame height={224}>
+          <LineChart data={radius} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+            <CartesianGrid {...GRID_STYLE} />
+            <XAxis dataKey="rsM" type="number" scale="log" domain={['dataMin', 'dataMax']}
+              tick={AXIS_TICK}
+              label={{ value: 'damaged radius (m, log)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+            <YAxis tick={AXIS_TICK}
+              label={{ value: 'skin', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+            <Tooltip contentStyle={TOOLTIP_STYLE}
+              formatter={(x) => fmt(x, 5)} />
+            <Legend {...LEGEND_PROPS} />
+            <Line type="monotone" dataKey="skin" name="skin against radius" stroke={seriesColor(0)} dot isAnimationActive={false} />
+          </LineChart>
+        </ChartFrame>
       </div>
       <div className="mt-3 grid gap-3 lg:grid-cols-2">
         <div className="overflow-x-auto">
-          <table className="text-xs text-slate-300 w-full">
-            <thead className="text-slate-500">
+          <table className="text-xs text-pl-text w-full">
+            <thead className="text-pl-muted">
               <tr>
                 <th className="text-left pr-3">k/ks</th>
                 <th className="text-right pr-3">skin</th>
@@ -107,15 +106,15 @@ const Damage = () => {
                 <tr key={r.kOverKs}>
                   <td className="pr-3">{fmt(r.kOverKs, 0)}</td>
                   <td className="text-right pr-3">{fmt(r.skin, 5)}</td>
-                  <td className="text-right text-emerald-400">{r.kOverKs === 1 ? '-' : fmt(r.skin / (r.kOverKs - 1), 5)}</td>
+                  <td className="text-right text-pl-text">{r.kOverKs === 1 ? 'n/a' : fmt(r.skin / (r.kOverKs - 1), 5)}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
         <div className="overflow-x-auto">
-          <table className="text-xs text-slate-300 w-full">
-            <thead className="text-slate-500">
+          <table className="text-xs text-pl-text w-full">
+            <thead className="text-pl-muted">
               <tr>
                 <th className="text-left pr-3">rs (m)</th>
                 <th className="text-right pr-3">skin</th>
@@ -127,14 +126,14 @@ const Damage = () => {
                 <tr key={r.rsM}>
                   <td className="pr-3">{fmt(r.rsM, 2)}</td>
                   <td className="text-right pr-3">{fmt(r.skin, 5)}</td>
-                  <td className="text-right text-amber-400">{fmt(r.gainFromDoubling, 4)}</td>
+                  <td className="text-right text-pl-text">{fmt(r.gainFromDoubling, 4)}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         The left column is a straight line and the right one is not. Skin is LINEAR in the
         permeability contrast: the third column of the left table is the same number on every row,
         so doubling the contrast above one exactly doubles the skin. Skin is only LOGARITHMIC in
@@ -184,44 +183,40 @@ const Sandstone = () => {
         <Tile label="Interval and porosity" value={`${fmt(ACID.hM, 0)} m at ${fmt(ACID.porosity, 3)}`} />
       </TileGrid>
       <div className="grid gap-3 lg:grid-cols-2 mt-3">
-        <div className="h-56">
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={sw} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-              <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-              <XAxis dataKey="raM" type="number" domain={['dataMin', 'dataMax']}
-                tick={{ fill: '#94a3b8', fontSize: 11 }}
-                label={{ value: 'acid radius (m)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-              <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }}
-                label={{ value: 'volume (m3)', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-              <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-                formatter={(x) => fmt(x, 4)} />
-              <Legend wrapperStyle={{ fontSize: 11 }} />
-              <Line type="monotone" dataKey="volumeM3" name="planning volume" stroke="#BFFF00" dot isAnimationActive={false} />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
-        <div className="h-56">
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={sw} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-              <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-              <XAxis dataKey="raM" type="number" domain={['dataMin', 'dataMax']}
-                tick={{ fill: '#94a3b8', fontSize: 11 }}
-                label={{ value: 'acid radius (m)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-              <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }}
-                label={{ value: 'skin left behind', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-              <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-                formatter={(x) => fmt(x, 5)} />
-              <Legend wrapperStyle={{ fontSize: 11 }} />
-              <ReferenceLine x={ACID.rsM} stroke="#f472b6"
-                label={{ value: 'damage ends here', fill: '#f472b6', fontSize: 10, position: 'top' }} />
-              <Line type="monotone" dataKey="sAfter" name="residual skin" stroke="#38bdf8" dot isAnimationActive={false} />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
+        <ChartFrame height={224}>
+          <LineChart data={sw} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+            <CartesianGrid {...GRID_STYLE} />
+            <XAxis dataKey="raM" type="number" domain={['dataMin', 'dataMax']}
+              tick={AXIS_TICK}
+              label={{ value: 'acid radius (m)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+            <YAxis tick={AXIS_TICK}
+              label={{ value: 'volume (m3)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+            <Tooltip contentStyle={TOOLTIP_STYLE}
+              formatter={(x) => fmt(x, 4)} />
+            <Legend {...LEGEND_PROPS} />
+            <Line type="monotone" dataKey="volumeM3" name="planning volume" stroke={seriesColor(1)} dot isAnimationActive={false} />
+          </LineChart>
+        </ChartFrame>
+        <ChartFrame height={224}>
+          <LineChart data={sw} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+            <CartesianGrid {...GRID_STYLE} />
+            <XAxis dataKey="raM" type="number" domain={['dataMin', 'dataMax']}
+              tick={AXIS_TICK}
+              label={{ value: 'acid radius (m)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+            <YAxis tick={AXIS_TICK}
+              label={{ value: 'skin left behind', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+            <Tooltip contentStyle={TOOLTIP_STYLE}
+              formatter={(x) => fmt(x, 5)} />
+            <Legend {...LEGEND_PROPS} />
+            <ReferenceLine x={ACID.rsM} stroke={seriesColor(4)}
+              label={{ value: 'damage ends here', fill: seriesColor(4), fontSize: 10, position: 'top' }} />
+            <Line type="monotone" dataKey="sAfter" name="residual skin" stroke={seriesColor(0)} dot isAnimationActive={false} />
+          </LineChart>
+        </ChartFrame>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">acid radius (m)</th>
               <th className="text-right pr-3">volume (m3)</th>
@@ -237,15 +232,15 @@ const Sandstone = () => {
                 <td className="pr-3">{fmt(r.raM, 2)}</td>
                 <td className="text-right pr-3">{fmt(r.volumeM3, 4)}</td>
                 <td className="text-right pr-3">{fmt(r.radiusRatio, 4)}</td>
-                <td className="text-right pr-3 text-amber-400">{fmt(r.volumeRatio, 4)}</td>
-                <td className={`text-right pr-3 ${r.sAfter > 0 ? 'text-rose-400' : 'text-emerald-400'}`}>{fmt(r.sAfter, 5)}</td>
+                <td className="text-right pr-3 text-pl-text">{fmt(r.volumeRatio, 4)}</td>
+                <td className="text-right pr-3 text-pl-text">{fmt(r.sAfter, 5)}</td>
                 <td className="text-right">{r.removed ? 'yes' : 'no'}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         Compare the two ratio columns. Doubling the radius does not double the volume, it roughly
         quadruples it, because the acid has to fill an annulus and an annulus grows with the SQUARE
         of its outer radius. Reaching twice as far costs about four times as much acid.
@@ -293,43 +288,39 @@ const Carbonate = () => {
         <Tile label="Skin bought by that four times" value={fmt(job.skin - carbonateOf({ volumeM3: 4 * volumeM3 }).skin, 6)} />
       </TileGrid>
       <div className="grid gap-3 lg:grid-cols-2 mt-3">
-        <div className="h-56">
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={sw} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-              <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-              <XAxis dataKey="volumeM3" type="number" scale="log" domain={['dataMin', 'dataMax']}
-                tick={{ fill: '#94a3b8', fontSize: 11 }}
-                label={{ value: 'pumped volume (m3, log)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-              <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }}
-                label={{ value: 'wormhole radius (m)', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-              <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-                formatter={(x) => fmt(x, 5)} />
-              <Legend wrapperStyle={{ fontSize: 11 }} />
-              <Line type="monotone" dataKey="rWhM" name="wormhole radius" stroke="#BFFF00" dot isAnimationActive={false} />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
-        <div className="h-56">
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={sw} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-              <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-              <XAxis dataKey="volumeM3" type="number" scale="log" domain={['dataMin', 'dataMax']}
-                tick={{ fill: '#94a3b8', fontSize: 11 }}
-                label={{ value: 'pumped volume (m3, log)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-              <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }}
-                label={{ value: 'skin', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-              <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-                formatter={(x) => fmt(x, 5)} />
-              <Legend wrapperStyle={{ fontSize: 11 }} />
-              <ReferenceLine y={0} stroke="#64748b" />
-              <Line type="monotone" dataKey="skin" name="wormhole skin" stroke="#38bdf8" dot isAnimationActive={false} />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
+        <ChartFrame height={224}>
+          <LineChart data={sw} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+            <CartesianGrid {...GRID_STYLE} />
+            <XAxis dataKey="volumeM3" type="number" scale="log" domain={['dataMin', 'dataMax']}
+              tick={AXIS_TICK}
+              label={{ value: 'pumped volume (m3, log)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+            <YAxis tick={AXIS_TICK}
+              label={{ value: 'wormhole radius (m)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+            <Tooltip contentStyle={TOOLTIP_STYLE}
+              formatter={(x) => fmt(x, 5)} />
+            <Legend {...LEGEND_PROPS} />
+            <Line type="monotone" dataKey="rWhM" name="wormhole radius" stroke={seriesColor(1)} dot isAnimationActive={false} />
+          </LineChart>
+        </ChartFrame>
+        <ChartFrame height={224}>
+          <LineChart data={sw} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+            <CartesianGrid {...GRID_STYLE} />
+            <XAxis dataKey="volumeM3" type="number" scale="log" domain={['dataMin', 'dataMax']}
+              tick={AXIS_TICK}
+              label={{ value: 'pumped volume (m3, log)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+            <YAxis tick={AXIS_TICK}
+              label={{ value: 'skin', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+            <Tooltip contentStyle={TOOLTIP_STYLE}
+              formatter={(x) => fmt(x, 5)} />
+            <Legend {...LEGEND_PROPS} />
+            <ReferenceLine y={0} stroke={SVG_CHART.reference} />
+            <Line type="monotone" dataKey="skin" name="wormhole skin" stroke={seriesColor(0)} dot isAnimationActive={false} />
+          </LineChart>
+        </ChartFrame>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">volume (m3)</th>
               <th className="text-right pr-3">wormhole radius (m)</th>
@@ -342,14 +333,14 @@ const Carbonate = () => {
               <tr key={r.volumeM3}>
                 <td className="pr-3">{fmt(r.volumeM3, 0)}</td>
                 <td className="text-right pr-3">{fmt(r.rWhM, 6)}</td>
-                <td className="text-right pr-3 text-emerald-400">{fmt(r.skin, 5)}</td>
-                <td className="text-right text-amber-400">{r.skinBought == null ? '-' : fmt(r.skinBought, 5)}</td>
+                <td className="text-right pr-3 text-pl-text">{fmt(r.skin, 5)}</td>
+                <td className="text-right text-pl-text">{r.skinBought == null ? 'n/a' : fmt(r.skinBought, 5)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         Every row in the table doubles the volume of the row above it, and the last column is the
         skin that doubling bought. Those numbers are all about the same size, which is the
         diminishing return: the first doubling and the last doubling buy the same small decrement,
@@ -406,45 +397,41 @@ const Ceiling = () => {
         <Tile label="Reservoir pressure" value={fmt(PARAMS.pResPa / 1e6, 4)} unit="MPa" />
       </TileGrid>
       <div className="grid gap-3 lg:grid-cols-2 mt-3">
-        <div className="h-56">
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={sw} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-              <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-              <XAxis dataKey="sSkin" type="number" domain={['dataMin', 'dataMax']}
-                tick={{ fill: '#94a3b8', fontSize: 11 }}
-                label={{ value: 'skin', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-              <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }}
-                label={{ value: 'ceiling (m3/s)', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-              <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-                formatter={(x) => Number(x).toExponential(4)} />
-              <Legend wrapperStyle={{ fontSize: 11 }} />
-              <ReferenceLine x={hawkinsOf()} stroke="#f472b6"
-                label={{ value: 'the damaged well', fill: '#f472b6', fontSize: 10, position: 'top' }} />
-              <Line type="monotone" dataKey="qM3s" name="ceiling with the acid" stroke="#BFFF00" dot isAnimationActive={false} />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
-        <div className="h-56">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={swWrong} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-              <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-              <XAxis dataKey="sSkin" tick={{ fill: '#94a3b8', fontSize: 11 }}
-                label={{ value: 'skin', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-              <YAxis scale="log" domain={['dataMin', 'dataMax']} tick={{ fill: '#94a3b8', fontSize: 11 }}
-                tickFormatter={(x) => Number(x).toExponential(0)}
-                label={{ value: 'ceiling (m3/s, log)', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-              <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-                formatter={(x) => Number(x).toExponential(4)} />
-              <Legend wrapperStyle={{ fontSize: 11 }} />
-              <Bar dataKey="qAcid" name="acid viscosity, right" fill="#BFFF00" isAnimationActive={false} />
-              <Bar dataKey="qFracFluid" name="frac fluid viscosity, wrong" fill="#f472b6" isAnimationActive={false} />
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
+        <ChartFrame height={224}>
+          <LineChart data={sw} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+            <CartesianGrid {...GRID_STYLE} />
+            <XAxis dataKey="sSkin" type="number" domain={['dataMin', 'dataMax']}
+              tick={AXIS_TICK}
+              label={{ value: 'skin', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+            <YAxis tick={AXIS_TICK}
+              label={{ value: 'ceiling (m3/s)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+            <Tooltip contentStyle={TOOLTIP_STYLE}
+              formatter={(x) => Number(x).toExponential(4)} />
+            <Legend {...LEGEND_PROPS} />
+            <ReferenceLine x={hawkinsOf()} stroke={seriesColor(4)}
+              label={{ value: 'the damaged well', fill: seriesColor(4), fontSize: 10, position: 'top' }} />
+            <Line type="monotone" dataKey="qM3s" name="ceiling with the acid" stroke={seriesColor(1)} dot isAnimationActive={false} />
+          </LineChart>
+        </ChartFrame>
+        <ChartFrame height={224}>
+          <BarChart data={swWrong} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+            <CartesianGrid {...GRID_STYLE} />
+            <XAxis dataKey="sSkin" tick={AXIS_TICK}
+              label={{ value: 'skin', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+            <YAxis scale="log" domain={['dataMin', 'dataMax']} tick={AXIS_TICK}
+              tickFormatter={(x) => Number(x).toExponential(0)}
+              label={{ value: 'ceiling (m3/s, log)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+            <Tooltip contentStyle={TOOLTIP_STYLE}
+              formatter={(x) => Number(x).toExponential(4)} />
+            <Legend {...LEGEND_PROPS} />
+            <Bar dataKey="qAcid" name="acid viscosity, right" fill={seriesColor(1)} isAnimationActive={false} />
+            <Bar dataKey="qFracFluid" name="frac fluid viscosity, wrong" fill={seriesColor(4)} isAnimationActive={false} />
+          </BarChart>
+        </ChartFrame>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">skin</th>
               <th className="text-right pr-3">acid viscosity (m3/s)</th>
@@ -456,15 +443,15 @@ const Ceiling = () => {
             {swWrong.map((r) => (
               <tr key={r.sSkin}>
                 <td className="pr-3">{fmt(r.sSkin, 0)}</td>
-                <td className="text-right pr-3 text-emerald-400">{r.qAcid.toExponential(5)}</td>
-                <td className="text-right pr-3 text-rose-400">{r.qFracFluid.toExponential(5)}</td>
+                <td className="text-right pr-3 text-pl-text">{r.qAcid.toExponential(5)}</td>
+                <td className="text-right pr-3 text-pl-text">{r.qFracFluid.toExponential(5)}</td>
                 <td className="text-right">{fmt(r.qAcid / r.qFracFluid, 0)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         The viscosity in this ceiling is the ACID that is being pumped, which is near water at
         {' '}{ACID_MU_PA_S.toExponential(0)} Pa.s, and NOT the crosslinked gel at
         {' '}{fmt(PARAMS.muPaS, 2)} Pa.s that you would pump to make a fracture. On this fixture
