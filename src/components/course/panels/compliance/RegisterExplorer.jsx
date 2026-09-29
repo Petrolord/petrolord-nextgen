@@ -223,7 +223,7 @@ export const PeriodMode = ({ per, pick, onPick }) => {
               <Line dataKey="y" stroke="transparent" dot={false} isAnimationActive={false} />
               {f.startDays !== null && <ReferenceArea x1={f.startDays} x2={f.dueDays} fill={SERIES[0]} fillOpacity={0.15} label={{ value: 'the current period', fill: SVG_CHART.note, fontSize: 10 }} />}
               {f.filedDays !== null && (
-                <ReferenceLine x={f.filedDays} stroke={f.filedInsideDerived ? SERIES[2] : SERIES[5]} label={{ value: f.filedInsideDerived ? 'filed inside' : 'filed outside', fill: SVG_CHART.label, fontSize: 10, position: 'top' }} />
+                <ReferenceLine x={f.filedDays} stroke={f.filedInsideDerived ? SERIES[2] : SERIES[5]} label={{ value: f.filedInsideDerived ? 'filed inside' : 'filed outside', fill: SVG_CHART.note, fontSize: 10, position: 'top' }} />
               )}
               <ReferenceLine x={0} stroke={SERIES[3]} strokeDasharray="4 2" label={{ value: 'as-of', fill: seriesColor(2), fontSize: 10, position: 'insideTopRight' }} />
             </LineChart>
@@ -272,8 +272,8 @@ export const RollMode = ({ roll }) => {
           <XAxis dataKey="x" type="number" domain={['dataMin', 'dataMax']} tick={AXIS} label={{ value: OFFSET_LABEL, fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
           <YAxis hide domain={[0, 1]} />
           <Line dataKey="y" stroke="transparent" dot={false} isAnimationActive={false} />
-          <ReferenceLine x={lf.dueDays} stroke={SERIES[5]} label={{ value: 'was due', fill: SVG_CHART.label, fontSize: 10, position: 'top' }} />
-          <ReferenceLine x={lf.filedDays} stroke={SERIES[1]} label={{ value: 'filed', fill: SVG_CHART.label, fontSize: 10, position: 'insideTopLeft' }} />
+          <ReferenceLine x={lf.dueDays} stroke={SERIES[5]} label={{ value: 'was due', fill: SVG_CHART.note, fontSize: 10, position: 'top' }} />
+          <ReferenceLine x={lf.filedDays} stroke={SERIES[1]} label={{ value: 'filed', fill: SVG_CHART.note, fontSize: 10, position: 'insideTopLeft' }} />
           <ReferenceLine x={lf.fromDueDays} stroke={SERIES[2]} label={{ value: 'next due, used', fill: seriesColor(1), fontSize: 10, position: 'top' }} />
           <ReferenceLine x={lf.fromFilingDays} stroke={SVG_CHART.reference} strokeDasharray="4 2" label={{ value: 'from the filing, unused', fill: SVG_CHART.note, fontSize: 10, position: 'insideTopRight' }} />
         </LineChart>
@@ -320,8 +320,8 @@ export const LibraryMode = ({ lib, rev, rules }) => {
               <XAxis dataKey="x" type="number" domain={['dataMin', 'dataMax']} tick={AXIS} label={{ value: OFFSET_LABEL, fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
               <YAxis hide domain={[0, 1]} />
               <Line dataKey="y" stroke="transparent" dot={false} isAnimationActive={false} />
-              <ReferenceLine x={c.issueDays} stroke={SERIES[0]} label={{ value: 'issued', fill: SVG_CHART.label, fontSize: 10, position: 'top' }} />
-              <ReferenceLine x={c.republishedDays} stroke={SERIES[1]} label={{ value: 'correction', fill: SVG_CHART.label, fontSize: 10, position: 'insideTopLeft' }} />
+              <ReferenceLine x={c.issueDays} stroke={SERIES[0]} label={{ value: 'issued', fill: SVG_CHART.note, fontSize: 10, position: 'top' }} />
+              <ReferenceLine x={c.republishedDays} stroke={SERIES[1]} label={{ value: 'correction', fill: SVG_CHART.note, fontSize: 10, position: 'insideTopLeft' }} />
               <ReferenceLine x={c.fromIssueDays} stroke={SERIES[2]} label={{ value: 'review, earned at issue', fill: seriesColor(1), fontSize: 10, position: 'top' }} />
               <ReferenceLine x={c.fromCorrectionDays} stroke={SVG_CHART.reference} strokeDasharray="4 2" label={{ value: 'from the correction, unused', fill: SVG_CHART.note, fontSize: 10, position: 'insideTopRight' }} />
             </LineChart>
