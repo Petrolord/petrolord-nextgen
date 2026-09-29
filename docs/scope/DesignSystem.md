@@ -499,7 +499,52 @@ entry.
   a status row check, and a source scan for retired colours and bare
   `ResponsiveContainer`s).
 
-## 9. Batch 4C: production III course apps (as built)
+## 9. Batch 3E: drilling II course apps (as built)
+
+- Routes (`rollout/w3e.js`): `/dashboard/apps/` `cementing`, `completion`,
+  `perfsand`, `stimulation`, `integrity` and `wellcost`, exact. Their course
+  reader pages stay on 1C's pattern entry.
+- The six learning pages follow the 3B and 3D page recipe: roles only,
+  primary tier toggle with `aria-pressed`, gold accent for the Learning
+  Mode pill and the certificate number, success and danger roles with their
+  words for the grading result, the success toasts on the root toaster.
+- The eighteen panels under
+  `components/course/panels/{cementing,completion,perfsand,stimulation,integrity,wellcost}`
+  moved straight to roles with no legacy branch: their only hosts are the
+  learning pages, the lesson reader and the handbook, and all three are
+  themed routes now (the page test asserts it).
+- Every chart is Recharts, now in `ChartFrame` with `GRID_STYLE`,
+  `AXIS_TICK`, `TOOLTIP_STYLE` and `LEGEND_PROPS`. Series colours: lime to
+  `seriesColor(1)` (green) and sky to `seriesColor(0)` (blue), because the
+  panel notes already call those lines "the green curve", "the green bars",
+  "the BLUE line" and "the blue bars"; pink and the old violet to
+  `seriesColor(4)`, rose to `(3)`, amber to `(2)`; grey context lines (ECD
+  at the shoe, inclination, own bore, critical flowing pressure) to
+  `SVG_CHART.reference`.
+- Tables: pass, fail, yes, no, the element and envelope states and the
+  clearance status sit on the status roles; number columns that were only
+  tinted to echo a chart line are plain text; a highlighted row (the
+  governing candidate, the chosen fraction, drill activities, provisions)
+  is gold (`accent-text`, semibold). The AFE basis word keeps its chart
+  colour as a swatch dot beside the word.
+- The integrity traffic light keeps its four category words: green on
+  success, yellow on warning, orange on the danger tint and red on solid
+  danger (the 2C severity ladder).
+- The skin table's out-of-range rpD now prints "out of range" beside the
+  warning colour. Touched empty cells show `n/a`.
+- No lesson in these six courses names a chart colour. Five panel notes did
+  (frac, time, AFE); they now say violet, blue and gold, in their own commit.
+- Screen fixes: legends no longer sit on the X axis titles, the time
+  explorer's flat footage axis prints whole metres, and input rows of three
+  to five boxes go two across on phones.
+- Tests: `src/pages/__tests__/DrillingApps3E.theme.test.jsx` (the four
+  standard checks per page, every tier in both themes, capstone pass, fail
+  and locked, the Learning Mode gate, no network) and
+  `src/components/course/panels/__tests__/DrillingPanels3E.theme.test.jsx`
+  (every view of every panel in both themes, plots on the white plate with
+  the mark, series in kit colours, a source scan with negative controls).
+
+## 10. Batch 4C: production III course apps (as built)
 
 Production networks (`/dashboard/apps/network`), well intervention
 (`/dashboard/apps/intervention`) and production surveillance
