@@ -4,7 +4,7 @@ import {
   XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
 import ChartFrame from '@/components/charts/ChartFrame';
-import { GRID_STYLE, TOOLTIP_STYLE, CHART_COLORS } from '@/utils/chartTheme';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
 import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import { networkExplorer } from './networkLab';
 import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
@@ -245,13 +245,13 @@ const Tree = () => {
       <ChartFrame height={224} className="mt-3">
         <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
           {GRID}
-          <XAxis dataKey="x" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="x" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
             label={{ value: 'trunk conductance, lb/d per root psi', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis yAxisId="p" tick={AXIS} domain={['auto', 'auto']}
             label={{ value: 'header 2, psia', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis yAxisId="q" orientation="right" tick={AXIS} domain={['auto', 'auto']} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <Line yAxisId="p" type="monotone" dataKey="header2Psia" name="header 2, psia" stroke={seriesColor(0)} dot isAnimationActive={false} />
           <Line yAxisId="q" type="monotone" dataKey="totalLbD" name="total produced, lb/d" stroke={seriesColor(1)} dot isAnimationActive={false} />
         </LineChart>
@@ -436,12 +436,12 @@ const Loop = () => {
       <ChartFrame height={224} className="mt-3">
         <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
           {GRID}
-          <XAxis dataKey="x" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="x" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
             label={{ value: 'conductance, lb/d per root psi', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis yAxisId="a" tick={AXIS} domain={['auto', 'auto']} />
           <YAxis yAxisId="b" orientation="right" tick={AXIS} domain={['auto', 'auto']} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <Line yAxisId="a" type="monotone" dataKey="sharePct"
             name={which === 'published' ? 'midpoint share, percent' : 'crosslink flow, lb/d'}
             stroke={seriesColor(0)} dot isAnimationActive={false} />
@@ -654,7 +654,7 @@ const Fight = () => {
               <YAxis tick={AXIS}
                 label={{ value: 'mass rate, lb/d', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
               <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-              <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+              <Legend {...LEGEND_PROPS} />
               <Bar dataKey="aloneLbD" name="alone on its own line" fill={seriesColor(1)} isAnimationActive={false} />
               <Bar dataKey="onTheSystemLbD" name="on the system" fill={seriesColor(0)} isAnimationActive={false} />
             </BarChart>

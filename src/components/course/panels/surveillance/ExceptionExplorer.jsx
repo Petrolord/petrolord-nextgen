@@ -4,7 +4,7 @@ import {
   XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
 import ChartFrame from '@/components/charts/ChartFrame';
-import { GRID_STYLE, TOOLTIP_STYLE, CHART_COLORS, getStreamPalette } from '@/utils/chartTheme';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT, getStreamPalette } from '@/utils/chartTheme';
 import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import { exceptionExplorer } from './surveillanceLab';
 import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
@@ -90,12 +90,12 @@ const Windows = () => {
       <ChartFrame height={240} className="mt-3">
         <ComposedChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
           {GRID}
-          <XAxis dataKey="date" tick={AXIS}
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="date" tick={AXIS}
             label={{ value: 'ledger date inside the recent window', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis tick={AXIS}
             label={{ value: 'stb over the row, and stb/d', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceLine y={data.two.baselineCalendarMean} stroke={seriesColor(2)} strokeDasharray="4 4" />
           <Bar dataKey="calendar" name="the CALENDAR volume the engine reads" fill={seriesColor(1)} isAnimationActive={false} />
           <Line type="monotone" dataKey="producingDay" name="the producing-day rate it never reads" stroke={seriesColor(0)} dot isAnimationActive={false} />
@@ -457,12 +457,12 @@ const Exceptions = () => {
       <ChartFrame height={224} className="mt-3">
         <BarChart data={chart} margin={{ top: 10, right: 20, bottom: 24, left: 0 }}>
           {GRID}
-          <XAxis dataKey="setting" tick={AXIS} interval={0} height={40}
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="setting" tick={AXIS} interval={0}
             label={{ value: `${sweepKey} as set`, position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis tick={AXIS} allowDecimals={false}
             label={{ value: 'exceptions raised', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 0)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <Bar dataKey="high" name="high" stackId="s" fill={seriesColor(3)} isAnimationActive={false} />
           <Bar dataKey="medium" name="medium" stackId="s" fill={seriesColor(2)} isAnimationActive={false} />
           <Bar dataKey="info" name="info" stackId="s" fill={seriesColor(0)} isAnimationActive={false} />
@@ -578,12 +578,12 @@ const Tests = () => {
       <ChartFrame height={240} className="mt-3">
         <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 24, left: 0 }}>
           {GRID}
-          <XAxis dataKey="days" tick={AXIS} interval={0} height={40}
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="days" tick={AXIS} interval={0}
             label={{ value: 'maximum test age allowed, days', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis tick={AXIS}
             label={{ value: 'theoretical oil over the window, stb', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 4)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <Line type="monotone" dataKey="theoretical" name="theoretical oil, stb" stroke={seriesColor(0)} dot isAnimationActive={false} />
         </LineChart>
       </ChartFrame>
@@ -860,12 +860,12 @@ const Allocation = () => {
       <ChartFrame height={240} className="mt-3">
         <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 24, left: 0 }}>
           {GRID}
-          <XAxis dataKey="date" tick={AXIS} interval={2} height={40}
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="date" tick={AXIS} interval={2}
             label={{ value: 'allocated day', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis tick={AXIS} domain={['auto', 'auto']}
             label={{ value: 'allocation factor, dimensionless', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 9)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceLine y={1} stroke={SVG_CHART.reference} strokeDasharray="4 4" />
           <ReferenceLine y={0.7} stroke={SVG_CHART.reference} strokeDasharray="2 4" />
           <ReferenceLine y={1.3} stroke={SVG_CHART.reference} strokeDasharray="2 4" />

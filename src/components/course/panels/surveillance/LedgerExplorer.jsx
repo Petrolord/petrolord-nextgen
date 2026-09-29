@@ -4,7 +4,7 @@ import {
   XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
 import ChartFrame from '@/components/charts/ChartFrame';
-import { GRID_STYLE, TOOLTIP_STYLE, CHART_COLORS } from '@/utils/chartTheme';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
 import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import { ledgerExplorer } from './surveillanceLab';
 import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
@@ -83,12 +83,12 @@ const Ledger = () => {
       <ChartFrame height={256} className="mt-3">
         <ComposedChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
           {GRID}
-          <XAxis dataKey="date" tick={AXIS}
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="date" tick={AXIS}
             label={{ value: 'ledger date', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis tick={AXIS}
             label={{ value: 'stb over the row, and stb/d', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <Bar dataKey="calendar" name="the calendar volume, stb" fill={seriesColor(1)} isAnimationActive={false} />
           <Line type="monotone" dataKey="producingDay" name="the producing-day rate, stb/d" stroke={seriesColor(0)} dot isAnimationActive={false} />
         </ComposedChart>
@@ -290,7 +290,7 @@ const Ratios = () => {
           <YAxis tick={AXIS}
             label={{ value: 'watercut fraction, and gas-oil ratio in Mscf/stb', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <Bar dataKey="watercut" name="watercut, a fraction" fill={seriesColor(1)} isAnimationActive={false} />
           <Bar dataKey="gor" name="gas-oil ratio, Mscf/stb" fill={seriesColor(0)} isAnimationActive={false} />
         </BarChart>
@@ -415,7 +415,7 @@ const Field = () => {
           <YAxis tick={AXIS} scale="log" domain={[100, 'dataMax']}
             label={{ value: 'field oil on one date, stb', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 0)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <Bar dataKey="asNumbers" name="the volumes as numbers" fill={seriesColor(0)} isAnimationActive={false} />
           <Bar dataKey="asStrings" name="the SAME volumes as text" fill={seriesColor(2)} isAnimationActive={false} />
         </BarChart>
@@ -587,12 +587,12 @@ const Kpis = () => {
       <ChartFrame height={224} className="mt-3">
         <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 24, left: 0 }}>
           {GRID}
-          <XAxis dataKey="asked" tick={AXIS} type="number" scale="log" domain={['dataMin', 'dataMax']}
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="asked" tick={AXIS} type="number" scale="log" domain={['dataMin', 'dataMax']}
             label={{ value: 'window asked for, days', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis tick={AXIS}
             label={{ value: 'field days actually averaged', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 4)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <Line type="monotone" dataKey="asked" name="days the object reports" stroke={seriesColor(1)} dot isAnimationActive={false} />
           <Line type="monotone" dataKey="averaged" name="days it actually averaged" stroke={seriesColor(0)} dot isAnimationActive={false} />
         </LineChart>

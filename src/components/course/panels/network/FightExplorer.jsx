@@ -4,7 +4,7 @@ import {
   XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
 import ChartFrame from '@/components/charts/ChartFrame';
-import { GRID_STYLE, TOOLTIP_STYLE, CHART_COLORS } from '@/utils/chartTheme';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
 import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import { fightExplorer } from './networkLab';
 import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
@@ -140,12 +140,12 @@ const Pinned = () => {
       <ChartFrame height={224} className="mt-3">
         <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
           {GRID}
-          <XAxis dataKey="x" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="x" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
             label={{ value: 'allocation, lb/d', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis tick={AXIS} domain={['auto', 'auto']}
             label={{ value: 'mass rate, lb/d', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <Line type="monotone" dataKey="rateLbD" name="what the well reports making" stroke={seriesColor(0)} dot isAnimationActive={false} />
           <Line type="monotone" dataKey="lineLbD" name="what its flowline carries" stroke={seriesColor(1)} dot isAnimationActive={false} />
           <Line type="monotone" dataKey="gapLbD" name="the conservation gap" stroke={seriesColor(2)} dot isAnimationActive={false} />
@@ -320,12 +320,12 @@ const Guess = () => {
           <ChartFrame height={224} className="mt-3">
             <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
               {GRID}
-              <XAxis dataKey="x" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
+              <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="x" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
                 label={{ value: 'where the node was started, psia', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
               <YAxis yAxisId="p" tick={AXIS} domain={['auto', 'auto']} />
               <YAxis yAxisId="q" orientation="right" tick={AXIS} domain={['auto', 'auto']} />
               <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-              <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+              <Legend {...LEGEND_PROPS} />
               <Line yAxisId="p" type="monotone" dataKey="pinnedPressurePsia" name="where the node ended, psia" stroke={seriesColor(0)} dot isAnimationActive={false} />
               <Line yAxisId="q" type="monotone" dataKey="gapLbD" name="conservation gap, lb/d" stroke={seriesColor(2)} dot isAnimationActive={false} />
             </LineChart>
@@ -704,12 +704,12 @@ const Tolerance = () => {
       <ChartFrame height={224} className="mt-3">
         <BarChart data={chart} margin={{ top: 10, right: 20, bottom: 24, left: 0 }}>
           {GRID}
-          <XAxis dataKey="x" tick={AXIS}
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="x" tick={AXIS}
             label={{ value: 'tolerance asked, as a power of ten', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis tick={AXIS}
             label={{ value: 'Newton iterations', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <Bar dataKey="iterations" name="Newton iterations" fill={seriesColor(0)} isAnimationActive={false} />
         </BarChart>
       </ChartFrame>
@@ -953,13 +953,13 @@ const Cusp = () => {
       <ChartFrame height={224} className="mt-3">
         <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
           {GRID}
-          <XAxis dataKey="x" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="x" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
             label={{ value: 'loop leg conductance, lb/d per root psi', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis yAxisId="i" tick={AXIS} domain={['auto', 'auto']}
             label={{ value: 'Newton iterations', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis yAxisId="d" orientation="right" tick={AXIS} domain={['auto', 'auto']} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <Line yAxisId="i" type="monotone" dataKey="iterations" name="Newton iterations" stroke={seriesColor(0)} dot isAnimationActive={false} />
           <Line yAxisId="d" type="monotone" dataKey="crosslinkDpPsi" name="crosslink drop, psi" stroke={seriesColor(1)} dot isAnimationActive={false} />
         </LineChart>

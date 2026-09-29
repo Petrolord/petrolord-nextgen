@@ -4,7 +4,7 @@ import {
   XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
 import ChartFrame from '@/components/charts/ChartFrame';
-import { GRID_STYLE, TOOLTIP_STYLE, CHART_COLORS } from '@/utils/chartTheme';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
 import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import { candidateExplorer } from './interventionLab';
 import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
@@ -87,12 +87,12 @@ const Discarded = () => {
       <ChartFrame height={256} className="mt-3">
         <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
           {GRID}
-          <XAxis dataKey="tDays" type="number" scale="log" tick={AXIS} domain={['dataMin', 'dataMax']}
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="tDays" type="number" scale="log" tick={AXIS} tickFormatter={(v) => fmt(v, 1)} domain={['dataMin', 'dataMax']}
             label={{ value: 'producing time, days', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis type="number" scale="log" tick={AXIS} domain={['dataMin', 'dataMax']}
             label={{ value: 'water-oil ratio', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceLine x={f.chokedOnDay} stroke={seriesColor(2)} strokeDasharray="4 4" />
           <Line type="monotone" dataKey="kept" name="samples the derivative fit kept" stroke={seriesColor(0)} dot connectNulls={false} isAnimationActive={false} />
           <Line type="monotone" dataKey="dropped" name="samples it discarded" stroke={seriesColor(2)} dot connectNulls={false} isAnimationActive={false} />
@@ -266,12 +266,12 @@ const Dial = () => {
       <ChartFrame height={256} className="mt-3">
         <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
           {GRID}
-          <XAxis dataKey="lateFraction" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="lateFraction" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
             label={{ value: 'how much of the history counts as late', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis tick={AXIS} domain={['auto', 'auto']}
             label={{ value: 'derivative slope', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceArea
             y1={(channelling ? channelling.value : 1.3) - (band ? band.value : 0.25)}
             y2={(channelling ? channelling.value : 1.3) + (band ? band.value : 0.25)}

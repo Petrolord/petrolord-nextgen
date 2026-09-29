@@ -4,7 +4,7 @@ import {
   XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
 import ChartFrame from '@/components/charts/ChartFrame';
-import { GRID_STYLE, TOOLTIP_STYLE, CHART_COLORS } from '@/utils/chartTheme';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
 import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import { readingExplorer } from './surveillanceLab';
 import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
@@ -87,12 +87,12 @@ const Seam = () => {
       <ChartFrame height={240} className="mt-3">
         <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 24, left: 0 }}>
           {GRID}
-          <XAxis dataKey="collapsed" tick={AXIS} interval={0} height={40}
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="collapsed" tick={AXIS} interval={0}
             label={{ value: 'collapsed days inside a seven day window', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis tick={AXIS}
             label={{ value: 'gas-oil ratio, scf/stb', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 9)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <Line type="monotone" dataKey="meanOfRatios" name="the MEAN OF THE DAILY RATIOS" stroke={seriesColor(0)} dot isAnimationActive={false} />
           <Line type="monotone" dataKey="volumetric" name="the VOLUMETRIC reading" stroke={seriesColor(1)} dot isAnimationActive={false} />
         </LineChart>
@@ -278,7 +278,7 @@ const Decline = () => {
           <YAxis tick={AXIS}
             label={{ value: 'effective decline over the first year, %', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 12)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceLine y={data.head.exponentialAnswerPct} stroke={seriesColor(2)} strokeDasharray="4 4" />
           <Bar dataKey="effective" name="effective decline, %" fill={seriesColor(0)} isAnimationActive={false} />
         </BarChart>
@@ -520,12 +520,12 @@ const Guards = () => {
       <ChartFrame height={240} className="mt-3">
         <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 24, left: 0 }}>
           {GRID}
-          <XAxis dataKey="n" tick={AXIS} type="number" scale="log" domain={['dataMin', 'dataMax']}
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="n" tick={AXIS} type="number" scale="log" domain={['dataMin', 'dataMax']}
             label={{ value: 'points handed in', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis tick={AXIS}
             label={{ value: 'points returned', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 0)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceLine y={1500} stroke={seriesColor(2)} strokeDasharray="4 4" />
           <Line type="monotone" dataKey="out" name="points returned" stroke={seriesColor(0)} dot isAnimationActive={false} />
           <Line type="monotone" dataKey="cap" name="the maximum the argument names" stroke={seriesColor(1)} dot={false} isAnimationActive={false} />
@@ -852,12 +852,12 @@ const Lift = () => {
       <ChartFrame height={256} className="mt-3">
         <BarChart data={chart} margin={{ top: 10, right: 20, bottom: 24, left: 0 }}>
           {GRID}
-          <XAxis dataKey="oil" tick={AXIS} interval={0} height={40}
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="oil" tick={AXIS} interval={0}
             label={{ value: 'the rate handed over, read as oil, bbl/d', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis tick={AXIS}
             label={{ value: 'score read as liquid less score read as oil', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 0)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceLine y={0} stroke={SVG_CHART.reference} />
           <Bar dataKey="plunger" name="plunger lift" fill={seriesColor(2)} isAnimationActive={false} />
           <Bar dataKey="rodPump" name="rod pump" fill={seriesColor(0)} isAnimationActive={false} />
