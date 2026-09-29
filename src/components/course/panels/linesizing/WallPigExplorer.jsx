@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, BarChart, Line, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
+  LineChart, BarChart, Line, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK } from '@/utils/chartSvg';
 import {
   wallCode, pigging, correlationLimits, refusalCatalogue, heldItems,
 } from './linesizingLab';
@@ -37,13 +40,13 @@ export const MODES = [
   ['held', 'What the method does not know'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
 
 const Tbl = ({ head, rows }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>{head.map((h, i) => <th key={i} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>)}</tr>
       </thead>
       <tbody>
@@ -58,9 +61,9 @@ const Tbl = ({ head, rows }) => (
 );
 
 const Held = ({ note }) => (
-  <div className="mt-3 rounded-md border border-amber-700/60 bg-amber-950/20 p-3">
-    <p className="text-amber-300 text-xs font-medium mb-1">HELD FOR LITERATURE</p>
-    <p className="text-xs text-slate-300 mb-0">{note}</p>
+  <div className="mt-3 rounded-md border border-pl-warning/40 bg-pl-warning-bg p-3">
+    <p className="text-pl-warning-text text-xs font-medium mb-1">HELD FOR LITERATURE</p>
+    <p className="text-xs text-pl-text mb-0">{note}</p>
   </div>
 );
 
@@ -79,7 +82,7 @@ export const WallMode = ({ w }) => {
         head={['location class', 'design factor']}
         rows={w.designFactors.map((r) => [String(r.locationClass), six(r.f)])}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         B31.4 uses a flat design factor of {six(w.b314Factor)} whatever the route, which is the same number B31.8 gives
         to Class 1. For B31.8 the class must be STATED, because assuming Class 1 near a school is exactly the mistake
         the classes exist to prevent.
@@ -91,20 +94,18 @@ export const WallMode = ({ w }) => {
           ['B31.4', 'any', six(w.b314Row.designFactor), six(w.b314Row.tPressureIn), six(w.b314Row.tRequiredIn), six(w.b314Row.maopPsig)],
         ]}
       />
-      <div className="h-48 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="cls" tick={AXIS} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Bar dataKey="pressure" name="pressure wall, in" fill="#38bdf8" isAnimationActive={false} />
-            <Bar dataKey="required" name="required wall, in" fill="#BFFF00" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <ChartFrame height={192} className="mt-3">
+        <BarChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="cls" tick={AXIS} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <Bar dataKey="pressure" name="pressure wall, in" fill={seriesColor(0)} isAnimationActive={false} />
+          <Bar dataKey="required" name="required wall, in" fill={seriesColor(1)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Class 4 asks for {six(w.class4OverClass1Derived)} times the pressure wall of Class 1 on the same pipe at the
         same pressure. The route, not the fluid, is what moved it.
       </p>
@@ -112,7 +113,7 @@ export const WallMode = ({ w }) => {
         head={['joint factor', 'pressure wall in', 'temperature derate', 'pressure wall in']}
         rows={w.factorRows.map((r) => [six(r.jointFactor), six(r.jointWallIn), six(r.tempDerate), six(r.derateWallIn)])}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Both sit in the denominator beside the design factor, so both make the wall thicker, and neither of them is
         strength: they are confidence in the seam and confidence in the steel when it is hot.
       </p>
@@ -124,7 +125,7 @@ export const WallMode = ({ w }) => {
           <Tile label="Rated with the allowance" value={six(w.maopWithPsig)} unit="psig" />
         </TileGrid>
       </div>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The corrosion allowance is not strength either. It holds no pressure on the day it is installed and it is what
         lets the pipe still hold pressure years later. Read the rating back off the wall the mill actually rolled and
         the allowance decides the answer: {six(w.maopWithPsig)} psig with it respected against {six(w.maopWithoutPsig)}
@@ -159,9 +160,9 @@ export const PigMode = ({ p }) => {
           <Tile label="Length" value={six(p.pig.lengthFt)} unit="ft" />
         </TileGrid>
       </div>
-      <div className="mt-3 rounded-md border border-sky-800/60 bg-sky-950/20 p-3">
-        <p className="text-sky-300 text-xs font-medium mb-1">THE HOLDUP IS AN INPUT AND NOT A RESULT</p>
-        <p className="text-xs text-slate-300 mb-0">
+      <div className="mt-3 rounded-md border border-pl-info/40 bg-pl-info-bg p-3">
+        <p className="text-pl-info-text text-xs font-medium mb-1">THE HOLDUP IS AN INPUT AND NOT A RESULT</p>
+        <p className="text-xs text-pl-text mb-0">
           The swept volume is the line volume times a holdup somebody else measured or assumed. There is no flow
           regime, no slip and no holdup correlation anywhere in this engine, so a pigging estimate is only as honest as
           that number. This is a seam a reader has to see rather than infer.
@@ -171,19 +172,17 @@ export const PigMode = ({ p }) => {
         head={['holdup', 'swept bbl', 'as a fraction of the line volume', 'days between runs']}
         rows={p.holdupRows.map((r) => [six(r.holdupFrac), four(r.sweptBbl), six(r.fractionOfVolumeDerived), r.error ? r.error : four(r.intervalDays)])}
       />
-      <div className="h-48 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="holdup" tick={AXIS} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => four(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line dataKey="interval" name="days between runs" stroke="#38bdf8" dot connectNulls={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <ChartFrame height={192} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="holdup" tick={AXIS} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => four(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line dataKey="interval" name="days between runs" stroke={seriesColor(0)} dot connectNulls={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         At a holdup of zero the sweep is {four(p.zeroHoldupSweptBbl)} bbl, and at a holdup of one it
         is {four(p.fullHoldupSweptBbl)} bbl against a line volume of {four(p.lineVolumeBbl)} bbl, which is the whole
         line.
@@ -198,9 +197,9 @@ export const PigMode = ({ p }) => {
           <Tile label={`At ${six(p.dropoutBpd)} bpd of dropout`} value={four(p.nominalIntervalDays)} unit="days between runs" />
         </TileGrid>
       </div>
-      <div className="mt-3 rounded-md border border-red-800/60 bg-red-950/20 p-3">
-        <p className="text-red-300 text-xs font-medium mb-1">{`The same sweep into a ${six(p.smallCatcherBbl)} bbl catcher`}</p>
-        <p className="text-xs text-slate-300 font-mono mb-0">{p.smallCatcherError}</p>
+      <div className="mt-3 rounded-md border border-pl-danger/40 bg-pl-danger-bg p-3">
+        <p className="text-pl-danger-text text-xs font-medium mb-1">{`The same sweep into a ${six(p.smallCatcherBbl)} bbl catcher`}</p>
+        <p className="text-xs text-pl-text font-mono mb-0">{p.smallCatcherError}</p>
       </div>
       <Tbl
         head={['published pigging case', 'volume bbl', 'golden volume', 'swept bbl', 'golden swept', 'run h', 'golden run']}
@@ -224,7 +223,7 @@ export const LimitsMode = ({ c }) => {
   }));
   return (
     <>
-      <p className="text-xs text-slate-400 mt-1 mb-0">
+      <p className="text-xs text-pl-muted mt-1 mb-0">
         The jump at the branch, exactly: the friction factor is {ten(c.fJustBelow)} at Reynolds
         {' '}{Number(c.reJustBelow).toFixed(7)} and {ten(c.fAtBranch)} at Reynolds {four(c.reAtBranch)}, a ratio of
         {' '}{six(c.jumpRatioDerived)}. Nothing physical happens in that interval. The engine leaves the laminar law and
@@ -235,7 +234,7 @@ export const LimitsMode = ({ c }) => {
         head={['relative roughness', `f at Reynolds ${four(c.reForDomainSweep)}`]}
         rows={c.domainRows.map((r) => [six(r.relRough), ten(r.f)])}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Colebrook was published to a relative roughness of about 0.05. The engine answers all five rows and flags none
         of them. The last two are extrapolations of a fitted curve into a region where the pipe is more obstruction
         than pipe.
@@ -244,20 +243,18 @@ export const LimitsMode = ({ c }) => {
         head={['bore in', 'weymouth scfd', 'general scfd', 'f general settled on', 'f that would make them agree']}
         rows={c.weymouthFriction.map((r) => [six(r.idIn), four(r.weymouthScfd), four(r.generalScfd), ten(r.generalFDarcy), ten(r.matchingFDerived)])}
       />
-      <div className="h-48 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="bore" tick={AXIS} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => ten(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line dataKey="settled" name="f General Flow settled on" stroke="#38bdf8" dot isAnimationActive={false} />
-            <Line dataKey="matching" name="f that would make General match Weymouth" stroke="#f472b6" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <ChartFrame height={192} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="bore" tick={AXIS} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => ten(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line dataKey="settled" name="f General Flow settled on" stroke={seriesColor(0)} dot isAnimationActive={false} />
+          <Line dataKey="matching" name="f that would make General match Weymouth" stroke={seriesColor(4)} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The last column falls as the bore grows, which is the signature of a fully rough friction law that depends on
         the diameter and not on the Reynolds number. That is the friction assumption hidden inside the Weymouth
         constant, measured out of the engine rather than sourced.
@@ -285,7 +282,7 @@ export const RefusalsMode = ({ r }) => {
   if (!r) return <Note>The refusal reader did not return the catalogue.</Note>;
   return (
     <>
-      <p className="text-xs text-slate-400 mt-1 mb-0">
+      <p className="text-xs text-pl-muted mt-1 mb-0">
         A refusal in this engine is an object carrying an error string. It is never a thrown exception, never a null
         and never a bare number, and the shape is the contract: a caller checks a property rather than inspecting a
         value. That is exactly why a NaN or an Infinity returned WITHOUT an error is worse than no guard at all. It
@@ -299,7 +296,7 @@ export const RefusalsMode = ({ r }) => {
           ['the friction factor at a negative relative roughness', JSON.stringify(r.frictionNegativeRoughnessShape)],
         ]}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The first two are bare numbers with nowhere to put a message, so they answer NaN by documented contract and the
         functions that wrap them refuse in words. The third carries its refusal in the regime it already returns. Note
         that a NaN has no JSON spelling and serialises as null: the engine returns NaN, and null is what printing it
@@ -309,7 +306,7 @@ export const RefusalsMode = ({ r }) => {
         head={['an input with no physical meaning', 'the engine\'s own message']}
         rows={r.refusals.map((x) => [x.label, x.error])}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Every one of those messages is the engine's own, read back from the call rather than retyped here. Each guard
         also has a boundary, and the boundary is where the teaching is: a resistance sum of zero is a line with no
         fittings and is perfectly legal, an efficiency of exactly one is the ideal the forms are written for, a holdup
@@ -319,7 +316,7 @@ export const RefusalsMode = ({ r }) => {
         head={['guard', 'value', 'the engine']}
         rows={r.boundaries.map((b) => [b.label, six(b.value), b.refuses ? 'refuses' : 'answers'])}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         A guard that refuses its own limit is as wrong as one that accepts nonsense, which is why both sides are read
         rather than one.
       </p>
@@ -346,15 +343,15 @@ export const HeldMode = ({ h }) => {
   if (!h) return <Note>The held reader did not return the items.</Note>;
   return (
     <>
-      <p className="text-xs text-slate-400 mt-1 mb-0">
+      <p className="text-xs text-pl-muted mt-1 mb-0">
         Five things this course teaches as limits and never as answers. Not one of them is read by a graded value:
         every c factor, efficiency, roughness, resistance sum, location class and holdup in the assessment is a STATED
         condition of its tier.
       </p>
       {h.items.map((x) => (
-        <div key={x.id} className="mt-3 rounded-md border border-amber-700/60 bg-amber-950/20 p-3">
-          <p className="text-amber-300 text-xs font-medium mb-1">{x.title}</p>
-          <p className="text-xs text-slate-300 mb-0">{x.note}</p>
+        <div key={x.id} className="mt-3 rounded-md border border-pl-warning/40 bg-pl-warning-bg p-3">
+          <p className="text-pl-warning-text text-xs font-medium mb-1">{x.title}</p>
+          <p className="text-xs text-pl-text mb-0">{x.note}</p>
         </div>
       ))}
       <div className="mt-3">
@@ -365,7 +362,7 @@ export const HeldMode = ({ h }) => {
           <Tile label="The step across the branch" value={six(h.jumpRatioDerived)} unit="times" />
         </TileGrid>
       </div>
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         And one thing that is not held but simply absent: THE MULTIPHASE HALF IS NOT IN THIS ENGINE. There is no flow
         regime, no slip, no holdup correlation and no slug model anywhere in it. Wherever a holdup is needed the engine
         takes it as an input.
