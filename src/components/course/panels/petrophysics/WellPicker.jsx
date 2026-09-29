@@ -40,14 +40,14 @@ const WellPicker = ({ well, onWell }) => {
   };
 
   return (
-    <div className="rounded-lg border border-gray-700 bg-[#1E293B] p-4 space-y-3" data-testid="well-picker">
+    <div className="rounded-lg border border-pl-border bg-pl-surface p-4 space-y-3" data-testid="well-picker">
       <div className="flex flex-wrap items-center gap-2 text-sm">
-        <span className="text-gray-400">Well:</span>
+        <span className="text-pl-muted">Well:</span>
         <button type="button" onClick={() => { setFile(null); setError(null); onWell(TYPEWELL); }}
-          className={`px-3 py-1.5 rounded-md border text-xs ${well === TYPEWELL ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold' : 'bg-gray-800 text-gray-300 border-gray-600'}`}>
+          className={`px-3 py-1.5 rounded-md border text-xs ${well === TYPEWELL ? 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold' : 'bg-pl-surface text-pl-text border-pl-border-strong'}`}>
           Typewell (teaching)
         </button>
-        <label className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-dashed border-gray-500 text-gray-300 text-xs cursor-pointer hover:border-[#BFFF00]">
+        <label className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-dashed border-pl-border-strong text-pl-text text-xs cursor-pointer hover:border-pl-primary">
           {file ? `Open LAS: ${file.name}` : 'Open a LAS file'}
           <input type="file" accept=".las,.LAS,.txt" className="hidden"
             onChange={async (e) => {
@@ -59,7 +59,7 @@ const WellPicker = ({ well, onWell }) => {
               build(next, z);
             }} />
         </label>
-        <span className="text-xs text-gray-500">Running on: {well ? well.name : 'no well yet'}</span>
+        <span className="text-xs text-pl-muted">Running on: {well ? well.name : 'no well yet'}</span>
       </div>
       {file && (
         <div className="grid gap-3 grid-cols-2 sm:grid-cols-6">

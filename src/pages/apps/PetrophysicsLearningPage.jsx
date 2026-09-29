@@ -3,8 +3,11 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import {
-  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceArea,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceArea,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK } from '@/utils/chartSvg';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -144,10 +147,10 @@ const PetrophysicsLearningPage = () => {
     <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
       {(capstone?.fields || []).map((f) => (
         <div key={f.key}>
-          <Label htmlFor={`capstone-${f.key}`} className="text-gray-400 text-xs mb-1 block">{f.label} ({f.unit})</Label>
+          <Label htmlFor={`capstone-${f.key}`} className="text-pl-muted text-xs mb-1 block">{f.label} ({f.unit})</Label>
           <Input id={`capstone-${f.key}`} type="text" inputMode="decimal" autoComplete="off" value={answers[f.key] ?? ''}
             onChange={(e) => setAnswers((a) => ({ ...a, [f.key]: e.target.value }))}
-            className="bg-gray-700 text-white border-gray-600 h-8 text-sm" />
+            className="h-8 text-sm" />
         </div>
       ))}
     </div>
@@ -163,10 +166,10 @@ const PetrophysicsLearningPage = () => {
         toast({
           title: `Capstone passed. ${CERT_LABELS[res.tier] || 'Associate'} certified!`,
           description: res.certificate_number,
-          className: 'bg-[#BFFF00] text-slate-900',
+          className: 'border-pl-success/40 bg-pl-success-bg text-pl-success-text',
         });
       } else if (res.passed) {
-        toast({ title: 'Passed — you were already certified', className: 'bg-[#BFFF00] text-slate-900' });
+        toast({ title: 'Passed. You were already certified', className: 'border-pl-success/40 bg-pl-success-bg text-pl-success-text' });
       } else {
         toast({
           title: 'Not passing yet',
@@ -182,19 +185,19 @@ const PetrophysicsLearningPage = () => {
   };
 
   if (gate.loading) {
-    return <div className="flex items-center justify-center h-64"><Loader2 className="h-8 w-8 animate-spin text-[#BFFF00]" /></div>;
+    return <div className="flex items-center justify-center h-64"><Loader2 className="h-8 w-8 animate-spin text-pl-primary-text" /></div>;
   }
   if (!gate.allowed) return <ScopeGate />;
 
   const capstoneLockedNote = (
-    <Card className="bg-[#1E293B] border-gray-700">
+    <Card className="bg-pl-surface border-pl-border">
       <CardContent className="p-5 flex flex-wrap items-center justify-between gap-3">
-        <p className="text-gray-300 text-sm mb-0 flex items-center gap-2">
-          <Lock className="h-4 w-4 text-[#BFFF00] shrink-0" />
+        <p className="text-pl-text text-sm mb-0 flex items-center gap-2">
+          <Lock className="h-4 w-4 text-pl-primary-text shrink-0" />
           The graded capstone unlocks at the end of the course, after every module quiz and the final exam.
         </p>
         <Link to={`/dashboard/apps/${APP}/course/${tier}`}>
-          <Button size="sm" className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold">
+          <Button size="sm" className="font-semibold">
             Open the course <ArrowRight className="h-4 w-4 ml-1" />
           </Button>
         </Link>
@@ -203,20 +206,20 @@ const PetrophysicsLearningPage = () => {
   );
 
   const zoneRow = (name, s) => (
-    <tr className="border-b border-gray-800 text-gray-300">
-      <td className="py-2 pr-4 text-white">{name}</td>
+    <tr className="border-b border-pl-border text-pl-text">
+      <td className="py-2 pr-4 text-pl-text">{name}</td>
       <td className="py-2 pr-4">{s.net_m?.toFixed(1)} m</td>
       <td className="py-2 pr-4">{s.gross_m?.toFixed(1)} m</td>
-      <td className="py-2 pr-4">{s.phi_avg != null ? (s.phi_avg * 100).toFixed(1) + '%' : '—'}</td>
-      <td className="py-2 pr-4">{s.sw_avg != null ? (s.sw_avg * 100).toFixed(1) + '%' : '—'}</td>
+      <td className="py-2 pr-4">{s.phi_avg != null ? (s.phi_avg * 100).toFixed(1) + '%' : 'n/a'}</td>
+      <td className="py-2 pr-4">{s.sw_avg != null ? (s.sw_avg * 100).toFixed(1) + '%' : 'n/a'}</td>
     </tr>
   );
 
   const Param = ({ k, label, step = 'any' }) => (
     <div>
-      <Label className="text-gray-400 text-xs mb-1 block">{label}</Label>
+      <Label className="text-pl-muted text-xs mb-1 block">{label}</Label>
       <Input type="number" step={step} value={params[k]} onChange={setP(k)}
-        className="bg-gray-700 text-white border-gray-600 h-8 text-sm" />
+        className="h-8 text-sm" />
     </div>
   );
 
@@ -226,18 +229,18 @@ const PetrophysicsLearningPage = () => {
       <div className="relative max-w-6xl mx-auto p-6 space-y-6">
         {watermark && (
           <div className="pointer-events-none fixed inset-0 z-0 flex items-center justify-center overflow-hidden">
-            <span className="text-white/5 text-[8rem] font-black -rotate-45 select-none">TRAINING</span>
+            <span className="text-pl-text/5 text-[8rem] font-black -rotate-45 select-none">TRAINING</span>
           </div>
         )}
 
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="relative z-10 space-y-6">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
-              <h1 className="text-3xl font-bold text-white flex items-center gap-2">
-                <FlaskConical className="h-7 w-7 text-[#BFFF00]" /> Petrophysics
-                <span className="text-xs px-2 py-0.5 rounded-full bg-[#BFFF00]/20 text-[#BFFF00] border border-[#BFFF00]/40">Learning Mode</span>
+              <h1 className="text-3xl font-bold text-pl-text flex items-center gap-2">
+                <FlaskConical className="h-7 w-7 text-pl-primary-text" /> Petrophysics
+                <span className="text-xs px-2 py-0.5 rounded-full bg-pl-accent/15 text-pl-accent-text border border-pl-accent/40">Learning Mode</span>
               </h1>
-              <p className="mt-1 text-gray-400">
+              <p className="mt-1 text-pl-muted">
                 Bundled teaching dataset (typewell), or a LAS file you open. {gate.quota?.own_data_upload === false && 'Your own data upload unlocks at the Associate tier.'}
               </p>
             </div>
@@ -248,16 +251,16 @@ const PetrophysicsLearningPage = () => {
           {/* Legacy pocket lessons: superseded by the deep course. They
               only render for tiers whose full content has not shipped. */}
           {!deep && (
-          <Card className="bg-[#1E293B] border-gray-700">
+          <Card className="bg-pl-surface border-pl-border">
             <CardHeader>
-              <CardTitle className="text-white flex items-center gap-2"><BookOpen className="h-5 w-5 text-[#BFFF00]" /> Lessons</CardTitle>
+              <CardTitle className="text-pl-text flex items-center gap-2"><BookOpen className="h-5 w-5 text-pl-primary-text" /> Lessons</CardTitle>
               <CardDescription>The interpretation loop, step by step.</CardDescription>
             </CardHeader>
             <CardContent className="grid gap-3 sm:grid-cols-2">
               {LESSONS.map((l) => (
-                <div key={l.n} className="rounded-md border border-gray-700 bg-[#0F172A] p-3">
-                  <p className="text-white text-sm font-medium">{l.n}. {l.title}</p>
-                  <p className="text-xs text-gray-400 mt-1">{l.body}</p>
+                <div key={l.n} className="rounded-md border border-pl-border bg-pl-sunken p-3">
+                  <p className="text-pl-text text-sm font-medium">{l.n}. {l.title}</p>
+                  <p className="text-xs text-pl-muted mt-1">{l.body}</p>
                 </div>
               ))}
             </CardContent>
@@ -268,9 +271,9 @@ const PetrophysicsLearningPage = () => {
 
           <div className="grid gap-6 lg:grid-cols-3">
             {/* Parameters */}
-            <Card className="bg-[#1E293B] border-gray-700 lg:col-span-1">
+            <Card className="bg-pl-surface border-pl-border lg:col-span-1">
               <CardHeader>
-                <CardTitle className="text-white">Interpretation parameters</CardTitle>
+                <CardTitle className="text-pl-text">Interpretation parameters</CardTitle>
                 <CardDescription>Given constants are pre-filled. Set the cutoffs and Archie Rw.</CardDescription>
               </CardHeader>
               <CardContent className="grid grid-cols-2 gap-3">
@@ -286,9 +289,9 @@ const PetrophysicsLearningPage = () => {
                 <Param k="cutVsh" label="Vsh cutoff" />
                 <Param k="cutSw" label="Sw cutoff" />
                 <div>
-                  <Label className="text-gray-400 text-xs mb-1 block">Vsh method</Label>
+                  <Label className="text-pl-muted text-xs mb-1 block">Vsh method</Label>
                   <select value={params.vshMethod} onChange={setP('vshMethod')}
-                    className="w-full bg-gray-700 text-white border border-gray-600 rounded-md h-8 text-sm px-2">
+                    className="w-full border-pl-border-strong bg-pl-surface text-pl-text border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus rounded-md h-8 text-sm px-2">
                     <option value="larionov-tertiary">Larionov (tertiary)</option>
                     <option value="larionov-older">Larionov (older)</option>
                     <option value="linear">Linear (IGR)</option>
@@ -300,25 +303,23 @@ const PetrophysicsLearningPage = () => {
             </Card>
 
             {/* Log + computed curves */}
-            <Card className="bg-[#1E293B] border-gray-700 lg:col-span-2">
-              <CardHeader><CardTitle className="text-white">Computed curves</CardTitle></CardHeader>
+            <Card className="bg-pl-surface border-pl-border lg:col-span-2">
+              <CardHeader><CardTitle className="text-pl-text">Computed curves</CardTitle></CardHeader>
               <CardContent>
-                <div style={{ height: 300 }}>
-                  <ResponsiveContainer width="100%" height="100%">
-                    <LineChart data={rows} margin={{ top: 5, right: 10, bottom: 5, left: 0 }}>
-                      <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-                      <XAxis dataKey="depth" tick={{ fill: '#94a3b8', fontSize: 11 }} />
-                      <YAxis domain={[0, 1]} tick={{ fill: '#94a3b8', fontSize: 11 }} />
-                      <Tooltip contentStyle={{ background: '#0F172A', border: '1px solid #334155', color: '#fff' }} />
-                      <ReferenceArea x1={ZONES.SAND_A[0]} x2={ZONES.SAND_A[1]} fill="#BFFF00" fillOpacity={0.06} />
-                      <ReferenceArea x1={ZONES.SAND_B[0]} x2={ZONES.SAND_B[1]} fill="#38bdf8" fillOpacity={0.06} />
-                      <Line type="monotone" dataKey="phi" name="φ" stroke="#BFFF00" dot={false} strokeWidth={1.5} />
-                      <Line type="monotone" dataKey="vsh" name="Vsh" stroke="#f59e0b" dot={false} strokeWidth={1.5} />
-                      <Line type="monotone" dataKey="sw" name="Sw" stroke="#38bdf8" dot={false} strokeWidth={1.5} />
-                    </LineChart>
-                  </ResponsiveContainer>
-                </div>
-                <p className="text-xs text-gray-500 mt-2">Shaded: SAND_A (lime) and SAND_B (blue). φ, Vsh, Sw are volume fractions.</p>
+                <ChartFrame height={300}>
+                  <LineChart data={rows} margin={{ top: 5, right: 10, bottom: 5, left: 0 }}>
+                    <CartesianGrid {...GRID_STYLE} />
+                    <XAxis dataKey="depth" tick={AXIS_TICK} />
+                    <YAxis domain={[0, 1]} tick={AXIS_TICK} />
+                    <Tooltip contentStyle={TOOLTIP_STYLE} />
+                    <ReferenceArea x1={ZONES.SAND_A[0]} x2={ZONES.SAND_A[1]} fill={seriesColor(0)} fillOpacity={0.08} />
+                    <ReferenceArea x1={ZONES.SAND_B[0]} x2={ZONES.SAND_B[1]} fill={seriesColor(1)} fillOpacity={0.08} />
+                    <Line type="monotone" dataKey="phi" name="φ" stroke={seriesColor(0)} dot={false} strokeWidth={1.5} />
+                    <Line type="monotone" dataKey="vsh" name="Vsh" stroke={seriesColor(2)} dot={false} strokeWidth={1.5} />
+                    <Line type="monotone" dataKey="sw" name="Sw" stroke={seriesColor(1)} dot={false} strokeWidth={1.5} />
+                  </LineChart>
+                </ChartFrame>
+                <p className="text-xs text-pl-muted mt-2">Shaded: SAND_A (blue) and SAND_B (green). φ, Vsh, Sw are volume fractions.</p>
               </CardContent>
             </Card>
           </div>
@@ -327,7 +328,7 @@ const PetrophysicsLearningPage = () => {
           <div className="flex gap-2">
             {LEARN_TIERS.map((t) => (
               <button key={t} type="button" onClick={() => setTier(t)}
-                className={`px-3 py-1.5 rounded-md border text-sm capitalize ${tier === t ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold' : 'bg-gray-800 text-gray-300 border-gray-600'}`}>
+                className={`px-3 py-1.5 rounded-md border text-sm capitalize ${tier === t ? 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold' : 'bg-pl-surface text-pl-text border-pl-border-strong'}`}>
                 {t} tier
               </button>
             ))}
@@ -335,7 +336,7 @@ const PetrophysicsLearningPage = () => {
 
           {tier === 'intermediate' && (
             <div className="space-y-6">
-              <p className="text-sm text-gray-400 mb-0">
+              <p className="text-sm text-pl-muted mb-0">
                 Professional workflow: produce the capstone numbers yourself. Multi-method porosity, then the Pickett fit in a window you choose, then shaly-sand saturation. The capstone grades what these panels compute from your inputs.
               </p>
               {well && (
@@ -350,7 +351,7 @@ const PetrophysicsLearningPage = () => {
 
           {tier === 'advanced' && (
             <div className="space-y-6">
-              <p className="text-sm text-gray-400 mb-0">
+              <p className="text-sm text-pl-muted mb-0">
                 Expert workflow: triangulate Rw from the lab sample, the SP quicklook and the Pickett fit, validate it in the water leg, then book SAND_A with the Rw you adopt and once more with the raw sample to see the damage.
               </p>
               {well && (
@@ -363,9 +364,9 @@ const PetrophysicsLearningPage = () => {
 
           {tier !== 'beginner' && !capstoneOpen && capstoneLockedNote}
           {tier !== 'beginner' && capstoneOpen && (
-            <Card className="bg-[#1E293B] border-gray-700">
+            <Card className="bg-pl-surface border-pl-border">
               <CardHeader>
-                <CardTitle className="text-white">{capstone?.title || 'Capstone'}</CardTitle>
+                <CardTitle className="text-pl-text">{capstone?.title || 'Capstone'}</CardTitle>
                 <CardDescription>{capstone?.prompt}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -375,20 +376,20 @@ const PetrophysicsLearningPage = () => {
                 )}
                 {answerBoxes}
                 <Button onClick={submit} disabled={submitting || !capstone}
-                  className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold">
+                  className="font-semibold">
                   {submitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <GraduationCap className="mr-2 h-4 w-4" />}
                   Submit for grading
                 </Button>
                 {result && !result.passed && (
-                  <p className="text-red-300 text-sm flex items-center gap-2">
+                  <p className="text-pl-danger-text text-sm flex items-center gap-2">
                     <XCircle className="h-4 w-4" /> {result.score}/{result.max_score} within tolerance. Rework the panels and try again.
                   </p>
                 )}
                 {result && result.passed && (
-                  <p className="text-emerald-300 text-sm flex items-center gap-2">
+                  <p className="text-pl-success-text text-sm flex items-center gap-2">
                     <CheckCircle2 className="h-4 w-4" /> Passed ({result.score}/{result.max_score}).
-                    {result.certificate_number && <>{CERT_LABELS[result.tier] || 'Associate'} certificate <span className="font-mono text-[#BFFF00]">{result.certificate_number}</span> issued.</>}
-                    {result.certificate_number && result.tier === 'expert' && <> Your 50% Suite discount code is on <Link to="/dashboard/certificates" className="text-[#BFFF00] hover:underline">your certificates page</Link>.</>}
+                    {result.certificate_number && <>{CERT_LABELS[result.tier] || 'Associate'} certificate <span className="font-mono text-pl-accent-text">{result.certificate_number}</span> issued.</>}
+                    {result.certificate_number && result.tier === 'expert' && <> Your 50% Suite discount code is on <Link to="/dashboard/certificates" className="text-pl-primary-text hover:underline">your certificates page</Link>.</>}
                     {result.already_certified && 'You were already certified for this tier.'}
                   </p>
                 )}
@@ -398,16 +399,16 @@ const PetrophysicsLearningPage = () => {
 
           {/* Net-pay summary + capstone */}
           {tier === 'beginner' && (
-          <Card className="bg-[#1E293B] border-gray-700">
+          <Card className="bg-pl-surface border-pl-border">
             <CardHeader>
-              <CardTitle className="text-white">Net-pay summary</CardTitle>
+              <CardTitle className="text-pl-text">Net-pay summary</CardTitle>
               <CardDescription>Computed live from your parameters. The capstone grades the figures you type below.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="text-left text-gray-400 border-b border-gray-700">
+                    <tr className="text-left text-pl-muted border-b border-pl-border">
                       <th className="py-2 pr-4">Zone</th><th className="py-2 pr-4">Net pay</th>
                       <th className="py-2 pr-4">Gross</th><th className="py-2 pr-4">Avg φ</th><th className="py-2 pr-4">Avg Sw</th>
                     </tr>
@@ -420,63 +421,63 @@ const PetrophysicsLearningPage = () => {
               </div>
 
               {!capstoneOpen && (
-                <div className="rounded-md border border-gray-700 bg-[#0F172A] p-4 flex flex-wrap items-center justify-between gap-3">
-                  <p className="text-gray-300 text-sm mb-0 flex items-center gap-2">
-                    <Lock className="h-4 w-4 text-[#BFFF00] shrink-0" />
+                <div className="rounded-md border border-pl-border bg-pl-sunken p-4 flex flex-wrap items-center justify-between gap-3">
+                  <p className="text-pl-text text-sm mb-0 flex items-center gap-2">
+                    <Lock className="h-4 w-4 text-pl-primary-text shrink-0" />
                     The graded capstone unlocks at the end of the course, after every module quiz and the final exam.
                   </p>
                   <Link to={`/dashboard/apps/${APP}/course/${tier}`}>
-                    <Button size="sm" className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold">
+                    <Button size="sm" className="font-semibold">
                       Open the course <ArrowRight className="h-4 w-4 ml-1" />
                     </Button>
                   </Link>
                 </div>
               )}
               {capstoneOpen && (
-              <div className="rounded-md border border-gray-700 bg-[#0F172A] p-4">
-                <p className="text-white font-medium">{capstone?.title || 'Capstone'}</p>
-                <p className="text-sm text-gray-400 mt-1">{capstone?.prompt}</p>
+              <div className="rounded-md border border-pl-border bg-pl-sunken p-4">
+                <p className="text-pl-text font-medium">{capstone?.title || 'Capstone'}</p>
+                <p className="text-sm text-pl-muted mt-1">{capstone?.prompt}</p>
                 {caseFiles && (
                   <div className="mt-3">
                     <CapstoneCaseFiles files={caseFiles}
                       note="Download the case well, then open it above with Open a LAS file and type the zones the brief states. No panel loads it for you." />
                   </div>
                 )}
-                <p className="text-sm text-gray-400 mt-1">Type each figure you have worked. Nothing is filled in for you.</p>
+                <p className="text-sm text-pl-muted mt-1">Type each figure you have worked. Nothing is filled in for you.</p>
                 <div className="mt-3">{answerBoxes}</div>
                 <Button onClick={submit} disabled={submitting || !capstone}
-                  className="mt-3 bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold">
+                  className="mt-3 font-semibold">
                   {submitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <GraduationCap className="mr-2 h-4 w-4" />}
                   Submit for grading
                 </Button>
 
                 {result && (
-                  <div className={`mt-4 rounded-md border p-4 ${result.passed ? 'border-emerald-700 bg-emerald-900/20' : 'border-red-800 bg-red-900/20'}`}>
+                  <div className={`mt-4 rounded-md border p-4 ${result.passed ? 'border-pl-success/40 bg-pl-success-bg' : 'border-pl-danger/40 bg-pl-danger-bg'}`}>
                     {result.passed ? (
                       <>
-                        <p className="text-emerald-300 font-medium flex items-center gap-2">
+                        <p className="text-pl-success-text font-medium flex items-center gap-2">
                           <CheckCircle2 className="h-5 w-5" /> Passed ({result.score}/{result.max_score})
                         </p>
                         {result.certificate_number ? (
-                          <div className="mt-2 text-sm text-gray-300 space-y-1">
-                            <p className="flex items-center gap-2"><Award className="h-4 w-4 text-[#BFFF00]" />
-                              {CERT_LABELS[result.tier] || 'Associate'} certificate <span className="font-mono text-[#BFFF00]">{result.certificate_number}</span> issued.</p>
+                          <div className="mt-2 text-sm text-pl-text space-y-1">
+                            <p className="flex items-center gap-2"><Award className="h-4 w-4 text-pl-accent-text" />
+                              {CERT_LABELS[result.tier] || 'Associate'} certificate <span className="font-mono text-pl-accent-text">{result.certificate_number}</span> issued.</p>
                             <div className="flex gap-3">
-                              <Link to="/dashboard/certificates" className="text-[#BFFF00] hover:underline inline-flex items-center gap-1">
+                              <Link to="/dashboard/certificates" className="text-pl-primary-text hover:underline inline-flex items-center gap-1">
                                 My certificates <ArrowRight className="h-3 w-3" />
                               </Link>
-                              <a href={verificationUrl(result.verify_code)} target="_blank" rel="noreferrer" className="text-gray-400 hover:underline">
+                              <a href={verificationUrl(result.verify_code)} target="_blank" rel="noreferrer" className="text-pl-muted hover:underline">
                                 Public verification
                               </a>
                             </div>
                           </div>
                         ) : (
-                          <p className="mt-1 text-sm text-gray-400">You were already certified for this tier.</p>
+                          <p className="mt-1 text-sm text-pl-muted">You were already certified for this tier.</p>
                         )}
                       </>
                     ) : (
-                      <p className="text-red-300 font-medium flex items-center gap-2">
-                        <XCircle className="h-5 w-5" /> {result.score}/{result.max_score} within tolerance — review your parameters and try again.
+                      <p className="text-pl-danger-text font-medium flex items-center gap-2">
+                        <XCircle className="h-5 w-5" /> {result.score}/{result.max_score} within tolerance. Review your parameters and try again.
                       </p>
                     )}
                   </div>

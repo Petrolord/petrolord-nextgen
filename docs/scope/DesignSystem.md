@@ -282,6 +282,40 @@ roles with no legacy branch.
   Supabase replaced by the 1A `frameStubs.js` stub, `fetch` counted and
   asserted unused).
 
+## 6. Batch 3A: geoscience I course apps (as built)
+
+Petrophysics, Well Data, Well Correlation, Seismolord and Mapping
+(`/dashboard/apps/<slug>`, exact paths) are on the roles and registered in
+`src/design/rollout/w3a.js`.
+
+- The five learning pages, `petrophysics/WellPicker` and the panels the
+  pages render (porosity lab, Pickett explorer, shaly-sand lab, Rw
+  triangulator, LAS inspector, import and campaign explorers with
+  `UserLasPicker`, the well correlation section explorer) moved straight to
+  roles: their only other screen is the course reader, themed by 1C. The
+  reader-only panels (flatten, prediction, seismolord, mapping) and the
+  correlation case inputs are 1C's and were left as 1C built them.
+- Lime buttons became the default `Button`; tier and file toggles use
+  `primary` for the active one; the Learning Mode pill is an accent (gold)
+  tint; certificate numbers and the award icon are `accent-text`; pass and
+  fail boxes are the success and danger roles with their words; the
+  capstone toasts use the success roles. On the panels a dead curve is
+  `danger-text`, a non-uniform step and a missing pick `warning-text`.
+- Charts: Recharts in `ChartFrame` (`GRID_STYLE`, `AXIS_TICK`,
+  `TOOLTIP_STYLE`), the Mapping page structure map and the section explorer
+  in `SvgChartFrame`; series by `seriesColor(n)` from the old-dark-chart map
+  (pink to `seriesColor(4)`). The Mapping page contours keep their hue ramp
+  at a darker lightness so they read on white.
+- Copy that named a chart colour follows the new colours (Petrophysics and
+  porosity lab shading, the Pickett water line). Lines touched follow the
+  copy rule; the Petrophysics net-pay empty cells show `n/a`.
+- Tests: `src/pages/__tests__/Geoscience3A.theme.test.jsx` (harness
+  `geo3aHarness.jsx` with `HelmetProvider` and the toaster, stubs
+  `geo3aStubs.js` on top of `frameStubs.js`) walks each app through its
+  three tiers, both capstone outcomes, the Learning Mode gate and dark;
+  `panels/__tests__/geo3aPanelsTheme.test.jsx` renders every page panel
+  scene inside a scope in light and dark.
+
 ## Batch 3B: geoscience II course apps (as built)
 
 Reservoir volumetrics (`/dashboard/apps/reservoircalc`), rock physics

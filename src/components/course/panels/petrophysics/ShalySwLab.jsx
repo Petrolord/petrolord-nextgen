@@ -70,17 +70,17 @@ const ShalySwLab = () => {
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="text-gray-400 text-xs border-b border-gray-700">
+                <tr className="text-pl-muted text-xs border-b border-pl-border">
                   <th className="text-left py-2 pr-4">Model</th>
                   <th className="text-left py-2 pr-4">Sample at {DEPTH[iSample]} m</th>
                   <th className="text-left py-2 pr-4">SAND_A mean</th>
                   <th className="text-left py-2 pr-4">SAND_B mean</th>
                 </tr>
               </thead>
-              <tbody className="text-gray-300">
+              <tbody className="text-pl-text">
                 {METHODS.map(([method, label]) => (
-                  <tr key={method} className="border-b border-gray-800">
-                    <td className="py-2 pr-4 text-white">{label}</td>
+                  <tr key={method} className="border-b border-pl-border">
+                    <td className="py-2 pr-4 text-pl-text">{label}</td>
                     <td className="py-2 pr-4">{fmt(sw[method][iSample])}</td>
                     <td className="py-2 pr-4">{fmt(zoneMean(sw[method], ZONES.SAND_A, well))}</td>
                     <td className="py-2 pr-4">{fmt(zoneMean(sw[method], ZONES.SAND_B, well))}</td>
