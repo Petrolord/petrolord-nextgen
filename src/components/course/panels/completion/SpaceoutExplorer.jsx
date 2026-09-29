@@ -3,7 +3,7 @@ import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceArea,
 } from 'recharts';
 import ChartFrame from '@/components/charts/ChartFrame';
-import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
 import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   spaceOutAt, spaceOutSweep, spaceOutBand, minPbrLength, dr6LengthChanges, dr6SpaceOut, GOLDEN,
@@ -38,7 +38,7 @@ const useInputs = () => {
     margin: margin === '' ? DEFAULTS.margin : Number(margin),
   };
   const fields = (
-    <div className="grid grid-cols-4 gap-2">
+    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
       <NumField label={`PBR length (m, default ${DEFAULTS.pbr})`} value={pbr} onChange={setPbr} placeholder={String(DEFAULTS.pbr)} />
       <NumField label={`Elongation (m, default ${DEFAULTS.up})`} value={up} onChange={setUp} placeholder={String(DEFAULTS.up)} />
       <NumField label={`Contraction (m, default ${DEFAULTS.down})`} value={down} onChange={setDown} placeholder={String(DEFAULTS.down)} />
@@ -83,7 +83,7 @@ const Sweep = () => {
             label={{ value: 'remaining after the move (m)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP_STYLE}
             formatter={(x) => fmt(x, 4)} />
-          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Legend {...LEGEND_PROPS} />
           {band.open && <ReferenceArea x1={band.loM} x2={band.hiM} fill={seriesColor(1)} fillOpacity={0.12} />}
           <Line type="monotone" dataKey="up" name="after elongation" stroke={seriesColor(0)} dot={false} isAnimationActive={false} />
           <Line type="monotone" dataKey="down" name="after contraction" stroke={seriesColor(4)} dot={false} isAnimationActive={false} />

@@ -3,7 +3,7 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
 import ChartFrame from '@/components/charts/ChartFrame';
-import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
 import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import { WELLS, caseOf, volumesFor, clearances, previousShoeMdOf } from './cementingLab';
 import { PanelShell, NumField, SelectField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
@@ -42,7 +42,7 @@ const Volumes = () => {
   ];
   return (
     <>
-      <div className="grid grid-cols-3 gap-2">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
         <SelectField label="Well" value={well} onChange={setWell} options={WELL_OPTIONS} />
         <NumField label={`Top of cement (m MD, default ${c.tocMd})`} value={toc} onChange={setToc} placeholder={String(c.tocMd)} />
         <NumField label={`Open hole excess (pct, default ${c.excessOpenHolePct})`} value={excess} onChange={setExcess} placeholder={String(c.excessOpenHolePct)} />
@@ -69,7 +69,7 @@ const Volumes = () => {
             label={{ value: 'cubic metres', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP_STYLE}
             formatter={(x) => fmt(x, 4)} />
-          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Legend {...LEGEND_PROPS} />
           <Bar dataKey="m3" name="volume" fill={seriesColor(1)} isAnimationActive={false} />
         </BarChart>
       </ChartFrame>
@@ -167,7 +167,7 @@ const Excess = () => {
             label={{ value: 'slurry (m3)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP_STYLE}
             formatter={(x) => fmt(x, 4)} />
-          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Legend {...LEGEND_PROPS} />
           <Bar dataKey="slurry" name="slurry volume" fill={seriesColor(0)} isAnimationActive={false} />
         </BarChart>
       </ChartFrame>

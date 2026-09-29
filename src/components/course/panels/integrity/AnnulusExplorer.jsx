@@ -4,7 +4,7 @@ import {
   Tooltip, Legend, ReferenceLine,
 } from 'recharts';
 import ChartFrame from '@/components/charts/ChartFrame';
-import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
 import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   PSI, G, PARAMS, RP90_MAWOP_FACTORS, MAASP_ELEMENTS, MAWOP_CANDIDATES,
@@ -90,7 +90,7 @@ const Maasp = () => {
             label={{ value: 'MPa', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP_STYLE}
             formatter={(x) => fmt(x, 4)} />
-          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceLine y={0} stroke={SVG_CHART.reference} />
           <Bar dataKey="v" name="contribution to the allowable" fill={seriesColor(1)} isAnimationActive={false} />
         </BarChart>
@@ -213,7 +213,7 @@ const Mawop = () => {
             label={{ value: 'allowed at surface (MPa)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP_STYLE}
             formatter={(x) => fmt(x, 4)} />
-          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceLine y={out.mawopPa / 1e6} stroke={seriesColor(1)}
             label={{ value: 'MAWOP, the minimum', fill: seriesColor(1), fontSize: 10, position: 'insideTopRight' }} />
           <Bar dataKey="mpa" name="allowed at surface" fill={seriesColor(0)} isAnimationActive={false} />
@@ -315,7 +315,7 @@ const Factors = () => {
             label={{ value: 'MAWOP (MPa)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP_STYLE}
             formatter={(x) => fmt(x, 4)} />
-          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Legend {...LEGEND_PROPS} />
           <Bar dataKey="mpa" name="MAWOP at this role" fill={seriesColor(1)} isAnimationActive={false} />
         </BarChart>
       </ChartFrame>
@@ -425,7 +425,7 @@ const Differential = () => {
             label={{ value: 'allowed at surface (MPa)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP_STYLE}
             formatter={(x) => fmt(x, 4)} />
-          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceLine y={0} stroke={seriesColor(4)}
             label={{ value: 'zero, below which it is a finding', fill: seriesColor(4), fontSize: 10, position: 'insideBottomRight' }} />
           <Line type="monotone" dataKey="published" name={`backup ${el.backupDensityKgM3} kg/m3, the published element`} stroke={seriesColor(1)} dot isAnimationActive={false} />

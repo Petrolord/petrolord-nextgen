@@ -3,7 +3,7 @@ import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
 import ChartFrame from '@/components/charts/ChartFrame';
-import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
 import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   WELLS, caseOf, standoffFor, requiredSpacingFor, spacingSweep, springRate,
@@ -57,7 +57,7 @@ const Profile = () => {
   if (!so) return <Note>Those centralizer settings do not describe a runnable profile.</Note>;
   return (
     <>
-      <div className="grid grid-cols-5 gap-2">
+      <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
         <SelectField label="Well" value={well} onChange={setWell} options={WELL_OPTIONS} />
         <SelectField label="Type" value={type} onChange={setType} options={TYPES} />
         <NumField label={`Spacing (m, default ${c.centralizer.spacingM})`} value={spacing} onChange={setSpacing} placeholder={String(c.centralizer.spacingM)} />
@@ -77,7 +77,7 @@ const Profile = () => {
             label={{ value: 'inclination (deg)', angle: 90, position: 'insideRight', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP_STYLE}
             formatter={(v) => fmt(v, 3)} />
-          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceLine yAxisId="s" y={100 * API_TARGET_STANDOFF} stroke={seriesColor(3)} strokeDasharray="4 4" />
           <Line yAxisId="s" dataKey="standoff" name="standoff" stroke={seriesColor(1)} strokeWidth={2} dot={false} isAnimationActive={false} />
           <Line yAxisId="s" dataKey="atCent" name="at the centralizer" stroke={seriesColor(0)} strokeWidth={1} dot={false} isAnimationActive={false} />
@@ -126,7 +126,7 @@ const Spacing = () => {
             label={{ value: 'minimum standoff (pct)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP_STYLE}
             formatter={(v) => fmt(v, 3)} />
-          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceLine y={100 * API_TARGET_STANDOFF} stroke={seriesColor(3)} strokeDasharray="4 4" />
           {req != null && <ReferenceLine x={req} stroke={seriesColor(1)} strokeDasharray="4 4" />}
           <Line dataKey="standoff" name="minimum standoff" stroke={seriesColor(1)} strokeWidth={2} dot isAnimationActive={false} />

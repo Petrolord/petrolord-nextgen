@@ -4,7 +4,7 @@ import {
   Legend, ReferenceLine, Cell,
 } from 'recharts';
 import ChartFrame from '@/components/charts/ChartFrame';
-import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
 import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   COST_BASES, COST_CATEGORIES, CONTINGENCY_FRAC, NOMINAL_USD,
@@ -216,7 +216,7 @@ const Bases = () => {
           <YAxis tick={AXIS} tickFormatter={(v) => usd(v)}
             label={{ value: 'USD on the line', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => usd(v)} />
-          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceLine x={1} stroke={SVG_CHART.reference} strokeDasharray="4 3"
             label={{ value: 'the plan', fill: SVG_CHART.note, fontSize: 10, position: 'top' }} />
           <Line type="linear" dataKey="perDayUsd" name="per-day line" stroke={seriesColor(1)} dot isAnimationActive={false} />
@@ -455,7 +455,7 @@ const Contingency = () => {
           <YAxis tick={AXIS} tickFormatter={(v) => usd(v)}
             label={{ value: 'USD', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => usd(v)} />
-          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceLine y={biggest.amountUsd} stroke={seriesColor(4)} strokeDasharray="5 3"
             label={{ value: 'the largest contracted line', fill: seriesColor(4), fontSize: 10, position: 'insideTopLeft' }} />
           <ReferenceLine x={crossing.frac} stroke={seriesColor(4)}

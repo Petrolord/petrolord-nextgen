@@ -4,7 +4,7 @@ import {
   Tooltip, Legend, ReferenceLine,
 } from 'recharts';
 import ChartFrame from '@/components/charts/ChartFrame';
-import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
 import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   PARAMS, PROPPANT, CFD_OPTIMUM, CFD_RANGE, M2_PER_DARCY,
@@ -68,7 +68,7 @@ const Schedule = () => {
               label={{ value: 'pad fraction', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
             <Tooltip contentStyle={TOOLTIP_STYLE}
               formatter={(x) => fmt(x, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
+            <Legend {...LEGEND_PROPS} />
             <ReferenceLine x={bal.etaFrac} stroke={seriesColor(4)}
               label={{ value: 'this job', fill: seriesColor(4), fontSize: 10, position: 'top' }} />
             <Line type="monotone" dataKey="oneMinusEta" name="one minus efficiency, WRONG" stroke={seriesColor(4)} dot isAnimationActive={false} />
@@ -85,7 +85,7 @@ const Schedule = () => {
               label={{ value: 'error in the pad fraction', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
             <Tooltip contentStyle={TOOLTIP_STYLE}
               formatter={(x) => fmt(x, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
+            <Legend {...LEGEND_PROPS} />
             <ReferenceLine y={0} stroke={SVG_CHART.reference} />
             <Bar dataKey="padFracError" name="how much too much pad" fill={seriesColor(4)} isAnimationActive={false} />
           </BarChart>
@@ -205,7 +205,7 @@ const Pack = () => {
             label={{ value: 'width (mm)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP_STYLE}
             formatter={(x) => fmt(x, 5)} />
-          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Legend {...LEGEND_PROPS} />
           <Bar dataKey="v" name="width" fill={seriesColor(0)} isAnimationActive={false} />
         </BarChart>
       </ChartFrame>
@@ -258,7 +258,7 @@ const Conductivity = () => {
               label={{ value: 'dimensionless conductivity', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
             <Tooltip contentStyle={TOOLTIP_STYLE}
               formatter={(x) => fmt(x, 5)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
+            <Legend {...LEGEND_PROPS} />
             <ReferenceLine y={CFD_OPTIMUM} stroke={seriesColor(4)}
               label={{ value: `the engine optimum ${CFD_OPTIMUM}`, fill: seriesColor(4), fontSize: 10, position: 'insideTopRight' }} />
             <Line type="monotone" dataKey="cfd" name="dimensionless conductivity" stroke={seriesColor(1)} dot isAnimationActive={false} />
@@ -274,7 +274,7 @@ const Conductivity = () => {
               label={{ value: 'pseudo-skin', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
             <Tooltip contentStyle={TOOLTIP_STYLE}
               formatter={(x) => fmt(x, 5)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
+            <Legend {...LEGEND_PROPS} />
             <Line type="monotone" dataKey="sF" name="pseudo-skin, lower is better" stroke={seriesColor(0)} dot isAnimationActive={false} />
           </LineChart>
         </ChartFrame>
@@ -380,7 +380,7 @@ const Optimum = () => {
               label={{ value: 'pseudo-skin', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
             <Tooltip contentStyle={TOOLTIP_STYLE}
               formatter={(x) => fmt(x, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
+            <Legend {...LEGEND_PROPS} />
             <ReferenceLine x={found.xfM} stroke={seriesColor(1)}
               label={{ value: 'the search stops here', fill: seriesColor(1), fontSize: 10, position: 'top' }} />
             <Line type="monotone" dataKey="sF" name="pseudo-skin, the thing being minimised" stroke={seriesColor(0)} dot isAnimationActive={false} />
@@ -396,7 +396,7 @@ const Optimum = () => {
               label={{ value: 'dimensionless conductivity', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
             <Tooltip contentStyle={TOOLTIP_STYLE}
               formatter={(x) => fmt(x, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
+            <Legend {...LEGEND_PROPS} />
             <ReferenceLine y={found.publishedConstant} stroke={seriesColor(4)}
               label={{ value: `published ${fmt(found.publishedConstant, 2)}`, fill: seriesColor(4), fontSize: 10, position: 'insideTopRight' }} />
             <ReferenceLine x={found.xfM} stroke={seriesColor(1)}

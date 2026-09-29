@@ -4,7 +4,7 @@ import {
   Tooltip, Legend, ReferenceLine,
 } from 'recharts';
 import ChartFrame from '@/components/charts/ChartFrame';
-import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
 import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   PARAMS, KT_RPD_RANGE, KT_HD_MAX, publishedGun, skinOf, prOf, PUBLISHED_KEYS,
@@ -48,7 +48,7 @@ const Components = () => {
   ];
   return (
     <>
-      <div className="grid grid-cols-3 gap-2">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
         <SelectField label="Gun" value={key} onChange={setKey}
           options={PUBLISHED_KEYS.map((k) => ({ value: k, label: k }))} />
         <NumField label={`kH/kV (default ${PARAMS.khOverKv})`} value={khkv} onChange={setKhkv} placeholder={String(PARAMS.khOverKv)} />
@@ -73,7 +73,7 @@ const Components = () => {
             label={{ value: 'skin', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP_STYLE}
             formatter={(x) => fmt(x, 5)} />
-          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceLine y={0} stroke={SVG_CHART.reference} />
           <Bar dataKey="v" name="skin component" fill={seriesColor(0)} isAnimationActive={false} />
         </BarChart>
@@ -137,7 +137,7 @@ const Catalog = () => {
             label={{ value: 'total skin', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP_STYLE}
             formatter={(x) => fmt(x, 5)} />
-          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceLine y={0} stroke={seriesColor(1)} />
           <Bar dataKey="total" name="total skin" fill={seriesColor(4)} isAnimationActive={false} />
         </BarChart>
@@ -217,7 +217,7 @@ const Phasing = () => {
             label={{ value: 'skin', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP_STYLE}
             formatter={(x) => fmt(x, 5)} />
-          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceLine y={0} stroke={SVG_CHART.reference} />
           <Line type="monotone" dataKey="sH" name="plane flow" stroke={seriesColor(0)} dot isAnimationActive={false} />
           <Line type="monotone" dataKey="total" name="total" stroke={seriesColor(1)} dot isAnimationActive={false} />
@@ -297,7 +297,7 @@ const Ratio = () => {
             label={{ value: 'productivity ratio', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP_STYLE}
             formatter={(x) => fmt(x, 6)} />
-          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceLine y={1} stroke={SVG_CHART.reference} />
           <Line type="monotone" dataKey="ratio" name="productivity ratio" stroke={seriesColor(1)} dot isAnimationActive={false} />
         </LineChart>

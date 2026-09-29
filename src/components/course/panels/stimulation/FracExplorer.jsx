@@ -4,7 +4,7 @@ import {
   Tooltip, Legend, ReferenceLine,
 } from 'recharts';
 import ChartFrame from '@/components/charts/ChartFrame';
-import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
 import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   PARAMS, E_PRIME_PA, FRAC_MODELS, geometryOf, publishedPkn, publishedKgd, modelSweep,
@@ -57,7 +57,7 @@ const Geometry = () => {
   ];
   return (
     <>
-      <div className="grid grid-cols-3 gap-2">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
         <NumField label={`Half-length xf (m, default ${PARAMS.xfM})`} value={xf} onChange={setXf} placeholder={String(PARAMS.xfM)} />
         <NumField label={`Height hf (m, default ${PARAMS.hfM})`} value={hf} onChange={setHf} placeholder={String(PARAMS.hfM)} />
         <NumField label={`Injection rate (m3/s, default ${PARAMS.qiM3s})`} value={qi} onChange={setQi} placeholder={String(PARAMS.qiM3s)} />
@@ -83,7 +83,7 @@ const Geometry = () => {
           <YAxis tick={AXIS_TICK} />
           <Tooltip contentStyle={TOOLTIP_STYLE}
             formatter={(x) => fmt(x, 5)} />
-          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Legend {...LEGEND_PROPS} />
           <Bar dataKey="pkn" name="PKN" fill={seriesColor(0)} isAnimationActive={false} />
           <Bar dataKey="kgd" name="KGD" fill={seriesColor(1)} isAnimationActive={false} />
         </BarChart>
@@ -144,7 +144,7 @@ const Models = () => {
               label={{ value: 'average width (mm)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
             <Tooltip contentStyle={TOOLTIP_STYLE}
               formatter={(x) => fmt(x, 5)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
+            <Legend {...LEGEND_PROPS} />
             <Line type="monotone" dataKey="kgdWAvgMm" name="KGD width" stroke={seriesColor(1)} dot isAnimationActive={false} />
             <Line type="monotone" dataKey="pknWAvgMm" name="PKN width" stroke={seriesColor(0)} dot isAnimationActive={false} />
           </LineChart>
@@ -159,7 +159,7 @@ const Models = () => {
               label={{ value: 'net pressure (MPa)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
             <Tooltip contentStyle={TOOLTIP_STYLE}
               formatter={(x) => fmt(x, 5)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
+            <Legend {...LEGEND_PROPS} />
             <Line type="monotone" dataKey="pknPNetMPa" name="PKN net pressure, RISES" stroke={seriesColor(0)} dot isAnimationActive={false} />
             <Line type="monotone" dataKey="kgdPNetMPa" name="KGD net pressure, FALLS" stroke={seriesColor(4)} dot isAnimationActive={false} />
           </LineChart>
@@ -174,7 +174,7 @@ const Models = () => {
             label={{ value: 'KGD width over PKN width', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP_STYLE}
             formatter={(x) => fmt(x, 5)} />
-          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceLine y={1} stroke={SVG_CHART.reference} />
           <Bar dataKey="ratio" name="KGD is this many times wider" fill={seriesColor(4)} isAnimationActive={false} />
         </BarChart>
@@ -262,7 +262,7 @@ const Rate = () => {
             label={{ value: 'width as a multiple', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP_STYLE}
             formatter={(x) => fmt(x, 6)} />
-          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceLine y={2} stroke={seriesColor(4)}
             label={{ value: 'twice the width', fill: seriesColor(4), fontSize: 10, position: 'insideTopLeft' }} />
           <ReferenceLine x={16} stroke={seriesColor(4)} />
@@ -354,7 +354,7 @@ const Balance = () => {
               label={{ value: 'volume (m3)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
             <Tooltip contentStyle={TOOLTIP_STYLE}
               formatter={(x) => fmt(x, 4)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
+            <Legend {...LEGEND_PROPS} />
             <Bar dataKey="v" name="volume" fill={seriesColor(0)} isAnimationActive={false} />
           </BarChart>
         </ChartFrame>
@@ -368,7 +368,7 @@ const Balance = () => {
               label={{ value: 'Nolte factor', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
             <Tooltip contentStyle={TOOLTIP_STYLE}
               formatter={(x) => fmt(x, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
+            <Legend {...LEGEND_PROPS} />
             <ReferenceLine x={bal.etaFrac} stroke={seriesColor(4)}
               label={{ value: 'this job', fill: seriesColor(4), fontSize: 10, position: 'top' }} />
             <Line type="monotone" dataKey="kL" name="Nolte factor" stroke={seriesColor(1)} dot isAnimationActive={false} />

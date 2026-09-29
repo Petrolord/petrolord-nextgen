@@ -3,7 +3,7 @@ import {
   BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
 import ChartFrame from '@/components/charts/ChartFrame';
-import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
 import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   IN, UM, FT_PER_M, GUN_CATALOG, catalogSweep, publishedGun, skinOf,
@@ -103,7 +103,7 @@ const Geometry = () => {
   if (!s) return <Note>Those numbers do not describe a charge.</Note>;
   return (
     <>
-      <div className="grid grid-cols-3 gap-2">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
         <NumField label="Shot density (spf per foot, default 12)" value={spf} onChange={setSpf} placeholder="12" />
         <NumField label="Penetration (in, default 32)" value={pen} onChange={setPen} placeholder="32" />
         <NumField label="Entrance hole (in, default 0.43)" value={eh} onChange={setEh} placeholder="0.43" />
@@ -128,7 +128,7 @@ const Geometry = () => {
             label={{ value: 'spacing (mm)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP_STYLE}
             formatter={(x) => fmt(x, 3)} />
-          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Legend {...LEGEND_PROPS} />
           <Bar dataKey="spacingMm" name="perf spacing" fill={seriesColor(1)} isAnimationActive={false} />
         </BarChart>
       </ChartFrame>
@@ -178,7 +178,7 @@ const Sieve = () => {
             label={{ value: 'cumulative retained (pct)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP_STYLE}
             formatter={(x) => fmt(x, 3)} />
-          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Legend {...LEGEND_PROPS} />
           <Line type="monotone" dataKey="retained" name="cumulative retained" stroke={seriesColor(0)} dot isAnimationActive={false} />
         </LineChart>
       </ChartFrame>

@@ -4,7 +4,7 @@ import {
   Legend, ReferenceLine, ReferenceDot, Cell,
 } from 'recharts';
 import ChartFrame from '@/components/charts/ChartFrame';
-import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
 import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   CONTINGENCY_FRAC, NPT_FRAC, MC_ANALYTIC, RISK_DOC, RISK_UNCERTAINTIES, MC_UNCERTAINTIES,
@@ -96,7 +96,7 @@ const Curve = () => {
           <YAxis tick={AXIS} tickFormatter={(v) => usd(v)}
             label={{ value: 'cumulative USD', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => usd(v)} />
-          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceLine x={checkpoint.tHr} stroke={seriesColor(4)} strokeDasharray="4 3"
             label={{ value: 'checkpoint', fill: seriesColor(4), fontSize: 10, position: 'top' }} />
           <ReferenceDot x={checkpoint.tHr} y={checkpoint.usd} r={5} fill={seriesColor(4)} stroke="none" />
@@ -431,7 +431,7 @@ const Risked = () => {
           <YAxis tick={AXIS}
             label={{ value: 'realizations', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 0)} labelFormatter={(v) => `${usd(v)} USD`} />
-          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceLine x={run.base.totalUsd} stroke={seriesColor(4)}
             label={{ value: 'the deterministic base', fill: seriesColor(4), fontSize: 10, position: 'top' }} />
           <ReferenceLine x={run.sampler.p90} stroke={seriesColor(0)} strokeDasharray="4 3"

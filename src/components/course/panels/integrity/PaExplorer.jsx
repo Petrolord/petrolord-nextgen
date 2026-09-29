@@ -4,7 +4,7 @@ import {
   Tooltip, Legend, ReferenceLine,
 } from 'recharts';
 import ChartFrame from '@/components/charts/ChartFrame';
-import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
 import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   PARAMS, D010_DEFAULT_RULES,
@@ -87,7 +87,7 @@ const Plug = () => {
             label={{ value: 'capacity (m2 per m)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP_STYLE}
             formatter={(x) => fmt(x, 8)} />
-          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceLine y={p.cHoleM2} stroke={seriesColor(4)}
             label={{ value: 'the full hole', fill: seriesColor(4), fontSize: 10, position: 'top' }} />
           <Bar dataKey="v" name="capacity" fill={seriesColor(1)} isAnimationActive={false} />
@@ -191,7 +191,7 @@ const Excess = () => {
               label={{ value: 'top (m MD, deeper is down)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
             <Tooltip contentStyle={TOOLTIP_STYLE}
               formatter={(x) => fmt(x, 4)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
+            <Legend {...LEGEND_PROPS} />
             <ReferenceLine y={designTopM} stroke={seriesColor(4)}
               label={{ value: `the design top ${fmt(designTopM, 0)} m`, fill: seriesColor(4), fontSize: 10, position: 'insideBottomRight' }} />
             <Line type="monotone" dataKey="asPumpedTopMdM" name="as-pumped top, stinger still in" stroke={seriesColor(0)} dot isAnimationActive={false} />
@@ -207,7 +207,7 @@ const Excess = () => {
               label={{ value: 'settle (m)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
             <Tooltip contentStyle={TOOLTIP_STYLE}
               formatter={(x) => fmt(x, 4)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
+            <Legend {...LEGEND_PROPS} />
             <ReferenceLine y={zero.settleM} stroke={seriesColor(4)}
               label={{ value: `${fmt(zero.settleM, 2)} m with NO excess at all`, fill: seriesColor(4), fontSize: 10, position: 'insideTopRight' }} />
             <Bar dataKey="settleM" name="how far the top drops" fill={seriesColor(1)} isAnimationActive={false} />
@@ -301,7 +301,7 @@ const Rules = () => {
             tick={AXIS_TICK} />
           <Tooltip contentStyle={TOOLTIP_STYLE}
             formatter={(x) => (x ? 'pass' : 'fail')} />
-          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Legend {...LEGEND_PROPS} />
           <Bar dataKey="none" name="no foundation" fill={seriesColor(4)} isAnimationActive={false} />
           <Bar dataKey="tagged" name="on a tagged foundation" fill={seriesColor(1)} isAnimationActive={false} />
         </BarChart>
@@ -458,7 +458,7 @@ const Programme = () => {
             tick={AXIS_TICK} />
           <Tooltip contentStyle={TOOLTIP_STYLE}
             formatter={(x) => (x ? 'pass' : 'fail')} />
-          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Legend {...LEGEND_PROPS} />
           <Bar dataKey="unverified" name="not logged" fill={seriesColor(4)} isAnimationActive={false} />
           <Bar dataKey="logged" name="verified by log" fill={seriesColor(1)} isAnimationActive={false} />
         </BarChart>

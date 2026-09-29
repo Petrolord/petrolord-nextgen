@@ -3,7 +3,7 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
 import ChartFrame from '@/components/charts/ChartFrame';
-import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
 import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   IN, PUBLISHED, publishedClearance, publishedThroughBore, publishedVolumes,
@@ -82,7 +82,7 @@ const RunIn = () => {
             label={{ value: 'clearance (mm)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP_STYLE}
             formatter={(x) => fmt(x, 4)} />
-          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Legend {...LEGEND_PROPS} />
           <Bar dataKey="mm" name="radial clearance" fill={seriesColor(0)} isAnimationActive={false} />
         </BarChart>
       </ChartFrame>
@@ -119,7 +119,7 @@ const Bore = () => {
             label={{ value: 'bore (mm)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP_STYLE}
             formatter={(x) => fmt(x, 3)} />
-          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Legend {...LEGEND_PROPS} />
           <Bar dataKey="own" name="own bore" fill={SVG_CHART.reference} isAnimationActive={false} />
           <Bar dataKey="cum" name="smallest so far" fill={seriesColor(1)} isAnimationActive={false} />
         </BarChart>

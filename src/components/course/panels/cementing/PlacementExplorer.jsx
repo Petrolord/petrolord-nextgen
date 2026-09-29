@@ -3,7 +3,7 @@ import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
 import ChartFrame from '@/components/charts/ChartFrame';
-import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
 import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   WELLS, PROGRAMS, caseOf, placementFor, rateSweep, rateWindow, previousShoeMdOf,
@@ -48,7 +48,7 @@ const Job = () => {
   if (!r) return <Note>That pump rate does not describe a runnable job.</Note>;
   return (
     <>
-      <div className="grid grid-cols-3 gap-2">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
         <SelectField label="Well" value={well} onChange={setWell} options={WELL_OPTIONS} />
         <SelectField label="Programme" value={program} onChange={setProgram} options={PROGRAM_OPTIONS} />
         <NumField label={`Pump rate (m3/s, default ${c.pumpRateM3s})`} value={rate} onChange={setRate} placeholder={String(c.pumpRateM3s)} />
@@ -64,7 +64,7 @@ const Job = () => {
             label={{ value: 'ECD (kg/m3)', angle: 90, position: 'insideRight', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP_STYLE}
             formatter={(v) => fmt(v, 3)} />
-          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceLine yAxisId="p" y={0} stroke={seriesColor(2)} strokeDasharray="4 4" />
           <Line yAxisId="p" dataKey="uTubeMPa" name="U-tube (MPa)" stroke={seriesColor(1)} strokeWidth={2} dot={false} isAnimationActive={false} />
           <Line yAxisId="p" dataKey="pumpMPa" name="pump pressure (MPa)" stroke={seriesColor(3)} strokeWidth={1} dot={false} isAnimationActive={false} />
@@ -154,7 +154,7 @@ const Window = () => {
   }));
   return (
     <>
-      <div className="grid grid-cols-3 gap-2">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
         <SelectField label="Well" value={well} onChange={setWell} options={WELL_OPTIONS} />
         <SelectField label="Programme" value={program} onChange={setProgram} options={PROGRAM_OPTIONS} />
         <NumField label="Fracture limit at the previous shoe (kg/m3)" value={limit} onChange={setLimit} />
@@ -170,7 +170,7 @@ const Window = () => {
             label={{ value: 'worst U-tube (MPa)', angle: 90, position: 'insideRight', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP_STYLE}
             formatter={(v) => fmt(v, 4)} />
-          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Legend {...LEGEND_PROPS} />
           {lim > 0 && <ReferenceLine yAxisId="e" y={lim} stroke={seriesColor(3)} strokeDasharray="4 4" />}
           <ReferenceLine yAxisId="u" y={0} stroke={seriesColor(2)} strokeDasharray="4 4" />
           {w?.minRateNoFreeFallM3s != null && <ReferenceLine yAxisId="e" x={w.minRateNoFreeFallM3s} stroke={seriesColor(1)} strokeDasharray="4 4" />}

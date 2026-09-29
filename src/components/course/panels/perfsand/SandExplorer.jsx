@@ -4,7 +4,7 @@ import {
   Tooltip, Legend, ReferenceLine,
 } from 'recharts';
 import ChartFrame from '@/components/charts/ChartFrame';
-import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
 import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   UM, THOU, PARAMS, SAUCIER_RANGE, rungTable, saucierSweep, gaugeTable, packFor,
@@ -239,7 +239,7 @@ const Sanding = () => {
             label={{ value: 'MPa', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP_STYLE}
             formatter={(x) => fmt(x, 5)} />
-          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceLine y={0} stroke={seriesColor(4)} />
           <Line type="monotone" dataKey="cdpMPa" name="drawdown margin" stroke={seriesColor(1)} dot isAnimationActive={false} />
           <Line type="monotone" dataKey="ppMPa" name="pore pressure" stroke={seriesColor(0)} dot={false} isAnimationActive={false} />

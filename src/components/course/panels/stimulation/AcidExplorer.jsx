@@ -4,7 +4,7 @@ import {
   Tooltip, Legend, ReferenceLine,
 } from 'recharts';
 import ChartFrame from '@/components/charts/ChartFrame';
-import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
 import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   PARAMS, ACID, ACID_MU_PA_S, hawkinsOf, hawkinsSweep, radiusSweep,
@@ -71,7 +71,7 @@ const Damage = () => {
               label={{ value: 'skin', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
             <Tooltip contentStyle={TOOLTIP_STYLE}
               formatter={(x) => fmt(x, 5)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
+            <Legend {...LEGEND_PROPS} />
             <ReferenceLine y={0} stroke={SVG_CHART.reference} />
             <Line type="monotone" dataKey="skin" name="skin against contrast" stroke={seriesColor(1)} dot isAnimationActive={false} />
           </LineChart>
@@ -86,7 +86,7 @@ const Damage = () => {
               label={{ value: 'skin', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
             <Tooltip contentStyle={TOOLTIP_STYLE}
               formatter={(x) => fmt(x, 5)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
+            <Legend {...LEGEND_PROPS} />
             <Line type="monotone" dataKey="skin" name="skin against radius" stroke={seriesColor(0)} dot isAnimationActive={false} />
           </LineChart>
         </ChartFrame>
@@ -193,7 +193,7 @@ const Sandstone = () => {
               label={{ value: 'volume (m3)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
             <Tooltip contentStyle={TOOLTIP_STYLE}
               formatter={(x) => fmt(x, 4)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
+            <Legend {...LEGEND_PROPS} />
             <Line type="monotone" dataKey="volumeM3" name="planning volume" stroke={seriesColor(1)} dot isAnimationActive={false} />
           </LineChart>
         </ChartFrame>
@@ -207,7 +207,7 @@ const Sandstone = () => {
               label={{ value: 'skin left behind', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
             <Tooltip contentStyle={TOOLTIP_STYLE}
               formatter={(x) => fmt(x, 5)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
+            <Legend {...LEGEND_PROPS} />
             <ReferenceLine x={ACID.rsM} stroke={seriesColor(4)}
               label={{ value: 'damage ends here', fill: seriesColor(4), fontSize: 10, position: 'top' }} />
             <Line type="monotone" dataKey="sAfter" name="residual skin" stroke={seriesColor(0)} dot isAnimationActive={false} />
@@ -298,7 +298,7 @@ const Carbonate = () => {
               label={{ value: 'wormhole radius (m)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
             <Tooltip contentStyle={TOOLTIP_STYLE}
               formatter={(x) => fmt(x, 5)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
+            <Legend {...LEGEND_PROPS} />
             <Line type="monotone" dataKey="rWhM" name="wormhole radius" stroke={seriesColor(1)} dot isAnimationActive={false} />
           </LineChart>
         </ChartFrame>
@@ -312,7 +312,7 @@ const Carbonate = () => {
               label={{ value: 'skin', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
             <Tooltip contentStyle={TOOLTIP_STYLE}
               formatter={(x) => fmt(x, 5)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
+            <Legend {...LEGEND_PROPS} />
             <ReferenceLine y={0} stroke={SVG_CHART.reference} />
             <Line type="monotone" dataKey="skin" name="wormhole skin" stroke={seriesColor(0)} dot isAnimationActive={false} />
           </LineChart>
@@ -407,7 +407,7 @@ const Ceiling = () => {
               label={{ value: 'ceiling (m3/s)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
             <Tooltip contentStyle={TOOLTIP_STYLE}
               formatter={(x) => Number(x).toExponential(4)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
+            <Legend {...LEGEND_PROPS} />
             <ReferenceLine x={hawkinsOf()} stroke={seriesColor(4)}
               label={{ value: 'the damaged well', fill: seriesColor(4), fontSize: 10, position: 'top' }} />
             <Line type="monotone" dataKey="qM3s" name="ceiling with the acid" stroke={seriesColor(1)} dot isAnimationActive={false} />
@@ -423,7 +423,7 @@ const Ceiling = () => {
               label={{ value: 'ceiling (m3/s, log)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
             <Tooltip contentStyle={TOOLTIP_STYLE}
               formatter={(x) => Number(x).toExponential(4)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
+            <Legend {...LEGEND_PROPS} />
             <Bar dataKey="qAcid" name="acid viscosity, right" fill={seriesColor(1)} isAnimationActive={false} />
             <Bar dataKey="qFracFluid" name="frac fluid viscosity, wrong" fill={seriesColor(4)} isAnimationActive={false} />
           </BarChart>

@@ -3,7 +3,7 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
 import ChartFrame from '@/components/charts/ChartFrame';
-import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
 import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   ELEMENT_STATUSES, ENVELOPE_STATUSES, ELEMENT_KINDS,
@@ -103,7 +103,7 @@ const Elements = () => {
           <YAxis allowDecimals={false} tick={AXIS_TICK}
             label={{ value: 'count', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP_STYLE} />
-          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceLine y={seats.physical} stroke={seriesColor(4)}
             label={{ value: 'the physical count', fill: seriesColor(4), fontSize: 10, position: 'top' }} />
           <Bar dataKey="v" name="how many" fill={seriesColor(1)} isAnimationActive={false} />

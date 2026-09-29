@@ -3,7 +3,7 @@ import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
 import ChartFrame from '@/components/charts/ChartFrame';
-import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
 import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   HOURS_PER_DAY, NPT_FRAC, ACTIVITY_KINDS,
@@ -87,10 +87,10 @@ const Drill = () => {
             label={{ value: 'rate of penetration, m/hr', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis yAxisId="hr" tick={AXIS}
             label={{ value: 'hours', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
-          <YAxis yAxisId="m" orientation="right" domain={[0, 'dataMax']} tick={AXIS}
+          <YAxis yAxisId="m" orientation="right" domain={[0, 'dataMax']} tick={AXIS} tickFormatter={(x) => fmt(x, 0)} width={64}
             label={{ value: 'rate times hours, m', angle: 90, position: 'insideRight', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} />
-          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Legend {...LEGEND_PROPS} />
           <Line yAxisId="hr" type="monotone" dataKey="hr" name="hours the section takes"
             stroke={seriesColor(1)} dot isAnimationActive={false} />
           <Line yAxisId="m" type="monotone" dataKey="footageM" name="rate times hours"
@@ -176,7 +176,7 @@ const Trip = () => {
           <YAxis tick={AXIS}
             label={{ value: 'hours', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} />
-          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Legend {...LEGEND_PROPS} />
           <Line type="linear" dataKey="hr" name="round trip, out and back"
             stroke={seriesColor(1)} dot isAnimationActive={false} />
           <Line type="linear" dataKey="oneWayHr" name="one way only"
@@ -271,7 +271,7 @@ const Casing = () => {
           <YAxis domain={[0, 'dataMax']} tick={AXIS}
             label={{ value: 'hours', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} />
-          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceLine y={rows[0].floorHr} stroke={seriesColor(4)} strokeDasharray="5 3"
             label={{ value: 'the flat floor', fill: seriesColor(4), fontSize: 10, position: 'insideBottomRight' }} />
           <Line type="monotone" dataKey="hr" name="whole activity"
@@ -463,7 +463,7 @@ const Schedule = () => {
           <YAxis dataKey="mdM" reversed domain={[0, 'dataMax']} tick={AXIS}
             label={{ value: 'hole depth, m', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} />
-          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Legend {...LEGEND_PROPS} />
           <Line type="linear" dataKey="mdM" name="time depth curve"
             stroke={seriesColor(1)} dot isAnimationActive={false} />
         </LineChart>
@@ -555,7 +555,7 @@ const Npt = () => {
           <YAxis tick={AXIS}
             label={{ value: 'share of hours', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} />
-          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Legend {...LEGEND_PROPS} />
           <Line type="monotone" dataKey="shareOfProductive" name="share of PRODUCTIVE time, what you typed"
             stroke={seriesColor(1)} dot isAnimationActive={false} />
           <Line type="monotone" dataKey="shareOfTotal" name="share of ELAPSED time, what it becomes"
