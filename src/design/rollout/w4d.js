@@ -4,4 +4,5 @@
 export default [
   '/dashboard/apps/cashflow',
   '/dashboard/apps/fiscal',
+  '/dashboard/apps/uncertainty',
 ];
