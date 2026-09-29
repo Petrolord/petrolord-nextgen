@@ -419,8 +419,8 @@ const Stack = ({ c }) => {
         THE MARGIN IS BOUNDED BY ONE STAGE, NOT BY A PERCENTAGE. stageCount rounds UP always, so the
         head the stack makes exceeds the head the duty requires by somewhere between nothing and one
         whole stage. Read the blue line on the chart: it is the margin in STAGES, it lives between
-        nought and one across the whole requirement sweep, and it never reaches the orange bound. The
-        lime line is the same margin as a percentage, and it is the one that moves, because the same
+        nought and one across the whole requirement sweep, and it never reaches the amber bound. The
+        green line is the same margin as a percentage, and it is the one that moves, because the same
         fraction of a stage is a different fraction of the whole depending on how many stages there
         are.
       </div>

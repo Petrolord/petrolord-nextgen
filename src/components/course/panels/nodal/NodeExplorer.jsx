@@ -176,7 +176,7 @@ const Crossings = ({ W }) => {
       <div className="mt-3 text-xs text-pl-text">
         This is the whole of nodal analysis in one frame. The green curve is what the reservoir will
         give at each rate and it falls, because pulling harder leaves less pressure at the sandface.
-        The orange curve is what the tubing will take at each rate and it is a J. The well produces
+        The amber curve is what the tubing will take at each rate and it is a J. The well produces
         where the two statements agree, and on {W.label} they agree
         {' '}{fmt(crossings.length, 0)} time{crossings.length === 1 ? '' : 's'}.
       </div>

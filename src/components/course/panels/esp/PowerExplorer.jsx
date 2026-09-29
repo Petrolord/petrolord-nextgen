@@ -283,7 +283,7 @@ const Derate = () => {
         </table>
       </div>
       <div className="mt-3 text-xs text-pl-text">
-        THIS IS A SEAM AND NOT AN ERROR. The lime line does not move across the sweep, because
+        THIS IS A SEAM AND NOT AN ERROR. The green line does not move across the sweep, because
         cutting a motor's permissible load does not change the current it draws at a given shaft
         load. The blue line climbs, because the same shaft power is a larger share of a smaller
         usable rating. The gap between them is the electrical load fraction times one over the derate

@@ -357,7 +357,7 @@ const Valve = () => {
       <div className="mt-3 text-xs text-pl-text">
         A DOME IS A THERMOMETER AS MUCH AS IT IS A SPRING. The shop charges the dome cold, at
         {' '}{fmt(GAS_LIFT_THRESHOLDS.testRackTempF, 0)} degF on a test rack, and the well reads it
-        hot. Those are the two blue and pink columns and they are the same nitrogen: the charge does
+        hot. Those are the two blue and gold columns and they are the same nitrogen: the charge does
         not change, the temperature it is read at does. Down this string the valve temperature runs
         from {fmt(rows[0].tempF, 2)} to {fmt(rows[rows.length - 1].tempF, 2)} degF, and the gap
         between the two readings widens with it. Report the test rack figure at valve temperature,

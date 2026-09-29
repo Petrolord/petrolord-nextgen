@@ -170,7 +170,7 @@ const Shape = ({ W }) => {
         The lower chart is the whole of the upper one. A wellhead pressure of
         {' '}{fmt(readings.wellheadPsia, 0)} psia sits under both terms as a constant, the blue term
         is the weight of the column and it FALLS as rate rises because gas breaks out and lightens
-        what has to be lifted, and the orange term is what the pipe charges and it GROWS as the
+        what has to be lifted, and the amber term is what the pipe charges and it GROWS as the
         square of rate. Their sum has to fall first and rise later, which is a J, and the bottom of
         it sits at {fmt(readings.trueMinimumQStbd, 4)} stb/d asking for
         {' '}{fmt(readings.trueMinimumBhpPsia, 4)} psia.
