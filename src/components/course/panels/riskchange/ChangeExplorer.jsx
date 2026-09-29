@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceArea, ReferenceLine,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceArea, ReferenceLine,
 } from 'recharts';
 import {
   stageTable, stageMovesFrom, approvalSets, approvalPeople, approvalStart, approvalView, decideApproval,
@@ -9,11 +9,13 @@ import {
   esanmiActions, esanmiSummary, EXPIRY_OFFSETS, RATIFY_OFFSETS, DECISIONS, AS_OF_ISO, q, yn, lst, orNull,
 } from './riskchangeLab';
 import {
-  Tbl, Verdict, Note, Lead, Empty, DaySlider, MoveButton, safe, AXIS, TOOLTIP, GRID, DASH, MARGIN, LIME, SKY, AMBER,
+  Tbl, Verdict, Note, Lead, Empty, DaySlider, MoveButton, safe, AXIS, TOOLTIP, GRID, DASH, MARGIN, GREEN, BLUE, AMBER,
 } from './panelBits';
 import {
   PanelShell, SelectField, Tile, TileGrid, FieldGrid,
 } from '@/components/course/panels/petrophysics/panelKit';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE } from '@/utils/chartTheme';
 
 // Change explorer, the Professional tier throughout.
 //
@@ -93,8 +95,8 @@ export const ApprovalsMode = ({
         <SelectField label="New level assigned to" value={addAs} onChange={onAddAs} options={personOptions} />
       </FieldGrid>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">row</th>
               <th className="text-left pr-3">level</th>
@@ -196,19 +198,17 @@ export const TimelineMode = ({
         <Tile label="Expiry state" value={q(exp.state)} />
         <Tile label="Counted expired" value={yn(exp.countedExpired)} />
       </TileGrid>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={expRows} margin={MARGIN}>
-            <CartesianGrid stroke={GRID} strokeDasharray={DASH} />
-            <XAxis dataKey="offset" type="number" domain={[lo, hi]} tick={AXIS} />
-            <YAxis tick={AXIS} allowDecimals={false} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v, n, p) => [`${v} days, ${p.payload.state}`, 'days until expiry']} />
-            <ReferenceArea x1={lead.first} x2={lead.last} fill={AMBER} fillOpacity={0.2} />
-            <ReferenceLine x={exp.offset} stroke={LIME} />
-            <Line dataKey="days" name="days until expiry" stroke={SKY} dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={expRows} margin={MARGIN}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="offset" type="number" domain={[lo, hi]} tick={AXIS} />
+          <YAxis tick={AXIS} allowDecimals={false} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v, n, p) => [`${v} days, ${p.payload.state}`, 'days until expiry']} />
+          <ReferenceArea x1={lead.first} x2={lead.last} fill={AMBER} fillOpacity={0.2} />
+          <ReferenceLine x={exp.offset} stroke={GREEN} />
+          <Line dataKey="days" name="days until expiry" stroke={BLUE} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Tbl head={['expiry states the engine carries']} rows={rules.states.map((s) => [q(s)])} />
       {types && Array.isArray(types.rows) && (
         <>
@@ -232,19 +232,17 @@ export const TimelineMode = ({
         <Tile label="Days to due" value={orNull(rat.daysToDue)} />
         <Tile label="Ratification state" value={q(rat.state)} />
       </TileGrid>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={ratRows} margin={MARGIN}>
-            <CartesianGrid stroke={GRID} strokeDasharray={DASH} />
-            <XAxis dataKey="daysSince" type="number" domain={[rlo, rhi]} tick={AXIS} />
-            <YAxis tick={AXIS} allowDecimals={false} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v, n, p) => [`${v} days, ${p.payload.state}`, 'days to ratification due']} />
-            <ReferenceArea x1={rlo} x2={win.lastInside} fill={AMBER} fillOpacity={0.2} />
-            <ReferenceLine x={rat.daysSince} stroke={LIME} />
-            <Line dataKey="daysToDue" name="days to ratification due" stroke={SKY} dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={ratRows} margin={MARGIN}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="daysSince" type="number" domain={[rlo, rhi]} tick={AXIS} />
+          <YAxis tick={AXIS} allowDecimals={false} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v, n, p) => [`${v} days, ${p.payload.state}`, 'days to ratification due']} />
+          <ReferenceArea x1={rlo} x2={win.lastInside} fill={AMBER} fillOpacity={0.2} />
+          <ReferenceLine x={rat.daysSince} stroke={GREEN} />
+          <Line dataKey="daysToDue" name="days to ratification due" stroke={BLUE} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       {cases && Array.isArray(cases.probes) && (
         <>
           {cases.probes.map((v) => <Verdict key={v.label} v={v} />)}

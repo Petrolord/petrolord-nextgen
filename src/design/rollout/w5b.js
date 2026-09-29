@@ -6,5 +6,6 @@ export default [
   '/dashboard/apps/metering',
   '/dashboard/apps/producedwater',
   '/dashboard/apps/corrosion',
+  '/dashboard/apps/riskchange',
   '/dashboard/apps/compliance',
 ];
