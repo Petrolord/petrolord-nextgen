@@ -1,8 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, ComposedChart, LineChart, BarChart, Line, Bar, ReferenceLine,
+  ComposedChart, LineChart, BarChart, Line, Bar, ReferenceLine,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, CHART_COLORS, getStreamPalette } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import { exceptionExplorer } from './surveillanceLab';
 import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
@@ -25,7 +28,7 @@ import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/comp
 
 const fmt = (v, d = 4) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: 0 })
-  : '-');
+  : 'n/a');
 
 const yn = (b) => (b ? 'yes' : 'no');
 
@@ -36,9 +39,9 @@ const MODES = [
   ['allocation', 'One meter shared over many wells'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const GRID = <CartesianGrid stroke="#334155" strokeDasharray="3 3" />;
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const GRID = <CartesianGrid {...GRID_STYLE} />;
 
 // --------------------------------------------------------------------------
 
@@ -84,23 +87,21 @@ const Windows = () => {
         <Tile label="Change the engine reports, on the calendar column" value={fmt(data.two.dropPctOnCalendar, 6)} unit="%" />
         <Tile label="Change on the producing-day column" value={fmt(data.two.dropPctOnProducingDay, 6)} unit="%" />
       </TileGrid>
-      <div className="h-60 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="date" tick={AXIS}
-              label={{ value: 'ledger date inside the recent window', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS}
-              label={{ value: 'stb over the row, and stb/d', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={data.two.baselineCalendarMean} stroke="#f97316" strokeDasharray="4 4" />
-            <Bar dataKey="calendar" name="the CALENDAR volume the engine reads" fill="#38bdf8" isAnimationActive={false} />
-            <Line type="monotone" dataKey="producingDay" name="the producing-day rate it never reads" stroke="#BFFF00" dot isAnimationActive={false} />
-          </ComposedChart>
-        </ResponsiveContainer>
-      </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <ChartFrame height={240} className="mt-3">
+        <ComposedChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="date" tick={AXIS}
+            label={{ value: 'ledger date inside the recent window', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS}
+            label={{ value: 'stb over the row, and stb/d', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <ReferenceLine y={data.two.baselineCalendarMean} stroke={seriesColor(2)} strokeDasharray="4 4" />
+          <Bar dataKey="calendar" name="the CALENDAR volume the engine reads" fill={seriesColor(1)} isAnimationActive={false} />
+          <Line type="monotone" dataKey="producingDay" name="the producing-day rate it never reads" stroke={seriesColor(0)} dot isAnimationActive={false} />
+        </ComposedChart>
+      </ChartFrame>
+      <div className="mt-3 text-xs text-pl-text">
         THE COMPARISON IS ALWAYS A WELL AGAINST ITSELF, and the rate key is the CALENDAR volume.
         Both windows are half-open and they do not overlap, so the boundary day belongs to the
         earlier window and to exactly one of them. On the teaching field, asOf
@@ -116,8 +117,8 @@ const Windows = () => {
         honestly instead of declaring every well stale.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">well and column</th>
               <th className="text-left pr-3">recent mean</th>
@@ -132,7 +133,7 @@ const Windows = () => {
             {data.means.map((r) => (
               <tr key={`${r.name}-${r.key}`}>
                 <td className="pr-3">{r.name} {r.key}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.recentMean, 12)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.recentMean, 12)}</td>
                 <td className="pr-3">{fmt(r.recentRows, 0)}</td>
                 <td className="pr-3">{fmt(r.baselineMean, 12)}</td>
                 <td className="pr-3">{fmt(r.baselineRows, 0)}</td>
@@ -143,7 +144,7 @@ const Windows = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-4 text-xs text-slate-300">
+      <div className="mt-4 text-xs text-pl-text">
         THE COLUMN THAT SETTLES IT IS ON EVERY POINT AND IS NEVER READ. On {data.two.name}, a
         TEACHING well and not a published one, the recent calendar mean is
         {' '}{fmt(data.two.recentCalendarMean, 12)} stb against a baseline of
@@ -158,15 +159,15 @@ const Windows = () => {
         the real cause does not fire either. The two columns move in opposite directions:
         {' '}{yn(data.two.theTwoColumnsMoveInOppositeDirections)}.
       </div>
-      <div className="mt-4 text-xs text-slate-300">
+      <div className="mt-4 text-xs text-pl-text">
         THE WINDOWS WIDEN FOR A COARSE LEDGER AND THE VOLUMES DO NOT. Each well widens its own
         windows on its OWN cadence, so two wells on one field can be compared over different
         windows and nothing in the return says which window a row used. Nothing in a ledger row
         says how long the row covers, so the widening rescales the WINDOW and never the VOLUME.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">cadence, days</th>
               <th className="text-left pr-3">recent window, days</th>
@@ -187,8 +188,8 @@ const Windows = () => {
         </table>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">gaps between consecutive points</th>
               <th className="text-left pr-3">points</th>
@@ -208,7 +209,7 @@ const Windows = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-4 text-xs text-slate-300">
+      <div className="mt-4 text-xs text-pl-text">
         A PERIOD VOLUME AND A RATE PER ELAPSED DAY TELL OPPOSITE STORIES, and the module only ever
         reads the first. On {data.monthlyHead.name}, a TEACHING well whose cadence is
         {' '}{fmt(data.monthlyHead.cadenceDays, 0)} days so its windows widen to
@@ -225,8 +226,8 @@ const Windows = () => {
         {' '}{data.publishedMonthly.exceptionMessage}
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">period row</th>
               <th className="text-left pr-3">oil over the period, stb</th>
@@ -238,15 +239,15 @@ const Windows = () => {
             {data.monthly.map((r) => (
               <tr key={r.date}>
                 <td className="pr-3">{r.date}</td>
-                <td className="pr-3 text-[#38bdf8]">{fmt(r.periodOilStb, 4)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.periodOilStb, 4)}</td>
                 <td className="pr-3">{r.daysSinceThePreviousRow === null ? 'not applicable' : fmt(r.daysSinceThePreviousRow, 0)}</td>
-                <td className="text-[#BFFF00]">{r.oilPerElapsedDayStbd === null ? 'not applicable' : fmt(r.oilPerElapsedDayStbd, 9)}</td>
+                <td className="text-pl-primary-text">{r.oilPerElapsedDayStbd === null ? 'not applicable' : fmt(r.oilPerElapsedDayStbd, 9)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-4 text-xs text-slate-300">
+      <div className="mt-4 text-xs text-pl-text">
         AND ONE FUNCTION IN THIS MODULE ANCHORS ON THE WALL CLOCK INSTEAD. The deferment roll-up
         defaults its anchor to today, in a file whose header says every window anchors on the
         field's latest ledger date precisely so an old dataset surveils honestly. This page will
@@ -262,8 +263,8 @@ const Windows = () => {
         and {fmt(data.deferments.totalOil, 4)} stb of oil.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">one open event, anchored at</th>
               <th className="text-left pr-3">days accrued</th>
@@ -336,7 +337,7 @@ const Exceptions = () => {
         <Tile label="Always medium, whatever the size" value={data.head.theOneThatIsAlwaysMediumUnconditionally} />
         <Tile label="Always high, whatever the size" value={data.head.theOneThatIsAlwaysHigh} />
       </TileGrid>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         A SEVERITY IS THE NAME OF A THRESHOLD CROSSED TWICE, and not a measurement. Every severity
         in this module is high when the trigger is exceeded by a factor of two and medium
         otherwise, and three of the {fmt(data.head.types, 0)} types do not work that way at all.
@@ -349,8 +350,8 @@ const Exceptions = () => {
         reading order of a surveillance list carries no information about size.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">type</th>
               <th className="text-left pr-3">setting it is measured against</th>
@@ -367,7 +368,7 @@ const Exceptions = () => {
                 <td className="pr-3">{r.type}</td>
                 <td className="pr-3">{r.settingKey}</td>
                 <td className="pr-3">{fmt(r.settingValue, 4)}</td>
-                <td className={r.doublingAt === null ? 'pr-3 text-[#f97316]' : 'pr-3'}>{r.doublingAt === null ? 'none, it does not climb' : fmt(r.doublingAt, 4)}</td>
+                <td className={r.doublingAt === null ? 'pr-3 text-pl-warning-text' : 'pr-3'}>{r.doublingAt === null ? 'none, it does not climb' : fmt(r.doublingAt, 4)}</td>
                 <td className="pr-3">{yn(r.canReachHigh)}</td>
                 <td className="pr-3">{yn(r.gatedByMinOilRate)}</td>
                 <td>{r.note}</td>
@@ -376,14 +377,14 @@ const Exceptions = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-4 text-xs text-slate-300">
+      <div className="mt-4 text-xs text-pl-text">
         THE PUBLISHED FIELD RAISES {fmt(data.published.length, 0)} EXCEPTIONS, and the golden
         commits every one of them: the type, the severity, the value and the baseline. Read the
         severity column against the setting column beside it.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">well</th>
               <th className="text-left pr-3">type</th>
@@ -399,7 +400,7 @@ const Exceptions = () => {
               <tr key={`${r.wellName}-${r.type}-${r.index}`}>
                 <td className="pr-3">{r.wellName}</td>
                 <td className="pr-3">{r.type}</td>
-                <td className={r.severity === 'high' ? 'pr-3 text-[#f97316]' : 'pr-3'}>{r.severity}</td>
+                <td className={r.severity === 'high' ? 'pr-3 text-pl-danger-text' : 'pr-3'}>{r.severity}</td>
                 <td className="pr-3">{fmt(r.value, 12)}</td>
                 <td className="pr-3">{fmt(r.baseline, 12)}</td>
                 <td className="pr-3">{r.settingKey} {fmt(r.settingValue, 4)}</td>
@@ -409,7 +410,7 @@ const Exceptions = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-4 text-xs text-slate-300">
+      <div className="mt-4 text-xs text-pl-text">
         AND THE TEACHING FIELD RAISES {fmt(data.teachingHead.raised, 0)} ON
         {' '}{fmt(data.teachingHead.wellsSurveilled, 0)} OF {fmt(data.teachingHead.wellsHandedIn, 0)}
         {' '}WELLS. One well is dropped before any comparison runs, because observation wells are
@@ -422,8 +423,8 @@ const Exceptions = () => {
         {' '}{data.teachingHead.theProducingDayRateIsReadByExactlyOneFunctionInTheFile}.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">well</th>
               <th className="text-left pr-3">type</th>
@@ -439,7 +440,7 @@ const Exceptions = () => {
               <tr key={`${r.wellName}-${r.type}`}>
                 <td className="pr-3">{r.wellName}</td>
                 <td className="pr-3">{r.type}</td>
-                <td className={r.severity === 'high' ? 'pr-3 text-[#f97316]' : 'pr-3'}>{r.severity}</td>
+                <td className={r.severity === 'high' ? 'pr-3 text-pl-danger-text' : 'pr-3'}>{r.severity}</td>
                 <td className="pr-3">{fmt(r.value, 12)}</td>
                 <td className="pr-3">{fmt(r.baseline, 12)}</td>
                 <td className="pr-3">{r.settingKey} {fmt(r.settingValue, 4)}{r.alwaysMedium ? ', and no doubling point' : ''}</td>
@@ -453,25 +454,23 @@ const Exceptions = () => {
         <SelectField label="Sweep one dial" value={sweepKey} onChange={setSweepKey}
           options={data.keys.map((k) => [k, k])} />
       </FieldGrid>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={chart} margin={{ top: 10, right: 20, bottom: 24, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="setting" tick={AXIS} interval={0} height={40}
-              label={{ value: `${sweepKey} as set`, position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS} allowDecimals={false}
-              label={{ value: 'exceptions raised', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 0)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Bar dataKey="high" name="high" stackId="s" fill="#f97316" isAnimationActive={false} />
-            <Bar dataKey="medium" name="medium" stackId="s" fill="#BFFF00" isAnimationActive={false} />
-            <Bar dataKey="info" name="info" stackId="s" fill="#38bdf8" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <BarChart data={chart} margin={{ top: 10, right: 20, bottom: 24, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="setting" tick={AXIS} interval={0} height={40}
+            label={{ value: `${sweepKey} as set`, position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS} allowDecimals={false}
+            label={{ value: 'exceptions raised', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 0)} />
+          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Bar dataKey="high" name="high" stackId="s" fill={seriesColor(3)} isAnimationActive={false} />
+          <Bar dataKey="medium" name="medium" stackId="s" fill={seriesColor(2)} isAnimationActive={false} />
+          <Bar dataKey="info" name="info" stackId="s" fill={seriesColor(0)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">{sweepKey}</th>
               <th className="text-left pr-3">the default</th>
@@ -498,8 +497,8 @@ const Exceptions = () => {
         </table>
       </div>
       <div className="mt-4 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">well type as filed</th>
               <th className="text-left pr-3">filtered out entirely</th>
@@ -576,21 +575,19 @@ const Tests = () => {
         <Tile label="Wells taking a share at 1 day" value={fmt(data.sweepHead.wellsAt1Day, 0)} />
         <Tile label="Wells taking a share at 0 days" value={fmt(data.sweepHead.wellsAt0Days, 0)} />
       </TileGrid>
-      <div className="h-60 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 24, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="days" tick={AXIS} interval={0} height={40}
-              label={{ value: 'maximum test age allowed, days', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS}
-              label={{ value: 'theoretical oil over the window, stb', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 4)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line type="monotone" dataKey="theoretical" name="theoretical oil, stb" stroke="#BFFF00" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <ChartFrame height={240} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 24, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="days" tick={AXIS} interval={0} height={40}
+            label={{ value: 'maximum test age allowed, days', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS}
+            label={{ value: 'theoretical oil over the window, stb', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 4)} />
+          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Line type="monotone" dataKey="theoretical" name="theoretical oil, stb" stroke={seriesColor(0)} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
+      <div className="mt-3 text-xs text-pl-text">
         ONE DIAL DECIDES WHICH WELLS ARE IN THE SPLIT AT ALL, AND ITS GUARD DECIDES MORE THAN THE
         LIMIT DOES. A well is carried on an allocated day by the most recent test on or before that
         day, within the age limit. The clause is a finite check AND a greater-than-zero check, so
@@ -611,8 +608,8 @@ const Tests = () => {
         {' '}{yn(data.sweepHead.theAllocatedTotalIsUnchangedByAgeingATestOut)}.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">the age limit as set</th>
               <th className="text-left pr-3">it is a finite positive number</th>
@@ -626,8 +623,8 @@ const Tests = () => {
               <tr key={r.label}>
                 <td className="pr-3">{r.label}</td>
                 <td className="pr-3">{yn(r.settingIsAFinitePositiveNumber)}</td>
-                <td className={r.theAgeCheckRan ? 'pr-3' : 'pr-3 text-[#f97316]'}>{yn(r.theAgeCheckRan)}</td>
-                <td className={r.theOldTestCarriesTheWell ? 'pr-3 text-[#f97316]' : 'pr-3'}>{yn(r.theOldTestCarriesTheWell)}</td>
+                <td className={r.theAgeCheckRan ? 'pr-3' : 'pr-3 text-pl-warning-text'}>{yn(r.theAgeCheckRan)}</td>
+                <td className={r.theOldTestCarriesTheWell ? 'pr-3 text-pl-warning-text' : 'pr-3'}>{yn(r.theOldTestCarriesTheWell)}</td>
                 <td>{fmt(r.testAgeDays, 0)}</td>
               </tr>
             ))}
@@ -635,8 +632,8 @@ const Tests = () => {
         </table>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">age limit, days</th>
               <th className="text-left pr-3">the check ran</th>
@@ -651,9 +648,9 @@ const Tests = () => {
             {data.sweep.map((r) => (
               <tr key={r.maxTestAgeDays}>
                 <td className="pr-3">{fmt(r.maxTestAgeDays, 0)}</td>
-                <td className={r.theAgeCheckRan ? 'pr-3' : 'pr-3 text-[#f97316]'}>{yn(r.theAgeCheckRan)}</td>
+                <td className={r.theAgeCheckRan ? 'pr-3' : 'pr-3 text-pl-warning-text'}>{yn(r.theAgeCheckRan)}</td>
                 <td className="pr-3">{fmt(r.wellsTakingAShare, 0)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.theoreticalOil, 9)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.theoreticalOil, 9)}</td>
                 <td className="pr-3">{fmt(r.allocatedOil, 9)}</td>
                 <td className="pr-3">{fmt(r.unallocatedMeteredOil, 6)}</td>
                 <td>{r.diagnostics}</td>
@@ -662,7 +659,7 @@ const Tests = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-4 text-xs text-slate-300">
+      <div className="mt-4 text-xs text-pl-text">
         WHICH TESTS ARE EVEN CANDIDATES. The grouping drops a test only when its validity flag is
         STRICTLY false, so a test that was never quality checked, a null, a zero and the STRING
         that spells false are all kept. And the quality check and the grouping live in one file and
@@ -670,8 +667,8 @@ const Tests = () => {
         carries its well regardless, because the grouping reads the validity flag and nothing else.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">test</th>
               <th className="text-left pr-3">validity flag as written</th>
@@ -694,8 +691,8 @@ const Tests = () => {
         </table>
       </div>
       <div className="mt-4 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">allocated day</th>
               <th className="text-left pr-3">well</th>
@@ -710,7 +707,7 @@ const Tests = () => {
               <tr key={`${r.date}-${r.wellName}`}>
                 <td className="pr-3">{r.date}</td>
                 <td className="pr-3">{r.wellName}</td>
-                <td className={r.noTestInForce ? 'pr-3 text-[#f97316]' : 'pr-3'}>{r.testId || 'no test in force'}</td>
+                <td className={r.noTestInForce ? 'pr-3 text-pl-warning-text' : 'pr-3'}>{r.testId || 'no test in force'}</td>
                 <td className="pr-3">{r.testDate || 'none'}</td>
                 <td className="pr-3">{r.oilRateStbd === null ? 'none' : fmt(r.oilRateStbd, 6)}</td>
                 <td>{r.ageDays === null ? 'none' : fmt(r.ageDays, 0)}</td>
@@ -719,7 +716,7 @@ const Tests = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-4 text-xs text-slate-300">
+      <div className="mt-4 text-xs text-pl-text">
         AND WHAT THE QUALITY CHECK IS NEVER ASKED. Every check in it is against data the ledger
         already holds, the well's own test history and the daily ledger on the test date, so the
         verdict never depends on a well model that may not exist. It returns only the tests WITH
@@ -733,8 +730,8 @@ const Tests = () => {
         and instead becomes part of the median that judges the later ones.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">tests on the well</th>
               <th className="text-left pr-3">prior tests available</th>
@@ -747,7 +744,7 @@ const Tests = () => {
               <tr key={r.testsOnTheWell}>
                 <td className="pr-3">{fmt(r.testsOnTheWell, 0)}</td>
                 <td className="pr-3">{fmt(r.priorTestsAvailable, 0)}</td>
-                <td className={r.theOutlierFired ? 'pr-3 text-[#f97316]' : 'pr-3'}>{yn(r.theOutlierFired)}</td>
+                <td className={r.theOutlierFired ? 'pr-3 text-pl-warning-text' : 'pr-3'}>{yn(r.theOutlierFired)}</td>
                 <td>{r.codesOnTheLastTest}</td>
               </tr>
             ))}
@@ -755,8 +752,8 @@ const Tests = () => {
         </table>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">published test</th>
               <th className="text-left pr-3">test date</th>
@@ -770,7 +767,7 @@ const Tests = () => {
               <tr key={r.testId}>
                 <td className="pr-3">{r.testId}</td>
                 <td className="pr-3">{r.testDate}</td>
-                <td className={r.severity === 'high' ? 'pr-3 text-[#f97316]' : 'pr-3'}>{r.severity}</td>
+                <td className={r.severity === 'high' ? 'pr-3 text-pl-danger-text' : 'pr-3'}>{r.severity}</td>
                 <td className="pr-3">{r.codes}</td>
                 <td>{r.messages}</td>
               </tr>
@@ -779,8 +776,8 @@ const Tests = () => {
         </table>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">teaching test</th>
               <th className="text-left pr-3">well</th>
@@ -860,26 +857,24 @@ const Allocation = () => {
         <Tile label="Measured oil over the window" value={fmt(data.head.measuredOil, 6)} unit="stb" />
         <Tile label="Closure residual on oil" value={fmt(data.head.closureResidualOil, 9)} unit="stb" />
       </TileGrid>
-      <div className="h-60 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 24, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="date" tick={AXIS} interval={2} height={40}
-              label={{ value: 'allocated day', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS} domain={['auto', 'auto']}
-              label={{ value: 'allocation factor, dimensionless', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 9)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={1} stroke="#64748b" strokeDasharray="4 4" />
-            <ReferenceLine y={0.7} stroke="#f97316" strokeDasharray="2 4" />
-            <ReferenceLine y={1.3} stroke="#f97316" strokeDasharray="2 4" />
-            <Line type="monotone" dataKey="oil" name="oil factor" stroke="#BFFF00" dot={false} isAnimationActive={false} />
-            <Line type="monotone" dataKey="water" name="water factor" stroke="#38bdf8" dot={false} isAnimationActive={false} />
-            <Line type="monotone" dataKey="gas" name="gas factor" stroke="#f472b6" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <ChartFrame height={240} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 24, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="date" tick={AXIS} interval={2} height={40}
+            label={{ value: 'allocated day', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS} domain={['auto', 'auto']}
+            label={{ value: 'allocation factor, dimensionless', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 9)} />
+          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <ReferenceLine y={1} stroke={SVG_CHART.reference} strokeDasharray="4 4" />
+          <ReferenceLine y={0.7} stroke={SVG_CHART.reference} strokeDasharray="2 4" />
+          <ReferenceLine y={1.3} stroke={SVG_CHART.reference} strokeDasharray="2 4" />
+          <Line type="monotone" dataKey="oil" name="oil factor" stroke={getStreamPalette('oil').primary} dot={false} isAnimationActive={false} />
+          <Line type="monotone" dataKey="water" name="water factor" stroke={getStreamPalette('water').primary} dot={false} isAnimationActive={false} />
+          <Line type="monotone" dataKey="gas" name="gas factor" stroke={getStreamPalette('gas').primary} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
+      <div className="mt-3 text-xs text-pl-text">
         THE FACTOR IS THE OUTPUT AND NOT AN INTERNAL. A theoretical is a test rate times an uptime
         fraction, the factor is the metered total over the sum of the theoreticals, and every share
         is that factor times a theoretical. A factor of one means the wells' tests add up to exactly
@@ -890,7 +885,7 @@ const Allocation = () => {
         {' '}{data.head.lastDate}, {fmt(data.head.wellsTakingAShare, 0)} wells take a share and
         {' '}{fmt(data.head.diagnostics, 0)} diagnostics are raised: {data.head.diagnosticsByCode}.
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         CLOSURE HOLDS PER DAY, EXACTLY, AND FAILS SILENTLY AT THE GRAND TOTAL. Because every share
         is the same factor times a theoretical, an allocated day closes to the last bit. A date
         whose theoretical is zero has NO factor, is not allocated at all, and its metered volume is
@@ -901,8 +896,8 @@ const Allocation = () => {
         whether the field closed has to subtract the two totals itself and nothing prompts it to.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">published day</th>
               <th className="text-left pr-3">oil factor</th>
@@ -920,15 +915,15 @@ const Allocation = () => {
                 <td className="pr-3">{fmt(r.measuredOil, 6)}</td>
                 <td className="pr-3">{fmt(r.theoreticalOil, 6)}</td>
                 <td className="pr-3">{fmt(r.allocatedOil, 6)}</td>
-                <td className="text-[#BFFF00]">{fmt(r.closureResidual, 12)}</td>
+                <td className="text-pl-primary-text">{fmt(r.closureResidual, 12)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">published setting</th>
               <th className="text-left pr-3">theoretical oil, stb</th>
@@ -952,7 +947,7 @@ const Allocation = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-4 text-xs text-slate-300">
+      <div className="mt-4 text-xs text-pl-text">
         A WELL THAT FILED NO ROW AT ALL TAKES A FULL SHARE. The split looks up a ledger row per
         well per date to find the hours; when there is no row the lookup returns nothing, the
         finite check fails, and the default of twenty-four hours is substituted. Told the truth
@@ -963,8 +958,8 @@ const Allocation = () => {
         module noticing the symptom and not the cause.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">what the second well did</th>
               <th className="text-left pr-3">oil factor</th>
@@ -981,14 +976,14 @@ const Allocation = () => {
                 <td className="pr-3">{fmt(r.oilFactor, 12)}</td>
                 <td className="pr-3">{r.shareBUptime === null ? 'took no share' : fmt(r.shareBUptime, 6)}</td>
                 <td className="pr-3">{r.shareBTheoreticalOil === null ? 'none' : fmt(r.shareBTheoreticalOil, 6)}</td>
-                <td className={r.shareBWasCreditedWithBarrelsItNeverMade ? 'pr-3 text-[#f97316]' : 'pr-3'}>{r.shareBAllocatedOil === null ? 'none' : fmt(r.shareBAllocatedOil, 6)}</td>
+                <td className={r.shareBWasCreditedWithBarrelsItNeverMade ? 'pr-3 text-pl-warning-text' : 'pr-3'}>{r.shareBAllocatedOil === null ? 'none' : fmt(r.shareBAllocatedOil, 6)}</td>
                 <td>{r.diagnostics}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-4 text-xs text-slate-300">
+      <div className="mt-4 text-xs text-pl-text">
         ONE WELL, TWO MODULES, TWO OPPOSITE READINGS OF THE SAME SILENCE. On the teaching field
         {' '}{data.quietHead.name} stops filing rows partway through the allocated window and does
         not stop producing. For {fmt(data.quietHead.daysWithNoLedgerRow, 0)} of the
@@ -1001,8 +996,8 @@ const Allocation = () => {
         {' '}{data.quietHead.surveillanceExceptionMessage}
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">allocated day</th>
               <th className="text-left pr-3">ledger row filed</th>
@@ -1016,7 +1011,7 @@ const Allocation = () => {
             {data.quiet.map((r) => (
               <tr key={r.date}>
                 <td className="pr-3">{r.date}</td>
-                <td className={r.ledgerRowFiled ? 'pr-3' : 'pr-3 text-[#f97316]'}>{yn(r.ledgerRowFiled)}</td>
+                <td className={r.ledgerRowFiled ? 'pr-3' : 'pr-3 text-pl-warning-text'}>{yn(r.ledgerRowFiled)}</td>
                 <td className="pr-3">{r.uptime === null ? 'took no share at all' : fmt(r.uptime, 9)}</td>
                 <td className="pr-3">{r.testId || 'none'}</td>
                 <td className="pr-3">{r.theoreticalOil === null ? 'none' : fmt(r.theoreticalOil, 6)}</td>
@@ -1026,7 +1021,7 @@ const Allocation = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-4 text-xs text-slate-300">
+      <div className="mt-4 text-xs text-pl-text">
         THE IMBALANCE IS THE UNACCOUNTED VOLUME AN ALLOCATION ENGINEER CHASES: the metered total
         against what the wells' own meters booked. Positive means the facility meter saw MORE than
         the wells did. The percentage is against what the WELLS BOOKED and not against the meter,
@@ -1036,8 +1031,8 @@ const Allocation = () => {
         rows exist, and the unaccounted volume steps.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">day</th>
               <th className="text-left pr-3">measured oil, stb</th>
@@ -1052,14 +1047,14 @@ const Allocation = () => {
                 <td className="pr-3">{r.date}</td>
                 <td className="pr-3">{fmt(r.measuredOil, 6)}</td>
                 <td className="pr-3">{fmt(r.bookedOil, 6)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.imbalanceOil, 9)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.imbalanceOil, 9)}</td>
                 <td>{r.imbalanceOilPct === null ? 'null' : fmt(r.imbalanceOilPct, 12)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-4 text-xs text-slate-300">
+      <div className="mt-4 text-xs text-pl-text">
         A MONTHLY FACTOR OF ONE HAS TWO MEANINGS AND THE RETURN CANNOT TELL THEM APART. A month
         with no theoretical volume for a phase carries a factor of one, documented as nothing to
         scale, which is indistinguishable from a month in which the tests agreed with the meter
@@ -1074,8 +1069,8 @@ const Allocation = () => {
         {' '}{fmt(data.writeBack.rowsCarryingAnHoursOn, 0)} carry an hours column.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">well</th>
               <th className="text-left pr-3">days</th>
@@ -1091,7 +1086,7 @@ const Allocation = () => {
                 <td className="pr-3">{r.wellName}</td>
                 <td className="pr-3">{fmt(r.days, 0)}</td>
                 <td className="pr-3">{fmt(r.theoreticalOil, 6)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.allocatedOil, 9)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.allocatedOil, 9)}</td>
                 <td className="pr-3">{fmt(r.allocatedWater, 9)}</td>
                 <td>{fmt(r.creditedOverTheoretical, 12)}</td>
               </tr>
@@ -1100,8 +1095,8 @@ const Allocation = () => {
         </table>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">metered over theoretical</th>
               <th className="text-left pr-3">reported factor</th>
@@ -1115,7 +1110,7 @@ const Allocation = () => {
                 <td className="pr-3">{fmt(r.meteredOverTheoretical, 4)}</td>
                 <td className="pr-3">{fmt(r.reportedFactor, 12)}</td>
                 <td className="pr-3">{fmt(r.allocatedOil, 6)}</td>
-                <td className={r.outOfBand ? 'text-[#f97316]' : ''}>{yn(r.outOfBand)}</td>
+                <td className={r.outOfBand ? 'text-pl-warning-text' : ''}>{yn(r.outOfBand)}</td>
               </tr>
             ))}
           </tbody>

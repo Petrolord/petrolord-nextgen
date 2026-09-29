@@ -1,8 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, BarChart, Bar, ReferenceLine,
+  LineChart, Line, BarChart, Bar, ReferenceLine,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, CHART_COLORS } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import { diagnosticExplorer } from './interventionLab';
 import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
@@ -21,10 +24,10 @@ import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/comp
 
 const fmt = (v, d = 4) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: 0 })
-  : '-');
+  : 'n/a');
 
 const tiny = (v) => {
-  if (!Number.isFinite(v)) return '-';
+  if (!Number.isFinite(v)) return 'n/a';
   if (v === 0) return '0';
   return Math.abs(v) < 0.0005 ? v.toExponential(3) : fmt(v, 8);
 };
@@ -38,9 +41,9 @@ const MODES = [
   ['floor', 'The floor a geometry allows, and what it refuses'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const GRID = <CartesianGrid stroke="#334155" strokeDasharray="3 3" />;
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const GRID = <CartesianGrid {...GRID_STYLE} />;
 
 // --------------------------------------------------------------------------
 
@@ -77,22 +80,20 @@ const Fit = () => {
         <Tile label="Fit quality, as a fraction" value={fmt(data.fit.r2Fraction, 6)} />
         <Tile label="The history it sits on" value={fmt(data.fit.spanDecades, 6)} unit="log cycles" />
       </TileGrid>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="tDays" type="number" scale="log" tick={AXIS} domain={['dataMin', 'dataMax']}
-              label={{ value: 'producing time, days', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis type="number" scale="log" tick={AXIS} domain={['dataMin', 'dataMax']}
-              label={{ value: 'water-oil ratio', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line type="monotone" dataKey="ratio" name="the samples" stroke="#BFFF00" dot isAnimationActive={false} />
-            <Line type="monotone" dataKey="fittedRatio" name="the fitted line" stroke="#38bdf8" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <ChartFrame height={256} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="tDays" type="number" scale="log" tick={AXIS} domain={['dataMin', 'dataMax']}
+            label={{ value: 'producing time, days', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis type="number" scale="log" tick={AXIS} domain={['dataMin', 'dataMax']}
+            label={{ value: 'water-oil ratio', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Line type="monotone" dataKey="ratio" name="the samples" stroke={seriesColor(0)} dot isAnimationActive={false} />
+          <Line type="monotone" dataKey="fittedRatio" name="the fitted line" stroke={seriesColor(1)} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
+      <div className="mt-3 text-xs text-pl-text">
         ONE CALL RETURNS ALL FOUR NUMBERS AND THIS PAGE READS THEM OFF IT, on the WHOLE history
         with no late window and no classifier anywhere near it. The slope is
         {' '}{fmt(data.fit.slope, 9)} per log cycle, the intercept is {fmt(data.fit.intercept, 9)},
@@ -104,7 +105,7 @@ const Fit = () => {
         history is a power law in. The fit was handed {fmt(data.fit.handedIn, 0)} samples and used
         {' '}{fmt(data.fit.n, 0)}, dropping {fmt(data.fit.dropped, 0)}.
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         AND THE SAME HISTORY FITTED ON ITS DERIVATIVE IS A DIFFERENT MEASUREMENT ON A DIFFERENT
         SET OF SAMPLES. The derivative fit returns a slope of {fmt(data.fit.derivativeSlope, 6)}
         {' '}against the channelling THRESHOLD of {fmt(channelling ? channelling.value : null, 2)},
@@ -115,8 +116,8 @@ const Fit = () => {
         {' '}{fmt(data.fit.spanDecades, 6)}. Two slopes, two point counts, two spans, one history.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">sample</th>
               <th className="text-left pr-3">time, days</th>
@@ -132,8 +133,8 @@ const Fit = () => {
               <tr key={r.index}>
                 <td className="pr-3">{fmt(r.index, 0)}</td>
                 <td className="pr-3">{fmt(r.tDays, 6)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.ratio, 9)}</td>
-                <td className={data.samples[i].derivativeIsPositive ? 'pr-3' : 'pr-3 text-[#f97316]'}>{fmt(data.samples[i].derivative, 9)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.ratio, 9)}</td>
+                <td className={data.samples[i].derivativeIsPositive ? 'pr-3' : 'pr-3 text-pl-warning-text'}>{fmt(data.samples[i].derivative, 9)}</td>
                 <td className="pr-3">{fmt(r.fittedRatio, 9)}</td>
                 <td className="pr-3">{tiny(r.residualInLnRatio)}</td>
                 <td>{yn(data.samples[i].afterTheChoke)}</td>
@@ -194,7 +195,7 @@ const NotProof = () => {
         <Tile label="Fit quality on it, as a fraction" value={fmt(data.power.engineR2Fraction, 9)} />
         <Tile label="Shortfall from a perfect fit" value={tiny(data.power.r2ShortfallFromPerfect)} />
       </TileGrid>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         A PERFECT FIT IS EVIDENCE ABOUT THE ARITHMETIC AND NOT ABOUT THE WELL. The published case
         is eleven points on a power law and the oracle commits the slope through them by
         THEIL-SEN, the median of every pairwise slope, which shares no mean, no square and no
@@ -205,8 +206,8 @@ const NotProof = () => {
         showing.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">point</th>
               <th className="text-left pr-3">x</th>
@@ -221,7 +222,7 @@ const NotProof = () => {
               <tr key={r.index}>
                 <td className="pr-3">{fmt(r.index, 0)}</td>
                 <td className="pr-3">{fmt(r.x, 6)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.y, 9)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.y, 9)}</td>
                 <td className="pr-3">{fmt(r.lnX, 9)}</td>
                 <td className="pr-3">{fmt(r.lnY, 9)}</td>
                 <td>{fmt(r.fittedY, 9)}</td>
@@ -230,7 +231,7 @@ const NotProof = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-4 text-xs text-slate-300">
+      <div className="mt-4 text-xs text-pl-text">
         THE FILTER IS SILENT, AND THE COUNT IT RETURNS IS THE COUNT AFTER THE DROP. Hand the
         measurement {fmt(data.drop.handedIn, 0)} points of which {fmt(data.drop.dropped, 0)} are
         not strictly positive and it succeeds, returns n of {fmt(data.drop.nReturned, 0)} with a
@@ -241,23 +242,21 @@ const NotProof = () => {
         window by {fmt(data.drop.spanUnderstatedByDecades, 9)} of a log cycle. On a real history
         the samples that get dropped are the ones that argue the other way.
       </div>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={chart} margin={{ top: 10, right: 20, bottom: 24, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="name" tick={AXIS} interval={0} height={40} />
-            <YAxis tick={AXIS}
-              label={{ value: 'derivative slope', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={channelling ? channelling.value : 1.3} stroke="#f97316" strokeDasharray="4 4" />
-            <Bar dataKey="derivativeSlope" name="late derivative slope" fill="#BFFF00" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <BarChart data={chart} margin={{ top: 10, right: 20, bottom: 24, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="name" tick={AXIS} interval={0} height={40} />
+          <YAxis tick={AXIS}
+            label={{ value: 'derivative slope', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <ReferenceLine y={channelling ? channelling.value : 1.3} stroke={seriesColor(2)} strokeDasharray="4 4" />
+          <Bar dataKey="derivativeSlope" name="late derivative slope" fill={seriesColor(0)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">published history</th>
               <th className="text-left pr-3">shape</th>
@@ -274,18 +273,18 @@ const NotProof = () => {
               <tr key={h.name}>
                 <td className="pr-3">{h.name}</td>
                 <td className="pr-3">{h.form}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(h.derivativeSlope, 9)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(h.derivativeSlope, 9)}</td>
                 <td className="pr-3">{fmt(h.derivativeR2Fraction, 9)}</td>
                 <td className="pr-3">{h.mechanismLabel || 'none'}</td>
                 <td className="pr-3">{h.confidence}</td>
                 <td className="pr-3">{yn(h.ambiguous)}</td>
-                <td className={data.verdicts[i].waterShutoffBlocked ? 'text-[#f97316]' : ''}>{data.verdicts[i].waterShutoffVerdict}</td>
+                <td className={data.verdicts[i].waterShutoffBlocked ? 'text-pl-warning-text' : ''}>{data.verdicts[i].waterShutoffVerdict}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         FOUR HISTORIES, FOUR VERDICTS, AND NOT ONE OF THEM IS ASSERTED ANYWHERE. The golden
         publishes each history and a late derivative slope for it and stops. It names no expected
         mechanism, no expected confidence, no expected verdict and no expected block reason, so the
@@ -301,8 +300,8 @@ const NotProof = () => {
         that genuinely needs the plot and a person.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">what was handed in</th>
               <th className="text-left pr-3">refused</th>
@@ -314,7 +313,7 @@ const NotProof = () => {
             {data.refusals.map((r) => (
               <tr key={r.label}>
                 <td className="pr-3">{r.label}</td>
-                <td className="pr-3 text-[#f97316]">{yn(r.refused)}</td>
+                <td className="pr-3 text-pl-warning-text">{yn(r.refused)}</td>
                 <td className="pr-3">{fmt(r.n, 0)}</td>
                 <td>{r.error || 'accepted'}</td>
               </tr>
@@ -378,21 +377,19 @@ const Group = () => {
           <Tile label="The denominator at zero skin" value={fmt(data.floor.denominatorAtZeroSkin, 9)} />
         </TileGrid>
       </div>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="x" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
-              label={{ value: label, position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS} domain={['auto', 'auto']}
-              label={{ value: 'ln(re/rw) less 3/4 plus S', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line type="monotone" dataKey="denominator" name="the denominator" stroke="#BFFF00" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="x" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
+            label={{ value: label, position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS} domain={['auto', 'auto']}
+            label={{ value: 'ln(re/rw) less 3/4 plus S', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Line type="monotone" dataKey="denominator" name="the denominator" stroke={seriesColor(0)} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
+      <div className="mt-3 text-xs text-pl-text">
         EVERYTHING ABOUT WHAT A STIMULATION IS WORTH COMES OUT OF ONE GROUP, because the
         productivity index is inversely proportional to it. The group is the logarithm of the
         radius ratio, less {fmt(data.floor.pssConstant, 2)}, plus the skin. The
@@ -409,8 +406,8 @@ const Group = () => {
       </div>
       {which === 'skin' ? (
         <div className="mt-3 overflow-x-auto">
-          <table className="text-xs text-slate-300 w-full">
-            <thead className="text-slate-500">
+          <table className="text-xs text-pl-text w-full">
+            <thead className="text-pl-muted">
               <tr>
                 <th className="text-left pr-3">skin</th>
                 <th className="text-left pr-3">the denominator</th>
@@ -421,7 +418,7 @@ const Group = () => {
               {data.denominator.map((r) => (
                 <tr key={r.skin}>
                   <td className="pr-3">{fmt(r.skin, 2)}</td>
-                  <td className="pr-3 text-[#BFFF00]">{fmt(r.denominator, 9)}</td>
+                  <td className="pr-3 text-pl-primary-text">{fmt(r.denominator, 9)}</td>
                   <td>{fmt(r.flowEfficiency, 9)}</td>
                 </tr>
               ))}
@@ -430,8 +427,8 @@ const Group = () => {
         </div>
       ) : (
         <div className="mt-3 overflow-x-auto">
-          <table className="text-xs text-slate-300 w-full">
-            <thead className="text-slate-500">
+          <table className="text-xs text-pl-text w-full">
+            <thead className="text-pl-muted">
               <tr>
                 <th className="text-left pr-3">drainage radius, ft</th>
                 <th className="text-left pr-3">wellbore radius, ft</th>
@@ -447,7 +444,7 @@ const Group = () => {
                   <td className="pr-3">{fmt(r.reFt, 0)}</td>
                   <td className="pr-3">{fmt(r.rwFt, 4)}</td>
                   <td className="pr-3">{fmt(r.lnReOverRw, 9)}</td>
-                  <td className="pr-3 text-[#BFFF00]">{fmt(r.denominatorAtZeroSkin, 9)}</td>
+                  <td className="pr-3 text-pl-primary-text">{fmt(r.denominatorAtZeroSkin, 9)}</td>
                   <td className="pr-3">{fmt(r.minimumSkin, 9)}</td>
                   <td>{yn(r.published)}</td>
                 </tr>
@@ -501,21 +498,19 @@ const Floor = () => {
         <Tile label="Difference from the published value" value={tiny(data.floor.difference)} />
         <Tile label="The teaching well floor" value={fmt(data.teaching.minimumSkin, 9)} />
       </TileGrid>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="x" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
-              label={{ value: 'drainage radius, ft', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS} domain={['auto', 'auto']}
-              label={{ value: 'the most negative skin allowed', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line type="monotone" dataKey="floor" name="the floor a geometry allows" stroke="#BFFF00" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="x" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
+            label={{ value: 'drainage radius, ft', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS} domain={['auto', 'auto']}
+            label={{ value: 'the most negative skin allowed', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Line type="monotone" dataKey="floor" name="the floor a geometry allows" stroke={seriesColor(0)} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
+      <div className="mt-3 text-xs text-pl-text">
         THE FLOOR IS WHERE THE ARITHMETIC RUNS OUT, NOT WHERE THE WELL STOPS GETTING BETTER. At a
         skin of {fmt(data.floor.engineMinimumSkin, 9)} on the published geometry the denominator
         reaches zero and the productivity index goes INFINITE. That is not an aggressive design, it
@@ -528,8 +523,8 @@ const Floor = () => {
         geometry and barely a property of the guess inside it.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">drainage radius, ft</th>
               <th className="text-left pr-3">the floor</th>
@@ -541,7 +536,7 @@ const Floor = () => {
             {data.drainage.map((r) => (
               <tr key={r.reFt}>
                 <td className="pr-3">{fmt(r.reFt, 0)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.minimumSkin, 9)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.minimumSkin, 9)}</td>
                 <td className="pr-3">{fmt(r.denominatorAtZeroSkin, 9)}</td>
                 <td>{yn(r.published)}</td>
               </tr>
@@ -550,8 +545,8 @@ const Floor = () => {
         </table>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">what was handed in</th>
               <th className="text-left pr-3">refused</th>
@@ -563,7 +558,7 @@ const Floor = () => {
             {data.refusals.map((r) => (
               <tr key={r.label}>
                 <td className="pr-3">{r.label}</td>
-                <td className="pr-3 text-[#f97316]">{yn(r.refused)}</td>
+                <td className="pr-3 text-pl-warning-text">{yn(r.refused)}</td>
                 <td className="pr-3">{yn(r.isFinite)}</td>
                 <td>{r.contract}</td>
               </tr>

@@ -1,8 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, BarChart, Line, Bar, ReferenceLine,
+  LineChart, BarChart, Line, Bar, ReferenceLine,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, CHART_COLORS } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import { readingExplorer } from './surveillanceLab';
 import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
@@ -26,7 +29,7 @@ import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/comp
 
 const fmt = (v, d = 4) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: 0 })
-  : '-');
+  : 'n/a');
 
 const yn = (b) => (b ? 'yes' : 'no');
 
@@ -40,9 +43,9 @@ const MODES = [
   ['lift', 'The lift handoff, and one rate read as two phases'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const GRID = <CartesianGrid stroke="#334155" strokeDasharray="3 3" />;
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const GRID = <CartesianGrid {...GRID_STYLE} />;
 
 // --------------------------------------------------------------------------
 
@@ -81,22 +84,20 @@ const Seam = () => {
         <Tile label="Teaching rise, volumetric" value={fmt(data.teaching.gorRiseByVolumetricPct, 9)} unit="%" />
         <Tile label="Severity by each reading" value={`${data.teaching.gorSeverityByMeanOfRatios} against ${data.teaching.gorSeverityByVolumetric}`} />
       </TileGrid>
-      <div className="h-60 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 24, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="collapsed" tick={AXIS} interval={0} height={40}
-              label={{ value: 'collapsed days inside a seven day window', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS}
-              label={{ value: 'gas-oil ratio, scf/stb', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 9)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line type="monotone" dataKey="meanOfRatios" name="the MEAN OF THE DAILY RATIOS" stroke="#BFFF00" dot isAnimationActive={false} />
-            <Line type="monotone" dataKey="volumetric" name="the VOLUMETRIC reading" stroke="#38bdf8" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <ChartFrame height={240} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 24, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="collapsed" tick={AXIS} interval={0} height={40}
+            label={{ value: 'collapsed days inside a seven day window', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS}
+            label={{ value: 'gas-oil ratio, scf/stb', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 9)} />
+          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Line type="monotone" dataKey="meanOfRatios" name="the MEAN OF THE DAILY RATIOS" stroke={seriesColor(0)} dot isAnimationActive={false} />
+          <Line type="monotone" dataKey="volumetric" name="the VOLUMETRIC reading" stroke={seriesColor(1)} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
+      <div className="mt-3 text-xs text-pl-text">
         TWO FUNCTIONS IN ONE FILE FORM THE SAME TWO RATIOS TWO DIFFERENT WAYS, and the engine's own
         header states it rather than hiding it. On the published well the golden publishes the
         DISAGREEMENT rather than an expected value, which is the right thing to have done: the
@@ -115,8 +116,8 @@ const Seam = () => {
         prints the higher one.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">function</th>
               <th className="text-left pr-3">which reading it forms</th>
@@ -128,7 +129,7 @@ const Seam = () => {
             {data.readers.map((r) => (
               <tr key={r.fn}>
                 <td className="pr-3">{r.fn}</td>
-                <td className={r.reading.includes('MEAN') ? 'pr-3 text-[#BFFF00]' : 'pr-3 text-[#38bdf8]'}>{r.reading}</td>
+                <td className={r.reading.includes('MEAN') ? 'pr-3 text-pl-primary-text' : 'pr-3 text-pl-info-text'}>{r.reading}</td>
                 <td className="pr-3">{r.how}</td>
                 <td>{r.answers}</td>
               </tr>
@@ -136,7 +137,7 @@ const Seam = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-4 text-xs text-slate-300">
+      <div className="mt-4 text-xs text-pl-text">
         ON THE TEACHING WELL THE SAME SEAM IS BIGGER, AND IT CHANGES THE VERDICT RATHER THAN THE
         SEVERITY. {data.teaching.name} is built to show it: over the baseline its daily watercut
         and its daily gas-oil ratio are exactly constant, so the two readings agree exactly
@@ -159,8 +160,8 @@ const Seam = () => {
         so only in a source comment.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">day shape</th>
               <th className="text-left pr-3">oil, stb</th>
@@ -184,7 +185,7 @@ const Seam = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         WHY THE COLLAPSED DAY DRIVES THE DAILY RATIO UP. The oil falls by a factor of
         {' '}{fmt(data.collapse.oilFallsByAFactorOf, 12)}, the water by
         {' '}{fmt(data.collapse.waterFallsByAFactorOf, 12)} and the gas by only
@@ -194,8 +195,8 @@ const Seam = () => {
         earned.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">collapsed days of seven</th>
               <th className="text-left pr-3">gas-oil ratio, mean of daily ratios</th>
@@ -209,8 +210,8 @@ const Seam = () => {
             {data.sweep.map((r) => (
               <tr key={r.collapsedDays}>
                 <td className="pr-3">{fmt(r.collapsedDays, 0)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.gorMeanOfRatios, 12)}</td>
-                <td className="pr-3 text-[#38bdf8]">{fmt(r.gorVolumetric, 12)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.gorMeanOfRatios, 12)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.gorVolumetric, 12)}</td>
                 <td className="pr-3">{fmt(r.gorRatio, 12)}</td>
                 <td className="pr-3">{fmt(r.watercutDifference, 12)}</td>
                 <td>{yn(r.theTwoReadingsAreIdentical)}</td>
@@ -270,21 +271,19 @@ const Decline = () => {
         <Tile label="Spellings that silently take the exponential branch" value={fmt(data.head.spellingsThatSilentlyTakeTheExponentialBranch, 0)} />
         <Tile label="It is case one of the published golden" value={yn(data.head.itIsCaseOneOfThePublishedGolden)} />
       </TileGrid>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={chart} margin={{ top: 10, right: 20, bottom: 78, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="label" tick={{ ...AXIS, fontSize: 9 }} interval={0} angle={-35} textAnchor="end" height={90} />
-            <YAxis tick={AXIS}
-              label={{ value: 'effective decline over the first year, %', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 12)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={data.head.exponentialAnswerPct} stroke="#f97316" strokeDasharray="4 4" />
-            <Bar dataKey="effective" name="effective decline, %" fill="#BFFF00" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <ChartFrame height={256} className="mt-3">
+        <BarChart data={chart} margin={{ top: 10, right: 20, bottom: 78, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="label" tick={{ ...AXIS, fontSize: 9 }} interval={0} angle={-35} textAnchor="end" height={90} />
+          <YAxis tick={AXIS}
+            label={{ value: 'effective decline over the first year, %', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 12)} />
+          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <ReferenceLine y={data.head.exponentialAnswerPct} stroke={seriesColor(2)} strokeDasharray="4 4" />
+          <Bar dataKey="effective" name="effective decline, %" fill={seriesColor(0)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
+      <div className="mt-3 text-xs text-pl-text">
         THREE BRANCHES AND ONE CLAUSE THAT DECIDES THEM. The first branch is taken when the model
         is named exponential OR when the exponent is FALSY, and a falsy test is true for a
         not-a-number, for a null and for a missing value alike. So a hyperbolic fit whose exponent
@@ -299,8 +298,8 @@ const Decline = () => {
         from a fourth spelling of the same field.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">the exponent as handed in</th>
               <th className="text-left pr-3">model asked for</th>
@@ -315,14 +314,14 @@ const Decline = () => {
                 <td className="pr-3">{r.label}</td>
                 <td className="pr-3">{r.modelTypeAsked}</td>
                 <td className="pr-3">{yn(r.bIsFalsy)}</td>
-                <td className="pr-3 text-[#BFFF00]">{r.effectivePct === null ? 'null, refused' : fmt(r.effectivePct, 12)}</td>
-                <td className={r.itReturnedTheExponentialAnswer ? 'text-[#f97316]' : ''}>{yn(r.itReturnedTheExponentialAnswer)}</td>
+                <td className="pr-3 text-pl-primary-text">{r.effectivePct === null ? 'null, refused' : fmt(r.effectivePct, 12)}</td>
+                <td className={r.itReturnedTheExponentialAnswer ? 'text-pl-warning-text' : ''}>{yn(r.itReturnedTheExponentialAnswer)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-4 text-xs text-slate-300">
+      <div className="mt-4 text-xs text-pl-text">
         A NEGATIVE EXPONENT IS NOT REFUSED EITHER. The hyperbolic form raises the bracket to the
         power of minus one over the exponent, and at an exponent of minus a half that is a NEGATIVE
         base raised to the power two, which is a perfectly ordinary positive number. An impossible
@@ -330,8 +329,8 @@ const Decline = () => {
         bracket went negative on the way.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">nominal decline, per day</th>
               <th className="text-left pr-3">exponent</th>
@@ -345,7 +344,7 @@ const Decline = () => {
               <tr key={`${r.diPerDay}-${r.b}`}>
                 <td className="pr-3">{fmt(r.diPerDay, 6)}</td>
                 <td className="pr-3">{fmt(r.b, 4)}</td>
-                <td className={r.bracket < 0 ? 'pr-3 text-[#f97316]' : 'pr-3'}>{fmt(r.bracket, 12)}</td>
+                <td className={r.bracket < 0 ? 'pr-3 text-pl-warning-text' : 'pr-3'}>{fmt(r.bracket, 12)}</td>
                 <td className="pr-3">{fmt(r.exponent, 6)}</td>
                 <td>{r.effectivePct === null ? 'null, refused' : fmt(r.effectivePct, 12)}</td>
               </tr>
@@ -353,14 +352,14 @@ const Decline = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-4 text-xs text-slate-300">
+      <div className="mt-4 text-xs text-pl-text">
         WHAT IS GUARDED, AND IT IS GUARDED PROPERLY: the nominal decline itself. A zero, a negative
         value, a not-a-number and a null all come back as a null rather than as a number nobody can
         distrust, which is the contract the exponent should have had.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">the nominal decline as handed in</th>
               <th className="text-left pr-3">effective decline, %</th>
@@ -373,14 +372,14 @@ const Decline = () => {
               <tr key={r.label}>
                 <td className="pr-3">{r.label}</td>
                 <td className="pr-3">{r.effectivePct === null ? 'null' : fmt(r.effectivePct, 12)}</td>
-                <td className={r.refused ? 'pr-3 text-[#f97316]' : 'pr-3'}>{yn(r.refused)}</td>
+                <td className={r.refused ? 'pr-3 text-pl-warning-text' : 'pr-3'}>{yn(r.refused)}</td>
                 <td>{r.contract}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-4 text-xs text-slate-300">
+      <div className="mt-4 text-xs text-pl-text">
         AND THE SERIES THE FITTER IS HANDED, WHICH IS WHAT SURVEILLANCE ACTUALLY OWNS. Decline is
         NOT re-derived here: the overlay calls the canonical Arps engine, and a second decline
         implementation would be a second thing to be wrong. What this module owns is the series it
@@ -390,8 +389,8 @@ const Decline = () => {
         contradiction in the ledger and the function resolves it by deleting the day.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">basis</th>
               <th className="text-left pr-3">points handed in</th>
@@ -406,7 +405,7 @@ const Decline = () => {
                 <td className="pr-3">{r.basis}</td>
                 <td className="pr-3">{fmt(r.pointsHandedIn, 0)}</td>
                 <td className="pr-3">{fmt(r.pointsKept, 0)}</td>
-                <td className={r.pointsDropped > 0 ? 'pr-3 text-[#f97316]' : 'pr-3'}>{fmt(r.pointsDropped, 0)}</td>
+                <td className={r.pointsDropped > 0 ? 'pr-3 text-pl-warning-text' : 'pr-3'}>{fmt(r.pointsDropped, 0)}</td>
                 <td>{r.dates}</td>
               </tr>
             ))}
@@ -414,8 +413,8 @@ const Decline = () => {
         </table>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">teaching well</th>
               <th className="text-left pr-3">stream and basis</th>
@@ -435,15 +434,15 @@ const Decline = () => {
                 <td className="pr-3">{r.modelType || 'none'}</td>
                 <td className="pr-3">{fmt(r.qi, 6)}</td>
                 <td className="pr-3">{fmt(r.diPerDay, 12)}</td>
-                <td className="text-[#BFFF00]">{fmt(r.annualEffectivePct, 12)}</td>
+                <td className="text-pl-primary-text">{fmt(r.annualEffectivePct, 12)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">what the fitter was handed</th>
               <th className="text-left pr-3">usable points</th>
@@ -455,7 +454,7 @@ const Decline = () => {
               <tr key={r.label}>
                 <td className="pr-3">{r.label}</td>
                 <td className="pr-3">{fmt(r.usablePoints, 0)}</td>
-                <td className="text-[#BFFF00]">{yn(r.itCameBackInsufficientRatherThanAsADeclineOfZero)}</td>
+                <td className="text-pl-primary-text">{yn(r.itCameBackInsufficientRatherThanAsADeclineOfZero)}</td>
               </tr>
             ))}
           </tbody>
@@ -518,23 +517,21 @@ const Guards = () => {
         <Tile label="Sweep points that come back OVER the cap" value={fmt(data.decimateHead.pointsOverTheCap, 0)} />
         <Tile label="Sweep points at half the budget or less" value={fmt(data.decimateHead.pointsAtHalfTheBudgetOrLess, 0)} />
       </TileGrid>
-      <div className="h-60 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 24, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="n" tick={AXIS} type="number" scale="log" domain={['dataMin', 'dataMax']}
-              label={{ value: 'points handed in', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS}
-              label={{ value: 'points returned', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 0)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={1500} stroke="#f97316" strokeDasharray="4 4" />
-            <Line type="monotone" dataKey="out" name="points returned" stroke="#BFFF00" dot isAnimationActive={false} />
-            <Line type="monotone" dataKey="cap" name="the maximum the argument names" stroke="#38bdf8" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <ChartFrame height={240} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 24, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="n" tick={AXIS} type="number" scale="log" domain={['dataMin', 'dataMax']}
+            label={{ value: 'points handed in', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS}
+            label={{ value: 'points returned', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 0)} />
+          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <ReferenceLine y={1500} stroke={seriesColor(2)} strokeDasharray="4 4" />
+          <Line type="monotone" dataKey="out" name="points returned" stroke={seriesColor(0)} dot isAnimationActive={false} />
+          <Line type="monotone" dataKey="cap" name="the maximum the argument names" stroke={seriesColor(1)} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
+      <div className="mt-3 text-xs text-pl-text">
         A NUMBER THAT NAMES A MAXIMUM AND DOES NOT ENFORCE ONE. The decimator takes a maximum point
         count and strides by a CEILING, and the stride is an integer, so the returned count lands
         wherever the rounding puts it. Ask for at most {fmt(data.decimateHead.publishedMaxPoints, 0)}
@@ -551,8 +548,8 @@ const Guards = () => {
         quoting it.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">points in</th>
               <th className="text-left pr-3">maximum asked for</th>
@@ -568,15 +565,15 @@ const Guards = () => {
                 <td className="pr-3">{fmt(r.n, 0)}</td>
                 <td className="pr-3">{fmt(r.maxPoints, 0)}</td>
                 <td className="pr-3">{fmt(r.stride, 0)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.outLength, 0)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.outLength, 0)}</td>
                 <td className="pr-3">{fmt(r.outOverMaxPoints, 9)}</td>
-                <td className={r.overTheCapItsOwnArgumentNames ? 'text-[#f97316]' : ''}>{yn(r.overTheCapItsOwnArgumentNames)}</td>
+                <td className={r.overTheCapItsOwnArgumentNames ? 'text-pl-warning-text' : ''}>{yn(r.overTheCapItsOwnArgumentNames)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-4 text-xs text-slate-300">
+      <div className="mt-4 text-xs text-pl-text">
         THE MINIMUM RATE GATE COVERS THE RATE CHECK AND THE RATIO CHECK AND NOT THE WATERCUT CHECK.
         On a constructed well whose baseline oil is {fmt(data.minOilHead.baselineOil, 6)} stb/d and
         whose recent oil is {fmt(data.minOilHead.recentOil, 6)} stb/d, the oil actually fell
@@ -589,8 +586,8 @@ const Guards = () => {
         {' '}{yn(data.minOilHead.theWellIsTooSmallToHaveItsRateCollapseReportedAndStillRaisesAHighWatercut)}.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">minimum rate, stb/d</th>
               <th className="text-left pr-3">the default</th>
@@ -607,7 +604,7 @@ const Guards = () => {
                 <td className="pr-3">{yn(r.isTheDefault)}</td>
                 <td className="pr-3">{yn(r.rateDropRaised)}</td>
                 <td className="pr-3">{yn(r.gorRiseRaised)}</td>
-                <td className={r.watercutRiseRaised ? 'pr-3 text-[#f97316]' : 'pr-3'}>{yn(r.watercutRiseRaised)}</td>
+                <td className={r.watercutRiseRaised ? 'pr-3 text-pl-warning-text' : 'pr-3'}>{yn(r.watercutRiseRaised)}</td>
                 <td>{r.raised}</td>
               </tr>
             ))}
@@ -615,8 +612,8 @@ const Guards = () => {
         </table>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">a well that stops altogether</th>
               <th className="text-left pr-3">baseline oil, stb/d</th>
@@ -632,13 +629,13 @@ const Guards = () => {
                 <td className="pr-3">{fmt(r.baselineOil, 4)}</td>
                 <td className="pr-3">{yn(r.aboveTheMinimumRateGate)}</td>
                 <td className="pr-3">{yn(r.shutInRaised)}</td>
-                <td className={r.exceptionsRaised === 0 ? 'text-[#f97316]' : ''}>{r.raised}</td>
+                <td className={r.exceptionsRaised === 0 ? 'text-pl-warning-text' : ''}>{r.raised}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-4 text-xs text-slate-300">
+      <div className="mt-4 text-xs text-pl-text">
         THE DOWNTIME TEST REFUSES AT EXACTLY ZERO HOURS. The condition is that the mean hours are
         below the threshold AND above zero, so a mean of exactly zero, which is a well that
         recorded itself shut for the whole window, is the one value the check refuses to report.
@@ -649,8 +646,8 @@ const Guards = () => {
         doubling point at all.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">mean recent hours</th>
               <th className="text-left pr-3">below the threshold</th>
@@ -666,7 +663,7 @@ const Guards = () => {
                 <td className="pr-3">{fmt(r.recentHours, 4)}</td>
                 <td className="pr-3">{yn(r.belowTheThreshold)}</td>
                 <td className="pr-3">{yn(r.aboveZero)}</td>
-                <td className={r.downtimeRaised ? 'pr-3' : 'pr-3 text-[#f97316]'}>{yn(r.downtimeRaised)}</td>
+                <td className={r.downtimeRaised ? 'pr-3' : 'pr-3 text-pl-warning-text'}>{yn(r.downtimeRaised)}</td>
                 <td className="pr-3">{r.downtimeSeverity}</td>
                 <td>{r.raised}</td>
               </tr>
@@ -674,7 +671,7 @@ const Guards = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-4 text-xs text-slate-300">
+      <div className="mt-4 text-xs text-pl-text">
         AND THE STALE CHECK RETURNS EARLY AND CANNOT EXCEED MEDIUM. A well that has not reported for
         months raises exactly one exception, at medium, and every other comparison on that well is
         skipped because the windows would be empty. It therefore ranks below every high-severity
@@ -682,8 +679,8 @@ const Guards = () => {
         takes it only from info to medium, and doubling it again does nothing at all.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">gap, days</th>
               <th className="text-left pr-3">threshold, days</th>
@@ -707,7 +704,7 @@ const Guards = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-4 text-xs text-slate-300">
+      <div className="mt-4 text-xs text-pl-text">
         A CLAUSE THAT CAN NEVER BE TRUE, PROVED BY CONSTRUCTION RATHER THAN BY ARGUMENT. The
         gas-oil ratio gate carries an escape hatch for a null baseline, and the baseline is null
         only when the window holds no points at all, in which case the gate has already shut two
@@ -717,8 +714,8 @@ const Guards = () => {
         {' '}{fmt(data.unreachableHead.constructionsInWhichTheEscapeHatchCouldFire, 0)}.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">oil per row, stb</th>
               <th className="text-left pr-3">gas per row, Mscf</th>
@@ -740,7 +737,7 @@ const Guards = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-4 text-xs text-slate-300">
+      <div className="mt-4 text-xs text-pl-text">
         AND THE SAME ABSENT COLUMN, READ BY TWO MODULES THAT DISAGREE ABOUT IT. Surveillance reads a
         missing hours column as UPTIME UNKNOWN and leaves the volume unscaled; allocation reads the
         identical column as TWENTY-FOUR HOURS ON and gives the well a full share. The unscaled
@@ -750,8 +747,8 @@ const Guards = () => {
         both call the same finite test.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">the hours column spelled</th>
               <th className="text-left pr-3">surveillance reading</th>
@@ -769,15 +766,15 @@ const Guards = () => {
                 <td className="pr-3">{r.surveillanceOilPd === null ? 'null' : fmt(r.surveillanceOilPd, 9)}</td>
                 <td className="pr-3">{r.allocationUptime === null ? 'took no share' : fmt(r.allocationUptime, 9)}</td>
                 <td className="pr-3">{r.allocationTheoreticalOil === null ? 'none' : fmt(r.allocationTheoreticalOil, 6)}</td>
-                <td className={r.theSameNumberIsNotTheSameClaim ? 'text-[#f97316]' : ''}>{yn(r.theSameNumberIsNotTheSameClaim)}</td>
+                <td className={r.theSameNumberIsNotTheSameClaim ? 'text-pl-warning-text' : ''}>{yn(r.theSameNumberIsNotTheSameClaim)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">function</th>
               <th className="text-left pr-3">the clause</th>
@@ -852,25 +849,23 @@ const Lift = () => {
         <Tile label="The largest single move in the sweep" value={fmt(data.head.largestSingleMovePoints, 0)} unit="points" />
         <Tile label="Where it happens" value={`${data.head.largestSingleMoveMethod} at ${fmt(data.head.largestSingleMoveAtOilRateBpd, 0)} bbl/d`} />
       </TileGrid>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={chart} margin={{ top: 10, right: 20, bottom: 24, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="oil" tick={AXIS} interval={0} height={40}
-              label={{ value: 'the rate handed over, read as oil, bbl/d', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS}
-              label={{ value: 'score read as liquid less score read as oil', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 0)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={0} stroke="#64748b" />
-            <Bar dataKey="plunger" name="plunger lift" fill="#f97316" isAnimationActive={false} />
-            <Bar dataKey="rodPump" name="rod pump" fill="#BFFF00" isAnimationActive={false} />
-            <Bar dataKey="esp" name="ESP" fill="#38bdf8" isAnimationActive={false} />
-            <Bar dataKey="gasLift" name="gas lift" fill="#f472b6" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <ChartFrame height={256} className="mt-3">
+        <BarChart data={chart} margin={{ top: 10, right: 20, bottom: 24, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="oil" tick={AXIS} interval={0} height={40}
+            label={{ value: 'the rate handed over, read as oil, bbl/d', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS}
+            label={{ value: 'score read as liquid less score read as oil', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 0)} />
+          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <ReferenceLine y={0} stroke={SVG_CHART.reference} />
+          <Bar dataKey="plunger" name="plunger lift" fill={seriesColor(2)} isAnimationActive={false} />
+          <Bar dataKey="rodPump" name="rod pump" fill={seriesColor(0)} isAnimationActive={false} />
+          <Bar dataKey="esp" name="ESP" fill={seriesColor(1)} isAnimationActive={false} />
+          <Bar dataKey="gasLift" name="gas lift" fill={seriesColor(4)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
+      <div className="mt-3 text-xs text-pl-text">
         THE SURVEILLANCE HALF OF THIS DOMAIN ENDS AT A RATE AND THE LIFT HALF BEGINS AT ONE, AND
         THE TWO MODULES THAT RECEIVE IT DISAGREE ABOUT WHICH PHASE IT IS. The screening matrix
         documents its target rate as bbl/d of LIQUID; the design advisor compares the identical
@@ -885,7 +880,7 @@ const Lift = () => {
         {' '}{data.published.asLiquidOrder.join(', ')}, with the rod pump moving
         {' '}{fmt(data.published.deltas.rodPump, 0)} points.
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         ON THE TEACHING WELL THE HANDOFF IS A REAL CHAIN. The rate comes off the last allocated day
         for the uptime well, {fmt(data.handoff.targetRateBpd, 12)} bbl/d on
         {' '}{data.handoff.date}, and the water cut of {fmt(data.handoff.wctPct, 9)} per cent and
@@ -903,8 +898,8 @@ const Lift = () => {
         {' '}{fmt(data.head.dutyIndexReachesSixAtBpd, 9)} bbl/d.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">the same well screened</th>
               <th className="text-left pr-3">scores</th>
@@ -924,7 +919,7 @@ const Lift = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-4 text-xs text-slate-300">
+      <div className="mt-4 text-xs text-pl-text">
         THE DELTAS COLUMN IS THE FINDING. Wherever it is not all zeroes, one number read two ways
         has moved a screening score without one datum about the well changing. Over
         {' '}{fmt(data.head.ratesSwept, 0)} rates, {fmt(data.head.methodsThatMoveSomewhere, 0)} of
@@ -939,8 +934,8 @@ const Lift = () => {
         impossible print the same zero.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">oil rate, bbl/d</th>
               <th className="text-left pr-3">liquid rate, bbl/d</th>
@@ -957,14 +952,14 @@ const Lift = () => {
                 <td className="pr-3">{fmt(r.liquidRateBpd, 9)}</td>
                 <td className="pr-3">{scoreList(r.asOilScores)}</td>
                 <td className="pr-3">{scoreList(r.asLiquidScores)}</td>
-                <td className={r.methodsThatMoved.length ? 'pr-3 text-[#f97316]' : 'pr-3'}>{r.methodsThatMoved.join(', ') || 'none'}</td>
+                <td className={r.methodsThatMoved.length ? 'pr-3 text-pl-warning-text' : 'pr-3'}>{r.methodsThatMoved.join(', ') || 'none'}</td>
                 <td>{r.recommendedAsOil.join(' ')} then {r.recommendedAsLiquid.join(' ')}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-4 text-xs text-slate-300">
+      <div className="mt-4 text-xs text-pl-text">
         AND THE COERCION CONVENTIONS FOR ONE QUANTITY CONTRADICT EACH OTHER TWO FILES APART. The
         screening matrix coerces an absent API to ZERO, and zero reads as heavier than any real
         crude; the design advisor coerces the same absent API to a thirty-two degree oil, and a
@@ -977,8 +972,8 @@ const Lift = () => {
         gives {scoreList(data.empty.scoresWithPowerAndGasStatedAbsent)}.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">the API as handed in</th>
               <th className="text-left pr-3">liquid gravity at zero water cut</th>
@@ -993,7 +988,7 @@ const Lift = () => {
               <tr key={r.label}>
                 <td className="pr-3">{r.label}</td>
                 <td className="pr-3">{fmt(r.liquidGravityAtZeroWatercut, 12)}</td>
-                <td className={r.denserThanWater ? 'pr-3 text-[#f97316]' : 'pr-3'}>{yn(r.denserThanWater)}</td>
+                <td className={r.denserThanWater ? 'pr-3 text-pl-warning-text' : 'pr-3'}>{yn(r.denserThanWater)}</td>
                 <td className="pr-3">{fmt(r.espScore, 0)}</td>
                 <td className="pr-3">{fmt(r.pcpScore, 0)}</td>
                 <td>{fmt(r.rodPumpScore, 0)}</td>
@@ -1003,8 +998,8 @@ const Lift = () => {
         </table>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">a model-driven screening</th>
               <th className="text-left pr-3">API stated</th>
@@ -1026,7 +1021,7 @@ const Lift = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-4 text-xs text-slate-300">
+      <div className="mt-4 text-xs text-pl-text">
         THE RECOMMENDATION BAND CAN BE EMPTY AND NOTHING IN THE RETURN SAYS SO. The band is any
         score within fifteen of the leader that also clears fifty, so on a well where the leader
         itself fails to clear fifty every method comes back not recommended and the caller gets a
@@ -1035,7 +1030,7 @@ const Lift = () => {
         {' '}{fmt(data.band.recommendedCount, 0)} of {fmt(data.band.methods, 0)} methods are
         recommended: {scoreList(data.band.scores)}.
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         AND THE DESIGN PASS ON THE SAME WELL REPORTS ITS OWN CALL AND NOT THE WELL. Run with no
         chains injected it comes back with {fmt(data.pass.methods, 0)} methods, of which
         {' '}{fmt(data.pass.threeRefusalsAreTheSameSentenceAndMeanOnlyThatNoChainWasInjected, 0)}
@@ -1051,8 +1046,8 @@ const Lift = () => {
         its verdict to a sixth name that no input can produce.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">method</th>
               <th className="text-left pr-3">the design succeeded</th>
@@ -1067,7 +1062,7 @@ const Lift = () => {
                 <td className="pr-3">{r.id}</td>
                 <td className="pr-3">{yn(r.ok)}</td>
                 <td className="pr-3">{data.pass.verdicts[r.id]}</td>
-                <td className={r.itSaysNothingAboutTheWell ? 'pr-3 text-[#f97316]' : 'pr-3'}>{yn(r.itSaysNothingAboutTheWell)}</td>
+                <td className={r.itSaysNothingAboutTheWell ? 'pr-3 text-pl-warning-text' : 'pr-3'}>{yn(r.itSaysNothingAboutTheWell)}</td>
                 <td>{r.reason || 'it ran'}</td>
               </tr>
             ))}
@@ -1075,8 +1070,8 @@ const Lift = () => {
         </table>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">duty, bbl/d</th>
               <th className="text-left pr-3">stage picked</th>
@@ -1094,7 +1089,7 @@ const Lift = () => {
                 <td className="pr-3">{fmt(r.pickedBepBpd, 0)}</td>
                 <td className="pr-3">{fmt(r.pickedDistance, 4)}</td>
                 <td className="pr-3">{r.nearestBepId}</td>
-                <td className={r.theyAgree ? '' : 'text-[#f97316]'}>{yn(r.theyAgree)}</td>
+                <td className={r.theyAgree ? '' : 'text-pl-warning-text'}>{yn(r.theyAgree)}</td>
               </tr>
             ))}
           </tbody>

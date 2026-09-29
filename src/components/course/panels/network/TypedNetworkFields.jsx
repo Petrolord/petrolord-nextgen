@@ -4,6 +4,7 @@ import {
   TEACHING_NETWORK_NAME, DEFAULT_TOLERANCE_LB_D, DEFAULT_MAX_ITER,
 } from './networkLab';
 import { SelectField, NumField, Tile, TileGrid, FieldGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { THEMED_INPUT } from '@/components/ui/input';
 
 // A NETWORK THE LEARNER TYPES, shared by the Network explorer (the solve) and
 // the Fight explorer (the solve plus what it hides). One input component and
@@ -23,8 +24,8 @@ export const TYPED_PRINT_DP = Object.freeze({
   fraction: 12,
 });
 
-const fx = (v, d) => (Number.isFinite(v) ? Number(v).toFixed(d) : '-');
-const tiny = (v) => (Number.isFinite(v) ? (v === 0 ? '0' : Number(v).toExponential(6)) : '-');
+const fx = (v, d) => (Number.isFinite(v) ? Number(v).toFixed(d) : 'n/a');
+const tiny = (v) => (Number.isFinite(v) ? (v === 0 ? '0' : Number(v).toExponential(6)) : 'n/a');
 const yn = (b) => (b ? 'yes' : 'no');
 const str = (v) => (v === undefined || v === null ? '' : String(v));
 
@@ -47,9 +48,9 @@ const initialState = () => ({
 
 const TextField = ({ label, value, onChange }) => (
   <div>
-    <div className="text-gray-400 text-xs mb-1">{label}</div>
+    <div className="text-pl-muted text-xs mb-1">{label}</div>
     <input type="text" value={value} onChange={(e) => onChange(e.target.value)}
-      className="w-full bg-gray-700 text-white border border-gray-600 rounded-md h-8 text-sm px-2" />
+      className={THEMED_INPUT} />
   </div>
 );
 
@@ -67,7 +68,7 @@ const TypedNetworkInputs = ({ s, setTop, setRow, advanced }) => {
         <NumField label="Tolerance" value={s.tolerance} onChange={(v) => setTop('tolerance', v)} />
         <NumField label="Iteration cap" value={s.maxIter} onChange={(v) => setTop('maxIter', v)} />
       </FieldGrid>
-      <div className="mt-3 text-xs text-slate-400">Internal nodes. A blank name leaves the slot unused.</div>
+      <div className="mt-3 text-xs text-pl-muted">Internal nodes. A blank name leaves the slot unused.</div>
       <div className="mt-1">
         <FieldGrid>
           {s.nodes.map((n, i) => (
@@ -76,11 +77,11 @@ const TypedNetworkInputs = ({ s, setTop, setRow, advanced }) => {
           ))}
         </FieldGrid>
       </div>
-      <div className="mt-3 text-xs text-slate-400">
+      <div className="mt-3 text-xs text-pl-muted">
         Wells. Leave the allocation or the capacity limit blank for none. A well with no name and no numbers is left off.
       </div>
       {s.wells.map((w, i) => (
-        <div key={`well-${i + 1}`} className="mt-2 rounded-md border border-gray-700 p-2">
+        <div key={`well-${i + 1}`} className="mt-2 rounded-md border border-pl-border p-2">
           <FieldGrid>
             <TextField label={`Well ${i + 1} name`} value={w.name} onChange={(v) => setRow('wells', i, { name: v })} />
             <NumField label="Vogel qmax, lb/d" value={w.qmax} onChange={(v) => setRow('wells', i, { qmax: v })} />
@@ -100,11 +101,11 @@ const TypedNetworkInputs = ({ s, setTop, setRow, advanced }) => {
           </FieldGrid>
         </div>
       ))}
-      <div className="mt-3 text-xs text-slate-400">
+      <div className="mt-3 text-xs text-pl-muted">
         Branches between internal nodes and the separator, each signed from its drawn start to its drawn end.
       </div>
       {s.branches.map((b, i) => (
-        <div key={`branch-${i + 1}`} className="mt-2 rounded-md border border-gray-700 p-2">
+        <div key={`branch-${i + 1}`} className="mt-2 rounded-md border border-pl-border p-2">
           <FieldGrid>
             <TextField label={`Branch ${i + 1} name`} value={b.name} onChange={(v) => setRow('branches', i, { name: v })} />
             <SelectField label="Drawn from" value={b.from} onChange={(v) => setRow('branches', i, { from: v })} options={endOptions} />
@@ -135,8 +136,8 @@ const TypedNetworkResults = ({ r, advanced }) => (
       </TileGrid>
     </div>
     <div className="mt-3 overflow-x-auto">
-      <table className="text-xs text-slate-300 w-full">
-        <thead className="text-slate-500">
+      <table className="text-xs text-pl-text w-full">
+        <thead className="text-pl-muted">
           <tr><Th>node</Th><Th>kind</Th><Th>pressure, psia</Th><Th>pinned</Th></tr>
         </thead>
         <tbody>
@@ -152,8 +153,8 @@ const TypedNetworkResults = ({ r, advanced }) => (
       </table>
     </div>
     <div className="mt-3 overflow-x-auto">
-      <table className="text-xs text-slate-300 w-full">
-        <thead className="text-slate-500">
+      <table className="text-xs text-pl-text w-full">
+        <thead className="text-pl-muted">
           <tr>
             <Th>branch</Th><Th>drawn from</Th><Th>drawn to</Th>
             <Th>mass, lb/d, signed in the drawn sense</Th><Th>runs as drawn</Th>
@@ -181,8 +182,8 @@ const TypedNetworkResults = ({ r, advanced }) => (
       </table>
     </div>
     <div className="mt-3 overflow-x-auto">
-      <table className="text-xs text-slate-300 w-full">
-        <thead className="text-slate-500">
+      <table className="text-xs text-pl-text w-full">
+        <thead className="text-pl-muted">
           <tr><Th>well</Th><Th>rate on the system, lb/d</Th><Th>wellhead, psia</Th><Th>flowline mass, lb/d</Th><Th>pinned</Th></tr>
         </thead>
         <tbody>
@@ -201,12 +202,12 @@ const TypedNetworkResults = ({ r, advanced }) => (
     {advanced && r.streams && !r.streams.ok && <Note>Streams: {r.streams.error}</Note>}
     {advanced && r.linear && (r.linear.ok ? (
       <div className="mt-3 overflow-x-auto">
-        <div className="text-xs text-slate-400 mb-1">
+        <div className="text-xs text-pl-muted mb-1">
           The linearised twin: every branch at its linear k in lb/d per psi, every well as q = qmax (1 - p/pr), no allocation
           and no capacity limit, solved by the weighted graph Laplacian with no iteration.
         </div>
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr><Th>node</Th><Th>kind</Th><Th>linear twin pressure, psia</Th></tr>
           </thead>
           <tbody>
@@ -236,7 +237,7 @@ export const TypedNetworkView = ({ advanced = false }) => {
   const r = useMemo(() => typedNetwork(s, { streams: advanced, linear: advanced }), [s, advanced]);
   return (
     <>
-      <div className="text-xs text-slate-300">
+      <div className="text-xs text-pl-text">
         Type a gathering system and solve it whole. The view opens on the {TEACHING_NETWORK_NAME} teaching network at the
         module default tolerance of {String(DEFAULT_TOLERANCE_LB_D)} and iteration cap of {DEFAULT_MAX_ITER}, and every input
         can be retyped.
