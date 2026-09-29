@@ -72,7 +72,7 @@ const Objects = () => {
           <tbody>
             {d.objects.map((o) => (
               <tr key={o.object}>
-                <td className="pr-3 text-pl-primary-text">{o.object}</td>
+                <td className="pr-3 text-pl-info-text">{o.object}</td>
                 <td className="pr-3">{o.module}</td>
                 <td className="pr-3">{o.owns}</td>
                 <td className={o.needsAMarch ? 'text-pl-accent-text' : ''}>{o.needsAMarch ? 'yes' : 'no'}</td>
@@ -190,7 +190,7 @@ const Taper = () => {
           <tbody>
             {s.sections.map((sec) => (
               <tr key={sec.index}>
-                <td className="pr-3 text-pl-primary-text">{sec.label}</td>
+                <td className="pr-3 text-pl-info-text">{sec.label}</td>
                 <td className="pr-3">{fmt(sec.lengthFt, 0)}</td>
                 <td className="pr-3">{fmt(sec.areaIn2, 9)}</td>
                 <td className="pr-3">{fmt(sec.weightLbPerFt, 4)}</td>
@@ -254,9 +254,9 @@ const Taper = () => {
                 <td className="pr-3">{fmt(r.topFt, 0)}</td>
                 <td className="pr-3">{fmt(r.weightAirLb, 6)}</td>
                 <td className="pr-3">{fmt(r.weightFluidLb, 6)}</td>
-                <td className="pr-3 text-pl-primary-text">{fmt(r.krLbPerIn, 9)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.krLbPerIn, 9)}</td>
                 <td className="pr-3">{fmt(r.stretchUnder5000LbIn, 6)}</td>
-                <td className="text-pl-info-text">{fmt(r.fundamentalSpm, 9)}</td>
+                <td className="text-pl-primary-text">{fmt(r.fundamentalSpm, 9)}</td>
               </tr>
             ))}
           </tbody>
@@ -524,8 +524,8 @@ const Linkage = () => {
               <tr key={r.crankDeg}>
                 <td className="pr-3">{fmt(r.crankDeg, 1)}</td>
                 <td className="pr-3">{fmt(r.psiRad, 9)}</td>
-                <td className="pr-3 text-pl-primary-text">{fmt(r.positionIn, 9)}</td>
-                <td className="pr-3 text-pl-info-text">{fmt(r.torqueFactorIn, 9)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.positionIn, 9)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.torqueFactorIn, 9)}</td>
                 <td>{fmt(r.velocityInPerS, 9)}</td>
               </tr>
             ))}
@@ -582,7 +582,7 @@ const Linkage = () => {
                 <td className="pr-3 text-pl-accent-text">{c.ok ? fmt(c.strokeOverCrank, 9) : '-'}</td>
                 <td className="pr-3">{d.arm[i] ? fmt(d.arm[i].aIn, 4) : ''}</td>
                 <td className="pr-3">{d.arm[i] ? fmt(d.arm[i].strokeIn, 9) : ''}</td>
-                <td className="text-pl-primary-text">{d.arm[i] ? fmt(d.arm[i].strokeOverArm, 12) : ''}</td>
+                <td className="text-pl-info-text">{d.arm[i] ? fmt(d.arm[i].strokeOverArm, 12) : ''}</td>
               </tr>
             ))}
           </tbody>
@@ -614,7 +614,7 @@ const Linkage = () => {
           <tbody>
             {d.designations.map((r) => (
               <tr key={r.designation}>
-                <td className="pr-3 text-pl-primary-text">{r.designation}</td>
+                <td className="pr-3 text-pl-info-text">{r.designation}</td>
                 <td className="pr-3">{r.kind}</td>
                 <td className="pr-3">{fmt(r.torqueRatingInLb, 0)}</td>
                 <td className="pr-3">{fmt(r.structuralCapacityLb, 0)}</td>
@@ -682,7 +682,7 @@ const Pump = () => {
                 <td className="pr-3">{fmt(r.areaIn2, 9)}</td>
                 <td className="pr-3">{fmt(r.fluidLoadLb, 6)}</td>
                 <td className="pr-3">{fmt(r.volumePerStrokeIn3, 6)}</td>
-                <td className="pr-3 text-pl-primary-text">{fmt(r.ratedBpd, 9)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.ratedBpd, 9)}</td>
                 <td className="pr-3 text-pl-accent-text">{fmt(r.areaFormBpd, 9)}</td>
                 <td>{fmt(r.understatedPct, 6)}</td>
               </tr>
@@ -710,7 +710,7 @@ const Pump = () => {
             {d.fluidLoads.map((r) => (
               <tr key={r.dpPsi}>
                 <td className="pr-3">{fmt(r.dpPsi, 1)}</td>
-                <td className="pr-3 text-pl-primary-text">{fmt(r.loadLb, 9)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.loadLb, 9)}</td>
                 <td>{fmt(r.staticStretchIn, 9)}</td>
               </tr>
             ))}

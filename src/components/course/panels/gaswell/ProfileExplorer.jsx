@@ -109,11 +109,11 @@ const Traverse = () => {
             {rows.map((r) => (
               <tr key={r.depthFt}>
                 <td className="pr-3">{fmt(r.depthFt, 1)}</td>
-                <td className="pr-3 text-pl-primary-text">{fmt(r.pPsia, 1)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.pPsia, 1)}</td>
                 <td className="pr-3">{fmt(r.tF, 2)}</td>
                 <td className="pr-3">{fmt(r.tempR, 2)}</td>
                 <td className="pr-3">{fmt(r.z, 10)}</td>
-                <td className="pr-3 text-pl-info-text">{fmt(r.rhoGasLbFt3, 10)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.rhoGasLbFt3, 10)}</td>
                 <td>{fmt(r.idIn, 3)}</td>
               </tr>
             ))}
@@ -212,7 +212,7 @@ const Profile = () => {
                 <td className="pr-3">{fmt(r.criticalVelocityFtS, 10)}</td>
                 <td className="pr-3">{fmt(r.criticalRateMscfd, 9)}</td>
                 <td className="pr-3">{fmt(r.actualVelocityFtS, 10)}</td>
-                <td className="pr-3 text-pl-primary-text">{fmt(r.ratio, 10)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.ratio, 10)}</td>
                 <td className="pr-3">{yn(r.loaded)}</td>
                 <td className="pr-3">{r.criticalRateRiseMscfd === null ? '-' : fmt(r.criticalRateRiseMscfd, 9)}</td>
                 <td>{r.ratioFall === null ? '-' : fmt(r.ratioFall, 10)}</td>
@@ -292,7 +292,7 @@ const Rates = () => {
             {data.rows.map((r) => (
               <tr key={r.qMscfd} className={r.loaded ? 'text-pl-warning-text' : ''}>
                 <td className="pr-3">{fmt(r.qMscfd, 1)}</td>
-                <td className="pr-3 text-pl-primary-text">{r.ratios.map((x) => fmt(x, 6)).join(', ')}</td>
+                <td className="pr-3 text-pl-info-text">{r.ratios.map((x) => fmt(x, 6)).join(', ')}</td>
                 <td className="pr-3">{yn(r.loaded)}</td>
                 <td className="pr-3">{fmt(r.marginPct, 6)}</td>
                 <td>{r.shallowestLoadingDepthFt === null ? 'none' : `${fmt(r.shallowestLoadingDepthFt, 1)} ft`}</td>
@@ -394,7 +394,7 @@ const Sizing = () => {
                 <td className="pr-3">{fmt(r.criticalVelocityFtS, 10)}</td>
                 <td className="pr-3">{fmt(r.criticalRateMscfd, 9)}</td>
                 <td className="pr-3">{fmt(r.actualVelocityFtS, 10)}</td>
-                <td className="pr-3 text-pl-primary-text">{fmt(r.ratio, 10)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.ratio, 10)}</td>
                 <td>{yn(r.unloads)}</td>
               </tr>
             ))}
@@ -500,7 +500,7 @@ const Plunger = () => {
             {terms.map(([label, psi]) => (
               <tr key={label}>
                 <td className="pr-3">{label}</td>
-                <td className="pr-3 text-pl-primary-text">{fmt(psi, 10)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(psi, 10)}</td>
                 <td>{fmt((psi / screen.requiredPsia) * 100, 4)} %</td>
               </tr>
             ))}

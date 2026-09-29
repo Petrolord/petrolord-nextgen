@@ -170,8 +170,8 @@ const Seam = () => {
               <tr key={r.depthFt} className={r.verdictsAgree ? '' : 'text-pl-warning-text'}>
                 <td className="pr-3">{fmt(r.depthFt, 1)}</td>
                 <td className="pr-3">{fmt(r.pPsia, 1)}</td>
-                <td className="pr-3 text-pl-info-text">{fmt(r.colemanCriticalRateMscfd, 9)}</td>
-                <td className="pr-3 text-pl-primary-text">{fmt(r.turnerCriticalRateMscfd, 9)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.colemanCriticalRateMscfd, 9)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.turnerCriticalRateMscfd, 9)}</td>
                 <td className="pr-3">{fmt(r.rateDifferenceMscfd, 9)}</td>
                 <td className="pr-3">{fmt(r.colemanRatio, 10)}</td>
                 <td className="pr-3">{fmt(r.turnerRatio, 10)}</td>
@@ -282,9 +282,9 @@ const Discarded = () => {
               <tr key={r.idIn} className={r.flips ? 'text-pl-warning-text' : ''}>
                 <td className="pr-3">{fmt(r.idIn, 3)}</td>
                 <td className="pr-3">{fmt(r.colemanRateMscfd, 9)}</td>
-                <td className="pr-3 text-pl-info-text">{fmt(r.colemanRatio, 10)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.colemanRatio, 10)}</td>
                 <td className="pr-3">{fmt(r.turnerRateMscfd, 9)}</td>
-                <td className="pr-3 text-pl-primary-text">{fmt(r.turnerRatio, 10)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.turnerRatio, 10)}</td>
                 <td>{yn(r.flips)}</td>
               </tr>
             ))}
@@ -315,7 +315,7 @@ const Discarded = () => {
                 <tr>
                   <td className="pr-3">the controlling station</td>
                   <td className="pr-3">{r.correlation}</td>
-                  <td className="pr-3 text-pl-primary-text">{fmt(r.controllingPickIdIn, 3)}</td>
+                  <td className="pr-3 text-pl-info-text">{fmt(r.controllingPickIdIn, 3)}</td>
                   <td className="pr-3">{fmt(r.controllingPickRatio, 10)}</td>
                   <td className="pr-3">{fmt(r.stationWorthIn, 3)}</td>
                 </tr>
@@ -410,8 +410,8 @@ const Gradient = () => {
               <tr key={r.slugLengthFt}>
                 <td className="pr-3">{fmt(r.slugLengthFt, 1)}</td>
                 <td className="pr-3">{fmt(r.liquidSg, 3)}</td>
-                <td className="pr-3 text-pl-info-text">{fmt(r.roundedPsi, 10)}</td>
-                <td className="pr-3 text-pl-primary-text">{fmt(r.exactPsi, 10)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.roundedPsi, 10)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.exactPsi, 10)}</td>
                 <td className="pr-3 text-pl-accent-text">{fmt(r.costPsi, 10)}</td>
                 <td>{fmt(r.costPct, 10)}</td>
               </tr>
@@ -546,7 +546,7 @@ const Falling = () => {
                   <tr key={r.casingPressurePsia} className={r.expansionRunsTheRightWay ? '' : 'text-pl-warning-text'}>
                     <td className="pr-3">{fmt(r.casingPressurePsia, 1)}</td>
                     <td className="pr-3">{fmt(r.gasPerCycleScf, 8)}</td>
-                    <td className="pr-3 text-pl-primary-text">{fmt(r.requiredGlrScfBbl, 8)}</td>
+                    <td className="pr-3 text-pl-info-text">{fmt(r.requiredGlrScfBbl, 8)}</td>
                     <td className="pr-3">{fmt(r.casingMinusRequirementPsi, 8)}</td>
                     <td className="pr-3">{yn(r.expansionRunsTheRightWay)}</td>
                     <td className="pr-3">{yn(r.pressureOk)}</td>
@@ -589,7 +589,7 @@ const Falling = () => {
                 {published.map((r) => (
                   <tr key={r.casingPressurePsia}>
                     <td className="pr-3">{fmt(r.casingPressurePsia, 1)}</td>
-                    <td className="pr-3 text-pl-primary-text">{fmt(r.requiredGlrScfBbl, 8)}</td>
+                    <td className="pr-3 text-pl-info-text">{fmt(r.requiredGlrScfBbl, 8)}</td>
                     <td className="pr-3">{yn(r.pressureOk)}</td>
                     <td className="pr-3">{yn(r.glrOk)}</td>
                     <td>{yn(r.feasible)}</td>
@@ -645,8 +645,8 @@ const Falling = () => {
                   <tr key={r.casingPressurePsia} className={r.clamped ? 'text-pl-warning-text' : ''}>
                     <td className="pr-3">{fmt(r.casingPressurePsia, 1)}</td>
                     <td className="pr-3">{fmt(r.availablePsi, 8)}</td>
-                    <td className="pr-3 text-pl-info-text">{fmt(r.unclampedFt, 8)}</td>
-                    <td className="pr-3 text-pl-primary-text">{fmt(r.returnedFt, 8)}</td>
+                    <td className="pr-3 text-pl-primary-text">{fmt(r.unclampedFt, 8)}</td>
+                    <td className="pr-3 text-pl-info-text">{fmt(r.returnedFt, 8)}</td>
                     <td>{yn(r.clamped)}</td>
                   </tr>
                 ))}
@@ -747,7 +747,7 @@ const Nobody = () => {
                 <td className="pr-3">{fmt(r.shutInMin, 1)}</td>
                 <td className="pr-3">{fmt(r.totalMin, 8)}</td>
                 <td className="pr-3">{fmt(r.cyclesPerDay, 8)}</td>
-                <td className="pr-3 text-pl-primary-text">{fmt(r.liquidPerDayBbl, 8)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.liquidPerDayBbl, 8)}</td>
                 <td className="pr-3 text-pl-muted">{fmt(r.wellLiquidBpd, 8)}</td>
                 <td className="pr-3">{fmt(r.ratio, 8)}</td>
                 <td className="text-pl-warning-text">{yn(r.carriesTheWell)}</td>

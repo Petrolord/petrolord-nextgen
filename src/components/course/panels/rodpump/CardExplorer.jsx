@@ -111,12 +111,12 @@ const March = () => {
               </tr>
             ))}
             <tr>
-              <td className="pr-3 text-pl-primary-text">{ODUMA.label}, {fmt(ODUMA.spm, 1)} spm</td>
-              <td className="pr-3 text-pl-primary-text">{fmt(s.samples, 0)}</td>
-              <td className="pr-3 text-pl-primary-text">{fmt(s.cardPoints, 0)}</td>
-              <td className="pr-3 text-pl-primary-text">{fmt(s.stride, 0)}</td>
-              <td className="pr-3 text-pl-primary-text">{t.dtS.toExponential(6)}</td>
-              <td className="text-pl-primary-text">{fmt(t.cycles, 0)}</td>
+              <td className="pr-3 text-pl-info-text">{ODUMA.label}, {fmt(ODUMA.spm, 1)} spm</td>
+              <td className="pr-3 text-pl-info-text">{fmt(s.samples, 0)}</td>
+              <td className="pr-3 text-pl-info-text">{fmt(s.cardPoints, 0)}</td>
+              <td className="pr-3 text-pl-info-text">{fmt(s.stride, 0)}</td>
+              <td className="pr-3 text-pl-info-text">{t.dtS.toExponential(6)}</td>
+              <td className="text-pl-info-text">{fmt(t.cycles, 0)}</td>
             </tr>
           </tbody>
         </table>
@@ -158,7 +158,7 @@ const March = () => {
               <tr key={r.spm}>
                 <td className="pr-3">{fmt(r.spm, 1)}</td>
                 <td className="pr-3">{fmt(r.periodS, 6)}</td>
-                <td className="pr-3 text-pl-primary-text">{fmt(r.roundTripsPerStroke, 9)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.roundTripsPerStroke, 9)}</td>
                 <td>{fmt(r.speedOverFundamental, 9)}</td>
               </tr>
             ))}
@@ -248,9 +248,9 @@ const Stretch = () => {
               <tr key={r.spm}>
                 <td className="pr-3">{fmt(r.spm, 1)}</td>
                 <td className="pr-3 text-pl-accent-text">{fmt(r.springRuleIn, 9)}</td>
-                <td className="pr-3 text-pl-primary-text">{fmt(r.waveMarchIn, 9)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.waveMarchIn, 9)}</td>
                 <td className="pr-3">{fmt(r.overtravelIn, 9)}</td>
-                <td className="pr-3 text-pl-info-text">{fmt(r.overtravelPct, 6)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.overtravelPct, 6)}</td>
                 <td>{fmt(r.speedOverFundamental, 9)}</td>
               </tr>
             ))}
@@ -285,7 +285,7 @@ const Stretch = () => {
                 <td className="pr-3">{fmt(r.springRuleIn, 9)}</td>
                 <td className="pr-3">{fmt(r.waveMarchIn, 9)}</td>
                 <td className="pr-3">{fmt(r.overtravelIn, 9)}</td>
-                <td className="text-pl-info-text">{fmt(r.overtravelPct, 6)}</td>
+                <td className="text-pl-primary-text">{fmt(r.overtravelPct, 6)}</td>
               </tr>
             ))}
           </tbody>
@@ -350,7 +350,7 @@ const Loads = () => {
           <tbody>
             {d.stresses.map((r) => (
               <tr key={r.index}>
-                <td className="pr-3 text-pl-primary-text">{r.label}</td>
+                <td className="pr-3 text-pl-info-text">{r.label}</td>
                 <td className="pr-3">{fmt(r.topDepthFt, 1)}</td>
                 <td className="pr-3">{fmt(r.envelopeSampleFt, 6)}</td>
                 <td className="pr-3">{fmt(r.maxStressPsi, 6)}</td>
@@ -407,8 +407,8 @@ const Loads = () => {
             {rows.map((r) => (
               <tr key={r[xKey]}>
                 <td className="pr-3">{fmt(r[xKey], 4)}</td>
-                <td className="pr-3 text-pl-primary-text">{fmt(r.pprlLb, 6)}</td>
-                <td className="pr-3 text-pl-info-text">{fmt(r.mprlLb, 6)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.pprlLb, 6)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.mprlLb, 6)}</td>
                 <td className="pr-3">{fmt(r.plungerStrokeIn, 6)}</td>
                 <td className="pr-3">{fmt(r.worstLoadingPct, 6)}</td>
                 <td>{r.warnings || '-'}</td>
@@ -471,8 +471,8 @@ const Power = () => {
             {d.teaching.map((r) => (
               <tr key={r.spm}>
                 <td className="pr-3">{fmt(r.spm, 1)}</td>
-                <td className="pr-3 text-pl-primary-text">{fmt(r.cardAreaInLb, 6)}</td>
-                <td className="pr-3 text-pl-info-text">{fmt(r.prhp, 9)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.cardAreaInLb, 6)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.prhp, 9)}</td>
                 <td>{fmt(r.areaTimesSpeedOver396000, 9)}</td>
               </tr>
             ))}
@@ -564,9 +564,9 @@ const Fillage = () => {
                 <td className="pr-3">{fmt(r.fillage, 4)}</td>
                 <td className="pr-3">{fmt(r.plungerStrokeIn, 6)}</td>
                 <td className="pr-3">{fmt(r.sweptBpd, 6)}</td>
-                <td className="pr-3 text-pl-info-text">{fmt(r.producedBpd, 6)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.producedBpd, 6)}</td>
                 <td className="pr-3">{fmt(r.effectiveFactor, 9)}</td>
-                <td className={r.effectiveOverNominal > 1 ? 'pr-3 text-pl-primary-text' : 'pr-3 text-pl-accent-text'}>
+                <td className={r.effectiveOverNominal > 1 ? 'pr-3 text-pl-info-text' : 'pr-3 text-pl-accent-text'}>
                   {fmt(r.effectiveOverNominal, 9)}
                 </td>
                 <td>{r.warnings}</td>

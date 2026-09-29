@@ -90,7 +90,7 @@ const Catalog = () => {
             {data.conductivities.map((r) => (
               <tr key={r.id}>
                 <td className="pr-3">{r.label}</td>
-                <td className="pr-3 text-pl-primary-text">{fmt(r.kBtuHrFtF, 4)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.kBtuHrFtF, 4)}</td>
                 <td className="pr-3">{fmt(r.ratioToSteel, 8)}</td>
                 <td>{fmt(r.steelOverThis, 4)}</td>
               </tr>
@@ -112,7 +112,7 @@ const Catalog = () => {
               <tr key={r.id}>
                 <td className="pr-3">{r.label}</td>
                 <td className="pr-3">{r.side}</td>
-                <td className="text-pl-primary-text">{fmt(r.hBtuHrFt2F, 4)}</td>
+                <td className="text-pl-info-text">{fmt(r.hBtuHrFt2F, 4)}</td>
               </tr>
             ))}
           </tbody>
@@ -217,7 +217,7 @@ const Stack = () => {
               <tr key={r.term}>
                 <td className="pr-3">{r.term}</td>
                 <td className="pr-3">{r.label || 'a boundary layer'}</td>
-                <td className="pr-3 text-pl-primary-text">{fmt(r.resistance, 10)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.resistance, 10)}</td>
                 <td>{fmt(r.sharePct, 8)}</td>
               </tr>
             ))}
@@ -238,8 +238,8 @@ const Stack = () => {
             <tbody>
               <tr>
                 <td className="pr-3">Btu/(hr ft2 degF)</td>
-                <td className="pr-3 text-pl-info-text">{fmt(pair.goldenUBtuHrFt2F, 10)}</td>
-                <td className="pr-3 text-pl-primary-text">{fmt(pair.engineUBtuHrFt2F, 10)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(pair.goldenUBtuHrFt2F, 10)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(pair.engineUBtuHrFt2F, 10)}</td>
                 <td>{tiny(pair.uRelDiff)} apart, relative</td>
               </tr>
             </tbody>
@@ -341,7 +341,7 @@ const Insulation = () => {
               </thead>
               <tbody>
                 {data.thickness.map((r) => (
-                  <tr key={r.foamOdIn} className={r.published ? 'text-pl-primary-text' : ''}>
+                  <tr key={r.foamOdIn} className={r.published ? 'text-pl-info-text' : ''}>
                     <td className="pr-3">{fmt(r.foamOdIn, 3)}</td>
                     <td className="pr-3">{fmt(r.wallIn, 4)}</td>
                     <td className="pr-3">{fmt(r.engineUBtuHrFt2F, 8)}</td>
@@ -380,7 +380,7 @@ const Insulation = () => {
               </thead>
               <tbody>
                 {data.materials.map((r) => (
-                  <tr key={r.materialId} className={r.published ? 'text-pl-primary-text' : ''}>
+                  <tr key={r.materialId} className={r.published ? 'text-pl-info-text' : ''}>
                     <td className="pr-3">{r.label}</td>
                     <td className="pr-3">{fmt(r.kBtuHrFtF, 4)}</td>
                     <td className="pr-3">{fmt(r.engineUBtuHrFt2F, 8)}</td>
@@ -480,7 +480,7 @@ const Burial = () => {
           </thead>
           <tbody>
             {rows.map((r) => (
-              <tr key={which === 'depth' ? r.burialFt : r.kSoil} className={r.published ? 'text-pl-primary-text' : ''}>
+              <tr key={which === 'depth' ? r.burialFt : r.kSoil} className={r.published ? 'text-pl-info-text' : ''}>
                 <td className="pr-3">{fmt(which === 'depth' ? r.burialFt : r.kSoil, 6)}</td>
                 {which === 'depth' && <td className="pr-3">{fmt(r.twoHOverD, 8)}</td>}
                 {which === 'depth' && <td className="pr-3">{fmt(r.acoshTerm, 10)}</td>}
@@ -570,7 +570,7 @@ const Reference = () => {
             {data.rows.map((r) => (
               <tr key={r.referenceIdIn}>
                 <td className="pr-3">{fmt(r.referenceIdIn, 3)}</td>
-                <td className="pr-3 text-pl-primary-text">{fmt(r.engineUBtuHrFt2F, 10)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.engineUBtuHrFt2F, 10)}</td>
                 <td className="pr-3">{fmt(r.totalResistance, 10)}</td>
                 <td>{fmt(r.uTimesReferenceIdFt, 10)}</td>
               </tr>

@@ -96,7 +96,7 @@ const JouleThomson = () => {
           <tbody>
             <tr>
               <td className="pr-3">heat loss only, no pressures set</td>
-              <td className="pr-3 text-pl-primary-text">{fmt(data.jt.heatLossOnlyArrivalTempF, 8)}</td>
+              <td className="pr-3 text-pl-info-text">{fmt(data.jt.heatLossOnlyArrivalTempF, 8)}</td>
               <td className="pr-3">{fmt(data.jt.heatLossOnlyMarginF, 8)}</td>
               <td>no</td>
             </tr>
@@ -108,7 +108,7 @@ const JouleThomson = () => {
             </tr>
             <tr>
               <td className="pr-3">the same term damped by the balance</td>
-              <td className="pr-3 text-pl-info-text">{fmt(data.jt.dampedJtArrivalTempF, 8)}</td>
+              <td className="pr-3 text-pl-primary-text">{fmt(data.jt.dampedJtArrivalTempF, 8)}</td>
               <td className="pr-3">{fmt(data.jt.dampedJtMarginF, 8)}</td>
               <td>{yn(data.jt.dampedSaysInsideTheHydrateRegion)}</td>
             </tr>
@@ -248,7 +248,7 @@ const Trench = () => {
               <td className="pr-3">yes</td>
               <td className="pr-3">yes</td>
               <td className="pr-3">none needed</td>
-              <td className="text-pl-primary-text">{fmt(d.withTermUBtuHrFt2F, 10)}</td>
+              <td className="text-pl-info-text">{fmt(d.withTermUBtuHrFt2F, 10)}</td>
             </tr>
             <tr className="text-pl-warning-text">
               <td className="pr-3">the same trench with a decimal point moved</td>
@@ -457,11 +457,11 @@ const Depression = () => {
             {goldenRows.map((r) => (
               <tr key={r.weightPct}>
                 <td className="pr-3">{fmt(r.weightPct, 1)}</td>
-                <td className="pr-3 text-pl-info-text">{fmt(r.goldenHammerschmidtF, 8)}</td>
-                <td className="pr-3 text-pl-primary-text">{fmt(r.engineHammerschmidtF, 8)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.goldenHammerschmidtF, 8)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.engineHammerschmidtF, 8)}</td>
                 <td className="pr-3">{tiny(r.hammerschmidtRelDiff)}</td>
-                <td className="pr-3 text-pl-info-text">{fmt(r.goldenNielsenBucklinF, 8)}</td>
-                <td className="pr-3 text-pl-primary-text">{fmt(r.engineNielsenBucklinF, 8)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.goldenNielsenBucklinF, 8)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.engineNielsenBucklinF, 8)}</td>
                 <td>{tiny(r.nielsenBucklinRelDiff)}</td>
               </tr>
             ))}
@@ -493,7 +493,7 @@ const Depression = () => {
                 <td className="pr-3">{fmt(r.weightPct, 1)}</td>
                 <td className="pr-3">{fmt(r.hammerschmidtF, 8)}</td>
                 <td className="pr-3">{r.nielsenBucklinF === null ? 'no relation for this fluid' : fmt(r.nielsenBucklinF, 8)}</td>
-                <td className="pr-3 text-pl-primary-text">{fmt(r.recommendedF, 8)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.recommendedF, 8)}</td>
                 <td className="pr-3">{r.basis}</td>
                 <td className="pr-3">{yn(r.reliable)}</td>
                 <td>{yn(r.published)}</td>
@@ -580,7 +580,7 @@ const Dose = () => {
             </tr>
             <tr>
               <td className="pr-3">weightPct</td>
-              <td className="pr-3 text-pl-primary-text">{fmt(r.designWtPct, 10)}</td>
+              <td className="pr-3 text-pl-info-text">{fmt(r.designWtPct, 10)}</td>
               <td>picked by inverting Hammerschmidt, so its Hammerschmidt depression is exact</td>
             </tr>
             <tr>
@@ -657,7 +657,7 @@ const Dose = () => {
             <tr>
               <td className="pr-3">bracketing the engine's own Nielsen-Bucklin instead</td>
               <td className="pr-3">{fmt(data.nielsen.nielsenBucklinSizedWtPct, 10)}</td>
-              <td className="pr-3 text-pl-primary-text">{fmt(data.nielsen.checkAtTheNielsenDoseF, 8)}</td>
+              <td className="pr-3 text-pl-info-text">{fmt(data.nielsen.checkAtTheNielsenDoseF, 8)}</td>
               <td>{fmt(data.nielsen.nielsenBucklinSizedRateBpd, 8)}</td>
             </tr>
           </tbody>
@@ -855,7 +855,7 @@ const Ceiling = () => {
               </thead>
               <tbody>
                 {data.leans.map((r) => (
-                  <tr key={r.leanWtPct} className={r.isTheTeachingLean ? 'text-pl-primary-text' : ''}>
+                  <tr key={r.leanWtPct} className={r.isTheTeachingLean ? 'text-pl-info-text' : ''}>
                     <td className="pr-3">{fmt(r.leanWtPct, 1)}</td>
                     <td className="pr-3">{fmt(r.engineStreamDensityLbGal, 8)}</td>
                     <td className="pr-3">{fmt(r.massAdditiveDensityLbGal, 8)}</td>
@@ -935,7 +935,7 @@ const Ceiling = () => {
                     <td className="pr-3">{fmt(r.weightPct, 3)}</td>
                     <td className="pr-3">{fmt(r.hammerschmidtF, 12)}</td>
                     <td className="pr-3">{fmt(r.nielsenBucklinF, 12)}</td>
-                    <td className="pr-3 text-pl-primary-text">{fmt(r.ratio, 10)}</td>
+                    <td className="pr-3 text-pl-info-text">{fmt(r.ratio, 10)}</td>
                     <td>{tiny(r.seriesCorrection)}</td>
                   </tr>
                 ))}

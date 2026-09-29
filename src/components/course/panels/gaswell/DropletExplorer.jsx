@@ -98,20 +98,20 @@ const Station = () => {
           <tbody>
             <tr>
               <td className="pr-3">gas density, lbm/ft3</td>
-              <td className="pr-3 text-pl-primary-text">{fmt(built.rhoGasLbFt3, 10)}</td>
-              <td className="pr-3 text-pl-info-text">{fmt(g.rhoGasLbFt3, 10)}</td>
+              <td className="pr-3 text-pl-info-text">{fmt(built.rhoGasLbFt3, 10)}</td>
+              <td className="pr-3 text-pl-primary-text">{fmt(g.rhoGasLbFt3, 10)}</td>
               <td>{tiny(built.rhoGasLbFt3 - g.rhoGasLbFt3)} apart</td>
             </tr>
             <tr>
               <td className="pr-3">terminal droplet velocity, ft/s</td>
-              <td className="pr-3 text-pl-primary-text">{fmt(built.terminalFtS, 10)}</td>
-              <td className="pr-3 text-pl-info-text">{fmt(built.goldenTerminalFtS, 10)}</td>
+              <td className="pr-3 text-pl-info-text">{fmt(built.terminalFtS, 10)}</td>
+              <td className="pr-3 text-pl-primary-text">{fmt(built.goldenTerminalFtS, 10)}</td>
               <td>{tiny(built.terminalFtS - built.goldenTerminalFtS)} apart</td>
             </tr>
             <tr>
               <td className="pr-3">Turner critical rate through 2.441 in, Mscf/d</td>
-              <td className="pr-3 text-pl-primary-text">{fmt(built.criticalRateMscfd, 9)}</td>
-              <td className="pr-3 text-pl-info-text">{fmt(built.goldenTurnerRateMscfd, 9)}</td>
+              <td className="pr-3 text-pl-info-text">{fmt(built.criticalRateMscfd, 9)}</td>
+              <td className="pr-3 text-pl-primary-text">{fmt(built.goldenTurnerRateMscfd, 9)}</td>
               <td>{tiny(built.criticalRateMscfd - built.goldenTurnerRateMscfd)} apart</td>
             </tr>
           </tbody>
@@ -208,7 +208,7 @@ const Balance = () => {
                 <td className="pr-3">{fmt(r.sigmaDyneCm, 1)}</td>
                 <td className="pr-3">{fmt(r.densityDiff, 1)}</td>
                 <td className="pr-3">{fmt(r.rhoGasLbFt3, 1)}</td>
-                <td className="pr-3 text-pl-primary-text">{fmt(r.velocityFtS, 10)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.velocityFtS, 10)}</td>
                 <td>{r.ratioToRowAbove === null ? '-' : fmt(r.ratioToRowAbove, 10)}</td>
               </tr>
             ))}
@@ -229,9 +229,9 @@ const Balance = () => {
             {data.drag.map((r, i) => (
               <tr key={r.dragCoefficient} className={r.isShipped || data.weber[i].isShipped ? 'text-pl-text font-semibold' : ''}>
                 <td className="pr-3">{fmt(r.dragCoefficient, 2)}{r.isShipped ? ' (shipped)' : ''}</td>
-                <td className="pr-3 text-pl-primary-text">{fmt(r.constant, 10)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.constant, 10)}</td>
                 <td className="pr-3">{fmt(data.weber[i].criticalWeber, 1)}{data.weber[i].isShipped ? ' (shipped)' : ''}</td>
-                <td className="text-pl-info-text">{fmt(data.weber[i].constant, 10)}</td>
+                <td className="text-pl-primary-text">{fmt(data.weber[i].constant, 10)}</td>
               </tr>
             ))}
           </tbody>
@@ -315,7 +315,7 @@ const Sweep = () => {
                 <td className="pr-3">{fmt(r.qMscfd, 1)}</td>
                 <td className="pr-3">{fmt(r.actualVelocityFtS, 10)}</td>
                 <td className="pr-3 text-pl-muted">{fmt(r.criticalRateMscfd, 9)}</td>
-                <td className="pr-3 text-pl-primary-text">{fmt(r.ratio, 10)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.ratio, 10)}</td>
                 <td>{yn(r.loaded)}</td>
               </tr>
             ))}
@@ -390,8 +390,8 @@ const Pair = () => {
             {data.rows.map((r) => (
               <tr key={r.row}>
                 <td className="pr-3">{r.row}</td>
-                <td className="pr-3 text-pl-info-text">{fmt(r.colemanFtS, 10)}</td>
-                <td className="pr-3 text-pl-primary-text">{fmt(r.turnerFtS, 10)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.colemanFtS, 10)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.turnerFtS, 10)}</td>
                 <td className="pr-3">{fmt(r.colemanRateMscfd, 9)}</td>
                 <td className="pr-3">{fmt(r.turnerRateMscfd, 9)}</td>
                 <td className="pr-3">{fmt(r.turnerMinusColemanMscfd, 9)}</td>
@@ -448,7 +448,7 @@ const Threshold = () => {
             {data.rows.map((r) => (
               <tr key={r.pPsia} className={r.printsAsTheLimit && r.belowLimit ? 'text-pl-warning-text' : ''}>
                 <td className="pr-3">{r.pPsia.toFixed(2)}</td>
-                <td className="pr-3 text-pl-primary-text">{r.correlation}</td>
+                <td className="pr-3 text-pl-info-text">{r.correlation}</td>
                 <td className="pr-3">{yn(r.belowLimit)}</td>
                 <td className="pr-3">{r.roundedWhole}</td>
                 <td className="pr-3">{r.printedOneDecimal}</td>

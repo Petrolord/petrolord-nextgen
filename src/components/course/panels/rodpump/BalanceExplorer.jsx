@@ -150,8 +150,8 @@ const Envelope = () => {
                 <td className="pr-3">{fmt(r.cardSamples, 0)}</td>
                 <td className="pr-3">{fmt(r.cardPoints, 0)}</td>
                 <td className="pr-3">{fmt(r.stride, 0)}</td>
-                <td className="pr-3 text-pl-primary-text">{fmt(r.prlPeakLb, 6)}</td>
-                <td className="pr-3 text-pl-info-text">{fmt(r.prlMinLb, 6)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.prlPeakLb, 6)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.prlMinLb, 6)}</td>
                 <td className="pr-3">{fmt(r.cardAreaInLb, 4)}</td>
                 <td>{fmt(r.plungerStrokeIn, 9)}</td>
               </tr>
@@ -219,8 +219,8 @@ const Envelope = () => {
               <tr key={r.designation}>
                 <td className="pr-3">{r.designation}</td>
                 <td className="pr-3">{fmt(r.structuralCapacityLb, 0)}</td>
-                <td className="pr-3 text-pl-info-text">{fmt(r.structuralPctFromReported, 9)}</td>
-                <td className="pr-3 text-pl-primary-text">{fmt(r.structuralPctFromMarched, 9)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.structuralPctFromReported, 9)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.structuralPctFromMarched, 9)}</td>
                 <td className="pr-3">{r.warnings}</td>
                 <td>{fmt(r.worstLoadingPct, 9)}</td>
               </tr>
@@ -296,7 +296,7 @@ const Convergence = () => {
               <tr key={r.nodes} className={r.notPeriodic ? 'text-pl-warning-text' : ''}>
                 <td className="pr-3">{fmt(r.nodes, 0)}</td>
                 <td className="pr-3">{fmt(r.samples, 0)}</td>
-                <td className="pr-3 text-pl-primary-text">{fmt(r.plungerStrokeIn, 9)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.plungerStrokeIn, 9)}</td>
                 <td className="pr-3">{fmt(r.prlPeakLb, 6)}</td>
                 <td className="pr-3">{fmt(r.prlMinLb, 6)}</td>
                 <td className="pr-3">{fmt(r.cycles, 0)}</td>
@@ -459,7 +459,7 @@ const Balance = () => {
               <tr key={r.fraction}>
                 <td className="pr-3">{fmt(r.fraction, 4)}</td>
                 <td className="pr-3">{fmt(r.momentInLb, 6)}</td>
-                <td className="pr-3 text-pl-primary-text">{fmt(r.upstrokePeakInLb, 6)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.upstrokePeakInLb, 6)}</td>
                 <td className="pr-3 text-pl-accent-text">{fmt(r.downstrokePeakInLb, 6)}</td>
                 <td>{fmt(r.largerInLb, 6)}</td>
               </tr>
@@ -505,7 +505,7 @@ const Balance = () => {
           </thead>
           <tbody>
             {d.offsets.map((r) => (
-              <tr key={r.crankOffsetDeg} className={r.crankOffsetDeg === 0 ? 'text-pl-primary-text' : ''}>
+              <tr key={r.crankOffsetDeg} className={r.crankOffsetDeg === 0 ? 'text-pl-info-text' : ''}>
                 <td className="pr-3">{fmt(r.crankOffsetDeg, 1)}</td>
                 <td className="pr-3">{fmt(r.momentInLb, 6)}</td>
                 <td className="pr-3">{fmt(r.peakTorqueInLb, 6)}</td>
@@ -571,7 +571,7 @@ const Ignored = () => {
           <tbody>
             {d.rows.map((r) => (
               <tr key={r.key}>
-                <td className="pr-3 text-pl-primary-text">{r.key}</td>
+                <td className="pr-3 text-pl-info-text">{r.key}</td>
                 <td className="pr-3">{fmt(r.runA, 12)}</td>
                 <td className="pr-3">{fmt(r.runB, 12)}</td>
                 <td>{String(r.strictlyEqual)}</td>
@@ -611,8 +611,8 @@ const Ignored = () => {
             {d.sensitivity.map((r) => (
               <tr key={r.label}>
                 <td className="pr-3">{r.label}</td>
-                <td className="pr-3 text-pl-primary-text">{fmt(r.momentInLb, 6)}</td>
-                <td className="pr-3 text-pl-info-text">{fmt(r.peakTorqueInLb, 6)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.momentInLb, 6)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.peakTorqueInLb, 6)}</td>
                 <td>{fmt(r.counterbalanceEffectLb, 6)}</td>
               </tr>
             ))}
@@ -794,7 +794,7 @@ const Stress = () => {
             {d.diagnosticDamping.map((r) => (
               <tr key={r.dampingRatio}>
                 <td className="pr-3">{fmt(r.dampingRatio, 4)}</td>
-                <td className="pr-3 text-pl-primary-text">{fmt(r.plungerStrokeIn, 9)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.plungerStrokeIn, 9)}</td>
                 <td className="pr-3">{fmt(r.pumpLoadMaxLb, 6)}</td>
                 <td>{fmt(r.pumpLoadMinLb, 6)}</td>
               </tr>
@@ -886,7 +886,7 @@ const TypedBalance = () => {
               </thead>
               <tbody>
                 {r.sections.map((s) => (
-                  <tr key={s.label} className={s.label === r.worstSectionLabel ? 'text-pl-info-text' : ''}>
+                  <tr key={s.label} className={s.label === r.worstSectionLabel ? 'text-pl-primary-text' : ''}>
                     <td className="pr-3">{s.label} in</td>
                     <td className="pr-3">{plain(s.maxStressPsi, 6)}</td>
                     <td className="pr-3">{plain(s.minStressPsi, 6)}</td>

@@ -94,8 +94,8 @@ const Balance = () => {
                 <td className="pr-3">{r.caseNumber}</td>
                 <td className="pr-3">{fmt(r.massRateLbHr, 0)}</td>
                 <td className="pr-3">{fmt(r.cpBtuLbF, 2)}</td>
-                <td className="pr-3 text-pl-info-text">{fmt(r.goldenRelaxationLengthFt, 8)}</td>
-                <td className="pr-3 text-pl-primary-text">{fmt(r.engineRelaxationLengthFt, 8)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.goldenRelaxationLengthFt, 8)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.engineRelaxationLengthFt, 8)}</td>
                 <td>{tiny(r.relaxationRelDiff)} apart, relative</td>
               </tr>
             ))}
@@ -134,10 +134,10 @@ const Balance = () => {
             {data.profiles.map((r) => (
               <tr key={r.lengthFt}>
                 <td className="pr-3">{fmt(r.lengthFt, 0)}</td>
-                <td className="pr-3 text-pl-info-text">{fmt(r.goldenNtu, 10)}</td>
-                <td className="pr-3 text-pl-primary-text">{fmt(r.engineNtu, 10)}</td>
-                <td className="pr-3 text-pl-info-text">{fmt(r.goldenArrivalTempF, 8)}</td>
-                <td className="pr-3 text-pl-primary-text">{fmt(r.engineArrivalTempF, 8)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.goldenNtu, 10)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.engineNtu, 10)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.goldenArrivalTempF, 8)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.engineArrivalTempF, 8)}</td>
                 <td>{fmt(r.lostExcessPct, 6)}</td>
               </tr>
             ))}
@@ -238,7 +238,7 @@ const Profile = () => {
               <tr key={s.station}>
                 <td className="pr-3">{s.station}</td>
                 <td className="pr-3">{fmt(s.xFt, 2)}</td>
-                <td className="pr-3 text-pl-primary-text">{fmt(s.tempF, 8)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(s.tempF, 8)}</td>
                 <td className="pr-3 text-pl-warning-text">{s.pressureIsNaN ? 'not a number' : fmt(s.pPsia, 2)}</td>
                 <td className="pr-3">{fmt(s.excessOverAmbientF, 8)}</td>
                 <td className="pr-3">{fmt(s.retainedExcessFraction, 10)}</td>
@@ -360,7 +360,7 @@ const Target = () => {
               {data.published.map((r) => (
                 <tr key={r.targetTempF}>
                   <td className="pr-3">{fmt(r.targetTempF, 2)}</td>
-                  <td className="pr-3 text-pl-primary-text">{fmt(r.uBtuHrFt2F, 10)}</td>
+                  <td className="pr-3 text-pl-info-text">{fmt(r.uBtuHrFt2F, 10)}</td>
                   <td className="pr-3">{fmt(r.ntuImplied, 10)}</td>
                   <td className="pr-3">{fmt(r.forwardArrivalTempF, 10)}</td>
                   <td>{tiny(r.roundTripErrorF)}</td>
@@ -385,7 +385,7 @@ const Target = () => {
               {data.akasoTargets.map((r) => (
                 <tr key={r.targetTempF} className={r.isTheHydrateBoundary ? 'text-pl-warning-text' : ''}>
                   <td className="pr-3">{fmt(r.targetTempF, 2)}</td>
-                  <td className="pr-3 text-pl-primary-text">{fmt(r.uNeededBtuHrFt2F, 10)}</td>
+                  <td className="pr-3 text-pl-info-text">{fmt(r.uNeededBtuHrFt2F, 10)}</td>
                   <td className="pr-3">{fmt(r.ntuImplied, 10)}</td>
                   <td className="pr-3">{fmt(r.ratioToTheUThisLineHas, 8)}</td>
                   <td>{yn(r.isTheHydrateBoundary)}</td>
@@ -473,14 +473,14 @@ const Cooldown = () => {
           <tbody>
             <tr>
               <td className="pr-3">no touch time, hr</td>
-              <td className="pr-3 text-pl-info-text">{fmt(data.cooldown.goldenHours, 10)}</td>
-              <td className="pr-3 text-pl-primary-text">{fmt(data.cooldown.engineHours, 10)}</td>
+              <td className="pr-3 text-pl-primary-text">{fmt(data.cooldown.goldenHours, 10)}</td>
+              <td className="pr-3 text-pl-info-text">{fmt(data.cooldown.engineHours, 10)}</td>
               <td>{tiny(data.cooldown.hoursRelDiff)} apart, relative</td>
             </tr>
             <tr>
               <td className="pr-3">time constant, hr</td>
-              <td className="pr-3 text-pl-info-text">{fmt(data.cooldown.goldenTimeConstantHr, 10)}</td>
-              <td className="pr-3 text-pl-primary-text">{fmt(data.cooldown.engineTimeConstantHr, 10)}</td>
+              <td className="pr-3 text-pl-primary-text">{fmt(data.cooldown.goldenTimeConstantHr, 10)}</td>
+              <td className="pr-3 text-pl-info-text">{fmt(data.cooldown.engineTimeConstantHr, 10)}</td>
               <td>{tiny(data.cooldown.timeConstantRelDiff)} apart, relative</td>
             </tr>
           </tbody>
@@ -517,7 +517,7 @@ const Cooldown = () => {
               <tr key={s.station}>
                 <td className="pr-3">{s.station}</td>
                 <td className="pr-3">{fmt(s.hours, 8)}</td>
-                <td className="pr-3 text-pl-primary-text">{fmt(s.tempF, 8)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(s.tempF, 8)}</td>
                 <td className="pr-3">{fmt(s.excessOverAmbientF, 8)}</td>
                 <td>{yn(s.pastTheTarget)}</td>
               </tr>
@@ -616,7 +616,7 @@ const Mass = () => {
               <td className="pr-3">{fmt(data.pair.lumpedMassLbPerFt, 8)}</td>
               <td className="pr-3">{fmt(data.pair.lumpedMcpBtuFtF, 8)}</td>
               <td className="pr-3">{fmt(data.pair.lumpedTimeConstantHr, 8)}</td>
-              <td className="text-pl-primary-text">{fmt(data.pair.lumpedNoTouchHours, 8)}</td>
+              <td className="text-pl-info-text">{fmt(data.pair.lumpedNoTouchHours, 8)}</td>
             </tr>
           </tbody>
         </table>
@@ -766,7 +766,7 @@ const Margin = () => {
               <tr key={s.station} className={s.insideTheHydrateRegion ? 'text-pl-warning-text' : ''}>
                 <td className="pr-3">{s.station}</td>
                 <td className="pr-3">{fmt(s.xFt, 2)}</td>
-                <td className="pr-3 text-pl-primary-text">{fmt(s.tempF, 8)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(s.tempF, 8)}</td>
                 <td className="pr-3">{fmt(s.excessOverSeabedF, 8)}</td>
                 <td className="pr-3">{fmt(s.marginAgainstFlowingBoundaryF, 8)}</td>
                 <td>{yn(s.insideTheHydrateRegion)}</td>
