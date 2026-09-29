@@ -1,8 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid,
+  LineChart, Line, BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid,
   Tooltip, Legend, ReferenceLine, ReferenceDot,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, CHART_COLORS } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import {
   TEACHING_WELLS, ESCRAVOS_9, SCAN_GRIDS, DEFAULT_NGRID, SCAN_REVERSAL_PWH_PSIA,
   wellCrossings, wellWindow, wellResidualSweep, wellResidualMinimum, wellResidualTable,
@@ -21,9 +24,9 @@ import { PanelShell, NumField, SelectField, Tile, TileGrid, FieldGrid, Note } fr
 
 const fmt = (v, d = 4) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: 0 })
-  : '-');
+  : 'n/a');
 
-const pct = (v, d = 2) => (Number.isFinite(v) ? `${fmt(v * 100, d)} %` : '-');
+const pct = (v, d = 2) => (Number.isFinite(v) ? `${fmt(v * 100, d)} %` : 'n/a');
 
 const yn = (b) => (b ? 'yes' : 'no');
 
@@ -36,9 +39,9 @@ const MODES = [
 
 const WELLS = TEACHING_WELLS.map((W) => [W.label, `${W.label}: ${W.note}`]);
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const GRID = <CartesianGrid stroke="#334155" strokeDasharray="3 3" />;
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const GRID = <CartesianGrid {...GRID_STYLE} />;
 
 const wellOf = (label) => TEACHING_WELLS.find((W) => W.label === label) || ESCRAVOS_9;
 
@@ -119,36 +122,34 @@ const Crossings = ({ W }) => {
             value={yn(win.operatingPointIsOnTheFrictionLimb)} />
         </TileGrid>
       </div>
-      <div className="h-80 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={sweep} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="qStbd" type="number" domain={[0, readings.qMaxStbd]} tick={AXIS}
-              label={{ value: 'rate, stb/d', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis domain={[0, top]} allowDataOverflow tick={AXIS}
-              label={{ value: 'pressure at the node, psia', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 3)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={readings.deadColumnPsia} stroke="#64748b" strokeDasharray="2 4"
-              label={{ value: 'the dead column', fill: '#64748b', fontSize: 10, position: 'insideTopLeft' }} />
-            <Line type="monotone" dataKey="iprPwfPsia" name="inflow: what the reservoir will give"
-              stroke="#BFFF00" dot={false} isAnimationActive={false} />
-            <Line type="monotone" dataKey="vlpBhpPsia" name="outflow: what the tubing will take"
-              stroke="#f97316" dot={false} isAnimationActive={false} />
-            {unstable.map((x) => (
-              <ReferenceDot key={`u-${x.index}`} x={x.qStbd} y={x.pwfPsia} r={6} fill="#fb7185" stroke="#0f172a"
-                label={{ value: 'unstable, the heading branch', fill: '#fb7185', fontSize: 10, position: 'top' }} />
-            ))}
-            {stable.map((x) => (
-              <ReferenceDot key={`s-${x.index}`} x={x.qStbd} y={x.pwfPsia} r={6} fill="#34d399" stroke="#0f172a"
-                label={{ value: 'stable, the operating point', fill: '#34d399', fontSize: 10, position: 'top' }} />
-            ))}
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={320} className="mt-3">
+        <LineChart data={sweep} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="qStbd" type="number" domain={[0, readings.qMaxStbd]} tick={AXIS}
+            label={{ value: 'rate, stb/d', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis domain={[0, top]} allowDataOverflow tick={AXIS}
+            label={{ value: 'pressure at the node, psia', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 3)} />
+          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <ReferenceLine y={readings.deadColumnPsia} stroke={SVG_CHART.reference} strokeDasharray="2 4"
+            label={{ value: 'the dead column', fill: SVG_CHART.note, fontSize: 10, position: 'insideTopLeft' }} />
+          <Line type="monotone" dataKey="iprPwfPsia" name="inflow: what the reservoir will give"
+            stroke={seriesColor(1)} dot={false} isAnimationActive={false} />
+          <Line type="monotone" dataKey="vlpBhpPsia" name="outflow: what the tubing will take"
+            stroke={seriesColor(2)} dot={false} isAnimationActive={false} />
+          {unstable.map((x) => (
+            <ReferenceDot key={`u-${x.index}`} x={x.qStbd} y={x.pwfPsia} r={6} fill={seriesColor(3)} stroke={SVG_CHART.marker}
+              label={{ value: 'unstable, the heading branch', fill: seriesColor(3), fontSize: 10, position: 'top' }} />
+          ))}
+          {stable.map((x) => (
+            <ReferenceDot key={`s-${x.index}`} x={x.qStbd} y={x.pwfPsia} r={6} fill={seriesColor(1)} stroke={SVG_CHART.marker}
+              label={{ value: 'stable, the operating point', fill: seriesColor(1), fontSize: 10, position: 'top' }} />
+          ))}
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">crossing</th>
               <th className="text-left pr-3">rate, stb/d</th>
@@ -160,7 +161,7 @@ const Crossings = ({ W }) => {
           </thead>
           <tbody>
             {crossings.map((x) => (
-              <tr key={x.index} className={x.stable ? 'text-emerald-300' : 'text-rose-300'}>
+              <tr key={x.index} className={x.stable ? 'text-pl-success-text' : 'text-pl-danger-text'}>
                 <td className="pr-3">{fmt(x.index + 1, 0)}</td>
                 <td className="pr-3">{fmt(x.qStbd, 6)}</td>
                 <td className="pr-3">{fmt(x.pwfPsia, 6)}</td>
@@ -172,7 +173,7 @@ const Crossings = ({ W }) => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         This is the whole of nodal analysis in one frame. The green curve is what the reservoir will
         give at each rate and it falls, because pulling harder leaves less pressure at the sandface.
         The orange curve is what the tubing will take at each rate and it is a J. The well produces
@@ -180,7 +181,7 @@ const Crossings = ({ W }) => {
         {' '}{fmt(crossings.length, 0)} time{crossings.length === 1 ? '' : 's'}.
       </div>
       {crossings.length > 1 && (
-        <div className="mt-2 text-xs text-slate-300">
+        <div className="mt-2 text-xs text-pl-text">
           Only one of those agreements holds. At {fmt(win.unstableQStbd, 4)} stb/d the outflow
           requirement is falling FASTER than the inflow is, so a well that slips a little below that
           rate needs more pressure than the reservoir can find and it keeps slipping: that is the
@@ -192,7 +193,7 @@ const Crossings = ({ W }) => {
           exist in practice.
         </div>
       )}
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         The operating point sits {fmt(win.opRightOfTubingMinimumStbd, 4)} stb/d
         {' '}{win.operatingPointIsOnTheFrictionLimb ? 'to the RIGHT of' : 'to the LEFT of'} the
         bottom of its own tubing curve at {fmt(win.tubingMinimumQStbd, 4)} stb/d, and
@@ -252,33 +253,31 @@ const Residual = ({ W }) => {
           <Tile label="Crossings the engine reports" value={fmt(crossings.length, 0)} />
         </TileGrid>
       </div>
-      <div className="h-80 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={sweep} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="qStbd" type="number" domain={[0, 'dataMax']} tick={AXIS}
-              label={{ value: 'rate, stb/d', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis domain={floor === null ? ['auto', 'auto'] : [floor, -floor]}
-              allowDataOverflow={floor !== null} tick={AXIS}
-              label={{ value: 'residual, outflow less inflow, psi', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 4)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={0} stroke="#e2e8f0" strokeWidth={2}
-              label={{ value: 'zero: the two curves agree here', fill: '#e2e8f0', fontSize: 10, position: 'insideTopRight' }} />
-            <ReferenceDot x={dip.qStbd} y={dip.residualPsi} r={5} fill="#f472b6" stroke="none"
-              label={{ value: 'the bottom of the dip', fill: '#f472b6', fontSize: 10, position: 'bottom' }} />
-            {crossings.map((x) => (
-              <ReferenceDot key={x.index} x={x.qStbd} y={0} r={6}
-                fill={x.stable ? '#34d399' : '#fb7185'} stroke="#0f172a" />
-            ))}
-            <Line type="monotone" dataKey="residualPsi" name="the residual"
-              stroke="#BFFF00" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={320} className="mt-3">
+        <LineChart data={sweep} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="qStbd" type="number" domain={[0, 'dataMax']} tick={AXIS}
+            label={{ value: 'rate, stb/d', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis domain={floor === null ? ['auto', 'auto'] : [floor, -floor]}
+            allowDataOverflow={floor !== null} tick={AXIS}
+            label={{ value: 'residual, outflow less inflow, psi', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 4)} />
+          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <ReferenceLine y={0} stroke={SVG_CHART.label} strokeWidth={2}
+            label={{ value: 'zero: the two curves agree here', fill: SVG_CHART.label, fontSize: 10, position: 'insideTopRight' }} />
+          <ReferenceDot x={dip.qStbd} y={dip.residualPsi} r={5} fill={seriesColor(4)} stroke="none"
+            label={{ value: 'the bottom of the dip', fill: seriesColor(4), fontSize: 10, position: 'bottom' }} />
+          {crossings.map((x) => (
+            <ReferenceDot key={x.index} x={x.qStbd} y={0} r={6}
+              fill={x.stable ? seriesColor(1) : seriesColor(3)} stroke={SVG_CHART.marker} />
+          ))}
+          <Line type="monotone" dataKey="residualPsi" name="the residual"
+            stroke={seriesColor(1)} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">rate, stb/d</th>
               <th className="text-left pr-3">inflow, psia</th>
@@ -290,12 +289,12 @@ const Residual = ({ W }) => {
           <tbody>
             {table.map((r) => (
               <tr key={r.qStbd}
-                className={r.isCrossing ? 'text-white font-semibold' : (r.isDip ? 'text-[#f472b6]' : '')}>
+                className={r.isCrossing ? 'text-pl-text font-semibold' : (r.isDip ? 'text-pl-accent-text' : '')}>
                 <td className="pr-3">{fmt(r.qStbd, 4)}</td>
                 <td className="pr-3">{fmt(r.iprPwfPsia, 4)}</td>
                 <td className="pr-3">{fmt(r.vlpBhpPsia, 4)}</td>
                 <td className="pr-3">{fmt(r.residualPsi, 6)}</td>
-                <td className="text-slate-400">
+                <td className="text-pl-muted">
                   {r.isCrossing ? 'a crossing: the residual is nought here' : ''}
                   {r.isDip ? 'the bottom of the dip' : ''}
                   {!r.isCrossing && !r.isDip ? (r.residualPsi > 0 ? 'the tubing wants more than the reservoir offers' : 'the reservoir offers more than the tubing wants') : ''}
@@ -305,13 +304,13 @@ const Residual = ({ W }) => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         A crossing is a claim. The residual is a shape, and it either touches the zero line or it
         does not. On {W.label} a fine sweep counts {fmt(dip.signChanges, 0)} sign
         change{dip.signChanges === 1 ? '' : 's'}, which is exactly the number of crossings the
         engine reports, and the two numbers agreeing is the check worth running.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         {startsPositive
           ? `The residual starts POSITIVE, at ${fmt(dip.residualAtLowestSampledRatePsi, 4)} psi at ${fmt(dip.lowestSampledRateStbd, 4)} stb/d. That is the precondition for two crossings and it is the opposite of the textbook single crossing picture: at low rate the column outweighs what the reservoir can push, so the well cannot start itself. The curve then dips through zero, bottoms out at ${fmt(dip.residualPsi, 4)} psi and comes back up through zero, and those two zeros are the two crossings.`
           : `The residual starts NEGATIVE, at ${fmt(dip.residualAtLowestSampledRatePsi, 4)} psi at ${fmt(dip.lowestSampledRateStbd, 4)} stb/d, which means the reservoir already outpushes the column at the lowest rate on the scan. A residual that starts below zero and ends above it can only cross an odd number of times, and this well crosses once. Two crossings are not available to a well like this one, whatever the tubing does.`}
@@ -348,15 +347,15 @@ const Resolution = ({ W }) => {
   const coarsest = rows[0];
   return (
     <>
-      <div className="rounded-md border border-rose-700 bg-rose-900/20 p-4">
-        <p className="text-xs text-gray-400 mb-1">
+      <div className="rounded-md border border-pl-danger/40 bg-pl-danger-bg p-4">
+        <p className="text-xs text-pl-muted mb-1">
           The same well, the same curves, the same engine, at twelve scan resolutions
         </p>
-        <p className="text-2xl font-bold text-white mb-1">
+        <p className="text-2xl font-bold text-pl-text mb-1">
           {dead.map((r) => `nGrid ${fmt(r.nGrid, 0)}`).join(', ')}
-          <span className="text-rose-300"> returns DEAD</span>
+          <span className="text-pl-danger-text"> returns DEAD</span>
         </p>
-        <p className="text-sm mb-0 text-rose-200">
+        <p className="text-sm mb-0 text-pl-danger-text">
           THE WELL IS ALIVE. Resolved at twenty thousand points the engine finds
           {' '}{fmt(truth.crossings, 0)} crossings, an operating rate of {fmt(truth.opQStbd, 6)}
           {' '}stb/d and a stable window {fmt(truth.windowStbd, 6)} stb/d wide, and the residual dips
@@ -379,8 +378,8 @@ const Resolution = ({ W }) => {
         </TileGrid>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">nGrid</th>
               <th className="text-left pr-3">interval, stb/d</th>
@@ -395,13 +394,13 @@ const Resolution = ({ W }) => {
             {rows.map((r) => (
               <tr key={r.nGrid}
                 className={r.status === 'dead'
-                  ? 'text-rose-200 font-bold bg-rose-900/40 border-y border-rose-600'
-                  : 'text-slate-300'}>
+                  ? 'text-pl-danger-text font-bold bg-pl-danger-bg border-y border-pl-danger/40'
+                  : 'text-pl-text'}>
                 <td className="pr-3">
                   {fmt(r.nGrid, 0)}{r.nGrid === DEFAULT_NGRID ? ' (the default)' : ''}
                 </td>
                 <td className="pr-3">{fmt(r.spacingStbd, 6)}</td>
-                <td className="pr-3 text-slate-500">{fmt(truth.windowStbd, 6)}</td>
+                <td className="pr-3 text-pl-muted">{fmt(truth.windowStbd, 6)}</td>
                 <td className="pr-3">{yn(r.spacingStbd > truth.windowStbd)}</td>
                 <td className="pr-3">
                   {r.status === 'dead' ? 'DEAD, and the well is not' : STATUS_WORDS[r.status] || r.status}
@@ -413,27 +412,25 @@ const Resolution = ({ W }) => {
           </tbody>
         </table>
       </div>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="nGrid" tick={AXIS} interval={0}
-              label={{ value: 'nGrid, the number of points the solver scans', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS}
-              label={{ value: 'interval width, stb/d', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={truth.windowStbd} stroke="#e2e8f0" strokeWidth={2} strokeDasharray="5 3"
-              label={{ value: `the stable window, ${fmt(truth.windowStbd, 3)} stb/d`, fill: '#e2e8f0', fontSize: 10, position: 'insideTopRight' }} />
-            <Bar dataKey="spacingStbd" name="one scan interval" isAnimationActive={false}>
-              {rows.map((r) => (
-                <Cell key={r.nGrid} fill={r.status === 'dead' ? '#fb7185' : '#BFFF00'} />
-              ))}
-            </Bar>
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <ChartFrame height={256} className="mt-3">
+        <BarChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="nGrid" tick={AXIS} interval={0}
+            label={{ value: 'nGrid, the number of points the solver scans', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS}
+            label={{ value: 'interval width, stb/d', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <ReferenceLine y={truth.windowStbd} stroke={SVG_CHART.label} strokeWidth={2} strokeDasharray="5 3"
+            label={{ value: `the stable window, ${fmt(truth.windowStbd, 3)} stb/d`, fill: SVG_CHART.label, fontSize: 10, position: 'insideTopRight' }} />
+          <Bar dataKey="spacingStbd" name="one scan interval" isAnimationActive={false}>
+            {rows.map((r) => (
+              <Cell key={r.nGrid} fill={r.status === 'dead' ? seriesColor(3) : seriesColor(1)} />
+            ))}
+          </Bar>
+        </BarChart>
+      </ChartFrame>
+      <div className="mt-3 text-xs text-pl-text">
         THAT COMPARISON IS THE EXPLANATION. The solver finds crossings by walking a grid and looking
         for a SIGN CHANGE in the residual between neighbouring samples. When the whole dip below
         zero is narrower than one interval, both crossings fall inside a single step, the residual
@@ -442,7 +439,7 @@ const Resolution = ({ W }) => {
         {' '}{fmt(coarsest.spacingStbd, 6)} stb/d at the default, on an open flow of
         {' '}{fmt(truth.aofStbd, 4)} stb/d.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         AND IT IS NOT MONOTONE IN RESOLUTION, WHICH IS THE PART THAT CATCHES PEOPLE. A sign change
         scan sees the dip only if one of its intervals STRADDLES it, so whether the well is found
         depends on where the samples LAND and not only on how many of them there are. The row that
@@ -451,12 +448,12 @@ const Resolution = ({ W }) => {
         well this close to tangency. The check is the residual, not the scan.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <p className="text-xs text-slate-500 mb-1">
+        <p className="text-xs text-pl-muted mb-1">
           The same finding on the published pinched instrument, whose crossings are the roots of a
           quadratic and are therefore known without any search at all
         </p>
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">nGrid</th>
               <th className="text-left pr-3">interval, stb/d</th>
@@ -469,10 +466,10 @@ const Resolution = ({ W }) => {
           <tbody>
             {pinched.map((r) => (
               <tr key={r.nGrid}
-                className={r.status === 'dead' ? 'text-rose-200 font-bold bg-rose-900/40' : ''}>
+                className={r.status === 'dead' ? 'text-pl-danger-text font-bold bg-pl-danger-bg' : ''}>
                 <td className="pr-3">{fmt(r.nGrid, 0)}{r.nGrid === DEFAULT_NGRID ? ' (the default)' : ''}</td>
                 <td className="pr-3">{fmt(r.spacingStbd, 6)}</td>
-                <td className="pr-3 text-slate-500">{fmt(r.trueWindowStbd, 4)}</td>
+                <td className="pr-3 text-pl-muted">{fmt(r.trueWindowStbd, 4)}</td>
                 <td className="pr-3">{r.status === 'dead' ? 'DEAD, and the well is not' : STATUS_WORDS[r.status] || r.status}</td>
                 <td className="pr-3">{fmt(r.crossings, 0)}</td>
                 <td>{r.opQStbd === null ? 'none reported' : fmt(r.opQStbd, 6)}</td>
@@ -482,12 +479,12 @@ const Resolution = ({ W }) => {
         </table>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <p className="text-xs text-slate-500 mb-1">
+        <p className="text-xs text-pl-muted mb-1">
           {W.label} at its own conditions, for contrast: a well with room does not care what the
           scan does
         </p>
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">nGrid</th>
               <th className="text-left pr-3">interval, stb/d</th>
@@ -499,7 +496,7 @@ const Resolution = ({ W }) => {
           </thead>
           <tbody>
             {own.map((r) => (
-              <tr key={r.nGrid} className={r.status === 'dead' ? 'text-rose-200 font-bold bg-rose-900/40' : ''}>
+              <tr key={r.nGrid} className={r.status === 'dead' ? 'text-pl-danger-text font-bold bg-pl-danger-bg' : ''}>
                 <td className="pr-3">{fmt(r.nGrid, 0)}{r.nGrid === DEFAULT_NGRID ? ' (the default)' : ''}</td>
                 <td className="pr-3">{fmt(r.spacingStbd, 6)}</td>
                 <td className="pr-3">{STATUS_WORDS[r.status] || r.status}</td>
@@ -560,42 +557,40 @@ const Sweep = ({ W }) => {
             value={live.length ? fmt(live[0].windowStbd, 4) : 'the well is dead everywhere'}
             unit={live.length && live[0].windowStbd !== null ? 'stb/d' : ''} />
           <Tile label="Rate at the lowest live pressure"
-            value={live.length ? fmt(live[0].qStbd, 4) : '-'} unit={live.length ? 'stb/d' : ''} />
+            value={live.length ? fmt(live[0].qStbd, 4) : 'n/a'} unit={live.length ? 'stb/d' : ''} />
           <Tile label="Rate at the highest live pressure"
-            value={live.length ? fmt(live[live.length - 1].qStbd, 4) : '-'} unit={live.length ? 'stb/d' : ''} />
+            value={live.length ? fmt(live[live.length - 1].qStbd, 4) : 'n/a'} unit={live.length ? 'stb/d' : ''} />
           <Tile label="Its wellhead pressure"
-            value={live.length ? fmt(live[live.length - 1].pWhPsia, 2) : '-'} unit={live.length ? 'psia' : ''} />
+            value={live.length ? fmt(live[live.length - 1].pWhPsia, 2) : 'n/a'} unit={live.length ? 'psia' : ''} />
           <Tile label="The lowest pressure that kills it"
             value={dead.length ? fmt(dead[0].pWhPsia, 2) : 'nothing on this sweep kills it'}
             unit={dead.length ? 'psia' : ''} />
         </TileGrid>
       </div>
-      <div className="h-72 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={series} margin={{ top: 10, right: 30, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="pWhPsia" type="number" tick={AXIS}
-              label={{ value: 'wellhead pressure, psia', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis yAxisId="q" tick={AXIS}
-              label={{ value: 'operating rate, stb/d', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <YAxis yAxisId="w" orientation="right" tick={AXIS}
-              label={{ value: 'stable window, stb/d', angle: 90, position: 'insideRight', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 4)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            {dead.map((r) => (
-              <ReferenceLine key={r.pWhPsia} yAxisId="q" x={r.pWhPsia} stroke="#fb7185" strokeDasharray="4 3"
-                label={{ value: 'DEAD', fill: '#fb7185', fontSize: 10, position: 'top' }} />
-            ))}
-            <Line yAxisId="q" type="monotone" dataKey="liveQStbd" name="operating rate, where there is one"
-              stroke="#BFFF00" dot connectNulls={false} isAnimationActive={false} />
-            <Line yAxisId="w" type="monotone" dataKey="liveWindowStbd" name="stable window, where there is one"
-              stroke="#38bdf8" strokeDasharray="4 3" dot connectNulls={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={288} className="mt-3">
+        <LineChart data={series} margin={{ top: 10, right: 30, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="pWhPsia" type="number" tick={AXIS}
+            label={{ value: 'wellhead pressure, psia', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis yAxisId="q" tick={AXIS}
+            label={{ value: 'operating rate, stb/d', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis yAxisId="w" orientation="right" tick={AXIS}
+            label={{ value: 'stable window, stb/d', angle: 90, position: 'insideRight', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 4)} />
+          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          {dead.map((r) => (
+            <ReferenceLine key={r.pWhPsia} yAxisId="q" x={r.pWhPsia} stroke={seriesColor(3)} strokeDasharray="4 3"
+              label={{ value: 'DEAD', fill: seriesColor(3), fontSize: 10, position: 'top' }} />
+          ))}
+          <Line yAxisId="q" type="monotone" dataKey="liveQStbd" name="operating rate, where there is one"
+            stroke={seriesColor(1)} dot connectNulls={false} isAnimationActive={false} />
+          <Line yAxisId="w" type="monotone" dataKey="liveWindowStbd" name="stable window, where there is one"
+            stroke={seriesColor(0)} strokeDasharray="4 3" dot connectNulls={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">wellhead pressure, psia</th>
               <th className="text-left pr-3">the dead column, psia</th>
@@ -610,9 +605,9 @@ const Sweep = ({ W }) => {
           <tbody>
             {rows.map((r) => (
               <tr key={r.pWhPsia}
-                className={r.status === 'flowing' ? '' : 'text-rose-200 font-bold bg-rose-900/40'}>
+                className={r.status === 'flowing' ? '' : 'text-pl-danger-text font-bold bg-pl-danger-bg'}>
                 <td className="pr-3">{fmt(r.pWhPsia, 2)}</td>
-                <td className="pr-3 text-slate-400">{fmt(r.deadColumnPsia, 0)}</td>
+                <td className="pr-3 text-pl-muted">{fmt(r.deadColumnPsia, 0)}</td>
                 <td className="pr-3">{STATUS_WORDS[r.status] || r.status}</td>
                 <td className="pr-3">{fmt(r.crossings, 0)}</td>
                 <td className="pr-3">{r.unstableQStbd === null ? 'none' : fmt(r.unstableQStbd, 4)}</td>
@@ -624,12 +619,12 @@ const Sweep = ({ W }) => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         {dead.length
           ? `The green line stops. It does not fall to zero and it does not carry on flat, it BREAKS, at ${fmt(dead[0].pWhPsia, 2)} psia, because there is no operating rate there to draw. Choking a well back lifts the whole outflow curve by the amount you added, one for one, so the two crossings walk towards each other, the stable window narrows, and at some pressure the curves stop touching and the well has no solution at any rate. Reporting that as a rate of zero would be a lie of the worst kind, because zero is a number and the answer here is that there is no number.`
           : `Nothing on this sweep kills the well, and the sweep says so plainly rather than implying safety. Raise the wellhead pressure far enough with the field above and the green line will break: choking a well back lifts the whole outflow curve one for one, the crossings walk towards each other and at some pressure the curves stop touching altogether. Where that happens is the margin this well is operating on.`}
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         Read the window column beside the rate column, because they do not carry the same warning.
         The rate falls smoothly and gives no sign of what is coming. The window is the thing that
         collapses, and it collapses first. A well can be losing almost none of its rate while it

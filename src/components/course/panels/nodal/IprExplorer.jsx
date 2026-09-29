@@ -1,8 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid,
+  LineChart, Line, BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid,
   Tooltip, Legend, ReferenceLine, ReferenceDot,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, CHART_COLORS } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import {
   TEACHING_WELLS, BONNY_7, linspace,
   wellIpr, wellInflowReadings, wellForwardPressures, wellModelComparison, wellModelAofs,
@@ -21,9 +24,9 @@ import { PanelShell, NumField, SelectField, Tile, TileGrid, FieldGrid, Note } fr
 
 const fmt = (v, d = 4) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: 0 })
-  : '-');
+  : 'n/a');
 
-const pct = (v, d = 2) => (Number.isFinite(v) ? `${fmt(v * 100, d)} %` : '-');
+const pct = (v, d = 2) => (Number.isFinite(v) ? `${fmt(v * 100, d)} %` : 'n/a');
 
 const yn = (b) => (b ? 'yes' : 'no');
 
@@ -36,9 +39,9 @@ const MODES = [
 
 const WELLS = TEACHING_WELLS.map((W) => [W.label, `${W.label}: ${W.note}`]);
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const GRID = <CartesianGrid stroke="#334155" strokeDasharray="3 3" />;
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const GRID = <CartesianGrid {...GRID_STYLE} />;
 
 const wellOf = (label) => TEACHING_WELLS.find((W) => W.label === label) || BONNY_7;
 
@@ -93,32 +96,30 @@ const Models = ({ W }) => {
             value={yn(straightAgreesAbovePb)} />
         </TileGrid>
       </div>
-      <div className="h-72 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="pwfPsia" type="number" reversed domain={[0, W.prPsia]} tick={AXIS}
-              label={{ value: 'flowing bottomhole pressure, psia', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS}
-              label={{ value: 'rate, stb/d', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 3)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine x={W.pbPsia} stroke="#f472b6" strokeDasharray="5 3"
-              label={{ value: 'bubble point', fill: '#f472b6', fontSize: 10, position: 'top' }} />
-            <ReferenceLine x={W.testPwfPsia} stroke="#38bdf8" strokeDasharray="5 3"
-              label={{ value: 'the test', fill: '#38bdf8', fontSize: 10, position: 'top' }} />
-            <Line type="monotone" dataKey="straightLineStbd" name="straight line, a constant index"
-              stroke="#f97316" dot={false} isAnimationActive={false} />
-            <Line type="monotone" dataKey="vogelStbd" name="Vogel, wholly saturated"
-              stroke="#38bdf8" dot={false} isAnimationActive={false} />
-            <Line type="monotone" dataKey="compositeStbd" name="composite, straight above pb and Vogel below"
-              stroke="#BFFF00" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={288} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="pwfPsia" type="number" reversed domain={[0, W.prPsia]} tick={AXIS}
+            label={{ value: 'flowing bottomhole pressure, psia', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS}
+            label={{ value: 'rate, stb/d', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 3)} />
+          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <ReferenceLine x={W.pbPsia} stroke={seriesColor(4)} strokeDasharray="5 3"
+            label={{ value: 'bubble point', fill: seriesColor(4), fontSize: 10, position: 'top' }} />
+          <ReferenceLine x={W.testPwfPsia} stroke={seriesColor(0)} strokeDasharray="5 3"
+            label={{ value: 'the test', fill: seriesColor(0), fontSize: 10, position: 'top' }} />
+          <Line type="monotone" dataKey="straightLineStbd" name="straight line, a constant index"
+            stroke={seriesColor(2)} dot={false} isAnimationActive={false} />
+          <Line type="monotone" dataKey="vogelStbd" name="Vogel, wholly saturated"
+            stroke={seriesColor(0)} dot={false} isAnimationActive={false} />
+          <Line type="monotone" dataKey="compositeStbd" name="composite, straight above pb and Vogel below"
+            stroke={seriesColor(1)} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">flowing pressure, psia</th>
               <th className="text-left pr-3">below the bubble point</th>
@@ -131,12 +132,12 @@ const Models = ({ W }) => {
           </thead>
           <tbody>
             {rows.map((r) => (
-              <tr key={r.pwfPsia} className={r.pwfPsia === W.testPwfPsia ? 'text-white' : ''}>
+              <tr key={r.pwfPsia} className={r.pwfPsia === W.testPwfPsia ? 'text-pl-text' : ''}>
                 <td className="pr-3">{fmt(r.pwfPsia, 0)}</td>
-                <td className="pr-3 text-slate-400">{yn(r.belowBubblePoint)}</td>
-                <td className="pr-3 text-[#f97316]">{fmt(r.straightLineStbd, 3)}</td>
-                <td className="pr-3 text-[#38bdf8]">{fmt(r.vogelStbd, 3)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.compositeStbd, 3)}</td>
+                <td className="pr-3 text-pl-muted">{yn(r.belowBubblePoint)}</td>
+                <td className="pr-3 text-pl-warning-text">{fmt(r.straightLineStbd, 3)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.vogelStbd, 3)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.compositeStbd, 3)}</td>
                 <td className="pr-3">{fmt(r.straightLineMinusCompositeStbd, 3)}</td>
                 <td>{fmt(r.vogelMinusCompositeStbd, 3)}</td>
               </tr>
@@ -144,11 +145,11 @@ const Models = ({ W }) => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         Read the last two columns down the table. At the test itself, {fmt(W.testPwfPsia, 0)} psia,
-        all three families return {atTest ? fmt(atTest.compositeStbd, 3) : '-'} stb/d and the two
-        difference columns are {atTest ? fmt(atTest.straightLineMinusCompositeStbd, 6) : '-'} and
-        {' '}{atTest ? fmt(atTest.vogelMinusCompositeStbd, 6) : '-'}, because all three were
+        all three families return {atTest ? fmt(atTest.compositeStbd, 3) : 'n/a'} stb/d and the two
+        difference columns are {atTest ? fmt(atTest.straightLineMinusCompositeStbd, 6) : 'n/a'} and
+        {' '}{atTest ? fmt(atTest.vogelMinusCompositeStbd, 6) : 'n/a'}, because all three were
         calibrated on that one point.
         {straightAgreesAbovePb
           ? ` Above the bubble point the straight line and the composite are the same curve on this well, and the engine says so exactly: every row above ${fmt(W.pbPsia, 0)} psia carries a difference of nought, because this well's test was taken above its bubble point and the straight line therefore backs out the well's own index.`
@@ -156,12 +157,12 @@ const Models = ({ W }) => {
         {' '}Vogel joins neither of them above the bubble point, and the reason is worth naming, it
         treats the whole drawdown as saturated and so bends where there is nothing to bend for.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         Below the bubble point they come apart further. At {fmt(W.pbPsia, 0)} psia the straight line
         reading and the composite reading differ by
-        {' '}{atPb ? fmt(atPb.straightLineMinusCompositeStbd, 3) : '-'} stb/d, and at zero pressure
-        the straight line offers {atZero ? fmt(atZero.straightLineStbd, 3) : '-'} stb/d against the
-        composite's {atZero ? fmt(atZero.compositeStbd, 3) : '-'}. Gas coming out of solution takes
+        {' '}{atPb ? fmt(atPb.straightLineMinusCompositeStbd, 3) : 'n/a'} stb/d, and at zero pressure
+        the straight line offers {atZero ? fmt(atZero.straightLineStbd, 3) : 'n/a'} stb/d against the
+        composite's {atZero ? fmt(atZero.compositeStbd, 3) : 'n/a'}. Gas coming out of solution takes
         the relative permeability to oil down with it, and a constant index has no way to say that.
       </div>
       <Note>
@@ -191,16 +192,16 @@ const Calibration = ({ W }) => {
   const corrupted = aofs.calibrationIsCorrupted;
   return (
     <>
-      <div className={`rounded-md border p-4 ${corrupted ? 'border-rose-700 bg-rose-900/20' : 'border-emerald-600 bg-emerald-900/20'}`}>
-        <p className="text-xs text-gray-400 mb-1">
+      <div className={`rounded-md border p-4 ${corrupted ? 'border-pl-danger/40 bg-pl-danger-bg' : 'border-pl-success/40 bg-pl-success-bg'}`}>
+        <p className="text-xs text-pl-muted mb-1">
           The productivity index each family backs out of the SAME test on {W.label}
         </p>
-        <p className="text-2xl font-bold text-white mb-1">
+        <p className="text-2xl font-bold text-pl-text mb-1">
           {fmt(aofs.straightLinePiStbdPerPsi, 6)}
-          <span className="text-[#BFFF00]"> against </span>
-          {fmt(aofs.compositePiStbdPerPsi, 6)} <span className="text-gray-400 text-sm">stb/d/psi</span>
+          <span className="text-pl-primary-text"> against </span>
+          {fmt(aofs.compositePiStbdPerPsi, 6)} <span className="text-pl-muted text-sm">stb/d/psi</span>
         </p>
-        <p className={`text-sm mb-0 ${corrupted ? 'text-rose-300' : 'text-emerald-300'}`}>
+        <p className={`text-sm mb-0 ${corrupted ? 'text-pl-danger-text' : 'text-pl-success-text'}`}>
           {corrupted
             ? `The test sits at ${fmt(W.testPwfPsia, 0)} psia, BELOW the ${fmt(W.pbPsia, 0)} psia bubble point, so the straight line is being fitted to a two phase test. The index it returns is ${fmt(aofs.piErrorStbdPerPsi, 6)} stb/d/psi away from the well's own, and the sign of that gap says the straight line UNDERSTATES the index.`
             : `The test sits at ${fmt(W.testPwfPsia, 0)} psia, ABOVE the ${fmt(W.pbPsia, 0)} psia bubble point, so the straight line is being fitted to single phase flow and it backs out the well's own index exactly. The gap is ${fmt(aofs.piErrorStbdPerPsi, 6)} stb/d/psi.`}
@@ -219,8 +220,8 @@ const Calibration = ({ W }) => {
         </TileGrid>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">published case</th>
               <th className="text-left pr-3">family</th>
@@ -235,14 +236,14 @@ const Calibration = ({ W }) => {
           </thead>
           <tbody>
             {golden.map((c) => (
-              <tr key={c.id} className={c.id.startsWith('composite') ? 'text-white' : ''}>
+              <tr key={c.id} className={c.id.startsWith('composite') ? 'text-pl-text' : ''}>
                 <td className="pr-3">{c.id}</td>
-                <td className="pr-3 text-slate-400">{c.model}</td>
+                <td className="pr-3 text-pl-muted">{c.model}</td>
                 <td className="pr-3">{fmt(c.inputs.pr, 0)}</td>
                 <td className="pr-3">{fmt(c.inputs.pb, 0)}</td>
                 <td className="pr-3">{fmt(c.inputs.testQ, 0)} at {fmt(c.inputs.testPwf, 0)}</td>
-                <td className="pr-3 text-[#BFFF00]">{Number.isFinite(c.piStbdPerPsi) ? fmt(c.piStbdPerPsi, 7) : 'the family has none'}</td>
-                <td className="pr-3">{Number.isFinite(c.fetkovichC) ? fmt(c.fetkovichC, 10) : '-'}</td>
+                <td className="pr-3 text-pl-primary-text">{Number.isFinite(c.piStbdPerPsi) ? fmt(c.piStbdPerPsi, 7) : 'the family has none'}</td>
+                <td className="pr-3">{Number.isFinite(c.fetkovichC) ? fmt(c.fetkovichC, 10) : 'n/a'}</td>
                 <td className="pr-3">{fmt(c.aofStbd, 4)}</td>
                 <td>{fmt(c.qAtTestPwfStbd, 6)}</td>
               </tr>
@@ -250,7 +251,7 @@ const Calibration = ({ W }) => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         The last column is the check every one of these cases has to pass: read the calibrated curve
         back at the pressure the test was taken at and the rate that comes out is the rate that went
         in. Calibration is not a fit through a cloud, it is one equation in one unknown, and a
@@ -260,7 +261,7 @@ const Calibration = ({ W }) => {
         two composite rows are the same family calibrated from a test on either side of the bubble
         point.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         Compare those two composite rows and then read the card above. The index a straight line
         backs out of a test is the test rate over the test drawdown, and that is only the
         productivity index if the flow between the sandface and the reservoir was single phase all
@@ -324,32 +325,30 @@ const Reading = ({ W }) => {
           <Tile label="Inverse: share of the open flow" value={pct(invRow.fracOfAof, 3)} />
         </TileGrid>
       </div>
-      <div className="h-72 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={curve} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="q" type="number" domain={[0, readings.aofStbd]} tick={AXIS}
-              label={{ value: 'rate, stb/d', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis dataKey="pwf" domain={[0, W.prPsia]} tick={AXIS}
-              label={{ value: 'flowing bottomhole pressure, psia', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 3)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line type="monotone" dataKey="pwf" name="the composite inflow curve"
-              stroke="#BFFF00" dot={false} isAnimationActive={false} />
-            <ReferenceLine y={fwdRow.pwfPsia} stroke="#38bdf8" strokeDasharray="4 3"
-              label={{ value: 'forward: a pressure goes in', fill: '#38bdf8', fontSize: 10, position: 'insideTopRight' }} />
-            <ReferenceDot x={fwdRow.qStbd} y={fwdRow.pwfPsia} r={5} fill="#38bdf8" stroke="none" />
-            <ReferenceLine x={invRow.qStbd} stroke="#f472b6" strokeDasharray="4 3"
-              label={{ value: 'inverse: a rate goes in', fill: '#f472b6', fontSize: 10, position: 'insideTopLeft' }} />
-            <ReferenceDot x={invRow.qStbd} y={invRow.pwfPsia} r={5} fill="#f472b6" stroke="none" />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={288} className="mt-3">
+        <LineChart data={curve} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="q" type="number" domain={[0, readings.aofStbd]} tick={AXIS}
+            label={{ value: 'rate, stb/d', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis dataKey="pwf" domain={[0, W.prPsia]} tick={AXIS}
+            label={{ value: 'flowing bottomhole pressure, psia', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 3)} />
+          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Line type="monotone" dataKey="pwf" name="the composite inflow curve"
+            stroke={seriesColor(1)} dot={false} isAnimationActive={false} />
+          <ReferenceLine y={fwdRow.pwfPsia} stroke={seriesColor(0)} strokeDasharray="4 3"
+            label={{ value: 'forward: a pressure goes in', fill: seriesColor(0), fontSize: 10, position: 'insideTopRight' }} />
+          <ReferenceDot x={fwdRow.qStbd} y={fwdRow.pwfPsia} r={5} fill={seriesColor(0)} stroke="none" />
+          <ReferenceLine x={invRow.qStbd} stroke={seriesColor(4)} strokeDasharray="4 3"
+            label={{ value: 'inverse: a rate goes in', fill: seriesColor(4), fontSize: 10, position: 'insideTopLeft' }} />
+          <ReferenceDot x={invRow.qStbd} y={invRow.pwfPsia} r={5} fill={seriesColor(4)} stroke="none" />
+        </LineChart>
+      </ChartFrame>
       <div className="grid gap-3 lg:grid-cols-2 mt-3">
         <div className="overflow-x-auto">
-          <p className="text-xs text-slate-500 mb-1">Forward: a pressure in, a rate out</p>
-          <table className="text-xs text-slate-300 w-full">
-            <thead className="text-slate-500">
+          <p className="text-xs text-pl-muted mb-1">Forward: a pressure in, a rate out</p>
+          <table className="text-xs text-pl-text w-full">
+            <thead className="text-pl-muted">
               <tr>
                 <th className="text-left pr-3">pressure, psia</th>
                 <th className="text-left pr-3">rate, stb/d</th>
@@ -359,7 +358,7 @@ const Reading = ({ W }) => {
             </thead>
             <tbody>
               {forward.map((r) => (
-                <tr key={r.pwfPsia} className={r.pwfPsia === fwdRow.pwfPsia ? 'text-[#38bdf8]' : ''}>
+                <tr key={r.pwfPsia} className={r.pwfPsia === fwdRow.pwfPsia ? 'text-pl-info-text' : ''}>
                   <td className="pr-3">{fmt(r.pwfPsia, 0)}</td>
                   <td className="pr-3">{fmt(r.qStbd, 4)}</td>
                   <td className="pr-3">{fmt(r.drawdownPsi, 0)}</td>
@@ -370,9 +369,9 @@ const Reading = ({ W }) => {
           </table>
         </div>
         <div className="overflow-x-auto">
-          <p className="text-xs text-slate-500 mb-1">Inverse: a rate in, a pressure out</p>
-          <table className="text-xs text-slate-300 w-full">
-            <thead className="text-slate-500">
+          <p className="text-xs text-pl-muted mb-1">Inverse: a rate in, a pressure out</p>
+          <table className="text-xs text-pl-text w-full">
+            <thead className="text-pl-muted">
               <tr>
                 <th className="text-left pr-3">rate, stb/d</th>
                 <th className="text-left pr-3">pressure, psia</th>
@@ -382,7 +381,7 @@ const Reading = ({ W }) => {
             </thead>
             <tbody>
               {inverse.map((r) => (
-                <tr key={r.qStbd} className={r.qStbd === invRow.qStbd ? 'text-[#f472b6]' : ''}>
+                <tr key={r.qStbd} className={r.qStbd === invRow.qStbd ? 'text-pl-accent-text' : ''}>
                   <td className="pr-3">{fmt(r.qStbd, 0)}</td>
                   <td className="pr-3">{fmt(r.pwfPsia, 4)}</td>
                   <td className="pr-3">{fmt(r.drawdownPsi, 3)}</td>
@@ -393,7 +392,7 @@ const Reading = ({ W }) => {
           </table>
         </div>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         Both markers sit on the same curve and neither reading is harder than the other to look at.
         They are not the same OPERATION. The forward reading evaluates the relation: hand it
         {' '}{fmt(fwdRow.pwfPsia, 0)} psia and the composite says {fmt(fwdRow.qStbd, 4)} stb/d in one
@@ -403,12 +402,12 @@ const Reading = ({ W }) => {
         an evaluation and one is a search, and they can fail in different ways.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <p className="text-xs text-slate-500 mb-1">
+        <p className="text-xs text-pl-muted mb-1">
           Why the search, and not a reading off the sampled curve: the published gas families,
           inverted both ways
         </p>
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">published gas case</th>
               <th className="text-left pr-3">rate, Mscf/d</th>
@@ -419,7 +418,7 @@ const Reading = ({ W }) => {
           </thead>
           <tbody>
             {chord.flatMap((c) => c.chord40.map((r) => (
-              <tr key={`${c.id}-${r.qMscfd}`} className={Math.abs(r.biasPsi) > 5 ? 'text-rose-300 font-semibold' : ''}>
+              <tr key={`${c.id}-${r.qMscfd}`} className={Math.abs(r.biasPsi) > 5 ? 'text-pl-danger-text font-semibold' : ''}>
                 <td className="pr-3">{c.id}</td>
                 <td className="pr-3">{fmt(r.qMscfd, 4)}</td>
                 <td className="pr-3">{fmt(r.chordPwfPsia, 4)}</td>
@@ -430,7 +429,7 @@ const Reading = ({ W }) => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         Every bias in that last column is NEGATIVE, and that is the tell. The engine samples a gas
         deliverability curve evenly in PRESSURE, which makes it sparse in RATE exactly where the
         curve is steepest, so a straight chord drawn between two neighbouring samples cuts the
@@ -464,22 +463,22 @@ const Aof = ({ W }) => {
     return <Note>An absolute open flow is a reading off a calibrated curve, so a well with no curve has no open flow. The engine returns NaN rather than a large number, which is the right refusal: an open flow invented from a reservoir pressure alone would look exactly like a real one.</Note>;
   }
   const bars = [
-    { name: 'straight line', v: aofs.straightLineStbd, fill: '#f97316' },
-    { name: 'Vogel', v: aofs.vogelStbd, fill: '#38bdf8' },
-    { name: 'composite', v: aofs.compositeStbd, fill: '#BFFF00' },
+    { name: 'straight line', v: aofs.straightLineStbd, fill: seriesColor(2) },
+    { name: 'Vogel', v: aofs.vogelStbd, fill: seriesColor(0) },
+    { name: 'composite', v: aofs.compositeStbd, fill: seriesColor(1) },
   ];
   const atZero = readings.forward[readings.forward.length - 1];
   return (
     <>
-      <div className="rounded-md border border-gray-700 bg-[#0F172A] p-4">
-        <p className="text-xs text-gray-400 mb-1">
+      <div className="rounded-md border border-pl-border bg-pl-sunken p-4">
+        <p className="text-xs text-pl-muted mb-1">
           The absolute open flow on {W.label}: the rate the calibrated curve returns at a flowing
           bottomhole pressure of nought
         </p>
-        <p className="text-2xl font-bold text-white mb-1">
-          {fmt(aofs.compositeStbd, 4)} <span className="text-gray-400 text-sm">stb/d</span>
+        <p className="text-2xl font-bold text-pl-text mb-1">
+          {fmt(aofs.compositeStbd, 4)} <span className="text-pl-muted text-sm">stb/d</span>
         </p>
-        <p className="text-sm mb-0 text-gray-300">
+        <p className="text-sm mb-0 text-pl-text">
           The same well read by the other two families gives
           {' '}{fmt(aofs.straightLineStbd, 4)} and {fmt(aofs.vogelStbd, 4)} stb/d. Three numbers, one
           well, one production test. The open flow is as much a property of the family you chose as
@@ -500,25 +499,23 @@ const Aof = ({ W }) => {
           <Tile label="Vogel open flow" value={fmt(aofs.vogelStbd, 4)} unit="stb/d" />
         </TileGrid>
       </div>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={bars} margin={{ top: 10, right: 16, bottom: 5, left: 20 }}>
-            {GRID}
-            <XAxis dataKey="name" tick={{ fill: '#94a3b8', fontSize: 10 }} />
-            <YAxis tick={AXIS} tickFormatter={(v) => fmt(v, 0)}
-              label={{ value: 'open flow, stb/d', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 4)} />
-            <ReferenceLine y={aofs.compositeStbd} stroke="#BFFF00" strokeDasharray="5 3"
-              label={{ value: 'the composite reading', fill: '#BFFF00', fontSize: 10, position: 'insideBottomRight' }} />
-            <Bar dataKey="v" name="stb/d" isAnimationActive={false}>
-              {bars.map((b) => <Cell key={b.name} fill={b.fill} />)}
-            </Bar>
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <BarChart data={bars} margin={{ top: 10, right: 16, bottom: 5, left: 20 }}>
+          {GRID}
+          <XAxis dataKey="name" tick={{ ...AXIS_TICK, fontSize: 10 }} />
+          <YAxis tick={AXIS} tickFormatter={(v) => fmt(v, 0)}
+            label={{ value: 'open flow, stb/d', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 4)} />
+          <ReferenceLine y={aofs.compositeStbd} stroke={seriesColor(1)} strokeDasharray="5 3"
+            label={{ value: 'the composite reading', fill: seriesColor(1), fontSize: 10, position: 'insideBottomRight' }} />
+          <Bar dataKey="v" name="stb/d" isAnimationActive={false}>
+            {bars.map((b) => <Cell key={b.name} fill={b.fill} />)}
+          </Bar>
+        </BarChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">published case</th>
               <th className="text-left pr-3">family</th>
@@ -532,24 +529,24 @@ const Aof = ({ W }) => {
             {published.map((c) => (
               <tr key={c.id}>
                 <td className="pr-3">{c.id}</td>
-                <td className="pr-3 text-slate-400">{c.model}</td>
+                <td className="pr-3 text-pl-muted">{c.model}</td>
                 <td className="pr-3">{fmt(c.inputs.pr, 0)}</td>
-                <td className="pr-3">{Number.isFinite(c.inputs.pb) ? fmt(c.inputs.pb, 0) : '-'}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(c.aofStbd, 4)}</td>
+                <td className="pr-3">{Number.isFinite(c.inputs.pb) ? fmt(c.inputs.pb, 0) : 'n/a'}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(c.aofStbd, 4)}</td>
                 <td>{fmt(c.curveRows, 0)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         WHAT THE OPEN FLOW IS. It is the last row of the forward table and nothing more: the rate
         the calibrated relation returns when you hand it a flowing bottomhole pressure of nought. It
         is the cleanest single number for comparing one inflow against another, it is what a
         deliverability curve is normalised against, and it is the upper bound the node solver scans
         up to.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         WHAT IT IS NOT. It is not a rate anybody should plan on. Producing at it would require the
         pressure at the sandface to be nought, which means the full {fmt(atZero.drawdownPsi, 0)} psi
         of drawdown, no column standing in the tubing, no wellhead pressure and no separator to

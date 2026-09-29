@@ -1,8 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, ComposedChart, LineChart, Line,
+  ComposedChart, LineChart, Line,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine, ReferenceDot,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, CHART_COLORS } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import {
   RULE_OF_THUMB_PSI_PER_FT, REFINEMENT_STEPS, CLOSED_FORM_STEPS, PUBLISHED_DESIGN_IDS,
   columnExplorer, refinementTargets, typedGasColumn, TYPED_COLUMN_DEFAULT,
@@ -25,10 +28,10 @@ import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/comp
 
 const fmt = (v, d = 4) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: 0 })
-  : '-');
+  : 'n/a');
 
 const tiny = (v) => {
-  if (!Number.isFinite(v)) return '-';
+  if (!Number.isFinite(v)) return 'n/a';
   if (v === 0) return '0';
   return Math.abs(v) < 0.0005 ? v.toExponential(3) : fmt(v, 8);
 };
@@ -41,9 +44,9 @@ const MODES = [
   ['typed', 'Your well, typed'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const GRID = <CartesianGrid stroke="#334155" strokeDasharray="3 3" />;
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const GRID = <CartesianGrid {...GRID_STYLE} />;
 
 const columnOptions = () => columnExplorer.columnIds.map((i) => [String(i), `published column ${i}`]);
 
@@ -78,40 +81,36 @@ const Column = () => {
           <Tile label="Local gradient over the rule, at surface" value={fmt(c.rows[0].gradientOverRule, 4)} />
         </TileGrid>
       </div>
-      <div className="h-72 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={c.rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="tvdFt" type="number" tick={AXIS}
-              label={{ value: 'depth, ft TVD', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS} domain={['auto', 'auto']}
-              label={{ value: 'pressure, psia', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 4)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line type="monotone" dataKey="enginePsia" name="the gas column the engine marches"
-              stroke="#BFFF00" dot={false} isAnimationActive={false} />
-            <Line type="monotone" dataKey="flatPsia" name={`the flat ${fmt(RULE_OF_THUMB_PSI_PER_FT, 3)} psi/ft rule`}
-              stroke="#f97316" strokeDasharray="5 3" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={c.rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="tvdFt" type="number" tick={AXIS}
-              label={{ value: 'depth, ft TVD', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS}
-              label={{ value: 'rule less engine, psi', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 4)} />
-            <ReferenceLine y={0} stroke="#64748b" />
-            <Line type="monotone" dataKey="ruleErrorPsi" name="the miss" stroke="#38bdf8" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={288} className="mt-3">
+        <LineChart data={c.rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="tvdFt" type="number" tick={AXIS}
+            label={{ value: 'depth, ft TVD', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS} domain={['auto', 'auto']}
+            label={{ value: 'pressure, psia', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 4)} />
+          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Line type="monotone" dataKey="enginePsia" name="the gas column the engine marches"
+            stroke={seriesColor(1)} dot={false} isAnimationActive={false} />
+          <Line type="monotone" dataKey="flatPsia" name={`the flat ${fmt(RULE_OF_THUMB_PSI_PER_FT, 3)} psi/ft rule`}
+            stroke={seriesColor(2)} strokeDasharray="5 3" dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={c.rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="tvdFt" type="number" tick={AXIS}
+            label={{ value: 'depth, ft TVD', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS}
+            label={{ value: 'rule less engine, psi', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 4)} />
+          <ReferenceLine y={0} stroke={SVG_CHART.reference} />
+          <Line type="monotone" dataKey="ruleErrorPsi" name="the miss" stroke={seriesColor(0)} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">depth, ft TVD</th>
               <th className="text-left pr-3">engine, psia</th>
@@ -127,8 +126,8 @@ const Column = () => {
             {c.rows.map((r) => (
               <tr key={r.tvdFt}>
                 <td className="pr-3">{fmt(r.tvdFt, 0)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.enginePsia, 4)}</td>
-                <td className="pr-3 text-[#f97316]">{fmt(r.flatPsia, 4)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.enginePsia, 4)}</td>
+                <td className="pr-3 text-pl-warning-text">{fmt(r.flatPsia, 4)}</td>
                 <td className="pr-3">{fmt(r.ruleErrorPsi, 4)}</td>
                 <td className="pr-3">{fmt(r.localGradientPsiPerFt, 8)}</td>
                 <td className="pr-3">{fmt(r.gradientOverRule, 4)}</td>
@@ -139,7 +138,7 @@ const Column = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THE RULE ERRS IN BOTH DIRECTIONS, AND THAT IS THE POINT. A flat
         {' '}{fmt(RULE_OF_THUMB_PSI_PER_FT, 3)} psi/ft has no pressure in it at all, so it cannot be
         low on one column and right on another: it is wrong in one direction on a heavy column and
@@ -190,28 +189,26 @@ const Gradient = () => {
           <Tile label="The control is held at" value={fmt(s.isothermalTempF, 2)} unit="degF" />
         </TileGrid>
       </div>
-      <div className="h-80 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={g.control} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="tvdFt" type="number" tick={AXIS}
-              label={{ value: 'depth, ft TVD', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS} domain={['auto', 'auto']}
-              label={{ value: 'local gradient, psi/ft', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 8)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={RULE_OF_THUMB_PSI_PER_FT} stroke="#f97316" strokeDasharray="5 3"
-              label={{ value: 'the flat rule', fill: '#f97316', fontSize: 10, position: 'right' }} />
-            <Line type="monotone" dataKey="geothermalGradientPsiPerFt"
-              name="temperature MOVING, the real well" stroke="#BFFF00" dot={false} isAnimationActive={false} />
-            <Line type="monotone" dataKey="isothermalGradientPsiPerFt"
-              name="temperature HELD at the wellhead, the control" stroke="#38bdf8" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={320} className="mt-3">
+        <LineChart data={g.control} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="tvdFt" type="number" tick={AXIS}
+            label={{ value: 'depth, ft TVD', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS} domain={['auto', 'auto']}
+            label={{ value: 'local gradient, psi/ft', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 8)} />
+          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <ReferenceLine y={RULE_OF_THUMB_PSI_PER_FT} stroke={seriesColor(2)} strokeDasharray="5 3"
+            label={{ value: 'the flat rule', fill: seriesColor(2), fontSize: 10, position: 'right' }} />
+          <Line type="monotone" dataKey="geothermalGradientPsiPerFt"
+            name="temperature MOVING, the real well" stroke={seriesColor(1)} dot={false} isAnimationActive={false} />
+          <Line type="monotone" dataKey="isothermalGradientPsiPerFt"
+            name="temperature HELD at the wellhead, the control" stroke={seriesColor(0)} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">depth, ft TVD</th>
               <th className="text-left pr-3">temperature, degF</th>
@@ -227,8 +224,8 @@ const Gradient = () => {
               <tr key={r.tvdFt}>
                 <td className="pr-3">{fmt(r.tvdFt, 0)}</td>
                 <td className="pr-3">{fmt(r.geothermalTempF, 2)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.geothermalGradientPsiPerFt, 8)}</td>
-                <td className="pr-3 text-[#38bdf8]">{fmt(r.isothermalGradientPsiPerFt, 8)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.geothermalGradientPsiPerFt, 8)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.isothermalGradientPsiPerFt, 8)}</td>
                 <td className="pr-3">{fmt(r.isothermalLessGeothermalGradientPsiPerFt, 8)}</td>
                 <td className="pr-3">{fmt(r.geothermalZ, 6)}</td>
                 <td>{fmt(r.isothermalZ, 6)}</td>
@@ -237,7 +234,7 @@ const Gradient = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THE CORRECTED RESULT, AND IT IS A RACE RATHER THAN A STORY. The gas gradient is density over
         144, and density goes as pressure over z times temperature, so going down the hole
         compression pushes the gradient UP and the geotherm pushes it DOWN. Which one wins has to be
@@ -256,7 +253,7 @@ const Gradient = () => {
         with DEPTH is the race, and this plot is the only honest way to answer it: two curves, one
         input changed, everything else identical.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         SO THE {fmt(RULE_OF_THUMB_PSI_PER_FT, 3)} PSI/FT RULE ERRS IN BOTH DIRECTIONS. It is not a
         conservative approximation that always reads one way, and it cannot be, because a constant
         cannot follow a quantity that moves with pressure. Across the three published columns the
@@ -307,24 +304,22 @@ const Convergence = () => {
           <Tile label="Ratios over that contiguous run" value={fmt(ratios.length, 0)} />
         </TileGrid>
       </div>
-      <div className="h-72 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="steps" type="number" scale="log" domain={['dataMin', 'dataMax']} tick={AXIS}
-              label={{ value: 'steps in the march', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS}
-              label={{ value: 'march less reference, psi', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => tiny(v)} />
-            <ReferenceLine y={0} stroke="#64748b" />
-            <Line type="monotone" dataKey="errorPsi" name="the truncation, which goes to zero"
-              stroke="#BFFF00" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={288} className="mt-3">
+        <LineChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="steps" type="number" scale="log" domain={['dataMin', 'dataMax']} tick={AXIS}
+            label={{ value: 'steps in the march', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS}
+            label={{ value: 'march less reference, psi', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => tiny(v)} />
+          <ReferenceLine y={0} stroke={SVG_CHART.reference} />
+          <Line type="monotone" dataKey="errorPsi" name="the truncation, which goes to zero"
+            stroke={seriesColor(1)} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">steps</th>
               <th className="text-left pr-3">the march reads, psia</th>
@@ -338,15 +333,15 @@ const Convergence = () => {
               <tr key={r.steps}>
                 <td className="pr-3">{fmt(r.steps, 0)}</td>
                 <td className="pr-3">{fmt(r.pPsia, 8)}</td>
-                <td className="pr-3 text-[#BFFF00]">{tiny(r.errorPsi)}</td>
-                <td className="pr-3">{Number.isFinite(r.errorRatio) ? fmt(r.errorRatio, 4) : '-'}</td>
+                <td className="pr-3 text-pl-primary-text">{tiny(r.errorPsi)}</td>
+                <td className="pr-3">{Number.isFinite(r.errorRatio) ? fmt(r.errorRatio, 4) : 'n/a'}</td>
                 <td>{k > 0 && r.steps === rows[k - 1].steps * 2 ? 'yes' : 'no'}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THE RATIO COLUMN RUNS OVER THE WHOLE CONTIGUOUS SEQUENCE AND IS NOT PICKED OVER. The march is
         a predictor with a trapezoidal corrector, so it is second order and every DOUBLING of the
         step count should cut the remaining error by about four.
@@ -358,8 +353,8 @@ const Convergence = () => {
         study actually contains, which is the whole reason the sequence is walked contiguously and
         printed contiguously.
       </div>
-      <div className="mt-4 rounded-md border border-gray-700 bg-[#0F172A] p-3">
-        <p className="text-xs text-gray-400 mb-2">
+      <div className="mt-4 rounded-md border border-pl-border bg-pl-sunken p-3">
+        <p className="text-xs text-pl-muted mb-2">
           THREE REFERENCES AND ONE MARCH. The same isothermal column has a closed form, and there
           are TWO of them: the textbook coefficient {fmt(coeff.textbookCoeff, 6)} and the engine's
           own air molar mass over 144 times the gas constant, {fmt(coeff.engineCoeff, 12)}. They
@@ -377,27 +372,25 @@ const Convergence = () => {
           <Tile label="Against the textbook, at the finest step" value={tiny(cf.marches[cf.marches.length - 1].errorAgainstTextbookPsi)} unit="psi" />
           <Tile label="Against the engine constant, at the finest step" value={tiny(cf.marches[cf.marches.length - 1].errorAgainstEnginePsi)} unit="psi" />
         </TileGrid>
-        <div className="h-64 mt-3">
-          <ResponsiveContainer width="100%" height="100%">
-            <ComposedChart data={cf.marches} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-              {GRID}
-              <XAxis dataKey="steps" type="number" scale="log" domain={['dataMin', 'dataMax']} tick={AXIS}
-                label={{ value: 'steps in the march', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-              <YAxis tick={AXIS}
-                label={{ value: 'march less closed form, psi', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-              <Tooltip contentStyle={TOOLTIP} formatter={(v) => tiny(v)} />
-              <Legend wrapperStyle={{ fontSize: 11 }} />
-              <ReferenceLine y={0} stroke="#64748b" />
-              <Line type="monotone" dataKey="errorAgainstTextbookPsi"
-                name="against the TEXTBOOK form, which parks" stroke="#f97316" dot isAnimationActive={false} />
-              <Line type="monotone" dataKey="errorAgainstEnginePsi"
-                name="against the ENGINE CONSTANT form, which converges" stroke="#38bdf8" dot isAnimationActive={false} />
-            </ComposedChart>
-          </ResponsiveContainer>
-        </div>
+        <ChartFrame height={256} className="mt-3">
+          <ComposedChart data={cf.marches} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+            {GRID}
+            <XAxis dataKey="steps" type="number" scale="log" domain={['dataMin', 'dataMax']} tick={AXIS}
+              label={{ value: 'steps in the march', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+            <YAxis tick={AXIS}
+              label={{ value: 'march less closed form, psi', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+            <Tooltip contentStyle={TOOLTIP} formatter={(v) => tiny(v)} />
+            <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+            <ReferenceLine y={0} stroke={SVG_CHART.reference} />
+            <Line type="monotone" dataKey="errorAgainstTextbookPsi"
+              name="against the TEXTBOOK form, which parks" stroke={seriesColor(2)} dot isAnimationActive={false} />
+            <Line type="monotone" dataKey="errorAgainstEnginePsi"
+              name="against the ENGINE CONSTANT form, which converges" stroke={seriesColor(0)} dot isAnimationActive={false} />
+          </ComposedChart>
+        </ChartFrame>
         <div className="mt-3 overflow-x-auto">
-          <table className="text-xs text-slate-300 w-full">
-            <thead className="text-slate-500">
+          <table className="text-xs text-pl-text w-full">
+            <thead className="text-pl-muted">
               <tr>
                 <th className="text-left pr-3">steps</th>
                 <th className="text-left pr-3">the march reads, psia</th>
@@ -410,15 +403,15 @@ const Convergence = () => {
                 <tr key={m.steps}>
                   <td className="pr-3">{fmt(m.steps, 0)}</td>
                   <td className="pr-3">{fmt(m.pPsia, 8)}</td>
-                  <td className="pr-3 text-[#f97316]">{tiny(m.errorAgainstTextbookPsi)}</td>
-                  <td className="text-[#38bdf8]">{tiny(m.errorAgainstEnginePsi)}</td>
+                  <td className="pr-3 text-pl-warning-text">{tiny(m.errorAgainstTextbookPsi)}</td>
+                  <td className="text-pl-info-text">{tiny(m.errorAgainstEnginePsi)}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         READ THE TWO COLUMNS SIDE BY SIDE AND THE DIFFERENCE IS THE WHOLE LESSON. The engine constant
         column falls by about four per doubling and keeps falling, all the way to
         {' '}{tiny(cf.marches[cf.marches.length - 1].errorAgainstEnginePsi)} psi. The textbook column
@@ -465,31 +458,29 @@ const Lines = () => {
           <Tile label="Deepest station plotted" value={fmt(deepest.tvdFt, 0)} unit="ft TVD" />
         </TileGrid>
       </div>
-      <div className="h-80 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="tvdFt" type="number" domain={['dataMin', 'dataMax']} tick={AXIS}
-              label={{ value: 'depth, ft TVD', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS} domain={['auto', 'auto']}
-              label={{ value: 'pressure, psia', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 4)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine x={x.tvdFt} stroke="#f472b6" strokeDasharray="4 3"
-              label={{ value: 'top valve', fill: '#f472b6', fontSize: 10, position: 'top' }} />
-            <Line type="monotone" dataKey="injectionPsia" name="the injection gas in the annulus"
-              stroke="#BFFF00" dot={false} isAnimationActive={false} />
-            <Line type="monotone" dataKey="unloadingPsia" name="the kill fluid being unloaded"
-              stroke="#38bdf8" dot={false} isAnimationActive={false} />
-            <Line type="monotone" dataKey="transferPsia" name="the transfer line, once gas is in"
-              stroke="#f97316" dot={false} isAnimationActive={false} />
-            <ReferenceDot x={x.tvdFt} y={x.injectionPsia} r={5} fill="#f472b6" stroke="none" isFront />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={320} className="mt-3">
+        <LineChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="tvdFt" type="number" domain={['dataMin', 'dataMax']} tick={AXIS}
+            label={{ value: 'depth, ft TVD', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS} domain={['auto', 'auto']}
+            label={{ value: 'pressure, psia', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 4)} />
+          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <ReferenceLine x={x.tvdFt} stroke={seriesColor(4)} strokeDasharray="4 3"
+            label={{ value: 'top valve', fill: seriesColor(4), fontSize: 10, position: 'top' }} />
+          <Line type="monotone" dataKey="injectionPsia" name="the injection gas in the annulus"
+            stroke={seriesColor(1)} dot={false} isAnimationActive={false} />
+          <Line type="monotone" dataKey="unloadingPsia" name="the kill fluid being unloaded"
+            stroke={seriesColor(0)} dot={false} isAnimationActive={false} />
+          <Line type="monotone" dataKey="transferPsia" name="the transfer line, once gas is in"
+            stroke={seriesColor(2)} dot={false} isAnimationActive={false} />
+          <ReferenceDot x={x.tvdFt} y={x.injectionPsia} r={5} fill={seriesColor(4)} stroke="none" isFront />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">depth, ft TVD</th>
               <th className="text-left pr-3">injection, psia</th>
@@ -499,17 +490,17 @@ const Lines = () => {
           </thead>
           <tbody>
             {rows.map((r) => (
-              <tr key={r.tvdFt} className={r.tvdFt > x.tvdFt ? 'text-slate-500' : ''}>
+              <tr key={r.tvdFt} className={r.tvdFt > x.tvdFt ? 'text-pl-muted' : ''}>
                 <td className="pr-3">{fmt(r.tvdFt, 1)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.injectionPsia, 4)}</td>
-                <td className="pr-3 text-[#38bdf8]">{fmt(r.unloadingPsia, 4)}</td>
-                <td className="text-[#f97316]">{fmt(r.transferPsia, 4)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.injectionPsia, 4)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.unloadingPsia, 4)}</td>
+                <td className="text-pl-warning-text">{fmt(r.transferPsia, 4)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THREE STRAIGHT LINES, AND ONLY ONE OF THEM IS A GAS COLUMN. The injection line is the real
         marched column from the mode above. The unloading line and the transfer line are STRAIGHT,
         on constant gradients the caller declares, and the engine does not pretend otherwise: a real
@@ -541,7 +532,7 @@ const Typed = () => {
   }, [values]);
   return (
     <>
-      <div className="text-xs text-slate-300">
+      <div className="text-xs text-pl-text">
         Type a well and weigh its injection gas. The view opens on the AKASO-3 teaching well, and
         every input can be retyped. The temperature runs in a straight line from the wellhead to the
         reference depth, which need not be the packer. The column is marched on the step count you

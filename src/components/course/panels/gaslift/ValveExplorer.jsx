@@ -1,8 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, ComposedChart, LineChart, Line, Bar,
+  ComposedChart, LineChart, Line, Bar,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, CHART_COLORS } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import {
   PUBLISHED_DESIGN_IDS, CATALOGUE_PORTS_IN, GAS_LIFT_THRESHOLDS,
   SPACING_MAX_ITERATES, TC_K,
@@ -29,10 +32,10 @@ import { PanelShell, SelectField, NumField, Tile, TileGrid, FieldGrid, Note } fr
 
 const fmt = (v, d = 4) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: 0 })
-  : '-');
+  : 'n/a');
 
 const tiny = (v) => {
-  if (!Number.isFinite(v)) return '-';
+  if (!Number.isFinite(v)) return 'n/a';
   if (v === 0) return '0';
   return Math.abs(v) < 0.0005 ? v.toExponential(3) : fmt(v, 8);
 };
@@ -47,11 +50,11 @@ const MODES = [
   ['typed', 'Your installation, typed'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const GRID = <CartesianGrid stroke="#334155" strokeDasharray="3 3" />;
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const GRID = <CartesianGrid {...GRID_STYLE} />;
 
-const SERIES = ['#BFFF00', '#38bdf8', '#f97316', '#f472b6'];
+const SERIES = [seriesColor(1), seriesColor(0), seriesColor(2), seriesColor(4)];
 
 const idOptions = () => PUBLISHED_DESIGN_IDS.map((id) => [id, id]);
 
@@ -97,29 +100,27 @@ const Spacing = () => {
           <Tile label="Where it converged" value={fmt(step.convergedFt, 4)} unit="ft TVD" />
         </TileGrid>
       </div>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart data={step.iterates} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="iterate" tick={AXIS}
-              label={{ value: 'iterate', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis yAxisId="d" tick={AXIS}
-              label={{ value: 'depth, ft TVD', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <YAxis yAxisId="m" orientation="right" tick={AXIS}
-              label={{ value: 'move this iterate, ft', angle: 90, position: 'insideRight', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine yAxisId="d" y={step.convergedFt} stroke="#f472b6" strokeDasharray="4 3"
-              label={{ value: 'the fixed point', fill: '#f472b6', fontSize: 10, position: 'right' }} />
-            <Line yAxisId="d" type="monotone" dataKey="atFt" name="the depth this iterate was evaluated at"
-              stroke="#BFFF00" isAnimationActive={false} />
-            <Bar yAxisId="m" dataKey="moveFt" name="how far the next iterate moves it" fill="#38bdf8" isAnimationActive={false} />
-          </ComposedChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3">
+        <ComposedChart data={step.iterates} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="iterate" tick={AXIS}
+            label={{ value: 'iterate', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis yAxisId="d" tick={AXIS}
+            label={{ value: 'depth, ft TVD', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis yAxisId="m" orientation="right" tick={AXIS}
+            label={{ value: 'move this iterate, ft', angle: 90, position: 'insideRight', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <ReferenceLine yAxisId="d" y={step.convergedFt} stroke={seriesColor(4)} strokeDasharray="4 3"
+            label={{ value: 'the fixed point', fill: seriesColor(4), fontSize: 10, position: 'right' }} />
+          <Line yAxisId="d" type="monotone" dataKey="atFt" name="the depth this iterate was evaluated at"
+            stroke={seriesColor(1)} isAnimationActive={false} />
+          <Bar yAxisId="m" dataKey="moveFt" name="how far the next iterate moves it" fill={seriesColor(0)} isAnimationActive={false} />
+        </ComposedChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">iterate</th>
               <th className="text-left pr-3">evaluated at, ft TVD</th>
@@ -134,10 +135,10 @@ const Spacing = () => {
               <tr key={r.iterate}>
                 <td className="pr-3">{fmt(r.iterate, 0)}</td>
                 <td className="pr-3">{fmt(r.atFt, 6)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.pInjPsia, 6)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.pInjPsia, 6)}</td>
                 <td className="pr-3">{fmt(r.availableHeadPsi, 6)}</td>
                 <td className="pr-3">{fmt(r.nextFt, 6)}</td>
-                <td className={Math.abs(r.moveFt) < GAS_LIFT_THRESHOLDS.fixedPointToleranceFt ? 'text-[#38bdf8]' : ''}>
+                <td className={Math.abs(r.moveFt) < GAS_LIFT_THRESHOLDS.fixedPointToleranceFt ? 'text-pl-info-text' : ''}>
                   {tiny(r.moveFt)}
                 </td>
               </tr>
@@ -145,7 +146,7 @@ const Spacing = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         ROAD ONE: THE RECURSION RE-RUN STANDALONE. A valve depth is not a formula, it is the fixed
         point of a map that has the depth on both sides: the injection pressure at a depth decides
         where the valve goes, and where the valve goes decides the injection pressure. The engine
@@ -154,8 +155,8 @@ const Spacing = () => {
         {' '}{fmt(step.iterates.length, 0)} iterates. Watch the move column: it falls by a large
         factor each time, which is what a contraction looks like.
       </div>
-      <div className="mt-4 rounded-md border border-gray-700 bg-[#0F172A] p-3">
-        <p className="text-xs text-gray-400 mb-2">
+      <div className="mt-4 rounded-md border border-pl-border bg-pl-sunken p-3">
+        <p className="text-xs text-pl-muted mb-2">
           ROAD TWO, KEPT SEPARATE ON PURPOSE. These are the depths the DESIGN ITSELF returned and
           the increments of those same depths. They agree with road one to about seven significant
           figures and no further, because the fixed point is stopped at a tolerance rather than
@@ -163,8 +164,8 @@ const Spacing = () => {
           other is how a difference in the seventh figure turns into a number nobody can reproduce.
         </p>
         <div className="overflow-x-auto">
-          <table className="text-xs text-slate-300 w-full">
-            <thead className="text-slate-500">
+          <table className="text-xs text-pl-text w-full">
+            <thead className="text-pl-muted">
               <tr>
                 <th className="text-left pr-3">valve</th>
                 <th className="text-left pr-3">depth the design returned, ft TVD</th>
@@ -179,10 +180,10 @@ const Spacing = () => {
                 return (
                   <tr key={d.valve}>
                     <td className="pr-3">{fmt(d.valve, 0)}</td>
-                    <td className="pr-3 text-[#BFFF00]">{fmt(d.depthFt, 6)}</td>
+                    <td className="pr-3 text-pl-primary-text">{fmt(d.depthFt, 6)}</td>
                     <td className="pr-3">{fmt(d.surfacePressurePsia, 4)}</td>
-                    <td className="pr-3">{inc ? fmt(inc.incrementFt, 6) : '-'}</td>
-                    <td>{inc ? fmt(inc.minSpacingFt, 0) : '-'}</td>
+                    <td className="pr-3">{inc ? fmt(inc.incrementFt, 6) : 'n/a'}</td>
+                    <td>{inc ? fmt(inc.minSpacingFt, 0) : 'n/a'}</td>
                   </tr>
                 );
               })}
@@ -191,8 +192,8 @@ const Spacing = () => {
         </div>
       </div>
       {swept ? (
-        <div className="mt-4 rounded-md border border-gray-700 bg-[#0F172A] p-3">
-          <p className="text-xs text-gray-400 mb-2">
+        <div className="mt-4 rounded-md border border-pl-border bg-pl-sunken p-3">
+          <p className="text-xs text-pl-muted mb-2">
             CHANGE THE DECREMENT AND EVERY DEPTH BELOW THE CHANGE MOVES. This is the whole design
             re-run at each decrement, so the shifts compound downward. VALVE 1 NEVER MOVES, because
             it is set by the kickoff pressure alone and the decrement has not been applied yet when
@@ -210,8 +211,8 @@ const Spacing = () => {
             <Tile label="Valve 1 moves at any decrement" value={yn(swept.some((s) => s.depths[0].shiftFt !== 0))} />
           </TileGrid>
           <div className="mt-3 overflow-x-auto">
-            <table className="text-xs text-slate-300 w-full">
-              <thead className="text-slate-500">
+            <table className="text-xs text-pl-text w-full">
+              <thead className="text-pl-muted">
                 <tr>
                   <th className="text-left pr-3">decrement, psi</th>
                   <th className="text-left pr-3">published</th>
@@ -224,7 +225,7 @@ const Spacing = () => {
               </thead>
               <tbody>
                 {swept.map((s) => (
-                  <tr key={s.decrementPsi} className={s.isPublished ? 'text-white' : ''}>
+                  <tr key={s.decrementPsi} className={s.isPublished ? 'text-pl-text' : ''}>
                     <td className="pr-3">{fmt(s.decrementPsi, 4)}</td>
                     <td className="pr-3">{yn(s.isPublished)}</td>
                     <td className="pr-3">{fmt(s.valveCount, 0)}</td>
@@ -233,7 +234,7 @@ const Spacing = () => {
                       const here = s.depths.find((x) => x.valve === d.valve);
                       return (
                         <td key={d.valve} className="pr-3">
-                          {here && Number.isFinite(here.shiftFt) ? tiny(here.shiftFt) : '-'}
+                          {here && Number.isFinite(here.shiftFt) ? tiny(here.shiftFt) : 'n/a'}
                         </td>
                       );
                     })}
@@ -251,7 +252,7 @@ const Spacing = () => {
           PUBLISHED depth of the valve above, so it shows the one step and not the compounding.
         </Note>
       )}
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         A CAVEAT WORTH CARRYING. The standalone recursion above starts each valve from the PUBLISHED
         depth of the valve above it. That is what makes it readable one valve at a time, and it also
         means that at a decrement other than {fmt(published, 4)} psi its converged depth is the one
@@ -292,34 +293,32 @@ const Valve = () => {
           <Tile label="At" value={fmt(worstNitrogen.tF, 0)} unit="degF" />
         </TileGrid>
       </div>
-      <div className="h-72 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="valve" tick={AXIS}
-              label={{ value: 'valve, top to bottom', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis yAxisId="p" tick={AXIS} domain={['auto', 'auto']}
-              label={{ value: 'pressure, psia', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <YAxis yAxisId="r" orientation="right" tick={AXIS}
-              label={{ value: 'port over bellows', angle: 90, position: 'insideRight', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line yAxisId="p" type="monotone" dataKey="pInjAtDepthPsia" name="injection pressure at valve depth"
-              stroke="#BFFF00" isAnimationActive={false} />
-            <Line yAxisId="p" type="monotone" dataKey="domeAtTempPsia" name="dome AT VALVE TEMPERATURE"
-              stroke="#38bdf8" isAnimationActive={false} />
-            <Line yAxisId="p" type="monotone" dataKey="dome60Psia" name={`dome as charged at ${fmt(GAS_LIFT_THRESHOLDS.testRackTempF, 0)} degF`}
-              stroke="#f472b6" strokeDasharray="5 3" isAnimationActive={false} />
-            <Line yAxisId="p" type="monotone" dataKey="testRackOpeningPsia" name="test rack opening pressure"
-              stroke="#f97316" isAnimationActive={false} />
-            <Line yAxisId="r" type="monotone" dataKey="r" name="port to bellows ratio R"
-              stroke="#94a3b8" strokeDasharray="2 2" isAnimationActive={false} />
-          </ComposedChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={288} className="mt-3">
+        <ComposedChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="valve" tick={AXIS}
+            label={{ value: 'valve, top to bottom', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis yAxisId="p" tick={AXIS} domain={['auto', 'auto']}
+            label={{ value: 'pressure, psia', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis yAxisId="r" orientation="right" tick={AXIS}
+            label={{ value: 'port over bellows', angle: 90, position: 'insideRight', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Line yAxisId="p" type="monotone" dataKey="pInjAtDepthPsia" name="injection pressure at valve depth"
+            stroke={seriesColor(1)} isAnimationActive={false} />
+          <Line yAxisId="p" type="monotone" dataKey="domeAtTempPsia" name="dome AT VALVE TEMPERATURE"
+            stroke={seriesColor(0)} isAnimationActive={false} />
+          <Line yAxisId="p" type="monotone" dataKey="dome60Psia" name={`dome as charged at ${fmt(GAS_LIFT_THRESHOLDS.testRackTempF, 0)} degF`}
+            stroke={seriesColor(4)} strokeDasharray="5 3" isAnimationActive={false} />
+          <Line yAxisId="p" type="monotone" dataKey="testRackOpeningPsia" name="test rack opening pressure"
+            stroke={seriesColor(2)} isAnimationActive={false} />
+          <Line yAxisId="r" type="monotone" dataKey="r" name="port to bellows ratio R"
+            stroke={SVG_CHART.reference} strokeDasharray="2 2" isAnimationActive={false} />
+        </ComposedChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">valve</th>
               <th className="text-left pr-3">depth, ft TVD</th>
@@ -344,18 +343,18 @@ const Valve = () => {
                 <td className="pr-3">{r.valveType}</td>
                 <td className="pr-3">{fmt(r.portIdIn, 5)}</td>
                 <td className="pr-3">{fmt(r.r, 6)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.pInjAtDepthPsia, 6)}</td>
-                <td className="pr-3 text-[#38bdf8]">{fmt(r.domeAtTempPsia, 6)}</td>
-                <td className="pr-3 text-[#f472b6]">{fmt(r.dome60Psia, 6)}</td>
-                <td className="pr-3 text-[#f97316]">{fmt(r.testRackOpeningPsia, 6)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.pInjAtDepthPsia, 6)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.domeAtTempPsia, 6)}</td>
+                <td className="pr-3 text-pl-accent-text">{fmt(r.dome60Psia, 6)}</td>
+                <td className="pr-3">{fmt(r.testRackOpeningPsia, 6)}</td>
                 <td className="pr-3">{fmt(r.spreadPsi, 6)}</td>
-                <td>{r.enginePassesTarget === null ? '-' : yn(r.enginePassesTarget)}</td>
+                <td>{r.enginePassesTarget === null ? 'n/a' : yn(r.enginePassesTarget)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         A DOME IS A THERMOMETER AS MUCH AS IT IS A SPRING. The shop charges the dome cold, at
         {' '}{fmt(GAS_LIFT_THRESHOLDS.testRackTempF, 0)} degF on a test rack, and the well reads it
         hot. Those are the two blue and pink columns and they are the same nitrogen: the charge does
@@ -365,23 +364,23 @@ const Valve = () => {
         or the valve temperature figure at {fmt(GAS_LIFT_THRESHOLDS.testRackTempF, 0)} degF, and the
         two swap places.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         AND THE THIRD COLUMN IS NOT THE SECOND ONE COOLED DOWN. The test rack opening also divides
         the cold dome by one minus the port to bellows ratio R, which is the grey line on the right
         axis. R is geometry: it is the port area over the bellows area and nothing else. So a valve
         whose port steps up in the catalogue gains opening pressure and spread at the same time,
         with no change to its charge.
       </div>
-      <div className="mt-4 rounded-md border border-gray-700 bg-[#0F172A] p-3">
-        <p className="text-xs text-gray-400 mb-2">
+      <div className="mt-4 rounded-md border border-pl-border bg-pl-sunken p-3">
+        <p className="text-xs text-pl-muted mb-2">
           THE NITROGEN, AND WHAT THE LINEAR RULE OF THUMB COSTS. The engine takes the dome from
           {' '}{fmt(GAS_LIFT_THRESHOLDS.testRackTempF, 0)} degF to valve temperature through a real
           equation of state and inverts it exactly. The familiar linear correction factor is a
           straight line through the same job.
         </p>
         <div className="overflow-x-auto">
-          <table className="text-xs text-slate-300 w-full">
-            <thead className="text-slate-500">
+          <table className="text-xs text-pl-text w-full">
+            <thead className="text-pl-muted">
               <tr>
                 <th className="text-left pr-3">charge at {fmt(GAS_LIFT_THRESHOLDS.testRackTempF, 0)} degF, psia</th>
                 <th className="text-left pr-3">read at, degF</th>
@@ -398,39 +397,37 @@ const Valve = () => {
                 <tr key={`${n.pd60Psia}-${n.tF}`}>
                   <td className="pr-3">{fmt(n.pd60Psia, 2)}</td>
                   <td className="pr-3">{fmt(n.tF, 1)}</td>
-                  <td className="pr-3 text-[#BFFF00]">{fmt(n.engineDomeAtTempPsia, 6)}</td>
+                  <td className="pr-3 text-pl-primary-text">{fmt(n.engineDomeAtTempPsia, 6)}</td>
                   <td className="pr-3">{fmt(n.engineBackTo60Psia, 6)}</td>
                   <td className="pr-3">{fmt(n.engineCt, 8)}</td>
                   <td className="pr-3">{fmt(n.linearCt, 8)}</td>
                   <td className="pr-3">{fmt(n.linearCtErrorPct, 6)}</td>
-                  <td className="text-[#f97316]">{fmt(n.linearDomeMissPsi, 6)}</td>
+                  <td className="text-pl-warning-text">{fmt(n.linearDomeMissPsi, 6)}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
       </div>
-      <div className="mt-4 rounded-md border border-gray-700 bg-[#0F172A] p-3">
-        <p className="text-xs text-gray-400 mb-2">
+      <div className="mt-4 rounded-md border border-pl-border bg-pl-sunken p-3">
+        <p className="text-xs text-pl-muted mb-2">
           THE PORT CATALOGUE AS GEOMETRY. R and one over one minus R for every catalogue port
           against both bellows families. Nothing here is a design decision, it is the arithmetic a
           port choice commits a valve to.
         </p>
-        <div className="h-56">
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={data.geometry} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-              {GRID}
-              <XAxis dataKey="portIdIn" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
-                label={{ value: 'port inside diameter, in', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-              <YAxis tick={AXIS}
-                label={{ value: 'one over one minus R', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-              <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-              <Legend wrapperStyle={{ fontSize: 11 }} />
-              <Line type="monotone" dataKey="oneOverOneMinusR" name="port geometry across both bellows families"
-                stroke="#BFFF00" isAnimationActive={false} />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
+        <ChartFrame height={224}>
+          <LineChart data={data.geometry} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+            {GRID}
+            <XAxis dataKey="portIdIn" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
+              label={{ value: 'port inside diameter, in', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+            <YAxis tick={AXIS}
+              label={{ value: 'one over one minus R', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+            <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+            <Line type="monotone" dataKey="oneOverOneMinusR" name="port geometry across both bellows families"
+              stroke={seriesColor(1)} isAnimationActive={false} />
+          </LineChart>
+        </ChartFrame>
       </div>
       <Note>{data.verdict.note}</Note>
     </>
@@ -473,30 +470,28 @@ const Spread = () => {
           <Tile label="Deepest injection operated spread shown" value={fmt(data.ipoRows[0].spreads.filter((v) => Number.isFinite(v.spreadPsi)).slice(-1)[0].spreadPsi, 6)} unit="psi" />
         </TileGrid>
       </div>
-      <div className="h-72 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="valve" tick={AXIS}
-              label={{ value: 'valve, top to bottom', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS}
-              label={{ value: 'spread, psi', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={0} stroke="#f472b6"
-              label={{ value: 'a spread cannot be below this line', fill: '#f472b6', fontSize: 10, position: 'insideBottomRight' }} />
-            {data.ipoRows.map((s, k) => (
-              <Line key={s.id} type="monotone" dataKey={s.id} name={`${s.id}, injection operated`}
-                stroke={SERIES[k % SERIES.length]} connectNulls isAnimationActive={false} />
-            ))}
-            <Line type="monotone" dataKey="ppo" name="the PRODUCTION operated case, its own series"
-              stroke="#ef4444" strokeWidth={2} connectNulls isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={288} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="valve" tick={AXIS}
+            label={{ value: 'valve, top to bottom', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS}
+            label={{ value: 'spread, psi', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <ReferenceLine y={0} stroke={seriesColor(4)}
+            label={{ value: 'a spread cannot be below this line', fill: seriesColor(4), fontSize: 10, position: 'insideBottomRight' }} />
+          {data.ipoRows.map((s, k) => (
+            <Line key={s.id} type="monotone" dataKey={s.id} name={`${s.id}, injection operated`}
+              stroke={SERIES[k % SERIES.length]} connectNulls isAnimationActive={false} />
+          ))}
+          <Line type="monotone" dataKey="ppo" name="the PRODUCTION operated case, its own series"
+            stroke={seriesColor(3)} strokeWidth={2} connectNulls isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">valve</th>
               {data.ipoRows.map((s) => (
@@ -510,17 +505,17 @@ const Spread = () => {
               <tr key={r.valve}>
                 <td className="pr-3">{fmt(r.valve, 0)}</td>
                 {data.ipoRows.map((s) => (
-                  <td key={s.id} className="pr-3">{Number.isFinite(r[s.id]) ? fmt(r[s.id], 6) : '-'}</td>
+                  <td key={s.id} className="pr-3">{Number.isFinite(r[s.id]) ? fmt(r[s.id], 6) : 'n/a'}</td>
                 ))}
-                <td className={Number.isFinite(r.ppo) && r.ppo < 0 ? 'text-[#ef4444]' : ''}>
-                  {Number.isFinite(r.ppo) ? fmt(r.ppo, 6) : '-'}
+                <td className={Number.isFinite(r.ppo) && r.ppo < 0 ? 'text-pl-danger-text' : ''}>
+                  {Number.isFinite(r.ppo) ? fmt(r.ppo, 6) : 'n/a'}
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THE NEGATIVE SERIES IS A KNOWN DIVERGENCE AND NOT A VALVE PROPERTY. A spread is a pressure
         FALL across a valve between opening and closing, so it is a positive number by construction,
         and every injection operated string above says so. The production operated case comes back
@@ -530,7 +525,7 @@ const Spread = () => {
         against the TUBING into a CASING surface pressure, and the same swapped line produces both
         symptoms. One root cause, two faces, and the louder of the two is this plot.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         It is PINNED rather than fixed, because the engine is consumed by a live application and the
         divergence is recorded where it can be seen. So the reading to take away is procedural: a
         design sheet that reports a negative spread has not found a strange valve, it has found a
@@ -568,26 +563,24 @@ const Throughput = () => {
           <Tile label="Rates where nothing moved at all" value={fmt(flat.length, 0)} />
         </TileGrid>
       </div>
-      <div className="h-72 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={data.regime} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="ratio" type="number" domain={[0, 1]} tick={AXIS}
-              label={{ value: 'downstream over upstream pressure', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS}
-              label={{ value: 'gas through the port, Mscf/d', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 4)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine x={critical} stroke="#f472b6" strokeDasharray="4 3"
-              label={{ value: 'critical ratio', fill: '#f472b6', fontSize: 10, position: 'top' }} />
-            <Line type="monotone" dataKey="qMscfd" name="Thornhill and Craver across the regime"
-              stroke="#BFFF00" isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={288} className="mt-3">
+        <LineChart data={data.regime} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="ratio" type="number" domain={[0, 1]} tick={AXIS}
+            label={{ value: 'downstream over upstream pressure', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS}
+            label={{ value: 'gas through the port, Mscf/d', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 4)} />
+          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <ReferenceLine x={critical} stroke={seriesColor(4)} strokeDasharray="4 3"
+            label={{ value: 'critical ratio', fill: seriesColor(4), fontSize: 10, position: 'top' }} />
+          <Line type="monotone" dataKey="qMscfd" name="Thornhill and Craver across the regime"
+            stroke={seriesColor(1)} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">downstream, psia</th>
               <th className="text-left pr-3">ratio</th>
@@ -597,7 +590,7 @@ const Throughput = () => {
           </thead>
           <tbody>
             {data.regime.map((r) => (
-              <tr key={r.pDnPsia} className={r.regime === 'critical' ? '' : 'text-[#f97316]'}>
+              <tr key={r.pDnPsia} className={r.regime === 'critical' ? '' : 'text-pl-warning-text'}>
                 <td className="pr-3">{fmt(r.pDnPsia, 2)}</td>
                 <td className="pr-3">{fmt(r.ratio, 4)}</td>
                 <td className="pr-3">{r.regime}</td>
@@ -607,7 +600,7 @@ const Throughput = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         BELOW THE CRITICAL RATIO NOTHING DOWNSTREAM MATTERS. Every choked row above carries the same
         {' '}{fmt(choked.length ? choked[0].qMscfd : NaN, 6)} Mscf/d, because a choked port cannot
         hear the pressure on the far side of it. Past {fmt(critical, 6)} the rate falls away with the
@@ -615,36 +608,34 @@ const Throughput = () => {
         engine says so: a real gas lift valve throttles on its STEM before the port is fully open, so
         this curve is an upper bound on what a valve passes, not a prediction of it.
       </div>
-      <div className="mt-4 rounded-md border border-gray-700 bg-[#0F172A] p-3">
-        <p className="text-xs text-gray-400 mb-2">
+      <div className="mt-4 rounded-md border border-pl-border bg-pl-sunken p-3">
+        <p className="text-xs text-pl-muted mb-2">
           THE PORT SELECTION, WHICH IS WHERE THE STEP BEHAVIOUR COMES FROM. Sweep the design gas
           rate and watch what the string does with it. The rate reaches the verdict only through
           selectPort, and selectPort takes the SMALLEST catalogue port that passes the target. So
           nothing happens until the target crosses a catalogue step, and then everything happens at
           once.
         </p>
-        <div className="h-64">
-          <ResponsiveContainer width="100%" height="100%">
-            <ComposedChart data={ladder} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-              {GRID}
-              <XAxis dataKey="qgiTargetMscfd" type="number" domain={['dataMin', 'dataMax']} tick={AXIS}
-                label={{ value: 'design gas rate, Mscf/d', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-              <YAxis yAxisId="m" tick={AXIS}
-                label={{ value: 'closing margin, psi', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-              <YAxis yAxisId="p" orientation="right" tick={AXIS}
-                label={{ value: 'port at valve 1, in', angle: 90, position: 'insideRight', fill: '#64748b', fontSize: 10 }} />
-              <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-              <Legend wrapperStyle={{ fontSize: 11 }} />
-              <Line yAxisId="m" type="stepAfter" dataKey="stage5MarginPsi"
-                name="the margin the verdict turns on" stroke="#BFFF00" isAnimationActive={false} />
-              <Line yAxisId="p" type="stepAfter" dataKey={(r) => r.ports[0]}
-                name="the port selectPort brings out" stroke="#38bdf8" strokeDasharray="4 3" isAnimationActive={false} />
-            </ComposedChart>
-          </ResponsiveContainer>
-        </div>
+        <ChartFrame height={256}>
+          <ComposedChart data={ladder} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+            {GRID}
+            <XAxis dataKey="qgiTargetMscfd" type="number" domain={['dataMin', 'dataMax']} tick={AXIS}
+              label={{ value: 'design gas rate, Mscf/d', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+            <YAxis yAxisId="m" tick={AXIS}
+              label={{ value: 'closing margin, psi', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+            <YAxis yAxisId="p" orientation="right" tick={AXIS}
+              label={{ value: 'port at valve 1, in', angle: 90, position: 'insideRight', fill: SVG_CHART.note, fontSize: 10 }} />
+            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+            <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+            <Line yAxisId="m" type="stepAfter" dataKey="stage5MarginPsi"
+              name="the margin the verdict turns on" stroke={seriesColor(1)} isAnimationActive={false} />
+            <Line yAxisId="p" type="stepAfter" dataKey={(r) => r.ports[0]}
+              name="the port selectPort brings out" stroke={seriesColor(0)} strokeDasharray="4 3" isAnimationActive={false} />
+          </ComposedChart>
+        </ChartFrame>
         <div className="mt-3 overflow-x-auto">
-          <table className="text-xs text-slate-300 w-full">
-            <thead className="text-slate-500">
+          <table className="text-xs text-pl-text w-full">
+            <thead className="text-pl-muted">
               <tr>
                 <th className="text-left pr-3">design gas rate, Mscf/d</th>
                 <th className="text-left pr-3">published</th>
@@ -657,11 +648,11 @@ const Throughput = () => {
               {ladder.map((r, k) => {
                 const moved = k > 0 && r.stage5MarginPsi !== ladder[k - 1].stage5MarginPsi;
                 return (
-                  <tr key={r.qgiTargetMscfd} className={moved ? 'text-white' : ''}>
+                  <tr key={r.qgiTargetMscfd} className={moved ? 'text-pl-text' : ''}>
                     <td className="pr-3">{fmt(r.qgiTargetMscfd, 0)}</td>
                     <td className="pr-3">{yn(r.isPublished)}</td>
                     <td className="pr-3">{r.ports.map((p) => fmt(p, 5)).join(', ')}</td>
-                    <td className={`pr-3 ${moved ? 'text-[#BFFF00]' : ''}`}>{fmt(r.stage5MarginPsi, 8)}</td>
+                    <td className={`pr-3 ${moved ? 'text-pl-primary-text' : ''}`}>{fmt(r.stage5MarginPsi, 8)}</td>
                     <td>{r.multipointingStages.length ? r.multipointingStages.join(', ') : 'none'}</td>
                   </tr>
                 );
@@ -670,7 +661,7 @@ const Throughput = () => {
           </table>
         </div>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         A SWEEP HAS TO MATCH THE MECHANISM, NOT THE AXIS. Across {fmt(ladder.length, 0)} design gas
         rates the margin moved on {fmt(steps.length, 0)} of them and did not move at all on
         {' '}{fmt(flat.length, 0)}. A coarse sweep steps straight over a flip. A fine one finds
@@ -692,7 +683,7 @@ const Typed = () => {
   }, [values]);
   return (
     <>
-      <div className="text-xs text-slate-300">
+      <div className="text-xs text-pl-text">
         Type an installation and run the whole design on it: spacing, dome charges, ports and the
         unloading walk. The view opens on the AKASO-3 teaching installation, and every input can be
         retyped. The spacing, valve and closing routines march the gas column on the engine&apos;s own
@@ -712,8 +703,8 @@ const Typed = () => {
             </TileGrid>
           </div>
           <div className="mt-3 overflow-x-auto">
-            <table className="text-xs text-slate-300 w-full">
-              <thead className="text-slate-500">
+            <table className="text-xs text-pl-text w-full">
+              <thead className="text-pl-muted">
                 <tr>
                   <th className="text-left pr-3">valve</th>
                   <th className="text-left pr-3">type</th>
@@ -734,7 +725,7 @@ const Typed = () => {
                   <tr key={v.valve}>
                     <td className="pr-3">{v.valve}</td>
                     <td className="pr-3">{v.valveType}</td>
-                    <td className="pr-3 text-[#BFFF00]">{plain(v.depthFt, 6)}</td>
+                    <td className="pr-3 text-pl-primary-text">{plain(v.depthFt, 6)}</td>
                     <td className="pr-3">{plain(v.surfaceOpenPsia, 6)}</td>
                     <td className="pr-3">{plain(v.tempF, 4)}</td>
                     <td className="pr-3">{plain(v.domeAtTempPsia, 6)}</td>
@@ -743,7 +734,7 @@ const Typed = () => {
                     <td className="pr-3">{plain(v.spreadPsi, 6)}</td>
                     <td className="pr-3">{plain(v.portIdIn, 5)}</td>
                     <td className="pr-3">{plain(v.throughputMscfd, 6)}</td>
-                    <td>{v.throughputRegime || '-'}</td>
+                    <td>{v.throughputRegime || 'n/a'}</td>
                   </tr>
                 ))}
               </tbody>
