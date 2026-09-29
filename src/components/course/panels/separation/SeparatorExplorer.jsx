@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, BarChart, LineChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
+  BarChart, LineChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import {
   engineScope, gasAtConditions, kValueTable, settling, verticalVessel,
 } from './separationLab';
@@ -32,13 +35,13 @@ export const MODES = [
   ['vertical', 'Vertical vessel: the diameter the gas demands, and the height at each offered diameter'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
 
 const Tbl = ({ head, rows }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>{head.map((h, i) => <th key={i} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>)}</tr>
       </thead>
       <tbody>
@@ -65,7 +68,7 @@ export const ConditionsMode = ({ gas, scope }) => {
         head={['stream', 'gas MMscfd', 'gauge psig', 'absolute psia (derived)', 'degF', 'gas gravity']}
         rows={gas.streams.map((s) => [s.longLabel, six(s.qGasMMscfd), six(s.pPsig), six(s.pPsiaDerived), six(s.tF), six(s.gasSg)])}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The absolute pressure is the gauge pressure plus 14.7 psi. A separator reading 600 psig on the gauge is at
         {' '}{six(gas.streams[0].pPsiaDerived)} psia, and every gas property below is read at the absolute figure.
       </p>
@@ -73,19 +76,17 @@ export const ConditionsMode = ({ gas, scope }) => {
         head={['stream', 'Tpc degR', 'Ppc psia', 'Ppr', 'Tpr', 'z', 'gas density lb/ft3', 'actual gas ft3/s']}
         rows={gas.streams.map((s) => [s.label, six(s.tpcR), six(s.ppcPsia), six(s.ppr), six(s.tpr), six(s.z), six(s.rhoGas), six(s.qGasActFt3S)])}
       />
-      <div className="h-48 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={bars} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="stream" tick={AXIS} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Bar dataKey="z" name="z factor" fill="#38bdf8" isAnimationActive={false} />
-            <Bar dataKey="density" name="gas density, lb/ft3" fill="#BFFF00" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={192} className="mt-3">
+        <BarChart data={bars} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="stream" tick={AXIS} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <Bar dataKey="z" name="z factor" fill={seriesColor(0)} isAnimationActive={false} />
+          <Bar dataKey="density" name="gas density, lb/ft3" fill={seriesColor(1)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
       <div className="mt-3">
         <TileGrid>
           <Tile label="Rankine at the ABANA temperature" value={six(gas.rankineAtAbana)} unit="degR" />
@@ -98,11 +99,11 @@ export const ConditionsMode = ({ gas, scope }) => {
         head={['stream', 'gas MMscfd', 'standard ft3/s (derived)', 'degR', 'z', 'actual ft3/s', 'shrinkage (derived)']}
         rows={gas.streams.map((s) => [s.label, six(s.qGasMMscfd), six(s.standardFt3SDerived), six(s.rankineR), six(s.z), six(s.qGasActFt3S), six(s.shrinkageDerived)])}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The shrinkage is the standard rate over the actual rate, and it is what the pressure, the temperature and z do to
         a volume between the sales meter and the vessel. A rate is not a rate until it is quoted at conditions.
       </p>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         ABANA-1 and ABANA-2 share a stream, so they share Ppr, Tpr, z and gas density. Only the gas rate differs,
         {' '}{six(gas.streams[0].qGasMMscfd)} MMscfd against {six(gas.streams[1].qGasMMscfd)} MMscfd, and the rate is what
         sizes the vessel.
@@ -138,7 +139,7 @@ export const KValueMode = ({ k }) => {
         head={['id', 'label', 'orientation', 'base K ft/s']}
         rows={k.base.map((r) => [r.id, r.label, r.orientation, six(r.k)])}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Six published rows, and every one of them can be replaced by a vendor number. A horizontal vessel carries a
         higher K than a vertical one at the same mist extractor, and a vessel with no mist extractor carries the lowest.
       </p>
@@ -146,20 +147,18 @@ export const KValueMode = ({ k }) => {
         head={['mist extractor', 'psig', 'base K', 'K the rule gives', 'K used', 'derated', 'floored', 'nearFloor']}
         rows={k.atPressure.map((r) => [r.internalsId, six(r.pPsig), six(r.kBase), six(r.kDerated), six(r.k), String(r.derated), String(r.floored), String(r.nearFloor)])}
       />
-      <div className="h-48 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={line} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="label" tick={{ ...AXIS, fontSize: 9 }} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={k.floor} stroke="#BFFF00" strokeDasharray="3 3" label={{ value: 'the floor', fill: '#BFFF00', fontSize: 10 }} />
-            <Line dataKey="rule" name="what the rule gives" stroke="#475569" dot={false} isAnimationActive={false} />
-            <Line dataKey="used" name="K used" stroke="#38bdf8" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={192} className="mt-3">
+        <LineChart data={line} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="label" tick={{ ...AXIS, fontSize: 9 }} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine y={k.floor} stroke={seriesColor(1)} strokeDasharray="3 3" label={{ value: 'the floor', fill: seriesColor(1), fontSize: 10 }} />
+          <Line dataKey="rule" name="what the rule gives" stroke={SVG_CHART.reference} dot={false} isAnimationActive={false} />
+          <Line dataKey="used" name="K used" stroke={seriesColor(0)} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3">
         <TileGrid>
           <Tile label="The derating floor" value={six(k.floor)} unit="ft/s, engine constant K_FLOOR" />
@@ -168,7 +167,7 @@ export const KValueMode = ({ k }) => {
           <Tile label="Floored" value={String(k.override.floored)} />
         </TileGrid>
       </div>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Below the floor the rule stops meaning anything, and the engine says so rather than returning the number the rule
         produced: {k.flooredWarning}
       </p>
@@ -176,7 +175,7 @@ export const KValueMode = ({ k }) => {
         head={['published kValue case', 'K used ft/s', 'K the rule gives', 'derated', 'floored', 'nearFloor']}
         rows={k.published.map((c) => [c.name, six(c.k), six(c.kDerated), String(c.derated), String(c.floored), String(c.nearFloor)])}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         A derated K can sit close to the floor and still read like a robust one, so the return carries a flag for it.
         {' '}{k.nearFloor.name} comes back at {six(k.nearFloor.k)} ft/s with floored {String(k.nearFloor.floored)} and
         {' '}nearFloor {String(k.nearFloor.nearFloor)}, which is only {six(k.nearFloor.gapAboveFloorDerived)} ft/s above
@@ -184,9 +183,9 @@ export const KValueMode = ({ k }) => {
         {' '}floor. nearFloor is true when one more 100 psi step of the same rule would floor the value, and it is never
         {' '}true at the same time as floored.
       </p>
-      <div className="mt-3 rounded-md border border-amber-700/60 bg-amber-950/20 p-3">
-        <p className="text-amber-300 text-xs font-medium mb-1">HELD FOR LITERATURE</p>
-        <p className="text-xs text-slate-300 mb-0">{k.held.note}</p>
+      <div className="mt-3 rounded-md border border-pl-warning/40 bg-pl-warning-bg p-3">
+        <p className="text-pl-warning-text text-xs font-medium mb-1">HELD FOR LITERATURE</p>
+        <p className="text-xs text-pl-text mb-0">{k.held.note}</p>
       </div>
     </>
   );
@@ -200,7 +199,7 @@ export const SettlingMode = ({ st, scope }) => {
         head={['stream', 'oil API', 'oil lb/ft3', 'water SG', 'water lb/ft3', 'oil bpd', 'water bpd', 'mixture lb/ft3']}
         rows={st.densities.map((d) => [d.label, six(d.oilApi), six(d.rhoOil), six(d.waterSg), six(d.rhoWater), six(d.qOilBpd), six(d.qWaterBpd), six(d.rhoLiquid)])}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The mixture the gas load sees is the two densities weighted by their volume rates. On AGBAMI the weighted figure
         is {six(st.agbamiWeighted)} lb/ft3 while a plain average of the two would give {six(st.agbamiAverageDerived)} lb/ft3,
         and the gap grows with the water cut.
@@ -248,7 +247,7 @@ export const VerticalMode = ({ v }) => {
           <Tile label="Held" value={`${six(v.qLiquidBpd)} bpd`} unit={`for ${six(v.retentionMin)} minutes`} />
         </TileGrid>
       </div>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         At the gas-required diameter the liquid stands {six(v.hLiquidFt)} ft deep, the vessel is {six(v.heightFt)} ft tall
         once the {six(v.allowanceFt)} ft allowance is added, the slenderness is {six(v.ldRatio)}, and the velocity margin is
         exactly {six(v.velocityMargin)} because the diameter was chosen to make it so.
@@ -257,21 +256,19 @@ export const VerticalMode = ({ v }) => {
         head={['diameter ft', 'liquid ft', 'height ft', 'L/D', 'gas velocity ft/s', 'margin', 'carries the gas']}
         rows={v.rows.map((r) => [six(r.diameterFt), six(r.hLiquidFt), six(r.heightFt), six(r.ldRatio), six(r.gasVelocityFtS), six(r.velocityMargin), String(r.gasCapacityOk)])}
       />
-      <div className="h-48 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="diameter" tick={AXIS} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={1} stroke="#BFFF00" strokeDasharray="3 3" label={{ value: 'margin of 1', fill: '#BFFF00', fontSize: 10 }} />
-            <Line dataKey="height" name="height, ft" stroke="#38bdf8" dot={false} isAnimationActive={false} />
-            <Line dataKey="margin" name="velocity margin" stroke="#f472b6" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <ChartFrame height={192} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="diameter" tick={AXIS} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine y={1} stroke={seriesColor(1)} strokeDasharray="3 3" label={{ value: 'margin of 1', fill: seriesColor(1), fontSize: 10 }} />
+          <Line dataKey="height" name="height, ft" stroke={seriesColor(0)} dot={false} isAnimationActive={false} />
+          <Line dataKey="margin" name="velocity margin" stroke={seriesColor(4)} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The height falls and the margin rises with diameter, because the same liquid volume spreads over a larger floor
         while the same gas crosses a larger area. The smallest diameter on the list cannot carry the gas at all.
       </p>
