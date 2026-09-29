@@ -1,10 +1,13 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, BarChart, Bar,
+  LineChart, Line, BarChart, Bar,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
 import { thermalExplorer } from './flowAssuranceLab';
 import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 
 // Thermal explorer, the Associate tier. One pipe, read completely.
 //
@@ -40,9 +43,9 @@ const MODES = [
   ['mass', 'What the line weighs, and what carries the heat'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const GRID = <CartesianGrid stroke="#334155" strokeDasharray="3 3" />;
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const GRID = <CartesianGrid {...GRID_STYLE} />;
 
 const buildOptions = () => thermalExplorer.builds.map((id) => [
   id, `${id}: ${thermalExplorer.buildLabels[id]}`,
@@ -74,8 +77,8 @@ const Catalog = () => {
         <Tile label="Molecular weight of water" value={fmt(data.constants.waterMolecularWeight, 4)} />
       </TileGrid>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">material</th>
               <th className="text-left pr-3">k, Btu/(hr ft degF)</th>
@@ -87,7 +90,7 @@ const Catalog = () => {
             {data.conductivities.map((r) => (
               <tr key={r.id}>
                 <td className="pr-3">{r.label}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.kBtuHrFtF, 4)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.kBtuHrFtF, 4)}</td>
                 <td className="pr-3">{fmt(r.ratioToSteel, 8)}</td>
                 <td>{fmt(r.steelOverThis, 4)}</td>
               </tr>
@@ -96,8 +99,8 @@ const Catalog = () => {
         </table>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">film coefficient</th>
               <th className="text-left pr-3">which face</th>
@@ -109,25 +112,25 @@ const Catalog = () => {
               <tr key={r.id}>
                 <td className="pr-3">{r.label}</td>
                 <td className="pr-3">{r.side}</td>
-                <td className="text-[#BFFF00]">{fmt(r.hBtuHrFt2F, 4)}</td>
+                <td className="text-pl-primary-text">{fmt(r.hBtuHrFt2F, 4)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         NO SILENT FALLBACK, AND THE HEADER SAYS WHY. An id in neither catalogue is a NaN, because an
         earlier version returned the first entry, carbon steel, for an unknown id, so a typo in an
         insulation id quietly turned aerogel into steel and made a line look two thousand times
         better insulated than it is. The ratio that mistake was worth is on the aerogel row above.
       </div>
       <div className="mt-2 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
+        <table className="text-xs text-pl-text w-full">
           <tbody>
             {data.refusals.map((r) => (
               <tr key={r.label}>
                 <td className="pr-3">{r.label}</td>
-                <td className="pr-3 text-[#f97316]">
+                <td className="pr-3 text-pl-accent-text">
                   {r.isNaN === undefined ? `ok ${yn(r.ok)}` : `not a number: ${yn(r.isNaN)}`}
                 </td>
                 <td>{r.error || ''}</td>
@@ -189,21 +192,19 @@ const Stack = () => {
           <Tile label="U times its reference diameter in feet" value={fmt(data.summary.uTimesReferenceIdFt, 10)} unit="Btu/(hr ft degF) per ft" />
         </TileGrid>
       </div>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={chart} margin={{ top: 10, right: 20, bottom: 24, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="name" tick={AXIS} interval={0} angle={-12} textAnchor="end" height={44} />
-            <YAxis tick={AXIS}
-              label={{ value: 'share of the stack, percent', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-            <Bar dataKey="sharePct" name="share of the total resistance" fill="#BFFF00" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3 rounded-t-lg">
+        <BarChart data={chart} margin={{ top: 10, right: 20, bottom: 24, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="name" tick={AXIS} interval={0} angle={-12} textAnchor="end" height={44} />
+          <YAxis tick={AXIS}
+            label={{ value: 'share of the stack, percent', angle: -90, position: 'insideLeft', fill: SVG_CHART.label, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+          <Bar dataKey="sharePct" name="share of the total resistance" fill={seriesColor(0)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">term</th>
               <th className="text-left pr-3">what it is</th>
@@ -216,7 +217,7 @@ const Stack = () => {
               <tr key={r.term}>
                 <td className="pr-3">{r.term}</td>
                 <td className="pr-3">{r.label || 'a boundary layer'}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.resistance, 10)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.resistance, 10)}</td>
                 <td>{fmt(r.sharePct, 8)}</td>
               </tr>
             ))}
@@ -225,8 +226,8 @@ const Stack = () => {
       </div>
       {pair && (
         <div className="mt-3 overflow-x-auto">
-          <table className="text-xs text-slate-300 w-full">
-            <thead className="text-slate-500">
+          <table className="text-xs text-pl-text w-full">
+            <thead className="text-pl-muted">
               <tr>
                 <th className="text-left pr-3">overall U on this build</th>
                 <th className="text-left pr-3">the oracle</th>
@@ -237,15 +238,15 @@ const Stack = () => {
             <tbody>
               <tr>
                 <td className="pr-3">Btu/(hr ft2 degF)</td>
-                <td className="pr-3 text-[#38bdf8]">{fmt(pair.goldenUBtuHrFt2F, 10)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(pair.engineUBtuHrFt2F, 10)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(pair.goldenUBtuHrFt2F, 10)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(pair.engineUBtuHrFt2F, 10)}</td>
                 <td>{tiny(pair.uRelDiff)} apart, relative</td>
               </tr>
             </tbody>
           </table>
         </div>
       )}
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         A SHARE IS A PROPERTY OF A BUILD AND NOT A NUMBER TO MEMORISE. The foam layer is the same
         two inches of the same material in every build here and its RESISTANCE never changes at
         {' '}{fmt(data.foam[0].resistance, 10)}. Its share runs from
@@ -253,7 +254,7 @@ const Stack = () => {
         {' '}{fmt(Math.max(...data.foam.map((f) => f.sharePct)), 6)} percent across the four builds
         it appears in, because everything around it moved.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         AND THE STEEL WALL IS THE CONTRAST. It is the strongest material in the stack and it carries
         almost nothing, because a layer resistance is the log of the diameter ratio over the
         conductivity and the steel has both the thinnest log,
@@ -263,7 +264,7 @@ const Stack = () => {
         resistance taken straight from the two engine returns:
         {' '}{fmt(data.logs.resistanceRatio, 6)}.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         Two inches of foam is worth a factor of {fmt(data.ratios.bareOverInsulated, 8)} on the bare
         U. Four feet of wet soil on top of that is worth
         {' '}{fmt(data.ratios.insulatedOverBuried, 8)}. The stack ADDS, so once one term dominates
@@ -310,26 +311,24 @@ const Insulation = () => {
             ['material', 'Material, at the published thickness'],
           ]} />
       </FieldGrid>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="x" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
-              label={{ value: label, position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS} domain={['auto', 'auto']}
-              label={{ value: 'overall U, Btu/(hr ft2 degF)', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 8)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line type="monotone" dataKey="u" name="overall U, referred to the bore"
-              stroke="#BFFF00" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3 rounded-t-lg">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="x" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
+            label={{ value: label, position: 'insideBottom', offset: -8, fill: SVG_CHART.label, fontSize: 10 }} />
+          <YAxis tick={AXIS} domain={['auto', 'auto']}
+            label={{ value: 'overall U, Btu/(hr ft2 degF)', angle: -90, position: 'insideLeft', fill: SVG_CHART.label, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 8)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line type="monotone" dataKey="u" name="overall U, referred to the bore"
+            stroke={seriesColor(0)} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       {which === 'thickness' ? (
         <>
           <div className="mt-3 overflow-x-auto">
-            <table className="text-xs text-slate-300 w-full">
-              <thead className="text-slate-500">
+            <table className="text-xs text-pl-text w-full">
+              <thead className="text-pl-muted">
                 <tr>
                   <th className="text-left pr-3">foam outside diameter, in</th>
                   <th className="text-left pr-3">wall, in</th>
@@ -342,7 +341,7 @@ const Insulation = () => {
               </thead>
               <tbody>
                 {data.thickness.map((r) => (
-                  <tr key={r.foamOdIn} className={r.published ? 'text-[#BFFF00]' : ''}>
+                  <tr key={r.foamOdIn} className={r.published ? 'text-pl-primary-text' : ''}>
                     <td className="pr-3">{fmt(r.foamOdIn, 3)}</td>
                     <td className="pr-3">{fmt(r.wallIn, 4)}</td>
                     <td className="pr-3">{fmt(r.engineUBtuHrFt2F, 8)}</td>
@@ -355,7 +354,7 @@ const Insulation = () => {
               </tbody>
             </table>
           </div>
-          <div className="mt-3 text-xs text-slate-300">
+          <div className="mt-3 text-xs text-pl-text">
             THE ROWS ARE A CONTIGUOUS SLICE AND ONLY ONE OF THEM IS A PUBLISHED CASE. Every other
             row is a sweep point on published inputs. The FIRST quarter inch of foam wall divides U
             by more than twenty, and a quarter inch added at the outside divides it by a small
@@ -368,8 +367,8 @@ const Insulation = () => {
       ) : (
         <>
           <div className="mt-3 overflow-x-auto">
-            <table className="text-xs text-slate-300 w-full">
-              <thead className="text-slate-500">
+            <table className="text-xs text-pl-text w-full">
+              <thead className="text-pl-muted">
                 <tr>
                   <th className="text-left pr-3">coating</th>
                   <th className="text-left pr-3">k, Btu/(hr ft degF)</th>
@@ -381,7 +380,7 @@ const Insulation = () => {
               </thead>
               <tbody>
                 {data.materials.map((r) => (
-                  <tr key={r.materialId} className={r.published ? 'text-[#BFFF00]' : ''}>
+                  <tr key={r.materialId} className={r.published ? 'text-pl-primary-text' : ''}>
                     <td className="pr-3">{r.label}</td>
                     <td className="pr-3">{fmt(r.kBtuHrFtF, 4)}</td>
                     <td className="pr-3">{fmt(r.engineUBtuHrFt2F, 8)}</td>
@@ -393,7 +392,7 @@ const Insulation = () => {
               </tbody>
             </table>
           </div>
-          <div className="mt-3 text-xs text-slate-300">
+          <div className="mt-3 text-xs text-pl-text">
             THE LAYER RESISTANCE IS EXACTLY INVERSE IN THE CONDUCTIVITY, so the whole table reads
             off one row and a division: the conductivity ratio between the two ends is
             {' '}{fmt(data.contrast.conductivityRatio, 8)} and the layer resistance ratio is
@@ -453,24 +452,22 @@ const Burial = () => {
           <Tile label="The exact answer both approximate" value={fmt(data.floor.exactAnswer, 0)} />
         </TileGrid>
       </div>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="x" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
-              label={{ value: label, position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS} domain={['auto', 'auto']}
-              label={{ value: 'ground share of the stack, percent', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 8)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line type="monotone" dataKey="share" name="share of the whole stack the ground carries"
-              stroke="#BFFF00" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3 rounded-t-lg">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="x" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
+            label={{ value: label, position: 'insideBottom', offset: -8, fill: SVG_CHART.label, fontSize: 10 }} />
+          <YAxis tick={AXIS} domain={['auto', 'auto']}
+            label={{ value: 'ground share of the stack, percent', angle: -90, position: 'insideLeft', fill: SVG_CHART.label, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 8)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line type="monotone" dataKey="share" name="share of the whole stack the ground carries"
+            stroke={seriesColor(0)} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">{which === 'depth' ? 'burial to centreline, ft' : 'soil k'}</th>
               {which === 'depth' && <th className="text-left pr-3">2H over D</th>}
@@ -483,7 +480,7 @@ const Burial = () => {
           </thead>
           <tbody>
             {rows.map((r) => (
-              <tr key={which === 'depth' ? r.burialFt : r.kSoil} className={r.published ? 'text-[#BFFF00]' : ''}>
+              <tr key={which === 'depth' ? r.burialFt : r.kSoil} className={r.published ? 'text-pl-primary-text' : ''}>
                 <td className="pr-3">{fmt(which === 'depth' ? r.burialFt : r.kSoil, 6)}</td>
                 {which === 'depth' && <td className="pr-3">{fmt(r.twoHOverD, 8)}</td>}
                 {which === 'depth' && <td className="pr-3">{fmt(r.acoshTerm, 10)}</td>}
@@ -496,7 +493,7 @@ const Burial = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         A PIPE LYING ON THE SEABED GETS NOTHING FROM THE GROUND, and that is the right answer rather
         than a limitation. It is also the check that this is the shape factor and not something that
         merely looks like one, because the inverse cosine of one has to vanish there. The oracle
@@ -504,12 +501,12 @@ const Burial = () => {
         point residue of an exact zero reached by different routes. They are not a disagreement and
         neither should be converted into the other.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         DOUBLING THE DEPTH DOES NOT DOUBLE THE GROUND TERM, because the inverse cosine grows like a
         logarithm once the depth is past about one diameter. Depth is cheap insulation at first and
         then it is nothing.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         AND THE BURIAL IS MEASURED TO THE CENTRELINE. Read the same trench to the TOP of the coated
         pipe instead and the ground resistance moves from
         {' '}{fmt(data.convention.toCentrelineResistance, 10)} to
@@ -560,8 +557,8 @@ const Reference = () => {
         </TileGrid>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">referred to, in</th>
               <th className="text-left pr-3">U, Btu/(hr ft2 degF)</th>
@@ -573,7 +570,7 @@ const Reference = () => {
             {data.rows.map((r) => (
               <tr key={r.referenceIdIn}>
                 <td className="pr-3">{fmt(r.referenceIdIn, 3)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.engineUBtuHrFt2F, 10)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.engineUBtuHrFt2F, 10)}</td>
                 <td className="pr-3">{fmt(r.totalResistance, 10)}</td>
                 <td>{fmt(r.uTimesReferenceIdFt, 10)}</td>
               </tr>
@@ -581,13 +578,13 @@ const Reference = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         NOTHING ABOUT THE PIPE CHANGED BETWEEN THOSE TWO ROWS. The same layers, the same films, the
         same trench and the same total resistance to the last figure. Only the reference diameter
         moved. A U is a resistance divided by an AREA, so naming a different area gives a different
         U for identical physics, and the engine reports which one it used.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         THE INVARIANT IS THE PRODUCT. U times its reference diameter is the same number whichever
         reference is chosen, and that product times the circle constant is the conductance per foot
         of pipe, which does not care what area you name. It is
@@ -639,21 +636,19 @@ const Mass = () => {
         <Tile label="Total heat capacity per foot" value={fmt(data.masses.totalMcpBtuFtF, 10)} unit="Btu/(ft degF)" />
         <Tile label="Contents share of it" value={fmt(data.masses.contentsShareOfMcpPct, 6)} unit="percent" />
       </TileGrid>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={chart} margin={{ top: 10, right: 20, bottom: 24, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="name" tick={AXIS} interval={0} height={40} />
-            <YAxis tick={AXIS}
-              label={{ value: 'lbm/ft and Btu/(ft degF)', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 8)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Bar dataKey="mass" name="mass per foot, lbm/ft" fill="#BFFF00" isAnimationActive={false} />
-            <Bar dataKey="mcp" name="heat capacity per foot, Btu/(ft degF)" fill="#f97316" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <ChartFrame height={224} className="mt-3 rounded-t-lg">
+        <BarChart data={chart} margin={{ top: 10, right: 20, bottom: 24, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="name" tick={AXIS} interval={0} height={40} />
+          <YAxis tick={AXIS}
+            label={{ value: 'lbm/ft and Btu/(ft degF)', angle: -90, position: 'insideLeft', fill: SVG_CHART.label, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 8)} />
+          <Legend {...LEGEND_PROPS} />
+          <Bar dataKey="mass" name="mass per foot, lbm/ft" fill={seriesColor(0)} isAnimationActive={false} />
+          <Bar dataKey="mcp" name="heat capacity per foot, Btu/(ft degF)" fill={seriesColor(2)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
+      <div className="mt-3 text-xs text-pl-text">
         MASS IS NOT HEAT CAPACITY, AND THE RANKING REVERSES. The cooldown header warns that on an
         insulated small bore line the steel can hold as much heat as the oil in it. On this pipe the
         steel does outweigh the contents, by a factor of
@@ -664,7 +659,7 @@ const Mass = () => {
         it reverses again, and the contents carry
         {' '}{fmt(data.reversal.teachingContentsShareOfApiMcpPct, 6)} percent.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         THE LAYERS THAT CARRY NONE. The overall U takes an unbounded layer list and the cooldown has
         exactly {fmt(data.foam.massSlotsCooldownOffers, 0)} mass slots, contents and shell. There is
         no slot for a coating, no helper that lumps one, and no warning when the layer list is
@@ -678,12 +673,12 @@ const Mass = () => {
         capacity and none of it is in the published cooldown at all.
       </div>
       <div className="mt-2 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
+        <table className="text-xs text-pl-text w-full">
           <tbody>
             {data.refusals.map((r) => (
               <tr key={r.label}>
                 <td className="pr-3">{r.label}</td>
-                <td className="text-[#f97316]">not a number: {yn(r.isNaN)}</td>
+                <td className="text-pl-warning-text">not a number: {yn(r.isNaN)}</td>
               </tr>
             ))}
           </tbody>

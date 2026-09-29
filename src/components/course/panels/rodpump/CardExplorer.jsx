@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, ComposedChart, Line, Scatter, ScatterChart,
+  LineChart, ComposedChart, Line, Scatter, ScatterChart,
   XAxis, YAxis, ZAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
 import {
@@ -8,6 +8,9 @@ import {
   DEFAULT_NODES, DEFAULT_CARD_SAMPLES, DEFAULT_MAX_CYCLES, DEFAULT_MARCH_TOL,
 } from './rodPumpLab';
 import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import TypedWellFields, { draftFrom } from './TypedWellFields.jsx';
 
 // Card explorer, the Professional tier. The design IS the card, so this panel is
@@ -46,9 +49,9 @@ const MODES = [
   { value: 'typed', label: 'Your well, typed: the card' },
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const GRID = <CartesianGrid stroke="#334155" strokeDasharray="3 3" />;
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const GRID = <CartesianGrid {...GRID_STYLE} />;
 
 const useSafe = (fn, deps = []) => useMemo(() => {
   try { return fn(); } catch { return null; }
@@ -74,7 +77,7 @@ const March = () => {
         <Tile label="Shallowest envelope sample" value={fmt(s.shallowestNodeFt, 9)} unit="ft" />
         <Tile label="Time step" value={t.dtS.toExponential(6)} unit="s" />
       </TileGrid>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         TWO SAMPLINGS OF ONE MARCH, IN ONE RETURN OBJECT. The march advances displacement on a
         collocated grid with an explicit central difference at a step short enough to keep the wave
         inside one cell, and it repeats whole cycles until the stroke stops changing:
@@ -85,8 +88,8 @@ const March = () => {
         read off that subsample. Only one of the two is the card.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">case</th>
               <th className="text-left pr-3">marched steps</th>
@@ -108,33 +111,31 @@ const March = () => {
               </tr>
             ))}
             <tr>
-              <td className="pr-3 text-[#BFFF00]">{ODUMA.label}, {fmt(ODUMA.spm, 1)} spm</td>
-              <td className="pr-3 text-[#BFFF00]">{fmt(s.samples, 0)}</td>
-              <td className="pr-3 text-[#BFFF00]">{fmt(s.cardPoints, 0)}</td>
-              <td className="pr-3 text-[#BFFF00]">{fmt(s.stride, 0)}</td>
-              <td className="pr-3 text-[#BFFF00]">{t.dtS.toExponential(6)}</td>
-              <td className="text-[#BFFF00]">{fmt(t.cycles, 0)}</td>
+              <td className="pr-3 text-pl-primary-text">{ODUMA.label}, {fmt(ODUMA.spm, 1)} spm</td>
+              <td className="pr-3 text-pl-primary-text">{fmt(s.samples, 0)}</td>
+              <td className="pr-3 text-pl-primary-text">{fmt(s.cardPoints, 0)}</td>
+              <td className="pr-3 text-pl-primary-text">{fmt(s.stride, 0)}</td>
+              <td className="pr-3 text-pl-primary-text">{t.dtS.toExponential(6)}</td>
+              <td className="text-pl-primary-text">{fmt(t.cycles, 0)}</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div className="h-80 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <ScatterChart margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="positionIn" type="number" tick={AXIS} domain={['auto', 'auto']}
-              label={{ value: 'position, in', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis dataKey="loadLb" type="number" tick={AXIS} domain={['auto', 'auto']}
-              label={{ value: 'load, lb', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <ZAxis range={[16, 16]} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 4)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Scatter name="the surface card, at the polished rod" data={d.surfaceCard} fill="#BFFF00" line isAnimationActive={false} />
-            <Scatter name="the pump card, at the plunger" data={d.pumpCard} fill="#38bdf8" line isAnimationActive={false} />
-          </ScatterChart>
-        </ResponsiveContainer>
-      </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <ChartFrame height={320} className="mt-3 rounded-t-lg">
+        <ScatterChart margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="positionIn" type="number" tick={AXIS} domain={['auto', 'auto']}
+            label={{ value: 'position, in', position: 'insideBottom', offset: -8, fill: SVG_CHART.label, fontSize: 10 }} />
+          <YAxis dataKey="loadLb" type="number" tick={AXIS} domain={['auto', 'auto']}
+            label={{ value: 'load, lb', angle: -90, position: 'insideLeft', fill: SVG_CHART.label, fontSize: 10 }} />
+          <ZAxis range={[16, 16]} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 4)} />
+          <Legend {...LEGEND_PROPS} />
+          <Scatter name="the surface card, at the polished rod" data={d.surfaceCard} fill={seriesColor(0)} line isAnimationActive={false} />
+          <Scatter name="the pump card, at the plunger" data={d.pumpCard} fill={seriesColor(1)} line isAnimationActive={false} />
+        </ScatterChart>
+      </ChartFrame>
+      <div className="mt-3 text-xs text-pl-text">
         THE TWO VERTICAL SIDES OF THE PUMP CARD ARE THE VALVE TRANSFERS, where the plunger is held
         still and the rod above it stretches or relaxes. Away from them the pump load takes two
         values: {fmt(d.areas.fluidLoadLb, 9)} lb while lifting or pounding down, and 0 lb while
@@ -143,8 +144,8 @@ const March = () => {
         {' '}{fmt(d.areas.differenceInLb, 6)} in-lb is the work the rods and the damping absorb.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">speed, spm</th>
               <th className="text-left pr-3">stroke period, s</th>
@@ -157,21 +158,21 @@ const March = () => {
               <tr key={r.spm}>
                 <td className="pr-3">{fmt(r.spm, 1)}</td>
                 <td className="pr-3">{fmt(r.periodS, 6)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.roundTripsPerStroke, 9)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.roundTripsPerStroke, 9)}</td>
                 <td>{fmt(r.speedOverFundamental, 9)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         A STRING THE WAVE CROSSES A HUNDRED TIMES A STROKE IS A SPRING. One it crosses a handful of
         times is a wave machine, and the two rules for the plunger stroke separate over exactly that
         range. On the published taper a round trip takes
         {' '}{fmt(d.transitHeadline.roundTripS, 9)} s at a wave speed of
         {' '}{fmt(d.transitHeadline.waveSpeedFtS, 6)} ft/s.
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         WHAT THE CALLER CANNOT ASK FOR. The march accepts a card sample count, a node count, a cycle
         cap of {fmt(s.maxCyclesDefault, 0)} and a tolerance of {s.tolDefault}. The design function
         forwards none of them, so a studio user gets the loads that came off the default decimation
@@ -211,30 +212,28 @@ const Stretch = () => {
           <Tile label="Largest overtravel" value={fmt(Math.max(...rows.map((r) => r.overtravelPct)), 6)} unit="%" />
         </TileGrid>
       </div>
-      <div className="h-80 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="spm" type="number" tick={AXIS} domain={['auto', 'auto']}
-              label={{ value: 'pumping speed, spm', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis yAxisId="s" tick={AXIS} domain={['auto', 'auto']}
-              label={{ value: 'plunger stroke, in', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <YAxis yAxisId="p" orientation="right" tick={AXIS} domain={['auto', 'auto']}
-              label={{ value: 'overtravel, %', angle: 90, position: 'insideRight', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line yAxisId="s" type="monotone" dataKey="springRuleIn" name="the spring rule, S less Fo Er"
-              stroke="#f97316" strokeDasharray="5 3" dot={false} isAnimationActive={false} />
-            <Line yAxisId="s" type="monotone" dataKey="waveMarchIn" name="the wave march"
-              stroke="#BFFF00" dot={false} isAnimationActive={false} />
-            <Line yAxisId="p" type="monotone" dataKey="overtravelPct" name="overtravel, per cent of the spring rule"
-              stroke="#38bdf8" dot={{ r: 2 }} isAnimationActive={false} />
-          </ComposedChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={320} className="mt-3 rounded-t-lg">
+        <ComposedChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="spm" type="number" tick={AXIS} domain={['auto', 'auto']}
+            label={{ value: 'pumping speed, spm', position: 'insideBottom', offset: -8, fill: SVG_CHART.label, fontSize: 10 }} />
+          <YAxis yAxisId="s" tick={AXIS} domain={['auto', 'auto']}
+            label={{ value: 'plunger stroke, in', angle: -90, position: 'insideLeft', fill: SVG_CHART.label, fontSize: 10 }} />
+          <YAxis yAxisId="p" orientation="right" tick={AXIS} domain={['auto', 'auto']}
+            label={{ value: 'overtravel, %', angle: 90, position: 'insideRight', fill: SVG_CHART.label, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line yAxisId="s" type="monotone" dataKey="springRuleIn" name="the spring rule, S less Fo Er"
+            stroke={seriesColor(2)} strokeDasharray="5 3" dot={false} isAnimationActive={false} />
+          <Line yAxisId="s" type="monotone" dataKey="waveMarchIn" name="the wave march"
+            stroke={seriesColor(0)} dot={false} isAnimationActive={false} />
+          <Line yAxisId="p" type="monotone" dataKey="overtravelPct" name="overtravel, per cent of the spring rule"
+            stroke={seriesColor(1)} dot={{ r: 2 }} isAnimationActive={false} />
+        </ComposedChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">speed, spm</th>
               <th className="text-left pr-3">spring rule, in</th>
@@ -248,17 +247,17 @@ const Stretch = () => {
             {rows.map((r) => (
               <tr key={r.spm}>
                 <td className="pr-3">{fmt(r.spm, 1)}</td>
-                <td className="pr-3 text-[#f97316]">{fmt(r.springRuleIn, 9)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.waveMarchIn, 9)}</td>
+                <td className="pr-3 text-pl-accent-text">{fmt(r.springRuleIn, 9)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.waveMarchIn, 9)}</td>
                 <td className="pr-3">{fmt(r.overtravelIn, 9)}</td>
-                <td className="pr-3 text-[#38bdf8]">{fmt(r.overtravelPct, 6)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.overtravelPct, 6)}</td>
                 <td>{fmt(r.speedOverFundamental, 9)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THE WAVE ANSWER IS LONGER AT EVERY SPEED ON THIS LADDER, and the difference is inertial
         OVERTRAVEL: the spring rule subtracts a static stretch from the surface stroke and knows
         nothing about a rod string that is still moving when the polished rod turns round. Read the
@@ -269,8 +268,8 @@ const Stretch = () => {
         it a trend.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">fluid load, lb</th>
               <th className="text-left pr-3">spring rule, in</th>
@@ -286,13 +285,13 @@ const Stretch = () => {
                 <td className="pr-3">{fmt(r.springRuleIn, 9)}</td>
                 <td className="pr-3">{fmt(r.waveMarchIn, 9)}</td>
                 <td className="pr-3">{fmt(r.overtravelIn, 9)}</td>
-                <td className="text-[#38bdf8]">{fmt(r.overtravelPct, 6)}</td>
+                <td className="text-pl-info-text">{fmt(r.overtravelPct, 6)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THE OVERTRAVEL IS AN INERTIA EFFECT, so it shrinks when the string is stiff relative to the
         load it carries. The published case at 9 spm with the fluid load walked down says so, and
         the percentage is the column to read because the spring rule moves too. WHICH ONE IS THE
@@ -327,7 +326,7 @@ const Loads = () => {
         <Tile label="F1 over Skr" value={fmt(d.groups.f1OverSkr, 9)} />
         <Tile label="F2 over Skr" value={fmt(d.groups.f2OverSkr, 9)} />
       </TileGrid>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THE RANGE IS THE NUMBER THE RODS FEEL, because steel fails on the swing and not on the
         average, and it is the only one of the three headline numbers that collects a movement at
         both ends of the card. On the published taper it runs
@@ -336,8 +335,8 @@ const Loads = () => {
         climbed and the minimum fell.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">section</th>
               <th className="text-left pr-3">top, ft</th>
@@ -351,7 +350,7 @@ const Loads = () => {
           <tbody>
             {d.stresses.map((r) => (
               <tr key={r.index}>
-                <td className="pr-3 text-[#BFFF00]">{r.label}</td>
+                <td className="pr-3 text-pl-primary-text">{r.label}</td>
                 <td className="pr-3">{fmt(r.topDepthFt, 1)}</td>
                 <td className="pr-3">{fmt(r.envelopeSampleFt, 6)}</td>
                 <td className="pr-3">{fmt(r.maxStressPsi, 6)}</td>
@@ -363,7 +362,7 @@ const Loads = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THE TWO READINGS ARE NOT TAKEN THE SAME WAY. The reported peak and minimum above are read
         off the surface card the function returns. The section maxima and minima that feed this
         table are read off the tension envelope the march accumulated. They come out of one call and
@@ -379,24 +378,22 @@ const Loads = () => {
           { value: 'gravity', label: 'the fluid gravity' },
         ]} />
       </FieldGrid>
-      <div className="h-72 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey={xKey} type="number" tick={AXIS} domain={['auto', 'auto']}
-              label={{ value: xLabel, position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS} domain={['auto', 'auto']}
-              label={{ value: 'load, lb', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 4)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line type="monotone" dataKey="pprlLb" name="peak polished rod load" stroke="#BFFF00" dot={{ r: 2 }} isAnimationActive={false} />
-            <Line type="monotone" dataKey="mprlLb" name="minimum polished rod load" stroke="#38bdf8" dot={{ r: 2 }} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={288} className="mt-3 rounded-t-lg">
+        <LineChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey={xKey} type="number" tick={AXIS} domain={['auto', 'auto']}
+            label={{ value: xLabel, position: 'insideBottom', offset: -8, fill: SVG_CHART.label, fontSize: 10 }} />
+          <YAxis tick={AXIS} domain={['auto', 'auto']}
+            label={{ value: 'load, lb', angle: -90, position: 'insideLeft', fill: SVG_CHART.label, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 4)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line type="monotone" dataKey="pprlLb" name="peak polished rod load" stroke={seriesColor(0)} dot={{ r: 2 }} isAnimationActive={false} />
+          <Line type="monotone" dataKey="mprlLb" name="minimum polished rod load" stroke={seriesColor(1)} dot={{ r: 2 }} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">{xLabel}</th>
               <th className="text-left pr-3">PPRL, lb</th>
@@ -410,8 +407,8 @@ const Loads = () => {
             {rows.map((r) => (
               <tr key={r[xKey]}>
                 <td className="pr-3">{fmt(r[xKey], 4)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.pprlLb, 6)}</td>
-                <td className="pr-3 text-[#38bdf8]">{fmt(r.mprlLb, 6)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.pprlLb, 6)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.mprlLb, 6)}</td>
                 <td className="pr-3">{fmt(r.plungerStrokeIn, 6)}</td>
                 <td className="pr-3">{fmt(r.worstLoadingPct, 6)}</td>
                 <td>{r.warnings || '-'}</td>
@@ -420,7 +417,7 @@ const Loads = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         {sweep === 'damping' && `THE DAMPING RATIO IS THE INPUT NOBODY MEASURES, and across these nine contiguous rows the peak moves ${fmt(d.dampingSpread.pprlSpreadLb, 6)} lb, the minimum ${fmt(d.dampingSpread.mprlSpreadLb, 6)} lb and the plunger stroke ${fmt(d.dampingSpread.plungerStrokeSpreadIn, 6)} in. Field strings sit between about 0.05 and 0.15 of critical, which is most of this column.`}
         {sweep === 'plunger' && 'THE PLUNGER SIZE MOVES THE LOAD AND THE VOLUME in opposite directions on the thing a designer cares about: a bigger bore lifts more barrels and hangs more weight on the same steel, and the loading column is where the two meet.'}
         {sweep === 'gravity' && 'THE FLUID GRAVITY MOVES THE BUOYED WEIGHT and therefore both loads, and it moves nothing else in the string. The spring rate and the elastic constant are properties of the steel and the geometry, so the fluid changes the weight the polished rod carries and not how far the string stretches under a given load.'}
@@ -443,28 +440,26 @@ const Power = () => {
         <Tile label="Horsepower per barrel produced" value={fmt(d.perBarrel.hpPerBpd, 9)} unit="hp per bbl/d" />
         <Tile label="Produced" value={fmt(d.perBarrel.producedBpd, 6)} unit="bbl/d" />
       </TileGrid>
-      <div className="h-72 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart data={d.teaching} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="spm" type="number" tick={AXIS} domain={['auto', 'auto']}
-              label={{ value: 'pumping speed, spm', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis yAxisId="a" tick={AXIS} domain={['auto', 'auto']}
-              label={{ value: 'card area, in-lb per cycle', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <YAxis yAxisId="h" orientation="right" tick={AXIS} domain={['auto', 'auto']}
-              label={{ value: 'horsepower, hp', angle: 90, position: 'insideRight', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line yAxisId="a" type="monotone" dataKey="cardAreaInLb" name="the loop the polished rod does once a stroke"
-              stroke="#BFFF00" dot={{ r: 2 }} isAnimationActive={false} />
-            <Line yAxisId="h" type="monotone" dataKey="prhp" name="the power that loop costs"
-              stroke="#38bdf8" dot={{ r: 2 }} isAnimationActive={false} />
-          </ComposedChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={288} className="mt-3 rounded-t-lg">
+        <ComposedChart data={d.teaching} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="spm" type="number" tick={AXIS} domain={['auto', 'auto']}
+            label={{ value: 'pumping speed, spm', position: 'insideBottom', offset: -8, fill: SVG_CHART.label, fontSize: 10 }} />
+          <YAxis yAxisId="a" tick={AXIS} domain={['auto', 'auto']}
+            label={{ value: 'card area, in-lb per cycle', angle: -90, position: 'insideLeft', fill: SVG_CHART.label, fontSize: 10 }} />
+          <YAxis yAxisId="h" orientation="right" tick={AXIS} domain={['auto', 'auto']}
+            label={{ value: 'horsepower, hp', angle: 90, position: 'insideRight', fill: SVG_CHART.label, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line yAxisId="a" type="monotone" dataKey="cardAreaInLb" name="the loop the polished rod does once a stroke"
+            stroke={seriesColor(0)} dot={{ r: 2 }} isAnimationActive={false} />
+          <Line yAxisId="h" type="monotone" dataKey="prhp" name="the power that loop costs"
+            stroke={seriesColor(1)} dot={{ r: 2 }} isAnimationActive={false} />
+        </ComposedChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">speed, spm</th>
               <th className="text-left pr-3">card area, in-lb per cycle</th>
@@ -476,13 +471,13 @@ const Power = () => {
             {d.teaching.map((r) => (
               <tr key={r.spm}>
                 <td className="pr-3">{fmt(r.spm, 1)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.cardAreaInLb, 6)}</td>
-                <td className="pr-3 text-[#38bdf8]">{fmt(r.prhp, 9)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.cardAreaInLb, 6)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.prhp, 9)}</td>
                 <td>{fmt(r.areaTimesSpeedOver396000, 9)}</td>
               </tr>
             ))}
             {d.published.map((r) => (
-              <tr key={`p${r.spm}`} className="text-slate-500">
+              <tr key={`p${r.spm}`} className="text-pl-muted">
                 <td className="pr-3">published taper, {fmt(r.spm, 1)}</td>
                 <td className="pr-3">{fmt(r.cardAreaInLb, 6)}</td>
                 <td className="pr-3">{fmt(r.prhp, 9)}</td>
@@ -492,13 +487,13 @@ const Power = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THE SPEED IS IN THE ANSWER TWICE. Horsepower is the card area times the speed over 396000,
         and raising the speed makes the loop bigger as well as more frequent, so both columns climb
         and the horsepower does not scale with the speed. A designer who prorated the low figure
         would size the surface equipment for a machine that does not exist.
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         AND IT REFUSES TO BE MORE EXACT THAN THE CARD IT WAS HANDED. The area comes off the
         decimated card, which is {fmt(d.subsampleCost.cardAreaLowByInLb, 4)} in-lb per cycle below
         the area over every marched step, {fmt(d.subsampleCost.cardAreaLowByPct, 6)} percent, and
@@ -529,32 +524,30 @@ const Fillage = () => {
         <Tile label="Longest plunger stroke in the sweep" value={fmt(s.longestPlungerStrokeIn, 6)} unit="in" />
         <Tile label="At a fillage of" value={fmt(s.longestAtFillage, 4)} />
       </TileGrid>
-      <div className="h-72 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart data={d.sweep} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="fillage" type="number" tick={AXIS} domain={['auto', 'auto']} reversed
-              label={{ value: 'fillage', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis yAxisId="r" tick={AXIS} domain={['auto', 'auto']}
-              label={{ value: 'effective over nominal', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <YAxis yAxisId="q" orientation="right" tick={AXIS} domain={['auto', 'auto']}
-              label={{ value: 'produced, bbl/d', angle: 90, position: 'insideRight', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine yAxisId="r" y={1} stroke="#f472b6" strokeDasharray="4 3"
-              label={{ value: 'the factor that was typed', fill: '#f472b6', fontSize: 10, position: 'insideTopLeft' }} />
-            <ReferenceLine yAxisId="r" x={d.threshold} stroke="#f97316" strokeDasharray="4 3"
-              label={{ value: 'the warning threshold', fill: '#f97316', fontSize: 10, position: 'top' }} />
-            <Line yAxisId="r" type="monotone" dataKey="effectiveOverNominal" name="what the design really applied, over what was typed"
-              stroke="#BFFF00" dot={{ r: 2 }} isAnimationActive={false} />
-            <Line yAxisId="q" type="monotone" dataKey="producedBpd" name="produced"
-              stroke="#38bdf8" dot={false} isAnimationActive={false} />
-          </ComposedChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={288} className="mt-3 rounded-t-lg">
+        <ComposedChart data={d.sweep} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="fillage" type="number" tick={AXIS} domain={['auto', 'auto']} reversed
+            label={{ value: 'fillage', position: 'insideBottom', offset: -8, fill: SVG_CHART.label, fontSize: 10 }} />
+          <YAxis yAxisId="r" tick={AXIS} domain={['auto', 'auto']}
+            label={{ value: 'effective over nominal', angle: -90, position: 'insideLeft', fill: SVG_CHART.label, fontSize: 10 }} />
+          <YAxis yAxisId="q" orientation="right" tick={AXIS} domain={['auto', 'auto']}
+            label={{ value: 'produced, bbl/d', angle: 90, position: 'insideRight', fill: SVG_CHART.label, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine yAxisId="r" y={1} stroke={seriesColor(4)} strokeDasharray="4 3"
+            label={{ value: 'the factor that was typed', fill: seriesColor(4), fontSize: 10, position: 'insideTopLeft' }} />
+          <ReferenceLine yAxisId="r" x={d.threshold} stroke={seriesColor(2)} strokeDasharray="4 3"
+            label={{ value: 'the warning threshold', fill: seriesColor(2), fontSize: 10, position: 'top' }} />
+          <Line yAxisId="r" type="monotone" dataKey="effectiveOverNominal" name="what the design really applied, over what was typed"
+            stroke={seriesColor(0)} dot={{ r: 2 }} isAnimationActive={false} />
+          <Line yAxisId="q" type="monotone" dataKey="producedBpd" name="produced"
+            stroke={seriesColor(1)} dot={false} isAnimationActive={false} />
+        </ComposedChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">fillage</th>
               <th className="text-left pr-3">plunger stroke, in</th>
@@ -571,9 +564,9 @@ const Fillage = () => {
                 <td className="pr-3">{fmt(r.fillage, 4)}</td>
                 <td className="pr-3">{fmt(r.plungerStrokeIn, 6)}</td>
                 <td className="pr-3">{fmt(r.sweptBpd, 6)}</td>
-                <td className="pr-3 text-[#38bdf8]">{fmt(r.producedBpd, 6)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.producedBpd, 6)}</td>
                 <td className="pr-3">{fmt(r.effectiveFactor, 9)}</td>
-                <td className={r.effectiveOverNominal > 1 ? 'pr-3 text-[#BFFF00]' : 'pr-3 text-[#f97316]'}>
+                <td className={r.effectiveOverNominal > 1 ? 'pr-3 text-pl-primary-text' : 'pr-3 text-pl-accent-text'}>
                   {fmt(r.effectiveOverNominal, 9)}
                 </td>
                 <td>{r.warnings}</td>
@@ -582,7 +575,7 @@ const Fillage = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THE FACTOR THAT COMES OUT IS NOT THE FACTOR THAT WENT IN. The swept rate is computed from the
         plunger stroke the march returned, then multiplied by the fillage, and the plunger stroke had
         already moved with that same fillage: the pound down state holds the fluid load on the
@@ -594,8 +587,8 @@ const Fillage = () => {
         the longest stroke in the sweep is not at a full barrel.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">fillage</th>
               <th className="text-left pr-3">produced, bbl/d</th>
@@ -605,7 +598,7 @@ const Fillage = () => {
           </thead>
           <tbody>
             {d.cliff.map((r) => (
-              <tr key={r.fillage} className={r.incompleteFillage ? 'text-[#f97316]' : ''}>
+              <tr key={r.fillage} className={r.incompleteFillage ? 'text-pl-warning-text' : ''}>
                 <td className="pr-3">{fmt(r.fillage, 4)}</td>
                 <td className="pr-3">{fmt(r.producedBpd, 6)}</td>
                 <td className="pr-3">{fmt(r.plungerStrokeIn, 6)}</td>
@@ -615,7 +608,7 @@ const Fillage = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         A CLIFF IN THE CODE. The warning fires at a hard fillage below {d.threshold}, with no
         hysteresis and no graduation. The silent design above makes {fmt(d.pair.silentProducedBpd, 6)}
         {' '}bbl/d and the warned one makes {fmt(d.pair.warnedProducedBpd, 6)} bbl/d: they are
@@ -635,7 +628,7 @@ const TypedCard = () => {
   const r = useSafe(() => typedWellCard(applied), [applied]);
   return (
     <>
-      <div className="text-xs text-slate-300">
+      <div className="text-xs text-pl-text">
         Type a well and march it. The view opens on the {ODUMA.label} teaching well on the published
         four-bar, and every input can be retyped: the taper top section first, the grade, the fluid,
         the six linkage dimensions, the pump, the speed, the damping, the fillage and the efficiency.
@@ -646,10 +639,10 @@ const TypedCard = () => {
       </div>
       <div className="mt-3 flex items-center gap-3">
         <button type="button" onClick={() => setApplied(draft)}
-          className="rounded-md border border-gray-600 bg-gray-700 px-3 h-8 text-sm text-white">
+          className="rounded-md border border-pl-primary bg-pl-primary px-3 h-8 text-sm font-medium text-pl-primary-fg hover:bg-pl-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus">
           March this well
         </button>
-        {draft !== applied && <span className="text-xs text-[#f97316]">Inputs changed since the last march.</span>}
+        {draft !== applied && <span className="text-xs text-pl-warning-text">Inputs changed since the last march.</span>}
       </div>
       <Note>
         Marching parameters stay at the engine defaults: {DEFAULT_NODES} nodes, {DEFAULT_CARD_SAMPLES} card

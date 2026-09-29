@@ -1,10 +1,13 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line,
+  LineChart, Line,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine, ReferenceDot,
 } from 'recharts';
 import { profileExplorer } from './gasWellLab';
 import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 
 // Profile explorer, the Professional tier. A well is not a station.
 //
@@ -36,9 +39,9 @@ const MODES = [
   ['plunger', 'The plunger, and the screen that judges it'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const GRID = <CartesianGrid stroke="#334155" strokeDasharray="3 3" />;
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const GRID = <CartesianGrid {...GRID_STYLE} />;
 
 const CORRELATIONS = [
   ['coleman', 'Coleman, which is what the wellhead pressure selects'],
@@ -73,27 +76,25 @@ const Traverse = () => {
         <Tile label="Gas rate" value={fmt(def.qMscfd, 1)} unit="Mscf/d" />
         <Tile label="Wellhead over shoe pressure" value={fmt(def.pressureRatio, 8)} />
       </TileGrid>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="depthFt" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
-              label={{ value: 'depth, ft', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis yAxisId="p" tick={AXIS} domain={['auto', 'auto']}
-              label={{ value: 'pressure, psia', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <YAxis yAxisId="r" orientation="right" tick={AXIS} domain={['auto', 'auto']} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line yAxisId="p" type="monotone" dataKey="pPsia" name="flowing pressure, psia"
-              stroke="#BFFF00" dot isAnimationActive={false} />
-            <Line yAxisId="r" type="monotone" dataKey="rhoGasLbFt3" name="gas density, lbm/ft3"
-              stroke="#38bdf8" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3 rounded-t-lg">
+        <LineChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="depthFt" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
+            label={{ value: 'depth, ft', position: 'insideBottom', offset: -8, fill: SVG_CHART.label, fontSize: 10 }} />
+          <YAxis yAxisId="p" tick={AXIS} domain={['auto', 'auto']}
+            label={{ value: 'pressure, psia', angle: -90, position: 'insideLeft', fill: SVG_CHART.label, fontSize: 10 }} />
+          <YAxis yAxisId="r" orientation="right" tick={AXIS} domain={['auto', 'auto']} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line yAxisId="p" type="monotone" dataKey="pPsia" name="flowing pressure, psia"
+            stroke={seriesColor(0)} dot isAnimationActive={false} />
+          <Line yAxisId="r" type="monotone" dataKey="rhoGasLbFt3" name="gas density, lbm/ft3"
+            stroke={seriesColor(1)} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">depth, ft</th>
               <th className="text-left pr-3">pressure, psia</th>
@@ -108,18 +109,18 @@ const Traverse = () => {
             {rows.map((r) => (
               <tr key={r.depthFt}>
                 <td className="pr-3">{fmt(r.depthFt, 1)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.pPsia, 1)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.pPsia, 1)}</td>
                 <td className="pr-3">{fmt(r.tF, 2)}</td>
                 <td className="pr-3">{fmt(r.tempR, 2)}</td>
                 <td className="pr-3">{fmt(r.z, 10)}</td>
-                <td className="pr-3 text-[#38bdf8]">{fmt(r.rhoGasLbFt3, 10)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.rhoGasLbFt3, 10)}</td>
                 <td>{fmt(r.idIn, 3)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THE CORRELATION IS CHOSEN HERE, AT THE TOP. Handed the wellhead pressure of{' '}
         {fmt(rows[0].pPsia, 1)} psia the recommendation returns {rec.correlation}, and that one
         answer is then used at every station in the study including the one that actually controls,
@@ -172,29 +173,27 @@ const Profile = () => {
           <Tile label="Shallowest loading station" value={fmt(summary.shallowestLoadingDepthFt, 0)} unit="ft" />
         </TileGrid>
       </div>
-      <div className="h-72 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="depthFt" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
-              label={{ value: 'depth, ft', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS} domain={['auto', 'auto']}
-              label={{ value: 'ratio, actual over critical', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 10)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={1} stroke="#f472b6" strokeDasharray="4 3"
-              label={{ value: 'the crossing', fill: '#f472b6', fontSize: 10, position: 'insideTopRight' }} />
-            <Line type="monotone" dataKey="ratio" name="the profile ratio, station by station"
-              stroke="#BFFF00" dot isAnimationActive={false} />
-            {crossing ? (
-              <ReferenceDot x={crossing.depthFt} y={crossing.ratio} r={5} fill="#f97316" stroke="none" isFront />
-            ) : null}
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={288} className="mt-3 rounded-t-lg">
+        <LineChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="depthFt" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
+            label={{ value: 'depth, ft', position: 'insideBottom', offset: -8, fill: SVG_CHART.label, fontSize: 10 }} />
+          <YAxis tick={AXIS} domain={['auto', 'auto']}
+            label={{ value: 'ratio, actual over critical', angle: -90, position: 'insideLeft', fill: SVG_CHART.label, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 10)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine y={1} stroke={seriesColor(4)} strokeDasharray="4 3"
+            label={{ value: 'the crossing', fill: seriesColor(4), fontSize: 10, position: 'insideTopRight' }} />
+          <Line type="monotone" dataKey="ratio" name="the profile ratio, station by station"
+            stroke={seriesColor(0)} dot isAnimationActive={false} />
+          {crossing ? (
+            <ReferenceDot x={crossing.depthFt} y={crossing.ratio} r={5} fill={seriesColor(2)} stroke="none" isFront />
+          ) : null}
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">depth, ft</th>
               <th className="text-left pr-3">critical velocity, ft/s</th>
@@ -208,12 +207,12 @@ const Profile = () => {
           </thead>
           <tbody>
             {rows.map((r) => (
-              <tr key={r.depthFt} className={r.loaded ? 'text-[#f97316]' : ''}>
+              <tr key={r.depthFt} className={r.loaded ? 'text-pl-warning-text' : ''}>
                 <td className="pr-3">{fmt(r.depthFt, 1)}</td>
                 <td className="pr-3">{fmt(r.criticalVelocityFtS, 10)}</td>
                 <td className="pr-3">{fmt(r.criticalRateMscfd, 9)}</td>
                 <td className="pr-3">{fmt(r.actualVelocityFtS, 10)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.ratio, 10)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.ratio, 10)}</td>
                 <td className="pr-3">{yn(r.loaded)}</td>
                 <td className="pr-3">{r.criticalRateRiseMscfd === null ? '-' : fmt(r.criticalRateRiseMscfd, 9)}</td>
                 <td>{r.ratioFall === null ? '-' : fmt(r.ratioFall, 10)}</td>
@@ -222,7 +221,7 @@ const Profile = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THE CRITICAL RATE RISES MONOTONICALLY WITH DEPTH ON A NORMAL TRAVERSE, which is WHY the shoe
         controls. It goes as roughly the square root of pressure, so it is highest at the bottom of
         the tubing, exactly where the liquid actually collects. The ratio therefore falls all the way
@@ -231,7 +230,7 @@ const Profile = () => {
         of the string and outside the deepest {fmt(summary.outsideDeepestPct, 4)} percent. Six
         stations is as far as six stations can pin it.
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         AND A POINT CHECK AT THE GAUGE INVERTS THE VERDICT. Handed only the wellhead station the
         profile names {fmt(wellheadOnly.controllingDepthFt, 0)} ft as the controlling station, reads
         a ratio of {fmt(wellheadOnly.controllingRatio, 10)} and reports loaded ={' '}
@@ -261,28 +260,26 @@ const Rates = () => {
   }));
   return (
     <>
-      <div className="h-64">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="qMscfd" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
-              label={{ value: 'gas rate, Mscf/d', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis yAxisId="m" tick={AXIS} domain={['auto', 'auto']}
-              label={{ value: 'margin, percent', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <YAxis yAxisId="d" orientation="right" tick={AXIS} domain={[0, 7500]} reversed />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine yAxisId="m" y={0} stroke="#f472b6" strokeDasharray="4 3" />
-            <Line yAxisId="m" type="monotone" dataKey="marginPct" name="margin at the controlling station, percent"
-              stroke="#BFFF00" dot isAnimationActive={false} />
-            <Line yAxisId="d" type="monotone" dataKey="crossingFt" name="shallowest loading station, ft"
-              stroke="#f97316" dot connectNulls={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="rounded-t-lg">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="qMscfd" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
+            label={{ value: 'gas rate, Mscf/d', position: 'insideBottom', offset: -8, fill: SVG_CHART.label, fontSize: 10 }} />
+          <YAxis yAxisId="m" tick={AXIS} domain={['auto', 'auto']}
+            label={{ value: 'margin, percent', angle: -90, position: 'insideLeft', fill: SVG_CHART.label, fontSize: 10 }} />
+          <YAxis yAxisId="d" orientation="right" tick={AXIS} domain={[0, 7500]} reversed />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine yAxisId="m" y={0} stroke={seriesColor(4)} strokeDasharray="4 3" />
+          <Line yAxisId="m" type="monotone" dataKey="marginPct" name="margin at the controlling station, percent"
+            stroke={seriesColor(0)} dot isAnimationActive={false} />
+          <Line yAxisId="d" type="monotone" dataKey="crossingFt" name="shallowest loading station, ft"
+            stroke={seriesColor(2)} dot connectNulls={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">gas rate, Mscf/d</th>
               <th className="text-left pr-3">ratios, top station first</th>
@@ -293,9 +290,9 @@ const Rates = () => {
           </thead>
           <tbody>
             {data.rows.map((r) => (
-              <tr key={r.qMscfd} className={r.loaded ? 'text-[#f97316]' : ''}>
+              <tr key={r.qMscfd} className={r.loaded ? 'text-pl-warning-text' : ''}>
                 <td className="pr-3">{fmt(r.qMscfd, 1)}</td>
-                <td className="pr-3 text-[#BFFF00]">{r.ratios.map((x) => fmt(x, 6)).join(', ')}</td>
+                <td className="pr-3 text-pl-primary-text">{r.ratios.map((x) => fmt(x, 6)).join(', ')}</td>
                 <td className="pr-3">{yn(r.loaded)}</td>
                 <td className="pr-3">{fmt(r.marginPct, 6)}</td>
                 <td>{r.shallowestLoadingDepthFt === null ? 'none' : `${fmt(r.shallowestLoadingDepthFt, 1)} ft`}</td>
@@ -304,7 +301,7 @@ const Rates = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THE CROSSING WALKS UP THE HOLE AS THE WELL DECLINES, and it does not walk smoothly. It moves
         in station-sized jumps, because six stations is the resolution the traverse has, so the
         column above says which BRACKET the crossing is in and never where inside it. The two highest
@@ -358,29 +355,27 @@ const Sizing = () => {
           <Tile label="Best ratio on the list" value={fmt(verdict.bestRatioOnTheList, 10)} />
         </TileGrid>
       </div>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={[...rows].reverse()} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="idIn" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
-              label={{ value: 'candidate inside diameter, in', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS} domain={['auto', 'auto']}
-              label={{ value: 'ratio', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 10)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={1} stroke="#f472b6" strokeDasharray="4 3"
-              label={{ value: 'clears one', fill: '#f472b6', fontSize: 10, position: 'insideTopLeft' }} />
-            <Line type="monotone" dataKey="ratio" name={`ratio under ${correlation}`}
-              stroke="#BFFF00" dot isAnimationActive={false} />
-            {verdict.pickIdIn === null ? null : (
-              <ReferenceDot x={verdict.pickIdIn} y={verdict.pickRatio} r={5} fill="#f97316" stroke="none" isFront />
-            )}
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3 rounded-t-lg">
+        <LineChart data={[...rows].reverse()} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="idIn" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
+            label={{ value: 'candidate inside diameter, in', position: 'insideBottom', offset: -8, fill: SVG_CHART.label, fontSize: 10 }} />
+          <YAxis tick={AXIS} domain={['auto', 'auto']}
+            label={{ value: 'ratio', angle: -90, position: 'insideLeft', fill: SVG_CHART.label, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 10)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine y={1} stroke={seriesColor(4)} strokeDasharray="4 3"
+            label={{ value: 'clears one', fill: seriesColor(4), fontSize: 10, position: 'insideTopLeft' }} />
+          <Line type="monotone" dataKey="ratio" name={`ratio under ${correlation}`}
+            stroke={seriesColor(0)} dot isAnimationActive={false} />
+          {verdict.pickIdIn === null ? null : (
+            <ReferenceDot x={verdict.pickIdIn} y={verdict.pickRatio} r={5} fill={seriesColor(2)} stroke="none" isFront />
+          )}
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">candidate, in</th>
               <th className="text-left pr-3">flow area, ft2</th>
@@ -393,27 +388,27 @@ const Sizing = () => {
           </thead>
           <tbody>
             {rows.map((r) => (
-              <tr key={r.idIn} className={r.idIn === verdict.pickIdIn ? 'text-white' : (r.unloads ? '' : 'text-slate-500')}>
+              <tr key={r.idIn} className={r.idIn === verdict.pickIdIn ? 'text-pl-text font-semibold' : (r.unloads ? '' : 'text-pl-muted')}>
                 <td className="pr-3">{fmt(r.idIn, 3)}{r.idIn === verdict.pickIdIn ? ' (the pick)' : ''}</td>
                 <td className="pr-3">{fmt(r.areaFt2, 10)}</td>
                 <td className="pr-3">{fmt(r.criticalVelocityFtS, 10)}</td>
                 <td className="pr-3">{fmt(r.criticalRateMscfd, 9)}</td>
                 <td className="pr-3">{fmt(r.actualVelocityFtS, 10)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.ratio, 10)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.ratio, 10)}</td>
                 <td>{yn(r.unloads)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THE PICK IS ONE LINE OUT OF THAT TABLE. It is the largest inside diameter whose critical rate
         the well still beats, and the rejections are the rest of it. The critical velocity is the same
         on every row, because velocity belongs to the station; only the area moves, so only the rate
         and the ratio move with it. The returned object carries {verdict.objectKeys.join(', ')}, and
         each row carries {verdict.rowKeys.join(', ')}. There is no depth anywhere in either list.
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         AND ok IS NOT DECORATION. Ask this list for a rate nothing on it can carry,{' '}
         {fmt(hopeless.qMscfd, 1)} Mscf/d, and largestUnloaded comes back null with ok ={' '}
         {yn(hopeless.ok)} and a best ratio anywhere on the list of{' '}
@@ -424,8 +419,8 @@ const Sizing = () => {
         all. Read the boolean before the pick.
       </div>
       <div className="mt-2 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">what went wrong</th>
               <th className="text-left pr-3">ok</th>
@@ -437,7 +432,7 @@ const Sizing = () => {
             {data.refusals.map((r) => (
               <tr key={r.label}>
                 <td className="pr-3">{r.label}</td>
-                <td className="pr-3 text-[#f97316]">{yn(r.ok)}</td>
+                <td className="pr-3 text-pl-warning-text">{yn(r.ok)}</td>
                 <td className="pr-3">{r.rowCount}</td>
                 <td>{r.reason}</td>
               </tr>
@@ -493,8 +488,8 @@ const Plunger = () => {
         <Tile label="The casing exceeds it by" value={fmt(screen.casingExceedsByPsi, 10)} unit="psi" />
       </TileGrid>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">term of the static balance</th>
               <th className="text-left pr-3">psi</th>
@@ -505,7 +500,7 @@ const Plunger = () => {
             {terms.map(([label, psi]) => (
               <tr key={label}>
                 <td className="pr-3">{label}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(psi, 10)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(psi, 10)}</td>
                 <td>{fmt((psi / screen.requiredPsia) * 100, 4)} %</td>
               </tr>
             ))}
@@ -528,7 +523,7 @@ const Plunger = () => {
           <Tile label="feasible" value={yn(screen.feasible)} />
         </TileGrid>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THE RULE OF THUMB BLESSES WHAT THE PHYSICS REFUSES. This well makes{' '}
         {fmt(screen.wellGlrScfBbl, 1)} scf/bbl and clears the {fmt(screen.ruleOfThumbGlrScfBbl, 1)}{' '}
         scf/bbl screening heuristic comfortably, so ruleOfThumbAgrees would read true on that reading
@@ -537,10 +532,10 @@ const Plunger = () => {
         glrOk reads {yn(screen.glrOk)}. The 400 scf per barrel per thousand feet rule is carried for
         comparison only and never decides feasibility.
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         {screen.warnings.map((w) => `${w.code}: ${w.message}`).join(' ')}
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THE SAME BALANCE ON THE PUBLISHED CASE, which an oracle did check: {fmt(pub.inputs.depthFt, 0)}{' '}
         ft of {fmt(pub.inputs.idIn, 3)} in tubing, a {fmt(pub.inputs.slugLengthFt, 0)} ft slug of{' '}
         {fmt(pub.inputs.liquidSg, 3)} SG liquid, a {fmt(pub.inputs.linePressurePsia, 1)} psia line and

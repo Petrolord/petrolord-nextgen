@@ -1,10 +1,13 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line,
+  LineChart, Line,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
 import { hydrateExplorer } from './flowAssuranceLab';
 import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 
 // Hydrate explorer, the Expert tier. The boundary and the chemical.
 //
@@ -42,9 +45,9 @@ const MODES = [
   ['ceiling', 'Ceilings and conventions that do not travel'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const GRID = <CartesianGrid stroke="#334155" strokeDasharray="3 3" />;
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const GRID = <CartesianGrid {...GRID_STYLE} />;
 
 // --------------------------------------------------------------------------
 
@@ -81,8 +84,8 @@ const JouleThomson = () => {
         <Tile label="Spurious cooling" value={fmt(data.jt.spuriousCoolingF, 8)} unit="degF" />
       </TileGrid>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">reading</th>
               <th className="text-left pr-3">arrival, degF</th>
@@ -93,11 +96,11 @@ const JouleThomson = () => {
           <tbody>
             <tr>
               <td className="pr-3">heat loss only, no pressures set</td>
-              <td className="pr-3 text-[#BFFF00]">{fmt(data.jt.heatLossOnlyArrivalTempF, 8)}</td>
+              <td className="pr-3 text-pl-primary-text">{fmt(data.jt.heatLossOnlyArrivalTempF, 8)}</td>
               <td className="pr-3">{fmt(data.jt.heatLossOnlyMarginF, 8)}</td>
               <td>no</td>
             </tr>
-            <tr className="text-[#f97316]">
+            <tr className="text-pl-warning-text">
               <td className="pr-3">the engine, term applied undamped</td>
               <td className="pr-3">{fmt(data.jt.engineJtArrivalTempF, 8)}</td>
               <td className="pr-3">{fmt(data.jt.engineJtMarginF, 8)}</td>
@@ -105,14 +108,14 @@ const JouleThomson = () => {
             </tr>
             <tr>
               <td className="pr-3">the same term damped by the balance</td>
-              <td className="pr-3 text-[#38bdf8]">{fmt(data.jt.dampedJtArrivalTempF, 8)}</td>
+              <td className="pr-3 text-pl-info-text">{fmt(data.jt.dampedJtArrivalTempF, 8)}</td>
               <td className="pr-3">{fmt(data.jt.dampedJtMarginF, 8)}</td>
               <td>{yn(data.jt.dampedSaysInsideTheHydrateRegion)}</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THE VERDICT FLIPS: {yn(data.jt.verdictFlips)}. The engine writes the arrival as the
         exponential approach to ambient minus the coefficient times the whole pressure drop, and its
         header justifies carrying the term linearly as what a linear pressure profile implies. It
@@ -124,27 +127,25 @@ const JouleThomson = () => {
         one. The undamped drop is {fmt(data.jt.engineJtDropF, 8)} degF where the damped drop is
         {' '}{fmt(data.jt.dampedJtDropF, 8)}.
       </div>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="x" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
-              label={{ value: 'line length, ft', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS} domain={['auto', 'auto']}
-              label={{ value: 'arrival temperature, degF', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={data.akaso.hydrateFlowingF} stroke="#f97316" strokeDasharray="4 3" />
-            <ReferenceLine y={data.akaso.seabedTempF} stroke="#38bdf8" strokeDasharray="4 3" />
-            <Line type="monotone" dataKey="heat" name="heat loss only" stroke="#94a3b8" dot={false} isAnimationActive={false} />
-            <Line type="monotone" dataKey="engine" name="the engine, term undamped" stroke="#f97316" dot isAnimationActive={false} />
-            <Line type="monotone" dataKey="damped" name="the same term damped" stroke="#BFFF00" strokeDasharray="5 3" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3 rounded-t-lg">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="x" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
+            label={{ value: 'line length, ft', position: 'insideBottom', offset: -8, fill: SVG_CHART.label, fontSize: 10 }} />
+          <YAxis tick={AXIS} domain={['auto', 'auto']}
+            label={{ value: 'arrival temperature, degF', angle: -90, position: 'insideLeft', fill: SVG_CHART.label, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine y={data.akaso.hydrateFlowingF} stroke={seriesColor(2)} strokeDasharray="4 3" />
+          <ReferenceLine y={data.akaso.seabedTempF} stroke={seriesColor(1)} strokeDasharray="4 3" />
+          <Line type="monotone" dataKey="heat" name="heat loss only" stroke={SVG_CHART.reference} dot={false} isAnimationActive={false} />
+          <Line type="monotone" dataKey="engine" name="the engine, term undamped" stroke={seriesColor(2)} dot isAnimationActive={false} />
+          <Line type="monotone" dataKey="damped" name="the same term damped" stroke={seriesColor(0)} strokeDasharray="5 3" dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">length, ft</th>
               <th className="text-left pr-3">ntu</th>
@@ -157,7 +158,7 @@ const JouleThomson = () => {
           </thead>
           <tbody>
             {data.lengths.map((r) => (
-              <tr key={r.lengthFt} className={r.arrivalBelowSeabed ? 'text-[#f97316]' : ''}>
+              <tr key={r.lengthFt} className={r.arrivalBelowSeabed ? 'text-pl-warning-text' : ''}>
                 <td className="pr-3">{fmt(r.lengthFt, 0)}{r.isTheTeachingLength ? ' (this line)' : ''}</td>
                 <td className="pr-3">{fmt(r.ntu, 8)}</td>
                 <td className="pr-3">{fmt(r.dampingFactor, 8)}</td>
@@ -170,7 +171,7 @@ const JouleThomson = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         AND IT COLLIDES WITH THE MODULE'S OWN PHYSICS. Push the same line to
         {' '}{fmt(data.below.lengthMultipleOfTheTeachingLine, 0)} times its length and the profile
         returns ok {yn(data.below.profileOk)} with an arrival of
@@ -231,8 +232,8 @@ const Trench = () => {
         </TileGrid>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">what the call returned</th>
               <th className="text-left pr-3">ok</th>
@@ -247,9 +248,9 @@ const Trench = () => {
               <td className="pr-3">yes</td>
               <td className="pr-3">yes</td>
               <td className="pr-3">none needed</td>
-              <td className="text-[#BFFF00]">{fmt(d.withTermUBtuHrFt2F, 10)}</td>
+              <td className="text-pl-primary-text">{fmt(d.withTermUBtuHrFt2F, 10)}</td>
             </tr>
-            <tr className="text-[#f97316]">
+            <tr className="text-pl-warning-text">
               <td className="pr-3">the same trench with a decimal point moved</td>
               <td className="pr-3">{yn(d.droppedTermOk)}</td>
               <td className="pr-3">{yn(d.droppedTermHasBurial)}</td>
@@ -260,7 +261,7 @@ const Trench = () => {
         </table>
       </div>
       {which === 'published' && (
-        <div className="mt-3 text-xs text-slate-300">
+        <div className="mt-3 text-xs text-pl-text">
           THE BURIED ANSWER AND THE EXPOSED ANSWER ARE THE SAME NUMBER. The no-burial build of the
           same pipe returns {fmt(d.exposedBuildUBtuHrFt2F, 10)}, identical to the swallowed result
           to {tiny(d.droppedAgainstExposedRelDiff)} relative. Nothing in the return says a trench
@@ -269,8 +270,8 @@ const Trench = () => {
         </div>
       )}
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">one input class, two treatments</th>
               <th className="text-left pr-3">refused</th>
@@ -279,7 +280,7 @@ const Trench = () => {
           </thead>
           <tbody>
             {data.asymmetry.map((r) => (
-              <tr key={r.label} className={r.refused ? '' : 'text-[#f97316]'}>
+              <tr key={r.label} className={r.refused ? '' : 'text-pl-warning-text'}>
                 <td className="pr-3">{r.label}</td>
                 <td className="pr-3">{yn(r.refused)}</td>
                 <td>{r.error || 'nothing at all'}</td>
@@ -288,7 +289,7 @@ const Trench = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THE GUARD IS IN THE WRONG PLACE. The ground resistance is checked for being a real number
         BEFORE it is pushed onto the list, so the term never reaches the refusal three lines later
         that catches an unresolvable layer. A term that cannot be computed is not a term worth zero.
@@ -331,8 +332,8 @@ const Reference = () => {
         <Tile label="Relaxation length error from mixing them" value={fmt(data.headline.relaxationErrorPct, 6)} unit="percent" />
       </TileGrid>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">length, ft</th>
               <th className="text-left pr-3">route</th>
@@ -345,7 +346,7 @@ const Reference = () => {
           </thead>
           <tbody>
             {data.rows.map((r, i) => (
-              <tr key={`${r.lengthFt}-${i}`} className={r.correct ? '' : 'text-[#f97316]'}>
+              <tr key={`${r.lengthFt}-${i}`} className={r.correct ? '' : 'text-pl-warning-text'}>
                 <td className="pr-3">{fmt(r.lengthFt, 0)}</td>
                 <td className="pr-3">{r.route}</td>
                 <td className="pr-3">{yn(r.correct)}</td>
@@ -358,7 +359,7 @@ const Reference = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THE TWO CORRECT ROUTES AGREE EXACTLY, because the U and the diameter both carry the same
         reference and the reference cancels. The mixed route is dimensionally consistent, raises no
         complaint anywhere, and is wrong on the relaxation length by
@@ -368,7 +369,7 @@ const Reference = () => {
         {' '}{fmt(data.headline.worstArrivalErrorF, 8)} degF at
         {' '}{fmt(data.headline.worstAtLengthFt, 0)} ft.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         THE SAME PAIR ON THE TEACHING LINE, whose coated outside diameter is further from its bore:
         the two U values are {fmt(data.akasoPair.boreUBtuHrFt2F, 10)} and
         {' '}{fmt(data.akasoPair.coatedUBtuHrFt2F, 10)}, a ratio of
@@ -377,7 +378,7 @@ const Reference = () => {
         reference in feet is the same number both ways at
         {' '}{fmt(data.akasoPair.boreUTimesIdFt, 10)}.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         AND A SHARE MOVES WHEN NOTHING ABOUT ITS OWN TERM MOVED. Take the foam out of the teaching
         line and carry the weight coat straight from the steel to the same outside diameter: the
         trench resistance does not change at all, at
@@ -425,25 +426,23 @@ const Depression = () => {
         <SelectField label="Inhibitor" value={inhibitorId} onChange={setInhibitorId}
           options={data.inhibitors.map((i) => [i.id, `${i.label}, molecular weight ${fmt(i.molecularWeight, 2)}`])} />
       </FieldGrid>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="w" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
-              label={{ value: 'inhibitor in the aqueous phase, weight percent', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS} domain={['auto', 'auto']}
-              label={{ value: 'depression, degF', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine x={data.line.reliableWtPct} stroke="#f97316" strokeDasharray="4 3" />
-            <Line type="monotone" dataKey="ham" name="Hammerschmidt, in weight percent" stroke="#BFFF00" dot isAnimationActive={false} />
-            <Line type="monotone" dataKey="nb" name="Nielsen-Bucklin, in mole fraction" stroke="#38bdf8" strokeDasharray="5 3" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3 rounded-t-lg">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="w" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
+            label={{ value: 'inhibitor in the aqueous phase, weight percent', position: 'insideBottom', offset: -8, fill: SVG_CHART.label, fontSize: 10 }} />
+          <YAxis tick={AXIS} domain={['auto', 'auto']}
+            label={{ value: 'depression, degF', angle: -90, position: 'insideLeft', fill: SVG_CHART.label, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine x={data.line.reliableWtPct} stroke={seriesColor(2)} strokeDasharray="4 3" />
+          <Line type="monotone" dataKey="ham" name="Hammerschmidt, in weight percent" stroke={seriesColor(0)} dot isAnimationActive={false} />
+          <Line type="monotone" dataKey="nb" name="Nielsen-Bucklin, in mole fraction" stroke={seriesColor(1)} strokeDasharray="5 3" dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">weight percent</th>
               <th className="text-left pr-3">Hammerschmidt, the oracle</th>
@@ -458,26 +457,26 @@ const Depression = () => {
             {goldenRows.map((r) => (
               <tr key={r.weightPct}>
                 <td className="pr-3">{fmt(r.weightPct, 1)}</td>
-                <td className="pr-3 text-[#38bdf8]">{fmt(r.goldenHammerschmidtF, 8)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.engineHammerschmidtF, 8)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.goldenHammerschmidtF, 8)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.engineHammerschmidtF, 8)}</td>
                 <td className="pr-3">{tiny(r.hammerschmidtRelDiff)}</td>
-                <td className="pr-3 text-[#38bdf8]">{fmt(r.goldenNielsenBucklinF, 8)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.engineNielsenBucklinF, 8)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.goldenNielsenBucklinF, 8)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.engineNielsenBucklinF, 8)}</td>
                 <td>{tiny(r.nielsenBucklinRelDiff)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         NOTE THE TWO RELATIVE DIFFERENCES. The oracle computed both relations in CELSIUS with the
         metric constants and converted the answers, so the field constants the engine carries have
         to fall out of the metric ones. Nielsen-Bucklin does, to machine precision. Hammerschmidt
         does not, and the residual is the constant rather than the arithmetic.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">weight percent</th>
               <th className="text-left pr-3">Hammerschmidt, degF</th>
@@ -490,11 +489,11 @@ const Depression = () => {
           </thead>
           <tbody>
             {data.rows.map((r) => (
-              <tr key={r.weightPct} className={r.reliable ? '' : 'text-[#f97316]'}>
+              <tr key={r.weightPct} className={r.reliable ? '' : 'text-pl-warning-text'}>
                 <td className="pr-3">{fmt(r.weightPct, 1)}</td>
                 <td className="pr-3">{fmt(r.hammerschmidtF, 8)}</td>
                 <td className="pr-3">{r.nielsenBucklinF === null ? 'no relation for this fluid' : fmt(r.nielsenBucklinF, 8)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.recommendedF, 8)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.recommendedF, 8)}</td>
                 <td className="pr-3">{r.basis}</td>
                 <td className="pr-3">{yn(r.reliable)}</td>
                 <td>{yn(r.published)}</td>
@@ -503,7 +502,7 @@ const Depression = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         THE RELIABLE LINE IS NOT WHERE THE TWO RELATIONS START TO DISAGREE. At the line itself the
         engine already reports {fmt(data.line.hammerschmidtF, 8)} degF against
         {' '}{fmt(data.line.nielsenBucklinF, 8)}, a spread of {fmt(data.line.spreadF, 8)} degF and
@@ -565,8 +564,8 @@ const Dose = () => {
         </TileGrid>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">field of the same returned object</th>
               <th className="text-left pr-3">value</th>
@@ -581,7 +580,7 @@ const Dose = () => {
             </tr>
             <tr>
               <td className="pr-3">weightPct</td>
-              <td className="pr-3 text-[#BFFF00]">{fmt(r.designWtPct, 10)}</td>
+              <td className="pr-3 text-pl-primary-text">{fmt(r.designWtPct, 10)}</td>
               <td>picked by inverting Hammerschmidt, so its Hammerschmidt depression is exact</td>
             </tr>
             <tr>
@@ -589,7 +588,7 @@ const Dose = () => {
               <td className="pr-3">{fmt(r.sizedDepressionF, 10)}</td>
               <td>the relation it SIZED with, agreeing with itself</td>
             </tr>
-            <tr className="text-[#f97316]">
+            <tr className="text-pl-warning-text">
               <td className="pr-3">depressionCheck.nielsenBucklinF</td>
               <td className="pr-3">{r.engineCheckNielsenBucklinF === null ? 'null, there is no check at all' : fmt(r.engineCheckNielsenBucklinF, 10)}</td>
               <td>the relation it CHECKED with, and nothing compares it back</td>
@@ -607,7 +606,7 @@ const Dose = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THE DOSE PASSES ITS OWN CHECK WHILE MISSING ITS OWN TARGET. The chain inside one call is
         that the concentration is picked by inverting Hammerschmidt, the check is then run on that
         concentration, the check decides the concentration is above the reliable line and reports
@@ -620,7 +619,7 @@ const Dose = () => {
         same return value.
       </div>
       {r.thereIsNoCheckAtAll && (
-        <div className="mt-2 text-xs text-slate-300">
+        <div className="mt-2 text-xs text-pl-text">
           AND FOR THIS FLUID THERE IS NO CHECK AT ALL. Nielsen-Bucklin is null, the basis stays
           Hammerschmidt, and the recommended depression is
           {' '}{fmt(r.engineRecommendedF, 8)} degF, which is exactly what was ordered, so the design
@@ -629,7 +628,7 @@ const Dose = () => {
           could check the glycol and does not.
         </div>
       )}
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         THE TWO DOSES SIT AT THE SAME MOLE FRACTION. For one wanted depression the Hammerschmidt
         inverse fixes the inhibitor to water mole ratio and nothing else, so the methanol dose at
         {' '}{fmt(data.seam.methanolWtPct, 8)} weight percent and the MEG dose at
@@ -639,8 +638,8 @@ const Dose = () => {
         and therefore on the same Nielsen-Bucklin depression to the last figure.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">sized by</th>
               <th className="text-left pr-3">weight percent</th>
@@ -652,19 +651,19 @@ const Dose = () => {
             <tr>
               <td className="pr-3">the Hammerschmidt inverse, which is what the engine does</td>
               <td className="pr-3">{fmt(data.nielsen.hammerschmidtSizedWtPct, 10)}</td>
-              <td className="pr-3 text-[#f97316]">{fmt(r.deliveredDepressionF, 8)}</td>
+              <td className="pr-3 text-pl-accent-text">{fmt(r.deliveredDepressionF, 8)}</td>
               <td>{fmt(data.nielsen.hammerschmidtSizedRateBpd, 8)}</td>
             </tr>
             <tr>
               <td className="pr-3">bracketing the engine's own Nielsen-Bucklin instead</td>
               <td className="pr-3">{fmt(data.nielsen.nielsenBucklinSizedWtPct, 10)}</td>
-              <td className="pr-3 text-[#BFFF00]">{fmt(data.nielsen.checkAtTheNielsenDoseF, 8)}</td>
+              <td className="pr-3 text-pl-primary-text">{fmt(data.nielsen.checkAtTheNielsenDoseF, 8)}</td>
               <td>{fmt(data.nielsen.nielsenBucklinSizedRateBpd, 8)}</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         Sizing on the relation the engine trusts up there costs
         {' '}{fmt(data.nielsen.wtPctDifference, 8)} more weight percent and
         {' '}{fmt(data.nielsen.extraRateBpd, 8)} bbl/d, which is
@@ -673,8 +672,8 @@ const Dose = () => {
         a BRACKET on the engine's own forward function rather than a second correlation.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">depression asked for, degF</th>
               <th className="text-left pr-3">design, weight percent</th>
@@ -687,7 +686,7 @@ const Dose = () => {
           </thead>
           <tbody>
             {data.sweep.map((r) => (
-              <tr key={r.neededDepressionF} className={r.accepted ? '' : 'text-[#f97316]'}>
+              <tr key={r.neededDepressionF} className={r.accepted ? '' : 'text-pl-warning-text'}>
                 <td className="pr-3">{fmt(r.neededDepressionF, 1)}</td>
                 <td className="pr-3">{fmt(r.designWtPct, 8)}</td>
                 <td className="pr-3">{r.basis || 'refused before any check'}</td>
@@ -700,7 +699,7 @@ const Dose = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         READ THAT SWEEP IN TWO HALVES. Below the reliability line the check reports the SAME
         relation the dose was sized with, so the shortfall reads as exactly zero and the check has
         proved nothing at all. Above it the check switches relation, the shortfall appears in one
@@ -710,8 +709,8 @@ const Dose = () => {
         refusal exactly where it is.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">fluid</th>
               <th className="text-left pr-3">molecular weight</th>
@@ -723,7 +722,7 @@ const Dose = () => {
           </thead>
           <tbody>
             {data.fluids.map((r) => (
-              <tr key={r.inhibitorId} className={r.thereIsNoCheckAtAll ? 'text-[#f97316]' : ''}>
+              <tr key={r.inhibitorId} className={r.thereIsNoCheckAtAll ? 'text-pl-warning-text' : ''}>
                 <td className="pr-3">{r.label}</td>
                 <td className="pr-3">{fmt(r.molecularWeight, 3)}</td>
                 <td className="pr-3">{fmt(r.designWtPct, 8)}</td>
@@ -735,7 +734,7 @@ const Dose = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         FOUR DIFFERENT CONCENTRATIONS, ONE MOLE FRACTION, ONE IDENTICAL CHECK. The Hammerschmidt
         inverse fixes the inhibitor to water mole ratio, and that ratio contains no molecular weight
         at all once every fluid in the catalogue carries the same constant. The stated reason for
@@ -744,7 +743,7 @@ const Dose = () => {
         computed for the fourth fluid. A reader who sees a glycol design come back with a null check
         should not conclude it was validated some other way. It was not validated at all.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         AND A SUBCOOLING NOBODY SUPPLIED FAILS OPEN. The guard is a test that the need is greater
         than zero, which is true for a not-a-number, so the branch written for a fluid already
         outside the hydrate region also catches a call where nobody said where the fluid is. It
@@ -805,7 +804,7 @@ const Ceiling = () => {
               <Tile label="The check is measured in" value={data.ceiling.theCheckIsMeasuredIn} />
             </TileGrid>
           </div>
-          <div className="mt-3 text-xs text-slate-300">
+          <div className="mt-3 text-xs text-pl-text">
             THE REFUSAL BOUNDARY IS DRAWN IN THE COORDINATES OF THE OVER-PREDICTING RELATION. The
             requirement compares the ceiling against the concentration it got from the Hammerschmidt
             inverse, so it will accept and design for a stated subcooling anywhere up to
@@ -816,12 +815,12 @@ const Ceiling = () => {
             chemistry does not deliver.
           </div>
           <div className="mt-3 overflow-x-auto">
-            <table className="text-xs text-slate-300 w-full">
+            <table className="text-xs text-pl-text w-full">
               <tbody>
                 <tr>
                   <td className="pr-3">a subcooling just past the ceiling</td>
                   <td className="pr-3">{fmt(data.refusal.subcoolingF, 8)} degF</td>
-                  <td className="pr-3 text-[#f97316]">ok {yn(data.refusal.ok)}</td>
+                  <td className="pr-3 text-pl-warning-text">ok {yn(data.refusal.ok)}</td>
                   <td>{data.refusal.error}</td>
                 </tr>
                 <tr>
@@ -833,7 +832,7 @@ const Ceiling = () => {
               </tbody>
             </table>
           </div>
-          <div className="mt-2 text-xs text-slate-300">
+          <div className="mt-2 text-xs text-pl-text">
             ONE DECIMAL NARROWS A COLLISION BY TEN RATHER THAN CLOSING IT. At whole percent the
             refusal named the very limit its own concentration had just cleared, which reads as a
             refusal whose own numbers say nothing was exceeded.
@@ -843,8 +842,8 @@ const Ceiling = () => {
       {which === 'lean' && (
         <>
           <div className="mt-3 overflow-x-auto">
-            <table className="text-xs text-slate-300 w-full">
-              <thead className="text-slate-500">
+            <table className="text-xs text-pl-text w-full">
+              <thead className="text-pl-muted">
                 <tr>
                   <th className="text-left pr-3">lean strength, weight percent</th>
                   <th className="text-left pr-3">stream density the engine returns, lb/gal</th>
@@ -856,7 +855,7 @@ const Ceiling = () => {
               </thead>
               <tbody>
                 {data.leans.map((r) => (
-                  <tr key={r.leanWtPct} className={r.isTheTeachingLean ? 'text-[#BFFF00]' : ''}>
+                  <tr key={r.leanWtPct} className={r.isTheTeachingLean ? 'text-pl-primary-text' : ''}>
                     <td className="pr-3">{fmt(r.leanWtPct, 1)}</td>
                     <td className="pr-3">{fmt(r.engineStreamDensityLbGal, 8)}</td>
                     <td className="pr-3">{fmt(r.massAdditiveDensityLbGal, 8)}</td>
@@ -868,7 +867,7 @@ const Ceiling = () => {
               </tbody>
             </table>
           </div>
-          <div className="mt-3 text-xs text-slate-300">
+          <div className="mt-3 text-xs text-pl-text">
             ONE NUMBER, TWO CONVENTIONS, ONE LINE APART. The mass gross-up divides by the lean
             strength, which treats it as a WEIGHT percent, and it is one. The density blend on the
             very next line weights the two component densities by the same number, which is the
@@ -877,7 +876,7 @@ const Ceiling = () => {
             exceeds the harmonic mean, so the stream density comes out HIGH and the injection rate,
             a mass over a density, comes out LOW.
           </div>
-          <div className="mt-2 text-xs text-slate-300">
+          <div className="mt-2 text-xs text-pl-text">
             THE ERROR GROWS WITH DILUTION, which is why a strong lean stream hides it. On the
             teaching line's own two doses it is
             {' '}{data.akasoLeans.map((x) => `${x.inhibitorId} at ${fmt(x.leanWtPct, 1)} weight percent lean, ${fmt(x.rateLowByPctOfEngineRate, 6)} percent`).join(', and ')}.
@@ -908,7 +907,7 @@ const Ceiling = () => {
               <Tile label="Nielsen-Bucklin tolerance in the same gate" value={tiny(data.constants.nielsenBucklinGateTolerance)} />
             </TileGrid>
           </div>
-          <div className="mt-3 text-xs text-slate-300">
+          <div className="mt-3 text-xs text-pl-text">
             THE TWO CONSTANTS ARE NOT INDEPENDENT. Hammerschmidt written in mole terms is the
             constant over the molecular weight of water times the mole ratio, and Nielsen-Bucklin's
             leading term as the concentration goes to zero is its own constant times the mole
@@ -920,8 +919,8 @@ const Ceiling = () => {
             {' '}{fmt(data.constants.ratioAtDiluteLimit, 10)} is the constant and nothing else.
           </div>
           <div className="mt-3 overflow-x-auto">
-            <table className="text-xs text-slate-300 w-full">
-              <thead className="text-slate-500">
+            <table className="text-xs text-pl-text w-full">
+              <thead className="text-pl-muted">
                 <tr>
                   <th className="text-left pr-3">weight percent</th>
                   <th className="text-left pr-3">Hammerschmidt, degF</th>
@@ -936,19 +935,19 @@ const Ceiling = () => {
                     <td className="pr-3">{fmt(r.weightPct, 3)}</td>
                     <td className="pr-3">{fmt(r.hammerschmidtF, 12)}</td>
                     <td className="pr-3">{fmt(r.nielsenBucklinF, 12)}</td>
-                    <td className="pr-3 text-[#BFFF00]">{fmt(r.ratio, 10)}</td>
+                    <td className="pr-3 text-pl-primary-text">{fmt(r.ratio, 10)}</td>
                     <td>{tiny(r.seriesCorrection)}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-          <div className="mt-2 text-xs text-slate-300">
+          <div className="mt-2 text-xs text-pl-text">
             THE RATIO WALKS DOWN TOWARD THE RATIO OF THE TWO CONSTANTS as the solution goes dilute,
             and what is left over is the series correction on the logarithm. The gap is a CONSTANT
             and not a curvature, which is what makes it adjudicable rather than a modelling choice.
           </div>
-          <div className="mt-2 text-xs text-slate-300">
+          <div className="mt-2 text-xs text-pl-text">
             THE SIZE IS NOT THE FINDING. The gate compares Hammerschmidt at a relative tolerance
             {' '}{fmt(data.constants.gateToleranceRatio, 0)} times looser than the one it uses on
             its neighbour, and the disagreement sits comfortably inside it. A tolerance doing the
