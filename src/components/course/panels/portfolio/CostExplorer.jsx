@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, BarChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, Legend,
+  LineChart, BarChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, Legend,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import {
   OFON_AS_OF, OFON_MID_AS_OF,
   ofonLines, forecastRule, earnedValue, asOfTable, ofonAsOf, sCurve,
@@ -38,16 +41,16 @@ export const MODES = [
   ['scurve', 'S-curve: plan, actual and forecast by month, closing on the end date'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
 
 const CostLabel = ({ children }) => <span data-plabel="cost">{children}</span>;
 const ForecastLabel = ({ children }) => <span data-plabel="forecast">{children}</span>;
 
 const Tbl = ({ head, rows }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>{head.map((h, i) => <th key={i} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>)}</tr>
       </thead>
       <tbody>
@@ -69,7 +72,7 @@ export const LinesMode = ({ lines }) => {
   if (!lines) return <Note>The AFE engine did not return OFON-1.</Note>;
   return (
     <>
-      <p className="text-sm text-slate-200 mb-0">
+      <p className="text-sm text-pl-text mb-0">
         {lines.afe.afe_number}: currency {lines.afe.currency}, window {lines.afe.start_date} to {lines.afe.end_date}, read as of {lines.asOf}.
       </p>
       <Tbl
@@ -100,7 +103,7 @@ export const ForecastMode = ({ fr }) => {
   if (!fr) return <Note>The AFE engine did not return the forecast.</Note>;
   return (
     <>
-      <p className="text-sm text-slate-200 mb-0">{fr.rule}</p>
+      <p className="text-sm text-pl-text mb-0">{fr.rule}</p>
       <Tbl
         head={['code', <CostLabel key="b">budget</CostLabel>, <CostLabel key="s">committed, actual + commitment</CostLabel>, <ForecastLabel key="e">entered forecast</ForecastLabel>, <ForecastLabel key="i">itemForecast</ForecastLabel>, 'rule used', <ForecastLabel key="f">below spent and committed</ForecastLabel>, <ForecastLabel key="v">line variance, budget less itemForecast (derived)</ForecastLabel>]}
         rows={fr.rows.map((i) => [i.code, usd(i.budget), usd(i.committed), i.enteredForecast ? usd(i.enteredForecast) : 'none', usd(i.itemForecast), <ForecastLabel key={i.code}>{i.rule}</ForecastLabel>, i.forecastBelowCommitted ? 'yes' : 'no', usd(i.lineVarianceDerived)])}
@@ -120,7 +123,7 @@ export const ForecastMode = ({ fr }) => {
           [`entered forecast ${fr.negativeProbe.enteredForecast}`, usd(fr.negativeProbe.itemForecast), 'not below', fr.negativeProbe.forecastIgnored ?? 'null'],
         ]}
       />
-      <p className="text-xs text-slate-500 mt-1 mb-0">
+      <p className="text-xs text-pl-muted mt-1 mb-0">
         A forecast of 0 is not positive and falls back to the formula. Any positive entered forecast is taken as typed, and one below the money already spent and
         committed is flagged with the amount it falls short. A negative entered forecast is replaced by the standard rule and flagged &quot;negative&quot;.
       </p>
@@ -149,19 +152,17 @@ export const EarnedMode = ({ ev }) => {
         head={['code', <CostLabel key="b">budget</CostLabel>, 'progress percent', 'earned value, budget x progress (derived)', <CostLabel key="a">actual</CostLabel>]}
         rows={ev.rows.map((i) => [i.code, usd(i.budget), four(i.progress), usd(i.earnedDerived), usd(i.actual)])}
       />
-      <div className="h-48 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={bars} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="code" tick={AXIS} />
-            <YAxis tick={AXIS} tickFormatter={(v) => `${Number(v / 1e6).toFixed(1)}M`} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => usd(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Bar dataKey="earned" name="earned value (derived)" fill="#38bdf8" isAnimationActive={false} />
-            <Bar dataKey="actual" name="actual" fill="#f472b6" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={192} className="mt-3">
+        <BarChart data={bars} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="code" tick={AXIS} />
+          <YAxis tick={AXIS} tickFormatter={(v) => `${Number(v / 1e6).toFixed(1)}M`} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => usd(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <Bar dataKey="earned" name="earned value (derived)" fill={seriesColor(1)} isAnimationActive={false} />
+          <Bar dataKey="actual" name="actual" fill={seriesColor(4)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
       <div className="mt-3">
         <TileGrid>
           <Tile label="Earned value" value={usd(ev.earnedValue)} unit="USD" />
@@ -170,20 +171,18 @@ export const EarnedMode = ({ ev }) => {
           <Tile label={`As of ${ev.asOf}`} value="read from the lines" />
         </TileGrid>
       </div>
-      <div className="h-24 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={pace} layout="vertical" margin={{ top: 5, right: 20, bottom: 5, left: 40 }}>
-            <XAxis type="number" domain={[0, 100]} tick={AXIS} />
-            <YAxis type="category" dataKey="name" tick={AXIS} width={110} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => four(v)} />
-            <Bar dataKey="value" fill="#BFFF00" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
-      <p className="text-xs text-slate-400 mt-1 mb-0">
+      <ChartFrame height={96} className="mt-3">
+        <BarChart data={pace} layout="vertical" margin={{ top: 5, right: 20, bottom: 5, left: 40 }}>
+          <XAxis type="number" domain={[0, 100]} tick={AXIS} />
+          <YAxis type="category" dataKey="name" tick={AXIS} width={110} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => four(v)} />
+          <Bar dataKey="value" fill={seriesColor(0)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
+      <p className="text-xs text-pl-muted mt-1 mb-0">
         Percent spent {four(ev.percentSpent)} against percent complete {four(ev.percentComplete)}.
       </p>
-      <p className="text-xs text-slate-500 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         {ev.rule}
       </p>
       <Tbl
@@ -222,9 +221,9 @@ export const AsOfMode = ({ table, asOf, onAsOf }) => {
       </div>
       <Tbl
         head={['as of', 'time progress', 'planned value', 'earned value', 'SPI', 'spiStatus', 'CPI']}
-        rows={table.rows.map((x) => [x.asOf === row.asOf ? <span key="s" className="text-[#BFFF00]">{x.asOf}</span> : x.asOf, six(x.timeProgress), usd(x.plannedValue), usd(x.earnedValue), x.spi === null ? 'null' : six(x.spi), x.spiStatus, six(x.cpi)])}
+        rows={table.rows.map((x) => [x.asOf === row.asOf ? <span key="s" className="text-pl-accent-text">{x.asOf}</span> : x.asOf, six(x.timeProgress), usd(x.plannedValue), usd(x.earnedValue), x.spi === null ? 'null' : six(x.spi), x.spiStatus, six(x.cpi)])}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Whole days in the window: {dc.windowDaysDerived} (derived). {dc.elapsed.map((e) => `At ${e.asOf}, ${e.elapsedDaysDerived} elapsed, time progress ${six(e.timeProgressDerived)}`).join('; ')} (derived), matching the engine column.
       </p>
       <Tbl
@@ -243,25 +242,23 @@ export const SCurveMode = ({ sc }) => {
   if (!sc) return <Note>The AFE engine did not return the S-curve.</Note>;
   return (
     <>
-      <div className="h-56 mt-1">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={sc.points} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="date" tick={AXIS} />
-            <YAxis tick={AXIS} tickFormatter={(v) => `${Number(v / 1e6).toFixed(0)}M`} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => usd(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            {sc.cutLabel && <ReferenceLine x={sc.cutLabel} stroke="#BFFF00" strokeDasharray="3 3" label={{ value: `as of ${sc.asOf}`, fill: '#BFFF00', fontSize: 10 }} />}
-            <Line dataKey="Planned" stroke="#94a3b8" dot isAnimationActive={false} />
-            <Line dataKey="Actual" stroke="#f472b6" dot isAnimationActive={false} connectNulls={false} />
-            <Line dataKey="Forecast" stroke="#38bdf8" strokeDasharray="4 2" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-1">
+        <LineChart data={sc.points} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="date" tick={AXIS} />
+          <YAxis tick={AXIS} tickFormatter={(v) => `${Number(v / 1e6).toFixed(0)}M`} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => usd(v)} />
+          <Legend {...LEGEND_PROPS} />
+          {sc.cutLabel && <ReferenceLine x={sc.cutLabel} stroke={seriesColor(0)} strokeDasharray="3 3" label={{ value: `as of ${sc.asOf}`, fill: seriesColor(0), fontSize: 10 }} />}
+          <Line dataKey="Planned" stroke={SVG_CHART.reference} dot isAnimationActive={false} />
+          <Line dataKey="Actual" stroke={seriesColor(4)} dot isAnimationActive={false} connectNulls={false} />
+          <Line dataKey="Forecast" stroke={seriesColor(1)} strokeDasharray="4 2" dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Tbl
         head={['point', 'label', 'window end', <CostLabel key="p">Planned</CostLabel>, <CostLabel key="a">Planned added (derived)</CostLabel>, <CostLabel key="c">Actual</CostLabel>, <ForecastLabel key="f">Forecast</ForecastLabel>]}
         rows={sc.points.map((p, i) => [
-          i === sc.cutIndex ? <span key="c" className="text-[#BFFF00]">{i}, the as-of cut</span> : i,
+          i === sc.cutIndex ? <span key="c" className="text-pl-accent-text">{i}, the as-of cut</span> : i,
           p.date, p.windowEnd ? 'yes' : 'no', usd(p.Planned), sc.plannedAddedDerived[i] === null ? 'none' : usd(sc.plannedAddedDerived[i]),
           p.Actual === null ? 'null' : usd(p.Actual), usd(p.Forecast),
         ])}
@@ -277,7 +274,7 @@ export const SCurveMode = ({ sc }) => {
           <Tile label="Undated invoices" value={String(sc.undatedInvoices)} />
         </TileGrid>
       </div>
-      <p className="text-xs text-slate-500 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         A monthly label is a month and a two-digit year; the closing point carries its day. Actual at a point counts invoices dated on
         or before that day. After the as-of date Forecast ignores the actuals and is the EAC spread from the start, so its jump at the
         first projected point comes from switching formulas: no money is spent at that point. Every date and label is read in UTC, so

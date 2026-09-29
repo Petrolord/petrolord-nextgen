@@ -6,4 +6,5 @@ export default [
   '/dashboard/apps/fiscal',
   '/dashboard/apps/uncertainty',
   '/dashboard/apps/decision',
+  '/dashboard/apps/portfolio',
 ];
