@@ -1,8 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
   ReferenceLine, ReferenceDot,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import {
   TEACHING_WELLS, FORCADOS_3, CS_STEP_LIST, PUBLISHED_CS_STEPS,
   wellDecomposition, wellTubingCurve, wellOutflowReadings, wellLimbCrossover,
@@ -22,14 +25,14 @@ import { PanelShell, SelectField, NumField, Tile, TileGrid, FieldGrid, Note } fr
 
 const fmt = (v, d = 4) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: 0 })
-  : '-');
+  : 'n/a');
 
-const pct = (v, d = 2) => (Number.isFinite(v) ? `${fmt(v * 100, d)} %` : '-');
+const pct = (v, d = 2) => (Number.isFinite(v) ? `${fmt(v * 100, d)} %` : 'n/a');
 
 // A gap smaller than a hundredth of a psi still has to be readable, because
 // rounding it to 0.00 would claim an exactness it does not have.
 const tiny = (v) => {
-  if (!Number.isFinite(v)) return '-';
+  if (!Number.isFinite(v)) return 'n/a';
   if (v === 0) return '0';
   return Math.abs(v) < 0.005 ? v.toExponential(3) : fmt(v, 6);
 };
@@ -37,7 +40,7 @@ const tiny = (v) => {
 const yn = (b) => (b ? 'yes' : 'no');
 
 /** A plain decimal print: no thousands separators, so it can be typed back into an answer box. */
-const plain = (v, d) => (Number.isFinite(v) ? Number(v).toFixed(d) : '-');
+const plain = (v, d) => (Number.isFinite(v) ? Number(v).toFixed(d) : 'n/a');
 
 const MODES = [
   ['shape', 'The J, taken apart'],
@@ -61,9 +64,9 @@ const LEVER_KEY = {
 
 const WELLS = TEACHING_WELLS.map((W) => [W.label, `${W.label}: ${W.note}`]);
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const GRID = <CartesianGrid stroke="#334155" strokeDasharray="3 3" />;
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const GRID = <CartesianGrid {...GRID_STYLE} />;
 
 const wellOf = (label) => TEACHING_WELLS.find((W) => W.label === label) || FORCADOS_3;
 
@@ -101,47 +104,43 @@ const Shape = ({ W }) => {
           <Tile label="Pressure the tubing wants there" value={fmt(crossover.bhpPsia, 4)} unit="psia" />
         </TileGrid>
       </div>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="qStbd" type="number" tick={AXIS}
-              label={{ value: 'rate, stb/d', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS}
-              label={{ value: 'pressure the tubing demands, psia', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 3)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceDot x={readings.trueMinimumQStbd} y={readings.trueMinimumBhpPsia} r={5}
-              fill="#f472b6" stroke="none" />
-            <ReferenceLine x={readings.trueMinimumQStbd} stroke="#f472b6" strokeDasharray="5 3"
-              label={{ value: 'the bottom of the J', fill: '#f472b6', fontSize: 10, position: 'top' }} />
-            <Line type="monotone" dataKey="bhpPsia" name="the outflow curve, the sum of the two"
-              stroke="#BFFF00" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <div className="h-56">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="qStbd" type="number" tick={AXIS}
-              label={{ value: 'rate, stb/d', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS}
-              label={{ value: 'the two terms, psi', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 3)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine x={crossover.qStbd} stroke="#94a3b8" strokeDasharray="5 3"
-              label={{ value: 'the terms cross here', fill: '#94a3b8', fontSize: 10, position: 'top' }} />
-            <Line type="monotone" dataKey="gravityPsi" name="gravity: the weight of the column, falling"
-              stroke="#38bdf8" dot={false} isAnimationActive={false} />
-            <Line type="monotone" dataKey="frictionPsi" name="friction: the price of the pipe, rising"
-              stroke="#f97316" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3">
+        <LineChart data={rows} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="qStbd" type="number" tick={AXIS}
+            label={{ value: 'rate, stb/d', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS}
+            label={{ value: 'pressure the tubing demands, psia', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 3)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceDot x={readings.trueMinimumQStbd} y={readings.trueMinimumBhpPsia} r={5}
+            fill={seriesColor(4)} stroke="none" />
+          <ReferenceLine x={readings.trueMinimumQStbd} stroke={seriesColor(4)} strokeDasharray="5 3"
+            label={{ value: 'the bottom of the J', fill: seriesColor(4), fontSize: 10, position: 'top' }} />
+          <Line type="monotone" dataKey="bhpPsia" name="the outflow curve, the sum of the two"
+            stroke={seriesColor(1)} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
+      <ChartFrame height={224}>
+        <LineChart data={rows} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="qStbd" type="number" tick={AXIS}
+            label={{ value: 'rate, stb/d', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS}
+            label={{ value: 'the two terms, psi', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 3)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine x={crossover.qStbd} stroke={SVG_CHART.reference} strokeDasharray="5 3"
+            label={{ value: 'the terms cross here', fill: SVG_CHART.note, fontSize: 10, position: 'top' }} />
+          <Line type="monotone" dataKey="gravityPsi" name="gravity: the weight of the column, falling"
+            stroke={seriesColor(0)} dot={false} isAnimationActive={false} />
+          <Line type="monotone" dataKey="frictionPsi" name="friction: the price of the pipe, rising"
+            stroke={seriesColor(2)} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">rate, stb/d</th>
               <th className="text-left pr-3">wellhead, psia</th>
@@ -154,12 +153,12 @@ const Shape = ({ W }) => {
           </thead>
           <tbody>
             {rows.filter((r, i) => i % 4 === 0 || i === rows.length - 1).map((r) => (
-              <tr key={r.qStbd} className={r.frictionExceedsGravity ? 'text-[#f97316]' : ''}>
+              <tr key={r.qStbd} className={r.frictionExceedsGravity ? 'text-pl-warning-text' : ''}>
                 <td className="pr-3">{fmt(r.qStbd, 3)}</td>
-                <td className="pr-3 text-slate-400">{fmt(r.wellheadPsia, 0)}</td>
-                <td className="pr-3 text-[#38bdf8]">{fmt(r.gravityPsi, 3)}</td>
-                <td className="pr-3 text-[#f97316]">{fmt(r.frictionPsi, 3)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.bhpPsia, 3)}</td>
+                <td className="pr-3 text-pl-muted">{fmt(r.wellheadPsia, 0)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.gravityPsi, 3)}</td>
+                <td className="pr-3 text-pl-warning-text">{fmt(r.frictionPsi, 3)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.bhpPsia, 3)}</td>
                 <td className="pr-3">{pct(r.gravityShare, 2)}</td>
                 <td>{yn(r.frictionExceedsGravity)}</td>
               </tr>
@@ -167,16 +166,16 @@ const Shape = ({ W }) => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         The lower chart is the whole of the upper one. A wellhead pressure of
         {' '}{fmt(readings.wellheadPsia, 0)} psia sits under both terms as a constant, the blue term
         is the weight of the column and it FALLS as rate rises because gas breaks out and lightens
-        what has to be lifted, and the orange term is what the pipe charges and it GROWS as the
+        what has to be lifted, and the amber term is what the pipe charges and it GROWS as the
         square of rate. Their sum has to fall first and rise later, which is a J, and the bottom of
         it sits at {fmt(readings.trueMinimumQStbd, 4)} stb/d asking for
         {' '}{fmt(readings.trueMinimumBhpPsia, 4)} psia.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         The two vertical markers are not the same rate and the gap between them is the point. The
         terms cross at {fmt(crossover.qStbd, 4)} stb/d, which is where friction first exceeds
         gravity in SIZE. The curve bottoms out at {fmt(readings.trueMinimumQStbd, 4)} stb/d, which
@@ -229,28 +228,26 @@ const Minimum = ({ W }) => {
           <Tile label="Friction end of the curve, pressure" value={fmt(readings.frictionEndBhpPsia, 4)} unit="psia" />
         </TileGrid>
       </div>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={rows} margin={{ top: 10, right: 30, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey={key} type="number" tick={AXIS}
-              label={{ value: LEVERS.find((l) => l[0] === lever)[1], position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis yAxisId="q" tick={AXIS}
-              label={{ value: 'rate at the bottom, stb/d', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <YAxis yAxisId="p" orientation="right" tick={AXIS}
-              label={{ value: 'pressure at the bottom, psia', angle: 90, position: 'insideRight', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 4)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line yAxisId="q" type="monotone" dataKey="minQStbd" name="rate at the bottom of the J"
-              stroke="#BFFF00" dot isAnimationActive={false} />
-            <Line yAxisId="p" type="monotone" dataKey="minBhpPsia" name="pressure at the bottom of the J"
-              stroke="#f472b6" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3">
+        <LineChart data={rows} margin={{ top: 20, right: 30, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey={key} type="number" tick={AXIS}
+            label={{ value: LEVERS.find((l) => l[0] === lever)[1], position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis yAxisId="q" tick={AXIS}
+            label={{ value: 'rate at the bottom, stb/d', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis yAxisId="p" orientation="right" tick={AXIS}
+            label={{ value: 'pressure at the bottom, psia', angle: 90, position: 'insideRight', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 4)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line yAxisId="q" type="monotone" dataKey="minQStbd" name="rate at the bottom of the J"
+            stroke={seriesColor(1)} dot isAnimationActive={false} />
+          <Line yAxisId="p" type="monotone" dataKey="minBhpPsia" name="pressure at the bottom of the J"
+            stroke={seriesColor(4)} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">{LEVERS.find((l) => l[0] === lever)[1]}</th>
               <th className="text-left pr-3">rate at the bottom, stb/d</th>
@@ -261,10 +258,10 @@ const Minimum = ({ W }) => {
           </thead>
           <tbody>
             {rows.map((r) => (
-              <tr key={r[key]} className={r.dMinQStbd === 0 && r.dMinBhpPsi === 0 ? 'text-white' : ''}>
+              <tr key={r[key]} className={r.dMinQStbd === 0 && r.dMinBhpPsi === 0 ? 'text-pl-text' : ''}>
                 <td className="pr-3">{fmt(r[key], 8)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.minQStbd, 4)}</td>
-                <td className="pr-3 text-[#f472b6]">{fmt(r.minBhpPsia, 4)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.minQStbd, 4)}</td>
+                <td className="pr-3 text-pl-accent-text">{fmt(r.minBhpPsia, 4)}</td>
                 <td className="pr-3">{tiny(r.dMinQStbd)}</td>
                 <td>{tiny(r.dMinBhpPsi)}</td>
               </tr>
@@ -272,7 +269,7 @@ const Minimum = ({ W }) => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         READ THE RATE COLUMN, NOT ONLY THE PRESSURE ONE. On this lever the sweep produces
         {' '}{fmt(rateMoves, 0)} distinct rate{rateMoves === 1 ? '' : 's'} at the bottom of the J and
         {' '}{fmt(pressureMoves, 0)} distinct pressure{pressureMoves === 1 ? '' : 's'}. Wellhead
@@ -281,7 +278,7 @@ const Minimum = ({ W }) => {
         the rate at the bottom does not move at all. Choking a well back does not change the rate at
         which it loads up. It changes how much pressure the reservoir has to find to hold it there.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         The other two levers move both columns, and only one of them moves them predictably. More
         friction always pulls the bottom of the J in to a lower rate and lifts it, so the friction
         constant is monotone in both columns. The lightening constant is NOT: a column that
@@ -320,18 +317,18 @@ const GasColumn = ({ W }) => {
   const ownTwo = own[0];
   return (
     <>
-      <div className="rounded-md border border-amber-700 bg-amber-900/20 p-4">
-        <p className="text-xs text-gray-400 mb-1">
+      <div className="rounded-md border border-pl-warning/40 bg-pl-warning-bg p-4">
+        <p className="text-xs text-pl-muted mb-1">
           What the published two station method costs, on a GRAVITY ONLY column and on a FRICTION
           LOADED one, side by side
         </p>
-        <p className="text-2xl font-bold text-white mb-1">
-          <span className="text-[#38bdf8]">{tiny(two.gravityOnlyErrorPsi)}</span>
-          <span className="text-gray-400"> psi against </span>
-          <span className="text-[#f97316]">{tiny(two.frictionLoadedErrorPsi)}</span>
-          <span className="text-gray-400 text-sm"> psi</span>
+        <p className="text-2xl font-bold text-pl-text mb-1">
+          <span className="text-pl-info-text">{tiny(two.gravityOnlyErrorPsi)}</span>
+          <span className="text-pl-muted"> psi against </span>
+          <span className="text-pl-warning-text">{tiny(two.frictionLoadedErrorPsi)}</span>
+          <span className="text-pl-muted text-sm"> psi</span>
         </p>
-        <p className="text-sm mb-0 text-amber-200">
+        <p className="text-sm mb-0 text-pl-warning-text">
           Same method, same step count, same kind of string. {two.gravityLabel} carries a static
           injection gradient and loses {tiny(two.gravityOnlyErrorPsi)} psi to the truncation.
           {' '}{two.frictionLabel} carries {fmt(frictionGroup.qMmscfd, 3)} MMscf/d up a
@@ -354,8 +351,8 @@ const GasColumn = ({ W }) => {
         </TileGrid>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">sub-intervals</th>
               <th className="text-left pr-3">{two.gravityLabel}, gravity only, psia</th>
@@ -368,11 +365,11 @@ const GasColumn = ({ W }) => {
           <tbody>
             {table.map((r) => (
               <tr key={r.steps}
-                className={r.steps === PUBLISHED_CS_STEPS ? 'text-white font-semibold bg-amber-900/20' : ''}>
+                className={r.steps === PUBLISHED_CS_STEPS ? 'text-pl-text font-semibold bg-pl-warning-bg' : ''}>
                 <td className="pr-3">{fmt(r.steps, 0)}{r.steps === PUBLISHED_CS_STEPS ? ' (the default)' : ''}</td>
-                <td className="pr-3 text-[#38bdf8]">{fmt(r.gravityOnlyPwfPsia, 6)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.gravityOnlyPwfPsia, 6)}</td>
                 <td className="pr-3">{tiny(r.gravityOnlyErrorPsi)}</td>
-                <td className="pr-3 text-[#f97316]">{fmt(r.frictionLoadedPwfPsia, 6)}</td>
+                <td className="pr-3 text-pl-warning-text">{fmt(r.frictionLoadedPwfPsia, 6)}</td>
                 <td className="pr-3">{tiny(r.frictionLoadedErrorPsi)}</td>
                 <td>{Number.isFinite(r.errorRatio) ? fmt(r.errorRatio, 2) : 'both gaps are nought'}</td>
               </tr>
@@ -380,26 +377,24 @@ const GasColumn = ({ W }) => {
           </tbody>
         </table>
       </div>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={table} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="steps" type="number" scale="log" domain={[2, 256]} tick={AXIS}
-              ticks={CS_STEP_LIST}
-              label={{ value: 'sub-intervals the column is marched in', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS}
-              label={{ value: 'gap to the converged march, psi', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => tiny(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={0} stroke="#94a3b8" />
-            <Line type="monotone" dataKey="gravityOnlyErrorPsi" name={`${two.gravityLabel}, gravity only`}
-              stroke="#38bdf8" dot isAnimationActive={false} />
-            <Line type="monotone" dataKey="frictionLoadedErrorPsi" name={`${two.frictionLabel}, friction loaded`}
-              stroke="#f97316" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <ChartFrame height={256} className="mt-3">
+        <LineChart data={table} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="steps" type="number" scale="log" domain={[2, 256]} tick={AXIS}
+            ticks={CS_STEP_LIST}
+            label={{ value: 'sub-intervals the column is marched in', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS}
+            label={{ value: 'gap to the converged march, psi', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => tiny(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine y={0} stroke={SVG_CHART.reference} />
+          <Line type="monotone" dataKey="gravityOnlyErrorPsi" name={`${two.gravityLabel}, gravity only`}
+            stroke={seriesColor(0)} dot isAnimationActive={false} />
+          <Line type="monotone" dataKey="frictionLoadedErrorPsi" name={`${two.frictionLabel}, friction loaded`}
+            stroke={seriesColor(2)} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
+      <div className="mt-3 text-xs text-pl-text">
         Both curves approach nought from BELOW, which is the direction the engine's own header
         states: two stations run LOW and the gap falls roughly with the square of the step count.
         The published method is one midpoint station, two trapezoid halves and one Simpson pass, and
@@ -411,7 +406,7 @@ const GasColumn = ({ W }) => {
         {' '}{fmt(frictionGroup.f2, 8)}. On {two.gravityLabel} it is nought, because nothing is
         moving.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         The column on {W.label} marched at the {fmt(ownTwo.actualSteps, 0)} station
         default reads {fmt(ownTwo.pwfPsia, 6)} psia against a converged
         {' '}{fmt(ownTwo.convergedPwfPsia, 6)} psia, a gap of {tiny(ownTwo.errorVsConvergedPsi)} psi,
@@ -447,16 +442,16 @@ const SecondOpinion = ({ W }) => {
   ];
   return (
     <>
-      <div className="rounded-md border border-sky-700 bg-sky-900/20 p-4">
-        <p className="text-xs text-gray-400 mb-1">
+      <div className="rounded-md border border-pl-info/40 bg-pl-info-bg p-4">
+        <p className="text-xs text-pl-muted mb-1">
           The same column on {W.label}, by a marched integral and by one average z
         </p>
-        <p className="text-2xl font-bold text-white mb-1">
+        <p className="text-2xl font-bold text-pl-text mb-1">
           {fmt(own.convergedPwfPsia, 6)}
-          <span className="text-[#BFFF00]"> against </span>
-          {fmt(own.averageTzPwfPsia, 6)} <span className="text-gray-400 text-sm">psia</span>
+          <span className="text-pl-primary-text"> against </span>
+          {fmt(own.averageTzPwfPsia, 6)} <span className="text-pl-muted text-sm">psia</span>
         </p>
-        <p className="text-sm mb-0 text-sky-200">
+        <p className="text-sm mb-0 text-pl-info-text">
           A gap of {fmt(own.convergedMinusAverageTzPsi, 6)} psi. That is a METHOD gap and not an
           arithmetic one. Both answers are converged, neither has any truncation left in it, and
           neither is a worse implementation of the other. They disagree because one of them holds
@@ -481,23 +476,21 @@ const SecondOpinion = ({ W }) => {
           <Tile label="It was supposed to come to" value={fmt(own.definingIntegral.target, 3)} />
         </TileGrid>
       </div>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={bars} margin={{ top: 10, right: 16, bottom: 24, left: 20 }}>
-            {GRID}
-            <XAxis dataKey="name" tick={{ fill: '#94a3b8', fontSize: 9 }} interval={0} />
-            <YAxis domain={['auto', 'auto']} tick={AXIS} tickFormatter={(v) => fmt(v, 2)}
-              label={{ value: 'bottomhole pressure, psia', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-            <ReferenceLine y={own.convergedPwfPsia} stroke="#BFFF00" strokeDasharray="5 3"
-              label={{ value: 'the marched integral', fill: '#BFFF00', fontSize: 10, position: 'insideBottomRight' }} />
-            <Line type="linear" dataKey="v" name="psia" stroke="#f472b6" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={bars} margin={{ top: 20, right: 16, bottom: 24, left: 20 }}>
+          {GRID}
+          <XAxis dataKey="name" tick={{ ...AXIS_TICK, fontSize: 9 }} interval={0} />
+          <YAxis domain={['auto', 'auto']} tick={AXIS} tickFormatter={(v) => fmt(v, 2)}
+            label={{ value: 'bottomhole pressure, psia', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+          <ReferenceLine y={own.convergedPwfPsia} stroke={seriesColor(1)} strokeDasharray="5 3"
+            label={{ value: 'the marched integral', fill: seriesColor(1), fontSize: 10, position: 'insideBottomRight' }} />
+          <Line type="linear" dataKey="v" name="psia" stroke={seriesColor(4)} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">teaching well</th>
               <th className="text-left pr-3">Cullender and Smith, converged, psia</th>
@@ -509,10 +502,10 @@ const SecondOpinion = ({ W }) => {
           </thead>
           <tbody>
             {all.map((r) => (
-              <tr key={r.label} className={r.label === W.label ? 'text-white' : ''}>
+              <tr key={r.label} className={r.label === W.label ? 'text-pl-text' : ''}>
                 <td className="pr-3">{r.label}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.convergedPwfPsia, 6)}</td>
-                <td className="pr-3 text-[#f472b6]">{fmt(r.averageTzPwfPsia, 6)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.convergedPwfPsia, 6)}</td>
+                <td className="pr-3 text-pl-accent-text">{fmt(r.averageTzPwfPsia, 6)}</td>
                 <td className="pr-3">{fmt(r.convergedMinusAverageTzPsi, 6)}</td>
                 <td className="pr-3">{fmt(r.averageTzZbar, 6)}</td>
                 <td>{fmt(r.definingIntegral.closureError, 4)}</td>
@@ -521,7 +514,7 @@ const SecondOpinion = ({ W }) => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         Read the method gap column against the well descriptions. On a static column the two roads
         land within a psi of each other, and the closed form is a perfectly good answer for a lift
         gas design. On a column with gas moving up it they part company by an order more, because a
@@ -530,7 +523,7 @@ const SecondOpinion = ({ W }) => {
         and it is signed: the closed form does not scatter around the marched answer, it sits on one
         side of it.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         The last column is why the marched answer is the one to trust when they disagree. Cullender
         and Smith is not a formula, it is the statement that the integral of the integrand between
         the two pressures equals 18.75 times the gas gravity times the measured depth. Marching that
@@ -573,7 +566,7 @@ const TypedColumn = () => {
   }, [values]);
   return (
     <>
-      <div className="text-xs text-slate-300">
+      <div className="text-xs text-pl-text">
         Type a static dry gas column and march it by Cullender and Smith. The view opens on the
         BONNY-7 teaching column, and every input can be retyped. The temperature runs in a straight
         line from the wellhead to the bottom of the column, and the column is marched in the number

@@ -1,6 +1,7 @@
 import React from 'react';
 import { TYPED_VALVE_TYPES, TYPED_METHODS } from './gasLiftLab';
 import { SelectField, NumField, FieldGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { THEMED_INPUT } from '@/components/ui/input';
 
 // The typed installation inputs, shared by the Valve explorer's and the
 // Unloading explorer's typed views so the two ask for one installation in one
@@ -8,7 +9,7 @@ import { SelectField, NumField, FieldGrid, Note } from '@/components/course/pane
 // and checks them.
 
 /** A plain decimal print: no thousands separators, so it can be typed back into an answer box. */
-export const plain = (v, d) => (Number.isFinite(v) ? Number(v).toFixed(d) : '-');
+export const plain = (v, d) => (Number.isFinite(v) ? Number(v).toFixed(d) : 'n/a');
 
 /** The typed state of a default case object: every value as a string. */
 export const typedState = (defaults) => Object.fromEntries(
@@ -68,12 +69,12 @@ export const TypedDesignFields = ({ values, set, withTarget = false }) => (
       </FieldGrid>
     </div>
     <div className="mt-3">
-      <label className="text-gray-400 text-xs mb-1 block" htmlFor="typed-port-catalogue">
+      <label className="text-pl-muted text-xs mb-1 block" htmlFor="typed-port-catalogue">
         Port catalogue, bores in inches separated by commas
       </label>
       <input id="typed-port-catalogue" type="text" value={values.ports}
         onChange={(e) => set('ports', e.target.value)}
-        className="w-full bg-gray-700 text-white border border-gray-600 rounded-md h-8 text-sm px-2" />
+        className={THEMED_INPUT} />
       <Note>selectPort takes the smallest bore in this list that passes the design gas rate at each valve.</Note>
     </div>
   </>

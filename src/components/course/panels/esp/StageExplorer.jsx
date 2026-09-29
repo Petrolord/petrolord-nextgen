@@ -1,8 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, ComposedChart, LineChart, BarChart, Line, Bar, Scatter,
+  ComposedChart, LineChart, BarChart, Line, Bar, Scatter,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine, ReferenceArea, ReferenceDot,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import {
   ESP_THRESHOLDS, BEP_SCAN_STEPS, BRASS_LABEL, REFERENCE_CURVE_IDS,
   VENDOR_DUTY_RATES,
@@ -25,9 +28,9 @@ import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/comp
 
 const fmt = (v, d = 4) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: 0 })
-  : '-');
+  : 'n/a');
 
-const pct = (v, d = 2) => (Number.isFinite(v) ? `${fmt(v * 100, d)} %` : '-');
+const pct = (v, d = 2) => (Number.isFinite(v) ? `${fmt(v * 100, d)} %` : 'n/a');
 
 const yn = (b) => (b ? 'yes' : 'no');
 
@@ -38,14 +41,14 @@ const MODES = [
   ['edge', 'Past the end of the data, where nothing snaps'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const GRID = <CartesianGrid stroke="#334155" strokeDasharray="3 3" />;
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const GRID = <CartesianGrid {...GRID_STYLE} />;
 
 const REGION_COLOUR = {
-  downthrust: '#f472b6',
-  recommended: '#BFFF00',
-  upthrust: '#f97316',
+  downthrust: seriesColor(4),
+  recommended: seriesColor(1),
+  upthrust: seriesColor(2),
 };
 
 const Fit = () => {
@@ -82,41 +85,37 @@ const Fit = () => {
           <Tile label="Warnings raised" value={fmt(fit.warningCount, 0)} />
         </TileGrid>
       </div>
-      <div className="h-72 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart data={residuals} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="qBpd" type="number" domain={[fit.qMin, fit.qMax]} tick={AXIS}
-              label={{ value: 'rate, bbl/d', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS}
-              label={{ value: 'head per stage, ft', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 4)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line type="monotone" dataKey="fitHeadFt" name="the cubic the engine fitted"
-              stroke="#BFFF00" dot={false} isAnimationActive={false} />
-            <Scatter dataKey="publishedHeadFt" name="the five published points" fill="#38bdf8" isAnimationActive={false} />
-          </ComposedChart>
-        </ResponsiveContainer>
-      </div>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={residuals} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="qBpd" tick={AXIS}
-              label={{ value: 'rate, bbl/d', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS}
-              label={{ value: 'fit less published, ft', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-            <ReferenceLine y={0} stroke="#64748b" />
-            <ReferenceLine y={fit.headRmse} stroke="#BFFF00" strokeDasharray="5 3"
-              label={{ value: 'root mean square', fill: '#BFFF00', fontSize: 10, position: 'right' }} />
-            <Bar dataKey="headResidualFt" name="miss at this point" fill="#38bdf8" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={288} className="mt-3">
+        <ComposedChart data={residuals} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="qBpd" type="number" domain={[fit.qMin, fit.qMax]} tick={AXIS}
+            label={{ value: 'rate, bbl/d', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS}
+            label={{ value: 'head per stage, ft', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 4)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line type="monotone" dataKey="fitHeadFt" name="the cubic the engine fitted"
+            stroke={seriesColor(1)} dot={false} isAnimationActive={false} />
+          <Scatter dataKey="publishedHeadFt" name="the five published points" fill={seriesColor(0)} isAnimationActive={false} />
+        </ComposedChart>
+      </ChartFrame>
+      <ChartFrame height={224} className="mt-3">
+        <BarChart data={residuals} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="qBpd" tick={AXIS}
+            label={{ value: 'rate, bbl/d', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS}
+            label={{ value: 'fit less published, ft', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+          <ReferenceLine y={0} stroke={SVG_CHART.reference} />
+          <ReferenceLine y={fit.headRmse} stroke={seriesColor(1)} strokeDasharray="5 3"
+            label={{ value: 'root mean square', fill: seriesColor(1), fontSize: 10, position: 'insideTopRight' }} />
+          <Bar dataKey="headResidualFt" name="miss at this point" fill={seriesColor(0)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">rate, bbl/d</th>
               <th className="text-left pr-3">published head, ft</th>
@@ -132,18 +131,18 @@ const Fit = () => {
               <tr key={r.qBpd}>
                 <td className="pr-3">{fmt(r.qBpd, 0)}</td>
                 <td className="pr-3">{fmt(r.publishedHeadFt, 4)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.fitHeadFt, 6)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.fitHeadFt, 6)}</td>
                 <td className="pr-3">{fmt(r.headResidualFt, 6)}</td>
                 <td className="pr-3">{fmt(r.publishedEfficiency, 6)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.fitEfficiency, 6)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.fitEfficiency, 6)}</td>
                 <td>{fmt(r.efficiencyResidual, 6)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-4 rounded-md border border-gray-700 bg-[#0F172A] p-3">
-        <p className="text-xs text-gray-400 mb-2">
+      <div className="mt-4 rounded-md border border-pl-border bg-pl-sunken p-3">
+        <p className="text-xs text-pl-muted mb-2">
           {BRASS_LABEL}, the teaching curve: the same five points as somebody else typed them. A fit
           that PASSES the check and a fit that FAILS it, on one test.
         </p>
@@ -164,8 +163,8 @@ const Fit = () => {
           </TileGrid>
         </div>
         <div className="mt-3 overflow-x-auto">
-          <table className="text-xs text-slate-300 w-full">
-            <thead className="text-slate-500">
+          <table className="text-xs text-pl-text w-full">
+            <thead className="text-pl-muted">
               <tr>
                 <th className="text-left pr-3">rate, bbl/d</th>
                 <th className="text-left pr-3">published, ft</th>
@@ -177,12 +176,12 @@ const Fit = () => {
             </thead>
             <tbody>
               {row.points.map((p) => (
-                <tr key={p.qBpd} className={p.typedLessPublishedFt !== 0 ? 'text-white' : ''}>
+                <tr key={p.qBpd} className={p.typedLessPublishedFt !== 0 ? 'text-pl-text' : ''}>
                   <td className="pr-3">{fmt(p.qBpd, 0)}</td>
                   <td className="pr-3">{fmt(p.publishedHeadFt, 4)}</td>
-                  <td className={`pr-3 ${p.typedLessPublishedFt !== 0 ? 'text-[#f97316]' : ''}`}>{fmt(p.typedHeadFt, 4)}</td>
+                  <td className={`pr-3 ${p.typedLessPublishedFt !== 0 ? 'text-pl-warning-text' : ''}`}>{fmt(p.typedHeadFt, 4)}</td>
                   <td className="pr-3">{fmt(p.typedLessPublishedFt, 4)}</td>
-                  <td className="pr-3 text-[#BFFF00]">{fmt(p.fitHeadFt, 6)}</td>
+                  <td className="pr-3 text-pl-primary-text">{fmt(p.fitHeadFt, 6)}</td>
                   <td>{fmt(p.residualFt, 6)}</td>
                 </tr>
               ))}
@@ -190,7 +189,7 @@ const Fit = () => {
           </table>
         </div>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THE QUALITY CHECK IS THE ROOT MEAN SQUARE AND NOTHING ELSE. The engine fits the head, takes
         the root mean square of the misses, compares it against
         {' '}{pct(ESP_THRESHOLDS.transcriptionRmseFraction, 0)} of the tallest published point, and
@@ -243,28 +242,26 @@ const Bep = () => {
           <Tile label="Recommended band, high" value={fmt(bep.recommendedHighBpd, 3)} unit="bbl/d" />
         </TileGrid>
       </div>
-      <div className="h-72 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="qBpd" type="number" domain={['dataMin', 'dataMax']} tick={AXIS}
-              label={{ value: 'rate, bbl/d', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS} domain={[0, 1]}
-              label={{ value: 'efficiency, fraction', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceArea x1={bep.recommendedLowBpd} x2={bep.recommendedHighBpd} fill="#BFFF00" fillOpacity={0.07} />
-            <ReferenceLine x={bep.qBpd} stroke="#BFFF00" strokeDasharray="5 3"
-              label={{ value: 'the scan winner', fill: '#BFFF00', fontSize: 10, position: 'top' }} />
-            <Line type="monotone" dataKey="efficiency" name="efficiency the fit reads"
-              stroke="#38bdf8" dot={false} isAnimationActive={false} />
-            <ReferenceDot x={bep.qBpd} y={bep.efficiency} r={4} fill="#BFFF00" stroke="none" />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={288} className="mt-3">
+        <LineChart data={rows} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="qBpd" type="number" domain={['dataMin', 'dataMax']} tick={AXIS}
+            label={{ value: 'rate, bbl/d', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS} domain={[0, 1]}
+            label={{ value: 'efficiency, fraction', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceArea x1={bep.recommendedLowBpd} x2={bep.recommendedHighBpd} fill={seriesColor(1)} fillOpacity={0.07} />
+          <ReferenceLine x={bep.qBpd} stroke={seriesColor(1)} strokeDasharray="5 3"
+            label={{ value: 'the scan winner', fill: seriesColor(1), fontSize: 10, position: 'top' }} />
+          <Line type="monotone" dataKey="efficiency" name="efficiency the fit reads"
+            stroke={seriesColor(0)} dot={false} isAnimationActive={false} />
+          <ReferenceDot x={bep.qBpd} y={bep.efficiency} r={4} fill={seriesColor(1)} stroke="none" />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">reference stage</th>
               <th className="text-left pr-3">generated at, bbl/d</th>
@@ -277,11 +274,11 @@ const Bep = () => {
           </thead>
           <tbody>
             {refs.map((r) => (
-              <tr key={r.id} className={r.id === worst.id ? 'text-white' : ''}>
+              <tr key={r.id} className={r.id === worst.id ? 'text-pl-text' : ''}>
                 <td className="pr-3">{r.id}</td>
                 <td className="pr-3">{fmt(r.bepBpd, 0)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.bepQBpd, 4)}</td>
-                <td className="pr-3 text-[#f97316]">{fmt(r.bepScanMissBpd, 4)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.bepQBpd, 4)}</td>
+                <td className="pr-3 text-pl-warning-text">{fmt(r.bepScanMissBpd, 4)}</td>
                 <td className="pr-3">{fmt(r.bepScanSpacingBpd, 4)}</td>
                 <td className="pr-3">{fmt(r.qMin, 0)} to {fmt(r.qMax, 0)}</td>
                 <td>{fmt(r.headRmse, 12)}</td>
@@ -290,14 +287,14 @@ const Bep = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THE BEST EFFICIENCY POINT IS SCANNED, NOT SOLVED. The engine walks
         {' '}{fmt(BEP_SCAN_STEPS, 0)} steps across the published range and keeps the best sample it
         saw. On this vendor curve that leaves the samples {fmt(bep.scanSpacingBpd, 4)} bbl/d apart,
         and the rate it reports, {fmt(bep.qBpd, 0)} bbl/d, is a grid point rather than the place
         where the derivative of the efficiency fit is nought.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         The four reference stages are where that is measurable, because each one was GENERATED from
         a named best efficiency rate, so the right answer is known before the scan runs. Read the
         miss column: every one of them comes back beside its own generating rate rather than on it,
@@ -345,40 +342,38 @@ const Duty = () => {
           <Tile label="Best efficiency rate" value={fmt(bep.qBpd, 0)} unit="bbl/d" />
         </TileGrid>
       </div>
-      <div className="h-72 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="qBpd" type="number" domain={['dataMin', 'dataMax']} tick={AXIS}
-              label={{ value: 'rate, bbl/d', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis yAxisId="head" tick={AXIS}
-              label={{ value: 'head, ft', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <YAxis yAxisId="power" orientation="right" tick={AXIS}
-              label={{ value: 'efficiency and brake power', angle: 90, position: 'insideRight', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceArea yAxisId="head" x1={bep.recommendedLowBpd} x2={bep.recommendedHighBpd}
-              fill="#BFFF00" fillOpacity={0.07} />
-            <ReferenceLine yAxisId="head" x={bep.recommendedLowBpd} stroke="#f472b6" strokeDasharray="5 3"
-              label={{ value: 'downthrust below here', fill: '#f472b6', fontSize: 10, position: 'top' }} />
-            <ReferenceLine yAxisId="head" x={bep.recommendedHighBpd} stroke="#f97316" strokeDasharray="5 3"
-              label={{ value: 'upthrust above here', fill: '#f97316', fontSize: 10, position: 'top' }} />
-            <ReferenceLine yAxisId="head" x={row.qBpd} stroke="#e2e8f0"
-              label={{ value: 'the duty', fill: '#e2e8f0', fontSize: 10, position: 'insideTopRight' }} />
-            <Line yAxisId="head" type="monotone" dataKey="headFt" name="head per stage, ft"
-              stroke="#BFFF00" dot={false} isAnimationActive={false} />
-            <Line yAxisId="power" type="monotone" dataKey="efficiency" name="efficiency, fraction"
-              stroke="#38bdf8" dot={false} isAnimationActive={false} />
-            <Line yAxisId="power" type="monotone" dataKey="bhpPerStageSg100" name="brake power on water, hp"
-              stroke="#f97316" dot={false} isAnimationActive={false} />
-            <Line yAxisId="power" type="monotone" dataKey="bhpPerStageSg090" name="brake power on the lighter fluid, hp"
-              stroke="#f472b6" dot={false} strokeDasharray="4 3" isAnimationActive={false} />
-          </ComposedChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={288} className="mt-3">
+        <ComposedChart data={rows} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="qBpd" type="number" domain={['dataMin', 'dataMax']} tick={AXIS}
+            label={{ value: 'rate, bbl/d', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis yAxisId="head" tick={AXIS}
+            label={{ value: 'head, ft', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis yAxisId="power" orientation="right" tick={AXIS}
+            label={{ value: 'efficiency and brake power', angle: 90, position: 'insideRight', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceArea yAxisId="head" x1={bep.recommendedLowBpd} x2={bep.recommendedHighBpd}
+            fill={seriesColor(1)} fillOpacity={0.07} />
+          <ReferenceLine yAxisId="head" x={bep.recommendedLowBpd} stroke={seriesColor(4)} strokeDasharray="5 3"
+            label={{ value: 'downthrust below here', fill: seriesColor(4), fontSize: 10, position: 'top' }} />
+          <ReferenceLine yAxisId="head" x={bep.recommendedHighBpd} stroke={seriesColor(2)} strokeDasharray="5 3"
+            label={{ value: 'upthrust above here', fill: seriesColor(2), fontSize: 10, position: 'top' }} />
+          <ReferenceLine yAxisId="head" x={row.qBpd} stroke={SVG_CHART.label}
+            label={{ value: 'the duty', fill: SVG_CHART.label, fontSize: 10, position: 'insideTopRight' }} />
+          <Line yAxisId="head" type="monotone" dataKey="headFt" name="head per stage, ft"
+            stroke={seriesColor(1)} dot={false} isAnimationActive={false} />
+          <Line yAxisId="power" type="monotone" dataKey="efficiency" name="efficiency, fraction"
+            stroke={seriesColor(0)} dot={false} isAnimationActive={false} />
+          <Line yAxisId="power" type="monotone" dataKey="bhpPerStageSg100" name="brake power on water, hp"
+            stroke={seriesColor(2)} dot={false} isAnimationActive={false} />
+          <Line yAxisId="power" type="monotone" dataKey="bhpPerStageSg090" name="brake power on the lighter fluid, hp"
+            stroke={seriesColor(4)} dot={false} strokeDasharray="4 3" isAnimationActive={false} />
+        </ComposedChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">rate, bbl/d</th>
               <th className="text-left pr-3">head, ft</th>
@@ -391,12 +386,12 @@ const Duty = () => {
           </thead>
           <tbody>
             {rows.map((r) => (
-              <tr key={r.qBpd} className={r.qBpd === row.qBpd ? 'text-white' : ''}>
+              <tr key={r.qBpd} className={r.qBpd === row.qBpd ? 'text-pl-text' : ''}>
                 <td className="pr-3">{fmt(r.qBpd, 0)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.headFt, 6)}</td>
-                <td className="pr-3 text-[#38bdf8]">{fmt(r.efficiency, 6)}</td>
-                <td className="pr-3 text-[#f97316]">{fmt(r.bhpPerStageSg100, 6)}</td>
-                <td className="pr-3 text-[#f472b6]">{fmt(r.bhpPerStageSg090, 6)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.headFt, 6)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.efficiency, 6)}</td>
+                <td className="pr-3 text-pl-warning-text">{fmt(r.bhpPerStageSg100, 6)}</td>
+                <td className="pr-3 text-pl-accent-text">{fmt(r.bhpPerStageSg090, 6)}</td>
                 <td className="pr-3" style={{ color: REGION_COLOUR[r.region] }}>{r.region}</td>
                 <td>{yn(r.inRange)}</td>
               </tr>
@@ -404,7 +399,7 @@ const Duty = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THREE READINGS OF ONE POINT. At {fmt(row.qBpd, 0)} bbl/d this stage makes
         {' '}{fmt(row.headFt, 6)} ft of head at {pct(row.efficiency, 4)} efficiency and asks for
         {' '}{fmt(row.bhpPerStageSg100, 6)} hp on water. Head and efficiency are read off the two
@@ -413,7 +408,7 @@ const Duty = () => {
         {' '}{fmt(row.bhpPerStageSg090, 6)} hp, because brake power carries the specific gravity and
         head does not.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         The band on the chart is the recommended duty range, {fmt(bep.recommendedLowBpd, 3)} to
         {' '}{fmt(bep.recommendedHighBpd, 3)} bbl/d, which is
         {' '}{pct(ESP_THRESHOLDS.downthrustBepFraction, 0)} to
@@ -473,44 +468,42 @@ const Edge = () => {
           <Tile label="Rows with negative head and a finite power" value={fmt(negativeHead.length, 0)} />
         </TileGrid>
       </div>
-      <div className="h-80 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="qBpd" type="number" domain={['dataMin', 'dataMax']} tick={AXIS}
-              label={{ value: 'rate, bbl/d', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis yAxisId="head" tick={AXIS}
-              label={{ value: 'head per stage, ft', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <YAxis yAxisId="eff" orientation="right" tick={AXIS}
-              label={{ value: 'efficiency and brake power', angle: 90, position: 'insideRight', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            {/* The region the whole view exists for: everything the fit says
-                between the last point it was given and the rate its own head
-                reaches nought. Both bounds are engine values. */}
-            <ReferenceArea yAxisId="head" x1={fit.qMax} x2={ex.vendorZeroHeadBpd}
-              fill="#f97316" fillOpacity={0.16} stroke="#f97316" strokeOpacity={0.5} />
-            <ReferenceLine yAxisId="head" x={fit.qMax} stroke="#38bdf8" strokeWidth={2}
-              label={{ value: 'last published rate', fill: '#38bdf8', fontSize: 10, position: 'top' }} />
-            <ReferenceLine yAxisId="head" x={ex.vendorZeroHeadBpd} stroke="#f97316" strokeWidth={2}
-              label={{ value: 'head reaches nought', fill: '#f97316', fontSize: 10, position: 'top' }} />
-            <ReferenceLine yAxisId="head" y={0} stroke="#64748b" />
-            <Line yAxisId="head" type="monotone" dataKey="headFt" name="head per stage, ft"
-              stroke="#BFFF00" strokeWidth={2} dot={false} isAnimationActive={false} />
-            <Line yAxisId="eff" type="monotone" dataKey="efficiency" name="efficiency, fraction"
-              stroke="#38bdf8" dot={false} isAnimationActive={false} />
-            <Line yAxisId="eff" type="monotone" dataKey="bhpPerStage" name="brake power per stage, hp"
-              stroke="#f472b6" dot={false} isAnimationActive={false} />
-          </ComposedChart>
-        </ResponsiveContainer>
-      </div>
-      <div className="mt-2 text-xs text-slate-400">
+      <ChartFrame height={320} className="mt-3">
+        <ComposedChart data={rows} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="qBpd" type="number" domain={['dataMin', 'dataMax']} tick={AXIS}
+            label={{ value: 'rate, bbl/d', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis yAxisId="head" tick={AXIS}
+            label={{ value: 'head per stage, ft', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis yAxisId="eff" orientation="right" tick={AXIS}
+            label={{ value: 'efficiency and brake power', angle: 90, position: 'insideRight', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+          <Legend {...LEGEND_PROPS} />
+          {/* The region the whole view exists for: everything the fit says
+              between the last point it was given and the rate its own head
+              reaches nought. Both bounds are engine values. */}
+          <ReferenceArea yAxisId="head" x1={fit.qMax} x2={ex.vendorZeroHeadBpd}
+            fill={seriesColor(2)} fillOpacity={0.16} stroke={seriesColor(2)} strokeOpacity={0.5} />
+          <ReferenceLine yAxisId="head" x={fit.qMax} stroke={seriesColor(0)} strokeWidth={2}
+            label={{ value: 'last published rate', fill: seriesColor(0), fontSize: 10, position: 'top' }} />
+          <ReferenceLine yAxisId="head" x={ex.vendorZeroHeadBpd} stroke={seriesColor(2)} strokeWidth={2}
+            label={{ value: 'head reaches nought', fill: seriesColor(2), fontSize: 10, position: 'top' }} />
+          <ReferenceLine yAxisId="head" y={0} stroke={SVG_CHART.reference} />
+          <Line yAxisId="head" type="monotone" dataKey="headFt" name="head per stage, ft"
+            stroke={seriesColor(1)} strokeWidth={2} dot={false} isAnimationActive={false} />
+          <Line yAxisId="eff" type="monotone" dataKey="efficiency" name="efficiency, fraction"
+            stroke={seriesColor(0)} dot={false} isAnimationActive={false} />
+          <Line yAxisId="eff" type="monotone" dataKey="bhpPerStage" name="brake power per stage, hp"
+            stroke={seriesColor(4)} dot={false} isAnimationActive={false} />
+        </ComposedChart>
+      </ChartFrame>
+      <div className="mt-2 text-xs text-pl-muted">
         The shaded strip is {fmt(ex.vendorZeroHeadPastDataBpd, 4)} bbl/d wide. Every answer inside it
         is finite, smooth and about nothing.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">rate, bbl/d</th>
               <th className="text-left pr-3">past the data, bbl/d</th>
@@ -524,20 +517,20 @@ const Edge = () => {
           <tbody>
             {rows.map((r) => (
               <tr key={r.qBpd}
-                className={r.qBpd > fit.qMax && r.qBpd < ex.vendorZeroHeadBpd ? 'bg-orange-900/20 text-white' : ''}>
+                className={r.qBpd > fit.qMax && r.qBpd < ex.vendorZeroHeadBpd ? 'bg-pl-warning-bg text-pl-text' : ''}>
                 <td className="pr-3">{fmt(r.qBpd, 0)}</td>
-                <td className="pr-3 text-slate-400">{fmt(r.pastDataBpd, 0)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.headFt, 6)}</td>
-                <td className="pr-3 text-[#38bdf8]">{fmt(r.efficiency, 6)}</td>
-                <td className="pr-3 text-[#f472b6]">{Number.isFinite(r.bhpPerStage) ? fmt(r.bhpPerStage, 6) : 'the engine refuses'}</td>
+                <td className="pr-3 text-pl-muted">{fmt(r.pastDataBpd, 0)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.headFt, 6)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.efficiency, 6)}</td>
+                <td className="pr-3 text-pl-accent-text">{Number.isFinite(r.bhpPerStage) ? fmt(r.bhpPerStage, 6) : 'the engine refuses'}</td>
                 <td className="pr-3" style={{ color: REGION_COLOUR[r.region] }}>{r.region}</td>
-                <td className={r.inRange ? '' : 'text-[#f97316] font-semibold'}>{yn(r.inRange)}</td>
+                <td className={r.inRange ? '' : 'text-pl-warning-text font-semibold'}>{yn(r.inRange)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         NOTHING SNAPS. Read the head column straight down through the boundary: it falls, it
         flattens, it crosses nought and it keeps going, and no row differs IN KIND from the row
         above it. The last row inside the published data reads {fmt(lastInside.headFt, 6)} ft and
@@ -546,7 +539,7 @@ const Edge = () => {
         the same. The ONLY field that changes at {fmt(fit.qMax, 0)} bbl/d is the last one, and it is
         a boolean.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         The strip on the chart runs from the last published rate to
         {' '}{fmt(ex.vendorZeroHeadBpd, 4)} bbl/d, where this fit's head reaches nought. That is
         {' '}{fmt(ex.vendorZeroHeadPastDataBpd, 4)} bbl/d of answers that are finite, smooth,
@@ -555,7 +548,7 @@ const Edge = () => {
         it, on {fmt(negativeHead.length, 0)} rows of this sweep, and the engine still answers,
         because the hydraulic power went negative while the efficiency was still positive.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         THE ONLY HARD STOP IN THE CHAIN is brakeHp's own guard, and it does not fire until the
         EFFICIENCY fit has gone negative too, at {fmt(ex.vendorZeroEfficiencyBpd, 4)} bbl/d. That is
         {' '}{fmt(ex.vendorEfficiencyOutlivesHeadBpd, 4)} bbl/d further on again, long after the
@@ -563,8 +556,8 @@ const Edge = () => {
         physics, it is a guard on the arithmetic.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">the same sweep on a QUADRATIC head fit, bbl/d</th>
               <th className="text-left pr-3">head, ft</th>
@@ -577,16 +570,16 @@ const Edge = () => {
             {refRows.map((r) => (
               <tr key={r.qBpd}>
                 <td className="pr-3">{fmt(r.qBpd, 0)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.headFt, 6)}</td>
-                <td className="pr-3 text-[#38bdf8]">{fmt(r.efficiency, 6)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.headFt, 6)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.efficiency, 6)}</td>
                 <td className="pr-3" style={{ color: REGION_COLOUR[r.region] }}>{r.region}</td>
-                <td className={r.inRange ? '' : 'text-[#f97316]'}>{yn(r.inRange)}</td>
+                <td className={r.inRange ? '' : 'text-pl-warning-text'}>{yn(r.inRange)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         That second table is the control. It is a QUADRATIC head fit on a reference stage, swept the
         same way, and it does the same thing: falls smoothly through its own boundary, crosses nought
         at {fmt(ex.referenceZeroHeadBpd, 4)} bbl/d, {fmt(ex.referenceZeroHeadPastDataBpd, 4)} bbl/d
@@ -597,12 +590,12 @@ const Edge = () => {
         {' '}{fmt(golden.pastDataBpd, 0)} bbl/d past the end of the data, and comes back with a
         number and inRange {yn(golden.inRange)}.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         The efficiency fit outliving the head fit is why the brake power goes negative rather than
         undefined. On the tail sweep the last rate at which this vendor curve still returns a
-        POSITIVE efficiency is {lastPositiveEfficiency ? fmt(lastPositiveEfficiency.qBpd, 0) : '-'}
+        POSITIVE efficiency is {lastPositiveEfficiency ? fmt(lastPositiveEfficiency.qBpd, 0) : 'n/a'}
         {' '}bbl/d, reading
-        {' '}{lastPositiveEfficiency ? fmt(lastPositiveEfficiency.vendorEfficiency, 6) : '-'}, and the
+        {' '}{lastPositiveEfficiency ? fmt(lastPositiveEfficiency.vendorEfficiency, 6) : 'n/a'}, and the
         head there went long ago. A positive efficiency dividing a negative hydraulic power is a
         negative brake power, and that is a number rather than a refusal.
       </div>

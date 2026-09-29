@@ -457,3 +457,44 @@ well control (`/dashboard/apps/wellcontrol`), geomechanics
   (every view of every panel in both themes, every plot on the white plate
   with the mark, every series in a kit colour with a negative control, and a
   source scan for legacy classes and retired chart colours in every branch).
+
+## 8. Batch 4A: production I course apps (as built)
+
+Nodal analysis (`/dashboard/apps/nodal`), gas lift (`/dashboard/apps/gaslift`)
+and ESP (`/dashboard/apps/esp`) are on the roles and registered in
+`src/design/rollout/w4a.js`. Their course reader pages stay on 1C's pattern
+entry.
+
+- The nine panels (`panels/{nodal,gaslift,esp}/*Explorer.jsx`) and the gas
+  lift `TypedDesignFields` are used by their learning page, the lesson reader
+  and the handbook, all inside a scope, so they moved straight to roles with
+  no legacy branch. No file is shared with 4B or 4C. The port catalogue field
+  takes `THEMED_INPUT`.
+- The page recipe is 3A's: cards on `surface`, lessons and the locked
+  capstone note on `sunken`, the tier buttons primary when chosen, capstone
+  results and toasts on the success and danger roles with their words,
+  certificate number and award icon gold, the Learning Mode pill a gold tint.
+- Every chart is Recharts in `ChartFrame` (white plate, chart mark):
+  `GRID_STYLE`, `AXIS_TICK`, `TOOLTIP_STYLE`, axis titles and notes on
+  `SVG_CHART.note`, guides on `SVG_CHART.reference`, the old near-white
+  reference lines in ink (`SVG_CHART.label`), point outlines white. The
+  colour map keeps each hue the panel copy already names: sky to
+  `seriesColor(0)` (blue), lime to `(1)` (green; the node explorer already
+  called its lime inflow "the green curve"), orange to `(2)`, red and rose
+  to `(3)`, pink to `(4)`. Charts with a legend take `LEGEND_PROPS` and
+  `XAXIS_LABEL_HEIGHT`, so the axis title no longer sits under the legend.
+- Table text keyed to a series takes the nearest role: lime values
+  `primary-text`, sky `info-text`, orange `warning-text`, pink `accent-text`.
+  Status rows (DEAD scans, unstable crossings, failed drops) are on the
+  status roles beside their words. Empty values are `n/a`.
+- Lesson colour words that named a retired colour now name the new one:
+  orange to amber (VLP, node and lift explorers), lime to green (lift and
+  power explorers), pink to gold for the valve explorer's dome columns.
+- Tests: `src/pages/__tests__/Production4A.theme.test.jsx` (harness
+  `prod4aHarness.jsx`, stubs `prod4aStubs.js`: the four standard checks per
+  app, every tier with both capstone outcomes, the gold certificate number,
+  the Learning Mode gate, dark) and
+  `src/components/course/panels/__tests__/prod4aPanelsTheme.test.jsx` (every
+  view of every panel in both themes, every chart frame white with the mark,
+  a status row check, and a source scan for retired colours and bare
+  `ResponsiveContainer`s).
