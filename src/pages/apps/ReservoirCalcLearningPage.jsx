@@ -416,7 +416,7 @@ const ReservoirCalcLearningPage = () => {
                           <p className="flex items-center gap-2"><Award className="h-4 w-4 text-pl-accent-text" />
                             {CERT_LABELS[result.tier] || 'Associate'} certificate <span className="font-mono text-pl-accent-text">{result.certificate_number}</span> issued.
                             {result.tier === 'expert' && ' Your 50% Suite discount code is on your certificates page.'}
-                            That completes the geoscience Beginner path — every course in the daily loop.</p>
+                            {' '}That completes the geoscience Beginner path: every course in the daily loop.</p>
                           <div className="flex gap-3">
                             <Link to="/dashboard/certificates" className="text-pl-primary-text hover:underline inline-flex items-center gap-1">
                               My certificates <ArrowRight className="h-3 w-3" />
