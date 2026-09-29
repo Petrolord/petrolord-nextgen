@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, BarChart, Line, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine, ReferenceDot,
+  LineChart, BarChart, Line, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine, ReferenceDot,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import {
   engineScope, twoCurves, dutyPointSolved, powerHeadPressure, whereTheDutyLanded,
 } from './rotatingLab';
@@ -40,13 +43,13 @@ export const MODES = [
   ['refusals', 'What the engine refuses: a returned object carrying its own message'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
 
 const Tbl = ({ head, rows }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>{head.map((h, i) => <th key={h} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>)}</tr>
       </thead>
       <tbody>
@@ -61,17 +64,17 @@ const Tbl = ({ head, rows }) => (
 );
 
 const Held = ({ children }) => (
-  <div className="mt-3 rounded-md border border-amber-700/60 bg-amber-950/20 p-3">
-    <p className="text-amber-300 text-xs font-medium mb-1">HELD FOR LITERATURE</p>
-    <p className="text-xs text-slate-300 mb-0">{children}</p>
+  <div className="mt-3 rounded-md border border-pl-warning/40 bg-pl-warning-bg p-3">
+    <p className="text-pl-warning-text text-xs font-medium mb-1">HELD FOR LITERATURE</p>
+    <p className="text-xs text-pl-text mb-0">{children}</p>
   </div>
 );
 
 /** A refusal shown as a refusal. The message is the engine's, through the lab. */
 const Refusal = ({ label, message }) => (
-  <div className="mt-2 rounded-md border border-red-800/60 bg-red-950/20 p-2">
-    <p className="text-red-300 text-xs font-medium mb-1">{label}</p>
-    <p className="text-xs text-slate-300 font-mono mb-0">{message}</p>
+  <div className="mt-2 rounded-md border border-pl-danger/40 bg-pl-danger-bg p-2">
+    <p className="text-pl-danger-text text-xs font-medium mb-1">{label}</p>
+    <p className="text-xs text-pl-text font-mono mb-0">{message}</p>
   </div>
 );
 
@@ -92,7 +95,7 @@ export const CurvesMode = ({ c }) => {
         <Tile label="Condition number" value={six(c.conditionNumber)} />
         <Tile label="Droops" value={String(c.droops)} />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         R squared says how well the fitted curve describes the four catalogue points. The condition number says whether
         the linear system behind the fit was solvable at all. Those are two different questions, and the engine reports
         both. Across the {c.conditionCount} point sets this course fits, the reported figure runs from
@@ -103,7 +106,7 @@ export const CurvesMode = ({ c }) => {
         head={['point set', 'condition number', 'R squared', 'droops']}
         rows={c.conditionSets.map((r) => [r.label, six(r.conditionNumber), r.rSquared === null ? 'null' : nine(r.rSquared), String(r.droops)])}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Three identical heads have no variance to explain, so the total sum of squares is zero and R squared is
         undefined. The engine returns null there. A horizontal line explains nothing, and null is what that looks like
         in a return.
@@ -112,26 +115,24 @@ export const CurvesMode = ({ c }) => {
         head={['flow gpm', 'catalogue head ft', 'fitted head ft', 'residual ft']}
         rows={c.readback.map((r) => [six(r.qGpm), six(r.catalogueHeadFt), six(r.fittedHeadFt), six(r.residualDerivedFt)])}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         A quadratic through four points misses all four. The catalogue reads {six(c.catalogueShutoffFt)} ft at zero flow
         and the fit puts the shutoff at {six(c.shutoffHeadFt)} ft, a difference of {six(c.shutoffMissDerivedFt)} ft.
       </p>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="flow" tick={AXIS} label={{ value: 'flow, gpm', fill: '#94a3b8', fontSize: 10, position: 'insideBottom', offset: -2 }} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={0} stroke="#475569" />
-            <Line dataKey="pump" name="pump head, ft" stroke="#38bdf8" dot={false} isAnimationActive={false} />
-            <Line dataKey="system" name="system head, ft" stroke="#BFFF00" dot={false} isAnimationActive={false} />
-            <Line dataKey="difference" name="pump less system, ft" stroke="#f472b6" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="flow" tick={AXIS} label={{ value: 'flow, gpm', fill: SVG_CHART.note, fontSize: 10, position: 'insideBottom', offset: -2 }} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine y={0} stroke={SVG_CHART.reference} />
+          <Line dataKey="pump" name="pump head, ft" stroke={seriesColor(0)} dot={false} isAnimationActive={false} />
+          <Line dataKey="system" name="system head, ft" stroke={seriesColor(1)} dot={false} isAnimationActive={false} />
+          <Line dataKey="difference" name="pump less system, ft" stroke={seriesColor(4)} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The system curve is stated as a friction head at a flow rather than as a coefficient, and the engine returns the
         coefficient that implies: k = {nine(c.system.kFt)} ft per gpm squared, over a static head of
         {' '}{six(c.system.staticReadBackFt)} ft. The pink line starts positive and ends negative. The flow where it is
@@ -141,7 +142,7 @@ export const CurvesMode = ({ c }) => {
         head={['flow gpm', 'pump head ft', 'system head ft', 'pump less system ft']}
         rows={c.crossing.map((r) => [six(r.qGpm), six(r.pumpHeadFt), six(r.systemHeadFt), six(r.differenceDerivedFt)])}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         A point set that RISES with flow is not a centrifugal head curve. Its fitted c2 is {six(c.rising.c2)}, positive
         where a drooping curve is negative, and the engine says so twice: once in prose and once in a field. The
         machine-readable half is `droops`, and it comes back {String(c.rising.droops)}. The duty solve reads that field.
@@ -164,15 +165,15 @@ export const DutyMode = ({ d }) => {
         <Tile label="Halvings taken" value={raw(d.iterations)} unit="of a cap of 200" />
         <Tile label="Converged" value={String(d.converged)} />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         At the returned flow the pump makes {six(d.pumpHeadAtDutyFt)} ft and the system demands
         {' '}{six(d.systemHeadFt)} ft. The difference is {raw(d.solvedDifferenceDerivedFt)} ft, which is what solved
         means here. The bracket the search stopped on is {raw(d.bracketGpm)} gpm and the head difference at the flow it
         returned is {raw(d.residualFt)} ft.
       </p>
-      <div className="mt-3 rounded-md border border-slate-700 bg-[#0F172A] p-3">
-        <p className="text-white text-xs font-medium mb-2">The flag is made of the residual as well as the bracket</p>
-        <p className="text-xs text-slate-400 mb-2">
+      <div className="mt-3 rounded-md border border-pl-border bg-pl-sunken p-3">
+        <p className="text-pl-text text-xs font-medium mb-2">The flag is made of the residual as well as the bracket</p>
+        <p className="text-xs text-pl-muted mb-2">
           On a bracketed sign change, bisection always collapses. A flag made only of the bracket width could never come
           back false, so it would be a check that validates nothing. Here is the case the residual half catches: a curve
           that returns a non-finite head over part of its range sends the comparison false at every step there and
@@ -185,13 +186,13 @@ export const DutyMode = ({ d }) => {
             ['a curve that goes non-finite', six(d.poisoned.qGpm), raw(d.poisoned.bracketGpm), raw(d.poisoned.iterations), raw(d.poisoned.residualFt), String(d.poisoned.converged)],
           ]}
         />
-        <p className="text-xs text-slate-400 mt-2 mb-0">
+        <p className="text-xs text-pl-muted mt-2 mb-0">
           The second row is {six(d.poisoned.awayFromTrueDerivedGpm)} gpm away from where those curves really cross, and
           its bracket is at the resolution of the numbers themselves. A bracket-only flag would have called it
           converged. Ask that question of every flag you meet: what input makes it false?
         </p>
       </div>
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         The solve stops when the midpoint stops moving rather than after a fixed count. A blind 200 halvings gives
         {' '}{six(d.blindGpm)} gpm on the same pair of curves, a difference of {raw(d.blindDifferenceDerivedGpm)} gpm, so
         adding the report moved nothing: the loop breaks where the blind one was already standing still.
@@ -200,33 +201,31 @@ export const DutyMode = ({ d }) => {
         head={['static head ft', 'duty flow gpm', 'duty head ft']}
         rows={d.staticSweep.map((r) => [six(r.staticHeadFt), r.refused ? 'refused' : six(r.qGpm), r.refused ? 'refused' : six(r.headFt)])}
       />
-      <div className="h-48 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="staticHead" tick={AXIS} label={{ value: 'static head, ft', fill: '#94a3b8', fontSize: 10, position: 'insideBottom', offset: -2 }} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line dataKey="flow" name="duty flow, gpm" stroke="#38bdf8" dot={false} isAnimationActive={false} />
-            <Line dataKey="head" name="duty head, ft" stroke="#BFFF00" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <ChartFrame height={192} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="staticHead" tick={AXIS} label={{ value: 'static head, ft', fill: SVG_CHART.note, fontSize: 10, position: 'insideBottom', offset: -2 }} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line dataKey="flow" name="duty flow, gpm" stroke={seriesColor(0)} dot={false} isAnimationActive={false} />
+          <Line dataKey="head" name="duty head, ft" stroke={seriesColor(1)} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Moving the station moves the duty, which is the whole reason it is solved rather than typed. On the
         friction-dominated station the same pump lands at {six(d.friction.qGpm)} gpm and {six(d.friction.headFt)} ft, of
         which {six(d.friction.staticHeadFt)} ft is static and {six(d.friction.frictionShareDerivedFt)} ft is friction.
       </p>
-      <p className="text-xs text-slate-400 mt-3 mb-1">Three refusals that are real answers:</p>
+      <p className="text-xs text-pl-muted mt-3 mb-1">Three refusals that are real answers:</p>
       <Refusal label="A curve that rises with flow" message={d.risingRefusal} />
       <Refusal label="A station the pump cannot start" message={d.tooHigh.error} />
-      <p className="text-xs text-slate-400 mt-1 mb-0">
+      <p className="text-xs text-pl-muted mt-1 mb-0">
         That one hands back its evidence: a shutoff head of {six(d.tooHigh.shutoffHeadFt)} ft against a system static
         head of {six(d.tooHigh.systemStaticHeadFt)} ft, a gap of {six(d.tooHigh.gapDerivedFt)} ft.
       </p>
       <Refusal label="A search limit set below the crossing" message={d.searchLimitRefusal} />
-      <p className="text-xs text-slate-400 mt-1 mb-0">
+      <p className="text-xs text-pl-muted mt-1 mb-0">
         The last one is a question about the search rather than about the machine, and the message says which.
       </p>
     </>
@@ -244,12 +243,12 @@ export const PowerMode = ({ p }) => {
         <Tile label="Motor input" value={six(p.motorInputHp)} unit="hp" />
         <Tile label="Motor input" value={six(p.motorInputKw)} unit="kW" />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         All four are asked AT the solved duty of {six(p.qGpm)} gpm and {six(p.headFt)} ft, so all four move when the
         station does. The pump loses {six(p.pumpLossDerivedHp)} hp and the motor a further
         {' '}{six(p.motorLossDerivedHp)} hp.
       </p>
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         Head belongs to the machine and pressure belongs to the fluid in it. The same {six(p.headFt)} ft makes
         {' '}{six(p.dischargePsi)} psi on this brine, and converting back gives {six(p.roundTripFt)} ft.
       </p>
@@ -257,19 +256,17 @@ export const PowerMode = ({ p }) => {
         head={['gravity', 'head ft', 'discharge psi']}
         rows={p.gravities.map((r) => [six(r.sg), six(r.headFt), six(r.dischargePsi)])}
       />
-      <div className="h-44 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="gravity" tick={AXIS} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Bar dataKey="psi" name="discharge, psi" fill="#38bdf8" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <ChartFrame height={176} className="mt-3">
+        <BarChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="gravity" tick={AXIS} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <Bar dataKey="psi" name="discharge, psi" fill={seriesColor(0)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         The engine exports no constants, so each packaging below is MEASURED by asking the engine a question about
         itself rather than typed here.
       </p>
@@ -282,7 +279,7 @@ export const PowerMode = ({ p }) => {
           ['the DEFAULT motor efficiency', six(p.measured.defaultMotorEfficiency), 'the brake power over the motor input with the argument omitted'],
         ]}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Both packagings carry a water density inside them, and the two can be compared. The pressure packaging implies
         {' '}{six(p.densityFromPressurePackagingDerived)} lb per ft3 and the power packaging
         {' '}{six(p.densityFromPowerPackagingDerived)} lb per ft3, a difference of
@@ -309,26 +306,24 @@ export const RegionsMode = ({ r }) => {
         <Tile label="Percent of best efficiency flow" value={six(r.percentOfBep)} unit="percent" />
         <Tile label="Region" value={r.region} />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">{r.note}</p>
+      <p className="text-xs text-pl-muted mt-2 mb-0">{r.note}</p>
       <Tbl
         head={['flow gpm', 'percent of BEP', 'region', 'preferred', 'note present']}
         rows={r.bands.map((b) => [six(b.qGpm), six(b.percentOfBep), b.region, String(b.preferred), String(b.notePresent)])}
       />
-      <div className="h-44 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="flow" tick={AXIS} label={{ value: 'flow, gpm', fill: '#94a3b8', fontSize: 10, position: 'insideBottom', offset: -2 }} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={100} stroke="#BFFF00" strokeDasharray="3 3" label={{ value: 'best efficiency flow', fill: '#BFFF00', fontSize: 10 }} />
-            <ReferenceDot x={r.qGpm} y={r.percentOfBep} r={4} fill="#f472b6" stroke="none" />
-            <Line dataKey="percent" name="percent of best efficiency flow" stroke="#38bdf8" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <ChartFrame height={176} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="flow" tick={AXIS} label={{ value: 'flow, gpm', fill: SVG_CHART.note, fontSize: 10, position: 'insideBottom', offset: -2 }} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine y={100} stroke={seriesColor(1)} strokeDasharray="3 3" label={{ value: 'best efficiency flow', fill: seriesColor(1), fontSize: 10 }} />
+          <ReferenceDot x={r.qGpm} y={r.percentOfBep} r={4} fill={seriesColor(4)} stroke="none" />
+          <Line dataKey="percent" name="percent of best efficiency flow" stroke={seriesColor(0)} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Both sides of every boundary are on the table above, because a band that misclassifies its own edge is a defect
         rather than a rounding question. What each region costs is the part of this return worth reading:
       </p>
@@ -360,7 +355,7 @@ export const RefusalsMode = ({ s }) => {
         <Tile label="Pump states with no answer" value={raw(s.pumpSoftStates.length)} />
         <Tile label="Compression states with no answer" value={raw(s.compressionSoftStates.length)} />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Every refusal in both modules is a RETURNED OBJECT carrying an error string. Neither module throws, so a caller
         checks a property rather than catching. {s.bareNumberNames.length} exports hand back a bare number and have
         nowhere to put an error key at all: {s.bareNumberNames.join(', ')}. Those five hold a documented contract
