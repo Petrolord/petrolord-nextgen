@@ -65,7 +65,7 @@ export const ContradictionsMode = ({ ct }) => {
       <Text>
         Implied {ct.irri.implied.map(pr).join(' / ')} against stated {ct.irri.stated.map(pr).join(' / ')}; deltas {ct.irri.deltas.map(pr).join(' / ')}.
       </Text>
-      <Text><span className="text-slate-500">The engine&apos;s insight:</span> {ct.irri.insights}</Text>
+      <Text><span className="text-pl-muted">The engine&apos;s insight:</span> {ct.irri.insights}</Text>
       <Note>
         <Unguarded>Weighted by the typed chances with nothing checking them, the same inputs would give a gross voi of {ct.irri.unguarded.voi.toFixed(2)} and a net voi of {ct.irri.unguarded.net.toFixed(2)} (unguarded arithmetic, derived).</Unguarded>
         {' '}Information derived by Bayes is never worth less than 0; a negative value only comes from typed inputs that contradict the stated chances.
@@ -247,7 +247,7 @@ export const DistrustMode = ({ ds }) => {
         exactly the Do Not value.
       </Text>
       <KpiCards result={ti} />
-      <Text><span className="text-slate-500">The insight opens:</span> {ti.insightOpening}</Text>
+      <Text><span className="text-pl-muted">The insight opens:</span> {ti.insightOpening}</Text>
       <Sub>A card rounded before it is shown</Sub>
       <Tbl
         head={['survey cost, million USD', 'Net VOI card', 'verdict sentence']}
