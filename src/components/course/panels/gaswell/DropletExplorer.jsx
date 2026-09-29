@@ -1,10 +1,13 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line,
+  LineChart, Line,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
 import { dropletExplorer } from './gasWellLab';
 import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 
 // Droplet explorer, the Associate tier. One station, read completely.
 //
@@ -37,9 +40,9 @@ const MODES = [
   ['threshold', 'The threshold between them, and the sentence that prints it'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const GRID = <CartesianGrid stroke="#334155" strokeDasharray="3 3" />;
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const GRID = <CartesianGrid {...GRID_STYLE} />;
 
 const rowOptions = (rows) => rows.map((r) => [
   String(r.row),
@@ -83,8 +86,8 @@ const Station = () => {
         </TileGrid>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">quantity</th>
               <th className="text-left pr-3">the engine</th>
@@ -95,26 +98,26 @@ const Station = () => {
           <tbody>
             <tr>
               <td className="pr-3">gas density, lbm/ft3</td>
-              <td className="pr-3 text-[#BFFF00]">{fmt(built.rhoGasLbFt3, 10)}</td>
-              <td className="pr-3 text-[#38bdf8]">{fmt(g.rhoGasLbFt3, 10)}</td>
+              <td className="pr-3 text-pl-info-text">{fmt(built.rhoGasLbFt3, 10)}</td>
+              <td className="pr-3 text-pl-primary-text">{fmt(g.rhoGasLbFt3, 10)}</td>
               <td>{tiny(built.rhoGasLbFt3 - g.rhoGasLbFt3)} apart</td>
             </tr>
             <tr>
               <td className="pr-3">terminal droplet velocity, ft/s</td>
-              <td className="pr-3 text-[#BFFF00]">{fmt(built.terminalFtS, 10)}</td>
-              <td className="pr-3 text-[#38bdf8]">{fmt(built.goldenTerminalFtS, 10)}</td>
+              <td className="pr-3 text-pl-info-text">{fmt(built.terminalFtS, 10)}</td>
+              <td className="pr-3 text-pl-primary-text">{fmt(built.goldenTerminalFtS, 10)}</td>
               <td>{tiny(built.terminalFtS - built.goldenTerminalFtS)} apart</td>
             </tr>
             <tr>
               <td className="pr-3">Turner critical rate through 2.441 in, Mscf/d</td>
-              <td className="pr-3 text-[#BFFF00]">{fmt(built.criticalRateMscfd, 9)}</td>
-              <td className="pr-3 text-[#38bdf8]">{fmt(built.goldenTurnerRateMscfd, 9)}</td>
+              <td className="pr-3 text-pl-info-text">{fmt(built.criticalRateMscfd, 9)}</td>
+              <td className="pr-3 text-pl-primary-text">{fmt(built.goldenTurnerRateMscfd, 9)}</td>
               <td>{tiny(built.criticalRateMscfd - built.goldenTurnerRateMscfd)} apart</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         TWO ROADS TO ONE NUMBER, AND A LESSON STAYS ON ONE. The engine works in dyne/cm, lbm/ft3 and
         ft/s and carries gc explicitly. The oracle that cut the goldens worked in N/m, kg/m3 and m/s
         with no gc anywhere, and built the rate constant from the molar volume rather than from
@@ -171,26 +174,24 @@ const Balance = () => {
           <Tile label="Droplet constant the oracle published" value={fmt(data.constants.goldenTurnerConstant, 10)} />
         </TileGrid>
       </div>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={sweep} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="x" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
-              label={{ value: label, position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS} domain={['auto', 'auto']}
-              label={{ value: 'velocity, ft/s', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line type="monotone" dataKey="terminalFtS" name="terminal droplet velocity, which is also the Coleman velocity"
-              stroke="#BFFF00" dot={false} isAnimationActive={false} />
-            <Line type="monotone" dataKey="turnerFtS" name="the Turner velocity, the same curve times 1.2"
-              stroke="#f97316" strokeDasharray="5 3" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3 rounded-t-lg">
+        <LineChart data={sweep} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="x" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
+            label={{ value: label, position: 'insideBottom', offset: -8, fill: SVG_CHART.label, fontSize: 10 }} />
+          <YAxis tick={AXIS} domain={['auto', 'auto']}
+            label={{ value: 'velocity, ft/s', angle: -90, position: 'insideLeft', fill: SVG_CHART.label, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line type="monotone" dataKey="terminalFtS" name="terminal droplet velocity, which is also the Coleman velocity"
+            stroke={seriesColor(0)} dot={false} isAnimationActive={false} />
+          <Line type="monotone" dataKey="turnerFtS" name="the Turner velocity, the same curve times 1.2"
+            stroke={seriesColor(2)} strokeDasharray="5 3" dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">group driven</th>
               <th className="text-left pr-3">sigma, dyne/cm</th>
@@ -207,7 +208,7 @@ const Balance = () => {
                 <td className="pr-3">{fmt(r.sigmaDyneCm, 1)}</td>
                 <td className="pr-3">{fmt(r.densityDiff, 1)}</td>
                 <td className="pr-3">{fmt(r.rhoGasLbFt3, 1)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.velocityFtS, 10)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.velocityFtS, 10)}</td>
                 <td>{r.ratioToRowAbove === null ? '-' : fmt(r.ratioToRowAbove, 10)}</td>
               </tr>
             ))}
@@ -215,8 +216,8 @@ const Balance = () => {
         </table>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">drag coefficient</th>
               <th className="text-left pr-3">constant</th>
@@ -226,17 +227,17 @@ const Balance = () => {
           </thead>
           <tbody>
             {data.drag.map((r, i) => (
-              <tr key={r.dragCoefficient} className={r.isShipped || data.weber[i].isShipped ? 'text-white' : ''}>
+              <tr key={r.dragCoefficient} className={r.isShipped || data.weber[i].isShipped ? 'text-pl-text font-semibold' : ''}>
                 <td className="pr-3">{fmt(r.dragCoefficient, 2)}{r.isShipped ? ' (shipped)' : ''}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.constant, 10)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.constant, 10)}</td>
                 <td className="pr-3">{fmt(data.weber[i].criticalWeber, 1)}{data.weber[i].isShipped ? ' (shipped)' : ''}</td>
-                <td className="text-[#38bdf8]">{fmt(data.weber[i].constant, 10)}</td>
+                <td className="text-pl-primary-text">{fmt(data.weber[i].constant, 10)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         BRINE AGAINST CONDENSATE, AT ONE STATION AND NOT AS A CONSTANT. At{' '}
         {fmt(data.pair.pPsia, 1)} psia and {fmt(data.pair.tempR, 1)} degR the water terminal velocity
         is {fmt(data.pair.waterTerminalFtS, 10)} ft/s and the condensate is{' '}
@@ -247,7 +248,7 @@ const Balance = () => {
         square root on its own and once inside the density difference, so nothing here is a fluid
         constant.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         {data.fluids.map((f) => `${f.label}: ${fmt(f.sigmaDyneCm, 1)} dyne/cm and ${fmt(f.densityLbFt3, 1)} lbm/ft3`).join('. ')}. These are labelled starting points and not correlations.
       </div>
       <Note>
@@ -282,26 +283,24 @@ const Sweep = () => {
         <Tile label="Coleman critical rate" value={fmt(base.colemanCriticalRateMscfd, 9)} unit="Mscf/d" />
         <Tile label="Tubing" value={fmt(base.idIn, 3)} unit="in" />
       </TileGrid>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="qMscfd" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
-              label={{ value: 'gas rate, Mscf/d', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS} domain={['auto', 'auto']}
-              label={{ value: 'ratio, actual over critical', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 10)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={1} stroke="#f472b6" strokeDasharray="4 3"
-              label={{ value: 'the verdict sits here', fill: '#f472b6', fontSize: 10, position: 'insideTopLeft' }} />
-            <Line type="monotone" dataKey="ratio" name="the ratio, the only one of the three carrying a verdict"
-              stroke="#BFFF00" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3 rounded-t-lg">
+        <LineChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="qMscfd" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
+            label={{ value: 'gas rate, Mscf/d', position: 'insideBottom', offset: -8, fill: SVG_CHART.label, fontSize: 10 }} />
+          <YAxis tick={AXIS} domain={['auto', 'auto']}
+            label={{ value: 'ratio, actual over critical', angle: -90, position: 'insideLeft', fill: SVG_CHART.label, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 10)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine y={1} stroke={seriesColor(4)} strokeDasharray="4 3"
+            label={{ value: 'the verdict sits here', fill: seriesColor(4), fontSize: 10, position: 'insideTopLeft' }} />
+          <Line type="monotone" dataKey="ratio" name="the ratio, the only one of the three carrying a verdict"
+            stroke={seriesColor(0)} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">gas rate, Mscf/d</th>
               <th className="text-left pr-3">actual velocity, ft/s</th>
@@ -312,18 +311,18 @@ const Sweep = () => {
           </thead>
           <tbody>
             {rows.map((r) => (
-              <tr key={r.qMscfd} className={r.loaded ? 'text-[#f97316]' : ''}>
+              <tr key={r.qMscfd} className={r.loaded ? 'text-pl-warning-text' : ''}>
                 <td className="pr-3">{fmt(r.qMscfd, 1)}</td>
                 <td className="pr-3">{fmt(r.actualVelocityFtS, 10)}</td>
-                <td className="pr-3 text-slate-500">{fmt(r.criticalRateMscfd, 9)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.ratio, 10)}</td>
+                <td className="pr-3 text-pl-muted">{fmt(r.criticalRateMscfd, 9)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.ratio, 10)}</td>
                 <td>{yn(r.loaded)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THE CRITICAL RATE DOES NOT MOVE DOWN THAT COLUMN. It belongs to the STATION and not to the
         well: change what the well makes and the critical rate is unchanged, while the actual
         velocity and the ratio move with it. The ratio is the rate ratio and the velocity ratio at
@@ -359,26 +358,24 @@ const Pair = () => {
         <Tile label="Between them" value={fmt(data.identity.adjustmentGapPct, 6)} unit="%" />
         <Tile label="Shared droplet constant" value={fmt(data.identity.sharedConstant, 10)} />
       </TileGrid>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="row" type="number" tick={AXIS} domain={[1, 12]}
-              label={{ value: 'published golden row', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS} domain={['auto', 'auto']}
-              label={{ value: 'critical rate, Mscf/d', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line type="monotone" dataKey="colemanRateMscfd" name="Coleman, the unadjusted equation"
-              stroke="#38bdf8" dot isAnimationActive={false} />
-            <Line type="monotone" dataKey="turnerRateMscfd" name="Turner, the same equation times 1.2"
-              stroke="#BFFF00" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3 rounded-t-lg">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="row" type="number" tick={AXIS} domain={[1, 12]}
+            label={{ value: 'published golden row', position: 'insideBottom', offset: -8, fill: SVG_CHART.label, fontSize: 10 }} />
+          <YAxis tick={AXIS} domain={['auto', 'auto']}
+            label={{ value: 'critical rate, Mscf/d', angle: -90, position: 'insideLeft', fill: SVG_CHART.label, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line type="monotone" dataKey="colemanRateMscfd" name="Coleman, the unadjusted equation"
+            stroke={seriesColor(1)} dot isAnimationActive={false} />
+          <Line type="monotone" dataKey="turnerRateMscfd" name="Turner, the same equation times 1.2"
+            stroke={seriesColor(0)} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">row</th>
               <th className="text-left pr-3">Coleman, ft/s</th>
@@ -393,8 +390,8 @@ const Pair = () => {
             {data.rows.map((r) => (
               <tr key={r.row}>
                 <td className="pr-3">{r.row}</td>
-                <td className="pr-3 text-[#38bdf8]">{fmt(r.colemanFtS, 10)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.turnerFtS, 10)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.colemanFtS, 10)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.turnerFtS, 10)}</td>
                 <td className="pr-3">{fmt(r.colemanRateMscfd, 9)}</td>
                 <td className="pr-3">{fmt(r.turnerRateMscfd, 9)}</td>
                 <td className="pr-3">{fmt(r.turnerMinusColemanMscfd, 9)}</td>
@@ -404,7 +401,7 @@ const Pair = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THE TERMINAL VELOCITY IS IDENTICAL UNDER BOTH, so a lesson that says the two correlations use
         different physics is wrong. At {fmt(data.identity.pPsia, 1)} psia and{' '}
         {fmt(data.identity.tempR, 1)} degR both give a terminal velocity of{' '}
@@ -436,8 +433,8 @@ const Threshold = () => {
   return (
     <>
       <div className="overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">pressure, psia</th>
               <th className="text-left pr-3">returns</th>
@@ -449,9 +446,9 @@ const Threshold = () => {
           </thead>
           <tbody>
             {data.rows.map((r) => (
-              <tr key={r.pPsia} className={r.printsAsTheLimit && r.belowLimit ? 'text-[#f97316]' : ''}>
+              <tr key={r.pPsia} className={r.printsAsTheLimit && r.belowLimit ? 'text-pl-warning-text' : ''}>
                 <td className="pr-3">{r.pPsia.toFixed(2)}</td>
-                <td className="pr-3 text-[#BFFF00]">{r.correlation}</td>
+                <td className="pr-3 text-pl-info-text">{r.correlation}</td>
                 <td className="pr-3">{yn(r.belowLimit)}</td>
                 <td className="pr-3">{r.roundedWhole}</td>
                 <td className="pr-3">{r.printedOneDecimal}</td>
@@ -461,7 +458,7 @@ const Threshold = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THE BRANCH WAS NEVER AMBIGUOUS. The sentence attached to it was. The reason used to round the
         pressure it branched on to a whole number, so a well below the limit printed AS the limit
         under a branch that by construction only takes wells below it, and a reader checking the
@@ -469,15 +466,15 @@ const Threshold = () => {
         hardcoded the word wellhead for whatever station it was handed. Both are display-only and both
         are fixed: one decimal, and a station label the caller sets.
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         ONE DECIMAL NARROWS THE COLLISION BY TEN RATHER THAN REMOVING IT. Anything inside 0.05 psi of
         the limit still renders as the limit, and the row highlighted above is the one that still
         does. A narrower print is a smaller target, not an absent one.
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         With no label: {data.labels.withoutLabel}
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         With a label: {data.labels.withLabel}
       </div>
       <Note>
