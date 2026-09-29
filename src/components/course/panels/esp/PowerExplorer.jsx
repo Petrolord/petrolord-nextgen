@@ -4,7 +4,7 @@ import {
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine, ReferenceArea,
 } from 'recharts';
 import ChartFrame from '@/components/charts/ChartFrame';
-import { GRID_STYLE, TOOLTIP_STYLE, CHART_COLORS } from '@/utils/chartTheme';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
 import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import {
   ESP_THRESHOLDS, DERATE_SWEEP_PCT, SEAM_FINDING, DIAGNOSIS_FIX,
@@ -76,13 +76,13 @@ const TwoPowers = () => {
         </TileGrid>
       </div>
       <ChartFrame height={288} className="mt-3">
-        <BarChart data={rows} margin={{ top: 10, right: 20, bottom: 46, left: 0 }}>
+        <BarChart data={rows} margin={{ top: 20, right: 20, bottom: 46, left: 0 }}>
           {GRID}
           <XAxis dataKey="id" tick={AXIS} interval={0} angle={-12} textAnchor="end" height={56} />
           <YAxis yAxisId="pct" tick={AXIS}
             label={{ value: 'gap between the two powers, percent', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <Bar yAxisId="pct" dataKey="twoPowerGapPct" name="gap, percent of the smaller power" isAnimationActive={false}>
             {rows.map((r) => (
               <Cell key={r.id} fill={r.stages > 100 ? seriesColor(0) : seriesColor(2)} />
@@ -238,14 +238,14 @@ const Derate = () => {
         </TileGrid>
       </div>
       <ChartFrame height={288} className="mt-3">
-        <ComposedChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+        <ComposedChart data={chart} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
           {GRID}
-          <XAxis dataKey="deratePct" type="number" domain={['dataMin', 'dataMax']} tick={AXIS}
-            label={{ value: 'thrust derate, percent', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="deratePct" type="number" domain={['dataMin', 'dataMax']} tick={AXIS}
+            label={{ value: 'thrust derate, percent', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis tick={AXIS}
             label={{ value: 'load fraction', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 8)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceLine y={ESP_THRESHOLDS.motorOverloadedSelectionLoad} stroke={seriesColor(2)} strokeWidth={2}
             label={{ value: 'the selection rule calls this overloaded', fill: seriesColor(2), fontSize: 10, position: 'insideTopLeft' }} />
           <ReferenceLine y={ESP_THRESHOLDS.weakCurrentEstimateBelowLoad} stroke={seriesColor(4)} strokeDasharray="5 3"
@@ -396,13 +396,13 @@ const Cable = () => {
             </TileGrid>
           </div>
           <ChartFrame height={288} className="mt-3">
-            <BarChart data={chartRows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+            <BarChart data={chartRows} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
               {GRID}
               <XAxis dataKey="label" tick={AXIS} />
               <YAxis tick={AXIS}
                 label={{ value: 'voltage drop, percent', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
               <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-              <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+              <Legend {...LEGEND_PROPS} />
               {worstDropPct > study.maxDropPct && (
                 <ReferenceArea y1={study.maxDropPct} y2={worstDropPct} fill={seriesColor(3)} fillOpacity={0.1} />
               )}

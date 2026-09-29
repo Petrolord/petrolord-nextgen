@@ -4,7 +4,7 @@ import {
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
 import ChartFrame from '@/components/charts/ChartFrame';
-import { GRID_STYLE, TOOLTIP_STYLE, CHART_COLORS } from '@/utils/chartTheme';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
 import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import {
   PUBLISHED_DESIGN_IDS, CATALOGUE_PORTS_IN, GAS_LIFT_THRESHOLDS,
@@ -101,18 +101,18 @@ const Spacing = () => {
         </TileGrid>
       </div>
       <ChartFrame height={256} className="mt-3">
-        <ComposedChart data={step.iterates} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+        <ComposedChart data={step.iterates} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
           {GRID}
-          <XAxis dataKey="iterate" tick={AXIS}
-            label={{ value: 'iterate', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="iterate" tick={AXIS}
+            label={{ value: 'iterate', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis yAxisId="d" tick={AXIS}
             label={{ value: 'depth, ft TVD', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis yAxisId="m" orientation="right" tick={AXIS}
             label={{ value: 'move this iterate, ft', angle: 90, position: 'insideRight', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceLine yAxisId="d" y={step.convergedFt} stroke={seriesColor(4)} strokeDasharray="4 3"
-            label={{ value: 'the fixed point', fill: seriesColor(4), fontSize: 10, position: 'right' }} />
+            label={{ value: 'the fixed point', fill: seriesColor(4), fontSize: 10, position: 'insideTopRight' }} />
           <Line yAxisId="d" type="monotone" dataKey="atFt" name="the depth this iterate was evaluated at"
             stroke={seriesColor(1)} isAnimationActive={false} />
           <Bar yAxisId="m" dataKey="moveFt" name="how far the next iterate moves it" fill={seriesColor(0)} isAnimationActive={false} />
@@ -294,16 +294,16 @@ const Valve = () => {
         </TileGrid>
       </div>
       <ChartFrame height={288} className="mt-3">
-        <ComposedChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+        <ComposedChart data={rows} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
           {GRID}
-          <XAxis dataKey="valve" tick={AXIS}
-            label={{ value: 'valve, top to bottom', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="valve" tick={AXIS}
+            label={{ value: 'valve, top to bottom', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis yAxisId="p" tick={AXIS} domain={['auto', 'auto']}
             label={{ value: 'pressure, psia', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis yAxisId="r" orientation="right" tick={AXIS}
             label={{ value: 'port over bellows', angle: 90, position: 'insideRight', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <Line yAxisId="p" type="monotone" dataKey="pInjAtDepthPsia" name="injection pressure at valve depth"
             stroke={seriesColor(1)} isAnimationActive={false} />
           <Line yAxisId="p" type="monotone" dataKey="domeAtTempPsia" name="dome AT VALVE TEMPERATURE"
@@ -416,14 +416,14 @@ const Valve = () => {
           port choice commits a valve to.
         </p>
         <ChartFrame height={224}>
-          <LineChart data={data.geometry} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          <LineChart data={data.geometry} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
             {GRID}
-            <XAxis dataKey="portIdIn" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
-              label={{ value: 'port inside diameter, in', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+            <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="portIdIn" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
+              label={{ value: 'port inside diameter, in', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
             <YAxis tick={AXIS}
               label={{ value: 'one over one minus R', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
             <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+            <Legend {...LEGEND_PROPS} />
             <Line type="monotone" dataKey="oneOverOneMinusR" name="port geometry across both bellows families"
               stroke={seriesColor(1)} isAnimationActive={false} />
           </LineChart>
@@ -471,14 +471,14 @@ const Spread = () => {
         </TileGrid>
       </div>
       <ChartFrame height={288} className="mt-3">
-        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+        <LineChart data={chart} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
           {GRID}
-          <XAxis dataKey="valve" tick={AXIS}
-            label={{ value: 'valve, top to bottom', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="valve" tick={AXIS}
+            label={{ value: 'valve, top to bottom', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis tick={AXIS}
             label={{ value: 'spread, psi', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceLine y={0} stroke={seriesColor(4)}
             label={{ value: 'a spread cannot be below this line', fill: seriesColor(4), fontSize: 10, position: 'insideBottomRight' }} />
           {data.ipoRows.map((s, k) => (
@@ -564,14 +564,14 @@ const Throughput = () => {
         </TileGrid>
       </div>
       <ChartFrame height={288} className="mt-3">
-        <LineChart data={data.regime} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+        <LineChart data={data.regime} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
           {GRID}
-          <XAxis dataKey="ratio" type="number" domain={[0, 1]} tick={AXIS}
-            label={{ value: 'downstream over upstream pressure', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="ratio" type="number" domain={[0, 1]} tick={AXIS}
+            label={{ value: 'downstream over upstream pressure', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis tick={AXIS}
             label={{ value: 'gas through the port, Mscf/d', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 4)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceLine x={critical} stroke={seriesColor(4)} strokeDasharray="4 3"
             label={{ value: 'critical ratio', fill: seriesColor(4), fontSize: 10, position: 'top' }} />
           <Line type="monotone" dataKey="qMscfd" name="Thornhill and Craver across the regime"
@@ -617,16 +617,16 @@ const Throughput = () => {
           once.
         </p>
         <ChartFrame height={256}>
-          <ComposedChart data={ladder} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          <ComposedChart data={ladder} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
             {GRID}
-            <XAxis dataKey="qgiTargetMscfd" type="number" domain={['dataMin', 'dataMax']} tick={AXIS}
-              label={{ value: 'design gas rate, Mscf/d', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+            <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="qgiTargetMscfd" type="number" domain={['dataMin', 'dataMax']} tick={AXIS}
+              label={{ value: 'design gas rate, Mscf/d', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
             <YAxis yAxisId="m" tick={AXIS}
               label={{ value: 'closing margin, psi', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
             <YAxis yAxisId="p" orientation="right" tick={AXIS}
               label={{ value: 'port at valve 1, in', angle: 90, position: 'insideRight', fill: SVG_CHART.note, fontSize: 10 }} />
             <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+            <Legend {...LEGEND_PROPS} />
             <Line yAxisId="m" type="stepAfter" dataKey="stage5MarginPsi"
               name="the margin the verdict turns on" stroke={seriesColor(1)} isAnimationActive={false} />
             <Line yAxisId="p" type="stepAfter" dataKey={(r) => r.ports[0]}

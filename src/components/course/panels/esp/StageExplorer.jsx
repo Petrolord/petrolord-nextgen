@@ -4,7 +4,7 @@ import {
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine, ReferenceArea, ReferenceDot,
 } from 'recharts';
 import ChartFrame from '@/components/charts/ChartFrame';
-import { GRID_STYLE, TOOLTIP_STYLE, CHART_COLORS } from '@/utils/chartTheme';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
 import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import {
   ESP_THRESHOLDS, BEP_SCAN_STEPS, BRASS_LABEL, REFERENCE_CURVE_IDS,
@@ -86,21 +86,21 @@ const Fit = () => {
         </TileGrid>
       </div>
       <ChartFrame height={288} className="mt-3">
-        <ComposedChart data={residuals} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+        <ComposedChart data={residuals} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
           {GRID}
-          <XAxis dataKey="qBpd" type="number" domain={[fit.qMin, fit.qMax]} tick={AXIS}
-            label={{ value: 'rate, bbl/d', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="qBpd" type="number" domain={[fit.qMin, fit.qMax]} tick={AXIS}
+            label={{ value: 'rate, bbl/d', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis tick={AXIS}
             label={{ value: 'head per stage, ft', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 4)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <Line type="monotone" dataKey="fitHeadFt" name="the cubic the engine fitted"
             stroke={seriesColor(1)} dot={false} isAnimationActive={false} />
           <Scatter dataKey="publishedHeadFt" name="the five published points" fill={seriesColor(0)} isAnimationActive={false} />
         </ComposedChart>
       </ChartFrame>
       <ChartFrame height={224} className="mt-3">
-        <BarChart data={residuals} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+        <BarChart data={residuals} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
           {GRID}
           <XAxis dataKey="qBpd" tick={AXIS}
             label={{ value: 'rate, bbl/d', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
@@ -109,7 +109,7 @@ const Fit = () => {
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
           <ReferenceLine y={0} stroke={SVG_CHART.reference} />
           <ReferenceLine y={fit.headRmse} stroke={seriesColor(1)} strokeDasharray="5 3"
-            label={{ value: 'root mean square', fill: seriesColor(1), fontSize: 10, position: 'right' }} />
+            label={{ value: 'root mean square', fill: seriesColor(1), fontSize: 10, position: 'insideTopRight' }} />
           <Bar dataKey="headResidualFt" name="miss at this point" fill={seriesColor(0)} isAnimationActive={false} />
         </BarChart>
       </ChartFrame>
@@ -243,14 +243,14 @@ const Bep = () => {
         </TileGrid>
       </div>
       <ChartFrame height={288} className="mt-3">
-        <LineChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+        <LineChart data={rows} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
           {GRID}
-          <XAxis dataKey="qBpd" type="number" domain={['dataMin', 'dataMax']} tick={AXIS}
-            label={{ value: 'rate, bbl/d', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="qBpd" type="number" domain={['dataMin', 'dataMax']} tick={AXIS}
+            label={{ value: 'rate, bbl/d', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis tick={AXIS} domain={[0, 1]}
             label={{ value: 'efficiency, fraction', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceArea x1={bep.recommendedLowBpd} x2={bep.recommendedHighBpd} fill={seriesColor(1)} fillOpacity={0.07} />
           <ReferenceLine x={bep.qBpd} stroke={seriesColor(1)} strokeDasharray="5 3"
             label={{ value: 'the scan winner', fill: seriesColor(1), fontSize: 10, position: 'top' }} />
@@ -343,16 +343,16 @@ const Duty = () => {
         </TileGrid>
       </div>
       <ChartFrame height={288} className="mt-3">
-        <ComposedChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+        <ComposedChart data={rows} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
           {GRID}
-          <XAxis dataKey="qBpd" type="number" domain={['dataMin', 'dataMax']} tick={AXIS}
-            label={{ value: 'rate, bbl/d', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="qBpd" type="number" domain={['dataMin', 'dataMax']} tick={AXIS}
+            label={{ value: 'rate, bbl/d', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis yAxisId="head" tick={AXIS}
             label={{ value: 'head, ft', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis yAxisId="power" orientation="right" tick={AXIS}
             label={{ value: 'efficiency and brake power', angle: 90, position: 'insideRight', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceArea yAxisId="head" x1={bep.recommendedLowBpd} x2={bep.recommendedHighBpd}
             fill={seriesColor(1)} fillOpacity={0.07} />
           <ReferenceLine yAxisId="head" x={bep.recommendedLowBpd} stroke={seriesColor(4)} strokeDasharray="5 3"
@@ -469,16 +469,16 @@ const Edge = () => {
         </TileGrid>
       </div>
       <ChartFrame height={320} className="mt-3">
-        <ComposedChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+        <ComposedChart data={rows} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
           {GRID}
-          <XAxis dataKey="qBpd" type="number" domain={['dataMin', 'dataMax']} tick={AXIS}
-            label={{ value: 'rate, bbl/d', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="qBpd" type="number" domain={['dataMin', 'dataMax']} tick={AXIS}
+            label={{ value: 'rate, bbl/d', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis yAxisId="head" tick={AXIS}
             label={{ value: 'head per stage, ft', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis yAxisId="eff" orientation="right" tick={AXIS}
             label={{ value: 'efficiency and brake power', angle: 90, position: 'insideRight', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           {/* The region the whole view exists for: everything the fit says
               between the last point it was given and the rate its own head
               reaches nought. Both bounds are engine values. */}

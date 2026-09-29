@@ -4,7 +4,7 @@ import {
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine, ReferenceDot,
 } from 'recharts';
 import ChartFrame from '@/components/charts/ChartFrame';
-import { GRID_STYLE, TOOLTIP_STYLE, CHART_COLORS } from '@/utils/chartTheme';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
 import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import {
   PUBLISHED_DESIGN_IDS, KNIFE_EDGE_ID, KNIFE_EDGE_DECREMENTS,
@@ -100,16 +100,16 @@ const Stages = () => {
         </TileGrid>
       </div>
       <ChartFrame height={288} className="mt-3">
-        <ComposedChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+        <ComposedChart data={chart} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
           {GRID}
-          <XAxis dataKey="stage" tick={AXIS}
-            label={{ value: 'unloading stage', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="stage" tick={AXIS}
+            label={{ value: 'unloading stage', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis yAxisId="p" tick={AXIS} domain={['auto', 'auto']}
             label={{ value: 'pressure, psia', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis yAxisId="n" orientation="right" tick={AXIS} allowDecimals={false}
             label={{ value: 'valves above still open', angle: 90, position: 'insideRight', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 4)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <Bar yAxisId="n" dataKey="openAbove" name="valves ABOVE this one still open" fill={seriesColor(3)} isAnimationActive={false} />
           <Line yAxisId="p" type="monotone" dataKey="injectionAtDepthPsia" name="injection pressure at the operating valve"
             stroke={seriesColor(1)} isAnimationActive={false} />
@@ -268,14 +268,14 @@ const KnifeEdge = () => {
         </p>
       </div>
       <ChartFrame height={288} className="mt-3">
-        <ComposedChart data={mech} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+        <ComposedChart data={mech} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
           {GRID}
-          <XAxis dataKey="valve" tick={AXIS}
-            label={{ value: 'valve, top to bottom', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="valve" tick={AXIS}
+            label={{ value: 'valve, top to bottom', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis tick={AXIS}
             label={{ value: 'pressure, psi', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 9)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceLine y={0} stroke={seriesColor(4)} strokeDasharray="4 3"
             label={{ value: 'the edge', fill: seriesColor(4), fontSize: 10, position: 'insideBottomRight' }} />
           <Bar dataKey="spreadLessDropPsi" name="spread LESS the casing drop, which is the open flag" fill={seriesColor(4)} isAnimationActive={false} />
@@ -338,14 +338,14 @@ const KnifeEdge = () => {
           <Tile label="Nearest decrement that flips it" value={nearestFlip ? fmt(nearestFlip.decrementPsi, 4) : 'n/a'} unit={nearestFlip ? 'psi per valve' : ''} />
         </TileGrid>
         <ChartFrame height={256} className="mt-3">
-          <LineChart data={sweep} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          <LineChart data={sweep} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
             {GRID}
-            <XAxis dataKey="decrementPsi" type="number" domain={['dataMin', 'dataMax']} tick={AXIS}
-              label={{ value: 'surface decrement, psi per valve', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+            <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="decrementPsi" type="number" domain={['dataMin', 'dataMax']} tick={AXIS}
+              label={{ value: 'surface decrement, psi per valve', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
             <YAxis tick={AXIS}
               label={{ value: 'closing margin, psi', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
             <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 9)} />
-            <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+            <Legend {...LEGEND_PROPS} />
             <ReferenceLine y={0} stroke={seriesColor(4)} strokeDasharray="4 3"
               label={{ value: 'the verdict flips here', fill: seriesColor(4), fontSize: 10, position: 'insideBottomRight' }} />
             <ReferenceLine x={k.decrementPsi} stroke={SVG_CHART.reference}
@@ -457,14 +457,14 @@ const InjectionPoint = () => {
           ships, on this second run.
         </p>
         <ChartFrame height={288}>
-          <LineChart data={tab} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          <LineChart data={tab} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
             {GRID}
-            <XAxis dataKey="segments" type="number" scale="log" domain={['dataMin', 'dataMax']} tick={AXIS}
-              label={{ value: 'segments the traverse is tabulated at', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+            <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="segments" type="number" scale="log" domain={['dataMin', 'dataMax']} tick={AXIS}
+              label={{ value: 'segments the traverse is tabulated at', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
             <YAxis tick={AXIS}
               label={{ value: 'true residual over reported residual', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
             <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 4)} />
-            <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+            <Legend {...LEGEND_PROPS} />
             {atShipped ? (
               <ReferenceLine x={atShipped.segments} stroke={SVG_CHART.reference}
                 label={{ value: 'the shipped spacing', fill: SVG_CHART.note, fontSize: 10, position: 'top' }} />
@@ -475,14 +475,14 @@ const InjectionPoint = () => {
           </LineChart>
         </ChartFrame>
         <ChartFrame height={256} className="mt-3">
-          <LineChart data={tab} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          <LineChart data={tab} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
             {GRID}
-            <XAxis dataKey="segments" type="number" scale="log" domain={['dataMin', 'dataMax']} tick={AXIS}
-              label={{ value: 'segments the traverse is tabulated at', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+            <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="segments" type="number" scale="log" domain={['dataMin', 'dataMax']} tick={AXIS}
+              label={{ value: 'segments the traverse is tabulated at', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
             <YAxis tick={AXIS}
               label={{ value: 'psi', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
             <Tooltip contentStyle={TOOLTIP} formatter={(v) => tiny(v)} />
-            <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+            <Legend {...LEGEND_PROPS} />
             <ReferenceLine y={0} stroke={SVG_CHART.reference} />
             <Line type="monotone" dataKey="reportedResidualPsi" name="the residual the function REPORTS"
               stroke={seriesColor(1)} dot isAnimationActive={false} />
@@ -629,14 +629,14 @@ const Sweep = () => {
         </TileGrid>
       </div>
       <ChartFrame height={256} className="mt-3">
-        <LineChart data={dec} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+        <LineChart data={dec} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
           {GRID}
-          <XAxis dataKey="decrementPsi" type="number" domain={['dataMin', 'dataMax']} tick={AXIS}
-            label={{ value: 'surface decrement, psi per valve', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="decrementPsi" type="number" domain={['dataMin', 'dataMax']} tick={AXIS}
+            label={{ value: 'surface decrement, psi per valve', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis tick={AXIS}
             label={{ value: 'closing margin, psi', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 9)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceLine y={0} stroke={seriesColor(4)} strokeDasharray="4 3"
             label={{ value: 'the verdict flips here', fill: seriesColor(4), fontSize: 10, position: 'insideBottomRight' }} />
           <Line type="monotone" dataKey="stage5MarginPsi" name="THE SAME MARGIN, swept over the decrement"
@@ -644,14 +644,14 @@ const Sweep = () => {
         </LineChart>
       </ChartFrame>
       <ChartFrame height={256} className="mt-3">
-        <LineChart data={gas} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+        <LineChart data={gas} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
           {GRID}
-          <XAxis dataKey="qgiTargetMscfd" type="number" domain={['dataMin', 'dataMax']} tick={AXIS}
-            label={{ value: 'design gas rate, Mscf/d', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="qgiTargetMscfd" type="number" domain={['dataMin', 'dataMax']} tick={AXIS}
+            label={{ value: 'design gas rate, Mscf/d', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis tick={AXIS}
             label={{ value: 'closing margin, psi', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 9)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceLine y={0} stroke={seriesColor(4)} strokeDasharray="4 3"
             label={{ value: 'the verdict flips here', fill: seriesColor(4), fontSize: 10, position: 'insideBottomRight' }} />
           <Line type="stepAfter" dataKey="stage5MarginPsi" name="THE SAME MARGIN, swept over the design gas rate"

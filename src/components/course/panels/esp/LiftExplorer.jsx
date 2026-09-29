@@ -4,7 +4,7 @@ import {
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
 import ChartFrame from '@/components/charts/ChartFrame';
-import { GRID_STYLE, TOOLTIP_STYLE, CHART_COLORS } from '@/utils/chartTheme';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
 import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import {
   ESP_THRESHOLDS, PSI_PER_FT_SG, EXACT_PSI_PER_FT_SG, REQUIREMENT_SWEEP_FT,
@@ -92,14 +92,14 @@ const Intake = ({ c }) => {
         </TileGrid>
       </div>
       <ChartFrame height={288} className="mt-3">
-        <ComposedChart data={sweep} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+        <ComposedChart data={sweep} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
           {GRID}
-          <XAxis dataKey="separatorEfficiency" type="number" domain={[0, 1]} tick={AXIS}
-            label={{ value: 'separator efficiency, fraction', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="separatorEfficiency" type="number" domain={[0, 1]} tick={AXIS}
+            label={{ value: 'separator efficiency, fraction', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis tick={AXIS}
             label={{ value: 'gas volume fraction', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           {/* BOTH published limits, drawn separately. They are checked in
               order, so only one of them ever decides a verdict, and neither
               of them is ever compared against the stream's own fraction. */}
@@ -236,7 +236,7 @@ const Tdh = ({ c }) => {
         </TileGrid>
       </div>
       <ChartFrame height={256} className="mt-3">
-        <BarChart data={parts} layout="vertical" margin={{ top: 10, right: 30, bottom: 18, left: 110 }}>
+        <BarChart data={parts} layout="vertical" margin={{ top: 20, right: 30, bottom: 18, left: 110 }}>
           {GRID}
           <XAxis type="number" tick={AXIS}
             label={{ value: 'feet of the fluid being pumped', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
@@ -337,16 +337,16 @@ const Stack = ({ c }) => {
         </TileGrid>
       </div>
       <ChartFrame height={288} className="mt-3">
-        <ComposedChart data={sweep} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+        <ComposedChart data={sweep} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
           {GRID}
-          <XAxis dataKey="stages" type="number" domain={['dataMin', 'dataMax']} tick={AXIS}
-            label={{ value: 'stages the sizing bought', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="stages" type="number" domain={['dataMin', 'dataMax']} tick={AXIS}
+            label={{ value: 'stages the sizing bought', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis yAxisId="pct" tick={AXIS}
             label={{ value: 'margin, percent', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis yAxisId="stg" orientation="right" domain={[0, 1]} tick={AXIS}
             label={{ value: 'margin, in stages', angle: 90, position: 'insideRight', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceLine yAxisId="stg" y={1} stroke={seriesColor(2)} strokeWidth={2}
             label={{ value: 'one whole stage, the bound', fill: seriesColor(2), fontSize: 10, position: 'insideTopRight' }} />
           <Line yAxisId="pct" type="monotone" dataKey="headMarginPct" name="margin, percent of the requirement"
@@ -494,7 +494,7 @@ const Gradient = ({ c }) => {
         </TileGrid>
       </div>
       <ChartFrame height={256} className="mt-3">
-        <BarChart data={rows} margin={{ top: 10, right: 20, bottom: 40, left: 0 }}>
+        <BarChart data={rows} margin={{ top: 20, right: 20, bottom: 40, left: 0 }}>
           {GRID}
           <XAxis dataKey="id" tick={AXIS} interval={0} angle={-12} textAnchor="end" height={50} />
           <YAxis tick={AXIS}

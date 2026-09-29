@@ -4,7 +4,7 @@ import {
   ReferenceLine, ReferenceDot,
 } from 'recharts';
 import ChartFrame from '@/components/charts/ChartFrame';
-import { GRID_STYLE, TOOLTIP_STYLE, CHART_COLORS } from '@/utils/chartTheme';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
 import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import {
   TEACHING_WELLS, FORCADOS_3, CS_STEP_LIST, PUBLISHED_CS_STEPS,
@@ -105,14 +105,14 @@ const Shape = ({ W }) => {
         </TileGrid>
       </div>
       <ChartFrame height={256} className="mt-3">
-        <LineChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+        <LineChart data={rows} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
           {GRID}
-          <XAxis dataKey="qStbd" type="number" tick={AXIS}
-            label={{ value: 'rate, stb/d', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="qStbd" type="number" tick={AXIS}
+            label={{ value: 'rate, stb/d', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis tick={AXIS}
             label={{ value: 'pressure the tubing demands, psia', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 3)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceDot x={readings.trueMinimumQStbd} y={readings.trueMinimumBhpPsia} r={5}
             fill={seriesColor(4)} stroke="none" />
           <ReferenceLine x={readings.trueMinimumQStbd} stroke={seriesColor(4)} strokeDasharray="5 3"
@@ -122,14 +122,14 @@ const Shape = ({ W }) => {
         </LineChart>
       </ChartFrame>
       <ChartFrame height={224}>
-        <LineChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+        <LineChart data={rows} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
           {GRID}
-          <XAxis dataKey="qStbd" type="number" tick={AXIS}
-            label={{ value: 'rate, stb/d', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="qStbd" type="number" tick={AXIS}
+            label={{ value: 'rate, stb/d', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis tick={AXIS}
             label={{ value: 'the two terms, psi', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 3)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceLine x={crossover.qStbd} stroke={SVG_CHART.reference} strokeDasharray="5 3"
             label={{ value: 'the terms cross here', fill: SVG_CHART.note, fontSize: 10, position: 'top' }} />
           <Line type="monotone" dataKey="gravityPsi" name="gravity: the weight of the column, falling"
@@ -229,16 +229,16 @@ const Minimum = ({ W }) => {
         </TileGrid>
       </div>
       <ChartFrame height={256} className="mt-3">
-        <LineChart data={rows} margin={{ top: 10, right: 30, bottom: 18, left: 0 }}>
+        <LineChart data={rows} margin={{ top: 20, right: 30, bottom: 18, left: 0 }}>
           {GRID}
-          <XAxis dataKey={key} type="number" tick={AXIS}
-            label={{ value: LEVERS.find((l) => l[0] === lever)[1], position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey={key} type="number" tick={AXIS}
+            label={{ value: LEVERS.find((l) => l[0] === lever)[1], position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis yAxisId="q" tick={AXIS}
             label={{ value: 'rate at the bottom, stb/d', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis yAxisId="p" orientation="right" tick={AXIS}
             label={{ value: 'pressure at the bottom, psia', angle: 90, position: 'insideRight', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 4)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <Line yAxisId="q" type="monotone" dataKey="minQStbd" name="rate at the bottom of the J"
             stroke={seriesColor(1)} dot isAnimationActive={false} />
           <Line yAxisId="p" type="monotone" dataKey="minBhpPsia" name="pressure at the bottom of the J"
@@ -378,15 +378,15 @@ const GasColumn = ({ W }) => {
         </table>
       </div>
       <ChartFrame height={256} className="mt-3">
-        <LineChart data={table} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+        <LineChart data={table} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
           {GRID}
-          <XAxis dataKey="steps" type="number" scale="log" domain={[2, 256]} tick={AXIS}
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="steps" type="number" scale="log" domain={[2, 256]} tick={AXIS}
             ticks={CS_STEP_LIST}
-            label={{ value: 'sub-intervals the column is marched in', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+            label={{ value: 'sub-intervals the column is marched in', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis tick={AXIS}
             label={{ value: 'gap to the converged march, psi', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => tiny(v)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceLine y={0} stroke={SVG_CHART.reference} />
           <Line type="monotone" dataKey="gravityOnlyErrorPsi" name={`${two.gravityLabel}, gravity only`}
             stroke={seriesColor(0)} dot isAnimationActive={false} />
@@ -477,7 +477,7 @@ const SecondOpinion = ({ W }) => {
         </TileGrid>
       </div>
       <ChartFrame height={224} className="mt-3">
-        <LineChart data={bars} margin={{ top: 10, right: 16, bottom: 24, left: 20 }}>
+        <LineChart data={bars} margin={{ top: 20, right: 16, bottom: 24, left: 20 }}>
           {GRID}
           <XAxis dataKey="name" tick={{ ...AXIS_TICK, fontSize: 9 }} interval={0} />
           <YAxis domain={['auto', 'auto']} tick={AXIS} tickFormatter={(v) => fmt(v, 2)}

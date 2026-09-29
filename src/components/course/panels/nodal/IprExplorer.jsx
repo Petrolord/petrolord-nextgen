@@ -4,7 +4,7 @@ import {
   Tooltip, Legend, ReferenceLine, ReferenceDot,
 } from 'recharts';
 import ChartFrame from '@/components/charts/ChartFrame';
-import { GRID_STYLE, TOOLTIP_STYLE, CHART_COLORS } from '@/utils/chartTheme';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
 import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import {
   TEACHING_WELLS, BONNY_7, linspace,
@@ -97,14 +97,14 @@ const Models = ({ W }) => {
         </TileGrid>
       </div>
       <ChartFrame height={288} className="mt-3">
-        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+        <LineChart data={chart} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
           {GRID}
-          <XAxis dataKey="pwfPsia" type="number" reversed domain={[0, W.prPsia]} tick={AXIS}
-            label={{ value: 'flowing bottomhole pressure, psia', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="pwfPsia" type="number" reversed domain={[0, W.prPsia]} tick={AXIS}
+            label={{ value: 'flowing bottomhole pressure, psia', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis tick={AXIS}
             label={{ value: 'rate, stb/d', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 3)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceLine x={W.pbPsia} stroke={seriesColor(4)} strokeDasharray="5 3"
             label={{ value: 'bubble point', fill: seriesColor(4), fontSize: 10, position: 'top' }} />
           <ReferenceLine x={W.testPwfPsia} stroke={seriesColor(0)} strokeDasharray="5 3"
@@ -326,14 +326,14 @@ const Reading = ({ W }) => {
         </TileGrid>
       </div>
       <ChartFrame height={288} className="mt-3">
-        <LineChart data={curve} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+        <LineChart data={curve} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
           {GRID}
-          <XAxis dataKey="q" type="number" domain={[0, readings.aofStbd]} tick={AXIS}
-            label={{ value: 'rate, stb/d', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="q" type="number" domain={[0, readings.aofStbd]} tick={AXIS}
+            label={{ value: 'rate, stb/d', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis dataKey="pwf" domain={[0, W.prPsia]} tick={AXIS}
             label={{ value: 'flowing bottomhole pressure, psia', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 3)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <Line type="monotone" dataKey="pwf" name="the composite inflow curve"
             stroke={seriesColor(1)} dot={false} isAnimationActive={false} />
           <ReferenceLine y={fwdRow.pwfPsia} stroke={seriesColor(0)} strokeDasharray="4 3"
@@ -500,7 +500,7 @@ const Aof = ({ W }) => {
         </TileGrid>
       </div>
       <ChartFrame height={224} className="mt-3">
-        <BarChart data={bars} margin={{ top: 10, right: 16, bottom: 5, left: 20 }}>
+        <BarChart data={bars} margin={{ top: 20, right: 16, bottom: 5, left: 20 }}>
           {GRID}
           <XAxis dataKey="name" tick={{ ...AXIS_TICK, fontSize: 10 }} />
           <YAxis tick={AXIS} tickFormatter={(v) => fmt(v, 0)}

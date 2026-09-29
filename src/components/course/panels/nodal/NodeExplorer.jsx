@@ -4,7 +4,7 @@ import {
   Tooltip, Legend, ReferenceLine, ReferenceDot,
 } from 'recharts';
 import ChartFrame from '@/components/charts/ChartFrame';
-import { GRID_STYLE, TOOLTIP_STYLE, CHART_COLORS } from '@/utils/chartTheme';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
 import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import {
   TEACHING_WELLS, ESCRAVOS_9, SCAN_GRIDS, DEFAULT_NGRID, SCAN_REVERSAL_PWH_PSIA,
@@ -123,14 +123,14 @@ const Crossings = ({ W }) => {
         </TileGrid>
       </div>
       <ChartFrame height={320} className="mt-3">
-        <LineChart data={sweep} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+        <LineChart data={sweep} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
           {GRID}
-          <XAxis dataKey="qStbd" type="number" domain={[0, readings.qMaxStbd]} tick={AXIS}
-            label={{ value: 'rate, stb/d', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="qStbd" type="number" domain={[0, readings.qMaxStbd]} tick={AXIS}
+            label={{ value: 'rate, stb/d', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis domain={[0, top]} allowDataOverflow tick={AXIS}
             label={{ value: 'pressure at the node, psia', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 3)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceLine y={readings.deadColumnPsia} stroke={SVG_CHART.reference} strokeDasharray="2 4"
             label={{ value: 'the dead column', fill: SVG_CHART.note, fontSize: 10, position: 'insideTopLeft' }} />
           <Line type="monotone" dataKey="iprPwfPsia" name="inflow: what the reservoir will give"
@@ -254,15 +254,15 @@ const Residual = ({ W }) => {
         </TileGrid>
       </div>
       <ChartFrame height={320} className="mt-3">
-        <LineChart data={sweep} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+        <LineChart data={sweep} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
           {GRID}
-          <XAxis dataKey="qStbd" type="number" domain={[0, 'dataMax']} tick={AXIS}
-            label={{ value: 'rate, stb/d', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="qStbd" type="number" domain={[0, 'dataMax']} tick={AXIS}
+            label={{ value: 'rate, stb/d', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis domain={floor === null ? ['auto', 'auto'] : [floor, -floor]}
             allowDataOverflow={floor !== null} tick={AXIS}
             label={{ value: 'residual, outflow less inflow, psi', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 4)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceLine y={0} stroke={SVG_CHART.label} strokeWidth={2}
             label={{ value: 'zero: the two curves agree here', fill: SVG_CHART.label, fontSize: 10, position: 'insideTopRight' }} />
           <ReferenceDot x={dip.qStbd} y={dip.residualPsi} r={5} fill={seriesColor(4)} stroke="none"
@@ -413,14 +413,14 @@ const Resolution = ({ W }) => {
         </table>
       </div>
       <ChartFrame height={256} className="mt-3">
-        <BarChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+        <BarChart data={rows} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
           {GRID}
-          <XAxis dataKey="nGrid" tick={AXIS} interval={0}
-            label={{ value: 'nGrid, the number of points the solver scans', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="nGrid" tick={AXIS} interval={0}
+            label={{ value: 'nGrid, the number of points the solver scans', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis tick={AXIS}
             label={{ value: 'interval width, stb/d', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceLine y={truth.windowStbd} stroke={SVG_CHART.label} strokeWidth={2} strokeDasharray="5 3"
             label={{ value: `the stable window, ${fmt(truth.windowStbd, 3)} stb/d`, fill: SVG_CHART.label, fontSize: 10, position: 'insideTopRight' }} />
           <Bar dataKey="spacingStbd" name="one scan interval" isAnimationActive={false}>
@@ -568,16 +568,16 @@ const Sweep = ({ W }) => {
         </TileGrid>
       </div>
       <ChartFrame height={288} className="mt-3">
-        <LineChart data={series} margin={{ top: 10, right: 30, bottom: 18, left: 0 }}>
+        <LineChart data={series} margin={{ top: 20, right: 30, bottom: 18, left: 0 }}>
           {GRID}
-          <XAxis dataKey="pWhPsia" type="number" tick={AXIS}
-            label={{ value: 'wellhead pressure, psia', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="pWhPsia" type="number" tick={AXIS}
+            label={{ value: 'wellhead pressure, psia', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis yAxisId="q" tick={AXIS}
             label={{ value: 'operating rate, stb/d', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis yAxisId="w" orientation="right" tick={AXIS}
             label={{ value: 'stable window, stb/d', angle: 90, position: 'insideRight', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 4)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           {dead.map((r) => (
             <ReferenceLine key={r.pWhPsia} yAxisId="q" x={r.pWhPsia} stroke={seriesColor(3)} strokeDasharray="4 3"
               label={{ value: 'DEAD', fill: seriesColor(3), fontSize: 10, position: 'top' }} />

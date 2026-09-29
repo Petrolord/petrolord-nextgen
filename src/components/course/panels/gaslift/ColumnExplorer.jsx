@@ -4,7 +4,7 @@ import {
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine, ReferenceDot,
 } from 'recharts';
 import ChartFrame from '@/components/charts/ChartFrame';
-import { GRID_STYLE, TOOLTIP_STYLE, CHART_COLORS } from '@/utils/chartTheme';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
 import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import {
   RULE_OF_THUMB_PSI_PER_FT, REFINEMENT_STEPS, CLOSED_FORM_STEPS, PUBLISHED_DESIGN_IDS,
@@ -82,14 +82,14 @@ const Column = () => {
         </TileGrid>
       </div>
       <ChartFrame height={288} className="mt-3">
-        <LineChart data={c.rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+        <LineChart data={c.rows} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
           {GRID}
-          <XAxis dataKey="tvdFt" type="number" tick={AXIS}
-            label={{ value: 'depth, ft TVD', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="tvdFt" type="number" tick={AXIS}
+            label={{ value: 'depth, ft TVD', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis tick={AXIS} domain={['auto', 'auto']}
             label={{ value: 'pressure, psia', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 4)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <Line type="monotone" dataKey="enginePsia" name="the gas column the engine marches"
             stroke={seriesColor(1)} dot={false} isAnimationActive={false} />
           <Line type="monotone" dataKey="flatPsia" name={`the flat ${fmt(RULE_OF_THUMB_PSI_PER_FT, 3)} psi/ft rule`}
@@ -97,7 +97,7 @@ const Column = () => {
         </LineChart>
       </ChartFrame>
       <ChartFrame height={224} className="mt-3">
-        <LineChart data={c.rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+        <LineChart data={c.rows} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
           {GRID}
           <XAxis dataKey="tvdFt" type="number" tick={AXIS}
             label={{ value: 'depth, ft TVD', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
@@ -190,16 +190,16 @@ const Gradient = () => {
         </TileGrid>
       </div>
       <ChartFrame height={320} className="mt-3">
-        <LineChart data={g.control} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+        <LineChart data={g.control} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
           {GRID}
-          <XAxis dataKey="tvdFt" type="number" tick={AXIS}
-            label={{ value: 'depth, ft TVD', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="tvdFt" type="number" tick={AXIS}
+            label={{ value: 'depth, ft TVD', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis tick={AXIS} domain={['auto', 'auto']}
             label={{ value: 'local gradient, psi/ft', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 8)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceLine y={RULE_OF_THUMB_PSI_PER_FT} stroke={seriesColor(2)} strokeDasharray="5 3"
-            label={{ value: 'the flat rule', fill: seriesColor(2), fontSize: 10, position: 'right' }} />
+            label={{ value: 'the flat rule', fill: seriesColor(2), fontSize: 10, position: 'insideTopRight' }} />
           <Line type="monotone" dataKey="geothermalGradientPsiPerFt"
             name="temperature MOVING, the real well" stroke={seriesColor(1)} dot={false} isAnimationActive={false} />
           <Line type="monotone" dataKey="isothermalGradientPsiPerFt"
@@ -305,7 +305,7 @@ const Convergence = () => {
         </TileGrid>
       </div>
       <ChartFrame height={288} className="mt-3">
-        <LineChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+        <LineChart data={rows} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
           {GRID}
           <XAxis dataKey="steps" type="number" scale="log" domain={['dataMin', 'dataMax']} tick={AXIS}
             label={{ value: 'steps in the march', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
@@ -373,14 +373,14 @@ const Convergence = () => {
           <Tile label="Against the engine constant, at the finest step" value={tiny(cf.marches[cf.marches.length - 1].errorAgainstEnginePsi)} unit="psi" />
         </TileGrid>
         <ChartFrame height={256} className="mt-3">
-          <ComposedChart data={cf.marches} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          <ComposedChart data={cf.marches} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
             {GRID}
-            <XAxis dataKey="steps" type="number" scale="log" domain={['dataMin', 'dataMax']} tick={AXIS}
-              label={{ value: 'steps in the march', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+            <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="steps" type="number" scale="log" domain={['dataMin', 'dataMax']} tick={AXIS}
+              label={{ value: 'steps in the march', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
             <YAxis tick={AXIS}
               label={{ value: 'march less closed form, psi', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
             <Tooltip contentStyle={TOOLTIP} formatter={(v) => tiny(v)} />
-            <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+            <Legend {...LEGEND_PROPS} />
             <ReferenceLine y={0} stroke={SVG_CHART.reference} />
             <Line type="monotone" dataKey="errorAgainstTextbookPsi"
               name="against the TEXTBOOK form, which parks" stroke={seriesColor(2)} dot isAnimationActive={false} />
@@ -459,14 +459,14 @@ const Lines = () => {
         </TileGrid>
       </div>
       <ChartFrame height={320} className="mt-3">
-        <LineChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+        <LineChart data={rows} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
           {GRID}
-          <XAxis dataKey="tvdFt" type="number" domain={['dataMin', 'dataMax']} tick={AXIS}
-            label={{ value: 'depth, ft TVD', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="tvdFt" type="number" domain={['dataMin', 'dataMax']} tick={AXIS}
+            label={{ value: 'depth, ft TVD', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis tick={AXIS} domain={['auto', 'auto']}
             label={{ value: 'pressure, psia', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 4)} />
-          <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+          <Legend {...LEGEND_PROPS} />
           <ReferenceLine x={x.tvdFt} stroke={seriesColor(4)} strokeDasharray="4 3"
             label={{ value: 'top valve', fill: seriesColor(4), fontSize: 10, position: 'top' }} />
           <Line type="monotone" dataKey="injectionPsia" name="the injection gas in the annulus"
