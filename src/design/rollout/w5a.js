@@ -1,3 +1,10 @@
-// Batch 5A routes (docs/scope/DesignSystem-Rollout.md section 3). Empty until
-// the batch lands; the batch lists its routes here and nowhere else.
-export default [];
+// Batch 5A routes (docs/scope/DesignSystem-Rollout.md section 3): the
+// facilities I course apps. Exact paths: each app's course reader pages are
+// batch 1C's pattern entry.
+export default [
+  '/dashboard/apps/separation',
+  '/dashboard/apps/linesizing',
+  '/dashboard/apps/rotating',
+  '/dashboard/apps/gasprocessing',
+  '/dashboard/apps/relief',
+];
