@@ -9,8 +9,8 @@ const ScheduleReportModal = ({ isOpen, onClose, reportType, filters }) => {
     const handleNotImplemented = () => {
         toast({
             variant: "default",
-            title: "🚧 Feature In Progress",
-            description: "This scheduling feature isn't implemented yet—but stay tuned!",
+            title: "Coming soon",
+            description: "Scheduled report delivery is not available yet.",
         });
         onClose();
     };

@@ -66,7 +66,7 @@ const AdminComplianceReportsPage = () => {
     const [selectedResourceType, setSelectedResourceType] = useState('ALL');
     const [isScheduleModalOpen, setIsScheduleModalOpen] = useState(false);
 
-    const handleNotImplemented = () => toast({ title: "🚧 Feature In Progress", description: "This feature isn't implemented yet—but you can request it!" });
+    const handleNotImplemented = () => toast({ title: 'Coming soon', description: 'Saved report templates are not available yet.' });
 
     useEffect(() => {
         if (reportType === 'user_activity') {
