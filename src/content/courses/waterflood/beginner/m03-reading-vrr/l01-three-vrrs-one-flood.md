@@ -38,7 +38,7 @@ Crucially, the rolling VRR is not the average of the monthly ratios. It is the r
 
 {{panel:wf-ledger-explorer}}
 
-Cyan is instantaneous, lime is rolling at the window you select, pink is cumulative. Start with the window at 1 and watch lime sit exactly on cyan. Move it to 3 and watch lime smooth and lag. Move it to 12 and watch lime approach the cumulative line without ever reaching it, because a window of 12 is still shorter than the record.
+Green is instantaneous, blue is rolling at the window you select, violet is cumulative. Start with the window at 1 and watch blue sit exactly on green. Move it to 3 and watch blue smooth and lag. Move it to 12 and watch blue approach the cumulative line without ever reaching it, because a window of 12 is still shorter than the record.
 
 ## The three-number report
 

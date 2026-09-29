@@ -34,7 +34,7 @@ Those three are genuinely different states of knowledge, and collapsing them int
 
 {{panel:wf-ledger-explorer}}
 
-The pink dashed vertical line marks fill-up on the field record. Note where it sits relative to the point where the instantaneous VRR first reached 1.0, which was seven months earlier. Instantaneous crossing and cumulative crossing are different events and the gap between them is the size of the debt.
+The violet dashed vertical line marks fill-up on the field record. Note where it sits relative to the point where the instantaneous VRR first reached 1.0, which was seven months earlier. Instantaneous crossing and cumulative crossing are different events and the gap between them is the size of the debt.
 
 ## Why the milestone matters operationally
 

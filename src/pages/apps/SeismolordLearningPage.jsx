@@ -3,8 +3,11 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import {
-  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, CHART_COLORS } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -121,9 +124,9 @@ const SeismolordLearningPage = () => {
       const res = await submitCapstone(APP, tier, numeric);
       setResult(res);
       if (res.passed && res.certificate_number) {
-        toast({ title: `Capstone passed. ${CERT_LABELS[res.tier] || 'Associate'} certified!`, description: res.certificate_number, className: 'bg-[#BFFF00] text-slate-900' });
+        toast({ title: `Capstone passed. ${CERT_LABELS[res.tier] || 'Associate'} certified!`, description: res.certificate_number, className: 'border-pl-success/40 bg-pl-success-bg text-pl-success-text' });
       } else if (res.passed) {
-        toast({ title: 'Passed — you were already certified', className: 'bg-[#BFFF00] text-slate-900' });
+        toast({ title: 'Passed. You were already certified', className: 'border-pl-success/40 bg-pl-success-bg text-pl-success-text' });
       } else {
         toast({
           title: 'Not passing yet',
@@ -150,7 +153,7 @@ const SeismolordLearningPage = () => {
     || actualRole === 'super_admin';
 
   if (gate.loading) {
-    return <div className="flex items-center justify-center h-64"><Loader2 className="h-8 w-8 animate-spin text-[#BFFF00]" /></div>;
+    return <div className="flex items-center justify-center h-64"><Loader2 className="h-8 w-8 animate-spin text-pl-primary-text" /></div>;
   }
   if (!gate.allowed) return <ScopeGate />;
 
@@ -162,17 +165,17 @@ const SeismolordLearningPage = () => {
       <div className="relative max-w-6xl mx-auto p-6 space-y-6">
         {watermark && (
           <div className="pointer-events-none fixed inset-0 z-0 flex items-center justify-center overflow-hidden">
-            <span className="text-white/5 text-[8rem] font-black -rotate-45 select-none">TRAINING</span>
+            <span className="text-pl-text/5 text-[8rem] font-black -rotate-45 select-none">TRAINING</span>
           </div>
         )}
 
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="relative z-10 space-y-6">
           <div>
-            <h1 className="text-3xl font-bold text-white flex items-center gap-2">
-              <Waves className="h-7 w-7 text-[#BFFF00]" /> Seismic Interpretation
-              <span className="text-xs px-2 py-0.5 rounded-full bg-[#BFFF00]/20 text-[#BFFF00] border border-[#BFFF00]/40">Learning Mode</span>
+            <h1 className="text-3xl font-bold text-pl-text flex items-center gap-2">
+              <Waves className="h-7 w-7 text-pl-primary-text" /> Seismic Interpretation
+              <span className="text-xs px-2 py-0.5 rounded-full bg-pl-accent/15 text-pl-accent-text border border-pl-accent/40">Learning Mode</span>
             </h1>
-            <p className="mt-1 text-gray-400">
+            <p className="mt-1 text-pl-muted">
               Synthetic seismogram on the basic_20 teaching well ({V_OVERBURDEN_MS} m/s teaching time-depth, {DT_MS} ms grid).
               {gate.quota?.own_data_upload === false && ' Your own data upload unlocks at the Associate tier.'}
             </p>
@@ -183,16 +186,16 @@ const SeismolordLearningPage = () => {
           {/* Legacy pocket lessons: superseded by the deep course. They
               only render for tiers whose full content has not shipped. */}
           {!deep && (
-          <Card className="bg-[#1E293B] border-gray-700">
+          <Card className="bg-pl-surface border-pl-border">
             <CardHeader>
-              <CardTitle className="text-white flex items-center gap-2"><BookOpen className="h-5 w-5 text-[#BFFF00]" /> Lessons</CardTitle>
+              <CardTitle className="text-pl-text flex items-center gap-2"><BookOpen className="h-5 w-5 text-pl-primary-text" /> Lessons</CardTitle>
               <CardDescription>From sonic log to seismic tie, step by step.</CardDescription>
             </CardHeader>
             <CardContent className="grid gap-3 sm:grid-cols-2">
               {LESSONS.map((l) => (
-                <div key={l.n} className="rounded-md border border-gray-700 bg-[#0F172A] p-3">
-                  <p className="text-white text-sm font-medium">{l.n}. {l.title}</p>
-                  <p className="text-xs text-gray-400 mt-1">{l.body}</p>
+                <div key={l.n} className="rounded-md border border-pl-border bg-pl-sunken p-3">
+                  <p className="text-pl-text text-sm font-medium">{l.n}. {l.title}</p>
+                  <p className="text-xs text-pl-muted mt-1">{l.body}</p>
                 </div>
               ))}
             </CardContent>
@@ -200,61 +203,57 @@ const SeismolordLearningPage = () => {
           )}
 
           {model.error ? (
-            <p className="text-red-400 text-sm">Engine error: {model.error}</p>
+            <p className="text-pl-danger-text text-sm">Engine error: {model.error}</p>
           ) : (
             <div className="grid gap-6 lg:grid-cols-3">
               {/* Wavelet */}
-              <Card className="bg-[#1E293B] border-gray-700">
+              <Card className="bg-pl-surface border-pl-border">
                 <CardHeader>
-                  <CardTitle className="text-white">Ricker wavelet</CardTitle>
+                  <CardTitle className="text-pl-text">Ricker wavelet</CardTitle>
                   <CardDescription>Pick the peak frequency.</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="flex gap-2">
                     {FREQS.map((f) => (
                       <button key={f} type="button" onClick={() => setFreq(f)}
-                        className={`px-3 py-1.5 rounded-md border text-sm ${freq === f ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold' : 'bg-gray-800 text-gray-300 border-gray-600'}`}>
+                        className={`px-3 py-1.5 rounded-md border text-sm ${freq === f ? 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold' : 'bg-pl-surface text-pl-text border-pl-border-strong'}`}>
                         {f} Hz
                       </button>
                     ))}
                   </div>
-                  <div style={{ height: 180 }}>
-                    <ResponsiveContainer width="100%" height="100%">
+                  <ChartFrame height={180}>
                       <LineChart data={wRows} margin={{ top: 5, right: 10, bottom: 5, left: 0 }}>
-                        <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-                        <XAxis dataKey="t" tick={{ fill: '#94a3b8', fontSize: 10 }} unit=" ms" />
-                        <YAxis domain={[-0.6, 1.05]} tick={{ fill: '#94a3b8', fontSize: 10 }} />
-                        <Tooltip contentStyle={{ background: '#0F172A', border: '1px solid #334155', color: '#fff' }} />
-                        <ReferenceLine y={0} stroke="#475569" />
-                        <Line type="monotone" dataKey="a" name="amplitude" stroke="#BFFF00" dot={false} strokeWidth={1.5} />
+                        <CartesianGrid {...GRID_STYLE} />
+                        <XAxis dataKey="t" tick={AXIS_TICK} unit=" ms" />
+                        <YAxis domain={[-0.6, 1.05]} tick={AXIS_TICK} />
+                        <Tooltip contentStyle={TOOLTIP_STYLE} />
+                        <ReferenceLine y={0} stroke={SVG_CHART.reference} />
+                        <Line type="monotone" dataKey="a" name="amplitude" stroke={seriesColor(0)} dot={false} strokeWidth={1.5} />
                       </LineChart>
-                    </ResponsiveContainer>
-                  </div>
-                  <p className="text-xs text-gray-500">The teaching reading is the whole log at {TEACHING_FREQ_HZ} Hz; the capstone states a window, a velocity and a wavelet of its own.</p>
+                  </ChartFrame>
+                  <p className="text-xs text-pl-muted">The teaching reading is the whole log at {TEACHING_FREQ_HZ} Hz; the capstone states a window, a velocity and a wavelet of its own.</p>
                 </CardContent>
               </Card>
 
               {/* Traces */}
-              <Card className="bg-[#1E293B] border-gray-700 lg:col-span-2">
+              <Card className="bg-pl-surface border-pl-border lg:col-span-2">
                 <CardHeader>
-                  <CardTitle className="text-white">Reflectivity and synthetic</CardTitle>
+                  <CardTitle className="text-pl-text">Reflectivity and synthetic</CardTitle>
                   <CardDescription>The RC series is frequency-independent; the synthetic is not.</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div style={{ height: 260 }}>
-                    <ResponsiveContainer width="100%" height="100%">
+                  <ChartFrame height={260}>
                       <LineChart data={tRows} margin={{ top: 5, right: 10, bottom: 5, left: 0 }}>
-                        <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-                        <XAxis dataKey="twt" tick={{ fill: '#94a3b8', fontSize: 10 }} unit=" ms" domain={['dataMin', 'dataMax']} />
-                        <YAxis tick={{ fill: '#94a3b8', fontSize: 10 }} />
-                        <Tooltip contentStyle={{ background: '#0F172A', border: '1px solid #334155', color: '#fff' }} />
-                        <ReferenceLine y={0} stroke="#475569" />
-                        <Line type="monotone" dataKey="rc" name="RC" stroke="#38bdf8" dot={false} strokeWidth={1} />
-                        <Line type="monotone" dataKey="syn" name={`synthetic ${freq} Hz`} stroke="#BFFF00" dot={false} strokeWidth={1.5} />
+                        <CartesianGrid {...GRID_STYLE} />
+                        <XAxis dataKey="twt" tick={AXIS_TICK} unit=" ms" domain={['dataMin', 'dataMax']} />
+                        <YAxis tick={AXIS_TICK} />
+                        <Tooltip contentStyle={TOOLTIP_STYLE} />
+                        <ReferenceLine y={0} stroke={SVG_CHART.reference} />
+                        <Line type="monotone" dataKey="rc" name="RC" stroke={seriesColor(1)} dot={false} strokeWidth={1} />
+                        <Line type="monotone" dataKey="syn" name={`synthetic ${freq} Hz`} stroke={seriesColor(0)} dot={false} strokeWidth={1.5} />
                       </LineChart>
-                    </ResponsiveContainer>
-                  </div>
-                  <p className="text-xs text-gray-500 mt-2">Only validity-masked synthetic samples are drawn (lesson 6).</p>
+                  </ChartFrame>
+                  <p className="text-xs text-pl-muted mt-2">Only validity-masked synthetic samples are drawn (lesson 6).</p>
                 </CardContent>
               </Card>
             </div>
@@ -262,9 +261,9 @@ const SeismolordLearningPage = () => {
 
           {/* Summary panel */}
           {s && (
-            <Card className="bg-[#1E293B] border-gray-700">
+            <Card className="bg-pl-surface border-pl-border">
               <CardHeader>
-                <CardTitle className="text-white">Synthetic summary — {freq} Hz</CardTitle>
+                <CardTitle className="text-pl-text">Synthetic summary at {freq} Hz</CardTitle>
                 <CardDescription>The teaching reading, at {TEACHING_FREQ_HZ} Hz on the whole log. For the capstone, type its case into the synthetic explorer in the course.</CardDescription>
               </CardHeader>
               <CardContent>
@@ -278,9 +277,9 @@ const SeismolordLearningPage = () => {
                     ['Strongest synthetic amplitude', num(s.synPeakAbs, 6)],
                     ['TWT of strongest synthetic', `${num(s.synPeakTwt, 0)} ms`],
                   ].map(([k, v]) => (
-                    <div key={k} className="rounded-md border border-gray-700 bg-[#0F172A] p-3">
-                      <p className="text-gray-500 text-xs">{k}</p>
-                      <p className="text-white">{v}</p>
+                    <div key={k} className="rounded-md border border-pl-border bg-pl-sunken p-3">
+                      <p className="text-pl-muted text-xs">{k}</p>
+                      <p className="text-pl-text">{v}</p>
                     </div>
                   ))}
                 </div>
@@ -292,7 +291,7 @@ const SeismolordLearningPage = () => {
           <div className="flex gap-2">
             {LEARN_TIERS.map((t) => (
               <button key={t} type="button" onClick={() => setTier(t)}
-                className={`px-3 py-1.5 rounded-md border text-sm capitalize ${tier === t ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold' : 'bg-gray-800 text-gray-300 border-gray-600'}`}>
+                className={`px-3 py-1.5 rounded-md border text-sm capitalize ${tier === t ? 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold' : 'bg-pl-surface text-pl-text border-pl-border-strong'}`}>
                 {t} tier
               </button>
             ))}
@@ -301,9 +300,9 @@ const SeismolordLearningPage = () => {
           {tier === 'intermediate' && (() => {
             const inter = computeIntermediate(TEACHING_LAG_MS);
             return (
-              <Card className="bg-[#1E293B] border-gray-700">
+              <Card className="bg-pl-surface border-pl-border">
                 <CardHeader>
-                  <CardTitle className="text-white">Bulk shift and tuning (Intermediate)</CardTitle>
+                  <CardTitle className="text-pl-text">Bulk shift and tuning (Intermediate)</CardTitle>
                   <CardDescription>
                     The teaching trace: the 25 Hz synthetic arriving late by a lag the scan has to find (the capstone's trace withholds its own lag; select it in the course's shift explorer). Tuning: compare the 15 Hz and 40 Hz peaks.
                   </CardDescription>
@@ -317,13 +316,13 @@ const SeismolordLearningPage = () => {
                       ['40 Hz peak (abs / TWT)', `${num(inter.peak40.abs, 6)} / ${num(inter.peak40.twt, 0)} ms`],
                       ['Peak ratio 15/40 Hz', num(inter.peak15.abs / inter.peak40.abs, 2)],
                     ].map(([k, v]) => (
-                      <div key={k} className="rounded-md border border-gray-700 bg-[#0F172A] p-3">
-                        <p className="text-gray-500 text-xs">{k}</p>
-                        <p className="text-white">{v}</p>
+                      <div key={k} className="rounded-md border border-pl-border bg-pl-sunken p-3">
+                        <p className="text-pl-muted text-xs">{k}</p>
+                        <p className="text-pl-text">{v}</p>
                       </div>
                     ))}
                   </div>
-                  <p className="text-xs text-gray-500 mt-3">
+                  <p className="text-xs text-pl-muted mt-3">
                     The lower frequency merges neighbouring reflections into one strong event (tuning) — a different amplitude AND a different apparent time.
                   </p>
                 </CardContent>
@@ -335,29 +334,27 @@ const SeismolordLearningPage = () => {
             const adv = { f25: computeWedge(15), f40: computeWedge(30) };
             const rows = tuningRows(adv);
             return (
-              <Card className="bg-[#1E293B] border-gray-700">
+              <Card className="bg-pl-surface border-pl-border">
                 <CardHeader>
-                  <CardTitle className="text-white">Wedge tuning panel (Advanced)</CardTitle>
+                  <CardTitle className="text-pl-text">Wedge tuning panel (Advanced)</CardTitle>
                   <CardDescription>
                     The SAND top and base as an equal and opposite pair (RC {WEDGE.rcTop} / {WEDGE.rcBase}), wedged 0 to {WEDGE.maxThicknessMs} ms at {WEDGE.dtMs} ms, at two teaching frequencies (the capstone reads 25 and 40 Hz in the course's wedge explorer). Peak amplitude near the top interface per thickness.
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <div style={{ height: 240 }}>
-                    <ResponsiveContainer width="100%" height="100%">
+                  <ChartFrame height={240}>
                       <LineChart data={rows} margin={{ top: 5, right: 10, bottom: 5, left: 0 }}>
-                        <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-                        <XAxis dataKey="thickness" tick={{ fill: '#94a3b8', fontSize: 11 }}
-                          label={{ value: 'thickness (ms)', position: 'insideBottom', offset: -2, fill: '#64748b', fontSize: 10 }} />
-                        <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} />
-                        <Tooltip contentStyle={{ background: '#0F172A', border: '1px solid #334155', color: '#fff' }} />
-                        <ReferenceLine x={adv.f25.tuneMs} stroke="#BFFF00" strokeDasharray="4 3" />
-                        <ReferenceLine x={adv.f40.tuneMs} stroke="#38bdf8" strokeDasharray="4 3" />
-                        <Line type="monotone" dataKey="a25" name="15 Hz" stroke="#BFFF00" dot={false} strokeWidth={1.5} />
-                        <Line type="monotone" dataKey="a40" name="30 Hz" stroke="#38bdf8" dot={false} strokeWidth={1.5} />
+                        <CartesianGrid {...GRID_STYLE} />
+                        <XAxis dataKey="thickness" tick={AXIS_TICK}
+                          label={{ value: 'thickness (ms)', position: 'insideBottom', offset: -2, fill: CHART_COLORS.axisLabel, fontSize: 10 }} />
+                        <YAxis tick={AXIS_TICK} />
+                        <Tooltip contentStyle={TOOLTIP_STYLE} />
+                        <ReferenceLine x={adv.f25.tuneMs} stroke={seriesColor(0)} strokeDasharray="4 3" />
+                        <ReferenceLine x={adv.f40.tuneMs} stroke={seriesColor(1)} strokeDasharray="4 3" />
+                        <Line type="monotone" dataKey="a25" name="15 Hz" stroke={seriesColor(0)} dot={false} strokeWidth={1.5} />
+                        <Line type="monotone" dataKey="a40" name="30 Hz" stroke={seriesColor(1)} dot={false} strokeWidth={1.5} />
                       </LineChart>
-                    </ResponsiveContainer>
-                  </div>
+                  </ChartFrame>
                   <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 text-sm">
                     {[
                       ['Tuning thickness at 15 Hz', `${adv.f25.tuneMs} ms`],
@@ -367,13 +364,13 @@ const SeismolordLearningPage = () => {
                       ['Isolated-reflector amplitude (15 Hz)', num(adv.f25.isoAmp, 6)],
                       ['Theoretical tuning at 15 Hz', `${num(adv.f25.theoryMs, 4)} ms`],
                     ].map(([k, v]) => (
-                      <div key={k} className="rounded-md border border-gray-700 bg-[#0F172A] p-3">
-                        <p className="text-gray-500 text-xs">{k}</p>
-                        <p className="text-white">{v}</p>
+                      <div key={k} className="rounded-md border border-pl-border bg-pl-sunken p-3">
+                        <p className="text-pl-muted text-xs">{k}</p>
+                        <p className="text-pl-text">{v}</p>
                       </div>
                     ))}
                   </div>
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-pl-muted">
                     Below tuning the pair brightens as the side lobes stack; the panel picks the tuning maximum one sample grid step above the Kallweit-Wood value sqrt(6)/(2*pi*f). Note the tuning amplitude itself does not depend on frequency.
                   </p>
                 </CardContent>
@@ -382,19 +379,19 @@ const SeismolordLearningPage = () => {
           })()}
 
           {/* Capstone */}
-          <Card className="bg-[#1E293B] border-gray-700">
+          <Card className="bg-pl-surface border-pl-border">
             <CardHeader>
-              <CardTitle className="text-white">{capstone?.title || 'Capstone'}</CardTitle>
+              <CardTitle className="text-pl-text">{capstone?.title || 'Capstone'}</CardTitle>
               <CardDescription>{capstone?.prompt}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               {!capstoneOpen ? (
-                <div className="rounded-md border border-gray-700 bg-[#0F172A] p-4 text-sm text-gray-300 flex items-start gap-2">
-                  <Lock className="h-4 w-4 text-[#BFFF00] mt-0.5 shrink-0" />
+                <div className="rounded-md border border-pl-border bg-pl-sunken p-4 text-sm text-pl-text flex items-start gap-2">
+                  <Lock className="h-4 w-4 text-pl-primary-text mt-0.5 shrink-0" />
                   <p className="mb-0">
                     The capstone unlocks after the course: finish the lessons, pass each module quiz
                     and the final exam, then submit here.{' '}
-                    <Link to={`/dashboard/apps/${APP}/course/${tier}`} className="text-[#BFFF00] hover:underline">
+                    <Link to={`/dashboard/apps/${APP}/course/${tier}`} className="text-pl-primary-text hover:underline">
                       Open the course
                     </Link>
                   </p>
@@ -404,16 +401,16 @@ const SeismolordLearningPage = () => {
                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                   {(capstone?.fields || []).map((f) => (
                     <div key={f.key}>
-                      <Label className="text-gray-400 text-xs mb-1 block">{f.label} ({f.unit})</Label>
+                      <Label className="text-pl-muted text-xs mb-1 block">{f.label} ({f.unit})</Label>
                       <Input type="text" inputMode="decimal" autoComplete="off" value={answers[f.key] ?? ''}
                         onChange={(e) => setAnswers((a) => ({ ...a, [f.key]: e.target.value }))}
-                        className="bg-gray-700 text-white border-gray-600 h-8 text-sm" />
+                        className="h-8 text-sm" />
                     </div>
                   ))}
                 </div>
 
                 <Button onClick={submit} disabled={submitting || !capstone}
-                  className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold">
+                  className="font-semibold">
                   {submitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <GraduationCap className="mr-2 h-4 w-4" />}
                   Submit for grading
                 </Button>
@@ -421,32 +418,32 @@ const SeismolordLearningPage = () => {
               )}
 
               {result && (
-                <div className={`rounded-md border p-4 ${result.passed ? 'border-emerald-700 bg-emerald-900/20' : 'border-red-800 bg-red-900/20'}`}>
+                <div className={`rounded-md border p-4 ${result.passed ? 'border-pl-success/40 bg-pl-success-bg' : 'border-pl-danger/40 bg-pl-danger-bg'}`}>
                   {result.passed ? (
                     <>
-                      <p className="text-emerald-300 font-medium flex items-center gap-2">
+                      <p className="text-pl-success-text font-medium flex items-center gap-2">
                         <CheckCircle2 className="h-5 w-5" /> Passed ({result.score}/{result.max_score})
                       </p>
                       {result.certificate_number ? (
-                        <div className="mt-2 text-sm text-gray-300 space-y-1">
-                          <p className="flex items-center gap-2"><Award className="h-4 w-4 text-[#BFFF00]" />
-                            {CERT_LABELS[result.tier] || 'Associate'} certificate <span className="font-mono text-[#BFFF00]">{result.certificate_number}</span> issued.
+                        <div className="mt-2 text-sm text-pl-text space-y-1">
+                          <p className="flex items-center gap-2"><Award className="h-4 w-4 text-pl-accent-text" />
+                            {CERT_LABELS[result.tier] || 'Associate'} certificate <span className="font-mono text-pl-accent-text">{result.certificate_number}</span> issued.
                             {result.tier === 'expert' && ' Your 50% Suite discount code is on your certificates page.'}</p>
                           <div className="flex gap-3">
-                            <Link to="/dashboard/certificates" className="text-[#BFFF00] hover:underline inline-flex items-center gap-1">
+                            <Link to="/dashboard/certificates" className="text-pl-primary-text hover:underline inline-flex items-center gap-1">
                               My certificates <ArrowRight className="h-3 w-3" />
                             </Link>
-                            <a href={verificationUrl(result.verify_code)} target="_blank" rel="noreferrer" className="text-gray-400 hover:underline">
+                            <a href={verificationUrl(result.verify_code)} target="_blank" rel="noreferrer" className="text-pl-muted hover:underline">
                               Public verification
                             </a>
                           </div>
                         </div>
                       ) : (
-                        <p className="mt-1 text-sm text-gray-400">You were already certified for this tier.</p>
+                        <p className="mt-1 text-sm text-pl-muted">You were already certified for this tier.</p>
                       )}
                     </>
                   ) : (
-                    <p className="text-red-300 font-medium flex items-center gap-2">
+                    <p className="text-pl-danger-text font-medium flex items-center gap-2">
                       <XCircle className="h-5 w-5" /> {result.score}/{result.max_score} within tolerance. Type the case the brief states into the course panels and read them again.
                     </p>
                   )}

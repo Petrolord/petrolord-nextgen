@@ -1,12 +1,15 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceArea, Legend,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceArea, Legend,
 } from 'recharts';
 import {
   TW, porosityCurves, zoneMean, sampleIndexAt, fmt, num,
 } from './typewellLab';
 import { useWell } from './wellContext';
 import { PanelShell, NumField, SelectField, Tile, TileGrid, FieldGrid, Note } from './panelKit';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, CHART_COLORS } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK } from '@/utils/chartSvg';
 
 // Multi-method porosity lab: density, Wyllie sonic, RHG and the
 // neutron-density combination, all computed live from the constants the
@@ -63,23 +66,21 @@ const PorosityLab = () => {
 
       {curves && (
         <>
-          <div style={{ height: 240 }}>
-            <ResponsiveContainer width="100%" height="100%">
+          <ChartFrame height={240}>
               <LineChart data={rows} margin={{ top: 5, right: 10, bottom: 5, left: 0 }}>
-                <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-                <XAxis dataKey="depth" tick={{ fill: '#94a3b8', fontSize: 11 }} />
-                <YAxis domain={[0, 0.45]} tick={{ fill: '#94a3b8', fontSize: 11 }} />
-                <Tooltip contentStyle={{ background: '#0F172A', border: '1px solid #334155', color: '#fff' }} />
-                <Legend wrapperStyle={{ fontSize: 11 }} />
-                <ReferenceArea x1={ZONES.SAND_A[0]} x2={ZONES.SAND_A[1]} fill="#BFFF00" fillOpacity={0.06} />
-                <ReferenceArea x1={ZONES.SAND_B[0]} x2={ZONES.SAND_B[1]} fill="#38bdf8" fillOpacity={0.06} />
-                <Line type="monotone" dataKey="phiD" name="Density" stroke="#BFFF00" dot={false} strokeWidth={1.5} />
-                <Line type="monotone" dataKey="phiW" name="Wyllie" stroke="#38bdf8" dot={false} strokeWidth={1.5} />
-                <Line type="monotone" dataKey="phiRhg" name="RHG" stroke="#f59e0b" dot={false} strokeWidth={1.2} />
-                <Line type="monotone" dataKey="phiNd" name="N-D" stroke="#f472b6" dot={false} strokeWidth={1.5} />
+                <CartesianGrid {...GRID_STYLE} />
+                <XAxis dataKey="depth" tick={AXIS_TICK} />
+                <YAxis domain={[0, 0.45]} tick={AXIS_TICK} />
+                <Tooltip contentStyle={TOOLTIP_STYLE} />
+                <Legend wrapperStyle={{ fontSize: 11, color: CHART_COLORS.legendText }} />
+                <ReferenceArea x1={ZONES.SAND_A[0]} x2={ZONES.SAND_A[1]} fill={seriesColor(0)} fillOpacity={0.08} />
+                <ReferenceArea x1={ZONES.SAND_B[0]} x2={ZONES.SAND_B[1]} fill={seriesColor(1)} fillOpacity={0.08} />
+                <Line type="monotone" dataKey="phiD" name="Density" stroke={seriesColor(0)} dot={false} strokeWidth={1.5} />
+                <Line type="monotone" dataKey="phiW" name="Wyllie" stroke={seriesColor(1)} dot={false} strokeWidth={1.5} />
+                <Line type="monotone" dataKey="phiRhg" name="RHG" stroke={seriesColor(2)} dot={false} strokeWidth={1.2} />
+                <Line type="monotone" dataKey="phiNd" name="N-D" stroke={seriesColor(4)} dot={false} strokeWidth={1.5} />
               </LineChart>
-            </ResponsiveContainer>
-          </div>
+          </ChartFrame>
 
           <TileGrid>
             <Tile label="SAND_A mean, density" value={fmt(zoneMean(curves.phiD, ZONES.SAND_A, well))} unit="v/v" />
@@ -96,7 +97,7 @@ const PorosityLab = () => {
         </>
       )}
       {!curves && <Note>Enter finite matrix and fluid constants to compute.</Note>}
-      <Note>Shaded bands: SAND_A (lime) and SAND_B (blue). Wrong constants make every family wrong together; the crossplot and the water leg are how you catch it.</Note>
+      <Note>Shaded bands: SAND_A (blue) and SAND_B (green). Wrong constants make every family wrong together; the crossplot and the water leg are how you catch it.</Note>
     </PanelShell>
   );
 };

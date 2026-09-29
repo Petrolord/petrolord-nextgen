@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip,
+  ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip,
 } from 'recharts';
 import {
   TW, porosityCurves, fitPickett, isoSwSegment, fmt, num,
@@ -8,6 +8,9 @@ import {
 import { useWell } from './wellContext';
 import { Button } from '@/components/ui/button';
 import { PanelShell, NumField, Tile, TileGrid, Note } from './panelKit';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 
 // Pickett explorer: the learner chooses the presumed-water depth window
 // and fits the water line themselves. A wrong window gives a wrong fit;
@@ -69,33 +72,31 @@ const PickettExplorer = () => {
         <NumField label="Window top (m)" value={win.top} onChange={(v) => setWin((w) => ({ ...w, top: v }))} />
         <NumField label="Window base (m)" value={win.base} onChange={(v) => setWin((w) => ({ ...w, base: v }))} />
         <NumField label="n (iso-Sw lines)" value={nExp} onChange={setNExp} />
-        <Button onClick={runFit} className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold h-8">
+        <Button onClick={runFit} className="font-semibold h-8">
           Fit water line
         </Button>
       </div>
 
-      <div style={{ height: 280 }}>
-        <ResponsiveContainer width="100%" height="100%">
+      <ChartFrame height={280}>
           <ScatterChart margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
+            <CartesianGrid {...GRID_STYLE} />
             <XAxis dataKey="phi" name="phi" type="number" scale="log" domain={[0.05, 0.4]}
               ticks={[0.05, 0.1, 0.15, 0.2, 0.3, 0.4]} allowDataOverflow
-              tick={{ fill: '#94a3b8', fontSize: 11 }} />
+              tick={AXIS_TICK} />
             <YAxis dataKey="rt" name="Rt" type="number" scale="log" domain={[1, 30]}
               ticks={[1, 2, 5, 10, 20, 30]} allowDataOverflow
-              tick={{ fill: '#94a3b8', fontSize: 11 }} />
-            <Tooltip contentStyle={{ background: '#0F172A', border: '1px solid #334155', color: '#fff' }}
+              tick={AXIS_TICK} />
+            <Tooltip contentStyle={TOOLTIP_STYLE}
               formatter={(v) => fmt(Number(v))} labelFormatter={() => ''} />
-            <Scatter name="Outside window" data={points.outWin} fill="#64748b" opacity={0.7} />
-            <Scatter name="In window" data={points.inWin} fill="#BFFF00" />
+            <Scatter name="Outside window" data={points.outWin} fill={SVG_CHART.reference} opacity={0.7} />
+            <Scatter name="In window" data={points.inWin} fill={seriesColor(0)} />
             {isoLines.map((l) => (
               <Scatter key={l.sw} data={l.pts} fill="none"
-                line={{ stroke: l.sw === 1 ? '#38bdf8' : '#475569', strokeWidth: l.sw === 1 ? 2 : 1 }}
+                line={{ stroke: l.sw === 1 ? seriesColor(1) : SVG_CHART.note, strokeWidth: l.sw === 1 ? 2 : 1 }}
                 shape={() => null} legendType="none" />
             ))}
           </ScatterChart>
-        </ResponsiveContainer>
-      </div>
+      </ChartFrame>
 
       {fitError && <Note>Fit failed: {fitError}</Note>}
       {fit && (
@@ -106,7 +107,7 @@ const PickettExplorer = () => {
           <Tile label="Iso-Sw lines" value="1.0 / 0.5 / 0.2" />
         </TileGrid>
       )}
-      <Note>Blue line: your fitted Sw = 1 water line (grey: 0.5 and 0.2). Points above the water line at the same porosity carry hydrocarbon. Try a deliberately wrong window and watch m and a x Rw move.</Note>
+      <Note>Green line: your fitted Sw = 1 water line (grey: 0.5 and 0.2). Points above the water line at the same porosity carry hydrocarbon. Try a deliberately wrong window and watch m and a x Rw move.</Note>
     </PanelShell>
   );
 };

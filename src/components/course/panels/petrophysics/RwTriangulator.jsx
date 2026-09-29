@@ -76,12 +76,12 @@ const RwTriangulator = () => {
       <div className="grid gap-3 grid-cols-2 sm:grid-cols-4 items-end">
         <NumField label="Book SAND_A with Rw (ohm.m)" value={bookRwInput}
           onChange={setBookRwInput} placeholder="your adopted Rw" />
-        <Button onClick={runBooking} className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold h-8">
+        <Button onClick={runBooking} className="font-semibold h-8">
           Book SAND_A
         </Button>
         {bookings.length > 0 && (
           <Button variant="outline" onClick={() => setBookings([])}
-            className="border-gray-600 text-gray-300 h-8">
+            className="border-pl-border-strong text-pl-text h-8">
             Clear bookings
           </Button>
         )}
@@ -91,7 +91,7 @@ const RwTriangulator = () => {
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="text-gray-400 text-xs border-b border-gray-700">
+              <tr className="text-pl-muted text-xs border-b border-pl-border">
                 <th className="text-left py-2 pr-4">Booked with Rw</th>
                 <th className="text-left py-2 pr-4">Net (m)</th>
                 <th className="text-left py-2 pr-4">NTG</th>
@@ -99,10 +99,10 @@ const RwTriangulator = () => {
                 <th className="text-left py-2 pr-4">Pay-avg Sw</th>
               </tr>
             </thead>
-            <tbody className="text-gray-300">
+            <tbody className="text-pl-text">
               {bookings.map((b) => (
-                <tr key={b.rw} className="border-b border-gray-800">
-                  <td className="py-2 pr-4 text-white">{fmt(b.rw)}</td>
+                <tr key={b.rw} className="border-b border-pl-border">
+                  <td className="py-2 pr-4 text-pl-text">{fmt(b.rw)}</td>
                   <td className="py-2 pr-4">{b.summary.net_m?.toFixed(1)}</td>
                   <td className="py-2 pr-4">{fmt(b.summary.ntg, 3)}</td>
                   <td className="py-2 pr-4">{fmt(b.summary.phi_avg)}</td>

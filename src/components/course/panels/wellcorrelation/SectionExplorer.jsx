@@ -5,6 +5,8 @@ import {
 import { useSectionWells } from '@/components/course/panels/wellcorrelation/caseInputs';
 import { depthToY, columnX } from '@petrolord/engines/engines/wellcorrelation/section.js';
 import { PanelShell, NumField, SelectField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import SvgChartFrame from '@/components/charts/SvgChartFrame';
+import { seriesColor, SVG_CHART, GRID_LINE_PROPS } from '@/utils/chartSvg';
 
 // Section explorer: the four-well Ekene section drawn from the central
 // section engine, with the datum under the learner's control. Every
@@ -12,10 +14,10 @@ import { PanelShell, NumField, SelectField, Tile, TileGrid, Note } from '@/compo
 // is produced by the choice the learner makes, so the capstone readings
 // are earned rather than displayed.
 const TOP_COLORS = {
-  TOP_A: '#38bdf8',
-  TOP_SAND: '#BFFF00',
-  BASE_SAND: '#f59e0b',
-  TOP_B: '#f472b6',
+  TOP_A: seriesColor(1),
+  TOP_SAND: seriesColor(0),
+  BASE_SAND: seriesColor(2),
+  TOP_B: seriesColor(4),
 };
 
 const W = 640;
@@ -92,63 +94,59 @@ const SectionExplorer = () => {
         <SelectField label="Datum top" value={topName} onChange={setTopName}
           options={section.topNames.map((t) => [t, t])} />
         <NumField label="Datum depth (m)" value={datumM} onChange={setDatumM} />
-        <div className="text-xs text-gray-500">
+        <div className="text-xs text-pl-muted">
           {mode === 'structural'
             ? 'Every well at true depth, no shifts.'
             : `${topName} pinned to ${datumM} m in every well that has it.`}
         </div>
       </div>
 
-      <div className="overflow-x-auto">
-        <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ minWidth: 480 }} role="img"
-          aria-label="Well correlation section">
-          <rect x="0" y="0" width={W} height={H} fill="#0F172A" />
-          {gridDepths.map((d) => (
-            <g key={d}>
-              <line x1={PLOT.left - 8} y1={yOf(d)} x2={PLOT.left + PLOT.width} y2={yOf(d)}
-                stroke="#334155" strokeDasharray="3 3" />
-              <text x={PLOT.left - 12} y={yOf(d) + 3} fill="#64748b" fontSize="9" textAnchor="end">{Math.round(d)}</text>
-            </g>
-          ))}
+      <SvgChartFrame width={W} height={H} label="Well correlation section" minWidth={480} maxWidth={720}>
+        {gridDepths.map((d) => (
+          <g key={d}>
+            <line x1={PLOT.left - 8} y1={yOf(d)} x2={PLOT.left + PLOT.width} y2={yOf(d)}
+              {...GRID_LINE_PROPS} />
+            <text x={PLOT.left - 12} y={yOf(d) + 3} fill={SVG_CHART.tick} fontSize="9" textAnchor="end">{Math.round(d)}</text>
+          </g>
+        ))}
 
-          {/* SAND zone fill per well */}
-          {section.rows.map((r, i) => (r.span ? (
-            <rect key={`z${r.id}`} x={xOf(i) - 16} y={yOf(r.span.top)} width={32}
-              height={Math.max(1, yOf(r.span.base) - yOf(r.span.top))}
-              fill="#BFFF00" fillOpacity="0.12" />
-          ) : null))}
+        {/* SAND zone fill per well */}
+        {section.rows.map((r, i) => (r.span ? (
+          <rect key={`z${r.id}`} x={xOf(i) - 16} y={yOf(r.span.top)} width={32}
+            height={Math.max(1, yOf(r.span.base) - yOf(r.span.top))}
+            fill={seriesColor(0)} fillOpacity="0.12" />
+        ) : null))}
 
-          {/* GR character */}
-          {WELLS.map((w, i) => (
-            <path key={`gr${w.id}`} d={grPath(w, i)} stroke="#94a3b8" strokeWidth="1" fill="none" opacity="0.8" />
-          ))}
+        {/* GR character */}
+        {WELLS.map((w, i) => (
+          <path key={`gr${w.id}`} d={grPath(w, i)} stroke={SVG_CHART.note} strokeWidth="1" fill="none" opacity="0.8" />
+        ))}
 
-          {/* correlation lines */}
-          {section.polylines.map((pl) => (
-            <g key={pl.name}>
-              <polyline
-                points={pl.points.map((p) => `${xOf(p.wellIndex)},${yOf(p.displayed)}`).join(' ')}
-                fill="none" stroke={TOP_COLORS[pl.name] || '#e2e8f0'} strokeWidth="1.75" />
-              {pl.points.map((p) => (
-                <circle key={`${pl.name}${p.wellId}`} cx={xOf(p.wellIndex)} cy={yOf(p.displayed)} r="2.5"
-                  fill={TOP_COLORS[pl.name] || '#e2e8f0'} />
-              ))}
-            </g>
-          ))}
+        {/* correlation lines */}
+        {section.polylines.map((pl) => (
+          <g key={pl.name}>
+            <polyline
+              points={pl.points.map((p) => `${xOf(p.wellIndex)},${yOf(p.displayed)}`).join(' ')}
+              fill="none" stroke={TOP_COLORS[pl.name] || SVG_CHART.note} strokeWidth="1.75" />
+            {pl.points.map((p) => (
+              <circle key={`${pl.name}${p.wellId}`} cx={xOf(p.wellIndex)} cy={yOf(p.displayed)} r="2.5"
+                fill={TOP_COLORS[pl.name] || SVG_CHART.note} />
+            ))}
+          </g>
+        ))}
 
-          {/* well headers */}
-          {section.rows.map((r, i) => (
-            <text key={`h${r.id}`} x={xOf(i)} y={14} fill="#e2e8f0" fontSize="10" textAnchor="middle">
-              {r.name}
-            </text>
-          ))}
-        </svg>
-      </div>
+        {/* well headers */}
+        {section.rows.map((r, i) => (
+          <text key={`h${r.id}`} x={xOf(i)} y={14} fill={SVG_CHART.label} fontSize="10" textAnchor="middle">
+            {r.name}
+          </text>
+        ))}
+      </SvgChartFrame>
 
       <div className="flex flex-wrap gap-3 text-xs">
         {section.topNames.map((t) => (
-          <span key={t} className="flex items-center gap-1.5 text-gray-400">
-            <span style={{ background: TOP_COLORS[t] || '#e2e8f0' }} className="inline-block w-3 h-0.5" />
+          <span key={t} className="flex items-center gap-1.5 text-pl-muted">
+            <span style={{ background: TOP_COLORS[t] || SVG_CHART.note }} className="inline-block w-3 h-0.5" />
             {t}
           </span>
         ))}
@@ -157,22 +155,22 @@ const SectionExplorer = () => {
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
-            <tr className="text-left text-gray-400 border-b border-gray-700">
+            <tr className="text-left text-pl-muted border-b border-pl-border">
               <th className="py-2 pr-4">Well</th>
               <th className="py-2 pr-4">Shift (m)</th>
               {section.topNames.map((t) => <th key={t} className="py-2 pr-4">{t}</th>)}
               <th className="py-2 pr-4">{ZONE.top} to {ZONE.base}</th>
             </tr>
           </thead>
-          <tbody className="text-gray-300">
+          <tbody className="text-pl-text">
             {section.rows.map((r) => (
-              <tr key={r.id} className="border-b border-gray-800">
-                <td className="py-2 pr-4 text-white">{r.name}</td>
+              <tr key={r.id} className="border-b border-pl-border">
+                <td className="py-2 pr-4 text-pl-text">{r.name}</td>
                 <td className="py-2 pr-4">{r.shift === null ? 'not flattened' : fmt(r.shift)}</td>
                 {section.topNames.map((t) => {
                   const hit = r.tops.find((x) => x.name === t);
                   return (
-                    <td key={t} className={`py-2 pr-4 ${hit ? '' : 'text-red-400'}`}>
+                    <td key={t} className={`py-2 pr-4 ${hit ? '' : 'text-pl-danger-text'}`}>
                       {hit ? fmt(hit.displayed) : 'missing'}
                     </td>
                   );

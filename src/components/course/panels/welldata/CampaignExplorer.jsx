@@ -62,11 +62,11 @@ const CampaignExplorer = () => {
           {[[false, 'Teaching campaign'], [true, `Your campaign (${userFiles.length} files)`]].map(([v, l]) => (
             <button key={l} type="button" onClick={() => setUseOwn(v)}
               className={`px-3 py-1.5 rounded-md border text-xs ${useOwn === v
-                ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold'
-                : 'bg-gray-800 text-gray-300 border-gray-600'}`}>{l}</button>
+                ? 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold'
+                : 'bg-pl-surface text-pl-text border-pl-border-strong'}`}>{l}</button>
           ))}
           <button type="button" onClick={() => { setUserFiles([]); setUseOwn(false); }}
-            className="text-xs text-gray-400 hover:underline">Clear your files</button>
+            className="text-xs text-pl-muted hover:underline">Clear your files</button>
         </>
       )}
     </div>
@@ -76,7 +76,7 @@ const CampaignExplorer = () => {
     return (
       <PanelShell title="Campaign explorer" subtitle="One of your files could not be imported.">
         {picker}
-        <p className="text-red-400 text-sm mb-0">Import failed: {A.error}</p>
+        <p className="text-pl-danger-text text-sm mb-0">Import failed: {A.error}</p>
       </PanelShell>
     );
   }
@@ -88,7 +88,7 @@ const CampaignExplorer = () => {
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
-            <tr className="text-gray-400 border-b border-gray-700">
+            <tr className="text-pl-muted border-b border-pl-border">
               <th className="text-left py-2 pr-4">file</th>
               <th className="text-left py-2 pr-4">curves</th>
               <th className="text-left py-2 pr-4">converted</th>
@@ -100,42 +100,42 @@ const CampaignExplorer = () => {
           </thead>
           <tbody>
             {A.perFile.map((f) => (
-              <tr key={f.id} className="border-b border-gray-800 cursor-pointer hover:bg-gray-800"
+              <tr key={f.id} className="border-b border-pl-border cursor-pointer hover:bg-pl-raised"
                 onClick={() => setOpenFile(f.id)}>
-                <td className={`py-2 pr-4 ${openF.id === f.id ? 'text-[#BFFF00] font-semibold' : 'text-white'}`}>{f.label}</td>
-                <td className="py-2 pr-4 text-gray-300">{f.curves}</td>
-                <td className={`py-2 pr-4 ${f.converted ? 'text-[#BFFF00] font-semibold' : 'text-gray-500'}`}>
+                <td className={`py-2 pr-4 ${openF.id === f.id ? 'text-pl-primary-text font-semibold' : 'text-pl-text'}`}>{f.label}</td>
+                <td className="py-2 pr-4 text-pl-text">{f.curves}</td>
+                <td className={`py-2 pr-4 ${f.converted ? 'text-pl-primary-text font-semibold' : 'text-pl-muted'}`}>
                   {f.converted ? 'YES' : 'no'}
                 </td>
-                <td className={`py-2 pr-4 ${f.uniform ? 'text-gray-500' : 'text-[#f472b6] font-semibold'}`}>
+                <td className={`py-2 pr-4 ${f.uniform ? 'text-pl-muted' : 'text-pl-warning-text font-semibold'}`}>
                   {f.uniform ? 'yes' : 'NO'}
                 </td>
-                <td className={`py-2 pr-4 ${f.dead ? 'text-[#f472b6] font-semibold' : 'text-gray-500'}`}>{f.dead}</td>
-                <td className="py-2 pr-4 text-gray-300">{f.nulls}</td>
-                <td className="py-2 text-gray-300">{f.samples}</td>
+                <td className={`py-2 pr-4 ${f.dead ? 'text-pl-danger-text font-semibold' : 'text-pl-muted'}`}>{f.dead}</td>
+                <td className="py-2 pr-4 text-pl-text">{f.nulls}</td>
+                <td className="py-2 text-pl-text">{f.samples}</td>
               </tr>
             ))}
-            <tr className="border-t-2 border-gray-600">
-              <td className="py-2 pr-4 text-[#BFFF00] font-semibold">campaign</td>
-              <td className="py-2 pr-4 text-[#BFFF00] font-semibold">{A.campaignCurves}</td>
-              <td className="py-2 pr-4 text-[#BFFF00] font-semibold">{A.convertedFiles}</td>
-              <td className="py-2 pr-4 text-[#BFFF00] font-semibold">{A.uniformFiles} of {A.perFile.length}</td>
-              <td className="py-2 pr-4 text-[#BFFF00] font-semibold">{A.deadCurves}</td>
-              <td className="py-2 pr-4 text-gray-500">see below</td>
-              <td className="py-2 text-gray-500"></td>
+            <tr className="border-t-2 border-pl-border-strong">
+              <td className="py-2 pr-4 text-pl-primary-text font-semibold">campaign</td>
+              <td className="py-2 pr-4 text-pl-primary-text font-semibold">{A.campaignCurves}</td>
+              <td className="py-2 pr-4 text-pl-primary-text font-semibold">{A.convertedFiles}</td>
+              <td className="py-2 pr-4 text-pl-primary-text font-semibold">{A.uniformFiles} of {A.perFile.length}</td>
+              <td className="py-2 pr-4 text-pl-primary-text font-semibold">{A.deadCurves}</td>
+              <td className="py-2 pr-4 text-pl-muted">see below</td>
+              <td className="py-2 text-pl-muted"></td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <div className="text-xs text-gray-500">
+      <div className="text-xs text-pl-muted">
         Click any file above to open its per-curve composition.
       </div>
 
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
-            <tr className="text-gray-400 border-b border-gray-700">
+            <tr className="text-pl-muted border-b border-pl-border">
               <th className="text-left py-2 pr-4">{openF.label}: curve</th>
               <th className="text-left py-2 pr-4">unit</th>
               <th className="text-left py-2 pr-4">nulls</th>
@@ -145,22 +145,22 @@ const CampaignExplorer = () => {
           </thead>
           <tbody>
             {detail.rows.map((r) => (
-              <tr key={r.mnemonic} className="border-b border-gray-800">
-                <td className="py-2 pr-4 text-white">{r.mnemonic}</td>
-                <td className="py-2 pr-4 text-gray-300">{r.unit}</td>
-                <td className={`py-2 pr-4 ${r.dead ? 'text-[#f472b6] font-semibold' : 'text-gray-300'}`}>{r.nulls}</td>
-                <td className="py-2 pr-4 text-gray-300">{r.n}</td>
-                <td className={`py-2 ${r.dead ? 'text-[#f472b6] font-semibold' : 'text-gray-500'}`}>
+              <tr key={r.mnemonic} className="border-b border-pl-border">
+                <td className="py-2 pr-4 text-pl-text">{r.mnemonic}</td>
+                <td className="py-2 pr-4 text-pl-text">{r.unit}</td>
+                <td className={`py-2 pr-4 ${r.dead ? 'text-pl-danger-text font-semibold' : 'text-pl-text'}`}>{r.nulls}</td>
+                <td className="py-2 pr-4 text-pl-text">{r.n}</td>
+                <td className={`py-2 ${r.dead ? 'text-pl-danger-text font-semibold' : 'text-pl-muted'}`}>
                   {r.dead ? 'DEAD, no finite samples' : r.nulls > 0 ? 'scattered nulls' : 'complete'}
                 </td>
               </tr>
             ))}
-            <tr className="border-t-2 border-gray-600">
-              <td className="py-2 pr-4 text-[#BFFF00] font-semibold">total</td>
-              <td className="py-2 pr-4 text-gray-500">NULL {fmt(detail.nullValue)}</td>
-              <td className="py-2 pr-4 text-[#BFFF00] font-semibold">{detailTotal}</td>
-              <td className="py-2 pr-4 text-gray-500"></td>
-              <td className="py-2 text-gray-500"></td>
+            <tr className="border-t-2 border-pl-border-strong">
+              <td className="py-2 pr-4 text-pl-primary-text font-semibold">total</td>
+              <td className="py-2 pr-4 text-pl-muted">NULL {fmt(detail.nullValue)}</td>
+              <td className="py-2 pr-4 text-pl-primary-text font-semibold">{detailTotal}</td>
+              <td className="py-2 pr-4 text-pl-muted"></td>
+              <td className="py-2 text-pl-muted"></td>
             </tr>
           </tbody>
         </table>

@@ -3,6 +3,10 @@ import {
   layerSweep, forecast, evAtFirstBreakthrough, channelBackoutFor, LAYERS, LAYER_DESIGN, ELEMENT, EKENE_SCAL, EKENE_FLOOD,
 } from './floodLab';
 import { PanelShell, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { useThemeClass } from '@/design/themeClass';
+import SvgChartFrame from '@/components/charts/SvgChartFrame';
+import { seriesColor, SVG_CHART, GRID_LINE_PROPS } from '@/utils/chartSvg';
+import { getStreamPalette } from '@/utils/chartTheme';
 
 // Design explorer: the two Expert engines side by side. Layers mode runs the
 // Dykstra-Parsons and Stiles stage tables on the planted column; forecast mode
@@ -15,30 +19,37 @@ const PAD = { left: 52, top: 14, right: 46, bottom: 34 };
 
 // A typed number box, dressed like the sliders (the capstone states values
 // the sliders do not reach).
-const NumBox = ({ label, value, onChange }) => (
+const NumBox = ({ label, value, onChange }) => {
+  const tc = useThemeClass();
+  return (
   <div>
-    <p className="text-gray-400 text-xs mb-1">{label}</p>
+    <p className={tc('text-gray-400 text-xs mb-1', 'text-pl-muted text-xs mb-1')}>{label}</p>
     <input value={value} onChange={(e) => onChange(e.target.value)}
-      className="w-full bg-gray-800 border border-gray-600 rounded-md text-white text-xs px-2 py-1.5" />
+      className={tc('w-full bg-gray-800 border border-gray-600 rounded-md text-white text-xs px-2 py-1.5', 'w-full bg-pl-surface border border-pl-border-strong rounded-md text-pl-text text-xs px-2 py-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus')} />
   </div>
-);
+  );
+};
 
 const fmt = (v, d = 4) => (Number.isFinite(v) ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d }) : '-');
 
-const RangeField = ({ label, value, min, max, step, onChange }) => (
+const RangeField = ({ label, value, min, max, step, onChange }) => {
+  const tc = useThemeClass();
+  return (
   <div>
-    <p className="text-gray-400 text-xs mb-1">
-      {label}: <span className="text-white">{value}</span>
+    <p className={tc('text-gray-400 text-xs mb-1', 'text-pl-muted text-xs mb-1')}>
+      {label}: <span className={tc('text-white', 'text-pl-text')}>{value}</span>
     </p>
     <input
       type="range" min={min} max={max} step={step} value={value}
       onChange={(e) => onChange(Number(e.target.value))}
-      className="w-full accent-[#BFFF00]"
+      className={tc('w-full accent-[#BFFF00]', 'w-full accent-pl-primary')}
     />
   </div>
-);
+  );
+};
 
 const DesignExplorer = () => {
+  const tc = useThemeClass();
   const [mode, setMode] = useState('layers');
   const [M, setM] = useState(LAYER_DESIGN.mobility_ratio);
   const [iw, setIw] = useState(ELEMENT.iw_design_rb_d);
@@ -99,10 +110,10 @@ const DesignExplorer = () => {
     >
       <div className="grid gap-4 sm:grid-cols-4 items-end">
         <div>
-          <p className="text-gray-400 text-xs mb-1">Mode</p>
+          <p className={tc('text-gray-400 text-xs mb-1', 'text-pl-muted text-xs mb-1')}>Mode</p>
           <select
             value={mode} onChange={(e) => setMode(e.target.value)}
-            className="w-full bg-gray-800 border border-gray-600 rounded-md text-white text-xs px-2 py-1.5"
+            className={tc('w-full bg-gray-800 border border-gray-600 rounded-md text-white text-xs px-2 py-1.5', 'w-full bg-pl-surface border border-pl-border-strong rounded-md text-pl-text text-xs px-2 py-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus')}
           >
             <option value="layers">Layered sweep</option>
             <option value="forecast">Pattern forecast</option>
@@ -121,58 +132,58 @@ const DesignExplorer = () => {
         <NumBox label="Rate rb/d (typed)" value={iwT} onChange={setIwT} />
         <NumBox label="Oil viscosity (cp)" value={muO} onChange={setMuO} />
       </div>
-      <p className="text-xs text-gray-500 mt-1">
+      <p className={tc('text-xs text-gray-500 mt-1', 'text-xs text-pl-muted mt-1')}>
         The panel opens on the teaching column, M {LAYER_DESIGN.mobility_ratio}, {ELEMENT.iw_design_rb_d} rb/d and the SCAL oil.
         Typed M and rate override the sliders. A capstone brief states its own; type it in.
       </p>
 
       <button
         type="button" onClick={() => setUseEv((v) => !v)}
-        className={`mt-3 px-3 py-1.5 rounded-md border text-xs ${useEv ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold' : 'bg-gray-800 text-gray-300 border-gray-600'}`}
+        className={tc(`mt-3 px-3 py-1.5 rounded-md border text-xs ${useEv ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold' : 'bg-gray-800 text-gray-300 border-gray-600'}`, `mt-3 px-3 py-1.5 rounded-md border text-xs ${useEv ? 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold' : 'bg-pl-surface text-pl-text border-pl-border-strong'}`)}
       >
         {useEv ? `EV from the layer column (${fmt(EV, 4)})` : 'EV = 1 (no vertical sweep penalty)'}
       </button>
 
       {mode === 'layers' ? (
-        <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto bg-[#0F172A] rounded-md border border-gray-700 mt-3">
+        <SvgChartFrame width={W} height={H} label="Layer permeability and thickness in depth order" minWidth={460} maxWidth={720} className="mt-3">
           {layersView.map((l) => {
             const yTop = PAD.top + (l.top / totalH) * (H - PAD.top - PAD.bottom);
             const hgt = (l.h_ft / totalH) * (H - PAD.top - PAD.bottom);
             const wdt = (l.k_md / maxK) * (W - PAD.left - PAD.right);
             return (
               <g key={l.name}>
-                <rect x={PAD.left} y={yTop} width={wdt} height={Math.max(1, hgt - 2)} fill="#38BDF8" opacity="0.55" />
-                <text x={PAD.left - 6} y={yTop + hgt / 2 + 4} textAnchor="end" fill="#94A3B8" fontSize="10">{l.name}</text>
-                <text x={PAD.left + wdt + 6} y={yTop + hgt / 2 + 4} fill="#E2E8F0" fontSize="10">
+                <rect x={PAD.left} y={yTop} width={wdt} height={Math.max(1, hgt - 2)} fill={seriesColor(0)} opacity="0.55" />
+                <text x={PAD.left - 6} y={yTop + hgt / 2 + 4} textAnchor="end" fill={SVG_CHART.tick} fontSize="10">{l.name}</text>
+                <text x={PAD.left + wdt + 6} y={yTop + hgt / 2 + 4} fill={SVG_CHART.label} fontSize="10">
                   {fmt(l.k_md, 1)} md, {l.h_ft} ft
                 </text>
               </g>
             );
           })}
-          <text x={PAD.left} y={H - 10} fill="#94A3B8" fontSize="10">bar length is permeability, bar height is thickness, order is depth</text>
-        </svg>
+          <text x={PAD.left} y={H - 10} fill={SVG_CHART.tick} fontSize="10">bar length is permeability, bar height is thickness, order is depth</text>
+        </SvgChartFrame>
       ) : (
-        <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto bg-[#0F172A] rounded-md border border-gray-700 mt-3">
+        <SvgChartFrame width={W} height={H} label="Oil and water rate against time for the pattern forecast" minWidth={460} maxWidth={720} className="mt-3">
           {[0.25, 0.5, 0.75, 1].map((frac) => (
             <g key={frac}>
-              <line x1={PAD.left} y1={fy(qMax * frac)} x2={W - PAD.right} y2={fy(qMax * frac)} stroke="#334155" strokeWidth="1" />
-              <text x={PAD.left - 6} y={fy(qMax * frac) + 4} textAnchor="end" fill="#94A3B8" fontSize="10">{fmt(qMax * frac, 0)}</text>
+              <line x1={PAD.left} y1={fy(qMax * frac)} x2={W - PAD.right} y2={fy(qMax * frac)} {...GRID_LINE_PROPS} />
+              <text x={PAD.left - 6} y={fy(qMax * frac) + 4} textAnchor="end" fill={SVG_CHART.tick} fontSize="10">{fmt(qMax * frac, 0)}</text>
             </g>
           ))}
-          <path d={fline('qo_stbd')} fill="none" stroke="#BFFF00" strokeWidth="2" />
-          <path d={fline('qw_stbd')} fill="none" stroke="#38BDF8" strokeWidth="2" />
+          <path d={fline('qo_stbd')} fill="none" stroke={getStreamPalette('oil').primary} strokeWidth="2" />
+          <path d={fline('qw_stbd')} fill="none" stroke={getStreamPalette('water').primary} strokeWidth="2" />
           {f.summary.breakthrough_days != null && (
             <line
               x1={fx(f.summary.breakthrough_days)} y1={PAD.top}
               x2={fx(f.summary.breakthrough_days)} y2={H - PAD.bottom}
-              stroke="#F472B6" strokeWidth="1.5" strokeDasharray="4 3"
+              stroke={seriesColor(4)} strokeWidth="1.5" strokeDasharray="4 3"
             />
           )}
-          <text x={PAD.left} y={H - 10} fill="#94A3B8" fontSize="10">0 d</text>
-          <text x={W - PAD.right} y={H - 10} textAnchor="end" fill="#94A3B8" fontSize="10">{fmt(tMax, 0)} d</text>
-          <text x={W - PAD.right + 4} y={PAD.top + 10} textAnchor="end" fill="#BFFF00" fontSize="10">oil</text>
-          <text x={W - PAD.right + 4} y={PAD.top + 24} textAnchor="end" fill="#38BDF8" fontSize="10">water</text>
-        </svg>
+          <text x={PAD.left} y={H - 10} fill={SVG_CHART.tick} fontSize="10">0 d</text>
+          <text x={W - PAD.right} y={H - 10} textAnchor="end" fill={SVG_CHART.tick} fontSize="10">{fmt(tMax, 0)} d</text>
+          <text x={W - PAD.right + 4} y={PAD.top + 10} textAnchor="end" fill={getStreamPalette('oil').primary} fontSize="10">oil</text>
+          <text x={W - PAD.right + 4} y={PAD.top + 24} textAnchor="end" fill={getStreamPalette('water').primary} fontSize="10">water</text>
+        </SvgChartFrame>
       )}
 
       {mode === 'layers' ? (
@@ -204,12 +215,12 @@ const DesignExplorer = () => {
       )}
 
       <div className="mt-4">
-        <p className="text-gray-400 text-xs mb-1">Channel back-out: the contacted pore volume a producer&apos;s breakthrough implies (opens on Ekene-6)</p>
+        <p className={tc('text-gray-400 text-xs mb-1', 'text-pl-muted text-xs mb-1')}>Channel back-out: the contacted pore volume a producer&apos;s breakthrough implies (opens on Ekene-6)</p>
         <div className="grid gap-4 sm:grid-cols-4 items-end">
           <div>
-            <p className="text-gray-400 text-xs mb-1">Producer</p>
+            <p className={tc('text-gray-400 text-xs mb-1', 'text-pl-muted text-xs mb-1')}>Producer</p>
             <select value={prod} onChange={(e) => setProd(e.target.value)}
-              className="w-full bg-gray-800 border border-gray-600 rounded-md text-white text-xs px-2 py-1.5">
+              className={tc('w-full bg-gray-800 border border-gray-600 rounded-md text-white text-xs px-2 py-1.5', 'w-full bg-pl-surface border border-pl-border-strong rounded-md text-pl-text text-xs px-2 py-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus')}>
               {['Ekene-1', 'Ekene-3', 'Ekene-5', 'Ekene-6'].map((p) => <option key={p} value={p}>{p}</option>)}
             </select>
           </div>

@@ -46,7 +46,7 @@ The useful way to frame it: a trailing window of $n$ periods introduces an effec
 
 {{panel:wf-ledger-explorer}}
 
-Set the window to 1 and confirm the lime line lands exactly on the cyan. Now step it up one period at a time and watch two things happen together: the lime line gets smoother, and its arrival at 1.05 moves later. Those are the same effect, not two effects.
+Set the window to 1 and confirm the blue line lands exactly on the green. Now step it up one period at a time and watch two things happen together: the blue line gets smoother, and its arrival at 1.05 moves later. Those are the same effect, not two effects.
 
 ## Partial windows at the start
 

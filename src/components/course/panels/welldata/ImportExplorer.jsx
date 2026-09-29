@@ -60,7 +60,7 @@ const ImportExplorer = () => {
         <div className="flex flex-wrap gap-2">
           {allFiles.map((f) => (
             <button key={f.id} type="button" onClick={() => setFileId(f.id)}
-              className="px-3 py-1.5 rounded-md border text-sm bg-gray-800 text-gray-300 border-gray-600">{f.label}</button>
+              className="px-3 py-1.5 rounded-md border text-sm bg-pl-surface text-pl-text border-pl-border-strong">{f.label}</button>
           ))}
         </div>
       </PanelShell>
@@ -75,8 +75,8 @@ const ImportExplorer = () => {
         {allFiles.map((f) => (
           <button key={f.id} type="button" onClick={() => setFileId(f.id)}
             className={`px-3 py-1.5 rounded-md border text-sm ${fileId === f.id
-              ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold'
-              : 'bg-gray-800 text-gray-300 border-gray-600'}`}>
+              ? 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold'
+              : 'bg-pl-surface text-pl-text border-pl-border-strong'}`}>
             {f.label}
           </button>
         ))}
@@ -85,7 +85,7 @@ const ImportExplorer = () => {
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
-            <tr className="text-gray-400 border-b border-gray-700">
+            <tr className="text-pl-muted border-b border-pl-border">
               <th className="text-left py-2 pr-4">curve</th>
               <th className="text-left py-2 pr-4">kind</th>
               <th className="text-left py-2 pr-4">unit before</th>
@@ -95,12 +95,12 @@ const ImportExplorer = () => {
           </thead>
           <tbody>
             {r.prep.logs.map((l, i) => (
-              <tr key={l.mnemonic} className="border-b border-gray-800">
-                <td className="py-2 pr-4 text-white">{l.mnemonic}{i === 0 ? ' (index)' : ''}</td>
-                <td className="py-2 pr-4 text-gray-300">{l.kind || 'not recognised'}</td>
-                <td className="py-2 pr-4 text-gray-300">{l.sourceUnit || '-'}</td>
-                <td className="py-2 pr-4 text-gray-300">{l.unit || '-'}</td>
-                <td className={`py-2 ${l.converted ? 'text-[#BFFF00] font-semibold' : 'text-gray-500'}`}>
+              <tr key={l.mnemonic} className="border-b border-pl-border">
+                <td className="py-2 pr-4 text-pl-text">{l.mnemonic}{i === 0 ? ' (index)' : ''}</td>
+                <td className="py-2 pr-4 text-pl-text">{l.kind || 'not recognised'}</td>
+                <td className="py-2 pr-4 text-pl-text">{l.sourceUnit || '-'}</td>
+                <td className="py-2 pr-4 text-pl-text">{l.unit || '-'}</td>
+                <td className={`py-2 ${l.converted ? 'text-pl-primary-text font-semibold' : 'text-pl-muted'}`}>
                   {l.converted ? 'YES' : 'no'}
                 </td>
               </tr>

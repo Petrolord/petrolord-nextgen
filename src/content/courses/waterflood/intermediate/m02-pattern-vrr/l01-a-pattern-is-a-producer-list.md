@@ -38,7 +38,7 @@ which is the pattern period's $W_i$ exactly. The arithmetic is worth doing once 
 
 {{panel:wf-pattern-explorer}}
 
-Select each pattern in turn and watch the lime line move while the pink field line stays put. The field line is the same series in both cases, because the field does not care how you group it.
+Select each pattern in turn and watch the blue line move while the violet field line stays put. The field line is the same series in both cases, because the field does not care how you group it.
 
 ## Patterns can overlap, and here they do not
 

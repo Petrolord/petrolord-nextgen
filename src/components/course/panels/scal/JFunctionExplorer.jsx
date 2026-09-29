@@ -3,6 +3,9 @@ import {
   plugJTables, fitPlugJ, reservoirCapillary, makeJFunction, TEACHING_ROCK,
 } from './scalLab';
 import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { useThemeClass } from '@/design/themeClass';
+import SvgChartFrame from '@/components/charts/SvgChartFrame';
+import { seriesColor, SVG_CHART, AXIS_LINE_PROPS } from '@/utils/chartSvg';
 
 // J-function explorer: three Ekene plugs from three different labs (air-brine,
 // mercury-air, oil-brine) whose Pc curves disagree by an order of magnitude,
@@ -19,9 +22,10 @@ const PAD = { left: 56, top: 16, right: 16, bottom: 40 };
 const fmt = (v, d = 4) => (Number.isFinite(v) ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d }) : '-');
 const sci = (v, d = 6) => (Number.isFinite(v) ? Number(v).toPrecision(d) : '-');
 
-const PLUG_COLORS = ['#38bdf8', '#f97316', '#a78bfa'];
+const PLUG_COLORS = [seriesColor(1), seriesColor(3), seriesColor(4)];
 
 const JFunctionExplorer = () => {
+  const tc = useThemeClass();
   const [plugSel, setPlugSel] = useState('all');
   const [swirrText, setSwirrText] = useState('0.25');
   const [kText, setKText] = useState(String(TEACHING_ROCK.k_md));
@@ -105,9 +109,9 @@ const JFunctionExplorer = () => {
       {controls}
 
       <div className="grid gap-3 lg:grid-cols-2">
-        <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto bg-[#0F172A] rounded-md border border-gray-700">
-          <line x1={PAD.left} y1={PAD.top} x2={PAD.left} y2={H - PAD.bottom} stroke="#334155" />
-          <line x1={PAD.left} y1={H - PAD.bottom} x2={W - PAD.right} y2={H - PAD.bottom} stroke="#334155" />
+        <SvgChartFrame width={W} height={H} label="Laboratory capillary pressure against water saturation, log axis" minWidth={460} maxWidth={720}>
+          <line x1={PAD.left} y1={PAD.top} x2={PAD.left} y2={H - PAD.bottom} {...AXIS_LINE_PROPS} />
+          <line x1={PAD.left} y1={H - PAD.bottom} x2={W - PAD.right} y2={H - PAD.bottom} {...AXIS_LINE_PROPS} />
           {shown.map((p, i) => (
             <path key={p.name} d={pcPath(p.pcRows)} fill="none" stroke={shownColors[i]} strokeWidth="1.6" />
           ))}
@@ -116,23 +120,23 @@ const JFunctionExplorer = () => {
               {p.name} ({p.system})
             </text>
           ))}
-          <text x={W / 2} y={H - 8} fontSize="10" fill="#64748b" textAnchor="middle">Sw</text>
-          <text x={14} y={H / 2} fontSize="10" fill="#64748b" transform={`rotate(-90 14 ${H / 2})`} textAnchor="middle">lab Pc (psi, log axis)</text>
-        </svg>
+          <text x={W / 2} y={H - 8} fontSize="10" fill={SVG_CHART.tick} textAnchor="middle">Sw</text>
+          <text x={14} y={H / 2} fontSize="10" fill={SVG_CHART.tick} transform={`rotate(-90 14 ${H / 2})`} textAnchor="middle">lab Pc (psi, log axis)</text>
+        </SvgChartFrame>
 
-        <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto bg-[#0F172A] rounded-md border border-gray-700">
-          <line x1={PAD.left} y1={PAD.top} x2={PAD.left} y2={H - PAD.bottom} stroke="#334155" />
-          <line x1={PAD.left} y1={H - PAD.bottom} x2={W - PAD.right} y2={H - PAD.bottom} stroke="#334155" />
-          <path d={fitPath} fill="none" stroke="#BFFF00" strokeWidth="1.4" />
+        <SvgChartFrame width={W} height={H} label="Leverett J against water saturation with the fitted power law" minWidth={460} maxWidth={720}>
+          <line x1={PAD.left} y1={PAD.top} x2={PAD.left} y2={H - PAD.bottom} {...AXIS_LINE_PROPS} />
+          <line x1={PAD.left} y1={H - PAD.bottom} x2={W - PAD.right} y2={H - PAD.bottom} {...AXIS_LINE_PROPS} />
+          <path d={fitPath} fill="none" stroke={seriesColor(0)} strokeWidth="1.4" />
           {shown.map((p, i) => p.jRows.map((r) => (
             <circle key={`${p.name}-${r.Sw}`} cx={xSw(r.Sw)} cy={yJ(r.J)} r="3.2" fill="none" stroke={shownColors[i]} strokeWidth="1.2" />
           )))}
-          <text x={PAD.left + 8} y={PAD.top + 11} fontSize="10" fill="#BFFF00">
+          <text x={PAD.left + 8} y={PAD.top + 11} fontSize="10" fill={seriesColor(0)}>
             fit J = {sci(fit.a, 4)} Sw*^(-{sci(fit.b, 4)}), Swirr {Swirr}
           </text>
-          <text x={W / 2} y={H - 8} fontSize="10" fill="#64748b" textAnchor="middle">Sw</text>
-          <text x={14} y={H / 2} fontSize="10" fill="#64748b" transform={`rotate(-90 14 ${H / 2})`} textAnchor="middle">J (dimensionless)</text>
-        </svg>
+          <text x={W / 2} y={H - 8} fontSize="10" fill={SVG_CHART.tick} textAnchor="middle">Sw</text>
+          <text x={14} y={H / 2} fontSize="10" fill={SVG_CHART.tick} transform={`rotate(-90 14 ${H / 2})`} textAnchor="middle">J (dimensionless)</text>
+        </SvgChartFrame>
       </div>
 
       <TileGrid>

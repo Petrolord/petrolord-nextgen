@@ -8,8 +8,8 @@ import { readUserFiles } from '@/lib/welldataTeaching';
 const UserLasPicker = ({ onFiles, label = 'Open your own LAS files' }) => {
   const [error, setError] = useState(null);
   return (
-    <div className="flex flex-wrap items-center gap-2 text-xs text-gray-400">
-      <label className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-dashed border-gray-500 text-gray-300 cursor-pointer hover:border-[#BFFF00]">
+    <div className="flex flex-wrap items-center gap-2 text-xs text-pl-muted">
+      <label className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-dashed border-pl-border-strong text-pl-text cursor-pointer hover:border-pl-primary">
         {label}
         <input type="file" multiple accept=".las,.LAS,.txt" className="hidden" data-testid="user-las-input"
           onChange={async (e) => {
@@ -23,7 +23,7 @@ const UserLasPicker = ({ onFiles, label = 'Open your own LAS files' }) => {
             e.target.value = '';
           }} />
       </label>
-      {error && <span className="text-red-400">Could not read that file: {error}</span>}
+      {error && <span className="text-pl-danger-text">Could not read that file: {error}</span>}
     </div>
   );
 };

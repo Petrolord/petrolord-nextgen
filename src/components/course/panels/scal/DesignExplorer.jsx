@@ -4,6 +4,9 @@ import {
   swAvgCrestColumn, EKENE_SCAL, TEACHING_ROCK, TEACHING_SWIRR,
 } from './scalLab';
 import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { useThemeClass } from '@/design/themeClass';
+import SvgChartFrame from '@/components/charts/SvgChartFrame';
+import { seriesColor, SVG_CHART, AXIS_LINE_PROPS } from '@/utils/chartSvg';
 
 // Design explorer (Expert): three ways to interrogate the same displacement.
 // Fit-the-lab recovers the Corey plant from the 13-row grid, and the printed
@@ -20,20 +23,24 @@ const PAD = { left: 52, top: 16, right: 16, bottom: 40 };
 
 const sci = (v, d = 6) => (Number.isFinite(v) ? Number(v).toPrecision(d) : '-');
 
-const RangeField = ({ label, value, min, max, step, onChange }) => (
+const RangeField = ({ label, value, min, max, step, onChange }) => {
+  const tc = useThemeClass();
+  return (
   <div>
-    <p className="text-gray-400 text-xs mb-1">
-      {label}: <span className="text-white">{value}</span>
+    <p className={tc('text-gray-400 text-xs mb-1', 'text-pl-muted text-xs mb-1')}>
+      {label}: <span className={tc('text-white', 'text-pl-text')}>{value}</span>
     </p>
     <input
       type="range" min={min} max={max} step={step} value={value}
       onChange={(e) => onChange(Number(e.target.value))}
-      className="w-full accent-[#BFFF00]"
+      className={tc('w-full accent-[#BFFF00]', 'w-full accent-pl-primary')}
     />
   </div>
-);
+  );
+};
 
 const DesignExplorer = () => {
+  const tc = useThemeClass();
   const [mode, setMode] = useState('fit');
   const [qt, setQt] = useState(3000);
   const [dip, setDip] = useState(0);
@@ -118,25 +125,25 @@ const DesignExplorer = () => {
         <NumField label="Crest column: porosity" value={phiText} onChange={setPhiText} />
       </div>
 
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto bg-[#0F172A] rounded-md border border-gray-700">
-        <line x1={PAD.left} y1={PAD.top} x2={PAD.left} y2={H - PAD.bottom} stroke="#334155" />
-        <line x1={PAD.left} y1={H - PAD.bottom} x2={W - PAD.right} y2={H - PAD.bottom} stroke="#334155" />
+      <SvgChartFrame width={W} height={H} label="Fractional flow of the base case and the designed case against water saturation" minWidth={460} maxWidth={720}>
+        <line x1={PAD.left} y1={PAD.top} x2={PAD.left} y2={H - PAD.bottom} {...AXIS_LINE_PROPS} />
+        <line x1={PAD.left} y1={H - PAD.bottom} x2={W - PAD.right} y2={H - PAD.bottom} {...AXIS_LINE_PROPS} />
         {[0, 0.25, 0.5, 0.75, 1].map((s) => (
-          <text key={s} x={x(s)} y={H - PAD.bottom + 14} fontSize="9" fill="#64748b" textAnchor="middle">{s}</text>
+          <text key={s} x={x(s)} y={H - PAD.bottom + 14} fontSize="9" fill={SVG_CHART.tick} textAnchor="middle">{s}</text>
         ))}
         {[0.25, 0.5, 0.75, 1].map((v) => (
-          <text key={v} x={PAD.left - 6} y={y(v) + 3} fontSize="9" fill="#64748b" textAnchor="end">{v}</text>
+          <text key={v} x={PAD.left - 6} y={y(v) + 3} fontSize="9" fill={SVG_CHART.tick} textAnchor="end">{v}</text>
         ))}
-        {tangent(base.bl, '#64748b')}
-        {tangent(caseOut.bl, '#BFFF00')}
-        <path d={fwPath(base.curves)} fill="none" stroke="#64748b" strokeWidth="1.4" />
-        <path d={fwPath(caseOut.curves)} fill="none" stroke="#BFFF00" strokeWidth="1.8" />
-        <circle cx={x(base.bl.Swf)} cy={y(base.bl.fwf)} r="3.5" fill="#64748b" />
-        {Number.isFinite(caseOut.bl.Swf) && <circle cx={x(caseOut.bl.Swf)} cy={y(caseOut.bl.fwf)} r="3.5" fill="#BFFF00" />}
-        <text x={PAD.left + 8} y={PAD.top + 11} fontSize="10" fill="#64748b">base Ekene fw</text>
-        <text x={PAD.left + 8} y={PAD.top + 24} fontSize="10" fill="#BFFF00">{caseLabel}</text>
-        <text x={W / 2} y={H - 8} fontSize="10" fill="#64748b" textAnchor="middle">Sw, water saturation</text>
-      </svg>
+        {tangent(base.bl, SVG_CHART.reference)}
+        {tangent(caseOut.bl, seriesColor(0))}
+        <path d={fwPath(base.curves)} fill="none" stroke={SVG_CHART.reference} strokeWidth="1.4" />
+        <path d={fwPath(caseOut.curves)} fill="none" stroke={seriesColor(0)} strokeWidth="1.8" />
+        <circle cx={x(base.bl.Swf)} cy={y(base.bl.fwf)} r="3.5" fill={SVG_CHART.reference} />
+        {Number.isFinite(caseOut.bl.Swf) && <circle cx={x(caseOut.bl.Swf)} cy={y(caseOut.bl.fwf)} r="3.5" fill={seriesColor(0)} />}
+        <text x={PAD.left + 8} y={PAD.top + 11} fontSize="10" fill={SVG_CHART.reference}>base Ekene fw</text>
+        <text x={PAD.left + 8} y={PAD.top + 24} fontSize="10" fill={seriesColor(0)}>{caseLabel}</text>
+        <text x={W / 2} y={H - 8} fontSize="10" fill={SVG_CHART.tick} textAnchor="middle">Sw, water saturation</text>
+      </SvgChartFrame>
 
       <TileGrid>
         {mode === 'fit' && (
