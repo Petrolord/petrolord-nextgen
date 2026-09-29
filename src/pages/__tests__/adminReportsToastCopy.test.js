@@ -4,7 +4,10 @@
 // construction emoji ("isn't implemented yet—but ...").
 import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { resolve, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
 
 const FILES = [
   'src/pages/AdminComplianceReportsPage.jsx',
@@ -27,7 +30,7 @@ const toastsIn = (src) => src.match(/toast\(\s*\{[\s\S]*?\}\s*\)/g) || [];
 describe('admin report toasts follow the copy rule', () => {
   for (const file of FILES) {
     it(file, () => {
-      const src = readFileSync(resolve(process.cwd(), file), 'utf8');
+      const src = readFileSync(resolve(ROOT, file), 'utf8');
       const toasts = toastsIn(src);
       expect(toasts.length).toBeGreaterThan(0);
       for (const t of toasts) {
