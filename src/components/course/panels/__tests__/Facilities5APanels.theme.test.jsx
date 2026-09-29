@@ -83,10 +83,11 @@ const sourceFiles = () => DIRS.flatMap((d) => fs.readdirSync(path.join(PANEL_DIR
 // What a line, bar or reference line may be drawn in on the white plate.
 const KIT_STROKES = new Set([...CHART_SERIES, SVG_CHART.label, SVG_CHART.note, SVG_CHART.reference].map((c) => c.toLowerCase()));
 // The old dark-plate colours: lime, sky, amber, pink, red, rose, violet,
-// green, the slate ticks and the dark tooltip. (#334155, the old grid, is the
-// kit's tick ink on white, and #e2e8f0, the old near-white trace, is the kit
-// grid; the grid check below proves the grid moved.)
-const RETIRED = /#(bfff00|38bdf8|fbbf24|f472b6|f87171|fb7185|a78bfa|34d399|94a3b8|0f172a)\b/i;
+// green and the slate ticks. (#334155, the old grid, is the kit's tick ink on
+// white, #e2e8f0, the old near-white trace, is the kit grid, and #0f172a, the
+// old dark tooltip, is the kit's axis title ink; the grid and tooltip checks
+// below prove those moved.)
+const RETIRED = /#(bfff00|38bdf8|fbbf24|f472b6|f87171|fb7185|a78bfa|34d399|94a3b8)\b/i;
 
 const viewSelects = (container) => [...container.querySelectorAll('select')]
   .filter((s) => s.parentElement.textContent.startsWith('View'));
