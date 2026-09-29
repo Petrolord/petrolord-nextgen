@@ -1,8 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, ComposedChart, BarChart, Line, Bar, Cell,
+  ComposedChart, BarChart, Line, Bar, Cell,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import {
   ESP_THRESHOLDS, PSI_PER_FT_SG, EXACT_PSI_PER_FT_SG, REQUIREMENT_SWEEP_FT,
   allCases, intakeReading, gasVerdictSweepRows, separatorDensityRows,
@@ -22,9 +25,9 @@ import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/comp
 
 const fmt = (v, d = 4) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: 0 })
-  : '-');
+  : 'n/a');
 
-const pct = (v, d = 2) => (Number.isFinite(v) ? `${fmt(v * 100, d)} %` : '-');
+const pct = (v, d = 2) => (Number.isFinite(v) ? `${fmt(v * 100, d)} %` : 'n/a');
 
 const MODES = [
   ['intake', 'What the pump swallows'],
@@ -33,14 +36,14 @@ const MODES = [
   ['gradient', 'One conversion, carried twice'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const GRID = <CartesianGrid stroke="#334155" strokeDasharray="3 3" />;
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const GRID = <CartesianGrid {...GRID_STYLE} />;
 
 const VERDICT_COLOUR = {
-  standard: '#BFFF00',
-  gasHandler: '#f97316',
-  separatorRequired: '#f472b6',
+  standard: seriesColor(1),
+  gasHandler: seriesColor(2),
+  separatorRequired: seriesColor(4),
 };
 
 // The four cases the course walks, built once. Every one of them is a bundle of
@@ -88,35 +91,33 @@ const Intake = ({ c }) => {
           <Tile label="Verdict" value={r.verdict} />
         </TileGrid>
       </div>
-      <div className="h-72 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart data={sweep} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="separatorEfficiency" type="number" domain={[0, 1]} tick={AXIS}
-              label={{ value: 'separator efficiency, fraction', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS}
-              label={{ value: 'gas volume fraction', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            {/* BOTH published limits, drawn separately. They are checked in
-                order, so only one of them ever decides a verdict, and neither
-                of them is ever compared against the stream's own fraction. */}
-            <ReferenceLine y={ESP_THRESHOLDS.standardMaxGvf} stroke="#f97316" strokeWidth={2}
-              label={{ value: 'standard stages stop here', fill: '#f97316', fontSize: 10, position: 'insideTopLeft' }} />
-            <ReferenceLine y={ESP_THRESHOLDS.handlerMaxGvf} stroke="#f472b6" strokeWidth={2}
-              label={{ value: 'a gas handler stops here', fill: '#f472b6', fontSize: 10, position: 'insideTopLeft' }} />
-            <ReferenceLine y={r.streamGvf} stroke="#94a3b8" strokeDasharray="5 3"
-              label={{ value: 'the stream, never compared', fill: '#94a3b8', fontSize: 10, position: 'insideBottomLeft' }} />
-            <ReferenceLine x={r.separatorEfficiency} stroke="#e2e8f0"
-              label={{ value: 'this design', fill: '#e2e8f0', fontSize: 10, position: 'top' }} />
-            <Line type="monotone" dataKey="gvfThroughPump" name="gas volume fraction through the pump"
-              stroke="#BFFF00" strokeWidth={2} dot={false} isAnimationActive={false} />
-          </ComposedChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={288} className="mt-3">
+        <ComposedChart data={sweep} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="separatorEfficiency" type="number" domain={[0, 1]} tick={AXIS}
+            label={{ value: 'separator efficiency, fraction', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS}
+            label={{ value: 'gas volume fraction', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+          <Legend {...LEGEND_PROPS} />
+          {/* BOTH published limits, drawn separately. They are checked in
+              order, so only one of them ever decides a verdict, and neither
+              of them is ever compared against the stream's own fraction. */}
+          <ReferenceLine y={ESP_THRESHOLDS.standardMaxGvf} stroke={seriesColor(2)} strokeWidth={2}
+            label={{ value: 'standard stages stop here', fill: seriesColor(2), fontSize: 10, position: 'insideTopLeft' }} />
+          <ReferenceLine y={ESP_THRESHOLDS.handlerMaxGvf} stroke={seriesColor(4)} strokeWidth={2}
+            label={{ value: 'a gas handler stops here', fill: seriesColor(4), fontSize: 10, position: 'insideTopLeft' }} />
+          <ReferenceLine y={r.streamGvf} stroke={SVG_CHART.reference} strokeDasharray="5 3"
+            label={{ value: 'the stream, never compared', fill: SVG_CHART.note, fontSize: 10, position: 'insideBottomLeft' }} />
+          <ReferenceLine x={r.separatorEfficiency} stroke={SVG_CHART.label}
+            label={{ value: 'this design', fill: SVG_CHART.label, fontSize: 10, position: 'top' }} />
+          <Line type="monotone" dataKey="gvfThroughPump" name="gas volume fraction through the pump"
+            stroke={seriesColor(1)} strokeWidth={2} dot={false} isAnimationActive={false} />
+        </ComposedChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">separator efficiency</th>
               <th className="text-left pr-3">gas through the pump, bbl/d</th>
@@ -128,11 +129,11 @@ const Intake = ({ c }) => {
           </thead>
           <tbody>
             {sweep.map((s) => (
-              <tr key={s.separatorEfficiency} className={s.separatorEfficiency === r.separatorEfficiency ? 'text-white' : ''}>
+              <tr key={s.separatorEfficiency} className={s.separatorEfficiency === r.separatorEfficiency ? 'text-pl-text' : ''}>
                 <td className="pr-3">{fmt(s.separatorEfficiency, 2)}</td>
                 <td className="pr-3">{fmt(s.throughPumpGasResBpd, 4)}</td>
                 <td className="pr-3">{fmt(s.pumpIntakeBpd, 4)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(s.gvfThroughPump, 6)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(s.gvfThroughPump, 6)}</td>
                 <td className="pr-3">{fmt(s.mixtureDensityLbFt3, 6)}</td>
                 <td style={{ color: VERDICT_COLOUR[s.verdict] }}>{s.verdict}</td>
               </tr>
@@ -140,7 +141,7 @@ const Intake = ({ c }) => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         WHAT THE PUMP SEES IS NOT WHAT THE PERFORATIONS DELIVER. The reservoir hands over
         {' '}{fmt(r.totalResBpd, 4)} bbl/d at pump conditions, of which
         {' '}{fmt(r.freeGasResBpd, 4)} bbl/d is free gas: a stream fraction of
@@ -151,7 +152,7 @@ const Intake = ({ c }) => {
         {' '}{fmt(r.streamMixtureDensityLbFt3, 6)} lbm/ft3, which is why the gradient the head
         conversion runs on is not the stream gradient.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         BOTH LIMITS ARE DRAWN AND ONLY ONE OF THEM EVER DECIDES. The engine compares the
         THROUGH-PUMP fraction against the handler limit of
         {' '}{pct(ESP_THRESHOLDS.handlerMaxGvf, 0)} first and against the standard limit of
@@ -167,8 +168,8 @@ const Intake = ({ c }) => {
         {' '}At the separator efficiency this design actually carries, the verdict is {r.verdict}.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">published design</th>
               <th className="text-left pr-3">stream density, lbm/ft3</th>
@@ -183,7 +184,7 @@ const Intake = ({ c }) => {
                 <td className="pr-3">{d.id}</td>
                 <td className="pr-3">{fmt(d.streamMixtureDensityLbFt3, 6)}</td>
                 <td className="pr-3">{fmt(d.pumpMixtureDensityLbFt3, 6)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(d.densityGainLbFt3, 6)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(d.densityGainLbFt3, 6)}</td>
                 <td>{fmt(d.gradientGainPsiPerFt, 8)}</td>
               </tr>
             ))}
@@ -208,9 +209,9 @@ const Tdh = ({ c }) => {
     return <Note>Total dynamic head is a pressure difference divided by a gradient, so it needs both. Handed a gradient of nought the engine returns the pressure difference and no head at all, because feet of a fluid with no weight is not a number.</Note>;
   }
   const parts = [
-    { part: 'net vertical lift', ft: t.netLiftFt, sharePct: t.netLiftSharePct, fill: '#BFFF00' },
-    { part: 'friction', ft: t.frictionFt, sharePct: t.frictionSharePct, fill: '#f97316' },
-    { part: 'wellhead pressure', ft: t.whpHeadFt, sharePct: t.whpSharePct, fill: '#38bdf8' },
+    { part: 'net vertical lift', ft: t.netLiftFt, sharePct: t.netLiftSharePct, fill: seriesColor(1) },
+    { part: 'friction', ft: t.frictionFt, sharePct: t.frictionSharePct, fill: seriesColor(2) },
+    { part: 'wellhead pressure', ft: t.whpHeadFt, sharePct: t.whpSharePct, fill: seriesColor(0) },
   ];
   return (
     <>
@@ -234,25 +235,23 @@ const Tdh = ({ c }) => {
           <Tile label="Friction share of the whole" value={pct(t.frictionSharePct / 100, 4)} />
         </TileGrid>
       </div>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={parts} layout="vertical" margin={{ top: 10, right: 30, bottom: 18, left: 110 }}>
-            {GRID}
-            <XAxis type="number" tick={AXIS}
-              label={{ value: 'feet of the fluid being pumped', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis type="category" dataKey="part" tick={AXIS} width={110} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 4)} />
-            <ReferenceLine x={t.tdhFt} stroke="#e2e8f0" strokeDasharray="5 3"
-              label={{ value: 'the whole', fill: '#e2e8f0', fontSize: 10, position: 'top' }} />
-            <Bar dataKey="ft" name="feet" isAnimationActive={false}>
-              {parts.map((p) => <Cell key={p.part} fill={p.fill} />)}
-            </Bar>
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3">
+        <BarChart data={parts} layout="vertical" margin={{ top: 20, right: 30, bottom: 18, left: 110 }}>
+          {GRID}
+          <XAxis type="number" tick={AXIS}
+            label={{ value: 'feet of the fluid being pumped', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis type="category" dataKey="part" tick={AXIS} width={110} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 4)} />
+          <ReferenceLine x={t.tdhFt} stroke={SVG_CHART.label} strokeDasharray="5 3"
+            label={{ value: 'the whole', fill: SVG_CHART.label, fontSize: 10, position: 'top' }} />
+          <Bar dataKey="ft" name="feet" isAnimationActive={false}>
+            {parts.map((p) => <Cell key={p.part} fill={p.fill} />)}
+          </Bar>
+        </BarChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">part</th>
               <th className="text-left pr-3">feet</th>
@@ -267,7 +266,7 @@ const Tdh = ({ c }) => {
                 <td>{fmt(p.sharePct, 4)} %</td>
               </tr>
             ))}
-            <tr className="text-white">
+            <tr className="text-pl-text">
               <td className="pr-3">summed</td>
               <td className="pr-3">{fmt(t.summedTdhFt, 6)}</td>
               <td>the whole, by construction</td>
@@ -275,7 +274,7 @@ const Tdh = ({ c }) => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         TOTAL DYNAMIC HEAD IS THE PRESSURE THE PUMP HAS TO ADD, IN FEET OF WHAT IT IS PUMPING. The
         two pressures give {fmt(t.dpPsi, 4)} psi, the gradient of the mixture through the pump is
         {' '}{fmt(t.gradientPsiPerFt, 8)} psi/ft, and the quotient is {fmt(t.tdhFt, 6)} ft. It is
@@ -283,7 +282,7 @@ const Tdh = ({ c }) => {
         {' '}percent of it here, and a design that leaves it out understates the stage count by
         roughly an order of magnitude.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         THE CLOSURE IS {fmt(t.summedLessPressureTdhFt, 12)} FT, AND IT IS NOT A TEST THIS PACKAGE
         RUNS. Read how the three parts were got. The net lift is the pump depth less the fluid
         standing above the intake, the wellhead part is the wellhead pressure over the same
@@ -337,30 +336,28 @@ const Stack = ({ c }) => {
           <Tile label="Warnings the sizing raised" value={fmt(s.warningCount, 0)} />
         </TileGrid>
       </div>
-      <div className="h-72 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart data={sweep} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="stages" type="number" domain={['dataMin', 'dataMax']} tick={AXIS}
-              label={{ value: 'stages the sizing bought', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis yAxisId="pct" tick={AXIS}
-              label={{ value: 'margin, percent', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <YAxis yAxisId="stg" orientation="right" domain={[0, 1]} tick={AXIS}
-              label={{ value: 'margin, in stages', angle: 90, position: 'insideRight', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine yAxisId="stg" y={1} stroke="#f97316" strokeWidth={2}
-              label={{ value: 'one whole stage, the bound', fill: '#f97316', fontSize: 10, position: 'insideTopRight' }} />
-            <Line yAxisId="pct" type="monotone" dataKey="headMarginPct" name="margin, percent of the requirement"
-              stroke="#BFFF00" dot isAnimationActive={false} />
-            <Line yAxisId="stg" type="monotone" dataKey="headMarginStages" name="margin, in stages"
-              stroke="#38bdf8" dot isAnimationActive={false} />
-          </ComposedChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={288} className="mt-3">
+        <ComposedChart data={sweep} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="stages" type="number" domain={['dataMin', 'dataMax']} tick={AXIS}
+            label={{ value: 'stages the sizing bought', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis yAxisId="pct" tick={AXIS}
+            label={{ value: 'margin, percent', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis yAxisId="stg" orientation="right" domain={[0, 1]} tick={AXIS}
+            label={{ value: 'margin, in stages', angle: 90, position: 'insideRight', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine yAxisId="stg" y={1} stroke={seriesColor(2)} strokeWidth={2}
+            label={{ value: 'one whole stage, the bound', fill: seriesColor(2), fontSize: 10, position: 'insideTopRight' }} />
+          <Line yAxisId="pct" type="monotone" dataKey="headMarginPct" name="margin, percent of the requirement"
+            stroke={seriesColor(1)} dot isAnimationActive={false} />
+          <Line yAxisId="stg" type="monotone" dataKey="headMarginStages" name="margin, in stages"
+            stroke={seriesColor(0)} dot isAnimationActive={false} />
+        </ComposedChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">requirement, ft</th>
               <th className="text-left pr-3">stages exactly</th>
@@ -377,11 +374,11 @@ const Stack = ({ c }) => {
               <tr key={r.tdhFt}>
                 <td className="pr-3">{fmt(r.tdhFt, 0)}</td>
                 <td className="pr-3">{fmt(r.stagesExact, 6)}</td>
-                <td className="pr-3 text-white">{fmt(r.stages, 0)}</td>
+                <td className="pr-3 text-pl-text">{fmt(r.stages, 0)}</td>
                 <td className="pr-3">{fmt(r.headMadeFt, 6)}</td>
                 <td className="pr-3">{fmt(r.headMarginFt, 6)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.headMarginPct, 6)}</td>
-                <td className="pr-3 text-[#38bdf8]">{fmt(r.headMarginStages, 6)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.headMarginPct, 6)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.headMarginStages, 6)}</td>
                 <td>{fmt(r.identity, 18)}</td>
               </tr>
             ))}
@@ -389,8 +386,8 @@ const Stack = ({ c }) => {
         </table>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">case</th>
               <th className="text-left pr-3">head required, ft</th>
@@ -404,30 +401,30 @@ const Stack = ({ c }) => {
           </thead>
           <tbody>
             {all.map((r) => (
-              <tr key={r.id} className={r.id === s.id ? 'text-white' : ''}>
+              <tr key={r.id} className={r.id === s.id ? 'text-pl-text' : ''}>
                 <td className="pr-3">{r.tag}</td>
                 <td className="pr-3">{fmt(r.tdhFt, 4)}</td>
                 <td className="pr-3">{fmt(r.headPerStageFt, 6)}</td>
                 <td className="pr-3">{fmt(r.stages, 0)}</td>
                 <td className="pr-3">{fmt(r.headMadeFt, 4)}</td>
                 <td className="pr-3">{fmt(r.headMarginFt, 6)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.headMarginPct, 6)}</td>
-                <td className="text-[#38bdf8]">{fmt(r.headMarginStages, 6)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.headMarginPct, 6)}</td>
+                <td className="text-pl-info-text">{fmt(r.headMarginStages, 6)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THE MARGIN IS BOUNDED BY ONE STAGE, NOT BY A PERCENTAGE. stageCount rounds UP always, so the
         head the stack makes exceeds the head the duty requires by somewhere between nothing and one
         whole stage. Read the blue line on the chart: it is the margin in STAGES, it lives between
-        nought and one across the whole requirement sweep, and it never reaches the orange bound. The
-        lime line is the same margin as a percentage, and it is the one that moves, because the same
+        nought and one across the whole requirement sweep, and it never reaches the amber bound. The
+        green line is the same margin as a percentage, and it is the one that moves, because the same
         fraction of a stage is a different fraction of the whole depending on how many stages there
         are.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         The four cases in the lower table make that concrete. The tightest is {tightest.tag} at
         {' '}{fmt(tightest.headMarginPct, 6)} percent on {fmt(tightest.stages, 0)} stages; the
         loosest is {loosest.tag} at {fmt(loosest.headMarginPct, 6)} percent on
@@ -436,7 +433,7 @@ const Stack = ({ c }) => {
         {' '}{fmt(loosest.headMarginStages, 6)}, they are the same kind of number, and both of them
         are under one. A short stack has nowhere to hide a rounded stage.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         The last column of the requirement sweep is the identity behind the Expert tier: brake power
         is linear in head at a fixed rate and efficiency, so the ratio of the two brake powers IS the
         ratio of the two heads, and the difference between them is nought to machine precision at
@@ -469,16 +466,16 @@ const Gradient = ({ c }) => {
   const worst = rows.reduce((a, b) => (Math.abs(b.gapFt) > Math.abs(a.gapFt) ? b : a));
   return (
     <>
-      <div className="rounded-md border border-amber-700 bg-amber-900/20 p-4">
-        <p className="text-xs text-gray-400 mb-1">
+      <div className="rounded-md border border-pl-warning/40 bg-pl-warning-bg p-4">
+        <p className="text-xs text-pl-muted mb-1">
           One conversion from density to gradient, carried twice in one module
         </p>
-        <p className="text-2xl font-bold text-white mb-1">
+        <p className="text-2xl font-bold text-pl-text mb-1">
           {fmt(summary.exactPsiPerFtSg, 10)}
-          <span className="text-[#BFFF00]"> against </span>
-          {fmt(summary.roundedPsiPerFtSg, 10)} <span className="text-gray-400 text-sm">psi/ft per unit specific gravity</span>
+          <span className="text-pl-primary-text"> against </span>
+          {fmt(summary.roundedPsiPerFtSg, 10)} <span className="text-pl-muted text-sm">psi/ft per unit specific gravity</span>
         </p>
-        <p className="text-sm text-amber-200 mb-0">
+        <p className="text-sm text-pl-warning-text mb-0">
           gradientFromDensity divides by 144, which is exact. PSI_PER_FT_SG is the familiar rounded
           field figure. They are {fmt(summary.differencePsiPerFtSg, 10)} psi/ft apart, which is
           {' '}{fmt(summary.differencePct, 6)} percent, and both of them are in the same file.
@@ -496,24 +493,22 @@ const Gradient = ({ c }) => {
           <Tile label="Gradient on the reader's specific gravity" value={fmt(row.diagnosticsGradientOnTrueSgPsiPerFt, 8)} unit="psi/ft" />
         </TileGrid>
       </div>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={rows} margin={{ top: 10, right: 20, bottom: 40, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="id" tick={AXIS} interval={0} angle={-12} textAnchor="end" height={50} />
-            <YAxis tick={AXIS}
-              label={{ value: 'head the disagreement is worth, ft', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-            <ReferenceLine y={0} stroke="#64748b" />
-            <Bar dataKey="gapFt" name="feet of head" isAnimationActive={false}>
-              {rows.map((r) => <Cell key={r.id} fill={r.id === row.id ? '#BFFF00' : '#38bdf8'} />)}
-            </Bar>
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3">
+        <BarChart data={rows} margin={{ top: 20, right: 20, bottom: 40, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="id" tick={AXIS} interval={0} angle={-12} textAnchor="end" height={50} />
+          <YAxis tick={AXIS}
+            label={{ value: 'head the disagreement is worth, ft', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+          <ReferenceLine y={0} stroke={SVG_CHART.reference} />
+          <Bar dataKey="gapFt" name="feet of head" isAnimationActive={false}>
+            {rows.map((r) => <Cell key={r.id} fill={r.id === row.id ? seriesColor(1) : seriesColor(0)} />)}
+          </Bar>
+        </BarChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">case</th>
               <th className="text-left pr-3">specific gravity, density over water</th>
@@ -527,28 +522,28 @@ const Gradient = ({ c }) => {
           </thead>
           <tbody>
             {rows.map((r) => (
-              <tr key={r.id} className={r.id === row.id ? 'text-white' : ''}>
+              <tr key={r.id} className={r.id === row.id ? 'text-pl-text' : ''}>
                 <td className="pr-3">{r.tag}</td>
                 <td className="pr-3">{fmt(r.trueSg, 8)}</td>
                 <td className="pr-3">{fmt(r.launderedSg, 8)}</td>
                 <td className="pr-3">{fmt(r.headOnDesignGradientFt, 6)}</td>
                 <td className="pr-3">{fmt(r.headOnTrueSgFt, 6)}</td>
-                <td className="pr-3 text-[#f97316]">{fmt(r.gapFt, 6)}</td>
+                <td className="pr-3 text-pl-warning-text">{fmt(r.gapFt, 6)}</td>
                 <td className="pr-3">{fmt(r.gapPct, 6)}</td>
-                <td className="text-[#BFFF00]">{fmt(r.gapOnLaunderedSgFt, 12)}</td>
+                <td className="text-pl-primary-text">{fmt(r.gapOnLaunderedSgFt, 12)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         WHAT THE DISAGREEMENT IS WORTH. Take the specific gravity the obvious way, density over the
         weight of water, multiply by the rounded field constant, and divide the same pressure
         difference by it. On {worst.tag} that lands {fmt(worst.gapFt, 6)} ft away from the design
         answer, which is {fmt(worst.gapPct, 6)} percent, and the sign is always the same because the
         rounded constant is always the smaller of the two.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         THE CONVENTION THAT KEEPS THEM EXACT is to derive the specific gravity FROM the design
         gradient rather than from the density. Then the rounded constant times that gravity is
         identically the design gradient again, the design chain and the diagnostics chain sit on one
@@ -557,7 +552,7 @@ const Gradient = ({ c }) => {
         that way. On the case selected above, {row.tag}, the design gradient is
         {' '}{fmt(row.designGradientPsiPerFt, 8)} psi/ft.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         The gap is a FIXED PERCENTAGE of whatever head it sits on, which is exactly why these
         figures are given on the published designs and the two teaching wells and nowhere else. A
         figure in feet divides straight back to the head that produced it, so quoting one on a
