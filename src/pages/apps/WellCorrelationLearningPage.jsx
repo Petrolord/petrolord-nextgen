@@ -42,8 +42,6 @@ const LESSONS = [
     body: 'A well can lack a top (TD too shallow, faulted out, not deposited). The correlation line simply does not reach that well — never force a pick.' },
 ];
 
-const COLORS = { TOP_A: '#38bdf8', TOP_SAND: '#BFFF00', BASE_SAND: '#f59e0b', TOP_B: '#f472b6' };
-
 function ScopeGate() {
   return (
     <LearningModeGate app={APP} title="Well Correlation: Learning Mode locked">
