@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import {
   OKONO_LIMITS, FRONTIER_LIMITS, GRID_CASE_IDS, SPREAD_DIVISOR, EXACT_STATE_LIMIT, FALLBACK_GRID_CELLS, BINARY_SUM_DERIVED, setLabel,
   engineRules, okonoInventory, okonoBudgets, okonoFrontiers, gridCases,
@@ -38,18 +41,18 @@ export const MODES = [
   ['grid', 'Exact solve: awkward capex solved exactly, and the stated fallback grid'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
 
-const NpvInput = ({ children }) => <span data-plabel="npvinput" className="text-[#BFFF00]">{children}</span>;
+const NpvInput = ({ children }) => <span data-plabel="npvinput" className="text-pl-primary-text">{children}</span>;
 const CapexLabel = ({ children }) => <span data-plabel="capex">{children}</span>;
 const BudgetLabel = ({ children }) => <span data-plabel="budget">{children}</span>;
 const ProbabilityLabel = ({ children }) => <span data-plabel="probability">{children}</span>;
 
 const Tbl = ({ head, rows }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>{head.map((h, i) => <th key={i} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>)}</tr>
       </thead>
       <tbody>
@@ -73,7 +76,7 @@ export const InventoryMode = ({ inv, rules }) => {
   return (
     <>
       {rules && (
-        <ul className="text-xs text-slate-300 list-none pl-0 space-y-1 mb-0">
+        <ul className="text-xs text-pl-text list-none pl-0 space-y-1 mb-0">
           {rules.rules.map((l) => <li key={l}>{l}</li>)}
         </ul>
       )}
@@ -91,16 +94,16 @@ export const InventoryMode = ({ inv, rules }) => {
           mm(p.failCost), mm(p.emv), mm(p.successSpread), mm(p.mixtureSdDerived),
         ])}
       />
-      <p className="text-xs text-slate-500 mt-1 mb-0">
+      <p className="text-xs text-pl-muted mt-1 mb-0">
         All money in million USD. The success spread is the engine&apos;s successStdDev: the entered high NPV less the entered low NPV,
         over {SPREAD_DIVISOR}. The mixture sd is the square root of the engine&apos;s projectMoments variance, success and failure together.
       </p>
-      <div className="mt-3 rounded-md border border-gray-700 bg-[#0F172A] p-3 text-sm text-slate-200">
-        <p className="text-slate-500 text-xs mb-1">{h.id} by hand</p>
+      <div className="mt-3 rounded-md border border-pl-border bg-pl-sunken p-3 text-sm text-pl-text">
+        <p className="text-pl-muted text-xs mb-1">{h.id} by hand</p>
         <p className="mb-0">
-          {six(h.pos)} x {mm(h.npvP50)} less {six(h.failWeightDerived)} x {mm(h.failCost)} = <span className="text-[#BFFF00] font-semibold">{mm(h.emv)}</span> million USD (engine).
+          {six(h.pos)} x {mm(h.npvP50)} less {six(h.failWeightDerived)} x {mm(h.failCost)} = <span className="text-pl-accent-text font-semibold">{mm(h.emv)}</span> million USD (engine).
         </p>
-        <p className="text-xs text-slate-400 mt-1 mb-0">
+        <p className="text-xs text-pl-muted mt-1 mb-0">
           Its success-case NPV of {mm(h.npvP50)} million USD is not its value: the risked EMV is {six(h.emvShareOfSuccessDerived)} of it (derived).
         </p>
       </div>
@@ -110,11 +113,11 @@ export const InventoryMode = ({ inv, rules }) => {
             head={['probe "Probe", NPV 80 and fail cost 30', 'risked EMV, million USD, or the engine message']}
             rows={rules.posProbes.map((x) => [x.label, x.ok ? mm(x.emv) : x.error])}
           />
-          <p className="text-xs text-slate-500 mt-1 mb-0">
+          <p className="text-xs text-pl-muted mt-1 mb-0">
             A missing or null chance of success is the documented default 1, certain success. A chance of success that is typed must be a number from 0 to 1;
             a blank, a word or a figure outside 0 to 1 is refused, naming the project.
           </p>
-          <p className="text-xs text-slate-400 mt-2 mb-0">
+          <p className="text-xs text-pl-muted mt-2 mb-0">
             A project with capex typed as text beside one with capex 40 at a limit of 100:{' '}
             {rules.textCapexProbe.ok ? `funded ${setLabel(rules.textCapexProbe.ids)}.` : rules.textCapexProbe.error}
             {' '}Nothing is funded: the whole call is refused.
@@ -169,7 +172,7 @@ export const BudgetMode = ({ b, limit, onLimit }) => {
         head={['project', 'risked EMV per million USD of capex (derived)']}
         rows={b.ranking.map((x) => [x.id, six(x.emvPerCapexDerived)])}
       />
-      <div className="mt-3 rounded-md border border-gray-700 bg-[#0F172A] p-3 text-xs text-slate-300">
+      <div className="mt-3 rounded-md border border-pl-border bg-pl-sunken p-3 text-xs text-pl-text">
         <p className="mb-0">
           Filling a <BudgetLabel>{mm(g.limit)} million USD limit</BudgetLabel> greedily down that ranking funds {setLabel(g.ids)} at
           capex {mm(g.capexDerived)} and risked EMV {mm(g.emvDerived)} (derived). The optimizer funds {setLabel(g.optimalIds)} at {mm(g.optimalEmv)}.
@@ -204,18 +207,16 @@ export const FrontierMode = ({ fr, limit, onLimit }) => {
             options={FRONTIER_LIMITS.map((l) => [String(l), `${l} million USD`])} />
         </FieldGrid>
       )}
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={front.points} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="capex" type="number" domain={[0, front.limit]} tick={AXIS} label={{ value: 'capex, million USD', position: 'insideBottom', offset: -2, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS} label={{ value: 'best risked EMV', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => mm(v)} />
-            <ReferenceLine x={front.limit} stroke="#BFFF00" strokeDasharray="3 3" />
-            <Line type="stepAfter" dataKey="emv" name="best risked EMV" stroke="#38bdf8" isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={front.points} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="capex" type="number" domain={[0, front.limit]} tick={AXIS} label={{ value: 'capex, million USD', position: 'insideBottom', offset: -2, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS} label={{ value: 'best risked EMV', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => mm(v)} />
+          <ReferenceLine x={front.limit} stroke={seriesColor(0)} strokeDasharray="3 3" />
+          <Line type="stepAfter" dataKey="emv" name="best risked EMV" stroke={seriesColor(1)} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Tbl
         head={['point', <CapexLabel key="c">capex</CapexLabel>, 'EMV', 'EMV gained', <CapexLabel key="a">capex added</CapexLabel>, 'EMV per extra million USD', ...(isLarger ? ['the set behind the point (derived)'] : [])]}
         rows={front.points.map((pt) => [
@@ -226,7 +227,7 @@ export const FrontierMode = ({ fr, limit, onLimit }) => {
           ...(isLarger ? [fr.setsBehindLargerFrontier[pt.index].setsDerived.map((s) => setLabel(s)).join(' or ')] : []),
         ])}
       />
-      <p className="text-xs text-slate-500 mt-1 mb-0">
+      <p className="text-xs text-pl-muted mt-1 mb-0">
         The last three step columns are derived from consecutive rows. The last point, {mm(last.capex)} and {mm(last.emv)}, is the optimum: {setLabel(front.ids)}.
       </p>
       <div className="mt-3">
@@ -279,7 +280,7 @@ export const GridMode = ({ grid, caseId, onCase }) => {
         head={['published case', 'solve method', 'engine set', 'EMV', 'optimality gap', 'exact optimum EMV (golden)']}
         rows={grid.map((x) => [x.id, x.solveMethod, setLabel(x.ids), mm(x.totalEmv), mm(x.optimalityGap), mm(x.goldenExactEmv)])}
       />
-      <p className="text-xs text-slate-500 mt-1 mb-0">
+      <p className="text-xs text-pl-muted mt-1 mb-0">
         On decimalCapexExactSum the capex 0.1 and 0.2 add in binary to {BINARY_SUM_DERIVED} (derived); the engine reads them at their typed decimals, so they sum to exactly 0.3 and both are funded.
       </p>
       <Note>

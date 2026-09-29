@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, BarChart, LineChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
+  BarChart, LineChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import {
   ODUDU_AS_OF, ODUDU_MID_AS_OF,
   rateOfReturn, sensitivitySweep, earnedValue, oduduAsOf, reconciliations, planAndRefusals,
@@ -34,8 +37,8 @@ export const MODES = [
   ['reconcile', 'Reconcile: three estimates of one cost, two measures of one schedule'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
 
 const RateLabel = ({ children }) => <span data-plabel="rate">{children}</span>;
 const CostLabel = ({ children }) => <span data-plabel="cost">{children}</span>;
@@ -46,8 +49,8 @@ const RatioLabel = ({ children }) => <span data-plabel="ratio">{children}</span>
 
 const Tbl = ({ head, rows }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>{head.map((h, i) => <th key={i} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>)}</tr>
       </thead>
       <tbody>
@@ -69,7 +72,7 @@ export const RateMode = ({ ror }) => {
   if (!ror) return <Note>The screening engine did not return the rates.</Note>;
   return (
     <>
-      <p className="text-sm text-slate-200 mb-0">
+      <p className="text-sm text-pl-text mb-0">
         The engine searches between {ror.band.low} and {ror.band.high} percent and reports a rate only when it is a root
         inside that band. Otherwise the rate is null and the status says which of these happened:
         {' '}{ror.statuses.join(', ')}.
@@ -91,12 +94,12 @@ export const RateMode = ({ ror }) => {
           </TileGrid>
         </div>
       )}
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         A negative rate is a real answer: it says what the money earned, which is less than none. A clamped search that
         stops at its own boundary has found nothing, and reporting the boundary put a rate of exactly {ror.band.high} percent
         in green on cards for projects that never return their money.
       </p>
-      <p className="text-sm text-slate-200 mt-3 mb-0">
+      <p className="text-sm text-pl-text mt-3 mb-0">
         More than one root, which is what an end of life cost does to a rate of return. The plan spends
         {' '}{four(ror.multipleRoots.capexMM)} million USD in year 0, earns for {ror.multipleRoots.years} years and pays
         {' '}{four(ror.multipleRoots.abandonmentMM)} to abandon in the last of them, so its flow changes sign twice and can be
@@ -130,29 +133,27 @@ export const SweepMode = ({ sw }) => {
   const bars = sw.rows.map((s) => ({ driver: s.name, low: s.lowParamNPV, high: s.highParamNPV }));
   return (
     <>
-      <p className="text-sm text-slate-200 mb-0">
+      <p className="text-sm text-pl-text mb-0">
         The sweep moves one driver at a time by 30 percent either way and re-runs the whole case. It is not a probability:
         nothing here says how likely a 30 percent move is.
       </p>
-      <div className="h-48 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={bars} layout="vertical" margin={{ top: 10, right: 20, bottom: 5, left: 70 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis type="number" tick={AXIS} />
-            <YAxis type="category" dataKey="driver" tick={AXIS} width={70} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => four(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine x={sw.rows[0].baseNPV} stroke="#BFFF00" strokeDasharray="3 3" />
-            <Bar dataKey="low" name="minus 30 percent" fill="#475569" isAnimationActive={false} />
-            <Bar dataKey="high" name="plus 30 percent" fill="#38bdf8" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={192} className="mt-3">
+        <BarChart data={bars} layout="vertical" margin={{ top: 10, right: 20, bottom: 5, left: 70 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis type="number" tick={AXIS} />
+          <YAxis type="category" dataKey="driver" tick={AXIS} width={70} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => four(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine x={sw.rows[0].baseNPV} stroke={seriesColor(0)} strokeDasharray="3 3" />
+          <Bar dataKey="low" name="minus 30 percent" fill={SVG_CHART.note} isAnimationActive={false} />
+          <Bar dataKey="high" name="plus 30 percent" fill={seriesColor(1)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
       <Tbl
         head={['driver', 'minus 30 percent', 'plus 30 percent', 'base', 'swing (derived)', <RatioLabel key="s">swing over base (derived)</RatioLabel>]}
         rows={sw.rows.map((s) => [s.name, four(s.lowParamNPV), four(s.highParamNPV), four(s.baseNPV), four(s.swingDerived), six(s.swingShareDerived)])}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Ranked by swing: {sw.rankedBySwingDerived.join(', ')}. Oil price and production both scale revenue, but production
         also scales the variable operating cost the barrels carry, so production swings the value less than price does. The
         capex bar runs the other way: at minus 30 percent capex the value is {four(sw.capexRow.lowParamNPV)} million USD and
@@ -189,27 +190,25 @@ export const EarnedMode = ({ ev, asOf, onAsOf }) => {
           <SelectField label="As of (the lessons' dates only)" value={row.asOf} onChange={onAsOf} options={ODUDU_AS_OF.map((d) => [d, d])} />
         </FieldGrid>
       )}
-      <div className="h-48 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={line} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="asOf" tick={AXIS} />
-            <YAxis tick={AXIS} tickFormatter={(v) => `${Number(v / 1e6).toFixed(0)}M`} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => whole(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine x={row.asOf} stroke="#BFFF00" strokeDasharray="3 3" />
-            <Line dataKey="planned" name="planned value" stroke="#94a3b8" dot isAnimationActive={false} />
-            <Line dataKey="earned" name="earned value" stroke="#BFFF00" dot isAnimationActive={false} />
-            <Line dataKey="actual" name="actual cost" stroke="#f472b6" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={192} className="mt-3">
+        <LineChart data={line} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="asOf" tick={AXIS} />
+          <YAxis tick={AXIS} tickFormatter={(v) => `${Number(v / 1e6).toFixed(0)}M`} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => whole(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine x={row.asOf} stroke={seriesColor(0)} strokeDasharray="3 3" />
+          <Line dataKey="planned" name="planned value" stroke={SVG_CHART.reference} dot isAnimationActive={false} />
+          <Line dataKey="earned" name="earned value" stroke={seriesColor(0)} dot isAnimationActive={false} />
+          <Line dataKey="actual" name="actual cost" stroke={seriesColor(4)} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Tbl
         head={['as of', <CostLabel key="p">planned value</CostLabel>, <CostLabel key="e">earned value</CostLabel>,
           <CostLabel key="a">actual cost</CostLabel>, <IndexLabel key="s">schedule index</IndexLabel>,
           <IndexLabel key="c">cost index</IndexLabel>, <RatioLabel key="r">completion ratio</RatioLabel>]}
         rows={ev.asOfRows.map((x) => [
-          x.asOf === row.asOf ? <span key="s" className="text-[#BFFF00]">{x.asOf}</span> : x.asOf,
+          x.asOf === row.asOf ? <span key="s" className="text-pl-accent-text">{x.asOf}</span> : x.asOf,
           x.pv === null ? 'none' : whole(x.pv), whole(x.ev), whole(x.ac),
           x.spi === null ? 'none' : six(x.spi), x.cpi === null ? 'none' : six(x.cpi),
           x.completionRatio === null ? 'none' : six(x.completionRatio)])}
@@ -222,12 +221,12 @@ export const EarnedMode = ({ ev, asOf, onAsOf }) => {
           <Tile label={<RatioLabel>Completion ratio</RatioLabel>} value={six(ev.mid.completionRatio)} unit="progress against the whole budget" />
         </TileGrid>
       </div>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The basis the engine states: {ev.mid.spiBasis}. The completion ratio is not a schedule index. Before the repair the
         app called that ratio the schedule index, so a project half finished on time and one half finished a year late both
         read {six(ev.mid.oldRatioExample)}.
       </p>
-      <p className="text-xs text-slate-500 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         A schedule index can read above one, which the old ratio never could: one task {four(ev.ahead.percentComplete)} percent
         done half way through its window reads {six(ev.ahead.spi)} against a completion ratio of {six(ev.ahead.completionRatio)}.
         Earned value itself is not time-phased. It is each task&apos;s budget times the percent somebody typed, with no history
@@ -258,7 +257,7 @@ export const RefusalsMode = ({ ev, rules }) => {
           <Tile label={<IndexLabel>A project with no costed task</IndexLabel>} value={ev.uncosted.spi === null ? 'no index of either kind' : six(ev.uncosted.spi)} unit={ev.uncosted.spiBasis} />
         </TileGrid>
       </div>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The three with no answer: no schedule index when a costed task carries no dates, no cost index when nothing has been
         spent, and no percent complete when nothing is costed. An index is a ratio, and with no denominator there is no
         ratio. Before the repair each of those read a clean 1.00 and one card printed the string NaN as a zero.
@@ -293,17 +292,15 @@ export const ReconcileMode = ({ rec }) => {
   ];
   return (
     <>
-      <div className="h-48 mt-1">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={bars} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="estimate" tick={AXIS} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => four(v)} />
-            <Bar dataKey="value" name="million USD" fill="#38bdf8" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={192} className="mt-1">
+        <BarChart data={bars} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="estimate" tick={AXIS} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => four(v)} />
+          <Bar dataKey="value" name="million USD" fill={seriesColor(1)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
       <Tbl
         head={['estimate of the cost', <CapexLabel key="v">million USD</CapexLabel>, 'what it is']}
         rows={[
@@ -312,7 +309,7 @@ export const ReconcileMode = ({ rec }) => {
           ['the facility screening estimate', four(rec.cost.facilityScreeningCapex), 'a class 5 figure from type and nameplate'],
         ]}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The comparison that is like for like is the facility screening estimate of {four(rec.cost.facilityScreeningCapex)} against
         the concept&apos;s facilities field of {four(rec.cost.conceptFacilitiesCapex)}, a gap of {four(rec.cost.likeForLikeGapDerived)}.
         Setting it against the {four(rec.cost.conceptCapex)} total instead compares one facility with a development that also

@@ -1,8 +1,11 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, BarChart, Bar, Line, Cell, XAxis, YAxis, CartesianGrid,
+  LineChart, BarChart, Bar, Line, Cell, XAxis, YAxis, CartesianGrid,
   Tooltip, Legend, ReferenceLine, ReferenceArea,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import {
   COMPARISON_IDS, COMPARISON_LABELS, PRICE_POINT_MEANINGS,
   comparison, priceSweep, capexSweep, etrBothWays,
@@ -44,7 +47,7 @@ const withState = (v, state) => (state === 'share' ? pc(v) : `${pc(v)} (${state}
 // A column heading that carries its definition on hover, from the shared
 // conventions module. The headline metric is set larger.
 const Defined = ({ label, definition, headline = false }) => (
-  <span title={definition} className={`cursor-help underline decoration-dotted ${headline ? 'text-sm font-semibold text-slate-200' : ''}`}>{label}</span>
+  <span title={definition} className={`cursor-help underline decoration-dotted ${headline ? 'text-sm font-semibold text-pl-text' : ''}`}>{label}</span>
 );
 
 const MODES = [
@@ -54,11 +57,11 @@ const MODES = [
   ['insights', 'Insights: the verdicts beside the quantities they rank'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const GRID = <CartesianGrid stroke="#334155" strokeDasharray="3 3" />;
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const GRID = <CartesianGrid {...GRID_STYLE} />;
 const compact = (v) => (Math.abs(v) >= 1000 ? `${(v / 1000).toFixed(1)}k` : Number(v).toFixed(0));
-const SERIES_COLOURS = ['#BFFF00', '#38bdf8', '#f472b6', '#fbbf24', '#a78bfa', '#34d399'];
+const SERIES_COLOURS = [seriesColor(0), seriesColor(1), seriesColor(2), seriesColor(3), seriesColor(4), SVG_CHART.note];
 
 /**
  * The engine's comparison is async, so a mode that needs it renders a plain
@@ -82,13 +85,13 @@ const useEngine = (run, deps) => {
 
 const Tbl = ({ head, rows, mark = () => false }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>{head.map((h, i) => <th key={i} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>)}</tr>
       </thead>
       <tbody>
         {rows.map((r, i) => (
-          <tr key={i} className={mark(i) ? 'text-[#BFFF00] font-semibold' : ''}>
+          <tr key={i} className={mark(i) ? 'text-pl-accent-text font-semibold' : ''}>
             {r.map((c, j) => <td key={j} className={`${j < r.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{c}</td>)}
           </tr>
         ))}
@@ -112,7 +115,7 @@ const SweepRegimeCaution = () => {
   const s = useMemo(() => { try { return sweepCaseRegime(); } catch { return null; } }, []);
   if (!s) return null;
   return (
-    <p className="text-xs text-amber-300 mt-2 mb-0">
+    <p className="text-xs text-pl-warning-text mt-2 mb-0">
       READ THE NAME ON THESE CASES CAREFULLY. Every id contains "pia" and not one of them runs the
       {' '}{s.template.name} TEMPLATE shown above. They run {s.courseLabel}, the Designer default regime id {s.id}
       {' '}(the engine names it {s.name}). Its values are the Designer illustrative samples and none is read from
@@ -142,8 +145,8 @@ const Summary = () => {
   return (
     <>
       {picker}
-      <p className="text-xs text-slate-400 mt-2 mb-0">{c.value.note}</p>
-      <p className="text-xs text-slate-500 mt-1 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">{c.value.note}</p>
+      <p className="text-xs text-pl-muted mt-1 mb-0">
         Discount rate {c.value.discountRatePct} percent. The deck own first-year oil price is {c.value.basePrice} USD per
         bbl, which is the price sweep label at index {c.value.basePriceLabelIndex} and the one price at which the sweep's
         government take and the summary's describe the same run.
@@ -165,26 +168,24 @@ const Summary = () => {
           'take minus share, percentage points (derived)']}
         rows={c.value.summary.map((s) => [
           s.rank, s.name, mm(s.npv), pc(s.irrPct), yr(s.paybackPeriod), yr(s.rFactorPayoutYear), mm(s.govTake),
-          <span key="take" className="text-sm font-semibold text-white">{withState(s.governmentTakePct, s.governmentTakeState)}</span>,
+          <span key="take" className="text-sm font-semibold text-pl-text">{withState(s.governmentTakePct, s.governmentTakeState)}</span>,
           withState(s.governmentTakeDiscountedPct, s.governmentTakeDiscountedState),
           pc(s.governmentShareOfNetRevenuePct),
           s.takeMinusShareDerived === null ? 'null' : pc(s.takeMinusShareDerived),
         ])}
       />
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={bars} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            {GRID}
-            <XAxis dataKey="name" tick={{ fill: '#94a3b8', fontSize: 9 }} interval={0} angle={-12} textAnchor="end" height={60} />
-            <YAxis tick={AXIS} label={{ value: 'percent', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => pc(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Bar dataKey="take" name={metricLabel('governmentTake')} fill="#BFFF00" barSize={22} isAnimationActive={false} />
-            <Bar dataKey="share" name={metricLabel('governmentShareOfNetRevenue')} fill="#64748b" barSize={12} isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <ChartFrame height={256} className="mt-3">
+        <BarChart data={bars} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          {GRID}
+          <XAxis dataKey="name" tick={{ ...AXIS_TICK, fontSize: 9 }} interval={0} angle={-12} textAnchor="end" height={60} />
+          <YAxis tick={AXIS} label={{ value: 'percent', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => pc(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <Bar dataKey="take" name={metricLabel('governmentTake')} fill={seriesColor(0)} barSize={22} isAnimationActive={false} />
+          <Bar dataKey="share" name={metricLabel('governmentShareOfNetRevenue')} fill={SVG_CHART.reference} barSize={12} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
+      <div className="mt-3 text-xs text-pl-text">
         The summary is sorted by contractor NPV descending, so the first row is the best regime FOR THE CONTRACTOR and
         nothing else can be read off the position. Payback is the first year cumulative contractor net cash flow is
         above zero; payout is the first year the R factor passes 1.0. They answer different questions and they often
@@ -236,46 +237,44 @@ const Price = () => {
   return (
     <>
       {picker}
-      <p className="text-xs text-slate-400 mt-2 mb-0">{sw.value.note}</p>
-      <p className="text-xs text-slate-500 mt-1 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">{sw.value.note}</p>
+      <p className="text-xs text-pl-muted mt-1 mb-0">
         The sweep reaches each price by a MULTIPLIER, the price it wants over the FIRST deck point oil price, and that
         multiplier scales OIL ONLY. Gas and NGL prices are untouched, so this is an oil price sweep and a gas-weighted
         project moves less across it than it looks like it should.
       </p>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            {GRID}
-            <XAxis
-              dataKey="price" type="number" tick={AXIS} ticks={sw.value.labels}
-              domain={[sw.value.labels[0] - step / 2, sw.value.labels[sw.value.labels.length - 1] + step / 2]}
-              label={{ value: 'oil price, USD per bbl', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }}
+      <ChartFrame height={256} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          {GRID}
+          <XAxis
+            dataKey="price" type="number" tick={AXIS} ticks={sw.value.labels}
+            domain={[sw.value.labels[0] - step / 2, sw.value.labels[sw.value.labels.length - 1] + step / 2]}
+            label={{ value: 'oil price, USD per bbl', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }}
+          />
+          <YAxis tick={AXIS} domain={[0, top]} allowDataOverflow tickFormatter={compact} label={{ value: `${metricLabel('governmentTake')}, percent`, angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={tooltipFormatter} />
+          <Legend {...LEGEND_PROPS} />
+          {sw.value.undefinedPrices.map((price, k) => (
+            <ReferenceArea
+              key={`band-${price}`} x1={price - step / 2} x2={price + step / 2} fill={seriesColor(3)} fillOpacity={0.12} stroke="none"
+              label={k === 0 ? { value: 'project uneconomic at this price', fill: seriesColor(3), fontSize: 10, position: 'insideTop' } : undefined}
             />
-            <YAxis tick={AXIS} domain={[0, top]} allowDataOverflow tickFormatter={compact} label={{ value: `${metricLabel('governmentTake')}, percent`, angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={tooltipFormatter} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            {sw.value.undefinedPrices.map((price, k) => (
-              <ReferenceArea
-                key={`band-${price}`} x1={price - step / 2} x2={price + step / 2} fill="#f87171" fillOpacity={0.12} stroke="none"
-                label={k === 0 ? { value: 'project uneconomic at this price', fill: '#f87171', fontSize: 10, position: 'insideTop' } : undefined}
-              />
-            ))}
-            {sw.value.series.map((d, i) => (
-              <Line key={d.id} type="linear" dataKey={d.id} name={d.name} stroke={SERIES_COLOURS[i % SERIES_COLOURS.length]} dot={false} connectNulls={false} isAnimationActive={false} />
-            ))}
-            {sw.value.series.map((d, i) => (
-              <Line
-                key={`${d.id}-pin`} type="linear" dataKey={`${d.id}__pin`} name={`${d.name}, above 100 percent`} stroke="none" legendType="none"
-                dot={{ r: 4, stroke: SERIES_COLOURS[i % SERIES_COLOURS.length], strokeWidth: 2, fill: '#0f172a' }} activeDot={false} isAnimationActive={false}
-              />
-            ))}
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <div className="mt-3 rounded-md border border-gray-700 bg-[#0F172A] p-3">
-        <p className="text-xs text-slate-500 mb-0 font-mono">price</p>
-        <p className="text-xs text-slate-300 mt-1 mb-0">{sw.value.priceVerdict ? sw.value.priceVerdict.text : 'No price verdict: fewer than two regimes are compared.'}</p>
-        <p className="text-xs text-slate-500 mt-1 mb-0">
+          ))}
+          {sw.value.series.map((d, i) => (
+            <Line key={d.id} type="linear" dataKey={d.id} name={d.name} stroke={SERIES_COLOURS[i % SERIES_COLOURS.length]} dot={false} connectNulls={false} isAnimationActive={false} />
+          ))}
+          {sw.value.series.map((d, i) => (
+            <Line
+              key={`${d.id}-pin`} type="linear" dataKey={`${d.id}__pin`} name={`${d.name}, above 100 percent`} stroke="none" legendType="none"
+              dot={{ r: 4, stroke: SERIES_COLOURS[i % SERIES_COLOURS.length], strokeWidth: 2, fill: SVG_CHART.marker }} activeDot={false} isAnimationActive={false}
+            />
+          ))}
+        </LineChart>
+      </ChartFrame>
+      <div className="mt-3 rounded-md border border-pl-border bg-pl-sunken p-3">
+        <p className="text-xs text-pl-muted mb-0 font-mono">price</p>
+        <p className="text-xs text-pl-text mt-1 mb-0">{sw.value.priceVerdict ? sw.value.priceVerdict.text : 'No price verdict: fewer than two regimes are compared.'}</p>
+        <p className="text-xs text-pl-muted mt-1 mb-0">
           {sw.value.windowLabels
             ? `The verdict ranks climbs from ${sw.value.windowLabels[0]} to ${sw.value.windowLabels[1]} USD per bbl, the longest run of prices at which every regime's point is a share.`
             : 'No swept price gives a share for every regime, so there is no run of prices to rank a climb over.'}
@@ -283,31 +282,31 @@ const Price = () => {
       </div>
       {sw.value.series.map((d) => (
         <div key={d.id} className="mt-4">
-          <p className="text-xs text-slate-500 mb-1">{d.name}</p>
+          <p className="text-xs text-pl-muted mb-1">{d.name}</p>
           <Tbl
             mark={(i) => d.points[i].warn}
             head={['oil price, USD/bbl', 'value the engine returns, percent', 'state', 'lifetime contractor NCF at that price', 'lifetime government cash flow', 'profit, the two added', 'what this point is']}
             rows={d.points.map((q) => [
               q.price, pc(q.plotted), q.state, mm(q.lifetimeContractorNCF), mm(q.lifetimeGovernmentTake), mm(q.lifetimeDenominatorDerived),
-              q.warn ? <span key={q.price} className="whitespace-normal text-amber-300">{q.meaning}</span> : 'a share',
+              q.warn ? <span key={q.price} className="whitespace-normal text-pl-warning-text">{q.meaning}</span> : 'a share',
             ])}
           />
           {d.warnPoints.length > 0 && (
-            <p className="text-xs text-amber-300 mt-1 mb-0">
+            <p className="text-xs text-pl-warning-text mt-1 mb-0">
               Warning. At {d.warnPoints.join(', ')} USD per bbl the engine flags this series exceeds or undefined, so the
               point is not an ordinary government take. An exceeds point keeps its true value and a contractor losing money over
               the life; an undefined point has no value because lifetime profit is not positive.
             </p>
           )}
           {d.warnPoints.length === 0 && (
-            <p className="text-xs text-slate-500 mt-1 mb-0">
+            <p className="text-xs text-pl-muted mt-1 mb-0">
               Every point on this series is a share at all nine prices. Climb across the range, last minus first,
               {' '}{pc(d.climbDerived)} percentage points.
             </p>
           )}
         </div>
       ))}
-      <p className="text-xs text-slate-500 mt-4 mb-1">The nine published price-sweep cases, which pin the whole result at each price rather than only the share</p>
+      <p className="text-xs text-pl-muted mt-4 mb-1">The nine published price-sweep cases, which pin the whole result at each price rather than only the share</p>
       <Tbl
         head={['case', 'regime it actually runs', 'npv', 'irr, percent', 'totalContractorNCF', 'totalGovTake', 'paybackYear', 'rFactorPayoutYear', 'finalUnrecoveredPool']}
         rows={published.map((x) => [x.id, x.regimeName, mm(x.npv), pc(x.irrPct), mm(x.totalContractorNCF), mm(x.totalGovTake), yr(x.paybackYear), yr(x.rFactorPayoutYear), mm(x.finalUnrecoveredPool)])}
@@ -342,7 +341,7 @@ const Capex = () => {
   return (
     <>
       {picker}
-      <p className="text-xs text-slate-400 mt-2 mb-0">{cs.value.note}</p>
+      <p className="text-xs text-pl-muted mt-2 mb-0">{cs.value.note}</p>
       <div className="mt-3">
         <TileGrid>
           <Tile label="Labels the engine returns" value={String(cs.value.labelCount)} />
@@ -358,21 +357,19 @@ const Capex = () => {
           mm(d.lossOverSweptRangeDerived),
         ])}
       />
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={bars} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            {GRID}
-            <XAxis dataKey="name" tick={{ fill: '#94a3b8', fontSize: 9 }} interval={0} angle={-12} textAnchor="end" height={60} />
-            <YAxis tick={AXIS} tickFormatter={compact} label={{ value: 'contractor NPV given up, million USD', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => mm(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Bar dataKey="loss" name="contractor NPV given up, 0.8 to 1.5" fill="#38bdf8" isAnimationActive={false}>
-              {bars.map((b) => <Cell key={b.name} fill="#38bdf8" />)}
-            </Bar>
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
-      <p className="text-xs text-slate-500 mt-4 mb-1">The published capex-sweep cases, at multipliers of 0.7 to 1.5</p>
+      <ChartFrame height={256} className="mt-3">
+        <BarChart data={bars} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          {GRID}
+          <XAxis dataKey="name" tick={{ ...AXIS_TICK, fontSize: 9 }} interval={0} angle={-12} textAnchor="end" height={60} />
+          <YAxis tick={AXIS} tickFormatter={compact} label={{ value: 'contractor NPV given up, million USD', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => mm(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <Bar dataKey="loss" name="contractor NPV given up, 0.8 to 1.5" fill={seriesColor(1)} isAnimationActive={false}>
+            {bars.map((b) => <Cell key={b.name} fill={seriesColor(1)} />)}
+          </Bar>
+        </BarChart>
+      </ChartFrame>
+      <p className="text-xs text-pl-muted mt-4 mb-1">The published capex-sweep cases, at multipliers of 0.7 to 1.5</p>
       <Tbl
         head={['case', 'regime it actually runs', 'npv', 'irr, percent', 'totalContractorNCF', 'totalGovTake', 'paybackYear', 'rFactorPayoutYear']}
         rows={published.map((x) => [x.id, x.regimeName, mm(x.npv), pc(x.irrPct), mm(x.totalContractorNCF), mm(x.totalGovTake), yr(x.paybackYear), yr(x.rFactorPayoutYear)])}
@@ -406,29 +403,29 @@ const Insights = () => {
   return (
     <>
       {picker}
-      <p className="text-xs text-slate-400 mt-2 mb-0">{one.note}</p>
+      <p className="text-xs text-pl-muted mt-2 mb-0">{one.note}</p>
       {one.empty ? (
-        <p className="text-xs text-slate-300 mt-3 mb-0">
+        <p className="text-xs text-pl-text mt-3 mb-0">
           The engine returns an EMPTY LIST here rather than a verdict about nothing. A summary with no regimes in it
           has nothing to rank, and the honest answer to that is silence.
         </p>
       ) : (
         <div className="mt-3 space-y-2">
           {one.verdicts.map((v) => (
-            <div key={v.key} className="rounded-md border border-gray-700 bg-[#0F172A] p-3">
-              <p className="text-xs text-slate-500 mb-0 font-mono">{v.key}</p>
-              <p className="text-white text-sm font-medium mb-0">{v.label}</p>
-              <p className="text-xs text-slate-300 mt-1 mb-0">{v.text}</p>
+            <div key={v.key} className="rounded-md border border-pl-border bg-pl-sunken p-3">
+              <p className="text-xs text-pl-muted mb-0 font-mono">{v.key}</p>
+              <p className="text-pl-text text-sm font-medium mb-0">{v.label}</p>
+              <p className="text-xs text-pl-text mt-1 mb-0">{v.text}</p>
             </div>
           ))}
         </div>
       )}
-      <p className="text-xs text-slate-500 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Keys returned: {one.keys.length ? one.keys.join(', ') : 'none'}. Regimes in the summary: {one.regimeCount}.
         {one.regimeCount === 1 ? ' With one regime the payback and government verdicts drop their comparison clause and the two sweep verdicts are omitted entirely, because a ranking of one is not a ranking.' : ''}
       </p>
 
-      <p className="text-xs text-slate-500 mt-5 mb-1">
+      <p className="text-xs text-pl-muted mt-5 mb-1">
         A TIE THAT A STRICT REDUCE WOULD RANK. A strict less-than in a reduce returns the FIRST element when two are
         equal and so breaks a tie by list order. The capex verdict names a regime alone only when it leads the next by
         at least 0.1 million USD, and declines to rank when the least and the most meet. The price verdict declines to
@@ -442,13 +439,13 @@ const Insights = () => {
           />
           <div className="mt-3 space-y-2">
             {tie.value.insights.map((v) => (
-              <div key={v.key} className="rounded-md border border-gray-700 bg-[#0F172A] p-3">
-                <p className="text-xs text-slate-500 mb-0 font-mono">{v.key}</p>
-                <p className="text-xs text-slate-300 mt-1 mb-0">{v.text}</p>
+              <div key={v.key} className="rounded-md border border-pl-border bg-pl-sunken p-3">
+                <p className="text-xs text-pl-muted mb-0 font-mono">{v.key}</p>
+                <p className="text-xs text-pl-text mt-1 mb-0">{v.text}</p>
               </div>
             ))}
           </div>
-          <p className="text-xs text-slate-500 mt-4 mb-1">
+          <p className="text-xs text-pl-muted mt-4 mb-1">
             AND THE TIE HERE IS EXACT, WHICH IS STRONGER THAN A NEAR TIE, but not for the reason it first looks. At
             BOTH ends of the swept range every regime recovers cost at its own limit, the pool being far larger than
             any allowance, so cost recovered, profit oil and tax are unchanged between a multiplier of{' '}
@@ -460,7 +457,7 @@ const Insights = () => {
             head={(() => { const lo = `x${tie.value.lowMultiplier.toFixed(1)}`; const hi = `at x${tie.value.highMultiplier.toFixed(1)}`; return ['regime', `cost recovered at ${lo}`, hi, `profit oil at ${lo}`, hi, `tax at ${lo}`, hi, 'capex loss']; })()}
             rows={tie.value.ends.map((d) => [d.name, mm(d.costRecoveredAtLow), mm(d.costRecoveredAtHigh), mm(d.profitOilAtLow), mm(d.profitOilAtHigh), mm(d.taxAtLow), mm(d.taxAtHigh), ratio(d.lossDerived)])}
           />
-          <p className="text-xs text-slate-300 mt-2 mb-0">
+          <p className="text-xs text-pl-text mt-2 mb-0">
             READ THE PROFIT OIL COLUMN BEFORE BELIEVING ANY STORY ABOUT IT. It is nought for the three templates that
             recover cost at 100 percent and very much not nought for the other three, so a claim that no profit oil
             and no tax exist anywhere here is refuted by the government cash flow the same comparison reports. What is
@@ -470,7 +467,7 @@ const Insights = () => {
             every one of the six losses. No tie-break rule could be right here: a rule that picks the first, the last,
             the alphabetically smallest or the largest is picking among six answers that are the same answer.
           </p>
-          <p className="text-xs text-amber-300 mt-2 mb-0">
+          <p className="text-xs text-pl-warning-text mt-2 mb-0">
             {tie.value.separatedAtOneDecimal
               ? 'On this case the ranked quantities are separated at the precision the sentence prints.'
               : 'The ranked quantities are NOT separated at the precision the sentence prints. Every loss above rounds to the same figure, and the capex verdict declines to rank and names all six together. A verdict naming a winner is only a verdict when the quantities it ranks are separated by more than the precision they are printed to.'}
@@ -478,7 +475,7 @@ const Insights = () => {
         </>
       )}
 
-      <p className="text-xs text-slate-500 mt-5 mb-1">
+      <p className="text-xs text-pl-muted mt-5 mb-1">
         AND AN INTEGER COLUMN, WHERE TIES ARE THE NORMAL CASE. Payback is a whole year, and whole years tie far more
         often than a continuous quantity does. Where the column ties, the sentence names every tied regime, in
         summary order, and the summary is sorted by contractor NPV, so the order of those names ranks nothing about
@@ -490,14 +487,14 @@ const Insights = () => {
           rows={payback.value.map((e) => [
             e.caseId, e.paybackYears.map((y) => yr(y)).join(', '), yr(e.fastestPaybackYear), e.tiedAtFastest,
             e.namedRegime === null ? 'null' : e.namedRegime, e.topNpvRegime,
-            e.tied ? <span key={e.caseId} className="text-amber-300">no, the column ties: read the tied names as a list</span> : 'yes, the column does not tie',
+            e.tied ? <span key={e.caseId} className="text-pl-warning-text">no, the column ties: read the tied names as a list</span> : 'yes, the column does not tie',
             e.afterAgainst === null ? 'none, every paying regime is tied' : e.afterAgainst,
             e.runnerUp === null ? 'null' : e.runnerUp,
           ])}
         />
       )}
       {payback.status === 'done' && (
-        <p className="text-xs text-amber-300 mt-2 mb-0">
+        <p className="text-xs text-pl-warning-text mt-2 mb-0">
           And notice the LAST name in every one of those sentences, the one after "against". It is not the runner-up.
           The function names the fastest year&apos;s regimes, sets them aside, and then takes the MAXIMUM of what is
           left, so the regime after "against" is the SLOWEST of the rest. A sentence of the form "A pays back in year x, against year y for B" reads like a top two and
@@ -505,7 +502,7 @@ const Insights = () => {
         </p>
       )}
 
-      <p className="text-xs text-slate-500 mt-5 mb-1">
+      <p className="text-xs text-pl-muted mt-5 mb-1">
         NO VALUE WHERE PROFIT IS NOT POSITIVE. On the comparison built for it, every regime returns null and the state
         undefined across the whole price sweep, and each of them collected hundreds or thousands of millions of USD for
         the government.
@@ -516,7 +513,7 @@ const Insights = () => {
             head={['regime', 'total government cash flow', 'total contractor NCF', 'the two added', 'value and state at every one of the nine prices']}
             rows={share.value.rows.map((x) => [x.name, mm(x.totalGovernmentTake), mm(x.totalContractorNCF), mm(x.denominatorDerived), [...new Set(x.points.map((q) => `${pc(q.plotted)} ${q.state}`))].join(', ')])}
           />
-          <p className="text-xs text-slate-500 mt-4 mb-1">
+          <p className="text-xs text-pl-muted mt-4 mb-1">
             And the other direction, reached by making one project progressively more expensive. The Angola template on
             the DEFAULT PROJECT with every capex line multiplied, so nothing but the capital cost changes.
           </p>
@@ -526,7 +523,7 @@ const Insights = () => {
               `x${a.multiple}`, ...a.values.map((v) => pc(v)), [...new Set(a.states)].join(', '),
             ])}
           />
-          <p className="text-xs text-amber-300 mt-2 mb-0">
+          <p className="text-xs text-pl-warning-text mt-2 mb-0">
             Read the x3 row along its length. It is null and undefined at 40 USD per bbl, exceeds at 50 with a number in
             the thousands and at 60 with one in the hundreds, and a share from
             {' '}{share.value.angola.find((a) => a.multiple === 3)?.firstSharePrice} USD per bbl onward. Three states on

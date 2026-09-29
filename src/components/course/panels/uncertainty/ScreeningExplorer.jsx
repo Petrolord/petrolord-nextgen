@@ -1,8 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, ComposedChart, BarChart, Bar, Line, Cell, XAxis, YAxis, CartesianGrid,
+  ComposedChart, BarChart, Bar, Line, Cell, XAxis, YAxis, CartesianGrid,
   Tooltip, Legend, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import {
   FIELD_KEYS, FIELD_LABELS, LEDGER_COLUMNS, SENSITIVITY_FACTORS, SCENARIO_RULE,
   screeningConventions, noEconomicLimit, quickCase, ledger, value, paybackCases, irrCases,
@@ -35,9 +38,9 @@ export const MODES = [
   ['range', 'Range: the sensitivity bars and Low, Base and High'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const GRID = <CartesianGrid stroke="#334155" strokeDasharray="3 3" />;
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const GRID = <CartesianGrid {...GRID_STYLE} />;
 const compact = (v) => (Math.abs(v) >= 1000 ? `${(v / 1000).toFixed(1)}k` : Number(v).toFixed(0));
 
 const FIELD_OPTIONS = FIELD_KEYS.map((k) => [k, FIELD_LABELS[k]]);
@@ -46,13 +49,13 @@ const InputLabel = ({ children }) => <span data-plabel="input">{children}</span>
 
 const Tbl = ({ head, rows, highlight = -1 }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>{head.map((h, i) => <th key={i} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>)}</tr>
       </thead>
       <tbody>
         {rows.map((r, i) => (
-          <tr key={i} className={i === highlight ? 'text-white font-semibold' : ''}>
+          <tr key={i} className={i === highlight ? 'text-pl-text font-semibold' : ''}>
             {r.map((c, j) => <td key={j} className={`${j < r.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{c}</td>)}
           </tr>
         ))}
@@ -84,9 +87,9 @@ export const CaseMode = ({ qc, conventions, limit }) => {
         head={['year', 'oil, bbl', 'oil price, USD/bbl', 'gas price, USD/Mscf', 'capex', 'fixed opex', 'variable opex']}
         rows={qc.rows.map((x) => [x.year, bbl(x.oilBbl), four(x.oilPrice), four(x.gasPrice), mm(x.capex), mm(x.opexFixed), mm(x.opexVariable)])}
       />
-      <p className="text-xs text-slate-500 mt-1 mb-0">Money columns are million USD. Variable opex is the year&apos;s oil volume times the rate per barrel, divided by one million.</p>
+      <p className="text-xs text-pl-muted mt-1 mb-0">Money columns are million USD. Variable opex is the year&apos;s oil volume times the rate per barrel, divided by one million.</p>
       {conventions && (
-        <ul className="mt-3 text-xs text-slate-300 list-none pl-0 space-y-1">
+        <ul className="mt-3 text-xs text-pl-text list-none pl-0 space-y-1">
           {conventions.lines.map((l) => <li key={l}>{l.replace(/^- /, '')}</li>)}
         </ul>
       )}
@@ -112,7 +115,7 @@ export const LedgerMode = ({ led, fieldKey, onField }) => {
           <SelectField label="Field" value={fieldKey} onChange={onField} options={FIELD_OPTIONS} />
         </FieldGrid>
       )}
-      <p className="text-xs text-slate-400 mt-2 mb-0">{led.label}: {led.line}.</p>
+      <p className="text-xs text-pl-muted mt-2 mb-0">{led.label}: {led.line}.</p>
       <div className="mt-3">
         <TileGrid>
           <Tile label="Total gross revenue" value={mm(led.metrics.totalRevenue)} unit="million USD" />
@@ -130,29 +133,27 @@ export const LedgerMode = ({ led, fieldKey, onField }) => {
         head={LEDGER_COLUMNS}
         rows={led.rows.map((x) => LEDGER_COLUMNS.map((k) => (k === 'year' ? x.year : mm(x[k]))))}
       />
-      <p className="text-xs text-slate-500 mt-1 mb-0">
+      <p className="text-xs text-pl-muted mt-1 mb-0">
         Money is million USD. The bold row is the first whose cumulative net cash flow is zero or above, which is the
         row the engine&apos;s payback reads.
         {led.paybackIndex === -1 ? ' On this field there is no such row and nothing is marked.' : ''}
         {led.paybackIndex === 0 ? ' On this field it is the very first row. The cumulative dips below zero again afterwards, so the engine flags the payback status as recrossed and reports a paybackLast, the point where the cumulative turns non-negative for good.' : ''}
       </p>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            {GRID}
-            <XAxis dataKey="year" tick={AXIS} />
-            <YAxis tick={AXIS} tickFormatter={compact} label={{ value: 'million USD', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => mm(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={0} stroke="#64748b" />
-            <Bar dataKey="ncf" name="net cash flow" isAnimationActive={false}>
-              {chart.map((c) => <Cell key={c.year} fill={c.ncf < 0 ? '#f87171' : '#38bdf8'} />)}
-            </Bar>
-            <Line type="monotone" dataKey="cumulative" name="cumulative net cash flow" stroke="#BFFF00" dot={false} isAnimationActive={false} />
-            <Line type="monotone" dataKey="gov" name="government take" stroke="#f472b6" dot={false} isAnimationActive={false} />
-          </ComposedChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3">
+        <ComposedChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          {GRID}
+          <XAxis dataKey="year" tick={AXIS} />
+          <YAxis tick={AXIS} tickFormatter={compact} label={{ value: 'million USD', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => mm(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine y={0} stroke={SVG_CHART.reference} />
+          <Bar dataKey="ncf" name="net cash flow" fill={seriesColor(1)} isAnimationActive={false}>
+            {chart.map((c) => <Cell key={c.year} fill={c.ncf < 0 ? seriesColor(3) : seriesColor(1)} />)}
+          </Bar>
+          <Line type="monotone" dataKey="cumulative" name="cumulative net cash flow" stroke={seriesColor(0)} dot={false} isAnimationActive={false} />
+          <Line type="monotone" dataKey="gov" name="government take" stroke={seriesColor(4)} dot={false} isAnimationActive={false} />
+        </ComposedChart>
+      </ChartFrame>
       <Note>
         Left to right is the order the engine works in. Royalty comes off gross revenue. Taxable income is revenue
         after royalty less opex less the capex expensed that year, and tax is charged only when that base is
@@ -175,14 +176,14 @@ export const ValueMode = ({ v, paybacks, irrs }) => {
         <Tile label="Payback for good (paybackLast)" value={Number.isFinite(v.paybackLast) ? four(v.paybackLast) : 'never'} unit={Number.isFinite(v.paybackLast) ? 'years' : ''} />
         <Tile label="Peak exposure" value={mm(v.maxExposure)} unit="million USD" />
       </TileGrid>
-      <p className="text-xs text-slate-500 mt-2 mb-0">{v.statusWords}</p>
+      <p className="text-xs text-pl-muted mt-2 mb-0">{v.statusWords}</p>
       <Tbl
         head={['year', 'net cash flow', 'mid-year factor (derived)', 'discounted net cash flow (derived)']}
         rows={v.factorRows.map((x) => [x.year, mm(x.ncf), ratio(x.factorDerived), mm(x.discountedNcfDerived)])}
       />
-      <p className="text-xs text-slate-500 mt-1 mb-0">The first six years. Year index i is divided by one plus the rate raised to i plus one half.</p>
+      <p className="text-xs text-pl-muted mt-1 mb-0">The first six years. Year index i is divided by one plus the rate raised to i plus one half.</p>
       {h && (
-        <div className="mt-3 text-xs text-slate-300">
+        <div className="mt-3 text-xs text-pl-text">
           Payback read by hand: the cumulative first reaches zero in year index {h.index} ({h.year}). The shortfall
           carried in is {mm(h.shortfallCarriedIn)} and that year&apos;s net cash flow is {mm(h.ncfThatYear)}, so the
           payback is {h.index} plus the shortfall over that year&apos;s cash, {four(h.paybackDerived)} years, which is
@@ -225,22 +226,20 @@ export const RangeMode = ({ sens, scen }) => {
         head={['input', `NPV with the input x${SENSITIVITY_FACTORS.low}`, 'base NPV', `NPV with the input x${SENSITIVITY_FACTORS.high}`, 'high minus low (derived)', 'what the bar scales']}
         rows={sens.map((x) => [<InputLabel key={x.name}>{x.name}</InputLabel>, mm(x.lowParamNPV), mm(x.baseNPV), mm(x.highParamNPV), mm(x.swingDerived), x.scales])}
       />
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={bars} layout="vertical" margin={{ top: 10, right: 20, bottom: 5, left: 30 }}>
-            {GRID}
-            <XAxis type="number" tick={AXIS} tickFormatter={compact} label={{ value: 'NPV, million USD', position: 'insideBottom', offset: -2, fill: '#64748b', fontSize: 10 }} />
-            <YAxis type="category" dataKey="name" tick={AXIS} width={80} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => mm(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine x={0} stroke="#64748b" />
-            {base !== null && <ReferenceLine x={base} stroke="#BFFF00" strokeDasharray="4 4" label={{ value: 'base NPV', fill: '#BFFF00', fontSize: 10, position: 'top' }} />}
-            <Bar dataKey="low" name={`input x${SENSITIVITY_FACTORS.low}`} fill="#f87171" isAnimationActive={false} />
-            <Bar dataKey="high" name={`input x${SENSITIVITY_FACTORS.high}`} fill="#38bdf8" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
-      <p className="text-xs text-slate-500 mt-1 mb-0">The chart plots the NPV the engine returned at each end, with the base NPV it returned beside them as the dashed line.</p>
+      <ChartFrame height={224} className="mt-3">
+        <BarChart data={bars} layout="vertical" margin={{ top: 10, right: 20, bottom: 5, left: 30 }}>
+          {GRID}
+          <XAxis height={XAXIS_LABEL_HEIGHT} type="number" tick={AXIS} tickFormatter={compact} label={{ value: 'NPV, million USD', position: 'insideBottom', offset: -2, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis type="category" dataKey="name" tick={AXIS} width={80} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => mm(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine x={0} stroke={SVG_CHART.reference} />
+          {base !== null && <ReferenceLine x={base} stroke={seriesColor(0)} strokeDasharray="4 4" label={{ value: 'base NPV', fill: seriesColor(0), fontSize: 10, position: 'top' }} />}
+          <Bar dataKey="low" name={`input x${SENSITIVITY_FACTORS.low}`} fill={seriesColor(3)} isAnimationActive={false} />
+          <Bar dataKey="high" name={`input x${SENSITIVITY_FACTORS.high}`} fill={seriesColor(1)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
+      <p className="text-xs text-pl-muted mt-1 mb-0">The chart plots the NPV the engine returned at each end, with the base NPV it returned beside them as the dashed line.</p>
       <Tbl
         head={['scenario', 'NPV', 'IRR, percent', 'IRR status', 'payback, years', 'payback status', 'peak exposure', 'total revenue', 'total opex', 'total tax']}
         rows={scen.map((x) => [x.name, mm(x.metrics.npv),
