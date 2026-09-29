@@ -10,6 +10,8 @@ import { useToast } from '@/components/ui/use-toast';
 import { useRole } from '@/contexts/RoleContext';
 import { hasDeepCourse } from '@/lib/courseContent';
 import DeepCourseBanner from '@/components/course/DeepCourseBanner';
+import SvgChartFrame from '@/components/charts/SvgChartFrame';
+import { seriesColor, SVG_CHART } from '@/utils/chartSvg';
 import {
   Loader2, Map, GraduationCap, Lock, CheckCircle2, XCircle,
   BookOpen, Award, ArrowRight,
@@ -72,31 +74,31 @@ function MapView({ map }) {
   const hue = (level) => 200 - 160 * ((level - zMin) / (zMax - zMin || 1));
 
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto bg-[#0F172A] rounded-md border border-gray-700">
+    <SvgChartFrame width={W} height={H} label="Structure map of the gridded surface" minWidth={420}>
       {contours.map((c) => c.lines.map((line, li) => (
         <g key={`${c.level}-${li}`}>
           <polyline
             points={line.map(([x, y]) => `${sx(x)},${sy(y)}`).join(' ')}
-            fill="none" stroke={`hsl(${hue(c.level)}, 80%, 60%)`} strokeWidth="1.2" />
+            fill="none" stroke={`hsl(${hue(c.level)}, 75%, 38%)`} strokeWidth="1.2" />
           {line.length > 4 && (
             <text x={sx(line[Math.floor(line.length / 2)][0])} y={sy(line[Math.floor(line.length / 2)][1]) - 2}
-              fontSize="8" fill={`hsl(${hue(c.level)}, 80%, 70%)`}>{c.level}</text>
+              fontSize="8" fill={`hsl(${hue(c.level)}, 75%, 32%)`}>{c.level}</text>
           )}
         </g>
       )))}
       {points.map((p) => (
         <g key={p.well}>
-          <circle cx={sx(p.x)} cy={sy(p.y)} r="4" fill="#0F172A" stroke="#BFFF00" strokeWidth="1.5" />
-          <text x={sx(p.x) + 7} y={sy(p.y) - 5} fontSize="9" fill="#e2e8f0">{p.well}</text>
-          <text x={sx(p.x) + 7} y={sy(p.y) + 7} fontSize="8" fill="#94a3b8">{p.z} m</text>
+          <circle cx={sx(p.x)} cy={sy(p.y)} r="4" fill={SVG_CHART.marker} stroke={seriesColor(0)} strokeWidth="1.5" />
+          <text x={sx(p.x) + 7} y={sy(p.y) - 5} fontSize="9" fill={SVG_CHART.label}>{p.well}</text>
+          <text x={sx(p.x) + 7} y={sy(p.y) + 7} fontSize="8" fill={SVG_CHART.note}>{p.z} m</text>
         </g>
       ))}
       <g>
-        <line x1={sx(TARGET.x) - 6} x2={sx(TARGET.x) + 6} y1={sy(TARGET.y)} y2={sy(TARGET.y)} stroke="#f472b6" strokeWidth="1.5" />
-        <line x1={sx(TARGET.x)} x2={sx(TARGET.x)} y1={sy(TARGET.y) - 6} y2={sy(TARGET.y) + 6} stroke="#f472b6" strokeWidth="1.5" />
-        <text x={sx(TARGET.x) + 8} y={sy(TARGET.y) + 3} fontSize="9" fill="#f472b6">{TARGET.label}</text>
+        <line x1={sx(TARGET.x) - 6} x2={sx(TARGET.x) + 6} y1={sy(TARGET.y)} y2={sy(TARGET.y)} stroke={seriesColor(4)} strokeWidth="1.5" />
+        <line x1={sx(TARGET.x)} x2={sx(TARGET.x)} y1={sy(TARGET.y) - 6} y2={sy(TARGET.y) + 6} stroke={seriesColor(4)} strokeWidth="1.5" />
+        <text x={sx(TARGET.x) + 8} y={sy(TARGET.y) + 3} fontSize="9" fill={seriesColor(4)}>{TARGET.label}</text>
       </g>
-    </svg>
+    </SvgChartFrame>
   );
 }
 
@@ -157,9 +159,9 @@ const MappingLearningPage = () => {
       const res = await submitCapstone(APP, tier, numeric);
       setResult(res);
       if (res.passed && res.certificate_number) {
-        toast({ title: `Capstone passed. ${CERT_LABELS[res.tier] || 'Associate'} certified!`, description: res.certificate_number, className: 'bg-[#BFFF00] text-slate-900' });
+        toast({ title: `Capstone passed. ${CERT_LABELS[res.tier] || 'Associate'} certified!`, description: res.certificate_number, className: 'border-pl-success/40 bg-pl-success-bg text-pl-success-text' });
       } else if (res.passed) {
-        toast({ title: 'Passed — you were already certified', className: 'bg-[#BFFF00] text-slate-900' });
+        toast({ title: 'Passed. You were already certified', className: 'border-pl-success/40 bg-pl-success-bg text-pl-success-text' });
       } else {
         toast({
           title: 'Not passing yet',
@@ -186,7 +188,7 @@ const MappingLearningPage = () => {
     || actualRole === 'super_admin';
 
   if (gate.loading) {
-    return <div className="flex items-center justify-center h-64"><Loader2 className="h-8 w-8 animate-spin text-[#BFFF00]" /></div>;
+    return <div className="flex items-center justify-center h-64"><Loader2 className="h-8 w-8 animate-spin text-pl-primary-text" /></div>;
   }
   if (!gate.allowed) return <ScopeGate />;
 
@@ -198,17 +200,17 @@ const MappingLearningPage = () => {
       <div className="relative max-w-6xl mx-auto p-6 space-y-6">
         {watermark && (
           <div className="pointer-events-none fixed inset-0 z-0 flex items-center justify-center overflow-hidden">
-            <span className="text-white/5 text-[8rem] font-black -rotate-45 select-none">TRAINING</span>
+            <span className="text-pl-text/5 text-[8rem] font-black -rotate-45 select-none">TRAINING</span>
           </div>
         )}
 
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="relative z-10 space-y-6">
           <div>
-            <h1 className="text-3xl font-bold text-white flex items-center gap-2">
-              <Map className="h-7 w-7 text-[#BFFF00]" /> Subsurface Mapping
-              <span className="text-xs px-2 py-0.5 rounded-full bg-[#BFFF00]/20 text-[#BFFF00] border border-[#BFFF00]/40">Learning Mode</span>
+            <h1 className="text-3xl font-bold text-pl-text flex items-center gap-2">
+              <Map className="h-7 w-7 text-pl-primary-text" /> Subsurface Mapping
+              <span className="text-xs px-2 py-0.5 rounded-full bg-pl-accent/15 text-pl-accent-text border border-pl-accent/40">Learning Mode</span>
             </h1>
-            <p className="mt-1 text-gray-400">
+            <p className="mt-1 text-pl-muted">
               {TOP_NAME} structure map over the Ekene teaching wells ({MAX_EXTRAP_M} m extrapolation limit).
               {gate.quota?.own_data_upload === false && ' Your own data upload unlocks at the Associate tier.'}
             </p>
@@ -219,16 +221,16 @@ const MappingLearningPage = () => {
           {/* Legacy pocket lessons: superseded by the deep course. They
               only render for tiers whose full content has not shipped. */}
           {!deep && (
-          <Card className="bg-[#1E293B] border-gray-700">
+          <Card className="bg-pl-surface border-pl-border">
             <CardHeader>
-              <CardTitle className="text-white flex items-center gap-2"><BookOpen className="h-5 w-5 text-[#BFFF00]" /> Lessons</CardTitle>
+              <CardTitle className="text-pl-text flex items-center gap-2"><BookOpen className="h-5 w-5 text-pl-primary-text" /> Lessons</CardTitle>
               <CardDescription>From well picks to a contoured structure map.</CardDescription>
             </CardHeader>
             <CardContent className="grid gap-3 sm:grid-cols-2">
               {LESSONS.map((l) => (
-                <div key={l.n} className="rounded-md border border-gray-700 bg-[#0F172A] p-3">
-                  <p className="text-white text-sm font-medium">{l.n}. {l.title}</p>
-                  <p className="text-xs text-gray-400 mt-1">{l.body}</p>
+                <div key={l.n} className="rounded-md border border-pl-border bg-pl-sunken p-3">
+                  <p className="text-pl-text text-sm font-medium">{l.n}. {l.title}</p>
+                  <p className="text-xs text-pl-muted mt-1">{l.body}</p>
                 </div>
               ))}
             </CardContent>
@@ -236,18 +238,18 @@ const MappingLearningPage = () => {
           )}
 
           {map.error ? (
-            <p className="text-red-400 text-sm">Engine error: {map.error}</p>
+            <p className="text-pl-danger-text text-sm">Engine error: {map.error}</p>
           ) : (
-            <Card className="bg-[#1E293B] border-gray-700">
+            <Card className="bg-pl-surface border-pl-border">
               <CardHeader>
-                <CardTitle className="text-white">Structure map — {cell} m cell</CardTitle>
+                <CardTitle className="text-pl-text">Structure map at a {cell} m cell</CardTitle>
                 <CardDescription>The Ekene teaching wells at {TEACHING_CELL_M} m; the capstone states a well set of its own. Toggle the cell size and watch resolution and node counts change.</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex gap-2">
                   {CELLS.map((c) => (
                     <button key={c} type="button" onClick={() => setCell(c)}
-                      className={`px-3 py-1.5 rounded-md border text-sm ${cell === c ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold' : 'bg-gray-800 text-gray-300 border-gray-600'}`}>
+                      className={`px-3 py-1.5 rounded-md border text-sm ${cell === c ? 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold' : 'bg-pl-surface text-pl-text border-pl-border-strong'}`}>
                       {c} m
                     </button>
                   ))}
@@ -265,13 +267,13 @@ const MappingLearningPage = () => {
                     [`Depth at ${TARGET.label} (${TARGET.x}, ${TARGET.y})`, s.depthAtTarget == null ? 'unmapped' : `${num(s.depthAtTarget)} m`],
                     ['Contour interval', `${s.contourStep} m`],
                   ].map(([k, v]) => (
-                    <div key={k} className="rounded-md border border-gray-700 bg-[#0F172A] p-3">
-                      <p className="text-gray-500 text-xs">{k}</p>
-                      <p className="text-white">{v}</p>
+                    <div key={k} className="rounded-md border border-pl-border bg-pl-sunken p-3">
+                      <p className="text-pl-muted text-xs">{k}</p>
+                      <p className="text-pl-text">{v}</p>
                     </div>
                   ))}
                 </div>
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-pl-muted">
                   Note where the crest sits: between the wells, near {TEACHING_WELLS[5].name} — the spline interpolates a culmination the wells only bracket (lesson 3).
                 </p>
               </CardContent>
@@ -282,7 +284,7 @@ const MappingLearningPage = () => {
           <div className="flex gap-2">
             {LEARN_TIERS.map((t) => (
               <button key={t} type="button" onClick={() => setTier(t)}
-                className={`px-3 py-1.5 rounded-md border text-sm capitalize ${tier === t ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold' : 'bg-gray-800 text-gray-300 border-gray-600'}`}>
+                className={`px-3 py-1.5 rounded-md border text-sm capitalize ${tier === t ? 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold' : 'bg-pl-surface text-pl-text border-pl-border-strong'}`}>
                 {t} tier
               </button>
             ))}
@@ -291,9 +293,9 @@ const MappingLearningPage = () => {
           {tier === 'intermediate' && (() => {
             const inter = computeIntermediate();
             return (
-              <Card className="bg-[#1E293B] border-gray-700">
+              <Card className="bg-pl-surface border-pl-border">
                 <CardHeader>
-                  <CardTitle className="text-white">Isochore panel (Intermediate)</CardTitle>
+                  <CardTitle className="text-pl-text">Isochore panel (Intermediate)</CardTitle>
                   <CardDescription>
                     Two-surface math: BASE_SAND minus TOP_SAND on the shared {TEACHING_CELL_M} m frame. Compare the gridded mean against the plain well average.
                   </CardDescription>
@@ -307,21 +309,21 @@ const MappingLearningPage = () => {
                       [`Thickness at ${TARGET.label}`, inter.isoAtP1 == null ? 'unmapped' : `${num(inter.isoAtP1)} m`],
                       ['Mean of the six well thicknesses', `${num(inter.meanWellThickness, 3)} m`],
                     ].map(([k, v]) => (
-                      <div key={k} className="rounded-md border border-gray-700 bg-[#0F172A] p-3">
-                        <p className="text-gray-500 text-xs">{k}</p>
-                        <p className="text-white">{v}</p>
+                      <div key={k} className="rounded-md border border-pl-border bg-pl-sunken p-3">
+                        <p className="text-pl-muted text-xs">{k}</p>
+                        <p className="text-pl-text">{v}</p>
                       </div>
                     ))}
                   </div>
                   <div className="overflow-x-auto">
-                    <table className="w-full text-xs text-gray-400">
-                      <thead><tr className="text-left text-gray-500 border-b border-gray-700">
+                    <table className="w-full text-xs text-pl-muted">
+                      <thead><tr className="text-left text-pl-muted border-b border-pl-border">
                         <th className="py-1 pr-3">Well</th><th className="py-1 pr-3">SAND thickness</th>
                       </tr></thead>
                       <tbody>
                         {inter.wellThk.map((w) => (
-                          <tr key={w.name} className="border-b border-gray-800/60">
-                            <td className="py-1 pr-3 text-white">{w.name}</td>
+                          <tr key={w.name} className="border-b border-pl-border/60">
+                            <td className="py-1 pr-3 text-pl-text">{w.name}</td>
                             <td className="py-1 pr-3">{w.thickness} m</td>
                           </tr>
                         ))}
@@ -336,9 +338,9 @@ const MappingLearningPage = () => {
           {tier === 'advanced' && (() => {
             const adv = computeAdvanced();
             return (
-              <Card className="bg-[#1E293B] border-gray-700">
+              <Card className="bg-pl-surface border-pl-border">
                 <CardHeader>
-                  <CardTitle className="text-white">Grid validation panel (Advanced)</CardTitle>
+                  <CardTitle className="text-pl-text">Grid validation panel (Advanced)</CardTitle>
                   <CardDescription>
                     Leave-one-out cross-validation on the {TEACHING_CELL_M} m frame, then a blind test at the new appraisal well {E7.name} ({E7.x}, {E7.y}), actual pick {E7.actual} m.
                   </CardDescription>
@@ -346,16 +348,16 @@ const MappingLearningPage = () => {
                 <CardContent className="space-y-4">
                   <div className="overflow-x-auto">
                     <table className="w-full text-sm">
-                      <thead><tr className="text-left text-gray-400 border-b border-gray-700">
+                      <thead><tr className="text-left text-pl-muted border-b border-pl-border">
                         <th className="py-2 pr-4">Well left out</th><th className="py-2 pr-4">Actual</th>
                         <th className="py-2 pr-4">Predicted</th><th className="py-2 pr-4">Residual</th>
                       </tr></thead>
                       <tbody>
                         {adv.loo.map((r) => (
-                          <tr key={r.well} className="border-b border-gray-800 text-gray-300">
-                            <td className="py-2 pr-4 text-white">{r.well}</td>
+                          <tr key={r.well} className="border-b border-pl-border text-pl-text">
+                            <td className="py-2 pr-4 text-pl-text">{r.well}</td>
                             <td className="py-2 pr-4">{r.actual} m</td>
-                            <td className="py-2 pr-4">{r.pred == null ? <span className="text-amber-400">outside the hull</span> : `${num(r.pred, 2)} m`}</td>
+                            <td className="py-2 pr-4">{r.pred == null ? <span className="text-pl-warning-text">outside the hull</span> : `${num(r.pred, 2)} m`}</td>
                             <td className="py-2 pr-4">{r.resid == null ? 'n/a' : `${num(r.resid, 2)} m`}</td>
                           </tr>
                         ))}
@@ -371,13 +373,13 @@ const MappingLearningPage = () => {
                       [`Crest depth with ${E7.name} included`, `${num(adv.zminWithE7, 3)} m`],
                       [`Live nodes with ${E7.name} included`, `${adv.liveWithE7}`],
                     ].map(([k, v]) => (
-                      <div key={k} className="rounded-md border border-gray-700 bg-[#0F172A] p-3">
-                        <p className="text-gray-500 text-xs">{k}</p>
-                        <p className="text-white">{v}</p>
+                      <div key={k} className="rounded-md border border-pl-border bg-pl-sunken p-3">
+                        <p className="text-pl-muted text-xs">{k}</p>
+                        <p className="text-pl-text">{v}</p>
                       </div>
                     ))}
                   </div>
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-pl-muted">
                     The gridder masks to the control hull, so a removed edge well never sees a prediction at its own location. Only the interior well validates, and the blind test is the honest check a new well gives you.
                   </p>
                 </CardContent>
@@ -386,19 +388,19 @@ const MappingLearningPage = () => {
           })()}
 
           {/* Capstone */}
-          <Card className="bg-[#1E293B] border-gray-700">
+          <Card className="bg-pl-surface border-pl-border">
             <CardHeader>
-              <CardTitle className="text-white">{capstone?.title || 'Capstone'}</CardTitle>
+              <CardTitle className="text-pl-text">{capstone?.title || 'Capstone'}</CardTitle>
               <CardDescription>{capstone?.prompt}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               {!capstoneOpen ? (
-                <div className="rounded-md border border-gray-700 bg-[#0F172A] p-4 text-sm text-gray-300 flex items-start gap-2">
-                  <Lock className="h-4 w-4 text-[#BFFF00] mt-0.5 shrink-0" />
+                <div className="rounded-md border border-pl-border bg-pl-sunken p-4 text-sm text-pl-text flex items-start gap-2">
+                  <Lock className="h-4 w-4 text-pl-primary-text mt-0.5 shrink-0" />
                   <p className="mb-0">
                     The capstone unlocks after the course: finish the lessons, pass each module quiz
                     and the final exam, then submit here.{' '}
-                    <Link to={`/dashboard/apps/${APP}/course/${tier}`} className="text-[#BFFF00] hover:underline">
+                    <Link to={`/dashboard/apps/${APP}/course/${tier}`} className="text-pl-primary-text hover:underline">
                       Open the course
                     </Link>
                   </p>
@@ -408,16 +410,16 @@ const MappingLearningPage = () => {
                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                   {(capstone?.fields || []).map((f) => (
                     <div key={f.key}>
-                      <Label className="text-gray-400 text-xs mb-1 block">{f.label} ({f.unit})</Label>
+                      <Label className="text-pl-muted text-xs mb-1 block">{f.label} ({f.unit})</Label>
                       <Input type="text" inputMode="decimal" autoComplete="off" value={answers[f.key] ?? ''}
                         onChange={(e) => setAnswers((a) => ({ ...a, [f.key]: e.target.value }))}
-                        className="bg-gray-700 text-white border-gray-600 h-8 text-sm" />
+                        className="h-8 text-sm" />
                     </div>
                   ))}
                 </div>
 
                 <Button onClick={submit} disabled={submitting || !capstone}
-                  className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold">
+                  className="font-semibold">
                   {submitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <GraduationCap className="mr-2 h-4 w-4" />}
                   Submit for grading
                 </Button>
@@ -425,32 +427,32 @@ const MappingLearningPage = () => {
               )}
 
               {result && (
-                <div className={`rounded-md border p-4 ${result.passed ? 'border-emerald-700 bg-emerald-900/20' : 'border-red-800 bg-red-900/20'}`}>
+                <div className={`rounded-md border p-4 ${result.passed ? 'border-pl-success/40 bg-pl-success-bg' : 'border-pl-danger/40 bg-pl-danger-bg'}`}>
                   {result.passed ? (
                     <>
-                      <p className="text-emerald-300 font-medium flex items-center gap-2">
+                      <p className="text-pl-success-text font-medium flex items-center gap-2">
                         <CheckCircle2 className="h-5 w-5" /> Passed ({result.score}/{result.max_score})
                       </p>
                       {result.certificate_number ? (
-                        <div className="mt-2 text-sm text-gray-300 space-y-1">
-                          <p className="flex items-center gap-2"><Award className="h-4 w-4 text-[#BFFF00]" />
-                            {CERT_LABELS[result.tier] || 'Associate'} certificate <span className="font-mono text-[#BFFF00]">{result.certificate_number}</span> issued.
+                        <div className="mt-2 text-sm text-pl-text space-y-1">
+                          <p className="flex items-center gap-2"><Award className="h-4 w-4 text-pl-accent-text" />
+                            {CERT_LABELS[result.tier] || 'Associate'} certificate <span className="font-mono text-pl-accent-text">{result.certificate_number}</span> issued.
                             {result.tier === 'expert' && ' Your 50% Suite discount code is on your certificates page.'}</p>
                           <div className="flex gap-3">
-                            <Link to="/dashboard/certificates" className="text-[#BFFF00] hover:underline inline-flex items-center gap-1">
+                            <Link to="/dashboard/certificates" className="text-pl-primary-text hover:underline inline-flex items-center gap-1">
                               My certificates <ArrowRight className="h-3 w-3" />
                             </Link>
-                            <a href={verificationUrl(result.verify_code)} target="_blank" rel="noreferrer" className="text-gray-400 hover:underline">
+                            <a href={verificationUrl(result.verify_code)} target="_blank" rel="noreferrer" className="text-pl-muted hover:underline">
                               Public verification
                             </a>
                           </div>
                         </div>
                       ) : (
-                        <p className="mt-1 text-sm text-gray-400">You were already certified for this tier.</p>
+                        <p className="mt-1 text-sm text-pl-muted">You were already certified for this tier.</p>
                       )}
                     </>
                   ) : (
-                    <p className="text-red-300 font-medium flex items-center gap-2">
+                    <p className="text-pl-danger-text font-medium flex items-center gap-2">
                       <XCircle className="h-5 w-5" /> {result.score}/{result.max_score} within tolerance. Type the well set the brief states into the course panels and read them again.
                     </p>
                   )}

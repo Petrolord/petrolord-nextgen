@@ -47,41 +47,41 @@ const RetentionPolicies = () => {
     };
 
     return (
-        <Card className="bg-[#1E293B] border-slate-800">
+        <Card>
             <CardHeader>
-                <CardTitle className="text-white flex items-center">
-                    <Archive className="w-5 h-5 mr-2 text-[#BFFF00]" />
+                <CardTitle className="text-pl-text flex items-center">
+                    <Archive className="w-5 h-5 mr-2 text-pl-accent-text" aria-hidden="true" />
                     Data Retention Policies
                 </CardTitle>
-                <p className="text-sm text-slate-400">
+                <p className="text-sm text-pl-muted">
                     Configure how long audit logs are kept before being automatically archived or deleted.
                 </p>
             </CardHeader>
             <CardContent>
                 <Table>
-                    <TableHeader className="bg-slate-900/50">
-                        <TableRow className="border-slate-800">
-                            <TableHead className="text-slate-400">Policy Name</TableHead>
-                            <TableHead className="text-slate-400">Log Type</TableHead>
-                            <TableHead className="text-slate-400">Retention (Days)</TableHead>
-                            <TableHead className="text-slate-400">Auto Delete</TableHead>
-                            <TableHead className="text-right text-slate-400">Actions</TableHead>
+                    <TableHeader className="bg-pl-sunken">
+                        <TableRow className="border-pl-border">
+                            <TableHead className="text-pl-muted">Policy Name</TableHead>
+                            <TableHead className="text-pl-muted">Log Type</TableHead>
+                            <TableHead className="text-pl-muted">Retention (Days)</TableHead>
+                            <TableHead className="text-pl-muted">Auto Delete</TableHead>
+                            <TableHead className="text-right text-pl-muted">Actions</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
                         {policies.map((policy) => (
-                            <TableRow key={policy.id} className="border-slate-800">
-                                <TableCell className="font-medium text-white">{policy.policy_name}</TableCell>
-                                <TableCell className="text-slate-300 capitalize">{policy.log_type}</TableCell>
+                            <TableRow key={policy.id} className="border-pl-border">
+                                <TableCell className="font-medium text-pl-text">{policy.policy_name}</TableCell>
+                                <TableCell className="text-pl-text capitalize">{policy.log_type}</TableCell>
                                 <TableCell>
                                     <div className="flex items-center gap-2">
                                         <Input 
                                             type="number" 
-                                            className="w-24 bg-slate-950 border-slate-700 text-white"
+                                            className="w-24"
                                             value={policy.retention_days}
                                             onChange={(e) => handlePolicyChange(policy.id, 'retention_days', parseInt(e.target.value))}
                                         />
-                                        <span className="text-slate-500 text-sm">days</span>
+                                        <span className="text-pl-muted text-sm">days</span>
                                     </div>
                                 </TableCell>
                                 <TableCell>
@@ -93,7 +93,7 @@ const RetentionPolicies = () => {
                                 <TableCell className="text-right">
                                     <Button 
                                         size="sm" 
-                                        className="bg-slate-800 hover:bg-slate-700 text-white"
+                                        variant="outline"
                                         onClick={() => handleSave(policy)}
                                     >
                                         <Save className="w-4 h-4 mr-2" /> Save

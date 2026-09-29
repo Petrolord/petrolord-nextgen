@@ -131,72 +131,73 @@ const AdminManagementPage = () => {
         <title>Admin Management - Petrolord</title>
       </Helmet>
       
-      <div className="space-y-6 animate-in fade-in duration-500">
+      <div className="px-4 py-8 md:px-8 space-y-6 animate-in fade-in duration-500">
         <div className="flex flex-col space-y-2">
-          <h1 className="text-3xl font-bold tracking-tight text-white flex items-center gap-2">
-             <ShieldCheck className="w-8 h-8 text-[#BFFF00]" /> Super Admin Console
+          <h1 className="text-3xl font-bold tracking-tight text-pl-text flex items-center gap-2">
+             <ShieldCheck className="w-8 h-8 text-pl-accent-text" aria-hidden="true" /> Super Admin Console
           </h1>
-          <p className="text-slate-400">Manage platform administrators and view system-wide analytics.</p>
+          <p className="text-pl-muted">Manage platform administrators and view system-wide analytics.</p>
         </div>
 
         <Tabs defaultValue="analytics" value={activeTab} onValueChange={setActiveTab} className="space-y-4">
-          <TabsList className="bg-[#1E293B] border-slate-800 p-1">
-            <TabsTrigger value="analytics" className="data-[state=active]:bg-[#BFFF00] data-[state=active]:text-black">
+          <TabsList className="p-1">
+            <TabsTrigger value="analytics">
                 <BarChart2 className="w-4 h-4 mr-2" /> System Analytics
             </TabsTrigger>
-            <TabsTrigger value="admins" className="data-[state=active]:bg-[#BFFF00] data-[state=active]:text-black">
+            <TabsTrigger value="admins">
                 <Users className="w-4 h-4 mr-2" /> Admin Users
             </TabsTrigger>
           </TabsList>
 
           {/* ANALYTICS TAB */}
           <TabsContent value="analytics" className="space-y-6">
-            <div className="flex justify-between items-center">
-                <h2 className="text-xl font-semibold text-white">System Overview</h2>
-                <Button variant="outline" size="sm" onClick={fetchSystemMetrics} className="border-slate-700">
+            <div className="flex flex-wrap justify-between items-center gap-2">
+                <h2 className="text-xl font-semibold text-pl-text">System Overview</h2>
+                <Button variant="outline" size="sm" onClick={fetchSystemMetrics}>
                     <RefreshCw className={`w-4 h-4 mr-2 ${loadingMetrics ? 'animate-spin' : ''}`} /> Refresh
                 </Button>
             </div>
 
             {loadingMetrics && !systemMetrics ? (
                 <div className="h-64 flex items-center justify-center">
-                    <Loader2 className="w-8 h-8 animate-spin text-[#BFFF00]" />
+                    <Loader2 className="w-8 h-8 animate-spin text-pl-primary" />
                 </div>
             ) : (
                 <>
                     {/* Top Level KPIs */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                        <KPICard title="Total Users" value={systemMetrics?.userCount || 0} icon={Users} color="text-blue-400 bg-blue-500/10" />
-                        <KPICard title="Learners" value={systemMetrics?.learnerCount || 0} icon={Users} color="text-purple-400 bg-purple-500/10" />
-                        <KPICard title="Active Today" value={systemMetrics?.activeUsers || 0} icon={RefreshCw} color="text-emerald-400 bg-emerald-500/10" />
-                        <KPICard title="Enrollments" value={systemMetrics?.enrollmentCount || 0} icon={BarChart2} color="text-orange-400 bg-orange-500/10" />
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                        <KPICard title="Total Users" value={systemMetrics?.userCount || 0} icon={Users} tone="info" />
+                        <KPICard title="Learners" value={systemMetrics?.learnerCount || 0} icon={Users} tone="primary" />
+                        <KPICard title="Active Today" value={systemMetrics?.activeUsers || 0} icon={RefreshCw} tone="success" />
+                        <KPICard title="Enrollments" value={systemMetrics?.enrollmentCount || 0} icon={BarChart2} tone="accent" />
                     </div>
 
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                         <div className="h-80">
+                         <div>
                              <PieChartWidget
                                 title="User Distribution"
+                                height={240}
                                 data={[
                                     { name: 'Learners', value: systemMetrics?.learnerCount || 0 },
                                     { name: 'Staff', value: Math.max((systemMetrics?.userCount || 0) - (systemMetrics?.learnerCount || 0), 0) }
                                 ]}
                              />
                          </div>
-                         <div className="lg:col-span-2 h-80">
-                            <Card className="bg-[#1E293B] border-slate-800 h-full">
-                                <CardHeader><CardTitle className="text-white">Academy Records</CardTitle></CardHeader>
+                         <div className="lg:col-span-2">
+                            <Card className="h-full">
+                                <CardHeader><CardTitle className="text-pl-text">Academy Records</CardTitle></CardHeader>
                                 <CardContent>
                                     <div className="grid grid-cols-2 gap-4 mt-4">
-                                        <div className="bg-slate-800 p-6 rounded text-center">
-                                            <div className="text-3xl font-bold text-white">{systemMetrics?.enrollmentCount || 0}</div>
-                                            <div className="text-xs text-slate-500 mt-1">Total Enrollments</div>
+                                        <div className="bg-pl-sunken p-6 rounded text-center">
+                                            <div className="text-3xl font-bold text-pl-text tabular-nums">{systemMetrics?.enrollmentCount || 0}</div>
+                                            <div className="text-xs text-pl-muted mt-1">Total Enrollments</div>
                                         </div>
-                                        <div className="bg-slate-800 p-6 rounded text-center">
-                                            <div className="text-3xl font-bold text-white">{systemMetrics?.certificateCount || 0}</div>
-                                            <div className="text-xs text-slate-500 mt-1">Live Certificates</div>
+                                        <div className="bg-pl-sunken p-6 rounded text-center">
+                                            <div className="text-3xl font-bold text-pl-text tabular-nums">{systemMetrics?.certificateCount || 0}</div>
+                                            <div className="text-xs text-pl-muted mt-1">Live Certificates</div>
                                         </div>
                                     </div>
-                                    <p className="text-xs text-slate-500 mt-4">Full breakdowns live in System Analytics.</p>
+                                    <p className="text-xs text-pl-muted mt-4">Full breakdowns live in System Analytics.</p>
                                 </CardContent>
                             </Card>
                          </div>
@@ -207,19 +208,19 @@ const AdminManagementPage = () => {
 
           {/* ADMINS LIST TAB */}
           <TabsContent value="admins">
-            <Card className="bg-[#1E293B] border-slate-800">
-              <CardHeader className="flex flex-row items-center justify-between">
+            <Card>
+              <CardHeader className="flex flex-row flex-wrap items-center justify-between gap-2">
                 <div>
-                  <CardTitle className="text-white">Petrolord Administrators</CardTitle>
+                  <CardTitle className="text-pl-text">Petrolord Administrators</CardTitle>
                   <CardDescription>Users with global administrative privileges.</CardDescription>
                 </div>
                 <Dialog open={isInviteDialogOpen} onOpenChange={setIsInviteDialogOpen}>
                   <DialogTrigger asChild>
-                    <Button className="bg-[#BFFF00] text-black hover:bg-[#a3d900]">
+                    <Button>
                       <UserPlus className="w-4 h-4 mr-2" /> Invite Admin
                     </Button>
                   </DialogTrigger>
-                  <DialogContent className="bg-[#1E293B] border-slate-700 text-white">
+                  <DialogContent>
                     <DialogHeader>
                       <DialogTitle>Invite New Administrator</DialogTitle>
                       <DialogDescription>
@@ -234,7 +235,6 @@ const AdminManagementPage = () => {
                           placeholder="John Doe" 
                           value={newAdminName}
                           onChange={(e) => setNewAdminName(e.target.value)}
-                          className="bg-slate-800 border-slate-600 text-white"
                         />
                       </div>
                       <div className="space-y-2">
@@ -245,11 +245,10 @@ const AdminManagementPage = () => {
                           placeholder="admin@petrolord.com" 
                           value={newAdminEmail}
                           onChange={(e) => setNewAdminEmail(e.target.value)}
-                          className="bg-slate-800 border-slate-600 text-white"
                         />
                       </div>
                       <DialogFooter>
-                        <Button type="submit" disabled={inviteLoading} className="bg-[#BFFF00] text-black hover:bg-[#a3d900]">
+                        <Button type="submit" disabled={inviteLoading}>
                           {inviteLoading ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
                           Send Invitation
                         </Button>
@@ -261,10 +260,10 @@ const AdminManagementPage = () => {
               <CardContent>
                 <div className="mb-4">
                   <div className="relative">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-pl-muted" />
                     <Input 
                       placeholder="Search admins..." 
-                      className="pl-9 bg-[#0F172A] border-slate-700 text-white"
+                      className="pl-9"
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
                     />
@@ -273,31 +272,31 @@ const AdminManagementPage = () => {
 
                 {loadingAdmins ? (
                   <div className="flex justify-center py-8">
-                    <Loader2 className="w-8 h-8 animate-spin text-[#BFFF00]" />
+                    <Loader2 className="w-8 h-8 animate-spin text-pl-primary" />
                   </div>
                 ) : (
                   <div className="space-y-4">
                     {filteredAdmins.length === 0 ? (
-                      <div className="text-center py-8 text-slate-500">
+                      <div className="text-center py-8 text-pl-muted">
                         No administrators found matching your search.
                       </div>
                     ) : (
                       filteredAdmins.map((admin) => (
-                        <div key={admin.id} className="flex items-center justify-between p-4 rounded-lg bg-[#0F172A] border border-slate-800">
+                        <div key={admin.id} className="flex flex-wrap items-center justify-between gap-3 p-4 rounded-lg bg-pl-sunken border border-pl-border">
                           <div className="flex items-center gap-4">
-                            <div className="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center text-slate-300 font-bold">
+                            <div className="w-10 h-10 rounded-full bg-pl-primary/10 flex items-center justify-center text-pl-primary-text font-bold">
                               {admin.display_name?.charAt(0) || admin.email.charAt(0).toUpperCase()}
                             </div>
                             <div>
-                              <div className="font-medium text-white">{admin.display_name || 'Unnamed Admin'}</div>
-                              <div className="text-sm text-slate-400">{admin.email}</div>
+                              <div className="font-medium text-pl-text">{admin.display_name || 'Unnamed Admin'}</div>
+                              <div className="text-sm text-pl-muted">{admin.email}</div>
                             </div>
                           </div>
                           <div className="flex items-center gap-4">
-                            <Badge className="bg-purple-900/50 text-purple-300 border-purple-700">
+                            <Badge className="bg-pl-accent/15 text-pl-accent-text border-pl-accent/40">
                               {admin.role === 'super_admin' ? 'Super Admin' : 'Admin'}
                             </Badge>
-                            <div className="text-xs text-slate-500">
+                            <div className="text-xs text-pl-muted">
                               Added {new Date(admin.created_at).toLocaleDateString()}
                             </div>
                           </div>

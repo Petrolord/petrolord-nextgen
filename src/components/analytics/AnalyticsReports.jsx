@@ -91,25 +91,25 @@ const AnalyticsReports = () => {
 
   // Helper to render table headers dynamically
   const renderTable = () => {
-    if (!reportData || reportData.length === 0) return <div className="text-center py-10 text-slate-500">No data available for this selection.</div>;
+    if (!reportData || reportData.length === 0) return <div className="text-center py-10 text-pl-muted">No data available for this selection.</div>;
     
     const headers = Object.keys(reportData[0]);
 
     return (
-      <div className="rounded-md border border-slate-700 overflow-hidden">
+      <div className="rounded-md border border-pl-border overflow-x-auto">
         <Table>
-          <TableHeader className="bg-slate-800">
+          <TableHeader className="bg-pl-sunken">
             <TableRow>
               {headers.map(h => (
-                <TableHead key={h} className="text-slate-300 capitalize">{h.replace(/([A-Z])/g, ' $1').trim()}</TableHead>
+                <TableHead key={h} className="text-pl-text capitalize">{h.replace(/([A-Z])/g, ' $1').trim()}</TableHead>
               ))}
             </TableRow>
           </TableHeader>
           <TableBody>
             {reportData.map((row, i) => (
-              <TableRow key={i} className="hover:bg-slate-800/50 border-slate-700">
+              <TableRow key={i} className="hover:bg-pl-sunken/60 border-pl-border">
                 {headers.map(h => (
-                  <TableCell key={`${i}-${h}`} className="text-slate-300">{row[h]}</TableCell>
+                  <TableCell key={`${i}-${h}`} className="text-pl-text">{row[h] ?? 'n/a'}</TableCell>
                 ))}
               </TableRow>
             ))}
@@ -121,34 +121,34 @@ const AnalyticsReports = () => {
 
   return (
     <div className="space-y-6">
-      <Card className="bg-[#1E293B] border-slate-800">
+      <Card>
         <CardHeader>
-          <CardTitle className="text-white flex items-center gap-2">
-            <FileText className="w-5 h-5 text-[#BFFF00]" />
+          <CardTitle className="text-pl-text flex items-center gap-2">
+            <FileText className="w-5 h-5 text-pl-accent-text" aria-hidden="true" />
             Report Configuration
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="flex flex-col md:flex-row gap-4 items-end">
             <div className="w-full md:w-1/3 space-y-2">
-              <label className="text-sm font-medium text-slate-300">Report Type</label>
+              <label className="text-sm font-medium text-pl-text">Report Type</label>
               <Select value={reportType} onValueChange={setReportType}>
-                <SelectTrigger className="bg-slate-950 border-slate-700 text-white">
+                <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent className="bg-slate-900 border-slate-700 text-white">
+                <SelectContent>
                   {REPORT_TYPES.map(t => <SelectItem key={t.id} value={t.id}>{t.name}</SelectItem>)}
                 </SelectContent>
               </Select>
             </div>
             
             <div className="w-full md:w-1/3 space-y-2">
-              <label className="text-sm font-medium text-slate-300">Date Range</label>
+              <label className="text-sm font-medium text-pl-text">Date Range</label>
               <Select value={dateRange} onValueChange={setDateRange}>
-                <SelectTrigger className="bg-slate-950 border-slate-700 text-white">
+                <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent className="bg-slate-900 border-slate-700 text-white">
+                <SelectContent>
                   {DATE_RANGES.map(r => <SelectItem key={r.id} value={r.id}>{r.name}</SelectItem>)}
                 </SelectContent>
               </Select>
@@ -157,7 +157,7 @@ const AnalyticsReports = () => {
             <Button 
               onClick={generateReport} 
               disabled={loading}
-              className="bg-[#BFFF00] text-black hover:bg-[#a3d900] w-full md:w-auto font-bold"
+              className="w-full md:w-auto"
             >
               {loading ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <RefreshCw className="w-4 h-4 mr-2" />}
               Generate Report
@@ -167,13 +167,13 @@ const AnalyticsReports = () => {
       </Card>
 
       {reportData && (
-        <Card className="bg-[#1E293B] border-slate-800 animate-in fade-in slide-in-from-bottom-4">
-          <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle className="text-white">Report Results</CardTitle>
-            <div className="flex gap-2">
-               <Button variant="outline" size="sm" onClick={() => handleExport('csv')} className="border-slate-600 text-slate-300 hover:text-white">CSV</Button>
-               <Button variant="outline" size="sm" onClick={() => handleExport('excel')} className="border-slate-600 text-slate-300 hover:text-white">Excel</Button>
-               <Button size="sm" onClick={() => handleExport('pdf')} className="bg-slate-700 text-white hover:bg-slate-600"><Download className="w-4 h-4 mr-2" /> PDF</Button>
+        <Card className="animate-in fade-in slide-in-from-bottom-4">
+          <CardHeader className="flex flex-row flex-wrap items-center justify-between gap-2">
+            <CardTitle className="text-pl-text">Report Results</CardTitle>
+            <div className="flex flex-wrap gap-2">
+               <Button variant="outline" size="sm" onClick={() => handleExport('csv')}>CSV</Button>
+               <Button variant="outline" size="sm" onClick={() => handleExport('excel')}>Excel</Button>
+               <Button size="sm" onClick={() => handleExport('pdf')}><Download className="w-4 h-4 mr-2" /> PDF</Button>
             </div>
           </CardHeader>
           <CardContent>

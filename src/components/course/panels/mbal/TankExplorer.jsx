@@ -3,6 +3,9 @@ import {
   runEkeneTank, reconciliation, runTank, typedTankInputs, runDakeTank, EKENE,
 } from './tankLab';
 import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { useThemeClass } from '@/design/themeClass';
+import SvgChartFrame from '@/components/charts/SvgChartFrame';
+import { seriesColor, SVG_CHART, AXIS_LINE_PROPS } from '@/utils/chartSvg';
 
 // Tank explorer: the Ekene survey history through the real material-balance
 // engine. The F-against-Et plot is the whole Havlena-Odeh idea in one picture,
@@ -27,6 +30,7 @@ const fmt = (v, d = 4) => (Number.isFinite(v) ? Number(v).toLocaleString('en-US'
 const sci = (v, d = 6) => (Number.isFinite(v) ? Number(v).toPrecision(d) : '-');
 
 const TankExplorer = () => {
+  const tc = useThemeClass();
   const [dataset, setDataset] = useState('ekene');
   const [aquiferModel, setAquiferModel] = useState('none');
   const [dakeAquifer, setDakeAquifer] = useState('none');
@@ -72,7 +76,7 @@ const TankExplorer = () => {
             <NumField label="cf (1/psi)" value={form.cf} onChange={(v) => setForm((f) => ({ ...f, cf: v }))} />
             <NumField label="cw (1/psi)" value={form.cw} onChange={(v) => setForm((f) => ({ ...f, cw: v }))} />
           </div>
-          <p className="text-xs text-gray-400 mb-0">Survey table: row 0 is the initial state (Np 0); every row above the bubble point.</p>
+          <p className={tc('text-xs text-gray-400 mb-0', 'text-xs text-pl-muted mb-0')}>Survey table: row 0 is the initial state (Np 0); every row above the bubble point.</p>
           {form.rows.map((r, i) => (
             <div key={i} className="grid gap-2 grid-cols-3 sm:w-[32rem]">
               <NumField label={`Row ${i}: p (psia)`} value={r.p} onChange={setRow(i, 'p')} />
@@ -123,29 +127,29 @@ const TankExplorer = () => {
     >
       {controls}
 
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto bg-[#0F172A] rounded-md border border-gray-700">
-        <line x1={PAD.left} y1={PAD.top} x2={PAD.left} y2={H - PAD.bottom} stroke="#334155" />
-        <line x1={PAD.left} y1={H - PAD.bottom} x2={W - PAD.right} y2={H - PAD.bottom} stroke="#334155" />
+      <SvgChartFrame width={W} height={H} label="Withdrawal F against total expansion Et with the fitted line" minWidth={460} maxWidth={720}>
+        <line x1={PAD.left} y1={PAD.top} x2={PAD.left} y2={H - PAD.bottom} {...AXIS_LINE_PROPS} />
+        <line x1={PAD.left} y1={H - PAD.bottom} x2={W - PAD.right} y2={H - PAD.bottom} {...AXIS_LINE_PROPS} />
         {/* fitted line through the origin: F = N * Et */}
         <line
           x1={x(0)} y1={y(intercept)}
           x2={x(maxEt)} y2={y(intercept + slope * maxEt)}
-          stroke="#BFFF00" strokeWidth="1.6" opacity="0.9"
+          stroke={seriesColor(0)} strokeWidth="1.6" opacity="0.9"
         />
         {pts.map((r) => (
           <g key={r.n}>
-            <circle cx={x(r.Et_rb)} cy={y(r.F_rb)} r="4" fill="#38bdf8" />
-            <text x={x(r.Et_rb) + 7} y={y(r.F_rb) - 5} fontSize="9" fill="#64748b">{r.date.slice(0, 7)}</text>
+            <circle cx={x(r.Et_rb)} cy={y(r.F_rb)} r="4" fill={seriesColor(1)} />
+            <text x={x(r.Et_rb) + 7} y={y(r.F_rb) - 5} fontSize="9" fill={SVG_CHART.tick}>{r.date.slice(0, 7)}</text>
           </g>
         ))}
-        <text x={W / 2} y={H - 8} fontSize="10" fill="#64748b" textAnchor="middle">Et, total expansion (rb/stb)</text>
-        <text x={14} y={H / 2} fontSize="10" fill="#64748b" transform={`rotate(-90 14 ${H / 2})`} textAnchor="middle">F, withdrawal (rb)</text>
-        <text x={PAD.left + 10} y={PAD.top + 12} fontSize="10" fill="#BFFF00">fitted line, slope = OOIP</text>
-      </svg>
+        <text x={W / 2} y={H - 8} fontSize="10" fill={SVG_CHART.tick} textAnchor="middle">Et, total expansion (rb/stb)</text>
+        <text x={14} y={H / 2} fontSize="10" fill={SVG_CHART.tick} transform={`rotate(-90 14 ${H / 2})`} textAnchor="middle">F, withdrawal (rb)</text>
+        <text x={PAD.left + 10} y={PAD.top + 12} fontSize="10" fill={seriesColor(0)}>fitted line, slope = OOIP</text>
+      </SvgChartFrame>
 
       <div className="overflow-x-auto">
-        <table className="w-full text-xs text-gray-300">
-          <thead className="text-gray-500">
+        <table className={tc('w-full text-xs text-gray-300', 'w-full text-xs text-pl-text')}>
+          <thead className={tc('text-gray-500', 'text-pl-muted')}>
             <tr>
               {['n', 'date', 'p psia', 'Np stb', 'F rb', 'Eo rb/stb', 'Efw rb', 'Et rb', 'F/Et'].map((h) => (
                 <th key={h} className="text-left font-normal py-1 pr-3">{h}</th>
@@ -154,7 +158,7 @@ const TankExplorer = () => {
           </thead>
           <tbody>
             {rows.map((r) => (
-              <tr key={r.n} className="border-t border-gray-800">
+              <tr key={r.n} className={tc('border-t border-gray-800', 'border-t border-pl-border')}>
                 <td className="py-1 pr-3">{r.n}</td>
                 <td className="py-1 pr-3">{r.date}</td>
                 <td className="py-1 pr-3">{fmt(r.pressure_psia, 2)}</td>

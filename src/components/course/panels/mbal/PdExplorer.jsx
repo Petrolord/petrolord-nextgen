@@ -1,6 +1,9 @@
 import React, { useMemo, useState } from 'react';
 import { pdSweep, pssAsymptote } from './tankLab';
 import { PanelShell, SelectField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { useThemeClass } from '@/design/themeClass';
+import SvgChartFrame from '@/components/charts/SvgChartFrame';
+import { seriesColor, SVG_CHART, AXIS_LINE_PROPS } from '@/utils/chartSvg';
 
 // pD explorer: the line-source solution against the bounded-circle van
 // Everdingen-Hurst solution, with the pseudo-steady-state asymptote overlaid.
@@ -15,6 +18,7 @@ const TDS = [0.05, 0.1, 0.25, 0.5, 1, 2, 5, 10, 15, 25, 40, 50, 75, 100];
 const sci = (v, d = 9) => (Number.isFinite(v) ? Number(v).toPrecision(d) : '-');
 
 const PdExplorer = () => {
+  const tc = useThemeClass();
   // Opens at reD 10; the Expert capstone's Dake case is reD 5, one select away.
   const [reD, setReD] = useState('10');
   const r = Number(reD);
@@ -47,20 +51,20 @@ const PdExplorer = () => {
           options={[['2', 'reD = 2 (tiny)'], ['3', 'reD = 3'], ['5', 'reD = 5 (Dake 9.2)'], ['10', 'reD = 10'], ['20', 'reD = 20 (large)']]} />
       </div>
 
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto bg-[#0F172A] rounded-md border border-gray-700">
-        <line x1={PAD.left} y1={PAD.top} x2={PAD.left} y2={H - PAD.bottom} stroke="#334155" />
-        <line x1={PAD.left} y1={H - PAD.bottom} x2={W - PAD.right} y2={H - PAD.bottom} stroke="#334155" />
+      <SvgChartFrame width={W} height={H} label="Dimensionless pressure against dimensionless time" minWidth={460} maxWidth={720}>
+        <line x1={PAD.left} y1={PAD.top} x2={PAD.left} y2={H - PAD.bottom} {...AXIS_LINE_PROPS} />
+        <line x1={PAD.left} y1={H - PAD.bottom} x2={W - PAD.right} y2={H - PAD.bottom} {...AXIS_LINE_PROPS} />
         {[0.05, 0.5, 5, 50].map((tD) => (
-          <text key={tD} x={x(tD)} y={H - PAD.bottom + 14} fontSize="9" fill="#64748b" textAnchor="middle">tD {tD}</text>
+          <text key={tD} x={x(tD)} y={H - PAD.bottom + 14} fontSize="9" fill={SVG_CHART.tick} textAnchor="middle">tD {tD}</text>
         ))}
-        {pssPath && <path d={pssPath} fill="none" stroke="#eab308" strokeWidth="1.2" strokeDasharray="5 4" opacity="0.8" />}
-        <path d={path('infinite')} fill="none" stroke="#38bdf8" strokeWidth="1.8" />
-        <path d={path('finite')} fill="none" stroke="#f97316" strokeWidth="1.8" />
-        <text x={PAD.left + 8} y={PAD.top + 11} fontSize="10" fill="#38bdf8">line source (infinite acting)</text>
-        <text x={PAD.left + 8} y={PAD.top + 24} fontSize="10" fill="#f97316">bounded circle, reD {r}</text>
-        <text x={PAD.left + 8} y={PAD.top + 37} fontSize="10" fill="#eab308">pseudo steady state asymptote</text>
-        <text x={14} y={H / 2} fontSize="10" fill="#64748b" transform={`rotate(-90 14 ${H / 2})`} textAnchor="middle">pD</text>
-      </svg>
+        {pssPath && <path d={pssPath} fill="none" stroke={SVG_CHART.reference} strokeWidth="1.2" strokeDasharray="5 4" />}
+        <path d={path('infinite')} fill="none" stroke={seriesColor(0)} strokeWidth="1.8" />
+        <path d={path('finite')} fill="none" stroke={seriesColor(2)} strokeWidth="1.8" />
+        <text x={PAD.left + 8} y={PAD.top + 11} fontSize="10" fill={seriesColor(0)}>line source (infinite acting)</text>
+        <text x={PAD.left + 8} y={PAD.top + 24} fontSize="10" fill={seriesColor(2)}>bounded circle, reD {r}</text>
+        <text x={PAD.left + 8} y={PAD.top + 37} fontSize="10" fill={SVG_CHART.reference}>pseudo steady state asymptote</text>
+        <text x={14} y={H / 2} fontSize="10" fill={SVG_CHART.tick} transform={`rotate(-90 14 ${H / 2})`} textAnchor="middle">pD</text>
+      </SvgChartFrame>
 
       <TileGrid>
         <Tile label="tD 0.1, finite / line source" value={sci(at(0.1).ratio, 6)} />

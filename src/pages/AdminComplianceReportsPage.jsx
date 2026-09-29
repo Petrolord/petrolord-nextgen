@@ -166,13 +166,13 @@ const AdminComplianceReportsPage = () => {
     return (
         <>
             <Helmet><title>Compliance Reports - Petrolord</title></Helmet>
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="px-4 py-8 md:px-8">
                 <div className="flex flex-wrap justify-between items-center gap-4 mb-8">
                     <div>
-                        <h1 className="text-4xl font-bold text-white mb-2 flex items-center"><FileText className="w-8 h-8 mr-4" />Compliance Reports</h1>
-                        <p className="text-xl text-gray-400">Generate, filter, and anonymize compliance reports.</p>
+                        <h1 className="text-3xl md:text-4xl font-bold text-pl-text mb-2 flex items-center"><FileText className="w-8 h-8 mr-4" />Compliance Reports</h1>
+                        <p className="text-base md:text-xl text-pl-muted">Generate, filter, and anonymize compliance reports.</p>
                     </div>
-                     <div className="flex gap-2">
+                     <div className="flex flex-wrap gap-2">
                         <Button variant="outline" onClick={() => setIsScheduleModalOpen(true)}><Calendar className="w-4 h-4 mr-2" /> Schedule</Button>
                         <Button variant="outline" onClick={handleNotImplemented}><Save className="w-4 h-4 mr-2" /> Save Template</Button>
                         <Button variant="outline" onClick={handleNotImplemented}><List className="w-4 h-4 mr-2" /> Load Template</Button>
@@ -181,21 +181,21 @@ const AdminComplianceReportsPage = () => {
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
                     <div className="lg:col-span-2 space-y-6">
-                        <div className="bg-[#1E293B] p-6 rounded-lg border border-gray-800 space-y-6">
+                        <div className="bg-pl-surface p-4 md:p-6 rounded-lg border border-pl-border space-y-6">
                             <Tabs value={reportType} onValueChange={val => { setOriginalReportData(null); setDisplayReportData(null); setReportType(val); }}>
-                                <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 lg:grid-cols-8">
+                                <TabsList className="grid w-full h-auto grid-cols-2 sm:grid-cols-4">
                                     {Object.entries(REPORT_TYPES).map(([key, { title, icon: Icon }]) => <TabsTrigger key={key} value={key}><Icon className="w-4 h-4 mr-2" />{title}</TabsTrigger>)}
                                 </TabsList>
                             </Tabs>
                             <div className="flex flex-wrap items-end gap-4">
                                 {reportType === 'user_activity' && (
-                                    <div className="flex-1 min-w-[200px]"><Label className="text-sm font-medium text-gray-300 mb-2 block">Select User</Label><Select value={selectedUserId} onValueChange={setSelectedUserId}><SelectTrigger><SelectValue placeholder="Select user..." /></SelectTrigger><SelectContent>{users.map(u => <SelectItem key={u.id} value={u.id}>{u.display_name}</SelectItem>)}</SelectContent></Select></div>
+                                    <div className="flex-1 min-w-[200px]"><Label className="text-sm font-medium text-pl-text mb-2 block">Select User</Label><Select value={selectedUserId} onValueChange={setSelectedUserId}><SelectTrigger><SelectValue placeholder="Select user..." /></SelectTrigger><SelectContent>{users.map(u => <SelectItem key={u.id} value={u.id}>{u.display_name}</SelectItem>)}</SelectContent></Select></div>
                                 )}
                                 {reportType === 'data_change' && (
-                                    <div className="flex-1 min-w-[200px]"><Label className="text-sm font-medium text-gray-300 mb-2 block">Resource Type</Label><Select value={selectedResourceType} onValueChange={setSelectedResourceType}><SelectTrigger><SelectValue /></SelectTrigger><SelectContent>{RESOURCE_TYPES.map(t => <SelectItem key={t} value={t}>{t}</SelectItem>)}</SelectContent></Select></div>
+                                    <div className="flex-1 min-w-[200px]"><Label className="text-sm font-medium text-pl-text mb-2 block">Resource Type</Label><Select value={selectedResourceType} onValueChange={setSelectedResourceType}><SelectTrigger><SelectValue /></SelectTrigger><SelectContent>{RESOURCE_TYPES.map(t => <SelectItem key={t} value={t}>{t}</SelectItem>)}</SelectContent></Select></div>
                                 )}
-                                <div className="flex-1 min-w-[180px]"><Label className="text-sm font-medium text-gray-300 mb-2 block">Date Range</Label><Select value={dateRangeKey} onValueChange={setDateRangeKey}><SelectTrigger><SelectValue /></SelectTrigger><SelectContent>{Object.entries(DATE_RANGES).map(([k, v]) => <SelectItem key={k} value={k}>{v}</SelectItem>)}</SelectContent></Select></div>
-                                <Button onClick={handleGenerateReport} disabled={loading} className="bg-[#BFFF00] text-black hover:bg-lime-400 font-semibold">
+                                <div className="flex-1 min-w-[180px]"><Label className="text-sm font-medium text-pl-text mb-2 block">Date Range</Label><Select value={dateRangeKey} onValueChange={setDateRangeKey}><SelectTrigger><SelectValue /></SelectTrigger><SelectContent>{Object.entries(DATE_RANGES).map(([k, v]) => <SelectItem key={k} value={k}>{v}</SelectItem>)}</SelectContent></Select></div>
+                                <Button onClick={handleGenerateReport} disabled={loading}>
                                     {loading ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Generating</> : 'Generate Report'}
                                 </Button>
                             </div>
@@ -208,7 +208,7 @@ const AdminComplianceReportsPage = () => {
                 </div>
 
                 {displayReportData && CurrentReportComponent && (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="bg-[#0F172A] p-6 rounded-lg border border-gray-800">
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="bg-pl-bg p-4 md:p-6 rounded-lg border border-pl-border">
                         <div className="flex justify-end gap-2 mb-4">
                             <Button variant="outline" size="sm" onClick={() => handleExport('pdf')}><Download className="w-4 h-4 mr-2" />PDF</Button>
                             <Button variant="outline" size="sm" onClick={() => handleExport('csv')}><FileType className="w-4 h-4 mr-2" />CSV</Button>
@@ -217,8 +217,8 @@ const AdminComplianceReportsPage = () => {
                         <CurrentReportComponent reportData={displayReportData} dateRange={getDateRange()} generatedBy={profile.email} />
                     </motion.div>
                 )}
-                 {loading && <div className="text-center py-16 text-gray-500"><Loader2 className="mx-auto h-12 w-12 animate-spin text-[#BFFF00]" /><p className="mt-4">Generating report...</p></div>}
-                {!displayReportData && !loading && <div className="text-center py-16 text-gray-500"><FileText className="mx-auto h-12 w-12" /><p className="mt-4">Select criteria and generate a report.</p></div>}
+                 {loading && <div className="text-center py-16 text-pl-muted"><Loader2 className="mx-auto h-12 w-12 animate-spin text-pl-primary" /><p className="mt-4">Generating report...</p></div>}
+                {!displayReportData && !loading && <div className="text-center py-16 text-pl-muted"><FileText className="mx-auto h-12 w-12" /><p className="mt-4">Select criteria and generate a report.</p></div>}
             </motion.div>
             <ScheduleReportModal isOpen={isScheduleModalOpen} onClose={() => setIsScheduleModalOpen(false)} reportType={reportType} filters={{dateRangeKey}} />
         </>

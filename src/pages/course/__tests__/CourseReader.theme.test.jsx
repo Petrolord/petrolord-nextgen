@@ -106,8 +106,8 @@ describe('Course reader, further states', () => {
     for (const r of [BASE, `${BASE}/exam`, `${BASE}/capstone`, `${BASE}/quiz/${MOD}`, `${BASE}/${MOD}`, `${BASE}/${MOD}/${LESSON}`]) {
       expect({ r, themed: isThemedPath(r) }).toEqual({ r, themed: true });
     }
-    // the learning page itself belongs to its course app's batch
-    expect(isThemedPath(`/dashboard/apps/${APP}`)).toBe(false);
+    // a signed-in route no batch registers stays out
+    expect(isThemedPath('/legacy-probe')).toBe(false);
   });
 
   it('the lesson stays clean in dark, and the panel plots sit on white chart plates', async () => {
@@ -146,8 +146,9 @@ describe('Course reader, further states', () => {
   });
 
   it('a route the rollout has not reached keeps the legacy frame (negative control)', async () => {
-    // the course's learning page belongs to its course app batch (3A)
-    renderRoute(`/dashboard/apps/${APP}`);
+    // a test-only route no batch registers (3A has since migrated the
+    // course's learning page, which this control used to render)
+    renderRoute('/legacy-probe');
     await waitFor(() => expect(document.querySelector('header')).toBeTruthy());
     expect(screen.queryByTestId('signed-in-theme-scope')).toBeNull();
     expect(screen.queryByTestId('theme-toggle')).toBeNull();

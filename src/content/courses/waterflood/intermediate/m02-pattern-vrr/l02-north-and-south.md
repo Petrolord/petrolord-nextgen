@@ -32,7 +32,7 @@ The deeper point is that no single number can summarise the pair, because the tw
 
 {{panel:wf-pattern-explorer}}
 
-Switch between the two patterns and watch the lime line jump from well above the pink field line to well below it. That gap is not noise and it is not a modelling artefact. It is the field's real geometry showing up in the bookkeeping.
+Switch between the two patterns and watch the blue line jump from well above the violet field line to well below it. That gap is not noise and it is not a modelling artefact. It is the field's real geometry showing up in the bookkeeping.
 
 ## What each element is probably experiencing
 

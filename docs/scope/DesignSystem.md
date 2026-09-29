@@ -282,6 +282,145 @@ roles with no legacy branch.
   Supabase replaced by the 1A `frameStubs.js` stub, `fetch` counted and
   asserted unused).
 
+## 6. Batch 3A: geoscience I course apps (as built)
+
+Petrophysics, Well Data, Well Correlation, Seismolord and Mapping
+(`/dashboard/apps/<slug>`, exact paths) are on the roles and registered in
+`src/design/rollout/w3a.js`.
+
+- The five learning pages, `petrophysics/WellPicker` and the panels the
+  pages render (porosity lab, Pickett explorer, shaly-sand lab, Rw
+  triangulator, LAS inspector, import and campaign explorers with
+  `UserLasPicker`, the well correlation section explorer) moved straight to
+  roles: their only other screen is the course reader, themed by 1C. The
+  reader-only panels (flatten, prediction, seismolord, mapping) and the
+  correlation case inputs are 1C's and were left as 1C built them.
+- Lime buttons became the default `Button`; tier and file toggles use
+  `primary` for the active one; the Learning Mode pill is an accent (gold)
+  tint; certificate numbers and the award icon are `accent-text`; pass and
+  fail boxes are the success and danger roles with their words; the
+  capstone toasts use the success roles. On the panels a dead curve is
+  `danger-text`, a non-uniform step and a missing pick `warning-text`.
+- Charts: Recharts in `ChartFrame` (`GRID_STYLE`, `AXIS_TICK`,
+  `TOOLTIP_STYLE`), the Mapping page structure map and the section explorer
+  in `SvgChartFrame`; series by `seriesColor(n)` from the old-dark-chart map
+  (pink to `seriesColor(4)`). The Mapping page contours keep their hue ramp
+  at a darker lightness so they read on white.
+- Copy that named a chart colour follows the new colours (Petrophysics and
+  porosity lab shading, the Pickett water line). Lines touched follow the
+  copy rule; the Petrophysics net-pay empty cells show `n/a`.
+- Tests: `src/pages/__tests__/Geoscience3A.theme.test.jsx` (harness
+  `geo3aHarness.jsx` with `HelmetProvider` and the toaster, stubs
+  `geo3aStubs.js` on top of `frameStubs.js`) walks each app through its
+  three tiers, both capstone outcomes, the Learning Mode gate and dark;
+  `panels/__tests__/geo3aPanelsTheme.test.jsx` renders every page panel
+  scene inside a scope in light and dark.
+
+## Batch 3B: geoscience II course apps (as built)
+
+Reservoir volumetrics (`/dashboard/apps/reservoircalc`), rock physics
+(`/dashboard/apps/rockphysics`), pore pressure (`/dashboard/apps/porepressure`),
+earth modeling (`/dashboard/apps/earthmodel`) and basin and charge
+(`/dashboard/apps/basin`) are on the roles and registered in
+`src/design/rollout/w3b.js`.
+
+- Each learning page is the only file with colour its app owns; the course
+  panels these apps teach with are reader-only and were moved by 1C. No
+  shared file changed.
+- The page recipe is 3A's: cards on `surface`, tiles and lessons on `sunken`,
+  option and tier buttons primary when chosen, capstone results on the
+  success and danger roles with their words, certificate number and award
+  icon gold, lime toasts on the success roles, empty values `n/a`.
+- The nine hand-drawn plots are in `SvgChartFrame` (`minWidth` 420,
+  `maxWidth` 720) with kit colours: axes `AXIS_LINE_PROPS`, ticks
+  `SVG_CHART.tick`, labels `SVG_CHART.label` and `note`. Old sky goes to
+  `seriesColor(0)`, green to `(1)`, orange to `(2)`, the lime ramp and the
+  violet layer to `(4)`; yellow guide lines (ramp top, conductivity
+  interface) take `REFERENCE_LINE_PROPS`; the fault polygon is an ink dashed
+  line; well posts are white markers. The oil and thickness maps keep their
+  green cells ("Green cells hold oil; darker means a thicker column") on
+  `seriesColor(1)`.
+- The earth model well-tie table marked the worst tie by colour alone; it
+  now also prints "largest tie" beside that residual.
+- Tests: `src/pages/__tests__/Geoscience3B.theme.test.jsx` on
+  `geo3bHarness.jsx` and `geo3bStubs.js` (the four standard checks per app,
+  every tier with both capstone outcomes, the Learning Mode gate, dark, every
+  plot in a chart frame with the chart mark, none of the old plate colours).
+
+## 6. Batch 2C: admin II (as built)
+
+Live monitoring (`/dashboard/admin/monitoring`), admin roles
+(`/dashboard/admin/admin-mgmt`), system analytics
+(`/dashboard/admin/analytics`), analytics and reporting
+(`/dashboard/analytics`, with `AnalyticsDashboard` and `AnalyticsReports`),
+the compliance centre (`/dashboard/compliance`, with `ComplianceDashboard`,
+`AuditLogViewer` and `RetentionPolicies`) and compliance reports
+(`/dashboard/reports`, with the `components/reports/*` panels, report views
+and schedule dialog) are on the roles and registered in
+`src/design/rollout/w2c.js`.
+
+- Every file these screens own is used by 2C screens alone, so each moved
+  straight to roles with no legacy branch. That includes
+  `charts/DashboardWidgets` (admin roles, `/dashboard/analytics`,
+  `/dashboard/compliance`) and `charts/ActionsTrendChart` (system
+  analytics).
+- Charts: the widgets and every chart on these screens use the 1B chart
+  kit: a `ChartPanel` card with a `ChartFrame` (white plate, Petrolord mark),
+  `GRID_STYLE`, `AXIS_TICK`, `PINNED_TOOLTIP_PROPS`, `LEGEND_PROPS`, and
+  series colours from `seriesColor(n)`. The two pie charts without a legend
+  gained one, so each colour has its name.
+- `KPICard` takes `tone` (`primary`, `accent`, `info`, `success`, `warning`,
+  `danger`, `neutral`) for its icon chip in place of a colour class. A
+  status tone sits only on a card whose title or subtext says the status.
+  The trend arrow carries a hidden up or down word.
+- Lime is gone: actions are the default (petrol green) `Button`, heading
+  icons gold (`accent`), and the per-page overrides on `Input`,
+  `SelectTrigger`, `SelectContent`, `DialogContent`, `TabsList` and
+  `TabsTrigger` were dropped. Status words sit on the status roles: event
+  and audit outcomes (the live feed now prints Success or Failure next to
+  its icon), severity (critical solid danger, high danger tint, medium
+  warning), report detail status and system health.
+- Empty cells show `n/a` (actor role and resource in the live feed, report
+  detail cells, summary cards, KPI values, the report author).
+- All six screens use the pilot's page padding (`px-4 py-8 md:px-8`). KPI
+  grids go two across on phones; the eight report type tabs sit in a
+  four-column grid (they overlapped at desktop width in eight).
+- Tests: one theme test per screen in `src/pages/__tests__/` on
+  `admin2cHarness.jsx` and `admin2cStubs.js` (a local Supabase fake that
+  answers the admin list and the audit feed and throws on anything else).
+  The harness mounts each page straight in `Layout`: DashboardPage is only
+  a route table for the three admin pages, and importing it costs about
+  85 s of collection per file.
+
+## Batch 3C: reservoir course apps (as built)
+
+- Routes (`rollout/w3c.js`): `/dashboard/apps/` `dca`, `mbal`, `scal`,
+  `waterflood`, `sim`, `fluid` and `welltest`, exact. Their course reader
+  pages stay on 1C's pattern entry.
+- The seven learning pages are fully owned and on roles: lime is gone
+  (primary for the tier toggle and the submit button, gold accent for the
+  Learning Mode pill and the certificate number, the success and danger
+  roles with their words for the grading result).
+- The 21 panels under `components/course/panels/{dca,mbal,scal,waterflood,sim,fluid,welltest}`
+  are scope-aware with `useThemeClass`: the batch started while the reader
+  and the handbook (1C) were unmigrated, and they render these panels too.
+  With 1C merged every screen that shows them is inside a scope, so the
+  legacy branch is only reached outside any scope; wave 7 drops it. Outside
+  a scope their classes match a fixture captured from main `1fbbedf34`
+  before any change (`panels/__tests__/rc3cPanelsLegacy.test.jsx`, 71
+  scenes); `rc3cPanelsTheme.test.jsx` walks the same scenes inside a scope.
+- Every chart is on the kit in both places: 16 hand-made plots in
+  `SvgChartFrame`, the two well test Recharts plots in `ChartFrame` with
+  `GRID_STYLE`, `AXIS_TICK` and `TOOLTIP_STYLE`. Colours follow the map in
+  section 1, with these choices: an oil and water rate pair uses
+  `getStreamPalette`; a guide, a target band or an excluded point uses
+  `SVG_CHART.reference`; where a lesson already named a colour (the SCAL
+  "blue water curve" and "red oil curve", the DCA "blue points") the series
+  keeps that name.
+- Lessons that named a retired chart colour (lime, cyan, pink, orange,
+  yellow) in the DCA, MBAL and waterflood courses now name the new colour.
+  Only the colour word changed.
+
 ## 7. Batch 3D: drilling I course apps (as built)
 
 Well design (`/dashboard/apps/welldesign`), torque and drag
