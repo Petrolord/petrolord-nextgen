@@ -1,10 +1,13 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line,
+  LineChart, Line,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
 import { lineExplorer } from './flowAssuranceLab';
 import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 
 // Line explorer, the Professional tier. A whole line in operation.
 //
@@ -39,9 +42,9 @@ const MODES = [
   ['margin', 'The margin, on a line with a boundary'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const GRID = <CartesianGrid stroke="#334155" strokeDasharray="3 3" />;
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const GRID = <CartesianGrid {...GRID_STYLE} />;
 
 // --------------------------------------------------------------------------
 
@@ -74,8 +77,8 @@ const Balance = () => {
         <Tile label="Heat capacity" value={fmt(data.fluid.cpBtuLbF, 2)} unit="Btu/(lb degF)" />
       </TileGrid>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">case</th>
               <th className="text-left pr-3">mass rate, lb/hr</th>
@@ -91,22 +94,22 @@ const Balance = () => {
                 <td className="pr-3">{r.caseNumber}</td>
                 <td className="pr-3">{fmt(r.massRateLbHr, 0)}</td>
                 <td className="pr-3">{fmt(r.cpBtuLbF, 2)}</td>
-                <td className="pr-3 text-[#38bdf8]">{fmt(r.goldenRelaxationLengthFt, 8)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.engineRelaxationLengthFt, 8)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.goldenRelaxationLengthFt, 8)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.engineRelaxationLengthFt, 8)}</td>
                 <td>{tiny(r.relaxationRelDiff)} apart, relative</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         TWO ROADS TO ONE LENGTH, AND A LESSON STAYS ON ONE. The oracle worked entirely in SI, watts
         and metres and kelvin and seconds, and converted only at the boundary. The engine works in
         field units and never leaves them. They agree to the conversion factors and the residual is
         the round trip, not a disagreement about physics. Quote one column, say which, and never
         pair a length from one with an arrival from the other.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         The relaxation length is exactly linear in the mass rate, a ratio of
         {' '}{fmt(data.scalings.lengthRatioAcrossMassRate, 10)} against a mass rate ratio of
         {' '}{fmt(data.scalings.massRateRatio, 10)}, and exactly linear in the heat capacity, a
@@ -116,8 +119,8 @@ const Balance = () => {
         {' '}{data.byBuild.map((b) => `${b.build} ${fmt(b.engineRelaxationLengthFt, 4)} ft`).join(', ')}.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">length, ft</th>
               <th className="text-left pr-3">ntu, the oracle</th>
@@ -131,32 +134,30 @@ const Balance = () => {
             {data.profiles.map((r) => (
               <tr key={r.lengthFt}>
                 <td className="pr-3">{fmt(r.lengthFt, 0)}</td>
-                <td className="pr-3 text-[#38bdf8]">{fmt(r.goldenNtu, 10)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.engineNtu, 10)}</td>
-                <td className="pr-3 text-[#38bdf8]">{fmt(r.goldenArrivalTempF, 8)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.engineArrivalTempF, 8)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.goldenNtu, 10)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.engineNtu, 10)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.goldenArrivalTempF, 8)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.engineArrivalTempF, 8)}</td>
                 <td>{fmt(r.lostExcessPct, 6)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="ntu" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
-              label={{ value: 'ntu, the length measured in relaxation lengths', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS} domain={[0, 100]}
-              label={{ value: 'excess over ambient retained, percent', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line type="monotone" dataKey="retained" name="excess over ambient still carried"
-              stroke="#BFFF00" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <ChartFrame height={256} className="mt-3 rounded-t-lg">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="ntu" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
+            label={{ value: 'ntu, the length measured in relaxation lengths', position: 'insideBottom', offset: -8, fill: SVG_CHART.label, fontSize: 10 }} />
+          <YAxis tick={AXIS} domain={[0, 100]}
+            label={{ value: 'excess over ambient retained, percent', angle: -90, position: 'insideLeft', fill: SVG_CHART.label, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line type="monotone" dataKey="retained" name="excess over ambient still carried"
+            stroke={seriesColor(0)} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
+      <div className="mt-3 text-xs text-pl-text">
         NTU IS THE WHOLE STORY. It is the length measured in relaxation lengths, and once the inlet
         and the ambient are fixed the arrival depends on nothing else. A line much shorter than its
         relaxation length arrives hot whatever the ambient. A line much longer than it arrives at
@@ -205,25 +206,23 @@ const Profile = () => {
           <Tile label="Arrival" value={fmt(data.stations[data.stations.length - 1].tempF, 8)} unit="degF" />
         </TileGrid>
       </div>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="x" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
-              label={{ value: 'distance along the line, ft', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS} domain={['auto', 'auto']}
-              label={{ value: 'temperature, degF', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 8)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={lineExplorer.fluid.ambientTempF} stroke="#38bdf8" strokeDasharray="4 3" />
-            <Line type="monotone" dataKey="t" name="fluid temperature down the line"
-              stroke="#BFFF00" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3 rounded-t-lg">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="x" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
+            label={{ value: 'distance along the line, ft', position: 'insideBottom', offset: -8, fill: SVG_CHART.label, fontSize: 10 }} />
+          <YAxis tick={AXIS} domain={['auto', 'auto']}
+            label={{ value: 'temperature, degF', angle: -90, position: 'insideLeft', fill: SVG_CHART.label, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 8)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine y={lineExplorer.fluid.ambientTempF} stroke={seriesColor(1)} strokeDasharray="4 3" />
+          <Line type="monotone" dataKey="t" name="fluid temperature down the line"
+            stroke={seriesColor(0)} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">station</th>
               <th className="text-left pr-3">x, ft</th>
@@ -239,8 +238,8 @@ const Profile = () => {
               <tr key={s.station}>
                 <td className="pr-3">{s.station}</td>
                 <td className="pr-3">{fmt(s.xFt, 2)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(s.tempF, 8)}</td>
-                <td className="pr-3 text-[#f97316]">{s.pressureIsNaN ? 'not a number' : fmt(s.pPsia, 2)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(s.tempF, 8)}</td>
+                <td className="pr-3 text-pl-warning-text">{s.pressureIsNaN ? 'not a number' : fmt(s.pPsia, 2)}</td>
                 <td className="pr-3">{fmt(s.excessOverAmbientF, 8)}</td>
                 <td className="pr-3">{fmt(s.retainedExcessFraction, 10)}</td>
                 <td>{s.dropFromStationAboveF === null ? '-' : fmt(s.dropFromStationAboveF, 8)}</td>
@@ -249,12 +248,12 @@ const Profile = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THE PRESSURE COLUMN IS NOT A NUMBER IN EVERY ROW, and it is printed rather than hidden. No
         published case sets a pressure at either end, so the profile has no pressure drop to carry
         and no Joule-Thomson term to apply.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         WHERE THE LINE IS COLDEST is the far end and only the far end, because this profile is a
         monotone exponential with nothing else in it. The first station interval drops
         {' '}{fmt(data.ratio.firstIntervalDropF, 8)} degF and the last drops
@@ -265,8 +264,8 @@ const Profile = () => {
         {' '}{fmt(data.ratio.excessRatioAcrossTheInnerSpan, 8)}.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">stations asked for</th>
               <th className="text-left pr-3">stations returned</th>
@@ -286,7 +285,7 @@ const Profile = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         THE STATION COUNT IS A RESOLUTION SETTING AND NOTHING MORE. The arrival is a closed form and
         does not move. The ugly two station row is kept rather than dropped, because it is the one
         that proves the point: refining a profile buys resolution in the middle of the line and
@@ -332,25 +331,23 @@ const Target = () => {
             ['akaso', `${data.akaso.name}, a TEACHING line with its own boundary`],
           ]} />
       </FieldGrid>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="t" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
-              label={{ value: 'target arrival temperature, degF', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS} domain={['auto', 'auto']}
-              label={{ value: 'U needed, Btu/(hr ft2 degF)', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 8)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line type="monotone" dataKey="u" name="the overall U this target needs"
-              stroke="#BFFF00" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3 rounded-t-lg">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="t" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
+            label={{ value: 'target arrival temperature, degF', position: 'insideBottom', offset: -8, fill: SVG_CHART.label, fontSize: 10 }} />
+          <YAxis tick={AXIS} domain={['auto', 'auto']}
+            label={{ value: 'U needed, Btu/(hr ft2 degF)', angle: -90, position: 'insideLeft', fill: SVG_CHART.label, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 8)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line type="monotone" dataKey="u" name="the overall U this target needs"
+            stroke={seriesColor(0)} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       {which === 'published' ? (
         <div className="mt-3 overflow-x-auto">
-          <table className="text-xs text-slate-300 w-full">
-            <thead className="text-slate-500">
+          <table className="text-xs text-pl-text w-full">
+            <thead className="text-pl-muted">
               <tr>
                 <th className="text-left pr-3">target arrival, degF</th>
                 <th className="text-left pr-3">U needed, Btu/(hr ft2 degF)</th>
@@ -363,7 +360,7 @@ const Target = () => {
               {data.published.map((r) => (
                 <tr key={r.targetTempF}>
                   <td className="pr-3">{fmt(r.targetTempF, 2)}</td>
-                  <td className="pr-3 text-[#BFFF00]">{fmt(r.uBtuHrFt2F, 10)}</td>
+                  <td className="pr-3 text-pl-info-text">{fmt(r.uBtuHrFt2F, 10)}</td>
                   <td className="pr-3">{fmt(r.ntuImplied, 10)}</td>
                   <td className="pr-3">{fmt(r.forwardArrivalTempF, 10)}</td>
                   <td>{tiny(r.roundTripErrorF)}</td>
@@ -374,8 +371,8 @@ const Target = () => {
         </div>
       ) : (
         <div className="mt-3 overflow-x-auto">
-          <table className="text-xs text-slate-300 w-full">
-            <thead className="text-slate-500">
+          <table className="text-xs text-pl-text w-full">
+            <thead className="text-pl-muted">
               <tr>
                 <th className="text-left pr-3">target arrival, degF</th>
                 <th className="text-left pr-3">U needed, Btu/(hr ft2 degF)</th>
@@ -386,9 +383,9 @@ const Target = () => {
             </thead>
             <tbody>
               {data.akasoTargets.map((r) => (
-                <tr key={r.targetTempF} className={r.isTheHydrateBoundary ? 'text-[#f97316]' : ''}>
+                <tr key={r.targetTempF} className={r.isTheHydrateBoundary ? 'text-pl-warning-text' : ''}>
                   <td className="pr-3">{fmt(r.targetTempF, 2)}</td>
-                  <td className="pr-3 text-[#BFFF00]">{fmt(r.uNeededBtuHrFt2F, 10)}</td>
+                  <td className="pr-3 text-pl-info-text">{fmt(r.uNeededBtuHrFt2F, 10)}</td>
                   <td className="pr-3">{fmt(r.ntuImplied, 10)}</td>
                   <td className="pr-3">{fmt(r.ratioToTheUThisLineHas, 8)}</td>
                   <td>{yn(r.isTheHydrateBoundary)}</td>
@@ -399,8 +396,8 @@ const Target = () => {
         </div>
       )}
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">target, degF</th>
               <th className="text-left pr-3">ok</th>
@@ -412,7 +409,7 @@ const Target = () => {
             {data.refusals.map((r) => (
               <tr key={r.targetTempF}>
                 <td className="pr-3">{fmt(r.targetTempF, 2)}</td>
-                <td className="pr-3 text-[#f97316]">{yn(r.ok)}</td>
+                <td className="pr-3 text-pl-warning-text">{yn(r.ok)}</td>
                 <td className="pr-3">{r.kind}</td>
                 <td>{r.reason}</td>
               </tr>
@@ -420,7 +417,7 @@ const Target = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THE TWO REFUSALS ARE DIFFERENT REFUSALS AND THE MESSAGES SAY SO. A target at or below
         ambient is a physical impossibility and no insulation reaches it. A target at or above the
         inlet is not a cooling problem at all. Collapsing them into one message would send an
@@ -464,8 +461,8 @@ const Cooldown = () => {
         <Tile label="No touch time, the engine" value={fmt(data.cooldown.engineHours, 10)} unit="hr" />
       </TileGrid>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">quantity</th>
               <th className="text-left pr-3">the oracle</th>
@@ -476,39 +473,37 @@ const Cooldown = () => {
           <tbody>
             <tr>
               <td className="pr-3">no touch time, hr</td>
-              <td className="pr-3 text-[#38bdf8]">{fmt(data.cooldown.goldenHours, 10)}</td>
-              <td className="pr-3 text-[#BFFF00]">{fmt(data.cooldown.engineHours, 10)}</td>
+              <td className="pr-3 text-pl-primary-text">{fmt(data.cooldown.goldenHours, 10)}</td>
+              <td className="pr-3 text-pl-info-text">{fmt(data.cooldown.engineHours, 10)}</td>
               <td>{tiny(data.cooldown.hoursRelDiff)} apart, relative</td>
             </tr>
             <tr>
               <td className="pr-3">time constant, hr</td>
-              <td className="pr-3 text-[#38bdf8]">{fmt(data.cooldown.goldenTimeConstantHr, 10)}</td>
-              <td className="pr-3 text-[#BFFF00]">{fmt(data.cooldown.engineTimeConstantHr, 10)}</td>
+              <td className="pr-3 text-pl-primary-text">{fmt(data.cooldown.goldenTimeConstantHr, 10)}</td>
+              <td className="pr-3 text-pl-info-text">{fmt(data.cooldown.engineTimeConstantHr, 10)}</td>
               <td>{tiny(data.cooldown.timeConstantRelDiff)} apart, relative</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="t" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
-              label={{ value: 'hours after the line stops', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS} domain={['auto', 'auto']}
-              label={{ value: 'temperature, degF', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 8)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={data.cooldown.targetTempF} stroke="#f97316" strokeDasharray="4 3" />
-            <ReferenceLine y={data.cooldown.ambientTempF} stroke="#38bdf8" strokeDasharray="4 3" />
-            <Line type="monotone" dataKey="temp" name="the line cooling towards ambient"
-              stroke="#BFFF00" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3 rounded-t-lg">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="t" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
+            label={{ value: 'hours after the line stops', position: 'insideBottom', offset: -8, fill: SVG_CHART.label, fontSize: 10 }} />
+          <YAxis tick={AXIS} domain={['auto', 'auto']}
+            label={{ value: 'temperature, degF', angle: -90, position: 'insideLeft', fill: SVG_CHART.label, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 8)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine y={data.cooldown.targetTempF} stroke={seriesColor(2)} strokeDasharray="4 3" />
+          <ReferenceLine y={data.cooldown.ambientTempF} stroke={seriesColor(1)} strokeDasharray="4 3" />
+          <Line type="monotone" dataKey="temp" name="the line cooling towards ambient"
+            stroke={seriesColor(0)} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">station</th>
               <th className="text-left pr-3">hours</th>
@@ -522,7 +517,7 @@ const Cooldown = () => {
               <tr key={s.station}>
                 <td className="pr-3">{s.station}</td>
                 <td className="pr-3">{fmt(s.hours, 8)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(s.tempF, 8)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(s.tempF, 8)}</td>
                 <td className="pr-3">{fmt(s.excessOverAmbientF, 8)}</td>
                 <td>{yn(s.pastTheTarget)}</td>
               </tr>
@@ -530,13 +525,13 @@ const Cooldown = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THE NO TOUCH TIME IS THE TIME CONSTANT TIMES A LOG TERM, and the log term here is
         {' '}{fmt(data.cooldown.logTerm, 10)}, so the answer is that many time constants and no
         more. Everything an engineer can change moves one of the two: better insulation lengthens
         the time constant in proportion, and a colder target lengthens the log term.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         THE U THIS COOLDOWN USES IS THE FLOWING U. A shut in line has a stagnant bore and its inside
         film falls from the flowing catalogue value of
         {' '}{fmt(data.stagnant.insideFilmFlowing, 1)} to something near the stagnant
@@ -598,8 +593,8 @@ const Mass = () => {
         </TileGrid>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">reading</th>
               <th className="text-left pr-3">mass carried, lbm/ft</th>
@@ -614,35 +609,33 @@ const Mass = () => {
               <td className="pr-3">{fmt(data.pair.apiMassLbPerFt, 8)}</td>
               <td className="pr-3">{fmt(data.pair.apiMcpBtuFtF, 8)}</td>
               <td className="pr-3">{fmt(data.pair.apiTimeConstantHr, 8)}</td>
-              <td className="text-[#f97316]">{fmt(data.pair.apiNoTouchHours, 8)}</td>
+              <td className="text-pl-accent-text">{fmt(data.pair.apiNoTouchHours, 8)}</td>
             </tr>
             <tr>
               <td className="pr-3">the lumped reading</td>
               <td className="pr-3">{fmt(data.pair.lumpedMassLbPerFt, 8)}</td>
               <td className="pr-3">{fmt(data.pair.lumpedMcpBtuFtF, 8)}</td>
               <td className="pr-3">{fmt(data.pair.lumpedTimeConstantHr, 8)}</td>
-              <td className="text-[#BFFF00]">{fmt(data.pair.lumpedNoTouchHours, 8)}</td>
+              <td className="text-pl-info-text">{fmt(data.pair.lumpedNoTouchHours, 8)}</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="t" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
-              label={{ value: 'hours after the line stops', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS} domain={['auto', 'auto']}
-              label={{ value: 'temperature, degF', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 8)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={data.pair.targetTempF} stroke="#f97316" strokeDasharray="4 3" />
-            <Line type="monotone" dataKey="temp" name={`the ${reading} reading cooling`}
-              stroke="#BFFF00" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <ChartFrame height={224} className="mt-3 rounded-t-lg">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="t" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
+            label={{ value: 'hours after the line stops', position: 'insideBottom', offset: -8, fill: SVG_CHART.label, fontSize: 10 }} />
+          <YAxis tick={AXIS} domain={['auto', 'auto']}
+            label={{ value: 'temperature, degF', angle: -90, position: 'insideLeft', fill: SVG_CHART.label, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 8)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine y={data.pair.targetTempF} stroke={seriesColor(2)} strokeDasharray="4 3" />
+          <Line type="monotone" dataKey="temp" name={`the ${reading} reading cooling`}
+            stroke={seriesColor(0)} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
+      <div className="mt-3 text-xs text-pl-text">
         THE TEACHING LINE {data.akaso.name} IS NOT A PUBLISHED CASE AND NO ORACLE HAS CHECKED IT.
         Its insulation and its weight coat carry
         {' '}{fmt(data.pair.resistanceShareLeftOutPct, 6)} percent of the thermal resistance and, as
@@ -652,14 +645,14 @@ const Mass = () => {
         factor of {fmt(data.pair.hoursRatio, 8)} and {fmt(data.pair.hoursGivenAwayByTheApiReading, 8)}
         {' '}hr the API reading gives away.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         THE TWO RATIOS ARE THE SAME NUMBER, and that is why the finding can be stated as a ratio of
         heat capacities and needs no second temperature. The log term is identical in both at
         {' '}{fmt(data.pair.sharedLogTerm, 10)}, so only the heat capacity moved: the time constant
         ratio is {fmt(data.pair.timeConstantRatio, 8)} and the no touch ratio is
         {' '}{fmt(data.pair.hoursRatio, 8)}.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         AND A MASS THAT COULD NOT BE COMPUTED BECOMES A MASS OF ZERO. Both slots are read as a value
         or zero, and a not-a-number is falsy, so the guard only fires when the TOTAL heat capacity
         reaches zero. Both slots bad is refused correctly, ok {yn(data.nanDrop.bothNaNOk)}. ONE slot
@@ -669,8 +662,8 @@ const Mass = () => {
         by exactly the dropped slot's share of the heat capacity.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">branch</th>
               <th className="text-left pr-3">ok</th>
@@ -681,7 +674,7 @@ const Mass = () => {
           </thead>
           <tbody>
             {data.branches.map((b) => (
-              <tr key={b.branch} className={b.handled ? '' : 'text-[#f97316]'}>
+              <tr key={b.branch} className={b.handled ? '' : 'text-pl-warning-text'}>
                 <td className="pr-3">{b.label}</td>
                 <td className="pr-3">{yn(b.ok)}</td>
                 <td className="pr-3">{b.hours === null ? '-' : fmt(b.hours, 8)}</td>
@@ -692,7 +685,7 @@ const Mass = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         THE MISSING BRANCH RETURNS A NEGATIVE NUMBER OF HOURS AS A NORMAL ANSWER. The cooldown
         guards its start against ambient and its target against ambient, and never checks the start
         against the target. Asked for the time to fall from {fmt(data.backwards.startTempF, 8)} degF
@@ -741,26 +734,24 @@ const Margin = () => {
         <Tile label="Hydrate boundary, a laboratory input" value={fmt(data.heat.hydrateFlowingF, 2)} unit="degF" />
         <Tile label="Margin against it" value={fmt(data.heat.marginF, 8)} unit="degF" />
       </TileGrid>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="x" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
-              label={{ value: 'distance along the line, ft', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS} domain={['auto', 'auto']}
-              label={{ value: 'temperature, degF', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 8)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={data.akaso.hydrateFlowingF} stroke="#f97316" strokeDasharray="4 3" />
-            <ReferenceLine y={data.akaso.seabedTempF} stroke="#38bdf8" strokeDasharray="4 3" />
-            <Line type="monotone" dataKey="t" name="fluid temperature, heat loss only"
-              stroke="#BFFF00" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3 rounded-t-lg">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="x" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
+            label={{ value: 'distance along the line, ft', position: 'insideBottom', offset: -8, fill: SVG_CHART.label, fontSize: 10 }} />
+          <YAxis tick={AXIS} domain={['auto', 'auto']}
+            label={{ value: 'temperature, degF', angle: -90, position: 'insideLeft', fill: SVG_CHART.label, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 8)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine y={data.akaso.hydrateFlowingF} stroke={seriesColor(2)} strokeDasharray="4 3" />
+          <ReferenceLine y={data.akaso.seabedTempF} stroke={seriesColor(1)} strokeDasharray="4 3" />
+          <Line type="monotone" dataKey="t" name="fluid temperature, heat loss only"
+            stroke={seriesColor(0)} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">station</th>
               <th className="text-left pr-3">x, ft</th>
@@ -772,10 +763,10 @@ const Margin = () => {
           </thead>
           <tbody>
             {data.stations.filter((s) => s.station % 2 === 0).map((s) => (
-              <tr key={s.station} className={s.insideTheHydrateRegion ? 'text-[#f97316]' : ''}>
+              <tr key={s.station} className={s.insideTheHydrateRegion ? 'text-pl-warning-text' : ''}>
                 <td className="pr-3">{s.station}</td>
                 <td className="pr-3">{fmt(s.xFt, 2)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(s.tempF, 8)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(s.tempF, 8)}</td>
                 <td className="pr-3">{fmt(s.excessOverSeabedF, 8)}</td>
                 <td className="pr-3">{fmt(s.marginAgainstFlowingBoundaryF, 8)}</td>
                 <td>{yn(s.insideTheHydrateRegion)}</td>
@@ -784,11 +775,11 @@ const Margin = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         ONLY THE EVEN STATIONS ARE LISTED, so a reading taken off this table has to say which
         station it came from. The arrival is the last station and it is on its own tile above.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         A MARGIN IS A DIFFERENCE AGAINST A NUMBER THE ENGINE NEVER COMPUTED. Both module headers say
         the hydrate boundary is a fluid property that comes from a lab or a compositional flash and
         that the consumer supplies it. Every verdict on this page is conditional on that

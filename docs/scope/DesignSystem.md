@@ -498,3 +498,86 @@ entry.
   view of every panel in both themes, every chart frame white with the mark,
   a status row check, and a source scan for retired colours and bare
   `ResponsiveContainer`s).
+
+## 9. Batch 3E: drilling II course apps (as built)
+
+- Routes (`rollout/w3e.js`): `/dashboard/apps/` `cementing`, `completion`,
+  `perfsand`, `stimulation`, `integrity` and `wellcost`, exact. Their course
+  reader pages stay on 1C's pattern entry.
+- The six learning pages follow the 3B and 3D page recipe: roles only,
+  primary tier toggle with `aria-pressed`, gold accent for the Learning
+  Mode pill and the certificate number, success and danger roles with their
+  words for the grading result, the success toasts on the root toaster.
+- The eighteen panels under
+  `components/course/panels/{cementing,completion,perfsand,stimulation,integrity,wellcost}`
+  moved straight to roles with no legacy branch: their only hosts are the
+  learning pages, the lesson reader and the handbook, and all three are
+  themed routes now (the page test asserts it).
+- Every chart is Recharts, now in `ChartFrame` with `GRID_STYLE`,
+  `AXIS_TICK`, `TOOLTIP_STYLE` and `LEGEND_PROPS`. Series colours: lime to
+  `seriesColor(1)` (green) and sky to `seriesColor(0)` (blue), because the
+  panel notes already call those lines "the green curve", "the green bars",
+  "the BLUE line" and "the blue bars"; pink and the old violet to
+  `seriesColor(4)`, rose to `(3)`, amber to `(2)`; grey context lines (ECD
+  at the shoe, inclination, own bore, critical flowing pressure) to
+  `SVG_CHART.reference`.
+- Tables: pass, fail, yes, no, the element and envelope states and the
+  clearance status sit on the status roles; number columns that were only
+  tinted to echo a chart line are plain text; a highlighted row (the
+  governing candidate, the chosen fraction, drill activities, provisions)
+  is gold (`accent-text`, semibold). The AFE basis word keeps its chart
+  colour as a swatch dot beside the word.
+- The integrity traffic light keeps its four category words: green on
+  success, yellow on warning, orange on the danger tint and red on solid
+  danger (the 2C severity ladder).
+- The skin table's out-of-range rpD now prints "out of range" beside the
+  warning colour. Touched empty cells show `n/a`.
+- No lesson in these six courses names a chart colour. Five panel notes did
+  (frac, time, AFE); they now say violet, blue and gold, in their own commit.
+- Screen fixes: legends no longer sit on the X axis titles, the time
+  explorer's flat footage axis prints whole metres, and input rows of three
+  to five boxes go two across on phones.
+- Tests: `src/pages/__tests__/DrillingApps3E.theme.test.jsx` (the four
+  standard checks per page, every tier in both themes, capstone pass, fail
+  and locked, the Learning Mode gate, no network) and
+  `src/components/course/panels/__tests__/DrillingPanels3E.theme.test.jsx`
+  (every view of every panel in both themes, plots on the white plate with
+  the mark, series in kit colours, a source scan with negative controls).
+
+## 10. Batch 4B: production II course apps (as built)
+
+Rod pump (`/dashboard/apps/rodpump`), gas well
+(`/dashboard/apps/gaswell`) and flow assurance
+(`/dashboard/apps/flowassurance`) are on the roles and registered in
+`src/design/rollout/w4b.js`.
+
+- The nine panels (string, card and balance explorers with
+  `TypedWellFields`; droplet, profile and remedy explorers; thermal, line and
+  hydrate explorers) are used by their learning page and by the course
+  reader and handbook, which 1C already themes, so they moved straight to
+  roles with no legacy branch. No file is shared with 4A or 4C.
+- The page recipe is 3C's: cards on `surface`, lessons and the locked
+  capstone note on `sunken`, the tier buttons primary when chosen, capstone
+  results and toasts on the success and danger roles with their words,
+  certificate number and award icon gold. The March this well button is the
+  primary action; the typed unit designation takes the Suite input styling.
+- Every chart (43 Recharts plots) is in `ChartFrame`: `GRID_STYLE`,
+  `AXIS_TICK`, `TOOLTIP_STYLE`, `LEGEND_PROPS`, axis titles on
+  `SVG_CHART.label`. Lime goes to `seriesColor(0)`, sky to `(1)`, orange to
+  `(2)`, the pink guide lines to `(4)`; slate guides and the heat-loss-only
+  trace take `SVG_CHART.reference`.
+- Table highlights echo their chart series: a lime column is now
+  `info-text` (blue, like `seriesColor(0)`), a sky column `primary-text`
+  (green, like `(1)`), an orange column `accent-text`. A flagged row (loaded,
+  not periodic, overstressed, opposite signs, inside the hydrate region,
+  refused) and "Inputs changed since the last march" are `warning-text`,
+  each beside its word. The balance explorer's "the rows above in orange" now
+  reads "in amber". No lesson names a chart colour.
+- Tests: `src/pages/apps/__tests__/Production4B.theme.test.jsx` (harness
+  `prod4bHarness.jsx`: the four standard checks per app, every tier in both
+  themes with the charts on the white plate and the mark, capstone pass and
+  fail, the Learning Mode gate) and
+  `src/components/course/panels/__tests__/prod4bPanelsTheme.test.jsx`
+  (scenes in `prod4bScenes.jsx`: every view of every panel in light and
+  dark, no retired chart colour, a flagged row on the warning role with its
+  words, the primary march button).

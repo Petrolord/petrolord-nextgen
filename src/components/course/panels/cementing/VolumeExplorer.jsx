@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
+import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import { WELLS, caseOf, volumesFor, clearances, previousShoeMdOf } from './cementingLab';
 import { PanelShell, NumField, SelectField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
@@ -39,7 +42,7 @@ const Volumes = () => {
   ];
   return (
     <>
-      <div className="grid grid-cols-3 gap-2">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
         <SelectField label="Well" value={well} onChange={setWell} options={WELL_OPTIONS} />
         <NumField label={`Top of cement (m MD, default ${c.tocMd})`} value={toc} onChange={setToc} placeholder={String(c.tocMd)} />
         <NumField label={`Open hole excess (pct, default ${c.excessOpenHolePct})`} value={excess} onChange={setExcess} placeholder={String(c.excessOpenHolePct)} />
@@ -58,20 +61,18 @@ const Volumes = () => {
         <Tile label="TVD at the shoe" value={fmt(v.tvdShoeM, 3)} unit="m" />
         <Tile label="TVD at the top of cement" value={fmt(v.tvdTocM, 3)} unit="m" />
       </TileGrid>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={bars} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="name" tick={{ fill: '#94a3b8', fontSize: 11 }} />
-            <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'cubic metres', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(x) => fmt(x, 4)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Bar dataKey="m3" name="volume" fill="#BFFF00" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <BarChart data={bars} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="name" tick={AXIS_TICK} />
+          <YAxis tick={AXIS_TICK}
+            label={{ value: 'cubic metres', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(x) => fmt(x, 4)} />
+          <Legend {...LEGEND_PROPS} />
+          <Bar dataKey="m3" name="volume" fill={seriesColor(1)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
       <Note>
         Every one of these is a cylinder volume. The annular slurry is the capacity between the top
         of cement and the shoe, the shoe track is the casing bore between the float collar and the
@@ -101,8 +102,8 @@ const Rows = () => {
         <NumField label={`Open hole excess (pct, default ${c.excessOpenHolePct})`} value={excess} onChange={setExcess} placeholder={String(c.excessOpenHolePct)} />
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">from (m MD)</th><th className="text-left pr-3">to</th>
               <th className="text-right pr-3">capacity (m2)</th><th className="text-right pr-3">effective bore (m)</th>
@@ -131,7 +132,7 @@ const Rows = () => {
         <Tile label="Effective clearance" value={fmt(cl.effectiveClearanceM * 1000, 4)} unit="mm" />
         <Tile label="Casing OD" value={fmt(c.casing.odM, 6)} unit="m" />
       </TileGrid>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         The rows are cut at the section boundaries and at the shoe, and nowhere else. Only the OPEN
         HOLE row is inflated by the excess, and the effective bore is back-solved from the inflated
         capacity rather than assumed. At the published excess the washed-out open hole is WIDER than
@@ -157,21 +158,19 @@ const Excess = () => {
   return (
     <>
       <SelectField label="Well" value={well} onChange={setWell} options={WELL_OPTIONS} />
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="excess" tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'open hole excess (pct)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'slurry (m3)', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(x) => fmt(x, 4)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Bar dataKey="slurry" name="slurry volume" fill="#38bdf8" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3">
+        <BarChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="excess" tick={AXIS_TICK}
+            label={{ value: 'open hole excess (pct)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS_TICK}
+            label={{ value: 'slurry (m3)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(x) => fmt(x, 4)} />
+          <Legend {...LEGEND_PROPS} />
+          <Bar dataKey="slurry" name="slurry volume" fill={seriesColor(0)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
       <TileGrid>
         <Tile label="Slurry at zero excess" value={fmt(base.slurry, 6)} unit="m3" />
         <Tile label="Slurry at fifty percent" value={fmt(top.slurry, 6)} unit="m3" />
