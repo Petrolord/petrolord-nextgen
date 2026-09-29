@@ -4,6 +4,7 @@ import {
   goodOilUntuned, goodOilStagesF, TIER, GOOD_OIL, GOOD_OIL_TESTS, TEACHING_TEST,
 } from './fluidLab';
 import { PanelShell, Tile, TileGrid, Note, NumField } from '@/components/course/panels/petrophysics/panelKit';
+import { useThemeClass } from '@/design/themeClass';
 
 // Study explorer: Good Oil Co. Well No. 4 as a laboratory report, and what an
 // untuned equation of state makes of it. The point is the gap between the two
@@ -14,21 +15,25 @@ const VIEWS = ['Composition', 'What the lab measured', 'What the model says'];
 
 const TEST_OPTIONS = GOOD_OIL_TESTS.map((t, i) => [String(i), `${Math.round(t.stagesF[0][1] - 14.65)} psig separator`]);
 
-const Select = ({ label, value, onChange, options }) => (
+const Select = ({ label, value, onChange, options }) => {
+  const tc = useThemeClass();
+  return (
   <div>
-    <p className="text-gray-400 text-xs mb-1">{label}</p>
+    <p className={tc('text-gray-400 text-xs mb-1', 'text-pl-muted text-xs mb-1')}>{label}</p>
     <select value={value} onChange={(e) => onChange(e.target.value)}
-      className="w-full bg-gray-800 border border-gray-600 rounded-md text-white text-xs px-2 py-1.5">
+      className={tc('w-full bg-gray-800 border border-gray-600 rounded-md text-white text-xs px-2 py-1.5', 'w-full bg-pl-surface border border-pl-border-strong rounded-md text-pl-text text-xs px-2 py-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus')}>
       {options.map(([v, l]) => <option key={v} value={v}>{l}</option>)}
     </select>
   </div>
-);
+  );
+};
 
 const fmt = (v, d = 4) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d })
   : '-');
 
 const StudyExplorer = () => {
+  const tc = useThemeClass();
   const [view, setView] = useState(VIEWS[1]);
   // The study opens on the teaching read: the 100 psig optimum separator test,
   // saturation at the 220 F reservoir temperature, the reported C7+. A capstone
@@ -82,7 +87,7 @@ const StudyExplorer = () => {
       subtitle="Good Oil Co. Well No. 4, Core Laboratories RFL 88001, against an untuned equation of state"
     >
       {inputs}
-      <p className="text-xs text-gray-500 mt-1">
+      <p className={tc('text-xs text-gray-500 mt-1', 'text-xs text-pl-muted mt-1')}>
         The panel opens on the teaching read: the 100 psig optimum test, saturation at 220 F and the reported
         C7+ (MW {GOOD_OIL.plus.mw}, SG {GOOD_OIL.plus.sg}). A capstone brief states its own; set it here.
       </p>
@@ -92,11 +97,15 @@ const StudyExplorer = () => {
             key={v}
             type="button"
             onClick={() => setView(v)}
-            className={`px-2 py-1 text-xs rounded border ${
+            className={tc(`px-2 py-1 text-xs rounded border ${
               v === view
                 ? 'bg-[#BFFF00] text-black border-[#BFFF00]'
                 : 'bg-transparent text-gray-300 border-gray-600 hover:border-gray-400'
-            }`}
+            }`, `px-2 py-1 text-xs rounded border ${
+              v === view
+                ? 'bg-pl-primary text-pl-primary-fg border-pl-primary'
+                : 'bg-transparent text-pl-text border-pl-border-strong hover:border-pl-muted'
+            }`)}
           >
             {v}
           </button>
@@ -105,9 +114,9 @@ const StudyExplorer = () => {
 
       {view === 'Composition' && (
         <>
-          <div className="mt-4 rounded border border-gray-700 overflow-x-auto">
+          <div className={tc('mt-4 rounded border border-gray-700 overflow-x-auto', 'mt-4 rounded border border-pl-border overflow-x-auto')}>
             <table className="w-full text-xs">
-              <thead className="bg-black/40 text-gray-400">
+              <thead className={tc('bg-black/40 text-gray-400', 'bg-pl-sunken text-pl-muted')}>
                 <tr>
                   <th className="text-left p-2">Component</th>
                   <th className="text-right p-2">Mol fraction</th>
@@ -117,11 +126,11 @@ const StudyExplorer = () => {
               </thead>
               <tbody>
                 {comp.map((c) => (
-                  <tr key={c.key} className="border-t border-gray-800">
-                    <td className={`p-2 ${c.isPseudo ? 'text-[#BFFF00]' : 'text-white'}`}>{c.key}</td>
-                    <td className="p-2 text-right text-gray-200">{fmt(c.molFraction, 4)}</td>
-                    <td className="p-2 text-right text-gray-200">{fmt(c.mw, 2)}</td>
-                    <td className="p-2 text-gray-400">
+                  <tr key={c.key} className={tc('border-t border-gray-800', 'border-t border-pl-border')}>
+                    <td className={tc(`p-2 ${c.isPseudo ? 'text-[#BFFF00]' : 'text-white'}`, `p-2 ${c.isPseudo ? 'text-pl-accent-text' : 'text-pl-text'}`)}>{c.key}</td>
+                    <td className={tc('p-2 text-right text-gray-200', 'p-2 text-right text-pl-text')}>{fmt(c.molFraction, 4)}</td>
+                    <td className={tc('p-2 text-right text-gray-200', 'p-2 text-right text-pl-text')}>{fmt(c.mw, 2)}</td>
+                    <td className={tc('p-2 text-gray-400', 'p-2 text-pl-muted')}>
                       {c.isPseudo ? 'one pseudo-component standing for everything heavier' : 'library component'}
                     </td>
                   </tr>
@@ -157,7 +166,7 @@ const StudyExplorer = () => {
             <Tile label="Components reported" value={fmt(lab.componentCount, 0)} />
           </TileGrid>
           <Note>
-            Every number above is tier <span className="text-white">measured</span>: {TIER.measured}.
+            Every number above is tier <span className={tc('text-white', 'text-pl-text')}>measured</span>: {TIER.measured}.
             The separator test ran at {fmt(stages[0][1], 2)} psia and {fmt(stages[0][0], 0)} F, then to
             a stock tank at {fmt(stages[1][1], 2)} psia. The report lists one separator stage; the
             stock tank is implied, and forgetting it is the commonest way to reproduce this study
@@ -168,9 +177,9 @@ const StudyExplorer = () => {
 
       {view === 'What the model says' && (
         <>
-          <div className="mt-4 rounded border border-gray-700 overflow-x-auto">
+          <div className={tc('mt-4 rounded border border-gray-700 overflow-x-auto', 'mt-4 rounded border border-pl-border overflow-x-auto')}>
             <table className="w-full text-xs">
-              <thead className="bg-black/40 text-gray-400">
+              <thead className={tc('bg-black/40 text-gray-400', 'bg-pl-sunken text-pl-muted')}>
                 <tr>
                   <th className="text-left p-2">Quantity</th>
                   <th className="text-right p-2">Lab</th>
@@ -179,35 +188,35 @@ const StudyExplorer = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-t border-gray-800">
-                  <td className="p-2 text-white">Saturation pressure at {fmt(out.satT, 1)} F (psia)</td>
-                  <td className="p-2 text-right text-gray-200">{fmt(lab.bubblePointPsia, 2)}</td>
-                  <td className="p-2 text-right text-gray-200">{fmt(model.saturationPressurePsia, 2)}</td>
-                  <td className="p-2 text-right text-amber-400">
+                <tr className={tc('border-t border-gray-800', 'border-t border-pl-border')}>
+                  <td className={tc('p-2 text-white', 'p-2 text-pl-text')}>Saturation pressure at {fmt(out.satT, 1)} F (psia)</td>
+                  <td className={tc('p-2 text-right text-gray-200', 'p-2 text-right text-pl-text')}>{fmt(lab.bubblePointPsia, 2)}</td>
+                  <td className={tc('p-2 text-right text-gray-200', 'p-2 text-right text-pl-text')}>{fmt(model.saturationPressurePsia, 2)}</td>
+                  <td className={tc('p-2 text-right text-amber-400', 'p-2 text-right text-pl-warning-text')}>
                     {fmt(pct(model.saturationPressurePsia, lab.bubblePointPsia), 2)} pct
                   </td>
                 </tr>
-                <tr className="border-t border-gray-800">
-                  <td className="p-2 text-white">Total GOR (scf/stb)</td>
-                  <td className="p-2 text-right text-gray-200">{fmt(lab.totalGorScfStb, 0)}</td>
-                  <td className="p-2 text-right text-gray-200">{fmt(model.totalGorScfStb, 1)}</td>
-                  <td className="p-2 text-right text-amber-400">
+                <tr className={tc('border-t border-gray-800', 'border-t border-pl-border')}>
+                  <td className={tc('p-2 text-white', 'p-2 text-pl-text')}>Total GOR (scf/stb)</td>
+                  <td className={tc('p-2 text-right text-gray-200', 'p-2 text-right text-pl-text')}>{fmt(lab.totalGorScfStb, 0)}</td>
+                  <td className={tc('p-2 text-right text-gray-200', 'p-2 text-right text-pl-text')}>{fmt(model.totalGorScfStb, 1)}</td>
+                  <td className={tc('p-2 text-right text-amber-400', 'p-2 text-right text-pl-warning-text')}>
                     {fmt(pct(model.totalGorScfStb, lab.totalGorScfStb), 2)} pct
                   </td>
                 </tr>
-                <tr className="border-t border-gray-800">
-                  <td className="p-2 text-white">Stock tank gravity (API)</td>
-                  <td className="p-2 text-right text-gray-200">{fmt(lab.stockTankApi, 1)}</td>
-                  <td className="p-2 text-right text-gray-200">{fmt(model.stockTankApi, 2)}</td>
-                  <td className="p-2 text-right text-red-400">
+                <tr className={tc('border-t border-gray-800', 'border-t border-pl-border')}>
+                  <td className={tc('p-2 text-white', 'p-2 text-pl-text')}>Stock tank gravity (API)</td>
+                  <td className={tc('p-2 text-right text-gray-200', 'p-2 text-right text-pl-text')}>{fmt(lab.stockTankApi, 1)}</td>
+                  <td className={tc('p-2 text-right text-gray-200', 'p-2 text-right text-pl-text')}>{fmt(model.stockTankApi, 2)}</td>
+                  <td className={tc('p-2 text-right text-red-400', 'p-2 text-right text-pl-danger-text')}>
                     {fmt(model.stockTankApi - lab.stockTankApi, 2)} API
                   </td>
                 </tr>
-                <tr className="border-t border-gray-800">
-                  <td className="p-2 text-white">Formation volume factor (rb/stb)</td>
-                  <td className="p-2 text-right text-gray-200">{fmt(lab.boRbStb, 3)}</td>
-                  <td className="p-2 text-right text-gray-500">withheld</td>
-                  <td className="p-2 text-right text-gray-500">no basis</td>
+                <tr className={tc('border-t border-gray-800', 'border-t border-pl-border')}>
+                  <td className={tc('p-2 text-white', 'p-2 text-pl-text')}>Formation volume factor (rb/stb)</td>
+                  <td className={tc('p-2 text-right text-gray-200', 'p-2 text-right text-pl-text')}>{fmt(lab.boRbStb, 3)}</td>
+                  <td className={tc('p-2 text-right text-gray-500', 'p-2 text-right text-pl-muted')}>withheld</td>
+                  <td className={tc('p-2 text-right text-gray-500', 'p-2 text-right text-pl-muted')}>no basis</td>
                 </tr>
               </tbody>
             </table>

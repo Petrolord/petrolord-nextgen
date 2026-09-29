@@ -27,7 +27,7 @@ The tile labelled **pD finite at tD 100** gives the value to nine significant fi
 
 $$p_D \to \frac{2 t_D}{r_{eD}^2 - 1} + \ln(r_{eD}) - 0.75$$
 
-At reD 3 the first term is $200/8 = 25$. The second group is on the panel: the tile labelled **ln(reD) - 0.75** reads 0.348612289, the same group that sits in the denominator of the Fetkovich productivity index, for the same physical reason. Add them and the asymptote is 25.34861228866811, which is what the tile labelled **PSS asymptote at tD 100** shows and what the dashed yellow line on the chart is drawing.
+At reD 3 the first term is $200/8 = 25$. The second group is on the panel: the tile labelled **ln(reD) - 0.75** reads 0.348612289, the same group that sits in the denominator of the Fetkovich productivity index, for the same physical reason. Add them and the asymptote is 25.34861228866811, which is what the tile labelled **PSS asymptote at tD 100** shows and what the dashed grey line on the chart is drawing.
 
 **Then the real solution.** The graded kind of number is not the asymptote. It is the bounded circle van Everdingen and Hurst constant terminal rate solution, obtained by Stehfest inversion of the radial Laplace form; at reD 3 and tD 100 it is 25.577955313403997, a little above the asymptote and running parallel to it. Read that as a sanity check on both tiles: the solution should be a little above the straight line. Module 1 lesson 3 showed that the offset is a property of $r_{eD}$, so at reD 5 expect a different, smaller offset.
 

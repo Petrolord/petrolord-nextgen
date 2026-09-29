@@ -60,7 +60,7 @@ Notice what produced water does. It appears in the denominator, so a well that s
 
 {{panel:wf-ledger-explorer}}
 
-The three lines are the same calculation at three time scopes. The cyan line is this month's VRR, the lime line is the trailing average over the window you choose, and the pink line is the running cumulative. Set the window to 1 and the lime line lands exactly on the cyan one, because a one-period trailing average is the period itself. That is worth doing once so that the rolling window stops being magic.
+The three lines are the same calculation at three time scopes. The green line is this month's VRR, the blue line is the trailing average over the window you choose, and the violet line is the running cumulative. Set the window to 1 and the blue line lands exactly on the green one, because a one-period trailing average is the period itself. That is worth doing once so that the rolling window stops being magic.
 
 ## Conventions that must be stated
 

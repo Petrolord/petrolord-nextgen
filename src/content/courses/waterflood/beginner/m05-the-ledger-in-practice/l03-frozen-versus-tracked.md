@@ -31,7 +31,7 @@ The tracked value is slightly HIGHER. Most of the record sits above 2100 psia, w
 
 {{panel:wf-ledger-explorer}}
 
-Toggle the button and watch the pink cumulative line. If you cannot see it move, that is the finding.
+Toggle the button and watch the violet cumulative line. If you cannot see it move, that is the finding.
 
 ## What to do with a null result
 

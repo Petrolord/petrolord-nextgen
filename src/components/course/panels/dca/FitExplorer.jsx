@@ -3,6 +3,9 @@ import {
   WELLS, FLOOD_START, ECON_LIMIT_BOPD, fitWell, bookFromFit, arpsRate, arpsCum, daysBetween,
 } from './declineLab';
 import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { useThemeClass } from '@/design/themeClass';
+import SvgChartFrame from '@/components/charts/SvgChartFrame';
+import { seriesColor, SVG_CHART, AXIS_LINE_PROPS } from '@/utils/chartSvg';
 
 // Fit explorer: pick a producer, a model and a fit window, and watch the
 // real engine fit the committed Ekene monthly rates. The tiles show the
@@ -29,6 +32,7 @@ const WINDOW_OPTIONS = [
 const fmt = (v, d = 4) => (Number.isFinite(v) ? Number(v).toFixed(d) : '-');
 
 const FitExplorer = () => {
+  const tc = useThemeClass();
   const [wellName, setWellName] = useState('Ekene-1');
   const [model, setModel] = useState('Auto-Select');
   const [windowKey, setWindowKey] = useState('primary');
@@ -110,7 +114,7 @@ const FitExplorer = () => {
       <div className="grid gap-3 grid-cols-2 sm:grid-cols-4">
         <NumField label="Economic limit (stb/d)" value={limit} onChange={setLimit} />
         <NumFieldLike label="Np up to (YYYY-MM-DD)" value={npDate} onChange={setNpDate} />
-        <div className="text-xs text-gray-500 sm:col-span-2">
+        <div className={tc('text-xs text-gray-500 sm:col-span-2', 'text-xs text-pl-muted sm:col-span-2')}>
           The panel opens on the teaching case: {ECON_LIMIT_BOPD} stb/d and Np to the flood start. A
           capstone brief states its own well, window, limit and date; set them here.
         </div>
@@ -122,38 +126,38 @@ const FitExplorer = () => {
         </div>
       )}
 
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto bg-[#0F172A] rounded-md border border-gray-700">
-        <line x1={PAD.left} y1={PAD.top} x2={PAD.left} y2={H - PAD.bottom} stroke="#334155" />
-        <line x1={PAD.left} y1={H - PAD.bottom} x2={W - PAD.right} y2={H - PAD.bottom} stroke="#334155" />
+      <SvgChartFrame width={W} height={H} label="Monthly oil rate against time with the fitted decline" minWidth={460} maxWidth={720}>
+        <line x1={PAD.left} y1={PAD.top} x2={PAD.left} y2={H - PAD.bottom} {...AXIS_LINE_PROPS} />
+        <line x1={PAD.left} y1={H - PAD.bottom} x2={W - PAD.right} y2={H - PAD.bottom} {...AXIS_LINE_PROPS} />
         {[0, 500, 1000, 1500, 2000].filter((t) => t <= tMax).map((t) => (
           <g key={t}>
-            <line x1={xOf(t)} y1={H - PAD.bottom} x2={xOf(t)} y2={H - PAD.bottom + 3} stroke="#334155" />
-            <text x={xOf(t)} y={H - PAD.bottom + 14} fontSize="9" fill="#64748b" textAnchor="middle">{t} d</text>
+            <line x1={xOf(t)} y1={H - PAD.bottom} x2={xOf(t)} y2={H - PAD.bottom + 3} {...AXIS_LINE_PROPS} />
+            <text x={xOf(t)} y={H - PAD.bottom + 14} fontSize="9" fill={SVG_CHART.tick} textAnchor="middle">{t} d</text>
           </g>
         ))}
         {(semilog ? [10, 30, 100] : [0, 40, 80, 120]).filter((r) => r <= rMax && r >= rMin).map((r) => (
           <g key={r}>
-            <line x1={PAD.left - 3} y1={yOf(r)} x2={PAD.left} y2={yOf(r)} stroke="#334155" />
-            <text x={PAD.left - 6} y={yOf(r) + 3} fontSize="9" fill="#64748b" textAnchor="end">{r}</text>
+            <line x1={PAD.left - 3} y1={yOf(r)} x2={PAD.left} y2={yOf(r)} {...AXIS_LINE_PROPS} />
+            <text x={PAD.left - 6} y={yOf(r) + 3} fontSize="9" fill={SVG_CHART.tick} textAnchor="end">{r}</text>
           </g>
         ))}
         {floodT <= tMax && (
           <g>
-            <line x1={xOf(floodT)} y1={PAD.top} x2={xOf(floodT)} y2={H - PAD.bottom} stroke="#eab308" strokeDasharray="5 4" opacity="0.6" />
-            <text x={xOf(floodT) + 4} y={PAD.top + 10} fontSize="9" fill="#eab308">flood start</text>
+            <line x1={xOf(floodT)} y1={PAD.top} x2={xOf(floodT)} y2={H - PAD.bottom} stroke={seriesColor(2)} strokeDasharray="5 4" />
+            <text x={xOf(floodT) + 4} y={PAD.top + 10} fontSize="9" fill={seriesColor(2)}>flood start</text>
           </g>
         )}
         {curve.length > 1 && (
-          <path d={`M${curve.join(' L')}`} fill="none" stroke="#BFFF00" strokeWidth="1.6" opacity="0.9" />
+          <path d={`M${curve.join(' L')}`} fill="none" stroke={seriesColor(1)} strokeWidth="1.6" opacity="0.9" />
         )}
         {pts.map((p) => (
           <circle key={p.date} cx={xOf(p.t)} cy={yOf(p.rate)} r="2.4"
-            fill={p.inWindow ? '#38bdf8' : '#475569'} />
+            fill={p.inWindow ? seriesColor(0) : SVG_CHART.reference} />
         ))}
-        <text x={PAD.left + 8} y={PAD.top + 10} fontSize="10" fill="#38bdf8">monthly rate (in window)</text>
-        <text x={PAD.left + 8} y={PAD.top + 23} fontSize="10" fill="#475569">outside window</text>
-        <text x={PAD.left + 8} y={PAD.top + 36} fontSize="10" fill="#BFFF00">fitted curve</text>
-      </svg>
+        <text x={PAD.left + 8} y={PAD.top + 10} fontSize="10" fill={seriesColor(0)}>monthly rate (in window)</text>
+        <text x={PAD.left + 8} y={PAD.top + 23} fontSize="10" fill={SVG_CHART.reference}>outside window</text>
+        <text x={PAD.left + 8} y={PAD.top + 36} fontSize="10" fill={seriesColor(1)}>fitted curve</text>
+      </SvgChartFrame>
 
       {usable ? (
         <TileGrid>
@@ -181,12 +185,15 @@ const FitExplorer = () => {
 };
 
 // Text input dressed like the panelKit fields (dates rather than numbers).
-const NumFieldLike = ({ label, value, onChange }) => (
+const NumFieldLike = ({ label, value, onChange }) => {
+  const tc = useThemeClass();
+  return (
   <div>
-    <p className="text-gray-400 text-xs mb-1">{label}</p>
+    <p className={tc('text-gray-400 text-xs mb-1', 'text-pl-muted text-xs mb-1')}>{label}</p>
     <input value={value} onChange={(e) => onChange(e.target.value)}
-      className="w-full bg-gray-700 text-white border border-gray-600 rounded-md h-8 text-sm px-2" />
+      className={tc('w-full bg-gray-700 text-white border border-gray-600 rounded-md h-8 text-sm px-2', 'w-full bg-pl-surface text-pl-text border border-pl-border-strong rounded-md h-8 text-sm px-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus')} />
   </div>
-);
+  );
+};
 
 export default FitExplorer;

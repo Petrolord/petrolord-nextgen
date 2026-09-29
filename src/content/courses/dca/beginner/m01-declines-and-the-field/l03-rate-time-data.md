@@ -43,7 +43,7 @@ Stop and do it yourself: compute $120\,e^{-0.0372}$ on a calculator. If you get 
 
 {{panel:dca-fit-explorer}}
 
-The fit explorer above is the instrument you will use throughout the course. For now, ignore the fitting controls entirely and just look at data. Select each of the four producers in turn with the model on Auto-select and the window on Primary. Blue points are monthly rate samples; the horizontal axis is days on that well's own clock; the dashed yellow line marks the flood start, where this module's story ends.
+The fit explorer above is the instrument you will use throughout the course. For now, ignore the fitting controls entirely and just look at data. Select each of the four producers in turn with the model on Auto-select and the window on Primary. Blue points are monthly rate samples; the horizontal axis is days on that well's own clock; the dashed amber line marks the flood start, where this module's story ends.
 
 Toggle the rate axis between Semilog and Linear and watch Ekene-1: on the linear axis its decline is a sagging curve, on the semilog axis it is a perfect straight line. Module 2 explains why that straightness is the exponential model's fingerprint. Notice too that the other three wells are NOT straight on semilog; they bend upward, fading more slowly. Those are your first hyperbolic and harmonic sightings.
 

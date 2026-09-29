@@ -391,3 +391,32 @@ and schedule dialog) are on the roles and registered in
   The harness mounts each page straight in `Layout`: DashboardPage is only
   a route table for the three admin pages, and importing it costs about
   85 s of collection per file.
+
+## Batch 3C: reservoir course apps (as built)
+
+- Routes (`rollout/w3c.js`): `/dashboard/apps/` `dca`, `mbal`, `scal`,
+  `waterflood`, `sim`, `fluid` and `welltest`, exact. Their course reader
+  pages stay on 1C's pattern entry.
+- The seven learning pages are fully owned and on roles: lime is gone
+  (primary for the tier toggle and the submit button, gold accent for the
+  Learning Mode pill and the certificate number, the success and danger
+  roles with their words for the grading result).
+- The 21 panels under `components/course/panels/{dca,mbal,scal,waterflood,sim,fluid,welltest}`
+  are scope-aware with `useThemeClass`: the batch started while the reader
+  and the handbook (1C) were unmigrated, and they render these panels too.
+  With 1C merged every screen that shows them is inside a scope, so the
+  legacy branch is only reached outside any scope; wave 7 drops it. Outside
+  a scope their classes match a fixture captured from main `1fbbedf34`
+  before any change (`panels/__tests__/rc3cPanelsLegacy.test.jsx`, 71
+  scenes); `rc3cPanelsTheme.test.jsx` walks the same scenes inside a scope.
+- Every chart is on the kit in both places: 16 hand-made plots in
+  `SvgChartFrame`, the two well test Recharts plots in `ChartFrame` with
+  `GRID_STYLE`, `AXIS_TICK` and `TOOLTIP_STYLE`. Colours follow the map in
+  section 1, with these choices: an oil and water rate pair uses
+  `getStreamPalette`; a guide, a target band or an excluded point uses
+  `SVG_CHART.reference`; where a lesson already named a colour (the SCAL
+  "blue water curve" and "red oil curve", the DCA "blue points") the series
+  keeps that name.
+- Lessons that named a retired chart colour (lime, cyan, pink, orange,
+  yellow) in the DCA, MBAL and waterflood courses now name the new colour.
+  Only the colour word changed.
