@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
 import {
   OGBOGENE, fireCase, fireBands, straightRun, heldRegister,
@@ -9,6 +9,9 @@ import {
   PanelShell, NumField, SelectField, Tile, TileGrid, FieldGrid, Note,
 } from '@/components/course/panels/petrophysics/panelKit';
 import { Relation, Refusal } from './MeterRunExplorer';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 
 // THE TWO WITHHELD ANSWERS. This panel exists so a learner sees a refusal as a
 // thing the software DOES rather than as a gap in a lesson, and so that they
@@ -50,13 +53,13 @@ export const MODES = [
   ['register', 'The register: everything these three engines do not carry or do not cite'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
 
 const Tbl = ({ head, rows }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>{head.map((h, i) => <th key={h} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>)}</tr>
       </thead>
       <tbody>
@@ -75,10 +78,10 @@ const Tbl = ({ head, rows }) => (
  *  a number the tool failed to compute rather than as an answer being refused,
  *  so this component uses none of the four. */
 export const Withheld = ({ label, reason }) => (
-  <div className="mt-3 rounded-md border border-red-800/60 bg-red-950/20 p-3">
-    <p className="text-slate-500 text-xs mb-1">{label}</p>
-    <p className="text-red-300 text-base font-medium mb-2">withheld</p>
-    <p className="text-xs text-slate-300 font-mono mb-0">{reason}</p>
+  <div className="mt-3 rounded-md border border-pl-danger/30 bg-pl-danger-bg p-3">
+    <p className="text-pl-muted text-xs mb-1">{label}</p>
+    <p className="text-pl-danger-text text-base font-medium mb-2">withheld</p>
+    <p className="text-xs text-pl-text font-mono mb-0">{reason}</p>
   </div>
 );
 
@@ -101,7 +104,7 @@ export const FireMode = ({ f }) => {
         <Tile label="The reason is the exported constant" value={String(f.reasonIsTheExportedConstant)} />
         <Tile label="Required vent capacity" value="withheld" />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         THE DUTY IS COMPUTED AND THE VENT IS WITHHELD. Move the liquid level and the diameter and watch the wetted area
         move, the band name change and the duty follow. The required vent capacity comes back empty at every one of
         them. The engine exports that sentence as a named constant, which is what stops a screen printing a blank where
@@ -111,8 +114,8 @@ export const FireMode = ({ f }) => {
       <Withheld label="Required vent capacity, scfh of air equivalent" reason={f.ventWithheldReason} />
       <Refusal label="The engine's note on the height cap" message={f.heightCapNote} />
       <Refusal label="The engine's warning on a tank this large" message={f.warning} />
-      <div className="mt-3 rounded-md border border-slate-700 bg-[#0F172A] p-2">
-        <p className="text-xs text-slate-300 font-mono mb-0">{f.comparisonNote}</p>
+      <div className="mt-3 rounded-md border border-pl-border bg-pl-sunken p-2">
+        <p className="text-xs text-pl-text font-mono mb-0">{f.comparisonNote}</p>
       </div>
       <Relation r={f.creditRelation} />
       <Refusal label="An environment factor used as a penalty" message={f.penaltyRefusal} />
@@ -136,7 +139,7 @@ export const BandsMode = ({ b }) => {
         <Tile label="Every vent is empty" value={String(b.everyVentIsNull)} />
         <Tile label="Every edge discriminates" value={String(b.edges.every((e) => e.edge.discriminates))} />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The wetted area at which each band gives way to the next is found by bisecting the band NAME the engine
         returns, rather than by reading a number out of the source. Tree: {b.countTree}. Rule: {b.countRule}.
       </p>
@@ -148,22 +151,20 @@ export const BandsMode = ({ b }) => {
         head={['band edge', 'wetted area, ft2', 'the duty there, Btu/hr', 'halvings', 'discriminates']}
         rows={b.edges.map((e) => [`${e.from} gives way to ${e.to}`, four(e.edge.at), four(e.qAtEdgeBtuHr), raw(e.edge.halvings), String(e.edge.discriminates)])}
       />
-      <div className="h-52 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="area" tick={AXIS} label={{ value: 'wetted area, ft2', fill: '#94a3b8', fontSize: 10, position: 'insideBottom', offset: -2 }} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => four(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            {b.edges.map((e) => (
-              <ReferenceLine key={e.to} x={e.edge.at} stroke="#f472b6" strokeDasharray="3 3" />
-            ))}
-            <Line dataKey="duty" name="fire duty, Btu/hr" stroke="#38bdf8" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <ChartFrame height={208} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="area" tick={AXIS} label={{ value: 'wetted area, ft2', fill: SVG_CHART.note, fontSize: 10, position: 'insideBottom', offset: -2 }} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => four(v)} />
+          <Legend {...LEGEND_PROPS} />
+          {b.edges.map((e) => (
+            <ReferenceLine key={e.to} x={e.edge.at} stroke={seriesColor(3)} strokeDasharray="3 3" />
+          ))}
+          <Line dataKey="duty" name="fire duty, Btu/hr" stroke={seriesColor(0)} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The duty column is full at every one of those areas. The vent column is empty at every one of them, and it says
         withheld rather than a blank, a zero or a dash, because all three of those read as a number the tool failed to
         compute rather than as an answer that is being refused.
@@ -183,7 +184,7 @@ export const StraightMode = ({ s }) => {
         <Tile label="The table stops above a beta of" value={six(s.tableMaxBeta)} />
         <Tile label="The reason is the exported constant" value={String(s.withheldReasonIsTheEngineConstant)} />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Straight-run requirements are table values. They depend on the beta and on what is upstream, and the engine
         says it is not calculating them. None of the columns is cited to a document in this repository, and one of them
         is withheld by name. Tree: {s.countTree}. Rule: {s.countRule}.
@@ -196,18 +197,18 @@ export const StraightMode = ({ s }) => {
         ])}
       />
       <Withheld label="The straight run for two elbows in different planes, at every beta above" reason={s.withheldReason} />
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         AND THE CEILING. Above the last row of the table the engine refuses rather than reading off the last row:
       </p>
       <Refusal label="A beta above where the table stops" message={s.ceilingRefusal} />
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         The note every answered row carries, in the engine&apos;s own words. Quoted exactly, because a learner running
         the shipped app sees these words:
       </p>
-      <div className="mt-2 rounded-md border border-amber-700/60 bg-amber-950/20 p-3">
-        <p className="text-xs text-slate-300 font-mono mb-0">{s.answeredRowNote}</p>
+      <div className="mt-2 rounded-md border border-pl-warning/40 bg-pl-warning-bg p-3">
+        <p className="text-xs text-pl-text font-mono mb-0">{s.answeredRowNote}</p>
       </div>
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         The downstream requirement steps up above a beta of {six(s.downstreamEdge.at)}, found by bisecting the number
         the engine returns rather than by reading the table: {raw(s.downstreamEdge.readingFrom)} diameters below it and
         {' '}{raw(s.downstreamEdge.readingTo)} above.
@@ -226,7 +227,7 @@ export const RegisterMode = ({ h }) => {
         <Tile label="Both refusals proved by calling them" value={String(h.bothRefusalsProved.every((x) => x.holds))} />
         <Tile label="Items carrying the engine's own words" value={raw(h.rows.filter((r) => r.words).length)} />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Every row below is the ENGINE&apos;S OWN SENTENCE, fetched by calling the engine or by reading a constant it
         exports, rather than typed onto this page. Nothing in this course is graded on any of them.
         Tree: {h.countTree}. Rule: {h.countRule}.
@@ -237,13 +238,13 @@ export const RegisterMode = ({ h }) => {
       />
       <div className="mt-3 space-y-2">
         {h.rows.map((r) => (
-          <div key={r.id} className={`rounded-md border p-2 ${r.refusal ? 'border-red-800/60 bg-red-950/20' : 'border-amber-700/60 bg-amber-950/20'}`}>
-            <p className={`text-xs font-medium mb-1 ${r.refusal ? 'text-red-300' : 'text-amber-300'}`}>{r.id}: {r.item}</p>
-            <p className="text-xs text-slate-300 font-mono mb-0">{r.words}</p>
+          <div key={r.id} className={`rounded-md border p-2 ${r.refusal ? 'border-pl-danger/30 bg-pl-danger-bg' : 'border-pl-warning/40 bg-pl-warning-bg'}`}>
+            <p className={`text-xs font-medium mb-1 ${r.refusal ? 'text-pl-danger-text' : 'text-pl-warning-text'}`}>{r.id}: {r.item}</p>
+            <p className="text-xs text-pl-text font-mono mb-0">{r.words}</p>
           </div>
         ))}
       </div>
-      <p className="text-xs text-slate-400 mt-3 mb-0">BOTH REFUSALS PROVED, BY CALLING THEM:</p>
+      <p className="text-xs text-pl-muted mt-3 mb-0">BOTH REFUSALS PROVED, BY CALLING THEM:</p>
       <Tbl
         head={['the claim', 'it holds']}
         rows={h.bothRefusalsProved.map((x) => [x.claim, String(x.holds)])}

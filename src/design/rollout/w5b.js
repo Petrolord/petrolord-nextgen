@@ -3,4 +3,5 @@
 // reader pages are batch 1C's pattern entry.
 export default [
   '/dashboard/apps/heattransfer',
+  '/dashboard/apps/metering',
 ];
