@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   WELLS, frictionSweep, frictionFromHookload, summaryOf, oracleCheck, stepStudy,
   TEACHING_MUD_KGM3, mudOver,
@@ -14,7 +17,7 @@ import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/compo
 
 const fmt = (v, d = 4) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: Math.min(d, 2) })
-  : '-');
+  : 'n/a');
 const kN = (v) => fmt(v / 1000, 3);
 const N = (v) => fmt(v, 2);
 const Nm = (v) => fmt(v, 3);
@@ -44,23 +47,21 @@ const Sweep = ({ over }) => {
         <SelectField label="Well" value={well} onChange={setWell} options={WELL_OPTIONS} />
         <SelectField label="Operation" value={op} onChange={setOp} options={OP_OPTIONS} />
       </div>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={rows.map((r) => ({ ...r, hookkN: r.hookloadN / 1000, torquekNm: r.surfaceTorqueNm / 1000 }))}
-            margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="frictionOpen" type="number" domain={[0.15, 0.5]} tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'open-hole friction factor', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-            <YAxis yAxisId="l" tick={{ fill: '#94a3b8', fontSize: 11 }} />
-            <YAxis yAxisId="r" orientation="right" tick={{ fill: '#94a3b8', fontSize: 11 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(v) => fmt(v, 3)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line yAxisId="l" dataKey="hookkN" name="hookload (kN)" stroke="#BFFF00" strokeWidth={2} isAnimationActive={false} />
-            <Line yAxisId="r" dataKey="torquekNm" name="torque (kN.m)" stroke="#38bdf8" strokeWidth={2} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={rows.map((r) => ({ ...r, hookkN: r.hookloadN / 1000, torquekNm: r.surfaceTorqueNm / 1000 }))}
+          margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="frictionOpen" type="number" domain={[0.15, 0.5]} tick={AXIS_TICK}
+            label={{ value: 'open-hole friction factor', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis yAxisId="l" tick={AXIS_TICK} />
+          <YAxis yAxisId="r" orientation="right" tick={AXIS_TICK} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(v) => fmt(v, 3)} />
+          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Line yAxisId="l" dataKey="hookkN" name="hookload (kN)" stroke={seriesColor(0)} strokeWidth={2} isAnimationActive={false} />
+          <Line yAxisId="r" dataKey="torquekNm" name="torque (kN.m)" stroke={seriesColor(1)} strokeWidth={2} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <TileGrid>
         <Tile label="At the standard 0.35" value={N(base.hookloadN)} unit="N" />
         <Tile label="Torque at the standard 0.35" value={Nm(base.surfaceTorqueNm)} unit="N.m" />
@@ -134,9 +135,9 @@ const Oracle = () => {
         <SelectField label="Well" value={well} onChange={setWell} options={WELL_OPTIONS} />
         <SelectField label="Operation" value={op} onChange={setOp} options={OP_OPTIONS} />
       </div>
-      <div className="mt-3 rounded border border-gray-700 overflow-x-auto">
+      <div className="mt-3 rounded border border-pl-border overflow-x-auto">
         <table className="w-full text-xs">
-          <thead className="bg-black/40 text-gray-400">
+          <thead className="bg-pl-sunken text-pl-muted">
             <tr>
               <th className="text-right p-2">Step (m)</th>
               <th className="text-right p-2">Hookload (N)</th>
@@ -145,10 +146,10 @@ const Oracle = () => {
           </thead>
           <tbody>
             {steps.map((r) => (
-              <tr key={r.stepM} className="border-t border-gray-800">
-                <td className="p-2 text-right text-white">{fmt(r.stepM, 2)}</td>
-                <td className="p-2 text-right text-gray-200">{fmt(r.hookloadN, 3)}</td>
-                <td className="p-2 text-right text-gray-400">{r.vsOracleN == null ? '-' : fmt(r.vsOracleN, 3)}</td>
+              <tr key={r.stepM} className="border-t border-pl-border">
+                <td className="p-2 text-right text-pl-text">{fmt(r.stepM, 2)}</td>
+                <td className="p-2 text-right text-pl-text">{fmt(r.hookloadN, 3)}</td>
+                <td className="p-2 text-right text-pl-muted">{r.vsOracleN == null ? 'n/a' : fmt(r.vsOracleN, 3)}</td>
               </tr>
             ))}
           </tbody>
@@ -186,7 +187,7 @@ const FrictionExplorer = () => {
         {over && mode === 'oracle' && <Oracle />}
       </div>
       {mode === 'oracle' && (
-        <p className="text-[11px] text-gray-500 mt-2">
+        <p className="text-[11px] text-pl-muted mt-2">
           The oracle comparison always runs on the goldens' own {TEACHING_MUD_KGM3} kg/m3 mud, because that is what the oracle was generated on.
         </p>
       )}

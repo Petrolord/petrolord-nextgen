@@ -30,6 +30,16 @@ vi.mock('@/services/academyService', () => ({
 const FIXTURE = path.join(path.dirname(fileURLToPath(import.meta.url)), 'fixtures/courseKitLegacyMarkup.json');
 const UPDATE = globalThis.process?.env?.UPDATE_COURSE_KIT_LEGACY === '1';
 const captured = {};
+
+// Radix settles two attributes after the first paint, so whether they are
+// there when the markup is read is a race: the inline pointer-events style,
+// and the roving tabindex of a radio group and its radios (0 or -1 by which
+// item holds focus). QuizRunner active compares with those two ignored;
+// every other attribute, and every other scene, stays pinned.
+const IGNORE_RADIX_ASYNC = new Set(['QuizRunner active']);
+const ignoreRadixAsync = (html) => html
+  .replace(/ style="pointer-events: [a-z]+;"/g, '')
+  .replace(/(<[a-z]+\b[^>]*\brole="(?:radio|radiogroup)"[^>]*?) tabindex="-?\d+"/g, '$1');
 const realToLocaleString = Date.prototype.toLocaleString;
 
 describe('the course kit outside a scope', () => {
@@ -49,6 +59,7 @@ describe('the course kit outside a scope', () => {
       if (scene.act) await scene.act({ screen, fireEvent, waitFor });
       const html = normaliseMarkup(document.body.innerHTML);
       if (UPDATE) captured[scene.name] = html;
+      else if (IGNORE_RADIX_ASYNC.has(scene.name)) expect(ignoreRadixAsync(html)).toBe(ignoreRadixAsync(want[scene.name]));
       else expect(html).toBe(want[scene.name]);
     });
   }

@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   PUBLISHED_TUBING, tubingGeometry, tubingRun, tubingScenario, tempSweep, envelope,
   erosionalVelocityMs, HELICAL_RATIO,
@@ -14,7 +17,7 @@ import { PanelShell, NumField, SelectField, Tile, TileGrid, Note } from '@/compo
 
 const fmt = (v, d = 4) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: Math.min(d, 2) })
-  : '-');
+  : 'n/a');
 const kN = (v) => fmt(v / 1e3, 3);
 
 const MODES = [
@@ -22,7 +25,7 @@ const MODES = [
   { value: 'envelope', label: 'The envelope' },
   { value: 'scenarios', label: 'Three scenarios' },
 ];
-const STATE_COLOUR = { none: 'text-[#BFFF00]', sinusoidal: 'text-amber-400', helical: 'text-rose-400' };
+const STATE_COLOUR = { none: 'text-pl-success-text', sinusoidal: 'text-pl-warning-text', helical: 'text-pl-danger-text' };
 
 const Forces = () => {
   const [dPi, setDPi] = useState('10');
@@ -58,7 +61,7 @@ const Forces = () => {
         <Tile label="Stroke available" value={fmt(PUBLISHED_TUBING.packer.strokeM, 2)} unit="m" />
         <Tile label="Within stroke" value={r.packer.strokeOk ? 'yes' : 'no'} />
       </TileGrid>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         The three areas this string works on are Ai {fmt(g.Ai * 1e4, 3)}, Ao {fmt(g.Ao * 1e4, 3)} and
         the seal bore Ap {fmt(g.Ap * 1e4, 3)}, all in square centimetres, and the steel section is
         {' '}{fmt(g.areaM2 * 1e4, 3)}. Piston acts on the differences between them, ballooning on the
@@ -89,25 +92,23 @@ const Envelope = () => {
   return (
     <>
       <NumField label="Bore pressure change (MPa)" value={dPi} onChange={setDPi} />
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={rows} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="dT" type="number" domain={[-80, 100]} tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'mean temperature change (deg C)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'kN, or m for length', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(v) => fmt(v, 3)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            {e && <ReferenceLine x={e.sinusoidalOnsetDegC} stroke="#f59e0b" strokeDasharray="4 4" />}
-            {e && <ReferenceLine x={e.coldStrokeDegC} stroke="#38bdf8" strokeDasharray="4 4" />}
-            {e && <ReferenceLine x={e.hotStrokeDegC} stroke="#38bdf8" strokeDasharray="4 4" />}
-            <Line dataKey="totalKN" name="total force (kN)" stroke="#BFFF00" strokeWidth={2} dot={false} isAnimationActive={false} />
-            <Line dataKey="dLm" name="length change (m)" stroke="#fb7185" strokeWidth={2} dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3">
+        <LineChart data={rows} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="dT" type="number" domain={[-80, 100]} tick={AXIS_TICK}
+            label={{ value: 'mean temperature change (deg C)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS_TICK}
+            label={{ value: 'kN, or m for length', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(v) => fmt(v, 3)} />
+          <Legend wrapperStyle={{ fontSize: 11 }} />
+          {e && <ReferenceLine x={e.sinusoidalOnsetDegC} stroke={seriesColor(2)} strokeDasharray="4 4" />}
+          {e && <ReferenceLine x={e.coldStrokeDegC} stroke={seriesColor(1)} strokeDasharray="4 4" />}
+          {e && <ReferenceLine x={e.hotStrokeDegC} stroke={seriesColor(1)} strokeDasharray="4 4" />}
+          <Line dataKey="totalKN" name="total force (kN)" stroke={seriesColor(0)} strokeWidth={2} dot={false} isAnimationActive={false} />
+          <Line dataKey="dLm" name="length change (m)" stroke={seriesColor(3)} strokeWidth={2} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       {e && (
         <>
           <TileGrid>
@@ -118,7 +119,7 @@ const Envelope = () => {
             <Tile label="Stroke window" value={fmt(e.strokeWindowDegC, 4)} unit="deg C" />
             <Tile label="Hot limit is" value={e.hotLimitIs} />
           </TileGrid>
-          <div className="mt-3 text-xs text-slate-300">
+          <div className="mt-3 text-xs text-pl-text">
             The stroke window is {fmt(e.strokeWindowDegC, 4)} degrees wide, and it stays that width
             at any pressure change you type, because only the thermal term contains the
             temperature. Two times the stroke over alpha times the length is
@@ -149,8 +150,8 @@ const Scenarios = () => {
   return (
     <>
       <div className="overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">scenario</th><th className="text-right pr-3">total (kN)</th>
               <th className="text-right pr-3">packer SF</th><th className="text-right pr-3">length (m)</th>
@@ -171,7 +172,7 @@ const Scenarios = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         Three cases and three different limits. Production heating is the only one that buckles and
         it is inside its stroke. Injection cooling does not buckle and runs out of stroke.
         Stimulation has the lowest packer safety factor of the three and does not buckle either.

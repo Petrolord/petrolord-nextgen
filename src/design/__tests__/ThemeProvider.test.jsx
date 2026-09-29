@@ -160,8 +160,8 @@ describe('route registry and cold load', () => {
     for (const p of ['/dashboard', '/search', '/dashboard/modules', '/dashboard/modules/x']) {
       expect({ p, themed: isThemedPath(p) }).toEqual({ p, themed: true });
     }
-    // /legacy-probe is the test-only unregistered route (2A registered /dashboard/enroll)
-    for (const p of ['/', '/login', '/legacy-probe', '/dashboard/apps/dca', '/searchx']) {
+    // /legacy-probe is the test-only unregistered route (2A registered /dashboard/enroll, 3C /dashboard/apps/dca)
+    for (const p of ['/', '/login', '/legacy-probe', '/searchx']) {
       expect({ p, themed: isThemedPath(p) }).toEqual({ p, themed: false });
     }
   });
@@ -187,5 +187,14 @@ describe('route registry and cold load', () => {
     expect(coldLoadTheme('/')).toBeNull();
     render(<ThemedLoadingScreen theme="dark" />);
     expect(screen.getByTestId('themed-loading').getAttribute('data-pl-theme')).toBe('dark');
+  });
+
+  it('3C themes the reservoir course apps (their learning pages only)', () => {
+    const w3c = ['dca', 'mbal', 'scal', 'waterflood', 'sim', 'fluid', 'welltest'].map((a) => `/dashboard/apps/${a}`);
+    expect(THEMED_ROUTES).toEqual(expect.arrayContaining(w3c));
+    for (const p of w3c) expect({ p, themed: isThemedPath(p) }).toEqual({ p, themed: true });
+    for (const p of ['/dashboard/apps/dcax', '/dashboard/apps/dca/x', '/dashboard/apps/simulation']) {
+      expect({ p, themed: isThemedPath(p) }).toEqual({ p, themed: false });
+    }
   });
 });

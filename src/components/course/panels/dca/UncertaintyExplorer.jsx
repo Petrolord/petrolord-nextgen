@@ -3,6 +3,9 @@ import {
   B_LEVERAGE_BASE, bLeverageRow, FIELD_TRIANGLE, triangularSummary,
 } from './declineLab';
 import { PanelShell, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { useThemeClass } from '@/design/themeClass';
+import SvgChartFrame from '@/components/charts/SvgChartFrame';
+import { seriesColor, SVG_CHART, AXIS_LINE_PROPS } from '@/utils/chartSvg';
 
 // Uncertainty explorer (Expert): the b-lever on EUR at fixed qi/Di/limit,
 // and the closed-form triangular distribution the risked booking uses.
@@ -18,6 +21,7 @@ const CH = 220;
 const PAD = { left: 64, top: 14, right: 14, bottom: 30 };
 
 const UncertaintyExplorer = () => {
+  const tc = useThemeClass();
   const [bIdx, setBIdx] = useState(24); // default b = 1.2, the governance case
   const [triMin, setTriMin] = useState(String(FIELD_TRIANGLE.min));
   const [triMode, setTriMode] = useState(String(FIELD_TRIANGLE.mode));
@@ -44,26 +48,26 @@ const UncertaintyExplorer = () => {
       title="Uncertainty explorer"
       subtitle={`The b-lever at fixed qi ${B_LEVERAGE_BASE.qi} stb/d and Di ${B_LEVERAGE_BASE.Di}/d at the limit you set (the teaching case uses ${B_LEVERAGE_BASE.qLimit} stb/d), and the closed-form field triangle.`}
     >
-      <svg viewBox={`0 0 ${CW} ${CH}`} className="w-full h-auto bg-[#0F172A] rounded-md border border-gray-700">
-        <line x1={PAD.left} y1={PAD.top} x2={PAD.left} y2={CH - PAD.bottom} stroke="#334155" />
-        <line x1={PAD.left} y1={CH - PAD.bottom} x2={CW - PAD.right} y2={CH - PAD.bottom} stroke="#334155" />
+      <SvgChartFrame width={CW} height={CH} label="EUR against the decline exponent b" minWidth={460} maxWidth={720}>
+        <line x1={PAD.left} y1={PAD.top} x2={PAD.left} y2={CH - PAD.bottom} {...AXIS_LINE_PROPS} />
+        <line x1={PAD.left} y1={CH - PAD.bottom} x2={CW - PAD.right} y2={CH - PAD.bottom} {...AXIS_LINE_PROPS} />
         {[0, 0.25, 0.5, 0.75, 1, 1.2].map((bb) => (
-          <text key={bb} x={xOf(bb)} y={CH - PAD.bottom + 14} fontSize="9" fill="#64748b" textAnchor="middle">b={bb}</text>
+          <text key={bb} x={xOf(bb)} y={CH - PAD.bottom + 14} fontSize="9" fill={SVG_CHART.tick} textAnchor="middle">b={bb}</text>
         ))}
         {[100000, 200000, 300000].map((e) => (
-          <text key={e} x={PAD.left - 6} y={yOf(e) + 3} fontSize="9" fill="#64748b" textAnchor="end">{e / 1000}k</text>
+          <text key={e} x={PAD.left - 6} y={yOf(e) + 3} fontSize="9" fill={SVG_CHART.tick} textAnchor="end">{e / 1000}k</text>
         ))}
         <path
           d={`M${curve.map((r) => `${xOf(r.b).toFixed(1)},${yOf(r.eur).toFixed(1)}`).join(' L')}`}
-          fill="none" stroke="#BFFF00" strokeWidth="1.8"
+          fill="none" stroke={seriesColor(0)} strokeWidth="1.8"
         />
-        <circle cx={xOf(b)} cy={yOf(row.eur)} r="4" fill="#f97316" />
-      </svg>
+        <circle cx={xOf(b)} cy={yOf(row.eur)} r="4" fill={seriesColor(3)} />
+      </SvgChartFrame>
       <div className="flex items-center gap-3">
-        <span className="text-xs text-gray-500 shrink-0">Decline exponent b</span>
+        <span className={tc('text-xs text-gray-500 shrink-0', 'text-xs text-pl-muted shrink-0')}>Decline exponent b</span>
         <input type="range" min="0" max={B_STEPS.length - 1} step="1" value={bIdx}
           onChange={(e) => setBIdx(Number(e.target.value))} className="w-full" />
-        <span className="text-sm text-white w-14 text-right">{b.toFixed(2)}</span>
+        <span className={tc('text-sm text-white w-14 text-right', 'text-sm text-pl-text w-14 text-right')}>{b.toFixed(2)}</span>
         <div className="w-40 shrink-0">
           <NumField label="Limit (stb/d)" value={limit} onChange={setLimit} />
         </div>
@@ -75,8 +79,8 @@ const UncertaintyExplorer = () => {
         <Tile label="Harmonic booking (b=1)" value={fmt(curve[20].eur, 1)} unit="stb" />
       </TileGrid>
 
-      <div className="pt-2 border-t border-gray-700 space-y-3">
-        <p className="text-white text-sm font-medium mb-0">Field EUR triangle (closed-form quantiles)</p>
+      <div className={tc('pt-2 border-t border-gray-700 space-y-3', 'pt-2 border-t border-pl-border space-y-3')}>
+        <p className={tc('text-white text-sm font-medium mb-0', 'text-pl-text text-sm font-medium mb-0')}>Field EUR triangle (closed-form quantiles)</p>
         <div className="grid gap-3 grid-cols-3">
           <NumField label="Minimum (stb)" value={triMin} onChange={setTriMin} />
           <NumField label="Mode (stb)" value={triMode} onChange={setTriMode} />

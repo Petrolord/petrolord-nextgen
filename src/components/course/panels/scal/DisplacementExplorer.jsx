@@ -3,6 +3,9 @@ import {
   displacementWith, textbookCase, btDaysAt, displacementCase, btDaysFor, EKENE_SCAL,
 } from './scalLab';
 import { PanelShell, Tile, TileGrid, Note, NumField, FieldGrid } from '@/components/course/panels/petrophysics/panelKit';
+import { useThemeClass } from '@/design/themeClass';
+import SvgChartFrame from '@/components/charts/SvgChartFrame';
+import { seriesColor, SVG_CHART, AXIS_LINE_PROPS } from '@/utils/chartSvg';
 
 // Displacement explorer: the Ekene rel-perm set through the real
 // fractional-flow engine, with the Welge tangent drawn from (Swc, 0). The
@@ -32,20 +35,24 @@ const PAD = { left: 52, top: 16, right: 16, bottom: 40 };
 const fmt = (v, d = 4) => (Number.isFinite(v) ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d }) : '-');
 const sci = (v, d = 6) => (Number.isFinite(v) ? Number(v).toPrecision(d) : '-');
 
-const RangeField = ({ label, value, min, max, step, onChange, disabled }) => (
+const RangeField = ({ label, value, min, max, step, onChange, disabled }) => {
+  const tc = useThemeClass();
+  return (
   <div>
-    <p className="text-gray-400 text-xs mb-1">
-      {label}: <span className="text-white">{value}</span>
+    <p className={tc('text-gray-400 text-xs mb-1', 'text-pl-muted text-xs mb-1')}>
+      {label}: <span className={tc('text-white', 'text-pl-text')}>{value}</span>
     </p>
     <input
       type="range" min={min} max={max} step={step} value={value} disabled={disabled}
       onChange={(e) => onChange(Number(e.target.value))}
-      className="w-full accent-[#BFFF00] disabled:opacity-40"
+      className={tc('w-full accent-[#BFFF00] disabled:opacity-40', 'w-full accent-pl-primary disabled:opacity-40')}
     />
   </div>
-);
+  );
+};
 
 const DisplacementExplorer = () => {
+  const tc = useThemeClass();
   const [muO, setMuO] = useState(EKENE_SCAL.design.muO_cp);
   const [nw, setNw] = useState(EKENE_SCAL.design.krSpec.nw);
   const [textbook, setTextbook] = useState(false);
@@ -81,7 +88,7 @@ const DisplacementExplorer = () => {
   const modeButton = (
     <button
       type="button" onClick={() => { setTyped((v) => !v); setTextbook(false); }}
-      className={`px-3 py-1.5 rounded-md border text-xs ${typed ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold' : 'bg-gray-800 text-gray-300 border-gray-600'}`}
+      className={tc(`px-3 py-1.5 rounded-md border text-xs ${typed ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold' : 'bg-gray-800 text-gray-300 border-gray-600'}`, `px-3 py-1.5 rounded-md border text-xs ${typed ? 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold' : 'bg-pl-surface text-pl-text border-pl-border-strong'}`)}
     >
       {typed ? 'Your case: every input typed' : 'Type your own case'}
     </button>
@@ -116,36 +123,36 @@ const DisplacementExplorer = () => {
         <RangeField label="Water Corey exponent nw" value={nw} min={1} max={4} step={0.1} onChange={setNw} disabled={textbook} />
         <button
           type="button" onClick={() => setTextbook((v) => !v)}
-          className={`px-3 py-1.5 rounded-md border text-xs ${textbook ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold' : 'bg-gray-800 text-gray-300 border-gray-600'}`}
+          className={tc(`px-3 py-1.5 rounded-md border text-xs ${textbook ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold' : 'bg-gray-800 text-gray-300 border-gray-600'}`, `px-3 py-1.5 rounded-md border text-xs ${textbook ? 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold' : 'bg-pl-surface text-pl-text border-pl-border-strong'}`)}
         >
           {textbook ? 'Textbook case (M = 4) active' : 'Load the textbook case'}
         </button>
       </div>
       )}
 
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto bg-[#0F172A] rounded-md border border-gray-700">
-        <line x1={PAD.left} y1={PAD.top} x2={PAD.left} y2={H - PAD.bottom} stroke="#334155" />
-        <line x1={PAD.left} y1={H - PAD.bottom} x2={W - PAD.right} y2={H - PAD.bottom} stroke="#334155" />
+      <SvgChartFrame width={W} height={H} label="Relative permeability and fractional flow against water saturation, with the Welge tangent" minWidth={460} maxWidth={720}>
+        <line x1={PAD.left} y1={PAD.top} x2={PAD.left} y2={H - PAD.bottom} {...AXIS_LINE_PROPS} />
+        <line x1={PAD.left} y1={H - PAD.bottom} x2={W - PAD.right} y2={H - PAD.bottom} {...AXIS_LINE_PROPS} />
         {[0, 0.25, 0.5, 0.75, 1].map((s) => (
-          <text key={s} x={x(s)} y={H - PAD.bottom + 14} fontSize="9" fill="#64748b" textAnchor="middle">{s}</text>
+          <text key={s} x={x(s)} y={H - PAD.bottom + 14} fontSize="9" fill={SVG_CHART.tick} textAnchor="middle">{s}</text>
         ))}
         {[0.25, 0.5, 0.75, 1].map((v) => (
-          <text key={v} x={PAD.left - 6} y={y(v) + 3} fontSize="9" fill="#64748b" textAnchor="end">{v}</text>
+          <text key={v} x={PAD.left - 6} y={y(v) + 3} fontSize="9" fill={SVG_CHART.tick} textAnchor="end">{v}</text>
         ))}
-        <path d={path('krw')} fill="none" stroke="#38bdf8" strokeWidth="1.4" />
-        <path d={path('kro')} fill="none" stroke="#f97316" strokeWidth="1.4" />
-        <path d={path('fw')} fill="none" stroke="#BFFF00" strokeWidth="1.8" />
+        <path d={path('krw')} fill="none" stroke={seriesColor(0)} strokeWidth="1.4" />
+        <path d={path('kro')} fill="none" stroke={seriesColor(3)} strokeWidth="1.4" />
+        <path d={path('fw')} fill="none" stroke={seriesColor(1)} strokeWidth="1.8" />
         {/* Welge tangent: from (Swc, 0) through the front to fw = 1 at SwAvgBt */}
         {Number.isFinite(bl.SwAvgBt) && (
-          <line x1={x(Swc)} y1={y(0)} x2={x(bl.SwAvgBt)} y2={y(1)} stroke="#e2e8f0" strokeWidth="1.1" strokeDasharray="5 4" />
+          <line x1={x(Swc)} y1={y(0)} x2={x(bl.SwAvgBt)} y2={y(1)} stroke={SVG_CHART.note} strokeWidth="1.1" strokeDasharray="5 4" />
         )}
-        {Number.isFinite(bl.Swf) && <circle cx={x(bl.Swf)} cy={y(bl.fwf)} r="4" fill="#e2e8f0" />}
-        <text x={PAD.left + 8} y={PAD.top + 11} fontSize="10" fill="#38bdf8">krw</text>
-        <text x={PAD.left + 8} y={PAD.top + 24} fontSize="10" fill="#f97316">kro</text>
-        <text x={PAD.left + 8} y={PAD.top + 37} fontSize="10" fill="#BFFF00">fw</text>
-        <text x={PAD.left + 8} y={PAD.top + 50} fontSize="10" fill="#e2e8f0">Welge tangent from (Swc, 0)</text>
-        <text x={W / 2} y={H - 8} fontSize="10" fill="#64748b" textAnchor="middle">Sw, water saturation</text>
-      </svg>
+        {Number.isFinite(bl.Swf) && <circle cx={x(bl.Swf)} cy={y(bl.fwf)} r="4" fill={SVG_CHART.note} />}
+        <text x={PAD.left + 8} y={PAD.top + 11} fontSize="10" fill={seriesColor(0)}>krw</text>
+        <text x={PAD.left + 8} y={PAD.top + 24} fontSize="10" fill={seriesColor(3)}>kro</text>
+        <text x={PAD.left + 8} y={PAD.top + 37} fontSize="10" fill={seriesColor(1)}>fw</text>
+        <text x={PAD.left + 8} y={PAD.top + 50} fontSize="10" fill={SVG_CHART.note}>Welge tangent from (Swc, 0)</text>
+        <text x={W / 2} y={H - 8} fontSize="10" fill={SVG_CHART.tick} textAnchor="middle">Sw, water saturation</text>
+      </SvgChartFrame>
 
       <TileGrid>
         <Tile label="Mobility ratio M" value={sci(r.M, 6)} />

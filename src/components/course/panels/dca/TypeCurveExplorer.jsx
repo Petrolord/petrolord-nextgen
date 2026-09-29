@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { WELLS, ECON_LIMIT_BOPD, typeCurvePipeline } from './declineLab';
 import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { useThemeClass } from '@/design/themeClass';
 
 // Type-curve explorer: pool producers, normalize by time and peak rate, fit
 // one hyperbolic through the pooled cloud, then apply it fixed-b to a target
@@ -11,6 +12,7 @@ import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/compo
 const fmt = (v, d = 4) => (Number.isFinite(v) ? Number(v).toFixed(d) : '-');
 
 const TypeCurveExplorer = () => {
+  const tc = useThemeClass();
   const [pool, setPool] = useState({ 'Ekene-1': false, 'Ekene-3': true, 'Ekene-5': false, 'Ekene-6': true });
   const [target, setTarget] = useState('Ekene-6');
   const [limit, setLimit] = useState(String(ECON_LIMIT_BOPD));
@@ -34,14 +36,14 @@ const TypeCurveExplorer = () => {
     >
       <div className="flex flex-wrap items-end gap-4">
         <div>
-          <p className="text-gray-400 text-xs mb-1">Pool (normalized together)</p>
+          <p className={tc('text-gray-400 text-xs mb-1', 'text-pl-muted text-xs mb-1')}>Pool (normalized together)</p>
           <div className="flex gap-3">
             {WELLS.map((w) => (
-              <label key={w.name} className="flex items-center gap-1.5 text-sm text-gray-300">
+              <label key={w.name} className={tc('flex items-center gap-1.5 text-sm text-gray-300', 'flex items-center gap-1.5 text-sm text-pl-text')}>
                 <input type="checkbox" checked={!!pool[w.name]}
                   onChange={(e) => setPool((p) => ({ ...p, [w.name]: e.target.checked }))} />
                 {w.name.replace('Ekene-', 'E')}
-                <span className="text-gray-500 text-xs">({w.planted.model === 'hyperbolic' ? `b ${w.planted.b}` : w.planted.model})</span>
+                <span className={tc('text-gray-500 text-xs', 'text-pl-muted text-xs')}>({w.planted.model === 'hyperbolic' ? `b ${w.planted.b}` : w.planted.model})</span>
               </label>
             ))}
           </div>

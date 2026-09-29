@@ -5,6 +5,7 @@ import {
 import {
   PanelShell, Tile, TileGrid, Note, NumField,
 } from '@/components/course/panels/petrophysics/panelKit';
+import { useThemeClass } from '@/design/themeClass';
 
 // Tuning explorer: four bounded knobs on one pseudo-component, regressed
 // against four laboratory targets at once. The point is the ledger: three
@@ -16,15 +17,18 @@ const MODES = ['The ledger', 'The knobs', 'Flash'];
 
 const TEST_OPTIONS = GOOD_OIL_TESTS.map((t, i) => [String(i), `${Math.round(t.stagesF[0][1] - 14.65)} psig separator`]);
 
-const Select = ({ label, value, onChange, options }) => (
+const Select = ({ label, value, onChange, options }) => {
+  const tc = useThemeClass();
+  return (
   <div>
-    <p className="text-gray-400 text-xs mb-1">{label}</p>
+    <p className={tc('text-gray-400 text-xs mb-1', 'text-pl-muted text-xs mb-1')}>{label}</p>
     <select value={value} onChange={(e) => onChange(e.target.value)}
-      className="w-full bg-gray-800 border border-gray-600 rounded-md text-white text-xs px-2 py-1.5">
+      className={tc('w-full bg-gray-800 border border-gray-600 rounded-md text-white text-xs px-2 py-1.5', 'w-full bg-pl-surface border border-pl-border-strong rounded-md text-pl-text text-xs px-2 py-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus')}>
       {options.map(([v, l]) => <option key={v} value={v}>{l}</option>)}
     </select>
   </div>
-);
+  );
+};
 
 const fmt = (v, d = 4) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d })
@@ -38,6 +42,7 @@ const KNOB_NOTES = {
 };
 
 const TuningExplorer = () => {
+  const tc = useThemeClass();
   const [mode, setMode] = useState(MODES[0]);
   const [flashT, setFlashT] = useState('220');
   const [flashP, setFlashP] = useState('1500');
@@ -82,7 +87,7 @@ const TuningExplorer = () => {
     >
       <div className="grid gap-3 grid-cols-2 sm:grid-cols-4 items-end mt-3">
         <Select label="Tune against" value={test} onChange={setTest} options={TEST_OPTIONS} />
-        <p className="text-xs text-gray-500 sm:col-span-3">
+        <p className={tc('text-xs text-gray-500 sm:col-span-3', 'text-xs text-pl-muted sm:col-span-3')}>
           Opens on the teaching regression against the 100 psig optimum test. A capstone brief may state another.
         </p>
       </div>
@@ -92,11 +97,15 @@ const TuningExplorer = () => {
             key={m}
             type="button"
             onClick={() => setMode(m)}
-            className={`px-2 py-1 text-xs rounded border ${
+            className={tc(`px-2 py-1 text-xs rounded border ${
               m === mode
                 ? 'bg-[#BFFF00] text-black border-[#BFFF00]'
                 : 'bg-transparent text-gray-300 border-gray-600 hover:border-gray-400'
-            }`}
+            }`, `px-2 py-1 text-xs rounded border ${
+              m === mode
+                ? 'bg-pl-primary text-pl-primary-fg border-pl-primary'
+                : 'bg-transparent text-pl-text border-pl-border-strong hover:border-pl-muted'
+            }`)}
           >
             {m}
           </button>
@@ -105,9 +114,9 @@ const TuningExplorer = () => {
 
       {mode === 'The ledger' && (
         <>
-          <div className="mt-4 rounded border border-gray-700 overflow-x-auto">
+          <div className={tc('mt-4 rounded border border-gray-700 overflow-x-auto', 'mt-4 rounded border border-pl-border overflow-x-auto')}>
             <table className="w-full text-xs">
-              <thead className="bg-black/40 text-gray-400">
+              <thead className={tc('bg-black/40 text-gray-400', 'bg-pl-sunken text-pl-muted')}>
                 <tr>
                   <th className="text-left p-2">Target</th>
                   <th className="text-right p-2">Measured</th>
@@ -119,15 +128,15 @@ const TuningExplorer = () => {
               </thead>
               <tbody>
                 {ledger.map((r) => (
-                  <tr key={r.name} className="border-t border-gray-800">
-                    <td className="p-2 text-white">
-                      {r.name} <span className="text-gray-500">({r.unit})</span>
+                  <tr key={r.name} className={tc('border-t border-gray-800', 'border-t border-pl-border')}>
+                    <td className={tc('p-2 text-white', 'p-2 text-pl-text')}>
+                      {r.name} <span className={tc('text-gray-500', 'text-pl-muted')}>({r.unit})</span>
                     </td>
-                    <td className="p-2 text-right text-gray-200">{fmt(r.measured, 3)}</td>
-                    <td className="p-2 text-right text-gray-400">{fmt(r.untuned, 3)}</td>
-                    <td className="p-2 text-right text-gray-200">{fmt(r.tuned, 3)}</td>
-                    <td className="p-2 text-right text-gray-400">{fmt(r.untunedErr, 3)}</td>
-                    <td className={`p-2 text-right ${r.improved ? 'text-[#BFFF00]' : 'text-red-400'}`}>
+                    <td className={tc('p-2 text-right text-gray-200', 'p-2 text-right text-pl-text')}>{fmt(r.measured, 3)}</td>
+                    <td className={tc('p-2 text-right text-gray-400', 'p-2 text-right text-pl-muted')}>{fmt(r.untuned, 3)}</td>
+                    <td className={tc('p-2 text-right text-gray-200', 'p-2 text-right text-pl-text')}>{fmt(r.tuned, 3)}</td>
+                    <td className={tc('p-2 text-right text-gray-400', 'p-2 text-right text-pl-muted')}>{fmt(r.untunedErr, 3)}</td>
+                    <td className={tc(`p-2 text-right ${r.improved ? 'text-[#BFFF00]' : 'text-red-400'}`, `p-2 text-right ${r.improved ? 'text-pl-success-text' : 'text-pl-danger-text'}`)}>
                       {fmt(r.tunedErr, 3)}
                     </td>
                   </tr>
@@ -151,9 +160,9 @@ const TuningExplorer = () => {
 
       {mode === 'The knobs' && (
         <>
-          <div className="mt-4 rounded border border-gray-700 overflow-x-auto">
+          <div className={tc('mt-4 rounded border border-gray-700 overflow-x-auto', 'mt-4 rounded border border-pl-border overflow-x-auto')}>
             <table className="w-full text-xs">
-              <thead className="bg-black/40 text-gray-400">
+              <thead className={tc('bg-black/40 text-gray-400', 'bg-pl-sunken text-pl-muted')}>
                 <tr>
                   <th className="text-left p-2">Knob</th>
                   <th className="text-right p-2">Start</th>
@@ -163,11 +172,11 @@ const TuningExplorer = () => {
               </thead>
               <tbody>
                 {Object.keys(f.knobs).map((k) => (
-                  <tr key={k} className="border-t border-gray-800">
-                    <td className="p-2 text-white">{k}</td>
-                    <td className="p-2 text-right text-gray-400">{fmt(f.startKnobs?.[k], 6)}</td>
-                    <td className="p-2 text-right text-gray-200">{fmt(f.knobs[k], 6)}</td>
-                    <td className="p-2 text-gray-400">{KNOB_NOTES[k]}</td>
+                  <tr key={k} className={tc('border-t border-gray-800', 'border-t border-pl-border')}>
+                    <td className={tc('p-2 text-white', 'p-2 text-pl-text')}>{k}</td>
+                    <td className={tc('p-2 text-right text-gray-400', 'p-2 text-right text-pl-muted')}>{fmt(f.startKnobs?.[k], 6)}</td>
+                    <td className={tc('p-2 text-right text-gray-200', 'p-2 text-right text-pl-text')}>{fmt(f.knobs[k], 6)}</td>
+                    <td className={tc('p-2 text-gray-400', 'p-2 text-pl-muted')}>{KNOB_NOTES[k]}</td>
                   </tr>
                 ))}
               </tbody>
@@ -184,7 +193,7 @@ const TuningExplorer = () => {
             measured substances with published constants, and a regression that moves those is
             fitting away from physics rather than toward this fluid. No knob reached its bound, which
             is the check that says the answer is an optimum rather than an edge. A tuned model is
-            tier <span className="text-white">lab tuned</span>: {TIER.lab_tuned}.
+            tier <span className={tc('text-white', 'text-pl-text')}>lab tuned</span>: {TIER.lab_tuned}.
           </Note>
         </>
       )}

@@ -391,3 +391,69 @@ and schedule dialog) are on the roles and registered in
   The harness mounts each page straight in `Layout`: DashboardPage is only
   a route table for the three admin pages, and importing it costs about
   85 s of collection per file.
+
+## Batch 3C: reservoir course apps (as built)
+
+- Routes (`rollout/w3c.js`): `/dashboard/apps/` `dca`, `mbal`, `scal`,
+  `waterflood`, `sim`, `fluid` and `welltest`, exact. Their course reader
+  pages stay on 1C's pattern entry.
+- The seven learning pages are fully owned and on roles: lime is gone
+  (primary for the tier toggle and the submit button, gold accent for the
+  Learning Mode pill and the certificate number, the success and danger
+  roles with their words for the grading result).
+- The 21 panels under `components/course/panels/{dca,mbal,scal,waterflood,sim,fluid,welltest}`
+  are scope-aware with `useThemeClass`: the batch started while the reader
+  and the handbook (1C) were unmigrated, and they render these panels too.
+  With 1C merged every screen that shows them is inside a scope, so the
+  legacy branch is only reached outside any scope; wave 7 drops it. Outside
+  a scope their classes match a fixture captured from main `1fbbedf34`
+  before any change (`panels/__tests__/rc3cPanelsLegacy.test.jsx`, 71
+  scenes); `rc3cPanelsTheme.test.jsx` walks the same scenes inside a scope.
+- Every chart is on the kit in both places: 16 hand-made plots in
+  `SvgChartFrame`, the two well test Recharts plots in `ChartFrame` with
+  `GRID_STYLE`, `AXIS_TICK` and `TOOLTIP_STYLE`. Colours follow the map in
+  section 1, with these choices: an oil and water rate pair uses
+  `getStreamPalette`; a guide, a target band or an excluded point uses
+  `SVG_CHART.reference`; where a lesson already named a colour (the SCAL
+  "blue water curve" and "red oil curve", the DCA "blue points") the series
+  keeps that name.
+- Lessons that named a retired chart colour (lime, cyan, pink, orange,
+  yellow) in the DCA, MBAL and waterflood courses now name the new colour.
+  Only the colour word changed.
+
+## 7. Batch 3D: drilling I course apps (as built)
+
+Well design (`/dashboard/apps/welldesign`), torque and drag
+(`/dashboard/apps/torquedrag`), hydraulics (`/dashboard/apps/hydraulics`),
+well control (`/dashboard/apps/wellcontrol`), geomechanics
+(`/dashboard/apps/geomech`) and casing and tubing
+(`/dashboard/apps/casingtubing`) are on the roles and registered in
+`src/design/rollout/w3d.js`.
+
+- The eighteen panels (and the hydraulics `MudBoxes`) are used by their
+  learning page, the lesson reader and the handbook. The reader and handbook
+  are 1C's and already inside a scope, so the panels moved straight to roles
+  with no legacy branch. No file is shared with 3E.
+- The page recipe is 3A and 3B's: cards on `surface`, lessons and the locked
+  capstone note on `sunken`, the tier buttons primary when chosen (with
+  `aria-pressed`), capstone results and toasts on the success and danger
+  roles with their words, certificate number and award icon gold.
+- Every chart is Recharts in `ChartFrame` (the white plate with the chart
+  mark): `GRID_STYLE`, `AXIS_TICK`, `TOOLTIP_STYLE`, axis titles on
+  `SVG_CHART.note`. Lime goes to `seriesColor(0)`, sky to `(1)` (or `(0)` in
+  the surge chart, which had no lime), amber to `(2)`, red and rose to
+  `(3)`; the white overburden and north traces are ink (`SVG_CHART.label`);
+  slate guides and the pore pressure trace take `SVG_CHART.reference`. No
+  lesson names a chart colour. The rheology table's "Green is an exact
+  reproduction" keeps green on the success text role.
+- Table status colours take the status roles (PASS, WARNING, FAIL; none,
+  sinusoidal, helical), each beside its word. Empty values are `n/a`.
+- The mud window explorer's EMW axis now rounds its ticks: the fracture
+  curve runs past the fixed domain and the stretched ticks were clipped.
+- Tests: `src/pages/__tests__/DrillingApps3D.theme.test.jsx` (the four
+  standard checks per app, every tier in both themes, capstone pass, fail
+  and locked, the Learning Mode gate) and
+  `src/components/course/panels/__tests__/DrillingPanels3D.theme.test.jsx`
+  (every view of every panel in both themes, every plot on the white plate
+  with the mark, every series in a kit colour with a negative control, and a
+  source scan for legacy classes and retired chart colours in every branch).

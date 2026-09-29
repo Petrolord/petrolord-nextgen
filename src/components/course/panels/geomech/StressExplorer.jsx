@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   G, PARAMS, PROFILE, stresses, atDepth, orderingViolations, ucsFromDt,
   frictionalLimitRatio, qualityScore, LITHOLOGY_SEEDS,
@@ -13,7 +16,7 @@ import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/compo
 
 const fmt = (v, d = 4) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: Math.min(d, 2) })
-  : '-');
+  : 'n/a');
 const MPa = (v) => fmt(v / 1e6, 5);
 
 const MODES = [
@@ -50,25 +53,23 @@ const Profile = () => {
         <NumField label="Friction angle (deg)" value={phi} onChange={setPhi} />
         <NumField label="Tectonic strain multiplier" value={eps} onChange={setEps} />
       </div>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={rows} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="tvd" type="number" domain={['auto', 'auto']} tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'true vertical depth (m)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-            <YAxis domain={[900, 6000]} tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'EMW (kg/m3)', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(v) => fmt(v, 2)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={2300} stroke="#475569" strokeDasharray="4 4" />
-            <Line dataKey="sv" name="overburden" stroke="#f8fafc" strokeWidth={2} dot={false} isAnimationActive={false} />
-            <Line dataKey="shmax" name="SHmax" stroke="#fb7185" strokeWidth={2} dot={false} isAnimationActive={false} />
-            <Line dataKey="shmin" name="Shmin" stroke="#38bdf8" strokeWidth={2} dot={false} isAnimationActive={false} />
-            <Line dataKey="pp" name="pore pressure" stroke="#BFFF00" strokeWidth={2} dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3">
+        <LineChart data={rows} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="tvd" type="number" domain={['auto', 'auto']} tick={AXIS_TICK}
+            label={{ value: 'true vertical depth (m)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis domain={[900, 6000]} tick={AXIS_TICK}
+            label={{ value: 'EMW (kg/m3)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(v) => fmt(v, 2)} />
+          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <ReferenceLine y={2300} stroke={SVG_CHART.reference} strokeDasharray="4 4" />
+          <Line dataKey="sv" name="overburden" stroke={SVG_CHART.label} strokeWidth={2} dot={false} isAnimationActive={false} />
+          <Line dataKey="shmax" name="SHmax" stroke={seriesColor(3)} strokeWidth={2} dot={false} isAnimationActive={false} />
+          <Line dataKey="shmin" name="Shmin" stroke={seriesColor(1)} strokeWidth={2} dot={false} isAnimationActive={false} />
+          <Line dataKey="pp" name="pore pressure" stroke={seriesColor(0)} strokeWidth={2} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       {s && q && (
         <TileGrid>
           <Tile label="k0 used" value={fmt(s.k0Used, 8)} />
@@ -76,7 +77,7 @@ const Profile = () => {
           <Tile label="Samples clamped" value={s.clampedCount} unit={`of ${PROFILE.tvdM.length}`} />
           <Tile label="Ordering breaches" value={viol.length} unit={`of ${PROFILE.tvdM.length}`} />
           <Tile label="Quality score" value={q.score} unit="of 100" />
-          <Tile label="Deepest breach" value={viol.length ? fmt(viol[viol.length - 1].tvdM, 0) : '-'} unit="m" />
+          <Tile label="Deepest breach" value={viol.length ? fmt(viol[viol.length - 1].tvdM, 0) : 'n/a'} unit="m" />
         </TileGrid>
       )}
       <Note>
@@ -114,7 +115,7 @@ const Point = () => {
             <Tile label="Shmin EMW" value={fmt(a.shminEmw, 2)} unit="kg/m3" />
             <Tile label="Pore pressure EMW" value={fmt(a.ppEmw, 2)} unit="kg/m3" />
           </TileGrid>
-          <div className={`mt-3 text-xs ${a.svEmw >= a.shmaxEmw ? 'text-[#BFFF00]' : 'text-amber-400'}`}>
+          <div className={`mt-3 text-xs ${a.svEmw >= a.shmaxEmw ? 'text-pl-success-text' : 'text-pl-warning-text'}`}>
             {a.svEmw >= a.shmaxEmw
               ? 'The overburden is the largest stress here, which is the normal faulting order this run assumes.'
               : 'SHmax exceeds the overburden here, so this depth is not in the normal faulting order the run assumes.'}
@@ -162,24 +163,22 @@ const Ucs = () => {
           <Tile label="Ratio" value={fmt(out.h / out.m, 6)} />
         </TileGrid>
       )}
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={rows} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="dt" type="number" domain={['auto', 'auto']} tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'slowness (us/m)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-            <YAxis scale="log" domain={[1, 400]} tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'UCS (MPa)', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(v) => fmt(v, 3)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine x={198.685} stroke="#f59e0b" strokeDasharray="4 4" />
-            <ReferenceLine x={409.836} stroke="#f59e0b" strokeDasharray="4 4" />
-            <Line dataKey="horsrud" name="Horsrud (shale)" stroke="#38bdf8" strokeWidth={2} dot={false} isAnimationActive={false} />
-            <Line dataKey="mcnally" name="McNally (sandstone)" stroke="#fb7185" strokeWidth={2} dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={rows} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="dt" type="number" domain={['auto', 'auto']} tick={AXIS_TICK}
+            label={{ value: 'slowness (us/m)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis scale="log" domain={[1, 400]} tick={AXIS_TICK}
+            label={{ value: 'UCS (MPa)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(v) => fmt(v, 3)} />
+          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <ReferenceLine x={198.685} stroke={seriesColor(2)} strokeDasharray="4 4" />
+          <ReferenceLine x={409.836} stroke={seriesColor(2)} strokeDasharray="4 4" />
+          <Line dataKey="horsrud" name="Horsrud (shale)" stroke={seriesColor(1)} strokeWidth={2} dot={false} isAnimationActive={false} />
+          <Line dataKey="mcnally" name="McNally (sandstone)" stroke={seriesColor(3)} strokeWidth={2} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Note>
         A power law and an exponential, and they meet TWICE. The two marked crossings are at about
         198.7 and about 409.8 microseconds per metre, and both fall inside this profile's sonic

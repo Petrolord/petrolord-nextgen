@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   PARAMS, PROFILE, atDepth, stability, attitudeSweep, wallStresses,
   farFieldInBoreholeFrame, VERTICAL, verticalCheck, frictionalLimitRatio,
@@ -15,7 +18,7 @@ import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/compo
 
 const fmt = (v, d = 4) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: Math.min(d, 2) })
-  : '-');
+  : 'n/a');
 const MPa = (v) => fmt(v / 1e6, 5);
 
 const MODES = [
@@ -48,7 +51,7 @@ const Point = () => {
         <NumField label="Inclination (deg)" value={inc} onChange={setInc} />
         <NumField label="Azimuth (deg)" value={azi} onChange={setAzi} />
       </div>
-      <p className="text-[11px] text-gray-500 mt-2">
+      <p className="text-[11px] text-pl-muted mt-2">
         Your case: type any parameter to replace the published one, and a UCS to replace the
         profile&apos;s own. Blank boxes keep the published values.
       </p>
@@ -70,7 +73,7 @@ const Point = () => {
             <Tile label="Fracture EMW" value={fmt(s.fracInitEmw, 4)} unit="kg/m3" />
             <Tile label="Window width" value={fmt(s.widthEmw, 4)} unit="kg/m3" />
           </TileGrid>
-          <div className={`mt-3 text-xs ${s.ppEmw > s.collapseEmw ? 'text-[#BFFF00]' : 'text-amber-400'}`}>
+          <div className={`mt-3 text-xs ${s.ppEmw > s.collapseEmw ? 'text-pl-primary-text' : 'text-pl-warning-text'}`}>
             {s.ppEmw > s.collapseEmw
               ? `The pore pressure at ${fmt(s.ppEmw, 1)} kg/m3 is above the collapse pressure, so it is the pore pressure that sets the lower bound here.`
               : `The collapse pressure is above the pore pressure of ${fmt(s.ppEmw, 1)} kg/m3, so wellbore stability sets the lower bound here.`}
@@ -118,25 +121,23 @@ const Wall = () => {
         <NumField label="Azimuth (deg)" value={azi} onChange={setAzi} />
         <NumField label="Well pressure (MPa)" value={pw} onChange={setPw} />
       </div>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={rows} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="theta" type="number" domain={[0, 360]} ticks={[0, 90, 180, 270, 360]}
-              tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'angle from the high side (deg)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'effective stress (MPa)', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(v) => fmt(v, 4)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={0} stroke="#ef4444" strokeDasharray="4 4" />
-            <Line dataKey="tmax" name="largest wall stress" stroke="#fb7185" strokeWidth={2} dot={false} isAnimationActive={false} />
-            <Line dataKey="tmin" name="smallest wall stress" stroke="#38bdf8" strokeWidth={2} dot={false} isAnimationActive={false} />
-            <Line dataKey="srr" name="radial (the mud)" stroke="#BFFF00" strokeWidth={2} dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={rows} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="theta" type="number" domain={[0, 360]} ticks={[0, 90, 180, 270, 360]}
+            tick={AXIS_TICK}
+            label={{ value: 'angle from the high side (deg)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS_TICK}
+            label={{ value: 'effective stress (MPa)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(v) => fmt(v, 4)} />
+          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <ReferenceLine y={0} stroke={SVG_CHART.reference} strokeDasharray="4 4" />
+          <Line dataKey="tmax" name="largest wall stress" stroke={seriesColor(3)} strokeWidth={2} dot={false} isAnimationActive={false} />
+          <Line dataKey="tmin" name="smallest wall stress" stroke={seriesColor(1)} strokeWidth={2} dot={false} isAnimationActive={false} />
+          <Line dataKey="srr" name="radial (the mud)" stroke={seriesColor(0)} strokeWidth={2} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Note>
         The wall is not uniformly loaded. Walk once round the hole and the largest wall stress peaks
         somewhere and dips a quarter turn away, and the breakout forms wherever the peak is. Raise
@@ -167,24 +168,22 @@ const Attitude = () => {
   return (
     <>
       <SelectField label="TVD" value={tvd} onChange={setTvd} options={DEPTHS} />
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={byInc} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="inc" type="number" domain={[0, 90]} ticks={[0, 30, 60, 90]}
-              tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'inclination (deg)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'window width (kg/m3)', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(v) => fmt(v, 4)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line dataKey="a60" name="toward SHmax (060)" stroke="#fb7185" strokeWidth={2} isAnimationActive={false} />
-            <Line dataKey="a0" name="toward north (000)" stroke="#f8fafc" strokeWidth={2} isAnimationActive={false} />
-            <Line dataKey="a150" name="toward Shmin (150)" stroke="#38bdf8" strokeWidth={2} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={byInc} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="inc" type="number" domain={[0, 90]} ticks={[0, 30, 60, 90]}
+            tick={AXIS_TICK}
+            label={{ value: 'inclination (deg)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS_TICK}
+            label={{ value: 'window width (kg/m3)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(v) => fmt(v, 4)} />
+          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Line dataKey="a60" name="toward SHmax (060)" stroke={seriesColor(3)} strokeWidth={2} isAnimationActive={false} />
+          <Line dataKey="a0" name="toward north (000)" stroke={SVG_CHART.label} strokeWidth={2} isAnimationActive={false} />
+          <Line dataKey="a150" name="toward Shmin (150)" stroke={seriesColor(1)} strokeWidth={2} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Note>
         Vertical is the widest window at this depth and every deviation costs some of it, but the
         cost depends enormously on which way you go. Drilling along the maximum horizontal stress
