@@ -5,4 +5,5 @@ export default [
   '/dashboard/apps/heattransfer',
   '/dashboard/apps/metering',
   '/dashboard/apps/producedwater',
+  '/dashboard/apps/corrosion',
 ];
