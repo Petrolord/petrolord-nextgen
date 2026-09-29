@@ -93,7 +93,7 @@ const Royalty = () => {
           {GRID}
           <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="price" tick={AXIS} label={{ value: 'applied year 1 oil price, USD per bbl', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
           <YAxis tick={AXIS} domain={[7, 10.5]} label={{ value: 'implied royalty rate, percent', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
-          <Tooltip contentStyle={TOOLTIP} formatter={(v) => pc(v)} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => pc(v)} labelFormatter={(v) => ratio(v)} />
           <ReferenceLine x={50} stroke={seriesColor(3)} strokeDasharray="5 3" label={{ value: 'the 50 USD per bbl threshold', fill: seriesColor(3), fontSize: 10, position: 'insideTopLeft' }} />
           <Line type="stepAfter" dataKey="rate" name="implied rate" stroke={seriesColor(0)} dot isAnimationActive={false} />
         </LineChart>
