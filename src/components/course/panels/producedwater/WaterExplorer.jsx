@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+  LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
   ReferenceLine,
 } from 'recharts';
 import {
@@ -11,6 +11,9 @@ import {
 import {
   PanelShell, SelectField, NumField, Tile, TileGrid, FieldGrid, Note,
 } from '@/components/course/panels/petrophysics/panelKit';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 
 // The water explorer, the Associate tier. The water and the oil first, then the
 // droplets, then what gravity catches.
@@ -42,14 +45,14 @@ export const MODES = [
   ['typed', 'Your stream, typed: the water, the oil, one droplet and the two gravity cuts'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const SERIES = ['#38bdf8', '#f472b6', '#BFFF00', '#fbbf24', '#a78bfa'];
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const SERIES = [seriesColor(0), seriesColor(4), seriesColor(1), seriesColor(2), seriesColor(3)];
 
 const Tbl = ({ head, rows }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>{head.map((h, i) => <th key={h} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>)}</tr>
       </thead>
       <tbody>
@@ -64,24 +67,24 @@ const Tbl = ({ head, rows }) => (
 );
 
 const Held = ({ children }) => (
-  <div className="mt-3 rounded-md border border-amber-700/60 bg-amber-950/20 p-3">
-    <p className="text-amber-300 text-xs font-medium mb-1">HELD FOR LITERATURE</p>
-    <p className="text-xs text-slate-300 mb-0">{children}</p>
+  <div className="mt-3 rounded-md border border-pl-warning/40 bg-pl-warning-bg p-3">
+    <p className="text-pl-warning-text text-xs font-medium mb-1">HELD FOR LITERATURE</p>
+    <p className="text-xs text-pl-text mb-0">{children}</p>
   </div>
 );
 
 /** A refusal shown as a refusal. The message is the engine's, through the lab. */
 export const Refusal = ({ label, message }) => (
-  <div className="mt-2 rounded-md border border-red-800/60 bg-red-950/20 p-2">
-    <p className="text-red-300 text-xs font-medium mb-1">{label}</p>
-    <p className="text-xs text-slate-300 font-mono mb-0">{message}</p>
+  <div className="mt-2 rounded-md border border-pl-danger/30 bg-pl-danger-bg p-2">
+    <p className="text-pl-danger-text text-xs font-medium mb-1">{label}</p>
+    <p className="text-xs text-pl-text font-mono mb-0">{message}</p>
   </div>
 );
 
 /** A warning shown as a warning. It withholds nothing and it says what it judged. */
 export const Warning = ({ children }) => (
-  <div className="mt-2 rounded-md border border-amber-700/60 bg-amber-950/10 p-2">
-    <p className="text-xs text-amber-200 mb-0">{children}</p>
+  <div className="mt-2 rounded-md border border-pl-warning/40 bg-pl-warning-bg p-2">
+    <p className="text-xs text-pl-warning-text mb-0">{children}</p>
   </div>
 );
 
@@ -101,41 +104,37 @@ export const FluidsMode = ({ s }) => {
         <Tile label="Salinity correction stated to" value={String(s.tdsMaxPpm)} unit="ppm TDS" />
         <Tile label="Brine at the stream conditions" value={six(s.densities[1].rhoKgM3)} unit="kg/m3" />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         A Stokes rise velocity goes as one over the viscosity, so the same basin on the same water catches a very
         different droplet at two temperatures. The salinity correction is linear and it is stated only to
         {' '}{s.tdsMaxPpm} ppm, because past saturation a linear correction has nothing behind it.
       </p>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="tC" tick={AXIS} label={{ value: 'degC', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -3 }} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(val) => twelve(val)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line dataKey="fresh" name="fresh water, Pa.s" stroke={SERIES[0]} dot={false} isAnimationActive={false} />
-            <Line dataKey="brine" name="brine, Pa.s" stroke={SERIES[2]} dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="tC" tick={AXIS} label={{ value: 'degC', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(val) => twelve(val)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line dataKey="fresh" name="fresh water, Pa.s" stroke={SERIES[0]} dot={false} isAnimationActive={false} />
+          <Line dataKey="brine" name="brine, Pa.s" stroke={SERIES[2]} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Tbl
         head={['ppm TDS', 'salinity factor', 'brine Pa.s']}
         rows={s.bySalinity.map((r) => [String(r.tdsPpm), six(r.salinityFactor), twelve(r.muPaS)])}
       />
-      <div className="h-52 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={crude} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="api" tick={AXIS} label={{ value: 'degrees API', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -3 }} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line dataKey="rho" name="crude density, kg/m3" stroke={SERIES[1]} dot={false} isAnimationActive={false} />
-            <Line dataKey="gap" name="difference from the brine, kg/m3" stroke={SERIES[3]} dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={208} className="mt-3">
+        <LineChart data={crude} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="api" tick={AXIS} label={{ value: 'degrees API', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line dataKey="rho" name="crude density, kg/m3" stroke={SERIES[1]} dot={false} isAnimationActive={false} />
+          <Line dataKey="gap" name="difference from the brine, kg/m3" stroke={SERIES[3]} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Note>
         The difference between those two curves is the entire driving force for every gravity and centrifugal device in
         this module. Across this sweep it changes by a factor of about three, which lands on every cut size squared.
@@ -157,7 +156,7 @@ export const DropletsMode = ({ s }) => {
         <Tile label="Volume median of the bin set" value={six(s.medianMicron)} unit="micron" />
         <Tile label="Volume in the truncated tails" value={twelve(s.truncatedTailFraction)} />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The volume median of the bin set reproduces the typed d50 of {UZERE_INLET.d50Micron} micron, which is the
         identity a median has to satisfy, because the volume median of a log-normal is its own d50. The coarsest bin
         reaches {six(s.coarsestMicron)} micron and the finest starts at {twelve(s.finestMicron)}.
@@ -175,19 +174,17 @@ export const DropletsMode = ({ s }) => {
         head={['sigma spans', 'truncated tail', 'coarsest bin micron']}
         rows={s.bySpan.map((r) => [String(r.spanSigma), twelve(r.truncatedTailFraction), six(r.coarsestMicron)])}
       />
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={sigma} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="sigma" tick={AXIS} label={{ value: 'sigma', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -3 }} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Bar dataKey="removal" name={`removal at a ${s.probeCutMicron} micron cut, percent`} fill={SERIES[0]} isAnimationActive={false} />
-            <Bar dataKey="median" name="outlet median, micron" fill={SERIES[2]} isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <BarChart data={sigma} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="sigma" tick={AXIS} label={{ value: 'sigma', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
+          <Legend {...LEGEND_PROPS} />
+          <Bar dataKey="removal" name={`removal at a ${s.probeCutMicron} micron cut, percent`} fill={SERIES[0]} isAnimationActive={false} />
+          <Bar dataKey="median" name="outlet median, micron" fill={SERIES[2]} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
       <Note>
         Sigma is the input a reader is least likely to have measured and it moves the answer more than almost anything
         else on the page. The module warns outside {s.sigmaCustomaryMin} to {s.sigmaCustomaryMax} and refuses above
@@ -212,19 +209,17 @@ export const RiseMode = ({ s }) => {
         head={['droplet micron', 'Stokes m/s', 'Reynolds', 'full drag balance m/s', 'Stokes over the balance', 'in band']}
         rows={s.rows.map((r) => [String(r.dMicron), twelve(r.stokesMS), six(r.reynolds), twelve(r.balanceMS), six(r.ratio), r.inBand ? 'yes' : 'no'])}
       />
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="d" tick={AXIS} label={{ value: 'droplet micron', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -3 }} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={1} stroke="#64748b" strokeDasharray="4 4" />
-            <Line dataKey="ratio" name="Stokes over the full drag balance" stroke={SERIES[2]} dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="d" tick={AXIS} label={{ value: 'droplet micron', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine y={1} stroke={SVG_CHART.reference} strokeDasharray="4 4" />
+          <Line dataKey="ratio" name="Stokes over the full drag balance" stroke={SERIES[2]} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Note>
         The departure grows with the Reynolds number on every row of that table, and that is the whole content of the
         band. An overstated rise velocity means an understated cut size, which is the optimistic direction, which is why
@@ -248,7 +243,7 @@ export const GravityMode = ({ s }) => {
         <Tile label="Horizontal velocity" value={twelve(s.basin.horizontalVelocityMS)} unit="m/s" />
         <Tile label="Against the fixed limit" value={six(s.basin.horizontalVelocityLimitMS)} unit="m/s" />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The basin is {UZERE_BASIN.lengthM} by {UZERE_BASIN.widthM} by {UZERE_BASIN.depthM} m on {UZERE_BWPD} bwpd at
         {' '}{UZERE_WATER.tC} C and {UZERE_WATER.tdsPpm} ppm TDS with {UZERE_OIL.apiGravity} API oil. Write out the
         settling time against the residence time and the depth cancels: what is left is the flow over the plan area,
@@ -263,19 +258,17 @@ export const GravityMode = ({ s }) => {
         leaves the cut alone and it moves the velocity check, and a reader who takes the cut size as the whole answer
         has missed the constraint that actually sizes the vessel.
       </Note>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={areas} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="area" tick={AXIS} label={{ value: 'plan area m2', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -3 }} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line dataKey="cut" name="basin cut, micron" stroke={SERIES[0]} dot isAnimationActive={false} />
-            <Line dataKey="perRoot" name="cut over the root of the loading" stroke={SERIES[3]} dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={areas} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="area" tick={AXIS} label={{ value: 'plan area m2', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line dataKey="cut" name="basin cut, micron" stroke={SERIES[0]} dot isAnimationActive={false} />
+          <Line dataKey="perRoot" name="cut over the root of the loading" stroke={SERIES[3]} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Note>
         The second line is flat, which says the cut size goes as the square root of the surface loading exactly. Halving
         the cut size costs four times the basin.
@@ -287,18 +280,16 @@ export const GravityMode = ({ s }) => {
       {s.shortCircuitRefusals.map((r) => (
         <Refusal key={r.label} label={`The engine refuses ${r.label}`} message={r.error} />
       ))}
-      <div className="h-52 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={plates} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="plates" tick={AXIS} label={{ value: 'plates', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -3 }} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line dataKey="cut" name="plate pack cut, micron" stroke={SERIES[2]} dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={208} className="mt-3">
+        <LineChart data={plates} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="plates" tick={AXIS} label={{ value: 'plates', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line dataKey="cut" name="plate pack cut, micron" stroke={SERIES[2]} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Held>
         The plate pack efficiency factor, {s.plateEfficiencyFactor}, is the fraction of the projected plate area that
         actually settles. It is worth a large part of the answer and it has no source in this repository. The second
@@ -317,7 +308,7 @@ export const TypedInputs = ({ groups, values, setValue }) => (
   <>
     {groups.map(([heading, keys]) => (
       <div key={heading} className="mt-3">
-        <p className="text-xs text-slate-400 mb-1">{heading}</p>
+        <p className="text-xs text-pl-muted mb-1">{heading}</p>
         <FieldGrid>
           {keys.map((k) => (
             <NumField key={k} label={TYPED_FIELD_LABELS[k]} value={values[k]} onChange={(x) => setValue(k, x)} />
@@ -349,7 +340,7 @@ export const TypedWaterMode = () => {
   const r = useMemo(() => typedWaterStream(values), [values]);
   return (
     <>
-      <p className="text-xs text-slate-300 mb-0">
+      <p className="text-xs text-pl-text mb-0">
         Type a stream and its two gravity devices. The view opens on the teaching stream UZERE, and every input can
         be retyped. The rate is taken to m3/s with the exact barrel, the crude is read at the water temperature, and
         the three fluid fits are the module&apos;s own.
