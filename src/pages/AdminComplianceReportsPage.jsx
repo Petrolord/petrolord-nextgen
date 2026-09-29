@@ -76,7 +76,7 @@ const AdminComplianceReportsPage = () => {
 
     const getDateRange = useCallback(() => {
         const to = new Date(), from = new Date();
-        from.setDate(to.getDate() - { '7d': 7, '90d': 90 }[dateRangeKey] || 30);
+        from.setDate(to.getDate() - ({ '7d': 7, '90d': 90 }[dateRangeKey] || 30));
         return { from, to };
     }, [dateRangeKey]);
 
