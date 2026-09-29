@@ -147,7 +147,7 @@ export const LedgerMode = ({ led, fieldKey, onField }) => {
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => mm(v)} />
           <Legend {...LEGEND_PROPS} />
           <ReferenceLine y={0} stroke={SVG_CHART.reference} />
-          <Bar dataKey="ncf" name="net cash flow" isAnimationActive={false}>
+          <Bar dataKey="ncf" name="net cash flow" fill={seriesColor(1)} isAnimationActive={false}>
             {chart.map((c) => <Cell key={c.year} fill={c.ncf < 0 ? seriesColor(3) : seriesColor(1)} />)}
           </Bar>
           <Line type="monotone" dataKey="cumulative" name="cumulative net cash flow" stroke={seriesColor(0)} dot={false} isAnimationActive={false} />

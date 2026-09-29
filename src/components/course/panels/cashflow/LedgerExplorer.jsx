@@ -105,7 +105,7 @@ const Ledger = () => {
           <Tooltip contentStyle={TOOLTIP} formatter={(v) => usd(v)} />
           <Legend {...LEGEND_PROPS} />
           <ReferenceLine y={0} stroke={SVG_CHART.reference} />
-          <Bar dataKey="net" name="net cash flow, money of the day" isAnimationActive={false}>
+          <Bar dataKey="net" name="net cash flow, money of the day" fill={seriesColor(1)} isAnimationActive={false}>
             {chart.map((c) => <Cell key={c.year} fill={c.year === Number(year) ? seriesColor(0) : (c.net < 0 ? seriesColor(3) : seriesColor(1))} />)}
           </Bar>
           <Line type="monotone" dataKey="cumulative" name="cumulative cash flow" stroke={seriesColor(4)} dot={false} isAnimationActive={false} />
