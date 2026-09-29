@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   WELLS, pipeLimits, bucklingLadder, utilization, runCase, wearRun, wearOracleCheck,
   WEAR_CASE, slidingDistance, TEACHING_MUD_KGM3, mudOver,
@@ -13,7 +16,7 @@ import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/compo
 
 const fmt = (v, d = 4) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: Math.min(d, 2) })
-  : '-');
+  : 'n/a');
 const kN = (v) => fmt(v / 1000, 3);
 const N = (v) => fmt(v, 2);
 
@@ -35,23 +38,21 @@ const Limits = ({ over }) => {
   return (
     <>
       <NumField label="Inclination (deg)" value={inc} onChange={setInc} />
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={ladder.map((r) => ({ ...r, sin: r.sinusoidalN / 1000, hel: r.helicalN / 1000 }))}
-            margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="incDeg" type="number" tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'inclination (deg)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'compression (kN)', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(v) => fmt(v, 2)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line dataKey="sin" name="sinusoidal" stroke="#f59e0b" strokeWidth={2} isAnimationActive={false} />
-            <Line dataKey="hel" name="helical" stroke="#ef4444" strokeWidth={2} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={ladder.map((r) => ({ ...r, sin: r.sinusoidalN / 1000, hel: r.helicalN / 1000 }))}
+          margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="incDeg" type="number" tick={AXIS_TICK}
+            label={{ value: 'inclination (deg)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS_TICK}
+            label={{ value: 'compression (kN)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(v) => fmt(v, 2)} />
+          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Line dataKey="sin" name="sinusoidal" stroke={seriesColor(2)} strokeWidth={2} isAnimationActive={false} />
+          <Line dataKey="hel" name="helical" stroke={seriesColor(3)} strokeWidth={2} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       {at && (
         <TileGrid>
           <Tile label="Sinusoidal limit" value={N(at.sinusoidalN)} unit="N" />
@@ -83,23 +84,21 @@ const Utilization = ({ over }) => {
   return (
     <>
       <SelectField label="Well" value={well} onChange={setWell} options={WELL_OPTIONS} />
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={rows} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="md" type="number" tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'measured depth (m)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} domain={[0, 100]}
-              label={{ value: 'percent of capacity', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(v) => fmt(v, 3)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={80} stroke="#f59e0b" strokeDasharray="4 4" />
-            <Line dataKey="tension" name="tension" stroke="#BFFF00" dot={false} strokeWidth={2} isAnimationActive={false} />
-            <Line dataKey="torsion" name="torsion" stroke="#38bdf8" dot={false} strokeWidth={2} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={rows} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="md" type="number" tick={AXIS_TICK}
+            label={{ value: 'measured depth (m)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS_TICK} domain={[0, 100]}
+            label={{ value: 'percent of capacity', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(v) => fmt(v, 3)} />
+          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <ReferenceLine y={80} stroke={seriesColor(2)} strokeDasharray="4 4" />
+          <Line dataKey="tension" name="tension" stroke={seriesColor(0)} dot={false} strokeWidth={2} isAnimationActive={false} />
+          <Line dataKey="torsion" name="torsion" stroke={seriesColor(1)} dot={false} strokeWidth={2} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <TileGrid>
         <Tile label="Worst tension utilization" value={fmt(u.maxTensionUtilization * 100, 4)} unit="%" />
         <Tile label="Worst torsion utilization" value={fmt(u.maxTorsionUtilization * 100, 4)} unit="%" />
@@ -152,23 +151,21 @@ const Wear = ({ over }) => {
       {!schedule && <Note>Each schedule entry needs both an rpm and a number of hours.</Note>}
       {run && (
         <>
-          <div className="h-52 mt-3">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={run.rows.map((r) => ({ md: (r.fromMd + r.toMd) / 2, loss: r.wallLossPct, side: r.sideForceN / 1000 }))}
-                margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-                <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-                <XAxis dataKey="md" type="number" tick={{ fill: '#94a3b8', fontSize: 11 }}
-                  label={{ value: 'casing MD (m)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-                <YAxis yAxisId="l" tick={{ fill: '#94a3b8', fontSize: 11 }} />
-                <YAxis yAxisId="r" orientation="right" tick={{ fill: '#94a3b8', fontSize: 11 }} />
-                <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-                  formatter={(v) => fmt(v, 4)} />
-                <Legend wrapperStyle={{ fontSize: 11 }} />
-                <Line yAxisId="l" dataKey="loss" name="wall loss (%)" stroke="#ef4444" dot={false} strokeWidth={2} isAnimationActive={false} />
-                <Line yAxisId="r" dataKey="side" name="side force (kN)" stroke="#38bdf8" dot={false} strokeWidth={2} isAnimationActive={false} />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
+          <ChartFrame height={208} className="mt-3">
+            <LineChart data={run.rows.map((r) => ({ md: (r.fromMd + r.toMd) / 2, loss: r.wallLossPct, side: r.sideForceN / 1000 }))}
+              margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+              <CartesianGrid {...GRID_STYLE} />
+              <XAxis dataKey="md" type="number" tick={AXIS_TICK}
+                label={{ value: 'casing MD (m)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+              <YAxis yAxisId="l" tick={AXIS_TICK} />
+              <YAxis yAxisId="r" orientation="right" tick={AXIS_TICK} />
+              <Tooltip contentStyle={TOOLTIP_STYLE}
+                formatter={(v) => fmt(v, 4)} />
+              <Legend wrapperStyle={{ fontSize: 11 }} />
+              <Line yAxisId="l" dataKey="loss" name="wall loss (%)" stroke={seriesColor(3)} dot={false} strokeWidth={2} isAnimationActive={false} />
+              <Line yAxisId="r" dataKey="side" name="side force (kN)" stroke={seriesColor(1)} dot={false} strokeWidth={2} isAnimationActive={false} />
+            </LineChart>
+          </ChartFrame>
           <TileGrid>
             <Tile label="Worst wear depth" value={fmt(run.maxWearDepthM * 1000, 6)} unit="mm" />
             <Tile label="Worst wall loss" value={fmt(run.worstWallLossPct, 6)} unit="%" />

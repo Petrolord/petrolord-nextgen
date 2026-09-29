@@ -420,3 +420,40 @@ and schedule dialog) are on the roles and registered in
 - Lessons that named a retired chart colour (lime, cyan, pink, orange,
   yellow) in the DCA, MBAL and waterflood courses now name the new colour.
   Only the colour word changed.
+
+## 7. Batch 3D: drilling I course apps (as built)
+
+Well design (`/dashboard/apps/welldesign`), torque and drag
+(`/dashboard/apps/torquedrag`), hydraulics (`/dashboard/apps/hydraulics`),
+well control (`/dashboard/apps/wellcontrol`), geomechanics
+(`/dashboard/apps/geomech`) and casing and tubing
+(`/dashboard/apps/casingtubing`) are on the roles and registered in
+`src/design/rollout/w3d.js`.
+
+- The eighteen panels (and the hydraulics `MudBoxes`) are used by their
+  learning page, the lesson reader and the handbook. The reader and handbook
+  are 1C's and already inside a scope, so the panels moved straight to roles
+  with no legacy branch. No file is shared with 3E.
+- The page recipe is 3A and 3B's: cards on `surface`, lessons and the locked
+  capstone note on `sunken`, the tier buttons primary when chosen (with
+  `aria-pressed`), capstone results and toasts on the success and danger
+  roles with their words, certificate number and award icon gold.
+- Every chart is Recharts in `ChartFrame` (the white plate with the chart
+  mark): `GRID_STYLE`, `AXIS_TICK`, `TOOLTIP_STYLE`, axis titles on
+  `SVG_CHART.note`. Lime goes to `seriesColor(0)`, sky to `(1)` (or `(0)` in
+  the surge chart, which had no lime), amber to `(2)`, red and rose to
+  `(3)`; the white overburden and north traces are ink (`SVG_CHART.label`);
+  slate guides and the pore pressure trace take `SVG_CHART.reference`. No
+  lesson names a chart colour. The rheology table's "Green is an exact
+  reproduction" keeps green on the success text role.
+- Table status colours take the status roles (PASS, WARNING, FAIL; none,
+  sinusoidal, helical), each beside its word. Empty values are `n/a`.
+- The mud window explorer's EMW axis now rounds its ticks: the fracture
+  curve runs past the fixed domain and the stretched ticks were clipped.
+- Tests: `src/pages/__tests__/DrillingApps3D.theme.test.jsx` (the four
+  standard checks per app, every tier in both themes, capstone pass, fail
+  and locked, the Learning Mode gate) and
+  `src/components/course/panels/__tests__/DrillingPanels3D.theme.test.jsx`
+  (every view of every panel in both themes, every plot on the white plate
+  with the mark, every series in a kit colour with a negative control, and a
+  source scan for legacy classes and retired chart colours in every branch).
