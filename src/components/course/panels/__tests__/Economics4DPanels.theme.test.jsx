@@ -22,7 +22,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, it, expect, vi, beforeAll, beforeEach, afterEach } from 'vitest';
-import { render, cleanup, fireEvent } from '@testing-library/react';
+import { render, cleanup, fireEvent, act } from '@testing-library/react';
 import { ThemedApp, themeStorageKey } from '@/design/ThemeProvider';
 import { installDomShims } from '@/design/testing/domShims';
 import { legacyChromeClasses, hasLegacyChrome } from '@/design/testing/themeAssertions';
@@ -83,6 +83,19 @@ const ECON_PANELS = {
 };
 // The two panels that teach from tables and words alone draw no plot.
 const NO_PLOT = new Set(['ec-judgement-explorer', 'ec-governance-explorer']);
+// Two panels await the engine (the fiscal comparison and the Monte Carlo
+// readers): each view is checked once the page stops changing.
+const ASYNC = new Set(['ec-comparison-explorer', 'ec-risk-explorer']);
+const settle = async () => {
+  let last = -1;
+  for (let i = 0; i < 240; i += 1) {
+    // eslint-disable-next-line no-await-in-loop
+    await act(() => new Promise((r) => { setTimeout(r, 250); }));
+    const now = document.body.innerHTML.length;
+    if (now === last) return;
+    last = now;
+  }
+};
 
 // panel directory: number of .jsx source files (panels plus helpers)
 const DIRS = { cashflow: 3, fiscal: 4, uncertainty: 3, decision: 4, portfolio: 3, fdp: 3 };
@@ -137,7 +150,7 @@ describe('the economics teaching panels inside a scope', () => {
 
   for (const theme of ['light', 'dark']) {
     for (const [id, Panel] of Object.entries(ECON_PANELS)) {
-      it(`${id} (${theme}): every view on roles, every plot on the white plate in kit colours`, () => {
+      it(`${id} (${theme}): every view on roles, every plot on the white plate in kit colours`, async () => {
         window.localStorage.setItem(themeStorageKey('u-4d'), theme);
         const { container } = render(<ThemedApp userId="u-4d"><Panel /></ThemedApp>);
         expect(document.querySelector('[data-pl-root]').getAttribute('data-pl-theme')).toBe(theme);
@@ -163,11 +176,15 @@ describe('the economics teaching panels inside a scope', () => {
         };
         for (const view of views) {
           if (view !== null) fireEvent.change(viewSelects(container)[0], { target: { value: view } });
+          // eslint-disable-next-line no-await-in-loop
+          if (ASYNC.has(id)) await settle();
           check(view);
           const sub = viewSelects(container)[1];
           if (sub) {
             for (const v of [...sub.options].map((o) => o.value)) {
               fireEvent.change(viewSelects(container)[1], { target: { value: v } });
+              // eslint-disable-next-line no-await-in-loop
+              if (ASYNC.has(id)) await settle();
               check(`${view}/${v}`);
             }
           }
