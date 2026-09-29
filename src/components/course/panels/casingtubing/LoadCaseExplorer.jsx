@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   LOAD_CASE_KINDS, PUBLISHED, runCase, runAllCases, shoeOnlyComparison, verdictThresholds,
 } from './casingTubingLab';
@@ -12,7 +15,7 @@ import { PanelShell, SelectField, Tile, TileGrid, Note } from '@/components/cour
 
 const fmt = (v, d = 4) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: Math.min(d, 2) })
-  : '-');
+  : 'n/a');
 const sf = (v) => (Number.isFinite(v) ? fmt(v, 6) : 'none');
 
 const CASE_OPTIONS = LOAD_CASE_KINDS.map((k) => ({ value: k, label: k }));
@@ -21,7 +24,7 @@ const MODES = [
   { value: 'matrix', label: 'All seven' },
   { value: 'governing', label: 'Governing depth' },
 ];
-const STATUS_COLOUR = { PASS: 'text-[#BFFF00]', WARNING: 'text-amber-400', FAIL: 'text-rose-400' };
+const STATUS_COLOUR = { PASS: 'text-pl-success-text', WARNING: 'text-pl-warning-text', FAIL: 'text-pl-danger-text' };
 
 const Profile = () => {
   const [kind, setKind] = useState('gasKickBurst');
@@ -36,28 +39,26 @@ const Profile = () => {
   return (
     <>
       <SelectField label="Load case" value={kind} onChange={setKind} options={CASE_OPTIONS} />
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={rows} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="tvd" type="number" domain={[0, 'auto']} tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'true vertical depth (m)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'MPa, or kN for axial', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(v) => fmt(v, 3)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine x={PUBLISHED.breakTvdM} stroke="#f59e0b" strokeDasharray="4 4" />
-            <Line dataKey="pi" name="inside" stroke="#fb7185" strokeWidth={2} dot={false} isAnimationActive={false} />
-            <Line dataKey="po" name="outside" stroke="#38bdf8" strokeWidth={2} dot={false} isAnimationActive={false} />
-            <Line dataKey="dp" name="inside less outside" stroke="#BFFF00" strokeWidth={2} dot={false} isAnimationActive={false} />
-            <Line dataKey="fa" name="axial (kN)" stroke="#94a3b8" strokeWidth={1} dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3">
+        <LineChart data={rows} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="tvd" type="number" domain={[0, 'auto']} tick={AXIS_TICK}
+            label={{ value: 'true vertical depth (m)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS_TICK}
+            label={{ value: 'MPa, or kN for axial', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(v) => fmt(v, 3)} />
+          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <ReferenceLine x={PUBLISHED.breakTvdM} stroke={seriesColor(2)} strokeDasharray="4 4" />
+          <Line dataKey="pi" name="inside" stroke={seriesColor(3)} strokeWidth={2} dot={false} isAnimationActive={false} />
+          <Line dataKey="po" name="outside" stroke={seriesColor(1)} strokeWidth={2} dot={false} isAnimationActive={false} />
+          <Line dataKey="dp" name="inside less outside" stroke={seriesColor(0)} strokeWidth={2} dot={false} isAnimationActive={false} />
+          <Line dataKey="fa" name="axial (kN)" stroke={SVG_CHART.reference} strokeWidth={1} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">section</th><th className="text-right pr-3">burst SF</th>
               <th className="text-right pr-3">at TVD</th><th className="text-right pr-3">collapse SF</th>
@@ -71,10 +72,10 @@ const Profile = () => {
               <tr key={`sec${i + 1}`}>
                 <td className="pr-3">{i + 1}</td>
                 <td className="text-right pr-3">{sf(s.burstSF)}</td>
-                <td className="text-right pr-3">{s.burstAtTvdM == null ? '-' : fmt(s.burstAtTvdM, 3)}</td>
+                <td className="text-right pr-3">{s.burstAtTvdM == null ? 'n/a' : fmt(s.burstAtTvdM, 3)}</td>
                 <td className="text-right pr-3">{sf(s.collapseSF)}</td>
-                <td className="text-right pr-3">{s.collapseAtTvdM == null ? '-' : fmt(s.collapseAtTvdM, 3)}</td>
-                <td className="text-right pr-3">{s.collapseRegime || '-'}</td>
+                <td className="text-right pr-3">{s.collapseAtTvdM == null ? 'n/a' : fmt(s.collapseAtTvdM, 3)}</td>
+                <td className="text-right pr-3">{s.collapseRegime || 'n/a'}</td>
                 <td className="text-right pr-3">{sf(s.tensionSF)}</td>
                 <td className="text-right pr-3">{sf(s.triaxSF)}</td>
                 <td className={`text-right ${STATUS_COLOUR[s.status]}`}>{s.status}</td>
@@ -99,8 +100,8 @@ const Matrix = () => {
   return (
     <>
       <div className="overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">case</th><th className="text-left pr-3">sec</th>
               <th className="text-right pr-3">burst</th><th className="text-right pr-3">collapse</th>
@@ -154,7 +155,7 @@ const Governing = () => {
         <Tile label="Pressure test, section 2 scanned" value={fmt(test[1].scannedSf, 6)} />
         <Tile label="Its governing depth" value={fmt(test[1].governingTvdM, 3)} unit="m TVD" />
       </TileGrid>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         On the gas kick the differential SHRINKS with depth, because the gas column inside loses
         far less pressure per metre than the water column outside gains. So the worst point is the
         wellhead. On the pressure test the differential GROWS with depth, because the mud inside

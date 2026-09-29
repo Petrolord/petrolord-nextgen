@@ -1,8 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, ComposedChart, BarChart, Line, Bar, Cell,
+  ComposedChart, BarChart, Line, Bar, Cell,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine, ReferenceArea,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import {
   ESP_THRESHOLDS, DERATE_SWEEP_PCT, SEAM_FINDING, DIAGNOSIS_FIX,
   allCases, stackSizing, twoPowerCostRows, loadFractionSeamRows,
@@ -22,9 +25,9 @@ import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/comp
 
 const fmt = (v, d = 4) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: 0 })
-  : '-');
+  : 'n/a');
 
-const pct = (v, d = 2) => (Number.isFinite(v) ? `${fmt(v * 100, d)} %` : '-');
+const pct = (v, d = 2) => (Number.isFinite(v) ? `${fmt(v * 100, d)} %` : 'n/a');
 
 const yn = (b) => (b ? 'yes' : 'no');
 
@@ -35,9 +38,9 @@ const MODES = [
   ['diagnosis', 'Three bands, printed two ways'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const GRID = <CartesianGrid stroke="#334155" strokeDasharray="3 3" />;
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const GRID = <CartesianGrid {...GRID_STYLE} />;
 
 // The four cases the course walks, built once, so a failure to build them is a
 // Note rather than a module that will not import.
@@ -72,26 +75,24 @@ const TwoPowers = () => {
           <Tile label="Bigger power is always the one at the head MADE" value={yn(rows.every((r) => r.twoPowerGapHp > 0))} />
         </TileGrid>
       </div>
-      <div className="h-72 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={rows} margin={{ top: 10, right: 20, bottom: 46, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="id" tick={AXIS} interval={0} angle={-12} textAnchor="end" height={56} />
-            <YAxis yAxisId="pct" tick={AXIS}
-              label={{ value: 'gap between the two powers, percent', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Bar yAxisId="pct" dataKey="twoPowerGapPct" name="gap, percent of the smaller power" isAnimationActive={false}>
-              {rows.map((r) => (
-                <Cell key={r.id} fill={r.stages > 100 ? '#38bdf8' : '#f97316'} />
-              ))}
-            </Bar>
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={288} className="mt-3">
+        <BarChart data={rows} margin={{ top: 20, right: 20, bottom: 46, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="id" tick={AXIS} interval={0} angle={-12} textAnchor="end" height={56} />
+          <YAxis yAxisId="pct" tick={AXIS}
+            label={{ value: 'gap between the two powers, percent', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+          <Legend {...LEGEND_PROPS} />
+          <Bar yAxisId="pct" dataKey="twoPowerGapPct" name="gap, percent of the smaller power" isAnimationActive={false}>
+            {rows.map((r) => (
+              <Cell key={r.id} fill={r.stages > 100 ? seriesColor(0) : seriesColor(2)} />
+            ))}
+          </Bar>
+        </BarChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">case</th>
               <th className="text-left pr-3">stages</th>
@@ -113,8 +114,8 @@ const TwoPowers = () => {
                 <td className="pr-3">{fmt(r.stages, 0)}</td>
                 <td className="pr-3">{fmt(r.tdhFt, 4)}</td>
                 <td className="pr-3">{fmt(r.headMadeFt, 4)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.shaftHp, 6)}</td>
-                <td className="pr-3 text-[#f97316]">{fmt(r.stackBhpTotal, 6)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.shaftHp, 6)}</td>
+                <td className="pr-3 text-pl-warning-text">{fmt(r.stackBhpTotal, 6)}</td>
                 <td className="pr-3">{fmt(r.twoPowerGapHp, 6)}</td>
                 <td className="pr-3">{fmt(r.twoPowerGapPct, 6)}</td>
                 <td className="pr-3">{fmt(r.powerRatio, 12)}</td>
@@ -126,8 +127,8 @@ const TwoPowers = () => {
         </table>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">case</th>
               <th className="text-left pr-3">the electrical chain is built on, hp</th>
@@ -140,8 +141,8 @@ const TwoPowers = () => {
             {cost.map((r) => (
               <tr key={r.id}>
                 <td className="pr-3">{r.tag}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.electricalChainBuiltOnHp, 6)}</td>
-                <td className="pr-3 text-[#f97316]">{fmt(r.publishedMethodTakesHp, 6)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.electricalChainBuiltOnHp, 6)}</td>
+                <td className="pr-3 text-pl-warning-text">{fmt(r.publishedMethodTakesHp, 6)}</td>
                 <td className="pr-3">{fmt(r.understatementHp, 6)}</td>
                 <td>{fmt(r.understatementPct, 6)}</td>
               </tr>
@@ -149,7 +150,7 @@ const TwoPowers = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         A SIZING RETURNS TWO BRAKE POWERS AND THEY ARE NOT THE SAME NUMBER. One is the power at the
         head the duty REQUIRES. The other is the power at the head the integer stack actually MAKES,
         which is larger, because rounding the stage count up bought head that nobody asked for. Both
@@ -157,7 +158,7 @@ const TwoPowers = () => {
         current, voltage drop, cable pick and surface kVA, is built on the SMALLER of them while the
         published motor sizing method takes the larger.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         THE IDENTITY. Brake power is linear in head at a fixed rate and a fixed efficiency, so the
         ratio of the two powers IS the ratio of the two heads. The last column of the first table is
         that difference, and the worst of it across all four cases is
@@ -166,7 +167,7 @@ const TwoPowers = () => {
         names, so a design that quotes both as separate safety factors has counted the same rounding
         twice.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         And the size of it is entirely about how many stages there are. The four cases spread from
         {' '}{fmt(tight.twoPowerGapPct, 6)} percent on {fmt(tight.stages, 0)} stages to
         {' '}{fmt(wide.twoPowerGapPct, 6)} percent on {fmt(wide.stages, 0)}. Same rounding rule, same
@@ -204,17 +205,17 @@ const Derate = () => {
         <SelectField label="Case" value={caseId || row.id} onChange={setCaseId}
           options={rows.map((r) => [r.id, r.tag])} />
       </FieldGrid>
-      <div className="mt-3 rounded-md border border-amber-700 bg-amber-900/20 p-4">
-        <p className="text-xs text-gray-400 mb-1">
+      <div className="mt-3 rounded-md border border-pl-warning/40 bg-pl-warning-bg p-4">
+        <p className="text-xs text-pl-muted mb-1">
           Two fields called loadFraction, in one domain, on {row.tag}
         </p>
-        <p className="text-2xl font-bold text-white mb-1">
+        <p className="text-2xl font-bold text-pl-text mb-1">
           {fmt(row.electricalLoadFraction, 8)}
-          <span className="text-[#BFFF00]"> against </span>
+          <span className="text-pl-primary-text"> against </span>
           {fmt(row.derates[row.derates.length - 1].selectionLoadFraction, 8)}
-          <span className="text-gray-400 text-sm"> at {fmt(row.derates[row.derates.length - 1].deratePct, 0)} percent derate</span>
+          <span className="text-pl-muted text-sm"> at {fmt(row.derates[row.derates.length - 1].deratePct, 0)} percent derate</span>
         </p>
-        <p className="text-sm text-amber-200 mb-0">
+        <p className="text-sm text-pl-warning-text mb-0">
           BOTH ARE RIGHT FOR WHAT THEY MEAN. espDesign.sizePump reports UTILISATION against the
           motor's usable rating, shaft power over nameplate power times the derate, and that is the
           published selection rule. espMotorCable.motorCurrent reports the ELECTRICAL load fraction,
@@ -236,30 +237,28 @@ const Derate = () => {
           <Tile label="Electrical load crosses one" value={yn(electricalCrosses)} />
         </TileGrid>
       </div>
-      <div className="h-72 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="deratePct" type="number" domain={['dataMin', 'dataMax']} tick={AXIS}
-              label={{ value: 'thrust derate, percent', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS}
-              label={{ value: 'load fraction', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 8)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={ESP_THRESHOLDS.motorOverloadedSelectionLoad} stroke="#f97316" strokeWidth={2}
-              label={{ value: 'the selection rule calls this overloaded', fill: '#f97316', fontSize: 10, position: 'insideTopLeft' }} />
-            <ReferenceLine y={ESP_THRESHOLDS.weakCurrentEstimateBelowLoad} stroke="#f472b6" strokeDasharray="5 3"
-              label={{ value: 'below here the current estimate is flagged weak', fill: '#f472b6', fontSize: 10, position: 'insideBottomLeft' }} />
-            <Line type="monotone" dataKey="electricalLoadFraction" name="ELECTRICAL load fraction, motorCurrent"
-              stroke="#BFFF00" strokeWidth={2} dot={false} isAnimationActive={false} />
-            <Line type="monotone" dataKey="selectionLoadFraction" name="SELECTION load fraction, sizePump"
-              stroke="#38bdf8" strokeWidth={2} dot isAnimationActive={false} />
-          </ComposedChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={288} className="mt-3">
+        <ComposedChart data={chart} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="deratePct" type="number" domain={['dataMin', 'dataMax']} tick={AXIS}
+            label={{ value: 'thrust derate, percent', position: 'insideBottom', offset: 0, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS}
+            label={{ value: 'load fraction', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 8)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine y={ESP_THRESHOLDS.motorOverloadedSelectionLoad} stroke={seriesColor(2)} strokeWidth={2}
+            label={{ value: 'the selection rule calls this overloaded', fill: seriesColor(2), fontSize: 10, position: 'insideTopLeft' }} />
+          <ReferenceLine y={ESP_THRESHOLDS.weakCurrentEstimateBelowLoad} stroke={seriesColor(4)} strokeDasharray="5 3"
+            label={{ value: 'below here the current estimate is flagged weak', fill: seriesColor(4), fontSize: 10, position: 'insideBottomLeft' }} />
+          <Line type="monotone" dataKey="electricalLoadFraction" name="ELECTRICAL load fraction, motorCurrent"
+            stroke={seriesColor(1)} strokeWidth={2} dot={false} isAnimationActive={false} />
+          <Line type="monotone" dataKey="selectionLoadFraction" name="SELECTION load fraction, sizePump"
+            stroke={seriesColor(0)} strokeWidth={2} dot isAnimationActive={false} />
+        </ComposedChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">thrust derate, percent</th>
               <th className="text-left pr-3">derate as a factor</th>
@@ -271,20 +270,20 @@ const Derate = () => {
           </thead>
           <tbody>
             {row.derates.map((d) => (
-              <tr key={d.deratePct} className={d.warningCodes.includes('motorOverloaded') ? 'text-white' : ''}>
+              <tr key={d.deratePct} className={d.warningCodes.includes('motorOverloaded') ? 'text-pl-text' : ''}>
                 <td className="pr-3">{fmt(d.deratePct, 0)}</td>
                 <td className="pr-3">{fmt(d.derate, 4)}</td>
-                <td className="pr-3 text-[#38bdf8]">{fmt(d.selectionLoadFraction, 8)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(row.electricalLoadFraction, 8)}</td>
-                <td className="pr-3 text-[#f97316]">{fmt(d.gapPoints, 6)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(d.selectionLoadFraction, 8)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(row.electricalLoadFraction, 8)}</td>
+                <td className="pr-3 text-pl-warning-text">{fmt(d.gapPoints, 6)}</td>
                 <td>{d.warningCodes.length ? d.warningCodes.join(', ') : 'none'}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
-        THIS IS A SEAM AND NOT AN ERROR. The lime line does not move across the sweep, because
+      <div className="mt-3 text-xs text-pl-text">
+        THIS IS A SEAM AND NOT AN ERROR. The green line does not move across the sweep, because
         cutting a motor's permissible load does not change the current it draws at a given shaft
         load. The blue line climbs, because the same shaft power is a larger share of a smaller
         usable rating. The gap between them is the electrical load fraction times one over the derate
@@ -293,12 +292,12 @@ const Derate = () => {
         {' '}{fmt(DERATE_SWEEP_PCT[0], 0)} to {fmt(DERATE_SWEEP_PCT[DERATE_SWEEP_PCT.length - 1], 0)}
         {' '}percent.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         {crossings.length > 0 && !electricalCrosses
           ? `On this case the two answers land on opposite sides of a decision. The selection rule calls the motor overloaded from ${fmt(crossings[0].deratePct, 0)} percent derate upward and raises a warning, while the electrical load fraction sits at ${fmt(row.electricalLoadFraction, 8)} and never reaches one, so the amps, the cable pick and the weak estimate flag all carry on as though nothing had happened. Neither half is wrong. They were asked different questions and they answered the ones they were asked.`
           : `On this case both readings stay on the same side of the overload line across the whole derate sweep, which is why a well like this one hides the seam rather than showing it. Move to the case where the selection rule crosses one and the electrical fraction does not, and the same two fields disagree about whether the motor is in trouble.`}
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         The finding as the wave recorded it: an electrical load fraction of
         {' '}{fmt(SEAM_FINDING.electricalLoadFraction, 6)} on a derate of
         {' '}{fmt(SEAM_FINDING.derate, 4)} opens a gap of {fmt(SEAM_FINDING.gapPoints, 6)} points.
@@ -354,12 +353,12 @@ const Cable = () => {
         <SelectField label="Study" value={label || study.label} onChange={setLabel}
           options={studies.map((s) => [s.label, s.label])} />
       </FieldGrid>
-      <div className={`mt-3 rounded-md border p-4 ${study.pickMoved ? 'border-rose-700 bg-rose-900/20' : 'border-gray-700 bg-[#0F172A]'}`}>
-        <p className="text-xs text-gray-400 mb-1">
+      <div className={`mt-3 rounded-md border p-4 ${study.pickMoved ? 'border-pl-danger/40 bg-pl-danger-bg' : 'border-pl-border bg-pl-sunken'}`}>
+        <p className="text-xs text-pl-muted mb-1">
           One design, one conductor table, one limit, two defensible readings of the power
         </p>
         {bothEmpty ? (
-          <p className="text-sm text-gray-300 mb-0">
+          <p className="text-sm text-pl-text mb-0">
             NOTHING QUALIFIES ON EITHER POWER on this study, so there is no pick to compare. Every
             conductor in the table fails the {fmt(study.maxDropPct, 1)} percent drop limit at this
             current over {fmt(study.lengthFt, 0)} ft at {fmt(study.cableTempF, 0)} degF, and
@@ -369,14 +368,14 @@ const Cable = () => {
           </p>
         ) : (
           <>
-            <p className="text-2xl font-bold text-white mb-1">
+            <p className="text-2xl font-bold text-pl-text mb-1">
               {study.chosenOnShaft || 'nothing qualifies'}
-              <span className="text-[#BFFF00]"> against </span>
+              <span className="text-pl-primary-text"> against </span>
               {study.chosenOnStack || 'nothing qualifies'}
             </p>
-            <p className={`text-sm mb-0 ${study.pickMoved ? 'text-rose-300' : 'text-gray-300'}`}>
+            <p className={`text-sm mb-0 ${study.pickMoved ? 'text-pl-danger-text' : 'text-pl-text'}`}>
               {study.pickMoved
-                ? `THE PICK MOVED. On the brake power at the head REQUIRED, ${fmt(study.shaftHp, 6)} hp, the deciding drop is ${fmt(study.decidingDropOnShaftPct, 6)} percent and ${study.chosenOnShaft} passes. On the brake power at the head the stack MAKES, ${fmt(study.stackBhpTotal, 6)} hp, the same conductor reads ${winnerOnStack ? fmt(winnerOnStack.dropPct, 6) : '-'} percent, which is over the ${fmt(study.maxDropPct, 1)} percent limit, so the pick steps up to ${study.chosenOnStack} at ${fmt(study.decidingDropOnStackPct, 6)} percent. Same design, same table, same limit, different conductor out.`
+                ? `THE PICK MOVED. On the brake power at the head REQUIRED, ${fmt(study.shaftHp, 6)} hp, the deciding drop is ${fmt(study.decidingDropOnShaftPct, 6)} percent and ${study.chosenOnShaft} passes. On the brake power at the head the stack MAKES, ${fmt(study.stackBhpTotal, 6)} hp, the same conductor reads ${winnerOnStack ? fmt(winnerOnStack.dropPct, 6) : 'n/a'} percent, which is over the ${fmt(study.maxDropPct, 1)} percent limit, so the pick steps up to ${study.chosenOnStack} at ${fmt(study.decidingDropOnStackPct, 6)} percent. Same design, same table, same limit, different conductor out.`
                 : `The pick did NOT move: ${study.chosenOnShaft} either way. The deciding drop goes from ${fmt(study.decidingDropOnShaftPct, 6)} percent on the smaller power to ${fmt(study.decidingDropOnStackPct, 6)} percent on the larger, and both of them are on the same side of the ${fmt(study.maxDropPct, 1)} percent limit, so nothing changes.`}
             </p>
           </>
@@ -396,28 +395,26 @@ const Cable = () => {
               <Tile label="Deciding drop on the larger power" value={fmt(study.decidingDropOnStackPct, 6)} unit="%" />
             </TileGrid>
           </div>
-          <div className="h-72 mt-3">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={chartRows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-                {GRID}
-                <XAxis dataKey="label" tick={AXIS} />
-                <YAxis tick={AXIS}
-                  label={{ value: 'voltage drop, percent', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-                <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-                <Legend wrapperStyle={{ fontSize: 11 }} />
-                {worstDropPct > study.maxDropPct && (
-                  <ReferenceArea y1={study.maxDropPct} y2={worstDropPct} fill="#f43f5e" fillOpacity={0.1} />
-                )}
-                <ReferenceLine y={study.maxDropPct} stroke="#f43f5e" strokeWidth={2}
-                  label={{ value: 'the limit', fill: '#f43f5e', fontSize: 10, position: 'insideTopRight' }} />
-                <Bar dataKey="onShaftDropPct" name="on the brake power at the head required" fill="#BFFF00" isAnimationActive={false} />
-                <Bar dataKey="onStackDropPct" name="on the brake power at the head made" fill="#f97316" isAnimationActive={false} />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
+          <ChartFrame height={288} className="mt-3">
+            <BarChart data={chartRows} margin={{ top: 20, right: 20, bottom: 18, left: 0 }}>
+              {GRID}
+              <XAxis dataKey="label" tick={AXIS} />
+              <YAxis tick={AXIS}
+                label={{ value: 'voltage drop, percent', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+              <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+              <Legend {...LEGEND_PROPS} />
+              {worstDropPct > study.maxDropPct && (
+                <ReferenceArea y1={study.maxDropPct} y2={worstDropPct} fill={seriesColor(3)} fillOpacity={0.1} />
+              )}
+              <ReferenceLine y={study.maxDropPct} stroke={seriesColor(3)} strokeWidth={2}
+                label={{ value: 'the limit', fill: seriesColor(3), fontSize: 10, position: 'insideTopRight' }} />
+              <Bar dataKey="onShaftDropPct" name="on the brake power at the head required" fill={seriesColor(1)} isAnimationActive={false} />
+              <Bar dataKey="onStackDropPct" name="on the brake power at the head made" fill={seriesColor(2)} isAnimationActive={false} />
+            </BarChart>
+          </ChartFrame>
           <div className="mt-3 overflow-x-auto">
-            <table className="text-xs text-slate-300 w-full">
-              <thead className="text-slate-500">
+            <table className="text-xs text-pl-text w-full">
+              <thead className="text-pl-muted">
                 <tr>
                   <th className="text-left pr-3">conductor</th>
                   <th className="text-left pr-3">amps on the smaller power</th>
@@ -434,14 +431,14 @@ const Cable = () => {
                   const y = onStackOf(x.label);
                   const chosen = x.label === study.chosenOnShaft || (y && y.label === study.chosenOnStack);
                   return (
-                    <tr key={x.label} className={chosen ? 'text-white' : ''}>
+                    <tr key={x.label} className={chosen ? 'text-pl-text' : ''}>
                       <td className="pr-3">{x.label}</td>
                       <td className="pr-3">{fmt(x.amps, 6)}</td>
-                      <td className="pr-3 text-[#BFFF00]">{fmt(x.dropPct, 6)}</td>
-                      <td className={`pr-3 ${x.dropOk ? '' : 'text-[#f43f5e]'}`}>{yn(x.dropOk)}</td>
-                      <td className="pr-3">{y ? fmt(y.amps, 6) : '-'}</td>
-                      <td className="pr-3 text-[#f97316]">{y ? fmt(y.dropPct, 6) : '-'}</td>
-                      <td className={`pr-3 ${y && !y.dropOk ? 'text-[#f43f5e]' : ''}`}>{y ? yn(y.dropOk) : '-'}</td>
+                      <td className="pr-3 text-pl-primary-text">{fmt(x.dropPct, 6)}</td>
+                      <td className={`pr-3 ${x.dropOk ? '' : 'text-pl-danger-text'}`}>{yn(x.dropOk)}</td>
+                      <td className="pr-3">{y ? fmt(y.amps, 6) : 'n/a'}</td>
+                      <td className="pr-3 text-pl-warning-text">{y ? fmt(y.dropPct, 6) : 'n/a'}</td>
+                      <td className={`pr-3 ${y && !y.dropOk ? 'text-pl-danger-text' : ''}`}>{y ? yn(y.dropOk) : 'n/a'}</td>
                       <td>{x.ampacityDeclared === null ? 'no ampacity in the table, so it passes' : fmt(x.ampacityDeclared, 0)}</td>
                     </tr>
                   );
@@ -452,8 +449,8 @@ const Cable = () => {
         </>
       )}
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">study</th>
               <th className="text-left pr-3">length, ft</th>
@@ -466,20 +463,20 @@ const Cable = () => {
           </thead>
           <tbody>
             {studies.map((s) => (
-              <tr key={s.label} className={s.pickMoved ? 'text-white' : ''}>
+              <tr key={s.label} className={s.pickMoved ? 'text-pl-text' : ''}>
                 <td className="pr-3">{s.label}</td>
                 <td className="pr-3">{fmt(s.lengthFt, 0)}</td>
-                <td className="pr-3 text-[#BFFF00]">{s.chosenOnShaft || 'nothing qualifies'}</td>
-                <td className="pr-3">{s.decidingDropOnShaftPct === null ? '-' : fmt(s.decidingDropOnShaftPct, 6)}</td>
-                <td className="pr-3 text-[#f97316]">{s.chosenOnStack || 'nothing qualifies'}</td>
-                <td className="pr-3">{s.decidingDropOnStackPct === null ? '-' : fmt(s.decidingDropOnStackPct, 6)}</td>
-                <td className={s.pickMoved ? 'text-[#f43f5e] font-semibold' : ''}>{yn(s.pickMoved)}</td>
+                <td className="pr-3 text-pl-primary-text">{s.chosenOnShaft || 'nothing qualifies'}</td>
+                <td className="pr-3">{s.decidingDropOnShaftPct === null ? 'n/a' : fmt(s.decidingDropOnShaftPct, 6)}</td>
+                <td className="pr-3 text-pl-warning-text">{s.chosenOnStack || 'nothing qualifies'}</td>
+                <td className="pr-3">{s.decidingDropOnStackPct === null ? 'n/a' : fmt(s.decidingDropOnStackPct, 6)}</td>
+                <td className={s.pickMoved ? 'text-pl-danger-text font-semibold' : ''}>{yn(s.pickMoved)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THE NON-MOVERS ARE THE POINT OF THAT TABLE. {fmt(movers.length, 0)} of
         {' '}{fmt(studies.length, 0)} studies move, and the other {fmt(nonMovers.length, 0)} do not,
         which is what proves the flip is a property of SHORT STACKS rather than a property of the
@@ -490,12 +487,12 @@ const Cable = () => {
         you hand over. On a stack of a few dozen the margin is percent, the window is wide enough,
         and it does.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         {noPick.length > 0
           ? `${fmt(noPick.length, 0)} of these studies return NO PICK on either power. Every conductor in the shipped table fails the drop limit at those lengths, currents and temperatures, and selectCable says so by returning no cable rather than the least bad one. Select one of them above to see what the panel does with a mode that has no answer.`
           : 'Every study on this page returns a pick on both powers.'}
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         One more thing about the last column of the candidate table. selectCable takes the cheapest
         conductor that passes BOTH the drop limit and the ampacity check, and on the shipped table
         the second check is TRUE BY CONSTRUCTION, because a candidate with no declared ampacity
@@ -567,15 +564,15 @@ const Diagnosis = () => {
         </TileGrid>
       </div>
       {bands.map((b) => (
-        <div key={b.key} className="mt-4 rounded-md border border-gray-700 bg-[#0F172A] p-3">
-          <p className="text-xs text-gray-400 mb-2">
+        <div key={b.key} className="mt-4 rounded-md border border-pl-border bg-pl-sunken p-3">
+          <p className="text-xs text-pl-muted mb-2">
             {b.title}: the flag fires below or above {b.threshold} and then prints the number it
             fired on. {fmt(b.colliding.length, 0)} of {fmt(b.rows.length, 0)} rows on this band used
             to print the threshold itself.
           </p>
           <div className="overflow-x-auto">
-            <table className="text-xs text-slate-300 w-full">
-              <thead className="text-slate-500">
+            <table className="text-xs text-pl-text w-full">
+              <thead className="text-pl-muted">
                 <tr>
                   <th className="text-left pr-3">measured at</th>
                   <th className="text-left pr-3">flag raised</th>
@@ -586,11 +583,11 @@ const Diagnosis = () => {
               </thead>
               <tbody>
                 {b.rows.map((r) => (
-                  <tr key={r.at} className={r.flagRaised && r.oldPrintEqualledThreshold ? 'text-white' : ''}>
+                  <tr key={r.at} className={r.flagRaised && r.oldPrintEqualledThreshold ? 'text-pl-text' : ''}>
                     <td className="pr-3">{r.at}</td>
-                    <td className={`pr-3 ${r.flagRaised ? 'text-[#f97316]' : 'text-slate-500'}`}>{yn(r.flagRaised)}</td>
-                    <td className="pr-3 text-[#f43f5e]">{r.printedBeforeFixPct}</td>
-                    <td className="pr-3 text-[#BFFF00]">{r.printsNowPct}</td>
+                    <td className={`pr-3 ${r.flagRaised ? 'text-pl-warning-text' : 'text-pl-muted'}`}>{yn(r.flagRaised)}</td>
+                    <td className="pr-3 text-pl-danger-text">{r.printedBeforeFixPct}</td>
+                    <td className="pr-3 text-pl-primary-text">{r.printsNowPct}</td>
                     <td>{yn(r.oldPrintEqualledThreshold)}</td>
                   </tr>
                 ))}
@@ -599,7 +596,7 @@ const Diagnosis = () => {
           </div>
         </div>
       ))}
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THE DEFECT WAS IN THE MESSAGE AND NOWHERE ELSE. Each of these three flags fires on a STRICT
         inequality against its threshold and then prints the ratio it fired on. Rounded to whole
         percent, everything in the first tenth of a percent past the threshold rendered AS the
@@ -607,7 +604,7 @@ const Diagnosis = () => {
         next move is to dismiss it. Read the two print columns side by side and the collision is the
         rows where the old column equals the threshold and the flag is up.
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         WHAT THE FIX CHANGED: {fmt(DIAGNOSIS_FIX.messageTemplatesChanged, 0)} message templates went
         from no decimal places to one. Thresholds changed: {fmt(DIAGNOSIS_FIX.thresholdsChanged, 0)}.
         Returned fields changed: {fmt(DIAGNOSIS_FIX.returnedFieldsChanged, 0)}. No comparison, no

@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   CASES, pressureSplit, holeCleaning, cleaningSweep, minimumFlow, oracleCheck,
   BLANK_MUD, mudOver,
@@ -14,7 +17,7 @@ import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/compo
 
 const fmt = (v, d = 4) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: Math.min(d, 2) })
-  : '-');
+  : 'n/a');
 
 const MODES = [
   { value: 'transport', label: 'Transport along the annulus' },
@@ -39,9 +42,9 @@ const Transport = ({ over }) => {
       </div>
       {hc && (
         <>
-          <div className="mt-3 rounded border border-gray-700 overflow-x-auto">
+          <div className="mt-3 rounded border border-pl-border overflow-x-auto">
             <table className="w-full text-xs">
-              <thead className="bg-black/40 text-gray-400">
+              <thead className="bg-pl-sunken text-pl-muted">
                 <tr>
                   <th className="text-left p-2">Interval (m)</th>
                   <th className="text-right p-2">Annular velocity</th>
@@ -52,12 +55,12 @@ const Transport = ({ over }) => {
               </thead>
               <tbody>
                 {hc.rows.map((r) => (
-                  <tr key={r.fromMd} className="border-t border-gray-800">
-                    <td className="p-2 text-white">{fmt(r.fromMd, 0)} to {fmt(r.toMd, 0)}</td>
-                    <td className="p-2 text-right text-gray-200">{fmt(r.annularVelocityMs, 6)}</td>
-                    <td className="p-2 text-right text-gray-400">{fmt(r.slipMs, 6)}</td>
-                    <td className={`p-2 text-right ${r.transportRatio < 0.5 ? 'text-red-400' : 'text-gray-200'}`}>{fmt(r.transportRatio, 6)}</td>
-                    <td className="p-2 text-right text-gray-400">{fmt(r.cuttingsConcPct, 6)}</td>
+                  <tr key={r.fromMd} className="border-t border-pl-border">
+                    <td className="p-2 text-pl-text">{fmt(r.fromMd, 0)} to {fmt(r.toMd, 0)}</td>
+                    <td className="p-2 text-right text-pl-text">{fmt(r.annularVelocityMs, 6)}</td>
+                    <td className="p-2 text-right text-pl-muted">{fmt(r.slipMs, 6)}</td>
+                    <td className={`p-2 text-right ${r.transportRatio < 0.5 ? 'text-pl-danger-text' : 'text-pl-text'}`}>{fmt(r.transportRatio, 6)}</td>
+                    <td className="p-2 text-right text-pl-muted">{fmt(r.cuttingsConcPct, 6)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -97,21 +100,19 @@ const Ecd = ({ over }) => {
       </div>
       {s && (
         <>
-          <div className="h-56 mt-3">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={s.ecdProfile} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-                <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-                <XAxis dataKey="tvd" type="number" tick={{ fill: '#94a3b8', fontSize: 11 }}
-                  label={{ value: 'true vertical depth (m)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-                <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} domain={['auto', 'auto']}
-                  label={{ value: 'ECD (kg/m3)', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-                <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-                  formatter={(v) => fmt(v, 4)} />
-                <ReferenceLine y={rho} stroke="#f59e0b" strokeDasharray="4 4" />
-                <Line dataKey="ecdKgM3" name="ECD" stroke="#BFFF00" dot={false} strokeWidth={2} isAnimationActive={false} />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
+          <ChartFrame height={224} className="mt-3">
+            <LineChart data={s.ecdProfile} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+              <CartesianGrid {...GRID_STYLE} />
+              <XAxis dataKey="tvd" type="number" tick={AXIS_TICK}
+                label={{ value: 'true vertical depth (m)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+              <YAxis tick={AXIS_TICK} domain={['auto', 'auto']}
+                label={{ value: 'ECD (kg/m3)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+              <Tooltip contentStyle={TOOLTIP_STYLE}
+                formatter={(v) => fmt(v, 4)} />
+              <ReferenceLine y={rho} stroke={seriesColor(2)} strokeDasharray="4 4" />
+              <Line dataKey="ecdKgM3" name="ECD" stroke={seriesColor(0)} dot={false} strokeWidth={2} isAnimationActive={false} />
+            </LineChart>
+          </ChartFrame>
           <TileGrid>
             <Tile label="Static mud weight" value={fmt(rho, 0)} unit="kg/m3" />
             <Tile label="ECD at total depth" value={fmt(s.ecdAtTdKgM3, 5)} unit="kg/m3" />
@@ -148,23 +149,21 @@ const MinFlow = ({ over }) => {
         <SelectField label="Case" value={id} onChange={setId} options={CASE_OPTIONS} />
         <NumField label="Target transport ratio" value={target} onChange={setTarget} />
       </div>
-      <div className="h-52 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={sweep.map((r) => ({ q: r.flowRateM3s, tr: r.minTransportRatio, conc: r.worstCuttingsConcPct }))}
-            margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="q" type="number" tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'flow rate (m3/s)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-            <YAxis yAxisId="l" tick={{ fill: '#94a3b8', fontSize: 11 }} domain={[0, 1]} />
-            <YAxis yAxisId="r" orientation="right" tick={{ fill: '#94a3b8', fontSize: 11 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(v) => fmt(v, 5)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line yAxisId="l" dataKey="tr" name="transport ratio" stroke="#BFFF00" strokeWidth={2} isAnimationActive={false} />
-            <Line yAxisId="r" dataKey="conc" name="cuttings (%)" stroke="#f59e0b" strokeWidth={2} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={208} className="mt-3">
+        <LineChart data={sweep.map((r) => ({ q: r.flowRateM3s, tr: r.minTransportRatio, conc: r.worstCuttingsConcPct }))}
+          margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="q" type="number" tick={AXIS_TICK}
+            label={{ value: 'flow rate (m3/s)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis yAxisId="l" tick={AXIS_TICK} domain={[0, 1]} />
+          <YAxis yAxisId="r" orientation="right" tick={AXIS_TICK} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(v) => fmt(v, 5)} />
+          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Line yAxisId="l" dataKey="tr" name="transport ratio" stroke={seriesColor(0)} strokeWidth={2} isAnimationActive={false} />
+          <Line yAxisId="r" dataKey="conc" name="cuttings (%)" stroke={seriesColor(2)} strokeWidth={2} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       {solved && (
         <TileGrid>
           <Tile label="Flow rate required" value={fmt(solved.q, 8)} unit="m3/s" />
@@ -193,7 +192,7 @@ const CleaningExplorer = () => {
       subtitle="What the annulus is carrying, what it costs the formation, and the flow rate the two of them argue about"
     >
       <SelectField label="View" value={mode} onChange={setMode} options={MODES} />
-      <p className="text-[11px] text-gray-500 mt-2">
+      <p className="text-[11px] text-pl-muted mt-2">
         Cuttings at 2600 kg/m3 and 6 mm, rate of penetration 0.005 m/s, Schiller-Naumann slip.
       </p>
       <MudBoxes typed={mud} setTyped={setMud} valid={over !== null} />

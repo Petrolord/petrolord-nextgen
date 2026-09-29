@@ -163,10 +163,18 @@ describe('the search modal and the device guard follow the page', () => {
   describe('with no themed screen mounted, the legacy markup is unchanged', () => {
     const want = UPDATE ? {} : JSON.parse(fs.readFileSync(FIXTURE, 'utf8'));
     const captured = {};
-    const check = (name, html) => {
+    const check = (name, html, ignore = (h) => h) => {
       if (UPDATE) captured[name] = html;
-      else expect(html).toBe(want[name]);
+      else expect(ignore(html)).toBe(ignore(want[name]));
     };
+    // Radix settles two attributes after the first paint, so whether they
+    // are there when the markup is read is a race: the inline pointer-events
+    // style and the roving tabindex (of a radio group and its radios). The
+    // device limit dialog compares with those two ignored; every other
+    // attribute, and every other state, stays pinned.
+    const ignoreRadixAsync = (html) => html
+      .replace(/ style="pointer-events: [a-z]+;"/g, '')
+      .replace(/(<[a-z]+\b[^>]*\brole="(?:radio|radiogroup)"[^>]*?) tabindex="-?\d+"/g, '$1');
 
     it('search modal, empty', async () => {
       renderApp('/outside');
@@ -197,7 +205,7 @@ describe('the search modal and the device guard follow the page', () => {
       renderApp('/outside');
       await screen.findByText('Device limit reached');
       expect(document.querySelector('[data-pl-theme]')).toBeNull();
-      check('deviceLimit', dialogMarkup());
+      check('deviceLimit', dialogMarkup(), ignoreRadixAsync);
     });
 
     it('the fixture covers every state', () => {
