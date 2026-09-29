@@ -18,6 +18,7 @@
 import React from 'react';
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { describe, it, expect, vi, beforeAll, beforeEach, afterEach } from 'vitest';
 import { render, cleanup, fireEvent } from '@testing-library/react';
 import { ThemedApp, themeStorageKey } from '@/design/ThemeProvider';
@@ -79,7 +80,7 @@ const DRILLING_PANELS = {
 };
 
 const DIRS = ['welldesign', 'torquedrag', 'hydraulics', 'wellcontrol', 'geomech', 'casingtubing'];
-const PANEL_DIR = path.resolve(__dirname, '..');
+const PANEL_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const sourceFiles = () => DIRS.flatMap((d) => fs.readdirSync(path.join(PANEL_DIR, d))
   .filter((f) => f.endsWith('.jsx') && !f.includes('.test.'))
   .map((f) => path.join(PANEL_DIR, d, f)));
