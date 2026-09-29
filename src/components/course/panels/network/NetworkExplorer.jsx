@@ -1,8 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, BarChart, Bar,
+  LineChart, Line, BarChart, Bar,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import { networkExplorer } from './networkLab';
 import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 import { TypedNetworkView } from './TypedNetworkFields';
@@ -24,10 +27,10 @@ import { TypedNetworkView } from './TypedNetworkFields';
 
 const fmt = (v, d = 4) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: 0 })
-  : '-');
+  : 'n/a');
 
 const tiny = (v) => {
-  if (!Number.isFinite(v)) return '-';
+  if (!Number.isFinite(v)) return 'n/a';
   if (v === 0) return '0';
   return Math.abs(v) < 0.0005 ? v.toExponential(3) : fmt(v, 8);
 };
@@ -45,14 +48,14 @@ const MODES = [
   ['typed', 'Your network, typed and solved'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const GRID = <CartesianGrid stroke="#334155" strokeDasharray="3 3" />;
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const GRID = <CartesianGrid {...GRID_STYLE} />;
 
 const Verdict = ({ v }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>
           <th className="text-left pr-3">ok</th>
           <th className="text-left pr-3">converged</th>
@@ -70,10 +73,10 @@ const Verdict = ({ v }) => (
           <td className="pr-3">{yn(v.converged)}</td>
           <td className="pr-3">{fmt(v.iterations, 0)}</td>
           <td className="pr-3">{v.pinned.length ? v.pinned.join(', ') : 'none'}</td>
-          <td className="pr-3 text-[#38bdf8]">{tiny(v.reportedResidualLbD)}</td>
+          <td className="pr-3 text-pl-info-text">{tiny(v.reportedResidualLbD)}</td>
           <td className="pr-3">{fmt(v.producedLbD, 6)}</td>
           <td className="pr-3">{fmt(v.deliveredLbD, 6)}</td>
-          <td className={v.massBalanceCloses ? 'text-[#38bdf8]' : 'text-[#f97316]'}>{tiny(v.conservationGapLbD)}</td>
+          <td className={v.massBalanceCloses ? 'text-pl-info-text' : 'text-pl-warning-text'}>{tiny(v.conservationGapLbD)}</td>
         </tr>
       </tbody>
     </table>
@@ -104,8 +107,8 @@ const Linear = () => {
         <Tile label="Conservation gap on the answer" value={tiny(data.summary.conservationGapLbD)} unit="lb/d" />
       </TileGrid>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">node</th>
               <th className="text-left pr-3">kind</th>
@@ -121,8 +124,8 @@ const Linear = () => {
               <tr key={r.id}>
                 <td className="pr-3">{r.id} ({r.label})</td>
                 <td className="pr-3">{r.kind}</td>
-                <td className="pr-3 text-[#38bdf8]">{fmt(r.exactPressurePsia, 9)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.newtonPressurePsia, 9)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.exactPressurePsia, 9)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.newtonPressurePsia, 9)}</td>
                 <td className="pr-3">{tiny(r.newtonMinusExactPsia)}</td>
                 <td className="pr-3">{fmt(r.goldenPressurePsia, 9)}</td>
                 <td>{yn(r.agreesExactly)}</td>
@@ -131,7 +134,7 @@ const Linear = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THIS IS THE ONLY CHECK IN THE COURSE WITH NO TOLERANCE IN IT. Give the solver linear branch
         resistances and the whole network collapses to a weighted graph Laplacian, whose solution is
         a matrix inverse. Newton iteration and Gaussian elimination share no code and no reasoning,
@@ -145,8 +148,8 @@ const Linear = () => {
       </div>
       <Verdict v={data.summary} />
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">and the topology reduces the way a network must</th>
               <th className="text-left pr-3">equivalent, lb/d per psi</th>
@@ -162,7 +165,7 @@ const Linear = () => {
                 <td className="pr-3">{fmt(r.equivalentLbDPerPsi, 6)}</td>
                 <td className="pr-3">{fmt(r.manyBranchWellheadPsia, 9)}</td>
                 <td className="pr-3">{fmt(r.oneBranchWellheadPsia, 9)}</td>
-                <td className="text-[#BFFF00]">{tiny(r.differencePsia)}</td>
+                <td className="text-pl-primary-text">{tiny(r.differencePsia)}</td>
               </tr>
             ))}
           </tbody>
@@ -206,8 +209,8 @@ const Tree = () => {
         <Tile label="Conservation gap on the answer" value={tiny(data.summary.conservationGapLbD)} unit="lb/d" />
       </TileGrid>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">what</th>
               <th className="text-left pr-3">which</th>
@@ -222,8 +225,8 @@ const Tree = () => {
               <tr key={`${r.kind}-${r.id}`}>
                 <td className="pr-3">{r.kind}</td>
                 <td className="pr-3">{r.id}</td>
-                <td className="pr-3 text-[#38bdf8]">{fmt(r.goldenValue, 9)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.engineValue, 9)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.goldenValue, 9)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.engineValue, 9)}</td>
                 <td className="pr-3">{tiny(r.engineMinusGolden)}</td>
                 <td>{r.unit}</td>
               </tr>
@@ -231,7 +234,7 @@ const Tree = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         TWO METHODS WITH NOTHING IN COMMON, LANDING ON THE SAME PRESSURES. The engine solves this by
         Newton with a numerically differenced Jacobian and a backtracking line search. The oracle
         solved it by sweeping node by node and bisecting each node own mass balance, with no
@@ -239,25 +242,23 @@ const Tree = () => {
         the code, which is the only kind of agreement worth anything.
       </div>
       <Verdict v={data.summary} />
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="x" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
-              label={{ value: 'trunk conductance, lb/d per root psi', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis yAxisId="p" tick={AXIS} domain={['auto', 'auto']}
-              label={{ value: 'header 2, psia', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <YAxis yAxisId="q" orientation="right" tick={AXIS} domain={['auto', 'auto']} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line yAxisId="p" type="monotone" dataKey="header2Psia" name="header 2, psia" stroke="#BFFF00" dot isAnimationActive={false} />
-            <Line yAxisId="q" type="monotone" dataKey="totalLbD" name="total produced, lb/d" stroke="#38bdf8" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="x" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
+            label={{ value: 'trunk conductance, lb/d per root psi', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis yAxisId="p" tick={AXIS} domain={['auto', 'auto']}
+            label={{ value: 'header 2, psia', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis yAxisId="q" orientation="right" tick={AXIS} domain={['auto', 'auto']} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line yAxisId="p" type="monotone" dataKey="header2Psia" name="header 2, psia" stroke={seriesColor(0)} dot isAnimationActive={false} />
+          <Line yAxisId="q" type="monotone" dataKey="totalLbD" name="total produced, lb/d" stroke={seriesColor(1)} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">trunk conductance</th>
               <th className="text-left pr-3">header 2, psia</th>
@@ -276,7 +277,7 @@ const Tree = () => {
                 <td className="pr-3">{fmt(r.w1LbD, 6)}</td>
                 <td className="pr-3">{fmt(r.w2LbD, 6)}</td>
                 <td className="pr-3">{fmt(r.w3LbD, 6)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.totalLbD, 6)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.totalLbD, 6)}</td>
                 <td>{yn(r.published)}</td>
               </tr>
             ))}
@@ -320,8 +321,8 @@ const Solve = () => {
       </TileGrid>
       <Verdict v={data.solve} />
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">node</th>
               <th className="text-left pr-3">kind</th>
@@ -336,10 +337,10 @@ const Solve = () => {
               <tr key={n.id}>
                 <td className="pr-3">{n.id} ({n.label})</td>
                 <td className="pr-3">{n.kind}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(n.pressurePsia, 9)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(n.pressurePsia, 9)}</td>
                 <td className="pr-3">{n.wellRateLbD === null ? '' : fmt(n.wellRateLbD, 6)}</td>
                 <td className="pr-3">{n.imbalanceLbD === null ? '' : tiny(n.imbalanceLbD)}</td>
-                <td className={n.pressureIsDetermined ? '' : 'text-[#f97316]'}>
+                <td className={n.pressureIsDetermined ? '' : 'text-pl-warning-text'}>
                   {n.pressureIsDetermined ? 'determined' : 'the last iterate, and pinned'}
                 </td>
               </tr>
@@ -348,8 +349,8 @@ const Solve = () => {
         </table>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">branch</th>
               <th className="text-left pr-3">drawn</th>
@@ -364,7 +365,7 @@ const Solve = () => {
               <tr key={b.id}>
                 <td className="pr-3">{b.id} ({b.label})</td>
                 <td className="pr-3">{b.drawnFrom} to {b.drawnTo}</td>
-                <td className={b.runsAsDrawn ? 'pr-3 text-[#BFFF00]' : 'pr-3 text-[#f97316]'}>{fmt(b.signedFlowLbD, 6)}</td>
+                <td className={b.runsAsDrawn ? 'pr-3 text-pl-primary-text' : 'pr-3 text-pl-warning-text'}>{fmt(b.signedFlowLbD, 6)}</td>
                 <td className="pr-3">{b.solvedFrom} to {b.solvedTo}</td>
                 <td className="pr-3">{fmt(b.dpDrawnSensePsi, 6)}</td>
                 <td>{yn(b.atItsCapacity)}</td>
@@ -373,7 +374,7 @@ const Solve = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         EVERY UNKNOWN NODE IS AT ZERO IMBALANCE EXCEPT ONE, AND THE ONE THAT IS NOT IS THE ONE THE
         REPORTED RESIDUAL CANNOT SEE. The engine reports converged with a residual of
         {' '}{tiny(data.solve.reportedResidualLbD)} lb/d, and an audit of the same answer says the
@@ -432,29 +433,27 @@ const Loop = () => {
           <Tile label="Neither leg is dead" value={yn(data.looped.neitherLegIsDead)} />
         </TileGrid>
       </div>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="x" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
-              label={{ value: 'conductance, lb/d per root psi', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis yAxisId="a" tick={AXIS} domain={['auto', 'auto']} />
-            <YAxis yAxisId="b" orientation="right" tick={AXIS} domain={['auto', 'auto']} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line yAxisId="a" type="monotone" dataKey="sharePct"
-              name={which === 'published' ? 'midpoint share, percent' : 'crosslink flow, lb/d'}
-              stroke="#BFFF00" dot isAnimationActive={false} />
-            <Line yAxisId="b" type="monotone" dataKey="totalLbD"
-              name={which === 'published' ? 'total delivered, lb/d' : 'trunk, lb/d'}
-              stroke="#38bdf8" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="x" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
+            label={{ value: 'conductance, lb/d per root psi', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis yAxisId="a" tick={AXIS} domain={['auto', 'auto']} />
+          <YAxis yAxisId="b" orientation="right" tick={AXIS} domain={['auto', 'auto']} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line yAxisId="a" type="monotone" dataKey="sharePct"
+            name={which === 'published' ? 'midpoint share, percent' : 'crosslink flow, lb/d'}
+            stroke={seriesColor(0)} dot isAnimationActive={false} />
+          <Line yAxisId="b" type="monotone" dataKey="totalLbD"
+            name={which === 'published' ? 'total delivered, lb/d' : 'trunk, lb/d'}
+            stroke={seriesColor(1)} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       {which === 'published' ? (
         <div className="mt-3 overflow-x-auto">
-          <table className="text-xs text-slate-300 w-full">
-            <thead className="text-slate-500">
+          <table className="text-xs text-pl-text w-full">
+            <thead className="text-pl-muted">
               <tr>
                 <th className="text-left pr-3">midpoint leg conductance</th>
                 <th className="text-left pr-3">header, psia</th>
@@ -473,7 +472,7 @@ const Loop = () => {
                   <td className="pr-3">{fmt(r.midpointPsia, 6)}</td>
                   <td className="pr-3">{fmt(r.directLegLbD, 6)}</td>
                   <td className="pr-3">{fmt(r.midpointLegLbD, 6)}</td>
-                  <td className="pr-3 text-[#BFFF00]">{fmt(r.midpointSharePct, 6)}</td>
+                  <td className="pr-3 text-pl-primary-text">{fmt(r.midpointSharePct, 6)}</td>
                   <td>{yn(r.published)}</td>
                 </tr>
               ))}
@@ -482,8 +481,8 @@ const Loop = () => {
         </div>
       ) : (
         <div className="mt-3 overflow-x-auto">
-          <table className="text-xs text-slate-300 w-full">
-            <thead className="text-slate-500">
+          <table className="text-xs text-pl-text w-full">
+            <thead className="text-pl-muted">
               <tr>
                 <th className="text-left pr-3">crosslink conductance</th>
                 <th className="text-left pr-3">manifold, psia</th>
@@ -500,7 +499,7 @@ const Loop = () => {
                   <td className="pr-3">{fmt(r.crosslinkConductanceLbDPerRootPsi, 0)}</td>
                   <td className="pr-3">{fmt(r.manifoldPsia, 6)}</td>
                   <td className="pr-3">{fmt(r.loopTeePsia, 6)}</td>
-                  <td className="pr-3 text-[#f97316]">{fmt(r.crosslinkLbD, 6)}</td>
+                  <td className="pr-3 text-pl-warning-text">{fmt(r.crosslinkLbD, 6)}</td>
                   <td className="pr-3">{fmt(r.dpDrawnSensePsi, 6)}</td>
                   <td className="pr-3">{yn(r.runsBackwards)}</td>
                   <td>{fmt(r.conservationGapLbD, 6)}</td>
@@ -510,7 +509,7 @@ const Loop = () => {
           </table>
         </div>
       )}
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         A DRAWN ARROW IS NOT A FLOW DIRECTION. The crosslink is drawn from {data.direction.drawnFrom}
         {' '}to {data.direction.drawnTo} and the solve returns
         {' '}{fmt(data.direction.signedFlowLbD, 6)} lb/d, so it carries
@@ -575,8 +574,8 @@ const Fight = () => {
       {which === 'ladder' ? (
         <>
           <div className="mt-3 overflow-x-auto">
-            <table className="text-xs text-slate-300 w-full">
-              <thead className="text-slate-500">
+            <table className="text-xs text-pl-text w-full">
+              <thead className="text-pl-muted">
                 <tr>
                   <th className="text-left pr-3">wells on the header</th>
                   <th className="text-left pr-3">the oracle header, psia</th>
@@ -591,8 +590,8 @@ const Fight = () => {
                 {data.ladder.map((r) => (
                   <tr key={r.count}>
                     <td className="pr-3">{fmt(r.count, 0)}</td>
-                    <td className="pr-3 text-[#38bdf8]">{fmt(r.goldenHeaderPsia, 9)}</td>
-                    <td className="pr-3 text-[#BFFF00]">{fmt(r.engineHeaderPsia, 9)}</td>
+                    <td className="pr-3 text-pl-info-text">{fmt(r.goldenHeaderPsia, 9)}</td>
+                    <td className="pr-3 text-pl-primary-text">{fmt(r.engineHeaderPsia, 9)}</td>
                     <td className="pr-3">{fmt(r.engineWellRatesLbD.w0, 6)}</td>
                     <td className="pr-3">{r.engineWellRatesLbD.w1 === undefined ? '' : fmt(r.engineWellRatesLbD.w1, 6)}</td>
                     <td className="pr-3">{r.engineWellRatesLbD.w2 === undefined ? '' : fmt(r.engineWellRatesLbD.w2, 6)}</td>
@@ -602,7 +601,7 @@ const Fight = () => {
               </tbody>
             </table>
           </div>
-          <div className="mt-3 text-xs text-slate-300">
+          <div className="mt-3 text-xs text-pl-text">
             THE HEADER CLIMBS AS MORE IS PUSHED THROUGH THE SAME TRUNK, and every well already on it
             makes strictly less: {yn(data.headline.everyWellAlreadyOnItMakesStrictlyLess)}. Total
             delivered rose from {fmt(data.headline.deliveredAtOneWellLbD, 6)} lb/d to
@@ -614,8 +613,8 @@ const Fight = () => {
             analysis.
           </div>
           <div className="mt-3 overflow-x-auto">
-            <table className="text-xs text-slate-300 w-full">
-              <thead className="text-slate-500">
+            <table className="text-xs text-pl-text w-full">
+              <thead className="text-pl-muted">
                 <tr>
                   <th className="text-left pr-3">separator, psia</th>
                   <th className="text-left pr-3">header, psia</th>
@@ -631,7 +630,7 @@ const Fight = () => {
                   <tr key={r.separatorPsia}>
                     <td className="pr-3">{fmt(r.separatorPsia, 0)}</td>
                     <td className="pr-3">{fmt(r.headerPsia, 6)}</td>
-                    <td className="pr-3 text-[#BFFF00]">{fmt(r.totalLbD, 6)}</td>
+                    <td className="pr-3 text-pl-primary-text">{fmt(r.totalLbD, 6)}</td>
                     <td className="pr-3">{fmt(r.w0LbD, 6)}</td>
                     <td className="pr-3">{fmt(r.w1LbD, 6)}</td>
                     <td className="pr-3">{fmt(r.w2LbD, 6)}</td>
@@ -648,23 +647,21 @@ const Fight = () => {
         </>
       ) : (
         <>
-          <div className="h-56 mt-3">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={chart} margin={{ top: 10, right: 20, bottom: 24, left: 0 }}>
-                {GRID}
-                <XAxis dataKey="name" tick={AXIS} interval={0} angle={-12} textAnchor="end" height={44} />
-                <YAxis tick={AXIS}
-                  label={{ value: 'mass rate, lb/d', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-                <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-                <Legend wrapperStyle={{ fontSize: 11 }} />
-                <Bar dataKey="aloneLbD" name="alone on its own line" fill="#38bdf8" isAnimationActive={false} />
-                <Bar dataKey="onTheSystemLbD" name="on the system" fill="#BFFF00" isAnimationActive={false} />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
+          <ChartFrame height={224} className="mt-3">
+            <BarChart data={chart} margin={{ top: 10, right: 20, bottom: 24, left: 0 }}>
+              {GRID}
+              <XAxis dataKey="name" tick={AXIS} interval={0} angle={-12} textAnchor="end" height={44} />
+              <YAxis tick={AXIS}
+                label={{ value: 'mass rate, lb/d', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+              <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+              <Legend {...LEGEND_PROPS} />
+              <Bar dataKey="aloneLbD" name="alone on its own line" fill={seriesColor(1)} isAnimationActive={false} />
+              <Bar dataKey="onTheSystemLbD" name="on the system" fill={seriesColor(0)} isAnimationActive={false} />
+            </BarChart>
+          </ChartFrame>
           <div className="mt-3 overflow-x-auto">
-            <table className="text-xs text-slate-300 w-full">
-              <thead className="text-slate-500">
+            <table className="text-xs text-pl-text w-full">
+              <thead className="text-pl-muted">
                 <tr>
                   <th className="text-left pr-3">well</th>
                   <th className="text-left pr-3">alone, lb/d</th>
@@ -679,16 +676,16 @@ const Fight = () => {
                   <tr key={r.id}>
                     <td className="pr-3">{r.label}</td>
                     <td className="pr-3">{fmt(r.aloneLbD, 6)}</td>
-                    <td className="pr-3 text-[#BFFF00]">{fmt(r.onTheSystemLbD, 6)}</td>
+                    <td className="pr-3 text-pl-primary-text">{fmt(r.onTheSystemLbD, 6)}</td>
                     <td className="pr-3">{fmt(r.lostLbD, 6)}</td>
-                    <td className="pr-3 text-[#f97316]">{fmt(r.lostPct, 6)}</td>
+                    <td className="pr-3 text-pl-warning-text">{fmt(r.lostPct, 6)}</td>
                     <td>{fmt(r.wellheadRosePsi, 6)}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-          <div className="mt-3 text-xs text-slate-300">
+          <div className="mt-3 text-xs text-pl-text">
             THE WEAK WELL LOSES MOST, AND THE TWO RANKINGS ARE NOT THE SAME RANKING. By percentage
             lost: {data.fightHeadline.rankedByPercentageLost.map((r) => `${r.label} at ${fmt(r.lostPct, 4)}`).join(', ')} percent.
             By rate on the system:
@@ -702,8 +699,8 @@ const Fight = () => {
             at from the other by any single-well method.
           </div>
           <div className="mt-3 overflow-x-auto">
-            <table className="text-xs text-slate-300 w-full">
-              <thead className="text-slate-500">
+            <table className="text-xs text-pl-text w-full">
+              <thead className="text-pl-muted">
                 <tr>
                   <th className="text-left pr-3">shut in</th>
                   <th className="text-left pr-3">the rest make, lb/d</th>
@@ -722,8 +719,8 @@ const Fight = () => {
                     <td className="pr-3">{fmt(r.survivorsGainedLbD, 6)}</td>
                     <td className="pr-3">{fmt(r.reportedRateLbD, 6)}</td>
                     <td className="pr-3">{fmt(r.itsFlowlineDeliveredLbD, 6)}</td>
-                    <td className="pr-3 text-[#f97316]">{fmt(r.defermentFromReportedRateLbD, 6)}</td>
-                    <td className="text-[#BFFF00]">{fmt(r.defermentFromDeliveredFlowLbD, 6)}</td>
+                    <td className="pr-3 text-pl-warning-text">{fmt(r.defermentFromReportedRateLbD, 6)}</td>
+                    <td className="text-pl-primary-text">{fmt(r.defermentFromDeliveredFlowLbD, 6)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -769,8 +766,8 @@ const Streams = () => {
         <Tile label="Arriving water cut" value={fmt(data.headline.trunkWaterCutPct, 6)} unit="percent" />
       </TileGrid>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">branch</th>
               <th className="text-left pr-3">oil, stb/d</th>
@@ -784,7 +781,7 @@ const Streams = () => {
             {data.rows.map((r) => (
               <tr key={r.id}>
                 <td className="pr-3">{r.id} ({r.label})</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.oilStbd, 6)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.oilStbd, 6)}</td>
                 <td className="pr-3">{fmt(r.waterStbd, 6)}</td>
                 <td className="pr-3">{fmt(r.gasMscfd, 6)}</td>
                 <td className="pr-3">{fmt(r.massLbD, 6)}</td>
@@ -794,7 +791,7 @@ const Streams = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         COMPONENT RATES ADD AND RATIOS NEVER DO. That is the entire algorithm and it is exact: a
         header carrying a dry well and a wet one carries the sum of both, and its water cut is a
         consequence rather than an input. On the published fixture the trunk cut is
@@ -809,8 +806,8 @@ const Streams = () => {
         wettest well, because an average has no idea which well is big.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">well</th>
               <th className="text-left">its own water cut, percent</th>
@@ -820,13 +817,13 @@ const Streams = () => {
             {data.headline.wellWaterCuts.map((c) => (
               <tr key={c.id}>
                 <td className="pr-3">{c.label}</td>
-                <td className="text-[#BFFF00]">{fmt(c.waterCutPct, 6)}</td>
+                <td className="text-pl-primary-text">{fmt(c.waterCutPct, 6)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         A NODE WITH MORE THAN ONE WAY OUT SPLITS ITS STREAM BY MASS, which is the only split that
         conserves anything. On the published fixture a well of
         {' '}{fmt(data.split.arrivingOilStbd, 0)} stb/d oil on
@@ -874,8 +871,8 @@ const Diagnosis = () => {
         <Tile label="Its intensity" value={tiny(data.headline.bottleneckIntensityPsiPerLbD)} unit="psi per lb/d" />
       </TileGrid>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">branch</th>
               <th className="text-left pr-3">drop, psi</th>
@@ -891,7 +888,7 @@ const Diagnosis = () => {
                 <td className="pr-3">{r.id} ({r.label})</td>
                 <td className="pr-3">{fmt(r.dpPsi, 6)}</td>
                 <td className="pr-3">{fmt(r.massLbD, 6)}</td>
-                <td className="pr-3 text-[#BFFF00]">{tiny(r.intensityPsiPerLbD)}</td>
+                <td className="pr-3 text-pl-primary-text">{tiny(r.intensityPsiPerLbD)}</td>
                 <td className="pr-3">{yn(r.backflow)}</td>
                 <td>{yn(r.carryingMass)}</td>
               </tr>
@@ -899,7 +896,7 @@ const Diagnosis = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THE BOTTLENECK IS NOT THE BIGGEST DROP. A trunk line carrying everything is SUPPOSED to have
         the biggest drop and pointing at it every time would be useless, so the bottleneck is the
         branch eating the most pressure per unit of what it carries. Here the biggest drop is
@@ -914,8 +911,8 @@ const Diagnosis = () => {
         than {tiny(data.headline.deadBranchThresholdLbD)} lb/d.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">published fixture</th>
               <th className="text-left pr-3">biggest drop</th>
@@ -928,20 +925,20 @@ const Diagnosis = () => {
               <tr key={c.caseName}>
                 <td className="pr-3">{c.caseName}</td>
                 <td className="pr-3">{c.biggestDropId}</td>
-                <td className="pr-3 text-[#BFFF00]">{c.bottleneckId}</td>
+                <td className="pr-3 text-pl-primary-text">{c.bottleneckId}</td>
                 <td>{yn(c.theyAreTheSameBranch)}</td>
               </tr>
             ))}
             <tr>
               <td className="pr-3">a dead leg with a big drop across it</td>
-              <td className="pr-3 text-[#f97316]">{data.population.biggestDropId}</td>
-              <td className="pr-3 text-[#BFFF00]">{data.population.bottleneckId}</td>
+              <td className="pr-3 text-pl-warning-text">{data.population.biggestDropId}</td>
+              <td className="pr-3 text-pl-primary-text">{data.population.bottleneckId}</td>
               <td>{yn(data.population.biggestDropId === data.population.bottleneckId)}</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         SO A DEAD LEG CAN BE THE REPORTED BIGGEST DROP AND CAN NEVER BE THE BOTTLENECK. On the
         fixture above it ranks over {fmt(data.population.biggestDropPopulation, 0)} branches for the
         drop and over {fmt(data.population.bottleneckPopulation, 0)} for the bottleneck, because a
@@ -949,8 +946,8 @@ const Diagnosis = () => {
         rather than winning it: {yn(data.population.deadLegIntensityIsInfinite)}.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">a leg carrying, lb/d</th>
               <th className="text-left pr-3">its intensity</th>
@@ -963,7 +960,7 @@ const Diagnosis = () => {
               <tr key={r.whisperMassLbD}>
                 <td className="pr-3">{tiny(r.whisperMassLbD)}</td>
                 <td className="pr-3">{tiny(r.whisperIntensityPsiPerLbD)}</td>
-                <td className="pr-3 text-[#f97316]">{r.bottleneckId}</td>
+                <td className="pr-3 text-pl-warning-text">{r.bottleneckId}</td>
                 <td>{r.biggestDropId}</td>
               </tr>
             ))}

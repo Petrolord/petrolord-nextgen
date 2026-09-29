@@ -1,8 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, BarChart, Bar,
+  LineChart, Line, BarChart, Bar,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import { trunkExplorer } from './networkLab';
 import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
@@ -22,10 +25,10 @@ import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/comp
 
 const fmt = (v, d = 4) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: 0 })
-  : '-');
+  : 'n/a');
 
 const tiny = (v) => {
-  if (!Number.isFinite(v)) return '-';
+  if (!Number.isFinite(v)) return 'n/a';
   if (v === 0) return '0';
   return Math.abs(v) < 0.0005 ? v.toExponential(3) : fmt(v, 8);
 };
@@ -40,9 +43,9 @@ const MODES = [
   ['solo', 'One well on its own line, against the boundary'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const GRID = <CartesianGrid stroke="#334155" strokeDasharray="3 3" />;
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const GRID = <CartesianGrid {...GRID_STYLE} />;
 
 // --------------------------------------------------------------------------
 
@@ -69,8 +72,8 @@ const Table = () => {
         <Tile label="The band the shipped gate uses" value={fmt(data.check.gateBandIn, 6)} unit="in" />
       </TileGrid>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">NPS</th>
               <th className="text-left pr-3">schedule</th>
@@ -89,16 +92,16 @@ const Table = () => {
                 <td className="pr-3">{r.schedule}</td>
                 <td className="pr-3">{fmt(r.odIn, 4)}</td>
                 <td className="pr-3">{fmt(r.wallIn, 4)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.publishedBoreIn, 4)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.publishedBoreIn, 4)}</td>
                 <td className="pr-3">{fmt(r.odMinusTwoWallsIn, 16)}</td>
                 <td className="pr-3">{tiny(r.residualIn)}</td>
-                <td className={r.strictEqualityHolds ? '' : 'text-[#f97316]'}>{yn(r.strictEqualityHolds)}</td>
+                <td className={r.strictEqualityHolds ? '' : 'text-pl-warning-text'}>{yn(r.strictEqualityHolds)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THE REDUNDANCY IS THE CHECK, AND THE GATE IS WIDER THAN THE THING IT CHECKS FOR. Every row
         carries the outside diameter, the wall AND the published bore even though the third is
         arithmetically the first two, because a transcription error in any one of the three makes
@@ -112,8 +115,8 @@ const Table = () => {
         is a real error and the gate still passes it: {yn(data.check.typoPassesTheGate)}.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">NPS</th>
               <th className="text-left pr-3">outside diameter, in</th>
@@ -130,7 +133,7 @@ const Table = () => {
                 <td className="pr-3">{fmt(r.odIn, 4)}</td>
                 <td className="pr-3">{fmt(r.wall40In, 4)} against {fmt(r.wall80In, 4)}</td>
                 <td className="pr-3">{fmt(r.bore40In, 4)} against {fmt(r.bore80In, 4)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.boreLostIn, 6)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.boreLostIn, 6)}</td>
                 <td>{fmt(r.flowAreaLostPct, 6)}</td>
               </tr>
             ))}
@@ -190,25 +193,23 @@ const Wall = () => {
           <Tile label="The teaching line, rated" value={fmt(data.teaching.ratingPsi, 6)} unit="psi" />
         </TileGrid>
       </div>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="x" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
-              label={{ value: label, position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS} domain={['auto', 'auto']}
-              label={{ value: 'rating, psi', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line type="monotone" dataKey="rating" name="Barlow rating, psi"
-              stroke="#BFFF00" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="x" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
+            label={{ value: label, position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS} domain={['auto', 'auto']}
+            label={{ value: 'rating, psi', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line type="monotone" dataKey="rating" name="Barlow rating, psi"
+            stroke={seriesColor(0)} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       {which === 'grade' ? (
         <div className="mt-3 overflow-x-auto">
-          <table className="text-xs text-slate-300 w-full">
-            <thead className="text-slate-500">
+          <table className="text-xs text-pl-text w-full">
+            <thead className="text-pl-muted">
               <tr>
                 <th className="text-left pr-3">grade</th>
                 <th className="text-left pr-3">minimum yield, psi</th>
@@ -224,7 +225,7 @@ const Wall = () => {
                   <td className="pr-3">{r.label || r.gradeId}</td>
                   <td className="pr-3">{fmt(r.yieldPsi, 0)}</td>
                   <td className="pr-3">{fmt(r.designFactor, 2)}</td>
-                  <td className="pr-3 text-[#BFFF00]">{fmt(r.ratingPsi, 6)}</td>
+                  <td className="pr-3 text-pl-primary-text">{fmt(r.ratingPsi, 6)}</td>
                   <td className="pr-3">{fmt(r.bareHoopPsi, 6)}</td>
                   <td>{yn(r.published)}</td>
                 </tr>
@@ -234,8 +235,8 @@ const Wall = () => {
         </div>
       ) : (
         <div className="mt-3 overflow-x-auto">
-          <table className="text-xs text-slate-300 w-full">
-            <thead className="text-slate-500">
+          <table className="text-xs text-pl-text w-full">
+            <thead className="text-pl-muted">
               <tr>
                 <th className="text-left pr-3">design factor</th>
                 <th className="text-left pr-3">rating, psi</th>
@@ -247,16 +248,16 @@ const Wall = () => {
               {data.factors.map((r) => (
                 <tr key={r.designFactor}>
                   <td className="pr-3">{fmt(r.designFactor, 2)}</td>
-                  <td className="pr-3 text-[#BFFF00]">{fmt(r.ratingPsi, 6)}</td>
+                  <td className="pr-3 text-pl-primary-text">{fmt(r.ratingPsi, 6)}</td>
                   <td className="pr-3">{fmt(1 / r.bareOverRated, 6)}</td>
-                  <td className={r.noDesignFactorAtAll ? 'text-[#f97316]' : ''}>{yn(r.noDesignFactorAtAll)}</td>
+                  <td className={r.noDesignFactorAtAll ? 'text-pl-warning-text' : ''}>{yn(r.noDesignFactorAtAll)}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
       )}
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THE DESIGN FACTOR IS AN INPUT AND IT IS NEVER DEFAULTED, because it is the whole regulatory
         content of the number: it differs by code, by class location and by fluid, and burying one
         in the module would be pretending a jurisdiction. Leave it out and the return is the bare
@@ -321,24 +322,22 @@ const Fittings = () => {
           <Tile label="The same fittings at f 0.012" value={fmt(data.published.smoothLengthFt, 6)} unit="ft" />
         </TileGrid>
       </div>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="x" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
-              label={{ value: label, position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS} domain={['auto', 'auto']}
-              label={{ value: 'equivalent length, ft', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line type="monotone" dataKey="lengthFt" name="equivalent length, ft"
-              stroke="#BFFF00" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="x" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
+            label={{ value: label, position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS} domain={['auto', 'auto']}
+            label={{ value: 'equivalent length, ft', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line type="monotone" dataKey="lengthFt" name="equivalent length, ft"
+            stroke={seriesColor(0)} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">{which === 'friction' ? 'friction factor' : 'bore, in'}</th>
               <th className="text-left pr-3">length, ft</th>
@@ -350,7 +349,7 @@ const Fittings = () => {
             {(which === 'friction' ? data.friction : data.bores).map((r) => (
               <tr key={which === 'friction' ? r.frictionFactor : r.idIn}>
                 <td className="pr-3">{which === 'friction' ? fmt(r.frictionFactor, 4) : fmt(r.idIn, 4)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.lengthFt, 6)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.lengthFt, 6)}</td>
                 <td className="pr-3">{fmt(r.diametersOfPipe, 6)}</td>
                 <td>{yn(r.published)}</td>
               </tr>
@@ -358,7 +357,7 @@ const Fittings = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         A FIXED DIAMETERS COUNT IS A FRICTION FACTOR IN DISGUISE. The count is the sum of K over the
         friction factor and nothing else, so a rule that puts this whole set at
         {' '}{fmt(data.rule.diametersPerFitting, 0)} diameters is assuming a friction factor of
@@ -375,8 +374,8 @@ const Fittings = () => {
         has to say which reading it is using.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">on the teaching line</th>
               <th className="text-left pr-3">count</th>
@@ -394,13 +393,13 @@ const Fittings = () => {
                 <td className="pr-3">{fmt(r.kEach, 4)}</td>
                 <td className="pr-3">{fmt(r.sumK, 6)}</td>
                 <td className="pr-3">{fmt(r.sharePct, 6)}</td>
-                <td className="text-[#BFFF00]">{fmt(r.lengthFt, 6)}</td>
+                <td className="text-pl-primary-text">{fmt(r.lengthFt, 6)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-2 text-xs text-slate-300">
+      <div className="mt-2 text-xs text-pl-text">
         ONE GLOBE VALVE IS WORTH MORE THAN EVERYTHING ELSE ON THAT LIST PUT TOGETHER. It carries
         {' '}{fmt(data.headline.worstSumK, 4)} of the {fmt(data.headline.totalSumK, 4)} total, which
         is {fmt(data.headline.worstSharePct, 6)} percent and
@@ -449,14 +448,14 @@ const Topology = () => {
         <Tile label="Pressures the solver has to find" value={fmt(data.topology.unknownCount, 0)} />
         <Tile label="Delivery points" value={fmt(data.topology.sinkCount, 0)} />
       </TileGrid>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         The unknowns in the order the solver indexes them: {data.topology.unknownIds.join(', ')}.
         The separator is not among them, because a sink is a FIXED pressure and takes whatever
         arrives. That index is what every later function reads.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">node</th>
               <th className="text-left pr-3">kind</th>
@@ -470,15 +469,15 @@ const Topology = () => {
                 <td className="pr-3">{n.id} ({n.label})</td>
                 <td className="pr-3">{n.kind}</td>
                 <td className="pr-3">{fmt(n.branchCount, 0)}</td>
-                <td className="text-[#BFFF00]">{n.pressureIsUnknown ? 'unknown, and solved for' : 'fixed, and given'}</td>
+                <td className="text-pl-primary-text">{n.pressureIsUnknown ? 'unknown, and solved for' : 'fixed, and given'}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">branch</th>
               <th className="text-left pr-3">drawn from</th>
@@ -493,22 +492,22 @@ const Topology = () => {
                 <td className="pr-3">{b.id} ({b.label})</td>
                 <td className="pr-3">{b.from}</td>
                 <td className="pr-3">{b.to}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(b.conductanceLbDPerRootPsi, 4)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(b.conductanceLbDPerRootPsi, 4)}</td>
                 <td>{b.capacityLimitedLbD === null ? 'none' : fmt(b.capacityLimitedLbD, 0)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THE THREE NODE KINDS ARE THE WHOLE VOCABULARY.
         {' '}{data.kinds.map((k) => `A ${k.kind} ${k.note}`).join(' ')} Anything a real gathering
         system has that is not one of those three has to be written as a branch relation or left
         out.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">what was handed in</th>
               <th className="text-left pr-3">refused</th>
@@ -519,7 +518,7 @@ const Topology = () => {
             {data.refusals.map((r) => (
               <tr key={r.label}>
                 <td className="pr-3">{r.label}</td>
-                <td className="pr-3 text-[#f97316]">{yn(r.refused)}</td>
+                <td className="pr-3 text-pl-warning-text">{yn(r.refused)}</td>
                 <td>{r.error || ''}</td>
               </tr>
             ))}
@@ -563,23 +562,21 @@ const Solo = () => {
         <Tile label="How many report converged" value={fmt(data.rows.filter((r) => r.converged).length, 0)} />
         <Tile label="How many actually close their mass balance" value={fmt(data.rows.filter((r) => r.massBalanceCloses).length, 0)} />
       </TileGrid>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={chart} margin={{ top: 10, right: 20, bottom: 24, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="name" tick={AXIS} interval={0} angle={-12} textAnchor="end" height={44} />
-            <YAxis tick={AXIS}
-              label={{ value: 'pressure, psi', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Bar dataKey="drawdownPsi" name="drawdown, reservoir to wellhead" fill="#BFFF00" isAnimationActive={false} />
-            <Bar dataKey="lineDropPsi" name="line drop, wellhead to separator" fill="#38bdf8" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <BarChart data={chart} margin={{ top: 10, right: 20, bottom: 24, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="name" tick={AXIS} interval={0} angle={-12} textAnchor="end" height={44} />
+          <YAxis tick={AXIS}
+            label={{ value: 'pressure, psi', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+          <Legend {...LEGEND_PROPS} />
+          <Bar dataKey="drawdownPsi" name="drawdown, reservoir to wellhead" fill={seriesColor(0)} isAnimationActive={false} />
+          <Bar dataKey="lineDropPsi" name="line drop, wellhead to separator" fill={seriesColor(1)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">well</th>
               <th className="text-left pr-3">qmax, lb/d</th>
@@ -597,7 +594,7 @@ const Solo = () => {
                 <td className="pr-3">{r.label}</td>
                 <td className="pr-3">{fmt(r.qmaxLbD, 0)}</td>
                 <td className="pr-3">{fmt(r.reservoirPressurePsia, 0)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.wellheadPsia, 6)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.wellheadPsia, 6)}</td>
                 <td className="pr-3">{fmt(r.rateLbD, 6)}</td>
                 <td className="pr-3">{fmt(r.flowlineLbD, 6)}</td>
                 <td className="pr-3">{fmt(r.drawdownPsi, 6)}</td>
@@ -608,8 +605,8 @@ const Solo = () => {
         </table>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">well</th>
               <th className="text-left pr-3">iterations</th>
@@ -626,14 +623,14 @@ const Solo = () => {
                 <td className="pr-3">{fmt(r.iterations, 0)}</td>
                 <td className="pr-3">{yn(r.converged)}</td>
                 <td className="pr-3">{r.pinned.length ? r.pinned.join(', ') : 'none'}</td>
-                <td className="pr-3 text-[#38bdf8]">{tiny(r.reportedResidualLbD)}</td>
-                <td className={r.massBalanceCloses ? 'text-[#38bdf8]' : 'text-[#f97316]'}>{tiny(r.conservationGapLbD)}</td>
+                <td className="pr-3 text-pl-info-text">{tiny(r.reportedResidualLbD)}</td>
+                <td className={r.massBalanceCloses ? 'text-pl-info-text' : 'text-pl-warning-text'}>{tiny(r.conservationGapLbD)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         READ THE LAST TWO COLUMNS TOGETHER, ALWAYS. The reported residual is what the ITERATION says
         about itself. The conservation gap is what an AUDIT says about the answer, and it is the
         only one of the two that can see a node the iteration left out of its own measurement.
@@ -647,8 +644,8 @@ const Solo = () => {
         already the case the whole Expert tier is about.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">the topology reduces the way a network must</th>
               <th className="text-left pr-3">many branches, psia</th>
@@ -662,7 +659,7 @@ const Solo = () => {
                 <td className="pr-3">{r.rule}</td>
                 <td className="pr-3">{fmt(r.manyBranchWellheadPsia, 9)}</td>
                 <td className="pr-3">{fmt(r.oneBranchWellheadPsia, 9)}</td>
-                <td className="text-[#BFFF00]">{tiny(r.differencePsia)}</td>
+                <td className="text-pl-primary-text">{tiny(r.differencePsia)}</td>
               </tr>
             ))}
           </tbody>

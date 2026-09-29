@@ -1,8 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, BarChart, Bar, ReferenceLine, ReferenceArea,
+  LineChart, Line, BarChart, Bar, ReferenceLine, ReferenceArea,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import { channelExplorer } from './interventionLab';
 import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
@@ -23,10 +26,10 @@ import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/comp
 
 const fmt = (v, d = 4) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: 0 })
-  : '-');
+  : 'n/a');
 
 const tiny = (v) => {
-  if (!Number.isFinite(v)) return '-';
+  if (!Number.isFinite(v)) return 'n/a';
   if (v === 0) return '0';
   return Math.abs(v) < 0.0005 ? v.toExponential(3) : fmt(v, 8);
 };
@@ -40,9 +43,9 @@ const MODES = [
   ['gates', 'Seven treatments, and the gate that decided each one'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const GRID = <CartesianGrid stroke="#334155" strokeDasharray="3 3" />;
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const GRID = <CartesianGrid {...GRID_STYLE} />;
 
 // --------------------------------------------------------------------------
 
@@ -92,25 +95,23 @@ const Window = () => {
           <Tile label="The window runs" value={fmt(chosen.windowRunsDecades, 6)} unit="log cycles" />
         </TileGrid>
       </div>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="tDays" type="number" scale="log" tick={AXIS} domain={['dataMin', 'dataMax']}
-              label={{ value: 'producing time, days', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis type="number" scale="log" tick={AXIS} domain={['dataMin', 'dataMax']}
-              label={{ value: 'water-oil ratio', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            {chosen.lateFromT !== null && (
-              <ReferenceLine x={chosen.lateFromT} stroke="#f97316" strokeDasharray="4 4" />
-            )}
-            <Line type="monotone" dataKey="ratio" name="the whole history" stroke="#475569" dot={false} isAnimationActive={false} />
-            <Line type="monotone" dataKey="inTheWindow" name="the late window the reading uses" stroke="#BFFF00" dot connectNulls={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <ChartFrame height={256} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="tDays" type="number" scale="log" tick={AXIS} tickFormatter={(v) => fmt(v, 1)} domain={['dataMin', 'dataMax']}
+            label={{ value: 'producing time, days', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis type="number" scale="log" tick={AXIS} domain={['dataMin', 'dataMax']}
+            label={{ value: 'water-oil ratio', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+          <Legend {...LEGEND_PROPS} />
+          {chosen.lateFromT !== null && (
+            <ReferenceLine x={chosen.lateFromT} stroke={seriesColor(2)} strokeDasharray="4 4" />
+          )}
+          <Line type="monotone" dataKey="ratio" name="the whole history" stroke={SVG_CHART.note} dot={false} isAnimationActive={false} />
+          <Line type="monotone" dataKey="inTheWindow" name="the late window the reading uses" stroke={seriesColor(0)} dot connectNulls={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
+      <div className="mt-3 text-xs text-pl-text">
         THE READING IS MADE ON THE LATE PART OF THE HISTORY, AND HOW MUCH OF IT IS AN INPUT. Early
         data is dominated by cleanup and by whatever the well was doing before it settled, so the
         mechanisms only separate late. At {fmt(chosen.lateFraction, 2)} the window starts on day
@@ -126,8 +127,8 @@ const Window = () => {
         one there.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">the dial</th>
               <th className="text-left pr-3">window starts, days</th>
@@ -147,11 +148,11 @@ const Window = () => {
                 <td className="pr-3">{fmt(r.lateFromT, 6)}</td>
                 <td className="pr-3">{fmt(r.lateSamples, 0)}</td>
                 <td className="pr-3">{fmt(r.latePositiveDerivatives, 0)}</td>
-                <td className="pr-3 text-[#f97316]">{fmt(r.lateNegativeDerivatives, 0)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.derivativeSlope, 9)}</td>
+                <td className="pr-3 text-pl-warning-text">{fmt(r.lateNegativeDerivatives, 0)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.derivativeSlope, 9)}</td>
                 <td className="pr-3">{fmt(r.channellingThreshold, 2)}</td>
                 <td className="pr-3">{fmt(r.marginToThreshold, 9)}</td>
-                <td className={r.mechanismId === 'channelling' ? '' : 'text-[#f97316]'}>{r.mechanismLabel}</td>
+                <td className={r.mechanismId === 'channelling' ? '' : 'text-pl-warning-text'}>{r.mechanismLabel}</td>
               </tr>
             ))}
           </tbody>
@@ -206,25 +207,23 @@ const Reading = () => {
         <Tile label="The channelling threshold" value={fmt(d.channellingThreshold, 2)} />
         <Tile label="Margin to that threshold" value={fmt(d.marginToThreshold, 9)} />
       </TileGrid>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="lateFraction" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
-              label={{ value: 'how much of the history counts as late', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS} domain={['auto', 'auto']}
-              label={{ value: 'log-log slope', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceArea y1={data.bands.lower} y2={data.bands.upper} fill="#f97316" fillOpacity={0.12} />
-            <ReferenceLine y={data.bands.channellingThreshold} stroke="#f97316" strokeDasharray="4 4" />
-            <ReferenceLine y={data.bands.coningThreshold} stroke="#38bdf8" strokeDasharray="2 4" />
-            <Line type="monotone" dataKey="derivativeSlope" name="derivative slope, which decides" stroke="#BFFF00" dot isAnimationActive={false} />
-            <Line type="monotone" dataKey="ratioSlope" name="ratio slope, which does not" stroke="#94a3b8" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <ChartFrame height={256} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="lateFraction" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
+            label={{ value: 'how much of the history counts as late', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS} domain={['auto', 'auto']}
+            label={{ value: 'log-log slope', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceArea y1={data.bands.lower} y2={data.bands.upper} fill={seriesColor(2)} fillOpacity={0.12} />
+          <ReferenceLine y={data.bands.channellingThreshold} stroke={seriesColor(2)} strokeDasharray="4 4" />
+          <ReferenceLine y={data.bands.coningThreshold} stroke={seriesColor(1)} strokeDasharray="2 4" />
+          <Line type="monotone" dataKey="derivativeSlope" name="derivative slope, which decides" stroke={seriesColor(0)} dot isAnimationActive={false} />
+          <Line type="monotone" dataKey="ratioSlope" name="ratio slope, which does not" stroke={SVG_CHART.reference} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
+      <div className="mt-3 text-xs text-pl-text">
         THE TWO LINES ON THAT CHART ARE THE BOUNDARIES AND THE SHADED STRIP IS THE BAND AROUND ONE
         OF THEM. At or below {fmt(data.bands.coningThreshold, 2)} the derivative is FALLING, which
         is the coning signature: the ratio has stopped climbing because the cone has reached the
@@ -241,8 +240,8 @@ const Reading = () => {
         boundary rather than resolved.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">one call returns both of these</th>
               <th className="text-left pr-3">samples it used</th>
@@ -256,20 +255,20 @@ const Reading = () => {
               <td className="pr-3">the RATIO fit, over every late sample</td>
               <td className="pr-3">{fmt(data.two.ratioFitSamples, 0)}</td>
               <td className="pr-3">{fmt(data.two.ratioFitSpanDecades, 9)}</td>
-              <td className="pr-3 text-[#BFFF00]">{fmt(data.two.ratioSlope, 9)}</td>
+              <td className="pr-3 text-pl-primary-text">{fmt(data.two.ratioSlope, 9)}</td>
               <td>{fmt(data.two.ratioR2Fraction, 9)}</td>
             </tr>
             <tr>
               <td className="pr-3">the DERIVATIVE fit, over the late samples whose derivative is positive</td>
               <td className="pr-3">{fmt(data.two.derivativeFitSamples, 0)}</td>
               <td className="pr-3">{fmt(data.two.derivativeFitSpanDecades, 9)}</td>
-              <td className="pr-3 text-[#BFFF00]">{fmt(data.two.derivativeSlope, 9)}</td>
+              <td className="pr-3 text-pl-primary-text">{fmt(data.two.derivativeSlope, 9)}</td>
               <td>{fmt(data.two.derivativeR2Fraction, 9)}</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THEY COME BACK SIDE BY SIDE AND NOTHING IN THE OBJECT SAYS THEY WERE MEASURED ON DIFFERENT
         DATA. The derivative fit is {fmt(data.two.samplesShort, 0)} samples short of the ratio fit
         and {fmt(data.two.decadesShort, 9)} of a log cycle short of the window it is describing,
@@ -278,8 +277,8 @@ const Reading = () => {
         {' '}{fmt(data.two.slopeGap, 9)}. Only the second of them decides anything.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">threshold</th>
               <th className="text-left pr-3">value</th>
@@ -290,18 +289,18 @@ const Reading = () => {
             {data.thresholds.map((t) => (
               <tr key={t.key}>
                 <td className="pr-3">{t.key}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(t.value, 6)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(t.value, 6)}</td>
                 <td>{t.note}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         WHAT THE ENGINE SAID, IN ITS OWN WORDS, AT A WINDOW OF {fmt(d.lateFraction, 2)} STARTING ON
         DAY {fmt(d.lateFromT, 6)}:
       </div>
-      <ul className="mt-1 text-xs text-slate-400 list-disc pl-5 space-y-1">
+      <ul className="mt-1 text-xs text-pl-muted list-disc pl-5 space-y-1">
         {d.notes.map((n) => (<li key={n.slice(0, 40)}>{n}</li>))}
       </ul>
       <Note>
@@ -361,25 +360,23 @@ const Worth = () => {
           <Tile label="Flow efficiency after" value={fmt(data.acid.flowEfficiencyAfter, 9)} />
         </TileGrid>
       </div>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={chart} margin={{ top: 10, right: 20, bottom: 24, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="x" tick={AXIS} interval={0} height={40}
-              label={{ value: label, position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS}
-              label={{ value: 'productivity multiplier', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={1} stroke="#f97316" strokeDasharray="4 4" />
-            <Bar dataKey="engine" name="the engine multiplier" fill="#BFFF00" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <BarChart data={chart} margin={{ top: 10, right: 20, bottom: 24, left: 0 }}>
+          {GRID}
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="x" tick={AXIS} interval={0}
+            label={{ value: label, position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS}
+            label={{ value: 'productivity multiplier', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine y={1} stroke={seriesColor(2)} strokeDasharray="4 4" />
+          <Bar dataKey="engine" name="the engine multiplier" fill={seriesColor(0)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
       {which === 'published' ? (
         <div className="mt-3 overflow-x-auto">
-          <table className="text-xs text-slate-300 w-full">
-            <thead className="text-slate-500">
+          <table className="text-xs text-pl-text w-full">
+            <thead className="text-pl-muted">
               <tr>
                 <th className="text-left pr-3">case</th>
                 <th className="text-left pr-3">skin before</th>
@@ -398,7 +395,7 @@ const Worth = () => {
                   <td className="pr-3">{fmt(r.skinBefore, 2)}</td>
                   <td className="pr-3">{fmt(r.skinAfter, 2)}</td>
                   <td className="pr-3">{fmt(r.publishedMultiplier, 9)}</td>
-                  <td className="pr-3 text-[#BFFF00]">{fmt(r.engineMultiplier, 9)}</td>
+                  <td className="pr-3 text-pl-primary-text">{fmt(r.engineMultiplier, 9)}</td>
                   <td className="pr-3">{tiny(r.difference)}</td>
                   <td className="pr-3">{fmt(r.flowEfficiencyBefore, 9)}</td>
                   <td>{fmt(r.flowEfficiencyAfter, 9)}</td>
@@ -409,8 +406,8 @@ const Worth = () => {
         </div>
       ) : (
         <div className="mt-3 overflow-x-auto">
-          <table className="text-xs text-slate-300 w-full">
-            <thead className="text-slate-500">
+          <table className="text-xs text-pl-text w-full">
+            <thead className="text-pl-muted">
               <tr>
                 <th className="text-left pr-3">skin before</th>
                 <th className="text-left pr-3">skin after</th>
@@ -423,7 +420,7 @@ const Worth = () => {
                 <tr key={r.skinBefore}>
                   <td className="pr-3">{fmt(r.skinBefore, 2)}</td>
                   <td className="pr-3">{fmt(r.skinAfter, 2)}</td>
-                  <td className="pr-3 text-[#BFFF00]">{fmt(r.multiplier, 9)}</td>
+                  <td className="pr-3 text-pl-primary-text">{fmt(r.multiplier, 9)}</td>
                   <td>{fmt(r.upliftPct, 6)}</td>
                 </tr>
               ))}
@@ -431,7 +428,7 @@ const Worth = () => {
           </table>
         </div>
       )}
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         NO CORRELATION, NO TYPE CURVE, NO RULE OF THUMB. The multiplier is a ratio of two
         denominators and it falls straight out of radial Darcy flow, which is why the first gate on
         it is that it is EXACTLY {fmt(data.identity.multiplier, 9)} when the skin does not change,
@@ -516,7 +513,7 @@ const Gates = () => {
           <Tile label="That read the diagnosis at all" value={fmt(head.readTheDiagnosis, 0)} />
         </TileGrid>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THE DIAGNOSIS IN CHARGE OF THIS SCREENING IS {head.sourceLabel.toUpperCase()}. It reads
         mechanism {head.mechanismLabel || 'none'} at {head.confidence} confidence, on a window
         starting day {fmt(head.lateFromT, 6)}. The WELL ROW never changes: the same skin, the same
@@ -524,8 +521,8 @@ const Gates = () => {
         moves below is the diagnosis moving.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">rank</th>
               <th className="text-left pr-3">treatment</th>
@@ -540,7 +537,7 @@ const Gates = () => {
               <tr key={r.id}>
                 <td className="pr-3">{fmt(r.rank, 0)}</td>
                 <td className="pr-3">{r.label}</td>
-                <td className={r.blocked ? 'pr-3 text-[#f97316]' : 'pr-3 text-[#BFFF00]'}>{r.verdict}</td>
+                <td className={r.blocked ? 'pr-3 text-pl-warning-text' : 'pr-3 text-pl-primary-text'}>{r.verdict}</td>
                 <td className="pr-3">{r.gate}</td>
                 <td className="pr-3">{yn(r.readsTheDiagnosis)}</td>
                 <td>{r.blockReason || 'not blocked'}</td>
@@ -551,19 +548,19 @@ const Gates = () => {
       </div>
       <div className="mt-4 space-y-3">
         {rows.map((r) => (
-          <div key={r.id} className="rounded-md border border-slate-700 bg-[#0F172A] p-3">
-            <p className="text-xs text-white font-medium mb-1">
+          <div key={r.id} className="rounded-md border border-pl-border bg-pl-sunken p-3">
+            <p className="text-xs text-pl-text font-medium mb-1">
               {r.label}: {r.verdict}, on {r.gate}
             </p>
-            <p className="text-[11px] text-slate-400 mb-1">{r.gateDescription}</p>
-            <ul className="text-[11px] text-slate-300 list-disc pl-5 space-y-1">
+            <p className="text-[11px] text-pl-muted mb-1">{r.gateDescription}</p>
+            <ul className="text-[11px] text-pl-text list-disc pl-5 space-y-1">
               {r.reasons.map((x) => (<li key={x.slice(0, 40)}>{x}</li>))}
-              {r.blockReason && (<li className="text-[#f97316]">{r.blockReason}</li>)}
+              {r.blockReason && (<li className="text-pl-warning-text">{r.blockReason}</li>)}
             </ul>
           </div>
         ))}
       </div>
-      <div className="mt-4 text-xs text-slate-300">
+      <div className="mt-4 text-xs text-pl-text">
         EVERY VERDICT CARRIES ITS REASONS IN FULL, and that is a design decision rather than an
         omission. A score with the reasoning folded into it is a number nobody can argue with, and
         the arguing is the point: an intervention is somebody else money. Of the
@@ -572,8 +569,8 @@ const Gates = () => {
         row alone. Ranked, this screening reads: {head.rankedOrder.join(', ')}.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">{sweep === 'water' ? 'water cut, percent' : 'gas-oil ratio, scf/stb'}</th>
               <th className="text-left pr-3">{sweep === 'water' ? 'water shutoff verdict' : 'gas shutoff verdict'}</th>
@@ -586,7 +583,7 @@ const Gates = () => {
             {sweepRows.map((r, i) => (
               <tr key={`${sweep}-${i}`}>
                 <td className="pr-3">{fmt(sweep === 'water' ? r.wctPct : r.gorScfStb, 4)}</td>
-                <td className="pr-3 text-[#BFFF00]">{sweep === 'water' ? r.waterShutoffVerdict : r.verdict}</td>
+                <td className="pr-3 text-pl-primary-text">{sweep === 'water' ? r.waterShutoffVerdict : r.verdict}</td>
                 <td className="pr-3">{sweep === 'water' ? yn(r.blocked) : fmt(r.ratioToExpected, 9)}</td>
                 <td className="pr-3">{fmt(sweep === 'water' ? r.waterReasonCount : r.reasonCount, 0)}</td>
                 <td>{yn(r.isTheTeachingWell)}</td>
@@ -595,7 +592,7 @@ const Gates = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         A GATE FIRES BEFORE THE THING BEHIND IT IS EVER READ, AND EVERY GATE IS A THRESHOLD. Below
         a threshold of 30 percent water there is no water problem worth an intervention whatever
         the diagnosis says, and the mechanism is never consulted. The gas gate is a threshold too,

@@ -1,8 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, ComposedChart, LineChart, BarChart, Line, Bar,
+  ComposedChart, LineChart, BarChart, Line, Bar,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import { ledgerExplorer } from './surveillanceLab';
 import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
@@ -24,7 +27,7 @@ import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/comp
 
 const fmt = (v, d = 4) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: 0 })
-  : '-');
+  : 'n/a');
 
 const yn = (b) => (b ? 'yes' : 'no');
 
@@ -35,9 +38,9 @@ const MODES = [
   ['kpis', 'The field roll-up, which has no baseline in it at all'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const GRID = <CartesianGrid stroke="#334155" strokeDasharray="3 3" />;
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const GRID = <CartesianGrid {...GRID_STYLE} />;
 
 // --------------------------------------------------------------------------
 
@@ -77,22 +80,20 @@ const Ledger = () => {
         <Tile label="Drop the engine reports, on the calendar column" value={fmt(data.head.dropPctOnCalendar, 6)} unit="%" />
         <Tile label="Drop on the producing-day column, which nobody computes" value={fmt(data.head.dropPctOnProducingDay, 6)} unit="%" />
       </TileGrid>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="date" tick={AXIS}
-              label={{ value: 'ledger date', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS}
-              label={{ value: 'stb over the row, and stb/d', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Bar dataKey="calendar" name="the calendar volume, stb" fill="#38bdf8" isAnimationActive={false} />
-            <Line type="monotone" dataKey="producingDay" name="the producing-day rate, stb/d" stroke="#BFFF00" dot isAnimationActive={false} />
-          </ComposedChart>
-        </ResponsiveContainer>
-      </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <ChartFrame height={256} className="mt-3">
+        <ComposedChart data={chart} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="date" tick={AXIS}
+            label={{ value: 'ledger date', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS}
+            label={{ value: 'stb over the row, and stb/d', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+          <Legend {...LEGEND_PROPS} />
+          <Bar dataKey="calendar" name="the calendar volume, stb" fill={seriesColor(1)} isAnimationActive={false} />
+          <Line type="monotone" dataKey="producingDay" name="the producing-day rate, stb/d" stroke={seriesColor(0)} dot isAnimationActive={false} />
+        </ComposedChart>
+      </ChartFrame>
+      <div className="mt-3 text-xs text-pl-text">
         TWO COLUMNS OFF THE SAME ROWS, MOVING IN OPPOSITE DIRECTIONS. On
         {' '}{data.head.name}, a TEACHING well this course invented and not a published one, the
         producing-day oil rate takes {fmt(data.head.distinctProducingDayValues, 0)} distinct value
@@ -111,8 +112,8 @@ const Ledger = () => {
         named the cause fires: {yn(data.head.theDowntimeExceptionFires)}.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">teaching row</th>
               <th className="text-left pr-3">hours on, h</th>
@@ -127,8 +128,8 @@ const Ledger = () => {
               <tr key={r.date}>
                 <td className="pr-3">{r.date}</td>
                 <td className="pr-3">{fmt(r.hoursOn, 4)}</td>
-                <td className="pr-3 text-[#38bdf8]">{fmt(r.calendarOilStb, 9)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.producingDayOilStbd, 9)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.calendarOilStb, 9)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.producingDayOilStbd, 9)}</td>
                 <td className="pr-3">{fmt(r.watercutFraction, 12)}</td>
                 <td>{fmt(r.gorScfStb, 9)}</td>
               </tr>
@@ -136,7 +137,7 @@ const Ledger = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-4 text-xs text-slate-300">
+      <div className="mt-4 text-xs text-pl-text">
         AND THE SAME FUNCTION ON THE FIVE PUBLISHED ROWS, which is where the members come from.
         Nine of the fourteen keys are copied through unchanged and
         {' '}{fmt(data.members.filter((m) => m.kind === 'computed').length, 0)} are computed, of
@@ -146,8 +147,8 @@ const Ledger = () => {
         downstream and turn a shut-in day into a fabricated record rate.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">published row</th>
               <th className="text-left pr-3">oil, stb</th>
@@ -170,14 +171,14 @@ const Ledger = () => {
                 <td className="pr-3">{fmt(r.liquid, 9)}</td>
                 <td className="pr-3">{r.watercut === null ? 'null' : fmt(r.watercut, 12)}</td>
                 <td className="pr-3">{r.gor === null ? 'null' : fmt(r.gor, 9)}</td>
-                <td className="pr-3 text-[#BFFF00]">{r.oilPd === null ? 'null' : fmt(r.oilPd, 9)}</td>
+                <td className="pr-3 text-pl-primary-text">{r.oilPd === null ? 'null' : fmt(r.oilPd, 9)}</td>
                 <td>{yn(r.engineReproducesThePublishedPoint)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-4 text-xs text-slate-300">
+      <div className="mt-4 text-xs text-pl-text">
         THE HOURS COLUMN IS THE WHOLE OF THE DIFFERENCE, and nothing clamps it. Sweep one
         constructed row of {fmt(data.sweep[0].calendarOilStb, 0)} stb of oil and the uplift over
         the calendar volume runs from {fmt(data.sweep[0].upliftOverTheCalendarVolume, 6)} at a full
@@ -190,8 +191,8 @@ const Ledger = () => {
         can average a negative number of hours.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">hours handed in</th>
               <th className="text-left pr-3">hours returned</th>
@@ -207,15 +208,15 @@ const Ledger = () => {
                 <td className="pr-3">{fmt(r.hoursOn, 4)}</td>
                 <td className="pr-3">{r.oilPd === null ? 'null' : fmt(r.oilPd, 9)}</td>
                 <td className="pr-3">{r.ratioToTheCalendarVolume === null ? 'not applicable' : fmt(r.ratioToTheCalendarVolume, 9)}</td>
-                <td className={r.refused ? 'text-[#f97316]' : ''}>{yn(r.refused)}</td>
+                <td className={r.refused ? 'text-pl-warning-text' : ''}>{yn(r.refused)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">the hours column spelled</th>
               <th className="text-left pr-3">uptime is unknown</th>
@@ -282,21 +283,19 @@ const Ratios = () => {
         <Tile label="Rows with no gas-oil ratio" value={fmt(refusedGor, 0)} />
         <Tile label="Correction rows, which are not refused at all" value={fmt(data.rows.filter((r) => r.isACorrectionRow).length, 0)} />
       </TileGrid>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={chart} margin={{ top: 10, right: 20, bottom: 24, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="row" tick={AXIS} interval={0} height={40} />
-            <YAxis tick={AXIS}
-              label={{ value: 'watercut fraction, and gas-oil ratio in Mscf/stb', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Bar dataKey="watercut" name="watercut, a fraction" fill="#38bdf8" isAnimationActive={false} />
-            <Bar dataKey="gor" name="gas-oil ratio, Mscf/stb" fill="#BFFF00" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <ChartFrame height={224} className="mt-3">
+        <BarChart data={chart} margin={{ top: 10, right: 20, bottom: 24, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="row" tick={AXIS} interval={0} height={40} />
+          <YAxis tick={AXIS}
+            label={{ value: 'watercut fraction, and gas-oil ratio in Mscf/stb', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+          <Legend {...LEGEND_PROPS} />
+          <Bar dataKey="watercut" name="watercut, a fraction" fill={seriesColor(1)} isAnimationActive={false} />
+          <Bar dataKey="gor" name="gas-oil ratio, Mscf/stb" fill={seriesColor(0)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
+      <div className="mt-3 text-xs text-pl-text">
         A WATERCUT IS A FRACTION OF LIQUID AND A GAS-OIL RATIO IS PER BARREL OF OIL, so the two
         refuse on DIFFERENT conditions and a bar of zero above is a REFUSAL and not a measurement.
         A row with no liquid has no watercut. A row with no OIL has no gas-oil ratio however much
@@ -308,8 +307,8 @@ const Ratios = () => {
         ordinary gas-oil ratio, because the ratio never looks at the water at all.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">oil, stb</th>
               <th className="text-left pr-3">water, stb</th>
@@ -326,7 +325,7 @@ const Ratios = () => {
                 <td className="pr-3">{fmt(r.oilStb, 4)}</td>
                 <td className="pr-3">{fmt(r.waterStb, 4)}</td>
                 <td className="pr-3">{fmt(r.gasMscf, 4)}</td>
-                <td className={r.liquidStb < 0 ? 'pr-3 text-[#f97316]' : 'pr-3'}>{fmt(r.liquidStb, 6)}</td>
+                <td className={r.liquidStb < 0 ? 'pr-3 text-pl-warning-text' : 'pr-3'}>{fmt(r.liquidStb, 6)}</td>
                 <td className="pr-3">{r.watercutFraction === null ? 'null' : fmt(r.watercutFraction, 12)}</td>
                 <td className="pr-3">{r.gorScfStb === null ? 'null' : fmt(r.gorScfStb, 9)}</td>
                 <td>{r.whyItRefused}</td>
@@ -335,14 +334,14 @@ const Ratios = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-4 text-xs text-slate-300">
+      <div className="mt-4 text-xs text-pl-text">
         THE FOURTEEN KEYS, AND WHICH FIVE CAN REFUSE. Naming which of them is copied and which is
         computed is most of what this tier is for, because a copied key is the ledger's claim and a
         computed one is the engine's.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">key</th>
               <th className="text-left pr-3">copied or computed</th>
@@ -354,7 +353,7 @@ const Ratios = () => {
             {data.members.map((m) => (
               <tr key={m.key}>
                 <td className="pr-3">{m.key}</td>
-                <td className={m.kind === 'computed' ? 'pr-3 text-[#BFFF00]' : 'pr-3'}>{m.kind}</td>
+                <td className={m.kind === 'computed' ? 'pr-3 text-pl-primary-text' : 'pr-3'}>{m.kind}</td>
                 <td className="pr-3">{yn(m.canRefuse)}</td>
                 <td>{m.meaning}</td>
               </tr>
@@ -409,21 +408,19 @@ const Field = () => {
         <Tile label="The same four rows as text" value={fmt(data.strings[3].fieldOilAsStrings, 0)} unit="stb" />
         <Tile label="Overstatement factor" value={fmt(data.strings[3].overstatementFactor, 4)} />
       </TileGrid>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={chart} margin={{ top: 10, right: 20, bottom: 24, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="rows" tick={AXIS} interval={0} height={40} />
-            <YAxis tick={AXIS} scale="log" domain={[100, 'dataMax']}
-              label={{ value: 'field oil on one date, stb', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 0)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Bar dataKey="asNumbers" name="the volumes as numbers" fill="#38bdf8" isAnimationActive={false} />
-            <Bar dataKey="asStrings" name="the SAME volumes as text" fill="#f97316" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <ChartFrame height={224} className="mt-3">
+        <BarChart data={chart} margin={{ top: 10, right: 20, bottom: 24, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="rows" tick={AXIS} interval={0} height={40} />
+          <YAxis tick={AXIS} scale="log" domain={[100, 'dataMax']}
+            label={{ value: 'field oil on one date, stb', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 0)} />
+          <Legend {...LEGEND_PROPS} />
+          <Bar dataKey="asNumbers" name="the volumes as numbers" fill={seriesColor(0)} isAnimationActive={false} />
+          <Bar dataKey="asStrings" name="the SAME volumes as text" fill={seriesColor(2)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
+      <div className="mt-3 text-xs text-pl-text">
         THE FIELD ROLL-UP ADDS, AND ADDITION IS THE ONE OPERATION A TEXT COLUMN BREAKS. The
         accumulator starts at a numeric zero and the first string turns the accumulator itself into
         a string, so every later row is CONCATENATED onto it rather than added. One row of text is
@@ -441,8 +438,8 @@ const Field = () => {
         arrived as text.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">identical rows of 800 stb on one date</th>
               <th className="text-left pr-3">as numbers, stb</th>
@@ -456,7 +453,7 @@ const Field = () => {
               <tr key={r.rows}>
                 <td className="pr-3">{fmt(r.rows, 0)}</td>
                 <td className="pr-3">{fmt(r.fieldOilAsNumbers, 0)}</td>
-                <td className="pr-3 text-[#f97316]">{fmt(r.fieldOilAsStrings, 0)}</td>
+                <td className="pr-3 text-pl-warning-text">{fmt(r.fieldOilAsStrings, 0)}</td>
                 <td className="pr-3">{fmt(r.overstatementFactor, 4)}</td>
                 <td>{yn(r.theAccumulatorConcatenated)}</td>
               </tr>
@@ -464,7 +461,7 @@ const Field = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-4 text-xs text-slate-300">
+      <div className="mt-4 text-xs text-pl-text">
         AND THE PUBLISHED FIELD, WHERE THE RATIOS ARE FORMED VOLUMETRICALLY, sum of water over sum
         of liquid, which is what a period ratio means. The engine reproduces every one of the
         {' '}{fmt(data.head.publishedDays, 0)} published days: {yn(data.head.everyPublishedDayReproduced)}.
@@ -474,8 +471,8 @@ const Field = () => {
         domain where a barrel and a thousand cubic feet are summed.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">published field day</th>
               <th className="text-left pr-3">oil, stb</th>
@@ -504,8 +501,8 @@ const Field = () => {
         </table>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">what filed the row</th>
               <th className="text-left pr-3">counts as producing</th>
@@ -587,22 +584,20 @@ const Kpis = () => {
         <Tile label="Gas-oil ratio, volumetric" value={fmt(chosen.gorScfStb, 6)} unit="scf/stb" />
         <Tile label="Uptime" value={fmt(chosen.uptimePct, 6)} unit="%" />
       </TileGrid>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 24, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="asked" tick={AXIS} type="number" scale="log" domain={['dataMin', 'dataMax']}
-              label={{ value: 'window asked for, days', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS}
-              label={{ value: 'field days actually averaged', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 4)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line type="monotone" dataKey="asked" name="days the object reports" stroke="#38bdf8" dot isAnimationActive={false} />
-            <Line type="monotone" dataKey="averaged" name="days it actually averaged" stroke="#BFFF00" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 24, left: 0 }}>
+          {GRID}
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="asked" tick={AXIS} type="number" scale="log" domain={['dataMin', 'dataMax']}
+            label={{ value: 'window asked for, days', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS}
+            label={{ value: 'field days actually averaged', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 4)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line type="monotone" dataKey="asked" name="days the object reports" stroke={seriesColor(1)} dot isAnimationActive={false} />
+          <Line type="monotone" dataKey="averaged" name="days it actually averaged" stroke={seriesColor(0)} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
+      <div className="mt-3 text-xs text-pl-text">
         THE ONLY SURVEILLANCE FUNCTION WITH NO BASELINE AND NO COMPARISON IN IT AT ALL, which is
         why it belongs to this tier. It forms mean daily rates over a trailing DATE window and then
         takes the watercut and the gas-oil ratio OF THOSE MEANS, which is volume weighted by
@@ -619,8 +614,8 @@ const Kpis = () => {
         whether any of its numbers is null.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">window asked, days</th>
               <th className="text-left pr-3">days averaged</th>
@@ -634,7 +629,7 @@ const Kpis = () => {
             {data.sweep.map((r) => (
               <tr key={r.windowDaysAsked}>
                 <td className="pr-3">{fmt(r.windowDaysAsked, 0)}</td>
-                <td className={r.itAveragedFewerDaysThanItReports ? 'pr-3 text-[#f97316]' : 'pr-3'}>{fmt(r.fieldDaysActuallyAveraged, 0)}</td>
+                <td className={r.itAveragedFewerDaysThanItReports ? 'pr-3 text-pl-warning-text' : 'pr-3'}>{fmt(r.fieldDaysActuallyAveraged, 0)}</td>
                 <td className="pr-3">{fmt(r.oil, 9)}</td>
                 <td className="pr-3">{fmt(r.watercutFraction, 12)}</td>
                 <td className="pr-3">{fmt(r.gorScfStb, 9)}</td>
@@ -644,7 +639,7 @@ const Kpis = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-4 text-xs text-slate-300">
+      <div className="mt-4 text-xs text-pl-text">
         THE GUARD IS ON ONE LINE AND NOT ON THE NEXT. The liquid is guarded with an explicit null
         check on both means; the watercut on the very next line reads the same two means with a
         bare test that they sum above zero. On a field day whose oil mean comes back null and whose
@@ -653,8 +648,8 @@ const Kpis = () => {
         refuses outright and returns null: {yn(data.empty.returnedNull)}.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">what was handed in</th>
               <th className="text-left pr-3">liquid</th>
@@ -667,7 +662,7 @@ const Kpis = () => {
             {data.nullGuard.map((r) => (
               <tr key={r.label}>
                 <td className="pr-3">{r.label}</td>
-                <td className={r.liquidRefused ? 'pr-3 text-[#f97316]' : 'pr-3'}>{r.liquid === null ? 'null' : fmt(r.liquid, 6)}</td>
+                <td className={r.liquidRefused ? 'pr-3 text-pl-warning-text' : 'pr-3'}>{r.liquid === null ? 'null' : fmt(r.liquid, 6)}</td>
                 <td className="pr-3">{r.watercutFraction === null ? 'null' : fmt(r.watercutFraction, 12)}</td>
                 <td className="pr-3">{r.gorScfStb === null ? 'null' : fmt(r.gorScfStb, 6)}</td>
                 <td>{r.uptimePct === null ? 'null' : fmt(r.uptimePct, 6)}</td>
@@ -676,7 +671,7 @@ const Kpis = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-4 text-xs text-slate-300">
+      <div className="mt-4 text-xs text-pl-text">
         WHO IS IN THE UPTIME. The roll-up skips INJECTORS and reads everything else, so an
         observation well recording a perfect twenty-four hours a day is averaged in with the real
         ones, and a producer that never records hours is not in it at all. Of the
@@ -685,8 +680,8 @@ const Kpis = () => {
         column, so the uptime is the mean of the wells that happened to fill it in.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">window, days</th>
               <th className="text-left pr-3">uptime with the observation well, %</th>
@@ -699,7 +694,7 @@ const Kpis = () => {
             {data.uptime.map((r) => (
               <tr key={r.windowDays}>
                 <td className="pr-3">{fmt(r.windowDays, 0)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.uptimePctWithTheObservationWell, 9)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.uptimePctWithTheObservationWell, 9)}</td>
                 <td className="pr-3">{fmt(r.uptimePctWithItDropped, 9)}</td>
                 <td className="pr-3">{fmt(r.differenceInPoints, 9)}</td>
                 <td>{fmt(r.wellCountWithIt, 0)} against {fmt(r.wellCountWithout, 0)}</td>
@@ -708,12 +703,12 @@ const Kpis = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-4 text-xs text-slate-300">
+      <div className="mt-4 text-xs text-pl-text">
         THE PUBLISHED FIELD, FOR COMPARISON, at both windows the golden commits.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">window, days</th>
               <th className="text-left pr-3">oil, stb/d</th>
@@ -740,8 +735,8 @@ const Kpis = () => {
         </table>
       </div>
       <div className="mt-4 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">teaching well</th>
               <th className="text-left pr-3">type</th>

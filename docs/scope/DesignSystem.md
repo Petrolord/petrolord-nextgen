@@ -581,3 +581,46 @@ Rod pump (`/dashboard/apps/rodpump`), gas well
   (scenes in `prod4bScenes.jsx`: every view of every panel in light and
   dark, no retired chart colour, a flagged row on the warning role with its
   words, the primary march button).
+
+## 11. Batch 4C: production III course apps (as built)
+
+Production networks (`/dashboard/apps/network`), well intervention
+(`/dashboard/apps/intervention`) and production surveillance
+(`/dashboard/apps/surveillance`) are on the roles and registered in
+`src/design/rollout/w4c.js`.
+
+- The nine panels (and the network course's `TypedNetworkFields`) are used
+  by their learning page, the lesson reader and the handbook, which 1C
+  already themes, so they moved straight to roles with no legacy branch. No
+  file is shared with 4A or 4B.
+- The page recipe is 3D's: cards on `surface`, lessons and the locked
+  capstone note on `sunken`, tier buttons primary when chosen (with
+  `aria-pressed`), capstone results and toasts on the success and danger
+  roles with their words, certificate number and award icon gold. The typed
+  network text field takes `THEMED_INPUT`.
+- Every chart (31, all Recharts) is in `ChartFrame` with `GRID_STYLE`,
+  `AXIS_TICK`, `TOOLTIP_STYLE`, axis titles on `SVG_CHART.note` and
+  `LEGEND_PROPS`; a labelled x-axis takes `XAXIS_LABEL_HEIGHT` (the
+  titles sat on the legend before). Lime goes to `seriesColor(0)`, sky to
+  `(1)` (or `(0)` where no lime was drawn), orange series and thresholds to
+  `(2)`, pink to `(4)`; the grey "whole history" and "ratio slope" traces
+  and the unity line take `SVG_CHART.note` and `reference`. Two charts
+  follow meaning: the surveillance allocation factors use
+  `getStreamPalette` for oil, water and gas (their 0.7 and 1.3 bands move
+  to `reference`), and the exception severity bars read high red, medium
+  amber, info blue, with the high rows of the severity tables on
+  `danger-text`.
+- The intervention producing-time axes are log scale and printed ticks
+  with fifteen decimals; they now round to one.
+- Table highlights that were lime, orange and sky take `primary-text`,
+  `warning-text` and `info-text`; each flag sits on its own word or value.
+  Empty values are `n/a`.
+- No lesson in these three courses names a chart colour, so no lesson
+  text changed.
+- Tests: `src/pages/__tests__/Production4C.theme.test.jsx` (the four
+  standard checks per app, every tier in both themes with no lime left,
+  capstone pass, fail and locked, the Learning Mode gate) and
+  `src/components/course/panels/__tests__/Production4CPanels.theme.test.jsx`
+  (every view and sub-view of every panel in both themes, every plot on the
+  white plate with the mark, every series in a kit colour, and a source
+  scan with a negative control).
