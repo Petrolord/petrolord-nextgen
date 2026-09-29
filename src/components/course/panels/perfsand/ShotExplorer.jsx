@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+  BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
+import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   IN, UM, FT_PER_M, GUN_CATALOG, catalogSweep, publishedGun, skinOf,
   PUBLISHED_SIEVE, publishedStats, RUNG_SANDS, ptsOf, sieveStats, FINES_CUTOFF_M,
@@ -42,8 +45,8 @@ const Guns = () => {
         <Tile label="Rows flagged approx" value={shown.length} />
       </TileGrid>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">gun</th>
               <th className="text-right pr-3">OD (in)</th>
@@ -100,7 +103,7 @@ const Geometry = () => {
   if (!s) return <Note>Those numbers do not describe a charge.</Note>;
   return (
     <>
-      <div className="grid grid-cols-3 gap-2">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
         <NumField label="Shot density (spf per foot, default 12)" value={spf} onChange={setSpf} placeholder="12" />
         <NumField label="Penetration (in, default 32)" value={pen} onChange={setPen} placeholder="32" />
         <NumField label="Entrance hole (in, default 0.43)" value={eh} onChange={setEh} placeholder="0.43" />
@@ -116,21 +119,19 @@ const Geometry = () => {
         <Tile label="Blockage ratio" value={fmt(s.rwD, 6)} />
         <Tile label="Total skin" value={fmt(s.total, 6)} />
       </TileGrid>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="spf" tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'shots per foot', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'spacing (mm)', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(x) => fmt(x, 3)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Bar dataKey="spacingMm" name="perf spacing" fill="#BFFF00" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <BarChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="spf" tick={AXIS_TICK}
+            label={{ value: 'shots per foot', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS_TICK}
+            label={{ value: 'spacing (mm)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(x) => fmt(x, 3)} />
+          <Legend {...LEGEND_PROPS} />
+          <Bar dataKey="spacingMm" name="perf spacing" fill={seriesColor(1)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
       <Note>
         Four lengths describe a perforation and the skin calculation reads nothing else: the tunnel
         length, the tunnel radius, the spacing between shots and the wellbore radius. Spacing is one
@@ -167,22 +168,20 @@ const Sieve = () => {
         <Tile label="Fines cutoff" value={fmt(FINES_CUTOFF_M / UM, 1)} unit="um" />
         <Tile label="Points" value={pts.length} />
       </TileGrid>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="sizeUm" type="number" scale="log" domain={['dataMin', 'dataMax']} reversed
-              tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'grain size (um, log)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} domain={[0, 100]}
-              label={{ value: 'cumulative retained (pct)', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(x) => fmt(x, 3)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line type="monotone" dataKey="retained" name="cumulative retained" stroke="#38bdf8" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3">
+        <LineChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="sizeUm" type="number" scale="log" domain={['dataMin', 'dataMax']} reversed
+            tick={AXIS_TICK}
+            label={{ value: 'grain size (um, log)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS_TICK} domain={[0, 100]}
+            label={{ value: 'cumulative retained (pct)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(x) => fmt(x, 3)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line type="monotone" dataKey="retained" name="cumulative retained" stroke={seriesColor(0)} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Note>
         The curve is cumulative RETAINED, which is the sand control convention and the opposite of
         the soils one. D10 is therefore the COARSE decile: only a tenth of the sample is coarser

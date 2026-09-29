@@ -1,8 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid,
+  LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid,
   Tooltip, Legend, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
+import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   PARAMS, E_PRIME_PA, FRAC_MODELS, geometryOf, publishedPkn, publishedKgd, modelSweep,
   ratePower, balanceOf, scheduleOf, leakoffSweep, noltekLSweep,
@@ -54,7 +57,7 @@ const Geometry = () => {
   ];
   return (
     <>
-      <div className="grid grid-cols-3 gap-2">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
         <NumField label={`Half-length xf (m, default ${PARAMS.xfM})`} value={xf} onChange={setXf} placeholder={String(PARAMS.xfM)} />
         <NumField label={`Height hf (m, default ${PARAMS.hfM})`} value={hf} onChange={setHf} placeholder={String(PARAMS.hfM)} />
         <NumField label={`Injection rate (m3/s, default ${PARAMS.qiM3s})`} value={qi} onChange={setQi} placeholder={String(PARAMS.qiM3s)} />
@@ -73,21 +76,19 @@ const Geometry = () => {
         <Tile label="Plane strain modulus" value={fmt(E_PRIME_PA / 1e9, 5)} unit="GPa" />
         <Tile label="Published KGD over PKN" value={fmt(pub.kgd.wAvgM / pub.pkn.wAvgM, 5)} unit="times" />
       </TileGrid>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={bars} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="name" tick={{ fill: '#94a3b8', fontSize: 11 }} />
-            <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(x) => fmt(x, 5)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Bar dataKey="pkn" name="PKN" fill="#38bdf8" isAnimationActive={false} />
-            <Bar dataKey="kgd" name="KGD" fill="#BFFF00" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <ChartFrame height={224} className="mt-3">
+        <BarChart data={bars} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="name" tick={AXIS_TICK} />
+          <YAxis tick={AXIS_TICK} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(x) => fmt(x, 5)} />
+          <Legend {...LEGEND_PROPS} />
+          <Bar dataKey="pkn" name="PKN" fill={seriesColor(0)} isAnimationActive={false} />
+          <Bar dataKey="kgd" name="KGD" fill={seriesColor(1)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
+      <div className="mt-3 text-xs text-pl-text">
         Same rock, same fluid, same rate, same target. The two models return widths that differ by
         a factor of {fmt(both.kgd.wAvgM / both.pkn.wAvgM, 3)} and net pressures that differ by
         more. The bottomhole treating pressure is the closure pressure plus the net pressure, and
@@ -133,60 +134,54 @@ const Models = () => {
         <Tile label="They move" value={(last.pknPNetPa - first.pknPNetPa) * (last.kgdPNetPa - first.kgdPNetPa) < 0 ? 'in OPPOSITE directions' : 'the same way'} />
       </TileGrid>
       <div className="grid gap-3 lg:grid-cols-2 mt-3">
-        <div className="h-64">
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-              <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-              <XAxis dataKey="xfM" type="number" domain={['dataMin', 'dataMax']}
-                tick={{ fill: '#94a3b8', fontSize: 11 }}
-                label={{ value: 'half-length (m)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-              <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }}
-                label={{ value: 'average width (mm)', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-              <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-                formatter={(x) => fmt(x, 5)} />
-              <Legend wrapperStyle={{ fontSize: 11 }} />
-              <Line type="monotone" dataKey="kgdWAvgMm" name="KGD width" stroke="#BFFF00" dot isAnimationActive={false} />
-              <Line type="monotone" dataKey="pknWAvgMm" name="PKN width" stroke="#38bdf8" dot isAnimationActive={false} />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
-        <div className="h-64">
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-              <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-              <XAxis dataKey="xfM" type="number" domain={['dataMin', 'dataMax']}
-                tick={{ fill: '#94a3b8', fontSize: 11 }}
-                label={{ value: 'half-length (m)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-              <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }}
-                label={{ value: 'net pressure (MPa)', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-              <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-                formatter={(x) => fmt(x, 5)} />
-              <Legend wrapperStyle={{ fontSize: 11 }} />
-              <Line type="monotone" dataKey="pknPNetMPa" name="PKN net pressure, RISES" stroke="#38bdf8" dot isAnimationActive={false} />
-              <Line type="monotone" dataKey="kgdPNetMPa" name="KGD net pressure, FALLS" stroke="#f472b6" dot isAnimationActive={false} />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
-      </div>
-      <div className="h-48 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="xfM" tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'half-length (m)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} domain={[0, 'dataMax']}
-              label={{ value: 'KGD width over PKN width', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
+        <ChartFrame height={256}>
+          <LineChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+            <CartesianGrid {...GRID_STYLE} />
+            <XAxis dataKey="xfM" type="number" domain={['dataMin', 'dataMax']}
+              tick={AXIS_TICK}
+              label={{ value: 'half-length (m)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+            <YAxis tick={AXIS_TICK}
+              label={{ value: 'average width (mm)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+            <Tooltip contentStyle={TOOLTIP_STYLE}
               formatter={(x) => fmt(x, 5)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={1} stroke="#64748b" />
-            <Bar dataKey="ratio" name="KGD is this many times wider" fill="#a78bfa" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
+            <Legend {...LEGEND_PROPS} />
+            <Line type="monotone" dataKey="kgdWAvgMm" name="KGD width" stroke={seriesColor(1)} dot isAnimationActive={false} />
+            <Line type="monotone" dataKey="pknWAvgMm" name="PKN width" stroke={seriesColor(0)} dot isAnimationActive={false} />
+          </LineChart>
+        </ChartFrame>
+        <ChartFrame height={256}>
+          <LineChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+            <CartesianGrid {...GRID_STYLE} />
+            <XAxis dataKey="xfM" type="number" domain={['dataMin', 'dataMax']}
+              tick={AXIS_TICK}
+              label={{ value: 'half-length (m)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+            <YAxis tick={AXIS_TICK}
+              label={{ value: 'net pressure (MPa)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+            <Tooltip contentStyle={TOOLTIP_STYLE}
+              formatter={(x) => fmt(x, 5)} />
+            <Legend {...LEGEND_PROPS} />
+            <Line type="monotone" dataKey="pknPNetMPa" name="PKN net pressure, RISES" stroke={seriesColor(0)} dot isAnimationActive={false} />
+            <Line type="monotone" dataKey="kgdPNetMPa" name="KGD net pressure, FALLS" stroke={seriesColor(4)} dot isAnimationActive={false} />
+          </LineChart>
+        </ChartFrame>
       </div>
+      <ChartFrame height={192} className="mt-3">
+        <BarChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="xfM" tick={AXIS_TICK}
+            label={{ value: 'half-length (m)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS_TICK} domain={[0, 'dataMax']}
+            label={{ value: 'KGD width over PKN width', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(x) => fmt(x, 5)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine y={1} stroke={SVG_CHART.reference} />
+          <Bar dataKey="ratio" name="KGD is this many times wider" fill={seriesColor(4)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">xf (m)</th>
               <th className="text-right pr-3">PKN width (mm)</th>
@@ -204,9 +199,9 @@ const Models = () => {
                 <td className="pr-3">{fmt(r.xfM, 0)}</td>
                 <td className="text-right pr-3">{mm(r.pknWAvgM)}</td>
                 <td className="text-right pr-3">{mm(r.kgdWAvgM)}</td>
-                <td className="text-right pr-3 text-violet-400">{fmt(r.widthRatioKgdOverPkn, 4)}</td>
-                <td className="text-right pr-3 text-sky-400">{mpa(r.pknPNetPa)}</td>
-                <td className="text-right pr-3 text-pink-400">{mpa(r.kgdPNetPa)}</td>
+                <td className="text-right pr-3 text-pl-text">{fmt(r.widthRatioKgdOverPkn, 4)}</td>
+                <td className="text-right pr-3 text-pl-text">{mpa(r.pknPNetPa)}</td>
+                <td className="text-right pr-3 text-pl-text">{mpa(r.kgdPNetPa)}</td>
                 <td className="text-right pr-3">{mpa(r.pknBhtpPa)}</td>
                 <td className="text-right">{mpa(r.kgdBhtpPa)}</td>
               </tr>
@@ -214,11 +209,11 @@ const Models = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         Two findings, both visible above. KGD is about {fmt(last.widthRatioKgdOverPkn, 2)} times
         wider than PKN at the same conditions, and the ratio bar chart shows it barely moving down
-        the sweep. And the two net pressures move in OPPOSITE directions: read the sky blue line
-        going up and the pink line coming down. PKN net pressure RISES from
+        the sweep. And the two net pressures move in OPPOSITE directions: read the blue line
+        going up and the violet line coming down. PKN net pressure RISES from
         {' '}{mpa(first.pknPNetPa)} to {mpa(last.pknPNetPa)} MPa as the fracture lengthens, while
         KGD net pressure FALLS from {mpa(first.kgdPNetPa)} to {mpa(last.kgdPNetPa)}.
       </div>
@@ -257,28 +252,26 @@ const Rate = () => {
         <Tile label="Width at sixteen times" value={mm(at16.wAvgM)} unit="mm" />
         <Tile label="The exponent" value={fmt(Math.log(at16.widthFactor) / Math.log(16), 6)} />
       </TileGrid>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="rateFactor" type="number" scale="log" domain={['dataMin', 'dataMax']}
-              ticks={[1, 2, 4, 8, 16]} tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'rate as a multiple of the base (log)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'width as a multiple', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(x) => fmt(x, 6)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={2} stroke="#f472b6"
-              label={{ value: 'twice the width', fill: '#f472b6', fontSize: 10, position: 'insideTopLeft' }} />
-            <ReferenceLine x={16} stroke="#f472b6" />
-            <Line type="monotone" dataKey="widthFactor" name="width multiple" stroke="#BFFF00" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3">
+        <LineChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="rateFactor" type="number" scale="log" domain={['dataMin', 'dataMax']}
+            ticks={[1, 2, 4, 8, 16]} tick={AXIS_TICK}
+            label={{ value: 'rate as a multiple of the base (log)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS_TICK}
+            label={{ value: 'width as a multiple', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(x) => fmt(x, 6)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine y={2} stroke={seriesColor(4)}
+            label={{ value: 'twice the width', fill: seriesColor(4), fontSize: 10, position: 'insideTopLeft' }} />
+          <ReferenceLine x={16} stroke={seriesColor(4)} />
+          <Line type="monotone" dataKey="widthFactor" name="width multiple" stroke={seriesColor(1)} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">rate multiple</th>
               <th className="text-right pr-3">rate (m3/s)</th>
@@ -292,13 +285,13 @@ const Rate = () => {
                 <td className="pr-3">{fmt(r.rateFactor, 0)}</td>
                 <td className="text-right pr-3">{fmt(PARAMS.qiM3s * r.rateFactor, 5)}</td>
                 <td className="text-right pr-3">{mm(r.wAvgM)}</td>
-                <td className={`text-right ${r.rateFactor === 16 ? 'text-[#BFFF00]' : ''}`}>{fmt(r.widthFactor, 6)}</td>
+                <td className={`text-right ${r.rateFactor === 16 ? 'text-pl-accent-text font-semibold' : ''}`}>{fmt(r.widthFactor, 6)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         Width goes as the QUARTER power of rate, and the last row is the whole argument: sixteen
         times the rate buys {fmt(at16.widthFactor, 4)} times the width. Two times the rate buys
         only {fmt(at2.widthFactor, 4)}. The measured exponent in the tile above is
@@ -353,42 +346,38 @@ const Balance = () => {
         <Tile label="Proppant mass" value={fmt(sch.massKg, 2)} unit="kg" />
       </TileGrid>
       <div className="grid gap-3 lg:grid-cols-2 mt-3">
-        <div className="h-56">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={volumes} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-              <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-              <XAxis dataKey="name" tick={{ fill: '#94a3b8', fontSize: 11 }} />
-              <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }}
-                label={{ value: 'volume (m3)', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-              <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-                formatter={(x) => fmt(x, 4)} />
-              <Legend wrapperStyle={{ fontSize: 11 }} />
-              <Bar dataKey="v" name="volume" fill="#38bdf8" isAnimationActive={false} />
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
-        <div className="h-56">
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={kl} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-              <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-              <XAxis dataKey="eta" type="number" domain={[0, 1]}
-                tick={{ fill: '#94a3b8', fontSize: 11 }}
-                label={{ value: 'efficiency', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-              <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} domain={[1.3, 1.6]}
-                label={{ value: 'Nolte factor', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-              <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-                formatter={(x) => fmt(x, 6)} />
-              <Legend wrapperStyle={{ fontSize: 11 }} />
-              <ReferenceLine x={bal.etaFrac} stroke="#f472b6"
-                label={{ value: 'this job', fill: '#f472b6', fontSize: 10, position: 'top' }} />
-              <Line type="monotone" dataKey="kL" name="Nolte factor" stroke="#BFFF00" dot isAnimationActive={false} />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
+        <ChartFrame height={224}>
+          <BarChart data={volumes} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+            <CartesianGrid {...GRID_STYLE} />
+            <XAxis dataKey="name" tick={AXIS_TICK} />
+            <YAxis tick={AXIS_TICK}
+              label={{ value: 'volume (m3)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+            <Tooltip contentStyle={TOOLTIP_STYLE}
+              formatter={(x) => fmt(x, 4)} />
+            <Legend {...LEGEND_PROPS} />
+            <Bar dataKey="v" name="volume" fill={seriesColor(0)} isAnimationActive={false} />
+          </BarChart>
+        </ChartFrame>
+        <ChartFrame height={224}>
+          <LineChart data={kl} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+            <CartesianGrid {...GRID_STYLE} />
+            <XAxis dataKey="eta" type="number" domain={[0, 1]}
+              tick={AXIS_TICK}
+              label={{ value: 'efficiency', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+            <YAxis tick={AXIS_TICK} domain={[1.3, 1.6]}
+              label={{ value: 'Nolte factor', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+            <Tooltip contentStyle={TOOLTIP_STYLE}
+              formatter={(x) => fmt(x, 6)} />
+            <Legend {...LEGEND_PROPS} />
+            <ReferenceLine x={bal.etaFrac} stroke={seriesColor(4)}
+              label={{ value: 'this job', fill: seriesColor(4), fontSize: 10, position: 'top' }} />
+            <Line type="monotone" dataKey="kL" name="Nolte factor" stroke={seriesColor(1)} dot isAnimationActive={false} />
+          </LineChart>
+        </ChartFrame>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">leakoff</th>
               <th className="text-right pr-3">efficiency</th>
@@ -407,14 +396,14 @@ const Balance = () => {
                 <td className="text-right pr-3">{fmt(r.tiS / 60, 3)}</td>
                 <td className="text-right pr-3">{fmt(r.viM3, 3)}</td>
                 <td className="text-right pr-3">{fmt(r.vfM3, 3)}</td>
-                <td className="text-right pr-3 text-rose-400">{fmt(r.vlM3, 3)}</td>
+                <td className="text-right pr-3 text-pl-text">{fmt(r.vlM3, 3)}</td>
                 <td className="text-right">{fmt(r.padFrac, 5)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         At the published leakoff the job pumps {fmt(bal.viM3, 2)} cubic metres to leave
         {' '}{fmt(bal.vfM3, 2)} in the fracture, so {fmt(bal.vlM3, 2)} goes into the rock and the
         efficiency is {fmt(100 * bal.etaFrac, 1)} percent. Most of what you pump is not there when

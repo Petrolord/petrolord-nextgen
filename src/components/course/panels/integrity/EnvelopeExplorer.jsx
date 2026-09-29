@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
+import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   ELEMENT_STATUSES, ENVELOPE_STATUSES, ELEMENT_KINDS,
   publishedElements, verifyPublished, statusSweep, categorySweep, flowPotentialSweep, seatCount,
@@ -24,24 +27,24 @@ const MODES = [
 ];
 
 const CATEGORY_TEXT = {
-  green: 'text-emerald-400',
-  yellow: 'text-amber-400',
-  orange: 'text-orange-400',
-  red: 'text-rose-400',
+  green: 'text-pl-success-text',
+  yellow: 'text-pl-warning-text',
+  orange: 'text-pl-danger-text',
+  red: 'text-pl-danger-text font-semibold',
 };
 
 const CATEGORY_CELL = {
-  green: 'bg-emerald-900/40 border-emerald-600 text-emerald-300',
-  yellow: 'bg-amber-900/40 border-amber-600 text-amber-300',
-  orange: 'bg-orange-900/40 border-orange-600 text-orange-300',
-  red: 'bg-rose-900/40 border-rose-600 text-rose-300',
+  green: 'bg-pl-success-bg border-pl-success/40 text-pl-success-text',
+  yellow: 'bg-pl-warning-bg border-pl-warning/40 text-pl-warning-text',
+  orange: 'bg-pl-danger-bg border-pl-danger/40 text-pl-danger-text',
+  red: 'bg-pl-danger border-pl-danger text-pl-danger-fg',
 };
 
 const ENVELOPE_TEXT = {
-  intact: 'text-emerald-400',
-  degraded: 'text-amber-400',
-  failed: 'text-rose-400',
-  empty: 'text-orange-400',
+  intact: 'text-pl-success-text',
+  degraded: 'text-pl-warning-text',
+  failed: 'text-pl-danger-text',
+  empty: 'text-pl-danger-text',
 };
 
 const kindLabel = (kind) => (ELEMENT_KINDS.find((k) => k.kind === kind) || {}).label || kind || '-';
@@ -93,24 +96,22 @@ const Elements = () => {
           <Tile label="Common WBE flagged by the engine" value={verdict.shared.length ? verdict.shared.join(', ') : 'none'} />
         </TileGrid>
       </div>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={bars} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="name" tick={{ fill: '#94a3b8', fontSize: 10 }} />
-            <YAxis allowDecimals={false} tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'count', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={seats.physical} stroke="#f472b6"
-              label={{ value: 'the physical count', fill: '#f472b6', fontSize: 10, position: 'top' }} />
-            <Bar dataKey="v" name="how many" fill="#BFFF00" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <BarChart data={bars} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="name" tick={{ ...AXIS_TICK, fontSize: 10 }} />
+          <YAxis allowDecimals={false} tick={AXIS_TICK}
+            label={{ value: 'count', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP_STYLE} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine y={seats.physical} stroke={seriesColor(4)}
+            label={{ value: 'the physical count', fill: seriesColor(4), fontSize: 10, position: 'top' }} />
+          <Bar dataKey="v" name="how many" fill={seriesColor(1)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">element</th>
               <th className="text-left pr-3">kind</th>
@@ -120,17 +121,17 @@ const Elements = () => {
           </thead>
           <tbody>
             {shown.map((el) => (
-              <tr key={el.name} className={el.envelope === 'both' ? 'text-[#BFFF00]' : ''}>
+              <tr key={el.name} className={el.envelope === 'both' ? 'text-pl-accent-text font-semibold' : ''}>
                 <td className="pr-3">{el.name}</td>
                 <td className="pr-3">{kindLabel(el.kind)}</td>
                 <td className="pr-3">{el.envelope}</td>
-                <td className={el.status === 'verified' ? 'text-emerald-400' : 'text-amber-400'}>{el.status}</td>
+                <td className={el.status === 'verified' ? 'text-pl-success-text' : 'text-pl-warning-text'}>{el.status}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         The published roster has {fmt(seats.physical, 0)} physical elements filling
         {' '}{fmt(published.seats, 0)} seats, an overcount of {fmt(published.overcount, 0)}, so on
         this well the two envelopes really are made of different hardware. Serve any one element
@@ -174,8 +175,8 @@ const Status = () => {
         </TileGrid>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">status of the ONE element</th>
               <th className="text-left pr-3">primary envelope</th>
@@ -195,7 +196,7 @@ const Status = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         Every row above puts three good elements and one questionable one in the primary envelope,
         and the primary reads back as the questionable one every time. There is no averaging here
         and no majority vote. The WORST element sets the whole envelope, which is the only safe
@@ -257,22 +258,22 @@ const Category = () => {
         <table className="text-xs w-full border-separate" style={{ borderSpacing: '4px' }}>
           <thead>
             <tr>
-              <th className="text-left text-slate-500 pr-2">primary \ secondary</th>
+              <th className="text-left text-pl-muted pr-2">primary \ secondary</th>
               {ENVELOPE_STATUSES.map((s) => (
-                <th key={s} className="text-slate-400 font-normal">{s}</th>
+                <th key={s} className="text-pl-muted font-normal">{s}</th>
               ))}
             </tr>
           </thead>
           <tbody>
             {ENVELOPE_STATUSES.map((primary) => (
               <tr key={primary}>
-                <td className="text-slate-400 pr-2">{primary}</td>
+                <td className="text-pl-muted pr-2">{primary}</td>
                 {ENVELOPE_STATUSES.map((secondary) => {
                   const cell = at(primary, secondary);
                   const cat = cell ? cell.category.category : null;
                   return (
                     <td key={secondary} className="align-top">
-                      <div className={`rounded-md border px-2 py-1 ${cat ? CATEGORY_CELL[cat] : 'border-gray-700 text-slate-500'}`}>
+                      <div className={`rounded-md border px-2 py-1 ${cat ? CATEGORY_CELL[cat] : 'border-pl-border text-pl-muted'}`}>
                         {cat || '-'}
                       </div>
                     </td>
@@ -284,8 +285,8 @@ const Category = () => {
         </table>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">primary</th>
               <th className="text-left pr-3">secondary</th>
@@ -299,7 +300,7 @@ const Category = () => {
                 <td className="pr-3">{r.primary}</td>
                 <td className="pr-3">{r.secondary}</td>
                 <td className={`pr-3 ${CATEGORY_TEXT[r.category.category] || ''}`}>{r.category.category}</td>
-                <td className="text-slate-400">{r.category.reason}</td>
+                <td className="text-pl-muted">{r.category.reason}</td>
               </tr>
             ))}
           </tbody>
@@ -307,8 +308,8 @@ const Category = () => {
       </div>
       {flowRows && flowRows.length ? (
         <div className="mt-3 overflow-x-auto">
-          <table className="text-xs text-slate-300 w-full">
-            <thead className="text-slate-500">
+          <table className="text-xs text-pl-text w-full">
+            <thead className="text-pl-muted">
               <tr>
                 <th className="text-left pr-3">primary, against an intact secondary</th>
                 <th className="text-left pr-3">can flow</th>
@@ -327,7 +328,7 @@ const Category = () => {
           </table>
         </div>
       ) : null}
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         Count the green cells. With flow potential there is exactly one, the corner where both
         envelopes are intact, and the whole rest of the grid is a finding of some size. Turn the
         flow flag off and the no-flow branch answers on the PRIMARY alone, which is why
@@ -360,8 +361,8 @@ const Verify = () => {
     <>
       <SelectField label="Flow potential to surface" value={flow} onChange={setFlow}
         options={[['true', 'Yes, the well can flow'], ['false', 'No, nothing can reach surface']]} />
-      <div className={`mt-3 rounded-md border p-4 ${CATEGORY_CELL[v.category] || 'border-gray-700'}`}>
-        <p className="text-xs text-gray-400 mb-1">The published well</p>
+      <div className={`mt-3 rounded-md border p-4 ${CATEGORY_CELL[v.category] || 'border-pl-border'}`}>
+        <p className="text-xs text-pl-muted mb-1">The published well</p>
         <p className="text-3xl font-bold mb-0">{v.category}</p>
         <p className="text-xs mt-2 mb-0">{v.reason}</p>
       </div>
@@ -378,8 +379,8 @@ const Verify = () => {
         </TileGrid>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">check</th>
               <th className="text-left pr-3">level</th>
@@ -392,14 +393,14 @@ const Verify = () => {
               <tr key={c.id}>
                 <td className="pr-3">{c.label}</td>
                 <td className="pr-3">{c.level}</td>
-                <td className={`pr-3 ${c.pass ? 'text-emerald-400' : 'text-rose-400'}`}>{c.pass ? 'pass' : 'fail'}</td>
-                <td className="text-slate-400">{c.detail || '-'}</td>
+                <td className={`pr-3 ${c.pass ? 'text-pl-success-text' : 'text-pl-danger-text'}`}>{c.pass ? 'pass' : 'fail'}</td>
+                <td className="text-pl-muted">{c.detail || 'n/a'}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         Every check on this well passes and the well is still not green. The four checks are rules
         about the SHAPE of the envelope: are there two of them, is anything shared, is anything
         untested, is anything failed. The category is a rule about its HEALTH, and it comes from

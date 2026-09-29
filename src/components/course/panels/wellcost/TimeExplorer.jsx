@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
+import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   HOURS_PER_DAY, NPT_FRAC, ACTIVITY_KINDS,
   ropSweep, tripDepthSweep, casingSpeedSweep, flatDurationSweep, nptSweep,
@@ -37,9 +40,9 @@ const FORMS = [
   ['flat', 'Flat time: the duration itself'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const GRID = <CartesianGrid stroke="#334155" strokeDasharray="3 3" />;
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const GRID = <CartesianGrid {...GRID_STYLE} />;
 
 // A user-supplied value joins the published sweep rather than replacing it, so
 // the shape stays visible while the learner's own case sits on it.
@@ -77,28 +80,26 @@ const Drill = () => {
           <Tile label="Fastest row" value={fmt(rows[rows.length - 1].hr, 3)} unit="h" />
         </TileGrid>
       </div>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="ropMPerHr" type="number" tick={AXIS}
-              label={{ value: 'rate of penetration, m/hr', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis yAxisId="hr" tick={AXIS}
-              label={{ value: 'hours', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <YAxis yAxisId="m" orientation="right" domain={[0, 'dataMax']} tick={AXIS}
-              label={{ value: 'rate times hours, m', angle: 90, position: 'insideRight', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line yAxisId="hr" type="monotone" dataKey="hr" name="hours the section takes"
-              stroke="#BFFF00" dot isAnimationActive={false} />
-            <Line yAxisId="m" type="monotone" dataKey="footageM" name="rate times hours"
-              stroke="#f472b6" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3">
+        <LineChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="ropMPerHr" type="number" tick={AXIS}
+            label={{ value: 'rate of penetration, m/hr', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis yAxisId="hr" tick={AXIS}
+            label={{ value: 'hours', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis yAxisId="m" orientation="right" domain={[0, 'dataMax']} tick={AXIS} tickFormatter={(x) => fmt(x, 0)} width={64}
+            label={{ value: 'rate times hours, m', angle: 90, position: 'insideRight', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} />
+          <Legend {...LEGEND_PROPS} />
+          <Line yAxisId="hr" type="monotone" dataKey="hr" name="hours the section takes"
+            stroke={seriesColor(1)} dot isAnimationActive={false} />
+          <Line yAxisId="m" type="monotone" dataKey="footageM" name="rate times hours"
+            stroke={seriesColor(4)} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">rate, m/hr</th>
               <th className="text-left pr-3">hours</th>
@@ -112,14 +113,14 @@ const Drill = () => {
                 <td className="pr-3">{fmt(r.ropMPerHr, 4)}</td>
                 <td className="pr-3">{fmt(r.hr, 4)}</td>
                 <td className="pr-3">{fmt(r.days, 5)}</td>
-                <td className="text-[#f472b6]">{fmt(r.footageM, 3)}</td>
+                <td className="text-pl-text">{fmt(r.footageM, 3)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
-        The pink line is flat. Whatever the rate does, rate times hours comes back to the same
+      <div className="mt-3 text-xs text-pl-text">
+        The violet line is flat. Whatever the rate does, rate times hours comes back to the same
         {' '}{fmt(rows[0].footageM, 0)} m, because the metres are the thing you asked for and the
         hours are what they cost. That is a HYPERBOLA and not a line: halving the rate from 10 to 5
         multiplies the hours by exactly {half && full ? fmt(half.hr / full.hr, 6) : '-'}, and the
@@ -167,26 +168,24 @@ const Trip = () => {
           <Tile label="Speed in force" value={fmt(rows[0].tripSpeedMPerHr, 4)} unit="m/hr" />
         </TileGrid>
       </div>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="mdM" type="number" tick={AXIS}
-              label={{ value: 'depth, m', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS}
-              label={{ value: 'hours', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line type="linear" dataKey="hr" name="round trip, out and back"
-              stroke="#BFFF00" dot isAnimationActive={false} />
-            <Line type="linear" dataKey="oneWayHr" name="one way only"
-              stroke="#38bdf8" strokeDasharray="4 3" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3">
+        <LineChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="mdM" type="number" tick={AXIS}
+            label={{ value: 'depth, m', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS}
+            label={{ value: 'hours', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} />
+          <Legend {...LEGEND_PROPS} />
+          <Line type="linear" dataKey="hr" name="round trip, out and back"
+            stroke={seriesColor(1)} dot isAnimationActive={false} />
+          <Line type="linear" dataKey="oneWayHr" name="one way only"
+            stroke={seriesColor(0)} strokeDasharray="4 3" dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">depth, m</th>
               <th className="text-left pr-3">one way, h</th>
@@ -198,15 +197,15 @@ const Trip = () => {
             {rows.map((r) => (
               <tr key={r.mdM}>
                 <td className="pr-3">{fmt(r.mdM, 3)}</td>
-                <td className="pr-3 text-[#38bdf8]">{fmt(r.oneWayHr, 4)}</td>
+                <td className="pr-3 text-pl-text">{fmt(r.oneWayHr, 4)}</td>
                 <td className="pr-3">{fmt(r.hr, 4)}</td>
-                <td className="text-[#BFFF00]">{fmt(r.roundTripRatio, 6)}</td>
+                <td className="text-pl-text">{fmt(r.roundTripRatio, 6)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         Two straight lines, and the upper one is exactly twice the lower one at every depth. The
         last column is {fmt(rows[0].roundTripRatio, 6)} in every row and it is not an
         approximation: a round trip is out and back, so the engine charges the depth twice. Read
@@ -264,28 +263,26 @@ const Casing = () => {
             value={a400 && a800 ? fmt(a400.hr - a800.hr, 4) : '-'} unit="h" />
         </TileGrid>
       </div>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="runSpeedMPerHr" type="number" tick={AXIS}
-              label={{ value: 'running speed, m/hr', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis domain={[0, 'dataMax']} tick={AXIS}
-              label={{ value: 'hours', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={rows[0].floorHr} stroke="#f472b6" strokeDasharray="5 3"
-              label={{ value: 'the flat floor', fill: '#f472b6', fontSize: 10, position: 'insideBottomRight' }} />
-            <Line type="monotone" dataKey="hr" name="whole activity"
-              stroke="#BFFF00" dot isAnimationActive={false} />
-            <Line type="monotone" dataKey="runHr" name="the running half only"
-              stroke="#38bdf8" strokeDasharray="4 3" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3">
+        <LineChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="runSpeedMPerHr" type="number" tick={AXIS}
+            label={{ value: 'running speed, m/hr', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis domain={[0, 'dataMax']} tick={AXIS}
+            label={{ value: 'hours', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine y={rows[0].floorHr} stroke={seriesColor(4)} strokeDasharray="5 3"
+            label={{ value: 'the flat floor', fill: seriesColor(4), fontSize: 10, position: 'insideBottomRight' }} />
+          <Line type="monotone" dataKey="hr" name="whole activity"
+            stroke={seriesColor(1)} dot isAnimationActive={false} />
+          <Line type="monotone" dataKey="runHr" name="the running half only"
+            stroke={seriesColor(0)} strokeDasharray="4 3" dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">speed, m/hr</th>
               <th className="text-left pr-3">running, h</th>
@@ -297,16 +294,16 @@ const Casing = () => {
             {rows.map((r) => (
               <tr key={r.runSpeedMPerHr}>
                 <td className="pr-3">{fmt(r.runSpeedMPerHr, 3)}</td>
-                <td className="pr-3 text-[#38bdf8]">{fmt(r.runHr, 4)}</td>
-                <td className="pr-3 text-[#f472b6]">{fmt(r.flatHr, 4)}</td>
+                <td className="pr-3 text-pl-text">{fmt(r.runHr, 4)}</td>
+                <td className="pr-3 text-pl-text">{fmt(r.flatHr, 4)}</td>
                 <td>{fmt(r.hr, 4)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
-        This form is AFFINE, not proportional, and the pink line is the reason. The green curve
+      <div className="mt-3 text-xs text-pl-text">
+        This form is AFFINE, not proportional, and the violet line is the reason. The green curve
         falls as the speed rises and then stops falling, flattening onto
         {' '}{fmt(rows[0].floorHr, 4)} h. Ask for a billion metres per hour and the activity still
         takes {fmt(enormous.hr, 4)} h, because rigging up, circulating, cementing and waiting on
@@ -356,8 +353,8 @@ const Flat = () => {
         </TileGrid>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">duration asked for, h</th>
               <th className="text-left pr-3">hours returned</th>
@@ -368,16 +365,16 @@ const Flat = () => {
             {rows.map((r) => (
               <tr key={r.durationHr}>
                 <td className="pr-3">{fmt(r.durationHr, 4)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.hr, 4)}</td>
-                <td className="text-slate-400">none, this kind has no rate at all</td>
+                <td className="pr-3 text-pl-text">{fmt(r.hr, 4)}</td>
+                <td className="text-pl-muted">none, this kind has no rate at all</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">flat activity on the published well</th>
               <th className="text-left pr-3">productive, h</th>
@@ -395,7 +392,7 @@ const Flat = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         {fmt(flatHr, 0)} of the {fmt(totals.productiveHr, 0)} productive hours on this well are
         flat time, which is {pct(flatHr / totals.productiveHr, 2)} of the programme, and no
         drilling rate touches any of it. A campaign that promises to save days by drilling faster
@@ -458,24 +455,22 @@ const Schedule = () => {
           <Tile label="Curve breakpoints" value={fmt(program.curve.length, 0)} />
         </TileGrid>
       </div>
-      <div className="h-72 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={program.curve} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="tHr" type="number" tick={AXIS}
-              label={{ value: 'elapsed hours', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis dataKey="mdM" reversed domain={[0, 'dataMax']} tick={AXIS}
-              label={{ value: 'hole depth, m', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line type="linear" dataKey="mdM" name="time depth curve"
-              stroke="#BFFF00" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={288} className="mt-3">
+        <LineChart data={program.curve} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="tHr" type="number" tick={AXIS}
+            label={{ value: 'elapsed hours', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis dataKey="mdM" reversed domain={[0, 'dataMax']} tick={AXIS}
+            label={{ value: 'hole depth, m', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} />
+          <Legend {...LEGEND_PROPS} />
+          <Line type="linear" dataKey="mdM" name="time depth curve"
+            stroke={seriesColor(1)} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">activity</th>
               <th className="text-left pr-3">kind</th>
@@ -488,7 +483,7 @@ const Schedule = () => {
           </thead>
           <tbody>
             {program.rows.map((r) => (
-              <tr key={r.id} className={r.kind === 'drill' ? 'text-[#BFFF00]' : ''}>
+              <tr key={r.id} className={r.kind === 'drill' ? 'text-pl-accent-text font-semibold' : ''}>
                 <td className="pr-3">{r.label}</td>
                 <td className="pr-3">{r.kind}</td>
                 <td className="pr-3">{fmt(r.productiveHr, 4)}</td>
@@ -501,9 +496,9 @@ const Schedule = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         The classic drilling curve, and it is a staircase for a reason: it slopes while a drill
-        activity is running and it stands vertical through everything else. The green rows are the
+        activity is running and it stands vertical through everything else. The gold rows are the
         only ones that move the hole. On this programme {fmt(program.rows.filter((r) => r.kind === 'drill').length, 0)}
         {' '}of the {fmt(program.rows.length, 0)} activities advance depth at all, and the last row
         ends at {fmt(last.endHr, 3)} h, which is the same number as the elapsed total
@@ -552,26 +547,24 @@ const Npt = () => {
           <Tile label="Distinct productive-hour values" value={fmt(productive.size, 0)} />
         </TileGrid>
       </div>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="nptFrac" type="number" tick={AXIS}
-              label={{ value: 'allowance entered', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS}
-              label={{ value: 'share of hours', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line type="monotone" dataKey="shareOfProductive" name="share of PRODUCTIVE time, what you typed"
-              stroke="#BFFF00" dot isAnimationActive={false} />
-            <Line type="monotone" dataKey="shareOfTotal" name="share of ELAPSED time, what it becomes"
-              stroke="#f472b6" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3">
+        <LineChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="nptFrac" type="number" tick={AXIS}
+            label={{ value: 'allowance entered', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS}
+            label={{ value: 'share of hours', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} />
+          <Legend {...LEGEND_PROPS} />
+          <Line type="monotone" dataKey="shareOfProductive" name="share of PRODUCTIVE time, what you typed"
+            stroke={seriesColor(1)} dot isAnimationActive={false} />
+          <Line type="monotone" dataKey="shareOfTotal" name="share of ELAPSED time, what it becomes"
+            stroke={seriesColor(4)} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">allowance</th>
               <th className="text-left pr-3">productive, h</th>
@@ -584,20 +577,20 @@ const Npt = () => {
           </thead>
           <tbody>
             {rows.map((r) => (
-              <tr key={r.nptFrac} className={r.nptFrac === NPT_FRAC ? 'text-white' : ''}>
+              <tr key={r.nptFrac} className={r.nptFrac === NPT_FRAC ? 'text-pl-text font-semibold' : ''}>
                 <td className="pr-3">{fmt(r.nptFrac, 5)}</td>
                 <td className="pr-3">{fmt(r.productiveHr, 3)}</td>
                 <td className="pr-3">{fmt(r.nptHr, 3)}</td>
                 <td className="pr-3">{fmt(r.totalHr, 3)}</td>
                 <td className="pr-3">{fmt(r.totalDays, 4)}</td>
-                <td className="pr-3 text-[#BFFF00]">{pct(r.shareOfProductive, 3)}</td>
-                <td className="text-[#f472b6]">{pct(r.shareOfTotal, 3)}</td>
+                <td className="pr-3 text-pl-text">{pct(r.shareOfProductive, 3)}</td>
+                <td className="text-pl-text">{pct(r.shareOfTotal, 3)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         Read the last two columns together, because this is the trap the tier is built on. The
         number you type is a fraction of PRODUCTIVE time: the engine multiplies every activity by
         one plus the allowance, so the non-productive hours are that fraction of the work. Their
@@ -658,8 +651,8 @@ const Rollup = () => {
         </TileGrid>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">total</th>
               <th className="text-left pr-3">value</th>
@@ -669,7 +662,7 @@ const Rollup = () => {
           </thead>
           <tbody>
             {rows.map((r) => (
-              <tr key={r.key} className={r.travels ? 'text-[#BFFF00]' : ''}>
+              <tr key={r.key} className={r.travels ? 'text-pl-accent-text font-semibold' : ''}>
                 <td className="pr-3">{r.label}</td>
                 <td className="pr-3">{fmt(r.value, 5)}</td>
                 <td className="pr-3">{r.unit}</td>
@@ -679,7 +672,7 @@ const Rollup = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         Elapsed hours over {fmt(HOURS_PER_DAY, 0)} is elapsed days, exactly:
         {' '}{fmt(t.totalHr, 3)} h gives {fmt(t.totalDays, 5)} days. Only two of these six numbers
         leave this engine. Days multiply every per-day line on the AFE and metres multiply every

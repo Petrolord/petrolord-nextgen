@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
+import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   WELLS, caseOf, standoffFor, requiredSpacingFor, spacingSweep, springRate,
   clearances, checklistFor, annularVelocities, API_TARGET_STANDOFF, buoyancyFactor,
@@ -54,7 +57,7 @@ const Profile = () => {
   if (!so) return <Note>Those centralizer settings do not describe a runnable profile.</Note>;
   return (
     <>
-      <div className="grid grid-cols-5 gap-2">
+      <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
         <SelectField label="Well" value={well} onChange={setWell} options={WELL_OPTIONS} />
         <SelectField label="Type" value={type} onChange={setType} options={TYPES} />
         <NumField label={`Spacing (m, default ${c.centralizer.spacingM})`} value={spacing} onChange={setSpacing} placeholder={String(c.centralizer.spacingM)} />
@@ -63,27 +66,25 @@ const Profile = () => {
           : <NumField label="Blade OD (m)" value={blade} onChange={setBlade} />}
         <NumField label="Mud density (kg/m3, default 1440)" value={mud} onChange={setMud} placeholder="1440" />
       </div>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={rows} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="md" type="number" domain={[0, 'auto']} tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'measured depth (m)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-            <YAxis yAxisId="s" domain={[0, 100]} tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'standoff (pct)', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <YAxis yAxisId="i" orientation="right" domain={[0, 90]} tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'inclination (deg)', angle: 90, position: 'insideRight', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(v) => fmt(v, 3)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine yAxisId="s" y={100 * API_TARGET_STANDOFF} stroke="#fb7185" strokeDasharray="4 4" />
-            <Line yAxisId="s" dataKey="standoff" name="standoff" stroke="#BFFF00" strokeWidth={2} dot={false} isAnimationActive={false} />
-            <Line yAxisId="s" dataKey="atCent" name="at the centralizer" stroke="#38bdf8" strokeWidth={1} dot={false} isAnimationActive={false} />
-            <Line yAxisId="s" dataKey="midSpan" name="mid span" stroke="#a78bfa" strokeWidth={1} dot={false} isAnimationActive={false} />
-            <Line yAxisId="i" dataKey="inc" name="inclination" stroke="#94a3b8" strokeWidth={1} dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3">
+        <LineChart data={rows} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="md" type="number" domain={[0, 'auto']} tick={AXIS_TICK}
+            label={{ value: 'measured depth (m)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis yAxisId="s" domain={[0, 100]} tick={AXIS_TICK}
+            label={{ value: 'standoff (pct)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis yAxisId="i" orientation="right" domain={[0, 90]} tick={AXIS_TICK}
+            label={{ value: 'inclination (deg)', angle: 90, position: 'insideRight', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(v) => fmt(v, 3)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine yAxisId="s" y={100 * API_TARGET_STANDOFF} stroke={seriesColor(3)} strokeDasharray="4 4" />
+          <Line yAxisId="s" dataKey="standoff" name="standoff" stroke={seriesColor(1)} strokeWidth={2} dot={false} isAnimationActive={false} />
+          <Line yAxisId="s" dataKey="atCent" name="at the centralizer" stroke={seriesColor(0)} strokeWidth={1} dot={false} isAnimationActive={false} />
+          <Line yAxisId="s" dataKey="midSpan" name="mid span" stroke={seriesColor(4)} strokeWidth={1} dot={false} isAnimationActive={false} />
+          <Line yAxisId="i" dataKey="inc" name="inclination" stroke={SVG_CHART.reference} strokeWidth={1} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <TileGrid>
         <Tile label="Minimum standoff" value={pct(so.minStandoff)} unit="pct" />
         <Tile label="Against the API target" value={so.minStandoff >= API_TARGET_STANDOFF ? 'pass' : 'fail'} />
@@ -116,23 +117,21 @@ const Spacing = () => {
   return (
     <>
       <SelectField label="Well" value={well} onChange={setWell} options={WELL_OPTIONS} />
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="spacing" type="number" domain={[0, 32]} tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'centralizer spacing (m)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-            <YAxis domain={[0, 100]} tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'minimum standoff (pct)', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(v) => fmt(v, 3)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={100 * API_TARGET_STANDOFF} stroke="#fb7185" strokeDasharray="4 4" />
-            {req != null && <ReferenceLine x={req} stroke="#BFFF00" strokeDasharray="4 4" />}
-            <Line dataKey="standoff" name="minimum standoff" stroke="#BFFF00" strokeWidth={2} dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3">
+        <LineChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="spacing" type="number" domain={[0, 32]} tick={AXIS_TICK}
+            label={{ value: 'centralizer spacing (m)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis domain={[0, 100]} tick={AXIS_TICK}
+            label={{ value: 'minimum standoff (pct)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(v) => fmt(v, 3)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine y={100 * API_TARGET_STANDOFF} stroke={seriesColor(3)} strokeDasharray="4 4" />
+          {req != null && <ReferenceLine x={req} stroke={seriesColor(1)} strokeDasharray="4 4" />}
+          <Line dataKey="standoff" name="minimum standoff" stroke={seriesColor(1)} strokeWidth={2} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <TileGrid>
         <Tile label="Required spacing" value={req == null ? 'not achievable' : fmt(req, 6)} unit={req == null ? '' : 'm'} />
         <Tile label="Spacing on this job" value={fmt(c.centralizer.spacingM, 2)} unit="m" />
@@ -142,8 +141,8 @@ const Spacing = () => {
         <Tile label="Buoyancy factor at 1440" value={fmt(buoyancyFactor(1440), 8)} />
       </TileGrid>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr><th className="text-left pr-3">restoring force (N)</th><th className="text-right">minimum standoff (pct)</th></tr>
           </thead>
           <tbody>
@@ -156,7 +155,7 @@ const Spacing = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         The volume side of this course measures the open hole at
         {' '}{fmt(cl.effectiveBoreM, 6)} m after the excess, and the centralization side measures it
         at the nominal {fmt(cl.nominalBoreM, 6)}. The clearance the spring rate is computed on is
@@ -180,8 +179,8 @@ const Checklist = () => {
     <>
       <SelectField label="Well" value={well} onChange={setWell} options={WELL_OPTIONS} />
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr><th className="text-left pr-3">item</th><th className="text-left pr-3">detail</th><th className="text-right">verdict</th></tr>
           </thead>
           <tbody>
@@ -189,7 +188,7 @@ const Checklist = () => {
               <tr key={i.id}>
                 <td className="pr-3">{i.id}</td>
                 <td className="pr-3">{i.detail}</td>
-                <td className={`text-right ${i.ok ? 'text-[#BFFF00]' : 'text-rose-400'}`}>{i.ok ? 'pass' : 'fail'}</td>
+                <td className={`text-right ${i.ok ? 'text-pl-success-text' : 'text-pl-danger-text'}`}>{i.ok ? 'pass' : 'fail'}</td>
               </tr>
             ))}
           </tbody>

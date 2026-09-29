@@ -1,8 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid,
+  LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid,
   Tooltip, Legend, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
+import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   PARAMS, D010_DEFAULT_RULES,
   publishedPlug, excessSweep, ruleSweep, annularSweep, publishedProgram,
@@ -76,28 +79,26 @@ const Plug = () => {
         <Tile label="Displacement" value={fmt(p.displacementM3, 6)} unit="m3" />
         <Tile label="Warnings" value={p.warnings.length ? p.warnings.length : 'none'} />
       </TileGrid>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={caps} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="name" tick={{ fill: '#94a3b8', fontSize: 10 }} interval={0} />
-            <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'capacity (m2 per m)', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(x) => fmt(x, 8)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={p.cHoleM2} stroke="#f472b6"
-              label={{ value: 'the full hole', fill: '#f472b6', fontSize: 10, position: 'top' }} />
-            <Bar dataKey="v" name="capacity" fill="#BFFF00" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <BarChart data={caps} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="name" tick={{ ...AXIS_TICK, fontSize: 10 }} interval={0} />
+          <YAxis tick={AXIS_TICK}
+            label={{ value: 'capacity (m2 per m)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(x) => fmt(x, 8)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine y={p.cHoleM2} stroke={seriesColor(4)}
+            label={{ value: 'the full hole', fill: seriesColor(4), fontSize: 10, position: 'top' }} />
+          <Bar dataKey="v" name="capacity" fill={seriesColor(1)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
       {p.warnings.length ? (
-        <div className="mt-3 rounded-md border border-amber-600 bg-amber-900/20 p-3 text-xs text-amber-300">
+        <div className="mt-3 rounded-md border border-pl-warning/30 bg-pl-warning-bg p-3 text-xs text-pl-warning-text">
           {p.warnings.map((w) => <p key={w} className="mb-0">{w}</p>)}
         </div>
       ) : null}
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         Four capacities and only three of them are geometry. The full hole is {fmt(p.cHoleM2, 6)}
         {' '}square metres per metre, the annulus around the stinger is {fmt(p.cAnnM2, 6)} and the
         stinger bore is {fmt(p.cInM2, 6)}. The fourth is the sum of the last two, and it is the one
@@ -137,31 +138,31 @@ const Excess = () => {
   }));
   return (
     <>
-      <div className="rounded-md border border-[#BFFF00]/40 bg-[#BFFF00]/5 p-4 mb-3">
-        <p className="text-xs text-gray-400 mb-1">At ZERO excess, both of these are true at once</p>
+      <div className="rounded-md border border-pl-accent/40 bg-pl-accent/5 p-4 mb-3">
+        <p className="text-xs text-pl-muted mb-1">At ZERO excess, both of these are true at once</p>
         <div className="grid gap-3 sm:grid-cols-2">
-          <div className="rounded-md border border-emerald-700 bg-emerald-900/20 p-3">
-            <p className="text-gray-400 text-xs mb-1">The settled top IS the design top</p>
-            <p className="text-emerald-300 text-2xl font-bold mb-0">
-              {fmt(zero.pluggedTopMdM, 3)} <span className="text-sm text-gray-400">against a design {fmt(designTopM, 3)} m</span>
+          <div className="rounded-md border border-pl-success/30 bg-pl-success-bg p-3">
+            <p className="text-pl-muted text-xs mb-1">The settled top IS the design top</p>
+            <p className="text-pl-success-text text-2xl font-bold mb-0">
+              {fmt(zero.pluggedTopMdM, 3)} <span className="text-sm text-pl-muted">against a design {fmt(designTopM, 3)} m</span>
             </p>
-            <p className="text-xs text-gray-400 mt-1 mb-0">
+            <p className="text-xs text-pl-muted mt-1 mb-0">
               apart by {fmt(zero.pluggedTopMdM - designTopM, 6)} m, which is the identity the
               engine is built on
             </p>
           </div>
-          <div className="rounded-md border border-rose-700 bg-rose-900/20 p-3">
-            <p className="text-gray-400 text-xs mb-1">And the plug still SETTLES</p>
-            <p className="text-rose-300 text-2xl font-bold mb-0">
-              {fmt(zero.settleM, 3)} <span className="text-sm text-gray-400">m below the as-pumped top</span>
+          <div className="rounded-md border border-pl-danger/30 bg-pl-danger-bg p-3">
+            <p className="text-pl-muted text-xs mb-1">And the plug still SETTLES</p>
+            <p className="text-pl-danger-text text-2xl font-bold mb-0">
+              {fmt(zero.settleM, 3)} <span className="text-sm text-pl-muted">m below the as-pumped top</span>
             </p>
-            <p className="text-xs text-gray-400 mt-1 mb-0">
+            <p className="text-xs text-pl-muted mt-1 mb-0">
               as-pumped {fmt(zero.asPumpedTopMdM, 3)} m, settled {fmt(zero.pluggedTopMdM, 3)} m,
               with no excess anywhere in the job
             </p>
           </div>
         </div>
-        <p className="text-xs text-gray-400 mt-2 mb-0">
+        <p className="text-xs text-pl-muted mt-2 mb-0">
           Both boxes describe the same pump. The column stands in the annulus PLUS the stinger bore
           while the stinger is in the hole, and once the stinger is pulled the same slurry
           redistributes across the FULL hole, which is wider. The top drops
@@ -180,46 +181,42 @@ const Excess = () => {
         <Tile label="Settle at the largest excess swept" value={fmt(sweep[sweep.length - 1].settleM, 4)} unit="m" />
       </TileGrid>
       <div className="grid gap-3 lg:grid-cols-2 mt-3">
-        <div className="h-64">
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-              <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-              <XAxis dataKey="excessPct" type="number" domain={['dataMin', 'dataMax']}
-                tick={{ fill: '#94a3b8', fontSize: 11 }}
-                label={{ value: 'excess (pct)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-              <YAxis reversed domain={['dataMin', 'dataMax']} tick={{ fill: '#94a3b8', fontSize: 11 }}
-                label={{ value: 'top (m MD, deeper is down)', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-              <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-                formatter={(x) => fmt(x, 4)} />
-              <Legend wrapperStyle={{ fontSize: 11 }} />
-              <ReferenceLine y={designTopM} stroke="#f472b6"
-                label={{ value: `the design top ${fmt(designTopM, 0)} m`, fill: '#f472b6', fontSize: 10, position: 'insideBottomRight' }} />
-              <Line type="monotone" dataKey="asPumpedTopMdM" name="as-pumped top, stinger still in" stroke="#38bdf8" dot isAnimationActive={false} />
-              <Line type="monotone" dataKey="pluggedTopMdM" name="settled top, stinger pulled" stroke="#BFFF00" dot isAnimationActive={false} />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
-        <div className="h-64">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-              <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-              <XAxis dataKey="excessPct" tick={{ fill: '#94a3b8', fontSize: 11 }}
-                label={{ value: 'excess (pct)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-              <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }}
-                label={{ value: 'settle (m)', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-              <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-                formatter={(x) => fmt(x, 4)} />
-              <Legend wrapperStyle={{ fontSize: 11 }} />
-              <ReferenceLine y={zero.settleM} stroke="#f472b6"
-                label={{ value: `${fmt(zero.settleM, 2)} m with NO excess at all`, fill: '#f472b6', fontSize: 10, position: 'insideTopRight' }} />
-              <Bar dataKey="settleM" name="how far the top drops" fill="#BFFF00" isAnimationActive={false} />
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
+        <ChartFrame height={256}>
+          <LineChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+            <CartesianGrid {...GRID_STYLE} />
+            <XAxis dataKey="excessPct" type="number" domain={['dataMin', 'dataMax']}
+              tick={AXIS_TICK}
+              label={{ value: 'excess (pct)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+            <YAxis reversed domain={['dataMin', 'dataMax']} tick={AXIS_TICK}
+              label={{ value: 'top (m MD, deeper is down)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+            <Tooltip contentStyle={TOOLTIP_STYLE}
+              formatter={(x) => fmt(x, 4)} />
+            <Legend {...LEGEND_PROPS} />
+            <ReferenceLine y={designTopM} stroke={seriesColor(4)}
+              label={{ value: `the design top ${fmt(designTopM, 0)} m`, fill: seriesColor(4), fontSize: 10, position: 'insideBottomRight' }} />
+            <Line type="monotone" dataKey="asPumpedTopMdM" name="as-pumped top, stinger still in" stroke={seriesColor(0)} dot isAnimationActive={false} />
+            <Line type="monotone" dataKey="pluggedTopMdM" name="settled top, stinger pulled" stroke={seriesColor(1)} dot isAnimationActive={false} />
+          </LineChart>
+        </ChartFrame>
+        <ChartFrame height={256}>
+          <BarChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+            <CartesianGrid {...GRID_STYLE} />
+            <XAxis dataKey="excessPct" tick={AXIS_TICK}
+              label={{ value: 'excess (pct)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+            <YAxis tick={AXIS_TICK}
+              label={{ value: 'settle (m)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+            <Tooltip contentStyle={TOOLTIP_STYLE}
+              formatter={(x) => fmt(x, 4)} />
+            <Legend {...LEGEND_PROPS} />
+            <ReferenceLine y={zero.settleM} stroke={seriesColor(4)}
+              label={{ value: `${fmt(zero.settleM, 2)} m with NO excess at all`, fill: seriesColor(4), fontSize: 10, position: 'insideTopRight' }} />
+            <Bar dataKey="settleM" name="how far the top drops" fill={seriesColor(1)} isAnimationActive={false} />
+          </BarChart>
+        </ChartFrame>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">excess</th>
               <th className="text-right pr-3">slurry (m3)</th>
@@ -232,20 +229,20 @@ const Excess = () => {
           </thead>
           <tbody>
             {sweep.map((r) => (
-              <tr key={r.excess} className={r.excess === 0 ? 'text-[#BFFF00]' : ''}>
+              <tr key={r.excess} className={r.excess === 0 ? 'text-pl-accent-text font-semibold' : ''}>
                 <td className="pr-3">{fmt(100 * r.excess, 1)} pct</td>
                 <td className="text-right pr-3">{fmt(r.slurryM3, 5)}</td>
                 <td className="text-right pr-3">{fmt(r.balancedHeightM, 4)}</td>
                 <td className="text-right pr-3">{fmt(r.asPumpedTopMdM, 3)}</td>
                 <td className="text-right pr-3">{fmt(r.pluggedTopMdM, 3)}</td>
-                <td className="text-right pr-3 text-rose-400">{fmt(r.settleM, 4)}</td>
-                <td className="text-right text-amber-400">{fmt(r.settleM - zero.settleM, 4)}</td>
+                <td className="text-right pr-3 text-pl-text">{fmt(r.settleM, 4)}</td>
+                <td className="text-right text-pl-text">{fmt(r.settleM - zero.settleM, 4)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         The last column is what excess actually buys you, and it is zero on the highlighted row.
         Everything to the left of it on that row is what the geometry costs you whatever you do.
         The settled top is always DEEPER than the as-pumped top, so a plug tagged where the pump
@@ -295,25 +292,23 @@ const Rules = () => {
         <Tile label="Lengths that need the foundation" value={between.length ? between.map((l) => fmt(l, 0)).join(', ') : 'none'} unit="m" />
         <Tile label="Rows in the sweep" value={fmt(sweep.length, 0)} />
       </TileGrid>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="lengthM" tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'plug length (m MD)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-            <YAxis domain={[0, 1]} ticks={[0, 1]} tickFormatter={(x) => (x ? 'pass' : 'fail')}
-              tick={{ fill: '#94a3b8', fontSize: 11 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(x) => (x ? 'pass' : 'fail')} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Bar dataKey="none" name="no foundation" fill="#f472b6" isAnimationActive={false} />
-            <Bar dataKey="tagged" name="on a tagged foundation" fill="#BFFF00" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <BarChart data={data} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="lengthM" tick={AXIS_TICK}
+            label={{ value: 'plug length (m MD)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis domain={[0, 1]} ticks={[0, 1]} tickFormatter={(x) => (x ? 'pass' : 'fail')}
+            tick={AXIS_TICK} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(x) => (x ? 'pass' : 'fail')} />
+          <Legend {...LEGEND_PROPS} />
+          <Bar dataKey="none" name="no foundation" fill={seriesColor(4)} isAnimationActive={false} />
+          <Bar dataKey="tagged" name="on a tagged foundation" fill={seriesColor(1)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">length (m MD)</th>
               <th className="text-right pr-3">required, no foundation (m)</th>
@@ -332,17 +327,17 @@ const Rules = () => {
                 <tr key={l}>
                   <td className="pr-3">{fmt(l, 0)}</td>
                   <td className="text-right pr-3">{fmt(a.checks[0].requiredM, 0)}</td>
-                  <td className={`pr-3 ${a.pass ? 'text-emerald-400' : 'text-rose-400'}`}>{a.pass ? 'pass' : 'fail'}</td>
+                  <td className={`pr-3 ${a.pass ? 'text-pl-success-text' : 'text-pl-danger-text'}`}>{a.pass ? 'pass' : 'fail'}</td>
                   <td className="text-right pr-3">{fmt(b.checks[0].requiredM, 0)}</td>
-                  <td className={`pr-3 ${b.pass ? 'text-emerald-400' : 'text-rose-400'}`}>{b.pass ? 'pass' : 'fail'}</td>
-                  <td className="text-amber-400">{a.pass === b.pass ? 'nothing' : 'everything, it turned a fail into a pass'}</td>
+                  <td className={`pr-3 ${b.pass ? 'text-pl-success-text' : 'text-pl-danger-text'}`}>{b.pass ? 'pass' : 'fail'}</td>
+                  <td className="text-pl-text">{a.pass === b.pass ? 'nothing' : 'everything, it turned a fail into a pass'}</td>
                 </tr>
               );
             })}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         There are two thresholds and not one. A plug hanging in open hole has to be
         {' '}{fmt(D010_DEFAULT_RULES.plugMinLengthM, 0)} m of cement, and a plug sitting on a
         foundation somebody has actually tagged has to be
@@ -382,12 +377,12 @@ const Programme = () => {
   const failingZones = prog.zoneCompliance.filter((z) => !z.pass);
   return (
     <>
-      <div className={`rounded-md border p-4 mb-3 ${prog.pass ? 'border-emerald-700 bg-emerald-900/20' : 'border-rose-700 bg-rose-900/20'}`}>
-        <p className="text-xs text-gray-400 mb-1">The programme as a whole</p>
-        <p className={`text-3xl font-bold mb-0 ${prog.pass ? 'text-emerald-300' : 'text-rose-300'}`}>
+      <div className={`rounded-md border p-4 mb-3 ${prog.pass ? 'border-pl-success/30 bg-pl-success-bg' : 'border-pl-danger/30 bg-pl-danger-bg'}`}>
+        <p className="text-xs text-pl-muted mb-1">The programme as a whole</p>
+        <p className={`text-3xl font-bold mb-0 ${prog.pass ? 'text-pl-success-text' : 'text-pl-danger-text'}`}>
           {prog.pass ? 'PASS' : 'FAIL'}
         </p>
-        <p className="text-xs text-gray-400 mt-2 mb-0">
+        <p className="text-xs text-pl-muted mt-2 mb-0">
           and its surface plug, {prog.surfacePlug.name || 'none proposed'}, is
           {' '}{prog.surfacePlug.pass ? 'compliant' : 'not compliant'}. A compliant surface phase
           does not rescue a zone with only one qualifying barrier, and on this well
@@ -405,8 +400,8 @@ const Programme = () => {
         <Tile label="Programme steps" value={fmt(prog.steps.length, 0)} />
       </TileGrid>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">zone</th>
               <th className="text-right pr-3">top (m MD)</th>
@@ -424,15 +419,15 @@ const Programme = () => {
                 <td className="pr-3">{z.primaryQualifying.length ? z.primaryQualifying.join(', ') : 'none'}</td>
                 <td className="pr-3">{z.secondaryQualifying.length ? z.secondaryQualifying.join(', ') : 'none'}</td>
                 <td className="text-right pr-3">{fmt(z.required, 0)}</td>
-                <td className={z.pass ? 'text-emerald-400' : 'text-rose-400'}>{z.pass ? 'pass' : 'FAIL'}</td>
+                <td className={z.pass ? 'text-pl-success-text' : 'text-pl-danger-text'}>{z.pass ? 'pass' : 'FAIL'}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">phase</th>
               <th className="text-left pr-3">step</th>
@@ -444,35 +439,33 @@ const Programme = () => {
               <tr key={`${s.phase}-${s.step}`}>
                 <td className="pr-3">{s.phase}</td>
                 <td className="pr-3">{s.step}</td>
-                <td className="text-slate-400">{s.description}</td>
+                <td className="text-pl-muted">{s.description}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="h-56 mt-4">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={lengths.map((l) => ({
-            lengthM: l,
-            unverified: at(l, false) && at(l, false).pass ? 1 : 0,
-            logged: at(l, true) && at(l, true).pass ? 1 : 0,
-          }))} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="lengthM" tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'annular cement length (m MD)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-            <YAxis domain={[0, 1]} ticks={[0, 1]} tickFormatter={(x) => (x ? 'pass' : 'fail')}
-              tick={{ fill: '#94a3b8', fontSize: 11 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(x) => (x ? 'pass' : 'fail')} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Bar dataKey="unverified" name="not logged" fill="#f472b6" isAnimationActive={false} />
-            <Bar dataKey="logged" name="verified by log" fill="#BFFF00" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-4">
+        <BarChart data={lengths.map((l) => ({
+          lengthM: l,
+          unverified: at(l, false) && at(l, false).pass ? 1 : 0,
+          logged: at(l, true) && at(l, true).pass ? 1 : 0,
+        }))} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="lengthM" tick={AXIS_TICK}
+            label={{ value: 'annular cement length (m MD)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis domain={[0, 1]} ticks={[0, 1]} tickFormatter={(x) => (x ? 'pass' : 'fail')}
+            tick={AXIS_TICK} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(x) => (x ? 'pass' : 'fail')} />
+          <Legend {...LEGEND_PROPS} />
+          <Bar dataKey="unverified" name="not logged" fill={seriesColor(4)} isAnimationActive={false} />
+          <Bar dataKey="logged" name="verified by log" fill={seriesColor(1)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">annular cement (m MD)</th>
               <th className="text-right pr-3">required unlogged (m)</th>
@@ -491,17 +484,17 @@ const Programme = () => {
                 <tr key={l}>
                   <td className="pr-3">{fmt(l, 1)}</td>
                   <td className="text-right pr-3">{fmt(a.requiredM, 0)}</td>
-                  <td className={`pr-3 ${a.pass ? 'text-emerald-400' : 'text-rose-400'}`}>{a.pass ? 'pass' : 'fail'}</td>
+                  <td className={`pr-3 ${a.pass ? 'text-pl-success-text' : 'text-pl-danger-text'}`}>{a.pass ? 'pass' : 'fail'}</td>
                   <td className="text-right pr-3">{fmt(b.requiredM, 0)}</td>
-                  <td className={`pr-3 ${b.pass ? 'text-emerald-400' : 'text-rose-400'}`}>{b.pass ? 'pass' : 'fail'}</td>
-                  <td className="text-amber-400">{a.pass === b.pass ? 'nothing' : 'everything'}</td>
+                  <td className={`pr-3 ${b.pass ? 'text-pl-success-text' : 'text-pl-danger-text'}`}>{b.pass ? 'pass' : 'fail'}</td>
+                  <td className="text-pl-text">{a.pass === b.pass ? 'nothing' : 'everything'}</td>
                 </tr>
               );
             })}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         A cement bond log is worth {fmt(worth, 0)} metres of cement. Unlogged annular cement has to
         be {fmt(D010_DEFAULT_RULES.annularCementUnverifiedMinM, 0)} m to count as a barrier and
         logged cement has to be {fmt(D010_DEFAULT_RULES.annularCementVerifiedMinM, 0)} m, so the
