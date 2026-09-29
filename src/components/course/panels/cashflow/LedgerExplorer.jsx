@@ -1,8 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, ComposedChart, BarChart, Bar, Line, Cell, XAxis, YAxis, CartesianGrid,
+  ComposedChart, BarChart, Bar, Line, Cell, XAxis, YAxis, CartesianGrid,
   Tooltip, Legend, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import {
   AKATA_LABEL, AKATA_YEARS, ENGINE_VERSION,
   akataLedger, akataYearCascade, akataWorkingInterestSweep, akataTakeDecomposition,
@@ -41,20 +44,20 @@ const MODES = [
   ['addingUp', 'Adding up: cumulative, payback, totals, boe, take'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const GRID = <CartesianGrid stroke="#334155" strokeDasharray="3 3" />;
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const GRID = <CartesianGrid {...GRID_STYLE} />;
 const compact = (v) => (Math.abs(v) >= 1e6 ? `${num(v / 1e6, 1)}M` : num(v, 0));
 
 const Tbl = ({ head, rows, highlight = -1 }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>{head.map((h, i) => <th key={i} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>)}</tr>
       </thead>
       <tbody>
         {rows.map((r, i) => (
-          <tr key={i} className={i === highlight ? 'text-white font-semibold' : ''}>
+          <tr key={i} className={i === highlight ? 'text-pl-text font-semibold' : ''}>
             {r.map((c, j) => <td key={j} className={`${j < r.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{c}</td>)}
           </tr>
         ))}
@@ -94,24 +97,22 @@ const Ledger = () => {
         head={['year', 'oil, bbl', 'gas, Mscf', 'oil price, USD/bbl', 'gross revenue', 'royalty', 'opex', 'capex', 'depreciation', 'taxable income', 'tax', 'net cash flow', 'cumulative']}
         rows={led.rows.map((r) => [r.year, num(r.oil_bbl, 0), num(r.gas_mscf, 0), num(r.applied_oil_price, 6), usd(r.gross_revenue), usd(r.royalty), usd(r.opex), usd(r.capex), usd(r.depreciation), usd(r.taxable_income), usd(r.tax), usd(r.net_cash_flow), usd(r.cumulative_cash_flow)])}
       />
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            {GRID}
-            <XAxis dataKey="year" tick={AXIS} />
-            <YAxis tick={AXIS} tickFormatter={compact} label={{ value: 'USD', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => usd(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={0} stroke="#64748b" />
-            <Bar dataKey="net" name="net cash flow, money of the day" isAnimationActive={false}>
-              {chart.map((c) => <Cell key={c.year} fill={c.year === Number(year) ? '#BFFF00' : (c.net < 0 ? '#f87171' : '#38bdf8')} />)}
-            </Bar>
-            <Line type="monotone" dataKey="cumulative" name="cumulative cash flow" stroke="#f472b6" dot={false} isAnimationActive={false} />
-          </ComposedChart>
-        </ResponsiveContainer>
-      </div>
-      <div className="mt-3 rounded-md border border-gray-700 bg-[#0F172A] p-3 text-xs text-slate-300">
-        <span className="text-white font-semibold">{cas.year}, read as a sentence. </span>
+      <ChartFrame height={256} className="mt-3">
+        <ComposedChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          {GRID}
+          <XAxis dataKey="year" tick={AXIS} />
+          <YAxis tick={AXIS} tickFormatter={compact} label={{ value: 'USD', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => usd(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine y={0} stroke={SVG_CHART.reference} />
+          <Bar dataKey="net" name="net cash flow, money of the day" isAnimationActive={false}>
+            {chart.map((c) => <Cell key={c.year} fill={c.year === Number(year) ? seriesColor(0) : (c.net < 0 ? seriesColor(3) : seriesColor(1))} />)}
+          </Bar>
+          <Line type="monotone" dataKey="cumulative" name="cumulative cash flow" stroke={seriesColor(4)} dot={false} isAnimationActive={false} />
+        </ComposedChart>
+      </ChartFrame>
+      <div className="mt-3 rounded-md border border-pl-border bg-pl-sunken p-3 text-xs text-pl-text">
+        <span className="text-pl-text font-semibold">{cas.year}, read as a sentence. </span>
         Oil {num(cas.oilBbl, 0)} bbl at {num(cas.oilPrice, 6)} USD per bbl and gas {num(cas.gasMscf, 0)} Mscf at
         {' '}{num(cas.gasPrice, 6)} USD per Mscf give gross revenue {usd(cas.grossRevenue)}. Royalty at
         {' '}{num(cas.royaltyPct, 2)} percent takes {usd(cas.royalty)}. Opex is {usd(cas.opex)} and depreciation
@@ -119,7 +120,7 @@ const Ledger = () => {
         is {usd(cas.tax)}. Capex in the year is {usd(cas.capex)}. Net cash flow is {usd(cas.netCashFlow)}, and the
         cumulative cash flow at the end of the year stands at {usd(cas.cumulativeCashFlow)}.
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         The ledger is the whole subject. Every column to the right of gross revenue is subtracted from the one
         before it, in this order and no other, and the last column is a running sum of the one before it. Depreciation
         is the one entry that is not cash: it is the capex spread over ten years so that tax is charged on income
@@ -149,18 +150,18 @@ const RowsToYears = () => {
       <FieldGrid>
         <SelectField label="Published ingestion case" value={c.name} onChange={setName} options={cases.map((x) => [x.name, x.name])} />
       </FieldGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">{c.note}</p>
+      <p className="text-xs text-pl-muted mt-2 mb-0">{c.note}</p>
       <div className="grid gap-3 lg:grid-cols-2 mt-3">
         <div>
-          <p className="text-xs text-slate-500 mb-1">Before: the rows as uploaded</p>
-          <div className="rounded-md border border-gray-700 bg-[#0F172A] p-2 text-xs text-slate-300 font-mono whitespace-pre-wrap break-words">
+          <p className="text-xs text-pl-muted mb-1">Before: the rows as uploaded</p>
+          <div className="rounded-md border border-pl-border bg-pl-sunken p-2 text-xs text-pl-text font-mono whitespace-pre-wrap break-words">
             {c.prodRows.map((r, i) => <div key={`p${i}`}>prod: {kv(r)}</div>)}
             {c.capexRows.length ? c.capexRows.map((r, i) => <div key={`c${i}`}>capex: {kv(r)}</div>) : <div>capex: (none)</div>}
             {c.opexRows.length ? c.opexRows.map((r, i) => <div key={`o${i}`}>opex: {kv(r)}</div>) : <div>opex: (none)</div>}
           </div>
         </div>
         <div>
-          <p className="text-xs text-slate-500 mb-1">After: the years the engine reads</p>
+          <p className="text-xs text-pl-muted mb-1">After: the years the engine reads</p>
           <Tbl head={['year', 'oil, bbl', 'gas, Mscf', 'condensate, bbl', 'water, bbl']}
             rows={c.volumes.map((v) => [v.year, num(v.oil_bbl, 2), num(v.gas_mscf, 2), num(v.condensate_bbl, 2), num(v.water_bbl, 2)])} />
           <Tbl head={['year', 'capex, USD']} rows={c.capex.length ? c.capex.map((v) => [v.year, usd(v.usd)]) : [['(none)', '']]} />
@@ -175,21 +176,21 @@ const RowsToYears = () => {
           <Tile label="Take" value={pc(c.takePct)} />
         </TileGrid>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         Read the before and the after side by side. A per-well column beats a rollup column when both are present,
         month indexes 1 to 12 land in the base year and 13 to 24 in the next, a row with no preferred cost alias
         sums its *_usd parts with total_ prefixed columns excluded, and two aliases carrying the same value are
         accepted once. None of that is arithmetic a learner should redo by hand; it is a contract the engine keeps.
       </div>
-      <p className="text-xs text-slate-500 mt-4 mb-1">Which column names count as volumes</p>
+      <p className="text-xs text-pl-muted mt-4 mb-1">Which column names count as volumes</p>
       <div className="flex flex-wrap gap-2">
         {cols.map((r) => (
-          <span key={r.key} className={`text-xs px-2 py-0.5 rounded border ${r.isVolume ? 'border-emerald-700 text-emerald-300' : 'border-rose-800 text-rose-300'}`}>
+          <span key={r.key} className={`text-xs px-2 py-0.5 rounded border ${r.isVolume ? 'border-pl-success/40 text-pl-success-text' : 'border-pl-danger/40 text-pl-danger-text'}`}>
             {r.key}: {yn(r.isVolume)}
           </span>
         ))}
       </div>
-      <p className="text-xs text-slate-500 mt-4 mb-1">The eight uploads the engine REFUSES, with the message each one throws</p>
+      <p className="text-xs text-pl-muted mt-4 mb-1">The eight uploads the engine REFUSES, with the message each one throws</p>
       <Tbl head={['refusal', 'message']} rows={refs.map((r) => [r.name, <span key={r.name} className="whitespace-normal">{r.message}</span>])} />
       <Note>
         A refusal is the engine's honest answer to an upload it cannot read. The alternative, a ledger full of
@@ -213,21 +214,21 @@ const Prices = () => {
       <FieldGrid>
         <SelectField label="Published price case" value={c.name} onChange={setName} options={pcs.map((x) => [x.name, x.name])} />
       </FieldGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">{c.note}</p>
+      <p className="text-xs text-pl-muted mt-2 mb-0">{c.note}</p>
       <Tbl
         head={showOpex ? ['year', 'applied oil price, USD/bbl', 'gross revenue, USD', 'opex, USD', 'capex, USD'] : ['year', 'applied oil price, USD/bbl', 'gross revenue, USD']}
         rows={c.byYear.map((q) => (showOpex
           ? [q.year, num(q.appliedOilPrice, 6), usd(q.grossRevenue), usd(q.opex), usd(q.capex)]
           : [q.year, num(q.appliedOilPrice, 6), usd(q.grossRevenue)]))}
       />
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         A deck entry overrides the flat price and its escalator for its stream. Between entries the deck holds its
         step, before the first entry it takes the first value, and beyond the last entry the last value is escalated
         by the stream escalator. A differential is added AFTER the deck is resolved and a scale multiplies the
         resolved price. An unset escalator falls back to the inflation rate for prices and opex; the capex escalator
         stays at zero.
       </div>
-      <p className="text-xs text-slate-500 mt-4 mb-1">
+      <p className="text-xs text-pl-muted mt-4 mb-1">
         The resolver on its own. Parsed oil deck of deck_step_hold: {deck.parsedOilDeck.map((d) => `${d.year} at ${d.value}`).join(', ')}.
         Gas deck entries {deck.gasDeckEntries}, condensate deck entries {deck.condensateDeckEntries}.
       </p>
@@ -265,7 +266,7 @@ const Cascade = () => {
       <FieldGrid>
         <SelectField label="Lever" value={family} onChange={setFamily} options={LEVER_FAMILIES} />
       </FieldGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The hand-derived two-year case: {num(base.prodRows[0].well1_oil_bbl, 0)} bbl a year at {num(base.cfg.oil_price_usd_bbl, 0)} USD,
         royalty {num(base.cfg.jv_royalty_pct, 0)} percent, tax {num(base.cfg.jv_tax_rate_pct, 0)} percent, working interest
         {' '}{num(base.cfg.jv_working_interest_pct, 0)} percent, capex {usd(base.capexRows[0].amount_usd)} in the first year.
@@ -274,26 +275,24 @@ const Cascade = () => {
         head={['year', 'gross revenue', 'royalty', 'opex', 'capex', 'depreciation', 'taxable income', 'tax', 'net cash flow', 'cumulative']}
         rows={base.rows.map((r) => [r.year, usd(r.gross_revenue), usd(r.royalty), usd(r.opex), usd(r.capex), usd(r.depreciation), usd(r.taxable_income), usd(r.tax), usd(r.net_cash_flow), usd(r.cumulative_cash_flow)])}
       />
-      <p className="text-xs text-slate-500 mt-4 mb-1">The same two years with one lever moved on its own</p>
+      <p className="text-xs text-pl-muted mt-4 mb-1">The same two years with one lever moved on its own</p>
       <Tbl
         head={['lever', 'value', 'year 1 royalty', 'year 1 tax', 'year 1 net', 'year 2 net', 'NPV at 10 %', 'IRR, %', 'take, %']}
         rows={rows.map((r) => [r.key, r.value === null ? '' : num(r.value, 0), usd(r.year1Royalty), usd(r.year1Tax), usd(r.year1Net), usd(r.year2Net), usd(r.npv), r.irrPct === null ? 'null' : num(r.irrPct, 4), num(r.takePct, 4)])}
       />
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={bars} margin={{ top: 10, right: 16, bottom: 5, left: 20 }}>
-            {GRID}
-            <XAxis dataKey="name" tick={{ fill: '#94a3b8', fontSize: 10 }} />
-            <YAxis tick={AXIS} tickFormatter={compact} label={{ value: 'take, percent of pre-take value', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => num(v, 4)} />
-            <ReferenceLine y={100} stroke="#f87171" strokeDasharray="5 3" label={{ value: 'take of 100 percent', fill: '#f87171', fontSize: 10, position: 'insideTopRight' }} />
-            <Bar dataKey="take" name="take, percent" isAnimationActive={false}>
-              {bars.map((b) => <Cell key={b.name} fill={b.take > 100 ? '#f87171' : '#BFFF00'} />)}
-            </Bar>
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <ChartFrame height={224} className="mt-3">
+        <BarChart data={bars} margin={{ top: 10, right: 16, bottom: 5, left: 20 }}>
+          {GRID}
+          <XAxis dataKey="name" tick={{ ...AXIS_TICK, fontSize: 10 }} />
+          <YAxis tick={AXIS} tickFormatter={compact} label={{ value: 'take, percent of pre-take value', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => num(v, 4)} />
+          <ReferenceLine y={100} stroke={seriesColor(3)} strokeDasharray="5 3" label={{ value: 'take of 100 percent', fill: seriesColor(3), fontSize: 10, position: 'insideTopRight' }} />
+          <Bar dataKey="take" name="take, percent" isAnimationActive={false}>
+            {bars.map((b) => <Cell key={b.name} fill={b.take > 100 ? seriesColor(3) : seriesColor(0)} />)}
+          </Bar>
+        </BarChart>
+      </ChartFrame>
+      <div className="mt-3 text-xs text-pl-text">
         Three levers, three different lines. ROYALTY is taken off gross revenue before anything else, so it moves
         the royalty line, the taxable income beneath it and therefore the tax, all in the same direction. The TAX
         RATE moves one line only, tax, and leaves royalty exactly where it was. WORKING INTEREST scales every money
@@ -337,35 +336,33 @@ const AddingUp = () => {
           <Tile label="Take, undiscounted" value={pc(c.takePct)} />
         </TileGrid>
       </div>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            {GRID}
-            <XAxis dataKey="year" tick={AXIS} />
-            <YAxis tick={AXIS} tickFormatter={compact} label={{ value: 'USD', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => usd(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={0} stroke="#f472b6" strokeDasharray="5 3" label={{ value: 'payback is where this is crossed', fill: '#f472b6', fontSize: 10, position: 'insideTopRight' }} />
-            <Bar dataKey="net" name="net cash flow" fill="#38bdf8" isAnimationActive={false} />
-            <Line type="monotone" dataKey="cumulative" name="cumulative cash flow" stroke="#BFFF00" dot isAnimationActive={false} />
-          </ComposedChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3">
+        <ComposedChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          {GRID}
+          <XAxis dataKey="year" tick={AXIS} />
+          <YAxis tick={AXIS} tickFormatter={compact} label={{ value: 'USD', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => usd(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine y={0} stroke={seriesColor(4)} strokeDasharray="5 3" label={{ value: 'payback is where this is crossed', fill: seriesColor(4), fontSize: 10, position: 'insideTopRight' }} />
+          <Bar dataKey="net" name="net cash flow" fill={seriesColor(1)} isAnimationActive={false} />
+          <Line type="monotone" dataKey="cumulative" name="cumulative cash flow" stroke={seriesColor(0)} dot isAnimationActive={false} />
+        </ComposedChart>
+      </ChartFrame>
       <Tbl head={['year', 'net cash flow', 'cumulative']} rows={c.cumulativeByYear.map((q) => [q.year, usd(q.netCashFlow), usd(q.cumulative)])} />
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         Payback is the year the cumulative line crosses zero, with the fraction of that year read by straight
         proportion inside it. When the line never crosses, the engine says "Beyond project life" and reports null
         years rather than a large number; when the first row is already positive it says "Year 0". Take is the
         government's royalty plus tax over the pre-take value, which is revenue less capex less opex, and it is
         null when that pre-take value is not positive, because a share of nothing is not a share.
       </div>
-      <p className="text-xs text-slate-500 mt-4 mb-1">Take on the teaching field, decomposed</p>
-      <div className="rounded-md border border-gray-700 bg-[#0F172A] p-3 text-xs text-slate-300">
+      <p className="text-xs text-pl-muted mt-4 mb-1">Take on the teaching field, decomposed</p>
+      <div className="rounded-md border border-pl-border bg-pl-sunken p-3 text-xs text-pl-text">
         Pre-take value is revenue {usd(take.totalRevenue)} less capex {usd(take.totalCapex)} less opex {usd(take.totalOpex)}.
         The government keeps royalties plus tax {usd(take.totalTax)}; the contractor keeps the total real net cash flow
         {' '}{usd(take.totalRealNetCashFlow)}. Take {pc(take.takePct)} undiscounted.
       </div>
-      <p className="text-xs text-slate-500 mt-4 mb-1">Working interest on the teaching field: every money line and every volume is the share</p>
+      <p className="text-xs text-pl-muted mt-4 mb-1">Working interest on the teaching field: every money line and every volume is the share</p>
       <Tbl
         head={['WI, %', 'year 1 gross revenue', 'year 1 royalty', 'year 1 tax', 'year 1 net', 'total oil, bbl', 'IRR, %', 'take, %', 'unit technical cost, USD/boe', 'reported WI']}
         rows={wi.map((r) => [r.wiPct, usd(r.year1GrossRevenue), usd(r.year1Royalty), usd(r.year1Tax), usd(r.year1Net), num(r.totalOilBbl, 0), num(r.irrPct, 4), num(r.takePct, 4), num(r.unitTechnicalCost, 6), r.reportedWiPct])}
