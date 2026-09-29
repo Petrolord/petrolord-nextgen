@@ -84,10 +84,10 @@ const TypedWellFields = ({ draft, setDraft, extra = [], designation = false }) =
             ))}
             {designation && (
               <div>
-                <label className="text-gray-400 text-xs mb-1 block" htmlFor="typed-unit-designation">Unit designation</label>
+                <label className="text-pl-muted text-xs mb-1 block" htmlFor="typed-unit-designation">Unit designation</label>
                 <input id="typed-unit-designation" type="text" value={draft.unitDesignation}
                   onChange={(e) => setKey('unitDesignation')(e.target.value)}
-                  className="w-full bg-gray-700 text-white border border-gray-600 rounded-md h-8 text-sm px-2" />
+                  className="w-full bg-pl-surface text-pl-text border border-pl-border-strong rounded-md h-8 text-sm px-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus" />
               </div>
             )}
           </FieldGrid>

@@ -543,3 +543,41 @@ entry.
   `src/components/course/panels/__tests__/DrillingPanels3E.theme.test.jsx`
   (every view of every panel in both themes, plots on the white plate with
   the mark, series in kit colours, a source scan with negative controls).
+
+## 10. Batch 4B: production II course apps (as built)
+
+Rod pump (`/dashboard/apps/rodpump`), gas well
+(`/dashboard/apps/gaswell`) and flow assurance
+(`/dashboard/apps/flowassurance`) are on the roles and registered in
+`src/design/rollout/w4b.js`.
+
+- The nine panels (string, card and balance explorers with
+  `TypedWellFields`; droplet, profile and remedy explorers; thermal, line and
+  hydrate explorers) are used by their learning page and by the course
+  reader and handbook, which 1C already themes, so they moved straight to
+  roles with no legacy branch. No file is shared with 4A or 4C.
+- The page recipe is 3C's: cards on `surface`, lessons and the locked
+  capstone note on `sunken`, the tier buttons primary when chosen, capstone
+  results and toasts on the success and danger roles with their words,
+  certificate number and award icon gold. The March this well button is the
+  primary action; the typed unit designation takes the Suite input styling.
+- Every chart (43 Recharts plots) is in `ChartFrame`: `GRID_STYLE`,
+  `AXIS_TICK`, `TOOLTIP_STYLE`, `LEGEND_PROPS`, axis titles on
+  `SVG_CHART.label`. Lime goes to `seriesColor(0)`, sky to `(1)`, orange to
+  `(2)`, the pink guide lines to `(4)`; slate guides and the heat-loss-only
+  trace take `SVG_CHART.reference`.
+- Table highlights echo their chart series: a lime column is now
+  `info-text` (blue, like `seriesColor(0)`), a sky column `primary-text`
+  (green, like `(1)`), an orange column `accent-text`. A flagged row (loaded,
+  not periodic, overstressed, opposite signs, inside the hydrate region,
+  refused) and "Inputs changed since the last march" are `warning-text`,
+  each beside its word. The balance explorer's "the rows above in orange" now
+  reads "in amber". No lesson names a chart colour.
+- Tests: `src/pages/apps/__tests__/Production4B.theme.test.jsx` (harness
+  `prod4bHarness.jsx`: the four standard checks per app, every tier in both
+  themes with the charts on the white plate and the mark, capstone pass and
+  fail, the Learning Mode gate) and
+  `src/components/course/panels/__tests__/prod4bPanelsTheme.test.jsx`
+  (scenes in `prod4bScenes.jsx`: every view of every panel in light and
+  dark, no retired chart colour, a flagged row on the warning role with its
+  words, the primary march button).

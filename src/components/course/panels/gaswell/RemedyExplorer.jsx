@@ -1,10 +1,13 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line,
+  LineChart, Line,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine, ReferenceDot,
 } from 'recharts';
 import { remedyExplorer } from './gasWellLab';
 import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 
 // Remedy explorer, the Expert tier. What the design hides or breaks.
 //
@@ -49,9 +52,9 @@ const MODES = [
   ['nobody', 'What nobody checks'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const GRID = <CartesianGrid stroke="#334155" strokeDasharray="3 3" />;
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const GRID = <CartesianGrid {...GRID_STYLE} />;
 
 // --------------------------------------------------------------------------
 
@@ -98,64 +101,58 @@ const Seam = () => {
         </TileGrid>
       </div>
       {view === 'rates' ? (
-        <div className="h-64 mt-3">
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-              {GRID}
-              <XAxis dataKey="depthFt" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
-                label={{ value: 'depth, ft', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-              <YAxis tick={AXIS} domain={['auto', 'auto']}
-                label={{ value: 'critical rate, Mscf/d', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-              <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-              <Legend wrapperStyle={{ fontSize: 11 }} />
-              <Line type="monotone" dataKey="colemanCriticalRateMscfd" name="Coleman, chosen at the gauge"
-                stroke="#38bdf8" dot isAnimationActive={false} />
-              <Line type="monotone" dataKey="turnerCriticalRateMscfd" name="Turner, the same equation times 1.2"
-                stroke="#BFFF00" dot isAnimationActive={false} />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
+        <ChartFrame height={256} className="mt-3 rounded-t-lg">
+          <LineChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+            {GRID}
+            <XAxis dataKey="depthFt" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
+              label={{ value: 'depth, ft', position: 'insideBottom', offset: -8, fill: SVG_CHART.label, fontSize: 10 }} />
+            <YAxis tick={AXIS} domain={['auto', 'auto']}
+              label={{ value: 'critical rate, Mscf/d', angle: -90, position: 'insideLeft', fill: SVG_CHART.label, fontSize: 10 }} />
+            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+            <Legend {...LEGEND_PROPS} />
+            <Line type="monotone" dataKey="colemanCriticalRateMscfd" name="Coleman, chosen at the gauge"
+              stroke={seriesColor(1)} dot isAnimationActive={false} />
+            <Line type="monotone" dataKey="turnerCriticalRateMscfd" name="Turner, the same equation times 1.2"
+              stroke={seriesColor(0)} dot isAnimationActive={false} />
+          </LineChart>
+        </ChartFrame>
       ) : null}
       {view === 'verdicts' ? (
-        <div className="h-64 mt-3">
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-              {GRID}
-              <XAxis dataKey="depthFt" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
-                label={{ value: 'depth, ft', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-              <YAxis tick={AXIS} domain={['auto', 'auto']}
-                label={{ value: 'ratio', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-              <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 10)} />
-              <Legend wrapperStyle={{ fontSize: 11 }} />
-              <ReferenceLine y={1} stroke="#f472b6" strokeDasharray="4 3" />
-              <Line type="monotone" dataKey="colemanRatio" name="under Coleman" stroke="#38bdf8" dot isAnimationActive={false} />
-              <Line type="monotone" dataKey="turnerRatio" name="under Turner" stroke="#BFFF00" dot isAnimationActive={false} />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
+        <ChartFrame height={256} className="mt-3 rounded-t-lg">
+          <LineChart data={rows} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+            {GRID}
+            <XAxis dataKey="depthFt" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
+              label={{ value: 'depth, ft', position: 'insideBottom', offset: -8, fill: SVG_CHART.label, fontSize: 10 }} />
+            <YAxis tick={AXIS} domain={['auto', 'auto']}
+              label={{ value: 'ratio', angle: -90, position: 'insideLeft', fill: SVG_CHART.label, fontSize: 10 }} />
+            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 10)} />
+            <Legend {...LEGEND_PROPS} />
+            <ReferenceLine y={1} stroke={seriesColor(4)} strokeDasharray="4 3" />
+            <Line type="monotone" dataKey="colemanRatio" name="under Coleman" stroke={seriesColor(1)} dot isAnimationActive={false} />
+            <Line type="monotone" dataKey="turnerRatio" name="under Turner" stroke={seriesColor(0)} dot isAnimationActive={false} />
+          </LineChart>
+        </ChartFrame>
       ) : null}
       {view === 'mixed' ? (
-        <div className="h-64 mt-3">
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={mixed} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-              {GRID}
-              <XAxis dataKey="depthFt" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
-                label={{ value: 'depth, ft', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-              <YAxis tick={AXIS} domain={['auto', 'auto']}
-                label={{ value: 'critical rate, Mscf/d', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-              <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-              <Legend wrapperStyle={{ fontSize: 11 }} />
-              <Line type="monotone" dataKey="criticalRateMscfd" name="each station under the correlation its own pressure selects"
-                stroke="#f97316" dot isAnimationActive={false} />
-              <ReferenceDot x={mixedSummary.correlationChangesAtDepthFt}
-                y={mixedSummary.rateAfterStepMscfd} r={5} fill="#f472b6" stroke="none" isFront />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
+        <ChartFrame height={256} className="mt-3 rounded-t-lg">
+          <LineChart data={mixed} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+            {GRID}
+            <XAxis dataKey="depthFt" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
+              label={{ value: 'depth, ft', position: 'insideBottom', offset: -8, fill: SVG_CHART.label, fontSize: 10 }} />
+            <YAxis tick={AXIS} domain={['auto', 'auto']}
+              label={{ value: 'critical rate, Mscf/d', angle: -90, position: 'insideLeft', fill: SVG_CHART.label, fontSize: 10 }} />
+            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+            <Legend {...LEGEND_PROPS} />
+            <Line type="monotone" dataKey="criticalRateMscfd" name="each station under the correlation its own pressure selects"
+              stroke={seriesColor(2)} dot isAnimationActive={false} />
+            <ReferenceDot x={mixedSummary.correlationChangesAtDepthFt}
+              y={mixedSummary.rateAfterStepMscfd} r={5} fill={seriesColor(4)} stroke="none" isFront />
+          </LineChart>
+        </ChartFrame>
       ) : null}
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">depth, ft</th>
               <th className="text-left pr-3">pressure, psia</th>
@@ -170,11 +167,11 @@ const Seam = () => {
           </thead>
           <tbody>
             {rows.map((r, i) => (
-              <tr key={r.depthFt} className={r.verdictsAgree ? '' : 'text-[#f97316]'}>
+              <tr key={r.depthFt} className={r.verdictsAgree ? '' : 'text-pl-warning-text'}>
                 <td className="pr-3">{fmt(r.depthFt, 1)}</td>
                 <td className="pr-3">{fmt(r.pPsia, 1)}</td>
-                <td className="pr-3 text-[#38bdf8]">{fmt(r.colemanCriticalRateMscfd, 9)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.turnerCriticalRateMscfd, 9)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.colemanCriticalRateMscfd, 9)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.turnerCriticalRateMscfd, 9)}</td>
                 <td className="pr-3">{fmt(r.rateDifferenceMscfd, 9)}</td>
                 <td className="pr-3">{fmt(r.colemanRatio, 10)}</td>
                 <td className="pr-3">{fmt(r.turnerRatio, 10)}</td>
@@ -185,7 +182,7 @@ const Seam = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         TURNER IS COLEMAN PLUS TWENTY PERCENT, so the choice is worth twenty percent of EVERY critical
         rate the study goes on to compute, at every station, exactly. It was made at the gauge, from
         one pressure, by a function that cannot see which station that pressure came from. Ask the
@@ -194,7 +191,7 @@ const Seam = () => {
         {perStation[perStation.length - 1].correlation}. Nothing in the module refuses that, warns
         about it, or offers a recommendation that takes the controlling station.
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         CHOOSING PER STATION IS NOT THE FIX EITHER. Under the mixed reading the shallowest loading
         station moves from {fmt(mixedSummary.shippedShallowestLoadingDepthFt, 0)} ft to{' '}
         {fmt(mixedSummary.mixedShallowestLoadingDepthFt, 0)} ft, and the critical rate stops rising
@@ -203,7 +200,7 @@ const Seam = () => {
         Mscf/d. That step is an artefact of where the correlation changed and not a property of the
         well.
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         ON A PUBLISHED STATION, so this is not a teaching-well artefact: the Coleman rate is{' '}
         {fmt(published.colemanRateMscfd, 9)} Mscf/d and the Turner rate is{' '}
         {fmt(published.turnerRateMscfd, 9)} Mscf/d, {fmt(published.differenceMscfd, 9)} Mscf/d apart.
@@ -252,27 +249,25 @@ const Discarded = () => {
         <Tile label="And under Turner" value={fmt(cmp.discardedRatioUnderTurner, 10)} />
         <Tile label="A loss of" value={fmt(cmp.discardedRatioLossPct, 6)} unit="%" />
       </TileGrid>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={[...merged].reverse()} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="idIn" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
-              label={{ value: 'candidate inside diameter, in', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS} domain={['auto', 'auto']}
-              label={{ value: 'ratio', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 10)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={1} stroke="#f472b6" strokeDasharray="4 3"
-              label={{ value: 'clears one', fill: '#f472b6', fontSize: 10, position: 'insideTopLeft' }} />
-            <Line type="monotone" dataKey="colemanRatio" name="under Coleman" stroke="#38bdf8" dot isAnimationActive={false} />
-            <Line type="monotone" dataKey="turnerRatio" name="under Turner" stroke="#BFFF00" dot isAnimationActive={false} />
-            <ReferenceDot x={cmp.discardedIdIn} y={cmp.discardedRatioUnderColeman} r={5} fill="#f97316" stroke="none" isFront />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3 rounded-t-lg">
+        <LineChart data={[...merged].reverse()} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="idIn" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
+            label={{ value: 'candidate inside diameter, in', position: 'insideBottom', offset: -8, fill: SVG_CHART.label, fontSize: 10 }} />
+          <YAxis tick={AXIS} domain={['auto', 'auto']}
+            label={{ value: 'ratio', angle: -90, position: 'insideLeft', fill: SVG_CHART.label, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 10)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine y={1} stroke={seriesColor(4)} strokeDasharray="4 3"
+            label={{ value: 'clears one', fill: seriesColor(4), fontSize: 10, position: 'insideTopLeft' }} />
+          <Line type="monotone" dataKey="colemanRatio" name="under Coleman" stroke={seriesColor(1)} dot isAnimationActive={false} />
+          <Line type="monotone" dataKey="turnerRatio" name="under Turner" stroke={seriesColor(0)} dot isAnimationActive={false} />
+          <ReferenceDot x={cmp.discardedIdIn} y={cmp.discardedRatioUnderColeman} r={5} fill={seriesColor(2)} stroke="none" isFront />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">candidate, in</th>
               <th className="text-left pr-3">Coleman rate, Mscf/d</th>
@@ -284,19 +279,19 @@ const Discarded = () => {
           </thead>
           <tbody>
             {merged.map((r) => (
-              <tr key={r.idIn} className={r.flips ? 'text-[#f97316]' : ''}>
+              <tr key={r.idIn} className={r.flips ? 'text-pl-warning-text' : ''}>
                 <td className="pr-3">{fmt(r.idIn, 3)}</td>
                 <td className="pr-3">{fmt(r.colemanRateMscfd, 9)}</td>
-                <td className="pr-3 text-[#38bdf8]">{fmt(r.colemanRatio, 10)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.colemanRatio, 10)}</td>
                 <td className="pr-3">{fmt(r.turnerRateMscfd, 9)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.turnerRatio, 10)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.turnerRatio, 10)}</td>
                 <td>{yn(r.flips)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         ONE CANDIDATE OUT OF NINE CHANGES ITS VERDICT, and it is the one the Coleman run picked. The
         twenty percent lands in the denominator, so the ratio falls by one sixth rather than rising by
         a fifth, and a candidate sitting two thousandths above one comes back sixteen percent under
@@ -304,8 +299,8 @@ const Discarded = () => {
         somewhere else, and nothing in it says which station it was evaluated at either.
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">station</th>
               <th className="text-left pr-3">correlation</th>
@@ -320,11 +315,11 @@ const Discarded = () => {
                 <tr>
                   <td className="pr-3">the controlling station</td>
                   <td className="pr-3">{r.correlation}</td>
-                  <td className="pr-3 text-[#BFFF00]">{fmt(r.controllingPickIdIn, 3)}</td>
+                  <td className="pr-3 text-pl-info-text">{fmt(r.controllingPickIdIn, 3)}</td>
                   <td className="pr-3">{fmt(r.controllingPickRatio, 10)}</td>
                   <td className="pr-3">{fmt(r.stationWorthIn, 3)}</td>
                 </tr>
-                <tr className="text-[#f97316]">
+                <tr className="text-pl-warning-text">
                   <td className="pr-3">the wellhead</td>
                   <td className="pr-3">{r.correlation}</td>
                   <td className="pr-3">{fmt(r.wellheadPickIdIn, 3)}</td>
@@ -336,7 +331,7 @@ const Discarded = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         FOUR RUNS OF ONE LIST, AND TWO OF THEM PICK THE SAME STRING FROM OPPOSITE ERRORS. Sized at
         this well's wellhead the function returns {fmt(cost.wellheadSizingPickIdIn, 3)} in against a
         current string of {fmt(cost.currentStringIdIn, 3)} in, so it reports that no workover is
@@ -382,27 +377,25 @@ const Gradient = () => {
         <Tile label="The rounding, as a share of the exact value" value={fmt(g.roundingPctOfExact, 10)} unit="%" />
         <Tile label="A third value in the same domain, 62.4 over 144" value={fmt(g.sixtyTwoPointFourOver144, 13)} />
       </TileGrid>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={slugs} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="slugLengthFt" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
-              label={{ value: 'slug length, ft', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis yAxisId="c" tick={AXIS} domain={['auto', 'auto']}
-              label={{ value: 'cost, psi', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <YAxis yAxisId="p" orientation="right" tick={AXIS} domain={[0, 0.25]} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 10)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line yAxisId="c" type="monotone" dataKey="costPsi" name="the cost in psi, which grows with the slug"
-              stroke="#f97316" dot isAnimationActive={false} />
-            <Line yAxisId="p" type="monotone" dataKey="costPct" name="the cost as a percentage, which does not move at all"
-              stroke="#BFFF00" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3 rounded-t-lg">
+        <LineChart data={slugs} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="slugLengthFt" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
+            label={{ value: 'slug length, ft', position: 'insideBottom', offset: -8, fill: SVG_CHART.label, fontSize: 10 }} />
+          <YAxis yAxisId="c" tick={AXIS} domain={['auto', 'auto']}
+            label={{ value: 'cost, psi', angle: -90, position: 'insideLeft', fill: SVG_CHART.label, fontSize: 10 }} />
+          <YAxis yAxisId="p" orientation="right" tick={AXIS} domain={[0, 0.25]} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 10)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line yAxisId="c" type="monotone" dataKey="costPsi" name="the cost in psi, which grows with the slug"
+            stroke={seriesColor(2)} dot isAnimationActive={false} />
+          <Line yAxisId="p" type="monotone" dataKey="costPct" name="the cost as a percentage, which does not move at all"
+            stroke={seriesColor(0)} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">slug, ft</th>
               <th className="text-left pr-3">specific gravity</th>
@@ -417,9 +410,9 @@ const Gradient = () => {
               <tr key={r.slugLengthFt}>
                 <td className="pr-3">{fmt(r.slugLengthFt, 1)}</td>
                 <td className="pr-3">{fmt(r.liquidSg, 3)}</td>
-                <td className="pr-3 text-[#38bdf8]">{fmt(r.roundedPsi, 10)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.exactPsi, 10)}</td>
-                <td className="pr-3 text-[#f97316]">{fmt(r.costPsi, 10)}</td>
+                <td className="pr-3 text-pl-primary-text">{fmt(r.roundedPsi, 10)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.exactPsi, 10)}</td>
+                <td className="pr-3 text-pl-accent-text">{fmt(r.costPsi, 10)}</td>
                 <td>{fmt(r.costPct, 10)}</td>
               </tr>
             ))}
@@ -427,8 +420,8 @@ const Gradient = () => {
         </table>
       </div>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">term of the published lift balance</th>
               <th className="text-left pr-3">psi</th>
@@ -438,7 +431,7 @@ const Gradient = () => {
           </thead>
           <tbody>
             {terms.map((t) => (
-              <tr key={t.term} className={t.builtFromTheConstant ? 'text-[#f97316]' : ''}>
+              <tr key={t.term} className={t.builtFromTheConstant ? 'text-pl-warning-text' : ''}>
                 <td className="pr-3">{t.term}</td>
                 <td className="pr-3">{fmt(t.psi, 10)}</td>
                 <td className="pr-3">{yn(t.builtFromTheConstant)}</td>
@@ -448,7 +441,7 @@ const Gradient = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         ONE TERM OF FIVE CARRIES IT, AND NOTHING CANCELS. The oracle that cut the goldens used rho g
         exactly and published {fmt(g.goldenSlugPsi, 10)} psi for its own slug; the engine returns{' '}
         {fmt(g.engineSlugPsi, 10)} psi, a gap of {fmt(g.costOnPublishedSlugPsi, 10)} psi that carries
@@ -517,28 +510,26 @@ const Falling = () => {
               <Tile label="glrOk at the dead end" value={yn(head.lowGlrOk)} />
             </TileGrid>
           </div>
-          <div className="h-64 mt-3">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={[...rows].reverse()} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-                {GRID}
-                <XAxis dataKey="casingPressurePsia" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
-                  label={{ value: 'casing pressure, psia', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-                <YAxis tick={AXIS} domain={['auto', 'auto']}
-                  label={{ value: 'required gas-liquid ratio, scf/bbl', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-                <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
-                <Legend wrapperStyle={{ fontSize: 11 }} />
-                <ReferenceLine y={head.wellGlrScfBbl} stroke="#38bdf8" strokeDasharray="4 3"
-                  label={{ value: 'what the well makes', fill: '#38bdf8', fontSize: 10, position: 'insideTopRight' }} />
-                <ReferenceLine x={head.requiredPsiaFixed} stroke="#f472b6" strokeDasharray="4 3"
-                  label={{ value: 'the plunger stops moving here', fill: '#f472b6', fontSize: 10, position: 'top' }} />
-                <Line type="monotone" dataKey="requiredGlrScfBbl" name="what the screen says a cycle needs"
-                  stroke="#f97316" dot isAnimationActive={false} />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
+          <ChartFrame height={256} className="mt-3 rounded-t-lg">
+            <LineChart data={[...rows].reverse()} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+              {GRID}
+              <XAxis dataKey="casingPressurePsia" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
+                label={{ value: 'casing pressure, psia', position: 'insideBottom', offset: -8, fill: SVG_CHART.label, fontSize: 10 }} />
+              <YAxis tick={AXIS} domain={['auto', 'auto']}
+                label={{ value: 'required gas-liquid ratio, scf/bbl', angle: -90, position: 'insideLeft', fill: SVG_CHART.label, fontSize: 10 }} />
+              <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 6)} />
+              <Legend {...LEGEND_PROPS} />
+              <ReferenceLine y={head.wellGlrScfBbl} stroke={seriesColor(1)} strokeDasharray="4 3"
+                label={{ value: 'what the well makes', fill: seriesColor(1), fontSize: 10, position: 'insideTopRight' }} />
+              <ReferenceLine x={head.requiredPsiaFixed} stroke={seriesColor(4)} strokeDasharray="4 3"
+                label={{ value: 'the plunger stops moving here', fill: seriesColor(4), fontSize: 10, position: 'top' }} />
+              <Line type="monotone" dataKey="requiredGlrScfBbl" name="what the screen says a cycle needs"
+                stroke={seriesColor(2)} dot isAnimationActive={false} />
+            </LineChart>
+          </ChartFrame>
           <div className="mt-3 overflow-x-auto">
-            <table className="text-xs text-slate-300 w-full">
-              <thead className="text-slate-500">
+            <table className="text-xs text-pl-text w-full">
+              <thead className="text-pl-muted">
                 <tr>
                   <th className="text-left pr-3">casing, psia</th>
                   <th className="text-left pr-3">gas per cycle, scf</th>
@@ -552,10 +543,10 @@ const Falling = () => {
               </thead>
               <tbody>
                 {rows.map((r) => (
-                  <tr key={r.casingPressurePsia} className={r.expansionRunsTheRightWay ? '' : 'text-[#f97316]'}>
+                  <tr key={r.casingPressurePsia} className={r.expansionRunsTheRightWay ? '' : 'text-pl-warning-text'}>
                     <td className="pr-3">{fmt(r.casingPressurePsia, 1)}</td>
                     <td className="pr-3">{fmt(r.gasPerCycleScf, 8)}</td>
-                    <td className="pr-3 text-[#BFFF00]">{fmt(r.requiredGlrScfBbl, 8)}</td>
+                    <td className="pr-3 text-pl-info-text">{fmt(r.requiredGlrScfBbl, 8)}</td>
                     <td className="pr-3">{fmt(r.casingMinusRequirementPsi, 8)}</td>
                     <td className="pr-3">{yn(r.expansionRunsTheRightWay)}</td>
                     <td className="pr-3">{yn(r.pressureOk)}</td>
@@ -566,7 +557,7 @@ const Falling = () => {
               </tbody>
             </table>
           </div>
-          <div className="mt-3 text-xs text-slate-300">
+          <div className="mt-3 text-xs text-pl-text">
             READ THAT SWEEP IN TWO HALVES. Above the crossing the fall is defensible: less casing
             pressure genuinely means less gas expanded per cycle, and feasible turns true over that
             band because the requirement really did drop under what the well makes. Below the
@@ -575,7 +566,7 @@ const Falling = () => {
             keeps falling, and glrOk turns TRUE on a well that cannot move the plunger. Every step of
             that is in the flattering direction.
           </div>
-          <div className="mt-3 text-xs text-slate-300">
+          <div className="mt-3 text-xs text-pl-text">
             feasible STILL CATCHES BOTH ENDS, because it is pressureOk and glrOk, so nothing ships a
             wrong composite verdict today. That is one flag covering for another by arithmetic rather
             than by design, and the headline number an operator actually quotes is the inverted one.
@@ -584,8 +575,8 @@ const Falling = () => {
             lift requirement, rather than averaging across the crossing.
           </div>
           <div className="mt-3 overflow-x-auto">
-            <table className="text-xs text-slate-300 w-full">
-              <thead className="text-slate-500">
+            <table className="text-xs text-pl-text w-full">
+              <thead className="text-pl-muted">
                 <tr>
                   <th className="text-left pr-3">the same shape on the published case, casing psia</th>
                   <th className="text-left pr-3">required ratio, scf/bbl</th>
@@ -598,7 +589,7 @@ const Falling = () => {
                 {published.map((r) => (
                   <tr key={r.casingPressurePsia}>
                     <td className="pr-3">{fmt(r.casingPressurePsia, 1)}</td>
-                    <td className="pr-3 text-[#BFFF00]">{fmt(r.requiredGlrScfBbl, 8)}</td>
+                    <td className="pr-3 text-pl-info-text">{fmt(r.requiredGlrScfBbl, 8)}</td>
                     <td className="pr-3">{yn(r.pressureOk)}</td>
                     <td className="pr-3">{yn(r.glrOk)}</td>
                     <td>{yn(r.feasible)}</td>
@@ -622,27 +613,25 @@ const Falling = () => {
               <Tile label="Net cost of a foot of slug" value={fmt(clampTerms.netPsiPerFtOfSlug, 12)} unit="psi/ft" />
             </TileGrid>
           </div>
-          <div className="h-64 mt-3">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={[...clamp].reverse()} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-                {GRID}
-                <XAxis dataKey="casingPressurePsia" type="number" tick={AXIS} domain={['dataMin', 1000]}
-                  label={{ value: 'casing pressure, psia', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-                <YAxis tick={AXIS} domain={['auto', 'auto']}
-                  label={{ value: 'slug length, ft', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-                <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 8)} />
-                <Legend wrapperStyle={{ fontSize: 11 }} />
-                <ReferenceLine y={0} stroke="#f472b6" strokeDasharray="4 3" />
-                <Line type="monotone" dataKey="unclampedFt" name="the solution the balance actually has"
-                  stroke="#38bdf8" strokeDasharray="5 3" dot isAnimationActive={false} />
-                <Line type="monotone" dataKey="returnedFt" name="what maxSlugLengthFt returns"
-                  stroke="#BFFF00" dot isAnimationActive={false} />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
+          <ChartFrame height={256} className="mt-3 rounded-t-lg">
+            <LineChart data={[...clamp].reverse()} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+              {GRID}
+              <XAxis dataKey="casingPressurePsia" type="number" tick={AXIS} domain={['dataMin', 1000]}
+                label={{ value: 'casing pressure, psia', position: 'insideBottom', offset: -8, fill: SVG_CHART.label, fontSize: 10 }} />
+              <YAxis tick={AXIS} domain={['auto', 'auto']}
+                label={{ value: 'slug length, ft', angle: -90, position: 'insideLeft', fill: SVG_CHART.label, fontSize: 10 }} />
+              <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 8)} />
+              <Legend {...LEGEND_PROPS} />
+              <ReferenceLine y={0} stroke={seriesColor(4)} strokeDasharray="4 3" />
+              <Line type="monotone" dataKey="unclampedFt" name="the solution the balance actually has"
+                stroke={seriesColor(1)} strokeDasharray="5 3" dot isAnimationActive={false} />
+              <Line type="monotone" dataKey="returnedFt" name="what maxSlugLengthFt returns"
+                stroke={seriesColor(0)} dot isAnimationActive={false} />
+            </LineChart>
+          </ChartFrame>
           <div className="mt-3 overflow-x-auto">
-            <table className="text-xs text-slate-300 w-full">
-              <thead className="text-slate-500">
+            <table className="text-xs text-pl-text w-full">
+              <thead className="text-pl-muted">
                 <tr>
                   <th className="text-left pr-3">casing, psia</th>
                   <th className="text-left pr-3">available, psi</th>
@@ -653,18 +642,18 @@ const Falling = () => {
               </thead>
               <tbody>
                 {clamp.map((r) => (
-                  <tr key={r.casingPressurePsia} className={r.clamped ? 'text-[#f97316]' : ''}>
+                  <tr key={r.casingPressurePsia} className={r.clamped ? 'text-pl-warning-text' : ''}>
                     <td className="pr-3">{fmt(r.casingPressurePsia, 1)}</td>
                     <td className="pr-3">{fmt(r.availablePsi, 8)}</td>
-                    <td className="pr-3 text-[#38bdf8]">{fmt(r.unclampedFt, 8)}</td>
-                    <td className="pr-3 text-[#BFFF00]">{fmt(r.returnedFt, 8)}</td>
+                    <td className="pr-3 text-pl-primary-text">{fmt(r.unclampedFt, 8)}</td>
+                    <td className="pr-3 text-pl-info-text">{fmt(r.returnedFt, 8)}</td>
                     <td>{yn(r.clamped)}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-          <div className="mt-3 text-xs text-slate-300">
+          <div className="mt-3 text-xs text-pl-text">
             WHAT ZERO ACTUALLY MEANS. At the casing pressures where this returns zero, the balance
             with NO SLUG AT ALL still is not satisfied:{' '}
             {zero.map((r) => `at ${fmt(r.casingPressurePsia, 1)} psia it still needs ${fmt(r.bareBalanceRequiredPsia, 10)} psia and is short by ${fmt(r.shortByPsi, 10)} psi`).join(', ')}
@@ -673,7 +662,7 @@ const Falling = () => {
             same shape: at {fmt(top.casingPressurePsia, 1)} psia the function returns{' '}
             {fmt(top.returnedFt, 8)} ft, which is the tubing length rather than a computed maximum.
           </div>
-          <div className="mt-3 text-xs text-slate-300">
+          <div className="mt-3 text-xs text-pl-text">
             AND THE FUNCTION ALREADY KNOWS HOW TO REFUSE. Handed {refusal.label} it returns NaN rather
             than a clamped number. One refusal and two clamps sit in one function for one kind of
             question. Where the clamp does not bite the solve is exact: at{' '}
@@ -724,26 +713,24 @@ const Nobody = () => {
         <Tile label="pressureOk" value={yn(capacity.pressureOk)} />
         <Tile label="glrOk" value={yn(capacity.glrOk)} />
       </TileGrid>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={[...sweep].reverse()} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
-            {GRID}
-            <XAxis dataKey="shutInMin" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
-              label={{ value: 'shut-in, min, with no afterflow', position: 'insideBottom', offset: -8, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS} domain={['auto', 'auto']}
-              label={{ value: 'liquid, bbl/d', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 8)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={capacity.wellLiquidBpd} stroke="#f472b6" strokeDasharray="4 3"
-              label={{ value: 'what the well makes', fill: '#f472b6', fontSize: 10, position: 'insideTopRight' }} />
-            <Line type="monotone" dataKey="liquidPerDayBbl" name="what the cycle carries"
-              stroke="#BFFF00" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3 rounded-t-lg">
+        <LineChart data={[...sweep].reverse()} margin={{ top: 10, right: 20, bottom: 18, left: 0 }}>
+          {GRID}
+          <XAxis dataKey="shutInMin" type="number" tick={AXIS} domain={['dataMin', 'dataMax']}
+            label={{ value: 'shut-in, min, with no afterflow', position: 'insideBottom', offset: -8, fill: SVG_CHART.label, fontSize: 10 }} />
+          <YAxis tick={AXIS} domain={['auto', 'auto']}
+            label={{ value: 'liquid, bbl/d', angle: -90, position: 'insideLeft', fill: SVG_CHART.label, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt(v, 8)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine y={capacity.wellLiquidBpd} stroke={seriesColor(4)} strokeDasharray="4 3"
+            label={{ value: 'what the well makes', fill: seriesColor(4), fontSize: 10, position: 'insideTopRight' }} />
+          <Line type="monotone" dataKey="liquidPerDayBbl" name="what the cycle carries"
+            stroke={seriesColor(0)} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">shut-in, min</th>
               <th className="text-left pr-3">cycle, min</th>
@@ -760,16 +747,16 @@ const Nobody = () => {
                 <td className="pr-3">{fmt(r.shutInMin, 1)}</td>
                 <td className="pr-3">{fmt(r.totalMin, 8)}</td>
                 <td className="pr-3">{fmt(r.cyclesPerDay, 8)}</td>
-                <td className="pr-3 text-[#BFFF00]">{fmt(r.liquidPerDayBbl, 8)}</td>
-                <td className="pr-3 text-slate-500">{fmt(r.wellLiquidBpd, 8)}</td>
+                <td className="pr-3 text-pl-info-text">{fmt(r.liquidPerDayBbl, 8)}</td>
+                <td className="pr-3 text-pl-muted">{fmt(r.wellLiquidBpd, 8)}</td>
                 <td className="pr-3">{fmt(r.ratio, 8)}</td>
-                <td className="text-[#f97316]">{yn(r.carriesTheWell)}</td>
+                <td className="text-pl-warning-text">{yn(r.carriesTheWell)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THE THIRD STEP THE SCREEN NEVER TAKES. liquidPerDayBbl is computed, returned, and compared to
         nothing. feasible is built from the pressure balance and the gas-liquid ratio only, and it
         carries these keys: {capacity.designKeys.join(', ')}. Every ingredient for the comparison is
@@ -777,19 +764,19 @@ const Nobody = () => {
         there beside it. Even cycling with no afterflow and no shut-in at all, the installation as
         specified stays behind this well's own liquid make, and nothing in the return says so.
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THE SAME READING ON THE PUBLISHED CASE: the cycle carries{' '}
         {fmt(published.liquidPerDayBbl, 8)} bbl/d against a well liquid make of{' '}
         {fmt(published.wellLiquidBpd, 8)} bbl/d, a factor of {fmt(published.ratio, 8)}, with
         pressureOk = {yn(published.pressureOk)}, glrOk = {yn(published.glrOk)} and feasible ={' '}
         {yn(published.feasible)}. The liquid comparison appears nowhere in that verdict either.
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         THE ONLY TIMING CHECK THERE IS FIRES ON TRIPS A DAY AND NOT ON BARRELS. Push the shut-in to{' '}
         {fmt(slow.shutInMin, 1)} min and the cycle runs to {fmt(slow.totalMin, 8)} min at{' '}
         {fmt(slow.cyclesPerDay, 8)} trips a day, and the warning raised is: {slow.message}
       </div>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         AND TWO MOLECULAR WEIGHTS OF AIR SIT IN ONE DOMAIN. At {fmt(air.pPsia, 1)} psia and{' '}
         {fmt(air.tempR, 1)} degR the same gas is {fmt(air.rhoLoading, 10)} lbm/ft3 through one module
         and {fmt(air.rhoProperties, 10)} through the other, {tiny(air.rhoGap)} lbm/ft3 apart, because
