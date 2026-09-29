@@ -10,6 +10,7 @@
 // live with a negative control.
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import React from 'react';
 import { describe, it, expect, afterEach, beforeAll, beforeEach } from 'vitest';
 import { render, cleanup, screen, fireEvent } from '@testing-library/react';
@@ -101,7 +102,7 @@ describe('production I panels inside a scope', () => {
 });
 
 describe('production I sources', () => {
-  const root = path.resolve(__dirname, '../../../../..');
+  const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../../..');
   const files = [
     ...['nodal', 'gaslift', 'esp'].flatMap((d) => fs.readdirSync(path.join(root, 'src/components/course/panels', d))
       .filter((f) => f.endsWith('.jsx')).map((f) => `src/components/course/panels/${d}/${f}`)),
