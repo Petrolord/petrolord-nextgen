@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
 import {
   balanceThreeWays, logMeanBothPairings, surfaceFromThree, tubesAndOvershoot, loopCloses,
@@ -13,6 +13,9 @@ import {
 import {
   PanelShell, SelectField, Tile, TileGrid, FieldGrid,
 } from '@/components/course/panels/petrophysics/panelKit';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 
 // Exchanger explorer, the Associate tier throughout.
 //
@@ -45,9 +48,9 @@ export const MODES = [
   ['loop', 'The tube count closing as a loop, with its trail'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const SERIES = ['#38bdf8', '#f472b6', '#BFFF00', '#fbbf24'];
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const SERIES = [seriesColor(0), seriesColor(4), seriesColor(1), seriesColor(2)];
 
 // ---------------------------------------------------------------------------
 
@@ -71,7 +74,7 @@ export const BalanceMode = ({ b, history }) => {
         head={['stream', 'lb/hr', 'Btu/lb.F', 'capacity rate, Btu/hr.F']}
         rows={b.capacityRates.map((c) => [c.label, r4(c.mLbHr), e6(c.cpBtuLbF), r4(c.cBtuHrF)])}
       />
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         The same duty, stated three ways on the same two streams. All three agree, and the engine names which one it
         worked from on its own basis key, which is why that column is here at all.
       </p>
@@ -79,7 +82,7 @@ export const BalanceMode = ({ b, history }) => {
         head={['stated', 'duty, Btu/hr', 'hot outlet, degF', 'cold outlet, degF', 'basis']}
         rows={b.statings.map((s) => [s.stated, r4(s.qBtuHr), e6(s.thOut), e6(s.tcOut), s.basis])}
       />
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         The arrangement decides which cross test runs. This duty is refused for parallel flow with both outlet
         temperatures handed back as evidence, and answered counter-current at the same figure.
       </p>
@@ -90,7 +93,7 @@ export const BalanceMode = ({ b, history }) => {
         <Tile label="Cold leaving" value={e6(b.parallelRefusedCounterAnswered.answer.tcOut)} unit="degF" />
         <Tile label="Hot inlet" value={e6(STUDIO_TERMINALS.thIn)} unit="degF" />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         And the arrangement itself, read three ways. A capital letter answers as the arrangement it names, and a string
         this module does not carry is refused rather than defaulted.
       </p>
@@ -102,7 +105,7 @@ export const BalanceMode = ({ b, history }) => {
         ]}
       />
       <Refusal probe={b.arrangementThreeWays.unknown} />
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         Six states this balance will not compute, each one a state a saved study can carry, and each message naming the
         box rather than the physics.
       </p>
@@ -129,19 +132,17 @@ export const LogMeanMode = ({ l }) => {
         <Tile label="Studio parallel log mean" value={e6(l.rows[1].lmtdF)} unit="degF" />
         <Tile label="Below on every unequal row" value={yn(l.strictlyBelowOnEveryUnequalRow)} />
       </TileGrid>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="row" tick={AXIS} label={{ value: 'case', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -3 }} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => e6(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line dataKey="arithmeticMean" name="arithmetic mean of the two ends, degF" stroke={SERIES[1]} dot isAnimationActive={false} />
-            <Line dataKey="logMean" name="log mean, degF" stroke={SERIES[0]} dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="row" tick={AXIS} label={{ value: 'case', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => e6(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line dataKey="arithmeticMean" name="arithmetic mean of the two ends, degF" stroke={SERIES[1]} dot isAnimationActive={false} />
+          <Line dataKey="logMean" name="log mean, degF" stroke={SERIES[0]} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Note>
         Read the two curves against each other. The log mean sits strictly below the arithmetic mean on every row whose
         two ends differ and lands on it where they do not. That is an analytic limit and it needs no publication to
@@ -165,11 +166,11 @@ export const LogMeanMode = ({ l }) => {
         <Tile label="Equal ends reported as" value={yn(l.equalEnded.equalEnds)} />
         <Tile label="1-2 shell log mean" value={e6(l.shell1.lmtdF)} unit="degF" />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         A 1-2 shell exchanger asks for the log mean too and gets the counter-current one with a note attached, on a
         basis the engine reports as {l.shell1.basis}. The note is the engine's own and it is the point of the tile:
       </p>
-      <p className="text-xs text-slate-300 font-mono mt-1 mb-0">{l.shell1.note}</p>
+      <p className="text-xs text-pl-text font-mono mt-1 mb-0">{l.shell1.note}</p>
       {l.refusals.map((r) => <Refusal key={r.label} probe={r} />)}
     </>
   );
@@ -274,34 +275,30 @@ export const LoopMode = ({ loop, held }) => {
         seed that evaluates starts the loop.
       </Note>
       {loop.studio.refusedSeeds.map((r) => <Refusal key={r.label} probe={r} />)}
-      <div className="h-52 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={trail} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="pass" tick={AXIS} label={{ value: 'pass of the loop', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -3 }} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => n0(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={loop.studio.nTubes} stroke="#BFFF00" strokeDasharray="4 4" label={{ value: `settles at ${n0(loop.studio.nTubes)}`, fill: '#BFFF00', fontSize: 10, position: 'insideTopRight' }} />
-            <Line dataKey="nTubes" name="tube count" stroke={SERIES[0]} dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <div className="h-52 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={cost} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="nTubes" tick={AXIS} label={{ value: 'tubes', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -3 }} />
-            <YAxis tick={AXIS} yAxisId="left" />
-            <YAxis tick={AXIS} yAxisId="right" orientation="right" />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => e6(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line yAxisId="left" dataKey="film" name="inside film coefficient, Btu/hr.ft2.F" stroke={SERIES[1]} dot isAnimationActive={false} />
-            <Line yAxisId="right" dataKey="uDirty" name="U dirty, Btu/hr.ft2.F" stroke={SERIES[2]} dot isAnimationActive={false} />
-            <Line yAxisId="right" dataKey="area" name="area it asks for, ft2" stroke={SERIES[3]} dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={208} className="mt-3">
+        <LineChart data={trail} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="pass" tick={AXIS} label={{ value: 'pass of the loop', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => n0(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine y={loop.studio.nTubes} stroke={seriesColor(1)} strokeDasharray="4 4" label={{ value: `settles at ${n0(loop.studio.nTubes)}`, fill: seriesColor(1), fontSize: 10, position: 'insideTopRight' }} />
+          <Line dataKey="nTubes" name="tube count" stroke={SERIES[0]} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
+      <ChartFrame height={208} className="mt-3">
+        <LineChart data={cost} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="nTubes" tick={AXIS} label={{ value: 'tubes', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
+          <YAxis tick={AXIS} yAxisId="left" />
+          <YAxis tick={AXIS} yAxisId="right" orientation="right" />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => e6(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line yAxisId="left" dataKey="film" name="inside film coefficient, Btu/hr.ft2.F" stroke={SERIES[1]} dot isAnimationActive={false} />
+          <Line yAxisId="right" dataKey="uDirty" name="U dirty, Btu/hr.ft2.F" stroke={SERIES[2]} dot isAnimationActive={false} />
+          <Line yAxisId="right" dataKey="area" name="area it asks for, ft2" stroke={SERIES[3]} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Tbl
         head={['tubes', 'tubes a pass', 'Reynolds', 'regime', 'film coefficient', 'U dirty that follows', 'area that follows, ft2']}
         rows={loop.trailRows.map((r) => (r.refusal
@@ -313,7 +310,7 @@ export const LoopMode = ({ loop, held }) => {
         coefficient and the area. A coefficient computed at a tube count the same screen contradicts is not a
         coefficient of anything, which is why the loop is closed here rather than seeded with a better constant.
       </Note>
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         The studio case at its converged count, top to bottom. Every figure is on the live app screen.
       </p>
       <Tbl
