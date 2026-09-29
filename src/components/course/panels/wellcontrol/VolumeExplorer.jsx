@@ -7,7 +7,7 @@ import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/compo
 
 const fmt = (v, d = 4) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: Math.min(d, 2) })
-  : '-');
+  : 'n/a');
 
 const MODES = [
   { value: 'volumes', label: 'Volumes and strokes' },
@@ -35,9 +35,9 @@ const Volumes = ({ initialWell = 'horizontal' }) => {
         <Tile label="String volume" value={fmt(v.stringVolumeM3, 8)} unit="m3" />
         <Tile label="Annulus volume" value={fmt(v.annulusVolumeM3, 8)} unit="m3" />
         <Tile label="Total circulating" value={fmt(v.totalCirculatingM3, 8)} unit="m3" />
-        <Tile label="Strokes to the bit" value={ok ? fmt(v.stringVolumeM3 / q, 6) : '-'} />
-        <Tile label="Bottoms up" value={ok ? fmt(v.annulusVolumeM3 / q, 6) : '-'} />
-        <Tile label="Full cycle" value={ok ? fmt(v.totalCirculatingM3 / q, 6) : '-'} />
+        <Tile label="Strokes to the bit" value={ok ? fmt(v.stringVolumeM3 / q, 6) : 'n/a'} />
+        <Tile label="Bottoms up" value={ok ? fmt(v.annulusVolumeM3 / q, 6) : 'n/a'} />
+        <Tile label="Full cycle" value={ok ? fmt(v.totalCirculatingM3 / q, 6) : 'n/a'} />
         <Tile label="Bit measured depth" value={fmt(v.bitMd, 1)} unit="m" />
         <Tile label="TVD at the bit" value={fmt(v.tvdBhM, 6)} unit="m" />
         <Tile label="TVD at the shoe" value={fmt(v.tvdShoeM, 6)} unit="m" />
@@ -61,9 +61,9 @@ const Rows = () => {
   return (
     <>
       <SelectField label="Well" value={id} onChange={setId} options={WELL_OPTIONS} />
-      <div className="mt-3 rounded border border-gray-700 overflow-x-auto max-h-72">
+      <div className="mt-3 rounded border border-pl-border overflow-x-auto max-h-72">
         <table className="w-full text-xs">
-          <thead className="bg-black/40 text-gray-400 sticky top-0">
+          <thead className="bg-pl-sunken text-pl-muted sticky top-0">
             <tr>
               <th className="text-left p-2">Side</th>
               <th className="text-right p-2">From (m)</th>
@@ -74,21 +74,21 @@ const Rows = () => {
           </thead>
           <tbody>
             {v.stringRows.map((r) => (
-              <tr key={`s${r.fromMd}`} className="border-t border-gray-800">
-                <td className="p-2 text-white">string</td>
-                <td className="p-2 text-right text-gray-200">{fmt(r.fromMd, 1)}</td>
-                <td className="p-2 text-right text-gray-200">{fmt(r.toMd, 1)}</td>
-                <td className="p-2 text-right text-gray-400">{fmt(r.capM2, 9)}</td>
-                <td className="p-2 text-right text-gray-200">{fmt(r.volM3, 6)}</td>
+              <tr key={`s${r.fromMd}`} className="border-t border-pl-border">
+                <td className="p-2 text-pl-text">string</td>
+                <td className="p-2 text-right text-pl-text">{fmt(r.fromMd, 1)}</td>
+                <td className="p-2 text-right text-pl-text">{fmt(r.toMd, 1)}</td>
+                <td className="p-2 text-right text-pl-muted">{fmt(r.capM2, 9)}</td>
+                <td className="p-2 text-right text-pl-text">{fmt(r.volM3, 6)}</td>
               </tr>
             ))}
             {v.annulusRows.map((r) => (
-              <tr key={`a${r.fromMd}`} className="border-t border-gray-800">
-                <td className="p-2 text-[#BFFF00]">annulus</td>
-                <td className="p-2 text-right text-gray-200">{fmt(r.fromMd, 1)}</td>
-                <td className="p-2 text-right text-gray-200">{fmt(r.toMd, 1)}</td>
-                <td className="p-2 text-right text-gray-400">{fmt(r.capM2, 9)}</td>
-                <td className="p-2 text-right text-gray-200">{fmt(r.volM3, 6)}</td>
+              <tr key={`a${r.fromMd}`} className="border-t border-pl-border">
+                <td className="p-2 text-pl-accent-text">annulus</td>
+                <td className="p-2 text-right text-pl-text">{fmt(r.fromMd, 1)}</td>
+                <td className="p-2 text-right text-pl-text">{fmt(r.toMd, 1)}</td>
+                <td className="p-2 text-right text-pl-muted">{fmt(r.capM2, 9)}</td>
+                <td className="p-2 text-right text-pl-text">{fmt(r.volM3, 6)}</td>
               </tr>
             ))}
           </tbody>
@@ -110,14 +110,14 @@ const Hand = () => {
   const i = IWCF.inputs;
   return (
     <>
-      <div className="rounded border border-gray-700 overflow-x-auto">
+      <div className="rounded border border-pl-border overflow-x-auto">
         <table className="w-full text-xs">
-          <thead className="bg-black/40 text-gray-400"><tr><th className="text-left p-2">Input</th><th className="text-right p-2">Value</th></tr></thead>
+          <thead className="bg-pl-sunken text-pl-muted"><tr><th className="text-left p-2">Input</th><th className="text-right p-2">Value</th></tr></thead>
           <tbody>
             {Object.entries(i).map(([k, val]) => (
-              <tr key={k} className="border-t border-gray-800">
-                <td className="p-2 text-white">{k}</td>
-                <td className="p-2 text-right text-gray-200">{fmt(val, 6)}</td>
+              <tr key={k} className="border-t border-pl-border">
+                <td className="p-2 text-pl-text">{k}</td>
+                <td className="p-2 text-right text-pl-text">{fmt(val, 6)}</td>
               </tr>
             ))}
           </tbody>

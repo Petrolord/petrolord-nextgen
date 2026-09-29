@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { AXIS_TICK, SVG_CHART, seriesColor } from '@/utils/chartSvg';
 import {
   WELLS, PARAMS, window_, caseOf, PARAM_FIELDS, BLANK_PARAMS, paramsOver,
 } from './geomechLab';
@@ -12,7 +15,7 @@ import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/compo
 
 const fmt = (v, d = 4) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: Math.min(d, 2) })
-  : '-');
+  : 'n/a');
 
 const WELL_OPTIONS = WELLS.map((w) => ({ value: w.id, label: w.id }));
 const MODES = [
@@ -45,27 +48,25 @@ const Window = () => {
             onChange={(v) => setTyped((t) => ({ ...t, [f.key]: v }))} />
         ))}
       </div>
-      <p className="text-[11px] text-gray-500 mt-1">Blank boxes keep the published values; type any of them to run your own case.</p>
+      <p className="text-[11px] text-pl-muted mt-1">Blank boxes keep the published values; type any of them to run your own case.</p>
       {!w && <Note>Those parameters do not describe a case: check the numbers typed above.</Note>}
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={rows} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="md" type="number" domain={['auto', 'auto']} tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'measured depth (m)', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-            <YAxis domain={[900, 3200]} tick={{ fill: '#94a3b8', fontSize: 11 }}
-              label={{ value: 'EMW (kg/m3)', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid #334155', fontSize: 11 }}
-              formatter={(v) => fmt(v, 3)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            {w && <ReferenceLine x={w.tightest.md} stroke="#f59e0b" strokeDasharray="4 4" />}
-            <Line dataKey="frac" name="fracture initiation" stroke="#fb7185" strokeWidth={2} dot={false} isAnimationActive={false} />
-            <Line dataKey="lower" name="lower bound" stroke="#BFFF00" strokeWidth={2} dot={false} isAnimationActive={false} />
-            <Line dataKey="collapse" name="collapse" stroke="#38bdf8" strokeWidth={1} dot={false} isAnimationActive={false} />
-            <Line dataKey="pp" name="pore pressure" stroke="#94a3b8" strokeWidth={1} dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3">
+        <LineChart data={rows} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="md" type="number" domain={['auto', 'auto']} tick={AXIS_TICK}
+            label={{ value: 'measured depth (m)', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis domain={[900, 3200]} tick={AXIS_TICK} tickFormatter={(v) => fmt(v, 0)}
+            label={{ value: 'EMW (kg/m3)', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP_STYLE}
+            formatter={(v) => fmt(v, 3)} />
+          <Legend wrapperStyle={{ fontSize: 11 }} />
+          {w && <ReferenceLine x={w.tightest.md} stroke={seriesColor(2)} strokeDasharray="4 4" />}
+          <Line dataKey="frac" name="fracture initiation" stroke={seriesColor(3)} strokeWidth={2} dot={false} isAnimationActive={false} />
+          <Line dataKey="lower" name="lower bound" stroke={seriesColor(0)} strokeWidth={2} dot={false} isAnimationActive={false} />
+          <Line dataKey="collapse" name="collapse" stroke={seriesColor(1)} strokeWidth={1} dot={false} isAnimationActive={false} />
+          <Line dataKey="pp" name="pore pressure" stroke={SVG_CHART.reference} strokeWidth={1} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       {w && (
         <>
           <TileGrid>
@@ -78,9 +79,9 @@ const Window = () => {
             <Tile label="Collapse at tightest" value={fmt(w.tightRow.collapseEmwKgM3, 4)} unit="kg/m3" />
             <Tile label="Fracture initiation at tightest" value={fmt(w.tightRow.fracInitEmwKgM3, 4)} unit="kg/m3" />
           </TileGrid>
-          <div className="mt-3 text-xs text-slate-300">
+          <div className="mt-3 text-xs text-pl-text">
             At the tightest point the lower bound is set by the
-            {' '}<span className="text-[#BFFF00]">{w.boundAtTightest}</span>.
+            {' '}<span className="text-pl-accent-text">{w.boundAtTightest}</span>.
             {w.inversionMd != null
               ? ` The window CLOSES from ${fmt(w.inversionMd, 0)} m MD, which means no mud weight works below that.`
               : ' The window stays open over the whole trajectory.'}
@@ -111,7 +112,7 @@ const Compare = () => {
         <Tile label="Horizontal width" value={fmt(h.tightest.widthKgM3, 4)} unit="kg/m3" />
         <Tile label="Horizontal bound" value={h.boundAtTightest} />
       </TileGrid>
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         The slant well is tightest at total depth, {fmt(caseOf('slant').stations.at(-1).md, 0)} m,
         where it is deepest and the pore pressure has climbed. The horizontal well is tightest at
         {' '}{fmt(h.tightest.md, 0)} m, which is in the BUILD rather than at total depth: it lands
