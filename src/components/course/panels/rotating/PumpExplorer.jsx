@@ -135,7 +135,7 @@ export const CurvesMode = ({ c }) => {
       <p className="text-xs text-pl-muted mt-2 mb-0">
         The system curve is stated as a friction head at a flow rather than as a coefficient, and the engine returns the
         coefficient that implies: k = {nine(c.system.kFt)} ft per gpm squared, over a static head of
-        {' '}{six(c.system.staticReadBackFt)} ft. The pink line starts positive and ends negative. The flow where it is
+        {' '}{six(c.system.staticReadBackFt)} ft. The violet line starts positive and ends negative. The flow where it is
         zero is the duty point.
       </p>
       <Tbl

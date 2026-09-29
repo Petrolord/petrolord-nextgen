@@ -126,7 +126,7 @@ export const MarchMode = ({ b }) => {
         </LineChart>
       </ChartFrame>
       <Note>
-        The pink line is the closed-form integral of the SAME mass balance the march evaluates, built from the engine&apos;s
+        The violet line is the closed-form integral of the SAME mass balance the march evaluates, built from the engine&apos;s
         own coefficient C, the measured universal gas constant of {twelve(b.universalGasConstant)} and the stated
         geometry. The march returns {six(b.timeS)} s and the integral gives {six(b.closedFormS)} s, a ratio of
         {' '}{twelve(b.closedFormRatioDerived)}. A discharge coefficient applied twice, a coefficient hidden inside the
@@ -250,7 +250,7 @@ export const OrificeMode = ({ d }) => {
         </LineChart>
       </ChartFrame>
       <Note>
-        The pink line is flat, and that flatness is the harder of the two teaching points on this chart. The end state is
+        The violet line is flat, and that flatness is the harder of the two teaching points on this chart. The end state is
         fixed by the pressure ratio and the isentropic exponent, so the orifice decides only how long the vessel takes to
         get there. Counted rather than eyeballed, the sweep reaches {d.distinctFinalTemperatures} distinct final
         temperature across {d.orificeRows.length} orifices. The fifteen minute orifice is read off the blue curve by
