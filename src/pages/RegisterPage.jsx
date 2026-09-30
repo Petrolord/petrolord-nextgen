@@ -10,6 +10,9 @@ import { useAuth } from '@/contexts/SupabaseAuthContext';
 import { Loader2, AlertCircle, MailCheck } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import {
+  PublicPage, AUTH_CARD, AUTH_COLUMN, AUTH_TITLE, TEXT_LINK, FIELD_ERROR, FIELD_LABEL,
+} from '@/components/public/PublicPage';
 
 // One identity, four doors (NextGen-Academy-PLAN §1): the account is a
 // PERSONAL email — it outlives graduation. Which door you enter through
@@ -29,9 +32,6 @@ const RegisterPage = () => {
   useEffect(() => {
     if (user) navigate('/dashboard');
   }, [user, navigate]);
-
-  const inputClass =
-    'appearance-none block w-full px-3 py-2 border border-gray-600 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#BFFF00] focus:border-[#BFFF00] sm:text-sm bg-gray-700 text-white';
 
   const onSubmit = async (data) => {
     if (isSubmitting) return;
@@ -55,7 +55,6 @@ const RegisterPage = () => {
         toast({
           title: 'Welcome to the Academy',
           description: 'Your account is ready.',
-          className: 'bg-[#BFFF00] text-slate-900',
         });
         navigate('/dashboard/enroll');
       } else {
@@ -74,43 +73,38 @@ const RegisterPage = () => {
         <title>Create account - Petrolord NextGen Academy</title>
         <meta name="description" content="Create your Petrolord NextGen Academy account with your personal email." />
       </Helmet>
-      <div className="min-h-screen flex items-center justify-center bg-[#0F172A] py-12 px-4 sm:px-6 lg:px-8">
+      <PublicPage testId="register-theme-scope" mainClassName={AUTH_COLUMN}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="max-w-md w-full space-y-8 p-10 bg-[#1E293B] rounded-lg shadow-lg border border-gray-800"
+          className={`w-full max-w-md space-y-8 ${AUTH_CARD}`}
         >
-          <div>
-            <img
-              className="mx-auto h-16 w-auto object-contain"
-              src="https://horizons-cdn.hostinger.com/80504870-35f5-4fc9-ba7f-f8bc12cf282f/petrolord-symbol-512-7N6nn.png"
-              alt="Petrolord NextGen Academy"
-            />
-            <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
+          <div className="text-center">
+            <h1 className={AUTH_TITLE}>
               Create your account
-            </h2>
-            <p className="mt-2 text-center text-sm text-gray-400">
-              Use your <span className="text-[#BFFF00] font-medium">personal email</span> — your
+            </h1>
+            <p className="mt-2 text-sm text-pl-muted">
+              Use your <span className="font-semibold text-pl-text">personal email</span>. Your
               Academy record, certificates and alumni standing stay with you after graduation.
               University students add their university email later, during campus enrollment.
             </p>
           </div>
 
           {awaitingConfirmation ? (
-            <Alert className="bg-emerald-900/20 border-emerald-800 text-emerald-200">
+            <Alert variant="success">
               <MailCheck className="h-4 w-4" />
               <AlertTitle>Confirm your email</AlertTitle>
               <AlertDescription>
                 We sent a confirmation link to your email address. Click it, then{' '}
-                <Link to="/login" className="text-[#BFFF00] underline">sign in</Link> to choose
+                <Link to="/login" className="font-medium underline">sign in</Link> to choose
                 your enrollment path.
               </AlertDescription>
             </Alert>
           ) : (
             <>
               {signupError && (
-                <Alert variant="destructive" className="bg-red-900/20 border-red-900">
+                <Alert variant="destructive">
                   <AlertCircle className="h-4 w-4" />
                   <AlertTitle>Error</AlertTitle>
                   <AlertDescription>{signupError}</AlertDescription>
@@ -118,73 +112,69 @@ const RegisterPage = () => {
               )}
 
               <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
-                <div className="rounded-md shadow-sm space-y-4">
+                <div className="space-y-4">
                   <div>
-                    <Label htmlFor="display-name" className="block text-sm font-medium text-gray-300 mb-1">
+                    <Label htmlFor="display-name" className={FIELD_LABEL}>
                       Full name
                     </Label>
                     <Input
                       id="display-name"
                       type="text"
                       autoComplete="name"
-                      className={inputClass}
                       placeholder="Ada Obi"
                       {...register('displayName', { required: 'Your name is required' })}
                     />
-                    {errors.displayName && <p className="mt-1 text-sm text-red-500">{errors.displayName.message}</p>}
+                    {errors.displayName && <p className={FIELD_ERROR}>{errors.displayName.message}</p>}
                   </div>
                   <div>
-                    <Label htmlFor="email-address" className="block text-sm font-medium text-gray-300 mb-1">
+                    <Label htmlFor="email-address" className={FIELD_LABEL}>
                       Personal email address
                     </Label>
                     <Input
                       id="email-address"
                       type="email"
                       autoComplete="email"
-                      className={inputClass}
                       placeholder="you@example.com"
                       {...register('email', { required: 'Email is required' })}
                     />
-                    {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>}
+                    {errors.email && <p className={FIELD_ERROR}>{errors.email.message}</p>}
                   </div>
                   <div>
-                    <Label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-1">
+                    <Label htmlFor="password" className={FIELD_LABEL}>
                       Password
                     </Label>
                     <Input
                       id="password"
                       type="password"
                       autoComplete="new-password"
-                      className={inputClass}
                       placeholder="••••••••"
                       {...register('password', {
                         required: 'Password is required',
                         minLength: { value: 8, message: 'At least 8 characters' },
                       })}
                     />
-                    {errors.password && <p className="mt-1 text-sm text-red-500">{errors.password.message}</p>}
+                    {errors.password && <p className={FIELD_ERROR}>{errors.password.message}</p>}
                   </div>
                   <div>
-                    <Label htmlFor="confirm-password" className="block text-sm font-medium text-gray-300 mb-1">
+                    <Label htmlFor="confirm-password" className={FIELD_LABEL}>
                       Confirm password
                     </Label>
                     <Input
                       id="confirm-password"
                       type="password"
                       autoComplete="new-password"
-                      className={inputClass}
                       placeholder="••••••••"
                       {...register('confirmPassword', {
                         validate: (v) => v === watch('password') || 'Passwords do not match',
                       })}
                     />
-                    {errors.confirmPassword && <p className="mt-1 text-sm text-red-500">{errors.confirmPassword.message}</p>}
+                    {errors.confirmPassword && <p className={FIELD_ERROR}>{errors.confirmPassword.message}</p>}
                   </div>
                 </div>
 
                 <Button
                   type="submit"
-                  className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-[#0F172A] bg-[#BFFF00] hover:bg-[#A8E600] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#BFFF00] disabled:opacity-70 disabled:cursor-not-allowed transition-all duration-200"
+                  className="w-full"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
@@ -197,9 +187,9 @@ const RegisterPage = () => {
                   )}
                 </Button>
 
-                <p className="text-center text-sm text-gray-400">
+                <p className="text-center text-sm text-pl-muted">
                   Already have an account?{' '}
-                  <Link to="/login" className="font-medium text-[#BFFF00] hover:text-[#A8E600]">
+                  <Link to="/login" className={TEXT_LINK}>
                     Sign in
                   </Link>
                 </p>
@@ -207,7 +197,7 @@ const RegisterPage = () => {
             </>
           )}
         </motion.div>
-      </div>
+      </PublicPage>
     </>
   );
 };
