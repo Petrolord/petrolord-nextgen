@@ -5,4 +5,5 @@ export default [
   '/dashboard/apps/dataqc',
   '/dashboard/apps/mlcore',
   '/dashboard/apps/facies',
+  '/dashboard/apps/forecastml',
 ];
