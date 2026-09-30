@@ -37,7 +37,7 @@ const CERT_LABELS = { associate: 'Associate', professional: 'Professional', expe
 
 const fmt = (v, d = 4) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: d })
-  : '-');
+  : 'n/a');
 const pct = (v, d = 4) => (Number.isFinite(v) ? `${Number(v).toFixed(d)} percent` : 'null');
 
 const LESSONS = [
@@ -181,9 +181,9 @@ const FiscalLearningPage = () => {
       const res = await submitCapstone(APP, tier, numeric);
       setResult(res);
       if (res.passed && res.certificate_number) {
-        toast({ title: `Capstone passed. ${CERT_LABELS[res.tier] || 'Associate'} certified!`, description: res.certificate_number, className: 'bg-[#BFFF00] text-slate-900' });
+        toast({ title: `Capstone passed. ${CERT_LABELS[res.tier] || 'Associate'} certified!`, description: res.certificate_number, className: 'border-pl-success/40 bg-pl-success-bg text-pl-success-text' });
       } else if (res.passed) {
-        toast({ title: 'Passed: you were already certified', className: 'bg-[#BFFF00] text-slate-900' });
+        toast({ title: 'Passed: you were already certified', className: 'border-pl-success/40 bg-pl-success-bg text-pl-success-text' });
       } else {
         toast({
           title: 'Not passing yet',
@@ -199,7 +199,7 @@ const FiscalLearningPage = () => {
   };
 
   if (gate.loading) {
-    return <div className="flex items-center justify-center h-64"><Loader2 className="h-8 w-8 animate-spin text-[#BFFF00]" /></div>;
+    return <div className="flex items-center justify-center h-64"><Loader2 className="h-8 w-8 animate-spin text-pl-primary-text" /></div>;
   }
   if (!gate.allowed) return <ScopeGate />;
 
@@ -212,17 +212,17 @@ const FiscalLearningPage = () => {
       <div className="relative max-w-6xl mx-auto p-6 space-y-6">
         {watermark && (
           <div className="pointer-events-none fixed inset-0 z-0 flex items-center justify-center overflow-hidden">
-            <span className="text-white/5 text-[8rem] font-black -rotate-45 select-none">TRAINING</span>
+            <span className="text-pl-text/5 text-[8rem] font-black -rotate-45 select-none">TRAINING</span>
           </div>
         )}
 
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="relative z-10 space-y-6">
           <div>
-            <h1 className="text-3xl font-bold text-white flex items-center gap-2">
-              <Scale className="h-7 w-7 text-[#BFFF00]" /> Fiscal Regime Design
-              <span className="text-xs px-2 py-0.5 rounded-full bg-[#BFFF00]/20 text-[#BFFF00] border border-[#BFFF00]/40">Learning Mode</span>
+            <h1 className="text-3xl font-bold text-pl-text flex items-center gap-2">
+              <Scale className="h-7 w-7 text-pl-accent-text" /> Fiscal Regime Design
+              <span className="text-xs px-2 py-0.5 rounded-full bg-pl-accent/15 text-pl-accent-text border border-pl-accent/40">Learning Mode</span>
             </h1>
-            <p className="mt-1 text-gray-400">
+            <p className="mt-1 text-pl-muted">
               A fiscal regime is four instruments: a royalty, a cost recovery limit, a profit split
               and a tax stack. Change nothing about a field except which of the
               {' '}{lab.templateCount} published templates it sits under and the numbers move a long
@@ -244,9 +244,9 @@ const FiscalLearningPage = () => {
           <DeepCourseBanner app={APP} tier={tier} />
 
           {/* Lessons overview */}
-          <Card className="bg-[#1E293B] border-gray-700">
+          <Card>
             <CardHeader>
-              <CardTitle className="text-white flex items-center gap-2"><BookOpen className="h-5 w-5 text-[#BFFF00]" /> Lessons</CardTitle>
+              <CardTitle className="text-pl-text flex items-center gap-2"><BookOpen className="h-5 w-5 text-pl-accent-text" /> Lessons</CardTitle>
               <CardDescription>
                 From four instruments to a ranked comparison, on the vendored fiscal regime sandbox
                 and its {lab.publishedCases} published cash flow cases. Every number on this page and
@@ -276,9 +276,9 @@ const FiscalLearningPage = () => {
             </CardHeader>
             <CardContent className="grid gap-3 sm:grid-cols-2">
               {LESSONS.map((l) => (
-                <div key={l.n} className="rounded-md border border-gray-700 bg-[#0F172A] p-3">
-                  <p className="text-white text-sm font-medium">{l.n}. {l.title}</p>
-                  <p className="text-xs text-gray-400 mt-1">{l.body}</p>
+                <div key={l.n} className="rounded-md border border-pl-border bg-pl-sunken p-3">
+                  <p className="text-pl-text text-sm font-medium">{l.n}. {l.title}</p>
+                  <p className="text-xs text-pl-muted mt-1">{l.body}</p>
                 </div>
               ))}
             </CardContent>
@@ -290,8 +290,8 @@ const FiscalLearningPage = () => {
           {/* Tier toggle */}
           <div className="flex gap-2">
             {LEARN_TIERS.map((t) => (
-              <button key={t} type="button" onClick={() => setTier(t)}
-                className={`px-3 py-1.5 rounded-md border text-sm capitalize ${tier === t ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold' : 'bg-gray-800 text-gray-300 border-gray-600'}`}>
+              <button key={t} type="button" onClick={() => setTier(t)} aria-pressed={tier === t}
+                className={`px-3 py-1.5 rounded-md border text-sm capitalize ${tier === t ? 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold' : 'bg-pl-surface text-pl-text border-pl-border-strong hover:bg-pl-sunken'}`}>
                 {t} tier
               </button>
             ))}
@@ -304,9 +304,9 @@ const FiscalLearningPage = () => {
           <FiscalDefinitions />
 
           {/* What the engine refuses to do */}
-          <Card className="bg-[#1E293B] border-gray-700">
+          <Card>
             <CardHeader>
-              <CardTitle className="text-white">What this engine does not do, and what it says that it does not mean</CardTitle>
+              <CardTitle className="text-pl-text">What this engine does not do, and what it says that it does not mean</CardTitle>
               <CardDescription>
                 The scope is worth knowing before you trust an answer. This is a regime SANDBOX and
                 not a second fiscal truth: the single source of truth for Nigerian fiscal math is the
@@ -363,9 +363,9 @@ const FiscalLearningPage = () => {
           </Card>
 
           {/* Capstone */}
-          <Card className="bg-[#1E293B] border-gray-700">
+          <Card>
             <CardHeader>
-              <CardTitle className="text-white">{capstone?.title || 'Capstone'}</CardTitle>
+              <CardTitle className="text-pl-text">{capstone?.title || 'Capstone'}</CardTitle>
               <CardDescription>{capstone?.prompt}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -373,12 +373,12 @@ const FiscalLearningPage = () => {
                 || courseProgress?.capstone?.unlocked === true
                 || courseProgress?.capstone?.passed === true
                 || actualRole === 'super_admin') ? (
-                  <div className="rounded-md border border-gray-700 bg-[#0F172A] p-4 text-sm text-gray-300 flex items-start gap-2">
-                    <Lock className="h-4 w-4 text-[#BFFF00] mt-0.5 shrink-0" />
+                  <div className="rounded-md border border-pl-border bg-pl-sunken p-4 text-sm text-pl-text flex items-start gap-2">
+                    <Lock className="h-4 w-4 text-pl-accent-text mt-0.5 shrink-0" />
                     <p className="mb-0">
                       The capstone unlocks after the course: finish the lessons, pass each module quiz
                       and the final exam, then submit here.{' '}
-                      <Link to={`/dashboard/apps/${APP}/course/${tier}`} className="text-[#BFFF00] hover:underline">
+                      <Link to={`/dashboard/apps/${APP}/course/${tier}`} className="text-pl-primary-text hover:underline">
                         Open the course
                       </Link>
                     </p>
@@ -388,16 +388,16 @@ const FiscalLearningPage = () => {
                     <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                       {(capstone?.fields || []).map((f) => (
                         <div key={f.key}>
-                          <Label className="text-gray-400 text-xs mb-1 block">{f.label} ({f.unit})</Label>
+                          <Label className="text-pl-muted text-xs mb-1 block">{f.label} ({f.unit})</Label>
                           <Input type="text" inputMode="decimal" autoComplete="off" value={answers[f.key] ?? ''}
                             onChange={(e) => setAnswers((a) => ({ ...a, [f.key]: e.target.value }))}
-                            className="bg-gray-700 text-white border-gray-600 h-8 text-sm" />
+                            className="h-8 text-sm" />
                         </div>
                       ))}
                     </div>
 
                     <Button onClick={submit} disabled={submitting || !capstone}
-                      className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold">
+                      className="font-semibold">
                       {submitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <GraduationCap className="mr-2 h-4 w-4" />}
                       Submit for grading
                     </Button>
@@ -405,33 +405,33 @@ const FiscalLearningPage = () => {
                 )}
 
               {result && (
-                <div className={`rounded-md border p-4 ${result.passed ? 'border-emerald-700 bg-emerald-900/20' : 'border-red-800 bg-red-900/20'}`}>
+                <div className={`rounded-md border p-4 ${result.passed ? 'border-pl-success/30 bg-pl-success-bg' : 'border-pl-danger/30 bg-pl-danger-bg'}`}>
                   {result.passed ? (
                     <>
-                      <p className="text-emerald-300 font-medium flex items-center gap-2">
+                      <p className="text-pl-success-text font-medium flex items-center gap-2">
                         <CheckCircle2 className="h-5 w-5" /> Passed ({result.score}/{result.max_score})
                       </p>
                       {result.certificate_number ? (
-                        <div className="mt-2 text-sm text-gray-300 space-y-1">
-                          <p className="flex items-center gap-2"><Award className="h-4 w-4 text-[#BFFF00]" />
-                            {CERT_LABELS[result.tier] || 'Associate'} certificate <span className="font-mono text-[#BFFF00]">{result.certificate_number}</span> issued.
+                        <div className="mt-2 text-sm text-pl-text space-y-1">
+                          <p className="flex items-center gap-2"><Award className="h-4 w-4 text-pl-accent-text" />
+                            {CERT_LABELS[result.tier] || 'Associate'} certificate <span className="font-mono text-pl-accent-text">{result.certificate_number}</span> issued.
                             {result.tier === 'expert' && ' Your 50% Suite discount code is on your certificates page.'}
                           </p>
                           <div className="flex gap-3">
-                            <Link to="/dashboard/certificates" className="text-[#BFFF00] hover:underline inline-flex items-center gap-1">
+                            <Link to="/dashboard/certificates" className="text-pl-primary-text hover:underline inline-flex items-center gap-1">
                               My certificates <ArrowRight className="h-3 w-3" />
                             </Link>
-                            <a href={verificationUrl(result.verify_code)} target="_blank" rel="noreferrer" className="text-gray-400 hover:underline">
+                            <a href={verificationUrl(result.verify_code)} target="_blank" rel="noreferrer" className="text-pl-muted hover:underline">
                               Public verification
                             </a>
                           </div>
                         </div>
                       ) : (
-                        <p className="mt-1 text-sm text-gray-400">You were already certified for this tier.</p>
+                        <p className="mt-1 text-sm text-pl-muted">You were already certified for this tier.</p>
                       )}
                     </>
                   ) : (
-                    <p className="text-red-300 font-medium flex items-center gap-2">
+                    <p className="text-pl-danger-text font-medium flex items-center gap-2">
                       <XCircle className="h-5 w-5" /> {result.score}/{result.max_score} within tolerance. Work the panels at the capstone settings and try again.
                     </p>
                   )}

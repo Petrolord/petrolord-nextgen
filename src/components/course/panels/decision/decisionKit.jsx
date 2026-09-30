@@ -26,20 +26,20 @@ const OUTCOME_SUFFIX = { p90: ' (low)', p50: '', p10: ' (high)' };
 /** Outcome labels, low to high, built from the convention module. */
 export const outcomeLabel = (key) => `${OUTCOME_LABELS[key]}${OUTCOME_SUFFIX[key]}`;
 
-export const Outcome = ({ children }) => <span data-plabel="outcome" className="text-[#BFFF00] font-semibold">{children}</span>;
+export const Outcome = ({ children }) => <span data-plabel="outcome" className="text-pl-accent-text font-semibold">{children}</span>;
 
 /** Unguarded arithmetic: what typed numbers would give with nothing checking them. Never an Analyzer card. */
-export const Unguarded = ({ children }) => <span data-unguarded="arithmetic" className="text-slate-400 italic">{children}</span>;
+export const Unguarded = ({ children }) => <span data-unguarded="arithmetic" className="text-pl-muted italic">{children}</span>;
 
 export const Tbl = ({ head, rows, strong = () => false }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>{head.map((h, i) => <th key={i} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>)}</tr>
       </thead>
       <tbody>
         {rows.map((r, i) => (
-          <tr key={i} className={strong(i) ? 'text-white font-semibold' : ''}>
+          <tr key={i} className={strong(i) ? 'text-pl-text font-semibold' : ''}>
             {r.map((c, j) => <td key={j} className={`${j < r.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{c}</td>)}
           </tr>
         ))}
@@ -48,8 +48,8 @@ export const Tbl = ({ head, rows, strong = () => false }) => (
   </div>
 );
 
-export const Sub = ({ children }) => <p className="text-sm text-white font-medium mt-4 mb-0">{children}</p>;
-export const Line = ({ children }) => <p className="text-xs text-slate-300 mt-2 mb-0">{children}</p>;
+export const Sub = ({ children }) => <p className="text-sm text-pl-text font-medium mt-4 mb-0">{children}</p>;
+export const Line = ({ children }) => <p className="text-xs text-pl-text mt-2 mb-0">{children}</p>;
 
 /** An engine answer: accepted with its EMV, or the refusal message verbatim. */
 export const answerText = (a) => (a.ok ? `accepted, EMV ${mm(a.emv)} million USD` : `refused: ${a.error}`);
@@ -81,10 +81,10 @@ export const TreeRows = ({ tv }) => (
 
 /** The rollback of every chance node, term by term, as the engine weighted it. */
 export const HandLines = ({ tv }) => (
-  <ul className="mt-3 text-xs text-slate-300 list-none pl-0 space-y-1">
+  <ul className="mt-3 text-xs text-pl-text list-none pl-0 space-y-1">
     {tv.chanceNodes.map((c) => (
       <li key={c.path || 'root'}>
-        <span className="text-slate-500">{c.label}{c.path ? ` (path ${c.path})` : ' (the root)'}:</span>{' '}
+        <span className="text-pl-muted">{c.label}{c.path ? ` (path ${c.path})` : ' (the root)'}:</span>{' '}
         {c.terms.map((t) => `${pr(t.probability)} x ${mm(t.branchValue)}`).join(' + ')} = {mm(c.emv)} million USD
         {c.incomingBranchValue !== null ? `, less the cost ${mm(c.incomingCost)} on the ${c.incomingLabel} branch = ${mm(c.incomingBranchValue)}` : ''}.
       </li>
@@ -103,17 +103,17 @@ export const KpiCards = ({ result, format = cardText }) => {
     <>
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4 text-sm mt-3">
         {ANALYZER_CARDS.map(([key, title]) => (
-          <div key={key} className="rounded-md border border-gray-700 bg-[#0F172A] p-3">
-            <p className="text-gray-500 text-xs mb-0">{title}</p>
-            <p className="text-white mb-0">
+          <div key={key} className="rounded-md border border-pl-border bg-pl-sunken p-3">
+            <p className="text-pl-muted text-xs mb-0">{title}</p>
+            <p className="text-pl-text mb-0">
               <span data-card={key}>{format(result.kpis[key])}</span>
-              {result.kpis[key] === null ? null : <span className="text-gray-400 text-xs ml-1">million USD</span>}
+              {result.kpis[key] === null ? null : <span className="text-pl-muted text-xs ml-1">million USD</span>}
             </p>
           </div>
         ))}
       </div>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
-        Gross voi, shown only in the guidance sentence and the CSV export: <span data-gross="voi" className="text-white">{format(result.kpis.voi)}</span>
+      <p className="text-xs text-pl-muted mt-2 mb-0">
+        Gross voi, shown only in the guidance sentence and the CSV export: <span data-gross="voi" className="text-pl-text">{format(result.kpis.voi)}</span>
         {result.kpis.voi === null ? '' : ' million USD'}. Consistent {String(result.consistent)}; withheld {String(result.withheld)};
         {result.tree ? ` the tree is drawn, its root EMV ${mm(result.tree.emv)} million USD, first move ${result.tree.bestLabel}.` : ' no tree is drawn.'}
       </p>

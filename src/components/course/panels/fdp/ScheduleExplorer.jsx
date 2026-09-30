@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import {
   EGINA_RIG_COUNTS,
   network, dates, wellsAndRigs, facilities, riskRegister,
@@ -38,8 +41,8 @@ export const MODES = [
   ['risk', 'Risk: one scale, four bands, the unscored row, exposure and health'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
 
 const DurationLabel = ({ children }) => <span data-plabel="duration">{children}</span>;
 const CostLabel = ({ children }) => <span data-plabel="cost">{children}</span>;
@@ -48,8 +51,8 @@ const RatioLabel = ({ children }) => <span data-plabel="ratio">{children}</span>
 
 const Tbl = ({ head, rows }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>{head.map((h, i) => <th key={i} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>)}</tr>
       </thead>
       <tbody>
@@ -81,19 +84,17 @@ export const NetworkMode = ({ net }) => {
           <DurationLabel key="f">float</DurationLabel>, 'critical']}
         rows={net.cpm.map((a) => [`${a.id} ${a.name}`, a.duration, a.es, a.ef, a.ls, a.lf, a.float, String(a.isCritical)])}
       />
-      <div className="h-48 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={bars} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="id" tick={AXIS} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => whole(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Bar dataKey="duration" name="duration, days" stackId="a" fill="#38bdf8" isAnimationActive={false} />
-            <Bar dataKey="float" name="float, days" stackId="a" fill="#475569" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={192} className="mt-3">
+        <BarChart data={bars} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="id" tick={AXIS} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => whole(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <Bar dataKey="duration" name="duration, days" stackId="a" fill={seriesColor(1)} isAnimationActive={false} />
+          <Bar dataKey="float" name="float, days" stackId="a" fill={SVG_CHART.note} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
       <Note>
         Float is the late start less the early start. An activity with float can slip by that much without moving the end
         date, and one on the critical path cannot slip at all. Before the repair every activity on this network read
@@ -119,7 +120,7 @@ export const PathMode = ({ net, dt }) => {
         head={['activity with float', <DurationLabel key="f">days it can slip</DurationLabel>]}
         rows={net.withFloat.map((a) => [a.id, a.float])}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         A date is not a timestamp. A date-only string is read as local midnight and a span is counted in whole calendar
         days, so the window {dt.dstWindow.startDate} to {dt.dstWindow.endDate}, which crosses a daylight-saving change in
         some zones, is {whole(dt.dstWindow.days)} days for every reader. An activity with no readable dates answers
@@ -164,7 +165,7 @@ export const WellsMode = ({ wr, rigs, onRigs }) => {
           <Tile label={<CostLabel>The same all-in day on every row</CostLabel>} value={whole(wr.totals.allInDayDerived)} unit="USD (derived)" />
         </TileGrid>
       </div>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Trajectory and depth move the days; the day itself is priced the same for a producer, an injector, a vertical well
         and a horizontal one. The same four wells at {whole(wr.alternativeRate.rate)} USD a day cost
         {' '}{whole(wr.alternativeRate.costDerived)} USD, so the rig rate is not a detail.
@@ -214,7 +215,7 @@ export const FacilitiesMode = ({ fac }) => {
           <Tile label="The plan&apos;s peak" value={whole(fac.utilisation.peakBpdDerived)} unit={`bopd, and ${whole(fac.utilisation.gasMscfdDerived)} Mscf/d at a gas-oil ratio of ${whole(fac.utilisation.gor)}`} />
         </TileGrid>
       </div>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Two and a half times the size costs {six(fac.scaling.capexFactorDerived)} times the money. Size does not price in
         proportion, and neither does the operating cost.
       </p>
@@ -228,7 +229,7 @@ export const FacilitiesMode = ({ fac }) => {
         rows={fac.utilisation.rows.map((x) => [x.name, six(x.oilUtilisationDerived), six(x.gasUtilisationDerived), whole(x.waterHandling),
           x.bottlenecks.length ? JSON.stringify(x.bottlenecks) : 'none'])}
       />
-      <p className="text-xs text-slate-500 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         There is no produced water forecast at all, so the water handling column has nothing to be divided by.
       </p>
       <Tbl
@@ -266,17 +267,15 @@ export const RiskMode = ({ risk }) => {
         rows={risk.rows.map((x) => [x.name, x.source, x.probability === null ? 'none' : x.probability, x.impact === null ? 'none' : x.impact,
           x.score === null ? 'none' : whole(x.score), x.band, four(x.costImpact), x.mitigation])}
       />
-      <div className="h-40 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={bars} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="band" tick={AXIS} />
-            <YAxis tick={AXIS} allowDecimals={false} />
-            <Tooltip contentStyle={TOOLTIP} />
-            <Bar dataKey="count" name="risks" fill="#BFFF00" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={160} className="mt-3">
+        <BarChart data={bars} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="band" tick={AXIS} />
+          <YAxis tick={AXIS} allowDecimals={false} />
+          <Tooltip contentStyle={TOOLTIP} />
+          <Bar dataKey="count" name="risks" fill={seriesColor(0)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
       <div className="mt-3">
         <TileGrid>
           <Tile label="Consolidated score" value={whole(risk.consolidated)} unit="the scored risks, summed" />
@@ -291,11 +290,11 @@ export const RiskMode = ({ risk }) => {
           x.factor === null ? 'no factor' : six(x.factor), four(x.costImpact),
           x.contributionDerived === null ? 'none, its probability is missing' : four(x.contributionDerived)])}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The five cost impacts add to {four(risk.costImpactTotalDerived)} million USD, which is what the register would cost if
         every risk happened. The exposure of {four(risk.exposure)} is neither that number nor a worst case.
       </p>
-      <p className="text-xs text-slate-500 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The HSE matrix on the same register reads critical {risk.matrix.critical}, high {risk.matrix.high}, medium
         {' '}{risk.matrix.medium}, low {risk.matrix.low}, unscored {risk.matrix.unscored}, total {risk.matrix.total}. The two
         agree because there is one scale. By source: {JSON.stringify(risk.bySource)}.

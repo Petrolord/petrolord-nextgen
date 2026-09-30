@@ -1,8 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, BarChart, Bar, Line, XAxis, YAxis, CartesianGrid,
+  LineChart, BarChart, Bar, Line, XAxis, YAxis, CartesianGrid,
   Tooltip, Legend, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import {
   BELIEF, SAMPLE_ORDER, PRICE_BRACKET_TOP,
   fits, beliefLabels, publishedInexactFit, samplingWalk, seedComparison,
@@ -38,9 +41,9 @@ export const MODES = [
   ['distribution', 'Distribution: the percentiles, the S-curve and the tornado'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const GRID = <CartesianGrid stroke="#334155" strokeDasharray="3 3" />;
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const GRID = <CartesianGrid {...GRID_STYLE} />;
 
 const PriceLabel = ({ children }) => <span data-plabel="price">{children}</span>;
 const InputLabel = ({ children }) => <span data-plabel="input">{children}</span>;
@@ -59,8 +62,8 @@ const sideLabel = (variable, side) => {
 
 const Tbl = ({ head, rows }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>{head.map((h, i) => <th key={i} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>)}</tr>
       </thead>
       <tbody>
@@ -76,7 +79,7 @@ const Tbl = ({ head, rows }) => (
 
 const RunButton = ({ onClick, running, children }) => (
   <button type="button" onClick={onClick} disabled={running}
-    className={`px-3 py-1.5 rounded-md border text-xs ${running ? 'bg-gray-800 text-gray-500 border-gray-700' : 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold'}`}>
+    className={`px-3 py-1.5 rounded-md border text-xs ${running ? 'bg-pl-surface text-pl-muted border-pl-border' : 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold'}`}>
     {running ? 'Running the engine...' : children}
   </button>
 );
@@ -129,11 +132,11 @@ export const FitMode = ({ fit, inexact, onInexact, inexactRunning }) => {
           ['the beliefs used as minimum, mode and maximum (the old error)', ...fit.capexCheck.beliefsAsEndpoints.map(four)],
         ]}
       />
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         The shape ratio is the stated median&apos;s distance above the {q10} over the whole stated spread. It depends
         only on where the mode sits, so one bisection on the mode position recovers the shape and the range and
         origin follow in closed form. A ratio outside the band cannot be honoured by any triangular. The engine says
-        so rather than returning a shape that misses the belief: <span className="text-slate-400">{fit.narrowNote}</span>.
+        so rather than returning a shape that misses the belief: <span className="text-pl-muted">{fit.narrowNote}</span>.
       </div>
       <div className="mt-3 flex items-center gap-3">
         <RunButton onClick={onInexact} running={inexactRunning}>Run the published case where both fits clamp (300 iterations)</RunButton>
@@ -166,12 +169,12 @@ export const SampleMode = ({ walk, seed, onSeed, comparison, onCompare, compareR
           <SelectField label="Seed" value={String(seed)} onChange={(v) => onSeed(Number(v))} options={[['20260829', '20260829, the engine default'], ['7', '7, another seed']]} />
         </FieldGrid>
       )}
-      <p className="text-xs text-slate-400 mt-2 mb-0">mulberry32({walk.seed}), the first six draws: {walk.draws.map(ratio).join(', ')}.</p>
+      <p className="text-xs text-pl-muted mt-2 mb-0">mulberry32({walk.seed}), the first six draws: {walk.draws.map(ratio).join(', ')}.</p>
       <Tbl
         head={['draw', 'u', 'variable', 'F(mode) (derived)', 'branch', 'sampled value']}
         rows={walk.iteration1.map((x) => [x.draw, ratio(x.u), <InputLabel key={x.variable}>{x.variable}</InputLabel>, ratio(x.fModeDerived), x.branch, four(x.sampled)])}
       />
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         Iteration 1 takes draws 1, 2 and 3 in the fixed order {SAMPLE_ORDER.join(', ')}. A draw at or below F(mode)
         takes the lower branch of the inverse CDF, min plus the root of u times the range times the distance to the
         mode; above it takes the upper branch from the maximum. Efficiency is sampled in percent and divided by 100
@@ -208,25 +211,23 @@ export const SolveMode = ({ curve, hurdle, kinks, solves }) => {
         ))}
         {hurdle && <Tile label={`NPV at the ${hurdle.bracketTop} USD/bbl bracket top`} value={mm(hurdle.npvAtBracketTop)} unit="million USD" />}
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The base case: capex {curve.capexMM} million USD all in year 1, opex {curve.opexMM} million USD a year, efficiency {curve.efficiency}.
         {curve.allStated
           ? ' Every fit here is exact, so the base case runs at the stated medians (EC3-5).'
           : ' At least one fit clamps, so the base case runs at that fitted triangle\'s own median (EC3-5).'}
       </p>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={curve.points} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            {GRID}
-            <XAxis dataKey="price" tick={AXIS} label={{ value: 'oil price, USD/bbl', position: 'insideBottom', offset: -2, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS} label={{ value: 'NPV, million USD', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => mm(v)} />
-            <ReferenceLine y={0} stroke="#64748b" />
-            <ReferenceLine x={curve.baseBreakeven} stroke="#BFFF00" strokeDasharray="4 4" />
-            <Line type="linear" dataKey="npv" name="NPV through the breakeven engine" stroke="#38bdf8" isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={curve.points} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          {GRID}
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="price" tick={AXIS} label={{ value: 'oil price, USD/bbl', position: 'insideBottom', offset: -2, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS} label={{ value: 'NPV, million USD', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => mm(v)} />
+          <ReferenceLine y={0} stroke={SVG_CHART.reference} />
+          <ReferenceLine x={curve.baseBreakeven} stroke={seriesColor(0)} strokeDasharray="4 4" />
+          <Line type="linear" dataKey="npv" name="NPV through the breakeven engine" stroke={seriesColor(1)} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Tbl head={['oil price, USD/bbl', 'NPV, million USD']} rows={curve.points.map((x) => [x.price, mm(x.npv)])} />
       {kinks && (
         <Tbl
@@ -234,7 +235,7 @@ export const SolveMode = ({ curve, hurdle, kinks, solves }) => {
           rows={kinks.map((x) => [x.year, four(x.kinkPriceDerived)])}
         />
       )}
-      <div className="mt-3 text-xs text-slate-300">
+      <div className="mt-3 text-xs text-pl-text">
         NPV rises with price: royalty and tax take only a fraction of each extra dollar. Bisection halves the 0 to
         {' '}{PRICE_BRACKET_TOP} USD/bbl bracket a hundred times. Each year&apos;s tax switches on at its own price,
         which puts a kink in the line, and every kink sits inside the bracket, so the line is still monotone and the
@@ -274,31 +275,29 @@ export const DistributionMode = ({ run, torn, unreachable, published }) => {
         head={['statistic', 'sorted index (derived)', 'engine key', <PriceLabel key="v">breakeven price, USD/bbl</PriceLabel>]}
         rows={run.percentiles.map((x) => [<PriceLabel key={x.key}>{x.label}</PriceLabel>, x.sortedIndexDerived, x.engineKey, four(x.value)])}
       />
-      <p className="text-xs text-slate-500 mt-1 mb-0">The engine keys its percentiles p10, p50 and p90. They are plain percentiles of a price, named here only as keys.</p>
+      <p className="text-xs text-pl-muted mt-1 mb-0">The engine keys its percentiles p10, p50 and p90. They are plain percentiles of a price, named here only as keys.</p>
       <Tbl
         head={[<InputLabel key="v">belief</InputLabel>, 'tenth percentile the base case and the tornado use', 'median they use', 'ninetieth they use', 'stated or fitted']}
         rows={Object.entries(run.beliefs).map(([k, b]) => [<InputLabel key={k}>{k}</InputLabel>, four(b.p10), four(b.p50), four(b.p90), b.source])}
       />
-      <p className="text-xs text-slate-500 mt-1 mb-0">
+      <p className="text-xs text-pl-muted mt-1 mb-0">
         EC3-5: the sample draws from the fitted triangle, so the base case and the tornado read that triangle&apos;s own
         percentiles wherever a fit clamps, and the stated ones wherever it is exact.
       </p>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={run.sCurve} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            {GRID}
-            <XAxis dataKey="price" type="number" domain={['dataMin', 'dataMax']} tick={AXIS} tickFormatter={(v) => Number(v).toFixed(0)} label={{ value: 'breakeven price, USD/bbl', position: 'insideBottom', offset: -2, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS} domain={[0, 1]} label={{ value: 'share of iterations at or below', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => ratio(v)} labelFormatter={(v) => `${four(v)} USD/bbl`} />
-            {run.percentiles.map((x) => <ReferenceLine key={x.key} x={x.value} stroke="#BFFF00" strokeDasharray="3 3" />)}
-            <Line type="stepAfter" dataKey="y" name="S-curve" stroke="#38bdf8" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <p className="text-xs text-slate-500 mt-1 mb-0">
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={run.sCurve} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          {GRID}
+          <XAxis dataKey="price" type="number" domain={['dataMin', 'dataMax']} tick={AXIS} tickFormatter={(v) => Number(v).toFixed(0)} label={{ value: 'breakeven price, USD/bbl', position: 'insideBottom', offset: -2, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS} domain={[0, 1]} label={{ value: 'share of iterations at or below', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => ratio(v)} labelFormatter={(v) => `${four(v)} USD/bbl`} />
+          {run.percentiles.map((x) => <ReferenceLine key={x.key} x={x.value} stroke={seriesColor(0)} strokeDasharray="3 3" />)}
+          <Line type="stepAfter" dataKey="y" name="S-curve" stroke={seriesColor(1)} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
+      <p className="text-xs text-pl-muted mt-1 mb-0">
         One point every {run.sampleSize / run.sCurve.length} sorted prices, from the lowest {four(run.lowest)} to the highest {four(run.highest)}. At sorted index {run.medianIndex} the S-curve reads {ratio(run.sCurveYAtMedianIndex)}.
       </p>
-      <p className="text-xs text-slate-300 mt-3 mb-0"><span className="text-slate-500">The engine&apos;s insight:</span> {run.insights}</p>
+      <p className="text-xs text-pl-text mt-3 mb-0"><span className="text-pl-muted">The engine&apos;s insight:</span> {run.insights}</p>
       <Tbl
         head={['rank', 'variable', 'low side, from the base', <InputLabel key="l">low side comes from</InputLabel>, 'high side, from the base', <InputLabel key="h">high side comes from</InputLabel>, 'swing (derived)', 'open end']}
         rows={rows.map((x) => [x.rank, x.variable,
@@ -309,20 +308,18 @@ export const DistributionMode = ({ run, torn, unreachable, published }) => {
           x.swingDerived === null ? 'none, one end is open' : four(x.swingDerived),
           x.unreachable ? 'yes, sorts first' : 'no'])}
       />
-      <div className="h-48 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={bars} layout="vertical" margin={{ top: 10, right: 20, bottom: 5, left: 30 }}>
-            {GRID}
-            <XAxis type="number" tick={AXIS} label={{ value: 'change in breakeven price from the base, USD/bbl', position: 'insideBottom', offset: -2, fill: '#64748b', fontSize: 10 }} />
-            <YAxis type="category" dataKey="name" tick={AXIS} width={100} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => four(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine x={0} stroke="#64748b" />
-            <Bar dataKey="low" name="low side" fill="#38bdf8" isAnimationActive={false} />
-            <Bar dataKey="high" name="high side" fill="#f87171" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={192} className="mt-3">
+        <BarChart data={bars} layout="vertical" margin={{ top: 10, right: 20, bottom: 5, left: 30 }}>
+          {GRID}
+          <XAxis height={XAXIS_LABEL_HEIGHT} type="number" tick={AXIS} label={{ value: 'change in breakeven price from the base, USD/bbl', position: 'insideBottom', offset: -2, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis type="category" dataKey="name" tick={AXIS} width={100} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => four(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine x={0} stroke={SVG_CHART.reference} />
+          <Bar dataKey="low" name="low side" fill={seriesColor(1)} isAnimationActive={false} />
+          <Bar dataKey="high" name="high side" fill={seriesColor(3)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
       {unreachable && (
         <Tbl
           head={['published mc_with_unreachable', 'excluded', <PriceLabel key="a">10th percentile</PriceLabel>, <PriceLabel key="b">50th percentile</PriceLabel>, <PriceLabel key="c">90th percentile</PriceLabel>]}
@@ -343,7 +340,7 @@ export const DistributionMode = ({ run, torn, unreachable, published }) => {
           rows={published.refused.map((x) => [x.id, x.error])}
         />
       )}
-      {published && <p className="text-xs text-slate-400 mt-2 mb-0">{published.allUnreachable.id}: the engine throws, &quot;{published.allUnreachable.error}&quot;</p>}
+      {published && <p className="text-xs text-pl-muted mt-2 mb-0">{published.allUnreachable.id}: the engine throws, &quot;{published.allUnreachable.error}&quot;</p>}
       <Note>
         A breakeven price is a quantity where more is worse, so it is read as three percentiles and never given a
         P-label. The mean sits above the median because the sample has a longer high tail. Efficiency runs backwards

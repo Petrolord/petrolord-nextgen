@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import {
   TIE_INPUTS, engineRules, refusals, ekpanTree, decisionNodes, thirds, costOnChanceBranch, distributionPayoff,
   drillOutcomes, okrika, publishedSequences, priorSweep, switchPoint, publishedSweep,
@@ -35,8 +38,8 @@ export const MODES = [
   ['sweep', 'Sweep: the prior, the switch point and an exact tie'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
 
 export const TreeMode = ({ t, rules, refs, dn }) => {
   if (!t) return <Note>The engine returned no tree.</Note>;
@@ -88,7 +91,7 @@ export const TreeMode = ({ t, rules, refs, dn }) => {
       {rules && (
         <>
           <Sub>What the engine assumes</Sub>
-          <ul className="mt-2 text-xs text-slate-300 list-none pl-0 space-y-1">
+          <ul className="mt-2 text-xs text-pl-text list-none pl-0 space-y-1">
             {rules.lines.map((l) => <li key={l}>{learnerLine(l)}</li>)}
           </ul>
           <Text>
@@ -208,21 +211,19 @@ export const SweepMode = ({ ps, sp, pw }) => {
         head={['success probability', ...ps.actions.map((a) => a.label), 'best action', 'EMV']}
         rows={ps.rows.map((x) => [pr(x.p), ...x.values.map(mm), x.bestLabel, mm(x.emv)])}
       />
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="p" type="number" domain={['dataMin', 'dataMax']} tick={AXIS} />
-            <YAxis tick={AXIS} label={{ value: 'million USD', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => mm(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine x={sp.drillFarmSwitchDerived} stroke="#BFFF00" strokeDasharray="4 4" />
-            <Line dataKey="drill" name={ps.actions[0].label} stroke="#38bdf8" dot={false} isAnimationActive={false} />
-            <Line dataKey="farm" name={ps.actions[1].label} stroke="#f472b6" dot={false} isAnimationActive={false} />
-            <Line dataKey="walk" name={ps.actions[2].label} stroke="#94a3b8" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="p" type="number" domain={['dataMin', 'dataMax']} tick={AXIS} />
+          <YAxis tick={AXIS} label={{ value: 'million USD', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => mm(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine x={sp.drillFarmSwitchDerived} stroke={seriesColor(0)} strokeDasharray="4 4" />
+          <Line dataKey="drill" name={ps.actions[0].label} stroke={seriesColor(1)} dot={false} isAnimationActive={false} />
+          <Line dataKey="farm" name={ps.actions[1].label} stroke={seriesColor(4)} dot={false} isAnimationActive={false} />
+          <Line dataKey="walk" name={ps.actions[2].label} stroke={SVG_CHART.reference} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3">
         <TileGrid>
           <Tile label="Drill meets Farm out at (derived)" value={pr(sp.drillFarmSwitchDerived)} />

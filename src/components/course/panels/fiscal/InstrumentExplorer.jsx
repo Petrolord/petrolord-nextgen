@@ -1,8 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, ComposedChart, LineChart, Bar, Line, XAxis, YAxis, CartesianGrid,
+  ComposedChart, LineChart, Bar, Line, XAxis, YAxis, CartesianGrid,
   Tooltip, Legend, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import {
   COST_RECOVERY_LIMITS, R_FACTOR_CASE_IDS, R_FACTOR_CASE_LABELS,
   royaltyMultiplierSweep, royaltyThresholdProbe, royaltyThresholdRounding, odidiRoyaltyByYear, odidiPiaRoyaltyByYear, royaltyCases,
@@ -37,20 +40,20 @@ const MODES = [
   ['rate', 'Rate: the discount sweep, the mid-year parity and five IRR vectors'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const GRID = <CartesianGrid stroke="#334155" strokeDasharray="3 3" />;
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const GRID = <CartesianGrid {...GRID_STYLE} />;
 const compact = (v) => (Math.abs(v) >= 1000 ? `${(v / 1000).toFixed(1)}k` : Number(v).toFixed(0));
 
 const Tbl = ({ head, rows, mark = () => false }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>{head.map((h, i) => <th key={i} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>)}</tr>
       </thead>
       <tbody>
         {rows.map((r, i) => (
-          <tr key={i} className={mark(i) ? 'text-[#BFFF00] font-semibold' : ''}>
+          <tr key={i} className={mark(i) ? 'text-pl-accent-text font-semibold' : ''}>
             {r.map((c, j) => <td key={j} className={`${j < r.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{c}</td>)}
           </tr>
         ))}
@@ -75,7 +78,7 @@ const Royalty = () => {
   const crossing = sweep.findIndex((x) => x.impliedRateDerived > 0.09);
   return (
     <>
-      <p className="text-xs text-slate-400 mb-0">
+      <p className="text-xs text-pl-muted mb-0">
         The tiered teaching regime's royalty has two tiers, 0 USD per bbl at 7.5 percent and 50 USD per bbl at 10 percent. Swept across
         the price multiplier on the DEFAULT PROJECT, whose year 1 deck price is 70 USD per bbl. The implied rate is
         the royalty the engine returned over the gross revenue it returned, on the same row.
@@ -85,19 +88,17 @@ const Royalty = () => {
         head={['price multiplier', 'applied year 1 oil price', 'year 1 grossRevenue', 'year 1 royalty', 'implied rate']}
         rows={sweep.map((x) => [ratio(x.multiplier), ratio(x.appliedYear1PriceDerived), mm(x.grossRevenue), mm(x.royalty), ratio(x.impliedRateDerived)])}
       />
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            {GRID}
-            <XAxis dataKey="price" tick={AXIS} label={{ value: 'applied year 1 oil price, USD per bbl', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS} domain={[7, 10.5]} label={{ value: 'implied royalty rate, percent', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => pc(v)} />
-            <ReferenceLine x={50} stroke="#f87171" strokeDasharray="5 3" label={{ value: 'the 50 USD per bbl threshold', fill: '#f87171', fontSize: 10, position: 'insideTopLeft' }} />
-            <Line type="stepAfter" dataKey="rate" name="implied rate" stroke="#BFFF00" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <p className="text-xs text-slate-500 mt-4 mb-1">
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          {GRID}
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="price" tick={AXIS} label={{ value: 'applied year 1 oil price, USD per bbl', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS} domain={[7, 10.5]} label={{ value: 'implied royalty rate, percent', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => pc(v)} labelFormatter={(v) => ratio(v)} />
+          <ReferenceLine x={50} stroke={seriesColor(3)} strokeDasharray="5 3" label={{ value: 'the 50 USD per bbl threshold', fill: seriesColor(3), fontSize: 10, position: 'insideTopLeft' }} />
+          <Line type="stepAfter" dataKey="rate" name="implied rate" stroke={seriesColor(0)} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
+      <p className="text-xs text-pl-muted mt-4 mb-1">
         Which side does the threshold itself belong to. The engine compares with a greater-than-or-equal, so a price
         sitting EXACTLY on a threshold takes the UPPER tier. No multiplier on this deck lands exactly on 50: the one
         that looks as though it does, {ratio(rounding.multiplier)}, gives an applied price of {rounding.appliedYear1PriceDerived},
@@ -108,7 +109,7 @@ const Royalty = () => {
         head={['deck oil price, USD/bbl', 'year 1 grossRevenue', 'year 1 royalty', 'implied rate']}
         rows={probe.map((x) => [ratio(x.deckOilPrice), mm(x.grossRevenue), mm(x.royalty), ratio(x.impliedRateDerived)])}
       />
-      <p className="text-xs text-slate-500 mt-4 mb-1">
+      <p className="text-xs text-pl-muted mt-4 mb-1">
         The same instrument along a deck rather than along a multiplier. ODIDI holds 45 USD per bbl through year 5
         and steps to 65 at year 6, so the rate changes inside the life of the field.
       </p>
@@ -116,7 +117,7 @@ const Royalty = () => {
         head={['year', 'grossRevenue', 'royalty', 'implied rate']}
         rows={deck.map((x) => [x.year, mm(x.grossRevenue), mm(x.royalty), ratio(x.impliedRateDerived)])}
       />
-      <p className="text-xs text-slate-500 mt-4 mb-1">
+      <p className="text-xs text-pl-muted mt-4 mb-1">
         The Nigeria - PIA (2021) template carries no price tiers. Each year it charges a production royalty at the
         deep offshore rate for the year's daily oil rate, a royalty by price once the oil price passes that year's low
         benchmark (the Regulations 2021 base, the engine default, with project year 1 in 2027), and 5 percent on gas
@@ -129,8 +130,8 @@ const Royalty = () => {
       <FieldGrid>
         <SelectField label="Published case" value={c.id} onChange={setCaseId} options={cases.map((x) => [x.id, x.id])} />
       </FieldGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">{c.note}</p>
-      <p className="text-xs text-slate-500 mt-1 mb-0">{c.regimeLine}.</p>
+      <p className="text-xs text-pl-muted mt-2 mb-0">{c.note}</p>
+      <p className="text-xs text-pl-muted mt-1 mb-0">{c.regimeLine}.</p>
       <Tbl
         head={['year', 'grossRevenue', 'royalty', 'implied rate']}
         rows={c.head.map((x) => [x.year, mm(x.grossRevenue), mm(x.royalty), ratio(x.impliedRateDerived)])}
@@ -157,10 +158,10 @@ const Recovery = () => {
     sweep.forEach((s) => { row[`limit${s.limit}`] = s.rows[i].unrecoveredCostPool; });
     return row;
   });
-  const colours = ['#f87171', '#fbbf24', '#38bdf8', '#BFFF00'];
+  const colours = [seriesColor(3), seriesColor(2), seriesColor(1), seriesColor(0)];
   return (
     <>
-      <p className="text-xs text-slate-400 mb-0">
+      <p className="text-xs text-pl-muted mb-0">
         The same project under four limits, so the limit is the only thing that moves. Everything else is held at the
         Generic Royalty/Tax settings on the DEFAULT PROJECT.
       </p>
@@ -175,30 +176,28 @@ const Recovery = () => {
         head={['limit, percent', 'total cost recovered', 'total profit oil', 'total contractor NCF', 'closing unrecovered pool']}
         rows={sweep.map((s) => [s.limit, mm(s.totalCostRecovered), mm(s.totalProfitOil), mm(s.totalContractorNCF), mm(s.closingUnrecoveredPool)])}
       />
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            {GRID}
-            <XAxis dataKey="year" tick={AXIS} />
-            <YAxis tick={AXIS} tickFormatter={compact} label={{ value: 'unrecovered cost pool, million USD', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => mm(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            {sweep.map((s, i) => (
-              <Line key={s.limit} type="monotone" dataKey={`limit${s.limit}`} name={`limit ${s.limit} percent`} stroke={colours[i % colours.length]} dot={false} isAnimationActive={false} />
-            ))}
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          {GRID}
+          <XAxis dataKey="year" tick={AXIS} />
+          <YAxis tick={AXIS} tickFormatter={compact} label={{ value: 'unrecovered cost pool, million USD', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => mm(v)} />
+          <Legend {...LEGEND_PROPS} />
+          {sweep.map((s, i) => (
+            <Line key={s.limit} type="monotone" dataKey={`limit${s.limit}`} name={`limit ${s.limit} percent`} stroke={colours[i % colours.length]} dot={false} isAnimationActive={false} />
+          ))}
+        </LineChart>
+      </ChartFrame>
       {sweep.map((s) => (
         <div key={s.limit}>
-          <p className="text-xs text-slate-500 mt-4 mb-1">Cost recovery limit {s.limit} percent, the first seven years</p>
+          <p className="text-xs text-pl-muted mt-4 mb-1">Cost recovery limit {s.limit} percent, the first seven years</p>
           <Tbl
             head={['year', 'grossRevenue', 'royalty', 'costRecovered', 'unrecoveredCostPool', 'profitOil']}
             rows={s.head.map((x) => [x.year, mm(x.grossRevenue), mm(x.royalty), mm(x.costRecovered), mm(x.unrecoveredCostPool), mm(x.profitOil)])}
           />
         </div>
       ))}
-      <p className="text-xs text-slate-500 mt-4 mb-1">The published extremes</p>
+      <p className="text-xs text-pl-muted mt-4 mb-1">The published extremes</p>
       <Tbl
         head={['case', 'limit', 'total cost recovered', 'total profit oil', 'total contractor NCF', 'closing pool', 'payback']}
         rows={cases.map((c) => [c.id, c.costRecoveryLimit, mm(c.totalCostRecovered), mm(c.totalProfitOil), mm(c.totalContractorNCF), mm(c.closingUnrecoveredPool), yr(c.paybackYear)])}
@@ -229,8 +228,8 @@ const RFactor = () => {
       <FieldGrid>
         <SelectField label="Case" value={caseId} onChange={setCaseId} options={R_FACTOR_CASE_IDS.map((id) => [id, R_FACTOR_CASE_LABELS[id] || id])} />
       </FieldGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">{t.note}</p>
-      <p className="text-xs text-slate-500 mt-1 mb-0">{t.regimeLine}.</p>
+      <p className="text-xs text-pl-muted mt-2 mb-0">{t.note}</p>
+      <p className="text-xs text-pl-muted mt-1 mb-0">{t.regimeLine}.</p>
       <div className="mt-3">
         <TileGrid>
           <Tile label="Payout year, R factor above 1.0" value={yr(t.payoutYear)} />
@@ -239,21 +238,19 @@ const RFactor = () => {
           <Tile label="A split once given up is returned" value={t.splitReturned ? `yes, in year ${t.splitReturnedYear}` : 'no'} />
         </TileGrid>
       </div>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            {GRID}
-            <XAxis dataKey="year" tick={AXIS} />
-            <YAxis yAxisId="r" tick={AXIS} label={{ value: 'R factor', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <YAxis yAxisId="s" orientation="right" tick={AXIS} domain={[0, 100]} label={{ value: 'implied contractor split, percent', angle: 90, position: 'insideRight', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => ratio(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine yAxisId="r" y={1} stroke="#f472b6" strokeDasharray="5 3" label={{ value: 'R equals 1.0', fill: '#f472b6', fontSize: 10, position: 'insideTopRight' }} />
-            <Line yAxisId="r" type="monotone" dataKey="rFactor" name="R factor" stroke="#38bdf8" dot={false} isAnimationActive={false} />
-            <Line yAxisId="s" type="stepAfter" dataKey="split" name="implied contractor split" stroke="#BFFF00" dot={false} isAnimationActive={false} connectNulls={false} />
-          </ComposedChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <ComposedChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          {GRID}
+          <XAxis dataKey="year" tick={AXIS} />
+          <YAxis yAxisId="r" tick={AXIS} label={{ value: 'R factor', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis yAxisId="s" orientation="right" tick={AXIS} domain={[0, 100]} label={{ value: 'implied contractor split, percent', angle: 90, position: 'insideRight', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => ratio(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine yAxisId="r" y={1} stroke={seriesColor(4)} strokeDasharray="5 3" label={{ value: 'R equals 1.0', fill: seriesColor(4), fontSize: 10, position: 'insideTopRight' }} />
+          <Line yAxisId="r" type="monotone" dataKey="rFactor" name="R factor" stroke={seriesColor(1)} dot={false} isAnimationActive={false} />
+          <Line yAxisId="s" type="stepAfter" dataKey="split" name="implied contractor split" stroke={seriesColor(0)} dot={false} isAnimationActive={false} connectNulls={false} />
+        </ComposedChart>
+      </ChartFrame>
       <Tbl
         mark={(i) => t.table[i].fallsBack}
         head={['year', 'grossRevenue', 'opex', 'capex', 'rFactor', 'profitOil', 'contractor profit share', 'implied split']}
@@ -262,7 +259,7 @@ const RFactor = () => {
           mm(x.contractorProfitShareDerived), x.impliedSplitDerived === null ? 'null' : ratio(x.impliedSplitDerived),
         ])}
       />
-      <p className="text-xs text-slate-500 mt-1 mb-0">
+      <p className="text-xs text-pl-muted mt-1 mb-0">
         A highlighted row is a year the R factor fell BELOW the year before it.
         {t.fallsBackAnywhere ? '' : ' There are none in this case.'}
       </p>
@@ -293,7 +290,7 @@ const Tax = () => {
   const chart = td.byYear.map((x) => ({ year: x.year, cit: x.citAlone, rrt: x.rrtAlone, min: x.minTaxAlone, published: x.taxAsPublished }));
   return (
     <>
-      <p className="text-xs text-slate-400 mb-0">
+      <p className="text-xs text-pl-muted mb-0">
         Four engine runs of the Brazil - Concession instruments on the DEFAULT PROJECT, whose CIT is {td.citPct} percent
         and whose RRT stands in for Special Participation at {td.rrtPct} percent. Because the tax rates do not enter the
         base, the stack decomposes exactly: running the same regime with two of the three at zero returns the third on
@@ -311,26 +308,24 @@ const Tax = () => {
           <Tile label="Uplift relief over the life at 20 percent" value={`at most ${(1 + td.rrtUpliftPct / 100).toFixed(1)} times the whole capex`} />
         </TileGrid>
       </div>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            {GRID}
-            <XAxis dataKey="year" tick={AXIS} />
-            <YAxis tick={AXIS} tickFormatter={compact} label={{ value: 'million USD', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => mm(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Bar dataKey="cit" name="CIT alone" fill="#38bdf8" isAnimationActive={false} />
-            <Bar dataKey="rrt" name="RRT alone" fill="#f472b6" isAnimationActive={false} />
-            <Line type="monotone" dataKey="min" name="minimum tax alone" stroke="#fbbf24" dot={false} isAnimationActive={false} />
-            <Line type="monotone" dataKey="published" name="tax as published" stroke="#BFFF00" dot={false} isAnimationActive={false} />
-          </ComposedChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <ComposedChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          {GRID}
+          <XAxis dataKey="year" tick={AXIS} />
+          <YAxis tick={AXIS} tickFormatter={compact} label={{ value: 'million USD', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => mm(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <Bar dataKey="cit" name="CIT alone" fill={seriesColor(1)} isAnimationActive={false} />
+          <Bar dataKey="rrt" name="RRT alone" fill={seriesColor(4)} isAnimationActive={false} />
+          <Line type="monotone" dataKey="min" name="minimum tax alone" stroke={seriesColor(2)} dot={false} isAnimationActive={false} />
+          <Line type="monotone" dataKey="published" name="tax as published" stroke={seriesColor(0)} dot={false} isAnimationActive={false} />
+        </ComposedChart>
+      </ChartFrame>
       <Tbl
         head={['year', 'grossRevenue', 'profitOil', 'CIT alone', 'RRT alone', 'minimum tax alone', 'tax as published']}
         rows={td.byYear.map((x) => [x.year, mm(x.grossRevenue), mm(x.profitOil), mm(x.citAlone), mm(x.rrtAlone), mm(x.minTaxAlone), mm(x.taxAsPublished)])}
       />
-      <p className="text-xs text-slate-500 mt-4 mb-1">The uplift swept, with CIT set to zero so the RRT is the whole of the tax</p>
+      <p className="text-xs text-pl-muted mt-4 mb-1">The uplift swept, with CIT set to zero so the RRT is the whole of the tax</p>
       <Tbl
         head={['rrtUpliftPct', 'total tax', 'total contractor NCF', 'total government cash flow', 'NPV at 10 percent', 'first year with a positive RRT charge']}
         rows={uplift.map((x) => [x.rrtUpliftPct, mm(x.totalTax), mm(x.totalContractorNCF), mm(x.totalGovernmentTake), mm(x.npvAt10), yr(x.firstYearWithPositiveRrt)])}
@@ -338,7 +333,7 @@ const Tax = () => {
       <FieldGrid>
         <SelectField label="Published case" value={c.id} onChange={setCaseId} options={cases.map((x) => [x.id, x.id])} />
       </FieldGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">{c.note}</p>
+      <p className="text-xs text-pl-muted mt-2 mb-0">{c.note}</p>
       <Tbl
         head={['year', 'grossRevenue', 'profitOil', 'tax']}
         rows={c.head.map((x) => [x.year, mm(x.grossRevenue), mm(x.profitOil), mm(x.tax)])}
@@ -368,7 +363,7 @@ const Rate = () => {
   const chart = sweep.map((x) => ({ rate: x.ratePct, yearEnd: x.npvYearEnd, midYear: x.npvMidYearDerived }));
   return (
     <>
-      <p className="text-xs text-slate-400 mb-0">
+      <p className="text-xs text-pl-muted mb-0">
         NPV here discounts YEAR END: each year contractor net cash flow is divided by one plus the rate raised to the
         year number, and year 1 is already discounted once. The screening engine in the same package discounts MID
         YEAR, and on identical cash flows the mid-year value is larger by exactly the square root of one plus the
@@ -378,21 +373,19 @@ const Rate = () => {
         head={['rate, percent', 'NPV year end', 'NPV mid year', 'parity ratio']}
         rows={sweep.map((x) => [x.ratePct, mm(x.npvYearEnd), mm(x.npvMidYearDerived), ratio(x.parityRatioDerived)])}
       />
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            {GRID}
-            <XAxis dataKey="rate" tick={AXIS} label={{ value: 'discount rate, percent', position: 'insideBottom', offset: -3, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS} tickFormatter={compact} label={{ value: 'million USD', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => mm(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={0} stroke="#64748b" />
-            <Line type="monotone" dataKey="yearEnd" name="NPV, year end" stroke="#BFFF00" dot isAnimationActive={false} />
-            <Line type="monotone" dataKey="midYear" name="NPV, mid year" stroke="#38bdf8" strokeDasharray="4 3" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <p className="text-xs text-slate-500 mt-4 mb-1">The five published IRR vectors</p>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          {GRID}
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="rate" tick={AXIS} label={{ value: 'discount rate, percent', position: 'insideBottom', offset: -3, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS} tickFormatter={compact} label={{ value: 'million USD', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => mm(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine y={0} stroke={SVG_CHART.reference} />
+          <Line type="monotone" dataKey="yearEnd" name="NPV, year end" stroke={seriesColor(0)} dot isAnimationActive={false} />
+          <Line type="monotone" dataKey="midYear" name="NPV, mid year" stroke={seriesColor(1)} strokeDasharray="4 3" dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
+      <p className="text-xs text-pl-muted mt-4 mb-1">The five published IRR vectors</p>
       <Tbl
         head={['case', 'cash flows', 'engine, percent', 'golden expects, percent', 'true root, percent', 'NPV at 10 percent', 'agrees']}
         rows={irrs.map((c) => [
@@ -403,7 +396,7 @@ const Rate = () => {
           mm(c.npvAt10), c.agrees ? 'yes' : 'no',
         ])}
       />
-      <p className="text-xs text-slate-500 mt-4 mb-1">
+      <p className="text-xs text-pl-muted mt-4 mb-1">
         The bracket made visible. The solver starts at 100 percent and doubles ten times, reaching
         {' '}{pc(bracket.engineIrrPct)} percent; if the NPV is STILL positive there it returns that bound rather than a
         root. The oracle root on this vector is {bracket.trueIrrPct === null ? 'not recorded' : pc(bracket.trueIrrPct)} percent.

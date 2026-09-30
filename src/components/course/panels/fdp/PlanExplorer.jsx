@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, BarChart, LineChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
+  BarChart, LineChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import { OUTCOME_LABELS } from '@petrolord/engines/lib/conventions/percentile.js';
 import {
   PRICE_LADDER,
@@ -36,8 +39,8 @@ export const MODES = [
   ['costs', 'Costs: the cost items, the phase roll-up, the sweep, the plan with no case'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
 
 const ReservesLabel = ({ children }) => <span data-plabel="reserves">{children}</span>;
 const CapexLabel = ({ children }) => <span data-plabel="capex">{children}</span>;
@@ -48,8 +51,8 @@ const RatioLabel = ({ children }) => <span data-plabel="ratio">{children}</span>
 
 const Tbl = ({ head, rows }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>{head.map((h, i) => <th key={i} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>)}</tr>
       </thead>
       <tbody>
@@ -87,27 +90,25 @@ export const ReservesMode = ({ res }) => {
           <ReservesLabel key="c">{`sum of ${OUTCOME_LABELS.p10}`}</ReservesLabel>]}
         rows={res.byFluid.map((t) => [t.fluid, t.units, t.count, four(t.p90Sum), four(t.p50Sum), four(t.p10Sum)])}
       />
-      <div className="h-48 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={bars} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="fluid" tick={AXIS} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => four(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Bar dataKey="low" name="low case" fill="#475569" isAnimationActive={false} />
-            <Bar dataKey="best" name="best estimate" fill="#38bdf8" isAnimationActive={false} />
-            <Bar dataKey="high" name="high case" fill="#BFFF00" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <ChartFrame height={192} className="mt-3">
+        <BarChart data={bars} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="fluid" tick={AXIS} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => four(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <Bar dataKey="low" name="low case" fill={SVG_CHART.note} isAnimationActive={false} />
+          <Bar dataKey="best" name="best estimate" fill={seriesColor(1)} isAnimationActive={false} />
+          <Bar dataKey="high" name="high case" fill={seriesColor(0)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Oil reads {four(res.oilP50)} MMbbl and gas {four(res.gasP50)} Bcf. Adding them gives {four(res.addedAcrossFluidsDerived)} of
         nothing: the two are different substances in different units, and the studio never totals across a fluid.
       </p>
       {/* The engine's own note names the reserves cases, so it sits inside a
           reserves span like every other label on this distribution. */}
-      <p className="text-xs text-slate-500 mt-2 mb-0"><ReservesLabel>{res.percentileNote}</ReservesLabel></p>
+      <p className="text-xs text-pl-muted mt-2 mb-0"><ReservesLabel>{res.percentileNote}</ReservesLabel></p>
       <Tbl
         head={['a row the engine refuses', 'message']}
         rows={[
@@ -153,23 +154,21 @@ export const ConceptsMode = ({ con }) => {
         head={['concept', <CapexLabel key="c">capex</CapexLabel>, <CostLabel key="o">operating cost over the life</CostLabel>, <CostLabel key="l">lifecycle cost</CostLabel>]}
         rows={con.costs.map((c) => [c.name, four(c.totalCapex), four(c.totalOpex), four(c.totalLifecycleCost)])}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         A concept carries its capex in three fields and the engine reads all three. One field alone still totals
         ({four(con.oneFieldOnly.totalCapex)} million USD from facilities of {four(con.oneFieldOnly.facilitiesCapex)}), and a
         concept somebody has already totalled is taken as typed ({four(con.preTotalled.totalCapex)} million USD).
       </p>
-      <div className="h-48 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={shape} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="year" tick={AXIS} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => four(v)} />
-            <ReferenceLine x={con.shape.plateauLastYear} stroke="#BFFF00" strokeDasharray="3 3" label={{ value: 'plateau ends', fill: '#BFFF00', fontSize: 10 }} />
-            <Line dataKey="kbpd" name="kbpd" stroke="#38bdf8" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={192} className="mt-3">
+        <LineChart data={shape} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="year" tick={AXIS} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => four(v)} />
+          <ReferenceLine x={con.shape.plateauLastYear} stroke={seriesColor(0)} strokeDasharray="3 3" label={{ value: 'plateau ends', fill: seriesColor(0), fontSize: 10 }} />
+          <Line dataKey="kbpd" name="kbpd" stroke={seriesColor(1)} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <div className="mt-3">
         <TileGrid>
           <Tile label="Peak rate" value={four(con.shape.peakProduction)} unit="kbpd" />
@@ -178,7 +177,7 @@ export const ConceptsMode = ({ con }) => {
           <Tile label="Volume under the shape" value={four(con.shape.volumeMMbblDerived)} unit="MMbbl (derived)" />
         </TileGrid>
       </div>
-      <p className="text-xs text-slate-500 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The shape is a screening shape and not a reservoir forecast. Nothing in the studio compares the volume under it with
         the plan&apos;s own reserves, and a plan whose profile cannot be fed by its own reserves still scores complete.
       </p>
@@ -209,7 +208,7 @@ export const ScenariosMode = ({ sc, price, onPrice }) => {
           <RateLabel key={s.name}>{s.irr === null ? 'none' : four(s.irr)}</RateLabel>, s.irrStatus,
           s.payback === null ? 'never' : four(s.payback)])}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         A rate of return of none is an answer. The status beside it says which of the five things happened, and the engine
         reports no rate at all rather than the edge of the band it searched. Every case above is charged the plan&apos;s end of
         life cost of {four(sc.abandonment.amountMM)} million USD in production year {sc.abandonment.year}, which is what puts a
@@ -239,18 +238,16 @@ export const ScenariosMode = ({ sc, price, onPrice }) => {
             options={PRICE_LADDER.map((p) => [String(p), `${four(p)} USD a barrel`])} />
         </FieldGrid>
       )}
-      <div className="h-48 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={ladder} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="price" tick={AXIS} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => four(v)} />
-            <ReferenceLine y={0} stroke="#94a3b8" />
-            <Bar dataKey="npv" name="NPV, million USD" fill="#BFFF00" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={192} className="mt-3">
+        <BarChart data={ladder} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="price" tick={AXIS} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => four(v)} />
+          <ReferenceLine y={0} stroke={SVG_CHART.reference} />
+          <Bar dataKey="npv" name="NPV, million USD" fill={seriesColor(0)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
       <div className="mt-3">
         <TileGrid>
           <Tile label={<CostLabel>{`At ${four(row.price)} USD a barrel`}</CostLabel>} value={four(row.npv)} unit="million USD" />
@@ -289,7 +286,7 @@ export const CostsMode = ({ pe, rules }) => {
         head={['phase', <CostLabel key="t">total, million USD</CostLabel>]}
         rows={pe.byPhase.map((x) => [x.phase, four(x.total)])}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The plan&apos;s own case runs the cost items rather than the concept card: capex {four(pe.planRun.capex)} million USD,
         operating cost {four(pe.planRun.annualOpex)} a year, {pe.planRun.years} producing years at {four(pe.planRun.priceUsd)} USD
         a barrel, and the plan&apos;s end of life cost in the last of them. NPV {four(pe.planRun.npv)} million USD,
@@ -309,25 +306,23 @@ export const CostsMode = ({ pe, rules }) => {
         Until September 2026 the line sat on this screen and reached no cash flow, so the NPV was the value of a plan that
         never paid to abandon the field.
       </Note>
-      <div className="h-48 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={bars} layout="vertical" margin={{ top: 10, right: 20, bottom: 5, left: 70 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis type="number" tick={AXIS} />
-            <YAxis type="category" dataKey="driver" tick={AXIS} width={70} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => four(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine x={pe.sweep[0].baseNPV} stroke="#BFFF00" strokeDasharray="3 3" />
-            <Bar dataKey="low" name="minus 30 percent" fill="#475569" isAnimationActive={false} />
-            <Bar dataKey="high" name="plus 30 percent" fill="#38bdf8" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={192} className="mt-3">
+        <BarChart data={bars} layout="vertical" margin={{ top: 10, right: 20, bottom: 5, left: 70 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis type="number" tick={AXIS} />
+          <YAxis type="category" dataKey="driver" tick={AXIS} width={70} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => four(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine x={pe.sweep[0].baseNPV} stroke={seriesColor(0)} strokeDasharray="3 3" />
+          <Bar dataKey="low" name="minus 30 percent" fill={SVG_CHART.note} isAnimationActive={false} />
+          <Bar dataKey="high" name="plus 30 percent" fill={seriesColor(1)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
       <Tbl
         head={['driver', 'minus 30 percent', 'plus 30 percent', 'base', 'swing (derived)']}
         rows={pe.sweep.map((s) => [s.name, four(s.lowParamNPV), four(s.highParamNPV), four(s.baseNPV), four(s.swingDerived)])}
       />
-      <p className="text-xs text-slate-500 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         A price deck that does not cover the profile is refused: {pe.priceDeck.shortRefusal.error}. The same profile with a
         price for every year is accepted and returns {four(pe.priceDeck.coveredNpv)} million USD.
       </p>

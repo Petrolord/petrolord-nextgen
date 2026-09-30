@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import {
   RESIDUE, perfectInformation, evpiSweep, bayes, informationTree, costSweep, accuracySweep, analyzer,
 } from './decisionLab';
@@ -33,22 +36,20 @@ export const MODES = [
   ['analyzer', 'Analyzer: the VOI Analyzer on its defaults and on EKPAN'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
 
 const SmallChart = ({ data, x, y, name, refX }) => (
-  <div className="h-48 mt-3">
-    <ResponsiveContainer width="100%" height="100%">
-      <LineChart data={data} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-        <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-        <XAxis dataKey={x} type="number" domain={['dataMin', 'dataMax']} tick={AXIS} />
-        <YAxis tick={AXIS} label={{ value: 'million USD', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-        <Tooltip contentStyle={TOOLTIP} formatter={(v) => mm(v)} />
-        {refX !== undefined && <ReferenceLine x={refX} stroke="#BFFF00" strokeDasharray="4 4" />}
-        <Line dataKey={y} name={name} stroke="#38bdf8" dot isAnimationActive={false} />
-      </LineChart>
-    </ResponsiveContainer>
-  </div>
+  <ChartFrame height={192} className="mt-3">
+    <LineChart data={data} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+      <CartesianGrid {...GRID_STYLE} />
+      <XAxis dataKey={x} type="number" domain={['dataMin', 'dataMax']} tick={AXIS} />
+      <YAxis tick={AXIS} label={{ value: 'million USD', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+      <Tooltip contentStyle={TOOLTIP} formatter={(v) => mm(v)} />
+      {refX !== undefined && <ReferenceLine x={refX} stroke={seriesColor(0)} strokeDasharray="4 4" />}
+      <Line dataKey={y} name={name} stroke={seriesColor(1)} dot isAnimationActive={false} />
+    </LineChart>
+  </ChartFrame>
 );
 
 export const PerfectMode = ({ pi, es }) => {
@@ -100,7 +101,7 @@ export const BayesMode = ({ by }) => {
         head={['signal', 'joint with Success (derived)', 'joint with Dry hole (derived)', 'chance of the signal', 'posterior Success', 'posterior Dry hole', 'best action', 'EMV, million USD']}
         rows={by.rows.map((s) => [s.label, pr(s.jointDerived[0]), pr(s.jointDerived[1]), pr(s.pSignal), pr(s.posterior[0]), pr(s.posterior[1]), s.bestLabel, mm(s.emv)])}
       />
-      <p className="text-xs text-slate-500 mt-1 mb-0">The joints are prior times likelihood; the chance of a signal is their sum; each posterior is its joint over that chance.</p>
+      <p className="text-xs text-pl-muted mt-1 mb-0">The joints are prior times likelihood; the chance of a signal is their sum; each posterior is its joint over that chance.</p>
       <div className="mt-3">
         <TileGrid>
           <Tile label="EV with the survey, before its cost" value={mm(by.evWithInfo)} unit="million USD" />
@@ -210,7 +211,7 @@ export const AnalyzerMode = ({ an }) => {
       <Sub>The four cards the Analyzer shows</Sub>
       <KpiCards result={d} />
       <Note>The EMV with Information card is after the survey cost; the tree engine&apos;s EV with information is before it.</Note>
-      <Text><span className="text-slate-500">The engine&apos;s insight:</span> {d.insights}</Text>
+      <Text><span className="text-pl-muted">The engine&apos;s insight:</span> {d.insights}</Text>
       <Sub>EKPAN typed into the form</Sub>
       <Text>
         {ef.decisionName} at {mm(ef.decisionCost)} million USD; {ef.outcomes.map((o) => `${o.name} ${o.probability} percent paying ${mm(o.payoff)}`).join(' and ')} (payoffs
