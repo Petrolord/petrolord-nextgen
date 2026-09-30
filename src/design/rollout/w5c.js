@@ -6,4 +6,5 @@ export default [
   '/dashboard/apps/hygiene',
   '/dashboard/apps/lopa',
   '/dashboard/apps/qra',
+  '/dashboard/apps/consequence',
 ];
