@@ -120,7 +120,7 @@ const VerifyCertificatePage = () => {
                 </div>
                 <div className="flex justify-between gap-4 border-b border-pl-border pb-2">
                   <dt className="text-pl-muted">Course</dt>
-                  <dd className="text-right text-pl-text">
+                  <dd className="flex flex-wrap items-center justify-end gap-2 text-right text-pl-text">
                     {courseName(result.app_slug, result.course_name)}
                     <PracticeCourseBadge show={courseTypeOf(result.app_slug, [{ slug: result.app_slug, course_type: result.course_type }]) === 'practice'} />
                   </dd>
