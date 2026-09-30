@@ -217,7 +217,7 @@ export const CurveMode = ({
           <ComposedChart data={plot.sampled} margin={{ top: 10, right: 20, bottom: 10, left: 0 }}>
             <CartesianGrid {...GRID_STYLE} />
             <XAxis dataKey="temperatureF" type="number" domain={[0, 1600]} tick={AXIS} label={{ value: 'temperature F', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -4 }} />
-            <YAxis domain={[0, 100]} tick={AXIS} label={{ value: 'volume percent distilled', angle: -90, fill: SVG_CHART.note, fontSize: 11, position: 'insideLeft' }} />
+            <YAxis domain={[0, 100]} tick={AXIS} label={{ value: 'volume percent distilled', angle: -90, fill: SVG_CHART.note, fontSize: 11, position: 'insideLeft', style: { textAnchor: 'middle' } }} />
             <Tooltip contentStyle={TOOLTIP} />
             {okCuts && cuts.cuts.map((c, i) => (
               <ReferenceArea key={c.id} x1={c.fromF === null ? 0 : c.fromF} x2={c.toF === null ? 1600 : c.toF} fill={BAND_FILL[i % 2]} fillOpacity={0.1} label={{ value: c.name.split(' /')[0], fill: SVG_CHART.note, fontSize: 9, position: 'insideTop' }} />
