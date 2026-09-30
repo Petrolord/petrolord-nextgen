@@ -640,53 +640,10 @@ registered in `src/design/rollout/w4d.js`.
   roles with no legacy branch. No file is shared with another batch. The
   economics labs (`*Lab.js`) and the vendored engines are untouched: every
   value, label and interaction is as before.
-
-## 13. Batch 5A: facilities I course apps (as built)
-
-Separation (`/dashboard/apps/separation`), line sizing
-(`/dashboard/apps/linesizing`), rotating equipment
-(`/dashboard/apps/rotating`), gas processing (`/dashboard/apps/gasprocessing`)
-and relief (`/dashboard/apps/relief`) are on the roles and registered in
-`src/design/rollout/w5a.js`. Their course reader pages stay on 1C's pattern
-entry.
-
-- The fifteen panels under
-  `components/course/panels/{separation,linesizing,rotating,gasprocessing,relief}`
-  are used by their learning page, the lesson reader and the handbook, all
-  inside a scope, so they moved straight to roles with no legacy branch. No
-  file is shared with 5B.
 - The page recipe is 4C's: cards on `surface`, lessons and the locked
   capstone note on `sunken`, tier buttons primary when chosen (with
   `aria-pressed`), capstone results and toasts on the success and danger
   roles with their words, certificate number and award icon gold.
-<<<<<<< HEAD
-- The panels' labelled boxes take the status roles with their headings:
-  HELD FOR LITERATURE and the other held items on `warning`, the engine's
-  refusals on `danger`, the engine's explanations (and "the holdup is an
-  input") on `info`. Explanation cards are on `sunken`.
-- Every chart (62, all Recharts) is in `ChartFrame` with `GRID_STYLE`,
-  `AXIS_TICK`, `TOOLTIP_STYLE` and `LEGEND_PROPS`; a labelled x-axis takes
-  `XAXIS_LABEL_HEIGHT`, and axis titles sit on `SVG_CHART.note`. The colour
-  map keeps each hue the panel notes already name: sky to `seriesColor(0)`
-  (blue), lime to `(1)` (green), amber to `(2)`, red and rose to `(3)`, pink
-  and violet to `(4)`; the grey series and guides take
-  `SVG_CHART.reference` and the old near-white orifice area trace is ink
-  (`SVG_CHART.label`). The absorber's seven absorption factor curves take
-  the five kit colours, then ink and the slate note, so no two share a
-  colour.
-- No lesson in these five courses names a chart colour. Three panel notes
-  named the pink line (pump and blowdown explorers); they now say violet,
-  in their own commit. The blue and green lines other notes name keep
-  their hues.
-- Tests: `src/pages/__tests__/Facilities5A.theme.test.jsx` (the four
-  standard checks per app, every tier in both themes with no lime left and
-  the plots on the white plate, capstone pass, fail and locked, the
-  Learning Mode gate, no network) and
-  `src/components/course/panels/__tests__/Facilities5APanels.theme.test.jsx`
-  (every view and sub-view of every panel in both themes, every plot on the
-  white plate with the mark, every series in a kit colour, and a source
-  scan with a negative control).
-=======
 - Every chart (42, all Recharts) is in `ChartFrame` with `GRID_STYLE`,
   `AXIS_TICK`, `TOOLTIP_STYLE`, axis titles on `SVG_CHART.note` and
   `LEGEND_PROPS`; a labelled x-axis takes `XAXIS_LABEL_HEIGHT`. Lime goes to
@@ -717,4 +674,48 @@ entry.
   (every view and sub-view of every panel in both themes, every plot on the
   white plate with the mark, every series in a kit colour, and a source scan
   with a negative control).
->>>>>>> origin/main
+
+## 13. Batch 5A: facilities I course apps (as built)
+
+Separation (`/dashboard/apps/separation`), line sizing
+(`/dashboard/apps/linesizing`), rotating equipment
+(`/dashboard/apps/rotating`), gas processing (`/dashboard/apps/gasprocessing`)
+and relief (`/dashboard/apps/relief`) are on the roles and registered in
+`src/design/rollout/w5a.js`. Their course reader pages stay on 1C's pattern
+entry.
+
+- The fifteen panels under
+  `components/course/panels/{separation,linesizing,rotating,gasprocessing,relief}`
+  are used by their learning page, the lesson reader and the handbook, all
+  inside a scope, so they moved straight to roles with no legacy branch. No
+  file is shared with 5B.
+- The page recipe is 4C's: cards on `surface`, lessons and the locked
+  capstone note on `sunken`, tier buttons primary when chosen (with
+  `aria-pressed`), capstone results and toasts on the success and danger
+  roles with their words, certificate number and award icon gold.
+- The panels' labelled boxes take the status roles with their headings:
+  HELD FOR LITERATURE and the other held items on `warning`, the engine's
+  refusals on `danger`, the engine's explanations (and "the holdup is an
+  input") on `info`. Explanation cards are on `sunken`.
+- Every chart (62, all Recharts) is in `ChartFrame` with `GRID_STYLE`,
+  `AXIS_TICK`, `TOOLTIP_STYLE` and `LEGEND_PROPS`; a labelled x-axis takes
+  `XAXIS_LABEL_HEIGHT`, and axis titles sit on `SVG_CHART.note`. The colour
+  map keeps each hue the panel notes already name: sky to `seriesColor(0)`
+  (blue), lime to `(1)` (green), amber to `(2)`, red and rose to `(3)`, pink
+  and violet to `(4)`; the grey series and guides take
+  `SVG_CHART.reference` and the old near-white orifice area trace is ink
+  (`SVG_CHART.label`). The absorber's seven absorption factor curves take
+  the five kit colours, then ink and the slate note, so no two share a
+  colour.
+- No lesson in these five courses names a chart colour. Three panel notes
+  named the pink line (pump and blowdown explorers); they now say violet,
+  in their own commit. The blue and green lines other notes name keep
+  their hues.
+- Tests: `src/pages/__tests__/Facilities5A.theme.test.jsx` (the four
+  standard checks per app, every tier in both themes with no lime left and
+  the plots on the white plate, capstone pass, fail and locked, the
+  Learning Mode gate, no network) and
+  `src/components/course/panels/__tests__/Facilities5APanels.theme.test.jsx`
+  (every view and sub-view of every panel in both themes, every plot on the
+  white plate with the mark, every series in a kit colour, and a source
+  scan with a negative control).
