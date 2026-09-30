@@ -5,9 +5,8 @@
 // imports; the rollout plan counts them in the lesson reader's own files).
 // Inside a scope, in both themes, each renders theme roles only outside its
 // plots, and every plot sits on a white chart plate (data-canvas="chart")
-// with the retired console lime gone, apart from the one marker a lesson
-// names "the hollow lime circle" (reservoircalc P-1, drawn with an ink
-// casing).
+// with the retired console lime gone everywhere (wave 7 moved the last one,
+// the reservoircalc P-1 marker, to the kit violet).
 //
 // panelKit is batch 1B's kit and renders for real.
 import React from 'react';
@@ -16,6 +15,7 @@ import { render, cleanup, fireEvent, screen, waitFor } from '@testing-library/re
 import { ThemedApp, themeStorageKey } from '@/design/ThemeProvider';
 import { installDomShims } from '@/design/testing/domShims';
 import { legacyChromeClasses } from '@/design/testing/themeAssertions';
+import { CHART_SERIES } from '@/utils/chartSvg';
 
 import MapExplorer from '@/components/course/panels/mapping/MapExplorer';
 import IsochoreExplorer from '@/components/course/panels/mapping/IsochoreExplorer';
@@ -112,15 +112,14 @@ describe('the reader-only teaching panels inside a scope', () => {
           expect(plate.querySelector('img[alt]')).toBeTruthy();
         }
         const svgMarkup = [...document.querySelectorAll('svg[role="img"]')].map((s) => s.outerHTML).join('');
+        // no lime on any plot (wave 7: the P-1 marker was the last one)
+        expect(svgMarkup).not.toMatch(LIME);
         if (id === 'rc-property-explorer') {
-          // the lesson's "hollow lime circle", and nothing else, keeps lime
-          const limeNodes = [...document.querySelectorAll('svg [stroke], svg [fill]')]
-            .filter((el) => LIME.test(el.getAttribute('stroke') || '') || LIME.test(el.getAttribute('fill') || ''));
-          expect(limeNodes.length).toBe(1);
-          expect(limeNodes[0].tagName.toLowerCase()).toBe('circle');
-          expect(limeNodes[0].getAttribute('fill')).toBe('none');
-        } else {
-          expect(svgMarkup).not.toMatch(LIME);
+          // the lessons' "hollow violet circle": a kit series colour, no fill
+          const p1 = document.querySelector('svg circle[data-marker="p1"]');
+          expect(p1.getAttribute('fill')).toBe('none');
+          expect(p1.getAttribute('stroke')).toBe(CHART_SERIES[4]);
+          expect(CHART_SERIES[4].toLowerCase()).toBe('#7c3aed');
         }
         // no dark console plate is left behind a plot
         expect(svgMarkup).not.toMatch(/fill="#0F172A" (?:\/>|><\/rect>)/i);

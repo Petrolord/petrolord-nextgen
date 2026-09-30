@@ -6,11 +6,12 @@
 // SvgChartFrame (data-canvas="chart", with the Petrolord chart mark).
 //
 // On top of the kit, the reader panels keep a few named hues because the
-// lessons read them by name ("the pink dashed line", "each orange dot", "a
-// hollow lime circle", "the white path"). Changing them would make the
-// teaching copy wrong, and the rollout leaves teaching content untouched.
-// A light mark (the white path and dots, the lime circle) is drawn over an
-// ink casing so it still reads on the white plate.
+// lessons read them by name ("the pink dashed line", "each orange dot",
+// "the white path"). Changing them would make the teaching copy wrong.
+// A light mark (the white path and dots) is drawn over an ink casing so it
+// still reads on the white plate. Lime is retired (wave 7): the P-1 marker
+// the reservoircalc lessons name is the kit violet, and the two lesson
+// sentences say violet.
 import { SVG_CHART as KIT, CHART_SERIES } from '@/utils/chartSvg';
 import { STREAM_PALETTES } from '@/utils/chartTheme';
 
@@ -29,10 +30,9 @@ export const SVG_CHART = Object.freeze({
   red: RED,
   violet: VIOLET,
   // Named hues the lessons read by name. Pink is the chart theme's gas
-  // forecast colour; orange (orange-600) and lime are the only colours here
-  // from outside the kit.
+  // forecast colour; orange (orange-600) is the only colour here from outside
+  // the kit.
   pink: STREAM_PALETTES.gas.forecast,
   orange: '#EA580C',
-  lime: '#BFFF00',
   casing: KIT.label, // the ink stroke drawn under a light line or marker
 });

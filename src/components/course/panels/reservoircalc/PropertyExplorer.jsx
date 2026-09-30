@@ -143,8 +143,8 @@ const PropertyExplorer = () => {
           );
         })}
 
-        <circle cx={sx(P1.x)} cy={sy(P1.y)} r="4" fill="none" stroke={CH.casing} strokeWidth="4" />
-        <circle cx={sx(P1.x)} cy={sy(P1.y)} r="4" fill="none" stroke={CH.lime} strokeWidth="2" />
+        <circle cx={sx(P1.x)} cy={sy(P1.y)} r="4" fill="none" stroke={CH.halo} strokeWidth="4" />
+        <circle data-marker="p1" cx={sx(P1.x)} cy={sy(P1.y)} r="4" fill="none" stroke={CH.violet} strokeWidth="2" />
         <text x={sx(P1.x) + 7} y={sy(P1.y) + 12} fill={CH.ink} fontSize="9">
           P-1 {fmt(m.phiAtP1, 4)}
         </text>
