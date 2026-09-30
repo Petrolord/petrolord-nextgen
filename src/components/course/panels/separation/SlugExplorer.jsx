@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, BarChart, LineChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
+  BarChart, LineChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import {
   crossSection, twoLengths, gasCapacity, slugCatchers, threePhaseSplit, dropletsAndVerdicts, vesselFamily,
 } from './separationLab';
@@ -37,13 +40,13 @@ export const MODES = [
   ['family', 'Family: every sweep with feasible, reasons, preferred and preferredStatus'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
 
 const Tbl = ({ head, rows }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>{head.map((h, i) => <th key={i} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>)}</tr>
       </thead>
       <tbody>
@@ -63,7 +66,7 @@ const SweepTable = ({ sweep }) => (
       head={['diameter ft', 'length ft', 'L/D', 'in band', 'feasible', 'reasons']}
       rows={sweep.rows.map((r) => [six(r.diameterFt), six(r.lengthFt), six(r.ldRatio), String(r.inRange), String(r.feasible), r.reasons.join(', ') || 'none'])}
     />
-    <p className="text-xs text-slate-400 mt-2 mb-0">
+    <p className="text-xs text-pl-muted mt-2 mb-0">
       preferred {sweep.preferred ? `${six(sweep.preferred.diameterFt)} ft` : 'null'}, preferredStatus
       {' '}{sweep.preferredStatus}, band {six(sweep.ldMin)} to {six(sweep.ldMax)}.
     </p>
@@ -79,7 +82,7 @@ export const SegmentsMode = ({ cs }) => {
   const chart = cs.rows.map((r) => ({ level: six(r.liquidLevelFrac), liquid: r.areaLiquidFt2, gas: r.areaGasFt2 }));
   return (
     <>
-      <p className="text-xs text-slate-400 mb-0">
+      <p className="text-xs text-pl-muted mb-0">
         ABANA-2 is built at {six(cs.diameterFt)} ft. A horizontal drum is a circle cut by a level, and every area below
         is the exact circular segment at that depth.
       </p>
@@ -87,20 +90,18 @@ export const SegmentsMode = ({ cs }) => {
         head={['level fraction', 'liquid depth ft', 'liquid area ft2', 'gas area ft2', 'gas height ft', 'gas-liquid chord ft', 'total area ft2']}
         rows={cs.rows.map((r) => [six(r.liquidLevelFrac), six(r.liquidLevelFt), six(r.areaLiquidFt2), six(r.areaGasFt2), six(r.gasHeightFt), six(r.gasLiquidChordFt), six(r.areaTotalFt2)])}
       />
-      <div className="h-48 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="level" tick={AXIS} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Bar dataKey="liquid" name="liquid area, ft2" stackId="a" fill="#38bdf8" isAnimationActive={false} />
-            <Bar dataKey="gas" name="gas area, ft2" stackId="a" fill="#475569" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <ChartFrame height={192} className="mt-3">
+        <BarChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="level" tick={AXIS} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <Bar dataKey="liquid" name="liquid area, ft2" stackId="a" fill={seriesColor(0)} isAnimationActive={false} />
+          <Bar dataKey="gas" name="gas area, ft2" stackId="a" fill={SVG_CHART.reference} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The chord is the WIDTH of the gas-liquid surface. It is neither the oil-water interface, which three-phase sizing
         places itself, nor a length along the vessel. Half full is a special case where the two areas are equal at
         {' '}{six(cs.halfFullAreaFt2)} ft2 each and the chord is the full diameter.
@@ -134,7 +135,7 @@ export const LengthsMode = ({ tl }) => {
           <Tile label="Slenderness" value={six(tl.built.ldRatio)} unit="L over D" />
         </TileGrid>
       </div>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         At {six(tl.diameterFt)} ft and level {six(tl.liquidLevelFrac)} the liquid requirement is the retention volume of
         {' '}{six(tl.built.liquidVolFt3)} ft3 spread over the liquid area of {six(tl.built.areaLiquidFt2)} ft2. Drop the level
         to {six(tl.lowLevelFrac)} and the same duty in the same drum needs {six(tl.low.lengthLiquidFt)} ft, because the liquid
@@ -145,19 +146,17 @@ export const LengthsMode = ({ tl }) => {
         head={['diameter ft', 'liquid area ft2', 'gas area ft2', 'liquid length ft', 'gas length ft', 'length ft', 'controlling', 'L/D']}
         rows={tl.rows.map((r) => [six(r.diameterFt), six(r.areaLiquidFt2), six(r.areaGasFt2), six(r.lengthLiquidFt), six(r.lengthGasFt), six(r.lengthFt), r.controlling, six(r.ldRatio)])}
       />
-      <div className="h-48 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="diameter" tick={AXIS} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line dataKey="liquid" name="liquid length, ft" stroke="#38bdf8" dot={false} isAnimationActive={false} />
-            <Line dataKey="gas" name="gas length, ft" stroke="#f472b6" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={192} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="diameter" tick={AXIS} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line dataKey="liquid" name="liquid length, ft" stroke={seriesColor(0)} dot={false} isAnimationActive={false} />
+          <Line dataKey="gas" name="gas length, ft" stroke={seriesColor(4)} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Tbl
         head={['published horizontal case', 'liquid ft', 'gas ft', 'length ft', 'controlling', 'L/D', 'gas velocity ft/s']}
         rows={tl.published.map((c) => [c.name, six(c.lengthLiquidFt), six(c.lengthGasFt), six(c.lengthFt), c.controlling, six(c.ldRatio), six(c.gasVelocityFtS)])}
@@ -187,19 +186,17 @@ export const CapacityMode = ({ gc }) => {
         head={['diameter ft', 'gas area ft2', 'gas velocity ft/s', 'margin', 'carries the gas']}
         rows={gc.rows.map((r) => [six(r.diameterFt), six(r.areaGasFt2), six(r.gasVelocityFtS), six(r.gasVelocityMargin), String(r.gasCapacityOk)])}
       />
-      <div className="h-48 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="diameter" tick={AXIS} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
-            <ReferenceLine y={1} stroke="#BFFF00" strokeDasharray="3 3" label={{ value: 'the verdict line', fill: '#BFFF00', fontSize: 10 }} />
-            <Bar dataKey="margin" name="gas velocity margin" fill="#38bdf8" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <ChartFrame height={192} className="mt-3">
+        <BarChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="diameter" tick={AXIS} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
+          <ReferenceLine y={1} stroke={seriesColor(1)} strokeDasharray="3 3" label={{ value: 'the verdict line', fill: seriesColor(1), fontSize: 10 }} />
+          <Bar dataKey="margin" name="gas velocity margin" fill={seriesColor(0)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         A margin below one is a vessel that cannot carry its gas, whatever its slenderness. The two smallest diameters on
         this family fail the verdict outright.
       </p>
@@ -211,14 +208,14 @@ export const CapacityMode = ({ gc }) => {
           <Tile label="Controlling requirement" value={gc.overloaded.controlling} />
         </TileGrid>
       </div>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The gas length is the gas velocity over the settling velocity, times the gas height. Under the capacity rule that
         ratio is at most one, so the gas length can never exceed the gas HEIGHT, and gas controls only a vessel that is
         already overloaded or one shorter than its own diameter.
       </p>
-      <div className="mt-3 rounded-md border border-amber-700/60 bg-amber-950/20 p-3">
-        <p className="text-amber-300 text-xs font-medium mb-1">HELD FOR LITERATURE</p>
-        <p className="text-xs text-slate-300 mb-0">{gc.held.note}</p>
+      <div className="mt-3 rounded-md border border-pl-warning/40 bg-pl-warning-bg p-3">
+        <p className="text-pl-warning-text text-xs font-medium mb-1">HELD FOR LITERATURE</p>
+        <p className="text-xs text-pl-text mb-0">{gc.held.note}</p>
       </div>
     </>
   );
@@ -228,7 +225,7 @@ export const SlugMode = ({ sc }) => {
   if (!sc) return <Note>The slug catcher reader did not return the sizing.</Note>;
   return (
     <>
-      <p className="text-xs text-slate-400 mb-0">
+      <p className="text-xs text-pl-muted mb-0">
         The slug VOLUME is not computed here. It comes from the line, where the pigging tab of the line sizing studio
         works it out, and it is typed into this tab as a number somebody else stands behind.
       </p>
@@ -242,7 +239,7 @@ export const SlugMode = ({ sc }) => {
           <Tile label="Drum length" value={six(sc.vessel.lengthFt)} unit={`ft at L/D ${six(sc.vessel.ldRatio)}`} />
         </TileGrid>
       </div>
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         A slug catcher holds more than the slug. The line keeps delivering at its normal rate while the slug is being
         drained, and the working volume carries both.
       </p>
@@ -257,7 +254,7 @@ export const SlugMode = ({ sc }) => {
           ['pipe in total, ft', six(sc.fingers.totalPipeFt)],
         ]}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The harp ignores the normal inflow entirely: its volume comes from the slug alone, so {six(sc.vessel.workingBbl)} bbl
         of working volume in the vessel answers {six(sc.fingersInput.slugBbl)} bbl in the fingers. Squeeze the same slug into
         {' '}{six(sc.fewInput.nFingers)} fingers of {six(sc.fewInput.fingerIdIn)} inch bore and each one runs
@@ -289,7 +286,7 @@ export const ThreePhaseMode = ({ tp, dv }) => {
           <Tile label="The retired chord rule gave (derived)" value={six(tp.retiredChordLayerDerivedFt)} unit="ft" />
         </TileGrid>
       </div>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The water takes {six(p.areaWaterFt2)} ft2 against {six(p.areaOilFt2)} ft2 of oil in a liquid area of
         {' '}{six(p.areaLiquidFt2)} ft2. The interface sits at the exact depth whose circular segment has the water area, so
         the water layer is {six(p.waterLayerFt)} ft and the oil layer above it {six(p.oilLayerFt)} ft, and the two add to the
@@ -309,25 +306,23 @@ export const ThreePhaseMode = ({ tp, dv }) => {
           ['retentionPhase', word(p.retentionPhase), word(tp.pinned.retentionPhase)],
         ]}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Under the proportional split both phases need the same length by construction, so there is one requirement and
         retentionPhase is null. Pin the interface at a water share of {six(tp.explicitWaterFrac)} and the two lengths
         separate, the requirement becomes the larger of them, and retentionPhase names the phase that set it. Two lengths
         count as the same length inside a relative gap of {tp.retentionTieRel}.
       </p>
-      <div className="h-48 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={ladder} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="micron" tick={AXIS} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line dataKey="velocity" name="settling velocity, ft/s" stroke="#38bdf8" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <ChartFrame height={192} className="mt-3">
+        <LineChart data={ladder} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="micron" tick={AXIS} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line dataKey="velocity" name="settling velocity, ft/s" stroke={seriesColor(0)} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Stokes velocity goes as the SQUARE of the droplet size and inversely with viscosity, so halving the drop quarters
         the speed. The vessel is {six(dv.lengthFt)} ft long, which gives the oil {four(dv.residenceOilS)} s of residence and
         the water {four(dv.residenceWaterS)} s.
@@ -340,7 +335,7 @@ export const ThreePhaseMode = ({ tp, dv }) => {
           ['water at the tighter specification', six(dv.tightMicron), six(dv.tight.waterDropVelocityFtS), six(dv.oilLayerFt), four(dv.tight.waterDropFallS), four(dv.tight.residenceOilS), `waterCarryover ${String(dv.tight.waterCarryover)}`],
         ]}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Tighten the water specification and nothing about the vessel changes except the verdict: {dv.tight.warning}
       </p>
       <Tbl
@@ -368,34 +363,34 @@ export const FamilyMode = ({ fam }) => {
   if (!fam) return <Note>The family reader did not return the sweeps.</Note>;
   return (
     <>
-      <p className="text-xs text-slate-400 mb-0">
+      <p className="text-xs text-pl-muted mb-0">
         ABANA-1, the vertical family, band {six(fam.abana1.ldMin)} to {six(fam.abana1.ldMax)}:
       </p>
       <SweepTable sweep={fam.abana1} />
-      <p className="text-xs text-slate-400 mt-4 mb-0">
+      <p className="text-xs text-pl-muted mt-4 mb-0">
         ABANA-2, the horizontal family, band {six(fam.abana2.ldMin)} to {six(fam.abana2.ldMax)}:
       </p>
       <SweepTable sweep={fam.abana2} />
-      <p className="text-xs text-slate-400 mt-4 mb-0">
+      <p className="text-xs text-pl-muted mt-4 mb-0">
         The same family against a band widened to {six(fam.abana2Wide.ldMin)} to {six(fam.abana2Wide.ldMax)}, which is an
         INPUT and not a property of the vessel:
       </p>
       <SweepTable sweep={fam.abana2Wide} />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Widening the band admits a row the narrow band excluded and the preferred vessel does not move. The
         {' '}{six(fam.wideAdmittedRow.diameterFt)} ft row is now inRange {String(fam.wideAdmittedRow.inRange)} and still
         infeasible for {fam.wideAdmittedRow.reasons.join(', ')}, so the smallest FEASIBLE row in band is still
         {' '}{six(fam.wideAdmittedRow.preferredDiameterFt)} ft. A rule that took the first row in band would have moved.
       </p>
-      <p className="text-xs text-slate-400 mt-4 mb-0">
+      <p className="text-xs text-pl-muted mt-4 mb-0">
         AGBAMI, the three-phase family at the {six(fam.waterDropletMicron)} micron specification:
       </p>
       <SweepTable sweep={fam.agbami} />
-      <p className="text-xs text-slate-400 mt-4 mb-0">
+      <p className="text-xs text-pl-muted mt-4 mb-0">
         The same family at the {six(fam.tightMicron)} micron specification, where a droplet verdict gates feasibility:
       </p>
       <SweepTable sweep={fam.agbamiTight} />
-      <p className="text-xs text-slate-400 mt-4 mb-0">
+      <p className="text-xs text-pl-muted mt-4 mb-0">
         The same family with the band narrowed to {six(fam.narrowBand.ldMin)} to {six(fam.narrowBand.ldMax)}:
       </p>
       <SweepTable sweep={fam.agbamiNarrow} />

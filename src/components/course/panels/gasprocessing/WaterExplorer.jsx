@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import {
   waterCarried, honestBand, waterToTakeOut, circulationChoice, reboilerPaysFor, stillOverhead,
   SATURATION_P, OBIAFU_LINE, OBIAFU, RATIO_AT_LOWER_CUSTOM, RATIO_AT_UPPER_CUSTOM,
@@ -43,14 +46,14 @@ export const MODES = [
   ['btex', 'The still overhead nobody sells'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const SERIES = ['#38bdf8', '#f472b6', '#BFFF00', '#fbbf24'];
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const SERIES = [0, 1, 2, 3].map(seriesColor);
 
 const Tbl = ({ head, rows }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>{head.map((h, i) => <th key={h} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>)}</tr>
       </thead>
       <tbody>
@@ -65,17 +68,17 @@ const Tbl = ({ head, rows }) => (
 );
 
 const Held = ({ children }) => (
-  <div className="mt-3 rounded-md border border-amber-700/60 bg-amber-950/20 p-3">
-    <p className="text-amber-300 text-xs font-medium mb-1">HELD FOR LITERATURE</p>
-    <p className="text-xs text-slate-300 mb-0">{children}</p>
+  <div className="mt-3 rounded-md border border-pl-warning/40 bg-pl-warning-bg p-3">
+    <p className="text-pl-warning-text text-xs font-medium mb-1">HELD FOR LITERATURE</p>
+    <p className="text-xs text-pl-text mb-0">{children}</p>
   </div>
 );
 
 /** A refusal shown as a refusal. The message is the engine's, through the lab. */
 const Refusal = ({ label, message }) => (
-  <div className="mt-2 rounded-md border border-red-800/60 bg-red-950/20 p-2">
-    <p className="text-red-300 text-xs font-medium mb-1">{label}</p>
-    <p className="text-xs text-slate-300 font-mono mb-0">{message}</p>
+  <div className="mt-2 rounded-md border border-pl-danger/40 bg-pl-danger-bg p-2">
+    <p className="text-pl-danger-text text-xs font-medium mb-1">{label}</p>
+    <p className="text-xs text-pl-text font-mono mb-0">{message}</p>
   </div>
 );
 
@@ -99,38 +102,34 @@ export const SurfaceMode = ({ s }) => {
         <Tile label="Vapour pressure" value={six(s.psatPsia)} unit="psia" />
         <Tile label="Vapour pressure over total" value={nine(s.yWaterDerived)} />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The last two tiles are one statement read twice. The mole fraction of water in the gas IS the vapour pressure of
         water over the total pressure, so the fourth tile is the third divided by {six(OBIAFU_LINE.pPsia)} psia and it
         comes back as the first. Everything the temperature does is in the vapour pressure; everything the pressure does
         is in the division.
       </p>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="tF" tick={AXIS} label={{ value: 'degF', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -3 }} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            {SATURATION_P.map((p, i) => (
-              <Line key={p} dataKey={`p${p}`} name={`${p} psia, lb/MMscf`} stroke={SERIES[i % SERIES.length]} dot={false} isAnimationActive={false} />
-            ))}
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <div className="h-44 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={curve} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="tF" tick={AXIS} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line dataKey="psat" name="vapour pressure, psia" stroke="#BFFF00" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="tF" tick={AXIS} label={{ value: 'degF', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
+          <Legend {...LEGEND_PROPS} />
+          {SATURATION_P.map((p, i) => (
+            <Line key={p} dataKey={`p${p}`} name={`${p} psia, lb/MMscf`} stroke={SERIES[i % SERIES.length]} dot={false} isAnimationActive={false} />
+          ))}
+        </LineChart>
+      </ChartFrame>
+      <ChartFrame height={176} className="mt-3">
+        <LineChart data={curve} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="tF" tick={AXIS} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line dataKey="psat" name="vapour pressure, psia" stroke={seriesColor(1)} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Note>
         The second chart carries no pressure at all. One curve stands behind all four of the curves above it.
       </Note>
@@ -151,7 +150,7 @@ export const BandMode = ({ b }) => {
   if (!b) return <Note>The band reader did not return its limits.</Note>;
   return (
     <>
-      <p className="text-xs text-slate-400 mb-0">
+      <p className="text-xs text-pl-muted mb-0">
         Three separate limits sit on this answer and they are not the same limit. One REFUSES, one warns that the FIT is
         being extrapolated, and one warns that the METHOD is.
       </p>
@@ -191,7 +190,7 @@ export const LoadMode = ({ l }) => {
         <Tile label="Comes out" value={six(l.removedLbMMscfDerived)} unit="lb/MMscf" />
         <Tile label="At the stated rate" value={four(l.waterLbDay)} unit="lb/day" />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The third tile is the first two subtracted and it still knows nothing about the rate. The fourth is the first
         moment the rate enters the chain at all.
       </p>
@@ -199,22 +198,20 @@ export const LoadMode = ({ l }) => {
         head={['outlet spec, lb/MMscf', 'water out, lb/day', 'circulation, gpm', 'reboiler, MMBtu/hr']}
         rows={l.specSweep.map((r) => [six(r.outletLbMMscf), four(r.waterLbDay), six(r.circGpm), six(r.reboilerMMBtuHr)])}
       />
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={l.rateSweep.map((r) => ({
-            rate: r.gasMMscfd, water: r.waterLbDay, gpm: r.circGpm, perGal: r.dutyBtuPerGal,
-          }))} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="rate" tick={AXIS} label={{ value: 'MMscfd', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -3 }} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line dataKey="water" name="water out, lb/day" stroke="#38bdf8" dot={false} isAnimationActive={false} />
-            <Line dataKey="gpm" name="circulation, gpm" stroke="#f472b6" dot={false} isAnimationActive={false} />
-            <Line dataKey="perGal" name="Btu per gallon" stroke="#BFFF00" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={l.rateSweep.map((r) => ({
+          rate: r.gasMMscfd, water: r.waterLbDay, gpm: r.circGpm, perGal: r.dutyBtuPerGal,
+        }))} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="rate" tick={AXIS} label={{ value: 'MMscfd', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line dataKey="water" name="water out, lb/day" stroke={seriesColor(0)} dot={false} isAnimationActive={false} />
+          <Line dataKey="gpm" name="circulation, gpm" stroke={seriesColor(4)} dot={false} isAnimationActive={false} />
+          <Line dataKey="perGal" name="Btu per gallon" stroke={seriesColor(1)} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Note>
         Two of those three lines rise with the rate and one is flat. The duty per gallon is a property of the glycol
         loop, and the rate only decides how many gallons there are.
@@ -233,22 +230,20 @@ export const RatioMode = ({ c }) => {
   }));
   return (
     <>
-      <div className="h-56">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="ratio" tick={AXIS} label={{ value: 'gal per lb', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -3 }} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine x={RATIO_AT_LOWER_CUSTOM} stroke="#BFFF00" strokeDasharray="3 3" label={{ value: 'customary low', fill: '#BFFF00', fontSize: 10 }} />
-            <ReferenceLine x={RATIO_AT_UPPER_CUSTOM} stroke="#BFFF00" strokeDasharray="3 3" label={{ value: 'customary high', fill: '#BFFF00', fontSize: 10 }} />
-            <Line dataKey="gpm" name="circulation, gpm" stroke="#38bdf8" dot={false} isAnimationActive={false} />
-            <Line dataKey="perGal" name="Btu per gallon" stroke="#f472b6" dot={false} isAnimationActive={false} />
-            <Line dataKey="reboiler" name="reboiler, MMBtu/hr" stroke="#fbbf24" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224}>
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="ratio" tick={AXIS} label={{ value: 'gal per lb', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine x={RATIO_AT_LOWER_CUSTOM} stroke={seriesColor(1)} strokeDasharray="3 3" label={{ value: 'customary low', fill: seriesColor(1), fontSize: 10 }} />
+          <ReferenceLine x={RATIO_AT_UPPER_CUSTOM} stroke={seriesColor(1)} strokeDasharray="3 3" label={{ value: 'customary high', fill: seriesColor(1), fontSize: 10 }} />
+          <Line dataKey="gpm" name="circulation, gpm" stroke={seriesColor(0)} dot={false} isAnimationActive={false} />
+          <Line dataKey="perGal" name="Btu per gallon" stroke={seriesColor(4)} dot={false} isAnimationActive={false} />
+          <Line dataKey="reboiler" name="reboiler, MMBtu/hr" stroke={seriesColor(2)} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Note>
         Three things move on that chart and they do not move together. More glycol per pound means more gallons and more
         sensible heat in total, and each gallon carries less water and needs less heat to boil it out, so the Btu a
@@ -259,7 +254,7 @@ export const RatioMode = ({ c }) => {
         head={['gal per lb', 'gpm', 'Btu/gal', 'sensible', 'overhead', 'MMBtu/hr', 'warned']}
         rows={c.ratioSweep.map((r) => [six(r.circulationGalPerLb), six(r.circGpm), four(r.dutyBtuPerGal), four(r.sensiblePerGal), four(r.vaporPerGal), six(r.reboilerMMBtuHr), r.warned ? 'yes' : 'no'])}
       />
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         The lean strength is a SECOND choice and it answers a different question. A gallon of lean solution is not pure
         glycol: at the stated weight percent it already carries {nine(c.leanWaterLbPerGal)} lb of water before it meets
         the gas, and it comes back rich at {nine(c.richTegWtPct)} weight percent.
@@ -268,10 +263,10 @@ export const RatioMode = ({ c }) => {
         head={['lean, wt %', 'water in a lean gallon, lb', 'rich returns at, wt %', 'warned']}
         rows={c.leanSweep.map((r) => [six(r.leanTegWtPct), nine(r.leanWaterLbPerGal), nine(r.richTegWtPct), r.warned ? 'yes' : 'no'])}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         What the lean strength does NOT do is set the outlet spec, and the engine says so on every answer it returns:
       </p>
-      <p className="text-xs text-slate-300 font-mono mt-1 mb-0">outletSpecBasis: {c.outletSpecBasis}</p>
+      <p className="text-xs text-pl-text font-mono mt-1 mb-0">outletSpecBasis: {c.outletSpecBasis}</p>
       {c.strengthBand.filter((r) => r.error).map((r) => (
         <Refusal key={r.leanTegWtPct} label={`a lean strength of ${nine(r.leanTegWtPct)} weight percent`} message={r.error} />
       ))}
@@ -293,7 +288,7 @@ export const DutyMode = ({ d }) => {
         <Tile label="The two summed" value={four(d.dutyBtuPerGal)} unit="Btu/gal" />
         <Tile label="Reboiler" value={six(d.reboilerMMBtuHr)} unit="MMBtu/hr" />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The duty arrives in named parts rather than as one number. The sensible half is heating {six(d.tegLbPerGal)} lb
         of glycol a gallon at {six(d.cpTegBtuLbFMeasured)} Btu per lb per degF through {six(d.riseF)} degF of rise; the
         overhead half is boiling the {nine(d.waterPerGalDerived)} lb of water each gallon carries back out at
