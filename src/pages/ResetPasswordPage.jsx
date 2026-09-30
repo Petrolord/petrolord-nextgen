@@ -243,7 +243,7 @@ const ResetPasswordPage = () => {
             </p>
             ) : (
             <p className="mt-2 text-sm text-pl-muted">
-              Create a secure password to activate your university admin account.
+              Create a secure password to activate your account.
             </p>
             )}
           </div>
