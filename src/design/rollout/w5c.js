@@ -3,4 +3,5 @@
 // exactly; its course reader pages are 1C's pattern entry.
 export default [
   '/dashboard/apps/safetystats',
+  '/dashboard/apps/hygiene',
 ];
