@@ -138,7 +138,7 @@ export const CoverageMode = ({ cov, cycle, onCycle, overrides, onOverride }) => 
       />
       {Object.keys(overrides).length > 0 && <Note>Audit records changed from the ones ORASHI holds: {Object.keys(overrides).length}.</Note>}
       <ChartFrame height={224} className="mt-3">
-        <ScatterChart margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+        <ScatterChart margin={{ top: 20, right: 20, bottom: 5, left: 10 }}>
           <CartesianGrid {...GRID_STYLE} />
           <XAxis dataKey="x" type="number" tick={AXIS} label={{ value: 'days from the as-of date to the last counting examination', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
           <YAxis dataKey="y" type="number" tick={AXIS} allowDecimals={false} width={30} />

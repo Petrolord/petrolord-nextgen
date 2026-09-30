@@ -130,7 +130,7 @@ export const RegisterMode = ({ reg, prec, timeline, pick, onPick }) => {
       </FieldGrid>
       {chart.length > 0 ? (
         <ChartFrame height={224} className="mt-3">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          <LineChart data={chart} margin={{ top: 20, right: 20, bottom: 5, left: 10 }}>
             <CartesianGrid {...GRID_STYLE} />
             <XAxis dataKey="offset" type="number" domain={['dataMin', 'dataMax']} tick={AXIS} label={{ value: OFFSET_LABEL, fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
             <YAxis dataKey="rank" reversed tick={AXIS} allowDecimals={false} tickFormatter={(v) => ranks[v] || ''} width={90} />
@@ -175,7 +175,7 @@ export const LeadMode = ({ sweep, curve, lead, onLead }) => {
       </TileGrid>
       <Note>{curve.reason}</Note>
       <ChartFrame height={192} className="mt-3">
-        <LineChart data={curve.curve} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+        <LineChart data={curve.curve} margin={{ top: 20, right: 20, bottom: 5, left: 10 }}>
           <CartesianGrid {...GRID_STYLE} />
           <XAxis dataKey="lead" type="number" domain={['dataMin', 'dataMax']} tick={AXIS} label={{ value: 'lead time in days', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
           <YAxis dataKey="rank" reversed tick={AXIS} allowDecimals={false} width={40} />
