@@ -26,6 +26,13 @@ const ResetPasswordPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [resetStatus, setResetStatus] = useState('idle'); // idle, success, error
   const [errorMessage, setErrorMessage] = useState('');
+  // True when the visitor arrived from a Supabase recovery email: there is
+  // no ?token=, and the Supabase client has already turned the link into a
+  // session. The new password then goes through supabase.auth.updateUser.
+  const [isRecovery, setIsRecovery] = useState(false);
+  // True when Supabase sent the visitor back with an error (a used or
+  // expired recovery link), so the page can offer a fresh link.
+  const [linkExpired, setLinkExpired] = useState(false);
 
   // Extract token from query parameters
   const token = searchParams.get('token');
@@ -70,6 +77,32 @@ const ResetPasswordPage = () => {
   useEffect(() => {
     const validateToken = async () => {
         if (!token) {
+            // Self-serve recovery: /forgot-password sends a Supabase recovery
+            // email that lands here with a session in place of a token.
+            // getSession waits for the client to finish reading the link.
+            try {
+                const { data } = await supabase.auth.getSession();
+                const recoveryUser = data?.session?.user;
+                if (recoveryUser) {
+                    setIsRecovery(true);
+                    setIsValidToken(true);
+                    setUserEmail(recoveryUser.email || '');
+                    setIsChecking(false);
+                    return;
+                }
+            } catch (err) {
+                console.error("Recovery session check failed:", err);
+            }
+
+            const hashParams = new URLSearchParams(window.location.hash.replace(/^#/, ''));
+            const queryParams = new URLSearchParams(window.location.search);
+            if (hashParams.get('error') || hashParams.get('error_code') || queryParams.get('error_code')) {
+                setLinkExpired(true);
+                setErrorMessage("This reset link has expired or was already used. Request a new link to continue.");
+                setIsChecking(false);
+                return;
+            }
+
             setErrorMessage("Invalid reset link. Token is missing.");
             setIsChecking(false);
             return;
@@ -114,6 +147,28 @@ const ResetPasswordPage = () => {
     setIsSubmitting(true);
     setResetStatus('idle');
     setErrorMessage('');
+
+    if (isRecovery) {
+        try {
+            const { error } = await supabase.auth.updateUser({ password: data.password });
+            if (error) throw new Error(error.message);
+
+            setResetStatus('success');
+            toast({
+                title: "Success",
+                description: "Your password has been updated."
+            });
+
+            setTimeout(() => navigate('/login'), 3000);
+        } catch (err) {
+            console.error("Recovery Password Error:", err);
+            setResetStatus('error');
+            setErrorMessage(err.message || "Failed to update password. Please request a new link.");
+        } finally {
+            setIsSubmitting(false);
+        }
+        return;
+    }
 
     try {
         console.log('Submitting password reset request...');
@@ -182,9 +237,15 @@ const ResetPasswordPage = () => {
             <h1 className={AUTH_TITLE}>
               Set Your Password
             </h1>
+            {isRecovery ? (
+            <p className="mt-2 text-sm text-pl-muted">
+              Choose a new password for your account.
+            </p>
+            ) : (
             <p className="mt-2 text-sm text-pl-muted">
               Create a secure password to activate your university admin account.
             </p>
+            )}
           </div>
 
           {/* Error View (Invalid Token or Submit Error) */}
@@ -199,6 +260,11 @@ const ResetPasswordPage = () => {
           {/* Invalid Token Only - Show Back Button */}
           {!isValidToken && !isSubmitting && (
                <div className="text-center mt-4">
+                 {linkExpired && (
+                 <Button asChild className="mr-2">
+                    <Link to="/forgot-password">Request a new link</Link>
+                 </Button>
+                 )}
                  <Button asChild variant="outline">
                     <Link to="/login">Return to Login</Link>
                  </Button>
@@ -213,7 +279,9 @@ const ResetPasswordPage = () => {
                 </div>
                 <h3 className="text-xl font-semibold text-pl-text">Password Set Successfully!</h3>
                 <p className="text-pl-muted">
-                    Your account is now active. You will be redirected to the login page shortly.
+                    {isRecovery
+                      ? 'Your new password is saved. You will be redirected to the login page shortly.'
+                      : 'Your account is now active. You will be redirected to the login page shortly.'}
                 </p>
                 <Button asChild className="w-full mt-4">
                     <Link to="/login">Go to Login Now</Link>
