@@ -11,10 +11,10 @@
 - [Devices & Sessions - Petrolord NextGen Academy](/devices): No description available
 - [Enroll - Petrolord NextGen Academy](/enroll): No description available
 - [Get Started - Petrolord NextGen Academy](/getstarted): No description available
-- [Login - Petrolord NextGen Suite](/login): Login to your Petrolord NextGen Suite account.
+- [Login - Petrolord NextGen](/login): Login to your Petrolord NextGen account.
 - [Notifications | Petrolord](/notificationcenter): No description available
 - [Report Analytics - Petrolord](/adminreportanalytics): No description available
-- [Settings - Petrolord NextGen Suite](/settings): No description available
+- [Settings - Petrolord NextGen](/settings): No description available
 - [Sponsor console - NextGen Academy](/sponsorconsole): No description available
 - [System Settings - Petrolord Admin](/adminsystemsettings): No description available
 - [User Management - Petrolord](/adminusers): No description available

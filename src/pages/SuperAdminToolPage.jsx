@@ -131,7 +131,7 @@ const SuperAdminToolPage = () => {
   return (
     <>
       <Helmet>
-        <title>Super Admin Tool - Petrolord NextGen Suite</title>
+        <title>Super Admin Tool - Petrolord NextGen</title>
         <meta name="description" content="Manage Super Admin accounts." />
       </Helmet>
       

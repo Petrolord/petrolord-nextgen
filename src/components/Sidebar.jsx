@@ -89,7 +89,7 @@ const RailContent = () => {
         <img src="/favicon.png" alt="" aria-hidden="true" className="w-8 h-8 rounded-lg object-contain shrink-0" />
         <div>
           <h1 className="text-lg font-bold text-pl-text tracking-tight">Petrolord</h1>
-          <p className="text-[10px] text-pl-accent-text font-pl-mono tracking-widest">NEXTGEN SUITE</p>
+          <p className="text-[10px] text-pl-accent-text font-pl-mono tracking-widest">NEXTGEN</p>
         </div>
       </div>
 
