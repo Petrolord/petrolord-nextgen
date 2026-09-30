@@ -214,9 +214,9 @@ const CorrosionLearningPage = () => {
       const res = await submitCapstone(APP, tier, numeric);
       setResult(res);
       if (res.passed && res.certificate_number) {
-        toast({ title: `Capstone passed. ${CERT_LABELS[res.tier] || 'Associate'} certified!`, description: res.certificate_number, className: 'bg-[#BFFF00] text-slate-900' });
+        toast({ title: `Capstone passed. ${CERT_LABELS[res.tier] || 'Associate'} certified!`, description: res.certificate_number, className: 'border-pl-success/40 bg-pl-success-bg text-pl-success-text' });
       } else if (res.passed) {
-        toast({ title: 'Passed: you were already certified', className: 'bg-[#BFFF00] text-slate-900' });
+        toast({ title: 'Passed: you were already certified', className: 'border-pl-success/40 bg-pl-success-bg text-pl-success-text' });
       } else {
         toast({
           title: 'Not passing yet',
@@ -232,7 +232,7 @@ const CorrosionLearningPage = () => {
   };
 
   if (gate.loading) {
-    return <div className="flex items-center justify-center h-64"><Loader2 className="h-8 w-8 animate-spin text-[#BFFF00]" /></div>;
+    return <div className="flex items-center justify-center h-64"><Loader2 className="h-8 w-8 animate-spin text-pl-primary-text" /></div>;
   }
   if (!gate.allowed) return <ScopeGate />;
 
@@ -242,18 +242,18 @@ const CorrosionLearningPage = () => {
       <div className="relative max-w-6xl mx-auto p-6 space-y-6">
         {watermark && (
           <div className="pointer-events-none fixed inset-0 z-0 flex items-center justify-center overflow-hidden">
-            <span className="text-white/5 text-[8rem] font-black -rotate-45 select-none">TRAINING</span>
+            <span className="text-pl-text/5 text-[8rem] font-black -rotate-45 select-none">TRAINING</span>
           </div>
         )}
 
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="relative z-10 space-y-6">
           <div>
-            <h1 className="text-3xl font-bold text-white flex items-center gap-2">
-              <ShieldAlert className="h-7 w-7 text-[#BFFF00]" /> Corrosion & Integrity
-              <span className="text-xs px-2 py-0.5 rounded-full bg-[#BFFF00]/20 text-[#BFFF00] border border-[#BFFF00]/40">Learning Mode</span>
+            <h1 className="text-3xl font-bold text-pl-text flex items-center gap-2">
+              <ShieldAlert className="h-7 w-7 text-pl-accent-text" /> Corrosion & Integrity
+              <span className="text-xs px-2 py-0.5 rounded-full bg-pl-accent/15 text-pl-accent-text border border-pl-accent/40">Learning Mode</span>
             </h1>
             {lab && (
-              <p className="mt-1 text-gray-400">
+              <p className="mt-1 text-pl-muted">
                 The shipped studio case arrives carrying {six(lab.d.pco2Bar)} bar of CO2 partial pressure, which the
                 engine turns into a fugacity of {six(lab.d.fco2Bar)} bar, and it is the fugacity that drives the rate.
                 Two resistances in series give {six(lab.d.reactionMmYr)} mm/yr of reaction against
@@ -275,9 +275,9 @@ const CorrosionLearningPage = () => {
 
           <DeepCourseBanner app={APP} tier={tier} />
 
-          <Card className="bg-[#1E293B] border-gray-700">
+          <Card>
             <CardHeader>
-              <CardTitle className="text-white flex items-center gap-2"><BookOpen className="h-5 w-5 text-[#BFFF00]" /> Lessons</CardTitle>
+              <CardTitle className="text-pl-text flex items-center gap-2"><BookOpen className="h-5 w-5 text-pl-accent-text" /> Lessons</CardTitle>
               <CardDescription>
                 Six teaching streams, the published golden and the live studio&apos;s own shipped defaults, on the
                 vendored Corrosion & Integrity engine. Every number on this page and inside every panel is a return
@@ -289,10 +289,10 @@ const CorrosionLearningPage = () => {
             </CardHeader>
             <CardContent className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {LESSONS.map((l, i) => (
-                <div key={l.title} className="rounded-md border border-gray-700 bg-[#0F172A] p-3">
-                  <p className="text-[10px] uppercase tracking-wide text-gray-500 mb-0">{l.tier}, module {(i % 6) + 1}</p>
-                  <p className="text-white text-sm font-medium mb-0">{l.title}</p>
-                  <p className="text-xs text-gray-400 mt-1 mb-0">{l.body}</p>
+                <div key={l.title} className="rounded-md border border-pl-border bg-pl-sunken p-3">
+                  <p className="text-[10px] uppercase tracking-wide text-pl-muted mb-0">{l.tier}, module {(i % 6) + 1}</p>
+                  <p className="text-pl-text text-sm font-medium mb-0">{l.title}</p>
+                  <p className="text-xs text-pl-muted mt-1 mb-0">{l.body}</p>
                 </div>
               ))}
             </CardContent>
@@ -304,7 +304,8 @@ const CorrosionLearningPage = () => {
                 key={t}
                 type="button"
                 onClick={() => setTier(t)}
-                className={`px-3 py-1.5 rounded-md border text-sm capitalize ${tier === t ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold' : 'bg-gray-800 text-gray-300 border-gray-600'}`}
+                aria-pressed={tier === t}
+                className={`px-3 py-1.5 rounded-md border text-sm capitalize ${tier === t ? 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold' : 'bg-pl-surface text-pl-text border-pl-border-strong hover:bg-pl-sunken'}`}
               >
                 {t} tier
               </button>
@@ -318,9 +319,9 @@ const CorrosionLearningPage = () => {
           {tier === 'advanced' && <InhibitorIntegrityExplorer initialMode="allowance" />}
           {tier === 'advanced' && <ChemistryExplorer initialMode="absent" />}
 
-          <Card className="bg-[#1E293B] border-gray-700">
+          <Card>
             <CardHeader>
-              <CardTitle className="text-white">What this engine cannot stand behind, and what it will not pretend to answer</CardTitle>
+              <CardTitle className="text-pl-text">What this engine cannot stand behind, and what it will not pretend to answer</CardTitle>
               <CardDescription>
                 A corrosion rate is a claim about a mechanism. This engine declares in its own exported lists that
                 eleven of the numbers its claim rests on have no source anywhere in the repository, and that eight
@@ -332,12 +333,12 @@ const CorrosionLearningPage = () => {
                   <>
                     <ul className="mt-2 space-y-1">
                       {lab.held.held.map((h) => (
-                        <li key={h} className="text-xs text-gray-400">HELD. {h}</li>
+                        <li key={h} className="text-xs text-pl-muted">HELD. {h}</li>
                       ))}
                     </ul>
                     <ul className="mt-2 space-y-1">
                       {lab.held.notProvided.map((h) => (
-                        <li key={h} className="text-xs text-gray-400">NOT PROVIDED. {h}</li>
+                        <li key={h} className="text-xs text-pl-muted">NOT PROVIDED. {h}</li>
                       ))}
                     </ul>
                   </>
@@ -353,9 +354,9 @@ const CorrosionLearningPage = () => {
             </CardHeader>
           </Card>
 
-          <Card className="bg-[#1E293B] border-gray-700">
+          <Card>
             <CardHeader>
-              <CardTitle className="text-white">{capstone?.title || 'Capstone'}</CardTitle>
+              <CardTitle className="text-pl-text">{capstone?.title || 'Capstone'}</CardTitle>
               <CardDescription>{capstone?.prompt}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -363,12 +364,12 @@ const CorrosionLearningPage = () => {
                 || courseProgress?.capstone?.unlocked === true
                 || courseProgress?.capstone?.passed === true
                 || actualRole === 'super_admin') ? (
-                  <div className="rounded-md border border-gray-700 bg-[#0F172A] p-4 text-sm text-gray-300 flex items-start gap-2">
-                    <Lock className="h-4 w-4 text-[#BFFF00] mt-0.5 shrink-0" />
+                  <div className="rounded-md border border-pl-border bg-pl-sunken p-4 text-sm text-pl-text flex items-start gap-2">
+                    <Lock className="h-4 w-4 text-pl-accent-text mt-0.5 shrink-0" />
                     <p className="mb-0">
                       The capstone unlocks after the course: finish the lessons, pass each module quiz
                       and the final exam, then submit here.{' '}
-                      <Link to={`/dashboard/apps/${APP}/course/${tier}`} className="text-[#BFFF00] hover:underline">
+                      <Link to={`/dashboard/apps/${APP}/course/${tier}`} className="text-pl-primary-text hover:underline">
                         Open the course
                       </Link>
                     </p>
@@ -378,14 +379,14 @@ const CorrosionLearningPage = () => {
                     <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                       {(capstone?.fields || []).map((f) => (
                         <div key={f.key}>
-                          <Label className="text-gray-400 text-xs mb-1 block">{f.label} ({f.unit})</Label>
+                          <Label className="text-pl-muted text-xs mb-1 block">{f.label} ({f.unit})</Label>
                           <Input
                             type="text"
                             inputMode="decimal"
                             autoComplete="off"
                             value={answers[f.key] ?? ''}
                             onChange={(e) => setAnswers((a) => ({ ...a, [f.key]: e.target.value }))}
-                            className="bg-gray-700 text-white border-gray-600 h-8 text-sm"
+                            className="h-8 text-sm"
                           />
                         </div>
                       ))}
@@ -394,7 +395,7 @@ const CorrosionLearningPage = () => {
                     <Button
                       onClick={submit}
                       disabled={submitting || !capstone}
-                      className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold"
+                      className="font-semibold"
                     >
                       {submitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <GraduationCap className="mr-2 h-4 w-4" />}
                       Submit for grading
@@ -403,34 +404,34 @@ const CorrosionLearningPage = () => {
                 )}
 
               {result && (
-                <div className={`rounded-md border p-4 ${result.passed ? 'border-emerald-700 bg-emerald-900/20' : 'border-red-800 bg-red-900/20'}`}>
+                <div className={`rounded-md border p-4 ${result.passed ? 'border-pl-success/30 bg-pl-success-bg' : 'border-pl-danger/30 bg-pl-danger-bg'}`}>
                   {result.passed ? (
                     <>
-                      <p className="text-emerald-300 font-medium flex items-center gap-2">
+                      <p className="text-pl-success-text font-medium flex items-center gap-2">
                         <CheckCircle2 className="h-5 w-5" /> Passed ({result.score}/{result.max_score})
                       </p>
                       {result.certificate_number ? (
-                        <div className="mt-2 text-sm text-gray-300 space-y-1">
+                        <div className="mt-2 text-sm text-pl-text space-y-1">
                           <p className="flex items-center gap-2">
-                            <Award className="h-4 w-4 text-[#BFFF00]" />
-                            {CERT_LABELS[result.tier] || 'Associate'} certificate <span className="font-mono text-[#BFFF00]">{result.certificate_number}</span> issued.
+                            <Award className="h-4 w-4 text-pl-accent-text" />
+                            {CERT_LABELS[result.tier] || 'Associate'} certificate <span className="font-mono text-pl-accent-text">{result.certificate_number}</span> issued.
                             {result.tier === 'expert' && ' Your 50% Suite discount code is on your certificates page.'}
                           </p>
                           <div className="flex gap-3">
-                            <Link to="/dashboard/certificates" className="text-[#BFFF00] hover:underline inline-flex items-center gap-1">
+                            <Link to="/dashboard/certificates" className="text-pl-primary-text hover:underline inline-flex items-center gap-1">
                               My certificates <ArrowRight className="h-3 w-3" />
                             </Link>
-                            <a href={verificationUrl(result.verify_code)} target="_blank" rel="noreferrer" className="text-gray-400 hover:underline">
+                            <a href={verificationUrl(result.verify_code)} target="_blank" rel="noreferrer" className="text-pl-muted hover:underline">
                               Public verification
                             </a>
                           </div>
                         </div>
                       ) : (
-                        <p className="mt-1 text-sm text-gray-400">You were already certified for this tier.</p>
+                        <p className="mt-1 text-sm text-pl-muted">You were already certified for this tier.</p>
                       )}
                     </>
                   ) : (
-                    <p className="text-red-300 font-medium flex items-center gap-2">
+                    <p className="text-pl-danger-text font-medium flex items-center gap-2">
                       <XCircle className="h-5 w-5" /> {result.score}/{result.max_score} within tolerance. Work the panels at the capstone settings and try again.
                     </p>
                   )}

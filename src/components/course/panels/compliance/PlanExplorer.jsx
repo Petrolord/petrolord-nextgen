@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
 import {
   ABAM_DECISIONS, ABAM_REMOVALS, asOfAt, initialPoints, planAt, requestDecision, requestRemoval, planClosureOf,
@@ -12,6 +12,8 @@ import {
 import {
   PanelShell, SelectField, Tile, TileGrid, FieldGrid,
 } from '@/components/course/panels/petrophysics/panelKit';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
 
 // Plan explorer, the Professional tier throughout.
 //
@@ -51,15 +53,15 @@ export const PlanMode = ({ plan, onRequest, onRemove, onReset, last, closure, nc
       </TileGrid>
       <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3 mt-3">
         {plan.cards.map((c) => (
-          <div key={c.id} className={`rounded-md border p-2 ${c.stopsWork ? 'border-amber-700/60' : 'border-slate-700'} bg-[#0F172A]`}>
-            <p className="text-xs text-slate-500 mb-0">{c.item}, {c.type}{c.stopsWork ? ', stops work' : ''}</p>
-            <p className="text-sm text-white mb-0">{c.title}</p>
+          <div key={c.id} className={`rounded-md border p-2 ${c.stopsWork ? 'border-pl-warning/40' : 'border-pl-border'} bg-pl-sunken`}>
+            <p className="text-xs text-pl-muted mb-0">{c.item}, {c.type}{c.stopsWork ? ', stops work' : ''}</p>
+            <p className="text-sm text-pl-text mb-0">{c.title}</p>
             <p className="text-xs mb-0">
               <Status word={c.status} />
-              {c.resolved ? <span className="text-slate-400">, resolved</span> : null}
-              {c.overdue ? <span className="text-red-300">, overdue</span> : null}
+              {c.resolved ? <span className="text-pl-muted">, resolved</span> : null}
+              {c.overdue ? <span className="text-pl-danger-text">, overdue</span> : null}
             </p>
-            <p className="text-[11px] text-slate-500 mb-0">planned {c.planned}</p>
+            <p className="text-[11px] text-pl-muted mb-0">planned {c.planned}</p>
           </div>
         ))}
       </div>
@@ -121,18 +123,16 @@ export const AgeingMode = ({ ncr, edges }) => {
         <Tile label="Oldest open, days" value={txt(ncr.summary.oldestOpen)} />
         <Tile label="Mean open age, days" value={txt(ncr.summary.meanOpen)} />
       </TileGrid>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={ncr.ageing} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
-            <XAxis dataKey="band" tick={AXIS} />
-            <YAxis tick={AXIS} allowDecimals={false} />
-            <Tooltip contentStyle={TOOLTIP} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            {severities.map((s, i) => <Bar key={s} dataKey={s} stackId="a" fill={SERIES[i % SERIES.length]} isAnimationActive={false} />)}
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <BarChart data={ncr.ageing} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="band" tick={AXIS} />
+          <YAxis tick={AXIS} allowDecimals={false} />
+          <Tooltip contentStyle={TOOLTIP} />
+          <Legend {...LEGEND_PROPS} />
+          {severities.map((s, i) => <Bar key={s} dataKey={s} stackId="a" fill={SERIES[i % SERIES.length]} isAnimationActive={false} />)}
+        </BarChart>
+      </ChartFrame>
       <Note>Open NCRs only, counted by ncrAgeing at the as-of date. A closed or voided NCR stops ageing at its closed date.</Note>
       <Tbl
         head={['code', 'severity', 'status', 'raised', 'closed', 'age, days', 'band', 'open', 'overdue']}

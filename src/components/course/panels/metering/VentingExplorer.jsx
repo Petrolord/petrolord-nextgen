@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
 import {
   OGBOGENE, tank, venting, vacuumOnset, shell,
@@ -9,6 +9,9 @@ import {
   PanelShell, NumField, SelectField, Tile, TileGrid, FieldGrid, Note,
 } from '@/components/course/panels/petrophysics/panelKit';
 import { Relation, Refusal, Provenance } from './MeterRunExplorer';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 
 // THE TANK, the Expert tier. A tank shell equation is simple. VENTING is what
 // actually destroys tanks: a tank is a thin-walled vessel designed for inches
@@ -44,13 +47,13 @@ export const MODES = [
   ['shell', 'The shell, and which of three things governs each course'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
 
 const Tbl = ({ head, rows }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>{head.map((h, i) => <th key={h} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>)}</tr>
       </thead>
       <tbody>
@@ -83,11 +86,11 @@ export const VentingMode = ({ v }) => {
         <Tile label="Total inbreathing" value={four(v.inbreathingScfh)} unit="scfh" />
         <Tile label="Total outbreathing" value={four(v.outbreathingScfh)} unit="scfh" />
       </TileGrid>
-      <div className="mt-3 rounded-md border border-slate-700 bg-[#0F172A] p-3">
-        <p className="text-slate-500 text-xs mb-1">The governing case, as the engine returns it</p>
-        <p className="text-white text-base mb-0">{raw(v.governing)}</p>
+      <div className="mt-3 rounded-md border border-pl-border bg-pl-sunken p-3">
+        <p className="text-pl-muted text-xs mb-1">The governing case, as the engine returns it</p>
+        <p className="text-pl-text text-base mb-0">{raw(v.governing)}</p>
       </div>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         That word is the engine&apos;s. It comes from one predicate the engine forms and computes once, so the word and
         the warning below it can never disagree. Raise the draw rate until the inbreathing total passes the
         outbreathing total and watch it turn over.
@@ -104,7 +107,7 @@ export const VentingMode = ({ v }) => {
       </TileGrid>
       <Relation r={v.insulationRelation} />
       <Relation r={v.volatilityRelation} />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         A high volatility product doubles the movement outbreathing, because the incoming liquid also evaporates.
         Insulation cuts the thermal rate by the credit the engine states, and the engine says whose figure that is:
       </p>
@@ -126,7 +129,7 @@ export const OnsetMode = ({ o }) => {
         <Tile label="Halvings" value={raw(o.edge.halvings)} />
         <Tile label="The edge discriminates" value={String(o.edge.discriminates)} />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The rate is found by bisecting the governing WORD the engine returns. At {four(o.edge.from)} bbl/hr the engine
         says {raw(o.edge.readingFrom)}; at {four(o.edge.to)} bbl/hr it says {raw(o.edge.readingTo)}. An edge with the
         same answer either side of it is not an edge, so that disagreement is computed rather than assumed.
@@ -135,20 +138,18 @@ export const OnsetMode = ({ o }) => {
         head={['draw rate, bbl/hr', 'inbreathing, scfh', 'outbreathing, scfh', 'governing']}
         rows={o.rows.map((r) => [four(r.drawBblPerHr), four(r.inbreathingScfh), four(r.outbreathingScfh), r.governing])}
       />
-      <div className="h-52 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="draw" tick={AXIS} label={{ value: 'draw rate, bbl/hr', fill: '#94a3b8', fontSize: 10, position: 'insideBottom', offset: -2 }} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => four(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine x={o.edge.at} stroke="#f472b6" strokeDasharray="3 3" label={{ value: 'vacuum takes the case', fill: '#f472b6', fontSize: 9 }} />
-            <Line dataKey="inbreathing" name="total inbreathing, scfh" stroke="#38bdf8" dot={false} isAnimationActive={false} />
-            <Line dataKey="outbreathing" name="total outbreathing, scfh" stroke="#BFFF00" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={208} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="draw" tick={AXIS} label={{ value: 'draw rate, bbl/hr', fill: SVG_CHART.note, fontSize: 10, position: 'insideBottom', offset: -2 }} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => four(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine x={o.edge.at} stroke={seriesColor(3)} strokeDasharray="3 3" label={{ value: 'vacuum takes the case', fill: seriesColor(3), fontSize: 9 }} />
+          <Line dataKey="inbreathing" name="total inbreathing, scfh" stroke={seriesColor(0)} dot={false} isAnimationActive={false} />
+          <Line dataKey="outbreathing" name="total outbreathing, scfh" stroke={seriesColor(1)} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Refusal label="The engine's warning once vacuum governs" message={o.vacuumWarning} />
       <Refusal label="The engine's warning above the stated proportional capacity" message={o.proportionalWarning} />
     </>
@@ -170,7 +171,7 @@ export const CapacityMode = ({ t }) => {
         <Tile label="Diameter" value={six(t.diameterFt)} unit="ft" />
         <Tile label="Shell height" value={six(t.heightFt)} unit="ft" />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The conversion between cubic feet and barrels is exact by definition and the engine returns it, so it can be
         checked rather than assumed. The three tank questions in this module share this one geometry, which is why
         they live together.
@@ -196,13 +197,13 @@ export const ShellMode = ({ s }) => {
         head={['course', 'bottom, ft', 'top, ft', 'head, ft', 't design, in', 't test, in', 'required, in', 'governed by']}
         rows={s.courses.map((c) => [raw(c.course), six(c.bottomFt), six(c.topFt), six(c.headFt), six(c.tDesignIn), six(c.tTestIn), six(c.requiredIn), c.governing])}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The bottom course is always the thickest, and the engine returns that as a property of the method rather than
         as a result: the head falls as the courses go up, both thickness relations are linear in it, and the minimum
         plate is a floor, so the required thickness cannot increase upward. The engine&apos;s own flag for that reads
         {' '}{String(s.governingCourseIsAlwaysTheBottom)}.
       </p>
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         WHAT GOVERNS THE BOTTOM COURSE ACROSS THE PRODUCT GRAVITIES. A light product makes the water test govern, which
         is the case people forget when they design for the product alone. The gravity the governing word turns over at
         is {six(s.waterTestEdge.at)}, found by bisecting that word.
