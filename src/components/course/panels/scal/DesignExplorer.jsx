@@ -4,7 +4,6 @@ import {
   swAvgCrestColumn, EKENE_SCAL, TEACHING_ROCK, TEACHING_SWIRR,
 } from './scalLab';
 import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
-import { useThemeClass } from '@/design/themeClass';
 import SvgChartFrame from '@/components/charts/SvgChartFrame';
 import { seriesColor, SVG_CHART, AXIS_LINE_PROPS } from '@/utils/chartSvg';
 
@@ -24,23 +23,21 @@ const PAD = { left: 52, top: 16, right: 16, bottom: 40 };
 const sci = (v, d = 6) => (Number.isFinite(v) ? Number(v).toPrecision(d) : '-');
 
 const RangeField = ({ label, value, min, max, step, onChange }) => {
-  const tc = useThemeClass();
   return (
   <div>
-    <p className={tc('text-gray-400 text-xs mb-1', 'text-pl-muted text-xs mb-1')}>
-      {label}: <span className={tc('text-white', 'text-pl-text')}>{value}</span>
+    <p className="text-pl-muted text-xs mb-1">
+      {label}: <span className="text-pl-text">{value}</span>
     </p>
     <input
       type="range" min={min} max={max} step={step} value={value}
       onChange={(e) => onChange(Number(e.target.value))}
-      className={tc('w-full accent-[#BFFF00]', 'w-full accent-pl-primary')}
+      className="w-full accent-pl-primary"
     />
   </div>
   );
 };
 
 const DesignExplorer = () => {
-  const tc = useThemeClass();
   const [mode, setMode] = useState('fit');
   const [qt, setQt] = useState(3000);
   const [dip, setDip] = useState(0);

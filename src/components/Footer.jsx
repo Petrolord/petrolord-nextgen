@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Linkedin, Twitter, Facebook, Instagram, MapPin, Phone } from 'lucide-react';
+import { Mail, MapPin, Phone } from 'lucide-react';
 import { BRAND_MARK } from '@/components/public/PublicPage';
 
 // The footer of the legal pages (its only user; the regal homepage has its
@@ -25,13 +25,6 @@ const Footer = () => {
             <p className="text-pl-muted text-sm leading-relaxed max-w-sm">
               The academy edition of the Petrolord Suite. Learn hands-on inside the real engineering apps and earn verifiable Associate, Professional and Expert certifications.
             </p>
-
-            <div className="flex items-center gap-4 pt-2">
-              <a href="#" className="text-pl-muted hover:text-pl-accent-text transition-colors"><Linkedin className="w-5 h-5" /></a>
-              <a href="#" className="text-pl-muted hover:text-pl-accent-text transition-colors"><Twitter className="w-5 h-5" /></a>
-              <a href="#" className="text-pl-muted hover:text-pl-accent-text transition-colors"><Facebook className="w-5 h-5" /></a>
-              <a href="#" className="text-pl-muted hover:text-pl-accent-text transition-colors"><Instagram className="w-5 h-5" /></a>
-            </div>
           </div>
 
           {/* Column 2: Academy */}

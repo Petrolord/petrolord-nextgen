@@ -59,8 +59,8 @@ export const Tbl = ({ head, rows }) => (
     <table className="text-xs text-pl-text w-full">
       <thead className="text-pl-muted">
         <tr>
-          {head.map((h) => (
-            <th key={h} className="text-left pr-3 last:pr-0 whitespace-nowrap">{h}</th>
+          {head.map((h, i) => (
+            <th key={`${i}-${h}`} className="text-left pr-3 last:pr-0 whitespace-nowrap">{h}</th>
           ))}
         </tr>
       </thead>

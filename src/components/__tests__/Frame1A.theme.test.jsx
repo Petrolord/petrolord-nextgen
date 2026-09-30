@@ -4,23 +4,18 @@
 // pieces.
 //
 // - The sidebar rail and its course navigation are the family's dark ink
-//   rail in both themes, on every signed-in route (themed or not yet): a
+//   rail in both themes, on every signed-in route: a
 //   FixedTheme dark scope with no toggle, pl-* roles only, and no lime.
 // - The global search modal and the device guard are mounted at the app
 //   root, outside every scope. Like the toaster they follow the theme of
-//   the screen on show; with no themed screen they render the markup they
-//   rendered before 1A, byte for byte (fixture captured from main
-//   af5c91747 with UPDATE_1A_LEGACY=1 before either file changed).
-import fs from 'node:fs';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+//   the screen on show; with no themed screen mounted they open light, on
+//   roles (wave 7: there is no legacy markup left).
 import { describe, it, expect, vi, beforeAll, beforeEach, afterEach } from 'vitest';
 import { screen, cleanup, fireEvent, act } from '@testing-library/react';
 import { installDomShims } from '@/design/testing/domShims';
 import {
   expectNoLegacyChrome, getScopeRoot, legacyChromeClasses, hasLegacyChrome,
 } from '@/design/testing/themeAssertions';
-import { normaliseMarkup } from '@/design/__tests__/uiScenes';
 import { renderApp, USER_ID } from '@/pages/__tests__/frameHarness';
 
 const flags = vi.hoisted(() => ({ limitReached: false }));
@@ -33,23 +28,12 @@ vi.mock('@/services/academyService', async () => {
   return { ...off, registerDevice: (...a) => (flags.limitReached ? on : off).registerDevice(...a) };
 });
 
-const FIXTURE = path.join(path.dirname(fileURLToPath(import.meta.url)), 'fixtures/frame1aLegacyMarkup.json');
-const UPDATE = globalThis.process?.env?.UPDATE_1A_LEGACY === '1';
-
 const rail = () => screen.getByTestId('sidebar-rail');
 const LIME = /BFFF00|191,\s*255,\s*0/i;
 
 const openSearch = () => act(() => {
   fireEvent.keyDown(window, { key: 'k', ctrlKey: true });
 });
-
-// The dialog content only: overlay and focus guards carry no theme.
-const dialogMarkup = () => {
-  const el = document.querySelector('[role="dialog"], [role="alertdialog"]');
-  if (!el) throw new Error('no dialog open');
-  // the device dialog shows the local time of each device's last activity
-  return normaliseMarkup(el.outerHTML).replace(/last active [^<]*/g, 'last active <time>');
-};
 
 beforeAll(installDomShims);
 beforeEach(() => {
@@ -91,11 +75,12 @@ describe('the ink rail (Sidebar and CourseModuleNav)', () => {
     expect(rail().getAttribute('data-pl-theme')).toBe('dark');
   });
 
-  it('is the same ink rail on a route the rollout has not reached', async () => {
+  it('is the same ink rail on any signed-in route, beside the one page scope', async () => {
     renderApp('/legacy-probe');
     await screen.findByText('Legacy probe');
     await checkRail();
-    expect(document.querySelector('[data-pl-root]')).toBeNull();
+    expect(getScopeRoot().getAttribute('data-pl-theme')).toBe('light');
+    expect(getScopeRoot().contains(rail())).toBe(false);
   });
 
   it('marks the active item with the gold edge and the course module open', async () => {
@@ -160,60 +145,52 @@ describe('the search modal and the device guard follow the page', () => {
     bad.remove();
   });
 
-  describe('with no themed screen mounted, the legacy markup is unchanged', () => {
-    const want = UPDATE ? {} : JSON.parse(fs.readFileSync(FIXTURE, 'utf8'));
-    const captured = {};
-    const check = (name, html, ignore = (h) => h) => {
-      if (UPDATE) captured[name] = html;
-      else expect(ignore(html)).toBe(ignore(want[name]));
-    };
-    // Radix settles two attributes after the first paint, so whether they
-    // are there when the markup is read is a race: the inline pointer-events
-    // style and the roving tabindex (of a radio group and its radios). The
-    // device limit dialog compares with those two ignored; every other
-    // attribute, and every other state, stays pinned.
-    const ignoreRadixAsync = (html) => html
-      .replace(/ style="pointer-events: [a-z]+;"/g, '')
-      .replace(/(<[a-z]+\b[^>]*\brole="(?:radio|radiogroup)"[^>]*?) tabindex="-?\d+"/g, '$1');
+  describe('with no themed screen mounted, the root dialogs open light on roles', () => {
+    const noPageScope = () => expect(document.querySelector('[data-pl-root]')).toBeNull();
 
-    it('search modal, empty', async () => {
+    it('search modal: empty, quick results and no match', async () => {
       renderApp('/outside');
       await screen.findByText('No layout here');
+      noPageScope();
       openSearch();
-      await screen.findByPlaceholderText(/Search anything/);
-      expect(document.querySelector('[data-pl-theme]')).toBeNull();
-      check('searchEmpty', dialogMarkup());
-    });
-
-    it('search modal, quick results', async () => {
-      renderApp('/outside');
-      openSearch();
-      fireEvent.change(await screen.findByPlaceholderText(/Search anything/), { target: { value: 'a' } });
-      check('searchResults', dialogMarkup());
-    });
-
-    it('search modal, no match', async () => {
-      renderApp('/outside');
-      openSearch();
-      fireEvent.change(await screen.findByPlaceholderText(/Search anything/), { target: { value: 'zzzz-no-match' } });
+      const input = await screen.findByPlaceholderText(/Search anything/);
+      expect(input.closest('[role="dialog"]').getAttribute('data-pl-theme')).toBe('light');
+      expectNoLegacyChrome();
+      fireEvent.change(input, { target: { value: 'a' } });
+      expectNoLegacyChrome();
+      fireEvent.change(input, { target: { value: 'zzzz-no-match' } });
       await screen.findByText('No quick matches found.');
-      check('searchNoMatch', dialogMarkup());
+      expectNoLegacyChrome();
+      expect(LIME.test(document.body.innerHTML)).toBe(false);
+    });
+
+    it('search modal stays light for a user who chose dark', async () => {
+      window.localStorage.setItem(`petrolord.theme.v1:${USER_ID}`, 'dark');
+      renderApp('/outside');
+      openSearch();
+      const input = await screen.findByPlaceholderText(/Search anything/);
+      expect(input.closest('[role="dialog"]').getAttribute('data-pl-theme')).toBe('light');
     });
 
     it('device limit dialog', async () => {
       flags.limitReached = true;
       renderApp('/outside');
       await screen.findByText('Device limit reached');
-      expect(document.querySelector('[data-pl-theme]')).toBeNull();
-      check('deviceLimit', dialogMarkup(), ignoreRadixAsync);
+      noPageScope();
+      expect(screen.getByRole('alertdialog').getAttribute('data-pl-theme')).toBe('light');
+      expectNoLegacyChrome();
+      expect(LIME.test(document.body.innerHTML)).toBe(false);
     });
 
-    it('the fixture covers every state', () => {
-      if (UPDATE) {
-        fs.writeFileSync(FIXTURE, `${JSON.stringify(captured, null, 1)}\n`);
-        return;
-      }
-      expect(Object.keys(want).sort()).toEqual(['deviceLimit', 'searchEmpty', 'searchNoMatch', 'searchResults']);
+    it('negative control: a legacy class planted in the light dialog is found', async () => {
+      renderApp('/outside');
+      openSearch();
+      const dlg = (await screen.findByPlaceholderText(/Search anything/)).closest('[role="dialog"]');
+      const bad = document.createElement('span');
+      bad.className = 'bg-[#1E293B]';
+      dlg.appendChild(bad);
+      expect(legacyChromeClasses()).toContain('bg-[#1E293B]');
+      bad.remove();
     });
   });
 });

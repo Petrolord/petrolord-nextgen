@@ -1,11 +1,9 @@
 // TEST-ONLY. Batch 3C (docs/scope/DesignSystem-Rollout.md section 3): every
 // reservoir course panel (DCA, material balance, SCAL, waterflood,
 // simulation, fluid, well test) in its opening state and in the states a
-// learner reaches with one or two actions, shared by the legacy test (outside
-// a scope, the unmigrated course reader and handbook) and the theme test
-// (inside a scope, the learning pages). The actions use roles, visible text
-// and values only, so the same scenes run against the pre-migration panels
-// when the legacy fixture is captured.
+// learner reaches with one or two actions, for the theme test
+// (rc3cPanelsTheme.test.jsx). The actions use roles, visible text and values
+// only.
 import React from 'react';
 import FitExplorer from '@/components/course/panels/dca/FitExplorer';
 import TypeCurveExplorer from '@/components/course/panels/dca/TypeCurveExplorer';
@@ -118,26 +116,3 @@ export const RC3C_SCENES = [
     act: (t) => combo(t, 1, 'homogeneous-sealing-fault') },
   { name: 'RegressionExplorer production', element: <RegressionExplorer />, act: (t) => combo(t, 0, 'production') },
 ];
-
-// Wrappers that held nothing but a pre-migration chart; the chart kit
-// replaces the wrapper and the chart together.
-const CHART_WRAPPERS = new Set(['overflow-x-auto', 'h-64 mt-3']);
-
-/**
- * The class attributes of a rendered panel in document order, chart regions
- * left out: the white chart kit (data-canvas), a Recharts container, an <svg>
- * and the wrapper that held only a pre-migration chart. Everything else a
- * panel renders outside a scope must match the pre-migration panel exactly.
- */
-export function chromeClasses(root) {
-  const copy = root.cloneNode(true);
-  const drop = [...copy.querySelectorAll('[data-canvas], .recharts-responsive-container, svg')];
-  for (const el of drop) {
-    if (!copy.contains(el)) continue;
-    const wrap = el.parentElement;
-    const onlyChartWrap = wrap && wrap !== copy && wrap.children.length === 1
-      && CHART_WRAPPERS.has(wrap.getAttribute('class'));
-    (onlyChartWrap ? wrap : el).remove();
-  }
-  return [...copy.querySelectorAll('[class]')].map((el) => el.getAttribute('class'));
-}

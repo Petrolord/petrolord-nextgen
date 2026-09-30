@@ -1,25 +1,26 @@
-// Which routes render inside the design-system scope, and the cold-load
-// loader for them (NextGen port of the Suite's src/design/coldLoad.jsx).
+// Which theme the cold-load loader paints on a path (NextGen port of the
+// Suite's src/design/coldLoad.jsx), as of the wave 7 end state.
 //
-// Signed-in routes: Layout opens the one scope (SignedInScope) on the routes
-// listed in src/design/rollout/ while the rollout runs. Before the auth
+// Signed-in routes: Layout opens the one scope (SignedInScope) on every
+// route it renders; there is no gate and no registry. Before the auth
 // session restores, App.jsx shows a loader from outside any scope; on a
-// themed route that loader paints in the theme this device last resolved
+// signed-in path that loader paints in the theme this device last resolved
 // (petrolord.theme.v1.last, light when unknown), so a light user does not
 // see a dark spinner before a light page and a dark user sees no light
-// flash. Every other route keeps its legacy loader byte for byte.
+// flash.
 //
 // Public and auth pages (login, register, verify, the password pages, legal)
-// always render light with no toggle since batch 6B (as the Suite's 7C): they
+// always render light with no toggle (batch 6B, as the Suite's 7C): they
 // open their own scope through src/components/public/PublicPage.jsx, and
-// their loader paints light whatever this device last resolved. The regal
-// homepage keeps its own look and is never listed. The 404 page renders on
-// the same frame, but an unknown path cannot be listed, so its loader stays
-// the legacy one.
+// their loader paints light whatever this device last resolved. So does the
+// loader on any other path (the 404 page is on the same light frame). The
+// regal homepage keeps its own look and is not lazy, so it shows no loader.
 import React from 'react';
 import { readLastTheme } from './ThemeProvider.jsx';
 import { DEFAULT_THEME } from './tokens.js';
-import { THEMED_ROUTES } from './rollout/index.js';
+
+// Every route App.jsx renders inside Layout.
+export const SIGNED_IN_ROUTES = Object.freeze(['/dashboard/*', '/search']);
 
 export const PUBLIC_LIGHT_ROUTES = Object.freeze([
   '/login',
@@ -36,10 +37,9 @@ export const PUBLIC_LIGHT_ROUTES = Object.freeze([
 const trimSlash = (p) => (p.length > 1 && p.endsWith('/') ? p.slice(0, -1) : p);
 
 /**
- * True when `pathname` matches a registry entry: '/x' that path exactly,
+ * True when `pathname` matches a route entry: '/x' that path exactly,
  * '/x/*' that path and everything under it, and a ':name' segment matches
- * any one segment ('/dashboard/apps/:slug/course/*' covers every course
- * reader page).
+ * any one segment ('/verify/:code').
  */
 export function matchesRoute(pathname, entry) {
   const p = trimSlash(pathname).split('/');
@@ -55,17 +55,24 @@ export function isPublicLightPath(pathname, routes = PUBLIC_LIGHT_ROUTES) {
   return routes.some((r) => matchesRoute(pathname, r));
 }
 
-/** True when the signed-in `pathname` renders inside the one scope. */
-export function isThemedPath(pathname, routes = THEMED_ROUTES) {
+/** True when `pathname` is a signed-in route (Layout opens the one scope there). */
+export function isSignedInPath(pathname, routes = SIGNED_IN_ROUTES) {
   if (typeof pathname !== 'string') return false;
-  return routes.some((r) => matchesRoute(pathname, r)) || isPublicLightPath(pathname);
+  return routes.some((r) => matchesRoute(pathname, r));
 }
 
-/** The theme a cold-load loader should paint on `pathname`, or null for legacy. */
+/** True when `pathname` renders inside a design-system scope (signed-in or public). */
+export function isThemedPath(pathname) {
+  return isSignedInPath(pathname) || isPublicLightPath(pathname);
+}
+
+/**
+ * The theme a cold-load loader paints on `pathname`: the device's last theme
+ * on a signed-in path, light everywhere else.
+ */
 export function coldLoadTheme(pathname) {
-  if (!isThemedPath(pathname)) return null;
-  if (isPublicLightPath(pathname)) return 'light';
-  return readLastTheme() || DEFAULT_THEME;
+  if (isSignedInPath(pathname)) return readLastTheme() || DEFAULT_THEME;
+  return 'light';
 }
 
 /** Full-screen themed spinner (its own scope; it is not a ThemedApp). */

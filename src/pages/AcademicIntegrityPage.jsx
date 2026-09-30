@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import LegalPageLayout from '@/components/legal/LegalPageLayout';
 import { TEXT_LINK } from '@/components/public/PublicPage';
 import PolicySection from '@/components/legal/PolicySection';
-import { AlertTriangle, BookOpen, CheckCircle, ShieldAlert } from 'lucide-react';
+import { AlertTriangle, CheckCircle, Mail, ShieldAlert } from 'lucide-react';
 
 const tocItems = [
   { id: 'statement', label: '1. Integrity Statement' },
@@ -145,21 +145,14 @@ const AcademicIntegrityPage = () => {
 
       <PolicySection id="resources" title="6. Resources & Support">
         <p>
-          We want you to succeed honestly. If you are struggling with coursework or technical challenges, please use these resources instead of resorting to dishonesty:
+          We want you to succeed honestly. If you are struggling with coursework or a technical problem, write to the academy team and ask for help.
         </p>
         <div className="grid sm:grid-cols-2 gap-4 mt-4">
-            <a href="/support" className="p-4 bg-pl-surface hover:bg-pl-sunken rounded-lg border border-pl-border transition-colors flex items-center gap-3">
-                <BookOpen className="w-6 h-6 text-pl-primary-text" />
+            <a href="mailto:info@petrolord.com" className="p-4 bg-pl-surface hover:bg-pl-sunken rounded-lg border border-pl-border transition-colors flex items-center gap-3">
+                <Mail className="w-6 h-6 text-pl-primary-text" aria-hidden="true" />
                 <div>
-                    <div className="font-bold text-pl-text">Documentation</div>
-                    <div className="text-xs text-pl-muted">Detailed guides and tutorials</div>
-                </div>
-            </a>
-            <a href="/community" className="p-4 bg-pl-surface hover:bg-pl-sunken rounded-lg border border-pl-border transition-colors flex items-center gap-3">
-                <BookOpen className="w-6 h-6 text-pl-info-text" />
-                <div>
-                    <div className="font-bold text-pl-text">Community Forum</div>
-                    <div className="text-xs text-pl-muted">Ask questions and get help</div>
+                    <div className="font-bold text-pl-text">Contact the academy</div>
+                    <div className="text-xs text-pl-muted">info@petrolord.com</div>
                 </div>
             </a>
         </div>

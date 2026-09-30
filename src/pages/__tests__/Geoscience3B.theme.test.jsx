@@ -99,7 +99,8 @@ describe('3B registry', () => {
       expect(isThemedPath(`/dashboard/apps/${app.slug}`)).toBe(true);
     }
     expect(isThemedPath('/dashboard/apps/basin/course/beginner/m01')).toBe(true); // 1C's pattern
-    expect(isThemedPath('/dashboard/apps/reservoircalc/extra')).toBe(false);
-    expect(isThemedPath('/legacy-probe')).toBe(false);
+    expect(isThemedPath('/dashboard/apps/reservoircalc/extra')).toBe(true);
+    // wave 7: every signed-in route is scoped, registered or not
+    expect(isThemedPath('/dashboard/legacy-probe')).toBe(true);
   });
 });

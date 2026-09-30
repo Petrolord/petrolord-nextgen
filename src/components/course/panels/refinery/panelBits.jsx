@@ -42,7 +42,7 @@ export const Tbl = ({ head, rows, tone }) => (
       <thead className="text-pl-muted">
         <tr>
           {head.map((h, i) => (
-            <th key={h} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>
+            <th key={`${i}-${h}`} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>
           ))}
         </tr>
       </thead>

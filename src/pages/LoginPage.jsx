@@ -73,8 +73,8 @@ const LoginPage = () => {
   return (
     <>
       <Helmet>
-        <title>Login - Petrolord NextGen Suite</title>
-        <meta name="description" content="Login to your Petrolord NextGen Suite account." />
+        <title>Login - Petrolord NextGen</title>
+        <meta name="description" content="Login to your Petrolord NextGen account." />
       </Helmet>
       <PublicPage testId="login-theme-scope" mainClassName={AUTH_COLUMN}>
         <motion.div

@@ -3,7 +3,6 @@ import {
   layerSweep, forecast, evAtFirstBreakthrough, channelBackoutFor, LAYERS, LAYER_DESIGN, ELEMENT, EKENE_SCAL, EKENE_FLOOD,
 } from './floodLab';
 import { PanelShell, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
-import { useThemeClass } from '@/design/themeClass';
 import SvgChartFrame from '@/components/charts/SvgChartFrame';
 import { seriesColor, SVG_CHART, GRID_LINE_PROPS } from '@/utils/chartSvg';
 import { getStreamPalette } from '@/utils/chartTheme';
@@ -20,12 +19,11 @@ const PAD = { left: 52, top: 14, right: 46, bottom: 34 };
 // A typed number box, dressed like the sliders (the capstone states values
 // the sliders do not reach).
 const NumBox = ({ label, value, onChange }) => {
-  const tc = useThemeClass();
   return (
   <div>
-    <p className={tc('text-gray-400 text-xs mb-1', 'text-pl-muted text-xs mb-1')}>{label}</p>
+    <p className="text-pl-muted text-xs mb-1">{label}</p>
     <input value={value} onChange={(e) => onChange(e.target.value)}
-      className={tc('w-full bg-gray-800 border border-gray-600 rounded-md text-white text-xs px-2 py-1.5', 'w-full bg-pl-surface border border-pl-border-strong rounded-md text-pl-text text-xs px-2 py-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus')} />
+      className="w-full bg-pl-surface border border-pl-border-strong rounded-md text-pl-text text-xs px-2 py-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus" />
   </div>
   );
 };
@@ -33,23 +31,21 @@ const NumBox = ({ label, value, onChange }) => {
 const fmt = (v, d = 4) => (Number.isFinite(v) ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d }) : '-');
 
 const RangeField = ({ label, value, min, max, step, onChange }) => {
-  const tc = useThemeClass();
   return (
   <div>
-    <p className={tc('text-gray-400 text-xs mb-1', 'text-pl-muted text-xs mb-1')}>
-      {label}: <span className={tc('text-white', 'text-pl-text')}>{value}</span>
+    <p className="text-pl-muted text-xs mb-1">
+      {label}: <span className="text-pl-text">{value}</span>
     </p>
     <input
       type="range" min={min} max={max} step={step} value={value}
       onChange={(e) => onChange(Number(e.target.value))}
-      className={tc('w-full accent-[#BFFF00]', 'w-full accent-pl-primary')}
+      className="w-full accent-pl-primary"
     />
   </div>
   );
 };
 
 const DesignExplorer = () => {
-  const tc = useThemeClass();
   const [mode, setMode] = useState('layers');
   const [M, setM] = useState(LAYER_DESIGN.mobility_ratio);
   const [iw, setIw] = useState(ELEMENT.iw_design_rb_d);
@@ -110,10 +106,10 @@ const DesignExplorer = () => {
     >
       <div className="grid gap-4 sm:grid-cols-4 items-end">
         <div>
-          <p className={tc('text-gray-400 text-xs mb-1', 'text-pl-muted text-xs mb-1')}>Mode</p>
+          <p className="text-pl-muted text-xs mb-1">Mode</p>
           <select
             value={mode} onChange={(e) => setMode(e.target.value)}
-            className={tc('w-full bg-gray-800 border border-gray-600 rounded-md text-white text-xs px-2 py-1.5', 'w-full bg-pl-surface border border-pl-border-strong rounded-md text-pl-text text-xs px-2 py-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus')}
+            className="w-full bg-pl-surface border border-pl-border-strong rounded-md text-pl-text text-xs px-2 py-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus"
           >
             <option value="layers">Layered sweep</option>
             <option value="forecast">Pattern forecast</option>
@@ -132,14 +128,14 @@ const DesignExplorer = () => {
         <NumBox label="Rate rb/d (typed)" value={iwT} onChange={setIwT} />
         <NumBox label="Oil viscosity (cp)" value={muO} onChange={setMuO} />
       </div>
-      <p className={tc('text-xs text-gray-500 mt-1', 'text-xs text-pl-muted mt-1')}>
+      <p className="text-xs text-pl-muted mt-1">
         The panel opens on the teaching column, M {LAYER_DESIGN.mobility_ratio}, {ELEMENT.iw_design_rb_d} rb/d and the SCAL oil.
         Typed M and rate override the sliders. A capstone brief states its own; type it in.
       </p>
 
       <button
         type="button" onClick={() => setUseEv((v) => !v)}
-        className={tc(`mt-3 px-3 py-1.5 rounded-md border text-xs ${useEv ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold' : 'bg-gray-800 text-gray-300 border-gray-600'}`, `mt-3 px-3 py-1.5 rounded-md border text-xs ${useEv ? 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold' : 'bg-pl-surface text-pl-text border-pl-border-strong'}`)}
+        className={`mt-3 px-3 py-1.5 rounded-md border text-xs ${useEv ? 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold' : 'bg-pl-surface text-pl-text border-pl-border-strong'}`}
       >
         {useEv ? `EV from the layer column (${fmt(EV, 4)})` : 'EV = 1 (no vertical sweep penalty)'}
       </button>
@@ -215,12 +211,12 @@ const DesignExplorer = () => {
       )}
 
       <div className="mt-4">
-        <p className={tc('text-gray-400 text-xs mb-1', 'text-pl-muted text-xs mb-1')}>Channel back-out: the contacted pore volume a producer&apos;s breakthrough implies (opens on Ekene-6)</p>
+        <p className="text-pl-muted text-xs mb-1">Channel back-out: the contacted pore volume a producer&apos;s breakthrough implies (opens on Ekene-6)</p>
         <div className="grid gap-4 sm:grid-cols-4 items-end">
           <div>
-            <p className={tc('text-gray-400 text-xs mb-1', 'text-pl-muted text-xs mb-1')}>Producer</p>
+            <p className="text-pl-muted text-xs mb-1">Producer</p>
             <select value={prod} onChange={(e) => setProd(e.target.value)}
-              className={tc('w-full bg-gray-800 border border-gray-600 rounded-md text-white text-xs px-2 py-1.5', 'w-full bg-pl-surface border border-pl-border-strong rounded-md text-pl-text text-xs px-2 py-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus')}>
+              className="w-full bg-pl-surface border border-pl-border-strong rounded-md text-pl-text text-xs px-2 py-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus">
               {['Ekene-1', 'Ekene-3', 'Ekene-5', 'Ekene-6'].map((p) => <option key={p} value={p}>{p}</option>)}
             </select>
           </div>

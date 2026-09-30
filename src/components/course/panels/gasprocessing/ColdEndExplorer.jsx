@@ -66,7 +66,7 @@ const Tbl = ({ head, rows }) => (
   <div className="mt-3 overflow-x-auto">
     <table className="text-xs text-pl-text w-full">
       <thead className="text-pl-muted">
-        <tr>{head.map((h, i) => <th key={h} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>)}</tr>
+        <tr>{head.map((h, i) => <th key={`${i}-${h}`} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>)}</tr>
       </thead>
       <tbody>
         {rows.map((r, i) => (

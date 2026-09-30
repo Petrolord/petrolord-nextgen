@@ -7,7 +7,7 @@
 // console colour is left outside canvases (with a negative control), in
 // every state the page can show. The certificate itself keeps its artwork:
 // it mounts outside the scope in a data-canvas="document" region and
-// renders its legacy markup unchanged. No request leaves the test.
+// keeps its artwork in a document canvas. No request leaves the test.
 import React from 'react';
 import { describe, it, expect, vi, beforeAll, beforeEach, afterEach, afterAll } from 'vitest';
 import { screen, cleanup, fireEvent, within } from '@testing-library/react';
@@ -316,28 +316,33 @@ describe('My certificates, further states', () => {
     expectNoLegacyChrome();
   });
 
-  it('the certificate opens outside the scope as a document and keeps its legacy artwork', async () => {
-    window.localStorage.setItem(`petrolord.theme.v1:${USER_ID}`, 'dark');
+  it('the certificate opens outside the page scope: the sheet is a document, its toolbar a fixed dark scope on roles', async () => {
+    window.localStorage.setItem(`petrolord.theme.v1:${USER_ID}`, 'light');
     mount();
     await screen.findByText('PLA-2026-000123');
     fireEvent.click(screen.getAllByRole('button', { name: /View certificate/ })[0]);
     const doc = await screen.findByTestId('certificate-document');
-    // a document region in document.body, with no theme scope around it
-    expect(doc.getAttribute('data-canvas')).toBe('document');
-    expect(doc.closest('[data-pl-theme]')).toBeNull();
+    // in document.body, outside the page scope
     expect(getScopeRoot().contains(doc)).toBe(false);
-    // the viewer renders its pre-rollout markup: the legacy print button and sheet
+    // the viewer chrome is a fixed dark scope over the scrim, whatever the page theme
+    const viewer = within(doc).getByTestId('certificate-viewer');
+    expect(viewer.getAttribute('data-pl-theme')).toBe('dark');
+    expect(viewer.hasAttribute('data-pl-root')).toBe(false);
+    expect(viewer.querySelector('[data-testid="theme-toggle"]')).toBeNull();
     const print = within(doc).getByRole('button', { name: /Print/ });
-    expect(print.className).toContain('bg-[#BFFF00]');
-    expect(print.className).not.toMatch(/pl-/);
-    expect(doc.querySelector('#certificate-sheet')).toBeTruthy();
-    // and the themed page around it is still clean
+    expect(print.className).toContain('bg-pl-primary');
+    expect(print.className).not.toMatch(/BFFF00/i);
+    // the certificate sheet keeps its artwork in a document canvas
+    const sheet = doc.querySelector('#certificate-sheet');
+    expect(sheet.getAttribute('data-canvas')).toBe('document');
+    expect(sheet.querySelector('.holder, .holder-missing')).toBeTruthy();
+    // the themed page and the viewer chrome are clean (the sheet is skipped)
     expectNoLegacyChrome();
-    // negative control: the same legacy markup inside the scope would be caught
+    // negative control: the retired lime print button inside the viewer would be caught
     const planted = document.createElement('div');
-    planted.className = print.className;
-    getScopeRoot().appendChild(planted);
-    expect(legacyChromeClasses()).toContain(print.className);
+    planted.className = 'bg-[#BFFF00] text-[#0F172A]';
+    viewer.appendChild(planted);
+    expect(legacyChromeClasses()).toContain('bg-[#BFFF00] text-[#0F172A]');
     planted.remove();
     fireEvent.click(within(doc).getByRole('button', { name: /Close/ }));
     expect(screen.queryByTestId('certificate-document')).toBeNull();

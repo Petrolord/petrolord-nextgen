@@ -114,9 +114,30 @@ describe('colour roles', () => {
   it('re-points every shadcn variable NextGen index.css defines', () => {
     const index = read('src/index.css');
     const rootBlock = index.slice(index.indexOf(':root {'), index.indexOf('}', index.indexOf(':root {')));
-    const defined = [...rootBlock.matchAll(/--([a-z-]+):/g)].map((m) => m[1])
-      .filter((k) => !k.startsWith('video-') && k !== 'radius');
+    const defined = [...rootBlock.matchAll(/--([a-z0-9-]+):/g)].map((m) => m[1])
+      .filter((k) => k !== 'radius' && !k.startsWith('chart-'));
+    expect(defined.length).toBeGreaterThan(20);
     for (const k of defined) expect(SHADCN_ALIASES[k], `--${k}`).toBeDefined();
+  });
+
+  // Wave 7 end state: the dark console defaults are retired. Outside a scope
+  // the shadcn variables hold the light scope's values.
+  it('index.css :root holds the light scope values, with no dark console default and no lime', () => {
+    const index = read('src/index.css');
+    const css = read('src/design/theme.css');
+    const rootBlock = index.slice(index.indexOf(':root {'), index.indexOf('}', index.indexOf(':root {')));
+    const light = css.slice(css.indexOf('[data-pl-theme="light"]'), css.indexOf('color-scheme: light'));
+    const valueIn = (block, k) => (block.match(new RegExp(`--${k}:\\s*([^;]+);`)) || [])[1];
+    for (const k of Object.keys(SHADCN_ALIASES)) {
+      expect({ k, v: valueIn(rootBlock, k) }).toEqual({ k, v: valueIn(light, k) });
+      expect(valueIn(light, k), `--${k} in theme.css`).toBeTruthy();
+    }
+    expect(index).not.toMatch(/#0F172A|#1E293B|BFFF00|76 100% 50%|222\.2 84% 4\.9%/i);
+    expect(index).not.toMatch(/\.dark\b/);
+    // negative control: the retired dark default would be caught
+    const retired = ':root { --background: 222.2 84% 4.9%; } body { background-color: #0F172A; }';
+    expect(retired).toMatch(/#0F172A|222\.2 84% 4\.9%/i);
+    expect(valueIn(retired, 'background')).not.toBe(valueIn(light, 'background'));
   });
 });
 

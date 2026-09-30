@@ -14,7 +14,7 @@ Set the population method to trend, which is the panel's default. The panel open
 
 ## The six values, on the teaching case
 
-**Trend porosity at P-1: 0.207142** on the teaching case, tolerance 0.001. Read the lime circle's label on the map, or evaluate the plane at an easting and northing of 1600 m. Because P-1 sits exactly on a grid node, the two routes agree exactly.
+**Trend porosity at P-1: 0.207142** on the teaching case, tolerance 0.001. Read the violet circle's label on the map, or evaluate the plane at an easting and northing of 1600 m. Because P-1 sits exactly on a grid node, the two routes agree exactly.
 
 **Mean trend porosity over the oil nodes: 0.209368**, tolerance 0.0002. The second mean tile. This is the plain average over the 169 oil bearing cells, not the volume weighted one. Report the tile to at least four decimals. The tolerance is tighter than the others on purpose: on a trend fit the node mean sits close to the plain mean of the well values, and a wider tolerance would accept a number you copied from the brief instead of a model you ran.
 

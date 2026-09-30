@@ -3,7 +3,6 @@ import {
   deckTextAt, keywordCounts, gridSummary, SECTIONS, TEACHING_MEAN_M, TEACHING_OWC_M,
 } from './simLab';
 import { PanelShell, Tile, TileGrid, Note, NumField } from '@/components/course/panels/petrophysics/panelKit';
-import { useThemeClass } from '@/design/themeClass';
 
 // Deck explorer: the composed Ekene deck, section by section. The point is
 // that a deck is an ordered text file with six sections, and every number in
@@ -12,7 +11,6 @@ import { useThemeClass } from '@/design/themeClass';
 const fmt = (v, d = 4) => (Number.isFinite(v) ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d }) : '-');
 
 const DeckExplorer = () => {
-  const tc = useThemeClass();
   const [section, setSection] = useState('GRID');
   const [maxLines, setMaxLines] = useState(24);
   // The deck opens as committed; a capstone brief may state a regional mean
@@ -62,29 +60,25 @@ const DeckExplorer = () => {
       subtitle="The composed Ekene deck: six sections, in order, in field units"
     >
       {inputs}
-      <div className={tc('text-xs text-gray-500', 'text-xs text-pl-muted')}>
+      <div className="text-xs text-pl-muted">
         The deck opens as committed (regional mean {TEACHING_MEAN_M} m, contact {TEACHING_OWC_M} m). Type another
         setting and the deck is rebuilt: the tops kriged at that mean, the EQUIL datum and contact, and the well
         reference depths.
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
-            <p className={tc('text-gray-400 text-xs mb-1', 'text-pl-muted text-xs mb-1')}>Section</p>
+            <p className="text-pl-muted text-xs mb-1">Section</p>
             <div className="flex flex-wrap gap-1">
               {SECTIONS.map((s) => (
                 <button
                   key={s}
                   type="button"
                   onClick={() => setSection(s)}
-                  className={tc(`px-2 py-1 text-xs rounded border ${
-                    s === active.name
-                      ? 'bg-[#BFFF00] text-black border-[#BFFF00]'
-                      : 'bg-transparent text-gray-300 border-gray-600 hover:border-gray-400'
-                  }`, `px-2 py-1 text-xs rounded border ${
+                  className={`px-2 py-1 text-xs rounded border ${
                     s === active.name
                       ? 'bg-pl-primary text-pl-primary-fg border-pl-primary'
                       : 'bg-transparent text-pl-text border-pl-border-strong hover:border-pl-muted'
-                  }`)}
+                  }`}
                 >
                   {s}
                 </button>
@@ -92,13 +86,13 @@ const DeckExplorer = () => {
             </div>
           </div>
           <div>
-            <p className={tc('text-gray-400 text-xs mb-1', 'text-pl-muted text-xs mb-1')}>
-              Lines shown: <span className={tc('text-white', 'text-pl-text')}>{maxLines}</span>
+            <p className="text-pl-muted text-xs mb-1">
+              Lines shown: <span className="text-pl-text">{maxLines}</span>
             </p>
             <input
               type="range" min={8} max={60} step={4} value={maxLines}
               onChange={(e) => setMaxLines(Number(e.target.value))}
-              className={tc('w-full accent-[#BFFF00]', 'w-full accent-pl-primary')}
+              className="w-full accent-pl-primary"
             />
         </div>
       </div>
@@ -112,12 +106,12 @@ const DeckExplorer = () => {
         <Tile label="TSTEP blocks" value={fmt(counts.TSTEP, 0)} unit="prediction" />
       </TileGrid>
 
-      <div className={tc('mt-4 rounded border border-gray-700 bg-black/40 overflow-x-auto', 'mt-4 rounded border border-pl-border bg-pl-sunken overflow-x-auto')}>
-        <pre className={tc('text-[11px] leading-relaxed text-gray-200 p-3 whitespace-pre', 'text-[11px] leading-relaxed text-pl-text p-3 whitespace-pre')}>
+      <div className="mt-4 rounded border border-pl-border bg-pl-sunken overflow-x-auto">
+        <pre className="text-[11px] leading-relaxed text-pl-text p-3 whitespace-pre">
           {body.map((l, idx) => (
             <div key={`${active.name}-${active.line + idx}`}>
-              <span className={tc('text-gray-600 select-none', 'text-pl-muted select-none')}>{String(active.line + idx).padStart(4, ' ')}  </span>
-              <span className={tc(l.trim() && l === l.trim() && l === l.toUpperCase() ? 'text-[#BFFF00]' : '', l.trim() && l === l.trim() && l === l.toUpperCase() ? 'text-pl-primary-text' : '')}>{l || ' '}</span>
+              <span className="text-pl-muted select-none">{String(active.line + idx).padStart(4, ' ')}  </span>
+              <span className={l.trim() && l === l.trim() && l === l.toUpperCase() ? 'text-pl-primary-text' : ''}>{l || ' '}</span>
             </div>
           ))}
         </pre>

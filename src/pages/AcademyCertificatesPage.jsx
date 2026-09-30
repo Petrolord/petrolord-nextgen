@@ -21,7 +21,6 @@ import {
 import CertificateView from '@/components/academy/CertificateView';
 import PracticeCourseBadge from '@/components/course/PracticeCourseBadge';
 import { courseTypeOf } from '@/lib/courseType';
-import { ThemeContext } from '@/design/themeContext';
 
 const STATUS_PILL = {
   valid: { cls: 'bg-pl-success-bg text-pl-success-text border-pl-success/30', icon: CheckCircle2, label: 'Valid' },
@@ -37,15 +36,14 @@ const STATUS_PILL = {
 // Design system (batch 2A): the page chrome renders inside the signed-in
 // scope on theme roles. The certificate itself keeps its designed artwork
 // (owner decision, docs/scope/DesignSystem-Rollout.md section 2): the
-// CertificateView overlay mounts in document.body, outside the scope, in a
-// data-canvas="document" region with no theme context, so it renders the
-// same markup, colours and print sheet as before the rollout.
+// CertificateView overlay mounts in document.body, outside the page scope,
+// so the print stylesheet can isolate the sheet. The overlay's toolbar is a
+// fixed dark scope of its own and the sheet is a data-canvas="document"
+// region (wave 7; see CertificateView).
 function CertificateDocument({ children }) {
   if (typeof document === 'undefined') return null;
   return createPortal(
-    <ThemeContext.Provider value={null}>
-      <div data-canvas="document" data-testid="certificate-document">{children}</div>
-    </ThemeContext.Provider>,
+    <div data-testid="certificate-document">{children}</div>,
     document.body,
   );
 }

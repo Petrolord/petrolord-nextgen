@@ -11,12 +11,10 @@ import {
 } from '@/design/ThemeProvider';
 import { AuthContext } from '@/contexts/SupabaseAuthContext';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
-import { useThemeClass } from '@/design/themeClass';
 import {
-  isThemedPath, coldLoadTheme, matchesRoute, ThemedLoadingScreen,
+  isThemedPath, isSignedInPath, coldLoadTheme, matchesRoute, ThemedLoadingScreen,
   isPublicLightPath,
 } from '@/design/scopePaths';
-import { THEMED_ROUTES } from '@/design/rollout';
 
 const root = () => document.querySelector('[data-pl-root]');
 
@@ -122,22 +120,6 @@ describe('ThemeToggle and FixedTheme', () => {
   });
 });
 
-describe('useThemeClass', () => {
-  afterEach(cleanup);
-  const Probe = () => {
-    const tc = useThemeClass({ 'bg-slate-900': 'bg-pl-surface' });
-    return <p data-testid="p" className={`${tc('bg-slate-900')} ${tc('text-slate-200', 'text-pl-text')}`} />;
-  };
-
-  it('returns the legacy classes outside a scope and the themed ones inside', () => {
-    render(<Probe />);
-    expect(screen.getByTestId('p').className).toBe('bg-slate-900 text-slate-200');
-    cleanup();
-    render(<ThemedApp userId="u1"><Probe /></ThemedApp>);
-    expect(screen.getByTestId('p').className).toBe('bg-pl-surface text-pl-text');
-  });
-});
-
 describe('route registry and cold load', () => {
   beforeEach(() => window.localStorage.clear());
   afterEach(cleanup);
@@ -156,42 +138,34 @@ describe('route registry and cold load', () => {
     expect(matchesRoute('/dashboard/apps/dca/x', '/dashboard/apps/:slug')).toBe(false);
   });
 
-  it('wave 0 themes the dashboard home, and 1A the search page and the modules placeholder', () => {
-    expect(THEMED_ROUTES).toEqual(expect.arrayContaining(['/dashboard', '/search', '/dashboard/modules/*']));
-    for (const p of ['/dashboard', '/search', '/dashboard/modules', '/dashboard/modules/x']) {
-      expect({ p, themed: isThemedPath(p) }).toEqual({ p, themed: true });
+  it('every signed-in route is scoped: any /dashboard path and /search (wave 7, no registry)', () => {
+    for (const p of ['/dashboard', '/dashboard/', '/search', '/dashboard/modules', '/dashboard/modules/x',
+      '/dashboard/enroll', '/dashboard/waiver/welldata', '/dashboard/apps/dca', '/dashboard/apps/dca/x',
+      '/dashboard/legacy-probe', '/dashboard/no/such/page']) {
+      expect({ p, signedIn: isSignedInPath(p), themed: isThemedPath(p) }).toEqual({ p, signedIn: true, themed: true });
     }
-    // /legacy-probe is the test-only unregistered route (2A registered /dashboard/enroll, 3C /dashboard/apps/dca)
-    // (6B made /login a public light route; see the 6B test below)
-    for (const p of ['/', '/legacy-probe', '/searchx']) {
-      expect({ p, themed: isThemedPath(p) }).toEqual({ p, themed: false });
+    // the homepage keeps its own look; a path outside the app is not a signed-in route
+    for (const p of ['/', '/searchx', '/dashboardx', '/legacy-probe']) {
+      expect({ p, signedIn: isSignedInPath(p) }).toEqual({ p, signedIn: false });
     }
+    expect(isSignedInPath(undefined)).toBe(false);
   });
 
-  it('2A themes the learner and account pages', () => {
-    const w2a = ['/dashboard/enroll', '/dashboard/get-started', '/dashboard/devices', '/dashboard/waiver/:appSlug',
-      '/dashboard/certificates', '/dashboard/settings', '/dashboard/notifications', '/dashboard/sponsor'];
-    expect(THEMED_ROUTES).toEqual(expect.arrayContaining(w2a));
-    for (const p of ['/dashboard/enroll', '/dashboard/waiver/welldata', '/dashboard/certificates', '/dashboard/sponsor']) {
-      expect({ p, themed: isThemedPath(p) }).toEqual({ p, themed: true });
-    }
-    for (const p of ['/dashboard/waiver', '/dashboard/waiver/a/b', '/dashboard/settingsx']) {
-      expect({ p, themed: isThemedPath(p) }).toEqual({ p, themed: false });
-    }
-  });
-
-  it('the cold-load loader paints the last resolved theme on a themed route and stays legacy elsewhere', () => {
+  it('the cold-load loader paints the last resolved theme on a signed-in route and light elsewhere', () => {
     expect(coldLoadTheme('/dashboard')).toBe('light');
     window.localStorage.setItem(LAST_THEME_KEY, 'dark');
     expect(coldLoadTheme('/dashboard')).toBe('dark');
-    expect(coldLoadTheme('/legacy-probe')).toBeNull();
     expect(coldLoadTheme('/dashboard/enroll')).toBe('dark');
-    expect(coldLoadTheme('/')).toBeNull();
+    expect(coldLoadTheme('/dashboard/legacy-probe')).toBe('dark');
+    expect(coldLoadTheme('/search')).toBe('dark');
+    // no legacy loader is left: every other path paints light
+    expect(coldLoadTheme('/legacy-probe')).toBe('light');
+    expect(coldLoadTheme('/')).toBe('light');
     render(<ThemedLoadingScreen theme="dark" />);
     expect(screen.getByTestId('themed-loading').getAttribute('data-pl-theme')).toBe('dark');
   });
 
-  it('6B: the public and auth pages always cold-load light; the homepage and unknown paths stay legacy', () => {
+  it('6B: the public and auth pages always cold-load light, as do the homepage and unknown paths', () => {
     const pages = ['/login', '/register', '/verify', '/verify/abc123', '/forgot-password', '/reset-password',
       '/privacy-policy', '/terms-of-service', '/academic-integrity'];
     window.localStorage.setItem(LAST_THEME_KEY, 'dark');
@@ -202,17 +176,8 @@ describe('route registry and cold load', () => {
     for (const p of ['/', '/verify/a/b', '/loginx', '/no-such-page', '/dashboard']) {
       expect({ p, light: isPublicLightPath(p) }).toEqual({ p, light: false });
     }
-    expect(coldLoadTheme('/')).toBeNull();
-    expect(coldLoadTheme('/no-such-page')).toBeNull();
+    expect(coldLoadTheme('/')).toBe('light');
+    expect(coldLoadTheme('/no-such-page')).toBe('light');
     expect(coldLoadTheme('/dashboard')).toBe('dark');
-  });
-
-  it('3C themes the reservoir course apps (their learning pages only)', () => {
-    const w3c = ['dca', 'mbal', 'scal', 'waterflood', 'sim', 'fluid', 'welltest'].map((a) => `/dashboard/apps/${a}`);
-    expect(THEMED_ROUTES).toEqual(expect.arrayContaining(w3c));
-    for (const p of w3c) expect({ p, themed: isThemedPath(p) }).toEqual({ p, themed: true });
-    for (const p of ['/dashboard/apps/dcax', '/dashboard/apps/dca/x', '/dashboard/apps/simulation']) {
-      expect({ p, themed: isThemedPath(p) }).toEqual({ p, themed: false });
-    }
   });
 });

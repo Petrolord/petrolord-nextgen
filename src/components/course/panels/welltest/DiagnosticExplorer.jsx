@@ -7,7 +7,6 @@ import {
   faultLines, fractureLinearFit, fractureAsRadial, rectanglePss, dualPorosityDip, dataPrep,
 } from './welltestLab';
 import { PanelShell, SelectField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
-import { useThemeClass } from '@/design/themeClass';
 import ChartFrame from '@/components/charts/ChartFrame';
 import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
 import { seriesColor, AXIS_TICK } from '@/utils/chartSvg';
@@ -82,7 +81,6 @@ const extras = (id) => {
 };
 
 const DiagnosticExplorer = () => {
-  const tc = useThemeClass();
   // Opens on the drawdown; the Professional capstone's buildup plateau is one select away.
   const [id, setId] = useState('drawdown');
   const [L, setL] = useState('0.1');
@@ -110,7 +108,7 @@ const DiagnosticExplorer = () => {
         <SelectField label="Test" value={id} onChange={setId} options={FIXTURE_OPTIONS} />
         <SelectField label="Bourdet smoothing" value={L} onChange={setL} options={L_OPTIONS} />
       </div>
-      <p className={tc('text-[11px] text-gray-400 mt-2', 'text-[11px] text-pl-muted mt-2')}>{story}</p>
+      <p className="text-[11px] text-pl-muted mt-2">{story}</p>
 
       <ChartFrame height={256} className="mt-3">
           <ScatterChart margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
@@ -137,9 +135,9 @@ const DiagnosticExplorer = () => {
         ))}
       </TileGrid>
 
-      <div className={tc('mt-4 rounded border border-gray-700 overflow-x-auto', 'mt-4 rounded border border-pl-border overflow-x-auto')}>
+      <div className="mt-4 rounded border border-pl-border overflow-x-auto">
         <table className="w-full text-xs">
-          <thead className={tc('bg-black/40 text-gray-400', 'bg-pl-sunken text-pl-muted')}>
+          <thead className="bg-pl-sunken text-pl-muted">
             <tr>
               <th className="text-left p-2">Regime the engine reports</th>
               <th className="text-right p-2">from (h)</th>
@@ -149,16 +147,16 @@ const DiagnosticExplorer = () => {
           </thead>
           <tbody>
             {regimes.length === 0 && (
-              <tr><td className={tc('p-2 text-gray-500', 'p-2 text-pl-muted')} colSpan={4}>No segment held for a quarter of a decade.</td></tr>
+              <tr><td className="p-2 text-pl-muted" colSpan={4}>No segment held for a quarter of a decade.</td></tr>
             )}
             {regimes.map((r) => (
-              <tr key={`${r.regime}-${r.xStart}`} className={tc('border-t border-gray-800', 'border-t border-pl-border')}>
-                <td className={tc(`p-2 ${TRANSITION_REGIMES.has(r.regime) ? 'text-amber-400' : 'text-white'}`, `p-2 ${TRANSITION_REGIMES.has(r.regime) ? 'text-pl-warning-text' : 'text-pl-text'}`)}>
+              <tr key={`${r.regime}-${r.xStart}`} className="border-t border-pl-border">
+                <td className={`p-2 ${TRANSITION_REGIMES.has(r.regime) ? 'text-pl-warning-text' : 'text-pl-text'}`}>
                   {r.label}
                 </td>
-                <td className={tc('p-2 text-right text-gray-200', 'p-2 text-right text-pl-text')}>{fmt(r.xStart, 4)}</td>
-                <td className={tc('p-2 text-right text-gray-200', 'p-2 text-right text-pl-text')}>{fmt(r.xEnd, 4)}</td>
-                <td className={tc('p-2 text-right text-gray-400', 'p-2 text-right text-pl-muted')}>{fmt(r.spanDecades, 3)}</td>
+                <td className="p-2 text-right text-pl-text">{fmt(r.xStart, 4)}</td>
+                <td className="p-2 text-right text-pl-text">{fmt(r.xEnd, 4)}</td>
+                <td className="p-2 text-right text-pl-muted">{fmt(r.spanDecades, 3)}</td>
               </tr>
             ))}
           </tbody>
@@ -166,14 +164,14 @@ const DiagnosticExplorer = () => {
       </div>
 
       {extras(id).length > 0 && (
-        <div className={tc('mt-3 rounded border border-gray-700 overflow-x-auto', 'mt-3 rounded border border-pl-border overflow-x-auto')}>
+        <div className="mt-3 rounded border border-pl-border overflow-x-auto">
           <table className="w-full text-xs">
             <tbody>
               {extras(id).map(([label, value, unit]) => (
-                <tr key={label} className={tc('border-t border-gray-800 first:border-t-0', 'border-t border-pl-border first:border-t-0')}>
-                  <td className={tc('p-2 text-gray-400', 'p-2 text-pl-muted')}>{label}</td>
-                  <td className={tc('p-2 text-right text-white', 'p-2 text-right text-pl-text')}>{value}</td>
-                  <td className={tc('p-2 text-gray-500', 'p-2 text-pl-muted')}>{unit}</td>
+                <tr key={label} className="border-t border-pl-border first:border-t-0">
+                  <td className="p-2 text-pl-muted">{label}</td>
+                  <td className="p-2 text-right text-pl-text">{value}</td>
+                  <td className="p-2 text-pl-muted">{unit}</td>
                 </tr>
               ))}
             </tbody>
@@ -182,11 +180,11 @@ const DiagnosticExplorer = () => {
       )}
 
       {ambiguousFirst ? (
-        <div className={tc('mt-3 rounded border border-amber-700/60 bg-amber-950/30 p-3', 'mt-3 rounded border border-pl-warning/40 bg-pl-warning-bg p-3')}>
-          <p className={tc('text-amber-300 text-xs font-medium mb-1', 'text-pl-warning-text text-xs font-medium mb-1')}>
+        <div className="mt-3 rounded border border-pl-warning/40 bg-pl-warning-bg p-3">
+          <p className="text-pl-warning-text text-xs font-medium mb-1">
             The first segment is the one the ordering rules cannot check
           </p>
-          <p className={tc('text-[11px] text-amber-200/90', 'text-[11px] text-pl-text')}>
+          <p className="text-[11px] text-pl-text">
             A fracture's linear flow legitimately comes first in a test, and so does the roll-off of
             a wellbore storage unit slope, so nothing about the ORDER separates them. The pressure
             does: during storage the pressure change and its derivative are the same quantity and

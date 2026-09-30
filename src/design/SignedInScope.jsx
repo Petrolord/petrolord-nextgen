@@ -2,12 +2,9 @@
 // (docs/scope/DesignSystem-Rollout.md section 5).
 //
 // Layout (src/components/Layout.jsx) renders this around the header and the
-// page column, so every signed-in screen is themed by one provider and the
-// theme holds while the learner moves between pages. Pages never wrap
-// themselves in <ThemedApp>. During the rollout Layout opens the scope only
-// on the routes listed in src/design/rollout/ (isThemedPath); every other
-// route renders exactly what it rendered before. At the end state the gate
-// goes and the scope is unconditional.
+// page column on every route it serves, so every signed-in screen is themed
+// by one provider and the theme holds while the learner moves between pages.
+// Pages never wrap themselves in <ThemedApp>. There is no gate (wave 7).
 //
 // The sidebar rail stays outside it: it keeps its dark frame in both themes
 // (the Suite's lead decision 1; see the plan, section 3).

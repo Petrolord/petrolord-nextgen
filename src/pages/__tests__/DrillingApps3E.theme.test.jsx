@@ -113,7 +113,8 @@ describe('the drilling II course apps, further states', () => {
       expect(isThemedPath(`/dashboard/apps/${app.slug}/course/beginner/m01/l01`)).toBe(true);
     }
     expect(isThemedPath('/dashboard/admin/handbook')).toBe(true);
-    expect(isThemedPath('/legacy-probe')).toBe(false);
+    // wave 7: every signed-in route is scoped, registered or not
+    expect(isThemedPath('/dashboard/legacy-probe')).toBe(true);
   });
 
   for (const app of APPS) {

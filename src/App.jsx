@@ -8,7 +8,6 @@ import { NotificationProvider } from '@/contexts/NotificationContext.jsx';
 import { SearchProvider } from '@/contexts/SearchContext.jsx'; 
 import { ApplicationLayoutProvider } from '@/contexts/ApplicationLayoutContext.jsx';
 import ErrorBoundary from '@/components/ErrorBoundary.jsx';
-import { Loader2 } from 'lucide-react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { coldLoadTheme, ThemedLoadingScreen } from '@/design/scopePaths';
 
@@ -43,23 +42,11 @@ const queryClient = new QueryClient({
   },
 });
 
-// Legacy loader, byte for byte, except on the routes that render inside the
-// design-system scope (src/design/scopePaths.jsx), where it paints the
-// theme this device last resolved.
-const AppLoading = () => {
-    const theme = coldLoadTheme(typeof window !== 'undefined' ? window.location.pathname : '');
-    if (theme) return <ThemedLoadingScreen theme={theme} />;
-    return <LegacyAppLoading />;
-};
-
-const LegacyAppLoading = () => (
-    <div className="h-screen w-full flex flex-col items-center justify-center bg-[#0F172A] text-white gap-4">
-        <Loader2 className="w-12 h-12 animate-spin text-emerald-500" />
-        <div className="flex flex-col items-center gap-1">
-            <h2 className="text-xl font-bold tracking-tight">Petrolord Suite</h2>
-            <p className="text-sm text-slate-400">Loading module architecture...</p>
-        </div>
-    </div>
+// The loader shown before the session restores and while a lazy page loads.
+// It paints the theme this device last resolved on a signed-in path and
+// light everywhere else (src/design/scopePaths.jsx).
+const AppLoading = () => (
+    <ThemedLoadingScreen theme={coldLoadTheme(typeof window !== 'undefined' ? window.location.pathname : '')} />
 );
 
 const ProtectedRoute = ({ children }) => {

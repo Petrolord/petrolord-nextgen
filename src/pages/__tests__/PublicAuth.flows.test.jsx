@@ -470,3 +470,31 @@ describe('not found', () => {
     expect(await screen.findByRole('button', { name: 'Go Back' })).toBeTruthy();
   });
 });
+
+// Wave 7: copy that contradicted the one-identity doctrine (a personal email
+// is the account; a university email is only a Campus verification
+// attribute). Copy only: the flows above are unchanged.
+describe('one identity copy (wave 7)', () => {
+  it('the login page is titled Petrolord NextGen', async () => {
+    mountPublic(LoginPage, '/login');
+    await screen.findByText('Sign in to your account');
+    await waitFor(() => expect(document.title).toBe('Login - Petrolord NextGen'));
+    expect(document.title).not.toMatch(/Suite/);
+  });
+
+  it('the forgot password email placeholder names no university', async () => {
+    mountPublic(PasswordResetPage, '/forgot-password');
+    await screen.findByText('Step 1: Identify Account');
+    const input = screen.getByLabelText('Email Address');
+    expect(input.getAttribute('placeholder')).toBe('you@example.com');
+    expect(document.body.innerHTML).not.toMatch(/university/i);
+  });
+
+  it('the set password page speaks of your account, with no university admin', async () => {
+    h.invoke = vi.fn(async () => ({ data: { success: true, email: 'ada@example.com' }, error: null }));
+    mountPublic(ResetPasswordPage, '/reset-password?token=tok-1');
+    await screen.findByText('ada@example.com');
+    expect(screen.getByText('Create a secure password to activate your account.')).toBeTruthy();
+    expect(document.body.textContent).not.toMatch(/university|admin account/i);
+  });
+});

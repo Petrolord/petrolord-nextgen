@@ -5,21 +5,17 @@
 // imports; the rollout plan counts them in the lesson reader's own files).
 // Inside a scope, in both themes, each renders theme roles only outside its
 // plots, and every plot sits on a white chart plate (data-canvas="chart")
-// with the retired console lime gone, apart from the one marker a lesson
-// names "the hollow lime circle" (reservoircalc P-1, drawn with an ink
-// casing).
+// with the retired console lime gone everywhere (wave 7 moved the last one,
+// the reservoircalc P-1 marker, to the kit violet).
 //
-// The Well Correlation case inputs are shared with that course's learning
-// page (batch 3A), so they are scope-aware: outside a scope they render the
-// legacy classes byte for byte.
-//
-// panelKit is batch 1B's scope-aware kit and renders for real.
+// panelKit is batch 1B's kit and renders for real.
 import React from 'react';
 import { describe, it, expect, beforeAll, beforeEach, afterEach } from 'vitest';
 import { render, cleanup, fireEvent, screen, waitFor } from '@testing-library/react';
 import { ThemedApp, themeStorageKey } from '@/design/ThemeProvider';
 import { installDomShims } from '@/design/testing/domShims';
 import { legacyChromeClasses } from '@/design/testing/themeAssertions';
+import { CHART_SERIES } from '@/utils/chartSvg';
 
 import MapExplorer from '@/components/course/panels/mapping/MapExplorer';
 import IsochoreExplorer from '@/components/course/panels/mapping/IsochoreExplorer';
@@ -116,15 +112,14 @@ describe('the reader-only teaching panels inside a scope', () => {
           expect(plate.querySelector('img[alt]')).toBeTruthy();
         }
         const svgMarkup = [...document.querySelectorAll('svg[role="img"]')].map((s) => s.outerHTML).join('');
+        // no lime on any plot (wave 7: the P-1 marker was the last one)
+        expect(svgMarkup).not.toMatch(LIME);
         if (id === 'rc-property-explorer') {
-          // the lesson's "hollow lime circle", and nothing else, keeps lime
-          const limeNodes = [...document.querySelectorAll('svg [stroke], svg [fill]')]
-            .filter((el) => LIME.test(el.getAttribute('stroke') || '') || LIME.test(el.getAttribute('fill') || ''));
-          expect(limeNodes.length).toBe(1);
-          expect(limeNodes[0].tagName.toLowerCase()).toBe('circle');
-          expect(limeNodes[0].getAttribute('fill')).toBe('none');
-        } else {
-          expect(svgMarkup).not.toMatch(LIME);
+          // the lessons' "hollow violet circle": a kit series colour, no fill
+          const p1 = document.querySelector('svg circle[data-marker="p1"]');
+          expect(p1.getAttribute('fill')).toBe('none');
+          expect(p1.getAttribute('stroke')).toBe(CHART_SERIES[4]);
+          expect(CHART_SERIES[4].toLowerCase()).toBe('#7c3aed');
         }
         // no dark console plate is left behind a plot
         expect(svgMarkup).not.toMatch(/fill="#0F172A" (?:\/>|><\/rect>)/i);
@@ -143,8 +138,6 @@ function MappingHarness() {
   return c.ui;
 }
 
-const LEGACY_LABEL = 'text-gray-400 text-xs mb-1 block';
-const LEGACY_TEXTAREA = 'w-full bg-gray-700 text-white border border-gray-600 rounded-md text-sm px-2 py-1 font-mono';
 
 describe('the case inputs', () => {
   beforeAll(installDomShims);
@@ -153,14 +146,6 @@ describe('the case inputs', () => {
   const typeASection = () => {
     fireEvent.change(screen.getByRole('combobox'), { target: { value: 'typed' } });
   };
-
-  it('Well Correlation (shared with batch 3A) renders its legacy classes byte for byte outside a scope', () => {
-    render(<SectionHarness />);
-    typeASection();
-    const textarea = document.getElementById('wc-section-table');
-    expect(textarea.getAttribute('class')).toBe(LEGACY_TEXTAREA);
-    expect(document.querySelector('label[for="wc-section-table"]').getAttribute('class')).toBe(LEGACY_LABEL);
-  });
 
   it('Well Correlation renders roles inside a scope', () => {
     render(<ThemedApp userId="u-panels"><SectionHarness /></ThemedApp>);

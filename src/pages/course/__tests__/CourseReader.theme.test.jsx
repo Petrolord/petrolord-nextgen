@@ -7,7 +7,7 @@
 // choice, and no legacy console colour is left outside canvases. The lesson
 // page is checked with a teaching panel embedded (its plots sit on white
 // chart plates) and in dark. The capstone redirect is covered by the
-// pattern registration. A route outside the rollout keeps the legacy frame.
+// pattern registration. Since wave 7 every signed-in route is scoped.
 //
 // The course kit (QuizRunner, LockedCard, panelKit ...) is batch 1B's and is
 // rendered for real: inside the scope it is on roles too.
@@ -106,8 +106,8 @@ describe('Course reader, further states', () => {
     for (const r of [BASE, `${BASE}/exam`, `${BASE}/capstone`, `${BASE}/quiz/${MOD}`, `${BASE}/${MOD}`, `${BASE}/${MOD}/${LESSON}`]) {
       expect({ r, themed: isThemedPath(r) }).toEqual({ r, themed: true });
     }
-    // a signed-in route no batch registers stays out
-    expect(isThemedPath('/legacy-probe')).toBe(false);
+    // wave 7: every signed-in route is scoped, registered or not
+    expect(isThemedPath('/dashboard/legacy-probe')).toBe(true);
   });
 
   it('the lesson stays clean in dark, and the panel plots sit on white chart plates', async () => {
@@ -145,13 +145,12 @@ describe('Course reader, further states', () => {
     expectNoLegacyChrome();
   });
 
-  it('a route the rollout has not reached keeps the legacy frame (negative control)', async () => {
-    // a test-only route no batch registers (3A has since migrated the
-    // course's learning page, which this control used to render)
+  it('every signed-in route is scoped: a route no batch ever listed gets the scope, the toggle and the role header', async () => {
     renderRoute('/legacy-probe');
     await waitFor(() => expect(document.querySelector('header')).toBeTruthy());
-    expect(screen.queryByTestId('signed-in-theme-scope')).toBeNull();
-    expect(screen.queryByTestId('theme-toggle')).toBeNull();
-    expect(document.querySelector('header').className).toContain('bg-[#1E293B]');
+    expect(screen.getByTestId('signed-in-theme-scope').getAttribute('data-pl-theme')).toBe('light');
+    expect(screen.getByTestId('theme-toggle')).toBeTruthy();
+    expect(document.querySelector('header').className).not.toContain('bg-[#1E293B]');
+    expectNoLegacyChrome();
   });
 });

@@ -282,7 +282,7 @@ const PasswordResetPage = () => {
                       onChange={(e) => setEmail(e.target.value)}
                       readOnly={mode === 'reset-password'}
                       disabled={loading || mode === 'reset-password'}
-                      placeholder="name@university.edu"
+                      placeholder="you@example.com"
                       className={`pl-10 ${mode === 'reset-password' ? 'pr-10 opacity-70 cursor-not-allowed' : ''}`}
                     />
                     {mode === 'reset-password' && (

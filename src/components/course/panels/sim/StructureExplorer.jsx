@@ -4,7 +4,6 @@ import {
   TEACHING_MEAN_M, TEACHING_OWC_M, BOOKED_STOIIP_STB, GOLDEN,
 } from './simLab';
 import { PanelShell, Tile, TileGrid, Note, SelectField, NumField } from '@/components/course/panels/petrophysics/panelKit';
-import { useThemeClass } from '@/design/themeClass';
 import SvgChartFrame from '@/components/charts/SvgChartFrame';
 import { seriesColor, SVG_CHART } from '@/utils/chartSvg';
 
@@ -20,7 +19,6 @@ const CELL = 11;
 const fmt = (v, d = 4) => (Number.isFinite(v) ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d }) : '-');
 
 const StructureExplorer = () => {
-  const tc = useThemeClass();
   const [convention, setConvention] = useState('centre');
   const [showWells, setShowWells] = useState(true);
   // The setting opens on the teaching deck; a capstone brief states its own
@@ -95,7 +93,7 @@ const StructureExplorer = () => {
       subtitle="The TOP_SAND surface the deck carries, kriged from the six mapped well tops, and what it books against the NG5 volumetric."
     >
       {inputs}
-      <div className={tc('text-xs text-gray-500', 'text-xs text-pl-muted')}>
+      <div className="text-xs text-pl-muted">
         The panel opens on the teaching deck: regional mean {TEACHING_MEAN_M} m and the contact at {TEACHING_OWC_M} m.
         A capstone brief states a setting of its own; type it in, and the surface is kriged again at that mean.
       </div>
@@ -107,11 +105,11 @@ const StructureExplorer = () => {
           options={[['centre', 'Eclipse cell centre'], ['tapered', 'Column clipped at contact']]}
         />
         <div>
-          <p className={tc('text-gray-400 text-xs mb-1', 'text-pl-muted text-xs mb-1')}>Wells</p>
+          <p className="text-pl-muted text-xs mb-1">Wells</p>
           <button
             type="button"
             onClick={() => setShowWells((v) => !v)}
-            className={tc('px-2 py-1 text-xs rounded border border-gray-600 text-gray-300 hover:border-gray-400', 'px-2 py-1 text-xs rounded border border-pl-border-strong text-pl-text hover:border-pl-muted')}
+            className="px-2 py-1 text-xs rounded border border-pl-border-strong text-pl-text hover:border-pl-muted"
           >
             {showWells ? 'Hide' : 'Show'} well posts
           </button>
@@ -162,13 +160,13 @@ const StructureExplorer = () => {
       </TileGrid>
 
       <div className="overflow-x-auto">
-        <table className={tc('w-full text-xs text-gray-300', 'w-full text-xs text-pl-text')}>
-          <thead className={tc('text-gray-500', 'text-pl-muted')}>
+        <table className="w-full text-xs text-pl-text">
+          <thead className="text-pl-muted">
             <tr><th className="text-left py-1">Well</th><th className="text-left">Cell</th><th className="text-right">Mapped (m)</th><th className="text-right">Deck (m)</th><th className="text-right">Delta (m)</th></tr>
           </thead>
           <tbody>
             {wells.map((w) => (
-              <tr key={w.well} className={tc(w.onLattice ? '' : 'text-[#BFFF00]', w.onLattice ? '' : 'text-pl-accent-text')}>
+              <tr key={w.well} className={w.onLattice ? '' : 'text-pl-accent-text'}>
                 <td className="py-1">{w.well}</td>
                 <td>({w.i}, {w.j})</td>
                 <td className="text-right">{fmt(w.mapped_top_m, 2)}</td>
@@ -181,7 +179,7 @@ const StructureExplorer = () => {
       </div>
 
       <div className="mt-4">
-        <p className={tc('text-gray-400 text-xs mb-2', 'text-pl-muted text-xs mb-2')}>Correlation check: what Standing's correlation says of a stated oil (it opens on the teaching fluid)</p>
+        <p className="text-pl-muted text-xs mb-2">Correlation check: what Standing's correlation says of a stated oil (it opens on the teaching fluid)</p>
         <div className="grid gap-3 grid-cols-2 sm:grid-cols-6 items-end">
           {[['api', 'API'], ['gasSg', 'Gas gravity'], ['tempF', 'Temperature (degF)'], ['pbPsia', 'Bubble point (psia)'], ['piPsia', 'Initial pressure (psia)'], ['rsiScfStb', 'Designed Rs (scf/stb)']].map(([k, label]) => (
             <NumField key={k} label={label} value={fluid[k]} onChange={(v) => setFluid((f) => ({ ...f, [k]: v }))} />

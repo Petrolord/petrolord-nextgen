@@ -1,7 +1,6 @@
 // TEST-ONLY. One scene per adapted @/components/ui piece, open where the
-// piece renders into a portal, so a test can compare what each renders:
-// outside a scope (legacyUi.test.jsx: byte for byte what main rendered
-// before wave 0) and inside one (uiKitScope.test.jsx: theme roles only).
+// piece renders into a portal, so uiKitScope.test.jsx can check that each
+// renders theme roles only, in both themes.
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -175,10 +174,3 @@ export const UI_SCENES = [
     </ToastProvider>
   )],
 ];
-
-/** Markup with the per-render ids React and Radix generate normalised away. */
-export function normaliseMarkup(html) {
-  return html
-    .replace(/radix-:r[0-9a-z]+:/g, 'radix-:id:')
-    .replace(/:r[0-9a-z]+:/g, ':id:');
-}

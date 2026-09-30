@@ -5,8 +5,8 @@
 // renders inside the one signed-in scope: grey panel light by default, the
 // header toggle switches to dark and back and stores the choice under
 // petrolord.theme.v1:<user id>, and no legacy console colour is left
-// outside canvases, menus included. A route the rollout has not reached
-// keeps the legacy frame (the gate's negative control).
+// outside canvases, menus included. A route no batch ever listed
+// is scoped like every other (wave 7: no gate).
 import React from 'react';
 import { describe, it, expect, vi, beforeAll, beforeEach, afterEach } from 'vitest';
 import { render, screen, cleanup, fireEvent } from '@testing-library/react';
@@ -18,7 +18,7 @@ import Layout from '@/components/Layout';
 import DashboardPage from '@/pages/DashboardPage';
 import { installDomShims } from '@/design/testing/domShims';
 import {
-  describeScreenTheme, expectNoLegacyChrome, getScopeRoot, legacyChromeClasses,
+  describeScreenTheme, expectNoLegacyChrome, expectNegativeControl, getScopeRoot,
 } from '@/design/testing/themeAssertions';
 
 vi.mock('@/services/academyService', async (importOriginal) => ({
@@ -65,7 +65,7 @@ function renderAt(path) {
         <RoleProvider>
           <Routes>
             <Route path="/dashboard/*" element={<ApplicationLayoutProvider><Layout><DashboardPage /></Layout></ApplicationLayoutProvider>} />
-            {/* a signed-in route no batch registers (the gate's negative control) */}
+            {/* a signed-in route no batch ever listed: scoped like every other (wave 7) */}
             <Route path="/legacy-probe" element={<ApplicationLayoutProvider><Layout><h1>Legacy probe</h1></Layout></ApplicationLayoutProvider>} />
           </Routes>
         </RoleProvider>
@@ -111,16 +111,15 @@ describe('Dashboard home, further states', () => {
     expectNoLegacyChrome();
   });
 
-  it('a route the rollout has not reached keeps the legacy frame (negative control)', async () => {
-    // 1A registered /dashboard/modules/*, so the control mounts Layout on a
-    // route no batch registers. The ink rail (1A) is a fixed dark scope on
-    // every route; nothing else carries a theme there.
+  it('every signed-in route is scoped: a route no batch ever listed opens the one scope', async () => {
     renderAt('/legacy-probe');
     await screen.findByText('Legacy probe');
-    expect(document.querySelector('[data-pl-theme]:not([data-testid="sidebar-rail"])')).toBeNull();
-    expect(screen.queryByTestId('theme-toggle')).toBeNull();
-    expect(document.querySelector('header').className).toContain('bg-[#1E293B]');
-    // the detector finds nothing only because there is no scope to scan
-    expect(legacyChromeClasses()).toEqual([]);
+    const scope = getScopeRoot();
+    expect(scope.getAttribute('data-pl-theme')).toBe('light');
+    expect(scope.contains(screen.getByText('Legacy probe'))).toBe(true);
+    expect(scope.contains(screen.getByTestId('theme-toggle'))).toBe(true);
+    expect(document.querySelectorAll('[data-pl-root]').length).toBe(1);
+    expectNoLegacyChrome();
+    expectNegativeControl(scope);
   });
 });

@@ -118,6 +118,7 @@ describe('production II course apps, further states', () => {
 describe('4B registry', () => {
   it('registers the three app routes (a test-only route stays out)', () => {
     for (const app of APPS) expect(isThemedPath(`/dashboard/apps/${app.slug}`)).toBe(true);
-    expect(isThemedPath('/legacy-probe')).toBe(false);
+    // wave 7: every signed-in route is scoped, registered or not
+    expect(isThemedPath('/dashboard/legacy-probe')).toBe(true);
   });
 });
