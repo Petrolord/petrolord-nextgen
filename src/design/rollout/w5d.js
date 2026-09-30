@@ -6,4 +6,5 @@ export default [
   '/dashboard/apps/mlcore',
   '/dashboard/apps/facies',
   '/dashboard/apps/forecastml',
+  '/dashboard/apps/appliedai',
 ];
