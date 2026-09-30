@@ -1,15 +1,18 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, ComposedChart, Bar, BarChart, XAxis, YAxis, CartesianGrid, Tooltip,
+  LineChart, Line, ComposedChart, Bar, BarChart, XAxis, YAxis, CartesianGrid, Tooltip,
   ReferenceLine, ReferenceDot, ReferenceArea, Legend,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
+import { SVG_CHART } from '@/utils/chartSvg';
 import {
   akodoTablesAt, partialTable, dipAt, dipSweepAt, partialDipsAt, aboveLastAt, curveAt, waterAt, waterSweepAt, morningAt,
   vcfAt, vcfCurveAt, vcfRefusalsAt, SYNTHETIC_COEFFICIENTS, AKODO_DAY, dayAt, openingFromClosingDerived,
   cannotFailAt, toleranceSweepAt, trendAt, fmt, plain,
 } from './supplyLab';
 import {
-  AXIS, TOOLTIP, GRID, SERIES, txt, usable, Tbl, Refusal, EngineNote, Note, Lead, Labelled, Empty, safe, NumBox,
+  AXIS, TOOLTIP, SERIES, txt, usable, Tbl, Refusal, EngineNote, Note, Lead, Labelled, Empty, safe, NumBox,
   Slider, Button,
 } from './panelBits';
 import {
@@ -60,7 +63,7 @@ export const TableMode = ({ tables, reading, sweep, partialRows, above, curve, t
           <Button active={partial} onClick={() => onPartial(true)}>A partial calibration that starts above the floor</Button>
         </div>
       )}
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         {t.id}: {t.product}, {t.shape}, {t.size}. {t.entries} entries every {t.stepMm} mm, from {t.first.heightMm} mm
         {' '}= {fmt.m3(t.first.volumeM3)} m3 to {t.last.heightMm} mm = {fmt.m3(t.last.volumeM3)} m3.
       </p>
@@ -74,19 +77,17 @@ export const TableMode = ({ tables, reading, sweep, partialRows, above, curve, t
       )}
       {r && r.refusal && <Refusal message={r.refusal} />}
       {drawn && (
-        <div className="mt-3 h-64">
-          <ResponsiveContainer width="100%" height="100%">
+        <ChartFrame height={256} className="mt-3">
             <LineChart data={drawn} margin={{ top: 8, right: 16, bottom: 18, left: 8 }}>
-              <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
-              <XAxis dataKey="heightMm" type="number" tick={AXIS} label={{ value: 'height, mm', position: 'insideBottom', offset: -8, fill: '#94a3b8', fontSize: 11 }} />
-              <YAxis tick={AXIS} label={{ value: 'volume, m3', angle: -90, position: 'insideLeft', fill: '#94a3b8', fontSize: 11 }} />
+              <CartesianGrid {...GRID_STYLE} />
+              <XAxis dataKey="heightMm" type="number" tick={AXIS} label={{ value: 'height, mm', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 11 }} />
+              <YAxis tick={AXIS} label={{ value: 'volume, m3', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 11 }} />
               <Tooltip contentStyle={TOOLTIP} />
               <Line type="linear" dataKey="volumeM3" name="strapping entry" stroke={SERIES[0]} dot={{ r: 2 }} isAnimationActive={false} />
               {r && Number.isFinite(Number(dip)) && dip !== '' && <ReferenceLine x={Number(dip)} stroke={SERIES[3]} strokeDasharray="4 4" />}
               {r && r.volumeM3 !== null && <ReferenceDot x={Number(dip)} y={r.volumeM3} r={5} fill={SERIES[2]} stroke="none" />}
             </LineChart>
-          </ResponsiveContainer>
-        </div>
+          </ChartFrame>
       )}
       <Note>
         volumeAtDip draws a straight line between the two entries either side of the dip. Below the first entry it answers
@@ -148,7 +149,7 @@ export const WaterMode = ({ water, sweep, tables, tank, onTank, dip, onDip, cut,
             <Tile label="Gross observed volume, m3" value={fmt.m3(w.grossM3)} />
           </TileGrid>
           <Labelled tag="the reading the engine does not use">
-            <p className="text-xs text-slate-300 mb-0">
+            <p className="text-xs text-pl-text mb-0">
               The volume at the dip less the water HEIGHT, {txt(w.heightLessWaterDerivedMm)} mm, read off the table
               once: {fmt.m3(w.byHeightNotUsedM3)} m3, against the engine&apos;s gross of {fmt.m3(w.grossM3)} m3.
               {t.shape === 'horizontal'
@@ -156,8 +157,7 @@ export const WaterMode = ({ water, sweep, tables, tank, onTank, dip, onDip, cut,
                 : ' On a vertical tank the two agree to about a litre, because its table is linear in height.'}
             </p>
           </Labelled>
-          <div className="mt-3 h-48">
-            <ResponsiveContainer width="100%" height="100%">
+          <ChartFrame height={192} className="mt-3">
               <BarChart
                 data={[
                   { name: 'volume at the dip', m3: w.volumeAtDipM3 },
@@ -166,14 +166,13 @@ export const WaterMode = ({ water, sweep, tables, tank, onTank, dip, onDip, cut,
                 ]}
                 margin={{ top: 8, right: 16, bottom: 8, left: 8 }}
               >
-                <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
+                <CartesianGrid {...GRID_STYLE} />
                 <XAxis dataKey="name" tick={AXIS} />
                 <YAxis tick={AXIS} />
                 <Tooltip contentStyle={TOOLTIP} />
                 <Bar dataKey="m3" fill={SERIES[0]} isAnimationActive={false} />
               </BarChart>
-            </ResponsiveContainer>
-          </div>
+            </ChartFrame>
         </>
       )}
       {w && w.refusal && <Refusal message={w.refusal} />}
@@ -212,7 +211,7 @@ export const VcfMode = ({ morning, vcfs, onVcf, synth, curve, refusals, rho, onR
         <Refusal key={x.label} label={`volumeCorrectionFactor with ${x.label}`} message={x.message} />
       ))}
       <Labelled tag="SYNTHETIC coefficients, invented for this course and no commodity group's published row">
-        <p className="text-xs text-slate-300 mb-2">
+        <p className="text-xs text-pl-text mb-2">
           The ASTM D1250 form: alpha = K0 / rho^2 + K1 / rho + K2, and VCF = exp( -alpha x dT x (1 + 0.8 x alpha x dT) ).
           Here K0 = {SYNTHETIC_COEFFICIENTS.k0}, K1 = {SYNTHETIC_COEFFICIENTS.k1}, K2 = {SYNTHETIC_COEFFICIENTS.k2}. They show
           the form only, and no stock on this page is corrected with them.
@@ -229,19 +228,17 @@ export const VcfMode = ({ morning, vcfs, onVcf, synth, curve, refusals, rho, onR
         )}
         {s && s.refusal && <Refusal message={s.refusal} />}
         {Array.isArray(curve) && curve.length > 0 && (
-          <div className="mt-3 h-56">
-            <ResponsiveContainer width="100%" height="100%">
+          <ChartFrame height={224} className="mt-3">
               <LineChart data={curve} margin={{ top: 8, right: 16, bottom: 18, left: 8 }}>
-                <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
-                <XAxis dataKey="temperatureC" type="number" tick={AXIS} label={{ value: 'temperature, C', position: 'insideBottom', offset: -8, fill: '#94a3b8', fontSize: 11 }} />
+                <CartesianGrid {...GRID_STYLE} />
+                <XAxis dataKey="temperatureC" type="number" tick={AXIS} label={{ value: 'temperature, C', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 11 }} />
                 <YAxis tick={AXIS} domain={['auto', 'auto']} />
                 <Tooltip contentStyle={TOOLTIP} />
                 <ReferenceLine x={15} stroke={SERIES[3]} strokeDasharray="4 4" />
-                <ReferenceLine y={1} stroke={GRID} />
+                <ReferenceLine y={1} stroke={SVG_CHART.reference} />
                 <Line type="monotone" dataKey="vcf" name="VCF (synthetic)" stroke={SERIES[1]} dot={false} isAnimationActive={false} />
               </LineChart>
-            </ResponsiveContainer>
-          </div>
+            </ChartFrame>
         )}
         <Note>At 15 C the form gives exactly one, and above it less than one: two invariants that need no coefficient.</Note>
       </Labelled>
@@ -264,7 +261,7 @@ export const DayMode = ({ day, inputs, onInput, onDemo, onRecord, cannotFail, to
         <NumBox label="Known losses, m3" value={inputs.knownLossM3} onChange={(v) => onInput('knownLossM3', v)} />
         <NumBox label="Tolerance, a stated percent of throughput" value={inputs.tolerancePercentOfThroughput} onChange={(v) => onInput('tolerancePercentOfThroughput', v)} />
       </FieldGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The closing stock comes from the tanks: the three standard volumes at the VCFs typed on the VCF view,
         {' '}{fmt.m3(inputs.closingDippedM3)} m3.
       </p>
@@ -286,18 +283,16 @@ export const DayMode = ({ day, inputs, onInput, onDemo, onRecord, cannotFail, to
       )}
       {day.note && <EngineNote>{day.note}</EngineNote>}
       {u !== null && tol !== null && (
-        <div className="mt-3 h-24">
-          <ResponsiveContainer width="100%" height="100%">
+        <ChartFrame height={96} className="mt-3">
             <BarChart layout="vertical" data={[{ name: 'unaccounted', m3: u }]} margin={{ top: 4, right: 16, bottom: 4, left: 8 }}>
-              <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
+              <CartesianGrid {...GRID_STYLE} />
               <XAxis type="number" domain={[-span, span]} tick={AXIS} />
               <YAxis type="category" dataKey="name" tick={AXIS} width={80} />
               <ReferenceArea x1={-tol} x2={tol} fill={SERIES[2]} fillOpacity={0.12} />
-              <ReferenceLine x={0} stroke={GRID} />
+              <ReferenceLine x={0} stroke={SVG_CHART.reference} />
               <Bar dataKey="m3" fill={u < 0 ? SERIES[5] : SERIES[0]} isAnimationActive={false} />
             </BarChart>
-          </ResponsiveContainer>
-        </div>
+          </ChartFrame>
       )}
       <Note>The shaded band is the tolerance, a stated percent of throughput, either side of zero.</Note>
 
@@ -326,20 +321,18 @@ export const DayMode = ({ day, inputs, onInput, onDemo, onRecord, cannotFail, to
           </TileGrid>
           {tr.prompt ? <EngineNote>{tr.prompt}</EngineNote> : <Note>The engine prints no prompt at this run.</Note>}
           {tr.rows.length > 0 && (
-            <div className="mt-3 h-56">
-              <ResponsiveContainer width="100%" height="100%">
+            <ChartFrame height={224} className="mt-3">
                 <ComposedChart data={tr.rows} margin={{ top: 8, right: 16, bottom: 8, left: 8 }}>
-                  <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
+                  <CartesianGrid {...GRID_STYLE} />
                   <XAxis dataKey="date" tick={AXIS} />
                   <YAxis tick={AXIS} />
                   <Tooltip contentStyle={TOOLTIP} />
-                  <Legend wrapperStyle={{ fontSize: 11 }} />
-                  <ReferenceLine y={0} stroke={GRID} />
+                  <Legend {...LEGEND_PROPS} />
+                  <ReferenceLine y={0} stroke={SVG_CHART.reference} />
                   <Bar dataKey="unaccountedM3" name="unaccounted, m3" fill={SERIES[0]} isAnimationActive={false} />
                   <Line dataKey="cumulativeM3" name="cumulative, m3" stroke={SERIES[3]} isAnimationActive={false} />
                 </ComposedChart>
-              </ResponsiveContainer>
-            </div>
+              </ChartFrame>
           )}
         </>
       )}

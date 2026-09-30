@@ -893,8 +893,12 @@ describe('THE RENDER GATE', () => {
 
   it('every ResponsiveContainer is given a width and a height', () => {
     PANEL_FILES.forEach((f) => {
+      // Batch 5D: a chart in the kit's ChartFrame states its height, and the
+      // frame gives its own ResponsiveContainer width 100% and that height.
       const tags = sourceOf(f).match(/<ResponsiveContainer[^>]*>/g) || [];
-      expect(tags.length, `${f} draws no chart`).toBeGreaterThan(0);
+      const frames = sourceOf(f).match(/<ChartFrame[^>]*>/g) || [];
+      expect(tags.length + frames.length, `${f} draws no chart`).toBeGreaterThan(0);
+      frames.forEach((t) => expect(t, f).toContain('height='));
       tags.forEach((t) => {
         expect(t, f).toContain('width=');
         expect(t, f).toContain('height=');

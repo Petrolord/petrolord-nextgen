@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, ComposedChart, Line, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+  ComposedChart, Line, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK } from '@/utils/chartSvg';
 import {
   zOf, modifiedZOf, fencesOf, hampelOf, grubbsOf, mahalanobisOf, quantileOf, pairRows,
   parseSeries, parseNumber, outliersOnSmallSets, gammaRayOutliers, densityNeutron, DATASET,
@@ -29,8 +32,8 @@ export const MODES = [
   ['mahalanobis', 'The Mahalanobis distance on two variables'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
 const GAUGE = Series(DATASET.EKENE_GAUGE.readings);
 const CORE = Series(DATASET.EKENE_CORE.porosity);
 
@@ -155,22 +158,20 @@ export const HampelMode = ({ t }) => {
       {r && r.error && <Refusal r={r} />}
       {r && !r.error && (
         <>
-          <div className="h-56 mt-3">
-            <ResponsiveContainer width="100%" height="100%">
+          <ChartFrame height={224} className="mt-3">
               <ComposedChart data={data} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-                <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
+                <CartesianGrid {...GRID_STYLE} />
                 <XAxis dataKey="entry" tick={AXIS} />
                 <YAxis tick={AXIS} />
                 <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
-                <Legend wrapperStyle={{ fontSize: 11 }} />
-                <Line dataKey="value" name="value" stroke="#38bdf8" dot isAnimationActive={false} connectNulls={false} />
-                <Line dataKey="median" name="window median" stroke="#BFFF00" dot={false} isAnimationActive={false} />
-                <Line dataKey="upper" name="median + threshold" stroke="#f472b6" dot={false} strokeDasharray="4 3" isAnimationActive={false} />
-                <Line dataKey="lower" name="median - threshold" stroke="#f472b6" dot={false} strokeDasharray="4 3" isAnimationActive={false} />
-                <Scatter dataKey="flagged" name="flagged" fill="#fbbf24" isAnimationActive={false} />
+                <Legend {...LEGEND_PROPS} />
+                <Line dataKey="value" name="value" stroke={seriesColor(0)} dot isAnimationActive={false} connectNulls={false} />
+                <Line dataKey="median" name="window median" stroke={seriesColor(1)} dot={false} isAnimationActive={false} />
+                <Line dataKey="upper" name="median + threshold" stroke={seriesColor(4)} dot={false} strokeDasharray="4 3" isAnimationActive={false} />
+                <Line dataKey="lower" name="median - threshold" stroke={seriesColor(4)} dot={false} strokeDasharray="4 3" isAnimationActive={false} />
+                <Scatter dataKey="flagged" name="flagged" fill={seriesColor(2)} isAnimationActive={false} />
               </ComposedChart>
-            </ResponsiveContainer>
-          </div>
+          </ChartFrame>
           <Tbl head={['entry', 'value', 'window median', 'MAD', 'threshold', 'present in window', 'judged']} rows={r.points.map((p) => [String(p.index), six(p.value), six(p.median), six(p.mad), six(p.threshold), p.windowCount === null ? 'none' : String(p.windowCount), String(p.judged)])} />
           <Flags flags={r.flags} />
         </>

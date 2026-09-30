@@ -1,14 +1,17 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
+import { SVG_CHART } from '@/utils/chartSvg';
 import {
   OKORDIA, CONFIGURATION_IDS, PRODUCT_IDS, SUPPLY_SCENARIOS, LICENSING_STAGES, SCALING_EXPONENT,
   scaleAt, slateOf, configurationOf, okordiaInputs, screenOf, scenarioTable, screenTable, screenRefusals,
   licensingOf, usd, bbl, pbl, frac,
 } from './refineryLab';
 import {
-  AXIS, TOOLTIP, GRID, SERIES, txt, yes, Tbl, Refused, Note, Lead, Empty, safe, usable, Slider, BoxField, Button, Check,
+  AXIS, TOOLTIP, SERIES, txt, yes, Tbl, Refused, Note, Lead, Empty, safe, usable, Slider, BoxField, Button, Check,
 } from './panelBits';
 import {
   PanelShell, SelectField, Tile, TileGrid, FieldGrid,
@@ -80,21 +83,19 @@ export const ScaleMode = ({
         cheaper {yes(p.modularCheaper)}; the two laws equal {yes(p.lawsEqual)}. Both start from the quotation of
         {' '}{usd(scale.reference.cost)} US dollars for {scale.reference.capacity} bpd, so they cross at that size.
       </Note>
-      <div className="mt-3">
-        <ResponsiveContainer width="100%" height={260}>
+      <ChartFrame height={260} className="mt-3">
           <LineChart data={data} margin={{ top: 8, right: 16, left: 8, bottom: 8 }}>
-            <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
-            <XAxis dataKey="capacity" type="number" domain={[0, 30000]} tick={AXIS} label={{ value: 'capacity (bpd)', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -4 }} />
+            <CartesianGrid {...GRID_STYLE} />
+            <XAxis dataKey="capacity" type="number" domain={[0, 30000]} tick={AXIS} label={{ value: 'capacity (bpd)', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -4 }} />
             <YAxis tick={AXIS} width={70} />
             <Tooltip contentStyle={TOOLTIP} formatter={(v) => usd(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine x={scale.reference.capacity} stroke="#94a3b8" strokeDasharray="4 4" label={{ value: 'the reference size', fill: '#94a3b8', fontSize: 10 }} />
-            <ReferenceLine x={capacity} stroke="#BFFF00" />
+            <Legend {...LEGEND_PROPS} />
+            <ReferenceLine x={scale.reference.capacity} stroke={SVG_CHART.reference} strokeDasharray="4 4" label={{ value: 'the reference size', fill: SVG_CHART.note, fontSize: 10 }} />
+            <ReferenceLine x={capacity} stroke={SERIES[2]} />
             <Line type="monotone" dataKey="modular" name={`modular per bpd (${frac(modular)})`} stroke={SERIES[0]} dot={false} />
             <Line type="monotone" dataKey="stick" name={`stick-built per bpd (${frac(stick)})`} stroke={SERIES[1]} dot={false} />
           </LineChart>
-        </ResponsiveContainer>
-      </div>
+        </ChartFrame>
       <Tbl
         head={['capacity (bpd)', 'modular cost', 'modular per bpd', 'stick-built cost', 'stick-built per bpd', 'ratio', 'modular cheaper', 'the two laws equal']}
         rows={scale.table.map((r) => [r.capacity, usd(r.modularCost), usd(r.modularPerBpd), usd(r.stickBuiltCost), usd(r.stickBuiltPerBpd), r.ratio === null ? 'none' : frac(r.ratio), yes(r.modularCheaper), yes(r.lawsEqual)])}
@@ -263,7 +264,7 @@ export const ScreenMode = ({ table }) => {
       <Tbl
         head={['configuration', 'scenario', 'gross value per bbl', 'annual throughput (bbl)', 'gross margin per bbl', 'first operating year revenue']}
         rows={table.map((r) => [r.configurationId, r.scenarioId, pbl(r.grossValuePerBbl), bbl(r.annualBbl), pbl(r.grossMarginPerBbl), usd(r.firstRevenue)])}
-        tone={(k) => (table[k].grossMarginPerBbl < 0 ? 'text-red-300' : '')}
+        tone={(k) => (table[k].grossMarginPerBbl < 0 ? 'text-pl-danger-text' : '')}
       />
       <Note>A row in red has a gross margin per barrel below zero.</Note>
     </>
@@ -288,11 +289,11 @@ export const LicensingMode = ({ lic, done, onToggle }) => {
       {lic.outOfOrder && <Note>A later licence is ticked while an earlier one is not, which the app surfaces as a data-entry error.</Note>}
       <div className="grid gap-2 sm:grid-cols-3 mt-3">
         {lic.stages.map((s) => (
-          <div key={s.id} className={`rounded-md border p-2 bg-[#0F172A] ${s.complete ? 'border-emerald-700/60' : 'border-slate-700'}`}>
-            <p className="text-xs text-slate-500 mb-0">stage {s.stage}, {s.id}{s.complete ? ', held' : ''}</p>
-            <p className="text-sm text-white mb-0">{s.name}</p>
-            <p className="text-xs text-slate-400 mt-1 mb-0">{s.summary}</p>
-            <p className="text-[11px] text-slate-500 mt-1 mb-0">Typical evidence: {s.typicalEvidence.join('; ')}</p>
+          <div key={s.id} className={`rounded-md border p-2 bg-pl-sunken ${s.complete ? 'border-pl-success/60' : 'border-pl-border'}`}>
+            <p className="text-xs text-pl-muted mb-0">stage {s.stage}, {s.id}{s.complete ? ', held' : ''}</p>
+            <p className="text-sm text-pl-text mb-0">{s.name}</p>
+            <p className="text-xs text-pl-muted mt-1 mb-0">{s.summary}</p>
+            <p className="text-[11px] text-pl-muted mt-1 mb-0">Typical evidence: {s.typicalEvidence.join('; ')}</p>
           </div>
         ))}
       </div>

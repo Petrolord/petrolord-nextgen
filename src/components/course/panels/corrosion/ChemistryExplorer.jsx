@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
 import {
   fugacityAndPartialPressure, h2sThreshold, whichFilmGoverns, theWithdrawal,
@@ -9,6 +9,9 @@ import {
 import {
   PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note,
 } from '@/components/course/panels/petrophysics/panelKit';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 
 // The chemistry explorer: what is in the stream, and which quantity drives what.
 //
@@ -42,14 +45,14 @@ export const MODES = [
   ['absent', 'What this door does not answer, printed as fields rather than gaps'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const SERIES = ['#38bdf8', '#f472b6', '#BFFF00', '#fbbf24'];
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const SERIES = [seriesColor(0), seriesColor(4), seriesColor(1), seriesColor(2)];
 
 const Tbl = ({ head, rows }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>{head.map((h, i) => <th key={h} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>)}</tr>
       </thead>
       <tbody>
@@ -64,21 +67,21 @@ const Tbl = ({ head, rows }) => (
 );
 
 const Held = ({ children }) => (
-  <div className="mt-3 rounded-md border border-amber-700/60 bg-amber-950/20 p-3">
-    <p className="text-amber-300 text-xs font-medium mb-1">HELD FOR LITERATURE</p>
-    <p className="text-xs text-slate-300 mb-0">{children}</p>
+  <div className="mt-3 rounded-md border border-pl-warning/40 bg-pl-warning-bg p-3">
+    <p className="text-pl-warning-text text-xs font-medium mb-1">HELD FOR LITERATURE</p>
+    <p className="text-xs text-pl-text mb-0">{children}</p>
   </div>
 );
 
 const Absent = ({ children }) => (
-  <div className="mt-3 rounded-md border border-slate-600 bg-slate-900/40 p-3">
-    <p className="text-slate-300 text-xs font-medium mb-1">NOT PROVIDED</p>
-    <p className="text-xs text-slate-400 mb-0">{children}</p>
+  <div className="mt-3 rounded-md border border-pl-border-strong bg-pl-sunken p-3">
+    <p className="text-pl-text text-xs font-medium mb-1">NOT PROVIDED</p>
+    <p className="text-xs text-pl-muted mb-0">{children}</p>
   </div>
 );
 
 const Quote = ({ children }) => (
-  <p className="mt-2 mb-0 border-l-2 border-slate-600 pl-3 text-xs text-slate-400 font-mono">{children}</p>
+  <p className="mt-2 mb-0 border-l-2 border-pl-border-strong pl-3 text-xs text-pl-muted font-mono">{children}</p>
 );
 
 const safe = (fn) => { try { return fn(); } catch { return null; } };
@@ -99,27 +102,25 @@ export const FugacityMode = ({ f, pressure }) => {
         <Tile label="CO2 fugacity, and THIS is what drives the rate" value={six(row.fco2Bar)} unit="bar" />
         <Tile label="Pressure cap applied" value={String(row.pressureCapApplied)} />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Read the first three tiles left to right. The partial pressure is bookkeeping over the stream. The coefficient is
         a correction that falls below one as the pressure rises. The fugacity is their product, and it is the one of the
         three that enters the rate correlation. At the shipped studio defaults the three read {six(f.appPco2Bar)} bar,
         {' '}{six(f.appCoefficient)} and {six(f.appFco2Bar)} bar.
       </p>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="p" tick={AXIS} label={{ value: 'total pressure, bar', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -3 }} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine x={f.capBar} stroke="#fbbf24" strokeDasharray="4 4" label={{ value: 'cap', fill: '#fbbf24', fontSize: 10 }} />
-            <Line dataKey="pco2" name="CO2 partial pressure, bar" stroke={SERIES[0]} dot={false} isAnimationActive={false} />
-            <Line dataKey="fco2" name="CO2 fugacity, bar" stroke={SERIES[1]} dot={false} isAnimationActive={false} />
-            <Line dataKey="coeff" name="fugacity coefficient" stroke={SERIES[2]} dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="p" tick={AXIS} label={{ value: 'total pressure, bar', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine x={f.capBar} stroke={seriesColor(2)} strokeDasharray="4 4" label={{ value: 'cap', fill: seriesColor(2), fontSize: 10 }} />
+          <Line dataKey="pco2" name="CO2 partial pressure, bar" stroke={SERIES[0]} dot={false} isAnimationActive={false} />
+          <Line dataKey="fco2" name="CO2 fugacity, bar" stroke={SERIES[1]} dot={false} isAnimationActive={false} />
+          <Line dataKey="coeff" name="fugacity coefficient" stroke={SERIES[2]} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Tbl
         head={['total pressure bar', 'coefficient', 'CO2 partial pressure bar', 'CO2 fugacity bar', 'cap applied']}
         rows={f.sweep.map((r) => [six(r.pTotalBar), six(r.fugacityCoefficient), six(r.pco2Bar), six(r.fco2Bar), String(r.pressureCapApplied)])}
@@ -153,24 +154,22 @@ export const SourMode = ({ h, w }) => {
         <Tile label="The screening threshold" value={twelve(h.thresholdBar)} unit="bar" />
         <Tile label="Decades above the threshold" value={six(w.decadesAboveThreshold)} />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         This door compares one partial pressure against one threshold and reports the comparison in two units. The
         threshold in psia is {twelve(h.thresholdPsia)}, derived by the engine rather than rounded, and a learner who has
         seen a round 0.05 psia in a hint has seen a different number.
       </p>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="bar" scale="log" domain={['auto', 'auto']} tick={AXIS} label={{ value: 'H2S partial pressure, bar', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -3 }} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={0} stroke="#fbbf24" strokeDasharray="4 4" label={{ value: 'the threshold', fill: '#fbbf24', fontSize: 10 }} />
-            <Line dataKey="decades" name="decades above the threshold" stroke={SERIES[0]} dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="bar" scale="log" domain={['auto', 'auto']} tick={AXIS} label={{ value: 'H2S partial pressure, bar', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine y={0} stroke={seriesColor(2)} strokeDasharray="4 4" label={{ value: 'the threshold', fill: seriesColor(2), fontSize: 10 }} />
+          <Line dataKey="decades" name="decades above the threshold" stroke={SERIES[0]} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Tbl
         head={['H2S partial pressure bar', 'psia', 'above the threshold', 'decades above', 'label']}
         rows={h.rows.map((r) => [twelve(r.ph2sBar), twelve(r.ph2sPsia), String(r.sour), six(r.decadesAboveThreshold), r.label])}
@@ -200,7 +199,7 @@ export const RatioMode = ({ g }) => {
         <Tile label="Answers the door can give" value={g.regimeWords.join(', ')} />
         <Tile label="Ratio at the sour teaching stream" value={twelve(g.diebuRatio)} />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         THE RATIO NEEDS NO PRESSURE AT ALL. Both arguments are partial pressures, both are the total pressure times a
         mole fraction, so the total pressure divides out and the ratio equals the ratio of the mole fractions at every
         pressure. The difference column below is zero at each of five pressures, which is the whole claim.
@@ -240,7 +239,7 @@ export const AbsentMode = ({ w, f }) => {
         <Tile label="thresholdHeld" value={String(w.thresholdHeld)} />
         <Tile label="ph2sFugacityApplied" value={String(f.ph2sFugacityApplied)} />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         THESE FOUR ARE FIELDS AND NOT GAPS. An earlier version of this engine computed a sour-service severity region
         from an expression of its own invention, labelled it with the names of two standards, and served three named
         material recommendations off it. The repair did not retune that expression. It withdrew the claim, and the

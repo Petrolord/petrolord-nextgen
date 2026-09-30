@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Cell,
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Cell,
 } from 'recharts';
 import {
   riskScale, riskMatrix, bandProbes, residualProbes, appetiteProbes, residualInputChoices, targetChoices,
@@ -8,11 +8,13 @@ import {
   POPULATION_CHOICES, SCORE_CHOICES, AS_OF_ISO, q, yn, orNull, given,
 } from './riskchangeLab';
 import {
-  Tbl, Chip, Note, Lead, Empty, safe, AXIS, TOOLTIP, GRID, DASH, MARGIN, BAND_FILL,
+  Tbl, Chip, Note, Lead, Empty, safe, AXIS, TOOLTIP, GRID, DASH, MARGIN, BAND_FILL, BAND_TONE,
 } from './panelBits';
 import {
   PanelShell, SelectField, Tile, TileGrid, FieldGrid,
 } from '@/components/course/panels/petrophysics/panelKit';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE } from '@/utils/chartTheme';
 
 // Risk explorer, the Associate tier throughout.
 //
@@ -52,17 +54,17 @@ export const MatrixMode = ({ m, scale, probes }) => {
         <Tile label="The band that means no score" value={q(scale.noBand)} />
       </TileGrid>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300">
+        <table className="text-xs text-pl-text">
           <thead>
             <tr>
-              <th className="pr-2 text-left text-slate-500">likelihood \ impact</th>
-              {m.impacts.map((i) => <th key={i} className="px-1 text-slate-500">{i}</th>)}
+              <th className="pr-2 text-left text-pl-muted">likelihood \ impact</th>
+              {m.impacts.map((i) => <th key={i} className="px-1 text-pl-muted">{i}</th>)}
             </tr>
           </thead>
           <tbody>
             {m.rows.map((row) => (
               <tr key={row.likelihood}>
-                <td className="pr-2 text-slate-500">{row.likelihood}</td>
+                <td className="pr-2 text-pl-muted">{row.likelihood}</td>
                 {row.cells.map((c) => (
                   <td key={c.impact} className="p-0.5">
                     <Chip band={c.band}>{c.score} {c.band}</Chip>
@@ -83,8 +85,7 @@ export const MatrixMode = ({ m, scale, probes }) => {
           <span
             key={x.score}
             title={`${x.score} ${x.band}${x.unreachable ? ', held by no cell' : ''}`}
-            className={`inline-block rounded border px-1 text-xs ${x.lowerEdge ? 'border-l-4 border-l-lime-400' : ''} ${x.unreachable ? 'line-through opacity-50' : ''}`}
-            style={{ background: BAND_FILL[x.band] }}
+            className={`inline-block rounded border px-1 text-xs ${BAND_TONE[x.band] || BAND_TONE.None} ${x.lowerEdge ? 'border-l-4 border-l-pl-text' : ''} ${x.unreachable ? 'line-through opacity-50' : ''}`}
           >
             {x.score}
           </span>
@@ -179,19 +180,17 @@ export const RegisterMode = ({
         <Tile label={q('Critical')} value={c.critical} />
         <Tile label="Critical, across the four choices" value={pops.criticalCounts.join(', ')} />
       </TileGrid>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={c.counts} margin={MARGIN}>
-            <CartesianGrid stroke={GRID} strokeDasharray={DASH} />
-            <XAxis dataKey="band" tick={AXIS} />
-            <YAxis tick={AXIS} allowDecimals={false} />
-            <Tooltip contentStyle={TOOLTIP} />
-            <Bar dataKey="count" name="risks" isAnimationActive={false}>
-              {c.counts.map((x) => <Cell key={x.band} fill={BAND_FILL[x.band]} />)}
-            </Bar>
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <BarChart data={c.counts} margin={MARGIN}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="band" tick={AXIS} />
+          <YAxis tick={AXIS} allowDecimals={false} />
+          <Tooltip contentStyle={TOOLTIP} />
+          <Bar dataKey="count" name="risks" isAnimationActive={false}>
+            {c.counts.map((x) => <Cell key={x.band} fill={BAND_FILL[x.band]} />)}
+          </Bar>
+        </BarChart>
+      </ChartFrame>
       <Note>
         The engine does not filter by status. It counts whatever list it is handed, so the population and the score are
         both the caller&apos;s choices, and a dashboard tile has to say which question it answers. {pops.live} of the

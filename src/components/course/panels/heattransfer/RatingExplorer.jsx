@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
 import {
   effectivenessSurface, collapseAtZero, hotDaySweep, secondMethod, airCoolerDesign,
@@ -12,6 +12,9 @@ import {
 import {
   PanelShell, SelectField, Tile, TileGrid, FieldGrid,
 } from '@/components/course/panels/petrophysics/panelKit';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 
 // Rating explorer, the Expert tier throughout.
 //
@@ -46,9 +49,9 @@ export const MODES = [
   ['second', 'The second method, and what two methods agreeing buys'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const SERIES = ['#38bdf8', '#f472b6', '#BFFF00', '#fbbf24'];
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const SERIES = [seriesColor(0), seriesColor(4), seriesColor(1), seriesColor(2)];
 const ARRANGEMENT_LABEL = { counter: 'counter-current', parallel: 'parallel', shell1: '1-2 shell' };
 
 // ---------------------------------------------------------------------------
@@ -81,26 +84,24 @@ export const EffectivenessMode = ({ e, cr, onCr }) => {
         <Tile label="Counter-current ceiling" value={ceilingRow.counter === null ? 'none' : e6(ceilingRow.counter)} />
         <Tile label="Counter-current is highest every time" value={yn(e.counterIsHighestEveryTime)} />
       </TileGrid>
-      <div className="h-60 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="ntu" type="number" domain={['auto', 'auto']} tick={AXIS} label={{ value: 'NTU, the surface written dimensionlessly', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -3 }} />
-            <YAxis tick={AXIS} domain={[0, 1]} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => e6(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            {ceilingRow.parallel !== null && (
-              <ReferenceLine y={ceilingRow.parallel} stroke={SERIES[1]} strokeDasharray="5 3" label={{ value: `parallel ceiling ${e6(ceilingRow.parallel)}`, fill: SERIES[1], fontSize: 10, position: 'insideBottomRight' }} />
-            )}
-            {ceilingRow.shell1 !== null && (
-              <ReferenceLine y={ceilingRow.shell1} stroke={SERIES[2]} strokeDasharray="5 3" label={{ value: `1-2 shell ceiling ${e6(ceilingRow.shell1)}`, fill: SERIES[2], fontSize: 10, position: 'insideTopRight' }} />
-            )}
-            <Line dataKey="counter" name="counter-current, drawn with no asymptote" stroke={SERIES[0]} dot isAnimationActive={false} />
-            <Line dataKey="parallel" name="parallel" stroke={SERIES[1]} dot isAnimationActive={false} />
-            <Line dataKey="shell1" name="1-2 shell" stroke={SERIES[2]} dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={240} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="ntu" type="number" domain={['auto', 'auto']} tick={AXIS} label={{ value: 'NTU, the surface written dimensionlessly', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
+          <YAxis tick={AXIS} domain={[0, 1]} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => e6(v)} />
+          <Legend {...LEGEND_PROPS} />
+          {ceilingRow.parallel !== null && (
+            <ReferenceLine y={ceilingRow.parallel} stroke={SERIES[1]} strokeDasharray="5 3" label={{ value: `parallel ceiling ${e6(ceilingRow.parallel)}`, fill: SERIES[1], fontSize: 10, position: 'insideBottomRight' }} />
+          )}
+          {ceilingRow.shell1 !== null && (
+            <ReferenceLine y={ceilingRow.shell1} stroke={SERIES[2]} strokeDasharray="5 3" label={{ value: `1-2 shell ceiling ${e6(ceilingRow.shell1)}`, fill: SERIES[2], fontSize: 10, position: 'insideTopRight' }} />
+          )}
+          <Line dataKey="counter" name="counter-current, drawn with no asymptote" stroke={SERIES[0]} dot isAnimationActive={false} />
+          <Line dataKey="parallel" name="parallel" stroke={SERIES[1]} dot isAnimationActive={false} />
+          <Line dataKey="shell1" name="1-2 shell" stroke={SERIES[2]} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Note>
         The two dashed lines are the effectivenesses those two arrangements cannot pass at ANY area, and the engine
         reports each of them on every answer. The counter-current curve is drawn with no dashed line because it HAS
@@ -123,7 +124,7 @@ export const EffectivenessMode = ({ e, cr, onCr }) => {
         rows={e.grid.map((row) => [e6(row.ntu)]
           .concat(row.byArrangement.map((a) => e6(a.byCr[index].effectiveness))))}
       />
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         Proved the other way round, at a capacity ratio of {e6(e.ceilingCr)}: asked for an NTU at effectivenesses
         climbing toward one, the counter-current column answers every time, measured as {yn(e.counterAnswersEveryTime)},
         and the other two stop with their ceiling beside the message.
@@ -167,20 +168,18 @@ export const CollapseMode = ({ c }) => {
         <Tile label="Every row collapses" value={yn(c.everyRowCollapses)} />
         <Tile label="Ceiling at that limit" value={c.ceiling === null ? 'none' : e6(c.ceiling)} />
       </TileGrid>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={c.rows} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="ntu" type="number" domain={['auto', 'auto']} tick={AXIS} label={{ value: 'NTU', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -3 }} />
-            <YAxis tick={AXIS} domain={[0, 1]} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => e6(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line dataKey="counter" name="counter-current" stroke={SERIES[0]} strokeWidth={6} dot={false} isAnimationActive={false} />
-            <Line dataKey="parallel" name="parallel" stroke={SERIES[1]} strokeWidth={3} dot={false} isAnimationActive={false} />
-            <Line dataKey="shell1" name="1-2 shell" stroke={SERIES[2]} strokeWidth={1} dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={c.rows} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="ntu" type="number" domain={['auto', 'auto']} tick={AXIS} label={{ value: 'NTU', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
+          <YAxis tick={AXIS} domain={[0, 1]} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => e6(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line dataKey="counter" name="counter-current" stroke={SERIES[0]} strokeWidth={6} dot={false} isAnimationActive={false} />
+          <Line dataKey="parallel" name="parallel" stroke={SERIES[1]} strokeWidth={3} dot={false} isAnimationActive={false} />
+          <Line dataKey="shell1" name="1-2 shell" stroke={SERIES[2]} strokeWidth={1} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Note>
         Three curves are drawn here and one curve is visible, because at a capacity ratio of zero all three lie exactly on
         top of each other. A capacity ratio of zero is a stream changing phase: it absorbs heat without changing
@@ -308,36 +307,32 @@ export const HotDayMode = ({ h }) => {
         the capacity ratio, so they fix the effectiveness. The duty then follows from the inlet temperature difference
         alone. The engine states the basis on every answer: {h.basis}
       </Note>
-      <div className="h-52 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={flat} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="ambient" type="number" domain={['auto', 'auto']} tick={AXIS} label={{ value: 'check ambient, degF', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -3 }} />
-            <YAxis tick={AXIS} domain={[0, 'auto']} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => e6(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line dataKey="effectiveness" name="effectiveness, which holds" stroke={SERIES[0]} dot isAnimationActive={false} />
-            <Line dataKey="ntu" name="NTU, which holds" stroke={SERIES[1]} dot isAnimationActive={false} />
-            <Line dataKey="cr" name="capacity ratio, which holds" stroke={SERIES[2]} dot isAnimationActive={false} />
-            <Line dataKey="dutyFraction" name="duty fraction, which moves" stroke={SERIES[3]} strokeWidth={3} dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <div className="h-52 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={moving} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="ambient" type="number" domain={['auto', 'auto']} tick={AXIS} label={{ value: 'check ambient, degF', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -3 }} />
-            <YAxis yAxisId="left" tick={AXIS} />
-            <YAxis yAxisId="right" orientation="right" tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => e6(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine yAxisId="left" y={1} stroke="#BFFF00" strokeDasharray="4 4" label={{ value: 'the design duty', fill: '#BFFF00', fontSize: 10, position: 'insideTopLeft' }} />
-            <Line yAxisId="left" dataKey="dutyFraction" name="duty fraction" stroke={SERIES[3]} dot isAnimationActive={false} />
-            <Line yAxisId="right" dataKey="processOutF" name="process leaving, degF" stroke={SERIES[1]} dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={208} className="mt-3">
+        <LineChart data={flat} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="ambient" type="number" domain={['auto', 'auto']} tick={AXIS} label={{ value: 'check ambient, degF', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
+          <YAxis tick={AXIS} domain={[0, 'auto']} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => e6(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line dataKey="effectiveness" name="effectiveness, which holds" stroke={SERIES[0]} dot isAnimationActive={false} />
+          <Line dataKey="ntu" name="NTU, which holds" stroke={SERIES[1]} dot isAnimationActive={false} />
+          <Line dataKey="cr" name="capacity ratio, which holds" stroke={SERIES[2]} dot isAnimationActive={false} />
+          <Line dataKey="dutyFraction" name="duty fraction, which moves" stroke={SERIES[3]} strokeWidth={3} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
+      <ChartFrame height={208} className="mt-3">
+        <LineChart data={moving} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="ambient" type="number" domain={['auto', 'auto']} tick={AXIS} label={{ value: 'check ambient, degF', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
+          <YAxis yAxisId="left" tick={AXIS} />
+          <YAxis yAxisId="right" orientation="right" tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => e6(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine yAxisId="left" y={1} stroke={seriesColor(1)} strokeDasharray="4 4" label={{ value: 'the design duty', fill: seriesColor(1), fontSize: 10, position: 'insideTopLeft' }} />
+          <Line yAxisId="left" dataKey="dutyFraction" name="duty fraction" stroke={SERIES[3]} dot isAnimationActive={false} />
+          <Line yAxisId="right" dataKey="processOutF" name="process leaving, degF" stroke={SERIES[1]} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Note>
         Read those two together. As the air gets hotter the duty falls AND the process leaves hotter, and those two go
         together: a rating that reports one without the other is asserting something it did not compute.
@@ -368,18 +363,18 @@ export const HotDayMode = ({ h }) => {
         <Tile label="Duty" value={r4(h.defaultCheck.qBtuHr)} unit="Btu/hr" />
         <Tile label="Process leaving" value={e6(h.defaultCheck.processOutF)} unit="degF" />
       </TileGrid>
-      <p className="text-xs text-slate-300 font-mono mt-1 mb-0">{h.defaultCheck.note}</p>
+      <p className="text-xs text-pl-text font-mono mt-1 mb-0">{h.defaultCheck.note}</p>
       <Note>
         The rated answer is self-consistent in both directions: the process capacity rate times the drop to the new
         outlet is {r4(h.selfConsistency.processSideDerived)} Btu an hour, derived, and the air capacity rate times the new
         rise is {r4(h.selfConsistency.airSideDerived)}, derived, against a rated duty of
         {' '}{r4(h.selfConsistency.ratedDuty)}.
       </Note>
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         And a cold morning, where the duty fraction goes above one. The engine says what that means in words rather than
         printing a number above one and leaving it there:
       </p>
-      <p className="text-xs text-slate-300 font-mono mt-1 mb-0">{h.coldDay.note}</p>
+      <p className="text-xs text-pl-text font-mono mt-1 mb-0">{h.coldDay.note}</p>
       <Tbl
         head={['U, Btu/hr.ft2.F', 'bare surface, ft2', 'UA, Btu/hr.F', 'duty fraction', 'process out on the hot day, degF']}
         rows={h.uInvariance.map((u) => [
@@ -419,19 +414,17 @@ export const SecondMethodMode = ({ m }) => {
         <Tile label="Last ratio" value={e6(m.rows[m.rows.length - 1].ratioDerived)} />
         <Tile label="Every ratio is one to the printed precision" value={yn(m.everyRatioIsOneToThePrintedPrecision)} />
       </TileGrid>
-      <div className="h-48 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="row" tick={AXIS} label={{ value: 'row of the sweep', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -3 }} />
-            <YAxis tick={AXIS} domain={[0.99, 1.01]} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => e6(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={1} stroke="#BFFF00" strokeDasharray="4 4" label={{ value: 'the two methods agreeing', fill: '#BFFF00', fontSize: 10, position: 'insideTopRight' }} />
-            <Line dataKey="ratio" name="UA times the hot-day log mean, over the rated duty" stroke={SERIES[0]} dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={192} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="row" tick={AXIS} label={{ value: 'row of the sweep', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
+          <YAxis tick={AXIS} domain={[0.99, 1.01]} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => e6(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine y={1} stroke={seriesColor(1)} strokeDasharray="4 4" label={{ value: 'the two methods agreeing', fill: seriesColor(1), fontSize: 10, position: 'insideTopRight' }} />
+          <Line dataKey="ratio" name="UA times the hot-day log mean, over the rated duty" stroke={SERIES[0]} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Note>
         The hot day was rated by effectiveness-NTU. There is another classical route to the same answer and it is
         genuinely independent: solve the duty out of the surface equation itself, at the fixed UA and at whatever log
@@ -448,7 +441,7 @@ export const SecondMethodMode = ({ m }) => {
         outlet temperature its own duty cannot produce satisfies NEITHER method, and checking against a second method is
         what turns an answer into a result.
       </Note>
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         The other places this course shows two methods meeting, all of them in a golden column. Read the last column for
         what it does NOT contain: a second copy of the first.
       </p>

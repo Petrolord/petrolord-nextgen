@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, ComposedChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+  ComposedChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
 import {
   theTrain, twoMedians, notAnswering, heldForLiterature, heldItems,
@@ -12,6 +12,9 @@ import {
 import {
   PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note,
 } from '@/components/course/panels/petrophysics/panelKit';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 
 // The train explorer, the Expert tier. The coupling stage by stage, the two
 // medians on one basis, and the three ways this engine declines to answer.
@@ -47,14 +50,14 @@ export const MODES = [
   ['typed', 'Your stream, typed: a plate pack, a liner bank and a media bed in series, and one droplet'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const SERIES = ['#38bdf8', '#f472b6', '#BFFF00', '#fbbf24'];
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const SERIES = [seriesColor(0), seriesColor(4), seriesColor(1), seriesColor(2)];
 
 const Tbl = ({ head, rows }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>{head.map((h, i) => <th key={h} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>)}</tr>
       </thead>
       <tbody>
@@ -69,9 +72,9 @@ const Tbl = ({ head, rows }) => (
 );
 
 const Held = ({ children }) => (
-  <div className="mt-3 rounded-md border border-amber-700/60 bg-amber-950/20 p-3">
-    <p className="text-amber-300 text-xs font-medium mb-1">HELD FOR LITERATURE</p>
-    <p className="text-xs text-slate-300 mb-0">{children}</p>
+  <div className="mt-3 rounded-md border border-pl-warning/40 bg-pl-warning-bg p-3">
+    <p className="text-pl-warning-text text-xs font-medium mb-1">HELD FOR LITERATURE</p>
+    <p className="text-xs text-pl-text mb-0">{children}</p>
   </div>
 );
 
@@ -82,9 +85,9 @@ const Held = ({ children }) => (
  * when nobody had given it a specification.
  */
 export const Withheld = ({ reason }) => (
-  <div className="mt-2 rounded-md border border-slate-600 bg-slate-800/40 p-2">
-    <p className="text-slate-200 text-xs font-medium mb-1">No verdict is reported, and this is the reason</p>
-    <p className="text-xs text-slate-300 font-mono mb-0">{reason}</p>
+  <div className="mt-2 rounded-md border border-pl-border-strong bg-pl-sunken p-2">
+    <p className="text-pl-text text-xs font-medium mb-1">No verdict is reported, and this is the reason</p>
+    <p className="text-xs text-pl-text font-mono mb-0">{reason}</p>
   </div>
 );
 
@@ -108,25 +111,23 @@ export const StagesMode = ({ s }) => {
         <Tile label="Droplet median, inlet" value={six(s.train.inletMedianMicron)} unit="micron" />
         <Tile label="Droplet median, outlet" value={six(s.train.outletMedianMicron)} unit="micron" />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         OGBOTOBO is {OGBOTOBO_BWPD} bwpd of {OGBOTOBO_INLET.oiwPpm} ppm oil at d50 {OGBOTOBO_INLET.d50Micron} micron and
         sigma {OGBOTOBO_INLET.sigma}, through four stages. {s.train.stagesRun} of {s.train.stages.length} stages ran and
         the train is complete. The grid it is integrated on is reported back: {s.train.nBins} bins over
         {' '}{s.train.spanSigma} sigma, with a truncated tail of {twelve(s.train.truncatedTailFraction)}.
       </p>
-      <div className="h-60 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart data={chart} margin={{ top: 10, right: 20, bottom: 40, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="stage" tick={{ ...AXIS, fontSize: 9 }} interval={0} angle={-15} textAnchor="end" />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Bar dataKey="removal" name="removal this stage, percent" fill={SERIES[0]} isAnimationActive={false} />
-            <Line dataKey="median" name="outlet droplet median, micron" stroke={SERIES[2]} dot isAnimationActive={false} />
-          </ComposedChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={240} className="mt-3">
+        <ComposedChart data={chart} margin={{ top: 10, right: 20, bottom: 40, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="stage" tick={{ ...AXIS, fontSize: 9 }} interval={0} angle={-15} textAnchor="end" />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
+          <Legend {...LEGEND_PROPS} />
+          <Bar dataKey="removal" name="removal this stage, percent" fill={SERIES[0]} isAnimationActive={false} />
+          <Line dataKey="median" name="outlet droplet median, micron" stroke={SERIES[2]} dot isAnimationActive={false} />
+        </ComposedChart>
+      </ChartFrame>
       <Tbl
         head={['stage', 'cut micron', 'sharpness', 'removal percent', 'outlet ppm', 'outlet median micron']}
         rows={s.train.stages.map((st) => [st.name, six(st.d50cMicron), String(st.sharpness), six(st.removalPct), six(st.outletOiwPpm), six(st.outletMedianMicron)])}
@@ -155,25 +156,23 @@ export const CouplingMode = ({ s }) => {
         <Tile label="First stage removes" value={six(s.identical.stages[0].removalPct)} unit="percent" />
         <Tile label="Last stage removes" value={six(s.identical.stages[s.identicalStageCount - 1].removalPct)} unit="percent" />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         If a device were a fixed efficiency, every bar below would be the same height. Compounding the first stage
         removal five times over would predict an outlet of {six(s.compounded)} ppm. The train says
         {' '}{six(s.identical.outletOiwPpm)} ppm, because the water reaching the fifth device has had its coarse oil
         taken out four times already. A table of fixed efficiencies throws exactly that away.
       </p>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="stage" tick={AXIS} label={{ value: 'stage', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -3 }} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Bar dataKey="removal" name="removal this stage, percent" fill={SERIES[0]} isAnimationActive={false} />
-            <Line dataKey="ratio" name="as a percentage of the first stage" stroke={SERIES[3]} dot isAnimationActive={false} />
-          </ComposedChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <ComposedChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="stage" tick={AXIS} label={{ value: 'stage', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
+          <Legend {...LEGEND_PROPS} />
+          <Bar dataKey="removal" name="removal this stage, percent" fill={SERIES[0]} isAnimationActive={false} />
+          <Line dataKey="ratio" name="as a percentage of the first stage" stroke={SERIES[3]} dot isAnimationActive={false} />
+        </ComposedChart>
+      </ChartFrame>
       <Tbl
         head={['position', 'device as designed', 'removal percent', 'device reversed', 'removal percent']}
         rows={s.train.stages.map((st, i) => [String(i + 1), st.name, six(st.removalPct), s.reversed.stages[i].name, six(s.reversed.stages[i].removalPct)])}
@@ -207,18 +206,16 @@ export const MediansMode = ({ s }) => {
         <Tile label="Published bin grid cases" value={String(s.binGrid.length)} />
       </TileGrid>
       <Note>{s.medianBasis}</Note>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="cut" tick={AXIS} label={{ value: 'device cut micron', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -3 }} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line dataKey="median" name="outlet droplet median, micron" stroke={SERIES[2]} dot isAnimationActive={false} />
-          </ComposedChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <ComposedChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="cut" tick={AXIS} label={{ value: 'device cut micron', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line dataKey="median" name="outlet droplet median, micron" stroke={SERIES[2]} dot isAnimationActive={false} />
+        </ComposedChart>
+      </ChartFrame>
       <Tbl
         head={['cut micron', 'outlet ppm', 'outlet median micron']}
         rows={s.tracking.map((r) => [String(r.d50cMicron), six(r.outletOiwPpm), six(r.outletMedianMicron)])}
@@ -248,7 +245,7 @@ export const SilenceMode = ({ s, h }) => {
         <Tile label="Band refusals shown here" value={String(s.bandRefusals.length)} />
         <Tile label="Doors on one bad fluid" value={String(s.doors.length)} />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         ONE: A REFUSAL. The input is one this method cannot use, so the return is an object carrying a named error and
         nothing that could pass for an answer. Every message below is the engine&apos;s own words.
       </p>
@@ -273,7 +270,7 @@ export const SilenceMode = ({ s, h }) => {
       {s.doors.map((r) => (
         <Refusal key={r.label} label={`The engine refuses ${r.label}`} message={r.error} />
       ))}
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         TWO: A WITHHELD VERDICT. The train ran, the concentrations are real, and the pass or fail is not reported, with
         a reason. A three stage train with the plate area box cleared runs {s.broken.stagesRun} of
         {' '}{s.broken.stages.length} stages and still reports {six(s.broken.outletOiwPpm)} ppm out at
@@ -288,7 +285,7 @@ export const SilenceMode = ({ s, h }) => {
         is. A stage that did not run carries its name and its cause and nothing else, so a stage that is not there
         cannot show a confident process warning beside its own failure.
       </Note>
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         THREE: A WARNING. The answer is reported and the module says something about it. A warning withholds nothing,
         and every one of them names a quantity and a threshold.
       </p>
@@ -329,7 +326,7 @@ export const TypedTrainMode = () => {
   const r = useMemo(() => typedTrainStream(values), [values]);
   return (
     <>
-      <p className="text-xs text-slate-300 mb-0">
+      <p className="text-xs text-pl-text mb-0">
         Type a stream and a three stage train, run in the order shown. The view opens on the teaching stream
         OGBOTOBO&apos;s water and inlet, and every input can be retyped. Every cut size is the engine&apos;s own for its
         device, and no dissolved oil floor and no discharge limit is applied.

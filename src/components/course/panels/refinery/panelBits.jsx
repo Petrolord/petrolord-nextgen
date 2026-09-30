@@ -1,4 +1,6 @@
 import React from 'react';
+import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 
 // The atoms the three refinery explorers share, so a table, a refusal, an empty
 // state and a typed box look and read the same on all three pages.
@@ -17,10 +19,12 @@ import React from 'react';
 // blank included, so a blank box reaches the engine blank and a 90 typed as a
 // utilisation reaches it as 90. Neither is tidied on the way.
 
-export const AXIS = { fill: '#94a3b8', fontSize: 11 };
-export const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-export const GRID = '#334155';
-export const SERIES = ['#38bdf8', '#f472b6', '#BFFF00', '#fbbf24', '#a78bfa', '#f87171'];
+export const AXIS = AXIS_TICK;
+export const TOOLTIP = TOOLTIP_STYLE;
+export const GRID = GRID_STYLE.stroke;
+// The six slots the panels index, on the family series colours: blue, violet,
+// green, amber, the ink note for the fifth slot, red.
+export const SERIES = [seriesColor(0), seriesColor(4), seriesColor(1), seriesColor(2), SVG_CHART.note, seriesColor(3)];
 
 /** A value as the digest prints it: a missing value is none. */
 export const txt = (v) => {
@@ -34,8 +38,8 @@ export const yes = (v) => (v ? 'yes' : 'no');
 
 export const Tbl = ({ head, rows, tone }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>
           {head.map((h, i) => (
             <th key={h} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>
@@ -57,28 +61,28 @@ export const Tbl = ({ head, rows, tone }) => (
 
 /** What the engine said when it refused, verbatim, with what was asked of it. */
 export const Refused = ({ label, sentence }) => (
-  <div className="mt-2 rounded-md border border-red-800/60 bg-red-950/20 p-2">
-    <p className="text-red-300 text-xs font-medium mb-1">The engine refused{label ? `: ${label}` : ''}</p>
-    <p className="text-xs text-slate-300 font-mono mb-0">{txt(sentence)}</p>
+  <div className="mt-2 rounded-md border border-pl-danger/30 bg-pl-danger-bg p-2">
+    <p className="text-pl-danger-text text-xs font-medium mb-1">The engine refused{label ? `: ${label}` : ''}</p>
+    <p className="text-xs text-pl-text font-mono mb-0">{txt(sentence)}</p>
   </div>
 );
 
 /** The engine's own words shown as a quotation. */
 export const EngineSays = ({ children }) => (
-  <p className="text-xs text-slate-300 font-mono mt-2 mb-0 border-l-2 border-slate-600 pl-2">{children}</p>
+  <p className="text-xs text-pl-text font-mono mt-2 mb-0 border-l-2 border-pl-border-strong pl-2">{children}</p>
 );
 
 export const Note = ({ children }) => (
-  <p className="text-xs text-slate-500 mt-1 mb-0">{children}</p>
+  <p className="text-xs text-pl-muted mt-1 mb-0">{children}</p>
 );
 
 export const Lead = ({ children }) => (
-  <p className="text-xs text-slate-400 mt-3 mb-0">{children}</p>
+  <p className="text-xs text-pl-muted mt-3 mb-0">{children}</p>
 );
 
 /** The empty state, rendered before any engine value exists. */
 export const Empty = ({ children }) => (
-  <p className="text-xs text-slate-400 mt-1 mb-0">
+  <p className="text-xs text-pl-muted mt-1 mb-0">
     {children || 'This reader has returned nothing yet, so there is no engine value to draw.'}
   </p>
 );
@@ -94,8 +98,8 @@ export const Slider = ({
   label, value, min, max, step = 1, onChange, shown,
 }) => (
   <div>
-    <label className="text-gray-400 text-xs mb-1 block">
-      {label}: <span className="text-white">{shown === undefined ? value : shown}</span>
+    <label className="text-pl-muted text-xs mb-1 block">
+      {label}: <span className="text-pl-text">{shown === undefined ? value : shown}</span>
     </label>
     <input
       type="range"
@@ -104,7 +108,7 @@ export const Slider = ({
       step={step}
       value={value}
       onChange={(e) => onChange(Number(e.target.value))}
-      className="w-full accent-[#BFFF00]"
+      className="w-full accent-pl-primary"
     />
   </div>
 );
@@ -114,14 +118,14 @@ export const BoxField = ({
   label, value, onChange, hint, width = 'w-full',
 }) => (
   <div>
-    {label ? <label className="text-gray-400 text-xs mb-1 block">{label}</label> : null}
+    {label ? <label className="text-pl-muted text-xs mb-1 block">{label}</label> : null}
     <input
       type="text"
       inputMode="decimal"
       value={value === null || value === undefined ? '' : String(value)}
       placeholder={hint || 'blank'}
       onChange={(e) => onChange(e.target.value)}
-      className={`${width} bg-gray-700 text-white border border-gray-600 rounded-md h-7 text-xs px-2`}
+      className={`${width} bg-pl-surface text-pl-text border border-pl-border-strong rounded-md h-7 text-xs px-2 placeholder:text-pl-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus`}
     />
   </div>
 );
@@ -130,21 +134,22 @@ export const Button = ({ onClick, children, active }) => (
   <button
     type="button"
     onClick={onClick}
-    className={`px-2 py-1 text-xs rounded border ${active ? 'border-[#BFFF00] text-[#BFFF00]' : 'border-slate-600 text-slate-300'}`}
+    aria-pressed={active === undefined ? undefined : Boolean(active)}
+    className={`px-2 py-1 text-xs rounded border ${active ? 'border-pl-primary bg-pl-primary text-pl-primary-fg font-semibold' : 'border-pl-border-strong bg-pl-surface text-pl-text hover:bg-pl-sunken'}`}
   >
     {children}
   </button>
 );
 
 export const Check = ({ label, checked, onChange }) => (
-  <label className="flex items-center gap-2 text-xs text-slate-300">
-    <input type="checkbox" checked={!!checked} onChange={(e) => onChange(e.target.checked)} className="accent-[#BFFF00]" />
+  <label className="flex items-center gap-2 text-xs text-pl-text">
+    <input type="checkbox" checked={!!checked} onChange={(e) => onChange(e.target.checked)} className="accent-pl-primary" />
     {label}
   </label>
 );
 
 /** A money figure coloured by what it did to margin: gained, lost or neither. */
 export const toneOf = (v) => {
-  if (typeof v !== 'number' || !Number.isFinite(v) || Math.abs(v) < 0.005) return 'text-slate-300';
-  return v > 0 ? 'text-emerald-300' : 'text-red-300';
+  if (typeof v !== 'number' || !Number.isFinite(v) || Math.abs(v) < 0.005) return 'text-pl-text';
+  return v > 0 ? 'text-pl-success-text' : 'text-pl-danger-text';
 };

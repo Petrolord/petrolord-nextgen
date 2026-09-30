@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK } from '@/utils/chartSvg';
 import {
   parseTable, parseNumber, parseSeries, fitAndScore, crossValidate, leakageOf, matrixOf, reportOf, rocOf, logLossOf, scalingLeakCase,
   attributeTableText, payTableText, TEACHING, ridgeReader, payReader,
@@ -30,8 +33,8 @@ export const MODES = [
   ['roc', 'ROC, AUC and log loss'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
 
 const useTable = (initial) => {
   const [text, setText] = useState(initial);
@@ -280,17 +283,15 @@ export const RocMode = () => {
       {r && r.error && <Refusal r={r} />}
       {r && !r.error && (
         <>
-          <div className="h-56 mt-3">
-            <ResponsiveContainer width="100%" height="100%">
+          <ChartFrame height={224} className="mt-3">
               <LineChart data={data} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-                <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
+                <CartesianGrid {...GRID_STYLE} />
                 <XAxis dataKey="fpr" type="number" domain={[0, 1]} tick={AXIS} />
                 <YAxis type="number" domain={[0, 1]} tick={AXIS} />
                 <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
-                <Line dataKey="tpr" name="true positive rate" stroke="#38bdf8" isAnimationActive={false} />
+                <Line dataKey="tpr" name="true positive rate" stroke={seriesColor(0)} isAnimationActive={false} />
               </LineChart>
-            </ResponsiveContainer>
-          </div>
+          </ChartFrame>
           <Tbl head={['threshold', 'FPR', 'TPR']} rows={r.fpr.map((f, i) => [r.thresholds[i] === null ? 'null' : six(r.thresholds[i]), six(f), six(r.tpr[i])])} />
           <TileGrid><Tile label="AUC" value={six(r.auc)} /></TileGrid>
         </>

@@ -1,7 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
 import {
   BLEND_PRESETS, blendRowsOf, blendAt, blendRefusalsAt, lpgReferenceAt, FILL_BASES, kanoVesselInputs, vesselAt,
   vesselEdgesAt, kanoVaporizerInputs, KANO_VAPORIZER, BUTANE_ATMOSPHERIC_BOILING_C, vaporizerAt, vaporizerRefusalsAt,
@@ -12,7 +13,7 @@ import {
   switchEdgesAt, IBAFO_CONVERSION, PRESSURE_BASIS, FORECOURT_OVERLOAD, fmt, plain,
 } from './gasvalueLab';
 import {
-  AXIS, TOOLTIP, GRID, SERIES, txt, usable, Tbl, Refusal, EngineNote, Note, Lead, Labelled, Empty, safe, NumBox,
+  AXIS, TOOLTIP, GRID, SERIES, AXIS_NOTE, LEGEND_PROPS, txt, usable, Tbl, Refusal, EngineNote, Note, Lead, Labelled, Empty, safe, NumBox,
   Button, Missing, Basis, RequiredSelect,
 } from './panelBits';
 import {
@@ -75,7 +76,7 @@ export const BlendMode = ({ blend, rows, onRow, onPreset, reference, refusals })
             {b.massFractions.map((m) => <Tile key={m.code} label={`${m.code} mass fraction`} value={fmt.f4(m.massFraction)} />)}
           </TileGrid>
           <Labelled tag="the reading the engine does not use">
-            <p className="text-xs text-slate-300 mb-0">
+            <p className="text-xs text-pl-text mb-0">
               The latent heat averaged on the volume fractions: {fmt.f4(b.latentOnVolumeNotUsed)} kJ/kg, which is
               {' '}{fmt.f4(b.latentOnVolumeLessEngineNotUsed)} kJ/kg from the engine&apos;s. The engine blends latent heat on mass.
             </p>
@@ -139,7 +140,7 @@ export const VesselMode = ({ vessel, inputs, onInput, edges }) => {
           {v.missingInputs.length > 0 && <EngineNote>missingInputs: {v.missingInputs.join(', ')}</EngineNote>}
           {v.deliveryWarning && <EngineNote>{v.deliveryWarning}</EngineNote>}
           <Labelled tag="the reading the engine does not use">
-            <p className="text-xs text-slate-300 mb-0">
+            <p className="text-xs text-pl-text mb-0">
               The same fill ratio read on the other basis ({txt(v.otherBasis)}): {fmt.f4(v.otherBasisTonnesNotUsed)} t, which is
               {' '}{fmt.f4(v.otherBasisLessEngineNotUsed)} t against the engine&apos;s {fmt.f4(v.usableTonnes)} t on {v.fillRatioBasis}.
             </p>
@@ -197,17 +198,15 @@ export const VaporizerMode = ({ vap, inputs, onInput, onKano, onAtmospheric, ref
             <Tile label="designDutyKW (with the margin)" value={fmt.f4(v.designDutyKW)} />
           </TileGrid>
           {v.note && <EngineNote>{v.note}</EngineNote>}
-          <div className="mt-3 h-40">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={v.terms.filter((t) => t.kW !== null).map((t) => ({ name: t.label, kW: t.kW }))} margin={{ top: 8, right: 16, bottom: 8, left: 8 }}>
-                <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
-                <XAxis dataKey="name" tick={AXIS} />
-                <YAxis tick={AXIS} label={{ value: 'kW', angle: -90, position: 'insideLeft', fill: '#94a3b8', fontSize: 11 }} />
-                <Tooltip contentStyle={TOOLTIP} formatter={(x) => fmt.f4(x)} />
-                <Bar dataKey="kW" fill={SERIES[3]} isAnimationActive={false} />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
+          <ChartFrame height={160} className="mt-3">
+            <BarChart data={v.terms.filter((t) => t.kW !== null).map((t) => ({ name: t.label, kW: t.kW }))} margin={{ top: 8, right: 16, bottom: 8, left: 8 }}>
+              <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
+              <XAxis dataKey="name" tick={AXIS} />
+              <YAxis tick={AXIS} label={{ value: 'kW', angle: -90, position: 'insideLeft', fill: AXIS_NOTE, fontSize: 11 }} />
+              <Tooltip contentStyle={TOOLTIP} formatter={(x) => fmt.f4(x)} />
+              <Bar dataKey="kW" fill={SERIES[3]} isAnimationActive={false} />
+            </BarChart>
+          </ChartFrame>
         </>
       )}
       <Lead>What vaporizerDuty refuses:</Lead>
@@ -228,8 +227,8 @@ const FloatBlock = ({ title, result, inputs, onStage, onField }) => {
   const r = usable(result) ? result : null;
   const I = usable(inputs) ? inputs : { cycleStages: [] };
   return (
-    <div className="mt-3 rounded-md border border-gray-700 p-3">
-      <p className="text-white text-sm font-medium mb-1">{title}</p>
+    <div className="mt-3 rounded-md border border-pl-border p-3">
+      <p className="text-pl-text text-sm font-medium mb-1">{title}</p>
       <FieldGrid>
         <NumBox label="Units a day" value={I.unitsPerDay} onChange={(x) => onField('unitsPerDay', x)} />
         <NumBox label="Spares allowance" value={I.sparesFraction} onChange={(x) => onField('sparesFraction', x)} />
@@ -336,7 +335,7 @@ export const BankMode = ({ bank, inputs, onInput, onPreset, banks, cold, refusal
           {b.correlationNote && <EngineNote>{b.correlationNote}</EngineNote>}
           {I.gauge && (
             <Labelled tag="the reading the engine does not use">
-              <p className="text-xs text-slate-300 mb-0">
+              <p className="text-xs text-pl-text mb-0">
                 The gauge reading typed as if absolute: {fmt.f4(b.gaugeAsAbsoluteMassNotUsed)} kg. Absolute minus gauge-as-absolute:
                 {' '}{fmt.f4(b.absoluteLessGaugeAsAbsoluteNotUsed)} kg.
               </p>
@@ -394,19 +393,17 @@ export const CascadeMode = ({ cascade, inputs, onBank, onInput, refusals }) => {
             <Tile label="pressureBasis" value={txt(c.pressureBasis)} />
           </TileGrid>
           <Tbl head={['bank', `startBar, ${BAR_A}`, `endBar, ${BAR_A}`]} rows={c.banksAfter.map((b) => [b.label, fmt.f4(b.startBar), fmt.f4(b.endBar)])} />
-          <div className="mt-3 h-48">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={c.banksAfter.map((b) => ({ name: b.label, start: b.startBar, end: b.endBar }))} margin={{ top: 8, right: 16, bottom: 8, left: 8 }}>
-                <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
-                <XAxis dataKey="name" tick={AXIS} />
-                <YAxis tick={AXIS} label={{ value: BAR_A, angle: -90, position: 'insideLeft', fill: '#94a3b8', fontSize: 11 }} />
-                <Tooltip contentStyle={TOOLTIP} formatter={(x) => fmt.f4(x)} />
-                <Legend wrapperStyle={{ fontSize: 11 }} />
-                <Bar dataKey="start" name="before the first fill" fill={SERIES[0]} isAnimationActive={false} />
-                <Bar dataKey="end" name="after the last whole fill" fill={SERIES[1]} isAnimationActive={false} />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
+          <ChartFrame height={192} className="mt-3">
+            <BarChart data={c.banksAfter.map((b) => ({ name: b.label, start: b.startBar, end: b.endBar }))} margin={{ top: 8, right: 16, bottom: 8, left: 8 }}>
+              <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
+              <XAxis dataKey="name" tick={AXIS} />
+              <YAxis tick={AXIS} label={{ value: BAR_A, angle: -90, position: 'insideLeft', fill: AXIS_NOTE, fontSize: 11 }} />
+              <Tooltip contentStyle={TOOLTIP} formatter={(x) => fmt.f4(x)} />
+              <Legend {...LEGEND_PROPS} />
+              <Bar dataKey="start" name="before the first fill" fill={SERIES[0]} isAnimationActive={false} />
+              <Bar dataKey="end" name="after the last whole fill" fill={SERIES[1]} isAnimationActive={false} />
+            </BarChart>
+          </ChartFrame>
           <Lead>The first fills and the last, with the banks each drew on (lowest first):</Lead>
           <Tbl
             head={['fill', 'banks used']}
@@ -415,7 +412,7 @@ export const CascadeMode = ({ cascade, inputs, onBank, onInput, refusals }) => {
           {c.note && <EngineNote>{c.note}</EngineNote>}
           {c.oneBank && (
             <Labelled tag="one bank, for comparison">
-              <p className="text-xs text-slate-300 mb-0">
+              <p className="text-xs text-pl-text mb-0">
                 The same {fmt.f4(c.oneBank.volumeM3)} m3 as one bank at the {c.oneBank.atBank} bank&apos;s {plain(c.oneBank.pressureBar)} {BAR_A}:
                 {' '}fillsBeforeRecharge {plain(c.oneBank.fillsBeforeRecharge)}, cascadeEfficiency {fmt.f4(c.oneBank.cascadeEfficiency)},
                 {' '}leftInBanksKg {fmt.t3(c.oneBank.leftInBanksKg)}.

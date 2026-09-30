@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
   ReferenceArea, ReferenceLine,
 } from 'recharts';
 import {
@@ -14,6 +14,9 @@ import {
 import {
   PanelShell, SelectField, Tile, TileGrid, FieldGrid,
 } from '@/components/course/panels/petrophysics/panelKit';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 
 // Coefficient explorer, the Professional tier throughout and the Expert module
 // that reads the bundle.
@@ -47,9 +50,9 @@ export const MODES = [
   ['bundle', 'The bundle, the shell, and the two layout rows that are equal'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const SERIES = ['#38bdf8', '#f472b6', '#BFFF00', '#fbbf24'];
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const SERIES = [seriesColor(0), seriesColor(4), seriesColor(1), seriesColor(2)];
 
 // ---------------------------------------------------------------------------
 
@@ -77,18 +80,16 @@ export const StackMode = ({ s, history }) => {
         engine reports the runner up and the margin as well. The threshold is declared by this module and is not a
         published limit.
       </Note>
-      <div className="h-52 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="term" tick={AXIS} />
-            <YAxis tick={AXIS} label={{ value: 'share of the total, percent', fill: '#94a3b8', fontSize: 11, angle: -90, position: 'insideLeft' }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => e6(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line dataKey="sharePct" name="share of the total resistance, percent" stroke={SERIES[0]} dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={208} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="term" tick={AXIS} />
+          <YAxis tick={AXIS} label={{ value: 'share of the total, percent', fill: SVG_CHART.note, fontSize: 11, angle: -90, position: 'insideLeft' }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => e6(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line dataKey="sharePct" name="share of the total resistance, percent" stroke={SERIES[0]} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Tbl
         head={['term', 'resistance, hr.ft2.F per Btu', 'share of the total, percent']}
         rows={s.terms.map((t) => [t.name, r9(t.resistance), e6(t.sharePct)])
@@ -134,7 +135,7 @@ export const StackMode = ({ s, history }) => {
         and refers it to the outside only at the end, and it takes the wall term by quadrature rather than by a
         logarithm, so the agreement there is two methods meeting.
       </Note>
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         And a case built deliberately near, where the verdict is a coin toss and the engine says so rather than letting
         one word stand.
       </p>
@@ -146,7 +147,7 @@ export const StackMode = ({ s, history }) => {
           e6(s.builtDeliberatelyNear.controllingMarginPct), yn(s.builtDeliberatelyNear.controllingClear),
         ]]}
       />
-      <p className="text-xs text-slate-300 font-mono mt-1 mb-0">{s.builtDeliberatelyNear.note}</p>
+      <p className="text-xs text-pl-text font-mono mt-1 mb-0">{s.builtDeliberatelyNear.note}</p>
       {s.refusals.map((r) => (
         <Refusal key={r.label} probe={r} frame={frames.includes(r.label) ? history.frame : null} />
       ))}
@@ -165,19 +166,17 @@ export const WallMode = ({ w }) => {
         <Tile label="Ratio at the thickest wall" value={e6(w.rows[0].ratioAtMiddleKDerived)} />
         <Tile label="Ratio at the thinnest" value={e6(w.rows[w.rows.length - 1].ratioAtMiddleKDerived)} />
       </TileGrid>
-      <div className="h-52 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="thickness" tick={AXIS} reversed label={{ value: 'wall thickness, inches, thinning to the right', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -3 }} />
-            <YAxis tick={AXIS} domain={[1, 'auto']} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => e6(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={1} stroke="#BFFF00" strokeDasharray="4 4" label={{ value: 'the flat plate', fill: '#BFFF00', fontSize: 10, position: 'insideBottomRight' }} />
-            <Line dataKey="ratio" name="cylindrical wall over flat plate" stroke={SERIES[0]} dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={208} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="thickness" tick={AXIS} reversed label={{ value: 'wall thickness, inches, thinning to the right', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
+          <YAxis tick={AXIS} domain={[1, 'auto']} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => e6(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine y={1} stroke={seriesColor(1)} strokeDasharray="4 4" label={{ value: 'the flat plate', fill: seriesColor(1), fontSize: 10, position: 'insideBottomRight' }} />
+          <Line dataKey="ratio" name="cylindrical wall over flat plate" stroke={SERIES[0]} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Note>
         As the wall thins the cylindrical expression has to collapse onto the flat plate, which is the thickness over the
         conductivity and nothing else. The curve approaching one is that limit, and it is the limit that fixes the factor
@@ -224,26 +223,24 @@ export const FilmMode = ({ f, history }) => {
         <Tile label="Regime" value={f.converged.regime} />
         <Tile label="Film coefficient" value={e6(f.converged.hBtuHrFt2F)} unit="Btu/hr.ft2.F" />
       </TileGrid>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="re" scale="log" domain={['auto', 'auto']} type="number" tick={AXIS} label={{ value: 'Reynolds number', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -3 }} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => e6(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceArea
-              x1={f.transitionBand.low}
-              x2={f.transitionBand.high}
-              fill="#dc2626"
-              fillOpacity={0.25}
-              stroke="#dc2626"
-              label={{ value: 'REFUSED', fill: '#fca5a5', fontSize: 10 }}
-            />
-            <Line dataKey="film" name="film coefficient, Btu/hr.ft2.F" stroke={SERIES[0]} connectNulls={false} dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="re" scale="log" domain={['auto', 'auto']} type="number" tick={AXIS} label={{ value: 'Reynolds number', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => e6(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceArea
+            x1={f.transitionBand.low}
+            x2={f.transitionBand.high}
+            fill={seriesColor(3)}
+            fillOpacity={0.25}
+            stroke={seriesColor(3)}
+            label={{ value: 'REFUSED', fill: seriesColor(3), fontSize: 10 }}
+          />
+          <Line dataKey="film" name="film coefficient, Btu/hr.ft2.F" stroke={SERIES[0]} connectNulls={false} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Note>
         The red band between Reynolds {n0(f.transitionBand.low)} and {n0(f.transitionBand.high)} is a REFUSAL rather than
         a gap in a curve. No correlation there is trustworthy, so the engine declines and hands back the Reynolds number
@@ -268,7 +265,7 @@ export const FilmMode = ({ f, history }) => {
         <Tile label="Film coefficient" value={e6(f.laminar.hBtuHrFt2F)} unit="Btu/hr.ft2.F" />
         <Tile label="At double the flow" value={e6(f.laminar.doubledH)} unit="Btu/hr.ft2.F" />
       </TileGrid>
-      <p className="text-xs text-slate-300 font-mono mt-1 mb-0">{f.laminar.warning}</p>
+      <p className="text-xs text-pl-text font-mono mt-1 mb-0">{f.laminar.warning}</p>
       <Note>
         The warning said the film would not move with the flow, and doubling the flow to {r4(f.laminar.doubledFlow)} lb an
         hour takes the Reynolds number to {e6(f.laminar.doubledRe)} and leaves the film coefficient where it was,
@@ -317,7 +314,7 @@ export const CoolingMode = ({ c }) => {
         <Tile label="Answer with the tube side heating" value={e6(c.heatingAnswer.hBtuHrFt2F)} unit="Btu/hr.ft2.F" />
         <Tile label="Service reported back" value={c.heatingAnswer.service} />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         A cooled tube side is REFUSED. The engine will neither answer it with the heating exponent nor invent a cooling
         one, and its message states the size of the thing it is declining to guess. This is the refusal to read twice:
       </p>
@@ -359,30 +356,28 @@ export const CorrectionMode = ({ k }) => {
         <Tile label="Of those, warned" value={n0(k.warnedCount)} />
         <Tile label="Refused" value={n0(k.refusedCount)} />
       </TileGrid>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="p" type="number" domain={['auto', 'auto']} tick={AXIS} label={{ value: 'P, the dimensionless temperature group', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -3 }} />
-            <YAxis tick={AXIS} domain={[0, 1]} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => e6(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceArea y1={0} y2={0.8} fill="#fbbf24" fillOpacity={0.12} stroke="#fbbf24" label={{ value: 'WARNED below F 0.8', fill: '#fbbf24', fontSize: 10, position: 'insideBottomLeft' }} />
-            {firstRefusedP && (
-              <ReferenceArea
-                x1={firstRefusedP.p}
-                x2={firstRefusedP.p + 0.02}
-                fill="#dc2626"
-                fillOpacity={0.3}
-                stroke="#dc2626"
-                label={{ value: 'REFUSED', fill: '#fca5a5', fontSize: 10 }}
-              />
-            )}
-            <Line dataKey="f" name="F at one shell pass" stroke={SERIES[0]} dot isAnimationActive={false} />
-            <Line dataKey="warned" name="the same F, inside the warning band" stroke={SERIES[3]} strokeWidth={3} dot isAnimationActive={false} connectNulls={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="p" type="number" domain={['auto', 'auto']} tick={AXIS} label={{ value: 'P, the dimensionless temperature group', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
+          <YAxis tick={AXIS} domain={[0, 1]} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => e6(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceArea y1={0} y2={0.8} fill={seriesColor(2)} fillOpacity={0.12} stroke={seriesColor(2)} label={{ value: 'WARNED below F 0.8', fill: seriesColor(2), fontSize: 10, position: 'insideBottomLeft' }} />
+          {firstRefusedP && (
+            <ReferenceArea
+              x1={firstRefusedP.p}
+              x2={firstRefusedP.p + 0.02}
+              fill={seriesColor(3)}
+              fillOpacity={0.3}
+              stroke={seriesColor(3)}
+              label={{ value: 'REFUSED', fill: seriesColor(3), fontSize: 10 }}
+            />
+          )}
+          <Line dataKey="f" name="F at one shell pass" stroke={SERIES[0]} dot isAnimationActive={false} />
+          <Line dataKey="warned" name="the same F, inside the warning band" stroke={SERIES[3]} strokeWidth={3} dot isAnimationActive={false} connectNulls={false} />
+        </LineChart>
+      </ChartFrame>
       <Note>
         The amber band and the red band are different answers. Inside the amber one the engine ANSWERS and says the curve
         is steep here, so a small error in the terminal temperatures swings the area badly and the remedy is another
@@ -396,7 +391,7 @@ export const CorrectionMode = ({ k }) => {
           : [e6(s.p), e6(s.f), s.warning ? 'yes' : 'none']))}
       />
       {k.sweep.filter((s) => s.refusal).map((s) => <Refusal key={s.refusal.label} probe={s.refusal} />)}
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         The correction factor is COMPUTED from a closed form rather than read off a chart or typed, and the published
         cases say whether the closed form is right.
       </p>
@@ -412,7 +407,7 @@ export const CorrectionMode = ({ k }) => {
         {' '}{yn(k.everyPublishedCaseAgrees)}. The oracle reaches F by inverting a marched NTU rather than by evaluating
         the closed form, so that column is a second method.
       </Note>
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         And an analytic limit: F tends to one as P tends to zero, at every R. A vanishing cold rise is a vanishing
         departure from counter-current flow, so there is nothing left to correct.
       </p>
@@ -449,7 +444,7 @@ export const BundleMode = ({ b }) => {
         ANGLES: choosing one over the other changes nothing at all, and this panel says so rather than letting the box
         look live. The engine attaches its own note to any answer at either angle.
       </Note>
-      <p className="text-xs text-slate-300 font-mono mt-1 mb-0">{b.layoutNote}</p>
+      <p className="text-xs text-pl-text font-mono mt-1 mb-0">{b.layoutNote}</p>
       <Note>
         The first angle against the second IS live, which is why the box is decorative between a named pair rather than
         useless in general: bundle {e6(b.firstAgainstSecond.firstBundleIn)} against
