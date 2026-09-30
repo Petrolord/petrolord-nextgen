@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import LegalPageLayout from '@/components/legal/LegalPageLayout';
+import { TEXT_LINK } from '@/components/public/PublicPage';
 import PolicySection from '@/components/legal/PolicySection';
 import { AlertTriangle, BookOpen, CheckCircle, ShieldAlert } from 'lucide-react';
 
@@ -30,11 +31,11 @@ const AcademicIntegrityPage = () => {
       tocItems={tocItems}
     >
       <div className="flex justify-start mb-6">
-        <Button variant="ghost" onClick={() => navigate('/')} className="text-slate-400 hover:text-white hover:bg-slate-800">
+        <Button variant="ghost" onClick={() => navigate('/')} className="print:hidden">
           <ArrowLeft className="w-4 h-4 mr-2" /> Back to Home
         </Button>
       </div>
-      <div className="text-xl text-slate-400 mb-10 leading-relaxed border-l-4 border-[#BFFF00] pl-6 py-2 bg-[#1E293B]/30 rounded-r-lg flex items-start gap-4">
+      <div className="text-xl text-pl-muted mb-10 leading-relaxed border-l-4 border-pl-accent pl-6 py-2 bg-pl-surface rounded-r-lg flex items-start gap-4">
         <div>
            Petrolord NextGen is built on a foundation of trust and professional ethics. We are committed to fostering an environment where learning is genuine, and achievements are earned.
         </div>
@@ -53,29 +54,29 @@ const AcademicIntegrityPage = () => {
         <p>Academic dishonesty includes, but is not limited to, the following behaviors:</p>
         
         <div className="grid md:grid-cols-2 gap-4 my-6">
-            <div className="p-4 bg-red-950/20 border border-red-900/50 rounded-lg">
-                <h4 className="text-red-400 font-bold mb-2 flex items-center gap-2">
+            <div className="p-4 bg-pl-danger-bg border border-pl-danger/40 rounded-lg">
+                <h4 className="text-pl-danger-text font-bold mb-2 flex items-center gap-2">
                     <AlertTriangle className="w-4 h-4" /> Cheating
                 </h4>
-                <p className="text-sm text-slate-400">Using unauthorized notes, aids, or information on an examination or assignment.</p>
+                <p className="text-sm text-pl-text">Using unauthorized notes, aids, or information on an examination or assignment.</p>
             </div>
-            <div className="p-4 bg-red-950/20 border border-red-900/50 rounded-lg">
-                <h4 className="text-red-400 font-bold mb-2 flex items-center gap-2">
+            <div className="p-4 bg-pl-danger-bg border border-pl-danger/40 rounded-lg">
+                <h4 className="text-pl-danger-text font-bold mb-2 flex items-center gap-2">
                     <AlertTriangle className="w-4 h-4" /> Fabrication
                 </h4>
-                <p className="text-sm text-slate-400">Inventing or falsifying data, citations, or information in any academic exercise.</p>
+                <p className="text-sm text-pl-text">Inventing or falsifying data, citations, or information in any academic exercise.</p>
             </div>
-            <div className="p-4 bg-red-950/20 border border-red-900/50 rounded-lg">
-                <h4 className="text-red-400 font-bold mb-2 flex items-center gap-2">
+            <div className="p-4 bg-pl-danger-bg border border-pl-danger/40 rounded-lg">
+                <h4 className="text-pl-danger-text font-bold mb-2 flex items-center gap-2">
                     <AlertTriangle className="w-4 h-4" /> Unauthorized Access
                 </h4>
-                <p className="text-sm text-slate-400">Accessing or manipulating platform data or systems to gain an unfair advantage.</p>
+                <p className="text-sm text-pl-text">Accessing or manipulating platform data or systems to gain an unfair advantage.</p>
             </div>
-            <div className="p-4 bg-red-950/20 border border-red-900/50 rounded-lg">
-                <h4 className="text-red-400 font-bold mb-2 flex items-center gap-2">
+            <div className="p-4 bg-pl-danger-bg border border-pl-danger/40 rounded-lg">
+                <h4 className="text-pl-danger-text font-bold mb-2 flex items-center gap-2">
                     <AlertTriangle className="w-4 h-4" /> Facilitation
                 </h4>
-                <p className="text-sm text-slate-400">Helping or attempting to help another student commit an act of academic dishonesty.</p>
+                <p className="text-sm text-pl-text">Helping or attempting to help another student commit an act of academic dishonesty.</p>
             </div>
         </div>
       </PolicySection>
@@ -89,8 +90,8 @@ const AcademicIntegrityPage = () => {
           <li>Copying code, scripts, or workflow configurations without attribution.</li>
           <li>Using AI-generated content (like ChatGPT) to complete essay or analysis questions without permission or citation.</li>
         </ul>
-        <div className="mt-4 p-4 bg-slate-800 rounded-lg border-l-4 border-[#BFFF00]">
-            <p className="text-sm text-slate-300">
+        <div className="mt-4 p-4 bg-pl-surface rounded-lg border-l-4 border-pl-accent">
+            <p className="text-sm text-pl-text">
                 <strong>Correct Practice:</strong> Always cite sources used in your reports. If you use a template or public workflow, acknowledge the original creator.
             </p>
         </div>
@@ -100,30 +101,30 @@ const AcademicIntegrityPage = () => {
         <p>
           We encourage collaboration, but there is a clear distinction between working together and copying.
         </p>
-        <h3 className="text-white font-semibold mt-4 mb-2">Allowed Collaboration</h3>
+        <h3 className="text-pl-text font-semibold mt-4 mb-2">Allowed Collaboration</h3>
         <ul className="space-y-2 mb-6">
-            <li className="flex items-start gap-2 text-slate-300">
-                <CheckCircle className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0" />
+            <li className="flex items-start gap-2 text-pl-text">
+                <CheckCircle className="w-5 h-5 text-pl-success-text mt-0.5 shrink-0" />
                 Discussing general concepts and approaches to a problem.
             </li>
-            <li className="flex items-start gap-2 text-slate-300">
-                <CheckCircle className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0" />
+            <li className="flex items-start gap-2 text-pl-text">
+                <CheckCircle className="w-5 h-5 text-pl-success-text mt-0.5 shrink-0" />
                 Peer-reviewing workflows to identify logic errors (without fixing them for the student).
             </li>
-            <li className="flex items-start gap-2 text-slate-300">
-                <CheckCircle className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0" />
+            <li className="flex items-start gap-2 text-pl-text">
+                <CheckCircle className="w-5 h-5 text-pl-success-text mt-0.5 shrink-0" />
                 Group projects where tasks are divided and contributions are documented.
             </li>
         </ul>
 
-        <h3 className="text-white font-semibold mt-4 mb-2">Unauthorized Collusion</h3>
+        <h3 className="text-pl-text font-semibold mt-4 mb-2">Unauthorized Collusion</h3>
         <ul className="space-y-2">
-            <li className="flex items-start gap-2 text-slate-300">
-                <ShieldAlert className="w-5 h-5 text-red-500 mt-0.5 shrink-0" />
+            <li className="flex items-start gap-2 text-pl-text">
+                <ShieldAlert className="w-5 h-5 text-pl-danger-text mt-0.5 shrink-0" />
                 Sharing login credentials to allow another to complete work.
             </li>
-            <li className="flex items-start gap-2 text-slate-300">
-                <ShieldAlert className="w-5 h-5 text-red-500 mt-0.5 shrink-0" />
+            <li className="flex items-start gap-2 text-pl-text">
+                <ShieldAlert className="w-5 h-5 text-pl-danger-text mt-0.5 shrink-0" />
                 Sharing finished report files or simulation exports for submission by another.
             </li>
         </ul>
@@ -147,18 +148,18 @@ const AcademicIntegrityPage = () => {
           We want you to succeed honestly. If you are struggling with coursework or technical challenges, please use these resources instead of resorting to dishonesty:
         </p>
         <div className="grid sm:grid-cols-2 gap-4 mt-4">
-            <a href="/support" className="p-4 bg-[#1E293B] hover:bg-slate-800 rounded-lg border border-slate-700 transition-colors flex items-center gap-3">
-                <BookOpen className="w-6 h-6 text-[#BFFF00]" />
+            <a href="/support" className="p-4 bg-pl-surface hover:bg-pl-sunken rounded-lg border border-pl-border transition-colors flex items-center gap-3">
+                <BookOpen className="w-6 h-6 text-pl-primary-text" />
                 <div>
-                    <div className="font-bold text-white">Documentation</div>
-                    <div className="text-xs text-slate-400">Detailed guides and tutorials</div>
+                    <div className="font-bold text-pl-text">Documentation</div>
+                    <div className="text-xs text-pl-muted">Detailed guides and tutorials</div>
                 </div>
             </a>
-            <a href="/community" className="p-4 bg-[#1E293B] hover:bg-slate-800 rounded-lg border border-slate-700 transition-colors flex items-center gap-3">
-                <BookOpen className="w-6 h-6 text-blue-400" />
+            <a href="/community" className="p-4 bg-pl-surface hover:bg-pl-sunken rounded-lg border border-pl-border transition-colors flex items-center gap-3">
+                <BookOpen className="w-6 h-6 text-pl-info-text" />
                 <div>
-                    <div className="font-bold text-white">Community Forum</div>
-                    <div className="text-xs text-slate-400">Ask questions and get help</div>
+                    <div className="font-bold text-pl-text">Community Forum</div>
+                    <div className="text-xs text-pl-muted">Ask questions and get help</div>
                 </div>
             </a>
         </div>
@@ -169,7 +170,7 @@ const AcademicIntegrityPage = () => {
           If you witness a violation of this policy, you have a responsibility to report it. Maintaining the integrity of the platform benefits everyone.
         </p>
         <p className="mt-4">
-           You can report suspected violations confidentially via email at <a href="mailto:integrity@petrolord.com" className="text-[#BFFF00] hover:underline">integrity@petrolord.com</a>. All reports are investigated discreetly.
+           You can report suspected violations confidentially via email at <a href="mailto:integrity@petrolord.com" className={TEXT_LINK}>integrity@petrolord.com</a>. All reports are investigated discreetly.
         </p>
       </PolicySection>
     </LegalPageLayout>
