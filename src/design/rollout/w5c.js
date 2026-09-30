@@ -5,4 +5,5 @@ export default [
   '/dashboard/apps/safetystats',
   '/dashboard/apps/hygiene',
   '/dashboard/apps/lopa',
+  '/dashboard/apps/qra',
 ];
