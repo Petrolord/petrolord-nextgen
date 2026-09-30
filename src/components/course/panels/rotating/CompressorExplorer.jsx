@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, BarChart, Line, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
+  LineChart, BarChart, Line, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import {
   stageIsNotAPump, stageCountAndLimit, trainAndCooling, machineDriverFuel, refusalContract, heldItems,
 } from './rotatingLab';
@@ -44,13 +47,13 @@ export const MODES = [
   ['limits', 'Where both engines stop: what a refusal is, the bare-number contract, and the validity window'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
 
 const Tbl = ({ head, rows }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>{head.map((h, i) => <th key={h} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>)}</tr>
       </thead>
       <tbody>
@@ -65,16 +68,16 @@ const Tbl = ({ head, rows }) => (
 );
 
 const Held = ({ children }) => (
-  <div className="mt-3 rounded-md border border-amber-700/60 bg-amber-950/20 p-3">
-    <p className="text-amber-300 text-xs font-medium mb-1">HELD FOR LITERATURE</p>
-    <p className="text-xs text-slate-300 mb-0">{children}</p>
+  <div className="mt-3 rounded-md border border-pl-warning/40 bg-pl-warning-bg p-3">
+    <p className="text-pl-warning-text text-xs font-medium mb-1">HELD FOR LITERATURE</p>
+    <p className="text-xs text-pl-text mb-0">{children}</p>
   </div>
 );
 
 const EngineSays = ({ label, message, tone = 'sky' }) => (
-  <div className={`mt-2 rounded-md border p-2 ${tone === 'red' ? 'border-red-800/60 bg-red-950/20' : 'border-sky-800/60 bg-sky-950/20'}`}>
-    <p className={`text-xs font-medium mb-1 ${tone === 'red' ? 'text-red-300' : 'text-sky-300'}`}>{label}</p>
-    <p className="text-xs text-slate-300 font-mono mb-0">{message}</p>
+  <div className={`mt-2 rounded-md border p-2 ${tone === 'red' ? 'border-pl-danger/40 bg-pl-danger-bg' : 'border-pl-info/40 bg-pl-info-bg'}`}>
+    <p className={`text-xs font-medium mb-1 ${tone === 'red' ? 'text-pl-danger-text' : 'text-pl-info-text'}`}>{label}</p>
+    <p className="text-xs text-pl-text font-mono mb-0">{message}</p>
   </div>
 );
 
@@ -109,7 +112,7 @@ export const StageMode = ({ s }) => {
         <Tile label="Discharge temperature" value={four(s.tDischargeF)} unit="degF" />
         <Tile label="Discharge pressure" value={four(s.pDischargePsia)} unit="psia" />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The exponent that governs a real stage is not the isentropic one: their quotient is
         {' '}{nine(s.exponentQuotientDerived)}, which is one over the polytropic efficiency. Using the isentropic
         exponent would have predicted {four(s.isentropicDischargeF)} degF, which is
@@ -134,13 +137,13 @@ export const StageMode = ({ s }) => {
           ['brake power', four(s.brakeHp), 'hp'],
         ]}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Both heads are reported so neither gets quoted as the other, and the compressibility is evaluated at both ends
         and averaged rather than carrying the suction value through.
       </p>
-      <div className="mt-3 rounded-md border border-slate-700 bg-[#0F172A] p-3">
-        <p className="text-white text-xs font-medium mb-2">An identity is not a check</p>
-        <p className="text-xs text-slate-400 mb-2">
+      <div className="mt-3 rounded-md border border-pl-border bg-pl-sunken p-3">
+        <p className="text-pl-text text-xs font-medium mb-2">An identity is not a check</p>
+        <p className="text-xs text-pl-muted mb-2">
           The two power routes above differ by {raw(s.gasHpDifferenceDerived)} hp. That agreement is an algebraic
           identity: the exponent ratio times the polytropic efficiency IS the isentropic exponent ratio, exactly, for
           every pair. The last column below is the difference, computed rather than asserted.
@@ -149,7 +152,7 @@ export const StageMode = ({ s }) => {
           head={['k', 'polytropic efficiency', 'exponent ratio', 'times the efficiency', 'the isentropic exponent ratio', 'difference']}
           rows={s.identity.map((r) => [six(r.k), six(r.polytropicEfficiency), nine(r.exponentRatio), raw(r.timesEfficiencyDerived), raw(r.isentropicExponentRatio), raw(r.differenceDerived)])}
         />
-        <p className="text-xs text-slate-400 mt-2 mb-0">
+        <p className="text-xs text-pl-muted mt-2 mb-0">
           Because that identity holds for every input, including an input transcribed wrong, the agreement of the two
           horsepower figures is a shape property rather than evidence about either head. Ask the same question of every
           gate you meet: what input would make it fail? If there is none, it restates the formula rather than testing
@@ -160,7 +163,7 @@ export const StageMode = ({ s }) => {
         head={['stated limit degF', 'discharge degF', 'warned']}
         rows={s.statedLimits.map((r) => [four(r.statedLimitF), four(r.tDischargeF), String(r.warned)])}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The hot-stage warning fires on the limit the CALLER stated. The discharge is the same
         {' '}{four(s.tDischargeF)} degF on all four rows, because a limit is a limit rather than an input to the
         thermodynamics. With no limit stated, the warning turns on between a ratio of
@@ -173,18 +176,16 @@ export const StageMode = ({ s }) => {
         measured out of the engine by bisection above rather than quoted, and it is a customary number with no
         publication behind it here. It is taught as a limit and never as an answer.
       </Held>
-      <div className="h-48 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="eta" tick={AXIS} label={{ value: 'polytropic efficiency', fill: '#94a3b8', fontSize: 10, position: 'insideBottom', offset: -2 }} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => four(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line dataKey="discharge" name="discharge, degF" stroke="#f472b6" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={192} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="eta" tick={AXIS} label={{ value: 'polytropic efficiency', fill: SVG_CHART.note, fontSize: 10, position: 'insideBottom', offset: -2 }} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => four(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line dataKey="discharge" name="discharge, degF" stroke={seriesColor(4)} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Tbl
         head={['k', 'exponent ratio', 'discharge degF', 'polytropic head ft lbf per lbm', 'gas hp']}
         rows={s.kSweep.map((r) => [six(r.k), nine(r.exponentRatio), four(r.tDischargeF), four(r.headPolyFtLbfLbm), four(r.gasHp)])}
@@ -211,7 +212,7 @@ export const StagingMode = ({ s }) => {
         <Tile label="Stages the temperature limit demands" value={raw(s.byTemp)} />
         <Tile label="Stages, governed by" value={`${raw(s.stages)} (${s.governedBy})`} />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The count is the larger of two limits and the engine names which one bound, at a ratio per stage of
         {' '}{nine(s.ratioPerStage)}. It is chosen against the temperature the stages will ACTUALLY see: a single stage
         starts from the suction and is never cooled, and every stage after the first starts from the interstage
@@ -225,29 +226,27 @@ export const StagingMode = ({ s }) => {
           ? [six(r.pDischargePsia), 'refused', '', '', '', '', '', '', '', '', '']
           : [six(r.pDischargePsia), raw(r.byRatio), raw(r.byTemp), raw(r.stages), r.governedBy, nine(r.ratioPerStage), four(r.totalBrakeHp), four(r.hottestF), four(r.roomDerivedF), four(r.totalCoolingMMBtuHr), nine(r.fuelMMscfd)]))}
       />
-      <div className="h-48 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="discharge" tick={AXIS} label={{ value: 'discharge pressure, psia', fill: '#94a3b8', fontSize: 10, position: 'insideBottom', offset: -2 }} />
-            <YAxis yAxisId="left" tick={AXIS} />
-            <YAxis yAxisId="right" orientation="right" tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => four(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line yAxisId="left" dataKey="brakeHp" name="total brake hp" stroke="#38bdf8" dot={false} isAnimationActive={false} />
-            <Line yAxisId="right" dataKey="stages" name="stages" stroke="#BFFF00" dot type="stepAfter" isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <ChartFrame height={192} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="discharge" tick={AXIS} label={{ value: 'discharge pressure, psia', fill: SVG_CHART.note, fontSize: 10, position: 'insideBottom', offset: -2 }} />
+          <YAxis yAxisId="left" tick={AXIS} />
+          <YAxis yAxisId="right" orientation="right" tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => four(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line yAxisId="left" dataKey="brakeHp" name="total brake hp" stroke={seriesColor(0)} dot={false} isAnimationActive={false} />
+          <Line yAxisId="right" dataKey="stages" name="stages" stroke={seriesColor(1)} dot type="stepAfter" isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Power climbs smoothly and the stage count climbs in steps, and each step is a machine, a cooler and a
         foundation. The room column is the stated limit of {four(s.duty.maxDischargeF)} degF less the hottest stage, so
         a negative entry would be a train running over the limit it was staged against. {raw(s.sweepOverLimit)} of the
         {' '}{raw(s.sweepRows)} rows do that.
       </p>
-      <div className="mt-3 rounded-md border border-slate-700 bg-[#0F172A] p-3">
-        <p className="text-white text-xs font-medium mb-2">A refusal carries its evidence</p>
-        <p className="text-xs text-slate-400 mb-2">
+      <div className="mt-3 rounded-md border border-pl-border bg-pl-sunken p-3">
+        <p className="text-pl-text text-xs font-medium mb-2">A refusal carries its evidence</p>
+        <p className="text-xs text-pl-muted mb-2">
           The search for the temperature-driven count runs from one stage to twelve and refuses past it. That refusal is
           hard to reach, because every cheaper explanation is caught at the door first. It needs a discharge limit above
           the suction temperature, {four(s.capDuty.maxDischargeF)} degF against {four(s.capDuty.tSuctionF)} degF here, a
@@ -266,7 +265,7 @@ export const StagingMode = ({ s }) => {
             ['the gap between the coolest reachable discharge and the limit', `${four(s.cap.gapDerivedF)} degF`],
           ]}
         />
-        <p className="text-xs text-slate-400 mt-2 mb-0">
+        <p className="text-xs text-pl-muted mt-2 mb-0">
           That gap is what tells a reader whether the approach or the limit is the impossible one, rather than sending
           them off to intercool harder. The same sentence used to answer four unrelated faults as well as this one; the
           domain-limits view shows each of those four refused by name instead.
@@ -294,12 +293,12 @@ export const TrainMode = ({ t }) => {
         head={['stage', 'suction psia', 'discharge psia', 'in degF', 'out degF', 'ratio', 'z average', 'polytropic head ft lbf per lbm', 'gas hp', 'brake hp', 'cooling Btu per hr', 'cooled to degF']}
         rows={t.stages.map((s) => [raw(s.stage), four(s.pSuctionPsia), four(s.pDischargePsia), four(s.tSuctionF), four(s.tDischargeF), nine(s.ratio), nine(s.zAvg), four(s.headPolyFtLbfLbm), four(s.gasHp), four(s.brakeHp), four(s.coolingBtuHr), s.cooledToF === null ? 'null' : four(s.cooledToF)])}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The interstage cooling is a real exchanger duty rather than a bookkeeping entry, and the final discharge is
         {' '}{four(t.finalDischargeF)} degF. The hottest stage on that table is {four(t.hottestDerivedF)} degF against a
         stated limit of {four(t.maxDischargeF)} degF.
       </p>
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         Now move the intercooler approach across the suction temperature. A warmer approach makes every stage after the
         first start hotter, so at a fixed count it finishes hotter, and the count the temperature limit demands rises
         once that is no longer affordable. The second column is the inlet the count was tested at, which is the only
@@ -311,14 +310,14 @@ export const TrainMode = ({ t }) => {
           ? [four(r.cooledToF), 'refused', '', '', '', '', '', '']
           : [four(r.cooledToF), four(r.inletTestedAtF), raw(r.stages), r.governedBy, four(r.hottestF), four(r.roomDerivedF), raw(r.stagesOverLimit), raw(r.stagesWarned)]))}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         {raw(t.coolSweepOver)} stages across that whole table run over the stated limit. A count chosen at the suction
         while the stages run from the cooler is a count chosen for a machine that is not the one being built, and the
         cost of a hotter approach is paid in MACHINES rather than in temperature.
       </p>
-      <div className="mt-3 rounded-md border border-slate-700 bg-[#0F172A] p-3">
-        <p className="text-white text-xs font-medium mb-2">A case cut to press on it</p>
-        <p className="text-xs text-slate-400 mb-2">
+      <div className="mt-3 rounded-md border border-pl-border bg-pl-sunken p-3">
+        <p className="text-pl-text text-xs font-medium mb-2">A case cut to press on it</p>
+        <p className="text-xs text-pl-muted mb-2">
           The same gas from {six(t.hotCase.duty.pSuctionPsia)} psia to {six(t.hotCase.duty.pDischargePsia)} psia at
           {' '}{four(t.hotCase.duty.tSuctionF)} degF, a stated discharge limit of
           {' '}{four(t.hotCase.duty.maxDischargeF)} degF, and an intercooler approach of
@@ -332,22 +331,20 @@ export const TrainMode = ({ t }) => {
           {' '}{four(t.hotCase.firstToLastDerivedF)} degF at the same ratio.
         </p>
       </div>
-      <div className="h-48 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="cooledTo" tick={AXIS} label={{ value: 'intercooler approach, degF', fill: '#94a3b8', fontSize: 10, position: 'insideBottom', offset: -2 }} />
-            <YAxis yAxisId="left" tick={AXIS} />
-            <YAxis yAxisId="right" orientation="right" tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => four(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line yAxisId="left" dataKey="cooling" name="total cooling, MMBtu per hr" stroke="#38bdf8" dot isAnimationActive={false} />
-            <Line yAxisId="left" dataKey="gasHp" name="total gas hp" stroke="#f472b6" dot isAnimationActive={false} />
-            <Line yAxisId="right" dataKey="stages" name="stages" stroke="#BFFF00" dot type="stepAfter" isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <ChartFrame height={192} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="cooledTo" tick={AXIS} label={{ value: 'intercooler approach, degF', fill: SVG_CHART.note, fontSize: 10, position: 'insideBottom', offset: -2 }} />
+          <YAxis yAxisId="left" tick={AXIS} />
+          <YAxis yAxisId="right" orientation="right" tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => four(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line yAxisId="left" dataKey="cooling" name="total cooling, MMBtu per hr" stroke={seriesColor(0)} dot isAnimationActive={false} />
+          <Line yAxisId="left" dataKey="gasHp" name="total gas hp" stroke={seriesColor(4)} dot isAnimationActive={false} />
+          <Line yAxisId="right" dataKey="stages" name="stages" stroke={seriesColor(1)} dot type="stepAfter" isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Colder suction to the next stage means less work for the same ratio and more heat to take out. Across the
         {' '}{raw(t.trade.fixedCountRows)} rows that share a stage count of {raw(t.trade.fixedCountStages)}, the cooling
         falls and the gas power rises on every step: {String(t.trade.holds)}. The cooling goes from
@@ -380,37 +377,35 @@ export const VolumeMode = ({ m }) => {
         head={['suction psia', 'actual inlet acfm']}
         rows={m.acfmSweep.map((r) => [six(r.pPsia), four(r.acfm)])}
       />
-      <div className="h-48 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="pressure" tick={AXIS} label={{ value: 'suction pressure, psia', fill: '#94a3b8', fontSize: 10, position: 'insideBottom', offset: -2 }} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => four(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line dataKey="acfm" name="actual inlet volume, acfm" stroke="#38bdf8" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <ChartFrame height={192} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="pressure" tick={AXIS} label={{ value: 'suction pressure, psia', fill: SVG_CHART.note, fontSize: 10, position: 'insideBottom', offset: -2 }} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => four(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line dataKey="acfm" name="actual inlet volume, acfm" stroke={seriesColor(0)} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The same standard rate occupies less and less volume as the suction pressure rises, and the machine screen turns
         on that volume rather than on the rate. The branch is decided on the inlet volume first and on the ratio second,
         so two duties can reach the same recommendation by different roads. The reason line is the only thing that says
         which road.
       </p>
       {m.screen.map((d) => (
-        <div key={d.label} className="mt-3 rounded-md border border-slate-700 bg-[#0F172A] p-3">
-          <p className="text-white text-xs font-medium mb-1">{d.label}</p>
-          <p className="text-xs text-slate-400 mb-1">
+        <div key={d.label} className="mt-3 rounded-md border border-pl-border bg-pl-sunken p-3">
+          <p className="text-pl-text text-xs font-medium mb-1">{d.label}</p>
+          <p className="text-xs text-pl-muted mb-1">
             {four(d.acfm)} acfm at an overall ratio of {six(d.overallRatio)} and {four(d.totalBrakeHp)} brake hp gives
             {' '}{d.recommendation}
           </p>
           <ul className="mb-0">
-            {d.reasons.map((r) => <li key={r} className="text-xs text-slate-300">{r}</li>)}
+            {d.reasons.map((r) => <li key={r} className="text-xs text-pl-text">{r}</li>)}
           </ul>
         </div>
       ))}
-      <p className="text-xs text-slate-400 mt-3 mb-1">
+      <p className="text-xs text-pl-muted mt-3 mb-1">
         The screen asks for the compressibility BEFORE it asks for the volume, so a suction state outside the
         correlation is refused by name rather than as a missing volume:
       </p>
@@ -443,7 +438,7 @@ export const FuelMode = ({ m }) => {
         <Tile label="Driver thermal efficiency" value={six(m.thermalEfficiencyPct)} unit="percent" />
         <Tile label="Share of the stream compressed" value={six(m.fuelSharePctDerived)} unit="percent" />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The driver burns gas out of the stream it is compressing, so the fuel is a share of the throughput rather than a
         separate supply. At a heat rate of {six(m.heatRateBtuHpHr)} Btu per hp hr on gas of {six(m.lhvBtuScf)} Btu per
         scf, that share is {six(m.fuelSharePctDerived)} percent of the {six(m.throughputMMscfd)} MMscfd going through.
@@ -452,19 +447,17 @@ export const FuelMode = ({ m }) => {
         head={['heat rate Btu per hp hr', 'fuel MMscfd', 'thermal efficiency percent', 'share of throughput percent']}
         rows={m.heatRates.map((r) => [six(r.heatRateBtuHpHr), nine(r.fuelMMscfd), six(r.thermalEfficiencyPct), six(r.sharePctDerived)])}
       />
-      <div className="h-48 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="heatRate" tick={AXIS} label={{ value: 'heat rate, Btu per hp hr', fill: '#94a3b8', fontSize: 10, position: 'insideBottom', offset: -2 }} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => nine(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Bar dataKey="fuel" name="fuel, MMscfd" fill="#38bdf8" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <ChartFrame height={192} className="mt-3">
+        <BarChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="heatRate" tick={AXIS} label={{ value: 'heat rate, Btu per hp hr', fill: SVG_CHART.note, fontSize: 10, position: 'insideBottom', offset: -2 }} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => nine(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <Bar dataKey="fuel" name="fuel, MMscfd" fill={seriesColor(0)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         Every packaging below is MEASURED out of the engine by asking it a question about itself, because the module
         exports none of them.
       </p>
@@ -482,7 +475,7 @@ export const FuelMode = ({ m }) => {
           ['the same quotient by the mass route', six(m.measured.baseQuotientFromMassRouteDerived), 'the gas constant above and the standard cubic feet per lbmol'],
         ]}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Two of those pairs are the point. The gas constant measured out of the head and the one gasProperties exports
         differ by {raw(m.measured.gasConstantDifferenceDerived)}, so this package holds ONE value of one constant across
         two modules where one imports from the other. And the two routes to the standard base differ by
@@ -503,7 +496,7 @@ export const LimitsMode = ({ r, h }) => {
   if (!r) return <Note>The refusal reader did not return the guards.</Note>;
   return (
     <>
-      <p className="text-xs text-slate-400 mb-0">
+      <p className="text-xs text-pl-muted mb-0">
         Every refusal in both modules is a RETURNED OBJECT carrying an error string that names the input which is
         actually wrong. Neither module throws, so a caller checks a property rather than catching, and that property is
         the only check most callers make. A NaN and an Infinity have no spelling in JSON and both come back as null
@@ -513,7 +506,7 @@ export const LimitsMode = ({ r, h }) => {
         head={['the input the pump module used to answer with a number', 'what it returns now']}
         rows={r.pumpProbes.map((x) => [x.label, shapeText(x.shape)])}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The sharpest of the set is a system curve with no static head: {shapeText(r.systemNoStatic)}. The object looked
         healthy and the coefficient was right, and the failure only appeared when the curve was called. A static head
         may be NEGATIVE, because the destination can sit below the pump, so the guard is finiteness rather than
@@ -523,9 +516,9 @@ export const LimitsMode = ({ r, h }) => {
         head={['the input the compression module used to answer with a number', 'what it returns now']}
         rows={r.compressionProbes.map((x) => [x.label, shapeText(x.shape)])}
       />
-      <div className="mt-3 rounded-md border border-slate-700 bg-[#0F172A] p-3">
-        <p className="text-white text-xs font-medium mb-2">The bare-number contract</p>
-        <p className="text-xs text-slate-400 mb-2">
+      <div className="mt-3 rounded-md border border-pl-border bg-pl-sunken p-3">
+        <p className="text-pl-text text-xs font-medium mb-2">The bare-number contract</p>
+        <p className="text-xs text-pl-muted mb-2">
           {r.bareNumberNames.length} exports hand back a bare number and have nowhere to put an error key at all:
           {' '}{r.bareNumberNames.join(', ')}. They hold a documented contract instead: NaN when the inputs cannot be
           read, never an Infinity and never a plausible number.
@@ -534,27 +527,27 @@ export const LimitsMode = ({ r, h }) => {
           head={['function', 'input', 'returns']}
           rows={r.nanContract.map((x) => [x.fn, x.label, String(x.returns)])}
         />
-        <p className="text-xs text-slate-400 mt-2 mb-0">
+        <p className="text-xs text-pl-muted mt-2 mb-0">
           Read the two control rows against the rest. A contract that says NaN is only worth something if the same
           function returns a real number when it can, and those two rows are what makes the others mean anything.
         </p>
       </div>
-      <p className="text-xs text-slate-400 mt-3 mb-1">
+      <p className="text-xs text-pl-muted mt-3 mb-1">
         Four faults, four refusals, each naming the input that is actually wrong rather than the one a reader would
         check first:
       </p>
       {r.fourFaults.map((x) => <EngineSays key={x.label} tone="red" label={x.label} message={x.error} />)}
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Two of those messages carry the value that was typed, because two typed values reach one guard from opposite
         directions. A zero and a value above one are different mistakes, and a reader told only the rule has to work out
         which of them they made. A refusal that names the wrong cause sends a reader to fix an input that was correct.
       </p>
-      <p className="text-xs text-slate-400 mt-3 mb-1">
+      <p className="text-xs text-pl-muted mt-3 mb-1">
         And the same fault asked through both functions, so the message cannot drift between them:
       </p>
       <EngineSays tone="red" label="A per-stage ratio limit of one, through the stage count" message={shapeText(r.ratioOneShape)} />
       <EngineSays tone="red" label="The same through the train" message={r.ratioOneThroughTrain} />
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         The compressibility window. Another module in this same package exports its validity bounds and refuses outside
         them by name, and this module now IMPORTS those bounds rather than restating them. That is the same one-owner
         rule the gas constant is settled by.
@@ -565,7 +558,7 @@ export const LimitsMode = ({ r, h }) => {
           x.refused ? 'refused' : nine(x.z1), String(x.solverConverged), x.refused ? 'present' : 'absent',
           x.refused ? 'refused' : four(x.gasHp)])}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Two of those three rows sit outside the published window and are refused. The convergence column is why reading
         that flag would never have caught either: the solver is perfectly happy at both and reports so. The refusal
         carries the reduced coordinates and the state they were taken at, and it says which end of the train died.
@@ -574,26 +567,26 @@ export const LimitsMode = ({ r, h }) => {
         head={['refusal', 'Ppr', 'Tpr', 'at psia', 'at degF', 'state']}
         rows={r.windowRefusals.map((x) => [x.label, six(x.ppr), six(x.tpr), six(x.atPsia), four(x.atF), x.state])}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         A suction BELOW the reduced pressure the fit data start at is accepted rather than refused, and noted instead:
         {' '}{r.lowPressureNote === null ? 'no note' : r.lowPressureNote}. The surface runs to the ideal-gas limit as the
         reduced pressure goes to zero, so a low-pressure suction is an ordinary machine rather than an extrapolation. A
         window has two kinds of edge and they are different kinds.
       </p>
       {h && (
-        <div className="mt-3 rounded-md border border-amber-700/60 bg-amber-950/20 p-3">
-          <p className="text-amber-300 text-xs font-medium mb-1">HELD FOR LITERATURE</p>
-          <p className="text-xs text-slate-300 mb-2">
+        <div className="mt-3 rounded-md border border-pl-warning/40 bg-pl-warning-bg p-3">
+          <p className="text-pl-warning-text text-xs font-medium mb-1">HELD FOR LITERATURE</p>
+          <p className="text-xs text-pl-text mb-2">
             Eight things in this course are used, printed, and never allowed to decide a graded answer:
           </p>
           <ul className="mb-2">
             {h.items.map((x) => (
-              <li key={x.id} className="text-xs text-slate-300">{x.title}, Section {x.section}. {x.note}</li>
+              <li key={x.id} className="text-xs text-pl-text">{x.title}, Section {x.section}. {x.note}</li>
             ))}
           </ul>
-          <p className="text-xs text-slate-300 mb-1">And four things are not in these engines at all:</p>
+          <p className="text-xs text-pl-text mb-1">And four things are not in these engines at all:</p>
           <ul className="mb-0">
-            {h.seams.map((x) => <li key={x} className="text-xs text-slate-300">{x}</li>)}
+            {h.seams.map((x) => <li key={x} className="text-xs text-pl-text">{x}</li>)}
           </ul>
         </div>
       )}

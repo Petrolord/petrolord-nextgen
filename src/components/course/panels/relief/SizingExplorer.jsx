@@ -1,7 +1,10 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine, ReferenceArea,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine, ReferenceArea,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import {
   associateReading, gasBranch, liquidLoop, steamNapier, orificeLadder, TYPED_MARKER,
 } from './reliefLab';
@@ -44,13 +47,13 @@ export const MODES = [
   ['ladder', 'The API 526 ladder, its selection boundaries and the refusal past the largest'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
 
 const Tbl = ({ head, rows }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>{head.map((h, i) => <th key={h} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>)}</tr>
       </thead>
       <tbody>
@@ -70,17 +73,17 @@ const Tbl = ({ head, rows }) => (
  * held for literature, typed as a published input, or a limit the caller applies.
  */
 const Held = ({ label = 'HELD FOR LITERATURE', children }) => (
-  <div className="mt-3 rounded-md border border-amber-700/60 bg-amber-950/20 p-3">
-    <p className="text-amber-300 text-xs font-medium mb-1">{label.toUpperCase()}</p>
-    <p className="text-xs text-slate-300 mb-0">{children}</p>
+  <div className="mt-3 rounded-md border border-pl-warning/40 bg-pl-warning-bg p-3">
+    <p className="text-pl-warning-text text-xs font-medium mb-1">{label.toUpperCase()}</p>
+    <p className="text-xs text-pl-text mb-0">{children}</p>
   </div>
 );
 
 /** A refusal shown as a refusal. The message is the engine's, through the lab. */
 const Refusal = ({ label, message }) => (
-  <div className="mt-2 rounded-md border border-red-800/60 bg-red-950/20 p-2">
-    <p className="text-red-300 text-xs font-medium mb-1">{label}</p>
-    <p className="text-xs text-slate-300 font-mono mb-0">{message}</p>
+  <div className="mt-2 rounded-md border border-pl-danger/40 bg-pl-danger-bg p-2">
+    <p className="text-pl-danger-text text-xs font-medium mb-1">{label}</p>
+    <p className="text-xs text-pl-text font-mono mb-0">{message}</p>
   </div>
 );
 
@@ -132,25 +135,23 @@ export const CoefficientMode = ({ g }) => {
         <Tile label="Exponents walked" value={g.kRows.length} />
         <Tile label="F2 read at a pressure ratio of" value={six(0.8)} />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Both of the first two are functions of the isentropic exponent and of nothing else. No rate, no pressure and no
         temperature enters either of them, which is why they can be drawn against one axis at all.
       </p>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 14, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="k" tick={AXIS} label={{ value: 'isentropic exponent k', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -8 }} />
-            <YAxis yAxisId="c" tick={AXIS} />
-            <YAxis yAxisId="r" orientation="right" tick={AXIS} domain={[0.4, 1]} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line yAxisId="c" dataKey="c" name="C" stroke="#38bdf8" dot={false} isAnimationActive={false} />
-            <Line yAxisId="r" dataKey="ratio" name="critical pressure ratio" stroke="#BFFF00" dot={false} isAnimationActive={false} />
-            <Line yAxisId="r" dataKey="f2" name="F2 at a ratio of 0.8" stroke="#f472b6" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 14, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="k" tick={AXIS} label={{ value: 'isentropic exponent k', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -8 }} />
+          <YAxis yAxisId="c" tick={AXIS} />
+          <YAxis yAxisId="r" orientation="right" tick={AXIS} domain={[0.4, 1]} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line yAxisId="c" dataKey="c" name="C" stroke={seriesColor(0)} dot={false} isAnimationActive={false} />
+          <Line yAxisId="r" dataKey="ratio" name="critical pressure ratio" stroke={seriesColor(1)} dot={false} isAnimationActive={false} />
+          <Line yAxisId="r" dataKey="f2" name="F2 at a ratio of 0.8" stroke={seriesColor(4)} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Tbl
         head={['k, stated', 'C', 'critical pressure ratio', 'F2 at a ratio of 0.8']}
         rows={g.kRows.map((r) => [six(r.k), six(r.c), six(r.criticalRatio), six(r.f2AtPointEight)])}
@@ -184,23 +185,21 @@ export const BranchMode = ({ g }) => {
         <Tile label="Spread across the choked rows" value={twelve(flatSpread)} unit="in2" />
         <Tile label="First subcritical row" value={six(firstSub.areaIn2)} unit="in2" />
       </TileGrid>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 14, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="ratio" tick={AXIS} label={{ value: 'pressure at the valve outlet, as a ratio of the relieving pressure', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -8 }} />
-            <YAxis yAxisId="a" tick={AXIS} />
-            <YAxis yAxisId="f" orientation="right" tick={AXIS} domain={[0.6, 1]} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceArea yAxisId="a" x1={g.branchRows[0].backRatio} x2={g.criticalRatio} fill="#38bdf8" fillOpacity={0.07} />
-            <ReferenceLine yAxisId="a" x={g.criticalRatio} stroke="#BFFF00" strokeDasharray="4 3" label={{ value: 'the branch', fill: '#BFFF00', fontSize: 10, position: 'top' }} />
-            <Line yAxisId="a" dataKey="critical" name="required area, choked, in2" stroke="#38bdf8" strokeWidth={2} dot isAnimationActive={false} connectNulls={false} />
-            <Line yAxisId="a" dataKey="subcritical" name="required area, subcritical, in2" stroke="#fbbf24" strokeWidth={2} dot isAnimationActive={false} connectNulls={false} />
-            <Line yAxisId="f" dataKey="f2" name="F2 where subcritical" stroke="#f472b6" dot={false} isAnimationActive={false} connectNulls={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 14, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="ratio" tick={AXIS} label={{ value: 'pressure at the valve outlet, as a ratio of the relieving pressure', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -8 }} />
+          <YAxis yAxisId="a" tick={AXIS} />
+          <YAxis yAxisId="f" orientation="right" tick={AXIS} domain={[0.6, 1]} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceArea yAxisId="a" x1={g.branchRows[0].backRatio} x2={g.criticalRatio} fill={seriesColor(0)} fillOpacity={0.07} />
+          <ReferenceLine yAxisId="a" x={g.criticalRatio} stroke={seriesColor(1)} strokeDasharray="4 3" label={{ value: 'the branch', fill: seriesColor(1), fontSize: 10, position: 'top' }} />
+          <Line yAxisId="a" dataKey="critical" name="required area, choked, in2" stroke={seriesColor(0)} strokeWidth={2} dot isAnimationActive={false} connectNulls={false} />
+          <Line yAxisId="a" dataKey="subcritical" name="required area, subcritical, in2" stroke={seriesColor(2)} strokeWidth={2} dot isAnimationActive={false} connectNulls={false} />
+          <Line yAxisId="f" dataKey="f2" name="F2 where subcritical" stroke={seriesColor(4)} dot={false} isAnimationActive={false} connectNulls={false} />
+        </LineChart>
+      </ChartFrame>
       <Note>
         The shaded stretch is flat, and that flatness is the whole meaning of choked. Once the downstream pressure is low
         enough the flow through the throat is set by the upstream condition alone, so the required area does not move
@@ -214,7 +213,7 @@ export const BranchMode = ({ g }) => {
           r.f2 === null ? 'n/a' : six(r.f2), r.warned ? 'yes' : 'no',
         ])}
       />
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         The two rows either side of the crossing are the last choked row at {six(lastCritical.backRatio)} and the first
         subcritical one at {six(firstSub.backRatio)}, and the areas are printed either side so the size of the step is
         visible rather than asserted. Below the crossing a typed Kb divides the area; above it the standard uses F2 and
@@ -248,31 +247,29 @@ export const KvMode = ({ l }) => {
         <Tile label="Kv, converged" value={six(l.viscous.kv)} />
         <Tile label="Passes the loop took" value={l.viscous.iterations} />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The liquid route needs the AREA to find the Reynolds number and the Reynolds number to find the correction that
         sets the area, so the engine iterates and reports what it did. The two areas stand in a ratio of
         {' '}{twelve(l.areaRatioDerived)}, and the converged answer stands to what a single pass would have given in a
         ratio of {twelve(l.convergedOverOnePassDerived)}. A loop that runs out of passes and a loop that reaches its
         residual are the same shape on the answer, so the flag, the pass count and the residual are all returned.
       </p>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 14, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="logRe" tick={AXIS} tickFormatter={(v) => `1e${v.toFixed(0)}`} label={{ value: 'Reynolds number', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -8 }} />
-            <YAxis yAxisId="kv" tick={AXIS} domain={[0, 1.05]} />
-            <YAxis yAxisId="s" orientation="right" tick={AXIS} domain={[0, 1]} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine yAxisId="kv" y={1} stroke="#BFFF00" strokeDasharray="4 3" label={{ value: 'the clamp at one', fill: '#BFFF00', fontSize: 10 }} />
-            <ReferenceLine yAxisId="kv" x={Math.log10(l.kvClampReynolds)} stroke="#f87171" strokeDasharray="4 3" label={{ value: 'clamp engages', fill: '#f87171', fontSize: 10, position: 'insideTopRight' }} />
-            <ReferenceLine yAxisId="kv" y={l.kvWarnValue} stroke="#fbbf24" strokeDasharray="2 3" label={{ value: 'the envelope warning', fill: '#fbbf24', fontSize: 10 }} />
-            <Line yAxisId="kv" dataKey="clamped" name="Kv, as the engine applies it" stroke="#38bdf8" strokeWidth={2} dot isAnimationActive={false} />
-            <Line yAxisId="kv" dataKey="unclamped" name="Kv, the raw fit" stroke="#f472b6" strokeDasharray="4 3" dot={false} isAnimationActive={false} />
-            <Line yAxisId="s" dataKey="share" name="the inverse three halves term, as a share of the sum" stroke="#fbbf24" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 14, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="logRe" tick={AXIS} tickFormatter={(v) => `1e${v.toFixed(0)}`} label={{ value: 'Reynolds number', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -8 }} />
+          <YAxis yAxisId="kv" tick={AXIS} domain={[0, 1.05]} />
+          <YAxis yAxisId="s" orientation="right" tick={AXIS} domain={[0, 1]} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine yAxisId="kv" y={1} stroke={seriesColor(1)} strokeDasharray="4 3" label={{ value: 'the clamp at one', fill: seriesColor(1), fontSize: 10 }} />
+          <ReferenceLine yAxisId="kv" x={Math.log10(l.kvClampReynolds)} stroke={seriesColor(3)} strokeDasharray="4 3" label={{ value: 'clamp engages', fill: seriesColor(3), fontSize: 10, position: 'insideTopRight' }} />
+          <ReferenceLine yAxisId="kv" y={l.kvWarnValue} stroke={seriesColor(2)} strokeDasharray="2 3" label={{ value: 'the envelope warning', fill: seriesColor(2), fontSize: 10 }} />
+          <Line yAxisId="kv" dataKey="clamped" name="Kv, as the engine applies it" stroke={seriesColor(0)} strokeWidth={2} dot isAnimationActive={false} />
+          <Line yAxisId="kv" dataKey="unclamped" name="Kv, the raw fit" stroke={seriesColor(4)} strokeDasharray="4 3" dot={false} isAnimationActive={false} />
+          <Line yAxisId="s" dataKey="share" name="the inverse three halves term, as a share of the sum" stroke={seriesColor(2)} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Note>
         The raw fit rises through one and asymptotes to {twelve(l.kvAsymptote)}, which would let a correction for viscous
         drag ADD capacity, so the engine holds it at one above a Reynolds number of {six(l.kvClampReynolds)}. The
@@ -285,7 +282,7 @@ export const KvMode = ({ l }) => {
           six(r.inverseRootTerm), six(r.inverseThreeHalvesTerm), six(r.lastTermShareDerived),
         ])}
       />
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         The three terms are separated on purpose. One over Kv is the sum of them, and the only honest way to say a term
         has a band is to show what each is worth where. The last term carries {six(l.kvTerms[0].lastTermShareDerived)} of
         the sum at the low end of the sweep and {six(l.kvTerms[7].lastTermShareDerived)} at a Reynolds number of
@@ -327,24 +324,22 @@ export const NapierMode = ({ s }) => {
         <Tile label="KN a millionth above it" value={twelve(s.knJustAboveThreshold)} />
         <Tile label="The step across two millionths" value={twelve(s.stepDerived)} />
       </TileGrid>
-      <div className="h-60 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 14, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="p" type="number" domain={[1000, 3200]} tick={AXIS} label={{ value: 'relieving pressure, psia', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -8 }} />
-            <YAxis yAxisId="kn" tick={AXIS} domain={[0.99, 1.2]} />
-            <YAxis yAxisId="a" orientation="right" tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceArea yAxisId="kn" x1={s.thresholdPsia} x2={s.unityCrossingPsia} fill="#f87171" fillOpacity={0.12} />
-            <ReferenceLine yAxisId="kn" y={1} stroke="#94a3b8" strokeDasharray="2 3" />
-            <ReferenceLine yAxisId="kn" x={s.thresholdPsia} stroke="#f87171" strokeDasharray="4 3" label={{ value: 'the step', fill: '#f87171', fontSize: 10, position: 'insideTopLeft' }} />
-            <ReferenceLine yAxisId="kn" x={s.unityCrossingPsia} stroke="#BFFF00" strokeDasharray="4 3" label={{ value: 'back through unity', fill: '#BFFF00', fontSize: 10, position: 'top' }} />
-            <Line yAxisId="kn" dataKey="kn" name="KN" stroke="#38bdf8" strokeWidth={2} dot isAnimationActive={false} />
-            <Line yAxisId="a" dataKey="area" name="required area at the TEBIDABA load, in2" stroke="#fbbf24" dot={false} isAnimationActive={false} connectNulls />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={240} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 14, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="p" type="number" domain={[1000, 3200]} tick={AXIS} label={{ value: 'relieving pressure, psia', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -8 }} />
+          <YAxis yAxisId="kn" tick={AXIS} domain={[0.99, 1.2]} />
+          <YAxis yAxisId="a" orientation="right" tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceArea yAxisId="kn" x1={s.thresholdPsia} x2={s.unityCrossingPsia} fill={seriesColor(3)} fillOpacity={0.12} />
+          <ReferenceLine yAxisId="kn" y={1} stroke={SVG_CHART.note} strokeDasharray="2 3" />
+          <ReferenceLine yAxisId="kn" x={s.thresholdPsia} stroke={seriesColor(3)} strokeDasharray="4 3" label={{ value: 'the step', fill: seriesColor(3), fontSize: 10, position: 'insideTopLeft' }} />
+          <ReferenceLine yAxisId="kn" x={s.unityCrossingPsia} stroke={seriesColor(1)} strokeDasharray="4 3" label={{ value: 'back through unity', fill: seriesColor(1), fontSize: 10, position: 'top' }} />
+          <Line yAxisId="kn" dataKey="kn" name="KN" stroke={seriesColor(0)} strokeWidth={2} dot isAnimationActive={false} />
+          <Line yAxisId="a" dataKey="area" name="required area at the TEBIDABA load, in2" stroke={seriesColor(2)} dot={false} isAnimationActive={false} connectNulls />
+        </LineChart>
+      </ChartFrame>
       <Note>
         The correction steps rather than sliding, and the shaded band is where it sits BELOW one, which makes the
         required area LARGER than the uncorrected one. It leaves unity at {twelve(s.thresholdPsia)} psia and returns
@@ -365,7 +360,7 @@ export const NapierMode = ({ s }) => {
         <Tile label="TEBIDABA required area" value={six(s.stream.areaIn2)} unit="in2" />
         <Tile label="Orifice and margin" value={`${s.stream.orifice} at ${six(s.stream.margin)}`} />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The superheat factor is the other half of this route and it is a published TABLE, so it is typed. The same case
         at a superheated {six(s.superheated.ksh)} needs {six(s.superheated.areaIn2)} in2, a ratio of
         {' '}{twelve(s.superheatRatioDerived)}. An input that always divides and an input that never moves an answer are
@@ -393,30 +388,28 @@ export const LadderMode = ({ o }) => {
         <Tile label="Largest" value={six(o.ladder[o.rowCount - 1].areaIn2)} unit="in2" />
         <Tile label="Streams selected here" value={o.streams.length} />
       </TileGrid>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 14, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="orifice" tick={AXIS} label={{ value: 'API 526 orifice letter', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -8 }} />
-            <YAxis yAxisId="a" tick={AXIS} />
-            <YAxis yAxisId="r" orientation="right" tick={AXIS} domain={[1, 2]} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            {o.streams.map((s, i) => (
-              <ReferenceLine
-                key={s.stream}
-                yAxisId="a"
-                y={s.areaIn2}
-                stroke={['#38bdf8', '#f472b6', '#fbbf24'][i]}
-                strokeDasharray="4 3"
-                label={{ value: `${s.stream} needs ${six(s.areaIn2)} in2`, fill: ['#38bdf8', '#f472b6', '#fbbf24'][i], fontSize: 10 }}
-              />
-            ))}
-            <Line yAxisId="a" dataKey="area" name="orifice area, in2" stroke="#e2e8f0" strokeWidth={2} dot isAnimationActive={false} />
-            <Line yAxisId="r" dataKey="ratio" name="ratio to the one below" stroke="#BFFF00" dot isAnimationActive={false} connectNulls={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 14, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="orifice" tick={AXIS} label={{ value: 'API 526 orifice letter', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -8 }} />
+          <YAxis yAxisId="a" tick={AXIS} />
+          <YAxis yAxisId="r" orientation="right" tick={AXIS} domain={[1, 2]} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
+          <Legend {...LEGEND_PROPS} />
+          {o.streams.map((s, i) => (
+            <ReferenceLine
+              key={s.stream}
+              yAxisId="a"
+              y={s.areaIn2}
+              stroke={[seriesColor(0), seriesColor(4), seriesColor(2)][i]}
+              strokeDasharray="4 3"
+              label={{ value: `${s.stream} needs ${six(s.areaIn2)} in2`, fill: [seriesColor(0), seriesColor(4), seriesColor(2)][i], fontSize: 10 }}
+            />
+          ))}
+          <Line yAxisId="a" dataKey="area" name="orifice area, in2" stroke={SVG_CHART.label} strokeWidth={2} dot isAnimationActive={false} />
+          <Line yAxisId="r" dataKey="ratio" name="ratio to the one below" stroke={seriesColor(1)} dot isAnimationActive={false} connectNulls={false} />
+        </LineChart>
+      </ChartFrame>
       <Note>
         The green line is the point. The ladder is not geometric: read the ratio of each row to the one below it top to
         bottom rather than assuming a constant step. It runs from {six(o.ladder[1].ratioToTheOneBelow)} down to
@@ -427,7 +420,7 @@ export const LadderMode = ({ o }) => {
         head={['letter', 'area in2', 'ratio to the one below']}
         rows={o.ladder.map((r) => [r.orifice, six(r.areaIn2), r.ratioToTheOneBelow === null ? 'n/a' : six(r.ratioToTheOneBelow)])}
       />
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         Selection is walked across and ON the boundaries, because the rows at an exactly listed area are the ones that
         decide whether the comparison is at-or-above or strictly above.
       </p>
@@ -435,7 +428,7 @@ export const LadderMode = ({ o }) => {
         head={['required area in2, stated', 'orifice', 'orifice area in2', 'margin', 'note']}
         rows={o.selectionRows.map((r) => [six(r.requiredAreaIn2), r.orifice, six(r.orificeAreaIn2), six(r.margin), r.note])}
       />
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         Past the largest standard orifice the engine refuses, and the refusal carries the figure that made it true along
         with how many valves the area needs:
       </p>

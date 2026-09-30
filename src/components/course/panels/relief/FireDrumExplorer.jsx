@@ -1,7 +1,10 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine, ReferenceDot, ReferenceArea,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine, ReferenceDot, ReferenceArea,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import {
   wettedGeometry, fireDuty, fireCase, dropletSettling, knockoutDrum, LIMIT_MARKER,
 } from './reliefLab';
@@ -47,13 +50,13 @@ export const MODES = [
   ['drum', 'The drum length and the L over D against diameter, and the holdup that turns'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
 
 const Tbl = ({ head, rows }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>{head.map((h, i) => <th key={h} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>)}</tr>
       </thead>
       <tbody>
@@ -72,24 +75,24 @@ const Tbl = ({ head, rows }) => (
  * heading names WHICH kind of not-derived it is, in the lab's own marker words.
  */
 const Held = ({ label = 'HELD FOR LITERATURE', children }) => (
-  <div className="mt-3 rounded-md border border-amber-700/60 bg-amber-950/20 p-3">
-    <p className="text-amber-300 text-xs font-medium mb-1">{label.toUpperCase()}</p>
-    <p className="text-xs text-slate-300 mb-0">{children}</p>
+  <div className="mt-3 rounded-md border border-pl-warning/40 bg-pl-warning-bg p-3">
+    <p className="text-pl-warning-text text-xs font-medium mb-1">{label.toUpperCase()}</p>
+    <p className="text-xs text-pl-text mb-0">{children}</p>
   </div>
 );
 
 /** Text the engine returns on a successful call to name a decision it left to the caller. */
 const EngineNote = ({ label, message }) => (
-  <div className="mt-2 rounded-md border border-sky-800/60 bg-sky-950/20 p-2">
-    <p className="text-sky-300 text-xs font-medium mb-1">{label}</p>
-    <p className="text-xs text-slate-300 font-mono mb-0">{message}</p>
+  <div className="mt-2 rounded-md border border-pl-info/40 bg-pl-info-bg p-2">
+    <p className="text-pl-info-text text-xs font-medium mb-1">{label}</p>
+    <p className="text-xs text-pl-text font-mono mb-0">{message}</p>
   </div>
 );
 
 const Refusal = ({ label, message }) => (
-  <div className="mt-2 rounded-md border border-red-800/60 bg-red-950/20 p-2">
-    <p className="text-red-300 text-xs font-medium mb-1">{label}</p>
-    <p className="text-xs text-slate-300 font-mono mb-0">{message}</p>
+  <div className="mt-2 rounded-md border border-pl-danger/40 bg-pl-danger-bg p-2">
+    <p className="text-pl-danger-text text-xs font-medium mb-1">{label}</p>
+    <p className="text-xs text-pl-text font-mono mb-0">{message}</p>
   </div>
 );
 
@@ -113,23 +116,21 @@ export const WettedMode = ({ w }) => {
         <Tile label="Lying over standing" value={twelve(w.lyingOverStandingDerived)} />
         <Tile label="Full, the whole lateral surface" value={four(w.fullFt2)} unit="ft2" />
       </TileGrid>
-      <div className="h-60 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 14, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="level" type="number" domain={[0, 12]} tick={AXIS} label={{ value: 'liquid level, ft', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -8 }} />
-            <YAxis yAxisId="a" tick={AXIS} />
-            <YAxis yAxisId="r" orientation="right" tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => four(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine yAxisId="a" x={w.halfFull.levelFt} stroke="#BFFF00" strokeDasharray="4 3" label={{ value: 'half full', fill: '#BFFF00', fontSize: 10, position: 'top' }} />
-            <ReferenceDot yAxisId="a" x={w.halfFull.levelFt} y={w.halfFull.wettedFt2} r={4} fill="#BFFF00" stroke="none" />
-            <Line yAxisId="a" dataKey="horizontal" name="lying down, ft2" stroke="#38bdf8" strokeWidth={2} dot isAnimationActive={false} />
-            <Line yAxisId="a" dataKey="vertical" name="standing up, ft2" stroke="#f472b6" strokeWidth={2} dot isAnimationActive={false} />
-            <Line yAxisId="r" dataKey="ratio" name="lying over standing" stroke="#fbbf24" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={240} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 14, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="level" type="number" domain={[0, 12]} tick={AXIS} label={{ value: 'liquid level, ft', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -8 }} />
+          <YAxis yAxisId="a" tick={AXIS} />
+          <YAxis yAxisId="r" orientation="right" tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => four(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine yAxisId="a" x={w.halfFull.levelFt} stroke={seriesColor(1)} strokeDasharray="4 3" label={{ value: 'half full', fill: seriesColor(1), fontSize: 10, position: 'top' }} />
+          <ReferenceDot yAxisId="a" x={w.halfFull.levelFt} y={w.halfFull.wettedFt2} r={4} fill={seriesColor(1)} stroke="none" />
+          <Line yAxisId="a" dataKey="horizontal" name="lying down, ft2" stroke={seriesColor(0)} strokeWidth={2} dot isAnimationActive={false} />
+          <Line yAxisId="a" dataKey="vertical" name="standing up, ft2" stroke={seriesColor(4)} strokeWidth={2} dot isAnimationActive={false} />
+          <Line yAxisId="r" dataKey="ratio" name="lying over standing" stroke={seriesColor(2)} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Note>
         The marked level is the one case with an analytic answer. At a level of exactly {six(w.halfFull.levelFt)} ft the
         engine returns {four(w.halfFull.wettedFt2)} ft2 and half the lateral surface of the cylinder is
@@ -166,46 +167,42 @@ export const DutyMode = ({ f, c }) => {
         <Tile label="Relief load" value={four(c.chain.loadLbHr)} unit="lb/hr" />
         <Tile label="Orifice the load demands" value={`${c.chain.orifice} at ${six(c.chain.margin)}`} />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Two things move this duty and they are different kinds of thing. The drainage answer is a BOOLEAN that switches
         between two published constants, {four(f.constantDrainedBtuHr)} and {four(f.constantUndrainedBtuHr)} Btu/hr at a
         unit area, a factor of {twelve(f.drainageFactorDerived)} between them. The environment factor is a typed CREDIT
         against its own table and it multiplies. The exponent the area is raised to is {twelve(f.exponent)}, measured as
         the log ratio of two duties an order of area apart.
       </p>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={envChart} margin={{ top: 10, right: 20, bottom: 14, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="env" type="number" domain={[0.1, 1]} tick={AXIS} label={{ value: 'environment factor, stated', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -8 }} />
-            <YAxis yAxisId="q" tick={AXIS} />
-            <YAxis yAxisId="w" orientation="right" tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => four(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line yAxisId="q" dataKey="drained" name="duty with drainage, Btu/hr" stroke="#38bdf8" strokeWidth={2} dot isAnimationActive={false} />
-            <Line yAxisId="q" dataKey="undrained" name="duty without drainage, Btu/hr" stroke="#f87171" strokeWidth={2} dot isAnimationActive={false} />
-            <Line yAxisId="w" dataKey="load" name="relief load with drainage, lb/hr" stroke="#BFFF00" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={envChart} margin={{ top: 10, right: 20, bottom: 14, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="env" type="number" domain={[0.1, 1]} tick={AXIS} label={{ value: 'environment factor, stated', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -8 }} />
+          <YAxis yAxisId="q" tick={AXIS} />
+          <YAxis yAxisId="w" orientation="right" tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => four(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line yAxisId="q" dataKey="drained" name="duty with drainage, Btu/hr" stroke={seriesColor(0)} strokeWidth={2} dot isAnimationActive={false} />
+          <Line yAxisId="q" dataKey="undrained" name="duty without drainage, Btu/hr" stroke={seriesColor(3)} strokeWidth={2} dot isAnimationActive={false} />
+          <Line yAxisId="w" dataKey="load" name="relief load with drainage, lb/hr" stroke={seriesColor(1)} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Tbl
         head={['environment factor, stated', 'duty with drainage Btu/hr', 'duty without Btu/hr', 'relief load lb/hr']}
         rows={f.envRows.map((r) => [six(r.envFactor), four(r.dutyDrainedBtuHr), four(r.dutyUndrainedBtuHr), four(r.loadDrainedLbHr)])}
       />
-      <div className="h-52 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={areaChart} margin={{ top: 10, right: 20, bottom: 14, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="area" type="number" scale="log" domain={['dataMin', 'dataMax']} tick={AXIS} label={{ value: 'wetted area, ft2', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -8 }} />
-            <YAxis yAxisId="q" tick={AXIS} />
-            <YAxis yAxisId="p" orientation="right" tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => four(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line yAxisId="q" dataKey="duty" name="duty, Btu/hr" stroke="#38bdf8" strokeWidth={2} dot isAnimationActive={false} />
-            <Line yAxisId="p" dataKey="perFt2" name="duty per ft2, Btu/hr" stroke="#fbbf24" strokeWidth={2} dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={208} className="mt-3">
+        <LineChart data={areaChart} margin={{ top: 10, right: 20, bottom: 14, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="area" type="number" scale="log" domain={['dataMin', 'dataMax']} tick={AXIS} label={{ value: 'wetted area, ft2', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -8 }} />
+          <YAxis yAxisId="q" tick={AXIS} />
+          <YAxis yAxisId="p" orientation="right" tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => four(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line yAxisId="q" dataKey="duty" name="duty, Btu/hr" stroke={seriesColor(0)} strokeWidth={2} dot isAnimationActive={false} />
+          <Line yAxisId="p" dataKey="perFt2" name="duty per ft2, Btu/hr" stroke={seriesColor(2)} strokeWidth={2} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Note>
         The exponent is below one, so the duty PER SQUARE FOOT falls as the vessel gets bigger. It runs from
         {' '}{four(f.areaRows[0].dutyPerFt2Derived)} Btu/hr at {four(f.areaRows[0].wettedFt2)} ft2 down to
@@ -253,21 +250,19 @@ export const SegmentMode = ({ k }) => {
         <Tile label="At a depth fraction of 0.75" value={six(k.segmentRows[4].liquidAreaFraction)} />
         <Tile label="Depth fractions walked" value={k.segmentRows.length} />
       </TileGrid>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 14, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="depth" type="number" domain={[0, 1]} tick={AXIS} label={{ value: 'depth fraction, which is what a level instrument reads', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -8 }} />
-            <YAxis tick={AXIS} domain={[0, 1]} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceDot x={0.5} y={0.5} r={5} fill="#BFFF00" stroke="none" label={{ value: 'the one agreement between the ends', fill: '#BFFF00', fontSize: 10, position: 'right' }} />
-            <Line dataKey="area" name="liquid AREA fraction" stroke="#38bdf8" strokeWidth={2} dot isAnimationActive={false} />
-            <Line dataKey="vapour" name="vapour area fraction" stroke="#f472b6" strokeWidth={2} dot isAnimationActive={false} />
-            <Line dataKey="same" name="the depth fraction itself" stroke="#94a3b8" strokeDasharray="4 3" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 14, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="depth" type="number" domain={[0, 1]} tick={AXIS} label={{ value: 'depth fraction, which is what a level instrument reads', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -8 }} />
+          <YAxis tick={AXIS} domain={[0, 1]} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceDot x={0.5} y={0.5} r={5} fill={seriesColor(1)} stroke="none" label={{ value: 'the one agreement between the ends', fill: seriesColor(1), fontSize: 10, position: 'right' }} />
+          <Line dataKey="area" name="liquid AREA fraction" stroke={seriesColor(0)} strokeWidth={2} dot isAnimationActive={false} />
+          <Line dataKey="vapour" name="vapour area fraction" stroke={seriesColor(4)} strokeWidth={2} dot isAnimationActive={false} />
+          <Line dataKey="same" name="the depth fraction itself" stroke={SVG_CHART.note} strokeDasharray="4 3" dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Note>
         The dashed line is the depth fraction read against itself, and the blue curve is the AREA fraction the same depth
         produces. They meet at one point and only one, and that single crossing is the whole lesson about what a stated
@@ -278,7 +273,7 @@ export const SegmentMode = ({ k }) => {
         head={['depth fraction, stated', 'liquid area fraction', 'vapour area fraction']}
         rows={k.segmentRows.map((r) => [six(r.depthFraction), six(r.liquidAreaFraction), six(r.vapourAreaFractionDerived)])}
       />
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         The size of the convention is printed rather than asserted. The same drum read with the stated fraction as a LEVEL
         and then as an AREA fraction gives two different lengths everywhere except at half full:
       </p>
@@ -307,28 +302,26 @@ export const SettlingMode = ({ d }) => {
         <Tile label="Dropout velocity at the stated droplet" value={six(d.statedPair.udFtS)} unit="ft/s" />
         <Tile label="Its drag coefficient" value={six(d.statedPair.dragC)} />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         A droplet falls at the speed where form drag balances its buoyant weight. The drag coefficient depends on the
         Reynolds number and the Reynolds number depends on the speed, so the engine iterates and returns the PAIR it
         converged on, in {d.statedPair.iterations} passes on a residual of {twelve(d.statedPair.residual)}. The velocity
         returned is the one that drag coefficient gives, so a reader can put the pair back into the balance and get the
         same answer.
       </p>
-      <div className="h-60 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 14, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="micron" type="number" scale="log" domain={['dataMin', 'dataMax']} tick={AXIS} label={{ value: 'droplet size, micron', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -8 }} />
-            <YAxis yAxisId="u" tick={AXIS} />
-            <YAxis yAxisId="c" orientation="right" scale="log" domain={['dataMin', 'dataMax']} tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine yAxisId="c" y={d.dragCap} stroke="#f87171" strokeDasharray="4 3" label={{ value: 'the low Reynolds cap', fill: '#f87171', fontSize: 10 }} />
-            <Line yAxisId="u" dataKey="ud" name="dropout velocity, ft/s" stroke="#38bdf8" strokeWidth={2} dot isAnimationActive={false} />
-            <Line yAxisId="c" dataKey="dragC" name="drag coefficient" stroke="#fbbf24" strokeWidth={2} dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={240} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 14, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="micron" type="number" scale="log" domain={['dataMin', 'dataMax']} tick={AXIS} label={{ value: 'droplet size, micron', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -8 }} />
+          <YAxis yAxisId="u" tick={AXIS} />
+          <YAxis yAxisId="c" orientation="right" scale="log" domain={['dataMin', 'dataMax']} tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine yAxisId="c" y={d.dragCap} stroke={seriesColor(3)} strokeDasharray="4 3" label={{ value: 'the low Reynolds cap', fill: seriesColor(3), fontSize: 10 }} />
+          <Line yAxisId="u" dataKey="ud" name="dropout velocity, ft/s" stroke={seriesColor(0)} strokeWidth={2} dot isAnimationActive={false} />
+          <Line yAxisId="c" dataKey="dragC" name="drag coefficient" stroke={seriesColor(2)} strokeWidth={2} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Note>
         The dashed line is where the correlation stops being evaluated. Measured, the drag coefficient stops moving at
         {' '}{twelve(d.dragCap)} and the Reynolds number just inside that cap is {twelve(d.dragCapReynolds)}. Below there
@@ -339,7 +332,7 @@ export const SettlingMode = ({ d }) => {
         head={['droplet micron, stated', 'dropout velocity ft/s', 'drag coefficient', 'Reynolds', 'passes', 'converged']}
         rows={d.rows.map((r) => [six(r.dropletMicron), six(r.udFtS), six(r.dragC), six(r.reynolds), r.iterations, r.converged ? 'yes' : 'no'])}
       />
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         THREE COURSES IN THIS ACADEMY ANSWER THE SAME QUESTION BY DIFFERENT ROUTES. Gas well loading owns drag against
         weight with the Turner and Coleman criteria, and Separation owns the Souders-Brown allowable and the critique of
         using it as a settling velocity. This is the third answer, the API 521 drag-coefficient method, and this course
@@ -378,24 +371,22 @@ export const DrumMode = ({ k }) => {
         <Tile label="L over D" value={six(k.statedDrum.ld)} />
         <Tile label="Diameters walked" value={k.diameterRows.length} />
       </TileGrid>
-      <div className="h-64 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={diameterChart} margin={{ top: 10, right: 20, bottom: 14, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="d" type="number" domain={[5, 14]} tick={AXIS} label={{ value: 'candidate drum diameter, ft', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -8 }} />
-            <YAxis yAxisId="l" tick={AXIS} />
-            <YAxis yAxisId="ld" orientation="right" tick={AXIS} domain={[0, 7]} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceArea yAxisId="ld" y1={k.noteBand.smallerDrumLd} y2={k.noteBand.goWiderLd} fill="#BFFF00" fillOpacity={0.07} />
-            <ReferenceLine yAxisId="ld" y={k.noteBand.goWiderLd} stroke="#f87171" strokeDasharray="4 3" label={{ value: `go wider above L over D ${six(k.noteBand.goWiderLd)}`, fill: '#f87171', fontSize: 10 }} />
-            <ReferenceLine yAxisId="ld" y={k.noteBand.smallerDrumLd} stroke="#fbbf24" strokeDasharray="4 3" label={{ value: `a smaller drum may do below ${six(k.noteBand.smallerDrumLd)}`, fill: '#fbbf24', fontSize: 10 }} />
-            <Line yAxisId="l" dataKey="length" name="required length, ft" stroke="#38bdf8" strokeWidth={2} dot isAnimationActive={false} />
-            <Line yAxisId="ld" dataKey="ld" name="L over D" stroke="#BFFF00" strokeWidth={2} dot isAnimationActive={false} />
-            <Line yAxisId="l" dataKey="velocity" name="vapour velocity, ft/s" stroke="#f472b6" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-3">
+        <LineChart data={diameterChart} margin={{ top: 10, right: 20, bottom: 14, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="d" type="number" domain={[5, 14]} tick={AXIS} label={{ value: 'candidate drum diameter, ft', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -8 }} />
+          <YAxis yAxisId="l" tick={AXIS} />
+          <YAxis yAxisId="ld" orientation="right" tick={AXIS} domain={[0, 7]} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceArea yAxisId="ld" y1={k.noteBand.smallerDrumLd} y2={k.noteBand.goWiderLd} fill={seriesColor(1)} fillOpacity={0.07} />
+          <ReferenceLine yAxisId="ld" y={k.noteBand.goWiderLd} stroke={seriesColor(3)} strokeDasharray="4 3" label={{ value: `go wider above L over D ${six(k.noteBand.goWiderLd)}`, fill: seriesColor(3), fontSize: 10 }} />
+          <ReferenceLine yAxisId="ld" y={k.noteBand.smallerDrumLd} stroke={seriesColor(2)} strokeDasharray="4 3" label={{ value: `a smaller drum may do below ${six(k.noteBand.smallerDrumLd)}`, fill: seriesColor(2), fontSize: 10 }} />
+          <Line yAxisId="l" dataKey="length" name="required length, ft" stroke={seriesColor(0)} strokeWidth={2} dot isAnimationActive={false} />
+          <Line yAxisId="ld" dataKey="ld" name="L over D" stroke={seriesColor(1)} strokeWidth={2} dot isAnimationActive={false} />
+          <Line yAxisId="l" dataKey="velocity" name="vapour velocity, ft/s" stroke={seriesColor(4)} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Note>
         Both edges of the note band are drawn because both are measured out of the engine rather than typed: the go wider
         note starts at an L over D of {twelve(k.noteBand.goWiderLd)} and the smaller drum note ends at
@@ -406,22 +397,20 @@ export const DrumMode = ({ k }) => {
         head={['diameter ft, stated', 'vapour velocity ft/s', 'required length ft', 'L over D', 'note']}
         rows={k.diameterRows.map((r) => [six(r.diameterFt), six(r.vVaporFtS), six(r.requiredLengthFt), six(r.ld), r.note === null ? 'none' : r.note])}
       />
-      <div className="h-60 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={holdupChart} margin={{ top: 10, right: 20, bottom: 14, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="f" type="number" domain={[0, 1]} tick={AXIS} label={{ value: 'holdup, the liquid level as a fraction of the diameter', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -8 }} />
-            <YAxis yAxisId="l" tick={AXIS} />
-            <YAxis yAxisId="v" orientation="right" scale="log" domain={['dataMin', 'dataMax']} tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceDot yAxisId="l" x={turn.liquidFraction} y={turn.requiredLengthFt} r={5} fill="#BFFF00" stroke="none" label={{ value: 'the turn', fill: '#BFFF00', fontSize: 10, position: 'top' }} />
-            <Line yAxisId="l" dataKey="length" name="required length, ft" stroke="#38bdf8" strokeWidth={2} dot isAnimationActive={false} />
-            <Line yAxisId="l" dataKey="fall" name="the distance a droplet falls, ft" stroke="#fbbf24" dot={false} isAnimationActive={false} />
-            <Line yAxisId="v" dataKey="velocity" name="vapour velocity, ft/s" stroke="#f472b6" strokeWidth={2} dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={240} className="mt-3">
+        <LineChart data={holdupChart} margin={{ top: 10, right: 20, bottom: 14, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="f" type="number" domain={[0, 1]} tick={AXIS} label={{ value: 'holdup, the liquid level as a fraction of the diameter', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -8 }} />
+          <YAxis yAxisId="l" tick={AXIS} />
+          <YAxis yAxisId="v" orientation="right" scale="log" domain={['dataMin', 'dataMax']} tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceDot yAxisId="l" x={turn.liquidFraction} y={turn.requiredLengthFt} r={5} fill={seriesColor(1)} stroke="none" label={{ value: 'the turn', fill: seriesColor(1), fontSize: 10, position: 'top' }} />
+          <Line yAxisId="l" dataKey="length" name="required length, ft" stroke={seriesColor(0)} strokeWidth={2} dot isAnimationActive={false} />
+          <Line yAxisId="l" dataKey="fall" name="the distance a droplet falls, ft" stroke={seriesColor(2)} dot={false} isAnimationActive={false} />
+          <Line yAxisId="v" dataKey="velocity" name="vapour velocity, ft/s" stroke={seriesColor(4)} strokeWidth={2} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Note>
         The required length is NOT monotonic in the holdup, and the marked turn is where it changes direction. Two effects
         move against each other: filling the drum shrinks the vapour space and speeds the gas up, which needs more

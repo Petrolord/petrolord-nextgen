@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, BarChart, Line, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
+  LineChart, BarChart, Line, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import {
   coldEnd, flagControls, vesselGasGoesUp, refusalContract,
   AGBADA, AGBADA_STEP_REFERENCE,
@@ -56,13 +59,13 @@ export const MODES = [
   ['contactor', 'The contactor, for the Professional tier'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
 
 const Tbl = ({ head, rows }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>{head.map((h, i) => <th key={h} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>)}</tr>
       </thead>
       <tbody>
@@ -77,18 +80,18 @@ const Tbl = ({ head, rows }) => (
 );
 
 const Held = ({ children }) => (
-  <div className="mt-3 rounded-md border border-amber-700/60 bg-amber-950/20 p-3">
-    <p className="text-amber-300 text-xs font-medium mb-1">HELD FOR LITERATURE</p>
-    <p className="text-xs text-slate-300 mb-0">{children}</p>
+  <div className="mt-3 rounded-md border border-pl-warning/40 bg-pl-warning-bg p-3">
+    <p className="text-pl-warning-text text-xs font-medium mb-1">HELD FOR LITERATURE</p>
+    <p className="text-xs text-pl-text mb-0">{children}</p>
   </div>
 );
 
 /** A refusal shown as a refusal, with the evidence it carries beside it. */
 const Refusal = ({ label, message, evidence }) => (
-  <div className="mt-2 rounded-md border border-red-800/60 bg-red-950/20 p-2">
-    <p className="text-red-300 text-xs font-medium mb-1">{label}</p>
-    <p className="text-xs text-slate-300 font-mono mb-0">{message}</p>
-    {evidence ? <p className="text-xs text-slate-400 mt-1 mb-0">{evidence}</p> : null}
+  <div className="mt-2 rounded-md border border-pl-danger/40 bg-pl-danger-bg p-2">
+    <p className="text-pl-danger-text text-xs font-medium mb-1">{label}</p>
+    <p className="text-xs text-pl-text font-mono mb-0">{message}</p>
+    {evidence ? <p className="text-xs text-pl-muted mt-1 mb-0">{evidence}</p> : null}
   </div>
 );
 
@@ -107,37 +110,33 @@ export const CoefficientMode = ({ c }) => {
         <Tile label="Coefficient" value={nine(c.muFPerPsi)} unit="degF/psi" />
         <Tile label="In the unit a field engineer quotes" value={six(c.muPer100PsiDerived)} unit="degF/100 psi" />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The relation the module derives is mu = (R T squared over Cp P) times the temperature derivative of the
         compressibility. Every term on the right is either the caller&apos;s or comes from the same validated
         correlation the contactor uses, and nothing about the gas beyond its gravity enters. At a reduced pressure of
         {' '}{six(c.ppr)} and a reduced temperature of {six(c.tpr)}, those four tiles are the whole chain.
       </p>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={rows.map((r) => ({ p: r.pPsia, z: r.z, mu100: r.muPer100PsiDerived }))} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="p" tick={AXIS} label={{ value: 'psia', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -3 }} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line dataKey="z" name="compressibility" stroke="#38bdf8" dot={false} isAnimationActive={false} />
-            <Line dataKey="mu100" name="mu, degF/100 psi" stroke="#BFFF00" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <div className="h-44 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={rows.map((r) => ({ p: r.pPsia, dzdT: r.dzdT }))} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="p" tick={AXIS} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(val) => twelve(val)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line dataKey="dzdT" name="dz/dT, per degR" stroke="#f472b6" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={rows.map((r) => ({ p: r.pPsia, z: r.z, mu100: r.muPer100PsiDerived }))} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="p" tick={AXIS} label={{ value: 'psia', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line dataKey="z" name="compressibility" stroke={seriesColor(0)} dot={false} isAnimationActive={false} />
+          <Line dataKey="mu100" name="mu, degF/100 psi" stroke={seriesColor(1)} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
+      <ChartFrame height={176} className="mt-3">
+        <LineChart data={rows.map((r) => ({ p: r.pPsia, dzdT: r.dzdT }))} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="p" tick={AXIS} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(val) => twelve(val)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line dataKey="dzdT" name="dz/dT, per degR" stroke={seriesColor(4)} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Note>
         Read the lowest pressure against the highest. The compressibility climbs back towards one as the pressure falls
         and the derivative falls away with it, yet the coefficient stays large, because what enters the relation is the
@@ -157,19 +156,17 @@ export const CapacityMode = ({ c }) => {
   if (!c) return <Note>The cold end reader did not return a heat capacity sweep.</Note>;
   return (
     <>
-      <div className="h-56">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={c.cpSweep.map((r) => ({ cp: r.cpBtuLbmolF, mu100: r.muPer100PsiDerived, product: r.cpTimesMuDerived }))} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="cp" tick={AXIS} label={{ value: 'Cp, Btu/lbmol.degF', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -3 }} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(val) => nine(val)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line dataKey="mu100" name="mu, degF/100 psi" stroke="#BFFF00" dot={false} isAnimationActive={false} />
-            <Line dataKey="product" name="Cp times mu" stroke="#38bdf8" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224}>
+        <LineChart data={c.cpSweep.map((r) => ({ cp: r.cpBtuLbmolF, mu100: r.muPer100PsiDerived, product: r.cpTimesMuDerived }))} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="cp" tick={AXIS} label={{ value: 'Cp, Btu/lbmol.degF', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(val) => nine(val)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line dataKey="mu100" name="mu, degF/100 psi" stroke={seriesColor(1)} dot={false} isAnimationActive={false} />
+          <Line dataKey="product" name="Cp times mu" stroke={seriesColor(0)} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Note>
         One line falls and the other is flat. The flat line is the product of the two, and it not moving is what says the
         heat capacity enters the relation exactly once and as a divisor. Everything else about the gas is in the other
@@ -197,24 +194,22 @@ export const MarchMode = ({ c }) => {
         <Tile label="Steps the default takes" value={String(c.steps)} />
         <Tile label="Reference march" value={String(AGBADA_STEP_REFERENCE)} unit="steps" />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         A coefficient is a slope, so a finite pressure drop is an integration rather than a multiplication. The module
         marches it in equal pressure steps, taking the half-step temperature as well as the half-step pressure, which is
         a midpoint step and second order in the step size.
       </p>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={c.stepSweep.map((r) => ({ steps: r.steps, over: r.overReferenceDerived }))} margin={{ top: 10, right: 20, bottom: 5, left: 30 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="steps" tick={AXIS} scale="log" domain={['auto', 'auto']} label={{ value: 'steps', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -3 }} />
-            <YAxis tick={AXIS} domain={[0.998, 1]} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(val) => twelve(val)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={1} stroke="#BFFF00" strokeDasharray="3 3" label={{ value: 'the converged answer', fill: '#BFFF00', fontSize: 10 }} />
-            <Line dataKey="over" name={`cooling over the ${AGBADA_STEP_REFERENCE}-step answer`} stroke="#38bdf8" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={c.stepSweep.map((r) => ({ steps: r.steps, over: r.overReferenceDerived }))} margin={{ top: 10, right: 20, bottom: 5, left: 30 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="steps" tick={AXIS} scale="log" domain={['auto', 'auto']} label={{ value: 'steps', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
+          <YAxis tick={AXIS} domain={[0.998, 1]} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(val) => twelve(val)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine y={1} stroke={seriesColor(1)} strokeDasharray="3 3" label={{ value: 'the converged answer', fill: seriesColor(1), fontSize: 10 }} />
+          <Line dataKey="over" name={`cooling over the ${AGBADA_STEP_REFERENCE}-step answer`} stroke={seriesColor(0)} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Tbl
         head={['steps', 'cooling, degF', 'arrival, degF', `cooling over the ${AGBADA_STEP_REFERENCE}-step answer`]}
         rows={c.stepSweep.map((r) => [String(r.steps), nine(r.dropF), nine(r.t2F), twelve(r.overReferenceDerived)])}
@@ -224,27 +219,25 @@ export const MarchMode = ({ c }) => {
         the table says what that default is worth on this let-down: one step is short by more than a thousandth, and the
         default is inside a hundred thousandth.
       </Note>
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         THREE COEFFICIENTS, AND THEY ARE THREE DIFFERENT NUMBERS.
       </p>
-      <div className="h-44 mt-2">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart
-            data={[
-              { name: 'at the inlet', mu: c.muInletFPerPsi },
-              { name: 'the mean the cooling delivered', mu: c.muMeanFPerPsi },
-              { name: 'at the last half step', mu: c.muLastStepFPerPsi },
-            ]}
-            margin={{ top: 10, right: 20, bottom: 5, left: 20 }}
-          >
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="name" tick={AXIS} />
-            <YAxis tick={AXIS} domain={['auto', 'auto']} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(val) => nine(val)} />
-            <Bar dataKey="mu" name="degF per psi" fill="#BFFF00" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={176} className="mt-2">
+        <BarChart
+          data={[
+            { name: 'at the inlet', mu: c.muInletFPerPsi },
+            { name: 'the mean the cooling delivered', mu: c.muMeanFPerPsi },
+            { name: 'at the last half step', mu: c.muLastStepFPerPsi },
+          ]}
+          margin={{ top: 10, right: 20, bottom: 5, left: 20 }}
+        >
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="name" tick={AXIS} />
+          <YAxis tick={AXIS} domain={['auto', 'auto']} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(val) => nine(val)} />
+          <Bar dataKey="mu" name="degF per psi" fill={seriesColor(1)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
       <Note>
         The mean is the cooling over the pressure drop and is the one that belongs beside an arrival temperature. The
         inlet coefficient is {nine(c.inletOverMeanDerived)} times that mean, so quoting the inlet beside the arrival
@@ -264,18 +257,16 @@ export const ColdMode = ({ c }) => {
         <Tile label="Dropped into the boot" value={nine(c.dropOutLbMMscfDerived)} unit="lb/MMscf" />
         <Tile label="The cold gas holds this fraction" value={nine(c.heldFractionDerived)} />
       </TileGrid>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={c.fourStates.map((r) => ({ name: r.label, water: r.lbPerMMscf }))} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="name" tick={{ fill: '#94a3b8', fontSize: 9 }} interval={0} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(val) => nine(val)} />
-            <ReferenceLine y={c.waterInLbMMscf} stroke="#BFFF00" strokeDasharray="3 3" label={{ value: 'what it arrived with', fill: '#BFFF00', fontSize: 10 }} />
-            <Bar dataKey="water" name="lb/MMscf" fill="#38bdf8" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <BarChart data={c.fourStates.map((r) => ({ name: r.label, water: r.lbPerMMscf }))} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="name" tick={{ ...AXIS, fontSize: 9 }} interval={0} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(val) => nine(val)} />
+          <ReferenceLine y={c.waterInLbMMscf} stroke={seriesColor(1)} strokeDasharray="3 3" label={{ value: 'what it arrived with', fill: seriesColor(1), fontSize: 10 }} />
+          <Bar dataKey="water" name="lb/MMscf" fill={seriesColor(0)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
       <Tbl
         head={['state', 'psia', 'degF', 'water the gas can hold, lb/MMscf']}
         rows={c.fourStates.map((r) => [r.label, six(r.pPsia), six(r.tF), r.error ? 'refuses' : nine(r.lbPerMMscf)])}
@@ -287,7 +278,7 @@ export const ColdMode = ({ c }) => {
         expansion dries the gas only through the cooling it causes, and the two effects pull in opposite directions all
         the way down.
       </Note>
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         And this is the seam. Dehydration and a cold separator are two answers to one question, and a third answer,
         injecting an inhibitor so the water that is there cannot form a hydrate, belongs to the Flow Assurance course
         along with the hydrate boundary itself. Nothing in this engine computes a hydrate boundary.
@@ -308,7 +299,7 @@ export const TypedMode = () => {
   const r = useMemo(() => safe(() => typedColdEnd(vals)), [vals]);
   return (
     <>
-      <p className="text-xs text-slate-400 mb-0">
+      <p className="text-xs text-pl-muted mb-0">
         Type a let-down of your own. The view opens on the teaching stream AGBADA, and every input can be retyped. The
         chain is the one the other views run: the coefficient and its derivative at the inlet, the module&apos;s default
         march of twenty steps down to the separator, and the water the gas can hold at the inlet and at the cold spot.
@@ -337,7 +328,7 @@ export const TypedMode = () => {
             <Tile label="Water the cold gas can hold" value={nine(r.waterOutLbMMscf)} unit="lb/MMscf" />
             <Tile label="Dropped into the boot" value={nine(r.dropOutLbMMscfDerived)} unit="lb/MMscf" />
           </TileGrid>
-          <p className="text-xs text-slate-400 mt-2 mb-0">
+          <p className="text-xs text-pl-muted mt-2 mb-0">
             The march took {String(r.steps)} steps. The mean coefficient it delivered is {nine(r.muMeanFPerPsi)} degF
             per psi, which is the one that belongs beside the arrival temperature.
           </p>
@@ -359,7 +350,7 @@ export const RefusalsMode = ({ c, f, r }) => {
   if (!c) return <Note>The march reader did not return its refusals.</Note>;
   return (
     <>
-      <p className="text-xs text-slate-400 mb-0">
+      <p className="text-xs text-pl-muted mb-0">
         Every refusal below is the engine&apos;s own returned message, and many of them carry EVIDENCE beside it. A
         panel that showed only the message would throw that away.
       </p>
@@ -375,7 +366,7 @@ export const RefusalsMode = ({ c, f, r }) => {
       )}
       {f && (
         <>
-          <p className="text-xs text-slate-400 mt-3 mb-0">
+          <p className="text-xs text-pl-muted mt-3 mb-0">
             WHAT KILLS A MARCH IS NOT WHAT IT LOOKS LIKE. A deep outlet looks like the thing that kills it. It is not:
             what kills it is a COLD INLET walking the gas off the compressibility correlation part way down.
           </p>
@@ -415,7 +406,7 @@ export const ContactorMode = ({ v }) => {
   if (!v) return <Note>The vessel reader did not return a sizing.</Note>;
   return (
     <>
-      <p className="text-xs text-slate-400 mb-0">
+      <p className="text-xs text-pl-muted mb-0">
         The contactor sizing is shown here for the Professional tier. Souders-Brown, the K value and the settling
         velocity belong to the Separation and Slug Catching course; there is no K-value chart on this page.
       </p>
