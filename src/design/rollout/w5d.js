@@ -3,4 +3,5 @@
 // app's course reader pages are batch 1C's pattern entry.
 export default [
   '/dashboard/apps/dataqc',
+  '/dashboard/apps/mlcore',
 ];
