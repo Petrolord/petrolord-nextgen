@@ -39,7 +39,7 @@ export const MODES = [
   ['distrust', 'Distrust: CPI before spend, the undated invoice, the closing point, the seed'],
 ];
 
-const Outcome = ({ children }) => <span data-plabel="outcome" className="text-[#BFFF00] font-semibold">{children}</span>;
+const Outcome = ({ children }) => <span data-plabel="outcome" className="text-pl-accent-text font-semibold">{children}</span>;
 const ProbabilityLabel = ({ children }) => <span data-plabel="probability">{children}</span>;
 const CostLabel = ({ children }) => <span data-plabel="cost">{children}</span>;
 const CapexLabel = ({ children }) => <span data-plabel="capex">{children}</span>;
@@ -47,8 +47,8 @@ const BudgetLabel = ({ children }) => <span data-plabel="budget">{children}</spa
 
 const Tbl = ({ head, rows }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>{head.map((h, i) => <th key={i} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>)}</tr>
       </thead>
       <tbody>
@@ -73,7 +73,7 @@ export const SimulationMode = ({ rm }) => {
   if (!rm) return <Note>The portfolio engine did not return the risk summaries.</Note>;
   return (
     <>
-      <p className="text-xs text-slate-400 mb-0">
+      <p className="text-xs text-pl-muted mb-0">
         The published method cases, each run by the engine at its stated seed and iterations, beside the exact answer and a
         normal approximation of the summed NPV (a normal curve with the portfolio mean and standard deviation). Money in million USD.
       </p>
@@ -96,8 +96,8 @@ export const SimulationMode = ({ rm }) => {
           mm(c.goldenNormalP90), mm(c.engineP90), c.seed, c.iterations,
         ])}
       />
-      <p className="text-xs text-slate-500 mt-1 mb-0">Exact, normal approximation, standard error and z are golden fields; the engine columns are this run.</p>
-      <p className="text-xs text-slate-300 mt-3 mb-0">{rm.drawOrder}</p>
+      <p className="text-xs text-pl-muted mt-1 mb-0">Exact, normal approximation, standard error and z are golden fields; the engine columns are this run.</p>
+      <p className="text-xs text-pl-text mt-3 mb-0">{rm.drawOrder}</p>
       <Tbl
         head={[
           'OKONO limit', 'funded set', 'emv', 'stdDev',
@@ -132,7 +132,7 @@ export const CorrelationMode = ({ c, rho, onRho }) => {
             options={RHO_SWEEP.map((x) => [String(x), String(x)])} />
         </FieldGrid>
       )}
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         OKONO funded set at {mm(c.limit)} million USD ({setLabel(c.ids)}): project sds {c.projectSdsDerived.map(mm).join(' / ')};
         sum of variances {mm(c.varianceSumDerived)}; square of the summed sds {mm(c.sdSumSquaredDerived)} (derived).
       </p>
@@ -169,7 +169,7 @@ export const SharesMode = ({ s }) => {
   if (!s) return <Note>The AFE engine did not return the partner split.</Note>;
   return (
     <>
-      <p className="text-sm text-slate-200 mb-0">OFON-1 budget {usd(s.budget.cost)} USD split by working interest:</p>
+      <p className="text-sm text-pl-text mb-0">OFON-1 budget {usd(s.budget.cost)} USD split by working interest:</p>
       <Tbl
         head={['party', 'working interest percent', <CostLabel key="s">share, USD</CostLabel>]}
         rows={[
@@ -177,7 +177,7 @@ export const SharesMode = ({ s }) => {
           ['operator', four(s.budget.operatorShare), usd(s.budget.operatorAmount)],
         ]}
       />
-      <p className="text-xs text-slate-400 mt-1 mb-0">
+      <p className="text-xs text-pl-muted mt-1 mb-0">
         partnerTotal {four(s.budget.partnerTotal)}, valid {String(s.budget.valid)}, note {s.budget.note ?? 'none'}. Shares sum to {usd(s.budget.sharesSumDerived)} (derived).
       </p>
       <Tbl
@@ -186,13 +186,13 @@ export const SharesMode = ({ s }) => {
       />
       <div className="mt-3 space-y-2">
         {s.published.map((x) => (
-          <div key={x.name} className="rounded-md border border-gray-700 bg-[#0F172A] p-3 text-xs text-slate-300">
-            <p className="text-slate-500 mb-1">{x.name}</p>
+          <div key={x.name} className="rounded-md border border-pl-border bg-pl-sunken p-3 text-xs text-pl-text">
+            <p className="text-pl-muted mb-1">{x.name}</p>
             <p className="mb-0">
               <CostLabel>cost {two(x.cost)}</CostLabel>, interests {JSON.stringify(x.interests)}; partner amounts {x.partnerAmounts.map(two).join(' / ') || 'none'};
               operator share {four(x.operatorShare)} percent, operator amount {two(x.operatorAmount)}; valid {String(x.valid)}.
             </p>
-            {x.note && <p className="mb-0 mt-1 text-amber-300">{x.note}</p>}
+            {x.note && <p className="mb-0 mt-1 text-pl-warning-text">{x.note}</p>}
           </div>
         ))}
       </div>
@@ -230,8 +230,8 @@ export const RefusalsMode = ({ rf }) => {
         head={['risk summary case', 'error', 'engine message, verbatim']}
         rows={rf.riskSummary.map((a) => [a.id, a.ok ? 'accepted' : a.name, a.ok ? '' : a.error])}
       />
-      <p className="text-xs text-slate-300 mt-3 mb-0">{rf.flags}</p>
-      <p className="text-xs text-slate-400 mt-2 mb-0">{rf.properties}</p>
+      <p className="text-xs text-pl-text mt-3 mb-0">{rf.flags}</p>
+      <p className="text-xs text-pl-muted mt-2 mb-0">{rf.properties}</p>
       <Note>A refusal is the engine declining to compute; a flag is the engine computing and saying what went wrong. Read both.</Note>
     </>
   );
@@ -248,7 +248,7 @@ export const DistrustMode = ({ d }) => {
         <Tile label={<CostLabel>Closing point Forecast</CostLabel>} value={usd(ov.closingForecast)} unit={`USD against Planned ${usd(ov.closingPlanned)}`} />
         <Tile label={<CostLabel>Last monthly point Forecast</CostLabel>} value={usd(ov.lastMonthlyForecast)} unit={`USD at "${ov.lastMonthlyLabel}", Planned ${usd(ov.lastMonthlyPlanned)}`} />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Value earned with nothing spent has no cost efficiency to report, so CPI is null. In the published case &quot;{d.nullDated.name}&quot; (invoices {JSON.stringify(d.nullDated.invoices)})
         neither invoice carries a date the engine can read, so neither reaches the curve, and the count is named beside it. OFON-1&apos;s closing point carries the EAC
         against the budget, a variance at completion of {usd(ov.variance)}; a reader who stops at the last month sees neither.
@@ -257,7 +257,7 @@ export const DistrustMode = ({ d }) => {
         head={['seed', 'iterations', <ProbabilityLabel key="p">chance of loss</ProbabilityLabel>, 'standard error sqrt(p(1 - p) / n) (derived)', <Outcome key="l">{LOW}</Outcome>]}
         rows={d.seedTable.rows.map((x) => [x.seed, x.iterations, six(x.probLoss), six(x.standardErrorDerived), mm(x.p90)])}
       />
-      <p className="text-xs text-slate-500 mt-1 mb-0">
+      <p className="text-xs text-pl-muted mt-1 mb-0">
         OKONO funded set at {mm(d.seedTable.limit)} million USD ({setLabel(d.seedTable.ids)}), correlation 0. A seed buys a reproducible number;
         iterations buy a smaller standard error. Neither buys a correct model of the projects.
       </p>

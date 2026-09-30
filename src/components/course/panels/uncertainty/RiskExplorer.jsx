@@ -1,8 +1,11 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, BarChart, Bar, Line, XAxis, YAxis, CartesianGrid,
+  LineChart, BarChart, Bar, Line, XAxis, YAxis, CartesianGrid,
   Tooltip, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import {
   APP_MC, MC_SAMPLING_LINES, OKPOMA_FIRST_ROW_COLUMNS, SWAPPED_CARDS,
   pLabelWords, scenarioBuilderCases, breakevenRun, scenarioBuilderMonteCarlo, mcSeedComparison,
@@ -38,19 +41,19 @@ export const MODES = [
   ['distrust', 'Distrust: what a missing number says, mid-year beside year-end'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const GRID = <CartesianGrid stroke="#334155" strokeDasharray="3 3" />;
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const GRID = <CartesianGrid {...GRID_STYLE} />;
 
-const Outcome = ({ children }) => <span data-plabel="outcome" className="text-[#BFFF00] font-semibold">{children}</span>;
-const History = ({ children }) => <span data-plabel="history" className="text-slate-400">{children}</span>;
+const Outcome = ({ children }) => <span data-plabel="outcome" className="text-pl-accent-text font-semibold">{children}</span>;
+const History = ({ children }) => <span data-plabel="history" className="text-pl-muted">{children}</span>;
 const PriceLabel = ({ children }) => <span data-plabel="price">{children}</span>;
 const InputLabel = ({ children }) => <span data-plabel="input">{children}</span>;
 
 const Tbl = ({ head, rows }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>{head.map((h, i) => <th key={i} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>)}</tr>
       </thead>
       <tbody>
@@ -66,7 +69,7 @@ const Tbl = ({ head, rows }) => (
 
 const RunButton = ({ onClick, running, children }) => (
   <button type="button" onClick={onClick} disabled={running}
-    className={`px-3 py-1.5 rounded-md border text-xs ${running ? 'bg-gray-800 text-gray-500 border-gray-700' : 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold'}`}>
+    className={`px-3 py-1.5 rounded-md border text-xs ${running ? 'bg-pl-surface text-pl-muted border-pl-border' : 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold'}`}>
     {running ? 'Running the engine...' : children}
   </button>
 );
@@ -106,7 +109,7 @@ export const LabelsMode = ({ words, cases, run, onRun, running }) => {
   if (!words) return <Note>The convention module did not load.</Note>;
   return (
     <>
-      <p className="text-sm text-slate-200 mb-0">{words.definition}</p>
+      <p className="text-sm text-pl-text mb-0">{words.definition}</p>
       <Tbl
         head={['case, low to high', 'P-label', 'engine key holding it', 'ISIALA NPV through the Scenario Builder, million USD']}
         rows={words.cases.map((c) => {
@@ -114,13 +117,13 @@ export const LabelsMode = ({ words, cases, run, onRun, running }) => {
           return [c.caseLabel, <Outcome key={c.caseKey}>{c.pLabel}</Outcome>, c.engineKey, got ? mm(got.npv) : 'running'];
         })}
       />
-      <p className="text-xs text-slate-500 mt-1 mb-0">
+      <p className="text-xs text-pl-muted mt-1 mb-0">
         NPV is an outcome where more is better, so its low case takes its {words.npvLowCasePercentile}: {words.npvLowCaseLabel}. The engine
         keys p10, p50 and p90 are plain percentiles; {OUTCOME_LABELS.p90} is read off p10.
         {cases ? ` Seed ${cases.seed}, ${cases.iterations} iterations.` : ''}
       </p>
-      <div className="mt-3 rounded-md border border-gray-700 bg-[#0F172A] p-3 text-xs text-slate-300">
-        <p className="text-slate-500 mb-1">What the results panel used to print, quoted as history</p>
+      <div className="mt-3 rounded-md border border-pl-border bg-pl-sunken p-3 text-xs text-pl-text">
+        <p className="text-pl-muted mb-1">What the results panel used to print, quoted as history</p>
         {SWAPPED_CARDS.map((s) => {
           const got = cases ? cases.swappedCards.find((x) => x.engineKey === s.engineKey) : null;
           return (
@@ -134,7 +137,7 @@ export const LabelsMode = ({ words, cases, run, onRun, running }) => {
         )}
       </div>
       <div className="mt-3">
-        <p className="text-xs text-slate-500 mb-1">A breakeven price is a quantity where more is worse. It takes no P-label at all:</p>
+        <p className="text-xs text-pl-muted mb-1">A breakeven price is a quantity where more is worse. It takes no P-label at all:</p>
         <TileGrid>
           {BREAKEVEN_WORDS.map((w, i) => (
             <Tile key={w} label={<PriceLabel>{w}</PriceLabel>} value={run ? four(run.percentiles[i].value) : 'not run'} unit={run ? 'USD/bbl' : ''} />
@@ -147,7 +150,7 @@ export const LabelsMode = ({ words, cases, run, onRun, running }) => {
         )}
       </div>
       <div className="mt-3">
-        <p className="text-xs text-slate-500 mb-1">Every parameter takes percentiles too:</p>
+        <p className="text-xs text-pl-muted mb-1">Every parameter takes percentiles too:</p>
         <Tbl
           head={['parameter', 'stated low', 'stated middle', 'stated high']}
           rows={Object.entries(words.parameters).map(([k, labels]) => [k, ...labels.map((l) => <InputLabel key={l}>{l}</InputLabel>)])}
@@ -162,7 +165,7 @@ export const MonteCarloMode = ({ mc, seeds, priceOnly }) => {
   const bars = mc.histogram.counts.map((count, i) => ({ bin: i + 1, count }));
   return (
     <>
-      <ul className="text-xs text-slate-300 list-none pl-0 space-y-1 mb-0">
+      <ul className="text-xs text-pl-text list-none pl-0 space-y-1 mb-0">
         {MC_SAMPLING_LINES.map((l) => <li key={l}>{l.replace(/^- /, '')}</li>)}
       </ul>
       <Tbl
@@ -185,31 +188,27 @@ export const MonteCarloMode = ({ mc, seeds, priceOnly }) => {
           <Tile label="Highest NPV" value={mm(mc.highest)} unit="million USD" />
         </TileGrid>
       </div>
-      <div className="h-48 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={bars} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            {GRID}
-            <XAxis dataKey="bin" tick={AXIS} label={{ value: `bin, lowest NPV to highest, width ${four(mc.histogram.widthDerived)} million USD`, position: 'insideBottom', offset: -2, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} />
-            <Bar dataKey="count" name="iterations" fill="#38bdf8" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
-      <div className="h-48 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={mc.sCurve.points} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            {GRID}
-            <XAxis dataKey="value" type="number" domain={['dataMin', 'dataMax']} tick={AXIS} tickFormatter={(v) => Number(v).toFixed(0)} label={{ value: 'NPV, million USD', position: 'insideBottom', offset: -2, fill: '#64748b', fontSize: 10 }} />
-            <YAxis tick={AXIS} domain={[0, 100]} label={{ value: 'percent below', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 10 }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => four(v)} />
-            <ReferenceLine x={mc.p10} stroke="#BFFF00" strokeDasharray="3 3" />
-            <ReferenceLine x={mc.p90} stroke="#BFFF00" strokeDasharray="3 3" />
-            <Line type="stepAfter" dataKey="probability" name="S-curve" stroke="#f472b6" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <p className="text-xs text-slate-500 mt-1 mb-0">
+      <ChartFrame height={192} className="mt-3">
+        <BarChart data={bars} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          {GRID}
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="bin" tick={AXIS} label={{ value: `bin, lowest NPV to highest, width ${four(mc.histogram.widthDerived)} million USD`, position: 'insideBottom', offset: -2, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} />
+          <Bar dataKey="count" name="iterations" fill={seriesColor(1)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
+      <ChartFrame height={192} className="mt-3">
+        <LineChart data={mc.sCurve.points} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          {GRID}
+          <XAxis dataKey="value" type="number" domain={['dataMin', 'dataMax']} tick={AXIS} tickFormatter={(v) => Number(v).toFixed(0)} label={{ value: 'NPV, million USD', position: 'insideBottom', offset: -2, fill: SVG_CHART.note, fontSize: 10 }} />
+          <YAxis tick={AXIS} domain={[0, 100]} label={{ value: 'percent below', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 10 }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => four(v)} />
+          <ReferenceLine x={mc.p10} stroke={seriesColor(0)} strokeDasharray="3 3" />
+          <ReferenceLine x={mc.p90} stroke={seriesColor(0)} strokeDasharray="3 3" />
+          <Line type="stepAfter" dataKey="probability" name="S-curve" stroke={seriesColor(4)} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
+      <p className="text-xs text-pl-muted mt-1 mb-0">
         The S-curve is {mc.sCurve.pointCount} points at probability {mc.sCurve.firstProbabilities.map((x) => four(x)).join(', ')} and so on to {four(mc.sCurve.lastProbability)} percent,
         each read with the same quantile rule as the cards (EC3-6). It starts at the lowest NPV, {mm(mc.sCurve.firstValue)},
         and ends at the highest, {mm(mc.sCurve.lastValue)}.
@@ -219,7 +218,7 @@ export const MonteCarloMode = ({ mc, seeds, priceOnly }) => {
           <Tile label="S-curve height at 10 percent" value={mm(mc.sCurve.heights.at10)} unit="million USD" />
           <Tile label={<>Low case card, <Outcome>{OUTCOME_LABELS.p90}</Outcome>, the same quantile rule</>} value={mm(mc.p10)} unit="million USD" />
         </TileGrid>
-        <p className="text-xs text-slate-500 mt-1 mb-0">
+        <p className="text-xs text-pl-muted mt-1 mb-0">
           The curve and the cards agree: its heights at 10, 50 and 90 percent are the three card values (EC3-6), which is
           {mc.sCurve.heightsEqualCards ? ' what the engine returns here' : ' not what the engine returns here'}. The chart&apos;s dashed lines are the cards.
           Before the repair the curve kept every twentieth sorted value, stopped short of the top of the sample, and read single values where the cards averaged.
@@ -234,7 +233,7 @@ export const MonteCarloMode = ({ mc, seeds, priceOnly }) => {
           </TileGrid>
         </div>
       )}
-      {priceOnly && <p className="text-xs text-slate-400 mt-2 mb-0">{priceOnly.id}: {priceOnly.note}</p>}
+      {priceOnly && <p className="text-xs text-pl-muted mt-2 mb-0">{priceOnly.id}: {priceOnly.note}</p>}
       <Note>
         The seed guarantees the sample and nothing about its accuracy. An iteration draws ONE factor for each
         uncertain variable and applies it to every year (EC3-7), so a case that is 20 percent light on reserves is
@@ -250,7 +249,7 @@ export const RulesMode = ({ rules, wob, progress, onWobble, wobbleRunning }) => 
   <>
     {rules ? (
       <>
-        <p className="text-xs text-slate-400 mb-0">
+        <p className="text-xs text-pl-muted mb-0">
           ISIALA&apos;s {rules.n} Scenario Builder NPVs, sorted. n times 0.1 is {rules.nTimesTenthDerived}, n times 0.5 is {rules.nTimesHalfDerived} and n times 0.9 is {rules.nTimesNinetiethDerived}, all whole numbers on an even length, so the screening rule averages two neighbours at every row.
         </p>
         <Tbl
@@ -261,7 +260,7 @@ export const RulesMode = ({ rules, wob, progress, onWobble, wobbleRunning }) => 
     ) : <Note>The two rules are running.</Note>}
     <div className="mt-3 flex items-center gap-3">
       {onWobble && <RunButton onClick={onWobble} running={wobbleRunning}>Run the wobble, fifteen breakeven runs (very slow)</RunButton>}
-      {progress && <span className="text-xs text-slate-400">{progress}</span>}
+      {progress && <span className="text-xs text-pl-muted">{progress}</span>}
     </div>
     {wob && (
       <>
@@ -277,7 +276,7 @@ export const RulesMode = ({ rules, wob, progress, onWobble, wobbleRunning }) => 
           rows={wob.byIterations.map((x) => [x.iterations, four(x.p10), four(x.p50), four(x.p90)])}
         />
         {wob.defaultSeedMedianOutsideSeedSpan !== null && (
-          <p className="text-xs text-slate-300 mt-2 mb-0">
+          <p className="text-xs text-pl-text mt-2 mb-0">
             The default seed&apos;s median at 5000 iterations {wob.defaultSeedMedianOutsideSeedSpan ? 'sits outside' : 'sits inside'} the span of the ten seeds&apos; medians.
           </p>
         )}
@@ -316,13 +315,13 @@ export const EdgesMode = ({ e, narrow, onNarrow, narrowRunning }) => (
             x.high === null ? 'no breakeven below the bracket' : four(x.high),
             x.unreachable ? 'yes, sorts first' : 'no'])}
         />
-        <p className="text-xs text-slate-500 mt-1 mb-0">
+        <p className="text-xs text-pl-muted mt-1 mb-0">
           An end with no breakeven below the bracket is null, its bar carries no swing, and the bar sorts FIRST:
           on mc_one_bar_unreachable the engine&apos;s order is {e.oneBarOpen.order.join(', ')}. Read an open end as no price at
           all. Before the repair that side was drawn at the base case with a swing of zero, so the bar sorted last,
           below every bar the sample could price.
         </p>
-        <p className="text-xs text-slate-300 mt-2 mb-0"><span className="text-slate-500">The engine&apos;s insight on that run:</span> {e.oneBarOpen.insights}</p>
+        <p className="text-xs text-pl-text mt-2 mb-0"><span className="text-pl-muted">The engine&apos;s insight on that run:</span> {e.oneBarOpen.insights}</p>
       </>
     ) : <Note>The edge runs are running.</Note>}
     <div className="mt-3 flex items-center gap-3">
@@ -338,8 +337,8 @@ export const EdgesMode = ({ e, narrow, onNarrow, narrowRunning }) => (
           {narrow.percentiles.map((x) => <Tile key={x.key} label={<PriceLabel>{x.label}</PriceLabel>} value={four(x.value)} unit="USD/bbl" />)}
           <Tile label={<PriceLabel>Base case breakeven price</PriceLabel>} value={four(narrow.baseBreakeven)} unit="USD/bbl" />
         </TileGrid>
-        <p className="text-xs text-slate-300 mt-2 mb-0"><span className="text-slate-500">The engine&apos;s insight, which now carries the fit note (repaired):</span> {narrow.insights}</p>
-        <p className="text-xs text-slate-300 mt-2 mb-0">
+        <p className="text-xs text-pl-text mt-2 mb-0"><span className="text-pl-muted">The engine&apos;s insight, which now carries the fit note (repaired):</span> {narrow.insights}</p>
+        <p className="text-xs text-pl-text mt-2 mb-0">
           The sample draws opex from the clamped triangle, and the base breakeven and the tornado now run at that
           triangle&apos;s own percentiles (EC3-5): the opex median they use is {four(narrow.beliefs.opex.p50)}, reported as a fitted
           belief, where the stated <InputLabel>{narrow.statedLabels[1]}</InputLabel> is {narrow.stated[1]}. The base case and the sample describe
@@ -374,13 +373,13 @@ export const DistrustMode = ({ d }) => {
         <Tile label="OKPOMA peak exposure" value={mm(d.okpoma.maxExposure)} unit="million USD" />
       </TileGrid>
       <Tbl head={OKPOMA_FIRST_ROW_COLUMNS} rows={d.okpoma.firstRows.map((x) => OKPOMA_FIRST_ROW_COLUMNS.map((k) => (k === 'year' ? x[k] : mm(x[k]))))} />
-      <p className="text-xs text-slate-500 mt-1 mb-0">
+      <p className="text-xs text-pl-muted mt-1 mb-0">
         OKPOMA&apos;s only root is negative and the engine reports it; NTEJE has no root at all, so its IRR is null with
         the status {d.nteje.irrStatus} and its payback is null with the status {d.nteje.paybackStatus}. A missing number that says why it is
         missing can be read. Before the repairs both read 1000 percent, the Newton clamp, and NTEJE&apos;s payback read
         the project life, which cannot be told apart from paying back on the last day.
       </p>
-      <p className="text-xs text-slate-500 mt-1 mb-0">
+      <p className="text-xs text-pl-muted mt-1 mb-0">
         The cumulative is non-negative at the first row, so the payback, which is the FIRST crossing, is {four(d.okpoma.payback)}. The second
         capex year takes the cumulative to {mm(d.okpoma.dipCumulative)}, so the status is {d.okpoma.paybackStatus} and paybackLast, where the
         cumulative turns non-negative for good, is {four(d.okpoma.paybackLast)} years: {d.okpoma.paybackLastByHand.index} plus {mm(Math.abs(d.okpoma.paybackLastByHand.carriedIn))} over {mm(d.okpoma.paybackLastByHand.ncfThatYear)}.
