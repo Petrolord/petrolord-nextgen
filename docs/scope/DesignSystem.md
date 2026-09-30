@@ -719,3 +719,68 @@ entry.
   (every view and sub-view of every panel in both themes, every plot on the
   white plate with the mark, every series in a kit colour, and a source
   scan with a negative control).
+
+## 14. Batch 6B: public and auth pages (as built)
+
+Login (`/login`), register (`/register`), certificate verify (`/verify`,
+`/verify/:code`), forgot password (`/forgot-password`), reset password
+(`/reset-password`), the three legal pages (`/privacy-policy`,
+`/terms-of-service`, `/academic-integrity`) and the 404 page render on the
+public frame, always light, with no toggle.
+
+- **The frame** is `src/components/public/PublicPage.jsx`, a port of the
+  Suite's W7C frame by way of the HSE port: `PublicPage` (a `ThemedApp`
+  keyed to the anonymous user, so a learner whose own choice is dark still
+  sees these pages light), `PublicBrandBar` (an ink strip, a fixed dark
+  scope like the rail), `PublicScope`, and the shared class strings
+  (`AUTH_CARD`, `AUTH_TITLE`, `AUTH_COLUMN`, `AUTH_ICON_TILE`, `TEXT_LINK`,
+  `FIELD_LABEL`, `FIELD_ERROR`). NextGen has no wordmark image, so the bar
+  carries the crest (`/favicon.png` in a gold ring) and the name set as the
+  regal homepage sets it. `header` replaces the bar, `footer` adds one.
+- **Routes** are listed in `PUBLIC_LIGHT_ROUTES` in
+  `src/design/scopePaths.jsx` (the plan assigns that list to 6B; there is no
+  `rollout/w6b.js`). Their cold-load loader paints light whatever the device
+  last resolved. The 404 page uses the frame, but an unknown path cannot be
+  listed, so its loader stays the legacy one. The regal homepage is
+  unlisted and untouched.
+- **Look only.** No handler, payload, redirect or validation rule changed.
+  `src/pages/__tests__/PublicAuth.flows.test.jsx` was written against the
+  legacy pages, committed first, and passes unchanged after the restyle. It
+  pins `signInWithPassword({ email, password })`, `signUp` (email, password
+  and `options.data.display_name` only: no redirect and no role from the
+  client, as the one identity doctrine requires), `resetPasswordForEmail`
+  with its `/reset-password` redirect, `updateUser({ password })`, the
+  `reset-password` edge function (`check`, then `reset` with the token and
+  `new_password`) and the `academy_verify_certificate` RPC for the path
+  code, the `?code` query and a typed code, plus where each flow navigates.
+  NextGen has no auth callback, invite, sponsor code or bridge code page
+  outside the dashboard: those flows are on `/dashboard/enroll` and
+  `/dashboard/certificates` (batch 2A).
+- **Lime is gone.** Actions are the primary button, links are `TEXT_LINK`,
+  the step bar and the policy section markers are gold. Status colour
+  comes with its word: the verify result says Valid certificate,
+  Certificate expired or Certificate revoked on the success, warning and
+  danger roles; the two strength meters keep their percentage and their
+  Weak, Medium, Strong words; each password requirement also reads "met"
+  or "not met" to a screen reader. Toasts lost their lime, blue and
+  emerald `className`: the root toaster themes them.
+- **The verify page** shows a result card, and no certificate sheet, so
+  there is no `data-canvas="document"` region on it. The practice course
+  badge takes its scope-aware look there.
+- **The legal kit** (`LegalPageLayout`, `PolicySection`, `Footer`) is used
+  by the three legal pages only (the homepage has its own `HomeFooter`), so
+  it moved straight to roles. The print and contents buttons sit in the
+  brand bar; the footer is an ink strip (a fixed dark scope). The documents
+  keep their `print:` variants, which the theme test allows by name. The
+  `prose` classes were dropped: the typography plugin is not installed, so
+  they never applied.
+- **Copy.** One em dash left the register page intro (the family copy
+  rule). Nothing else was reworded.
+- **Tests:** `PublicAuth.flows.test.jsx` (29 behaviour pins) and
+  `PublicAuth.theme.test.jsx` (per page: light in its own scope under the
+  brand bar, no toggle, light when the stored choice is dark, no legacy
+  chrome with a negative control, the loader theme; then every further
+  state, a source scan with a negative control, and the homepage left
+  alone). Harness `publicAuthHarness.jsx` mounts the real `AuthProvider`
+  over `publicAuthStubs.js`, a Supabase stand-in that throws on any call
+  the pages do not make; `fetch` is counted and asserted unused.
