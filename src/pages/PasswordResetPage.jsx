@@ -10,7 +10,6 @@ import {
   Loader2, 
   KeyRound, 
   Mail, 
-  ArrowRight,
   ArrowLeft
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -20,6 +19,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter }
 import { useToast } from '@/components/ui/use-toast';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Progress } from '@/components/ui/progress';
+import { PublicPage, AUTH_COLUMN, AUTH_ICON_TILE, AUTH_TITLE, TEXT_LINK } from '@/components/public/PublicPage';
 
 const PasswordResetPage = () => {
   const [searchParams] = useSearchParams();
@@ -123,8 +123,7 @@ const PasswordResetPage = () => {
       setSuccess(true);
       toast({
         title: "Reset Link Sent",
-        description: "Check your email for the password reset link.",
-        className: "bg-blue-600 text-white"
+        description: "Check your email for the password reset link."
       });
     } catch (err) {
       setError(err.message || "Failed to send reset link.");
@@ -162,8 +161,7 @@ const PasswordResetPage = () => {
       setSuccess(true);
       toast({
         title: "Success!",
-        description: "Password updated successfully.",
-        className: "bg-emerald-600 text-white"
+        description: "Password updated successfully."
       });
     } catch (err) {
       setError(err.message || "Failed to update password. Your session may have expired.");
@@ -175,63 +173,65 @@ const PasswordResetPage = () => {
     }
   };
 
+  // Each requirement reads "met" or "not met" to a screen reader, so the
+  // colour is never the only signal.
   const StrengthItem = ({ met, label }) => (
-    <div className={`flex items-center gap-2 text-xs transition-colors duration-300 ${met ? 'text-emerald-400' : 'text-slate-500'}`}>
-      {met ? <CheckCircle className="w-3 h-3" /> : <div className="w-3 h-3 rounded-full border border-slate-600" />}
+    <div className={`flex items-center gap-2 text-xs transition-colors duration-300 ${met ? 'text-pl-success-text' : 'text-pl-muted'}`}>
+      {met ? <CheckCircle className="w-3 h-3" /> : <div className="w-3 h-3 rounded-full border border-pl-border-strong" />}
       <span>{label}</span>
+      <span className="sr-only">{met ? 'met' : 'not met'}</span>
     </div>
   );
 
   if (mode === 'detecting') {
     return (
-      <div className="min-h-screen w-full flex items-center justify-center bg-slate-950">
-        <Loader2 className="w-8 h-8 text-blue-500 animate-spin" />
-      </div>
+      <PublicPage testId="forgot-password-theme-scope" mainClassName={AUTH_COLUMN}>
+        <div role="status" aria-label="Checking your session">
+          <Loader2 className="w-8 h-8 text-pl-primary animate-spin" />
+        </div>
+      </PublicPage>
     );
   }
 
-  return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 p-4 relative overflow-hidden">
-      {/* Brand Background Elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[100px] -translate-y-1/2" />
-        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-emerald-600/10 rounded-full blur-[100px] translate-y-1/2" />
-      </div>
+  const fieldIcon = 'absolute left-3 top-3 h-4 w-4 text-pl-muted';
+  const eyeButton = 'absolute right-3 top-3 rounded-sm text-pl-muted transition-colors hover:text-pl-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus';
 
-      <div className="w-full max-w-lg relative z-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
-        
+  return (
+    <PublicPage testId="forgot-password-theme-scope" mainClassName={AUTH_COLUMN}>
+      <div className="w-full max-w-lg animate-in fade-in slide-in-from-bottom-4 duration-700">
+
         {/* Header Branding */}
         <div className="text-center mb-8 space-y-2">
-          <div className="inline-flex p-3 rounded-2xl bg-gradient-to-br from-blue-600 to-emerald-600 shadow-xl shadow-blue-900/20 mb-2">
-            <KeyRound className="w-8 h-8 text-white" />
+          <div className={`${AUTH_ICON_TILE} bg-pl-primary text-pl-primary-fg shadow-pl-md`}>
+            <KeyRound className="w-7 h-7" />
           </div>
-          <h1 className="text-3xl font-bold text-white tracking-tight">Petrolord NextGen</h1>
-          <p className="text-slate-400 font-medium">
+          <h1 className={AUTH_TITLE}>Petrolord NextGen</h1>
+          <p className="text-pl-muted font-medium">
             {mode === 'request-link' ? 'Account Recovery' : 'Secure Password Reset'}
           </p>
         </div>
 
-        <Card className="border-slate-800 bg-slate-900/80 backdrop-blur-xl shadow-2xl overflow-hidden">
+        <Card className="overflow-hidden rounded-2xl bg-pl-raised shadow-pl-lg">
           {/* Progress Bar (Visual indicator of steps) */}
-          <div className="w-full bg-slate-800 h-1">
-            <div 
-              className="h-full bg-gradient-to-r from-blue-500 to-emerald-500 transition-all duration-500"
+          <div className="w-full bg-pl-border h-1">
+            <div
+              className="h-full bg-pl-accent transition-all duration-500"
               style={{ width: mode === 'request-link' ? '50%' : '100%' }}
             />
           </div>
 
           <CardHeader>
-            <CardTitle className="text-xl text-white flex items-center gap-2">
+            <CardTitle className="text-xl text-pl-text flex items-center gap-2">
               {success ? (
-                <span className="text-emerald-400">Success</span>
+                <span className="text-pl-success-text">Success</span>
               ) : mode === 'request-link' ? (
                 <>Step 1: Identify Account</>
               ) : (
                 <>Step 2: Create New Password</>
               )}
             </CardTitle>
-            <CardDescription className="text-slate-400">
-              {success 
+            <CardDescription>
+              {success
                 ? (mode === 'request-link' ? "Email sent successfully." : "Password updated successfully.")
                 : (mode === 'request-link' ? "Enter your email to receive a secure reset link." : "Please enter a strong password to secure your account.")}
             </CardDescription>
@@ -239,7 +239,7 @@ const PasswordResetPage = () => {
 
           <CardContent className="space-y-6">
             {error && (
-              <Alert variant="destructive" className="bg-red-950/30 border-red-900/50 text-red-200 animate-in slide-in-from-top-2">
+              <Alert variant="destructive" className="animate-in slide-in-from-top-2">
                 <AlertCircle className="h-4 w-4" />
                 <AlertTitle>Error</AlertTitle>
                 <AlertDescription>{error}</AlertDescription>
@@ -248,21 +248,21 @@ const PasswordResetPage = () => {
 
             {success ? (
               <div className="flex flex-col items-center justify-center py-6 text-center space-y-4">
-                <div className="w-20 h-20 bg-emerald-500/10 rounded-full flex items-center justify-center border border-emerald-500/20">
-                  <CheckCircle className="w-10 h-10 text-emerald-500" />
+                <div className="w-20 h-20 bg-pl-success-bg rounded-full flex items-center justify-center border border-pl-success/40">
+                  <CheckCircle className="w-10 h-10 text-pl-success-text" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-white">
+                  <h3 className="text-lg font-semibold text-pl-text">
                     {mode === 'request-link' ? 'Reset Link Sent' : 'Password Reset Complete'}
                   </h3>
-                  <p className="text-slate-400 text-sm mt-2 max-w-xs mx-auto">
-                    {mode === 'request-link' 
+                  <p className="text-pl-muted text-sm mt-2 max-w-xs mx-auto">
+                    {mode === 'request-link'
                       ? `We've sent a link to ${email}. Please check your inbox and spam folder.`
                       : `You will be redirected to the login page in ${countdown} seconds.`}
                   </p>
                 </div>
                 {mode === 'reset-password' && (
-                  <Button onClick={() => navigate('/login')} className="bg-emerald-600 hover:bg-emerald-500 text-white w-full">
+                  <Button onClick={() => navigate('/login')} className="w-full">
                     Go to Login Now
                   </Button>
                 )}
@@ -272,22 +272,21 @@ const PasswordResetPage = () => {
               <div className="space-y-4">
                 {/* Email Field - Always Visible but state changes */}
                 <div className="space-y-2">
-                  <Label htmlFor="email" className="text-slate-300">Email Address</Label>
-                  <div className="relative group">
-                    <Mail className="absolute left-3 top-3 h-4 w-4 text-slate-500 group-focus-within:text-blue-400 transition-colors" />
-                    <Input 
-                      id="email" 
-                      type="email" 
+                  <Label htmlFor="email" className="text-pl-text">Email Address</Label>
+                  <div className="relative">
+                    <Mail className={fieldIcon} />
+                    <Input
+                      id="email"
+                      type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       readOnly={mode === 'reset-password'}
                       disabled={loading || mode === 'reset-password'}
                       placeholder="name@university.edu"
-                      className={`pl-10 bg-slate-950/50 border-slate-800 text-white placeholder:text-slate-600 
-                        ${mode === 'reset-password' ? 'opacity-70 cursor-not-allowed border-transparent ring-0' : 'focus:border-blue-500 focus:ring-blue-500/20'}`}
+                      className={`pl-10 ${mode === 'reset-password' ? 'pr-10 opacity-70 cursor-not-allowed' : ''}`}
                     />
                     {mode === 'reset-password' && (
-                      <CheckCircle className="absolute right-3 top-3 h-4 w-4 text-emerald-500" />
+                      <CheckCircle className="absolute right-3 top-3 h-4 w-4 text-pl-success-text" />
                     )}
                   </div>
                 </div>
@@ -296,36 +295,37 @@ const PasswordResetPage = () => {
                 {mode === 'reset-password' && (
                   <div className="space-y-4 animate-in fade-in slide-in-from-bottom-2 duration-500">
                     <div className="space-y-2">
-                      <Label htmlFor="password" className="text-slate-300">New Password</Label>
-                      <div className="relative group">
-                        <Lock className="absolute left-3 top-3 h-4 w-4 text-slate-500 group-focus-within:text-blue-400 transition-colors" />
+                      <Label htmlFor="password" className="text-pl-text">New Password</Label>
+                      <div className="relative">
+                        <Lock className={fieldIcon} />
                         <Input
                           id="password"
                           type={showPassword ? "text" : "password"}
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
-                          className="pl-10 pr-10 bg-slate-950/50 border-slate-800 text-white placeholder:text-slate-600 focus:border-blue-500 focus:ring-blue-500/20"
+                          className="pl-10 pr-10"
                           placeholder="Create a strong password"
                         />
                         <button
                           type="button"
                           onClick={() => setShowPassword(!showPassword)}
-                          className="absolute right-3 top-3 text-slate-500 hover:text-slate-300 transition-colors"
+                          aria-label={showPassword ? 'Hide password' : 'Show password'}
+                          className={eyeButton}
                         >
                           {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                         </button>
                       </div>
-                      
+
                       {/* Password Strength Meter */}
                       <div className="space-y-2 pt-1">
-                        <div className="flex justify-between text-xs text-slate-400 mb-1">
+                        <div className="flex justify-between text-xs text-pl-muted mb-1">
                           <span>Strength</span>
                           <span>{Math.round(strengthScore)}%</span>
                         </div>
-                        <Progress value={strengthScore} className={`h-1.5 ${
-                          strengthScore < 40 ? "bg-slate-800 [&>div]:bg-red-500" :
-                          strengthScore < 80 ? "bg-slate-800 [&>div]:bg-yellow-500" :
-                          "bg-slate-800 [&>div]:bg-emerald-500"
+                        <Progress value={strengthScore} aria-label="Password strength" className={`h-1.5 ${
+                          strengthScore < 40 ? "[&>div]:bg-pl-danger" :
+                          strengthScore < 80 ? "[&>div]:bg-pl-warning" :
+                          "[&>div]:bg-pl-success"
                         }`} />
                         <div className="grid grid-cols-2 gap-y-1 gap-x-4 pt-1">
                           <StrengthItem met={requirements.length} label="8+ Characters" />
@@ -338,49 +338,50 @@ const PasswordResetPage = () => {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="confirm" className="text-slate-300">Confirm Password</Label>
-                      <div className="relative group">
-                        <Lock className="absolute left-3 top-3 h-4 w-4 text-slate-500 group-focus-within:text-blue-400 transition-colors" />
+                      <Label htmlFor="confirm" className="text-pl-text">Confirm Password</Label>
+                      <div className="relative">
+                        <Lock className={fieldIcon} />
                         <Input
                           id="confirm"
                           type={showConfirmPassword ? "text" : "password"}
                           value={confirmPassword}
                           onChange={(e) => setConfirmPassword(e.target.value)}
-                          className={`pl-10 pr-10 bg-slate-950/50 border-slate-800 text-white placeholder:text-slate-600 focus:ring-blue-500/20 
-                            ${confirmPassword && password !== confirmPassword ? 'border-red-500 focus:border-red-500' : 'focus:border-blue-500'}`}
+                          aria-invalid={Boolean(confirmPassword && password !== confirmPassword)}
+                          className={`pl-10 pr-10 ${confirmPassword && password !== confirmPassword ? 'border-pl-danger' : ''}`}
                           placeholder="Re-enter password"
                         />
                         <button
                           type="button"
                           onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                          className="absolute right-3 top-3 text-slate-500 hover:text-slate-300 transition-colors"
+                          aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
+                          className={eyeButton}
                         >
                           {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                         </button>
                       </div>
                       {confirmPassword && password !== confirmPassword && (
-                        <p className="text-xs text-red-400 animate-in slide-in-from-top-1">Passwords do not match</p>
+                        <p className="text-xs text-pl-danger-text animate-in slide-in-from-top-1">Passwords do not match</p>
                       )}
                     </div>
                   </div>
                 )}
-                
+
                 {/* Actions */}
                 <div className="pt-4">
                   {mode === 'request-link' ? (
-                    <Button 
+                    <Button
                       onClick={handleRequestLink}
                       disabled={loading || !email}
-                      className="w-full bg-blue-600 hover:bg-blue-500 text-white h-11 shadow-lg shadow-blue-900/20 transition-all hover:scale-[1.02]"
+                      className="w-full h-11"
                     >
                       {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Mail className="mr-2 h-4 w-4" />}
                       Send Reset Link
                     </Button>
                   ) : (
-                    <Button 
+                    <Button
                       onClick={handleUpdatePassword}
                       disabled={loading || !password || !confirmPassword || password !== confirmPassword || strengthScore < 60}
-                      className="w-full bg-emerald-600 hover:bg-emerald-500 text-white h-11 shadow-lg shadow-emerald-900/20 transition-all hover:scale-[1.02]"
+                      className="w-full h-11"
                     >
                       {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <CheckCircle className="mr-2 h-4 w-4" />}
                       Update Password
@@ -390,33 +391,35 @@ const PasswordResetPage = () => {
               </div>
             )}
           </CardContent>
-          
-          <CardFooter className="bg-slate-950/30 border-t border-slate-800 py-4 flex flex-col gap-2">
+
+          <CardFooter className="bg-pl-sunken border-t border-pl-border py-4 flex flex-col gap-2">
             {mode === 'reset-password' && !success && (
-               <button 
+               <button
+               type="button"
                onClick={() => {
                  setMode('request-link');
                  setPassword('');
                  setConfirmPassword('');
                  setError('');
                }}
-               className="text-xs text-slate-500 hover:text-slate-300 flex items-center gap-1 transition-colors"
+               className="text-xs text-pl-muted hover:text-pl-text flex items-center gap-1 transition-colors"
              >
                <ArrowLeft className="w-3 h-3" />
                Not {email}? Request a new link
              </button>
             )}
-            
-            <button 
+
+            <button
+              type="button"
               onClick={() => navigate('/login')}
-              className="text-sm text-slate-400 hover:text-white transition-colors flex items-center gap-2"
+              className={`text-sm ${TEXT_LINK}`}
             >
               Back to Login
             </button>
           </CardFooter>
         </Card>
       </div>
-    </div>
+    </PublicPage>
   );
 };
 
