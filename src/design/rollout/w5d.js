@@ -9,4 +9,5 @@ export default [
   '/dashboard/apps/appliedai',
   '/dashboard/apps/crude',
   '/dashboard/apps/refinery',
+  '/dashboard/apps/supply',
 ];

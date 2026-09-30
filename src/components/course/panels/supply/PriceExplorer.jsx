@@ -1,14 +1,17 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, Cell,
+  LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, Cell,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE } from '@/utils/chartTheme';
+import { SVG_CHART } from '@/utils/chartSvg';
 import {
   BADAGRY_CARGO, BADAGRY_RATES, BADAGRY_ELEMENTS, BADAGRY_CAP, BADAGRY_FX_VALUES, CARGO_UNITS, cargoAt,
   cargoUnitsAt, cargoDensitiesAt, landedAt, landedRefusalsAt, lossCurveAt, h1At, pumpAt, fxAt, fmt, plain,
   importTemplate, pumpTemplate,
 } from './supplyLab';
 import {
-  AXIS, TOOLTIP, GRID, SERIES, txt, usable, Tbl, Refusal, EngineNote, Note, Lead, Labelled, Empty, safe, NumBox,
+  AXIS, TOOLTIP, SERIES, txt, usable, Tbl, Refusal, EngineNote, Note, Lead, Labelled, Empty, safe, NumBox,
   Slider, Button,
 } from './panelBits';
 import {
@@ -82,12 +85,12 @@ export const LandedMode = ({ landed, rates, onRate, basis, onBasis, refusals }) 
   const bars = Array.isArray(landed.lines) ? landed.lines.filter((l) => Number.isFinite(l.amount)) : [];
   return (
     <>
-      <p className="text-xs text-slate-400 mb-0">
+      <p className="text-xs text-pl-muted mb-0">
         The BADAGRY cargo: {BADAGRY_CARGO.quantity} tonnes of PMS at {BADAGRY_CARGO.densityKgM3} kg/m3, FOB
         {' '}{fmt.usd(BADAGRY_CARGO.fobPrice)} USD a tonne. Every rate below is invented for this course.
       </p>
       <div className="mt-2 flex gap-2 items-center">
-        <span className="text-xs text-slate-400">Marine insurance quoted on</span>
+        <span className="text-xs text-pl-muted">Marine insurance quoted on</span>
         <Button active={basis === 'cif'} onClick={() => onBasis('cif')}>CIF, the usual marine quote</Button>
         <Button active={basis === 'cf'} onClick={() => onBasis('cf')}>C&amp;F, as the template ships its basis</Button>
       </div>
@@ -106,10 +109,9 @@ export const LandedMode = ({ landed, rates, onRate, basis, onBasis, refusals }) 
             <Tile label="Complete" value={txt(landed.complete)} />
           </TileGrid>
           <EngineNote>{landed.basisOfTotal}</EngineNote>
-          <div className="mt-3 h-64">
-            <ResponsiveContainer width="100%" height="100%">
+          <ChartFrame height={256} className="mt-3">
               <BarChart data={bars} margin={{ top: 8, right: 16, bottom: 40, left: 16 }}>
-                <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
+                <CartesianGrid {...GRID_STYLE} />
                 <XAxis dataKey="key" tick={AXIS} angle={-30} textAnchor="end" interval={0} />
                 <YAxis tick={AXIS} domain={['auto', 'auto']} />
                 <Tooltip contentStyle={TOOLTIP} />
@@ -118,8 +120,7 @@ export const LandedMode = ({ landed, rates, onRate, basis, onBasis, refusals }) 
                   {bars.map((l) => <Cell key={l.key} fill={l.stage === 'fob' ? SERIES[0] : l.stage === 'landed' ? SERIES[3] : SERIES[1]} />)}
                 </Bar>
               </BarChart>
-            </ResponsiveContainer>
-          </div>
+            </ChartFrame>
           <Tbl
             head={['stage', 'line', 'bites on', 'rate', 'amount USD', 'USD an outturn litre']}
             rows={landed.lines.map((l) => [l.stage, l.label, l.basis, txt(l.rate), fmt.usd(l.amount), fmt.usdL(l.perLitre)])}
@@ -153,23 +154,21 @@ export const LossMode = ({ landed, curve, h1, loss, onLoss }) => {
         </TileGrid>
       )}
       {Array.isArray(curve) && curve.length > 0 && (
-        <div className="mt-3 h-56">
-          <ResponsiveContainer width="100%" height="100%">
+        <ChartFrame height={224} className="mt-3">
             <LineChart data={curve} margin={{ top: 8, right: 16, bottom: 18, left: 16 }}>
-              <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
-              <XAxis dataKey="lossPercent" type="number" tick={AXIS} label={{ value: 'ocean loss, percent', position: 'insideBottom', offset: -8, fill: '#94a3b8', fontSize: 11 }} />
+              <CartesianGrid {...GRID_STYLE} />
+              <XAxis dataKey="lossPercent" type="number" tick={AXIS} label={{ value: 'ocean loss, percent', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 11 }} />
               <YAxis tick={AXIS} domain={['auto', 'auto']} />
               <Tooltip contentStyle={TOOLTIP} />
               {Number.isFinite(Number(loss)) && loss !== '' && <ReferenceLine x={Number(loss)} stroke={SERIES[3]} strokeDasharray="4 4" />}
               <Line type="monotone" dataKey="perLitreUsd" name="USD a litre sold" stroke={SERIES[0]} dot={false} isAnimationActive={false} />
             </LineChart>
-          </ResponsiveContainer>
-        </div>
+          </ChartFrame>
       )}
       <Note>The loss divides the cost: the landed total stays where it is and the litres it is spread over fall.</Note>
       {h && (
         <Labelled tag="held, FINDINGS-supply H1">
-          <p className="text-xs text-slate-300 mb-0">
+          <p className="text-xs text-pl-text mb-0">
             The jetty line ({fmt.usd(h.jetty && h.jetty.amount)} USD) and the storage line ({fmt.usd(h.storage && h.storage.amount)} USD)
             are charged on the {fmt.m3(h.billOfLadingM3)} m3 on the bill of lading, while the outturn is
             {' '}{fmt.m3(h.outturnM3)} m3. So are the regulatory line ({fmt.usd(h.regulator && h.regulator.amount)} USD on
@@ -194,7 +193,7 @@ export const PumpMode = ({ pump, elements, onElement, cap, onCap, vatBasis, onVa
         <NumBox label="Cap, naira a litre" tag="invented" value={cap} onChange={onCap} />
       </FieldGrid>
       <div className="mt-2 flex gap-2 items-center">
-        <span className="text-xs text-slate-400">VAT charged on</span>
+        <span className="text-xs text-pl-muted">VAT charged on</span>
         <Button active={vatBasis === 'running'} onClick={() => onVatBasis('running')}>the running total</Button>
         <Button active={vatBasis === 'landed'} onClick={() => onVatBasis('landed')}>the landed cost</Button>
       </div>
@@ -208,10 +207,9 @@ export const PumpMode = ({ pump, elements, onElement, cap, onCap, vatBasis, onVa
           </TileGrid>
           <EngineNote>{pump.basisOfPrice}</EngineNote>
           <Note>A positive shortfall means the cap is below what the chain costs, and somebody in the chain absorbs it.</Note>
-          <div className="mt-3 h-64">
-            <ResponsiveContainer width="100%" height="100%">
+          <ChartFrame height={256} className="mt-3">
               <BarChart data={pump.lines.filter((l) => Number.isFinite(l.amount))} margin={{ top: 8, right: 16, bottom: 40, left: 16 }}>
-                <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
+                <CartesianGrid {...GRID_STYLE} />
                 <XAxis dataKey="key" tick={AXIS} angle={-30} textAnchor="end" interval={0} />
                 <YAxis tick={AXIS} domain={['auto', 'auto']} />
                 <Tooltip contentStyle={TOOLTIP} />
@@ -219,8 +217,7 @@ export const PumpMode = ({ pump, elements, onElement, cap, onCap, vatBasis, onVa
                 <Bar dataKey="baseDrawn" stackId="p" fill="transparent" isAnimationActive={false} />
                 <Bar dataKey="amount" name="naira a litre" stackId="p" fill={SERIES[2]} isAnimationActive={false} />
               </BarChart>
-            </ResponsiveContainer>
-          </div>
+            </ChartFrame>
           <Tbl
             head={['element', 'recipient', 'basis', 'amount naira/L', 'running naira/L', 'share of price']}
             rows={pump.lines.map((l) => [l.label, txt(l.recipient), l.basis, fmt.localL(l.amount), fmt.localL(l.running), fmt.share(l.share)])}
@@ -248,19 +245,17 @@ export const FxMode = ({ fx, inputs, onInput }) => {
         <NumBox label="Cap, naira a litre" tag="invented" value={inputs.capPerLitre} onChange={(v) => onInput('capPerLitre', v)} />
       </FieldGrid>
       {Array.isArray(fx.points) && fx.points.length > 0 && (
-        <div className="mt-3 h-64">
-          <ResponsiveContainer width="100%" height="100%">
+        <ChartFrame height={256} className="mt-3">
             <LineChart data={fx.points} margin={{ top: 8, right: 16, bottom: 18, left: 16 }}>
-              <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
-              <XAxis dataKey="value" type="number" domain={['dataMin', 'dataMax']} tick={AXIS} label={{ value: 'naira to the dollar', position: 'insideBottom', offset: -8, fill: '#94a3b8', fontSize: 11 }} />
+              <CartesianGrid {...GRID_STYLE} />
+              <XAxis dataKey="value" type="number" domain={['dataMin', 'dataMax']} tick={AXIS} label={{ value: 'naira to the dollar', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 11 }} />
               <YAxis tick={AXIS} domain={['auto', 'auto']} />
               <Tooltip contentStyle={TOOLTIP} />
               {Number.isFinite(capN) && inputs.capPerLitre !== '' && <ReferenceLine y={capN} stroke={SERIES[5]} strokeDasharray="4 4" />}
               {b && b.found && <ReferenceLine x={b.value} stroke={SERIES[2]} />}
               <Line type="monotone" dataKey="pricePerLitre" name="pump price, naira a litre" stroke={SERIES[0]} isAnimationActive={false} />
             </LineChart>
-          </ResponsiveContainer>
-        </div>
+          </ChartFrame>
       )}
       {!b && <Note>With no cap there is nothing to cross, so there is no breakeven.</Note>}
       {b && b.found && (
