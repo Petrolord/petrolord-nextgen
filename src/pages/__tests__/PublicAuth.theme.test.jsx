@@ -15,7 +15,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, it, expect, vi, beforeAll, beforeEach, afterEach } from 'vitest';
-import { screen, fireEvent, cleanup, configure, within } from '@testing-library/react';
+import { screen, fireEvent, cleanup, configure, within, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/vitest';
 import {
   getScopeRoot, expectLightByDefault, expectNoLegacyChrome, expectNegativeControl, hasLegacyChrome,
@@ -418,5 +418,72 @@ describe('the 6B sources', () => {
     const viaAlias = await import('@/lib/customSupabaseClient');
     expect(viaRelative.supabase).toBe(viaAlias.supabase);
     expect(viaRelative.supabase.supabaseUrl).toBeUndefined();
+  });
+});
+
+// Wave 7: no dead links on the public pages. Every internal link resolves to
+// a route App.jsx serves, every /#anchor to a section id on the homepage, and
+// no link is a bare "#". Before wave 7 Academic Integrity linked to /support
+// and /community (no such routes) and the footer carried four social icons
+// with href="#".
+describe('public pages carry no dead links (wave 7)', () => {
+  const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
+  const read = (rel) => fs.readFileSync(path.join(root, rel), 'utf8');
+  const appRoutes = [...read('src/App.jsx').matchAll(/<Route path="([^"]+)"/g)].map((m) => m[1]).filter((p) => p !== '*');
+  const homeIds = new Set([...read('src/pages/LandingPage.jsx').matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]));
+  const served = (pathname) => appRoutes.some((r) => {
+    const a = r.split('/'); const b = pathname.split('/');
+    if (r.endsWith('/*')) return pathname === r.slice(0, -2) || pathname.startsWith(r.slice(0, -1));
+    return a.length === b.length && a.every((seg, i) => seg.startsWith(':') || seg === b[i]);
+  });
+  const deadLinks = () => [...document.querySelectorAll('a[href]')].map((a) => a.getAttribute('href')).filter((href) => {
+    if (/^(mailto:|tel:|https?:)/.test(href)) return false;
+    if (href === '#' || href === '') return true;
+    const [pathname, hash] = href.split('#');
+    if (pathname === '/' || pathname === '') return hash ? !homeIds.has(hash) : false;
+    return !served(pathname);
+  });
+
+  it('reads the routes and the homepage sections it checks against', () => {
+    expect(appRoutes).toEqual(expect.arrayContaining(['/', '/login', '/register', '/verify', '/privacy-policy']));
+    expect(homeIds.has('courses')).toBe(true);
+    expect(served('/verify/abc')).toBe(true);
+    expect(served('/dashboard/enroll')).toBe(true);
+  });
+
+  for (const [name, Page, route] of [
+    ['privacy policy', PrivacyPolicyPage, '/privacy-policy'],
+    ['terms of service', TermsOfServicePage, '/terms-of-service'],
+    ['academic integrity', AcademicIntegrityPage, '/academic-integrity'],
+    ['not found', NotFoundPage, '/no-such-page'],
+  ]) {
+    it(`${name}: every link goes somewhere`, async () => {
+      mountPublic(Page, route, route === '/no-such-page' ? '*' : route);
+      await waitFor(() => expect(document.querySelectorAll('a[href]').length).toBeGreaterThan(0));
+      expect(deadLinks()).toEqual([]);
+    });
+  }
+
+  it('negative control: the retired links are reported', async () => {
+    mountPublic(AcademicIntegrityPage, '/academic-integrity');
+    await screen.findByRole('navigation', { name: 'Table of contents' });
+    const host = document.querySelector('main');
+    for (const href of ['/support', '/community', '#', '/#modules']) {
+      const a = document.createElement('a');
+      a.setAttribute('href', href);
+      a.className = 'planted-dead-link';
+      host.appendChild(a);
+    }
+    expect(deadLinks()).toEqual(['/support', '/community', '#', '/#modules']);
+    host.querySelectorAll('.planted-dead-link').forEach((a) => a.remove());
+    expect(deadLinks()).toEqual([]);
+  });
+
+  it('the footer has no social icons, and the integrity help card is the academy email', async () => {
+    mountPublic(AcademicIntegrityPage, '/academic-integrity');
+    await screen.findByRole('navigation', { name: 'Table of contents' });
+    expect(document.querySelector('footer').querySelectorAll('a[href="#"]').length).toBe(0);
+    expect(screen.getByText('Contact the academy').closest('a').getAttribute('href')).toBe('mailto:info@petrolord.com');
+    expect(screen.queryByText('Community Forum')).toBeNull();
   });
 });
