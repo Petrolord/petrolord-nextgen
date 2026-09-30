@@ -24,7 +24,7 @@ The six wells are posted with two lines each. The first is the well name and its
 
 The ring around each well post carries the summary: green means the model reproduces the measurement to within a millionth, red means it does not.
 
-P-1, the prospect location at an easting and northing of 1600 m, is marked with a hollow lime circle and labelled with the modelled porosity there. That value is one of the six numbers the capstone asks for.
+P-1, the prospect location at an easting and northing of 1600 m, is marked with a hollow violet circle and labelled with the modelled porosity there. That value is one of the six numbers the capstone asks for.
 
 ## The tiles
 
