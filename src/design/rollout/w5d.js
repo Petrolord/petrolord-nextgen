@@ -8,4 +8,5 @@ export default [
   '/dashboard/apps/forecastml',
   '/dashboard/apps/appliedai',
   '/dashboard/apps/crude',
+  '/dashboard/apps/refinery',
 ];

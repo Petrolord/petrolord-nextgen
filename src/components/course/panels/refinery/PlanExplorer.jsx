@@ -1,14 +1,16 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Cell,
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Cell,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE } from '@/utils/chartTheme';
 import {
   ABUA, CARGO_SIZES, ZONES, PERIOD_START, PERIOD_DAYS, abuaInput, planOf, crudeUnitGivenAFeed, variantPlans,
   planRefusals, hydrotreaterThreeWays, reformerAt, reformerSweep, scheduleOf, zoneSchedules,
   usd, bbl, pbl, pct, frac,
 } from './refineryLab';
 import {
-  AXIS, TOOLTIP, GRID, SERIES, txt, yes, Tbl, Refused, EngineSays, Note, Lead, Empty, safe, usable, Slider, BoxField, Button, Check,
+  AXIS, TOOLTIP, SERIES, txt, yes, Tbl, Refused, EngineSays, Note, Lead, Empty, safe, usable, Slider, BoxField, Button, Check,
 } from './panelBits';
 import {
   PanelShell, SelectField, Tile, TileGrid, FieldGrid,
@@ -37,7 +39,7 @@ export const MODES = [
   ['schedule', 'The schedule for March 2027, the cargo size and the time zones'],
 ];
 
-const hi = 'text-[#BFFF00]';
+const hi = 'text-pl-primary-text font-semibold';
 
 export const PlanStatus = ({ plan }) => {
   if (!plan || typeof plan !== 'object') return <Empty>The plan reader has returned nothing.</Empty>;
@@ -164,10 +166,9 @@ export const StreamsMode = ({
         rows={plan.streams.map((s) => [s.id, bbl(s.made), bbl(s.consumed), bbl(s.placed), bbl(s.surplus), pbl(s.marginalValue),
           s.goesInto.length ? s.goesInto.map((g) => `${g.name} ${pbl(g.price)}`).join('; ') : 'no product', s.feeds.length ? s.feeds.join(', ') : 'no unit'])}
       />
-      <div className="mt-3">
-        <ResponsiveContainer width="100%" height={200}>
+      <ChartFrame height={200} className="mt-3">
           <BarChart data={data} margin={{ top: 8, right: 16, left: 8, bottom: 8 }}>
-            <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
+            <CartesianGrid {...GRID_STYLE} />
             <XAxis dataKey="id" tick={AXIS} />
             <YAxis tick={AXIS} width={60} />
             <Tooltip contentStyle={TOOLTIP} formatter={(v) => pbl(v)} />
@@ -175,8 +176,7 @@ export const StreamsMode = ({
               {data.map((d, k) => <Cell key={d.id} fill={SERIES[k % SERIES.length]} />)}
             </Bar>
           </BarChart>
-        </ResponsiveContainer>
-      </div>
+        </ChartFrame>
       <Lead>Pricing a debottleneck: the reformer capacity as a control, everything else as it stands in the configuration.</Lead>
       <Slider label="Reformer capacity (bbl for the month)" value={reformer} min={300000} max={560000} step={20000} onChange={onReformer} shown={bbl(reformer)} />
       <div className="mt-2">
@@ -264,15 +264,15 @@ export const ScheduleMode = ({
           <Note>Period start {sch.periodStart}, passed as that string, over {sch.periodDays} days. The engine&apos;s note:</Note>
           <EngineSays>{txt(sch.note)}</EngineSays>
           <div className="mt-3 overflow-x-auto">
-            <table className="text-[11px] text-slate-300 w-full border-collapse">
+            <table className="text-[11px] text-pl-text w-full border-collapse">
               <tbody>
                 {weeks.map((w, k) => (
                   <tr key={k}>
                     {w.map((d) => (
-                      <td key={d.date} className="align-top border border-slate-700 p-1 min-w-[88px]">
-                        <p className="text-slate-500 mb-0">{d.date}</p>
+                      <td key={d.date} className="align-top border border-pl-border p-1 min-w-[88px]">
+                        <p className="text-pl-muted mb-0">{d.date}</p>
                         {d.events.map((e) => (
-                          <p key={e.id} className={`mb-0 ${e.type === 'receipt' ? 'text-sky-300' : e.type === 'delivery' ? 'text-pink-300' : 'text-slate-300'}`}>
+                          <p key={e.id} className={`mb-0 ${e.type === 'receipt' ? 'text-pl-info-text' : e.type === 'delivery' ? 'text-pl-accent-text' : 'text-pl-text'}`}>
                             {short[e.type] || e.type} {e.materialId} {bbl(e.quantity)}
                           </p>
                         ))}
