@@ -88,6 +88,7 @@ describe('3A registry', () => {
     for (const app of GEO3A_APPS) {
       expect(isThemedPath(`/dashboard/apps/${app.slug}`)).toBe(true);
     }
-    expect(isThemedPath('/legacy-probe')).toBe(false);
+    // wave 7: every signed-in route is scoped, registered or not
+    expect(isThemedPath('/dashboard/legacy-probe')).toBe(true);
   });
 });

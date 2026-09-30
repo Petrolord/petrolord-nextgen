@@ -6,7 +6,7 @@
 import { describe, it, expect, vi, beforeAll, beforeEach, afterEach } from 'vitest';
 import { screen, cleanup, fireEvent, within } from '@testing-library/react';
 import { installDomShims } from '@/design/testing/domShims';
-import { describeScreenTheme, expectNoLegacyChrome, getScopeRoot, legacyChromeClasses } from '@/design/testing/themeAssertions';
+import { describeScreenTheme, expectNoLegacyChrome, expectNegativeControl, getScopeRoot } from '@/design/testing/themeAssertions';
 import { renderAdmin, openTab, toggleTheme, USER_ID } from './admin2bHarness';
 
 vi.mock('@/lib/customSupabaseClient', async () => (await import('./admin2bStubs')).supabaseFake());
@@ -74,11 +74,15 @@ describe('Academy doors, further states', () => {
     expectNoLegacyChrome();
   });
 
-  it('a route the rollout has not reached keeps the legacy frame (negative control)', async () => {
+  it('every signed-in route is scoped: a route no batch ever listed opens the one scope', async () => {
     renderAdmin('/legacy-probe');
     await screen.findByText('Legacy probe');
-    expect(document.querySelector('[data-pl-theme]:not([data-testid="sidebar-rail"])')).toBeNull();
-    expect(screen.queryByTestId('theme-toggle')).toBeNull();
-    expect(legacyChromeClasses()).toEqual([]);
+    const scope = getScopeRoot();
+    expect(scope.getAttribute('data-pl-theme')).toBe('light');
+    expect(scope.contains(screen.getByText('Legacy probe'))).toBe(true);
+    expect(scope.contains(screen.getByTestId('theme-toggle'))).toBe(true);
+    expect(document.querySelectorAll('[data-pl-root]').length).toBe(1);
+    expectNoLegacyChrome();
+    expectNegativeControl(scope);
   });
 });

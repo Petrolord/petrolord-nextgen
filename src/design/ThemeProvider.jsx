@@ -6,9 +6,9 @@
 // user can always switch back. src/design/theme.css only has selectors
 // under [data-pl-theme], so every themed screen sits in a scope. In NextGen
 // there is ONE scope for the signed-in screens, rendered by Layout around
-// the header and the page (SignedInScope, src/design/SignedInScope.jsx);
-// during the rollout it opens only on the routes listed in
-// src/design/rollout/ (docs/scope/DesignSystem-Rollout.md section 5).
+// the header and the page on every signed-in route (SignedInScope,
+// src/design/SignedInScope.jsx; docs/scope/DesignSystem-Rollout.md
+// section 5).
 //
 // The choice is remembered per user in localStorage under
 // petrolord.theme.v1:<user id>, the Suite's key. NextGen runs on its own

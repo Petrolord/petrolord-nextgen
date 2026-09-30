@@ -4,5 +4,5 @@ export { ThemedApp, FixedTheme, ThemeProvider, themeStorageKey, readStoredTheme,
 export { useDsTheme, usePortalThemeProps } from './themeContext.js';
 export { useThemeClass, themeClassPicker } from './themeClass.js';
 export { SignedInScope, SIGNED_IN_SCOPE_TEST_ID } from './SignedInScope.jsx';
-export { isThemedPath, isPublicLightPath, coldLoadTheme, ThemedLoadingScreen } from './scopePaths.jsx';
+export { isThemedPath, isSignedInPath, isPublicLightPath, coldLoadTheme, ThemedLoadingScreen } from './scopePaths.jsx';
 export * as tokens from './tokens.js';

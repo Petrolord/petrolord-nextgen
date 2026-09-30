@@ -42,7 +42,7 @@ export function renderApp(path) {
               <Routes>
                 <Route path="/dashboard/*" element={<ApplicationLayoutProvider><Layout><DashboardPage /></Layout></ApplicationLayoutProvider>} />
                 <Route path="/search" element={<ApplicationLayoutProvider><Layout><SearchPage /></Layout></ApplicationLayoutProvider>} />
-                {/* a signed-in route no batch registers */}
+                {/* a signed-in route no batch ever listed: scoped like every other (wave 7) */}
                 <Route path="/legacy-probe" element={<ApplicationLayoutProvider><Layout><h1>Legacy probe</h1></Layout></ApplicationLayoutProvider>} />
                 <Route path="/outside" element={<p>No layout here</p>} />
               </Routes>

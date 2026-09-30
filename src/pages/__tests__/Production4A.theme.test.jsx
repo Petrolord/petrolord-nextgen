@@ -110,7 +110,8 @@ describe('4A registry', () => {
       expect(isThemedPath(`/dashboard/apps/${app.slug}`)).toBe(true);
     }
     expect(isThemedPath('/dashboard/apps/nodal/course/beginner/m01')).toBe(true); // 1C's pattern
-    expect(isThemedPath('/dashboard/apps/gaslift/extra')).toBe(false);
-    expect(isThemedPath('/legacy-probe')).toBe(false);
+    expect(isThemedPath('/dashboard/apps/gaslift/extra')).toBe(true);
+    // wave 7: every signed-in route is scoped, registered or not
+    expect(isThemedPath('/dashboard/legacy-probe')).toBe(true);
   });
 });

@@ -91,11 +91,12 @@ describe('the ink rail (Sidebar and CourseModuleNav)', () => {
     expect(rail().getAttribute('data-pl-theme')).toBe('dark');
   });
 
-  it('is the same ink rail on a route the rollout has not reached', async () => {
+  it('is the same ink rail on any signed-in route, beside the one page scope', async () => {
     renderApp('/legacy-probe');
     await screen.findByText('Legacy probe');
     await checkRail();
-    expect(document.querySelector('[data-pl-root]')).toBeNull();
+    expect(getScopeRoot().getAttribute('data-pl-theme')).toBe('light');
+    expect(getScopeRoot().contains(rail())).toBe(false);
   });
 
   it('marks the active item with the gold edge and the course module open', async () => {

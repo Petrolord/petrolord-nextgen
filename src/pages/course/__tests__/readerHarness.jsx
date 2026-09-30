@@ -32,7 +32,7 @@ export function renderRoute(path, { role = 'learner' } = {}) {
           <RoleProvider>
             <Routes>
               <Route path="/dashboard/*" element={<ApplicationLayoutProvider><Layout><DashboardPage /></Layout></ApplicationLayoutProvider>} />
-              {/* a signed-in route no batch registers (the negative control) */}
+              {/* a signed-in route no batch ever listed: scoped like every other (wave 7) */}
               <Route path="/legacy-probe" element={<ApplicationLayoutProvider><Layout><h1>Legacy probe</h1></Layout></ApplicationLayoutProvider>} />
             </Routes>
           </RoleProvider>

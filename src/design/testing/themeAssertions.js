@@ -9,8 +9,9 @@
 //   3. no legacy console colour class is left under the scope outside
 //      data-canvas regions, with a planted negative control so a detector
 //      that finds nothing is not mistaken for a clean page;
-//   4. the route is registered, so Layout opens the scope and the cold-load
-//      loader paints the user's theme there.
+//   4. the route is a signed-in (or public) route, so the cold-load loader
+//      paints the right theme there. Layout opens the scope on every route
+//      it serves; there is no registry (wave 7).
 //
 // Never import this file from application code.
 import { describe, it, expect, beforeAll, beforeEach, afterEach } from 'vitest';
@@ -74,7 +75,7 @@ export function legacyChromeClasses({ root = document.body, allow = [] } = {}) {
 export function getScopeRoot(scopeTestId = SIGNED_IN_SCOPE_TEST_ID) {
   let el = document.querySelector(`[data-testid="${scopeTestId}"]`) || document.querySelector('[data-pl-root]');
   if (el && !el.hasAttribute('data-pl-root')) el = el.closest('[data-pl-root]');
-  if (!el) throw new Error('No design-system scope root found: is the screen mounted inside Layout (or SignedInScope) on a registered route?');
+  if (!el) throw new Error('No design-system scope root found: is the screen mounted inside Layout (or SignedInScope)?');
   return el;
 }
 
@@ -142,7 +143,7 @@ export function expectNegativeControl(scope = getScopeRoot(), { allow = [] } = {
   expect(legacyChromeClasses({ root: scope, allow })).not.toContain(planted);
 }
 
-/** 4. The route is registered, so Layout opens the scope there. */
+/** 4. The route is a signed-in or public route: the loader is themed there. */
 export function expectThemedPath(route) {
   expect({ route, themed: isThemedPath(route) }).toEqual({ route, themed: true });
 }
@@ -196,7 +197,7 @@ export function describeScreenTheme({
       expectNegativeControl(scope, { allow });
     });
 
-    it(`registers ${route} in the rollout`, () => {
+    it(`${route} is a themed route`, () => {
       expectThemedPath(route);
     });
   });

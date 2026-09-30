@@ -101,7 +101,8 @@ describe('the commercial and trading course apps, further states', () => {
 
   it('registers the nine learning pages (their reader pages are 1C)', () => {
     for (const app of [...APPS, CONTRACTS]) expect(isThemedPath(`/dashboard/apps/${app.slug}`)).toBe(true);
-    expect(isThemedPath('/legacy-probe')).toBe(false);
+    // wave 7: every signed-in route is scoped, registered or not
+    expect(isThemedPath('/dashboard/legacy-probe')).toBe(true);
   });
 
   for (const app of APPS) {
