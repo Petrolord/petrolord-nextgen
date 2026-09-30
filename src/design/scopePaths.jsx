@@ -9,16 +9,29 @@
 // see a dark spinner before a light page and a dark user sees no light
 // flash. Every other route keeps its legacy loader byte for byte.
 //
-// Public and auth pages (login, register, verify, legal) will always render
-// light with no toggle once batch 6B lands (as the Suite's 7C). The list is
-// empty until then. The regal homepage keeps its own look and is never
-// listed.
+// Public and auth pages (login, register, verify, the password pages, legal)
+// always render light with no toggle since batch 6B (as the Suite's 7C): they
+// open their own scope through src/components/public/PublicPage.jsx, and
+// their loader paints light whatever this device last resolved. The regal
+// homepage keeps its own look and is never listed. The 404 page renders on
+// the same frame, but an unknown path cannot be listed, so its loader stays
+// the legacy one.
 import React from 'react';
 import { readLastTheme } from './ThemeProvider.jsx';
 import { DEFAULT_THEME } from './tokens.js';
 import { THEMED_ROUTES } from './rollout/index.js';
 
-export const PUBLIC_LIGHT_ROUTES = Object.freeze([]);
+export const PUBLIC_LIGHT_ROUTES = Object.freeze([
+  '/login',
+  '/register',
+  '/verify',
+  '/verify/:code',
+  '/forgot-password',
+  '/reset-password',
+  '/privacy-policy',
+  '/terms-of-service',
+  '/academic-integrity',
+]);
 
 const trimSlash = (p) => (p.length > 1 && p.endsWith('/') ? p.slice(0, -1) : p);
 
