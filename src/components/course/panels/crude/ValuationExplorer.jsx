@@ -1,12 +1,15 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, Legend, Cell,
+  LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, Legend, Cell,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
+import { seriesColor, SVG_CHART } from '@/utils/chartSvg';
 import {
   KWALE_SHARES, KWALE_CUT_POINTS, kwaleBlend, kwalePartial, studioPair, kwaleCuts, cutPointRange, netback, marker,
 } from './crudeLab';
 import {
-  AXIS, TOOLTIP, GRID, SERIES, f4, usable, Tbl, Basis, Shortcut, Refused, Note, Lead, Empty, safe, Slider, Toggle, Button,
+  AXIS, TOOLTIP, SERIES, f4, usable, Tbl, Basis, Shortcut, Refused, Note, Lead, Empty, safe, Slider, Toggle, Button,
 } from './panelBits';
 import { PanelShell, SelectField, FieldGrid } from '@/components/course/panels/petrophysics/panelKit';
 
@@ -49,20 +52,18 @@ export const BlendCurveMode = ({
         blendDistillationCurves: at every temperature either crude measured, the blend has distilled the volume-weighted
         sum of what each crude has distilled. Temperatures are never averaged.
       </Lead>
-      <div className="h-64 mt-2">
-        <ResponsiveContainer width="100%" height="100%">
+      <ChartFrame height={256} className="mt-2">
           <LineChart data={kw.table} margin={{ top: 10, right: 20, bottom: 10, left: 0 }}>
-            <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
+            <CartesianGrid {...GRID_STYLE} />
             <XAxis dataKey="temperatureF" type="number" domain={[0, 1500]} tick={AXIS} />
             <YAxis domain={[0, 100]} tick={AXIS} />
             <Tooltip contentStyle={TOOLTIP} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
+            <Legend {...LEGEND_PROPS} />
             <Line type="linear" dataKey="light" name="Kwale Light" stroke={SERIES[0]} dot={false} isAnimationActive={false} />
             <Line type="linear" dataKey="medium" name="Ughelli Medium" stroke={SERIES[1]} dot={false} isAnimationActive={false} />
             <Line type="linear" dataKey="blend" name="the blend (blendDistillationCurves)" stroke={SERIES[2]} strokeWidth={2} isAnimationActive={false} />
           </LineChart>
-        </ResponsiveContainer>
-      </div>
+        </ChartFrame>
       <Note>
         Blend API {f4(kw.api)}, SG {f4(kw.sg)}, sulfur {f4(kw.sulfurWtPct)} wt% on <Basis>{kw.sulfurBasis}</Basis>. The
         blend&apos;s curve has {kw.curve.length} points, one at every temperature either crude measured.
@@ -108,21 +109,19 @@ export const T50Mode = ({ kw, studio }) => {
         its difference from the engine&apos;s figure.
       </Lead>
       <Tbl head={['reading', 'F', 'what it is', 'minus the engine F']} rows={t50Rows(t)} />
-      <div className="h-56 mt-2">
-        <ResponsiveContainer width="100%" height="100%">
+      <ChartFrame height={224} className="mt-2">
           <LineChart data={kw.curve} margin={{ top: 10, right: 20, bottom: 10, left: 0 }}>
-            <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
+            <CartesianGrid {...GRID_STYLE} />
             <XAxis dataKey="temperatureF" type="number" domain={[300, 900]} allowDataOverflow tick={AXIS} />
             <YAxis domain={[0, 100]} tick={AXIS} />
             <Tooltip contentStyle={TOOLTIP} />
-            <ReferenceLine y={50} stroke="#64748b" strokeDasharray="4 2" />
-            <ReferenceLine x={t.t50} stroke={SERIES[2]} label={{ value: 'T50, the engine', fill: '#BFFF00', fontSize: 10, position: 'insideTopLeft' }} />
-            {t.grid !== null && <ReferenceLine x={t.grid} stroke="#94a3b8" strokeDasharray="4 2" label={{ value: 'grid', fill: '#94a3b8', fontSize: 10, position: 'insideTopRight' }} />}
-            <ReferenceLine x={t.volumeMean} stroke={SERIES[1]} strokeDasharray="2 2" label={{ value: 'averaged', fill: '#f472b6', fontSize: 10, position: 'insideBottomLeft' }} />
+            <ReferenceLine y={50} stroke={SVG_CHART.reference} strokeDasharray="4 2" />
+            <ReferenceLine x={t.t50} stroke={SERIES[2]} label={{ value: 'T50, the engine', fill: SERIES[2], fontSize: 10, position: 'insideTopLeft' }} />
+            {t.grid !== null && <ReferenceLine x={t.grid} stroke={SVG_CHART.reference} strokeDasharray="4 2" label={{ value: 'grid', fill: SVG_CHART.note, fontSize: 10, position: 'insideTopRight' }} />}
+            <ReferenceLine x={t.volumeMean} stroke={SERIES[1]} strokeDasharray="2 2" label={{ value: 'averaged', fill: SERIES[1], fontSize: 10, position: 'insideBottomLeft' }} />
             <Line type="linear" dataKey="volumePercent" name="blend" stroke={SERIES[0]} isAnimationActive={false} />
           </LineChart>
-        </ResponsiveContainer>
-      </div>
+        </ChartFrame>
       <Lead>
         Watson K, a SCREENING figure: the studio takes the boiling point as the blend&apos;s T50, and the strict basis is the
         mean average boiling point, which the studio does not compute (a held item, C13).
@@ -185,19 +184,17 @@ export const CutsMode = ({
         {' '}{cuts.unknownCuts.length ? cuts.unknownCuts.join(', ') : 'nothing'}. Yields add on volume, so the blend&apos;s yield is
         the volume-weighted yield of its crudes.
       </Note>
-      <div className="h-56 mt-2">
-        <ResponsiveContainer width="100%" height="100%">
+      <ChartFrame height={224} className="mt-2">
           <BarChart data={cuts.rows} margin={{ top: 10, right: 20, bottom: 10, left: 0 }}>
-            <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
+            <CartesianGrid {...GRID_STYLE} />
             <XAxis dataKey="name" tick={AXIS} interval={0} />
             <YAxis tick={AXIS} />
             <Tooltip contentStyle={TOOLTIP} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Bar dataKey="base" name="at the refinery's cut points" fill="#475569" isAnimationActive={false} />
+            <Legend {...LEGEND_PROPS} />
+            <Bar dataKey="base" name="at the refinery's cut points" fill={SVG_CHART.note} isAnimationActive={false} />
             <Bar dataKey="yieldVolPercent" name="at the points you set" fill={SERIES[2]} isAnimationActive={false} />
           </BarChart>
-        </ResponsiveContainer>
-      </div>
+        </ChartFrame>
     </>
   );
 };
@@ -229,20 +226,18 @@ export const NetbackMode = ({
         netbackValue, every term per barrel of crude. Losses are a shrinkage on the product side, so they come off the
         product value before the costs.
       </Lead>
-      <div className="h-64 mt-2">
-        <ResponsiveContainer width="100%" height="100%">
+      <ChartFrame height={256} className="mt-2">
           <BarChart data={nb.waterfall} margin={{ top: 10, right: 20, bottom: 30, left: 0 }}>
-            <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
+            <CartesianGrid {...GRID_STYLE} />
             <XAxis dataKey="step" tick={{ ...AXIS, fontSize: 9 }} interval={0} angle={-12} textAnchor="end" />
             <YAxis tick={AXIS} />
             <Tooltip contentStyle={TOOLTIP} />
             <Bar dataKey="low" stackId="w" fill="transparent" isAnimationActive={false} />
             <Bar dataKey="span" stackId="w" isAnimationActive={false}>
-              {nb.waterfall.map((w) => <Cell key={w.step} fill={w.value < 0 ? '#f87171' : w.step === 'netback' ? '#BFFF00' : SERIES[0]} />)}
+              {nb.waterfall.map((w) => <Cell key={w.step} fill={w.value < 0 ? seriesColor(3) : w.step === 'netback' ? SERIES[2] : SERIES[0]} />)}
             </Bar>
           </BarChart>
-        </ResponsiveContainer>
-      </div>
+        </ChartFrame>
       <Tbl head={['step', '$/bbl of crude']} rows={nb.waterfall.map((w) => [w.step, f4(w.value)])} />
       <Tbl
         head={['cut', 'yield volume percent', 'price $/bbl of product', 'value $/bbl of crude']}

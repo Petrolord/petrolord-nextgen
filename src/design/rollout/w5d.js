@@ -7,4 +7,5 @@ export default [
   '/dashboard/apps/facies',
   '/dashboard/apps/forecastml',
   '/dashboard/apps/appliedai',
+  '/dashboard/apps/crude',
 ];

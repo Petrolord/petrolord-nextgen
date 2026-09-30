@@ -1,14 +1,17 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, ComposedChart, Line, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceArea,
+  ComposedChart, Line, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceArea,
   ReferenceLine, BarChart, Bar,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE } from '@/utils/chartTheme';
+import { seriesColor, SVG_CHART } from '@/utils/chartSvg';
 import {
   LIBRARY, LIBRARY_IDS, BLANKABLE, OBIGBO_STABILITY_PAIRS, OBIGBO_BLEND_SHARES, library, gravity, refutas,
   blendOf, blanksAndRefusals, curvePlot, cutsOf, stability,
 } from './crudeLab';
 import {
-  AXIS, TOOLTIP, GRID, SERIES, f4, usable, Tbl, Basis, Shortcut, Refused, StableBadge, Note, Lead, Empty, safe,
+  AXIS, TOOLTIP, SERIES, f4, usable, Tbl, Basis, Shortcut, Refused, StableBadge, Note, Lead, Empty, safe,
   Slider, Toggle,
 } from './panelBits';
 import { PanelShell, SelectField, FieldGrid } from '@/components/course/panels/petrophysics/panelKit';
@@ -53,8 +56,8 @@ export const LibraryMode = ({ lib, gravity: g, refutas: r }) => {
       </Lead>
       <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {lib.map((c) => (
-          <div key={c.id} className="rounded-md border border-gray-700 bg-[#0F172A] p-3 text-xs text-slate-300">
-            <p className="text-white text-sm font-medium mb-1">{c.name}{c.partial ? ' (partial assay)' : ''}</p>
+          <div key={c.id} className="rounded-md border border-pl-border bg-pl-sunken p-3 text-xs text-pl-text">
+            <p className="text-pl-text text-sm font-medium mb-1">{c.name}{c.partial ? ' (partial assay)' : ''}</p>
             <p className="mb-0">API {c.api}, SG {f4(c.sg)} <Shortcut>(sgFromApi)</Shortcut></p>
             <p className="mb-0">sulfur {propLabel(c.properties.sulfurWtPct)} wt%, TAN {propLabel(c.properties.tanMgKohG)} mg KOH/g, nitrogen {propLabel(c.properties.nitrogenWtPct)} wt%</p>
             <p className="mb-0">nickel {propLabel(c.properties.nickelPpm)} ppm, vanadium {propLabel(c.properties.vanadiumPpm)} ppm</p>
@@ -63,8 +66,8 @@ export const LibraryMode = ({ lib, gravity: g, refutas: r }) => {
               <p className="mb-0">
                 SARA {c.sara.saturates}, {c.sara.aromatics}, {c.sara.resins}, {c.sara.asphaltenes} wt%; CII alone {f4(c.cii)}
               </p>
-            ) : <p className="mb-0 text-slate-500">no SARA analysis</p>}
-            <p className="mb-0 text-slate-400">TBP: {c.curve.map((q) => `${q.volumePercent} at ${q.temperatureF} F`).join('; ')}</p>
+            ) : <p className="mb-0 text-pl-muted">no SARA analysis</p>}
+            <p className="mb-0 text-pl-muted">TBP: {c.curve.map((q) => `${q.volumePercent} at ${q.temperatureF} F`).join('; ')}</p>
           </div>
         ))}
       </div>
@@ -187,7 +190,7 @@ export const BlendMode = ({
 
 // ---------------------------------------------------------------------------
 
-const BAND_FILL = ['#1e3a8a', '#134e4a'];
+const BAND_FILL = [seriesColor(0), seriesColor(1)];
 
 export const CurveMode = ({
   plot, cuts, pick, onPick,
@@ -210,23 +213,21 @@ export const CurveMode = ({
         unknown, beyond a partial curve, the line stops and the region is shaded as unknown: the curve says nothing
         there, and nothing is drawn as though it did.
       </Lead>
-      <div className="h-64 mt-2">
-        <ResponsiveContainer width="100%" height="100%">
+      <ChartFrame height={256} className="mt-2">
           <ComposedChart data={plot.sampled} margin={{ top: 10, right: 20, bottom: 10, left: 0 }}>
-            <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
-            <XAxis dataKey="temperatureF" type="number" domain={[0, 1600]} tick={AXIS} label={{ value: 'temperature F', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -4 }} />
-            <YAxis domain={[0, 100]} tick={AXIS} label={{ value: 'volume percent distilled', angle: -90, fill: '#94a3b8', fontSize: 11, position: 'insideLeft' }} />
+            <CartesianGrid {...GRID_STYLE} />
+            <XAxis dataKey="temperatureF" type="number" domain={[0, 1600]} tick={AXIS} label={{ value: 'temperature F', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -4 }} />
+            <YAxis domain={[0, 100]} tick={AXIS} label={{ value: 'volume percent distilled', angle: -90, fill: SVG_CHART.note, fontSize: 11, position: 'insideLeft' }} />
             <Tooltip contentStyle={TOOLTIP} />
             {okCuts && cuts.cuts.map((c, i) => (
-              <ReferenceArea key={c.id} x1={c.fromF === null ? 0 : c.fromF} x2={c.toF === null ? 1600 : c.toF} fill={BAND_FILL[i % 2]} fillOpacity={0.25} label={{ value: c.name.split(' /')[0], fill: '#cbd5e1', fontSize: 9, position: 'insideTop' }} />
+              <ReferenceArea key={c.id} x1={c.fromF === null ? 0 : c.fromF} x2={c.toF === null ? 1600 : c.toF} fill={BAND_FILL[i % 2]} fillOpacity={0.1} label={{ value: c.name.split(' /')[0], fill: SVG_CHART.note, fontSize: 9, position: 'insideTop' }} />
             ))}
-            {plot.unknownBelowF !== null && <ReferenceArea x1={0} x2={plot.unknownBelowF} fill="#7f1d1d" fillOpacity={0.35} label={{ value: 'unknown', fill: '#fca5a5', fontSize: 10 }} />}
-            {plot.unknownAboveF !== null && <ReferenceArea x1={plot.unknownAboveF} x2={1600} fill="#7f1d1d" fillOpacity={0.35} label={{ value: 'unknown', fill: '#fca5a5', fontSize: 10 }} />}
+            {plot.unknownBelowF !== null && <ReferenceArea x1={0} x2={plot.unknownBelowF} fill={seriesColor(3)} fillOpacity={0.12} label={{ value: 'unknown', fill: seriesColor(3), fontSize: 10 }} />}
+            {plot.unknownAboveF !== null && <ReferenceArea x1={plot.unknownAboveF} x2={1600} fill={seriesColor(3)} fillOpacity={0.12} label={{ value: 'unknown', fill: seriesColor(3), fontSize: 10 }} />}
             <Line type="linear" dataKey="volumePercent" stroke={SERIES[0]} dot={false} connectNulls={false} name="volumePercentAt" isAnimationActive={false} />
             <Scatter data={measured} dataKey="measured" fill={SERIES[2]} name="measured point" isAnimationActive={false} />
           </ComposedChart>
-        </ResponsiveContainer>
-      </div>
+        </ChartFrame>
       {okCuts ? (
         <>
           <Lead>cutYields on the studio&apos;s default cut set, each cut the curve at its upper bound minus the curve at its lower bound:</Lead>
@@ -267,9 +268,9 @@ export const StabilityMode = ({
       {controls}
       <div className="mt-3 flex items-center gap-3">
         <StableBadge stable={st.stable} />
-        <span className="text-xs text-slate-400">basis {st.basis}{st.band ? `, band ${st.band}` : ''}</span>
+        <span className="text-xs text-pl-muted">basis {st.basis}{st.band ? `, band ${st.band}` : ''}</span>
       </div>
-      <p className="text-xs text-slate-300 font-mono mt-2 mb-0">{st.message}</p>
+      <p className="text-xs text-pl-text font-mono mt-2 mb-0">{st.message}</p>
       {st.basis === 'cii' && st.blendedSara && (
         <>
           <Lead>Each SARA fraction blended on mass, and CII = (saturates + asphaltenes) / (aromatics + resins):</Lead>
@@ -278,20 +279,18 @@ export const StabilityMode = ({
             rows={[[f4(st.blendedSara.saturates), f4(st.blendedSara.aromatics), f4(st.blendedSara.resins), f4(st.blendedSara.asphaltenes), f4(st.cii), f4(st.ciiOnVolume)]]}
           />
           {bands && (
-            <div className="h-24 mt-2">
-              <ResponsiveContainer width="100%" height="100%">
+            <ChartFrame height={96} className="mt-2">
                 <BarChart layout="vertical" data={[{ name: 'CII', cii: st.cii }]} margin={{ top: 4, right: 20, bottom: 4, left: 10 }}>
                   <XAxis type="number" domain={[0, 2]} tick={AXIS} />
                   <YAxis type="category" dataKey="name" tick={AXIS} width={40} />
-                  <ReferenceArea x1={0} x2={bands.STABLE} fill="#065f46" fillOpacity={0.3} />
-                  <ReferenceArea x1={bands.STABLE} x2={bands.UNSTABLE} fill="#92400e" fillOpacity={0.3} />
-                  <ReferenceArea x1={bands.UNSTABLE} x2={2} fill="#7f1d1d" fillOpacity={0.3} />
-                  <ReferenceLine x={bands.STABLE} stroke="#fbbf24" label={{ value: String(bands.STABLE), fill: '#fbbf24', fontSize: 10, position: 'top' }} />
-                  <ReferenceLine x={bands.UNSTABLE} stroke="#f87171" label={{ value: String(bands.UNSTABLE), fill: '#f87171', fontSize: 10, position: 'top' }} />
+                  <ReferenceArea x1={0} x2={bands.STABLE} fill={seriesColor(1)} fillOpacity={0.15} />
+                  <ReferenceArea x1={bands.STABLE} x2={bands.UNSTABLE} fill={seriesColor(2)} fillOpacity={0.15} />
+                  <ReferenceArea x1={bands.UNSTABLE} x2={2} fill={seriesColor(3)} fillOpacity={0.15} />
+                  <ReferenceLine x={bands.STABLE} stroke={seriesColor(2)} label={{ value: String(bands.STABLE), fill: seriesColor(2), fontSize: 10, position: 'top' }} />
+                  <ReferenceLine x={bands.UNSTABLE} stroke={seriesColor(3)} label={{ value: String(bands.UNSTABLE), fill: seriesColor(3), fontSize: 10, position: 'top' }} />
                   <Bar dataKey="cii" fill={SERIES[0]} isAnimationActive={false} />
                 </BarChart>
-              </ResponsiveContainer>
-            </div>
+              </ChartFrame>
           )}
           <Note>
             The bands are the two the engine exports, below {bands ? String(bands.STABLE) : 'the first'} stable and at or

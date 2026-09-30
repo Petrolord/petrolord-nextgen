@@ -1,14 +1,16 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, ScatterChart, Scatter, LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+  ScatterChart, Scatter, LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
 import {
   TEXTBOOK_LP, APAPA_PMS_POOL, APAPA_AGO_POOL, PMS_LIMITS, LIMIT_RANGES, PMS_BLANKS, PROBES, ROW_BASES,
   textbookDrag, lpCases, pmsRecipe, giveaway, blendingRules, relief, reliefResolve, reliefSweep, agoRecipe,
   refusedAndSkipped,
 } from './crudeLab';
 import {
-  AXIS, TOOLTIP, GRID, SERIES, f4, usable, Tbl, Basis, Shortcut, Refused, Note, Lead, Empty, safe, Slider,
+  AXIS, TOOLTIP, SERIES, f4, usable, Tbl, Basis, Shortcut, Refused, Note, Lead, Empty, safe, Slider,
 } from './panelBits';
 import { PanelShell, SelectField, FieldGrid } from '@/components/course/panels/petrophysics/panelKit';
 
@@ -67,20 +69,18 @@ export const LpMode = ({
         sides you set, its corners found by the kernel itself: asked to maximise in 72 directions, every distinct optimum
         it returns is a vertex. The dashed line is the objective through the optimum, which sits on a vertex.
       </Lead>
-      <div className="h-72 mt-2">
-        <ResponsiveContainer width="100%" height="100%">
+      <ChartFrame height={288} className="mt-2">
           <ScatterChart margin={{ top: 10, right: 20, bottom: 10, left: 0 }}>
-            <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
+            <CartesianGrid {...GRID_STYLE} />
             <XAxis dataKey="x" type="number" domain={[0, 8]} tick={AXIS} name="x" />
             <YAxis dataKey="y" type="number" domain={[0, 8]} tick={AXIS} name="y" />
             <Tooltip contentStyle={TOOLTIP} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
+            <Legend {...LEGEND_PROPS} />
             <Scatter name="feasible region, vertices from the kernel" data={polygon} line fill={SERIES[0]} isAnimationActive={false} />
             {m.objectiveLine && <Scatter name="objective line through the optimum" data={m.objectiveLine} line={{ strokeDasharray: '5 3' }} fill={SERIES[3]} isAnimationActive={false} />}
             {m.status === 'optimal' && <Scatter name="the optimum" data={[{ x: m.x[0], y: m.x[1] }]} fill={SERIES[2]} isAnimationActive={false} />}
           </ScatterChart>
-        </ResponsiveContainer>
-      </div>
+        </ChartFrame>
       <Tbl head={['vertex x', 'vertex y', 'objective at the vertex']} rows={m.vertices.map((v) => [f4(v.x), f4(v.y), f4(v.objective)])} />
       <Tbl
         head={['', 'status', 'x', 'y', 'objective', 'row price, row 1', 'row price, row 2', 'iterations']}
@@ -143,17 +143,15 @@ export const PmsMode = ({ pms, giveaway: gv, rules }) => {
         Total {f4(pms.totalVolume)} bbl for {f4(pms.totalCost)} $, unit cost {f4(pms.unitCost)} $/bbl. At their
         availability: {pms.atAvailability.length ? pms.atAvailability.join(', ') : 'nothing'}.
       </Note>
-      <div className="h-48 mt-2">
-        <ResponsiveContainer width="100%" height="100%">
+      <ChartFrame height={192} className="mt-2">
           <BarChart data={pms.recipe} margin={{ top: 10, right: 20, bottom: 10, left: 0 }}>
-            <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
+            <CartesianGrid {...GRID_STYLE} />
             <XAxis dataKey="name" tick={AXIS} />
             <YAxis tick={AXIS} />
             <Tooltip contentStyle={TOOLTIP} />
             <Bar dataKey="volume" name="volume bbl" fill={SERIES[0]} isAnimationActive={false} />
           </BarChart>
-        </ResponsiveContainer>
-      </div>
+        </ChartFrame>
       <Lead>Achieved, recomputed by each specification&apos;s own rule. Binding rows are highlighted: the optimum is pressed against them.</Lead>
       <Tbl head={['specification', 'min', 'max', 'achieved', 'giveaway', 'binding', 'basis']} rows={specRows(pms.achieved)} highlight={(i) => pms.achieved[i].binding} />
       {usable(gv) && Array.isArray(gv.rows) && (
@@ -208,19 +206,17 @@ export const ReliefMode = ({
         />
       ) : <Empty>The re-solve has returned nothing.</Empty>}
       {Array.isArray(sweep) && (
-        <div className="h-56 mt-2">
-          <ResponsiveContainer width="100%" height="100%">
+        <ChartFrame height={224} className="mt-2">
             <LineChart data={sweep} margin={{ top: 10, right: 20, bottom: 10, left: 0 }}>
-              <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
+              <CartesianGrid {...GRID_STYLE} />
               <XAxis dataKey="limit" type="number" domain={['dataMin', 'dataMax']} tick={AXIS} />
               <YAxis tick={AXIS} />
               <Tooltip contentStyle={TOOLTIP} />
-              <Legend wrapperStyle={{ fontSize: 11 }} />
+              <Legend {...LEGEND_PROPS} />
               <Line dataKey="saving" name="saving, re-solved" stroke={SERIES[2]} isAnimationActive={false} connectNulls={false} />
               <Line dataKey="predicted" name="shadow price x relief" stroke={SERIES[1]} strokeDasharray="4 2" dot={false} isAnimationActive={false} />
             </LineChart>
-          </ResponsiveContainer>
-        </div>
+          </ChartFrame>
       )}
       <Note>A shadow price is a derivative at the optimum. One whole unit of relief can differ from it, because the rows move non-linearly in the limit and the optimal vertex can change.</Note>
       {usable(rel.marginal) && (
@@ -256,17 +252,15 @@ export const AgoMode = ({ ago, agoVol }) => {
         rows={ago.recipe.map((x, i) => [x.name, f4(x.volume), vol ? f4(vol.recipe[i].volume) : 'not formed'])}
       />
       <Note>Total cost {f4(ago.totalCost)} $, unit cost {f4(ago.unitCost)} $/bbl.</Note>
-      <div className="h-48 mt-2">
-        <ResponsiveContainer width="100%" height="100%">
+      <ChartFrame height={192} className="mt-2">
           <BarChart data={ago.recipe} margin={{ top: 10, right: 20, bottom: 10, left: 0 }}>
-            <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
+            <CartesianGrid {...GRID_STYLE} />
             <XAxis dataKey="name" tick={AXIS} />
             <YAxis tick={AXIS} />
             <Tooltip contentStyle={TOOLTIP} />
-            <Bar dataKey="volume" name="volume bbl" fill={SERIES[4]} isAnimationActive={false} />
+            <Bar dataKey="volume" name="volume bbl" fill={SERIES[1]} isAnimationActive={false} />
           </BarChart>
-        </ResponsiveContainer>
-      </div>
+        </ChartFrame>
       <Tbl
         head={['specification', 'achieved', 'giveaway', 'binding', 'value of one unit of relief $', 'per']}
         rows={ago.bySpec.map((s) => [s.name, f4(s.value), f4(s.giveaway), s.binding ? 'binding' : 'not binding', f4(s.price), s.per])}
