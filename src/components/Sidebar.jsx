@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
+import * as DialogPrimitive from '@radix-ui/react-dialog';
 import {
   Briefcase,
   Settings,
@@ -13,7 +14,8 @@ import {
   Award,
   KeyRound,
   MonitorSmartphone,
-  SlidersHorizontal
+  SlidersHorizontal,
+  X
 } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { useRole } from '@/contexts/RoleContext';
@@ -30,6 +32,13 @@ import { RAIL_ITEM, RAIL_ITEM_ACTIVE, RAIL_ITEM_IDLE } from '@/components/sideba
 // pl-* roles below resolve to the dark ink palette whatever the page next
 // to it uses. Lime is retired: the active item is a raised fill with a gold
 // edge, group titles are gold eyebrows.
+//
+// Phone (wave 7): below md the rail is hidden, and the header menu button
+// opens the same rail in a drawer (SIDEBAR_DRAWER_ID). The drawer is a modal
+// dialog: focus is trapped inside it, Escape and the scrim close it, and it
+// closes when the route changes. It starts closed.
+
+export const SIDEBAR_DRAWER_ID = 'sidebar-drawer';
 
 const SidebarItem = ({ to, icon: Icon, label, exact = false }) => {
   const location = useLocation();
@@ -64,8 +73,7 @@ const SidebarGroup = ({ title, children }) => (
   </div>
 );
 
-const Sidebar = () => {
-  const { isFullScreen } = useApplicationLayout();
+const RailContent = () => {
   const {
     isViewAsSuperAdmin,
     isViewAsAdmin,
@@ -75,15 +83,7 @@ const Sidebar = () => {
   const isSponsorLead = useIsSponsorLead();
 
   return (
-    <FixedTheme theme="dark">
-    <aside
-      data-pl-theme="dark"
-      data-testid="sidebar-rail"
-      aria-label="Main navigation"
-      className={cn(
-        "hidden md:flex flex-col bg-pl-surface border-r border-pl-border h-screen overflow-y-auto whitespace-nowrap font-pl-sans",
-        isFullScreen ? "invisible" : "visible w-64"
-    )}>
+    <>
       {/* Brand */}
       <div className="p-6 flex items-center gap-3">
         <img src="/favicon.png" alt="" aria-hidden="true" className="w-8 h-8 rounded-lg object-contain shrink-0" />
@@ -168,7 +168,76 @@ const Sidebar = () => {
       <div className="p-4 border-t border-pl-border">
         <SidebarItem to="/dashboard/settings" icon={Settings} label="Settings" />
       </div>
+    </>
+  );
+};
+
+const MD_QUERY = '(min-width: 768px)';
+
+const Sidebar = ({ sidebarOpen = false, setSidebarOpen }) => {
+  const { isFullScreen } = useApplicationLayout();
+  const { pathname } = useLocation();
+  const close = () => { if (setSidebarOpen) setSidebarOpen(false); };
+
+  // The drawer closes on navigation.
+  useEffect(() => {
+    close();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
+
+  // It is a phone control: at md and wider the rail itself is on show.
+  useEffect(() => {
+    if (!sidebarOpen || typeof window === 'undefined' || !window.matchMedia) return undefined;
+    const mq = window.matchMedia(MD_QUERY);
+    const onChange = (e) => { if (e.matches) close(); };
+    if (mq.matches) close();
+    mq.addEventListener?.('change', onChange);
+    return () => mq.removeEventListener?.('change', onChange);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sidebarOpen]);
+
+  return (
+    <FixedTheme theme="dark">
+    <aside
+      data-pl-theme="dark"
+      data-testid="sidebar-rail"
+      aria-label="Main navigation"
+      className={cn(
+        "hidden md:flex flex-col bg-pl-surface border-r border-pl-border h-screen overflow-y-auto whitespace-nowrap font-pl-sans",
+        isFullScreen ? "invisible" : "visible w-64"
+    )}>
+      <RailContent />
     </aside>
+
+    <DialogPrimitive.Root open={Boolean(sidebarOpen) && !isFullScreen} onOpenChange={(open) => { if (!open) close(); }}>
+      <DialogPrimitive.Portal>
+        <DialogPrimitive.Overlay
+          data-testid="sidebar-drawer-scrim"
+          className="fixed inset-0 z-40 bg-black/50 md:hidden"
+        />
+        <DialogPrimitive.Content
+          id={SIDEBAR_DRAWER_ID}
+          data-pl-theme="dark"
+          data-testid="sidebar-drawer"
+          aria-describedby={undefined}
+          onCloseAutoFocus={(e) => {
+            // back to the header menu button (Safari does not focus a button on click)
+            const trigger = document.querySelector(`[aria-controls="${SIDEBAR_DRAWER_ID}"]`);
+            if (trigger) { e.preventDefault(); trigger.focus(); }
+          }}
+          className="fixed inset-y-0 left-0 z-50 flex w-72 max-w-[85vw] flex-col overflow-y-auto whitespace-nowrap border-r border-pl-border bg-pl-surface font-pl-sans shadow-pl-lg focus:outline-none md:hidden"
+        >
+          <DialogPrimitive.Title className="sr-only">Main navigation</DialogPrimitive.Title>
+          <DialogPrimitive.Close
+            aria-label="Close navigation"
+            className="absolute right-3 top-5 rounded-md p-2 text-pl-muted hover:bg-pl-raised hover:text-pl-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus"
+          >
+            <X className="h-5 w-5" aria-hidden="true" />
+          </DialogPrimitive.Close>
+          <RailContent />
+        </DialogPrimitive.Content>
+      </DialogPrimitive.Portal>
+    </DialogPrimitive.Root>
     </FixedTheme>
   );
 };

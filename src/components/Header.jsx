@@ -16,11 +16,12 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import ViewAsSelector from '@/components/ViewAsSelector';
 import NotificationBell from '@/components/notifications/NotificationBell';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
+import { SIDEBAR_DRAWER_ID } from '@/components/Sidebar';
 
 // Design system (docs/scope/DesignSystem-Rollout.md): the header sits inside
 // the signed-in scope on theme roles and shows the light/dark ThemeToggle.
 
-const Header = () => {
+const Header = ({ sidebarOpen = false, setSidebarOpen }) => {
   const { user, signOut, profile } = useAuth();
   const { isFullScreen, currentAppName, moduleName, exitFullScreen } = useApplicationLayout();
   const navigate = useNavigate();
@@ -53,8 +54,20 @@ const Header = () => {
         ) : (
             /* Normal Mode: Mobile Trigger & View Selector */
             <div className="flex items-center gap-2">
-                <Button variant="ghost" size="icon" className="md:hidden text-pl-muted">
-                    <Menu className="w-6 h-6" />
+                {/* Phone: opens the navigation drawer (the rail is hidden below md) */}
+                <Button
+                    type="button"
+                    variant="ghost"
+                    size="icon"
+                    className="md:hidden text-pl-muted"
+                    aria-label="Open navigation"
+                    aria-haspopup="dialog"
+                    aria-expanded={sidebarOpen ? 'true' : 'false'}
+                    aria-controls={SIDEBAR_DRAWER_ID}
+                    data-testid="nav-menu-button"
+                    onClick={() => setSidebarOpen && setSidebarOpen(true)}
+                >
+                    <Menu className="w-6 h-6" aria-hidden="true" />
                 </Button>
                 
                 {/* View As Selector - placed prominently in header for Admins */}
