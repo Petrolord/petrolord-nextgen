@@ -104,7 +104,7 @@ export const CartMode = () => {
       {tree && tree.error && <Refusal r={tree} />}
       {tree && !tree.error && (
         <>
-          <pre className="mt-3 text-xs text-slate-300 overflow-x-auto">{tree.printed}</pre>
+          <pre className="mt-3 text-xs text-pl-text overflow-x-auto">{tree.printed}</pre>
           <TileGrid>
             <Tile label="Nodes" value={String(tree.nNodes)} />
             <Tile label="Leaves" value={String(tree.nLeaves)} />

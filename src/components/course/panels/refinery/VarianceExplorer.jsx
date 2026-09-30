@@ -1,13 +1,15 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
 import {
   START_YEAR, START_YEAR_CHECK, odiomaPlan, odiomaActuals, varianceOf, expansionOf,
   usd, bbl, pbl, pct, mmd,
 } from './refineryLab';
 import {
-  AXIS, TOOLTIP, GRID, SERIES, txt, yes, Tbl, Refused, Note, Lead, Empty, safe, usable, BoxField, Button, Check, toneOf,
+  AXIS, TOOLTIP, SERIES, txt, yes, Tbl, Refused, Note, Lead, Empty, safe, usable, BoxField, Button, Check, toneOf,
 } from './panelBits';
 import {
   PanelShell, SelectField, Tile, TileGrid, FieldGrid,
@@ -157,21 +159,19 @@ export const ExpansionMode = ({
       <Tbl
         head={['year', 'calendar year', 'gross revenue (MM)', 'opex (MM)', 'capex (MM)', 'taxable income before relief (MM)', 'tax (MM)', 'loss carried forward (MM)', 'net cash flow (MM)']}
         rows={exp.rows.map((r) => [r.index, r.year, mmd(r.grossRevenue), mmd(r.opex), mmd(r.capex), mmd(r.taxableBeforeRelief), mmd(r.tax), mmd(r.lossCarriedForward), mmd(r.ncf)])}
-        tone={(k) => (k === exp.firstTaxYear ? 'text-[#BFFF00]' : '')}
+        tone={(k) => (k === exp.firstTaxYear ? 'text-pl-accent-text font-semibold' : '')}
       />
-      <div className="mt-3">
-        <ResponsiveContainer width="100%" height={220}>
+      <ChartFrame height={220} className="mt-3">
           <BarChart data={data} margin={{ top: 8, right: 16, left: 8, bottom: 8 }}>
-            <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
+            <CartesianGrid {...GRID_STYLE} />
             <XAxis dataKey="year" tick={AXIS} />
             <YAxis tick={AXIS} width={50} />
             <Tooltip contentStyle={TOOLTIP} formatter={(x) => mmd(x)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
+            <Legend {...LEGEND_PROPS} />
             <Bar dataKey="tax" name={carry ? 'tax, loss carried forward (MM)' : 'tax, option off (MM)'} fill={SERIES[0]} />
             <Bar dataKey="off" name="tax, option off (MM)" fill={SERIES[1]} />
           </BarChart>
-        </ResponsiveContainer>
-      </div>
+        </ChartFrame>
       <Note>
         Total tax with the loss carried forward {mmd(exp.totalTaxOn)} MM, with the option off {mmd(exp.totalTaxOff)} MM; the
         difference {exp.totalTaxDifference} MM. The capital is expensed in the years it is spent, so the construction years

@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, ComposedChart, Line, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+  ComposedChart, Line, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import {
   individualsOf, ewmaOf, cusumOf, scorecardOf, parseSeries, parseNumber, pressureCharts, ekeneScorecard,
   ekeneDimensions, EKENE_WEIGHTS, DATASET,
@@ -26,26 +29,24 @@ export const MODES = [
   ['scorecard', 'The scorecard: a score per dimension and weights'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
 const W = DATASET.EKENE_WHP;
 
 const ChartBox = ({ data, lines, flaggedKey }) => (
-  <div className="h-56 mt-3">
-    <ResponsiveContainer width="100%" height="100%">
+  <ChartFrame height={224} className="mt-3">
       <ComposedChart data={data} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-        <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
+        <CartesianGrid {...GRID_STYLE} />
         <XAxis dataKey="day" tick={AXIS} />
         <YAxis tick={AXIS} domain={['auto', 'auto']} />
         <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
-        <Legend wrapperStyle={{ fontSize: 11 }} />
+        <Legend {...LEGEND_PROPS} />
         {lines.map(([key, name, stroke, dashed]) => (
           <Line key={key} dataKey={key} name={name} stroke={stroke} dot={key === lines[0][0]} strokeDasharray={dashed ? '4 3' : undefined} isAnimationActive={false} />
         ))}
-        {flaggedKey && <Scatter dataKey={flaggedKey} name="signal" fill="#fbbf24" isAnimationActive={false} />}
+        {flaggedKey && <Scatter dataKey={flaggedKey} name="signal" fill={seriesColor(2)} isAnimationActive={false} />}
       </ComposedChart>
-    </ResponsiveContainer>
-  </div>
+  </ChartFrame>
 );
 
 export const IndividualsMode = ({ t }) => {
@@ -80,7 +81,7 @@ export const IndividualsMode = ({ t }) => {
       {p2 && p2.error && <Refusal r={p2} />}
       {p2 && !p2.error && (
         <>
-          <ChartBox data={data} lines={[['value', 'value', '#38bdf8'], ['ucl', 'upper limit', '#f472b6', true], ['lcl', 'lower limit', '#f472b6', true], ['centre', 'centre', '#BFFF00']]} flaggedKey="flagged" />
+          <ChartBox data={data} lines={[['value', 'value', seriesColor(0)], ['ucl', 'upper limit', seriesColor(4), true], ['lcl', 'lower limit', seriesColor(4), true], ['centre', 'centre', seriesColor(1)]]} flaggedKey="flagged" />
           <Flags flags={p2.flags} label="entry (day less one)" />
         </>
       )}
@@ -119,7 +120,7 @@ export const EwmaMode = ({ t }) => {
       {r && r.error && <Refusal r={r} />}
       {r && !r.error && (
         <>
-          <ChartBox data={data} lines={[['ewma', 'EWMA', '#38bdf8'], ['ucl', 'upper limit', '#f472b6', true], ['lcl', 'lower limit', '#f472b6', true], ['value', 'observation', '#64748b']]} flaggedKey="flagged" />
+          <ChartBox data={data} lines={[['ewma', 'EWMA', seriesColor(0)], ['ucl', 'upper limit', seriesColor(4), true], ['lcl', 'lower limit', seriesColor(4), true], ['value', 'observation', SVG_CHART.reference]]} flaggedKey="flagged" />
           <Flags flags={r.flags} label="entry (day less one)" />
           <Declared title="WHERE THE CHART STARTS">{r.basis.start}</Declared>
         </>
@@ -164,7 +165,7 @@ export const CusumMode = ({ t }) => {
             <Tile label="First upper signal, day" value={r.firstSignalHigh === null ? 'none' : String(r.firstSignalHigh + 1)} />
             <Tile label="First lower signal, day" value={r.firstSignalLow === null ? 'none' : String(r.firstSignalLow + 1)} />
           </TileGrid>
-          <ChartBox data={data} lines={[['sHigh', 'upper CUSUM', '#38bdf8'], ['sLow', 'lower CUSUM', '#a78bfa'], ['h', 'h', '#f472b6', true]]} />
+          <ChartBox data={data} lines={[['sHigh', 'upper CUSUM', seriesColor(0)], ['sLow', 'lower CUSUM', seriesColor(1)], ['h', 'h', seriesColor(4), true]]} />
         </>
       )}
       <Note>No reset after a signal. A signal is a CUSUM strictly above h.</Note>

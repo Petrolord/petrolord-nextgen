@@ -829,7 +829,67 @@ carbon (`/dashboard/apps/carbon`) are on the roles and registered in
   white plate with the mark, every series in a kit colour, the atoms on
   their status roles, and a source scan with a negative control).
 
-## 16. Batch 6A: commercial and trading course apps (as built)
+## 16. Batch 5D: data and AI, crude, refinery and supply course apps (as built)
+
+Oilfield data quality (`/dashboard/apps/dataqc`), machine learning on well
+data (`/dashboard/apps/mlcore`), electrofacies (`/dashboard/apps/facies`),
+production forecasting (`/dashboard/apps/forecastml`), applied AI
+(`/dashboard/apps/appliedai`), crude assay and blending
+(`/dashboard/apps/crude`), refinery feasibility and planning
+(`/dashboard/apps/refinery`) and terminals, depots and fuel supply
+(`/dashboard/apps/supply`) are on the roles and registered in
+`src/design/rollout/w5d.js`. The batch was not split.
+
+- The twenty-four panels and each course's `panelBits` are used by their
+  learning page, the lesson reader and the handbook, which 1C already themes,
+  so they moved straight to roles with no legacy branch. No file is shared
+  with 5A, 5B or 5C. The labs (`*Lab.js`), the guards and the vendored
+  engines are untouched.
+- The page recipe is 4D's: cards on `surface`, lessons and the locked
+  capstone note on `sunken`, tier buttons primary when chosen (with
+  `aria-pressed`), capstone results and toasts on the success and danger
+  roles with their words, certificate number and award icon gold.
+- Panel bits: refusals on the danger roles, engine warnings and notes on the
+  warning roles, declared-basis boxes and the basis tag on the info roles,
+  the stability badge on success, danger and warning with its words. Typed
+  boxes and series text areas take the Suite input styling, sliders and
+  checkboxes `accent-pl-primary`, and a chosen option button is primary (with
+  `aria-pressed`).
+- Every chart (27 frames, all Recharts) is in `ChartFrame` with `GRID_STYLE`,
+  `AXIS_TICK`, `TOOLTIP_STYLE`, `LEGEND_PROPS` and axis titles on
+  `SVG_CHART.note`. Data quality and ML core: sky to `seriesColor(0)`, lime
+  to `(1)`, the pink limits to `(4)`, amber signals to `(2)`, the grey
+  observation trace to `SVG_CHART.reference`. Crude, refinery and supply
+  index a six-slot `SERIES` array in their panel bits; it now reads blue,
+  violet, green, amber, the ink note, red. Zero lines, guides and the ullage
+  bars take `SVG_CHART.reference`; the base-case bars take `SVG_CHART.note`.
+  The TBP cut bands, the unknown regions and the CII bands are light tints of
+  kit colours.
+- Table highlights: a binding row and the first tax year are gold
+  (`accent-text`, semibold); rows at a limit keep their green on
+  `primary-text`; a negative margin row and margin losses are `danger-text`,
+  gains `success-text`; schedule receipts are `info-text` and lifts
+  `accent-text`.
+- No lesson in these eight courses names a chart colour. One panel note did:
+  the refinery schedule's "in pink a product lift" now says gold, in its own
+  commit.
+- The engine's `none`, `null` and `unknown` readings are its own answers that
+  the lessons teach, so they are unchanged.
+- The crude, refinery and supply lab tests scanned the source for
+  `ResponsiveContainer` with a width and a height; they now also count
+  `ChartFrame`, which states its height.
+- Screen fix: the crude TBP chart's y-axis title was clipped at the top and
+  is now centred.
+- Tests: `src/pages/__tests__/DataAiDownstream5D.theme.test.jsx` (the four
+  standard checks per app, every tier in both themes with no lime left and
+  the charts on the white plate, capstone pass, fail and locked, the Learning
+  Mode gate, no network) and
+  `src/components/course/panels/__tests__/DataAiDownstream5DPanels.theme.test.jsx`
+  (every view of every panel in both themes, every plot on the white plate
+  with the mark, every series in a kit colour, and a source scan with a
+  negative control).
+
+## 17. Batch 6A: commercial and trading course apps (as built)
 
 Procurement (`/dashboard/apps/procurement`), marine logistics
 (`/dashboard/apps/marine`), the Petroleum Industry Act

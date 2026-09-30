@@ -1,3 +1,13 @@
-// Batch 5D routes (docs/scope/DesignSystem-Rollout.md section 3). Empty until
-// the batch lands; the batch lists its routes here and nowhere else.
-export default [];
+// Batch 5D routes (docs/scope/DesignSystem-Rollout.md section 3): the data
+// and AI course apps, then crude, refinery and supply. Exact paths: each
+// app's course reader pages are batch 1C's pattern entry.
+export default [
+  '/dashboard/apps/dataqc',
+  '/dashboard/apps/mlcore',
+  '/dashboard/apps/facies',
+  '/dashboard/apps/forecastml',
+  '/dashboard/apps/appliedai',
+  '/dashboard/apps/crude',
+  '/dashboard/apps/refinery',
+  '/dashboard/apps/supply',
+];
