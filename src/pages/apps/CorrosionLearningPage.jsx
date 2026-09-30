@@ -304,6 +304,7 @@ const CorrosionLearningPage = () => {
                 key={t}
                 type="button"
                 onClick={() => setTier(t)}
+                aria-pressed={tier === t}
                 className={`px-3 py-1.5 rounded-md border text-sm capitalize ${tier === t ? 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold' : 'bg-pl-surface text-pl-text border-pl-border-strong hover:bg-pl-sunken'}`}
               >
                 {t} tier
