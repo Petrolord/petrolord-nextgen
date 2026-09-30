@@ -172,7 +172,7 @@ const PiaLearningPage = () => {
 
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="relative z-10 space-y-6">
           <div>
-            <h1 className="text-3xl font-bold text-pl-text flex items-center gap-2">
+            <h1 className="text-3xl font-bold text-pl-text flex flex-wrap items-center gap-2">
               <Database className="h-7 w-7 text-pl-accent-text" /> Petroleum Industry Act 2021 &amp; Nigerian Fiscal Terms
               <span className="text-xs px-2 py-0.5 rounded-full bg-pl-accent/15 text-pl-accent-text border border-pl-accent/40">Learning Mode</span>
             </h1>
