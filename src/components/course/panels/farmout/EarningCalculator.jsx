@@ -121,10 +121,10 @@ export const ConsentLine = () => {
   const r = safe(() => feeOf(STARTS.earnConsent));
   if (!r || r.error) return null;
   return (
-    <div className="mt-3 rounded-md border border-sky-800/60 bg-sky-950/20 p-3">
-      <p className="text-sky-300 text-xs font-medium mb-1">THE CONSENT IN WORDS, AS THE ENGINE STATES IT</p>
-      <p className="text-xs text-slate-300 mb-0 font-mono">{r.basis.consent}</p>
-      <p className="text-xs text-slate-400 mt-1 mb-0">The fee on an assignment is computed in the deal calculator.</p>
+    <div className="mt-3 rounded-md border border-pl-info/40 bg-pl-info-bg p-3">
+      <p className="text-pl-info-text text-xs font-medium mb-1">THE CONSENT IN WORDS, AS THE ENGINE STATES IT</p>
+      <p className="text-xs text-pl-text mb-0 font-mono">{r.basis.consent}</p>
+      <p className="text-xs text-pl-muted mt-1 mb-0">The fee on an assignment is computed in the deal calculator.</p>
     </div>
   );
 };

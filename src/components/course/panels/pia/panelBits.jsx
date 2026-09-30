@@ -8,8 +8,8 @@ export const list = (a) => (a && a.length ? a.join(', ') : 'none');
 
 export const Tbl = ({ head, rows }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>{head.map((h, i) => <th key={h} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>)}</tr>
       </thead>
       <tbody>
@@ -26,12 +26,12 @@ export const Tbl = ({ head, rows }) => (
 /** A free-text box: a list of values, or a table whose first line names its columns. */
 export const TextField = ({ label, value, onChange, rows = 3 }) => (
   <div className="col-span-2 sm:col-span-3 lg:col-span-5">
-    <Label className="text-gray-400 text-xs mb-1 block">{label}</Label>
+    <Label className="text-pl-muted text-xs mb-1 block">{label}</Label>
     <textarea
       value={value}
       rows={rows}
       onChange={(e) => onChange(e.target.value)}
-      className="w-full bg-gray-700 text-white border border-gray-600 rounded-md text-xs p-2 font-mono"
+      className="w-full bg-pl-surface text-pl-text border border-pl-border-strong rounded-md text-xs p-2 font-mono"
     />
   </div>
 );
@@ -39,12 +39,12 @@ export const TextField = ({ label, value, onChange, rows = 3 }) => (
 /** A short text box for a word or a list of years. */
 export const WordField = ({ label, value, onChange }) => (
   <div>
-    <Label className="text-gray-400 text-xs mb-1 block">{label}</Label>
+    <Label className="text-pl-muted text-xs mb-1 block">{label}</Label>
     <input
       type="text"
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className="w-full bg-gray-700 text-white border border-gray-600 rounded-md text-xs h-8 px-2 font-mono"
+      className="w-full bg-pl-surface text-pl-text border border-pl-border-strong rounded-md text-xs h-8 px-2 font-mono"
     />
   </div>
 );
@@ -62,24 +62,24 @@ export const taughtRefusal = (text) => {
 
 /** The engine's own refusal, verbatim (its taught part). */
 export const Refusal = ({ text }) => (
-  <div className="mt-3 rounded-md border border-red-800/60 bg-red-950/20 p-3">
-    <p className="text-red-300 text-xs font-medium mb-1">THE ENGINE REFUSED, IN ITS OWN WORDS</p>
-    <p className="text-xs text-slate-300 mb-0 font-mono">{taughtRefusal(text)}</p>
+  <div className="mt-3 rounded-md border border-pl-danger/40 bg-pl-danger-bg p-3">
+    <p className="text-pl-danger-text text-xs font-medium mb-1">THE ENGINE REFUSED, IN ITS OWN WORDS</p>
+    <p className="text-xs text-pl-text mb-0 font-mono">{taughtRefusal(text)}</p>
   </div>
 );
 
 /** An engine note from kpis.pia_notes, verbatim. */
 export const EngineNote = ({ text }) => (
-  <div className="mt-3 rounded-md border border-amber-800/60 bg-amber-950/20 p-3">
-    <p className="text-amber-300 text-xs font-medium mb-1">THE ENGINE NOTES</p>
-    <p className="text-xs text-slate-300 mb-0 font-mono">{text}</p>
+  <div className="mt-3 rounded-md border border-pl-warning/40 bg-pl-warning-bg p-3">
+    <p className="text-pl-warning-text text-xs font-medium mb-1">THE ENGINE NOTES</p>
+    <p className="text-xs text-pl-text mb-0 font-mono">{text}</p>
   </div>
 );
 
 export const Declared = ({ title, children }) => (
-  <div className="mt-3 rounded-md border border-sky-800/60 bg-sky-950/20 p-3">
-    <p className="text-sky-300 text-xs font-medium mb-1">{title}</p>
-    <p className="text-xs text-slate-300 mb-0">{children}</p>
+  <div className="mt-3 rounded-md border border-pl-info/40 bg-pl-info-bg p-3">
+    <p className="text-pl-info-text text-xs font-medium mb-1">{title}</p>
+    <p className="text-xs text-pl-text mb-0">{children}</p>
   </div>
 );
 
