@@ -3,7 +3,6 @@ import {
   displacementWith, textbookCase, btDaysAt, displacementCase, btDaysFor, EKENE_SCAL,
 } from './scalLab';
 import { PanelShell, Tile, TileGrid, Note, NumField, FieldGrid } from '@/components/course/panels/petrophysics/panelKit';
-import { useThemeClass } from '@/design/themeClass';
 import SvgChartFrame from '@/components/charts/SvgChartFrame';
 import { seriesColor, SVG_CHART, AXIS_LINE_PROPS } from '@/utils/chartSvg';
 
@@ -36,23 +35,21 @@ const fmt = (v, d = 4) => (Number.isFinite(v) ? Number(v).toLocaleString('en-US'
 const sci = (v, d = 6) => (Number.isFinite(v) ? Number(v).toPrecision(d) : '-');
 
 const RangeField = ({ label, value, min, max, step, onChange, disabled }) => {
-  const tc = useThemeClass();
   return (
   <div>
-    <p className={tc('text-gray-400 text-xs mb-1', 'text-pl-muted text-xs mb-1')}>
-      {label}: <span className={tc('text-white', 'text-pl-text')}>{value}</span>
+    <p className="text-pl-muted text-xs mb-1">
+      {label}: <span className="text-pl-text">{value}</span>
     </p>
     <input
       type="range" min={min} max={max} step={step} value={value} disabled={disabled}
       onChange={(e) => onChange(Number(e.target.value))}
-      className={tc('w-full accent-[#BFFF00] disabled:opacity-40', 'w-full accent-pl-primary disabled:opacity-40')}
+      className="w-full accent-pl-primary disabled:opacity-40"
     />
   </div>
   );
 };
 
 const DisplacementExplorer = () => {
-  const tc = useThemeClass();
   const [muO, setMuO] = useState(EKENE_SCAL.design.muO_cp);
   const [nw, setNw] = useState(EKENE_SCAL.design.krSpec.nw);
   const [textbook, setTextbook] = useState(false);
@@ -88,7 +85,7 @@ const DisplacementExplorer = () => {
   const modeButton = (
     <button
       type="button" onClick={() => { setTyped((v) => !v); setTextbook(false); }}
-      className={tc(`px-3 py-1.5 rounded-md border text-xs ${typed ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold' : 'bg-gray-800 text-gray-300 border-gray-600'}`, `px-3 py-1.5 rounded-md border text-xs ${typed ? 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold' : 'bg-pl-surface text-pl-text border-pl-border-strong'}`)}
+      className={`px-3 py-1.5 rounded-md border text-xs ${typed ? 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold' : 'bg-pl-surface text-pl-text border-pl-border-strong'}`}
     >
       {typed ? 'Your case: every input typed' : 'Type your own case'}
     </button>
@@ -123,7 +120,7 @@ const DisplacementExplorer = () => {
         <RangeField label="Water Corey exponent nw" value={nw} min={1} max={4} step={0.1} onChange={setNw} disabled={textbook} />
         <button
           type="button" onClick={() => setTextbook((v) => !v)}
-          className={tc(`px-3 py-1.5 rounded-md border text-xs ${textbook ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold' : 'bg-gray-800 text-gray-300 border-gray-600'}`, `px-3 py-1.5 rounded-md border text-xs ${textbook ? 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold' : 'bg-pl-surface text-pl-text border-pl-border-strong'}`)}
+          className={`px-3 py-1.5 rounded-md border text-xs ${textbook ? 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold' : 'bg-pl-surface text-pl-text border-pl-border-strong'}`}
         >
           {textbook ? 'Textbook case (M = 4) active' : 'Load the textbook case'}
         </button>

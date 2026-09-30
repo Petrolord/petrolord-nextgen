@@ -3,7 +3,6 @@ import {
   patternLedger, patternAdvice, allocationAudit, fieldLedger, surveillanceWith, PATTERNS, ALLOCATION,
 } from './floodLab';
 import { PanelShell, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
-import { useThemeClass } from '@/design/themeClass';
 import SvgChartFrame from '@/components/charts/SvgChartFrame';
 import { seriesColor, SVG_CHART, GRID_LINE_PROPS, REFERENCE_LINE_PROPS } from '@/utils/chartSvg';
 
@@ -20,12 +19,11 @@ const PAD = { left: 46, top: 14, right: 16, bottom: 34 };
 // A typed number box, dressed like the sliders (the capstone states values
 // the sliders do not reach).
 const NumBox = ({ label, value, onChange }) => {
-  const tc = useThemeClass();
   return (
   <div>
-    <p className={tc('text-gray-400 text-xs mb-1', 'text-pl-muted text-xs mb-1')}>{label}</p>
+    <p className="text-pl-muted text-xs mb-1">{label}</p>
     <input value={value} onChange={(e) => onChange(e.target.value)}
-      className={tc('w-full bg-gray-800 border border-gray-600 rounded-md text-white text-xs px-2 py-1.5', 'w-full bg-pl-surface border border-pl-border-strong rounded-md text-pl-text text-xs px-2 py-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus')} />
+      className="w-full bg-pl-surface border border-pl-border-strong rounded-md text-pl-text text-xs px-2 py-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus" />
   </div>
   );
 };
@@ -33,23 +31,21 @@ const NumBox = ({ label, value, onChange }) => {
 const fmt = (v, d = 4) => (Number.isFinite(v) ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d }) : '-');
 
 const RangeField = ({ label, value, min, max, step, onChange }) => {
-  const tc = useThemeClass();
   return (
   <div>
-    <p className={tc('text-gray-400 text-xs mb-1', 'text-pl-muted text-xs mb-1')}>
-      {label}: <span className={tc('text-white', 'text-pl-text')}>{value}</span>
+    <p className="text-pl-muted text-xs mb-1">
+      {label}: <span className="text-pl-text">{value}</span>
     </p>
     <input
       type="range" min={min} max={max} step={step} value={value}
       onChange={(e) => onChange(Number(e.target.value))}
-      className={tc('w-full accent-[#BFFF00]', 'w-full accent-pl-primary')}
+      className="w-full accent-pl-primary"
     />
   </div>
   );
 };
 
 const PatternExplorer = () => {
-  const tc = useThemeClass();
   const [name, setName] = useState(PATTERNS[0].name);
   const [target, setTarget] = useState(1.0);
   const [win, setWin] = useState(3);
@@ -112,10 +108,10 @@ const PatternExplorer = () => {
     >
       <div className="grid gap-4 sm:grid-cols-3 items-end">
         <div>
-          <p className={tc('text-gray-400 text-xs mb-1', 'text-pl-muted text-xs mb-1')}>Pattern</p>
+          <p className="text-pl-muted text-xs mb-1">Pattern</p>
           <select
             value={name} onChange={(e) => setName(e.target.value)}
-            className={tc('w-full bg-gray-800 border border-gray-600 rounded-md text-white text-xs px-2 py-1.5', 'w-full bg-pl-surface border border-pl-border-strong rounded-md text-pl-text text-xs px-2 py-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus')}
+            className="w-full bg-pl-surface border border-pl-border-strong rounded-md text-pl-text text-xs px-2 py-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus"
           >
             {PATTERNS.map((p) => <option key={p.name} value={p.name}>{p.name}</option>)}
             <option value="Unrouted element">Unrouted element (no allocation)</option>
@@ -131,7 +127,7 @@ const PatternExplorer = () => {
         ))}
         <NumBox label="Target VRR (typed)" value={targetT} onChange={setTargetT} />
       </div>
-      <p className={tc('text-xs text-gray-500 mt-1', 'text-xs text-pl-muted mt-1')}>
+      <p className="text-xs text-pl-muted mt-1">
         The allocation opens on the teaching matrix and the target on the slider. A capstone brief states its own; type it in.
       </p>
 
@@ -155,8 +151,8 @@ const PatternExplorer = () => {
       )}
 
       <div className="mt-3">
-        <p className={tc('text-gray-400 text-xs mb-1', 'text-pl-muted text-xs mb-1')}>Where every injected barrel went ({fmt(totalAlloc, 0)} bbl)</p>
-        <div className={tc('flex w-full h-5 rounded overflow-hidden border border-gray-700', 'flex w-full h-5 rounded overflow-hidden border border-pl-border')}>
+        <p className="text-pl-muted text-xs mb-1">Where every injected barrel went ({fmt(totalAlloc, 0)} bbl)</p>
+        <div className="flex w-full h-5 rounded overflow-hidden border border-pl-border">
           {bars.map((b, i) => (
             <div
               key={b.label}
@@ -179,13 +175,13 @@ const PatternExplorer = () => {
       </TileGrid>
 
       <div className="mt-4">
-        <p className={tc('text-gray-400 text-xs mb-1', 'text-pl-muted text-xs mb-1')}>Surveillance diagnostics on the daily rows (opens on the whole record, pressure above the reference, smoothing 3)</p>
+        <p className="text-pl-muted text-xs mb-1">Surveillance diagnostics on the daily rows (opens on the whole record, pressure above the reference, smoothing 3)</p>
         <div className="grid gap-4 sm:grid-cols-4 items-end">
           <NumBox label="Rows through (YYYY-MM-DD, blank for all)" value={through} onChange={setThrough} />
           <NumBox label="Chan smoothing (points)" value={smooth} onChange={setSmooth} />
           <button
             type="button" onClick={() => setAbove((v) => !v)}
-            className={tc(`px-3 py-1.5 rounded-md border text-xs ${above ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold' : 'bg-gray-800 text-gray-300 border-gray-600'}`, `px-3 py-1.5 rounded-md border text-xs ${above ? 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold' : 'bg-pl-surface text-pl-text border-pl-border-strong'}`)}
+            className={`px-3 py-1.5 rounded-md border text-xs ${above ? 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold' : 'bg-pl-surface text-pl-text border-pl-border-strong'}`}
           >
             {above ? 'Hall on pressure above the reference' : 'Hall on absolute pressure'}
           </button>

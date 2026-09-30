@@ -3,7 +3,6 @@ import {
   plugJTables, fitPlugJ, reservoirCapillary, makeJFunction, TEACHING_ROCK,
 } from './scalLab';
 import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
-import { useThemeClass } from '@/design/themeClass';
 import SvgChartFrame from '@/components/charts/SvgChartFrame';
 import { seriesColor, SVG_CHART, AXIS_LINE_PROPS } from '@/utils/chartSvg';
 
@@ -25,7 +24,6 @@ const sci = (v, d = 6) => (Number.isFinite(v) ? Number(v).toPrecision(d) : '-');
 const PLUG_COLORS = [seriesColor(1), seriesColor(3), seriesColor(4)];
 
 const JFunctionExplorer = () => {
-  const tc = useThemeClass();
   const [plugSel, setPlugSel] = useState('all');
   const [swirrText, setSwirrText] = useState('0.25');
   const [kText, setKText] = useState(String(TEACHING_ROCK.k_md));

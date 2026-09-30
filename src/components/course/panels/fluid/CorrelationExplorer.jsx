@@ -6,7 +6,6 @@ import {
 import {
   PanelShell, Tile, TileGrid, Note, NumField,
 } from '@/components/course/panels/petrophysics/panelKit';
-import { useThemeClass } from '@/design/themeClass';
 
 // Correlation explorer: the black-oil description of one oil, three
 // correlations at a time. The point is that the correlations disagree, that
@@ -18,7 +17,6 @@ const fmt = (v, d = 4) => (Number.isFinite(v)
   : '-');
 
 const CorrelationExplorer = () => {
-  const tc = useThemeClass();
   const [api, setApi] = useState(String(EKENE.api));
   const [gasSg, setGasSg] = useState(String(EKENE.gasSg));
   const [tempF, setTempF] = useState(String(EKENE.tempF));
@@ -83,9 +81,9 @@ const CorrelationExplorer = () => {
         <NumField label="Pressure (psia)" value={pPsia} onChange={setPPsia} />
       </div>
 
-      <div className={tc('mt-4 rounded border border-gray-700 overflow-x-auto', 'mt-4 rounded border border-pl-border overflow-x-auto')}>
+      <div className="mt-4 rounded border border-pl-border overflow-x-auto">
         <table className="w-full text-xs">
-          <thead className={tc('bg-black/40 text-gray-400', 'bg-pl-sunken text-pl-muted')}>
+          <thead className="bg-pl-sunken text-pl-muted">
             <tr>
               <th className="text-left p-2">Correlation</th>
               <th className="text-right p-2">Bubble point (psia)</th>
@@ -96,14 +94,14 @@ const CorrelationExplorer = () => {
           </thead>
           <tbody>
             {rows.map((r) => (
-              <tr key={r.name} className={tc('border-t border-gray-800', 'border-t border-pl-border')}>
-                <td className={tc('p-2 text-white', 'p-2 text-pl-text')}>
-                  {r.name} <span className={tc('text-gray-500', 'text-pl-muted')}>({r.year})</span>
+              <tr key={r.name} className="border-t border-pl-border">
+                <td className="p-2 text-pl-text">
+                  {r.name} <span className="text-pl-muted">({r.year})</span>
                 </td>
-                <td className={tc('p-2 text-right text-gray-200', 'p-2 text-right text-pl-text')}>{fmt(r.pbAtRs, 1)}</td>
-                <td className={tc('p-2 text-right text-gray-200', 'p-2 text-right text-pl-text')}>{fmt(r.rsAtPb, 2)}</td>
-                <td className={tc('p-2 text-right text-gray-200', 'p-2 text-right text-pl-text')}>{fmt(r.boAtRs, 4)}</td>
-                <td className={tc(`p-2 ${r.tier === 'screening' ? 'text-amber-400' : 'text-gray-400'}`, `p-2 ${r.tier === 'screening' ? 'text-pl-warning-text' : 'text-pl-muted'}`)}>
+                <td className="p-2 text-right text-pl-text">{fmt(r.pbAtRs, 1)}</td>
+                <td className="p-2 text-right text-pl-text">{fmt(r.rsAtPb, 2)}</td>
+                <td className="p-2 text-right text-pl-text">{fmt(r.boAtRs, 4)}</td>
+                <td className={`p-2 ${r.tier === 'screening' ? 'text-pl-warning-text' : 'text-pl-muted'}`}>
                   {r.tier.replace('_', ' ')}
                 </td>
               </tr>
@@ -135,11 +133,11 @@ const CorrelationExplorer = () => {
             the engine starts naming the correlation and the bound it has left.
           </Note>
         ) : (
-          <div className={tc('rounded border border-amber-700/60 bg-amber-950/30 p-3', 'rounded border border-pl-warning/40 bg-pl-warning-bg p-3')}>
-            <p className={tc('text-amber-300 text-xs font-medium mb-1', 'text-pl-warning-text text-xs font-medium mb-1')}>
+          <div className="rounded border border-pl-warning/40 bg-pl-warning-bg p-3">
+            <p className="text-pl-warning-text text-xs font-medium mb-1">
               {warn.total} validity {warn.total === 1 ? 'warning' : 'warnings'}
             </p>
-            <ul className={tc('text-[11px] text-amber-200/90 space-y-1 list-disc pl-4', 'text-[11px] text-pl-text space-y-1 list-disc pl-4')}>
+            <ul className="text-[11px] text-pl-text space-y-1 list-disc pl-4">
               {[...warn.correlation, ...warn.viscosity].map((w) => (
                 <li key={w}>{w}</li>
               ))}

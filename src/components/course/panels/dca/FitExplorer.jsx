@@ -3,7 +3,6 @@ import {
   WELLS, FLOOD_START, ECON_LIMIT_BOPD, fitWell, bookFromFit, arpsRate, arpsCum, daysBetween,
 } from './declineLab';
 import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
-import { useThemeClass } from '@/design/themeClass';
 import SvgChartFrame from '@/components/charts/SvgChartFrame';
 import { seriesColor, SVG_CHART, AXIS_LINE_PROPS } from '@/utils/chartSvg';
 
@@ -32,7 +31,6 @@ const WINDOW_OPTIONS = [
 const fmt = (v, d = 4) => (Number.isFinite(v) ? Number(v).toFixed(d) : '-');
 
 const FitExplorer = () => {
-  const tc = useThemeClass();
   const [wellName, setWellName] = useState('Ekene-1');
   const [model, setModel] = useState('Auto-Select');
   const [windowKey, setWindowKey] = useState('primary');
@@ -114,7 +112,7 @@ const FitExplorer = () => {
       <div className="grid gap-3 grid-cols-2 sm:grid-cols-4">
         <NumField label="Economic limit (stb/d)" value={limit} onChange={setLimit} />
         <NumFieldLike label="Np up to (YYYY-MM-DD)" value={npDate} onChange={setNpDate} />
-        <div className={tc('text-xs text-gray-500 sm:col-span-2', 'text-xs text-pl-muted sm:col-span-2')}>
+        <div className="text-xs text-pl-muted sm:col-span-2">
           The panel opens on the teaching case: {ECON_LIMIT_BOPD} stb/d and Np to the flood start. A
           capstone brief states its own well, window, limit and date; set them here.
         </div>
@@ -186,12 +184,11 @@ const FitExplorer = () => {
 
 // Text input dressed like the panelKit fields (dates rather than numbers).
 const NumFieldLike = ({ label, value, onChange }) => {
-  const tc = useThemeClass();
   return (
   <div>
-    <p className={tc('text-gray-400 text-xs mb-1', 'text-pl-muted text-xs mb-1')}>{label}</p>
+    <p className="text-pl-muted text-xs mb-1">{label}</p>
     <input value={value} onChange={(e) => onChange(e.target.value)}
-      className={tc('w-full bg-gray-700 text-white border border-gray-600 rounded-md h-8 text-sm px-2', 'w-full bg-pl-surface text-pl-text border border-pl-border-strong rounded-md h-8 text-sm px-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus')} />
+      className="w-full bg-pl-surface text-pl-text border border-pl-border-strong rounded-md h-8 text-sm px-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus" />
   </div>
   );
 };

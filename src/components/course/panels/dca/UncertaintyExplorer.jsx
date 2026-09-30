@@ -3,7 +3,6 @@ import {
   B_LEVERAGE_BASE, bLeverageRow, FIELD_TRIANGLE, triangularSummary,
 } from './declineLab';
 import { PanelShell, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
-import { useThemeClass } from '@/design/themeClass';
 import SvgChartFrame from '@/components/charts/SvgChartFrame';
 import { seriesColor, SVG_CHART, AXIS_LINE_PROPS } from '@/utils/chartSvg';
 
@@ -21,7 +20,6 @@ const CH = 220;
 const PAD = { left: 64, top: 14, right: 14, bottom: 30 };
 
 const UncertaintyExplorer = () => {
-  const tc = useThemeClass();
   const [bIdx, setBIdx] = useState(24); // default b = 1.2, the governance case
   const [triMin, setTriMin] = useState(String(FIELD_TRIANGLE.min));
   const [triMode, setTriMode] = useState(String(FIELD_TRIANGLE.mode));
@@ -64,10 +62,10 @@ const UncertaintyExplorer = () => {
         <circle cx={xOf(b)} cy={yOf(row.eur)} r="4" fill={seriesColor(3)} />
       </SvgChartFrame>
       <div className="flex items-center gap-3">
-        <span className={tc('text-xs text-gray-500 shrink-0', 'text-xs text-pl-muted shrink-0')}>Decline exponent b</span>
+        <span className="text-xs text-pl-muted shrink-0">Decline exponent b</span>
         <input type="range" min="0" max={B_STEPS.length - 1} step="1" value={bIdx}
           onChange={(e) => setBIdx(Number(e.target.value))} className="w-full" />
-        <span className={tc('text-sm text-white w-14 text-right', 'text-sm text-pl-text w-14 text-right')}>{b.toFixed(2)}</span>
+        <span className="text-sm text-pl-text w-14 text-right">{b.toFixed(2)}</span>
         <div className="w-40 shrink-0">
           <NumField label="Limit (stb/d)" value={limit} onChange={setLimit} />
         </div>
@@ -79,8 +77,8 @@ const UncertaintyExplorer = () => {
         <Tile label="Harmonic booking (b=1)" value={fmt(curve[20].eur, 1)} unit="stb" />
       </TileGrid>
 
-      <div className={tc('pt-2 border-t border-gray-700 space-y-3', 'pt-2 border-t border-pl-border space-y-3')}>
-        <p className={tc('text-white text-sm font-medium mb-0', 'text-pl-text text-sm font-medium mb-0')}>Field EUR triangle (closed-form quantiles)</p>
+      <div className="pt-2 border-t border-pl-border space-y-3">
+        <p className="text-pl-text text-sm font-medium mb-0">Field EUR triangle (closed-form quantiles)</p>
         <div className="grid gap-3 grid-cols-3">
           <NumField label="Minimum (stb)" value={triMin} onChange={setTriMin} />
           <NumField label="Mode (stb)" value={triMode} onChange={setTriMode} />

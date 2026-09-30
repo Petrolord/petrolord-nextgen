@@ -1,8 +1,7 @@
 // Renders src/design/theme.css from src/design/tokens.js.
 //
-// Every selector is scoped under [data-pl-theme], so the stylesheet is inert
-// for any page that has not opted in: the global :root variables in
-// src/index.css keep driving the legacy dark screens untouched.
+// Every selector is scoped under [data-pl-theme]: a screen is themed by the
+// scope it sits in (the signed-in scope, a public page, a fixed rail).
 // Ported unchanged from the Suite (see the note in tokens.js).
 import {
   THEMES, SHADOWS, FONTS, SHADCN_ALIASES, CHART_SERIES, CHART_SURFACE, CANVAS_RADIUS,

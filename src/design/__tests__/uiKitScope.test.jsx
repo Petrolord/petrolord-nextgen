@@ -46,11 +46,13 @@ describe('the ui kit inside a scope', () => {
     });
   }
 
-  it('toasts at the app root follow the themed screen on show, and stay legacy without one', () => {
+  it('toasts at the app root follow the themed screen on show, and are light without one', () => {
     const Toasts = Object.fromEntries(UI_SCENES).toast;
     render(<Toasts />);
-    const legacyViewport = document.querySelector('ol');
-    expect(legacyViewport.hasAttribute('data-pl-theme')).toBe(false);
+    const bare = document.querySelector('ol');
+    expect(bare.getAttribute('data-pl-theme')).toBe('light');
+    expect(bare.querySelector('li').className).toMatch(/bg-pl-raised/);
+    expect([...bare.querySelectorAll('[class]')].filter((el) => hasLegacyChrome(el.getAttribute('class')))).toEqual([]);
     cleanup();
 
     window.localStorage.setItem(themeStorageKey('u-kit'), 'dark');

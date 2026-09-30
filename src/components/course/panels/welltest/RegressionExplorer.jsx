@@ -4,7 +4,6 @@ import {
   pseudoPressureGap, deliverabilityCase, rtaOil, rtaGas, rtaLinear,
 } from './welltestLab';
 import { PanelShell, SelectField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
-import { useThemeClass } from '@/design/themeClass';
 
 // Regression explorer: the automatic match, and the production-data analyses
 // that use no shut-in at all. Two modes because they answer two different
@@ -35,7 +34,6 @@ const WEIGHT_OPTIONS = [
 ];
 
 const FitMode = () => {
-  const tc = useThemeClass();
   const [modelId, setModelId] = useState('homogeneous');
   const [fixtureId, setFixtureId] = useState('buildup');
   const [weight, setWeight] = useState('1');
@@ -61,9 +59,9 @@ const FitMode = () => {
         <SelectField label="Residuals" value={weight} onChange={setWeight} options={WEIGHT_OPTIONS} />
       </div>
 
-      <div className={tc('mt-3 rounded border border-gray-700 overflow-x-auto', 'mt-3 rounded border border-pl-border overflow-x-auto')}>
+      <div className="mt-3 rounded border border-pl-border overflow-x-auto">
         <table className="w-full text-xs">
-          <thead className={tc('bg-black/40 text-gray-400', 'bg-pl-sunken text-pl-muted')}>
+          <thead className="bg-pl-sunken text-pl-muted">
             <tr>
               <th className="text-left p-2">Parameter</th>
               <th className="text-right p-2">Fitted</th>
@@ -78,16 +76,16 @@ const FitMode = () => {
               const v = fit.params[meta.key];
               const off = t !== null && Math.abs(v - t) > Math.max(Math.abs(t) * 0.02, 1e-9);
               return (
-                <tr key={meta.key} className={tc('border-t border-gray-800', 'border-t border-pl-border')}>
-                  <td className={tc('p-2 text-white', 'p-2 text-pl-text')}>
-                    {meta.label} <span className={tc('text-gray-500', 'text-pl-muted')}>({meta.unit})</span>
+                <tr key={meta.key} className="border-t border-pl-border">
+                  <td className="p-2 text-pl-text">
+                    {meta.label} <span className="text-pl-muted">({meta.unit})</span>
                   </td>
-                  <td className={tc(`p-2 text-right ${off ? 'text-amber-400' : 'text-gray-200'}`, `p-2 text-right ${off ? 'text-pl-warning-text' : 'text-pl-text'}`)}>{fmt(v)}</td>
-                  <td className={tc('p-2 text-right text-gray-400', 'p-2 text-right text-pl-muted')}>
+                  <td className={`p-2 text-right ${off ? 'text-pl-warning-text' : 'text-pl-text'}`}>{fmt(v)}</td>
+                  <td className="p-2 text-right text-pl-muted">
                     {fmt(fit.confidence95[meta.key][0])} to {fmt(fit.confidence95[meta.key][1])}
                   </td>
-                  <td className={tc('p-2 text-right text-gray-400', 'p-2 text-right text-pl-muted')}>{fmt(fit.intervalWidth[meta.key])}</td>
-                  <td className={tc('p-2 text-right text-gray-500', 'p-2 text-right text-pl-muted')}>{t === null ? 'not in this test' : String(t)}</td>
+                  <td className="p-2 text-right text-pl-muted">{fmt(fit.intervalWidth[meta.key])}</td>
+                  <td className="p-2 text-right text-pl-muted">{t === null ? 'not in this test' : String(t)}</td>
                 </tr>
               );
             })}
@@ -103,11 +101,11 @@ const FitMode = () => {
       </TileGrid>
 
       {phantom && (
-        <div className={tc('mt-3 rounded border border-amber-700/60 bg-amber-950/30 p-3', 'mt-3 rounded border border-pl-warning/40 bg-pl-warning-bg p-3')}>
-          <p className={tc('text-amber-300 text-xs font-medium mb-1', 'text-pl-warning-text text-xs font-medium mb-1')}>
+        <div className="mt-3 rounded border border-pl-warning/40 bg-pl-warning-bg p-3">
+          <p className="text-pl-warning-text text-xs font-medium mb-1">
             There is no fault in this test, and the fit has found one anyway
           </p>
-          <p className={tc('text-[11px] text-amber-200/90', 'text-[11px] text-pl-text')}>
+          <p className="text-[11px] text-pl-text">
             Write the same pressure change two arithmetically equivalent ways, differing by
             {' '}{phantom.dataGap.toExponential(3)} psi, and the boundary moves
             {' '}{fmt(phantom.distanceGapFt, 2)} ft, from {fmt(phantom.storedDp.L, 2)} to
@@ -129,7 +127,6 @@ const FitMode = () => {
 };
 
 const ProductionMode = () => {
-  const tc = useThemeClass();
   const mr = useMemo(() => multiRateCase(), []);
   const oil = useMemo(() => rtaOil(), []);
   const gas = useMemo(() => rtaGas(), []);
@@ -154,34 +151,34 @@ const ProductionMode = () => {
 
   return (
     <>
-      <p className={tc('text-[11px] text-gray-400', 'text-[11px] text-pl-muted')}>
+      <p className="text-[11px] text-pl-muted">
         No shut-in anywhere below. Rate and flowing pressure, a time transform, and a straight line.
       </p>
-      <div className={tc('mt-3 rounded border border-gray-700 overflow-x-auto', 'mt-3 rounded border border-pl-border overflow-x-auto')}>
+      <div className="mt-3 rounded border border-pl-border overflow-x-auto">
         <table className="w-full text-xs">
           <tbody>
             {rows.map(([label, value, unit]) => (
-              <tr key={label} className={tc('border-t border-gray-800 first:border-t-0', 'border-t border-pl-border first:border-t-0')}>
-                <td className={tc('p-2 text-gray-400', 'p-2 text-pl-muted')}>{label}</td>
-                <td className={tc('p-2 text-right text-white', 'p-2 text-right text-pl-text')}>{value}</td>
-                <td className={tc('p-2 text-gray-500', 'p-2 text-pl-muted')}>{unit}</td>
+              <tr key={label} className="border-t border-pl-border first:border-t-0">
+                <td className="p-2 text-pl-muted">{label}</td>
+                <td className="p-2 text-right text-pl-text">{value}</td>
+                <td className="p-2 text-pl-muted">{unit}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className={tc('mt-3 rounded border border-gray-700 overflow-x-auto', 'mt-3 rounded border border-pl-border overflow-x-auto')}>
+      <div className="mt-3 rounded border border-pl-border overflow-x-auto">
         <table className="w-full text-xs">
-          <thead className={tc('bg-black/40 text-gray-400', 'bg-pl-sunken text-pl-muted')}>
+          <thead className="bg-pl-sunken text-pl-muted">
             <tr>
               <th className="text-left p-2">If the permeability were</th>
               {lin.split.map((s) => <th key={s.k} className="text-right p-2">{s.k} mD</th>)}
             </tr>
           </thead>
           <tbody>
-            <tr className={tc('border-t border-gray-800', 'border-t border-pl-border')}>
-              <td className={tc('p-2 text-white', 'p-2 text-pl-text')}>the half-length would be (ft)</td>
-              {lin.split.map((s) => <td key={s.k} className={tc('p-2 text-right text-gray-200', 'p-2 text-right text-pl-text')}>{fmt(s.xf, 2)}</td>)}
+            <tr className="border-t border-pl-border">
+              <td className="p-2 text-pl-text">the half-length would be (ft)</td>
+              {lin.split.map((s) => <td key={s.k} className="p-2 text-right text-pl-text">{fmt(s.xf, 2)}</td>)}
             </tr>
           </tbody>
         </table>
@@ -196,7 +193,6 @@ const ProductionMode = () => {
 };
 
 const RegressionExplorer = () => {
-  const tc = useThemeClass();
   const [mode, setMode] = useState('fit');
   return (
     <PanelShell

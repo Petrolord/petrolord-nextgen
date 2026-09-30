@@ -5,8 +5,7 @@
 // courseKitScenes.jsx renders with no legacy console colour (lime, slate,
 // gray, the #0F172A / #1E293B plates, sky and the raw status hues) in light
 // and in dark, the scope opens light and the toggle goes to dark and back,
-// and the detector is proven live with a negative control. The legacy
-// branch outside a scope is courseKitLegacy.test.jsx.
+// and the detector is proven live with a negative control.
 import React from 'react';
 import { describe, it, expect, afterEach, beforeAll, beforeEach, vi } from 'vitest';
 import { render, cleanup, screen, fireEvent, waitFor } from '@testing-library/react';

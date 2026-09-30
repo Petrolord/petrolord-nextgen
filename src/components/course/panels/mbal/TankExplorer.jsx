@@ -3,7 +3,6 @@ import {
   runEkeneTank, reconciliation, runTank, typedTankInputs, runDakeTank, EKENE,
 } from './tankLab';
 import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
-import { useThemeClass } from '@/design/themeClass';
 import SvgChartFrame from '@/components/charts/SvgChartFrame';
 import { seriesColor, SVG_CHART, AXIS_LINE_PROPS } from '@/utils/chartSvg';
 
@@ -30,7 +29,6 @@ const fmt = (v, d = 4) => (Number.isFinite(v) ? Number(v).toLocaleString('en-US'
 const sci = (v, d = 6) => (Number.isFinite(v) ? Number(v).toPrecision(d) : '-');
 
 const TankExplorer = () => {
-  const tc = useThemeClass();
   const [dataset, setDataset] = useState('ekene');
   const [aquiferModel, setAquiferModel] = useState('none');
   const [dakeAquifer, setDakeAquifer] = useState('none');
@@ -76,7 +74,7 @@ const TankExplorer = () => {
             <NumField label="cf (1/psi)" value={form.cf} onChange={(v) => setForm((f) => ({ ...f, cf: v }))} />
             <NumField label="cw (1/psi)" value={form.cw} onChange={(v) => setForm((f) => ({ ...f, cw: v }))} />
           </div>
-          <p className={tc('text-xs text-gray-400 mb-0', 'text-xs text-pl-muted mb-0')}>Survey table: row 0 is the initial state (Np 0); every row above the bubble point.</p>
+          <p className="text-xs text-pl-muted mb-0">Survey table: row 0 is the initial state (Np 0); every row above the bubble point.</p>
           {form.rows.map((r, i) => (
             <div key={i} className="grid gap-2 grid-cols-3 sm:w-[32rem]">
               <NumField label={`Row ${i}: p (psia)`} value={r.p} onChange={setRow(i, 'p')} />
@@ -148,8 +146,8 @@ const TankExplorer = () => {
       </SvgChartFrame>
 
       <div className="overflow-x-auto">
-        <table className={tc('w-full text-xs text-gray-300', 'w-full text-xs text-pl-text')}>
-          <thead className={tc('text-gray-500', 'text-pl-muted')}>
+        <table className="w-full text-xs text-pl-text">
+          <thead className="text-pl-muted">
             <tr>
               {['n', 'date', 'p psia', 'Np stb', 'F rb', 'Eo rb/stb', 'Efw rb', 'Et rb', 'F/Et'].map((h) => (
                 <th key={h} className="text-left font-normal py-1 pr-3">{h}</th>
@@ -158,7 +156,7 @@ const TankExplorer = () => {
           </thead>
           <tbody>
             {rows.map((r) => (
-              <tr key={r.n} className={tc('border-t border-gray-800', 'border-t border-pl-border')}>
+              <tr key={r.n} className="border-t border-pl-border">
                 <td className="py-1 pr-3">{r.n}</td>
                 <td className="py-1 pr-3">{r.date}</td>
                 <td className="py-1 pr-3">{fmt(r.pressure_psia, 2)}</td>

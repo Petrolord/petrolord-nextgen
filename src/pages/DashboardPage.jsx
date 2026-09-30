@@ -115,14 +115,12 @@ import NotificationCenterPage from '@/pages/NotificationCenterPage';
 import { listAcademyApps, listMyEnrollments, listMyCertifications } from '@/services/academyService';
 import { MODULE_LABELS, moduleLabel } from '@/lib/academyModules';
 import { courseNameFrom } from '@/lib/appNames';
-import { useThemeClass } from '@/design/themeClass';
 
 // --- Role Specific Home Components ---
 //
 // Design system pilot (wave 0, docs/scope/DesignSystem-Rollout.md): the four
 // homes render only at /dashboard, which sits inside the signed-in scope, so
-// they use theme roles directly. The routes below them (/dashboard/modules/*
-// and the rest) keep their legacy look until their batch lands.
+// they use theme roles directly.
 
 const AdminHomeCard = ({ to, title, description, cta }) => (
     <Card className="h-full transition-all hover:border-pl-border-strong hover:shadow-pl-md">
@@ -389,12 +387,11 @@ const ModulePlaceholder = ({ name, icon: Icon, description }) => (
 const DashboardPage = () => {
   const { loading } = useAuth();
   const { viewRole } = useRole();
-  const tc = useThemeClass();
 
   if (loading) {
     return (
-        <div className={tc("flex items-center justify-center h-screen bg-[#0F172A]", "flex items-center justify-center h-screen")}>
-            <div className={tc("text-white animate-pulse", "text-pl-muted animate-pulse")}>Loading Dashboard...</div>
+        <div className="flex items-center justify-center h-screen">
+            <div className="text-pl-muted animate-pulse">Loading Dashboard...</div>
         </div>
     );
   }

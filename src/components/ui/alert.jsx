@@ -2,27 +2,10 @@ import * as React from "react"
 import { cva } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
-import { useDsTheme } from "@/design/themeContext"
 
+// Design system: the Suite's alert on theme roles, with the status variants
+// (danger, warning, success, info).
 const alertVariants = cva(
-  "relative w-full rounded-lg border p-4 [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground",
-  {
-    variants: {
-      variant: {
-        default: "bg-background text-foreground",
-        destructive:
-          "border-destructive/50 text-destructive dark:border-destructive [&>svg]:text-destructive",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-    },
-  }
-)
-
-// Design system: the Suite's alert on theme roles, inside a scope only. The
-// status variants (danger, warning, success, info) exist only here.
-const themedAlertVariants = cva(
   "relative w-full rounded-lg border p-4 [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4",
   {
     variants: {
@@ -42,12 +25,11 @@ const themedAlertVariants = cva(
 )
 
 const Alert = React.forwardRef(({ className, variant, ...props }, ref) => {
-  const variants = useDsTheme() ? themedAlertVariants : alertVariants
   return (
     <div
       ref={ref}
       role="alert"
-      className={cn(variants({ variant }), className)}
+      className={cn(alertVariants({ variant }), className)}
       {...props}
     />
   )

@@ -1,6 +1,5 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
-import { useDsTheme } from '@/design/themeContext';
 
 // A titled white card for a chart. It carries data-canvas="chart", which
 // inside a theme scope pins the light roles, so the title, the border
@@ -8,29 +7,19 @@ import { useDsTheme } from '@/design/themeContext';
 // keeps the white chartTheme + ChartLogo standard. Put a ChartFrame (or any
 // chart that follows the standard) in it.
 //
-// NextGen (batch 1B): the Suite's piece with the same API. While the rollout
-// runs, a course panel that uses it can still render outside a scope (the
-// unmigrated reader and handbook); there the theme roles do not resolve, so
-// it draws the same white card with fixed light classes.
+// NextGen (batch 1B): the Suite's piece with the same API.
 //
 //   <ChartPanel title="Rate vs time" subtitle="Oil, stb/d" actions={<Button size="sm">PNG</Button>}>
 //     <ChartFrame height={280}>...</ChartFrame>
 //   </ChartPanel>
-const LOOK = {
+const look = {
   card: 'rounded-xl border border-pl-border bg-pl-chart-surface p-4 text-pl-text shadow-pl-sm',
   title: 'text-sm font-semibold text-pl-text',
   subtitle: 'text-xs text-pl-muted',
 };
-const OUTSIDE_SCOPE_LOOK = {
-  card: 'rounded-xl border border-slate-300 bg-white p-4 text-slate-900 shadow-sm',
-  title: 'text-sm font-semibold text-slate-900',
-  subtitle: 'text-xs text-slate-600',
-};
-
 const ChartPanel = React.forwardRef(({
   title, subtitle, actions, as: Comp = 'section', className, bodyClassName, children, ...props
 }, ref) => {
-  const look = useDsTheme() ? LOOK : OUTSIDE_SCOPE_LOOK;
   const hasHead = title || subtitle || actions;
   return (
     <Comp ref={ref} data-canvas="chart" className={cn(look.card, className)} {...props}>

@@ -9,11 +9,7 @@
 // names "the hollow lime circle" (reservoircalc P-1, drawn with an ink
 // casing).
 //
-// The Well Correlation case inputs are shared with that course's learning
-// page (batch 3A), so they are scope-aware: outside a scope they render the
-// legacy classes byte for byte.
-//
-// panelKit is batch 1B's scope-aware kit and renders for real.
+// panelKit is batch 1B's kit and renders for real.
 import React from 'react';
 import { describe, it, expect, beforeAll, beforeEach, afterEach } from 'vitest';
 import { render, cleanup, fireEvent, screen, waitFor } from '@testing-library/react';
@@ -143,8 +139,6 @@ function MappingHarness() {
   return c.ui;
 }
 
-const LEGACY_LABEL = 'text-gray-400 text-xs mb-1 block';
-const LEGACY_TEXTAREA = 'w-full bg-gray-700 text-white border border-gray-600 rounded-md text-sm px-2 py-1 font-mono';
 
 describe('the case inputs', () => {
   beforeAll(installDomShims);
@@ -153,14 +147,6 @@ describe('the case inputs', () => {
   const typeASection = () => {
     fireEvent.change(screen.getByRole('combobox'), { target: { value: 'typed' } });
   };
-
-  it('Well Correlation (shared with batch 3A) renders its legacy classes byte for byte outside a scope', () => {
-    render(<SectionHarness />);
-    typeASection();
-    const textarea = document.getElementById('wc-section-table');
-    expect(textarea.getAttribute('class')).toBe(LEGACY_TEXTAREA);
-    expect(document.querySelector('label[for="wc-section-table"]').getAttribute('class')).toBe(LEGACY_LABEL);
-  });
 
   it('Well Correlation renders roles inside a scope', () => {
     render(<ThemedApp userId="u-panels"><SectionHarness /></ThemedApp>);

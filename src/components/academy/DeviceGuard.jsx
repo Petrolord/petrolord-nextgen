@@ -9,7 +9,6 @@ import {
 import { Button } from '@/components/ui/button';
 import { Loader2, MonitorSmartphone } from 'lucide-react';
 import { useActiveTheme } from '@/design/activeTheme';
-import { themeClassPicker } from '@/design/themeClass';
 import { FixedTheme } from '@/design/ThemeProvider';
 
 // Registers this browser as a device on login (two-device limit, N3.3).
@@ -19,7 +18,7 @@ import { FixedTheme } from '@/design/ThemeProvider';
 // Design system (docs/scope/DesignSystem-Rollout.md, batch 1A): the guard is
 // mounted at the app root, outside every scope. Like the toaster its dialog
 // follows the theme of the screen on show (useActiveTheme), on theme roles;
-// with no themed screen mounted it renders exactly what it rendered before.
+// with no themed screen mounted (the homepage) it is light.
 const DeviceGuard = ({ children }) => {
   const { user } = useAuth();
   const { isViewAsStudent } = useRole();
@@ -27,7 +26,6 @@ const DeviceGuard = ({ children }) => {
   const [busy, setBusy] = useState(false);
   const attempted = useRef(false);
   const active = useActiveTheme();
-  const tc = themeClassPicker(active ? { theme: active } : null);
 
   const attempt = async () => {
     try {
@@ -58,25 +56,25 @@ const DeviceGuard = ({ children }) => {
 
   const dialog = (
       <AlertDialog open={!!limitInfo}>
-        <AlertDialogContent className={tc("bg-[#1E293B] border-gray-700", undefined)}>
+        <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle className={tc("text-white flex items-center gap-2", "text-pl-text flex items-center gap-2")}>
-              <MonitorSmartphone className={tc("h-5 w-5 text-[#BFFF00]", "h-5 w-5 text-pl-accent-text")} aria-hidden={tc(undefined, 'true')} /> Device limit reached
+            <AlertDialogTitle className="text-pl-text flex items-center gap-2">
+              <MonitorSmartphone className="h-5 w-5 text-pl-accent-text" aria-hidden="true" /> Device limit reached
             </AlertDialogTitle>
-            <AlertDialogDescription className={tc("text-gray-400", "text-pl-muted")}>
+            <AlertDialogDescription className="text-pl-muted">
               Your account is limited to {limitInfo?.limit} devices. Sign out one of these to use this device.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <div className="space-y-2">
             {(limitInfo?.devices || []).map((d) => (
-              <div key={d.device_id} className={tc("flex items-center justify-between rounded-md border border-gray-700 bg-[#0F172A] px-3 py-2", "flex items-center justify-between rounded-md border border-pl-border bg-pl-surface px-3 py-2")}>
+              <div key={d.device_id} className="flex items-center justify-between rounded-md border border-pl-border bg-pl-surface px-3 py-2">
                 <div className="text-sm">
-                  <p className={tc("text-white", "text-pl-text")}>{d.label || 'Device'}</p>
-                  <p className={tc("text-gray-500 text-xs", "text-pl-muted text-xs")}>last active {new Date(d.last_seen).toLocaleString()}</p>
+                  <p className="text-pl-text">{d.label || 'Device'}</p>
+                  <p className="text-pl-muted text-xs">last active {new Date(d.last_seen).toLocaleString()}</p>
                 </div>
                 <Button
                   size="sm" variant="outline" disabled={busy}
-                  className={tc("border-red-700 text-red-400 hover:bg-red-900/30", "border-pl-danger/60 text-pl-danger-text hover:bg-pl-danger-bg hover:text-pl-danger-text")}
+                  className="border-pl-danger/60 text-pl-danger-text hover:bg-pl-danger-bg hover:text-pl-danger-text"
                   onClick={() => handleRevoke(d.device_id)}
                 >
                   {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Sign out'}
@@ -85,7 +83,7 @@ const DeviceGuard = ({ children }) => {
             ))}
           </div>
           <AlertDialogFooter>
-            <p className={tc("text-xs text-gray-500", "text-xs text-pl-muted")}>
+            <p className="text-xs text-pl-muted">
               Until you free a slot, this device stays in read-only Learning previews.
             </p>
           </AlertDialogFooter>
@@ -96,7 +94,7 @@ const DeviceGuard = ({ children }) => {
   return (
     <>
       {children}
-      {active ? <FixedTheme theme={active}>{dialog}</FixedTheme> : dialog}
+      <FixedTheme theme={active || 'light'}>{dialog}</FixedTheme>
     </>
   );
 };

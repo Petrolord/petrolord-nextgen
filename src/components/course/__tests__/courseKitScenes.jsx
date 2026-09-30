@@ -1,6 +1,6 @@
 // TEST-ONLY. The course kit (docs/scope/DesignSystem-Rollout.md section 4,
-// batch 1B) in every state it can show, for the legacy markup test
-// (courseKitLegacy.test.jsx) and the theme test (courseKitTheme.test.jsx).
+// batch 1B) in every state it can show, for the theme test
+// (courseKitTheme.test.jsx).
 //
 // A test file using these scenes mocks '@/hooks/useActivation',
 // '@/contexts/RoleContext' and '@/services/academyService' so the Learning
@@ -143,9 +143,3 @@ export const COURSE_KIT_SCENES = [
     claim: async () => { throw new Error('Not today.'); },
   }, claimWith((screen) => screen.findByText('Not today.'))),
 ];
-
-export function normaliseMarkup(html) {
-  return html
-    .replace(/radix-:r[0-9a-z]+:/g, 'radix-:id:')
-    .replace(/:r[0-9a-z]+:/g, ':id:');
-}

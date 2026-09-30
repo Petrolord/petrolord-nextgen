@@ -7,7 +7,6 @@ import {
   buildupWindowFor, parseBuildupText,
 } from './welltestLab';
 import { PanelShell, SelectField, NumField, Tile, TileGrid, FieldGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
-import { useThemeClass } from '@/design/themeClass';
 import ChartFrame from '@/components/charts/ChartFrame';
 import { GRID_STYLE, TOOLTIP_STYLE } from '@/utils/chartTheme';
 import { seriesColor, SVG_CHART, AXIS_TICK } from '@/utils/chartSvg';
@@ -36,7 +35,6 @@ const TYPED_FIELDS = [
 const plain = (v, d) => (Number.isFinite(v) ? Number(v).toFixed(d) : '-');
 
 const YourTest = () => {
-  const tc = useThemeClass();
   const [file, setFile] = useState(null);
   const [form, setForm] = useState(TEACHING_CONSTANTS);
   const out = useMemo(() => {
@@ -55,7 +53,7 @@ const YourTest = () => {
   }, [file, form]);
   return (
     <div className="space-y-3">
-      <label className={tc('inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-dashed border-gray-500 text-gray-300 text-xs cursor-pointer hover:border-[#BFFF00]', 'inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-dashed border-pl-border-strong text-pl-text text-xs cursor-pointer hover:border-pl-primary')}>
+      <label className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-dashed border-pl-border-strong text-pl-text text-xs cursor-pointer hover:border-pl-primary">
         {file ? `Buildup file: ${file.name}` : 'Open a buildup file'}
         <input type="file" accept=".csv,.txt" className="hidden"
           onChange={async (e) => {
@@ -97,7 +95,6 @@ const CUT_OPTIONS = WINDOW_CUTS.map((c) => ({
 }));
 
 const BuildupExplorer = () => {
-  const tc = useThemeClass();
   const [cut, setCut] = useState('5');
   const [mine, setMine] = useState(false);
 
@@ -126,7 +123,7 @@ const BuildupExplorer = () => {
     <div className="flex flex-wrap gap-2">
       {[[false, 'Teaching buildup'], [true, 'Your test']].map(([v, l]) => (
         <button key={l} type="button" onClick={() => setMine(v)}
-          className={tc(`px-3 py-1.5 rounded-md border text-xs ${mine === v ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold' : 'bg-gray-800 text-gray-300 border-gray-600'}`, `px-3 py-1.5 rounded-md border text-xs ${mine === v ? 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold' : 'bg-pl-surface text-pl-text border-pl-border-strong'}`)}>
+          className={`px-3 py-1.5 rounded-md border text-xs ${mine === v ? 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold' : 'bg-pl-surface text-pl-text border-pl-border-strong'}`}>
           {l}
         </button>
       ))}
@@ -150,7 +147,7 @@ const BuildupExplorer = () => {
       {modeButtons}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
         <SelectField label="Points in the semilog fit" value={cut} onChange={setCut} options={CUT_OPTIONS} />
-        <div className={tc('text-xs text-gray-400 self-end pb-2', 'text-xs text-pl-muted self-end pb-2')}>
+        <div className="text-xs text-pl-muted self-end pb-2">
           Producing time 36 h, flowing pressure at shut-in 4530.77 psi, rate 450 stb/d.
         </div>
       </div>
@@ -171,7 +168,7 @@ const BuildupExplorer = () => {
               isAnimationActive={false} />
           </ComposedChart>
       </ChartFrame>
-      <p className={tc('text-[11px] text-gray-500 mt-1', 'text-[11px] text-pl-muted mt-1')}>
+      <p className="text-[11px] text-pl-muted mt-1">
         Horner ratio on a reversed log axis: shut-in runs left to right, and the extrapolation to
         a ratio of 1 at the right-hand edge is p star.
       </p>
@@ -191,9 +188,9 @@ const BuildupExplorer = () => {
         <Tile label="Skin error" value={fmt(fit.skinError, 3)} />
       </TileGrid>
 
-      <div className={tc('mt-4 rounded border border-gray-700 overflow-x-auto', 'mt-4 rounded border border-pl-border overflow-x-auto')}>
+      <div className="mt-4 rounded border border-pl-border overflow-x-auto">
         <table className="w-full text-xs">
-          <thead className={tc('bg-black/40 text-gray-400', 'bg-pl-sunken text-pl-muted')}>
+          <thead className="bg-pl-sunken text-pl-muted">
             <tr>
               <th className="text-left p-2">Window</th>
               <th className="text-right p-2">n</th>
@@ -204,16 +201,16 @@ const BuildupExplorer = () => {
           </thead>
           <tbody>
             {walk.map((w) => (
-              <tr key={w.minDt} className={tc(`border-t border-gray-800 ${String(w.minDt) === cut ? 'bg-white/5' : ''}`, `border-t border-pl-border ${String(w.minDt) === cut ? 'bg-pl-sunken' : ''}`)}>
-                <td className={tc('p-2 text-white', 'p-2 text-pl-text')}>
+              <tr key={w.minDt} className={`border-t border-pl-border ${String(w.minDt) === cut ? 'bg-pl-sunken' : ''}`}>
+                <td className="p-2 text-pl-text">
                   {w.minDt === 0 ? 'every point' : `shut-in at or after ${w.minDt} h`}
                 </td>
-                <td className={tc('p-2 text-right text-gray-200', 'p-2 text-right text-pl-text')}>{w.n}</td>
-                <td className={tc('p-2 text-right text-gray-200', 'p-2 text-right text-pl-text')}>{fmt(w.k, 3)}</td>
-                <td className={tc(`p-2 text-right ${w.skin < 0 ? 'text-amber-400' : 'text-gray-200'}`, `p-2 text-right ${w.skin < 0 ? 'text-pl-warning-text' : 'text-pl-text'}`)}>
+                <td className="p-2 text-right text-pl-text">{w.n}</td>
+                <td className="p-2 text-right text-pl-text">{fmt(w.k, 3)}</td>
+                <td className={`p-2 text-right ${w.skin < 0 ? 'text-pl-warning-text' : 'text-pl-text'}`}>
                   {fmt(w.skin, 3)}
                 </td>
-                <td className={tc('p-2 text-right text-gray-400', 'p-2 text-right text-pl-muted')}>{fmt(w.r2, 7)}</td>
+                <td className="p-2 text-right text-pl-muted">{fmt(w.r2, 7)}</td>
               </tr>
             ))}
           </tbody>
@@ -221,9 +218,9 @@ const BuildupExplorer = () => {
       </div>
 
       {fit.skin < 0 ? (
-        <div className={tc('mt-3 rounded border border-amber-700/60 bg-amber-950/30 p-3', 'mt-3 rounded border border-pl-warning/40 bg-pl-warning-bg p-3')}>
-          <p className={tc('text-amber-300 text-xs font-medium mb-1', 'text-pl-warning-text text-xs font-medium mb-1')}>This window says the well is stimulated</p>
-          <p className={tc('text-[11px] text-amber-200/90', 'text-[11px] text-pl-text')}>
+        <div className="mt-3 rounded border border-pl-warning/40 bg-pl-warning-bg p-3">
+          <p className="text-pl-warning-text text-xs font-medium mb-1">This window says the well is stimulated</p>
+          <p className="text-[11px] text-pl-text">
             The skin has come out negative on a well whose planted skin is plus 6.5. Nothing about
             the well changed. The storage-affected early points are in the line, they are steeper
             than radial flow, and a steeper line is a lower permeability and a smaller skin.

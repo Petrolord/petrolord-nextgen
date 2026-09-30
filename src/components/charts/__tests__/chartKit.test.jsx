@@ -4,7 +4,7 @@
 // section 5). The API matches the Suite's (same export names and defaults),
 // every piece sits on a white data-canvas="chart" surface with the Petrolord
 // mark, the series colours read on white, and ChartPanel is white in both
-// themes and outside a scope.
+// themes.
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -156,13 +156,5 @@ describe('the frames', () => {
       expectNoLegacyChrome();
       unmount();
     }
-  });
-
-  it('ChartPanel outside a scope draws the same white card with fixed light classes', () => {
-    const { container } = render(<ChartPanel title="Rate"><div>plot</div></ChartPanel>);
-    const panel = container.querySelector('[data-canvas="chart"]');
-    expect(panel.className).toMatch(/\bbg-white\b/);
-    expect(panel.className).not.toMatch(/pl-/);
-    expect(screen.getByRole('heading', { name: 'Rate' }).className).toMatch(/\btext-slate-900\b/);
   });
 });

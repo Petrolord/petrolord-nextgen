@@ -3,6 +3,7 @@ import QRCode from 'qrcode';
 import { Link } from 'react-router-dom';
 import { X, Printer, Loader2, UserCog } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { FixedTheme } from '@/design/ThemeProvider';
 import { verificationUrl, certificateStatus } from '@/services/academyService';
 import {
   courseName, CERT_TIER_LABELS, formalDate, titleCaseSlug,
@@ -20,6 +21,12 @@ import authorisedSignature from '@/assets/certificates/authorised-signature.png'
 // printed code resolve to the public verify page, so a forged print
 // fails the scan. Expired and revoked certificates carry a diagonal
 // status watermark on screen AND in print.
+//
+// Design system (wave 7): the overlay mounts in document.body, outside the
+// page scope. Its toolbar and the display-name notice are chrome, so they
+// sit on theme roles in a fixed dark scope over the scrim (no toggle, no
+// storage). The certificate sheet keeps its designed artwork: it is a
+// data-canvas="document" region and nothing inside it takes a role.
 const INK = '#18320e';
 const SHEET_W = 1123;
 const SHEET_H = 794;
@@ -70,7 +77,8 @@ const CertificateView = ({ cert, holderName, onClose }) => {
   const displayUrl = url.replace(/^https?:\/\//, '');
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/85 p-4 sm:p-8">
+    <FixedTheme theme="dark">
+    <div data-pl-theme="dark" data-testid="certificate-viewer" className="fixed inset-0 z-50 overflow-y-auto bg-black/85 p-4 sm:p-8">
       <style>{`
         #certificate-sheet{
           --ink:#18320e; --gold:#f9bd00; --lime:#9adf22; --green:#5f990d;
@@ -153,25 +161,23 @@ const CertificateView = ({ cert, holderName, onClose }) => {
 
       <div className="mx-auto" style={{ maxWidth: `${SHEET_W}px` }}>
         <div className="mb-4 flex items-center justify-between print:hidden">
-          <p className="text-gray-300 text-sm mb-0">
+          <p className="text-pl-muted text-sm mb-0">
             Certificate preview. Printing produces a clean A4 landscape sheet.
           </p>
           <div className="flex gap-2">
-            <Button size="sm" onClick={() => window.print()} disabled={needsName}
-              className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold">
+            <Button size="sm" onClick={() => window.print()} disabled={needsName} className="font-semibold">
               <Printer className="h-4 w-4 mr-1" /> Print
             </Button>
-            <Button size="sm" variant="outline" onClick={onClose}
-              className="border-gray-500 text-gray-200">
+            <Button size="sm" variant="outline" onClick={onClose}>
               <X className="h-4 w-4 mr-1" /> Close
             </Button>
           </div>
         </div>
 
         {needsName && (
-          <div className="mb-4 rounded-md border border-[#BFFF00]/50 bg-[#1E293B] p-4 text-sm text-gray-200 print:hidden">
+          <div className="mb-4 rounded-md border border-pl-warning/40 bg-pl-warning-bg p-4 text-sm text-pl-warning-text print:hidden">
             Your certificate prints the display name on your profile, and your profile has none yet.{' '}
-            <Link to="/dashboard/settings" onClick={onClose} className="inline-flex items-center gap-1 font-semibold text-[#BFFF00] hover:underline">
+            <Link to="/dashboard/settings" onClick={onClose} className="inline-flex items-center gap-1 font-semibold underline underline-offset-2">
               <UserCog className="h-4 w-4" /> Set your display name in Settings
             </Link>{' '}
             to complete and print it.
@@ -181,6 +187,7 @@ const CertificateView = ({ cert, holderName, onClose }) => {
         <div ref={frameRef} style={{ height: `${SHEET_H * scale}px` }}>
           <div
             id="certificate-sheet"
+            data-canvas="document"
             className={`${tier}${status !== 'valid' ? ' lapsed' : ''}`}
             style={{ transform: `scale(${scale})` }}
           >
@@ -253,6 +260,7 @@ const CertificateView = ({ cert, holderName, onClose }) => {
         </div>
       </div>
     </div>
+    </FixedTheme>
   );
 };
 

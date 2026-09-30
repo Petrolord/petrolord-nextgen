@@ -3,7 +3,6 @@ import {
   ledgerWith, pressureView, trackedFvfLedger, periodVoidage, TARGET_BAND, LEDGER_FVF,
 } from './floodLab';
 import { PanelShell, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
-import { useThemeClass } from '@/design/themeClass';
 import SvgChartFrame from '@/components/charts/SvgChartFrame';
 import { seriesColor, SVG_CHART, GRID_LINE_PROPS } from '@/utils/chartSvg';
 
@@ -20,12 +19,11 @@ const PAD = { left: 46, top: 14, right: 46, bottom: 34 };
 // A typed number box, dressed like the sliders (the capstone states values
 // the sliders do not reach).
 const NumBox = ({ label, value, onChange }) => {
-  const tc = useThemeClass();
   return (
   <div>
-    <p className={tc('text-gray-400 text-xs mb-1', 'text-pl-muted text-xs mb-1')}>{label}</p>
+    <p className="text-pl-muted text-xs mb-1">{label}</p>
     <input value={value} onChange={(e) => onChange(e.target.value)}
-      className={tc('w-full bg-gray-800 border border-gray-600 rounded-md text-white text-xs px-2 py-1.5', 'w-full bg-pl-surface border border-pl-border-strong rounded-md text-pl-text text-xs px-2 py-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus')} />
+      className="w-full bg-pl-surface border border-pl-border-strong rounded-md text-pl-text text-xs px-2 py-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus" />
   </div>
   );
 };
@@ -33,23 +31,21 @@ const NumBox = ({ label, value, onChange }) => {
 const fmt = (v, d = 4) => (Number.isFinite(v) ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d }) : '-');
 
 const RangeField = ({ label, value, min, max, step, onChange }) => {
-  const tc = useThemeClass();
   return (
   <div>
-    <p className={tc('text-gray-400 text-xs mb-1', 'text-pl-muted text-xs mb-1')}>
-      {label}: <span className={tc('text-white', 'text-pl-text')}>{value}</span>
+    <p className="text-pl-muted text-xs mb-1">
+      {label}: <span className="text-pl-text">{value}</span>
     </p>
     <input
       type="range" min={min} max={max} step={step} value={value}
       onChange={(e) => onChange(Number(e.target.value))}
-      className={tc('w-full accent-[#BFFF00]', 'w-full accent-pl-primary')}
+      className="w-full accent-pl-primary"
     />
   </div>
   );
 };
 
 const LedgerExplorer = () => {
-  const tc = useThemeClass();
   const [win, setWin] = useState(3);
   const [bandMin, setBandMin] = useState(TARGET_BAND.min);
   const [bandMax, setBandMax] = useState(TARGET_BAND.max);
@@ -112,7 +108,7 @@ const LedgerExplorer = () => {
         <RangeField label="Band maximum" value={bandMax} min={1.0} max={1.4} step={0.01} onChange={setBandMax} />
         <button
           type="button" onClick={() => setTracked((v) => !v)}
-          className={tc(`px-3 py-1.5 rounded-md border text-xs ${tracked ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold' : 'bg-gray-800 text-gray-300 border-gray-600'}`, `px-3 py-1.5 rounded-md border text-xs ${tracked ? 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold' : 'bg-pl-surface text-pl-text border-pl-border-strong'}`)}
+          className={`px-3 py-1.5 rounded-md border text-xs ${tracked ? 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold' : 'bg-pl-surface text-pl-text border-pl-border-strong'}`}
         >
           {tracked ? 'Bo tracked on pressure' : 'Bo frozen at 1.21584'}
         </button>
@@ -126,7 +122,7 @@ const LedgerExplorer = () => {
         <NumBox label="Band maximum (typed)" value={bandMaxT} onChange={setBandMaxT} />
         <NumBox label="Read month (YYYY-MM)" value={month} onChange={setMonth} />
       </div>
-      <p className={tc('text-xs text-gray-500 mt-1', 'text-xs text-pl-muted mt-1')}>
+      <p className="text-xs text-pl-muted mt-1">
         The panel opens on the teaching factor set (Bo {LEDGER_FVF.Bo}, Bw {LEDGER_FVF.Bw}, Rs {LEDGER_FVF.Rs}) and the
         1.00 to 1.20 band. A typed band overrides the sliders. A capstone brief states its own factors, band and month.
       </p>

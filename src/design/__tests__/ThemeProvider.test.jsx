@@ -11,7 +11,6 @@ import {
 } from '@/design/ThemeProvider';
 import { AuthContext } from '@/contexts/SupabaseAuthContext';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
-import { useThemeClass } from '@/design/themeClass';
 import {
   isThemedPath, isSignedInPath, coldLoadTheme, matchesRoute, ThemedLoadingScreen,
   isPublicLightPath,
@@ -118,22 +117,6 @@ describe('ThemeToggle and FixedTheme', () => {
     render(<FixedTheme theme="dark"><ThemeToggle /></FixedTheme>);
     expect(screen.queryByTestId('theme-toggle')).toBeNull();
     expect(window.localStorage.length).toBe(0);
-  });
-});
-
-describe('useThemeClass', () => {
-  afterEach(cleanup);
-  const Probe = () => {
-    const tc = useThemeClass({ 'bg-slate-900': 'bg-pl-surface' });
-    return <p data-testid="p" className={`${tc('bg-slate-900')} ${tc('text-slate-200', 'text-pl-text')}`} />;
-  };
-
-  it('returns the legacy classes outside a scope and the themed ones inside', () => {
-    render(<Probe />);
-    expect(screen.getByTestId('p').className).toBe('bg-slate-900 text-slate-200');
-    cleanup();
-    render(<ThemedApp userId="u1"><Probe /></ThemedApp>);
-    expect(screen.getByTestId('p').className).toBe('bg-pl-surface text-pl-text');
   });
 });
 

@@ -125,10 +125,10 @@ describe.each(PAGES)('%s on the public frame', (name, Page, route, pattern, scop
     expectNegativeControl(getScopeRoot(scopeTestId), { allow: PRINT });
   });
 
-  it(registered ? 'is a public light route, so its loader paints light' : 'is an unknown path, so its loader stays legacy', () => {
+  it(registered ? 'is a public light route, so its loader paints light' : 'is an unknown path, and its loader paints light too (wave 7)', () => {
     window.localStorage.setItem(LAST_THEME_KEY, 'dark');
     expect(isPublicLightPath(pathname)).toBe(registered);
-    expect(coldLoadTheme(pathname)).toBe(registered ? 'light' : null);
+    expect(coldLoadTheme(pathname)).toBe('light');
   });
 });
 
@@ -409,7 +409,8 @@ describe('the 6B sources', () => {
     expect(home).toContain("import './LandingPage.css'");
     expect(PUBLIC_LIGHT_ROUTES).not.toContain('/');
     expect(isPublicLightPath('/')).toBe(false);
-    expect(coldLoadTheme('/')).toBeNull();
+    // it is not lazy, so it never shows the loader; a loader there would be light
+    expect(coldLoadTheme('/')).toBe('light');
   });
 
   it('keep every Supabase import on the stand-in', async () => {
