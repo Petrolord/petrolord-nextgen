@@ -890,7 +890,11 @@ describe('THE RENDER GATE: every mode renders its empty state before any engine 
     PANEL_FILES.forEach((f) => {
       const text = sourceOf(f);
       const opens = [...text.matchAll(/<ResponsiveContainer([^>]*)>/g)];
-      expect(opens.length, `${f} draws no chart`).toBeGreaterThanOrEqual(1);
+      // Batch 5B: a chart in the kit's ChartFrame states its height, and the
+      // frame gives its own ResponsiveContainer width 100% and that height.
+      const frames = [...text.matchAll(/<ChartFrame([^>]*)>/g)];
+      expect(opens.length + frames.length, `${f} draws no chart`).toBeGreaterThanOrEqual(1);
+      frames.forEach((m) => expect(m[1], `${f} has a ChartFrame with no height`).toContain('height='));
       opens.forEach((m) => {
         expect(m[1], `${f} has a ResponsiveContainer with no width`).toContain('width=');
         expect(m[1], `${f} has a ResponsiveContainer with no height`).toContain('height=');

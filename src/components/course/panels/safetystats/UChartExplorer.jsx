@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, ComposedChart, Line, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+  ComposedChart, Line, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK } from '@/utils/chartSvg';
 import {
   chart, revisedChart, beforeAfter, parseSeries, parseNumber, egbemaChart, STREAMS,
 } from './safetystatsLab';
@@ -24,8 +27,8 @@ export const MODES = [
   ['beforeafter', 'Before and after an intervention, saying which months'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
 
 const baseOf = (s) => (s === '' ? undefined : Number(s));
 
@@ -62,22 +65,20 @@ export const ChartMode = ({ t }) => {
             <Tile label="Centre line, sum of counts over sum of units" value={six(r.centre)} unit={r.basis.baseLabel} />
             <Tile label="Months flagged" value={r.outOfControl.length ? r.outOfControl.map((i) => i + 1).join(', ') : 'none'} />
           </TileGrid>
-          <div className="h-56 mt-3">
-            <ResponsiveContainer width="100%" height="100%">
-              <ComposedChart data={data} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-                <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-                <XAxis dataKey="month" tick={AXIS} />
-                <YAxis tick={AXIS} />
-                <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
-                <Legend wrapperStyle={{ fontSize: 11 }} />
-                <Line dataKey="u" name="u, the month's rate" stroke="#38bdf8" dot isAnimationActive={false} />
-                <Line dataKey="ucl" name="upper limit" stroke="#f472b6" dot={false} strokeDasharray="4 3" isAnimationActive={false} />
-                <Line dataKey="lcl" name="lower limit" stroke="#f472b6" dot={false} strokeDasharray="4 3" isAnimationActive={false} />
-                <Line dataKey="centre" name="centre line" stroke="#BFFF00" dot={false} isAnimationActive={false} />
-                <Scatter dataKey="flagged" name="signal" fill="#fbbf24" isAnimationActive={false} />
-              </ComposedChart>
-            </ResponsiveContainer>
-          </div>
+          <ChartFrame height={224} className="mt-3">
+            <ComposedChart data={data} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+              <CartesianGrid {...GRID_STYLE} />
+              <XAxis dataKey="month" tick={AXIS} />
+              <YAxis tick={AXIS} />
+              <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
+              <Legend {...LEGEND_PROPS} />
+              <Line dataKey="u" name="u, the month's rate" stroke={seriesColor(1)} dot isAnimationActive={false} />
+              <Line dataKey="ucl" name="upper limit" stroke={seriesColor(4)} dot={false} strokeDasharray="4 3" isAnimationActive={false} />
+              <Line dataKey="lcl" name="lower limit" stroke={seriesColor(4)} dot={false} strokeDasharray="4 3" isAnimationActive={false} />
+              <Line dataKey="centre" name="centre line" stroke={seriesColor(0)} dot={false} isAnimationActive={false} />
+              <Scatter dataKey="flagged" name="signal" fill={seriesColor(2)} isAnimationActive={false} />
+            </ComposedChart>
+          </ChartFrame>
           <Tbl
             head={['month', 'count', 'hours', 'units n', 'u', 'LCL', 'UCL', 'lower floored', 'signal']}
             rows={r.points.map((p) => [String(p.index + 1), String(p.count), String(p.exposureHours), six(p.exposureUnits), six(p.u), six(p.lcl), six(p.ucl), String(p.lclFloored), p.signal || 'none'])}

@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
 import {
   inhibitorArithmetic, wallShear, theCoupling, allowanceAndLife, bindingConstraint,
@@ -9,6 +9,9 @@ import {
 import {
   PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note,
 } from '@/components/course/panels/petrophysics/panelKit';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 
 // The corrosion inhibitor and integrity explorer.
 //
@@ -54,14 +57,14 @@ export const MODES = [
   ['binding', 'The binding constraint, and the four answers this module does not have'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const SERIES = ['#38bdf8', '#f472b6', '#BFFF00', '#fbbf24'];
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const SERIES = [seriesColor(0), seriesColor(4), seriesColor(1), seriesColor(2)];
 
 const Tbl = ({ head, rows }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>{head.map((h, i) => <th key={h} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>)}</tr>
       </thead>
       <tbody>
@@ -76,21 +79,21 @@ const Tbl = ({ head, rows }) => (
 );
 
 const Held = ({ children }) => (
-  <div className="mt-3 rounded-md border border-amber-700/60 bg-amber-950/20 p-3">
-    <p className="text-amber-300 text-xs font-medium mb-1">HELD FOR LITERATURE</p>
-    <p className="text-xs text-slate-300 mb-0">{children}</p>
+  <div className="mt-3 rounded-md border border-pl-warning/40 bg-pl-warning-bg p-3">
+    <p className="text-pl-warning-text text-xs font-medium mb-1">HELD FOR LITERATURE</p>
+    <p className="text-xs text-pl-text mb-0">{children}</p>
   </div>
 );
 
 const Absent = ({ children }) => (
-  <div className="mt-3 rounded-md border border-slate-600 bg-slate-900/40 p-3">
-    <p className="text-slate-300 text-xs font-medium mb-1">NOT PROVIDED</p>
-    <p className="text-xs text-slate-400 mb-0">{children}</p>
+  <div className="mt-3 rounded-md border border-pl-border-strong bg-pl-sunken p-3">
+    <p className="text-pl-text text-xs font-medium mb-1">NOT PROVIDED</p>
+    <p className="text-xs text-pl-muted mb-0">{children}</p>
   </div>
 );
 
 const Quote = ({ children }) => (
-  <p className="mt-2 mb-0 border-l-2 border-slate-600 pl-3 text-xs text-slate-400 font-mono">{children}</p>
+  <p className="mt-2 mb-0 border-l-2 border-pl-border-strong pl-3 text-xs text-pl-muted font-mono">{children}</p>
 );
 
 const safe = (fn) => { try { return fn(); } catch { return null; } };
@@ -111,26 +114,24 @@ export const ProgrammeMode = ({ i, availability }) => {
         <Tile label="Effective protection the line actually sees" value={six(row.effectiveInhibitionPct)} unit="percent" />
         <Tile label="Shortfall against the datasheet figure" value={six(row.inhibitorShortfallPp)} unit="percentage points" />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Read the third tile against the first. A corrosion inhibitor at {six(row.efficiencyPct)} percent efficiency
         running {six(row.availabilityPct)} percent of the time delivers {six(row.effectiveInhibitionPct)} percent
         effective protection, and the metal loss is {six(row.metalLossRatio)} times what the datasheet number would
         give. AVAILABILITY IS WHAT LIMITS IT. Efficiency does not.
       </p>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="avail" tick={AXIS} label={{ value: 'availability, percent', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -3 }} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line dataKey="effective" name="effective protection, percent" stroke={SERIES[0]} dot isAnimationActive={false} />
-            <Line dataKey="shortfall" name="shortfall, percentage points" stroke={SERIES[1]} dot isAnimationActive={false} />
-            <Line dataKey="loss" name="metal loss against the datasheet" stroke={SERIES[2]} dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="avail" tick={AXIS} label={{ value: 'availability, percent', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line dataKey="effective" name="effective protection, percent" stroke={SERIES[0]} dot isAnimationActive={false} />
+          <Line dataKey="shortfall" name="shortfall, percentage points" stroke={SERIES[1]} dot isAnimationActive={false} />
+          <Line dataKey="loss" name="metal loss against the datasheet" stroke={SERIES[2]} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Tbl
         head={['efficiency percent', 'availability percent', 'effective protection percent', 'shortfall pp', 'rate mm/yr', 'metal loss against the datasheet']}
         rows={i.rows.map((r) => [
@@ -177,26 +178,24 @@ export const ShearMode = ({ s, c }) => {
         <Tile label="The shear there" value={six(s.strippingTauPa)} unit="Pa" />
         <Tile label="Shear jump across the branch switch" value={six(s.switchJump)} unit="times" />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The wall shear is what decides whether a corrosion inhibitor film survives, so it is the number the rate depends
         on. It is built from THIS MODULE&apos;S friction factor, on a two-branch Blasius form switching at THIS
         MODULE&apos;S Reynolds number of {six(s.switchRe)}. The Pipeline &amp; Line Sizing course computes its own
         friction factor and its own Reynolds number with a different correlation and a different transition, and the two
         will not agree on the same pipe.
       </p>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="u" tick={AXIS} label={{ value: 'velocity, m/s', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -3 }} />
-            <YAxis tick={AXIS} label={{ value: 'wall shear, Pa', angle: -90, fill: '#94a3b8', fontSize: 11, position: 'insideLeft' }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={s.filmStripPa} stroke="#fbbf24" strokeDasharray="4 4" label={{ value: 'the stripping threshold, HELD', fill: '#fbbf24', fontSize: 10 }} />
-            <Line dataKey="tau" name="wall shear, Pa" stroke={SERIES[0]} dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="u" tick={AXIS} label={{ value: 'velocity, m/s', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
+          <YAxis tick={AXIS} label={{ value: 'wall shear, Pa', angle: -90, fill: SVG_CHART.note, fontSize: 11, position: 'insideLeft' }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine y={s.filmStripPa} stroke={seriesColor(2)} strokeDasharray="4 4" label={{ value: 'the stripping threshold, HELD', fill: seriesColor(2), fontSize: 10 }} />
+          <Line dataKey="tau" name="wall shear, Pa" stroke={SERIES[0]} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Tbl
         head={["stream", "this module's Reynolds number", 'branch', "this module's friction factor", 'wall shear Pa', 'film risk']}
         rows={s.streamRows.map((r) => [r.name, four(r.reynolds), r.branch, six(r.fanningFriction), six(r.tauPa), r.filmRisk])}
@@ -250,7 +249,7 @@ export const AllowanceMode = ({ a, d }) => {
         <Tile label="Allowance the design life demands" value={six(d.requiredAllowanceMm)} unit="mm" />
         <Tile label="Shortfall" value={six(d.shortfallMm)} unit="mm" />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         INTEGRITY HERE MEANS ONE ARITHMETIC: a remaining allowance divided by a rate. That is the whole scope of this
         door. The required allowance is the rate times the design life and it IGNORES what has already gone, so it is
         the allowance a new line would need; the shortfall compares it against what is LEFT. The two fields answer two
@@ -269,9 +268,9 @@ export const AllowanceMode = ({ a, d }) => {
         actually reinstates the design life is {six(a.reinstatingAllowanceMm)} mm. The gap between the last two is
         exactly the consumed depth.
       </Note>
-      <div className="mt-3 rounded-md border border-red-800/60 bg-red-950/20 p-3">
-        <p className="text-red-300 text-xs font-medium mb-1">A ZERO RATE IS NOT A PASS</p>
-        <p className="text-xs text-slate-300 mb-0">
+      <div className="mt-3 rounded-md border border-pl-danger/30 bg-pl-danger-bg p-3">
+        <p className="text-pl-danger-text text-xs font-medium mb-1">A ZERO RATE IS NOT A PASS</p>
+        <p className="text-xs text-pl-text mb-0">
           At a zero rate the remaining life comes back as {String(a.zeroRemainingYears)} and the verdict as
           {' '}{String(a.zeroMeetsDesignLife)}, with an `unbounded` flag of {String(a.zeroUnbounded)}. There is no
           infinite life on this page and no passing verdict taken from one, because an unbounded life is reachable from
@@ -304,7 +303,7 @@ export const BindingMode = ({ b, h }) => {
         <Tile label="Items it declares NOT PROVIDED" value={String(h.notProvidedCount)} />
         <Tile label="Claims withdrawn rather than retuned" value={String(h.withdrawn.length)} />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         A screen that returns seven independent numbers and reconciles none of them is a screen the reader has to
         summarise themselves, and they will summarise it by reading the largest number. The engine names WHICH of its
         own limits governs the answer, in descending order of what would change first, and every one of them is derived

@@ -47,7 +47,7 @@ export const CriteriaMode = ({ c, w, inv, period }) => {
         head={['level dBA', 'hours', 'OSHA PEL percent', 'OSHA action level percent', 'NIOSH noise REL percent']}
         rows={c.record.map((p, k) => [six(p.levelDbA), six(p.durationH), cell(c.oben[0].contributions[k].dosePct), cell(c.oben[1].contributions[k].dosePct), cell(c.oben[2].contributions[k].dosePct)])}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Period {i + 1} at {six(c.record[i].levelDbA)} dBA has an OSHA reference duration of {cell(c.referenceDurations[i].oshaH)} h
         {' '}and a NIOSH reference duration of {cell(c.referenceDurations[i].nioshH)} h. The loudest period carries
         {' '}{six(c.loudestSharePct)} percent of the PEL noise dose, so it is one term of the sum and never the answer on its own.
@@ -59,7 +59,7 @@ export const CriteriaMode = ({ c, w, inv, period }) => {
       <Note>The threshold is inclusive: a period exactly at 80 dBA counts under the action level, and one at 79.9 dBA counts under nothing.</Note>
       {w && w.map((x) => (
         <div key={x.label} className="mt-2">
-          <p className="text-xs text-slate-300 mb-0">{x.label}: noise dose {six(x.dosePct)} percent, TWA {six(x.twaDbA)} dBA.</p>
+          <p className="text-xs text-pl-text mb-0">{x.label}: noise dose {six(x.dosePct)} percent, TWA {six(x.twaDbA)} dBA.</p>
           {x.warnings.map((m) => <Quote key={m}>{m}</Quote>)}
         </div>
       ))}
