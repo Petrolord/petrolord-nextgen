@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import LegalPageLayout from '@/components/legal/LegalPageLayout';
+import { TEXT_LINK } from '@/components/public/PublicPage';
 import PolicySection from '@/components/legal/PolicySection';
 
 const tocItems = [
@@ -30,11 +31,11 @@ const TermsOfServicePage = () => {
       tocItems={tocItems}
     >
       <div className="flex justify-start mb-6">
-        <Button variant="ghost" onClick={() => navigate('/')} className="text-slate-400 hover:text-white hover:bg-slate-800">
+        <Button variant="ghost" onClick={() => navigate('/')} className="print:hidden">
           <ArrowLeft className="w-4 h-4 mr-2" /> Back to Home
         </Button>
       </div>
-      <div className="text-xl text-slate-400 mb-10 leading-relaxed border-l-4 border-[#BFFF00] pl-6 py-2 bg-[#1E293B]/30 rounded-r-lg">
+      <div className="text-xl text-pl-muted mb-10 leading-relaxed border-l-4 border-pl-accent pl-6 py-2 bg-pl-surface rounded-r-lg">
         Please read these Terms carefully before using Petrolord NextGen. These terms govern your access to and use of our academic and enterprise software suite.
       </div>
 
@@ -66,7 +67,7 @@ const TermsOfServicePage = () => {
         <p>
           Our trademarks and trade dress may not be used in connection with any product or service without the prior written consent of Lordsway Energy Limited.
         </p>
-        <h3 className="text-white font-semibold mt-4 mb-2">User License</h3>
+        <h3 className="text-pl-text font-semibold mt-4 mb-2">User License</h3>
         <p>
           Subject to your compliance with these Terms, we grant you a limited, non-exclusive, non-transferable, non-sublicensable license to access and use the Service for your personal, non-commercial (academic) or internal business use.
         </p>
@@ -119,8 +120,8 @@ const TermsOfServicePage = () => {
       <PolicySection id="contact" title="8. Contact Information">
         <p>If you have any questions about these Terms, please contact us:</p>
         <div className="mt-4 flex flex-col gap-2">
-           <a href="mailto:legal@petrolord.com" className="text-[#BFFF00] hover:underline">legal@petrolord.com</a>
-           <span className="text-slate-400">Attn: Legal Department</span>
+           <a href="mailto:legal@petrolord.com" className={TEXT_LINK}>legal@petrolord.com</a>
+           <span className="text-pl-muted">Attn: Legal Department</span>
         </div>
       </PolicySection>
     </LegalPageLayout>

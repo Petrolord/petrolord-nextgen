@@ -10,6 +10,9 @@ import { Loader2, CheckCircle2, AlertCircle, ArrowLeft, Lock } from 'lucide-reac
 import { useToast } from '@/components/ui/use-toast';
 import { supabase } from '@/lib/customSupabaseClient';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import {
+  PublicPage, AUTH_CARD, AUTH_COLUMN, AUTH_ICON_TILE, AUTH_TITLE, TEXT_LINK, FIELD_ERROR,
+} from '@/components/public/PublicPage';
 
 const ResetPasswordPage = () => {
   const navigate = useNavigate();
@@ -52,9 +55,9 @@ const ResetPasswordPage = () => {
   }, [password]);
 
   const getStrengthColor = () => {
-    if (strength <= 2) return 'bg-red-500';
-    if (strength <= 3) return 'bg-yellow-500';
-    return 'bg-emerald-500';
+    if (strength <= 2) return 'bg-pl-danger';
+    if (strength <= 3) return 'bg-pl-warning';
+    return 'bg-pl-success';
   };
 
   const getStrengthText = () => {
@@ -133,8 +136,7 @@ const ResetPasswordPage = () => {
         setResetStatus('success');
         toast({
             title: "Success",
-            description: "Your password has been set successfully.",
-            className: "bg-emerald-600 text-white border-none"
+            description: "Your password has been set successfully."
         });
 
         // Delay redirect
@@ -151,9 +153,11 @@ const ResetPasswordPage = () => {
 
   if (isChecking) {
       return (
-        <div className="min-h-screen flex items-center justify-center bg-[#0F172A] bg-[url('https://horizons-cdn.hostinger.com/80504870-35f5-4fc9-ba7f-f8bc12cf282f/grid-dark-1-M1t2.png')] bg-fixed">
-            <Loader2 className="w-10 h-10 text-indigo-500 animate-spin" />
-        </div>
+        <PublicPage testId="reset-password-theme-scope" mainClassName={AUTH_COLUMN}>
+            <div role="status" aria-label="Checking your reset link">
+                <Loader2 className="w-10 h-10 text-pl-primary animate-spin" />
+            </div>
+        </PublicPage>
       )
   }
 
@@ -162,30 +166,30 @@ const ResetPasswordPage = () => {
       <Helmet>
         <title>Set Password | Petrolord NextGen</title>
       </Helmet>
-      
-      <div className="min-h-screen flex items-center justify-center bg-[#0F172A] py-12 px-4 sm:px-6 lg:px-8 bg-[url('https://horizons-cdn.hostinger.com/80504870-35f5-4fc9-ba7f-f8bc12cf282f/grid-dark-1-M1t2.png')] bg-fixed">
+
+      <PublicPage testId="reset-password-theme-scope" mainClassName={AUTH_COLUMN}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="max-w-md w-full space-y-8 bg-[#1E293B]/90 backdrop-blur-xl p-8 rounded-2xl shadow-2xl border border-slate-700/50"
+          className={`w-full max-w-md space-y-8 ${AUTH_CARD}`}
         >
           {/* Header */}
           <div className="text-center">
-            <div className="mx-auto h-16 w-16 bg-gradient-to-tr from-indigo-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg mb-6">
-                <Lock className="h-8 w-8 text-white" />
+            <div className={`${AUTH_ICON_TILE} bg-pl-primary text-pl-primary-fg shadow-pl-md`}>
+                <Lock className="h-7 w-7" />
             </div>
-            <h2 className="text-3xl font-extrabold text-white tracking-tight">
+            <h1 className={AUTH_TITLE}>
               Set Your Password
-            </h2>
-            <p className="mt-2 text-sm text-slate-400">
+            </h1>
+            <p className="mt-2 text-sm text-pl-muted">
               Create a secure password to activate your university admin account.
             </p>
           </div>
 
           {/* Error View (Invalid Token or Submit Error) */}
           {(!isValidToken || resetStatus === 'error') && (
-            <Alert variant="destructive" className="bg-red-950/30 border-red-900/50 text-red-200">
+            <Alert variant="destructive">
               <AlertCircle className="h-4 w-4" />
               <AlertTitle>Action Failed</AlertTitle>
               <AlertDescription>{errorMessage}</AlertDescription>
@@ -195,51 +199,46 @@ const ResetPasswordPage = () => {
           {/* Invalid Token Only - Show Back Button */}
           {!isValidToken && !isSubmitting && (
                <div className="text-center mt-4">
-                 <Link to="/login">
-                    <Button variant="outline" className="border-slate-700 text-slate-300 hover:bg-slate-800">
-                        Return to Login
-                    </Button>
-                 </Link>
+                 <Button asChild variant="outline">
+                    <Link to="/login">Return to Login</Link>
+                 </Button>
                </div>
           )}
 
           {/* Success View */}
           {resetStatus === 'success' ? (
             <div className="text-center py-8 space-y-6">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 mb-4">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full border border-pl-success/40 bg-pl-success-bg text-pl-success-text mb-4">
                     <CheckCircle2 className="w-8 h-8" />
                 </div>
-                <h3 className="text-xl font-semibold text-white">Password Set Successfully!</h3>
-                <p className="text-slate-400">
+                <h3 className="text-xl font-semibold text-pl-text">Password Set Successfully!</h3>
+                <p className="text-pl-muted">
                     Your account is now active. You will be redirected to the login page shortly.
                 </p>
-                <Link to="/login">
-                    <Button className="w-full mt-4 bg-indigo-600 hover:bg-indigo-700 text-white">
-                        Go to Login Now
-                    </Button>
-                </Link>
+                <Button asChild className="w-full mt-4">
+                    <Link to="/login">Go to Login Now</Link>
+                </Button>
             </div>
           ) : isValidToken && (
             /* Form View */
             <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
               <div className="space-y-5">
-                
+
                 {/* Readonly Email */}
                 <div>
-                  <Label className="text-xs uppercase font-bold text-slate-500 tracking-wider">Account Email</Label>
-                  <div className="mt-1 flex items-center px-3 py-2 bg-slate-900/50 border border-slate-700 rounded-lg text-slate-300 text-sm font-mono">
+                  <Label className="text-xs uppercase font-bold text-pl-muted tracking-wider">Account Email</Label>
+                  <div className="mt-1 flex items-center px-3 py-2 bg-pl-sunken border border-pl-border rounded-lg text-pl-text text-sm font-pl-mono break-all">
                     {userEmail || 'Loading...'}
                   </div>
                 </div>
 
                 {/* Password Field */}
                 <div className="space-y-2">
-                  <Label htmlFor="password" className="text-slate-200">New Password</Label>
+                  <Label htmlFor="password" className="text-pl-text">New Password</Label>
                   <Input
                     id="password"
                     type="password"
                     disabled={isSubmitting}
-                    className="bg-slate-900 border-slate-700 focus:ring-indigo-500 text-white"
                     placeholder="Enter new password"
                     {...register('password', {
                         required: 'Password is required',
@@ -250,33 +249,32 @@ const ResetPasswordPage = () => {
                     })}
                   />
                   {/* Strength Meter */}
-                  <div className="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden mt-2">
-                    <div 
-                        className={`h-full transition-all duration-300 ${getStrengthColor()}`} 
+                  <div className="h-1.5 w-full bg-pl-border rounded-full overflow-hidden mt-2">
+                    <div
+                        className={`h-full transition-all duration-300 ${getStrengthColor()}`}
                         style={{ width: `${(strength / 5) * 100}%` }}
                     />
                   </div>
                   <div className="flex justify-between text-xs">
-                     <span className="text-slate-500">Strength check</span>
-                     <span className={`${strength > 3 ? 'text-emerald-400' : 'text-slate-400'}`}>{getStrengthText()}</span>
+                     <span className="text-pl-muted">Strength check</span>
+                     <span className={`font-medium ${strength > 3 ? 'text-pl-success-text' : 'text-pl-muted'}`}>{getStrengthText()}</span>
                   </div>
-                  {errors.password && <p className="text-xs text-red-400 mt-1">{errors.password.message}</p>}
+                  {errors.password && <p className={`${FIELD_ERROR} text-xs`}>{errors.password.message}</p>}
                 </div>
 
                 {/* Confirm Password */}
                 <div className="space-y-2">
-                  <Label htmlFor="confirmPassword" className="text-slate-200">Confirm Password</Label>
+                  <Label htmlFor="confirmPassword" className="text-pl-text">Confirm Password</Label>
                   <Input
                     id="confirmPassword"
                     type="password"
                     disabled={isSubmitting}
-                    className="bg-slate-900 border-slate-700 focus:ring-indigo-500 text-white"
                     placeholder="Repeat password"
                     {...register('confirmPassword', {
                         validate: val => val === password || 'Passwords do not match'
                     })}
                   />
-                  {errors.confirmPassword && <p className="text-xs text-red-400 mt-1">{errors.confirmPassword.message}</p>}
+                  {errors.confirmPassword && <p className={`${FIELD_ERROR} text-xs`}>{errors.confirmPassword.message}</p>}
                 </div>
 
               </div>
@@ -285,7 +283,8 @@ const ResetPasswordPage = () => {
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full flex justify-center py-6 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold shadow-lg shadow-indigo-500/20 transition-all duration-200"
+                  aria-label={isSubmitting ? 'Setting your password' : undefined}
+                  className="w-full h-12 font-bold"
                 >
                   {isSubmitting ? (
                     <Loader2 className="w-5 h-5 animate-spin" />
@@ -296,14 +295,14 @@ const ResetPasswordPage = () => {
               </div>
 
               <div className="text-center">
-                <Link to="/login" className="inline-flex items-center text-sm text-slate-400 hover:text-white transition-colors">
+                <Link to="/login" className={`inline-flex items-center text-sm ${TEXT_LINK}`}>
                     <ArrowLeft className="w-4 h-4 mr-1" /> Back to Login
                 </Link>
               </div>
             </form>
           )}
         </motion.div>
-      </div>
+      </PublicPage>
     </>
   );
 };

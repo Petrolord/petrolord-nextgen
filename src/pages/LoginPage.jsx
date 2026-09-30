@@ -10,6 +10,9 @@ import { useAuth } from '@/contexts/SupabaseAuthContext';
 import { Loader2, AlertCircle } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import {
+  PublicPage, AUTH_CARD, AUTH_COLUMN, AUTH_TITLE, TEXT_LINK, FIELD_ERROR, FIELD_LABEL,
+} from '@/components/public/PublicPage';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -57,7 +60,6 @@ const LoginPage = () => {
           toast({
             title: "Login Successful",
             description: "Redirecting to dashboard...",
-            className: "bg-[#BFFF00] text-slate-900"
           });
           setTimeout(() => navigate('/dashboard'), 500);
         }
@@ -74,29 +76,24 @@ const LoginPage = () => {
         <title>Login - Petrolord NextGen Suite</title>
         <meta name="description" content="Login to your Petrolord NextGen Suite account." />
       </Helmet>
-      <div className="min-h-screen flex items-center justify-center bg-[#0F172A] py-12 px-4 sm:px-6 lg:px-8">
+      <PublicPage testId="login-theme-scope" mainClassName={AUTH_COLUMN}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="max-w-md w-full space-y-8 p-10 bg-[#1E293B] rounded-lg shadow-lg border border-gray-800"
+          className={`w-full max-w-md space-y-8 ${AUTH_CARD}`}
         >
-          <div>
-            <img
-              className="mx-auto h-16 w-auto object-contain"
-              src="https://horizons-cdn.hostinger.com/80504870-35f5-4fc9-ba7f-f8bc12cf282f/petrolord-symbol-512-7N6nn.png"
-              alt="Petrolord Workflow Suite"
-            />
-            <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
+          <div className="text-center">
+            <h1 className={AUTH_TITLE}>
               Sign in to your account
-            </h2>
-            <p className="mt-2 text-center text-sm text-gray-400">
+            </h1>
+            <p className="mt-2 text-sm text-pl-muted">
               Enter your credentials to access the dashboard
             </p>
           </div>
 
           {loginError && (
-            <Alert variant="destructive" className="bg-red-900/20 border-red-900">
+            <Alert variant="destructive">
               <AlertCircle className="h-4 w-4" />
               <AlertTitle>Error</AlertTitle>
               <AlertDescription>{loginError}</AlertDescription>
@@ -104,9 +101,9 @@ const LoginPage = () => {
           )}
 
           <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
-            <div className="rounded-md shadow-sm space-y-4">
+            <div className="space-y-4">
               <div>
-                <Label htmlFor="email-address" className="block text-sm font-medium text-gray-300 mb-1">
+                <Label htmlFor="email-address" className={FIELD_LABEL}>
                   Email address
                 </Label>
                 <Input
@@ -115,14 +112,13 @@ const LoginPage = () => {
                   type="email"
                   autoComplete="email"
                   required
-                  className="appearance-none block w-full px-3 py-2 border border-gray-600 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#BFFF00] focus:border-[#BFFF00] sm:text-sm bg-gray-700 text-white"
                   placeholder="info@petrolord.com"
                   {...register('email', { required: 'Email is required' })}
                 />
-                {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>}
+                {errors.email && <p className={FIELD_ERROR}>{errors.email.message}</p>}
               </div>
               <div>
-                <Label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-1">
+                <Label htmlFor="password" className={FIELD_LABEL}>
                   Password
                 </Label>
                 <Input
@@ -131,22 +127,21 @@ const LoginPage = () => {
                   type="password"
                   autoComplete="current-password"
                   required
-                  className="appearance-none block w-full px-3 py-2 border border-gray-600 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#BFFF00] focus:border-[#BFFF00] sm:text-sm bg-gray-700 text-white"
                   placeholder="••••••••"
                   {...register('password', { required: 'Password is required' })}
                 />
-                {errors.password && <p className="mt-1 text-sm text-red-500">{errors.password.message}</p>}
+                {errors.password && <p className={FIELD_ERROR}>{errors.password.message}</p>}
               </div>
             </div>
 
-            <div className="flex items-center justify-between">
+            <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
               <div className="text-sm">
-                <Link to="/forgot-password" className="font-medium text-[#BFFF00] hover:text-[#A8E600]">
+                <Link to="/forgot-password" className={TEXT_LINK}>
                   Forgot your password?
                 </Link>
               </div>
               <div className="text-sm">
-                <Link to="/register" className="font-medium text-[#BFFF00] hover:text-[#A8E600]">
+                <Link to="/register" className={TEXT_LINK}>
                   Create an account
                 </Link>
               </div>
@@ -155,7 +150,7 @@ const LoginPage = () => {
             <div>
               <Button
                 type="submit"
-                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-[#0F172A] bg-[#BFFF00] hover:bg-[#A8E600] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#BFFF00] disabled:opacity-70 disabled:cursor-not-allowed transition-all duration-200"
+                className="w-full"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (
@@ -170,7 +165,7 @@ const LoginPage = () => {
             </div>
           </form>
         </motion.div>
-      </div>
+      </PublicPage>
     </>
   );
 };

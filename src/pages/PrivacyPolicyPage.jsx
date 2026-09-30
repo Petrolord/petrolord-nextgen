@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import LegalPageLayout from '@/components/legal/LegalPageLayout';
+import { TEXT_LINK } from '@/components/public/PublicPage';
 import PolicySection from '@/components/legal/PolicySection';
 
 const tocItems = [
@@ -32,11 +33,11 @@ const PrivacyPolicyPage = () => {
       tocItems={tocItems}
     >
       <div className="flex justify-start mb-6">
-        <Button variant="ghost" onClick={() => navigate('/')} className="text-slate-400 hover:text-white hover:bg-slate-800">
+        <Button variant="ghost" onClick={() => navigate('/')} className="print:hidden">
           <ArrowLeft className="w-4 h-4 mr-2" /> Back to Home
         </Button>
       </div>
-      <div className="text-xl text-slate-400 mb-10 leading-relaxed border-l-4 border-[#BFFF00] pl-6 py-2 bg-[#1E293B]/30 rounded-r-lg">
+      <div className="text-xl text-pl-muted mb-10 leading-relaxed border-l-4 border-pl-accent pl-6 py-2 bg-pl-surface rounded-r-lg">
         At Petrolord NextGen, we take your privacy seriously. This document outlines our transparent approach to handling your data while you focus on engineering the future.
       </div>
 
@@ -52,7 +53,7 @@ const PrivacyPolicyPage = () => {
       <PolicySection id="collection" title="2. Information We Collect">
         <p>We collect personal information that you voluntarily provide to us when expressing an interest in obtaining information about us or our products and services, when participating in activities on the Services, or otherwise contacting us.</p>
         
-        <h3 className="text-white font-semibold mt-6 mb-2">Personal Information Provided by You</h3>
+        <h3 className="text-pl-text font-semibold mt-6 mb-2">Personal Information Provided by You</h3>
         <ul className="list-disc pl-5 space-y-2">
           <li><strong>Identity Data:</strong> Name, username, or similar identifier.</li>
           <li><strong>Contact Data:</strong> Billing address, delivery address, email address, and telephone numbers.</li>
@@ -60,7 +61,7 @@ const PrivacyPolicyPage = () => {
           <li><strong>Credentials:</strong> Passwords, password hints, and similar security information used for authentication and account access.</li>
         </ul>
 
-        <h3 className="text-white font-semibold mt-6 mb-2">Information Automatically Collected</h3>
+        <h3 className="text-pl-text font-semibold mt-6 mb-2">Information Automatically Collected</h3>
         <p>
           We automatically collect certain information when you visit, use, or navigate the Services. This information does not reveal your specific identity (like your name or contact information) but may include device and usage information, such as your IP address, browser and device characteristics, operating system, language preferences, referring URLs, device name, country, location, information about how and when you use our Services, and other technical information.
         </p>
@@ -110,7 +111,7 @@ const PrivacyPolicyPage = () => {
           <li><strong>Performance of a Contract:</strong> Where we have entered into a contract with you, we may process your personal information to fulfill the terms of our contract.</li>
           <li><strong>Legal Obligations:</strong> We may disclose your information where we are legally required to do so in order to comply with applicable law, governmental requests, a judicial proceeding, court order, or legal process.</li>
         </ul>
-        <h3 id="sponsored-learning" className="text-white font-semibold mt-6 mb-2">Sponsored learning</h3>
+        <h3 id="sponsored-learning" className="text-pl-text font-semibold mt-6 mb-2">Sponsored learning</h3>
         <p>
           When an employer or other organisation sponsors your enrolment in a course, that sponsor's training leads can see your
           progress and results in that course for as long as your sponsored seat is active. This covers your name and email address,
@@ -124,7 +125,7 @@ const PrivacyPolicyPage = () => {
           sharing stops when the sponsorship ends. We share this information to fulfil the sponsorship arrangement under which your
           place is provided. If you have questions about how your sponsor uses it, please contact them or us using the details below.
         </p>
-        <p className="mt-4 text-[#BFFF00] font-medium">We do not sell your personal data to advertisers or third parties.</p>
+        <p className="mt-4 text-pl-text font-semibold">We do not sell your personal data to advertisers or third parties.</p>
       </PolicySection>
 
       <PolicySection id="rights" title="7. Your User Rights">
@@ -145,9 +146,9 @@ const PrivacyPolicyPage = () => {
       </PolicySection>
 
       <PolicySection id="contact" title="10. Contact Us">
-        <p>If you have questions or comments about this policy, you may email us at <a href="mailto:privacy@petrolord.com" className="text-[#BFFF00] hover:underline">privacy@petrolord.com</a> or by post to:</p>
-        <address className="mt-4 not-italic bg-slate-800 p-6 rounded-lg border border-slate-700">
-          <strong className="text-white block mb-2">Lordsway Energy Limited</strong>
+        <p>If you have questions or comments about this policy, you may email us at <a href="mailto:privacy@petrolord.com" className={TEXT_LINK}>privacy@petrolord.com</a> or by post to:</p>
+        <address className="mt-4 not-italic bg-pl-surface p-6 rounded-lg border border-pl-border">
+          <strong className="text-pl-text block mb-2">Lordsway Energy Limited</strong>
           Data Protection Officer<br />
           8 The Providence Street<br />
           Lekki Phase 1, Lagos<br />

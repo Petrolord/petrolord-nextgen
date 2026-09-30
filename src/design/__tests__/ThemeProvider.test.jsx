@@ -14,6 +14,7 @@ import { ThemeToggle } from '@/components/ui/theme-toggle';
 import { useThemeClass } from '@/design/themeClass';
 import {
   isThemedPath, coldLoadTheme, matchesRoute, ThemedLoadingScreen,
+  isPublicLightPath,
 } from '@/design/scopePaths';
 import { THEMED_ROUTES } from '@/design/rollout';
 
@@ -161,7 +162,8 @@ describe('route registry and cold load', () => {
       expect({ p, themed: isThemedPath(p) }).toEqual({ p, themed: true });
     }
     // /legacy-probe is the test-only unregistered route (2A registered /dashboard/enroll, 3C /dashboard/apps/dca)
-    for (const p of ['/', '/login', '/legacy-probe', '/searchx']) {
+    // (6B made /login a public light route; see the 6B test below)
+    for (const p of ['/', '/legacy-probe', '/searchx']) {
       expect({ p, themed: isThemedPath(p) }).toEqual({ p, themed: false });
     }
   });
@@ -187,6 +189,22 @@ describe('route registry and cold load', () => {
     expect(coldLoadTheme('/')).toBeNull();
     render(<ThemedLoadingScreen theme="dark" />);
     expect(screen.getByTestId('themed-loading').getAttribute('data-pl-theme')).toBe('dark');
+  });
+
+  it('6B: the public and auth pages always cold-load light; the homepage and unknown paths stay legacy', () => {
+    const pages = ['/login', '/register', '/verify', '/verify/abc123', '/forgot-password', '/reset-password',
+      '/privacy-policy', '/terms-of-service', '/academic-integrity'];
+    window.localStorage.setItem(LAST_THEME_KEY, 'dark');
+    for (const p of pages) {
+      expect({ p, light: isPublicLightPath(p), themed: isThemedPath(p), cold: coldLoadTheme(p) })
+        .toEqual({ p, light: true, themed: true, cold: 'light' });
+    }
+    for (const p of ['/', '/verify/a/b', '/loginx', '/no-such-page', '/dashboard']) {
+      expect({ p, light: isPublicLightPath(p) }).toEqual({ p, light: false });
+    }
+    expect(coldLoadTheme('/')).toBeNull();
+    expect(coldLoadTheme('/no-such-page')).toBeNull();
+    expect(coldLoadTheme('/dashboard')).toBe('dark');
   });
 
   it('3C themes the reservoir course apps (their learning pages only)', () => {
