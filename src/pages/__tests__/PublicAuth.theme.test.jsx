@@ -13,6 +13,7 @@
 import React from 'react';
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { describe, it, expect, vi, beforeAll, beforeEach, afterEach } from 'vitest';
 import { screen, fireEvent, cleanup, configure, within } from '@testing-library/react';
 import '@testing-library/jest-dom/vitest';
@@ -374,7 +375,7 @@ describe('further states', () => {
 });
 
 describe('the 6B sources', () => {
-  const root = path.resolve(__dirname, '../../..');
+  const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
   const read = (rel) => fs.readFileSync(path.join(root, rel), 'utf8');
   const FILES = [
     'src/components/public/PublicPage.jsx',
