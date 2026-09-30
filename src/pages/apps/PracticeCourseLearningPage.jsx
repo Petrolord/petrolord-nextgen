@@ -30,12 +30,12 @@ export function PracticeCourseBody({ app, subtitle, intro, apps, tier, setTier, 
   return (
     <div className="relative max-w-6xl mx-auto p-6 space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-white flex flex-wrap items-center gap-2">
-          <BookOpen className="h-7 w-7 text-[#BFFF00]" /> {name}
-          <span className="text-xs px-2 py-0.5 rounded-full bg-[#BFFF00]/20 text-[#BFFF00] border border-[#BFFF00]/40">Learning Mode</span>
+        <h1 className="text-3xl font-bold text-pl-text flex flex-wrap items-center gap-2">
+          <BookOpen className="h-7 w-7 text-pl-accent-text" /> {name}
+          <span className="text-xs px-2 py-0.5 rounded-full bg-pl-accent/15 text-pl-accent-text border border-pl-accent/40">Learning Mode</span>
         </h1>
-        {subtitle && <p className="mt-1 text-xs uppercase tracking-wide text-gray-500">{subtitle}</p>}
-        {intro && <p className="mt-2 text-sm text-gray-300">{intro}</p>}
+        {subtitle && <p className="mt-1 text-xs uppercase tracking-wide text-pl-muted">{subtitle}</p>}
+        {intro && <p className="mt-2 text-sm text-pl-text">{intro}</p>}
       </div>
 
       <PracticeCourseNotice app={app} apps={apps} />
@@ -47,8 +47,8 @@ export function PracticeCourseBody({ app, subtitle, intro, apps, tier, setTier, 
           <button
             key={t}
             type="button"
-            onClick={() => setTier(t)}
-            className={`px-3 py-1.5 rounded-md border text-sm ${tier === t ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold' : 'bg-gray-800 text-gray-300 border-gray-600'}`}
+            onClick={() => setTier(t)} aria-pressed={tier === t}
+            className={`px-3 py-1.5 rounded-md border text-sm ${tier === t ? 'bg-pl-primary text-pl-primary-fg border-pl-primary font-semibold' : 'bg-pl-surface text-pl-text border-pl-border-strong hover:bg-pl-sunken'}`}
           >
             {TIER_NAMES[t]}
           </button>
@@ -56,17 +56,17 @@ export function PracticeCourseBody({ app, subtitle, intro, apps, tier, setTier, 
       </div>
 
       {manifest && (
-        <Card className="bg-[#1E293B] border-gray-700">
+        <Card>
           <CardHeader>
-            <CardTitle className="text-white flex items-center gap-2"><BookOpen className="h-5 w-5 text-[#BFFF00]" /> {TIER_NAMES[tier]} syllabus</CardTitle>
+            <CardTitle className="text-pl-text flex items-center gap-2"><BookOpen className="h-5 w-5 text-pl-accent-text" /> {TIER_NAMES[tier]} syllabus</CardTitle>
             <CardDescription>{manifest.modules.length} modules and {lessons.length} lessons.</CardDescription>
           </CardHeader>
           <CardContent className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {manifest.modules.map((m) => (
-              <div key={m.key} className="rounded-md border border-gray-700 bg-[#0F172A] p-3">
-                <p className="text-[10px] uppercase tracking-wide text-gray-500 mb-0">{TIER_NAMES[tier]}, module {m.order}</p>
-                <p className="text-white text-sm font-medium mb-1">{m.title}</p>
-                <ul className="text-xs text-gray-400 space-y-0.5 mb-0 list-none pl-0">
+              <div key={m.key} className="rounded-md border border-pl-border bg-pl-sunken p-3">
+                <p className="text-[10px] uppercase tracking-wide text-pl-muted mb-0">{TIER_NAMES[tier]}, module {m.order}</p>
+                <p className="text-pl-text text-sm font-medium mb-1">{m.title}</p>
+                <ul className="text-xs text-pl-muted space-y-0.5 mb-0 list-none pl-0">
                   {m.lessons.map((l) => <li key={l.key}>{l.title}</li>)}
                 </ul>
               </div>
@@ -75,9 +75,9 @@ export function PracticeCourseBody({ app, subtitle, intro, apps, tier, setTier, 
         </Card>
       )}
 
-      <Card className="bg-[#1E293B] border-gray-700">
+      <Card>
         <CardHeader>
-          <CardTitle className="text-white flex items-center gap-2"><PenLine className="h-5 w-5 text-[#BFFF00]" /> Written scenario work</CardTitle>
+          <CardTitle className="text-pl-text flex items-center gap-2"><PenLine className="h-5 w-5 text-pl-accent-text" /> Written scenario work</CardTitle>
           <CardDescription>
             A practice course has no calculator. Each lesson closes with a short written exercise on one of the course&apos;s
             synthetic Ekene contracts: you write the note, the checklist or the decision, and the lesson then sets out the
@@ -91,7 +91,7 @@ export function PracticeCourseBody({ app, subtitle, intro, apps, tier, setTier, 
 
       {hasDeepCourse(app, tier) && (
         <Link to={`/dashboard/apps/${app}/course/${tier}`}>
-          <Button className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold">
+          <Button className="font-semibold">
             Open the {TIER_NAMES[tier]} course <ArrowRight className="h-4 w-4 ml-1" />
           </Button>
         </Link>
@@ -128,7 +128,7 @@ const PracticeCourseLearningPage = ({ app, subtitle, intro, gateText }) => {
 
   const name = courseNameFrom(apps, app);
   if (gate.loading) {
-    return <div className="flex items-center justify-center h-64"><Loader2 className="h-8 w-8 animate-spin text-[#BFFF00]" /></div>;
+    return <div className="flex items-center justify-center h-64"><Loader2 className="h-8 w-8 animate-spin text-pl-primary-text" /></div>;
   }
   if (!gate.allowed) {
     return (

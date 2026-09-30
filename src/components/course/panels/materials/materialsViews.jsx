@@ -297,9 +297,9 @@ const SparesResult = ({ r }) => (
 
 const RiskResult = ({ r, seed, iterations }) => (
   <>
-    <div className="mt-3 rounded-md border border-sky-800/60 bg-sky-950/20 p-3">
-      <p className="text-sky-300 text-xs font-medium mb-1">SAMPLED AND UNGRADED</p>
-      <p className="text-xs text-slate-300 mb-0">Every figure below is {drawnNote(seed, iterations)}. P90 is the low figure and P10 the high one.</p>
+    <div className="mt-3 rounded-md border border-pl-info/40 bg-pl-info-bg p-3">
+      <p className="text-pl-info-text text-xs font-medium mb-1">SAMPLED AND UNGRADED</p>
+      <p className="text-xs text-pl-text mb-0">Every figure below is {drawnNote(seed, iterations)}. P90 is the low figure and P10 the high one.</p>
     </div>
     <Tbl head={['figure', 'lead time, days', 'lead-time demand']}
       rows={[['mean', 'mean'], ['P90 (the low figure)', 'p90'], ['P50', 'p50'], ['P10 (the high figure)', 'p10'], ['minimum', 'min'], ['maximum', 'max']]

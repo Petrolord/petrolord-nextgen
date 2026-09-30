@@ -889,7 +889,59 @@ production forecasting (`/dashboard/apps/forecastml`), applied AI
   with the mark, every series in a kit colour, and a source scan with a
   negative control).
 
-## 17. Batch 6B: public and auth pages (as built)
+## 17. Batch 6A: commercial and trading course apps (as built)
+
+Procurement (`/dashboard/apps/procurement`), marine logistics
+(`/dashboard/apps/marine`), the Petroleum Industry Act
+(`/dashboard/apps/pia`), gas sales agreements (`/dashboard/apps/gsa`), joint
+operating agreements (`/dashboard/apps/joa`), farm-outs
+(`/dashboard/apps/farmout`), PRMS reserves (`/dashboard/apps/prms`),
+materials and spares (`/dashboard/apps/materials`) and the contracts practice
+course (`/dashboard/apps/contracts`) are on the roles and registered in
+`src/design/rollout/w6a.js`. Their course reader pages stay on 1C's pattern
+entry. The batch was done whole, with no split.
+
+- These nine courses draw no chart (no Recharts import and no `<svg>` in any
+  panel), so the chart kit has nothing to carry here and no lime or sky
+  series needed a mapping. The panel test asserts it, so a chart added later
+  has to come through `ChartFrame`.
+- The twenty-five calculator panels take their colours from
+  `petrophysics/panelKit` (1B, scope-aware) and from each course's own
+  `panelBits.jsx` (plus `materials/materialsViews.jsx` and one box in
+  `farmout/EarningCalculator.jsx`). Those files are used by their learning
+  page, the lesson reader and the handbook, all inside a scope, so they
+  moved straight to roles with no legacy branch. No file is shared with 5C,
+  5D or 6B.
+- The labelled boxes take the status roles beside their headings: THE ENGINE
+  REFUSED on `danger`, THE ENGINE WARNS on `warning`, the declared, source
+  and consent boxes on `info`, and the neutral stated-input box on `sunken`.
+  Tables are `text-pl-text` with muted heads. The JSON and word text boxes
+  and the stated-input selects sit on `surface` with the strong border, and
+  the plain action buttons hover to `sunken`.
+- The page recipe is 4C's: cards on `surface`, lessons and the locked
+  capstone note on `sunken`, tier buttons primary when chosen (with
+  `aria-pressed`), capstone results and toasts on the success and danger
+  roles with their words, certificate number and award icon gold.
+- `pages/apps/PracticeCourseLearningPage.jsx` has one user, the contracts
+  course, so 6A owns it and it moved straight to roles with the same recipe.
+  Its notice, badge and certificate card are 1B's scope-aware pieces and are
+  unchanged. `CapstonePrompt.jsx` is untouched.
+- No lesson and no panel note in these courses names a colour, so no lesson
+  text changed.
+- Tests: `src/pages/__tests__/Commercial6A.theme.test.jsx` (the four standard
+  checks for all nine apps, every tier in both themes with no lime left,
+  capstone pass, fail and locked, the Learning Mode gate for an engine
+  course and for the practice course, no network) and
+  `src/components/course/panels/__tests__/Commercial6APanels.theme.test.jsx`
+  (every view of every panel and every choice of every select in both
+  themes, and a source scan with a negative control).
+- Found while testing, present on main and left alone: in the farmout deal
+  and information views, setting "Cap (stated)" to "not stated" makes the
+  vendored farmout engine throw a TypeError (`checkCarry` reads `cap.on`)
+  where the other stated inputs get a named refusal, and the panel unmounts.
+  The panel test skips that one choice.
+
+## 18. Batch 6B: public and auth pages (as built)
 
 Login (`/login`), register (`/register`), certificate verify (`/verify`,
 `/verify/:code`), forgot password (`/forgot-password`), reset password
