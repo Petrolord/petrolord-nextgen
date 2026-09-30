@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import {
   stagedDevice, acidGasByMoles, threeAmines, vesselGasGoesUp, flagControls,
   KREMSER_FACTORS, UBIE, UBIE_CONTACTOR,
@@ -49,14 +52,16 @@ export const MODES = [
   ['vessel', 'The vessel the gas goes up, whose equation belongs to another course'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const SERIES = ['#38bdf8', '#f472b6', '#BFFF00', '#fbbf24', '#a78bfa', '#34d399', '#fb7185'];
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+// Seven absorption factors: the five kit series colours, then the ink and the
+// slate note colour, so no two curves share a colour.
+const SERIES = [0, 1, 2, 3, 4].map(seriesColor).concat([SVG_CHART.label, SVG_CHART.note]);
 
 const Tbl = ({ head, rows }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>{head.map((h, i) => <th key={h} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>)}</tr>
       </thead>
       <tbody>
@@ -71,18 +76,18 @@ const Tbl = ({ head, rows }) => (
 );
 
 const Held = ({ children }) => (
-  <div className="mt-3 rounded-md border border-amber-700/60 bg-amber-950/20 p-3">
-    <p className="text-amber-300 text-xs font-medium mb-1">HELD FOR LITERATURE</p>
-    <p className="text-xs text-slate-300 mb-0">{children}</p>
+  <div className="mt-3 rounded-md border border-pl-warning/40 bg-pl-warning-bg p-3">
+    <p className="text-pl-warning-text text-xs font-medium mb-1">HELD FOR LITERATURE</p>
+    <p className="text-xs text-pl-text mb-0">{children}</p>
   </div>
 );
 
 /** A refusal shown as a refusal, with the evidence it carries beside it. */
 const Refusal = ({ label, message, evidence }) => (
-  <div className="mt-2 rounded-md border border-red-800/60 bg-red-950/20 p-2">
-    <p className="text-red-300 text-xs font-medium mb-1">{label}</p>
-    <p className="text-xs text-slate-300 font-mono mb-0">{message}</p>
-    {evidence ? <p className="text-xs text-slate-400 mt-1 mb-0">{evidence}</p> : null}
+  <div className="mt-2 rounded-md border border-pl-danger/40 bg-pl-danger-bg p-2">
+    <p className="text-pl-danger-text text-xs font-medium mb-1">{label}</p>
+    <p className="text-xs text-pl-text font-mono mb-0">{message}</p>
+    {evidence ? <p className="text-xs text-pl-muted mt-1 mb-0">{evidence}</p> : null}
   </div>
 );
 
@@ -105,29 +110,27 @@ export const KremserMode = ({ k }) => {
         <Tile label="Stage counts swept" value={String(k.surface.length)} />
         <Tile label="Ceiling rows read" value={String(k.ceiling.length)} />
       </TileGrid>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="stages" tick={AXIS} label={{ value: 'theoretical stages', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -3 }} />
-            <YAxis tick={AXIS} domain={[0, 1]} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(val) => nine(val)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            {KREMSER_FACTORS.map((a, i) => (
-              <ReferenceLine
-                key={`ceil${a}`}
-                y={a < 1 ? a : null}
-                stroke={SERIES[i % SERIES.length]}
-                strokeDasharray="2 4"
-                ifOverflow="hidden"
-              />
-            ))}
-            {KREMSER_FACTORS.map((a, i) => (
-              <Line key={a} dataKey={`a${String(a).replace('.', '_')}`} name={`A = ${a}`} stroke={SERIES[i % SERIES.length]} dot={false} isAnimationActive={false} />
-            ))}
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="stages" tick={AXIS} label={{ value: 'theoretical stages', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
+          <YAxis tick={AXIS} domain={[0, 1]} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(val) => nine(val)} />
+          <Legend {...LEGEND_PROPS} />
+          {KREMSER_FACTORS.map((a, i) => (
+            <ReferenceLine
+              key={`ceil${a}`}
+              y={a < 1 ? a : null}
+              stroke={SERIES[i % SERIES.length]}
+              strokeDasharray="2 4"
+              ifOverflow="hidden"
+            />
+          ))}
+          {KREMSER_FACTORS.map((a, i) => (
+            <Line key={a} dataKey={`a${String(a).replace('.', '_')}`} name={`A = ${a}`} stroke={SERIES[i % SERIES.length]} dot={false} isAnimationActive={false} />
+          ))}
+        </LineChart>
+      </ChartFrame>
       <Note>
         The dashed lines are the CEILING. For every absorption factor below one the removal flattens onto the factor
         itself and stops, and the dashed line it stops on is drawn at that factor. Above one there is no dashed line and
@@ -168,7 +171,7 @@ export const StagesMode = ({ k, f }) => {
       )}
       {f && (
         <>
-          <p className="text-xs text-slate-400 mt-3 mb-0">
+          <p className="text-xs text-pl-muted mt-3 mb-0">
             WHAT ACTUALLY REFUSES IS NOT WHAT IT LOOKS LIKE. A factor below one looks like the thing that has no stage
             count. It is not: what refuses is a factor at or below the REMOVAL the spec asks for. The middle row below is
             the case that tells the two apart.
@@ -197,7 +200,7 @@ export const MolesMode = ({ m }) => {
         <Tile label="Loading swing, the difference" value={nine(m.swingDerived)} unit="mol/mol" />
         <Tile label="Acid gas picked up" value={four(m.acidMolesDay)} unit="lbmol/day" />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Three names and three different numbers. The rich loading is a CEILING that corrosion sets. The swing is a
         THROUGHPUT that the regenerator buys, it is the difference between the two loadings, and it is what sets the
         circulation of {six(m.circGpm)} gpm and the {six(m.reboilerMMBtuHr)} MMBtu an hour of regenerator. The engine
@@ -272,7 +275,7 @@ export const VesselMode = ({ v }) => {
   if (!v) return <Note>The vessel reader did not return a sizing.</Note>;
   return (
     <>
-      <p className="text-xs text-slate-400 mb-0">
+      <p className="text-xs text-pl-muted mb-0">
         THE EQUATION IS NOT NEW. Souders-Brown, the K value and the settling velocity are owned by the Separation and
         Slug Catching course, which teaches the published K rows and the mist extractor that sets them. There is no
         K-value chart on this page. What is new here is the duty: a contactor is a mass transfer column, sized on the gas
@@ -284,7 +287,7 @@ export const VesselMode = ({ v }) => {
         <Tile label="Allowed velocity" value={six(v.ubie.vAllowFtS)} unit="ft/s" />
         <Tile label="Diameter" value={six(v.ubie.diameterFt)} unit="ft" />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The compressibility is not an input on that row. The engine formed it from the same correlation the rest of the
         platform uses, at {six(UBIE_CONTACTOR.pPsia)} psia and {six(UBIE_CONTACTOR.tF)} degF, and reports where it came
         from as {v.zSourceFormed}. Handed one instead, it reports {v.zSourceGiven}.
@@ -297,7 +300,7 @@ export const VesselMode = ({ v }) => {
         head={['K, ft/s', 'allowed velocity, ft/s', 'diameter, ft']}
         rows={v.kSweep.map((r) => [six(r.ksFtS), six(r.vAllowFtS), six(r.diameterFt)])}
       />
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         The liquid the gas rises against is an input. The same published case sized against glycol comes out
         {' '}{nine(v.thirdAgainstGlycolFt)} ft and against MDEA solution {nine(v.thirdAgainstAmineFt)} ft, a factor of
         {' '}{nine(v.thirdLiquidFactorDerived)}. A column sized against the wrong fluid is confidently the wrong width.

@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, BarChart, ScatterChart, Scatter, Bar, XAxis, YAxis, ZAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
+  BarChart, ScatterChart, Scatter, Bar, XAxis, YAxis, ZAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import { distancesAndSetbacks, stationJudged, layoutReading } from './separationLab';
 import {
   PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note,
@@ -30,13 +33,13 @@ export const MODES = [
   ['table', 'Table: the spacing figures used, and the null a pair the table does not carry returns'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
 
 const Tbl = ({ head, rows }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>{head.map((h, i) => <th key={i} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>)}</tr>
       </thead>
       <tbody>
@@ -59,7 +62,7 @@ export const DistancesMode = ({ ds, sj }) => {
   const plan = (sj?.neighbours || []).map((r) => ({ x: r.distanceM, y: r.requiredM === null ? 0 : r.requiredM, name: r.name }));
   return (
     <>
-      <p className="text-xs text-slate-400 mb-0">
+      <p className="text-xs text-pl-muted mb-0">
         The ERHA station sits at {six(ds.datum.lat)} north, {six(ds.datum.lon)} east. The engine measures on a sphere,
         because a site plan at a real latitude is not a flat grid.
       </p>
@@ -68,18 +71,16 @@ export const DistancesMode = ({ ds, sj }) => {
         rows={ds.distances.map((d) => [d.fromName, d.toName, four(d.distanceM)])}
       />
       {plan.length > 0 && (
-        <div className="h-48 mt-3">
-          <ResponsiveContainer width="100%" height="100%">
-            <ScatterChart margin={{ top: 10, right: 20, bottom: 15, left: 20 }}>
-              <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-              <XAxis type="number" dataKey="x" name="nearest neighbour, m" tick={AXIS} label={{ value: 'distance to nearest neighbour, m', fill: '#94a3b8', fontSize: 10, position: 'insideBottom', offset: -10 }} />
-              <YAxis type="number" dataKey="y" name="table requirement, m" tick={AXIS} />
-              <ZAxis range={[60, 60]} />
-              <Tooltip contentStyle={TOOLTIP} formatter={(v) => four(v)} />
-              <Scatter data={plan} name="each placed item" fill="#38bdf8" isAnimationActive={false} />
-            </ScatterChart>
-          </ResponsiveContainer>
-        </div>
+        <ChartFrame height={192} className="mt-3">
+          <ScatterChart margin={{ top: 10, right: 20, bottom: 15, left: 20 }}>
+            <CartesianGrid {...GRID_STYLE} />
+            <XAxis height={XAXIS_LABEL_HEIGHT} type="number" dataKey="x" name="nearest neighbour, m" tick={AXIS} label={{ value: 'distance to nearest neighbour, m', fill: SVG_CHART.note, fontSize: 10, position: 'insideBottom', offset: -10 }} />
+            <YAxis type="number" dataKey="y" name="table requirement, m" tick={AXIS} />
+            <ZAxis range={[60, 60]} />
+            <Tooltip contentStyle={TOOLTIP} formatter={(v) => four(v)} />
+            <Scatter data={plan} name="each placed item" fill={seriesColor(0)} isAnimationActive={false} />
+          </ScatterChart>
+        </ChartFrame>
       )}
       <Tbl
         head={['published distance case', 'haversine m', 'Vincenty m (golden)', 'chord m (golden)']}
@@ -106,7 +107,7 @@ export const SetbacksMode = ({ ds }) => {
           <Tile label="Setback" value={four(ds.flare.distanceM)} unit="m" />
         </TileGrid>
       </div>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         A radiation setback is computed from the duty, so it moves when the duty moves. Double the relief rate and the
         setback grows with the square root of the heat release.
       </p>
@@ -130,7 +131,7 @@ export const SetbacksMode = ({ ds }) => {
           <Tile label="The difference (derived)" value={four(ds.halfPoolDiameterDerivedM)} unit="m, half the pool diameter" />
         </TileGrid>
       </div>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         That difference is the defect the Suite layer carried. The layout check measures centre to centre and the tank
         icon is the pool centre, so passing the setback measured from the EDGE made every check short by half the bund and
         the check failed open.
@@ -169,23 +170,21 @@ export const CheckMode = ({ sj, lr }) => {
         head={['kind', 'from', 'to', 'actual m', 'required m', 'shortfall m', 'shortfall fraction']}
         rows={sj.violations.map((v) => [v.kind, v.aName, v.bName, four(v.actualM), four(v.requiredM), four(v.shortfallM), six(v.shortfallFraction)])}
       />
-      <div className="h-48 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={bars} layout="vertical" margin={{ top: 10, right: 20, bottom: 5, left: 80 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis type="number" tick={AXIS} />
-            <YAxis type="category" dataKey="pair" tick={{ ...AXIS, fontSize: 9 }} width={80} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => four(v)} />
-            <ReferenceLine x={0} stroke="#94a3b8" />
-            <Bar dataKey="shortfall" name="shortfall, m" fill="#f472b6" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={192} className="mt-3">
+        <BarChart data={bars} layout="vertical" margin={{ top: 10, right: 20, bottom: 5, left: 80 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis type="number" tick={AXIS} />
+          <YAxis type="category" dataKey="pair" tick={{ ...AXIS, fontSize: 9 }} width={80} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => four(v)} />
+          <ReferenceLine x={0} stroke={SVG_CHART.note} />
+          <Bar dataKey="shortfall" name="shortfall, m" fill={seriesColor(4)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
       <Tbl
         head={['item skipped', 'why']}
         rows={sj.skipped.map((s) => [s.id, s.reason])}
       />
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         What the half-bund correction is worth on this plot. The retired Suite layer handed the check the setback from
         the pool EDGE, {four(sj.retiredEdge.edgeSetbackM)} m, where the check measures centre to centre and the real
         requirement is {four(sj.retiredEdge.radiusFromCentreM)} m. The same plot judged both ways:
@@ -195,7 +194,7 @@ export const CheckMode = ({ sj, lr }) => {
         rows={sj.retiredEdge.rows.map((r) => [`Crude tank to ${r.bName}`, four(r.actualM), four(r.requiredM), four(r.shortfallM),
           four(r.retiredRequiredM), r.retiredShortfallM === null ? 'not flagged at all' : four(r.retiredShortfallM)])}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Every row&apos;s two shortfalls differ by {four(sj.retiredEdge.halfBundDerivedM)} m, the half bund. The heater
         treater shows what the defect cost: {four(sj.retiredEdge.heaterTreaterShortfallM)} m short of the real
         requirement and only {four(sj.retiredEdge.heaterTreaterRetiredShortfallM)} m short of the retired one. Judged the
@@ -203,7 +202,7 @@ export const CheckMode = ({ sj, lr }) => {
         {' '}{String(sj.violationCount)}, so the defect never showed as a pass. It showed as a smaller number, which is the
         harder kind to notice.
       </p>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Complete and pass answer different questions. Complete says the layout was fully judged, and it is false here
         because things were skipped and some type pairs have no table figure. Pass says the comparisons that were made all
         cleared. A layout can pass and still be incomplete.
@@ -233,7 +232,7 @@ export const RankingsMode = ({ sj, lr }) => {
           <Tile label="Short by" value={six(sj.worstRelative.shortfallFraction)} unit={`of its requirement, ${four(sj.worstRelative.requiredM)} m`} />
         </TileGrid>
       </div>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Two rankings are returned and neither is called the worst on its own. They name different pairs here. A pair a
         couple of metres short of a three metre figure is the worst RELATIVE breach, while a control room tens of metres
         short of ninety is the worst ABSOLUTE one, and which of the two matters is a judgement the engine leaves to the
@@ -267,7 +266,7 @@ export const TableMode = ({ ds }) => {
         head={['pair of equipment types', 'required m']}
         rows={ds.table.map((r) => [`${r.typeA} to ${r.typeB}`, r.requiredM === null ? 'null, the table has no figure' : six(r.requiredM)])}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The lookup is symmetric, so a pair reads the same in either order. A pair the table does not carry comes back as
         null rather than a guess, which is why a real plot with a modern skid or a flow meter on it reports incomplete the
         moment it is checked.
@@ -280,10 +279,10 @@ export const TableMode = ({ ds }) => {
           <Tile label="A radiation setback" value="computed" unit="it moves when the duty moves" />
         </TileGrid>
       </div>
-      <div className="mt-3 rounded-md border border-amber-700/60 bg-amber-950/20 p-3">
-        <p className="text-amber-300 text-xs font-medium mb-1">HELD FOR LITERATURE</p>
-        <p className="text-xs text-slate-300 mb-2">{ds.heldTable.note}</p>
-        <p className="text-xs text-slate-300 mb-0">{ds.heldLabels.note}</p>
+      <div className="mt-3 rounded-md border border-pl-warning/40 bg-pl-warning-bg p-3">
+        <p className="text-pl-warning-text text-xs font-medium mb-1">HELD FOR LITERATURE</p>
+        <p className="text-xs text-pl-text mb-2">{ds.heldTable.note}</p>
+        <p className="text-xs text-pl-text mb-0">{ds.heldLabels.note}</p>
       </div>
     </>
   );
