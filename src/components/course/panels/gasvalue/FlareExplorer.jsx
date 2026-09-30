@@ -1,14 +1,15 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, Legend,
+  BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, Legend,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
 import {
   GAS_PRESETS, presetRows, gasAt, referenceAt, pureComponentsAt, carbonProbeAt, analysisRefusalsAt, richnessEdgesAt,
   missingProbesAt, flareAt, BLANK_FLARE, egbemaFlareInputs, flareMolarMassesAt, passThroughAt, destructionSweepAt,
   gwpSweepAt, flareRefusalsAt, fmt, plain,
 } from './gasvalueLab';
 import {
-  AXIS, TOOLTIP, GRID, SERIES, txt, usable, Tbl, Refusal, EngineNote, Note, Lead, Labelled, Empty, safe, NumBox,
+  AXIS, TOOLTIP, GRID, SERIES, AXIS_NOTE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT, txt, usable, Tbl, Refusal, EngineNote, Note, Lead, Labelled, Empty, safe, NumBox,
   Button, Missing, Basis,
 } from './panelBits';
 import {
@@ -55,8 +56,8 @@ const Presets = ({ onPreset }) => (
 /** The sheet as boxes. A box left blank goes to the engine blank. */
 const SheetTable = ({ rows, onRow }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>
           <th className="text-left pr-3">code</th>
           {COLUMNS.map(([, h]) => <th key={h} className="text-left pr-3 whitespace-nowrap">{h}</th>)}
@@ -74,7 +75,7 @@ const SheetTable = ({ rows, onRow }) => (
                   aria-label={`${r.code} ${k}`}
                   value={r[k] === null || r[k] === undefined ? '' : r[k]}
                   onChange={(e) => onRow(i, k, e.target.value)}
-                  className="w-24 bg-gray-700 text-white border border-gray-600 rounded px-1 h-7"
+                  className="w-24 rounded border border-pl-border-strong bg-pl-surface text-pl-text px-1 h-7"
                 />
               </td>
             ))}
@@ -167,7 +168,7 @@ export const MoleMode = ({ gas, rows, onRow, onPreset, probe }) => {
           </TileGrid>
           {g.ghvNote && <EngineNote>{g.ghvNote}</EngineNote>}
           <Labelled tag="the reading the engine does not use">
-            <p className="text-xs text-slate-300 mb-0">
+            <p className="text-xs text-pl-text mb-0">
               The same heating values weighted by mass: {fmt.f4(g.massWeightedGhvNotUsed)} Btu/scf, minus the
               engine&apos;s: {fmt.f4(g.massWeightedLessEngineNotUsed)}. The engine asked about the hydrocarbons alone
               (inerts left out and the rest scaled to one): {fmt.f4(g.hydrocarbonsOnlyGhv)} Btu/scf, minus the
@@ -175,17 +176,15 @@ export const MoleMode = ({ gas, rows, onRow, onPreset, probe }) => {
             </p>
           </Labelled>
           {ghvBars.length > 0 && (
-            <div className="mt-3 h-48">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={ghvBars} margin={{ top: 8, right: 16, bottom: 8, left: 8 }}>
-                  <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
-                  <XAxis dataKey="name" tick={AXIS} />
-                  <YAxis tick={AXIS} label={{ value: 'Btu/scf', angle: -90, position: 'insideLeft', fill: '#94a3b8', fontSize: 11 }} />
-                  <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt.f4(v)} />
-                  <Bar dataKey="value" fill={SERIES[0]} isAnimationActive={false} />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
+            <ChartFrame height={192} className="mt-3">
+              <BarChart data={ghvBars} margin={{ top: 8, right: 16, bottom: 8, left: 8 }}>
+                <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
+                <XAxis dataKey="name" tick={AXIS} />
+                <YAxis tick={AXIS} label={{ value: 'Btu/scf', angle: -90, position: 'insideLeft', fill: AXIS_NOTE, fontSize: 11 }} />
+                <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt.f4(v)} />
+                <Bar dataKey="value" fill={SERIES[0]} isAnimationActive={false} />
+              </BarChart>
+            </ChartFrame>
           )}
         </>
       )}
@@ -228,19 +227,17 @@ export const LiquidsMode = ({ gas, rows, onRow, onPreset, edges, probes }) => {
           </TileGrid>
           <EngineNote>{g.gpmBasis}</EngineNote>
           {e && !gpmMissing && (
-            <div className="mt-3 h-32">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart layout="vertical" data={[{ name: 'gpmC3Plus', value: g.gpmC3Plus }]} margin={{ top: 8, right: 24, bottom: 8, left: 24 }}>
-                  <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
-                  <XAxis type="number" tick={AXIS} domain={[0, (max) => Math.max(max, e.moderateToRich.gpmC3Plus) * 1.2]} />
-                  <YAxis type="category" dataKey="name" tick={AXIS} />
-                  <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt.f4(v)} />
-                  <ReferenceLine x={e.leanToModerate.gpmC3Plus} stroke={SERIES[3]} strokeDasharray="4 4" label={{ value: 'lean to moderate', fill: '#fbbf24', fontSize: 10, position: 'top' }} />
-                  <ReferenceLine x={e.moderateToRich.gpmC3Plus} stroke={SERIES[1]} strokeDasharray="4 4" label={{ value: 'moderate to rich', fill: '#f472b6', fontSize: 10, position: 'top' }} />
-                  <Bar dataKey="value" fill={SERIES[2]} isAnimationActive={false} />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
+            <ChartFrame height={128} className="mt-3">
+              <BarChart layout="vertical" data={[{ name: 'gpmC3Plus', value: g.gpmC3Plus }]} margin={{ top: 8, right: 24, bottom: 8, left: 24 }}>
+                <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
+                <XAxis type="number" tick={AXIS} domain={[0, (max) => Math.max(max, e.moderateToRich.gpmC3Plus) * 1.2]} />
+                <YAxis type="category" dataKey="name" tick={AXIS} />
+                <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt.f4(v)} />
+                <ReferenceLine x={e.leanToModerate.gpmC3Plus} stroke={SERIES[3]} strokeDasharray="4 4" label={{ value: 'lean to moderate', fill: SERIES[3], fontSize: 10, position: 'top' }} />
+                <ReferenceLine x={e.moderateToRich.gpmC3Plus} stroke={SERIES[1]} strokeDasharray="4 4" label={{ value: 'moderate to rich', fill: SERIES[1], fontSize: 10, position: 'top' }} />
+                <Bar dataKey="value" fill={SERIES[2]} isAnimationActive={false} />
+              </BarChart>
+            </ChartFrame>
           )}
         </>
       )}
@@ -304,29 +301,27 @@ export const FlareMode = ({ flare, inputs, onInput, onEgbema, onClear, molar, pa
           {f.combustionEfficiencyNote && <EngineNote>{f.combustionEfficiencyNote}</EngineNote>}
           <EngineNote>{f.basis}</EngineNote>
           <Labelled tag="the reading the engine does not use">
-            <p className="text-xs text-slate-300 mb-0">
+            <p className="text-xs text-pl-text mb-0">
               Every unburned carbon atom counted as methane, from the engine&apos;s own carbon per mole:
               {' '}{fmt.t3(f.allCarbonMethaneNotUsed)} t/yr, over the engine&apos;s {fmt.t3(f.flareCh4Tonnes)} t/yr:
               {' '}{fmt.f4(f.allCarbonOverEngineNotUsed)}. The engine counts the methane in the gas.
             </p>
           </Labelled>
-          <div className="mt-3 h-48">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart
-                data={[
-                  { name: 'methane, the engine', t: f.flareCh4Tonnes },
-                  { name: 'every unburned carbon (not used)', t: f.allCarbonMethaneNotUsed },
-                ]}
-                margin={{ top: 8, right: 16, bottom: 8, left: 8 }}
-              >
-                <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
-                <XAxis dataKey="name" tick={AXIS} />
-                <YAxis tick={AXIS} label={{ value: 't/yr', angle: -90, position: 'insideLeft', fill: '#94a3b8', fontSize: 11 }} />
-                <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt.t3(v)} />
-                <Bar dataKey="t" fill={SERIES[1]} isAnimationActive={false} />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
+          <ChartFrame height={192} className="mt-3">
+            <BarChart
+              data={[
+                { name: 'methane, the engine', t: f.flareCh4Tonnes },
+                { name: 'every unburned carbon (not used)', t: f.allCarbonMethaneNotUsed },
+              ]}
+              margin={{ top: 8, right: 16, bottom: 8, left: 8 }}
+            >
+              <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
+              <XAxis dataKey="name" tick={AXIS} />
+              <YAxis tick={AXIS} label={{ value: 't/yr', angle: -90, position: 'insideLeft', fill: AXIS_NOTE, fontSize: 11 }} />
+              <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt.t3(v)} />
+              <Bar dataKey="t" fill={SERIES[1]} isAnimationActive={false} />
+            </BarChart>
+          </ChartFrame>
         </>
       )}
       {m && (
@@ -343,19 +338,17 @@ export const FlareMode = ({ flare, inputs, onInput, onEgbema, onClear, molar, pa
       {Array.isArray(sweep) && sweep.length > 0 && (
         <>
           <Lead>EGBEMA&apos;s destruction efficiency swept, combustion left out so it stands in each time:</Lead>
-          <div className="mt-2 h-56">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={sweep.filter((x) => !x.refusal)} margin={{ top: 8, right: 16, bottom: 18, left: 8 }}>
-                <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
-                <XAxis dataKey="eta" type="number" domain={['dataMin', 'dataMax']} tick={AXIS} label={{ value: 'destruction efficiency', position: 'insideBottom', offset: -8, fill: '#94a3b8', fontSize: 11 }} />
-                <YAxis tick={AXIS} />
-                <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt.t3(v)} />
-                <Legend wrapperStyle={{ fontSize: 11 }} />
-                <Line type="linear" dataKey="flareCo2eTonnes" name="CO2e t/yr" stroke={SERIES[0]} isAnimationActive={false} />
-                <Line type="linear" dataKey="flareCo2Tonnes" name="CO2 t/yr" stroke={SERIES[2]} isAnimationActive={false} />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
+          <ChartFrame height={224} className="mt-2">
+            <LineChart data={sweep.filter((x) => !x.refusal)} margin={{ top: 8, right: 16, bottom: 18, left: 8 }}>
+              <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
+              <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="eta" type="number" domain={['dataMin', 'dataMax']} tick={AXIS} label={{ value: 'destruction efficiency', position: 'insideBottom', offset: -8, fill: AXIS_NOTE, fontSize: 11 }} />
+              <YAxis tick={AXIS} />
+              <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt.t3(v)} />
+              <Legend {...LEGEND_PROPS} />
+              <Line type="linear" dataKey="flareCo2eTonnes" name="CO2e t/yr" stroke={SERIES[0]} isAnimationActive={false} />
+              <Line type="linear" dataKey="flareCo2Tonnes" name="CO2 t/yr" stroke={SERIES[2]} isAnimationActive={false} />
+            </LineChart>
+          </ChartFrame>
           <Tbl
             head={['destruction efficiency (input)', 'flareCo2Tonnes', 'flareCh4Tonnes', 'flareCo2eTonnes', 'methaneShareOfFlareCo2e']}
             rows={sweep.map((x) => [x.eta, fmt.t3(x.flareCo2Tonnes), fmt.t3(x.flareCh4Tonnes), fmt.t3(x.flareCo2eTonnes), fmt.f4(x.methaneShareOfFlareCo2e)])}

@@ -1,7 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, Cell,
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, Cell,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
 import {
   GAS_PRESETS, presetRows, routeTemplatesAt, screensAt, egbemaLimits, blankLimits, yieldChecksAt, yieldRefusalsAt,
   studioLpgAt, egbemaRouteInputs, egbemaParcel, routeYearAt, routeYearsAt, scalingExponentsAt, COUNTERFACTUAL_PRESETS,
@@ -9,7 +10,7 @@ import {
   fmt, plain,
 } from './gasvalueLab';
 import {
-  AXIS, TOOLTIP, GRID, SERIES, txt, usable, Tbl, Refusal, EngineNote, Note, Lead, Labelled, Empty, safe, NumBox,
+  AXIS, TOOLTIP, GRID, SERIES, AXIS_NOTE, GUIDE, XAXIS_LABEL_HEIGHT, txt, usable, Tbl, Refusal, EngineNote, Note, Lead, Labelled, Empty, safe, NumBox,
   Button, Missing, Basis,
 } from './panelBits';
 import {
@@ -45,12 +46,12 @@ const GAS_OPTIONS = GAS_PRESETS.map(([id, label]) => [id, label]);
 
 const TextBox = ({ label, value, onChange }) => (
   <div>
-    <Label className="text-gray-400 text-xs mb-1 block">{label}</Label>
+    <Label className="text-pl-muted text-xs mb-1 block">{label}</Label>
     <Input
       type="text"
       value={value === null || value === undefined ? '' : value}
       onChange={(e) => onChange(e.target.value)}
-      className="bg-gray-700 text-white border-gray-600 h-8 text-sm"
+      className="h-8 text-sm"
     />
   </div>
 );
@@ -71,10 +72,10 @@ export const ScreenMode = ({ templates, screens, limits, onLimit, onStudy, onUns
       {templates.templates.map((t) => {
         const s = S.find((x) => x.routeId === t.id) || null;
         return (
-          <div key={t.id} className="mt-3 rounded-md border border-gray-700 p-3">
-            <p className="text-white text-sm font-medium mb-1">
+          <div key={t.id} className="mt-3 rounded-md border border-pl-border p-3">
+            <p className="text-pl-text text-sm font-medium mb-1">
               {t.label}
-              <span className="ml-2 text-xs text-slate-400">yield in {t.yieldBasis.unit}, ceiling on the {t.yieldBasis.ceiling}</span>
+              <span className="ml-2 text-xs text-pl-muted">yield in {t.yieldBasis.unit}, ceiling on the {t.yieldBasis.ceiling}</span>
             </p>
             <FieldGrid>
               {t.requirements.map((q) => (
@@ -95,8 +96,8 @@ export const ScreenMode = ({ templates, screens, limits, onLimit, onStudy, onUns
                   rows={s.checks.map((c) => [c.label, fmt.f4(c.actual), c.limit === null || c.limit === '' ? 'unset' : plain(c.limit), c.status, fmt.f4(c.margin)])}
                 />
                 <p className="text-xs mt-2 mb-0">
-                  <span className="text-slate-400">verdict: </span>
-                  <span className={s.verdict === 'passes' ? 'text-emerald-300' : s.verdict === 'fails' ? 'text-red-300' : 'text-amber-300'}>{s.verdict}</span>
+                  <span className="text-pl-muted">verdict: </span>
+                  <span className={s.verdict === 'passes' ? 'text-pl-success-text' : s.verdict === 'fails' ? 'text-pl-danger-text' : 'text-pl-warning-text'}>{s.verdict}</span>
                 </p>
                 {s.failures.length > 0 && (
                   <Tbl
@@ -126,8 +127,8 @@ export const YieldMode = ({ ceilings, years, inputs, onInput, refusals, studio }
       {ceilings.map((c) => {
         const y = Y.find((x) => x.routeId === c.routeId) || null;
         return (
-          <div key={c.routeId} className="mt-3 rounded-md border border-gray-700 p-3">
-            <p className="text-white text-sm font-medium mb-1">{c.label}</p>
+          <div key={c.routeId} className="mt-3 rounded-md border border-pl-border p-3">
+            <p className="text-pl-text text-sm font-medium mb-1">{c.label}</p>
             <FieldGrid>
               <NumBox label={`Yield per Mscf, ${c.unit}`} value={(I[c.routeId] || {}).productUnitPerMscf} onChange={(v) => onInput(c.routeId, 'productUnitPerMscf', v)} />
               {c.ceiling === null
@@ -140,20 +141,18 @@ export const YieldMode = ({ ceilings, years, inputs, onInput, refusals, studio }
         );
       })}
       {chart.length > 0 && (
-        <div className="mt-3 h-48">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={chart} margin={{ top: 8, right: 16, bottom: 8, left: 8 }}>
-              <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
-              <XAxis dataKey="name" tick={AXIS} />
-              <YAxis tick={AXIS} label={{ value: 'typed yield over ceiling', angle: -90, position: 'insideLeft', fill: '#94a3b8', fontSize: 11 }} />
-              <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt.f4(v)} />
-              <ReferenceLine y={1} stroke={SERIES[5]} strokeDasharray="4 4" />
-              <Bar dataKey="share" isAnimationActive={false}>
-                {chart.map((x) => <Cell key={x.name} fill={x.share > 1 ? SERIES[5] : SERIES[0]} />)}
-              </Bar>
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
+        <ChartFrame height={192} className="mt-3">
+          <BarChart data={chart} margin={{ top: 8, right: 16, bottom: 8, left: 8 }}>
+            <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
+            <XAxis dataKey="name" tick={AXIS} />
+            <YAxis tick={AXIS} label={{ value: 'typed yield over ceiling', angle: -90, position: 'insideLeft', fill: AXIS_NOTE, fontSize: 11 }} />
+            <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt.f4(v)} />
+            <ReferenceLine y={1} stroke={SERIES[5]} strokeDasharray="4 4" />
+            <Bar dataKey="share" isAnimationActive={false}>
+              {chart.map((x) => <Cell key={x.name} fill={x.share > 1 ? SERIES[5] : SERIES[0]} />)}
+            </Bar>
+          </BarChart>
+        </ChartFrame>
       )}
       <Lead>Yields the engine refuses:</Lead>
       <Tbl head={['probe', 'engine']} rows={(Array.isArray(refusals) ? refusals : []).map((x) => [x.probe, `REFUSED: ${txt(x.refusal)}`])} />
@@ -208,7 +207,7 @@ export const YearMode = ({ route, onRoute, year, inputs, onInput, parcel, onParc
           {y.capexNote && <EngineNote>{y.capexNote}</EngineNote>}
           <EngineNote>{y.valuationNote}</EngineNote>
           <Labelled tag="the reading this route does not use">
-            <p className="text-xs text-slate-300 mb-0">
+            <p className="text-xs text-pl-text mb-0">
               The six-tenths rule on the same plant (modularRefinery&apos;s STICK_BUILT exponent): {fmt.d2(y.sixTenthsNotUsed)} dollars.
               {' '}Modular minus six-tenths: {fmt.d2(y.modularLessSixTenthsDerived)} dollars.
             </p>
@@ -269,25 +268,23 @@ export const CounterfactualMode = ({ cf, inputs, onInput, preset, onPreset, tabl
           {c.blockedBy && <EngineNote>blockedBy: {c.blockedBy}</EngineNote>}
           {c.warning && <EngineNote>{c.warning}</EngineNote>}
           {c.netAbatementTonnesCo2ePerYear !== null && (
-            <div className="mt-3 h-52">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart
-                  data={[
-                    { name: 'gross flare', t: c.grossClaimIfNoCounterfactual },
-                    { name: 'avoided (recovered share)', t: c.avoidedFlareCo2eTonnes },
-                    { name: 'net abatement', t: c.netAbatementTonnesCo2ePerYear },
-                  ]}
-                  margin={{ top: 8, right: 16, bottom: 8, left: 8 }}
-                >
-                  <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
-                  <XAxis dataKey="name" tick={AXIS} />
-                  <YAxis tick={AXIS} label={{ value: 'tCO2e a year', angle: -90, position: 'insideLeft', fill: '#94a3b8', fontSize: 11 }} />
-                  <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt.t3(v)} />
-                  <ReferenceLine y={0} stroke="#94a3b8" />
-                  <Bar dataKey="t" fill={SERIES[4]} isAnimationActive={false} />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
+            <ChartFrame height={208} className="mt-3">
+              <BarChart
+                data={[
+                  { name: 'gross flare', t: c.grossClaimIfNoCounterfactual },
+                  { name: 'avoided (recovered share)', t: c.avoidedFlareCo2eTonnes },
+                  { name: 'net abatement', t: c.netAbatementTonnesCo2ePerYear },
+                ]}
+                margin={{ top: 8, right: 16, bottom: 8, left: 8 }}
+              >
+                <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
+                <XAxis dataKey="name" tick={AXIS} />
+                <YAxis tick={AXIS} label={{ value: 'tCO2e a year', angle: -90, position: 'insideLeft', fill: AXIS_NOTE, fontSize: 11 }} />
+                <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt.t3(v)} />
+                <ReferenceLine y={0} stroke={GUIDE} />
+                <Bar dataKey="t" fill={SERIES[4]} isAnimationActive={false} />
+              </BarChart>
+            </ChartFrame>
           )}
         </>
       )}
@@ -334,20 +331,18 @@ export const CreditsMode = ({ credits, cf, year, prices, onPrices, hurdle, onHur
           </TileGrid>
           {r.verdict && <EngineNote>{r.verdict}</EngineNote>}
           {chart.length > 0 && (
-            <div className="mt-3 h-48">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={chart} margin={{ top: 8, right: 16, bottom: 8, left: 8 }}>
-                  <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
-                  <XAxis dataKey="name" tick={AXIS} label={{ value: 'credit price, in the order typed', position: 'insideBottom', offset: -2, fill: '#94a3b8', fontSize: 11 }} />
-                  <YAxis tick={AXIS} />
-                  <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt.d2(v)} />
-                  {r.hurdleMarginPerYear !== null && <ReferenceLine y={r.hurdleMarginPerYear} stroke={SERIES[3]} strokeDasharray="4 4" />}
-                  <Bar dataKey="total" isAnimationActive={false}>
-                    {chart.map((x) => <Cell key={x.name} fill={x.clears ? SERIES[2] : SERIES[5]} />)}
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
+            <ChartFrame height={192} className="mt-3">
+              <BarChart data={chart} margin={{ top: 8, right: 16, bottom: 8, left: 8 }}>
+                <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
+                <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="name" tick={AXIS} label={{ value: 'credit price, in the order typed', position: 'insideBottom', offset: -2, fill: AXIS_NOTE, fontSize: 11 }} />
+                <YAxis tick={AXIS} />
+                <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt.d2(v)} />
+                {r.hurdleMarginPerYear !== null && <ReferenceLine y={r.hurdleMarginPerYear} stroke={SERIES[3]} strokeDasharray="4 4" />}
+                <Bar dataKey="total" isAnimationActive={false}>
+                  {chart.map((x) => <Cell key={x.name} fill={x.clears ? SERIES[0] : SERIES[5]} />)}
+                </Bar>
+              </BarChart>
+            </ChartFrame>
           )}
         </>
       )}

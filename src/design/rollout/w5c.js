@@ -7,4 +7,5 @@ export default [
   '/dashboard/apps/lopa',
   '/dashboard/apps/qra',
   '/dashboard/apps/consequence',
+  '/dashboard/apps/gasvalue',
 ];

@@ -1,4 +1,6 @@
 import React from 'react';
+import { CHART_COLORS, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
@@ -17,10 +19,15 @@ import { Label } from '@/components/ui/label';
 // NO REFUSAL STRING IS A LITERAL HERE. Refusal prints the sentence the engine
 // returned, through the lab.
 
-export const AXIS = { fill: '#94a3b8', fontSize: 11 };
-export const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-export const GRID = '#334155';
-export const SERIES = ['#38bdf8', '#f472b6', '#BFFF00', '#fbbf24', '#a78bfa', '#f87171'];
+export const AXIS = AXIS_TICK;
+export const TOOLTIP = TOOLTIP_STYLE;
+export const GRID = CHART_COLORS.grid;
+// The old dark-plate hues in their old slots (sky, pink, lime, amber, violet,
+// red), now the chart kit's colours for the white plate.
+export const SERIES = [seriesColor(1), seriesColor(4), seriesColor(0), seriesColor(2), seriesColor(4), seriesColor(3)];
+export const AXIS_NOTE = SVG_CHART.note;
+export const GUIDE = SVG_CHART.reference;
+export { LEGEND_PROPS, XAXIS_LABEL_HEIGHT };
 
 /** A value as the digest prints it: a missing value is none. */
 export const txt = (v) => {
@@ -34,8 +41,8 @@ export const usable = (v) => !!v && typeof v === 'object' && !('error' in v && O
 
 export const Tbl = ({ head, rows }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>
           {head.map((h, i) => (
             <th key={h} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>
@@ -57,38 +64,38 @@ export const Tbl = ({ head, rows }) => (
 
 /** The engine's refusal, verbatim, in a box that reads as one. */
 export const Refusal = ({ message, label }) => (
-  <div className="mt-2 rounded-md border border-red-800/60 bg-red-950/20 p-2">
-    <p className="text-red-300 text-xs font-medium mb-1">REFUSED{label ? `: ${label}` : ''}</p>
-    <p className="text-xs text-slate-300 font-mono mb-0">{txt(message)}</p>
+  <div className="mt-2 rounded-md border border-pl-danger/30 bg-pl-danger-bg p-2">
+    <p className="text-pl-danger-text text-xs font-medium mb-1">REFUSED{label ? `: ${label}` : ''}</p>
+    <p className="text-xs text-pl-text font-mono mb-0">{txt(message)}</p>
   </div>
 );
 
 /** The engine's own note, where it answered with less than it was asked for. */
 export const EngineNote = ({ children }) => (
-  <div className="mt-2 rounded-md border border-amber-800/60 bg-amber-950/20 p-2">
-    <p className="text-xs text-amber-200 font-mono mb-0">{children}</p>
+  <div className="mt-2 rounded-md border border-pl-warning/30 bg-pl-warning-bg p-2">
+    <p className="text-xs text-pl-warning-text font-mono mb-0">{children}</p>
   </div>
 );
 
 export const Note = ({ children }) => (
-  <p className="text-xs text-slate-500 mt-1 mb-0">{children}</p>
+  <p className="text-xs text-pl-muted mt-1 mb-0">{children}</p>
 );
 
 export const Lead = ({ children }) => (
-  <p className="text-xs text-slate-400 mt-3 mb-0">{children}</p>
+  <p className="text-xs text-pl-muted mt-3 mb-0">{children}</p>
 );
 
 /** A box labelled as something the course invented, or as SYNTHETIC. */
 export const Labelled = ({ tag, children }) => (
-  <div className="mt-3 rounded-md border border-dashed border-amber-700/70 p-3">
-    <p className="text-[10px] uppercase tracking-wide text-amber-300 mb-1">{tag}</p>
+  <div className="mt-3 rounded-md border border-dashed border-pl-warning/50 p-3">
+    <p className="text-[10px] uppercase tracking-wide text-pl-warning-text mb-1">{tag}</p>
     {children}
   </div>
 );
 
 /** The empty state, rendered before any engine value exists. */
 export const Empty = ({ children }) => (
-  <p className="text-xs text-slate-400 mt-1 mb-0">
+  <p className="text-xs text-pl-muted mt-1 mb-0">
     {children || 'This reader has returned nothing yet, so there is no engine value to draw.'}
   </p>
 );
@@ -99,16 +106,16 @@ export const safe = (fn) => { try { return fn(); } catch { return null; } };
 /** A typed number box. It hands back the string, so a blank stays blank. */
 export const NumBox = ({ label, value, onChange, tag }) => (
   <div>
-    <Label className="text-gray-400 text-xs mb-1 block">
+    <Label className="text-pl-muted text-xs mb-1 block">
       {label}
-      {tag ? <span className="ml-1 text-amber-300">({tag})</span> : null}
+      {tag ? <span className="ml-1 text-pl-warning-text">({tag})</span> : null}
     </Label>
     <Input
       type="number"
       step="any"
       value={value === null || value === undefined ? '' : value}
       onChange={(e) => onChange(e.target.value)}
-      className="bg-gray-700 text-white border-gray-600 h-8 text-sm"
+      className="h-8 text-sm"
     />
   </div>
 );
@@ -118,8 +125,8 @@ export const Slider = ({ label, value, min, max, step = 1, onChange, shown }) =>
   const n = Number(value);
   return (
     <div>
-      <label className="text-gray-400 text-xs mb-1 block">
-        {label}: <span className="text-white">{shown === undefined ? txt(value) : shown}</span>
+      <label className="text-pl-muted text-xs mb-1 block">
+        {label}: <span className="text-pl-text">{shown === undefined ? txt(value) : shown}</span>
       </label>
       <input
         type="range"
@@ -128,7 +135,7 @@ export const Slider = ({ label, value, min, max, step = 1, onChange, shown }) =>
         step={step}
         value={Number.isFinite(n) && value !== '' ? Math.max(min, Math.min(max, n)) : min}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full accent-[#BFFF00]"
+        className="w-full accent-pl-primary"
       />
     </div>
   );
@@ -138,7 +145,7 @@ export const Button = ({ onClick, children, active }) => (
   <button
     type="button"
     onClick={onClick}
-    className={`px-2 py-1 text-xs rounded border ${active ? 'border-[#BFFF00] text-[#BFFF00]' : 'border-slate-600 text-slate-300'}`}
+    className={`px-2 py-1 text-xs rounded border ${active ? 'border-pl-primary bg-pl-primary text-pl-primary-fg' : 'border-pl-border-strong bg-pl-surface text-pl-text hover:bg-pl-sunken'}`}
   >
     {children}
   </button>
@@ -153,7 +160,7 @@ export const Stepper = ({ label, value, onChange }) => {
   const whole = value !== '' && Number.isFinite(n) ? Math.round(n) : null;
   return (
     <div>
-      <Label className="text-gray-400 text-xs mb-1 block">{label}</Label>
+      <Label className="text-pl-muted text-xs mb-1 block">{label}</Label>
       <div className="flex gap-1 items-center">
         <Button onClick={() => onChange(String(whole === null ? 1 : Math.max(0, whole - 1)))}>minus one</Button>
         <Input
@@ -161,7 +168,7 @@ export const Stepper = ({ label, value, onChange }) => {
           step="any"
           value={value === null || value === undefined ? '' : value}
           onChange={(e) => onChange(e.target.value)}
-          className="bg-gray-700 text-white border-gray-600 h-8 text-sm w-24"
+          className="h-8 text-sm w-24"
         />
         <Button onClick={() => onChange(String(whole === null ? 1 : whole + 1))}>plus one</Button>
       </div>
@@ -175,25 +182,25 @@ export const Stepper = ({ label, value, onChange }) => {
  * engine named one.
  */
 export const Missing = ({ label, why }) => (
-  <div className="rounded-md border border-dashed border-slate-600 bg-[#0F172A] p-3">
-    <p className="text-gray-500 text-xs mb-0">{label}</p>
-    <p className="text-slate-400 text-sm italic mb-0">missing{why ? `: ${why}` : ''}</p>
+  <div className="rounded-md border border-dashed border-pl-border-strong bg-pl-sunken p-3">
+    <p className="text-pl-muted text-xs mb-0">{label}</p>
+    <p className="text-pl-muted text-sm italic mb-0">missing{why ? `: ${why}` : ''}</p>
   </div>
 );
 
 /** A figure with the basis the engine names printed beside it. */
 export const Basis = ({ children }) => (
-  <span className="ml-1 text-[10px] uppercase tracking-wide text-sky-300">({children})</span>
+  <span className="ml-1 text-[10px] uppercase tracking-wide text-pl-info-text">({children})</span>
 );
 
 /** A select with a first option that is no choice at all, for an input the engine will not default. */
 export const RequiredSelect = ({ label, value, onChange, options, none }) => (
   <div>
-    <Label className="text-gray-400 text-xs mb-1 block">{label}</Label>
+    <Label className="text-pl-muted text-xs mb-1 block">{label}</Label>
     <select
       value={value === null || value === undefined ? '' : value}
       onChange={(e) => onChange(e.target.value)}
-      className="w-full bg-gray-700 text-white border border-gray-600 rounded-md h-8 text-sm px-2"
+      className="w-full rounded-md border border-pl-border-strong bg-pl-surface text-pl-text h-8 text-sm px-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus"
     >
       <option value="">{none}</option>
       {(options || []).map((o) => <option key={o} value={o}>{o}</option>)}
