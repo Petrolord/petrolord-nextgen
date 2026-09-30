@@ -1,13 +1,14 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
 import {
   COURSE_SET, IGBOGENE_HEATERS, IGBOGENE_FLARE, IGBOGENE_FLARE_DE, REPORTABLE_STEPS,
   gwpSets, heaters, flare, flareSweep, inventory, inventoryOnSets, reportableSteps, atomUnit, carbonRefusals, yn,
 } from './carbonLab';
 import {
-  AXIS, TOOLTIP, GRID, SERIES, F, usable, Tbl, Refused, Verbatim, Here, Status, Note, Lead, Empty, safe, Box, Button,
+  AXIS, TOOLTIP, GRID, SERIES, AXIS_NOTE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT, F, usable, Tbl, Refused, Verbatim, Here, Status, Note, Lead, Empty, safe, Box, Button,
 } from './panelBits';
 import { PanelShell, SelectField, FieldGrid } from '@/components/course/panels/petrophysics/panelKit';
 
@@ -41,19 +42,19 @@ const S = (v) => (v === null || v === undefined ? '' : String(v));
 export const GwpPicker = ({ gwp, setKey, onSet }) => {
   if (!usable(gwp) || !Array.isArray(gwp.sets)) return <Empty>The GWP reader has returned nothing, so there is no set to choose.</Empty>;
   return (
-    <div className="rounded-md border border-gray-700 bg-[#0F172A] p-3">
-      <p className="text-xs text-slate-300 mb-1">
+    <div className="rounded-md border border-pl-border bg-pl-sunken p-3">
+      <p className="text-xs text-pl-text mb-1">
         The GWP set. The engine ships none; these four are IPCC {gwp.horizon} values as tabulated in {gwp.source}. The set
         selected at load is the one every inventory in this course is computed on. Which report an operator files on is
         held (H1), and no choice here is graded.
       </p>
       <div className="grid gap-2 sm:grid-cols-2">
         {gwp.sets.map((s) => (
-          <label key={s.key} className={`flex items-start gap-2 text-xs rounded border p-2 ${s.key === setKey ? 'border-[#BFFF00]' : 'border-slate-700'}`}>
-            <input type="radio" name="carbon-gwp-set" checked={s.key === setKey} onChange={() => onSet && onSet(s.key)} className="mt-0.5 accent-[#BFFF00]" />
-            <span className="text-slate-300">
+          <label key={s.key} className={`flex items-start gap-2 text-xs rounded border p-2 ${s.key === setKey ? 'border-pl-primary' : 'border-pl-border'}`}>
+            <input type="radio" name="carbon-gwp-set" checked={s.key === setKey} onChange={() => onSet && onSet(s.key)} className="mt-0.5 accent-pl-primary" />
+            <span className="text-pl-text">
               {s.label}
-              <span className="block text-slate-500">report {s.report}, horizon {s.horizon}, CH4 {s.CH4}, N2O {s.N2O}{s.key === gwp.courseKey ? '; the course set' : ''}</span>
+              <span className="block text-pl-muted">report {s.report}, horizon {s.horizon}, CH4 {s.CH4}, N2O {s.N2O}{s.key === gwp.courseKey ? '; the course set' : ''}</span>
             </span>
           </label>
         ))}
@@ -79,13 +80,13 @@ export const AtomMode = ({
   const boxes = (
     <div className="grid gap-3 sm:grid-cols-2">
       <div className="space-y-2">
-        <p className="text-xs text-slate-300 mb-0">The Igbogene fired heaters</p>
+        <p className="text-xs text-pl-text mb-0">The Igbogene fired heaters</p>
         <Box label="fuel, kmol a year" tag value={hi.fuelKmolPerYear} onChange={(v) => onHeat && onHeat('fuelKmolPerYear', v)} />
         <Box label="carbon per kmol of fuel" tag value={hi.carbonPerKmolFuel} onChange={(v) => onHeat && onHeat('carbonPerKmolFuel', v)} />
         <Box label="destruction efficiency, a fraction" tag value={hi.destructionEfficiencyFraction} onChange={(v) => onHeat && onHeat('destructionEfficiencyFraction', v)} />
       </div>
       <div className="space-y-2">
-        <p className="text-xs text-slate-300 mb-0">The Igbogene flare</p>
+        <p className="text-xs text-pl-text mb-0">The Igbogene flare</p>
         <Box label="gas to the flare, kmol a year" tag value={fi.fuelKmolPerYear} onChange={(v) => onFlare && onFlare('fuelKmolPerYear', v)} />
         <Box label="carbon per kmol" tag value={fi.carbonPerKmolFuel} onChange={(v) => onFlare && onFlare('carbonPerKmolFuel', v)} />
         <Box label="destruction efficiency, from the operator's flare study" tag value={fi.destructionEfficiencyFraction} onChange={(v) => onFlare && onFlare('destructionEfficiencyFraction', v)} />
@@ -151,19 +152,17 @@ export const FlareMode = ({ sweep }) => {
         The Igbogene flare at the five efficiencies, CO2 and the methane line stacked in tCO2e, the methane converted on the
         set chosen above: {sweep.setLabel || 'no set declared'}{sweep.ch4Gwp !== null ? ` (CH4 ${sweep.ch4Gwp})` : ''}.
       </Lead>
-      <div className="h-64 mt-2">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={data} margin={{ top: 10, right: 20, bottom: 10, left: 10 }}>
-            <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
-            <XAxis dataKey="eta" tick={AXIS} label={{ value: 'destruction efficiency', fill: '#94a3b8', fontSize: 10, position: 'insideBottom', offset: -4 }} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Bar dataKey="co2" name="CO2, tCO2e" stackId="f" fill={SERIES[0]} isAnimationActive={false} />
-            <Bar dataKey="ch4" name="methane line, tCO2e" stackId="f" fill={SERIES[1]} isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-2">
+        <BarChart data={data} margin={{ top: 10, right: 20, bottom: 10, left: 10 }}>
+          <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="eta" tick={AXIS} label={{ value: 'destruction efficiency', fill: AXIS_NOTE, fontSize: 10, position: 'insideBottom', offset: -4 }} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} />
+          <Legend {...LEGEND_PROPS} />
+          <Bar dataKey="co2" name="CO2, tCO2e" stackId="f" fill={SERIES[0]} isAnimationActive={false} />
+          <Bar dataKey="ch4" name="methane line, tCO2e" stackId="f" fill={SERIES[1]} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
       <Tbl
         head={['destruction efficiency', 'co2Tonnes', 'ch4Tonnes', 'methane line tCO2e', 'flare tCO2e']}
         rows={sweep.rows.map((r) => [String(r.eta), F.t(r.co2Tonnes), F.t(r.ch4Tonnes), r.ch4LineTCo2e === null ? 'no line (no methane)' : F.t(r.ch4LineTCo2e), F.t(r.flareTCo2e)])}

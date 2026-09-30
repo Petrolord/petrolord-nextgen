@@ -8,4 +8,5 @@ export default [
   '/dashboard/apps/qra',
   '/dashboard/apps/consequence',
   '/dashboard/apps/gasvalue',
+  '/dashboard/apps/carbon',
 ];
