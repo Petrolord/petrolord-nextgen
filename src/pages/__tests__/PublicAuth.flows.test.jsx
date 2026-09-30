@@ -278,6 +278,93 @@ describe('reset password (the reset-password edge function)', () => {
     expect(screen.queryByLabelText('New Password')).toBeNull();
   });
 
+  // Flow A, the self-serve recovery email. /forgot-password asks Supabase to
+  // send the visitor back to /reset-password, and the Supabase client turns
+  // that link into a session. There is no ?token=, so the page must take the
+  // session and save the new password with updateUser. The edge function is
+  // for the token link only and is never called here.
+  it('a Supabase recovery landing shows the password form and saves with updateUser', async () => {
+    h.session = { user: { id: 'u1', email: 'ada@example.com' } };
+    h.profile = { id: 'u1', role: 'learner' };
+    h.invoke = vi.fn();
+    h.updateUser = vi.fn(async () => ({ data: {}, error: null }));
+    mountPublic(ResetPasswordPage, '/reset-password');
+    await screen.findByText('ada@example.com');
+    expect(screen.queryByText('Invalid reset link. Token is missing.')).toBeNull();
+    expect(screen.getByText('Choose a new password for your account.')).toBeTruthy();
+    type('New Password', 'N3w!password');
+    type('Confirm Password', 'N3w!password');
+    await screen.findByText('Strong');
+    fireEvent.click(screen.getByRole('button', { name: 'Set Password & Login' }));
+    await screen.findByText('Password Set Successfully!');
+    expect(h.updateUser).toHaveBeenCalledTimes(1);
+    expect(h.updateUser).toHaveBeenCalledWith({ password: 'N3w!password' });
+    expect(h.invoke).not.toHaveBeenCalled();
+    expect(screen.getByText(/Your new password is saved\./)).toBeTruthy();
+    expect(screen.getByRole('link', { name: 'Go to Login Now' })).toHaveAttribute('href', '/login');
+  });
+
+  it('a recovery landing shows the Supabase error and keeps the form', async () => {
+    h.session = { user: { id: 'u1', email: 'ada@example.com' } };
+    h.invoke = vi.fn();
+    h.updateUser = vi.fn(async () => ({ data: null, error: { message: 'New password should be different from the old password.' } }));
+    mountPublic(ResetPasswordPage, '/reset-password');
+    await screen.findByText('ada@example.com');
+    type('New Password', 'N3w!password');
+    type('Confirm Password', 'N3w!password');
+    fireEvent.click(screen.getByRole('button', { name: 'Set Password & Login' }));
+    expect(await screen.findByRole('alert')).toHaveTextContent('New password should be different from the old password.');
+    expect(screen.getByLabelText('New Password')).toBeTruthy();
+    expect(h.invoke).not.toHaveBeenCalled();
+  });
+
+  it('a recovery landing stops a mismatch before updateUser', async () => {
+    h.session = { user: { id: 'u1', email: 'ada@example.com' } };
+    h.updateUser = vi.fn();
+    mountPublic(ResetPasswordPage, '/reset-password');
+    await screen.findByText('ada@example.com');
+    type('New Password', 'N3w!password');
+    type('Confirm Password', 'nope');
+    fireEvent.click(screen.getByRole('button', { name: 'Set Password & Login' }));
+    await screen.findByText('Passwords do not match');
+    expect(h.updateUser).not.toHaveBeenCalled();
+  });
+
+  it('a token link wins over a session: the edge function flow is unchanged', async () => {
+    h.session = { user: { id: 'u1', email: 'ada@example.com' } };
+    h.updateUser = vi.fn();
+    h.invoke = vi.fn(async (_name, { body }) => (body.action === 'check'
+      ? { data: { success: true, email: 'admin@uni.example' }, error: null }
+      : { data: { success: true }, error: null }));
+    mountPublic(ResetPasswordPage, '/reset-password?token=tok-1');
+    await screen.findByText('admin@uni.example');
+    expect(screen.queryByText('Choose a new password for your account.')).toBeNull();
+    type('New Password', 'N3w!password');
+    type('Confirm Password', 'N3w!password');
+    fireEvent.click(screen.getByRole('button', { name: 'Set Password & Login' }));
+    await screen.findByText('Password Set Successfully!');
+    expect(h.invoke).toHaveBeenLastCalledWith('reset-password', {
+      body: { action: 'reset', token: 'tok-1', new_password: 'N3w!password' },
+    });
+    expect(h.updateUser).not.toHaveBeenCalled();
+    expect(screen.getByText(/Your account is now active\./)).toBeTruthy();
+  });
+
+  it('an expired recovery link offers a new link and never shows the form', async () => {
+    h.invoke = vi.fn();
+    window.location.hash = '#error=access_denied&error_code=otp_expired&error_description=Email+link+is+invalid+or+has+expired';
+    try {
+      mountPublic(ResetPasswordPage, '/reset-password');
+      expect(await screen.findByRole('alert')).toHaveTextContent('This reset link has expired or was already used. Request a new link to continue.');
+      expect(screen.getByRole('link', { name: 'Request a new link' })).toHaveAttribute('href', '/forgot-password');
+      expect(screen.getByRole('link', { name: 'Return to Login' })).toHaveAttribute('href', '/login');
+      expect(screen.queryByLabelText('New Password')).toBeNull();
+      expect(h.invoke).not.toHaveBeenCalled();
+    } finally {
+      window.location.hash = '';
+    }
+  });
+
   it('shows the function\'s reason for a rejected token', async () => {
     h.invoke = vi.fn(async () => ({ data: { success: false, error: 'This link has expired.' }, error: null }));
     mountPublic(ResetPasswordPage, '/reset-password?token=old');
