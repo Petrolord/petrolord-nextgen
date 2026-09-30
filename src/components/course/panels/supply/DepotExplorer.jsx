@@ -1,14 +1,17 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, Legend,
+  LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, Legend,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
+import { SVG_CHART } from '@/utils/chartSvg';
 import {
   IBAFO_RACK, IBAFO_TANKS, IBAFO_DAILY_M3, IBAFO_ECONOMICS, SYNTHETIC_LOSS_FACTOR_KG_PER_T, IBAFO_LANE,
   IBAFO_DEMAND_L_PER_DAY, IBAFO_STATION, rackAt, rackCurveAt, baySweepAt, arrivalSweepAt, farmAt, economicsAt,
   laneAt, fleetAt, stationAt, nozzleSweepAt, fmt,
 } from './supplyLab';
 import {
-  AXIS, TOOLTIP, GRID, SERIES, txt, usable, Tbl, Refusal, EngineNote, Note, Lead, Labelled, Empty, safe, NumBox, Stepper,
+  AXIS, TOOLTIP, SERIES, txt, usable, Tbl, Refusal, EngineNote, Note, Lead, Labelled, Empty, safe, NumBox, Stepper,
 } from './panelBits';
 import {
   PanelShell, SelectField, Tile, TileGrid, FieldGrid,
@@ -63,7 +66,7 @@ export const RackMode = ({ rack, curve, baySweep, arrivalSweep, inputs, onInput 
       {rack.refusal && <Refusal message={rack.refusal} />}
       {rack.stable && (
         <Labelled tag="the course's arithmetic on the engine's figures">
-          <p className="text-xs text-slate-300 mb-0">
+          <p className="text-xs text-pl-text mb-0">
             The wait of a truck that does queue, the mean wait over the probability of waiting:
             {' '}{fmt.min(rack.waitIfQueuedDerivedMinutes)} minutes. Erlang B, every bay busy in a rack with no queue, from
             the engine&apos;s Erlang C by B = C x (1 - utilisation) / (1 - utilisation x C): {fmt.prob(rack.erlangBDerived)}.
@@ -73,18 +76,16 @@ export const RackMode = ({ rack, curve, baySweep, arrivalSweep, inputs, onInput 
         </Labelled>
       )}
       {Array.isArray(curve) && curve.length > 0 && (
-        <div className="mt-3 h-56">
-          <ResponsiveContainer width="100%" height="100%">
+        <ChartFrame height={224} className="mt-3">
             <LineChart data={curve} margin={{ top: 8, right: 16, bottom: 18, left: 8 }}>
-              <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
-              <XAxis dataKey="arrivalsPerHour" type="number" tick={AXIS} label={{ value: 'trucks arriving an hour', position: 'insideBottom', offset: -8, fill: '#94a3b8', fontSize: 11 }} />
-              <YAxis tick={AXIS} label={{ value: 'mean wait, min', angle: -90, position: 'insideLeft', fill: '#94a3b8', fontSize: 11 }} />
+              <CartesianGrid {...GRID_STYLE} />
+              <XAxis dataKey="arrivalsPerHour" type="number" tick={AXIS} label={{ value: 'trucks arriving an hour', position: 'insideBottom', offset: -8, fill: SVG_CHART.note, fontSize: 11 }} />
+              <YAxis tick={AXIS} label={{ value: 'mean wait, min', angle: -90, position: 'insideLeft', fill: SVG_CHART.note, fontSize: 11 }} />
               <Tooltip contentStyle={TOOLTIP} />
               {Number.isFinite(a) && <ReferenceLine x={a} stroke={SERIES[3]} strokeDasharray="4 4" />}
               <Line type="monotone" dataKey="averageWaitMinutes" name="mean wait, minutes" stroke={SERIES[0]} dot={{ r: 2 }} isAnimationActive={false} connectNulls={false} />
             </LineChart>
-          </ResponsiveContainer>
-        </div>
+          </ChartFrame>
       )}
       <Note>The curve stops where the engine says the rack cannot keep up: at a utilisation of one there is no mean wait.</Note>
       <Lead>The IBAFO rack, the bays swept:</Lead>
@@ -113,20 +114,18 @@ export const FarmMode = ({ farm, stocks, onStock, daily, onDaily }) => {
         ))}
         <NumBox label="Daily throughput (liftings), m3" value={daily} onChange={onDaily} />
       </FieldGrid>
-      <div className="mt-3 h-60">
-        <ResponsiveContainer width="100%" height="100%">
+      <ChartFrame height={240} className="mt-3">
           <BarChart data={farm.tanks} margin={{ top: 8, right: 16, bottom: 8, left: 8 }}>
-            <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
+            <CartesianGrid {...GRID_STYLE} />
             <XAxis dataKey="id" tick={AXIS} />
             <YAxis tick={AXIS} />
             <Tooltip contentStyle={TOOLTIP} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
+            <Legend {...LEGEND_PROPS} />
             <Bar dataKey="stockAtOrBelowHeelDrawnM3" name="stock at or below the heel" stackId="t" fill={SERIES[5]} isAnimationActive={false} />
             <Bar dataKey="pumpableM3" name="pumpable, the engine" stackId="t" fill={SERIES[2]} isAnimationActive={false} />
-            <Bar dataKey="ullageM3" name="ullage, the engine" stackId="t" fill={GRID} isAnimationActive={false} />
+            <Bar dataKey="ullageM3" name="ullage, the engine" stackId="t" fill={SVG_CHART.reference} isAnimationActive={false} />
           </BarChart>
-        </ResponsiveContainer>
-      </div>
+        </ChartFrame>
       <Tbl
         head={['tank', 'capacity m3', 'heel m3', 'stock m3', 'pumpable m3', 'ullage m3']}
         rows={farm.tanks.map((t) => [t.id, fmt.m3(t.capacityM3), fmt.m3(t.heelM3), fmt.m3(t.stockM3), fmt.m3(t.pumpableM3), fmt.m3(t.ullageM3)])}
@@ -138,7 +137,7 @@ export const FarmMode = ({ farm, stocks, onStock, daily, onDaily }) => {
         <Tile label="Turns a year" value={fmt.turns(farm.turnsPerYear)} />
       </TileGrid>
       <Labelled tag="the figure the engine does not use">
-        <p className="text-xs text-slate-300 mb-0">
+        <p className="text-xs text-pl-text mb-0">
           The farm&apos;s stock less the farm&apos;s heel: {fmt.m3(farm.stockLessHeelNotUsedM3)} m3, beside the engine&apos;s
           pumpable stock of {fmt.m3(farm.pumpableStockM3)} m3. A tank below its own heel lends nothing to another tank&apos;s
           heel, because no pump can move it there.
@@ -163,8 +162,8 @@ export const EconomicsMode = ({ econ, inputs, onInput }) => {
       </FieldGrid>
       {econ.refusal ? <Refusal message={econ.refusal} /> : (
         <div className="grid gap-3 sm:grid-cols-2 mt-3">
-          <div className="rounded-md border border-slate-700 p-3">
-            <p className="text-xs text-slate-400 mb-1">The money ledger, USD</p>
+          <div className="rounded-md border border-pl-border p-3">
+            <p className="text-xs text-pl-muted mb-1">The money ledger, USD</p>
             <Tbl
               head={['item', 'value']}
               rows={[
@@ -173,8 +172,8 @@ export const EconomicsMode = ({ econ, inputs, onInput }) => {
               ]}
             />
           </div>
-          <div className="rounded-md border border-slate-700 p-3">
-            <p className="text-xs text-slate-400 mb-1">The carbon ledger, from the same movements</p>
+          <div className="rounded-md border border-pl-border p-3">
+            <p className="text-xs text-pl-muted mb-1">The carbon ledger, from the same movements</p>
             <Tbl
               head={['item', 'value']}
               rows={[
