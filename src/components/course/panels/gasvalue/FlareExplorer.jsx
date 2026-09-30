@@ -341,7 +341,7 @@ export const FlareMode = ({ flare, inputs, onInput, onEgbema, onClear, molar, pa
           <ChartFrame height={224} className="mt-2">
             <LineChart data={sweep.filter((x) => !x.refusal)} margin={{ top: 8, right: 16, bottom: 18, left: 8 }}>
               <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
-              <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="eta" type="number" domain={['dataMin', 'dataMax']} tick={AXIS} label={{ value: 'destruction efficiency', position: 'insideBottom', offset: -8, fill: AXIS_NOTE, fontSize: 11 }} />
+              <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="eta" type="number" domain={['dataMin', 'dataMax']} tick={AXIS} label={{ value: 'destruction efficiency', position: 'insideBottom', offset: -2, fill: AXIS_NOTE, fontSize: 11 }} />
               <YAxis tick={AXIS} />
               <Tooltip contentStyle={TOOLTIP} formatter={(v) => fmt.t3(v)} />
               <Legend {...LEGEND_PROPS} />

@@ -155,7 +155,7 @@ export const FlareMode = ({ sweep }) => {
       <ChartFrame height={256} className="mt-2">
         <BarChart data={data} margin={{ top: 10, right: 20, bottom: 10, left: 10 }}>
           <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
-          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="eta" tick={AXIS} label={{ value: 'destruction efficiency', fill: AXIS_NOTE, fontSize: 10, position: 'insideBottom', offset: -4 }} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="eta" tick={AXIS} label={{ value: 'destruction efficiency', fill: AXIS_NOTE, fontSize: 10, position: 'insideBottom', offset: -2 }} />
           <YAxis tick={AXIS} />
           <Tooltip contentStyle={TOOLTIP} />
           <Legend {...LEGEND_PROPS} />
