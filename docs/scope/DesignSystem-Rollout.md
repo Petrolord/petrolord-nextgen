@@ -608,3 +608,76 @@ caught. Regions marked `data-canvas` are skipped.
 - Token values must match the Suite. Change the Suite's `tokens.js` first,
   copy it here, regenerate `theme.css`, and update `SUITE_TOKENS_DIGEST` in
   `tokens.test.js`.
+
+## 13. As built: wave 7 (end state)
+
+The rollout is finished. Every screen batch (wave 0, 1A to 6B) is merged and
+this batch removes the scaffolding.
+
+- **Gate off.** `Layout` renders `SignedInScope` on every route it serves
+  (the framed return and the fullscreen return). `src/design/rollout/` is
+  deleted. `scopePaths.jsx` keeps only what the cold load needs:
+  `isSignedInPath` (any `/dashboard` path and `/search`), `isPublicLightPath`
+  and `coldLoadTheme`, which now always returns a theme (the device's last
+  theme on a signed-in path, light everywhere else). `App.jsx` has one
+  loader, the themed one.
+- **Legacy branches out.** Every `tc(legacy, themed)` call became its themed
+  string (a codemod over 49 files) and `src/design/themeClass.js`
+  (`useThemeClass`, `themeClassPicker`) is deleted. The ui kit keeps one
+  variant set per primitive (`buttonVariants`, `badgeVariants`,
+  `alertVariants`, `toastVariants`; the `themed*` exports are gone), and
+  `ThemeToggle` is the only ui piece that reads the theme. The course kit,
+  the 3C reservoir panels, the Well Correlation case inputs, the header, the
+  notification bell and the view-as selector render roles only.
+- **Route to scope map** (pinned by `src/design/__tests__/endState.test.js`):
+
+  | Routes | Scope |
+  |---|---|
+  | `/search`, `/dashboard/analytics`, `/dashboard/compliance`, `/dashboard/reports`, `/dashboard/certificates`, `/dashboard/*` | `SignedInScope` (Layout) |
+  | `/login`, `/register`, `/verify`, `/verify/:code`, `/forgot-password`, `/reset-password`, `/privacy-policy`, `/terms-of-service`, `/academic-integrity`, `*` (404) | `PublicPage`, always light |
+  | `/` | the regal homepage's own look (`.ng-home`), no kit component |
+  | the sidebar rail and its phone drawer | `FixedTheme` dark (ink) |
+  | the toaster, the search modal, the device limit dialog (app root) | the theme of the scope on screen, light where none is mounted |
+  | the loader (`ThemedLoadingScreen`) and the `ErrorBoundary` panel | a scope of their own (the device's last theme) |
+  | the certificate viewer overlay | toolbar in `FixedTheme` dark; the sheet is `data-canvas="document"` |
+
+  Two places rendered kit components outside a scope and were given one:
+  the root `ErrorBoundary` panel (it was slate on slate) and the certificate
+  viewer's toolbar (a lime Print button on the kit `Button`, in
+  `document.body`). The certificate sheet itself is unchanged.
+- **Dark defaults retired.** `Layout`'s outer `bg-[#0F172A]` is gone.
+  `index.css` `:root` holds the light scope's shadcn values (pinned against
+  `theme.css` by `tokens.test.js`); the dark console variables, the
+  `#0F172A` body paint, the lime video variables and the unused video
+  player classes are gone. The homepage keeps its own stylesheet.
+- **Retired proofs.** `legacyUi.test.jsx` and `legacyUiMarkup.json`,
+  `courseKitLegacy.test.jsx` and its fixture, `rc3cPanelsLegacy.test.jsx` and
+  `rc3cLegacyClasses.json`, `frame1aLegacyMarkup.json`, the `useThemeClass`
+  test and the ChartPanel outside-scope test. The `/legacy-probe` negatives
+  now prove that a route no batch ever listed is scoped like every other.
+- **Sweep and guard.** `endState.test.js` walks the import graph from
+  `src/main.jsx` (621 code files) and fails on lime (`#BFFF00`, `#A8E600`,
+  `lime-*`), a legacy console colour class or a console plate hex outside
+  three named allowances: the homepage, the white chart kit
+  (`ChartFrame`, `SvgChartFrame`, `chartTheme.js`) and the two document
+  canvases (the certificate sheet, the printable handbook). `print:`
+  variants are allowed. Each detector has a negative control. The sweep
+  found nothing else once the items below were fixed.
+- **Small fixes in this batch.** The last lime on a chart (the reservoircalc
+  P-1 marker is the kit violet; two lesson sentences say violet, in their
+  own commit). Phone navigation: the header menu button opens the ink rail
+  in a modal drawer below md (starts closed; closes on navigation, Escape,
+  the scrim and at md; focus is trapped and returns to the button). Copy:
+  the set password page says "activate your account", the forgot password
+  placeholder is `you@example.com`, the login title is "Petrolord NextGen".
+  Dead links: Academic Integrity's `/support` and `/community` cards became
+  one card to the academy email, and the legal footer's four `href="#"`
+  social icons are removed. The panel tables key their header cells by
+  index and text (44 files), which ends the duplicate-key warnings.
+- **Still legacy, by decision or out of reach.** The regal homepage and its
+  own lime token; the certificate sheet and the handbook document body;
+  the chart kit's fixed light classes on white plates. 134 source files are
+  not reachable from `src/main.jsx` (35 unused `components/ui` pieces among
+  them, 18 files with legacy colour classes); nothing renders them, and
+  this batch left them for a cleanup batch.
+

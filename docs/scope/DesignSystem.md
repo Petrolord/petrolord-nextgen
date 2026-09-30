@@ -115,21 +115,15 @@ outside a chart canvas may use them.
 
 ### Outside a scope
 
-`ChartFrame` and `SvgChartFrame` render the same everywhere. `ChartPanel`
-takes the theme roles inside a scope and, outside one, draws the same white
-card with fixed light classes (the roles do not resolve there). So a course
-app batch can move a panel's charts to the kit even though the panel still
-renders in the unmigrated reader and handbook: the chart is white in both
-places. Wave 7 drops `ChartPanel`'s outside-scope look.
+Nothing renders the chart kit outside a scope since wave 7, and
+`ChartPanel`'s outside-scope look is gone: it takes the theme roles.
 
 ## 2. The course kit (batch 1B)
 
 The pieces every course app, the course reader and the handbook share. Each
-is scope-aware with `useThemeClass` (`src/design/themeClass.js`): inside a
-design-system scope it renders the theme roles, outside one it renders its
-legacy markup byte for byte, proven by
-`src/components/course/__tests__/courseKitLegacy.test.jsx` against a fixture
-captured from main `af5c91747` before any kit file changed.
+renders the theme roles. During the rollout each was scope-aware with
+`useThemeClass` and rendered its legacy markup outside a scope; wave 7
+(section 19) removed that branch, the helper and the legacy fixture.
 
 | piece | file | inside a scope |
 |---|---|---|
@@ -155,11 +149,7 @@ still render them outside a scope.
 
 - `src/components/course/__tests__/courseKitScenes.jsx`: every kit piece in
   every state (the five gate states and loading, each quiz phase, each
-  certificate outcome), shared by the two tests below.
-- `courseKitLegacy.test.jsx`: outside a scope, the markup matches the
-  fixture. Do not regenerate the fixture
-  (`UPDATE_COURSE_KIT_LEGACY=1`) while an unmigrated screen uses the legacy
-  branch.
+  certificate outcome), used by the theme test below.
 - `courseKitTheme.test.jsx`: inside a scope, every scene has no legacy
   chrome in light and dark, no lime, the scope opens light and the toggle
   round-trips, with a negative control.
@@ -229,11 +219,11 @@ explorer in `ChartFrame`).
 Colours come from `components/course/panels/readerChart.js`, which takes
 the chart kit's values (`utils/chartSvg.js`) and adds only the hues a
 lesson names: the lessons read "the white path", "each orange dot", "the
-pink dashed line" and "a hollow lime circle", and teaching content is not
-changed by the rollout. A light mark (the white well path and dots, the
-lime P-1 circle) is drawn over an ink casing so it reads on white. The
-well correlation case inputs are shared with that course's learning page
-(batch 3A) and are scope-aware.
+pink dashed line". A light mark (the white well path and dots) is drawn
+over an ink casing so it reads on white. The P-1 circle was lime until wave
+7; it is now the kit violet and its two lessons say violet (section 19).
+The well correlation case inputs are shared with that course's learning
+page (batch 3A).
 
 Every other course's panels still render their own legacy classes and dark
 plates inside the reader until their course app batch migrates them; the
@@ -1005,3 +995,49 @@ public frame, always light, with no toggle.
   alone). Harness `publicAuthHarness.jsx` mounts the real `AuthProvider`
   over `publicAuthStubs.js`, a Supabase stand-in that throws on any call
   the pages do not make; `fetch` is counted and asserted unused.
+
+## 19. Wave 7: end state (as built)
+
+The rollout scaffolding is gone. The full note, with the route to scope map,
+is section 13 of `docs/scope/DesignSystem-Rollout.md`. What a developer
+needs from now on:
+
+- **There is one way to style a screen: theme roles.** `useThemeClass`,
+  `themeClassPicker`, `src/design/rollout/` and every legacy branch are
+  deleted. Earlier sections of this file that say "scope-aware" or "outside
+  a scope" describe how the rollout ran; that branch no longer exists.
+- **Every signed-in route is scoped by `Layout`.** A new route under
+  `/dashboard` needs no registration. `isSignedInPath` and `coldLoadTheme`
+  in `src/design/scopePaths.jsx` serve only the loader.
+- **The ui kit has one variant set per primitive**: `buttonVariants`,
+  `badgeVariants`, `alertVariants`, `toastVariants`. A component mounted
+  where no scope exists (a portal into `document.body`, the app root) must
+  open one: `FixedTheme` with `data-pl-theme` for a fixed look (the rail,
+  its drawer, the certificate viewer toolbar), or the active theme with a
+  light fallback (`useActiveTheme() || 'light'`: the toaster, the search
+  modal, the device dialog).
+- **`index.css` `:root`** holds the light scope's shadcn values, so a stray
+  shadcn class outside a scope reads as the light theme. Change a token in
+  the Suite first, regenerate `theme.css`, then copy the light values;
+  `tokens.test.js` compares the two.
+- **Phone navigation.** `Sidebar` renders the rail (`hidden md:flex`) and a
+  Radix dialog drawer with the same `RailContent` below md. `Layout` owns
+  the open state and passes it to `Header` (the menu button,
+  `data-testid="nav-menu-button"`) and `Sidebar`
+  (`data-testid="sidebar-drawer"`). Tests:
+  `src/components/__tests__/PhoneNav.theme.test.jsx`.
+- **The guard** is `src/design/__tests__/endState.test.js`. It fails when
+  reachable code gains lime, a legacy console colour class or a console
+  plate hex outside the homepage, the chart kit and the two document
+  canvases, when a route in `App.jsx` has no scope, or when a retired
+  helper comes back. A new allowance belongs in that file with its reason.
+- **Charts.** No chart carries lime. The reservoircalc P-1 marker is
+  `CHART_SERIES[4]` (violet) over a white halo, and the two lessons that
+  name it say violet. `readerChart.js` keeps pink, orange and white as the
+  named hues the lessons read.
+- **Document canvases.** The certificate sheet (`#certificate-sheet`,
+  `data-canvas="document"`) and the handbook body keep their artwork. The
+  certificate viewer's toolbar is chrome and sits on roles.
+- **Panel tables** key header cells as `${i}-${h}`; a table may repeat a
+  heading.
+
