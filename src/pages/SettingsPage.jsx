@@ -106,7 +106,7 @@ const SettingsPage = () => {
   return (
     <div className="max-w-6xl mx-auto px-4 py-6 md:p-8 space-y-8">
       <Helmet>
-        <title>Settings - Petrolord NextGen Suite</title>
+        <title>Settings - Petrolord NextGen</title>
       </Helmet>
 
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
