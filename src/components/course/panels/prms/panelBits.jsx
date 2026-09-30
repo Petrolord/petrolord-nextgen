@@ -11,8 +11,8 @@ export const list = (a) => (a && a.length ? a.join(', ') : 'none');
 
 export const Tbl = ({ head, rows }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>{head.map((h, i) => <th key={h} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>)}</tr>
       </thead>
       <tbody>
@@ -29,12 +29,12 @@ export const Tbl = ({ head, rows }) => (
 /** A free-text box: a list of values, or a table whose first line names its columns. */
 export const TextField = ({ label, value, onChange, rows = 3 }) => (
   <div className="col-span-2 sm:col-span-3 lg:col-span-5">
-    <Label className="text-gray-400 text-xs mb-1 block">{label}</Label>
+    <Label className="text-pl-muted text-xs mb-1 block">{label}</Label>
     <textarea
       value={value}
       rows={rows}
       onChange={(e) => onChange(e.target.value)}
-      className="w-full bg-gray-700 text-white border border-gray-600 rounded-md text-xs p-2 font-mono"
+      className="w-full bg-pl-surface text-pl-text border border-pl-border-strong rounded-md text-xs p-2 font-mono"
     />
   </div>
 );
@@ -42,36 +42,36 @@ export const TextField = ({ label, value, onChange, rows = 3 }) => (
 /** A short text box for a word or a list of years. */
 export const WordField = ({ label, value, onChange }) => (
   <div>
-    <Label className="text-gray-400 text-xs mb-1 block">{label}</Label>
+    <Label className="text-pl-muted text-xs mb-1 block">{label}</Label>
     <input
       type="text"
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className="w-full bg-gray-700 text-white border border-gray-600 rounded-md text-xs h-8 px-2 font-mono"
+      className="w-full bg-pl-surface text-pl-text border border-pl-border-strong rounded-md text-xs h-8 px-2 font-mono"
     />
   </div>
 );
 
 /** The engine's own refusal, verbatim. */
 export const Refusal = ({ text }) => (
-  <div className="mt-3 rounded-md border border-red-800/60 bg-red-950/20 p-3">
-    <p className="text-red-300 text-xs font-medium mb-1">THE ENGINE REFUSED, IN ITS OWN WORDS</p>
-    <p className="text-xs text-slate-300 mb-0 font-mono">{text}</p>
+  <div className="mt-3 rounded-md border border-pl-danger/40 bg-pl-danger-bg p-3">
+    <p className="text-pl-danger-text text-xs font-medium mb-1">THE ENGINE REFUSED, IN ITS OWN WORDS</p>
+    <p className="text-xs text-pl-text mb-0 font-mono">{text}</p>
   </div>
 );
 
 /** An engine reason or basis line, verbatim. */
 export const EngineNote = ({ text }) => (
-  <div className="mt-3 rounded-md border border-amber-800/60 bg-amber-950/20 p-3">
-    <p className="text-amber-300 text-xs font-medium mb-1">THE ENGINE SAYS</p>
-    <p className="text-xs text-slate-300 mb-0 font-mono">{text}</p>
+  <div className="mt-3 rounded-md border border-pl-warning/40 bg-pl-warning-bg p-3">
+    <p className="text-pl-warning-text text-xs font-medium mb-1">THE ENGINE SAYS</p>
+    <p className="text-xs text-pl-text mb-0 font-mono">{text}</p>
   </div>
 );
 
 export const Declared = ({ title, children }) => (
-  <div className="mt-3 rounded-md border border-sky-800/60 bg-sky-950/20 p-3">
-    <p className="text-sky-300 text-xs font-medium mb-1">{title}</p>
-    <p className="text-xs text-slate-300 mb-0">{children}</p>
+  <div className="mt-3 rounded-md border border-pl-info/40 bg-pl-info-bg p-3">
+    <p className="text-pl-info-text text-xs font-medium mb-1">{title}</p>
+    <p className="text-xs text-pl-text mb-0">{children}</p>
   </div>
 );
 
@@ -110,17 +110,17 @@ export const useJsonBox = (start, initialText = null) => {
 
 /** The source the engine names for the rule it applied (its basis.source), verbatim. */
 export const Source = ({ text }) => (text ? (
-  <div className="mt-3 rounded-md border border-slate-600/60 bg-slate-900/40 p-3">
-    <p className="text-slate-300 text-xs font-medium mb-1">Source, as the engine names it</p>
-    <p className="text-xs text-slate-300 mb-0 font-mono">{text}</p>
+  <div className="mt-3 rounded-md border border-pl-border bg-pl-sunken p-3">
+    <p className="text-pl-text text-xs font-medium mb-1">Source, as the engine names it</p>
+    <p className="text-xs text-pl-text mb-0 font-mono">{text}</p>
   </div>
 ) : null);
 
 /** The engine's reasons, each verbatim. */
 export const Reasons = ({ items }) => (items && items.length ? (
-  <div className="mt-3 rounded-md border border-amber-800/60 bg-amber-950/20 p-3">
-    <p className="text-amber-300 text-xs font-medium mb-1">THE ENGINE&apos;S REASONS, VERBATIM</p>
-    {items.map((r, i) => <p key={i} className="text-xs text-slate-300 mb-0 font-mono">{r}</p>)}
+  <div className="mt-3 rounded-md border border-pl-warning/40 bg-pl-warning-bg p-3">
+    <p className="text-pl-warning-text text-xs font-medium mb-1">THE ENGINE&apos;S REASONS, VERBATIM</p>
+    {items.map((r, i) => <p key={i} className="text-xs text-pl-text mb-0 font-mono">{r}</p>)}
   </div>
 ) : null);
 
@@ -147,9 +147,9 @@ export const StatedControl = ({ box, viewKey, path, label, options = null, cast 
     const opts = [['', 'not stated'], ...options];
     return (
       <div>
-        <Label className="text-gray-400 text-xs mb-1 block">{label}</Label>
+        <Label className="text-pl-muted text-xs mb-1 block">{label}</Label>
         <select value={current === undefined ? '' : String(current)} onChange={(e) => write(e.target.value === '' ? undefined : cast(e.target.value))}
-          className="w-full bg-gray-700 text-white border border-gray-600 rounded-md h-8 text-sm px-2">
+          className="w-full bg-pl-surface text-pl-text border border-pl-border-strong rounded-md h-8 text-sm px-2">
           {opts.map(([v, l]) => <option key={v} value={v}>{l}</option>)}
         </select>
       </div>
@@ -167,9 +167,9 @@ const NumberControl = ({ label, current, write }) => {
   };
   return (
     <div>
-      <Label className="text-gray-400 text-xs mb-1 block">{label}</Label>
+      <Label className="text-pl-muted text-xs mb-1 block">{label}</Label>
       <input type="text" value={text} placeholder="not stated" onChange={(e) => change(e.target.value)}
-        className="w-full bg-gray-700 text-white border border-gray-600 rounded-md text-xs h-8 px-2 font-mono" />
+        className="w-full bg-pl-surface text-pl-text border border-pl-border-strong rounded-md text-xs h-8 px-2 font-mono" />
     </div>
   );
 };
@@ -179,7 +179,7 @@ export const MissingStated = ({ box, viewKey, required }) => {
   if (box.parsed.error) return null;
   const missing = required.filter(([path]) => statedIn(box, viewKey, path) === undefined);
   return missing.map(([path, name]) => (
-    <p key={path} className="text-xs text-gray-500 mt-1 mb-0">The box does not state {name}, so the engine refuses: choose it above, or type it.</p>
+    <p key={path} className="text-xs text-pl-muted mt-1 mb-0">The box does not state {name}, so the engine refuses: choose it above, or type it.</p>
   ));
 };
 
@@ -193,15 +193,15 @@ export const writeStated = (box, viewKey, path, value) => {
 export const ActionButton = ({ label, onClick }) => (
   <div className="flex items-end">
     <button type="button" onClick={onClick}
-      className="h-8 px-2 text-xs rounded-md border border-gray-600 bg-gray-800 text-gray-200 hover:bg-gray-700">{label}</button>
+      className="h-8 px-2 text-xs rounded-md border border-pl-border-strong bg-pl-surface text-pl-text hover:bg-pl-sunken">{label}</button>
   </div>
 );
 
 const ChoiceControl = ({ label, value, options, onChange }) => (
   <div>
-    <Label className="text-gray-400 text-xs mb-1 block">{label}</Label>
+    <Label className="text-pl-muted text-xs mb-1 block">{label}</Label>
     <select value={value} onChange={(e) => onChange(e.target.value)}
-      className="w-full bg-gray-700 text-white border border-gray-600 rounded-md h-8 text-sm px-2">
+      className="w-full bg-pl-surface text-pl-text border border-pl-border-strong rounded-md h-8 text-sm px-2">
       {[['', 'not stated'], ...options].map(([v, l]) => <option key={v} value={v}>{l}</option>)}
     </select>
   </div>
@@ -237,9 +237,9 @@ const WordStatedField = ({ label, current, write }) => {
   const change = (v) => { setText(v); write(v.trim() === '' ? undefined : v.trim()); };
   return (
     <div>
-      <Label className="text-gray-400 text-xs mb-1 block">{label}</Label>
+      <Label className="text-pl-muted text-xs mb-1 block">{label}</Label>
       <input type="text" value={text} placeholder="not stated" onChange={(e) => change(e.target.value)}
-        className="w-full bg-gray-700 text-white border border-gray-600 rounded-md text-xs h-8 px-2 font-mono" />
+        className="w-full bg-pl-surface text-pl-text border border-pl-border-strong rounded-md text-xs h-8 px-2 font-mono" />
     </div>
   );
 };
@@ -256,9 +256,9 @@ export const castBool = (v) => v === 'true';
  */
 export const BlockSelector = ({ blocks, value, onChange }) => (blocks.length > 1 ? (
   <div>
-    <Label className="text-gray-400 text-xs mb-1 block">Block of the case file</Label>
+    <Label className="text-pl-muted text-xs mb-1 block">Block of the case file</Label>
     <select value={value} onChange={(e) => onChange(e.target.value)}
-      className="w-full bg-gray-700 text-white border border-gray-600 rounded-md h-8 text-sm px-2">
+      className="w-full bg-pl-surface text-pl-text border border-pl-border-strong rounded-md h-8 text-sm px-2">
       {blocks.map((b) => <option key={b} value={b}>{b}</option>)}
     </select>
   </div>
