@@ -14,6 +14,7 @@ import { ThemeToggle } from '@/components/ui/theme-toggle';
 import { useThemeClass } from '@/design/themeClass';
 import {
   isThemedPath, coldLoadTheme, matchesRoute, ThemedLoadingScreen,
+  isPublicLightPath,
 } from '@/design/scopePaths';
 import { THEMED_ROUTES } from '@/design/rollout';
 
