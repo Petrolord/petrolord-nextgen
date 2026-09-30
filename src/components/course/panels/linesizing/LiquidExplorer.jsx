@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, BarChart, Line, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
+  LineChart, BarChart, Line, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 import {
   frictionAndRegime, threeLosses, erosionalLimit, boreChoice, associateReading,
 } from './linesizingLab';
@@ -34,13 +37,13 @@ export const MODES = [
   ['reading', 'The Associate reading: one line end to end'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
 
 const Tbl = ({ head, rows }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>{head.map((h, i) => <th key={i} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>)}</tr>
       </thead>
       <tbody>
@@ -55,9 +58,9 @@ const Tbl = ({ head, rows }) => (
 );
 
 const Held = ({ note }) => (
-  <div className="mt-3 rounded-md border border-amber-700/60 bg-amber-950/20 p-3">
-    <p className="text-amber-300 text-xs font-medium mb-1">HELD FOR LITERATURE</p>
-    <p className="text-xs text-slate-300 mb-0">{note}</p>
+  <div className="mt-3 rounded-md border border-pl-warning/40 bg-pl-warning-bg p-3">
+    <p className="text-pl-warning-text text-xs font-medium mb-1">HELD FOR LITERATURE</p>
+    <p className="text-xs text-pl-text mb-0">{note}</p>
   </div>
 );
 
@@ -74,7 +77,7 @@ export const RegimeMode = ({ f }) => {
         head={['Reynolds number', 'relative roughness', 'engine f', 'golden f', 'regime the engine reports']}
         rows={f.published.map((c) => [four(c.re), six(c.relRough), ten(c.f), ten(c.goldenF), c.regime])}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The published cases are synthetic, written by an independent oracle in SI where the engine works in field units.
         They catch an arithmetic or a unit error and cannot catch a method that is wrong in both files.
       </p>
@@ -82,19 +85,17 @@ export const RegimeMode = ({ f }) => {
         head={['Reynolds number', 'f', 'regime']}
         rows={f.branch.map((r) => [four(r.re), ten(r.f), r.regime])}
       />
-      <div className="h-48 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="re" tick={AXIS} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => ten(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line dataKey="f" name="friction factor" stroke="#38bdf8" dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <ChartFrame height={192} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="re" tick={AXIS} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => ten(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line dataKey="f" name="friction factor" stroke={seriesColor(0)} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         At the line's own relative roughness of {ten(f.ogbiaRelRoughDerived)} the friction factor goes from
         {' '}{ten(f.jumpFromF)} to {ten(f.jumpToF)} across a single unit of Reynolds number, a jump of
         {' '}{six(f.jumpPercentDerived)} percent. The lower value is reported as {f.jumpFromRegime} and the upper as
@@ -105,7 +106,7 @@ export const RegimeMode = ({ f }) => {
         head={['relative roughness', `f at Reynolds ${four(f.reLow)}`, `f at Reynolds ${four(f.reHigh)}`]}
         rows={f.roughnessRows.map((r) => [six(r.relRough), ten(r.fLow), ten(r.fHigh)])}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         A rough pipe stops caring about the Reynolds number and a smooth one never does. Read the two columns against
         each other down the table: that is the vertical axis of the Moody chart.
       </p>
@@ -136,7 +137,7 @@ export const LossesMode = ({ t }) => {
           <Tile label="Gradient" value={ten(t.gradientPsiPerFt)} unit="psi per ft" />
         </TileGrid>
       </div>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The line as built: {six(t.qBpd)} bpd of {six(t.rhoLbFt3)} lb/ft3 crude at {six(t.muCp)} cp, through
         {' '}{six(t.idIn)} in of bore over {six(t.lengthFt)} ft. Friction {six(t.dpFrictionPsi)} psi, fittings
         {' '}{six(t.dpFittingsPsi)} psi, elevation {six(t.dpElevationPsi)} psi, total {six(t.dpTotalPsi)} psi. The three
@@ -147,7 +148,7 @@ export const LossesMode = ({ t }) => {
         head={['fitting', 'count', 'K each', 'K total']}
         rows={t.fittings.map((x) => [x.id, String(x.count), six(x.kEach), six(x.kTotal)])}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The resistance sum for that list is {six(t.sumK)} velocity heads. On the whole {six(t.lengthFt)} ft line those
         fittings cost {six(t.withKFittingsPsi)} psi against {six(t.withKFrictionPsi)} psi of pipe, a share of
         {' '}{six(t.withKShareDerived)}. On a {six(t.manifoldLengthFt)} ft manifold run carrying the same duty and the
@@ -157,21 +158,19 @@ export const LossesMode = ({ t }) => {
         head={['elevation change ft', 'friction psi', 'elevation psi', 'total psi', 'gradient psi per ft']}
         rows={t.elevationRows.map((r) => [six(r.elevChangeFt), six(r.dpFrictionPsi), six(r.dpElevationPsi), six(r.dpTotalPsi), ten(r.gradientPsiPerFt)])}
       />
-      <div className="h-48 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="elev" tick={AXIS} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={0} stroke="#64748b" />
-            <Bar dataKey="friction" name="friction, psi" fill="#38bdf8" isAnimationActive={false} />
-            <Bar dataKey="elevation" name="elevation, psi" fill="#BFFF00" isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <ChartFrame height={192} className="mt-3">
+        <BarChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="elev" tick={AXIS} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine y={0} stroke={SVG_CHART.reference} />
+          <Bar dataKey="friction" name="friction, psi" fill={seriesColor(0)} isAnimationActive={false} />
+          <Bar dataKey="elevation" name="elevation, psi" fill={seriesColor(1)} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The friction term is identical in all three rows and the elevation term is symmetric about zero, so a hill is
         ADDED to a pressure drop rather than mixed into it. Downhill the total comes back negative, and that is an
         answer rather than an error.
@@ -193,7 +192,7 @@ export const ErosionalMode = ({ e }) => {
   return (
     <>
       <Tbl head={['id', 'label', 'c']} rows={e.rows.map((r) => [r.id, r.label, six(r.c)])} />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         An id the table does not carry does not refuse and does not return null. Asked for
         {' '}<span className="font-mono">{e.unknownId}</span> the catalogue answers with the FIRST ROW under its own
         label, which is the one thing in this chain that answers a question it was not asked.
@@ -208,7 +207,7 @@ export const ErosionalMode = ({ e }) => {
           <Tile label="Velocity the erosional check reads" value={six(e.checkVelocityFtS)} unit="ft/s" />
         </TileGrid>
       </div>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         That is the same velocity the pressure drop read. The erosional limit is not a pressure drop and not a length:
         it is a ceiling on velocity, so it can rule out a bore that the pressure drop was perfectly happy with.
       </p>
@@ -216,21 +215,19 @@ export const ErosionalMode = ({ e }) => {
         head={['mixture density lb/ft3', 'erosional at c 100', 'at c 125', 'at c 175']}
         rows={e.densityRows.map((r) => [six(r.rhoLbFt3), six(r.at100), six(r.at125), six(r.at175)])}
       />
-      <div className="h-48 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="rho" tick={AXIS} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line dataKey="c100" name="c 100" stroke="#38bdf8" dot={false} isAnimationActive={false} />
-            <Line dataKey="c125" name="c 125" stroke="#BFFF00" dot={false} isAnimationActive={false} />
-            <Line dataKey="c175" name="c 175" stroke="#f472b6" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <ChartFrame height={192} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="rho" tick={AXIS} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line dataKey="c100" name="c 100" stroke={seriesColor(0)} dot={false} isAnimationActive={false} />
+          <Line dataKey="c125" name="c 125" stroke={seriesColor(1)} dot={false} isAnimationActive={false} />
+          <Line dataKey="c175" name="c 175" stroke={seriesColor(4)} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Density is the whole of the limit. A light gas is allowed to run several times faster than a dense liquid,
         which is why the limit bites hardest on wet gas and hardly at all on crude.
       </p>
@@ -250,24 +247,22 @@ export const BoreMode = ({ b }) => {
         head={['nominal', 'schedule', 'OD in', 'wall in', 'bore in', 'velocity ft/s', 'Reynolds', 'friction psi', 'total psi', 'erosional ft/s', 'ratio', 'inside the limit']}
         rows={b.rows.map((r) => [String(r.nps), r.schedule, six(r.odIn), six(r.wallIn), six(r.idIn), six(r.vFtS), four(r.re), six(r.dpFrictionPsi), six(r.dpTotalPsi), six(r.erosionalFtS), six(r.ratio), String(r.insideTheLimit)])}
       />
-      <div className="h-48 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="bore" tick={AXIS} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={1} stroke="#BFFF00" strokeDasharray="3 3" label={{ value: 'the erosional limit', fill: '#BFFF00', fontSize: 10 }} />
-            <Line dataKey="ratio" name="velocity over the erosional limit" stroke="#f472b6" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <ChartFrame height={192} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="bore" tick={AXIS} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine y={1} stroke={seriesColor(1)} strokeDasharray="3 3" label={{ value: 'the erosional limit', fill: seriesColor(1), fontSize: 10 }} />
+          <Line dataKey="ratio" name="velocity over the erosional limit" stroke={seriesColor(4)} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The erosional velocity is the same on every row, {six(b.erosionalFtS)} ft/s, because it depends on the density
         and the c factor and not on the bore. What changes down the table is the velocity that has to sit under it.
       </p>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Bores in table order: {b.boresInTableOrder.map((x) => six(x)).join(', ')}. That is NOT the order of the bores.
         A heavier schedule is a thicker wall and a smaller bore on the same outside diameter, and it sits after the
         lighter one, so reading down the table crosses back and forth over the bore a line actually needs.
@@ -304,7 +299,7 @@ export const ReadingMode = ({ a }) => {
           <Tile label="Pipe costs" value={six(a.dpFrictionPsi)} unit="psi" />
         </TileGrid>
       </div>
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         End to end: {six(a.qBpd)} bpd of {six(a.rhoLbFt3)} lb/ft3 crude at {six(a.muCp)} cp through {six(a.idIn)} in of
         bore over {six(a.lengthFt)} ft gives a velocity of {six(a.vFtS)} ft/s and a Reynolds number of {four(a.re)},
         which is {a.regime}. At a relative roughness of {ten(a.relRoughDerived)} the friction factor is {ten(a.f)} and
