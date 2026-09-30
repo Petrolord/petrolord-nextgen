@@ -283,7 +283,7 @@ export const ScheduleMode = ({
               </tbody>
             </table>
           </div>
-          <Note>Rows are the period&apos;s weeks from the period start. In blue a crude receipt, in pink a product lift.</Note>
+          <Note>Rows are the period&apos;s weeks from the period start. In blue a crude receipt, in gold a product lift.</Note>
           <Tbl
             head={['crude', 'crude run (bbl)', 'crude run / cargo size', 'cargoes in the schedule', 'receipt dates']}
             rows={sch.cargoes.map((c) => [c.name, bbl(c.crudeRun), frac(c.runOverCargo), c.cargoes, c.dates.join(', ')])}
