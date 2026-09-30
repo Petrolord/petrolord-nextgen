@@ -1,3 +1,6 @@
-// Batch 5C routes (docs/scope/DesignSystem-Rollout.md section 3). Empty until
-// the batch lands; the batch lists its routes here and nowhere else.
-export default [];
+// Batch 5C routes (docs/scope/DesignSystem-Rollout.md section 3): the five
+// HSE course apps, gas value and carbon. Each learning page is registered
+// exactly; its course reader pages are 1C's pattern entry.
+export default [
+  '/dashboard/apps/safetystats',
+];
