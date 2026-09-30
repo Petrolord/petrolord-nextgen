@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, BarChart, Line, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine, ReferenceDot,
+  LineChart, BarChart, Line, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine, ReferenceDot,
 } from 'recharts';
 import {
   ABOH, meterRun, inchOfWater, coefficientSurface, smallBoreBoundary, publishedBetaRange, downTheSpan,
@@ -8,6 +8,9 @@ import {
 import {
   PanelShell, NumField, SelectField, Tile, TileGrid, FieldGrid, Note,
 } from '@/components/course/panels/petrophysics/panelKit';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART, CHART_SERIES } from '@/utils/chartSvg';
 
 // THE METER RUN, the Associate tier. A meter run is the first of three places
 // in this course where a number that looks like a measurement is a design
@@ -43,14 +46,14 @@ export const MODES = [
   ['measured', 'Measured rather than typed: the inch of water, the small bore, the published edges'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const LINES = ['#38bdf8', '#BFFF00', '#f472b6', '#fbbf24', '#a78bfa'];
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const LINES = CHART_SERIES;
 
 const Tbl = ({ head, rows }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>{head.map((h, i) => <th key={h} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>)}</tr>
       </thead>
       <tbody>
@@ -67,8 +70,8 @@ const Tbl = ({ head, rows }) => (
 /** A RELATION, printed the only way this course allows two numbers to be
  *  compared: both values, their difference and their ratio, all computed. */
 export const Relation = ({ r }) => (r ? (
-  <div className="mt-3 rounded-md border border-slate-700 bg-[#0F172A] p-3">
-    <p className="text-slate-400 text-xs mb-2">RELATION: {r.label}</p>
+  <div className="mt-3 rounded-md border border-pl-border bg-pl-sunken p-3">
+    <p className="text-pl-muted text-xs mb-2">RELATION: {r.label}</p>
     <Tbl
       head={['', 'value', 'difference (first less second)', 'ratio (first over second)']}
       rows={[
@@ -83,18 +86,18 @@ export const Relation = ({ r }) => (r ? (
  *  Never a blank, a zero, a dash or a placeholder, because all four read as a
  *  number the tool failed to compute rather than as an answer being refused. */
 export const Refusal = ({ label, message }) => (message ? (
-  <div className="mt-2 rounded-md border border-red-800/60 bg-red-950/20 p-2">
-    <p className="text-red-300 text-xs font-medium mb-1">{label}</p>
-    <p className="text-xs text-slate-300 font-mono mb-0">{message}</p>
+  <div className="mt-2 rounded-md border border-pl-danger/30 bg-pl-danger-bg p-2">
+    <p className="text-pl-danger-text text-xs font-medium mb-1">{label}</p>
+    <p className="text-xs text-pl-text font-mono mb-0">{message}</p>
   </div>
 ) : null);
 
 /** A quantity the engine says is its own stated data. A panel that shows one
  *  says on the screen whose figure it is. */
 export const Provenance = ({ children }) => (
-  <div className="mt-3 rounded-md border border-amber-700/60 bg-amber-950/20 p-3">
-    <p className="text-amber-300 text-xs font-medium mb-1">THE ENGINE&apos;S OWN STATED DATA</p>
-    <p className="text-xs text-slate-300 font-mono mb-0">{children}</p>
+  <div className="mt-3 rounded-md border border-pl-warning/40 bg-pl-warning-bg p-3">
+    <p className="text-pl-warning-text text-xs font-medium mb-1">THE ENGINE&apos;S OWN STATED DATA</p>
+    <p className="text-xs text-pl-text font-mono mb-0">{children}</p>
   </div>
 );
 
@@ -119,7 +122,7 @@ export const RunMode = ({ r }) => {
         <Tile label="Volume at the flowing density" value={four(r.volumetricFt3HrAtFlowing)} unit="ft3/hr" />
         <Tile label="Differential" value={six(r.dpPsi)} unit="psi" />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The beta is a returned value and so is the flag beside it. Drive the orifice bore above the top of the
         published range and the flag turns over and the engine writes a warning. That is the boundary this whole
         module lives at. The volume is at the FLOWING density the run was given: there is no base pressure and no base
@@ -129,7 +132,7 @@ export const RunMode = ({ r }) => {
       <Provenance>{r.reynoldsBasis}</Provenance>
       {b ? (
         <>
-          <p className="text-xs text-slate-400 mt-3 mb-0">
+          <p className="text-xs text-pl-muted mt-3 mb-0">
             THE UNCERTAINTY IS THE SUBJECT. Each input&apos;s uncertainty is multiplied by the sensitivity of the flow
             to that input, read off the orifice equation itself, and the six are combined as a root sum of squares.
             The total is {six(b.totalUncertaintyPct)} percent of flow.
@@ -145,29 +148,27 @@ export const RunMode = ({ r }) => {
             <Tile label="The dominance is clear" value={String(b.dominanceIsClear)} />
           </TileGrid>
           <Relation r={b.leadRelation} />
-          <p className="text-xs text-slate-400 mt-3 mb-0">
+          <p className="text-xs text-pl-muted mt-3 mb-0">
             WHERE THE DIFFERENTIAL TERM COMES FROM. The engine derives it from the transmitter whenever a reading and a
             span are both given, and it says which of the two routes it took. That is what stops a screen showing a
             transmitter figure beside a budget that disagrees with it.
           </p>
-          <div className="mt-2 rounded-md border border-slate-700 bg-[#0F172A] p-2">
-            <p className="text-xs text-slate-300 font-mono mb-0">{b.differentialUncertaintySource}</p>
+          <div className="mt-2 rounded-md border border-pl-border bg-pl-sunken p-2">
+            <p className="text-xs text-pl-text font-mono mb-0">{b.differentialUncertaintySource}</p>
           </div>
           <Relation r={r.routeRelation} />
-          <div className="h-44 mt-3">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
-                <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-                <XAxis dataKey="term" tick={{ ...AXIS, fontSize: 9 }} interval={0} />
-                <YAxis tick={AXIS} />
-                <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
-                <Legend wrapperStyle={{ fontSize: 11 }} />
-                <Bar dataKey="share" name="share of variance, percent" fill="#38bdf8" isAnimationActive={false} />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-          <div className="mt-2 rounded-md border border-slate-700 bg-[#0F172A] p-2">
-            <p className="text-xs text-slate-300 font-mono mb-0">{b.note}</p>
+          <ChartFrame height={176} className="mt-3">
+            <BarChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
+              <CartesianGrid {...GRID_STYLE} />
+              <XAxis dataKey="term" tick={{ ...AXIS, fontSize: 9 }} interval={0} />
+              <YAxis tick={AXIS} />
+              <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
+              <Legend {...LEGEND_PROPS} />
+              <Bar dataKey="share" name="share of variance, percent" fill={seriesColor(0)} isAnimationActive={false} />
+            </BarChart>
+          </ChartFrame>
+          <div className="mt-2 rounded-md border border-pl-border bg-pl-sunken p-2">
+            <p className="text-xs text-pl-text font-mono mb-0">{b.note}</p>
           </div>
         </>
       ) : <Refusal label="The budget was refused" message={r.budgetError} />}
@@ -179,8 +180,8 @@ export const RunMode = ({ r }) => {
             <Tile label="Flow turndown" value={six(r.transmitter.flowTurndown)} />
             <Tile label="Permanent loss" value={r.permanentLoss ? six(r.permanentLoss.lossInH2O) : 'none'} unit="in H2O" />
           </TileGrid>
-          <div className="mt-2 rounded-md border border-slate-700 bg-[#0F172A] p-2">
-            <p className="text-xs text-slate-300 font-mono mb-0">{r.transmitter.turndownNote}</p>
+          <div className="mt-2 rounded-md border border-pl-border bg-pl-sunken p-2">
+            <p className="text-xs text-pl-text font-mono mb-0">{r.transmitter.turndownNote}</p>
           </div>
           <Refusal label="The engine's turndown warning" message={r.transmitter.warning} />
         </>
@@ -198,7 +199,7 @@ export const SurfaceMode = ({ s }) => {
   });
   return (
     <>
-      <p className="text-xs text-slate-400 mb-0">
+      <p className="text-xs text-pl-muted mb-0">
         A course that used a constant coefficient would be wrong by more than the uncertainty anybody is arguing about.
         The engine computes the published correlation instead, and the span of this table is the measurement of that.
         {' '}{s.inPublishedRangeCount} of these cells sit inside the published beta range. Tree: {s.countTree}.
@@ -208,22 +209,20 @@ export const SurfaceMode = ({ s }) => {
         head={['beta', ...s.reynolds.map((re) => `Re ${re.toExponential(0)}`)]}
         rows={s.rows.map((row) => [six(row.beta), ...row.cells.map((c) => six(c.cd))])}
       />
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="beta" tick={AXIS} label={{ value: 'beta', fill: '#94a3b8', fontSize: 10, position: 'insideBottom', offset: -2 }} />
-            <YAxis tick={AXIS} domain={['auto', 'auto']} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            {s.reynolds.map((re, i) => (
-              <Line key={re} dataKey={`re${i}`} name={`Re ${re.toExponential(0)}`} stroke={LINES[i % LINES.length]} dot={false} isAnimationActive={false} />
-            ))}
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="beta" tick={AXIS} label={{ value: 'beta', fill: SVG_CHART.note, fontSize: 10, position: 'insideBottom', offset: -2 }} />
+          <YAxis tick={AXIS} domain={['auto', 'auto']} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
+          <Legend {...LEGEND_PROPS} />
+          {s.reynolds.map((re, i) => (
+            <Line key={re} dataKey={`re${i}`} name={`Re ${re.toExponential(0)}`} stroke={LINES[i % LINES.length]} dot={false} isAnimationActive={false} />
+          ))}
+        </LineChart>
+      </ChartFrame>
       <Relation r={s.spanRelation} />
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         The engine refuses to assume a coefficient anywhere it needs one. The permanent loss relation takes the
         coefficient of the run as a required argument and says why when it is missing:
       </p>
@@ -245,7 +244,7 @@ export const SpanMode = ({ d }) => {
         <Tile label="The dominant term changes name at" value={six(d.dominanceEdge.at)} unit="in H2O" />
         <Tile label="The lead stops being clear at" value={six(d.clearEdge.at)} unit="in H2O" />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         All three readings above are found by bisecting what the engine returns rather than by argument: the warning
         going from empty to a sentence, the NAME of the dominant term, and the flag that says whether the lead is
         clear. Above {six(d.dominanceEdge.at)} in H2O the engine names {raw(d.dominantAbove)}; below it the engine
@@ -259,32 +258,30 @@ export const SpanMode = ({ d }) => {
           r.warningFires ? 'fires' : 'silent', six(r.totalUncertaintyPct), r.dominant, six(r.dominantShareOfVariancePct), String(r.dominanceIsClear),
         ])}
       />
-      <div className="h-52 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="reading" tick={AXIS} reversed label={{ value: 'reading, in H2O', fill: '#94a3b8', fontSize: 10, position: 'insideBottom', offset: -2 }} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine x={d.dominanceEdge.at} stroke="#f472b6" strokeDasharray="3 3" label={{ value: 'the dominant term changes name', fill: '#f472b6', fontSize: 9 }} />
-            <Line dataKey="transmitter" name="transmitter, percent of reading" stroke="#38bdf8" dot={false} isAnimationActive={false} />
-            <Line dataKey="total" name="total uncertainty, percent" stroke="#BFFF00" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={208} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="reading" tick={AXIS} reversed label={{ value: 'reading, in H2O', fill: SVG_CHART.note, fontSize: 10, position: 'insideBottom', offset: -2 }} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine x={d.dominanceEdge.at} stroke={seriesColor(3)} strokeDasharray="3 3" label={{ value: 'the dominant term changes name', fill: seriesColor(3), fontSize: 9 }} />
+          <Line dataKey="transmitter" name="transmitter, percent of reading" stroke={seriesColor(0)} dot={false} isAnimationActive={false} />
+          <Line dataKey="total" name="total uncertainty, percent" stroke={seriesColor(1)} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Relation r={d.spanRelation} />
       <Relation r={d.limitRelation} />
-      <div className="mt-3 rounded-md border border-slate-700 bg-[#0F172A] p-2">
-        <p className="text-xs text-slate-300 font-mono mb-0">{d.turndownNote}</p>
+      <div className="mt-3 rounded-md border border-pl-border bg-pl-sunken p-2">
+        <p className="text-xs text-pl-text font-mono mb-0">{d.turndownNote}</p>
       </div>
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         THE MARGIN IS PART OF THE RESULT. A ranking of six numbers with no margin will name a winner on a photo finish.
         The engine returns whether the lead is clear and writes a different note in the two cases:
       </p>
-      <div className="mt-2 rounded-md border border-slate-700 bg-[#0F172A] p-2">
-        <p className="text-xs text-slate-300 font-mono mb-2">{d.clearNote}</p>
-        <p className="text-xs text-slate-300 font-mono mb-0">{d.closeNote}</p>
+      <div className="mt-2 rounded-md border border-pl-border bg-pl-sunken p-2">
+        <p className="text-xs text-pl-text font-mono mb-2">{d.clearNote}</p>
+        <p className="text-xs text-pl-text font-mono mb-0">{d.closeNote}</p>
       </div>
       <Refusal label="A reading above the transmitter span" message={d.aboveTheSpanRefusal} />
     </>
@@ -295,7 +292,7 @@ export const MeasuredMode = ({ w, sb, br }) => {
   if (!w || !sb || !br) return <Note>The measured readers did not answer.</Note>;
   return (
     <>
-      <p className="text-xs text-slate-400 mb-0">
+      <p className="text-xs text-pl-muted mb-0">
         Every constant on this page is MEASURED out of the engine rather than typed into this panel. A constant written
         as a literal here would be a claim about the engine rather than a reading of it.
       </p>
@@ -309,11 +306,11 @@ export const MeasuredMode = ({ w, sb, br }) => {
         head={['', 'differential given, in H2O', 'differential returned, psi', 'the factor that implies']}
         rows={w.runs.map((r) => [r.label, six(r.dpInH2O), six(r.dpPsi), String(r.factorDerived)])}
       />
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Two runs sharing no other input return differentials in psi whose quotients with the inches of water they were
         given are the same double. That is what makes this a constant rather than a coincidence.
       </p>
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         THE SMALL BORE CORRECTION, and the bore it turns on at, found by bisecting the engine&apos;s own flag. The
         search ran {raw(sb.edge.halvings)} halvings and the flag reads {raw(sb.edge.readingFrom)} at
         {' '}{six(sb.edge.from)} in and {raw(sb.edge.readingTo)} at {six(sb.edge.to)} in, so the edge discriminates.
@@ -323,7 +320,7 @@ export const MeasuredMode = ({ w, sb, br }) => {
         rows={sb.rows.map((r) => [six(r.pipeIdIn), six(r.cd), String(r.correctionApplied)])}
       />
       <Relation r={sb.eitherSide} />
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         THE PUBLISHED BETA RANGE. Both edges are found by bisecting the engine&apos;s own flag, and the beta the trade
         warning starts above is found by bisecting the warning going from empty to a sentence.
       </p>

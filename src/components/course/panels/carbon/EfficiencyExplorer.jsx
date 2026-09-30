@@ -1,14 +1,16 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, Legend,
+  LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, Legend,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { seriesColor } from '@/utils/chartSvg';
 import {
   ISIOKPO_FUEL, ISIOKPO_HEATER, ISIOKPO_TRAP, ISIOKPO_CONDENSATE, ISIOKPO_DTMIN, ISIOKPO_DTMIN_CASE, TRAP_EXPONENTS, PROBES,
   combustion, excessAir, excessAirAt, stackLoss, stackLossCases, tuning, tuningCases, trap, trapCases, condensate, condensateCases,
   pinch, pinchCases, f10, yn,
 } from './carbonLab';
 import {
-  AXIS, TOOLTIP, GRID, SERIES, F, usable, Tbl, Refused, Verbatim, Here, Note, Lead, Empty, safe, Box, Slider, Button,
+  AXIS, TOOLTIP, GRID, SERIES, AXIS_NOTE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT, F, usable, Tbl, Refused, Verbatim, Here, Note, Lead, Empty, safe, Box, Slider, Button,
 } from './panelBits';
 import { PanelShell, SelectField, FieldGrid } from '@/components/course/panels/petrophysics/panelKit';
 
@@ -122,19 +124,17 @@ export const AirMode = ({
         />
       ) : <Refused label={`a dry stack oxygen of ${o2} percent`} reason={at && at.error} />}
       {air.assumption && <Verbatim label="The engine's assumption">{air.assumption}</Verbatim>}
-      <div className="h-56 mt-2">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={data} margin={{ top: 10, right: 20, bottom: 10, left: 0 }}>
-            <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
-            <XAxis dataKey="o2" type="number" domain={[0, 22]} tick={AXIS} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} />
-            {Number.isFinite(air.airOxygenPercent) && <ReferenceLine x={air.airOxygenPercent} stroke="#f87171" strokeDasharray="4 2" label={{ value: 'oxygen in air', fill: '#f87171', fontSize: 10, position: 'insideTopRight' }} />}
-            {usable(at) && <ReferenceLine x={o2} stroke={SERIES[2]} />}
-            <Line type="monotone" dataKey="excess" name="excess air percent" stroke={SERIES[0]} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-2">
+        <LineChart data={data} margin={{ top: 10, right: 20, bottom: 10, left: 0 }}>
+          <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
+          <XAxis dataKey="o2" type="number" domain={[0, 22]} tick={AXIS} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} />
+          {Number.isFinite(air.airOxygenPercent) && <ReferenceLine x={air.airOxygenPercent} stroke={SERIES[5]} strokeDasharray="4 2" label={{ value: 'oxygen in air', fill: SERIES[5], fontSize: 10, position: 'insideTopRight' }} />}
+          {usable(at) && <ReferenceLine x={o2} stroke={SERIES[2]} />}
+          <Line type="monotone" dataKey="excess" name="excess air percent" stroke={SERIES[0]} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Tbl
         head={['dry O2 percent', 'excess air percent', 'actual air', 'dry flue gas', 'wet flue gas']}
         rows={air.rows.map((r) => (usable(r.r)
@@ -148,7 +148,7 @@ export const AirMode = ({
 
 // ---------------------------------------------------------------------------
 
-const LOSS_KEYS = [['Dry flue gas', SERIES[0]], ['Moisture from hydrogen', SERIES[1]], ['Radiation and convection', SERIES[3]], ['Unburned and other', SERIES[4]]];
+const LOSS_KEYS = [['Dry flue gas', seriesColor(0)], ['Moisture from hydrogen', seriesColor(1)], ['Radiation and convection', seriesColor(2)], ['Unburned and other', seriesColor(4)]];
 
 const LossChart = ({ title, r }) => {
   if (!usable(r) || !Array.isArray(r.losses)) return <Refused label={title} reason={r && r.error} />;
@@ -156,19 +156,17 @@ const LossChart = ({ title, r }) => {
   r.losses.forEach((l) => { row[l.label] = l.percent; });
   return (
     <div>
-      <p className="text-xs text-slate-300 mb-0">{title}: efficiency {F.pct(r.efficiencyPercent)} percent on {r.basis}</p>
-      <div className="h-56 mt-1">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={[row]} margin={{ top: 10, right: 10, bottom: 10, left: 0 }}>
-            <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
-            <XAxis dataKey="name" tick={AXIS} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} />
-            <Legend wrapperStyle={{ fontSize: 10 }} />
-            {LOSS_KEYS.map(([k, c]) => <Bar key={k} dataKey={k} stackId="l" fill={c} isAnimationActive={false} />)}
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <p className="text-xs text-pl-text mb-0">{title}: efficiency {F.pct(r.efficiencyPercent)} percent on {r.basis}</p>
+      <ChartFrame height={224} className="mt-1">
+        <BarChart data={[row]} margin={{ top: 10, right: 10, bottom: 10, left: 0 }}>
+          <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
+          <XAxis dataKey="name" tick={AXIS} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} />
+          <Legend {...LEGEND_PROPS} />
+          {LOSS_KEYS.map(([k, c]) => <Bar key={k} dataKey={k} stackId="l" fill={c} isAnimationActive={false} />)}
+        </BarChart>
+      </ChartFrame>
       <Tbl head={['loss', 'percent']} rows={[...r.losses.map((l) => [l.label, F.pct(l.percent)]), ['total loss', F.pct(r.totalLossPercent)], ['efficiency', F.pct(r.efficiencyPercent)]]} />
       {r.moistureBasisNote && <Verbatim label={`The moisture note on ${r.basis}`}>{r.moistureBasisNote}</Verbatim>}
       {r.comparisonWarning && <Verbatim label="The comparison warning">{r.comparisonWarning}</Verbatim>}
@@ -253,8 +251,8 @@ export const TuningMode = ({
           />
           <Verbatim label="The engine's method">{s.method}</Verbatim>
           {sc && (
-            <div className="mt-2 rounded-md border border-slate-700 p-2">
-              <p className="text-xs text-slate-400 mb-0">
+            <div className="mt-2 rounded-md border border-pl-border p-2">
+              <p className="text-xs text-pl-muted mb-0">
                 The percentage-point shortcut, the course&apos;s contrast figure and never the answer: a saving fraction of {f10(sc.fraction)},
                 which is {F.gj(sc.gj)} GJ a year, {F.gj(sc.belowEngine)} GJ below the engine&apos;s saving (computed here from the
                 engine&apos;s two efficiencies; the engine does not return it).
@@ -384,18 +382,16 @@ export const PinchMode = ({
         head={['hot utility kW', 'cold utility kW', 'pinch hot C', 'pinch cold C', 'heat recovered kW', 'balance check', 'threshold problem']}
         rows={[[F.kw(p.hotUtilityKW), F.kw(p.coldUtilityKW), F.c(p.pinchHotC), F.c(p.pinchColdC), F.kw(p.heatRecoveredKW), F.kw(p.balanceCheck), yn(p.thresholdProblem)]]}
       />
-      <div className="h-64 mt-2">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={gc} margin={{ top: 10, right: 20, bottom: 10, left: 0 }}>
-            <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
-            <XAxis dataKey="heat" type="number" tick={AXIS} label={{ value: 'heat flow kW', fill: '#94a3b8', fontSize: 10, position: 'insideBottom', offset: -4 }} />
-            <YAxis dataKey="t" type="number" domain={['auto', 'auto']} tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} />
-            {p.pinchShiftedC !== null && p.pinchShiftedC !== undefined && <ReferenceLine y={p.pinchShiftedC} stroke={SERIES[2]} label={{ value: 'the pinch', fill: '#BFFF00', fontSize: 10, position: 'insideTopRight' }} />}
-            <Line type="linear" dataKey="t" name="grand composite, shifted C" stroke={SERIES[0]} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-2">
+        <LineChart data={gc} margin={{ top: 10, right: 20, bottom: 10, left: 0 }}>
+          <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="heat" type="number" tick={AXIS} label={{ value: 'heat flow kW', fill: AXIS_NOTE, fontSize: 10, position: 'insideBottom', offset: -4 }} />
+          <YAxis dataKey="t" type="number" domain={['auto', 'auto']} tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} />
+          {p.pinchShiftedC !== null && p.pinchShiftedC !== undefined && <ReferenceLine y={p.pinchShiftedC} stroke={SERIES[2]} label={{ value: 'the pinch', fill: SERIES[2], fontSize: 10, position: 'insideTopRight' }} />}
+          <Line type="linear" dataKey="t" name="grand composite, shifted C" stroke={SERIES[0]} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Tbl
         head={['top shifted C', 'bottom shifted C', 'CP hot kW/K', 'CP cold kW/K', 'surplus kW', 'heat flow below kW']}
         rows={p.intervals.map((iv) => [F.c(iv.topShiftedC), F.c(iv.bottomShiftedC), F.frac(iv.cpHotKWperK), F.frac(iv.cpColdKWperK), F.kw(iv.surplusKW), F.kw(iv.cascadeKW)])}

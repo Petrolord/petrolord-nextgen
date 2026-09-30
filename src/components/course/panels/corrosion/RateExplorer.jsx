@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
 import {
   twoResistances, protectiveFilm, phAndItsReference, waterWetting, studioDefaults,
@@ -8,6 +8,9 @@ import {
 import {
   PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note,
 } from '@/components/course/panels/petrophysics/panelKit';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 
 // The rate explorer: the two resistances, the film, the pH correction and the
 // wetting regime, each shown as the separate factor the engine reports.
@@ -45,14 +48,14 @@ export const MODES = [
   ['wetting', 'Water wetting, a dropdown that can take the rate to zero'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const SERIES = ['#38bdf8', '#f472b6', '#BFFF00', '#fbbf24'];
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const SERIES = [seriesColor(0), seriesColor(4), seriesColor(1), seriesColor(2)];
 
 const Tbl = ({ head, rows }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>{head.map((h, i) => <th key={h} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>)}</tr>
       </thead>
       <tbody>
@@ -67,28 +70,28 @@ const Tbl = ({ head, rows }) => (
 );
 
 const Held = ({ children }) => (
-  <div className="mt-3 rounded-md border border-amber-700/60 bg-amber-950/20 p-3">
-    <p className="text-amber-300 text-xs font-medium mb-1">HELD FOR LITERATURE</p>
-    <p className="text-xs text-slate-300 mb-0">{children}</p>
+  <div className="mt-3 rounded-md border border-pl-warning/40 bg-pl-warning-bg p-3">
+    <p className="text-pl-warning-text text-xs font-medium mb-1">HELD FOR LITERATURE</p>
+    <p className="text-xs text-pl-text mb-0">{children}</p>
   </div>
 );
 
 const Unresolved = ({ children }) => (
-  <div className="mt-3 rounded-md border border-fuchsia-800/60 bg-fuchsia-950/20 p-3">
-    <p className="text-fuchsia-300 text-xs font-medium mb-1">UNRESOLVED, AND NOTHING BELOW IT IS GRADED</p>
-    <p className="text-xs text-slate-300 mb-0">{children}</p>
+  <div className="mt-3 rounded-md border border-pl-info/30 bg-pl-info-bg p-3">
+    <p className="text-pl-info-text text-xs font-medium mb-1">UNRESOLVED, AND NOTHING BELOW IT IS GRADED</p>
+    <p className="text-xs text-pl-text mb-0">{children}</p>
   </div>
 );
 
 const Absent = ({ children }) => (
-  <div className="mt-3 rounded-md border border-slate-600 bg-slate-900/40 p-3">
-    <p className="text-slate-300 text-xs font-medium mb-1">NOT PROVIDED</p>
-    <p className="text-xs text-slate-400 mb-0">{children}</p>
+  <div className="mt-3 rounded-md border border-pl-border-strong bg-pl-sunken p-3">
+    <p className="text-pl-text text-xs font-medium mb-1">NOT PROVIDED</p>
+    <p className="text-xs text-pl-muted mb-0">{children}</p>
   </div>
 );
 
 const Quote = ({ children }) => (
-  <p className="mt-2 mb-0 border-l-2 border-slate-600 pl-3 text-xs text-slate-400 font-mono">{children}</p>
+  <p className="mt-2 mb-0 border-l-2 border-pl-border-strong pl-3 text-xs text-pl-muted font-mono">{children}</p>
 );
 
 const safe = (fn) => { try { return fn(); } catch { return null; } };
@@ -108,27 +111,25 @@ export const SeriesMode = ({ s, d }) => {
         <Tile label="Combined, below both of them" value={six(d.combinedMmYr)} unit="mm/yr" />
         <Tile label="Controlling, and its margin" value={`${d.controlling}, ${six(d.controllingMargin)}`} />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The combined answer is below both terms on every row, and it sits close to whichever term is smaller. That is
         what a series combination means, and it is a property you can state before you see a number. The controlling
         word carries a REPORTING margin of {six(s.controllingMarginPct)} percent, inside which the engine answers
         comparable rather than naming one term, because a bare comparison of two nearly equal numbers flips on
         floating-point noise.
       </p>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="name" tick={AXIS} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line dataKey="reaction" name="reaction term, mm/yr" stroke={SERIES[0]} dot isAnimationActive={false} />
-            <Line dataKey="transport" name="mass-transfer term, mm/yr" stroke={SERIES[1]} dot isAnimationActive={false} />
-            <Line dataKey="combined" name="combined, mm/yr" stroke={SERIES[2]} dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="name" tick={AXIS} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line dataKey="reaction" name="reaction term, mm/yr" stroke={SERIES[0]} dot isAnimationActive={false} />
+          <Line dataKey="transport" name="mass-transfer term, mm/yr" stroke={SERIES[1]} dot isAnimationActive={false} />
+          <Line dataKey="combined" name="combined, mm/yr" stroke={SERIES[2]} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Tbl
         head={['stream', 'reaction mm/yr', 'mass transfer mm/yr', 'combined mm/yr', 'combined over the smaller term', 'controlling', 'margin']}
         rows={s.rows.map((r) => [
@@ -174,43 +175,39 @@ export const FilmMode = ({ f }) => {
         <Tile label="How far the onset moves across the swept fugacities" value={six(f.onsetSpreadC)} unit="C" />
         <Tile label="Scale factor at the studio's own temperature" value={twelve(f.appScaleFactor)} />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         THE ONSET IS NOT A FIXED TEMPERATURE, so this page prints no round one. It is the temperature at which the scale
         expression crosses zero, it moves with the CO2 fugacity, and across the fugacities below it moves by
         {' '}{six(f.onsetSpreadC)} degrees Celsius. A help guide that quotes one figure is wrong at every fugacity
         except one. The fourth column is the proof that the computed onset is the crossing: the factor there is exactly
         one to twelve decimals, by construction rather than by a clamp.
       </p>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="fco2" scale="log" domain={['auto', 'auto']} tick={AXIS} label={{ value: 'CO2 fugacity, bar', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -3 }} />
-            <YAxis tick={AXIS} label={{ value: 'computed onset, C', angle: -90, fill: '#94a3b8', fontSize: 11, position: 'insideLeft' }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine y={f.appOnsetC} stroke="#fbbf24" strokeDasharray="4 4" label={{ value: 'the studio case', fill: '#fbbf24', fontSize: 10 }} />
-            <Line dataKey="onset" name="computed onset, C" stroke={SERIES[0]} dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="fco2" scale="log" domain={['auto', 'auto']} tick={AXIS} label={{ value: 'CO2 fugacity, bar', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
+          <YAxis tick={AXIS} label={{ value: 'computed onset, C', angle: -90, fill: SVG_CHART.note, fontSize: 11, position: 'insideLeft' }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine y={f.appOnsetC} stroke={seriesColor(2)} strokeDasharray="4 4" label={{ value: 'the studio case', fill: seriesColor(2), fontSize: 10 }} />
+          <Line dataKey="onset" name="computed onset, C" stroke={SERIES[0]} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Tbl
         head={['CO2 fugacity bar', 'computed onset C', 'factor at 60 C', 'factor at the onset', 'factor 20 C above it']}
         rows={f.onsets.map((o) => [six(o.fco2Bar), six(o.onsetC), six(o.at60), twelve(o.atOnset), six(o.above)])}
       />
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={temps} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="tC" tick={AXIS} label={{ value: 'temperature, C', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -3 }} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line dataKey="factor" name="scale factor" stroke={SERIES[2]} dot isAnimationActive={false} />
-            <Line dataKey="rate" name="rate, mm/yr" stroke={SERIES[1]} dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={temps} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="tC" tick={AXIS} label={{ value: 'temperature, C', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line dataKey="factor" name="scale factor" stroke={SERIES[2]} dot isAnimationActive={false} />
+          <Line dataKey="rate" name="rate, mm/yr" stroke={SERIES[1]} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Note>
         Two streams, one number, two answers. The hot stream runs at {six(f.kanbiTC)} C with a fugacity of
         {' '}{six(f.kanbiFco2Bar)} bar, so its computed onset is {six(f.kanbiOnsetC)} C and its factor is
@@ -246,26 +243,24 @@ export const PhMode = ({ p }) => {
         <Tile label="Rate at the bottom of the swept band" value={six(p.firstRateMmYr)} unit="mm/yr" />
         <Tile label="And at the top of it" value={six(p.lastRateMmYr)} unit="mm/yr" />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The rate falls strictly with pH across the whole band above the reference, by a factor of
         {' '}{six(p.spanFactor)} from pH {six(p.firstPh)} to pH {six(p.lastPh)}. Exactly one decade per two pH units is
         a PROPERTY of the correction and it is scale free, so it tests the form rather than the slope:
         {' '}{p.decade.map((d) => twelve(d.ratio)).join(', ')}.
       </p>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="ph" tick={AXIS} label={{ value: 'in-situ pH', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -3 }} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine x={p.phReference} stroke="#fbbf24" strokeDasharray="4 4" label={{ value: 'the reference', fill: '#fbbf24', fontSize: 10 }} />
-            <Line dataKey="factor" name="pH factor" stroke={SERIES[2]} dot isAnimationActive={false} />
-            <Line dataKey="rate" name="rate, mm/yr" stroke={SERIES[1]} dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="ph" tick={AXIS} label={{ value: 'in-situ pH', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine x={p.phReference} stroke={seriesColor(2)} strokeDasharray="4 4" label={{ value: 'the reference', fill: seriesColor(2), fontSize: 10 }} />
+          <Line dataKey="factor" name="pH factor" stroke={SERIES[2]} dot isAnimationActive={false} />
+          <Line dataKey="rate" name="rate, mm/yr" stroke={SERIES[1]} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Tbl
         head={['pH', 'factor', 'factor relative to the reference', 'rate on the base stream mm/yr']}
         rows={p.rows.map((r) => [six(r.ph), six(r.factor), six(r.relativeToReference), six(r.rateMmYr)])}
@@ -299,7 +294,7 @@ export const WettingMode = ({ ww }) => {
         ))}
         <Tile label="Effective protection in the oil-wet case" value={String(ww.oilWetEffectiveInhibitionPct)} />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Steel does not corrode where it is oil wet, and the engine treats that as a REGIME rather than as a multiplier
         applied always. The multiplier for the oil-wet regime is zero, a zero rate is the strongest reassurance a screen
         can give, and whether the wall is oil wet is an INPUT. That makes this dropdown able to take the rate to zero

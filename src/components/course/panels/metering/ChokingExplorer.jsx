@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
 import {
   BELEMA, liquidAt, chokingMarch, gasMarch,
@@ -9,6 +9,9 @@ import {
   PanelShell, NumField, SelectField, Tile, TileGrid, FieldGrid, Note,
 } from '@/components/course/panels/petrophysics/panelKit';
 import { Relation, Refusal, Provenance } from './MeterRunExplorer';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 
 // THE CHOKING BOUNDARY, the Professional tier. A control valve is the one item
 // of process equipment where the ordinary sizing equation stops working exactly
@@ -44,13 +47,13 @@ export const MODES = [
   ['gas', 'Gas sizing: the pressure drop ratio, its terminal value and the two thirds floor'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
 
 const Tbl = ({ head, rows }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>{head.map((h, i) => <th key={h} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>)}</tr>
       </thead>
       <tbody>
@@ -83,18 +86,18 @@ export const ValveMode = ({ v }) => {
         <Tile label="Choked" value={String(v.choked)} />
         <Tile label="Flashing" value={String(v.flashing)} />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Three drops, and the third is the one that matters. The allowable drop is the pressure recovery factor squared
         times the difference between the inlet and the vapour pressure that the critical pressure ratio factor lets
         the valve keep. Below it the valve is not choked and the coefficient follows the ordinary equation. At or above
         it the flow is choked, extra drop does nothing, and the engine sizes on the allowable drop instead. Drive the
         outlet pressure down and watch the stated drop pass the allowable one.
       </p>
-      <div className="mt-2 rounded-md border border-slate-700 bg-[#0F172A] p-2">
-        <p className="text-xs text-slate-300 font-mono mb-0">{v.sigmaBasis}</p>
+      <div className="mt-2 rounded-md border border-pl-border bg-pl-sunken p-2">
+        <p className="text-xs text-pl-text font-mono mb-0">{v.sigmaBasis}</p>
       </div>
       <Refusal label="The engine's warning on this service" message={v.warning} />
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         WHAT SIZING ON THE STATED DROP WOULD COST. A hand calculation that used the full stated drop produces a
         different coefficient, and the size of that difference is computed and printed here rather than described.
         Below the boundary the two agree, because the drop the valve uses IS the stated drop.
@@ -125,7 +128,7 @@ export const MarchMode = ({ m }) => {
         <Tile label="The coefficient there" value={six(m.atChoke.cv)} />
         <Tile label="Rows of this march that report choked flow" value={raw(m.chokedRowCount)} />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The onset is found by bisecting the engine&apos;s own choked flag over {raw(m.chokeEdge.halvings)} halvings.
         The flag reads {raw(m.chokeEdge.readingFrom)} at {six(m.chokeEdge.from)} psia and
         {' '}{raw(m.chokeEdge.readingTo)} at {six(m.chokeEdge.to)} psia, so the edge discriminates.
@@ -135,43 +138,39 @@ export const MarchMode = ({ m }) => {
         head={['outlet, psia', 'dP stated', 'dP allowable', 'dP used', 'coefficient', 'cavitation index', 'regime']}
         rows={rows.map((r) => [six(r.p2Psia), six(r.dpStatedPsi), six(r.dpAllowablePsi), six(r.dpUsedPsi), six(r.cv), six(r.sigma), r.regime])}
       />
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="outlet" tick={AXIS} reversed label={{ value: 'outlet pressure, psia', fill: '#94a3b8', fontSize: 10, position: 'insideBottom', offset: -2 }} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine x={m.chokeEdge.at} stroke="#f472b6" strokeDasharray="3 3" label={{ value: 'the flow chokes', fill: '#f472b6', fontSize: 9 }} />
-            <Line dataKey="stated" name="stated drop, psi" stroke="#38bdf8" dot={false} isAnimationActive={false} />
-            <Line dataKey="allowable" name="allowable drop, psi" stroke="#fbbf24" dot={false} isAnimationActive={false} />
-            <Line dataKey="used" name="the drop the valve uses, psi" stroke="#BFFF00" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="outlet" tick={AXIS} reversed label={{ value: 'outlet pressure, psia', fill: SVG_CHART.note, fontSize: 10, position: 'insideBottom', offset: -2 }} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine x={m.chokeEdge.at} stroke={seriesColor(3)} strokeDasharray="3 3" label={{ value: 'the flow chokes', fill: seriesColor(3), fontSize: 9 }} />
+          <Line dataKey="stated" name="stated drop, psi" stroke={seriesColor(0)} dot={false} isAnimationActive={false} />
+          <Line dataKey="allowable" name="allowable drop, psi" stroke={seriesColor(2)} dot={false} isAnimationActive={false} />
+          <Line dataKey="used" name="the drop the valve uses, psi" stroke={seriesColor(1)} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         The blue line keeps climbing as the outlet falls. The green line stops at the amber one. That is the whole
         subject: past the crossing, more pressure drop is not available to the valve, and a coefficient sized on the
         blue line belongs to a drop the valve cannot take.
       </p>
-      <div className="h-44 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="outlet" tick={AXIS} reversed label={{ value: 'outlet pressure, psia', fill: '#94a3b8', fontSize: 10, position: 'insideBottom', offset: -2 }} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine x={m.chokeEdge.at} stroke="#f472b6" strokeDasharray="3 3" />
-            <Line dataKey="cv" name="coefficient" stroke="#38bdf8" dot={false} isAnimationActive={false} />
-            <Line dataKey="sigma" name="cavitation index" stroke="#a78bfa" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={176} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="outlet" tick={AXIS} reversed label={{ value: 'outlet pressure, psia', fill: SVG_CHART.note, fontSize: 10, position: 'insideBottom', offset: -2 }} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine x={m.chokeEdge.at} stroke={seriesColor(3)} strokeDasharray="3 3" />
+          <Line dataKey="cv" name="coefficient" stroke={seriesColor(0)} dot={false} isAnimationActive={false} />
+          <Line dataKey="sigma" name="cavitation index" stroke={seriesColor(4)} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Relation r={m.rows.find((r) => !r.refused && r.choked) ? m.rows.find((r) => !r.refused && r.choked).sizingRelation : null} />
       <Refusal label="A liquid sizing with no vapour pressure" message={m.noVapourPressureRefusal} />
-      <p className="text-xs text-slate-400 mt-1 mb-0">
+      <p className="text-xs text-pl-muted mt-1 mb-0">
         That refusal is why the ladder runs at all. With no vapour pressure the index is infinite, the last rung is
         taken, and every liquid service at every drop reads as stable.
       </p>
@@ -189,7 +188,7 @@ export const LadderMode = ({ m }) => {
         <Tile label="Rungs found" value={raw(m.ladder.length)} />
         <Tile label="Every rung discriminates" value={String(m.ladder.every((r) => r.edge.discriminates))} />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Damage begins long before the flow chokes, and the cavitation index says how much margin there is before it.
         Each rung below is found by bisecting the WORD the engine returns, starting from just below the rung above, so
         the ladder is read off the engine rather than counted in advance.
@@ -203,7 +202,7 @@ export const LadderMode = ({ m }) => {
         certified vendor figure for the specific trim always replaces the style data behind them, and this course
         grades no regime word anywhere.
       </Provenance>
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         FLASHING IS A DIFFERENT PROBLEM WITH A DIFFERENT FIX. When the outlet sits at or below the vapour pressure the
         liquid is flashing and an anti-cavitation trim will not help it. The engine separates the two and says which
         one it has, in its own words:
@@ -216,7 +215,7 @@ export const LadderMode = ({ m }) => {
       </TileGrid>
       <Refusal label="The engine's warning on a flashing service" message={m.flashing.warning} />
       <Relation r={m.flashing.onsetRelation} />
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         The critical pressure ratio factor sets how much of the difference between the inlet and the vapour pressure
         the valve can use. It is a computed function of the vapour and critical pressures, so it moves with the fluid:
       </p>
@@ -246,7 +245,7 @@ export const GasMode = ({ g }) => {
         <Tile label="The specific heat ratio factor there" value={six(g.atEdge.fk)} />
         <Tile label="The coefficient there" value={six(g.atEdge.cv)} />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         On gas the boundary is a pressure drop RATIO. The expansion factor falls linearly with it and is floored at two
         thirds, which is the choked condition. {raw(g.chokedRowCount)} rows of this march report choked flow.
         Tree: {g.countTree}. Rule: {g.countRule}.
@@ -255,23 +254,21 @@ export const GasMode = ({ g }) => {
         head={['outlet, psia', 'x', 'x terminal', 'x used', 'expansion factor', 'coefficient', 'choked']}
         rows={rows.map((r) => [six(r.p2Psia), six(r.x), six(r.xChoked), six(r.xUsed), six(r.y), six(r.cv), String(r.choked)])}
       />
-      <div className="h-52 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="outlet" tick={AXIS} reversed label={{ value: 'outlet pressure, psia', fill: '#94a3b8', fontSize: 10, position: 'insideBottom', offset: -2 }} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <ReferenceLine x={g.edge.at} stroke="#f472b6" strokeDasharray="3 3" label={{ value: 'the flow chokes', fill: '#f472b6', fontSize: 9 }} />
-            <Line dataKey="x" name="pressure drop ratio" stroke="#38bdf8" dot={false} isAnimationActive={false} />
-            <Line dataKey="terminal" name="terminal ratio" stroke="#fbbf24" dot={false} isAnimationActive={false} />
-            <Line dataKey="used" name="the ratio used" stroke="#BFFF00" dot={false} isAnimationActive={false} />
-            <Line dataKey="y" name="expansion factor" stroke="#a78bfa" dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <ChartFrame height={208} className="mt-3">
+        <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 20 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="outlet" tick={AXIS} reversed label={{ value: 'outlet pressure, psia', fill: SVG_CHART.note, fontSize: 10, position: 'insideBottom', offset: -2 }} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v) => six(v)} />
+          <Legend {...LEGEND_PROPS} />
+          <ReferenceLine x={g.edge.at} stroke={seriesColor(3)} strokeDasharray="3 3" label={{ value: 'the flow chokes', fill: seriesColor(3), fontSize: 9 }} />
+          <Line dataKey="x" name="pressure drop ratio" stroke={seriesColor(0)} dot={false} isAnimationActive={false} />
+          <Line dataKey="terminal" name="terminal ratio" stroke={seriesColor(2)} dot={false} isAnimationActive={false} />
+          <Line dataKey="used" name="the ratio used" stroke={seriesColor(1)} dot={false} isAnimationActive={false} />
+          <Line dataKey="y" name="expansion factor" stroke={seriesColor(4)} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         THE FLOOR, MEASURED. The expansion factor is the same double on every choked row:
         {' '}{String(g.floorIsTheSameOnEveryChokedRow)}. How far that double sits from two thirds is measured rather
         than asserted. It is not two thirds exactly ({String(g.floorIsTwoThirdsExactly)}) and it sits one unit in the
@@ -283,7 +280,7 @@ export const GasMode = ({ g }) => {
         head={['specific heat ratio', 'the factor']}
         rows={g.specificHeatFactors.map((r) => [six(r.k), six(r.fk)])}
       />
-      <p className="text-xs text-slate-400 mt-3 mb-0">
+      <p className="text-xs text-pl-muted mt-3 mb-0">
         The pressure recovery factor and the terminal ratio behind every row above come off the engine&apos;s own style
         table:
       </p>

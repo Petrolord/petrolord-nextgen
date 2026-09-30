@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceArea,
+  BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceArea,
   ReferenceLine,
 } from 'recharts';
 import {
@@ -11,11 +11,13 @@ import {
   q, yn, lst, orNull,
 } from './riskchangeLab';
 import {
-  Tbl, Verdict, Note, Lead, Empty, DaySlider, MoveButton, safe, AXIS, TOOLTIP, GRID, DASH, MARGIN, LIME, SKY, AMBER,
+  Tbl, Verdict, Note, Lead, Empty, DaySlider, MoveButton, safe, AXIS, TOOLTIP, GRID, DASH, MARGIN, GREEN, BLUE, AMBER,
 } from './panelBits';
 import {
   PanelShell, SelectField, Tile, TileGrid, FieldGrid,
 } from '@/components/course/panels/petrophysics/panelKit';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE } from '@/utils/chartTheme';
 
 // Review explorer, the Expert tier throughout.
 //
@@ -63,8 +65,8 @@ export const CommentsMode = ({
         <SelectField label="Acting as" value={actingAs} onChange={onActingAs} options={actors.map((a) => [a.id, a.label])} />
       </FieldGrid>
       <div className="mt-3 overflow-x-auto">
-        <table className="text-xs text-slate-300 w-full">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text w-full">
+          <thead className="text-pl-muted">
             <tr>
               <th className="text-left pr-3">comment</th>
               <th className="text-left pr-3">severity</th>
@@ -102,17 +104,15 @@ export const CommentsMode = ({
         <Tile label="Open comments" value={view.openComments} />
         <Tile label="Blocking count" value={view.blockingComments} />
       </TileGrid>
-      <div className="h-48 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={view.byStatus} margin={MARGIN}>
-            <CartesianGrid stroke={GRID} strokeDasharray={DASH} />
-            <XAxis dataKey="status" tick={AXIS} />
-            <YAxis tick={AXIS} allowDecimals={false} />
-            <Tooltip contentStyle={TOOLTIP} />
-            <Bar dataKey="count" name="comments" fill={SKY} isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={192} className="mt-3">
+        <BarChart data={view.byStatus} margin={MARGIN}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="status" tick={AXIS} />
+          <YAxis tick={AXIS} allowDecimals={false} />
+          <Tooltip contentStyle={TOOLTIP} />
+          <Bar dataKey="count" name="comments" fill={BLUE} isAnimationActive={false} />
+        </BarChart>
+      </ChartFrame>
       <Note>Worst first, unresolved before resolved: {lst(view.order)}.</Note>
       <Tbl
         head={['from', 'legal next statuses', 'who makes each move']}
@@ -256,19 +256,17 @@ export const DatesMode = ({
         <Tile label="Overdue" value={yn(at.overdue)} />
         <Tile label="Due soon" value={yn(at.dueSoon)} />
       </TileGrid>
-      <div className="h-48 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={rows} margin={MARGIN}>
-            <CartesianGrid stroke={GRID} strokeDasharray={DASH} />
-            <XAxis dataKey="offset" type="number" domain={[lo, hi]} tick={AXIS} />
-            <YAxis tick={AXIS} allowDecimals={false} />
-            <Tooltip contentStyle={TOOLTIP} />
-            <ReferenceArea x1={lead.first} x2={lead.last} fill={AMBER} fillOpacity={0.2} />
-            <ReferenceLine x={offset} stroke={LIME} />
-            <Line dataKey="days" name="days until the review" stroke={SKY} dot={false} isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={192} className="mt-3">
+        <LineChart data={rows} margin={MARGIN}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="offset" type="number" domain={[lo, hi]} tick={AXIS} />
+          <YAxis tick={AXIS} allowDecimals={false} />
+          <Tooltip contentStyle={TOOLTIP} />
+          <ReferenceArea x1={lead.first} x2={lead.last} fill={AMBER} fillOpacity={0.2} />
+          <ReferenceLine x={offset} stroke={GREEN} />
+          <Line dataKey="days" name="days until the review" stroke={BLUE} dot={false} isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       {Array.isArray(reg) && (
         <Tbl
           head={['lesson', 'status', 'event date', 'age in days', 'review due', 'overdue', 'due soon', 'applied nowhere']}

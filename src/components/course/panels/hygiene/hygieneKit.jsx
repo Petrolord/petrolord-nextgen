@@ -12,8 +12,8 @@ export const cell = (v) => (Number.isFinite(v) ? six(v) : 'not integrated');
 
 export const Tbl = ({ head, rows }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>{head.map((h, i) => <th key={h} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>)}</tr>
       </thead>
       <tbody>
@@ -29,14 +29,14 @@ export const Tbl = ({ head, rows }) => (
 
 /** An engine message, printed as the engine's own words. */
 export const Quote = ({ children }) => (
-  <p className="mt-2 mb-0 border-l-2 border-slate-600 pl-3 text-xs text-slate-400 font-mono">{children}</p>
+  <p className="mt-2 mb-0 border-l-2 border-pl-border-strong pl-3 text-xs text-pl-muted font-mono">{children}</p>
 );
 
 /** The evidence status of a figure built on a transcription-only constant. */
 export const Evidence = ({ children }) => (
-  <div className="mt-3 rounded-md border border-amber-700/60 bg-amber-950/20 p-3">
-    <p className="text-amber-300 text-xs font-medium mb-1">TRANSCRIPTION ONLY, AND NEVER GRADED</p>
-    <p className="text-xs text-slate-300 mb-0">{children}</p>
+  <div className="mt-3 rounded-md border border-pl-warning/30 bg-pl-warning-bg p-3">
+    <p className="text-pl-warning-text text-xs font-medium mb-1">TRANSCRIPTION ONLY, AND NEVER GRADED</p>
+    <p className="text-xs text-pl-text mb-0">{children}</p>
   </div>
 );
 

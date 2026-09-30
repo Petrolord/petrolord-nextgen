@@ -1,13 +1,14 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, AreaChart, Area, ComposedChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, Legend,
+  AreaChart, Area, ComposedChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, Legend,
 } from 'recharts';
+import ChartFrame from '@/components/charts/ChartFrame';
 import {
   AGBOR_MEASURES, AGBOR_DISCOUNT_RATE, AGBOR_SAVING, AGBOR_ENERGY, CURVE_PRESETS, PATH_PRESETS, BASES,
   costTable, costRefusals, curve, curveSteps, path, pathRefusals, saving, savingCalls, energy, yn,
 } from './carbonLab';
 import {
-  AXIS, TOOLTIP, GRID, SERIES, F, usable, Tbl, Refused, Verbatim, Here, Status, Note, Lead, Empty, safe, Box, Button, Verdict,
+  AXIS, TOOLTIP, GRID, SERIES, AXIS_NOTE, GUIDE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT, F, usable, Tbl, Refused, Verbatim, Here, Status, Note, Lead, Empty, safe, Box, Button, Verdict,
 } from './panelBits';
 import { PanelShell, SelectField, FieldGrid } from '@/components/course/panels/petrophysics/panelKit';
 
@@ -55,8 +56,8 @@ export const CostMode = ({
     <>
       <div className="max-w-xs"><Box label="discount rate, a fraction (0.1 for ten percent)" tag value={rate} onChange={onRate} /></div>
       <div className="mt-2 overflow-x-auto">
-        <table className="text-xs text-slate-300">
-          <thead className="text-slate-500">
+        <table className="text-xs text-pl-text">
+          <thead className="text-pl-muted">
             <tr><th className="text-left pr-2">measure (acts on)</th>{FIELDS.map(([k, l]) => <th key={k} className="text-left pr-2 whitespace-nowrap">{l}</th>)}</tr>
           </thead>
           <tbody>
@@ -70,7 +71,7 @@ export const CostMode = ({
                       inputMode="decimal"
                       value={S(m[k])}
                       onChange={(e) => onMeasure && onMeasure(i, k, e.target.value)}
-                      className="w-24 bg-gray-700 text-white border border-gray-600 rounded h-7 text-xs px-1"
+                      className="w-24 rounded border border-pl-border-strong bg-pl-surface text-pl-text h-7 text-xs px-1"
                     />
                   </td>
                 ))}
@@ -132,19 +133,17 @@ export const CurveMode = ({ cv }) => {
   return (
     <>
       <Lead>abatementCurve: the measures cheapest first, each step as wide as its tonnes a year and as high as its cost per tonne.</Lead>
-      <div className="h-64 mt-2">
-        <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={pts} margin={{ top: 10, right: 20, bottom: 10, left: 10 }}>
-            <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
-            <XAxis dataKey="tonnes" type="number" domain={[0, 'dataMax']} tick={AXIS} label={{ value: 'tonnes abated a year', fill: '#94a3b8', fontSize: 10, position: 'insideBottom', offset: -4 }} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} />
-            <ReferenceLine y={0} stroke="#64748b" />
-            {Number.isFinite(c.weightedAverageCostPerTonne) && <ReferenceLine y={c.weightedAverageCostPerTonne} stroke={SERIES[3]} strokeDasharray="4 2" label={{ value: 'weighted average', fill: '#fbbf24', fontSize: 10, position: 'insideTopRight' }} />}
-            <Area type="stepAfter" dataKey="cost" name="cost per tonne USD" stroke={SERIES[0]} fill={SERIES[0]} fillOpacity={0.25} isAnimationActive={false} />
-          </AreaChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-2">
+        <AreaChart data={pts} margin={{ top: 10, right: 20, bottom: 10, left: 10 }}>
+          <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="tonnes" type="number" domain={[0, 'dataMax']} tick={AXIS} label={{ value: 'tonnes abated a year', fill: AXIS_NOTE, fontSize: 10, position: 'insideBottom', offset: -4 }} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} />
+          <ReferenceLine y={0} stroke={GUIDE} />
+          {Number.isFinite(c.weightedAverageCostPerTonne) && <ReferenceLine y={c.weightedAverageCostPerTonne} stroke={SERIES[3]} strokeDasharray="4 2" label={{ value: 'weighted average', fill: SERIES[3], fontSize: 10, position: 'insideTopRight' }} />}
+          <Area type="stepAfter" dataKey="cost" name="cost per tonne USD" stroke={SERIES[0]} fill={SERIES[0]} fillOpacity={0.25} isAnimationActive={false} />
+        </AreaChart>
+      </ChartFrame>
       <Tbl
         head={['order', 'measure', 'cost per tonne USD', 'tonnes a year', 'cumulative start t', 'cumulative end t', 'pays for itself', 'interacts']}
         rows={c.steps.map((s, i) => [String(i + 1), s.label, F.usdt(s.costPerTonne), F.t(s.tonnesAbatedPerYear), F.t(s.cumulativeStartTonnes), F.t(s.cumulativeEndTonnes), yn(s.paysForItself),
@@ -188,7 +187,7 @@ export const TargetMode = ({ cv, preset, onPreset }) => {
       </Lead>
       <div className="flex flex-wrap items-center gap-3 mt-2">
         <Verdict value={c.meetsTarget} />
-        <span className="text-xs text-slate-300">targetBasis: <span className="font-mono">{c.targetBasis === null || c.targetBasis === undefined ? 'none' : `"${c.targetBasis}"`}</span></span>
+        <span className="text-xs text-pl-text">targetBasis: <span className="font-mono">{c.targetBasis === null || c.targetBasis === undefined ? 'none' : `"${c.targetBasis}"`}</span></span>
       </div>
       <Tbl
         head={['total abatement t', 'target t', 'meetsTarget', 'targetBasis', 'residual to target t']}
@@ -228,21 +227,19 @@ export const PathMode = ({ p, refusals, preset, onPreset }) => {
         target line falls straight from the baseline to 30 percent below it, as the Carbon Studio draws it (computed here); each
         measure counts in full from its start year.
       </Lead>
-      <div className="h-64 mt-2">
-        <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart data={data} margin={{ top: 10, right: 20, bottom: 10, left: 10 }}>
-            <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
-            <XAxis dataKey="year" tick={AXIS} />
-            <YAxis tick={AXIS} domain={['auto', 'auto']} />
-            <Tooltip contentStyle={TOOLTIP} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Area type="linear" dataKey="base" stackId="g" stroke="none" fill="transparent" legendType="none" isAnimationActive={false} />
-            <Area type="linear" dataKey="gap" name="unabated gap, no measure identified" stackId="g" stroke={SERIES[5]} fill={SERIES[5]} fillOpacity={0.35} isAnimationActive={false} />
-            <Line type="linear" dataKey="emissions" name="emissions t" stroke={SERIES[0]} isAnimationActive={false} />
-            <Line type="linear" dataKey="target" name="target t" stroke={SERIES[2]} strokeDasharray="5 3" isAnimationActive={false} />
-          </ComposedChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={256} className="mt-2">
+        <ComposedChart data={data} margin={{ top: 10, right: 20, bottom: 10, left: 10 }}>
+          <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
+          <XAxis dataKey="year" tick={AXIS} />
+          <YAxis tick={AXIS} domain={['auto', 'auto']} />
+          <Tooltip contentStyle={TOOLTIP} />
+          <Legend {...LEGEND_PROPS} />
+          <Area type="linear" dataKey="base" stackId="g" stroke="none" fill="transparent" legendType="none" isAnimationActive={false} />
+          <Area type="linear" dataKey="gap" name="unabated gap, no measure identified" stackId="g" stroke={SERIES[5]} fill={SERIES[5]} fillOpacity={0.35} isAnimationActive={false} />
+          <Line type="linear" dataKey="emissions" name="emissions t" stroke={SERIES[0]} isAnimationActive={false} />
+          <Line type="linear" dataKey="target" name="target t" stroke={SERIES[2]} strokeDasharray="5 3" isAnimationActive={false} />
+        </ComposedChart>
+      </ChartFrame>
       <Tbl
         head={['year', 'abated t', 'emissions t', 'target t', 'unabated gap t', 'measures live']}
         rows={p.path.rows.map((r) => [String(r.year), F.t(r.abatedTonnes), F.t(r.emissionsTonnes), F.t(r.targetTonnes), F.t(r.unabatedGapTonnes), r.measuresLive.length ? r.measuresLive.join('; ') : 'none'])}

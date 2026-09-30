@@ -18,8 +18,8 @@ import { HELD_MARKER } from './heattransferLab';
 
 export const Tbl = ({ head, rows }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>
           {head.map((h, i) => (
             <th key={h} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>
@@ -41,9 +41,9 @@ export const Tbl = ({ head, rows }) => (
 
 /** A held quantity, marked with the wording that says it is unverified. */
 export const Held = ({ children }) => (
-  <div className="mt-3 rounded-md border border-amber-700/60 bg-amber-950/20 p-3">
-    <p className="text-amber-300 text-xs font-medium mb-1">{HELD_MARKER}</p>
-    <p className="text-xs text-slate-300 mb-0">{children}</p>
+  <div className="mt-3 rounded-md border border-pl-warning/40 bg-pl-warning-bg p-3">
+    <p className="text-pl-warning-text text-xs font-medium mb-1">{HELD_MARKER}</p>
+    <p className="text-xs text-pl-text mb-0">{children}</p>
   </div>
 );
 
@@ -56,8 +56,8 @@ export const Held = ({ children }) => (
 export const Refusal = ({ probe, frame }) => {
   if (!probe || typeof probe.message !== 'string') {
     return (
-      <div className="mt-2 rounded-md border border-slate-700 bg-slate-900/40 p-2">
-        <p className="text-xs text-slate-400 mb-0">
+      <div className="mt-2 rounded-md border border-pl-border bg-pl-sunken p-2">
+        <p className="text-xs text-pl-muted mb-0">
           This state has no refusal to show, so the engine answered it.
         </p>
       </div>
@@ -65,12 +65,12 @@ export const Refusal = ({ probe, frame }) => {
   }
   const evidence = probe.evidence && typeof probe.evidence === 'object' ? Object.keys(probe.evidence) : [];
   return (
-    <div className="mt-2 rounded-md border border-red-800/60 bg-red-950/20 p-2">
-      {frame && <p className="text-amber-300 text-xs mb-1">{frame}</p>}
-      <p className="text-red-300 text-xs font-medium mb-1">REFUSED: {probe.label}</p>
-      <p className="text-xs text-slate-300 font-mono mb-0">{probe.message}</p>
+    <div className="mt-2 rounded-md border border-pl-danger/30 bg-pl-danger-bg p-2">
+      {frame && <p className="text-pl-warning-text text-xs mb-1">{frame}</p>}
+      <p className="text-pl-danger-text text-xs font-medium mb-1">REFUSED: {probe.label}</p>
+      <p className="text-xs text-pl-text font-mono mb-0">{probe.message}</p>
       {evidence.length > 0 && (
-        <p className="text-xs text-slate-400 mt-1 mb-0">
+        <p className="text-xs text-pl-muted mt-1 mb-0">
           Evidence the same return carried:
           {' '}
           {evidence.map((k) => `${k} ${String(probe.evidence[k])}`).join(', ')}
@@ -81,12 +81,12 @@ export const Refusal = ({ probe, frame }) => {
 };
 
 export const Note = ({ children }) => (
-  <p className="text-xs text-slate-500 mt-1 mb-0">{children}</p>
+  <p className="text-xs text-pl-muted mt-1 mb-0">{children}</p>
 );
 
 /** The empty state, rendered before any engine value exists. */
 export const Empty = ({ children }) => (
-  <p className="text-xs text-slate-400 mt-1 mb-0">
+  <p className="text-xs text-pl-muted mt-1 mb-0">
     {children || 'This reader has returned nothing yet, so there is no engine value to draw.'}
   </p>
 );

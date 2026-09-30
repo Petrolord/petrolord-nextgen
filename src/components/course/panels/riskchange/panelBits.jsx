@@ -1,4 +1,6 @@
 import React from 'react';
+import { TOOLTIP_STYLE, GRID_STYLE, getStreamPalette } from '@/utils/chartTheme';
+import { CHART_SERIES, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 
 // The atoms the three AS-RC explorers share, so a table, a verdict, a note and an
 // empty state look and read the same on all three pages.
@@ -15,39 +17,47 @@ import React from 'react';
 // sentence the engine may never produce, and the refusal gate asserts that none
 // of these files does.
 //
-// THE CHART STYLE is the dark NextGen course-panel convention every course panel
-// in this repository uses: slate axes and grid on the panel's own dark card, the
-// lime accent for the series a reader is moving. The numbers here are pixels and
-// font sizes, and none of them is a value the course grades.
+// THE CHART STYLE is the family chart kit (batch 1B, docs/scope/DesignSystem.md):
+// every plot sits in ChartFrame on the white plate with the chart mark, with the
+// kit's axis, grid and tooltip and the kit's series colours. The numbers here are
+// pixels and font sizes, and none of them is a value the course grades.
 
-export const AXIS = { fill: '#94a3b8', fontSize: 13 };
-export const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 13 };
-export const GRID = '#334155';
-export const DASH = '14 15';
+export const AXIS = AXIS_TICK;
+export const TOOLTIP = TOOLTIP_STYLE;
+export const GRID = GRID_STYLE.stroke;
+export const DASH = GRID_STYLE.strokeDasharray;
 export const MARGIN = {
   top: 14, right: 24, bottom: 0, left: 0,
 };
-export const LIME = '#BFFF00';
-export const SKY = '#38bdf8';
-export const PINK = '#f472b6';
-export const AMBER = '#fbbf24';
+// The kit's five series colours by name, destructured so this file prints no
+// bare number the capstone guard would read as a graded value.
+const [KIT_BLUE, KIT_GREEN, KIT_AMBER, KIT_RED, KIT_VIOLET] = CHART_SERIES;
+export const GREEN = KIT_GREEN;
+export const BLUE = KIT_BLUE;
+export const VIOLET = KIT_VIOLET;
+export const AMBER = KIT_AMBER;
 
-/** Band colours, keyed by the engine's own band names. */
+/** Band tones on the status roles, keyed by the engine's own band names. */
 export const BAND_TONE = {
-  Critical: 'bg-red-900/60 text-red-200 border-red-700',
-  High: 'bg-orange-900/50 text-orange-200 border-orange-700',
-  Medium: 'bg-amber-900/40 text-amber-200 border-amber-700',
-  Low: 'bg-emerald-900/40 text-emerald-200 border-emerald-700',
-  None: 'bg-slate-800 text-slate-400 border-slate-600',
+  Critical: 'bg-pl-danger text-pl-danger-fg border-pl-danger',
+  High: 'bg-pl-danger-bg text-pl-danger-text border-pl-danger/40',
+  Medium: 'bg-pl-warning-bg text-pl-warning-text border-pl-warning/40',
+  Low: 'bg-pl-success-bg text-pl-success-text border-pl-success/30',
+  None: 'bg-pl-sunken text-pl-muted border-pl-border-strong',
 };
+/** Band bar colours on the white chart plate, darkest red for Critical. */
 export const BAND_FILL = {
-  Critical: '#b91c1c', High: '#ea580c', Medium: '#d97706', Low: '#059669', None: '#475569',
+  Critical: getStreamPalette('oil').p90,
+  High: KIT_RED,
+  Medium: KIT_AMBER,
+  Low: KIT_GREEN,
+  None: SVG_CHART.reference,
 };
 
 export const Tbl = ({ head, rows }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>
           {head.map((h) => (
             <th key={h} className="text-left pr-3 last:pr-0 whitespace-nowrap">{h}</th>
@@ -74,41 +84,41 @@ export const Tbl = ({ head, rows }) => (
  */
 export const Verdict = ({ v }) => {
   if (!v || typeof v.ok !== 'boolean') {
-    return <p className="text-xs text-slate-500 mt-2 mb-0">No move has been asked yet.</p>;
+    return <p className="text-xs text-pl-muted mt-2 mb-0">No move has been asked yet.</p>;
   }
   if (v.ok) {
     return (
-      <div className="mt-2 rounded-md border border-emerald-800/60 bg-emerald-950/20 p-2">
-        <p className="text-emerald-300 text-xs font-medium mb-0">ALLOWED: {v.label}</p>
+      <div className="mt-2 rounded-md border border-pl-success/30 bg-pl-success-bg p-2">
+        <p className="text-pl-success-text text-xs font-medium mb-0">ALLOWED: {v.label}</p>
       </div>
     );
   }
   return (
-    <div className="mt-2 rounded-md border border-red-800/60 bg-red-950/20 p-2">
-      <p className="text-red-300 text-xs font-medium mb-1">REFUSED: {v.label}</p>
-      <p className="text-xs text-slate-300 font-mono mb-0">{typeof v.reason === 'string' ? v.reason : 'The engine gave no sentence for this state.'}</p>
+    <div className="mt-2 rounded-md border border-pl-danger/30 bg-pl-danger-bg p-2">
+      <p className="text-pl-danger-text text-xs font-medium mb-1">REFUSED: {v.label}</p>
+      <p className="text-xs text-pl-text font-mono mb-0">{typeof v.reason === 'string' ? v.reason : 'The engine gave no sentence for this state.'}</p>
     </div>
   );
 };
 
 /** A band or status word, in the tone of its band where it has one. */
 export const Chip = ({ children, band }) => (
-  <span className={`inline-block rounded border px-1 text-xs ${BAND_TONE[band] || 'bg-slate-800 text-slate-300 border-slate-600'}`}>
+  <span className={`inline-block rounded border px-1 text-xs ${BAND_TONE[band] || 'bg-pl-sunken text-pl-text border-pl-border-strong'}`}>
     {children}
   </span>
 );
 
 export const Note = ({ children }) => (
-  <p className="text-xs text-slate-500 mt-1 mb-0">{children}</p>
+  <p className="text-xs text-pl-muted mt-1 mb-0">{children}</p>
 );
 
 export const Lead = ({ children }) => (
-  <p className="text-xs text-slate-400 mt-3 mb-0">{children}</p>
+  <p className="text-xs text-pl-muted mt-3 mb-0">{children}</p>
 );
 
 /** The empty state, rendered before any engine value exists. */
 export const Empty = ({ children }) => (
-  <p className="text-xs text-slate-400 mt-1 mb-0">
+  <p className="text-xs text-pl-muted mt-1 mb-0">
     {children || 'This reader has returned nothing yet, so there is no engine value to show.'}
   </p>
 );
@@ -117,11 +127,11 @@ export const Empty = ({ children }) => (
 export const DaySlider = ({
   label, value, min, max, onChange,
 }) => (
-  <label className="block text-xs text-slate-400">
+  <label className="block text-xs text-pl-muted">
     {label}
     <input
       type="range"
-      className="w-full mt-1 accent-lime-400"
+      className="w-full mt-1 accent-pl-primary"
       min={min}
       max={max}
       value={value}
@@ -136,8 +146,8 @@ export const MoveButton = ({ children, onClick, tone }) => (
     type="button"
     onClick={onClick}
     className={`mr-1 mb-1 rounded border px-2 py-0.5 text-xs ${tone === 'legal'
-      ? 'border-lime-500/60 text-lime-300 hover:bg-lime-900/30'
-      : 'border-slate-600 text-slate-400 hover:bg-slate-800'}`}
+      ? 'border-pl-primary/60 text-pl-primary-text hover:bg-pl-primary/10'
+      : 'border-pl-border-strong text-pl-muted hover:bg-pl-sunken'}`}
   >
     {children}
   </button>

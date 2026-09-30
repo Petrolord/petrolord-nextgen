@@ -719,3 +719,112 @@ entry.
   (every view and sub-view of every panel in both themes, every plot on the
   white plate with the mark, every series in a kit colour, and a source
   scan with a negative control).
+
+## 14. Batch 5B: facilities II and assurance course apps (as built)
+
+Heat exchange and cooling (`/dashboard/apps/heattransfer`), metering
+(`/dashboard/apps/metering`), produced water (`/dashboard/apps/producedwater`),
+corrosion (`/dashboard/apps/corrosion`), risk and change
+(`/dashboard/apps/riskchange`) and compliance (`/dashboard/apps/compliance`)
+are on the roles and registered in `src/design/rollout/w5b.js`.
+
+- The nineteen panels and the three `panelBits` files are used by their
+  learning page, the lesson reader and the handbook, which 1C already
+  themes, so they moved straight to roles with no legacy branch. No file is
+  shared with 5A or 4D. `CapstonePrompt` (also used by gas value, carbon,
+  crude, refinery and supply) carries no colour and is unchanged.
+- The page recipe is 4C's: cards on `surface`, lessons and the locked
+  capstone note on `sunken`, tier buttons primary when chosen (with
+  `aria-pressed`), capstone results and toasts on the success and danger
+  roles with their words, certificate number and award icon gold.
+- Every chart (52, all Recharts) is in `ChartFrame` with `GRID_STYLE`,
+  `AXIS_TICK`, `TOOLTIP_STYLE`, axis titles on `SVG_CHART.note`,
+  `LEGEND_PROPS` and `XAXIS_LABEL_HEIGHT` for a titled x-axis. The series
+  follow the words the panels already print: sky goes to `seriesColor(0)`
+  (blue), lime to `(1)` (green), amber to `(2)`, red to `(3)`, pink and
+  violet to `(4)`. So "the blue line keeps climbing, the green line stops
+  at the amber one" (choking), "green is covered, red is stale"
+  (readiness) and "the red band and the amber one" (the F correction)
+  still read true. The metering edge markers (the flow chokes, vacuum
+  takes the case) are red, the Reynolds sweep takes `CHART_SERIES` in
+  order, and the refused bands are the kit red at a light fill so the
+  REFUSED label reads on white.
+- Status words keep their tone on the status roles: held notes warning,
+  unresolved notes info, refusals danger, allowed verdicts success, the
+  compliance status words (overdue, due soon, on track, compliant) danger,
+  warning, info and success. The risk band chips and the score strip take
+  Critical solid danger, High danger, Medium warning, Low success, None
+  sunken, each beside its band word or score; the band bar chart reads
+  Critical darkest red (the oil stream's p90), High red, Medium amber, Low
+  green, None grey. The riskchange constants are destructured from
+  `CHART_SERIES`, since its capstone guard reads a bare number as a graded
+  value.
+- Two panel source gates (heat transfer and risk and change) asked every
+  `ResponsiveContainer` for a width and a height; they now also accept a
+  `ChartFrame` with a height, whose own container is 100% wide at that
+  height.
+- No lesson in these six courses names a retired chart colour, so no
+  lesson text changed.
+- Tests: `src/pages/__tests__/Facilities5B.theme.test.jsx` (the four
+  standard checks per app, every tier in both themes with no lime left,
+  capstone pass, fail and locked, the Learning Mode gate) and
+  `src/components/course/panels/__tests__/Facilities5BPanels.theme.test.jsx`
+  (every view of every panel in both themes, every plot on the white plate
+  with the mark, every series in a kit colour, and a source scan with a
+  negative control).
+
+## 15. Batch 5C: HSE, gas value and carbon course apps (as built)
+
+Safety statistics (`/dashboard/apps/safetystats`), occupational hygiene
+(`/dashboard/apps/hygiene`), LOPA (`/dashboard/apps/lopa`), QRA
+(`/dashboard/apps/qra`), consequence modelling
+(`/dashboard/apps/consequence`), gas value (`/dashboard/apps/gasvalue`) and
+carbon (`/dashboard/apps/carbon`) are on the roles and registered in
+`src/design/rollout/w5c.js`.
+
+- The twenty-one panels and their atoms (`panelBits`, `hygieneKit`) are used
+  by their learning page, the lesson reader and the handbook, which 1C
+  already themes, so they moved straight to roles with no legacy branch. No
+  file is shared with 5A, 5B or 5D. `CapstonePrompt`, which 5B and 5D pages
+  also use, carries no colour and is unchanged. The labs (`*Lab.js`) and the
+  vendored engines are untouched: every value, label and interaction is as
+  before.
+- The page recipe is 4D's: cards on `surface`, lessons and the locked
+  capstone note on `sunken`, tier buttons primary when chosen (with
+  `aria-pressed`), capstone results and toasts on the success and danger
+  roles with their words, certificate number and award icon gold.
+- Sixteen charts, all Recharts, are in `ChartFrame`: the safety statistics
+  u-chart, nine in gas value and six in carbon. Hygiene, LOPA, QRA and
+  consequence draw no chart. The gas value and carbon `SERIES` lists keep
+  their six slots and now hold kit colours: sky to `seriesColor(1)`, pink
+  and violet to `(4)`, lime to `(0)`, amber to `(2)`, red to `(3)`. The
+  carbon stack loss bars take `(0)`, `(1)`, `(2)` and `(4)` so the four
+  losses stay distinct. Axis titles are on `SVG_CHART.note`, zero lines on
+  `SVG_CHART.reference`, legends on `LEGEND_PROPS`, and a labelled x-axis
+  takes `XAXIS_LABEL_HEIGHT`. One chart follows meaning: a credit price
+  that clears the hurdle is green and one that does not is red.
+- The atoms' status boxes take the status roles, each with the words it
+  already printed: refusals on danger, declared bases on info, warnings,
+  derived figures and invented or synthetic tags on warning, the carbon
+  `meetsTarget` chips on success, danger and warning. A chosen toggle
+  button is primary, a highlighted table row is gold, sliders and radios
+  use `accent-pl-primary`, and the free-text boxes and table inputs take
+  the Suite input styling.
+- The panels' `none`, `missing` and `not integrated` readings are the
+  engine's own answers that the lessons teach, so they are unchanged.
+- No lesson in these seven courses names a chart colour, so no lesson text
+  changed.
+- Screen fix: the gas value efficiency sweep and the carbon flare chart
+  printed their x-axis title on the legend row; the title now clears it.
+- The gas value and carbon render gates (`gasvalueLab.test.js`,
+  `carbonLab.test.js`) counted `<ResponsiveContainer>` tags with a width
+  and a height. They now also count a `ChartFrame` with its stated height,
+  as 5B's gates do.
+- Tests: `src/pages/__tests__/Hse5C.theme.test.jsx` (the four standard
+  checks per app, every tier in both themes with no lime left and the
+  charts on the white plate, capstone pass, fail and locked, the Learning
+  Mode gate, no network) and
+  `src/components/course/panels/__tests__/Hse5CPanels.theme.test.jsx`
+  (every view and sub-view of every panel in both themes, every plot on the
+  white plate with the mark, every series in a kit colour, the atoms on
+  their status roles, and a source scan with a negative control).

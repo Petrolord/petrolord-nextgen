@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, ReferenceArea,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, ReferenceArea,
 } from 'recharts';
 import {
   AS_OF_YMD, IKORO_OBLIGATIONS, asOfAt, vocabulary, calendarAt, unreadableTodayContract, registerAt, precedenceAt,
@@ -12,6 +12,9 @@ import {
 import {
   PanelShell, SelectField, Tile, TileGrid, FieldGrid,
 } from '@/components/course/panels/petrophysics/panelKit';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE } from '@/utils/chartTheme';
+import { seriesColor, SVG_CHART } from '@/utils/chartSvg';
 
 // Register explorer, the Associate tier throughout.
 //
@@ -126,21 +129,19 @@ export const RegisterMode = ({ reg, prec, timeline, pick, onPick }) => {
         />
       </FieldGrid>
       {chart.length > 0 ? (
-        <div className="h-56 mt-3">
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-              <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
-              <XAxis dataKey="offset" type="number" domain={['dataMin', 'dataMax']} tick={AXIS} label={{ value: OFFSET_LABEL, fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -3 }} />
-              <YAxis dataKey="rank" reversed tick={AXIS} allowDecimals={false} tickFormatter={(v) => ranks[v] || ''} width={90} />
-              <Tooltip contentStyle={TOOLTIP} formatter={(v, n, p) => [p && p.payload ? `${p.payload.status} on ${p.payload.date}` : v, 'status']} />
-              <Line type="stepAfter" dataKey="rank" stroke={SERIES[0]} dot={false} isAnimationActive={false} />
-              {timeline.edgesDerived.map((e) => (
-                <ReferenceLine key={e.offset} x={e.offset} stroke={SERIES[3]} strokeDasharray="4 2" label={{ value: e.to, fill: '#fbbf24', fontSize: 10, position: 'top' }} />
-              ))}
-              {current && <ReferenceLine x={current.offset} stroke={SERIES[2]} />}
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
+        <ChartFrame height={224} className="mt-3">
+          <LineChart data={chart} margin={{ top: 20, right: 20, bottom: 5, left: 10 }}>
+            <CartesianGrid {...GRID_STYLE} />
+            <XAxis dataKey="offset" type="number" domain={['dataMin', 'dataMax']} tick={AXIS} label={{ value: OFFSET_LABEL, fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
+            <YAxis dataKey="rank" reversed tick={AXIS} allowDecimals={false} tickFormatter={(v) => ranks[v] || ''} width={90} />
+            <Tooltip contentStyle={TOOLTIP} formatter={(v, n, p) => [p && p.payload ? `${p.payload.status} on ${p.payload.date}` : v, 'status']} />
+            <Line type="stepAfter" dataKey="rank" stroke={SERIES[0]} dot={false} isAnimationActive={false} />
+            {timeline.edgesDerived.map((e) => (
+              <ReferenceLine key={e.offset} x={e.offset} stroke={SERIES[3]} strokeDasharray="4 2" label={{ value: e.to, fill: seriesColor(2), fontSize: 10, position: 'top' }} />
+            ))}
+            {current && <ReferenceLine x={current.offset} stroke={SERIES[2]} />}
+          </LineChart>
+        </ChartFrame>
       ) : <Empty>The timeline reader has returned nothing for this obligation.</Empty>}
       {timeline && Array.isArray(timeline.edgesDerived) && (
         <Tbl head={['day', 'date', 'from', 'to']} rows={timeline.edgesDerived.map((e) => [e.offset, e.date, <Status key="a" word={e.from} />, <Status key="b" word={e.to} />])} />
@@ -173,19 +174,17 @@ export const LeadMode = ({ sweep, curve, lead, onLead }) => {
         <Tile label="Due soon from a lead time of" value={txt(curve.edgeDerived)} />
       </TileGrid>
       <Note>{curve.reason}</Note>
-      <div className="h-48 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={curve.curve} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
-            <XAxis dataKey="lead" type="number" domain={['dataMin', 'dataMax']} tick={AXIS} label={{ value: 'lead time in days', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -3 }} />
-            <YAxis dataKey="rank" reversed tick={AXIS} allowDecimals={false} width={40} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v, n, p) => [p && p.payload ? p.payload.status : v, 'status']} />
-            <Line type="stepAfter" dataKey="rank" stroke={SERIES[0]} dot={false} isAnimationActive={false} />
-            {curve.edgeDerived !== null && <ReferenceLine x={curve.edgeDerived} stroke={SERIES[3]} strokeDasharray="4 2" label={{ value: 'Due soon starts', fill: '#fbbf24', fontSize: 10, position: 'top' }} />}
-            <ReferenceLine x={curve.lead} stroke={SERIES[2]} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={192} className="mt-3">
+        <LineChart data={curve.curve} margin={{ top: 20, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="lead" type="number" domain={['dataMin', 'dataMax']} tick={AXIS} label={{ value: 'lead time in days', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
+          <YAxis dataKey="rank" reversed tick={AXIS} allowDecimals={false} width={40} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v, n, p) => [p && p.payload ? p.payload.status : v, 'status']} />
+          <Line type="stepAfter" dataKey="rank" stroke={SERIES[0]} dot={false} isAnimationActive={false} />
+          {curve.edgeDerived !== null && <ReferenceLine x={curve.edgeDerived} stroke={SERIES[3]} strokeDasharray="4 2" label={{ value: 'Due soon starts', fill: seriesColor(2), fontSize: 10, position: 'top' }} />}
+          <ReferenceLine x={curve.lead} stroke={SERIES[2]} />
+        </LineChart>
+      </ChartFrame>
       <Note>The edge is where the status the engine returns first differs from its status at a lead time of zero.</Note>
       <Lead>The sweep the lessons quote, including the lead times the engine cannot use:</Lead>
       <Tbl head={['lead_time_days given', 'status']} rows={sweep.rows.map((r) => [r.given, <Status key="s" word={r.status} />])} />
@@ -216,21 +215,19 @@ export const PeriodMode = ({ per, pick, onPick }) => {
             <Tile label="Status" value={<Status word={f.status} />} />
           </TileGrid>
           <Note>{f.reason}</Note>
-          <div className="h-32 mt-3">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={axis} margin={{ top: 20, right: 20, bottom: 5, left: 10 }}>
-                <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
-                <XAxis dataKey="x" type="number" domain={['dataMin', 'dataMax']} tick={AXIS} label={{ value: OFFSET_LABEL, fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -3 }} />
-                <YAxis hide domain={[0, 1]} />
-                <Line dataKey="y" stroke="transparent" dot={false} isAnimationActive={false} />
-                {f.startDays !== null && <ReferenceArea x1={f.startDays} x2={f.dueDays} fill={SERIES[0]} fillOpacity={0.15} label={{ value: 'the current period', fill: '#94a3b8', fontSize: 10 }} />}
-                {f.filedDays !== null && (
-                  <ReferenceLine x={f.filedDays} stroke={f.filedInsideDerived ? SERIES[2] : SERIES[5]} label={{ value: f.filedInsideDerived ? 'filed inside' : 'filed outside', fill: '#e2e8f0', fontSize: 10, position: 'top' }} />
-                )}
-                <ReferenceLine x={0} stroke={SERIES[3]} strokeDasharray="4 2" label={{ value: 'as-of', fill: '#fbbf24', fontSize: 10, position: 'insideTopRight' }} />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
+          <ChartFrame height={128} className="mt-3">
+            <LineChart data={axis} margin={{ top: 20, right: 20, bottom: 5, left: 10 }}>
+              <CartesianGrid {...GRID_STYLE} />
+              <XAxis dataKey="x" type="number" domain={['dataMin', 'dataMax']} tick={AXIS} label={{ value: OFFSET_LABEL, fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
+              <YAxis hide domain={[0, 1]} />
+              <Line dataKey="y" stroke="transparent" dot={false} isAnimationActive={false} />
+              {f.startDays !== null && <ReferenceArea x1={f.startDays} x2={f.dueDays} fill={SERIES[0]} fillOpacity={0.15} label={{ value: 'the current period', fill: SVG_CHART.note, fontSize: 10 }} />}
+              {f.filedDays !== null && (
+                <ReferenceLine x={f.filedDays} stroke={f.filedInsideDerived ? SERIES[2] : SERIES[5]} label={{ value: f.filedInsideDerived ? 'filed inside' : 'filed outside', fill: SVG_CHART.note, fontSize: 10, position: 'top' }} />
+              )}
+              <ReferenceLine x={0} stroke={SERIES[3]} strokeDasharray="4 2" label={{ value: 'as-of', fill: seriesColor(2), fontSize: 10, position: 'insideTopRight' }} />
+            </LineChart>
+          </ChartFrame>
           <Note>
             The band runs from periodStart to the next due date. A filing inside it counts for this period, and a filing
             before it was for an earlier one.
@@ -269,20 +266,18 @@ export const RollMode = ({ roll }) => {
         <Tile label="Days to the next action" value={txt(lf.after.daysUntil)} />
       </TileGrid>
       <Note>{lf.after.reason}</Note>
-      <div className="h-32 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={axis} margin={{ top: 20, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
-            <XAxis dataKey="x" type="number" domain={['dataMin', 'dataMax']} tick={AXIS} label={{ value: OFFSET_LABEL, fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -3 }} />
-            <YAxis hide domain={[0, 1]} />
-            <Line dataKey="y" stroke="transparent" dot={false} isAnimationActive={false} />
-            <ReferenceLine x={lf.dueDays} stroke={SERIES[5]} label={{ value: 'was due', fill: '#e2e8f0', fontSize: 10, position: 'top' }} />
-            <ReferenceLine x={lf.filedDays} stroke={SERIES[1]} label={{ value: 'filed', fill: '#e2e8f0', fontSize: 10, position: 'insideTopLeft' }} />
-            <ReferenceLine x={lf.fromDueDays} stroke={SERIES[2]} label={{ value: 'next due, used', fill: '#BFFF00', fontSize: 10, position: 'top' }} />
-            <ReferenceLine x={lf.fromFilingDays} stroke="#64748b" strokeDasharray="4 2" label={{ value: 'from the filing, unused', fill: '#94a3b8', fontSize: 10, position: 'insideTopRight' }} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={128} className="mt-3">
+        <LineChart data={axis} margin={{ top: 20, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="x" type="number" domain={['dataMin', 'dataMax']} tick={AXIS} label={{ value: OFFSET_LABEL, fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
+          <YAxis hide domain={[0, 1]} />
+          <Line dataKey="y" stroke="transparent" dot={false} isAnimationActive={false} />
+          <ReferenceLine x={lf.dueDays} stroke={SERIES[5]} label={{ value: 'was due', fill: SVG_CHART.note, fontSize: 10, position: 'top' }} />
+          <ReferenceLine x={lf.filedDays} stroke={SERIES[1]} label={{ value: 'filed', fill: SVG_CHART.note, fontSize: 10, position: 'insideTopLeft' }} />
+          <ReferenceLine x={lf.fromDueDays} stroke={SERIES[2]} label={{ value: 'next due, used', fill: seriesColor(1), fontSize: 10, position: 'top' }} />
+          <ReferenceLine x={lf.fromFilingDays} stroke={SVG_CHART.reference} strokeDasharray="4 2" label={{ value: 'from the filing, unused', fill: SVG_CHART.note, fontSize: 10, position: 'insideTopRight' }} />
+        </LineChart>
+      </ChartFrame>
       <Lead>rollForward from a due date of {roll.rollFrom}, by every frequency:</Lead>
       <Tbl head={['frequency', 'next due date', 'days until it']} rows={roll.byFrequency.map((r) => [r.frequency, txt(r.next), txt(r.daysUntil)])} />
       <Lead>Three month ends, pulled back to the last day of a shorter month:</Lead>
@@ -319,20 +314,18 @@ export const LibraryMode = ({ lib, rev, rules }) => {
             The review date is earned at issue: {c.fromIssue}. Counting from the correction would give
             {' '}{c.fromCorrectionNotUsed}, which the engine does not use.
           </Lead>
-          <div className="h-32 mt-3">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={axis} margin={{ top: 20, right: 20, bottom: 5, left: 10 }}>
-                <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
-                <XAxis dataKey="x" type="number" domain={['dataMin', 'dataMax']} tick={AXIS} label={{ value: OFFSET_LABEL, fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -3 }} />
-                <YAxis hide domain={[0, 1]} />
-                <Line dataKey="y" stroke="transparent" dot={false} isAnimationActive={false} />
-                <ReferenceLine x={c.issueDays} stroke={SERIES[0]} label={{ value: 'issued', fill: '#e2e8f0', fontSize: 10, position: 'top' }} />
-                <ReferenceLine x={c.republishedDays} stroke={SERIES[1]} label={{ value: 'correction', fill: '#e2e8f0', fontSize: 10, position: 'insideTopLeft' }} />
-                <ReferenceLine x={c.fromIssueDays} stroke={SERIES[2]} label={{ value: 'review, earned at issue', fill: '#BFFF00', fontSize: 10, position: 'top' }} />
-                <ReferenceLine x={c.fromCorrectionDays} stroke="#64748b" strokeDasharray="4 2" label={{ value: 'from the correction, unused', fill: '#94a3b8', fontSize: 10, position: 'insideTopRight' }} />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
+          <ChartFrame height={128} className="mt-3">
+            <LineChart data={axis} margin={{ top: 20, right: 20, bottom: 5, left: 10 }}>
+              <CartesianGrid {...GRID_STYLE} />
+              <XAxis dataKey="x" type="number" domain={['dataMin', 'dataMax']} tick={AXIS} label={{ value: OFFSET_LABEL, fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
+              <YAxis hide domain={[0, 1]} />
+              <Line dataKey="y" stroke="transparent" dot={false} isAnimationActive={false} />
+              <ReferenceLine x={c.issueDays} stroke={SERIES[0]} label={{ value: 'issued', fill: SVG_CHART.note, fontSize: 10, position: 'top' }} />
+              <ReferenceLine x={c.republishedDays} stroke={SERIES[1]} label={{ value: 'correction', fill: SVG_CHART.note, fontSize: 10, position: 'insideTopLeft' }} />
+              <ReferenceLine x={c.fromIssueDays} stroke={SERIES[2]} label={{ value: 'review, earned at issue', fill: seriesColor(1), fontSize: 10, position: 'top' }} />
+              <ReferenceLine x={c.fromCorrectionDays} stroke={SVG_CHART.reference} strokeDasharray="4 2" label={{ value: 'from the correction, unused', fill: SVG_CHART.note, fontSize: 10, position: 'insideTopRight' }} />
+            </LineChart>
+          </ChartFrame>
         </>
       )}
       {rules && Array.isArray(rules.revisions) && (
