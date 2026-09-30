@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine,
+  ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine,
 } from 'recharts';
 import {
   ORASHI_AUDITS, ORASHI_FINDINGS, LEAD_AUDITOR_CHOICES, asOfAt, ymd, vocabulary, clauseRegisterAt, clauseStatusTries,
@@ -13,6 +13,9 @@ import {
 import {
   PanelShell, SelectField, Tile, TileGrid, FieldGrid,
 } from '@/components/course/panels/petrophysics/panelKit';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE } from '@/utils/chartTheme';
+import { seriesColor, SVG_CHART } from '@/utils/chartSvg';
 
 // Readiness explorer, the Expert tier throughout.
 //
@@ -123,10 +126,10 @@ export const CoverageMode = ({ cov, cycle, onCycle, overrides, onOverride }) => 
         head={['audit', 'type', 'status', 'ended', 'counts towards coverage']}
         rows={cov.audits.map((a) => [
           a.code,
-          <select key="t" value={a.type} onChange={(e) => onOverride(a.id, { audit_type: e.target.value })} className="bg-gray-700 text-white border border-gray-600 rounded text-xs">
+          <select key="t" value={a.type} onChange={(e) => onOverride(a.id, { audit_type: e.target.value })} className="bg-pl-surface text-pl-text border border-pl-border-strong rounded text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus">
             {types.map((t) => <option key={t} value={t}>{t}</option>)}
           </select>,
-          <select key="s" value={a.status} onChange={(e) => onOverride(a.id, { status: e.target.value })} className="bg-gray-700 text-white border border-gray-600 rounded text-xs">
+          <select key="s" value={a.status} onChange={(e) => onOverride(a.id, { status: e.target.value })} className="bg-pl-surface text-pl-text border border-pl-border-strong rounded text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pl-focus">
             {statuses.map((t) => <option key={t} value={t}>{t}</option>)}
           </select>,
           txt(a.ended),
@@ -134,19 +137,17 @@ export const CoverageMode = ({ cov, cycle, onCycle, overrides, onOverride }) => 
         ])}
       />
       {Object.keys(overrides).length > 0 && <Note>Audit records changed from the ones ORASHI holds: {Object.keys(overrides).length}.</Note>}
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <ScatterChart margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke={GRID} strokeDasharray="3 3" />
-            <XAxis dataKey="x" type="number" tick={AXIS} label={{ value: 'days from the as-of date to the last counting examination', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -3 }} />
-            <YAxis dataKey="y" type="number" tick={AXIS} allowDecimals={false} width={30} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(v, n, p) => [p && p.payload ? `${p.payload.clause}${p.payload.covered ? ', covered' : ', stale'}` : v, 'clause']} />
-            <Scatter data={points.filter((p) => p.covered)} fill={SERIES[2]} isAnimationActive={false} />
-            <Scatter data={points.filter((p) => !p.covered)} fill={SERIES[5]} isAnimationActive={false} />
-            <ReferenceLine x={0} stroke={SERIES[3]} strokeDasharray="4 2" label={{ value: 'as-of', fill: '#fbbf24', fontSize: 10, position: 'top' }} />
-          </ScatterChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <ScatterChart margin={{ top: 20, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis dataKey="x" type="number" tick={AXIS} label={{ value: 'days from the as-of date to the last counting examination', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
+          <YAxis dataKey="y" type="number" tick={AXIS} allowDecimals={false} width={30} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(v, n, p) => [p && p.payload ? `${p.payload.clause}${p.payload.covered ? ', covered' : ', stale'}` : v, 'clause']} />
+          <Scatter data={points.filter((p) => p.covered)} fill={SERIES[2]} isAnimationActive={false} />
+          <Scatter data={points.filter((p) => !p.covered)} fill={SERIES[5]} isAnimationActive={false} />
+          <ReferenceLine x={0} stroke={SERIES[3]} strokeDasharray="4 2" label={{ value: 'as-of', fill: seriesColor(2), fontSize: 10, position: 'top' }} />
+        </ScatterChart>
+      </ChartFrame>
       <Note>
         Green is a clause the engine counts as covered, red one it counts as stale. The cycle begins on the same calendar
         day the cycle length back from the as-of date, and the engine decides which side of it an examination falls.
@@ -219,7 +220,7 @@ export const ReadinessMode = ({ rd, certOffset, onCertOffset, sweep, empty, summ
       <Lead>certificationReadiness for {rd.standard}, as the list the engine returns:</Lead>
       <ul className="mt-2 space-y-1">
         {rd.blockers.map((b) => (
-          <li key={b.text} className="text-xs text-slate-300">
+          <li key={b.text} className="text-xs text-pl-text">
             <Status word={b.severity} />
             {' '}
             (count {b.count}) {b.text}

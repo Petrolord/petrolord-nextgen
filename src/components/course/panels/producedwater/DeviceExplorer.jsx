@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import {
-  ResponsiveContainer, LineChart, Line, ComposedChart, Area, XAxis, YAxis, CartesianGrid, Tooltip,
+  LineChart, Line, ComposedChart, Area, XAxis, YAxis, CartesianGrid, Tooltip,
   Legend, ReferenceLine, ReferenceArea,
 } from 'recharts';
 import {
@@ -13,6 +13,9 @@ import {
 import {
   PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note,
 } from '@/components/course/panels/petrophysics/panelKit';
+import ChartFrame from '@/components/charts/ChartFrame';
+import { GRID_STYLE, TOOLTIP_STYLE, LEGEND_PROPS, XAXIS_LABEL_HEIGHT } from '@/utils/chartTheme';
+import { seriesColor, AXIS_TICK, SVG_CHART } from '@/utils/chartSvg';
 
 // The device explorer, the Professional tier. The three devices whose cut size
 // does not come from gravity alone.
@@ -50,14 +53,14 @@ export const MODES = [
   ['typed', 'Your stream, typed: a liner bank, a flotation unit and a media bed on your water'],
 ];
 
-const AXIS = { fill: '#94a3b8', fontSize: 11 };
-const TOOLTIP = { background: '#0f172a', border: '1px solid #334155', fontSize: 11 };
-const SERIES = ['#38bdf8', '#f472b6', '#BFFF00', '#fbbf24', '#a78bfa'];
+const AXIS = AXIS_TICK;
+const TOOLTIP = TOOLTIP_STYLE;
+const SERIES = [seriesColor(0), seriesColor(4), seriesColor(1), seriesColor(2), seriesColor(3)];
 
 const Tbl = ({ head, rows }) => (
   <div className="mt-3 overflow-x-auto">
-    <table className="text-xs text-slate-300 w-full">
-      <thead className="text-slate-500">
+    <table className="text-xs text-pl-text w-full">
+      <thead className="text-pl-muted">
         <tr>{head.map((h, i) => <th key={h} className={`text-left ${i < head.length - 1 ? 'pr-3' : ''} whitespace-nowrap`}>{h}</th>)}</tr>
       </thead>
       <tbody>
@@ -72,9 +75,9 @@ const Tbl = ({ head, rows }) => (
 );
 
 const Held = ({ children }) => (
-  <div className="mt-3 rounded-md border border-amber-700/60 bg-amber-950/20 p-3">
-    <p className="text-amber-300 text-xs font-medium mb-1">HELD FOR LITERATURE</p>
-    <p className="text-xs text-slate-300 mb-0">{children}</p>
+  <div className="mt-3 rounded-md border border-pl-warning/40 bg-pl-warning-bg p-3">
+    <p className="text-pl-warning-text text-xs font-medium mb-1">HELD FOR LITERATURE</p>
+    <p className="text-xs text-pl-text mb-0">{children}</p>
   </div>
 );
 
@@ -83,8 +86,8 @@ const Slider = ({
   label, value, min, max, step, onChange, unit,
 }) => (
   <label className="block">
-    <span className="block text-[11px] uppercase tracking-wide text-slate-500 mb-1">
-      {label}: <span className="text-slate-200 normal-case tracking-normal">{value}{unit ? ` ${unit}` : ''}</span>
+    <span className="block text-[11px] uppercase tracking-wide text-pl-muted mb-1">
+      {label}: <span className="text-pl-text normal-case tracking-normal">{value}{unit ? ` ${unit}` : ''}</span>
     </span>
     <input
       type="range"
@@ -93,7 +96,7 @@ const Slider = ({
       step={step}
       value={value}
       onChange={(e) => onChange(Number(e.target.value))}
-      className="w-full accent-[#BFFF00]"
+      className="w-full accent-pl-primary"
     />
   </label>
 );
@@ -148,29 +151,27 @@ export const LinerMode = ({ s, ko, nLiners, setLiners }) => {
           )}
         </>
       )}
-      <div className="h-60 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="n" tick={AXIS} label={{ value: 'liners in the bank', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -3 }} />
-            <YAxis tick={AXIS} label={{ value: 'cut micron', angle: -90, fill: '#94a3b8', fontSize: 11, position: 'insideLeft' }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            {refusedCounts.length > 0 && (
-              <ReferenceArea
-                x1={Math.min(...refusedCounts)}
-                x2={Math.max(...refusedCounts)}
-                fill="#7f1d1d"
-                fillOpacity={0.35}
-                label={{ value: 'REFUSED', fill: '#fca5a5', fontSize: 11 }}
-              />
-            )}
-            <ReferenceLine x={nLiners} stroke="#BFFF00" strokeDasharray="4 4" />
-            <Line dataKey="cut" name="reported cut, micron" stroke={SERIES[2]} dot={false} connectNulls={false} isAnimationActive={false} />
-            <Line dataKey="ideal" name="ideal cut before the shear penalty, micron" stroke={SERIES[0]} dot={false} connectNulls={false} isAnimationActive={false} />
-          </ComposedChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={240} className="mt-3">
+        <ComposedChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="n" tick={AXIS} label={{ value: 'liners in the bank', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
+          <YAxis tick={AXIS} label={{ value: 'cut micron', angle: -90, fill: SVG_CHART.note, fontSize: 11, position: 'insideLeft' }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
+          <Legend {...LEGEND_PROPS} />
+          {refusedCounts.length > 0 && (
+            <ReferenceArea
+              x1={Math.min(...refusedCounts)}
+              x2={Math.max(...refusedCounts)}
+              fill={seriesColor(3)}
+              fillOpacity={0.18}
+              label={{ value: 'REFUSED', fill: seriesColor(3), fontSize: 11 }}
+            />
+          )}
+          <ReferenceLine x={nLiners} stroke={seriesColor(1)} strokeDasharray="4 4" />
+          <Line dataKey="cut" name="reported cut, micron" stroke={SERIES[2]} dot={false} connectNulls={false} isAnimationActive={false} />
+          <Line dataKey="ideal" name="ideal cut before the shear penalty, micron" stroke={SERIES[0]} dot={false} connectNulls={false} isAnimationActive={false} />
+        </ComposedChart>
+      </ChartFrame>
       <Note>
         Read that curve from the right. Taking liners out of the bank improves the cut for a while and then it turns
         over, and the finest cut in the published sweep is at {s.best.nLiners} liners rather than at the smallest bank.
@@ -230,7 +231,7 @@ export const FlotationMode = ({ s, preset, setPreset }) => {
         <Tile label="Gas holdup" value={twelve(s.cell.gasHoldup)} />
         <Tile label="Cut size" value={six(shown ? shown.d50cMicron : s.cell.d50cMicron)} unit="micron" />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-2 mb-0">
+      <p className="text-xs text-pl-muted mt-2 mb-0">
         Gas flotation carries droplets out rather than settling them, so the cut size is a rate question. Gas is fed at
         {' '}{s.gasRatio} times the water flow to each cell, the bubbles rise at Reynolds
         {' '}{six(s.cell.bubbleReynolds)} on the full drag balance, the swarm holdup is the gas velocity over the bubble
@@ -238,18 +239,16 @@ export const FlotationMode = ({ s, preset, setPreset }) => {
         per square metre of droplet diameter, and the cut is the droplet for which the rate times the
         {' '}{six(s.cell.residenceS)} s of residence is the log of two.
       </p>
-      <div className="h-56 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={bubbles} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="b" tick={AXIS} label={{ value: 'bubble micron', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -3 }} />
-            <YAxis tick={AXIS} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            <Line dataKey="cut" name="cut, micron" stroke={SERIES[2]} dot isAnimationActive={false} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={224} className="mt-3">
+        <LineChart data={bubbles} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="b" tick={AXIS} label={{ value: 'bubble micron', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
+          <YAxis tick={AXIS} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
+          <Legend {...LEGEND_PROPS} />
+          <Line dataKey="cut" name="cut, micron" stroke={SERIES[2]} dot isAnimationActive={false} />
+        </LineChart>
+      </ChartFrame>
       <Note>
         The cut goes as the bubble diameter to the three halves, because the rate carries the inverse cube of it and the
         cut is a square root of a rate. Finer bubbles cut finer, and that is the larger of the two engineering
@@ -326,28 +325,26 @@ export const BedMode = ({
         </TileGrid>
       )}
       {here && !here.refused && here.warning && <Warning>{here.warning}</Warning>}
-      <div className="h-60 mt-3">
-        <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-            <XAxis dataKey="a" tick={AXIS} label={{ value: 'bed area m2', fill: '#94a3b8', fontSize: 11, position: 'insideBottom', offset: -3 }} />
-            <YAxis tick={AXIS} label={{ value: 'cut micron', angle: -90, fill: '#94a3b8', fontSize: 11, position: 'insideLeft' }} />
-            <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
-            <Legend wrapperStyle={{ fontSize: 11 }} />
-            {refusedAreas.length > 0 && (
-              <ReferenceArea
-                x1={Math.min(...refusedAreas)}
-                x2={Math.max(...refusedAreas)}
-                fill="#7f1d1d"
-                fillOpacity={0.35}
-                label={{ value: 'REFUSED', fill: '#fca5a5', fontSize: 11 }}
-              />
-            )}
-            <ReferenceLine x={areaM2} stroke="#BFFF00" strokeDasharray="4 4" />
-            <Line dataKey="cut" name="cut, micron" stroke={SERIES[2]} dot={false} connectNulls={false} isAnimationActive={false} />
-          </ComposedChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartFrame height={240} className="mt-3">
+        <ComposedChart data={chart} margin={{ top: 10, right: 20, bottom: 5, left: 10 }}>
+          <CartesianGrid {...GRID_STYLE} />
+          <XAxis height={XAXIS_LABEL_HEIGHT} dataKey="a" tick={AXIS} label={{ value: 'bed area m2', fill: SVG_CHART.note, fontSize: 11, position: 'insideBottom', offset: -3 }} />
+          <YAxis tick={AXIS} label={{ value: 'cut micron', angle: -90, fill: SVG_CHART.note, fontSize: 11, position: 'insideLeft' }} />
+          <Tooltip contentStyle={TOOLTIP} formatter={(val) => six(val)} />
+          <Legend {...LEGEND_PROPS} />
+          {refusedAreas.length > 0 && (
+            <ReferenceArea
+              x1={Math.min(...refusedAreas)}
+              x2={Math.max(...refusedAreas)}
+              fill={seriesColor(3)}
+              fillOpacity={0.18}
+              label={{ value: 'REFUSED', fill: seriesColor(3), fontSize: 11 }}
+            />
+          )}
+          <ReferenceLine x={areaM2} stroke={seriesColor(1)} strokeDasharray="4 4" />
+          <Line dataKey="cut" name="cut, micron" stroke={SERIES[2]} dot={false} connectNulls={false} isAnimationActive={false} />
+        </ComposedChart>
+      </ChartFrame>
       <Note>
         Drag that slider to the right and watch the refusal arrive. A wider bed is a lower loading rate, and under
         {' '}{s.minLoadingMHr} m/hr this module stops answering and says why: its filter coefficient is declared at one
@@ -406,13 +403,13 @@ export const TypedDeviceMode = () => {
   const r = useMemo(() => typedDeviceStream(values), [values]);
   return (
     <>
-      <p className="text-xs text-slate-300 mb-0">
+      <p className="text-xs text-pl-text mb-0">
         Type a stream and its three devices. The view opens on the teaching stream KOKORI, and every input can be
         retyped. The operating envelope of a liner, the drag a bubble rises against, the attachment efficiency and the
         loading law of the bed are the module&apos;s own.
       </p>
       <TypedInputs groups={DEVICE_GROUPS} values={values} setValue={setValue} />
-      <p className="text-xs text-slate-400 mt-3 mb-1">The liner bank</p>
+      <p className="text-xs text-pl-muted mt-3 mb-1">The liner bank</p>
       <TileGrid>
         <Tile label="Turndown, flow per liner over rated" value={nine(r.turndownRatio)} />
         <Tile label="Inlet shear penalty on the cut" value={nine(r.shearPenalty)} />
@@ -422,7 +419,7 @@ export const TypedDeviceMode = () => {
         <Tile label="Liner bank cut size" value={six(r.linerCutMicron)} unit="micron" />
         <Tile label="Liners that would run this flow at rated" value={r.linersAtDesignFlow === null || r.linersAtDesignFlow === undefined ? 'none' : String(r.linersAtDesignFlow)} />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-3 mb-1">The flotation unit</p>
+      <p className="text-xs text-pl-muted mt-3 mb-1">The flotation unit</p>
       <TileGrid>
         <Tile label="Rise velocity of one bubble" value={twelve(r.bubbleRiseMS)} unit="m/s" />
         <Tile label="Superficial gas velocity" value={twelve(r.superficialGasMS)} unit="m/s" />
@@ -430,7 +427,7 @@ export const TypedDeviceMode = () => {
         <Tile label="Residence in the cells" value={six(r.flotationResidenceS)} unit="s" />
         <Tile label="Flotation cut size" value={six(r.flotationCutMicron)} unit="micron" />
       </TileGrid>
-      <p className="text-xs text-slate-400 mt-3 mb-1">The media bed</p>
+      <p className="text-xs text-pl-muted mt-3 mb-1">The media bed</p>
       <TileGrid>
         <Tile label="Bed loading" value={six(r.bedLoadingMHr)} unit="m/hr" />
         <Tile label="Bed cut size" value={six(r.bedCutMicron)} unit="micron" />
