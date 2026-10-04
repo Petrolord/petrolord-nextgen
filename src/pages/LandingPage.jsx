@@ -449,7 +449,7 @@ function HomeFooter() {
             <span className="crest"><img src={LOGO} alt="" /></span>
             <span>Petrolord <em>NextGen</em></span>
           </Link>
-          <p>The academy of the Petrolord Suite. Hands-on courses and verifiable Associate, Professional and Expert certifications. A Lordsway Energy company.</p>
+          <p>The academy of the Petrolord Suite. Hands-on courses and verifiable Associate, Professional and Expert certifications. A <a href="https://lordswayenergy.com">Lordsway Energy</a> company.</p>
         </div>
         <FooterCol title="Academy">
           {NAV.map(([href, label]) => <a key={href} href={href}>{label}</a>)}
