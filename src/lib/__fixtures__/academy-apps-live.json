@@ -1,0 +1,480 @@
+{
+ "_about": "Read-only snapshot of public.academy_apps on the NextGen project (txcsbtvcdaqmkjjbhbeg), taken 2026-10-05. The homepage counts are derived from these rows; the Suite homepage pins the same figures (petrolord-suite src/data/__fixtures__/live-catalogue.json). See docs/Homepage-Counts.md. Refresh when a course goes live, together with homeCatalog.js.",
+ "taken": "2026-10-05",
+ "courses": [
+  {
+   "slug": "appliedai",
+   "module": "data_ai",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "basin",
+   "module": "geoscience",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "carbon",
+   "module": "energy_transition",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "cashflow",
+   "module": "economics",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "casingtubing",
+   "module": "drilling",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "cementing",
+   "module": "drilling",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "completion",
+   "module": "drilling",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "compliance",
+   "module": "assurance",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "consequence",
+   "module": "hse",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "contracts",
+   "module": "supply_chain",
+   "status": "available",
+   "courseType": "practice"
+  },
+  {
+   "slug": "corrosion",
+   "module": "facilities",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "crude",
+   "module": "commercial_trading",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "dataqc",
+   "module": "data_ai",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "dca",
+   "module": "reservoir",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "decision",
+   "module": "economics",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "earthmodel",
+   "module": "geoscience",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "esp",
+   "module": "production",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "facies",
+   "module": "data_ai",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "farmout",
+   "module": "economics",
+   "status": "available",
+   "courseType": "engine"
+  },
+  {
+   "slug": "fdp",
+   "module": "economics",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "fiscal",
+   "module": "economics",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "flowassurance",
+   "module": "production",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "fluid",
+   "module": "reservoir",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "forecastml",
+   "module": "data_ai",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "gaslift",
+   "module": "production",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "gasprocessing",
+   "module": "facilities",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "gasvalue",
+   "module": "energy_transition",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "gaswell",
+   "module": "production",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "geomech",
+   "module": "drilling",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "gsa",
+   "module": "economics",
+   "status": "available",
+   "courseType": "engine"
+  },
+  {
+   "slug": "heattransfer",
+   "module": "facilities",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "hydraulics",
+   "module": "drilling",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "hygiene",
+   "module": "hse",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "integrity",
+   "module": "drilling",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "intervention",
+   "module": "production",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "joa",
+   "module": "economics",
+   "status": "available",
+   "courseType": "engine"
+  },
+  {
+   "slug": "linesizing",
+   "module": "facilities",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "lopa",
+   "module": "hse",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "mapping",
+   "module": "geoscience",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "marine",
+   "module": "supply_chain",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "materials",
+   "module": "supply_chain",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "mbal",
+   "module": "reservoir",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "metering",
+   "module": "facilities",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "mlcore",
+   "module": "data_ai",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "network",
+   "module": "production",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "nodal",
+   "module": "production",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "perfsand",
+   "module": "drilling",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "petrophysics",
+   "module": "geoscience",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "pia",
+   "module": "economics",
+   "status": "available",
+   "courseType": "engine"
+  },
+  {
+   "slug": "porepressure",
+   "module": "geoscience",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "portfolio",
+   "module": "economics",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "prms",
+   "module": "economics",
+   "status": "available",
+   "courseType": "engine"
+  },
+  {
+   "slug": "procurement",
+   "module": "supply_chain",
+   "status": "available",
+   "courseType": "engine"
+  },
+  {
+   "slug": "producedwater",
+   "module": "facilities",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "qra",
+   "module": "hse",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "refinery",
+   "module": "commercial_trading",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "relief",
+   "module": "facilities",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "reservoircalc",
+   "module": "geoscience",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "riskchange",
+   "module": "assurance",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "rockphysics",
+   "module": "geoscience",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "rodpump",
+   "module": "production",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "rotating",
+   "module": "facilities",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "safetystats",
+   "module": "hse",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "scal",
+   "module": "reservoir",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "seismolord",
+   "module": "geoscience",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "separation",
+   "module": "facilities",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "sim",
+   "module": "reservoir",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "stimulation",
+   "module": "drilling",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "supply",
+   "module": "supply_chain",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "surveillance",
+   "module": "production",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "torquedrag",
+   "module": "drilling",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "uncertainty",
+   "module": "economics",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "waterflood",
+   "module": "reservoir",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "wellcontrol",
+   "module": "drilling",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "wellcorrelation",
+   "module": "geoscience",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "wellcost",
+   "module": "drilling",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "welldata",
+   "module": "geoscience",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "welldesign",
+   "module": "drilling",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "welltest",
+   "module": "reservoir",
+   "status": "available",
+   "courseType": "app"
+  }
+ ]
+}
