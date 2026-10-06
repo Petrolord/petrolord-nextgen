@@ -13,7 +13,6 @@ import './LandingPage.css';
 // with live status from academy_apps. Fees mirror academy_fees (every course
 // is on the subsurface schedule today); update both together.
 
-const LOGO = 'https://horizons-cdn.hostinger.com/80504870-35f5-4fc9-ba7f-f8bc12cf282f/petrolord-symbol-512-4kVUt.png';
 const INITIAL_COUNT = 12;
 
 const NAV = [
@@ -194,8 +193,7 @@ const LandingPage = () => {
       <header className="site">
         <div className="wrap nav">
           <Link className="brand" to="/" aria-label="Petrolord NextGen home">
-            <span className="crest"><img src={LOGO} alt="" /></span>
-            <span>Petrolord <em>NextGen</em></span>
+            <BrandLogo />
           </Link>
           <nav className="links" aria-label="Main">
             {NAV.map(([href, label]) => <a key={href} href={href}>{label}</a>)}
@@ -440,14 +438,29 @@ const LandingPage = () => {
   );
 };
 
+// The official Petrolord NextGen logo (owner supplied, 2026-10-05), trimmed
+// from /root/lordsway-assets/petrolord-nextgen-logo.png; 1x and 2x for sharp
+// rendering. The yellow wordmark is drawn on the ink header and footer only.
+function BrandLogo() {
+  return (
+    <img
+      className="brand-logo"
+      src="/brand/petrolord-nextgen-logo-96.png"
+      srcSet="/brand/petrolord-nextgen-logo-96.png 1x, /brand/petrolord-nextgen-logo-192.png 2x"
+      width={889}
+      height={96}
+      alt="Petrolord NextGen"
+    />
+  );
+}
+
 function HomeFooter() {
   return (
     <footer style={{ background: '#07140E', color: 'var(--on-ink-muted)', fontSize: 14 }}>
       <div className="wrap" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))', gap: 28, paddingBlock: '52px 36px' }}>
         <div>
-          <Link className="brand" to="/" style={{ marginBottom: 14 }}>
-            <span className="crest"><img src={LOGO} alt="" /></span>
-            <span>Petrolord <em>NextGen</em></span>
+          <Link className="brand brand-foot" to="/" aria-label="Petrolord NextGen home" style={{ marginBottom: 14 }}>
+            <BrandLogo />
           </Link>
           <p>The academy of the Petrolord Suite. Hands-on courses and verifiable Associate, Professional and Expert certifications. A Lordsway Energy company.</p>
         </div>
