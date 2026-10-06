@@ -252,3 +252,7 @@
 .ng-home .final .contact-line a{color:var(--gold-soft)}
 
 .ng-home [id]{scroll-margin-top:72px}
+/* Official logo (2026-10-05): height sets the size, width follows the 9.26:1 artwork */
+.ng-home .brand-logo{display:block;height:38px;width:auto;max-width:100%}
+.ng-home .brand-foot .brand-logo{height:34px}
+@media (max-width:420px){.ng-home .brand-logo{height:26px}}
