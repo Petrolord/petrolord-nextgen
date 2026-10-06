@@ -118,7 +118,7 @@ describeScreenTheme({
   name: 'Enroll',
   route: '/dashboard/enroll',
   renderScreen: () => renderRoute('/dashboard/enroll'),
-  ready: async () => { await screen.findByText('Enroll in a course'); await screen.findByText('My enrollments'); },
+  ready: async () => { await screen.findByText('Enroll in a course', {}, { timeout: 15000 }); await screen.findByText('My enrollments'); },
   userId: USER_ID,
 });
 

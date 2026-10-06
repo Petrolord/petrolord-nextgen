@@ -22,8 +22,8 @@ import DeviceGuard from '@/components/academy/DeviceGuard';
 // The dashboard chunk starts downloading as soon as the app boots on a
 // /dashboard URL, in parallel with the session restore and profile read,
 // instead of after them (2026-10-05 load fix).
+const DashboardPage = lazy(() => import('@/pages/DashboardPage'));
 const preloadDashboard = () => import('@/pages/DashboardPage');
-const DashboardPage = lazy(preloadDashboard);
 if (typeof window !== 'undefined' && /^\/dashboard(\/|$)/.test(window.location.pathname)) {
   preloadDashboard().catch(() => {});
 }

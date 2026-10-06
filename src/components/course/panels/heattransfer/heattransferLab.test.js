@@ -1134,7 +1134,7 @@ describe('the three panel ids, the route and the page are registered', () => {
     const dash = fs.readFileSync(path.join(ROOT, 'src/pages/DashboardPage.jsx'), 'utf8');
     expect(dash).toContain('path="apps/heattransfer"');
     expect(dash).toContain('<HeatTransferLearningPage />');
-    expect(dash).toContain("import HeatTransferLearningPage from '@/pages/apps/HeatTransferLearningPage'");
+    expect(dash).toContain("const HeatTransferLearningPage = lazy(() => import('@/pages/apps/HeatTransferLearningPage'));");
   });
 
   it('the learning page is behind LearningModeGate and reads the lab', () => {
