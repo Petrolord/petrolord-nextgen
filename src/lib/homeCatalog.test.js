@@ -1,6 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import { HOME_COURSES, HOME_MODULES, mergeCatalog, catalogStats } from './homeCatalog';
 import { MODULE_LABELS } from './academyModules';
+import { courseTypeOf } from './courseType';
+import LIVE from './__fixtures__/academy-apps-live.json';
 
 describe('homepage catalogue', () => {
   it('has unique slugs and only known modules', () => {
@@ -32,7 +34,7 @@ describe('homepage catalogue', () => {
   it('falls back to the static status when there are no live rows', () => {
     expect(mergeCatalog(HOME_COURSES, [])).toBe(HOME_COURSES);
     expect(mergeCatalog(HOME_COURSES, null)).toBe(HOME_COURSES);
-    expect(catalogStats(HOME_COURSES)).toEqual({ courses: 68, disciplines: 12, certifications: 204 });
+    expect(catalogStats(HOME_COURSES)).toEqual({ courses: 79, appCourses: 72, disciplines: 12, certifications: 237 });
   });
 
   it('takes status from the live catalogue and counts only available courses', () => {
@@ -46,6 +48,22 @@ describe('homepage catalogue', () => {
     expect(by.welldata).toBe('available');
     expect(by.dataqc).toBe('coming_soon');
     expect(by.nodal).toBe('coming_soon'); // not listed live yet
-    expect(catalogStats(merged)).toEqual({ courses: 2, disciplines: 1, certifications: 6 });
+    expect(catalogStats(merged)).toEqual({ courses: 2, appCourses: 2, disciplines: 1, certifications: 6 });
+  });
+
+  // The reconciled counts (docs/Homepage-Counts.md). The static catalogue is
+  // what the page paints before academy_apps answers and what it keeps if the
+  // read fails, so it must equal the live catalogue: pinned here to a
+  // read-only snapshot of academy_apps taken 2026-10-05. The Suite homepage
+  // pins the same 79 and 72 to the same snapshot.
+  it('equals the live academy_apps snapshot, course by course', () => {
+    expect(LIVE.taken).toBe('2026-10-05');
+    const live = Object.fromEntries(LIVE.courses.map((c) => [c.slug, c]));
+    expect(HOME_COURSES.map((c) => c.slug).sort()).toEqual(Object.keys(live).sort());
+    for (const co of HOME_COURSES) {
+      expect([co.slug, co.module, co.status, co.courseType]).toEqual([co.slug, live[co.slug].module, live[co.slug].status, live[co.slug].courseType]);
+      expect(courseTypeOf(co.slug)).toBe(live[co.slug].courseType);
+    }
+    expect(catalogStats(mergeCatalog(HOME_COURSES, LIVE.courses))).toEqual(catalogStats(HOME_COURSES));
   });
 });

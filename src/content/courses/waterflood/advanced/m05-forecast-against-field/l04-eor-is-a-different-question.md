@@ -1,6 +1,6 @@
 # EOR is a different question
 
-After a waterflood forecast the natural next question is whether something other than water would do better. This lesson takes that question seriously enough to frame it properly, and then stops, because the tooling to answer it quantitatively does not exist in this engine set and pretending otherwise would be the exact failure this course keeps warning about.
+After a waterflood forecast the natural next question is whether something other than water would do better. This lesson takes that question seriously enough to frame it properly, and then hands it on. Answering it is a separate study with its own tools, and treating a waterflood forecast as if it could answer it would be the exact failure this course keeps warning about.
 
 ## What the forecast leaves behind
 
@@ -36,11 +36,13 @@ Both gains are real and both are small, because the mobility ratio was never the
 
 ## Why this course stops here
 
-Because there is no validated central EOR screening engine in the Petrolord engine set.
+Because EOR is a different question from the one this course answers, and its first step has a tool of its own.
 
-That is a deliberate statement of a boundary, and it is the same rule that governs the rest of the curriculum: new engine math lands with goldens and validation FIRST, and a course is built on it afterwards. Reversing that order produces courses that teach numbers nobody has checked.
+The Petrolord Suite's **EOR Screening** app, in the Reservoir module, does that first step. It checks a reservoir and its oil against the published screening criteria of Taber, Martin and Seright (1997, Parts 1 and 2), with every limit read from the paper's own tables and tested at, inside and beyond each one. For CO2 it adds a minimum miscibility pressure check from Zhu and co-authors (2025), which reproduces the error figures that paper reports. That is validated screening, built the way this curriculum asks every engine to be built: goldens and published references first, and anything that relies on the engine afterwards.
 
-So nothing in this lesson is graded, no EOR screening number appears in the capstone, and the treatment above is qualitative on purpose. When you see an EOR screening chart elsewhere with three significant figures and a recovery factor uplift, the question to ask is what validated it.
+Screening is still a long way short of design. A screening verdict says which processes deserve a closer look for this oil in this rock. It cannot say where the remaining oil sits, how much of it a process would recover, or whether the project pays. Those are the questions in the next section, and a table of published limits answers none of them.
+
+So nothing in this lesson is graded, no EOR number appears in the capstone, and the treatment above stays qualitative on purpose. This course owns the waterflood; when you want to screen EOR processes for a field, open the EOR Screening app and read its verdicts as a shortlist. When you see an EOR chart anywhere with three significant figures and a recovery factor uplift, ask two things: what validated it, and whether it is a screen or a design.
 
 ## What a proper screening would need
 

@@ -4,7 +4,10 @@ import { courseTypeOf } from '@/lib/courseType';
 // keyed by academy_apps.slug. Status comes from academy_apps when the page
 // can read it (anon SELECT is allowed), so a course whose go-live migration
 // is still held shows as "Coming soon" and is left out of the counts. The
-// static `status` below is only the fallback when that read fails.
+// static `status` below is the fallback when that read fails, and what the
+// page paints before it returns, so keep it equal to the live catalogue
+// (docs/Homepage-Counts.md; homeCatalog.test.js pins it to the 2026-10-05
+// snapshot) or the count changes on screen as the page loads.
 //
 // Add a row here alongside any new academy_apps row. homeCatalog.test.js
 // checks slugs are unique and every module key is known.
@@ -83,10 +86,10 @@ export const HOME_COURSES = [
   c('crude', 'commercial_trading', 'Crude Assay & Blending', 'Value crudes correctly and blend for margin.'),
   c('refinery', 'commercial_trading', 'Refinery Feasibility & Planning', 'Test refinery economics before you commit capital.'),
   c('supply', 'supply_chain', 'Terminals, Depots & Fuel Supply', 'Storage and distribution with lean working capital.'),
-  c('procurement', 'supply_chain', 'Procurement, Tendering & Contracting', 'Run a fair tender and choose the contract that fits the risk.', 'coming_soon', true),
-  c('materials', 'supply_chain', 'Materials, Spares & Inventory Management', 'Set criticality, order quantities, safety stock and insurance spares the way a stated stock policy writes them.', 'coming_soon', true),
-  c('marine', 'supply_chain', 'Offshore & Marine Logistics', 'Plan supply voyages, size the vessel fleet and queue the shore base the way a stated logistics plan writes them.', 'coming_soon', true),
-  c('contracts', 'supply_chain', 'Contract & Supplier Management', 'Run a contract from award to close-out and keep every supplier performing.', 'coming_soon', true),
+  c('procurement', 'supply_chain', 'Procurement, Tendering & Contracting', 'Run a fair tender and choose the contract that fits the risk.', 'available', true),
+  c('materials', 'supply_chain', 'Materials, Spares & Inventory Management', 'Set criticality, order quantities, safety stock and insurance spares the way a stated stock policy writes them.', 'available', true),
+  c('marine', 'supply_chain', 'Offshore & Marine Logistics', 'Plan supply voyages, size the vessel fleet and queue the shore base the way a stated logistics plan writes them.', 'available', true),
+  c('contracts', 'supply_chain', 'Contract & Supplier Management', 'Run a contract from award to close-out and keep every supplier performing.', 'available', true),
   c('gasvalue', 'energy_transition', 'Flare Gas to Value & LPG/CNG', 'Turn a flare into a revenue stream.'),
   c('carbon', 'energy_transition', 'Carbon & Energy Efficiency', 'Cut emissions and energy cost. Stronger ESG reporting.'),
   c('cashflow', 'economics', 'Cash Flow & NPV', 'The common language of every investment decision.'),
@@ -95,11 +98,11 @@ export const HOME_COURSES = [
   c('decision', 'economics', 'Decision Analysis & Value of Information', 'When to buy more data and when to act.'),
   c('portfolio', 'economics', 'Capital Portfolio & Cost Control', 'Capital to the best projects, spend kept on track.'),
   c('fdp', 'economics', 'Field Development Planning', 'Every discipline in one bankable plan.'),
-  c('pia', 'economics', 'Petroleum Industry Act 2021 & Nigerian Fiscal Terms', 'Read Nigerian royalty and tax the way the Act writes them.', 'coming_soon', true),
-  c('gsa', 'economics', 'Gas Commercialisation & Gas Sales Agreements', 'Work take-or-pay, make-up and gas price formulas the way the contract writes them.', 'coming_soon', true),
-  c('joa', 'economics', 'Joint Ventures, Operating Agreements & Cost Recovery', 'Work cash calls, carries, defaults and PSC cost recovery the way the agreement writes them.', 'coming_soon', true),
-  c('farmout', 'economics', 'Farm-ins, Farm-outs & Asset Valuation', 'Work promotes, carries, deal value and the consent fee the way the deal terms write them.', 'coming_soon', true),
-  c('prms', 'economics', 'Reserves & Resources under SPE-PRMS 2018', 'Classify, categorise, add up and reconcile reserves and resources the way SPE-PRMS 2018 frames them.', 'coming_soon', true),
+  c('pia', 'economics', 'Petroleum Industry Act 2021 & Nigerian Fiscal Terms', 'Read Nigerian royalty and tax the way the Act writes them.', 'available', true),
+  c('gsa', 'economics', 'Gas Commercialisation & Gas Sales Agreements', 'Work take-or-pay, make-up and gas price formulas the way the contract writes them.', 'available', true),
+  c('joa', 'economics', 'Joint Ventures, Operating Agreements & Cost Recovery', 'Work cash calls, carries, defaults and PSC cost recovery the way the agreement writes them.', 'available', true),
+  c('farmout', 'economics', 'Farm-ins, Farm-outs & Asset Valuation', 'Work promotes, carries, deal value and the consent fee the way the deal terms write them.', 'available', true),
+  c('prms', 'economics', 'Reserves & Resources under SPE-PRMS 2018', 'Classify, categorise, add up and reconcile reserves and resources the way SPE-PRMS 2018 frames them.', 'available', true),
   c('riskchange', 'assurance', 'Risk, Change & Learning', 'Risk registers, MOC and lessons learned done properly.'),
   c('compliance', 'assurance', 'Compliance, Audit & Quality', 'Audit-ready teams and consistent quality.'),
   c('safetystats', 'hse', 'Safety Performance Statistics & KPIs', 'Act on real safety trends instead of noise in the data.'),
@@ -110,8 +113,8 @@ export const HOME_COURSES = [
   c('dataqc', 'data_ai', 'Oilfield Data Quality', 'Fix bad data before it poisons models and decisions.', 'available', true),
   c('mlcore', 'data_ai', 'Machine Learning on Well Data', 'Predict missing logs with methods engineers can explain.', 'available', true),
   c('facies', 'data_ai', 'Electrofacies Classification', 'Classify rock types from logs across many wells.', 'available', true),
-  c('forecastml', 'data_ai', 'Data-Driven Production Forecasting', 'Machine learning forecasts alongside classic decline.', 'coming_soon', true),
-  c('appliedai', 'data_ai', 'Applied AI and Language Models', 'Use AI tools productively and evaluate them critically.', 'coming_soon', true),
+  c('forecastml', 'data_ai', 'Data-Driven Production Forecasting', 'Machine learning forecasts alongside classic decline.', 'available', true),
+  c('appliedai', 'data_ai', 'Applied AI and Language Models', 'Use AI tools productively and evaluate them critically.', 'available', true),
 ];
 
 /**
@@ -133,5 +136,6 @@ export function mergeCatalog(courses, liveApps) {
 export function catalogStats(courses) {
   const live = courses.filter((co) => co.status === 'available');
   const disciplines = new Set(live.map((co) => co.module)).size;
-  return { courses: live.length, disciplines, certifications: live.length * 3 };
+  const appCourses = live.filter((co) => co.courseType === 'app').length;
+  return { courses: live.length, appCourses, disciplines, certifications: live.length * 3 };
 }

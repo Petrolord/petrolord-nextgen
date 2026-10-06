@@ -126,7 +126,7 @@ describe('course types', () => {
 
   it('carries the course type onto the homepage catalogue, static and live', () => {
     const contracts = HOME_COURSES.find((c) => c.slug === 'contracts');
-    expect(contracts).toMatchObject({ module: 'supply_chain', status: 'coming_soon', courseType: 'practice' });
+    expect(contracts).toMatchObject({ module: 'supply_chain', status: 'available', courseType: 'practice' });
     expect(HOME_COURSES.filter((c) => c.courseType === 'practice').map((c) => c.slug)).toEqual(['contracts']);
     expect(HOME_COURSES.filter((c) => c.courseType === 'engine').map((c) => c.slug).sort())
       .toEqual([...ENGINE_COURSES].sort());

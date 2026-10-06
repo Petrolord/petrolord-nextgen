@@ -47,7 +47,7 @@ describe('the practice course badge', () => {
   it('is on the practice course catalogue card and on no other', () => {
     const c = card('contracts');
     expect(count(c, 'Practice course')).toBe(1);
-    expect(c).toContain('Coming soon');
+    expect(c).not.toContain('Coming soon'); // live since 2026-09-27 (docs/Homepage-Counts.md)
     expect(c).toContain('Contract &amp; Supplier Management');
     for (const slug of ['procurement', 'prms', 'welldata', 'supply']) expect(card(slug)).not.toContain('Practice course');
     const badged = HOME_COURSES.filter((co) => html(<CourseCard c={co} />).includes('Practice course')).map((co) => co.slug);

@@ -187,7 +187,7 @@ const LandingPage = () => {
         <title>Petrolord NextGen Academy | Energy courses with verifiable certifications</title>
         <meta
           name="description"
-          content={`${stats.courses} hands-on energy industry courses taught inside the Petrolord Suite, from geoscience to HSE. Auto-graded practicals and Associate, Professional and Expert certificates anyone can verify.`}
+          content={`${stats.courses} hands-on energy industry courses built on the Petrolord Suite's apps and engines, from geoscience to HSE. Auto-graded practicals and Associate, Professional and Expert certificates anyone can verify.`}
         />
       </Helmet>
 
@@ -263,8 +263,8 @@ const LandingPage = () => {
           </div>
           <div className="ledger">
             <ul className="wrap" aria-label="NextGen at a glance">
-              <li><strong>{stats.courses}</strong><span>courses, each built around a real engineering app</span></li>
-              <li><strong>{stats.disciplines}</strong><span>disciplines across the energy value chain</span></li>
+              <li><strong>{stats.courses}</strong><span>courses live today, {stats.appCourses} of them built on a Petrolord Suite app</span></li>
+              <li><strong>{stats.disciplines}</strong><span>academy disciplines, from geoscience to data and AI</span></li>
               <li><strong>{stats.certifications}</strong><span>certifications across three tiers</span></li>
               <li><strong>100%</strong><span>of capstones auto-graded against verified answers</span></li>
               <li><strong>0</strong><span>software to install. Learn from any browser</span></li>

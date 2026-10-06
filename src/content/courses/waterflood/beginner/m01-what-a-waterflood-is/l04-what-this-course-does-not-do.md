@@ -22,11 +22,11 @@ This course owns the bookkeeping of a flood and the decisions that follow from i
 
 **Valuation belongs to Petroleum Economics.** When a lesson says a flood design is better or worse, it means technically better on a stated measure. Nothing here is a discounted cash flow, and no number here should be carried into an investment case without going through the economics tooling.
 
-## Two things nobody owns yet
+## Two things this course hands on
 
 There are two places where this course will say "screening only" and mean it.
 
-The first is **enhanced oil recovery**. The Expert tier discusses EOR screening because the natural question after a waterflood forecast is "what if we injected something other than water", but the Petrolord engine set has no central, validated EOR module. So EOR appears in this course as a way of thinking about a decision, with no graded number attached to it. If you see an EOR screening chart elsewhere in the industry with three significant figures on it, ask what validated it.
+The first is **enhanced oil recovery**. The Expert tier discusses EOR screening because the natural question after a waterflood forecast is "what if we injected something other than water". That is a different question from waterflood design. Its first step, screening a reservoir against published EOR criteria, has its own app in the Petrolord Suite, EOR Screening, and a screen is a shortlist of processes worth studying, a long way short of a design. So EOR appears in this course as a way of thinking about a decision, with no graded number attached to it. If you see an EOR screening chart elsewhere in the industry with three significant figures on it, ask what validated it.
 
 The second is **anything requiring a simulator**. Pattern interference, crossflow between layers, and the actual three-dimensional geometry of a flood front are simulator questions. Everything in this course is an analytical screening tool of the Craig monograph lineage, and each of those tools carries assumptions that the engines surface as warnings rather than hiding. When the Expert tier's forecast prints "vertical sweep applied as a constant multiplier on the flooded volume (screening simplification)", that warning is the engine telling you the boundary of its own competence.
 
