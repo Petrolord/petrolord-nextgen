@@ -23,7 +23,7 @@ import { supabase } from '@/lib/customSupabaseClient';
 import { useActivation } from '@/hooks/useActivation';
 import { useRole } from '@/contexts/RoleContext';
 import { enrollmentAction } from '@/lib/learningGate';
-import { hasDeepCourse } from '@/lib/courseContent';
+import { hasDeepCourse } from '@/lib/courseIndex';
 import { courseName } from '@/lib/appNames';
 
 // One identity, four doors (NextGen-Academy-PLAN §1): same account, same

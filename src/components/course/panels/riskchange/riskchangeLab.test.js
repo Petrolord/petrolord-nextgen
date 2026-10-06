@@ -1033,7 +1033,7 @@ describe('the three panel ids, the route and the page are registered', () => {
   it('the route is /dashboard/apps/riskchange and it renders the learning page behind the Learning Mode gate', () => {
     const dash = fs.readFileSync(path.join(ROOT, 'src/pages/DashboardPage.jsx'), 'utf8');
     expect(dash).toContain('<Route path="apps/riskchange" element={<RiskChangeLearningPage />} />');
-    expect(dash).toContain("import RiskChangeLearningPage from '@/pages/apps/RiskChangeLearningPage'");
+    expect(dash).toContain("const RiskChangeLearningPage = lazy(() => import('@/pages/apps/RiskChangeLearningPage'));");
     const page = sourceOf(PAGE);
     expect(page).toContain('LearningModeGate');
     expect(page).toContain("const APP = 'riskchange'");

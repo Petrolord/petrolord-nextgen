@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { supabase } from '@/lib/customSupabaseClient';
 import { useToast } from '@/components/ui/use-toast';
 
@@ -42,7 +42,22 @@ export const AuthProvider = ({ children }) => {
   const [unreadNotifCount, setUnreadNotifCount] = useState(0);
   const [profile, setProfile] = useState(null);
 
-  const fetchProfile = async (userId) => {
+  // One profile read per user in flight: the session restore and the
+  // INITIAL_SESSION event both ask on every load (2026-10-05 load fix), and
+  // the second now joins the first. refreshProfile passes force.
+  const profileRead = useRef({ userId: null, promise: null });
+
+  const fetchProfile = (userId, { force = false } = {}) => {
+    const cur = profileRead.current;
+    if (!force && cur.promise && cur.userId === userId) return cur.promise;
+    const promise = readProfile(userId).finally(() => {
+      if (profileRead.current.promise === promise) profileRead.current = { userId: null, promise: null };
+    });
+    profileRead.current = { userId, promise };
+    return promise;
+  };
+
+  const readProfile = async (userId) => {
     try {
       const { data, error } = await supabase
         .from('profiles')
@@ -165,7 +180,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const refreshProfile = async () => {
-    if (user) await fetchProfile(user.id);
+    if (user) await fetchProfile(user.id, { force: true });
   };
 
   const value = {
