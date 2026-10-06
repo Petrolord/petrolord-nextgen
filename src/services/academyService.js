@@ -6,13 +6,47 @@ import { supabase } from '@/lib/customSupabaseClient';
 
 export const TIERS = ['beginner', 'intermediate', 'advanced'];
 
-export async function listAcademyApps() {
-  const { data, error } = await supabase
-    .from('academy_apps')
-    .select('*')
-    .order('path_order');
-  if (error) throw error;
-  return data;
+// The catalog is the same for every viewer and changes only when a course
+// launches, yet one /dashboard visit asked for it three times (2026-10-05
+// load fix). Concurrent asks share one read and a good answer is kept for a
+// minute; a failed read is never kept.
+const CATALOG_TTL_MS = 60 * 1000;
+let catalogCache = { at: 0, promise: null };
+
+export function listAcademyApps() {
+  const now = Date.now();
+  if (catalogCache.promise && now - catalogCache.at < CATALOG_TTL_MS) return catalogCache.promise;
+  const promise = (async () => {
+    const { data, error } = await supabase
+      .from('academy_apps')
+      .select('*')
+      .order('path_order');
+    if (error) throw error;
+    return data;
+  })();
+  catalogCache = { at: now, promise };
+  promise.catch(() => {
+    if (catalogCache.promise === promise) catalogCache = { at: 0, promise: null };
+  });
+  return promise;
+}
+
+// Concurrent callers share one in-flight call; once it settles the next
+// call reads fresh (used where two components ask at the same moment).
+function coalesce(fn) {
+  let inflight = null;
+  const wrapped = () => {
+    if (!inflight) inflight = Promise.resolve().then(fn).finally(() => { inflight = null; });
+    return inflight;
+  };
+  wrapped.reset = () => { inflight = null; };
+  return wrapped;
+}
+
+/** Test hook: forget cached and in-flight academy reads. */
+export function __resetAcademyCaches() {
+  catalogCache = { at: 0, promise: null };
+  getActivationStatus.reset();
 }
 
 export async function listFees() {
@@ -193,11 +227,12 @@ export async function adminDecideResidency(applicationId, decision, note = null)
 
 // ---- N3.3 activation gate + integrity controls ----
 
-export async function getActivationStatus() {
+// The banner and the home both ask on the same render; they share one call.
+export const getActivationStatus = coalesce(async () => {
   const { data, error } = await supabase.rpc('academy_activation_status');
   if (error) throw error;
   return data;
-}
+});
 
 export async function completeOrientation() {
   const { data, error } = await supabase.rpc('academy_complete_orientation');
@@ -332,11 +367,9 @@ export async function verifyCertificate(verifyCode) {
 // pages fall back to the static maps in lib/appNames and lib/courseType.
 async function withCourseNames(rows) {
   if (!rows?.length) return rows || [];
-  const slugs = [...new Set(rows.map((c) => c.app_slug))];
-  const { data: apps } = await supabase
-    .from('academy_apps')
-    .select('*') // course_type is read when the column exists, and never fails the read before it does
-    .in('slug', slugs);
+  // The shared catalog read (listAcademyApps) carries every course with
+  // course_type, so naming the rows costs no second request.
+  const apps = await listAcademyApps().catch(() => []);
   const byslug = Object.fromEntries((apps || []).map((a) => [a.slug, a]));
   return rows.map((c) => ({
     ...c,

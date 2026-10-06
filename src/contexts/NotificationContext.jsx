@@ -24,10 +24,12 @@ export const NotificationProvider = ({ children }) => {
         if (!user) return;
         setIsLoading(true);
         try {
-            const { data, count } = await notificationService.getNotifications(user.id, { limit: 20 });
+            // Both reads at once rather than one after the other (2026-10-05).
+            const [{ data }, countUnread] = await Promise.all([
+                notificationService.getNotifications(user.id, { limit: 20 }),
+                notificationService.getUnreadCount(user.id),
+            ]);
             setNotifications(data);
-            
-            const countUnread = await notificationService.getUnreadCount(user.id);
             setUnreadCount(countUnread);
         } catch (error) {
             console.error(error);
