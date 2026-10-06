@@ -1,120 +1,123 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { Routes, Route, Navigate, Link } from 'react-router-dom';
 import { useAuth } from '@/contexts/SupabaseAuthContext';
 import { useRole } from '@/contexts/RoleContext';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Activity, Users, Settings, Construction, Award, KeyRound, GraduationCap, ArrowRight, BookOpen, PlayCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-
-import EnrollPage from '@/pages/EnrollPage';
-import AdminAcademyDoorsPage from '@/pages/AdminAcademyDoorsPage';
-import SponsorConsolePage from '@/pages/SponsorConsolePage';
-import PrereqWaiverPage from '@/pages/PrereqWaiverPage';
-import GetStartedPage from '@/pages/GetStartedPage';
 import { useActivation } from '@/hooks/useActivation';
 import { enrollmentAction } from '@/lib/learningGate';
-import { hasDeepCourse } from '@/lib/courseContent';
-import DevicesPage from '@/pages/DevicesPage';
-import AdminCertificationsPage from '@/pages/AdminCertificationsPage';
-import AdminCourseHandbookPage from '@/pages/AdminCourseHandbookPage';
-import PetrophysicsLearningPage from '@/pages/apps/PetrophysicsLearningPage';
-import WellDataLearningPage from '@/pages/apps/WellDataLearningPage';
-import WellCorrelationLearningPage from '@/pages/apps/WellCorrelationLearningPage';
-import SeismolordLearningPage from '@/pages/apps/SeismolordLearningPage';
-import MappingLearningPage from '@/pages/apps/MappingLearningPage';
-import ReservoirCalcLearningPage from '@/pages/apps/ReservoirCalcLearningPage';
-import RockPhysicsLearningPage from '@/pages/apps/RockPhysicsLearningPage';
-import PorePressureLearningPage from '@/pages/apps/PorePressureLearningPage';
-import EarthModelLearningPage from '@/pages/apps/EarthModelLearningPage';
-import BasinLearningPage from '@/pages/apps/BasinLearningPage';
-import DcaLearningPage from '@/pages/apps/DcaLearningPage';
-import MbalLearningPage from '@/pages/apps/MbalLearningPage';
-import ScalLearningPage from '@/pages/apps/ScalLearningPage';
-import WaterfloodLearningPage from '@/pages/apps/WaterfloodLearningPage';
-import SimLearningPage from '@/pages/apps/SimLearningPage';
-import FluidLearningPage from '@/pages/apps/FluidLearningPage';
-import WellTestLearningPage from '@/pages/apps/WellTestLearningPage';
-import WellDesignLearningPage from '@/pages/apps/WellDesignLearningPage';
-import TorqueDragLearningPage from '@/pages/apps/TorqueDragLearningPage';
-import HydraulicsLearningPage from '@/pages/apps/HydraulicsLearningPage';
-import WellControlLearningPage from '@/pages/apps/WellControlLearningPage';
-import GeomechLearningPage from '@/pages/apps/GeomechLearningPage';
-import CasingTubingLearningPage from '@/pages/apps/CasingTubingLearningPage';
-import CementingLearningPage from '@/pages/apps/CementingLearningPage';
-import CompletionLearningPage from '@/pages/apps/CompletionLearningPage';
-import PerfsandLearningPage from '@/pages/apps/PerfsandLearningPage';
-import StimulationLearningPage from '@/pages/apps/StimulationLearningPage';
-import IntegrityLearningPage from '@/pages/apps/IntegrityLearningPage';
-import WellCostLearningPage from '@/pages/apps/WellCostLearningPage';
-import NodalLearningPage from '@/pages/apps/NodalLearningPage';
-import GasLiftLearningPage from '@/pages/apps/GasLiftLearningPage';
-import EspLearningPage from '@/pages/apps/EspLearningPage';
-import RodPumpLearningPage from '@/pages/apps/RodPumpLearningPage';
-import GasWellLearningPage from '@/pages/apps/GasWellLearningPage';
-import FlowAssuranceLearningPage from '@/pages/apps/FlowAssuranceLearningPage';
-import NetworkLearningPage from '@/pages/apps/NetworkLearningPage';
-import InterventionLearningPage from '@/pages/apps/InterventionLearningPage';
-import SurveillanceLearningPage from '@/pages/apps/SurveillanceLearningPage';
-import CashflowLearningPage from '@/pages/apps/CashflowLearningPage';
-import FiscalLearningPage from '@/pages/apps/FiscalLearningPage';
-import UncertaintyLearningPage from '@/pages/apps/UncertaintyLearningPage';
-import DecisionLearningPage from '@/pages/apps/DecisionLearningPage';
-import PortfolioLearningPage from '@/pages/apps/PortfolioLearningPage';
-import FdpLearningPage from '@/pages/apps/FdpLearningPage';
-import SeparationLearningPage from '@/pages/apps/SeparationLearningPage';
-import LineSizingLearningPage from '@/pages/apps/LineSizingLearningPage';
-import RotatingLearningPage from '@/pages/apps/RotatingLearningPage';
-import GasProcessingLearningPage from '@/pages/apps/GasProcessingLearningPage';
-import ReliefLearningPage from '@/pages/apps/ReliefLearningPage';
-import HeatTransferLearningPage from '@/pages/apps/HeatTransferLearningPage';
-import MeteringLearningPage from '@/pages/apps/MeteringLearningPage';
-import ProducedWaterLearningPage from '@/pages/apps/ProducedWaterLearningPage';
-import CorrosionLearningPage from '@/pages/apps/CorrosionLearningPage';
-import SafetyStatsLearningPage from '@/pages/apps/SafetyStatsLearningPage';
-import DataQcLearningPage from '@/pages/apps/DataQcLearningPage';
-import MlCoreLearningPage from '@/pages/apps/MlCoreLearningPage';
-import FaciesLearningPage from '@/pages/apps/FaciesLearningPage';
-import ForecastmlLearningPage from '@/pages/apps/ForecastmlLearningPage';
-import AppliedaiLearningPage from '@/pages/apps/AppliedaiLearningPage';
-import ProcurementLearningPage from '@/pages/apps/ProcurementLearningPage';
-import PiaLearningPage from '@/pages/apps/PiaLearningPage';
-import GsaLearningPage from '@/pages/apps/GsaLearningPage';
-import JoaLearningPage from '@/pages/apps/JoaLearningPage';
-import FarmoutLearningPage from '@/pages/apps/FarmoutLearningPage';
-import PrmsLearningPage from '@/pages/apps/PrmsLearningPage';
-import MaterialsLearningPage from '@/pages/apps/MaterialsLearningPage';
-import ContractsLearningPage from '@/pages/apps/ContractsLearningPage';
-import MarineLearningPage from '@/pages/apps/MarineLearningPage';
-import HygieneLearningPage from '@/pages/apps/HygieneLearningPage';
-import RiskChangeLearningPage from '@/pages/apps/RiskChangeLearningPage';
-import ComplianceLearningPage from '@/pages/apps/ComplianceLearningPage';
-import CrudeLearningPage from '@/pages/apps/CrudeLearningPage';
-import RefineryLearningPage from '@/pages/apps/RefineryLearningPage';
-import SupplyLearningPage from '@/pages/apps/SupplyLearningPage';
-import GasvalueLearningPage from '@/pages/apps/GasvalueLearningPage';
-import CarbonLearningPage from '@/pages/apps/CarbonLearningPage';
-import LopaLearningPage from '@/pages/apps/LopaLearningPage';
-import QraLearningPage from '@/pages/apps/QraLearningPage';
-import ConsequenceLearningPage from '@/pages/apps/ConsequenceLearningPage';
-import CourseHomePage from '@/pages/course/CourseHomePage';
-import ModulePage from '@/pages/course/ModulePage';
-import LessonPage from '@/pages/course/LessonPage';
-import ModuleQuizPage from '@/pages/course/ModuleQuizPage';
-import FinalExamPage from '@/pages/course/FinalExamPage';
-import CapstoneRedirect from '@/pages/course/CapstoneRedirect';
+import { hasDeepCourse } from '@/lib/courseIndex';
 import ActivationBanner from '@/components/academy/ActivationBanner';
-import SettingsPage from '@/pages/SettingsPage';
-import AdminUsersPage from '@/pages/AdminUsersPage';
-import AdminReportAnalyticsPage from '@/pages/AdminReportAnalyticsPage';
-import AdminAuditLogsPage from '@/pages/AdminAuditLogsPage';
-import AdminManagementPage from '@/pages/AdminManagementPage';
-import AdminSystemSettingsPage from '@/pages/AdminSystemSettingsPage';
-import SuperAdminToolPage from '@/pages/SuperAdminToolPage';
-import RealTimeMonitoringPage from '@/pages/RealTimeMonitoringPage';
-import NotificationCenterPage from '@/pages/NotificationCenterPage';
 import { listAcademyApps, listMyEnrollments, listMyCertifications } from '@/services/academyService';
 import { MODULE_LABELS, moduleLabel } from '@/lib/academyModules';
 import { courseNameFrom } from '@/lib/appNames';
+
+// Every sub-route is its own lazy chunk (2026-10-05): the learner home at
+// /dashboard needs none of them, and importing them here made the one
+// chunk behind /dashboard 16 MB. See src/pages/__tests__/DashboardPage.split.test.js.
+const EnrollPage = lazy(() => import('@/pages/EnrollPage'));
+const AdminAcademyDoorsPage = lazy(() => import('@/pages/AdminAcademyDoorsPage'));
+const SponsorConsolePage = lazy(() => import('@/pages/SponsorConsolePage'));
+const PrereqWaiverPage = lazy(() => import('@/pages/PrereqWaiverPage'));
+const GetStartedPage = lazy(() => import('@/pages/GetStartedPage'));
+const DevicesPage = lazy(() => import('@/pages/DevicesPage'));
+const AdminCertificationsPage = lazy(() => import('@/pages/AdminCertificationsPage'));
+const AdminCourseHandbookPage = lazy(() => import('@/pages/AdminCourseHandbookPage'));
+const PetrophysicsLearningPage = lazy(() => import('@/pages/apps/PetrophysicsLearningPage'));
+const WellDataLearningPage = lazy(() => import('@/pages/apps/WellDataLearningPage'));
+const WellCorrelationLearningPage = lazy(() => import('@/pages/apps/WellCorrelationLearningPage'));
+const SeismolordLearningPage = lazy(() => import('@/pages/apps/SeismolordLearningPage'));
+const MappingLearningPage = lazy(() => import('@/pages/apps/MappingLearningPage'));
+const ReservoirCalcLearningPage = lazy(() => import('@/pages/apps/ReservoirCalcLearningPage'));
+const RockPhysicsLearningPage = lazy(() => import('@/pages/apps/RockPhysicsLearningPage'));
+const PorePressureLearningPage = lazy(() => import('@/pages/apps/PorePressureLearningPage'));
+const EarthModelLearningPage = lazy(() => import('@/pages/apps/EarthModelLearningPage'));
+const BasinLearningPage = lazy(() => import('@/pages/apps/BasinLearningPage'));
+const DcaLearningPage = lazy(() => import('@/pages/apps/DcaLearningPage'));
+const MbalLearningPage = lazy(() => import('@/pages/apps/MbalLearningPage'));
+const ScalLearningPage = lazy(() => import('@/pages/apps/ScalLearningPage'));
+const WaterfloodLearningPage = lazy(() => import('@/pages/apps/WaterfloodLearningPage'));
+const SimLearningPage = lazy(() => import('@/pages/apps/SimLearningPage'));
+const FluidLearningPage = lazy(() => import('@/pages/apps/FluidLearningPage'));
+const WellTestLearningPage = lazy(() => import('@/pages/apps/WellTestLearningPage'));
+const WellDesignLearningPage = lazy(() => import('@/pages/apps/WellDesignLearningPage'));
+const TorqueDragLearningPage = lazy(() => import('@/pages/apps/TorqueDragLearningPage'));
+const HydraulicsLearningPage = lazy(() => import('@/pages/apps/HydraulicsLearningPage'));
+const WellControlLearningPage = lazy(() => import('@/pages/apps/WellControlLearningPage'));
+const GeomechLearningPage = lazy(() => import('@/pages/apps/GeomechLearningPage'));
+const CasingTubingLearningPage = lazy(() => import('@/pages/apps/CasingTubingLearningPage'));
+const CementingLearningPage = lazy(() => import('@/pages/apps/CementingLearningPage'));
+const CompletionLearningPage = lazy(() => import('@/pages/apps/CompletionLearningPage'));
+const PerfsandLearningPage = lazy(() => import('@/pages/apps/PerfsandLearningPage'));
+const StimulationLearningPage = lazy(() => import('@/pages/apps/StimulationLearningPage'));
+const IntegrityLearningPage = lazy(() => import('@/pages/apps/IntegrityLearningPage'));
+const WellCostLearningPage = lazy(() => import('@/pages/apps/WellCostLearningPage'));
+const NodalLearningPage = lazy(() => import('@/pages/apps/NodalLearningPage'));
+const GasLiftLearningPage = lazy(() => import('@/pages/apps/GasLiftLearningPage'));
+const EspLearningPage = lazy(() => import('@/pages/apps/EspLearningPage'));
+const RodPumpLearningPage = lazy(() => import('@/pages/apps/RodPumpLearningPage'));
+const GasWellLearningPage = lazy(() => import('@/pages/apps/GasWellLearningPage'));
+const FlowAssuranceLearningPage = lazy(() => import('@/pages/apps/FlowAssuranceLearningPage'));
+const NetworkLearningPage = lazy(() => import('@/pages/apps/NetworkLearningPage'));
+const InterventionLearningPage = lazy(() => import('@/pages/apps/InterventionLearningPage'));
+const SurveillanceLearningPage = lazy(() => import('@/pages/apps/SurveillanceLearningPage'));
+const CashflowLearningPage = lazy(() => import('@/pages/apps/CashflowLearningPage'));
+const FiscalLearningPage = lazy(() => import('@/pages/apps/FiscalLearningPage'));
+const UncertaintyLearningPage = lazy(() => import('@/pages/apps/UncertaintyLearningPage'));
+const DecisionLearningPage = lazy(() => import('@/pages/apps/DecisionLearningPage'));
+const PortfolioLearningPage = lazy(() => import('@/pages/apps/PortfolioLearningPage'));
+const FdpLearningPage = lazy(() => import('@/pages/apps/FdpLearningPage'));
+const SeparationLearningPage = lazy(() => import('@/pages/apps/SeparationLearningPage'));
+const LineSizingLearningPage = lazy(() => import('@/pages/apps/LineSizingLearningPage'));
+const RotatingLearningPage = lazy(() => import('@/pages/apps/RotatingLearningPage'));
+const GasProcessingLearningPage = lazy(() => import('@/pages/apps/GasProcessingLearningPage'));
+const ReliefLearningPage = lazy(() => import('@/pages/apps/ReliefLearningPage'));
+const HeatTransferLearningPage = lazy(() => import('@/pages/apps/HeatTransferLearningPage'));
+const MeteringLearningPage = lazy(() => import('@/pages/apps/MeteringLearningPage'));
+const ProducedWaterLearningPage = lazy(() => import('@/pages/apps/ProducedWaterLearningPage'));
+const CorrosionLearningPage = lazy(() => import('@/pages/apps/CorrosionLearningPage'));
+const SafetyStatsLearningPage = lazy(() => import('@/pages/apps/SafetyStatsLearningPage'));
+const DataQcLearningPage = lazy(() => import('@/pages/apps/DataQcLearningPage'));
+const MlCoreLearningPage = lazy(() => import('@/pages/apps/MlCoreLearningPage'));
+const FaciesLearningPage = lazy(() => import('@/pages/apps/FaciesLearningPage'));
+const ForecastmlLearningPage = lazy(() => import('@/pages/apps/ForecastmlLearningPage'));
+const AppliedaiLearningPage = lazy(() => import('@/pages/apps/AppliedaiLearningPage'));
+const ProcurementLearningPage = lazy(() => import('@/pages/apps/ProcurementLearningPage'));
+const PiaLearningPage = lazy(() => import('@/pages/apps/PiaLearningPage'));
+const GsaLearningPage = lazy(() => import('@/pages/apps/GsaLearningPage'));
+const JoaLearningPage = lazy(() => import('@/pages/apps/JoaLearningPage'));
+const FarmoutLearningPage = lazy(() => import('@/pages/apps/FarmoutLearningPage'));
+const PrmsLearningPage = lazy(() => import('@/pages/apps/PrmsLearningPage'));
+const MaterialsLearningPage = lazy(() => import('@/pages/apps/MaterialsLearningPage'));
+const ContractsLearningPage = lazy(() => import('@/pages/apps/ContractsLearningPage'));
+const MarineLearningPage = lazy(() => import('@/pages/apps/MarineLearningPage'));
+const HygieneLearningPage = lazy(() => import('@/pages/apps/HygieneLearningPage'));
+const RiskChangeLearningPage = lazy(() => import('@/pages/apps/RiskChangeLearningPage'));
+const ComplianceLearningPage = lazy(() => import('@/pages/apps/ComplianceLearningPage'));
+const CrudeLearningPage = lazy(() => import('@/pages/apps/CrudeLearningPage'));
+const RefineryLearningPage = lazy(() => import('@/pages/apps/RefineryLearningPage'));
+const SupplyLearningPage = lazy(() => import('@/pages/apps/SupplyLearningPage'));
+const GasvalueLearningPage = lazy(() => import('@/pages/apps/GasvalueLearningPage'));
+const CarbonLearningPage = lazy(() => import('@/pages/apps/CarbonLearningPage'));
+const LopaLearningPage = lazy(() => import('@/pages/apps/LopaLearningPage'));
+const QraLearningPage = lazy(() => import('@/pages/apps/QraLearningPage'));
+const ConsequenceLearningPage = lazy(() => import('@/pages/apps/ConsequenceLearningPage'));
+const CourseHomePage = lazy(() => import('@/pages/course/CourseHomePage'));
+const ModulePage = lazy(() => import('@/pages/course/ModulePage'));
+const LessonPage = lazy(() => import('@/pages/course/LessonPage'));
+const ModuleQuizPage = lazy(() => import('@/pages/course/ModuleQuizPage'));
+const FinalExamPage = lazy(() => import('@/pages/course/FinalExamPage'));
+const CapstoneRedirect = lazy(() => import('@/pages/course/CapstoneRedirect'));
+const SettingsPage = lazy(() => import('@/pages/SettingsPage'));
+const AdminUsersPage = lazy(() => import('@/pages/AdminUsersPage'));
+const AdminReportAnalyticsPage = lazy(() => import('@/pages/AdminReportAnalyticsPage'));
+const AdminAuditLogsPage = lazy(() => import('@/pages/AdminAuditLogsPage'));
+const AdminManagementPage = lazy(() => import('@/pages/AdminManagementPage'));
+const AdminSystemSettingsPage = lazy(() => import('@/pages/AdminSystemSettingsPage'));
+const SuperAdminToolPage = lazy(() => import('@/pages/SuperAdminToolPage'));
+const RealTimeMonitoringPage = lazy(() => import('@/pages/RealTimeMonitoringPage'));
+const NotificationCenterPage = lazy(() => import('@/pages/NotificationCenterPage'));
 
 // --- Role Specific Home Components ---
 //
@@ -224,6 +227,30 @@ const YourCourses = ({ enrollments, apps, isLearner, activation }) => {
     );
 };
 
+// Placeholders while the academy reads land: the page frame paints at once
+// and each section fills in as its data arrives.
+const CountSkeleton = () => (
+    <span role="status" aria-label="Loading" className="inline-block h-7 w-8 animate-pulse rounded bg-pl-raised align-middle" />
+);
+
+const CatalogSkeleton = () => (
+    <div role="status" aria-label="Loading your courses" className="rounded-lg border border-pl-border bg-pl-surface p-6 shadow-pl-sm">
+        <div className="h-5 w-40 animate-pulse rounded bg-pl-raised mb-4" />
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {[0, 1, 2].map((i) => <div key={i} className="h-14 animate-pulse rounded-md bg-pl-raised" />)}
+        </div>
+    </div>
+);
+
+// Shown while a sub-route's chunk downloads; the sidebar and header stay.
+const RouteSkeleton = () => (
+    <div role="status" aria-label="Loading page" className="space-y-4 px-4 py-8 md:px-8 md:py-10">
+        <div className="h-8 w-64 animate-pulse rounded bg-pl-raised" />
+        <div className="h-4 w-96 max-w-full animate-pulse rounded bg-pl-raised" />
+        <div className="h-48 animate-pulse rounded-lg bg-pl-raised" />
+    </div>
+);
+
 const StudentHome = () => {
     const { user, profile } = useAuth();
     const { isViewAsStudent } = useRole();
@@ -232,29 +259,35 @@ const StudentHome = () => {
     const [enrollments, setEnrollments] = React.useState([]);
     const [certs, setCerts] = React.useState([]);
     const [loading, setLoading] = React.useState(true);
+    const [loadFailed, setLoadFailed] = React.useState(false);
+    const [attempt, setAttempt] = React.useState(0);
 
+    // The three reads run in parallel and each lands on its own: one slow or
+    // failed read no longer blanks the others, and a failure offers a retry
+    // instead of an empty page (every read has a time limit, see
+    // src/lib/fetchWithTimeout.js).
     React.useEffect(() => {
         if (!user) return;
         let cancelled = false;
+        setLoading(true);
+        setLoadFailed(false);
         (async () => {
-            try {
-                const [appList, enrollList, certList] = await Promise.all([
-                    listAcademyApps(),
-                    listMyEnrollments(),
-                    listMyCertifications(),
-                ]);
-                if (cancelled) return;
-                setApps(appList || []);
-                setEnrollments(enrollList || []);
-                setCerts(certList || []);
-            } catch (err) {
-                console.error('Failed to load academy dashboard:', err);
-            } finally {
-                if (!cancelled) setLoading(false);
-            }
+            const [appRes, enrollRes, certRes] = await Promise.allSettled([
+                listAcademyApps(),
+                listMyEnrollments(),
+                listMyCertifications(),
+            ]);
+            if (cancelled) return;
+            if (appRes.status === 'fulfilled') setApps(appRes.value || []);
+            if (enrollRes.status === 'fulfilled') setEnrollments(enrollRes.value || []);
+            if (certRes.status === 'fulfilled') setCerts(certRes.value || []);
+            const failed = [appRes, enrollRes, certRes].filter((r) => r.status === 'rejected');
+            if (failed.length) console.error('Failed to load academy dashboard:', failed[0].reason);
+            setLoadFailed(failed.length > 0);
+            setLoading(false);
         })();
         return () => { cancelled = true; };
-    }, [user]);
+    }, [user, attempt]);
 
     const activeEnrollments = enrollments.filter((e) => e.status === 'active');
     const liveCerts = certs.filter((c) => !c.revoked_at && (!c.valid_until || new Date(c.valid_until) > new Date()));
@@ -291,7 +324,7 @@ const StudentHome = () => {
                     <GraduationCap className="h-4 w-4 text-pl-primary-text" aria-hidden="true" />
                 </CardHeader>
                 <CardContent>
-                    <div className="text-2xl font-bold text-pl-text tabular-nums">{loading ? '—' : activeEnrollments.length}</div>
+                    <div className="text-2xl font-bold text-pl-text tabular-nums">{loading ? <CountSkeleton /> : activeEnrollments.length}</div>
                     <p className="text-xs text-pl-muted">Courses you can work in right now</p>
                 </CardContent>
             </Card>
@@ -301,7 +334,7 @@ const StudentHome = () => {
                     <Award className="h-4 w-4 text-pl-accent-text" aria-hidden="true" />
                 </CardHeader>
                 <CardContent>
-                    <div className="text-2xl font-bold text-pl-text tabular-nums">{loading ? '—' : liveCerts.length}</div>
+                    <div className="text-2xl font-bold text-pl-text tabular-nums">{loading ? <CountSkeleton /> : liveCerts.length}</div>
                     <p className="text-xs text-pl-muted">Valid certifications on your account</p>
                 </CardContent>
             </Card>
@@ -319,6 +352,18 @@ const StudentHome = () => {
                 </CardContent>
             </Card>
         </div>
+
+        {loadFailed && (
+            <div role="alert" className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-pl-danger/40 bg-pl-danger-bg p-4">
+                <div>
+                    <p className="font-medium text-pl-danger-text">We could not load all of your courses.</p>
+                    <p className="text-sm text-pl-muted">The connection is slow or dropped. Your progress is safe; try again.</p>
+                </div>
+                <Button size="sm" variant="outline" onClick={() => setAttempt((n) => n + 1)}>Try again</Button>
+            </div>
+        )}
+
+        {loading && <CatalogSkeleton />}
 
         <YourCourses
             enrollments={[...activeEnrollments].sort((a, b) => new Date(b.created_at) - new Date(a.created_at))}
@@ -404,6 +449,7 @@ const DashboardPage = () => {
   };
 
   return (
+    <Suspense fallback={<RouteSkeleton />}>
     <Routes>
     {/* The Index Route determines the Dashboard Landing Page */}
     <Route path="/" element={renderHome()} />
@@ -533,6 +579,7 @@ const DashboardPage = () => {
     {/* Fallback */}
     <Route path="*" element={<Navigate to="/dashboard" replace />} />
     </Routes>
+    </Suspense>
   );
 };
 

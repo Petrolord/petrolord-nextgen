@@ -19,7 +19,14 @@ import GlobalSearchModal from '@/components/search/GlobalSearchModal';
 import DeviceGuard from '@/components/academy/DeviceGuard';
 
 // Lazy Load Pages
-const DashboardPage = lazy(() => import('@/pages/DashboardPage'));
+// The dashboard chunk starts downloading as soon as the app boots on a
+// /dashboard URL, in parallel with the session restore and profile read,
+// instead of after them (2026-10-05 load fix).
+const preloadDashboard = () => import('@/pages/DashboardPage');
+const DashboardPage = lazy(preloadDashboard);
+if (typeof window !== 'undefined' && /^\/dashboard(\/|$)/.test(window.location.pathname)) {
+  preloadDashboard().catch(() => {});
+}
 const RegisterPage = lazy(() => import('@/pages/RegisterPage'));
 const VerifyCertificatePage = lazy(() => import('@/pages/VerifyCertificatePage'));
 const AcademyCertificatesPage = lazy(() => import('@/pages/AcademyCertificatesPage'));
