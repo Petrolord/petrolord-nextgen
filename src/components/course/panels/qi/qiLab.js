@@ -238,6 +238,7 @@ export function timeWindow(traces, { t0Ms, t1Ms, dtMs = QC_CLOCK.dtMs, startMs =
 
 /** The mean spectrum of traces and its peak, centroid and band edges. */
 export function spectrum(traces, dtMs, { taper } = {}) {
+  if (traces && traces.error) return traces;
   return attempt(() => {
     const s = averageSpectrum(traces, dtMs, { taper });
     const st = spectrumStats(s);
@@ -418,6 +419,8 @@ export function wetTrend(well, fluids, { blockFt = EKENE.trendBlockFt } = {}) {
 
 /** Shuey's intercept and gradient of one interface (upper over lower layer). */
 export function interfaceAB(upper, lower) {
+  if (!upper || upper.error) return upper || { error: 'No upper layer.' };
+  if (!lower || lower.error) return lower || { error: 'No lower layer.' };
   return attempt(() => {
     const r = shuey(upper.vp, upper.vs, upper.rho, lower.vp, lower.vs, lower.rho, 0);
     return { a: r.a, b: r.b, c: r.c };
