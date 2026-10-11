@@ -21,6 +21,7 @@ import { extractWellWavelet } from '@suite/pages/apps/Seismolord/lib/wellWavelet
 
 const X = E.EXPERT;
 const fin = Number.isFinite;
+const fv = (x) => (fin(x) ? f6(x) : 'NaN');
 const ms = (S, i) => S.win.t0Ms + i * S.win.dtMs;
 const ft = (m) => f6(m / 0.3048);
 const covered = (log) => log.lnAi.map((v, i) => (fin(v) ? i : -1)).filter((i) => i >= 0);
@@ -346,7 +347,9 @@ ${table(['quantity', 'value'], [
     ['s, the log-against-log residual error', f6(cal.summary.s)], ['pooled left-out RMS', f6(cal.summary.sLoo)], ['s_extra, the widening', f6(cal.summary.sExtra)],
   ])}
 
-${table(['well left out', 'samples', 'RMS porosity error', 'bias', 'correlation', 'share inside the widened 80 percent band'], cal.rows.map((r) => (r.error ? [r.name, r.error, '', '', '', ''] : [r.name, whole(r.n), f6(r.rms), f6(r.bias), f6(r.corr), f6(r.coverage)])))}`));
+A correlation over too few samples with no spread prints as NaN, which is the engine's own result.
+
+${table(['well left out', 'samples', 'RMS porosity error', 'bias', 'correlation', 'share inside the widened 80 percent band'], cal.rows.map((r) => (r.error ? [r.name, r.error, '', '', '', ''] : [r.name, whole(r.n), fv(r.rms), fv(r.bias), fv(r.corr), fv(r.coverage)])))}`));
 
   /* ------------------------------------------------------------ 57 */
   const counts = {}; for (const s of logS) counts[s.facies] = (counts[s.facies] || 0) + 1;

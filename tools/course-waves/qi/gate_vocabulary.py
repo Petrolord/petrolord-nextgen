@@ -53,7 +53,7 @@ RULES = [
         r'\bthe (?:correct|right|true) (?:reading|rule|formula|interpretation)\b', re.I)),
     ('a hidden default claimed', re.compile(r'\bdefaults? to\b|\bby default\b|\bdefault value\b', re.I)),
     ('a source quoted', re.compile(
-        r'\b(?:Batzle|Wang|Gassmann|Greenberg|Castagna|Shuey|Rutherford|Williams|Hatton|Worthington|Makin|Goodway|Zoeppritz|Dvorkin|Wood|Hill|Walden|Dix|Fatti|Gidlow|Connolly|Whitcombe|Aki|Richards|the paper|the book|the article)\b[^\n"]{0,40}\b(?:say|says|said|state|states|stated|reads|read|define|defines|write|writes|puts it|put it|in (?:its|their) (?:own )?words)\b[^\n"]{0,20}"', re.I)),
+        r'\b(?:Batzle|Wang|Gassmann|Greenberg|Castagna|Shuey|Rutherford|Williams|Hatton|Worthington|Makin|Goodway|Zoeppritz|Dvorkin|Wood|Hill|Walden|Dix|Fatti|Gidlow|Connolly|Whitcombe|Aki|Richards|the paper|the book|the article)\b[^\n"]{0,40}\b(?:say|says|said|state|states|reads|define|defines|write|writes|puts it|put it|in (?:its|their) (?:own )?words)\b[^\n"]{0,20}"', re.I)),
     ('an AI claim', re.compile(r'AI-powered|artificial intelligence', re.I)),
 ]
 REPORT = [
