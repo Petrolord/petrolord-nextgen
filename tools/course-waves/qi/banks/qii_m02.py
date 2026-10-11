@@ -76,7 +76,7 @@ q(0, "A well ties with a non-zero bulk shift. What does that do to the times com
  ["Nothing: the committed time is always the checkshot time, whatever shift the tie found.",
   "It moves only the top of the reservoir, the one event the tie was matched on.",
   "It scales each in proportion to depth."],
- "With a bulk shift of zero, as at Ekene-1 and Ekene-3, the committed time is the checkshot time; a non-zero shift moves every time below by the same amount. Ekene-2 and Ekene-4 tied at -4.000000 ms, one sample.")
+ "With a bulk shift of zero, as at Ekene-1 and Ekene-3, the committed time is the checkshot time; a bulk shift is the single-anchor warp, adding the shift to the seismic time of every depth on the tie and leaving the imported checkshot rows as they were. Ekene-2 and Ekene-4 tied at -4.000000 ms, one sample.")
 
 q(1, "How does compareWavelets measure the similarity of two wavelets?",
  "After aligning by the lag of largest correlation, up to 5 samples, and scaling to unit energy, as the zero-lag correlation.",

@@ -31,7 +31,7 @@ The table says nothing about phase: every statistical wavelet is zero phase by c
 
 ## The wavelet from the well
 
-The second wavelet is the least-squares (Wiener) wavelet that best convolves the well's reflectivity into the trace at the well, so its phase is measured. It is Seismolord app code, and it needs a log long enough for the wavelet asked for.
+The second wavelet is the least-squares (Wiener) wavelet that best convolves the well's reflectivity into the trace at the well, so its phase is measured. It runs in the engines, beside Seismolord's synthetics, and it needs a log long enough for the wavelet asked for.
 
 ## Why the pack refuses it
 

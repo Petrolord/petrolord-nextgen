@@ -164,7 +164,7 @@ q(3, "The Ekene crossline stripe reports 8.500000 cycles at a period of 15.05882
 q(0, "The designed teaching stripe multiplies every sixth crossline by 1.2. What does the search along the inlines return on that slice?",
  "A period of 13.473684 lines, share 0.014803 and no footprint: the axis the stripe was not added to does not move.",
  ["A period of 5.953488 lines with share 0.490123, because a gain stripe on one axis shows equally on the other.",
-  "A refusal, since a slice with a stripe added by hand no longer meets the engine's minimum of 4 by 4.",
+  "A refusal, since a slice with a stripe added by hand falls short of the engine's minimum of 4 by 4.",
   "A period of six lines exactly, share above 0.3, called a footprint on both axes by the rule."],
  "Along the crosslines the designed stripe is found at 5.953488 lines with share 0.490123 and prominence 467.977933. Along the inlines the slice still reads 13.473684 lines and a share of a few hundredths.")
 

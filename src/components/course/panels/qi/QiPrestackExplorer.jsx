@@ -489,14 +489,8 @@ const AvoView = ({ data, gather, s, set }) => {
 };
 
 const WellsView = ({ data, s, set }) => {
-  const rows = data.kind === 'case'
-    ? data.wells.map((w) => [w.name, six(w.modelled && w.modelled.A), six(w.modelled && w.modelled.B), six(w.observed && w.observed.A), six(w.observed && w.observed.B)])
-    : WELLS.map((w) => {
-      const o = P.observedAtWell(w, { anglesDeg: list(s.stackAngles), halfWindowMs: num(s.pickHalf) });
-      const m = P.modelledAtWell(w);
-      if (o.error || m.error) return [w, o.error || m.error, '', '', ''];
-      return [w, six(m.A), six(m.B), six(o.A), six(o.B)];
-    });
+  const opts = { anglesDeg: list(s.stackAngles), halfWindowMs: num(s.pickHalf) };
+  const cmp = data.kind === 'case' ? P.avoAtWells(data.wells) : P.packAvoAtWells(opts);
   return (
     <>
       {data.kind === 'pack' && (
@@ -505,13 +499,21 @@ const WellsView = ({ data, s, set }) => {
           <NumField label="Pick half window, ms (stated)" value={s.pickHalf} onChange={set('pickHalf')} />
         </FieldGrid>
       )}
-      <Tbl head={['well', 'modelled A', 'modelled B', 'seismic A', 'seismic B']} rows={rows} />
+      {cmp.error ? <Refusal text={cmp.error} /> : (
+        <>
+          <TileGrid>
+            <Tile label="One scale over every well" value={six(cmp.scale)} unit="trace units per unit reflection coefficient" />
+            <Tile label="Wells compared" value={String(cmp.n)} />
+            <Tile label="Wells whose classes agree" value={String(cmp.agree)} />
+          </TileGrid>
+          <Tbl head={['well', 'modelled A', 'modelled B', 'seismic A', 'seismic B', 'scaled seismic A', 'scaled seismic B', 'residual', 'modelled class', 'seismic class']}
+            rows={cmp.wells.map((w) => (w.error
+              ? [w.name, w.error, '', '', '', '', '', '', '', '']
+              : [w.name, six(w.modelled.A), six(w.modelled.B), six(w.observed.A), six(w.observed.B), six(w.scaled.A), six(w.scaled.B), six(w.residual), w.modelledClass, w.observedClass]))} />
+        </>
+      )}
       {data.kind === 'pack' && <Note>Modelled: the cap rock over the oil leg at each well, or over its net sand where it has no oil leg. Seismic: the top picked on the near stack trace about its checkshot time, the near, mid and far traces read at that sample and fitted with two Shuey terms.</Note>}
-      <Declared title="THE ONE SCALE ARRIVES IN QI STUDIO">
-        The least-squares scale that ties the seismic amplitudes to the modelled reflection coefficients over every well,
-        and each well&apos;s residual and class agreement, are computed by QI Studio&apos;s AVO at the wells. That calculation
-        is app code in the Suite today, so this explorer prints the inputs above and no scale.
-      </Declared>
+      <Note>The scale is sum(observed x modelled) over sum(modelled squared), A and B together over every well (compareAtWells, the function QI Studio runs). Each well&apos;s seismic A and B are divided by it; the residual is the distance between the scaled point and the modelled one, and the classes use the 0.02 band.</Note>
     </>
   );
 };

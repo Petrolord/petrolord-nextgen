@@ -12,7 +12,11 @@ import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import QiFeasibilityExplorer from './QiFeasibilityExplorer.jsx';
 import { GRADED_FIELDS, gradedTolerance } from './gradedTolerance.js';
-import { associateFigures, readCaseText, qiWaveInput } from './qiCaseFigures.testkit.js';
+import { associateFigures, professionalFigures, readCaseText, qiWaveInput } from './qiCaseFigures.testkit.js';
+import QiPrestackExplorer from './QiPrestackExplorer.jsx';
+import QiInversionExplorer from './QiInversionExplorer.jsx';
+import QiProspectExplorer from './QiProspectExplorer.jsx';
+import { expertFigures } from './qiCaseFigures.testkit.js';
 
 const CASE_TEXT = readCaseText('tamberlo');
 const FIG = associateFigures(JSON.parse(CASE_TEXT));
@@ -51,7 +55,7 @@ const render = (mode, initialText) => renderToStaticMarkup(React.createElement(Q
 
 describe('EVERY GRADED QI FIELD IS READABLE OFF A PANEL', () => {
   it('names a reader for every graded field and nothing else', () => {
-    expect(Object.keys(WHERE).sort()).toEqual(GRADED_FIELDS.map((f) => f[1]).sort());
+    expect([...Object.keys(WHERE), ...Object.keys(WHERE_PRO), ...Object.keys(WHERE_EXP)].sort()).toEqual(GRADED_FIELDS.map((f) => f[1]).sort());
   });
 
   it('each field read from the panel with the case pasted lands within its tolerance', () => {
@@ -71,12 +75,12 @@ describe('EVERY GRADED QI FIELD IS READABLE OFF A PANEL', () => {
       console.log(`[qi readable] fields.json not cross-checked: ${src.missing}`);
       return;
     }
-    const fields = JSON.parse(fs.readFileSync(src.path, 'utf8')).filter((f) => f[0] === 'beginner');
+    const fields = JSON.parse(fs.readFileSync(src.path, 'utf8'));
     console.log(`[qi readable] fields.json read from ${src.from}`);
-    expect(fields.length).toBe(6);
+    expect(fields.length).toBe(18);
     fields.forEach(([, key, value, tol]) => {
       expect(tol).toBe(gradedTolerance(key));
-      expect(Math.abs(value - FIG[key]), key).toBeLessThanOrEqual(1e-9);
+      expect(Math.abs(value - (FIG[key] ?? FIG_PRO[key] ?? FIG_EXP[key])), key).toBeLessThanOrEqual(1e-9);
     });
   });
 
@@ -85,6 +89,77 @@ describe('EVERY GRADED QI FIELD IS READABLE OFF A PANEL', () => {
     for (const [key, [mode, how]] of Object.entries(WHERE)) {
       const shown = how(render(mode, null));
       if (Math.abs(Number(shown) - FIG[key]) > gradedTolerance(key)) missed += 1;
+    }
+    expect(missed).toBe(6);
+  });
+});
+
+// THE PROFESSIONAL FIELDS, read off the prestack explorer with the QUARVIN case
+// pasted the way a learner pastes it.
+const PRO_TEXT = readCaseText('quarvin');
+const FIG_PRO = professionalFigures(JSON.parse(PRO_TEXT));
+const PQ = JSON.parse(PRO_TEXT).stated;
+const WHERE_PRO = {
+  quarvin_dix_vint: ['velocity', (h) => tile(h, `Dix interval velocity, ${PQ.dixLayer.fromMs} to ${PQ.dixLayer.toMs} ms`)],
+  quarvin_walden_deg: ['velocity', (h) => tile(h, 'Walden angle at the offset and time')],
+  quarvin_nmo_stretch: ['velocity', (h) => tile(h, 'NMO stretch at the offset and time')],
+  quarvin_far_stack_amp: ['angles', (h) => tile(h, `Partial stack, bins ${PQ.farBins[0]} up to ${PQ.farBins[1]}`)],
+  quarvin_shuey_a: ['avo', (h) => tile(h, 'Intercept A at the sample')],
+  quarvin_one_scale: ['wells', (h) => tile(h, 'One scale over every well')],
+};
+const renderPro = (mode, initialText) => renderToStaticMarkup(React.createElement(QiPrestackExplorer, { initialMode: mode, initialText }));
+
+describe('EVERY GRADED PROFESSIONAL FIELD IS READABLE OFF THE PRESTACK EXPLORER', () => {
+  it('each field read from the panel with the case pasted lands within its tolerance', () => {
+    for (const [key, [mode, how]] of Object.entries(WHERE_PRO)) {
+      const shown = how(renderPro(mode, PRO_TEXT));
+      expect(shown, key).toMatch(/^-?\d+\.\d{6}$/);
+      expect(Math.abs(Number(shown) - FIG_PRO[key]), `${key}: panel ${shown}, lab ${FIG_PRO[key]}`).toBeLessThanOrEqual(gradedTolerance(key));
+    }
+  });
+
+  it('NEGATIVE CONTROL: the same readers on the Ekene pack miss every case figure', () => {
+    let missed = 0;
+    for (const [key, [mode, how]] of Object.entries(WHERE_PRO)) {
+      let shown = 'none';
+      try { shown = how(renderPro(mode, null)); } catch { shown = 'none'; }
+      if (!(Math.abs(Number(shown) - FIG_PRO[key]) <= gradedTolerance(key))) missed += 1;
+    }
+    expect(missed).toBe(6);
+  });
+});
+
+// THE EXPERT FIELDS, read off the inversion and prospect explorers with the
+// DELSHOLM case pasted the way a learner pastes it.
+const EXP_TEXT = readCaseText('delsholm');
+const FIG_EXP = expertFigures(JSON.parse(EXP_TEXT));
+const DS = JSON.parse(EXP_TEXT).stated;
+const six6 = (v) => v.toFixed(6);
+const WHERE_EXP = {
+  delsholm_lfm_lnai_b: ['inv', 'lfm', (h) => tile(h, 'LFM ln(AI) at the stated sample')],
+  delsholm_mb_ai: ['inv', 'modelBased', (h) => tile(h, 'Inverted AI at the stated sample')],
+  delsholm_sim_vpvs: ['inv', 'simultaneous', (h) => tile(h, 'Vp/Vs at the stated sample')],
+  delsholm_phi_q90: ['pros', 'transform', (h) => cell(h, 'high end of the interval', six6(DS.porosity.atAi))],
+  delsholm_p_oil: ['pros', 'facies', (h) => cell(h, `P(${DS.facies.class})`, six6(DS.facies.atAi))],
+  delsholm_column_ft: ['pros', 'closure', (h) => tile(h, 'Column from crest to spill')],
+};
+const renderExp = (panel, mode, initialText) => renderToStaticMarkup(React.createElement(panel === 'inv' ? QiInversionExplorer : QiProspectExplorer, { initialMode: mode, initialText }));
+
+describe('EVERY GRADED EXPERT FIELD IS READABLE OFF THE INVERSION AND PROSPECT EXPLORERS', () => {
+  it('each field read from the panel with the case pasted lands within its tolerance', () => {
+    for (const [key, [panel, mode, how]] of Object.entries(WHERE_EXP)) {
+      const shown = how(renderExp(panel, mode, EXP_TEXT));
+      expect(shown, key).toMatch(/^-?\d+\.\d{6}$/);
+      expect(Math.abs(Number(shown) - FIG_EXP[key]), `${key}: panel ${shown}, lab ${FIG_EXP[key]}`).toBeLessThanOrEqual(gradedTolerance(key));
+    }
+  });
+
+  it('NEGATIVE CONTROL: the same readers on the Ekene pack miss every case figure', () => {
+    let missed = 0;
+    for (const [key, [panel, mode, how]] of Object.entries(WHERE_EXP)) {
+      let shown = 'none';
+      try { shown = how(renderExp(panel, mode, null)); } catch { shown = 'none'; }
+      if (!(Math.abs(Number(shown) - FIG_EXP[key]) <= gradedTolerance(key))) missed += 1;
     }
     expect(missed).toBe(6);
   });

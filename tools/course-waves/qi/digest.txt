@@ -55,6 +55,12 @@ THE RULE THIS COURSE FOLLOWS. Every method is named with its authors and year, t
 | exact reflection coefficients | Zoeppritz, in the form of Dvorkin and others (2014) | avo.js | by concept |
 | signal to noise from coherency | Hatton, Worthington and Makin (1986), Seismic Data Processing, section 4.4 | seismicQc.js | by equation |
 | lambda-rho and mu-rho | Goodway, Chen and Downton (1997) | elasticSet.js | by equation |
+| the post-stack and prestack operators | Ravasi and Vasconcelos (2020), SoftwareX 11 (pylops) | inversion.js, prestackInversion.js | by concept |
+| sparse reflectivity by FISTA | Beck and Teboulle (2009), SIAM Journal on Imaging Sciences 2 | inversion.js | by equation |
+| coloured inversion | Lancaster and Whitcombe (2000), SEG Expanded Abstracts | inversion.js | by concept |
+| quantiles of realisations | Hyndman and Fan (1996), The American Statistician 50, type 7 | inversionSpread.js | by equation |
+| simultaneous inversion | Fatti and others (1994), Geophysics 59 | prestackInversion.js | by equation |
+| Bayesian facies from impedance | Avseth, Mukerji and Mavko (2005), Quantitative Seismic Interpretation, chapter 4 | propertyPrediction.js | by concept |
 
 The Rock Physics course teaches Batzle-Wang, Gassmann, Greenberg-Castagna, Shuey, the classes and exact Zoeppritz in full. This course recaps each in one lesson and applies it to the QI questions.
 
@@ -525,6 +531,8 @@ The Associate tier asked whether the seismic can see the fluid, from logs and on
 | engines/qi/prestack.js | `binOffsets`, `dixInterval`, `velocityOnGrid`, `waldenAngle`, `rayTraceAngle`, `angleGather`, `partialStack`, `usableAngle` | gathers, angles and angle stacks |
 | engines/qi/prestackQc.js | `nmoStretch`, `stretchMuteOffset`, `residualMoveout`, `foldSummary` | gather QC |
 | engines/qi/avo.js | `fitShuey`, `contrastsFromAB`, `backgroundTrend`, `offTrend`, `chiProjection`, `avoClass` | AVO on the seismic |
+| engines/seismolord/wellWavelet.js | `extractWellWavelet` | the wavelet from the well |
+| engines/qi/avoWells.js | `compareAtWells` | AVO at the wells and the one scale |
 
 THE STATED BOOKKEEPING the lab does around the engines, and nothing else: the checkshot time-depth line (two-way time = 2 x the one-way time, linear between checkshot levels); the trace clock (sample i at the first sample's time plus i times the sample interval); and an event's time on a trace, the sample of the largest amplitude within 8 ms of a stated time.
 
@@ -542,7 +550,7 @@ EKENE-1 on its full-stack trace clock (4.000000 ms, first sample 900 ms), with t
 
 TWO WAVELETS COME FROM THE SEISMIC AT A WELL.
 - STATISTICAL (extractStatisticalWavelet): the amplitude spectrum of the traces' autocorrelation, taken to zero phase. Its spectrum is the source wavelet's when the reflectivity is white; its phase is ASSUMED zero. The engine reads the stated window length (120 ms here) and smoothing (5 Hz here), Hann-tapers the lags and normalises the peak to 1.
-- FROM THE WELL: the least-squares (Wiener) wavelet that best convolves the well's reflectivity into the trace at the well, so its phase is MEASURED. This one is Seismolord app code (src/pages/apps/Seismolord/lib/wellWavelet.js, petrolord-suite 5df9d9410), and it needs a log long enough for the wavelet it is asked for.
+- FROM THE WELL (extractWellWavelet, engines/seismolord/wellWavelet.js): the least-squares (Wiener) wavelet that best convolves the well's reflectivity into the trace at the well, mildly damped, so its phase is MEASURED. It keeps only trace samples whose whole wavelet window (2 x half length + 1 samples) sits on live reflectivity, and it needs at least twice the wavelet's samples of those.
 
 THE STATISTICAL WAVELET AT EACH WELL, full stack, window 1100 to 1500 ms, every 4.000000 ms:
 
@@ -555,7 +563,15 @@ THE STATISTICAL WAVELET AT EACH WELL, full stack, window 1100 to 1500 ms, every 
 
 For comparison, a 25 Hz Ricker on the same clock (31 samples): peak 25.039790 Hz, centroid 26.596139 Hz.
 
-THE WELL WAVELET ON THE PACK. Asked for a wavelet at Ekene-1 with its stated window from the pack's logs, Seismolord refuses: "The well reflectivity is flat over the seismic at the well, so there is nothing to extract a wavelet from." The extraction keeps only trace samples whose whole wavelet window (2 x 15 + 1 = 31 samples at its default half length) sits on live reflectivity, and the pack's logs give 26 live samples (section 23), so no sample qualifies. The course's ties therefore use the statistical wavelet.
+THE WELL WAVELET ON THE PACK, Ekene-1, damping 0.001, the reflectivity of the synthetic of section 23 (26 live samples):
+
+| half length, samples | wavelet samples | the engine returns |
+| --- | --- | --- |
+| 15 (its default) | 31 | "The well reflectivity is flat over the seismic at the well, so there is nothing to extract a wavelet from." |
+| 5 | 11 | "The log covers 16 usable samples at the well; a 11-sample wavelet needs at least 22. Shorten the wavelet or use the statistical one." |
+| 3 | 7 | a wavelet from 20 samples, fit correlation 0.946989 |
+
+The pack's logs cover the Ekene Sand and the shale above it only, so the course's ties use the statistical wavelet; a well tied over its whole log carries both.
 
 # SECTION 25: Phase and correlation (owned by Professional m01 l04)
 
@@ -627,7 +643,7 @@ THE TOP OF THE EKENE SAND IN TIME at every pack well, linear between checkshot l
 | Ekene-3 | 5055.774278 | 1282.159191 |
 | Ekene-4 | 5216.535433 | 1329.290304 |
 
-With a bulk shift of zero (section 26) the committed time is the checkshot time; a non-zero shift moves every time below by the same amount.
+A bulk shift is the single-anchor warp of section 26: it adds the shift to the seismic time of every depth on the tie, the top's included, and leaves the imported checkshot rows as they were. At Ekene-1 the bulk shift is zero, so the top's committed time is its checkshot time above.
 
 # SECTION 28: Comparing wavelets across wells (owned by Professional m02 l03)
 
@@ -659,7 +675,7 @@ DIFFERENT SAMPLE INTERVALS are first brought to one (resampleWavelet, linear abo
 
 # SECTION 30: When one well disagrees (owned by Professional m02 l05)
 
-QI STUDIO'S RULES for the issue register (src/pages/apps/QIStudio/services/ties.js, petrolord-suite 5df9d9410): a tie whose mean windowed correlation is below 0.5 is poor and one below 0.7 fair; wavelet phases across wells that span more than 30 degrees are flagged; a well whose wavelet correlates with the average below 0.8 is unlike the others, and the remedy is to leave it out of the field wavelet or re-extract it.
+QI STUDIO'S RULES for the issue register (src/pages/apps/QIStudio/services/ties.js, petrolord-suite 5df9d9410; app rules, which no engine carries): a tie whose mean windowed correlation is below 0.5 is poor and one below 0.7 fair; wavelet phases across wells that span more than 30 degrees are flagged; a well whose wavelet correlates with the average below 0.8 is unlike the others, and the remedy is to leave it out of the field wavelet or re-extract it.
 
 A DESIGNED TEACHING CASE: Ekene-3's wavelet rotated by a stated phase before the comparison, the others as they are:
 
@@ -801,13 +817,13 @@ THE PARTIAL STACK (partialStack): over a range of angle bins, the fold-weighted 
 
 GATHER 5 AT 1292.000000 ms against the kit's angle stack traces at Ekene-1 at the same time (the kit built its near, mid and far stacks over 5 to 15, 15 to 25 and 25 to 35 degrees from the same rock):
 
-| stack | from gather 5 | the kit's stack trace at Ekene-1 |
-| --- | --- | --- |
-| near | 483.072830 | 456.803711 |
-| mid | 410.433207 | 357.560150 |
-| far | 320.449005 | 220.203720 |
+| stack | from gather 5 at the top | the kit's stack trace at Ekene-1 at the top | zero-lag correlation of the two, 1000 to 1700 ms |
+| --- | --- | --- | --- |
+| near | 483.072830 | 456.803711 | 0.997076 |
+| mid | 410.433207 | 357.560150 | 0.981357 |
+| far | 320.449005 | 220.203720 | 0.961871 |
 
-The kit's seismic README states that stacking its gathers over 5 to 15 degrees with the published velocity gives the near stack back, up to the noise. The table shows how each range compares at this one sample.
+The correlation is read from suggestBulkShift's correlation series at zero lag, over the samples both traces carry. At the top the two routes give different amplitudes, and the far range differs most; the correlations over the window say how alike the two traces are in shape, which a single sample cannot.
 
 THE USABLE ANGLE at that sample, at the stated minimum fold of 2, is 35.000000 degrees (section 34).
 
@@ -839,7 +855,7 @@ CONDITIONING BEFORE AVO. QI Studio conditions angle stacks before the fit: trim 
 
 # SECTION 41: AVO at the wells, and the Professional capstone (owned by Professional m06)
 
-THE COMPARISON (QI Studio's `compareAtWells`, src/pages/apps/QIStudio/services/avoWells.js, petrolord-suite 5df9d9410, app code): at every well, the intercept and gradient modelled from the logs against those the seismic shows. One least-squares scale ties the seismic amplitudes to reflectivity over every well, A and B together: scale = sum(observed x modelled) / sum(modelled^2). Each well's seismic A and B are divided by the scale; its residual is the distance between the scaled point and the modelled one, and the AVO classes (engines qi/avo avoClass, band 0.02) of the two are compared.
+THE COMPARISON (compareAtWells, engines/qi/avoWells.js, the function QI Studio runs): at every well, the intercept and gradient modelled from the logs against those the seismic shows. One least-squares scale ties the seismic amplitudes to reflectivity over every well, A and B together: scale = sum(observed x modelled) / sum(modelled^2). Each well's seismic A and B are divided by the scale; its residual is the distance between the scaled point and the modelled one, and the AVO classes (engines qi/avo avoClass, band 0.02) of the two are compared.
 
 THE INPUTS. MODELLED: the cap rock over the oil leg at each well (Associate section 19), or over its net sand where the well has no oil leg. SEISMIC: the top picked on the near stack trace within 8 ms of its checkshot time, the near, mid and far stack traces read at that sample and fitted with two Shuey terms at 10, 20, 30 degrees.
 
@@ -876,8 +892,12 @@ THE ENGINES AND THEIR GATE (the extraction gate: a golden plus an independent or
 | engines/qi/prestackInversion.js | Fatti's coefficients, the prestack forward model, simultaneous inversion | golden and oracle (pylops) |
 | engines/qi/propertyPrediction.js | the linear transform and its interval, Bayesian facies, the confusion matrix | golden and oracle |
 | lib/gridding/closure.js | crest, spill point, closure and gross rock volume | golden and oracle |
-| engines/qi/lfm.js | the low-frequency model between wells, the blind-well score | awaiting its oracle; taught, and graded only once it lands |
-| engines/qi/prospectAssessment.js | anomaly conformance, evidence independence, the assessment | awaiting its oracle; taught, and graded only once it lands |
+| engines/qi/lfm.js | the low-frequency model between wells, the blind-well score | golden and oracle |
+| engines/qi/inversionQc.js | the wavelet scale at the wells, the moving-average high cut, the blind-well table | golden and oracle |
+| engines/qi/propertyCalibration.js | the property calibration at seismic scale and its left-out-well check | golden and oracle |
+| engines/qi/angleWavelets.js and engines/seismolord/wellWavelet.js | a wavelet per angle stack by least squares at the wells | golden and oracle |
+| engines/qi/prospectAssessment.js | anomaly conformance, evidence independence, the assessment | golden and oracle |
+| engines/qi/prospectTrap.js | the climb to a local crest, the trap and the anomaly of one prospect | golden and oracle |
 
 THE SETTINGS THE TIER STATES ON THE EKENE PACK (each a stated input; QI Studio's own starting values where it has one):
 
@@ -908,7 +928,7 @@ THE WELLS IN TIME. Each pack well's logs go to two-way time on its checkshots (l
 
 THE MODEL (forwardPoststack, the operator of pylops' PoststackLinearModelling, kind centred). The unknown is m = ln(AI) on the trace clock; D is the centred first difference, (D m)_i = (m_(i+1) - m_(i-1)) / 2, zero at the first and last sample; C is the centred convolution with the wavelet (offset the floor of half its length). The seismic trace is d = C D m. Half the difference of ln(AI) is close to the reflection coefficient for small contrasts, which is why the model is written in ln(AI).
 
-THE ADJOINT. Every solver here needs the transpose of the operator. The test of an adjoint is the dot product: for any x and y, (C x) . y equals x . (C^T y). On two seeded vectors of 101 samples (mulberry32 seed 42):
+THE ADJOINT. Every solver here needs the transpose of the operator. The test of an adjoint is the dot product: for any x and y, (C x) . y equals x . (C^T y). On two vectors of 101 samples from the canonical seeded generator (mulberry32 on seed 42, each value uniform less one half, x drawn first and then y), the test the inversion explorer's forward view runs on the seed it states:
 
 | operator | (A x) . y | x . (A^T y) | difference |
 | --- | --- | --- | --- |
@@ -932,7 +952,7 @@ Over the logged samples the synthetic and the trace correlate at 0.966050 (27 sa
 
 WHY IT IS NEEDED. The seismic band holds no trend: a band-limited trace says how impedance changes and says nothing of its level. The low-frequency model (LFM) supplies what the seismic lacks below about 8 Hz, from the wells.
 
-HOW IT IS BUILT (lfm.js; THIS ENGINE AWAITS ITS INDEPENDENT ORACLE, engines PR E1c: the course teaches it and grades nothing through it until that lands). Each well's ln(AI) in time is low-passed by a moving average whose half window is round(1000 / (cut x dt) / 2) samples (16 samples here, lowFrequencyModel), then carried to a trace by inverse distance weighting with power 2. Between two horizons a sample keeps its proportional position (mapToWellTime), so a layer that thickens or dips between wells keeps its impedance; above the first horizon and below the last the time offset from that horizon is kept. Samples no well covers hold the nearest covered value.
+HOW IT IS BUILT (lfm.js). Each well's ln(AI) in time is low-passed by a moving average whose half window is round(1000 / (cut x dt) / 2) samples (16 samples here, lowFrequencyModel), then carried to a trace by inverse distance weighting with power 2. Between two horizons a sample keeps its proportional position (mapToWellTime), so a layer that thickens or dips between wells keeps its impedance; above the first horizon and below the last the time offset from that horizon is kept. Samples no well covers hold the nearest covered value.
 
 THE PROPORTIONAL POSITION, the Ekene-1 trace's times mapped to Ekene-2's horizons (top and base Ekene Sand):
 
@@ -960,9 +980,9 @@ THE PROBLEM. A wavelet extracted or chosen for its shape carries an arbitrary am
 
 THE EKENE SCALE. The 25 Hz Ricker (peak amplitude 1.000000) against the full stack at the four pack wells: scale 769.984107 over 19 samples; the scaled wavelet's peak is 769.984107.
 
-THE SAME BY QI STUDIO'S OWN CODE. `waveletScale` in src/pages/apps/QIStudio/services/inversionRun.js (APP CODE, petrolord-suite 5df9d9410; it is not one of the extraction-gated engines) on the same pairs returns 769.984107 over 19 samples.
+THE ENGINE. `waveletScale` in engines/qi/inversionQc.js, the rule QI Studio runs, computes the scale; the course's lab calls it on the four pack wells.
 
-A REFUSAL BY THE SAME RULE. QI Studio refuses to scale when the wells overlap fewer than ten usable samples of seismic: "The wells overlap too little seismic to scale the wavelet."
+A REFUSAL BY THE SAME RULE. The engine refuses to scale when the wells overlap fewer than ten usable samples of seismic: "The wells overlap too little seismic to scale the wavelet."
 
 # SECTION 46: Model-based least squares (owned by Expert m02 l01)
 
@@ -1059,13 +1079,13 @@ SPARSE-SPIKE, blind:
 | Ekene-3 | 0.821455 | 9.718054 |
 | Ekene-4 | 0.778867 | 10.144841 |
 
-Read the columns together. The LFM alone carries the level, with a lower RMS error than either inversion at every well here, and a negative correlation: it has none of the shape. The inversions follow the shape (blind correlations from about 0.76 to 0.89) at a larger RMS error. A study quotes both figures.
+Read the columns together. The LFM alone has a negative correlation at every well: it carries the level and none of the shape. Its RMS error is lower than the model-based blind error at 4 of 4 wells, and lower than the sparse-spike blind error at 2 of 4 (Ekene-2, Ekene-3); sparse-spike has the lower error at Ekene-1 and Ekene-4. The inversions follow the shape, with blind correlations from 0.759365 to 0.889320 across both methods. A study quotes both figures.
 
 # SECTION 50: Sensitivity across realisations (owned by Expert m02 l05)
 
 THE METHOD (inversionSpread.js). Realisations that differ in one assumption each, here the noise: the Ekene-1 full-stack trace plus seeded Gaussian noise at a signal-to-noise ratio of 4 (addNoise: RMS of the trace over the noise standard deviation), on the 20 seeds 101 to 120, each inverted blind exactly as section 46. Per sample, the quantiles across the realisations (quantilesAcross: linear interpolation between order statistics, Hyndman and Fan type 7) and the relative spread (Q90 - Q10) / Q50 (relativeSpread).
 
-THE LABELS (the Suite's percentile convention for parameters, PT10): Q10 is the 10th percentile, the value 10 percent of realisations fall below, so it is the LOW figure; Q50 the median; Q90 the 90th percentile, the HIGH figure. P-labels are kept for outcomes such as volumes, where P90 is the low figure.
+THE LABELS (the course's percentile convention for parameters): Q10 is the 10th percentile, the value 10 percent of realisations fall below, so it is the LOW figure; Q50 the median; Q90 the 90th percentile, the HIGH figure. P-labels are kept for outcomes such as volumes, where P90 is the low figure.
 
 EKENE-1, 20 realisations, AI:
 
@@ -1092,7 +1112,7 @@ THE EKENE BACKGROUND Vs/Vp: the mean of Vs / Vp over every logged sample of the 
 | 30 | 0.666667 | -0.155548 | -0.088893 |
 | 40 | 0.852044 | -0.257075 | -0.223507 |
 
-At normal incidence only AI contributes. G3 is negative and the smallest of the three in size at every angle in the table, and it grows fastest between 30 and 40 degrees: density is the parameter the angles see least.
+At normal incidence only AI contributes: G2 and G3 are zero there. At every other angle in the table G3 is negative and the smallest of the three in size, and its size grows more between 30 and 40 degrees than between any earlier pair of angles: density is the parameter the angles see least.
 
 # SECTION 52: Angle-dependent wavelets (owned by Expert m03 l02)
 
@@ -1106,9 +1126,26 @@ THE EKENE SETTING. The same 25 Hz Ricker shape for every stack, scaled per stack
 | mid | 20 | 1679.662569 | 19 |
 | far | 30 | 1305.654435 | 19 |
 
-QI STUDIO extracts a wavelet per angle at every well by least squares against that well's reflectivity, then aligns and averages them across the wells (angleWavelets, APP CODE). On the pack's short logs that extraction refuses. Seismolord's well-wavelet extraction (src/pages/apps/Seismolord/lib/wellWavelet.js, petrolord-suite 5df9d9410) at Ekene-1, on the half differences of the ln(AI) log in time: with its default half length of 15 samples (a 31-sample wavelet, longer than the 27 logged samples, so no row of the fit is complete) it says "The well reflectivity is flat over the seismic at the well, so there is nothing to extract a wavelet from."; with a half length of 5 it says "The log covers 16 usable samples at the well; a 11-sample wavelet needs at least 22. Shorten the wavelet or use the statistical one." The course therefore states the shape and scales it per stack.
+THE ENGINE QI STUDIO RUNS (extractAngleWavelets, engines/qi/angleWavelets.js) extracts a wavelet per angle at every well by least squares against that well's Fatti reflectivity at the stack's angle (extractWellWavelet, engines/seismolord/wellWavelet.js), then aligns and averages them across the wells. On the pack's short logs the extraction is limited by the wavelet length. At Ekene-1, on the half differences of the ln(AI) log in time: with the default half length of 15 samples (a 31-sample wavelet, longer than the 27 logged samples, so no row of the fit is complete) it says "The well reflectivity is flat over the seismic at the well, so there is nothing to extract a wavelet from."; with a half length of 5 it says "The log covers 16 usable samples at the well; a 11-sample wavelet needs at least 22. Shorten the wavelet or use the statistical one." Over the four wells, extractAngleWavelets returns no wavelet for any stack at a half length of 15 (0 of 3 stacks), and a 7-sample wavelet for each of the 3 stacks at a half length of 3, each well's fit and the correlation of its synthetic with the stack:
 
-# SECTION 53: Why density needs the far angles (owned by Expert m03 l03)
+| angle degrees | well | fit correlation | synthetic against the stack |
+| --- | --- | --- | --- |
+| 10 | Ekene-1 | 0.953115 | 0.941755 |
+| 10 | Ekene-2 | 0.953385 | 0.675428 |
+| 10 | Ekene-3 | 0.956707 | 0.928928 |
+| 10 | Ekene-4 | 0.971756 | 0.623404 |
+| 20 | Ekene-1 | 0.951748 | 0.939733 |
+| 20 | Ekene-2 | 0.947987 | 0.664947 |
+| 20 | Ekene-3 | 0.953584 | 0.922300 |
+| 20 | Ekene-4 | 0.970240 | 0.622244 |
+| 30 | Ekene-1 | 0.940659 | 0.927864 |
+| 30 | Ekene-2 | 0.942311 | 0.613638 |
+| 30 | Ekene-3 | 0.947310 | 0.910855 |
+| 30 | Ekene-4 | 0.967385 | 0.603319 |
+
+A 7-sample wavelet spans 24.000000 ms, shorter than the stated Ricker; the course therefore states the Ricker shape and scales it per stack for the inversions in sections 53 and 54.
+
+# SECTION 53: What each set of stacks resolves (owned by Expert m03 l03)
 
 THE EXPERIMENT. Ekene-1, blind, simultaneous inversion with eps 0.050000, 0.050000, 0.050000 and 60 iterations, from three sets of stacks; each parameter scored against the well's log after the high cut (correlation; RMS of the relative error in percent of AI, Vp/Vs and density):
 
@@ -1119,7 +1156,7 @@ THE EXPERIMENT. Ekene-1, blind, simultaneous inversion with eps 0.050000, 0.0500
 | near and mid | 0.865225 | 9.757899 | 0.383124 | 13.660754 | -0.707948 | 12.184029 |
 | near, mid and far | 0.863789 | 8.956955 | 0.470296 | 10.707173 | -0.767957 | 14.112317 |
 
-AI is held by the near angles alone. With the near stack only, density keeps an RMS error close to the LFMs-alone row, both under one percent: the near stack barely moves its level. G3 is tiny at 10 degrees (section 51), so the near stack carries almost no density information. With the mid and far stacks added, the density correlation at Ekene-1 turns negative: the inversion moves density away from the log, and density is the least reliable of the three parameters in this table. The far stack here reaches 30 degrees, and G3 grows fastest beyond it.
+AI is held by the near angles alone: its correlation hardly changes between the three sets of stacks. With the near stack only, density's RMS error stays under one percent, as it does with the LFMs alone, while its correlation changes from the LFMs' value: the near stack, where G3 is tiny (section 51), moves density's shape without moving its level far. With the mid and far stacks added, density's correlation at Ekene-1 is negative and its error rises above ten percent: density is the least reliable of the three parameters in this table. The far stack here reaches 30 degrees; section 51 shows G3 growing most beyond that.
 
 # SECTION 54: Blind wells per parameter (owned by Expert m03 l04)
 
@@ -1151,7 +1188,7 @@ The last row lies outside the calibration range: the engine still answers, and i
 
 # SECTION 56: Left-out wells and the widened band (owned by Expert m04 l02)
 
-THE CHECK (QI Studio's calibrateProperty in src/pages/apps/QIStudio/services/propertyRun.js, APP CODE, petrolord-suite 5df9d9410; it calls the extraction-gated engine propertyPrediction.js). At seismic scale: each well's ln(AI) and porosity in time are low-passed at 50 Hz, the transform is fitted to the wells, then each well is left out, the transform refitted on the others, and porosity predicted from the BLIND INVERTED AI at that well (section 49). The left-out residuals carry the inversion's error, which a log-against-log fit cannot see, so their pooled RMS widens the band: s_extra = sqrt(RMS^2 - s^2) when the RMS exceeds s. Each well's coverage is tested with the other wells' residuals only.
+THE CHECK (calibrateProperty in engines/qi/propertyCalibration.js, the rule QI Studio runs, over propertyPrediction.js). At seismic scale: each well's ln(AI) and porosity in time are low-passed at 50 Hz, the transform is fitted to the wells, then each well is left out, the transform refitted on the others, and porosity predicted from the BLIND INVERTED AI at that well (section 49). The left-out residuals carry the inversion's error, which a log-against-log fit cannot see, so their pooled RMS widens the band: s_extra = sqrt(RMS^2 - s^2) when the RMS exceeds s. Each well's coverage is tested with the other wells' residuals only.
 
 EKENE, the porosity of each well inside its Ekene Sand times:
 
@@ -1239,7 +1276,7 @@ THE EKENE SAND TOP GRID, as the kit grids it from the six development wells' top
 
 The map spills at the edge of its own mapped area, 2.380249 ft below the crest and above the contact the wells see: six wells grid too little of the structure to close the trap on the map. The engine says so (limited by the edge); a closure figure from this grid is the map's limit and no measurement of the trap.
 
-ANOMALY CONFORMANCE (prospectAssessment.js anomalyConformance; THIS ENGINE AWAITS ITS INDEPENDENT ORACLE, engines PR E1c: taught, and graded only once it lands). A hydrocarbon anomaly ends downdip at a contact, so its downdip edge follows one depth contour. The engine reads the anomaly's downdip edge (an anomaly node beside a lower node outside it, at their midpoint), its scatter against the closure's relief, conformance = 1 - scatter / relief clipped to 0 to 1, the share of the anomaly inside the closure, and the contact the edge implies. Two DESIGNED TEACHING ANOMALIES on the Ekene grid, labelled as such: A, every mapped node shallower than the spill; B, every node shallower than a level 20 ft below the spill, kept only west of the grid's middle column (an anomaly that cuts across the contours):
+ANOMALY CONFORMANCE (prospectAssessment.js anomalyConformance). A hydrocarbon anomaly ends downdip at a contact, so its downdip edge follows one depth contour. The engine reads the anomaly's downdip edge (an anomaly node beside a lower node outside it, at their midpoint), its scatter against the closure's relief, conformance = 1 - scatter / relief clipped to 0 to 1, the share of the anomaly inside the closure, and the contact the edge implies. Two DESIGNED TEACHING ANOMALIES on the Ekene grid, labelled as such: A, every mapped node shallower than the spill; B, every node shallower than a level 20 ft below the spill, kept only west of the grid's middle column (an anomaly that cuts across the contours):
 
 | anomaly | nodes | edge nodes | conformance | share inside the closure | implied contact ft | edge scatter ft |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1258,7 +1295,9 @@ THE ASSESSMENT (assessProspect, the decision table; conformance 0.7 and above fi
 | no anomaly, feasibility not stated | retain | neutral |
 | anomaly present, a competing explanation judged likely | investigate | neutral |
 
-The absence of an anomaly counts against a prospect only where the feasibility study says the case would be visible.
+The absence of an anomaly counts against a prospect only where the feasibility study says the case would be visible. A COMPETING EXPLANATION (tuning, a lithology change, a processing artefact) is an input with a status of open, ruled out or likely; one judged likely holds the prospect at investigate, as the last row shows. The prospect explorer's assessment states it as a control.
+
+THE CLIMB TO A CREST (climbToCrest, engines/qi/prospectTrap.js). A prospect picked at a point starts from the nearest mapped node and steps to the highest of its eight neighbours until none is higher. On the Ekene grid, from the mapped node nearest the grid's centre (column 12, row 9, -5057.417979 ft), the climb ends at node 310, at -5051.568570 ft; the highest mapped node is -5051.568570 ft, so the climb reaches the same crest.
 
 # SECTION 59: The report and the limits, and the Expert capstone (owned by Expert m06 l01 and Expert m06 l02 and Expert m06 l03 and Expert m06 l04)
 

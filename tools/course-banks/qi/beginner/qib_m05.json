@@ -19,7 +19,7 @@
    "1.291926 GPa, which sits much nearer the oil's 0.852881 GPa than the brine's 2.662550 GPa: the Wood average stays close to the softer phase."
   ],
   "answer": 3,
-  "explanation": "At Sw 0.500000 Wood's average returns 1.291926 GPa, far nearer the oil than the brine, and it rises fastest only near full brine. 879.708973 is the mix's density in kg/m3, and 0.987056 GPa is the mix at Sw 0.200000."
+  "explanation": "At Sw 0.500000 Wood's average returns 1.291926 GPa, far nearer the oil than the brine: the Wood average sits close to the softer phase until the brine fraction is high. 879.708973 is the mix's density in kg/m3, and 0.987056 GPa is the mix at Sw 0.200000."
  },
  {
   "prompt": "The lab converts the stated Ekene pressure of 3200 psia before calling Batzle-Wang. What does the brine function receive?",
@@ -107,7 +107,7 @@
    "6641244.924742 is the oil leg after substitution to brine, and 6639018.603084 is the same leg as it is."
   ],
   "answer": 0,
-  "explanation": "Two kinds of mean appear: the substitution table averages each sample's AI to 6641244.924742, while the elastic set averages Vp, Vs and density first and computes AI from the means, 6639018.603084. Taken to brine the leg reads 7136467.682134, and a study states which mean it reports."
+  "explanation": "Two kinds of mean appear: the substitution table averages each sample's AI to 6641244.924742, while the elastic set averages Vp, Vs and density first and computes AI from the means, 6639018.603084. Taken to brine the leg's mean of the sample values reads 7136467.682134."
  },
  {
   "prompt": "How does fitFluidLine fit the wet trend to the brine-substituted block boundaries?",
@@ -151,7 +151,7 @@
    "The oil moves the top 0.067572 further to the hydrocarbon side."
   ],
   "answer": 3,
-  "explanation": "Negative is the hydrocarbon side. The brine top sits almost on the trend at -0.004519, and the same rock with oil sits at -0.072091, 0.067572 further negative, far outside the boundaries' rms scatter of 0.006806. The rock is the same in both rows, so that move is the oil."
+  "explanation": "Negative is the hydrocarbon side. The brine top sits almost on the trend at -0.004519, and the same rock with oil sits at -0.072091, 0.067572 further negative. The rock is the same in both rows, so the oil moves the point off the trend."
  },
  {
   "prompt": "Measured from the published line, the Ekene-1 top reads -0.458460 in situ and -0.363599 with brine. What does that show?",
@@ -162,6 +162,6 @@
    "The oil moves the top toward the positive side when it is read from the published line, the reverse of what the fitted line shows."
   ],
   "answer": 1,
-  "explanation": "The two lines give different distances: from the fitted line the tops read -0.072091 and -0.004519, from the published line -0.458460 and -0.363599. Measured from the published line even the brine top looks anomalous, the direction of the oil's move survives, and its size depends on the line, which a verdict names."
+  "explanation": "The two lines give different distances: from the fitted line the tops read -0.072091 and -0.004519, from the published line -0.458460 and -0.363599. Which line the distance is read from is a stated choice, and a verdict states it beside the figure."
  }
 ]

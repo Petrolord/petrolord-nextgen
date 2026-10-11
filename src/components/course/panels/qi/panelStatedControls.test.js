@@ -130,12 +130,12 @@ describe('THE STATED CONTROLS OF THE PRESTACK EXPLORER', () => {
     for (const [mode, w] of Object.entries(want)) expect(missingPro(renderPro(mode), w), mode).toEqual([]);
   });
 
-  it('no view refuses on the pack or on the case, and AVO at the wells prints no scale', () => {
+  it('no view refuses on the pack or on the case, and AVO at the wells prints the one scale', () => {
     for (const [mode] of PRO_MODES) {
       expect(renderPro(mode), mode).not.toContain('THE ENGINE REFUSED');
       expect(renderPro(mode, PRO_TEXT), mode).not.toContain('THE ENGINE REFUSED');
     }
-    expect(renderPro('wells', PRO_TEXT)).toContain('THE ONE SCALE ARRIVES IN QI STUDIO');
+    expect(renderPro('wells', PRO_TEXT)).toContain('One scale over every well');
   });
 
   it('NEGATIVE CONTROL: a missing or wrong prestack control is reported, and a refusal prints verbatim', () => {

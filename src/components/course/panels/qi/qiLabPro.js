@@ -17,7 +17,7 @@
 // Depth in feet (the pack's metres / 0.3048); offsets in metres, as the kit's
 // gathers record them; times in ms; velocities in m/s.
 import {
-  PACK, attempt, mToFt, ftToM, packWell, zoneSamples, layerMeans, interfaceAB, traceSpectrum,
+  PACK, PACK_WELLS as PACK_WELLS_PRO, attempt, mToFt, ftToM, packWell, zoneSamples, layerMeans, interfaceAB, traceSpectrum,
 } from './qiLab.js';
 import {
   computeImpedance, resampleToDt, reflectivity, convolveSame, extractStatisticalWavelet, suggestBulkShift,
@@ -34,6 +34,8 @@ import {
   fitShuey, contrastsFromAB, backgroundTrend, offTrend, chiProjection, avoClass as qiAvoClass,
 } from '@petrolord/engines/engines/qi/avo.js';
 import { rickerWavelet } from '@petrolord/engines/lib/waveform.js';
+import { compareAtWells } from '@petrolord/engines/engines/qi/avoWells.js';
+import { extractWellWavelet } from '@petrolord/engines/engines/seismolord/wellWavelet.js';
 
 /* ------------------------------------------------- the stated settings */
 
@@ -140,6 +142,23 @@ export function wellStatWavelet(well, { window = EKENE_PRO.waveletWindowMs, ...o
   const seg = traceWindow(t, t.values, window[0], window[1]);
   if (seg.error) return seg;
   return statWavelet([seg], t.dtMs, opts);
+}
+
+/**
+ * The least-squares (Wiener) wavelet from the well (seismolord/wellWavelet):
+ * the wavelet that best convolves the well's reflectivity into the trace at the
+ * well, on the stated half length and damping.
+ */
+export function wellWavelet(well, { halfLength = 15, damping = 1e-3, wavelet = null } = {}) {
+  const w = wavelet || wellStatWavelet(well);
+  if (w.error) return w;
+  const syn = synthetic(well, w);
+  if (syn.error) return syn;
+  const t = wellTrace(well, 'full');
+  return attempt(() => {
+    const r = extractWellWavelet(syn.rc, t.values, { halfLength, damping });
+    return { wavelet: Array.from(r.wavelet), used: r.used, fitCorr: r.fitCorr };
+  });
 }
 
 /** A zero-phase Ricker on the stated clock (lib/waveform). */
@@ -303,6 +322,25 @@ export function modelledAtWell(well) {
   if (lower.error) return lower;
   const ab = interfaceAB(cap, lower);
   return { well, layer: which, A: ab.a, B: ab.b };
+}
+
+/**
+ * AVO at the wells (qi/avoWells compareAtWells): one least-squares scale over
+ * every well, A and B together, then each well's scaled seismic point, its
+ * residual and the two classes. rows: [{ name, modelled: {A, B}, observed: {A, B} }].
+ */
+export const avoAtWells = (rows) => attempt(() => compareAtWells(rows));
+
+/** The comparison on the pack's four wells, modelled and seismic as above. */
+export function packAvoAtWells(opts = {}) {
+  const rows = [];
+  for (const w of PACK_WELLS_PRO) {
+    const o = observedAtWell(w, opts); if (o.error) return o;
+    const m = modelledAtWell(w); if (m.error) return m;
+    rows.push({ name: w, layer: m.layer, pickMs: o.pickMs, csMs: o.checkshotTwtMs, modelled: { A: m.A, B: m.B }, observed: { A: o.A, B: o.B } });
+  }
+  const c = avoAtWells(rows);
+  return c.error ? c : { ...c, rows };
 }
 
 export { mToFt };

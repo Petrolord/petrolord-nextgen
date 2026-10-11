@@ -1,26 +1,21 @@
 // THE PROFESSIONAL SECTIONS OF THE QI TEACHING DIGEST (sections 22 to 41).
 // Printed from the Professional teaching lab's return values (qiLabPro.js,
-// through qi_engine_p.mjs), on the Ekene teaching pack. Two Suite app files
-// are run for the figures they own and labelled as app code wherever they are
-// printed: Seismolord's well wavelet (src/pages/apps/Seismolord/lib/
-// wellWavelet.js) and QI Studio's AVO at the wells
-// (src/pages/apps/QIStudio/services/avoWells.js).
+// through qi_engine_p.mjs), on the Ekene teaching pack. Every figure is an
+// engine return value: the well wavelet comes from engines/seismolord/
+// wellWavelet.js and AVO at the wells from engines/qi/avoWells.js, both moved
+// into the engines from the Suite (gate E2). QI Studio's tie-issue rules
+// (ties.js) are app rules with no engine, and are printed as such.
 import { LAB as L } from './qi_engine.mjs';
 import { LABP as P } from './qi_engine_p.mjs';
 import { f6, whole, table, section } from './qi_digest_kit.mjs';
-import { extractWellWavelet } from '@suite/pages/apps/Seismolord/lib/wellWavelet.js';
-import { compareAtWells } from '@suite/pages/apps/QIStudio/services/avoWells.js';
 
 const E = P.EKENE_PRO;
 const WELLS = ['Ekene-1', 'Ekene-2', 'Ekene-3', 'Ekene-4'];
 const SUITE = {
-  wellWavelet: 'src/pages/apps/Seismolord/lib/wellWavelet.js',
-  avoWells: 'src/pages/apps/QIStudio/services/avoWells.js',
   ties: 'src/pages/apps/QIStudio/services/ties.js',
   conditioning: 'engines/qi/conditioning.js',
 };
 const must = (x, what) => { if (x === null || x === undefined || x.error) throw new Error(`${what}: ${x && x.error}`); return x; };
-const msgOf = (fn) => { try { fn(); } catch (e) { return e.message; } throw new Error('expected a refusal'); };
 
 export function sectionsP(ctx) {
   const out = [];
@@ -39,6 +34,8 @@ ${table(['engine file', 'functions the tier calls', 'what for'], [
     ['engines/qi/prestack.js', '`binOffsets`, `dixInterval`, `velocityOnGrid`, `waldenAngle`, `rayTraceAngle`, `angleGather`, `partialStack`, `usableAngle`', 'gathers, angles and angle stacks'],
     ['engines/qi/prestackQc.js', '`nmoStretch`, `stretchMuteOffset`, `residualMoveout`, `foldSummary`', 'gather QC'],
     ['engines/qi/avo.js', '`fitShuey`, `contrastsFromAB`, `backgroundTrend`, `offTrend`, `chiProjection`, `avoClass`', 'AVO on the seismic'],
+    ['engines/seismolord/wellWavelet.js', '`extractWellWavelet`', 'the wavelet from the well'],
+    ['engines/qi/avoWells.js', '`compareAtWells`', 'AVO at the wells and the one scale'],
   ])}
 
 THE STATED BOOKKEEPING the lab does around the engines, and nothing else: the checkshot time-depth line (two-way time = 2 x the one-way time, linear between checkshot levels); the trace clock (sample i at the first sample's time plus i times the sample interval); and an event's time on a trace, the sample of the largest amplitude within ${whole(E.pickHalfWindowMs)} ms of a stated time.
@@ -64,12 +61,15 @@ EKENE-1 on its full-stack trace clock (${f6(tr1.dtMs)} ms, first sample ${whole(
   const wl = WELLS.map((w) => { const s = must(P.wellStatWavelet(w), w); const sp = P.waveletSpectrum(s, 4); return [w, s, sp]; });
   const rk = must(P.rickerOf(25, 4, 60), 'ricker');
   const rks = P.waveletSpectrum(rk, 4);
-  const wwMsg = msgOf(() => extractWellWavelet(syn1.rc, tr1.values));
-  if (/[–—]/.test(wwMsg)) throw new Error('well wavelet message carries a dash');
+  const ww15 = P.wellWavelet('Ekene-1', { wavelet: sw1 });
+  const ww5 = P.wellWavelet('Ekene-1', { wavelet: sw1, halfLength: 5 });
+  const ww3 = P.wellWavelet('Ekene-1', { wavelet: sw1, halfLength: 3 });
+  for (const r of [ww15, ww5]) if (!r.error || /[–—]/.test(r.error)) throw new Error('well wavelet: expected a printable refusal');
+  if (ww3.error) throw new Error(ww3.error);
   out.push(section(24, 'Statistical and well wavelets', 'Professional m01 l03 and Professional m02 l03', `
 TWO WAVELETS COME FROM THE SEISMIC AT A WELL.
 - STATISTICAL (extractStatisticalWavelet): the amplitude spectrum of the traces' autocorrelation, taken to zero phase. Its spectrum is the source wavelet's when the reflectivity is white; its phase is ASSUMED zero. The engine reads the stated window length (${whole(E.waveletLengthMs)} ms here) and smoothing (${whole(E.waveletSmoothHz)} Hz here), Hann-tapers the lags and normalises the peak to 1.
-- FROM THE WELL: the least-squares (Wiener) wavelet that best convolves the well's reflectivity into the trace at the well, so its phase is MEASURED. This one is Seismolord app code (${SUITE.wellWavelet}, petrolord-suite ${sc}), and it needs a log long enough for the wavelet it is asked for.
+- FROM THE WELL (extractWellWavelet, engines/seismolord/wellWavelet.js): the least-squares (Wiener) wavelet that best convolves the well's reflectivity into the trace at the well, mildly damped, so its phase is MEASURED. It keeps only trace samples whose whole wavelet window (2 x half length + 1 samples) sits on live reflectivity, and it needs at least twice the wavelet's samples of those.
 
 THE STATISTICAL WAVELET AT EACH WELL, full stack, window ${whole(E.waveletWindowMs[0])} to ${whole(E.waveletWindowMs[1])} ms, every ${f6(4)} ms:
 
@@ -77,7 +77,15 @@ ${table(['well', 'samples', 'peak Hz', 'centroid Hz', '-6 dB low Hz', '-6 dB hig
 
 For comparison, a 25 Hz Ricker on the same clock (${whole(rk.length)} samples): peak ${f6(rks.peakHz)} Hz, centroid ${f6(rks.centroidHz)} Hz.
 
-THE WELL WAVELET ON THE PACK. Asked for a wavelet at Ekene-1 with its stated window from the pack's logs, Seismolord refuses: "${wwMsg}" The extraction keeps only trace samples whose whole wavelet window (2 x 15 + 1 = 31 samples at its default half length) sits on live reflectivity, and the pack's logs give ${whole(syn1.live)} live samples (section 23), so no sample qualifies. The course's ties therefore use the statistical wavelet.`));
+THE WELL WAVELET ON THE PACK, Ekene-1, damping 0.001, the reflectivity of the synthetic of section 23 (${whole(syn1.live)} live samples):
+
+${table(['half length, samples', 'wavelet samples', 'the engine returns'], [
+    ['15 (its default)', '31', `"${ww15.error}"`],
+    ['5', '11', `"${ww5.error}"`],
+    ['3', '7', `a wavelet from ${whole(ww3.used)} samples, fit correlation ${f6(ww3.fitCorr)}`],
+  ])}
+
+The pack's logs cover the Ekene Sand and the shale above it only, so the course's ties use the statistical wavelet; a well tied over its whole log carries both.`));
 
   /* ------------------------------------------------------------ 25 */
   const ph1 = must(P.phaseMatch(syn1.synthetic, tr1.values), 'phase');
@@ -141,7 +149,7 @@ THE TOP OF THE EKENE SAND IN TIME at every pack well, linear between checkshot l
 
 ${table(['well', 'top ft', 'two-way time ms'], topRows)}
 
-With a bulk shift of zero (section 26) the committed time is the checkshot time; a non-zero shift moves every time below by the same amount.`));
+A bulk shift is the single-anchor warp of section 26: it adds the shift to the seismic time of every depth on the tie, the top's included, and leaves the imported checkshot rows as they were. At Ekene-1 the bulk shift is zero, so the top's committed time is its checkshot time above.`));
   void topT;
 
   /* ------------------------------------------------------------ 28, 29, 30 */
@@ -168,7 +176,7 @@ DIFFERENT SAMPLE INTERVALS are first brought to one (resampleWavelet, linear abo
   const cmp2 = must(P.compare(bad), 'compare2');
   const cmp3 = must(P.compare(ws.map((w) => (w.name === 'Ekene-3' ? { name: w.name, samples: must(P.rotate(w.samples, 180), 'rot') } : w))), 'compare3');
   out.push(section(30, 'When one well disagrees', 'Professional m02 l05', `
-QI STUDIO'S RULES for the issue register (${SUITE.ties}, petrolord-suite ${sc}): a tie whose mean windowed correlation is below 0.5 is poor and one below 0.7 fair; wavelet phases across wells that span more than 30 degrees are flagged; a well whose wavelet correlates with the average below 0.8 is unlike the others, and the remedy is to leave it out of the field wavelet or re-extract it.
+QI STUDIO'S RULES for the issue register (${SUITE.ties}, petrolord-suite ${sc}; app rules, which no engine carries): a tie whose mean windowed correlation is below 0.5 is poor and one below 0.7 fair; wavelet phases across wells that span more than 30 degrees are flagged; a well whose wavelet correlates with the average below 0.8 is unlike the others, and the remedy is to leave it out of the field wavelet or re-extract it.
 
 A DESIGNED TEACHING CASE: Ekene-3's wavelet rotated by a stated phase before the comparison, the others as they are:
 
@@ -271,19 +279,22 @@ ${table(['bin, degrees', 'fold', 'mean amplitude'], ag5.gather.map((b, k) => [`$
   /* ------------------------------------------------------------ 38 */
   const stacks = [[0, 1, 'near'], [1, 2, 'mid'], [2, 3, 'far']];
   const pkRows = stacks.map(([a, b, n]) => {
-    const st = P.stackOf(ag5, a, b)[i5];
+    const full = P.stackOf(ag5, a, b);
+    const st = full[i5];
     const pkTrace = must(P.wellTrace('Ekene-1', n), n);
     const ii = Math.round((top5.tMs - pkTrace.t0Ms) / pkTrace.dtMs);
-    return [n, f6(st), f6(pkTrace.values[ii])];
+    const kit = must(P.traceWindow(pkTrace, pkTrace.values, g5.t0Ms, pk.gathers.t1_ms), 'window');
+    const z = must(P.bulkShift(full.map((v) => (Number.isFinite(v) ? v : NaN)), kit, g5.dtMs, { maxLagMs: g5.dtMs }), 'corr').series.find((x) => x.lagMs === 0);
+    return [n, f6(st), f6(pkTrace.values[ii]), f6(z.corr)];
   });
   out.push(section(38, 'Partial stacks and the usable angle', 'Professional m04 l04', `
 THE PARTIAL STACK (partialStack): over a range of angle bins, the fold-weighted mean of the bins at each sample, empty where no bin has data.
 
 GATHER 5 AT ${f6(top5.tMs)} ms against the kit's angle stack traces at Ekene-1 at the same time (the kit built its near, mid and far stacks over 5 to 15, 15 to 25 and 25 to 35 degrees from the same rock):
 
-${table(['stack', 'from gather 5', 'the kit\'s stack trace at Ekene-1'], pkRows)}
+${table(['stack', 'from gather 5 at the top', 'the kit\'s stack trace at Ekene-1 at the top', `zero-lag correlation of the two, ${pk.gathers.t0_ms} to ${pk.gathers.t1_ms} ms`], pkRows)}
 
-The kit's seismic README states that stacking its gathers over 5 to 15 degrees with the published velocity gives the near stack back, up to the noise. The table shows how each range compares at this one sample.
+The correlation is read from suggestBulkShift's correlation series at zero lag, over the samples both traces carry. At the top the two routes give different amplitudes, and the far range differs most; the correlations over the window say how alike the two traces are in shape, which a single sample cannot.
 
 THE USABLE ANGLE at that sample, at the stated minimum fold of ${whole(E.minFold)}, is ${f6(P.usable(ag5, E.angleEdges, E.minFold)[i5])} degrees (section 34).`));
 
@@ -313,7 +324,7 @@ A and B here are in trace amplitude units; section 41 ties them to the modelled 
     const o = must(P.observedAtWell(w), w); const m = must(P.modelledAtWell(w), w);
     return { name: w, modelled: { A: m.A, B: m.B }, observed: { A: o.A, B: o.B }, layer: m.layer, pickMs: o.pickMs, csMs: o.checkshotTwtMs };
   });
-  const cmpW = compareAtWells(rows41);
+  const cmpW = must(P.avoAtWells(rows41), 'avo at wells');
   const As = []; const Bs = [];
   for (let i = 0; i < g5.traces[0].length; i++) {
     const f = P.shueyFit(E.stackAngles, ag5.gather.map((b) => b[i]), { terms: 2 });
@@ -337,7 +348,7 @@ CONDITIONING BEFORE AVO. QI Studio conditions angle stacks before the fit: trim 
 
   /* ------------------------------------------------------------ 41 */
   out.push(section(41, 'AVO at the wells, and the Professional capstone', 'Professional m06', `
-THE COMPARISON (QI Studio's \`compareAtWells\`, ${SUITE.avoWells}, petrolord-suite ${sc}, app code): at every well, the intercept and gradient modelled from the logs against those the seismic shows. One least-squares scale ties the seismic amplitudes to reflectivity over every well, A and B together: scale = sum(observed x modelled) / sum(modelled^2). Each well's seismic A and B are divided by the scale; its residual is the distance between the scaled point and the modelled one, and the AVO classes (engines qi/avo avoClass, band 0.02) of the two are compared.
+THE COMPARISON (compareAtWells, engines/qi/avoWells.js, the function QI Studio runs): at every well, the intercept and gradient modelled from the logs against those the seismic shows. One least-squares scale ties the seismic amplitudes to reflectivity over every well, A and B together: scale = sum(observed x modelled) / sum(modelled^2). Each well's seismic A and B are divided by the scale; its residual is the distance between the scaled point and the modelled one, and the AVO classes (engines qi/avo avoClass, band 0.02) of the two are compared.
 
 THE INPUTS. MODELLED: the cap rock over the oil leg at each well (Associate section 19), or over its net sand where the well has no oil leg. SEISMIC: the top picked on the near stack trace within ${whole(E.pickHalfWindowMs)} ms of its checkshot time, the near, mid and far stack traces read at that sample and fitted with two Shuey terms at ${E.stackAngles.map(whole).join(', ')} degrees.
 

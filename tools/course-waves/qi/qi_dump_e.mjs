@@ -1,10 +1,9 @@
 // THE EXPERT SECTIONS OF THE QI TEACHING DIGEST (sections 42 to 59).
 // Printed from the Expert teaching lab's own return values (qiLabExp.js,
 // through qi_engine_e.mjs), on the Ekene teaching pack and the Ekene Sand top
-// grid. Two pieces of QI Studio app code are run for comparison, through the
-// loader's '@suite/' alias, and labelled as app code where they print:
-// inversionRun.waveletScale and propertyRun.calibrateProperty, plus the
-// Seismolord well-wavelet extraction whose refusal section 52 quotes.
+// grid. Every engine it calls is vendored and gated (a golden and an
+// independent oracle), QI Studio's service maths included (inversionQc,
+// propertyCalibration, prospectTrap, angleWavelets, seismolord wellWavelet).
 import { f6, whole, table, section, refusal } from './qi_digest_kit.mjs';
 import { LABE as E } from './qi_engine_e.mjs';
 import * as INV from '@petrolord/engines/engines/qi/inversion.js';
@@ -14,10 +13,6 @@ import * as PP from '@petrolord/engines/engines/qi/propertyPrediction.js';
 import * as LFM from '@petrolord/engines/engines/qi/lfm.js';
 import * as PA from '@petrolord/engines/engines/qi/prospectAssessment.js';
 import * as CL from '@petrolord/engines/lib/gridding/closure.js';
-import { mulberry32 } from '@petrolord/engines/lib/stats/stats.js';
-import { waveletScale as suiteWaveletScale } from '@suite/pages/apps/QIStudio/services/inversionRun.js';
-import { calibrateProperty } from '@suite/pages/apps/QIStudio/services/propertyRun.js';
-import { extractWellWavelet } from '@suite/pages/apps/Seismolord/lib/wellWavelet.js';
 
 const X = E.EXPERT;
 const fin = Number.isFinite;
@@ -27,18 +22,13 @@ const ft = (m) => f6(m / 0.3048);
 const covered = (log) => log.lnAi.map((v, i) => (fin(v) ? i : -1)).filter((i) => i >= 0);
 const scoreRow = (s) => (s.error ? [s.error, '', ''] : [f6(s.corr), f6(s.rmsPct), whole(s.n)]);
 
-export const SUITE_FILES_E = {
-  inversionRun: 'src/pages/apps/QIStudio/services/inversionRun.js',
-  propertyRun: 'src/pages/apps/QIStudio/services/propertyRun.js',
-  wellWavelet: 'src/pages/apps/Seismolord/lib/wellWavelet.js',
-};
 
 export function sectionsE(ctx) {
   const out = [];
   const S = E.ekeneSetup();
   if (S.error) throw new Error(S.error);
   const E1 = S.logs.find((l) => l.name === 'Ekene-1');
-  const sc = ctx.suiteCommit.slice(0, 9);
+  void ctx;
 
   /* ------------------------------------------------------------ 42 */
   out.push(section(42, 'What the Expert tier adds, and the settings it states', 'Expert m01 l01', `
@@ -52,8 +42,12 @@ ${table(['engine', 'what it computes', 'gate'], [
     ['engines/qi/prestackInversion.js', "Fatti's coefficients, the prestack forward model, simultaneous inversion", 'golden and oracle (pylops)'],
     ['engines/qi/propertyPrediction.js', 'the linear transform and its interval, Bayesian facies, the confusion matrix', 'golden and oracle'],
     ['lib/gridding/closure.js', 'crest, spill point, closure and gross rock volume', 'golden and oracle'],
-    ['engines/qi/lfm.js', 'the low-frequency model between wells, the blind-well score', 'awaiting its oracle; taught, and graded only once it lands'],
-    ['engines/qi/prospectAssessment.js', 'anomaly conformance, evidence independence, the assessment', 'awaiting its oracle; taught, and graded only once it lands'],
+    ['engines/qi/lfm.js', 'the low-frequency model between wells, the blind-well score', 'golden and oracle'],
+    ['engines/qi/inversionQc.js', 'the wavelet scale at the wells, the moving-average high cut, the blind-well table', 'golden and oracle'],
+    ['engines/qi/propertyCalibration.js', 'the property calibration at seismic scale and its left-out-well check', 'golden and oracle'],
+    ['engines/qi/angleWavelets.js and engines/seismolord/wellWavelet.js', 'a wavelet per angle stack by least squares at the wells', 'golden and oracle'],
+    ['engines/qi/prospectAssessment.js', 'anomaly conformance, evidence independence, the assessment', 'golden and oracle'],
+    ['engines/qi/prospectTrap.js', 'the climb to a local crest, the trap and the anomaly of one prospect', 'golden and oracle'],
   ])}
 
 THE SETTINGS THE TIER STATES ON THE EKENE PACK (each a stated input; QI Studio's own starting values where it has one):
@@ -80,12 +74,8 @@ ${table(['well', 'log samples in the window', 'first logged time ms', 'last logg
   }))}`));
 
   /* ------------------------------------------------------------ 43 */
-  const rng = mulberry32(42);
-  const xv = Array.from({ length: S.win.ns }, () => rng() - 0.5);
-  const yv = Array.from({ length: S.win.ns }, () => rng() - 0.5);
-  const dot = (a, b) => a.reduce((s, v, i) => s + v * b[i], 0);
-  const lhsD = dot(INV.diffCentred(xv), yv); const rhsD = dot(xv, INV.diffCentredAdjoint(yv));
-  const lhsC = dot(INV.convolveCentred(xv, S.wavelet), yv); const rhsC = dot(xv, INV.convolveCentredAdjoint(yv, S.wavelet));
+  const adj = E.adjointTest(S.wavelet, S.win.ns, 42);
+  const [lhsD, rhsD] = adj.d; const [lhsC, rhsC] = adj.c;
   const fill = E1.lnAi.map((v, i, a) => (fin(v) ? v : NaN));
   const firstI = covered(E1)[0]; const lastI = covered(E1).at(-1);
   const held = fill.map((v, i) => (fin(v) ? v : (i < firstI ? fill[firstI] : fill[lastI])));
@@ -97,7 +87,7 @@ ${table(['well', 'log samples in the window', 'first logged time ms', 'last logg
   out.push(section(43, 'The convolutional model and its adjoint', 'Expert m01 l02', `
 THE MODEL (forwardPoststack, the operator of pylops' PoststackLinearModelling, kind centred). The unknown is m = ln(AI) on the trace clock; D is the centred first difference, (D m)_i = (m_(i+1) - m_(i-1)) / 2, zero at the first and last sample; C is the centred convolution with the wavelet (offset the floor of half its length). The seismic trace is d = C D m. Half the difference of ln(AI) is close to the reflection coefficient for small contrasts, which is why the model is written in ln(AI).
 
-THE ADJOINT. Every solver here needs the transpose of the operator. The test of an adjoint is the dot product: for any x and y, (C x) . y equals x . (C^T y). On two seeded vectors of ${whole(S.win.ns)} samples (mulberry32 seed 42):
+THE ADJOINT. Every solver here needs the transpose of the operator. The test of an adjoint is the dot product: for any x and y, (C x) . y equals x . (C^T y). On two vectors of ${whole(S.win.ns)} samples from the canonical seeded generator (mulberry32 on seed 42, each value uniform less one half, x drawn first and then y), the test the inversion explorer's forward view runs on the seed it states:
 
 ${table(['operator', '(A x) . y', 'x . (A^T y)', 'difference'], [
     ['centred difference D', f6(lhsD), f6(rhsD), f6(lhsD - rhsD)],
@@ -128,7 +118,7 @@ Over the logged samples the synthetic and the trace correlate at ${f6(cSyn.corr)
   out.push(section(44, 'The low-frequency model from wells and horizons', 'Expert m01 l03 and Expert m02 l04', `
 WHY IT IS NEEDED. The seismic band holds no trend: a band-limited trace says how impedance changes and says nothing of its level. The low-frequency model (LFM) supplies what the seismic lacks below about ${whole(X.lfmHz)} Hz, from the wells.
 
-HOW IT IS BUILT (lfm.js; THIS ENGINE AWAITS ITS INDEPENDENT ORACLE, engines PR E1c: the course teaches it and grades nothing through it until that lands). Each well's ln(AI) in time is low-passed by a moving average whose half window is round(1000 / (cut x dt) / 2) samples (${whole(E.halfWindowFor(X.lfmHz, S.win.dtMs))} samples here, lowFrequencyModel), then carried to a trace by inverse distance weighting with power ${whole(X.idwPower)}. Between two horizons a sample keeps its proportional position (mapToWellTime), so a layer that thickens or dips between wells keeps its impedance; above the first horizon and below the last the time offset from that horizon is kept. Samples no well covers hold the nearest covered value.
+HOW IT IS BUILT (lfm.js). Each well's ln(AI) in time is low-passed by a moving average whose half window is round(1000 / (cut x dt) / 2) samples (${whole(E.halfWindowFor(X.lfmHz, S.win.dtMs))} samples here, lowFrequencyModel), then carried to a trace by inverse distance weighting with power ${whole(X.idwPower)}. Between two horizons a sample keeps its proportional position (mapToWellTime), so a layer that thickens or dips between wells keeps its impedance; above the first horizon and below the last the time offset from that horizon is kept. Samples no well covers hold the nearest covered value.
 
 THE PROPORTIONAL POSITION, the Ekene-1 trace's times mapped to Ekene-2's horizons (top and base Ekene Sand):
 
@@ -142,15 +132,14 @@ ${table(['well', 'LFM ln(AI), well left out', 'LFM ln(AI), well kept', 'LFM-only
 
   /* ------------------------------------------------------------ 45 */
   const pairs = S.logs.map((l) => ({ trace: E.wellTrace(l.name), lnAi: l.lnAi }));
-  const suite = suiteWaveletScale(pairs, S.raw);
   out.push(section(45, 'The wavelet scale', 'Expert m01 l04', `
 THE PROBLEM. A wavelet extracted or chosen for its shape carries an arbitrary amplitude, and the inversion reads impedance contrast from the ratio of the trace to the synthetic. The scale is set at the wells: the one number s that makes s times the forward model of the logs match the seismic best, by least squares pooled over every well sample whose wavelet span the log covers.
 
 THE EKENE SCALE. The ${whole(X.waveletHz)} Hz Ricker (peak amplitude ${f6(Math.max(...S.raw))}) against the full stack at the four pack wells: scale ${f6(S.scale)} over ${whole(S.scaleSamples)} samples; the scaled wavelet's peak is ${f6(Math.max(...S.wavelet))}.
 
-THE SAME BY QI STUDIO'S OWN CODE. \`waveletScale\` in ${SUITE_FILES_E.inversionRun} (APP CODE, petrolord-suite ${sc}; it is not one of the extraction-gated engines) on the same pairs returns ${f6(suite.scale)} over ${whole(suite.samples)} samples.
+THE ENGINE. \`waveletScale\` in engines/qi/inversionQc.js, the rule QI Studio runs, computes the scale; the course's lab calls it on the four pack wells.
 
-A REFUSAL BY THE SAME RULE. QI Studio refuses to scale when the wells overlap fewer than ten usable samples of seismic: "${refusal(() => suiteWaveletScale([{ trace: [1, 2, 3], lnAi: [15, 15.1, 15.2] }], S.raw))}"`));
+A REFUSAL BY THE SAME RULE. The engine refuses to scale when the wells overlap fewer than ten usable samples of seismic: "${E.waveletScale([{ trace: [1, 2, 3], lnAi: [15, 15.1, 15.2] }], S.raw).error}"`));
 
   /* ------------------------------------------------------------ 46 */
   const mb = E.invertAt(S, 'Ekene-1', { exclude: true });
@@ -233,6 +222,11 @@ The logs here are short (the pack covers the Ekene Sand and the shale above it),
   /* ------------------------------------------------------------ 49 */
   const bt = E.blindTable(S);
   const btS = E.blindTable(S, 'sparse_spike');
+  const lfmBeatsMb = bt.filter((r) => r.lfmOnly.rmsPct < r.blind.rmsPct).length;
+  const lfmBeatsSp = bt.filter((r, k) => r.lfmOnly.rmsPct < btS[k].blind.rmsPct).map((r) => r.name);
+  const spBeatsLfm = bt.filter((r, k) => !(r.lfmOnly.rmsPct < btS[k].blind.rmsPct)).map((r) => r.name);
+  const allCorr = [...bt.map((r) => r.blind.corr), ...btS.map((r) => r.blind.corr)];
+  const corrLo = Math.min(...allCorr); const corrHi = Math.max(...allCorr);
   out.push(section(49, 'Blind wells', 'Expert m02 l04 and Expert m03 l04', `
 THE CHECK. Each well is inverted with the LFM built from the OTHER wells, and scored against its own log after the ${whole(X.truthHz)} Hz high cut (blindWellScore: the correlation of AI with the log's AI, and the RMS of the relative AI error in percent, over samples where both exist). Beside it the same well with itself in the LFM, and the LFM alone: the share of the match that comes from the LFM is then visible. The same rule as QI Studio's blind-well table.
 
@@ -244,7 +238,7 @@ SPARSE-SPIKE, blind:
 
 ${table(['well', 'blind correlation', 'blind AI error percent'], btS.map((r) => [r.name, f6(r.blind.corr), f6(r.blind.rmsPct)]))}
 
-Read the columns together. The LFM alone carries the level, with a lower RMS error than either inversion at every well here, and a negative correlation: it has none of the shape. The inversions follow the shape (blind correlations from about 0.76 to 0.89) at a larger RMS error. A study quotes both figures.`));
+Read the columns together. The LFM alone has a negative correlation at every well: it carries the level and none of the shape. Its RMS error is lower than the model-based blind error at ${whole(lfmBeatsMb)} of ${whole(bt.length)} wells, and lower than the sparse-spike blind error at ${whole(lfmBeatsSp.length)} of ${whole(bt.length)} (${lfmBeatsSp.join(', ')}); sparse-spike has the lower error at ${spBeatsLfm.join(' and ')}. The inversions follow the shape, with blind correlations from ${f6(corrLo)} to ${f6(corrHi)} across both methods. A study quotes both figures.`));
 
   /* ------------------------------------------------------------ 50 */
   const sprd = E.spreadAt(S, 'Ekene-1');
@@ -253,7 +247,7 @@ Read the columns together. The LFM alone carries the level, with a lower RMS err
   out.push(section(50, 'Sensitivity across realisations', 'Expert m02 l05', `
 THE METHOD (inversionSpread.js). Realisations that differ in one assumption each, here the noise: the Ekene-1 full-stack trace plus seeded Gaussian noise at a signal-to-noise ratio of ${whole(X.noiseSnr)} (addNoise: RMS of the trace over the noise standard deviation), on the ${whole(X.seeds.length)} seeds ${whole(X.seeds[0])} to ${whole(X.seeds[X.seeds.length - 1])}, each inverted blind exactly as section 46. Per sample, the quantiles across the realisations (quantilesAcross: linear interpolation between order statistics, Hyndman and Fan type 7) and the relative spread (Q90 - Q10) / Q50 (relativeSpread).
 
-THE LABELS (the Suite's percentile convention for parameters, PT10): Q10 is the 10th percentile, the value 10 percent of realisations fall below, so it is the LOW figure; Q50 the median; Q90 the 90th percentile, the HIGH figure. P-labels are kept for outcomes such as volumes, where P90 is the low figure.
+THE LABELS (the course's percentile convention for parameters): Q10 is the 10th percentile, the value 10 percent of realisations fall below, so it is the LOW figure; Q50 the median; Q90 the 90th percentile, the HIGH figure. P-labels are kept for outcomes such as volumes, where P90 is the low figure.
 
 EKENE-1, ${whole(sprd.realisations)} realisations, AI:
 
@@ -272,12 +266,17 @@ THE EKENE BACKGROUND Vs/Vp: the mean of Vs / Vp over every logged sample of the 
 
 ${table(['angle degrees', 'G1 (AI)', 'G2 (SI)', 'G3 (density)'], G.map((g, i) => [whole([0, 10, 20, 30, 40][i]), f6(g[0]), f6(g[1]), f6(g[2])]))}
 
-At normal incidence only AI contributes. G3 is negative and the smallest of the three in size at every angle in the table, and it grows fastest between 30 and 40 degrees: density is the parameter the angles see least.`));
+At normal incidence only AI contributes: G2 and G3 are zero there. At every other angle in the table G3 is negative and the smallest of the three in size, and its size grows more between 30 and 40 degrees than between any earlier pair of angles: density is the parameter the angles see least.`));
 
   /* ------------------------------------------------------------ 52 */
   const rcE1 = Float64Array.from(E1.lnAi.map((v, i, a) => (fin(v) && fin(a[i - 1]) ? 0.5 * (v - a[i - 1]) : NaN)));
-  const sw15 = refusal(() => extractWellWavelet(rcE1, tr1, { halfLength: 15 }));
-  const sw5 = refusal(() => extractWellWavelet(rcE1, tr1, { halfLength: 5 }));
+  const sw15 = E.wellWaveletOf(rcE1, tr1, { halfLength: 15 }).error;
+  const sw5 = E.wellWaveletOf(rcE1, tr1, { halfLength: 5 }).error;
+  if (!sw15 || !sw5) throw new Error('section 52: the well-wavelet extraction no longer refuses on the pack');
+  const aw3 = E.angleWaveletsAt(S, M, { halfLength: 3 });
+  const aw15 = E.angleWaveletsAt(S, M, { halfLength: 15 });
+  if (aw3.error || aw15.error) throw new Error(aw3.error || aw15.error);
+  const awRows = aw3.flatMap((a) => a.wells.map((w) => [whole(a.angle), w.name, fv(w.fitCorr), fv(w.synthCorr)]));
   out.push(section(52, 'Angle-dependent wavelets', 'Expert m03 l02', `
 WHY EACH ANGLE HAS ITS OWN. A far-angle stack carries less high frequency and a different amplitude scale than a near one, so the simultaneous inversion takes one wavelet per angle stack.
 
@@ -285,7 +284,11 @@ THE EKENE SETTING. The same ${whole(X.waveletHz)} Hz Ricker shape for every stac
 
 ${table(['stack', 'angle degrees', 'scale', 'samples'], M.stacks.map((k, i) => [k, whole(M.angles[i]), f6(M.scales[i].scale), whole(M.scales[i].samples)]))}
 
-QI STUDIO extracts a wavelet per angle at every well by least squares against that well's reflectivity, then aligns and averages them across the wells (angleWavelets, APP CODE). On the pack's short logs that extraction refuses. Seismolord's well-wavelet extraction (${SUITE_FILES_E.wellWavelet}, petrolord-suite ${sc}) at Ekene-1, on the half differences of the ln(AI) log in time: with its default half length of 15 samples (a 31-sample wavelet, longer than the ${whole(covered(E1).length)} logged samples, so no row of the fit is complete) it says "${sw15}"; with a half length of 5 it says "${sw5}" The course therefore states the shape and scales it per stack.`));
+THE ENGINE QI STUDIO RUNS (extractAngleWavelets, engines/qi/angleWavelets.js) extracts a wavelet per angle at every well by least squares against that well's Fatti reflectivity at the stack's angle (extractWellWavelet, engines/seismolord/wellWavelet.js), then aligns and averages them across the wells. On the pack's short logs the extraction is limited by the wavelet length. At Ekene-1, on the half differences of the ln(AI) log in time: with the default half length of 15 samples (a 31-sample wavelet, longer than the ${whole(covered(E1).length)} logged samples, so no row of the fit is complete) it says "${sw15}"; with a half length of 5 it says "${sw5}" Over the four wells, extractAngleWavelets returns no wavelet for any stack at a half length of 15 (${whole(aw15.filter((a) => a.samples).length)} of ${whole(aw15.length)} stacks), and a ${whole(aw3[0].samples ? aw3[0].samples.length : 0)}-sample wavelet for each of the ${whole(aw3.filter((a) => a.samples).length)} stacks at a half length of 3, each well's fit and the correlation of its synthetic with the stack:
+
+${table(['angle degrees', 'well', 'fit correlation', 'synthetic against the stack'], awRows)}
+
+A ${whole(aw3[0].samples ? aw3[0].samples.length : 0)}-sample wavelet spans ${f6(((aw3[0].samples ? aw3[0].samples.length : 1) - 1) * S.win.dtMs)} ms, shorter than the stated Ricker; the course therefore states the Ricker shape and scales it per stack for the inversions in sections 53 and 54.`));
 
   /* ------------------------------------------------------------ 53 */
   const simAll = S.logs.map((l) => ({ l, full: E.simAt(S, M, l.name, { exclude: true }), near: E.simAt(S, M, l.name, { exclude: true, stacks: ['near'] }), nm: E.simAt(S, M, l.name, { exclude: true, stacks: ['near', 'mid'] }) }));
@@ -293,7 +296,7 @@ QI STUDIO extracts a wavelet per angle at every well by least squares against th
   const sc3 = (res) => E.scoreSim(res, r1.l);
   const lfmOnly1 = (() => { const at = { x: r1.l.x, y: r1.l.y, horizons: r1.l.horizonsMs }; const o = { exclude: 'Ekene-1' }; return { lnAi: E.lfmAt(M.lfm.lnAi, at, S.win, o), lnSi: E.lfmAt(M.lfm.lnSi, at, S.win, o), lnRho: E.lfmAt(M.lfm.lnRho, at, S.win, o) }; })();
   const row6 = (s) => [f6(s.ai.corr), f6(s.ai.rmsPct), f6(s.vpvs.corr), f6(s.vpvs.rmsPct), f6(s.rho.corr), f6(s.rho.rmsPct)];
-  out.push(section(53, 'Why density needs the far angles', 'Expert m03 l03', `
+  out.push(section(53, 'What each set of stacks resolves', 'Expert m03 l03', `
 THE EXPERIMENT. Ekene-1, blind, simultaneous inversion with eps ${X.simEps.map(f6).join(', ')} and ${whole(X.iters)} iterations, from three sets of stacks; each parameter scored against the well's log after the high cut (correlation; RMS of the relative error in percent of AI, Vp/Vs and density):
 
 ${table(['stacks used', 'AI correlation', 'AI error percent', 'Vp/Vs correlation', 'Vp/Vs error percent', 'density correlation', 'density error percent'], [
@@ -303,7 +306,7 @@ ${table(['stacks used', 'AI correlation', 'AI error percent', 'Vp/Vs correlation
     ['near, mid and far', ...((s) => [f6(s.ai.corr), f6(s.ai.rmsPct), f6(s.vpvs.corr), f6(s.vpvs.rmsPct), f6(s.rho.corr), f6(s.rho.rmsPct)])(sc3(r1.full))],
   ])}
 
-AI is held by the near angles alone. With the near stack only, density keeps an RMS error close to the LFMs-alone row, both under one percent: the near stack barely moves its level. G3 is tiny at ${whole(X.angles.near)} degrees (section 51), so the near stack carries almost no density information. With the mid and far stacks added, the density correlation at Ekene-1 turns negative: the inversion moves density away from the log, and density is the least reliable of the three parameters in this table. The far stack here reaches ${whole(X.angles.far)} degrees, and G3 grows fastest beyond it.`));
+AI is held by the near angles alone: its correlation hardly changes between the three sets of stacks. With the near stack only, density's RMS error stays under one percent, as it does with the LFMs alone, while its correlation changes from the LFMs' value: the near stack, where G3 is tiny (section 51), moves density's shape without moving its level far. With the mid and far stacks added, density's correlation at Ekene-1 is negative and its error rises above ten percent: density is the least reliable of the three parameters in this table. The far stack here reaches ${whole(X.angles.far)} degrees; section 51 shows G3 growing most beyond that.`));
 
   /* ------------------------------------------------------------ 54 */
   out.push(section(54, 'Blind wells per parameter', 'Expert m03 l04', `
@@ -334,18 +337,10 @@ ${table(['AI kg/(m2 s)', 'predicted porosity', 'Q10 (low end, 80 percent)', 'Q90
 The last row lies outside the calibration range: the engine still answers, and its interval widens only by the distance term. At the 90 percent level and AI 7000000 the interval is ${f6(lvl90.predictions[0].lo)} to ${f6(lvl90.predictions[0].hi)}.`));
 
   /* ------------------------------------------------------------ 56 */
-  const blindAi = S.logs.map((l) => E.invertAt(S, l.name, { exclude: true }).ai);
-  const pr = {
-    kind: 'porosity', upscaleHz: X.truthHz,
-    wells: S.logs.map((l, k) => ({
-      name: l.name, il: k, xl: 0,
-      ln_ai: Array.from(l.lnAi, (v) => (fin(v) ? v : null)),
-      target: Array.from(l.phit, (v, i) => { const t = ms(S, i); return fin(v) && t >= l.horizonsMs[0] && t <= l.horizonsMs[1] ? v : null; }),
-    })),
-  };
-  const cal = calibrateProperty({ pr, aiTraces: blindAi.map((a) => Array.from(a)), dtMs: S.win.dtMs });
+  const cal = E.leftOutBand(S);
+  if (cal.error) throw new Error(cal.error);
   out.push(section(56, 'Left-out wells and the widened band', 'Expert m04 l02', `
-THE CHECK (QI Studio's calibrateProperty in ${SUITE_FILES_E.propertyRun}, APP CODE, petrolord-suite ${sc}; it calls the extraction-gated engine propertyPrediction.js). At seismic scale: each well's ln(AI) and porosity in time are low-passed at ${whole(X.truthHz)} Hz, the transform is fitted to the wells, then each well is left out, the transform refitted on the others, and porosity predicted from the BLIND INVERTED AI at that well (section 49). The left-out residuals carry the inversion's error, which a log-against-log fit cannot see, so their pooled RMS widens the band: s_extra = sqrt(RMS^2 - s^2) when the RMS exceeds s. Each well's coverage is tested with the other wells' residuals only.
+THE CHECK (calibrateProperty in engines/qi/propertyCalibration.js, the rule QI Studio runs, over propertyPrediction.js). At seismic scale: each well's ln(AI) and porosity in time are low-passed at ${whole(X.truthHz)} Hz, the transform is fitted to the wells, then each well is left out, the transform refitted on the others, and porosity predicted from the BLIND INVERTED AI at that well (section 49). The left-out residuals carry the inversion's error, which a log-against-log fit cannot see, so their pooled RMS widens the band: s_extra = sqrt(RMS^2 - s^2) when the RMS exceeds s. Each well's coverage is tested with the other wells' residuals only.
 
 EKENE, the porosity of each well inside its Ekene Sand times:
 
@@ -399,6 +394,16 @@ A FLUID HYPOTHESIS. A facies named for a fluid (oil sand, brine sand) is a hypot
   const owcFt = -1560 / 0.3048;
   const atOwc = CL.closureAt(clo.spill, g.spec, owcFt);
   const live = Array.from(g.z).filter((v) => Math.abs(v) < 1e29).length;
+  let startNode = -1; let bestD = Infinity;
+  for (let i = 0; i < g.z.length; i++) {
+    if (!(Math.abs(g.z[i]) < 1e29)) continue;
+    const r = Math.floor(i / g.spec.nx); const c = i % g.spec.nx;
+    const d = (r - (g.spec.ny - 1) / 2) ** 2 + (c - (g.spec.nx - 1) / 2) ** 2;
+    if (d < bestD) { bestD = d; startNode = i; }
+  }
+  const startR = Math.floor(startNode / g.spec.nx); const startC = startNode % g.spec.nx;
+  const climb = E.trapFrom(g, startNode);
+  if (climb.error) throw new Error(climb.error);
   const maskA = E.maskAbove(g, clo.spillZ);
   const xMid = g.spec.x0 + Math.floor(g.spec.nx / 2) * g.spec.dx;
   const maskB = E.maskCut(g, clo.spillZ - 20, xMid);
@@ -431,7 +436,7 @@ ${table(['quantity', 'value'], [
 
 The map spills at the edge of its own mapped area, ${f6(clo.columnFt)} ft below the crest and above the contact the wells see: six wells grid too little of the structure to close the trap on the map. The engine says so (limited by the edge); a closure figure from this grid is the map's limit and no measurement of the trap.
 
-ANOMALY CONFORMANCE (prospectAssessment.js anomalyConformance; THIS ENGINE AWAITS ITS INDEPENDENT ORACLE, engines PR E1c: taught, and graded only once it lands). A hydrocarbon anomaly ends downdip at a contact, so its downdip edge follows one depth contour. The engine reads the anomaly's downdip edge (an anomaly node beside a lower node outside it, at their midpoint), its scatter against the closure's relief, conformance = 1 - scatter / relief clipped to 0 to 1, the share of the anomaly inside the closure, and the contact the edge implies. Two DESIGNED TEACHING ANOMALIES on the Ekene grid, labelled as such: A, every mapped node shallower than the spill; B, every node shallower than a level 20 ft below the spill, kept only west of the grid's middle column (an anomaly that cuts across the contours):
+ANOMALY CONFORMANCE (prospectAssessment.js anomalyConformance). A hydrocarbon anomaly ends downdip at a contact, so its downdip edge follows one depth contour. The engine reads the anomaly's downdip edge (an anomaly node beside a lower node outside it, at their midpoint), its scatter against the closure's relief, conformance = 1 - scatter / relief clipped to 0 to 1, the share of the anomaly inside the closure, and the contact the edge implies. Two DESIGNED TEACHING ANOMALIES on the Ekene grid, labelled as such: A, every mapped node shallower than the spill; B, every node shallower than a level 20 ft below the spill, kept only west of the grid's middle column (an anomaly that cuts across the contours):
 
 ${table(['anomaly', 'nodes', 'edge nodes', 'conformance', 'share inside the closure', 'implied contact ft', 'edge scatter ft'], [cfRow('A, a contour', cA), cfRow('B, cut across', cB)])}
 
@@ -441,7 +446,9 @@ THE ASSESSMENT (assessProspect, the decision table; conformance 0.7 and above fi
 
 ${table(['case', 'recommendation', 'seismic support'], asmt)}
 
-The absence of an anomaly counts against a prospect only where the feasibility study says the case would be visible.`));
+The absence of an anomaly counts against a prospect only where the feasibility study says the case would be visible. A COMPETING EXPLANATION (tuning, a lithology change, a processing artefact) is an input with a status of open, ruled out or likely; one judged likely holds the prospect at investigate, as the last row shows. The prospect explorer's assessment states it as a control.
+
+THE CLIMB TO A CREST (climbToCrest, engines/qi/prospectTrap.js). A prospect picked at a point starts from the nearest mapped node and steps to the highest of its eight neighbours until none is higher. On the Ekene grid, from the mapped node nearest the grid's centre (column ${whole(startC)}, row ${whole(startR)}, ${f6(g.z[startNode])} ft), the climb ends at node ${whole(climb.seed)}, at ${f6(climb.crestZ)} ft; the highest mapped node is ${f6(clo.crestZ)} ft, so ${climb.seed === clo.spill.order[0] ? 'the climb reaches the same crest' : 'the climb stops at a different, local crest'}.`));
 
   /* ------------------------------------------------------------ 59 */
   out.push(section(59, 'The report and the limits, and the Expert capstone', 'Expert m06 l01 and Expert m06 l02 and Expert m06 l03 and Expert m06 l04', `

@@ -275,5 +275,381 @@ def main():
     sys.exit(1 if bad else 0)
 
 
+# ------------------------------------------------ Professional: QUARVIN
+# Independent replay of the six QUARVIN fields, written from the published
+# methods and the engines' stated conventions:
+#   Dix        Vint^2 = (V2^2 t2 - V1^2 t1) / (t2 - t1), times in seconds, the
+#              first row's interval velocity its own RMS velocity
+#   on a time  Vrms linear in time between rows, flat outside; Vint the Dix
+#              velocity of the row segment the time falls in
+#   Walden     sin(theta) = (Vint / Vrms) x / sqrt(x^2 + (Vrms t0)^2)
+#   stretch    sqrt(t0^2 + x^2 / v^2) / t0 - 1 with v = Vrms
+#   far stack  every trace's sample at the target time binned by its Walden
+#              angle (bin k holds [edge k, edge k + 1)), the partial stack the
+#              mean of every sample in the stated bins (fold-weighted)
+#   Shuey      two-term least squares of amplitude on sin^2(theta) at the
+#              stated bin angles, by the closed-form simple regression
+#   one scale  sum(observed x modelled) / sum(modelled^2) over A and B
+QCASE = os.path.join(os.path.dirname(CASE), 'quarvin_case.json')
+
+
+def professional(plant):
+    fields = {r[1]: r for r in json.load(open(os.path.join(HERE, 'fields.json'))) if r[0] == 'intermediate'}
+    if len(fields) != 6:
+        return None
+    c = json.load(open(QCASE))
+    st = c['stated']
+    tms = [r[0] for r in c['velocity']['rows']]
+    vr = [r[1] for r in c['velocity']['rows']]
+    ts = [max(t, 1e-6) / 1000 for t in tms]
+    seg = [vr[0]] + [math.sqrt((vr[i] ** 2 * ts[i] - vr[i - 1] ** 2 * ts[i - 1]) / (ts[i] - ts[i - 1])) for i in range(1, len(vr))]
+
+    def vel_at(t):
+        if t <= tms[0]:
+            return vr[0], seg[0]
+        if t >= tms[-1]:
+            return vr[-1], seg[-1]
+        j = max(k for k in range(len(tms) - 1) if tms[k] < t)
+        f = (t - tms[j]) / (tms[j + 1] - tms[j])
+        return vr[j] + f * (vr[j + 1] - vr[j]), seg[j + 1]
+
+    def walden(x, t_ms, vrms, vint):
+        sn = (vint / vrms) * x / math.sqrt(x * x + (vrms * t_ms / 1000) ** 2)
+        return 90.0 if sn >= 1 else math.degrees(math.asin(sn))
+
+    li = tms.index(st['dixLayer']['toMs'])
+    dix = seg[li]
+    vrms, vint = vel_at(st['timeMs'])
+    wal = walden(st['offsetM'], st['timeMs'], vrms, vint)
+    t0 = st['timeMs'] / 1000
+    stretch = math.sqrt(t0 * t0 + st['offsetM'] ** 2 / vrms ** 2) / t0 - 1
+    g = c['gather']
+    i = round((st['targetMs'] - g['t0_ms']) / g['dt_ms'])
+    t_i = g['t0_ms'] + i * g['dt_ms']
+    vr_i, vi_i = vel_at(t_i)
+    edges = st['angleEdges']
+    sums = [0.0] * (len(edges) - 1)
+    fold = [0] * (len(edges) - 1)
+    for x, tr in zip(g['offsets_m'], g['traces']):
+        v = tr[i]
+        if v is None or not math.isfinite(v) or abs(v) >= 1e29:
+            continue
+        a = walden(x, t_i, vr_i, vi_i)
+        for k in range(len(edges) - 1):
+            if edges[k] <= a < edges[k + 1]:
+                sums[k] += v
+                fold[k] += 1
+                break
+    lo, hi = st['farBins']
+    far = sum(sums[lo:hi]) / sum(fold[lo:hi])
+    xs = [math.sin(math.radians(a)) ** 2 for a in st['stackAngles']]
+    ys = [sums[k] / fold[k] for k in range(len(sums))]
+    xb, yb = sum(xs) / len(xs), sum(ys) / len(ys)
+    b = sum((x - xb) * (y - yb) for x, y in zip(xs, ys)) / sum((x - xb) ** 2 for x in xs)
+    a_int = yb - b * xb
+    so = sum(w['observed'][k] * w['modelled'][k] for w in c['wells'] for k in ('A', 'B'))
+    sm = sum(w['modelled'][k] ** 2 for w in c['wells'] for k in ('A', 'B'))
+    mine = {'quarvin_dix_vint': dix, 'quarvin_walden_deg': wal, 'quarvin_nmo_stretch': stretch,
+            'quarvin_far_stack_amp': far, 'quarvin_shuey_a': a_int, 'quarvin_one_scale': so / sm}
+    if plant:
+        mine['quarvin_shuey_a'] = fields['quarvin_shuey_a'][2] + 10 * fields['quarvin_shuey_a'][3]
+    bad, worst = [], (-1.0, '')
+    for k, (_, _, v, tol) in fields.items():
+        o = mine[k]
+        rel = abs(o - v) / max(abs(v), 1e-300)
+        print(f'  {k:24s} engine {v!r:24s} oracle {o!r:24s} relative {rel:.2e}  tolerances {abs(o - v) / tol:.3e}')
+        worst = max(worst, (rel, k))
+        if rel > REL or abs(o - v) > tol:
+            bad.append(k)
+    print(f'oracle_check: 6 Professional fields replayed in standard-library Python; worst relative disagreement {worst[0]:.2e} ({worst[1]}); over {REL}: {len(bad)}')
+    return bad
+
+
+
+# ---------------------------------------------------------------- Expert
+# THE SIX DELSHOLM FIELDS, replayed with the standard library alone from the
+# case file, written from the published methods and the engines' stated
+# conventions (never their code):
+#   LFM        the wells' supplied low-passed ln(AI), each sample of the second
+#              position mapped to a well time by its proportional position
+#              between the two horizons (offset kept above the first and below
+#              the last), sampled linearly, weighted by inverse distance to the
+#              stated power; samples no well covers hold the nearest covered
+#              value
+#   model-based  the regularised least-squares problem SOLVED EXACTLY by its
+#              normal equations, (A'A + eps^2 I) m = A'd + eps^2 m0, A = C D
+#              (centred difference, centred convolution), by Gaussian
+#              elimination; the engine iterates CGLS from m0, so the two agree
+#              when the engine has converged. The vendored goldens record the
+#              engine within 1e-6 in ln(AI) of pylops' solution.
+#   simultaneous  the same for the three-parameter Fatti operator (one
+#              wavelet per angle, each parameter pulled to its own LFM by its
+#              own weight); goldens: within 2e-4 in each ln parameter
+#   porosity   ordinary least squares and the Student t interval of a new
+#              observation, t from the regularised incomplete beta function
+#              by bisection
+#   facies     one Gaussian per facies (mean, variance on n - 1), priors the
+#              sample proportions, Bayes' rule
+#   column     a priority flood from the highest mapped node (four
+#              neighbours), the running minimum when the flood first pops a
+#              node on the edge of the mapped area
+DCASE = os.path.join(os.path.dirname(CASE), 'delsholm_case.json')
+
+
+def solve(M, v):
+    n = len(v)
+    a = [row[:] + [v[i]] for i, row in enumerate(M)]
+    for c in range(n):
+        p = max(range(c, n), key=lambda r: abs(a[r][c]))
+        a[c], a[p] = a[p], a[c]
+        piv = a[c][c]
+        for r in range(n):
+            if r != c and a[r][c] != 0.0:
+                f = a[r][c] / piv
+                ar, ac = a[r], a[c]
+                for k in range(c, n + 1):
+                    ar[k] -= f * ac[k]
+    return [a[i][n] / a[i][i] for i in range(n)]
+
+
+def op_cd(n, h):
+    """The matrix of C D: centred convolution with h after the centred difference."""
+    c = len(h) // 2
+    D = [[0.0] * n for _ in range(n)]
+    for i in range(1, n - 1):
+        D[i][i + 1] = 0.5
+        D[i][i - 1] = -0.5
+    C = [[0.0] * n for _ in range(n)]
+    for i in range(n):
+        for k in range(len(h)):
+            j = i - k + c
+            if 0 <= j < n:
+                C[i][j] += h[k]
+    return [[sum(C[i][t] * D[t][j] for t in range(n) if C[i][t]) for j in range(n)] for i in range(n)]
+
+
+def ls_reg(blocks, d, eps, m0):
+    """min ||A x - d||^2 + sum eps_p^2 ||x_p - m0_p||^2 with A given as rows of blocks [A_p]."""
+    P = len(m0)
+    n = len(m0[0])
+    N = P * n
+    rows = []
+    for blk in blocks:  # one entry per data trace: [A_p matrices], data
+        mats, dat = blk
+        for i in range(len(dat)):
+            rows.append(([x for p in range(P) for x in mats[p][i]], dat[i]))
+    M = [[0.0] * N for _ in range(N)]
+    v = [0.0] * N
+    for r, y in rows:
+        nz = [(j, x) for j, x in enumerate(r) if x]
+        for j, x in nz:
+            v[j] += x * y
+            Mj = M[j]
+            for k, z in nz:
+                Mj[k] += x * z
+    for p in range(P):
+        for i in range(n):
+            M[p * n + i][p * n + i] += eps[p] ** 2
+            v[p * n + i] += eps[p] ** 2 * m0[p][i]
+    x = solve(M, v)
+    return [x[p * n:(p + 1) * n] for p in range(P)]
+
+
+def betainc(a, b, x):
+    if x <= 0:
+        return 0.0
+    if x >= 1:
+        return 1.0
+    lbt = math.lgamma(a + b) - math.lgamma(a) - math.lgamma(b) + a * math.log(x) + b * math.log(1 - x)
+    def cf(a, b, x):
+        qab, qap, qam = a + b, a + 1, a - 1
+        c, d = 1.0, 1 - qab * x / qap
+        d = 1 / d
+        h = d
+        for m in range(1, 300):
+            m2 = 2 * m
+            aa = m * (b - m) * x / ((qam + m2) * (a + m2))
+            d = 1 / (1 + aa * d); c = 1 + aa / c; h *= d * c
+            aa = -(a + m) * (qab + m) * x / ((a + m2) * (qap + m2))
+            d = 1 / (1 + aa * d); c = 1 + aa / c; de = d * c; h *= de
+            if abs(de - 1) < 1e-15:
+                break
+        return h
+    if x < (a + 1) / (a + b + 2):
+        return math.exp(lbt) * cf(a, b, x) / a
+    return 1 - math.exp(lbt) * cf(b, a, 1 - x) / b
+
+
+def t_upper(p, dof):
+    """t with P(T > t) = p, by bisection on the Student t tail."""
+    tail = lambda t: 0.5 * betainc(dof / 2, 0.5, dof / (dof + t * t))
+    lo, hi = 0.0, 100.0
+    for _ in range(200):
+        mid = (lo + hi) / 2
+        if tail(mid) > p:
+            lo = mid
+        else:
+            hi = mid
+    return (lo + hi) / 2
+
+
+def expert(plant):
+    fields = {r[1]: r for r in json.load(open(os.path.join(HERE, 'fields.json'))) if r[0] == 'advanced'}
+    if len(fields) != 6:
+        return None
+    c = json.load(open(DCASE))
+    st = c['stated']
+    t0, dt, ns = c['clock']['t0_ms'], c['clock']['dt_ms'], c['clock']['samples']
+    # LFM at the second position
+    B = c['positionB']
+
+    def map_t(t, H, h):
+        if t <= H[0]:
+            return h[0] + (t - H[0])
+        if t >= H[-1]:
+            return h[-1] + (t - H[-1])
+        for i in range(len(H) - 1):
+            if t <= H[i + 1]:
+                span = H[i + 1] - H[i]
+                p = (t - H[i]) / span if span > 0 else 0
+                return h[i] + p * (h[i + 1] - h[i])
+        return t
+
+    def samp(vals, t):
+        x = (t - t0) / dt
+        if not (x >= 0) or x > len(vals) - 1:
+            return float('nan')
+        i = math.floor(x); f = x - i
+        if f < 1e-12:
+            return vals[i]
+        return vals[i] + f * (vals[i + 1] - vals[i])
+
+    pw = st['lfm']['power']
+    lfm = []
+    for k in range(ns):
+        t = t0 + k * dt
+        s_ = w_ = 0.0
+        for w in c['wells']:
+            d = math.hypot(w['x'] - B['x'], w['y'] - B['y'])
+            v = samp(w['lnAiLowPassed'], map_t(t, B['horizonsMs'], w['horizonsMs']))
+            if math.isfinite(v):
+                wt = 1 / d ** pw
+                s_ += wt * v; w_ += wt
+        lfm.append(s_ / w_ if w_ > 0 else float('nan'))
+    first = next(k for k in range(ns) if math.isfinite(lfm[k]))
+    for k in range(first):
+        lfm[k] = lfm[first]
+    for k in range(first + 1, ns):
+        if not math.isfinite(lfm[k]):
+            lfm[k] = lfm[k - 1]
+    o_lfm = lfm[st['lfm']['sampleB']]
+    # model-based, exactly
+    A = c['traceA']
+    m0 = A['lowFrequencyModels']
+    CD = op_cd(ns, A['fullWavelet'])
+    (m_ai,) = ls_reg([([CD], A['full'])], A['full'], [st['modelBased']['eps']], [m0['lnAi']])
+    o_mb = math.exp(m_ai[st['modelBased']['sampleA']])
+    # simultaneous, exactly
+    K2 = A['backgroundVsVp'] ** 2
+    blocks = []
+    for th, h, tr in zip(A['angles_deg'], A['angleWavelets'], A['angleTraces']):
+        t = math.radians(th); s2 = math.sin(t) ** 2; tn2 = math.tan(t) ** 2
+        g = [0.5 * (1 + tn2), -4 * K2 * s2, 0.5 * (4 * K2 * s2 - tn2)]
+        cdk = op_cd(ns, h)
+        blocks.append(([[[g[p] * x for x in row] for row in cdk] for p in range(3)], tr))
+    la, ls_, lr = ls_reg(blocks, None, st['simultaneous']['eps'], [m0['lnAi'], m0['lnSi'], m0['lnRho']])
+    k = st['simultaneous']['sampleA']
+    o_sim = math.exp(la[k] - ls_[k])
+    # porosity interval
+    xs = [r[0] for r in c['calibration']['porosity']['rows']]
+    ys = [r[1] for r in c['calibration']['porosity']['rows']]
+    n = len(xs); xb = sum(xs) / n; yb = sum(ys) / n
+    sxx = sum((x - xb) ** 2 for x in xs)
+    b = sum((x - xb) * (y - yb) for x, y in zip(xs, ys)) / sxx
+    a = yb - b * xb
+    s_e = math.sqrt(sum((y - a - b * x) ** 2 for x, y in zip(xs, ys)) / (n - 2))
+    x0 = st['porosity']['atAi']; lvl = st['porosity']['level']
+    tq = t_upper((1 - lvl) / 2, n - 2)
+    o_phi = a + b * x0 + tq * s_e * math.sqrt(1 + 1 / n + (x0 - xb) ** 2 / sxx)
+    # facies posterior
+    groups = {}
+    for name, ai in c['calibration']['facies']['rows']:
+        groups.setdefault(name, []).append(ai)
+    tot = sum(len(v) for v in groups.values())
+    xq = st['facies']['atAi']
+    lp = {}
+    for name, v in groups.items():
+        mu = sum(v) / len(v); var = sum((x - mu) ** 2 for x in v) / (len(v) - 1)
+        lp[name] = math.log(len(v) / tot) - 0.5 * (xq - mu) ** 2 / var - 0.5 * math.log(2 * math.pi * var)
+    mx = max(lp.values()); den = sum(math.exp(v - mx) for v in lp.values())
+    o_p = math.exp(lp[st['facies']['class']] - mx) / den
+    # column by a priority flood
+    import heapq
+    g_ = c['grid']; nx, ny = g_['spec']['nx'], g_['spec']['ny']
+    z = [v if v is not None else 1e30 for v in g_['z']]
+    live = lambda i: abs(z[i]) < 1e29
+    def nb(i):
+        r, cc = divmod(i, nx)
+        out = []
+        if cc > 0: out.append(i - 1)
+        if cc < nx - 1: out.append(i + 1)
+        if r > 0: out.append(i - nx)
+        if r < ny - 1: out.append(i + nx)
+        return out
+    def boundary(i):
+        r, cc = divmod(i, nx)
+        if r in (0, ny - 1) or cc in (0, nx - 1):
+            return True
+        return any(not live(j) for j in nb(i))
+    crest = max((i for i in range(nx * ny) if live(i)), key=lambda i: z[i])
+    heap = [(-z[crest], crest)]; seen = {crest}; run = float('inf')
+    while heap:
+        nz_, i = heapq.heappop(heap)
+        run = min(run, z[i])
+        if boundary(i):
+            break
+        for j in nb(i):
+            if j not in seen and live(j):
+                seen.add(j); heapq.heappush(heap, (-z[j], j))
+    o_col = z[crest] - run
+    mine = {'delsholm_lfm_lnai_b': o_lfm, 'delsholm_mb_ai': o_mb, 'delsholm_sim_vpvs': o_sim,
+            'delsholm_phi_q90': o_phi, 'delsholm_p_oil': o_p, 'delsholm_column_ft': o_col}
+    if plant:
+        mine['delsholm_p_oil'] = fields['delsholm_p_oil'][2] + 10 * fields['delsholm_p_oil'][3]
+    solver = {'delsholm_mb_ai', 'delsholm_sim_vpvs'}
+    bad, worst = [], (-1.0, '')
+    for key, (_, _, v, tol) in fields.items():
+        o = mine[key]
+        rel = abs(o - v) / max(abs(v), 1e-300)
+        tag = ' (solver: exact normal equations against the converged engine)' if key in solver else ''
+        print(f'  {key:24s} engine {v!r:24s} oracle {o!r:24s} relative {rel:.2e}  tolerances {abs(o - v) / tol:.3e}{tag}')
+        worst = max(worst, (rel, key))
+        if abs(o - v) > tol or (key not in solver and rel > REL):
+            bad.append(key)
+    print(f'oracle_check: 6 Expert fields replayed in standard-library Python; worst relative disagreement {worst[0]:.2e} ({worst[1]}); failing: {len(bad)}')
+    return bad
+
 if __name__ == '__main__':
-    main()
+    plant = '--plant' in sys.argv
+    bad_p = professional(plant)
+    bad_e = expert(plant)
+    try:
+        main()
+        code = 0
+    except SystemExit as e:
+        code = e.code or 0
+    if bad_p is not None:
+        if plant:
+            print(f'NEGATIVE CONTROL: quarvin_shuey_a moved by ten tolerances; {"caught" if bad_p == ["quarvin_shuey_a"] else "NOT CAUGHT"}')
+            if bad_p != ['quarvin_shuey_a']:
+                code = 2
+        elif bad_p:
+            code = max(code, 1)
+    if bad_e is not None:
+        if plant:
+            print(f'NEGATIVE CONTROL: delsholm_p_oil moved by ten tolerances; {"caught" if bad_e == ["delsholm_p_oil"] else "NOT CAUGHT"}')
+            if bad_e != ['delsholm_p_oil']:
+                code = 2
+        elif bad_e:
+            code = max(code, 1)
+    sys.exit(code)

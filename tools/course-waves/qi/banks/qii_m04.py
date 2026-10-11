@@ -89,8 +89,8 @@ q(0, "At 1292.000000 ms, what are the far partial stack from gather 5 and the ki
  "320.449005 from gather 5 and 220.203720 on the kit's trace.",
  ["220.203720 from gather 5, 320.449005 on the kit's trace.",
   "410.433207 and 357.560150, the 15 to 25 degree pair.",
-  "483.072830 from gather 5 and 456.803711 on the kit's trace, the pair the kit's README says agree."],
- "Over 25 to 35 degrees gather 5 gives 320.449005 and the kit's far trace 220.203720. The 410.433207 and 357.560150 pair is the mid range and 483.072830 and 456.803711 the near range; the README's claim is for the near stack, up to the noise.")
+  "483.072830 from gather 5 and 456.803711 on the kit's trace, the near pair that correlates most closely."],
+ "Over 25 to 35 degrees gather 5 gives 320.449005 and the kit's far trace 220.203720. The 410.433207 and 357.560150 pair is the mid range and 483.072830 and 456.803711 the near range; over the window the near pair correlates at 0.997076 and the far pair at 0.961871.")
 
 q(3, "At the top of gather 5 the bins of 5 to 15, 15 to 25 and 25 to 35 degrees carry fold 2, 3 and 2. What does usableAngle return at a stated minimum fold of 3?",
  "None.",

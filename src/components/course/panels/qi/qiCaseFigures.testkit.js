@@ -62,15 +62,13 @@ export function professionalFigures(c, prefix = 'quarvin') {
   const ag = must(P.angles(g, table, { edges: st.angleEdges }), 'angles');
   const i = Math.round((st.targetMs - g.t0Ms) / g.dtMs);
   const fit = P.shueyFit(st.stackAngles, ag.gather.map((b) => b[i]), { terms: st.shueyTerms });
-  let so = 0; let sm = 0;
-  for (const w of c.wells) for (const k of ['A', 'B']) { so += w.observed[k] * w.modelled[k]; sm += w.modelled[k] * w.modelled[k]; }
   return {
     [`${prefix}_dix_vint`]: vint[li],
     [`${prefix}_walden_deg`]: P.walden(st.offsetM, st.timeMs, v.vrms, v.vint),
     [`${prefix}_nmo_stretch`]: P.stretch(st.offsetM, st.timeMs, v.vrms),
     [`${prefix}_far_stack_amp`]: P.stackOf(ag, st.farBins[0], st.farBins[1])[i],
     [`${prefix}_shuey_a`]: fit.A,
-    [`${prefix}_one_scale`]: so / sm,
+    [`${prefix}_one_scale`]: must(P.avoAtWells(c.wells), 'avo at wells').scale,
   };
 }
 

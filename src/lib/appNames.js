@@ -83,6 +83,7 @@ export const APP_NAMES = {
   procurement: 'Procurement, Tendering & Contracting',
   materials: 'Materials, Spares & Inventory Management',
   marine: 'Offshore & Marine Logistics',
+  qi: 'Quantitative Interpretation',
   gasvalue: 'Flare Gas to Value & LPG/CNG',
   carbon: 'Carbon & Energy Efficiency',
   dataqc: 'Oilfield Data Quality',

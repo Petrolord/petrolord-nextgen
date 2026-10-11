@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "fitShuey runs with two terms on gather 5's three angle bins at the top (1292.000000 ms), placed at 10, 20 and 30 degrees. What intercept and gradient come back?",
+  "options": [
+   "A 510.227684 and B -915.097371, the three-term fit on the same three bins, its curvature carried in C.",
+   "A 501.873676 and B -734.431814, in trace amplitude units.",
+   "A 519.312395 and B -927.296460, from 9 bins of 5 degrees.",
+   "A 486.838592 and B -1072.562182, from the kit's stacks."
+  ],
+  "answer": 1,
+  "explanation": "The two-term fit on the near, mid and far bins at 10, 20 and 30 degrees gives A 501.873676 and B -734.431814. The three-term fit gives 510.227684 and -915.097371, nine 5 degree bins give 519.312395 and -927.296460, and 486.838592 with -1072.562182 is the fit to the kit's stack traces at Ekene-1."
+ },
+ {
+  "prompt": "fitShuey is asked for three terms on the three bins at gather 5's top. What does the course say about that fit?",
+  "options": [
+   "It is overdetermined, with one spare equation left to measure the misfit of the curvature term against the data.",
+   "It is underdetermined, so the engine refuses a third term until a fourth angle carries a finite amplitude.",
+   "It returns C as 0.000000, the same as the two-term fit, because three angles cannot resolve a curvature term.",
+   "It is exactly determined: three terms on three angles."
+  ],
+  "answer": 3,
+  "explanation": "A three-term fit on three angles is exactly determined, so it passes through all three points and leaves nothing to judge it by. The engine returns C 467.947963 here; 0.000000 is the two-term fit's C, which has no third term."
+ },
+ {
+  "prompt": "Adding the third term at gather 5's top changes the fit. What does the three-term fit return?",
+  "options": [
+   "A 510.227684, B -915.097371 and C 467.947963.",
+   "A 501.873676, B -734.431814 and C 467.947963.",
+   "A 510.227684, B -734.431814 and C 0.000000.",
+   "A 519.312395, B -927.296460 and C 0.000000."
+  ],
+  "answer": 0,
+  "explanation": "The three-term fit gives A 510.227684, B -915.097371 and C 467.947963: the gradient steepens from the two-term -734.431814 as part of the fall with angle is split off into C. 519.312395 and -927.296460 are the two-term fit on 9 bins."
+ },
+ {
+  "prompt": "At one sample the far stack carries no finite amplitude. What does fitShuey do with that angle?",
+  "options": [
+   "It reads the gap as an amplitude of zero, pulling the gradient steeply negative at that sample of the volume.",
+   "It refuses the sample in the engine's own words and leaves the volumes empty there.",
+   "It drops it, fitting only the angles that carry a finite amplitude.",
+   "It fills the gap with the mean of the near and mid amplitudes."
+  ],
+  "answer": 2,
+  "explanation": "fitShuey fits per sample by least squares over the angles that carry a finite amplitude, so a gap drops out and the angles used can be fewer than the angles given. It neither zero-fills, refuses nor interpolates; a gap in a stack changes what the volumes rest on at that sample."
+ },
+ {
+  "prompt": "The two-term intercept at gather 5's top is 501.873676. In what units is that figure?",
+  "options": [
+   "Reflection coefficient units, since the fit is Shuey's approximation, which is written for reflectivity itself.",
+   "Trace amplitude units, tied to reflectivity only by the one scale over the wells.",
+   "Acoustic impedance in kg/(m2 s), the contrast across the top of the Ekene Sand.",
+   "Degrees, the angle at which the fitted line crosses zero."
+  ],
+  "answer": 1,
+  "explanation": "The kit's seismic amplitudes carry no physical scale, so A and B from the stacks are in trace amplitude units. The course divides them by the one scale over the wells, 1882.216944, before reading them as reflection coefficients."
+ },
+ {
+  "prompt": "What is an intercept volume, and where does QI Studio compute it?",
+  "options": [
+   "The near stack relabelled, since the near angle sits closest to normal incidence across the whole survey.",
+   "The Shuey fit at the top of each well only, the four well points then gridded across the survey by the app.",
+   "The full stack scaled by 1882.216944, so that every sample of it reads as a reflection coefficient.",
+   "The Shuey fit at every sample of every trace of the angle stacks, run on QI Studio's seismic worker over the survey."
+  ],
+  "answer": 3,
+  "explanation": "Intercept and gradient volumes are the same fit run at every sample of every trace of the angle stacks; QI Studio runs it on the seismic worker over the survey. The near stack is one input to the fit, and the one scale ties amplitudes to reflectivity after the fit."
+ },
+ {
+  "prompt": "How does backgroundTrend fit the line through gather 5's (A, B) pairs?",
+  "options": [
+   "By ordinary least squares of B on A with a free intercept, the line allowed to miss the origin.",
+   "By ordinary least squares of B on A through the origin.",
+   "B = m A through the origin, by orthogonal regression over the pairs.",
+   "By taking the published Castagna, Swan and Foster slope as it stands, with no fit to the seismic pairs at all."
+  ],
+  "answer": 2,
+  "explanation": "The background trend is the line B = m A through the origin by orthogonal regression, which treats A and B alike. Ordinary least squares minimises vertical misfit only, and the published slope is a fixed line; the course names which line a distance is read from."
+ },
+ {
+  "prompt": "On gather 5, the two-term fit at every sample of the window where all three bins carry data gives the (A, B) pairs. How many pairs, and what trend slope m do they give?",
+  "options": [
+   "176 pairs, slope m -4.020851.",
+   "13 pairs, one per offset, slope m -4.020851.",
+   "176 pairs, slope m -76.033690, the slope given in degrees.",
+   "176 pairs, slope m -1.16, the fluid factor's coefficient on dVs/Vs."
+  ],
+  "answer": 0,
+  "explanation": "176 pairs give a background slope of -4.020851. -76.033690 is atan(m) in degrees, the chi along the trend, and 1.16 is the coefficient in the fluid factor; the gather's 13 offsets are traces, and the pairs come from samples of the window."
+ },
+ {
+  "prompt": "How far does the top's point at gather 5 sit from that gather's background trend?",
+  "options": [
+   "833.848276, the projection of the point at chi = atan(m), read along the background trend.",
+   "309.781098, in trace amplitude units.",
+   "67.419446, the chi projection of the point at the stated chi of 30 degrees.",
+   "0.107520, the fluid factor."
+  ],
+  "answer": 1,
+  "explanation": "offTrend gives (B - m A) / sqrt(1 + m^2); the top's two-term point sits 309.781098 from the line in trace amplitude units. 833.848276 and 67.419446 are chi projections and 0.107520 is the fluid factor of the scaled point."
+ },
+ {
+  "prompt": "What does a negative off-trend distance mean?",
+  "options": [
+   "The point sits above the line, towards harder responses than the background of the window.",
+   "The point's intercept is negative, whatever its gradient.",
+   "The point sits on the line, in reverse polarity.",
+   "The point sits below the line, towards softer, gas-like responses."
+  ],
+  "answer": 3,
+  "explanation": "offTrend returns (B - m A) / sqrt(1 + m^2), negative towards softer, gas-like responses below the line; the course's vocabulary calls negative the hydrocarbon side. The sign of the distance is a position against the line, which the intercept alone does not set."
+ },
+ {
+  "prompt": "contrastsFromAB is run on the top of gather 5 after its two-term A and B are divided by 1882.216944, at a stated Vs/Vp of 0.500000. What fluid factor does it return?",
+  "options": [
+   "0.426623, the relative compressional contrast dVp/Vp of the same point.",
+   "0.550179, the relative shear contrast dVs/Vs at the stated Vs/Vp.",
+   "0.107520.",
+   "0.106656, the density contrast drho/rho from Gardner."
+  ],
+  "answer": 2,
+  "explanation": "The fluid factor dVp/Vp - 1.16 (Vs/Vp) dVs/Vs is 0.107520 here. 0.426623 is dVp/Vp, 0.550179 dVs/Vs and 0.106656 drho/rho; each moves with the stated Vs/Vp and with the scale, so a fluid factor is quoted with both."
+ },
+ {
+  "prompt": "How does contrastsFromAB tie the density contrast to the velocity contrasts?",
+  "options": [
+   "By Gardner's density, drho/rho = dVp/Vp / 4, which gives 0.106656 against dVp/Vp 0.426623 at the top.",
+   "By the stated Vs/Vp of 0.500000, which sets the density contrast to half the shear contrast.",
+   "By holding density fixed, so drho/rho reads zero and A carries only velocity.",
+   "By 1.16 (Vs/Vp) dVs/Vs, the mudrock line term."
+  ],
+  "answer": 0,
+  "explanation": "The engine uses Gardner's density, drho/rho = dVp/Vp / 4, and the top gives drho/rho 0.106656 against dVp/Vp 0.426623. The stated Vs/Vp divides the gradient between compressional and shear contrast, and 1.16 (Vs/Vp) dVs/Vs is the term the fluid factor subtracts."
+ },
+ {
+  "prompt": "A study passes the seismic A and B of a sample to contrastsFromAB straight from the stacks, in trace units. What does the course state about that input?",
+  "options": [
+   "Trace units are fine, since the fluid factor is a ratio of contrasts and any common scale cancels out of it.",
+   "The engine needs A and B as reflection coefficients, so they are first divided by the one scale.",
+   "The engine rescales its inputs itself by the stated Vs/Vp, which is why that ratio must be given.",
+   "The engine refuses any intercept above one."
+  ],
+  "answer": 1,
+  "explanation": "contrastsFromAB needs A and B as reflection coefficients, and the course divides the top's two-term A and B by the one scale, 1882.216944, first. The stated Vs/Vp divides the gradient between compressional and shear contrast and carries no scale."
+ },
+ {
+  "prompt": "What does chiProjection return for the top of gather 5 at chi = atan(m) = -76.033690 degrees, the angle along the background trend?",
+  "options": [
+   "67.419446, the projection of the same point at the stated chi of 30 degrees.",
+   "309.781098, the off-trend distance of the point from the background line.",
+   "-4.020851, the background trend slope m of gather 5.",
+   "833.848276."
+  ],
+  "answer": 3,
+  "explanation": "chiProjection is A cos(chi) + B sin(chi). At chi = atan(m), along the background trend, the top projects to 833.848276; at the stated 30 degrees it projects to 67.419446. 309.781098 is the off-trend distance and -4.020851 is m itself."
+ },
+ {
+  "prompt": "QI Studio conditions its angle stacks before the Shuey fit. Which statement about that conditioning holds in this course?",
+  "options": [
+   "QI Studio runs trim statics, matching in shift, phase and scale, and spectral balancing; the course vendors none of it, grades none of it, and a study records which steps it ran.",
+   "The course's prestack explorer runs all three steps on the pack's stacks before every fit, so its A and B are conditioned.",
+   "Conditioning moves the stacks in time only, so the amplitudes the fit reads are unchanged by it.",
+   "The capstone grades the conditioned far stack."
+  ],
+  "answer": 0,
+  "explanation": "Conditioning lives in the engines' conditioning file and QI Studio runs it: trim statics, matching in shift, phase and scale, and spectral balancing. The course vendors and grades none of it, and each step changes the amplitudes the fit reads, so a study records which it ran."
+ }
+]

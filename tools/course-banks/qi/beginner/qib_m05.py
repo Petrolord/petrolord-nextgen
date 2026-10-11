@@ -20,7 +20,7 @@ q(3, "woodMix mixes the Ekene brine and live oil at Sw 0.500000. Which result do
  ["2.662550 GPa, because any brine in the pore space sets the modulus of the mix to the stiffer phase as soon as it is present.",
   "879.708973 GPa, the mix at half saturation, read straight from the woodMix table's other column, the one that climbs in even steps as Sw rises.",
   "0.987056 GPa, the halfway point between the two fluids, since Wood's average weights each modulus by its volume fraction."],
- "At Sw 0.500000 Wood's average returns 1.291926 GPa, far nearer the oil than the brine, and it rises fastest only near full brine. 879.708973 is the mix's density in kg/m3, and 0.987056 GPa is the mix at Sw 0.200000.")
+ "At Sw 0.500000 Wood's average returns 1.291926 GPa, far nearer the oil than the brine: the Wood average sits close to the softer phase until the brine fraction is high. 879.708973 is the mix's density in kg/m3, and 0.987056 GPa is the mix at Sw 0.200000.")
 
 q(0, "The lab converts the stated Ekene pressure of 3200 psia before calling Batzle-Wang. What does the brine function receive?",
  "22.063223 MPa, using 1 MPa = 145.037738 psi.",
@@ -76,7 +76,7 @@ q(0, "For the Ekene-1 oil leg in situ, the course prints an AI (acoustic impedan
  ["They are one figure, printed twice at six decimals, and the gap between them is rounding carried through two different routes through the lab.",
   "6639018.603084 is the mean of the sample values and 6641244.924742 is elasticPoint on the layer's means.",
   "6641244.924742 is the oil leg after substitution to brine, and 6639018.603084 is the same leg as it is."],
- "Two kinds of mean appear: the substitution table averages each sample's AI to 6641244.924742, while the elastic set averages Vp, Vs and density first and computes AI from the means, 6639018.603084. Taken to brine the leg reads 7136467.682134, and a study states which mean it reports.")
+ "Two kinds of mean appear: the substitution table averages each sample's AI to 6641244.924742, while the elastic set averages Vp, Vs and density first and computes AI from the means, 6639018.603084. Taken to brine the leg's mean of the sample values reads 7136467.682134.")
 
 q(1, "How does fitFluidLine fit the wet trend to the brine-substituted block boundaries?",
  "By total least squares through the origin, the principal axis of the (A, B) points, so neither A nor B is treated as free of error.",
@@ -104,14 +104,14 @@ q(3, "Against the fitted wet trend, the top of the Ekene Sand at Ekene-1 sits at
  ["The brine top is the anomaly, because -0.004519 lies on the positive side of a falling trend line where wet rock should not sit.",
   "Both lie inside the trend's own scatter, an rms distance of 0.006806, so no fluid effect can be read from the pair.",
   "The oil moves the top 0.067572 toward the positive side, away from the side a hydrocarbon sand moves to on a falling line."],
- "Negative is the hydrocarbon side. The brine top sits almost on the trend at -0.004519, and the same rock with oil sits at -0.072091, 0.067572 further negative, far outside the boundaries' rms scatter of 0.006806. The rock is the same in both rows, so that move is the oil.")
+ "Negative is the hydrocarbon side. The brine top sits almost on the trend at -0.004519, and the same rock with oil sits at -0.072091, 0.067572 further negative. The rock is the same in both rows, so the oil moves the point off the trend.")
 
 q(1, "Measured from the published line, the Ekene-1 top reads -0.458460 in situ and -0.363599 with brine. What does that show?",
  "The line a distance is read from is a stated choice: both tops read far negative from the published line, and the oil top still lies further to the negative side.",
  ["The published line is the correct background, so the brine top is a strong fluid anomaly and the oil leg is wet.",
   "The two lines give the same distance once the sign is dropped, so a verdict may quote either one without naming it.",
   "The oil moves the top toward the positive side when it is read from the published line, the reverse of what the fitted line shows."],
- "The two lines give different distances: from the fitted line the tops read -0.072091 and -0.004519, from the published line -0.458460 and -0.363599. Measured from the published line even the brine top looks anomalous, the direction of the oil's move survives, and its size depends on the line, which a verdict names.")
+ "The two lines give different distances: from the fitted line the tops read -0.072091 and -0.004519, from the published line -0.458460 and -0.363599. Which line the distance is read from is a stated choice, and a verdict states it beside the figure.")
 
 emit(Q, '/root/qi-wip-qi/banks/qib_m05.json', expect_n=15)
 finish()

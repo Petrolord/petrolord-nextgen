@@ -34,7 +34,7 @@ The order in time follows the order in depth: Ekene-3 is shallowest and earliest
 
 ## Where the bulk shift goes
 
-With a bulk shift of zero, as at Ekene-1 and Ekene-3, the committed time is the checkshot time. A non-zero shift moves every committed time by that same amount. Ekene-2 and Ekene-4 tied best at -4.000000 ms, so a study that accepts those ties commits times one sample earlier than the table above, and states that it did.
+With a bulk shift of zero, as at Ekene-1 and Ekene-3, the committed time is the checkshot time. A bulk shift is the single-anchor warp: it adds the shift to the seismic time of every depth on the tie, the top's included, and leaves the imported checkshot rows as they were. Ekene-2 and Ekene-4 tied best at -4.000000 ms, so a study that accepts those ties commits times one sample earlier than the table above, and states that it did.
 
 ## What a study records
 

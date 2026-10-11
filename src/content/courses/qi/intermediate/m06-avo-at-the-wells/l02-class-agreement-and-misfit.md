@@ -44,4 +44,4 @@ The band of 0.02, the scale and the wells it was fitted over, and every choice u
 
 ## Exercise
 
-In the prestack explorer, set Data to "Ekene teaching pack" and View to "AVO at the wells", with Mean angle of near, mid and far at 10, 20, 30 and Pick half window at 8 ms. The explorer prints the inputs and no scale, so from its table and the scale of 1882.216944 work out each well's scaled seismic point, residual and class by hand, and check them against the tables. Then narrow Pick half window to 4 ms, one sample, and widen it to 20 ms, and record whether Ekene-2's seismic A and B move; where they do, recompute its residual and class.
+In the prestack explorer, set Data to "Ekene teaching pack" and View to "AVO at the wells", with Mean angle of near, mid and far at 10, 20, 30 and Pick half window at 8 ms. Read the scale, each well's scaled seismic A and B, its residual and its two classes from the explorer's table, and check them against the tables. Then narrow Pick half window to 4 ms, one sample, and widen it to 20 ms, and record whether Ekene-2's seismic A and B move; where they do, read its new residual and class.

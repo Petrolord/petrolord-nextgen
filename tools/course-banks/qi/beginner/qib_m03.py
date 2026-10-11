@@ -35,7 +35,7 @@ q(0, "On a 30 Hz Ricker wavelet the engine reads a peak of 30.070572 Hz against 
  ["The 0.100000 taper the engine applies to every trace before the transform.",
   "Averaging the 120 spread traces, which pulls the peak towards the field's 31.374887 Hz.",
   "An error in the engine, which the course corrects by quoting the closed-form figures only."],
- "The wavelet was sampled every 4.000000 ms with 31 samples and no taper, and the small differences (edges 14.463999 and 49.112032 Hz against 14.471033 and 49.062252 Hz) are the sampling and the finite length. It is one wavelet, so no traces are averaged, and the check is how an engine figure earns trust.")
+ "The wavelet was sampled every 4.000000 ms with 31 samples and no taper, and the small differences (edges 14.463999 and 49.112032 Hz against 14.471033 and 49.062252 Hz) are the sampling and the finite length. It is one wavelet, so no traces are averaged.")
 
 q(0, "Where does spectrumStats place a -6 dB edge?",
  "Where the amplitude falls to 10^(-6/20) of the peak amplitude, interpolated linearly between frequency steps, below and above the peak.",
@@ -58,12 +58,12 @@ q(1, "Going from the 800 to 1600 ms window to the 1600 to 2400 ms window, what h
   "Every figure stays the same to the decimals, because only the window changes and the traces are the same."],
  "The peak falls with depth, 31.374887 to 21.761176 Hz, as the earth absorbs the higher frequencies, and the -6 dB edges move less: the low edge goes from 14.425434 to 14.429678 Hz. 7.272835 Hz is the deep window's -20 dB low edge, and 34.787627 Hz is the shallow window's -6 dB high edge.")
 
-q(3, "The same traces and window are measured at taper fractions 0.000000, 0.100000, 0.250000 and 0.500000. Which figure is the least steady?",
- "The peak, which drops from 31.323187 Hz at taper 0.250000 to 22.305063 Hz at 0.500000.",
- ["The -6 dB low edge, 14.447432 to 14.308629 Hz.",
-  "The centroid, 26.750783 to 26.175193 Hz.",
-  "The -6 dB high edge, which moves from 34.727319 Hz with no taper to 35.006494 Hz at 0.250000."],
- "The edges and the centroid move in the decimals across the four tapers, while the peak jumps from 31.323187 to 22.305063 Hz at the heaviest taper. The top of the mean spectrum is broad, so the taper is a stated choice and the band and centroid are the steadier figures to quote.")
+q(3, "The same 120 traces and the 800 to 1600 ms window are measured with a taper of 0.500000 in place of 0.100000. What peak does the engine return?",
+ "22.305063 Hz, against 31.374887 Hz at 0.100000.",
+ ["31.374887 Hz unchanged, because the taper only shapes the trace ends and never moves the peak of the mean spectrum.",
+  "26.175193 Hz, the figure the engine returns at that taper, which is where the peak of the mean spectrum now sits.",
+  "31.323187 Hz, since a heavier taper only nudges the peak of a broad mean spectrum by a few hundredths of a hertz."],
+ "The taper is a stated choice: at 0.500000 the peak is 22.305063 Hz, against 31.374887 Hz at 0.100000. 26.175193 Hz is the centroid at 0.500000 and 31.323187 Hz is the peak at 0.250000, so a spectrum figure is quoted with its taper.")
 
 q(2, "The single trace at Ekene-1, same window and taper, gives -6 dB edges at 30.556053 and 32.127840 Hz. Which band belongs in the verdict?",
  "The mean spectrum's -6 dB band of the 120 spread traces, 14.425434 to 34.787627 Hz.",

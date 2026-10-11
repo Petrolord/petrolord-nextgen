@@ -224,7 +224,7 @@
   "options": [
    "A period of 13.473684 lines, share 0.014803 and no footprint: the axis the stripe was not added to does not move.",
    "A period of 5.953488 lines with share 0.490123, because a gain stripe on one axis shows equally on the other.",
-   "A refusal, since a slice with a stripe added by hand no longer meets the engine's minimum of 4 by 4.",
+   "A refusal, since a slice with a stripe added by hand falls short of the engine's minimum of 4 by 4.",
    "A period of six lines exactly, share above 0.3, called a footprint on both axes by the rule."
   ],
   "answer": 0,

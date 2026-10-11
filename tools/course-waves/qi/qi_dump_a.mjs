@@ -71,6 +71,12 @@ ${table(['method', 'reference', 'engine', 'how the course uses it'], [
     ['exact reflection coefficients', 'Zoeppritz, in the form of Dvorkin and others (2014)', 'avo.js', 'by concept'],
     ['signal to noise from coherency', 'Hatton, Worthington and Makin (1986), Seismic Data Processing, section 4.4', 'seismicQc.js', 'by equation'],
     ['lambda-rho and mu-rho', 'Goodway, Chen and Downton (1997)', 'elasticSet.js', 'by equation'],
+    ['the post-stack and prestack operators', 'Ravasi and Vasconcelos (2020), SoftwareX 11 (pylops)', 'inversion.js, prestackInversion.js', 'by concept'],
+    ['sparse reflectivity by FISTA', 'Beck and Teboulle (2009), SIAM Journal on Imaging Sciences 2', 'inversion.js', 'by equation'],
+    ['coloured inversion', 'Lancaster and Whitcombe (2000), SEG Expanded Abstracts', 'inversion.js', 'by concept'],
+    ['quantiles of realisations', 'Hyndman and Fan (1996), The American Statistician 50, type 7', 'inversionSpread.js', 'by equation'],
+    ['simultaneous inversion', 'Fatti and others (1994), Geophysics 59', 'prestackInversion.js', 'by equation'],
+    ['Bayesian facies from impedance', 'Avseth, Mukerji and Mavko (2005), Quantitative Seismic Interpretation, chapter 4', 'propertyPrediction.js', 'by concept'],
   ])}
 
 The Rock Physics course teaches Batzle-Wang, Gassmann, Greenberg-Castagna, Shuey, the classes and exact Zoeppritz in full. This course recaps each in one lesson and applies it to the QI questions.`));

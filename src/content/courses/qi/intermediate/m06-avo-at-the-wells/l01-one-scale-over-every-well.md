@@ -1,6 +1,6 @@
 # One scale over every well
 
-The seismic gives intercept and gradient in trace units; the logs give them as reflection coefficients. Before the two can be compared they need one tie, and QI Studio's comparison at the wells fits a single least-squares scale over every well, A and B together. The prestack explorer prints its inputs at the four Ekene wells, and the scale is worked by hand from them.
+The seismic gives intercept and gradient in trace units; the logs give them as reflection coefficients. Before the two can be compared they need one tie, and QI Studio's comparison at the wells fits a single least-squares scale over every well, A and B together. The prestack explorer runs the same comparison on the four Ekene wells and prints the scale with its inputs.
 
 {{video:qi-e14}}
 
@@ -44,4 +44,4 @@ Every choice on both sides moves it: the cut-off, the cap rock thickness and the
 
 ## Exercise
 
-In the prestack explorer, set Data to "Ekene teaching pack" and View to "AVO at the wells", with Mean angle of near, mid and far at 10, 20, 30 and Pick half window at 8 ms. Check the modelled and seismic A and B at each well against the table. The explorer prints no scale, so compute it by hand from the eight pairs with the equation above and check it against 1882.216944. Then leave one well out at a time, recompute, and record how the scale moves. Finally flip the sign of every seismic A and B, recompute, and name the issue QI Studio would raise.
+In the prestack explorer, set Data to "Ekene teaching pack" and View to "AVO at the wells", with Mean angle of near, mid and far at 10, 20, 30 and Pick half window at 8 ms. Check the modelled and seismic A and B at each well against the table. Read One scale over every well and check it against 1882.216944, then work it once by hand from the eight pairs with the equation above. Then leave one well out at a time, recompute, and record how the scale moves. Finally flip the sign of every seismic A and B, recompute, and name the issue QI Studio would raise.

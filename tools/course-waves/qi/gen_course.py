@@ -6,7 +6,7 @@ and the CASE FILES, so no expected value, no setting and no data point is
 retyped. Adapted from SC4 marine's gen_course.py.
 
 1. THE ENGINE IS RUN HERE. Every tier's capstone generator (qi_capstone.mjs,
-   qi_capstone_p.mjs, qi_capstone_e.mjs) runs through the teaching lab and the
+   qi_capstone_e.mjs; the Professional fields are in qi_capstone.mjs) runs through the teaching lab and the
    vendored engines, and this file REFUSES unless fields.json carries exactly
    what that run returned for every DECLARED field: the same tier, key and value
    to the last bit, and the tolerance gradedTolerance.js derives.
@@ -56,7 +56,7 @@ SLUG, MODULE, PATH_ORDER, PREREQ, COURSE_TYPE = 'qi', 'geoscience', 80, 'welldat
 NAME = 'Quantitative Interpretation'
 TIERS = ('beginner', 'intermediate', 'advanced')
 CERT = {'beginner': 'associate', 'intermediate': 'professional', 'advanced': 'expert'}
-GENERATOR = {'beginner': 'qi_capstone.mjs', 'intermediate': 'qi_capstone_p.mjs', 'advanced': 'qi_capstone_e.mjs'}
+GENERATOR = {'beginner': 'qi_capstone.mjs', 'intermediate': 'qi_capstone.mjs', 'advanced': 'qi_capstone_e.mjs'}
 CASE_NAME = {'beginner': 'tamberlo_case.json', 'intermediate': 'quarvin_case.json', 'advanced': 'delsholm_case.json'}
 
 bad = []

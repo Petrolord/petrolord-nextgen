@@ -107,7 +107,7 @@
    "It scales each in proportion to depth."
   ],
   "answer": 0,
-  "explanation": "With a bulk shift of zero, as at Ekene-1 and Ekene-3, the committed time is the checkshot time; a non-zero shift moves every time below by the same amount. Ekene-2 and Ekene-4 tied at -4.000000 ms, one sample."
+  "explanation": "With a bulk shift of zero, as at Ekene-1 and Ekene-3, the committed time is the checkshot time; a bulk shift is the single-anchor warp, adding the shift to the seismic time of every depth on the tie and leaving the imported checkshot rows as they were. Ekene-2 and Ekene-4 tied at -4.000000 ms, one sample."
  },
  {
   "prompt": "How does compareWavelets measure the similarity of two wavelets?",

@@ -4,7 +4,7 @@
 // modelled and seismic intercepts and gradients at a target, in the plan's
 // shape (Suite docs/scope/NextGen-QI-Course-PLAN.md section 5). Written to
 // src/content/capstone-cases/qi/quarvin_case.json; the graded figures are
-// computed from the case file's content by qi_capstone_p.mjs.
+// computed from the case file's content by qi_capstone.mjs (professionalFields).
 //
 // Deterministic: the canonical seeded generator (lib/stats mulberry32) and
 // engines/qi/inversionSpread.js addNoise on the stated seeds.
@@ -68,7 +68,7 @@ export function quarvin() {
     wells,
     stated: {
       dixLayer: { fromMs: 880, toMs: 1310 },
-      offsetM: 1650,
+      offsetM: 1600,
       timeMs: 1324,
       nmoVelocity: 'the RMS velocity at the stated time',
       angleEdges: [5, 15, 25, 35],

@@ -39,8 +39,8 @@ export const PRINTED_DECIMALS = {
  * distance), so the stated tolerance is 1e-9 and the printed floor, half a
  * unit in the sixth decimal, sets every tolerance. No field is a random draw.
  *
- * Professional and Expert fields are added when their engines pass the
- * extraction gate (golden plus an independent oracle).
+ * Expert fields are added when their engines pass the extraction gate
+ * (golden plus an independent oracle).
  */
 export const GRADED_FIELDS = [
   ['beginner', 'tamberlo_low6_hz', 'frequency', 1e-9],
@@ -49,6 +49,19 @@ export const GRADED_FIELDS = [
   ['beginner', 'tamberlo_ai_brine', 'impedance', 1e-9],
   ['beginner', 'tamberlo_vpvs_brine', 'ratio', 1e-9],
   ['beginner', 'tamberlo_wet_distance', 'ratio', 1e-9],
+  // Professional: QUARVIN, a held-out synthetic prestack case (one NMO-corrected
+  // gather, its RMS velocity table, and four wells' modelled and seismic A and
+  // B; never the Ekene field). Every field is closed-form engine arithmetic on
+  // the case file's numbers (Dix, Walden's straight-ray angle, the NMO
+  // stretch, angle binning and a fold-weighted partial stack, a two-term Shuey
+  // least squares, the one least-squares scale of engines/qi/avoWells), so the
+  // printed floor sets every tolerance. Engines gated by E1a, E1b and E2.
+  ['intermediate', 'quarvin_dix_vint', 'velocity', 1e-9],
+  ['intermediate', 'quarvin_walden_deg', 'angle', 1e-9],
+  ['intermediate', 'quarvin_nmo_stretch', 'ratio', 1e-9],
+  ['intermediate', 'quarvin_far_stack_amp', 'amplitude', 1e-9],
+  ['intermediate', 'quarvin_shuey_a', 'amplitude', 1e-9],
+  ['intermediate', 'quarvin_one_scale', 'ratio', 1e-9],
 ];
 
 /**

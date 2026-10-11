@@ -4,7 +4,7 @@ Q=[]
 def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
 # QI Professional m06, AVO at the wells.
-# Sources: QI Studio's comparison at the wells (app code, keyed only on the
+# Sources: the comparison at the wells (engines/qi/avoWells.js, keyed only on the
 # lines the course prints): its inputs, the one scale, the scaled points and
 # residuals, the classes at the 0.02 band, the issues it raises, and the
 # Professional capstone as the course describes it.

@@ -2248,7 +2248,6 @@
       "precision.json",
       "qi_capstone.mjs",
       "qi_capstone_e.mjs",
-      "qi_capstone_p.mjs",
       "qi_cases.mjs",
       "qi_cases_e.mjs",
       "qi_cases_p.mjs",
@@ -2311,12 +2310,9 @@
       "banks/qii_m06.py"
     ],
     "pins": {
-      "digest.txt": "8bc7e43f726b5671771f2c95ab79793e1dbd379f5d461ba9f30d81d8bb683446",
-      "fields.json": "29e1b63f928713398f02aa7f3940d986581dfbd8bb432f69b0b6ccefc19f7a8f"
+      "digest.txt": "1d0536672a942dcaae8c04671e744f43fa370bf848e6129a37f317863627e525",
+      "fields.json": "af884f40de588d4822e680d212e246289e1f4539d77db6f86978e8447dc0824c"
     },
-    "fieldsPendingTiers": [
-      "intermediate",
-      "advanced"
-    ]
+    "fieldsPendingTiers": []
   }
 }

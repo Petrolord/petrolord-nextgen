@@ -75,7 +75,7 @@ q(1, "Asked for a wavelet from the well at Ekene-1 on the pack's logs, Seismolor
  "Each kept sample needs its whole 31-sample wavelet window on live reflectivity, and the logs give 26 live samples.",
  ["The reflectivity is not white over the window, so the extraction cannot take the autocorrelation's spectrum to zero phase.",
   "The 4.000000 ms clock is too coarse to resample a 0.500000 ft log onto.",
-  "The phase match has already rotated the synthetic by -6.135261 degrees, so the well's reflectivity no longer fits the trace."],
+  "The phase match has already rotated the synthetic by -6.135261 degrees, so the well's reflectivity stops fitting the trace."],
  "The extraction keeps only trace samples whose whole window, 2 x 15 + 1 = 31 samples at the default half length, sits on live reflectivity. The pack's logs give 26 live samples, so none qualifies and the engine says, in its own words, \"The well reflectivity is flat over the seismic at the well, so there is nothing to extract a wavelet from.\"")
 
 q(0, "Set the 25 Hz Ricker beside the Ekene-1 statistical wavelet on the same 31-sample clock. What does the course's table show?",
@@ -101,7 +101,7 @@ q(1, "In the designed case the Ekene-1 synthetic is first turned by 90 degrees a
 
 q(3, "Why does the lab run estimatePhaseRotation on the synthetic's live span only?",
  "Because the Hilbert transform cannot cross a gap.",
- ["Because the trace outside 1100 to 1500 ms was used to extract the statistical wavelet and must stay apart from the match.",
+ ["Because the trace outside 1100 to 1500 ms went into the statistical wavelet and must stay apart from the match.",
   "Because the 20 ms bulk shift must fit inside it.",
   "Because the zero fill would fix the phase."],
  "The best phase is found over the samples both traces carry, and the lab restricts it to the synthetic's live span, the 26 samples at Ekene-1, because the Hilbert transform cannot cross a gap. The wavelet window and the bulk shift search do not set this span.")

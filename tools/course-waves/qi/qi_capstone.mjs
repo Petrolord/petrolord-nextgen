@@ -14,6 +14,8 @@ import { register } from 'node:module';
 
 register('./qi_loader.mjs', import.meta.url);
 const { LAB: L, REPO } = await import('./qi_engine.mjs');
+const { LABP: P } = await import('./qi_engine_p.mjs');
+const { expertFields } = await import('./qi_capstone_e.mjs');
 
 const CASE_DIR = path.join(REPO, 'src/content/capstone-cases/qi');
 const readCase = (k) => JSON.parse(fs.readFileSync(path.join(CASE_DIR, `${k}_case.json`), 'utf8'));
@@ -43,8 +45,39 @@ export function associateFields(c) {
   ];
 }
 
+/* ---------------------------------------------------- Professional: QUARVIN */
+// Every field through the vendored engines via qiLabPro.js (qi/prestack,
+// qi/prestackQc, qi/avo and qi/avoWells, gated by E1a, E1b and E2). One change
+// from the plan's list: its "usable angle at the stated minimum fold" returns a
+// bin edge, a small set a learner could guess, so the fourth field is the far
+// partial stack amplitude at the target sample, which runs the same angle
+// gather, fold and mute.
+export function professionalFields(c) {
+  const st = c.stated;
+  const table = { tMs: c.velocity.rows.map((x) => x[0]), vrms: c.velocity.rows.map((x) => x[1]) };
+  const g = { traces: c.gather.traces, offsets: c.gather.offsets_m, dtMs: c.gather.dt_ms, t0Ms: c.gather.t0_ms };
+  const vint = must(P.dix(table), 'dix');
+  const li = table.tMs.indexOf(st.dixLayer.toMs);
+  if (li < 1 || table.tMs[li - 1] !== st.dixLayer.fromMs) throw new Error('the stated Dix layer is not a table segment');
+  const v = must(P.velocityAt(table, st.timeMs), 'velocity');
+  const ag = must(P.angles(g, table, { edges: st.angleEdges }), 'angle gather');
+  const i = Math.round((st.targetMs - g.t0Ms) / g.dtMs);
+  const fit = P.shueyFit(st.stackAngles, ag.gather.map((b) => b[i]), { terms: st.shueyTerms });
+  const cmp = must(P.avoAtWells(c.wells), 'avo at wells');
+  return [
+    { tier: 'intermediate', key: 'quarvin_dix_vint', cls: 'velocity', value: vint[li], call: 'qi/prestack dixInterval' },
+    { tier: 'intermediate', key: 'quarvin_walden_deg', cls: 'angle', value: P.walden(st.offsetM, st.timeMs, v.vrms, v.vint), call: 'qi/prestack velocityOnGrid + waldenAngle' },
+    { tier: 'intermediate', key: 'quarvin_nmo_stretch', cls: 'ratio', value: P.stretch(st.offsetM, st.timeMs, v.vrms), call: 'qi/prestackQc nmoStretch' },
+    { tier: 'intermediate', key: 'quarvin_far_stack_amp', cls: 'amplitude', value: P.stackOf(ag, st.farBins[0], st.farBins[1])[i], call: 'qi/prestack angleGather + partialStack' },
+    { tier: 'intermediate', key: 'quarvin_shuey_a', cls: 'amplitude', value: fit.A, call: 'qi/avo fitShuey A' },
+    { tier: 'intermediate', key: 'quarvin_one_scale', cls: 'ratio', value: cmp.scale, call: 'qi/avoWells compareAtWells scale' },
+  ];
+}
+
 export function allFields() {
-  return [...associateFields(readCase('tamberlo'))];
+  return [...associateFields(readCase('tamberlo')), ...professionalFields(readCase('quarvin')),
+    // Expert: DELSHOLM, through the Expert lab (qi_capstone_e.mjs names each field's engine call)
+    ...expertFields(readCase('delsholm')).map(({ tier, key, cls, value, call }) => ({ tier, key, cls, value, call }))];
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === path.resolve(new URL(import.meta.url).pathname)) {

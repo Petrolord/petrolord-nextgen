@@ -13,21 +13,21 @@ q(2, "The feasibility explorer passes elasticPoint a sample whose Vs is above it
  ["A refusal in the engine's own words, \"Upper halfspace has vs >= vp.\", which stops the whole layer.",
   "A refusal in the engine's own words, \"vp, vs and rho must be positive.\", as Gassmann's check on its inputs.",
   "A result with Vs clamped to the sample's Vp, so AI is finite and Vp/Vs reads exactly one."],
- "elasticPoint with Vs above Vp does not throw: it returns every field as NaN, a result with empty fields that a study reads as a data problem at that sample. The halfspace message belongs to zoeppritzRpp and the positivity message to substituteVels; no engine clamps Vs to Vp.")
+ "elasticPoint with Vs above Vp does not throw: it returns every field as NaN, and a panel shows the gap. The halfspace message belongs to zoeppritzRpp and the positivity message to substituteVels; no engine clamps Vs to Vp.")
 
 q(0, "A learner fits the local shear trend, linear, on only three measured Vp and Vs pairs. What does fitVsRegression do?",
  "It refuses, in the engine's own words: \"Need at least 5 samples with measured Vp and Vs (got 3).\"",
  ["It refuses, in the engine's own words: \"The regression is singular (Vp has no spread).\"",
   "It returns a line through the three pairs with a residual standard error of zero and an R squared of one.",
   "It returns NaN coefficients, the way elasticPoint returns NaN fields when its input has no physical answer."],
- "Three pairs are too few for a linear fit with its two coefficients and degrees of freedom left over, so the engine refuses with the message about five samples. The singular message comes from six pairs all at Vp 3000 m/s, and a NaN result is elasticPoint's behaviour, which the fit does not share.")
+ "fitVsRegression given three measured pairs in the linear form refuses with the message about five samples, and the panel prints it unchanged. The singular message comes from six pairs all at Vp 3000 m/s, and a NaN result is elasticPoint's behaviour, which the fit does not share.")
 
 q(3, "In the feasibility explorer the net sand Vsh cut-off is moved up and down from 0.350000 at Ekene-1. Which layer's sample count stays at its Ekene figure, and why?",
  "The cap rock's 130 samples, because it is the 65 ft of log above the top of the Ekene Sand and has no Vsh rule.",
  ["The oil leg's 65 samples, because the oil-water contact at 5118.110236 ft fixes the leg whatever the cut-off.",
   "The water leg's 103 samples, because every sample below the contact is counted whatever its shale volume reads.",
   "The net sand's 168 samples, because the cut-off is applied after the count and only reweights the layer means."],
- "Net sand is Vsh at or below the stated cut-off, and the oil leg (65) and water leg (103) are net sand above and below the contact, so both move with it. The cap rock is a stated thickness of log, the 65 ft above the top, 130 samples, and moves only with its own control.")
+ "Net sand is Vsh at or below the stated cut-off, and the oil leg (65) and water leg (103) are net sand above and below the contact, so both move with it. The cap rock is a stated thickness of log, the 65 ft above the top, 130 samples, set by its own stated thickness.")
 
 q(1, "Over the 103 water-leg net sand samples of Ekene-1, what is the mean of measured Vs over the Greenberg-Castagna Vs?",
  "1.036576, so on average the measured shear sits above what the published regression predicts.",
@@ -62,14 +62,14 @@ q(2, "At the 0.900000 level, predictVs is asked for Vs at Vp 3700 m/s on the Eke
  ["A refusal, because a Vp outside the calibration range of 2670.381000 to 3481.638000 m/s has no prediction interval the engine can compute.",
   "Vs 1852.041638 m/s, the prediction at the highest Vp the engine will use, since it holds every Vp above the range at the last calibrated value.",
   "Vs 2194.153650 m/s with sigma 41.009437 m/s, unflagged, because an R squared of 0.925483 keeps the line trusted beyond its samples."],
- "A Vp outside the calibration range still gets a prediction, but it is flagged as extrapolated and its sigma grows, here to 43.298759 m/s: the line is being trusted where no sample supports it. The engine neither refuses nor clamps, and sigma is s sqrt(1 + leverage), so it never equals s alone.")
+ "A Vp outside the calibration range still gets a prediction, but it is flagged as extrapolated and its sigma is 43.298759 m/s. The engine neither refuses nor clamps, and sigma is s sqrt(1 + leverage), so it is not the fit's s of 41.009437 m/s.")
 
 q(3, "The prediction interval at Vp 3100 m/s is 1612.548122 to 1749.423143 m/s at the 0.900000 level. What does the engine return at the 0.8 level?",
  "1627.805269 to 1734.165996 m/s, a narrower interval.",
  ["1612.548122 to 1749.423143 m/s, unchanged.",
   "1615.915396 to 1746.630980 m/s.",
   "A wider interval than at 0.900000, because a lower level loosens the fit and so raises the residual standard error."],
- "The level is a stated choice. At 0.8 the interval at 3100 m/s is 1627.805269 to 1734.165996 m/s, narrower than at 0.900000, and a narrower band is a weaker promise. 1615.915396 to 1746.630980 m/s is the four-well fit at 0.900000, and the level does not touch s.")
+ "The level is a stated choice. At 0.8 the interval at 3100 m/s is 1627.805269 to 1734.165996 m/s, narrower than at 0.900000. 1615.915396 to 1746.630980 m/s is the four-well fit at 0.900000, and the level does not touch s.")
 
 q(0, "A learner passes fitVsRegression six measured pairs, every one at Vp 3000 m/s. What happens?",
  "The engine refuses: \"The regression is singular (Vp has no spread).\"",

@@ -35,7 +35,7 @@ const BARE = process.argv.includes('--bare-stated-tolerances');
 // with the declared quantity class.
 const declared = GRADED_FIELDS.map(([, k]) => k);
 const allRows = [];
-for (const g of ['qi_capstone.mjs', 'qi_capstone_p.mjs', 'qi_capstone_e.mjs']) {
+for (const g of ['qi_capstone.mjs', 'qi_capstone_e.mjs']) {
   if (!fs.existsSync(`${HERE}/${g}`)) continue;
   allRows.push(...JSON.parse(execFileSync('node', [`${HERE}/${g}`, '--json'],
     { encoding: 'utf8', maxBuffer: 1e8, cwd: HERE })));

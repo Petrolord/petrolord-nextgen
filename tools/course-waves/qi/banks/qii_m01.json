@@ -104,7 +104,7 @@
    "The reflectivity is not white over the window, so the extraction cannot take the autocorrelation's spectrum to zero phase.",
    "Each kept sample needs its whole 31-sample wavelet window on live reflectivity, and the logs give 26 live samples.",
    "The 4.000000 ms clock is too coarse to resample a 0.500000 ft log onto.",
-   "The phase match has already rotated the synthetic by -6.135261 degrees, so the well's reflectivity no longer fits the trace."
+   "The phase match has already rotated the synthetic by -6.135261 degrees, so the well's reflectivity stops fitting the trace."
   ],
   "answer": 1,
   "explanation": "The extraction keeps only trace samples whose whole window, 2 x 15 + 1 = 31 samples at the default half length, sits on live reflectivity. The pack's logs give 26 live samples, so none qualifies and the engine says, in its own words, \"The well reflectivity is flat over the seismic at the well, so there is nothing to extract a wavelet from.\""
@@ -145,7 +145,7 @@
  {
   "prompt": "Why does the lab run estimatePhaseRotation on the synthetic's live span only?",
   "options": [
-   "Because the trace outside 1100 to 1500 ms was used to extract the statistical wavelet and must stay apart from the match.",
+   "Because the trace outside 1100 to 1500 ms went into the statistical wavelet and must stay apart from the match.",
    "Because the 20 ms bulk shift must fit inside it.",
    "Because the zero fill would fix the phase.",
    "Because the Hilbert transform cannot cross a gap."

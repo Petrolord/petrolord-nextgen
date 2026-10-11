@@ -20,7 +20,7 @@ It also states every input the six figures depend on: the layer, the offset and 
 | the two-term Shuey intercept at the target sample | `fitShuey` | the Shuey fit from near, mid and far |
 | the one scale over the four wells | the comparison at the wells | one scale over every well |
 
-Five figures are return values of an engine on the case, read from the panel; the scale is worked by hand from the four wells' points the "AVO at the wells" view prints. Each ends a chain the tier has walked: two rows of the case's table give the interval velocity; the angle and the stretch read the velocities at the stated offset and time; and the far stack and the intercept read the angle gather built with that table and the stated bins.
+All six figures are return values of an engine on the case, read from the panel; the scale is the One scale over every well tile of the "AVO at the wells" view. Each ends a chain the tier has walked: two rows of the case's table give the interval velocity; the angle and the stretch read the velocities at the stated offset and time; and the far stack and the intercept read the angle gather built with that table and the stated bins.
 
 ## What is graded and what is not
 
@@ -36,4 +36,4 @@ A refusal is the engine's own message and means an input is outside what the fun
 
 ## Exercise
 
-Rehearse the capstone with Data set to "Ekene teaching pack", writing each choice down. In "Dix and Walden", choose a layer in Dix layer ending at, a Time and an Offset, and read the layer's Dix interval velocity, Walden angle at the offset and time, and NMO stretch at the offset and time. In "Angle gathers and partial stacks", choose a Sample time and a far range and read the partial stack tile. In "Shuey fit and the background trend", read Intercept A at the same sample with two terms. In "AVO at the wells", work out the one scale by hand. Beside each figure, note every input it read.
+Rehearse the capstone with Data set to "Ekene teaching pack", writing each choice down. In "Dix and Walden", choose a layer in Dix layer ending at, a Time and an Offset, and read the layer's Dix interval velocity, Walden angle at the offset and time, and NMO stretch at the offset and time. In "Angle gathers and partial stacks", choose a Sample time and a far range and read the partial stack tile. In "Shuey fit and the background trend", read Intercept A at the same sample with two terms. In "AVO at the wells", read One scale over every well. Beside each figure, note every input it read.
