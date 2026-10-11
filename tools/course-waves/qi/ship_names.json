@@ -1,8 +1,12 @@
 {
- "comment": "The QI migration file names, each stamped with its real creation time (UTC, YYYYMMDDHHMMSS) when the ship-phase generator first wrote it, and never renamed. The course migration carries all three capstones. The apply script orders the files explicitly: the course row first, the deep seeds, the go-live last.",
+ "comment": "The QI migration file names, each stamped with its real creation time (UTC, YYYYMMDDHHMMSS) when the ship-phase generator first wrote it, and never renamed. The course migration carries all three capstones. The apply script orders the files explicitly: the course row first, the deep seeds, the go-live last. held_deep names the tiers whose deep seed is not written yet even if their banks are committed (the lead releases a tier once its banks are final and audited); gen_seeds.sh reports them HELD.",
  "course": "20261011212305_qi_course",
  "beginner_deep": "20261011212306_qi_beginner_deep",
  "intermediate_deep": "20261011212307_qi_intermediate_deep",
  "advanced_deep": "20261011212308_qi_advanced_deep",
- "go_live": "20261011212309_qi_go_live"
+ "go_live": "20261011212309_qi_go_live",
+ "held_deep": [
+  "intermediate",
+  "advanced"
+ ]
 }

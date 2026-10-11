@@ -67,7 +67,10 @@ GEN=""
 for tier in beginner intermediate advanced; do
   L=$(case $tier in beginner) echo b;; intermediate) echo i;; advanced) echo a;; esac)
   have=$(ls "$STAGE/repo/tools/course-banks/$SLUG/$tier/qi${L}_"*.json 2>/dev/null | wc -l || true)
-  if [ "$have" = 7 ]; then
+  held=$(python3 -c "import json; print('yes' if '$tier' in json.load(open('$W/ship_names.json')).get('held_deep', []) else '')")
+  if [ -n "$held" ]; then
+    echo "  HELD      ${tier}_deep: $have of 7 bank JSONs committed; held in ship_names.json until the banks are final"
+  elif [ "$have" = 7 ]; then
     cp "$STAGE/repo/tools/course-banks/$SLUG/$tier/"*.json "$W/banks/"
     python3 "$KIT/gen_migration.py" "$tier" "$W/hdr_${tier}.txt" "$OUTDIR/$(NAME ${tier}_deep).sql" "$W" | sed 's/^/  /'
     GEN="$GEN ${tier}_deep"
