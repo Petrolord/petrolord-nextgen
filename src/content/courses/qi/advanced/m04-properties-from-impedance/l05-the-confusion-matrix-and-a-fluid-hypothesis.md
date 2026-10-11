@@ -40,4 +40,4 @@ A report carries that label through to every map and table. The oil-sand probabi
 
 ## Exercise
 
-In the prospect explorer's properties view, fit the Bayesian facies model on the Ekene pack logs on AI alone, with the cut-off at 0.350000, the contact at 5118.110236 ft and sample-proportion priors, and read the confusion matrix; check it against the first table. Add Vp/Vs and read the second. For each matrix, write the share of the oil-sand row that lands on its diagonal as a count out of 179, then switch to equal priors and record which row gains and which loses.
+In the prospect explorer, set View to "Bayesian facies and the confusion matrix" and Data to "Ekene teaching pack", with "Net sand Vsh cut-off (stated)" at 0.350000, "Attributes (stated)" at AI, "Priors (stated)" at the samples' proportions and "Density per facies (stated)" at Gaussian, and check the confusion matrix against the first table. Set "Attributes (stated)" to AI and Vp/Vs and check the second. For each matrix, write the oil-sand diagonal as a count out of 179. Then set "Priors (stated)" to equal and record which row gains and which loses.

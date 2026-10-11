@@ -17,7 +17,7 @@ The case states every input the six figures depend on: its wells and their horiz
 | the posterior probability of the oil-sand facies at a stated AI | prospect explorer | Bayesian facies on impedance |
 | the column from crest to spill on the case's depth grid, in feet | prospect explorer | crest, spill and closure |
 
-Every figure is a return value of an engine on the case, read from the panel. The first comes from the low-frequency model between wells, an engine the course marks as awaiting its independent oracle and grades only once that check lands. The second and third read the case's own low-frequency model and wavelets as inputs. The fifth depends on the case's labels and priors. The sixth reads the case's grid as it stands, and the engine's edge flag tells you whether that column is the map's limit.
+Every figure is a return value of an engine on the case, read from the panel. The first comes from the low-frequency model between wells, an engine the course marks as awaiting its independent oracle and grades only once that check lands. The second and third read the case's own low-frequency model and wavelets as inputs. The sixth reads the case's grid as it stands, with its edge flag.
 
 ## What is graded and what is not
 
@@ -25,10 +25,10 @@ The six figures are graded. Nothing else is: no figure from a video, no Ekene fi
 
 ## How to work it
 
-State every choice the case states, in your own notes, before reading a figure: the wells, the horizons, the inverse distance power, the positions and samples, the window, the wavelet, the weight, the iterations, the angles, the cut-off, the priors, the interval level and the grid. Then run the chain in order. Check the units: AI in kg/(m2 s), times in milliseconds two-way, depths in feet. A refusal is the engine's own message and means an input is outside what the function accepts; re-read the case file for that input.
+State every choice the case states, in your own notes, before reading a figure: the inverse distance power, the samples, the window, the wavelet, the weights, the iterations, the priors and the interval level. Then run the chain in order. Check the units: AI in kg/(m2 s), times in milliseconds two-way, depths in feet. A refusal is the engine's own message and means an input is outside what the function accepts; re-read the case file for that input.
 
 {{panel:qi-prospect-explorer}}
 
 ## Exercise
 
-Rehearse the capstone on the Ekene pack. In the inversion explorer, write down a trace position, a sample, the window, the wavelet, the weight and the iteration count, then read the low-frequency model, the model-based AI and the simultaneous Vp/Vs there. In the prospect explorer, choose an AI, read the high end of the 80 percent porosity interval and the oil-sand posterior, then read the column from crest to spill on the Ekene Sand top grid. Beside each figure, note every input it read.
+Rehearse the capstone on the Ekene pack. In the inversion explorer, with Data "Ekene teaching pack", open "The low-frequency model", "Model-based, blocky and sparse-spike" and "Simultaneous inversion by stacks", write down every control marked "(stated)" and its value, and read what each view returns. In the prospect explorer, read the high end of the interval in "A linear transform and its interval" with "Interval level (stated)" at 0.8, the oil-sand posterior in "Bayesian facies and the confusion matrix", and the Column from crest to spill in "Crest, spill and closure". Then set Data to "Paste a case file" in each explorer and note the sample controls that appear; the capstone fills them from its case.

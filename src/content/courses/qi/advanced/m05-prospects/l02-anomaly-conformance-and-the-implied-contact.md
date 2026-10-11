@@ -11,11 +11,11 @@ The engine takes an anomaly as a set of grid nodes on the stated depth grid. Its
 - the share of the anomaly inside the closure;
 - the implied contact, the depth the edge points to.
 
-Conformance near 1 says the edge sits on one contour; conformance 0 says its scatter is as large as the closure's relief, or larger.
+Conformance near 1 says the edge sits on one contour; 0 says its scatter reaches the closure's relief.
 
 ## Two designed teaching anomalies
 
-On the Ekene grid the course runs two anomalies DESIGNED for teaching, labelled as such. Anomaly A is every mapped node shallower than the spill. Anomaly B is bounded by a depth limit and also by the grid's middle column, keeping only nodes to the west of it, so one of its edges is a straight line with nothing to do with depth.
+On the Ekene grid the course runs two anomalies DESIGNED for teaching, labelled as such. Anomaly A is every mapped node shallower than the spill. Anomaly B is every node shallower than a level 20 ft below the spill, kept only west of the grid's middle column, so one of its edges is a straight line with nothing to do with depth.
 
 | anomaly | nodes | edge nodes | conformance | share inside the closure | implied contact ft | edge scatter ft |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -32,10 +32,10 @@ B's edge scatter, 6.992237 ft, is larger than the closure's whole relief, so con
 
 ## What conformance depends on
 
-Every figure here depends on the stated grid, the stated anomaly and the closure the grid returns. On the Ekene grid the relief is the map's limit, set by the mapped edge. A report quotes conformance with the relief it was measured against and the edge flag of the closure.
+On the Ekene grid the relief is the map's limit, set by the mapped edge. A report quotes conformance with the relief it was measured against and the edge flag of the closure.
 
 {{panel:qi-prospect-explorer}}
 
 ## Exercise
 
-In the prospect explorer's prospect view on the Ekene Sand top grid, choose designed teaching anomaly A and read its nodes, edge nodes, conformance, share inside, implied contact and scatter against the table; then choose B. Compare A's implied contact with the spill the closure view returns. Write one sentence for each anomaly on what its implied contact may be used for, naming the conformance threshold that decides it.
+In the prospect explorer, set View to "Anomaly conformance, evidence and the assessment" and Data to "Ekene teaching pack". For anomaly A, set "Anomaly: nodes shallower than the spill plus, ft (stated)" to 0 and "Cut the anomaly at the middle column (stated)" to no, and check the six tiles against the table. For anomaly B, set the first control to -20 and the second to yes. Compare A's implied contact with the spill the closure view returns, and write one sentence for each anomaly on what its implied contact may be used for, naming the conformance threshold that decides it.

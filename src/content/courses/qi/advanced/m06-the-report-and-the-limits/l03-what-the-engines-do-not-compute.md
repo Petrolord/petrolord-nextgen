@@ -32,4 +32,4 @@ Most engines this tier calls carry a golden and an independent oracle in the eng
 
 ## Exercise
 
-In the prospect explorer, list every input the properties view and the prospect view ask for on the Ekene pack. For each, write where the figure came from: a stated setting, a stated selection, a stated grid or an earlier engine's output. Then choose one input, change it, and record which returned figures move.
+In the prospect explorer, with Data "Ekene teaching pack", step through every View and list each control marked "(stated)". For each, write where its figure comes from: a stated setting, a stated selection, a stated grid or an earlier engine's output. Then choose one control, change it, and record which tiles move.

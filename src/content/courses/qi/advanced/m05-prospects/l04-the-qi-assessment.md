@@ -6,7 +6,7 @@ The closure, the conformance, the evidence count and the feasibility verdict mee
 
 ## The thresholds
 
-Conformance at 0.7 and above fits the structure; conformance under 0.3 cuts across it. Maturing a prospect needs two independent supporting sources. Between 0.3 and 0.7 the edge is neither. Every threshold is part of the stated table, and a report quotes them with the decision.
+Conformance at 0.7 and above fits the structure; conformance under 0.3 cuts across it. Maturing a prospect needs two independent supporting sources. Between 0.3 and 0.7 the edge is neither. A report quotes the thresholds with the decision.
 
 ## The decision table
 
@@ -24,13 +24,13 @@ The first row is the case every input favours: an anomaly that follows a contour
 
 Take one independent source away and the seismic still supports the prospect, but the recommendation drops to investigate. Support and recommendation are separate outputs: one says which way the seismic leans, the other says what the study should do next.
 
-The two rows without an anomaly show the feasibility verdict at work. Where the study says the fluid would be visible, its absence is evidence against, and the prospect is downgraded. Where feasibility is not stated, absence says nothing, and the prospect is retained with neutral support. The same seismic gives different recommendations depending on an Associate-tier input.
+The two rows without an anomaly show the feasibility verdict at work. Where the study says the fluid would be visible, its absence is evidence against, and the prospect is downgraded. Where feasibility is not stated, absence says nothing, and the prospect is retained with neutral support. An Associate-tier input decides between them.
 
 The last row shows a competing explanation judged likely. The anomaly is present and the recommendation is investigate, but the support is neutral, because the anomaly points to its rival as readily as to fluid.
 
 ## On the Ekene grid
 
-The course prints no assessment of the Ekene teaching anomalies, and the panel runs one on inputs a learner states. Every input matters there. Anomaly A conforms above the fitting threshold and lies wholly inside a closure that is the map's limit; anomaly B falls under the cutting threshold. The feasibility verdict, the evidence count and any competing explanation are stated by the learner. Change one and the recommendation can change.
+The course prints no assessment of the Ekene teaching anomalies; the panel runs one on inputs a learner states. Anomaly A conforms above the fitting threshold and lies wholly inside a closure that is the map's limit; anomaly B falls under the cutting threshold. The feasibility verdict, the evidence count and any competing explanation are stated by the learner. Change one and the recommendation can change.
 
 ## What the assessment is
 
@@ -40,4 +40,4 @@ The output is a decision aid built from stated inputs, and its words are QI's wo
 
 ## Exercise
 
-In the prospect explorer's prospect view, open the assessment and enter the first row of the decision table; check the recommendation and the seismic support. Then step through the other rows by changing one input at a time: the number of independent sources, the anomaly flag, the feasibility verdict and the competing explanation. Finally, enter anomaly A's conformance and share inside from the conformance view, state a feasibility verdict and an evidence count of your own, and write the recommendation with every input that produced it.
+In the prospect explorer, set View to "Anomaly conformance, evidence and the assessment" and Data to "Ekene teaching pack". The assessment opens on the first row of the decision table: check its Recommendation and Seismic support. Set "Independent supporting sources (stated)" to 1 and read them again. Restore 2, set "Anomaly present (stated)" to no, and read the result with "Feasibility verdict (stated)" at feasible and then at not stated. Finally set the anomaly back to yes, enter anomaly A's Conformance and Share inside the closure from the tiles above, state a feasibility verdict and a number of sources of your own, and write the recommendation with every input that produced it.

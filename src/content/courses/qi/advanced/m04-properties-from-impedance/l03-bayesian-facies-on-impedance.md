@@ -4,7 +4,7 @@ A transform predicts a number; a facies model predicts a class with a probabilit
 
 ## The labels are stated
 
-Every label comes from a stated rule on the four pack wells at log scale. Oil sand is net sand of the Ekene Sand above the oil-water contact, at 5118.110236 ft; brine sand is net sand at or below it; shale is any sample with Vsh above the cut-off of 0.350000 anywhere in the window. Net sand outside the Ekene Sand is left out. Change the cut-off or the contact and every count, mean and posterior below moves.
+Oil sand is net sand of the Ekene Sand above the oil-water contact, at 5118.110236 ft; brine sand is net sand at or below it; shale is any sample with Vsh above the cut-off of 0.350000 anywhere in the window. Net sand outside the Ekene Sand is left out. Change the cut-off or the contact and every count, mean and posterior below moves.
 
 ## The split is heavily shale
 
@@ -27,16 +27,16 @@ Shale sits far below both sands in AI, with a narrow spread, so shale and sand s
 | 7200000.000000 | 0.000000 | 0.231827 | 0.768173 | brine sand |
 | 7800000.000000 | 0.000000 | 0.116827 | 0.883173 | brine sand |
 
-Only the softest point in the table is called oil sand, and even there brine sand keeps 0.280694. From 6600000 upwards brine sand is the most likely class, by a narrow margin at first. Shale has no weight at any of these points.
+Only the softest point in the table is called oil sand, and even there brine sand keeps 0.280694. From 6600000 upwards brine sand is the most likely class, by a narrow margin at first.
 
 ## The prior moves the answer
 
 With equal priors at AI 6600000 the posteriors are P(shale) 0.000000, P(oil sand) 0.673039 and P(brine sand) 0.326961: the most likely class flips from brine sand to oil sand. Nothing about the rock changed; only the stated prior did. Where two densities overlap, the prior decides the call, so a facies map is quoted with its priors, and a map made with sample-proportion priors inherits the heavily shale, brine-rich split of the logged window.
 
-A posterior is a probability under the model: Gaussian densities, these labels and these priors. It is a calibrated statement about those samples, and the next two lessons ask how well it sorts them and what its class names claim.
+A posterior is a probability under the model: Gaussian densities, these labels and these priors.
 
 {{panel:qi-prospect-explorer}}
 
 ## Exercise
 
-In the prospect explorer's properties view, fit the Bayesian facies model on AI alone from the Ekene pack logs, with the cut-off at 0.350000 and the contact at 5118.110236 ft, and check the samples, priors, means and standard deviations against the first table. Read the posteriors at the four AI values of the second table. Then switch the priors from the samples' proportions to equal priors, read the posteriors at 6600000 again, and write one sentence on which stated choice decided the class there.
+In the prospect explorer, set View to "Bayesian facies and the confusion matrix" and Data to "Ekene teaching pack" (the contact is the pack's, 5118.110236 ft). Keep "Net sand Vsh cut-off (stated)" at 0.350000, "Attributes (stated)" at AI, "Priors (stated)" at the samples' proportions and "Density per facies (stated)" at Gaussian, and check the samples, priors, means and standard deviations against the first table. Enter the four AI values of the second table in "AI to classify at, kg/(m2 s) (stated)" and read the posteriors. Then set "Priors (stated)" to equal, read the posteriors at 6600000 again, and write one sentence on which stated choice decided the class there.

@@ -40,4 +40,4 @@ A seed moves the start of the flood to a stated node, which matters on a grid wi
 
 ## Exercise
 
-In the prospect explorer, open the view that computes crest, spill and closure on the Ekene Sand top grid. Leave the crest seed unset and check the crest, spill, column, edge flag, node count, area and gross rock volume against the table. Set the stated contact to -5118.110236 ft and read whether the closure is closed, then set it to the spill elevation and read it again. Write two sentences for a report on what the closure figures of this grid may and may not be used for.
+In the prospect explorer, set View to "Crest, spill and closure" and Data to "Ekene teaching pack". Leave "Contact elevation, ft, blank for the spill (stated)" blank and check the crest, spill, column, edge flag, area and gross rock volume tiles against the table. Set the contact to -5118.110236 and read "Closed at that contact"; then set it to -5053.948819 and read "Nodes at the stated contact". Write two sentences for a report on what the closure figures of this grid may and may not be used for.

@@ -18,16 +18,16 @@ The assessment matures a prospect only on two independent supporting sources. A 
 
 ## Competing explanations
 
-An anomaly is an observation, and fluid is one explanation of it. The modules before this one name others from the Ekene figures themselves. On AI (acoustic impedance, Vp x density) alone, most oil-sand samples at the wells were called brine sand, so a soft impedance anomaly may be brine sand. Vp/Vs separates the two sands at log scale, and its blind correlations at the wells are weak, so an anomaly on inverted Vp/Vs carries that uncertainty. An anomaly whose edge cuts across the contours, like designed anomaly B, is hard to explain by a contact at all.
+Fluid is one explanation of an anomaly, and the Ekene figures name others. On AI (acoustic impedance, Vp x density) alone, most oil-sand samples at the wells were called brine sand, so a soft impedance anomaly may be brine sand. Vp/Vs separates the two sands at log scale, and its blind correlations at the wells are weak, so an anomaly on inverted Vp/Vs carries that uncertainty. An anomaly whose edge cuts across the contours, like designed anomaly B, is hard to explain by a contact at all.
 
 The assessment takes a competing explanation as a stated judgement. Where one is judged likely, an anomaly that is present still leads to investigate, and its seismic support is neutral. The engine does not find competing explanations, and it does not weigh them: the interpreter names each one, states whether it is judged likely, and writes the reason into the report.
 
 ## Feasibility decides what absence means
 
-Evidence also runs the other way. The absence of an anomaly counts against a prospect only where the feasibility study says the case would be visible. Without a feasibility verdict, absence is neutral, because a fluid the seismic cannot see leaves no anomaly to miss. This is where the Associate tier's verdict returns: it is an input to the decision.
+Evidence also runs the other way. The absence of an anomaly counts against a prospect only where the feasibility study says the case would be visible. Without a feasibility verdict, absence is neutral, because a fluid the seismic cannot see leaves no anomaly to miss.
 
 {{panel:qi-prospect-explorer}}
 
 ## Exercise
 
-In the prospect explorer's prospect view, open the evidence count and enter the worked case: a full-stack RMS amplitude, an impedance from the full stack and a far-stack brightening, each with its source. Check the supporting items, the independent sources and the shared source. Then change the third item's source to the full stack and read the count again. Write one sentence naming a competing explanation for a soft impedance anomaly at Ekene, citing the facies lesson that supports it.
+In the prospect explorer, set View to "Anomaly conformance, evidence and the assessment" and Data to "Ekene teaching pack". Read the evidence table, which groups the worked case's three items by source, and check the Supporting items and Independent sources tiles. In the assessment below it, keep the stated inputs as they open, then set "Independent supporting sources (stated)" from 2 to 1 and read how the Recommendation and the Seismic support move. Write one sentence naming a competing explanation for a soft impedance anomaly at Ekene, citing the facies lesson that supports it.

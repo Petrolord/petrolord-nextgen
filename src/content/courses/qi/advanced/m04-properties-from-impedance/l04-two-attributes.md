@@ -14,7 +14,7 @@ On AI (acoustic impedance, Vp x density) alone the oil sand and the brine sand o
 | 6600000.000000 | 1.750000 | 0.000000 | 0.997373 | 0.002627 |
 | 6600000.000000 | 2.000000 | 0.000000 | 0.000000 | 1.000000 |
 
-At AI 6600000 the one-attribute model called brine sand with 0.557911 and oil sand 0.442088, close to a coin toss. With Vp/Vs added, the same AI is oil sand at 0.997373 when Vp/Vs is 1.750000 and brine sand at 1.000000 when it is 2.000000. The second attribute decides a point the first could not, and it decides it almost to certainty, which is itself a reason to ask how well Vp/Vs is known where the model is applied.
+At AI 6600000 the one-attribute model called brine sand with 0.557911 and oil sand 0.442088, close to a coin toss. With Vp/Vs added, the same AI is oil sand at 0.997373 when Vp/Vs is 1.750000 and brine sand at 1.000000 when it is 2.000000. The second attribute decides a point the first could not, almost to certainty, which is a reason to ask how well Vp/Vs is known where the model is applied.
 
 The share correct rises from 0.934872 to 0.973443. That rise looks modest because shale, which AI already separates, makes up most of the samples; the next lesson reads the confusion matrices row by row, where the change for the oil sand is large.
 
@@ -39,4 +39,4 @@ The cut-off, the contact, the labels, the priors and the attributes are inputs, 
 
 ## Exercise
 
-In the prospect explorer's properties view, fit the Bayesian facies model on the Ekene pack logs twice, first on AI alone and then on AI and Vp/Vs, with the cut-off at 0.350000, the contact at 5118.110236 ft and sample-proportion priors. Check both shares correct. Read the posteriors at AI 6600000 with Vp/Vs 1.750000 and 2.000000, then step Vp/Vs between them and record where the most likely class changes. Write one sentence on what a blind Vp/Vs correlation near zero would do to that boundary on a map.
+In the prospect explorer, set View to "Bayesian facies and the confusion matrix" and Data to "Ekene teaching pack", with "Net sand Vsh cut-off (stated)" at 0.350000, "Priors (stated)" at the samples' proportions and "Density per facies (stated)" at Gaussian. Read the Share classified correctly tile with "Attributes (stated)" at AI, then at AI and Vp/Vs. Set "AI to classify at, kg/(m2 s) (stated)" to 6600000 and "Vp/Vs to classify at (stated)" to 1.750000, then 2.000000, and read the posteriors; step Vp/Vs between them and record where the most likely class changes. Write one sentence on what a blind Vp/Vs correlation near zero would do to that boundary on a map.

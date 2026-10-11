@@ -44,4 +44,4 @@ Every issue raised goes into the report. QI Studio raises one for a well whose s
 
 ## Exercise
 
-In the prospect explorer, run the properties view and the prospect view on the Ekene pack with the settings in the table above. For each product the panel returns, write the line of a report that carries it: the figure, the settings it depends on, its check and its limit. Mark every line whose figure would move if the net sand cut-off changed.
+In the prospect explorer, with Data "Ekene teaching pack", run the views "A linear transform and its interval", "Bayesian facies and the confusion matrix" and "Crest, spill and closure". For each product, write the line of a report that carries it: the figure, the settings it depends on, its check and its limit. Then change "Net sand Vsh cut-off (stated)" in the first two views and mark every line whose figure moved.

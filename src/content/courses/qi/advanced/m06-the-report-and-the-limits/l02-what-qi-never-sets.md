@@ -12,7 +12,7 @@ The assessment returns supports where an anomaly is present and nothing stated w
 
 ## Why the chance stays with the risk team
 
-A seismic support is one input to a prospect's chance. It describes an anomaly, its fit to a mapped structure and the independence of the evidence. The risk team weighs that statement and sets the chance; QI's job is to make its own statement exact, stated and checkable.
+A seismic support is one input to a prospect's chance. The risk team weighs that statement and sets the chance; QI's job is to make its own statement exact, stated and checkable.
 
 The figures this tier produces show why. On the Ekene grid the closure is the map's limit, spilling at the edge 2.380249 ft below the crest while the wells hold oil far deeper. A facies class named oil sand is a fluid hypothesis, measured on its own samples at the wells. The porosity band at seismic scale is widened by a left-out RMS of 0.024072 resting on four wells. Each is a measurement with a limit, and none is a probability that the prospect holds oil.
 
@@ -28,4 +28,4 @@ The recommendation, mature, investigate, retain or downgrade, says what the stud
 
 ## Exercise
 
-In the prospect explorer's prospect view, open the assessment and enter anomaly A's conformance and share inside, an evidence count of your own and a stated feasibility verdict. Read the recommendation and the seismic support. Then write the paragraph a QI report hands to the risk team: the support word, the inputs behind it and the limits of the closure, in words that set no chance of success.
+In the prospect explorer, set View to "Anomaly conformance, evidence and the assessment" and Data to "Ekene teaching pack". Read anomaly A's Conformance and Share inside the closure, enter them in the assessment's "Conformance (stated)" and "Share inside the closure (stated)", and set "Independent supporting sources (stated)" and "Feasibility verdict (stated)" to values of your own. Read the Recommendation and the Seismic support. Then write the paragraph a QI report hands to the risk team: the support word, the inputs behind it and the limits of the closure, in words that set no chance of success.

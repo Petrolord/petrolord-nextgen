@@ -37,10 +37,10 @@ The last row lies beyond the highest calibration AI, 8402495.750400. The engine 
 
 ## The level is a choice
 
-At the 90 percent level and AI 7000000 the interval is 0.174207 to 0.233493, wider than the 80 percent band at the same AI. The level is stated beside every band, with the cut-off, the wells and the legs that built the fit: change any of them and a, b, s and every interval move.
+At the 90 percent level and AI 7000000 the interval is 0.174207 to 0.233493, wider than the 80 percent band at the same AI. The level is stated beside every band, with the cut-off, the wells and the legs that built the fit.
 
 {{panel:qi-prospect-explorer}}
 
 ## Exercise
 
-In the prospect explorer, open the view that computes properties from impedance on the Ekene pack logs at the four wells. Fit the transform with the net sand cut-off at 0.350000 and both legs, and check a, b, s and R squared against the first table. Set the stated AI to 7000000 and read the 80 percent band, then set the interval level to 90 percent and read it again. Set the stated AI to 8500000 and write two sentences: what the band there tells a reader, and what it cannot.
+In the prospect explorer, set View to "A linear transform and its interval" and Data to "Ekene teaching pack". Keep "Net sand Vsh cut-off (stated)" at 0.350000 and check the tiles Intercept a, Slope b per 10^6 kg/(m2 s), Residual standard error s, R squared and Calibration samples against the first table. Set "AI to predict at, kg/(m2 s) (stated)" to 7000000 and read the interval with "Interval level (stated)" at 0.8, then at 0.9. Set the AI to 8500000 and write two sentences: what the band there tells a reader, and what it cannot.
