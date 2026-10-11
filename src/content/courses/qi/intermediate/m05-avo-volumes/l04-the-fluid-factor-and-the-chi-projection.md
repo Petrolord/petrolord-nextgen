@@ -1,6 +1,6 @@
 # The fluid factor and the chi projection
 
-Intercept and gradient are two numbers at every sample; a map wants one. The fluid factor of Smith and Gidlow (1987) and the chi projection of Whitcombe and others (2002) are two ways to combine A and B into a single attribute that separates fluid from the background. `contrastsFromAB` gives the first and `chiProjection` the second.
+Intercept and gradient are two numbers at every sample; a map wants one. The fluid factor of Smith and Gidlow (1987) and the chi projection of Whitcombe and others (2002) are two ways to combine A and B into a single attribute that separates fluid from the background.
 
 ## The fluid factor
 
@@ -34,10 +34,10 @@ The second row uses the background trend slope m -4.020851 of the last lesson: a
 
 ## What both attributes rest on
 
-The two attributes are rearrangements of the same A and B, so they carry every choice under the fit, and each adds its own: the fluid factor a stated Vs/Vp, Gardner's density and the scale, the chi projection a stated angle. Neither is a measurement of fluid on its own. Each says where a sample sits against a stated line, and the AVO at the wells module checks the seismic points against modelled ones before any attribute is read for fluid.
+The two attributes are rearrangements of the same A and B, so they carry every choice under the fit, and each adds its own: the fluid factor a stated Vs/Vp, Gardner's density and the scale, the chi projection a stated angle. Neither measures fluid on its own: each says where a sample sits against a stated line, and the last module checks the seismic points against modelled ones first.
 
 {{panel:qi-prestack-explorer}}
 
 ## Exercise
 
-In the prestack explorer, open the AVO view on the Ekene pack's gather 5 with two terms at 10, 20 and 30 degrees and the time at 1292 ms. Enter the scale 1882.216944 and a Vs/Vp of 0.5 and read the three contrasts and the fluid factor. Change the Vs/Vp control and record which contrast moves and which stays. Then set chi to 30 degrees and to the angle of the background trend, read both projections, and sweep chi to find where the top's projection crosses zero.
+In the prestack explorer, set Data to "Ekene teaching pack" and View to "Shuey fit and the background trend", on gather 5 with bin edges 5, 15, 25, 35, mean angles 10, 20, 30, two terms and Sample time 1292 ms. Set Scale to 1882.216944 and the Vs/Vp control to 0.500000, and read the three contrasts and Fluid factor. Change the Vs/Vp and record which contrast moves and which stay. Then set Chi to 30 degrees and to -76.033690 degrees, read Chi projection for each, and sweep chi to find where the top's projection crosses zero.

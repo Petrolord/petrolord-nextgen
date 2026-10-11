@@ -23,11 +23,11 @@ The synthetic needs a wavelet, and two can be taken from the seismic at a well. 
 
 ## Reading the table
 
-Every wavelet has 31 samples: the same window length on the same clock. Ekene-2 is the lowest in every column, from its peak of 23.394907 Hz to its high edge of 39.582002 Hz; Ekene-4 is the highest in every column, peak 26.530951 Hz and high edge 43.780487 Hz. Ekene-1 and Ekene-3 sit between them and close to each other. The next module measures how alike the four are.
+Every wavelet has 31 samples: the same window length on the same clock. Ekene-2 is the lowest in every column, from its peak of 23.394907 Hz to its high edge of 39.582002 Hz; Ekene-4 is the highest in every column, peak 26.530951 Hz and high edge 43.780487 Hz. Ekene-1 and Ekene-3 sit between them and close to each other.
 
 The 25 Hz Ricker is a useful yardstick. Its peak is close to the field wavelets' peaks, but its centroid of 26.596139 Hz sits well above its peak, while each statistical wavelet's centroid sits close to its own peak. A Ricker chosen by its peak alone carries a higher centroid than any of the four field wavelets.
 
-The table says nothing about phase: every statistical wavelet is zero phase by construction. The next lesson measures phase separately.
+The table says nothing about phase: every statistical wavelet is zero phase by construction.
 
 ## The wavelet from the well
 
@@ -45,4 +45,4 @@ The extraction keeps only trace samples whose whole wavelet window sits on live 
 
 ## Exercise
 
-In the prestack explorer, set View to "Wavelets and the tie" and Data to "Ekene pack: Ekene-1". Choose the statistical wavelet, set the trace window to 1100 and 1500 ms, the window length to 120 ms and the smoothing to 5 Hz, and read the samples, peak, centroid and the two -6 dB edges. Change the smoothing and note which tiles move. Run the same settings at the other three wells. Finally switch the wavelet source to the well wavelet, read the message the panel prints, and explain it in one sentence from the live sample count.
+In the prestack explorer, set Data to "Ekene teaching pack" and View to "Wavelets and phase", with Well at Ekene-1. Set Trace window start to 1100 ms, Trace window end to 1500 ms, Wavelet length to 120 ms and Spectral smoothing to 5 Hz, and read Samples, Peak, Centroid and the two -6 dB edges against the table. Change the smoothing and note which tiles move. Run the same settings at the other three wells. The explorer extracts no well wavelet, so finish with the tie view: set View to "The tie and the time-depth record", read Live synthetic samples at Ekene-1, set it beside the 31 samples of the wavelet window, and explain Seismolord's refusal in one sentence.

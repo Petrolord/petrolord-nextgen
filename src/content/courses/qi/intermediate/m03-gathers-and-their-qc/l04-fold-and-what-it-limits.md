@@ -30,13 +30,11 @@ The fold is read at one sample because the angle of an offset changes with time,
 
 At a minimum fold of 1 or 2, all three bins qualify and the usable angle is 35.000000 degrees, the far edge of the 25 to 35 degree bin. At a minimum of 3 the answer is none, even though the middle bin holds 3, because the count starts at the nearest bin and the 5 to 15 degree bin holds only 2. One thin near bin ends the range before it starts.
 
-The count runs outwards without skipping a bin, so a usable range never has a gap in it.
-
 ## What fold limits
 
-A bin is the mean of the traces that fall in it, so a bin of fold 2 is the mean of two traces. The minimum fold is therefore a stated trade between how far out in angle the study reaches and how many traces stand behind each bin. At the Ekene settings of a minimum fold of 2, the three bins all qualify and the usable angle reaches 35.000000 degrees.
+A bin is the mean of the traces that fall in it, so a bin of fold 2 is the mean of two traces. The minimum fold is therefore a stated trade between how far out in angle the study reaches and how many traces stand behind each bin.
 
-Fold is one limit among several. The stretch mute bounds the offsets kept, and the gather's own mute writes zeros beyond 40 degrees, which count as live samples, so the mute angle and the bin edges are read together.
+Fold is one limit among several. The stretch mute bounds the offsets kept, and the gathers carry the kit's stated mute beyond 40 degrees, by the kit's own angle calculation; muted zeros count as live samples, so the mute and the bin edges are read together.
 
 ## What it means for the two questions
 
@@ -46,4 +44,4 @@ For data quality, the fold table says how many traces stand behind each angle bi
 
 ## Exercise
 
-In the prestack explorer, set View to "Gathers and their QC" and Data to "Ekene pack: gather 5", with the event at 1292 ms and the angle bin edges set to 5, 15, 25 and 35 degrees. Set the minimum fold to 1, 2, 3, 4 and 5 in turn and read the fold of each bin and the usable angle. Then move the event time later, read the fold again, and say which bin gains or loses traces and why.
+In the prestack explorer, set Data to "Ekene teaching pack" and View to "Angle gathers and partial stacks", on gather 5. Set Angle bin edges to 5, 15, 25, 35 and Sample time to 1292 ms. Set Minimum fold to 1, 2, 3, 4 and 5 in turn and read the fold column and Usable angle. Then move Sample time later, read the fold again, and say which bin gains or loses traces and why.

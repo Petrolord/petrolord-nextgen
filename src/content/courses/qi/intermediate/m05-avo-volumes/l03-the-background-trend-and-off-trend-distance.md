@@ -1,10 +1,10 @@
 # The background trend and the off-trend distance
 
-The (A, B) pairs of a window fall along a line: most reflectors in a shale and brine sand sequence share a ratio of gradient to intercept. Castagna and Swan (1997) call that line the background trend, and an AVO anomaly is a point that sits off it. `backgroundTrend` fits the line on the seismic pairs and `offTrend` measures how far a point sits from it.
+The (A, B) pairs of a window fall along a line: most reflectors in a shale and brine sand sequence share a ratio of gradient to intercept. Castagna and Swan (1997) call that line the background trend, and an AVO anomaly is a point that sits off it.
 
 ## The line and the distance
 
-`backgroundTrend` fits B = m A through the origin by orthogonal regression over the (A, B) pairs. Orthogonal regression minimises the perpendicular distances to the line, so A and B are treated alike, which suits a crossplot where both carry noise. The line passes through the origin because a reflector with no contrast has no intercept and no gradient.
+`backgroundTrend` fits B = m A through the origin by orthogonal regression over the (A, B) pairs. Orthogonal regression minimises perpendicular distances, treating A and B alike, which suits a crossplot where both carry noise. The line passes through the origin because a reflector with no contrast has no intercept and no gradient.
 
 `offTrend` returns the signed perpendicular distance of a point from that line:
 
@@ -29,14 +29,14 @@ The Associate tier measured the top at Ekene-1 against the wet trend, the fluid 
 - the wet trend is fitted to modelled interfaces taken to brine, in reflection coefficients;
 - the background trend is fitted to every sample of a seismic window, whatever its fluid, in trace units, and the top's own sample is one of the 176.
 
-Which line a distance is read from is a stated choice, and a distance quoted without its line means nothing. A study names the line, the window and the pairs it was fitted to.
+Which line a distance is read from is a stated choice, and a distance quoted without its line means nothing.
 
 ## Units
 
-The background slope is a ratio of B to A, so dividing every pair by one scale leaves m unchanged. The distance is not a ratio: it is in the units of A and B, here the kit's trace amplitude, and it shrinks by the scale when the pairs become reflection coefficients. A map of off-trend distance is read for its sign and its pattern until the one scale over every well ties it to reflectivity.
+The background slope is a ratio of B to A, so dividing every pair by one scale leaves m unchanged. The distance is in the units of A and B, here the kit's trace amplitude, and it shrinks by the scale when the pairs become reflection coefficients. A map of off-trend distance is read for its sign and its pattern until the one scale over every well ties it to reflectivity.
 
 {{panel:qi-prestack-explorer}}
 
 ## Exercise
 
-In the prestack explorer, open the AVO view on the Ekene pack's gather 5 with near, mid and far ranges of 5 to 15, 15 to 25 and 25 to 35 degrees and two terms at 10, 20 and 30 degrees. Fit the background trend over the gather window and check the pair count and slope. Read the top's off-trend distance at 1292 ms and its sign. Then narrow the window so it holds fewer samples, refit, and record how the slope and the top's distance move.
+In the prestack explorer, set Data to "Ekene teaching pack" and View to "Shuey fit and the background trend", on gather 5 with bin edges 5, 15, 25, 35, mean angles 10, 20, 30, two terms and Sample time 1292 ms. Check the (A, B) pairs and Background trend slope m tiles, then read Off-trend distance of the sample and its sign. Move Sample time a few samples up and down and record which of the slope and the distance move. Then switch to three terms and say why the slope and the pair count stay put while the top's distance changes.

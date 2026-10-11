@@ -13,7 +13,7 @@ Four wavelets that agree can be averaged into one, and that one wavelet then ser
 3. Take the mean, sample by sample.
 4. Scale the mean to unit energy again.
 
-Step 2 gives every well an equal vote whatever the strength of its trace. Step 4 puts the average on the same footing as the wavelets it came from, so its correlation with each of them reads on the same scale as the similarities of the previous lesson.
+Step 2 gives every well an equal vote whatever the strength of its trace. Step 4 puts the average on the same footing as its members, so its correlations read on the same scale as the previous lesson's similarities.
 
 ## Each well against the average
 
@@ -54,4 +54,4 @@ Which wells enter it, the reference for the alignment, the maximum lag, and each
 
 ## Exercise
 
-In the prestack explorer, set View to "Wavelets and the tie" and Data to the Ekene pack with all four wells, statistical wavelets over the window 1100 to 1500 ms, and the maximum lag set to 5 samples. Read each well's correlation with the average and the average's samples, peak and centroid. Leave Ekene-2 out, rebuild the average, and note which way the other three figures and the average's peak move. Restore Ekene-2, set the output sample interval to 2 ms, and read the samples of the resampled average.
+In the prestack explorer, set Data to "Ekene teaching pack" and View to "Wavelets across wells", with the trace window at 1100 to 1500 ms, Designed rotation at none and Alignment search at 5 samples. Read each well's correlation with the average and the three Field wavelet tiles against the tables. Move Trace window start to 1200 ms and note which way the four correlations and the average's peak move, since the window is one of the choices the average states. Restore it. The explorer keeps every wavelet on the 4.000000 ms clock, so finish by hand: from the field wavelet's samples, work out how many it has on a 2 ms clock about the same centre.

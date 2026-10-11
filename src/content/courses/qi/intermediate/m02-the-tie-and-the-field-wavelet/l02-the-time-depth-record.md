@@ -30,7 +30,7 @@ Two-way time is 2 x the one-way time, linear between checkshot levels. The top o
 | Ekene-3 | 5055.774278 | 1282.159191 |
 | Ekene-4 | 5216.535433 | 1329.290304 |
 
-The order in time follows the order in depth: Ekene-3 is shallowest and earliest, Ekene-4 deepest and latest. These are checkshot times, the times the next module looks for the top near on the gathers and the last module picks it near on the stacks.
+The order in time follows the order in depth: Ekene-3 is shallowest and earliest, Ekene-4 deepest and latest. These are checkshot times, the times the later modules search about on the gathers and the stacks.
 
 ## Where the bulk shift goes
 
@@ -44,4 +44,4 @@ For each well: the checkshot set it used, the wavelet, the phase (assumed or mea
 
 ## Exercise
 
-In the prestack explorer, set View to "Wavelets and the tie" and Data to "Ekene pack: Ekene-1". Set the depth to each checkshot level in the table and confirm its two-way time, then to the top of the Ekene Sand. Switch Data to each other well and read the top's two-way time. Then set the bulk shift to -4 ms at Ekene-2 and note which times move and which stay.
+In the prestack explorer, set Data to "Ekene teaching pack" and View to "The tie and the time-depth record", with Well at Ekene-1. In the checkshot table, confirm that each two-way time is twice its one-way time, and find the two levels either side of the top. Read the top's two-way time at every well from the table of tops. Then set Well to Ekene-2 and read Bulk shift. Set Checkshot times moved by to -4 ms, a designed teaching case, read the bulk shift again, and note that both time-depth tables stay as imported.

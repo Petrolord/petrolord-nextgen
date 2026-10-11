@@ -1,6 +1,6 @@
 # The synthetic in one lesson
 
-A tie sets a trace built from the well beside the trace recorded at it. The Seismic Interpretation course teaches the synthetic seismogram in full; here it is recapped in the form the QI engines run it, with the Ekene-1 figures every later tie starts from.
+A tie sets a trace built from the well beside the trace recorded at it. The Seismic Interpretation course teaches the synthetic seismogram in full; here it is recapped as the QI engines run it, with the Ekene-1 figures every later tie starts from.
 
 ## Five steps
 
@@ -27,15 +27,15 @@ A sample is a gap when it is not finite or is a seismic or LAS null. The convolu
 | its time, ms | 1312.000000 |
 | normalised correlation with the trace at zero shift | 0.983438 |
 
-The wavelet is the statistical wavelet of the next lesson, extracted from the same trace.
+The wavelet is the next lesson's statistical wavelet from the same trace.
 
 ## Reading the figures
 
-The pack's logs cover the Ekene Sand and the shale above it and little else, so the synthetic is short: 26 live samples on a 4.000000 ms clock. Every correlation this module reports is measured over those samples, so it describes the reservoir interval and says nothing about the trace above or below it.
+The pack's logs cover the Ekene Sand and the shale above it, so the synthetic is short: 26 live samples on a 4.000000 ms clock. Every correlation this module reports is measured over those samples, so it describes the reservoir interval alone.
 
 The largest coefficient is negative. At 1312.000000 ms it sits just below the Ekene-1 checkshot at 5183.989501 ft (two-way time 1311.086000 ms), next to the base of the Ekene Sand at 5183.727034 ft, where impedance falls downwards. The top of the sand is a peak, as the Associate tier showed from the logs; the base is a trough, and on these logs it is the stronger of the two.
 
-A correlation of 0.983438 with no shift and no rotation says the checkshots already place the synthetic close to the recorded event, and that the zero-phase wavelet already resembles the recorded one. The next three lessons test each of those in turn: the wavelet, its phase, and the shift.
+A correlation of 0.983438 with no shift and no rotation says the checkshots already place the synthetic close to the recorded event, and the zero-phase wavelet already resembles the recorded one. The next three lessons test the wavelet, its phase and the shift.
 
 ## What the synthetic depends on
 
@@ -45,4 +45,4 @@ Three stated inputs: the logs, the checkshots and the wavelet. The reflection co
 
 ## Exercise
 
-In the prestack explorer, set View to "Wavelets and the tie" and Data to "Ekene pack: Ekene-1", with the statistical wavelet over the window 1100 to 1500 ms. Read the live synthetic samples, the largest reflection coefficient and its time, and the correlation at zero shift, and check them against the table. Then switch the wavelet to a 25 Hz Ricker and note which of those figures move and which stay put. Repeat on Ekene-2, Ekene-3 and Ekene-4 with the statistical wavelet, and write down each well's live sample count beside the span of its logs.
+In the prestack explorer, set Data to "Ekene teaching pack" and View to "The tie and the time-depth record", with Well at Ekene-1 and the trace window at 1100 to 1500 ms. Read Live synthetic samples, then Bulk shift and Correlation at that shift: at a bulk shift of 0.000000 ms that correlation is the zero-shift figure in the table. On the chart, find the trough of the red synthetic near the base of the sand. Change Spectral smoothing and note which figures move. Repeat at the other three wells and write down each well's live sample count.

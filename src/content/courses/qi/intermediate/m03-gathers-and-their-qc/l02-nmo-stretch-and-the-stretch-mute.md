@@ -26,7 +26,7 @@ The time is the top picked on gather 5, t0 1292.000000 ms, and the NMO velocity 
 
 | stretch limit | stretch mute offset, m |
 | --- | --- |
-| 0.2 | 2047.359898 |
+| 0.200000 | 2047.359898 |
 | 0.300000 | 2563.848741 |
 
 ## Reading the stretch
@@ -35,7 +35,7 @@ At 100 m the stretch is 0.000525, negligible. It climbs faster than the offset: 
 
 ## Reading the mute
 
-The two limits cut the gather differently. At a limit of 0.300000 the mute offset, 2563.848741 m, lies beyond the farthest offset of 2500 m, whose stretch of 0.286880 is under the limit, so every offset is kept. At a limit of 0.2 the mute offset is 2047.359898 m, and the offsets beyond it, including 2100 m at 0.209511 and 2500 m at 0.286880, are cut.
+The two limits cut the gather differently. At a limit of 0.300000 the mute offset, 2563.848741 m, lies beyond the farthest offset of 2500 m, whose stretch of 0.286880 is under the limit, so every offset is kept. At a limit of 0.200000 the mute offset is 2047.359898 m, and the offsets beyond it, including 2100 m at 0.209511 and 2500 m at 0.286880, are cut.
 
 The choice of limit is a trade. A tighter limit keeps a cleaner waveform and loses the far offsets, and the far offsets carry the largest angles, which are the ones the gradient in AVO depends on. A looser limit keeps them and accepts a drawn-out event on the far traces. A study states the limit and reads the mute offset that follows.
 
@@ -51,4 +51,4 @@ For data quality, the stretch says which offsets still carry an undistorted even
 
 ## Exercise
 
-In the prestack explorer, set View to "Gathers and their QC" and Data to "Ekene pack: gather 5". Set the event time to 1292 ms and the NMO velocity to the table's RMS velocity at that time, and read the stretch at each offset. Set the stretch limit to 0.2, then to 0.300000, and read the stretch mute offset for each. Then move the event time to 1100 ms and to 1500 ms, with the table's velocity at each, and predict before reading whether the mute offset rises or falls.
+In the prestack explorer, set Data to "Ekene teaching pack" and View to "Gathers and their QC", with Gather at gather 5, Event near at 1289 ms and Pick half window at 8 ms. Read Event picked and RMS velocity there, then check the NMO stretch column against the table. Set Stretch limit to 0.200000, then to 0.300000, and read Stretch mute offset for each. Then set View to "Dix and Walden", keep the limit, set Time to 1100 ms and then 1500 ms, and predict before reading whether Stretch mute offset at the time rises or falls.

@@ -1,6 +1,6 @@
 # Intercept and gradient volumes
 
-An intercept volume and a gradient volume are the Shuey fit of the last lesson run at every sample of every trace of the angle stacks. Each sample of the near, mid and far stacks gives one A and one B, and the two volumes hold them on the same grid as the stacks. QI Studio runs the fit on its seismic worker over the whole survey; the prestack explorer runs the same `fitShuey` on the traces and the gather the pack carries.
+An intercept volume and a gradient volume are the Shuey fit of the last lesson run at every sample of every trace of the angle stacks. Each sample of the near, mid and far stacks gives one A and one B, and the two volumes hold them on the same grid as the stacks. QI Studio runs the fit on its seismic worker over the whole survey; the prestack explorer runs the same `fitShuey` on the pack's traces and gather.
 
 {{video:qi-e13}}
 
@@ -12,7 +12,7 @@ The volumes are in trace units, like the stacks. An A becomes a reflection coeff
 
 ## The volumes at the four wells
 
-The AVO at the wells module reads the volumes where they meet the wells. At each well the top of the Ekene Sand is picked on the near stack trace within 8 ms of its checkshot time, and the near, mid and far traces at that sample are fitted with two terms at 10, 20 and 30 degrees:
+At each well the top is picked on the near stack trace within 8 ms of its checkshot time, and the near, mid and far traces at that sample are fitted with two terms at 10, 20 and 30 degrees:
 
 | well | checkshot top ms | picked ms | seismic A | seismic B |
 | --- | --- | --- | --- | --- |
@@ -31,10 +31,10 @@ Over a window, the A and B of every sample are pairs on a crossplot. On gather 5
 
 ## What the volumes state
 
-A pair of volumes inherits every choice under the fit: the stacks, their ranges and angles, the number of terms, the velocity table and any conditioning applied to the stacks. A study states them once for the volumes and reads every map from them in that light.
+A pair of volumes inherits every choice under the fit: the stacks, their ranges and angles, the number of terms, the velocity table and any conditioning applied to the stacks. A study states them once for the volumes.
 
 {{panel:qi-prestack-explorer}}
 
 ## Exercise
 
-In the prestack explorer, open the AVO view on the Ekene pack's near, mid and far stack traces at the four wells. Set the angles to 10, 20 and 30 degrees, two terms, and the pick window to 8 ms about each checkshot top. Read the picked time, A and B at each well against the table. Then switch the source to gather 5 and run the fit down the window to plot the (A, B) pairs, and find the top's point in the cloud.
+In the prestack explorer, set Data to "Ekene teaching pack" and View to "AVO at the wells". Set Mean angle of near, mid and far to 10, 20, 30 and Pick half window to 8 ms, and read the seismic A and B at each well against the table. Then set View to "Shuey fit and the background trend", on gather 5 with bin edges 5, 15, 25, 35, mean angles 10, 20, 30, two terms and Sample time 1292 ms. Read the (A, B) pairs tile, and find the top's point, drawn in red, in the cloud on the chart.

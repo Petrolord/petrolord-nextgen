@@ -42,4 +42,4 @@ Leaving the well out rebuilds the average from the remaining wells, which restor
 
 ## Exercise
 
-In the prestack explorer, set View to "Wavelets and the tie" and Data to the Ekene pack with all four wells and the maximum lag set to 5 samples. Set the phase rotation applied to Ekene-3's wavelet to 90 degrees and read every well's correlation with the average; then 180 degrees. Note which wells cross the 0.8 rule. Then leave Ekene-3 out, rebuild, and read the other three. Finally rotate Ekene-2 by 90 degrees and predict, before reading, whether it passes the rule.
+In the prestack explorer, set Data to "Ekene teaching pack" and View to "Wavelets across wells", with the trace window at 1100 to 1500 ms and Alignment search at 5 samples. Set Designed rotation to "Ekene-3 rotated by 90 degrees" and read every well's correlation with the average; then choose "Ekene-3 rotated by 180 degrees". Note which wells cross the 0.8 rule, and how far each of the other three falls from its unrotated figure. Then set View to "Wavelets and phase", read Best constant phase at each of the four wells, and say whether their span trips the 30 degree rule.

@@ -26,14 +26,14 @@ A is positive and B negative in every row: a peak at the top that dims with angl
 
 - **The three-term fit moves B.** Adding a curvature term takes some of the fall with angle into C, and the gradient grows steeper. On three points, with nothing left over, the split between B and C is fixed by the points alone, so noise in the far stack goes straight into both.
 - **More bins move the two-term fit.** Nine bins of 5 degrees at their centres give a two-term A and B both larger in size than the three-bin fit.
-- **The units are trace units.** A and B here are in the kit's trace amplitude, which has no physical scale. They become reflection coefficients only after the one scale over every well that the next module fits.
+- **The units are trace units.** A and B here are in the kit's trace amplitude, which has no physical scale. They become reflection coefficients only through the one scale over every well.
 
 ## What a fit states
 
-Every A and B rests on stated choices: the angle stacks and their ranges, the angle each stack is placed at, the number of terms, and the velocity table that gave the angles. A study names all of them beside its intercept and gradient. The two-term fit on near, mid and far at their mean angles is the course's working choice for the rest of this tier.
+Every A and B rests on stated choices: the angle stacks and their ranges, the angle each stack is placed at, the number of terms, and the velocity table that gave the angles. The two-term fit on near, mid and far at their mean angles is the course's working choice for the rest of this tier.
 
 {{panel:qi-prestack-explorer}}
 
 ## Exercise
 
-In the prestack explorer, open the AVO view on the Ekene pack's gather 5 with the published RMS velocity table, near, mid and far ranges of 5 to 15, 15 to 25 and 25 to 35 degrees, and the time at 1292 ms. Fit two terms at angles 10, 20 and 30 degrees and check A and B against the table. Switch the terms control to three and watch B and C move together. Then set the bins to 5 degrees wide and fit two terms again, and say which of A and B moved further.
+In the prestack explorer, set Data to "Ekene teaching pack" and View to "Shuey fit and the background trend", on gather 5. Set Angle bin edges to 5, 15, 25, 35, Sample time to 1292 ms, Mean angle of each bin to 10, 20, 30 and Shuey terms to two terms, and check the A and B tiles against the table. Switch to three terms and watch B and C move together. Then set the edges every 5 degrees from zero, nine bins in all, give each bin its centre as its mean angle, fit two terms again, and say which of A and B moved further.

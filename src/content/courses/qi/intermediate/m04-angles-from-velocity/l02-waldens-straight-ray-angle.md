@@ -1,6 +1,6 @@
 # Walden's straight-ray angle
 
-A gather records offsets; AVO is read in angles. Walden's (1991, Geophysical Prospecting 39) straight-ray angle gives each offset an incidence angle from the two velocities the last lesson put on the trace clock, the RMS velocity and the interval velocity at the zero-offset time.
+A gather records offsets; AVO is read in angles. Walden's (1991, Geophysical Prospecting 39) straight-ray angle gives each offset an incidence angle from the RMS and interval velocities the last lesson put on the trace clock.
 
 {{video:qi-d12}}
 
@@ -27,7 +27,7 @@ The course tests the approximation on a designed flat-layer teaching earth of fo
 | 2500 | 45.265069 | 44.057814 | 1.207256 |
 | 3000 | 52.574313 | 50.430992 | 2.143321 |
 
-Walden reads high at every offset here, and the excess grows with offset: under a hundredth of a degree at 500 m, over two degrees at 3000 m. At far offsets the straight ray places a trace at a higher angle than the exact ray, which matters most for the gradient, the change of amplitude across angle.
+Walden reads high at every offset here, and the excess grows with offset: under a hundredth of a degree at 500 m, over two degrees at 3000 m. At far offsets the straight ray places a trace at a higher angle than the exact ray, which matters most for the gradient.
 
 ## On the Ekene table
 
@@ -41,14 +41,14 @@ At the top of gather 5 (1292.000000 ms), with the RMS velocity 2388.940541 m/s a
 | 2000 | 41.065011 |
 | 2500 | 49.493998 |
 
-At the same offsets these angles are larger than in the teaching earth: the top of the Ekene Sand is earlier in time, and the product Vrms t0 in the denominator is the smaller there. The gathers are muted to exact zeros beyond 40 degrees, and at the top Walden's angle passes 40 degrees between the 1500 m and 2000 m rows, so the farthest offsets at the target carry the mute.
+At the same offsets these angles are larger than in the teaching earth: the top of the Ekene Sand is earlier in time, and the product Vrms t0 in the denominator is the smaller there. Walden's angle at the top passes 40 degrees between the 1500 m and 2000 m rows. The gathers carry the kit's stated mute beyond 40 degrees, by the kit's own angle calculation, which the course does not measure, so whether the farthest offsets at the target carry the mute rests on that calculation.
 
 ## What the angle rests on
 
-Every figure above depends on the velocity table, the time it is read at and the straight-ray assumption. A study states the table and the time, and says that its angles are Walden's. The Rock Physics course reads the reflection coefficient at an angle; this course supplies the angle from the seismic.
+Every figure above depends on the velocity table, the time it is read at and the straight-ray assumption. A study states the table and the time, and says that its angles are Walden's.
 
 {{panel:qi-prestack-explorer}}
 
 ## Exercise
 
-In the prestack explorer, open the Angles from velocity view and choose the designed four-layer teaching earth. Set the zero-offset time to the base of the third layer and step the offset from 500 m to 3000 m, comparing Walden's angle with the ray-traced one. Then switch the source to the Ekene pack's RMS velocity table, set the time to 1292 ms, and find the offset at which Walden's angle first passes 40 degrees. Move the time later and say which way that offset moves.
+In the prestack explorer, set Data to "Ekene teaching pack" and View to "Dix and Walden". Under "Walden against an exact ray trace", compare the two angle columns for the designed teaching earth from 500 m to 3000 m. Then set Time to 1292 ms and step Offset to find where Walden angle at the offset and time first passes 40 degrees. Move Time later and say which way that offset moves.

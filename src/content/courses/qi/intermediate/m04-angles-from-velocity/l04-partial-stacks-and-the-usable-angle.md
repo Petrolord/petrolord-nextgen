@@ -8,7 +8,7 @@ Over a stated range of angle bins, the partial stack at each sample is the fold-
 
 ## Gather 5 against the kit's stacks
 
-The kit built its near, mid and far angle stack traces over 5 to 15, 15 to 25 and 25 to 35 degrees from the same rock. At 1292.000000 ms, the top picked on gather 5, against the kit's stack traces at Ekene-1 at the same time:
+The kit built its near, mid and far stack traces over 5 to 15, 15 to 25 and 25 to 35 degrees from the same rock. At 1292.000000 ms, the top picked on gather 5, against those traces at Ekene-1:
 
 | stack | from gather 5 | the kit's stack trace at Ekene-1 |
 | --- | --- | --- |
@@ -16,7 +16,7 @@ The kit built its near, mid and far angle stack traces over 5 to 15, 15 to 25 an
 | mid | 410.433207 | 357.560150 |
 | far | 320.449005 | 220.203720 |
 
-Both columns fall from near to far, the dimming with angle at the top. The gather's stack is the higher of the two in every range, and the gap widens from near to far, so the gather's partial stacks fall less steeply with angle than the kit's traces do. The kit's seismic README states that stacking its gathers over 5 to 15 degrees with the published velocity gives the near stack back, up to the noise. The table shows how each range compares at this one sample.
+Both columns fall from near to far, the dimming with angle at the top. The gather's stack is the higher of the two in every range, and the gap widens from near to far, so the gather's partial stacks fall less steeply with angle than the kit's traces do. The kit's seismic README states that stacking its gathers over 5 to 15 degrees with the published velocity gives the near stack back, up to the noise.
 
 The intercept leans on the near stack, where the two sources sit closest. The gradient leans on how far the far stack falls below the near, and that is where they part most. Two angle stacks of the same rock can carry different gradients, which is why a study states which stacks its AVO read.
 
@@ -32,14 +32,14 @@ The intercept leans on the near stack, where the two sources sit closest. The gr
 | 4 | none |
 | 5 | none |
 
-At the stated minimum fold of 2 the usable angle is 35.000000 degrees: all three ranges count. At a minimum of 3 the answer is none, even though the mid bin has fold 3, because the count starts at the near bin and stops at the first bin that falls short.
+At the stated minimum fold of 2 the usable angle is 35.000000 degrees: all three ranges count. At a minimum of 3 the answer is none, even though the mid bin has fold 3, because the count starts at the near bin, which falls short.
 
 ## What a study states
 
-The minimum fold is a choice, and the table shows how much rests on it: one step moves the answer from the full range to nothing. A study states the minimum fold, the bin edges and the ranges each stack sums, and reads its far stack only out to the usable angle. The next module fits intercept and gradient to these three stacks.
+The minimum fold is a choice, and the table shows how much rests on it: one step moves the answer from the full range to nothing. A study states the minimum fold, the bin edges and the ranges each stack sums, and reads its far stack only out to the usable angle.
 
 {{panel:qi-prestack-explorer}}
 
 ## Exercise
 
-In the prestack explorer, open the Angles from velocity view on the Ekene pack's gather 5 with the published RMS velocity table and bin edges at 5, 15, 25 and 35 degrees. Set the time to 1292 ms and read the near, mid and far partial stacks against the kit's stack traces at Ekene-1. Then step the minimum fold control from 1 to 5 and record the usable angle at each step.
+In the prestack explorer, set Data to "Ekene teaching pack" and View to "Angle gathers and partial stacks", on gather 5. Set Angle bin edges to 5, 15, 25, 35 and Sample time to 1292 ms, and read each bin's partial stack against the gather 5 column of the table. Set Far stack from bin to 2 and Far stack to bin, excluded to 3, and read the partial stack tile; then set the range to bins 1 up to 3 and say why the fold-weighted mean lands where it does. Step Minimum fold from 1 to 5 and record Usable angle at each step.

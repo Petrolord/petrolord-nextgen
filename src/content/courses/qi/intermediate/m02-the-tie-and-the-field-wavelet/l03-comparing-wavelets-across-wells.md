@@ -46,4 +46,4 @@ The reference well, the maximum lag and the wavelets themselves, which carry the
 
 ## Exercise
 
-In the prestack explorer, set View to "Wavelets and the tie" and Data to the Ekene pack with all four wells, statistical wavelets over the window 1100 to 1500 ms, and the comparison's maximum lag set to 5 samples. Read the lags and the similarity of every pair. Put Ekene-4 first as the reference and read the matrix again. Then set the maximum lag to 0 and say whether anything changes, and why from the lags you read.
+In the prestack explorer, set Data to "Ekene teaching pack" and View to "Wavelets across wells", with the trace window at 1100 to 1500 ms, Designed rotation at none and Alignment search at 5 samples. Read each well's lag to the reference, which the explorer takes as Ekene-1, and the similarity of every pair against the matrix. Set Alignment search to 0 and say whether anything changes, and why from the lags you read. Then change Spectral smoothing and read the matrix again: each wavelet carries its own stated choices, and the matrix moves with them.

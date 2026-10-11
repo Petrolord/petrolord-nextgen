@@ -8,13 +8,13 @@ An offset becomes an angle only through a velocity, and the gathers come with an
 
 Vint^2 = (Vrms2^2 t2 - Vrms1^2 t1) / (t2 - t1)
 
-The first row's interval velocity is its RMS velocity. When a deeper row's RMS velocity falls fast enough, the numerator is negative, no real velocity has that square, and the engine refuses, naming the time. A designed table built to fall too fast gives:
+The first row's interval velocity is its RMS velocity. When a deeper row's RMS velocity falls fast enough the numerator is negative, and the engine refuses, naming the time. A designed table built to fall too fast gives:
 
 > The RMS velocities give no real interval velocity at 1.1 s.
 
 ## The pack's table
 
-The pack carries the kit's published RMS velocity table for the gathers next to Ekene-1. Its Dix interval velocities:
+The kit's published RMS velocity table for the gathers, with its Dix interval velocities:
 
 | two-way time ms | RMS velocity m/s | interval velocity m/s |
 | --- | --- | --- |
@@ -40,7 +40,7 @@ The RMS column changes slowly below the row at 925.500000 ms, and the interval c
 | RMS velocity | 2388.940541 |
 | interval velocity | 2885.878392 |
 
-1292.000000 ms is the top of the Ekene Sand picked on gather 5, the gather on the trace of Ekene-1. The picked time falls just below the row at 1288.800000 ms, so its interval velocity is the sand's, and its RMS velocity lies between the two rows that bracket it. That RMS velocity is also the NMO velocity the stretch at the top was read with.
+1292.000000 ms is the top picked on gather 5. The picked time falls just below the row at 1288.800000 ms, so its interval velocity is the sand's, and its RMS velocity lies between the two rows that bracket it. That RMS velocity is also the NMO velocity the stretch at the top was read with.
 
 ## What a study states
 
@@ -50,4 +50,4 @@ The table is an input: which table, which rows, and what the study did with a ro
 
 ## Exercise
 
-In the prestack explorer, open the Angles from velocity view on the Ekene pack's RMS velocity table. Check the interval column against the table above, then set the sample time to 1292 ms and read the RMS and interval velocities on the trace clock. Move the time across the row at 1311.000000 ms and watch the interval velocity step while the RMS velocity moves smoothly. Finally edit one RMS velocity in the table downwards until the view refuses, and record the time the refusal names.
+In the prestack explorer, set Data to "Ekene teaching pack" and View to "Dix and Walden". Check the Dix interval velocity column against the table above, then choose rows in Dix layer ending at and read the tile for each layer. Set Time to 1292 ms and read RMS velocity at the time and Interval velocity at the time. Step Time a few milliseconds either side of the row at 1311.000000 ms and watch the interval velocity step while the RMS velocity moves smoothly. Finally find the layer below 925.500000 ms with the highest interval velocity and say which rock it is.
