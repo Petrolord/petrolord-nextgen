@@ -568,6 +568,26 @@ describe('every course panel renders with no props', () => {
     }
     expect(rendered).toBe(5);
   }, 120000);
+  it('finds the QI explorer panels', () => {
+    const names = entries.map(([p]) => p.split('/panels/')[1]);
+    expect(names).toContain('qi/QiFeasibilityExplorer.jsx');
+    expect(names).toContain('qi/QiPrestackExplorer.jsx');
+    expect(names).toContain('qi/QiInversionExplorer.jsx');
+    expect(names).toContain('qi/QiProspectExplorer.jsx');
+  });
+  it('every QI feasibility view renders on the Ekene pack, not only the default one', async () => {
+    const entry = entries.find(([p]) => p.endsWith('/qi/QiFeasibilityExplorer.jsx'));
+    expect(entry, 'the feasibility explorer is not in the panel sweep').toBeTruthy();
+    const mod = await entry[1]();
+    const modes = ['inventory', 'qc', 'shear', 'elastic', 'substitution', 'wet', 'avo'];
+    expect(mod.MODES.map((m) => m[0])).toEqual(modes);
+    for (const mode of modes) {
+      const html = renderToStaticMarkup(React.createElement(mod.default, { initialMode: mode }));
+      expect(html, `the ${mode} view refused on the Ekene pack`).not.toContain('THE ENGINE REFUSED');
+    }
+    const blank = renderToStaticMarkup(React.createElement(mod.default, { initialMode: 'qc', initialText: '{}' }));
+    expect(blank).toContain('The case has no well block.');
+  }, 120000);
   it('finds the D5 appliedai panels', () => {
     const names = entries.map(([p]) => p.split('/panels/')[1]);
     expect(names).toContain('appliedai/RetrievalExplorer.jsx');
