@@ -1,0 +1,42 @@
+{
+ "amplitude": {
+  "decimals": 6,
+  "match": "^(?:quarvin_far_stack_amp|quarvin_shuey_a)$"
+ },
+ "angle": {
+  "decimals": 6,
+  "match": "^(?:quarvin_walden_deg)$"
+ },
+ "depth": {
+  "decimals": 6,
+  "match": "^(?:delsholm_column_ft)$"
+ },
+ "fraction": {
+  "decimals": 6,
+  "match": "^(?:delsholm_phi_q90)$"
+ },
+ "frequency": {
+  "decimals": 6,
+  "match": "^(?:tamberlo_centroid_hz|tamberlo_low6_hz)$"
+ },
+ "impedance": {
+  "decimals": 6,
+  "match": "^(?:delsholm_mb_ai|tamberlo_ai_brine)$"
+ },
+ "probability": {
+  "decimals": 6,
+  "match": "^(?:delsholm_p_oil)$"
+ },
+ "ratio": {
+  "decimals": 6,
+  "match": "^(?:delsholm_lfm_lnai_b|delsholm_sim_vpvs|quarvin_nmo_stretch|quarvin_one_scale|tamberlo_vpvs_brine|tamberlo_wet_distance)$"
+ },
+ "slope": {
+  "decimals": 6,
+  "match": "^(?:tamberlo_shear_slope)$"
+ },
+ "velocity": {
+  "decimals": 6,
+  "match": "^(?:quarvin_dix_vint)$"
+ }
+}

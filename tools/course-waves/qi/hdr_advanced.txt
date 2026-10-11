@@ -1,0 +1,21 @@
+-- ============================================================================
+-- QI EXPERT DEEP SEED: Quantitative Interpretation, advanced tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/qi/advanced.
+--
+-- What this tier owns: INVERSION, PROPERTIES AND THE DECISION. The
+-- convolutional model and its adjoint, the low-frequency model and the wavelet
+-- scale; model-based, sparse-spike and coloured inversion, blind wells,
+-- quantiles across realisations; Fatti's simultaneous inversion; property
+-- transforms with their intervals, left-out wells, Bayesian facies and the
+-- confusion matrix; closure, anomaly conformance, evidence and the assessment;
+-- the report and what QI never sets.
+--
+-- AN APP COURSE. The Suite app is QI Studio; the practicals also run in the
+-- course's own explorer panels. The tier's capstone grades six values on a
+-- held-out synthetic case, each a return value of a vendored engine. No BEGIN
+-- or COMMIT: apply_qi.sh wraps this file in one transaction.
+-- ============================================================================

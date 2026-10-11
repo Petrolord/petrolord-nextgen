@@ -1,0 +1,118 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# QI Associate m03, Seismic QC.
+# Sources: how seismicQc.js measures a spectrum and the Ricker check; the band
+# edges, the centroid, the windows, the taper and the single trace; signal to
+# noise from coherency, the lag and the clamp; the footprint method, QI
+# Studio's rule, the Ekene slice and the designed stripe; the refusals.
+
+q(3, "What sets the frequency step of the spectrum seismicQc.js returns?",
+ "1000 / (padded length x sample interval in ms), which is 0.488281 Hz on the Ekene window sampled every 4.000000 ms.",
+ ["The taper fraction, since a heavier Tukey taper spreads each frequency over more steps.",
+  "The number of traces averaged, the step shrinking as more traces enter the spectrum.",
+  "The window length in ms alone, read before any zero padding is added."],
+ "Each trace is padded with zeros to twice the next power of two samples, and the step is 1000 / (padded length x sample interval in ms): 0.488281 Hz at 4.000000 ms on the Ekene window. The taper shapes the trace ends and the traces are averaged after the transform, so neither enters the step.")
+
+q(1, "How does averageSpectrum combine the 120 spread traces into one spectrum?",
+ "It averages the power of the traces and takes the root.",
+ ["It averages their amplitudes at each frequency, the mean of the one-sided moduli.",
+  "It keeps the single trace with the highest peak amplitude, 3269.099145, and discards the rest of the traces as noise.",
+  "It stacks the traces in time into one trace and transforms that stacked trace, so the spectrum is of the stack."],
+ "averageSpectrum averages the POWER of many traces and takes the root, giving one spectrum of the 120 traces with peak 31.374887 Hz. The peak amplitude of 3269.099145 belongs to that mean spectrum, refined by a parabola, and the engine transforms each trace before averaging.")
+
+q(2, "A learner pastes an RMS slice of 3 by 3 into the footprint function. What does the panel show?",
+ "The engine's own words: \"A footprint needs a slice of at least 4 by 4.\"",
+ ["A result with share 0.000000 and no stripe.",
+  "The engine's own words: \"A spectrum needs at least 8 samples.\"",
+  "A footprint by the rule, since three lines in each direction give every period searched at least one full cycle."],
+ "footprint refuses a slice of 3 by 3 with \"A footprint needs a slice of at least 4 by 4.\", and the panel prints the message unchanged. The 8-sample message is amplitudeSpectrum's refusal of a 5-sample trace, and a refusal returns no share and calls no stripe.")
+
+q(0, "On a 30 Hz Ricker wavelet the engine reads a peak of 30.070572 Hz against the closed form's 30.000000 Hz. What does the course put the difference down to?",
+ "The sampling and the finite length of the wavelet.",
+ ["The 0.100000 taper the engine applies to every trace before the transform.",
+  "Averaging the 120 spread traces, which pulls the peak towards the field's 31.374887 Hz.",
+  "An error in the engine, which the course corrects by quoting the closed-form figures only."],
+ "The wavelet was sampled every 4.000000 ms with 31 samples and no taper, and the small differences (edges 14.463999 and 49.112032 Hz against 14.471033 and 49.062252 Hz) are the sampling and the finite length. It is one wavelet, so no traces are averaged.")
+
+q(0, "Where does spectrumStats place a -6 dB edge?",
+ "Where the amplitude falls to 10^(-6/20) of the peak amplitude, interpolated linearly between frequency steps, below and above the peak.",
+ ["6 Hz either side of the peak frequency, so the -6 dB band is always 12 Hz wide.",
+  "Where the amplitude falls to 10^(-6/10) of the peak, the decibel form the course uses for power ratios.",
+  "Where the amplitude falls 6 dB below the mean amplitude of the window."],
+ "The -6 dB edges are where the amplitude falls to 10^(-6/20) of the peak amplitude, below and above the peak; on Ekene they are 14.425434 and 34.787627 Hz, a bandwidth of 20.362193 Hz. The spectrum is an amplitude, so its decibels use 20 log10, and the edges are read against the peak.")
+
+q(2, "On the Ekene full stack, 800 to 1600 ms, the centroid is 26.656573 Hz. What is the centroid?",
+ "The power-weighted mean frequency, the sum of f A(f)^2 over the sum of A(f)^2.",
+ ["The frequency of the peak, refined between steps by a parabola through the three highest values.",
+  "The midpoint of the two -6 dB edges, halfway across the band that carries the useful energy.",
+  "The amplitude-weighted mean frequency, the sum of f A(f) over the sum of A(f)."],
+ "The centroid is the power-weighted mean frequency, the sum of f A(f)^2 over the sum of A(f)^2. The peak in the same window is 31.374887 Hz, a different figure, and the definition weights by power, the amplitude squared.")
+
+q(1, "Going from the 800 to 1600 ms window to the 1600 to 2400 ms window, what happens to the Ekene mean spectrum?",
+ "The peak falls from 31.374887 to 21.761176 Hz, while the -6 dB low edge barely moves, from 14.425434 to 14.429678 Hz.",
+ ["The peak holds at 31.374887 Hz while the -6 dB low edge falls to 7.272835 Hz as the deeper data loses its low end.",
+  "The peak rises to 34.787627 Hz, since the deeper window holds more reflectors and so more high-frequency energy.",
+  "Every figure stays the same to the decimals, because only the window changes and the traces are the same."],
+ "The peak falls with depth, 31.374887 to 21.761176 Hz, as the earth absorbs the higher frequencies, and the -6 dB edges move less: the low edge goes from 14.425434 to 14.429678 Hz. 7.272835 Hz is the deep window's -20 dB low edge, and 34.787627 Hz is the shallow window's -6 dB high edge.")
+
+q(3, "The same 120 traces and the 800 to 1600 ms window are measured with a taper of 0.500000 in place of 0.100000. What peak does the engine return?",
+ "22.305063 Hz, against 31.374887 Hz at 0.100000.",
+ ["31.374887 Hz unchanged, because the taper only shapes the trace ends, which leaves the peak of the mean spectrum where it was.",
+  "26.175193 Hz, the figure the engine returns at that taper, which is where the peak of the mean spectrum now sits.",
+  "31.323187 Hz, since a heavier taper only nudges the peak of a broad mean spectrum by a few hundredths of a hertz."],
+ "The taper is a stated choice: at 0.500000 the peak is 22.305063 Hz, against 31.374887 Hz at 0.100000. 26.175193 Hz is the centroid at 0.500000 and 31.323187 Hz is the peak at 0.250000, so a spectrum figure is quoted with its taper.")
+
+q(2, "The single trace at Ekene-1, same window and taper, gives -6 dB edges at 30.556053 and 32.127840 Hz. Which band belongs in the verdict?",
+ "The mean spectrum's -6 dB band of the 120 spread traces, 14.425434 to 34.787627 Hz.",
+ ["The single trace's band, 30.556053 to 32.127840 Hz, because the trace sits at the well where the sand is.",
+  "The Ricker band, 14.471033 to 49.062252 Hz.",
+  "The -20 dB band, 8.801471 to 47.968080 Hz."],
+ "The -6 dB band is read from the mean spectrum of stated traces, and the verdict quotes 14.425434 to 34.787627 Hz. A single trace's spectrum is spiky from a few reflectors, so its band is a sliver around its peak of 31.418177 Hz, and the Ricker figures check the engine on a wavelet.")
+
+q(0, "The median signal to noise on the shallow window is 361.155122, quoted as 25.576938 dB. Which conversion gives the decibels?",
+ "10 log10 of the ratio, because signal to noise is a power ratio.",
+ ["20 log10 of the ratio, the same form the amplitude spectrum uses for its decibels.",
+  "c / (1 - c) of the ratio, the Hatton, Worthington and Makin form for decibels.",
+  "The ratio divided by 10."],
+ "Signal to noise is a POWER ratio from trace coherency, with its decibel form 10 log10 of the ratio: 361.155122 is 25.576938 dB. The spectrum uses 20 log10 because it is an amplitude, and c / (1 - c) turns a correlation into the ratio.")
+
+q(3, "Two neighbouring traces are almost identical, so their correlation c is close to 1. How should the engine's signal to noise be read?",
+ "As a ceiling: c is clamped at 0.999999, where the ratio is 999998.999971.",
+ ["As the true ratio, exact at every correlation.",
+  "As a refusal: the engine throws \"No neighbouring pair had samples to correlate.\" once c reaches 1.",
+  "As zero, since identical traces carry no noise."],
+ "The engine clamps c at 0.999999 at most, and there the ratio is 999998.999971, so a figure that large is a ceiling set by the clamp. QI Studio prints any ratio of 10,000 or more as \"over 10,000 (over 40 dB)\" for that reason. The pair message is the refusal of two traces of nulls.")
+
+q(1, "On the shallow window the median signal to noise is 361.155122 at maximum lags of 0, 1, 3 and 6 samples. What does the course give as the reason?",
+ "The best alignment of every neighbouring pair is at zero lag.",
+ ["The engine reads the lag only on the deep window and fixes it at zero on the shallow one.",
+  "The median ignores the lag by design, which only the mean ratio of the pairs would respond to.",
+  "The clamp at 0.999999 is reached on every pair, so a longer search cannot raise the ratio."],
+ "The shallow window returns the same median at every lag because the best alignment of every neighbouring pair here is at zero lag. The lag is a stated choice the engine applies to every window, and the pairs read 388.889121, 471.612452 and so on, far below the clamp's ratio of 999998.999971.")
+
+q(0, "From the 21 neighbouring traces along inline 1027, what does snrFromCoherency report for a window?",
+ "The median ratio over the 20 neighbouring pairs, and the same in decibels.",
+ ["The mean ratio over 21 pairs, since each trace is paired once with the trace beside it and once with itself.",
+  "The ratio of the first pair, 388.889121, since the first pair sits at Ekene-1.",
+  "The largest pair ratio, 471.612452, as the best the data can do."],
+ "The engine takes every neighbouring pair and reports the median ratio and the same in decibels; 21 traces give 20 pairs, with a median of 361.155122 (25.576938 dB) on the shallow window. 388.889121 and 471.612452 are the first two pairs, and neither is the median.")
+
+q(2, "The Ekene slice along the crosslines gives share 0.015148, prominence 27.724874 and 8.500000 cycles. By QI Studio's rule, is it a footprint?",
+ "No: the share must be above 0.3, and the rule needs all three conditions together.",
+ ["Yes: a prominence above 10 with more than five cycles is enough to call a stripe.",
+  "No: 8.500000 cycles falls short of the rule's minimum of 10 repeats of the period across the slice.",
+  "Yes: any periodic stripe the engine finds in the band of periods searched is a footprint."],
+ "QI Studio calls a footprint only with a share above 0.3, a prominence of 10 or more and at least five cycles. Here the prominence and cycles pass and the share of 0.015148 fails, while the designed stripe passes with share 0.490123, prominence 467.977933 and 21.500000 cycles.")
+
+q(3, "Why does the course measure a footprint on a slice of RMS amplitude?",
+ "On signed seismic a stripe of gain averages away when the slice is averaged to a profile.",
+ ["Because the footprint function throws on any negative sample.",
+  "Because RMS amplitude raises the share of every stripe above 0.3.",
+  "Because only the RMS slice holds the Ekene Sand."],
+ "The engine averages the slice along one axis to a profile, and on signed seismic a stripe of gain averages away, so it is measured on RMS or absolute amplitude. The footprint function's one refusal is of a slice under 4 by 4, the Ekene RMS slice shows a share of only 0.015148, and the spread traces of 800 to 1600 ms also hold the Ekene Sand.")
+
+emit(Q, '/root/qi-wip-qi/banks/qib_m03.json', expect_n=15)
+finish()

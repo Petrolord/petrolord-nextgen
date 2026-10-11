@@ -64,7 +64,7 @@ export const VIDEOS = {
     access: 'public',
     youtubeId: null,
     hostKey: 'lesson-qi-a1',
-    lessons: [],
+    lessons: ['qi/beginner/m01-what-a-qi-study-asks/l01-why-a-qi-study'],
   },
   'qi-a2': {
     series: 'qi',
@@ -81,7 +81,7 @@ export const VIDEOS = {
     access: 'public',
     youtubeId: null,
     hostKey: 'lesson-qi-a2',
-    lessons: [],
+    lessons: ['qi/beginner/m02-the-data-inventory/l02-the-usability-matrix'],
   },
   'qi-a3': {
     series: 'qi',
@@ -99,7 +99,7 @@ export const VIDEOS = {
     access: 'public',
     youtubeId: null,
     hostKey: 'lesson-qi-a3',
-    lessons: [],
+    lessons: ['qi/beginner/m03-seismic-qc/l01-the-amplitude-spectrum'],
   },
   'qi-b4': {
     series: 'qi',
@@ -117,7 +117,7 @@ export const VIDEOS = {
     access: 'members',
     youtubeId: null,
     hostKey: 'lesson-qi-b4',
-    lessons: [],
+    lessons: ['qi/beginner/m04-elastic-logs-at-the-wells/l03-the-local-shear-trend-and-its-interval'],
   },
   'qi-b5': {
     series: 'qi',
@@ -135,7 +135,7 @@ export const VIDEOS = {
     access: 'members',
     youtubeId: null,
     hostKey: 'lesson-qi-b5',
-    lessons: [],
+    lessons: ['qi/beginner/m05-will-the-fluid-show/l02-oil-to-brine-substitution-on-a-log'],
   },
   'qi-b6': {
     series: 'qi',
@@ -153,7 +153,7 @@ export const VIDEOS = {
     access: 'members',
     youtubeId: null,
     hostKey: 'lesson-qi-b6',
-    lessons: [],
+    lessons: ['qi/beginner/m05-will-the-fluid-show/l04-the-wet-trend-on-a-crossplot'],
   },
   'qi-b7': {
     series: 'qi',
@@ -172,7 +172,7 @@ export const VIDEOS = {
     access: 'members',
     youtubeId: null,
     hostKey: 'lesson-qi-b7',
-    lessons: [],
+    lessons: ['qi/beginner/m06-the-feasibility-verdict/l01-modelled-avo-at-the-zone-top'],
   },
   'qi-c8': {
     series: 'qi',
@@ -192,7 +192,7 @@ export const VIDEOS = {
     access: 'members',
     youtubeId: null,
     hostKey: 'lesson-qi-c8',
-    lessons: [],
+    lessons: ['qi/intermediate/m01-from-feasibility-to-the-tie/l03-statistical-and-well-wavelets'],
   },
   'qi-c9': {
     series: 'qi',
@@ -211,7 +211,7 @@ export const VIDEOS = {
     access: 'members',
     youtubeId: null,
     hostKey: 'lesson-qi-c9',
-    lessons: [],
+    lessons: ['qi/intermediate/m02-the-tie-and-the-field-wavelet/l01-bulk-shift-and-anchors'],
   },
   'qi-c10': {
     series: 'qi',
@@ -228,7 +228,7 @@ export const VIDEOS = {
     access: 'members',
     youtubeId: null,
     hostKey: 'lesson-qi-c10',
-    lessons: [],
+    lessons: ['qi/intermediate/m02-the-tie-and-the-field-wavelet/l04-aligning-and-averaging-one-field-wavelet'],
   },
   'qi-d11': {
     series: 'qi',
@@ -245,7 +245,7 @@ export const VIDEOS = {
     access: 'members',
     youtubeId: null,
     hostKey: 'lesson-qi-d11',
-    lessons: [],
+    lessons: ['qi/intermediate/m03-gathers-and-their-qc/l01-offset-gathers-and-bin-width'],
   },
   'qi-d12': {
     series: 'qi',
@@ -264,7 +264,7 @@ export const VIDEOS = {
     access: 'members',
     youtubeId: null,
     hostKey: 'lesson-qi-d12',
-    lessons: [],
+    lessons: ['qi/intermediate/m04-angles-from-velocity/l02-waldens-straight-ray-angle'],
   },
   'qi-e13': {
     series: 'qi',
@@ -283,7 +283,7 @@ export const VIDEOS = {
     access: 'members',
     youtubeId: null,
     hostKey: 'lesson-qi-e13',
-    lessons: [],
+    lessons: ['qi/intermediate/m05-avo-volumes/l02-intercept-and-gradient-volumes'],
   },
   'qi-e14': {
     series: 'qi',
@@ -301,7 +301,7 @@ export const VIDEOS = {
     access: 'members',
     youtubeId: null,
     hostKey: 'lesson-qi-e14',
-    lessons: [],
+    lessons: ['qi/intermediate/m06-avo-at-the-wells/l01-one-scale-over-every-well'],
   },
   'qi-f15': {
     series: 'qi',
@@ -320,7 +320,7 @@ export const VIDEOS = {
     access: 'members',
     youtubeId: null,
     hostKey: 'lesson-qi-f15',
-    lessons: [],
+    lessons: ['qi/advanced/m02-post-stack-inversion/l01-model-based-least-squares'],
   },
   'qi-f16': {
     series: 'qi',
@@ -339,7 +339,7 @@ export const VIDEOS = {
     access: 'members',
     youtubeId: null,
     hostKey: 'lesson-qi-f16',
-    lessons: [],
+    lessons: ['qi/advanced/m03-simultaneous-inversion/l01-fattis-three-parameters'],
   },
   'qi-f17': {
     series: 'qi',
@@ -357,7 +357,7 @@ export const VIDEOS = {
     access: 'members',
     youtubeId: null,
     hostKey: 'lesson-qi-f17',
-    lessons: [],
+    lessons: ['qi/advanced/m04-properties-from-impedance/l02-left-out-wells-and-the-widened-band'],
   },
   'qi-f18': {
     series: 'qi',
@@ -379,7 +379,7 @@ export const VIDEOS = {
     access: 'members',
     youtubeId: null,
     hostKey: 'lesson-qi-f18',
-    lessons: [],
+    lessons: ['qi/advanced/m05-prospects/l04-the-qi-assessment'],
   },
 };
 

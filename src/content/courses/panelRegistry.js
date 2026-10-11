@@ -310,6 +310,10 @@ export const PANELS = {
   'marine-deck-calculator': React.lazy(() => import('@/components/course/panels/marine/DeckCalculator')),
   'marine-base-calculator': React.lazy(() => import('@/components/course/panels/marine/BaseCalculator')),
   'marine-variability-calculator': React.lazy(() => import('@/components/course/panels/marine/VariabilityCalculator')),
+  'qi-feasibility-explorer': React.lazy(() => import('@/components/course/panels/qi/QiFeasibilityExplorer')),
+  'qi-prestack-explorer': React.lazy(() => import('@/components/course/panels/qi/QiPrestackExplorer')),
+  'qi-inversion-explorer': React.lazy(() => import('@/components/course/panels/qi/QiInversionExplorer')),
+  'qi-prospect-explorer': React.lazy(() => import('@/components/course/panels/qi/QiProspectExplorer')),
 };
 
 export function resolvePanel(id) {

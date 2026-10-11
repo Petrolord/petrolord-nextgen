@@ -92,6 +92,7 @@ const PrmsLearningPage = lazy(() => import('@/pages/apps/PrmsLearningPage'));
 const MaterialsLearningPage = lazy(() => import('@/pages/apps/MaterialsLearningPage'));
 const ContractsLearningPage = lazy(() => import('@/pages/apps/ContractsLearningPage'));
 const MarineLearningPage = lazy(() => import('@/pages/apps/MarineLearningPage'));
+const QiLearningPage = lazy(() => import('@/pages/apps/QiLearningPage'));
 const HygieneLearningPage = lazy(() => import('@/pages/apps/HygieneLearningPage'));
 const RiskChangeLearningPage = lazy(() => import('@/pages/apps/RiskChangeLearningPage'));
 const ComplianceLearningPage = lazy(() => import('@/pages/apps/ComplianceLearningPage'));
@@ -528,6 +529,7 @@ const DashboardPage = () => {
     <Route path="apps/appliedai" element={<AppliedaiLearningPage />} />
     <Route path="apps/procurement" element={<ProcurementLearningPage />} />
     <Route path="apps/marine" element={<MarineLearningPage />} />
+    <Route path="apps/qi" element={<QiLearningPage />} />
     <Route path="apps/pia" element={<PiaLearningPage />} />
     <Route path="apps/gsa" element={<GsaLearningPage />} />
     <Route path="apps/joa" element={<JoaLearningPage />} />

@@ -1,0 +1,361 @@
+{
+ "app_slug": "qi",
+ "tier": "advanced",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-the-forward-model",
+   "title": "The Forward Model",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-what-the-expert-tier-adds",
+     "title": "What the Expert tier adds",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "qi-inversion-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-convolutional-model-and-its-adjoint",
+     "title": "The convolutional model and its adjoint",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "qi-inversion-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-low-frequency-model",
+     "title": "The low-frequency model from wells and horizons",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "qi-inversion-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-wavelet-scale",
+     "title": "The wavelet scale",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "qi-inversion-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-post-stack-inversion",
+   "title": "Post-Stack Inversion",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-model-based-least-squares",
+     "title": "Model-based least squares",
+     "order": 1,
+     "est_minutes": 14,
+     "panels": [
+      "qi-inversion-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-blocky-and-sparse-spike",
+     "title": "Blocky and sparse-spike inversion",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "qi-inversion-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-coloured-inversion",
+     "title": "Coloured inversion",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "qi-inversion-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-blind-wells",
+     "title": "Blind wells",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "qi-inversion-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-sensitivity-across-realisations",
+     "title": "Sensitivity across realisations",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "qi-inversion-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-simultaneous-inversion",
+   "title": "Simultaneous Inversion",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-fattis-three-parameters",
+     "title": "Fatti's three parameters",
+     "order": 1,
+     "est_minutes": 14,
+     "panels": [
+      "qi-inversion-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-angle-dependent-wavelets",
+     "title": "Angle-dependent wavelets",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "qi-inversion-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-why-density-needs-the-far-angles",
+     "title": "Why density needs the far angles",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "qi-inversion-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-blind-wells-per-parameter",
+     "title": "Blind wells per parameter",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "qi-inversion-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-properties-from-impedance",
+   "title": "Properties from Impedance",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-a-linear-transform-and-its-interval",
+     "title": "A linear transform and its interval",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "qi-prospect-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-left-out-wells-and-the-widened-band",
+     "title": "Left-out wells and the widened band",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "qi-prospect-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-bayesian-facies-on-impedance",
+     "title": "Bayesian facies on impedance",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "qi-prospect-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-two-attributes",
+     "title": "Two attributes, impedance and Vp/Vs",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "qi-prospect-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-confusion-matrix-and-a-fluid-hypothesis",
+     "title": "The confusion matrix and a fluid hypothesis",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "qi-prospect-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-prospects",
+   "title": "Prospects",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-crest-spill-and-closure",
+     "title": "Crest, spill and closure",
+     "order": 1,
+     "est_minutes": 14,
+     "panels": [
+      "qi-prospect-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-anomaly-conformance-and-the-implied-contact",
+     "title": "Anomaly conformance and the implied contact",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "qi-prospect-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-independent-evidence-and-competing-explanations",
+     "title": "Independent evidence and competing explanations",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "qi-prospect-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-qi-assessment",
+     "title": "The QI assessment",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "qi-prospect-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-the-report-and-the-limits",
+   "title": "The Report and the Limits",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-the-qi-report-and-the-handover-files",
+     "title": "The QI report and the handover files",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "qi-prospect-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-what-qi-never-sets",
+     "title": "What QI never sets",
+     "order": 2,
+     "est_minutes": 12,
+     "panels": [
+      "qi-prospect-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-what-the-engines-do-not-compute",
+     "title": "What the engines do not compute",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [
+      "qi-prospect-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "qi-prospect-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}
