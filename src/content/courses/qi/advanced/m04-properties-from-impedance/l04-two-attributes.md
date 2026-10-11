@@ -1,6 +1,6 @@
 # Two attributes, impedance and Vp/Vs
 
-On AI (acoustic impedance, Vp x density) alone the oil sand and the brine sand overlap. The Associate tier showed why a second attribute should help: taking the Ekene-1 oil leg to brine raised its mean AI from 6641244.924742 to 7136467.682134 kg/(m2 s) and its mean Vp/Vs from 1.752075 to 1.877221, so the fluid moves both. A two-attribute facies model fits one Gaussian density per facies in the plane of AI and Vp/Vs, from the same labelled samples and the same stated rules as the previous lesson.
+On AI (acoustic impedance, Vp x density) alone the oil sand and the brine sand overlap. The Associate tier showed why a second attribute should help: taking the Ekene-1 oil leg to brine raised both its mean AI and its mean Vp/Vs, so the fluid moves both, and a second attribute gives the model a second direction in which the sands can differ. A two-attribute facies model fits one Gaussian density per facies in the plane of AI and Vp/Vs, from the same labelled samples and the same stated rules as the previous lesson.
 
 ## What the second attribute buys
 

@@ -2,7 +2,7 @@
 
 `confusionMatrix` counts, for every labelled sample, its true facies against the facies the model predicts. Rows are the true facies and columns the predicted, in the order shale, oil sand, brine sand; the diagonal is what the model got right. One figure, the share correct, summarises the matrix, and on a heavily shale split it hides the row that matters.
 
-## AI alone
+## Impedance alone
 
 The one-attribute model on AI (acoustic impedance, Vp x density), on its own samples, share correct 0.934872:
 
@@ -14,7 +14,7 @@ The one-attribute model on AI (acoustic impedance, Vp x density), on its own sam
 
 Shale is called shale 2469 times out of 2519. Brine sand is called brine sand 439 times out of 465. The oil sand is the failure: 49 of its 179 samples are called oil sand and 127 are called brine sand. On AI alone most oil-sand samples are called brine sand, and the share correct still reads high, because shale fills most of the matrix.
 
-## AI and Vp/Vs
+## Impedance and Vp/Vs
 
 The two-attribute model, share correct 0.973443:
 
