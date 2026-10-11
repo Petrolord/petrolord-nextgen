@@ -1,10 +1,10 @@
 # The wavelet scale
 
-A wavelet chosen for its shape carries an arbitrary amplitude. The kit's traces carry no physical scale, and the forward model produces half differences of ln(AI). One number has to join them before any inversion can read a contrast: on the Ekene pack it is 769.984107, measured over 19 samples at the four wells.
+A wavelet chosen for its shape carries an arbitrary amplitude, and the forward model produces half differences of ln(AI). One number has to join them before any inversion can read a contrast: on the Ekene pack it is 769.984107, measured over 19 samples at the four wells.
 
 ## Why one number matters
 
-The inversion reads impedance contrast from the ratio of the trace to the synthetic. Set the scale too large and the solver needs smaller contrasts in ln(AI), the log of AI (acoustic impedance), to match the trace; set it too small and it needs larger ones.
+The inversion reads impedance contrast from the ratio of the trace to the synthetic, in ln(AI), the log of AI (acoustic impedance), so the scale enters every contrast it returns.
 
 ## How it is measured
 
@@ -36,7 +36,7 @@ The Ekene pack clears that rule with 19 samples.
 
 ## What the scale assumes
 
-It assumes the shape is right. The 25 Hz Ricker is a stated choice, and the scale only absorbs amplitude, so a misfit in shape stays in the residual. It assumes one scale serves the whole window and every well, the claim the Professional tier tested when it averaged four wavelets. And 19 samples from four wells is a thin base for a number every inversion multiplies through. The third module sets one scale per angle stack by the same rule.
+It assumes the shape is right. The 25 Hz Ricker is a stated choice, and the scale only absorbs amplitude, so a misfit in shape stays in the residual. It assumes one scale serves the whole window and every well, and it rests on 19 samples from four wells, a number every inversion multiplies through. The third module sets one scale per angle stack by the same rule.
 
 A study states the wavelet, its length, the wells in the fit, the sample count and the scale, and it quotes the count beside the scale every time.
 
@@ -44,4 +44,4 @@ A study states the wavelet, its length, the wells in the fit, the sample count a
 
 ## Exercise
 
-In the inversion explorer, set View to "The wavelet scale" and Data to "Ekene teaching pack", with "Ricker wavelet, Hz" 25 and "Wavelet half length, ms" 40. Read the scale, the samples pooled and the two peaks. Lengthen the half length to 60 ms and note which way the samples pooled move and whether they still clear QI Studio's rule of ten. Restore 40 ms, change the Ricker to 30 Hz, and write one sentence on how the scale responds to a change of shape.
+In the inversion explorer, set View to "The wavelet scale" and Data to "Ekene teaching pack", with "Ricker wavelet, Hz" 25 and "Wavelet half length, ms" 40. Read the scale, the samples pooled and the two peaks. Lengthen the half length to 60 ms and read what the panel prints against QI Studio's rule of ten. Restore 40 ms, change the Ricker to 30 Hz, and write one sentence on how the scale responds to a change of shape.

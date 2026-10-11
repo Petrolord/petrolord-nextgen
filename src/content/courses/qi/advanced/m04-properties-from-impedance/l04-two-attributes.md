@@ -14,9 +14,9 @@ On AI (acoustic impedance, Vp x density) alone the oil sand and the brine sand o
 | 6600000.000000 | 1.750000 | 0.000000 | 0.997373 | 0.002627 |
 | 6600000.000000 | 2.000000 | 0.000000 | 0.000000 | 1.000000 |
 
-At AI 6600000 the one-attribute model called brine sand with 0.557911 and oil sand 0.442088, close to a coin toss. With Vp/Vs added, the same AI is oil sand at 0.997373 when Vp/Vs is 1.750000 and brine sand at 1.000000 when it is 2.000000. The second attribute decides a point the first could not, almost to certainty, which is a reason to ask how well Vp/Vs is known where the model is applied.
+At AI 6600000 the one-attribute model called brine sand with 0.557911 and oil sand 0.442088. With Vp/Vs added, the same AI is oil sand at 0.997373 when Vp/Vs is 1.750000 and brine sand at 1.000000 when it is 2.000000. At this AI the call now turns on Vp/Vs, which is a reason to ask how well Vp/Vs is known where the model is applied.
 
-The share correct rises from 0.934872 to 0.973443. That rise looks modest because shale, which AI already separates, makes up most of the samples; the next lesson reads the confusion matrices row by row, where the change for the oil sand is large.
+The share correct rises from 0.934872 to 0.973443. Shale makes up 2519 of the samples, and its row changes little; the next lesson reads the confusion matrices row by row, where the change for the oil sand is large.
 
 ## Where Vp/Vs comes from on a map
 

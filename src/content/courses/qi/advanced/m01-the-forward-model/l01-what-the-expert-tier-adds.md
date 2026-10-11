@@ -4,7 +4,7 @@ The Associate tier asked whether the seismic can see the fluid, from logs and on
 
 ## The engines and their gate
 
-Every Expert engine has passed the extraction gate: a golden result plus an independent oracle in the engines repository. That includes the QI Studio maths the tier uses, the wavelet scale, the left-out-well check, the angle wavelets and the prospect trap, which now live in the engines beside the rest.
+Every Expert engine has passed the extraction gate: a golden result plus an independent oracle in the engines repository. That includes the QI Studio maths the tier uses: the wavelet scale, the left-out-well check, the angle wavelets and the prospect trap.
 
 | engine | what it computes | gate |
 | --- | --- | --- |
@@ -48,7 +48,7 @@ Each pack well's logs go to two-way time on its checkshots, linear between level
 | Ekene-3 | 27 | 1240.000000 | 1344.000000 | 1282.159191 | 1302.328106 |
 | Ekene-4 | 26 | 1284.000000 | 1384.000000 | 1329.290304 | 1346.132878 |
 
-Every score in the inversion modules runs over these logged samples alone: 27 at three wells and 26 at Ekene-4. A correlation over 27 samples moves a long way on a few of them. Read every Expert figure with that count beside it.
+Every score in the inversion modules runs over these logged samples alone: 27 at three wells and 26 at Ekene-4. Read every Expert figure with that count beside it.
 
 ## Words this tier uses
 

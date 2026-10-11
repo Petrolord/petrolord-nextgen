@@ -16,7 +16,7 @@ Oil sand is net sand of the Ekene Sand above the oil-water contact, at 5118.1102
 
 The pack's logs cover the Ekene Sand and the shale above it, so shale dominates the labelled samples and its prior is 0.796396. The oil-sand prior, 0.056592, is the smallest of the three. These priors describe the logged window at four wells; they say nothing about how much of a prospect is oil sand, and a study that keeps them states where they came from.
 
-Shale sits far below both sands in AI, with a narrow spread, so shale and sand separate cleanly on AI alone. The two sands do not. The oil-sand mean is below the brine-sand mean, as substitution predicts, but the gap between them is smaller than either standard deviation: the two Gaussians overlap over most of their range.
+Shale's mean AI sits far below both sands', with the narrowest spread of the three. The two sands sit closer together. The oil-sand mean is below the brine-sand mean, as substitution predicts, but the gap between them is smaller than either standard deviation, so their two Gaussians overlap.
 
 ## The posteriors
 
@@ -27,11 +27,11 @@ Shale sits far below both sands in AI, with a narrow spread, so shale and sand s
 | 7200000.000000 | 0.000000 | 0.231827 | 0.768173 | brine sand |
 | 7800000.000000 | 0.000000 | 0.116827 | 0.883173 | brine sand |
 
-Only the softest point in the table is called oil sand, and even there brine sand keeps 0.280694. From 6600000 upwards brine sand is the most likely class, by a narrow margin at first.
+Only the softest point in the table is called oil sand, and even there brine sand keeps 0.280694. At 6600000, 7200000 and 7800000 brine sand is the most likely class, by 0.557911 to 0.442088 at the first.
 
 ## The prior moves the answer
 
-With equal priors at AI 6600000 the posteriors are P(shale) 0.000000, P(oil sand) 0.673039 and P(brine sand) 0.326961: the most likely class flips from brine sand to oil sand. Nothing about the rock changed; only the stated prior did. Where two densities overlap, the prior decides the call, so a facies map is quoted with its priors, and a map made with sample-proportion priors inherits the heavily shale, brine-rich split of the logged window.
+With equal priors at AI 6600000 the posteriors are P(shale) 0.000000, P(oil sand) 0.673039 and P(brine sand) 0.326961: the most likely class flips from brine sand to oil sand. Nothing about the rock changed; only the stated prior did. Here the prior decided the call, so a facies map is quoted with its priors, and a map made with sample-proportion priors inherits the heavily shale, brine-rich split of the logged window.
 
 A posterior is a probability under the model: Gaussian densities, these labels and these priors.
 

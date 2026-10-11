@@ -1,6 +1,6 @@
 # The QI assessment
 
-The closure, the conformance, the evidence count and the feasibility verdict meet in one decision. `assessProspect` in prospectAssessment.js reads them through a stated decision table and returns two things: a recommendation (mature, investigate, retain or downgrade) and a seismic support (supports, neutral or against). It returns no probability of success. The engine awaits its independent oracle; the course teaches it, and grades it only once that check lands.
+The closure, the conformance, the evidence count and the feasibility verdict meet in one decision. `assessProspect` in prospectAssessment.js reads them through a stated decision table and returns two things: a recommendation (mature, investigate, retain or downgrade) and a seismic support (supports, neutral or against). It returns no probability of success. It carries a golden and an independent oracle in the engines repository.
 
 {{video:qi-f18}}
 
@@ -26,7 +26,7 @@ Take one independent source away and the seismic still supports the prospect, bu
 
 The two rows without an anomaly show the feasibility verdict at work. Where the study says the fluid would be visible, its absence is evidence against, and the prospect is downgraded. Where feasibility is not stated, absence says nothing, and the prospect is retained with neutral support. An Associate-tier input decides between them.
 
-The last row shows a competing explanation judged likely. The anomaly is present and the recommendation is investigate, but the support is neutral, because the anomaly points to its rival as readily as to fluid.
+The last row shows a competing explanation judged likely. The anomaly is present and every other input is as in the first row, yet the recommendation is investigate and the support neutral.
 
 ## On the Ekene grid
 

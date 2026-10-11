@@ -32,13 +32,13 @@ With eps 0.050000 and 60 iterations:
 
 The LFM alone carries the level. Its correlation is negative at every well: it has none of the shape. Its RMS error is lower than the model-based inversion's at every well, blind or kept in.
 
-The inversions carry the shape, with blind correlations from 0.759365 to 0.889320 across the two methods. They pay for it with a larger RMS error. Sparse-spike sits between: its error is below the LFM-alone figure at Ekene-1 and Ekene-4, and above it at Ekene-2 and Ekene-3.
+The inversions carry the shape, with blind correlations from 0.759365 to 0.889320 across the two methods. Model-based pays for it with a larger RMS error at every well. Sparse-spike sits between: its error is below the LFM-alone figure at Ekene-1 and Ekene-4, and above it at Ekene-2 and Ekene-3.
 
 Keeping the well in its own LFM changes little. The kept-in correlations sit beside the blind ones at every well, and the kept-in error is larger than the blind error at three of the four wells. A well's own log inside its LFM is no guarantee of a closer match, as the LFM lesson found at Ekene-2.
 
 ## What a study quotes
 
-Both figures, for every well, with the LFM-alone row beside them. A correlation alone hides the error in level; an RMS error alone rewards the flat LFM. A study that quotes only the correlation oversells its inversion, and one that quotes only the error undersells it. The blind figure is the nearest guide to how the inversion behaves between the wells.
+Both figures, for every well, with the LFM-alone row beside them. A correlation alone hides the error in level; an RMS error alone rewards the flat LFM. A study that quotes only the correlation oversells its inversion, and one that quotes only the error undersells it. A study quotes the blind figure for every well.
 
 Four wells is a small sample. The blind scores say how the inversion behaved at four places on 27 samples or fewer each, and nothing stronger.
 

@@ -34,7 +34,7 @@ An AI (acoustic impedance, Vp x density) volume carries its blind-well table: at
 
 A porosity map carries its transform and both of its errors: s 0.007175 log against log, and the pooled left-out RMS 0.024072 that widened its band, with the samples behind each well's coverage. A facies map carries its labels, its priors, its confusion matrix and the fact that the matrix was measured on its own samples. Classes named for a fluid travel as fluid hypotheses.
 
-A prospect carries its closure with the edge flag: on the Ekene Sand top grid the spill is limited by the map edge, so the column of 2.380249 ft is the map's limit. Conformance travels with the relief it was measured against, the evidence count with each item's source, and the assessment with every input that produced it. The engines behind anomaly conformance, the evidence count and the assessment await their independent oracle, and the report says so.
+A prospect carries its closure with the edge flag: on the Ekene Sand top grid the spill is limited by the map edge, so the column of 2.380249 ft is the map's limit. Conformance travels with the relief it was measured against, the evidence count with each item's source, and the assessment with every input that produced it. The report names the engine behind each figure.
 
 ## The issue register
 

@@ -29,7 +29,7 @@ The interval at a new AI x0 is y +/- t s sqrt(1 + 1/n + (x0 - mean)^2 / Sxx), wi
 | 7500000.000000 | 0.192433 | 0.169342 | 0.215525 |
 | 8500000.000000 | 0.169599 | 0.146406 | 0.192792 |
 
-The bands are nearly the same width in every row. With 644 samples the line is well pinned, so almost all of the width is the scatter of one sample about it.
+The bands are nearly the same width in every row, 0.192157 to 0.238378 at the softest AI and 0.146406 to 0.192792 at the hardest.
 
 ## Outside the calibration
 

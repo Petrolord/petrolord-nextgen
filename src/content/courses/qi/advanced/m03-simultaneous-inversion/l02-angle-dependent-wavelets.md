@@ -4,7 +4,7 @@ A far-angle stack carries less high frequency than a near one, and a different a
 
 ## Why each angle needs its own
 
-The forward model of each stack is the Fatti reflection at that stack's angle, convolved with that stack's wavelet. A far-stack wavelet with the wrong scale or shape lands its error on the parameters the far angles carry most, SI (shear impedance) and density, whose coefficients the last lesson showed are already the smallest.
+The forward model of each stack is the Fatti reflection at that stack's angle, convolved with that stack's wavelet. Each stack's wavelet is a stated input of the solve, so its scale and shape are stated beside the result. SI (shear impedance) and density have the smallest coefficients of the three, as the last lesson showed.
 
 ## The Ekene setting
 

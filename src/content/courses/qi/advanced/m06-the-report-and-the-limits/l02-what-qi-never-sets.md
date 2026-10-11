@@ -14,15 +14,15 @@ The assessment returns supports where an anomaly is present and nothing stated w
 
 A seismic support is one input to a prospect's chance. The risk team weighs that statement and sets the chance; QI's job is to make its own statement exact, stated and checkable.
 
-The figures this tier produces show why. On the Ekene grid the closure is the map's limit, spilling at the edge 2.380249 ft below the crest while the wells hold oil far deeper. A facies class named oil sand is a fluid hypothesis, measured on its own samples at the wells. The porosity band at seismic scale is widened by a left-out RMS of 0.024072 resting on four wells. Each is a measurement with a limit, and none is a probability that the prospect holds oil.
+The figures this tier produces show why. On the Ekene grid the closure is the map's limit, spilling at the edge 2.380249 ft below the crest while the wells' contact lies far deeper. A facies class named oil sand is a fluid hypothesis, measured on its own samples at the wells. The porosity band at seismic scale is widened by a left-out RMS of 0.024072 resting on four wells. Each is a measurement with a limit, and none is a probability that the prospect holds oil.
 
 ## What absence means
 
-QI's statement can count against a prospect. The absence of an anomaly counts against only where the feasibility study says the case would be visible; where feasibility is not stated, absence is neutral. A QI study that skips the feasibility verdict cannot speak against a prospect, and the report says which case applies.
+QI's statement can count against a prospect. The absence of an anomaly counts against only where the feasibility study says the case would be visible; where feasibility is not stated, absence is neutral. A QI study that skips the feasibility verdict cannot count a missing anomaly against a prospect, and the report says which case applies.
 
 ## The recommendation is a next step
 
-The recommendation, mature, investigate, retain or downgrade, says what the study should do next with the prospect. It is a QI recommendation on the seismic evidence, and it carries the support word and every input with it so that the risk team can see what it rests on. The engine behind it awaits its independent oracle; the course teaches it, and grades it only once that check lands.
+The recommendation, mature, investigate, retain or downgrade, says what the study should do next with the prospect. It is a QI recommendation on the seismic evidence, and it carries the support word and every input with it so that the risk team can see what it rests on. The engine behind it carries a golden and an independent oracle in the engines repository.
 
 {{panel:qi-prospect-explorer}}
 

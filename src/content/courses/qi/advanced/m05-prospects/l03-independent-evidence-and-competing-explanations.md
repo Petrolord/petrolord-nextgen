@@ -1,6 +1,6 @@
 # Independent evidence and competing explanations
 
-Several attributes that agree look like strength, and they are strength only where the attributes come from different measurements. `evidenceIndependence` in prospectAssessment.js counts the supporting items and the independent sources behind them: attributes computed from one seismic response are one piece of evidence, however many maps they fill. The engine awaits its independent oracle; the course teaches it, and grades it only once that check lands.
+Several attributes that agree look like strength, and they are strength only where the attributes come from different measurements. `evidenceIndependence` in prospectAssessment.js counts the supporting items and the independent sources behind them: attributes computed from one seismic response are one piece of evidence, however many maps they fill. The engine carries a golden and an independent oracle in the engines repository.
 
 ## One response, one source
 
@@ -20,7 +20,7 @@ The assessment matures a prospect only on two independent supporting sources. A 
 
 Fluid is one explanation of an anomaly, and the Ekene figures name others. On AI (acoustic impedance, Vp x density) alone, most oil-sand samples at the wells were called brine sand, so a soft impedance anomaly may be brine sand. Vp/Vs separates the two sands at log scale, and its blind correlations at the wells are weak, so an anomaly on inverted Vp/Vs carries that uncertainty. An anomaly whose edge cuts across the contours, like designed anomaly B, is hard to explain by a contact at all.
 
-The assessment takes a competing explanation as a stated judgement. Where one is judged likely, an anomaly that is present still leads to investigate, and its seismic support is neutral. The engine does not find competing explanations, and it does not weigh them: the interpreter names each one, states whether it is judged likely, and writes the reason into the report.
+The assessment takes a competing explanation as a stated judgement. Where one is judged likely, the decision table's maturing case, an anomaly present on every other favourable input, is held at investigate with neutral support. The engine does not find competing explanations, and it does not weigh them: the interpreter names each one, states whether it is judged likely, and writes the reason into the report.
 
 ## Feasibility decides what absence means
 

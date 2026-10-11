@@ -19,11 +19,11 @@ The near stack alone holds AI. Its correlation goes from negative with the LFMs 
 
 ## Vp/Vs
 
-With the near stack only, Vp/Vs goes badly wrong: a correlation of -0.744719 and an error of 30.824755 percent, far worse than the LFMs alone. G2 is small at 10 degrees, and the solver still moves the shear impedance to fit the near stack. The mid and far stacks pull Vp/Vs back, to a correlation of 0.470296 and an error just below the LFMs-alone figure with all three. Vp/Vs needs at least the mid angles.
+With the near stack only, Vp/Vs goes badly wrong: a correlation of -0.744719 and an error of 30.824755 percent, far worse than the LFMs alone. The mid and far stacks pull Vp/Vs back, to a correlation of 0.470296 and an error just below the LFMs-alone figure with all three.
 
 ## Density
 
-With the near stack only, density's RMS error stays under one percent, 0.627310 against 0.767482 with the LFMs alone, while its correlation changes from -0.087754 to 0.614032. G3 is tiny at 10 degrees, so the near stack moves density's shape without moving its level far, and that positive correlation rests on a level the LFM still sets.
+With the near stack only, density's RMS error stays under one percent, 0.627310 against 0.767482 with the LFMs alone, while its correlation changes from -0.087754 to 0.614032. G3 is tiny at 10 degrees, and the near stack moves density's shape without moving its level far.
 
 Add the mid and far stacks and the density correlation at Ekene-1 turns negative, to -0.767957, with an error of 14.112317 percent: the inversion moves density away from the log. In this table density is the least reliable of the three parameters.
 

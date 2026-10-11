@@ -21,7 +21,7 @@ The penalty lambda ||r||_1 is weighed against a misfit measured in trace units, 
 | 1000.000000 | 67 | 44 |
 | 5000.000000 | 36 | 27 |
 
-At QI Studio's own setting of 0.002000 every one of the 101 samples is non-zero. On traces of this amplitude that lambda imposes no sparsity. Sparsity appears only at the larger lambdas, and more iterations sharpen it further. A study that calls its result sparse-spike states lambda and the count of non-zero samples it produced.
+At QI Studio's own setting of 0.002000 every one of the 101 samples is non-zero. On traces of this amplitude that lambda imposes no sparsity. Sparsity appears at the larger lambdas in the table, and more iterations sharpen it further. A study that calls its result sparse-spike states lambda and the count of non-zero samples it produced.
 
 ## Three methods at Ekene-1
 
@@ -33,9 +33,9 @@ Each run blind, the well left out of its LFM, scored against the log after the 5
 | model-based, blocky | 0.751173 | 13.130119 | 27 |
 | sparse-spike | 0.873414 | 8.356661 | 27 |
 
-Sparse-spike leads on both measures here, and its AI error falls below the LFM-alone error of 8.638086 percent at this well. It does so at a lambda that imposes no sparsity, so sparsity cannot take the credit. Blocky trails both at the stated epsTV.
+Sparse-spike leads on both measures here, and its AI error falls below the LFM-alone error of 8.638086 percent at this well. It does so at a lambda that imposes no sparsity. Blocky trails both at the stated epsTV.
 
-These are scores at one well on 27 samples. The blind-well lesson runs model-based and sparse-spike at all four wells, and the order is not the same everywhere.
+These are scores at one well on 27 samples. The blind-well lesson runs model-based and sparse-spike at all four wells, and the order by correlation is not the same at every well.
 
 {{panel:qi-inversion-explorer}}
 

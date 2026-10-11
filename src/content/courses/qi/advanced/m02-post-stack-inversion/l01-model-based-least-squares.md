@@ -20,7 +20,7 @@ Ekene-1 is left out of its own LFM, so the inversion at the well knows nothing o
 | 1304.000000 | 6092574.823749 | 5168379.152075 | 7082384.485415 |
 | 1312.000000 | 5512396.282574 | 5177480.045787 | 5850264.680558 |
 
-The LFM is almost flat across the sand. The inversion finds the step up into the sand that the LFM lacks, and the log has it too. It then overshoots: at 1296 and 1304 ms the inverted AI is well above the log.
+The LFM is almost flat across the sand. The log steps up into the sand between 1280 and 1296 ms, and the inverted AI steps up with it. At 1296 and 1304 ms the inverted AI is above the log.
 
 ## The iteration count is a choice
 
@@ -43,9 +43,9 @@ And the weight at 300 iterations:
 
 ## Reading the two tables together
 
-The residual falls with every extra iteration while the error at the well rises, because the solver fits the trace beyond what the stated wavelet and the scale can explain. A smaller residual is no better inversion. At 300 iterations the correlation has all but gone. A heavier weight holds the result nearer the LFM, and recovers part of the correlation at the cost of a larger residual.
+The residual falls with every extra iteration while the error at the well rises, because the solver fits the trace beyond what the stated wavelet and the scale can explain. A smaller residual is no better inversion. At 300 iterations the correlation is 0.091593. A heavier weight holds the result nearer the LFM, and recovers part of the correlation at the cost of a larger residual.
 
-Two plain facts follow for Ekene-1. The stated 60 iterations score a larger error than 20 iterations do. And the LFM alone, at 8.638086 percent, scores a lower RMS error than the stated inversion; only 20 iterations get below it on this measure. What the inversion adds is shape: a correlation of 0.852881 where the LFM alone correlates negatively. The blind-well lesson sets this out at every well.
+Two plain facts follow for Ekene-1. The stated 60 iterations score a larger error than 20 iterations do. And the LFM alone, at 8.638086 percent, scores a lower RMS error than the stated inversion; of the four counts, only 20 iterations get below it on this measure. What the inversion adds is shape: a correlation of 0.852881 where the LFM alone correlates negatively. The blind-well lesson sets this out at every well.
 
 ## What a study states
 

@@ -23,7 +23,7 @@ The slope comes from each pack well's AI log in time, over its logged samples on
 
 ## Why the four slopes differ
 
-The pack covers the Ekene Sand and the shale above it, so each log is short, and a slope fitted to a short log rests on few frequencies. The four slopes spread widely around their mean. On the pack the mean of four short fits is the stated choice, and the table shows how loosely it is held.
+The pack covers the Ekene Sand and the shale above it, so each log is short, and a slope fitted to a short log rests on few frequencies. The four slopes run from -0.646563 at Ekene-1 to -1.473109 at Ekene-2 about their mean of -1.012769. On the pack the mean of four short fits is the stated choice, and a study states it with the four slopes behind it.
 
 ## What the correlations can and cannot be compared with
 

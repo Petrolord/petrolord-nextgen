@@ -10,7 +10,7 @@ The seismic band holds no trend: below about 8 Hz it carries nothing an inversio
 
 The LFM between wells comes from lfm.js, which carries a golden and an independent oracle in the engines repository. It takes three steps:
 
-1. **Low-pass each well.** Each well's ln(AI) in time is smoothed by a moving average whose half window is round(1000 / (cut x dt) / 2) samples. At the stated cut of 8 Hz on the 4.000000 ms clock that is 16 samples (`lowFrequencyModel`). That is more than half of a 27-sample log.
+1. **Low-pass each well.** Each well's ln(AI) in time is smoothed by a moving average whose half window is round(1000 / (cut x dt) / 2) samples. At the stated cut of 8 Hz on the 4.000000 ms clock that is 16 samples (`lowFrequencyModel`).
 2. **Follow the horizons.** Between two horizons a sample keeps its proportional position (`mapToWellTime`), so a layer that thickens or dips between wells keeps its impedance. Above the first horizon and below the last, the time offset from that horizon is kept.
 3. **Weight by distance.** The smoothed wells are carried to a trace by inverse distance weighting with power 2.
 
@@ -25,7 +25,7 @@ The Ekene-1 trace's times mapped onto Ekene-2's horizons, the top and base of th
 | 1299.913186 | 1318.075904 |
 | 1319.029994 | 1338.405474 |
 
-The second and fourth rows are the horizons. The third, mid-sand at Ekene-1, lands mid-sand in Ekene-2's thicker sand; the first, above the top, keeps its offset.
+The second and fourth rows are the horizons. The third, mid-sand at Ekene-1, lands mid-sand at Ekene-2; the first, above the top, keeps its offset.
 
 ## The weights at Ekene-1
 
@@ -52,7 +52,7 @@ Left out, the errors run from 8.512597 percent at Ekene-3 to 10.450743 percent a
 
 ## What these numbers will mean
 
-The LFM-only error is the bar every inversion in the next module must clear, and the blind-well lesson shows it is hard to beat on RMS error. A study states the cut, the power, the horizons and the wells, and quotes the LFM-only score beside every inversion.
+The next module sets every inversion's error beside the LFM-only error, and the blind-well lesson finds the LFM alone lower than the model-based inversion at all four wells. A study states the cut, the power, the horizons and the wells, and quotes the LFM-only score beside every inversion.
 
 {{panel:qi-inversion-explorer}}
 

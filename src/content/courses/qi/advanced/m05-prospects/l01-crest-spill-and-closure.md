@@ -4,7 +4,7 @@ A property map says what the rock may hold; a prospect also needs a trap. The Ma
 
 ## How the spill is found
 
-From the crest, the highest mapped node unless a seed is stated, a priority flood always expands the highest node on its frontier. The spill elevation is the running minimum when the flood first reaches the edge of the mapped area. Connectivity is four-neighbour. The mapped edge is any node on the edge of the grid or any node beside a null, so a gap in the map is an edge too. A contact at or above the spill leaves the closure closed; a contact below it lets the trap leak.
+From the crest, the highest mapped node unless a seed is stated, a priority flood always expands the highest node on its frontier. The spill elevation is the running minimum when the flood first reaches the edge of the mapped area. Connectivity is four-neighbour. The mapped edge is any node on the edge of the grid or any node beside a null, so a gap in the map is an edge too. A contact at or above the spill leaves the closure closed; a contact below it leaves the closure open.
 
 The engine reads elevation and spacing in one unit; the course runs it in feet.
 
@@ -26,7 +26,7 @@ The grid is the kit's own, gridded from the six development wells' tops: 25 by 2
 
 ## What the grid can and cannot say
 
-The map spills at the edge of its own mapped area, 2.380249 ft below the crest, and above the contact the wells see. The wells hold oil down to 5118.110236 ft, far below that spill. Six wells grid too little of the structure to close the trap on the map. The engine says so: the spill is flagged as limited by the edge, and at the wells' contact the closure is reported open.
+The map spills at the edge of its own mapped area, 2.380249 ft below the crest, and above the contact the wells see. The wells' oil-water contact, at 5118.110236 ft, lies below that spill. Six wells grid too little of the structure to close the trap on the map. The engine says so: the spill is flagged as limited by the edge, and at the wells' contact the closure is reported open.
 
 A closure figure from this grid is therefore the map's limit and no measurement of the trap. The column, the 11 nodes and the gross rock volume all describe how far the mapped area reaches before it runs out. A study reads the edge flag before it quotes any closure figure, and reports the flag beside it.
 

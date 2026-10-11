@@ -27,7 +27,7 @@ Each well's coverage is tested with the other wells' residuals only.
 | pooled left-out RMS | 0.024072 |
 | s_extra, the widening | 0.022977 |
 
-At seismic scale the fit rests on 20 upscaled samples, where the log-scale fit of the previous lesson had 644. The low-pass smooths the logs, so the log-against-log error s is small. The pooled left-out RMS is much larger, and the widening is close to the RMS itself: almost all of the band a map should carry comes from the inversion, and a band quoted from s alone would hide it.
+At seismic scale the fit rests on 20 upscaled samples, where the log-scale fit of the previous lesson had 644. The log-against-log error s is 0.007175, the pooled left-out RMS 0.024072 and the widening 0.022977. A band quoted from s alone would leave out the inversion's error, which the left-out residuals carry and a log-against-log fit cannot see.
 
 | well left out | samples | RMS porosity error | bias | correlation | share inside the widened 80 percent band |
 | --- | --- | --- | --- | --- | --- |
@@ -38,9 +38,9 @@ At seismic scale the fit rests on 20 upscaled samples, where the log-scale fit o
 
 ## Reading the wells
 
-Every bias carries the same sign, so the left-out predictions sit off the log in one direction at all four wells; a study reports that offset beside the RMS. The correlations rest on four to six samples each and are negative at three wells: at this scale the prediction carries a level inside the sand and little of its shape. Ekene-4 returns NaN, the result the code gives when either series has no spread over the well's samples, and a NaN is reported as a gap.
+Every bias carries the same sign, so the left-out predictions sit off the log in one direction at all four wells; a study reports that offset beside the RMS. The correlations rest on four to six samples each and are negative at three wells. Ekene-4 returns NaN, the result the code gives when either series has no spread over the well's samples, and a NaN is reported as a gap, beside the well's RMS of 0.012741 and its bias of -0.009593, which the code still returns.
 
-The coverage column is the test of the widened band. Ekene-3 and Ekene-4 fall wholly inside it, Ekene-2 at 0.833333 and Ekene-1 at 0.600000. On five samples a share moves in large steps, so four wells give a rough check of an 80 percent band and no more. A report states the samples behind every share.
+The coverage column is the test of the widened band. Ekene-3 and Ekene-4 fall wholly inside it, Ekene-2 at 0.833333 and Ekene-1 at 0.600000. On five samples a share moves one sample in five at a time, so a report states the samples behind every share.
 
 {{panel:qi-prospect-explorer}}
 

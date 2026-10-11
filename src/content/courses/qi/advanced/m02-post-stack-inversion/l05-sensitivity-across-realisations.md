@@ -10,7 +10,7 @@ Per sample, `quantilesAcross` takes the quantiles across the realisations by lin
 
 ## The labels
 
-The course uses the Suite's percentile convention for parameters. Q10 is the 10th percentile, the value 10 percent of realisations fall below, so it is the LOW figure. Q50 is the median. Q90 is the 90th percentile, the HIGH figure. P-labels are kept for outcomes such as volumes, where P90 is the low figure. The uncertainty course teaches quantiles, the two labelling rules and Monte Carlo as a subject.
+The course uses its own percentile convention for parameters. Q10 is the 10th percentile, the value 10 percent of realisations fall below, so it is the LOW figure. Q50 is the median. Q90 is the 90th percentile, the HIGH figure. P-labels are kept for outcomes such as volumes, where P90 is the low figure. The uncertainty course teaches quantiles, the two labelling rules and Monte Carlo as a subject.
 
 ## Ekene-1, 20 realisations
 
@@ -27,7 +27,7 @@ Mean relative spread over the 27 logged samples: 0.645787.
 
 Each row runs low to high, Q10 to Q90, with the median between. Round the top of the sand the spread sits near one half of the median, and at 1304 ms it rises to 0.727077. At that sample the Q90 lies much farther above the median than the Q10 lies below it.
 
-The medians sit above the log after the high cut at 1296 and 1304 ms, as the single blind inversion did. Noise widens the answer round that overshoot; it does not remove it.
+The medians sit above the log after the high cut at 1296 and 1304 ms, as the single blind inversion did.
 
 ## What the spread does not say
 

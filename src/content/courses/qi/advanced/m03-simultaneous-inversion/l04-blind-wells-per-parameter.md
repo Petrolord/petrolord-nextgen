@@ -4,7 +4,7 @@ The last lesson scored one well. The same blind check at every pack well shows w
 
 ## The check
 
-Each well is inverted with the three LFMs built from the other wells, from the near, mid and far stacks, with weights of 0.050000 for each parameter and 60 iterations. Each parameter is then scored against the well's own log after the high cut, by the rule of the post-stack blind-well lesson: the correlation, and the RMS of the relative error in percent. The LFMs come from lfm.js, which awaits its independent oracle in the engines repository; the course teaches these figures and grades none of them through it until that lands.
+Each well is inverted with the three LFMs built from the other wells, from the near, mid and far stacks, with weights of 0.050000 for each parameter and 60 iterations. Each parameter is then scored against the well's own log after the high cut, by the rule of the post-stack blind-well lesson: the correlation, and the RMS of the relative error in percent. The LFMs come from lfm.js, which carries a golden and an independent oracle in the engines repository.
 
 | well | AI correlation | AI error percent | Vp/Vs correlation | Vp/Vs error percent | density correlation | density error percent |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -15,7 +15,7 @@ Each well is inverted with the three LFMs built from the other wells, from the n
 
 ## AI holds
 
-The AI correlations run from 0.780557 at Ekene-4 to 0.863789 at Ekene-1, close to the post-stack model-based figures at the same wells. The AI error sits beside the LFM-alone error of the post-stack lesson: below it at Ekene-2 and Ekene-4, above it at Ekene-1 and Ekene-3. The AI errors are also below the post-stack model-based blind errors at every well.
+The AI correlations run from 0.780557 at Ekene-4 to 0.863789 at Ekene-1, beside the post-stack model-based figures of 0.759365 to 0.889320 at the same wells. The AI error sits beside the LFM-alone error of the post-stack lesson: below it at Ekene-2 and Ekene-4, above it at Ekene-1 and Ekene-3. The AI errors are also below the post-stack model-based blind errors at every well.
 
 ## Vp/Vs is mixed
 

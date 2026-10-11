@@ -35,11 +35,11 @@ The ln(AI) log at Ekene-1 in time, held at its first and last values beyond the 
 | 1304.000000 | 15.512999 | -267.168500 | -268.438965 |
 | 1312.000000 | 15.380870 | -223.202416 | -352.980957 |
 
-The rise in ln(AI) between 1288 and 1296 ms is the top of the sand, harder than the shale above it, and the trace peaks at 1288 ms as SEG normal polarity predicts. The synthetic matches the trace closely at 1288 and 1304 ms. At 1296 and 1312 ms the trace is larger in size than the synthetic: there the operator, the stated Ricker and the one scale do not explain the seismic.
+The rise in ln(AI) between 1288 and 1296 ms is the top of the sand, harder than the shale above it, and the trace is positive there, a peak as SEG normal polarity predicts. At 1288 and 1304 ms the synthetic and the trace print within a few units of each other. At 1296 and 1312 ms the trace is larger in size than the synthetic, 258.968262 against 137.874591 and -352.980957 against -223.202416.
 
 ## What the correlation says
 
-Over the logged samples the synthetic and the trace correlate at 0.966050 (27 samples). It is the evidence that d = C D m with this stated wavelet describes the full stack at Ekene-1. A correlation is blind to a misfit in amplitude, and 27 samples is a short base. Beyond the logged samples the synthetic says nothing about the earth.
+Over the logged samples the synthetic and the trace correlate at 0.966050 (27 samples). It measures how far d = C D m with this stated wavelet follows the shape of the full stack at Ekene-1. A correlation is blind to a misfit in amplitude, and 27 samples is a short base. Beyond the logged samples the synthetic says nothing about the earth.
 
 {{panel:qi-inversion-explorer}}
 

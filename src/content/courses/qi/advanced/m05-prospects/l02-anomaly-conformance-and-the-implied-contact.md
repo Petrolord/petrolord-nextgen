@@ -1,6 +1,6 @@
 # Anomaly conformance and the implied contact
 
-A hydrocarbon anomaly ends downdip at a contact, so its downdip edge should follow one depth contour. `anomalyConformance` in prospectAssessment.js measures how closely an anomaly's edge follows the structure and what contact that edge implies. This engine awaits its independent oracle: the course teaches it, and grades it only once that check lands.
+A hydrocarbon anomaly ends downdip at a contact, so its downdip edge should follow one depth contour. `anomalyConformance` in prospectAssessment.js measures how closely an anomaly's edge follows the structure and what contact that edge implies. It carries a golden and an independent oracle in the engines repository.
 
 ## What the engine reads
 
@@ -28,7 +28,7 @@ A has the 11 nodes of the closure at the spill and lies wholly inside it. Its im
 
 ## Reading B
 
-B's edge scatter, 6.992237 ft, is larger than the closure's whole relief, so conformance clips to 0.000000, under the 0.3 the assessment counts as cutting across. Only 0.152778 of its nodes lie inside the closure. Its implied contact, -5068.442175 ft, comes from edge points that follow no contour. The engine still returns it, and the conformance says it carries no weight.
+B's edge scatter, 6.992237 ft, is larger than the closure's whole relief, so conformance clips to 0.000000, under the 0.3 the assessment counts as cutting across. Only 0.152778 of its nodes lie inside the closure. Its implied contact, -5068.442175 ft, comes from edge points that follow no contour. The engine still returns it, beside a conformance of 0.000000.
 
 ## What conformance depends on
 

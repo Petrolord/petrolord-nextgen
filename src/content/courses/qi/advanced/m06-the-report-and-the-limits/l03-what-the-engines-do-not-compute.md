@@ -22,11 +22,11 @@ An inversion that estimated its own wavelet would hide a choice inside the resul
 
 ## The references behind this tier
 
-The methods are named with their authors and years, and the course teaches each by concept and equation in its own words. Bayesian facies follow Avseth and others (2005), chapter 4; the quantiles across realisations follow Hyndman and Fan, type 7; the simultaneous inversion uses the linearisation of Fatti and others (1994). The Rock Physics course teaches Gassmann, Shuey and the classes in full.
+The methods are named with their authors and years, and the course teaches each by concept and equation in its own words. Bayesian facies follow Avseth and others (2005), chapter 4; the quantiles across realisations follow Hyndman and Fan (1996), type 7; the simultaneous inversion uses the linearisation of Fatti and others (1994). The Rock Physics course teaches Gassmann, Shuey and the classes in full.
 
 ## The gate behind each engine
 
-Every engine this tier calls carries a golden and an independent oracle in the engines repository: lfm.js, the low-frequency model between wells and the blind-well score; prospectAssessment.js, anomaly conformance, the evidence count and the assessment; and the QI Studio maths that moved into the engines, the wavelet scale, the left-out porosity calibration, the per-angle wavelet extraction and the climb to a crest. A report names the engine behind each figure.
+Every engine this tier calls carries a golden and an independent oracle in the engines repository: lfm.js, the low-frequency model between wells and the blind-well score; prospectAssessment.js, anomaly conformance, the evidence count and the assessment; and the QI Studio maths the tier runs: the wavelet scale, the left-out porosity calibration, the per-angle wavelet extraction and the climb to a crest. A report names the engine behind each figure.
 
 {{panel:qi-prospect-explorer}}
 
