@@ -14,7 +14,7 @@ QI Studio calls a stripe a footprint when three conditions hold together: a shar
 
 ## The Ekene slice, and a designed stripe
 
-The slice is the RMS amplitude of the full stack, 1250 to 1350 ms, 128 inlines by 128 crosslines, with periods searched from 2 to 16 lines. To show what a footprint looks like, the course adds a designed teaching case: the same slice with every sixth crossline multiplied by 1.2. It is not in the Ekene data.
+The slice is the RMS amplitude of the full stack, 1250 to 1350 ms, 128 inlines by 128 crosslines, with periods searched from 2 to 16 lines. The course adds a designed teaching case, labelled as such: the same slice with every sixth crossline multiplied by 1.2.
 
 | slice and axis | period, lines | share | prominence | cycles | a footprint by the rule |
 | --- | --- | --- | --- | --- | --- |
@@ -23,11 +23,11 @@ The slice is the RMS amplitude of the full stack, 1250 to 1350 ms, 128 inlines b
 | designed stripe, along the crosslines | 5.953488 | 0.490123 | 467.977933 | 21.500000 | yes |
 | designed stripe, along the inlines | 13.473684 | 0.014803 | 26.664709 | 9.500000 | no |
 
-The Ekene slice carries no footprint. Its prominence is in the tens, above the rule's 10, but its share is a few hundredths, far below 0.3: that is the random variation of a slice. The designed stripe is found at its period, 5.953488 lines against the six it was built with, with about half the variance, a share of 0.490123, and it passes all three conditions. The inline axis, which the stripe was not added to, keeps its period of 13.473684 lines and its share of a few hundredths.
+The Ekene slice carries no footprint. Its prominence is in the tens, above the rule's 10, but its share is a few hundredths, far below 0.3: that is the random variation of a slice. The designed stripe is found at its period, 5.953488 lines against the six it was built with, with about half the variance, a share of 0.490123, and it passes all three conditions. The inline axis, which the stripe was not added to, keeps its period of 13.473684 lines.
 
 ## Where to measure it
 
-Three choices set the answer, and a verdict names each: the slice (which time window, and RMS amplitude), the axis, and the band of periods searched. A band that stops short of a stripe's period cannot find it, and a slice of signed amplitude can hide one. The Ekene slice sits around the top of the sand, which is at TWT 1288.796378 ms at Ekene-1.
+Three choices set the answer, and a verdict names each: the slice (its time window, on RMS amplitude), the axis, and the band of periods searched. A band that stops short of a stripe's period cannot find it. The Ekene slice sits around the top of the sand, which is at TWT 1288.796378 ms at Ekene-1.
 
 The engine refuses a slice too small to search:
 

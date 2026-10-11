@@ -1,6 +1,6 @@
 # The issue register
 
-A matrix of grades says where the data falls short. An issue register turns each shortfall into a line someone owns. QI Studio suggests one issue per well and item kind that is not good, with a severity and a remedy, and the user keeps, edits or dismisses each one.
+An issue register turns each shortfall in the matrix into a line someone owns. QI Studio suggests one issue per well and item kind that is not good, with a severity and a remedy, and the user keeps, edits or dismisses each one.
 
 ## The rule
 
@@ -26,21 +26,21 @@ The thirty medium issues are the same three curves at every logged well. Nothing
 
 The user decides each line.
 
-Keep a line when the shortfall stands and someone has to act. The Ekene-9 density line is a keep: until a density log arrives, Ekene-9 stays out of every elastic result, and the register is where that decision is written down.
+Keep a line when the shortfall stands and someone has to act. A study that keeps the Ekene-9 density line writes down that Ekene-9 stays out of every elastic result until a density log arrives.
 
-Edit a line when the suggestion is right in kind and wrong in detail. The thirty curve lines are a case for editing: one action, bringing the petrophysical curves in, closes all of them, and a single line saying so is easier to own than thirty.
+Edit a line when the suggestion is right in kind and wrong in detail. A study may edit the thirty curve lines into one, since bringing the petrophysical curves in would close all of them.
 
 Dismiss a line when the shortfall does not touch the study. A dismissal is a decision too, so the reason belongs beside it.
 
 ## Closing the medium issues
 
-In practice porosity, shale volume and saturation come from Petrophysics Studio before a QI study starts, and the pack carries the kit's PHIT, VSH and SW for Ekene-1 to Ekene-4 for that reason. For those four wells the curve issues are closed by the pack itself; for Ekene-5 to Ekene-10 they stay open until the curves are brought in, and any figure from those wells that needs them waits.
+In practice porosity, shale volume and saturation come from Petrophysics Studio before a QI study starts, and the pack carries the kit's PHIT, VSH and SW for Ekene-1 to Ekene-4 for that reason. For those four wells the pack supplies the curves; for Ekene-5 to Ekene-10 the curve issues stay open until the curves are brought in.
 
 ## What the register gives the verdict
 
 The verdict at the end of this tier answers the two questions with numbers, and it states what each number rests on. The register supplies the data side of that statement: which wells are in, which are out, and which inputs are an interpretation brought in from elsewhere.
 
-No severity, grade or register line is graded in the capstone. The register's value is that a later reader can see what the study knew it lacked.
+No severity, grade or register line is graded in the capstone.
 
 {{panel:qi-feasibility-explorer}}
 

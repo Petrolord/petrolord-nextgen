@@ -18,7 +18,7 @@ The -6 dB band holds the frequencies within 6 dB of the peak; the -20 dB band is
 
 The peak falls with depth, from the shallow window to the deep one, as the earth absorbs the higher frequencies. The centroid falls too. The -6 dB edges move less: the low edge barely shifts and the high edge comes down. The window that holds the Ekene Sand is the shallow one, and that is the window the verdict quotes.
 
-Notice that the peak alone would mislead. In the full window the peak sits at 21.777034 Hz while the centroid is 26.095344 Hz: a spectrum with a broad top can put its single highest point well away from where its power is centred.
+The peak and the centroid answer different questions. In the full window the peak sits at 21.777034 Hz while the centroid is 26.095344 Hz, so a study names which of the two it quotes.
 
 ## The taper is a stated choice
 
@@ -31,7 +31,7 @@ The same traces and window at four taper fractions:
 | 0.250000 | 31.323187 | 26.618496 | 14.351787 | 35.006494 |
 | 0.500000 | 22.305063 | 26.175193 | 14.308629 | 34.975851 |
 
-The edges and the centroid move in the decimals. The peak jumps at the heaviest taper, from 31.323187 Hz to 22.305063 Hz. The top of the mean spectrum is broad, its tabled amplitudes within a few dB of the peak from 15.136719 to 29.785156 Hz, so a small change of shape can move the single highest point a long way. That is why the verdict quotes the band and the centroid and names the taper beside them.
+The edges and the centroid move in the decimals. The peak jumps at the heaviest taper, from 31.323187 Hz to 22.305063 Hz. The top of the mean spectrum is broad, its tabled amplitudes within a few dB of the peak from 15.136719 to 29.785156 Hz, so a small change of shape can move the single highest point a long way. That is why the verdict names the taper beside its band and its peak.
 
 ## One trace is not a spectrum of the volume
 

@@ -40,13 +40,13 @@ Both curves start positive, because the sand is harder than the shale above it, 
 | mid mean, 15 to 25 degrees | 0.118516 | 0.162661 |
 | far mean, 25 to 35 degrees | 0.073416 | 0.144237 |
 
-A sits close to the exact coefficient at normal incidence in both rows. The in situ gradient is the more negative, so the oil makes the top dim faster with angle.
+Shuey's A and the exact coefficient at normal incidence come from different engine calls and are quoted as separate figures. The in situ gradient is the more negative of the two.
 
 ## What the model says
 
 The oil dims the top of the Ekene Sand at every angle: the in situ coefficient sits below the brine one throughout, by 0.034809 at normal incidence and by 0.066214 at 30 degrees. The gap widens with angle, so the far stack separates oil from brine by a wider margin than the near stack.
 
-Both rows are class I. Both A values sit well above 0.02, so the class alone does not separate oil from brine at this interface. A study that read only the label would miss the figures underneath it, and a class is never graded.
+Both rows are class I. Both A values sit well above 0.02, so the class alone does not separate oil from brine at this interface. A class is never graded.
 
 ## What the model rests on
 
@@ -60,4 +60,4 @@ That refusal comes from `zoeppritzRpp` given an upper layer with Vs above Vp.
 
 ## Exercise
 
-In the feasibility explorer, set View to "Modelled AVO" and Data to "Ekene pack: Ekene-1". Check the angle table and the A, B, C and stack rows against this lesson, and find the angle on the chart where the two curves are furthest apart. Change "Cap rock thickness above the top, ft (stated)" from 65 and record how A and the class move. Restore 65, then switch Data to Ekene-4 and say whether its top is also class I with oil and with brine.
+In the feasibility explorer, set View to "Modelled AVO" and Data to "Ekene pack: Ekene-1". Check the angle table and the A, B, C and stack rows against this lesson, and find the angle on the chart where the two curves are furthest apart. Change "Cap rock thickness above the top, ft (stated)" from 65 and record how A and the class move. Restore 65, then switch Data to Ekene-3 and say whether its top is also class I with oil and with brine.

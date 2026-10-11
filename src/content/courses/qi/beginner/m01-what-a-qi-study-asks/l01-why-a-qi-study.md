@@ -1,12 +1,12 @@
 # Why a QI study
 
-A seismic volume is amplitude in time. A well is rock, fluid and depth at one point. A quantitative interpretation, QI for short, is the work that joins the two and asks how much of the seismic amplitude can be read as rock and fluid away from the wells. Before anyone spends months on that, a study asks two questions: is the data good enough, and can the seismic see the fluid? The Associate tier answers both as a feasibility study, with stated engines on stated data, and writes the answer as a verdict.
+A seismic volume is amplitude in time. A well is rock, fluid and depth at one point. A quantitative interpretation, QI for short, joins the two and asks how much of the seismic amplitude can be read as rock and fluid away from the wells. First a study asks two questions: is the data good enough, and can the seismic see the fluid? The Associate tier answers both as a feasibility study, with stated engines on stated data, and writes the answer as a verdict.
 
 {{video:qi-a1}}
 
 ## What the engines compute
 
-Every figure in this course is a return value of a Petrolord engine, the same files QI Studio and Rock Physics Studio run. Each function takes plain numbers and arrays and returns numbers. No engine reads a file, a clock or a random number of its own, so the same inputs always give the same answer, and a reader can repeat any figure the course prints.
+Every figure in this course is a return value of a Petrolord engine, the same files QI Studio and Rock Physics Studio run. Each function takes plain numbers and arrays and returns numbers. No engine reads a file, a clock or a random number of its own, so a reader can repeat any figure the course prints.
 
 | engine file | what the Associate tier asks of it |
 | --- | --- |
@@ -17,7 +17,7 @@ Every figure in this course is a return value of a Petrolord engine, the same fi
 | gassmann.js | substitution of one pore fluid for another |
 | avoTrend.js, avo.js | the wet trend, the distance from it, modelled reflections at the zone top |
 
-When a function cannot answer, it refuses with a message that says why. The last lesson of this module reads those refusals.
+When a function cannot answer, it refuses with a message that says why; the last lesson of this module reads those refusals.
 
 ## What the engines decline to do
 
@@ -27,11 +27,11 @@ The engines hold no Ekene figure. Every temperature, pressure, salinity, oil gra
 
 The engines do not pick the samples. Which samples are net sand, which are the water leg and which are the cap rock is a selection made before a function is called.
 
-The engines do not decide whether a study should go ahead. They return spectra, trends, moduli and reflection coefficients. The verdict is written by a person from those numbers, and it carries every choice that moved them.
+The engines do not decide whether a study should go ahead. They return spectra, trends, moduli and reflection coefficients, and a person writes the verdict from those numbers with every choice that moved them.
 
 ## The methods behind the engines
 
-Each method is named by its authors and year, as the engines' own headers name it, and the course explains each in its own words.
+Each method is named by its authors and year, and the course explains each in its own words.
 
 | method | reference |
 | --- | --- |
@@ -50,7 +50,7 @@ The Rock Physics course teaches the fluid, substitution, shear, intercept and cl
 
 ## Why feasibility comes first
 
-A seismic attribute can be computed on any volume. Whether it means anything depends on the band of the data, on how much of each trace is signal, on whether the acquisition left stripes in the amplitudes, and on whether the fluid in the rock changes the elastic properties enough to change a reflection. Each of those has a number, and each number rests on stated choices. A feasibility study collects them before the expensive work begins, so a later team knows what the seismic can and cannot be asked.
+A seismic attribute can be computed on any volume. Whether it means anything depends on the band of the data, on how much of each trace is signal, on whether the acquisition left stripes in the amplitudes, and on whether the fluid changes the elastic properties enough to change a reflection. Each of those has a number resting on stated choices, and a feasibility study collects them first.
 
 {{panel:qi-feasibility-explorer}}
 

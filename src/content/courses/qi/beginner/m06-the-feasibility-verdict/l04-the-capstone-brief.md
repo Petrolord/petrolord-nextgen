@@ -1,10 +1,10 @@
 # The capstone brief
 
-The Associate capstone runs the feasibility steps of this tier on a case of its own. It is a held-out synthetic case: a patch of traces and one well with its own layers, its own fluids and its own conditions, supplied as a case file. The case is never the Ekene field. Every graded figure is a return value of an engine, read from the feasibility explorer after the case file has been pasted into it.
+The Associate capstone runs the feasibility steps of this tier on a case of its own. It is a held-out synthetic case: a patch of traces and one well with its own layers, its own fluids and its own conditions, supplied as a case file. The case is never the Ekene field. Every graded figure is a return value of an engine, read from the feasibility explorer.
 
 ## How the case reaches the panel
 
-In the feasibility explorer, set Data to "Paste a case file" and paste the case file into the box that appears. The panel then runs the same engines this tier has used on the Ekene pack, on the case's traces and the case's well. Its stated controls take the values the case states: the net sand cut-off, the cap rock thickness, the conditions, the taper, the shear fit form and level, the block length and the sample depth. Check each control against the case file before reading a figure. A control left at a figure the case does not state produces a number that looks reasonable and answers a different question.
+In the feasibility explorer, set Data to "Paste a case file" and paste the case file into the box that appears. The panel then runs the same engines this tier has used on the Ekene pack, on the case's traces and the case's well. Its stated controls take the values the case states: the net sand cut-off, the cap rock thickness, the conditions, the taper, the shear fit form and level, the block length and the sample depth. Check each control against the case file before reading a figure: a control left at a figure the case does not state answers a different question.
 
 ## The six graded figures
 
@@ -21,11 +21,11 @@ AI is acoustic impedance, Vp times density. Each figure is the one the panel pri
 
 ## What each figure asks of you
 
-The spectrum figures are read off the mean spectrum of all the case traces, at the window and taper the case states; the low edge is the lower of the two -6 dB edges and the centroid is the power-weighted mean frequency. The shear slope is c1 of the fit on the case's water-leg net sand, in m/s per km/s, in the form the case states. The two substituted figures belong to one stated sample, taken from its in situ fluid to brine; read the tiles labelled after substitution to brine, which sit beside the in situ ones. The distance is measured from the case's own fitted wet trend, the fitted line, and its sign matters: negative is the hydrocarbon side.
+The spectrum figures are read off the mean spectrum of all the case traces; the low edge is the lower of the two -6 dB edges and the centroid is the power-weighted mean frequency. The shear slope is c1 of the fit on the case's water-leg net sand, in m/s per km/s, in the form the case states. The two substituted figures belong to one stated sample; read the tiles labelled after substitution to brine. The distance is measured from the case's own fitted wet trend, the fitted line, and its sign matters: negative is the hydrocarbon side.
 
 ## Every choice is stated
 
-Every input those six figures depend on is stated in the case file. That is why the capstone can grade them: a figure that depends on a choice the case does not state is never graded. Before you read a tile, state to yourself every choice the case states and confirm the panel shows it. The tolerance of each graded field is set by the course in one place, so copy each figure as the panel prints it.
+Every input those six figures depend on is stated in the case file; a figure that depends on a choice the case does not state is never graded. Before you read a tile, confirm the panel shows every choice the case states. The tolerance of each graded field is set by the course in one place, so copy each figure as the panel prints it.
 
 ## What is never graded
 

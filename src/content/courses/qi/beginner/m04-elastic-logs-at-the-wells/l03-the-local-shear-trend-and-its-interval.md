@@ -36,7 +36,7 @@ The level here is 0.900000. At 3700 m/s the Vp lies above the highest calibrated
 
 ## Three stated choices
 
-The level. At Vp 3100 m/s and the 0.8 level, the interval is 1627.805269 to 1734.165996 m/s, narrower than at 0.900000. A narrower band is a weaker promise.
+The level. At Vp 3100 m/s and the 0.8 level, the interval is 1627.805269 to 1734.165996 m/s, narrower than at 0.900000.
 
 The form. Quadratic on the same samples gives c0 -4335.156360, c1 3017.560894, c2 -346.356417 and s 39.004155 m/s, and predicts 1690.797241 m/s at 3100 m/s. The extra coefficient buys a smaller s.
 

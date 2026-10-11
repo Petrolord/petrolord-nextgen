@@ -18,7 +18,7 @@ Velocities are in metres per second and density in kilograms per cubic metre: a 
 | the same in units of 10^6 kg/(m2 s) | 6.639019 |
 | the same as (m/s)(g/cc), that is AI / 1000 | 6639.018603 |
 
-All three are one number. A crossplot built from two sources in different units puts the same rock in two places. The AI here is computed from the mean Vp and the mean density of the leg, the AI of the means.
+All three are one number. The AI here is computed from the mean Vp and the mean density of the leg, the AI of the means.
 
 ## Time
 
@@ -26,7 +26,7 @@ Seismic time is two-way time (TWT) in milliseconds: down to the reflector and ba
 
 ## Polarity
 
-The kit's seismic is SEG normal polarity: an increase in acoustic impedance downwards is a peak, a positive number. At Ekene-1 the cap rock, the Ogbia Shale above the sand, has a mean AI of 4697628.723902 kg/(m2 s) on its 130 samples, and the oil leg 6639018.603084 kg/(m2 s) on its 65. The sand is harder than the shale above it, so its top is a peak on the Ekene seismic. On data of the opposite polarity the same top would be a trough, so a study states its convention.
+The kit's seismic is SEG normal polarity: an increase in acoustic impedance downwards is a peak, a positive number. At Ekene-1 the cap rock, the Ogbia Shale above the sand, has a mean AI of 4697628.723902 kg/(m2 s) on its 130 samples, and the oil leg 6639018.603084 kg/(m2 s) on its 65. The sand is harder than the shale above it, so its top is a peak on the Ekene seismic.
 
 {{panel:qi-feasibility-explorer}}
 

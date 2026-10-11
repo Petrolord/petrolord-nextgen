@@ -32,7 +32,7 @@ The peak is refined between frequency steps by a parabola through the three high
 
 ## A check against a known answer
 
-An engine figure is trusted when the engine reproduces a known answer. A Ricker wavelet of 30 Hz has an amplitude spectrum known in closed form: peak 30.000000 Hz, -6 dB edges 14.471033 and 49.062252 Hz, centroid 31.915382 Hz. The engine on that wavelet, sampled every 4.000000 ms with 31 samples and no taper, reads:
+A Ricker wavelet of 30 Hz has an amplitude spectrum known in closed form: peak 30.000000 Hz, -6 dB edges 14.471033 and 49.062252 Hz, centroid 31.915382 Hz. The engine on that wavelet, sampled every 4.000000 ms with 31 samples and no taper, reads:
 
 | quantity | closed form | engine |
 | --- | --- | --- |
@@ -45,7 +45,7 @@ The small differences come from the sampling and the finite length of the wavele
 
 ## What a study states with it
 
-A spectrum is a measurement with inputs: which traces, which window and which taper. The Ekene figures above rest on the 120 spread traces, the window 800 to 1600 ms and taper 0.100000. Change any one and the figures move, and the verdict names all three.
+A spectrum is a measurement with inputs: the Ekene figures above rest on the 120 spread traces, the window 800 to 1600 ms and taper 0.100000. Change any one and the figures move, so the verdict names all three.
 
 The engine also refuses inputs it cannot measure. Too short a trace gives:
 

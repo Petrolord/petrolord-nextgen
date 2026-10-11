@@ -1,6 +1,6 @@
 # The elastic set
 
-Vp, Vs and density are what the logs measure. QI reads them through combinations that separate rock from fluid and match what the seismic responds to. `elasticPoint` turns one triple of Vp, Vs and density in SI into the whole elastic set, and the course runs it on the mean of each stated layer at Ekene-1.
+Vp, Vs and density are what the logs measure. `elasticPoint` turns one triple of Vp, Vs and density in SI into the whole elastic set, and the course runs it on the mean of each stated layer at Ekene-1.
 
 ## The set
 
@@ -29,7 +29,7 @@ The SI column runs 1610959.186341, 3795337.170439 and 4026599.058770 kg/(m2 s) d
 
 The sand is harder than the shale above it. Both legs carry a higher AI than the cap rock, so the top of the Ekene Sand is an increase in impedance downwards, which the kit's normal polarity shows as a peak. The shale's Vp/Vs of 2.916045 and Poisson's ratio of 0.433363 stand well above either leg: a soft, shear-weak rock over a stiffer sand.
 
-The oil leg is softer than the water leg in AI and in Vp/Vs, and its lambda-rho is lower. The two legs' mu-rho sit closer together than their lambda-rho, which is the direction a pore fluid would push them: a fluid substitution leaves the shear modulus unchanged.
+The oil leg is softer than the water leg in AI and in Vp/Vs, and its lambda-rho and mu-rho are both lower.
 
 Part of the gap is still rock. The legs are different net sand: the oil leg's mean porosity is 0.203626 with Vsh 0.178134, and the water leg's 0.197677 with Vsh 0.117854. A comparison of the two legs therefore mixes fluid and rock, and the next module separates them by substituting brine into the same oil-leg rock.
 
@@ -41,4 +41,4 @@ These figures are `elasticPoint` on the layer's mean Vp, Vs and density. The mea
 
 ## Exercise
 
-In the feasibility explorer, set View to "The elastic set" and Data to "Ekene pack: Ekene-1", and check the three rows above. Change "Cap rock thickness above the top, ft (stated)" from 65 to a thinner and a thicker figure and record which columns of the cap-rock row move most. Restore 65. Then switch Data to Ekene-4 and say whether its oil leg is softer than its water leg in AI, in Vp/Vs and in lambda-rho, and whether mu-rho tells the same story.
+In the feasibility explorer, set View to "The elastic set" and Data to "Ekene pack: Ekene-1", and check the three rows above. Change "Cap rock thickness above the top, ft (stated)" from 65 to a thinner and a thicker figure and record which columns of the cap-rock row move most. Restore 65. Then switch Data to Ekene-3 and say whether its oil leg is softer than its water leg in AI, in Vp/Vs and in lambda-rho, and whether mu-rho tells the same story.

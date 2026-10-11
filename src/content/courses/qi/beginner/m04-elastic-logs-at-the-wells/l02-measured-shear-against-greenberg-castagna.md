@@ -26,7 +26,7 @@ The comparison reads the 103 water-leg net sand samples of Ekene-1, the samples 
 | 5163.000000 | 3099.987000 | 1681.702000 | 0.073600 | 1627.984203 | 1.032997 |
 | 5171.500000 | 3063.255000 | 1666.658000 | 0.062800 | 1599.846507 | 1.041761 |
 
-Over all 103 samples the mean of measured over predicted is 1.036576. The measured shear sits above the regression at every row shown, so in this sand Greenberg-Castagna gives too little shear for the Vp it is given. A Vp/Vs built on the regression would read higher than the logs.
+Over all 103 samples the mean of measured over predicted is 1.036576. The measured shear sits above the regression at every row shown, so in this sand Greenberg-Castagna gives too little shear for the Vp it is given.
 
 ## The oil leg is a warning
 
@@ -34,9 +34,11 @@ Over the 65 oil-leg samples the same mean is 1.151143, much further from one. Th
 
 ## Why a study checks this first
 
-A published regression describes somebody else's rock, and the Ekene Sand need not sit on it. Where a measured shear log exists, it calibrates the field's own relation, and the size of the misfit tells the study how much a regression-only well would be in error. Where no shear log exists, the study states that its shear is a regression and carries that as a limit in the verdict.
+A published regression describes somebody else's rock, and the Ekene Sand need not sit on it. Where a measured shear log exists, it calibrates the field's own relation. Where no shear log exists, the study states that its shear is a regression and carries that as a limit in the verdict.
 
-For the two questions, the misfit feeds the second. Vp/Vs and the AVO gradient both depend on shear, so every later figure in this tier inherits the shear source a study chose, and the verdict names it.
+The comparison itself rests on stated inputs: the selection (net sand at or below 0.350000 Vsh, below the contact at 5118.110236 ft, 103 samples at Ekene-1), the published coefficients, and the mix on Vsh. A study that quotes the ratio quotes them with it.
+
+For the two questions, the misfit feeds the second. Vp/Vs and the AVO gradient both depend on shear, so the later figures that use them inherit the shear source a study chose, and the verdict names it.
 
 {{panel:qi-feasibility-explorer}}
 

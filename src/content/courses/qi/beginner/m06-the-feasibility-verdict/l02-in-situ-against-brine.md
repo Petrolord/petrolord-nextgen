@@ -23,13 +23,13 @@ AI here is acoustic impedance, Vp times density.
 
 The rows agree. Taking the oil leg to brine raises its mean AI by 7.456776 percent and its mean Vp/Vs by 7.142745 percent. At the top of the sand, the oil leaves A lower and B more negative. The in situ top sits at -0.072091 from the fitted wet trend while the brine top sits at -0.004519, almost on it, so the oil moves the point 0.067572 further to the hydrocarbon side. And the modelled reflection is dimmer with oil at every angle, by 0.034809 at normal incidence and by 0.066214 at 30 degrees.
 
-A fluid effect seen in only one measure would be fragile. Here the logs, the crossplot and the modelled reflection all say the same thing: oil makes the top of the Ekene Sand softer and dimmer, and dims it faster with angle.
+Here the logs, the crossplot and the modelled reflection all say the same thing: oil makes the top of the Ekene Sand softer and dimmer, and dims it faster with angle.
 
 ## Where the pair does not separate
 
 The class does not. Both tops are class I, because both intercepts sit well above the 0.02 band. A verdict that rested on the class would find no fluid effect where every number shows one.
 
-The published line still orders the pair, oil further to the negative side, but both tops sit far from it, so measured from that line the brine top would look like an anomaly too. The fitted wet trend, built from the well's own brine-substituted boundaries, puts the brine top on the background and the oil top off it.
+The published line still orders the pair, oil further to the negative side, but both tops sit far from it. The fitted wet trend, built from the well's own brine-substituted boundaries, puts the brine top on the background and the oil top off it.
 
 ## What the pairing guards against
 

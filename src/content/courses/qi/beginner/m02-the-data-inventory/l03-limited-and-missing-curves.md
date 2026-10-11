@@ -12,7 +12,7 @@ On Ekene, one item is missing in one well.
 | --- | --- | --- | --- | --- |
 | Ekene-9 | deviated | 5 | CALI, GR, DT, DTS, RT | missing |
 
-Ekene-9 has a sonic and a shear sonic, 24 checkshot levels and a top of the Ekene Sand at 5505.511811 ft, and the matrix grades all of those good. Its density item reads:
+Ekene-9 has a sonic, a shear sonic and 24 checkshot levels, and the matrix grades all of those good. Its density item reads:
 
 > No density over the zone.
 
@@ -22,7 +22,7 @@ The study has two honest choices: request the density log, or leave Ekene-9 out 
 
 Six items can be limited: shear, porosity, shale volume, saturation, checkshots with fewer than two levels, and a missing deviation survey.
 
-Shear is limited when absent because Vs can be estimated from Vp by a published regression, Greenberg and Castagna, which the Rock Physics course teaches and a later module of this tier compares against measured shear. Every logged Ekene well carries DTS, so the shear item is good everywhere.
+Shear is limited when absent because Vs can be estimated from Vp by a published regression, Greenberg and Castagna, which a later module compares against measured shear. Every logged Ekene well carries DTS, so the shear item is good everywhere.
 
 Porosity, shale volume and saturation feed the substitution and are limited when absent. On Ekene they are limited at all ten logged wells, because the LAS files carry none of the three curves. That single gap is why no cell in the Ekene matrix is good.
 

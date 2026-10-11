@@ -43,7 +43,7 @@ Counts over the 10 cells: good 0, limited 9, missing 1. Ekene-9's density item r
 
 ## Reading it
 
-No cell is good, and that is the honest answer for files with no petrophysical curves: every logged well is limited on porosity, shale volume and saturation. That is a gap a study closes by bringing those curves in from petrophysics before it starts, which is why the pack carries the kit's PHIT, VSH and SW for Ekene-1 to Ekene-4.
+No cell is good: every logged well is limited on porosity, shale volume and saturation. That is a gap a study closes by bringing those curves in from petrophysics before it starts, which is why the pack carries the kit's PHIT, VSH and SW for Ekene-1 to Ekene-4.
 
 Nine cells are limited and no worse. Sonic, density, shear, checkshots, datum and survey are good on all nine, so the elastic work can run and only the substitution inputs wait on petrophysics.
 

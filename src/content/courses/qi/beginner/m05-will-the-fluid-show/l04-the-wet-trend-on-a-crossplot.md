@@ -1,6 +1,6 @@
 # The wet trend on a crossplot
 
-A fluid effect means something only against a background. On a crossplot of AVO intercept A against gradient B, brine-filled rock boundaries fall along a line through the origin. The wet trend is that line fitted to the well's own boundaries after every oil-bearing sample has been taken to brine, so a hydrocarbon interface can be judged by how far it falls off it.
+A fluid effect means something only against a background. On a crossplot of AVO intercept A against gradient B, the wet trend is a line through the origin fitted to the well's own block boundaries after every oil-bearing sample has been taken to brine, so a hydrocarbon interface can be judged by how far it falls off it.
 
 {{video:qi-b6}}
 
@@ -13,7 +13,7 @@ The panel draws the wet trend the same way QI Studio and Rock Physics Studio do:
 - every boundary between two blocks gives an intercept A and a gradient B by Shuey (1985) (`interfacePoints`);
 - the fluid line through the origin is fitted by total least squares, the principal axis of the points about the origin (`fitFluidLine`).
 
-Total least squares treats neither A nor B as free of error, which suits two quantities computed from the same blocks. The Rock Physics course derives Shuey's intercept and gradient.
+Total least squares treats neither A nor B as free of error. The Rock Physics course derives Shuey's intercept and gradient.
 
 ## Ekene-1, block length 16 ft
 
@@ -30,7 +30,7 @@ The whole pack window holds 800 samples, 79 of them substituted. Blocks of 16 ft
 | 5043.500000 | 0.003238 | 0.002240 |
 | 5059.500000 | 0.000627 | -0.001871 |
 
-Most boundaries inside the shale give small A and B near the origin. The line is set by the stronger contrasts, and the rms distance says how tightly the boundaries cluster about it.
+The rms distance says how tightly the boundaries cluster about the line.
 
 ## The published line
 

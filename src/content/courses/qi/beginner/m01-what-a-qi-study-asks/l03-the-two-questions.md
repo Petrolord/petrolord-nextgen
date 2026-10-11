@@ -1,10 +1,10 @@
 # The two questions
 
-A feasibility study asks whether this seismic, on this data, can see this fluid. That splits into two questions with numbers under each. Is the data good enough: is the band wide enough at the target, is the signal clean enough, and did the acquisition leave a footprint? Can the seismic see the fluid: how far does the fluid move AI (acoustic impedance, Vp x density) and Vp/Vs, does the top of the reservoir sit off the wet trend, and what reflection should the seismic show? The engines answer each part with a figure. A person writes the verdict.
+A feasibility study asks whether this seismic, on this data, can see this fluid. That splits into two questions with numbers under each. Is the data good enough: is the band wide enough at the target, is the signal clean enough, and did the acquisition leave a footprint? Can the seismic see the fluid: how far does the fluid move AI (acoustic impedance, Vp x density) and Vp/Vs, does the top of the reservoir sit off the wet trend, and what reflection should the seismic show? The engines answer each part with a figure; a person writes the verdict.
 
 ## The Ekene answer, in outline
 
-The table below is where this tier ends on the Ekene pack. Each row is worked in its own module.
+This tier ends here on the Ekene pack, each row worked in its own module.
 
 | question | the Ekene figure |
 | --- | --- |
@@ -18,7 +18,7 @@ The table below is where this tier ends on the Ekene pack. Each row is worked in
 
 ## The data question
 
-The first three rows judge the seismic as a measurement. The -6 dB band says which frequencies carry useful energy at the target. Signal to noise, a power ratio read from how alike neighbouring traces are, says how much of each trace is repeatable. A footprint is a periodic stripe on a slice of RMS amplitude, called one only by a stated rule; if it is there, amplitude maps carry the acquisition pattern as well as the geology. Module three measures all three.
+The first three rows judge the seismic as a measurement. The -6 dB band says which frequencies carry useful energy at the target. Signal to noise, a power ratio read from how alike neighbouring traces are, says how much of each trace is repeatable. A footprint is a periodic stripe on a slice of RMS amplitude, called one only by a stated rule. Module three measures all three.
 
 ## The fluid question
 
@@ -26,9 +26,7 @@ The last four rows judge the rock. Oil in the Ekene Sand makes it softer than th
 
 ## What the verdict carries
 
-A number without its choices cannot be checked. Every row above moved with something the study stated: the net sand cut-off and the legs, the fluids and conditions, the taper and the time windows, the block length and the line the distance is read from. The verdict states each of them beside its figure, so a reader can repeat the work and see which choice would change the answer.
-
-The engines never decide whether the study goes ahead. They return spectra, trends, moduli and reflection coefficients; the go or no-go is a judgement written from them.
+Every row above moved with something the study stated: the net sand cut-off and the legs, the fluids and conditions, the taper and the time windows, the block length and the line the distance is read from. The verdict states each of them beside its figure, so a reader can repeat the work. The engines do not decide whether the study goes ahead; the verdict is written from their numbers.
 
 ## What this tier leaves for later
 

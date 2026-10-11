@@ -1,6 +1,6 @@
 # What Rock Physics hands to QI
 
-Rock physics turns logs into elastic properties at the wells, and QI takes those properties to the seismic. Four things cross that hand-off: the elastic logs (Vp, Vs and density), the fluids at reservoir conditions, the substitution of one pore fluid for another, and the reflection coefficients they imply. This module handles the first at the Ekene wells; the next module handles the fluids and the substitution; the last module turns them into reflection coefficients at the top of the Ekene Sand.
+Rock physics turns logs into elastic properties at the wells, and QI takes those properties to the seismic. Four things cross that hand-off: the elastic logs (Vp, Vs and density), the fluids at reservoir conditions, the substitution of one pore fluid for another, and the reflection coefficients they imply. This module handles the first; the next handles the fluids and the substitution; the last turns them into reflection coefficients at the top of the Ekene Sand.
 
 ## The logs that arrive
 
@@ -15,7 +15,7 @@ The pack's Vp, Vs and density come from the DT, DTS and RHOB logs: Vp = 304800 /
 | substitution | minerals.js, gassmann.js | `mixMinerals`, `substituteVels` | Voigt, Reuss and Hill (Hill 1952); Gassmann (1951) |
 | reflection coefficients | avoTrend.js, avo.js | `interfacePoints`, `fitFluidLine`, `zoeppritzRpp`, `shuey`, `avoClass` | Castagna, Swan and Foster (1998); Shuey (1985); Rutherford and Williams (1989) |
 
-The Rock Physics course teaches Batzle-Wang, Gassmann, Greenberg-Castagna, Shuey and the classes in full. This course recaps each once, in the lesson that uses it, then states the inputs and reads the outputs against the two questions.
+The Rock Physics course teaches Batzle-Wang, Gassmann, Greenberg-Castagna, Shuey and the classes in full; this course recaps each once, states the inputs and reads the outputs.
 
 ## What the engines leave to the study
 
@@ -31,11 +31,11 @@ The conditions at the Ekene Sand are stated with the kit: 180 degF, 3200 psia, b
 
 ## A result, and a refusal
 
-`elasticPoint` given a Vs above its Vp does not throw. It returns every field as NaN, AI (acoustic impedance) and Vp/Vs included, and the panel shows the gap. That is a result with empty fields, and a study reads it as a data problem at that sample. A fit with too few measured pairs is different: the engine refuses, and the panel prints its message unchanged.
+`elasticPoint` given a Vs above its Vp does not throw. It returns every field as NaN, AI (acoustic impedance) and Vp/Vs included, and the panel shows the gap. A fit with too few measured pairs is different: the engine refuses, and the panel prints its message unchanged.
 
 > Need at least 5 samples with measured Vp and Vs (got 3).
 
-The first case flags bad data and carries on; the second stops because no answer exists. A feasibility study needs to tell the two apart before it trusts a layer mean or a trend.
+A study tells the two apart before it trusts a layer mean or a trend.
 
 {{panel:qi-feasibility-explorer}}
 

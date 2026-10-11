@@ -21,12 +21,12 @@ A selection is a rule for choosing samples, made before any engine is called. Th
 
 | selection | rule | samples at Ekene-1 |
 | --- | --- | --- |
-| net sand | Vsh at or below 0.350000 | |
+| net sand | Vsh at or below 0.350000 | 168 |
 | oil leg | net sand inside the Ekene Sand, above the contact | 65 |
 | water leg | net sand inside the Ekene Sand, at or below the contact | 103 |
 | cap rock | the 65 ft of log above the top of the Ekene Sand | 130 |
 
-The cut-off, the contact and the cap rock thickness are choices. Move the cut-off and the legs change size, and every mean, trend and substitution read from them moves with it.
+The cut-off, the contact and the cap rock thickness are choices: move the cut-off and the legs change size, and every mean, trend and substitution read from them moves.
 
 ## What the pack holds
 
@@ -44,11 +44,11 @@ The velocities come straight from the slowness logs: Vp = 304800 / DT and Vs = 3
 
 ## The conditions at the sand
 
-The conditions are stated with the kit: 180 degF, 3200 psia, brine salinity 0.035000 (weight fraction of NaCl), oil of 32 API, a gas-oil ratio of 400 scf/stb and gas gravity 0.750000. The engines hold none of them; each enters the fluid calculations as a stated input, and a later module changes them to see what moves.
+The conditions are stated with the kit: 180 degF, 3200 psia, brine salinity 0.035000 (weight fraction of NaCl), oil of 32 API, a gas-oil ratio of 400 scf/stb and gas gravity 0.750000. The engines hold none of them; each enters the fluid calculations as a stated input.
 
 ## Why a synthetic field
 
-Because the earth model is known, a figure the engines return on the pack can be checked against the rock that produced it. That is the reason the course teaches on Ekene: a method can be judged on a field whose answer exists. The pack is still a pack of logs and traces, with the curves and the interpretation a study would be handed, so every step reads it the way it would read a real field's data.
+Because the earth model is known, a figure the engines return on the pack can be checked against the rock that produced it, so a method can be judged on a field whose answer exists. The pack is still logs and traces, with the curves and the interpretation a study would be handed.
 
 {{panel:qi-feasibility-explorer}}
 

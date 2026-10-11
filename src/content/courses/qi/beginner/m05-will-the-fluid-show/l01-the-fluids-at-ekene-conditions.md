@@ -35,7 +35,7 @@ Pores in the oil leg hold both fluids. `woodMix` mixes them as a uniform mix: th
 | 0.800000 | 1.869288 | 955.005731 |
 | 1.000000 | 2.662550 | 1005.203569 |
 
-The density climbs in even steps with Sw. The modulus does not: at Sw 0.500000 it sits much nearer the oil's than the brine's, and it rises fastest only near full brine. At the oil-leg mean Sw of 0.574254 the pore fluid's modulus is 1.398867 GPa. The Wood average stays close to the softer phase until the brine fraction is high, which is why even a modest oil saturation softens the pore fluid a long way.
+The density climbs in even steps with Sw. The modulus does not: at Sw 0.500000 it sits much nearer the oil's than the brine's. At the oil-leg mean Sw of 0.574254 the pore fluid's modulus is 1.398867 GPa. The Wood average stays close to the softer phase until the brine fraction is high.
 
 ## What this means for the second question
 

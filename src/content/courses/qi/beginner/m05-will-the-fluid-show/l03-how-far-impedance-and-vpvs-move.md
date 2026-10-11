@@ -1,6 +1,6 @@
 # How far impedance and Vp/Vs move
 
-Substitution produces a brine log beside the in situ log for every oil-leg sample. The feasibility question compresses it to two figures: how far the oil moves AI (acoustic impedance, Vp times density) and how far it moves Vp/Vs. One bears on the reflection at normal incidence and the other on how it changes with angle.
+Substitution produces a brine log beside the in situ log for every oil-leg sample. The feasibility question compresses it to two figures: how far the oil moves AI (acoustic impedance, Vp times density) and how far it moves Vp/Vs. Both rows sit in the verdict.
 
 ## Sample by sample
 
@@ -15,7 +15,7 @@ Substitution produces a brine log beside the in situ log for every oil-leg sampl
 | 5110.000000 | 6876631.854600 | 7324973.338620 | 1.750560 | 1.858685 |
 | 5114.000000 | 7350603.656600 | 7660571.567728 | 1.746495 | 1.816325 |
 
-AI is in kg/(m2 s). Both properties rise at every sample when brine replaces the oil: Vp rises and density rises, so AI rises; Vp rises while Vs falls a little, so Vp/Vs rises too. The deepest sample, nearest the contact and wettest, moves least.
+AI is in kg/(m2 s). Both properties rise at every tabled sample when brine replaces the oil: Vp rises and density rises, so AI rises; Vp rises while Vs falls a little, so Vp/Vs rises too. The deepest sample, nearest the contact and wettest, moves least.
 
 ## The means over the leg
 
@@ -36,10 +36,10 @@ Two kinds of mean appear in this tier and a study says which it reports. The fig
 
 ## What the two percentages mean
 
-Both changes are the size of the fluid signal the seismic would have to see. AI bears on the reflection at normal incidence, and Vp/Vs, through the shear, on how that reflection changes with angle. A fluid that moved neither would leave nothing to detect whatever the data quality. Here the oil moves both by similar fractions. Whether that move takes the top of the sand off the wet background is a separate test, made on the crossplot of intercept and gradient.
+Both changes are the size of the fluid signal the seismic would have to see, and each rests on stated inputs: the conditions that set the two fluids, the quartz and clay moduli, the kit's PHIT, Vsh and Sw, and the net sand cut-off that picks the 65 samples. A fluid that moved neither would leave nothing to detect whatever the data quality. Here the oil moves both by similar fractions. Whether that move takes the top of the sand off the wet background is a separate test, made on the crossplot of intercept and gradient.
 
 {{panel:qi-feasibility-explorer}}
 
 ## Exercise
 
-In the feasibility explorer, set View to "Fluids and substitution" and Data to "Ekene pack: Ekene-1". Read the four "Mean" tiles and check them against the table above. Lower "Net sand Vsh cut-off (stated)" so the shaliest oil-leg samples drop out, and record which way the two means move. Restore 0.350000. Then switch Data to Ekene-2 and say whether the oil there moves AI by more or less than at Ekene-1.
+In the feasibility explorer, set View to "Fluids and substitution" and Data to "Ekene pack: Ekene-1". Read the four "Mean" tiles and check them against the table above. Lower "Net sand Vsh cut-off (stated)" so the shaliest oil-leg samples drop out, and record which way the two means move. Restore 0.350000. Then switch Data to Ekene-3 and say whether the oil there moves AI by more or less than at Ekene-1.
