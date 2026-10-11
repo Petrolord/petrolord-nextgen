@@ -67,7 +67,7 @@ q(1, "The field wavelet compareWavelets builds at Ekene has 31 samples. What are
 q(3, "At the top on gather 5, the three angle bins read 483.072830, 410.433207 and 320.449005. What does the sign of all three agree with?",
  "SEG normal polarity: the Ekene Sand is harder than the Ogbia Shale above it at Ekene-1, so the top is a peak.",
  ["Reversed polarity, where an increase in impedance downwards is a trough on the kit's seismic and the top of the sand is softer.",
-  "The base of the sand, whose coefficient of -0.190340 is the largest in the synthetic and dominates every bin at the top.",
+  "The synthetic's coefficient of -0.190340 at 1312.000000 ms, the largest in its span, which dominates every bin at the top.",
   "The mute's exact zeros, which enter every bin's mean and lift it above zero."],
  "The kit's seismic is SEG normal polarity, an increase in impedance downwards is a peak, a positive number, and the sand is harder than the shale above it at Ekene-1, so its top reads positive in every bin. The -0.190340 coefficient sits at 1312.000000 ms, and zeros could only pull a mean towards zero.")
 
@@ -197,7 +197,7 @@ q(2, "The stretch at the top on gather 5 is read with an NMO velocity of 2388.94
  "On a trace the RMS velocity is linear in time between rows and held flat outside the table; at 1292.000000 ms it is 2388.940541 m/s, and the stretch takes the table's RMS velocity there as its NMO velocity. The interval velocity at that time, 2885.878392 m/s, is what Walden's angle reads beside it.")
 
 # CROSS m03 (the gathers' mute and the stretch mute) + m04 (angles)
-q(1, "Two mutes reach the gathers next to Ekene-1: the kit's stated mute and the stretch mute. Which statement holds?",
+q(1, "Two mutes come up for the gathers next to Ekene-1: the kit's stated mute and the stretch mute. Which statement holds?",
  "The kit's mute is an angle, 40 degrees, from the kit's own calculation; the stretch mute is an offset that follows from a stated limit.",
  ["Both are offsets a study states, 2047.359898 m for the kit and 2563.848741 m for the stretch.",
   "The course measures the kit's mute with Walden's angle, which passes 40 degrees at 2000 m.",
@@ -284,8 +284,8 @@ q(1, "Which of these is one of the three steps QI Studio runs to condition angle
  "Spectral balancing.",
  ["AB semblance, the measure residualMoveout changes to when its lags scatter.",
   "The stretch mute, applied at a stated limit such as 0.200000.",
-  "The bulk shift, searched over the stated 20 ms between the stacks."],
- "QI Studio's conditioning is trim statics between the stacks, matching in shift, phase and scale, and spectral balancing, in engines/qi/conditioning.js, which the course vendors none of. AB semblance, the stretch mute at 0.200000 and the 20 ms bulk shift search belong to the gather QC and the tie.")
+  "The Dix conversion of the RMS velocity table, turning each stack's times into interval velocities."],
+ "QI Studio's conditioning is trim statics between the stacks, matching in shift, phase and scale, and spectral balancing, in engines/qi/conditioning.js, which the course vendors none of. AB semblance and the stretch mute at 0.200000 belong to the gather QC, and the Dix conversion to angles from velocity.")
 
 # CROSS m05 (the fluid factor) + m06 (the one scale)
 q(0, "contrastsFromAB needs A and B as reflection coefficients. How does the course get them from gather 5's top, A 501.873676 and B -734.431814?",
@@ -312,12 +312,12 @@ q(2, "After division by the one scale, which well's seismic gradient is the leas
   "Ekene-3, -0.663631, against a modelled -0.641524."],
  "The scaled seismic gradients are -0.569840 at Ekene-1, -0.410601 at Ekene-2, -0.663631 at Ekene-3 and -0.475262 at Ekene-4, so Ekene-2 is the least negative, against its modelled -0.501240 from net sand.")
 
-q(1, "Which well's scaled seismic point lies closest to its modelled point?",
- "Ekene-3, at a residual of 0.059452.",
- ["Ekene-4, at 0.077711.",
-  "Ekene-1, at 0.088133.",
-  "Ekene-2, at 0.105803."],
- "The residual is the distance between the scaled seismic point and the modelled one: 0.059452 at Ekene-3, 0.077711 at Ekene-4, 0.088133 at Ekene-1 and 0.105803 at Ekene-2, so Ekene-3 lies closest.")
+q(1, "Ekene-3's scaled seismic point is A 0.249870 and B -0.663631. Which modelled point does the comparison at the wells set it against?",
+ "A 0.194681 and B -0.641524, from the cap rock over its oil leg.",
+ ["A 0.216991 and B -0.520090, from the cap rock over its net sand, the layer Ekene-4 is modelled from.",
+  "A 470.308887 and B -1249.098330, its own seismic point before the division by the one scale of 1882.216944.",
+  "A 0.170742 and B -0.563558, from Ekene-1's oil leg, the well whose trace gather 5 carries."],
+ "Ekene-3 holds 114 oil-leg samples, so its modelled side is the cap rock over its oil leg, A 0.194681 and B -0.641524, at a residual of 0.059452 from the scaled seismic point. 470.308887 and -1249.098330 are its seismic A and B before the division, and the other two points belong to Ekene-4 and Ekene-1.")
 
 # CROSS m01 (polarity) + m06 (the issues the comparison raises)
 q(0, "The kit's seismic is SEG normal polarity, and the one scale at Ekene is positive. Which result of the comparison would QI Studio rate as a high issue?",
@@ -325,7 +325,7 @@ q(0, "The kit's seismic is SEG normal polarity, and the one scale at Ekene is po
  ["A class that differs at one well.",
   "A positive scale, read as reversed seismic.",
   "A wavelet correlation of 0.693702 with the average, read by the comparison at the wells."],
- "At Ekene the one scale is 1882.216944, positive, so the seismic and the model agree in sign, and 4 of 4 wells agree in class; QI Studio keeps its high rating for a negative scale, which points to polarity or the wavelet. 0.693702 is Ekene-3's reversed wavelet in the tie register.")
+ "At Ekene the one scale is 1882.216944, positive, and 4 of 4 wells agree in class; QI Studio keeps its high rating for a negative scale, which points to polarity or the wavelet. 0.693702 is Ekene-3's reversed wavelet in the tie register.")
 
 # CROSS m03 (the stretch) + m04 (Walden) + m06 (the capstone)
 q(3, "In the Professional capstone, the NMO stretch is read at the same offset and time as which other graded figure?",

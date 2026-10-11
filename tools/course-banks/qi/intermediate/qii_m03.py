@@ -41,7 +41,7 @@ q(0, "How does nmoStretch measure the stretch of an event at offset x and zero-o
  ["As t - t0 in milliseconds, the moveout itself.",
   "As x / (v t0), growing in a straight line with offset.",
   "As the fall of the centroid from near to far traces."],
- "The stretch is t / t0 - 1, with t = sqrt(t0^2 + x^2 / v^2) and v the NMO velocity, so it is a fraction. On gather 5 it is 0.000525 at 100 m and 0.286880 at 2500 m, climbing faster than the offset.")
+ "The stretch is t / t0 - 1, with t = sqrt(t0^2 + x^2 / v^2) and v the NMO velocity, so it is a fraction. On gather 5 it is 0.000525 at 100 m and 0.286880 at 2500 m.")
 
 q(3, "On gather 5 at the top, t0 1292.000000 ms, what NMO velocity does the course use for the stretch?",
  "The table's RMS velocity there, 2388.940541 m/s.",
@@ -55,7 +55,7 @@ q(2, "NMO correction draws the top event out at the far traces. What stretch doe
  ["0.209511, the figure at 2100 m, the next offset in, read as the far trace of the gather.",
   "0.000525, the stretch at 100 m, since the stretch is read at the nearest offset for the gather.",
   "0.300000, the limit."],
- "The stretch at 2500 m is 0.286880, against 0.000525 at 100 m and 0.209511 at 2100 m, so the far traces carry almost all of it. 0.300000 is a stated limit and no measured stretch.")
+ "The stretch at 2500 m is 0.286880, against 0.000525 at 100 m and 0.209511 at 2100 m. 0.300000 is a stated limit and no measured stretch.")
 
 q(1, "At the top of gather 5, what offset does stretchMuteOffset return for a stated limit of 0.300000?",
  "2563.848741 m, from v t0 sqrt((1 + limit)^2 - 1).",

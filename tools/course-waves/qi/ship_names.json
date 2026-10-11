@@ -5,8 +5,5 @@
  "intermediate_deep": "20261011212307_qi_intermediate_deep",
  "advanced_deep": "20261011212308_qi_advanced_deep",
  "go_live": "20261011212309_qi_go_live",
- "held_deep": [
-  "intermediate",
-  "advanced"
- ]
+ "held_deep": []
 }

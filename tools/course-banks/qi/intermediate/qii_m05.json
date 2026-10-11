@@ -19,7 +19,7 @@
    "It is exactly determined: three terms on three angles."
   ],
   "answer": 3,
-  "explanation": "A three-term fit on three angles is exactly determined, so it passes through all three points and leaves nothing to judge it by. The engine returns C 467.947963 here; 0.000000 is the two-term fit's C, which has no third term."
+  "explanation": "A three-term fit on three angles is exactly determined. The engine returns C 467.947963 here; 0.000000 is the two-term fit's C, which has no third term."
  },
  {
   "prompt": "Adding the third term at gather 5's top changes the fit. What does the three-term fit return?",
@@ -30,7 +30,7 @@
    "A 519.312395, B -927.296460 and C 0.000000."
   ],
   "answer": 0,
-  "explanation": "The three-term fit gives A 510.227684, B -915.097371 and C 467.947963: the gradient steepens from the two-term -734.431814 as part of the fall with angle is split off into C. 519.312395 and -927.296460 are the two-term fit on 9 bins."
+  "explanation": "The three-term fit gives A 510.227684, B -915.097371 and C 467.947963, against the two-term A 501.873676 and B -734.431814 on the same bins. 519.312395 and -927.296460 are the two-term fit on 9 bins."
  },
  {
   "prompt": "At one sample the far stack carries no finite amplitude. What does fitShuey do with that angle?",
@@ -74,7 +74,7 @@
    "By taking the published Castagna, Swan and Foster slope as it stands, with no fit to the seismic pairs at all."
   ],
   "answer": 2,
-  "explanation": "The background trend is the line B = m A through the origin by orthogonal regression, which treats A and B alike. Ordinary least squares minimises vertical misfit only, and the published slope is a fixed line; the course names which line a distance is read from."
+  "explanation": "The background trend is the line B = m A through the origin by orthogonal regression over the (A, B) pairs, 176 of them on gather 5 with slope -4.020851. The course names which line a distance is read from."
  },
  {
   "prompt": "On gather 5, the two-term fit at every sample of the window where all three bins carry data gives the (A, B) pairs. How many pairs, and what trend slope m do they give?",
@@ -118,7 +118,7 @@
    "0.106656, the density contrast drho/rho from Gardner."
   ],
   "answer": 2,
-  "explanation": "The fluid factor dVp/Vp - 1.16 (Vs/Vp) dVs/Vs is 0.107520 here. 0.426623 is dVp/Vp, 0.550179 dVs/Vs and 0.106656 drho/rho; each moves with the stated Vs/Vp and with the scale, so a fluid factor is quoted with both."
+  "explanation": "The fluid factor dVp/Vp - 1.16 (Vs/Vp) dVs/Vs is 0.107520 here. 0.426623 is dVp/Vp, 0.550179 dVs/Vs and 0.106656 drho/rho, all from the A and B divided by the one scale at the stated Vs/Vp of 0.500000."
  },
  {
   "prompt": "How does contrastsFromAB tie the density contrast to the velocity contrasts?",
@@ -129,7 +129,7 @@
    "By 1.16 (Vs/Vp) dVs/Vs, the mudrock line term."
   ],
   "answer": 0,
-  "explanation": "The engine uses Gardner's density, drho/rho = dVp/Vp / 4, and the top gives drho/rho 0.106656 against dVp/Vp 0.426623. The stated Vs/Vp divides the gradient between compressional and shear contrast, and 1.16 (Vs/Vp) dVs/Vs is the term the fluid factor subtracts."
+  "explanation": "The engine uses Gardner's density, drho/rho = dVp/Vp / 4, and the top gives drho/rho 0.106656 against dVp/Vp 0.426623. 1.16 (Vs/Vp) dVs/Vs is the term the fluid factor subtracts."
  },
  {
   "prompt": "A study passes the seismic A and B of a sample to contrastsFromAB straight from the stacks, in trace units. What does the course state about that input?",
@@ -140,7 +140,7 @@
    "The engine refuses any intercept above one."
   ],
   "answer": 1,
-  "explanation": "contrastsFromAB needs A and B as reflection coefficients, and the course divides the top's two-term A and B by the one scale, 1882.216944, first. The stated Vs/Vp divides the gradient between compressional and shear contrast and carries no scale."
+  "explanation": "The course states that the engine needs A and B as reflection coefficients. Seismic A and B sit in trace amplitude units, so a study divides them by the scale the comparison at the wells fits before the call."
  },
  {
   "prompt": "What does chiProjection return for the top of gather 5 at chi = atan(m) = -76.033690 degrees, the angle along the background trend?",

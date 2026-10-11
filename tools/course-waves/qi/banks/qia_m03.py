@@ -51,7 +51,7 @@ q(3, "Each angle stack takes the same 25 Hz Ricker shape with its own least squa
   "They match the angle's G1, rising from 0.515546 at 10 degrees to 0.666667 at 30 degrees."],
  "fattiScale gives near 1860.598608, mid 1679.662569 and far 1305.654435, each over 19 samples: the scale falls from near to far. 769.984107 is the post-stack scale of the full stack, and the shape is the same Ricker for every stack.")
 
-q(0, "extractAngleWavelets is run at Ekene-1 with a half length of 15 samples, a 31-sample wavelet against 27 logged samples. What does it say?",
+q(0, "The well-wavelet extraction under extractAngleWavelets is run at Ekene-1, on the half differences of the ln(AI) log, with a half length of 15 samples, a 31-sample wavelet against 27 logged samples. What does it say?",
  "\"The well reflectivity is flat over the seismic at the well, so there is nothing to extract a wavelet from.\"",
  ["\"The log covers 16 usable samples at the well; a 11-sample wavelet needs at least 22. Shorten the wavelet or use the statistical one.\"",
   "\"The wells overlap too little seismic to scale the wavelet.\"",
@@ -66,7 +66,7 @@ q(2, "At what half length does extractAngleWavelets return a wavelet for each st
  "At a half length of 3 the engine returns a 7-sample wavelet for each of the 3 stacks; it spans 24.000000 ms, shorter than the stated Ricker, so the course states the Ricker shape and scales it per stack. At 5 the engine says an 11-sample wavelet needs at least 22 usable samples.")
 
 q(1, "With 7-sample angle wavelets at 30 degrees, Ekene-4 prints a fit correlation of 0.967385. How well does its synthetic match the far stack?",
- "At 0.603319, far below the fit.",
+ "At 0.603319, below its fit correlation.",
  ["At 0.967385, the same figure, since a well's synthetic against the stack is its fit correlation read a second way.",
   "At 0.927864, the figure Ekene-1's synthetic reaches against the far stack, which every well shares at that angle.",
   "At 0.940659, the fit correlation at Ekene-1, as the four wells' fits are aligned and averaged into one."],
@@ -98,7 +98,7 @@ q(1, "How does AI's correlation at Ekene-1 change across the three sets of stack
  ["It rises steadily as stacks join, from 0.858677 to 0.865225, with the far stack lifting it most of all.",
   "It falls with each stack added, from 0.863789 to 0.858677, since the far stacks carry less of G1 than the near stack.",
   "It goes negative with the far stack, to -0.190352."],
- "AI scores 0.858677, 0.865225 and 0.863789 from the three sets of stacks: AI is held by the near angles alone. -0.190352 is the LFMs alone, and the far stack adds nothing to the near and mid figure of 0.865225.")
+ "AI scores 0.858677, 0.865225 and 0.863789 from the three sets of stacks: AI is held by the near angles alone. -0.190352 is the LFMs alone, and 0.865225 is the near and mid figure.")
 
 q(3, "Every pack well is inverted blind from the near, mid and far stacks. What sign does the density correlation take across the four wells?",
  "Negative at all four wells.",

@@ -111,3 +111,13 @@ console.log(JSON.stringify({ explorer: out['explorer.defaults'] }));
 
 /* lesson check (m02 l03): four wavelets sharing one phase error compare as four unrotated ones */
 { const c = P.compare(ws.map((w) => ({ name: w.name, samples: P.rotate(w.samples, 60) }))); console.log(JSON.stringify({ allRot60: F(c.similarity), lags: c.aligned.map((a) => a.lag) })); }
+
+/* lesson check (m05 l05): a change to the far amplitude alone, and one scale on every stack, through fitShuey */
+{ const base = P.shueyFit(E.stackAngles, amps5, { terms: 2 });
+  const farDown = P.shueyFit(E.stackAngles, [amps5[0], amps5[1], amps5[2] - 100], { terms: 2 });
+  const allX2 = P.shueyFit(E.stackAngles, amps5.map((a) => 2 * a), { terms: 2 });
+  console.log(JSON.stringify({ base: F([base.A, base.B, base.B / base.A]), farMinus100: F([farDown.A, farDown.B]), allTimes2: F([allX2.A, allX2.B, allX2.B / allX2.A]) })); }
+
+/* lesson check (m06 l02): the comparison's avoClass (engines/qi/avo.js) at the band edges */
+{ const AV = await import('@petrolord/engines/engines/rockphysics/avo.js');
+  console.log(JSON.stringify({ qi: [P.classOf(0.02, -0.1), P.classOf(-0.1, 0), P.classOf(0.25, -0.66)], rockphysics: [AV.avoClass(0.02, -0.1), AV.avoClass(-0.1, 0), AV.avoClass(0.25, -0.66)] })); }

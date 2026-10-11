@@ -32,7 +32,7 @@ q(3, "How much dimmer is the modelled in situ top of the Ekene Sand than the sam
 q(1, "Which exact plane-wave coefficient does zoeppritzRpp give at normal incidence for the oil-bearing case?",
  "0.171249.",
  ["0.170742, Shuey's intercept A for the same interface.",
-  "0.206058, the exact coefficient at normal incidence.",
+  "0.206058, read from the brine column of the same table and taken for the oil case.",
   "0.156172, the near mean over 5 to 15 degrees."],
  "The exact plane-wave coefficient at normal incidence is 0.171249 in situ. Shuey's A of 0.170742 comes from a different engine call and sits close to it without being the same figure; 0.206058 is the brine top and 0.156172 the near stack mean.")
 
@@ -71,12 +71,12 @@ q(0, "A verdict quotes the in situ top at -0.072091 from the wet trend. Which ch
   "The taper of the spectrum alone, because the wet trend is fitted to the seismic spectrum and inherits its band from it."],
  "A verdict states its selections, its fluids and conditions, its taper and windows, its block length and the line the distance is read from, because each one moves a figure. The distance rests on the block length and the line; the lag and the taper belong to the data question.")
 
-q(3, "For the verdict's band row, which figures does the course quote for the Ekene full stack?",
- "-6 dB 14.425434 to 34.787627 Hz, peak 31.374887 Hz, on the mean spectrum of the 120 spread traces, 800 to 1600 ms.",
- ["-6 dB 30.556053 to 32.127840 Hz, the band of the single trace at Ekene-1 in the same window, taper and target.",
-  "-6 dB 14.429678 to 32.581187 Hz, from the deeper 1600 to 2400 ms window of the same spread traces.",
-  "8.801471 to 47.968080 Hz."],
- "The verdict's band is the -6 dB band of the mean spectrum of the 120 spread traces in the window holding the Ekene Sand, 14.425434 to 34.787627 Hz with peak 31.374887 Hz. A single trace's -6 dB band hugs its peak (30.556053 to 32.127840 Hz), 14.429678 to 32.581187 Hz is the deeper window, and 8.801471 to 47.968080 Hz are the -20 dB edges.")
+q(3, "The verdict's band row asks whether the band is wide enough at the target, and it is read from the 800 to 1600 ms window. What ties that window to the question?",
+ "The window holds the Ekene Sand, the target the row asks about.",
+ ["It is the only window the spread traces hold.",
+  "QI Studio fixes it for every spectrum, so no other window can be stated.",
+  "The deep window takes no taper."],
+ "The spectrum window 800 to 1600 ms holds the Ekene Sand, so the row quotes that window, and a verdict states its windows because each one moves a figure. The spread traces run 800 to 2400 ms, the course tables three windows, and every one of them is measured at taper 0.100000.")
 
 q(2, "What does the verdict quote for whether the signal is clean enough at Ekene?",
  "A median signal to noise of 361.155122 as a power ratio, 25.576938 dB, along the inline through Ekene-1.",
@@ -85,12 +85,12 @@ q(2, "What does the verdict quote for whether the signal is clean enough at Eken
   "A ratio of 25.576938 and a decibel figure of 361.155122."],
  "Signal to noise is a power ratio from trace coherency: the median over 20 pairs of the 800 to 1600 ms window is 361.155122, 25.576938 dB. 77.008444 is the 1600 to 2400 ms window, 999998.999971 is the ceiling at the clamp 0.999999, and 25.576938 is the decibel form, so reading it as the ratio swaps the two.")
 
-q(1, "The verdict's footprint row reads \"share 0.015148 along the crosslines, no stripe by the rule\". Why does the rule call no footprint?",
- "The rule needs a share above 0.3 together with a prominence of 10 or more and at least five cycles; a share of 0.015148 fails it.",
- ["The prominence of 27.724874 falls short of the rule's threshold of 467.977933, the prominence the designed stripe reached on the same slice.",
-  "The period of 15.058824 lines is outside the 2 to 16 lines searched, so the engine does not report it as a stripe.",
-  "The cycles of 8.500000 fall below the five repeats the rule requires."],
- "QI Studio's rule calls a stripe a footprint only with a share above 0.3, a prominence of 10 or more and at least five repeats, all together. The Ekene crossline profile has prominence 27.724874 and 8.500000 cycles, both enough, but its share of 0.015148 is far below 0.3, so no footprint.")
+q(1, "The verdict's footprint row reads \"share 0.015148 along the crosslines, no stripe by the rule\". Which data does that row rest on?",
+ "The RMS amplitude slice of the full stack, 1250 to 1350 ms, 128 inlines by 128 crosslines, with periods searched from 2 to 16 lines.",
+ ["The full-stack spread traces of 800 to 1600 ms, the same window and traces the band row and its spectrum are read from.",
+  "The designed teaching case with every sixth crossline multiplied by 1.2, the slice on which the search finds its stripe and the one the verdict reports.",
+  "Signed full-stack amplitudes at 1288.796378 ms, the two-way time of the top of the Ekene Sand at Ekene-1."],
+ "The Ekene slice is the RMS amplitude of the full stack, 1250 to 1350 ms, 128 by 128 lines, searched over periods of 2 to 16 lines. The designed stripe is a teaching case the course adds and labels as such, and signed seismic is avoided because a stripe of gain averages away on it.")
 
 q(3, "Which of these does the course say is never graded?",
  "Any verdict, any class name and any Ekene figure.",
@@ -111,7 +111,7 @@ q(2, "At the modelled top of the Ekene Sand, how do Shuey's intercept and gradie
  ["A falls from 0.205564 to 0.170742 and B goes from -0.475316 to the more negative -0.563558, oil to brine.",
   "A stays at 0.170742, since the intercept depends on the rock frame alone, while B moves to -0.475316 with the brine.",
   "A rises to 0.205564 and B becomes more negative at -0.563558, because the stiffer brine steepens the gradient."],
- "With oil the top reads A 0.170742 and B -0.563558; with brine A 0.205564 and B -0.475316. So the oil leaves A lower and B more negative, and the top dims faster with angle; taking it to brine reverses both. The intercept moves with the fluid as AI does.")
+ "With oil the top reads A 0.170742 and B -0.563558; with brine A 0.205564 and B -0.475316. So the oil leaves A lower and B more negative, and taking the leg to brine reverses both.")
 
 emit(Q, '/root/qi-wip-qi/banks/qib_m06.json', expect_n=15)
 finish()

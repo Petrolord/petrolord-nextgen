@@ -2209,7 +2209,9 @@
     "kit": "full",
     "kitNote": "Full kit, committed at the foundation and re-mirrored by mirror.sh, which derives the input list from the wave directory by pattern. It carries the teaching digest and its generators (qi_dump.mjs with one part per tier, printed from the NextGen teaching lab qiLab.js through qi_loader.mjs and qi_engine.mjs), the teaching-pack cut (cut_pack.py, kit_truth_rows.mjs and the interpretation rows it wrote), the held-out case generator and the capstone generator, the graded fields with their precision (tolerances from gradedTolerance.js), the discriminate sweep, the independent standard-library oracle check, every wave gate with its negative control and the runner that pins their md5s into wave.json, the briefs, the structure, the scaffold and the vendor script; the banks once they exist. Fields carry the tiers whose graders exist (Associate first).",
     "inputs": [
+      "AUDIT-advanced.md",
       "AUDIT-beginner.md",
+      "AUDIT-intermediate.md",
       "BANK_TASK.md",
       "BRIEF.md",
       "KEY_TRUTH_TASK.md",
@@ -2239,6 +2241,7 @@
       "hdr_advanced.txt",
       "hdr_beginner.txt",
       "hdr_intermediate.txt",
+      "keytruth_probe_advanced.mjs",
       "keytruth_probe_beginner.mjs",
       "keytruth_probe_beginner_usability.mjs",
       "keytruth_probe_intermediate.mjs",

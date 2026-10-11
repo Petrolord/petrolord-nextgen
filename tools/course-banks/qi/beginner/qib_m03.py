@@ -60,7 +60,7 @@ q(1, "Going from the 800 to 1600 ms window to the 1600 to 2400 ms window, what h
 
 q(3, "The same 120 traces and the 800 to 1600 ms window are measured with a taper of 0.500000 in place of 0.100000. What peak does the engine return?",
  "22.305063 Hz, against 31.374887 Hz at 0.100000.",
- ["31.374887 Hz unchanged, because the taper only shapes the trace ends and never moves the peak of the mean spectrum.",
+ ["31.374887 Hz unchanged, because the taper only shapes the trace ends, which leaves the peak of the mean spectrum where it was.",
   "26.175193 Hz, the figure the engine returns at that taper, which is where the peak of the mean spectrum now sits.",
   "31.323187 Hz, since a heavier taper only nudges the peak of a broad mean spectrum by a few hundredths of a hertz."],
  "The taper is a stated choice: at 0.500000 the peak is 22.305063 Hz, against 31.374887 Hz at 0.100000. 26.175193 Hz is the centroid at 0.500000 and 31.323187 Hz is the peak at 0.250000, so a spectrum figure is quoted with its taper.")

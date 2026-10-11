@@ -52,7 +52,7 @@
    "As the fall of the centroid from near to far traces."
   ],
   "answer": 0,
-  "explanation": "The stretch is t / t0 - 1, with t = sqrt(t0^2 + x^2 / v^2) and v the NMO velocity, so it is a fraction. On gather 5 it is 0.000525 at 100 m and 0.286880 at 2500 m, climbing faster than the offset."
+  "explanation": "The stretch is t / t0 - 1, with t = sqrt(t0^2 + x^2 / v^2) and v the NMO velocity, so it is a fraction. On gather 5 it is 0.000525 at 100 m and 0.286880 at 2500 m."
  },
  {
   "prompt": "On gather 5 at the top, t0 1292.000000 ms, what NMO velocity does the course use for the stretch?",
@@ -74,7 +74,7 @@
    "0.300000, the limit."
   ],
   "answer": 2,
-  "explanation": "The stretch at 2500 m is 0.286880, against 0.000525 at 100 m and 0.209511 at 2100 m, so the far traces carry almost all of it. 0.300000 is a stated limit and no measured stretch."
+  "explanation": "The stretch at 2500 m is 0.286880, against 0.000525 at 100 m and 0.209511 at 2100 m. 0.300000 is a stated limit and no measured stretch."
  },
  {
   "prompt": "At the top of gather 5, what offset does stretchMuteOffset return for a stated limit of 0.300000?",

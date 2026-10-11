@@ -73,7 +73,7 @@ q(0, "Anomaly A's implied contact is -5053.959008 ft and the spill is -5053.9488
  "The engine reads the downdip edge as an anomaly node beside a lower node outside it, at their midpoint. A's edge implies -5053.959008 ft, just below the spill of -5053.948819 ft, and far from the wells' -5118.110236 ft.")
 
 q(2, "Designed anomaly B, cut at the grid's middle column, has an edge scatter of 6.992237 ft. What does anomalyConformance return for it?",
- "Conformance 0.000000, share inside 0.152778, and an implied contact of -5068.442175 ft that carries no weight.",
+ "Conformance 0.000000, share inside 0.152778, and an implied contact of -5068.442175 ft that the engine still returns.",
  ["A refusal, since B's scatter is larger than the closure's whole relief and leaves no conformance.",
   "Conformance 0.152778, its share inside the closure read as its conformance.",
   "Conformance 0.729467 and share 1.000000, since B holds every node of A inside it."],
@@ -91,7 +91,7 @@ q(1, "The first row of the decision table matures a prospect. With one independe
  ["Mature, with support moved down to neutral.",
   "Retain, with neutral support, as for a missing feasibility verdict.",
   "Downgrade, with support against, since one source is evidence against."],
- "Maturing needs two independent supporting sources. The same case with one returns investigate and supports: support says which way the seismic leans, the recommendation what to do next.")
+ "Maturing needs two independent supporting sources. The same case with one returns investigate and supports: the recommendation drops while the support holds.")
 
 q(0, "No anomaly is seen on a prospect where the feasibility study says the case would be visible. What does the assessment return?",
  "Downgrade, with seismic support against.",
@@ -100,7 +100,7 @@ q(0, "No anomaly is seen on a prospect where the feasibility study says the case
   "Mature, with support against."],
  "The absence of an anomaly counts against a prospect only where the feasibility study says the case would be visible: no anomaly, feasible, returns downgrade and against. With feasibility not stated it returns retain and neutral.")
 
-q(2, "An anomaly is present, and a competing explanation (tuning, a lithology change or a processing artefact) is judged likely. What does the assessment return?",
+q(2, "The first row of the decision table matures a prospect: conformance 0.83, inside 0.9, two independent sources, feasible. A competing explanation (tuning, a lithology change or a processing artefact) is now judged likely, every other input the same. What does the assessment return?",
  "Investigate, with neutral seismic support.",
  ["Mature, with support kept at supports.",
   "Downgrade, with support set at against.",

@@ -103,7 +103,7 @@
   "options": [
    "A refusal, since B's scatter is larger than the closure's whole relief and leaves no conformance.",
    "Conformance 0.152778, its share inside the closure read as its conformance.",
-   "Conformance 0.000000, share inside 0.152778, and an implied contact of -5068.442175 ft that carries no weight.",
+   "Conformance 0.000000, share inside 0.152778, and an implied contact of -5068.442175 ft that the engine still returns.",
    "Conformance 0.729467 and share 1.000000, since B holds every node of A inside it."
   ],
   "answer": 2,
@@ -129,7 +129,7 @@
    "Downgrade, with support against, since one source is evidence against."
   ],
   "answer": 1,
-  "explanation": "Maturing needs two independent supporting sources. The same case with one returns investigate and supports: support says which way the seismic leans, the recommendation what to do next."
+  "explanation": "Maturing needs two independent supporting sources. The same case with one returns investigate and supports: the recommendation drops while the support holds."
  },
  {
   "prompt": "No anomaly is seen on a prospect where the feasibility study says the case would be visible. What does the assessment return?",
@@ -143,7 +143,7 @@
   "explanation": "The absence of an anomaly counts against a prospect only where the feasibility study says the case would be visible: no anomaly, feasible, returns downgrade and against. With feasibility not stated it returns retain and neutral."
  },
  {
-  "prompt": "An anomaly is present, and a competing explanation (tuning, a lithology change or a processing artefact) is judged likely. What does the assessment return?",
+  "prompt": "The first row of the decision table matures a prospect: conformance 0.83, inside 0.9, two independent sources, feasible. A competing explanation (tuning, a lithology change or a processing artefact) is now judged likely, every other input the same. What does the assessment return?",
   "options": [
    "Mature, with support kept at supports.",
    "Downgrade, with support set at against.",

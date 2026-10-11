@@ -10,12 +10,12 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
 # ---- m01 the forward model ----
 
-q(1, "The inversion explorer's forward view runs the dot-product test on two seeded vectors of 101 samples. What does it print for the centred convolution C with the scaled wavelet?",
- "38.991017 on both sides, a difference of 0.000000.",
- ["-0.753789 on both sides, the pair the convolution shares with the centred first difference D.",
-  "38.991017 for (A x) . y and -0.753789 for x . (A^T y), a mismatch the solver absorbs at every step.",
-  "344.213395 on both sides, the synthetic's peak at Ekene-1 at 1288.000000 ms carried into the test."],
- "The test prints 38.991017 for (C x) . y and for x . (C^T y), a difference of 0.000000. The pair -0.753789 belongs to the centred difference D, and 344.213395 is the synthetic at Ekene-1 at 1288.000000 ms, no part of the test.")
+q(1, "Before any inversion is trusted, the operator d = C D m is checked step by step on two seeded vectors. Which figures show that both steps pass?",
+ "D prints -0.753789 on both sides and C prints 38.991017 on both sides, each with a difference of 0.000000.",
+ ["D prints -0.753789 forward and 38.991017 backward, the two steps sharing one test of the whole operator end to end.",
+  "Only C is tested, at 38.991017, a centred first difference being its own transpose and needing no check.",
+  "C prints 344.213395 and 341.516846, the synthetic and the trace at 1288.000000 ms agreeing closely."],
+ "The course tests each step: the centred difference D gives -0.753789 for (A x) . y and for x . (A^T y), the convolution C gives 38.991017 for both, and each difference is 0.000000. 344.213395 and 341.516846 are the Ekene-1 synthetic and trace at 1288.000000 ms, no part of the adjoint test.")
 
 q(3, "Why does the forward model take m = ln(AI), the natural log of acoustic impedance, as its unknown?",
  "Half the difference of ln(AI) is close to the reflection coefficient for small contrasts.",
@@ -24,42 +24,41 @@ q(3, "Why does the forward model take m = ln(AI), the natural log of acoustic im
   "The log makes each reflection the full change of ln(AI) across two samples, with no factor of one half anywhere."],
  "The course writes the model in ln(AI) because half the difference of ln(AI) is close to the reflection coefficient for small contrasts; the trace is d = C D m with D the centred difference, half the change across two samples. The seismic band holds no trend, so the LFM supplies what lies below about 8 Hz.")
 
-q(0, "lowFrequencyModel smooths each well's ln(AI) by a moving average whose half window is round(1000 / (cut x dt) / 2) samples. At the stated 8 Hz cut on the 4.000000 ms clock, how wide is that half window?",
- "16 samples.",
- ["21 samples, the length of the stated 25 Hz Ricker.",
-  "27 samples, the logged count at Ekene-1.",
-  "101 samples, the whole window from 1100 to 1500 ms."],
- "The course prints a half window of 16 samples for the 8 Hz cut on the 4.000000 ms clock. 21 samples is the Ricker's length at half length 40 ms, 27 the logged samples at Ekene-1 and 101 the inversion window.")
+q(0, "Ekene-1 is left out of its own low-frequency model. Which of the remaining wells takes the largest inverse-distance share at Ekene-1, and how is a share formed?",
+ "Ekene-2, 0.477419 at 1209.338662 m; each weight is the inverse square of the distance, and a share is that weight over the sum of the three.",
+ ["Ekene-4, 0.477419 at 2193.171220 m, the farthest well weighted most so the model reaches across the field.",
+  "Ekene-3, 0.377419 at 1360.147051 m, each share being the plain inverse of the distance over the sum.",
+  "Each of the three wells an equal share, the power of 2 acting only once the horizons are mapped."],
+ "The course prints 0.477419 for Ekene-2, the well 1209.338662 m away, with weights falling as the square of distance grows. Ekene-3's share is 0.377419, and equal shares would ignore the power of 2 the course states.")
 
-q(2, "Between the top and base of the Ekene Sand, mapToWellTime carries an Ekene-1 trace time to Ekene-2's horizons. Where does the mid-sand time 1299.913186 ms at Ekene-1 land?",
- "At 1318.075904 ms, keeping its proportional position between Ekene-2's top and base.",
- ["At 1299.913186 ms, one two-way time held at every well between the horizons.",
-  "At 1305.746335 ms, Ekene-2's top, every sample inside a layer snapping to the horizon above it.",
-  "At 1338.405474 ms, Ekene-2's base, the time offset from the lower horizon being kept inside the layer."],
- "Between two horizons a sample keeps its proportional position, and the course maps 1299.913186 ms at Ekene-1 to 1318.075904 ms at Ekene-2. 1305.746335 ms and 1338.405474 ms are Ekene-2's top and base, where Ekene-1's own horizons at 1288.796378 ms and 1319.029994 ms land; the time offset is kept only above the first horizon and below the last.")
+q(2, "Ekene-1's sand top at 1288.796378 ms maps to Ekene-2's top at 1305.746335 ms. Above that horizon, Ekene-1's 1280.796378 ms maps to 1297.746335 ms. Which rule of mapToWellTime places it?",
+ "Above the first horizon the time offset from that horizon is kept.",
+ ["The proportional position between top and base is kept, as it is for every sample inside the sand.",
+  "The sample takes the nearest covered value, as an uncovered one does.",
+  "The two-way time is carried across unchanged, the LFM holding one clock at every well."],
+ "Above the first horizon and below the last, mapToWellTime keeps the time offset from that horizon, which is why 1280.796378 ms lands at 1297.746335 ms. The proportional position applies between two horizons, and the nearest covered value fills samples no well covers.")
 
-q(1, "On the Ekene pack the wavelet scale pools 19 samples at the four wells. What does waveletScale do on a case where the wells overlap fewer than ten usable samples of seismic?",
- 'It refuses, in the engine\'s own words: "The wells overlap too little seismic to scale the wavelet."',
- ["It returns a scale with NaN fields, as elasticPoint does with Vs above Vp, and the panel shows the gap.",
-  "It returns 1.000000, the peak of the unit Ricker, and every inversion then runs on the unscaled wavelet.",
-  "It pools the near, mid and far stacks as well until the count reaches the full stack's 19 samples."],
- "waveletScale refuses below ten usable samples with the message quoted in the key; the Ekene pack clears the rule with 19 samples and a scale of 769.984107. A NaN result is elasticPoint's behaviour, and the unit Ricker's peak of 1.000000 is what the scale multiplies.")
+q(1, "Model-based inversion needs the 25 Hz Ricker scaled at the wells before it runs. What makes that scale necessary?",
+ "A wavelet chosen for its shape carries an arbitrary amplitude, and the inversion reads impedance contrast from the ratio of the trace to the synthetic.",
+ ["The scale supplies the level of AI that the band-limited trace lacks below about 8 Hz.",
+  "The scale reshapes the Ricker until its spectrum matches the full stack at every well.",
+  "The scale converts the trace from one-way to two-way time before the convolution."],
+ "The scale is one number, 769.984107 over 19 samples on the pack, that makes s times the forward model match the seismic; it is needed because the shape carries an arbitrary amplitude and the inversion reads contrast from the trace over the synthetic. The level below about 8 Hz comes from the LFM, and one number cannot change the wavelet's shape.")
 
-# CROSS m01 (the stated Ricker) + m03 (angle-dependent wavelets)
-q(2, "The pack's stated wavelet is a zero-phase 25 Hz Ricker of half length 40 ms. At a half length of 3, extractAngleWavelets returns a 7-sample wavelet for each stack. What does the course do with that result?",
- "It states the Ricker shape and scales it per stack, since a 7-sample wavelet spans 24.000000 ms, shorter than the stated Ricker.",
- ["It runs the simultaneous inversion on the three 7-sample wavelets, whose synthetic at Ekene-1 reaches 0.941755 against the near stack.",
-  "It lengthens the half length to 15, where extractAngleWavelets returns a 31-sample wavelet for all 3 stacks.",
-  "It drops the far stack, whose 7-sample wavelet fits worst, and inverts from near and mid only."],
- "A 7-sample wavelet spans 24.000000 ms, shorter than the 21-sample Ricker, so the course states the Ricker shape and scales it per stack for the inversions. At a half length of 15 the engine returns no wavelet for any stack (0 of 3), and the inversions use near, mid and far at 10, 20 and 30 degrees.")
+q(2, "The stated Ricker spans 21 samples. When the well-wavelet extraction under QI Studio's angle-wavelet engine is asked for an 11-sample wavelet on Ekene-1's short log, which message comes back?",
+ '"The log covers 16 usable samples at the well; a 11-sample wavelet needs at least 22. Shorten the wavelet or use the statistical one."',
+ ['"The well reflectivity is flat over the seismic at the well, so there is nothing to extract a wavelet from."',
+  '"The wells overlap too little seismic to scale the wavelet."',
+  "None: it returns an 11-sample wavelet for each stack, the 27 logged samples clearing the need."],
+ "At a half length of 5 the engine gives the message in the key, in its own words. The flat-reflectivity message comes at a half length of 15, the overlap message is waveletScale's, and a wavelet per stack comes back at a half length of 3, 7 samples long.")
 
 # CROSS m01 (the settings the tier states) + m04 (left-out wells and the widened band)
 q(3, "Which stated frequency is both the high cut of the log an inversion is scored against and the low-pass calibrateProperty applies to each well's ln(AI) and porosity at seismic scale?",
- "50 Hz.",
+ "50 Hz in both places.",
  ["8 Hz, the low-frequency cut of the LFM and the crossover sparse-spike takes its low frequencies through.",
   "60 Hz, the upper edge of the coloured band from 8 to 60 Hz.",
   "25 Hz, the frequency of the stated zero-phase Ricker wavelet."],
- "The tier scores every inversion against the log after a 50 Hz high cut, and the seismic-scale calibration low-passes ln(AI) and porosity at 50 Hz. 8 Hz is the LFM cut and the sparse-spike crossover, 8 to 60 Hz the coloured band, 25 Hz the Ricker.")
+ "One figure does both jobs: inversions are scored on the log high-cut at 50 Hz, and calibrateProperty low-passes ln(AI) and porosity at 50 Hz before it fits. The LFM and the sparse-spike crossover sit at 8 Hz, the coloured band tops out at 60 Hz, and the Ricker is a 25 Hz wavelet.")
 
 # CROSS m01 (the seeded adjoint test) + m02 (sensitivity across realisations)
 q(0, "A report states the seeds behind every figure. Which seeds and noise level produce the mean relative spread in AI of 0.645787 at Ekene-1?",
@@ -79,84 +78,86 @@ q(3, "The full-stack wavelet scale is 769.984107. Which statement about the thre
 
 # ---- m02 post-stack inversion ----
 
-q(2, "The blind model-based inversion at Ekene-1 runs at 20, 60, 120 and 300 iterations with eps 0.050000. What do the residual and the AI error do as the count rises?",
- "The residual falls to 1.233454 while the AI error at the well rises to 52.851805 percent.",
- ["Both fall, the AI error reaching 8.300748 percent at 300 iterations.",
-  "The residual rises to 3.419041 while the correlation with the log climbs to 0.852881, the solver settling on the trend.",
-  "Neither moves after 60, the solver stopping early so that 120 and 300 iterations both repeat the residual 2.121830."],
- "From 20 to 300 iterations the residual falls from 3.419041 to 1.233454 while the AI error rises from 8.300748 to 52.851805 percent: the solver fits the trace beyond what the wavelet and scale explain. Every count asked is run, 120 and 300 included.")
+q(2, "With the iteration count held at 300, a heavier weight eps of 1.000000 is tried in the Ekene-1 blind run. What scores come back?",
+ "0.219646 for the correlation, 33.801729 percent for the error, 1.320986 for the residual.",
+ ["0.732457 for the correlation and 13.421322 percent for the error, the scores of eps 5.000000.",
+  "0.091593 and 52.851805 percent, eps having no effect once 300 iterations run.",
+  "0.583443 and 19.965981 percent, the 120-iteration row at eps 0.050000."],
+ "Raising eps to 1.000000 lifts the correlation to 0.219646 and cuts the error to 33.801729 percent, the residual reading 1.320986. The pair 0.091593 and 52.851805 is the lighter weight, 0.732457 and 13.421322 the weight of 5.000000, and 0.583443 and 19.965981 come from 120 iterations.")
 
-q(1, "Sparse-spike runs at QI Studio's starting lambda of 0.002000 on the Ekene-1 trace, whose largest absolute amplitude is 399.814697. How many of the 101 reflectivity samples are non-zero?",
- "101 of 101: on traces of this amplitude that lambda imposes no sparsity.",
- ["27 of 101, one spike for each logged sample at the well, the log setting where reflectivity may sit.",
-  "61 of 101 at 400 iterations, the extra iterations sharpening even the smallest lambda into a sparse series.",
-  "36 of 101, lambda being read against the unit wavelet's peak of 1.000000 and the trace's amplitude ignored."],
- "At lambda 0.002000 the count is 101 at both 60 and 400 iterations, so that lambda imposes no sparsity. 61 is the count at lambda 200.000000 and 400 iterations, and 36 and 27 belong to lambda 5000.000000; lambda is read on the trace's own amplitude scale.")
+q(1, "On the 101-sample Ekene-1 trace, sparse-spike is run at lambda 1000.000000. How many reflectivity samples stay non-zero at 60 and at 400 iterations?",
+ "67 at 60 iterations, falling to 44 at 400.",
+ ["101 at both counts, as at QI Studio's starting lambda of 0.002000.",
+  "36 at 60 and 27 at 400, the counts at lambda 5000.000000.",
+  "96 and 61, the lambda 200.000000 counts."],
+ "At lambda 1000.000000 the course prints 67 non-zero samples at 60 iterations and 44 at 400; more iterations sharpen the sparsity. 101 is the count at 0.002000, 96 and 61 belong to 200.000000, and 36 and 27 to 5000.000000.")
 
 q(0, "Coloured inversion at Ekene-1 correlates 0.931237 with the log band-passed between 8 and 50 Hz. Why does the course score it by correlation alone?",
  "Its output is relative impedance, band-limited with no level, so there is no level to compare.",
- ["Its operator carries the LFM's level, and an RMS error would count that level twice.",
+ ["Its operator carries the LFM's level from the wells, and an RMS error would count that level twice over.",
   "Its wavelet scale of 769.984107 leaves every AI error in trace units.",
   "Its slope alpha of -1.012769 is fitted to the trace, fixing the error at zero."],
  "Coloured inversion uses no wavelet and no LFM: one operator with phase minus 90 degrees and slope alpha -1.012769 fitted to the wells' logs, so its output is relative impedance with no level, scored by correlation alone. The scale 769.984107 belongs to the wavelet the absolute inversions use.")
 
-q(3, "The blind-well table sets the LFM alone beside the model-based inversion at the four pack wells. Which reading does the course print?",
- "The LFM alone correlates negatively at every well, and its RMS error is lower than the model-based blind error at 4 of 4.",
- ["The LFM alone correlates positively at every well, from 0.759365 to 0.889320, carrying level and shape.",
-  "The model-based blind error is lower than the LFM's at every well, the inversion supplying the level the LFM lacks.",
-  "Keeping each well in its own LFM lowers the model-based error at all four wells, Ekene-1 dropping below 10.557858 percent."],
- "The LFM-only correlations run from -0.345505 to -0.190352 and its error is lower than the model-based blind error at 4 of 4 wells: the LFM carries the level, the inversion the shape. 0.759365 to 0.889320 is the inversions' blind correlation range, and kept in, Ekene-1's error is 10.805677 percent.")
+q(3, "sparseSpike solves for a sparse reflectivity r by FISTA. How does it reach an absolute ln(AI) from r?",
+ "It integrates r to a relative ln(AI), m_(i+1) = m_(i-1) + 2 r_i, and takes the low frequencies from the LFM through a moving-average crossover at 8 Hz.",
+ ["It integrates r once from the top sample, taking its level from the first logged AI at the well.",
+  "It runs CGLS on r with eps 0.050000 towards the LFM, as modelBased does with m.",
+  "It multiplies r by the wavelet scale of 769.984107, which carries the level of AI."],
+ "sparseSpike integrates r into a relative ln(AI) by m_(i+1) = m_(i-1) + 2 r_i, levels each of the two interleaved chains to its mean, and takes the low frequencies from the LFM through an 8 Hz moving-average crossover. CGLS towards m0 is modelBased's solver, and the scale 769.984107 only joins wavelet and trace.")
 
-q(1, "At which pack wells does the sparse-spike blind AI error fall below the LFM-only error?",
- "Ekene-1 and Ekene-4.",
- ["Ekene-2 and Ekene-3, where the LFM-only errors are 10.450743 and 8.512597 percent.",
-  "All four wells, sparse-spike carrying the level of the log as well as its shape.",
-  "None of the four, the LFM alone keeping the lower error everywhere for both methods."],
- "Sparse-spike's blind error is lower than the LFM alone at Ekene-1 (8.356661 against 8.638086 percent) and Ekene-4; the LFM keeps the lower error at Ekene-2 and Ekene-3. Against model-based, the LFM is lower at 4 of 4.")
+# CROSS m02 (post-stack blind wells) + m03 (blind wells per parameter)
+q(1, "At Ekene-4, blind, which three AI correlations do model-based post-stack, sparse-spike and simultaneous inversion from near, mid and far return, in that order?",
+ "0.759365, 0.778867 and 0.780557.",
+ ["0.852881, 0.873414 and 0.863789, the Ekene-1 figures.",
+  "0.889320, 0.881157 and 0.854299, the Ekene-2 figures.",
+  "0.847503, 0.821455 and 0.847660, the Ekene-3 figures."],
+ "At Ekene-4 the blind AI correlations are 0.759365 for model-based, 0.778867 for sparse-spike and 0.780557 for the simultaneous inversion from all three stacks. The other options are the same three figures at Ekene-1, Ekene-2 and Ekene-3.")
 
 q(2, "Over 20 realisations at Ekene-1, the 1304.000000 ms row reads Q10 5069751.189881, Q50 6629158.255936 and Q90 9889658.945117. What does relativeSpread return there, and which of the three is the low figure?",
- "0.727077, with Q10 the low figure, the value 10 percent of realisations fall below.",
- ["The same 0.727077, with Q90 the low figure, as P90 is for a volume.",
+ "0.727077, from (Q90 - Q10) / Q50, Q10 being the low end.",
+ ["0.727077, with Q90 the low figure as for a volume.",
   "0.645787, the mean spread over the 27 logged samples, with Q10 as the low figure.",
   "0.498207, the spread one row up at 1288.000000 ms, again with Q10 as the low figure."],
- "relativeSpread is (Q90 - Q10) / Q50, 0.727077 at 1304.000000 ms; Q10 is the 10th percentile, the low figure, and the P-label convention with P90 low applies to outcomes such as volumes. 0.645787 is the mean over the logged samples and 0.498207 the row at 1288.000000 ms.")
+ "relativeSpread divides Q90 - Q10 by Q50, giving 0.727077 at 1304.000000 ms. For a parameter Q10 is the 10th percentile and the low end; the convention with P90 low belongs to outcomes such as volumes. 0.645787 is the mean over 27 samples and 0.498207 the 1288.000000 ms row.")
 
 # ---- m03 simultaneous inversion ----
 
-q(0, "At normal incidence, what do Fatti's coefficients give at the Ekene background Vs/Vp of 0.394396?",
- "G1 0.500000 for AI, with G2 and G3 both zero: only AI contributes.",
- ["G1 0.500000 and G3 -0.006165, density entering even at zero angle.",
-  "G1 0.666667, G2 -0.155548 and G3 -0.088893, all three contributing at zero angle.",
-  "G2 0.500000 for SI, the shear term leading at zero angle."],
- "At 0 degrees G1 is 0.500000 and G2 and G3 are 0.000000, so only AI contributes. G3 -0.006165 is the 10 degree value, and 0.666667, -0.155548 and -0.088893 are the coefficients at 30 degrees.")
+q(0, "Fatti's linearisation writes R(theta) = G1 dln(AI) + G2 dln(SI) + G3 dln(rho), with K the background Vs/Vp. Which coefficient does K not enter?",
+ "G1, written (1 + tan^2 theta) / 2.",
+ ["G2, written -4 K^2 sin^2 theta, the shear term K scales.",
+  "G3, written (4 K^2 sin^2 theta - tan^2 theta) / 2.",
+  "None of the three: K enters each one through tan^2 theta."],
+ "G1 = (1 + tan^2 theta) / 2 holds no K, while G2 = -4 K^2 sin^2 theta and G3 = (4 K^2 sin^2 theta - tan^2 theta) / 2 both carry K^2. On the pack K is 0.394396, the mean Vs / Vp over the logged samples in the window.")
 
-q(3, "At Ekene-1, blind, simultaneous inversion runs from the near stack only. What does density do?",
- "Its RMS error stays under one percent at 0.627310 while its correlation changes to 0.614032.",
- ["Its correlation turns to -0.767957 with an error of 14.112317 percent, the near stack driving density hardest of all.",
-  "It keeps the LFMs' correlation of -0.087754, G3 being zero at 10 degrees so the near stack leaves density alone.",
-  "Its error rises to 12.184029 percent, the near stack moving density's level."],
- "With the near stack only, density's error is 0.627310 percent against the LFMs' 0.767482 and its correlation moves from -0.087754 to 0.614032: G3 is -0.006165 at 10 degrees, tiny but non-zero. -0.767957 and 14.112317 come from all three stacks, 12.184029 from near and mid.")
+q(3, "At Ekene-3, blind from the near, mid and far stacks, what does the simultaneous inversion score for density?",
+ "A correlation of -0.719301 and an error of 16.816175 percent.",
+ ["A correlation of 0.360220 and an error of 12.979404 percent, density following Vp/Vs at this well.",
+  "A correlation of 0.847660 and an error of 10.653026 percent, density riding on the shape of AI.",
+  "-0.413424 and 9.115991 percent, Ekene-4's figures."],
+ "Ekene-3's density row reads -0.719301 and 16.816175 percent. 0.360220 and 12.979404 are its Vp/Vs figures, 0.847660 and 10.653026 its AI figures, and -0.413424 with 9.115991 is Ekene-4's density.")
 
-q(1, "At Ekene-1, blind, simultaneous inversion from the near stack alone returns which Vp/Vs scores?",
- "A correlation of -0.744719 and an error of 30.824755 percent.",
- ["A correlation of 0.470296 and an error of 10.707173 percent, the scores the near, mid and far stacks reach together.",
-  "The LFMs' scores, 0.048283 and 11.122749 percent.",
-  "0.383124 and 13.660754 percent, the mid stack adding nothing."],
- "The near stack alone gives Vp/Vs a correlation of -0.744719 and an error of 30.824755 percent, worse than the LFMs alone at 0.048283 and 11.122749. Adding the mid stack gives 0.383124 and 13.660754, and all three give 0.470296 and 10.707173.")
+# CROSS m02 (model-based blind) + m03 (what each set of stacks resolves)
+q(1, "Post-stack model-based inversion at Ekene-1, blind, scores an AI error of 10.557858 percent. What AI error and correlation does the simultaneous inversion from near, mid and far return at the same well, blind?",
+ "8.956955 percent, with an AI correlation of 0.863789.",
+ ["10.557858 percent again, the simultaneous run reproducing the post-stack AI exactly.",
+  "9.807415 percent with 0.858677, near stack only.",
+  "8.638086 percent with -0.190352, the three LFMs' figures with no seismic."],
+ "From near, mid and far the simultaneous inversion at Ekene-1 gives AI 0.863789 and 8.956955 percent. 9.807415 and 0.858677 come from the near stack alone, and -0.190352 with 8.638086 from the three LFMs with no seismic.")
 
-q(2, "Run blind at all four pack wells from the near, mid and far stacks, which parameter does the course find correlates well?",
- "AI: it correlates well at every well, and Vp/Vs and density do not.",
- ["AI and Vp/Vs, the shear term correlating positively at every well from 0.360220 upwards.",
-  "All three, density included, its error falling to 9.115991 percent at Ekene-4.",
-  "Density alone, from its Ekene-4 correlation of -0.413424."],
- "AI correlates from 0.780557 to 0.863789 at the four wells; Vp/Vs reads -0.287516 at Ekene-2 and -0.132709 at Ekene-4, and density is negative at all four, -0.413424 at Ekene-4 included. A small density error such as 9.115991 percent sits beside a negative correlation.")
+q(2, "At the far stack's angle of 30 degrees and K 0.394396, what does Fatti's SI coefficient G2 print beside G1?",
+ "G2 -0.155548 beside G1 0.666667.",
+ ["G2 -0.072783 beside G1 0.566237, the 20 degree pair.",
+  "G2 -0.257075 beside G1 0.852044, the 40 degree pair.",
+  "G2 -0.088893 beside G1 0.666667, the density value read as shear."],
+ "At 30 degrees the coefficients are G1 0.666667, G2 -0.155548 and G3 -0.088893. The pairs at 20 and 40 degrees are -0.072783 with 0.566237 and -0.257075 with 0.852044.")
 
-q(0, "At Ekene-1, the well-wavelet fit under extractAngleWavelets runs with a half length of 15 samples, a 31-sample wavelet longer than the 27 logged samples. What does the engine say?",
- '"The well reflectivity is flat over the seismic at the well, so there is nothing to extract a wavelet from."',
- ['"The log covers 16 usable samples at the well; a 11-sample wavelet needs at least 22. Shorten the wavelet or use the statistical one."',
-  '"The wells overlap too little seismic to scale the wavelet."',
-  "Nothing: it returns a 7-sample wavelet for each of the 3 stacks, trimming the request to fit the log."],
- "With a half length of 15 no row of the fit is complete and the engine gives the message in the key, in its own words. The message about 16 usable samples comes at a half length of 5, the overlap message is waveletScale's, and the 7-sample wavelets come at a half length of 3.")
+q(0, "Ekene-1 is inverted with its own log left out of the LFMs, from two stacks only, near and mid. Which scores do Vp/Vs and density print?",
+ "Vp/Vs 0.383124 with 13.660754 percent; density -0.707948 with 12.184029 percent.",
+ ["Vp/Vs -0.744719 with 30.824755 percent; density 0.614032 with 0.627310 percent, the near-only row.",
+  "Vp/Vs 0.470296 with 10.707173 percent; density -0.767957 with 14.112317 percent, all three stacks.",
+  "Vp/Vs 0.048283 with 11.122749 percent; density -0.087754 with 0.767482 percent, the LFMs alone."],
+ "With near and mid the course prints Vp/Vs 0.383124 and 13.660754 percent and density -0.707948 and 12.184029 percent. The other rows are the near stack alone, all three stacks and the LFMs with no seismic.")
 
 # CROSS m03 (blind wells per parameter) + m04 (two attributes)
 q(3, "The two-attribute facies model on AI and Vp/Vs scores a share correct of 0.973443 on its own samples at log scale. At which pack wells is the blind Vp/Vs correlation of the simultaneous inversion negative?",
@@ -168,26 +169,26 @@ q(3, "The two-attribute facies model on AI and Vp/Vs scores a share correct of 0
 
 # ---- m04 properties from impedance ----
 
-q(1, "The log-scale porosity transform is calibrated on AI from 5693260.530000 to 8402495.750400. What does predictWithInterval do at AI 8500000.000000?",
- "It still answers, 0.169599 with an 80 percent band of 0.146406 to 0.192792, widened only by the distance term.",
- ["It refuses outside the calibration range, the way fitVsRegression refuses a form it does not know.",
-  "It returns NaN for the prediction and both ends of the band, the panel showing a gap.",
-  "It clamps the AI to 8402495.750400 and returns that point's porosity, so the band cannot widen."],
- "8500000.000000 lies outside the calibration range; the engine still answers 0.169599 between 0.146406 and 0.192792, its interval widening only by the distance term. No refusal, no NaN and no clamp: a study flags the prediction as made outside the range.")
+q(1, "At AI 6500000.000000, what porosity and 80 percent band does the log-scale transform return?",
+ "0.215267, between 0.192157 and 0.238378.",
+ ["0.203850, between 0.180764 and 0.226936, the figures at AI 7000000.000000.",
+  "0.192433 between 0.169342 and 0.215525, read at AI 7500000.000000.",
+  "0.215267 between 0.174207 and 0.233493, a band from the 90 percent level."],
+ "At 6500000.000000 the transform predicts 0.215267 with Q10 0.192157 and Q90 0.238378 at the 80 percent level; the slope is negative, so softer rock reads more porous. 0.174207 to 0.233493 is the 90 percent interval at AI 7000000.")
 
-q(3, "At seismic scale the porosity transform has s 0.007175 log against log and a pooled left-out RMS of 0.024072. What widening s_extra does calibrateProperty add?",
- "0.022977, from sqrt(RMS^2 - s^2), since the RMS exceeds s.",
- ["0.017980, the log-scale fit's residual error.",
-  "0.007175, s itself, with nothing added.",
-  "0.024072, the pooled RMS added to s whole, the two errors stacking in a straight line."],
- "s_extra = sqrt(RMS^2 - s^2) when the RMS exceeds s, and the course prints 0.022977. 0.017980 is the log-scale s on 644 samples; the left-out residuals carry the inversion's error, which a log-against-log fit cannot see.")
+q(3, "Refitted at seismic scale on each well's porosity inside its Ekene Sand times, what transform does calibrateProperty fit?",
+ "Intercept 0.302982 and slope -0.017033 on 20 upscaled samples.",
+ ["Intercept 0.363690 and slope -0.022834 on 644 samples, the log-scale fit carried up unchanged.",
+  "Intercept 0.302982 and slope -0.017033 on 644 samples, the log samples kept at full count.",
+  "s 0.007175 and RMS 0.024072, no line refitted."],
+ "Fitted on the upscaled samples inside the sand times, the seismic-scale line has intercept 0.302982 and slope -0.017033 on n 20. The 644-sample line at log scale is a separate fit, and 0.007175 and 0.024072 are the two errors that travel beside the refitted line.")
 
-q(2, "Left out of the seismic-scale porosity calibration, Ekene-4's 4 samples return a correlation of NaN. What does that result mean?",
- "Either series has no spread over the well's samples, and the code returns NaN as its result.",
- ["The engine refused Ekene-4, as substituteVels refuses a porosity of 0, and the well leaves the pool.",
-  "Ekene-4's predictions all fall outside the widened band, its share inside reading 0.600000.",
-  "The prediction and the log agree exactly at all 4 samples, the RMS porosity error reading 0.000000."],
- "A NaN correlation is the result the code returns when either series has no spread over the well's samples. Ekene-4 still reports an RMS error of 0.012741, a bias of -0.009593 and a share inside the widened band of 1.000000; 0.600000 is Ekene-1's share.")
+q(2, "Left out of the seismic-scale porosity check, Ekene-2 is predicted from its blind inverted AI on 6 samples. What correlation and band coverage does it return?",
+ "Correlation -0.794283, with 0.833333 of its samples inside the widened 80 percent band.",
+ ["Correlation NaN, its predicted series showing no spread over the samples, with 1.000000 inside the band.",
+  "Correlation -0.484704, with 0.600000 inside the band, as at Ekene-1.",
+  "Correlation -0.734150 and 1.000000 inside, the Ekene-3 pair."],
+ "Ekene-2 left out returns a correlation of -0.794283, an RMS error of 0.027716 and a share inside the widened band of 0.833333. The NaN belongs to Ekene-4, -0.484704 with 0.600000 to Ekene-1, and -0.734150 with 1.000000 to Ekene-3.")
 
 q(0, "On AI alone at 6600000.000000, the sample-proportion priors make brine sand most likely at 0.557911. What do equal priors return at the same AI?",
  "Oil sand at 0.673039 and brine sand at 0.326961: the prior is a stated choice, and it moves the answer.",
@@ -196,36 +197,36 @@ q(0, "On AI alone at 6600000.000000, the sample-proportion priors make brine san
   "Oil sand at 0.997373, the call the two-attribute model makes at Vp/Vs 1.750000."],
  "With equal priors at 6600000.000000 the posteriors are shale 0.000000, oil sand 0.673039 and brine sand 0.326961, so the call flips. 0.796396 is shale's sample-proportion prior, and 0.997373 needs Vp/Vs 1.750000 as a second attribute.")
 
-q(1, "In the one-attribute confusion matrix on AI, how are the 179 oil-sand samples called?",
- "49 oil sand, 127 brine sand and 3 shale.",
- ["160 oil sand and 19 brine sand, the oil-sand row behind the share correct of 0.934872.",
-  "Most of them as oil sand, the diagonal entry that lifts the share correct to 0.934872.",
-  "26 oil sand and 439 brine sand, the brine-sand row read as the oil-sand row."],
- "On AI alone the oil-sand row reads 3 shale, 49 oil sand and 127 brine sand: most oil-sand samples are called brine sand. 160 and 19 are the two-attribute row, and 439 and 26 belong to the brine-sand row of the AI matrix.")
+q(1, "With Vp/Vs added to AI, how does the two-attribute confusion matrix call the 465 brine-sand samples?",
+ "455 brine sand, 9 oil sand and 1 shale.",
+ ["439 brine sand and 26 oil sand, the counts of the model on AI alone.",
+  "455 brine sand and 10 oil sand, every miss going to the oil sand.",
+  "160 brine sand and 19 oil sand, the oil-sand row read across."],
+ "The two-attribute brine-sand row reads 1 shale, 9 oil sand and 455 brine sand, up from 439 on AI alone, where 26 went to oil sand. 160 and 19 are the two-attribute oil-sand row.")
 
 q(3, "How does QI Studio label a facies class named for a fluid, such as oil sand or brine sand?",
  "fluid_hypothesis, and every other class calibrated_prediction.",
  ["calibrated_prediction, like every class.",
   "fluid_measurement, for a class scoring above 0.934872.",
   "oil_sand or brine_sand, the fluid read straight from the class name and carried through to every map."],
- "A facies named for a fluid is a hypothesis about the pore fluid, and QI Studio labels it fluid_hypothesis; every other class is calibrated_prediction. No engine infers a fluid from a class name.")
+ "The pore fluid behind a fluid-named class is an interpretation, so its label is fluid_hypothesis; shale carries calibrated_prediction. No engine reads a fluid from a class name, whatever share correct, 0.934872 or 0.973443, the model scores.")
 
 # CROSS m02 (blind wells) + m04 (left-out wells and the widened band)
 q(2, "calibrateProperty leaves each well out, refits the porosity transform on the others, and predicts that well's porosity. From which AI does it predict?",
  "The blind inverted AI at that well, from the inversion with the well left out of its LFM.",
  ["The LFM alone at that well, whose AI error at Ekene-1 left out is 8.638086 percent.",
   "The well's own log AI after the 50 Hz high cut, so the residuals match s of 0.007175.",
-  "Coloured inversion's relative impedance, the one product built with no LFM between wells."],
- "Porosity is predicted from the blind inverted AI at the left-out well, so the left-out residuals carry the inversion's error and their pooled RMS of 0.024072 widens the band. The log against log gives only s 0.007175, and coloured inversion carries no level.")
+  "Coloured inversion's relative impedance, the one product built with no LFM between wells, so no level leaks in."],
+ "The check predicts each left-out well from the AI the blind inversion returns there, its LFM built from the other wells; that is why the pooled left-out RMS, 0.024072, exceeds the log-against-log s of 0.007175. Coloured inversion has no level to feed a transform.")
 
 # ---- m05 prospects ----
 
-q(0, "On the Ekene Sand top grid from the six development wells' tops, what column does spillAnalysis return from crest to spill, and what flag stands beside it?",
- "2.380249 ft, with the spill limited by the map edge.",
- ["From the crest at -5051.568570 ft down to the wells' contact at -5118.110236 ft, the closure closed at that contact.",
-  "2.380249 ft, the spill at a saddle inside the map.",
-  "11 ft, one foot for each node at the spill."],
- "The crest is -5051.568570 ft and the spill -5053.948819 ft, a column of 2.380249 ft with the spill limited by the map edge, so the figure is the map's limit. At the wells' contact, -5118.110236 ft, the closure is reported open; 11 is the node count at the spill.")
+q(0, "The closure engine reads the Ekene Sand top grid of 25 by 20 nodes every 328.083990 ft. In what units does it read elevation and spacing?",
+ "In one unit for both, which the course runs in feet, with z minus the depth below the kelly bushing.",
+ ["Elevation in feet and spacing in metres, the kit's projection unit, converted inside the engine.",
+  "Both in metres, the unit the kit writes, the course converting only the printed column.",
+  "Elevation as two-way time in milliseconds, the spacing in feet."],
+ "The engine reads elevation and spacing in one unit, and the course runs it in feet; z is minus the depth below the kelly bushing, so the crest reads -5051.568570 ft and the wells' contact -5118.110236 ft.")
 
 q(1, "Designed teaching anomaly A, every mapped node shallower than the spill, has an edge scatter of 0.643935 ft. What conformance and implied contact does anomalyConformance return?",
  "Conformance 0.729467, implied contact -5053.959008 ft.",
@@ -234,79 +235,79 @@ q(1, "Designed teaching anomaly A, every mapped node shallower than the spill, h
   "Conformance 0.643935, the scatter read directly."],
  "Conformance is 1 - scatter / relief, and for A it is 0.729467 with an implied contact of -5053.959008 ft, just below the spill at -5053.948819 ft. 1.000000 is A's share inside the closure, and 0.000000 with -5068.442175 ft is anomaly B.")
 
-q(3, "Designed teaching anomaly B is cut at the grid's middle column. Its edge scatter is 6.992237 ft against a closure relief of 2.380249 ft. What conformance does the engine return?",
- "0.000000, as 1 - scatter / relief is clipped to 0 to 1.",
- ["0.152778, the share of B's nodes lying inside the closure at the spill.",
-  "0.729467, the conformance of A carried to every anomaly on the same closure.",
-  "None: the engine refuses the anomaly."],
- "B's scatter exceeds the closure's relief, so conformance clips to 0.000000, under the 0.3 the assessment counts as cutting across. The engine still answers; 0.152778 is B's share inside the closure and 0.729467 is A's conformance.")
+q(3, "Designed teaching anomaly B keeps every node shallower than a level 20 ft below the spill, west of the grid's middle column only. What node counts and share inside the closure does the engine return?",
+ "72 nodes, 22 of them edge nodes, with 0.152778 inside the closure.",
+ ["11 nodes, 9 of them edge nodes, wholly inside at 1.000000, the counts of anomaly A.",
+  "201 nodes, every mapped node of the grid, with 0.152778 inside.",
+  "72 nodes, every one on the edge, the straight cut adding edge all along, 1.000000 inside."],
+ "B holds 72 nodes with 22 edge nodes, and 0.152778 of it lies inside the closure; its conformance clips to 0.000000. 11 nodes with 9 edge nodes is anomaly A, wholly inside, and 201 is the count of mapped nodes on the grid.")
 
-q(2, "An anomaly is present with conformance 0.83, 0.9 inside the closure, a feasible verdict and nothing open, but only one independent supporting source. What does assessProspect return?",
- "investigate, with seismic support supports.",
- ["mature, with supports, three supporting items counting as three sources.",
-  "investigate, with neutral, a single source dropping the support word.",
-  "downgrade, with against, too few sources counting against the prospect."],
- "Maturing needs two independent supporting sources, so the same case with one source returns investigate while the seismic still supports. neutral comes from a competing explanation judged likely or an unstated feasibility with no anomaly, and against from no anomaly on feasible data.")
+q(2, "No anomaly is seen on a prospect. Which stated input decides between downgrade and retain?",
+ "The feasibility verdict: downgrade with against where it is feasible, retain with neutral where it is not stated.",
+ ["The count of independent sources: downgrade with one, retain with two.",
+  "The conformance: downgrade under 0.3, retain at 0.7 and above.",
+  "A competing explanation: downgrade where it is ruled out, retain where it is open."],
+ "Feasibility decides what absence means. With the case visible, a missing anomaly downgrades the prospect and the support reads against; with feasibility unstated the prospect is retained and the support is neutral. Source counts and the 0.3 and 0.7 thresholds act on an anomaly that is present.")
 
-q(0, "No anomaly is seen, and the feasibility verdict is not stated. What does the assessment return?",
- "retain, neutral: absence counts against a prospect only where the feasibility study says the case would be visible.",
- ["downgrade, against, the absence of an anomaly counting against every prospect.",
-  "investigate, neutral, the row for a competing explanation judged likely.",
-  "mature, supports, nothing being open on the prospect."],
- "With no anomaly and feasibility not stated the table returns retain and neutral; downgrade and against need the feasibility study to say the case would be visible. investigate with neutral is the competing explanation row, and mature with supports needs an anomaly with two independent sources.")
+q(0, "Which two cases in the assessment's decision table return a seismic support of neutral?",
+ "No anomaly with feasibility not stated, and an anomaly present with a competing explanation judged likely.",
+ ["No anomaly on feasible data, and an anomaly with one independent source.",
+  "An anomaly with conformance 0.83, and one with 0.9 inside the closure.",
+  "Every case recommending investigate, the word neutral following the recommendation."],
+ "neutral comes from the retain row (no anomaly, feasibility not stated) and the competing-explanation row. No anomaly on feasible data reads against, and one independent source returns investigate with supports, so support and recommendation move apart.")
 
-q(1, "A prospect is picked at the mapped node nearest the grid's centre, column 12, row 9, at -5057.417979 ft. Where does climbToCrest end?",
- "At node 310, -5051.568570 ft, the same crest as the highest mapped node.",
- ["At the spill, -5053.948819 ft, the climb stopping where the flood first meets the mapped edge.",
-  "Where it starts, -5057.417979 ft, the climb checking four neighbours and finding none higher.",
-  "At -5053.959008 ft, anomaly A's implied contact."],
- "The climb steps to the highest of its eight neighbours until none is higher and ends at node 310, -5051.568570 ft, the highest mapped node. -5053.948819 ft is the spill and -5053.959008 ft anomaly A's implied contact.")
+q(1, "spillAnalysis floods outward from the crest, and climbToCrest climbs from a picked point. How many neighbours does each consider at a node?",
+ "Four for the flood, which uses four-neighbour connectivity, and eight for the climb.",
+ ["Eight for both, so a diagonal saddle counts for the spill as it does for the crest.",
+  "Four for both, the climb stepping only along rows and columns.",
+  "Eight for the flood and four for the climb, the flood needing diagonals to reach the edge."],
+ "The flood that finds the spill uses four-neighbour connectivity; the climb steps to the highest of its eight neighbours. On the Ekene grid the climb from column 12, row 9 reaches node 310 at -5051.568570 ft.")
 
 # CROSS m04 (the confusion matrix) + m05 (competing explanations and the assessment)
-q(3, "An interpreter judges likely the competing explanation that a soft impedance anomaly is brine sand, citing the AI-only confusion matrix where 127 of the 179 oil-sand samples are called brine sand. The anomaly is present. What does the assessment return?",
- "investigate, with seismic support neutral.",
+q(3, "An interpreter judges likely the competing explanation that a soft impedance anomaly is brine sand, citing the AI-only confusion matrix where 127 of the 179 oil-sand samples are called brine sand. The anomaly is present, every other input as in the decision table's first row (conformance 0.83, two independent sources, feasible). What does the assessment return?",
+ "investigate, the likely rival holding the seismic support at neutral.",
  ["mature, supports, the anomaly being present with two independent sources behind it.",
   "downgrade, against, the rival explanation counting as the absence of an anomaly.",
-  "retain, neutral, the row for no anomaly where feasibility is not stated."],
+  "retain, neutral, the row for no anomaly with feasibility unstated."],
  "A competing explanation judged likely holds the prospect at investigate with neutral support, the table's last row. On AI alone 127 of the 179 oil-sand samples are called brine sand, which is why brine sand is a real rival; downgrade and retain are the two rows with no anomaly.")
 
-# CROSS m02 (post-stack impedance) + m05 (independent evidence)
-q(2, "A study lists three supporting items: a full-stack RMS amplitude, an impedance inverted from the same full stack, and a far-stack brightening. How does evidenceIndependence count them?",
- "3 supporting items and 2 independent sources, the first two sharing the source full_stack.",
- ["3 items and 3 sources, the inversion adding the LFM's information to the full stack's.",
-  "3 items and 1 source, every seismic attribute counting as one response.",
-  "2 items and 2 sources, the impedance dropped as a copy of the RMS amplitude."],
- "Attributes computed from one seismic response are one piece of evidence, so the full-stack amplitude and the full-stack impedance share full_stack: 3 supporting items, 2 independent sources. The far-stack brightening is the second source.")
+# CROSS m02 (post-stack impedance) + m05 (independent evidence and the assessment)
+q(2, "Only two attributes back a soft anomaly: the RMS amplitude of the full stack, and AI inverted from that same full stack. What does the evidence count make of them, and what would maturing need?",
+ "One, the shared source full_stack; maturing needs two independent supporting sources.",
+ ["Two, the inversion adding the LFM's information from the wells to the full stack, which is enough to mature.",
+  "Two, one per attribute, though maturing needs three.",
+  "None, an impedance being no supporting item, so the prospect is downgraded."],
+ "Two attributes drawn from one seismic response count once, under the source full_stack. Maturing takes two independent supporting sources, which the course's worked case gets from a far-stack brightening, a second response.")
 
 # ---- m06 the report and the limits ----
 
-q(1, "Which figure does QI never set, and what does prospectAssessment.js return in its place?",
- "The geological chance of success; the engine returns a recommendation and a seismic support, and no probability of success.",
- ["The gross rock volume; the engine returns a probability of success for the risk team to adopt.",
-  "The recommendation; the engine returns the probability that the anomaly is oil sand, 0.997373.",
-  "The seismic support word; the risk team picks supports, neutral or against from the closure."],
- "QI never sets the geological chance of success: prospectAssessment.js returns a recommendation (mature, investigate, retain or downgrade) and a seismic support (supports, neutral or against) for the risk team to weigh. Closure returns the gross rock volume, 1519731.367693 ft3 at the spill.")
+q(1, "QI never sets a prospect's geological chance of success. Who weighs what a QI study reports, and what does it report?",
+ "The risk team weighs it; QI reports what the seismic says, supports, neutral or against, with a recommendation.",
+ ["The interpreter alone, who turns the oil-sand posterior of 0.997373 at Vp/Vs 1.750000 into the chance.",
+  "The closure engine, which weighs the gross rock volume of 1519731.367693 ft3 at the spill.",
+  "The assessment engine, which reports a probability of success beside its recommendation."],
+ "QI reports the seismic support for the risk team to weigh, and prospectAssessment.js returns a recommendation and a seismic support with no probability of success. A posterior such as 0.997373 is a probability under the facies model, and closure returns rock volume only.")
 
-q(0, "Which statement about the inputs of modelBased and simultaneousInversion matches what the engines compute?",
- "m0 is an input: no LFM is built inside either, and no wavelet is estimated inside an inversion.",
- ["Each builds its own LFM from the wells, with the 8 Hz cut, before its first iteration starts.",
-  "Each estimates its wavelet from the trace and then applies the scale of 769.984107 to it.",
-  "modelBased picks the top and base horizons the LFM follows, from the trace."],
- "The engines build no LFM inside modelBased or simultaneousInversion (m0 is an input), estimate no wavelet inside an inversion and pick no horizon. The 8 Hz LFM and the scaled Ricker with its 769.984107 scale are stated inputs built beforehand.")
+q(0, "Which of these does no engine in the Expert tier compute?",
+ "A picked horizon.",
+ ["The blind-well score, the correlation and RMS error at a left-out well.",
+  "The quantiles across realisations, Q10, Q50 and Q90 per sample.",
+  "The gross rock volume at the spill of a stated grid."],
+ "The engines pick no horizon. lfm.js computes the blind-well score, inversionSpread.js the quantiles across realisations, and closure the gross rock volume, 1519731.367693 ft3 at the Ekene spill.")
 
 q(3, "The Expert capstone asks for six figures read from the inversion and prospect explorers. On what data does it run?",
  "A held-out synthetic case supplied as a case file; the Ekene field is never used.",
  ["The Ekene pack, read at Ekene-1 on the tier's settings.",
   "The Ekene pack with fresh noise seeds, so its figures differ from those of the 20 seeds 101 to 120.",
   "A case built from the members-only videos."],
- "The capstone runs on a held-out synthetic case the learner pastes into the panels. The Ekene field is never used because the members-only videos speak the Ekene answers aloud, and no Ekene figure is graded, the eps 0.050000 and 60 iterations of the pack included.")
+ "The capstone runs on a held-out synthetic case the learner pastes into the panels. The Ekene field is never used because the members-only videos speak the Ekene answers aloud, and no Ekene figure is graded, the 20 seeds 101 to 120 included.")
 
-q(2, "What does the course's QI report state for every product?",
+q(2, "Beyond the products themselves, what goes into the handover record of a QI study?",
  "The method, the stated settings, the blind-well figures per parameter, the calibration and its left-out check, the prospect figures with their limits, and every issue raised.",
  ["The products alone, each volume carrying its own settings, its 8 Hz LFM cut and its 50 Hz high cut in its header.",
   "The inverted volumes and the recommendation, the settings left at QI Studio's starting values such as eps 0.050000.",
   "The method and the geological chance of success, the two figures a risk team reads first."],
- "The report states the method, the settings (window, wavelet and its scale, LFM cut, weights, iterations, seeds), the blind-well figures per parameter, the calibration and its left-out check, the prospect figures with their limits and every issue; a result without its settings cannot be checked, and QI never sets the chance of success. The 8 Hz cut and eps 0.050000 are among the settings it states.")
+ "The handover files are the products together with the record of how each was made; a product without it cannot be checked. An 8 Hz cut or an eps of 0.050000 is a setting that record names, and the chance of success stays with the risk team.")
 
 q(1, "Which reference does the course name for the sparse reflectivity that sparse-spike inversion solves by FISTA?",
  "Beck and Teboulle (2009), SIAM Journal on Imaging Sciences 2.",
@@ -321,7 +322,7 @@ q(0, "The closure at the spill on the Ekene grid returns a gross rock volume of 
  ["1519731.367693 barrels, the engine reading the grid's cubic feet as barrels of rock.",
   "The oil in place over the 11 nodes, from the transform's porosity of 0.215267 at AI 6500000.000000.",
   "A volume in barrels at the contact, -5118.110236 ft."],
- "The engines compute no volume in barrels: closure returns gross rock volume only, 1519731.367693 ft3 over 11 nodes at the spill. At the wells' contact of -5118.110236 ft the closure is reported open, and no engine joins the porosity transform to the closure.")
+ "The engines compute no volume in barrels, so 1519731.367693 ft3 stays a rock volume. At the wells' contact of -5118.110236 ft the closure is reported open, and closure returns gross rock volume only.")
 
 emit(Q, '/root/qi-wip-qi/banks/qia_exam.json', expect_n=42)
 finish()

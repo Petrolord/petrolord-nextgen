@@ -74,7 +74,7 @@ q(1, "A porosity map from inverted AI (acoustic impedance) travels with which er
 q(3, "An AI volume from post-stack inversion travels with its blind-well figures. What blind correlations do the Ekene wells return?",
  "From 0.759365 to 0.889320 across model-based and sparse-spike.",
  ["From -0.345505 to -0.190352, the low-frequency model's own correlations.",
-  "From 0.858647 to 0.889063, the wells kept in their own LFM.",
+  "From 0.758561 to 0.889063, the wells kept in their own LFM.",
   "From 0.796895 to 0.931237, coloured inversion against the band-passed log."],
  "The inversions follow the shape, with blind correlations from 0.759365 to 0.889320 across both methods. The LFM alone correlates negatively at every well, and the kept-in and coloured figures are other checks.")
 

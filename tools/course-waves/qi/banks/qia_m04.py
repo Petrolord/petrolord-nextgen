@@ -35,7 +35,7 @@ q(2, "predictWithInterval is called at 8500000, beyond the highest of the AI val
  ["It refuses, with a message that the AI lies outside the calibration range of the transform it was given.",
   "It returns NaN for the prediction and both ends, the way a result with a gap is shown in a panel.",
   "It answers 0.169599 and adds an out-of-range penalty to the interval on top of the distance term."],
- "The calibration AI runs from 5693260.530000 to 8402495.750400; at 8500000 the engine still answers, 0.169599 with Q10 0.146406 and Q90 0.192792, and the interval widens only by the distance term. Nothing in the band tests whether the straight line holds out there, so a study flags the prediction itself.")
+ "The calibration AI runs from 5693260.530000 to 8402495.750400; at 8500000 the engine still answers, 0.169599 with Q10 0.146406 and Q90 0.192792, and the interval widens only by the distance term: the last row lies outside the calibration range, and the engine still answers.")
 
 q(1, "The seismic-scale check gives s 0.007175 log against log and a pooled left-out RMS of 0.024072. What widening s_extra does calibrateProperty return?",
  "0.022977, the square root of the RMS squared less s squared.",
@@ -56,7 +56,7 @@ q(0, "How is each well's share inside the widened 80 percent band tested, and wh
  ["With every well's residuals pooled, its own included; Ekene-1 returns 1.000000 on 5 samples.",
   "With the other wells' residuals; Ekene-1 returns 0.833333.",
   "With the log-against-log s alone, 0.007175; Ekene-1 returns 0.600000, so the narrow band already covers it."],
- "Each well's coverage is tested with the other wells' residuals only, and Ekene-1 returns 0.600000 on 5 samples. 0.833333 on 6 samples is Ekene-2, and 1.000000 is Ekene-3 and Ekene-4. On so few samples a share moves in large steps.")
+ "Each well's coverage is tested with the other wells' residuals only, and Ekene-1 returns 0.600000 on 5 samples. 0.833333 on 6 samples is Ekene-2, and 1.000000 is Ekene-3 and Ekene-4.")
 
 q(2, "In the left-out table, Ekene-4 returns its correlation as NaN on 4 samples. What is that?",
  "A result: the code returns NaN when either series has no spread over the well's samples.",
@@ -70,7 +70,7 @@ q(1, "What do the four left-out biases in the seismic-scale check show?",
  ["They change sign between wells, so they cancel and leave the pooled RMS of 0.024072 to describe the scatter alone.",
   "Every one is positive, an overprediction at each well.",
   "Every one is smaller in size than s, 0.007175."],
- "The printed biases are -0.024560, -0.021598, -0.020246 and -0.009593: one sign at every well, the predictions sitting off the log in one direction. Each is larger in size than s, 0.007175, so a study reports the offset beside the RMS.")
+ "The printed biases are -0.024560, -0.021598, -0.020246 and -0.009593: one sign at every well. Each is larger in size than s, 0.007175.")
 
 q(3, "fitFaciesModel is fitted on AI alone with priors from the samples' proportions. At AI 6600000 kg/(m2 s), what does faciesPosterior return?",
  "Brine sand most likely, 0.557911 against oil sand 0.442088.",
@@ -91,21 +91,21 @@ q(2, "A second attribute, Vp/Vs, is added to the facies model. At AI 6600000 kg/
  ["Brine sand 0.557911 at both ratios.",
   "Oil sand 0.673039; brine sand 0.326961.",
   "Brine sand 0.997373; oil sand 1.000000."],
- "At AI 6600000 the two-attribute posteriors are oil sand 0.997373 at Vp/Vs 1.750000 and brine sand 1.000000 at 2.000000, where AI alone split 0.442088 to 0.557911. The second attribute decides a point the first could not.")
+ "At AI 6600000 the two-attribute posteriors are oil sand 0.997373 at Vp/Vs 1.750000 and brine sand 1.000000 at 2.000000, where AI alone split 0.442088 to 0.557911.")
 
 q(3, "The confusion matrix of the AI-only facies model has the oil-sand row 3, 49, 127 (shale, oil sand, brine sand). What does it show, beside a share correct of 0.934872?",
  "Most of the 179 oil-sand samples, 127, are called brine sand.",
  ["160 of the 179 are called oil sand.",
   "Most of the 179 are called shale.",
   "About 0.934872 of the 179 are called oil sand."],
- "On AI alone 49 of 179 oil-sand samples are called oil sand and 127 brine sand. The share correct reads 0.934872 because shale, 2469 of 2519 correct, fills most of the matrix. 160 of 179 is the two-attribute row.")
+ "On AI alone 49 of 179 oil-sand samples are called oil sand and 127 brine sand. Shale is called shale 2469 times of 2519 inside the same share correct of 0.934872. 160 of 179 is the two-attribute row.")
 
 q(1, "Adding Vp/Vs raises the share correct from 0.934872 to 0.973443. What happens to the shale row of the confusion matrix?",
  "It worsens: 2464 correct from 2469, with 36 called brine sand from 5.",
  ["It improves: 2519 of 2519 are called shale.",
   "It is unchanged at 2469 correct, since AI alone already separates shale and Vp/Vs only moves the two sands.",
   "It worsens: 45 called oil sand, from 19."],
- "Shale is called shale 2469 times on AI alone and 2464 times with Vp/Vs, and shale called brine sand rises from 5 to 36. A second attribute is no free gain in every row, so the matrix is read row by row. 45 and 19 run the other way: AI alone called 45 shale samples oil sand, the two attributes 19.")
+ "Shale is called shale 2469 times on AI alone and 2464 times with Vp/Vs, and shale called brine sand rises from 5 to 36. 45 and 19 run the other way: AI alone called 45 shale samples oil sand, the two attributes 19.")
 
 q(0, "What kind of test are the two confusion matrices, and how does QI Studio label the classes oil sand and brine sand?",
  "Each is on the model's own samples; a class named for a fluid is labelled fluid_hypothesis.",

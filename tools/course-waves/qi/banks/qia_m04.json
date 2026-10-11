@@ -41,7 +41,7 @@
    "It answers 0.169599 and adds an out-of-range penalty to the interval on top of the distance term."
   ],
   "answer": 2,
-  "explanation": "The calibration AI runs from 5693260.530000 to 8402495.750400; at 8500000 the engine still answers, 0.169599 with Q10 0.146406 and Q90 0.192792, and the interval widens only by the distance term. Nothing in the band tests whether the straight line holds out there, so a study flags the prediction itself."
+  "explanation": "The calibration AI runs from 5693260.530000 to 8402495.750400; at 8500000 the engine still answers, 0.169599 with Q10 0.146406 and Q90 0.192792, and the interval widens only by the distance term: the last row lies outside the calibration range, and the engine still answers."
  },
  {
   "prompt": "The seismic-scale check gives s 0.007175 log against log and a pooled left-out RMS of 0.024072. What widening s_extra does calibrateProperty return?",
@@ -74,7 +74,7 @@
    "With the log-against-log s alone, 0.007175; Ekene-1 returns 0.600000, so the narrow band already covers it."
   ],
   "answer": 0,
-  "explanation": "Each well's coverage is tested with the other wells' residuals only, and Ekene-1 returns 0.600000 on 5 samples. 0.833333 on 6 samples is Ekene-2, and 1.000000 is Ekene-3 and Ekene-4. On so few samples a share moves in large steps."
+  "explanation": "Each well's coverage is tested with the other wells' residuals only, and Ekene-1 returns 0.600000 on 5 samples. 0.833333 on 6 samples is Ekene-2, and 1.000000 is Ekene-3 and Ekene-4."
  },
  {
   "prompt": "In the left-out table, Ekene-4 returns its correlation as NaN on 4 samples. What is that?",
@@ -96,7 +96,7 @@
    "Every one is smaller in size than s, 0.007175."
   ],
   "answer": 1,
-  "explanation": "The printed biases are -0.024560, -0.021598, -0.020246 and -0.009593: one sign at every well, the predictions sitting off the log in one direction. Each is larger in size than s, 0.007175, so a study reports the offset beside the RMS."
+  "explanation": "The printed biases are -0.024560, -0.021598, -0.020246 and -0.009593: one sign at every well. Each is larger in size than s, 0.007175."
  },
  {
   "prompt": "fitFaciesModel is fitted on AI alone with priors from the samples' proportions. At AI 6600000 kg/(m2 s), what does faciesPosterior return?",
@@ -129,7 +129,7 @@
    "Brine sand 0.997373; oil sand 1.000000."
   ],
   "answer": 2,
-  "explanation": "At AI 6600000 the two-attribute posteriors are oil sand 0.997373 at Vp/Vs 1.750000 and brine sand 1.000000 at 2.000000, where AI alone split 0.442088 to 0.557911. The second attribute decides a point the first could not."
+  "explanation": "At AI 6600000 the two-attribute posteriors are oil sand 0.997373 at Vp/Vs 1.750000 and brine sand 1.000000 at 2.000000, where AI alone split 0.442088 to 0.557911."
  },
  {
   "prompt": "The confusion matrix of the AI-only facies model has the oil-sand row 3, 49, 127 (shale, oil sand, brine sand). What does it show, beside a share correct of 0.934872?",
@@ -140,7 +140,7 @@
    "Most of the 179 oil-sand samples, 127, are called brine sand."
   ],
   "answer": 3,
-  "explanation": "On AI alone 49 of 179 oil-sand samples are called oil sand and 127 brine sand. The share correct reads 0.934872 because shale, 2469 of 2519 correct, fills most of the matrix. 160 of 179 is the two-attribute row."
+  "explanation": "On AI alone 49 of 179 oil-sand samples are called oil sand and 127 brine sand. Shale is called shale 2469 times of 2519 inside the same share correct of 0.934872. 160 of 179 is the two-attribute row."
  },
  {
   "prompt": "Adding Vp/Vs raises the share correct from 0.934872 to 0.973443. What happens to the shale row of the confusion matrix?",
@@ -151,7 +151,7 @@
    "It worsens: 45 called oil sand, from 19."
   ],
   "answer": 1,
-  "explanation": "Shale is called shale 2469 times on AI alone and 2464 times with Vp/Vs, and shale called brine sand rises from 5 to 36. A second attribute is no free gain in every row, so the matrix is read row by row. 45 and 19 run the other way: AI alone called 45 shale samples oil sand, the two attributes 19."
+  "explanation": "Shale is called shale 2469 times on AI alone and 2464 times with Vp/Vs, and shale called brine sand rises from 5 to 36. 45 and 19 run the other way: AI alone called 45 shale samples oil sand, the two attributes 19."
  },
  {
   "prompt": "What kind of test are the two confusion matrices, and how does QI Studio label the classes oil sand and brine sand?",

@@ -41,7 +41,7 @@ q(1, "In the blind model-based inversion at Ekene-1 (eps 0.050000, 60 iterations
  ["It is 5168379.152075, the LFM's value, since the LFM fixes the level inside the sand.",
   "It is 5312165.284155, just below the log, as the solver stops short of the step.",
   "It is 4686769.690526, below the log, because eps pulls it down to the LFM."],
- "At 1296.000000 ms the log after the high cut is 6044332.734122, the LFM 5168379.152075 and the inverted AI 7582152.255748: the inversion finds the step into the sand that the LFM lacks and then overshoots. 5312165.284155 and 4686769.690526 are the inverted values at 1288.000000 and 1280.000000 ms.")
+ "At 1296.000000 ms the log after the high cut is 6044332.734122, the LFM 5168379.152075 and the inverted AI 7582152.255748, above both. 5312165.284155 and 4686769.690526 are the inverted values at 1288.000000 and 1280.000000 ms.")
 
 q(3, "QI Studio's starting sparse-spike lambda is 0.002000. How many of the 101 reflectivity samples in the Ekene-1 trace are non-zero, and what does that mean?",
  "101 at 60 and at 400 iterations: on traces of this amplitude that lambda imposes no sparsity.",

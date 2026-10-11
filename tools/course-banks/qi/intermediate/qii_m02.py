@@ -20,7 +20,7 @@ q(3, "Which pack wells need a non-zero bulk shift, each with the statistical wav
  ["Ekene-1 and Ekene-3, each by -4.000000 ms, the two wells whose wavelets are the most alike of the four.",
   "None: all four tie at 0.000000 ms.",
   "Ekene-2 and Ekene-4, each by 8.000000 ms, the move the designed check plants in the checkshot times."],
- "Ekene-2 and Ekene-4 tie best at -4.000000 ms, with correlations 0.965477 and 0.962720, while Ekene-1 and Ekene-3 need 0.000000 ms. The 8.000000 ms figure belongs to the designed check, and a high correlation does not set the shift to zero.")
+ "Ekene-2 and Ekene-4 tie best at -4.000000 ms, with correlations 0.965477 and 0.962720, while Ekene-1 and Ekene-3 need 0.000000 ms. The 8.000000 ms figure belongs to the designed check.")
 
 q(0, "Over what lags does suggestBulkShift search for the largest correlation of the synthetic with the trace?",
  "Every whole-sample lag up to the stated search of 20 ms, on the samples both traces carry.",
@@ -34,7 +34,7 @@ q(2, "Ekene-1's checkshot times are moved by -8.000000 ms before the synthetic i
  ["-8.000000 ms, the same sign as the planted move, with a correlation of 0.983438.",
   "8.000000 ms, with the correlation dropping to 0.965477 because the synthetic has moved.",
   "0.000000 ms, since the stated search of 20 ms is measured from the moved checkshot times."],
- "The search returns the opposite of the planted move, 8.000000 ms, and the correlation equals the unshifted tie's 0.983438, because a whole-sample move slides the same synthetic samples along the clock. 0.965477 is Ekene-2's tie.")
+ "The search returns the opposite of the planted move, 8.000000 ms, at a correlation of 0.983438, the same figure the unshifted tie prints. 0.965477 is Ekene-2's tie.")
 
 q(0, "A tie carries anchors at (1250, 1252) and (1350, 1356) ms. To what seismic time does the synthetic time 1400.000000 ms map?",
  "1406.000000 ms: beyond the last anchor the mapping continues with slope one.",
@@ -55,7 +55,7 @@ q(1, "A learner gives makeTieWarp a second anchor whose seismic time is earlier 
  ["It sorts the anchors by seismic time and builds the warp from the reordered pair without any comment.",
   "It drops the second anchor and keeps a bulk shift at the first.",
   "It maps the interval with a negative slope, running time backwards."],
- "Both times must increase from one anchor to the next, and makeTieWarp refuses a pair that would fold time. Its message carries a punctuation mark the course does not print, so the course names it by what it refuses; a tie may stretch or squeeze an interval and may not reverse it.")
+ "Both times must increase from one anchor to the next, and makeTieWarp refuses a pair that would fold time. Its message carries a punctuation mark the course does not print, so the course names it by what it refuses.")
 
 q(2, "A tie is accepted at a well. What happens to the time-depth record?",
  "Rows derived from its anchors are kept as a new set beside the imported checkshots, which stay as imported.",
@@ -71,12 +71,12 @@ q(3, "At Ekene-1, what is the two-way time of the top of the Ekene Sand, 5078.74
   "1311.086000 ms, the two-way time of the checkshot at 5183.989501 ft, the level next to the base."],
  "Linear between the levels at 4687.500000 ft and 5079.002625 ft, the top lands at 1288.796378 ms, just above that level's 1288.876000 ms. Two-way time is 2 x the one-way time, so 644.398189 ms is the one-way figure, and 1311.086000 ms sits by the base.")
 
-q(0, "A well ties with a non-zero bulk shift. What does that do to the times committed to its record below the shift?",
- "It moves every one of them by that same amount.",
- ["Nothing: the committed time is always the checkshot time, whatever shift the tie found.",
+q(0, "A well ties with a non-zero bulk shift. What does the shift do to the seismic times of the depths on its tie?",
+ "It adds the shift to the seismic time of every depth, the top's included, and leaves the imported checkshot rows as they were.",
+ ["Nothing: the committed seismic time of every depth stays its imported checkshot time, whatever bulk shift the tie found at the well.",
   "It moves only the top of the reservoir, the one event the tie was matched on.",
   "It scales each in proportion to depth."],
- "With a bulk shift of zero, as at Ekene-1 and Ekene-3, the committed time is the checkshot time; a bulk shift is the single-anchor warp, adding the shift to the seismic time of every depth on the tie and leaving the imported checkshot rows as they were. Ekene-2 and Ekene-4 tied at -4.000000 ms, one sample.")
+ "A bulk shift is the single-anchor warp: it adds the shift to the seismic time of every depth on the tie, the top's included, and leaves the imported checkshot rows as they were. At Ekene-1 the bulk shift is zero, so the top's committed time is its checkshot time; Ekene-2 and Ekene-4 tied at -4.000000 ms.")
 
 q(1, "How does compareWavelets measure the similarity of two wavelets?",
  "After aligning by the lag of largest correlation, up to 5 samples, and scaling to unit energy, as the zero-lag correlation.",

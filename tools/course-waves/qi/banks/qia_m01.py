@@ -48,14 +48,14 @@ q(0, "At Ekene-1 the ln(AI) log, through the scaled wavelet, is set against the 
  ["They correlate at 0.852881 over 27 samples, the agreement the forward model reaches once the solver has run its 60 iterations at the well.",
   "At 0.966050 over all 101 samples.",
   "At 0.931237 over 27 samples."],
- "Over the logged samples the synthetic and the trace correlate at 0.966050 on 27 samples. The log is held at its first and last values beyond them only so the convolution has an input; the score counts the logged samples alone.")
+ "Over the logged samples the synthetic and the trace correlate at 0.966050 on 27 samples. The log is held at its first and last values beyond the logged samples, and the score counts the logged samples alone.")
 
 q(3, "In the Ekene-1 table round the top of the Ekene Sand, what do the synthetic and the full-stack trace print at 1296.000000 ms?",
  "Synthetic 137.874591, trace 258.968262.",
  ["Synthetic 344.213395, trace 341.516846, the closest pair in the table.",
   "Synthetic -267.168500, trace -268.438965, a trough that the trace reproduces.",
   "Synthetic 13.435099, trace -8.919362."],
- "At 1296.000000 ms the synthetic is 137.874591 and the trace 258.968262, so the trace is larger there. The close pair 344.213395 and 341.516846 is at 1288.000000 ms, where the trace peaks under SEG normal polarity, -267.168500 against -268.438965 is at 1304.000000 ms, and 13.435099 against -8.919362 is the row at 1280.000000 ms.")
+ "At 1296.000000 ms the synthetic is 137.874591 and the trace 258.968262, so the trace is larger there. The close pair 344.213395 and 341.516846 is at 1288.000000 ms, -267.168500 against -268.438965 is at 1304.000000 ms, and 13.435099 against -8.919362 is the row at 1280.000000 ms.")
 
 q(2, "Why does every absolute inversion in this tier need a low-frequency model?",
  "The band-limited trace says how impedance changes and nothing of its level; the wells supply what lies below about 8 Hz.",
@@ -111,7 +111,7 @@ q(1, "The LFM is built from wells whose logs cover only part of the window. What
  ["A refusal naming the sample, since the engine declines to build a model where no well carries a log in the window.",
   "Zero in ln(AI).",
   "A value extrapolated along the trend of the last logged samples, continued to the edge of the window."],
- "Samples no well covers hold the nearest covered value, so across most of the 101-sample window the level is a held value from 27 or 26 logged samples. That rule silently decides the LFM away from the logs, so a study states the wells and the horizons it used.")
+ "Samples no well covers hold the nearest covered value. The logs cover the Ekene Sand and the shale above it, 27 or 26 of the 101 samples at each well, so outside them that stated rule decides the LFM, and a study states the wells and the horizons it used.")
 
 emit(Q, '/root/qi-wip-qi/banks/qia_m01.json', expect_n=15)
 finish()
