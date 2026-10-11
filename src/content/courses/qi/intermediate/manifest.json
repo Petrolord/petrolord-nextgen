@@ -1,0 +1,361 @@
+{
+ "app_slug": "qi",
+ "tier": "intermediate",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-from-feasibility-to-the-tie",
+   "title": "From Feasibility to the Tie",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-what-the-professional-tier-adds",
+     "title": "What the Professional tier adds",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "qi-prestack-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-synthetic-in-one-lesson",
+     "title": "The synthetic in one lesson",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "qi-prestack-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-statistical-and-well-wavelets",
+     "title": "Statistical and well wavelets",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "qi-prestack-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-phase-and-correlation",
+     "title": "Phase and correlation",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "qi-prestack-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-the-tie-and-the-field-wavelet",
+   "title": "The Tie and the Field Wavelet",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-bulk-shift-and-anchors",
+     "title": "Bulk shift and anchors",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "qi-prestack-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-time-depth-record",
+     "title": "The time-depth record every app reads",
+     "order": 2,
+     "est_minutes": 12,
+     "panels": [
+      "qi-prestack-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-comparing-wavelets-across-wells",
+     "title": "Comparing wavelets across wells",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "qi-prestack-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-aligning-and-averaging-one-field-wavelet",
+     "title": "Aligning and averaging into one field wavelet",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "qi-prestack-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-when-one-well-disagrees",
+     "title": "When one well disagrees",
+     "order": 5,
+     "est_minutes": 12,
+     "panels": [
+      "qi-prestack-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-gathers-and-their-qc",
+   "title": "Gathers and Their QC",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-offset-gathers-and-bin-width",
+     "title": "Offset gathers and bin width",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "qi-prestack-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-nmo-stretch-and-the-stretch-mute",
+     "title": "NMO stretch and the stretch mute",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "qi-prestack-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-residual-moveout",
+     "title": "Residual moveout",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "qi-prestack-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-fold-and-what-it-limits",
+     "title": "Fold and what it limits",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "qi-prestack-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-angles-from-velocity",
+   "title": "Angles from Velocity",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-rms-to-interval-velocity",
+     "title": "RMS to interval velocity",
+     "order": 1,
+     "est_minutes": 14,
+     "panels": [
+      "qi-prestack-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-waldens-straight-ray-angle",
+     "title": "Walden's straight-ray angle",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "qi-prestack-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-angle-gathers-and-ranges",
+     "title": "Angle gathers and ranges",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "qi-prestack-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-partial-stacks-and-the-usable-angle",
+     "title": "Partial stacks and the usable angle",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "qi-prestack-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-avo-volumes",
+   "title": "AVO Volumes",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-the-shuey-fit-from-near-mid-and-far",
+     "title": "The Shuey fit from near, mid and far",
+     "order": 1,
+     "est_minutes": 14,
+     "panels": [
+      "qi-prestack-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-intercept-and-gradient-volumes",
+     "title": "Intercept and gradient volumes",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "qi-prestack-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-background-trend-and-off-trend-distance",
+     "title": "The background trend and the off-trend distance",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "qi-prestack-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-fluid-factor-and-the-chi-projection",
+     "title": "The fluid factor and the chi projection",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "qi-prestack-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-conditioning-before-avo",
+     "title": "Conditioning before AVO",
+     "order": 5,
+     "est_minutes": 12,
+     "panels": [
+      "qi-prestack-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-avo-at-the-wells",
+   "title": "AVO at the Wells",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-one-scale-over-every-well",
+     "title": "One scale over every well",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "qi-prestack-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-class-agreement-and-misfit",
+     "title": "Class agreement and misfit",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "qi-prestack-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-what-a-disagreement-means",
+     "title": "What a disagreement means",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [
+      "qi-prestack-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "qi-prestack-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

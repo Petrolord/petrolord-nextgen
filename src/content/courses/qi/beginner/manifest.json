@@ -1,0 +1,361 @@
+{
+ "app_slug": "qi",
+ "tier": "beginner",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-what-a-qi-study-asks",
+   "title": "What a QI Study Asks",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-why-a-qi-study",
+     "title": "Why a QI study",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "qi-feasibility-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-ekene-field-and-the-teaching-pack",
+     "title": "The Ekene field and the teaching pack",
+     "order": 2,
+     "est_minutes": 12,
+     "panels": [
+      "qi-feasibility-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-two-questions",
+     "title": "The two questions",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [
+      "qi-feasibility-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-times-polarity-and-impedance-units",
+     "title": "Times, polarity and impedance units",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "qi-feasibility-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-panels-and-their-refusals",
+     "title": "The panels and their refusals",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "qi-feasibility-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-the-data-inventory",
+   "title": "The Data Inventory",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-what-a-qi-study-needs-from-each-well",
+     "title": "What a QI study needs from each well",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "qi-feasibility-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-usability-matrix",
+     "title": "The usability matrix",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "qi-feasibility-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-limited-and-missing-curves",
+     "title": "Limited and missing curves",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "qi-feasibility-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-issue-register",
+     "title": "The issue register",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "qi-feasibility-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-seismic-qc",
+   "title": "Seismic QC",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-the-amplitude-spectrum",
+     "title": "The amplitude spectrum",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "qi-feasibility-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-band-edges-and-the-centroid",
+     "title": "Band edges and the centroid",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "qi-feasibility-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-signal-to-noise-from-trace-coherency",
+     "title": "Signal to noise from trace coherency",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "qi-feasibility-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-acquisition-footprint",
+     "title": "Acquisition footprint and where to measure it",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "qi-feasibility-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-elastic-logs-at-the-wells",
+   "title": "Elastic Logs at the Wells",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-what-rock-physics-hands-to-qi",
+     "title": "What Rock Physics hands to QI",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "qi-feasibility-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-measured-shear-against-greenberg-castagna",
+     "title": "Measured shear against Greenberg-Castagna",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "qi-feasibility-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-local-shear-trend-and-its-interval",
+     "title": "The local shear trend and its prediction interval",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "qi-feasibility-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-elastic-set",
+     "title": "The elastic set",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "qi-feasibility-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-will-the-fluid-show",
+   "title": "Will the Fluid Show?",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-the-fluids-at-ekene-conditions",
+     "title": "The fluids at Ekene conditions",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "qi-feasibility-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-oil-to-brine-substitution-on-a-log",
+     "title": "Oil-to-brine substitution on a log",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "qi-feasibility-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-how-far-impedance-and-vpvs-move",
+     "title": "How far impedance and Vp/Vs move",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "qi-feasibility-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-wet-trend-on-a-crossplot",
+     "title": "The wet trend on a crossplot",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "qi-feasibility-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-distance-from-the-wet-trend",
+     "title": "Distance from the wet trend",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "qi-feasibility-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-the-feasibility-verdict",
+   "title": "The Feasibility Verdict",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-modelled-avo-at-the-zone-top",
+     "title": "Modelled AVO at the zone top",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "qi-feasibility-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-in-situ-against-brine",
+     "title": "In situ against brine",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "qi-feasibility-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-writing-the-verdict",
+     "title": "Writing the verdict",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [
+      "qi-feasibility-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "qi-feasibility-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}
