@@ -11,6 +11,7 @@
 import { describe, it, expect } from 'vitest';
 import fs from 'node:fs';
 import * as L from './qiLab.js';
+import * as P from './qiLabPro.js';
 import { qiWaveInput } from './qiCaseFigures.testkit.js';
 
 const f6 = (x) => { const s = x.toFixed(6); return s === '-0.000000' ? '0.000000' : s; };
@@ -104,5 +105,74 @@ describe('THE QI LAB REPRODUCES THE ASSOCIATE DIGEST', () => {
   it('an engine refusal comes back as the engine\'s own words', () => {
     expect(L.fluidsAt({ tF: 180, pPsia: 0, salinity: 0.035, api: 32, gorScfStb: 400, gasSg: 0.75 }).error).toBe('Temperature (degC) and positive pressure (MPa) required.');
     expect(L.snr([[1, 2, 3]]).error).toBe('Signal-to-noise needs at least two neighbouring traces.');
+  });
+});
+
+/** Every figure the Professional sections print from the lab, as [label, printed string]. */
+function professionalFigures() {
+  const out = [];
+  const add = (label, v) => out.push([label, f6(v)]);
+  const addN = (label, n) => out.push([label, String(n)]);
+  const E = P.EKENE_PRO;
+  const WELLS = L.PACK_WELLS;
+  const tab = P.packVelocity();
+  // wavelets, synthetic, phase, bulk shift
+  const sw1 = P.wellStatWavelet('Ekene-1');
+  const tr1 = P.wellTrace('Ekene-1', 'full');
+  const syn1 = P.synthetic('Ekene-1', sw1);
+  addN('live synthetic samples', syn1.live);
+  WELLS.forEach((w) => {
+    const sw = P.wellStatWavelet(w); const sp = P.waveletSpectrum(sw, 4);
+    add(`${w} wavelet peak`, sp.peakHz); add(`${w} wavelet centroid`, sp.centroidHz);
+    const sy = P.synthetic(w, sw); const t = P.wellTrace(w, 'full');
+    const b = P.bulkShift(sy.synthetic, t.values, t.dtMs); add(`${w} bulk shift`, b.lagMs); add(`${w} bulk corr`, b.corr);
+    const pw = L.packWell(w); add(`${w} top twt`, P.checkshotTwt(w, pw.topFt));
+  });
+  const ph = P.phaseMatch(syn1.synthetic, tr1.values); add('phase', ph.phiDeg); add('phase corr', ph.corr); add('phase corr0', ph.corr0);
+  for (const sh of [-8, 8]) { const sy = P.synthetic('Ekene-1', sw1, { shiftMs: sh }); add(`shift ${sh}`, P.bulkShift(sy.synthetic, tr1.values, tr1.dtMs).lagMs); }
+  // wavelets across wells
+  const cmp = P.compare(WELLS.map((w) => ({ name: w, samples: P.wellStatWavelet(w) })));
+  cmp.misfit.forEach((m) => add(`misfit ${m.name}`, m.corrToAverage));
+  add('field wavelet peak', P.waveletSpectrum(Array.from(cmp.average), 4).peakHz);
+  // gathers
+  const g = P.packGather(5);
+  const top = P.pickEvent(g, g.traces[0], 1289); add('top on gather 5', top.tMs);
+  const v = P.velocityAt(tab, top.tMs); add('vrms at top', v.vrms); add('vint at top', v.vint);
+  g.offsets.filter((_, k) => k % 2 === 0).forEach((x) => add(`stretch ${x}`, P.stretch(x, top.tMs, v.vrms)));
+  add('mute 0.3', P.muteOffset(top.tMs, v.vrms, E.maxStretch));
+  add('rmo far', P.rmo(g, top.tMs).rmoFarMs);
+  P.dix(tab).forEach((x, i) => add(`dix ${i}`, x));
+  [500, 1000, 1500, 2000, 2500].forEach((x) => add(`walden ${x}`, P.walden(x, top.tMs, v.vrms, v.vint)));
+  // angles and AVO
+  const ag = P.angles(g, tab, { edges: E.angleEdges });
+  const i = Math.round((top.tMs - g.t0Ms) / g.dtMs);
+  ag.gather.forEach((b, k) => add(`bin ${k}`, b[i]));
+  const f2 = P.shueyFit(E.stackAngles, ag.gather.map((b) => b[i]), { terms: 2 });
+  const f3 = P.shueyFit(E.stackAngles, ag.gather.map((b) => b[i]), { terms: 3 });
+  add('A2', f2.A); add('B2', f2.B); add('A3', f3.A); add('C3', f3.C);
+  WELLS.forEach((w) => { const o = P.observedAtWell(w); const m = P.modelledAtWell(w); add(`${w} seismic A`, o.A); add(`${w} seismic B`, o.B); add(`${w} modelled A`, m.A); });
+  return out;
+}
+
+describe('THE QI LAB REPRODUCES THE PROFESSIONAL DIGEST', () => {
+  it('every Professional figure the lab returns is printed in the digest', async () => {
+    const d = await digest();
+    if (!d.text.includes('# SECTION 22:')) throw new Error(`[qi lab] the digest read from ${d.from} has no Professional sections`);
+    const figs = professionalFigures();
+    expect(figs.length).toBeGreaterThan(60);
+    const absent = figs.filter(([, s]) => !d.text.includes(s)).map(([l, s]) => `${l} ${s}`);
+    expect(absent).toEqual([]);
+  });
+
+  it('NEGATIVE CONTROL: a Professional figure moved by one unit in the sixth decimal is not in the digest', async () => {
+    const d = await digest();
+    const moved = professionalFigures().filter(([, s]) => s.includes('.') && Number(s) !== 0).slice(0, 25)
+      .map(([l, s]) => [l, f6(Number(s) + 1e-6 * (Number(s) >= 0 ? 1 : -1))]);
+    expect(moved.filter(([, s]) => d.text.includes(s)).length).toBeLessThanOrEqual(1);
+  });
+
+  it('a Professional refusal comes back as the engine\'s own words', () => {
+    expect(P.dix({ tMs: [1000, 1100], vrms: [2500, 2000] }).error).toBe('The RMS velocities give no real interval velocity at 1.1 s.');
+    expect(P.offsetBins([100, 200], 0).error).toBe('The offset bin width must be positive.');
   });
 });

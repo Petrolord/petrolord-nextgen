@@ -10,6 +10,7 @@ import path from 'node:path';
 import process from 'node:process';
 import { fileURLToPath } from 'node:url';
 import * as L from './qiLab.js';
+import * as P from './qiLabPro.js';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 export const ROOT = path.resolve(HERE, '../../../../..');
@@ -38,6 +39,37 @@ export function associateFigures(c, prefix = 'tamberlo') {
     [`${prefix}_ai_brine`]: sub.aiAfter,
     [`${prefix}_vpvs_brine`]: sub.vpvsAfter,
     [`${prefix}_wet_distance`]: L.distance(ab.a, ab.b, wt.line.slope),
+  };
+}
+
+/**
+ * The six Professional figures of a prestack case (QUARVIN), computed through
+ * the Professional lab with the case file's own stated choices, as the wave's
+ * qi_capstone_p.mjs computes them. None is graded yet (their engines wait on
+ * the extraction gate), so these feed the capstone guard only. The one scale
+ * is QI Studio app code (compareAtWells) until the engines carry it; the guard
+ * computes the same least-squares scale, sum(observed x modelled) over
+ * sum(modelled squared) on A and B, here, to have it to search for.
+ */
+export function professionalFigures(c, prefix = 'quarvin') {
+  const st = c.stated;
+  const table = { tMs: c.velocity.rows.map((x) => x[0]), vrms: c.velocity.rows.map((x) => x[1]) };
+  const g = { traces: c.gather.traces, offsets: c.gather.offsets_m, dtMs: c.gather.dt_ms, t0Ms: c.gather.t0_ms };
+  const vint = must(P.dix(table), 'dix');
+  const li = table.tMs.indexOf(st.dixLayer.toMs);
+  const v = must(P.velocityAt(table, st.timeMs), 'velocity');
+  const ag = must(P.angles(g, table, { edges: st.angleEdges }), 'angles');
+  const i = Math.round((st.targetMs - g.t0Ms) / g.dtMs);
+  const fit = P.shueyFit(st.stackAngles, ag.gather.map((b) => b[i]), { terms: st.shueyTerms });
+  let so = 0; let sm = 0;
+  for (const w of c.wells) for (const k of ['A', 'B']) { so += w.observed[k] * w.modelled[k]; sm += w.modelled[k] * w.modelled[k]; }
+  return {
+    [`${prefix}_dix_vint`]: vint[li],
+    [`${prefix}_walden_deg`]: P.walden(st.offsetM, st.timeMs, v.vrms, v.vint),
+    [`${prefix}_nmo_stretch`]: P.stretch(st.offsetM, st.timeMs, v.vrms),
+    [`${prefix}_far_stack_amp`]: P.stackOf(ag, st.farBins[0], st.farBins[1])[i],
+    [`${prefix}_shuey_a`]: fit.A,
+    [`${prefix}_one_scale`]: so / sm,
   };
 }
 

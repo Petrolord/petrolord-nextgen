@@ -81,3 +81,69 @@ describe('THE STATED CONTROLS', () => {
     expect(html).toContain('Temperature (degC) and positive pressure (MPa) required.');
   });
 });
+
+// THE PRESTACK EXPLORER (Professional): the same rule, on the QUARVIN case
+// pasted and on the Ekene pack.
+import QiPrestackExplorer, { MODES as PRO_MODES } from './QiPrestackExplorer.jsx';
+import * as P from './qiLabPro.js';
+
+const PRO_TEXT = readCaseText('quarvin');
+const Q = JSON.parse(PRO_TEXT);
+const renderPro = (mode, initialText = null) => renderToStaticMarkup(React.createElement(QiPrestackExplorer, { initialMode: mode, initialText }));
+/** The option a labelled select shows as chosen, or null. */
+const chosen = (html, label) => {
+  const m = html.match(new RegExp(`>${esc(label)}</label><select[^>]*>([\\s\\S]*?)</select>`));
+  if (!m) return null;
+  const o = m[1].match(/<option value="([^"]*)" selected="">/);
+  return o ? o[1] : null;
+};
+const missingPro = (html, want) => Object.entries(want).filter(([label, v]) => String(shown(html, label) ?? chosen(html, label)) !== String(v))
+  .map(([l, v]) => `${l}: wanted ${v}, shows ${shown(html, l) ?? chosen(html, l)}`);
+const listText = (a) => a.join(', ');
+
+describe('THE STATED CONTROLS OF THE PRESTACK EXPLORER', () => {
+  it('declares the eight views', () => {
+    expect(PRO_MODES.map((m) => m[0])).toEqual(['wavelet', 'tie', 'compare', 'gathers', 'velocity', 'angles', 'avo', 'wells']);
+  });
+
+  it('with the prestack case pasted, every view shows each stated input at the value the case states', () => {
+    const st = Q.stated;
+    const want = {
+      velocity: { 'Dix layer ending at, ms (stated)': st.dixLayer.toMs, 'Time, ms (stated)': st.timeMs, 'Offset, m (stated)': st.offsetM },
+      angles: { 'Angle bin edges, degrees (stated)': listText(st.angleEdges), 'Sample time, ms (stated)': st.targetMs, 'Far stack from bin (stated)': st.farBins[0], 'Far stack to bin, excluded (stated)': st.farBins[1] },
+      avo: { 'Angle bin edges, degrees (stated)': listText(st.angleEdges), 'Sample time, ms (stated)': st.targetMs, 'Mean angle of each bin, degrees (stated)': listText(st.stackAngles), 'Shuey terms (stated)': st.shueyTerms },
+      gathers: { 'Event near, ms (stated)': st.targetMs, 'Offset bin width, m (stated)': P.EKENE_PRO.binWidthM },
+    };
+    for (const [mode, w] of Object.entries(want)) expect(missingPro(renderPro(mode, PRO_TEXT), w), mode).toEqual([]);
+  });
+
+  it('on the Ekene pack, every control shows the course setting', () => {
+    const E = P.EKENE_PRO;
+    const want = {
+      wavelet: { 'Trace window start, ms (stated)': E.waveletWindowMs[0], 'Trace window end, ms (stated)': E.waveletWindowMs[1], 'Wavelet length, ms (stated)': E.waveletLengthMs, 'Spectral smoothing, Hz (stated)': E.waveletSmoothHz },
+      tie: { 'Bulk shift search, ms (stated)': E.bulkMaxLagMs, 'Checkshot times moved by, ms (stated)': 0 },
+      compare: { 'Alignment search, samples (stated)': E.compareMaxLag },
+      gathers: { 'Stretch limit, fraction (stated)': E.maxStretch, 'Moveout half window, ms (stated)': E.rmoWindowMs, 'Moveout largest shift, ms (stated)': E.rmoMaxLagMs, 'Pilot traces, nearest (stated)': E.rmoNearCount, 'Pick half window, ms (stated)': E.pickHalfWindowMs },
+      angles: { 'Angle bin edges, degrees (stated)': listText(E.angleEdges), 'Minimum fold (stated)': E.minFold },
+      avo: { 'Mean angle of each bin, degrees (stated)': listText(E.stackAngles), 'Chi, degrees (stated)': E.chiDeg },
+    };
+    for (const [mode, w] of Object.entries(want)) expect(missingPro(renderPro(mode), w), mode).toEqual([]);
+  });
+
+  it('no view refuses on the pack or on the case, and AVO at the wells prints no scale', () => {
+    for (const [mode] of PRO_MODES) {
+      expect(renderPro(mode), mode).not.toContain('THE ENGINE REFUSED');
+      expect(renderPro(mode, PRO_TEXT), mode).not.toContain('THE ENGINE REFUSED');
+    }
+    expect(renderPro('wells', PRO_TEXT)).toContain('THE ONE SCALE ARRIVES IN QI STUDIO');
+  });
+
+  it('NEGATIVE CONTROL: a missing or wrong prestack control is reported, and a refusal prints verbatim', () => {
+    const html = renderPro('velocity', PRO_TEXT);
+    expect(missingPro(html, { 'Offset, m (stated)': Q.stated.offsetM + 1 })).toHaveLength(1);
+    expect(missingPro(html, { 'Minimum fold (stated)': 2 })).toHaveLength(1);
+    const bad = JSON.parse(PRO_TEXT);
+    bad.velocity.rows = [[1000, 2500], [1100, 2000]];
+    expect(renderPro('velocity', JSON.stringify(bad))).toContain('The RMS velocities give no real interval velocity at 1.1 s.');
+  });
+});

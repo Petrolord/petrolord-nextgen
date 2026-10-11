@@ -18,7 +18,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { allRenderings, leaksIn, renderingsOf, skippedShapesOf } from './gradedAnswerGuard.js';
 import { GRADED_FIELDS, gradedTolerance } from './gradedTolerance.js';
-import { associateFigures, readCaseText } from './qiCaseFigures.testkit.js';
+import { associateFigures, professionalFigures, readCaseText } from './qiCaseFigures.testkit.js';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const PAGE = path.resolve(HERE, '../../../../pages/apps/QiLearningPage.jsx');
@@ -28,13 +28,23 @@ const EXPECTED_SOURCES = [
 ];
 const NOT_SWEPT = ['gradedTolerance.js', 'gradedAnswerGuard.js', 'qiCaseFigures.testkit.js'];
 
-const CASES = { TAMBERLO: JSON.parse(readCaseText('tamberlo')) };
+const CASES = { TAMBERLO: JSON.parse(readCaseText('tamberlo')), QUARVIN: JSON.parse(readCaseText('quarvin')) };
 const FIG = associateFigures(CASES.TAMBERLO);
 const FIELDS = GRADED_FIELDS.map(([tier, key]) => [tier, key, FIG[key], gradedTolerance(key)]);
-const NAMES = /\b(tamberlo)\b/i;
+const NAMES = /\b(tamberlo|quarvin)\b/i;
 const STRINGS = Object.values(CASES).map((c) => c.description.toLowerCase());
 const SCALARS = Object.values(CASES).flatMap((c) => Object.values(c.stated)
   .filter((v) => typeof v === 'number' && Math.abs(v) >= 100 && !Number.isInteger(v)));
+// The Professional figures are not graded yet (gradedTolerance holds none), so
+// they are guarded here in their own four shapes, computed from the QUARVIN case.
+const PRO = professionalFigures(CASES.QUARVIN);
+const trimZ = (t) => (t.includes('.') ? t.replace(/0+$/, '').replace(/\.$/, '') : t);
+const PRO_RENDERINGS = Object.entries(PRO).flatMap(([key, v]) => [String(v), trimZ(v.toPrecision(12)), trimZ(v.toPrecision(9)), v.toFixed(6)]
+  .filter((t, k, a) => t.includes('.') && !/e/i.test(t) && t.length >= 6 && a.indexOf(t) === k).map((text) => ({ key, text })));
+// The prestack case's distinctive stated inputs: its uneven layer times and its
+// offset, time and target (whole numbers, so matched as whole tokens).
+const PRO_INPUTS = [CASES.QUARVIN.stated.offsetM, CASES.QUARVIN.stated.timeMs, CASES.QUARVIN.stated.dixLayer.fromMs, CASES.QUARVIN.stated.dixLayer.toMs];
+const wholeIn = (text) => PRO_INPUTS.filter((h) => new RegExp(`(?<![\\d.])${h}(?![\\d])(?!\\.\\d)`).test(text));
 
 const sources = () => {
   const panelFiles = fs.readdirSync(HERE).filter((f) => /\.(jsx?|mjs|json)$/.test(f) && !/\.test\./.test(f) && !NOT_SWEPT.includes(f)).sort();
@@ -49,7 +59,7 @@ describe('THE QI CAPSTONE GUARD', () => {
     FIELDS.forEach(([, key, v]) => expect(Number.isFinite(v), key).toBe(true));
     const r = allRenderings(FIELDS);
     FIELDS.forEach(([, k]) => expect(r.filter((x) => x.key === k).length, k).toBeGreaterThanOrEqual(1));
-    expect(STRINGS.length).toBe(1);
+    expect(STRINGS.length).toBe(2);
     expect(SCALARS.length).toBeGreaterThanOrEqual(1);
     const skipped = FIELDS.flatMap(([, k, v]) => skippedShapesOf(k, v));
     console.log(`[qi guard] ${r.length} renderings of ${FIELDS.length} answers searched, ${skipped.length} shapes skipped, ${STRINGS.length} case descriptions, ${SCALARS.length} distinctive scalars`);
@@ -83,6 +93,26 @@ describe('THE QI CAPSTONE GUARD', () => {
     expect('<p>Tamberlo-1</p>').toMatch(NAMES);
     expect(stringsIn(`const q = '${CASES.TAMBERLO.description}';`)).toHaveLength(1);
     expect(scalarsIn(`const v = ${SCALARS[0]};`)).toEqual([SCALARS[0]]);
+    expect('<p>Quarvin-2</p>').toMatch(NAMES);
+    expect(stringsIn(`const q = '${CASES.QUARVIN.description}';`)).toHaveLength(1);
+  });
+
+  it('no swept source carries a Professional case figure or a distinctive prestack case input', () => {
+    expect(Object.values(PRO).every(Number.isFinite)).toBe(true);
+    expect(new Set(PRO_RENDERINGS.map((r) => r.key)).size).toBe(6);
+    const found = [];
+    sources().texts.forEach(([f, text]) => {
+      PRO_RENDERINGS.filter((r) => text.includes(r.text)).forEach((r) => found.push(`${f}: ${r.key} as ${r.text}`));
+      wholeIn(text).forEach((h) => found.push(`${f}: a prestack case input ${h}`));
+    });
+    expect(found).toEqual([]);
+  });
+
+  it('NEGATIVE CONTROL: a planted Professional figure and a planted prestack input are caught', () => {
+    const r = PRO_RENDERINGS[0];
+    expect(PRO_RENDERINGS.filter((x) => `const z = ${r.text};`.includes(x.text)).length).toBeGreaterThanOrEqual(1);
+    expect(wholeIn(`const t = ${PRO_INPUTS[1]};`)).toEqual([PRO_INPUTS[1]]);
+    expect(wholeIn(`const t = ${PRO_INPUTS[1]}.5;`)).toEqual([]);
   });
 
   it('this suite names no path under /root', () => {
