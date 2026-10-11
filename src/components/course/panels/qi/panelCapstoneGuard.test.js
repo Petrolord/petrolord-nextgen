@@ -18,7 +18,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { allRenderings, leaksIn, renderingsOf, skippedShapesOf } from './gradedAnswerGuard.js';
 import { GRADED_FIELDS, gradedTolerance } from './gradedTolerance.js';
-import { associateFigures, professionalFigures, readCaseText } from './qiCaseFigures.testkit.js';
+import { associateFigures, professionalFigures, expertFigures, readCaseText } from './qiCaseFigures.testkit.js';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const PAGE = path.resolve(HERE, '../../../../pages/apps/QiLearningPage.jsx');
@@ -28,12 +28,12 @@ const EXPECTED_SOURCES = [
 ];
 const NOT_SWEPT = ['gradedTolerance.js', 'gradedAnswerGuard.js', 'qiCaseFigures.testkit.js'];
 
-const CASES = { TAMBERLO: JSON.parse(readCaseText('tamberlo')), QUARVIN: JSON.parse(readCaseText('quarvin')) };
+const CASES = { TAMBERLO: JSON.parse(readCaseText('tamberlo')), QUARVIN: JSON.parse(readCaseText('quarvin')), DELSHOLM: JSON.parse(readCaseText('delsholm')) };
 const FIG = associateFigures(CASES.TAMBERLO);
 const FIELDS = GRADED_FIELDS.map(([tier, key]) => [tier, key, FIG[key], gradedTolerance(key)]);
-const NAMES = /\b(tamberlo|quarvin)\b/i;
+const NAMES = /\b(tamberlo|quarvin|delsholm)\b/i;
 const STRINGS = Object.values(CASES).map((c) => c.description.toLowerCase());
-const SCALARS = Object.values(CASES).flatMap((c) => Object.values(c.stated)
+const SCALARS = [CASES.TAMBERLO, CASES.QUARVIN].flatMap((c) => Object.values(c.stated)
   .filter((v) => typeof v === 'number' && Math.abs(v) >= 100 && !Number.isInteger(v)));
 // The Professional figures are not graded yet (gradedTolerance holds none), so
 // they are guarded here in their own four shapes, computed from the QUARVIN case.
@@ -59,7 +59,7 @@ describe('THE QI CAPSTONE GUARD', () => {
     FIELDS.forEach(([, key, v]) => expect(Number.isFinite(v), key).toBe(true));
     const r = allRenderings(FIELDS);
     FIELDS.forEach(([, k]) => expect(r.filter((x) => x.key === k).length, k).toBeGreaterThanOrEqual(1));
-    expect(STRINGS.length).toBe(2);
+    expect(STRINGS.length).toBe(3);
     expect(SCALARS.length).toBeGreaterThanOrEqual(1);
     const skipped = FIELDS.flatMap(([, k, v]) => skippedShapesOf(k, v));
     console.log(`[qi guard] ${r.length} renderings of ${FIELDS.length} answers searched, ${skipped.length} shapes skipped, ${STRINGS.length} case descriptions, ${SCALARS.length} distinctive scalars`);
@@ -118,5 +118,43 @@ describe('THE QI CAPSTONE GUARD', () => {
   it('this suite names no path under /root', () => {
     const me = fs.readFileSync(fileURLToPath(import.meta.url), 'utf8');
     expect(me.split('\n').filter((l) => /['"`]\/root\//.test(l))).toEqual([]);
+  });
+});
+
+// The Expert figures are not graded yet either: guarded in their own four
+// shapes, computed from the DELSHOLM case through the Expert lab; and the
+// case's distinctive inputs (its trace positions and its two stated AIs, whole
+// numbers matched as whole tokens).
+const EXP = expertFigures(CASES.DELSHOLM);
+const EXP_RENDERINGS = Object.entries(EXP).flatMap(([key, v]) => [String(v), trimZ(v.toPrecision(12)), trimZ(v.toPrecision(9)), v.toFixed(6)]
+  .filter((t, k, a) => t.includes('.') && !/e/i.test(t) && t.length >= 6 && a.indexOf(t) === k).map((text) => ({ key, text })));
+const DS = CASES.DELSHOLM;
+const EXP_INPUTS = [DS.traceA.x, DS.traceA.y, DS.positionB.x, DS.positionB.y, DS.stated.porosity.atAi, DS.stated.facies.atAi];
+const wholeExp = (text) => EXP_INPUTS.filter((h) => new RegExp(`(?<![\\d.])${h}(?![\\d])(?!\\.\\d)`).test(text));
+
+describe('THE QI CAPSTONE GUARD, EXPERT', () => {
+  it('derives the six Expert figures from the case and enough to search for', () => {
+    expect(Object.keys(EXP)).toHaveLength(6);
+    expect(Object.values(EXP).every(Number.isFinite)).toBe(true);
+    expect(new Set(EXP_RENDERINGS.map((r) => r.key)).size).toBe(6);
+    expect(EXP_INPUTS.every(Number.isInteger)).toBe(true);
+  });
+
+  it('no swept source carries an Expert case figure or a distinctive Expert case input', () => {
+    const found = [];
+    sources().texts.forEach(([f, text]) => {
+      EXP_RENDERINGS.filter((r) => text.includes(r.text)).forEach((r) => found.push(`${f}: ${r.key} as ${r.text}`));
+      wholeExp(text).forEach((h) => found.push(`${f}: an Expert case input ${h}`));
+    });
+    expect(found).toEqual([]);
+  });
+
+  it('NEGATIVE CONTROL: a planted Expert figure, name, description and input are caught', () => {
+    const r = EXP_RENDERINGS[EXP_RENDERINGS.length - 1];
+    expect(EXP_RENDERINGS.filter((x) => `const z = ${r.text};`.includes(x.text)).length).toBeGreaterThanOrEqual(1);
+    expect('<p>Delsholm-2</p>').toMatch(NAMES);
+    expect(stringsIn(`const q = '${DS.description}';`)).toHaveLength(1);
+    expect(wholeExp(`const p = ${EXP_INPUTS[0]};`)).toEqual([EXP_INPUTS[0]]);
+    expect(wholeExp(`const p = ${EXP_INPUTS[0]}.5;`)).toEqual([]);
   });
 });

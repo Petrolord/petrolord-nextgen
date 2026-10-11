@@ -530,3 +530,6 @@ export function logScaleSamples(wells = EXPERT_WELLS, { vshCut = 0.35 } = {}) {
   }
   return out;
 }
+
+/** The blind-well score (lfm.js blindWellScore) of an inverted ln(AI) against a log's ln(AI). */
+export const scoreOf = (estimateLnAi, truthLnAi) => blindWellScore(estimateLnAi, truthLnAi);

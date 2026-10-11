@@ -147,3 +147,82 @@ describe('THE STATED CONTROLS OF THE PRESTACK EXPLORER', () => {
     expect(renderPro('velocity', JSON.stringify(bad))).toContain('The RMS velocities give no real interval velocity at 1.1 s.');
   });
 });
+
+// THE INVERSION AND PROSPECT EXPLORERS (Expert): the same rule, on the
+// DELSHOLM case pasted and on the Ekene pack.
+import QiInversionExplorer, { MODES as INV_MODES } from './QiInversionExplorer.jsx';
+import QiProspectExplorer, { MODES as PROS_MODES } from './QiProspectExplorer.jsx';
+import * as X from './qiLabExp.js';
+
+const EXP_TEXT = readCaseText('delsholm');
+const D = JSON.parse(EXP_TEXT);
+const renderInv = (mode, initialText = null) => renderToStaticMarkup(React.createElement(QiInversionExplorer, { initialMode: mode, initialText }));
+const renderPros = (mode, initialText = null) => renderToStaticMarkup(React.createElement(QiProspectExplorer, { initialMode: mode, initialText }));
+
+describe('THE STATED CONTROLS OF THE INVERSION AND PROSPECT EXPLORERS', () => {
+  it('declares their views', () => {
+    expect(INV_MODES.map((m) => m[0])).toEqual(['forward', 'lfm', 'scale', 'modelBased', 'coloured', 'blind', 'spread', 'simultaneous']);
+    expect(PROS_MODES.map((m) => m[0])).toEqual(['transform', 'leftout', 'facies', 'closure', 'conformance']);
+  });
+
+  it('with the Expert case pasted, every view shows each stated input at the value the case states', () => {
+    const st = D.stated;
+    const inv = {
+      lfm: { 'Inverse distance power (stated)': st.lfm.power, 'Sample of the second position, index from the first (stated)': st.lfm.sampleB },
+      modelBased: { 'Regularisation weight eps (stated)': st.modelBased.eps, 'Iterations (stated)': st.modelBased.iters, 'Sample of the target trace, index from the first (stated)': st.modelBased.sampleA },
+      simultaneous: { 'Weights for ln(AI), ln(SI), ln(density) (stated)': listText(st.simultaneous.eps), 'Iterations (stated)': st.simultaneous.iters, 'Sample of the target trace, index from the first (stated)': st.simultaneous.sampleA },
+    };
+    for (const [mode, w] of Object.entries(inv)) expect(missingPro(renderInv(mode, EXP_TEXT), w), mode).toEqual([]);
+    const pros = {
+      transform: { 'Interval level (stated)': st.porosity.level, 'AI to predict at, kg/(m2 s) (stated)': st.porosity.atAi },
+      facies: { 'AI to classify at, kg/(m2 s) (stated)': st.facies.atAi, 'Density per facies (stated)': st.facies.kind },
+    };
+    for (const [mode, w] of Object.entries(pros)) expect(missingPro(renderPros(mode, EXP_TEXT), w), mode).toEqual([]);
+  });
+
+  it('on the Ekene pack, every control shows the course setting', () => {
+    const E = X.EXPERT;
+    const inv = {
+      modelBased: {
+        'Window start, ms (stated)': E.windowMs[0], 'Window end, ms (stated)': E.windowMs[1], 'Ricker wavelet, Hz (stated)': E.waveletHz,
+        'Wavelet half length, ms (stated)': E.waveletHalfMs, 'LFM cut, Hz (stated)': E.lfmHz, 'Method (stated)': 'model_based',
+        'Regularisation weight eps (stated)': E.eps, 'Iterations (stated)': E.iters, 'Inverse distance power (stated)': E.idwPower,
+        'High cut of the log scored against, Hz (stated)': E.truthHz,
+      },
+      coloured: { 'Band low edge, Hz (stated)': E.band[0], 'Band high edge, Hz (stated)': E.band[1] },
+      spread: { 'Signal to noise of the added noise (stated)': E.noiseSnr, 'First seed (stated)': E.seeds[0], 'Realisations (stated)': E.seeds.length },
+      simultaneous: { 'Weights for ln(AI), ln(SI), ln(density) (stated)': listText(E.simEps), 'Stacks used (stated)': 'near,mid,far' },
+      forward: { 'Seed of the two test vectors (stated)': 42 },
+    };
+    for (const [mode, w] of Object.entries(inv)) expect(missingPro(renderInv(mode), w), mode).toEqual([]);
+    const pros = {
+      transform: { 'Net sand Vsh cut-off (stated)': 0.35, 'Interval level (stated)': E.levelInterval },
+      facies: { 'Attributes (stated)': 'ai', 'Priors (stated)': 'samples', 'Density per facies (stated)': 'gaussian' },
+      conformance: { 'Anomaly: nodes shallower than the spill plus, ft (stated)': 0, 'Cut the anomaly at the middle column (stated)': 'no', 'Feasibility verdict (stated)': 'feasible' },
+    };
+    for (const [mode, w] of Object.entries(pros)) expect(missingPro(renderPros(mode), w), mode).toEqual([]);
+  });
+
+  it('no view refuses on the pack or on the case, and the left-out band says where it is computed', () => {
+    for (const [mode] of INV_MODES) {
+      expect(renderInv(mode), mode).not.toContain('THE ENGINE REFUSED');
+      expect(renderInv(mode, EXP_TEXT), mode).not.toContain('THE ENGINE REFUSED');
+    }
+    for (const [mode] of PROS_MODES) {
+      expect(renderPros(mode), mode).not.toContain('THE ENGINE REFUSED');
+      expect(renderPros(mode, EXP_TEXT), mode).not.toContain('THE ENGINE REFUSED');
+    }
+    expect(renderPros('leftout')).toContain('THE LEFT-OUT-WELL BAND ARRIVES IN QI STUDIO');
+    expect(renderInv('lfm')).toContain('AWAITING ITS INDEPENDENT ORACLE');
+    expect(renderInv('scale')).toContain('APP ARITHMETIC');
+  });
+
+  it('NEGATIVE CONTROL: a missing or wrong Expert control is reported, and a refusal prints verbatim', () => {
+    const html = renderInv('modelBased', EXP_TEXT);
+    expect(missingPro(html, { 'Iterations (stated)': D.stated.modelBased.iters + 1 })).toHaveLength(1);
+    expect(missingPro(html, { 'Band low edge, Hz (stated)': 8 })).toHaveLength(1);
+    const bad = JSON.parse(EXP_TEXT);
+    bad.stated.modelBased.eps = -1;
+    expect(renderInv('modelBased', JSON.stringify(bad))).toContain('The regularisation weight must be zero or positive.');
+  });
+});

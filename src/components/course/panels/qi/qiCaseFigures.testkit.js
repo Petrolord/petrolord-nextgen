@@ -11,6 +11,7 @@ import process from 'node:process';
 import { fileURLToPath } from 'node:url';
 import * as L from './qiLab.js';
 import * as P from './qiLabPro.js';
+import * as X from './qiLabExp.js';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 export const ROOT = path.resolve(HERE, '../../../../..');
@@ -70,6 +71,33 @@ export function professionalFigures(c, prefix = 'quarvin') {
     [`${prefix}_far_stack_amp`]: P.stackOf(ag, st.farBins[0], st.farBins[1])[i],
     [`${prefix}_shuey_a`]: fit.A,
     [`${prefix}_one_scale`]: so / sm,
+  };
+}
+
+/**
+ * The six Expert figures of an Expert case (DELSHOLM), computed through the
+ * Expert lab with the case file's own stated choices, as the wave's
+ * qi_capstone_e.mjs computes them. None is graded yet (gradedTolerance holds
+ * none), so these feed the capstone guard only.
+ */
+export function expertFigures(c, prefix = 'delsholm') {
+  const st = c.stated;
+  const D = must(X.caseExpert(c), 'case');
+  const A = D.A;
+  const lfm = must(X.lfmAt(D.lfm, D.B, D.win, { power: st.lfm.power }), 'lfm');
+  const mb = must(X.modelBasedOn({ d: A.full, wavelet: A.fullWavelet, m0: A.lowFrequencyModels.lnAi, eps: st.modelBased.eps, iters: st.modelBased.iters }), 'model-based');
+  const sim = must(X.simultaneousOn({ traces: A.angleTraces, thetaDeg: A.angles_deg, wavelets: A.angleWavelets, vsVp: A.backgroundVsVp, m0: A.lowFrequencyModels, eps: st.simultaneous.eps, iters: st.simultaneous.iters }), 'simultaneous');
+  const por = must(X.porosityTransform(D.porositySamples, [st.porosity.atAi], st.porosity.level), 'porosity');
+  const fac = must(X.faciesModel(D.faciesSamples, { attrs: ['ai'], kind: st.facies.kind, at: [[st.facies.atAi]] }), 'facies');
+  const clo = must(X.closureOf(D.grid), 'closure');
+  const k = st.simultaneous.sampleA;
+  return {
+    [`${prefix}_lfm_lnai_b`]: lfm[st.lfm.sampleB],
+    [`${prefix}_mb_ai`]: mb.ai[st.modelBased.sampleA],
+    [`${prefix}_sim_vpvs`]: Math.exp(sim.lnAi[k] - sim.lnSi[k]),
+    [`${prefix}_phi_q90`]: por.predictions[0].hi,
+    [`${prefix}_p_oil`]: fac.posteriors[0].probs[fac.model.classes.findIndex((m) => m.name === st.facies.class)],
+    [`${prefix}_column_ft`]: clo.columnFt,
   };
 }
 
