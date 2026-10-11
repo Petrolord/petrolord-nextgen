@@ -51,14 +51,18 @@ SLUG=qi
 
 # pinned at HEAD (written by pin_qi.py from the committed tree; never by hand)
 SEEDS="20261011212305_qi_course
-20261011212306_qi_beginner_deep"
+20261011212306_qi_beginner_deep
+20261011212307_qi_intermediate_deep
+20261011212308_qi_advanced_deep"
 GOLIVE=20261011212309_qi_go_live
 FILES="$SEEDS
 $GOLIVE"
 digest_for() {
   case $1 in
     20261011212305_qi_course                ) echo 7d13bb51dbd822425ceaacf379f5556db19e1ac0500004fae902d3129a05cc0d ;;
-    20261011212306_qi_beginner_deep         ) echo dcead26bb963f5dd0b55ea3e6080f21541a7746f9af1af970ba9c1c7ac126567 ;;
+    20261011212306_qi_beginner_deep         ) echo ccb6b4fce59872d1eecb09dce2bafa2ab8d21bc15247901e8d782500bd490f26 ;;
+    20261011212307_qi_intermediate_deep     ) echo 08cdc133ca5ad1014e8f033b8f8438ed63a4a97e98ec4c2a7e36ba1fe26d7a11 ;;
+    20261011212308_qi_advanced_deep         ) echo 81f73558c030adf60312dc7c5b9959daf7875e4d4d2c89b2c34af4135701a896 ;;
     20261011212309_qi_go_live               ) echo 714e82bbfb85b17e275be4cb286916a89645082aea6c66ee928fa7276498032b ;;
     *) echo UNPINNED ;;
   esac
