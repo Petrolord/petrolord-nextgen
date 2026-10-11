@@ -71,10 +71,12 @@ export function adjacentLessons(manifest, moduleKey, lessonKey) {
 }
 
 // Split raw lesson markdown into renderable segments. A line consisting
-// solely of {{panel:<id>}} becomes a panel segment; everything else stays
-// markdown. Pure function (unit-tested; the renderer and the printed
-// handbook both consume it).
+// solely of {{panel:<id>}} becomes a panel segment, a line consisting solely
+// of {{video:<id>}} becomes a video segment (src/content/videos/registry.js),
+// and everything else stays markdown. Pure function (unit-tested; the
+// renderer and the printed handbook both consume it).
 const PANEL_MARKER = /^\{\{panel:([a-z0-9-]+)\}\}\s*$/;
+const VIDEO_MARKER = /^\{\{video:([a-z0-9-]+)\}\}\s*$/;
 
 export function splitLessonSegments(raw) {
   const segments = [];
@@ -86,9 +88,13 @@ export function splitLessonSegments(raw) {
   };
   for (const line of String(raw ?? '').split('\n')) {
     const m = line.match(PANEL_MARKER);
+    const v = m ? null : line.match(VIDEO_MARKER);
     if (m) {
       flush();
       segments.push({ type: 'panel', id: m[1] });
+    } else if (v) {
+      flush();
+      segments.push({ type: 'video', id: v[1] });
     } else {
       buf.push(line);
     }

@@ -30,6 +30,22 @@ function loadManifests() {
 }
 
 describe('splitLessonSegments', () => {
+  it('splits video markers into video segments, each on its own line', () => {
+    expect(splitLessonSegments('Intro.\n\n{{video:qi-a1}}\n\nAfter.')).toEqual([
+      { type: 'markdown', content: 'Intro.\n' },
+      { type: 'video', id: 'qi-a1' },
+      { type: 'markdown', content: '\nAfter.' },
+    ]);
+    expect(splitLessonSegments('see {{video:qi-a1}} inline')).toEqual([
+      { type: 'markdown', content: 'see {{video:qi-a1}} inline' },
+    ]);
+    expect(splitLessonSegments('{{panel:abc}}\n{{video:qi-b4}}')).toEqual([
+      { type: 'panel', id: 'abc' },
+      { type: 'video', id: 'qi-b4' },
+    ]);
+    expect(splitLessonSegments('{{video:Bad_Id}}')).toEqual([{ type: 'markdown', content: '{{video:Bad_Id}}' }]);
+  });
+
   it('returns one markdown segment for plain prose', () => {
     expect(splitLessonSegments('# Title\n\nBody text.')).toEqual([
       { type: 'markdown', content: '# Title\n\nBody text.' },
