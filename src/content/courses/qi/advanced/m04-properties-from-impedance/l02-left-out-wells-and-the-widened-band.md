@@ -6,7 +6,7 @@ A transform fitted log against log knows nothing of the inversion. On a map, por
 
 ## Where the check lives
 
-The check is QI Studio app code, `calibrateProperty`, which calls the extraction-gated engine `propertyPrediction.js` for the fit and the interval. The leave-one-out loop around those calls is the app's; the course quotes its figures on the Ekene wells, and the prospect explorer states the check without computing it. A report says so.
+The check is `calibrateProperty` in engines/qi/propertyCalibration.js, the rule QI Studio runs, which calls `propertyPrediction.js` for the fit and the interval. It carries a golden and an independent oracle, and the prospect explorer runs it on the Ekene wells.
 
 ## The steps
 
@@ -46,4 +46,4 @@ The coverage column is the test of the widened band. Ekene-3 and Ekene-4 fall wh
 
 ## Exercise
 
-In the prospect explorer, set View to "Left-out wells and the widened band" and read what it declares: the check is QI Studio app code, and the explorer quotes no figure from it. Then set View to "A linear transform and its interval" with Data "Ekene teaching pack" and read the Residual standard error s of the log-scale fit. Set it beside the seismic-scale s and the pooled left-out RMS in the first table above, and write one sentence on which error a porosity map from inverted AI should carry, and why.
+In the prospect explorer, set View to "Left-out wells and the widened band" with Data "Ekene teaching pack" and read s, the pooled left-out RMS and the widening, then each well's coverage of the widened band. Then set View to "A linear transform and its interval" with Data "Ekene teaching pack" and read the Residual standard error s of the log-scale fit. Set it beside the seismic-scale s and the pooled left-out RMS in the first table above, and write one sentence on which error a porosity map from inverted AI should carry, and why.

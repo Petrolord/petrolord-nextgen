@@ -17,7 +17,7 @@ The case states every input the six figures depend on: its wells and their horiz
 | the posterior probability of the oil-sand facies at a stated AI | prospect explorer | Bayesian facies on impedance |
 | the column from crest to spill on the case's depth grid, in feet | prospect explorer | crest, spill and closure |
 
-Every figure is a return value of an engine on the case, read from the panel. The first comes from the low-frequency model between wells, an engine the course marks as awaiting its independent oracle and grades only once that check lands. The second and third read the case's own low-frequency model and wavelets as inputs. The sixth reads the case's grid as it stands, with its edge flag.
+Every figure is a return value of an engine on the case, read from the panel. The first comes from the low-frequency model between wells, built by inverse distance between the case's wells and their horizons. The second and third read the case's own low-frequency model and wavelets as inputs. The sixth reads the case's grid as it stands, with its edge flag.
 
 ## What is graded and what is not
 

@@ -10,11 +10,12 @@
 // least squares scales, unit conversions). The digest's Expert sections are
 // printed from these functions by the wave's qi_dump_e.mjs.
 //
-// GATE STATUS (plan section 3). inversion.js, inversionSpread.js,
-// prestackInversion.js, propertyPrediction.js and closure.js carry a golden
-// and an independent oracle. lfm.js (G5) and prospectAssessment.js (G8) await
-// their oracles (engines PR E1c): the lab teaches them and no capstone field
-// is graded through them until that PR lands.
+// GATE STATUS. Every engine this lab calls carries a golden and an
+// independent oracle in the engines repository, the QI Studio service maths
+// included (engines/qi/inversionQc.js, propertyCalibration.js, prospectTrap.js
+// and angleWavelets.js, moved out of the Suite app). The only arithmetic the
+// lab does itself is named where it does it: depth to time on the checkshots,
+// the per-stack least-squares Fatti scale, unit conversions.
 //
 // No refusal message is written here for an engine refusal: attempt() returns
 // the engine's own words. Nothing reads a clock or a random number; every
@@ -35,6 +36,12 @@ import { lfmTrace, blindWellScore } from '@petrolord/engines/engines/qi/lfm.js';
 import { anomalyConformance, evidenceIndependence, assessProspect } from '@petrolord/engines/engines/qi/prospectAssessment.js';
 import { spillAnalysis, closureAt, closureCurve } from '@petrolord/engines/lib/gridding/closure.js';
 import { resampleToDt } from '@petrolord/engines/engines/seismolord/synthetics.js';
+import { halfWindowFor, lowPassFinite, waveletScale as engineWaveletScale } from '@petrolord/engines/engines/qi/inversionQc.js';
+import { calibrateProperty } from '@petrolord/engines/engines/qi/propertyCalibration.js';
+import { climbToCrest } from '@petrolord/engines/engines/qi/prospectTrap.js';
+import { extractAngleWavelets } from '@petrolord/engines/engines/qi/angleWavelets.js';
+import { extractWellWavelet } from '@petrolord/engines/engines/seismolord/wellWavelet.js';
+import { mulberry32 } from '@petrolord/engines/lib/stats/stats.js';
 import { rickerWavelet } from '@petrolord/engines/lib/waveform.js';
 import { fft, nextPow2 } from '@petrolord/engines/lib/fft.js';
 
@@ -128,16 +135,8 @@ export function wellInTime(well, win = windowIndex()) {
   };
 }
 
-/** Moving-average half window (samples) for a cut frequency, as QI Studio sets it. */
-export const halfWindowFor = (hz, dtMs) => Math.max(1, Math.round(1000 / (hz * dtMs) / 2));
-
-/** The finite runs of a series low-passed by the engine's lowFrequencyModel; gaps stay gaps. */
-export function lowPassFinite(values, half) {
-  const out = Float64Array.from(values, (v) => (fin(v) ? v : NaN));
-  const lp = lowFrequencyModel(out, half);
-  for (let i = 0; i < out.length; i++) out[i] = fin(out[i]) ? lp[i] : NaN;
-  return out;
-}
+/** The moving-average half window and the gap-preserving low pass (engines/qi/inversionQc.js). */
+export { halfWindowFor, lowPassFinite };
 
 /* ------------------------------------------------- the wavelet */
 
@@ -164,23 +163,9 @@ const covered = (values, i, half) => {
 /**
  * The least-squares scale s that makes s x forwardPoststack(ln AI) match the
  * seismic at the wells, pooled over every sample whose wavelet span the log
- * covers (the rule QI Studio's waveletScale states).
+ * covers (engines/qi/inversionQc.js waveletScale).
  */
-export function waveletScale(pairs, wavelet) {
-  let sxy = 0; let sxx = 0; let n = 0;
-  const half = (wavelet.length - 1) / 2;
-  for (const { trace, lnAi } of pairs) {
-    const filled = holdFill(lnAi);
-    if (!filled) continue;
-    const syn = forwardPoststack(filled, wavelet);
-    for (let i = 0; i < trace.length; i++) {
-      if (!fin(trace[i]) || !covered(lnAi, i, half)) continue;
-      sxy += syn[i] * trace[i]; sxx += syn[i] * syn[i]; n += 1;
-    }
-  }
-  if (n < 10 || !(sxx > 0)) return { error: 'The wells overlap too little seismic to scale the wavelet.' };
-  return { scale: sxy / sxx, samples: n };
-}
+export const waveletScale = (pairs, wavelet) => attempt(() => engineWaveletScale(pairs, wavelet));
 
 /* ------------------------------------------------- the low-frequency model */
 
@@ -533,3 +518,67 @@ export function logScaleSamples(wells = EXPERT_WELLS, { vshCut = 0.35 } = {}) {
 
 /** The blind-well score (lfm.js blindWellScore) of an inverted ln(AI) against a log's ln(AI). */
 export const scoreOf = (estimateLnAi, truthLnAi) => blindWellScore(estimateLnAi, truthLnAi);
+
+/* ------------------------------------------------- engine-gated QI Studio maths */
+
+/**
+ * The dot-product test of the two operators on two vectors from the
+ * canonical seeded generator (mulberry32 on the stated seed, uniform minus
+ * one half): [(D x).y, x.(D^T y)] and [(C x).y, x.(C^T y)].
+ */
+export function adjointTest(wavelet, n, seed = 42) {
+  const rng = mulberry32(seed);
+  const x = Array.from({ length: n }, () => rng() - 0.5);
+  const y = Array.from({ length: n }, () => rng() - 0.5);
+  const dot = (a, b) => a.reduce((t, v, i) => t + v * b[i], 0);
+  return {
+    d: [dot(diffCentred(x), y), dot(x, diffCentredAdjoint(y))],
+    c: [dot(convolveCentred(x, wavelet), y), dot(x, convolveCentredAdjoint(y, wavelet))],
+  };
+}
+
+/**
+ * The left-out-well check of a porosity transform at seismic scale
+ * (engines/qi/propertyCalibration.js calibrateProperty): each well's ln(AI)
+ * and its porosity inside the Ekene Sand times, the blind inverted AI at each
+ * well (model-based, the well left out of its LFM), and the band widened by
+ * the pooled left-out error.
+ */
+export function leftOutBand(S, { upscaleHz = EXPERT.truthHz, ...inv } = {}) {
+  const blindAi = [];
+  for (const l of S.logs) {
+    const r = invertAt(S, l.name, { ...inv, exclude: true });
+    if (r.error) return r;
+    blindAi.push(Array.from(r.ai));
+  }
+  const ms = (i) => S.win.t0Ms + i * S.win.dtMs;
+  const pr = {
+    kind: 'porosity', upscaleHz,
+    wells: S.logs.map((l, k) => ({
+      name: l.name, il: k, xl: 0,
+      ln_ai: Array.from(l.lnAi, (v) => (fin(v) ? v : null)),
+      target: Array.from(l.phit, (v, i) => { const t = ms(i); return fin(v) && t >= l.horizonsMs[0] && t <= l.horizonsMs[1] ? v : null; }),
+    })),
+  };
+  return attempt(() => calibrateProperty({ pr, aiTraces: blindAi, dtMs: S.win.dtMs }));
+}
+
+/** The well-wavelet extraction of a reflectivity against a trace (engines/seismolord/wellWavelet.js). */
+export const wellWaveletOf = (rc, trace, { halfLength = 15 } = {}) => attempt(() => extractWellWavelet(rc, trace, { halfLength }));
+
+/** Angle wavelets at the pack wells by least squares against each well's Fatti reflectivity (engines/qi/angleWavelets.js). */
+export function angleWaveletsAt(S, M, { halfLength = 15 } = {}) {
+  return attempt(() => extractAngleWavelets({
+    wells: S.logs.map((l) => ({ name: l.name, ln_ai: Array.from(l.lnAi), ln_si: Array.from(l.lnSi), ln_rho: Array.from(l.lnRho) })),
+    tracesByWell: S.logs.map((l) => M.stacks.map((k) => Array.from(wellTrace(l.name, k, S.win)))),
+    thetaDeg: M.angles, vsVp: M.vsVp, halfLength,
+  }));
+}
+
+/** The local crest reached by climbing from a stated node (engines/qi/prospectTrap.js climbToCrest), then its closure. */
+export function trapFrom(g, startNode, opts = {}) {
+  const seed = attempt(() => climbToCrest(g.z, g.spec, startNode));
+  if (seed && seed.error) return seed;
+  if (!(seed >= 0)) return { error: 'The climb found no mapped crest from that node.' };
+  return { seed, ...closureOf(g, { ...opts, seed }) };
+}

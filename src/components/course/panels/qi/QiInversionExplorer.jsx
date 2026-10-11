@@ -177,14 +177,11 @@ const ForwardView = ({ data, s, set }) => {
   const wavelet = data.kind === 'pack' ? data.S.wavelet : data.A.fullWavelet;
   const n = data.kind === 'pack' ? data.S.win.ns : data.win.ns;
   const seed = num(s.adjSeed);
-  let a = (Number.isInteger(seed) ? seed : 0) >>> 0;
-  const rnd = () => { a = (a * 1664525 + 1013904223) >>> 0; return a / 4294967296 - 0.5; };
-  const xv = Array.from({ length: n }, rnd); const yv = Array.from({ length: n }, rnd);
-  const dot = (u, v) => u.reduce((t, w, i) => t + w * v[i], 0);
+  const adj = X.adjointTest(wavelet, n, Number.isInteger(seed) ? seed : 0);
   const rows = [
-    ['centred difference D', dot(X.diffCentred(xv), yv), dot(xv, X.diffCentredAdjoint(yv))],
-    ['centred convolution C', dot(X.convolveCentred(xv, wavelet), yv), dot(xv, X.convolveCentredAdjoint(yv, wavelet))],
-  ].map(([k, l, r]) => [k, six(l), six(r), six(l - r)]);
+    ['centred difference D', adj.d[0], adj.d[1]],
+    ['centred convolution C', adj.c[0], adj.c[1]],
+].map(([k, l, r]) => [k, six(l), six(r), six(l - r)]);
   let chart = null;
   if (data.kind === 'pack') {
     const S = data.S;
@@ -213,7 +210,7 @@ const ForwardView = ({ data, s, set }) => {
         {data.kind === 'pack' && <WellPick s={s} set={set} blind={false} />}
         <NumField label="Seed of the two test vectors (stated)" value={s.adjSeed} onChange={set('adjSeed')} />
       </FieldGrid>
-      <p className="text-xs text-pl-muted mt-2 mb-0">The dot-product test: for any x and y, (A x) . y equals x . (A transposed y). Two vectors of {n} samples from the stated seed.</p>
+      <p className="text-xs text-pl-muted mt-2 mb-0">The dot-product test: for any x and y, (A x) . y equals x . (A transposed y). Two vectors of {n} samples from the canonical seeded generator (mulberry32) on the stated seed, x drawn first and then y, each value uniform less one half.</p>
       <Tbl head={['operator', '(A x) . y', 'x . (A^T y)', 'difference']} rows={rows} />
       {chart}
     </>
@@ -231,7 +228,6 @@ const LfmView = ({ data, s, set }) => {
           <NumField label="Inverse distance power (stated)" value={s.power} onChange={set('power')} />
           <NumField label="Sample of the second position, index from the first (stated)" value={s.sampleB} onChange={set('sampleB')} />
         </FieldGrid>
-        <Declared title="AWAITING ITS INDEPENDENT ORACLE">The low-frequency model engine (lfm.js) waits on its oracle in the engines repository. The course teaches it now and grades nothing through it until that lands.</Declared>
         {r.error ? <Refusal text={r.error} /> : (
           <>
             <XYChart label="The LFM ln(AI) at the second position" xTitle="two-way time, ms" yTitle="ln(AI)" lines={[{ pts: Array.from(r, (v, i) => [msOf(data.win, i), v]), color: CH.blue }]} />
@@ -256,7 +252,6 @@ const LfmView = ({ data, s, set }) => {
         <NumField label="Inverse distance power (stated)" value={s.power} onChange={set('power')} />
         <NumField label="High cut of the log scored against, Hz (stated)" value={s.truthHz} onChange={set('truthHz')} />
       </FieldGrid>
-      <Declared title="AWAITING ITS INDEPENDENT ORACLE">The low-frequency model engine (lfm.js) waits on its oracle in the engines repository. The course teaches it now and grades nothing through it until that lands.</Declared>
       {r.error ? <Refusal text={r.error} /> : (
         <>
           <XYChart label="The LFM and the well's log after the high cut, ln(AI)" xTitle="two-way time, ms" yTitle="ln(AI)"
@@ -282,7 +277,7 @@ const LfmView = ({ data, s, set }) => {
 
 const ScaleView = ({ S }) => (
   <>
-    <Declared title="APP ARITHMETIC">The scale is QI Studio&apos;s own least-squares rule (its inversion service), repeated in the course&apos;s lab: the one number that makes the scaled forward model of the logs match the full stack best, pooled over the well samples whose wavelet span the log covers. It is app code, outside the gated engines.</Declared>
+    <p className="text-xs text-pl-muted mt-2 mb-0">The scale is the engine&apos;s least-squares rule (waveletScale, engines/qi/inversionQc.js, the rule QI Studio runs): the one number that makes the scaled forward model of the logs match the full stack best, pooled over the well samples whose wavelet span the log covers.</p>
     <TileGrid>
       <Tile label="Scale" value={six(S.scale)} />
       <Tile label="Samples pooled" value={String(S.scaleSamples)} />

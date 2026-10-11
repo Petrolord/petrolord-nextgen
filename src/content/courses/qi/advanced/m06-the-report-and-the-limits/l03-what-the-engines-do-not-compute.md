@@ -26,7 +26,7 @@ The methods are named with their authors and years, and the course teaches each 
 
 ## The gate behind each engine
 
-Most engines this tier calls carry a golden and an independent oracle in the engines repository. Two await theirs: lfm.js, the low-frequency model between wells and the blind-well score, and prospectAssessment.js, anomaly conformance, the evidence count and the assessment. Both are taught, and graded only once their oracle lands. Two Expert steps the course describes are QI Studio app code, the left-out porosity calibration, which calls the gated propertyPrediction.js, and the per-angle wavelet extraction, and a report names them as app code.
+Every engine this tier calls carries a golden and an independent oracle in the engines repository: lfm.js, the low-frequency model between wells and the blind-well score; prospectAssessment.js, anomaly conformance, the evidence count and the assessment; and the QI Studio maths that moved into the engines, the wavelet scale, the left-out porosity calibration, the per-angle wavelet extraction and the climb to a crest. A report names the engine behind each figure.
 
 {{panel:qi-prospect-explorer}}
 

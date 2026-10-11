@@ -39,8 +39,7 @@ export const PRINTED_DECIMALS = {
  * distance), so the stated tolerance is 1e-9 and the printed floor, half a
  * unit in the sixth decimal, sets every tolerance. No field is a random draw.
  *
- * Expert fields are added when their engines pass the extraction gate
- * (golden plus an independent oracle).
+ * Expert fields (DELSHOLM) follow in their own block below.
  */
 export const GRADED_FIELDS = [
   ['beginner', 'tamberlo_low6_hz', 'frequency', 1e-9],
@@ -62,6 +61,46 @@ export const GRADED_FIELDS = [
   ['intermediate', 'quarvin_far_stack_amp', 'amplitude', 1e-9],
   ['intermediate', 'quarvin_shuey_a', 'amplitude', 1e-9],
   ['intermediate', 'quarvin_one_scale', 'ratio', 1e-9],
+  // Expert: DELSHOLM, a held-out synthetic case (three wells' low-passed ln(AI)
+  // in time with their horizons, a target trace with its stacks, wavelets and
+  // supplied low-frequency models, calibration samples and a depth grid in
+  // feet; never the Ekene field). Engines gated by E1c (lfm.js) and the
+  // engines' own goldens and oracles (inversion.js, prestackInversion.js,
+  // propertyPrediction.js, lib/gridding/closure.js).
+  // Closed-form fields (inverse-distance LFM, a least-squares transform and its
+  // Student-t interval, a Gaussian posterior, the crest-to-spill column of a
+  // priority flood) sit at the printed floor.
+  // The two solver fields: the engine at the stated iteration count is
+  // deterministic arithmetic (CGLS with no random draw and no Math.sin or
+  // Math.cos in the loop), and on the case it has converged before the stated
+  // count (the field does not move between the stated count and four times it,
+  // measured by qi_capstone_e.mjs). The tolerance is set from the engines'
+  // measured agreement with the independent pylops oracle in the vendored
+  // goldens: post-stack modelBased within 1e-6 in ln(AI)
+  // (qi.inversion.test.js), simultaneous within 2e-4 in each ln parameter
+  // (qi.prestackInversion.test.js), times a stated safety factor of 10, carried
+  // to the field's own units at the field's order of magnitude:
+  //   model-based AI:  1e-6 x 10 x an AI of order 6e6 kg/(m2 s), about 60
+  //   Vp/Vs:           2e-4 x 2 (ln AI and ln SI) x 10 x a Vp/Vs of order 1.7, about 0.0068
+  // Both FAILED the wave's gates. The leak sweeps compare a field against
+  // every digest and golden number within ten tolerances in three unit
+  // shiftings, and windows that wide reach unrelated literals; and for Vp/Vs
+  // two plausible wrong methods (the full-stack wavelet at every angle, a
+  // background Vs/Vp of 0.5) move the field by less than 0.0068. The oracle
+  // agreement measures the engine against the exact least-squares solution,
+  // which is not what a learner reproduces: the learner runs the same engine,
+  // whose only browser-dependent arithmetic is Math.sin, Math.tan and Math.exp
+  // at ulp level (oracle_check.py's exact normal-equation solve agrees with the
+  // converged engine to about 1e-13 relative on this case). So both solver
+  // tolerances are set by discrimination, well above any reproduction error:
+  // model-based AI 1 kg/(m2 s), Vp/Vs 5e-6 (ten times the printed floor);
+  // discriminate.mjs reports every wrong method's distance in these.
+  ['advanced', 'delsholm_lfm_lnai_b', 'ratio', 1e-9],
+  ['advanced', 'delsholm_mb_ai', 'impedance', 1],
+  ['advanced', 'delsholm_sim_vpvs', 'ratio', 5e-6],
+  ['advanced', 'delsholm_phi_q90', 'fraction', 1e-9],
+  ['advanced', 'delsholm_p_oil', 'probability', 1e-9],
+  ['advanced', 'delsholm_column_ft', 'depth', 1e-9],
 ];
 
 /**

@@ -22,13 +22,13 @@ A synthetic sample counts only when the log covers the whole wavelet around it; 
 
 The unit Ricker's peak is 1.000000, so the scaled peak equals the scale. This is the wavelet whose synthetic tied Ekene-1 at 0.966050.
 
-## The same figure by QI Studio's code
+## The engine behind the figure
 
-QI Studio computes the scale with `waveletScale` in its inversion service (src/pages/apps/QIStudio/services/inversionRun.js, petrolord-suite 5df9d9410). On the same pairs it returns 769.984107 over 19 samples. That routine is app code: it is not one of the extraction-gated engines, so the figure is QI Studio app arithmetic, checked here only by agreement with the course's own pooled fit.
+The scale comes from `waveletScale` in engines/qi/inversionQc.js, the same rule QI Studio runs, and it carries a golden and an independent oracle like the inversions it feeds. The inversion explorer calls that engine on the four pack wells, so the scale the panel prints and the 769.984107 above are one computation, made once.
 
 ## When the scale refuses
 
-QI Studio refuses to scale when the wells overlap fewer than ten usable samples of seismic, with the message:
+The engine refuses to scale when the wells overlap fewer than ten usable samples of seismic, with the message:
 
 > The wells overlap too little seismic to scale the wavelet.
 

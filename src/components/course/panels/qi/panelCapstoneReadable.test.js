@@ -12,11 +12,10 @@ import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import QiFeasibilityExplorer from './QiFeasibilityExplorer.jsx';
 import { GRADED_FIELDS, gradedTolerance } from './gradedTolerance.js';
-import { associateFigures, professionalFigures, readCaseText, qiWaveInput } from './qiCaseFigures.testkit.js';
+import { associateFigures, professionalFigures, expertFigures, readCaseText, qiWaveInput } from './qiCaseFigures.testkit.js';
 import QiPrestackExplorer from './QiPrestackExplorer.jsx';
 import QiInversionExplorer from './QiInversionExplorer.jsx';
 import QiProspectExplorer from './QiProspectExplorer.jsx';
-import { expertFigures } from './qiCaseFigures.testkit.js';
 
 const CASE_TEXT = readCaseText('tamberlo');
 const FIG = associateFigures(JSON.parse(CASE_TEXT));

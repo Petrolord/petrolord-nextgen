@@ -112,10 +112,10 @@ describe('THE QI CAPSTONE GUARD', () => {
   });
 });
 
-// The Expert figures are not graded yet either: guarded in their own four
-// shapes, computed from the DELSHOLM case through the Expert lab; and the
-// case's distinctive inputs (its trace positions and its two stated AIs, whole
-// numbers matched as whole tokens).
+// The Expert figures are graded (in FIELDS above) and also guarded here in
+// their own four shapes, computed from the DELSHOLM case through the Expert
+// lab; and the case's distinctive inputs (its trace positions and its two
+// stated AIs, whole numbers matched as whole tokens).
 const EXP = expertFigures(CASES.DELSHOLM);
 const EXP_RENDERINGS = Object.entries(EXP).flatMap(([key, v]) => [String(v), trimZ(v.toPrecision(12)), trimZ(v.toPrecision(9)), v.toFixed(6)]
   .filter((t, k, a) => t.includes('.') && !/e/i.test(t) && t.length >= 6 && a.indexOf(t) === k).map((text) => ({ key, text })));

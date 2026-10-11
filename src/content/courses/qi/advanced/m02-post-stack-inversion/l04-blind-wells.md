@@ -6,7 +6,7 @@ An inversion scored at a well that built its own low-frequency model is partly s
 
 Each well is inverted with the LFM from the other three, then scored against its own log after the 50 Hz high cut. `blindWellScore` returns two figures over the samples where both exist: the correlation of AI with the log's AI, and the RMS of the relative AI error in percent. Beside it the course sets the same well kept in its LFM, and the LFM alone, so the share of the match that comes from the LFM is visible. The rule is the one QI Studio's blind-well table uses.
 
-`blindWellScore` and the LFM between wells both come from lfm.js, which awaits its independent oracle in the engines repository. The course teaches every figure below and grades none of them until that oracle lands.
+`blindWellScore` and the LFM between wells both come from lfm.js, and the blind-well table from inversionQc.js; both carry a golden and an independent oracle in the engines repository.
 
 ## Model-based
 
@@ -32,7 +32,7 @@ With eps 0.050000 and 60 iterations:
 
 The LFM alone carries the level. Its correlation is negative at every well: it has none of the shape. Its RMS error is lower than the model-based inversion's at every well, blind or kept in.
 
-The inversions carry the shape, with blind correlations from about 0.76 to 0.89. They pay for it with a larger RMS error. Sparse-spike sits between: its error is below the LFM-alone figure at Ekene-1 and Ekene-4, and above it at Ekene-2 and Ekene-3.
+The inversions carry the shape, with blind correlations from 0.759365 to 0.889320 across the two methods. They pay for it with a larger RMS error. Sparse-spike sits between: its error is below the LFM-alone figure at Ekene-1 and Ekene-4, and above it at Ekene-2 and Ekene-3.
 
 Keeping the well in its own LFM changes little. The kept-in correlations sit beside the blind ones at every well, and the kept-in error is larger than the blind error at three of the four wells. A well's own log inside its LFM is no guarantee of a closer match, as the LFM lesson found at Ekene-2.
 

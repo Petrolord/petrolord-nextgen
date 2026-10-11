@@ -1,6 +1,6 @@
 # Why density needs the far angles
 
-Density is the parameter the angles see least. This lesson inverts Ekene-1 from three sets of stacks and scores each parameter at the well. The near stack recovers AI (acoustic impedance) and barely moves density; adding the mid and far stacks turns the density correlation negative. On the Ekene pack density is not resolved.
+Density is the parameter the angles see least. This lesson inverts Ekene-1 from three sets of stacks and scores each parameter at the well. The near stack recovers AI (acoustic impedance) and moves density's shape without moving its level far; adding the mid and far stacks turns the density correlation negative. On the Ekene pack density is not resolved.
 
 ## The experiment
 
@@ -23,7 +23,7 @@ With the near stack only, Vp/Vs goes badly wrong: a correlation of -0.744719 and
 
 ## Density
 
-With the near stack only, density keeps an RMS error close to the LFMs-alone row, both under one percent: the near stack barely moves its level. G3 is tiny at 10 degrees, so the near stack carries almost no density information. Its positive correlation is read beside that barely moved level.
+With the near stack only, density's RMS error stays under one percent, 0.627310 against 0.767482 with the LFMs alone, while its correlation changes from -0.087754 to 0.614032. G3 is tiny at 10 degrees, so the near stack moves density's shape without moving its level far, and that positive correlation rests on a level the LFM still sets.
 
 Add the mid and far stacks and the density correlation at Ekene-1 turns negative, to -0.767957, with an error of 14.112317 percent: the inversion moves density away from the log. In this table density is the least reliable of the three parameters.
 

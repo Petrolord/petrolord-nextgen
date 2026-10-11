@@ -8,7 +8,7 @@ The seismic band holds no trend: below about 8 Hz it carries nothing an inversio
 
 ## How the engine builds it
 
-The LFM between wells comes from lfm.js, which awaits its independent oracle in the engines repository: the course teaches it and grades nothing through it until that oracle lands. It takes three steps:
+The LFM between wells comes from lfm.js, which carries a golden and an independent oracle in the engines repository. It takes three steps:
 
 1. **Low-pass each well.** Each well's ln(AI) in time is smoothed by a moving average whose half window is round(1000 / (cut x dt) / 2) samples. At the stated cut of 8 Hz on the 4.000000 ms clock that is 16 samples (`lowFrequencyModel`). That is more than half of a 27-sample log.
 2. **Follow the horizons.** Between two horizons a sample keeps its proportional position (`mapToWellTime`), so a layer that thickens or dips between wells keeps its impedance. Above the first horizon and below the last, the time offset from that horizon is kept.

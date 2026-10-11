@@ -34,6 +34,7 @@ const ATTRS = [['ai', 'AI'], ['ai,vpvs', 'AI and Vp/Vs']];
 const PRIORS = [['samples', 'the samples\' proportions'], ['equal', 'equal']];
 const KINDS = [['gaussian', 'Gaussian'], ['kde', 'Gaussian kernel density']];
 const YES = [['yes', 'yes'], ['no', 'no']];
+const COMPETING = [['none', 'none stated'], ['open', 'tuning, open'], ['ruled-out', 'tuning, ruled out'], ['likely', 'tuning, likely']];
 const FEAS = [['feasible', 'feasible'], ['conditional', 'conditional'], ['not-feasible', 'not feasible'], ['', 'not stated']];
 const list = (t) => String(t).split(',').map((v) => num(v)).filter(Number.isFinite);
 const listText = (a) => a.join(', ');
@@ -60,7 +61,8 @@ const startState = (c) => {
     levels: '8',
     anomalyAbove: '0',
     cut: 'no',
-    present: 'yes', conf: '0.83', inside: '0.9', independent: '2', feasibility: 'feasible',
+    present: 'yes', conf: '0.83', inside: '0.9', independent: '2', feasibility: 'feasible', competing: 'none',
+    climbCol: '', climbRow: '',
   };
 };
 
@@ -98,7 +100,7 @@ const QiProspectExplorer = ({ initialMode = 'transform', initialText = null }) =
       {!data.error && (
         <div className="mt-1">
           {mode === 'transform' && <TransformView data={data} s={s} set={set} />}
-          {mode === 'leftout' && <LeftOutView />}
+          {mode === 'leftout' && <LeftOutView data={data} />}
           {mode === 'facies' && <FaciesView data={data} s={s} set={set} />}
           {mode === 'closure' && <ClosureView data={data} s={s} set={set} />}
           {mode === 'conformance' && <ConformanceView data={data} s={s} set={set} />}
@@ -155,11 +157,30 @@ const TransformView = ({ data, s, set }) => {
   );
 };
 
-const LeftOutView = () => (
-  <>
-    <Declared title="THE LEFT-OUT-WELL BAND ARRIVES IN QI STUDIO">QI Studio leaves each well out in turn, predicts its porosity from the blind inverted AI at that well, and widens the band by the pooled left-out error. That check is QI Studio&apos;s own app code; this explorer does not compute it. The course&apos;s lessons quote its figures on the Ekene wells, and the transform view here gives the log-against-log band it widens.</Declared>
-  </>
-);
+const LeftOutView = ({ data }) => {
+  if (data.kind !== 'pack') return <Note>The left-out-well check reads the Ekene pack&apos;s four wells, their logs in time and their blind inversions; a case carries calibration pairs alone. Choose the Ekene teaching pack as the data.</Note>;
+  const S = X.ekeneSetup();
+  const cal = S.error ? S : X.leftOutBand(S);
+  return (
+    <>
+      <p className="text-xs text-pl-muted mt-2 mb-0">calibrateProperty (engines/qi/propertyCalibration.js, the rule QI Studio runs): each well&apos;s ln(AI) and porosity in time inside its Ekene Sand times, upscaled at {E.truthHz} Hz; each well left out in turn, the transform refitted on the others and porosity predicted from the blind inverted AI at that well (model-based, eps {six(E.eps)}, {E.iters} iterations); the band widened by the pooled left-out error.</p>
+      {cal.error ? <Refusal text={cal.error} /> : (
+        <>
+          <TileGrid>
+            <Tile label="Intercept a" value={six(cal.summary.a)} />
+            <Tile label="Slope b per 10^6 kg/(m2 s)" value={six(cal.summary.b * 1e6)} />
+            <Tile label="Upscaled samples" value={String(cal.summary.n)} />
+            <Tile label="s, log against log" value={six(cal.summary.s)} />
+            <Tile label="Pooled left-out RMS" value={six(cal.summary.sLoo)} />
+            <Tile label="s_extra, the widening" value={six(cal.summary.sExtra)} />
+          </TileGrid>
+          <Tbl head={['well left out', 'samples', 'RMS porosity error', 'bias', 'correlation', 'share inside the widened band']}
+            rows={cal.rows.map((r) => (r.error ? [r.name, r.error, '', '', '', ''] : [r.name, String(r.n), six(r.rms), six(r.bias), six(r.corr), six(r.coverage)]))} />
+        </>
+      )}
+    </>
+  );
+};
 
 const FaciesView = ({ data, s, set }) => {
   const attrs = s.attrs.split(',');
@@ -208,21 +229,31 @@ const FaciesView = ({ data, s, set }) => {
 const ClosureView = ({ data, s, set }) => {
   if (!data.grid) return <Note>The case carries no grid.</Note>;
   const contact = String(s.contact).trim() === '' ? null : num(s.contact);
-  const c = X.closureOf(data.grid, { contact, levels: num(s.levels) });
+  const g = data.grid;
+  const climbing = String(s.climbCol).trim() !== '' && String(s.climbRow).trim() !== '';
+  const cc = num(s.climbCol); const cr = num(s.climbRow);
+  const start = climbing && Number.isInteger(cc) && Number.isInteger(cr) && cc >= 0 && cr >= 0 && cc < g.spec.nx && cr < g.spec.ny ? cr * g.spec.nx + cc : null;
+  const c = climbing
+    ? (start == null ? null : X.trapFrom(g, start, { contact, levels: num(s.levels) }))
+    : X.closureOf(g, { contact, levels: num(s.levels) });
   const live = Array.from(data.grid.z).filter((v) => Math.abs(v) < 1e29).length;
   return (
     <>
       <FieldGrid>
         <NumField label="Contact elevation, ft, blank for the spill (stated)" value={s.contact} onChange={set('contact')} />
         <NumField label="Levels on the area-depth curve (stated)" value={s.levels} onChange={set('levels')} />
+        <NumField label="Climb from column, blank for the highest node (stated)" value={s.climbCol} onChange={set('climbCol')} />
+        <NumField label="Climb from row, blank for the highest node (stated)" value={s.climbRow} onChange={set('climbRow')} />
       </FieldGrid>
       <p className="text-xs text-pl-muted mt-2 mb-0">
         {data.kind === 'pack' ? 'The Ekene Sand top as the kit grids it from the six development wells\' tops, z minus the depth below the kelly bushing.' : 'The case\'s depth grid.'}
-        {' '}{data.grid.spec.nx} by {data.grid.spec.ny} nodes every {six(data.grid.spec.dx)} ft, {live} mapped. Elevation in feet, negative down; the crest is the highest mapped node.
+        {' '}{data.grid.spec.nx} by {data.grid.spec.ny} nodes every {six(data.grid.spec.dx)} ft, {live} mapped. Elevation in feet, negative down; the crest is the highest mapped node, or the local crest a climb from a stated node reaches (climbToCrest, engines/qi/prospectTrap.js).
       </p>
-      {c.error ? <Refusal text={c.error} /> : (
+      {!c && <Note>The climb needs a whole column from 0 to {g.spec.nx - 1} and a whole row from 0 to {g.spec.ny - 1}.</Note>}
+      {c && (c.error ? <Refusal text={c.error} /> : (
         <>
           <TileGrid>
+            {c.seed != null && <Tile label="Crest node reached by the climb" value={String(c.seed)} />}
             <Tile label="Crest" value={six(c.crestZ)} unit="ft" />
             <Tile label="Spill" value={six(c.spillZ)} unit="ft" />
             <Tile label="Column from crest to spill" value={six(c.columnFt)} unit="ft" />
@@ -245,7 +276,7 @@ const ClosureView = ({ data, s, set }) => {
             </>
           )}
         </>
-      )}
+      ))}
     </>
   );
 };
@@ -273,7 +304,7 @@ const ConformanceView = ({ data, s, set }) => {
     insideClosure: present ? num(s.inside) : null,
     independent: num(s.independent),
     feasibility: s.feasibility,
-    competing: [],
+    competing: s.competing === 'none' ? [] : [{ name: 'tuning', status: s.competing }],
   });
   return (
     <>
@@ -281,7 +312,7 @@ const ConformanceView = ({ data, s, set }) => {
         <NumField label="Anomaly: nodes shallower than the spill plus, ft (stated)" value={s.anomalyAbove} onChange={set('anomalyAbove')} />
         <SelectField label="Cut the anomaly at the middle column (stated)" value={s.cut} onChange={set('cut')} options={YES} />
       </FieldGrid>
-      <Declared title="A DESIGNED TEACHING ANOMALY">The anomaly is drawn by the course on the grid: every mapped node shallower than the stated elevation, and, when cut, only west of the grid&apos;s middle column. The conformance engine (prospectAssessment.js) waits on its independent oracle; the course teaches it now and grades nothing through it until that lands.</Declared>
+      <Declared title="A DESIGNED TEACHING ANOMALY">The anomaly is drawn by the course on the grid: every mapped node shallower than the stated elevation, and, when cut, only west of the grid&apos;s middle column. The conformance engine is prospectAssessment.js.</Declared>
       {c.error && <Refusal text={c.error} />}
       {conf && (conf.error ? <Refusal text={conf.error} /> : (
         <TileGrid>
@@ -306,6 +337,7 @@ const ConformanceView = ({ data, s, set }) => {
         {present && <NumField label="Share inside the closure (stated)" value={s.inside} onChange={set('inside')} />}
         <NumField label="Independent supporting sources (stated)" value={s.independent} onChange={set('independent')} />
         <SelectField label="Feasibility verdict (stated)" value={s.feasibility} onChange={set('feasibility')} options={FEAS} />
+        <SelectField label="Competing explanation (stated)" value={s.competing} onChange={set('competing')} options={COMPETING} />
       </FieldGrid>
       <TileGrid>
         <Tile label="Recommendation" value={asmt.recommendation} />

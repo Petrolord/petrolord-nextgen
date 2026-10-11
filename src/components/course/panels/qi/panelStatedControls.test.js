@@ -198,12 +198,12 @@ describe('THE STATED CONTROLS OF THE INVERSION AND PROSPECT EXPLORERS', () => {
     const pros = {
       transform: { 'Net sand Vsh cut-off (stated)': 0.35, 'Interval level (stated)': E.levelInterval },
       facies: { 'Attributes (stated)': 'ai', 'Priors (stated)': 'samples', 'Density per facies (stated)': 'gaussian' },
-      conformance: { 'Anomaly: nodes shallower than the spill plus, ft (stated)': 0, 'Cut the anomaly at the middle column (stated)': 'no', 'Feasibility verdict (stated)': 'feasible' },
+      conformance: { 'Anomaly: nodes shallower than the spill plus, ft (stated)': 0, 'Cut the anomaly at the middle column (stated)': 'no', 'Feasibility verdict (stated)': 'feasible', 'Competing explanation (stated)': 'none' },
     };
     for (const [mode, w] of Object.entries(pros)) expect(missingPro(renderPros(mode), w), mode).toEqual([]);
   });
 
-  it('no view refuses on the pack or on the case, and the left-out band says where it is computed', () => {
+  it('no view refuses on the pack or on the case, and the left-out band and the scale are computed through the engines', () => {
     for (const [mode] of INV_MODES) {
       expect(renderInv(mode), mode).not.toContain('THE ENGINE REFUSED');
       expect(renderInv(mode, EXP_TEXT), mode).not.toContain('THE ENGINE REFUSED');
@@ -212,9 +212,12 @@ describe('THE STATED CONTROLS OF THE INVERSION AND PROSPECT EXPLORERS', () => {
       expect(renderPros(mode), mode).not.toContain('THE ENGINE REFUSED');
       expect(renderPros(mode, EXP_TEXT), mode).not.toContain('THE ENGINE REFUSED');
     }
-    expect(renderPros('leftout')).toContain('THE LEFT-OUT-WELL BAND ARRIVES IN QI STUDIO');
-    expect(renderInv('lfm')).toContain('AWAITING ITS INDEPENDENT ORACLE');
-    expect(renderInv('scale')).toContain('APP ARITHMETIC');
+    expect(renderPros('leftout')).toContain('s_extra, the widening');
+    expect(renderPros('leftout')).toContain('engines/qi/propertyCalibration.js');
+    expect(renderInv('scale')).toContain('engines/qi/inversionQc.js');
+    for (const html of [renderPros('leftout'), renderInv('lfm'), renderInv('scale'), renderPros('conformance')]) {
+      expect(html).not.toMatch(/AWAITING|APP ARITHMETIC|ARRIVES IN QI STUDIO|app code/i);
+    }
   });
 
   it('NEGATIVE CONTROL: a missing or wrong Expert control is reported, and a refusal prints verbatim', () => {

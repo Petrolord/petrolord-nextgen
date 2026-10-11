@@ -4,17 +4,20 @@ The Associate tier asked whether the seismic can see the fluid, from logs and on
 
 ## The engines and their gate
 
-Every Expert engine passes the extraction gate before the course grades through it: a golden result plus an independent oracle in the engines repository. Two engines have not passed it yet, and the course says so wherever it uses them.
+Every Expert engine has passed the extraction gate: a golden result plus an independent oracle in the engines repository. That includes the QI Studio maths the tier uses, the wavelet scale, the left-out-well check, the angle wavelets and the prospect trap, which now live in the engines beside the rest.
 
 | engine | what it computes | gate |
 | --- | --- | --- |
 | engines/qi/inversion.js | the forward model, model-based, blocky, sparse-spike and coloured inversion, the low-frequency model of one log | golden and oracle (pylops) |
 | engines/qi/inversionSpread.js | quantiles across realisations, the relative spread, seeded noise | golden and oracle |
 | engines/qi/prestackInversion.js | Fatti's coefficients, the prestack forward model, simultaneous inversion | golden and oracle (pylops) |
-| engines/qi/lfm.js | the low-frequency model between wells, the blind-well score | awaiting its oracle |
-| engines/qi/prospectAssessment.js | anomaly conformance, evidence independence, the assessment | awaiting its oracle |
+| engines/qi/lfm.js | the low-frequency model between wells, the blind-well score | golden and oracle |
+| engines/qi/inversionQc.js | the wavelet scale at the wells, the moving-average high cut, the blind-well table | golden and oracle |
+| engines/qi/propertyCalibration.js | the property calibration at seismic scale and its left-out-well check | golden and oracle |
+| engines/qi/prospectAssessment.js | anomaly conformance, evidence independence, the assessment | golden and oracle |
+| engines/qi/prospectTrap.js | the climb to a local crest, the trap and the anomaly of one prospect | golden and oracle |
 
-lfm.js builds the low-frequency model between wells and scores every blind well in these modules. It is taught in full, and nothing is graded through it until its oracle lands.
+lfm.js builds the low-frequency model between wells and scores every blind well in these modules.
 
 ## The settings the tier states
 
@@ -59,4 +62,4 @@ A Suite user runs these steps in QI Studio. Every exercise here runs in the inve
 
 ## Exercise
 
-Open the inversion explorer with Data set to "Ekene teaching pack". Step through its eight views, from "The forward model and its adjoint" to "Simultaneous inversion by stacks". For each view, write down which engine file from the table above it calls, which stated settings it shows as controls, and whether it also accepts a pasted case. Mark the views that carry the notice that lfm.js awaits its oracle, and the one marked as app arithmetic.
+Open the inversion explorer with Data set to "Ekene teaching pack". Step through its eight views, from "The forward model and its adjoint" to "Simultaneous inversion by stacks". For each view, write down which engine file from the table above it calls, which stated settings it shows as controls, and whether it also accepts a pasted case. Mark the views that read the low-frequency model from lfm.js, and the one that calls the wavelet scale from inversionQc.js.
