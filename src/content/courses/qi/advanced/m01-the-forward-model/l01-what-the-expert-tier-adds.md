@@ -45,7 +45,7 @@ Each pack well's logs go to two-way time on its checkshots, linear between level
 | Ekene-3 | 27 | 1240.000000 | 1344.000000 | 1282.159191 | 1302.328106 |
 | Ekene-4 | 26 | 1284.000000 | 1384.000000 | 1329.290304 | 1346.132878 |
 
-Every score in the inversion modules runs over these logged samples alone: 27 at three wells and 26 at Ekene-4. That is short. A correlation over 27 samples moves a long way on a few of them, and a slope fitted to so short a log rests on few frequencies. Read every Expert figure with that count beside it.
+Every score in the inversion modules runs over these logged samples alone: 27 at three wells and 26 at Ekene-4. A correlation over 27 samples moves a long way on a few of them. Read every Expert figure with that count beside it.
 
 ## Words this tier uses
 
@@ -53,10 +53,10 @@ AI is acoustic impedance, Vp x density, in kg/(m2 s); SI is shear impedance, Vs 
 
 ## Where the work runs
 
-A Suite user runs these steps in QI Studio. Every exercise here runs in the inversion explorer, which calls the same engine files on the Ekene pack or on a pasted case, with one view for each of the three modules.
+A Suite user runs these steps in QI Studio. Every exercise here runs in the inversion explorer, which calls the same engine files on the Ekene pack or on a pasted case, with one view for each step of the first three modules.
 
 {{panel:qi-inversion-explorer}}
 
 ## Exercise
 
-Open the inversion explorer with Data set to the Ekene pack. Step through its three views: the forward model, post-stack inversion and simultaneous inversion. For each view, write down which engine file from the table above it calls, which stacks of the pack it reads, and which of the stated settings it shows as controls. Mark every figure that view returns through lfm.js.
+Open the inversion explorer with Data set to "Ekene teaching pack". Step through its eight views, from "The forward model and its adjoint" to "Simultaneous inversion by stacks". For each view, write down which engine file from the table above it calls, which stated settings it shows as controls, and whether it also accepts a pasted case. Mark the views that carry the notice that lfm.js awaits its oracle, and the one marked as app arithmetic.

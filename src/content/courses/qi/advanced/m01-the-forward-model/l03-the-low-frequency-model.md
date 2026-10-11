@@ -12,7 +12,7 @@ The LFM between wells comes from lfm.js, which awaits its independent oracle in 
 
 1. **Low-pass each well.** Each well's ln(AI) in time is smoothed by a moving average whose half window is round(1000 / (cut x dt) / 2) samples. At the stated cut of 8 Hz on the 4.000000 ms clock that is 16 samples (`lowFrequencyModel`). That is more than half of a 27-sample log.
 2. **Follow the horizons.** Between two horizons a sample keeps its proportional position (`mapToWellTime`), so a layer that thickens or dips between wells keeps its impedance. Above the first horizon and below the last, the time offset from that horizon is kept.
-3. **Weight by distance.** The smoothed wells are carried to a trace by inverse distance weighting with power 2. Samples no well covers hold the nearest covered value.
+3. **Weight by distance.** The smoothed wells are carried to a trace by inverse distance weighting with power 2.
 
 ## The proportional position
 
@@ -52,10 +52,10 @@ Left out, the errors run from 8.512597 percent at Ekene-3 to 10.450743 percent a
 
 ## What these numbers will mean
 
-The LFM-only error is the bar every inversion in the next module must clear, and the blind-well lesson shows it is hard to beat on RMS error. A study states the cut, the power, the horizons and the wells in its LFM, and quotes the LFM-only score beside every inversion it reports.
+The LFM-only error is the bar every inversion in the next module must clear, and the blind-well lesson shows it is hard to beat on RMS error. A study states the cut, the power, the horizons and the wells, and quotes the LFM-only score beside every inversion.
 
 {{panel:qi-inversion-explorer}}
 
 ## Exercise
 
-In the inversion explorer, set View to the forward model, Data to the Ekene pack and the LFM cut to 8 Hz with inverse distance power 2. Leave Ekene-1 out and read the distances, shares, LFM ln(AI) at 1288 ms and LFM-only error; keep it in and read them again. Change the power to 1 and note which way Ekene-4's share moves.
+In the inversion explorer, set View to "The low-frequency model", Data to "Ekene teaching pack", "LFM cut, Hz" to 8 and "Inverse distance power" to 2. Set Well to Ekene-1 and "The well's own log" to left out, and read the distances, the shares and the two horizon times. Set the well's own log to kept in and look again. Change the power to 1 and note which way Ekene-4's share moves.

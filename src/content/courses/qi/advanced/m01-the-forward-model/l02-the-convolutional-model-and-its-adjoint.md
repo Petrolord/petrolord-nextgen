@@ -39,10 +39,10 @@ The rise in ln(AI) between 1288 and 1296 ms is the top of the sand, harder than 
 
 ## What the correlation says
 
-Over the logged samples the synthetic and the trace correlate at 0.966050 (27 samples). It is the evidence that d = C D m with this stated wavelet describes the full stack at Ekene-1, with one wavelet, one scale and one angle for the whole window; the third module adds the angles. A correlation is blind to a misfit in amplitude, and 27 samples is a short base. Beyond the logged samples the log is held flat, so the synthetic there says nothing about the earth.
+Over the logged samples the synthetic and the trace correlate at 0.966050 (27 samples). It is the evidence that d = C D m with this stated wavelet describes the full stack at Ekene-1. A correlation is blind to a misfit in amplitude, and 27 samples is a short base. Beyond the logged samples the synthetic says nothing about the earth.
 
 {{panel:qi-inversion-explorer}}
 
 ## Exercise
 
-In the inversion explorer, set View to the forward model, Data to the Ekene pack, Well to Ekene-1, the window to 1100 to 1500 ms and the wavelet to the 25 Hz Ricker with its scale. Run the dot-product test and check both differences. Read the log, the synthetic and the trace round 1288 ms, and the correlation over the logged samples. Repeat at Ekene-3 and write one sentence on whether its tie is better or worse than Ekene-1's, and at which samples they differ.
+In the inversion explorer, set View to "The forward model and its adjoint" and Data to "Ekene teaching pack", with "Window start, ms" 1100, "Window end, ms" 1500, "Ricker wavelet, Hz" 25 and "Wavelet half length, ms" 40. Check that both rows of the dot-product table show a difference of zero, then change "Seed of the two test vectors" and check again. Set Well to Ekene-1 and read the chart round 1288 ms and the correlation over the logged samples. Repeat at Ekene-3 and write one sentence on whether its tie is better or worse, and where the two curves part.

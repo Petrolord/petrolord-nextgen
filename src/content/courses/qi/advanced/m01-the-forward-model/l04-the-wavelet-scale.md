@@ -44,4 +44,4 @@ A study states the wavelet, its length, the wells in the fit, the sample count a
 
 ## Exercise
 
-In the inversion explorer, set View to the forward model, Data to the Ekene pack and the wavelet to the 25 Hz Ricker with a half length of 40 ms, all four wells in the fit. Read the scale and the sample count. Leave Ekene-4 out of the fit and read both again. Lengthen the half length to 60 ms and note which way the count moves, and whether it still clears QI Studio's rule of ten.
+In the inversion explorer, set View to "The wavelet scale" and Data to "Ekene teaching pack", with "Ricker wavelet, Hz" 25 and "Wavelet half length, ms" 40. Read the scale, the samples pooled and the two peaks. Lengthen the half length to 60 ms and note which way the samples pooled move and whether they still clear QI Studio's rule of ten. Restore 40 ms, change the Ricker to 30 Hz, and write one sentence on how the scale responds to a change of shape.
