@@ -17,7 +17,7 @@ import { fetchMemberVideoUrl } from '@/services/videoService';
 
 function Frame({ src, title }) {
   return (
-    <div className="relative w-full overflow-hidden rounded-md border border-pl-border bg-black" style={{ paddingTop: '56.25%' }}>
+    <div className="relative w-full overflow-hidden rounded-md border border-pl-border bg-pl-sunken" style={{ paddingTop: '56.25%' }}>
       <iframe
         className="absolute inset-0 h-full w-full"
         src={src}
