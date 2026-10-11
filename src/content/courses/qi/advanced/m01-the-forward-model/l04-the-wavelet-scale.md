@@ -1,3 +1,47 @@
 # The wavelet scale
 
+A wavelet chosen for its shape carries an arbitrary amplitude. The kit's traces carry no physical scale, and the forward model produces half differences of ln(AI). One number has to join them before any inversion can read a contrast: on the Ekene pack it is 769.984107, measured over 19 samples at the four wells.
+
+## Why one number matters
+
+The inversion reads impedance contrast from the ratio of the trace to the synthetic. Set the scale too large and the solver needs smaller contrasts in ln(AI), the log of AI (acoustic impedance), to match the trace; set it too small and it needs larger ones.
+
+## How it is measured
+
+The scale is the one number s that makes s times the forward model of the logs match the seismic best, by least squares pooled over every well sample whose wavelet span the log covers. Pooled means one fit over the four wells together, giving one scale for the field.
+
+A synthetic sample counts only when the log covers the whole wavelet around it; beyond the log's ends the synthetic carries no earth. On the pack's short logs that leaves few samples per well.
+
+| quantity | value |
+| --- | --- |
+| wavelet | 25 Hz Ricker, half length 40 ms (21 samples) |
+| peak amplitude of the unit wavelet | 1.000000 |
+| scale | 769.984107 |
+| samples in the fit | 19 |
+| peak of the scaled wavelet | 769.984107 |
+
+The unit Ricker's peak is 1.000000, so the scaled peak equals the scale. This is the wavelet whose synthetic tied Ekene-1 at 0.966050.
+
+## The same figure by QI Studio's code
+
+QI Studio computes the scale with `waveletScale` in its inversion service (src/pages/apps/QIStudio/services/inversionRun.js, petrolord-suite 5df9d9410). On the same pairs it returns 769.984107 over 19 samples. That routine is app code: it is not one of the extraction-gated engines, so the figure is QI Studio app arithmetic, checked here only by agreement with the course's own pooled fit.
+
+## When the scale refuses
+
+QI Studio refuses to scale when the wells overlap fewer than ten usable samples of seismic, with the message:
+
+> The wells overlap too little seismic to scale the wavelet.
+
+The Ekene pack clears that rule with 19 samples.
+
+## What the scale assumes
+
+It assumes the shape is right. The 25 Hz Ricker is a stated choice, and the scale only absorbs amplitude, so a misfit in shape stays in the residual. It assumes one scale serves the whole window and every well, the claim the Professional tier tested when it averaged four wavelets. And 19 samples from four wells is a thin base for a number every inversion multiplies through. The third module sets one scale per angle stack by the same rule.
+
+A study states the wavelet, its length, the wells in the fit, the sample count and the scale, and it quotes the count beside the scale every time.
+
 {{panel:qi-inversion-explorer}}
+
+## Exercise
+
+In the inversion explorer, set View to the forward model, Data to the Ekene pack and the wavelet to the 25 Hz Ricker with a half length of 40 ms, all four wells in the fit. Read the scale and the sample count. Leave Ekene-4 out of the fit and read both again. Lengthen the half length to 60 ms and note which way the count moves, and whether it still clears QI Studio's rule of ten.
