@@ -152,7 +152,7 @@ q(1, "A neighbouring pair on some other survey returns a signal to noise of 9999
  ["As an exceptionally clean dataset, far cleaner than the Ekene shallow window's median of 361.155122 and ready for any attribute.",
   "As a refusal, since the engine's own words for neighbouring traces of nulls are \"No neighbouring pair had samples to correlate.\"",
   "As an amplitude ratio, to be put in decibels with 20 log10."],
- "With c / (1 - c), a correlation near 1 sends the power ratio up without bound; capped at 0.999999 it stops at 999998.999971. QI Studio prints 10,000 or more as over 10,000 (over 40 dB).")
+ "With c / (1 - c), a correlation near 1 sends the power ratio up without bound; capped at 0.999999 it stops at 999998.999971. QI Studio prints any ratio of 10,000 or more as \"over 10,000 (over 40 dB)\" for that reason.")
 
 q(3, "The Ekene crossline stripe reports 8.500000 cycles at a period of 15.058824 lines. How is that cycles figure obtained, and does it satisfy its part of the rule?",
  "Lines in the slice over the period, 128 over 15.058824; it clears the five repeats the rule asks for.",
@@ -197,7 +197,7 @@ q(0, "A study pools Ekene-1 to Ekene-4 to calibrate its Vs from Vp relation on t
  ["It returns the same slope of 855.280029, since every pack well sits on the same Ekene earth model and the fit is linear.",
   "It refuses, because the four wells' water legs span different depths and the engine fits one well at a time.",
   "The slope settles onto the Greenberg-Castagna sandstone a1 of 0.804160."],
- "More wells move the slope, so a study states which wells it fitted. At 3100 m/s the pooled fit predicts 1681.273188 m/s against 1680.985632 at Ekene-1.")
+ "More wells move the slope. At 3100 m/s the pooled fit predicts 1681.273188 m/s against 1680.985632 at Ekene-1.")
 
 # X m04+m06
 q(2, "The capstone grades the slope of the local shear trend. In what unit is it read, and on which samples is it fitted?",
@@ -229,7 +229,7 @@ q(2, "At the oil-leg mean Sw of 0.574254, the Wood mix gives a pore-fluid modulu
  ["Midway, because Wood's average is the volume-weighted mean of the two moduli and the saturation is close to one half.",
   "Near the brine, since water is the wetting phase and a mix of more than half brine behaves as brine.",
   "Above both phases, because mixing two fluids stiffens the mixture past either one alone."],
- "Wood's mix is the uniform (Reuss) mix. At Sw 0.500000 it reads 1.291926 GPa and at 0.800000 only 1.869288 GPa, so the modulus climbs fastest near full brine.")
+ "Wood's mix is the uniform (Reuss) mix. At Sw 0.500000 it reads 1.291926 GPa and at 0.800000 1.869288 GPa, both still well below the brine's 2.662550 GPa.")
 
 q(1, "At 180 degF and 3200 psia, how do brine and live oil compare in bulk modulus, the property substitution turns on?",
  "Brine reads 2.662550 GPa and the live oil 0.852881 GPa.",
@@ -238,12 +238,12 @@ q(1, "At 180 degF and 3200 psia, how do brine and live oil compare in bulk modul
   "Brine reads 1.398867 GPa and the oil 0.987056 GPa, the two moduli the Wood mix returns at reservoir conditions."],
  "Batzle and Wang at the stated conditions give brine 1005.203569 kg/m3 and 1627.503313 m/s, live oil 754.214377 kg/m3 and 1063.400328 m/s: the brine is denser and far stiffer.")
 
-q(3, "Among the tabled Ekene-1 oil-leg samples, where does substitution to brine raise Vp the most and where the least?",
- "Most at 5082.000000 ft, Sw 0.416600, from 2474.227000 to 2733.411573 m/s; least at 5114.000000 ft, Sw 0.786200, from 3129.781000 to 3248.090773 m/s.",
- ["Most at 5114.000000 ft, where a high Sw of 0.786200 is read as the most oil left to replace, and least at the shallow sample of 5082.000000 ft with its Sw of 0.416600.",
-  "Equally at every sample, since Gassmann raises Vp by the same fraction wherever the frame and the porosity are held fixed.",
-  "Most where the mineral modulus is highest, 35.087723 GPa at 5114.000000 ft, as a stiffer mineral carries the fluid further."],
- "The deep sample already holds mostly brine: its in situ fluid modulus is 1.831634 GPa against 1.189766 GPa at 5082.000000 ft, so there is less to substitute.")
+q(3, "The oil-leg sample at 5114.000000 ft (PHIT 0.184200, Vsh 0.072400, Sw 0.786200) has an in situ Vp of 3129.781000 m/s. What Vp does substitution to brine return there?",
+ "3248.090773 m/s, from the sample's own PHIT, Vsh and Sw.",
+ ["3129.781000 m/s, unchanged, as the sample is mostly brine.",
+  "3088.285476 m/s, the brine Vp at 5110.000000 ft.",
+  "1788.275833 m/s, read as Vp from the Vs column."],
+ "Every sample with oil in it goes through the substitution with its own PHIT, Vsh and Sw: at 5114.000000 ft the in situ fluid modulus is 1.831634 GPa, Vp goes to 3248.090773 m/s, Vs to 1788.275833 m/s and density from 2348.600000 to 2358.484446 kg/m3.")
 
 # X m01+m05
 q(0, "Substitution to brine raises the density of the 5082.000000 ft sample from 2311.300000 to 2343.616460 kg/m3. What sets the size of that rise?",
@@ -298,12 +298,12 @@ q(3, "The modelled Ekene-1 top is dimmer with oil at every angle. How does the g
   "It reverses, the in situ coefficient rising above the brine one beyond 25 degrees as the oil curve turns back up."],
  "The near means read 0.156172 against 0.192995 and the far 0.073416 against 0.144237: the in situ coefficient is below the brine one throughout, and further below at the far angles.")
 
-q(2, "Shuey's intercept for the in situ top is 0.170742. How does it compare with the exact Zoeppritz coefficient at 0 degrees?",
- "It sits close, at 0.170742 against an exact 0.171249.",
- ["It is twice the exact figure, since Shuey's A is the sum of the impedance and the shear contrasts at normal incidence.",
-  "It equals the near mean, 0.156172.",
-  "It is the exact coefficient at 30 degrees, 0.070998, since Shuey's terms are read at the far end of the stated range."],
- "With brine the pair reads 0.205564 against 0.206058. The intercept is Shuey's normal-incidence term, and the exact plane-wave coefficient at 0 degrees lands near it in both cases.")
+q(2, "With brine in the oil leg, shuey returns A 0.205564 and B -0.475316 for the modelled Ekene-1 top. What curvature C does it return beside them?",
+ "0.216617, beside the in situ C of 0.186597.",
+ ["0.186597, as the fluid leaves C alone.",
+  "0.206058, the exact coefficient at 0 degrees.",
+  "0.166006, the exact coefficient at 35 degrees."],
+ "shuey returns the intercept, the gradient and the curvature of the interface: A 0.205564, B -0.475316 and C 0.216617 with brine, against A 0.170742, B -0.563558 and C 0.186597 in situ. 0.206058 and 0.166006 are exact coefficients from zoeppritzRpp at 0 and 35 degrees.")
 
 # X m01+m06
 q(0, "Which of these belongs to the interpreter and to no engine in a feasibility study of the Ekene Sand?",

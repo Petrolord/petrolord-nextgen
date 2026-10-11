@@ -276,7 +276,7 @@ At normal incidence only AI contributes: G2 and G3 are zero there. At every othe
   const aw3 = E.angleWaveletsAt(S, M, { halfLength: 3 });
   const aw15 = E.angleWaveletsAt(S, M, { halfLength: 15 });
   if (aw3.error || aw15.error) throw new Error(aw3.error || aw15.error);
-  const awRows = aw3.flatMap((a) => a.wells.map((w) => [whole(a.angle), w.name, fv(w.fitCorr), fv(w.synthCorr)]));
+  const awRows = aw3.flatMap((a) => a.wells.map((w) => [w.name, whole(a.angle), fv(w.fitCorr), fv(w.synthCorr)]));
   out.push(section(52, 'Angle-dependent wavelets', 'Expert m03 l02', `
 WHY EACH ANGLE HAS ITS OWN. A far-angle stack carries less high frequency and a different amplitude scale than a near one, so the simultaneous inversion takes one wavelet per angle stack.
 
@@ -286,7 +286,7 @@ ${table(['stack', 'angle degrees', 'scale', 'samples'], M.stacks.map((k, i) => [
 
 THE ENGINE QI STUDIO RUNS (extractAngleWavelets, engines/qi/angleWavelets.js) extracts a wavelet per angle at every well by least squares against that well's Fatti reflectivity at the stack's angle (extractWellWavelet, engines/seismolord/wellWavelet.js), then aligns and averages them across the wells. On the pack's short logs the extraction is limited by the wavelet length. At Ekene-1, on the half differences of the ln(AI) log in time: with the default half length of 15 samples (a 31-sample wavelet, longer than the ${whole(covered(E1).length)} logged samples, so no row of the fit is complete) it says "${sw15}"; with a half length of 5 it says "${sw5}" Over the four wells, extractAngleWavelets returns no wavelet for any stack at a half length of 15 (${whole(aw15.filter((a) => a.samples).length)} of ${whole(aw15.length)} stacks), and a ${whole(aw3[0].samples ? aw3[0].samples.length : 0)}-sample wavelet for each of the ${whole(aw3.filter((a) => a.samples).length)} stacks at a half length of 3, each well's fit and the correlation of its synthetic with the stack:
 
-${table(['angle degrees', 'well', 'fit correlation', 'synthetic against the stack'], awRows)}
+${table(['well', 'angle degrees', 'fit correlation', 'synthetic against the stack'], awRows)}
 
 A ${whole(aw3[0].samples ? aw3[0].samples.length : 0)}-sample wavelet spans ${f6(((aw3[0].samples ? aw3[0].samples.length : 1) - 1) * S.win.dtMs)} ms, shorter than the stated Ricker; the course therefore states the Ricker shape and scales it per stack for the inversions in sections 53 and 54.`));
 

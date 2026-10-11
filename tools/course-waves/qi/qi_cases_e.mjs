@@ -144,9 +144,9 @@ export function delsholm() {
     stated: {
       lfm: { power: 2, sampleB: 42 },
       modelBased: { eps: 0.3, iters: 400, sampleA: 32 },
-      simultaneous: { eps: [0.3, 0.3, 0.3], iters: 400, sampleA: 32 },
+      simultaneous: { eps: [0.3, 0.3, 0.3], iters: 400, sampleA: 30 },
       porosity: { level: 0.8, atAi: 6.55e6 },
-      facies: { kind: 'gaussian', priors: 'the calibration proportions', atAi: 6.45e6, class: 'oil sand' },
+      facies: { kind: 'gaussian', priors: 'the calibration proportions', atAi: 6.38e6, class: 'oil sand' },
       closure: { crest: 'the highest mapped node', contact: 'the spill' },
     },
   };

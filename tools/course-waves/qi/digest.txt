@@ -1128,20 +1128,20 @@ THE EKENE SETTING. The same 25 Hz Ricker shape for every stack, scaled per stack
 
 THE ENGINE QI STUDIO RUNS (extractAngleWavelets, engines/qi/angleWavelets.js) extracts a wavelet per angle at every well by least squares against that well's Fatti reflectivity at the stack's angle (extractWellWavelet, engines/seismolord/wellWavelet.js), then aligns and averages them across the wells. On the pack's short logs the extraction is limited by the wavelet length. At Ekene-1, on the half differences of the ln(AI) log in time: with the default half length of 15 samples (a 31-sample wavelet, longer than the 27 logged samples, so no row of the fit is complete) it says "The well reflectivity is flat over the seismic at the well, so there is nothing to extract a wavelet from."; with a half length of 5 it says "The log covers 16 usable samples at the well; a 11-sample wavelet needs at least 22. Shorten the wavelet or use the statistical one." Over the four wells, extractAngleWavelets returns no wavelet for any stack at a half length of 15 (0 of 3 stacks), and a 7-sample wavelet for each of the 3 stacks at a half length of 3, each well's fit and the correlation of its synthetic with the stack:
 
-| angle degrees | well | fit correlation | synthetic against the stack |
+| well | angle degrees | fit correlation | synthetic against the stack |
 | --- | --- | --- | --- |
-| 10 | Ekene-1 | 0.953115 | 0.941755 |
-| 10 | Ekene-2 | 0.953385 | 0.675428 |
-| 10 | Ekene-3 | 0.956707 | 0.928928 |
-| 10 | Ekene-4 | 0.971756 | 0.623404 |
-| 20 | Ekene-1 | 0.951748 | 0.939733 |
-| 20 | Ekene-2 | 0.947987 | 0.664947 |
-| 20 | Ekene-3 | 0.953584 | 0.922300 |
-| 20 | Ekene-4 | 0.970240 | 0.622244 |
-| 30 | Ekene-1 | 0.940659 | 0.927864 |
-| 30 | Ekene-2 | 0.942311 | 0.613638 |
-| 30 | Ekene-3 | 0.947310 | 0.910855 |
-| 30 | Ekene-4 | 0.967385 | 0.603319 |
+| Ekene-1 | 10 | 0.953115 | 0.941755 |
+| Ekene-2 | 10 | 0.953385 | 0.675428 |
+| Ekene-3 | 10 | 0.956707 | 0.928928 |
+| Ekene-4 | 10 | 0.971756 | 0.623404 |
+| Ekene-1 | 20 | 0.951748 | 0.939733 |
+| Ekene-2 | 20 | 0.947987 | 0.664947 |
+| Ekene-3 | 20 | 0.953584 | 0.922300 |
+| Ekene-4 | 20 | 0.970240 | 0.622244 |
+| Ekene-1 | 30 | 0.940659 | 0.927864 |
+| Ekene-2 | 30 | 0.942311 | 0.613638 |
+| Ekene-3 | 30 | 0.947310 | 0.910855 |
+| Ekene-4 | 30 | 0.967385 | 0.603319 |
 
 A 7-sample wavelet spans 24.000000 ms, shorter than the stated Ricker; the course therefore states the Ricker shape and scales it per stack for the inversions in sections 53 and 54.
 

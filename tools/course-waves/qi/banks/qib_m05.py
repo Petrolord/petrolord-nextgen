@@ -31,7 +31,7 @@ q(0, "The lab converts the stated Ekene pressure of 3200 psia before calling Bat
 
 q(2, "A learner sets the pressure to 0 in the feasibility explorer and calls brine. What does the panel print?",
  "The engine's own words: \"Temperature (degC) and positive pressure (MPa) required.\"",
- ["The engine's own words: \"Salinity must be a weight fraction in [0, 0.5).\", the brine's range check.",
+ ["The engine's own words: \"Salinity must be a weight fraction in [0, 0.5).\"",
   "A brine row with every field NaN and the gap shown, as elasticPoint does.",
   "The engine's own words: \"API gravity must be in (0, 100).\", since the oil and the brine share one check on the conditions."],
  "brine refuses a pressure of 0 MPa with the message on temperature and positive pressure. The salinity message comes from a salinity of 0.6 and the API message from apiToRho0 at 0 API; a NaN result belongs to elasticPoint with Vs above Vp.")
