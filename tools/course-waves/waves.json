@@ -2213,6 +2213,7 @@
       "BRIEF.md",
       "KEY_TRUTH_TASK.md",
       "LESSON_TASK.md",
+      "apply_qi.sh",
       "apply_qi.tmpl.sh",
       "build_digest.sh",
       "collisions_qi.py",
