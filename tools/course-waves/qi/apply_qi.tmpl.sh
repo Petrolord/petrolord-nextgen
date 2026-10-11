@@ -15,24 +15,23 @@
 # time, UTC; ship_names.json in tools/course-waves/qi is the record):
 #   <ts>_qi_course              catalogue row (coming_soon, geoscience,
 #                               path_order 80, prerequisite welldata,
-#                               course_type app) + the Associate capstone
+#                               course_type app) + the three capstones,
+#                               eighteen graded fields
 #   <ts>_qi_<tier>_deep         a tier's structure and 132 questions
-#   <ts>_qi_<tier>_capstone     the Professional or Expert capstone, written
-#                               only once its engines pass the extraction gate
 #   <ts>_qi_go_live             HELD. coming_soon -> available, behind the
 #                               completeness, shape, grader, prompt, engine
 #                               ledger, second-route, oracle and trap checks.
-#                               It REFUSES while any tier lacks its capstone.
-# The ladder applies only the files pinned below; a tier still pending has no
-# file and no pin yet. THE COURSE SEED GOES FIRST (the other files reference
+#                               It REFUSES while any deep seed is missing.
+# The ladder applies only the files pinned below; a deep seed still pending
+# has no file and no pin yet. THE COURSE SEED GOES FIRST (the other files reference
 # the course row through a foreign key on app_slug).
 #
 # =========================== THE UPLOAD GATE ================================
 # The lessons, the teaching lab, the four explorer panels and the capstone
 # case files ship in the NextGen ZIP. Upload the zip FIRST; the seeds may then
 # be applied (the course stays coming_soon, invisible to learners). The go-live
-# runs ONLY after the deployed site serves /dashboard/apps/qi and every tier
-# has its capstone: `apply --prod --go-live` will not run until you type the
+# runs ONLY after the deployed site serves /dashboard/apps/qi and all three
+# deep seeds are applied: `apply --prod --go-live` will not run until you type the
 # route.
 # ============================================================================
 #
@@ -165,21 +164,24 @@ rows() {
 dryrun() {
   local ok=1
   REPO="$NG_REPO" bash "$HERE/scratch_db.sh" "$REF" | tail -2 || refuse "scratch_db.sh failed"
-  # While a tier's capstone is pending the go-live must REFUSE through its
-  # completeness block; once all three exist it must run clean.
-  if [ -z "$(git -C "$NG_REPO" show "$REF:tools/course-waves/qi/ship_names.json" | python3 -c "import json,sys; n=json.load(sys.stdin); print('' if n['intermediate_capstone'] and n['advanced_capstone'] else 'pending')")" ]; then
-    REPO="$NG_REPO" bash "$HERE/dryrun_qi.sh" "$REF" | tail -3 | sed 's/^/  /'; [ "${PIPESTATUS[0]}" = 0 ] || ok=0
-    REPO="$NG_REPO" bash "$HERE/dryrun_qi.sh" "$REF" --idempotent | grep -E '^IDEMPOTENT' | sed 's/^/  /'; [ "${PIPESTATUS[0]}" = 0 ] || ok=0
-    P=""
-  else
-    REPO="$NG_REPO" bash "$HERE/dryrun_qi.sh" "$REF" --control completeness | grep -E '^CONTROL' | sed 's/^/  /'; [ "${PIPESTATUS[0]}" = 0 ] || ok=0
-    say "  (a tier's capstone is pending: the per-field checks run with the completeness and shape blocks cut)"
-    P=1
-    QI_PARTIAL=1 REPO="$NG_REPO" bash "$HERE/dryrun_qi.sh" "$REF" | tail -2 | sed 's/^/  /'; [ "${PIPESTATUS[0]}" = 0 ] || ok=0
-    QI_PARTIAL=1 REPO="$NG_REPO" bash "$HERE/dryrun_qi.sh" "$REF" --idempotent | grep -E '^IDEMPOTENT' | sed 's/^/  /'; [ "${PIPESTATUS[0]}" = 0 ] || ok=0
+  # With all three deep seeds pinned the ladder is dry-run as it is. While a
+  # deep seed is pending, the committed ladder must REFUSE at the go-live's
+  # structure count, and the whole ladder is then dry-run on a scratch-only
+  # directory with stand-in deep seeds (standin_seeds.sh: real structures,
+  # placeholder questions, never committed), so every go-live check still runs.
+  D="$NG_REPO"; R="$REF"
+  if [ "$(echo "$SEEDS" | grep -c _deep)" != 3 ]; then
+    out=$(REPO="$NG_REPO" bash "$HERE/dryrun_qi.sh" "$REF" 2>&1)
+    if grep -q "active deep structures, expected 3" <<<"$out"; then say "  the committed ladder refuses at the go-live, as it must while a deep seed is pending"
+    else say "  the committed ladder did NOT refuse at the deep structure count"; ok=0; fi
+    D=$(mktemp -d /tmp/qistandin.XXXXXX); R=WORKTREE
+    REPO="$NG_REPO" bash "$HERE/standin_seeds.sh" "$D" "$REF" | grep stand-in | sed 's/^/  /'
   fi
+  REPO="$D" bash "$HERE/dryrun_qi.sh" "$R" | tail -3 | sed 's/^/  /'; [ "${PIPESTATUS[0]}" = 0 ] || ok=0
+  REPO="$D" bash "$HERE/dryrun_qi.sh" "$R" --idempotent | grep -E '^IDEMPOTENT' | sed 's/^/  /'; [ "${PIPESTATUS[0]}" = 0 ] || ok=0
+  REPO="$D" bash "$HERE/dryrun_qi.sh" "$R" --control completeness | grep -E '^CONTROL' | sed 's/^/  /'; [ "${PIPESTATUS[0]}" = 0 ] || ok=0
   for c in ledger route oracle trap prompt leak; do
-    QI_PARTIAL=$P REPO="$NG_REPO" bash "$HERE/dryrun_qi.sh" "$REF" --control "$c" | grep -E '^CONTROL' | sed 's/^/  /'; [ "${PIPESTATUS[0]}" = 0 ] || ok=0
+    REPO="$D" bash "$HERE/dryrun_qi.sh" "$R" --control "$c" | grep -E '^CONTROL' | sed 's/^/  /'; [ "${PIPESTATUS[0]}" = 0 ] || ok=0
   done
   REPO="$NG_REPO" python3 "$HERE/verify_sql.py" "$REF" | tail -1 | sed 's/^/  /'; [ "${PIPESTATUS[0]}" = 0 ] || ok=0
   for c in --canary --canary-key --canary-field --canary-lesson; do

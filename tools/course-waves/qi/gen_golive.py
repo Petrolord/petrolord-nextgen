@@ -10,19 +10,20 @@ ways, none of which restates the generator that wrote them:
    generated (gen_course.py refuses unless fields.json equals that run), to the
    last bit.
 2. BY A SECOND ROUTE IN SQL over the case file the learner is handed
-   (golive_helpers.sql): the Associate shear slope, the substituted sample's
-   impedance and Vp/Vs, and the distance from the wet trend, each to 1e-9
-   relative. The two spectrum fields have no second route (a padded FFT); their
-   independent check is the oracle's direct DFT, which is check 3.
+   (golive_helpers.sql), each to 1e-9 relative: sixteen of the eighteen
+   fields (Associate rock physics and wet trend; every Professional field;
+   every Expert field, the two inversions solved exactly by their normal
+   equations). The two Associate spectrum fields have no second route (a padded
+   FFT); their independent check is the oracle's direct DFT, check 3.
 3. BY THE ORACLE: oracle_check.py --json, an independent standard-library
    Python replay, written in by value; each seeded value within its tolerance.
 4. BY THE TRAPS: every wrong method discriminate.mjs swept through the engines
    for a field, by value, must miss the seeded value by more than its tolerance.
 
 AND BEFORE ANY OF IT, THE COMPLETENESS BLOCK: the go-live REFUSES, naming the
-tier, while any tier lacks its capstone (the Professional and Expert capstones
-are written only once their engines pass the extraction gate), its deep
-structure or its 132 questions. Then the shape, the catalogue row (geoscience,
+tier, while any tier lacks its capstone, and refuses while the deep structures
+or the 396 questions are short (the Professional and Expert deep seeds are
+written once their banks are final). Then the shape, the catalogue row (geoscience,
 path_order 80, prerequisite welldata, course_type app) with no other course at
 80, the numeric grader simulated on every field, each shipped prompt byte for
 byte (md5) with every stated setting named, and a sweep of every number handed
@@ -118,20 +119,25 @@ HEADER = f"""-- ================================================================
 -- the Suite app is QI Studio, and the course's own explorer panels carry every
 -- practical, so this go-live waits on the NextGen upload only.
 --
--- IT ALSO REFUSES, NAMING THE TIER, WHILE ANY TIER LACKS ITS CAPSTONE. The
--- Professional and Expert capstones are written into their own migrations only
--- once the engines behind their fields pass the extraction gate; until then
--- this file is regenerated, not run.
+-- IT ALSO REFUSES WHILE THE LADDER IS SHORT: naming the tier when a capstone is
+-- missing, and when the three deep structures or the 396 questions are not all
+-- seeded (the Professional and Expert deep seeds are written once their banks
+-- are final, and this file is regenerated then).
 --
 -- EVERY GRADED VALUE IS CHECKED FOUR WAYS, and none restates the generator:
 --   1. against the ENGINE LEDGER (the capstone generators' run through the
 --      teaching lab and the vendored engines), to the last bit;
---   2. by a SECOND ROUTE IN SQL over the case file the learner is handed
---      (Batzle-Wang, Wood, Voigt-Reuss-Hill, Gassmann, least squares, Shuey and
---      the total least squares wet trend, in plpgsql), to 1e-9 relative; the
---      two spectrum fields (a padded FFT) have none and rest on check 3;
+--   2. by a SECOND ROUTE IN SQL over the case file the learner is handed, to
+--      1e-9 relative, for sixteen fields: Batzle-Wang, Wood, Voigt-Reuss-Hill,
+--      Gassmann, least squares, Shuey and the total least squares wet trend;
+--      Dix, Walden, NMO stretch, the binned partial stacks, the Shuey
+--      regression and the one scale; the low-frequency model, both inversions
+--      solved exactly by their normal equations, the Student t porosity bound,
+--      the Gaussian facies posterior and the priority-flood closure. The two
+--      Associate spectrum fields (a padded FFT) have none and rest on check 3;
 --   3. by the ORACLE (oracle_check.py, an independent standard-library Python
---      replay with a direct DFT), written in by value, within each tolerance;
+--      replay, a direct DFT for the spectra), written in by value, within each
+--      field's tolerance;
 --   4. by the TRAPS: every wrong method discriminate.mjs swept through the
 --      engines, by value, must miss the seeded value by more than its tolerance.
 --
@@ -139,7 +145,10 @@ HEADER = f"""-- ================================================================
 -- NO BEGIN OR COMMIT: apply_qi.sh wraps this file in one transaction.
 -- THE GRADER IS NUMERIC: abs(answer - expected) <= tol. The six-decimal answer
 -- the prompt asks for must pass, and one unit either side in the sixth decimal
--- must fail at the six-decimal floor.
+-- must fail at the six-decimal floor. Two Expert fields are graded wider than
+-- the floor because their value comes from an iterative solver: the model-based
+-- impedance at 1 kg/(m2 s) (under a millionth of the value) and the
+-- simultaneous Vp/Vs at 5e-6, the tolerances gradedTolerance.js derives.
 -- EVERY REFUSAL THAT READS A GRADED VALUE NAMES IT as tier/key.
 -- ============================================================================
 """
@@ -228,7 +237,12 @@ w('    from public.academy_capstones c, lateral jsonb_array_elements(c.fields) f
 w(f"   where c.app_slug = '{S}'")
 w("     and (jsonb_typeof(f->'expected') <> 'number' or jsonb_typeof(f->'tol') <> 'number'")
 w("          or abs((f->>'expected')::numeric) <= 0.001")
-w("          or abs((f->>'expected')::numeric - round((f->>'expected')::numeric)) <= (f->>'tol')::numeric")
+# "Whole" is read with each field's own tolerance when it is below half a unit;
+# a field graded at half a unit or more (the model-based impedance, whose
+# tolerance is set by the solver's convergence) must instead be large against
+# its tolerance, so the grade is still a precision of a millionth or finer.
+w("          or ((f->>'tol')::numeric < 0.5 and abs((f->>'expected')::numeric - round((f->>'expected')::numeric)) <= (f->>'tol')::numeric)")
+w("          or ((f->>'tol')::numeric >= 0.5 and abs((f->>'expected')::numeric) < 1000000 * (f->>'tol')::numeric)")
 w(f"          or (f->>'tol')::numeric is distinct from (select t.tol from (values {TOL_ROWS}) t(tier, k, tol) where t.tier = c.tier and t.k = f->>'key')")
 w("          or coalesce(f->>'label', '') = '' or coalesce(f->>'unit', '') = '');")
 w('  if v_n <> 0 then')
@@ -296,6 +310,18 @@ for k in KEYS:
 w('')
 w('  -- ----------------------------------------------- 2. the second route in SQL')
 SECOND = {
+    'quarvin_dix_vint': "pg_temp.qi_prof(v_case_i, 'dix')",
+    'quarvin_walden_deg': "pg_temp.qi_prof(v_case_i, 'walden')",
+    'quarvin_nmo_stretch': "pg_temp.qi_prof(v_case_i, 'stretch')",
+    'quarvin_far_stack_amp': "pg_temp.qi_prof(v_case_i, 'far')",
+    'quarvin_shuey_a': "pg_temp.qi_prof(v_case_i, 'shuey_a')",
+    'quarvin_one_scale': "pg_temp.qi_prof(v_case_i, 'scale')",
+    'delsholm_lfm_lnai_b': "pg_temp.qi_exp(v_case_a, 'lfm')",
+    'delsholm_mb_ai': "pg_temp.qi_exp(v_case_a, 'mb')",
+    'delsholm_sim_vpvs': "pg_temp.qi_exp(v_case_a, 'sim')",
+    'delsholm_phi_q90': "pg_temp.qi_exp(v_case_a, 'phi')",
+    'delsholm_p_oil': "pg_temp.qi_exp(v_case_a, 'poil')",
+    'delsholm_column_ft': "pg_temp.qi_exp(v_case_a, 'column')",
     'tamberlo_shear_slope': "pg_temp.qi_assoc(v_case_b, 'slope')",
     'tamberlo_ai_brine': "pg_temp.qi_assoc(v_case_b, 'ai')",
     'tamberlo_vpvs_brine': "pg_temp.qi_assoc(v_case_b, 'vpvs')",

@@ -256,9 +256,7 @@ def main():
     if '--plant' in sys.argv:
         k = 'tamberlo_shear_slope'
         mine[k] = fields[k][2] + 10 * fields[k][3]
-    if '--json' in sys.argv:
-        print(json.dumps({k: {'value': mine[k], 'oracle': 'oracle_check.py: standard-library Python replay (direct DFT, Batzle-Wang, Wood, VRH, Gassmann, OLS, Shuey, eigenvector line)'} for k in fields}))
-        sys.exit(0)
+    ORACLE_VALUES.update({k: (mine[k], 'oracle_check.py: standard-library Python replay (direct DFT, Batzle-Wang, Wood, VRH, Gassmann, OLS, Shuey, eigenvector line)') for k in fields})
     bad = []
     worst = (0, None)
     for k, (_, _, v, tol) in fields.items():
@@ -291,6 +289,7 @@ def main():
 #              stated bin angles, by the closed-form simple regression
 #   one scale  sum(observed x modelled) / sum(modelled^2) over A and B
 QCASE = os.path.join(os.path.dirname(CASE), 'quarvin_case.json')
+ORACLE_VALUES = {}
 
 
 def professional(plant):
@@ -351,6 +350,7 @@ def professional(plant):
     sm = sum(w['modelled'][k] ** 2 for w in c['wells'] for k in ('A', 'B'))
     mine = {'quarvin_dix_vint': dix, 'quarvin_walden_deg': wal, 'quarvin_nmo_stretch': stretch,
             'quarvin_far_stack_amp': far, 'quarvin_shuey_a': a_int, 'quarvin_one_scale': so / sm}
+    ORACLE_VALUES.update({k: (mine[k], 'oracle_check.py: standard-library Python replay (Dix, Walden, NMO stretch, Walden-binned partial stacks, two-term Shuey regression, least squares one scale)') for k in fields})
     if plant:
         mine['quarvin_shuey_a'] = fields['quarvin_shuey_a'][2] + 10 * fields['quarvin_shuey_a'][3]
     bad, worst = [], (-1.0, '')
@@ -614,6 +614,7 @@ def expert(plant):
     o_col = z[crest] - run
     mine = {'delsholm_lfm_lnai_b': o_lfm, 'delsholm_mb_ai': o_mb, 'delsholm_sim_vpvs': o_sim,
             'delsholm_phi_q90': o_phi, 'delsholm_p_oil': o_p, 'delsholm_column_ft': o_col}
+    ORACLE_VALUES.update({k: (mine[k], 'oracle_check.py: standard-library Python replay (IDW low-frequency model, exact normal equations for both inversions, OLS with the Student t interval, Gaussian Bayes, priority-flood closure)') for k in fields})
     if plant:
         mine['delsholm_p_oil'] = fields['delsholm_p_oil'][2] + 10 * fields['delsholm_p_oil'][3]
     solver = {'delsholm_mb_ai', 'delsholm_sim_vpvs'}
@@ -628,6 +629,19 @@ def expert(plant):
             bad.append(key)
     print(f'oracle_check: 6 Expert fields replayed in standard-library Python; worst relative disagreement {worst[0]:.2e} ({worst[1]}); failing: {len(bad)}')
     return bad
+
+if __name__ == '__main__' and '--json' in sys.argv:
+    import contextlib
+    import io as _io
+    with contextlib.redirect_stdout(_io.StringIO()):
+        professional(False)
+        expert(False)
+        try:
+            main()
+        except SystemExit:
+            pass
+    print(json.dumps({k: {'value': v, 'oracle': why} for k, (v, why) in ORACLE_VALUES.items()}))
+    sys.exit(0)
 
 if __name__ == '__main__':
     plant = '--plant' in sys.argv

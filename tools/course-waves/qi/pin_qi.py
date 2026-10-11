@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Write apply_qi.sh from apply_qi.tmpl.sh with the content pins of every QI
 migration present in the COMMITTED tree at <ref>, in ladder order (the course
-row, the deep seeds, the later capstones, then the go-live). Never pin by hand.
+row with the three capstones, the deep seeds, then the go-live). Never pin by hand.
 
     python3 pin_qi.py <repo> <ref>     rewrites apply_qi.sh beside this file
 """
@@ -21,7 +21,7 @@ def show(p):
 
 
 names = json.loads(show('tools/course-waves/qi/ship_names.json') or open(f'{HERE}/ship_names.json', 'rb').read())
-order = ['course', 'beginner_deep', 'intermediate_deep', 'advanced_deep', 'intermediate_capstone', 'advanced_capstone']
+order = ['course', 'beginner_deep', 'intermediate_deep', 'advanced_deep']
 seeds, cases = [], []
 for k in order + ['go_live']:
     n = names.get(k)

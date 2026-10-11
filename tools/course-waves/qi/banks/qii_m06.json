@@ -8,7 +8,7 @@
    "From the intercepts alone, sum(observed A) over sum(modelled A)."
   ],
   "answer": 2,
-  "explanation": "One least-squares scale ties the seismic amplitudes to reflectivity over every well, A and B together: sum(observed x modelled) / sum(modelled^2). A scale per well would fit each well to its own model and hide the differences the comparison is for."
+  "explanation": "One least-squares scale ties the seismic amplitudes to reflectivity over every well, A and B together: sum(observed x modelled) / sum(modelled^2). Over the four Ekene wells it is 1882.216944."
  },
  {
   "prompt": "What is the one scale over the four Ekene wells, and in what units?",
@@ -30,7 +30,7 @@
    "An issue for a class that differs, a high one for a negative scale."
   ],
   "answer": 3,
-  "explanation": "QI Studio raises an issue for a class that differs and a high one for a negative scale, a polarity or wavelet problem. The correlation below 0.5 is its rule for a poor tie, which belongs to the issue register for ties, and no residual threshold is printed."
+  "explanation": "QI Studio raises an issue for a class that differs and a high one for a negative scale, a polarity or wavelet problem. The correlation below 0.5 is its rule for a poor tie, which belongs to the issue register for ties, and the course states no residual threshold."
  },
  {
   "prompt": "Ekene-2's top of the Ekene Sand is at 5134.514436 ft. Why is its modelled intercept and gradient read from the cap rock over its net sand?",
@@ -96,7 +96,7 @@
    "Ekene-4, at 0.077711."
   ],
   "answer": 1,
-  "explanation": "The residuals are 0.088133 at Ekene-1, 0.105803 at Ekene-2, 0.059452 at Ekene-3 and 0.077711 at Ekene-4, so Ekene-2 is the largest and Ekene-3 the smallest. With every class in agreement, the residual is the figure that tells the wells apart."
+  "explanation": "Ekene-2's scaled seismic point, A 0.265206 and B -0.410601, sits 0.105803 from its modelled point, above Ekene-1's 0.088133, Ekene-4's 0.077711 and Ekene-3's 0.059452."
  },
  {
   "prompt": "What are Ekene-1's seismic A and B after division by the one scale?",
@@ -118,7 +118,7 @@
    "4 of 4 agree, all class I."
   ],
   "answer": 3,
-  "explanation": "Every modelled and seismic point is class I, so 4 of 4 wells agree in class. Agreement in class is the easy kind here; the residuals still range from 0.059452 to 0.105803."
+  "explanation": "Every modelled and seismic point is class I at the band of 0.02, so 4 of 4 wells agree in class; the residuals range from 0.059452 to 0.105803."
  },
  {
   "prompt": "The comparison classes each point with avoClass. At what band, and is the class graded?",

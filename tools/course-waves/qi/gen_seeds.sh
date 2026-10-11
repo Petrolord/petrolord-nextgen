@@ -14,12 +14,11 @@
 # is what the COMMITTED engines return on the COMMITTED case files.
 #
 # WHAT IT WRITES depends on what is committed:
-#   course            always (the catalogue row and the Associate capstone)
+#   course            always (the catalogue row and the three capstones), and
+#                     the capstone card's case-file index beside it
 #   <tier>_deep       for every tier whose seven bank JSONs are committed
-#   <tier>_capstone   for the Professional and Expert tiers once their six
-#                     fields are declared in gradedTolerance.js (stamped names)
-#   go_live           always; it refuses at run time while any tier lacks its
-#                     capstone, structure or questions
+#   go_live           always; it refuses at run time while any deep seed is
+#                     missing
 # It then DIFFS each generated file against the worktree and says so.
 #
 # Usage: gen_seeds.sh [ref] [--write]    default HEAD, compare only
@@ -59,7 +58,7 @@ NAME() { python3 -c "import json,sys; v=json.load(open('$W/ship_names.json'))[sy
 
 export QI_WAVE="$W" QI_WAVE_DIR="$W" QI_REPO="$STAGE/repo" QI_ENGINES="$STAGE/repo/packages/engines" \
        QI_TOLERANCE="$STAGE/repo/src/components/course/panels/$SLUG/gradedTolerance.js" \
-       QI_CASES="$STAGE/repo/src/content/capstone-cases/$SLUG" QI_COURSE_OUT="$OUTDIR"
+       QI_CASES="$STAGE/repo/src/content/capstone-cases/$SLUG" QI_CASES_OUT="$OUTDIR/cases" QI_COURSE_OUT="$OUTDIR"
 
 # The deep seeds, off the exported banks and manifests, for every tier whose
 # seven banks are committed.
@@ -81,7 +80,6 @@ done
 # fields, case files and ENGINES.
 ( cd "$W" && python3 "$W/gen_course.py" --migration | sed 's/^/  /' )
 GEN="$GEN course"
-for t in intermediate advanced; do [ -n "$(NAME ${t}_capstone)" ] && [ -f "$OUTDIR/$(NAME ${t}_capstone).sql" ] && GEN="$GEN ${t}_capstone"; done
 
 # The go-live, off the course migration this run just emitted.
 ( cd "$W" && QI_COURSE_SQL="$OUTDIR/$(NAME course).sql" QI_GOLIVE_OUT="$OUTDIR/$(NAME go_live).sql" \
@@ -108,6 +106,12 @@ for f in $GEN; do
     [ "$WRITE" = --write ] && cp "$gen" "$live" && echo "      (rewritten from the committed inputs)"
   fi
 done
+if cmp -s "$OUTDIR/cases/index.js" "$REPO/src/content/capstone-cases/$SLUG/index.js"; then
+  printf '  identical  %-40s %s\n' "capstone-cases/qi/index.js" "$(sha256sum "$OUTDIR/cases/index.js" | cut -c1-12)"
+else
+  printf '  DIFFERS    %-40s\n' "capstone-cases/qi/index.js"; bad=1
+  [ "$WRITE" = --write ] && cp "$OUTDIR/cases/index.js" "$REPO/src/content/capstone-cases/$SLUG/index.js" && echo "      (rewritten from the committed inputs)"
+fi
 echo
 if [ "$bad" = 0 ]; then
   echo "AGREE: every QI migration the committed inputs produce ($GEN ) regenerates byte for byte at $REF."

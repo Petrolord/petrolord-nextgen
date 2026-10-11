@@ -1,8 +1,9 @@
 -- ----------------------------------------------------------------------------
 -- QI go-live helpers: the SECOND ROUTE IN SQL. Temporary functions (pg_temp),
 -- gone when the session ends; nothing is created in any schema. They rebuild
--- the Associate (TAMBERLO) arithmetic from the case file the learner is handed,
--- in plpgsql, from the published equations, with no engine code:
+-- the capstone arithmetic from the case files the learner is handed, in
+-- plpgsql, from the published equations, with no engine code. First the
+-- Associate (TAMBERLO):
 --   Batzle and Wang (1992) brine and live oil, Wood's fluid mix, the Voigt,
 --   Reuss and Hill mineral mix of quartz and clay, Gassmann through the dry
 --   rock, the least squares slope of Vs on Vp in km/s, Shuey's intercept and
@@ -210,6 +211,412 @@ begin
     end loop;
     ab := pg_temp.qi_shuey(array[su[1] / nu, su[2] / nu, su[3] / nu], array[so[1] / no, so[2] / no, so[3] / no]);
     return (ab[2] - m * ab[1]) / sqrt(1 + m * m);
+  end if;
+  return null;
+end $f$;
+
+-- ----------------------------------------------------------------------------
+-- PROFESSIONAL (QUARVIN): Dix, Walden, NMO stretch, the Walden-binned partial
+-- stacks, the two-term Shuey regression and the one scale, from the published
+-- equations (Dix 1955; Walden 1991; Shuey 1985), on the case file.
+--   Vint^2 = (V2^2 t2 - V1^2 t1) / (t2 - t1), t in seconds; Vrms linear in
+--   time between rows and flat outside, Vint the Dix velocity of the segment;
+--   sin(theta) = (Vint / Vrms) x / sqrt(x^2 + (Vrms t0)^2);
+--   stretch = sqrt(t0^2 + x^2 / Vrms^2) / t0 - 1;
+--   bin k holds [edge k, edge k + 1); a partial stack is the mean of every
+--   sample in its bins; the intercept is the least squares line of the bin
+--   means on sin^2 of the stated angles; the one scale is
+--   sum(observed x modelled) / sum(modelled^2) over A and B.
+-- ----------------------------------------------------------------------------
+create or replace function pg_temp.qi_prof(c jsonb, what text)
+returns double precision language plpgsql stable as $f$
+declare
+  st jsonb := c->'stated'; g jsonb := c->'gather';
+  tms double precision[] := '{}'; vr double precision[] := '{}'; ts double precision[] := '{}';
+  seg double precision[]; n int; k int; j int; li int;
+  t double precision; f double precision; vrms double precision; vint double precision;
+  x double precision; sn double precision; wal double precision; t0 double precision;
+  i int; ti double precision; vri double precision; vii double precision;
+  edges double precision[] := '{}'; sums double precision[]; fold int[]; nb int;
+  tr jsonb; v double precision; a double precision; lo int; hi int;
+  xs double precision[] := '{}'; ys double precision[] := '{}'; xb double precision; yb double precision;
+  sxy double precision := 0; sxx double precision := 0; so double precision := 0; sm double precision := 0; w jsonb;
+begin
+  for tr in select e from jsonb_array_elements(c->'velocity'->'rows') e loop
+    tms := tms || (tr->>0)::double precision; vr := vr || (tr->>1)::double precision;
+    ts := ts || greatest((tr->>0)::double precision, 1e-6) / 1000;
+  end loop;
+  n := array_length(tms, 1);
+  seg := array[vr[1]];
+  for k in 2..n loop
+    seg := seg || sqrt((vr[k] ^ 2 * ts[k] - vr[k - 1] ^ 2 * ts[k - 1]) / (ts[k] - ts[k - 1]));
+  end loop;
+  if what = 'dix' then
+    for k in 1..n loop
+      if tms[k] = (st->'dixLayer'->>'toMs')::double precision then return seg[k]; end if;
+    end loop;
+    return null;
+  end if;
+  if what = 'scale' then
+    for w in select e from jsonb_array_elements(c->'wells') e loop
+      so := so + (w->'observed'->>'A')::double precision * (w->'modelled'->>'A')::double precision
+                + (w->'observed'->>'B')::double precision * (w->'modelled'->>'B')::double precision;
+      sm := sm + (w->'modelled'->>'A')::double precision ^ 2 + (w->'modelled'->>'B')::double precision ^ 2;
+    end loop;
+    return so / sm;
+  end if;
+  -- the velocities at a time (the stated time, or the target sample's time)
+  if what in ('walden', 'stretch') then
+    t := (st->>'timeMs')::double precision;
+  else
+    i := round(((st->>'targetMs')::double precision - (g->>'t0_ms')::double precision) / (g->>'dt_ms')::double precision)::int;
+    t := (g->>'t0_ms')::double precision + i * (g->>'dt_ms')::double precision;
+  end if;
+  if t <= tms[1] then vrms := vr[1]; vint := seg[1];
+  elsif t >= tms[n] then vrms := vr[n]; vint := seg[n];
+  else
+    j := 1;
+    for k in 1..n - 1 loop if tms[k] < t then j := k; end if; end loop;
+    f := (t - tms[j]) / (tms[j + 1] - tms[j]);
+    vrms := vr[j] + f * (vr[j + 1] - vr[j]); vint := seg[j + 1];
+  end if;
+  if what = 'walden' then
+    x := (st->>'offsetM')::double precision;
+    sn := (vint / vrms) * x / sqrt(x * x + (vrms * t / 1000) ^ 2);
+    if sn >= 1 then return 90; end if;
+    return degrees(asin(sn));
+  end if;
+  if what = 'stretch' then
+    t0 := t / 1000; x := (st->>'offsetM')::double precision;
+    return sqrt(t0 * t0 + x * x / (vrms * vrms)) / t0 - 1;
+  end if;
+  select array_agg(e::double precision order by o) into edges from jsonb_array_elements_text(st->'angleEdges') with ordinality q(e, o);
+  nb := array_length(edges, 1) - 1;
+  sums := array_fill(0::double precision, array[nb]); fold := array_fill(0, array[nb]);
+  k := 0;
+  for tr in select e from jsonb_array_elements(g->'traces') e loop
+    x := (g->'offsets_m'->>k)::double precision; k := k + 1;
+    v := (tr->>i)::double precision;
+    if v is null or abs(v) >= 1e29 then continue; end if;
+    sn := (vint / vrms) * x / sqrt(x * x + (vrms * t / 1000) ^ 2);
+    a := case when sn >= 1 then 90 else degrees(asin(sn)) end;
+    for j in 1..nb loop
+      if edges[j] <= a and a < edges[j + 1] then sums[j] := sums[j] + v; fold[j] := fold[j] + 1; exit; end if;
+    end loop;
+  end loop;
+  if what = 'far' then
+    lo := (st->'farBins'->>0)::int; hi := (st->'farBins'->>1)::int;
+    v := 0; j := 0;
+    for k in lo + 1..hi loop v := v + sums[k]; j := j + fold[k]; end loop;
+    return v / j;
+  end if;
+  if what = 'shuey_a' then
+    for k in 1..nb loop
+      xs := xs || sin(radians((st->'stackAngles'->>(k - 1))::double precision)) ^ 2;
+      ys := ys || sums[k] / fold[k];
+    end loop;
+    xb := 0; yb := 0;
+    for k in 1..nb loop xb := xb + xs[k]; yb := yb + ys[k]; end loop;
+    xb := xb / nb; yb := yb / nb;
+    for k in 1..nb loop sxy := sxy + (xs[k] - xb) * (ys[k] - yb); sxx := sxx + (xs[k] - xb) ^ 2; end loop;
+    return yb - sxy / sxx * xb;
+  end if;
+  return null;
+end $f$;
+
+-- ----------------------------------------------------------------------------
+-- EXPERT (DELSHOLM).
+--   The low-frequency model at position B: each sample's time mapped
+--   proportionally between B's horizons onto each well's, the well's supplied
+--   low-passed ln(AI) sampled linearly, weighted by inverse distance to the
+--   stated power; samples no well covers hold the nearest covered value.
+--   The model-based and simultaneous inversions: the regularised least squares
+--   problem min ||A m - d||^2 + sum eps_p^2 ||m_p - m0_p||^2 SOLVED EXACTLY by
+--   its normal equations (banded Gaussian elimination; the matrix is symmetric
+--   positive definite), A = C D (centred difference, centred convolution with
+--   the stated wavelet), and for the simultaneous inversion the Fatti weights
+--   0.5 (1 + tan^2), -4 K^2 sin^2 and 0.5 (4 K^2 sin^2 - tan^2), K the stated
+--   background Vs/Vp. The engines iterate CGLS from the low-frequency model
+--   at the stated count and converge (oracle_check.py: 2.5e-13 relative).
+--   The porosity bound: ordinary least squares and the Student t interval of a
+--   new observation at the stated level, t by bisection on the regularised
+--   incomplete beta function (log gamma by Stirling after shifting).
+--   The facies posterior: one Gaussian per facies (variance on n - 1), priors
+--   the sample proportions, Bayes' rule.
+--   The column: a priority flood from the highest mapped node over its four
+--   neighbours; the running minimum when the flood first takes a node on the
+--   edge of the mapped area; the column is the crest less that spill.
+-- ----------------------------------------------------------------------------
+create or replace function pg_temp.qi_lgamma(x double precision)
+returns double precision language plpgsql immutable as $f$
+declare s double precision := 0; y double precision := x; z double precision;
+begin
+  while y < 30 loop s := s + ln(y); y := y + 1; end loop;
+  z := 1 / (y * y);
+  return (y - 0.5) * ln(y) - y + 0.5 * ln(2 * pi())
+         + (1.0 / 12 - z * (1.0 / 360 - z * (1.0 / 1260 - z * (1.0 / 1680 - z / 1188)))) / y - s;
+end $f$;
+
+create or replace function pg_temp.qi_betacf(a double precision, b double precision, x double precision)
+returns double precision language plpgsql immutable as $f$
+declare qab double precision := a + b; qap double precision := a + 1; qam double precision := a - 1;
+        c double precision := 1; d double precision; h double precision; aa double precision; de double precision; m2 int;
+begin
+  d := 1 / (1 - qab * x / qap); h := d;
+  for m in 1..299 loop
+    m2 := 2 * m;
+    aa := m * (b - m) * x / ((qam + m2) * (a + m2));
+    d := 1 / (1 + aa * d); c := 1 + aa / c; h := h * d * c;
+    aa := -(a + m) * (qab + m) * x / ((a + m2) * (qap + m2));
+    d := 1 / (1 + aa * d); c := 1 + aa / c; de := d * c; h := h * de;
+    exit when abs(de - 1) < 1e-15;
+  end loop;
+  return h;
+end $f$;
+
+create or replace function pg_temp.qi_betainc(a double precision, b double precision, x double precision)
+returns double precision language plpgsql immutable as $f$
+declare lbt double precision;
+begin
+  if x <= 0 then return 0; end if;
+  if x >= 1 then return 1; end if;
+  lbt := pg_temp.qi_lgamma(a + b) - pg_temp.qi_lgamma(a) - pg_temp.qi_lgamma(b) + a * ln(x) + b * ln(1 - x);
+  if x < (a + 1) / (a + b + 2) then return exp(lbt) * pg_temp.qi_betacf(a, b, x) / a; end if;
+  return 1 - exp(lbt) * pg_temp.qi_betacf(b, a, 1 - x) / b;
+end $f$;
+
+-- the regularised least squares solve; rows of A come as (row, col, value)
+-- over N = np * n unknowns ordered sample-major (index = i * np + p)
+create or replace function pg_temp.qi_lsq(wavelets jsonb, traces jsonb, weights double precision[], np int, n int,
+                                          eps double precision[], m0 double precision[])
+returns double precision[] language plpgsql stable as $f$
+declare
+  nn int := np * n; nw int := jsonb_array_length(wavelets);
+  h double precision[]; lh int; hc int; d double precision[];
+  big double precision[]; v double precision[]; r double precision[];
+  cols int[]; vals double precision[]; nz int;
+  bw int := 0; i int; j int; k int; p int; a int; q int; t int; e double precision; fac double precision;
+  x double precision[];
+begin
+  big := array_fill(0::double precision, array[nn * nn]);
+  v := array_fill(0::double precision, array[nn]);
+  for a in 0..nw - 1 loop
+    select array_agg(e0::double precision order by o) into h from jsonb_array_elements_text(wavelets->a) with ordinality z(e0, o);
+    select array_agg(e0::double precision order by o) into d from jsonb_array_elements_text(traces->a) with ordinality z(e0, o);
+    lh := array_length(h, 1); hc := lh / 2;
+    for i in 0..n - 1 loop
+      -- row i of C D: CD[i][j] = 0.5 C[i][j - 1] - 0.5 C[i][j + 1], over D's interior rows
+      r := array_fill(0::double precision, array[n]);
+      for t in 1..n - 2 loop
+        k := i - t + hc;
+        if k >= 0 and k < lh then
+          r[t + 2] := r[t + 2] + h[k + 1] * 0.5;
+          r[t] := r[t] - h[k + 1] * 0.5;
+        end if;
+      end loop;
+      cols := '{}'; vals := '{}';
+      for j in 0..n - 1 loop
+        if r[j + 1] <> 0 then
+          for p in 0..np - 1 loop
+            if weights[a * np + p + 1] <> 0 then
+              cols := cols || (j * np + p); vals := vals || (weights[a * np + p + 1] * r[j + 1]);
+            end if;
+          end loop;
+        end if;
+      end loop;
+      nz := coalesce(array_length(cols, 1), 0);
+      for k in 1..nz loop
+        v[cols[k] + 1] := v[cols[k] + 1] + vals[k] * d[i + 1];
+        for q in 1..nz loop
+          big[cols[k] * nn + cols[q] + 1] := big[cols[k] * nn + cols[q] + 1] + vals[k] * vals[q];
+          if abs(cols[k] - cols[q]) > bw then bw := abs(cols[k] - cols[q]); end if;
+        end loop;
+      end loop;
+    end loop;
+  end loop;
+  for i in 0..n - 1 loop
+    for p in 0..np - 1 loop
+      big[(i * np + p) * nn + i * np + p + 1] := big[(i * np + p) * nn + i * np + p + 1] + eps[p + 1] ^ 2;
+      v[i * np + p + 1] := v[i * np + p + 1] + eps[p + 1] ^ 2 * m0[p * n + i + 1];
+    end loop;
+  end loop;
+  -- banded elimination without pivoting (symmetric positive definite)
+  for k in 0..nn - 1 loop
+    for i in k + 1..least(nn - 1, k + bw) loop
+      e := big[i * nn + k + 1];
+      if e <> 0 then
+        fac := e / big[k * nn + k + 1];
+        for j in k..least(nn - 1, k + bw) loop
+          big[i * nn + j + 1] := big[i * nn + j + 1] - fac * big[k * nn + j + 1];
+        end loop;
+        v[i + 1] := v[i + 1] - fac * v[k + 1];
+      end if;
+    end loop;
+  end loop;
+  x := array_fill(0::double precision, array[nn]);
+  for k in reverse nn - 1..0 loop
+    e := v[k + 1];
+    for j in k + 1..least(nn - 1, k + bw) loop e := e - big[k * nn + j + 1] * x[j + 1]; end loop;
+    x[k + 1] := e / big[k * nn + k + 1];
+  end loop;
+  return x;
+end $f$;
+
+create or replace function pg_temp.qi_exp(c jsonb, what text)
+returns double precision language plpgsql stable as $f$
+declare
+  st jsonb := c->'stated'; t0 double precision := (c->'clock'->>'t0_ms')::double precision;
+  dt double precision := (c->'clock'->>'dt_ms')::double precision; ns int := (c->'clock'->>'samples')::int;
+  b jsonb := c->'positionB'; ta jsonb := c->'traceA'; w jsonb;
+  lfm double precision[] := '{}'; k int; i int; t double precision; s double precision; ws double precision;
+  hb double precision[]; hw double precision[]; tw double precision; xx double precision; fi int; ff double precision;
+  vals double precision[]; dd double precision; val double precision; first int;
+  m0 double precision[]; x double precision[]; k2 double precision; th double precision; s2 double precision; tn2 double precision;
+  wts double precision[] := '{}'; eps double precision[];
+  n int; xb double precision; yb double precision; sxx double precision := 0; sxy double precision := 0; se double precision := 0;
+  aa double precision; bb double precision; x0 double precision; lvl double precision; pp double precision;
+  lo double precision; hi double precision; mid double precision; dof double precision; e jsonb;
+  names text[] := '{}'; cnt int[] := '{}'; sm double precision[] := '{}'; sq double precision[] := '{}';
+  tot int := 0; mu double precision; var double precision; lp double precision[] := '{}'; mx double precision; den double precision; idx int;
+  nx int; ny int; z double precision[]; live boolean[]; seen boolean[]; front boolean[]; crest int; best int; run double precision;
+  r int; cc int; nbr int[]; bnd boolean;
+begin
+  if what = 'lfm' then
+    select array_agg(e0::double precision order by o) into hb from jsonb_array_elements_text(b->'horizonsMs') with ordinality q(e0, o);
+    for k in 0..ns - 1 loop
+      t := t0 + k * dt; s := 0; ws := 0;
+      for w in select e1 from jsonb_array_elements(c->'wells') e1 loop
+        select array_agg(e0::double precision order by o) into hw from jsonb_array_elements_text(w->'horizonsMs') with ordinality q(e0, o);
+        if t <= hb[1] then tw := hw[1] + (t - hb[1]);
+        elsif t >= hb[array_length(hb, 1)] then tw := hw[array_length(hw, 1)] + (t - hb[array_length(hb, 1)]);
+        else
+          tw := t;
+          for i in 1..array_length(hb, 1) - 1 loop
+            if t <= hb[i + 1] then
+              tw := hw[i] + (case when hb[i + 1] - hb[i] > 0 then (t - hb[i]) / (hb[i + 1] - hb[i]) else 0 end) * (hw[i + 1] - hw[i]);
+              exit;
+            end if;
+          end loop;
+        end if;
+        select array_agg(e0::double precision order by o) into vals from jsonb_array_elements_text(w->'lnAiLowPassed') with ordinality q(e0, o);
+        xx := (tw - t0) / dt;
+        if xx >= 0 and xx <= array_length(vals, 1) - 1 then
+          fi := floor(xx)::int; ff := xx - fi;
+          val := case when ff < 1e-12 then vals[fi + 1] else vals[fi + 1] + ff * (vals[fi + 2] - vals[fi + 1]) end;
+          dd := sqrt(((w->>'x')::double precision - (b->>'x')::double precision) ^ 2 + ((w->>'y')::double precision - (b->>'y')::double precision) ^ 2);
+          s := s + val / dd ^ (st->'lfm'->>'power')::double precision;
+          ws := ws + 1 / dd ^ (st->'lfm'->>'power')::double precision;
+        end if;
+      end loop;
+      lfm := lfm || case when ws > 0 then s / ws else null end;
+    end loop;
+    first := null;
+    for k in 1..ns loop if lfm[k] is not null then first := k; exit; end if; end loop;
+    for k in 1..first - 1 loop lfm[k] := lfm[first]; end loop;
+    for k in first + 1..ns loop if lfm[k] is null then lfm[k] := lfm[k - 1]; end if; end loop;
+    return lfm[(st->'lfm'->>'sampleB')::int + 1];
+  end if;
+
+  if what = 'mb' then
+    select array_agg(e0::double precision order by o) into m0 from jsonb_array_elements_text(ta->'lowFrequencyModels'->'lnAi') with ordinality q(e0, o);
+    x := pg_temp.qi_lsq(jsonb_build_array(ta->'fullWavelet'), jsonb_build_array(ta->'full'), array[1::double precision], 1, ns,
+                        array[(st->'modelBased'->>'eps')::double precision], m0);
+    return exp(x[(st->'modelBased'->>'sampleA')::int + 1]);
+  end if;
+
+  if what = 'sim' then
+    select array_agg(e0::double precision order by g0, o) into m0 from
+      (select 1 g0, e0, o from jsonb_array_elements_text(ta->'lowFrequencyModels'->'lnAi') with ordinality q(e0, o)
+       union all select 2, e0, o from jsonb_array_elements_text(ta->'lowFrequencyModels'->'lnSi') with ordinality q(e0, o)
+       union all select 3, e0, o from jsonb_array_elements_text(ta->'lowFrequencyModels'->'lnRho') with ordinality q(e0, o)) u;
+    k2 := (ta->>'backgroundVsVp')::double precision ^ 2;
+    for k in 0..jsonb_array_length(ta->'angles_deg') - 1 loop
+      th := radians((ta->'angles_deg'->>k)::double precision); s2 := sin(th) ^ 2; tn2 := tan(th) ^ 2;
+      wts := wts || 0.5 * (1 + tn2) || -4 * k2 * s2 || 0.5 * (4 * k2 * s2 - tn2);
+    end loop;
+    select array_agg(e0::double precision order by o) into eps from jsonb_array_elements_text(st->'simultaneous'->'eps') with ordinality q(e0, o);
+    x := pg_temp.qi_lsq(ta->'angleWavelets', ta->'angleTraces', wts, 3, ns, eps, m0);
+    k := (st->'simultaneous'->>'sampleA')::int;
+    return exp(x[k * 3 + 1] - x[k * 3 + 2]);
+  end if;
+
+  if what = 'phi' then
+    n := jsonb_array_length(c->'calibration'->'porosity'->'rows'); xb := 0; yb := 0;
+    for e in select e1 from jsonb_array_elements(c->'calibration'->'porosity'->'rows') e1 loop
+      xb := xb + (e->>0)::double precision; yb := yb + (e->>1)::double precision;
+    end loop;
+    xb := xb / n; yb := yb / n;
+    for e in select e1 from jsonb_array_elements(c->'calibration'->'porosity'->'rows') e1 loop
+      sxx := sxx + ((e->>0)::double precision - xb) ^ 2;
+      sxy := sxy + ((e->>0)::double precision - xb) * ((e->>1)::double precision - yb);
+    end loop;
+    bb := sxy / sxx; aa := yb - bb * xb;
+    for e in select e1 from jsonb_array_elements(c->'calibration'->'porosity'->'rows') e1 loop
+      se := se + ((e->>1)::double precision - aa - bb * (e->>0)::double precision) ^ 2;
+    end loop;
+    se := sqrt(se / (n - 2));
+    x0 := (st->'porosity'->>'atAi')::double precision; lvl := (st->'porosity'->>'level')::double precision;
+    pp := (1 - lvl) / 2; dof := n - 2; lo := 0; hi := 100;
+    for k in 1..200 loop
+      mid := (lo + hi) / 2;
+      if 0.5 * pg_temp.qi_betainc(dof / 2, 0.5, dof / (dof + mid * mid)) > pp then lo := mid; else hi := mid; end if;
+    end loop;
+    return aa + bb * x0 + (lo + hi) / 2 * se * sqrt(1 + 1.0 / n + (x0 - xb) ^ 2 / sxx);
+  end if;
+
+  if what = 'poil' then
+    for e in select e1 from jsonb_array_elements(c->'calibration'->'facies'->'rows') e1 loop
+      idx := array_position(names, e->>0);
+      if idx is null then names := names || (e->>0); cnt := cnt || 0; sm := sm || 0::double precision; idx := array_length(names, 1); end if;
+      cnt[idx] := cnt[idx] + 1; sm[idx] := sm[idx] + (e->>1)::double precision; tot := tot + 1;
+    end loop;
+    sq := array_fill(0::double precision, array[array_length(names, 1)]);
+    for e in select e1 from jsonb_array_elements(c->'calibration'->'facies'->'rows') e1 loop
+      idx := array_position(names, e->>0);
+      sq[idx] := sq[idx] + ((e->>1)::double precision - sm[idx] / cnt[idx]) ^ 2;
+    end loop;
+    x0 := (st->'facies'->>'atAi')::double precision;
+    for k in 1..array_length(names, 1) loop
+      mu := sm[k] / cnt[k]; var := sq[k] / (cnt[k] - 1);
+      lp := lp || (ln(cnt[k]::double precision / tot) - 0.5 * (x0 - mu) ^ 2 / var - 0.5 * ln(2 * pi() * var));
+    end loop;
+    mx := lp[1]; for k in 2..array_length(lp, 1) loop mx := greatest(mx, lp[k]); end loop;
+    den := 0; for k in 1..array_length(lp, 1) loop den := den + exp(lp[k] - mx); end loop;
+    return exp(lp[array_position(names, st->'facies'->>'class')] - mx) / den;
+  end if;
+
+  if what = 'column' then
+    nx := (c->'grid'->'spec'->>'nx')::int; ny := (c->'grid'->'spec'->>'ny')::int;
+    select array_agg(coalesce(e0::double precision, 1e30) order by o) into z from jsonb_array_elements_text(c->'grid'->'z') with ordinality q(e0, o);
+    live := array_fill(false, array[nx * ny]); seen := array_fill(false, array[nx * ny]); front := array_fill(false, array[nx * ny]);
+    crest := null;
+    for k in 1..nx * ny loop
+      live[k] := abs(z[k]) < 1e29;
+      if live[k] and (crest is null or z[k] > z[crest]) then crest := k; end if;
+    end loop;
+    front[crest] := true; seen[crest] := true; run := 'Infinity';
+    loop
+      best := null;
+      for k in 1..nx * ny loop
+        if front[k] and (best is null or z[k] > z[best]) then best := k; end if;
+      end loop;
+      exit when best is null;
+      front[best] := false;
+      run := least(run, z[best]);
+      r := (best - 1) / nx; cc := (best - 1) % nx;
+      nbr := '{}';
+      if cc > 0 then nbr := nbr || (best - 1); end if;
+      if cc < nx - 1 then nbr := nbr || (best + 1); end if;
+      if r > 0 then nbr := nbr || (best - nx); end if;
+      if r < ny - 1 then nbr := nbr || (best + nx); end if;
+      bnd := r in (0, ny - 1) or cc in (0, nx - 1);
+      foreach k in array nbr loop if not live[k] then bnd := true; end if; end loop;
+      exit when bnd;
+      foreach k in array nbr loop
+        if not seen[k] and live[k] then seen[k] := true; front[k] := true; end if;
+      end loop;
+    end loop;
+    return z[crest] - run;
   end if;
   return null;
 end $f$;

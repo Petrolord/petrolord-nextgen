@@ -99,26 +99,26 @@
   "explanation": "The engine reads a window length of 120 ms and a smoothing of 5 Hz, Hann-tapers the lags and normalises the peak to 1. The 1100 to 1500 ms span is the trace window, a separate choice, and unit energy is the wavelet comparison's scaling."
  },
  {
-  "prompt": "Asked for a wavelet from the well at Ekene-1 on the pack's logs, Seismolord refuses. Why does no trace sample qualify?",
+  "prompt": "On the pack's logs, at what half length does the wavelet from the well at Ekene-1 come back as a wavelet, with damping 0.001?",
   "options": [
-   "The reflectivity is not white over the window, so the extraction cannot take the autocorrelation's spectrum to zero phase.",
-   "Each kept sample needs its whole 31-sample wavelet window on live reflectivity, and the logs give 26 live samples.",
-   "The 4.000000 ms clock is too coarse to resample a 0.500000 ft log onto.",
-   "The phase match has already rotated the synthetic by -6.135261 degrees, so the well's reflectivity stops fitting the trace."
+   "At 15 samples, its default: a 31-sample wavelet from the 26 live samples of the synthetic, with a measured phase.",
+   "At 3 samples: a 7-sample wavelet from 20 samples, fit correlation 0.946989.",
+   "At 5 samples: an 11-sample wavelet from the 16 usable samples the log covers at the well, the engine's own count.",
+   "At none of them: the well reflectivity is flat at every half length, so only the statistical wavelet ever comes back."
   ],
   "answer": 1,
-  "explanation": "The extraction keeps only trace samples whose whole window, 2 x 15 + 1 = 31 samples at the default half length, sits on live reflectivity. The pack's logs give 26 live samples, so none qualifies and the engine says, in its own words, \"The well reflectivity is flat over the seismic at the well, so there is nothing to extract a wavelet from.\""
+  "explanation": "At the default half length of 15 the engine says \"The well reflectivity is flat over the seismic at the well, so there is nothing to extract a wavelet from.\" At 5 it counts 16 usable samples against the 22 an 11-sample wavelet needs and refuses; at 3 it returns a 7-sample wavelet from 20 samples, fit correlation 0.946989."
  },
  {
   "prompt": "Set the 25 Hz Ricker beside the Ekene-1 statistical wavelet on the same 31-sample clock. What does the course's table show?",
   "options": [
-   "The Ricker's centroid, 26.596139 Hz, is well above its 25.039790 Hz peak; Ekene-1's centroid, 25.084884 Hz, is close to its 24.488746 Hz peak.",
+   "The Ricker peaks at 25.039790 Hz with its centroid at 26.596139 Hz; Ekene-1 peaks at 24.488746 Hz with its centroid at 25.084884 Hz.",
    "The two wavelets match: the Ricker peaks at 25.039790 Hz and Ekene-1 centres at 25.084884 Hz, so either serves.",
    "The Ricker's centroid equals its 25 Hz peak, since a Ricker is symmetric and its power sits about one frequency.",
    "Ekene-1's centroid, 26.596139 Hz, sits above the Ricker's 25.084884 Hz, because a field wavelet carries more high frequency."
   ],
   "answer": 0,
-  "explanation": "The Ricker peaks at 25.039790 Hz and has its centroid at 26.596139 Hz, while Ekene-1 peaks at 24.488746 Hz with its centroid at 25.084884 Hz. A Ricker chosen by its peak carries a higher centroid than the field wavelet, and the swapped figures belong to the other wavelet."
+  "explanation": "The Ricker peaks at 25.039790 Hz and has its centroid at 26.596139 Hz, while Ekene-1 peaks at 24.488746 Hz with its centroid at 25.084884 Hz. The two wavelets do not match figure for figure, and the swapped figures belong to the other wavelet."
  },
  {
   "prompt": "Which well's statistical wavelet has the highest -6 dB high edge, and what is it?",

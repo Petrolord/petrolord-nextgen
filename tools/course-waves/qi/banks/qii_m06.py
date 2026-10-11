@@ -14,7 +14,7 @@ q(2, "How does the comparison at the wells compute its one scale?",
  ["One scale per well, the well's seismic A over its modelled A, then averaged over the four wells.",
   "From the gradients alone, since B is the larger number in both the modelled and the seismic columns.",
   "From the intercepts alone, sum(observed A) over sum(modelled A)."],
- "One least-squares scale ties the seismic amplitudes to reflectivity over every well, A and B together: sum(observed x modelled) / sum(modelled^2). A scale per well would fit each well to its own model and hide the differences the comparison is for.")
+ "One least-squares scale ties the seismic amplitudes to reflectivity over every well, A and B together: sum(observed x modelled) / sum(modelled^2). Over the four Ekene wells it is 1882.216944.")
 
 q(0, "What is the one scale over the four Ekene wells, and in what units?",
  "1882.216944 trace units per unit reflection coefficient.",
@@ -28,7 +28,7 @@ q(3, "Which two conditions does QI Studio raise from the comparison at the wells
  ["A high issue for any residual above 0.088133, the Ekene-1 figure, and an issue for a well modelled over net sand.",
   "An issue for a tie whose mean windowed correlation is below 0.5, and a high one for a pick outside 8 ms.",
   "A high issue for a class that differs, none for the scale."],
- "QI Studio raises an issue for a class that differs and a high one for a negative scale, a polarity or wavelet problem. The correlation below 0.5 is its rule for a poor tie, which belongs to the issue register for ties, and no residual threshold is printed.")
+ "QI Studio raises an issue for a class that differs and a high one for a negative scale, a polarity or wavelet problem. The correlation below 0.5 is its rule for a poor tie, which belongs to the issue register for ties, and the course states no residual threshold.")
 
 q(1, "Ekene-2's top of the Ekene Sand is at 5134.514436 ft. Why is its modelled intercept and gradient read from the cap rock over its net sand?",
  "Its top lies below the oil-water contact at 5118.110236 ft, so it has no oil leg.",
@@ -70,7 +70,7 @@ q(1, "Which Ekene well carries the largest residual against its model?",
  ["Ekene-1, at 0.088133, the well on which the gathers sit.",
   "Ekene-3, at 0.059452, the smallest of the four residuals.",
   "Ekene-4, at 0.077711."],
- "The residuals are 0.088133 at Ekene-1, 0.105803 at Ekene-2, 0.059452 at Ekene-3 and 0.077711 at Ekene-4, so Ekene-2 is the largest and Ekene-3 the smallest. With every class in agreement, the residual is the figure that tells the wells apart.")
+ "Ekene-2's scaled seismic point, A 0.265206 and B -0.410601, sits 0.105803 from its modelled point, above Ekene-1's 0.088133, Ekene-4's 0.077711 and Ekene-3's 0.059452.")
 
 q(0, "What are Ekene-1's seismic A and B after division by the one scale?",
  "A 0.258652 and B -0.569840, against modelled A 0.170742 and B -0.563558.",
@@ -84,7 +84,7 @@ q(3, "How do the modelled and seismic classes compare over the four Ekene wells?
  ["The oil-leg wells Ekene-1 and Ekene-3 are class III on the seismic, so 2 of 4 agree with the model.",
   "Ekene-2, the largest residual, is class II on the seismic, so 3 of 4 agree with the model there.",
   "All four are class IV on both sides, since every gradient in the comparison is negative."],
- "Every modelled and seismic point is class I, so 4 of 4 wells agree in class. Agreement in class is the easy kind here; the residuals still range from 0.059452 to 0.105803.")
+ "Every modelled and seismic point is class I at the band of 0.02, so 4 of 4 wells agree in class; the residuals range from 0.059452 to 0.105803.")
 
 q(2, "The comparison classes each point with avoClass. At what band, and is the class graded?",
  "At the stated band of 0.02, and a class is never graded.",

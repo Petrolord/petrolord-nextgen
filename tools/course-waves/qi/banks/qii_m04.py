@@ -9,7 +9,7 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 # table, the angle gather and the mute, partial stacks, and the usable angle.
 
 q(2, "In the pack's RMS velocity table, what Dix interval velocity does dixInterval return for the interval that closes at the row of 1311.000000 ms?",
- "2885.878392 m/s, the thin interval that starts at the row of 1288.800000 ms.",
+ "2885.878392 m/s, the interval that starts at the row of 1288.800000 ms.",
  ["2396.900000 m/s, the RMS velocity printed on that row.",
   "2077.601943 m/s, the interval from 1040.500000 to 1288.800000 ms.",
   "2388.940541 m/s, the RMS velocity the trace clock puts at 1292.000000 ms between the two bracketing rows."],
@@ -34,7 +34,7 @@ q(1, "A sample lies later than the last row of the pack's RMS table, 1782.300000
  ["2132.930307 m/s, the last segment's Dix interval velocity carried on.",
   "A refusal naming the time, as the sample lies outside the table.",
   "A value extrapolated along the line through the last two rows."],
- "The RMS velocity is linear between rows and held flat outside the table, so a sample past 1782.300000 ms reads 2328.600000 m/s. That default silently decides every angle below the table, so a study states it. 2132.930307 is an interval velocity, and the engine neither refuses nor extrapolates.")
+ "The RMS velocity is linear between rows and held flat outside the table, so a sample past 1782.300000 ms reads 2328.600000 m/s. 2132.930307 is an interval velocity, and the engine neither refuses nor extrapolates.")
 
 q(2, "On the Ekene table at the top of gather 5 (1292.000000 ms), what is Walden's angle for the 1500 m offset?",
  "31.872141 degrees.",
@@ -48,7 +48,7 @@ q(3, "The course compares Walden's angle with an exact ray trace at the base of 
  ["Walden reads low at every offset, by 0.009482 degrees at 500 m and 2.143321 at 3000 m.",
   "Walden and the ray trace differ by a near constant 0.255506 degrees at every offset.",
   "Walden reads high by 2.143321 degrees at 500 m, shrinking to 0.009482 at 3000 m."],
- "Walden less ray trace is positive in every row and grows with offset: 0.009482 degrees at 500 m, 0.255506 at 1500 m, 2.143321 at 3000 m. At 500 m the excess is under a hundredth of a degree, a margin no field measurement could resolve; at 3000 m it passes two degrees.")
+ "Walden less ray trace is positive in every row and grows with offset: 0.009482 degrees at 500 m, 0.255506 at 1500 m, 2.143321 at 3000 m. At 500 m the excess is under a hundredth of a degree; at 3000 m it passes two degrees.")
 
 q(0, "waldenAngle is given an offset so large that its sine works out above one. What does it return?",
  "90 degrees.",
@@ -62,7 +62,7 @@ q(1, "The pack's gathers carry the kit's mute beyond 40 degrees. On the Ekene ta
  ["Between 2000 m (41.065011 degrees) and 2500 m (49.493998 degrees), so only the 2500 m trace reaches the mute zone.",
   "Between 1000 m (21.859471 degrees) and 1500 m.",
   "Beyond 2500 m, the far offset staying inside the mute."],
- "Walden's angle at the top is 31.872141 degrees at 1500 m and 41.065011 at 2000 m, so it passes 40 degrees between them, and the farthest offsets at the target carry the mute. At 2500 m it is 49.493998 degrees.")
+ "Walden's angle at the top is 31.872141 degrees at 1500 m and 41.065011 at 2000 m, so it passes 40 degrees between them. At 2500 m it is 49.493998 degrees. The kit's mute comes from the kit's own angle calculation, which the course does not measure.")
 
 q(3, "How does angleGather treat the mute's exact zeros at a sample?",
  "As live samples, entering the bin mean like any other value.",

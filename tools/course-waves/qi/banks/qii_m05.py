@@ -20,14 +20,14 @@ q(3, "fitShuey is asked for three terms on the three bins at gather 5's top. Wha
  ["It is overdetermined, with one spare equation left to measure the misfit of the curvature term against the data.",
   "It is underdetermined, so the engine refuses a third term until a fourth angle carries a finite amplitude.",
   "It returns C as 0.000000, the same as the two-term fit, because three angles cannot resolve a curvature term."],
- "A three-term fit on three angles is exactly determined, so it passes through all three points and leaves nothing to judge it by. The engine returns C 467.947963 here; 0.000000 is the two-term fit's C, which has no third term.")
+ "A three-term fit on three angles is exactly determined. The engine returns C 467.947963 here; 0.000000 is the two-term fit's C, which has no third term.")
 
 q(0, "Adding the third term at gather 5's top changes the fit. What does the three-term fit return?",
  "A 510.227684, B -915.097371 and C 467.947963.",
  ["A 501.873676, B -734.431814 and C 467.947963.",
   "A 510.227684, B -734.431814 and C 0.000000.",
   "A 519.312395, B -927.296460 and C 0.000000."],
- "The three-term fit gives A 510.227684, B -915.097371 and C 467.947963: the gradient steepens from the two-term -734.431814 as part of the fall with angle is split off into C. 519.312395 and -927.296460 are the two-term fit on 9 bins.")
+ "The three-term fit gives A 510.227684, B -915.097371 and C 467.947963, against the two-term A 501.873676 and B -734.431814 on the same bins. 519.312395 and -927.296460 are the two-term fit on 9 bins.")
 
 q(2, "At one sample the far stack carries no finite amplitude. What does fitShuey do with that angle?",
  "It drops it, fitting only the angles that carry a finite amplitude.",
@@ -55,7 +55,7 @@ q(2, "How does backgroundTrend fit the line through gather 5's (A, B) pairs?",
  ["By ordinary least squares of B on A with a free intercept, the line allowed to miss the origin.",
   "By ordinary least squares of B on A through the origin.",
   "By taking the published Castagna, Swan and Foster slope as it stands, with no fit to the seismic pairs at all."],
- "The background trend is the line B = m A through the origin by orthogonal regression, which treats A and B alike. Ordinary least squares minimises vertical misfit only, and the published slope is a fixed line; the course names which line a distance is read from.")
+ "The background trend is the line B = m A through the origin by orthogonal regression over the (A, B) pairs, 176 of them on gather 5 with slope -4.020851. The course names which line a distance is read from.")
 
 q(0, "On gather 5, the two-term fit at every sample of the window where all three bins carry data gives the (A, B) pairs. How many pairs, and what trend slope m do they give?",
  "176 pairs, slope m -4.020851.",
@@ -83,21 +83,21 @@ q(2, "contrastsFromAB is run on the top of gather 5 after its two-term A and B a
  ["0.426623, the relative compressional contrast dVp/Vp of the same point.",
   "0.550179, the relative shear contrast dVs/Vs at the stated Vs/Vp.",
   "0.106656, the density contrast drho/rho from Gardner."],
- "The fluid factor dVp/Vp - 1.16 (Vs/Vp) dVs/Vs is 0.107520 here. 0.426623 is dVp/Vp, 0.550179 dVs/Vs and 0.106656 drho/rho; each moves with the stated Vs/Vp and with the scale, so a fluid factor is quoted with both.")
+ "The fluid factor dVp/Vp - 1.16 (Vs/Vp) dVs/Vs is 0.107520 here. 0.426623 is dVp/Vp, 0.550179 dVs/Vs and 0.106656 drho/rho, all from the A and B divided by the one scale at the stated Vs/Vp of 0.500000.")
 
 q(0, "How does contrastsFromAB tie the density contrast to the velocity contrasts?",
  "By Gardner's density, drho/rho = dVp/Vp / 4, which gives 0.106656 against dVp/Vp 0.426623 at the top.",
  ["By the stated Vs/Vp of 0.500000, which sets the density contrast to half the shear contrast.",
   "By holding density fixed, so drho/rho reads zero and A carries only velocity.",
   "By 1.16 (Vs/Vp) dVs/Vs, the mudrock line term."],
- "The engine uses Gardner's density, drho/rho = dVp/Vp / 4, and the top gives drho/rho 0.106656 against dVp/Vp 0.426623. The stated Vs/Vp divides the gradient between compressional and shear contrast, and 1.16 (Vs/Vp) dVs/Vs is the term the fluid factor subtracts.")
+ "The engine uses Gardner's density, drho/rho = dVp/Vp / 4, and the top gives drho/rho 0.106656 against dVp/Vp 0.426623. 1.16 (Vs/Vp) dVs/Vs is the term the fluid factor subtracts.")
 
 q(1, "A study passes the seismic A and B of a sample to contrastsFromAB straight from the stacks, in trace units. What does the course state about that input?",
  "The engine needs A and B as reflection coefficients, so they are first divided by the one scale.",
  ["Trace units are fine, since the fluid factor is a ratio of contrasts and any common scale cancels out of it.",
   "The engine rescales its inputs itself by the stated Vs/Vp, which is why that ratio must be given.",
   "The engine refuses any intercept above one."],
- "contrastsFromAB needs A and B as reflection coefficients, and the course divides the top's two-term A and B by the one scale, 1882.216944, first. The stated Vs/Vp divides the gradient between compressional and shear contrast and carries no scale.")
+ "The course states that the engine needs A and B as reflection coefficients. Seismic A and B sit in trace amplitude units, so a study divides them by the scale the comparison at the wells fits before the call.")
 
 q(3, "What does chiProjection return for the top of gather 5 at chi = atan(m) = -76.033690 degrees, the angle along the background trend?",
  "833.848276.",

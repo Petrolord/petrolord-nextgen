@@ -19,9 +19,8 @@
 #
 # THE NEGATIVE CONTROLS (scratch only). A dry run that passes proves nothing
 # unless the same run can be made to fail, each check on its own:
-#   completeness           the go-live as written on a ladder that lacks the
-#                          Professional and Expert capstones: it must refuse
-#                          and name both tiers.
+#   completeness           the Expert capstone deleted before the go-live: it
+#                          must refuse and name the tier.
 #   ledger [field] [mult]  moves one graded value by a factor (default
 #                          tamberlo_wet_distance by 1.0000001, far inside its
 #                          5e-7 tolerance); the engine-ledger check must refuse.
@@ -29,6 +28,7 @@
 #                          second route in SQL must refuse and name the field.
 #   oracle                 tamberlo_shear_slope moved by ten tolerances with the
 #                          ledger and second-route blocks cut out.
+#   (ledger, route and oracle take any of the eighteen fields as an argument.)
 #   trap                   tamberlo_ai_brine set to its zone-mean-Sw trap value
 #                          (discriminate.mjs --json) with the ledger, route and
 #                          oracle blocks cut out.
@@ -37,8 +37,9 @@
 #                          Associate label; the SQL prompt sweep must refuse.
 #   sweep                  ledger AND route at one part in 1e7 on every field
 #                          that has a second route, one rolled-back run each.
-# While a tier's capstone or banks are pending, run the per-field controls with
-# QI_PARTIAL=1 (the completeness and shape blocks cut).
+# While a tier's deep seed is pending, either run on the scratch-only stand-in
+# directory (standin_seeds.sh, REPO=<dir> REF=WORKTREE) for the whole ladder,
+# or run the per-field controls with QI_PARTIAL=1 (completeness and shape cut).
 #
 # --idempotent runs the WHOLE LADDER TWICE in the one rolled-back transaction
 # and requires the second pass to leave every count and digest where the first
@@ -71,12 +72,12 @@ RUN=$(mktemp -d /tmp/qidry.XXXXXX)
 SLUG=qi
 NAME() { python3 -c "import json,sys; v=json.load(open('$HERE/ship_names.json'))[sys.argv[1]]; print(v or '')" "$1"; }
 GOLIVE=$(NAME go_live)
-# The ladder in its fixed order: the course row, the deep seeds, the later
-# capstones, the go-live last. A file not present at REF (a deep seed whose
-# banks are not committed yet, a capstone whose engines have not passed the
-# gate) is left out and named.
+# The ladder in its fixed order: the course row (with the three capstones),
+# the deep seeds, the go-live last. A deep seed not present at REF (its banks
+# not final yet) is left out and named; standin_seeds.sh builds a scratch-only
+# directory with stand-ins so the whole ladder can still be dry-run.
 FILES=""
-for k in course beginner_deep intermediate_deep advanced_deep intermediate_capstone advanced_capstone go_live; do
+for k in course beginner_deep intermediate_deep advanced_deep go_live; do
   n=$(NAME $k); [ -n "$n" ] || { echo "  (not named yet: $k)"; continue; }
   if [ "$REF" = WORKTREE ]; then [ -f "$REPO/migrations/$n.sql" ] || { echo "  (absent: $n)"; continue; }
   else git -C "$REPO" cat-file -e "$REF:migrations/$n.sql" 2>/dev/null || { echo "  (absent at $REF: $n)"; continue; }; fi
@@ -170,7 +171,7 @@ case "$CONTROL:$CTL" in
   --control:oracle)
     # Ten tolerances, so the move is past what the oracle allows, with the
     # ledger and the second route cut out so ONLY the oracle can object.
-    FIELD=tamberlo_shear_slope; TIER=beginner
+    FIELD=${FIELD_ARG:-tamberlo_shear_slope}; TIER=$(tier_of "$FIELD"); [ -n "$TIER" ] || { echo "unknown field $FIELD"; exit 2; }
     PRE_GOLIVE="update public.academy_capstones c
    set fields = (select jsonb_agg(case when f->>'key' = '$FIELD'
                                        then jsonb_set(f, '{expected}', to_jsonb(((f->>'expected')::numeric) + 10 * ((f->>'tol')::numeric)))
@@ -227,10 +228,10 @@ case "$CONTROL:$CTL" in
     ;;
   --idempotent:) IDEMPOTENT=1 ;;
   --control:completeness)
-    # The go-live as written, on a ladder that lacks a tier's capstone: it must
-    # refuse through the completeness block and name the missing tier.
-    GOLIVE_EDIT=cat
-    WANT="no capstone for the tier\\(s\\) intermediate, advanced"
+    # The Expert capstone deleted before the go-live: it must refuse through
+    # the completeness block and name the missing tier.
+    PRE_GOLIVE="delete from public.academy_capstones where app_slug = '$SLUG' and tier = 'advanced';"
+    WANT="no capstone for the tier\\(s\\) advanced"
     ;;
   *) echo "unknown control $CTL"; exit 2 ;;
 esac
