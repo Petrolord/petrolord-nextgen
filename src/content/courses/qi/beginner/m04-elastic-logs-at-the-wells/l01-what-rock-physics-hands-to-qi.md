@@ -4,7 +4,7 @@ Rock physics turns logs into elastic properties at the wells, and QI takes those
 
 ## The logs that arrive
 
-The pack's Vp, Vs and density come from the DT, DTS and RHOB logs: Vp = 304800 / DT, Vs = 304800 / DTS and density = RHOB x 1000. Velocities arrive in metres per second and density in kilograms per cubic metre, and every engine works in SI from here on. Beside them sit GR and the kit's PHIT, VSH and SW, which are the generator's own interpretation at the log depths. A study that brings its own petrophysics states it.
+The pack's Vp, Vs and density come from the DT, DTS and RHOB logs: Vp = 304800 / DT, Vs = 304800 / DTS and density = RHOB x 1000. Velocities arrive in metres per second and density in kilograms per cubic metre, and every engine works in SI from here on. Beside them sit GR and the kit's PHIT, VSH and SW, the interpretation the kit was built from, sampled at the log depths. A study that brings its own petrophysics states it.
 
 ## The hand-offs and their engines
 
