@@ -1,0 +1,873 @@
+# QI TEACHING DIGEST: Quantitative Interpretation
+
+# THIS FILE IS THE ONLY TEACHING TRUTH FOR THIS COURSE. Every number in every lesson, bank question, key truth and panel comes from a line below. The kit's 10-qi truth file, the engines' oracles and goldens, the engine source comments, the videos and their storyboards are PROVENANCE; none of them is teaching truth.
+
+# PRECISION. Every depth (ft), velocity (m/s), density (kg/m3), impedance, modulus, frequency (Hz), time (ms), amplitude, reflection coefficient, intercept, gradient, slope, ratio, fraction, saturation, porosity, probability, percentage and distance prints to SIX decimals; whole counts (samples, traces, wells, pairs, blocks, interfaces, levels, lines) and whole inputs print as whole numbers; a stated input prints as it was stated; an engine message is printed verbatim between double quotation marks.
+
+# THE ENGINES. engines/qi/*, engines/rockphysics/*, lib/waveform.js and lib/gridding/closure.js, vendored sha-identical from petrolord-engines at their canonical paths in the NextGen repository, and called through the course's teaching lab, src/components/course/panels/qi/qiLab.js, which this digest is printed from.
+
+# AN APP COURSE. The Suite app for this course is QI Studio, in the Suite's Geoscience module, which runs these same engines. Every practical also runs in the course's own four explorer panels, so a learner without a Suite seat can work every exercise.
+
+# THE DATA. The Ekene field is SYNTHETIC, generated for this platform by a stated script (section 3). No real well, company or survey appears.
+
+# WHAT IS NEVER IN THIS FILE. No capstone field, no capstone case and no graded answer. The capstones run their own held-out synthetic cases and the digest never names them.
+
+# NO SOURCE PROSE. The course cites its references by author, year and equation and writes every explanation in its own words (section 2).
+
+# THIS COURSE TEACHES NO REPAIR HISTORY. Every section below describes what the engines do today.
+
+# SECTION 1: What the engines compute, and what they decline to compute (owned by Associate m01 and Professional m01 and Expert m01 and Expert m06)
+
+The course runs on the vendored Petrolord engines, the same files QI Studio and Rock Physics Studio run. Each engine function takes plain numbers and arrays and returns numbers; a function that cannot answer refuses by throwing an error whose message says why (section 5). No engine reads a file, a clock or a random number of its own.
+
+| engine file | functions the course calls | tier that teaches it |
+| --- | --- | --- |
+| engines/qi/seismicQc.js | `amplitudeSpectrum`, `averageSpectrum`, `spectrumStats`, `snrFromCoherency`, `footprint` | Associate |
+| engines/rockphysics/elasticSet.js | `elasticPoint`, `fitVsRegression`, `predictVs` | Associate |
+| engines/rockphysics/vsEstimate.js | `gcSandShaleVs` | Associate |
+| engines/rockphysics/fluids.js | `brine`, `liveOil`, `apiToRho0`, `woodMix` | Associate |
+| engines/rockphysics/minerals.js | `mixMinerals` | Associate |
+| engines/rockphysics/gassmann.js | `substituteVels` | Associate |
+| engines/rockphysics/avoTrend.js | `blockLogs`, `interfacePoints`, `fitFluidLine`, `distanceFromLine`, `backgroundSlope` | Associate |
+| engines/rockphysics/avo.js | `zoeppritzRpp`, `shuey`, `avoClass` | Associate |
+| engines/qi/wavelets.js, engines/qi/prestack.js, engines/qi/prestackQc.js, engines/qi/avo.js | the wavelet, gather, angle and AVO functions | Professional |
+| engines/qi/lfm.js, engines/qi/inversion.js, engines/qi/inversionSpread.js, engines/qi/prestackInversion.js, engines/qi/propertyPrediction.js, engines/qi/prospectAssessment.js, lib/gridding/closure.js | the forward model, the inversions, the property transforms and the prospect functions | Expert |
+
+WHAT THE ENGINES DO NOT DO, checked here against the functions above:
+- They hold no Ekene figure. Every temperature, pressure, salinity, oil gravity, gas-oil ratio, gas gravity, porosity, shale volume, saturation, mineral, taper, window, block length, angle and cut-off is an input the caller states; the course states each one where it uses it.
+- They do not decide whether a QI study should go ahead. The engines return spectra, trends, moduli and reflection coefficients; the verdict is written by the interpreter from those numbers (section 21).
+- They do not pick the samples. Which samples are net sand, which are the water leg and which are the cap rock is a selection the course states (section 3) before a function is called.
+
+# SECTION 2: The references behind the engines, and how the course uses them (owned by Associate m01 l01 and Professional m01 and Expert m01 and Expert m06 l03)
+
+THE RULE THIS COURSE FOLLOWS. Every method is named with its authors and year, the way the engines' own source headers and validation records name it. The course quotes none of their prose: each is a publisher's text, so the course teaches it by concept and equation and writes every explanation in its own words.
+
+| method | reference | engine | how the course uses it |
+| --- | --- | --- | --- |
+| brine and live oil properties | Batzle and Wang (1992), Geophysics 57 | fluids.js | by equation, at stated conditions |
+| the fluid mix | Wood (1955), the uniform (Reuss) mix | fluids.js | by concept |
+| the mineral mix | Voigt, Reuss and Hill (Hill 1952) | minerals.js | by concept |
+| fluid substitution | Gassmann (1951) | gassmann.js | by equation |
+| shear from compressional velocity | Greenberg and Castagna (1992), Geophysical Prospecting 40 | vsEstimate.js | by equation and its published coefficients |
+| the wet background trend | Castagna, Swan and Foster (1998), Geophysics 63 | avoTrend.js | by equation |
+| intercept and gradient | Shuey (1985), Geophysics 50 | avo.js | by equation |
+| AVO classes | Rutherford and Williams (1989), Geophysics 54, with class IV | avo.js | by concept |
+| exact reflection coefficients | Zoeppritz, in the form of Dvorkin and others (2014) | avo.js | by concept |
+| signal to noise from coherency | Hatton, Worthington and Makin (1986), Seismic Data Processing, section 4.4 | seismicQc.js | by equation |
+| lambda-rho and mu-rho | Goodway, Chen and Downton (1997) | elasticSet.js | by equation |
+
+The Rock Physics course teaches Batzle-Wang, Gassmann, Greenberg-Castagna, Shuey, the classes and exact Zoeppritz in full. This course recaps each in one lesson and applies it to the QI questions.
+
+# SECTION 3: The Ekene field and the teaching pack (owned by Associate m01 l02 and Associate m02 l01 and Professional m01 and Expert m01)
+
+THE DATA IS SYNTHETIC. The Ekene field is the Petrolord demonstration field: one earth model, from which every log and every seismic trace was generated by a stated script, so every answer can be checked against the model. No real well, company or survey appears. The teaching pack is cut from release ekene-demo-v3 of the Ekene demonstration kit, the release the QI with Petrolord videos were recorded on, by the course's cut script; its petrophysical curves (PHIT, VSH, SW) are the interpretation the kit was built from, sampled at the log depths.
+
+Depths are measured depth below the kelly bushing in feet; the kit writes metres and the course converts (feet = metres / 0.3048). The wells in the pack are vertical.
+
+| well | easting m | northing m | KB elevation ft | top Ogbia Shale ft | top Ekene Sand ft | base Ekene Sand ft | log samples | first sample ft | last sample ft |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Ekene-1 | 401000.000000 | 521000.000000 | 82.020997 | 4232.283465 | 5078.740157 | 5183.727034 | 800 | 4931.500000 | 5331.000000 |
+| Ekene-2 | 402200.000000 | 521150.000000 | 82.020997 | 4262.959318 | 5134.514436 | 5252.624672 | 827 | 4987.000000 | 5400.000000 |
+| Ekene-3 | 401400.000000 | 522300.000000 | 82.020997 | 4219.652231 | 5055.774278 | 5150.918635 | 781 | 4908.500000 | 5298.500000 |
+| Ekene-4 | 402600.000000 | 522500.000000 | 82.020997 | 4308.070866 | 5216.535433 | 5298.556430 | 755 | 5069.000000 | 5446.000000 |
+
+The Ekene Sand oil-water contact is at 5118.110236 ft (1560.000000 m in the kit), the same depth in every well. The log step is 0.500000 ft.
+
+THE SELECTIONS THE COURSE STATES (lab `zoneSamples`):
+
+| selection | rule | samples at Ekene-1 |
+| --- | --- | --- |
+| net sand | Vsh at or below 0.350000 |  |
+| oil leg | net sand inside the Ekene Sand, above the oil-water contact | 65 |
+| water leg | net sand inside the Ekene Sand, at or below the contact | 103 |
+| cap rock | the 65 ft of log above the top of the Ekene Sand | 130 |
+
+WHAT THE PACK HOLDS:
+
+| part | what it is | size |
+| --- | --- | --- |
+| logs | Vp, Vs and density from the DT, DTS and RHOB logs (Vp = 304800 / DT, Vs = 304800 / DTS, density = RHOB x 1000), GR, and the kit's PHIT, VSH and SW, for Ekene-1 to Ekene-4 over the Ekene Sand and the shale above it | 4 wells |
+| headers | every well's curve list, checkshot count and survey station count | 12 wells |
+| spread traces | full-stack traces spread over the survey | 10 inlines by 12 crosslines, 800 to 2400 ms every 4.000000 ms |
+| neighbour traces | neighbouring full-stack traces along the inline through Ekene-1 | 21 traces, inline 1027 |
+| RMS slice | the RMS amplitude of the full stack on every trace | 128 inlines by 128 crosslines, 1250 to 1350 ms |
+| traces at the wells | full, near, mid and far stack traces at Ekene-1 to Ekene-4 | 900 to 1700 ms |
+| gathers | NMO-corrected CDP gathers next to Ekene-1 | 12 CDPs, 13 offsets |
+
+THE CONDITIONS AT THE EKENE SAND, stated with the kit: 180 degF, 3200 psia, brine salinity 0.035000 (weight fraction of NaCl), oil 32 API, gas-oil ratio 400 scf/stb, gas gravity 0.750000.
+
+# SECTION 4: Units, times and polarity (owned by Associate m01 l04)
+
+DEPTH. Feet throughout: 1 ft = 0.3048 m. The top of the Ekene Sand at Ekene-1 is 5078.740157 ft (1548.000000 m in the kit).
+
+VELOCITY AND DENSITY. Velocities in metres per second, density in kilograms per cubic metre (a density log in g/cc times 1000). The engines work in SI throughout.
+
+IMPEDANCE. Acoustic impedance AI = Vp x density, in kg/(m2 s). The same number appears in three ways, and a study states which:
+
+| quantity | Ekene-1 oil-leg mean |
+| --- | --- |
+| Vp, m/s | 2865.750738 |
+| density, kg/m3 | 2316.676923 |
+| AI of the means, kg/(m2 s) (elasticPoint) | 6639018.603084 |
+| the same in units of 10^6 kg/(m2 s) | 6.639019 |
+| the same as (m/s)(g/cc), that is AI / 1000 | 6639.018603 |
+
+TIME. Seismic time is two-way time (TWT) in milliseconds; a checkshot records one-way time (OWT) from the reference. At Ekene-1 the checkshots bracketing the top of the Ekene Sand are at 4687.500000 ft (OWT 585.055000 ms) and 5079.002625 ft (OWT 644.438000 ms); linear between them the top is at OWT 644.398189 ms, TWT 1288.796378 ms.
+
+POLARITY. The kit's seismic is SEG normal polarity: an increase in acoustic impedance downwards is a peak, a positive number. The Ekene Sand is harder than the Ogbia Shale above it at Ekene-1 (section 15), so its top is a peak.
+
+# SECTION 5: The panels, and every refusal the Associate engines make (owned by Associate m01 l05 and Associate m03 and Associate m04 and Associate m05)
+
+The feasibility explorer runs the Associate engines on the Ekene pack or on a case a learner pastes. When an engine cannot answer it throws, and the panel prints the engine's own message unchanged. Each row below was produced by calling the function with the input shown:
+
+| function | input | the engine's message |
+| --- | --- | --- |
+| `amplitudeSpectrum` | a sample interval of 0 ms | "The sample interval must be positive." |
+| `amplitudeSpectrum` | a trace of 5 samples | "A spectrum needs at least 8 samples." |
+| `averageSpectrum` | no traces | "Give at least one trace." |
+| `averageSpectrum` | traces of 16 and 20 samples | "Every trace must have the same length." |
+| `snrFromCoherency` | one trace | "Signal-to-noise needs at least two neighbouring traces." |
+| `snrFromCoherency` | two traces of nulls | "No neighbouring pair had samples to correlate." |
+| `footprint` | a slice of 3 by 3 | "A footprint needs a slice of at least 4 by 4." |
+| `fitVsRegression` | three measured pairs, linear | "Need at least 5 samples with measured Vp and Vs (got 3)." |
+| `fitVsRegression` | the form 'cubic' | "form must be 'linear' or 'quadratic'." |
+| `fitVsRegression` | six pairs all at Vp 3000 m/s | "The regression is singular (Vp has no spread)." |
+| `predictVs` | an interval level of 1.2 | "The interval level must be between 0 and 1." |
+| `brine` | a pressure of 0 MPa | "Temperature (degC) and positive pressure (MPa) required." |
+| `brine` | a salinity of 0.6 | "Salinity must be a weight fraction in [0, 0.5)." |
+| `apiToRho0` | an oil gravity of 0 API | "API gravity must be in (0, 100)." |
+| `woodMix` | saturations of 0.6 and 0.6 | "Saturations must sum to 1." |
+| `mixMinerals` | quartz 0.7 and clay 0.2 | "Fractions must sum to 1." |
+| `substituteVels` | a negative Vp | "vp, vs and rho must be positive." |
+| `substituteVels` | a porosity of 0 | "Porosity must be in (0, 1)." |
+| `fitFluidLine` | two interfaces | "A fluid line needs at least three interfaces." |
+| `backgroundSlope` | a Vs/Vp of 1.2 | "Vs/Vp must be between 0 and 1." |
+| `zoeppritzRpp` | an upper layer with Vs above Vp | "Upper halfspace has vs >= vp." |
+
+21 refusals across 14 functions. Two more messages exist in gassmann.js (an implied saturated modulus that is not positive, and an inverse Gassmann dry modulus that is not positive); each carries a punctuation mark this course does not print, so the course names them by what they refuse and never quotes them.
+
+A RESULT IS NO REFUSAL. `elasticPoint` with Vs above Vp does not throw: it returns every field as NaN (AI NaN, Vp/Vs NaN), and a panel shows the gap.
+
+# SECTION 6: What is graded, where the practicals run, the Suite app, and what is never graded (owned by Associate m01 l05 and Associate m06 l04 and Professional m06 l04 and Expert m06)
+
+THE SUITE APP for this course is QI Studio, in the Suite's Geoscience module, with Rock Physics Studio beside it; both run the same engine files the course vendors. Every practical in this course also runs in the course's own four explorer panels (feasibility, prestack, inversion and prospect), which call the vendored engines on the Ekene pack or on a learner's own case, so a learner without a Suite seat can work every exercise.
+
+WHAT IS GRADED. Each tier ends on a capstone of six numeric fields. Every field is a return value of an engine on a held-out synthetic case the capstone supplies as a case file; the learner pastes the case into the tier's panel and reads the six figures. The capstone cases are never the Ekene field: the members-only videos speak the Ekene answers aloud, so a graded figure on Ekene could be answered by watching a video.
+
+WHAT IS NEVER GRADED. Any figure in the videos; any Ekene figure; any verdict, class name or category (section 8, the usability grades); and any figure that depends on a choice the case does not state.
+
+# SECTION 7: The data inventory (owned by Associate m02 l01 and Associate m02 l03)
+
+WHAT A QI STUDY NEEDS FROM EACH WELL. Rock physics needs Vp (a sonic) and density; shear makes the shear-dependent results measured instead of estimated; porosity, shale volume and saturation feed the substitution; checkshots tie the well to the seismic; the elevation and the deviation survey place it in depth.
+
+| well | kind | logs | curves | sonic DT | shear DTS | density RHOB | checkshot levels | top Ekene Sand ft (kit tops) |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Ekene-1 | vertical | yes | 11 | yes | yes | yes | 25 | 5078.740157 |
+| Ekene-2 | vertical | yes | 11 | yes | yes | yes | 21 | 5134.514436 |
+| Ekene-3 | vertical | yes | 11 | yes | yes | yes | 21 | 5055.774278 |
+| Ekene-4 | vertical | yes | 11 | yes | yes | yes | 21 | 5216.535433 |
+| Ekene-5 | vertical | yes | 11 | yes | yes | yes | 21 | 5091.863517 |
+| Ekene-6 | vertical | yes | 11 | yes | yes | yes | 21 | 5072.178478 |
+| Ekene-7 | vertical | yes | 11 | yes | yes | yes | 21 | 5082.020997 |
+| Ekene-8 | deviated | yes | 11 | yes | yes | yes | 24 | 5428.215223 |
+| Ekene-9 | deviated | yes | 5 | yes | yes | no | 24 | 5505.511811 |
+| Ekene-10 | deviated | yes | 12 | yes | yes | yes | 24 | 5270.669291 |
+| Ekene-11 | planned | no | none | none | none | none | 0 | none |
+| Ekene-12 | survey_only | no | none | none | none | none | 0 | none |
+
+10 of 12 wells have logs. Of those, 10 carry a shear sonic, 9 a density log and 10 two or more checkshot levels. Ekene-9 is the well without density: its curves are CALI, GR, DT, DTS, RT.
+
+# SECTION 8: The usability matrix and the issue register (owned by Associate m02 l02 and Associate m02 l03 and Associate m02 l04)
+
+QI Studio grades every well against every target interval, item by item, as good, limited or missing, and a cell takes the worst of its items. Sonic and density are required (missing when absent); shear, porosity, shale volume and saturation are limited when absent, because the study can go on with an estimate; fewer than two checkshot levels is limited; an unset elevation is missing; no deviation survey is limited. The table is QI Studio's own function (`usabilityMatrix` in src/pages/apps/QIStudio/services/usability.js, petrolord-suite 5df9d9410) run on the pack's headers for the target Ekene Sand, with the porosity, shale volume and saturation curves the logs carry (the LAS files carry none of the three, so each reads as absent):
+
+| well | cell | sonic | density | shear | porosity | vsh | sw | checkshots | datum | survey |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Ekene-1 | limited | good | good | good | limited | limited | limited | good | good | good |
+| Ekene-10 | limited | good | good | good | limited | limited | limited | good | good | good |
+| Ekene-2 | limited | good | good | good | limited | limited | limited | good | good | good |
+| Ekene-3 | limited | good | good | good | limited | limited | limited | good | good | good |
+| Ekene-4 | limited | good | good | good | limited | limited | limited | good | good | good |
+| Ekene-5 | limited | good | good | good | limited | limited | limited | good | good | good |
+| Ekene-6 | limited | good | good | good | limited | limited | limited | good | good | good |
+| Ekene-7 | limited | good | good | good | limited | limited | limited | good | good | good |
+| Ekene-8 | limited | good | good | good | limited | limited | limited | good | good | good |
+| Ekene-9 | missing | good | missing | good | limited | limited | limited | good | good | good |
+
+Counts over the 10 cells: good 0, limited 9, missing 1.
+
+Ekene-9's density item reads: "No density over the zone."
+
+THE ISSUE REGISTER. QI Studio suggests one issue per well and item kind that is not good (`suggestedIssues`): 31 issues on this matrix, 1 high and 30 medium. A missing item is high, a limited one medium. The suggested remedy for a missing density log is "Request the density log; rock physics cannot run without it." The user keeps, edits or dismisses each one.
+
+IN PRACTICE the porosity, shale volume and saturation curves come from Petrophysics Studio before a QI study starts; the pack carries the kit's own PHIT, VSH and SW for Ekene-1 to Ekene-4 for that reason.
+
+# SECTION 9: The amplitude spectrum (owned by Associate m03 l01)
+
+HOW THE ENGINE MEASURES IT (seismicQc.js). Each trace is tapered at both ends by a Tukey window (the stated taper fraction), padded with zeros to twice the next power of two samples, and transformed; the one-sided amplitude is the modulus at each frequency. `averageSpectrum` averages the POWER of many traces and takes the root. The frequency step is 1000 / (padded length x sample interval in ms).
+
+THE EKENE SPECTRUM. The 120 spread traces of the full stack, window 800 to 1600 ms (it holds the Ekene Sand), sample interval 4.000000 ms, taper 0.100000: frequency step 0.488281 Hz, peak 31.374887 Hz. The amplitude at a few frequencies, and relative to the peak in decibels (20 log10 of amplitude over peak amplitude):
+
+| frequency Hz | amplitude | relative to the peak, dB |
+| --- | --- | --- |
+| 4.882813 | 135.533846 | -27.647607 |
+| 9.765625 | 575.251794 | -15.091402 |
+| 15.136719 | 2116.417605 | -3.776535 |
+| 20.019531 | 2403.141302 | -2.672976 |
+| 24.902344 | 2691.535156 | -1.688561 |
+| 29.785156 | 2071.960931 | -3.960931 |
+| 35.156250 | 1424.977894 | -7.212399 |
+| 40.039063 | 1249.410326 | -8.354460 |
+| 49.804688 | 329.228053 | -19.938625 |
+| 60.058594 | 115.309770 | -29.051240 |
+| 80.078125 | 41.257627 | -37.978477 |
+
+The peak amplitude is 3269.099145 (the peak is refined between frequency steps by a parabola through the three highest values, so it can sit above every tabled amplitude).
+
+A CHECK AGAINST A KNOWN ANSWER. A Ricker wavelet of 30 Hz has an amplitude spectrum known in closed form (the engine's oracle, goldens.seismicQc.json): peak 30.000000 Hz, -6 dB edges 14.471033 and 49.062252 Hz, centroid 31.915382 Hz. The engine on that wavelet sampled every 4.000000 ms (31 samples, no taper) reads peak 30.070572 Hz, edges 14.463999 and 49.112032 Hz, centroid 31.915377 Hz. The small differences are the sampling and the finite length.
+
+# SECTION 10: Band edges and the centroid (owned by Associate m03 l02 and Associate m06 l03)
+
+DEFINITIONS (spectrumStats). The -6 dB edges are where the amplitude falls to 10^(-6/20) of the peak amplitude, either side of the peak, interpolated linearly between frequency steps; the -20 dB edges the same at 10^(-20/20). The -6 dB bandwidth is the high edge less the low edge. The centroid is the power-weighted mean frequency, the sum of f A(f)^2 over the sum of A(f)^2.
+
+THE EKENE FULL STACK BY WINDOW, the 120 spread traces, taper 0.100000:
+
+| window ms | peak Hz | centroid Hz | -6 dB low Hz | -6 dB high Hz | -6 dB bandwidth Hz | -20 dB low Hz | -20 dB high Hz |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 800 to 1600 | 31.374887 | 26.656573 | 14.425434 | 34.787627 | 20.362193 | 8.801471 | 47.968080 |
+| 1600 to 2400 | 21.761176 | 23.361149 | 14.429678 | 32.581187 | 18.151509 | 7.272835 | 45.334861 |
+| 800 to 2400 | 21.777034 | 26.095344 | 15.790410 | 34.601268 | 18.810858 | 8.340108 | 46.984080 |
+
+The peak falls with depth, from the shallow window to the deep one, as the earth absorbs the higher frequencies; the -6 dB edges move less.
+
+THE TAPER IS A STATED CHOICE. The same traces and window at four taper fractions:
+
+| taper | peak Hz | centroid Hz | -6 dB low Hz | -6 dB high Hz |
+| --- | --- | --- | --- | --- |
+| 0.000000 | 31.382353 | 26.750783 | 14.447432 | 34.727319 |
+| 0.100000 | 31.374887 | 26.656573 | 14.425434 | 34.787627 |
+| 0.250000 | 31.323187 | 26.618496 | 14.351787 | 35.006494 |
+| 0.500000 | 22.305063 | 26.175193 | 14.308629 | 34.975851 |
+
+ONE TRACE IS NOT A SPECTRUM OF THE VOLUME. The single trace at Ekene-1, same window and taper: peak 31.418177 Hz, centroid 26.664566 Hz, -6 dB 30.556053 to 32.127840 Hz. A few reflectors make a single trace's spectrum spiky; averaging many traces over the survey smooths it.
+
+# SECTION 11: Signal to noise from trace coherency (owned by Associate m03 l03 and Associate m06 l03)
+
+THE METHOD (Hatton, Worthington and Makin, section 4.4). Two neighbouring traces carrying the same signal and independent noise of equal power have a normalised cross-correlation c at their best alignment, and the signal to noise POWER ratio is c / (1 - c). The engine searches the stated number of samples either side for the best alignment (for dip), clamps c at 0.999999 at most, takes every neighbouring pair, and reports the median ratio and the same in decibels (10 log10 of the ratio).
+
+THE EKENE NEIGHBOURS. 21 neighbouring traces along inline 1027 through Ekene-1, maximum lag 3 samples:
+
+| window ms | pairs | median signal to noise (power) | in dB |
+| --- | --- | --- | --- |
+| 800 to 1600 | 20 | 361.155122 | 25.576938 |
+| 1600 to 2400 | 20 | 77.008444 | 18.865384 |
+
+The first five pairs of the shallow window, in order: 388.889121, 471.612452, 367.582682, 350.585441, 390.813495.
+
+THE LAG, A STATED CHOICE, ON FLAT EVENTS. The shallow window at four maximum lags returns the same median at every lag, because the best alignment of every neighbouring pair here is at zero lag:
+
+| maximum lag, samples | median signal to noise | in dB |
+| --- | --- | --- |
+| 0 | 361.155122 | 25.576938 |
+| 1 | 361.155122 | 25.576938 |
+| 3 | 361.155122 | 25.576938 |
+| 6 | 361.155122 | 25.576938 |
+
+A RATIO NEAR THE CLAMP IS A CEILING. When neighbouring traces are almost identical, c is close to 1 and c / (1 - c) grows without bound; at the clamp 0.999999 the ratio is 999998.999971. QI Studio prints any ratio of 10,000 or more as "over 10,000 (over 40 dB)" for that reason (src/pages/apps/QIStudio/services/qcRun.js).
+
+# SECTION 12: Acquisition footprint and where to measure it (owned by Associate m03 l04)
+
+THE METHOD (footprint). On a time slice (inlines by crosslines) of RMS or absolute amplitudes, the engine averages the slice along one axis to a profile, removes its straight-line trend, and finds the strongest periodic stripe in the stated band of periods: the period in lines, its share of the profile's variance (with its harmonics), and its prominence over the median power of the band. Measure it on RMS amplitude: on signed seismic a stripe of gain averages away.
+
+QI STUDIO'S RULE for calling a stripe a footprint (`isStripe`, src/pages/apps/QIStudio/services/qcRun.js): a share above 0.3, a prominence of 10 or more, and at least five repeats of the period across the slice (cycles = lines in the slice / period).
+
+THE EKENE SLICE: RMS amplitude of the full stack, 1250 to 1350 ms, 128 inlines by 128 crosslines, periods searched 2 to 16 lines. And a DESIGNED TEACHING CASE: the same slice with every sixth crossline multiplied by 1.2 (a stated stripe added by the course, labelled as such):
+
+| slice and axis | period, lines | share | prominence | cycles | a footprint by the rule |
+| --- | --- | --- | --- | --- | --- |
+| Ekene, along the crosslines | 15.058824 | 0.015148 | 27.724874 | 8.500000 | no |
+| Ekene, along the inlines | 13.473684 | 0.014838 | 27.074395 | 9.500000 | no |
+| designed stripe, along the crosslines | 5.953488 | 0.490123 | 467.977933 | 21.500000 | yes |
+| designed stripe, along the inlines | 13.473684 | 0.014803 | 26.664709 | 9.500000 | no |
+
+The Ekene slice carries no footprint: a prominence of tens with a share of a few hundredths is the random variation of a slice. The designed stripe is found at its period with about half the variance, and the inline axis it was not added to does not move.
+
+# SECTION 13: What Rock Physics hands to QI, and measured shear against Greenberg-Castagna (owned by Associate m04 l01 and Associate m04 l02)
+
+WHAT ROCK PHYSICS HANDS TO QI. Elastic logs at the wells (Vp, Vs, density), the fluids at reservoir conditions, the substitution of one fluid for another, and the reflection coefficients they imply. QI takes these to the seismic. The Rock Physics course teaches each method in full; this course states the inputs and reads the outputs.
+
+GREENBERG-CASTAGNA (gcSandShaleVs). Shear from Vp by a published regression per lithology, Vs = a2 Vp^2 + a1 Vp + a0 in km/s; sandstone a1 0.804160, a0 -0.855880; shale a1 0.769690, a0 -0.867350; mixed on Vsh as the average of the arithmetic and harmonic means of the two.
+
+AGAINST THE MEASURED SHEAR, the 103 water-leg net sand samples of Ekene-1:
+
+| depth ft | Vp m/s | measured Vs m/s | Vsh | Greenberg-Castagna Vs m/s | measured / GC |
+| --- | --- | --- | --- | --- | --- |
+| 5118.500000 | 3349.377000 | 1912.147000 | 0.077300 | 1827.409932 | 1.046370 |
+| 5127.000000 | 3280.629000 | 1814.383000 | 0.081000 | 1771.835594 | 1.024013 |
+| 5135.500000 | 3250.403000 | 1784.073000 | 0.077600 | 1748.047504 | 1.020609 |
+| 5144.000000 | 3325.732000 | 1920.581000 | 0.079700 | 1808.147261 | 1.062182 |
+| 5163.000000 | 3099.987000 | 1681.702000 | 0.073600 | 1627.984203 | 1.032997 |
+| 5171.500000 | 3063.255000 | 1666.658000 | 0.062800 | 1599.846507 | 1.041761 |
+
+The mean of measured / Greenberg-Castagna over the 103 samples is 1.036576; over the 65 oil-leg samples, where the oil softens Vp and leaves the shear modulus alone, it is 1.151143. A published regression is somebody else's rock; a measured shear log calibrates the field's own.
+
+# SECTION 14: The local shear trend and its prediction interval (owned by Associate m04 l03)
+
+THE FIT (fitVsRegression). Ordinary least squares of measured Vs (m/s) on Vp in km/s: linear Vs = c0 + c1 Vp, or quadratic with a c2 Vp^2 term. The slope c1 is in m/s of Vs per km/s of Vp. It returns the coefficients, the sample count n, the degrees of freedom (n less the coefficients), the residual standard error s, R squared and the Vp range of the calibration.
+
+THE PREDICTION (predictVs). At a new Vp the predicted Vs carries a prediction interval Vs +/- t s sqrt(1 + leverage), with t Student's quantile at (1 + level) / 2 on the degrees of freedom; sigma is s sqrt(1 + leverage). A Vp outside the calibration range is flagged as extrapolated.
+
+EKENE-1, the 103 water-leg net sand samples, linear:
+
+| quantity | value |
+| --- | --- |
+| c0, m/s | -970.382459 |
+| c1 (the slope), m/s per km/s | 855.280029 |
+| n | 103 |
+| degrees of freedom | 101 |
+| residual standard error s, m/s | 41.009437 |
+| R squared | 0.925483 |
+| lowest Vp, m/s | 2670.381000 |
+| highest Vp, m/s | 3481.638000 |
+
+Predictions at the 0.900000 level:
+
+| Vp m/s | predicted Vs m/s | sigma m/s | low m/s | high m/s | extrapolated |
+| --- | --- | --- | --- | --- | --- |
+| 2900.000000 | 1509.929626 | 41.646413 | 1440.793224 | 1579.066029 | no |
+| 3100.000000 | 1680.985632 | 41.225414 | 1612.548122 | 1749.423143 | no |
+| 3300.000000 | 1852.041638 | 41.367840 | 1783.367688 | 1920.715589 | no |
+| 3700.000000 | 2194.153650 | 43.298759 | 2122.274219 | 2266.033081 | yes |
+
+THE LEVEL IS A STATED CHOICE. At Vp 3100 m/s and the 0.8 level the interval is 1627.805269 to 1734.165996 m/s, narrower than at 0.900000.
+
+THE FORM IS A STATED CHOICE. Quadratic on the same samples: c0 -4335.156360, c1 3017.560894, c2 -346.356417, s 39.004155 m/s, predicted Vs at 3100 m/s 1690.797241.
+
+MORE WELLS. The water-leg net sand of all four pack wells together (465 samples): c0 -1022.068640, c1 872.045751, s 39.612304 m/s; predicted Vs at 3100 m/s 1681.273188, interval 1615.915396 to 1746.630980 m/s.
+
+# SECTION 15: The elastic set (owned by Associate m04 l04 and Associate m01 l04)
+
+THE SET (elasticPoint), from Vp, Vs and density in SI: AI = Vp rho; SI = Vs rho; Vp/Vs; Poisson's ratio (Vp^2 - 2 Vs^2) / (2 (Vp^2 - Vs^2)); K = rho (Vp^2 - 4/3 Vs^2); mu = rho Vs^2; lambda-rho = AI^2 - 2 SI^2 and mu-rho = SI^2 (Goodway, Chen and Downton). The course prints lambda-rho and mu-rho in units of 10^12 kg^2/(m4 s2), which is (GPa)(g/cc).
+
+EKENE-1, the means of each selection:
+
+| layer | samples | Vp m/s | Vs m/s | density kg/m3 | AI kg/(m2 s) | SI kg/(m2 s) | Vp/Vs | Poisson's ratio | lambda-rho | mu-rho |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| cap rock (Ogbia Shale) | 130 | 1964.449431 | 673.669215 | 2391.320769 | 4697628.723902 | 1610959.186341 | 2.916045 | 0.433363 | 16.877337 | 2.595190 |
+| oil leg | 65 | 2865.750738 | 1638.267785 | 2316.676923 | 6639018.603084 | 3795337.170439 | 1.749257 | 0.257270 | 15.267400 | 14.404584 |
+| water leg | 103 | 3149.569660 | 1723.381573 | 2336.452427 | 7358819.677147 | 4026599.058770 | 1.827552 | 0.286320 | 21.725227 | 16.213500 |
+
+The oil leg is softer than the water leg in AI and in Vp/Vs; part of that gap is fluid and part is rock (porosity and shale volume differ between the legs: oil leg mean porosity 0.203626, Vsh 0.178134; water leg 0.197677, 0.117854). Section 17 separates the two by substituting the same rock.
+
+# SECTION 16: The fluids at Ekene conditions (owned by Associate m05 l01)
+
+THE CONVERSIONS the lab makes before calling Batzle-Wang: temperature 180 degF = 82.222222 degC; pressure 3200 psia = 22.063223 MPa (1 MPa = 145.037738 psi); gas-oil ratio 400 scf/stb = 71.243043 L/L; 32 API = a reference density of 0.865443 g/cc (apiToRho0).
+
+| fluid | density kg/m3 | Vp m/s | bulk modulus GPa |
+| --- | --- | --- | --- |
+| brine (brine) | 1005.203569 | 1627.503313 | 2.662550 |
+| live oil (liveOil) | 754.214377 | 1063.400328 | 0.852881 |
+
+THE PORE FLUID at a water saturation Sw is brine and oil mixed by Wood's average (woodMix), the uniform mix:
+
+| Sw | bulk modulus GPa | density kg/m3 |
+| --- | --- | --- |
+| 0.200000 | 0.987056 | 804.412216 |
+| 0.500000 | 1.291926 | 879.708973 |
+| 0.800000 | 1.869288 | 955.005731 |
+| 1.000000 | 2.662550 | 1005.203569 |
+
+At the oil-leg mean Sw 0.574254 the pore fluid's modulus is 1.398867 GPa: the Wood average sits close to the softer phase until the brine fraction is high.
+
+# SECTION 17: Oil-to-brine substitution on a log, and how far impedance and Vp/Vs move (owned by Associate m05 l02 and Associate m05 l03 and Associate m06 l02)
+
+THE METHOD, sample by sample (lab `substituteSample`): the mineral modulus from quartz and clay by Voigt-Reuss-Hill on the sample's Vsh (mixMinerals; quartz K 36.600000 GPa, clay K 20.900000 GPa); the in situ pore fluid from brine and oil by Wood at the sample's Sw; the new fluid brine (Sw 1); then Gassmann through the dry rock (substituteVels) with the sample's PHIT. The shear modulus does not change; the density swaps the pore fluid, rho_new = rho + phi (rho_brine - rho_fluid).
+
+EKENE-1 OIL LEG, 65 net sand samples. Eight of them, before and after:
+
+| depth ft | PHIT | Vsh | Sw | Vp in situ | Vp brine | Vs in situ | Vs brine | density in situ | density brine |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 5082.000000 | 0.220700 | 0.325800 | 0.416600 | 2474.227000 | 2733.411573 | 1358.537000 | 1349.137957 | 2311.300000 | 2343.616460 |
+| 5087.000000 | 0.232000 | 0.209400 | 0.436700 | 2755.603000 | 2966.856405 | 1589.777000 | 1578.439345 | 2275.100000 | 2307.900673 |
+| 5091.000000 | 0.223100 | 0.079900 | 0.456700 | 2864.823000 | 3080.030226 | 1692.957000 | 1681.735085 | 2272.000000 | 2302.422458 |
+| 5095.000000 | 0.203100 | 0.182200 | 0.481400 | 2882.678000 | 3095.863092 | 1712.475000 | 1702.757689 | 2309.600000 | 2336.036104 |
+| 5099.000000 | 0.206700 | 0.313000 | 0.512900 | 2636.063000 | 2852.850224 | 1432.997000 | 1425.276554 | 2326.300000 | 2351.570488 |
+| 5103.000000 | 0.194000 | 0.184200 | 0.554200 | 2832.056000 | 3039.591396 | 1614.792000 | 1607.289638 | 2319.800000 | 2341.506850 |
+| 5110.000000 | 0.184100 | 0.199700 | 0.669800 | 2918.031000 | 3088.285476 | 1666.913000 | 1661.542925 | 2356.600000 | 2371.857588 |
+| 5114.000000 | 0.184200 | 0.072400 | 0.786200 | 3129.781000 | 3248.090773 | 1792.035000 | 1788.275833 | 2348.600000 | 2358.484446 |
+
+| depth ft | mineral K GPa | in situ fluid K GPa | AI in situ | AI brine | Vp/Vs in situ | Vp/Vs brine |
+| --- | --- | --- | --- | --- | --- | --- |
+| 5082.000000 | 30.444339 | 1.189766 | 5718680.865100 | 6406068.354736 | 1.821244 | 2.026043 |
+| 5087.000000 | 32.468871 | 1.212881 | 6269272.385300 | 6847209.894684 | 1.733327 | 1.879614 |
+| 5091.000000 | 34.936601 | 1.236790 | 6508877.856000 | 7091530.763147 | 1.692201 | 1.831460 |
+| 5095.000000 | 32.966586 | 1.267651 | 6657833.108800 | 7232047.957293 | 1.683340 | 1.818147 |
+| 5099.000000 | 30.659271 | 1.309315 | 6132273.356900 | 6708678.392395 | 1.839545 | 2.001612 |
+| 5103.000000 | 32.929642 | 1.368279 | 6569803.508800 | 7117224.076160 | 1.753821 | 1.891129 |
+| 5110.000000 | 32.645206 | 1.565627 | 6876631.854600 | 7324973.338620 | 1.750560 | 1.858685 |
+| 5114.000000 | 35.087723 | 1.831634 | 7350603.656600 | 7660571.567728 | 1.746495 | 1.816325 |
+
+THE MEANS over the 65 samples (each the mean of the sample values):
+
+| quantity | in situ (oil) | substituted to brine | change, percent |
+| --- | --- | --- | --- |
+| AI kg/(m2 s) | 6641244.924742 | 7136467.682134 | 7.456776 |
+| Vp/Vs | 1.752075 | 1.877221 | 7.142745 |
+
+AGAINST THE WATER LEG. The measured water leg's mean-of-layer AI is 7358819.677147 kg/(m2 s) and its Vp/Vs 1.827552. The substituted oil leg and the water leg are different rock, so the substituted figures are the fluid effect alone and the water-leg figures add the difference in porosity and clay.
+
+# SECTION 18: The wet trend on a crossplot (owned by Associate m05 l04)
+
+THE METHOD, as QI Studio and Rock Physics Studio draw it (lab `wetTrend`). Every sample of the window with oil in it (Sw below 1) is taken to brine by the substitution of section 17; the logs are blocked into blocks of the stated length (blockLogs, a block's mean Vp, Vs and density); every boundary between two blocks gives an intercept A and a gradient B by Shuey (interfacePoints); and the fluid line through the origin is fitted to the points by total least squares, the principal axis of the points about the origin (fitFluidLine), so neither A nor B is treated as free of error.
+
+EKENE-1, the whole pack window, block length 16 ft (32 samples of 0.500000 ft): 800 samples, 79 of them substituted, 25 blocks, 24 interfaces. The fitted line: slope B / A -2.257963, angle -66.112544 degrees, root mean square distance of the points from it 0.006806.
+
+The first eight points:
+
+| depth of the lower block ft | A | B |
+| --- | --- | --- |
+| 4947.500000 | -0.002222 | -0.000052 |
+| 4963.500000 | -0.001288 | 0.000016 |
+| 4979.500000 | -0.001060 | -0.000212 |
+| 4995.500000 | 0.000405 | -0.005313 |
+| 5011.500000 | -0.001565 | 0.005908 |
+| 5027.500000 | -0.001460 | -0.000371 |
+| 5043.500000 | 0.003238 | 0.002240 |
+| 5059.500000 | 0.000627 | -0.001871 |
+
+THE PUBLISHED LINE FOR COMPARISON (backgroundSlope, Castagna, Swan and Foster): for a constant Vs/Vp and a Gardner density exponent of 0.25, B / A = (1 - 4 (Vs/Vp)^2 (g + 2)) / (1 + g). At the blocks' mean Vs/Vp of 0.408987 it is -0.404345.
+
+THE BLOCK LENGTH IS A STATED CHOICE:
+
+| block length ft | samples a block | interfaces | fitted slope | rms distance |
+| --- | --- | --- | --- | --- |
+| 8 | 16 | 49 | -2.565814 | 0.006424 |
+| 24 | 48 | 16 | -2.254272 | 0.005925 |
+
+# SECTION 19: Distance from the wet trend (owned by Associate m05 l05 and Associate m06 l02)
+
+THE DISTANCE (distanceFromLine). The signed perpendicular distance of a point (A, B) from the line B = m A is (B - m A) / sqrt(1 + m^2). Negative is below and to the left of a falling line, the side a hydrocarbon sand moves to.
+
+THE TOP OF THE EKENE SAND AT EKENE-1, as an interface between the mean cap rock and the mean oil leg (in situ), and between the mean cap rock and the oil leg's substituted means (brine: Vp 3050.844953 m/s, Vs 1630.554630 m/s, density 2339.039854 kg/m3):
+
+| interface | A | B | distance from the fitted line | distance from the published line |
+| --- | --- | --- | --- | --- |
+| cap rock over the oil leg (in situ) | 0.170742 | -0.563558 | -0.072091 | -0.458460 |
+| cap rock over the oil leg taken to brine | 0.205564 | -0.475316 | -0.004519 | -0.363599 |
+
+Against the fitted line the in situ interface lies 0.067572 further to the hydrocarbon (negative) side than the same rock with brine, so the oil moves the point off the trend. Which line the distance is measured from is a stated choice, and the two lines give different distances.
+
+# SECTION 20: Modelled AVO at the zone top (owned by Associate m06 l01 and Associate m06 l02)
+
+THE MODEL. Two half-spaces, the mean cap rock over the mean oil leg (in situ) and over the oil leg taken to brine (section 19). The exact plane-wave reflection coefficient (zoeppritzRpp) at each angle; Shuey's intercept A, gradient B and curvature C (shuey); the class from A and B (avoClass: A above 0.02 is class I, A within 0.02 of zero class II, otherwise class III with B at or below zero and class IV with B above it); and the mean exact coefficient over each angle range at every whole degree, ends included, the way the kit built its angle stacks.
+
+| angle degrees | exact R in situ | exact R brine |
+| --- | --- | --- |
+| 0 | 0.171249 | 0.206058 |
+| 5 | 0.167750 | 0.202983 |
+| 10 | 0.157426 | 0.194011 |
+| 15 | 0.140846 | 0.179978 |
+| 20 | 0.119130 | 0.162628 |
+| 25 | 0.094393 | 0.145543 |
+| 30 | 0.070998 | 0.137212 |
+| 35 | 0.060228 | 0.166006 |
+
+| quantity | in situ (oil) | brine |
+| --- | --- | --- |
+| A | 0.170742 | 0.205564 |
+| B | -0.563558 | -0.475316 |
+| C | 0.186597 | 0.216617 |
+| class | I | I |
+| near mean, 5 to 15 degrees | 0.156172 | 0.192995 |
+| mid mean, 15 to 25 degrees | 0.118516 | 0.162661 |
+| far mean, 25 to 35 degrees | 0.073416 | 0.144237 |
+
+The oil dims the top of the Ekene Sand at every angle: the in situ coefficient is below the brine one throughout, by 0.034809 at normal incidence and 0.066214 at 30 degrees. Both stay in the same class, so the class alone does not separate oil from brine here.
+
+# SECTION 21: Writing the verdict, and the Associate capstone (owned by Associate m06 l03 and Associate m06 l04)
+
+THE ENGINES RETURN NUMBERS; THE VERDICT IS WRITTEN. A feasibility verdict answers the two questions with the numbers above and says what each rests on.
+
+| question | the Ekene figure | section |
+| --- | --- | --- |
+| is the band wide enough at the target | -6 dB 14.425434 to 34.787627 Hz, peak 31.374887 Hz (800 to 1600 ms) | 10 |
+| is the signal clean enough | median 361.155122 (25.576938 dB) | 11 |
+| is there a footprint | share 0.015148 along the crosslines, no stripe by the rule | 12 |
+| how far does the fluid move AI | 7.456776 percent, oil to brine | 17 |
+| how far does it move Vp/Vs | 7.142745 percent | 17 |
+| does the top sit off the wet trend | -0.072091 in situ against -0.004519 with brine | 19 |
+| what the seismic should show | top Ekene class I in situ and with brine; normal-incidence R 0.171249 against 0.206058 | 20 |
+
+WHAT A VERDICT STATES ALONGSIDE ITS NUMBERS: the selections (net sand, legs, cap rock), the fluids and conditions, the taper, the windows, the block length and the line the distance is read from, because each one moves a figure.
+
+THE ASSOCIATE CAPSTONE runs the same steps on a held-out synthetic case: a trace patch and one well with its own layers, fluids and conditions, supplied as a case file the learner pastes into the feasibility explorer. It grades six figures, each read from the panel: the -6 dB low edge and the centroid of the case traces' mean spectrum, the slope of the local shear trend on the case's water-leg net sand, the AI and the Vp/Vs of the stated sample after substitution to brine, and the distance of the case's top interface from its own fitted wet trend. Every input those figures depend on is stated in the case file.
+
+# SECTION 22: What the Professional tier adds (owned by Professional m01 l01)
+
+The Associate tier asked whether the seismic can see the fluid, from logs and one modelled interface. The Professional tier takes the question onto the seismic itself: the well is tied to the trace, one wavelet is chosen for the field, the gathers are checked, every offset is given an angle from the velocity, the angle stacks are fitted for intercept and gradient, and the modelled and seismic AVO are compared at every well.
+
+| engine file | functions the tier calls | what for |
+| --- | --- | --- |
+| engines/seismolord/synthetics.js | `computeImpedance`, `resampleToDt`, `reflectivity`, `convolveSame`, `extractStatisticalWavelet`, `suggestBulkShift` | the synthetic, the statistical wavelet and the bulk shift |
+| engines/seismolord/tieWarp.js | `estimatePhaseRotation`, `rotateConstantPhase`, `makeTieWarp` | phase and anchors |
+| engines/qi/wavelets.js | `compareWavelets`, `resampleWavelet`, `normaliseWavelet` | one wavelet for the field |
+| engines/qi/prestack.js | `binOffsets`, `dixInterval`, `velocityOnGrid`, `waldenAngle`, `rayTraceAngle`, `angleGather`, `partialStack`, `usableAngle` | gathers, angles and angle stacks |
+| engines/qi/prestackQc.js | `nmoStretch`, `stretchMuteOffset`, `residualMoveout`, `foldSummary` | gather QC |
+| engines/qi/avo.js | `fitShuey`, `contrastsFromAB`, `backgroundTrend`, `offTrend`, `chiProjection`, `avoClass` | AVO on the seismic |
+
+THE STATED BOOKKEEPING the lab does around the engines, and nothing else: the checkshot time-depth line (two-way time = 2 x the one-way time, linear between checkshot levels); the trace clock (sample i at the first sample's time plus i times the sample interval); and an event's time on a trace, the sample of the largest amplitude within 8 ms of a stated time.
+
+UNITS. Depth in feet; offsets in metres, as the kit's gathers record them; times in milliseconds two-way; velocities in m/s. Seismic amplitudes are in the kit's own trace units, which carry no physical scale: a reflection coefficient and a seismic amplitude are tied by a scale (section 41).
+
+# SECTION 23: The synthetic in one lesson (owned by Professional m01 l02)
+
+THE SEISMIC INTERPRETATION COURSE TEACHES THE SYNTHETIC IN FULL. The recap: impedance from the sonic and the density, placed in two-way time by the checkshots, resampled to the seismic sample interval, turned into reflection coefficients rc = (Z2 - Z1) / (Z2 + Z1) between neighbouring samples (SEG normal polarity: an increase in impedance is positive), and convolved with a wavelet.
+
+THE ENGINE'S CONVENTIONS (synthetics.js): impedance in (m/s)(g/cc); a sample is a gap when it is not finite or is a seismic or LAS null; the convolution zero-fills gaps and a convolved value whose own coefficient is a gap is not used.
+
+EKENE-1 on its full-stack trace clock (4.000000 ms, first sample 900 ms), with the statistical wavelet of section 24: the pack's logs give 26 live synthetic samples (the logs span 4931.500000 to 5331.000000 ft). The largest reflection coefficient in that span is -0.190340, at 1312.000000 ms. The normalised correlation of the synthetic with the trace at zero shift is 0.983438.
+
+# SECTION 24: Statistical and well wavelets (owned by Professional m01 l03 and Professional m02 l03)
+
+TWO WAVELETS COME FROM THE SEISMIC AT A WELL.
+- STATISTICAL (extractStatisticalWavelet): the amplitude spectrum of the traces' autocorrelation, taken to zero phase. Its spectrum is the source wavelet's when the reflectivity is white; its phase is ASSUMED zero. The engine reads the stated window length (default 120 ms) and smoothing (default 5 Hz), Hann-tapers the lags and normalises the peak to 1.
+- FROM THE WELL: the least-squares (Wiener) wavelet that best convolves the well's reflectivity into the trace at the well, so its phase is MEASURED. This one is Seismolord app code (src/pages/apps/Seismolord/lib/wellWavelet.js, petrolord-suite 5df9d9410), and it needs a log long enough for the wavelet it is asked for.
+
+THE STATISTICAL WAVELET AT EACH WELL, full stack, window 1100 to 1500 ms, every 4.000000 ms:
+
+| well | samples | peak Hz | centroid Hz | -6 dB low Hz | -6 dB high Hz |
+| --- | --- | --- | --- | --- | --- |
+| Ekene-1 | 31 | 24.488746 | 25.084884 | 8.950036 | 41.469972 |
+| Ekene-2 | 31 | 23.394907 | 23.431642 | 7.301503 | 39.582002 |
+| Ekene-3 | 31 | 24.962688 | 25.605164 | 9.159836 | 42.236734 |
+| Ekene-4 | 31 | 26.530951 | 26.581599 | 9.647548 | 43.780487 |
+
+For comparison, a 25 Hz Ricker on the same clock (31 samples): peak 25.039790 Hz, centroid 26.596139 Hz.
+
+THE WELL WAVELET ON THE PACK. Asked for its default wavelet at Ekene-1 from the pack's logs, Seismolord refuses: "The well reflectivity is flat over the seismic at the well, so there is nothing to extract a wavelet from." The extraction keeps only trace samples whose whole wavelet window (2 x 15 + 1 = 31 samples at its default half length) sits on live reflectivity, and the pack's logs give 26 live samples (section 23), so no sample qualifies. The course's ties therefore use the statistical wavelet.
+
+# SECTION 25: Phase and correlation (owned by Professional m01 l04)
+
+THE ROTATION (rotateConstantPhase): s cos(phi) + H(s) sin(phi), with H the Hilbert transform. THE BEST PHASE (estimatePhaseRotation): phi = atan2(<H(s), r>, <s, r>) over the samples both traces carry, reported with the actual correlation of the rotated synthetic with the trace and the correlation before rotation. The lab runs it on the synthetic's live span, because the Hilbert transform cannot cross a gap.
+
+EKENE-1, the synthetic of section 23 against the full-stack trace: best phase -6.135261 degrees, correlation before rotation 0.983438, after 0.989111.
+
+A DESIGNED TEACHING CASE: the same synthetic rotated by a stated phase first, then matched again:
+
+| phase added, degrees | best phase found, degrees | correlation before | correlation after |
+| --- | --- | --- | --- |
+| 30 | -36.092689 | 0.799189 | 0.989219 |
+| 60 | -66.081556 | 0.400777 | 0.988816 |
+| 90 | -96.113046 | -0.105222 | 0.988309 |
+
+# SECTION 26: Bulk shift and anchors (owned by Professional m02 l01)
+
+THE BULK SHIFT (suggestBulkShift): the normalised cross-correlation of the synthetic with the trace at every whole-sample lag up to the stated search (20 ms), on the samples both carry; the lag of the largest correlation. POSITIVE means the seismic event is later, so the synthetic moves down.
+
+EVERY PACK WELL, statistical wavelet of its own trace:
+
+| well | bulk shift ms | correlation |
+| --- | --- | --- |
+| Ekene-1 | 0.000000 | 0.983438 |
+| Ekene-2 | -4.000000 | 0.965477 |
+| Ekene-3 | 0.000000 | 0.977607 |
+| Ekene-4 | -4.000000 | 0.962720 |
+
+A DESIGNED TEACHING CASE: Ekene-1's checkshot times moved by a stated amount before the synthetic is built; the bulk shift finds the move back:
+
+| checkshot times moved by, ms | bulk shift found, ms | correlation |
+| --- | --- | --- |
+| -8.000000 | 8.000000 | 0.983438 |
+| 8.000000 | -8.000000 | 0.983438 |
+
+ANCHORS (makeTieWarp). Pairs of (synthetic time, seismic time); between two anchors the mapping is linear, beyond the first and the last it continues with slope one (a constant shift, the single-anchor case is a bulk shift). A DESIGNED pair, (1250, 1252) and (1350, 1356) ms:
+
+| synthetic time ms | seismic time ms |
+| --- | --- |
+| 1200.000000 | 1202.000000 |
+| 1250.000000 | 1252.000000 |
+| 1300.000000 | 1304.000000 |
+| 1350.000000 | 1356.000000 |
+| 1400.000000 | 1406.000000 |
+
+Both times must increase from one anchor to the next; makeTieWarp refuses a pair that would fold time (its message carries a punctuation mark the course does not print, so the course names it by what it refuses).
+
+# SECTION 27: The time-depth record every app reads (owned by Professional m02 l02)
+
+THE RECORD. A tie is committed as a time-depth record: the checkshots (depth, one-way time), and, once a tie is accepted, derived rows from its anchors through the same time-depth line (tieWarp warpToCheckshots), kept as a new set beside the imported checkshots, which stay as they were imported. QI Studio reads the tie each well has in Seismolord, with its QC record (src/pages/apps/QIStudio/services/ties.js).
+
+EKENE-1 CHECKSHOTS round the Ekene Sand:
+
+| depth ft | one-way time ms | two-way time ms |
+| --- | --- | --- |
+| 4687.500000 | 585.055000 | 1170.110000 |
+| 5079.002625 | 644.438000 | 1288.876000 |
+| 5136.515748 | 650.478000 | 1300.956000 |
+| 5183.989501 | 655.543000 | 1311.086000 |
+| 5585.498688 | 715.018000 | 1430.036000 |
+| 5872.998688 | 758.273000 | 1516.546000 |
+
+THE TOP OF THE EKENE SAND IN TIME at every pack well, linear between checkshot levels:
+
+| well | top ft | two-way time ms |
+| --- | --- | --- |
+| Ekene-1 | 5078.740157 | 1288.796378 |
+| Ekene-2 | 5134.514436 | 1305.746335 |
+| Ekene-3 | 5055.774278 | 1282.159191 |
+| Ekene-4 | 5216.535433 | 1329.290304 |
+
+With a bulk shift of zero (section 26) the committed time is the checkshot time; a non-zero shift moves every time below by the same amount.
+
+# SECTION 28: Comparing wavelets across wells (owned by Professional m02 l03)
+
+THE COMPARISON (compareWavelets): the first wavelet is the reference; every other is aligned to it by the lag (up to 5 samples) of largest correlation, all are scaled to unit energy, and the zero-lag correlation of every pair is the similarity.
+
+THE FOUR STATISTICAL WAVELETS of section 24:
+
+| well | lag to the reference, samples | Ekene-1 | Ekene-2 | Ekene-3 | Ekene-4 |
+| --- | --- | --- | --- | --- | --- |
+| Ekene-1 | 0 | 1.000000 | 0.996488 | 0.999524 | 0.996130 |
+| Ekene-2 | 0 | 0.996488 | 1.000000 | 0.994059 | 0.986771 |
+| Ekene-3 | 0 | 0.999524 | 0.994059 | 1.000000 | 0.998211 |
+| Ekene-4 | 0 | 0.996130 | 0.986771 | 0.998211 | 1.000000 |
+
+# SECTION 29: Aligning and averaging into one field wavelet (owned by Professional m02 l04)
+
+THE FIELD WAVELET (compareWavelets): the mean of the aligned, unit-energy wavelets, scaled to unit energy again. Each well's misfit is its correlation with that average.
+
+| well | correlation with the average |
+| --- | --- |
+| Ekene-1 | 0.999838 |
+| Ekene-2 | 0.996125 |
+| Ekene-3 | 0.999751 |
+| Ekene-4 | 0.997075 |
+
+The average wavelet has 31 samples; its peak is 24.769590 Hz and its centroid 25.155328 Hz.
+
+DIFFERENT SAMPLE INTERVALS are first brought to one (resampleWavelet, linear about the centre sample). The average resampled from 4 ms to 2 ms has 61 samples.
+
+# SECTION 30: When one well disagrees (owned by Professional m02 l05)
+
+QI STUDIO'S RULES for the issue register (src/pages/apps/QIStudio/services/ties.js, petrolord-suite 5df9d9410): a tie whose mean windowed correlation is below 0.5 is poor and one below 0.7 fair; wavelet phases across wells that span more than 30 degrees are flagged; a well whose wavelet correlates with the average below 0.8 is unlike the others, and the remedy is to leave it out of the field wavelet or re-extract it.
+
+A DESIGNED TEACHING CASE: Ekene-3's wavelet rotated by a stated phase before the comparison, the others as they are:
+
+| well | rotated by 90 degrees: correlation with the average | rotated by 180 degrees (reversed polarity): correlation with the average |
+| --- | --- | --- |
+| Ekene-1 | 0.990887 | 0.971738 |
+| Ekene-2 | 0.984498 | 0.960667 |
+| Ekene-3 | 0.911984 | 0.693702 |
+| Ekene-4 | 0.989492 | 0.972763 |
+
+At 90 degrees Ekene-3 stays above the 0.8 rule; reversed, it falls below it. In both, the average it pulled lowers the other three wells' figures from section 29 as well.
+
+# SECTION 31: Offset gathers and bin width (owned by Professional m03 l01)
+
+THE PACK'S GATHERS: 12 NMO-corrected CDP gathers next to Ekene-1 (inlines 1026 to 1028), 13 offsets from 100 to 2500 m, 4.000000 ms, 1000 to 1700 ms, muted to exact zeros beyond 40 degrees. Gather 5 is at inline 1027, crossline 2051, the trace of Ekene-1.
+
+OFFSET BINS (binOffsets): bin k holds offsets from k w to (k + 1) w, centred at (k + 0.5) w. At the stated width of 200 m the gather fills 13 bins with fold 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1; foldSummary: 13 traces, 13 live bins, far offset 2500.000000 m (a bin is reported at its centre).
+
+THE TOP OF THE EKENE SAND ON GATHER 5, picked on the nearest offset about 1289 ms: 1292.000000 ms.
+
+# SECTION 32: NMO stretch and the stretch mute (owned by Professional m03 l02)
+
+STRETCH (nmoStretch, Yilmaz 2001, section 3.2): an event at offset x and zero-offset time t0 is stretched by t / t0 - 1, t = sqrt(t0^2 + x^2 / v^2), with v the NMO velocity. THE STRETCH MUTE (stretchMuteOffset): the offset at which the stretch reaches a stated limit, v t0 sqrt((1 + limit)^2 - 1).
+
+AT THE TOP ON GATHER 5, t0 1292.000000 ms, NMO velocity the table's RMS velocity there, 2388.940541 m/s:
+
+| offset m | stretch |
+| --- | --- |
+| 100 | 0.000525 |
+| 500 | 0.013036 |
+| 900 | 0.041646 |
+| 1300 | 0.085080 |
+| 1700 | 0.141649 |
+| 2100 | 0.209511 |
+| 2500 | 0.286880 |
+
+Stretch mute offsets at that time: 2047.359898 m for a limit of 0.2, 2563.848741 m for 0.300000.
+
+# SECTION 33: Residual moveout (owned by Professional m03 l03)
+
+THE MEASURE (residualMoveout): on a gather that should be flat, each offset's shift of the event against a pilot (the stated nearest traces stacked, default 3), by the lag of largest absolute correlation in a window (half window 40 ms, largest shift 24 ms); offsets whose correlation is at least 0.7 in size enter a fit dt = a x^2 weighted by the squared correlation, and the residual at the far offset, a x_far^2, is the number a QC map shows. When the fitted lags scatter about the parabola by more than one sample the waveform has changed with offset, and the engine measures instead by AB semblance (method 'ab-semblance').
+
+GATHER 5 about the top: method ab-semblance, 13 offsets used, 13 fitted, far offset 2500.000000 m, residual at the far offset 2.795940 ms. The last three offsets' lags are -24.000000, -24.000000, -24.000000 ms, at the search limit, with correlations -0.776230, -0.728225, -0.786646; with all 13 offsets in the fit the lags scatter about the parabola by more than a sample, which is the condition on which the engine measures by AB semblance.
+
+EVERY PACK GATHER:
+
+| gather | inline | crossline | top picked ms | method | offsets fitted | far-offset residual ms |
+| --- | --- | --- | --- | --- | --- | --- |
+| 0 | 1026 | 2050 | 1292.000000 | ab-semblance | 13 | 2.939718 |
+| 1 | 1026 | 2051 | 1292.000000 | ab-semblance | 13 | 2.819016 |
+| 2 | 1026 | 2052 | 1292.000000 | ab-semblance | 13 | 2.894457 |
+| 3 | 1026 | 2053 | 1292.000000 | ab-semblance | 13 | 3.002917 |
+| 4 | 1027 | 2050 | 1292.000000 | ab-semblance | 13 | 2.844287 |
+| 5 | 1027 | 2051 | 1292.000000 | ab-semblance | 13 | 2.795940 |
+| 6 | 1027 | 2052 | 1292.000000 | ab-semblance | 13 | 2.950494 |
+| 7 | 1027 | 2053 | 1292.000000 | ab-semblance | 13 | 2.949581 |
+| 8 | 1028 | 2050 | 1292.000000 | ab-semblance | 13 | 2.824094 |
+| 9 | 1028 | 2051 | 1292.000000 | ab-semblance | 13 | 2.862656 |
+| 10 | 1028 | 2052 | 1292.000000 | ab-semblance | 13 | 2.953658 |
+| 11 | 1028 | 2053 | 1292.000000 | ab-semblance | 13 | 2.931752 |
+
+# SECTION 34: Fold and what it limits (owned by Professional m03 l04 and Professional m04 l04)
+
+FOLD BY ANGLE. Mapped to angle bins (section 37), each bin's fold at a sample is the number of offsets whose angle falls in it. On gather 5 at the top (1292.000000 ms), bins 5 to 15, 15 to 25, 25 to 35 degrees: fold 2, 3, 2.
+
+THE USABLE ANGLE (usableAngle): counting from the nearest bin, the far edge of the last bin with at least the stated minimum fold; none where even the first bin has too few. At the top of gather 5:
+
+| minimum fold | usable angle, degrees |
+| --- | --- |
+| 1 | 35.000000 |
+| 2 | 35.000000 |
+| 3 | none |
+| 4 | none |
+| 5 | none |
+
+# SECTION 35: RMS to interval velocity (owned by Professional m04 l01)
+
+DIX (dixInterval): between two rows of an RMS velocity table, Vint^2 = (Vrms2^2 t2 - Vrms1^2 t1) / (t2 - t1), with t the two-way time; the first row's interval velocity is its RMS velocity. A pair of rows that gives a negative numerator is refused, naming the time.
+
+THE PACK'S RMS VELOCITY TABLE (the kit's published table for the gathers) and its Dix interval velocities:
+
+| two-way time ms | RMS velocity m/s | interval velocity m/s |
+| --- | --- | --- |
+| 46.700000 | 1500.000000 | 1500.000000 |
+| 330.600000 | 1974.900000 | 2042.470033 |
+| 925.500000 | 2458.300000 | 2689.639308 |
+| 1040.500000 | 2455.800000 | 2435.587010 |
+| 1288.800000 | 2387.600000 | 2077.601943 |
+| 1311.000000 | 2396.900000 | 2885.878392 |
+| 1516.500000 | 2352.200000 | 2044.152876 |
+| 1571.700000 | 2340.500000 | 1992.374462 |
+| 1624.800000 | 2346.700000 | 2523.323799 |
+| 1782.300000 | 2328.600000 | 2132.930307 |
+
+ON A TRACE (velocityOnGrid): the RMS velocity is linear in time between rows and held flat outside the table; the interval velocity is the Dix velocity of the row segment the sample falls in. At 1292.000000 ms: RMS 2388.940541 m/s, interval 2885.878392 m/s.
+
+A designed table whose RMS velocity falls too fast is refused: "The RMS velocities give no real interval velocity at 1.1 s."
+
+# SECTION 36: Walden's straight-ray angle (owned by Professional m04 l02)
+
+THE ANGLE (waldenAngle, Walden 1991, Geophysical Prospecting 39): sin(theta) = (Vint / Vrms) x / sqrt(x^2 + (Vrms t0)^2), with Vrms and Vint at the zero-offset time t0 and x the offset; past a sine of one it returns 90 degrees.
+
+A DESIGNED FLAT-LAYER TEACHING EARTH, four layers (600 m at 1800 m/s; 600 m at 2200 m/s; 500 m at 2600 m/s; 400 m at 3000 m/s), its RMS velocity and time at each layer base by layeredRms. At the base of the third layer (t0 1596.736597 ms, Vrms 2152.777869 m/s, Vint 2600 m/s), Walden's angle against an exact ray trace through the layers (rayTraceAngle, Snell's law with the ray parameter solved for the offset):
+
+| offset m | Walden degrees | ray trace degrees | Walden less ray trace |
+| --- | --- | --- | --- |
+| 500 | 10.011520 | 10.002038 | 0.009482 |
+| 1000 | 19.716435 | 19.640730 | 0.075705 |
+| 1500 | 28.884086 | 28.628580 | 0.255506 |
+| 2000 | 37.400033 | 36.790963 | 0.609071 |
+| 2500 | 45.265069 | 44.057814 | 1.207256 |
+| 3000 | 52.574313 | 50.430992 | 2.143321 |
+
+ON THE EKENE TABLE at the top of gather 5 (1292.000000 ms):
+
+| offset m | Walden degrees |
+| --- | --- |
+| 500 | 11.138104 |
+| 1000 | 21.859471 |
+| 1500 | 31.872141 |
+| 2000 | 41.065011 |
+| 2500 | 49.493998 |
+
+# SECTION 37: Angle gathers and ranges (owned by Professional m04 l03)
+
+THE ANGLE GATHER (angleGather): every live sample of every offset goes to the bin of its Walden angle at that sample's time (the table on the trace clock, section 35); a bin is the mean of what falls in it, and empty where nothing does. A sample that is not finite or is a seismic null is skipped; the mute's exact zeros are live samples, so the mute angle and the bin edges must be read together.
+
+GATHER 5 AT THE TOP (1292.000000 ms), bins 5, 15, 25, 35 degrees:
+
+| bin, degrees | fold | mean amplitude |
+| --- | --- | --- |
+| 5 to 15 | 2 | 483.072830 |
+| 15 to 25 | 3 | 410.433207 |
+| 25 to 35 | 2 | 320.449005 |
+
+# SECTION 38: Partial stacks and the usable angle (owned by Professional m04 l04)
+
+THE PARTIAL STACK (partialStack): over a range of angle bins, the fold-weighted mean of the bins at each sample, empty where no bin has data.
+
+GATHER 5 AT 1292.000000 ms against the kit's angle stack traces at Ekene-1 at the same time (the kit built its near, mid and far stacks over 5 to 15, 15 to 25 and 25 to 35 degrees from the same rock):
+
+| stack | from gather 5 | the kit's stack trace at Ekene-1 |
+| --- | --- | --- |
+| near | 483.072830 | 456.803711 |
+| mid | 410.433207 | 357.560150 |
+| far | 320.449005 | 220.203720 |
+
+The kit's seismic README states that stacking its gathers over 5 to 15 degrees with the published velocity gives the near stack back, up to the noise. The table shows how each range compares at this one sample.
+
+THE USABLE ANGLE at that sample, at the stated minimum fold of 2, is 35.000000 degrees (section 34).
+
+# SECTION 39: The Shuey fit from near, mid and far, and intercept and gradient (owned by Professional m05 l01 and Professional m05 l02)
+
+THE FIT (fitShuey): R(theta) = A + B sin^2(theta), or with C (tan^2 - sin^2) as a third term, fitted per sample by least squares over the angles that carry a finite amplitude. A three-term fit on three angles is exactly determined.
+
+GATHER 5 AT THE TOP, the three bins of section 37 at their mean angles 10, 20, 30 degrees:
+
+| fit | A | B | C | angles used |
+| --- | --- | --- | --- | --- |
+| two terms | 501.873676 | -734.431814 | 0.000000 | 3 |
+| three terms | 510.227684 | -915.097371 | 467.947963 | 3 |
+| two terms, 9 bins of 5 degrees at their centres | 519.312395 | -927.296460 | 0.000000 | 9 |
+
+A and B here are in trace amplitude units; section 41 ties them to the modelled reflection coefficients. INTERCEPT AND GRADIENT VOLUMES are the same fit run at every sample of every trace of the angle stacks; QI Studio runs it on the seismic worker over the survey.
+
+# SECTION 40: The background trend, the off-trend distance, the fluid factor, chi, and conditioning before AVO (owned by Professional m05 l03 and Professional m05 l04 and Professional m05 l05)
+
+THE BACKGROUND TREND (backgroundTrend, Castagna and Swan 1997): the line B = m A through the origin, by orthogonal regression over (A, B) pairs. THE OFF-TREND DISTANCE (offTrend): (B - m A) / sqrt(1 + m^2), negative towards softer, gas-like responses below the line.
+
+GATHER 5: the two-term fit at every sample of the gather window where all three bins carry data gives 176 (A, B) pairs; their trend slope m is -4.020851. The top's point (section 39) sits 309.781098 from that line, in trace amplitude units.
+
+THE FLUID FACTOR (contrastsFromAB, Smith and Gidlow 1987): from A and B, a stated Vs/Vp and Gardner's density (drho/rho = dVp/Vp / 4), the relative contrasts and dVp/Vp - 1.16 (Vs/Vp) dVs/Vs, near zero along the mudrock line. It needs A and B as reflection coefficients; the top's two-term A and B divided by the one scale of section 41 (1882.216944) at a stated Vs/Vp of 0.500000: dVp/Vp 0.426623, dVs/Vs 0.550179, drho/rho 0.106656, fluid factor 0.107520.
+
+THE CHI PROJECTION (chiProjection, Whitcombe and others 2002): A cos(chi) + B sin(chi). At the stated chi of 30 degrees the top projects to 67.419446; at chi = atan(m) = -76.033690 degrees, the angle along the background trend, it projects to 833.848276.
+
+CONDITIONING BEFORE AVO. QI Studio conditions angle stacks before the fit: trim statics between the stacks, matching the stacks to each other in shift, phase and scale, and spectral balancing (engines/qi/conditioning.js in the engines; the course vendors none of it and grades none of it). Each step changes the amplitudes the fit reads, so a study records which it ran.
+
+# SECTION 41: AVO at the wells, and the Professional capstone (owned by Professional m06)
+
+THE COMPARISON (QI Studio's `compareAtWells`, src/pages/apps/QIStudio/services/avoWells.js, petrolord-suite 5df9d9410, app code): at every well, the intercept and gradient modelled from the logs against those the seismic shows. One least-squares scale ties the seismic amplitudes to reflectivity over every well, A and B together: scale = sum(observed x modelled) / sum(modelled^2). Each well's seismic A and B are divided by the scale; its residual is the distance between the scaled point and the modelled one, and the AVO classes (engines qi/avo avoClass, band 0.02) of the two are compared.
+
+THE INPUTS. MODELLED: the cap rock over the oil leg at each well (Associate section 19), or over its net sand where the well has no oil leg. SEISMIC: the top picked on the near stack trace within 8 ms of its checkshot time, the near, mid and far stack traces read at that sample and fitted with two Shuey terms at 10, 20, 30 degrees.
+
+| well | modelled from | checkshot top ms | picked ms | modelled A | modelled B | seismic A | seismic B |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Ekene-1 | oil leg | 1288.796378 | 1292.000000 | 0.170742 | -0.563558 | 486.838592 | -1072.562182 |
+| Ekene-2 | net sand | 1305.746335 | 1304.000000 | 0.210627 | -0.501240 | 499.174430 | -772.839743 |
+| Ekene-3 | oil leg | 1282.159191 | 1284.000000 | 0.194681 | -0.641524 | 470.308887 | -1249.098330 |
+| Ekene-4 | net sand | 1329.290304 | 1328.000000 | 0.216991 | -0.520090 | 527.903525 | -894.546352 |
+
+ONE SCALE over the 4 wells: 1882.216944 trace units per unit reflection coefficient.
+
+| well | scaled seismic A | scaled seismic B | residual | modelled class | seismic class | agree |
+| --- | --- | --- | --- | --- | --- | --- |
+| Ekene-1 | 0.258652 | -0.569840 | 0.088133 | I | I | yes |
+| Ekene-2 | 0.265206 | -0.410601 | 0.105803 | I | I | yes |
+| Ekene-3 | 0.249870 | -0.663631 | 0.059452 | I | I | yes |
+| Ekene-4 | 0.280469 | -0.475262 | 0.077711 | I | I | yes |
+
+4 of 4 wells agree in class. QI Studio raises an issue for a class that differs and a high one for a negative scale (a polarity or wavelet problem).
+
+THE PROFESSIONAL CAPSTONE runs these steps on a held-out synthetic case: one NMO-corrected CDP gather with its RMS velocity table, and modelled and seismic intercepts and gradients at four wells, supplied as a case file the learner pastes into the prestack explorer. It asks for six figures: the Dix interval velocity of a stated layer, Walden's angle at a stated offset and time, the NMO stretch there, the far partial stack amplitude at the target sample, the two-term Shuey intercept at the target sample, and the one scale over the four wells. Every input they depend on is stated in the case file.
+
+# SECTION 60: Vocabulary this course legislates before a word is written (owned by Associate m01 and Professional m01 and Expert m01)
+
+THE RULE. Each term below means one thing everywhere a learner reads, and a lesson that uses it in another sense is a defect.
+
+- **AI**: acoustic impedance, Vp x density, in kg/(m2 s); the course writes the word impedance beside it the first time a lesson uses it, and never uses AI for anything else.
+- **SI**: shear impedance, Vs x density.
+- **net sand**: a sample of the reservoir with Vsh at or below the stated cut-off.
+- **oil leg, water leg**: net sand above, and at or below, the stated oil-water contact.
+- **cap rock**: the stated thickness of log above the top of the reservoir, read as one layer by its means.
+- **the -6 dB band**: the frequencies between the two -6 dB edges of the mean spectrum of stated traces with a stated taper; its width is the -6 dB bandwidth.
+- **centroid**: the power-weighted mean frequency of a spectrum.
+- **signal to noise**: a POWER ratio, from trace coherency, with its decibel form 10 log10 of the ratio.
+- **footprint**: a periodic stripe on a slice of RMS amplitude, called one only by a stated rule.
+- **the local shear trend**: a least squares fit of measured Vs on Vp on stated samples, with its prediction interval at a stated level.
+- **substitution**: Gassmann through the dry rock from one pore fluid to another, at stated conditions, mineral and porosity.
+- **the wet trend**: the fluid line through the origin fitted to the intercept and gradient of the brine-substituted block boundaries; the published line is the Castagna, Swan and Foster slope, and a lesson names which line it means.
+- **distance**: the signed perpendicular distance of an (A, B) point from a stated line; negative is the hydrocarbon side.
+- **class**: the Rutherford and Williams class from A and B, with class IV, at the stated 0.02 band; a class is never graded.
+- **feasibility**: the Associate question: can this seismic, on this data, see this fluid, written as a verdict that states its numbers and its choices.

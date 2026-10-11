@@ -1,0 +1,26 @@
+{
+ "slug": "qi",
+ "prefix": "qi",
+ "name": "Quantitative Interpretation",
+ "repo": "/root/wt-qi-nextgen",
+ "goldens": [],
+ "constants": {},
+ "digest": {
+  "lines": 873,
+  "sections": 42,
+  "md5": "e0dd0a3bb1fe2de92c55a7903d01aa19",
+  "sha256": "a51e7444af87632c08802bbacf95af695918a7fe643c8aee37719ce3d8a3834a"
+ },
+ "fields": {
+  "count": 6,
+  "sha256": "bbadef1c361c395163d64469b62cce3162f95668310c91b99d1f99e81f2077fe",
+  "keys": [
+   "tamberlo_low6_hz",
+   "tamberlo_centroid_hz",
+   "tamberlo_shear_slope",
+   "tamberlo_ai_brine",
+   "tamberlo_vpvs_brine",
+   "tamberlo_wet_distance"
+  ]
+ }
+}

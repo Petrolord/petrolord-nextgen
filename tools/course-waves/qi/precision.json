@@ -1,0 +1,18 @@
+{
+ "frequency": {
+  "decimals": 6,
+  "match": "^(?:tamberlo_centroid_hz|tamberlo_low6_hz)$"
+ },
+ "impedance": {
+  "decimals": 6,
+  "match": "^(?:tamberlo_ai_brine)$"
+ },
+ "ratio": {
+  "decimals": 6,
+  "match": "^(?:tamberlo_vpvs_brine|tamberlo_wet_distance)$"
+ },
+ "slope": {
+  "decimals": 6,
+  "match": "^(?:tamberlo_shear_slope)$"
+ }
+}

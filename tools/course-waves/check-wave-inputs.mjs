@@ -143,7 +143,16 @@ for (const [wave, entry] of Object.entries(waves)) {
   }
 
   const fields = JSON.parse(fs.readFileSync(path.join(dir, 'fields.json'), 'utf8'));
-  if (fields.length !== 18) fail(`${wave}/fields.json carries ${fields.length} graded fields and every wave grades 18`);
+  // A wave may record tiers whose graders are not wired yet (fieldsPendingTiers:
+  // QI grades a tier only once its engines pass the extraction gate). Each
+  // pending tier lowers the expected count by six, a pending tier that carries
+  // a field fails, and the pending list is printed so it cannot hide.
+  const pendingTiers = entry.fieldsPendingTiers || [];
+  const expectFields = 18 - 6 * pendingTiers.length;
+  const gradedPending = fields.filter((f) => pendingTiers.includes(f[0]));
+  if (gradedPending.length) fail(`${wave}/fields.json grades ${gradedPending.length} field(s) in tiers waves.json records as pending: ${pendingTiers.join(', ')}`);
+  if (fields.length !== expectFields) fail(`${wave}/fields.json carries ${fields.length} graded fields and the wave grades ${expectFields}${pendingTiers.length ? ` (18 less six for each pending tier: ${pendingTiers.join(', ')})` : ''}`);
+  if (pendingTiers.length) console.log(`  note graders pending for ${pendingTiers.join(', ')}, as recorded: fields.json carries ${fields.length} of 18`);
   const names = fields.map((f) => f[1]);
   const unspelledFields = names.filter((n) => !haystack.includes(n));
   const allowedFields = entry.fieldsNoGeneratorSpells || [];
