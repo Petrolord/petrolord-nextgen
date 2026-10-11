@@ -2281,8 +2281,8 @@
       "banks/qii_m06.py"
     ],
     "pins": {
-      "digest.txt": "a51e7444af87632c08802bbacf95af695918a7fe643c8aee37719ce3d8a3834a",
-      "fields.json": "bbadef1c361c395163d64469b62cce3162f95668310c91b99d1f99e81f2077fe"
+      "digest.txt": "c67393749c1c4b1c530c0c18ff613406146750cc9b54854e7796a6537d2f2388",
+      "fields.json": "29e1b63f928713398f02aa7f3940d986581dfbd8bb432f69b0b6ccefc19f7a8f"
     },
     "fieldsPendingTiers": [
       "intermediate",

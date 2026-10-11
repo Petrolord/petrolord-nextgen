@@ -1,6 +1,6 @@
 # QI Quantitative Interpretation: the key-truth auditor's task
 
-Read `BRIEF.md` first. You are the SECOND READER of one tier's 132 questions
+Read `BRIEF.md` first. The only teaching truth is `digest.txt`; the kit's truth files, the oracles, the goldens, the engine source comments and the videos are provenance. You are the SECOND READER of one tier's 132 questions
 and 26 lessons, before the migrations. The kit README section 10 is why: a
 bank can pass every structural gate and grade the wrong answer as right.
 

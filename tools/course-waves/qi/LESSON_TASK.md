@@ -1,6 +1,6 @@
 # QI Quantitative Interpretation: the lesson writer's task
 
-Read `BRIEF.md` first. This file is the working instruction for the lesson
+Read `BRIEF.md` (its table of provenance files binds here too) first. This file is the working instruction for the lesson
 bodies. You write ONE TIER's lessons, in the NextGen worktree
 `/root/wt-qi-nextgen`, under `src/content/courses/qi/<tier>/`.
 

@@ -77,7 +77,7 @@ THE SELECTIONS THE COURSE STATES (lab `zoneSamples`):
 
 | selection | rule | samples at Ekene-1 |
 | --- | --- | --- |
-| net sand | Vsh at or below 0.350000 |  |
+| net sand | Vsh at or below 0.350000 | 168 |
 | oil leg | net sand inside the Ekene Sand, above the oil-water contact | 65 |
 | water leg | net sand inside the Ekene Sand, at or below the contact | 103 |
 | cap rock | the 65 ft of log above the top of the Ekene Sand | 130 |
@@ -86,13 +86,24 @@ WHAT THE PACK HOLDS:
 
 | part | what it is | size |
 | --- | --- | --- |
-| logs | Vp, Vs and density from the DT, DTS and RHOB logs (Vp = 304800 / DT, Vs = 304800 / DTS, density = RHOB x 1000), GR, and the kit's PHIT, VSH and SW, for Ekene-1 to Ekene-4 over the Ekene Sand and the shale above it | 4 wells |
+| logs | Vp, Vs and density from the DT and DTS logs in microseconds per foot and the RHOB log in g/cc (Vp = 304800 / DT, Vs = 304800 / DTS, density = RHOB x 1000), GR, and the kit's PHIT, VSH and SW, for Ekene-1 to Ekene-4 over the Ekene Sand and the shale above it | 4 wells |
 | headers | every well's curve list, checkshot count and survey station count | 12 wells |
 | spread traces | full-stack traces spread over the survey | 10 inlines by 12 crosslines, 800 to 2400 ms every 4.000000 ms |
 | neighbour traces | neighbouring full-stack traces along the inline through Ekene-1 | 21 traces, inline 1027 |
 | RMS slice | the RMS amplitude of the full stack on every trace | 128 inlines by 128 crosslines, 1250 to 1350 ms |
 | traces at the wells | full, near, mid and far stack traces at Ekene-1 to Ekene-4 | 900 to 1700 ms |
 | gathers | NMO-corrected CDP gathers next to Ekene-1 | 12 CDPs, 13 offsets |
+
+THE SAME SELECTIONS AT EVERY PACK WELL:
+
+| well | net sand | oil leg | water leg | cap rock |
+| --- | --- | --- | --- | --- |
+| Ekene-1 | 168 | 65 | 103 | 130 |
+| Ekene-2 | 187 | 0 | 187 | 130 |
+| Ekene-3 | 154 | 114 | 40 | 130 |
+| Ekene-4 | 135 | 0 | 135 | 130 |
+
+A well whose top of the Ekene Sand lies below the oil-water contact has no oil leg by this rule.
 
 THE CONDITIONS AT THE EKENE SAND, stated with the kit: 180 degF, 3200 psia, brine salinity 0.035000 (weight fraction of NaCl), oil 32 API, gas-oil ratio 400 scf/stb, gas gravity 0.750000.
 
@@ -144,7 +155,7 @@ The feasibility explorer runs the Associate engines on the Ekene pack or on a ca
 | `backgroundSlope` | a Vs/Vp of 1.2 | "Vs/Vp must be between 0 and 1." |
 | `zoeppritzRpp` | an upper layer with Vs above Vp | "Upper halfspace has vs >= vp." |
 
-21 refusals across 14 functions. Two more messages exist in gassmann.js (an implied saturated modulus that is not positive, and an inverse Gassmann dry modulus that is not positive); each carries a punctuation mark this course does not print, so the course names them by what they refuse and never quotes them.
+21 refusals across 14 functions. Two more messages exist in gassmann.js (an implied saturated modulus that is not positive, and an inverse Gassmann dry modulus that is not positive); each carries a punctuation mark this course does not print, so the course names them by what they refuse and does not quote them.
 
 A RESULT IS NO REFUSAL. `elasticPoint` with Vs above Vp does not throw: it returns every field as NaN (AI NaN, Vp/Vs NaN), and a panel shows the gap.
 
@@ -158,7 +169,7 @@ WHAT IS NEVER GRADED. Any figure in the videos; any Ekene figure; any verdict, c
 
 # SECTION 7: The data inventory (owned by Associate m02 l01 and Associate m02 l03)
 
-WHAT A QI STUDY NEEDS FROM EACH WELL. Rock physics needs Vp (a sonic) and density; shear makes the shear-dependent results measured instead of estimated; porosity, shale volume and saturation feed the substitution; checkshots tie the well to the seismic; the elevation and the deviation survey place it in depth.
+WHAT A QI STUDY NEEDS FROM EACH WELL. Rock physics needs Vp (a sonic) and density; a measured shear log means the shear-dependent results rest on a measurement, where without one they rest on an estimate; porosity, shale volume and saturation feed the substitution; checkshots tie the well to the seismic; the elevation and the deviation survey place it in depth.
 
 | well | kind | logs | curves | sonic DT | shear DTS | density RHOB | checkshot levels | top Ekene Sand ft (kit tops) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -228,7 +239,7 @@ A CHECK AGAINST A KNOWN ANSWER. A Ricker wavelet of 30 Hz has an amplitude spect
 
 # SECTION 10: Band edges and the centroid (owned by Associate m03 l02 and Associate m06 l03)
 
-DEFINITIONS (spectrumStats). The -6 dB edges are where the amplitude falls to 10^(-6/20) of the peak amplitude, either side of the peak, interpolated linearly between frequency steps; the -20 dB edges the same at 10^(-20/20). The -6 dB bandwidth is the high edge less the low edge. The centroid is the power-weighted mean frequency, the sum of f A(f)^2 over the sum of A(f)^2.
+DEFINITIONS (spectrumStats). The -6 dB edges are where the amplitude falls to 10^(-6/20) of the peak amplitude, below and above the peak, interpolated linearly between frequency steps; the -20 dB edges the same at 10^(-20/20). The -6 dB bandwidth is the high edge less the low edge. The centroid is the power-weighted mean frequency, the sum of f A(f)^2 over the sum of A(f)^2.
 
 THE EKENE FULL STACK BY WINDOW, the 120 spread traces, taper 0.100000:
 
@@ -296,7 +307,7 @@ The Ekene slice carries no footprint: a prominence of tens with a share of a few
 
 WHAT ROCK PHYSICS HANDS TO QI. Elastic logs at the wells (Vp, Vs, density), the fluids at reservoir conditions, the substitution of one fluid for another, and the reflection coefficients they imply. QI takes these to the seismic. The Rock Physics course teaches each method in full; this course states the inputs and reads the outputs.
 
-GREENBERG-CASTAGNA (gcSandShaleVs). Shear from Vp by a published regression per lithology, Vs = a2 Vp^2 + a1 Vp + a0 in km/s; sandstone a1 0.804160, a0 -0.855880; shale a1 0.769690, a0 -0.867350; mixed on Vsh as the average of the arithmetic and harmonic means of the two.
+GREENBERG-CASTAGNA (gcSandShaleVs). Shear from Vp by a published regression per lithology, Vs = a2 Vp^2 + a1 Vp + a0 in km/s; sandstone a2 0.000000, a1 0.804160, a0 -0.855880; shale a2 0.000000, a1 0.769690, a0 -0.867350; mixed on Vsh as the average of the arithmetic and harmonic means of the two.
 
 AGAINST THE MEASURED SHEAR, the 103 water-leg net sand samples of Ekene-1:
 
@@ -852,11 +863,418 @@ ONE SCALE over the 4 wells: 1882.216944 trace units per unit reflection coeffici
 
 THE PROFESSIONAL CAPSTONE runs these steps on a held-out synthetic case: one NMO-corrected CDP gather with its RMS velocity table, and modelled and seismic intercepts and gradients at four wells, supplied as a case file the learner pastes into the prestack explorer. It asks for six figures: the Dix interval velocity of a stated layer, Walden's angle at a stated offset and time, the NMO stretch there, the far partial stack amplitude at the target sample, the two-term Shuey intercept at the target sample, and the one scale over the four wells. Every input they depend on is stated in the case file.
 
+# SECTION 42: What the Expert tier adds, and the settings it states (owned by Expert m01 l01)
+
+THE EXPERT QUESTION. From the seismic to impedance, from impedance to properties, and from properties to a prospect and a report. The Associate tier asked whether the seismic can see the fluid; the Professional tier tied the wells and read AVO; this tier inverts, predicts and decides what QI can and cannot say.
+
+THE ENGINES AND THEIR GATE (the extraction gate: a golden plus an independent oracle in the engines repository):
+
+| engine | what it computes | gate |
+| --- | --- | --- |
+| engines/qi/inversion.js | the forward model, model-based, blocky, sparse-spike and coloured inversion, the low-frequency model of one log | golden and oracle (pylops) |
+| engines/qi/inversionSpread.js | quantiles across realisations, the relative spread, seeded noise | golden and oracle |
+| engines/qi/prestackInversion.js | Fatti's coefficients, the prestack forward model, simultaneous inversion | golden and oracle (pylops) |
+| engines/qi/propertyPrediction.js | the linear transform and its interval, Bayesian facies, the confusion matrix | golden and oracle |
+| lib/gridding/closure.js | crest, spill point, closure and gross rock volume | golden and oracle |
+| engines/qi/lfm.js | the low-frequency model between wells, the blind-well score | awaiting its oracle; taught, and graded only once it lands |
+| engines/qi/prospectAssessment.js | anomaly conformance, evidence independence, the assessment | awaiting its oracle; taught, and graded only once it lands |
+
+THE SETTINGS THE TIER STATES ON THE EKENE PACK (each a stated input; QI Studio's own defaults where it has one):
+
+| setting | value |
+| --- | --- |
+| inversion window on the well traces, ms | 1100 to 1500 (101 samples every 4.000000 ms) |
+| wavelet | a zero-phase Ricker of 25 Hz, half length 40 ms (21 samples) |
+| low-frequency cut of the LFM, Hz | 8 |
+| high cut of the log a result is scored against, Hz | 50 |
+| regularisation weight eps | 0.050000 |
+| iterations | 60 |
+| blocky: epsTV, outer loops | 0.020000, 4 |
+| sparse-spike lambda | 0.002000 |
+| inverse distance power | 2 |
+| coloured band, Hz | 8 to 60 |
+| angle of each stack, degrees | near 10, mid 20, far 30 |
+
+THE WELLS IN TIME. Each pack well's logs go to two-way time on its checkshots (linear between levels) and onto the trace clock by the engine's `resampleToDt`; the pack's logs cover the Ekene Sand and the shale above it, so only part of the window carries a log:
+
+| well | log samples in the window | first logged time ms | last logged time ms | top Ekene Sand ms | base Ekene Sand ms |
+| --- | --- | --- | --- | --- | --- |
+| Ekene-1 | 27 | 1248.000000 | 1352.000000 | 1288.796378 | 1311.029994 |
+| Ekene-2 | 27 | 1264.000000 | 1368.000000 | 1305.746335 | 1330.405474 |
+| Ekene-3 | 27 | 1240.000000 | 1344.000000 | 1282.159191 | 1302.328106 |
+| Ekene-4 | 26 | 1284.000000 | 1384.000000 | 1329.290304 | 1346.132878 |
+
+# SECTION 43: The convolutional model and its adjoint (owned by Expert m01 l02)
+
+THE MODEL (forwardPoststack, the operator of pylops' PoststackLinearModelling, kind centred). The unknown is m = ln(AI) on the trace clock; D is the centred first difference, (D m)_i = (m_(i+1) - m_(i-1)) / 2, zero at the first and last sample; C is the centred convolution with the wavelet (offset the floor of half its length). The seismic trace is d = C D m. Half the difference of ln(AI) is close to the reflection coefficient for small contrasts, which is why the model is written in ln(AI).
+
+THE ADJOINT. Every solver here needs the transpose of the operator. The test of an adjoint is the dot product: for any x and y, (C x) . y equals x . (C^T y). On two seeded vectors of 101 samples (mulberry32 seed 42):
+
+| operator | (A x) . y | x . (A^T y) | difference |
+| --- | --- | --- | --- |
+| centred difference D | -0.753789 | -0.753789 | 0.000000 |
+| centred convolution C with the scaled wavelet | 38.991017 | 38.991017 | 0.000000 |
+
+AT EKENE-1. The ln(AI) log in time, held at its first and last values beyond the logged samples, through the scaled wavelet (section 45), against the full-stack trace at the well, round the top of the Ekene Sand (1288.796378 ms):
+
+| time ms | ln(AI) log | synthetic | full-stack trace |
+| --- | --- | --- | --- |
+| 1272.000000 | 15.353633 | -116.583585 | -126.054001 |
+| 1280.000000 | 15.368369 | 13.435099 | -8.919362 |
+| 1288.000000 | 15.359233 | 344.213395 | 341.516846 |
+| 1296.000000 | 15.810831 | 137.874591 | 258.968262 |
+| 1304.000000 | 15.512999 | -267.168500 | -268.438965 |
+| 1312.000000 | 15.380870 | -223.202416 | -352.980957 |
+
+Over the logged samples the synthetic and the trace correlate at 0.966050 (27 samples).
+
+# SECTION 44: The low-frequency model from wells and horizons (owned by Expert m01 l03 and Expert m02 l04)
+
+WHY IT IS NEEDED. The seismic band holds no trend: a band-limited trace says how impedance changes and says nothing of its level. The low-frequency model (LFM) supplies what the seismic lacks below about 8 Hz, from the wells.
+
+HOW IT IS BUILT (lfm.js; THIS ENGINE AWAITS ITS INDEPENDENT ORACLE, engines PR E1c: the course teaches it and grades nothing through it until that lands). Each well's ln(AI) in time is low-passed by a moving average whose half window is round(1000 / (cut x dt) / 2) samples (16 samples here, lowFrequencyModel), then carried to a trace by inverse distance weighting with power 2. Between two horizons a sample keeps its proportional position (mapToWellTime), so a layer that thickens or dips between wells keeps its impedance; above the first horizon and below the last the time offset from that horizon is kept. Samples no well covers hold the nearest covered value.
+
+THE PROPORTIONAL POSITION, the Ekene-1 trace's times mapped to Ekene-2's horizons (top and base Ekene Sand):
+
+| time at Ekene-1 ms | the same position at Ekene-2 ms |
+| --- | --- |
+| 1280.796378 | 1297.746335 |
+| 1288.796378 | 1305.746335 |
+| 1299.913186 | 1318.075904 |
+| 1319.029994 | 1338.405474 |
+
+THE WEIGHTS at Ekene-1 with Ekene-1 left out (distance in metres in the kit's projection): Ekene-2 distance 1209.338662, share 0.477419; Ekene-3 distance 1360.147051, share 0.377419; Ekene-4 distance 2193.171220, share 0.145161. Each weight is the inverse square of the distance, and a well's share is its weight over the sum of the three.
+
+AT EACH WELL, the LFM ln(AI) at the sample of the top of Ekene-1's sand (1288.000000 ms), with the well left out and kept in, and the RMS error in AI of the LFM alone against the well's log after the 50 Hz high cut (blindWellScore, over the logged samples):
+
+| well | LFM ln(AI), well left out | LFM ln(AI), well kept | LFM-only AI error percent, left out | LFM-only AI error percent, kept |
+| --- | --- | --- | --- | --- |
+| Ekene-1 | 15.458070 | 15.461408 | 8.638086 | 8.369222 |
+| Ekene-2 | 15.454999 | 15.473081 | 10.450743 | 11.272271 |
+| Ekene-3 | 15.461340 | 15.446607 | 8.512597 | 7.817522 |
+| Ekene-4 | 15.474175 | 15.468322 | 10.307658 | 10.251573 |
+
+# SECTION 45: The wavelet scale (owned by Expert m01 l04)
+
+THE PROBLEM. A wavelet extracted or chosen for its shape carries an arbitrary amplitude, and the inversion reads impedance contrast from the ratio of the trace to the synthetic. The scale is set at the wells: the one number s that makes s times the forward model of the logs match the seismic best, by least squares pooled over every well sample whose wavelet span the log covers.
+
+THE EKENE SCALE. The 25 Hz Ricker (peak amplitude 1.000000) against the full stack at the four pack wells: scale 769.984107 over 19 samples; the scaled wavelet's peak is 769.984107.
+
+THE SAME BY QI STUDIO'S OWN CODE. `waveletScale` in src/pages/apps/QIStudio/services/inversionRun.js (APP CODE, petrolord-suite 5df9d9410; it is not one of the extraction-gated engines) on the same pairs returns 769.984107 over 19 samples.
+
+A REFUSAL BY THE SAME RULE. QI Studio refuses to scale when the wells overlap fewer than ten usable samples of seismic: "The wells overlap too little seismic to scale the wavelet."
+
+# SECTION 46: Model-based least squares (owned by Expert m02 l01)
+
+THE PROBLEM (modelBased). Minimise ||C D m - d||^2 + eps^2 ||m - m0||^2 by conjugate gradients on the normal equations (CGLS), starting from the LFM m0, for the stated number of iterations or until the gradient falls to 1e-10 of its first value. eps pulls the result towards the LFM. The output is ln(AI) and AI = exp(ln(AI)).
+
+EKENE-1, the well left out of its own LFM (a blind inversion at the well), eps 0.050000, 60 iterations: 60 iterations run, residual RMS 2.121830 (trace units). Round the top of the Ekene Sand:
+
+| time ms | log AI after the high cut | LFM AI | inverted AI |
+| --- | --- | --- | --- |
+| 1280.000000 | 4951328.995159 | 5173957.520173 | 4686769.690526 |
+| 1288.000000 | 5586150.312069 | 5168379.152075 | 5312165.284155 |
+| 1296.000000 | 6044332.734122 | 5168379.152075 | 7582152.255748 |
+| 1304.000000 | 6092574.823749 | 5168379.152075 | 7082384.485415 |
+| 1312.000000 | 5512396.282574 | 5177480.045787 | 5850264.680558 |
+
+THE ITERATION COUNT IS A STATED CHOICE, and here it is also the regularisation. The same blind inversion at four counts (eps 0.050000), scored against the log after the high cut:
+
+| iterations asked | iterations run | residual RMS | correlation with the log | AI error percent |
+| --- | --- | --- | --- | --- |
+| 20 | 20 | 3.419041 | 0.840147 | 8.300748 |
+| 60 | 60 | 2.121830 | 0.852881 | 10.557858 |
+| 120 | 120 | 1.731434 | 0.583443 | 19.965981 |
+| 300 | 300 | 1.233454 | 0.091593 | 52.851805 |
+
+THE WEIGHT AT 300 ITERATIONS:
+
+| eps | residual RMS | correlation with the log | AI error percent |
+| --- | --- | --- | --- |
+| 0.050000 | 1.233454 | 0.091593 | 52.851805 |
+| 1.000000 | 1.320986 | 0.219646 | 33.801729 |
+| 5.000000 | 1.769102 | 0.732457 | 13.421322 |
+
+Read the two tables together: the residual keeps falling with more iterations while the error at the well rises, because the solver fits the trace beyond what the stated wavelet and the scale can explain. A smaller residual is no better inversion; the blind well is the check (section 49).
+
+# SECTION 47: Blocky and sparse-spike inversion (owned by Expert m02 l02)
+
+BLOCKY (modelBased with blocky). Adds an iteratively reweighted total variation term, epsTV^2 sum of w_i (m_(i+1) - m_i)^2 with w_i = 1 / sqrt((m_(i+1) - m_i)^2 + beta^2), re-solved over the stated outer loops (beta 0.001, an engine argument the course leaves at that value), so few large steps cost less than many small ones.
+
+SPARSE-SPIKE (sparseSpike). FISTA (Beck and Teboulle 2009) solves min 1/2 ||C r - d||^2 + lambda ||r||_1 for a sparse reflectivity r (fistaReflectivity); r is integrated to a relative ln(AI) (m_(i+1) = m_(i-1) + 2 r_i, each of the two interleaved chains levelled to its mean), and the low frequencies come from the LFM through a moving-average crossover at 8 Hz.
+
+THE SPARSITY IS SET BY LAMBDA, ON THE TRACE'S OWN AMPLITUDE SCALE. Non-zero reflectivity samples in the 101-sample Ekene-1 trace (largest absolute amplitude 399.814697), with the scaled wavelet:
+
+| lambda | non-zero samples, 60 iterations | non-zero samples, 400 iterations |
+| --- | --- | --- |
+| 0.002000 | 101 | 101 |
+| 200.000000 | 96 | 61 |
+| 1000.000000 | 67 | 44 |
+| 5000.000000 | 36 | 27 |
+
+At QI Studio's default lambda 0.002000 there are 101 of 101: on traces of this amplitude that lambda imposes no sparsity. Sparsity appears at the larger lambdas in the table, and more iterations sharpen it further.
+
+THREE METHODS AT EKENE-1, each blind (the well left out of its LFM), scored against the log after the high cut:
+
+| method | correlation | AI error percent | samples |
+| --- | --- | --- | --- |
+| model-based | 0.852881 | 10.557858 | 27 |
+| model-based, blocky | 0.751173 | 13.130119 | 27 |
+| sparse-spike | 0.873414 | 8.356661 | 27 |
+
+# SECTION 48: Coloured inversion (owned by Expert m02 l03)
+
+THE METHOD (Lancaster and Whitcombe 2000; impedanceSpectrumSlope, colouredOperator, applyColoured). One operator for every trace: its amplitude spectrum turns the seismic's average spectrum into the wells' impedance spectrum, a power law f^alpha fitted to the logs (log-log least squares over 5 to 80 Hz), inside the stated band with cosine tapers 5 Hz wide, and its phase is minus 90 degrees. No wavelet and no LFM: the output is RELATIVE impedance, band-limited, with no level.
+
+EKENE. The slope from each pack well's AI log in time (the logged samples only) and the mean the operator uses, alpha -1.012769, transform length 256. Scored by correlation alone against the log band-passed between 8 and 50 Hz (relative impedance has no level to compare), over the logged samples:
+
+| well | alpha from its log | correlation with the band-passed log | samples |
+| --- | --- | --- | --- |
+| Ekene-1 | -0.646563 | 0.931237 | 27 |
+| Ekene-2 | -1.473109 | 0.923565 | 27 |
+| Ekene-3 | -0.749731 | 0.828766 | 27 |
+| Ekene-4 | -1.181673 | 0.796895 | 26 |
+
+The logs here are short (the pack covers the Ekene Sand and the shale above it), so each slope rests on few frequencies; that is why the four slopes differ.
+
+# SECTION 49: Blind wells (owned by Expert m02 l04 and Expert m03 l04)
+
+THE CHECK. Each well is inverted with the LFM built from the OTHER wells, and scored against its own log after the 50 Hz high cut (blindWellScore: the correlation of AI with the log's AI, and the RMS of the relative AI error in percent, over samples where both exist). Beside it the same well with itself in the LFM, and the LFM alone: the share of the match that comes from the LFM is then visible. The same rule as QI Studio's blind-well table.
+
+MODEL-BASED (eps 0.050000, 60 iterations):
+
+| well | blind correlation | blind AI error percent | samples | kept-in correlation | kept-in AI error percent | LFM-only correlation | LFM-only AI error percent |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Ekene-1 | 0.852881 | 10.557858 | 27 | 0.858647 | 10.805677 | -0.190352 | 8.638086 |
+| Ekene-2 | 0.889320 | 13.513999 | 27 | 0.889063 | 15.516228 | -0.248169 | 10.450743 |
+| Ekene-3 | 0.847503 | 11.484291 | 27 | 0.847813 | 10.340948 | -0.230889 | 8.512597 |
+| Ekene-4 | 0.759365 | 13.511984 | 26 | 0.758561 | 13.760737 | -0.345505 | 10.307658 |
+
+SPARSE-SPIKE, blind:
+
+| well | blind correlation | blind AI error percent |
+| --- | --- | --- |
+| Ekene-1 | 0.873414 | 8.356661 |
+| Ekene-2 | 0.881157 | 11.090545 |
+| Ekene-3 | 0.821455 | 9.718054 |
+| Ekene-4 | 0.778867 | 10.144841 |
+
+Read the columns together. The LFM alone carries the level, with a lower RMS error than either inversion at every well here, and a negative correlation: it has none of the shape. The inversions follow the shape (blind correlations from about 0.76 to 0.89) at a larger RMS error. A study quotes both figures.
+
+# SECTION 50: Sensitivity across realisations (owned by Expert m02 l05)
+
+THE METHOD (inversionSpread.js). Realisations that differ in one assumption each, here the noise: the Ekene-1 full-stack trace plus seeded Gaussian noise at a signal-to-noise ratio of 4 (addNoise: RMS of the trace over the noise standard deviation), on the 20 seeds 101 to 120, each inverted blind exactly as section 46. Per sample, the quantiles across the realisations (quantilesAcross: linear interpolation between order statistics, Hyndman and Fan type 7) and the relative spread (Q90 - Q10) / Q50 (relativeSpread).
+
+THE LABELS (the Suite's percentile convention for parameters, PT10): Q10 is the 10th percentile, the value 10 percent of realisations fall below, so it is the LOW figure; Q50 the median; Q90 the 90th percentile, the HIGH figure. P-labels are kept for outcomes such as volumes, where P90 is the low figure.
+
+EKENE-1, 20 realisations, AI:
+
+| time ms | Q10 AI | Q50 AI | Q90 AI | relative spread |
+| --- | --- | --- | --- | --- |
+| 1280.000000 | 3234788.713574 | 4265197.870417 | 5381890.062124 | 0.503400 |
+| 1288.000000 | 4068272.975688 | 5411809.392501 | 6756958.543550 | 0.496818 |
+| 1296.000000 | 5585687.788449 | 7492439.243862 | 9627879.127025 | 0.539503 |
+| 1304.000000 | 5105598.449954 | 6676603.290047 | 9946158.337593 | 0.725003 |
+
+Mean relative spread over the 27 logged samples: 0.643946. The spread is an estimate on stated seeds and a stated noise level; a different set of seeds gives different figures.
+
+# SECTION 51: Fatti's three parameters (owned by Expert m03 l01)
+
+THE LINEARISATION (Fatti and others 1994; fattiCoefficients). R(theta) = G1 dln(AI) + G2 dln(SI) + G3 dln(rho), with G1 = (1 + tan^2 theta) / 2, G2 = -4 K^2 sin^2 theta, G3 = (4 K^2 sin^2 theta - tan^2 theta) / 2 and K the background Vs/Vp. The simultaneous inversion (simultaneousInversion, pylops' PrestackLinearModelling with the Fatti linearisation, kind centred) solves for ln(AI), ln(SI) and ln(rho) together by CGLS, each pulled to its own LFM by its own weight.
+
+THE EKENE BACKGROUND Vs/Vp: the mean of Vs / Vp over every logged sample of the four pack wells in the window, 0.394396. The coefficients at that K:
+
+| angle degrees | G1 (AI) | G2 (SI) | G3 (density) |
+| --- | --- | --- | --- |
+| 0 | 0.500000 | 0.000000 | 0.000000 |
+| 10 | 0.515546 | -0.018761 | -0.006165 |
+| 20 | 0.566237 | -0.072783 | -0.029846 |
+| 30 | 0.666667 | -0.155548 | -0.088893 |
+| 40 | 0.852044 | -0.257075 | -0.223507 |
+
+At normal incidence only AI contributes. G3 is negative and the smallest of the three in size at every angle in the table, and it grows fastest between 30 and 40 degrees: density is the parameter the angles see least.
+
+# SECTION 52: Angle-dependent wavelets (owned by Expert m03 l02)
+
+WHY EACH ANGLE HAS ITS OWN. A far-angle stack carries less high frequency and a different amplitude scale than a near one, so the simultaneous inversion takes one wavelet per angle stack.
+
+THE EKENE SETTING. The same 25 Hz Ricker shape for every stack, scaled per stack by least squares of the Fatti synthetic of the logs (unit wavelet amplitude, the stack's angle) against that stack at the four wells (lab `fattiScale`):
+
+| stack | angle degrees | scale | samples |
+| --- | --- | --- | --- |
+| near | 10 | 1860.598608 | 19 |
+| mid | 20 | 1679.662569 | 19 |
+| far | 30 | 1305.654435 | 19 |
+
+QI STUDIO extracts a wavelet per angle at every well by least squares against that well's reflectivity, then aligns and averages them across the wells (angleWavelets, APP CODE). On the pack's short logs that extraction refuses. Seismolord's well-wavelet extraction (src/pages/apps/Seismolord/lib/wellWavelet.js, petrolord-suite 5df9d9410) at Ekene-1, on the half differences of the ln(AI) log in time: with its default half length of 15 samples (a 31-sample wavelet, longer than the 27 logged samples, so no row of the fit is complete) it says "The well reflectivity is flat over the seismic at the well, so there is nothing to extract a wavelet from."; with a half length of 5 it says "The log covers 16 usable samples at the well; a 11-sample wavelet needs at least 22. Shorten the wavelet or use the statistical one." The course therefore states the shape and scales it per stack.
+
+# SECTION 53: Why density needs the far angles (owned by Expert m03 l03)
+
+THE EXPERIMENT. Ekene-1, blind, simultaneous inversion with eps 0.050000, 0.050000, 0.050000 and 60 iterations, from three sets of stacks; each parameter scored against the well's log after the high cut (correlation; RMS of the relative error in percent of AI, Vp/Vs and density):
+
+| stacks used | AI correlation | AI error percent | Vp/Vs correlation | Vp/Vs error percent | density correlation | density error percent |
+| --- | --- | --- | --- | --- | --- | --- |
+| the three LFMs alone (no seismic) | -0.190352 | 8.638086 | 0.048283 | 11.122749 | -0.087754 | 0.767482 |
+| near only | 0.858677 | 9.807415 | -0.744719 | 30.824755 | 0.614032 | 0.627310 |
+| near and mid | 0.865225 | 9.757899 | 0.383124 | 13.660754 | -0.707948 | 12.184029 |
+| near, mid and far | 0.863789 | 8.956955 | 0.470296 | 10.707173 | -0.767957 | 14.112317 |
+
+AI is held by the near angles alone. With the near stack only, density keeps an RMS error close to the LFMs-alone row, both under one percent: the near stack barely moves its level. G3 is tiny at 10 degrees (section 51), so the near stack carries almost no density information. With the mid and far stacks added, the density correlation at Ekene-1 turns negative: the inversion moves density away from the log, and density is the least reliable of the three parameters in this table. The far stack here reaches 30 degrees, and G3 grows fastest beyond it.
+
+# SECTION 54: Blind wells per parameter (owned by Expert m03 l04)
+
+EVERY PACK WELL, blind, near, mid and far stacks, scored per parameter:
+
+| well | AI correlation | AI error percent | Vp/Vs correlation | Vp/Vs error percent | density correlation | density error percent |
+| --- | --- | --- | --- | --- | --- | --- |
+| Ekene-1 | 0.863789 | 8.956955 | 0.470296 | 10.707173 | -0.767957 | 14.112317 |
+| Ekene-2 | 0.854299 | 9.659172 | -0.287516 | 15.482932 | -0.470987 | 10.343005 |
+| Ekene-3 | 0.847660 | 10.653026 | 0.360220 | 12.979404 | -0.719301 | 16.816175 |
+| Ekene-4 | 0.780557 | 9.629147 | -0.132709 | 12.786564 | -0.413424 | 9.115991 |
+
+AI correlates well at every well; Vp/Vs and density do not, and each is reported for what it is. A study quotes the blind figure for each parameter it uses.
+
+# SECTION 55: A linear transform and its interval (owned by Expert m04 l01)
+
+THE TRANSFORM (fitLinearTransform). Porosity = a + b AI by least squares, with n, the residual standard error s on n - 2 degrees of freedom and R squared. THE INTERVAL (predictWithInterval) of a new observation at AI x0: y +/- t s sqrt(1 + 1/n + (x0 - mean)^2 / Sxx), t Student's quantile; the 80 percent interval gives Q10 (its low end) and Q90 (its high end).
+
+EKENE, AT LOG SCALE: the net sand samples of the Ekene Sand in the four pack wells, both legs (644 samples; AI from Vp x density in kg/(m2 s), the kit's PHIT): a 0.363690, b -0.022834 per 10^6 kg/(m2 s), s 0.017980, R squared 0.323708, mean AI 7160405.649805. The calibration AI runs from 5693260.530000 to 8402495.750400.
+
+| AI kg/(m2 s) | predicted porosity | Q10 (low end, 80 percent) | Q90 (high end, 80 percent) |
+| --- | --- | --- | --- |
+| 6500000.000000 | 0.215267 | 0.192157 | 0.238378 |
+| 7000000.000000 | 0.203850 | 0.180764 | 0.226936 |
+| 7500000.000000 | 0.192433 | 0.169342 | 0.215525 |
+| 8500000.000000 | 0.169599 | 0.146406 | 0.192792 |
+
+The last row lies outside the calibration range: the engine still answers, and its interval widens only by the distance term. At the 90 percent level and AI 7000000 the interval is 0.174207 to 0.233493.
+
+# SECTION 56: Left-out wells and the widened band (owned by Expert m04 l02)
+
+THE CHECK (QI Studio's calibrateProperty in src/pages/apps/QIStudio/services/propertyRun.js, APP CODE, petrolord-suite 5df9d9410; it calls the extraction-gated engine propertyPrediction.js). At seismic scale: each well's ln(AI) and porosity in time are low-passed at 50 Hz, the transform is fitted to the wells, then each well is left out, the transform refitted on the others, and porosity predicted from the BLIND INVERTED AI at that well (section 49). The left-out residuals carry the inversion's error, which a log-against-log fit cannot see, so their pooled RMS widens the band: s_extra = sqrt(RMS^2 - s^2) when the RMS exceeds s. Each well's coverage is tested with the other wells' residuals only.
+
+EKENE, the porosity of each well inside its Ekene Sand times:
+
+| quantity | value |
+| --- | --- |
+| a | 0.302982 |
+| b, per 10^6 kg/(m2 s) | -0.017033 |
+| n (upscaled samples) | 20 |
+| s, the log-against-log residual error | 0.007175 |
+| pooled left-out RMS | 0.024072 |
+| s_extra, the widening | 0.022977 |
+
+A NaN correlation is the result the code returns when either series has no spread over the well's samples.
+
+| well left out | samples | RMS porosity error | bias | correlation | share inside the widened 80 percent band |
+| --- | --- | --- | --- | --- | --- |
+| Ekene-1 | 5 | 0.028337 | -0.024560 | -0.484704 | 0.600000 |
+| Ekene-2 | 6 | 0.027716 | -0.021598 | -0.794283 | 0.833333 |
+| Ekene-3 | 5 | 0.021520 | -0.020246 | -0.734150 | 1.000000 |
+| Ekene-4 | 4 | 0.012741 | -0.009593 | NaN | 1.000000 |
+
+# SECTION 57: Bayesian facies on impedance, two attributes, and the confusion matrix (owned by Expert m04 l03 and Expert m04 l04 and Expert m04 l05)
+
+THE METHOD (fitFaciesModel, faciesPosterior, confusionMatrix; Avseth and others 2005, chapter 4). A Gaussian density per facies in attribute space from labelled samples, priors from the samples' proportions unless stated, and the posterior probability of each facies at a point with the most likely one. The Facies course teaches Bayesian classification as a subject; this tier applies it to impedance.
+
+EKENE, AT LOG SCALE, the four pack wells: oil sand (net sand of the Ekene Sand above the contact), brine sand (net sand at or below it) and shale (Vsh above the cut-off anywhere in the window); net sand outside the Ekene Sand is left out. Samples: shale 2519, oil sand 179, brine sand 465.
+
+ONE ATTRIBUTE, AI:
+
+| facies | samples | prior | mean AI | standard deviation of AI |
+| --- | --- | --- | --- | --- |
+| shale | 2519 | 0.796396 | 4909101.931291 | 286846.678563 |
+| oil sand | 179 | 0.056592 | 6861912.039477 | 531684.159516 |
+| brine sand | 465 | 0.147012 | 7275309.641738 | 504572.278546 |
+
+| AI | P(shale) | P(oil sand) | P(brine sand) | most likely |
+| --- | --- | --- | --- | --- |
+| 6000000.000000 | 0.047185 | 0.672121 | 0.280694 | oil sand |
+| 6600000.000000 | 0.000000 | 0.442088 | 0.557911 | brine sand |
+| 7200000.000000 | 0.000000 | 0.231827 | 0.768173 | brine sand |
+| 7800000.000000 | 0.000000 | 0.116827 | 0.883173 | brine sand |
+
+With equal priors at AI 6600000: P(shale) 0.000000, P(oil sand) 0.673039, P(brine sand) 0.326961. The prior is a stated choice and it moves the answer.
+
+The confusion matrix of the one-attribute model on its own samples (rows the true facies, columns the predicted, in the order shale, oil sand, brine sand), share correct 0.934872:
+
+| true facies | shale | oil sand | brine sand |
+| --- | --- | --- | --- |
+| shale | 2469 | 45 | 5 |
+| oil sand | 3 | 49 | 127 |
+| brine sand | 0 | 26 | 439 |
+
+TWO ATTRIBUTES, AI AND Vp/Vs: share correct 0.973443.
+
+| true facies | shale | oil sand | brine sand |
+| --- | --- | --- | --- |
+| shale | 2464 | 19 | 36 |
+| oil sand | 0 | 160 | 19 |
+| brine sand | 1 | 9 | 455 |
+
+| AI | Vp/Vs | P(shale) | P(oil sand) | P(brine sand) |
+| --- | --- | --- | --- | --- |
+| 6600000.000000 | 1.750000 | 0.000000 | 0.997373 | 0.002627 |
+| 6600000.000000 | 2.000000 | 0.000000 | 0.000000 | 1.000000 |
+
+A FLUID HYPOTHESIS. A facies named for a fluid (oil sand, brine sand) is a hypothesis about the pore fluid; QI Studio labels such a class fluid_hypothesis and every other class calibrated_prediction. On AI alone most oil-sand samples are called brine sand; adding Vp/Vs separates them.
+
+# SECTION 58: Prospects: crest, spill and closure, anomaly conformance, evidence and the assessment (owned by Expert m05 l01 and Expert m05 l02 and Expert m05 l03 and Expert m05 l04)
+
+CLOSURE (lib/gridding/closure.js spillAnalysis, closureAt, closureCurve). From the crest (the highest mapped node unless a seed is stated) a priority flood always expands the highest frontier node; the spill elevation is the running minimum when the flood first reaches the edge of the mapped area, and a contact at or above it leaves the closure closed. Four-neighbour connectivity; the mapped edge is any grid-edge node or any node beside a null. The engine reads elevation and spacing in one unit; the course runs it in feet.
+
+THE EKENE SAND TOP GRID, as the kit grids it from the six development wells' tops (02-surfaces/EkeneSand-top-6wells.zmap of ekene-demo-v3): 25 by 20 nodes every 328.083990 ft, 201 of them mapped; z is minus the depth below the kelly bushing, in feet.
+
+| quantity | value |
+| --- | --- |
+| crest, ft | -5051.568570 |
+| spill, ft | -5053.948819 |
+| column from crest to spill, ft | 2.380249 |
+| spill limited by the map edge | yes |
+| nodes in the closure at the spill | 11 |
+| area at the spill, ft2 | 1184030.145838 |
+| gross rock volume at the spill, ft3 | 1519731.367693 |
+| the oil-water contact of the wells, ft | -5118.110236 |
+| closure at that contact closed | no |
+
+The map spills at the edge of its own mapped area, 2.380249 ft below the crest and above the contact the wells see: six wells grid too little of the structure to close the trap on the map. The engine says so (limited by the edge); a closure figure from this grid is the map's limit and no measurement of the trap.
+
+ANOMALY CONFORMANCE (prospectAssessment.js anomalyConformance; THIS ENGINE AWAITS ITS INDEPENDENT ORACLE, engines PR E1c: taught, and graded only once it lands). A hydrocarbon anomaly ends downdip at a contact, so its downdip edge follows one depth contour. The engine reads the anomaly's downdip edge (an anomaly node beside a lower node outside it, at their midpoint), its scatter against the closure's relief, conformance = 1 - scatter / relief clipped to 0 to 1, the share of the anomaly inside the closure, and the contact the edge implies. Two DESIGNED TEACHING ANOMALIES on the Ekene grid, labelled as such: A, every mapped node shallower than the spill; B, every node 20 ft shallower than the spill and west of the grid's middle column (an anomaly that cuts across the contours):
+
+| anomaly | nodes | edge nodes | conformance | share inside the closure | implied contact ft | edge scatter ft |
+| --- | --- | --- | --- | --- | --- | --- |
+| A, a contour | 11 | 9 | 0.729467 | 1.000000 | -5053.959008 | 0.643935 |
+| B, cut across | 72 | 22 | 0.000000 | 0.152778 | -5068.442175 | 6.992237 |
+
+EVIDENCE (evidenceIndependence). Attributes computed from one seismic response are one piece of evidence. A full-stack RMS amplitude, an impedance from the same full stack and a far-stack brightening make 3 supporting items and 2 independent sources; the shared source is full_stack (full-stack RMS amplitude, impedance from the full stack).
+
+THE ASSESSMENT (assessProspect, the decision table; conformance 0.7 and above fits, under 0.3 cuts across; two independent supporting sources to mature):
+
+| case | recommendation | seismic support |
+| --- | --- | --- |
+| anomaly present, conformance 0.83, inside 0.9, two independent sources, feasible, nothing open | mature | supports |
+| the same with one independent source | investigate | supports |
+| no anomaly, feasible | downgrade | against |
+| no anomaly, feasibility not stated | retain | neutral |
+| anomaly present, a competing explanation judged likely | investigate | neutral |
+
+The absence of an anomaly counts against a prospect only where the feasibility study says the case would be visible.
+
+# SECTION 59: The report and the limits, and the Expert capstone (owned by Expert m06 l01 and Expert m06 l02 and Expert m06 l03 and Expert m06 l04)
+
+THE QI REPORT states, for every product, the method, the stated settings (window, wavelet and its scale, LFM cut, weights, iterations, seeds), the blind-well figures per parameter, the calibration and its left-out check, the prospect figures with their limits, and every issue raised. The handover files are the products and that record; a result without its settings cannot be checked.
+
+WHAT QI NEVER SETS: the geological chance of success. QI reports what the seismic says (supports, neutral, against) for the risk team to weigh; prospectAssessment.js returns a recommendation and a seismic support and no probability of success.
+
+WHAT THE ENGINES DO NOT COMPUTE, checked against the functions this tier calls: no wavelet is estimated inside an inversion (it is an input); no LFM is built inside modelBased or simultaneousInversion (m0 is an input); no horizon is picked; no grid is gridded (closure reads a stated grid); no fluid is inferred from a class name; no geological chance; no volume in barrels (closure returns gross rock volume only).
+
+THE EXPERT CAPSTONE runs on a held-out synthetic case (the Ekene field is never used), supplied as a case file the learner pastes into the inversion and prospect explorers. It asks for six figures, each read from the panels: the LFM ln(AI) at a stated sample of a second trace position, built from the case's wells by inverse distance and their horizons; the model-based AI at a stated sample of the target trace, with the case's supplied low-frequency model, wavelet, weight and iteration count; the Vp/Vs from the simultaneous inversion at that sample, with the case's angle wavelets; the high end of the 80 percent porosity interval at a stated AI; the posterior probability of the oil-sand facies at a stated AI; and the column from crest to spill on the case's depth grid, in feet. Every input those figures depend on is stated in the case file.
+
 # SECTION 60: Vocabulary this course legislates before a word is written (owned by Associate m01 and Professional m01 and Expert m01)
 
 THE RULE. Each term below means one thing everywhere a learner reads, and a lesson that uses it in another sense is a defect.
 
-- **AI**: acoustic impedance, Vp x density, in kg/(m2 s); the course writes the word impedance beside it the first time a lesson uses it, and never uses AI for anything else.
+- **AI**: acoustic impedance, Vp x density, in kg/(m2 s); the course writes the word impedance beside it the first time a lesson uses it, and uses AI for nothing else.
 - **SI**: shear impedance, Vs x density.
 - **net sand**: a sample of the reservoir with Vsh at or below the stated cut-off.
 - **oil leg, water leg**: net sand above, and at or below, the stated oil-water contact.

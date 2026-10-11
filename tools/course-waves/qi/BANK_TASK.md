@@ -1,6 +1,6 @@
 # QI Quantitative Interpretation: the bank writer's task
 
-Read `BRIEF.md` and `LESSON_TASK.md` first, then the kit's
+Read `BRIEF.md` (its table of provenance files binds here too) and `LESSON_TASK.md` first, then the kit's
 `/root/dc-wavekit/BANK_TASK.md` (format, gates, key-truth rule), which binds
 here in full. Every number you write is quoted from `digest.txt`, the only
 teaching truth for this course.

@@ -106,7 +106,7 @@ ${table(['selection', 'rule', 'samples at Ekene-1'], [
 WHAT THE PACK HOLDS:
 
 ${table(['part', 'what it is', 'size'], [
-    ['logs', 'Vp, Vs and density from the DT, DTS and RHOB logs (Vp = 304800 / DT, Vs = 304800 / DTS, density = RHOB x 1000), GR, and the kit\'s PHIT, VSH and SW, for Ekene-1 to Ekene-4 over the Ekene Sand and the shale above it', `${whole(L.PACK_WELLS.length)} wells`],
+    ['logs', 'Vp, Vs and density from the DT and DTS logs in microseconds per foot and the RHOB log in g/cc (Vp = 304800 / DT, Vs = 304800 / DTS, density = RHOB x 1000), GR, and the kit\'s PHIT, VSH and SW, for Ekene-1 to Ekene-4 over the Ekene Sand and the shale above it', `${whole(L.PACK_WELLS.length)} wells`],
     ['headers', 'every well\'s curve list, checkshot count and survey station count', `${whole(Object.keys(P.headers).length)} wells`],
     ['spread traces', 'full-stack traces spread over the survey', `${whole(P.qcSpread.inlines.length)} inlines by ${whole(P.qcSpread.crosslines.length)} crosslines, ${whole(P.qcSpread.t0_ms)} to ${whole(P.qcSpread.t1_ms)} ms every ${f6(P.qcSpread.dt_ms)} ms`],
     ['neighbour traces', 'neighbouring full-stack traces along the inline through Ekene-1', `${whole(P.qcNeighbours.traces.length)} traces, inline ${whole(P.qcNeighbours.inline)}`],
@@ -114,6 +114,12 @@ ${table(['part', 'what it is', 'size'], [
     ['traces at the wells', 'full, near, mid and far stack traces at Ekene-1 to Ekene-4', `${whole(P.wellTraces.t0_ms)} to ${whole(P.wellTraces.t1_ms)} ms`],
     ['gathers', 'NMO-corrected CDP gathers next to Ekene-1', `${whole(P.gathers.cdps.length)} CDPs, ${whole(P.gathers.offsets_m.length)} offsets`],
   ])}
+
+THE SAME SELECTIONS AT EVERY PACK WELL:
+
+${table(['well', 'net sand', 'oil leg', 'water leg', 'cap rock'], L.PACK_WELLS.map((w) => { const W = L.packWell(w); return [w, whole(L.zoneSamples(W, 'sand').length), whole(L.zoneSamples(W, 'oil').length), whole(L.zoneSamples(W, 'water').length), whole(L.zoneSamples(W, 'shale').length)]; }))}
+
+A well whose top of the Ekene Sand lies below the oil-water contact has no oil leg by this rule.
 
 THE CONDITIONS AT THE EKENE SAND, stated with the kit: ${P.conditions.ekene.tF} degF, ${P.conditions.ekene.pPsia} psia, brine salinity ${f6(P.conditions.ekene.salinity)} (weight fraction of NaCl), oil ${P.conditions.ekene.api} API, gas-oil ratio ${P.conditions.ekene.gorScfStb} scf/stb, gas gravity ${f6(P.conditions.ekene.gasSg)}.`));
 
@@ -274,7 +280,7 @@ A CHECK AGAINST A KNOWN ANSWER. A Ricker wavelet of 30 Hz has an amplitude spect
   const one = L.spectrum(L.timeWindow(L.qcTraces('ekene1'), { t0Ms: E.qcWindowsMs[0][0], t1Ms: E.qcWindowsMs[0][1] }), L.QC_CLOCK.dtMs, { taper: E.qcTaper });
   ctx.S1 = S1;
   out.push(section(10, 'Band edges and the centroid', 'Associate m03 l02 and Associate m06 l03', `
-DEFINITIONS (spectrumStats). The -6 dB edges are where the amplitude falls to 10^(-6/20) of the peak amplitude, either side of the peak, interpolated linearly between frequency steps; the -20 dB edges the same at 10^(-20/20). The -6 dB bandwidth is the high edge less the low edge. The centroid is the power-weighted mean frequency, the sum of f A(f)^2 over the sum of A(f)^2.
+DEFINITIONS (spectrumStats). The -6 dB edges are where the amplitude falls to 10^(-6/20) of the peak amplitude, below and above the peak, interpolated linearly between frequency steps; the -20 dB edges the same at 10^(-20/20). The -6 dB bandwidth is the high edge less the low edge. The centroid is the power-weighted mean frequency, the sum of f A(f)^2 over the sum of A(f)^2.
 
 THE EKENE FULL STACK BY WINDOW, the ${whole(S1.traces)} spread traces, taper ${f6(E.qcTaper)}:
 

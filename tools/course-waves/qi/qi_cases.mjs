@@ -56,7 +56,7 @@ export function tamberlo() {
       rho = 2425 + 15 * gauss(rng);
     } else {
       const x = (md - top) / (base - top);
-      vsh = clamp(0.17 + 0.11 * Math.sin(2 * Math.PI * 2.3 * x) + 0.025 * gauss(rng), 0.03, 0.6);
+      vsh = clamp(0.17 + 0.11 * Math.sin(2 * Math.PI * 2.3 * x) + 0.025 * gauss(rng) + (md >= 7604 && md <= 7613 ? 0.3 : 0), 0.03, 0.6);
       phi = clamp(0.275 - 0.24 * vsh + 0.012 * gauss(rng), 0.08, 0.33);
       vp = 4320 - 5300 * phi - 950 * vsh + 45 * gauss(rng);
       vs = -760 + 0.79 * vp + 38 * gauss(rng);
