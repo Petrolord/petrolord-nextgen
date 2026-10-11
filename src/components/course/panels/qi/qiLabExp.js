@@ -205,37 +205,42 @@ export function lfmAt(wells, at, win, { power = EXPERT.idwPower, exclude } = {})
  * Everything one Ekene well's post-stack inversion needs, built once: the
  * logs of all four pack wells in time, the scaled wavelet, the LFM wells.
  */
-export function ekeneSetup(win = windowIndex()) {
+export function ekeneSetup(win = windowIndex(), { waveletHz = EXPERT.waveletHz, waveletHalfMs = EXPERT.waveletHalfMs, lfmHz = EXPERT.lfmHz } = {}) {
+  if (!(win.ns >= 4) || win.i0 < 0 || win.i1 >= PACK.wellTraces.wells['Ekene-1'].full.length) return { error: `The window must lie inside the well traces, ${PACK.wellTraces.t0_ms} to ${PACK.wellTraces.t1_ms} ms.` };
   const logs = Object.keys(PACK.wells).map((w) => wellInTime(w, win));
-  const raw = teachingWavelet();
+  const raw = attempt(() => teachingWavelet(waveletHz, waveletHalfMs));
+  if (raw.error) return raw;
   const sc = waveletScale(logs.map((l) => ({ trace: wellTrace(l.name, 'full', win), lnAi: l.lnAi })), raw);
   if (sc.error) return sc;
   const wavelet = raw.map((v) => v * sc.scale);
-  return { win, logs, raw, scale: sc.scale, scaleSamples: sc.samples, wavelet, lfm: lfmWells(logs) };
+  return { win, logs, raw, scale: sc.scale, scaleSamples: sc.samples, wavelet, lfm: lfmWells(logs, 'lnAi', lfmHz), lfmHz };
 }
 
 /** The truth a well's inversion is scored against: its ln(AI) after the stated high cut. */
 export const truthOf = (log, hz = EXPERT.truthHz) => lowPassFinite(log.lnAi, halfWindowFor(hz, log.win.dtMs));
 
 /** Invert one well's full-stack trace by a stated method, the well left out of its LFM or kept in. */
-export function invertAt(S, well, { method = 'model_based', exclude = null, d = null, eps = EXPERT.eps, iters = EXPERT.iters } = {}) {
+export function invertAt(S, well, {
+  method = 'model_based', exclude = null, d = null, eps = EXPERT.eps, iters = EXPERT.iters,
+  lambda = EXPERT.lambda, epsTV = EXPERT.epsTV, outer = EXPERT.outer, power = EXPERT.idwPower,
+} = {}) {
   const log = S.logs.find((l) => l.name === well);
-  const m0 = lfmAt(S.lfm, { x: log.x, y: log.y, horizons: log.horizonsMs }, S.win, { exclude: exclude ? well : undefined });
+  const m0 = lfmAt(S.lfm, { x: log.x, y: log.y, horizons: log.horizonsMs }, S.win, { exclude: exclude ? well : undefined, power });
   if (m0.error) return m0;
   const trace = d || wellTrace(well, 'full', S.win);
   return attempt(() => {
-    if (method === 'sparse_spike') return { ...sparseSpike({ d: trace, wavelet: S.wavelet, m0, lambda: EXPERT.lambda, dtMs: S.win.dtMs, crossoverHz: EXPERT.lfmHz, iters }), m0 };
-    const blocky = method === 'blocky' ? { epsTV: EXPERT.epsTV, outer: EXPERT.outer } : null;
+    if (method === 'sparse_spike') return { ...sparseSpike({ d: trace, wavelet: S.wavelet, m0, lambda, dtMs: S.win.dtMs, crossoverHz: S.lfmHz ?? EXPERT.lfmHz, iters }), m0 };
+    const blocky = method === 'blocky' ? { epsTV, outer } : null;
     return { ...modelBased({ d: trace, wavelet: S.wavelet, m0, eps, blocky, iters }), m0 };
   });
 }
 
 /** The blind-well table: each well with itself left out of the LFM, and kept in. */
-export function blindTable(S, method = 'model_based') {
+export function blindTable(S, method = 'model_based', opts = {}) {
   return S.logs.map((log) => {
-    const truth = truthOf(log);
-    const blind = invertAt(S, log.name, { method, exclude: true });
-    const kept = invertAt(S, log.name, { method });
+    const truth = truthOf(log, opts.truthHz);
+    const blind = invertAt(S, log.name, { ...opts, method, exclude: true });
+    const kept = invertAt(S, log.name, { ...opts, method });
     return {
       name: log.name,
       blind: blind.error ? blind : blindWellScore(blind.m, truth),
@@ -246,11 +251,13 @@ export function blindTable(S, method = 'model_based') {
 }
 
 /** Seeded noise realisations of one well's inversion and their Q10, Q50 and Q90 of AI. */
-export function spreadAt(S, well, { snr = EXPERT.noiseSnr, seeds = EXPERT.seeds } = {}) {
+export function spreadAt(S, well, { snr = EXPERT.noiseSnr, seeds = EXPERT.seeds, ...opts } = {}) {
   const d = wellTrace(well, 'full', S.win);
   const reals = [];
   for (const seed of seeds) {
-    const r = invertAt(S, well, { d: addNoise(d, snr, seed) });
+    const noisy = attempt(() => addNoise(d, snr, seed));
+    if (noisy.error) return noisy;
+    const r = invertAt(S, well, { ...opts, exclude: true, d: noisy });
     if (r.error) return r;
     reals.push(r.ai);
   }
@@ -284,7 +291,7 @@ export function averageAmplitude(traces, dtMs) {
 }
 
 /** Coloured inversion of every pack well: the slope from each log's AI, the operator, the output. */
-export function colouredAt(S) {
+export function colouredAt(S, { band = EXPERT.band } = {}) {
   return attempt(() => {
     const slopes = S.logs.map((l) => {
       const ai = l.lnAi.filter(fin).map(Math.exp);
@@ -292,7 +299,7 @@ export function colouredAt(S) {
     });
     const alpha = mean(slopes.map((s) => s.alpha));
     const traces = S.logs.map((l) => wellTrace(l.name, 'full', S.win));
-    const op = colouredOperator({ seismicAmp: averageAmplitude(traces, S.win.dtMs), alpha, n: S.win.ns, dtMs: S.win.dtMs, band: EXPERT.band });
+    const op = colouredOperator({ seismicAmp: averageAmplitude(traces, S.win.dtMs), alpha, n: S.win.ns, dtMs: S.win.dtMs, band });
     const out = S.logs.map((l, k) => ({ name: l.name, rel: Float64Array.from(applyColoured(traces[k], op)) }));
     return { slopes, alpha, N: op.N, out };
   });
@@ -351,10 +358,10 @@ export function ekeneSimSetup(S, stacks = ['near', 'mid', 'far']) {
 }
 
 /** Simultaneous inversion at one well, the well left out of its three LFMs or kept in. */
-export function simAt(S, M, well, { exclude = false, stacks = M.stacks, eps = EXPERT.simEps, iters = EXPERT.iters } = {}) {
+export function simAt(S, M, well, { exclude = false, stacks = M.stacks, eps = EXPERT.simEps, iters = EXPERT.iters, power = EXPERT.idwPower } = {}) {
   const log = S.logs.find((l) => l.name === well);
   const at = { x: log.x, y: log.y, horizons: log.horizonsMs };
-  const opt = { exclude: exclude ? well : undefined };
+  const opt = { exclude: exclude ? well : undefined, power };
   const m0 = {};
   for (const k of ['lnAi', 'lnSi', 'lnRho']) {
     const t = lfmAt(M.lfm[k], at, S.win, opt);

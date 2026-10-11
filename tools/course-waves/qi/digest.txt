@@ -1071,12 +1071,12 @@ EKENE-1, 20 realisations, AI:
 
 | time ms | Q10 AI | Q50 AI | Q90 AI | relative spread |
 | --- | --- | --- | --- | --- |
-| 1280.000000 | 3234788.713574 | 4265197.870417 | 5381890.062124 | 0.503400 |
-| 1288.000000 | 4068272.975688 | 5411809.392501 | 6756958.543550 | 0.496818 |
-| 1296.000000 | 5585687.788449 | 7492439.243862 | 9627879.127025 | 0.539503 |
-| 1304.000000 | 5105598.449954 | 6676603.290047 | 9946158.337593 | 0.725003 |
+| 1280.000000 | 3220622.144347 | 4255855.190784 | 5379029.910027 | 0.507162 |
+| 1288.000000 | 4056484.639171 | 5392598.674201 | 6743113.590982 | 0.498207 |
+| 1296.000000 | 5559235.382643 | 7469086.162302 | 9637911.753338 | 0.546074 |
+| 1304.000000 | 5069751.189881 | 6629158.255936 | 9889658.945117 | 0.727077 |
 
-Mean relative spread over the 27 logged samples: 0.643946. The spread is an estimate on stated seeds and a stated noise level; a different set of seeds gives different figures.
+Mean relative spread over the 27 logged samples: 0.645787. The spread is an estimate on stated seeds and a stated noise level; a different set of seeds gives different figures.
 
 # SECTION 51: Fatti's three parameters (owned by Expert m03 l01)
 
