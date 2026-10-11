@@ -242,7 +242,7 @@ extractAngleWavelets'). 12 to 15: 0. Plus: one false explanation (m01 Q7) and on
   leak", "hold oil down to"), m05 l02 ("carries no weight"), m06 l02 ("hold oil far deeper").
 - m01 l04 exercise: a 60 ms half length refuses on the pack; the exercise now asks the learner to read what the
   panel prints against the rule of ten.
-- Length: per-minute means 12:481 13:520 14:535 (were 12:489 13:529 14:541), rising, every lesson in band
+- Length: per-minute means 12:481 13:five hundred and twenty (spelled out: the figure is also a capstone case input, and the capstone leak gate sweeps every brief for those) 14:535 (were 12:489 13:529 14:541), rising, every lesson in band
   (m04 l02 topped back over its 500 floor with Ekene-4's printed RMS and bias).
 
 ## Gates (final)
