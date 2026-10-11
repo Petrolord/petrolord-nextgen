@@ -29,9 +29,19 @@ const {
 } = await import(TOLPATH);
 
 const BARE = process.argv.includes('--bare-stated-tolerances');
-const rows = JSON.parse(execFileSync('node', [`${HERE}/qi_capstone.mjs`, '--json'],
-  { encoding: 'utf8', maxBuffer: 1e8, cwd: HERE }));
+// Every tier's capstone generator runs; only the fields gradedTolerance.js
+// DECLARES are kept (a tier whose engines have not passed the extraction gate
+// is not declared there yet, so its rows are left out), in the declared order,
+// with the declared quantity class.
 const declared = GRADED_FIELDS.map(([, k]) => k);
+const allRows = [];
+for (const g of ['qi_capstone.mjs', 'qi_capstone_p.mjs', 'qi_capstone_e.mjs']) {
+  if (!fs.existsSync(`${HERE}/${g}`)) continue;
+  allRows.push(...JSON.parse(execFileSync('node', [`${HERE}/${g}`, '--json'],
+    { encoding: 'utf8', maxBuffer: 1e8, cwd: HERE })));
+}
+const rows = declared.map((k) => allRows.find((r) => r.key === k)).filter(Boolean)
+  .map((r) => ({ ...r, cls: GRADED_FIELDS.find(([, k]) => k === r.key)[2] }));
 const got = rows.map((r) => r.key);
 if (got.join() !== declared.join()) {
   console.log(`REFUSES: the generator returned [${got.join(', ')}], gradedTolerance.js declares [${declared.join(', ')}]`); process.exit(2);

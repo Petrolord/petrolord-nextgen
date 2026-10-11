@@ -147,15 +147,25 @@ if BANKS:
     ]
 
 
-# THE FINAL (SHIP) STAGE: the migration generators and their verifiers are
-# added here when the migrations are written (gen_seeds.sh, verify_sql.py and
-# its canaries, gen_golive.py's self checks, promptleak over the course
-# migration). Until then a final run REFUSES rather than passing without them.
+# THE FINAL (SHIP) STAGE: the seed ladder regenerated from the COMMITTED tree
+# (gen_seeds.sh, byte for byte), verify_sql.py field by field with its four
+# canaries, the course and go-live generators' self checks, promptleak over the
+# course migration, and the migration files' own shape (no transaction lines).
 if STAGE == 'final':
-    for f in ('gen_seeds.sh', 'verify_sql.py', 'gen_golive.py'):
-        if not os.path.exists(os.path.join(HERE, f)):
-            print(f'run_gates REFUSES: QI_STAGE=final needs {f}, which does not exist yet')
-            sys.exit(2)
+    NAMES = json.load(open(os.path.join(HERE, 'ship_names.json')))
+    MIG = f"{REPO}/migrations/{NAMES['course']}.sql"
+    RUNS += [
+        ('gen_seeds.sh HEAD', f'{HERE}/gen_seeds.sh', ['bash', f'{HERE}/gen_seeds.sh', 'HEAD'], 0),
+        ('verify_sql.py HEAD', f'{HERE}/verify_sql.py', ['python3', f'{HERE}/verify_sql.py', 'HEAD'], 0),
+        ('verify_sql.py CANARY text', f'{HERE}/verify_sql.py', ['python3', f'{HERE}/verify_sql.py', 'HEAD', '--canary'], 2),
+        ('verify_sql.py CANARY key', f'{HERE}/verify_sql.py', ['python3', f'{HERE}/verify_sql.py', 'HEAD', '--canary-key'], 2),
+        ('verify_sql.py CANARY field', f'{HERE}/verify_sql.py', ['python3', f'{HERE}/verify_sql.py', 'HEAD', '--canary-field'], 2),
+        ('verify_sql.py CANARY lesson', f'{HERE}/verify_sql.py', ['python3', f'{HERE}/verify_sql.py', 'HEAD', '--canary-lesson'], 2),
+        ('gen_course.py (self checks)', f'{HERE}/gen_course.py', ['python3', f'{HERE}/gen_course.py'], 0),
+        ('gen_golive.py (self checks)', f'{HERE}/gen_golive.py', ['python3', '-c', f'import sys; sys.argv=["x"]; sys.path.insert(0, "{HERE}"); import gen_golive as G; sys.exit(1 if G.refused else 0)'], 0),
+        ('promptleak.py --sql', f'{KIT}/promptleak.py', ['python3', f'{KIT}/promptleak.py', '--sql', MIG, '--course', 'qi'], 0),
+        ('no transaction lines in any QI migration', '/usr/bin/grep', ['bash', '-c', f"! grep -niE '^\\s*(begin|commit|rollback)\\s*;' {REPO}/migrations/*_qi_*.sql"], 0),
+    ]
 
 
 def last_line(out):

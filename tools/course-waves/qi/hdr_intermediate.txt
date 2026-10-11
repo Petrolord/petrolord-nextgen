@@ -1,0 +1,20 @@
+-- ============================================================================
+-- QI PROFESSIONAL DEEP SEED: Quantitative Interpretation, intermediate tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/qi/intermediate.
+--
+-- What this tier owns: FROM THE TIE TO AVO ON THE SEISMIC. Statistical and
+-- well wavelets, phase, the bulk shift, anchors and the time-depth record, one
+-- field wavelet; offset gathers, NMO stretch and its mute, residual moveout
+-- and fold; Dix, Walden's angle, angle gathers, partial stacks and the usable
+-- angle; the Shuey fit, intercept and gradient, the background trend, the
+-- fluid factor and chi; AVO at the wells.
+--
+-- AN APP COURSE. The Suite app is QI Studio; the practicals also run in the
+-- course's own explorer panels. The tier's capstone grades six values on a
+-- held-out synthetic case, each a return value of a vendored engine. No BEGIN
+-- or COMMIT: apply_qi.sh wraps this file in one transaction.
+-- ============================================================================

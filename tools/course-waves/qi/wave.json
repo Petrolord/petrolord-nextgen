@@ -22,5 +22,9 @@
    "tamberlo_vpvs_brine",
    "tamberlo_wet_distance"
   ]
- }
+ },
+ "module": "geoscience",
+ "pathOrder": 80,
+ "prerequisite": "welldata",
+ "courseType": "app"
 }

@@ -68,7 +68,7 @@ EKENE-1 on its full-stack trace clock (${f6(tr1.dtMs)} ms, first sample ${whole(
   if (/[–—]/.test(wwMsg)) throw new Error('well wavelet message carries a dash');
   out.push(section(24, 'Statistical and well wavelets', 'Professional m01 l03 and Professional m02 l03', `
 TWO WAVELETS COME FROM THE SEISMIC AT A WELL.
-- STATISTICAL (extractStatisticalWavelet): the amplitude spectrum of the traces' autocorrelation, taken to zero phase. Its spectrum is the source wavelet's when the reflectivity is white; its phase is ASSUMED zero. The engine reads the stated window length (default ${whole(E.waveletLengthMs)} ms) and smoothing (default ${whole(E.waveletSmoothHz)} Hz), Hann-tapers the lags and normalises the peak to 1.
+- STATISTICAL (extractStatisticalWavelet): the amplitude spectrum of the traces' autocorrelation, taken to zero phase. Its spectrum is the source wavelet's when the reflectivity is white; its phase is ASSUMED zero. The engine reads the stated window length (${whole(E.waveletLengthMs)} ms here) and smoothing (${whole(E.waveletSmoothHz)} Hz here), Hann-tapers the lags and normalises the peak to 1.
 - FROM THE WELL: the least-squares (Wiener) wavelet that best convolves the well's reflectivity into the trace at the well, so its phase is MEASURED. This one is Seismolord app code (${SUITE.wellWavelet}, petrolord-suite ${sc}), and it needs a log long enough for the wavelet it is asked for.
 
 THE STATISTICAL WAVELET AT EACH WELL, full stack, window ${whole(E.waveletWindowMs[0])} to ${whole(E.waveletWindowMs[1])} ms, every ${f6(4)} ms:
@@ -77,7 +77,7 @@ ${table(['well', 'samples', 'peak Hz', 'centroid Hz', '-6 dB low Hz', '-6 dB hig
 
 For comparison, a 25 Hz Ricker on the same clock (${whole(rk.length)} samples): peak ${f6(rks.peakHz)} Hz, centroid ${f6(rks.centroidHz)} Hz.
 
-THE WELL WAVELET ON THE PACK. Asked for its default wavelet at Ekene-1 from the pack's logs, Seismolord refuses: "${wwMsg}" The extraction keeps only trace samples whose whole wavelet window (2 x 15 + 1 = 31 samples at its default half length) sits on live reflectivity, and the pack's logs give ${whole(syn1.live)} live samples (section 23), so no sample qualifies. The course's ties therefore use the statistical wavelet.`));
+THE WELL WAVELET ON THE PACK. Asked for a wavelet at Ekene-1 with its stated window from the pack's logs, Seismolord refuses: "${wwMsg}" The extraction keeps only trace samples whose whole wavelet window (2 x 15 + 1 = 31 samples at its default half length) sits on live reflectivity, and the pack's logs give ${whole(syn1.live)} live samples (section 23), so no sample qualifies. The course's ties therefore use the statistical wavelet.`));
 
   /* ------------------------------------------------------------ 25 */
   const ph1 = must(P.phaseMatch(syn1.synthetic, tr1.values), 'phase');
@@ -183,7 +183,7 @@ At 90 degrees Ekene-3 stays above the 0.8 rule; reversed, it falls below it. In 
   const top5 = must(P.pickEvent(g5, g5.traces[0], 1289), 'pick');
   const v5 = must(P.velocityAt(tab, top5.tMs), 'velocity');
   out.push(section(31, 'Offset gathers and bin width', 'Professional m03 l01', `
-THE PACK'S GATHERS: ${whole(pk.gathers.cdps.length)} NMO-corrected CDP gathers next to Ekene-1 (inlines ${whole(pk.gathers.cdps[0].inline)} to ${whole(pk.gathers.cdps[pk.gathers.cdps.length - 1].inline)}), ${whole(g5.offsets.length)} offsets from ${whole(g5.offsets[0])} to ${whole(g5.offsets[g5.offsets.length - 1])} m, ${f6(g5.dtMs)} ms, ${whole(g5.t0Ms)} to ${whole(pk.gathers.t1_ms)} ms, muted to exact zeros beyond ${whole(pk.gathers.muteAngle_deg)} degrees. Gather 5 is at inline ${whole(g5.inline)}, crossline ${whole(g5.crossline)}, the trace of Ekene-1.
+THE PACK'S GATHERS: ${whole(pk.gathers.cdps.length)} NMO-corrected CDP gathers next to Ekene-1 (inlines ${whole(pk.gathers.cdps[0].inline)} to ${whole(pk.gathers.cdps[pk.gathers.cdps.length - 1].inline)}), ${whole(g5.offsets.length)} offsets from ${whole(g5.offsets[0])} to ${whole(g5.offsets[g5.offsets.length - 1])} m, ${f6(g5.dtMs)} ms, ${whole(g5.t0Ms)} to ${whole(pk.gathers.t1_ms)} ms, carrying the kit's stated mute beyond ${whole(pk.gathers.muteAngle_deg)} degrees (by the kit's own angle calculation, which the course does not measure). Gather 5 is at inline ${whole(g5.inline)}, crossline ${whole(g5.crossline)}, the trace of Ekene-1.
 
 OFFSET BINS (binOffsets): bin k holds offsets from k w to (k + 1) w, centred at (k + 0.5) w. At the stated width of ${whole(E.binWidthM)} m the gather fills ${whole(bins.fold.length)} bins with fold ${bins.fold.map(whole).join(', ')}; foldSummary: ${whole(fs.total)} traces, ${whole(fs.liveBins)} live bins, far offset ${f6(fs.farOffset)} m (a bin is reported at its centre).
 
@@ -198,7 +198,7 @@ AT THE TOP ON GATHER 5, t0 ${f6(top5.tMs)} ms, NMO velocity the table's RMS velo
 
 ${table(['offset m', 'stretch'], stRows)}
 
-Stretch mute offsets at that time: ${f6(P.muteOffset(top5.tMs, v5.vrms, 0.2))} m for a limit of 0.2, ${f6(P.muteOffset(top5.tMs, v5.vrms, E.maxStretch))} m for ${f6(E.maxStretch)}.`));
+Stretch mute offsets at that time: ${f6(P.muteOffset(top5.tMs, v5.vrms, 0.2))} m for a limit of ${f6(0.2)}, ${f6(P.muteOffset(top5.tMs, v5.vrms, E.maxStretch))} m for ${f6(E.maxStretch)}.`));
 
   /* ------------------------------------------------------------ 33 */
   const r5 = must(P.rmo(g5, top5.tMs), 'rmo');
@@ -207,7 +207,7 @@ Stretch mute offsets at that time: ${f6(P.muteOffset(top5.tMs, v5.vrms, 0.2))} m
     return [whole(k), whole(g.inline), whole(g.crossline), f6(t.tMs), r.method, whole(r.fitted), f6(r.rmoFarMs)];
   });
   out.push(section(33, 'Residual moveout', 'Professional m03 l03', `
-THE MEASURE (residualMoveout): on a gather that should be flat, each offset's shift of the event against a pilot (the stated nearest traces stacked, default ${whole(E.rmoNearCount)}), by the lag of largest absolute correlation in a window (half window ${whole(E.rmoWindowMs)} ms, largest shift ${whole(E.rmoMaxLagMs)} ms); offsets whose correlation is at least 0.7 in size enter a fit dt = a x^2 weighted by the squared correlation, and the residual at the far offset, a x_far^2, is the number a QC map shows. When the fitted lags scatter about the parabola by more than one sample the waveform has changed with offset, and the engine measures instead by AB semblance (method 'ab-semblance').
+THE MEASURE (residualMoveout): on a gather that should be flat, each offset's shift of the event against a pilot (the stated nearest traces stacked, ${whole(E.rmoNearCount)} here), by the lag of largest absolute correlation in a window (half window ${whole(E.rmoWindowMs)} ms, largest shift ${whole(E.rmoMaxLagMs)} ms); offsets whose correlation is at least 0.7 in size enter a fit dt = a x^2 weighted by the squared correlation, and the residual at the far offset, a x_far^2, is the number a QC map shows. When the fitted lags scatter about the parabola by more than one sample the waveform has changed with offset, and the engine measures instead by AB semblance (method 'ab-semblance').
 
 GATHER 5 about the top: method ${r5.method}, ${whole(r5.used)} offsets used, ${whole(r5.fitted)} fitted, far offset ${f6(r5.farOffset)} m, residual at the far offset ${f6(r5.rmoFarMs)} ms. The last three offsets' lags are ${r5.lagsMs.slice(-3).map(f6).join(', ')} ms, at the search limit, with correlations ${r5.corr.slice(-3).map(f6).join(', ')}; with all ${whole(r5.fitted)} offsets in the fit the lags scatter about the parabola by more than a sample, which is the condition on which the engine measures by AB semblance.
 

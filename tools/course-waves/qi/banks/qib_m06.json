@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "The modelled top of the Ekene Sand at Ekene-1 has A 0.170742 in situ and 0.205564 with brine. What class does avoClass return for each, and what follows?",
+  "options": [
+   "Class II in situ and class I with brine, because the oil softens the sand and pulls its intercept down into the band around zero.",
+   "Class III in situ, since its gradient of -0.563558 is at or below zero, and class I with brine.",
+   "Class I for both, since both intercepts sit above 0.02, so the class alone does not separate oil from brine here.",
+   "Class I in situ and class IV with brine, because the brine curve turns up again by 35 degrees."
+  ],
+  "answer": 2,
+  "explanation": "avoClass calls A above 0.02 class I, whatever B is, and both intercepts (0.170742 and 0.205564) clear that band, so both tops are class I. Class III needs A more than 0.02 below zero, and the brine curve rising to 0.166006 at 35 degrees does not change a class read from A and B."
+ },
+ {
+  "prompt": "Under avoClass, an interface whose intercept A lies more than 0.02 below zero and whose gradient B is above zero falls in which class?",
+  "options": [
+   "Class IV.",
+   "Class III, the class of every interface with A more than 0.02 below zero, whatever its gradient reads.",
+   "Class II, because any gradient above zero pulls the interface back into the band around zero intercept.",
+   "Class I, because a positive gradient brightens the reflection with angle the way a hard sand's top does."
+  ],
+  "answer": 0,
+  "explanation": "The rule is: A above 0.02 class I; A within 0.02 of zero class II; otherwise class III when B is at or below zero and class IV when B is above it. A below the band with B above zero is class IV."
+ },
+ {
+  "prompt": "How much dimmer is the modelled in situ top of the Ekene Sand than the same rock with brine, at normal incidence and at 30 degrees?",
+  "options": [
+   "The oil brightens the top: the in situ coefficient sits above the brine one by 0.034809 at normal incidence.",
+   "By 0.066214 at normal incidence, shrinking to 0.034809 at 30 degrees as the two curves converge.",
+   "By 0.034809 at normal incidence, with no gap left by 30 degrees, where the two exact curves cross over.",
+   "By 0.034809 at normal incidence and 0.066214 at 30 degrees, below the brine coefficient at every angle."
+  ],
+  "answer": 3,
+  "explanation": "The exact coefficient with oil is below the brine one throughout: 0.171249 against 0.206058 at 0 degrees, a gap of 0.034809, and 0.070998 against 0.137212 at 30 degrees, 0.066214. The gap widens with angle, and the curves never cross in the table."
+ },
+ {
+  "prompt": "Which exact plane-wave coefficient does zoeppritzRpp give at normal incidence for the oil-bearing case?",
+  "options": [
+   "0.170742, Shuey's intercept A for the same interface.",
+   "0.171249.",
+   "0.206058, the exact coefficient at normal incidence.",
+   "0.156172, the near mean over 5 to 15 degrees."
+  ],
+  "answer": 1,
+  "explanation": "The exact plane-wave coefficient at normal incidence is 0.171249 in situ. Shuey's A of 0.170742 comes from a different engine call and sits close to it without being the same figure; 0.206058 is the brine top and 0.156172 the near stack mean."
+ },
+ {
+  "prompt": "What far mean does the model return for the in situ top over 25 to 35 degrees?",
+  "options": [
+   "0.073416, the mean exact coefficient at every whole degree from 25 to 35, ends included.",
+   "0.070998, the exact coefficient at 30 degrees, the middle of the range, which the model takes as the stack's value.",
+   "0.060228, the exact coefficient at 35 degrees, the far end of the range, where the far stack takes its value.",
+   "0.144237, the far mean of the same range, which the model reports for the in situ top."
+  ],
+  "answer": 0,
+  "explanation": "Each stack mean averages the exact coefficient at every whole degree of its range, ends included, the way the kit built its angle stacks: 0.073416 in situ over 25 to 35 degrees. 0.070998 and 0.060228 are single angles, and 0.144237 is the brine top's far mean."
+ },
+ {
+  "prompt": "What two layers does the modelled AVO at the top of the Ekene Sand use?",
+  "options": [
+   "The mean oil leg over the mean water leg, the contact at 5118.110236 ft read as the interface that the seismic sees.",
+   "The blocked logs of the 16 ft wet trend, convolved with a wavelet so the model carries the thickness of the sand.",
+   "Two half-spaces: the mean cap rock over the mean oil leg in situ, and the same cap rock over the oil leg taken to brine.",
+   "The mean cap rock over the measured water leg, which stands in for the oil leg with brine."
+  ],
+  "answer": 2,
+  "explanation": "The model is two half-spaces, the mean cap rock over the mean oil leg as it is and over the oil leg's substituted means, with no wavelet and no thickness. The measured water leg is different rock (porosity 0.197677 against 0.203626), so it cannot stand in for the same rock with brine."
+ },
+ {
+  "prompt": "A learner models a reflection with an upper half-space whose shear velocity exceeds its compressional velocity. What happens?",
+  "options": [
+   "A coefficient of NaN at every angle, the way elasticPoint returns NaN fields for the same impossible layer.",
+   "The message \"vp, vs and rho must be positive.\"",
+   "A curve computed with the upper Vs clamped at its Vp, flagged in the panel as extrapolated.",
+   "The engine's own words: \"Upper halfspace has vs >= vp.\""
+  ],
+  "answer": 3,
+  "explanation": "zoeppritzRpp refuses an upper layer with Vs above Vp, and the panel prints that message unchanged. The NaN result is elasticPoint's behaviour, the positivity message is substituteVels, and no engine clamps Vs; extrapolated is predictVs's flag."
+ },
+ {
+  "prompt": "Who or what decides whether a QI study at Ekene should go ahead?",
+  "options": [
+   "avoClass, whose class I at the top of the Ekene Sand is the engine's go decision for the study, in situ and with brine.",
+   "The interpreter, who writes the verdict from the numbers the engines return.",
+   "QI Studio's usability matrix, which grades nine Ekene wells limited and one missing, and so decides the study for the team.",
+   "The capstone, which grades a verdict alongside its six figures."
+  ],
+  "answer": 1,
+  "explanation": "The engines return spectra, trends, moduli and reflection coefficients; they do not decide whether a QI study should go ahead, and the verdict is written by the interpreter. A class is never graded, the usability grades are never graded, and no verdict is graded."
+ },
+ {
+  "prompt": "A verdict quotes the in situ top at -0.072091 from the wet trend. Which choices must it state beside that figure?",
+  "options": [
+   "The block length of the wet trend and the line the distance is read from, with the selections and the fluids and conditions.",
+   "None, because the fitted wet trend is fixed by the well's logs and every reader of the verdict would rebuild the same line.",
+   "The maximum lag of the signal to noise.",
+   "The taper of the spectrum alone, because the wet trend is fitted to the seismic spectrum and inherits its band from it."
+  ],
+  "answer": 0,
+  "explanation": "A verdict states its selections, its fluids and conditions, its taper and windows, its block length and the line the distance is read from, because each one moves a figure. The distance rests on the block length and the line; the lag and the taper belong to the data question."
+ },
+ {
+  "prompt": "For the verdict's band row, which figures does the course quote for the Ekene full stack?",
+  "options": [
+   "-6 dB 30.556053 to 32.127840 Hz, the band of the single trace at Ekene-1 in the same window, taper and target.",
+   "-6 dB 14.429678 to 32.581187 Hz, from the deeper 1600 to 2400 ms window of the same spread traces.",
+   "8.801471 to 47.968080 Hz.",
+   "-6 dB 14.425434 to 34.787627 Hz, peak 31.374887 Hz, on the mean spectrum of the 120 spread traces, 800 to 1600 ms."
+  ],
+  "answer": 3,
+  "explanation": "The verdict's band is the -6 dB band of the mean spectrum of the 120 spread traces in the window holding the Ekene Sand, 14.425434 to 34.787627 Hz with peak 31.374887 Hz. A single trace's -6 dB band hugs its peak (30.556053 to 32.127840 Hz), 14.429678 to 32.581187 Hz is the deeper window, and 8.801471 to 47.968080 Hz are the -20 dB edges."
+ },
+ {
+  "prompt": "What does the verdict quote for whether the signal is clean enough at Ekene?",
+  "options": [
+   "A median of 77.008444, 18.865384 dB, the figure for the window that holds the Ekene Sand in the neighbour traces.",
+   "A median of 999998.999971, which shows the neighbouring traces are identical and the data are noise-free at the target.",
+   "A median signal to noise of 361.155122 as a power ratio, 25.576938 dB, along the inline through Ekene-1.",
+   "A ratio of 25.576938 and a decibel figure of 361.155122."
+  ],
+  "answer": 2,
+  "explanation": "Signal to noise is a power ratio from trace coherency: the median over 20 pairs of the 800 to 1600 ms window is 361.155122, 25.576938 dB. 77.008444 is the 1600 to 2400 ms window, 999998.999971 is the ceiling at the clamp 0.999999, and 25.576938 is the decibel form, so reading it as the ratio swaps the two."
+ },
+ {
+  "prompt": "The verdict's footprint row reads \"share 0.015148 along the crosslines, no stripe by the rule\". Why does the rule call no footprint?",
+  "options": [
+   "The prominence of 27.724874 falls short of the rule's threshold of 467.977933, the prominence the designed stripe reached on the same slice.",
+   "The rule needs a share above 0.3 together with a prominence of 10 or more and at least five cycles; a share of 0.015148 fails it.",
+   "The period of 15.058824 lines is outside the 2 to 16 lines searched, so the engine does not report it as a stripe.",
+   "The cycles of 8.500000 fall below the five repeats the rule requires."
+  ],
+  "answer": 1,
+  "explanation": "QI Studio's rule calls a stripe a footprint only with a share above 0.3, a prominence of 10 or more and at least five repeats, all together. The Ekene crossline profile has prominence 27.724874 and 8.500000 cycles, both enough, but its share of 0.015148 is far below 0.3, so no footprint."
+ },
+ {
+  "prompt": "Which of these does the course say is never graded?",
+  "options": [
+   "The class of the case's top interface, which the panel prints from A and B and the capstone marks as one of its six figures.",
+   "The distance of the case's top interface from its own fitted wet trend, the figure that answers the fluid question.",
+   "The slope of the local shear trend on the case's water-leg net sand, since it rests on a stated form of fit.",
+   "Any verdict, any class name and any Ekene figure."
+  ],
+  "answer": 3,
+  "explanation": "Never graded: any figure in the videos, any Ekene figure, any verdict, class name or category, and any figure that depends on a choice the case does not state. The distance from the case's own fitted wet trend and the shear slope on the case's water-leg net sand are two of the Associate capstone's six graded figures."
+ },
+ {
+  "prompt": "In the Associate capstone, which line is the case's top-interface distance measured from?",
+  "options": [
+   "The case's own fitted wet trend.",
+   "The published Castagna, Swan and Foster line, computed from the case's mean Vs/Vp and a Gardner exponent.",
+   "The Ekene-1 fitted wet trend of slope -2.257963, which the panel keeps as the reference line for every case.",
+   "Any line the learner states."
+  ],
+  "answer": 0,
+  "explanation": "The capstone grades the distance of the case's top interface from its own fitted wet trend, with every input it depends on stated in the case file. The published line gives a different distance, Ekene is never the case, and a figure that depends on an unstated choice is never graded."
+ },
+ {
+  "prompt": "At the modelled top of the Ekene Sand, how do Shuey's intercept and gradient move when the oil leg is taken from in situ to brine?",
+  "options": [
+   "A falls from 0.205564 to 0.170742 and B goes from -0.475316 to the more negative -0.563558, oil to brine.",
+   "A stays at 0.170742, since the intercept depends on the rock frame alone, while B moves to -0.475316 with the brine.",
+   "A rises from 0.170742 to 0.205564, and B goes from -0.563558 to the less negative -0.475316.",
+   "A rises to 0.205564 and B becomes more negative at -0.563558, because the stiffer brine steepens the gradient."
+  ],
+  "answer": 2,
+  "explanation": "With oil the top reads A 0.170742 and B -0.563558; with brine A 0.205564 and B -0.475316. So the oil leaves A lower and B more negative, and the top dims faster with angle; taking it to brine reverses both. The intercept moves with the fluid as AI does."
+ }
+]

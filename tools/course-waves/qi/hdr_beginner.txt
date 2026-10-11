@@ -1,0 +1,21 @@
+-- ============================================================================
+-- QI ASSOCIATE DEEP SEED: Quantitative Interpretation, beginner tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/qi/beginner.
+--
+-- What this tier owns: FEASIBILITY. What a QI study asks, the Ekene field and
+-- the teaching pack, units and polarity; the data inventory and the usability
+-- matrix; seismic QC (the amplitude spectrum, band edges and the centroid,
+-- signal to noise from coherency, footprint); measured shear against
+-- Greenberg-Castagna, the local shear trend and its prediction interval, the
+-- elastic set; the fluids, oil-to-brine substitution, the wet trend and the
+-- distance from it; modelled AVO and the feasibility verdict.
+--
+-- AN APP COURSE. The Suite app is QI Studio; the practicals also run in the
+-- course's own explorer panels. The tier's capstone grades six values on a
+-- held-out synthetic case, each a return value of a vendored engine. No BEGIN
+-- or COMMIT: apply_qi.sh wraps this file in one transaction.
+-- ============================================================================

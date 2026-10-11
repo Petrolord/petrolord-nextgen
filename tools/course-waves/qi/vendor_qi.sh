@@ -16,6 +16,13 @@
 # NextGen vendors at other blobs under group 5-unaudited-difference and which
 # other courses reach; moving them is not this wave's call.
 #
+# RE-VENDORED at 0f4ac4a (engines #352 E1b, #354 E1a, #353 E1c, #355 E2): the
+# seeds are now every __tests__/qi.*.test.js except the three left out below,
+# which brings the E1 golden suites and E2's moved QI Studio maths
+# (angleWavelets, avoWells, inversionQc, propertyCalibration, prospectTrap,
+# seismolord/wellWavelet), their goldens, oracles, negative controls and
+# FINDINGS records.
+#
 # LEFT OUT ON PURPOSE: engines/qi/gatherStore.js (storage layout),
 # engines/qi/conditioning.js (taught without a graded value) and their suites,
 # and the inversion benchmark suite (slow; its golden and oracle travel named).
@@ -52,7 +59,7 @@ NG=${NG:-/root/wt-qi-nextgen}
 RECUT=${RECUT:-origin/main}
 GROUP=qi-course
 PIN=$(python3 -c "import json,sys;print(json.load(open(sys.argv[1]))['canonical']['commit'])" "$NG/packages/engines/VENDOR.json")
-REV=${REV:-cc4c62d}
+REV=${REV:-0f4ac4a}
 FULL=$(git -C "$ENG" rev-parse "$REV^{commit}")
 EXP=$(mktemp -d)
 LEDGER_PY=$(mktemp)
@@ -71,7 +78,7 @@ for p in $KEPTLIST; do SHARED[$p]=kept; done
 echo "PIN ${PIN:0:7}, VENDORING FROM ${FULL:0:7}"
 echo
 cd "$EXP"
-SEEDS="__tests__/qi.seismicQc.test.js __tests__/qi.avo.test.js __tests__/qi.prestack.test.js __tests__/qi.prestackQc.test.js __tests__/qi.wavelets.test.js __tests__/qi.lfm.test.js __tests__/qi.inversion.test.js __tests__/qi.inversionSpread.test.js __tests__/qi.prestackInversion.test.js __tests__/qi.propertyPrediction.test.js __tests__/qi.prospectAssessment.test.js __tests__/rockphysics.elasticSet.test.js __tests__/rockphysics.granular.test.js __tests__/rockphysics.inclusion.test.js __tests__/rockphysics.modelLines.test.js __tests__/rockphysics.u2.test.js"
+SEEDS="$(cd "$EXP" && ls __tests__/qi.*.test.js | grep -vE 'qi\.(conditioning|gatherStore|inversionBenchmark)\.test\.js$' | tr '\n' ' ')__tests__/rockphysics.elasticSet.test.js __tests__/rockphysics.granular.test.js __tests__/rockphysics.inclusion.test.js __tests__/rockphysics.modelLines.test.js __tests__/rockphysics.u2.test.js"
 echo "CLOSURE WALK over an export of ${FULL:0:7}, seeds: $SEEDS"
 declare -A CLOSURE=()
 declare -a QUEUE=()
@@ -95,7 +102,7 @@ WALKED=${#CLOSURE[@]}
 
 NAMED=()
 for p in test-data/qi/*; do NAMED+=("$p:a QI golden or its README, read at runtime by the qi suites through fs (or written by the named oracle)"); done
-for p in tools/validation/qi/*.py; do NAMED+=("$p:the independent oracle that writes a test-data/qi golden"); done
+for p in tools/validation/qi/*; do NAMED+=("$p:an independent oracle that writes a test-data/qi golden, its negative-control script or its FINDINGS record"); done
 for p in test-data/rockphysics/*; do NAMED+=("$p:a rock physics golden or its README, read at runtime by the rockphysics suites through fs"); done
 for p in tools/validation/rockphysics/*.py; do NAMED+=("$p:an oracle, fixture writer or cross-check behind a test-data/rockphysics golden"); done
 NAMED+=("test-data/mapping/goldens/closure_cases.json:the closure golden (crest, spill, closure area, GRV) behind lib/gridding/closure.js")
@@ -220,7 +227,7 @@ for p in paths:
         'path': p, 'kind': kind, 'group': GROUP, 'vendoredSha': blob,
         'reason': (f"QI course (Quantitative Interpretation): vendored sha-identical from petrolord-engines {full[:7]} "
                    f"(engines/qi seismicQc, avo, prestack, prestackQc, wavelets, lfm, inversion, inversionSpread, prestackInversion, "
-                   f"propertyPrediction, prospectAssessment; the rockphysics elasticSet, avoTrend, granular, inclusion, templates, gather, "
+                   f"propertyPrediction, prospectAssessment, and from E2 angleWavelets, avoWells, inversionQc, propertyCalibration, prospectTrap with seismolord/wellWavelet; the rockphysics elasticSet, avoTrend, granular, inclusion, templates, gather, "
                    f"pseudoSonic files; lib/gridding/closure.js; their suites, goldens and oracles) by the wave's vendor_qi.sh, 4 proofs per path. "
                    f"lib/gridding/gridmath.js is kept at NextGen's blob (closure.js uses only isNull and the unrotated gridXY). "
                    + ("The move of this already vendored file is additive for every function NextGen calls; the Rock Physics "

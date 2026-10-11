@@ -541,7 +541,7 @@ EKENE-1 on its full-stack trace clock (4.000000 ms, first sample 900 ms), with t
 # SECTION 24: Statistical and well wavelets (owned by Professional m01 l03 and Professional m02 l03)
 
 TWO WAVELETS COME FROM THE SEISMIC AT A WELL.
-- STATISTICAL (extractStatisticalWavelet): the amplitude spectrum of the traces' autocorrelation, taken to zero phase. Its spectrum is the source wavelet's when the reflectivity is white; its phase is ASSUMED zero. The engine reads the stated window length (default 120 ms) and smoothing (default 5 Hz), Hann-tapers the lags and normalises the peak to 1.
+- STATISTICAL (extractStatisticalWavelet): the amplitude spectrum of the traces' autocorrelation, taken to zero phase. Its spectrum is the source wavelet's when the reflectivity is white; its phase is ASSUMED zero. The engine reads the stated window length (120 ms here) and smoothing (5 Hz here), Hann-tapers the lags and normalises the peak to 1.
 - FROM THE WELL: the least-squares (Wiener) wavelet that best convolves the well's reflectivity into the trace at the well, so its phase is MEASURED. This one is Seismolord app code (src/pages/apps/Seismolord/lib/wellWavelet.js, petrolord-suite 5df9d9410), and it needs a log long enough for the wavelet it is asked for.
 
 THE STATISTICAL WAVELET AT EACH WELL, full stack, window 1100 to 1500 ms, every 4.000000 ms:
@@ -555,7 +555,7 @@ THE STATISTICAL WAVELET AT EACH WELL, full stack, window 1100 to 1500 ms, every 
 
 For comparison, a 25 Hz Ricker on the same clock (31 samples): peak 25.039790 Hz, centroid 26.596139 Hz.
 
-THE WELL WAVELET ON THE PACK. Asked for its default wavelet at Ekene-1 from the pack's logs, Seismolord refuses: "The well reflectivity is flat over the seismic at the well, so there is nothing to extract a wavelet from." The extraction keeps only trace samples whose whole wavelet window (2 x 15 + 1 = 31 samples at its default half length) sits on live reflectivity, and the pack's logs give 26 live samples (section 23), so no sample qualifies. The course's ties therefore use the statistical wavelet.
+THE WELL WAVELET ON THE PACK. Asked for a wavelet at Ekene-1 with its stated window from the pack's logs, Seismolord refuses: "The well reflectivity is flat over the seismic at the well, so there is nothing to extract a wavelet from." The extraction keeps only trace samples whose whole wavelet window (2 x 15 + 1 = 31 samples at its default half length) sits on live reflectivity, and the pack's logs give 26 live samples (section 23), so no sample qualifies. The course's ties therefore use the statistical wavelet.
 
 # SECTION 25: Phase and correlation (owned by Professional m01 l04)
 
@@ -674,7 +674,7 @@ At 90 degrees Ekene-3 stays above the 0.8 rule; reversed, it falls below it. In 
 
 # SECTION 31: Offset gathers and bin width (owned by Professional m03 l01)
 
-THE PACK'S GATHERS: 12 NMO-corrected CDP gathers next to Ekene-1 (inlines 1026 to 1028), 13 offsets from 100 to 2500 m, 4.000000 ms, 1000 to 1700 ms, muted to exact zeros beyond 40 degrees. Gather 5 is at inline 1027, crossline 2051, the trace of Ekene-1.
+THE PACK'S GATHERS: 12 NMO-corrected CDP gathers next to Ekene-1 (inlines 1026 to 1028), 13 offsets from 100 to 2500 m, 4.000000 ms, 1000 to 1700 ms, carrying the kit's stated mute beyond 40 degrees (by the kit's own angle calculation, which the course does not measure). Gather 5 is at inline 1027, crossline 2051, the trace of Ekene-1.
 
 OFFSET BINS (binOffsets): bin k holds offsets from k w to (k + 1) w, centred at (k + 0.5) w. At the stated width of 200 m the gather fills 13 bins with fold 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1; foldSummary: 13 traces, 13 live bins, far offset 2500.000000 m (a bin is reported at its centre).
 
@@ -696,11 +696,11 @@ AT THE TOP ON GATHER 5, t0 1292.000000 ms, NMO velocity the table's RMS velocity
 | 2100 | 0.209511 |
 | 2500 | 0.286880 |
 
-Stretch mute offsets at that time: 2047.359898 m for a limit of 0.2, 2563.848741 m for 0.300000.
+Stretch mute offsets at that time: 2047.359898 m for a limit of 0.200000, 2563.848741 m for 0.300000.
 
 # SECTION 33: Residual moveout (owned by Professional m03 l03)
 
-THE MEASURE (residualMoveout): on a gather that should be flat, each offset's shift of the event against a pilot (the stated nearest traces stacked, default 3), by the lag of largest absolute correlation in a window (half window 40 ms, largest shift 24 ms); offsets whose correlation is at least 0.7 in size enter a fit dt = a x^2 weighted by the squared correlation, and the residual at the far offset, a x_far^2, is the number a QC map shows. When the fitted lags scatter about the parabola by more than one sample the waveform has changed with offset, and the engine measures instead by AB semblance (method 'ab-semblance').
+THE MEASURE (residualMoveout): on a gather that should be flat, each offset's shift of the event against a pilot (the stated nearest traces stacked, 3 here), by the lag of largest absolute correlation in a window (half window 40 ms, largest shift 24 ms); offsets whose correlation is at least 0.7 in size enter a fit dt = a x^2 weighted by the squared correlation, and the residual at the far offset, a x_far^2, is the number a QC map shows. When the fitted lags scatter about the parabola by more than one sample the waveform has changed with offset, and the engine measures instead by AB semblance (method 'ab-semblance').
 
 GATHER 5 about the top: method ab-semblance, 13 offsets used, 13 fitted, far offset 2500.000000 m, residual at the far offset 2.795940 ms. The last three offsets' lags are -24.000000, -24.000000, -24.000000 ms, at the search limit, with correlations -0.776230, -0.728225, -0.786646; with all 13 offsets in the fit the lags scatter about the parabola by more than a sample, which is the condition on which the engine measures by AB semblance.
 
@@ -879,7 +879,7 @@ THE ENGINES AND THEIR GATE (the extraction gate: a golden plus an independent or
 | engines/qi/lfm.js | the low-frequency model between wells, the blind-well score | awaiting its oracle; taught, and graded only once it lands |
 | engines/qi/prospectAssessment.js | anomaly conformance, evidence independence, the assessment | awaiting its oracle; taught, and graded only once it lands |
 
-THE SETTINGS THE TIER STATES ON THE EKENE PACK (each a stated input; QI Studio's own defaults where it has one):
+THE SETTINGS THE TIER STATES ON THE EKENE PACK (each a stated input; QI Studio's own starting values where it has one):
 
 | setting | value |
 | --- | --- |
@@ -1012,7 +1012,7 @@ THE SPARSITY IS SET BY LAMBDA, ON THE TRACE'S OWN AMPLITUDE SCALE. Non-zero refl
 | 1000.000000 | 67 | 44 |
 | 5000.000000 | 36 | 27 |
 
-At QI Studio's default lambda 0.002000 there are 101 of 101: on traces of this amplitude that lambda imposes no sparsity. Sparsity appears at the larger lambdas in the table, and more iterations sharpen it further.
+At QI Studio's starting lambda 0.002000 there are 101 of 101: on traces of this amplitude that lambda imposes no sparsity. Sparsity appears at the larger lambdas in the table, and more iterations sharpen it further.
 
 THREE METHODS AT EKENE-1, each blind (the well left out of its LFM), scored against the log after the high cut:
 
@@ -1239,7 +1239,7 @@ THE EKENE SAND TOP GRID, as the kit grids it from the six development wells' top
 
 The map spills at the edge of its own mapped area, 2.380249 ft below the crest and above the contact the wells see: six wells grid too little of the structure to close the trap on the map. The engine says so (limited by the edge); a closure figure from this grid is the map's limit and no measurement of the trap.
 
-ANOMALY CONFORMANCE (prospectAssessment.js anomalyConformance; THIS ENGINE AWAITS ITS INDEPENDENT ORACLE, engines PR E1c: taught, and graded only once it lands). A hydrocarbon anomaly ends downdip at a contact, so its downdip edge follows one depth contour. The engine reads the anomaly's downdip edge (an anomaly node beside a lower node outside it, at their midpoint), its scatter against the closure's relief, conformance = 1 - scatter / relief clipped to 0 to 1, the share of the anomaly inside the closure, and the contact the edge implies. Two DESIGNED TEACHING ANOMALIES on the Ekene grid, labelled as such: A, every mapped node shallower than the spill; B, every node 20 ft shallower than the spill and west of the grid's middle column (an anomaly that cuts across the contours):
+ANOMALY CONFORMANCE (prospectAssessment.js anomalyConformance; THIS ENGINE AWAITS ITS INDEPENDENT ORACLE, engines PR E1c: taught, and graded only once it lands). A hydrocarbon anomaly ends downdip at a contact, so its downdip edge follows one depth contour. The engine reads the anomaly's downdip edge (an anomaly node beside a lower node outside it, at their midpoint), its scatter against the closure's relief, conformance = 1 - scatter / relief clipped to 0 to 1, the share of the anomaly inside the closure, and the contact the edge implies. Two DESIGNED TEACHING ANOMALIES on the Ekene grid, labelled as such: A, every mapped node shallower than the spill; B, every node shallower than a level 20 ft below the spill, kept only west of the grid's middle column (an anomaly that cuts across the contours):
 
 | anomaly | nodes | edge nodes | conformance | share inside the closure | implied contact ft | edge scatter ft |
 | --- | --- | --- | --- | --- | --- | --- |

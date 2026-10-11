@@ -21,7 +21,7 @@ HERE=$(cd "$(dirname "$0")" && pwd)
 NG=${NG:-/root/wt-qi-nextgen}
 DEST="$NG/tools/course-waves/qi"
 cd "$HERE"
-INPUTS=$( (ls -1 digest.txt fields.json precision.json wave.json truth-qi.json ./*.md ./*.py ./*.mjs ./*.sh sources/kit_truth_rows.json 2>/dev/null || true) | sed 's#^\./##' | sort -u)
+INPUTS=$( (ls -1 digest.txt fields.json precision.json wave.json truth-qi.json ship_names.json golive_helpers.sql ./hdr_*.txt ./*.md ./*.py ./*.mjs ./*.sh sources/kit_truth_rows.json 2>/dev/null || true) | sed 's#^\./##' | sort -u)
 if [ -d banks ]; then INPUTS="$INPUTS
 $( (ls -1 banks/qi[bia]_*.py banks/qi[bia]_*.json 2>/dev/null || true) | sort)"; fi
 for must in digest.txt fields.json wave.json build_digest.sh qi_dump.mjs qi_dump_a.mjs qi_capstone.mjs qi_cases.mjs structure.py run_gates.py; do

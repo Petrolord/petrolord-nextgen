@@ -256,6 +256,9 @@ def main():
     if '--plant' in sys.argv:
         k = 'tamberlo_shear_slope'
         mine[k] = fields[k][2] + 10 * fields[k][3]
+    if '--json' in sys.argv:
+        print(json.dumps({k: {'value': mine[k], 'oracle': 'oracle_check.py: standard-library Python replay (direct DFT, Batzle-Wang, Wood, VRH, Gassmann, OLS, Shuey, eigenvector line)'} for k in fields}))
+        sys.exit(0)
     bad = []
     worst = (0, None)
     for k, (_, _, v, tol) in fields.items():

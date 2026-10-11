@@ -125,6 +125,17 @@ const WRONG = {
   ],
 };
 
+const JSON_OUT = process.argv.includes('--json');
+if (JSON_OUT) {
+  const o = {};
+  for (const [key, [, , value]] of Object.entries(fields)) {
+    const wrong = {};
+    for (const [name, fn] of WRONG[key]) { let v = null; try { v = fn(); } catch { v = null; } wrong[name] = Number.isFinite(v) ? v : null; }
+    o[key] = { truth: truthRows[key], expected: value, wrong };
+  }
+  process.stdout.write(`${JSON.stringify(o)}\n`);
+  process.exit(0);
+}
 let weak = 0;
 let closest = { d: Infinity };
 const table = [];

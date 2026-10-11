@@ -56,7 +56,7 @@ ${table(['engine', 'what it computes', 'gate'], [
     ['engines/qi/prospectAssessment.js', 'anomaly conformance, evidence independence, the assessment', 'awaiting its oracle; taught, and graded only once it lands'],
   ])}
 
-THE SETTINGS THE TIER STATES ON THE EKENE PACK (each a stated input; QI Studio's own defaults where it has one):
+THE SETTINGS THE TIER STATES ON THE EKENE PACK (each a stated input; QI Studio's own starting values where it has one):
 
 ${table(['setting', 'value'], [
     ['inversion window on the well traces, ms', `${whole(X.windowMs[0])} to ${whole(X.windowMs[1])} (${whole(S.win.ns)} samples every ${f6(S.win.dtMs)} ms)`],
@@ -202,7 +202,7 @@ THE SPARSITY IS SET BY LAMBDA, ON THE TRACE'S OWN AMPLITUDE SCALE. Non-zero refl
 
 ${table(['lambda', `non-zero samples, ${X.iters} iterations`, 'non-zero samples, 400 iterations'], lamRows)}
 
-At QI Studio's default lambda ${f6(X.lambda)} there are ${whole(nz)} of ${whole(S.win.ns)}: on traces of this amplitude that lambda imposes no sparsity. Sparsity appears at the larger lambdas in the table, and more iterations sharpen it further.
+At QI Studio's starting lambda ${f6(X.lambda)} there are ${whole(nz)} of ${whole(S.win.ns)}: on traces of this amplitude that lambda imposes no sparsity. Sparsity appears at the larger lambdas in the table, and more iterations sharpen it further.
 
 THREE METHODS AT EKENE-1, each blind (the well left out of its LFM), scored against the log after the high cut:
 
@@ -431,7 +431,7 @@ ${table(['quantity', 'value'], [
 
 The map spills at the edge of its own mapped area, ${f6(clo.columnFt)} ft below the crest and above the contact the wells see: six wells grid too little of the structure to close the trap on the map. The engine says so (limited by the edge); a closure figure from this grid is the map's limit and no measurement of the trap.
 
-ANOMALY CONFORMANCE (prospectAssessment.js anomalyConformance; THIS ENGINE AWAITS ITS INDEPENDENT ORACLE, engines PR E1c: taught, and graded only once it lands). A hydrocarbon anomaly ends downdip at a contact, so its downdip edge follows one depth contour. The engine reads the anomaly's downdip edge (an anomaly node beside a lower node outside it, at their midpoint), its scatter against the closure's relief, conformance = 1 - scatter / relief clipped to 0 to 1, the share of the anomaly inside the closure, and the contact the edge implies. Two DESIGNED TEACHING ANOMALIES on the Ekene grid, labelled as such: A, every mapped node shallower than the spill; B, every node 20 ft shallower than the spill and west of the grid's middle column (an anomaly that cuts across the contours):
+ANOMALY CONFORMANCE (prospectAssessment.js anomalyConformance; THIS ENGINE AWAITS ITS INDEPENDENT ORACLE, engines PR E1c: taught, and graded only once it lands). A hydrocarbon anomaly ends downdip at a contact, so its downdip edge follows one depth contour. The engine reads the anomaly's downdip edge (an anomaly node beside a lower node outside it, at their midpoint), its scatter against the closure's relief, conformance = 1 - scatter / relief clipped to 0 to 1, the share of the anomaly inside the closure, and the contact the edge implies. Two DESIGNED TEACHING ANOMALIES on the Ekene grid, labelled as such: A, every mapped node shallower than the spill; B, every node shallower than a level 20 ft below the spill, kept only west of the grid's middle column (an anomaly that cuts across the contours):
 
 ${table(['anomaly', 'nodes', 'edge nodes', 'conformance', 'share inside the closure', 'implied contact ft', 'edge scatter ft'], [cfRow('A, a contour', cA), cfRow('B, cut across', cB)])}
 
