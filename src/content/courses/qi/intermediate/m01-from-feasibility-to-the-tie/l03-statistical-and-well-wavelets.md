@@ -1,5 +1,48 @@
 # Statistical and well wavelets
 
-{{panel:qi-prestack-explorer}}
+The synthetic needs a wavelet, and two can be taken from the seismic at a well. The statistical wavelet assumes its phase; the wavelet from the well measures it. On the Ekene pack only the first can be extracted, because of the length of the logs.
 
 {{video:qi-c8}}
+
+## The statistical wavelet
+
+`extractStatisticalWavelet` takes the amplitude spectrum of the traces' autocorrelation and builds a zero-phase wavelet from it. Its spectrum is the source wavelet's when the reflectivity is white, and its phase is assumed zero. The engine reads two stated inputs, a window length of 120 ms and a smoothing of 5 Hz, Hann-tapers the lags and normalises the peak to 1. The trace window is a third stated choice: here the full stack from 1100 to 1500 ms at each well.
+
+## The four wells
+
+| well | samples | peak Hz | centroid Hz | -6 dB low Hz | -6 dB high Hz |
+| --- | --- | --- | --- | --- | --- |
+| Ekene-1 | 31 | 24.488746 | 25.084884 | 8.950036 | 41.469972 |
+| Ekene-2 | 31 | 23.394907 | 23.431642 | 7.301503 | 39.582002 |
+| Ekene-3 | 31 | 24.962688 | 25.605164 | 9.159836 | 42.236734 |
+| Ekene-4 | 31 | 26.530951 | 26.581599 | 9.647548 | 43.780487 |
+
+| wavelet on the same clock | samples | peak Hz | centroid Hz |
+| --- | --- | --- | --- |
+| 25 Hz Ricker | 31 | 25.039790 | 26.596139 |
+
+## Reading the table
+
+Every wavelet has 31 samples: the same window length on the same clock. Ekene-2 is the lowest in every column, from its peak of 23.394907 Hz to its high edge of 39.582002 Hz; Ekene-4 is the highest in every column, peak 26.530951 Hz and high edge 43.780487 Hz. Ekene-1 and Ekene-3 sit between them and close to each other. The next module measures how alike the four are.
+
+The 25 Hz Ricker is a useful yardstick. Its peak is close to the field wavelets' peaks, but its centroid of 26.596139 Hz sits well above its peak, while each statistical wavelet's centroid sits close to its own peak. A Ricker chosen by its peak alone carries a higher centroid than any of the four field wavelets.
+
+The table says nothing about phase: every statistical wavelet is zero phase by construction. The next lesson measures phase separately.
+
+## The wavelet from the well
+
+The second wavelet is the least-squares (Wiener) wavelet that best convolves the well's reflectivity into the trace at the well, so its phase is measured. It is Seismolord app code, and it needs a log long enough for the wavelet asked for.
+
+## Why the pack refuses it
+
+Asked for its wavelet at Ekene-1 from the pack's logs, Seismolord answers:
+
+> The well reflectivity is flat over the seismic at the well, so there is nothing to extract a wavelet from.
+
+The extraction keeps only trace samples whose whole wavelet window sits on live reflectivity. At its half length of 15 samples that window is 2 x 15 + 1 = 31 samples, and the pack's logs give 26 live synthetic samples at Ekene-1, so no sample qualifies. The course's ties therefore use the statistical wavelet, and every tie states that its phase was assumed.
+
+{{panel:qi-prestack-explorer}}
+
+## Exercise
+
+In the prestack explorer, set View to "Wavelets and the tie" and Data to "Ekene pack: Ekene-1". Choose the statistical wavelet, set the trace window to 1100 and 1500 ms, the window length to 120 ms and the smoothing to 5 Hz, and read the samples, peak, centroid and the two -6 dB edges. Change the smoothing and note which tiles move. Run the same settings at the other three wells. Finally switch the wavelet source to the well wavelet, read the message the panel prints, and explain it in one sentence from the live sample count.
