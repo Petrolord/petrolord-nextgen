@@ -7,10 +7,12 @@ import { Loader2, MonitorPlay } from 'lucide-react';
 import 'katex/dist/katex.min.css';
 import { splitLessonSegments, figureUrl } from '@/lib/courseContent';
 import { resolvePanel } from '@/content/courses/panelRegistry';
+import VideoSegment from '@/components/course/VideoSegment';
 
 // Renders one lesson's markdown (GFM + KaTeX math) with interactive
-// panels interleaved at their {{panel:<id>}} markers. printMode swaps
-// panels for a static callout (admin handbook / print).
+// panels interleaved at their {{panel:<id>}} markers and optional videos at
+// their {{video:<id>}} markers. printMode swaps panels and videos for a
+// static callout (admin handbook / print).
 
 const mdComponents = {
   h1: (p) => <h1 className="text-2xl font-bold text-pl-text mt-8 mb-3 first:mt-0" {...p} />,
@@ -85,6 +87,8 @@ const MarkdownLesson = ({ raw, app, tier, moduleKey, printMode = false }) => {
       {segments.map((seg, i) =>
         seg.type === 'panel' ? (
           <PanelSlot key={`panel-${seg.id}-${i}`} id={seg.id} printMode={printMode} />
+        ) : seg.type === 'video' ? (
+          <VideoSegment key={`video-${seg.id}-${i}`} id={seg.id} printMode={printMode} />
         ) : (
           <ReactMarkdown
             key={`md-${i}`}
