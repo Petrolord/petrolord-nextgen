@@ -4,11 +4,11 @@ Intercept and gradient are two numbers at every sample; a map wants one. The flu
 
 ## The fluid factor
 
-`contrastsFromAB` turns A and B back into relative contrasts across the interface: dVp/Vp, dVs/Vs and drho/rho. It needs two stated pieces to do it. A stated Vs/Vp sets how the gradient divides between compressional and shear contrast, and Gardner's density, drho/rho = dVp/Vp / 4, ties the density contrast to the velocity contrast. From those, the fluid factor is
+`contrastsFromAB` turns A and B back into relative contrasts across the interface: dVp/Vp, dVs/Vs and drho/rho. It needs two stated pieces to do it: a Vs/Vp, and Gardner's density, drho/rho = dVp/Vp / 4, which ties the density contrast to the velocity contrast. From those, the fluid factor is
 
 dVp/Vp - 1.16 (Vs/Vp) dVs/Vs
 
-which sits near zero along the mudrock line, where compressional and shear velocity rise together. A pore fluid moves Vp without moving Vs much, so a fluid contrast moves the factor away from zero.
+which sits near zero along the mudrock line, where compressional and shear velocity rise together.
 
 The engine needs A and B as reflection coefficients. The top of gather 5's two-term A and B, divided by the one scale over every well (1882.216944), at a stated Vs/Vp of 0.500000:
 
@@ -19,7 +19,7 @@ The engine needs A and B as reflection coefficients. The top of gather 5's two-t
 | drho/rho | 0.106656 |
 | fluid factor | 0.107520 |
 
-drho/rho is a quarter of dVp/Vp, as Gardner's relation sets it. The factor is positive at the top. Every figure in the table moves with the stated Vs/Vp and with the scale, so a fluid factor map is quoted with both.
+drho/rho is a quarter of dVp/Vp, as Gardner's relation sets it. The factor is positive at the top. With the scale held, only dVs/Vs and the fluid factor move when the stated Vs/Vp changes; all four move with the scale. A fluid factor map is therefore quoted with both.
 
 ## The chi projection
 

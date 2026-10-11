@@ -19,7 +19,7 @@ Each well's synthetic uses the statistical wavelet of its own trace.
 | Ekene-3 | 0.000000 | 0.977607 |
 | Ekene-4 | -4.000000 | 0.962720 |
 
-Ekene-1 and Ekene-3 need no shift. Ekene-2 and Ekene-4 move by -4.000000 ms, one sample on the 4.000000 ms clock: on those two wells the recorded event is a little earlier than the checkshots put it. All four correlations are high, from 0.962720 at Ekene-4 to 0.983438 at Ekene-1, and the two shifted wells carry the two lowest.
+Ekene-1 and Ekene-3 need no shift. Ekene-2 and Ekene-4 move by -4.000000 ms, one sample on the 4.000000 ms clock: on those two wells the recorded event is a little earlier than the checkshots put it. The correlations run from 0.962720 at Ekene-4 to 0.983438 at Ekene-1, and the two shifted wells carry the two lowest.
 
 For the first question, all four wells tie at their checkshot times or one sample from them.
 
@@ -32,7 +32,7 @@ Ekene-1's checkshot times are moved by a stated amount before the synthetic is b
 | -8.000000 | 8.000000 | 0.983438 |
 | 8.000000 | -8.000000 | 0.983438 |
 
-The search returns the opposite of the planted move both ways, at the unshifted tie's 0.983438: a whole-sample move slides the same samples along the clock, and the bulk shift slides them back.
+The search returns the opposite of the planted move both ways, at the same correlation as the unshifted tie, 0.983438.
 
 ## Anchors
 

@@ -18,7 +18,7 @@ The statistical wavelet's phase is an assumption, so the tie tests it. A constan
 | correlation before rotation | 0.983438 |
 | correlation after rotation | 0.989111 |
 
-The angle found and the gain in correlation are both small. On this trace a zero-phase wavelet is close to what the seismic carries, and the course's ties keep the statistical wavelet unrotated.
+The angle found is -6.135261 degrees and the correlation rises by less than a hundredth. The course's ties use the statistical wavelet as it is extracted, at zero phase.
 
 ## A designed case
 
@@ -32,9 +32,9 @@ The same synthetic is first rotated by a stated phase, then matched to the trace
 
 ## Reading the case
 
-The match finds the rotation back. Each best phase lands a few degrees beyond the negative of the phase added, on the same side as Ekene-1's own best phase of -6.135261 degrees, so the match recovers the planted rotation and Ekene-1's small residual phase together.
+The match finds the rotation back. Each best phase lands a few degrees beyond the negative of the phase added, on the same side as Ekene-1's own best phase of -6.135261 degrees.
 
-The correlation before matching falls quickly as the planted phase grows: 0.799189 at 30 degrees, 0.400777 at 60 and -0.105222 at 90, where the synthetic and the trace are close to unrelated. After matching, every row returns close to Ekene-1's 0.989111. A low correlation at zero shift can therefore be a phase problem that one rotation removes, and a tie that reports only the correlation before rotation hides that.
+The correlation before matching falls quickly as the planted phase grows: 0.799189 at 30 degrees, 0.400777 at 60 and -0.105222 at 90. After matching, every row returns close to Ekene-1's 0.989111. A low correlation at zero shift can therefore be a phase problem that one rotation removes, and a tie that reports only the correlation before rotation hides that.
 
 ## What phase means for the two questions
 
@@ -46,4 +46,4 @@ A tie therefore states its phase: assumed zero with a statistical wavelet, or th
 
 ## Exercise
 
-In the prestack explorer, set Data to "Ekene teaching pack" and View to "Wavelets and phase", with Well at Ekene-1 and the trace window at 1100 to 1500 ms. Read Best constant phase, Correlation before rotation and Correlation after rotation against the Ekene-1 table. Read the same three tiles at the other three wells, and say whether the four best phases span more than the 30 degrees QI Studio flags. The explorer adds no phase to the synthetic, so work the 180 degree row of the designed case from the rotation: predict the sign of the correlation before rotation and the size of the correlation after.
+In the prestack explorer, set Data to "Ekene teaching pack" and View to "Wavelets and phase", with Well at Ekene-1 and the trace window at 1100 to 1500 ms. Read Best constant phase, Correlation before rotation and Correlation after rotation against the Ekene-1 table. Read the same three tiles at the other three wells, and say whether the four best phases span more than the 30 degrees QI Studio flags. The explorer adds no phase to the synthetic, so extend the designed case to 180 degrees from the rotation formula: predict the sign of the correlation before rotation and the size of the correlation after.

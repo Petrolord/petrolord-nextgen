@@ -38,7 +38,7 @@ Fold is one limit among several. The stretch mute bounds the offsets kept, and t
 
 ## What it means for the two questions
 
-For data quality, the fold table says how many traces stand behind each angle bin at the target. For the fluid question, the usable angle is the largest angle the AVO fit can trust, and the gradient depends on the far bin. The next module computes the angles and stacks the bins that qualify.
+For data quality, the fold table says how many traces stand behind each angle bin at the target. For the fluid question, the usable angle is the farthest angle a study counts at its stated minimum fold. The next module computes the angles and stacks the bins that qualify.
 
 {{panel:qi-prestack-explorer}}
 

@@ -28,11 +28,11 @@ The sums run over every well, A and B together: the least-squares factor that ca
 | wells | 4 |
 | one scale, trace units per unit reflection coefficient | 1882.216944 |
 
-The scale is positive, so the seismic and the model agree in sign: a peak on the seismic is a positive reflection coefficient, as SEG normal polarity says it should be. QI Studio raises a high issue for a negative scale: a polarity or wavelet problem.
+The scale is positive, on seismic of SEG normal polarity, where a peak is a positive number. QI Studio raises a high issue for a negative scale: a polarity or wavelet problem.
 
 ## Why one scale
 
-A scale fitted per well would hide much of the difference the comparison is for. One scale over every well ties the trace units to reflectivity once, for the survey, and leaves each well free to disagree. The gradients weigh heavily in the sums because they are the larger numbers in both columns, so the scale leans on how well the seismic gradients match the modelled ones.
+One scale over every well ties the trace units to reflectivity once, for the survey, and leaves each well free to disagree. The gradients weigh heavily in the sums because they are the larger numbers in both columns, so the scale leans on how well the seismic gradients match the modelled ones.
 
 The fluid factor lesson divided the top of gather 5 by this same figure.
 

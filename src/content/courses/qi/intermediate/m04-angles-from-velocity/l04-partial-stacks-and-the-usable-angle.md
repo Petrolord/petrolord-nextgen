@@ -16,9 +16,9 @@ The kit built its near, mid and far stack traces over 5 to 15, 15 to 25 and 25 t
 | mid | 410.433207 | 357.560150 | 0.981357 |
 | far | 320.449005 | 220.203720 | 0.961871 |
 
-Both columns fall from near to far, the dimming with angle at the top. The gather's stack is the higher of the two in every range, and the gap widens from near to far, so the gather's partial stacks fall less steeply with angle than the kit's traces do. Over the whole gather window the two traces of each range correlate closely, the near most and the far least, so they agree in shape far better than one sample suggests.
+Both columns fall from near to far, the dimming with angle at the top. The gather's stack is the higher of the two in every range, and the gap widens from near to far, so the gather's partial stacks fall less steeply with angle than the kit's traces do. Over the gather window the near pair correlates most and the far pair least; those correlations say how alike the two traces are in shape, which a single sample cannot.
 
-The intercept leans on the near stack, where the two sources sit closest. The gradient leans on how far the far stack falls below the near, and that is where they part most. Two angle stacks of the same rock can carry different gradients, which is why a study states which stacks its AVO read.
+The intercept and gradient of the next module are fitted to stacks like these, so a study states which stacks its AVO read.
 
 ## The usable angle
 

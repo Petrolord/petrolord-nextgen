@@ -27,7 +27,7 @@ At 1292.000000 ms, the top picked on gather 5, the trace of Ekene-1:
 
 The amplitude is positive in every bin: the top is a peak under SEG normal polarity. It falls from near to far, the dimming with angle that the Associate model predicted for the oil leg under the cap rock.
 
-Each bin is the mean of two or three traces, so one noisy trace moves it far. Between them the three bins hold fewer traces than the gather's 13 offsets: the rest fall at angles outside 5 to 35 degrees at this time.
+Each bin is the mean of two or three traces. Between them the three bins hold fewer traces than the gather's 13 offsets: the rest fall at angles outside 5 to 35 degrees at this time.
 
 ## What changes the bins
 

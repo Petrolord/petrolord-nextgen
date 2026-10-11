@@ -31,13 +31,13 @@ The time is the top picked on gather 5, t0 1292.000000 ms, and the NMO velocity 
 
 ## Reading the stretch
 
-At 100 m the stretch is 0.000525, negligible. It climbs faster than the offset: 0.013036 at 500 m, 0.085080 at 1300 m, 0.286880 at 2500 m, so the far half of the gather carries almost all of it.
+At 100 m the stretch is 0.000525. It rises with every offset: 0.013036 at 500 m, 0.085080 at 1300 m, 0.286880 at 2500 m.
 
 ## Reading the mute
 
 The two limits cut the gather differently. At a limit of 0.300000 the mute offset, 2563.848741 m, lies beyond the farthest offset of 2500 m, whose stretch of 0.286880 is under the limit, so every offset is kept. At a limit of 0.200000 the mute offset is 2047.359898 m, and the offsets beyond it, including 2100 m at 0.209511 and 2500 m at 0.286880, are cut.
 
-The choice of limit is a trade. A tighter limit keeps a cleaner waveform and loses the far offsets, and the far offsets carry the largest angles, which are the ones the gradient in AVO depends on. A looser limit keeps them and accepts a drawn-out event on the far traces. A study states the limit and reads the mute offset that follows.
+The choice of limit is a trade. A tighter limit keeps a cleaner waveform and loses the far offsets, and the far offsets carry the largest angles. A looser limit keeps them and accepts a drawn-out event on the far traces. A study states the limit and reads the mute offset that follows.
 
 ## The time matters
 

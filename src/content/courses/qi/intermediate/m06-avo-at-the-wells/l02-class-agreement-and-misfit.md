@@ -13,13 +13,13 @@ Each well's seismic A and B are divided by the scale, 1882.216944. The residual 
 | Ekene-3 | 0.194681 | -0.641524 | 0.249870 | -0.663631 | 0.059452 |
 | Ekene-4 | 0.216991 | -0.520090 | 0.280469 | -0.475262 | 0.077711 |
 
-The scaled seismic intercept sits above the modelled one at every well: the seismic top reads harder at normal incidence than the logs predict. The gradients split: at Ekene-1 and Ekene-3, the oil-leg wells, the seismic gradient is close to the modelled one and slightly more negative; at Ekene-2 and Ekene-4, the net sand wells, it is less negative. Ekene-2 carries the largest residual and Ekene-3 the smallest.
+The scaled seismic intercept sits above the modelled one at every well. The gradients split: at Ekene-1 and Ekene-3, the oil-leg wells, the seismic gradient is slightly more negative than the modelled one; at Ekene-2 and Ekene-4, the net sand wells, it is less negative. Ekene-2 carries the largest residual and Ekene-3 the smallest.
 
-One scale multiplies A and B alike, so it cannot match an intercept that reads high at every well and a gradient that reads close at the same time. The residuals are what is left after the single best factor.
+At Ekene-1, the seismic 486.838592 and -1072.562182 divided by 1882.216944 give 0.258652 and -0.569840; the modelled point is 0.170742 and -0.563558, and the distance between the two points is the residual, 0.088133. One scale divides A and B alike, and the residuals are what is left after that single least-squares factor.
 
 ## The classes
 
-The class of each point comes from `avoClass` at the stated band of 0.02, after Rutherford and Williams (1989) with class IV: A above 0.02 is class I; A within 0.02 of zero is class II; otherwise class III when B is at or below zero and class IV when B is above it.
+The class of each point comes from `avoClass` in engines/qi/avo.js at the stated band of 0.02, after Rutherford and Williams (1989) with class IV. Every intercept in both tables, modelled and scaled seismic, lies above that band.
 
 | well | modelled class | seismic class | agree |
 | --- | --- | --- | --- |
@@ -32,9 +32,9 @@ The class of each point comes from `avoClass` at the stated band of 0.02, after 
 
 ## What agreement says
 
-Every intercept in both tables sits well above 0.02, so every point is class I whatever its gradient. Class agreement at Ekene is the easy kind: the points are far from any boundary, and the gradient, where the wells differ, plays no part in the class. The Associate model at Ekene-1 put the top in class I with oil and with brine too. Agreement in class fits the polarity and the broad character of the top; it says nothing about the fluid.
+Every point at Ekene is class I, on intercepts from 0.170742 to 0.280469, while the gradients are where the wells differ. The Associate model at Ekene-1 put the top in class I with oil and with brine too, so here the class alone does not separate oil from brine.
 
-The residual carries more: it measures the whole misfit in A and B, a number a study can track as choices change.
+QI Studio raises an issue where the two classes differ, and a high one for a negative scale; at Ekene neither is raised, so the residual table is the part of the comparison a study reads well by well. The residual carries more: it measures the whole misfit in A and B, a number a study can track as choices change.
 
 ## What a study states
 

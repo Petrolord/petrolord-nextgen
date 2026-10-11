@@ -22,7 +22,7 @@ When the fitted lags scatter about the parabola by more than one sample, the wav
 
 ## Reading gather 5
 
-The last three offsets sit at the search limit of 24 ms, and their best match to the pilot is a negative correlation, each above 0.7 in size. The engine counts the size of the correlation, so a reversed match qualifies. With all 13 offsets in the fit the lags scatter about the parabola by more than a sample, so the engine changes to AB semblance. The lag measure has found the far traces unlike the near ones; the semblance measure then gives a residual of 2.795940 ms.
+The last three offsets sit at the search limit of 24 ms, and their best match to the pilot is a negative correlation, each above 0.7 in size. The engine counts the size of the correlation, so a reversed match qualifies. With all 13 offsets in the fit the lags scatter about the parabola by more than a sample, so the engine changes to AB semblance. On those far traces the lag measure lands at its search limit with a reversed match; the semblance measure then gives a residual of 2.795940 ms.
 
 ## Every pack gather
 
@@ -47,7 +47,7 @@ Every gather picks its top at 1292.000000 ms, every one changes to AB semblance,
 
 ## What it means for the two questions
 
-For data quality, a far-offset residual under one sample on every gather says the top lies within a sample of flat out to the far offset. That every gather needed AB semblance says something else: the waveform changes with offset at the top, and a study reading AVO here records it.
+For data quality, the far-offset residual is under one sample on every gather. That every gather needed AB semblance says something else: the waveform changes with offset at the top, and a study reading AVO here records it.
 
 For the fluid question, a change of waveform with offset is what AVO measures. The QC does not decide whether that change is the rock or the processing; the comparison at the wells takes that up.
 

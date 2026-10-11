@@ -38,7 +38,7 @@ The rest of this module and the next measure stretch, residual moveout, fold and
 
 ## For the two questions
 
-For data quality, the gather holds 13 offsets evenly spread to 2500 m; for the fluid question, the target sits where the tie predicts.
+For data quality, the gather holds 13 offsets from 100 to 2500 m, one in each 200 m bin; for the fluid question, the target sits where the tie predicts.
 
 {{panel:qi-prestack-explorer}}
 

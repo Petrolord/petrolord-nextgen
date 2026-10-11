@@ -24,7 +24,7 @@ Step 2 gives every well an equal vote whatever the strength of its trace. Step 4
 | Ekene-3 | 0.999751 |
 | Ekene-4 | 0.997075 |
 
-Ekene-1 and Ekene-3 sit closest to the average, Ekene-2 farthest, with Ekene-4 between. That is the order of the spectra: the two wells in the middle of the frequency range lie nearest the mean, and the two at its ends lie farther from it, the lowest-frequency well farthest. Even the lowest, Ekene-2's 0.996125, is close to identical in shape.
+Ekene-1 and Ekene-3 sit closest to the average, Ekene-2 farthest, with Ekene-4 between. In frequency, Ekene-1 and Ekene-3 lie in the middle of the four, Ekene-2 lowest and Ekene-4 highest. Ekene-2's 0.996125 is the lowest figure in the table.
 
 ## The average's spectrum
 
@@ -36,7 +36,7 @@ Ekene-1 and Ekene-3 sit closest to the average, Ekene-2 farthest, with Ekene-4 b
 | Ekene-4 | 31 | 26.530951 | 26.581599 |
 | the average | 31 | 24.769590 | 25.155328 |
 
-The average keeps the 31 samples of its members. Its peak of 24.769590 Hz and centroid of 25.155328 Hz sit inside the range the four wells span and close to Ekene-1's, the well nearest the average in shape.
+The average keeps the 31 samples of its members. Its peak of 24.769590 Hz and centroid of 25.155328 Hz sit inside the range the four wells span.
 
 ## Different sample intervals
 

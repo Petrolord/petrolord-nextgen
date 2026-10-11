@@ -15,6 +15,8 @@ Four wells give four statistical wavelets, and a field wavelet is only defensibl
 | Ekene-3 | 24.962688 | 25.605164 |
 | Ekene-4 | 26.530951 | 26.581599 |
 
+Ekene-2 is the lowest in both columns and Ekene-4 the highest, with Ekene-1 and Ekene-3 between them.
+
 ## The similarity of every pair
 
 | well | lag to the reference, samples | Ekene-1 | Ekene-2 | Ekene-3 | Ekene-4 |
@@ -26,17 +28,17 @@ Four wells give four statistical wavelets, and a field wavelet is only defensibl
 
 ## Reading the matrix
 
-Every lag is zero. Each statistical wavelet is zero phase by construction and centred on its middle sample, so the alignment has nothing to correct, and here it moved nothing.
+Every lag is zero: the alignment moved nothing. Each statistical wavelet is zero phase by construction.
 
-The diagonal is 1.000000, each wavelet against itself. The most alike pair is Ekene-1 with Ekene-3, at 0.999524; their spectra were the closest pair too. The least alike is Ekene-2 with Ekene-4, at 0.986771, the two wells whose spectra lay at the two ends of the range, Ekene-2 lowest in frequency and Ekene-4 highest. The matrix and the spectra tell one story: four wavelets of one family, differing a little in frequency from well to well.
+The diagonal is 1.000000, each wavelet against itself. The most alike pair is Ekene-1 with Ekene-3, at 0.999524; their spectra were the closest pair too. The least alike is Ekene-2 with Ekene-4, at 0.986771, the two wells whose spectra lay at the two ends of the range, Ekene-2 lowest in frequency and Ekene-4 highest.
 
 ## What similarity measures
 
-Unit energy removes strength, so a wavelet twice as strong as another of the same shape scores the same. The alignment removes a time offset of up to the stated lag. What is left is shape: the width of the main lobe, the side lobes and the phase. A difference in frequency changes the width and lowers the figure a little, which is what the table shows. A difference in phase changes the shape more, and the lesson on a disagreeing well rotates one wavelet to show how much.
+Unit energy removes strength, so a wavelet twice as strong as another of the same shape scores the same. The alignment removes a time offset of up to the stated lag. What is left is shape: the width of the main lobe, the side lobes and the phase. The lesson on a disagreeing well rotates one wavelet to show how far a difference in phase moves the figures.
 
 ## What it does not measure
 
-Similarity says nothing about whether any of the wavelets is right. Four wavelets sharing the same phase error compare as well as four correct ones. The phase check of the first module and the tie correlations of this one answer that, well by well; the comparison answers only whether one wavelet can serve all four.
+Similarity says nothing about whether any of the wavelets is right. Four wavelets sharing the same phase error can compare as closely as four correct ones. The phase check of the first module and the tie correlations of this one answer that, well by well; the comparison answers only whether one wavelet can serve all four.
 
 ## The choices the comparison states
 

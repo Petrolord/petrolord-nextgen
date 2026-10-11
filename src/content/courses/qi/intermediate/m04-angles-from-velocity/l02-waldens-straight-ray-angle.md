@@ -27,7 +27,7 @@ The course tests the approximation on a designed flat-layer teaching earth of fo
 | 2500 | 45.265069 | 44.057814 | 1.207256 |
 | 3000 | 52.574313 | 50.430992 | 2.143321 |
 
-Walden reads high at every offset here, and the excess grows with offset: under a hundredth of a degree at 500 m, over two degrees at 3000 m. At far offsets the straight ray places a trace at a higher angle than the exact ray, which matters most for the gradient.
+Walden reads high at every offset here, and the excess grows with offset: under a hundredth of a degree at 500 m, over two degrees at 3000 m. At far offsets the straight ray places a trace at a higher angle than the exact ray.
 
 ## On the Ekene table
 
@@ -41,7 +41,7 @@ At the top of gather 5 (1292.000000 ms), with the RMS velocity 2388.940541 m/s a
 | 2000 | 41.065011 |
 | 2500 | 49.493998 |
 
-At the same offsets these angles are larger than in the teaching earth: the top of the Ekene Sand is earlier in time, and the product Vrms t0 in the denominator is the smaller there. Walden's angle at the top passes 40 degrees between the 1500 m and 2000 m rows. The gathers carry the kit's stated mute beyond 40 degrees, by the kit's own angle calculation, which the course does not measure, so whether the farthest offsets at the target carry the mute rests on that calculation.
+At the same offsets these angles are larger than in the teaching earth, whose third base lies later, at 1596.736597 ms. Walden's angle at the top passes 40 degrees between the 1500 m and 2000 m rows. The gathers carry the kit's stated mute beyond 40 degrees, by the kit's own angle calculation, which the course does not measure, so whether the farthest offsets at the target carry the mute rests on that calculation.
 
 ## What the angle rests on
 

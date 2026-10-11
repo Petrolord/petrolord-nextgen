@@ -1,6 +1,6 @@
 # The background trend and the off-trend distance
 
-The (A, B) pairs of a window fall along a line: most reflectors in a shale and brine sand sequence share a ratio of gradient to intercept. Castagna and Swan (1997) call that line the background trend, and an AVO anomaly is a point that sits off it.
+The (A, B) pairs of a window are summed up by one line through them. Castagna and Swan (1997) call that line the background trend, and an AVO anomaly is a point that sits off it.
 
 ## The line and the distance
 

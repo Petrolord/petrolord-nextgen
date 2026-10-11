@@ -2,7 +2,7 @@
 
 The Associate tier asked whether the seismic can see the fluid, and answered from logs and one modelled interface: the cap rock over the oil leg at the top of the Ekene Sand. This tier takes the same question onto the seismic itself. Each well is tied to the trace recorded at it, one wavelet is chosen for the field, the gathers are checked, every offset is given an angle from the velocity, the angle stacks are fitted for intercept and gradient, and the modelled and seismic AVO are compared at every well.
 
-## Six engine files, one per step
+## The engine files the tier calls
 
 | engine file | functions the tier calls | what for |
 | --- | --- | --- |
@@ -12,6 +12,8 @@ The Associate tier asked whether the seismic can see the fluid, and answered fro
 | engines/qi/prestack.js | `binOffsets`, `dixInterval`, `velocityOnGrid`, `waldenAngle`, `rayTraceAngle`, `angleGather`, `partialStack`, `usableAngle` | gathers, angles and angle stacks |
 | engines/qi/prestackQc.js | `nmoStretch`, `stretchMuteOffset`, `residualMoveout`, `foldSummary` | gather QC |
 | engines/qi/avo.js | `fitShuey`, `contrastsFromAB`, `backgroundTrend`, `offTrend`, `chiProjection`, `avoClass` | AVO on the seismic |
+| engines/seismolord/wellWavelet.js | `extractWellWavelet` | the wavelet from the well |
+| engines/qi/avoWells.js | `compareAtWells` | AVO at the wells and the one scale |
 
 ## Three pieces of bookkeeping, and nothing else
 

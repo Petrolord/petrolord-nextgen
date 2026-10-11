@@ -29,7 +29,7 @@ The kit's published RMS velocity table for the gathers, with its Dix interval ve
 | 1624.800000 | 2346.700000 | 2523.323799 |
 | 1782.300000 | 2328.600000 | 2132.930307 |
 
-The RMS column changes slowly below the row at 925.500000 ms, and the interval column swings widely. The row at 1288.800000 ms sits at the top of the Ekene Sand in time (the checkshot top at Ekene-1 is 1288.796378 ms), and the next row, 1311.000000 ms, closes a thin interval at 2885.878392 m/s: the sand. Above it the interval from 1040.500000 to 1288.800000 ms runs at 2077.601943 m/s, the slower shale. A small change in RMS velocity over a short time is a large change in interval velocity, so Dix sees the contrast that makes the top a peak, and a small picking error in a thin interval becomes a large error in the velocity the angle reads.
+The RMS column changes slowly below the row at 925.500000 ms, and the interval column swings widely. The row at 1288.800000 ms lies at the checkshot top of the Ekene Sand at Ekene-1, 1288.796378 ms, and the next row, 1311.000000 ms, lies by the checkshot level next to the base, 1311.086000 ms. The interval between them runs at 2885.878392 m/s, the fastest on the table. Above it the interval from 1040.500000 to 1288.800000 ms runs at 2077.601943 m/s. Across those rows the RMS velocity moves from 2387.600000 to 2396.900000 m/s, while the interval velocity jumps from 2077.601943 to 2885.878392 m/s.
 
 ## On the trace clock
 
@@ -40,7 +40,7 @@ The RMS column changes slowly below the row at 925.500000 ms, and the interval c
 | RMS velocity | 2388.940541 |
 | interval velocity | 2885.878392 |
 
-1292.000000 ms is the top picked on gather 5. The picked time falls just below the row at 1288.800000 ms, so its interval velocity is the sand's, and its RMS velocity lies between the two rows that bracket it. That RMS velocity is also the NMO velocity the stretch at the top was read with.
+1292.000000 ms is the top picked on gather 5. The picked time falls just below the row at 1288.800000 ms, so its interval velocity is that of the segment to 1311.000000 ms, and its RMS velocity lies between the two rows that bracket it. That RMS velocity is also the NMO velocity the stretch at the top was read with.
 
 ## What a study states
 
@@ -50,4 +50,4 @@ The table is an input: which table, which rows, and what the study did with a ro
 
 ## Exercise
 
-In the prestack explorer, set Data to "Ekene teaching pack" and View to "Dix and Walden". Check the Dix interval velocity column against the table above, then choose rows in Dix layer ending at and read the tile for each layer. Set Time to 1292 ms and read RMS velocity at the time and Interval velocity at the time. Step Time a few milliseconds either side of the row at 1311.000000 ms and watch the interval velocity step while the RMS velocity moves smoothly. Finally find the layer below 925.500000 ms with the highest interval velocity and say which rock it is.
+In the prestack explorer, set Data to "Ekene teaching pack" and View to "Dix and Walden". Check the Dix interval velocity column against the table above, then choose rows in Dix layer ending at and read the tile for each layer. Set Time to 1292 ms and read RMS velocity at the time and Interval velocity at the time. Step Time a few milliseconds either side of the row at 1311.000000 ms and watch the interval velocity step while the RMS velocity moves smoothly. Finally find the layer below 925.500000 ms with the highest interval velocity and set its two rows beside Ekene-1's checkshot times at the top and the base of the sand.

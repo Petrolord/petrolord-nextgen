@@ -24,7 +24,7 @@ The three bins of the angle gather at the top (1292.000000 ms), near, mid and fa
 
 A is positive and B negative in every row: a peak at the top that dims with angle, the same signs as the modelled interface at Ekene-1. The two-term fit reports C as 0.000000 because it has no third term.
 
-- **The three-term fit moves B.** Adding a curvature term takes some of the fall with angle into C, and the gradient grows steeper. On three points, with nothing left over, the split between B and C is fixed by the points alone, so noise in the far stack goes straight into both.
+- **The three-term fit moves B.** Adding a curvature term takes B from -734.431814 to -915.097371, with C at 467.947963, and A from 501.873676 to 510.227684. On three points, with nothing left over, the split between B and C is fixed by the three amplitudes alone.
 - **More bins move the two-term fit.** Nine bins of 5 degrees at their centres give a two-term A and B both larger in size than the three-bin fit.
 - **The units are trace units.** A and B here are in the kit's trace amplitude, which has no physical scale. They become reflection coefficients only through the one scale over every well.
 

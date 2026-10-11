@@ -31,11 +31,11 @@ The wavelet is the next lesson's statistical wavelet from the same trace.
 
 ## Reading the figures
 
-The pack's logs cover the Ekene Sand and the shale above it, so the synthetic is short: 26 live samples on a 4.000000 ms clock. Every correlation this module reports is measured over those samples, so it describes the reservoir interval alone.
+The pack's logs cover the Ekene Sand and the shale above it, so the synthetic is short: 26 live samples on a 4.000000 ms clock. Every correlation this module reports is measured over those samples, so it describes the Ekene Sand and the shale above it alone.
 
 The largest coefficient is negative. At 1312.000000 ms it sits just below the Ekene-1 checkshot at 5183.989501 ft (two-way time 1311.086000 ms), next to the base of the Ekene Sand at 5183.727034 ft, where impedance falls downwards. The top of the sand is a peak, as the Associate tier showed from the logs; the base is a trough, and on these logs it is the stronger of the two.
 
-A correlation of 0.983438 with no shift and no rotation says the checkshots already place the synthetic close to the recorded event, and the zero-phase wavelet already resembles the recorded one. The next three lessons test the wavelet, its phase and the shift.
+The correlation of 0.983438 is read with no shift and no rotation, with the checkshots placing the synthetic and a zero-phase wavelet shaping it. The next three lessons test the wavelet, its phase and the shift.
 
 ## What the synthetic depends on
 

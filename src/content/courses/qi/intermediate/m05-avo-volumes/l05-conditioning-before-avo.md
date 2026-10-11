@@ -4,7 +4,7 @@ The Shuey fit reads three amplitudes at one sample and trusts that they are the 
 
 ## How each step reaches A and B
 
-- **Trim statics** shift one stack against another in time, which changes which part of the far wavelet sits under the near stack's peak, so the far amplitude moves.
+- **Trim statics** shift one stack against another in time, so the amplitude read at the sample moves.
 - **Matching in shift, phase and scale** adjusts each stack towards the others. A scale applied to the far stack alone changes how far the far amplitude falls below the near, and that fall is what B measures. A scale applied to every stack alike moves A and B together and leaves their ratio.
 - **Spectral balancing** brings the stacks' spectra towards one another, which changes each stack's amplitude at a sample as well.
 
@@ -20,7 +20,7 @@ A, the intercept, leans on the near stack and changes least when only the far st
 | the kit's near stack trace at Ekene-1, same time | 456.803711 |
 | the kit's far stack trace at Ekene-1, same time | 220.203720 |
 
-The gathers module measured a far-offset residual of 2.795940 ms on gather 5: the far traces do not sit exactly level with the near ones about the top. The angles module compared the gather's partial stacks with the kit's stack traces at Ekene-1 and found them closest at near and furthest apart at far. Neither says which version is right; both say the far amplitude is the fragile one, and conditioning adjusts it.
+The gathers module measured a far-offset residual of 2.795940 ms on gather 5: the far traces do not sit exactly level with the near ones about the top. The angles module compared the gather's partial stacks with the kit's stack traces at Ekene-1 and found them closest at near and furthest apart at far. Neither says which version is right; both concern the far traces.
 
 ## What a study records
 

@@ -23,9 +23,9 @@ The synthetic needs a wavelet, and two can be taken from the seismic at a well. 
 
 ## Reading the table
 
-Every wavelet has 31 samples: the same window length on the same clock. Ekene-2 is the lowest in every column, from its peak of 23.394907 Hz to its high edge of 39.582002 Hz; Ekene-4 is the highest in every column, peak 26.530951 Hz and high edge 43.780487 Hz. Ekene-1 and Ekene-3 sit between them and close to each other.
+Every wavelet has 31 samples: the same window length on the same clock. Ekene-2 is the lowest in every column, from its peak of 23.394907 Hz to its high edge of 39.582002 Hz; Ekene-4 is the highest in every column, peak 26.530951 Hz and high edge 43.780487 Hz. Ekene-1 and Ekene-3 sit between them.
 
-The 25 Hz Ricker is a useful yardstick. Its peak is close to the field wavelets' peaks, but its centroid of 26.596139 Hz sits well above its peak, while each statistical wavelet's centroid sits close to its own peak. A Ricker chosen by its peak alone carries a higher centroid than any of the four field wavelets.
+The 25 Hz Ricker is a useful yardstick. It peaks at 25.039790 Hz, inside the span of the four field peaks, and its centroid of 26.596139 Hz lies above the centroid of every statistical wavelet, the highest of which is Ekene-4's 26.581599 Hz. A wavelet is described by its peak and its centroid together.
 
 The table says nothing about phase: every statistical wavelet is zero phase by construction.
 

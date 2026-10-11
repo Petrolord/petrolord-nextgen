@@ -21,7 +21,7 @@ At each well the top is picked on the near stack trace within 8 ms of its checks
 | Ekene-3 | 1282.159191 | 1284.000000 | 470.308887 | -1249.098330 |
 | Ekene-4 | 1329.290304 | 1328.000000 | 527.903525 | -894.546352 |
 
-Every well has a positive A and a negative B: a peak that dims with angle. The intercepts sit close together across the four wells, and the gradients spread much further, from Ekene-2 the least negative to Ekene-3 the most. On these stacks the gradient is the volume that varies between wells.
+Every well has a positive A and a negative B: a peak that dims with angle. The intercepts run from 470.308887 at Ekene-3 to 527.903525 at Ekene-4, and the gradients from -772.839743 at Ekene-2, the least negative, to -1249.098330 at Ekene-3, the most.
 
 At Ekene-1 the volume reads A 486.838592 from the kit's stack traces, where the gather's own partial stacks gave 501.873676 at the same time. The two come from different stacks of the same rock, and the angle stacks module showed the kit's far trace falling further than the gather's. A volume is only as good as the stacks under it.
 
