@@ -108,3 +108,6 @@ console.log(JSON.stringify(out, null, 0).replace(/,"/g, ',\n"'));
     contrastsScale1: P.contrasts(fit.A, fit.B, 0.5), classScale1: P.classOf(fit.A, fit.B) }));
 }
 console.log(JSON.stringify({ explorer: out['explorer.defaults'] }));
+
+/* lesson check (m02 l03): four wavelets sharing one phase error compare as four unrotated ones */
+{ const c = P.compare(ws.map((w) => ({ name: w.name, samples: P.rotate(w.samples, 60) }))); console.log(JSON.stringify({ allRot60: F(c.similarity), lags: c.aligned.map((a) => a.lag) })); }

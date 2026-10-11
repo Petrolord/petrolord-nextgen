@@ -58,7 +58,7 @@ $GOLIVE"
 digest_for() {
   case $1 in
     20261011212305_qi_course                ) echo 7d13bb51dbd822425ceaacf379f5556db19e1ac0500004fae902d3129a05cc0d ;;
-    20261011212306_qi_beginner_deep         ) echo 0d258c6ba1404dfae8470c66236c1bf386acf11ad917c0de0e9de9cea1771455 ;;
+    20261011212306_qi_beginner_deep         ) echo dcead26bb963f5dd0b55ea3e6080f21541a7746f9af1af970ba9c1c7ac126567 ;;
     20261011212309_qi_go_live               ) echo 714e82bbfb85b17e275be4cb286916a89645082aea6c66ee928fa7276498032b ;;
     *) echo UNPINNED ;;
   esac
