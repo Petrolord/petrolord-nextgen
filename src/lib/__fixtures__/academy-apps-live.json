@@ -1,6 +1,6 @@
 {
- "_about": "Read-only snapshot of public.academy_apps on the NextGen project (txcsbtvcdaqmkjjbhbeg), taken 2026-10-05. The homepage counts are derived from these rows; the Suite homepage pins the same figures (petrolord-suite src/data/__fixtures__/live-catalogue.json). See docs/Homepage-Counts.md. Refresh when a course goes live, together with homeCatalog.js.",
- "taken": "2026-10-05",
+ "_about": "Read-only snapshot of public.academy_apps on the NextGen project (txcsbtvcdaqmkjjbhbeg), taken 2026-10-05, plus the qi row as its go-live migration (20261011212309_qi_go_live) sets it on 2026-10-12. The homepage counts are derived from these rows; the Suite homepage pins the same figures (petrolord-suite src/data/__fixtures__/live-catalogue.json). See docs/Homepage-Counts.md. Refresh when a course goes live, together with homeCatalog.js.",
+ "taken": "2026-10-12",
  "courses": [
   {
    "slug": "appliedai",
@@ -323,6 +323,12 @@
   {
    "slug": "producedwater",
    "module": "facilities",
+   "status": "available",
+   "courseType": "app"
+  },
+  {
+   "slug": "qi",
+   "module": "geoscience",
    "status": "available",
    "courseType": "app"
   },

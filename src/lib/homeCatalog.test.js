@@ -34,7 +34,7 @@ describe('homepage catalogue', () => {
   it('falls back to the static status when there are no live rows', () => {
     expect(mergeCatalog(HOME_COURSES, [])).toBe(HOME_COURSES);
     expect(mergeCatalog(HOME_COURSES, null)).toBe(HOME_COURSES);
-    expect(catalogStats(HOME_COURSES)).toEqual({ courses: 79, appCourses: 72, disciplines: 12, certifications: 237 });
+    expect(catalogStats(HOME_COURSES)).toEqual({ courses: 80, appCourses: 73, disciplines: 12, certifications: 240 });
   });
 
   it('takes status from the live catalogue and counts only available courses', () => {
@@ -54,10 +54,10 @@ describe('homepage catalogue', () => {
   // The reconciled counts (docs/Homepage-Counts.md). The static catalogue is
   // what the page paints before academy_apps answers and what it keeps if the
   // read fails, so it must equal the live catalogue: pinned here to a
-  // read-only snapshot of academy_apps taken 2026-10-05. The Suite homepage
-  // pins the same 79 and 72 to the same snapshot.
+  // read-only snapshot of academy_apps taken 2026-10-05, plus qi at its
+  // 2026-10-12 go-live. The Suite homepage pins the same 80 and 73.
   it('equals the live academy_apps snapshot, course by course', () => {
-    expect(LIVE.taken).toBe('2026-10-05');
+    expect(LIVE.taken).toBe('2026-10-12');
     const live = Object.fromEntries(LIVE.courses.map((c) => [c.slug, c]));
     expect(HOME_COURSES.map((c) => c.slug).sort()).toEqual(Object.keys(live).sort());
     for (const co of HOME_COURSES) {
