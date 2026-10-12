@@ -6,6 +6,7 @@ import { listAcademyApps } from '@/services/academyService';
 import { HOME_COURSES, HOME_MODULES, mergeCatalog, catalogStats } from '@/lib/homeCatalog';
 import PracticeCourseBadge from '@/components/course/PracticeCourseBadge';
 import './LandingPage.css';
+import { YouTubeLink, LinkedInLink } from '@/components/public/SocialLinks';
 
 // Homepage, regal redesign (2026-09-25, owner approved). Written for two
 // readers at a glance: the professional choosing a course and the employer
@@ -473,6 +474,10 @@ function HomeFooter() {
           <a href="mailto:info@lordswayenergy.com">info@lordswayenergy.com</a>
           <a href="tel:+2349015566981">+234 901 556 6981</a>
           <a href="tel:+447403660720">+44 7403 660720</a>
+        </FooterCol>
+        <FooterCol title="Follow us">
+          <YouTubeLink />
+          <LinkedInLink />
         </FooterCol>
         <FooterCol title="Offices">
           <p>8 The Providence Street, Lekki Phase 1, Lagos, Nigeria</p>

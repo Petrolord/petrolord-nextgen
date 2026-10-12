@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, MapPin, Phone } from 'lucide-react';
 import { BRAND_MARK } from '@/components/public/PublicPage';
+import { YouTubeLink, LinkedInLink } from '@/components/public/SocialLinks';
 
 // The footer of the legal pages (its only user; the regal homepage has its
 // own HomeFooter). Batch 6B: an ink strip, a fixed dark scope like the brand
@@ -36,6 +37,8 @@ const Footer = () => {
               <li><a href="/#courses" className="text-sm text-pl-muted hover:text-pl-accent-text transition-colors">Courses</a></li>
               <li><a href="/#fees" className="text-sm text-pl-muted hover:text-pl-accent-text transition-colors">Fees</a></li>
               <li><Link to="/verify" className="text-sm text-pl-muted hover:text-pl-accent-text transition-colors">Verify a Certificate</Link></li>
+              <li><YouTubeLink className="text-sm text-pl-muted hover:text-pl-accent-text transition-colors" /></li>
+              <li><LinkedInLink className="text-sm text-pl-muted hover:text-pl-accent-text transition-colors" /></li>
             </ul>
           </div>
 

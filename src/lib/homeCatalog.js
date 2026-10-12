@@ -7,7 +7,7 @@ import { courseTypeOf } from '@/lib/courseType';
 // static `status` below is the fallback when that read fails, and what the
 // page paints before it returns, so keep it equal to the live catalogue
 // (docs/Homepage-Counts.md; homeCatalog.test.js pins it to the 2026-10-05
-// snapshot) or the count changes on screen as the page loads.
+// snapshot, with qi added at its 2026-10-12 go-live) or the count changes on screen as the page loads.
 //
 // Add a row here alongside any new academy_apps row. homeCatalog.test.js
 // checks slugs are unique and every module key is known.
@@ -43,6 +43,7 @@ export const HOME_COURSES = [
   c('mapping', 'geoscience', 'Subsurface Mapping', 'Honest structure and property maps that drive well placement.'),
   c('reservoircalc', 'geoscience', 'Reservoir Volumetrics', 'In-place volumes with contacts and uncertainty, ready for partners.'),
   c('rockphysics', 'geoscience', 'Rock Physics', 'See fluids and lithology in the seismic before you drill.'),
+  c('qi', 'geoscience', 'Quantitative Interpretation', 'Read rock and fluid from seismic amplitudes, with the uncertainty stated.', 'available', true),
   c('porepressure', 'geoscience', 'Pore Pressure', 'Predict pressure ahead of the bit. Prevent kicks and losses.'),
   c('earthmodel', 'geoscience', 'Earth Modeling', 'The 3D model every development plan depends on.'),
   c('basin', 'geoscience', 'Basin & Charge', 'Was oil generated and trapped? Smarter exploration bets.'),

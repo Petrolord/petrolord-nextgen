@@ -45,3 +45,11 @@ re-run `select slug, module, status, course_type from public.academy_apps;`
 (read-only), update the snapshot and `homeCatalog.js` together, and update
 the Suite's `NEXTGEN_LIVE_COURSES` and `NEXTGEN_APP_COURSES` with its
 snapshot in a Suite PR.
+
+## 2026-10-12: Quantitative Interpretation (qi)
+
+The qi course joins the static catalogue (`homeCatalog.js`) and the snapshot
+fixture as available, app type, Geoscience. With its go-live
+(`20261011212309_qi_go_live`) the homepage reads 80 courses, 73 built on a
+Suite app, 240 certifications. Until the go-live runs, the live read keeps qi
+as coming soon and the page shows 79. The Suite homepage pins 80 and 73.
