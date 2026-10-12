@@ -179,9 +179,9 @@ describe('video registry: playback rules', () => {
 
   it('a members video waits for a host, then plays from it', () => {
     const mem = { access: 'members', youtubeId: null };
-    expect(VIDEO_HOST.provider).toBeNull();
-    expect(videoPlayback(mem)).toBe('soon');
-    expect(videoPlayback(mem, { provider: 'bunny' })).toBe('host');
+    expect(VIDEO_HOST.provider).toBe('cloudflare-stream');
+    expect(videoPlayback(mem, { provider: null })).toBe('soon');
+    expect(videoPlayback(mem)).toBe('host');
   });
 
   it('unknown ids and access values play nothing', () => {

@@ -21,8 +21,8 @@
 //                          configured the lesson shows the coming-soon card
 //   youtubeId    the 11 character YouTube id of a public video, or null
 //   hostKey      the master's key in the video store (the folder name under
-//                demo-videos and the R2 key prefix); V2 maps it to the
-//                private host's own id
+//                demo-videos and the R2 key prefix); the uploader maps it to
+//                the video's Cloudflare Stream uid in academy_videos
 //   lessons      lesson paths this video enriches, as
 //                '<app>/<tier>/<module key>/<lesson key>'. Every path must
 //                exist and every listed lesson must carry the marker, and
@@ -39,12 +39,13 @@ export const SERIES = {
   },
 };
 
-// The private host for members-only videos. null until the owner chooses a
-// host and the academy-video-url function is deployed with its secrets
-// (Bunny Stream is the recommended host; see docs/video/VIDEO-HOSTING.md).
-// While it is null no members-only video makes a network call.
+// The private host for members-only videos: Cloudflare Stream (owner decision
+// 2026-10-12). A members-only video asks academy-video-url for a signed player
+// URL; until the function is deployed with its secrets and the video is in
+// academy_videos, the call fails and the lesson shows the coming-soon card
+// (docs/video/VIDEO-HOSTING.md). Set provider to null to stop every call.
 export const VIDEO_HOST = {
-  provider: null,
+  provider: 'cloudflare-stream',
 };
 
 export const VIDEOS = {

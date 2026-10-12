@@ -15,7 +15,7 @@ export default defineConfig({
   },
   test: {
     environment: 'node',
-    include: ['src/**/*.test.{js,jsx}'],
+    include: ['src/**/*.test.{js,jsx}', 'supabase/functions/**/*.test.ts', 'tools/video/**/*.test.mjs'],
     // Dashboard sub-routes are lazy chunks (2026-10-05 load fix), so a
     // route test now loads its page module inside the test rather than at
     // collection; the first render of a heavy course page needs more than

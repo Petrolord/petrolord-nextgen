@@ -38,14 +38,14 @@ describe('VideoSegment', () => {
 
   it('a members video with no host shows the coming-soon card and makes no call', async () => {
     const { fetchMemberVideoUrl } = await import('@/services/videoService');
-    const html = renderToStaticMarkup(<VideoSegment id="qi-f15" />);
+    const html = renderToStaticMarkup(<VideoSegment id="qi-f15" host={{ provider: null }} />);
     expect(html).toContain('Video coming soon to your course');
     expect(html).toContain('Impedance Inversion');
     expect(fetchMemberVideoUrl).not.toHaveBeenCalled();
   });
 
   it('a members video with a host configured waits for its signed URL', () => {
-    const html = renderToStaticMarkup(<VideoSegment id="qi-f15" host={{ provider: 'bunny' }} />);
+    const html = renderToStaticMarkup(<VideoSegment id="qi-f15" host={{ provider: 'cloudflare-stream' }} />);
     expect(html).toContain('data-video-mode="host"');
     expect(html).not.toContain('Video coming soon');
   });
