@@ -10,3 +10,17 @@ verify_jwt = true
 # Paystack calls this server-to-server; auth is the HMAC-SHA512
 # signature over the raw body, not a JWT.
 verify_jwt = false
+
+# Admin functions: the caller's JWT is checked at the gateway AND inside the
+# function (getUser, then profiles.role = 'super_admin'; fails closed).
+[functions.create-admin]
+verify_jwt = true
+
+[functions.create-super-admin]
+verify_jwt = true
+
+[functions.deactivate-user]
+verify_jwt = true
+
+[functions.delete-user]
+verify_jwt = true
