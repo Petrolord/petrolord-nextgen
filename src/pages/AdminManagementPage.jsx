@@ -92,7 +92,11 @@ const AdminManagementPage = () => {
       // accessible only via Edge Function. For this demo, we'll simulate by checking if user exists or calling edge function.
       
       const { data, error } = await supabase.functions.invoke('create-admin', {
-        body: { email: newAdminEmail, name: newAdminName }
+        body: {
+          email: newAdminEmail,
+          name: newAdminName,
+          redirectUrl: `${window.location.origin}/reset-password`,
+        }
       });
 
       if (error) throw error;
