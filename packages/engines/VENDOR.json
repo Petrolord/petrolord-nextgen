@@ -1896,9 +1896,9 @@
     {
       "path": "engines/economics/cashflow.ts",
       "kind": "differing",
-      "group": "ec7-pia-recut",
-      "vendoredSha": "92906576c0cc9afdeee45dd6d640f997dcb9fb49",
-      "reason": "EC7 PIA 2021 recut: vendored sha-identical from petrolord-engines 3778451 (PR #262, engines 3.12.0, PIA 2021 / NTA 2025 compliance by default, pia_legacy_pre_audit switch): cashflow.ts, fiscalRegime.js, fiscalTemplates.js, their suites, goldens, the worked-example fixture, oracles, negative control, FINDINGS-pia2021 and AUDIT-PIA-2021. fiscalConventions.js and irrContract.js already match. The pin stays at 54cf7c4. The cashflow and fiscal courses are re-cut on the default path in the same branch (fix/cashflow-fiscal-pia-recut); qra (npv only) is proven byte-identical."
+      "group": "ec1-midyear-recut",
+      "vendoredSha": "43bbe6e0fccb44877ef56650e5d019bacd3f5d0a",
+      "reason": "EC1 mid-year recut (2026-10-14, owner decision: the course must match the Suite): vendored sha-identical from petrolord-engines a6cb037 (PR #359, engines 3.12.3; it carries 3.12.1 per-row volume columns and 3.12.2 variable opex as well). Mid-year discounting now subtracts 0.5 from every exponent (cash half a year before the 31 December valuation date), so mid-year NPV = end-year NPV x sqrt(1 + r); end-year results are unchanged. Paths: cashflow.ts, economics.cashflow and economics.pia2021 suites, the new economics.midYearDiscounting and economics.mixedVolumeLayouts suites, cashflow_cases.json, oracle_cashflow.py and the ekene-epe-case.json fixture. NOT vendored: __tests__/economics.variableOpex.test.ts, whose case (c) needs the 3.12.2 montecarlo.ts hunk and montecarlo.ts is held for the EC3 recut. The pin stays at 54cf7c4. The cashflow course is re-cut in the same branch (fix/ec1-mid-year-discounting, migration 20261014090000_ec1_midyear_recut_cashflow.sql); every other course whose kit imports cashflow.ts (fiscal, pia, qra, procurement, gsa, joa, farmout, prms, consequence) rebuilds byte-identical apart from the pia digest's engine header line."
     },
     {
       "path": "engines/economics/fiscalRegime.js",
@@ -1917,9 +1917,9 @@
     {
       "path": "__tests__/economics.cashflow.test.ts",
       "kind": "differing",
-      "group": "ec7-pia-recut",
-      "vendoredSha": "b4ec0c70820eabf2c9623093d6493bad04b47552",
-      "reason": "EC7 PIA 2021 recut: vendored sha-identical from petrolord-engines 3778451 (PR #262, engines 3.12.0, PIA 2021 / NTA 2025 compliance by default, pia_legacy_pre_audit switch): cashflow.ts, fiscalRegime.js, fiscalTemplates.js, their suites, goldens, the worked-example fixture, oracles, negative control, FINDINGS-pia2021 and AUDIT-PIA-2021. fiscalConventions.js and irrContract.js already match. The pin stays at 54cf7c4. The cashflow and fiscal courses are re-cut on the default path in the same branch (fix/cashflow-fiscal-pia-recut); qra (npv only) is proven byte-identical."
+      "group": "ec1-midyear-recut",
+      "vendoredSha": "273798656bf6b0d92f09eb3d03e74291200ee436",
+      "reason": "EC1 mid-year recut (2026-10-14, owner decision: the course must match the Suite): vendored sha-identical from petrolord-engines a6cb037 (PR #359, engines 3.12.3; it carries 3.12.1 per-row volume columns and 3.12.2 variable opex as well). Mid-year discounting now subtracts 0.5 from every exponent (cash half a year before the 31 December valuation date), so mid-year NPV = end-year NPV x sqrt(1 + r); end-year results are unchanged. Paths: cashflow.ts, economics.cashflow and economics.pia2021 suites, the new economics.midYearDiscounting and economics.mixedVolumeLayouts suites, cashflow_cases.json, oracle_cashflow.py and the ekene-epe-case.json fixture. NOT vendored: __tests__/economics.variableOpex.test.ts, whose case (c) needs the 3.12.2 montecarlo.ts hunk and montecarlo.ts is held for the EC3 recut. The pin stays at 54cf7c4. The cashflow course is re-cut in the same branch (fix/ec1-mid-year-discounting, migration 20261014090000_ec1_midyear_recut_cashflow.sql); every other course whose kit imports cashflow.ts (fiscal, pia, qra, procurement, gsa, joa, farmout, prms, consequence) rebuilds byte-identical apart from the pia digest's engine header line."
     },
     {
       "path": "__tests__/economics.fiscal.test.js",
@@ -1931,16 +1931,16 @@
     {
       "path": "__tests__/economics.pia2021.test.ts",
       "kind": "extra",
-      "group": "ec7-pia-recut",
-      "vendoredSha": "24c3a8d9c4000761589aa1278af165abf9a2a06c",
-      "reason": "EC7 PIA 2021 recut: vendored sha-identical from petrolord-engines 3778451 (PR #262, engines 3.12.0, PIA 2021 / NTA 2025 compliance by default, pia_legacy_pre_audit switch): cashflow.ts, fiscalRegime.js, fiscalTemplates.js, their suites, goldens, the worked-example fixture, oracles, negative control, FINDINGS-pia2021 and AUDIT-PIA-2021. fiscalConventions.js and irrContract.js already match. The pin stays at 54cf7c4. The cashflow and fiscal courses are re-cut on the default path in the same branch (fix/cashflow-fiscal-pia-recut); qra (npv only) is proven byte-identical."
+      "group": "ec1-midyear-recut",
+      "vendoredSha": "8eb107c2dd3d32c9f9712225d6010c428cd00b25",
+      "reason": "EC1 mid-year recut (2026-10-14, owner decision: the course must match the Suite): vendored sha-identical from petrolord-engines a6cb037 (PR #359, engines 3.12.3; it carries 3.12.1 per-row volume columns and 3.12.2 variable opex as well). Mid-year discounting now subtracts 0.5 from every exponent (cash half a year before the 31 December valuation date), so mid-year NPV = end-year NPV x sqrt(1 + r); end-year results are unchanged. Paths: cashflow.ts, economics.cashflow and economics.pia2021 suites, the new economics.midYearDiscounting and economics.mixedVolumeLayouts suites, cashflow_cases.json, oracle_cashflow.py and the ekene-epe-case.json fixture. NOT vendored: __tests__/economics.variableOpex.test.ts, whose case (c) needs the 3.12.2 montecarlo.ts hunk and montecarlo.ts is held for the EC3 recut. The pin stays at 54cf7c4. The cashflow course is re-cut in the same branch (fix/ec1-mid-year-discounting, migration 20261014090000_ec1_midyear_recut_cashflow.sql); every other course whose kit imports cashflow.ts (fiscal, pia, qra, procurement, gsa, joa, farmout, prms, consequence) rebuilds byte-identical apart from the pia digest's engine header line."
     },
     {
       "path": "test-data/economics/goldens/cashflow_cases.json",
       "kind": "differing",
-      "group": "ec7-pia-recut",
-      "vendoredSha": "9ba8d506f224ea37eebd3375b68a895bd2941b50",
-      "reason": "EC7 PIA 2021 recut: vendored sha-identical from petrolord-engines 3778451 (PR #262, engines 3.12.0, PIA 2021 / NTA 2025 compliance by default, pia_legacy_pre_audit switch): cashflow.ts, fiscalRegime.js, fiscalTemplates.js, their suites, goldens, the worked-example fixture, oracles, negative control, FINDINGS-pia2021 and AUDIT-PIA-2021. fiscalConventions.js and irrContract.js already match. The pin stays at 54cf7c4. The cashflow and fiscal courses are re-cut on the default path in the same branch (fix/cashflow-fiscal-pia-recut); qra (npv only) is proven byte-identical."
+      "group": "ec1-midyear-recut",
+      "vendoredSha": "a6db4030ed33f90634384df3ebb2faea330b4ae2",
+      "reason": "EC1 mid-year recut (2026-10-14, owner decision: the course must match the Suite): vendored sha-identical from petrolord-engines a6cb037 (PR #359, engines 3.12.3; it carries 3.12.1 per-row volume columns and 3.12.2 variable opex as well). Mid-year discounting now subtracts 0.5 from every exponent (cash half a year before the 31 December valuation date), so mid-year NPV = end-year NPV x sqrt(1 + r); end-year results are unchanged. Paths: cashflow.ts, economics.cashflow and economics.pia2021 suites, the new economics.midYearDiscounting and economics.mixedVolumeLayouts suites, cashflow_cases.json, oracle_cashflow.py and the ekene-epe-case.json fixture. NOT vendored: __tests__/economics.variableOpex.test.ts, whose case (c) needs the 3.12.2 montecarlo.ts hunk and montecarlo.ts is held for the EC3 recut. The pin stays at 54cf7c4. The cashflow course is re-cut in the same branch (fix/ec1-mid-year-discounting, migration 20261014090000_ec1_midyear_recut_cashflow.sql); every other course whose kit imports cashflow.ts (fiscal, pia, qra, procurement, gsa, joa, farmout, prms, consequence) rebuilds byte-identical apart from the pia digest's engine header line."
     },
     {
       "path": "test-data/economics/goldens/fiscal_cases.json",
@@ -1966,9 +1966,9 @@
     {
       "path": "tools/validation/economics/oracle_cashflow.py",
       "kind": "differing",
-      "group": "ec7-pia-recut",
-      "vendoredSha": "6a2dc4a0ab6ebd38215dce51ed13fbe95fade479",
-      "reason": "EC7 PIA 2021 recut: vendored sha-identical from petrolord-engines 3778451 (PR #262, engines 3.12.0, PIA 2021 / NTA 2025 compliance by default, pia_legacy_pre_audit switch): cashflow.ts, fiscalRegime.js, fiscalTemplates.js, their suites, goldens, the worked-example fixture, oracles, negative control, FINDINGS-pia2021 and AUDIT-PIA-2021. fiscalConventions.js and irrContract.js already match. The pin stays at 54cf7c4. The cashflow and fiscal courses are re-cut on the default path in the same branch (fix/cashflow-fiscal-pia-recut); qra (npv only) is proven byte-identical."
+      "group": "ec1-midyear-recut",
+      "vendoredSha": "83a59e5ec58b92a395d21479a98feb2a02f36ea0",
+      "reason": "EC1 mid-year recut (2026-10-14, owner decision: the course must match the Suite): vendored sha-identical from petrolord-engines a6cb037 (PR #359, engines 3.12.3; it carries 3.12.1 per-row volume columns and 3.12.2 variable opex as well). Mid-year discounting now subtracts 0.5 from every exponent (cash half a year before the 31 December valuation date), so mid-year NPV = end-year NPV x sqrt(1 + r); end-year results are unchanged. Paths: cashflow.ts, economics.cashflow and economics.pia2021 suites, the new economics.midYearDiscounting and economics.mixedVolumeLayouts suites, cashflow_cases.json, oracle_cashflow.py and the ekene-epe-case.json fixture. NOT vendored: __tests__/economics.variableOpex.test.ts, whose case (c) needs the 3.12.2 montecarlo.ts hunk and montecarlo.ts is held for the EC3 recut. The pin stays at 54cf7c4. The cashflow course is re-cut in the same branch (fix/ec1-mid-year-discounting, migration 20261014090000_ec1_midyear_recut_cashflow.sql); every other course whose kit imports cashflow.ts (fiscal, pia, qra, procurement, gsa, joa, farmout, prms, consequence) rebuilds byte-identical apart from the pia digest's engine header line."
     },
     {
       "path": "tools/validation/economics/oracle_fiscal.py",
@@ -3362,6 +3362,27 @@
       "group": "qi-course",
       "vendoredSha": "480487e6085a46b00a5d0e21ab647904f5a8b321",
       "reason": "QI course (Quantitative Interpretation): vendored sha-identical from petrolord-engines 0f4ac4a (engines/qi seismicQc, avo, prestack, prestackQc, wavelets, lfm, inversion, inversionSpread, prestackInversion, propertyPrediction, prospectAssessment, and from E2 angleWavelets, avoWells, inversionQc, propertyCalibration, prospectTrap with seismolord/wellWavelet; the rockphysics elasticSet, avoTrend, granular, inclusion, templates, gather, pseudoSonic files; lib/gridding/closure.js; their suites, goldens and oracles) by the wave's vendor_qi.sh, 4 proofs per path. lib/gridding/gridmath.js is kept at NextGen's blob (closure.js uses only isNull and the unrotated gridXY). New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to 0f4ac4a or later."
+    },
+    {
+      "path": "__tests__/economics.midYearDiscounting.test.ts",
+      "kind": "extra",
+      "group": "ec1-midyear-recut",
+      "vendoredSha": "98bffed2dcade4ddd892562745aeb934800ff9c3",
+      "reason": "EC1 mid-year recut (2026-10-14, owner decision: the course must match the Suite): vendored sha-identical from petrolord-engines a6cb037 (PR #359, engines 3.12.3; it carries 3.12.1 per-row volume columns and 3.12.2 variable opex as well). Mid-year discounting now subtracts 0.5 from every exponent (cash half a year before the 31 December valuation date), so mid-year NPV = end-year NPV x sqrt(1 + r); end-year results are unchanged. Paths: cashflow.ts, economics.cashflow and economics.pia2021 suites, the new economics.midYearDiscounting and economics.mixedVolumeLayouts suites, cashflow_cases.json, oracle_cashflow.py and the ekene-epe-case.json fixture. NOT vendored: __tests__/economics.variableOpex.test.ts, whose case (c) needs the 3.12.2 montecarlo.ts hunk and montecarlo.ts is held for the EC3 recut. The pin stays at 54cf7c4. The cashflow course is re-cut in the same branch (fix/ec1-mid-year-discounting, migration 20261014090000_ec1_midyear_recut_cashflow.sql); every other course whose kit imports cashflow.ts (fiscal, pia, qra, procurement, gsa, joa, farmout, prms, consequence) rebuilds byte-identical apart from the pia digest's engine header line."
+    },
+    {
+      "path": "__tests__/economics.mixedVolumeLayouts.test.ts",
+      "kind": "extra",
+      "group": "ec1-midyear-recut",
+      "vendoredSha": "0cfc52914cac8b9d768a651bbcf30b0a00edd687",
+      "reason": "EC1 mid-year recut (2026-10-14, owner decision: the course must match the Suite): vendored sha-identical from petrolord-engines a6cb037 (PR #359, engines 3.12.3; it carries 3.12.1 per-row volume columns and 3.12.2 variable opex as well). Mid-year discounting now subtracts 0.5 from every exponent (cash half a year before the 31 December valuation date), so mid-year NPV = end-year NPV x sqrt(1 + r); end-year results are unchanged. Paths: cashflow.ts, economics.cashflow and economics.pia2021 suites, the new economics.midYearDiscounting and economics.mixedVolumeLayouts suites, cashflow_cases.json, oracle_cashflow.py and the ekene-epe-case.json fixture. NOT vendored: __tests__/economics.variableOpex.test.ts, whose case (c) needs the 3.12.2 montecarlo.ts hunk and montecarlo.ts is held for the EC3 recut. The pin stays at 54cf7c4. The cashflow course is re-cut in the same branch (fix/ec1-mid-year-discounting, migration 20261014090000_ec1_midyear_recut_cashflow.sql); every other course whose kit imports cashflow.ts (fiscal, pia, qra, procurement, gsa, joa, farmout, prms, consequence) rebuilds byte-identical apart from the pia digest's engine header line."
+    },
+    {
+      "path": "test-data/economics/ekene-epe-case.json",
+      "kind": "extra",
+      "group": "ec1-midyear-recut",
+      "vendoredSha": "a23a8d48613fd05727db78a9ad0b9e2130f81524",
+      "reason": "EC1 mid-year recut (2026-10-14, owner decision: the course must match the Suite): vendored sha-identical from petrolord-engines a6cb037 (PR #359, engines 3.12.3; it carries 3.12.1 per-row volume columns and 3.12.2 variable opex as well). Mid-year discounting now subtracts 0.5 from every exponent (cash half a year before the 31 December valuation date), so mid-year NPV = end-year NPV x sqrt(1 + r); end-year results are unchanged. Paths: cashflow.ts, economics.cashflow and economics.pia2021 suites, the new economics.midYearDiscounting and economics.mixedVolumeLayouts suites, cashflow_cases.json, oracle_cashflow.py and the ekene-epe-case.json fixture. NOT vendored: __tests__/economics.variableOpex.test.ts, whose case (c) needs the 3.12.2 montecarlo.ts hunk and montecarlo.ts is held for the EC3 recut. The pin stays at 54cf7c4. The cashflow course is re-cut in the same branch (fix/ec1-mid-year-discounting, migration 20261014090000_ec1_midyear_recut_cashflow.sql); every other course whose kit imports cashflow.ts (fiscal, pia, qra, procurement, gsa, joa, farmout, prms, consequence) rebuilds byte-identical apart from the pia digest's engine header line."
     }
   ]
 }
