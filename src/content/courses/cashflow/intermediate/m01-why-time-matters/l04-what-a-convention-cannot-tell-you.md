@@ -6,13 +6,13 @@ Four settings, three NPVs, one field. The convention tells you how to read the l
 
 ## One field, several readings
 
-AKATA reports an NPV of 72534830.66 USD on the nominal basis with end-year discounting, 69159247.46 on the nominal basis with mid-year, 72534830.66 on the real basis with end-year and 70188970.32 on the real basis with mid-year. The rows were not changed between those runs. The production is the same 9680000.00 bbl of oil, the revenue the same 857602518.80, the tax the same 148425219.46. Only the rule for placing each row in time changed.
+AKATA reports an NPV of 72534830.66 USD on the nominal basis with end-year discounting, 76075172.20 on the nominal basis with mid-year, 72534830.66 on the real basis with end-year and 74959094.51 on the real basis with mid-year. The rows were not changed between those runs. The production is the same 9680000.00 bbl of oil, the revenue the same 857602518.80, the tax the same 148425219.46. Only the rule for placing each row in time changed.
 
 So "the NPV of AKATA" is not a number. "The NPV of AKATA on the real basis, end-year, at 10 percent nominal, valued in 2029" is a number, and it is 72534830.66. Every reported NPV carries that sentence, printed or not.
 
 ## What a convention can tell you
 
-It can tell you the direction of a change. Mid-year scales every discounted row toward zero by one factor, so a positive NPV shrinks and a negative one shrinks in magnitude too.
+It can tell you the direction of a change. The valuation date is 31 December, and mid-year cash arrives half a year before it, so mid-year scales every discounted row away from zero by one factor, the square root of one plus the applied rate. A positive NPV grows and a negative one grows in magnitude too.
 
 It can tell you what is invariant. The IRR is 29.2361 percent and the discounted payback 3.961607 years in all four runs. The totals, 141637829.18 nominal and 117362408.71 real, have no exponent to shift.
 
@@ -20,13 +20,13 @@ It can tell you what is invariant. The IRR is 29.2361 percent and the discounted
 
 It cannot tell you which convention is true. The rows the engine discounts are years, and nothing in a year row records when within that year the cash moved. Choosing mid-year is a claim about the field, that cash flows evenly through the year, and the engine will not check it.
 
-It cannot tell you whether a difference is real. Two readings of one field, 72534830.66 and 69159247.46, differ by a convention; two fields read under the same convention differ by their ledgers. Only the second difference means anything.
+It cannot tell you whether a difference is real. Two readings of one field, 72534830.66 and 76075172.20, differ by a convention; two fields read under the same convention differ by their ledgers. Only the second difference means anything.
 
-It cannot rescue a comparison that mixes conventions. multiyear_pia_real reports a headline NPV of 219158380.04 and multiyear_pia_midyear_real, the same field, 212070544.45; at 5 percent their profiles read 239552507.28 and 233779309.33. Set those side by side without their conventions and a reader sees two projects. There is one.
+It cannot rescue a comparison that mixes conventions. multiyear_pia_real reports a headline NPV of 219158380.04 and multiyear_pia_midyear_real, the same field, 226483105.72; at 5 percent their profiles read 239552507.28 and 245468274.80. Set those side by side without their conventions and a reader sees two projects. There is one.
 
 ## The mistake
 
-The careful mistake is precision without provenance. A reader reports 70188970.32 to the cent and omits that it is real basis, mid-year. The next reader, holding 72534830.66 from the same field, concludes that one of them made an arithmetic error and starts hunting for it. Both are right, and the hunt finds nothing, because the difference was never in the arithmetic.
+The careful mistake is precision without provenance. A reader reports 74959094.51 to the cent and omits that it is real basis, mid-year. The next reader, holding 72534830.66 from the same field, concludes that one of them made an arithmetic error and starts hunting for it. Both are right, and the hunt finds nothing, because the difference was never in the arithmetic.
 
 ## What the engine refuses
 
@@ -34,4 +34,4 @@ It refuses to report a convention-free NPV, and it refuses to pick the conventio
 
 ## Exercise
 
-Write the full sentence that names 70188970.32, with its basis, convention, discount rate and valuation year. Then say which of IRR, discounted payback and NPV would change if only the convention changed.
+Write the full sentence that names 74959094.51, with its basis, convention, discount rate and valuation year. Then say which of IRR, discounted payback and NPV would change if only the convention changed.

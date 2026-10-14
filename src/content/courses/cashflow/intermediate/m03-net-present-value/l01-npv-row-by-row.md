@@ -36,7 +36,7 @@ The second mistake is to discount the total. 117362408.71 divided once by anythi
 
 ## What NPV refuses
 
-It refuses to say how big the field is: 72534830.66 on a 255000000.00 capex and 21590909.09 on a 50000000.00 capex are not ranked by NPV alone, which is DPI's work. It refuses to say when the money comes back, which is payback's. And it refuses to state itself without a rate, a basis, a convention and a valuation year; the same rows give 70188970.32 under mid-year and 77464382.26 valued a year later.
+It refuses to say how big the field is: 72534830.66 on a 255000000.00 capex and 21590909.09 on a 50000000.00 capex are not ranked by NPV alone, which is DPI's work. It refuses to say when the money comes back, which is payback's. And it refuses to state itself without a rate, a basis, a convention and a valuation year; the same rows give 74959094.51 under mid-year and 77464382.26 valued a year later.
 
 ## Exercise
 

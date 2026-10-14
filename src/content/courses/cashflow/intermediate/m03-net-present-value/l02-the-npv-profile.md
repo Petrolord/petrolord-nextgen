@@ -32,7 +32,7 @@ AKATA's applied rate is 6.796117 percent. The point is labelled 6.8 and reads 72
 | multiyear_pia_real | 219158380.04 | 219158380.04 | 0.00 |
 | multiyear_jv_real | 88104639.00 | 88104639.00 | 0.00 |
 | pia_loss_relief | 4985473.45 | 4985473.45 | 0.00 |
-| multiyear_pia_midyear_real | 212070544.45 | 212070544.45 | 0.00 |
+| multiyear_pia_midyear_real | 226483105.72 | 226483105.72 | 0.00 |
 
 ## Why the label and the rate part
 

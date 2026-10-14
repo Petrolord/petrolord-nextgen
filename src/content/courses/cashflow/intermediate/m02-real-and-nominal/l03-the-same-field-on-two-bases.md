@@ -17,11 +17,11 @@ That agreement is the Fisher relation at work, and it is exact. The nominal rout
 | applied rate, percent | 10.000000 | 6.796117 |
 | total net cash flow | 141637829.18 | 117362408.71 |
 | NPV, end_year | 72534830.66 | 72534830.66 |
-| NPV, mid_year | 69159247.46 | 70188970.32 |
+| NPV, mid_year | 76075172.20 | 74959094.51 |
 
 The undiscounted total is the number that changes. 141637829.18 is the cash that will pass through the account, in the money of each year it arrives. 117362408.71 is the same cash restated in 2029 purchasing power. The second is smaller by exactly the deflation, and neither is wrong. The NPV profile is built on whichever column the basis selects, which is why AKATA's profile starts at 117362408.71 at 0 percent rather than at 141637829.18.
 
-The mid-year row is the one exception to agreement. Under mid-year the half-year shift is a division by the square root of one plus the applied rate, and the applied rates differ, so the shift is smaller on the real basis. The two bases part by about a million USD: 69159247.46 against 70188970.32. Basis does not move NPV under end-year; under mid-year it does.
+The mid-year row is the one exception to agreement. Mid-year cash arrives half a year before the 31 December valuation date, so the shift multiplies by the square root of one plus the applied rate; the applied rates differ, so the shift is smaller on the real basis. The bases part by 1116077.69 USD: 76075172.20 against 74959094.51. Basis does not move NPV under end-year; under mid-year it does.
 
 ## The mistake
 

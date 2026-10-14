@@ -32,7 +32,7 @@ DPI is also not NPV over capex as spent. 72534830.66 over 255000000.00 is a smal
 
 ## The mistake
 
-The careful mistake is to compare DPIs computed at different rates or on different bases. The denominator moves with the rate as well as the numerator, and a DPI carries the whole convention sentence that its NPV does. Under mid-year both numerator and denominator scale by the same factor, which is why the mid_year_discounting case reports 0.431818, the same DPI as its end-year twin, while the NPVs differ at 20586124.09 and 21590909.09.
+The careful mistake is to compare DPIs computed at different rates or on different bases. The denominator moves with the rate as well as the numerator, and a DPI carries the whole convention sentence that its NPV does. Under mid-year both numerator and denominator scale by the same factor, which is why the mid_year_discounting case reports 0.431818, the same DPI as its end-year twin, while the NPVs differ at 22644736.49 and 21590909.09.
 
 ## What DPI refuses
 

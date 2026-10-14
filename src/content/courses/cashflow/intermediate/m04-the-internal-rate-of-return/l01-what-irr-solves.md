@@ -24,7 +24,7 @@ The root is 29.2361 percent. The headline NPV of 72534830.66 belongs to the same
 
 ## What cannot move it
 
-The discount rate. On multiyear_jv_real swept from 0 to 20 percent in steps of 2, NPV falls from 148905488.72 to 50852201.45 while the IRR reads 47.9020 percent at every point. The basis and the convention: AKATA reports 29.2361 percent on the nominal basis end-year, nominal mid-year, real end-year and real mid-year, four runs with NPVs of 72534830.66, 69159247.46, 72534830.66 and 70188970.32. The working interest: at 100, 75, 60, 40 and 25 percent the IRR is 29.2361 percent every time, because scaling every entry of a vector by one factor scales its NPV at every rate and leaves the zero where it was.
+The discount rate. On multiyear_jv_real swept from 0 to 20 percent in steps of 2, NPV falls from 148905488.72 to 50852201.45 while the IRR reads 47.9020 percent at every point. The basis and the convention: AKATA reports 29.2361 percent on the nominal basis end-year, nominal mid-year, real end-year and real mid-year, four runs with NPVs of 72534830.66, 76075172.20, 72534830.66 and 74959094.51. The working interest: at 100, 75, 60, 40 and 25 percent the IRR is 29.2361 percent every time, because scaling every entry of a vector by one factor scales its NPV at every rate and leaves the zero where it was.
 
 ## The mistake
 

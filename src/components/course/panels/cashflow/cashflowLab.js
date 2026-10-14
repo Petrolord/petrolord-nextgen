@@ -5,7 +5,7 @@
 // EVERYTHING HERE IS THE VENDORED ENGINE'S OWN OUTPUT. Every ledger row, every
 // KPI, every sweep point, every IRR and every fiscal line below is a return
 // value from a call into engines/economics/cashflow.ts (the Petroleum
-// Economics Studio engine, v3.12.0). Nothing in this
+// Economics Studio engine, v3.12.3). Nothing in this
 // file re-implements the engine. The one place that looks like arithmetic, the
 // cost recovery pool in akataUnderPsc, is the engine's own applyPSC marched
 // over the engine's own rows, because the rows do not carry the pool and no

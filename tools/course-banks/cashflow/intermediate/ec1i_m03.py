@@ -74,8 +74,8 @@ q(2,
 q(1,
  "AKATA is switched from end-year to mid-year discounting. What happens to its discounted payback?",
  "Nothing; it is 3.961607 years under all four combinations of basis and convention.",
- ["It moves half a year later, because every exponent has been shifted by half.",
-  "It moves earlier, because the 2029 capex shrinks to minus 115486897.55 and the hole is shallower.",
+ ["It moves half a year earlier, because every exponent has been brought forward by half.",
+  "It moves later, because the 2029 capex grows to minus 125171883.54 and the hole is deeper.",
   "It becomes 3.461632 years, because mid-year timing removes the gap between the two paybacks."],
  "The mid-year shift scales every discounted row by one factor, and a crossing does not move when everything is scaled together.")
 

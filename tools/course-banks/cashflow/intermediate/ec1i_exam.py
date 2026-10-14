@@ -16,15 +16,15 @@ q(2,
  "Deflating the flow and deflating the rate multiply back to one factor, which is why the two bases agree at 72534830.66 end-year.")
 
 q(0,
- "Under mid-year discounting on the nominal basis AKATA's 2029 row reads -115486897.55 in the discounted column instead of -121123680.00. What happened to the valuation year row?",
- "It was shifted by half a year like every other row, so the capex is divided by the square root of 1.1 even though it sits in the valuation year.",
+ "Under mid-year discounting on the nominal basis AKATA's 2029 row reads -127035587.31 in the discounted column instead of -121123680.00. What happened to the valuation year row?",
+ "It was moved half a year like every other row, so the capex is multiplied by the square root of 1.1 even though it sits in the valuation year.",
  ["It was deflated by half a year of the 3 percent inflation, because mid-year timing moves the base date for the real column as well.",
   "The 45000000.00 of 2030 capex was netted into it, since mid-year timing brings the following year's spend forward by half a year.",
   "Nothing was discounted; the row is printed net of its 2029 depreciation of 21000000.00 under mid-year, and the exponent is still zero in the valuation year."],
- "The whole column is scaled by one factor, which is why the mid-year NPV of 69159247.46 sits closer to 72534830.66 than a reader who shifts only the revenue years would compute.")
+ "The whole column is scaled by one factor, which is why the mid-year NPV of 76075172.20 sits closer to 72534830.66 than a reader who shifts only the revenue years would compute.")
 
 q(3,
- "mid_year_discounting reports NPV 20586124.09 against 21590909.09 for its end-year twin, yet DPI 0.431818 and discounted take 82.2761 percent are identical in both. What separates the readings that move from those that hold?",
+ "mid_year_discounting reports NPV 22644736.49 against 21590909.09 for its end-year twin, yet DPI 0.431818 and discounted take 82.2761 percent are identical in both. What separates the readings that move from those that hold?",
  "A sum of present values moves when every row is scaled by one factor; a ratio of two present values scaled by the same factor does not.",
  ["The DPI and the take are undiscounted readings, so the convention has no exponent to shift in them.",
   "The mid-year shift applies to the 2031 row only, and the DPI and the take are read on the 2030 row where nothing moved.",
@@ -32,12 +32,12 @@ q(3,
  "The same reasoning holds AKATA's discounted payback at 3.961607 years under all four combinations of basis and convention.")
 
 q(1,
- "A summary table lists two projects at 219158380.04 and 212070544.45. What is a reader entitled to conclude from those two figures?",
+ "A summary table lists two projects at 219158380.04 and 226483105.72. What is a reader entitled to conclude from those two figures?",
  "Nothing until the conventions are attached: they are one field, multiyear_pia_real, read end-year and mid-year.",
- ["That the second project is worth less, since NPVs on the same ledger scale are directly comparable whatever their convention.",
-  "That the second project carries the higher discount rate, since a lower NPV on a similar field is the mark of a harsher rate.",
+ ["That the second project is worth more, since NPVs on the same ledger scale are directly comparable whatever their convention.",
+  "That the first project carries the higher discount rate, since a lower NPV on a similar field is the mark of a harsher rate.",
   "That the two differ by a valuation year, since a shift of one year at 6.796117 percent is about the size of the gap."],
- "At 5 percent their profiles read 239552507.28 and 233779309.33, and every difference between the two columns is the half-year shift.")
+ "At 5 percent their profiles read 239552507.28 and 245468274.80, and every difference between the two columns is the half-year shift.")
 
 q(1,
  "AKATA's configuration has discount_rate_pct 10 and inflation_rate_pct 3 and the basis is real. Which rate does the engine apply, and to which column?",
@@ -296,16 +296,16 @@ q(3,
  "AKATA's gas is 7744000.00 Mscf against 9680000.00 bbl of oil, and its revenue at 3.2 USD/Mscf does not change across the nine points.")
 
 q(1,
- "A reader reports AKATA's NPV as 70188970.32, and only afterwards discovers that the run was mid-year on the real basis. What does the method call this?",
+ "A reader reports AKATA's NPV as 74959094.51, and only afterwards discovers that the run was mid-year on the real basis. What does the method call this?",
  "Working the steps out of order: every number changes meaning when a convention is found late, and naming the convention first is what stops the numbers betraying you.",
- ["A reconciliation problem: the two facts are consistent, and the reader has only to restate 70188970.32 on the nominal basis, where the mid-year figure of 69159247.46 is the same claim about the same rows in other money.",
-  "A sunk-year problem: a mid-year run on the real basis sinks the valuation year row by discounting it half a year, so the reader is holding an NPV with the 2029 capex partly written off and needs the sunk figure of 206819768.67 to compare.",
-  "A basis problem: 70188970.32 is the real basis figure and the reader needs the nominal 69159247.46 to proceed."],
- "The convention sentence is written first; 70188970.32 is real basis, mid-year, 10 percent nominal, 3 percent inflation, valued in 2029, and a reader who learns that last has read the number wrong until then.")
+ ["A reconciliation problem: the two facts are consistent, and the reader has only to restate 74959094.51 on the nominal basis, where the mid-year figure of 76075172.20 is the same claim about the same rows in other money.",
+  "A sunk-year problem: a mid-year run on the real basis moves the valuation year row by half a year, so the reader is holding an NPV with the 2029 capex partly written off and needs the sunk figure of 206819768.67 to compare.",
+  "A basis problem: 74959094.51 is the real basis figure and the reader needs the nominal 76075172.20 to proceed."],
+ "The convention sentence is written first; 74959094.51 is real basis, mid-year, 10 percent nominal, 3 percent inflation, valued in 2029, and a reader who learns that last has read the number wrong until then.")
 
 q(0,
  "The onward lesson says the Expert tier's fiscal cascade is read with the conventions this tier named. What does that mean for a PIA NPV such as 219158380.04 on multiyear_pia_real?",
- "It carries the same label: real basis, end-year, 10 percent nominal at 3 percent inflation, applied 6.796117; its mid-year twin reads 212070544.45 and its applied-rate profile point reads the headline, as AKATA's does.",
+ "It carries the same label: real basis, end-year, 10 percent nominal at 3 percent inflation, applied 6.796117; its mid-year twin reads 226483105.72 and its applied-rate profile point reads the headline, as AKATA's does.",
  ["It is convention-free, because the PIA cascade is charged on undiscounted bases and the NPV is a sum of after-tax rows, so the discount rate, the basis and the timing convention enter only the JV ledger, and a PIA NPV is the same number under every reading of time.",
   "It needs its own conventions, because five taxes on three bases each carry a timing rule that the JV ledger does not, so the royalty, the HCT, the CIT and the levy are each placed in time separately and a PIA NPV is labelled by the timing of each tax rather than by one convention.",
   "It is read nominal only, because the PIA's price royalty tiers are in money of the day and cannot be deflated, so the real basis is refused on a PIA run and the profile is evaluated on the nominal flows at the nominal 10.000000 percent with no Fisher conversion and no rounding gap."],
@@ -336,7 +336,7 @@ q(3,
  "The label is the applied rate rounded to two decimals for display, and the evaluation is at the exact rate. 6.8 percent discounts every row a little harder than 6.796117, so a recomputation at the label lands slightly below the headline, and nothing in the ledger has moved.")
 
 q(1,
- "AKATA reads 72534830.66 under nominal end-year and under real end-year, 69159247.46 under nominal mid-year and 70188970.32 under real mid-year. Which of basis and convention moves NPV, and when does the other begin to?",
+ "AKATA reads 72534830.66 under nominal end-year and under real end-year, 76075172.20 under nominal mid-year and 74959094.51 under real mid-year. Which of basis and convention moves NPV, and when does the other begin to?",
  "The convention always moves it; the basis moves it only under mid-year, where the half-year factor differs between 10.000000 and 6.796117 percent.",
  ["The basis always moves it, by the deflation of 141637829.18 to 117362408.71; the convention only moves it on the nominal basis.",
   "Both always move it, and the two end-year figures agree by the coincidence of 3 percent inflation against 2 percent escalators, which happen to offset each other over AKATA's seven years.",

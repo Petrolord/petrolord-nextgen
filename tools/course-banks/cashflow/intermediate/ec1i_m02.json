@@ -88,9 +88,9 @@
   "explanation": "The applied real rate is 6.796117 percent on AKATA, multiyear_pia_real, multiyear_jv_real and pia_loss_relief whatever their prices do, because only the inflation rate enters it."
  },
  {
-  "prompt": "Under mid-year discounting AKATA's nominal basis gives 69159247.46 and its real basis 70188970.32, after agreeing at 72534830.66 under end-year. Why do the bases part?",
+  "prompt": "Under mid-year discounting AKATA's nominal basis gives 76075172.20 and its real basis 74959094.51, after agreeing at 72534830.66 under end-year. Why do the bases part?",
   "options": [
-   "The half-year shift divides by the square root of one plus the applied rate, and the applied rates differ, so the shift is smaller on the real basis.",
+   "The half-year shift multiplies by the square root of one plus the applied rate, and the applied rates differ, so the shift is smaller on the real basis.",
    "The real basis under mid-year deflates the 2029 row as well, which the end-year run had left whole.",
    "Mid-year shifts the real flows by half a year of inflation on top of half a year of the rate, and the two shifts compound.",
    "The half-year shift is taken at the inflation rate of 3 percent rather than at the applied rate on each basis."

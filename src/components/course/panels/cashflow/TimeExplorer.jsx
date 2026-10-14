@@ -105,7 +105,9 @@ const Basis = () => {
         readings discount to the SAME number in every year, because the real basis deflates each flow by the
         inflation rate and then discounts at the Fisher real rate, and those two operations cancel to the
         nominal discounting they replaced. The convention that does move NPV is mid-year against end-year:
-        adding a half to every exponent lifts the early negative less than it lowers the later positives.
+        the valuation date is 31 December, and mid-year cash arrives half a year before it, so taking a half
+        from every exponent scales every row up by the square root of one plus the rate. The early negative
+        grows, the later positives grow more, and the mid-year NPV is the larger.
       </div>
       <div className="mt-3 rounded-md border border-pl-border bg-pl-sunken p-3 text-xs text-pl-text">
         The {defl.year} flow, followed through. Money of the day {usd(defl.nominalFlow)} deflates to {usd(defl.realFlow)} on the
