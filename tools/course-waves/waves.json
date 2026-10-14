@@ -95,10 +95,10 @@
       "precision.json"
     ],
     "pins": {
-      "digest.txt": "a00ca71b1c56c93a7f5a18e1faa5769f41492c6410dcef29a7b8238197bea479",
-      "fields.json": "7e55e1ade9cdaf32abd296e470bb4cf767ef7d989883a9c9851e6b07764ed3eb"
+      "digest.txt": "88f5c93c2bcc3b6406392b54bc593afb047efc9962513a724b92ca9f9192a9be",
+      "fields.json": "f0ff146bc67ba08c82aa5df7a3c77176425d2100ab91747d98f72adc9ca683ae"
     },
-    "recutNote": "EC7 PIA recut 2026-09-26 (engines 3.12.0 at 3778451, default path). First commit of the EC1 kit. fields.json carries the Expert set of lead decisions L1 and L3 (the served IKPOTO Expert config is refused by the corrected engine): the new-PML HCT rate is stated at 30 in the prompt and no Expert field depends on it; the 2035 CPR carry replaces the 2034 one (L3). discriminate_expert.mjs proves both. ec1_capstone.mjs renders all three prompts from the engine inputs into capstones.json and proves the Associate and Professional capstones byte-identical to the served rows. prove_prior_courses.sh proves qra unchanged."
+    "recutNote": "EC7 PIA recut 2026-09-26 (engines 3.12.0 at 3778451, default path). First commit of the EC1 kit. fields.json carries the Expert set of lead decisions L1 and L3 (the served IKPOTO Expert config is refused by the corrected engine): the new-PML HCT rate is stated at 30 in the prompt and no Expert field depends on it; the 2035 CPR carry replaces the 2034 one (L3). discriminate_expert.mjs proves both. ec1_capstone.mjs renders all three prompts from the engine inputs into capstones.json and proves the Associate and Professional capstones byte-identical to the served rows. prove_prior_courses.sh proves qra unchanged. EC1 mid-year recut 2026-10-14 (engines 3.12.3 at a6cb037, owner decision: the course matches the Suite): mid-year discounting now takes 0.5 from every exponent, so every mid-year figure is the end-year figure times sqrt(1 + applied rate); ec1_dump.mjs prints the 31 December valuation convention and the engine's own ratios in Section 7; fields.json moves jv_npv_mid_year_usd 20030970.834339857 -> 21301227.52139557 and nothing else; the kit for the bank, lesson and capstone edits is midyear-recut/."
   },
   "fiscal": {
     "course": "EC2",
@@ -1625,9 +1625,10 @@
       "banks/ec7i_m06.py"
     ],
     "pins": {
-      "digest.txt": "c555b5622bf31142181e5e62120fa2a085bec8838c86c0aaaf639f499732edea",
+      "digest.txt": "39f8aa8783655f786ae29d5e09b61d119b5e19d258ce07509e3fb61960873920",
       "fields.json": "db32035bdcb7552f40eaaad7aef4947da9e67a3ee127f2449ca6b7d7bf16f9c2"
-    }
+    },
+    "recutNote": "EC1 mid-year recut 2026-10-14: pia_dump.mjs asserts ENGINE_VERSION 3.12.3; the digest changes only in its ENGINE header line (version, provenance and engine line count); no PIA figure moves."
   },
   "gsa": {
     "course": "EC8",
