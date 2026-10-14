@@ -24,12 +24,12 @@ q(3,
  "The Fisher rate is one plus the nominal over one plus the inflation less one; at 0 percent inflation it would be 10.000000 and at 8 percent 1.851852, and NPV is 72534830.66 at each.")
 
 q(0,
- "Step three reads AKATA's NPV under both conventions, 72534830.66 end-year and 70188970.32 mid-year on the real basis. What does the method say to report?",
+ "Step three reads AKATA's NPV under both conventions, 72534830.66 end-year and 74959094.51 mid-year on the real basis. What does the method say to report?",
  "The pair with its convention on each, because the pair is the answer and neither number alone is.",
- ["The mid-year figure of 70188970.32, because it is the lower of the two and a decision should rest on the conservative reading.",
+ ["The mid-year figure of 74959094.51, because it is the higher of the two and cash really does arrive through the year.",
   "The end-year figure of 72534830.66, because the engine defaults to end-year and the default is the engine's statement of the true convention.",
   "The mean of the two, because the true timing of cash inside a year lies between the conventions and averaging removes the convention error."],
- "The rows are identical under both readings, and 69159247.46 is the same field mid-year on the nominal basis; no one of the three is more true than the others.")
+ "The rows are identical under both readings, and 76075172.20 is the same field mid-year on the nominal basis; no one of the three is more true than the others.")
 
 q(2,
  "Step four: AKATA valued from 2030 reads 77464382.26 with prior years kept and 206819768.67 with them sunk. What decides which figure is wanted?",
@@ -56,17 +56,17 @@ q(3,
  "With a 60000000 abandonment the last flow is -29598201.95, the curve crosses twice and the engine returns null with irrStatus multiple-roots; the sign of the last entry is what changes the count.")
 
 q(2,
- "Six conventions label 72534830.66. Which single change moves it to 70188970.32, and which to 206819768.67?",
- "End-year to mid-year moves it to 70188970.32; a 2030 valuation year with prior years treated as sunk moves it to 206819768.67.",
- ["Real to nominal basis moves it to 70188970.32, because the deflator comes out of the rows; a 2030 valuation year with prior years kept moves it to 206819768.67.",
-  "Inflation from 3 to 8 percent moves it to 70188970.32; valuing from 2031 with prior years kept moves it to 206819768.67.",
-  "The nominal rate from 10 to 12 percent moves it to 70188970.32; an abandonment of 60000000 in 2035 moves it to 206819768.67."],
+ "Six conventions label 72534830.66. Which single change moves it to 74959094.51, and which to 206819768.67?",
+ "End-year to mid-year moves it to 74959094.51; a 2030 valuation year with prior years treated as sunk moves it to 206819768.67.",
+ ["Real to nominal basis moves it to 74959094.51, because the deflator comes out of the rows; a 2030 valuation year with prior years kept moves it to 206819768.67.",
+  "Inflation from 3 to 8 percent moves it to 74959094.51; valuing from 2031 with prior years kept moves it to 206819768.67.",
+  "The nominal rate from 10 to 12 percent moves it to 74959094.51; an abandonment of 60000000 in 2035 moves it to 206819768.67."],
  "Basis does not move NPV end-year, inflation never does on the real basis with the escalators set, 2030 with prior years kept gives 77464382.26, and the 60000000 abandonment gives 38666394.86.")
 
 q(0,
  "The tier ends on the sentence that IRR is a property of a curve rather than of a project. What is the sentence claiming?",
  "That the IRR is a zero of one vector's NPV curve: a curve with two zeros has no single IRR, which is why the engine returns null there, and a scaled vector keeps its IRR at any size.",
- ["That the IRR moves when the convention moves, as NPV does from 72534830.66 to 70188970.32, because the curve is redrawn under mid-year discounting.",
+ ["That the IRR moves when the convention moves, as NPV does from 72534830.66 to 74959094.51, because the curve is redrawn under mid-year discounting.",
   "That the IRR is a rate on the project's money, so a project with an IRR of 29.2361 percent earns 29.2361 percent on its 255000000.00 of capex.",
   "That the IRR is read from the sampled profile, so AKATA's 29.2361 percent is where the profile crosses zero between the 15 and 20 percent points."],
  "29.2361 percent holds at every working interest and under all four conventions; [-100, 208, -108.12] is zero at 2.0000 and at 6.0000 percent, so the engine names neither and returns null with both listed.")
@@ -83,7 +83,7 @@ q(2,
  "The onward lesson names a second source of terminal negatives beside abandonment. What is it?",
  "A tail kept past its economic limit with the limit test off, where each late year carries a loss to the end of the vector.",
  ["A price deck that falls in its last entries, which turns the late revenue rows negative before the cascade is applied to them.",
-  "Mid-year discounting, which discounts the valuation year row and so pushes a negative into the tail of the discounted column.",
+  "Mid-year discounting, which moves the valuation year row by half a year and so pushes a negative into the tail of the discounted column.",
   "A working interest below 100 percent, which scales the late rows harder than the early ones and turns the tail negative at 25 percent."],
  "At 20 percent decline the limit year is 2031 and three years are trimmed; with the limit off those years would stay, and each would carry a loss.")
 
@@ -101,7 +101,7 @@ q(0,
  ["A mid-year figure, since the engine defaults to end-year and the method follows the engine's default.",
   "An IRR on a real basis run, since 29.2361 percent is solved on the nominal flows and the method is worked on the real basis.",
   "A profile, since the method reads only the headline at the applied rate and leaves the seven sampled points to the sensitivity work."],
- "AKATA's 72534830.66, 70188970.32, 77464382.26 and 206819768.67 are all NPVs of the same rows, and only the label tells them apart.")
+ "AKATA's 72534830.66, 74959094.51, 77464382.26 and 206819768.67 are all NPVs of the same rows, and only the label tells them apart.")
 
 q(2,
  "Working the method on multiyear_jv_real: 127186476.88 at 0 percent, headline 88104639.00 at 6.796117 percent, 88104639.00 at the point labelled 6.8, IRR 47.9020 percent. What is the gap, and what does the engine naming 47.9020 already tell you?",
@@ -124,8 +124,8 @@ q(3,
  "The point labelled 6.8 reads the headline 72534830.66 because it is evaluated at the exact rate, and [-100, 208, -108.12] is null with multiple-roots and both roots listed.",
  ["The point labelled 6.8 is a rounded estimate to be corrected against the headline, and [-100, 208, -108.12] returns 6.0000 percent, the root the search reaches first from 10 percent.",
   "The profile point reads the headline, and [-100, 208, -108.12] returns 2.0000 percent, the lower root, which the contract keeps as the conservative rate for a hurdle.",
-  "Both are superseded by the breakeven residual of 897.16 and the mid-year NPV of 70188970.32, the readings the engine reports without saying how."],
- "The applied-rate point is labelled at the rate rounded to two decimals and evaluated at 6.796117, so it equals the headline; a vector with two crossings in the band is null with its roots listed. 70188970.32 and 897.16 are correct readings under their labels.")
+  "Both are superseded by the breakeven residual of 897.16 and the mid-year NPV of 74959094.51, the readings the engine reports without saying how."],
+ "The applied-rate point is labelled at the rate rounded to two decimals and evaluated at 6.796117, so it equals the headline; a vector with two crossings in the band is null with its roots listed. 74959094.51 and 897.16 are correct readings under their labels.")
 
 emit(Q, '/root/wt-ec7-recut/tools/course-banks/cashflow/intermediate/ec1i_m06.json', expect_n=15)
 finish()

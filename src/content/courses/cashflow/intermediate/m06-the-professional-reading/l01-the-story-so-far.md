@@ -4,7 +4,7 @@ Every number the Professional tier reports is a reading of AKATA's ledger under 
 
 ## Time and its two conventions
 
-AKATA's rows do not change between runs. Read end-year, the NPV at 10 percent nominal is 72534830.66. Read mid-year on the real basis it is 70188970.32, and on the nominal basis 69159247.46. The IRR is 29.2361 percent under all four combinations, and the discounted payback 3.961607 years.
+AKATA's rows do not change between runs. Read end-year, the NPV at 10 percent nominal is 72534830.66. Read mid-year on the real basis it is 74959094.51, and on the nominal basis 76075172.20. The IRR is 29.2361 percent under all four combinations, and the discounted payback 3.961607 years.
 
 ## Real and nominal
 
@@ -32,4 +32,4 @@ IRR is a property of a curve rather than of a project. So is every discounted re
 
 ## Exercise
 
-Write the six conventions that label 72534830.66: basis, convention, nominal rate, inflation, valuation year and the treatment of prior years. Then name the one change to those six that moves it to 70188970.32 and the one that moves it to 206819768.67.
+Write the six conventions that label 72534830.66: basis, convention, nominal rate, inflation, valuation year and the treatment of prior years. Then name the one change to those six that moves it to 74959094.51 and the one that moves it to 206819768.67.

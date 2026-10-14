@@ -12,7 +12,7 @@
 // literals and clears everything.
 //
 // EVERY NUMBER PRINTED HERE IS A RETURN VALUE OF THE ENGINE
-// (engines/economics/cashflow.ts, the default path of ENGINE_VERSION 3.12.0),
+// (engines/economics/cashflow.ts, the default path of ENGINE_VERSION 3.12.3),
 // except where a line says "stated" (an input typed in this file and printed
 // beside the call it went into), "golden input" (read from the vendored
 // test-data/economics/goldens/pia2021_cases.json, whose inputs are the Ekene
@@ -139,8 +139,8 @@ w('# THIS FILE IS THE ONLY TEACHING TRUTH FOR THIS COURSE. Every number in every
 w();
 w('# PRECISION. Every amount of money, rate, fraction, share, percentage, benchmark, price, allowance, levy, tax, take and daily rate prints to SIX decimals; years, counts and whole barrels, Mscf and bopd inputs print as whole numbers; an engine message and an engine note are printed verbatim, figures and all.');
 w();
-w(`# ENGINE. ${ENGINE_REL}, ENGINE_VERSION ${E.ENGINE_VERSION}, vendored sha-identical with petrolord-engines 3778451 (engines PR #262), ${engineLines} lines, the default path. It makes no network call. engines/economics/fiscalConventions.js supplies the take wording (${ref('take')}).`);
-must('the engine is 3.12.0', E.ENGINE_VERSION === '3.12.0', E.ENGINE_VERSION);
+w(`# ENGINE. ${ENGINE_REL}, ENGINE_VERSION ${E.ENGINE_VERSION}, vendored sha-identical with petrolord-engines a6cb037 (engines PR #359, after the PIA repair of PR #262), ${engineLines} lines, the default path. It makes no network call. engines/economics/fiscalConventions.js supplies the take wording (${ref('take')}).`);
+must('the engine is 3.12.3', E.ENGINE_VERSION === '3.12.3', E.ENGINE_VERSION);
 w();
 w('# AN ENGINE COURSE. There is no Suite app for this course. Every practical runs in the course\'s own calculator panels, which call this same vendored engine on the learner\'s own terms and rows.');
 w();

@@ -4,7 +4,7 @@
 
 # PRECISION. Every amount of money, rate, fraction, share, percentage, benchmark, price, allowance, levy, tax, take and daily rate prints to SIX decimals; years, counts and whole barrels, Mscf and bopd inputs print as whole numbers; an engine message and an engine note are printed verbatim, figures and all.
 
-# ENGINE. engines/economics/cashflow.ts, ENGINE_VERSION 3.12.0, vendored sha-identical with petrolord-engines 3778451 (engines PR #262), 2644 lines, the default path. It makes no network call. engines/economics/fiscalConventions.js supplies the take wording (section 20).
+# ENGINE. engines/economics/cashflow.ts, ENGINE_VERSION 3.12.3, vendored sha-identical with petrolord-engines a6cb037 (engines PR #359, after the PIA repair of PR #262), 2723 lines, the default path. It makes no network call. engines/economics/fiscalConventions.js supplies the take wording (section 20).
 
 # AN ENGINE COURSE. There is no Suite app for this course. Every practical runs in the course's own calculator panels, which call this same vendored engine on the learner's own terms and rows.
 

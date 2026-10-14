@@ -12,7 +12,7 @@ The price sweep on oil_price_multiyear_pia_real carries columns AKATA under join
 
 ## What travels
 
-The discounted readings travel with their labels: 72534830.66 end-year on the real basis, 70188970.32 mid-year, 6.796117 percent applied. Two readings travel with their own proof. The point labelled 6.8 reads 72534830.66, the headline, because it is evaluated at the exact applied rate. The vector [-100, 208, -108.12] returns null with irrStatus multiple-roots and both of its roots listed, so a reader sees that there are two before choosing either. What travels instead is the habit of asking what the engine did to reach a number.
+The discounted readings travel with their labels: 72534830.66 end-year on the real basis, 74959094.51 mid-year, 6.796117 percent applied. Two readings travel with their own proof. The point labelled 6.8 reads 72534830.66, the headline, because it is evaluated at the exact applied rate. The vector [-100, 208, -108.12] returns null with irrStatus multiple-roots and both of its roots listed, so a reader sees that there are two before choosing either. What travels instead is the habit of asking what the engine did to reach a number.
 
 ## What to carry
 

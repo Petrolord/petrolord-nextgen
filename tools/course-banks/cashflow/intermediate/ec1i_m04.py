@@ -8,9 +8,9 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 # written by tools/course-waves/cashflow/pia-recut/build.py. Edit the rows there, then re-run it.
 
 q(2,
- "AKATA reports NPV 72534830.66 end-year and 70188970.32 mid-year on the real basis, and 69159247.46 mid-year on the nominal basis. What does the IRR read across those three runs?",
+ "AKATA reports NPV 72534830.66 end-year and 74959094.51 mid-year on the real basis, and 76075172.20 mid-year on the nominal basis. What does the IRR read across those three runs?",
  "29.2361 percent in every one of them.",
- ["29.2361 percent end-year, and a lower root under mid-year, because the half-year shift discounts every receipt harder and the curve crosses zero sooner.",
+ ["29.2361 percent end-year, and a higher root under mid-year, because the half-year shift discounts every receipt less and the curve crosses zero later.",
   "29.2361 percent on the nominal basis and 6.796117 percent on the real basis, since the real run discounts at the applied real rate.",
   "Three roots, one per NPV."],
  "The IRR is solved from the nominal flow vector alone, and neither the basis, the convention nor the discount rate enters that vector.")

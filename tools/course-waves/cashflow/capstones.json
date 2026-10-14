@@ -57,7 +57,7 @@
   "cert_tier": "professional",
   "title": "Put a time value on the ledger",
   "dataset": "the IKPOTO joint venture ledger valued in time: two discounting conventions, a real basis, and the price at which the value is nought",
-  "prompt": "Six values for the same IKPOTO joint venture run as the Associate capstone (identical rows and terms), now valued at a 9 percent NOMINAL discount rate on the REAL basis with 2.5 percent inflation, valuation year equal to the 2031 base year, nothing sunk. Report: (1) the NPV under END-YEAR discounting; (2) the NPV under MID-YEAR discounting; (3) the INTERNAL RATE OF RETURN in percent; (4) the DISCOUNTED PAYBACK in years; (5) the DPI (NPV over the present value of capex); and (6) the BREAKEVEN flat oil price in USD/bbl at which the end-year NPV is nought. Traps. The applied rate is the Fisher REAL rate, (1.09 / 1.025) - 1, which is below 9 percent, and the flows it discounts are the DEFLATED flows; discounting the nominal flows at 9 percent gives the same NPV, which is the point, but discounting the deflated flows at 9 percent does not. Mid-year adds one half to every exponent including the first. IRR is solved on the NOMINAL flows and does not depend on the basis. DPI here is NPV over PV(capex), which is the profitability index MINUS ONE; report the engine's definition. The breakeven is the FLAT price with the 1.5 percent escalator still applied from it, found by bisection to the cent.",
+  "prompt": "Six values for the same IKPOTO joint venture run as the Associate capstone (identical rows and terms), now valued at a 9 percent NOMINAL discount rate on the REAL basis with 2.5 percent inflation, valuation year equal to the 2031 base year, nothing sunk. Report: (1) the NPV under END-YEAR discounting; (2) the NPV under MID-YEAR discounting; (3) the INTERNAL RATE OF RETURN in percent; (4) the DISCOUNTED PAYBACK in years; (5) the DPI (NPV over the present value of capex); and (6) the BREAKEVEN flat oil price in USD/bbl at which the end-year NPV is nought. Traps. The applied rate is the Fisher REAL rate, (1.09 / 1.025) - 1, which is below 9 percent, and the flows it discounts are the DEFLATED flows; discounting the nominal flows at 9 percent gives the same NPV, which is the point, but discounting the deflated flows at 9 percent does not. Mid-year takes one half from every exponent, the first included, because the valuation date is 31 December and mid-year cash arrives half a year before it. IRR is solved on the NOMINAL flows and does not depend on the basis. DPI here is NPV over PV(capex), which is the profitability index MINUS ONE; report the engine's definition. The breakeven is the FLAT price with the 1.5 percent escalator still applied from it, found by bisection to the cent.",
   "fields": [
    {
     "key": "jv_npv_real_usd",
@@ -71,7 +71,7 @@
     "tol": 1,
     "unit": "USD",
     "label": "NPV, real basis, mid year",
-    "expected": 20030970.834339857
+    "expected": 21301227.52139557
    },
    {
     "key": "jv_irr_pct",

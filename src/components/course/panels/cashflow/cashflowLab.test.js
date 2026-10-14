@@ -43,8 +43,8 @@ const byYear = (rows, year) => rows.find((r) => r.year === year);
 // ---------------------------------------------------------------------------
 
 describe('the engine, its version and its eight refusals', () => {
-  it('is the 3.12.0 engine the goldens and the digest were cut against', () => {
-    expect(L.ENGINE_VERSION).toBe('3.12.0');
+  it('is the 3.12.3 engine the goldens and the digest were cut against', () => {
+    expect(L.ENGINE_VERSION).toBe('3.12.3');
     expect(L.GOLDEN_ENGINE_VERSION).toBe(L.ENGINE_VERSION);
     expect(DIGEST).toContain(`Engine version ${L.ENGINE_VERSION}.`);
   });
@@ -334,13 +334,26 @@ describe('the four basis and convention combinations', () => {
     at('real', 'end_year').byYear.forEach((q, i) => money(q.discountedCashFlow, AKATA_ROWS[i][13]));
   });
   it('mid-year is the convention that moves NPV', () => {
-    money(at('nominal', 'mid_year').npv, 69159247.46);
-    money(at('nominal', 'mid_year').byYear[0].discountedCashFlow, -115486897.55);
-    money(at('nominal', 'mid_year').byYear[6].discountedCashFlow, 16362392.88);
-    money(at('real', 'mid_year').npv, 70188970.32);
-    money(at('real', 'mid_year').byYear[0].discountedCashFlow, -117206400.04);
-    money(at('real', 'mid_year').byYear[6].discountedCashFlow, 16606015.11);
+    money(at('nominal', 'mid_year').npv, 76075172.20);
+    money(at('nominal', 'mid_year').byYear[0].discountedCashFlow, -127035587.31);
+    money(at('nominal', 'mid_year').byYear[6].discountedCashFlow, 17998632.17);
+    money(at('real', 'mid_year').npv, 74959094.51);
+    money(at('real', 'mid_year').byYear[0].discountedCashFlow, -125171883.54);
+    money(at('real', 'mid_year').byYear[6].discountedCashFlow, 17734579.24);
     m.forEach((r) => { pct(r.irrPct, 29.2361); rate(r.discountedPaybackYears, 3.961607); });
+  });
+  // engines 3.12.3 (owner decision 2026-10-14): the valuation date is 31 December
+  // and mid-year cash arrives half a year before it, so every row, the valuation
+  // year's included, is the end-year row times sqrt(1 + applied rate). Fails on
+  // the 3.12.0 engine, where mid-year divided by that factor.
+  it('mid-year is the end-year ledger times the square root of one plus the applied rate', () => {
+    for (const basis of ['nominal', 'real']) {
+      const end = at(basis, 'end_year'); const mid = at(basis, 'mid_year');
+      const f = Math.sqrt(1 + end.appliedRatePct / 100);
+      expect(mid.npv).toBeGreaterThan(end.npv);
+      expect(Math.abs(mid.npv / end.npv - f)).toBeLessThan(1e-12);
+      mid.byYear.forEach((q, i) => expect(Math.abs(q.discountedCashFlow / end.byYear[i].discountedCashFlow - f)).toBeLessThan(1e-12));
+    }
   });
   it('the 2033 flow deflates and discounts to the same number both ways', () => {
     const d = L.akataDeflationExample();
@@ -367,7 +380,7 @@ describe('the four basis and convention combinations', () => {
 describe('valuation year and sunk years', () => {
   it('the published discounting cases', () => {
     const c = L.publishedDiscountingCases();
-    money(c[0].kpis.npv, 20586124.09); money(c[0].rows[0].discounted_cash_flow, -11918282.37); money(c[0].rows[1].discounted_cash_flow, 32504406.45);
+    money(c[0].kpis.npv, 22644736.49); money(c[0].rows[0].discounted_cash_flow, -13110110.60); money(c[0].rows[1].discounted_cash_flow, 35754847.10);
     money(c[1].kpis.npv, 23750000); expect(c[1].valuationYear).toBe(2031); money(c[1].rows[0].discounted_cash_flow, -13750000);
     money(c[2].kpis.npv, 37500000); expect(c[2].kpis.irr).toBeNull(); money(c[2].sunkNetCashFlow, -12500000);
     money(c[2].kpis.total_capex, 0); expect(c[2].rowsFlaggedSunk).toBe(1);
@@ -416,7 +429,7 @@ describe('the profile point at the applied rate is the headline (EC1-1)', () => 
     money(at('multiyear_pia_real').headlineNpv, 219158380.04); money(at('multiyear_pia_real').labelledPointNpv, 219158380.04); money(at('multiyear_pia_real').gap, 0);
     expect(at('multiyear_pia_real').oracle).toBeNull();
     money(at('multiyear_jv_real').headlineNpv, 88104639.00); money(at('multiyear_jv_real').labelledPointNpv, 88104639.00); money(at('multiyear_jv_real').gap, 0);
-    money(at('multiyear_pia_midyear_real').headlineNpv, 212070544.45); money(at('multiyear_pia_midyear_real').labelledPointNpv, 212070544.45); money(at('multiyear_pia_midyear_real').gap, 0); expect(at('multiyear_pia_midyear_real').exactIsComparable).toBe(false);
+    money(at('multiyear_pia_midyear_real').headlineNpv, 226483105.72); money(at('multiyear_pia_midyear_real').labelledPointNpv, 226483105.72); money(at('multiyear_pia_midyear_real').gap, 0); expect(at('multiyear_pia_midyear_real').exactIsComparable).toBe(false);
     money(at('pia_loss_relief').headlineNpv, 4985473.45); money(at('pia_loss_relief').labelledPointNpv, 4985473.45); money(at('pia_loss_relief').gap, 0);
     money(at('allowance_cap_midyear').headlineNpv, 18637168.50); money(at('allowance_cap_midyear').labelledPointNpv, 18637168.50); money(at('allowance_cap_midyear').gap, 0);
     expect(at('jv_analytic_decision_kpis').appliedRateLabelPct).toBe(10); money(at('jv_analytic_decision_kpis').gap, 0);

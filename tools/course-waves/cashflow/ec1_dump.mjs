@@ -315,6 +315,18 @@ for (const basis of ['nominal', 'real']) for (const conv of ['end_year', 'mid_ye
   w(`- ${basis} basis, ${conv}: applied rate ${r(res.kpis.discount_rate_applied_pct)} percent, NPV ${m(res.kpis.npv)}, discounted cash flow by year ${res.cashFlowData.map((q) => `${q.year}: ${m(q.discounted_cash_flow)}`).join('; ')}; IRR ${p(res.kpis.irr)} percent; discounted payback ${r(res.kpis.discounted_payback_years)} years; total net cash flow ${m(res.kpis.total_net_cash_flow)}.`);
 }
 w();
+// THE CONVENTION (engines 3.12.3, owner decision 2026-10-14). Every figure in
+// this block is an engine return value, or a ratio or difference of two of them.
+{
+  const at = (basis, conv) => run(withCfg(AKATA, { present_value_basis: basis, discounting_convention: conv }));
+  const ne = at('nominal', 'end_year'); const nm = at('nominal', 'mid_year');
+  const re = at('real', 'end_year'); const rm = at('real', 'mid_year');
+  const v0 = ne.cashFlowData[0].year;
+  w(`The valuation date is 31 December of the valuation year. Under end_year a row is discounted by the number of whole years between its 31 December and that date, so the valuation year's own row (${v0} on AKATA) is not discounted at all. Under mid_year the cash of each year is taken to arrive through the year, on average half a year before its 31 December, so every exponent is half a year SMALLER: each row is discounted half a year less, the valuation year's row is compounded forward by half a year, and the mid-year NPV is the end-year NPV multiplied by the square root of one plus the applied rate.`);
+  w(`On AKATA, nominal basis: mid-year NPV over end-year NPV ${r(nm.kpis.npv / ne.kpis.npv)}, square root of one plus the applied rate ${r(Math.sqrt(1 + nm.kpis.discount_rate_applied_pct / 100))}; mid-year minus end-year ${m(nm.kpis.npv - ne.kpis.npv)}. Real basis: ratio ${r(rm.kpis.npv / re.kpis.npv)}, square root of one plus the applied rate ${r(Math.sqrt(1 + rm.kpis.discount_rate_applied_pct / 100))}; mid-year minus end-year ${m(rm.kpis.npv - re.kpis.npv)}. Nominal mid-year minus real mid-year ${m(nm.kpis.npv - rm.kpis.npv)}.`);
+  w(`The ${v0} row: ${m(ne.cashFlowData[0].discounted_cash_flow)} end-year on either basis, ${m(nm.cashFlowData[0].discounted_cash_flow)} mid-year nominal, ${m(rm.cashFlowData[0].discounted_cash_flow)} mid-year real. The 2035 row: ${m(ne.cashFlowData[6].discounted_cash_flow)} end-year, ${m(nm.cashFlowData[6].discounted_cash_flow)} mid-year nominal, ${m(rm.cashFlowData[6].discounted_cash_flow)} mid-year real.`);
+}
+w();
 {
   const nom = run(withCfg(AKATA, { present_value_basis: 'nominal' }));
   const re = run(withCfg(AKATA, { present_value_basis: 'real' }));

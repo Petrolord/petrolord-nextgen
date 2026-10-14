@@ -35,7 +35,7 @@ q(1,
  "jv_analytic_decision_kpis has a 2030 flow of minus 12500000.00 and a 2031 flow of 37500000.00, base year 2030, 10 percent, nominal, end-year. What is its NPV?",
  "21590909.09, the first row whole plus the second divided by 1.1 once, 34090909.09.",
  ["25000000.00, the plain sum of the rows, since two years is too short to discount.",
-  "20586124.09, both rows divided by the square root of 1.1 because each sits half a year from the base date.",
+  "22644736.49, both rows multiplied by the square root of 1.1 because each arrives half a year before its year end.",
   "23750000.00, because the 2030 flow is a year older than the 2031 flow and is carried forward by 1.1 to meet it."],
  "The undiscounted total is 25000000.00; the discount touches the 2031 row alone, 37500000.00 to 34090909.09.")
 
@@ -72,20 +72,20 @@ q(2,
  "Set only inflation to zero and NPV stays 72534830.66; it is the escalators that move the rows, and the deflator does not.")
 
 q(3,
- "Under mid_year_discounting the 2030 row goes from minus 12500000.00 to minus 11918282.37, the 2031 row to 32504406.45, and the NPV is 20586124.09 against the end-year 21590909.09. What is the relation between the two NPVs?",
- "The mid-year NPV is the end-year NPV divided by the square root of 1.1, because every exponent moved by half.",
- ["Mid-year shifts only the 2031 row by half a year, so the 2030 row stays at minus 12500000.00 and the NPV falls by the change in one row.",
-  "The mid-year NPV is the end-year NPV divided by 1.1 once more, a full extra year on every row, which is why it is lower.",
+ "Under mid_year_discounting the 2030 row goes from minus 12500000.00 to minus 13110110.60, the 2031 row to 35754847.10, and the NPV is 22644736.49 against the end-year 21590909.09. What is the relation between the two NPVs?",
+ "The mid-year NPV is the end-year NPV multiplied by the square root of 1.1, because every exponent fell by half.",
+ ["Mid-year shifts only the 2031 row by half a year, so the 2030 row stays at minus 12500000.00 and the NPV rises by the change in one row.",
+  "The mid-year NPV is the end-year NPV multiplied by 1.1, a full year earlier on every row, which is why it is higher.",
   "The difference is the fiscal cascade: royalty of 20000000.00 is charged mid-year and tax of 32500000.00 at year end, so the timing of the two moves the sum."],
  "Every row, the base year row included, was scaled by one factor, so the sum was scaled by the same factor.")
 
 q(1,
- "AKATA reads 72534830.66 end-year and 69159247.46 mid-year on the nominal basis, but 72534830.66 and 70188970.32 on the real basis. Why do the two conventions differ less on the real basis?",
- "Half a year at 6.796117 percent is a smaller division than half a year at 10 percent.",
- ["The real flows are smaller, 117362408.71 against 141637829.18 in total, so there is less for the half-year shift to remove.",
+ "AKATA reads 72534830.66 end-year and 76075172.20 mid-year on the nominal basis, but 72534830.66 and 74959094.51 on the real basis. Why do the two conventions differ less on the real basis?",
+ "Half a year at 6.796117 percent is a smaller factor than half a year at 10 percent.",
+ ["The real flows are smaller, 117362408.71 against 141637829.18 in total, so there is less for the half-year shift to add.",
   "The real basis shifts only the years after 2029, leaving the capex row whole.",
   "The real basis deflates the half-year shift by 3 percent of inflation on top of the rate, and the two shifts partly cancel."],
- "The nominal gap runs 72534830.66 to 69159247.46; the real gap only 72534830.66 to 70188970.32.")
+ "The nominal gap runs 72534830.66 to 76075172.20; the real gap only 72534830.66 to 74959094.51.")
 
 q(0,
  "Which readings of AKATA does mid-year discounting leave unchanged?",
@@ -97,16 +97,16 @@ q(0,
 
 q(2,
  "A reader hand-checks AKATA's mid-year NPV by shifting the 2030 to 2035 rows by half a year and leaving the 2029 row whole at minus 121123680.00. What happens?",
- "The check will not reconcile: the engine discounts the valuation year row too, to minus 115486897.55.",
+ "The check will not reconcile: the engine moves the valuation year row too, compounding it to minus 127035587.31.",
  ["The check reconciles, because the base year row carries an exponent of zero under either convention and cannot move.",
-  "The check lands on 70188970.32, because leaving the capex row whole is what the real basis does under mid-year.",
-  "The check produces a smaller gap than 72534830.66 to 69159247.46, because the capex left at full size pulls the sum down."],
- "Discounting the 2029 capex by half a year makes it cheaper in present value and partly offsets the shrinking of the revenue rows, so the true gap is smaller than the reader computes.")
+  "The check lands on 74959094.51, because leaving the capex row whole is what the real basis does under mid-year.",
+  "The check produces a smaller gap than 72534830.66 to 76075172.20, because the capex left at full size pulls the sum down."],
+ "Compounding the 2029 capex forward by half a year makes it dearer in present value and partly offsets the lift of the revenue rows, so the true gap is smaller than the reader computes.")
 
 q(0,
- "One project is run end-year and reports 72534830.66; another is run mid-year and reports 69159247.46. Can they be ranked on those NPVs?",
+ "One project is run end-year and reports 72534830.66; another is run mid-year and reports 76075172.20. Can they be ranked on those NPVs?",
  "No. Between the two figures there is no information about either field, only a convention, and both must be run under the same one first.",
- ["Yes, because mid-year is the more accurate convention and its lower figure is the conservative one to rank on.",
+ ["Yes, because mid-year is the more accurate convention and its higher figure is the better estimate to rank on.",
   "Yes, because the IRR of 29.2361 percent and the discounted payback of 3.961607 years are the same under both conventions, which shows that the NPVs are comparable too.",
   "Yes, provided both are on the nominal basis, since basis is the only setting that changes NPV."],
  "The IRR and the discounted payback of 3.961607 years are unmoved by the convention; the NPV is not, so it cannot cross a convention boundary.")
@@ -123,7 +123,7 @@ q(1,
  "Which of AKATA's two conventions, end-year or mid-year, is the true one?",
  "The engine cannot say: the rows are years, nothing records when within a year the cash moved, and choosing mid-year is a claim about the field that the engine will not check.",
  ["Mid-year, because the published mid_year_discounting case is the golden the engine was validated against.",
-  "End-year, because it gives the higher NPV of 72534830.66 and the engine reports the higher of the two readings.",
+  "End-year, because it gives the lower NPV of 72534830.66 and the engine reports the more cautious of the two readings.",
   "The engine tests both and keeps the one whose discounted payback matches the undiscounted 3.461632 years."],
  "Where none is given it discounts end-year, and a default is still a choice the reader has to be told.")
 

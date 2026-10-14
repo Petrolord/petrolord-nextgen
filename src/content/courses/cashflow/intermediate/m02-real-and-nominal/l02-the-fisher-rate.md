@@ -35,7 +35,7 @@ The second mistake is to pair the real rate with nominal flows or the nominal ra
 
 ## What the rate refuses
 
-There is no configuration key for a real rate in any published case: discount_rate_pct is nominal, and the real rate is always derived from it and from inflation_rate_pct. It refuses to see the escalators: the applied real rate is 6.796117 percent on AKATA, on multiyear_pia_real, on multiyear_jv_real and on pia_loss_relief, whatever their prices do, because only the inflation rate enters it. And the cancellation refuses to hold under mid-year, where the half-year shift uses a different factor on each basis and the NPVs part: 69159247.46 nominal against 70188970.32 real.
+There is no configuration key for a real rate in any published case: discount_rate_pct is nominal, and the real rate is always derived from it and from inflation_rate_pct. It refuses to see the escalators: the applied real rate is 6.796117 percent on AKATA, on multiyear_pia_real, on multiyear_jv_real and on pia_loss_relief, whatever their prices do, because only the inflation rate enters it. And the cancellation refuses to hold under mid-year, where the half-year shift uses a different factor on each basis and the NPVs part: 76075172.20 nominal against 74959094.51 real.
 
 ## Exercise
 
